@@ -1,0 +1,14 @@
+d:\daten\Visual Studio 2008\Projects\praisebase\Presenter\trunk\bin\Debug\PraiseBase Presenter.exe.config
+d:\daten\Visual Studio 2008\Projects\praisebase\Presenter\trunk\bin\Debug\PraiseBase Presenter.exe
+d:\daten\Visual Studio 2008\Projects\praisebase\Presenter\trunk\bin\Debug\PraiseBase Presenter.pdb
+d:\daten\Visual Studio 2008\Projects\praisebase\Presenter\trunk\obj\Debug\ResolveAssemblyReference.cache
+d:\daten\Visual Studio 2008\Projects\praisebase\Presenter\trunk\obj\Debug\Pbp.AboutBox.resources
+d:\daten\Visual Studio 2008\Projects\praisebase\Presenter\trunk\obj\Debug\Pbp.ColorPaletteDialog.resources
+d:\daten\Visual Studio 2008\Projects\praisebase\Presenter\trunk\obj\Debug\Pbp.mainWindow.resources
+d:\daten\Visual Studio 2008\Projects\praisebase\Presenter\trunk\obj\Debug\Pbp.Forms.projectionWindow.resources
+d:\daten\Visual Studio 2008\Projects\praisebase\Presenter\trunk\obj\Debug\Pbp.Forms.settingsWindow.resources
+d:\daten\Visual Studio 2008\Projects\praisebase\Presenter\trunk\obj\Debug\Pbp.Properties.Resources.resources
+d:\daten\Visual Studio 2008\Projects\praisebase\Presenter\trunk\obj\Debug\PraiseBase Presenter.csproj.GenerateResource.Cache
+d:\daten\Visual Studio 2008\Projects\praisebase\Presenter\trunk\obj\Debug\PraiseBase Presenter.exe
+d:\daten\Visual Studio 2008\Projects\praisebase\Presenter\trunk\obj\Debug\PraiseBase Presenter.pdb
+d:\daten\Visual Studio 2008\Projects\praisebase\Presenter\trunk\obj\Debug\Pbp.Forms.AboutWindow.resources
