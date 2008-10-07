@@ -45,7 +45,7 @@ namespace Pbp
             t1.Interval = 500; // Intervall festlegen, hier 100 ms
             t1.Tick += new EventHandler(t1_Tick); // Eventhandler ezeugen der beim Timerablauf aufgerufen wird
        
-            projectionFont = new Font("Arial", 50);
+            projectionFont = new Font("Arial", 50, FontStyle.Bold);
 
             /*
             ColorButton colorButton3 = new ColorButton();
@@ -92,65 +92,8 @@ namespace Pbp
 
         private void infoToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            AboutBox ab  = new AboutBox();
-            ab.Show();  
-        }
-
-  
-
-
-
-        private void songList_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            /*
-            songDetailItems.Items.Clear();
-            songDetailImages.Items.Clear();
-
-            Song currentSong = tmpSongs[songList.SelectedIndex];
-
-            ImageList imageList = currentSong.getImageList();
-            imageList.ImageSize = new Size(64, 48);
-            imageList.ColorDepth = ColorDepth.Depth32Bit;
-            songDetailItems.SmallImageList = imageList;
-
-            ImageList largerImages = currentSong.getImageList();
-            songDetailImages.LargeImageList = imageList;
-            for (int i = 0; i < imageList.Images.Count; i++)
-            {
-                ListViewItem lvi = new ListViewItem();
-                lvi.ImageIndex = i;
-                songDetailImages.Items.Add(lvi);
-            }
-
-
-            int j = 0;
-            foreach (Song.part bla in currentSong.parts)
-            {
-                int i = 0;
-                foreach (Song.slide sld in bla.slides)
-                {
-                    ListViewItem lvi = new ListViewItem(new string[] {bla.caption + "  ["+(i+1).ToString()+"]",
-                    bla.slides[i].text});
-                    lvi.ImageIndex = bla.slides[i].imageNumber;
-                    songDetailItems.Items.Add(lvi);
-                    i++;
-                    j++;
-                }
-            }
-            songDetailItems.Columns[0].Width = -2;
-            songDetailItems.Columns[1].Width = -2;
-            */
-        }
-
-        private void songDetailList_SelectedIndexChanged(object sender, EventArgs e)
-        {
-//            Song currentSong = tmpSongs[songList.SelectedIndex];
-
-            //projectionText.Text = currentSong.parts[songDetailList.SelectedIndex].text;
-                
-                //     resultstring += line.InnerText + "\n";
-                
-                //projectionText.Text = resultstring;
+            AboutWindow ab = new AboutWindow();
+            ab.ShowDialog(this);
         }
 
         private void songSearchBox_TextChanged(object sender, EventArgs e)
@@ -211,10 +154,7 @@ namespace Pbp
             {
                 projectionFont = fontDlg.Font;
             }
-
         }
-
-
 
         private void songDetailItems_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -223,33 +163,11 @@ namespace Pbp
                 int idx = songDetailItems.SelectedIndices[0];
                 Song currentSong = (Song)listViewSongs.Items[listViewSongs.SelectedIndices[0]].Tag;
                 Song.slide sld = (Song.slide)songDetailItems.Items[idx].Tag;
-                Console.WriteLine(idx);
                 
                 if (checkBoxUseSongImage.Checked == true)
                     projWindow.showText(sld.nlText, projectionFont, currentSong.getImage(sld.imageNumber));
                 else
                     projWindow.showText(sld.nlText, projectionFont, null);
-            }
-        }
-
-        private void songDetailImages_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            if (songDetailImages.SelectedIndices.Count > 0)
-            {
-            }
-        }
-
-        private void songDetailImages_Click(object sender, EventArgs e)
-        {
-            if (songDetailImages.SelectedIndices.Count > 0)
-            {
-                int idx = songDetailImages.SelectedIndices[0];
-                
-                
-                if (checkBoxUseSongImage.Checked == true)
-                {
-                    
-                }
             }
         }
 
@@ -322,20 +240,16 @@ namespace Pbp
             }
         }
 
-
-
-
-
         private void optionenToolStripMenuItem_Click(object sender, EventArgs e)
         {
             settingsWindow stWnd = new settingsWindow();
-            stWnd.Show();
+            stWnd.ShowDialog(this);
         }
 
         private void toolStripButton4_Click(object sender, EventArgs e)
         {
             settingsWindow stWnd = new settingsWindow();
-            stWnd.Show();
+            stWnd.ShowDialog(this);
         }
 
         private void liederlisteNeuLadenToolStripMenuItem_Click(object sender, EventArgs e)
@@ -402,18 +316,10 @@ namespace Pbp
                 songSearchBox.Focus();
         }
 
-
-
-
-
-
-
-
- 
-
-
-
-
+        private void webToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            System.Diagnostics.Process.Start("http://www.nicu.ch/pbp");
+        }
 
     }
 }

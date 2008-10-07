@@ -7,7 +7,8 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using System.Drawing.Imaging;
-
+using System.Drawing.Drawing2D;
+using System.Drawing.Text;
 
 namespace Pbp.Forms
 {
@@ -17,11 +18,23 @@ namespace Pbp.Forms
         private int h;
         private int w;
 
+        private int textBluring;
+        private int padding;
+
         public projectionWindow()
         {
             InitializeComponent();
             h = 1;
             w = 1;
+            textBluring = 4;
+            padding = 10;
+
+            scanScreens(0);
+            this.Location = projScreen.WorkingArea.Location;
+            this.Size = new Size(projScreen.WorkingArea.Width, projScreen.WorkingArea.Height);
+            h = this.Height;
+            w = this.Width;
+            Console.WriteLine("Projection window has dimensions " + w + "*" + h);
         }
 
         private void projectionWindow_Load(object sender, EventArgs e)
@@ -31,6 +44,7 @@ namespace Pbp.Forms
             this.Size = new Size(projScreen.WorkingArea.Width, projScreen.WorkingArea.Height);
             h = this.Height;
             w = this.Width;
+            Console.WriteLine("Projection window has dimensions "+w+"*"+h);
         }
 
         /**
@@ -85,13 +99,40 @@ namespace Pbp.Forms
             {
                 gr.DrawImage(background, new Rectangle(0, 0, w, h), 0, 0, background.Width, background.Height, GraphicsUnit.Pixel);
             }
+            
             StringFormat strFormat = new StringFormat();
             strFormat.Alignment = StringAlignment.Center;
             strFormat.LineAlignment = StringAlignment.Center;
-            gr.DrawString(str, font, Brushes.White,
-                          pictureBoxCommon.Width / 2,
-                          pictureBoxCommon.Height / 2, strFormat);
 
+            Brush br = new SolidBrush(Color.FromArgb(15, Color.Black));
+            gr.SmoothingMode = SmoothingMode.HighQuality;
+            gr.InterpolationMode = InterpolationMode.HighQualityBilinear;
+            gr.TextRenderingHint = TextRenderingHint.AntiAliasGridFit;
+
+            int textX = w / 2;
+            int textY = h / 2;
+
+            float realFontWidth = gr.MeasureString(str, font).Width;
+            if (realFontWidth > w - padding)
+            {
+                font = new Font(font.FontFamily, ((w - padding) / realFontWidth) * font.Size, font.Style);
+            }
+            float realFontHeight = gr.MeasureString(str, font).Height;
+            if (realFontHeight > h - padding)
+            {
+                font = new Font(font.FontFamily, ((h - padding) / realFontHeight) * font.Size, font.Style);
+            }
+
+
+            for (int x = textX - textBluring; x <= textX + textBluring; x++)
+            {
+                for (int y = textY - textBluring; y <= textY + textBluring; y++)
+              {
+                  gr.DrawString(str, font, br, new Point(x, y), strFormat);
+              }
+            }
+
+            gr.DrawString(str, font, Brushes.White, new Point(textX, textY), strFormat);
             pictureBoxCommon.Image = bmp;
             
             gr.Dispose();

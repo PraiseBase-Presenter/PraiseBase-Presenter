@@ -6,8 +6,6 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
-using System.ComponentModel;
-using System.Linq;
 using System.Reflection;
 
 
@@ -31,7 +29,10 @@ namespace Pbp.Forms
             this.labelVersion.Text = String.Format("Version {0} {0}", AssemblyVersion);
             this.labelCopyright.Text = AssemblyCopyright;
             this.labelCompanyName.Text = AssemblyCompany;
-            this.labelDescription.Text = AssemblyDescription;
+            
+
+            this.textBox1.Text = global::Pbp.Properties.Resources.License;
+
         }
 
         #region Assembly Attribute Accessors

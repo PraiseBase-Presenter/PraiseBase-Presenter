@@ -66,6 +66,7 @@
             this.toolStripButton4 = new System.Windows.Forms.ToolStripButton();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.toolStripProgressBar1 = new System.Windows.Forms.ToolStripProgressBar();
+            this.webToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.tabControl1.SuspendLayout();
@@ -136,7 +137,8 @@
             // toolStripMenuItem1
             // 
             this.toolStripMenuItem1.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.infoToolStripMenuItem});
+            this.infoToolStripMenuItem,
+            this.webToolStripMenuItem});
             this.toolStripMenuItem1.Name = "toolStripMenuItem1";
             this.toolStripMenuItem1.Size = new System.Drawing.Size(24, 20);
             this.toolStripMenuItem1.Text = "?";
@@ -144,7 +146,7 @@
             // infoToolStripMenuItem
             // 
             this.infoToolStripMenuItem.Name = "infoToolStripMenuItem";
-            this.infoToolStripMenuItem.Size = new System.Drawing.Size(105, 22);
+            this.infoToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.infoToolStripMenuItem.Text = "Info";
             this.infoToolStripMenuItem.Click += new System.EventHandler(this.infoToolStripMenuItem_Click);
             // 
@@ -325,8 +327,6 @@
             this.songDetailImages.TileSize = new System.Drawing.Size(70, 50);
             this.songDetailImages.UseCompatibleStateImageBehavior = false;
             this.songDetailImages.View = System.Windows.Forms.View.Tile;
-            this.songDetailImages.SelectedIndexChanged += new System.EventHandler(this.songDetailImages_SelectedIndexChanged);
-            this.songDetailImages.Click += new System.EventHandler(this.songDetailImages_Click);
             // 
             // fontSelector
             // 
@@ -433,6 +433,13 @@
             this.toolStripProgressBar1.Name = "toolStripProgressBar1";
             this.toolStripProgressBar1.Size = new System.Drawing.Size(100, 16);
             // 
+            // webToolStripMenuItem
+            // 
+            this.webToolStripMenuItem.Name = "webToolStripMenuItem";
+            this.webToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.webToolStripMenuItem.Text = "Web";
+            this.webToolStripMenuItem.Click += new System.EventHandler(this.webToolStripMenuItem_Click);
+            // 
             // mainWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -507,6 +514,7 @@
         private System.Windows.Forms.ToolStripMenuItem liederlisteNeuLadenToolStripMenuItem;
         private System.Windows.Forms.StatusStrip statusStrip1;
         private System.Windows.Forms.ToolStripProgressBar toolStripProgressBar1;
+        private System.Windows.Forms.ToolStripMenuItem webToolStripMenuItem;
     }
 }
 
