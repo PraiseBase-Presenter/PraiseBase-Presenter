@@ -20,6 +20,8 @@ namespace Pbp.Forms
         public projectionWindow()
         {
             InitializeComponent();
+            h = 1;
+            w = 1;
         }
 
         private void projectionWindow_Load(object sender, EventArgs e)

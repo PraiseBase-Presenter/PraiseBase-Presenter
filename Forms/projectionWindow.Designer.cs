@@ -68,7 +68,6 @@
             this.ShowIcon = false;
             this.ShowInTaskbar = false;
             this.Text = "projectionWindow";
-            this.TopMost = true;
             this.Load += new System.EventHandler(this.projectionWindow_Load);
             this.Paint += new System.Windows.Forms.PaintEventHandler(this.projectionWindow_Paint);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxCommon)).EndInit();

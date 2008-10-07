@@ -16,10 +16,11 @@ namespace Pbp
         static private string imageDirectory = "Backgrounds";
         private bool _isValid;
         private string _path;
-        private string _title;
+        public string _title; // { get { return _title; }}
         private string _language;
         private string _category;
         protected string _wholeText;
+        
         public struct part
         {
             public string caption;
@@ -29,10 +30,13 @@ namespace Pbp
         public struct slide
         {
             public string text;
+            public string nlText;
             public int imageNumber;
-            public List<string> lines;
         };
-        public List<string> images;
+
+        private List<string> imagePaths;
+        private List<Image> imageObjects;
+        private ImageList imageThumbs;
 
         public Song(string filePath)
         {
@@ -77,15 +81,15 @@ namespace Pbp
                             if (slideElem.Name == "slide")
                             {
                                 slide tmpSlide = new slide();
-                                tmpSlide.lines = new List<string>();
                                 tmpSlide.text = "";
+                                tmpSlide.nlText = "";
                                 tmpSlide.imageNumber = System.Convert.ToInt32(slideElem.GetAttribute("backgroundnr"));
                                 foreach (XmlElement lineElem in slideElem)
                                 {
                                     if (lineElem.Name == "line")
                                     {
-                                        tmpSlide.lines.Add(lineElem.InnerText);
                                         tmpSlide.text += lineElem.InnerText + " ";
+                                        tmpSlide.nlText += lineElem.InnerText + "\n";
                                     }
                                 }
                                 tempPart.slides.Add(tmpSlide);
@@ -99,12 +103,12 @@ namespace Pbp
                 // ... and the images
                 //
                 Settings setting = new Settings();
-                images = new List<string>();
+                imagePaths = new List<string>();
                 foreach (XmlElement elem in root["formatting"]["background"])
                 {
                     if (elem.Name == "file")
                     {
-                        images.Add( setting.dataDirectory + "/" + imageDirectory + "/" + elem.InnerText);
+                        imagePaths.Add( setting.dataDirectory + "/" + imageDirectory + "/" + elem.InnerText);
                     }
                 }
 
@@ -134,17 +138,16 @@ namespace Pbp
             return _wholeText;
         }
 
-        public ImageList getImageList()
+        private void loadImages()
         {
-            ImageList imageList;
-            imageList = new ImageList();
+            imageObjects = new List<Image>();
 
-            foreach (String path in images)
+            foreach (String path in imagePaths)
             {
                 if (File.Exists(path))
                 {
                     Image img = Image.FromFile(path);
-                    imageList.Images.Add(img);
+                    imageObjects.Add(img);
                 }
                 else
                 {
@@ -152,16 +155,60 @@ namespace Pbp
                     Image img = new Bitmap(800, 600);
                     Graphics graph = Graphics.FromImage(img);
                     graph.FillRectangle(new SolidBrush(Color.Black), 0, 0, img.Width, img.Height);
-                    
-                    imageList.Images.Add(img);
-
+                    imageObjects.Add(img);
                 }
             }
-          
-
-            return imageList;
         }
 
+        private void loadImageThumbs()
+        {
+            imageThumbs = new ImageList();
+            imageThumbs.ImageSize = new Size(64, 48);
+            imageThumbs.ColorDepth = ColorDepth.Depth32Bit;
+            foreach (String path in imagePaths)
+            {
+                if (File.Exists(path))
+                {
+                    Image img = Image.FromFile(path);
+                    imageThumbs.Images.Add(img);
+                }
+                else
+                {
+                    Console.WriteLine("Image " + path + " does not exist!");
+                    Image img = new Bitmap(64, 48);
+                    Graphics graph = Graphics.FromImage(img);
+                    graph.FillRectangle(new SolidBrush(Color.Black), 0, 0, img.Width, img.Height);
+                    imageThumbs.Images.Add(img);
+                }
+            }
+        }
+
+        public List<Image> getImages()
+        {
+            if (imageObjects == null)
+            {
+                loadImages();
+            }
+            return imageObjects;
+        }
+
+        public Image getImage(int nr)
+        {
+            if (imageObjects == null)
+            {
+                loadImages();
+            }
+            return imageObjects[nr];
+        }
+
+       public ImageList getThumbs()
+        {
+            if (imageThumbs == null)
+            {
+                loadImageThumbs();
+            }
+            return imageThumbs;
+        }
 
     }
 }

@@ -23,8 +23,6 @@ namespace Pbp
         private bool blackout;
 
         private Settings setting;
-        private List<Song> validSongs;
-        private List<Song> tmpSongs;
         private projectionWindow projWindow;
 
         private Font projectionFont;
@@ -220,38 +218,18 @@ namespace Pbp
 
         private void songDetailItems_SelectedIndexChanged(object sender, EventArgs e)
         {
-            /*
-            if (songDetailItems.SelectedIndices.Count > 0)
+            if (projWindow != null && songDetailItems.SelectedIndices.Count > 0)
             {
                 int idx = songDetailItems.SelectedIndices[0];
-                Song currentSong = tmpSongs[songList.SelectedIndex];
-
-                int j = 0;
-                foreach (Song.part bla in currentSong.parts)
-                {
-                    foreach (Song.slide sld in bla.slides)
-                    {
-                        if (j == idx)
-                        {
-                            string text = "";
-                            foreach (string str in sld.lines)
-                            {
-                                text += str + "\n";
-                            }
-
-                            if (checkBoxUseSongImage.Checked == true)
-                            {
-                                projWindow.showText(text, projectionFont, Image.FromFile(currentSong.images[sld.imageNumber]));
-                            }
-                            else
-                            {
-                                projWindow.showText(text, projectionFont, null);
-                            }
-                        }
-                        j++;
-                    }
-                }
-            }*/
+                Song currentSong = (Song)listViewSongs.Items[listViewSongs.SelectedIndices[0]].Tag;
+                Song.slide sld = (Song.slide)songDetailItems.Items[idx].Tag;
+                Console.WriteLine(idx);
+                
+                if (checkBoxUseSongImage.Checked == true)
+                    projWindow.showText(sld.nlText, projectionFont, currentSong.getImage(sld.imageNumber));
+                else
+                    projWindow.showText(sld.nlText, projectionFont, null);
+            }
         }
 
         private void songDetailImages_SelectedIndexChanged(object sender, EventArgs e)
@@ -379,12 +357,7 @@ namespace Pbp
 
                 Song currentSong = (Song)listViewSongs.Items[listViewSongs.SelectedIndices[0]].Tag;
 
-                toolStripProgressBar1.Value = 0;
-
-                ImageList imageList = currentSong.getImageList();
-                imageList.ImageSize = new Size(64, 48);
-                imageList.ColorDepth = ColorDepth.Depth32Bit;
-                songDetailItems.SmallImageList = imageList;
+                songDetailItems.SmallImageList = currentSong.getThumbs();
 
                 /*
                 ImageList largerImages = currentSong.getImageList();
@@ -398,8 +371,6 @@ namespace Pbp
 
 
                 int j = 0;
-                int z=0;
-                int cnt = currentSong.parts.Count; 
                 foreach (Song.part bla in currentSong.parts)
                 {
                     int i = 0;
@@ -408,16 +379,12 @@ namespace Pbp
                         ListViewItem lvi = new ListViewItem(new string[] {bla.caption + "  ["+(i+1).ToString()+"]",
                         bla.slides[i].text});
                         lvi.ImageIndex = bla.slides[i].imageNumber;
+                        lvi.Tag = sld;
                         songDetailItems.Items.Add(lvi);
                         i++;
                         j++;
                     }
-                    toolStripProgressBar1.Value = 100/cnt * z;
-                    z++;
                 }
-
-                toolStripProgressBar1.Value = 100;
-
                 songDetailItems.Columns[0].Width = -2;
                 songDetailItems.Columns[1].Width = -2;
             }
