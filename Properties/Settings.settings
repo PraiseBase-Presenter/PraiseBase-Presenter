@@ -3,10 +3,25 @@
   <Profiles />
   <Settings>
     <Setting Name="dataDirectory" Type="System.String" Scope="User">
-      <Value Profile="(Default)">D:\Daten\Powerpraise-Dateien</Value>
+      <Value Profile="(Default)" />
     </Setting>
-    <Setting Name="test" Type="System.String" Scope="User">
-      <Value Profile="(Default)">123</Value>
+    <Setting Name="projectionFont" Type="System.Drawing.Font" Scope="User">
+      <Value Profile="(Default)">Calibri, 60pt, style=Bold</Value>
+    </Setting>
+    <Setting Name="projectionBackColor" Type="System.Drawing.Color" Scope="User">
+      <Value Profile="(Default)">Black</Value>
+    </Setting>
+    <Setting Name="projectionForeColor" Type="System.Drawing.Color" Scope="User">
+      <Value Profile="(Default)">White</Value>
+    </Setting>
+    <Setting Name="projectionFontBorderColor" Type="System.Drawing.Color" Scope="User">
+      <Value Profile="(Default)">Black</Value>
+    </Setting>
+    <Setting Name="projectionFontScaling" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
+    <Setting Name="projectionPadding" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">80</Value>
     </Setting>
   </Settings>
 </SettingsFile>

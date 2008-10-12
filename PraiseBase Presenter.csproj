@@ -70,6 +70,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Classes\ImageManager.cs" />
     <Compile Include="Classes\SongManager.cs" />
     <Compile Include="Componetns\ColorButton.cs">
       <SubType>Component</SubType>
@@ -82,6 +83,18 @@
     </Compile>
     <Compile Include="Forms\ColorDialog.cs">
       <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\EditorChild.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\EditorChild.Designer.cs">
+      <DependentUpon>EditorChild.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\EditorWindow.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\EditorWindow.Designer.cs">
+      <DependentUpon>EditorWindow.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\mainWindow.cs">
       <SubType>Form</SubType>
@@ -109,6 +122,14 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\ColorDialog.resx">
       <DependentUpon>ColorDialog.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\EditorChild.resx">
+      <DependentUpon>EditorChild.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\EditorWindow.resx">
+      <DependentUpon>EditorWindow.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\mainWindow.resx">
@@ -186,9 +207,6 @@
     <None Include="Resources\gpg.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\kate.png" />
-  </ItemGroup>
-  <ItemGroup>
     <None Include="Resources\keditbookmarks.png" />
   </ItemGroup>
   <ItemGroup>
@@ -206,6 +224,8 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Doc\License.txt" />
+    <None Include="Resources\kate.png" />
+    <None Include="Resources\gplv3-127x51.png" />
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include="Microsoft.Net.Framework.2.0">

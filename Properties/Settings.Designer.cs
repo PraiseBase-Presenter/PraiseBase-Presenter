@@ -25,7 +25,7 @@ namespace Pbp.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("D:\\Daten\\Powerpraise-Dateien")]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
         public string dataDirectory {
             get {
                 return ((string)(this["dataDirectory"]));
@@ -37,13 +37,73 @@ namespace Pbp.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("123")]
-        public string test {
+        [global::System.Configuration.DefaultSettingValueAttribute("Calibri, 60pt, style=Bold")]
+        public global::System.Drawing.Font projectionFont {
             get {
-                return ((string)(this["test"]));
+                return ((global::System.Drawing.Font)(this["projectionFont"]));
             }
             set {
-                this["test"] = value;
+                this["projectionFont"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("Black")]
+        public global::System.Drawing.Color projectionBackColor {
+            get {
+                return ((global::System.Drawing.Color)(this["projectionBackColor"]));
+            }
+            set {
+                this["projectionBackColor"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("White")]
+        public global::System.Drawing.Color projectionForeColor {
+            get {
+                return ((global::System.Drawing.Color)(this["projectionForeColor"]));
+            }
+            set {
+                this["projectionForeColor"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("Black")]
+        public global::System.Drawing.Color projectionFontBorderColor {
+            get {
+                return ((global::System.Drawing.Color)(this["projectionFontBorderColor"]));
+            }
+            set {
+                this["projectionFontBorderColor"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool projectionFontScaling {
+            get {
+                return ((bool)(this["projectionFontScaling"]));
+            }
+            set {
+                this["projectionFontScaling"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("80")]
+        public int projectionPadding {
+            get {
+                return ((int)(this["projectionPadding"]));
+            }
+            set {
+                this["projectionPadding"] = value;
             }
         }
     }

@@ -39,6 +39,7 @@
             this.pictureBoxCommon.Location = new System.Drawing.Point(41, 64);
             this.pictureBoxCommon.Name = "pictureBoxCommon";
             this.pictureBoxCommon.Size = new System.Drawing.Size(394, 265);
+            this.pictureBoxCommon.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureBoxCommon.TabIndex = 0;
             this.pictureBoxCommon.TabStop = false;
             // 

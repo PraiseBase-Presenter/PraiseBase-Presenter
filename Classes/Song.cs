@@ -11,37 +11,62 @@ using Pbp.Properties;
 
 namespace Pbp
 {
-    class Song
+    public class Song
     {
         static private string imageDirectory = "Backgrounds";
         private bool _isValid;
         private string _path;
-        public string _title; // { get { return _title; }}
+        XmlDocument xmlDoc;
+        XmlElement xmlRoot;
+
+        public string _title;
+        public string title { get { return _title; } set { _title = value; } }
+
+        protected string _wholeText;
+        public string text { get { return _wholeText; } set { _wholeText = value; } }
+
+        private string _comment;
+        public string comment { 
+            get { return _comment; } 
+            set { 
+                _comment = value;
+                saveBack(); } }
+
         private string _language;
         private string _category;
-        protected string _wholeText;
-        
-        public struct part
-        {
-            public string caption;
-            public List<slide> slides;
-        };
-        public List<part> parts;
+
+        public List<slide> slides;
         public struct slide
         {
+            public string caption;
             public string text;
             public string nlText;
             public int imageNumber;
+            public SongTextAlign vertAlign;
+            public SongTextAlign horizAlign;
         };
+
+        public int id;
+
+        public int currentSlide;
 
         private List<string> imagePaths;
         private List<Image> imageObjects;
         private ImageList imageThumbs;
 
+        public enum SongTextAlign {
+            left,
+            center,
+            right,
+            top,
+            bottom
+        }
+
+        public SongTextAlign vertAlign;
+        public SongTextAlign horizAlign;        
+
         public Song(string filePath)
         {
-            XmlElement root;
-
             _isValid = false;
             bool err = false;
 
@@ -50,39 +75,89 @@ namespace Pbp
                 // 
                 // Init xml
                 //
-                XmlDocument doc = new XmlDocument();
-                doc.Load(filePath);
-                root = doc.DocumentElement;
+                xmlDoc = new XmlDocument();
+                xmlDoc.Load(filePath);
+                xmlRoot = xmlDoc.DocumentElement;
 
                 _path = filePath;
 
                 //
                 // General stuff
                 //
-                _title = root["general"]["title"].InnerText;
-                _language = root["general"]["language"].InnerText;
-                _category = root["general"]["category"].InnerText;
+                _title = xmlRoot["general"]["title"].InnerText;
 
-                _wholeText = root["songtext"].InnerText;
+                if (xmlRoot["general"]["language"] != null)
+                    _language = xmlRoot["general"]["language"].InnerText;
+                else
+                    _language = "German";
+
+                if (xmlRoot["general"]["category"] != null)
+                    _category = xmlRoot["general"]["category"].InnerText;
+                else
+                    _category = "";
+
+                if (xmlRoot["general"]["comment"] != null)
+                    _comment = xmlRoot["general"]["comment"].InnerText;
+                else
+                    _comment = "";
+
+                _wholeText = xmlRoot["songtext"].InnerText;
+
+                horizAlign = SongTextAlign.center;
+                vertAlign = SongTextAlign.center;
+                if (xmlRoot["formatting"]["textorientation"] != null)
+                {
+                    if (xmlRoot["formatting"]["textorientation"]["horizontal"] != null)
+                    {
+                        switch (xmlRoot["formatting"]["textorientation"]["horizontal"].InnerText)
+                        {
+                            case "left":
+                                horizAlign = SongTextAlign.left;
+                                break;
+                            case "center":
+                                horizAlign = SongTextAlign.center;
+                                break;
+                            case "right":
+                                horizAlign = SongTextAlign.right;
+                                break;
+                        }
+                    }
+                    if (xmlRoot["formatting"]["textorientation"]["vertical"] != null)
+                    {
+                        switch (xmlRoot["formatting"]["textorientation"]["vertical"].InnerText)
+                        {
+                            case "top":
+                                vertAlign = SongTextAlign.top;
+                                break;
+                            case "center":
+                                vertAlign = SongTextAlign.center;
+                                break;
+                            case "bottom":
+                                vertAlign = SongTextAlign.bottom;
+                                break;
+                        }
+                    }
+                }
 
                 //
                 // Now the song text ... 
                 //
-                parts = new List<part>();
-                foreach (XmlElement elem in root["songtext"])
+                slides = new List<slide>();
+                foreach (XmlElement elem in xmlRoot["songtext"])
                 {
                     if (elem.Name == "part")
                     {
-                        part tempPart = new part();
-                        tempPart.caption = elem.GetAttribute("caption");
-                        tempPart.slides = new List<slide>();
+                        string caption = elem.GetAttribute("caption");
                         foreach (XmlElement slideElem in elem)
                         {
                             if (slideElem.Name == "slide")
                             {
                                 slide tmpSlide = new slide();
+                                tmpSlide.caption = caption;
                                 tmpSlide.text = "";
                                 tmpSlide.nlText = "";
+                                tmpSlide.horizAlign = horizAlign;
+                                tmpSlide.vertAlign = vertAlign;
                                 tmpSlide.imageNumber = System.Convert.ToInt32(slideElem.GetAttribute("backgroundnr"));
                                 foreach (XmlElement lineElem in slideElem)
                                 {
@@ -92,10 +167,9 @@ namespace Pbp
                                         tmpSlide.nlText += lineElem.InnerText + "\n";
                                     }
                                 }
-                                tempPart.slides.Add(tmpSlide);
+                                slides.Add(tmpSlide);
                             }
                         }
-                        parts.Add(tempPart);
                     }
                 }
 
@@ -104,7 +178,7 @@ namespace Pbp
                 //
                 Settings setting = new Settings();
                 imagePaths = new List<string>();
-                foreach (XmlElement elem in root["formatting"]["background"])
+                foreach (XmlElement elem in xmlRoot["formatting"]["background"])
                 {
                     if (elem.Name == "file")
                     {
@@ -127,15 +201,6 @@ namespace Pbp
         public bool isValid()
         {
             return _isValid;
-        }
-        public string title()
-        {
-            return _title;
-        }
-
-        public string text()
-        {
-            return _wholeText;
         }
 
         private void loadImages()
@@ -208,6 +273,16 @@ namespace Pbp
                 loadImageThumbs();
             }
             return imageThumbs;
+        }
+
+        public void saveBack()
+        {
+            if (xmlRoot["general"]["comment"] == null)
+                xmlRoot["general"].AppendChild(xmlDoc.CreateElement("comment"));
+            xmlRoot["general"]["comment"].InnerText = _comment;
+
+
+            xmlDoc.Save(_path);
         }
 
     }

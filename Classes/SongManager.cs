@@ -11,6 +11,19 @@ namespace Pbp
     {
         static private SongManager instance;
         private List<Song> validSongs;
+        private Song _currentSong;
+
+        public Song currentSong
+        {
+            get
+            {
+                return _currentSong;
+            }
+            set
+            {
+                _currentSong = value;
+            }
+        }
 
         private SongManager()
         {
@@ -21,14 +34,30 @@ namespace Pbp
         {
             Settings setting = new Settings();
 
-            validSongs = new List<Song>();
-            string[] songFilePaths = Directory.GetFiles(setting.dataDirectory + "\\Songs", "*.ppl", SearchOption.AllDirectories);
-            foreach (string file in songFilePaths)
+            if (setting.dataDirectory == "")
             {
-                Song tmpSong = new Song(file);
-                if (tmpSong.isValid())
+                setting.dataDirectory = Environment.GetFolderPath(Environment.SpecialFolder.Personal).ToString()+ "\\Praisebase Presenter";
+                setting.Save();
+                Console.WriteLine("Data dir set to " + setting.dataDirectory);
+            }
+
+            string searchDir = setting.dataDirectory + "\\Songs";
+
+            validSongs = new List<Song>();
+
+            int i=0;
+            if (Directory.Exists(searchDir))
+            {
+                string[] songFilePaths = Directory.GetFiles(searchDir, "*.ppl", SearchOption.AllDirectories);
+                foreach (string file in songFilePaths)
                 {
-                    validSongs.Add(tmpSong);
+                    Song tmpSong = new Song(file);
+                    if (tmpSong.isValid())
+                    {
+                        tmpSong.id = i;
+                        validSongs.Add(tmpSong);
+                        i++;
+                    }
                 }
             }
         }
@@ -47,13 +76,18 @@ namespace Pbp
             return validSongs;
         }
 
+        public Song get(int id)
+        {
+            return validSongs[id];
+        }
+
         public List<Song> getSearchResults(string needle, int mode)
         {
             List<Song> tmpList = new List<Song>();
             for (int i=0;i<validSongs.Count;i++)
             {
-                if (validSongs[i].title().ToLower().Contains(needle.ToLower()) ||
-                    (mode==1 && validSongs[i].text().ToLower().Contains(needle.ToLower())))
+                if (validSongs[i].title.ToLower().Contains(needle.ToLower()) ||
+                    (mode==1 && validSongs[i].text.ToLower().Contains(needle.ToLower())))
                 {
                     tmpList.Add(validSongs[i]);
                 }

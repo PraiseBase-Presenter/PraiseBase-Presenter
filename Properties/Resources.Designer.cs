@@ -109,6 +109,13 @@ namespace Pbp.Properties {
             }
         }
         
+        internal static System.Drawing.Bitmap editor {
+            get {
+                object obj = ResourceManager.GetObject("editor", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
         internal static System.Drawing.Bitmap error {
             get {
                 object obj = ResourceManager.GetObject("error", resourceCulture);
@@ -130,9 +137,9 @@ namespace Pbp.Properties {
             }
         }
         
-        internal static System.Drawing.Bitmap kate {
+        internal static System.Drawing.Bitmap gplv3_127x51 {
             get {
-                object obj = ResourceManager.GetObject("kate", resourceCulture);
+                object obj = ResourceManager.GetObject("gplv3_127x51", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
