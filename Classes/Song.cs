@@ -11,6 +11,8 @@ using Pbp.Properties;
 
 namespace Pbp
 {
+
+
     public class Song
     {
         static private string imageDirectory = "Backgrounds";
@@ -22,8 +24,8 @@ namespace Pbp
         public string _title;
         public string title { get { return _title; } set { _title = value; } }
 
-        protected string _wholeText;
-        public string text { get { return _wholeText; } set { _wholeText = value; } }
+        public string _language;
+        public string language { get { return _language; } set { _language = value; } }
 
         private string _comment;
         public string comment { 
@@ -32,11 +34,12 @@ namespace Pbp
                 _comment = value;
                 saveBack(); } }
 
-        private string _language;
-        private string _category;
+        private List<string> _tags;
+        public List<string> tags { get { return _tags; } }
 
-        public List<slide> slides;
-        public struct slide
+        public List<Slide> slides;
+
+        public class Slide
         {
             public string caption;
             public string text;
@@ -45,6 +48,13 @@ namespace Pbp
             public SongTextAlign vertAlign;
             public SongTextAlign horizAlign;
         };
+
+        public class Part
+        {
+            public string caption;
+            public List<Slide> partSlides;
+        };
+        public List<Part> parts;
 
         public int id;
 
@@ -63,7 +73,10 @@ namespace Pbp
         }
 
         public SongTextAlign vertAlign;
-        public SongTextAlign horizAlign;        
+        public SongTextAlign horizAlign;
+
+        protected string _wholeText;
+        public string text { get { return _wholeText; } set { _wholeText = value; } }
 
         public Song(string filePath)
         {
@@ -89,12 +102,13 @@ namespace Pbp
                 if (xmlRoot["general"]["language"] != null)
                     _language = xmlRoot["general"]["language"].InnerText;
                 else
-                    _language = "German";
+                    _language = "Deutsch";
 
+                _tags = new List<string>();
                 if (xmlRoot["general"]["category"] != null)
-                    _category = xmlRoot["general"]["category"].InnerText;
-                else
-                    _category = "";
+                {
+                    _tags.Add(xmlRoot["general"]["category"].InnerText);
+                }
 
                 if (xmlRoot["general"]["comment"] != null)
                     _comment = xmlRoot["general"]["comment"].InnerText;
@@ -142,17 +156,21 @@ namespace Pbp
                 //
                 // Now the song text ... 
                 //
-                slides = new List<slide>();
+                slides = new List<Slide>();
+                parts = new List<Part>();
                 foreach (XmlElement elem in xmlRoot["songtext"])
                 {
                     if (elem.Name == "part")
                     {
                         string caption = elem.GetAttribute("caption");
+                        Part tmpPart = new Part();
+                        tmpPart.caption = caption;
+                        tmpPart.partSlides = new List<Slide>();
                         foreach (XmlElement slideElem in elem)
                         {
                             if (slideElem.Name == "slide")
                             {
-                                slide tmpSlide = new slide();
+                                Slide tmpSlide = new Slide();
                                 tmpSlide.caption = caption;
                                 tmpSlide.text = "";
                                 tmpSlide.nlText = "";
@@ -164,12 +182,14 @@ namespace Pbp
                                     if (lineElem.Name == "line")
                                     {
                                         tmpSlide.text += lineElem.InnerText + " ";
-                                        tmpSlide.nlText += lineElem.InnerText + "\n";
+                                        tmpSlide.nlText += lineElem.InnerText + "\r\n";
                                     }
                                 }
                                 slides.Add(tmpSlide);
+                                tmpPart.partSlides.Add(tmpSlide);
                             }
                         }
+                        parts.Add(tmpPart);
                     }
                 }
 
@@ -285,5 +305,27 @@ namespace Pbp
             xmlDoc.Save(_path);
         }
 
+
+        public void setSlideText(string text, int partId, int slideId)
+        {
+            parts[partId].partSlides[slideId].nlText = text;
+            parts[partId].partSlides[slideId].text = text.Replace("\r\n","");
+        }
+
+        public void setPartCaption(string text, int partId)
+        {
+            parts[partId].caption = text;
+        }
+
+        public void resetTags()
+        {
+            _tags.Clear();
+        }
+
+        public void addTag(string str)
+        {
+            if (!_tags.Contains(str))
+            _tags.Add(str);
+        }
     }
 }

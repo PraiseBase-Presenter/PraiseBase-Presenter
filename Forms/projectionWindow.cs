@@ -95,7 +95,7 @@ namespace Pbp.Forms
                 pictureBoxBlackout.Visible = false;
         }
 
-        public void showSlide(Song.slide slide, Image background)
+        public void showSlide(Song.Slide slide, Image background)
         {
             setting.Reload();
             Application.DoEvents();
@@ -146,6 +146,7 @@ namespace Pbp.Forms
                 realFontWidth = gr.MeasureString(str, font).Width;
                 realFontHeight = gr.MeasureString(str, font).Height;
 
+                // Horizontal stuff
                 switch (slide.horizAlign)
                 {
                     case Song.SongTextAlign.left:
@@ -161,6 +162,8 @@ namespace Pbp.Forms
                         strFormat.Alignment = StringAlignment.Far;
                         break;
                 }
+
+                // Vertical stuff
                 switch (slide.vertAlign)
                 {
                     case Song.SongTextAlign.top:

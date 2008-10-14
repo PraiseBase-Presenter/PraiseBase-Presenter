@@ -30,6 +30,47 @@ namespace Pbp.Forms
             buttonChooseProjectionForeColor.ForeColor = stn.projectionForeColor;
             buttonChooseProjectionBorderColor.ForeColor = stn.projectionFontBorderColor;
             checkBoxFontScaling.Checked = stn.projectionFontScaling;
+
+            List<string> strList;
+            
+            listBoxTags.Items.Clear();
+            strList = new List<string>();
+            foreach (string str in stn.tags)
+            {
+                strList.Add(str);
+            }
+            strList.Sort();
+            foreach (string str in strList)
+            {
+                listBoxTags.Items.Add(str);
+            }
+
+            listBoxLanguages.Items.Clear();
+            strList = new List<string>();
+            foreach (string str in stn.languages)
+            {
+                strList.Add(str);
+            }
+            strList.Sort();
+            foreach (string str in strList)
+            {
+                listBoxLanguages.Items.Add(str);
+            }
+
+            listBoxSongParts.Items.Clear();
+            strList = new List<string>();
+            foreach (string str in stn.songParts)
+            {
+                strList.Add(str);
+            }
+            strList.Sort();
+            foreach (string str in strList)
+            {
+                listBoxSongParts.Items.Add(str);
+            }
+
+            
+
         }
 
         private void cancelButton_Click(object sender, EventArgs e)
@@ -125,6 +166,113 @@ namespace Pbp.Forms
         private void checkBoxFontScaling_CheckedChanged(object sender, EventArgs e)
         {
             stn.projectionFontScaling = checkBoxFontScaling.Checked;
+        }
+
+        private void buttonAddTag_Click(object sender, EventArgs e)
+        {
+            string str = textBoxNewTag.Text.Trim();
+            if (str != "")
+            {
+                if (!stn.tags.Contains(str))
+                {
+                    stn.tags.Add(str);
+                    textBoxNewTag.Text = "";
+                    updateLabels();
+                }
+                else
+                {
+                    MessageBox.Show("Tag bereits vorhanden!", "Einstellungen", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                }
+            }
+            else
+            {
+                MessageBox.Show("Leere Einträge sind nicht erlaubt!", "Einstellungen", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+            }
+            textBoxNewTag.Focus();
+        }
+
+        private void buttonDelTags_Click(object sender, EventArgs e)
+        {
+            for (int i = 0; i < listBoxTags.Items.Count; i++)
+            {
+                if (listBoxTags.GetSelected(i))
+                {
+                    stn.tags.Remove(listBoxTags.Items[i].ToString());
+                }
+            }
+            updateLabels();
+        }
+
+        private void buttonAddLang_Click(object sender, EventArgs e)
+        {
+            string str = textBoxNewLang.Text.Trim();
+            if (str != "")
+            {
+                if (!stn.languages.Contains(str))
+                {
+                    stn.languages.Add(str);
+                    textBoxNewLang.Text = "";
+                    updateLabels();
+                }
+                else
+                {
+                    MessageBox.Show("Sprache bereits vorhanden!", "Einstellungen", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                }
+            }
+            else
+            {
+                MessageBox.Show("Leere Einträge sind nicht erlaubt!", "Einstellungen", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+            }
+            textBoxNewLang.Focus();
+        }
+
+        private void buttonDelLang_Click(object sender, EventArgs e)
+        {
+            for (int i = 0; i < listBoxLanguages.Items.Count; i++)
+            {
+                if (listBoxLanguages.GetSelected(i))
+                {
+                    stn.languages.Remove(listBoxLanguages.Items[i].ToString());
+                }
+            }
+            updateLabels();
+        }
+
+        private void buttonAddSongPart_Click(object sender, EventArgs e)
+        {
+            string str = textBoxNewSongPart.Text.Trim();
+            if (str != "")
+            {
+                if (!stn.songParts.Contains(str))
+                {
+                    stn.songParts.Add(str);
+                    textBoxNewSongPart.Text = "";
+                    updateLabels();
+                }
+                else
+                {
+                    MessageBox.Show("Name bereits vorhanden!", "Einstellungen", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                }
+            }
+            else
+            {
+                MessageBox.Show("Leere Einträge sind nicht erlaubt!", "Einstellungen", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+            }
+            textBoxNewSongPart.Focus();
+            
+        }
+
+        private void buttonDelSongParts_Click(object sender, EventArgs e)
+        {
+            for (int i = 0; i < listBoxSongParts.Items.Count; i++)
+            {
+                if (listBoxSongParts.GetSelected(i))
+                {
+                    stn.songParts.Remove(listBoxSongParts.Items[i].ToString());
+                }
+            }
+            updateLabels();
+            
         }
     }
 }

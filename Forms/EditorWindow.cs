@@ -27,6 +27,9 @@ namespace Pbp.Forms
         {
             EditorChild childForm = new EditorChild(null);
             childForm.MdiParent = this;
+            
+            
+            childForm.Text = "Neues Lied " + childFormNumber++;
             childForm.Show();
         }
 
@@ -40,7 +43,6 @@ namespace Pbp.Forms
                 string FileName = openFileDialog.FileName;
                 EditorChild childForm = new EditorChild(FileName);
                 childForm.MdiParent = this;
-                childForm.Text = "Window " + childFormNumber++;
                 childForm.Show();
             }
         }
@@ -111,9 +113,30 @@ namespace Pbp.Forms
             }
         }
 
-        private void EditorWindow_Load(object sender, EventArgs e)
+        private void contentsToolStripMenuItem_Click(object sender, EventArgs e)
         {
 
         }
+
+        private void aboutToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            AboutWindow ab = new AboutWindow();
+            ab.ShowDialog(this);
+        }
+
+        private void webToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            System.Diagnostics.Process.Start("http://www.nicu.ch/pbp");
+        }
+
+        private void optionsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            settingsWindow stWnd = new settingsWindow();
+            if (stWnd.ShowDialog(this) == DialogResult.OK)
+            {
+                setting.Reload();
+            }
+        }
+
     }
 }

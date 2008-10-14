@@ -38,8 +38,10 @@
             this.liederlisteNeuLadenToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.bilderlisteNeuLadenToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
-            this.infoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
             this.webToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
+            this.infoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.labelFadeInfo = new System.Windows.Forms.Label();
             this.songSearchBox = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
@@ -115,13 +117,13 @@
             this.beendenToolStripMenuItem});
             this.dateiToolStripMenuItem.Name = "dateiToolStripMenuItem";
             this.dateiToolStripMenuItem.Size = new System.Drawing.Size(64, 20);
-            this.dateiToolStripMenuItem.Text = "Allgemein";
+            this.dateiToolStripMenuItem.Text = "&Allgemein";
             // 
             // beendenToolStripMenuItem
             // 
             this.beendenToolStripMenuItem.Name = "beendenToolStripMenuItem";
             this.beendenToolStripMenuItem.Size = new System.Drawing.Size(127, 22);
-            this.beendenToolStripMenuItem.Text = "Beenden";
+            this.beendenToolStripMenuItem.Text = "&Beenden";
             this.beendenToolStripMenuItem.Click += new System.EventHandler(this.beendenToolStripMenuItem_Click);
             // 
             // einstellungenToolStripMenuItem
@@ -133,58 +135,72 @@
             this.bilderlisteNeuLadenToolStripMenuItem});
             this.einstellungenToolStripMenuItem.Name = "einstellungenToolStripMenuItem";
             this.einstellungenToolStripMenuItem.Size = new System.Drawing.Size(50, 20);
-            this.einstellungenToolStripMenuItem.Text = "Extras";
+            this.einstellungenToolStripMenuItem.Text = "&Extras";
             // 
             // optionenToolStripMenuItem
             // 
             this.optionenToolStripMenuItem.Name = "optionenToolStripMenuItem";
             this.optionenToolStripMenuItem.Size = new System.Drawing.Size(195, 22);
-            this.optionenToolStripMenuItem.Text = "Optionen...";
+            this.optionenToolStripMenuItem.Text = "&Optionen...";
             this.optionenToolStripMenuItem.Click += new System.EventHandler(this.optionenToolStripMenuItem_Click);
             // 
             // bildschirmeErneutSuchenToolStripMenuItem
             // 
             this.bildschirmeErneutSuchenToolStripMenuItem.Name = "bildschirmeErneutSuchenToolStripMenuItem";
             this.bildschirmeErneutSuchenToolStripMenuItem.Size = new System.Drawing.Size(195, 22);
-            this.bildschirmeErneutSuchenToolStripMenuItem.Text = "Bildschirme neu suchen";
+            this.bildschirmeErneutSuchenToolStripMenuItem.Text = "Bildschirme neu &suchen";
             this.bildschirmeErneutSuchenToolStripMenuItem.Click += new System.EventHandler(this.bildschirmeErneutSuchenToolStripMenuItem_Click);
             // 
             // liederlisteNeuLadenToolStripMenuItem
             // 
             this.liederlisteNeuLadenToolStripMenuItem.Name = "liederlisteNeuLadenToolStripMenuItem";
             this.liederlisteNeuLadenToolStripMenuItem.Size = new System.Drawing.Size(195, 22);
-            this.liederlisteNeuLadenToolStripMenuItem.Text = "Liederliste neu laden";
+            this.liederlisteNeuLadenToolStripMenuItem.Text = "&Liederliste neu laden";
             this.liederlisteNeuLadenToolStripMenuItem.Click += new System.EventHandler(this.liederlisteNeuLadenToolStripMenuItem_Click);
             // 
             // bilderlisteNeuLadenToolStripMenuItem
             // 
             this.bilderlisteNeuLadenToolStripMenuItem.Name = "bilderlisteNeuLadenToolStripMenuItem";
             this.bilderlisteNeuLadenToolStripMenuItem.Size = new System.Drawing.Size(195, 22);
-            this.bilderlisteNeuLadenToolStripMenuItem.Text = "Bilderliste neu laden";
+            this.bilderlisteNeuLadenToolStripMenuItem.Text = "&Bilderliste neu laden";
             this.bilderlisteNeuLadenToolStripMenuItem.Click += new System.EventHandler(this.bilderlisteNeuLadenToolStripMenuItem_Click);
             // 
             // toolStripMenuItem1
             // 
             this.toolStripMenuItem1.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.infoToolStripMenuItem,
-            this.webToolStripMenuItem});
+            this.toolStripMenuItem2,
+            this.webToolStripMenuItem,
+            this.toolStripSeparator3,
+            this.infoToolStripMenuItem});
             this.toolStripMenuItem1.Name = "toolStripMenuItem1";
             this.toolStripMenuItem1.Size = new System.Drawing.Size(24, 20);
-            this.toolStripMenuItem1.Text = "?";
+            this.toolStripMenuItem1.Text = "&?";
             // 
-            // infoToolStripMenuItem
+            // toolStripMenuItem2
             // 
-            this.infoToolStripMenuItem.Name = "infoToolStripMenuItem";
-            this.infoToolStripMenuItem.Size = new System.Drawing.Size(107, 22);
-            this.infoToolStripMenuItem.Text = "Info";
-            this.infoToolStripMenuItem.Click += new System.EventHandler(this.infoToolStripMenuItem_Click);
+            this.toolStripMenuItem2.Name = "toolStripMenuItem2";
+            this.toolStripMenuItem2.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.F1)));
+            this.toolStripMenuItem2.Size = new System.Drawing.Size(150, 22);
+            this.toolStripMenuItem2.Text = "&Hilfe";
             // 
             // webToolStripMenuItem
             // 
             this.webToolStripMenuItem.Name = "webToolStripMenuItem";
-            this.webToolStripMenuItem.Size = new System.Drawing.Size(107, 22);
-            this.webToolStripMenuItem.Text = "Web";
+            this.webToolStripMenuItem.Size = new System.Drawing.Size(150, 22);
+            this.webToolStripMenuItem.Text = "&Web";
             this.webToolStripMenuItem.Click += new System.EventHandler(this.webToolStripMenuItem_Click);
+            // 
+            // toolStripSeparator3
+            // 
+            this.toolStripSeparator3.Name = "toolStripSeparator3";
+            this.toolStripSeparator3.Size = new System.Drawing.Size(147, 6);
+            // 
+            // infoToolStripMenuItem
+            // 
+            this.infoToolStripMenuItem.Name = "infoToolStripMenuItem";
+            this.infoToolStripMenuItem.Size = new System.Drawing.Size(150, 22);
+            this.infoToolStripMenuItem.Text = "&Info...";
+            this.infoToolStripMenuItem.Click += new System.EventHandler(this.infoToolStripMenuItem_Click);
             // 
             // labelFadeInfo
             // 
@@ -227,6 +243,8 @@
             // 
             // groupBox2
             // 
+            this.groupBox2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+                        | System.Windows.Forms.AnchorStyles.Left)));
             this.groupBox2.Controls.Add(this.listViewSongs);
             this.groupBox2.Controls.Add(this.radioSongSearchAll);
             this.groupBox2.Controls.Add(this.radioSongSearchTitle);
@@ -243,6 +261,8 @@
             // 
             // listViewSongs
             // 
+            this.listViewSongs.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+                        | System.Windows.Forms.AnchorStyles.Left)));
             this.listViewSongs.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.columnHeader2});
             this.listViewSongs.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -285,6 +305,9 @@
             // 
             // tabControl1
             // 
+            this.tabControl1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+                        | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
             this.tabControl1.Controls.Add(this.tabPage1);
             this.tabControl1.Controls.Add(this.tabPage2);
             this.tabControl1.Controls.Add(this.tabPage3);
@@ -310,6 +333,9 @@
             // 
             // groupBox3
             // 
+            this.groupBox3.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+                        | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
             this.groupBox3.Controls.Add(this.groupBox1);
             this.groupBox3.Controls.Add(this.checkBoxUseSongImage);
             this.groupBox3.Controls.Add(this.songDetailItems);
@@ -324,6 +350,8 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
             this.groupBox1.Controls.Add(this.textBoxSongComment);
             this.groupBox1.Location = new System.Drawing.Point(6, 506);
             this.groupBox1.Name = "groupBox1";
@@ -335,6 +363,8 @@
             // textBoxSongComment
             // 
             this.textBoxSongComment.AcceptsReturn = true;
+            this.textBoxSongComment.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
             this.textBoxSongComment.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
             this.textBoxSongComment.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.textBoxSongComment.Enabled = false;
@@ -365,6 +395,8 @@
             // 
             // songDetailItems
             // 
+            this.songDetailItems.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
             this.songDetailItems.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.columnHeader1,
             this.columnHeader3});
@@ -394,6 +426,8 @@
             // 
             // songDetailImages
             // 
+            this.songDetailImages.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
             this.songDetailImages.HideSelection = false;
             this.songDetailImages.Location = new System.Drawing.Point(6, 19);
             this.songDetailImages.Name = "songDetailImages";
@@ -680,13 +714,11 @@
             this.Controls.Add(this.tabControl1);
             this.Controls.Add(this.labelFadeInfo);
             this.Controls.Add(this.menuStrip1);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MainMenuStrip = this.menuStrip1;
-            this.MaximizeBox = false;
             this.Name = "mainWindow";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "PraiseBase Presenter";
+            this.Text = "PraiseBase Presenter Viewer";
             this.Load += new System.EventHandler(this.Form1_Load);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
@@ -769,6 +801,8 @@
         private System.Windows.Forms.TextBox textBoxDiaDuration;
         private System.Windows.Forms.RadioButton radioButtonAutoDiaShow;
         private System.Windows.Forms.RadioButton radioButtonManualDiashow;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem2;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
     }
 }
 

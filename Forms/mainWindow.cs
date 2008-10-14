@@ -206,7 +206,10 @@ namespace Pbp
         private void optionenToolStripMenuItem_Click(object sender, EventArgs e)
         {
             settingsWindow stWnd = new settingsWindow();
-            stWnd.ShowDialog(this);
+            if (stWnd.ShowDialog(this) == DialogResult.OK)
+            {
+                setting.Reload();
+            }            
         }
 
         private void toolStripButton4_Click(object sender, EventArgs e)
@@ -252,7 +255,7 @@ namespace Pbp
                     songDetailImages.Items.Add(lvi);
                 }
 
-                foreach (Song.slide sld in songMan.currentSong.slides)
+                foreach (Song.Slide sld in songMan.currentSong.slides)
                 {
                     ListViewItem lvi = new ListViewItem(new string[] {sld.caption,
                     sld.text});
@@ -471,7 +474,7 @@ namespace Pbp
                 Application.DoEvents();
                 int idx = listViewDirectoryImages.SelectedIndices[0];
 
-                if ((Control.ModifierKeys & Keys.Shift) == Keys.Shift && songMan.currentSong != null && songMan.currentSong.currentSlide!=null)
+                if ((Control.ModifierKeys & Keys.Shift) == Keys.Shift && songMan.currentSong != null && songMan.currentSong.currentSlide>=0)
                 {
 
                     projWindow.showSlide(songMan.currentSong.slides[songMan.currentSong.currentSlide], Image.FromFile((string)listViewDirectoryImages.Items[idx].Tag));

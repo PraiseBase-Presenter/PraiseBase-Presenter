@@ -23,5 +23,45 @@
     <Setting Name="projectionPadding" Type="System.Int32" Scope="User">
       <Value Profile="(Default)">80</Value>
     </Setting>
+    <Setting Name="languages" Type="System.Collections.Specialized.StringCollection" Scope="User">
+      <Value Profile="(Default)">&lt;?xml version="1.0" encoding="utf-16"?&gt;
+&lt;ArrayOfString xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"&gt;
+  &lt;string&gt;Deutsch&lt;/string&gt;
+  &lt;string&gt;Englisch&lt;/string&gt;
+  &lt;string&gt;Französisch&lt;/string&gt;
+  &lt;string&gt;Italienisch&lt;/string&gt;
+  &lt;string&gt;Schweizerdeutsch&lt;/string&gt;
+&lt;/ArrayOfString&gt;</Value>
+    </Setting>
+    <Setting Name="tags" Type="System.Collections.Specialized.StringCollection" Scope="User">
+      <Value Profile="(Default)">&lt;?xml version="1.0" encoding="utf-16"?&gt;
+&lt;ArrayOfString xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"&gt;
+  &lt;string&gt;Lobpreis&lt;/string&gt;
+  &lt;string&gt;Anbetung&lt;/string&gt;
+  &lt;string&gt;Trost&lt;/string&gt;
+  &lt;string&gt;Hingabe&lt;/string&gt;
+  &lt;string&gt;Heiliger Geist&lt;/string&gt;
+  &lt;string&gt;Segen&lt;/string&gt;
+  &lt;string&gt;Dank&lt;/string&gt;
+  &lt;string&gt;Bitte&lt;/string&gt;
+  &lt;string&gt;Evangelisation&lt;/string&gt;
+  &lt;string&gt;Vertrauen&lt;/string&gt;
+&lt;/ArrayOfString&gt;</Value>
+    </Setting>
+    <Setting Name="songParts" Type="System.Collections.Specialized.StringCollection" Scope="User">
+      <Value Profile="(Default)">&lt;?xml version="1.0" encoding="utf-16"?&gt;
+&lt;ArrayOfString xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"&gt;
+  &lt;string&gt;Refrain&lt;/string&gt;
+  &lt;string&gt;Strophe 1&lt;/string&gt;
+  &lt;string&gt;Strophe 2&lt;/string&gt;
+  &lt;string&gt;Strophe 3&lt;/string&gt;
+  &lt;string&gt;Teil 1&lt;/string&gt;
+  &lt;string&gt;Teil 2&lt;/string&gt;
+  &lt;string&gt;Teil 3&lt;/string&gt;
+  &lt;string&gt;Instrumentalteil&lt;/string&gt;
+  &lt;string&gt;Bridge&lt;/string&gt;
+  &lt;string&gt;Schluss&lt;/string&gt;
+&lt;/ArrayOfString&gt;</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

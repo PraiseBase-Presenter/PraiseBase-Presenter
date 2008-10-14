@@ -106,5 +106,72 @@ namespace Pbp.Properties {
                 this["projectionPadding"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute(@"<?xml version=""1.0"" encoding=""utf-16""?>
+<ArrayOfString xmlns:xsi=""http://www.w3.org/2001/XMLSchema-instance"" xmlns:xsd=""http://www.w3.org/2001/XMLSchema"">
+  <string>Deutsch</string>
+  <string>Englisch</string>
+  <string>Französisch</string>
+  <string>Italienisch</string>
+  <string>Schweizerdeutsch</string>
+</ArrayOfString>")]
+        public global::System.Collections.Specialized.StringCollection languages {
+            get {
+                return ((global::System.Collections.Specialized.StringCollection)(this["languages"]));
+            }
+            set {
+                this["languages"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute(@"<?xml version=""1.0"" encoding=""utf-16""?>
+<ArrayOfString xmlns:xsi=""http://www.w3.org/2001/XMLSchema-instance"" xmlns:xsd=""http://www.w3.org/2001/XMLSchema"">
+  <string>Lobpreis</string>
+  <string>Anbetung</string>
+  <string>Trost</string>
+  <string>Hingabe</string>
+  <string>Heiliger Geist</string>
+  <string>Segen</string>
+  <string>Dank</string>
+  <string>Bitte</string>
+  <string>Evangelisation</string>
+  <string>Vertrauen</string>
+</ArrayOfString>")]
+        public global::System.Collections.Specialized.StringCollection tags {
+            get {
+                return ((global::System.Collections.Specialized.StringCollection)(this["tags"]));
+            }
+            set {
+                this["tags"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute(@"<?xml version=""1.0"" encoding=""utf-16""?>
+<ArrayOfString xmlns:xsi=""http://www.w3.org/2001/XMLSchema-instance"" xmlns:xsd=""http://www.w3.org/2001/XMLSchema"">
+  <string>Refrain</string>
+  <string>Strophe 1</string>
+  <string>Strophe 2</string>
+  <string>Strophe 3</string>
+  <string>Teil 1</string>
+  <string>Teil 2</string>
+  <string>Teil 3</string>
+  <string>Instrumentalteil</string>
+  <string>Bridge</string>
+  <string>Schluss</string>
+</ArrayOfString>")]
+        public global::System.Collections.Specialized.StringCollection songParts {
+            get {
+                return ((global::System.Collections.Specialized.StringCollection)(this["songParts"]));
+            }
+            set {
+                this["songParts"] = value;
+            }
+        }
     }
 }
