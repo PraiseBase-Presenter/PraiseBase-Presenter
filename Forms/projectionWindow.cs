@@ -25,6 +25,8 @@ namespace Pbp.Forms
         private int padding;
         private Settings setting;
 
+        private Image currentImage;
+
         public projectionWindow()
         {
             setting = new Settings();
@@ -103,7 +105,7 @@ namespace Pbp.Forms
             Bitmap bmp = new Bitmap(w, h);
             Graphics gr = Graphics.FromImage(bmp);
             Font font = setting.projectionFont;
-            String str = slide.nlText;
+            String str = slide.lineBreakText();
 
             // Background color
             gr.FillRectangle(new SolidBrush(setting.projectionBackColor), 0, 0, w, h);
@@ -112,6 +114,11 @@ namespace Pbp.Forms
             if (background != null)
             {
                 gr.DrawImage(background, new Rectangle(0, 0, w, h), 0, 0, background.Width, background.Height, GraphicsUnit.Pixel);
+                currentImage = background;
+            }
+            else if (currentImage!=null)
+            {
+                gr.DrawImage(currentImage, new Rectangle(0, 0, w, h), 0, 0, currentImage.Width, currentImage.Height, GraphicsUnit.Pixel);
             }
 
             // Text
@@ -149,15 +156,15 @@ namespace Pbp.Forms
                 // Horizontal stuff
                 switch (slide.horizAlign)
                 {
-                    case Song.SongTextAlign.left:
+                    case Song.SongTextHorizontalAlign.left:
                         textX = padding;
                         strFormat.Alignment = StringAlignment.Near;
                         break;
-                    case Song.SongTextAlign.center:
+                    case Song.SongTextHorizontalAlign.center:
                         textX = w / 2;
                         strFormat.Alignment = StringAlignment.Center;
                         break;
-                    case Song.SongTextAlign.right:
+                    case Song.SongTextHorizontalAlign.right:
                         textX = w - padding;
                         strFormat.Alignment = StringAlignment.Far;
                         break;
@@ -166,15 +173,15 @@ namespace Pbp.Forms
                 // Vertical stuff
                 switch (slide.vertAlign)
                 {
-                    case Song.SongTextAlign.top:
+                    case Song.SongTextVerticalAlign.top:
                         strFormat.LineAlignment = StringAlignment.Near;
                         textY = padding;
                         break;
-                    case Song.SongTextAlign.center:
+                    case Song.SongTextVerticalAlign.center:
                         strFormat.LineAlignment = StringAlignment.Center;
                         textY = h / 2;
                         break;
-                    case Song.SongTextAlign.bottom:
+                    case Song.SongTextVerticalAlign.bottom:
                         strFormat.LineAlignment = StringAlignment.Far;
                         textY = h - padding;
                         break;
@@ -200,6 +207,7 @@ namespace Pbp.Forms
         {
             Application.DoEvents();
             pictureBoxCommon.Image = background;
+            currentImage = background;
         }
 
         public void showNone()

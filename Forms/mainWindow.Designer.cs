@@ -56,7 +56,6 @@
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.textBoxSongComment = new System.Windows.Forms.TextBox();
-            this.checkBoxUseSongImage = new System.Windows.Forms.CheckBox();
             this.songDetailItems = new System.Windows.Forms.ListView();
             this.columnHeader1 = new System.Windows.Forms.ColumnHeader();
             this.columnHeader3 = new System.Windows.Forms.ColumnHeader();
@@ -337,7 +336,6 @@
                         | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
             this.groupBox3.Controls.Add(this.groupBox1);
-            this.groupBox3.Controls.Add(this.checkBoxUseSongImage);
             this.groupBox3.Controls.Add(this.songDetailItems);
             this.groupBox3.Controls.Add(this.songDetailImages);
             this.groupBox3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -381,21 +379,10 @@
             this.textBoxSongComment.Leave += new System.EventHandler(this.textBoxSongComment_Leave);
             this.textBoxSongComment.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBoxSongComment_KeyPress);
             // 
-            // checkBoxUseSongImage
-            // 
-            this.checkBoxUseSongImage.AutoSize = true;
-            this.checkBoxUseSongImage.Checked = true;
-            this.checkBoxUseSongImage.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.checkBoxUseSongImage.Location = new System.Drawing.Point(6, 447);
-            this.checkBoxUseSongImage.Name = "checkBoxUseSongImage";
-            this.checkBoxUseSongImage.Size = new System.Drawing.Size(189, 17);
-            this.checkBoxUseSongImage.TabIndex = 27;
-            this.checkBoxUseSongImage.Text = "Hintergrundbilder verwenden";
-            this.checkBoxUseSongImage.UseVisualStyleBackColor = true;
-            // 
             // songDetailItems
             // 
-            this.songDetailItems.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+            this.songDetailItems.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+                        | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
             this.songDetailItems.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.columnHeader1,
@@ -407,7 +394,7 @@
             this.songDetailItems.Location = new System.Drawing.Point(6, 79);
             this.songDetailItems.MultiSelect = false;
             this.songDetailItems.Name = "songDetailItems";
-            this.songDetailItems.Size = new System.Drawing.Size(721, 362);
+            this.songDetailItems.Size = new System.Drawing.Size(721, 421);
             this.songDetailItems.TabIndex = 23;
             this.songDetailItems.UseCompatibleStateImageBehavior = false;
             this.songDetailItems.View = System.Windows.Forms.View.Details;
@@ -430,6 +417,7 @@
                         | System.Windows.Forms.AnchorStyles.Right)));
             this.songDetailImages.HideSelection = false;
             this.songDetailImages.Location = new System.Drawing.Point(6, 19);
+            this.songDetailImages.MultiSelect = false;
             this.songDetailImages.Name = "songDetailImages";
             this.songDetailImages.Size = new System.Drawing.Size(721, 52);
             this.songDetailImages.TabIndex = 24;
@@ -727,7 +715,6 @@
             this.tabControl1.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
             this.groupBox3.ResumeLayout(false);
-            this.groupBox3.PerformLayout();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.tabPage2.ResumeLayout(false);
@@ -782,7 +769,6 @@
         private System.Windows.Forms.ToolStripProgressBar toolStripProgressBar;
         private System.Windows.Forms.ToolStripMenuItem webToolStripMenuItem;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel;
-        private System.Windows.Forms.CheckBox checkBoxUseSongImage;
         private System.Windows.Forms.TextBox textBoxSongComment;
         private System.Windows.Forms.ListView listViewDirectoryImages;
         private System.Windows.Forms.TreeView treeViewImageDirectories;

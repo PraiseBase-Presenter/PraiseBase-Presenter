@@ -255,12 +255,20 @@ namespace Pbp
                     songDetailImages.Items.Add(lvi);
                 }
 
-                foreach (Song.Slide sld in songMan.currentSong.slides)
+                foreach (Song.Part prt in songMan.currentSong.parts)
                 {
-                    ListViewItem lvi = new ListViewItem(new string[] {sld.caption,
-                    sld.text});
-                    lvi.ImageIndex = sld.imageNumber;
-                    songDetailItems.Items.Add(lvi);
+                    int sj = 1;
+                    foreach (Song.Slide sld in prt.partSlides)
+                    {
+                        ListViewItem lvi = new ListViewItem(new string[] 
+                        { 
+                            prt.partSlides.Count > 1 ? prt.caption + " ("+sj+")" : prt.caption, 
+                            sld.oneLineText() }
+                        );
+                        lvi.ImageIndex = sld.imageNumber;
+                        songDetailItems.Items.Add(lvi);
+                        sj++;
+                    }
                 }
 
                 songDetailItems.Columns[0].Width = -2;
@@ -282,10 +290,14 @@ namespace Pbp
 
                 toolStripStatusLabel.Text = "Projiziere '" + songMan.currentSong.title + "' ...";
 
-                if (checkBoxUseSongImage.Checked == true)
-                    projWindow.showSlide(songMan.currentSong.slides[songMan.currentSong.currentSlide], songMan.currentSong.getImage(songMan.currentSong.slides[songMan.currentSong.currentSlide].imageNumber));
-                else
+                if ((Control.ModifierKeys & Keys.Shift) == Keys.Shift)
+                {
                     projWindow.showSlide(songMan.currentSong.slides[songMan.currentSong.currentSlide], null);
+                }
+                else
+                {
+                    projWindow.showSlide(songMan.currentSong.slides[songMan.currentSong.currentSlide], songMan.currentSong.getImage(songMan.currentSong.slides[songMan.currentSong.currentSlide].imageNumber));
+                }
                 toolStripStatusLabel.Text = "'" + songMan.currentSong.title + "' ist aktiv";
             }
         }
@@ -296,7 +308,14 @@ namespace Pbp
             {
                 Application.DoEvents();
                 int idx = songDetailImages.SelectedIndices[0];
-                projWindow.showImage(songMan.currentSong.getImage(idx));
+                if ((Control.ModifierKeys & Keys.Shift) == Keys.Shift)
+                {
+                    projWindow.showSlide(songMan.currentSong.slides[songMan.currentSong.currentSlide],songMan.currentSong.getImage(idx));
+                }
+                else
+                {
+                    projWindow.showImage(songMan.currentSong.getImage(idx));
+                }
             }
         }
 
@@ -337,7 +356,19 @@ namespace Pbp
                 && listViewSongs.Items[0].Selected == true 
                 && songDetailItems.Items.Count >0)
             {
-                songDetailItems.Items[0].Selected = true;
+                int i = 0;
+                int sldIdx = 0;
+                foreach (ListViewItem itm in songDetailItems.Items)
+                {
+                    if (itm.SubItems[1].Text.ToLower().Contains(songSearchBox.Text.ToLower()))
+                    {
+                        sldIdx = i;
+                        break;
+                    }
+                    i++;
+                }
+                songDetailItems.Items[sldIdx].Selected = true;
+                
             }
         }
 
@@ -391,7 +422,7 @@ namespace Pbp
 
         public void imageTreeViewInit()
         {
-            string rootDir = setting.dataDirectory + "\\Backgrounds";
+            string rootDir = setting.dataDirectory + Path.DirectorySeparatorChar + setting.imageDir;
             treeViewImageDirectories.Nodes.Clear();
             TreeNode rootTreeNode = new TreeNode("Bilder");
             rootTreeNode.Tag = rootDir;
@@ -408,23 +439,19 @@ namespace Pbp
                 {
                     string[] directoryArray =
                     Directory.GetDirectories(directoryValue);
-                    string substringDirectory;
 
                     if (directoryArray.Length != 0)
                     {
                         foreach (string directory in directoryArray)
                         {
-                            substringDirectory = directory.Substring(
-                            directory.LastIndexOf('\\') + 1,
-                            directory.Length - directory.LastIndexOf('\\') - 1);
-
-                            TreeNode myNode = new TreeNode(substringDirectory);
-
-                            myNode.Tag = directoryValue + "\\"+substringDirectory;
-
-                            parentNode.Nodes.Add(myNode);
-
-                            PopulateTreeView(directory, myNode);
+                            string dName = Path.GetFileName(directory);
+                            if (dName.Substring(0, 1) != "[" && dName.Substring(0, 1) != ".")
+                            {
+                                TreeNode myNode = new TreeNode(dName);
+                                myNode.Tag = directory;
+                                parentNode.Nodes.Add(myNode);
+                                PopulateTreeView(directory, myNode);
+                            }
                         }
                     }
                 }

@@ -173,5 +173,32 @@ namespace Pbp.Properties {
                 this["songParts"] = value;
             }
         }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("songs")]
+        public string songDir {
+            get {
+                return ((string)(this["songDir"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("backgrounds")]
+        public string imageDir {
+            get {
+                return ((string)(this["imageDir"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("Praisebase Presenter")]
+        public string dataDirDefaultName {
+            get {
+                return ((string)(this["dataDirDefaultName"]));
+            }
+        }
     }
 }

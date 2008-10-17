@@ -46,10 +46,15 @@
             this.groupBoxSongPart = new System.Windows.Forms.GroupBox();
             this.label3 = new System.Windows.Forms.Label();
             this.textBoxSongPartCaption = new System.Windows.Forms.TextBox();
+            this.groupBoxNewSlide = new System.Windows.Forms.GroupBox();
+            this.buttonAddNewSlide = new System.Windows.Forms.Button();
+            this.buttonAddItem = new System.Windows.Forms.Button();
+            this.buttonDelItem = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxPreview)).BeginInit();
             this.groupBoxSongSettings.SuspendLayout();
             this.groupBoxNewSongPart.SuspendLayout();
             this.groupBoxSongPart.SuspendLayout();
+            this.groupBoxNewSlide.SuspendLayout();
             this.SuspendLayout();
             // 
             // treeViewContents
@@ -60,7 +65,7 @@
             this.treeViewContents.HideSelection = false;
             this.treeViewContents.Location = new System.Drawing.Point(12, 12);
             this.treeViewContents.Name = "treeViewContents";
-            this.treeViewContents.Size = new System.Drawing.Size(245, 515);
+            this.treeViewContents.Size = new System.Drawing.Size(245, 524);
             this.treeViewContents.TabIndex = 0;
             this.treeViewContents.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.treeViewContents_AfterSelect);
             // 
@@ -69,7 +74,7 @@
             this.textBoxSongText.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
             this.textBoxSongText.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBoxSongText.Location = new System.Drawing.Point(263, 426);
+            this.textBoxSongText.Location = new System.Drawing.Point(263, 428);
             this.textBoxSongText.Multiline = true;
             this.textBoxSongText.Name = "textBoxSongText";
             this.textBoxSongText.ScrollBars = System.Windows.Forms.ScrollBars.Both;
@@ -86,7 +91,7 @@
             this.pictureBoxPreview.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.pictureBoxPreview.Location = new System.Drawing.Point(263, 12);
             this.pictureBoxPreview.Name = "pictureBoxPreview";
-            this.pictureBoxPreview.Size = new System.Drawing.Size(617, 408);
+            this.pictureBoxPreview.Size = new System.Drawing.Size(617, 410);
             this.pictureBoxPreview.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureBoxPreview.TabIndex = 2;
             this.pictureBoxPreview.TabStop = false;
@@ -230,7 +235,7 @@
             this.groupBoxSongPart.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.groupBoxSongPart.Location = new System.Drawing.Point(263, 8);
             this.groupBoxSongPart.Name = "groupBoxSongPart";
-            this.groupBoxSongPart.Size = new System.Drawing.Size(617, 281);
+            this.groupBoxSongPart.Size = new System.Drawing.Size(617, 80);
             this.groupBoxSongPart.TabIndex = 10;
             this.groupBoxSongPart.TabStop = false;
             this.groupBoxSongPart.Text = "Liedteil-Einstellungen";
@@ -257,22 +262,74 @@
             this.textBoxSongPartCaption.TabIndex = 4;
             this.textBoxSongPartCaption.TextChanged += new System.EventHandler(this.textBoxSongPartCaption_TextChanged);
             // 
+            // groupBoxNewSlide
+            // 
+            this.groupBoxNewSlide.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupBoxNewSlide.Controls.Add(this.buttonAddNewSlide);
+            this.groupBoxNewSlide.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.groupBoxNewSlide.Location = new System.Drawing.Point(263, 116);
+            this.groupBoxNewSlide.Name = "groupBoxNewSlide";
+            this.groupBoxNewSlide.Size = new System.Drawing.Size(617, 71);
+            this.groupBoxNewSlide.TabIndex = 12;
+            this.groupBoxNewSlide.TabStop = false;
+            this.groupBoxNewSlide.Text = "Neue Folie";
+            // 
+            // buttonAddNewSlide
+            // 
+            this.buttonAddNewSlide.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.buttonAddNewSlide.Location = new System.Drawing.Point(435, 25);
+            this.buttonAddNewSlide.Name = "buttonAddNewSlide";
+            this.buttonAddNewSlide.Size = new System.Drawing.Size(168, 28);
+            this.buttonAddNewSlide.TabIndex = 10;
+            this.buttonAddNewSlide.Text = "Hinzufügen";
+            this.buttonAddNewSlide.UseVisualStyleBackColor = true;
+            this.buttonAddNewSlide.Click += new System.EventHandler(this.buttonAddNewSlide_Click);
+            // 
+            // buttonAddItem
+            // 
+            this.buttonAddItem.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+                        | System.Windows.Forms.AnchorStyles.Left)));
+            this.buttonAddItem.Location = new System.Drawing.Point(12, 542);
+            this.buttonAddItem.Name = "buttonAddItem";
+            this.buttonAddItem.Size = new System.Drawing.Size(85, 23);
+            this.buttonAddItem.TabIndex = 13;
+            this.buttonAddItem.Text = "Hinzufügen";
+            this.buttonAddItem.UseVisualStyleBackColor = true;
+            this.buttonAddItem.Click += new System.EventHandler(this.buttonAddItem_Click);
+            // 
+            // buttonDelItem
+            // 
+            this.buttonDelItem.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+                        | System.Windows.Forms.AnchorStyles.Left)));
+            this.buttonDelItem.Location = new System.Drawing.Point(169, 542);
+            this.buttonDelItem.Name = "buttonDelItem";
+            this.buttonDelItem.Size = new System.Drawing.Size(88, 23);
+            this.buttonDelItem.TabIndex = 14;
+            this.buttonDelItem.Text = "Löschen";
+            this.buttonDelItem.UseVisualStyleBackColor = true;
+            this.buttonDelItem.Click += new System.EventHandler(this.buttonDelItem_Click);
+            // 
             // EditorChild
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(892, 573);
+            this.ClientSize = new System.Drawing.Size(892, 575);
+            this.Controls.Add(this.buttonDelItem);
+            this.Controls.Add(this.buttonAddItem);
             this.Controls.Add(this.groupBoxNewSongPart);
             this.Controls.Add(this.groupBoxSongPart);
-
             this.Controls.Add(this.textBoxSongText);
             this.Controls.Add(this.treeViewContents);
+            this.Controls.Add(this.groupBoxNewSlide);
             this.Controls.Add(this.groupBoxSongSettings);
             this.Controls.Add(this.pictureBoxPreview);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "EditorChild";
             this.ShowInTaskbar = false;
             this.Text = "Liededitor";
+            this.Load += new System.EventHandler(this.EditorChild_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxPreview)).EndInit();
             this.groupBoxSongSettings.ResumeLayout(false);
             this.groupBoxSongSettings.PerformLayout();
@@ -280,6 +337,7 @@
             this.groupBoxNewSongPart.PerformLayout();
             this.groupBoxSongPart.ResumeLayout(false);
             this.groupBoxSongPart.PerformLayout();
+            this.groupBoxNewSlide.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -304,5 +362,9 @@
         private System.Windows.Forms.GroupBox groupBoxSongPart;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.TextBox textBoxSongPartCaption;
+        private System.Windows.Forms.GroupBox groupBoxNewSlide;
+        private System.Windows.Forms.Button buttonAddNewSlide;
+        private System.Windows.Forms.Button buttonAddItem;
+        private System.Windows.Forms.Button buttonDelItem;
     }
 }

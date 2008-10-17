@@ -12,6 +12,7 @@ namespace Pbp
         static private SongManager instance;
         private List<Song> validSongs;
         private Song _currentSong;
+        static private string[] extensions = { "*.ppl", "*.pbpl" };
 
         public Song currentSong
         {
@@ -36,30 +37,34 @@ namespace Pbp
 
             if (setting.dataDirectory == "")
             {
-                setting.dataDirectory = Environment.GetFolderPath(Environment.SpecialFolder.Personal).ToString()+ "\\Praisebase Presenter";
+                setting.dataDirectory = Environment.GetFolderPath(Environment.SpecialFolder.Personal).ToString() + Path.DirectorySeparatorChar + setting.dataDirDefaultName;
                 setting.Save();
                 Console.WriteLine("Data dir set to " + setting.dataDirectory);
             }
 
-            string searchDir = setting.dataDirectory + "\\Songs";
+            string searchDir = setting.dataDirectory +  Path.DirectorySeparatorChar + setting.songDir;
 
             validSongs = new List<Song>();
 
             int i=0;
             if (Directory.Exists(searchDir))
             {
-                string[] songFilePaths = Directory.GetFiles(searchDir, "*.ppl", SearchOption.AllDirectories);
-                foreach (string file in songFilePaths)
+                foreach (string ext in extensions)
                 {
-                    Song tmpSong = new Song(file);
-                    if (tmpSong.isValid())
+                    string[] songFilePaths = Directory.GetFiles(searchDir, ext, SearchOption.AllDirectories);
+                    foreach (string file in songFilePaths)
                     {
-                        tmpSong.id = i;
-                        validSongs.Add(tmpSong);
-                        i++;
+                        Song tmpSong = new Song(file);
+                        if (tmpSong.isValid())
+                        {
+                            tmpSong.id = i;
+                            validSongs.Add(tmpSong);
+                            i++;
+                        }
                     }
                 }
             }
+            
         }
 
         static public SongManager getInstance()
@@ -81,6 +86,12 @@ namespace Pbp
             return validSongs[id];
         }
 
+        /// <summary>
+        /// Search the songlist for a given pattern and returns the matching songs
+        /// </summary>
+        /// <param name="needle">The search pattern</param>
+        /// <param name="mode">If set to 1, the sogtext is also searched for the pattern. If set to 0, only the song title will be used</param>
+        /// <returns>Returns a list of matches songs</returns>
         public List<Song> getSearchResults(string needle, int mode)
         {
             List<Song> tmpList = new List<Song>();

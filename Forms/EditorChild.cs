@@ -28,11 +28,12 @@ namespace Pbp.Forms
                 sng = new Song(fileName);
                 if (sng.isValid())
                 {
-                    this.Text = sng.title;
+                    this.Text = sng.title + " ("+fileName+")";
 
                     populateTree();
 
                     treeViewContents.SelectedNode = treeViewContents.Nodes[0];
+                    
                 }
                 else
                 {
@@ -75,7 +76,7 @@ namespace Pbp.Forms
                 showSlideControls(true);
                
                 Song.Slide sld = sng.parts[treeViewContents.SelectedNode.Parent.Index].partSlides[treeViewContents.SelectedNode.Index];
-                textBoxSongText.Text = sld.nlText;
+                textBoxSongText.Text = sld.lineBreakText();
                 preview(sld);
             }
             else if (treeViewContents.SelectedNode.Level == 1)
@@ -142,7 +143,7 @@ namespace Pbp.Forms
 
         private void showPartControls(bool value)
         {
-
+            groupBoxNewSlide.Visible = value;
             groupBoxSongPart.Visible = value;
         }
 
@@ -154,7 +155,7 @@ namespace Pbp.Forms
             else
                 background = null;
             string str = "";
-            str = slide.nlText;
+            str = slide.lineBreakText();
 
 
             int w = pictureBoxPreview.Width;
@@ -202,30 +203,30 @@ namespace Pbp.Forms
 
             switch (slide.horizAlign)
             {
-                case Song.SongTextAlign.left:
+                case Song.SongTextHorizontalAlign.left:
                     textX = padding;
                     strFormat.Alignment = StringAlignment.Near;
                     break;
-                case Song.SongTextAlign.center:
+                case Song.SongTextHorizontalAlign.center:
                     textX = w / 2;
                     strFormat.Alignment = StringAlignment.Center;
                     break;
-                case Song.SongTextAlign.right:
+                case Song.SongTextHorizontalAlign.right:
                     textX = w - padding;
                     strFormat.Alignment = StringAlignment.Far;
                     break;
             }
             switch (slide.vertAlign)
             {
-                case Song.SongTextAlign.top:
+                case Song.SongTextVerticalAlign.top:
                     strFormat.LineAlignment = StringAlignment.Near;
                     textY = padding;
                     break;
-                case Song.SongTextAlign.center:
+                case Song.SongTextVerticalAlign.center:
                     strFormat.LineAlignment = StringAlignment.Center;
                     textY = h / 2;
                     break;
-                case Song.SongTextAlign.bottom:
+                case Song.SongTextVerticalAlign.bottom:
                     strFormat.LineAlignment = StringAlignment.Far;
                     textY = h - padding;
                     break;
@@ -312,6 +313,85 @@ namespace Pbp.Forms
             string cap = textBoxSongPartCaption.Text.Trim();
             sng.setPartCaption(cap, treeViewContents.SelectedNode.Index);
             treeViewContents.SelectedNode.Text = cap;
+        }
+
+        private void EditorChild_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void buttonAddNewSlide_Click(object sender, EventArgs e)
+        {
+            int partId = 0;
+            Song.Slide sld = new Song.Slide();
+            sld.imageNumber = -1;
+            if (treeViewContents.SelectedNode.Level == 1)
+            {
+                partId = treeViewContents.SelectedNode.Index;
+                sng.parts[partId].partSlides.Add(sld);
+                populateTree();
+                treeViewContents.SelectedNode = treeViewContents.Nodes[0].Nodes[partId].LastNode;
+            }
+            if (treeViewContents.SelectedNode.Level == 2)
+            {
+                partId = treeViewContents.SelectedNode.Parent.Index;
+                sng.parts[partId].partSlides.Add(sld);
+                populateTree();
+                treeViewContents.SelectedNode = treeViewContents.Nodes[0].Nodes[partId].LastNode;
+            }           
+        }
+
+        private void buttonAddItem_Click(object sender, EventArgs e)
+        {
+            if (treeViewContents.SelectedNode != null)
+            {
+                if (treeViewContents.SelectedNode.Level == 2)
+                {
+                    buttonAddNewSlide_Click(sender, e);
+                }
+                else if (treeViewContents.SelectedNode.Level == 1)
+                {
+                    buttonAddNewSlide_Click(sender, e);
+                }
+                else
+                {
+                    Song.Part prt = new Song.Part();
+                    prt.caption = "Neuer Liedteil";
+                    prt.partSlides = new List<Song.Slide>();
+                    Song.Slide sld = new Song.Slide();
+                    sld.imageNumber = -1;
+                    prt.partSlides.Add(sld);
+                    sng.parts.Add(prt);
+
+                    populateTree();
+                    treeViewContents.SelectedNode = treeViewContents.Nodes[0].LastNode.LastNode;
+                }
+            }
+        }
+
+        private void buttonDelItem_Click(object sender, EventArgs e)
+        {
+            if (treeViewContents.SelectedNode != null)
+            {
+                if (treeViewContents.SelectedNode.Level == 2)
+                {
+                    int partId = treeViewContents.SelectedNode.Parent.Index;
+                    int slideId = treeViewContents.SelectedNode.Index;
+                    sng.parts[partId].partSlides.RemoveAt(slideId);
+                    populateTree();
+                    treeViewContents.SelectedNode = treeViewContents.Nodes[0].Nodes[partId];
+                }
+                else if (treeViewContents.SelectedNode.Level == 1)
+                {
+                    int partId = treeViewContents.SelectedNode.Index;
+                    sng.parts.RemoveAt(partId);
+                    populateTree();
+                    treeViewContents.SelectedNode = treeViewContents.Nodes[0];
+                }
+                else
+                {
+                }
+            }
         }
 
   
