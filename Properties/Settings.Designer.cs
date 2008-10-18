@@ -38,12 +38,12 @@ namespace Pbp.Properties {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("Calibri, 60pt, style=Bold")]
-        public global::System.Drawing.Font projectionFont {
+        public global::System.Drawing.Font projectionMasterFont {
             get {
-                return ((global::System.Drawing.Font)(this["projectionFont"]));
+                return ((global::System.Drawing.Font)(this["projectionMasterFont"]));
             }
             set {
-                this["projectionFont"] = value;
+                this["projectionMasterFont"] = value;
             }
         }
         
@@ -62,24 +62,24 @@ namespace Pbp.Properties {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("White")]
-        public global::System.Drawing.Color projectionForeColor {
+        public global::System.Drawing.Color projectionMasterFontColor {
             get {
-                return ((global::System.Drawing.Color)(this["projectionForeColor"]));
+                return ((global::System.Drawing.Color)(this["projectionMasterFontColor"]));
             }
             set {
-                this["projectionForeColor"] = value;
+                this["projectionMasterFontColor"] = value;
             }
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("Black")]
-        public global::System.Drawing.Color projectionFontBorderColor {
+        public global::System.Drawing.Color projectionOutlineColor {
             get {
-                return ((global::System.Drawing.Color)(this["projectionFontBorderColor"]));
+                return ((global::System.Drawing.Color)(this["projectionOutlineColor"]));
             }
             set {
-                this["projectionFontBorderColor"] = value;
+                this["projectionOutlineColor"] = value;
             }
         }
         
@@ -198,6 +198,102 @@ namespace Pbp.Properties {
         public string dataDirDefaultName {
             get {
                 return ((string)(this["dataDirDefaultName"]));
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("Calibri, 40pt, style=Bold")]
+        public global::System.Drawing.Font projectionMasterFontTranslation {
+            get {
+                return ((global::System.Drawing.Font)(this["projectionMasterFontTranslation"]));
+            }
+            set {
+                this["projectionMasterFontTranslation"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public int projectionMasterLineSpacing {
+            get {
+                return ((int)(this["projectionMasterLineSpacing"]));
+            }
+            set {
+                this["projectionMasterLineSpacing"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("White")]
+        public global::System.Drawing.Color projectionMasterTranslationColor {
+            get {
+                return ((global::System.Drawing.Color)(this["projectionMasterTranslationColor"]));
+            }
+            set {
+                this["projectionMasterTranslationColor"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public int settingsLastTabIndex {
+            get {
+                return ((int)(this["settingsLastTabIndex"]));
+            }
+            set {
+                this["settingsLastTabIndex"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("White")]
+        public global::System.Drawing.Color projectionShadowColor {
+            get {
+                return ((global::System.Drawing.Color)(this["projectionShadowColor"]));
+            }
+            set {
+                this["projectionShadowColor"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("1")]
+        public int projectionOutlineSize {
+            get {
+                return ((int)(this["projectionOutlineSize"]));
+            }
+            set {
+                this["projectionOutlineSize"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("6")]
+        public int projectionShadowSize {
+            get {
+                return ((int)(this["projectionShadowSize"]));
+            }
+            set {
+                this["projectionShadowSize"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool projectionUseMaster {
+            get {
+                return ((bool)(this["projectionUseMaster"]));
+            }
+            set {
+                this["projectionUseMaster"] = value;
             }
         }
     }

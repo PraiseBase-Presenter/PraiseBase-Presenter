@@ -5,16 +5,16 @@
     <Setting Name="dataDirectory" Type="System.String" Scope="User">
       <Value Profile="(Default)" />
     </Setting>
-    <Setting Name="projectionFont" Type="System.Drawing.Font" Scope="User">
+    <Setting Name="projectionMasterFont" Type="System.Drawing.Font" Scope="User">
       <Value Profile="(Default)">Calibri, 60pt, style=Bold</Value>
     </Setting>
     <Setting Name="projectionBackColor" Type="System.Drawing.Color" Scope="User">
       <Value Profile="(Default)">Black</Value>
     </Setting>
-    <Setting Name="projectionForeColor" Type="System.Drawing.Color" Scope="User">
+    <Setting Name="projectionMasterFontColor" Type="System.Drawing.Color" Scope="User">
       <Value Profile="(Default)">White</Value>
     </Setting>
-    <Setting Name="projectionFontBorderColor" Type="System.Drawing.Color" Scope="User">
+    <Setting Name="projectionOutlineColor" Type="System.Drawing.Color" Scope="User">
       <Value Profile="(Default)">Black</Value>
     </Setting>
     <Setting Name="projectionFontScaling" Type="System.Boolean" Scope="User">
@@ -71,6 +71,30 @@
     </Setting>
     <Setting Name="dataDirDefaultName" Type="System.String" Scope="Application">
       <Value Profile="(Default)">Praisebase Presenter</Value>
+    </Setting>
+    <Setting Name="projectionMasterFontTranslation" Type="System.Drawing.Font" Scope="User">
+      <Value Profile="(Default)">Calibri, 40pt, style=Bold</Value>
+    </Setting>
+    <Setting Name="projectionMasterLineSpacing" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">0</Value>
+    </Setting>
+    <Setting Name="projectionMasterTranslationColor" Type="System.Drawing.Color" Scope="User">
+      <Value Profile="(Default)">White</Value>
+    </Setting>
+    <Setting Name="settingsLastTabIndex" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">0</Value>
+    </Setting>
+    <Setting Name="projectionShadowColor" Type="System.Drawing.Color" Scope="User">
+      <Value Profile="(Default)">White</Value>
+    </Setting>
+    <Setting Name="projectionOutlineSize" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">1</Value>
+    </Setting>
+    <Setting Name="projectionShadowSize" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">6</Value>
+    </Setting>
+    <Setting Name="projectionUseMaster" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
     </Setting>
   </Settings>
 </SettingsFile>

@@ -51,7 +51,7 @@ namespace Pbp
             t1.Interval = 500; // Intervall festlegen, hier 100 ms
             t1.Tick += new EventHandler(t1_Tick); // Eventhandler ezeugen der beim Timerablauf aufgerufen wird
 
-            projectionFont = setting.projectionFont;
+            projectionFont = setting.projectionMasterFont;
             projctionBackgroundColor = setting.projectionBackColor;
 
             loadSongList();

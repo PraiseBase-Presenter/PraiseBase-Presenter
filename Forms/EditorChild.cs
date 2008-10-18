@@ -26,7 +26,7 @@ namespace Pbp.Forms
             if (fileName != null)
             {
                 sng = new Song(fileName);
-                if (sng.isValid())
+                if (sng.valid)
                 {
                     this.Text = sng.title + " ("+fileName+")";
 
@@ -164,7 +164,7 @@ namespace Pbp.Forms
 
             Bitmap bmp = new Bitmap(w, h);
             Graphics gr = Graphics.FromImage(bmp);
-            Font font = setting.projectionFont;
+            Font font = setting.projectionMasterFont;
             StringFormat strFormat = new StringFormat();
             strFormat.Alignment = StringAlignment.Center;
             strFormat.LineAlignment = StringAlignment.Center;
@@ -235,7 +235,7 @@ namespace Pbp.Forms
 
 
 
-            gr.DrawString(str, font, new SolidBrush(setting.projectionForeColor), new Point(textX, textY), strFormat);
+            gr.DrawString(str, font, new SolidBrush(setting.projectionMasterFontColor), new Point(textX, textY), strFormat);
 
 
             pictureBoxPreview.Image = bmp;

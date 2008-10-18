@@ -11,35 +11,130 @@ using Pbp.Properties;
 
 namespace Pbp
 {
+    /// <summary>
+    /// Keeps and manages all song related data loaded form an xml file
+    /// 
+    /// Author: Nicolas Perrenoud <nicolape@ee.ethz.ch>
+    /// </summary>
     public class Song
     {
+        //
+        // Variables
+        // 
+
+        /// <summary>
+        /// Indicates if this is a valid song file. Do not use this class if this
+        /// variable is set to false after loading!
+        /// </summary>
         private bool _isValid;
+        public bool valid { get { return _isValid; } }
+        /// <summary>
+        /// Path of the song xml file
+        /// </summary>
         private string _path;
         private int _id;
+        /// <summary>
+        /// Song number used by the song manager
+        /// </summary>
         public int id { get {return _id; } set { _id=value; } }
-
         public string _title;
+        /// <summary>
+        /// The song title. Usually the same as the file name
+        /// </summary>
         public string title { get { return _title; } set { _title = value; } }
-
         public string _language;
+        /// <summary>
+        /// Main language of the song
+        /// </summary>
         public string language { get { return _language; } set { _language = value; } }
-
         private List<string> _tags;
+        /// <summary>
+        /// A list of tags (like categories) which describe the type of the song
+        /// </summary>
         public List<string> tags { get { return _tags; } }
-
         private string _comment;
-        public string comment
-        {
-            get { return _comment; }
-            set
-            {
-                _comment = value;
-                saveBack();
-            }
-        }
-
+        /// <summary>
+        /// User defined comment for quality assurance information or presentation issues
+        /// </summary>
+        public string comment { get { return _comment; } set { _comment = value; } }
         protected string _text;
+        /// <summary>
+        /// The whole song text used a quick search by the song manager
+        /// </summary>
         public string text { get { return _text; } set { _text = value; } }
+        /// <summary>
+        /// Text font
+        /// </summary>
+        public Font font;
+        /// <summary>
+        /// Text color
+        /// </summary>
+        public Color fontColor;
+        /// <summary>
+        /// Font of tanslation text
+        /// </summary>
+        public Font fontTranslation;
+        /// <summary>
+        /// Color of translation text
+        /// </summary>
+        public Color fontColorTranslation;
+        /// <summary>
+        /// Additional height between lines
+        /// </summary>
+        public int lineSpacing;
+        /// <summary>
+        /// Additional height between a line and its translation
+        /// </summary>
+        public int lineSpacingTranslation;
+        /// <summary>
+        /// Quality assurance indicator for spelling errors
+        /// </summary>
+        public bool QASpelling;
+        /// <summary>
+        /// Quality assurance indicator for missing or wrong translation
+        /// </summary>
+        public bool QATranslation;
+        /// <summary>
+        /// Quality assurance indicator for missing or wrong images
+        /// </summary>
+        public bool QAImage;
+        /// <summary>
+        /// The file type of this song
+        /// </summary>
+        private FileType _fileType;
+        /// <summary>
+        /// The list of all parts in the song
+        /// </summary>
+        public List<Part> parts;
+        /// <summary>
+        /// A list containing a sequence of part numbers indicating 
+        /// the real sequence the song is song
+        /// </summary>
+        public List<int> partSequence;
+        /// <summary>
+        /// List of all slides. Used in the presenter song detail overview.
+        /// </summary>
+        public List<Slide> slides;
+        /// <summary>
+        /// Indicates the current slide
+        /// </summary>
+        public int currentSlide;
+        /// <summary>
+        /// List of the paths to all images
+        /// </summary>
+        private List<string> imagePaths;
+        /// <summary>
+        /// All images of this song
+        /// </summary>
+        private List<Image> imageObjects;
+        /// <summary>
+        /// Thumbnails of all images
+        /// </summary>
+        private ImageList imageThumbs;
+
+        //
+        // Enums and types
+        //
 
         /// <summary>
         /// Defines the song file format
@@ -55,15 +150,23 @@ namespace Pbp
             /// </summary>
             ppl
         }
-        private FileType _fileType;
 
         /// <summary>
         /// Horizontal aligning of slide text
         /// </summary>
         public enum SongTextHorizontalAlign
         {
+            /// <summary>
+            /// Text is aligned horizontally to the left
+            /// </summary>
             left,
+            /// <summary>
+            /// Text is horizontally centered
+            /// </summary>
             center,
+            /// <summary>
+            /// Text is aligned horizontally to the right
+            /// </summary>
             right
         }
 
@@ -72,12 +175,19 @@ namespace Pbp
         /// </summary>
         public enum SongTextVerticalAlign
         {
+            /// <summary>
+            /// Text is aligned vertically to the top of the page
+            /// </summary>
             top,
+            /// <summary>
+            /// Text is aligned to the center
+            /// </summary>
             center,
+            /// <summary>
+            /// Text is aligned vertically to the bottom of the page
+            /// </summary>
             bottom
         }
-        public SongTextHorizontalAlign defaultHorizAlign;
-        public SongTextVerticalAlign defaultVertAlign;
 
         /// <summary>
         /// A song part with a given name and one or more slides
@@ -93,39 +203,92 @@ namespace Pbp
             /// </summary>
             public List<Slide> partSlides;
 
+            /// <summary>
+            /// Part constructor
+            /// </summary>
             public Part()
             {
                 partSlides = new List<Slide>();
             }
         };
-        public List<Part> parts;
 
         /// <summary>
         /// A single slide with songtext and/or a background image
         /// </summary>
         public class Slide
         {
+            /// <summary>
+            /// All text lines of this slide
+            /// </summary>
             public List<string> lines;
+            /// <summary>
+            /// All translation lines of this slide
+            /// </summary>
+            public List<string> translation;
+            /// <summary>
+            /// Number of the slide image. If set to -1, no image is used
+            /// </summary>
             public int imageNumber;
-
+            /// <summary>
+            /// Indicates wether this slide has a translation
+            /// </summary>
+            public bool hasTranslation;
+            /// <summary>
+            /// Horizonztal text alignment
+            /// </summary>
             public SongTextHorizontalAlign horizAlign;
+            /// <summary>
+            /// Vertical text alignment
+            /// </summary>
             public SongTextVerticalAlign vertAlign;
 
+            /// <summary>
+            /// The slide constructor
+            /// </summary>
             public Slide()
             {
                 lines = new List<string>();
+                translation = new List<string>();
+                hasTranslation = false;
+                horizAlign = SongTextHorizontalAlign.center;
+                vertAlign = SongTextVerticalAlign.center;
             }
 
+            /// <summary>
+            /// Returns a string of the wrapped text
+            /// </summary>
+            /// <returns>Wrapped text</returns>
             public string lineBreakText()
             {
                 string txt = "";
                 foreach (string str in lines)
                 {
-                    txt += str + "\r\n";
+                    txt += str + Environment.NewLine;
                 }
                 return txt;
 
             }
+
+            /// <summary>
+            /// Returns the wrapped translation text
+            /// </summary>
+            /// <returns>Wrapped translation</returns>
+            public string lineBreakTranslation()
+            {
+                string txt = "";
+                foreach (string str in translation)
+                {
+                    txt += str + Environment.NewLine;
+                }
+                return txt;
+
+            }
+
+            /// <summary>
+            /// Returns the text on one line. This is mainly used 
+            /// in the song detail overview in the presenter.
+            /// </summary>
+            /// <returns>Text on one line</returns>
             public string oneLineText()
             {
                 string txt = "";
@@ -136,14 +299,15 @@ namespace Pbp
                 return txt;
             }
         };
-        public List<Slide> slides;
+ 
+        //
+        // Class Methods
+        //
 
-        public int currentSlide;
-        private List<string> imagePaths;
-        private List<Image> imageObjects;
-        private ImageList imageThumbs;
-
-
+        /// <summary>
+        /// The song constructor
+        /// </summary>
+        /// <param name="filePath">Full path to the song xml file</param>
         public Song(string filePath)
         {
             _isValid = false;
@@ -203,8 +367,8 @@ namespace Pbp
 
                     _text = xmlRoot["songtext"].InnerText;
 
-                    defaultHorizAlign = SongTextHorizontalAlign.center;
-                    defaultVertAlign = SongTextVerticalAlign.center;
+                    SongTextHorizontalAlign defaultHorizAlign = SongTextHorizontalAlign.center;
+                    SongTextVerticalAlign defaultVertAlign = SongTextVerticalAlign.center;
                     if (xmlRoot["formatting"]["textorientation"] != null)
                     {
                         if (xmlRoot["formatting"]["textorientation"]["horizontal"] != null)
@@ -267,6 +431,11 @@ namespace Pbp
                                         {
                                             tmpSlide.lines.Add(lineElem.InnerText);
                                         }
+                                        if (lineElem.Name == "translation")
+                                        {
+                                            tmpSlide.hasTranslation = true;
+                                            tmpSlide.translation.Add(lineElem.InnerText);
+                                        }
                                     }
                                     slides.Add(tmpSlide);
                                     tmpPart.partSlides.Add(tmpSlide);
@@ -306,11 +475,6 @@ namespace Pbp
             {
                 _isValid = true;
             }
-        }
-
-        public bool isValid()
-        {
-            return _isValid;
         }
 
         private void loadImages()
@@ -385,7 +549,11 @@ namespace Pbp
             return imageThumbs;
         }
 
-        public void saveBack()
+        /// <summary>
+        /// Saves the song to an xml file
+        /// </summary>
+        /// <param name="fileName">The target filename. Use null to save it back to its original file</param>
+        public void save(string fileName)
         {
             XmlDocument xmlDoc = new XmlDocument();
             
@@ -469,8 +637,15 @@ namespace Pbp
 
                 xmlRoot["formatting"].AppendChild(xmlDoc.CreateElement("borders"));
 
-                xmlDoc.Save("c:\\test.ppl");
-                //xmlDoc.Save(_path);
+                if (fileName != null)
+                {
+                    xmlDoc.Save(fileName);
+                }
+                else
+                {
+                    //xmlDoc.Save(_path);
+                    xmlDoc.Save("c:\\test.ppl");
+                }
             }
         }
 
@@ -478,7 +653,7 @@ namespace Pbp
         public void setSlideText(string text, int partId, int slideId)
         {
             parts[partId].partSlides[slideId].lines = new List<string>();
-            string[] lines = text.Split(new char[] { '\n' });
+            string[] lines = text.Split(Environment.NewLine.ToCharArray());
             foreach (string sl in lines)
             {
                 parts[partId].partSlides[slideId].lines.Add(sl);

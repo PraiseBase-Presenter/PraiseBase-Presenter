@@ -15,21 +15,43 @@ namespace Pbp.Forms
     public partial class settingsWindow : Form
     {
         Settings stn;
+        int lastTabIndex;
 
         public settingsWindow()
         {
             stn = new Settings();
             InitializeComponent();
+            lastTabIndex = 0;
         }
 
         public void updateLabels()
         {
             textBox1.Text = stn.dataDirectory;
-            label3.Text = stn.projectionFont.FontFamily.Name + ", " + stn.projectionFont.Size.ToString() + ", " + stn.projectionFont.Style.ToString();
-            buttonChosseBackgroundColor.ForeColor = stn.projectionBackColor;
-            buttonChooseProjectionForeColor.ForeColor = stn.projectionForeColor;
-            buttonChooseProjectionBorderColor.ForeColor = stn.projectionFontBorderColor;
-            checkBoxFontScaling.Checked = stn.projectionFontScaling;
+
+            checkBoxUseMasterFormat.Checked = stn.projectionUseMaster;
+            groupBoxUseMaster.Enabled = stn.projectionUseMaster;
+
+            trackBarProjectionShadowSize.Value = stn.projectionShadowSize;
+            trackBarProjectionOutlineSize.Value = stn.projectionOutlineSize;
+
+            label3.Text = stn.projectionMasterFont.FontFamily.Name + ", " + stn.projectionMasterFont.Size.ToString() + ", " + stn.projectionMasterFont.Style.ToString();
+            label3.ForeColor = stn.projectionMasterFontColor;
+
+            label9.Text = stn.projectionMasterFontTranslation.FontFamily.Name + ", " + stn.projectionMasterFontTranslation.Size.ToString() + ", " + stn.projectionMasterFontTranslation.Style.ToString();
+            label9.ForeColor = stn.projectionMasterTranslationColor;
+
+
+            pictureBoxProjectionBackColor.BackColor = stn.projectionBackColor;
+            pictureBoxProjectionOutlineColor.BackColor = stn.projectionOutlineColor;
+            pictureBoxProjectionShadowColor.BackColor = stn.projectionShadowColor;
+
+            trackBarProjectionPadding.Value = stn.projectionPadding;
+            trackBarLineSpacing.Value = stn.projectionMasterLineSpacing;
+            labelLineSpacing.Text = stn.projectionMasterLineSpacing.ToString();
+            labelProjectionPadding.Text = stn.projectionPadding.ToString();
+           
+
+            checkBoxProjectionFontScaling.Checked = stn.projectionFontScaling;
 
             List<string> strList;
             
@@ -67,9 +89,7 @@ namespace Pbp.Forms
             foreach (string str in strList)
             {
                 listBoxSongParts.Items.Add(str);
-            }
-
-            
+            }           
 
         }
 
@@ -88,6 +108,7 @@ namespace Pbp.Forms
 
         private void settingsWindow_Load(object sender, EventArgs e)
         {
+            tabControl1.SelectedIndex = stn.settingsLastTabIndex;
             updateLabels();
         }
 
@@ -119,10 +140,10 @@ namespace Pbp.Forms
         private void buttonFontSelector_Click(object sender, EventArgs e)
         {
             FontDialog fontDlg = new FontDialog();
-            fontDlg.Font = stn.projectionFont;
+            fontDlg.Font = stn.projectionMasterFont;
             if (fontDlg.ShowDialog() == DialogResult.OK)
             {
-                stn.projectionFont = fontDlg.Font;
+                stn.projectionMasterFont = fontDlg.Font;
                 updateLabels();
             }
         }
@@ -144,28 +165,19 @@ namespace Pbp.Forms
         private void buttonChooseProjectionForeColor_Click(object sender, EventArgs e)
         {
             ColorDialog colDlg = new ColorDialog();
-            colDlg.Color = stn.projectionForeColor;
+            colDlg.Color = stn.projectionMasterFontColor;
             if (colDlg.ShowDialog() == DialogResult.OK)
             {
-                stn.projectionForeColor = colDlg.Color;
+                stn.projectionMasterFontColor = colDlg.Color;
                 updateLabels();
             }
         }
 
-        private void buttonChooseProjectionBorderColor_Click(object sender, EventArgs e)
-        {
-            ColorDialog colDlg = new ColorDialog();
-            colDlg.Color = stn.projectionFontBorderColor;
-            if (colDlg.ShowDialog() == DialogResult.OK)
-            {
-                stn.projectionFontBorderColor = colDlg.Color;
-                updateLabels();
-            }
-        }
+
 
         private void checkBoxFontScaling_CheckedChanged(object sender, EventArgs e)
         {
-            stn.projectionFontScaling = checkBoxFontScaling.Checked;
+            stn.projectionFontScaling = checkBoxProjectionFontScaling.Checked;
         }
 
         private void buttonAddTag_Click(object sender, EventArgs e)
@@ -274,5 +286,93 @@ namespace Pbp.Forms
             updateLabels();
             
         }
+
+        private void buttonTranslationColor_Click(object sender, EventArgs e)
+        {
+            ColorDialog colDlg = new ColorDialog();
+            colDlg.Color = stn.projectionMasterTranslationColor;
+            if (colDlg.ShowDialog() == DialogResult.OK)
+            {
+                stn.projectionMasterTranslationColor = colDlg.Color;
+                updateLabels();
+            }
+        }
+
+        private void buttonTranslationFont_Click(object sender, EventArgs e)
+        {
+            FontDialog fontDlg = new FontDialog();
+            fontDlg.Font = stn.projectionMasterFontTranslation;
+            if (fontDlg.ShowDialog() == DialogResult.OK)
+            {
+                stn.projectionMasterFontTranslation = fontDlg.Font;
+                updateLabels();
+            }
+            
+        }
+
+        private void label11_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void trackBarLineSpacing_Scroll(object sender, EventArgs e)
+        {
+            stn.projectionMasterLineSpacing = trackBarLineSpacing.Value;
+            updateLabels();
+        }
+
+        private void trackBarPadding_Scroll(object sender, EventArgs e)
+        {
+            stn.projectionPadding = trackBarProjectionPadding.Value;
+            updateLabels();
+        }
+
+        private void tabControl1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            stn.settingsLastTabIndex = tabControl1.SelectedIndex;
+        }
+
+        private void buttonProjectionShadowColor_Click(object sender, EventArgs e)
+        {
+            ColorDialog colDlg = new ColorDialog();
+            colDlg.Color = stn.projectionShadowColor;
+            if (colDlg.ShowDialog() == DialogResult.OK)
+            {
+                stn.projectionShadowColor = colDlg.Color;
+                updateLabels();
+            }
+        }
+
+        private void buttonProjectionOutlineColor_Click(object sender, EventArgs e)
+        {
+            ColorDialog colDlg = new ColorDialog();
+            colDlg.Color = stn.projectionOutlineColor;
+            if (colDlg.ShowDialog() == DialogResult.OK)
+            {
+                stn.projectionOutlineColor = colDlg.Color;
+                updateLabels();
+            }
+        }
+
+        private void trackBarProjectionShadowSize_Scroll(object sender, EventArgs e)
+        {
+            stn.projectionShadowSize = trackBarProjectionShadowSize.Value;
+        }
+
+        private void trackBarProjectionOutlineSize_Scroll(object sender, EventArgs e)
+        {
+            stn.projectionOutlineSize = trackBarProjectionOutlineSize.Value;
+        }
+
+        private void checkBoxUseMasterFormat_CheckedChanged(object sender, EventArgs e)
+        {
+            if (checkBoxUseMasterFormat.Checked)
+                groupBoxUseMaster.Enabled = true;
+            else
+                groupBoxUseMaster.Enabled = false;
+            stn.projectionUseMaster = checkBoxUseMasterFormat.Checked;
+        }
+
+
     }
 }

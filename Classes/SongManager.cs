@@ -55,7 +55,7 @@ namespace Pbp
                     foreach (string file in songFilePaths)
                     {
                         Song tmpSong = new Song(file);
-                        if (tmpSong.isValid())
+                        if (tmpSong.valid)
                         {
                             tmpSong.id = i;
                             validSongs.Add(tmpSong);
