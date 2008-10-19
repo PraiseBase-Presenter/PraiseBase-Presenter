@@ -277,6 +277,10 @@ namespace Pbp
                 // Set comment
                 setSongComment(songMan.currentSong.comment);
 
+                checkBoxQASpelling.Checked = songMan.currentSong.QASpelling;
+                checkBoxQATranslation.Checked = songMan.currentSong.QATranslation;
+                checkBoxQAImages.Checked = songMan.currentSong.QAImage;
+
                 groupBox3.Text = "Lied-Details '" + songMan.currentSong.title + "'";
             }            
         }
@@ -688,6 +692,21 @@ namespace Pbp
         private void radioButton1_CheckedChanged(object sender, EventArgs e)
         {
             textBoxDiaDuration.Enabled = false;
+        }
+
+        private void checkBoxQASpelling_CheckedChanged(object sender, EventArgs e)
+        {
+            songMan.currentSong.QASpelling = ((CheckBox)sender).Checked;
+        }
+
+        private void checkBoxQATranslation_CheckedChanged(object sender, EventArgs e)
+        {
+            songMan.currentSong.QATranslation = ((CheckBox)sender).Checked;
+        }
+
+        private void checkBoxQAImages_CheckedChanged(object sender, EventArgs e)
+        {
+            songMan.currentSong.QAImage = ((CheckBox)sender).Checked;
         }
 
 

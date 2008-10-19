@@ -122,6 +122,7 @@ namespace Pbp.Forms
             {
                 StringFormat strFormat = new StringFormat();
                 Font font = setting.projectionMasterFont;
+                Font fontTr = setting.projectionMasterFontTranslation;
                 int padding = setting.projectionPadding;
                 int lineSpacing = setting.projectionMasterLineSpacing;
                 int shadowThickness = setting.projectionShadowSize;
@@ -134,7 +135,16 @@ namespace Pbp.Forms
                 int textStartX = padding;
                 int textStartY = padding;
 
-                gr.DrawRectangle(Pens.BlueViolet, padding, padding, usableWidth, usableHeight);
+                //gr.DrawRectangle(Pens.BlueViolet, padding, padding, usableWidth, usableHeight);
+
+                if (slide.hasTranslation)
+                {
+                    SizeF strMeasure = gr.MeasureString(slide.lineBreakTranslation(), fontTr);
+                    int usedWidth = (int)strMeasure.Width;
+                    int usedHeight = (int)strMeasure.Height + (lineSpacing * (slide.lines.Count - 1));
+                    int lineHeight = (int)(strMeasure.Height / slide.translation.Count);
+                    lineSpacing += lineHeight + lineSpacing;
+                }
 
                 if (slide.hasTranslation && false)
                 {
@@ -192,7 +202,7 @@ namespace Pbp.Forms
 
                     int textX = textStartX;
                     int textY = textStartY;
-                    gr.DrawRectangle(Pens.BlueViolet, textX, textY, usableWidth, usedHeight);
+                    //gr.DrawRectangle(Pens.BlueViolet, textX, textY, usableWidth, usedHeight);
 
                     if (shadowThickness > 0)
                     {

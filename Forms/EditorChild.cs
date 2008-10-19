@@ -26,7 +26,7 @@ namespace Pbp.Forms
             if (fileName != null)
             {
                 sng = new Song(fileName);
-                if (sng.valid)
+                if (sng.isValid)
                 {
                     this.Text = sng.title + " ("+fileName+")";
 
@@ -375,24 +375,37 @@ namespace Pbp.Forms
             {
                 if (treeViewContents.SelectedNode.Level == 2)
                 {
-                    int partId = treeViewContents.SelectedNode.Parent.Index;
-                    int slideId = treeViewContents.SelectedNode.Index;
-                    sng.parts[partId].partSlides.RemoveAt(slideId);
-                    populateTree();
-                    treeViewContents.SelectedNode = treeViewContents.Nodes[0].Nodes[partId];
+                    if (MessageBox.Show("Folie wirklich löschen?","Liededitor",MessageBoxButtons.YesNo,MessageBoxIcon.Question) == DialogResult.Yes)
+                    {
+                        int partId = treeViewContents.SelectedNode.Parent.Index;
+                        int slideId = treeViewContents.SelectedNode.Index;
+                        sng.parts[partId].partSlides.RemoveAt(slideId);
+                        populateTree();
+                        treeViewContents.SelectedNode = treeViewContents.Nodes[0].Nodes[partId];
+                    }
                 }
                 else if (treeViewContents.SelectedNode.Level == 1)
                 {
-                    int partId = treeViewContents.SelectedNode.Index;
-                    sng.parts.RemoveAt(partId);
-                    populateTree();
-                    treeViewContents.SelectedNode = treeViewContents.Nodes[0];
+                    if (MessageBox.Show("Liedteil wirklich löschen?", "Liededitor", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+                    {
+                        int partId = treeViewContents.SelectedNode.Index;
+                        sng.parts.RemoveAt(partId);
+                        populateTree();
+                        treeViewContents.SelectedNode = treeViewContents.Nodes[0];
+                    }
                 }
                 else
                 {
                 }
             }
         }
+
+        private void buttonMoveUp_Click(object sender, EventArgs e)
+        {
+
+        }
+
+ 
 
   
     }

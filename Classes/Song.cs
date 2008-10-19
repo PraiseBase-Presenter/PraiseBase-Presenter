@@ -27,7 +27,7 @@ namespace Pbp
         /// variable is set to false after loading!
         /// </summary>
         private bool _isValid;
-        public bool valid { get { return _isValid; } }
+        public bool isValid { get { return _isValid; } }
         /// <summary>
         /// Path of the song xml file
         /// </summary>

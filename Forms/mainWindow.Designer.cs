@@ -55,6 +55,9 @@
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.checkBoxQAImages = new System.Windows.Forms.CheckBox();
+            this.checkBoxQATranslation = new System.Windows.Forms.CheckBox();
+            this.checkBoxQASpelling = new System.Windows.Forms.CheckBox();
             this.textBoxSongComment = new System.Windows.Forms.TextBox();
             this.songDetailItems = new System.Windows.Forms.ListView();
             this.columnHeader1 = new System.Windows.Forms.ColumnHeader();
@@ -350,13 +353,52 @@
             // 
             this.groupBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupBox1.Controls.Add(this.checkBoxQAImages);
+            this.groupBox1.Controls.Add(this.checkBoxQATranslation);
+            this.groupBox1.Controls.Add(this.checkBoxQASpelling);
             this.groupBox1.Controls.Add(this.textBoxSongComment);
-            this.groupBox1.Location = new System.Drawing.Point(6, 506);
+            this.groupBox1.Location = new System.Drawing.Point(6, 477);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(721, 61);
+            this.groupBox1.Size = new System.Drawing.Size(721, 90);
             this.groupBox1.TabIndex = 29;
             this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Bemerkungen";
+            this.groupBox1.Text = "Qualitätssicherung und Bemerkungen";
+            // 
+            // checkBoxQAImages
+            // 
+            this.checkBoxQAImages.AutoSize = true;
+            this.checkBoxQAImages.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.checkBoxQAImages.Location = new System.Drawing.Point(408, 19);
+            this.checkBoxQAImages.Name = "checkBoxQAImages";
+            this.checkBoxQAImages.Size = new System.Drawing.Size(236, 17);
+            this.checkBoxQAImages.TabIndex = 31;
+            this.checkBoxQAImages.Text = "Bild(er) fehlen oder müssen geändert werden";
+            this.checkBoxQAImages.UseVisualStyleBackColor = true;
+            this.checkBoxQAImages.CheckedChanged += new System.EventHandler(this.checkBoxQAImages_CheckedChanged);
+            // 
+            // checkBoxQATranslation
+            // 
+            this.checkBoxQATranslation.AutoSize = true;
+            this.checkBoxQATranslation.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.checkBoxQATranslation.Location = new System.Drawing.Point(168, 19);
+            this.checkBoxQATranslation.Name = "checkBoxQATranslation";
+            this.checkBoxQATranslation.Size = new System.Drawing.Size(189, 17);
+            this.checkBoxQATranslation.TabIndex = 30;
+            this.checkBoxQATranslation.Text = "Übersetzung fehlt/ist unvollständig";
+            this.checkBoxQATranslation.UseVisualStyleBackColor = true;
+            this.checkBoxQATranslation.CheckedChanged += new System.EventHandler(this.checkBoxQATranslation_CheckedChanged);
+            // 
+            // checkBoxQASpelling
+            // 
+            this.checkBoxQASpelling.AutoSize = true;
+            this.checkBoxQASpelling.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.checkBoxQASpelling.Location = new System.Drawing.Point(14, 19);
+            this.checkBoxQASpelling.Name = "checkBoxQASpelling";
+            this.checkBoxQASpelling.Size = new System.Drawing.Size(114, 17);
+            this.checkBoxQASpelling.TabIndex = 29;
+            this.checkBoxQASpelling.Text = "Text enthält Fehler";
+            this.checkBoxQASpelling.UseVisualStyleBackColor = true;
+            this.checkBoxQASpelling.CheckedChanged += new System.EventHandler(this.checkBoxQASpelling_CheckedChanged);
             // 
             // textBoxSongComment
             // 
@@ -368,7 +410,7 @@
             this.textBoxSongComment.Enabled = false;
             this.textBoxSongComment.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.textBoxSongComment.ForeColor = System.Drawing.Color.Black;
-            this.textBoxSongComment.Location = new System.Drawing.Point(6, 16);
+            this.textBoxSongComment.Location = new System.Drawing.Point(6, 46);
             this.textBoxSongComment.Multiline = true;
             this.textBoxSongComment.Name = "textBoxSongComment";
             this.textBoxSongComment.ReadOnly = true;
@@ -394,7 +436,7 @@
             this.songDetailItems.Location = new System.Drawing.Point(6, 79);
             this.songDetailItems.MultiSelect = false;
             this.songDetailItems.Name = "songDetailItems";
-            this.songDetailItems.Size = new System.Drawing.Size(721, 421);
+            this.songDetailItems.Size = new System.Drawing.Size(721, 392);
             this.songDetailItems.TabIndex = 23;
             this.songDetailItems.UseCompatibleStateImageBehavior = false;
             this.songDetailItems.View = System.Windows.Forms.View.Details;
@@ -653,7 +695,7 @@
             this.toolStripButton5.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripButton5.Name = "toolStripButton5";
             this.toolStripButton5.Size = new System.Drawing.Size(68, 68);
-            this.toolStripButton5.Text = "toolStripButton5";
+            this.toolStripButton5.Text = "Editor öffnen";
             this.toolStripButton5.Click += new System.EventHandler(this.toolStripButton5_Click);
             // 
             // toolStripSeparator2
@@ -789,6 +831,9 @@
         private System.Windows.Forms.RadioButton radioButtonManualDiashow;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem2;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
+        private System.Windows.Forms.CheckBox checkBoxQAImages;
+        private System.Windows.Forms.CheckBox checkBoxQATranslation;
+        private System.Windows.Forms.CheckBox checkBoxQASpelling;
     }
 }
 
