@@ -87,8 +87,11 @@
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripButton4 = new System.Windows.Forms.ToolStripButton();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
-            this.toolStripProgressBar = new System.Windows.Forms.ToolStripProgressBar();
             this.toolStripStatusLabel = new System.Windows.Forms.ToolStripStatusLabel();
+            this.label4 = new System.Windows.Forms.Label();
+            this.textBoxImageSearch = new System.Windows.Forms.TextBox();
+            this.listViewImageHistory = new System.Windows.Forms.ListView();
+            this.buttonClearImageHistory = new System.Windows.Forms.Button();
             this.menuStrip1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.tabControl1.SuspendLayout();
@@ -471,6 +474,10 @@
             // 
             // tabPage2
             // 
+            this.tabPage2.Controls.Add(this.buttonClearImageHistory);
+            this.tabPage2.Controls.Add(this.listViewImageHistory);
+            this.tabPage2.Controls.Add(this.label4);
+            this.tabPage2.Controls.Add(this.textBoxImageSearch);
             this.tabPage2.Controls.Add(this.label3);
             this.tabPage2.Controls.Add(this.listViewDirectoryImages);
             this.tabPage2.Controls.Add(this.treeViewImageDirectories);
@@ -484,6 +491,8 @@
             // 
             // label3
             // 
+            this.label3.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
             this.label3.AutoSize = true;
             this.label3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
             this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -496,19 +505,26 @@
             // 
             // listViewDirectoryImages
             // 
+            this.listViewDirectoryImages.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+                        | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
             this.listViewDirectoryImages.Location = new System.Drawing.Point(234, 6);
             this.listViewDirectoryImages.MultiSelect = false;
             this.listViewDirectoryImages.Name = "listViewDirectoryImages";
-            this.listViewDirectoryImages.Size = new System.Drawing.Size(758, 544);
+            this.listViewDirectoryImages.Size = new System.Drawing.Size(514, 544);
             this.listViewDirectoryImages.TabIndex = 1;
             this.listViewDirectoryImages.UseCompatibleStateImageBehavior = false;
             this.listViewDirectoryImages.SelectedIndexChanged += new System.EventHandler(this.listViewDirectoryImages_SelectedIndexChanged);
+            this.listViewDirectoryImages.Leave += new System.EventHandler(this.listViewDirectoryImages_Leave);
             // 
             // treeViewImageDirectories
             // 
-            this.treeViewImageDirectories.Location = new System.Drawing.Point(6, 6);
+            this.treeViewImageDirectories.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+                        | System.Windows.Forms.AnchorStyles.Left)));
+            this.treeViewImageDirectories.HideSelection = false;
+            this.treeViewImageDirectories.Location = new System.Drawing.Point(6, 32);
             this.treeViewImageDirectories.Name = "treeViewImageDirectories";
-            this.treeViewImageDirectories.Size = new System.Drawing.Size(222, 575);
+            this.treeViewImageDirectories.Size = new System.Drawing.Size(222, 549);
             this.treeViewImageDirectories.TabIndex = 0;
             this.treeViewImageDirectories.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.treeViewImageDirectories_AfterSelect);
             // 
@@ -614,6 +630,9 @@
             // 
             // listViewDias
             // 
+            this.listViewDias.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+                        | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
             this.listViewDias.CheckBoxes = true;
             this.listViewDias.Location = new System.Drawing.Point(197, 31);
             this.listViewDias.MultiSelect = false;
@@ -716,7 +735,6 @@
             // statusStrip1
             // 
             this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripProgressBar,
             this.toolStripStatusLabel});
             this.statusStrip1.Location = new System.Drawing.Point(0, 721);
             this.statusStrip1.Name = "statusStrip1";
@@ -724,15 +742,51 @@
             this.statusStrip1.TabIndex = 22;
             this.statusStrip1.Text = "statusStrip1";
             // 
-            // toolStripProgressBar
-            // 
-            this.toolStripProgressBar.Name = "toolStripProgressBar";
-            this.toolStripProgressBar.Size = new System.Drawing.Size(100, 16);
-            // 
             // toolStripStatusLabel
             // 
             this.toolStripStatusLabel.Name = "toolStripStatusLabel";
             this.toolStripStatusLabel.Size = new System.Drawing.Size(0, 17);
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label4.Location = new System.Drawing.Point(6, 9);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(41, 13);
+            this.label4.TabIndex = 20;
+            this.label4.Text = "Suche:";
+            // 
+            // textBoxImageSearch
+            // 
+            this.textBoxImageSearch.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.textBoxImageSearch.Location = new System.Drawing.Point(53, 6);
+            this.textBoxImageSearch.Name = "textBoxImageSearch";
+            this.textBoxImageSearch.Size = new System.Drawing.Size(175, 20);
+            this.textBoxImageSearch.TabIndex = 19;
+            // 
+            // listViewImageHistory
+            // 
+            this.listViewImageHistory.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.listViewImageHistory.Location = new System.Drawing.Point(754, 6);
+            this.listViewImageHistory.Name = "listViewImageHistory";
+            this.listViewImageHistory.Size = new System.Drawing.Size(238, 515);
+            this.listViewImageHistory.TabIndex = 21;
+            this.listViewImageHistory.UseCompatibleStateImageBehavior = false;
+            this.listViewImageHistory.SelectedIndexChanged += new System.EventHandler(this.listViewImageHistory_SelectedIndexChanged);
+            this.listViewImageHistory.Leave += new System.EventHandler(this.listViewImageHistory_Leave);
+            // 
+            // buttonClearImageHistory
+            // 
+            this.buttonClearImageHistory.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.buttonClearImageHistory.Location = new System.Drawing.Point(754, 527);
+            this.buttonClearImageHistory.Name = "buttonClearImageHistory";
+            this.buttonClearImageHistory.Size = new System.Drawing.Size(238, 23);
+            this.buttonClearImageHistory.TabIndex = 22;
+            this.buttonClearImageHistory.Text = "Verlauf leeren";
+            this.buttonClearImageHistory.UseVisualStyleBackColor = true;
+            this.buttonClearImageHistory.Click += new System.EventHandler(this.buttonClearImageHistory_Click);
             // 
             // mainWindow
             // 
@@ -808,7 +862,6 @@
         private System.Windows.Forms.ColumnHeader columnHeader2;
         private System.Windows.Forms.ToolStripMenuItem liederlisteNeuLadenToolStripMenuItem;
         private System.Windows.Forms.StatusStrip statusStrip1;
-        private System.Windows.Forms.ToolStripProgressBar toolStripProgressBar;
         private System.Windows.Forms.ToolStripMenuItem webToolStripMenuItem;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel;
         private System.Windows.Forms.TextBox textBoxSongComment;
@@ -834,6 +887,10 @@
         private System.Windows.Forms.CheckBox checkBoxQAImages;
         private System.Windows.Forms.CheckBox checkBoxQATranslation;
         private System.Windows.Forms.CheckBox checkBoxQASpelling;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.TextBox textBoxImageSearch;
+        private System.Windows.Forms.ListView listViewImageHistory;
+        private System.Windows.Forms.Button buttonClearImageHistory;
     }
 }
 

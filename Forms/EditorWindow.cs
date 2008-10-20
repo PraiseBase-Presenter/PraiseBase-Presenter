@@ -14,13 +14,21 @@ namespace Pbp.Forms
     public partial class EditorWindow : Form
     {
         Settings setting;
+        static private EditorWindow _instance;
 
         private int childFormNumber = 0;
 
-        public EditorWindow()
+        private EditorWindow()
         {
             setting = new Settings();
             InitializeComponent();
+        }
+
+        static public EditorWindow getInstance()
+        {
+            if (_instance==null)
+                _instance = new EditorWindow();
+            return _instance;
         }
 
         private void ShowNewForm(object sender, EventArgs e)
@@ -82,7 +90,7 @@ namespace Pbp.Forms
 
         private void StatusBarToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            statusStrip.Visible = statusBarToolStripMenuItem.Checked;
+            //statusStrip.Visible = statusBarToolStripMenuItem.Checked;
         }
 
         private void CascadeToolStripMenuItem_Click(object sender, EventArgs e)
@@ -141,6 +149,17 @@ namespace Pbp.Forms
         private void saveToolStripButton_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void EditorWindow_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void EditorWindow_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            this.Hide();
+            e.Cancel = true;
         }
 
     }

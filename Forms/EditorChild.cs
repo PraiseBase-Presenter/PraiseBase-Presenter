@@ -16,10 +16,14 @@ namespace Pbp.Forms
     {
         Song sng;
         Settings setting;
+        projectionWindow projWindow;
 
         public EditorChild(string fileName)
         {
             InitializeComponent();
+
+            projWindow = projectionWindow.getInstance();
+
             this.WindowState = FormWindowState.Maximized;
             setting = new Settings();
 
@@ -71,19 +75,19 @@ namespace Pbp.Forms
         {
             if (treeViewContents.SelectedNode.Level == 2)
             {
-                showSongControls(false);
-                showPartControls(false);
-                showSlideControls(true);
+                tabControlEditor.SelectedIndex = 2;
                
                 Song.Slide sld = sng.parts[treeViewContents.SelectedNode.Parent.Index].partSlides[treeViewContents.SelectedNode.Index];
                 textBoxSongText.Text = sld.lineBreakText();
+
+                comboBoxSlideHorizOrientation.SelectedIndex = (int)sld.horizAlign;
+                comboBoxSlideVertOrientation.SelectedIndex = (int)sld.vertAlign;
+                
                 preview(sld);
             }
             else if (treeViewContents.SelectedNode.Level == 1)
             {
-                showSlideControls(false);
-                showSongControls(false);
-                showPartControls(true);
+                tabControlEditor.SelectedIndex = 1;
                 
                 Song.Part prt = sng.parts[treeViewContents.SelectedNode.Index];
                 textBoxSongPartCaption.Text = prt.caption;
@@ -91,11 +95,14 @@ namespace Pbp.Forms
             }
             else
             {
-                showSlideControls(false);
-                showPartControls(false);
-                showSongControls(true);
-                
+                tabControlEditor.SelectedIndex = 0;
+
                 textBoxSongTitle.Text = sng.title;
+
+                textBoxComment.Text = sng.comment;
+                checkBoxQAImages.Checked = sng.QAImage;
+                checkBoxQASpelling.Checked = sng.QASpelling;
+                checkBoxQATranslation.Checked = sng.QATranslation;
 
                 comboBoxLanguage.Items.Clear();
                 comboBoxLanguage.Text = sng.language;
@@ -129,23 +136,6 @@ namespace Pbp.Forms
             }
         }
 
-        private void showSlideControls(bool value)
-        {
-            textBoxSongText.Visible = value;
-            pictureBoxPreview.Visible = value;
-        }
-
-        private void showSongControls(bool value)
-        {
-            groupBoxSongSettings.Visible = value;
-            groupBoxNewSongPart.Visible = value;
-        }
-
-        private void showPartControls(bool value)
-        {
-            groupBoxNewSlide.Visible = value;
-            groupBoxSongPart.Visible = value;
-        }
 
         private void preview(Song.Slide slide)
         {
@@ -250,7 +240,9 @@ namespace Pbp.Forms
                 int slideIdx = treeViewContents.SelectedNode.Index;
 
                 sng.setSlideText(textBoxSongText.Text, partIdx, slideIdx);
-                preview(sng.parts[partIdx].partSlides[slideIdx]);
+
+                pictureBoxPreview.Image = projWindow.showSlide(sng.parts[partIdx].partSlides[slideIdx], sng.getImage(sng.parts[partIdx].partSlides[slideIdx].imageNumber), true);
+                
             }
         }
 
@@ -403,6 +395,61 @@ namespace Pbp.Forms
         private void buttonMoveUp_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void textBoxComment_TextChanged(object sender, EventArgs e)
+        {
+            sng.comment = textBoxComment.Text.Trim();
+        }
+
+        private void checkBoxQASpelling_CheckedChanged(object sender, EventArgs e)
+        {
+            if (checkBoxQASpelling.Checked)
+                checkBoxQASpelling.ForeColor = Color.Red;
+            else
+                checkBoxQASpelling.ForeColor = SystemColors.ControlText;
+            sng.QASpelling = checkBoxQASpelling.Checked;
+        }
+
+        private void checkBoxQATranslation_CheckedChanged(object sender, EventArgs e)
+        {
+            if (checkBoxQATranslation.Checked)
+                checkBoxQATranslation.ForeColor = Color.Red;
+            else
+                checkBoxQATranslation.ForeColor = SystemColors.ControlText;
+
+            sng.QATranslation = checkBoxQATranslation.Checked;
+        }
+
+        private void checkBoxQAImages_CheckedChanged(object sender, EventArgs e)
+        {
+            if (checkBoxQAImages.Checked)
+                checkBoxQAImages.ForeColor = Color.Red;
+            else
+                checkBoxQAImages.ForeColor = SystemColors.ControlText;
+            sng.QAImage = checkBoxQAImages.Checked;
+        }
+
+        private void tabControlEditor_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (tabControlEditor.SelectedIndex == 2)
+            {
+                if (treeViewContents.SelectedNode.Level == 0)
+                    treeViewContents.SelectedNode = treeViewContents.Nodes[0].Nodes[0].Nodes[0];
+                else if (treeViewContents.SelectedNode.Level == 1)
+                    treeViewContents.SelectedNode = treeViewContents.SelectedNode.Nodes[0];
+            }
+            else if (tabControlEditor.SelectedIndex == 1)
+            {
+                if (treeViewContents.SelectedNode.Level==0)
+                    treeViewContents.SelectedNode = treeViewContents.Nodes[0].Nodes[0];
+                else if (treeViewContents.SelectedNode.Level==2)
+                    treeViewContents.SelectedNode = treeViewContents.SelectedNode.Parent;
+            }
+            else
+            {
+                treeViewContents.SelectedNode = treeViewContents.Nodes[0];
+            }
         }
 
  

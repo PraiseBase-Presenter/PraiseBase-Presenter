@@ -42,7 +42,7 @@ namespace Pbp
 
         private void Form1_Load(object sender, EventArgs e)
         {            
-            projWindow = new projectionWindow();
+            projWindow = projectionWindow.getInstance();
             songMan = SongManager.getInstance();
             imgMan = ImageManager.getInstance();
 
@@ -116,7 +116,19 @@ namespace Pbp
             }
             if (cnt == 1)
             {
-                listViewSongs.Items[0].Selected = true;
+                if (listViewSongs.Items.Count>0)
+                {
+                    try
+                    {
+
+                        listViewSongs.Items[0].Selected = true;
+                    }
+                    catch (Exception e)
+                    {
+                        Console.WriteLine(e.ToString());
+                    }
+
+                 }
             }
             listViewSongs.Columns[0].Width = -2;
         }
@@ -296,11 +308,11 @@ namespace Pbp
 
                 if ((Control.ModifierKeys & Keys.Shift) == Keys.Shift)
                 {
-                    projWindow.showSlide(songMan.currentSong.slides[songMan.currentSong.currentSlide], null);
+                    projWindow.showSlide(songMan.currentSong.slides[songMan.currentSong.currentSlide], null, false);
                 }
                 else
                 {
-                    projWindow.showSlide(songMan.currentSong.slides[songMan.currentSong.currentSlide], songMan.currentSong.getImage(songMan.currentSong.slides[songMan.currentSong.currentSlide].imageNumber));
+                    projWindow.showSlide(songMan.currentSong.slides[songMan.currentSong.currentSlide], songMan.currentSong.getImage(songMan.currentSong.slides[songMan.currentSong.currentSlide].imageNumber), false);
                 }
                 toolStripStatusLabel.Text = "'" + songMan.currentSong.title + "' ist aktiv";
             }
@@ -314,7 +326,7 @@ namespace Pbp
                 int idx = songDetailImages.SelectedIndices[0];
                 if ((Control.ModifierKeys & Keys.Shift) == Keys.Shift)
                 {
-                    projWindow.showSlide(songMan.currentSong.slides[songMan.currentSong.currentSlide],songMan.currentSong.getImage(idx));
+                    projWindow.showSlide(songMan.currentSong.slides[songMan.currentSong.currentSlide],songMan.currentSong.getImage(idx), false);
                 }
                 else
                 {
@@ -433,6 +445,11 @@ namespace Pbp
             treeViewImageDirectories.Nodes.Add(rootTreeNode);
             PopulateTreeView(rootDir, treeViewImageDirectories.Nodes[0]);
             treeViewImageDirectories.Nodes[0].Expand();
+            
+            ImageList iml = new ImageList();
+            iml.ImageSize = new Size(150, 112);
+            iml.ColorDepth = ColorDepth.Depth32Bit;
+            listViewImageHistory.LargeImageList = iml;
         }
 
         public void PopulateTreeView(string directoryValue, TreeNode parentNode)
@@ -508,13 +525,26 @@ namespace Pbp
                 if ((Control.ModifierKeys & Keys.Shift) == Keys.Shift && songMan.currentSong != null && songMan.currentSong.currentSlide>=0)
                 {
 
-                    projWindow.showSlide(songMan.currentSong.slides[songMan.currentSong.currentSlide], Image.FromFile((string)listViewDirectoryImages.Items[idx].Tag));
+                    projWindow.showSlide(songMan.currentSong.slides[songMan.currentSong.currentSlide], Image.FromFile((string)listViewDirectoryImages.Items[idx].Tag), false);
                 }
                 else
                 {
                     projWindow.showImage(Image.FromFile((string)listViewDirectoryImages.Items[idx].Tag));
                 }
 
+                
+                listViewImageHistory.LargeImageList.Images.Add(Image.FromFile((string)listViewDirectoryImages.Items[idx].Tag)); 
+
+                ListViewItem lvi = new ListViewItem(listViewDirectoryImages.Items[idx].Text);
+                lvi.Tag = listViewDirectoryImages.Items[idx].Tag;
+                lvi.ImageIndex = listViewImageHistory.LargeImageList.Images.Count-1;
+                listViewImageHistory.Items.Add(lvi);
+                listViewImageHistory.EnsureVisible(listViewImageHistory.Items.Count-1);
+
+                if (listViewImageHistory.Items.Count > 10)
+                {
+                    listViewImageHistory.Items.RemoveAt(0); 
+                }
 
             }
         }
@@ -528,8 +558,9 @@ namespace Pbp
 
         private void toolStripButton5_Click(object sender, EventArgs e)
         {
-            EditorWindow wnd = new EditorWindow();
+            EditorWindow wnd = EditorWindow.getInstance();
             wnd.Show();
+            wnd.Focus();
         }
 
         private void textBoxSongComment_TextChanged(object sender, EventArgs e)
@@ -707,6 +738,45 @@ namespace Pbp
         private void checkBoxQAImages_CheckedChanged(object sender, EventArgs e)
         {
             songMan.currentSong.QAImage = ((CheckBox)sender).Checked;
+        }
+
+        private void listViewDirectoryImages_Leave(object sender, EventArgs e)
+        {
+            int idx = listViewDirectoryImages.SelectedIndices[0];
+            listViewDirectoryImages.Items[idx].Selected = false;
+        }
+
+        private void listViewImageHistory_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (projWindow != null && listViewImageHistory.SelectedIndices.Count > 0)
+            {
+                Application.DoEvents();
+                int idx = listViewImageHistory.SelectedIndices[0];
+
+                if ((Control.ModifierKeys & Keys.Shift) == Keys.Shift && songMan.currentSong != null && songMan.currentSong.currentSlide >= 0)
+                {
+
+                    projWindow.showSlide(songMan.currentSong.slides[songMan.currentSong.currentSlide], Image.FromFile((string)listViewImageHistory.Items[idx].Tag), false);
+                }
+                else
+                {
+                    projWindow.showImage(Image.FromFile((string)listViewImageHistory.Items[idx].Tag));
+                }
+            }
+        }
+
+        private void buttonClearImageHistory_Click(object sender, EventArgs e)
+        {
+            listViewImageHistory.Items.Clear();
+            listViewImageHistory.LargeImageList.Images.Clear();
+            GC.Collect();
+        }
+
+        private void listViewImageHistory_Leave(object sender, EventArgs e)
+        {
+            int idx = listViewImageHistory.SelectedIndices[0];
+            listViewImageHistory.Items[idx].Selected = false;
+
         }
 
 

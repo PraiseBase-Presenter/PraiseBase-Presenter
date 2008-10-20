@@ -17,15 +17,15 @@ namespace Pbp.Forms
 {
     public partial class projectionWindow : Form
     {
-        private Screen projScreen;
         private int h;
         private int w;
-
+        private Screen projScreen;
         private Settings setting;
-
         private Image currentImage;
 
-        public projectionWindow()
+        static private projectionWindow _instance;
+
+        private projectionWindow()
         {
             setting = new Settings();
             InitializeComponent();
@@ -42,6 +42,15 @@ namespace Pbp.Forms
             h = this.Height;
             w = this.Width;
             Console.WriteLine("Projection window has dimensions " + w + "*" + h);
+        }
+
+        static public projectionWindow getInstance()
+        {
+            if (_instance == null)
+            {
+                _instance = new projectionWindow();
+            }
+            return _instance;
         }
 
         private void projectionWindow_Load(object sender, EventArgs e)
@@ -94,7 +103,7 @@ namespace Pbp.Forms
                 pictureBoxBlackout.Visible = false;
         }
 
-        public void showSlide(Song.Slide slide, Image background)
+        public Image showSlide(Song.Slide slide, Image background, bool simluate)
         {
             setting.Reload();
 
@@ -137,127 +146,132 @@ namespace Pbp.Forms
 
                 //gr.DrawRectangle(Pens.BlueViolet, padding, padding, usableWidth, usableHeight);
 
-                if (slide.hasTranslation)
-                {
-                    SizeF strMeasure = gr.MeasureString(slide.lineBreakTranslation(), fontTr);
-                    int usedWidth = (int)strMeasure.Width;
-                    int usedHeight = (int)strMeasure.Height + (lineSpacing * (slide.lines.Count - 1));
-                    int lineHeight = (int)(strMeasure.Height / slide.translation.Count);
-                    lineSpacing += lineHeight + lineSpacing;
-                }
+                SizeF strMeasureTrans;
 
                 if (slide.hasTranslation && false)
                 {
+                    strMeasureTrans = gr.MeasureString(slide.lineBreakTranslation(), fontTr);
+                    lineSpacing +=  (int)(strMeasureTrans.Height / slide.translation.Count) + lineSpacing;
                 }
-                else
+
+                SizeF strMeasure = gr.MeasureString(slide.lineBreakText(), font);
+                Brush shadodBrush = Brushes.Transparent;
+                int usedWidth = (int)strMeasure.Width;
+                int usedHeight = (int)strMeasure.Height + (lineSpacing * (slide.lines.Count - 1));
+
+                float scalingFactor = 1.0f;
+                if (setting.projectionFontScaling  && (usedWidth > usableWidth || usedHeight > usableHeight))
                 {
-                    SizeF strMeasure = gr.MeasureString(slide.lineBreakText(), font);
-                    Brush shadodBrush = Brushes.Transparent;
-                    int usedWidth = (int)strMeasure.Width;
-                    int usedHeight = (int)strMeasure.Height + (lineSpacing * (slide.lines.Count - 1));
+                    scalingFactor = Math.Min((float)usableWidth / (float)usedWidth, (float)usableHeight / (float)usedHeight);
+                    font = new Font(font.FontFamily, font.Size * scalingFactor, font.Style);
+                    strMeasure = gr.MeasureString(slide.lineBreakText(), font);
+                    usedWidth = (int)strMeasure.Width;
+                    usedHeight = (int)strMeasure.Height + (lineSpacing * (slide.lines.Count - 1));
+                }
+                int lineHeight = (int)(strMeasure.Height / slide.lines.Count);
 
-                    float scalingFactor = 1.0f;
-                    if (setting.projectionFontScaling  && (usedWidth > usableWidth || usedHeight > usableHeight))
-                    {
-                        scalingFactor = Math.Min((float)usableWidth / (float)usedWidth, (float)usableHeight / (float)usedHeight);
-                        font = new Font(font.FontFamily, font.Size * scalingFactor, font.Style);
-                        strMeasure = gr.MeasureString(slide.lineBreakText(), font);
-                        usedWidth = (int)strMeasure.Width;
-                        usedHeight = (int)strMeasure.Height + (lineSpacing * (slide.lines.Count - 1));
-                    }
-                    int lineHeight = (int)(strMeasure.Height / slide.lines.Count);
+                // Horizontal stuff
+                switch (slide.horizAlign)
+                {
+                    case Song.SongTextHorizontalAlign.left:
+                        textStartX = textStartX;
+                        strFormat.Alignment = StringAlignment.Near;
+                        break;
+                    case Song.SongTextHorizontalAlign.center:
+                        textStartX = w / 2;
+                        strFormat.Alignment = StringAlignment.Center;
+                        break;
+                    case Song.SongTextHorizontalAlign.right:
+                        textStartX = textStartX + usableWidth;
+                        strFormat.Alignment = StringAlignment.Far;
+                        break;
+                }
 
+                // Vertical stuff
+                switch (slide.vertAlign)
+                {
+                    case Song.SongTextVerticalAlign.top:
+                        textStartY = textStartY;
+                        break;
+                    case Song.SongTextVerticalAlign.center:
+                        textStartY = textStartY + (usableHeight / 2) - (usedHeight / 2);
+                        break;
+                    case Song.SongTextVerticalAlign.bottom:
+                        textStartY = textStartY + usableHeight - usedHeight;
+                        break;
+                }
 
-                    // Horizontal stuff
-                    switch (slide.horizAlign)
-                    {
-                        case Song.SongTextHorizontalAlign.left:
-                            textStartX = textStartX;
-                            strFormat.Alignment = StringAlignment.Near;
-                            break;
-                        case Song.SongTextHorizontalAlign.center:
-                            textStartX = w / 2;
-                            strFormat.Alignment = StringAlignment.Center;
-                            break;
-                        case Song.SongTextHorizontalAlign.right:
-                            textStartX = textStartX + usableWidth;
-                            strFormat.Alignment = StringAlignment.Far;
-                            break;
-                    }
-
-                    // Vertical stuff
-                    switch (slide.vertAlign)
-                    {
-                        case Song.SongTextVerticalAlign.top:
-                            textStartY = textStartY;
-                            break;
-                        case Song.SongTextVerticalAlign.center:
-                            textStartY = textStartY + (usableHeight / 2) - (usedHeight / 2);
-                            break;
-                        case Song.SongTextVerticalAlign.bottom:
-                            textStartY = textStartY + usableHeight - usedHeight;
-                            break;
-                    }
+                int transStartX = textStartX + 10;
+                int transStartY = textStartY + lineHeight;
 
 
-                    int textX = textStartX;
-                    int textY = textStartY;
-                    //gr.DrawRectangle(Pens.BlueViolet, textX, textY, usableWidth, usedHeight);
 
-                    if (shadowThickness > 0)
-                    {
-                        shadodBrush = new SolidBrush(Color.FromArgb(15, setting.projectionShadowColor));
-                        gr.SmoothingMode = SmoothingMode.HighQuality;
-                        gr.InterpolationMode = InterpolationMode.HighQualityBilinear;
-                        gr.TextRenderingHint = TextRenderingHint.AntiAliasGridFit;
+                int textX = textStartX;
+                int textY = textStartY;
 
-                        foreach (string s in slide.lines)
-                        {
-                            for (int x = textX; x <= textX + shadowThickness; x++)
-                            {
-                                for (int y = textY; y <= textY + shadowThickness; y++)
-                                {
-                                    gr.DrawString(s, font, shadodBrush, new Point(x, y), strFormat);
-                                }
-                            }
-                            textY += lineHeight + lineSpacing;
-                        }
-                        textY = textStartY;
-                    }
-                    if (outLineThickness > 0)
-                    {
-                        gr.SmoothingMode = SmoothingMode.None;
-                        gr.InterpolationMode = InterpolationMode.Low;
-                        gr.TextRenderingHint = TextRenderingHint.ClearTypeGridFit;
-
-                        Brush br = new SolidBrush(setting.projectionOutlineColor);
-
-                        foreach (string s in slide.lines)
-                        {
-                            for (int x = textX - outLineThickness*2; x <= textX + outLineThickness*2; x+=2)
-                            {
-                                for (int y = textY - outLineThickness*2; y <= textY + outLineThickness*2; y+=2)
-                                {
-                                    gr.DrawString(s, font, br, new Point(x, y), strFormat);
-                                }
-                            }
-                            textY += lineHeight + lineSpacing;
-                        }
-                        textY = textStartY;
-                    }
+                if (shadowThickness > 0)
+                {
+                    shadodBrush = new SolidBrush(Color.FromArgb(15, setting.projectionShadowColor));
+                    gr.SmoothingMode = SmoothingMode.HighQuality;
+                    gr.InterpolationMode = InterpolationMode.HighQualityBilinear;
+                    gr.TextRenderingHint = TextRenderingHint.AntiAliasGridFit;
 
                     foreach (string s in slide.lines)
                     {
-                        gr.DrawString(s, font, new SolidBrush(setting.projectionMasterFontColor), new Point(textX, textY), strFormat);
+                        for (int x = textX; x <= textX + shadowThickness; x++)
+                        {
+                            for (int y = textY; y <= textY + shadowThickness; y++)
+                            {
+                                gr.DrawString(s, font, shadodBrush, new Point(x, y), strFormat);
+                            }
+                        }
                         textY += lineHeight + lineSpacing;
                     }
+                    textY = textStartY;
+                }
+                if (outLineThickness > 0)
+                {
+                    gr.SmoothingMode = SmoothingMode.None;
+                    gr.InterpolationMode = InterpolationMode.Low;
+                    gr.TextRenderingHint = TextRenderingHint.ClearTypeGridFit;
 
-                    
-                }               
+                    Brush br = new SolidBrush(setting.projectionOutlineColor);
+
+                    foreach (string s in slide.lines)
+                    {
+                        for (int x = textX - outLineThickness*2; x <= textX + outLineThickness*2; x+=2)
+                        {
+                            for (int y = textY - outLineThickness*2; y <= textY + outLineThickness*2; y+=2)
+                            {
+                                gr.DrawString(s, font, br, new Point(x, y), strFormat);
+                            }
+                        }
+                        textY += lineHeight + lineSpacing;
+                    }
+                    textY = textStartY;
+                }
+
+                foreach (string s in slide.lines)
+                {
+                    gr.DrawString(s, font, new SolidBrush(setting.projectionMasterFontColor), new Point(textX, textY), strFormat);
+                    textY += lineHeight + lineSpacing;
+                }
+
+                /*
+                foreach (string s in slide.translation)
+                {
+                    gr.DrawString(s, fonttrans, new SolidBrush(setting.projectionMasterFontColor), new Point(textX, textY), strFormat);
+                    textY += lineHeight + lineSpacing;
+                }       */           
+              
+
             }
 
-            pictureBoxCommon.Image = bmp;
+            if (!simluate)
+                pictureBoxCommon.Image = bmp;
+
             gr.Dispose();
+            return bmp;
         }
 
 
