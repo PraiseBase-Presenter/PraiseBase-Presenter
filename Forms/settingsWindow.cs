@@ -15,13 +15,11 @@ namespace Pbp.Forms
     public partial class settingsWindow : Form
     {
         Settings stn;
-        int lastTabIndex;
 
         public settingsWindow()
         {
             stn = new Settings();
             InitializeComponent();
-            lastTabIndex = 0;
         }
 
         public void updateLabels()

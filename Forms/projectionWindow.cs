@@ -9,6 +9,8 @@ using System.Windows.Forms;
 using System.Drawing.Imaging;
 using System.Drawing.Drawing2D;
 using System.Drawing.Text;
+using System.Windows.Forms.Integration;
+
 
 using Pbp;
 using Pbp.Properties;
@@ -174,7 +176,6 @@ namespace Pbp.Forms
                 switch (slide.horizAlign)
                 {
                     case Song.SongTextHorizontalAlign.left:
-                        textStartX = textStartX;
                         strFormat.Alignment = StringAlignment.Near;
                         break;
                     case Song.SongTextHorizontalAlign.center:
@@ -191,7 +192,6 @@ namespace Pbp.Forms
                 switch (slide.vertAlign)
                 {
                     case Song.SongTextVerticalAlign.top:
-                        textStartY = textStartY;
                         break;
                     case Song.SongTextVerticalAlign.center:
                         textStartY = textStartY + (usableHeight / 2) - (usedHeight / 2);
@@ -209,7 +209,7 @@ namespace Pbp.Forms
                 int textX = textStartX;
                 int textY = textStartY;
 
-                if (shadowThickness > 0)
+                if (!simluate && shadowThickness > 0)
                 {
                     shadodBrush = new SolidBrush(Color.FromArgb(15, setting.projectionShadowColor));
                     gr.SmoothingMode = SmoothingMode.HighQuality;
@@ -229,7 +229,7 @@ namespace Pbp.Forms
                     }
                     textY = textStartY;
                 }
-                if (outLineThickness > 0)
+                if (!simluate && outLineThickness > 0)
                 {
                     gr.SmoothingMode = SmoothingMode.None;
                     gr.InterpolationMode = InterpolationMode.Low;
@@ -305,6 +305,7 @@ namespace Pbp.Forms
 
         private void projectionWindow_Paint(object sender, PaintEventArgs e)
         {
+            
             pictureBoxCommon.Top = 0;
             pictureBoxCommon.Left = 0;
             pictureBoxCommon.Width = this.Width;
@@ -314,7 +315,7 @@ namespace Pbp.Forms
             pictureBoxBlackout.Left = 0;
             pictureBoxBlackout.Width = this.Width;
             pictureBoxBlackout.Height = this.Height;
-
+            
         }
 
 

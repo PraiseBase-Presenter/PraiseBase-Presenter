@@ -99,6 +99,10 @@ namespace Pbp
         /// </summary>
         public bool QAImage;
         /// <summary>
+        /// Qualiti assurance indicator for improper segmentation of slide text
+        /// </summary>
+        public bool QASegmentation;
+        /// <summary>
         /// The file type of this song
         /// </summary>
         private FileType _fileType;
@@ -533,6 +537,8 @@ namespace Pbp
 
         public Image getImage(int nr)
         {
+            if (nr < 0)
+                return null;
             if (imageObjects == null)
             {
                 loadImages();
@@ -653,10 +659,10 @@ namespace Pbp
         public void setSlideText(string text, int partId, int slideId)
         {
             parts[partId].partSlides[slideId].lines = new List<string>();
-            string[] lines = text.Split(Environment.NewLine.ToCharArray());
+            string[] lines = text.Split(new string[] {"\r\n"},StringSplitOptions.None);
             foreach (string sl in lines)
             {
-                parts[partId].partSlides[slideId].lines.Add(sl);
+                parts[partId].partSlides[slideId].lines.Add(sl.Trim());
             }
         }
 

@@ -82,8 +82,9 @@ namespace Pbp.Forms
 
                 comboBoxSlideHorizOrientation.SelectedIndex = (int)sld.horizAlign;
                 comboBoxSlideVertOrientation.SelectedIndex = (int)sld.vertAlign;
-                
-                preview(sld);
+
+                pictureBoxPreview.Image = projWindow.showSlide(sld, sng.getImage(sld.imageNumber), true);
+
             }
             else if (treeViewContents.SelectedNode.Level == 1)
             {
@@ -103,6 +104,7 @@ namespace Pbp.Forms
                 checkBoxQAImages.Checked = sng.QAImage;
                 checkBoxQASpelling.Checked = sng.QASpelling;
                 checkBoxQATranslation.Checked = sng.QATranslation;
+                checkBoxQASegmentation.Checked = sng.QASegmentation;
 
                 comboBoxLanguage.Items.Clear();
                 comboBoxLanguage.Text = sng.language;
@@ -136,7 +138,7 @@ namespace Pbp.Forms
             }
         }
 
-
+        /**
         private void preview(Song.Slide slide)
         {
             Image background;
@@ -230,20 +232,11 @@ namespace Pbp.Forms
 
             pictureBoxPreview.Image = bmp;
             gr.Dispose();
-        }
+        }**/
 
-        private void textBoxSongText_TextChanged(object sender, EventArgs e)
+        private void updateSongText(object sender, EventArgs e)
         {
-            if (treeViewContents.SelectedNode.Level == 2)
-            {
-                int partIdx = treeViewContents.SelectedNode.Parent.Index;
-                int slideIdx = treeViewContents.SelectedNode.Index;
 
-                sng.setSlideText(textBoxSongText.Text, partIdx, slideIdx);
-
-                pictureBoxPreview.Image = projWindow.showSlide(sng.parts[partIdx].partSlides[slideIdx], sng.getImage(sng.parts[partIdx].partSlides[slideIdx].imageNumber), true);
-                
-            }
         }
 
         private void textBoxSongTitle_TextChanged(object sender, EventArgs e)
@@ -451,6 +444,56 @@ namespace Pbp.Forms
                 treeViewContents.SelectedNode = treeViewContents.Nodes[0];
             }
         }
+
+        private void checkBoxQASegmentation_CheckedChanged(object sender, EventArgs e)
+        {
+            if (checkBoxQASegmentation.Checked)
+                checkBoxQASegmentation.ForeColor = Color.Red;
+            else
+                checkBoxQASegmentation.ForeColor = SystemColors.ControlText;
+            sng.QASegmentation = checkBoxQASegmentation.Checked;
+        }
+
+        private void updateSongText(object sender, KeyEventArgs e)
+        {
+            if (treeViewContents.SelectedNode.Level == 2)
+            {
+                int partIdx = treeViewContents.SelectedNode.Parent.Index;
+                int slideIdx = treeViewContents.SelectedNode.Index;
+
+                sng.setSlideText(textBoxSongText.Text, partIdx, slideIdx);
+
+                pictureBoxPreview.Image = projWindow.showSlide(sng.parts[partIdx].partSlides[slideIdx], sng.getImage(sng.parts[partIdx].partSlides[slideIdx].imageNumber), true);
+
+            }
+        }
+
+        private void textBoxSongText_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void comboBoxSlideHorizOrientation_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            int partIdx = treeViewContents.SelectedNode.Parent.Index;
+            int slideIdx = treeViewContents.SelectedNode.Index;
+            sng.parts[partIdx].partSlides[slideIdx].horizAlign = (Song.SongTextHorizontalAlign)comboBoxSlideHorizOrientation.SelectedIndex;
+            pictureBoxPreview.Image = projWindow.showSlide(sng.parts[partIdx].partSlides[slideIdx], sng.getImage(sng.parts[partIdx].partSlides[slideIdx].imageNumber), true);
+        }
+
+        private void comboBoxSlideVertOrientation_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            int partIdx = treeViewContents.SelectedNode.Parent.Index;
+            int slideIdx = treeViewContents.SelectedNode.Index;
+            sng.parts[partIdx].partSlides[slideIdx].vertAlign = (Song.SongTextVerticalAlign)comboBoxSlideVertOrientation.SelectedIndex;
+            pictureBoxPreview.Image = projWindow.showSlide(sng.parts[partIdx].partSlides[slideIdx], sng.getImage(sng.parts[partIdx].partSlides[slideIdx].imageNumber), true);
+        }
+
+
+
+
+
+
 
  
 

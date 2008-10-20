@@ -34,6 +34,8 @@ namespace Pbp
         SongManager songMan;
         ImageManager imgMan;
 
+        private List<String> imageSearchResults;
+
         public mainWindow()
         {
             setting = new Settings();
@@ -292,6 +294,7 @@ namespace Pbp
                 checkBoxQASpelling.Checked = songMan.currentSong.QASpelling;
                 checkBoxQATranslation.Checked = songMan.currentSong.QATranslation;
                 checkBoxQAImages.Checked = songMan.currentSong.QAImage;
+                checkBoxQASegmentation.Checked = songMan.currentSong.QASegmentation;
 
                 groupBox3.Text = "Lied-Details '" + songMan.currentSong.title + "'";
             }            
@@ -341,13 +344,7 @@ namespace Pbp
                 songSearchBox.Focus();
             else if (tabControl1.SelectedIndex == 1)
             {
-                if (treeViewImageDirectories.SelectedNode == null)
-                {
-                    if (treeViewImageDirectories.Nodes[0]!=null)
-                    {
-                        //treeViewImageDirectories.SelectedNode = treeViewImageDirectories.Nodes[0];
-                    }
-                }
+                textBoxImageSearch.Focus();
             }
         }
 
@@ -419,6 +416,7 @@ namespace Pbp
             {
                 toolStripStatusLabel.Text = "Kommentar gespeichert";
                 songMan.currentSong.comment = textBoxSongComment.Text;
+                songMan.currentSong.save(null);
             }
         }
 
@@ -445,7 +443,10 @@ namespace Pbp
             treeViewImageDirectories.Nodes.Add(rootTreeNode);
             PopulateTreeView(rootDir, treeViewImageDirectories.Nodes[0]);
             treeViewImageDirectories.Nodes[0].Expand();
-            
+            treeViewImageDirectories.Nodes.Add("Suchergebnisse");
+
+            imageSearchResults = new List<String>();
+
             ImageList iml = new ImageList();
             iml.ImageSize = new Size(150, 112);
             iml.ColorDepth = ColorDepth.Depth32Bit;
@@ -485,18 +486,42 @@ namespace Pbp
 
         private void treeViewImageDirectories_AfterSelect(object sender, TreeViewEventArgs e)
         {
-            if (Directory.Exists((string)treeViewImageDirectories.SelectedNode.Tag))
+            listViewDirectoryImages.Items.Clear();
+            if (listViewDirectoryImages.LargeImageList != null)
             {
-                listViewDirectoryImages.Items.Clear();
-                if (listViewDirectoryImages.LargeImageList != null)
-                {
-                    listViewDirectoryImages.LargeImageList.Dispose();
-                }
+                listViewDirectoryImages.LargeImageList.Dispose();
+            }
+            if (treeViewImageDirectories.SelectedNode == treeViewImageDirectories.Nodes[1])
+            {
+                    labelImgDirName.Text = "Suchergebnisse";
+
+                    ImageList imList = new ImageList();
+                    imList.ImageSize = new Size(150, 112);
+                    imList.ColorDepth = ColorDepth.Depth32Bit;
+                    listViewDirectoryImages.LargeImageList = imList;
+
+                    int i = 0;
+                    foreach (string file in imageSearchResults)
+                    {
+                        ListViewItem lvi = new ListViewItem(Path.GetFileNameWithoutExtension(file));
+                        lvi.Tag = file;
+                        lvi.ImageIndex = i;
+                        listViewDirectoryImages.LargeImageList.Images.Add(Image.FromFile(file));
+                        listViewDirectoryImages.Items.Add(lvi);
+                        i++;
+                        Application.DoEvents();
+                    }
+            }
+            else if (Directory.Exists((string)treeViewImageDirectories.SelectedNode.Tag))
+            {
+
+
+                labelImgDirName.Text = "Verzeichnisinhalt '" + Path.GetFileName((string)treeViewImageDirectories.SelectedNode.Tag) + "':";
 
                 ImageList imList = new ImageList();
                 imList.ImageSize = new Size(150, 112);
                 imList.ColorDepth = ColorDepth.Depth32Bit;
-                
+
                 string[] songFilePaths = Directory.GetFiles((string)treeViewImageDirectories.SelectedNode.Tag, "*.jpg", SearchOption.TopDirectoryOnly);
                 int i = 0;
                 foreach (string file in songFilePaths)
@@ -510,7 +535,7 @@ namespace Pbp
                     i++;
                 }
                 listViewDirectoryImages.LargeImageList = imList;
-                
+
             }
 
         }
@@ -532,19 +557,23 @@ namespace Pbp
                     projWindow.showImage(Image.FromFile((string)listViewDirectoryImages.Items[idx].Tag));
                 }
 
-                
-                listViewImageHistory.LargeImageList.Images.Add(Image.FromFile((string)listViewDirectoryImages.Items[idx].Tag)); 
-
-                ListViewItem lvi = new ListViewItem(listViewDirectoryImages.Items[idx].Text);
-                lvi.Tag = listViewDirectoryImages.Items[idx].Tag;
-                lvi.ImageIndex = listViewImageHistory.LargeImageList.Images.Count-1;
-                listViewImageHistory.Items.Add(lvi);
-                listViewImageHistory.EnsureVisible(listViewImageHistory.Items.Count-1);
-
-                if (listViewImageHistory.Items.Count > 10)
+                // History
+                if (listViewImageHistory.Items.Count==0 || (string)listViewImageHistory.Items[listViewImageHistory.Items.Count - 1].Tag != (string)listViewDirectoryImages.Items[idx].Tag)
                 {
-                    listViewImageHistory.Items.RemoveAt(0); 
+                    listViewImageHistory.LargeImageList.Images.Add(Image.FromFile((string)listViewDirectoryImages.Items[idx].Tag));
+
+                    if (listViewImageHistory.Items.Count > 10)
+                    {
+                        listViewImageHistory.Items.RemoveAt(0);
+                    }
+
+                    ListViewItem lvi = new ListViewItem(listViewDirectoryImages.Items[idx].Text);
+                    lvi.Tag = listViewDirectoryImages.Items[idx].Tag;
+                    lvi.ImageIndex = listViewImageHistory.LargeImageList.Images.Count-1;
+                    listViewImageHistory.Items.Add(lvi);
+                    listViewImageHistory.EnsureVisible(listViewImageHistory.Items.Count-1);
                 }
+
 
             }
         }
@@ -727,23 +756,38 @@ namespace Pbp
 
         private void checkBoxQASpelling_CheckedChanged(object sender, EventArgs e)
         {
-            songMan.currentSong.QASpelling = ((CheckBox)sender).Checked;
+            if (songMan.currentSong != null)
+            {
+                songMan.currentSong.QASpelling = ((CheckBox)sender).Checked;
+                songMan.currentSong.save(null);
+            }
         }
 
         private void checkBoxQATranslation_CheckedChanged(object sender, EventArgs e)
         {
-            songMan.currentSong.QATranslation = ((CheckBox)sender).Checked;
+            if (songMan.currentSong != null)
+            {
+                songMan.currentSong.QATranslation = ((CheckBox)sender).Checked;
+                songMan.currentSong.save(null);
+            }
         }
 
         private void checkBoxQAImages_CheckedChanged(object sender, EventArgs e)
         {
-            songMan.currentSong.QAImage = ((CheckBox)sender).Checked;
+            if (songMan.currentSong != null)
+            {
+                songMan.currentSong.QAImage = ((CheckBox)sender).Checked;
+                songMan.currentSong.save(null);
+            }
         }
 
         private void listViewDirectoryImages_Leave(object sender, EventArgs e)
         {
-            int idx = listViewDirectoryImages.SelectedIndices[0];
-            listViewDirectoryImages.Items[idx].Selected = false;
+            if (listViewDirectoryImages.SelectedIndices.Count > 0)
+            {
+                int idx = listViewDirectoryImages.SelectedIndices[0];
+                listViewDirectoryImages.Items[idx].Selected = false;
+            }
         }
 
         private void listViewImageHistory_SelectedIndexChanged(object sender, EventArgs e)
@@ -777,6 +821,53 @@ namespace Pbp
             int idx = listViewImageHistory.SelectedIndices[0];
             listViewImageHistory.Items[idx].Selected = false;
 
+        }
+
+        private void checkBoxQASegmentation_CheckedChanged(object sender, EventArgs e)
+        {
+            if (songMan.currentSong != null)
+            {
+                songMan.currentSong.QASegmentation = ((CheckBox)sender).Checked;
+                songMan.currentSong.save(null);
+            }
+        }
+
+        private void buttonSearchImages_Click(object sender, EventArgs e)
+        {
+            string haystack = textBoxImageSearch.Text.ToLower().Trim();
+            if (haystack != String.Empty)
+            {
+                treeViewImageDirectories.SelectedNode = null;
+                imageSearchResults.Clear();
+                string[] imgFilePaths = Directory.GetFiles(setting.dataDirectory + Path.DirectorySeparatorChar + setting.imageDir, "*.jpg", SearchOption.AllDirectories);
+                foreach (string ims in imgFilePaths)
+                {
+                    if (!ims.Contains("[Thumbnails]"))
+                    {
+                        string needle = Path.GetFileNameWithoutExtension(ims);
+                        if (needle.ToLower().Contains(haystack))
+                        {
+                            imageSearchResults.Add(ims);
+                        }
+                    }
+                }
+                treeViewImageDirectories.SelectedNode = treeViewImageDirectories.Nodes[1];
+            }
+            textBoxImageSearch.SelectAll();
+            textBoxImageSearch.Focus();
+        }
+
+        private void textBoxImageSearch_Click(object sender, EventArgs e)
+        {
+            textBoxImageSearch.SelectAll();
+        }
+
+        private void textBoxImageSearch_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Return && textBoxImageSearch.Text.Trim() != String.Empty)
+            {
+                buttonSearchImages_Click(sender, e);
+            }
         }
 
 

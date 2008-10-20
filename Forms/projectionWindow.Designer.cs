@@ -58,7 +58,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Black;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.ClientSize = new System.Drawing.Size(587, 412);
+            this.ClientSize = new System.Drawing.Size(840, 641);
             this.ControlBox = false;
             this.Controls.Add(this.pictureBoxBlackout);
             this.Controls.Add(this.pictureBoxCommon);

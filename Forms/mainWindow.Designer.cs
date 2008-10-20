@@ -55,6 +55,7 @@
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.checkBoxQASegmentation = new System.Windows.Forms.CheckBox();
             this.checkBoxQAImages = new System.Windows.Forms.CheckBox();
             this.checkBoxQATranslation = new System.Windows.Forms.CheckBox();
             this.checkBoxQASpelling = new System.Windows.Forms.CheckBox();
@@ -64,6 +65,13 @@
             this.columnHeader3 = new System.Windows.Forms.ColumnHeader();
             this.songDetailImages = new System.Windows.Forms.ListView();
             this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.buttonSearchImages = new System.Windows.Forms.Button();
+            this.labelImgDirName = new System.Windows.Forms.Label();
+            this.label5 = new System.Windows.Forms.Label();
+            this.buttonClearImageHistory = new System.Windows.Forms.Button();
+            this.listViewImageHistory = new System.Windows.Forms.ListView();
+            this.label4 = new System.Windows.Forms.Label();
+            this.textBoxImageSearch = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
             this.listViewDirectoryImages = new System.Windows.Forms.ListView();
             this.treeViewImageDirectories = new System.Windows.Forms.TreeView();
@@ -88,10 +96,6 @@
             this.toolStripButton4 = new System.Windows.Forms.ToolStripButton();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.toolStripStatusLabel = new System.Windows.Forms.ToolStripStatusLabel();
-            this.label4 = new System.Windows.Forms.Label();
-            this.textBoxImageSearch = new System.Windows.Forms.TextBox();
-            this.listViewImageHistory = new System.Windows.Forms.ListView();
-            this.buttonClearImageHistory = new System.Windows.Forms.Button();
             this.menuStrip1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.tabControl1.SuspendLayout();
@@ -356,6 +360,7 @@
             // 
             this.groupBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupBox1.Controls.Add(this.checkBoxQASegmentation);
             this.groupBox1.Controls.Add(this.checkBoxQAImages);
             this.groupBox1.Controls.Add(this.checkBoxQATranslation);
             this.groupBox1.Controls.Add(this.checkBoxQASpelling);
@@ -367,11 +372,23 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Qualitätssicherung und Bemerkungen";
             // 
+            // checkBoxQASegmentation
+            // 
+            this.checkBoxQASegmentation.AutoSize = true;
+            this.checkBoxQASegmentation.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.checkBoxQASegmentation.Location = new System.Drawing.Point(560, 19);
+            this.checkBoxQASegmentation.Name = "checkBoxQASegmentation";
+            this.checkBoxQASegmentation.Size = new System.Drawing.Size(155, 17);
+            this.checkBoxQASegmentation.TabIndex = 32;
+            this.checkBoxQASegmentation.Text = "Textaufteilung nicht optimal";
+            this.checkBoxQASegmentation.UseVisualStyleBackColor = true;
+            this.checkBoxQASegmentation.CheckedChanged += new System.EventHandler(this.checkBoxQASegmentation_CheckedChanged);
+            // 
             // checkBoxQAImages
             // 
             this.checkBoxQAImages.AutoSize = true;
             this.checkBoxQAImages.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.checkBoxQAImages.Location = new System.Drawing.Point(408, 19);
+            this.checkBoxQAImages.Location = new System.Drawing.Point(322, 19);
             this.checkBoxQAImages.Name = "checkBoxQAImages";
             this.checkBoxQAImages.Size = new System.Drawing.Size(236, 17);
             this.checkBoxQAImages.TabIndex = 31;
@@ -383,7 +400,7 @@
             // 
             this.checkBoxQATranslation.AutoSize = true;
             this.checkBoxQATranslation.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.checkBoxQATranslation.Location = new System.Drawing.Point(168, 19);
+            this.checkBoxQATranslation.Location = new System.Drawing.Point(130, 19);
             this.checkBoxQATranslation.Name = "checkBoxQATranslation";
             this.checkBoxQATranslation.Size = new System.Drawing.Size(189, 17);
             this.checkBoxQATranslation.TabIndex = 30;
@@ -443,6 +460,7 @@
             this.songDetailItems.TabIndex = 23;
             this.songDetailItems.UseCompatibleStateImageBehavior = false;
             this.songDetailItems.View = System.Windows.Forms.View.Details;
+            this.songDetailItems.ItemActivate += new System.EventHandler(this.songDetailItems_SelectedIndexChanged);
             this.songDetailItems.SelectedIndexChanged += new System.EventHandler(this.songDetailItems_SelectedIndexChanged);
             this.songDetailItems.Leave += new System.EventHandler(this.songDetailItems_Leave);
             // 
@@ -474,6 +492,9 @@
             // 
             // tabPage2
             // 
+            this.tabPage2.Controls.Add(this.buttonSearchImages);
+            this.tabPage2.Controls.Add(this.labelImgDirName);
+            this.tabPage2.Controls.Add(this.label5);
             this.tabPage2.Controls.Add(this.buttonClearImageHistory);
             this.tabPage2.Controls.Add(this.listViewImageHistory);
             this.tabPage2.Controls.Add(this.label4);
@@ -488,6 +509,82 @@
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Bilder";
             this.tabPage2.UseVisualStyleBackColor = true;
+            // 
+            // buttonSearchImages
+            // 
+            this.buttonSearchImages.Location = new System.Drawing.Point(175, 5);
+            this.buttonSearchImages.Name = "buttonSearchImages";
+            this.buttonSearchImages.Size = new System.Drawing.Size(53, 23);
+            this.buttonSearchImages.TabIndex = 25;
+            this.buttonSearchImages.Text = "Suchen";
+            this.buttonSearchImages.UseVisualStyleBackColor = true;
+            this.buttonSearchImages.Click += new System.EventHandler(this.buttonSearchImages_Click);
+            // 
+            // labelImgDirName
+            // 
+            this.labelImgDirName.AutoSize = true;
+            this.labelImgDirName.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelImgDirName.Location = new System.Drawing.Point(241, 11);
+            this.labelImgDirName.Name = "labelImgDirName";
+            this.labelImgDirName.Size = new System.Drawing.Size(107, 13);
+            this.labelImgDirName.TabIndex = 24;
+            this.labelImgDirName.Text = "Verzeichnisinhalt:";
+            // 
+            // label5
+            // 
+            this.label5.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.label5.AutoSize = true;
+            this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label5.Location = new System.Drawing.Point(760, 11);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(51, 13);
+            this.label5.TabIndex = 23;
+            this.label5.Text = "Verlauf:";
+            // 
+            // buttonClearImageHistory
+            // 
+            this.buttonClearImageHistory.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.buttonClearImageHistory.Location = new System.Drawing.Point(743, 527);
+            this.buttonClearImageHistory.Name = "buttonClearImageHistory";
+            this.buttonClearImageHistory.Size = new System.Drawing.Size(249, 23);
+            this.buttonClearImageHistory.TabIndex = 22;
+            this.buttonClearImageHistory.Text = "Verlauf leeren";
+            this.buttonClearImageHistory.UseVisualStyleBackColor = true;
+            this.buttonClearImageHistory.Click += new System.EventHandler(this.buttonClearImageHistory_Click);
+            // 
+            // listViewImageHistory
+            // 
+            this.listViewImageHistory.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.listViewImageHistory.Location = new System.Drawing.Point(743, 32);
+            this.listViewImageHistory.MultiSelect = false;
+            this.listViewImageHistory.Name = "listViewImageHistory";
+            this.listViewImageHistory.Size = new System.Drawing.Size(249, 489);
+            this.listViewImageHistory.TabIndex = 21;
+            this.listViewImageHistory.UseCompatibleStateImageBehavior = false;
+            this.listViewImageHistory.SelectedIndexChanged += new System.EventHandler(this.listViewImageHistory_SelectedIndexChanged);
+            this.listViewImageHistory.Leave += new System.EventHandler(this.listViewImageHistory_Leave);
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label4.Location = new System.Drawing.Point(6, 9);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(41, 13);
+            this.label4.TabIndex = 20;
+            this.label4.Text = "Suche:";
+            // 
+            // textBoxImageSearch
+            // 
+            this.textBoxImageSearch.AcceptsReturn = true;
+            this.textBoxImageSearch.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.textBoxImageSearch.Location = new System.Drawing.Point(50, 6);
+            this.textBoxImageSearch.Name = "textBoxImageSearch";
+            this.textBoxImageSearch.Size = new System.Drawing.Size(116, 20);
+            this.textBoxImageSearch.TabIndex = 19;
+            this.textBoxImageSearch.Click += new System.EventHandler(this.textBoxImageSearch_Click);
+            this.textBoxImageSearch.KeyUp += new System.Windows.Forms.KeyEventHandler(this.textBoxImageSearch_KeyUp);
             // 
             // label3
             // 
@@ -508,10 +605,10 @@
             this.listViewDirectoryImages.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
                         | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
-            this.listViewDirectoryImages.Location = new System.Drawing.Point(234, 6);
+            this.listViewDirectoryImages.Location = new System.Drawing.Point(234, 32);
             this.listViewDirectoryImages.MultiSelect = false;
             this.listViewDirectoryImages.Name = "listViewDirectoryImages";
-            this.listViewDirectoryImages.Size = new System.Drawing.Size(514, 544);
+            this.listViewDirectoryImages.Size = new System.Drawing.Size(503, 518);
             this.listViewDirectoryImages.TabIndex = 1;
             this.listViewDirectoryImages.UseCompatibleStateImageBehavior = false;
             this.listViewDirectoryImages.SelectedIndexChanged += new System.EventHandler(this.listViewDirectoryImages_SelectedIndexChanged);
@@ -747,47 +844,6 @@
             this.toolStripStatusLabel.Name = "toolStripStatusLabel";
             this.toolStripStatusLabel.Size = new System.Drawing.Size(0, 17);
             // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.Location = new System.Drawing.Point(6, 9);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(41, 13);
-            this.label4.TabIndex = 20;
-            this.label4.Text = "Suche:";
-            // 
-            // textBoxImageSearch
-            // 
-            this.textBoxImageSearch.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBoxImageSearch.Location = new System.Drawing.Point(53, 6);
-            this.textBoxImageSearch.Name = "textBoxImageSearch";
-            this.textBoxImageSearch.Size = new System.Drawing.Size(175, 20);
-            this.textBoxImageSearch.TabIndex = 19;
-            // 
-            // listViewImageHistory
-            // 
-            this.listViewImageHistory.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Right)));
-            this.listViewImageHistory.Location = new System.Drawing.Point(754, 6);
-            this.listViewImageHistory.Name = "listViewImageHistory";
-            this.listViewImageHistory.Size = new System.Drawing.Size(238, 515);
-            this.listViewImageHistory.TabIndex = 21;
-            this.listViewImageHistory.UseCompatibleStateImageBehavior = false;
-            this.listViewImageHistory.SelectedIndexChanged += new System.EventHandler(this.listViewImageHistory_SelectedIndexChanged);
-            this.listViewImageHistory.Leave += new System.EventHandler(this.listViewImageHistory_Leave);
-            // 
-            // buttonClearImageHistory
-            // 
-            this.buttonClearImageHistory.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.buttonClearImageHistory.Location = new System.Drawing.Point(754, 527);
-            this.buttonClearImageHistory.Name = "buttonClearImageHistory";
-            this.buttonClearImageHistory.Size = new System.Drawing.Size(238, 23);
-            this.buttonClearImageHistory.TabIndex = 22;
-            this.buttonClearImageHistory.Text = "Verlauf leeren";
-            this.buttonClearImageHistory.UseVisualStyleBackColor = true;
-            this.buttonClearImageHistory.Click += new System.EventHandler(this.buttonClearImageHistory_Click);
-            // 
             // mainWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -891,6 +947,10 @@
         private System.Windows.Forms.TextBox textBoxImageSearch;
         private System.Windows.Forms.ListView listViewImageHistory;
         private System.Windows.Forms.Button buttonClearImageHistory;
+        private System.Windows.Forms.Label labelImgDirName;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.CheckBox checkBoxQASegmentation;
+        private System.Windows.Forms.Button buttonSearchImages;
     }
 }
 
