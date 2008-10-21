@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using System.Xml;
+using System.IO;
 
 using Pbp.Properties;
 
@@ -32,11 +33,12 @@ namespace Pbp.Forms
                 sng = new Song(fileName);
                 if (sng.isValid)
                 {
-                    this.Text = sng.title + " ("+fileName+")";
+                    this.Text = sng.title;
 
                     populateTree();
 
                     treeViewContents.SelectedNode = treeViewContents.Nodes[0];
+
                     
                 }
                 else
@@ -106,6 +108,14 @@ namespace Pbp.Forms
                 checkBoxQATranslation.Checked = sng.QATranslation;
                 checkBoxQASegmentation.Checked = sng.QASegmentation;
 
+                labelFont.Text = sng.font.Name + ", " + sng.font.Style.ToString() + ", " + sng.font.Size.ToString();
+                labelFontTranslation.Text = sng.fontTranslation.Name + ", " + sng.fontTranslation.Style.ToString() + ", " + sng.fontTranslation.Size.ToString();
+                pictureBoxFontColor.BackColor= sng.fontColor;
+                pictureBoxFontTranslationColor.BackColor = sng.fontColorTranslation;
+
+                trackBarLineSpacing.Value = sng.lineSpacing;
+                labelLineSpacing.Text = sng.lineSpacing.ToString();
+
                 comboBoxLanguage.Items.Clear();
                 comboBoxLanguage.Text = sng.language;
                 comboBoxLanguage.AutoCompleteMode = AutoCompleteMode.Suggest;
@@ -138,101 +148,7 @@ namespace Pbp.Forms
             }
         }
 
-        /**
-        private void preview(Song.Slide slide)
-        {
-            Image background;
-            if (slide.imageNumber >= 0)
-                background = sng.getImage(slide.imageNumber);
-            else
-                background = null;
-            string str = "";
-            str = slide.lineBreakText();
 
-
-            int w = pictureBoxPreview.Width;
-            int h = pictureBoxPreview.Height;
-            int padding = 10;
-
-            Bitmap bmp = new Bitmap(w, h);
-            Graphics gr = Graphics.FromImage(bmp);
-            Font font = setting.projectionMasterFont;
-            StringFormat strFormat = new StringFormat();
-            strFormat.Alignment = StringAlignment.Center;
-            strFormat.LineAlignment = StringAlignment.Center;
-
-            int textX = w / 2;
-            int textY = h / 2;
-
-            // Background color
-            gr.FillRectangle(new SolidBrush(setting.projectionBackColor), 0, 0, w, h);
-
-            // Background image
-            if (background != null)
-            {
-                gr.DrawImage(background, new Rectangle(0, 0, w, h), 0, 0, background.Width, background.Height, GraphicsUnit.Pixel);
-            }
-
-
-            float realFontWidth;
-            float realFontHeight;
-
-            if (setting.projectionFontScaling)
-            {
-                realFontWidth = gr.MeasureString(str, font).Width;
-                if (realFontWidth > w - padding)
-                {
-                    font = new Font(font.FontFamily, ((w - padding) / realFontWidth) * font.Size, font.Style);
-                }
-                realFontHeight = gr.MeasureString(str, font).Height;
-                if (realFontHeight > h - padding)
-                {
-                    font = new Font(font.FontFamily, ((h - padding) / realFontHeight) * font.Size, font.Style);
-                }
-            }
-            realFontWidth = gr.MeasureString(str, font).Width;
-            realFontHeight = gr.MeasureString(str, font).Height;
-
-            switch (slide.horizAlign)
-            {
-                case Song.SongTextHorizontalAlign.left:
-                    textX = padding;
-                    strFormat.Alignment = StringAlignment.Near;
-                    break;
-                case Song.SongTextHorizontalAlign.center:
-                    textX = w / 2;
-                    strFormat.Alignment = StringAlignment.Center;
-                    break;
-                case Song.SongTextHorizontalAlign.right:
-                    textX = w - padding;
-                    strFormat.Alignment = StringAlignment.Far;
-                    break;
-            }
-            switch (slide.vertAlign)
-            {
-                case Song.SongTextVerticalAlign.top:
-                    strFormat.LineAlignment = StringAlignment.Near;
-                    textY = padding;
-                    break;
-                case Song.SongTextVerticalAlign.center:
-                    strFormat.LineAlignment = StringAlignment.Center;
-                    textY = h / 2;
-                    break;
-                case Song.SongTextVerticalAlign.bottom:
-                    strFormat.LineAlignment = StringAlignment.Far;
-                    textY = h - padding;
-                    break;
-            } 
-
-
-
-
-            gr.DrawString(str, font, new SolidBrush(setting.projectionMasterFontColor), new Point(textX, textY), strFormat);
-
-
-            pictureBoxPreview.Image = bmp;
-            gr.Dispose();
-        }**/
 
         private void updateSongText(object sender, EventArgs e)
         {
@@ -257,7 +173,7 @@ namespace Pbp.Forms
             Song.Part prt = new Song.Part();
             prt.caption = comboBoxSongParts.Text;
             prt.partSlides = new List<Song.Slide>();
-            Song.Slide sld = new Song.Slide();
+            Song.Slide sld = new Song.Slide(sng);
             sld.imageNumber = -1;
             prt.partSlides.Add(sld);
             sng.parts.Add(prt);
@@ -302,13 +218,13 @@ namespace Pbp.Forms
 
         private void EditorChild_Load(object sender, EventArgs e)
         {
-
+            ((EditorWindow)MdiParent).setStatus("Lied " + sng.path + " geöffnet");                    
         }
 
         private void buttonAddNewSlide_Click(object sender, EventArgs e)
         {
             int partId = 0;
-            Song.Slide sld = new Song.Slide();
+            Song.Slide sld = new Song.Slide(sng);
             sld.imageNumber = -1;
             if (treeViewContents.SelectedNode.Level == 1)
             {
@@ -317,7 +233,7 @@ namespace Pbp.Forms
                 populateTree();
                 treeViewContents.SelectedNode = treeViewContents.Nodes[0].Nodes[partId].LastNode;
             }
-            if (treeViewContents.SelectedNode.Level == 2)
+            else if (treeViewContents.SelectedNode.Level == 2)
             {
                 partId = treeViewContents.SelectedNode.Parent.Index;
                 sng.parts[partId].partSlides.Add(sld);
@@ -343,7 +259,7 @@ namespace Pbp.Forms
                     Song.Part prt = new Song.Part();
                     prt.caption = "Neuer Liedteil";
                     prt.partSlides = new List<Song.Slide>();
-                    Song.Slide sld = new Song.Slide();
+                    Song.Slide sld = new Song.Slide(sng);
                     sld.imageNumber = -1;
                     prt.partSlides.Add(sld);
                     sng.parts.Add(prt);
@@ -488,6 +404,99 @@ namespace Pbp.Forms
             sng.parts[partIdx].partSlides[slideIdx].vertAlign = (Song.SongTextVerticalAlign)comboBoxSlideVertOrientation.SelectedIndex;
             pictureBoxPreview.Image = projWindow.showSlide(sng.parts[partIdx].partSlides[slideIdx], sng.getImage(sng.parts[partIdx].partSlides[slideIdx].imageNumber), true);
         }
+
+        private void buttonProjectionMasterFont_Click(object sender, EventArgs e)
+        {
+            FontDialog dlg = new FontDialog();
+            dlg.Font = sng.font;
+            if (dlg.ShowDialog() == DialogResult.OK)
+            {
+                sng.font = dlg.Font;
+                labelFont.Text = sng.font.Name+ ", " + sng.font.Style.ToString() + ", "+ sng.font.Size.ToString();
+            }
+        }
+
+        private void buttonTranslationFont_Click(object sender, EventArgs e)
+        {
+            FontDialog dlg = new FontDialog();
+            dlg.Font = sng.fontTranslation;
+            if (dlg.ShowDialog() == DialogResult.OK)
+            {
+                sng.fontTranslation = dlg.Font;
+                labelFontTranslation.Text = sng.fontTranslation.Name + ", " + sng.fontTranslation.Style.ToString() + ", " + sng.fontTranslation.Size.ToString();
+            }
+        }
+
+        private void buttonChooseProjectionForeColor_Click(object sender, EventArgs e)
+        {
+            ColorDialog dlg = new ColorDialog();
+            dlg.Color = sng.fontColor;
+            if (dlg.ShowDialog() == DialogResult.OK)
+            {
+                sng.fontColor = dlg.Color;
+                pictureBoxFontColor.BackColor = sng.fontColor;
+            }
+        }
+
+        private void buttonTranslationColor_Click(object sender, EventArgs e)
+        {
+            ColorDialog dlg = new ColorDialog();
+            dlg.Color = sng.fontColorTranslation;
+            if (dlg.ShowDialog() == DialogResult.OK)
+            {
+                sng.fontColorTranslation = dlg.Color;
+                pictureBoxFontTranslationColor.BackColor = sng.fontColorTranslation;
+            }
+        }
+
+        private void trackBarLineSpacing_Scroll(object sender, EventArgs e)
+        {
+            sng.lineSpacing = trackBarLineSpacing.Value;
+            labelLineSpacing.Text = trackBarLineSpacing.Value.ToString();
+        }
+
+        private void comboBoxSongParts_Click(object sender, EventArgs e)
+        {
+            comboBoxSongParts.DroppedDown = true;
+        }
+
+        private void comboBoxSongParts_Enter(object sender, EventArgs e)
+        {
+            comboBoxSongParts.DroppedDown = true;
+        }
+
+        public void save()
+        {
+            SaveFileDialog saveFileDialog = new SaveFileDialog();
+            saveFileDialog.InitialDirectory = Path.GetDirectoryName(sng.path);
+
+            String fltr = String.Empty;
+            int i = 0;
+            foreach (String ext in Song.extensions)
+            {
+                fltr += Song.extensionNames[i] + " (" + ext + ")|" + ext + "|";
+                i++;
+            }
+            fltr += "Alle Dateien (*.*)|*.*";
+            saveFileDialog.Filter = fltr;
+            saveFileDialog.AddExtension = true;
+            saveFileDialog.CheckPathExists = true;
+            saveFileDialog.Title = "Lied speichern unter...";
+
+            if (saveFileDialog.ShowDialog(this) == DialogResult.OK)
+            {
+                sng.save(saveFileDialog.FileName);
+                ((EditorWindow)MdiParent).setStatus("Lied gespeichert als "+saveFileDialog.FileName+"");
+            }
+        }
+
+        public void saveAs()
+        {
+
+        }
+
+
+
 
 
 

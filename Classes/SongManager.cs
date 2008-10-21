@@ -13,7 +13,6 @@ namespace Pbp
         static private SongManager instance;
         private List<Song> validSongs;
         private Song _currentSong;
-        static private string[] extensions = { "*.ppl", "*.pbpl" };
 
         public Song currentSong
         {
@@ -50,7 +49,7 @@ namespace Pbp
             int i=0;
             if (Directory.Exists(searchDir))
             {
-                foreach (string ext in extensions)
+                foreach (string ext in Song.extensions)
                 {
                     string[] songFilePaths = Directory.GetFiles(searchDir, ext, SearchOption.AllDirectories);
                     foreach (string file in songFilePaths)

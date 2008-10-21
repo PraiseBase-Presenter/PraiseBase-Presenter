@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using System.Xml;
+using System.IO;
 using Pbp.Properties;
 
 namespace Pbp.Forms
@@ -44,8 +45,18 @@ namespace Pbp.Forms
         private void OpenFile(object sender, EventArgs e)
         {
             OpenFileDialog openFileDialog = new OpenFileDialog();
-            openFileDialog.InitialDirectory = setting.dataDirectory+"\\Songs";
-            openFileDialog.Filter = "PraiseBase Presenter Songs (*.ppl)|*.ppl|Alle Dateien (*.*)|*.*";
+            openFileDialog.InitialDirectory = setting.dataDirectory+Path.DirectorySeparatorChar + setting.songDir;
+
+            String fltr = String.Empty;
+            int i = 0;
+            foreach (String ext in Song.extensions)
+            {
+                fltr += Song.extensionNames[i] + " (" + ext + ")|" + ext + "|";
+                i++;
+            }
+            fltr += "Alle Dateien (*.*)|*.*";
+
+            openFileDialog.Filter = fltr;
             if (openFileDialog.ShowDialog(this) == DialogResult.OK)
             {
                 string FileName = openFileDialog.FileName;
@@ -57,13 +68,7 @@ namespace Pbp.Forms
 
         private void SaveAsToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            SaveFileDialog saveFileDialog = new SaveFileDialog();
-            saveFileDialog.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.Personal);
-            saveFileDialog.Filter = "Text Files (*.txt)|*.txt|All Files (*.*)|*.*";
-            if (saveFileDialog.ShowDialog(this) == DialogResult.OK)
-            {
-                string FileName = saveFileDialog.FileName;
-            }
+            ((EditorChild)ActiveMdiChild).saveAs();
         }
 
         private void ExitToolsStripMenuItem_Click(object sender, EventArgs e)
@@ -146,11 +151,6 @@ namespace Pbp.Forms
             }
         }
 
-        private void saveToolStripButton_Click(object sender, EventArgs e)
-        {
-
-        }
-
         private void EditorWindow_Load(object sender, EventArgs e)
         {
 
@@ -160,6 +160,19 @@ namespace Pbp.Forms
         {
             this.Hide();
             e.Cancel = true;
+        }
+
+        private void saveChild(object sender, EventArgs e)
+        {
+            if (ActiveMdiChild != null)
+            {
+                ((EditorChild)ActiveMdiChild).save();
+            }
+        }
+
+        public void setStatus(string text)
+        {
+            toolStripStatusLabel1.Text = text;
         }
 
     }

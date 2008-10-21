@@ -32,6 +32,7 @@ namespace Pbp
         /// Path of the song xml file
         /// </summary>
         private string _path;
+        public string path { get { return _path; } }
         private int _id;
         /// <summary>
         /// Song number used by the song manager
@@ -135,6 +136,11 @@ namespace Pbp
         /// Thumbnails of all images
         /// </summary>
         private ImageList imageThumbs;
+        /// <summary>
+        /// Possible file extensions
+        /// </summary>
+        static public string[] extensions = {  "*.pbs", "*.ppl" };
+        static public string[] extensionNames = { "PraiseBase-Presenter Song", "PowerPraise Lied (veraltet)" };
 
         //
         // Enums and types
@@ -148,7 +154,7 @@ namespace Pbp
             /// <summary>
             ///  The PBP default format
             /// </summary>
-            pbpl,
+            pbs,
             /// <summary>
             /// PowerPraise 3.0 format (deprecated)
             /// </summary>
@@ -245,17 +251,22 @@ namespace Pbp
             /// Vertical text alignment
             /// </summary>
             public SongTextVerticalAlign vertAlign;
+            /// <summary>
+            /// Pointer to the song object who owns this slide
+            /// </summary>
+            private Song ownerSong;
 
             /// <summary>
             /// The slide constructor
             /// </summary>
-            public Slide()
+            public Slide(Song ownerSong)
             {
                 lines = new List<string>();
                 translation = new List<string>();
                 hasTranslation = false;
                 horizAlign = SongTextHorizontalAlign.center;
                 vertAlign = SongTextVerticalAlign.center;
+                this.ownerSong = ownerSong;
             }
 
             /// <summary>
@@ -302,6 +313,28 @@ namespace Pbp
                 }
                 return txt;
             }
+
+            public Font font()
+            {
+                return ownerSong.font;
+            }
+
+            public Font fontTranslation()
+            {
+                return ownerSong.fontTranslation;
+            }
+            public Color fontColor()
+            {
+                return ownerSong.fontColor;
+            }
+            public Color fontColorTranslation()
+            {
+                return ownerSong.fontColorTranslation;
+            }
+            public int lineSpacint()
+            {
+                return ownerSong.lineSpacing;
+            }
         };
  
         //
@@ -337,9 +370,9 @@ namespace Pbp
                 //
 
                 // PraiseBase Presenter Song Format
-                if (xmlRoot.Name == "pbpl" && xmlRoot.GetAttribute("version") == "1.0")
+                if (xmlRoot.Name == "pbs" && xmlRoot.GetAttribute("version") == "1.0")
                 {
-                    _fileType = FileType.pbpl;
+                    _fileType = FileType.pbs;
                 }
                 // PowerPraise Version 3 (www.powerpraise.ch)
                 else if (xmlRoot.Name == "ppl" && xmlRoot.GetAttribute("version") == "3.0")
@@ -424,7 +457,7 @@ namespace Pbp
                             {
                                 if (slideElem.Name == "slide")
                                 {
-                                    Slide tmpSlide = new Slide();
+                                    Slide tmpSlide = new Slide(this);
                                     tmpSlide.lines = new List<string>();
                                     tmpSlide.horizAlign = defaultHorizAlign;
                                     tmpSlide.vertAlign = defaultVertAlign;
@@ -462,7 +495,11 @@ namespace Pbp
                         }
                     }
 
-
+                    font = setting.projectionMasterFont;
+                    fontColor = setting.projectionMasterFontColor;
+                    fontTranslation = setting.projectionMasterFontTranslation;
+                    fontColorTranslation = setting.projectionMasterTranslationColor;
+                    lineSpacing = setting.projectionMasterLineSpacing;
                 }
                 else
                 {
@@ -635,8 +672,8 @@ namespace Pbp
                 
                 xmlRoot["formatting"]["linespacing"].AppendChild(xmlDoc.CreateElement("main"));
                 xmlRoot["formatting"]["linespacing"].AppendChild(xmlDoc.CreateElement("translation"));
-                xmlRoot["formatting"]["linespacing"]["main"].InnerText = "30";
-                xmlRoot["formatting"]["linespacing"]["translation"].InnerText = "20";
+                xmlRoot["formatting"]["linespacing"]["main"].InnerText = lineSpacing.ToString();
+                xmlRoot["formatting"]["linespacing"]["translation"].InnerText = lineSpacing.ToString();
 
                 xmlRoot["formatting"].AppendChild(xmlDoc.CreateElement("textorientation"));
                 xmlRoot["formatting"]["textorientation"].AppendChild(xmlDoc.CreateElement("horizontal"));

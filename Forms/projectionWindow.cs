@@ -132,10 +132,32 @@ namespace Pbp.Forms
             if (slide.lines.Count > 0)
             {
                 StringFormat strFormat = new StringFormat();
-                Font font = setting.projectionMasterFont;
-                Font fontTr = setting.projectionMasterFontTranslation;
+
+                Font font;
+                Font fontTr;
+                int lineSpacing;
+                Brush fontBrush;
+                Brush fontTranslationBrush;
+
+                if (setting.projectionUseMaster && !simluate)
+                {
+                    font = setting.projectionMasterFont;
+                    fontTr = setting.projectionMasterFontTranslation;
+                    lineSpacing = setting.projectionMasterLineSpacing;
+                    fontBrush = new SolidBrush(setting.projectionMasterFontColor);
+                    fontTranslationBrush = new SolidBrush(setting.projectionMasterTranslationColor);
+                }
+                else
+                {
+                    font = slide.font();
+                    fontTr = slide.fontTranslation();
+                    lineSpacing = slide.lineSpacint();
+                    fontBrush = new SolidBrush(slide.fontColor());
+                    fontTranslationBrush = new SolidBrush(slide.fontColorTranslation());
+                }
+
+
                 int padding = setting.projectionPadding;
-                int lineSpacing = setting.projectionMasterLineSpacing;
                 int shadowThickness = setting.projectionShadowSize;
                 int outLineThickness = setting.projectionOutlineSize;
                 String str = String.Empty;
@@ -253,7 +275,7 @@ namespace Pbp.Forms
 
                 foreach (string s in slide.lines)
                 {
-                    gr.DrawString(s, font, new SolidBrush(setting.projectionMasterFontColor), new Point(textX, textY), strFormat);
+                    gr.DrawString(s, font,fontBrush, new Point(textX, textY), strFormat);
                     textY += lineHeight + lineSpacing;
                 }
 

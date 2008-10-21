@@ -36,6 +36,8 @@
             this.labelSongTitle = new System.Windows.Forms.Label();
             this.labelLanguage = new System.Windows.Forms.Label();
             this.groupBoxSongSettings = new System.Windows.Forms.GroupBox();
+            this.pictureBoxFontTranslationColor = new System.Windows.Forms.PictureBox();
+            this.pictureBoxFontColor = new System.Windows.Forms.PictureBox();
             this.label7 = new System.Windows.Forms.Label();
             this.buttonProjectionMasterFont = new System.Windows.Forms.Button();
             this.labelLineSpacing = new System.Windows.Forms.Label();
@@ -44,8 +46,8 @@
             this.buttonTranslationFont = new System.Windows.Forms.Button();
             this.label10 = new System.Windows.Forms.Label();
             this.buttonTranslationColor = new System.Windows.Forms.Button();
-            this.label9 = new System.Windows.Forms.Label();
-            this.label8 = new System.Windows.Forms.Label();
+            this.labelFontTranslation = new System.Windows.Forms.Label();
+            this.labelFont = new System.Windows.Forms.Label();
             this.label11 = new System.Windows.Forms.Label();
             this.checkBoxQASegmentation = new System.Windows.Forms.CheckBox();
             this.label6 = new System.Windows.Forms.Label();
@@ -81,6 +83,8 @@
             this.buttonMoveDown = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxPreview)).BeginInit();
             this.groupBoxSongSettings.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxFontTranslationColor)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxFontColor)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackBarLineSpacing)).BeginInit();
             this.groupBoxNewSongPart.SuspendLayout();
             this.groupBoxSongPart.SuspendLayout();
@@ -166,6 +170,8 @@
             this.groupBoxSongSettings.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
                         | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupBoxSongSettings.Controls.Add(this.pictureBoxFontTranslationColor);
+            this.groupBoxSongSettings.Controls.Add(this.pictureBoxFontColor);
             this.groupBoxSongSettings.Controls.Add(this.label7);
             this.groupBoxSongSettings.Controls.Add(this.buttonProjectionMasterFont);
             this.groupBoxSongSettings.Controls.Add(this.labelLineSpacing);
@@ -174,8 +180,8 @@
             this.groupBoxSongSettings.Controls.Add(this.buttonTranslationFont);
             this.groupBoxSongSettings.Controls.Add(this.label10);
             this.groupBoxSongSettings.Controls.Add(this.buttonTranslationColor);
-            this.groupBoxSongSettings.Controls.Add(this.label9);
-            this.groupBoxSongSettings.Controls.Add(this.label8);
+            this.groupBoxSongSettings.Controls.Add(this.labelFontTranslation);
+            this.groupBoxSongSettings.Controls.Add(this.labelFont);
             this.groupBoxSongSettings.Controls.Add(this.label11);
             this.groupBoxSongSettings.Controls.Add(this.checkBoxQASegmentation);
             this.groupBoxSongSettings.Controls.Add(this.label6);
@@ -198,6 +204,28 @@
             this.groupBoxSongSettings.TabStop = false;
             this.groupBoxSongSettings.Text = "Liedeinstellungen";
             // 
+            // pictureBoxFontTranslationColor
+            // 
+            this.pictureBoxFontTranslationColor.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.pictureBoxFontTranslationColor.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pictureBoxFontTranslationColor.Location = new System.Drawing.Point(588, 253);
+            this.pictureBoxFontTranslationColor.Name = "pictureBoxFontTranslationColor";
+            this.pictureBoxFontTranslationColor.Size = new System.Drawing.Size(31, 29);
+            this.pictureBoxFontTranslationColor.TabIndex = 67;
+            this.pictureBoxFontTranslationColor.TabStop = false;
+            this.pictureBoxFontTranslationColor.Click += new System.EventHandler(this.buttonTranslationColor_Click);
+            // 
+            // pictureBoxFontColor
+            // 
+            this.pictureBoxFontColor.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.pictureBoxFontColor.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pictureBoxFontColor.Location = new System.Drawing.Point(588, 210);
+            this.pictureBoxFontColor.Name = "pictureBoxFontColor";
+            this.pictureBoxFontColor.Size = new System.Drawing.Size(31, 29);
+            this.pictureBoxFontColor.TabIndex = 66;
+            this.pictureBoxFontColor.TabStop = false;
+            this.pictureBoxFontColor.Click += new System.EventHandler(this.buttonChooseProjectionForeColor_Click);
+            // 
             // label7
             // 
             this.label7.AutoSize = true;
@@ -212,12 +240,13 @@
             // 
             this.buttonProjectionMasterFont.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.buttonProjectionMasterFont.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.buttonProjectionMasterFont.Location = new System.Drawing.Point(355, 211);
+            this.buttonProjectionMasterFont.Location = new System.Drawing.Point(314, 211);
             this.buttonProjectionMasterFont.Name = "buttonProjectionMasterFont";
             this.buttonProjectionMasterFont.Size = new System.Drawing.Size(133, 28);
             this.buttonProjectionMasterFont.TabIndex = 56;
             this.buttonProjectionMasterFont.Text = "Schrift wählen...";
             this.buttonProjectionMasterFont.UseVisualStyleBackColor = true;
+            this.buttonProjectionMasterFont.Click += new System.EventHandler(this.buttonProjectionMasterFont_Click);
             // 
             // labelLineSpacing
             // 
@@ -232,12 +261,13 @@
             // 
             this.buttonChooseProjectionForeColor.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.buttonChooseProjectionForeColor.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.buttonChooseProjectionForeColor.Location = new System.Drawing.Point(500, 211);
+            this.buttonChooseProjectionForeColor.Location = new System.Drawing.Point(453, 211);
             this.buttonChooseProjectionForeColor.Name = "buttonChooseProjectionForeColor";
             this.buttonChooseProjectionForeColor.Size = new System.Drawing.Size(119, 28);
             this.buttonChooseProjectionForeColor.TabIndex = 55;
             this.buttonChooseProjectionForeColor.Text = "Schriftfarbe...";
             this.buttonChooseProjectionForeColor.UseVisualStyleBackColor = true;
+            this.buttonChooseProjectionForeColor.Click += new System.EventHandler(this.buttonChooseProjectionForeColor_Click);
             // 
             // trackBarLineSpacing
             // 
@@ -247,17 +277,19 @@
             this.trackBarLineSpacing.Size = new System.Drawing.Size(141, 42);
             this.trackBarLineSpacing.TabIndex = 64;
             this.trackBarLineSpacing.TickFrequency = 5;
+            this.trackBarLineSpacing.Scroll += new System.EventHandler(this.trackBarLineSpacing_Scroll);
             // 
             // buttonTranslationFont
             // 
             this.buttonTranslationFont.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.buttonTranslationFont.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.buttonTranslationFont.Location = new System.Drawing.Point(355, 252);
+            this.buttonTranslationFont.Location = new System.Drawing.Point(314, 254);
             this.buttonTranslationFont.Name = "buttonTranslationFont";
             this.buttonTranslationFont.Size = new System.Drawing.Size(133, 28);
             this.buttonTranslationFont.TabIndex = 57;
             this.buttonTranslationFont.Text = "Schrift wählen...";
             this.buttonTranslationFont.UseVisualStyleBackColor = true;
+            this.buttonTranslationFont.Click += new System.EventHandler(this.buttonTranslationFont_Click);
             // 
             // label10
             // 
@@ -273,32 +305,33 @@
             // 
             this.buttonTranslationColor.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.buttonTranslationColor.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.buttonTranslationColor.Location = new System.Drawing.Point(500, 252);
+            this.buttonTranslationColor.Location = new System.Drawing.Point(453, 254);
             this.buttonTranslationColor.Name = "buttonTranslationColor";
             this.buttonTranslationColor.Size = new System.Drawing.Size(119, 28);
             this.buttonTranslationColor.TabIndex = 58;
             this.buttonTranslationColor.Text = "Schriftfarbe...";
             this.buttonTranslationColor.UseVisualStyleBackColor = true;
+            this.buttonTranslationColor.Click += new System.EventHandler(this.buttonTranslationColor_Click);
             // 
-            // label9
+            // labelFontTranslation
             // 
-            this.label9.AutoSize = true;
-            this.label9.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label9.Location = new System.Drawing.Point(171, 256);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(51, 20);
-            this.label9.TabIndex = 62;
-            this.label9.Text = "label9";
+            this.labelFontTranslation.AutoSize = true;
+            this.labelFontTranslation.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelFontTranslation.Location = new System.Drawing.Point(171, 256);
+            this.labelFontTranslation.Name = "labelFontTranslation";
+            this.labelFontTranslation.Size = new System.Drawing.Size(14, 20);
+            this.labelFontTranslation.TabIndex = 62;
+            this.labelFontTranslation.Text = "-";
             // 
-            // label8
+            // labelFont
             // 
-            this.label8.AutoSize = true;
-            this.label8.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label8.Location = new System.Drawing.Point(171, 214);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(51, 20);
-            this.label8.TabIndex = 60;
-            this.label8.Text = "label8";
+            this.labelFont.AutoSize = true;
+            this.labelFont.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelFont.Location = new System.Drawing.Point(149, 215);
+            this.labelFont.Name = "labelFont";
+            this.labelFont.Size = new System.Drawing.Size(14, 20);
+            this.labelFont.TabIndex = 60;
+            this.labelFont.Text = "-";
             // 
             // label11
             // 
@@ -463,6 +496,7 @@
             this.comboBoxSongParts.Name = "comboBoxSongParts";
             this.comboBoxSongParts.Size = new System.Drawing.Size(329, 28);
             this.comboBoxSongParts.TabIndex = 11;
+            this.comboBoxSongParts.Enter += new System.EventHandler(this.comboBoxSongParts_Enter);
             // 
             // buttonNewSongPart
             // 
@@ -726,6 +760,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxPreview)).EndInit();
             this.groupBoxSongSettings.ResumeLayout(false);
             this.groupBoxSongSettings.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxFontTranslationColor)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxFontColor)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackBarLineSpacing)).EndInit();
             this.groupBoxNewSongPart.ResumeLayout(false);
             this.groupBoxNewSongPart.PerformLayout();
@@ -790,8 +826,10 @@
         private System.Windows.Forms.Button buttonTranslationFont;
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.Button buttonTranslationColor;
-        private System.Windows.Forms.Label label9;
-        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.Label labelFontTranslation;
+        private System.Windows.Forms.Label labelFont;
         private System.Windows.Forms.Label label11;
+        private System.Windows.Forms.PictureBox pictureBoxFontTranslationColor;
+        private System.Windows.Forms.PictureBox pictureBoxFontColor;
     }
 }
