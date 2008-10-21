@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using Pbp.Properties;
 using System.IO;
+using System.Windows.Forms;
 
 namespace Pbp
 {
@@ -37,7 +38,7 @@ namespace Pbp
 
             if (setting.dataDirectory == "")
             {
-                setting.dataDirectory = Environment.GetFolderPath(Environment.SpecialFolder.Personal).ToString() + Path.DirectorySeparatorChar + setting.dataDirDefaultName;
+                setting.dataDirectory =  Environment.GetFolderPath(Environment.SpecialFolder.Personal).ToString() + Path.DirectorySeparatorChar + setting.dataDirDefaultName;
                 setting.Save();
                 Console.WriteLine("Data dir set to " + setting.dataDirectory);
             }

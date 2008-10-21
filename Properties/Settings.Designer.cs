@@ -194,7 +194,7 @@ namespace Pbp.Properties {
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("Praisebase Presenter")]
+        [global::System.Configuration.DefaultSettingValueAttribute("PraiseBase Presenter")]
         public string dataDirDefaultName {
             get {
                 return ((string)(this["dataDirDefaultName"]));
@@ -251,7 +251,7 @@ namespace Pbp.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("White")]
+        [global::System.Configuration.DefaultSettingValueAttribute("Black")]
         public global::System.Drawing.Color projectionShadowColor {
             get {
                 return ((global::System.Drawing.Color)(this["projectionShadowColor"]));
@@ -275,7 +275,7 @@ namespace Pbp.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("6")]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
         public int projectionShadowSize {
             get {
                 return ((int)(this["projectionShadowSize"]));

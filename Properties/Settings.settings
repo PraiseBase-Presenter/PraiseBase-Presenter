@@ -70,7 +70,7 @@
       <Value Profile="(Default)">backgrounds</Value>
     </Setting>
     <Setting Name="dataDirDefaultName" Type="System.String" Scope="Application">
-      <Value Profile="(Default)">Praisebase Presenter</Value>
+      <Value Profile="(Default)">PraiseBase Presenter</Value>
     </Setting>
     <Setting Name="projectionMasterFontTranslation" Type="System.Drawing.Font" Scope="User">
       <Value Profile="(Default)">Calibri, 40pt, style=Bold</Value>
@@ -85,13 +85,13 @@
       <Value Profile="(Default)">0</Value>
     </Setting>
     <Setting Name="projectionShadowColor" Type="System.Drawing.Color" Scope="User">
-      <Value Profile="(Default)">White</Value>
+      <Value Profile="(Default)">Black</Value>
     </Setting>
     <Setting Name="projectionOutlineSize" Type="System.Int32" Scope="User">
       <Value Profile="(Default)">1</Value>
     </Setting>
     <Setting Name="projectionShadowSize" Type="System.Int32" Scope="User">
-      <Value Profile="(Default)">6</Value>
+      <Value Profile="(Default)">0</Value>
     </Setting>
     <Setting Name="projectionUseMaster" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>

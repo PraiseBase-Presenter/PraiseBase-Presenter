@@ -543,6 +543,8 @@ namespace Pbp
             {
                 loadImages();
             }
+            if (nr >= imageObjects.Count)
+                return null;
             return imageObjects[nr];
         }
 
