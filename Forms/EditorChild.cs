@@ -44,6 +44,7 @@ namespace Pbp.Forms
 				valid = false;
 				this.Close();
             }
+
         }
 
         public void populateTree()
@@ -92,6 +93,7 @@ namespace Pbp.Forms
                
 				Song.Slide sld = sng.parts[partId].slides[slideId];
                 textBoxSongText.Text = sld.lineBreakText();
+				textBoxSongTranslation.Text = sld.lineBreakTranslation();
 
                 comboBoxSlideHorizOrientation.SelectedIndex = (int)sld.horizAlign;
                 comboBoxSlideVertOrientation.SelectedIndex = (int)sld.vertAlign;
@@ -253,7 +255,7 @@ namespace Pbp.Forms
 
         private void EditorChild_Load(object sender, EventArgs e)
         {
-            ((EditorWindow)MdiParent).setStatus("Lied " + sng.path + " geöffnet");                    
+            ((EditorWindow)MdiParent).setStatus("Lied " + sng.path + " geöffnet");
         }
 
         private void buttonAddNewSlide_Click(object sender, EventArgs e)
@@ -405,6 +407,7 @@ namespace Pbp.Forms
                     treeViewContents.SelectedNode = treeViewContents.Nodes[0].Nodes[0].Nodes[0];
                 else if (treeViewContents.SelectedNode.Level == 1)
                     treeViewContents.SelectedNode = treeViewContents.SelectedNode.Nodes[0];
+				alignTextFields();
             }
             else if (tabControlEditor.SelectedIndex == 1)
             {
@@ -442,10 +445,6 @@ namespace Pbp.Forms
             }
         }
 
-        private void textBoxSongText_TextChanged(object sender, EventArgs e)
-        {
-
-        }
 
         private void comboBoxSlideHorizOrientation_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -528,15 +527,7 @@ namespace Pbp.Forms
             SaveFileDialog saveFileDialog = new SaveFileDialog();
             saveFileDialog.InitialDirectory = Path.GetDirectoryName(sng.path);
 
-            String fltr = String.Empty;
-            int i = 0;
-            foreach (String ext in Song.extensions)
-            {
-                fltr += Song.extensionNames[i] + " (" + ext + ")|" + ext + "|";
-                i++;
-            }
-            fltr += "Alle Dateien (*.*)|*.*";
-            saveFileDialog.Filter = fltr;
+            saveFileDialog.Filter = Song.fileType.getFilter();
             saveFileDialog.AddExtension = true;
             saveFileDialog.CheckPathExists = true;
             saveFileDialog.Title = "Lied speichern unter...";
@@ -593,10 +584,53 @@ namespace Pbp.Forms
 
 		private void buttonSlideDuplicate_Click(object sender, EventArgs e)
 		{
-			int partId = treeViewContents.SelectedNode.Parent.Index;
-			int slideId = treeViewContents.SelectedNode.Index;
-			sng.parts[partId].duplicateSlide(slideId);
-			populateTree();
+			if (treeViewContents.SelectedNode != null && treeViewContents.SelectedNode.Level == 2)
+			{
+				int partId = treeViewContents.SelectedNode.Parent.Index;
+				int slideId = treeViewContents.SelectedNode.Index;
+				sng.parts[partId].duplicateSlide(slideId);
+				populateTree();
+				treeViewContents.SelectedNode = treeViewContents.Nodes[0].Nodes[partId].Nodes[slideId];
+			}
+		}
+
+		private void buttonSlideSeparate_Click(object sender, EventArgs e)
+		{
+			if (treeViewContents.SelectedNode != null && treeViewContents.SelectedNode.Level == 2)
+			{
+				int partId = treeViewContents.SelectedNode.Parent.Index;
+				int slideId = treeViewContents.SelectedNode.Index;
+				sng.parts[partId].splitSlide(slideId);
+
+				populateTree();
+				treeViewContents.SelectedNode = treeViewContents.Nodes[0].Nodes[partId].Nodes[slideId];
+			}
+		}
+
+		private void EditorChild_Resize(object sender, EventArgs e)
+		{
+			alignTextFields();
+		}
+
+		private void textBoxSongTranslation_TextChanged(object sender, EventArgs e)
+		{
+			if (treeViewContents.SelectedNode.Level == 2)
+			{
+				int partIdx = treeViewContents.SelectedNode.Parent.Index;
+				int slideIdx = treeViewContents.SelectedNode.Index;
+
+				sng.parts[partIdx].slides[slideIdx].setSlideTextTranslation(textBoxSongTranslation.Text);
+
+				pictureBoxPreview.Image = projWindow.showSlide(sng.parts[partIdx].slides[slideIdx], sng.getImage(sng.parts[partIdx].slides[slideIdx].imageNumber), true);
+
+			}
+		}
+
+		private void alignTextFields()
+		{
+			textBoxSongText.Width = (tabPage3.Width - 20) / 2;
+			textBoxSongTranslation.Left = textBoxSongText.Right + 5;
+			textBoxSongTranslation.Width = tabPage3.Width - 10 - textBoxSongTranslation.Left;
 		}
 
     }

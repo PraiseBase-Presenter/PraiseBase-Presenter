@@ -49,7 +49,7 @@ namespace Pbp
             int i=0;
             if (Directory.Exists(searchDir))
             {
-                foreach (string ext in Song.extensions)
+                foreach (string ext in Song.fileType.getAllExtensions())
                 {
                     string[] songFilePaths = Directory.GetFiles(searchDir, ext, SearchOption.AllDirectories);
                     foreach (string file in songFilePaths)
@@ -94,11 +94,18 @@ namespace Pbp
         /// <returns>Returns a list of matches songs</returns>
         public List<Song> getSearchResults(string needle, int mode)
         {
+			needle = needle.Trim().ToLower();
+			needle = needle.Replace(",", "");
+			needle = needle.Replace(".", "");
+			needle = needle.Replace(";", "");
+			needle = needle.Replace(Environment.NewLine, "");
+			needle = needle.Replace("  ", " ");
+
             List<Song> tmpList = new List<Song>();
             for (int i=0;i<validSongs.Count;i++)
             {
-                if (validSongs[i].title.ToLower().Contains(needle.ToLower()) ||
-                    (mode==1 && validSongs[i].text.ToLower().Contains(needle.ToLower())))
+                if (validSongs[i].title.ToLower().Contains(needle) ||
+                    (mode==1 && validSongs[i].text.Contains(needle)))
                 {
                     tmpList.Add(validSongs[i]);
                 }

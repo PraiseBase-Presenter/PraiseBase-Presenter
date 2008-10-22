@@ -6,6 +6,7 @@ using System.Xml;
 using System.IO;
 using System.Windows.Forms;
 using System.Drawing;
+using System.Runtime.Serialization.Formatters.Binary;
 
 using Pbp.Properties; 
 
@@ -60,7 +61,16 @@ namespace Pbp
         /// <summary>
         /// The whole song text used a quick search by the song manager
         /// </summary>
-        public string text { get { return _text; } set { _text = value; } }
+        public string text { get { return _text; } set 
+		{ 
+			_text = value;
+			_text = _text.Trim().ToLower();
+			_text = _text.Replace(",", "");
+			_text = _text.Replace(".", "");
+			_text = _text.Replace(";", "");
+			_text = _text.Replace(Environment.NewLine, "");
+			_text = _text.Replace("  ", " ");
+		} }
         /// <summary>
         /// Text font
         /// </summary>
@@ -127,18 +137,9 @@ namespace Pbp
         /// </summary>
         private List<string> imagePaths;
         /// <summary>
-        /// All images of this song
-        /// </summary>
-        private List<Image> imageObjects;
-        /// <summary>
         /// Thumbnails of all images
         /// </summary>
         private ImageList imageThumbs;
-        /// <summary>
-        /// Possible file extensions
-        /// </summary>
-        static public string[] extensions = {  "*.pbs", "*.ppl" };
-        static public string[] extensionNames = { "PraiseBase-Presenter Song", "PowerPraise Lied (veraltet)" };
 
 		#endregion
 
@@ -243,20 +244,32 @@ namespace Pbp
 
 			public void duplicateSlide(int slideId)
 			{
-				Slide sld = new Slide(ownerSong);
-				sld.lines = slides[slideId].lines;
-				sld.imageNumber = slides[slideId].imageNumber;
-				sld.hasTranslation = slides[slideId].hasTranslation;
-				sld.horizAlign = slides[slideId].horizAlign;
-				sld.vertAlign = slides[slideId].vertAlign;
-				slides.Insert(slideId,sld);
+				slides.Insert(slideId, (Slide)slides[slideId].Clone());
+			}
+
+			public void splitSlide(int slideId)
+			{
+				Slide sld = (Slide)slides[slideId].Clone();
+
+				int totl = sld.lines.Count;
+				int rem = totl/2;
+				slides[slideId].lines.RemoveRange(0, rem);
+				sld.lines.RemoveRange(rem, totl-rem);
+
+				totl = sld.translation.Count;
+				rem = totl / 2;
+				slides[slideId].translation.RemoveRange(0, rem);
+				sld.translation.RemoveRange(rem, totl - rem);			
+
+
+				slides.Insert(slideId, sld);
 			}
         };
 
         /// <summary>
         /// A single slide with songtext and/or a background image
         /// </summary>
-        public class Slide
+        public class Slide : ICloneable
         {
             /// <summary>
             /// All text lines of this slide
@@ -310,10 +323,20 @@ namespace Pbp
 			public void setSlideText(string text)
 			{
 				this.lines = new List<string>();
-				string[] lines = text.Split(new string[] { Environment.NewLine }, StringSplitOptions.None);
-				foreach (string sl in lines)
+				string[] ln = text.Split(new string[] { Environment.NewLine }, StringSplitOptions.None);
+				foreach (string sl in ln)
 				{
 					this.lines.Add(sl.Trim());
+				}
+			}
+
+			public void setSlideTextTranslation(string text)
+			{
+				this.translation = new List<string>();
+				string[] tr = text.Split(new string[] { Environment.NewLine }, StringSplitOptions.None);
+				foreach (string sl in tr)
+				{
+					this.translation.Add(sl.Trim());
 				}
 			}
 
@@ -362,6 +385,20 @@ namespace Pbp
                 return txt;
             }
 
+			public object Clone()
+			{
+				Slide res = new Slide(this.ownerSong);
+				res.hasTranslation = hasTranslation;
+				res.horizAlign = horizAlign;
+				res.imageNumber = imageNumber;
+				foreach (string obj in lines)
+					res.lines.Add(obj);
+				foreach (string obj in translation)
+					res.translation.Add(obj);
+				res.vertAlign = vertAlign;
+				return res;
+			}
+
         };
 
 		public abstract class fileType
@@ -387,9 +424,16 @@ namespace Pbp
 				fltr += "Alle Dateien (*.*)|*.*";
 				return fltr;
 			}
+
+			public static string[] getAllExtensions()
+			{
+				return new string[] { 
+					"*."+fileTypePBPS.extension, 
+					"*."+fileTypePPL.extension };
+			}
 		}
 
-		public class fileTypePBPS : fileType
+		protected class fileTypePBPS : fileType
 		{
 			static public string name = "PraiseBase-Presenter Song";
 			static public string extension = "pbps";
@@ -397,7 +441,7 @@ namespace Pbp
 			static public bool isDefault = true;
 		}
 
-		public class fileTypePPL : fileType
+		protected class fileTypePPL : fileType
 		{
 			static public string name = "PowerPraise Lied (veraltet)";
 			static public string extension = "ppl";
@@ -553,7 +597,7 @@ namespace Pbp
 						//
 						// Now the song text ... 
 						//
-						_text = xmlRoot["songtext"].InnerText;
+						text = xmlRoot["songtext"].InnerText;
 						foreach (XmlElement elem in xmlRoot["songtext"])
 						{
 							if (elem.Name == "part")
@@ -597,7 +641,7 @@ namespace Pbp
 						{
 							if (elem.Name == "file")
 							{
-								imagePaths.Add(setting.dataDirectory + Path.DirectorySeparatorChar + setting.imageDir + Path.DirectorySeparatorChar + elem.InnerText);
+								imagePaths.Add(elem.InnerText);
 							}
 						}
 
@@ -630,39 +674,19 @@ namespace Pbp
             }
         }
 
-        private void loadImages()
-        {
-            imageObjects = new List<Image>();
-
-            foreach (String path in imagePaths)
-            {
-                if (File.Exists(path))
-                {
-                    Image img = Image.FromFile(path);
-                    imageObjects.Add(img);
-                }
-                else
-                {
-                    Console.WriteLine("Image " + path + " does not exist!");
-                    Image img = new Bitmap(800, 600);
-                    Graphics graph = Graphics.FromImage(img);
-                    graph.FillRectangle(new SolidBrush(Color.Black), 0, 0, img.Width, img.Height);
-                    imageObjects.Add(img);
-                }
-            }
-        }
-
         private void loadImageThumbs()
         {
             imageThumbs = new ImageList();
             imageThumbs.ImageSize = new Size(64, 48);
             imageThumbs.ColorDepth = ColorDepth.Depth32Bit;
-            foreach (String path in imagePaths)
+			Settings setting = new Settings();
+			foreach (String path in imagePaths)
             {
-                if (File.Exists(path))
+				string imPath = setting.dataDirectory + Path.DirectorySeparatorChar + setting.imageDir + Path.DirectorySeparatorChar + path;
+
+				if (File.Exists(imPath))
                 {
-                    Image img = Image.FromFile(path);
-                    imageThumbs.Images.Add(img);
+                    imageThumbs.Images.Add(Image.FromFile(imPath));
                 }
                 else
                 {
@@ -675,36 +699,51 @@ namespace Pbp
             }
         }
 
-        public List<Image> getImages()
-        {
-            if (imageObjects == null)
-            {
-                loadImages();
-            }
-            return imageObjects;
-        }
-
         public Image getImage(int nr)
         {
-            if (nr < 0)
-                return null;
-            if (imageObjects == null)
-            {
-                loadImages();
-            }
-            if (nr >= imageObjects.Count)
-                return null;
-            return imageObjects[nr];
+			try
+			{
+				if (nr < 0)
+				{
+					throw new Exception("Ungültige Bildnummer!");
+				}
+
+				if (imagePaths[nr] == null)
+				{
+					throw new Exception("Das Bild mit der Nummer " + nr + " existiert nicht!");
+				}
+
+				Settings setting = new Settings();
+				string path = setting.dataDirectory + Path.DirectorySeparatorChar + setting.imageDir + Path.DirectorySeparatorChar + imagePaths[nr];
+
+				if (File.Exists(path))
+				{
+					return Image.FromFile(path);
+				}
+				else
+				{
+					throw new Exception("Das Bild " + path + " existiert nicht!");
+				}
+			}
+			catch (Exception e)
+			{
+				//MessageBox.Show(e.Message, "Lied", MessageBoxButtons.OK, MessageBoxIcon.Error);
+				Console.WriteLine("Fehler im Lied "+title+": " + e.Message);
+				Image img = new Bitmap(800, 600);
+				Graphics graph = Graphics.FromImage(img);
+				graph.FillRectangle(new SolidBrush(Color.Black), 0, 0, img.Width, img.Height);
+				return img;
+			}
         }
 
         public ImageList getThumbs()
-       {
+		{
             if (imageThumbs == null)
             {
                 loadImageThumbs();
             }
             return imageThumbs;
-       }
+		}
 
         /// <summary>
         /// Saves the song to an xml file

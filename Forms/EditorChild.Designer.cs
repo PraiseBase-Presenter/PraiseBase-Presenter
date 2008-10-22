@@ -75,6 +75,7 @@
 			this.tabPage1 = new System.Windows.Forms.TabPage();
 			this.tabPage2 = new System.Windows.Forms.TabPage();
 			this.tabPage3 = new System.Windows.Forms.TabPage();
+			this.textBoxSongTranslation = new System.Windows.Forms.TextBox();
 			this.buttonDelSlide = new System.Windows.Forms.Button();
 			this.buttonSlideSeparate = new System.Windows.Forms.Button();
 			this.buttonSlideDuplicate = new System.Windows.Forms.Button();
@@ -113,16 +114,14 @@
 			// 
 			// textBoxSongText
 			// 
-			this.textBoxSongText.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)
-						| System.Windows.Forms.AnchorStyles.Right)));
+			this.textBoxSongText.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
 			this.textBoxSongText.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.textBoxSongText.Location = new System.Drawing.Point(5, 515);
+			this.textBoxSongText.Location = new System.Drawing.Point(5, 466);
 			this.textBoxSongText.Multiline = true;
 			this.textBoxSongText.Name = "textBoxSongText";
 			this.textBoxSongText.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-			this.textBoxSongText.Size = new System.Drawing.Size(634, 154);
+			this.textBoxSongText.Size = new System.Drawing.Size(355, 203);
 			this.textBoxSongText.TabIndex = 1;
-			this.textBoxSongText.TextChanged += new System.EventHandler(this.textBoxSongText_TextChanged);
 			this.textBoxSongText.KeyUp += new System.Windows.Forms.KeyEventHandler(this.updateSongText);
 			// 
 			// pictureBoxPreview
@@ -131,9 +130,9 @@
 						| System.Windows.Forms.AnchorStyles.Left)
 						| System.Windows.Forms.AnchorStyles.Right)));
 			this.pictureBoxPreview.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-			this.pictureBoxPreview.Location = new System.Drawing.Point(2, 38);
+			this.pictureBoxPreview.Location = new System.Drawing.Point(2, 6);
 			this.pictureBoxPreview.Name = "pictureBoxPreview";
-			this.pictureBoxPreview.Size = new System.Drawing.Size(640, 442);
+			this.pictureBoxPreview.Size = new System.Drawing.Size(572, 454);
 			this.pictureBoxPreview.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
 			this.pictureBoxPreview.TabIndex = 2;
 			this.pictureBoxPreview.TabStop = false;
@@ -632,7 +631,7 @@
 			this.tabControlEditor.Location = new System.Drawing.Point(263, 4);
 			this.tabControlEditor.Name = "tabControlEditor";
 			this.tabControlEditor.SelectedIndex = 0;
-			this.tabControlEditor.Size = new System.Drawing.Size(653, 705);
+			this.tabControlEditor.Size = new System.Drawing.Size(727, 705);
 			this.tabControlEditor.TabIndex = 15;
 			this.tabControlEditor.SelectedIndexChanged += new System.EventHandler(this.tabControlEditor_SelectedIndexChanged);
 			// 
@@ -643,7 +642,7 @@
 			this.tabPage1.Location = new System.Drawing.Point(4, 25);
 			this.tabPage1.Name = "tabPage1";
 			this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-			this.tabPage1.Size = new System.Drawing.Size(645, 676);
+			this.tabPage1.Size = new System.Drawing.Size(719, 676);
 			this.tabPage1.TabIndex = 0;
 			this.tabPage1.Text = "Lied";
 			this.tabPage1.UseVisualStyleBackColor = true;
@@ -655,13 +654,14 @@
 			this.tabPage2.Location = new System.Drawing.Point(4, 25);
 			this.tabPage2.Name = "tabPage2";
 			this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-			this.tabPage2.Size = new System.Drawing.Size(645, 676);
+			this.tabPage2.Size = new System.Drawing.Size(719, 676);
 			this.tabPage2.TabIndex = 1;
 			this.tabPage2.Text = "Liedteil";
 			this.tabPage2.UseVisualStyleBackColor = true;
 			// 
 			// tabPage3
 			// 
+			this.tabPage3.Controls.Add(this.textBoxSongTranslation);
 			this.tabPage3.Controls.Add(this.buttonDelSlide);
 			this.tabPage3.Controls.Add(this.buttonSlideSeparate);
 			this.tabPage3.Controls.Add(this.buttonSlideDuplicate);
@@ -675,16 +675,29 @@
 			this.tabPage3.Location = new System.Drawing.Point(4, 25);
 			this.tabPage3.Name = "tabPage3";
 			this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
-			this.tabPage3.Size = new System.Drawing.Size(645, 676);
+			this.tabPage3.Size = new System.Drawing.Size(719, 676);
 			this.tabPage3.TabIndex = 2;
 			this.tabPage3.Text = "Folie";
 			this.tabPage3.UseVisualStyleBackColor = true;
 			// 
+			// textBoxSongTranslation
+			// 
+			this.textBoxSongTranslation.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+			this.textBoxSongTranslation.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.textBoxSongTranslation.Location = new System.Drawing.Point(366, 466);
+			this.textBoxSongTranslation.Multiline = true;
+			this.textBoxSongTranslation.Name = "textBoxSongTranslation";
+			this.textBoxSongTranslation.ScrollBars = System.Windows.Forms.ScrollBars.Both;
+			this.textBoxSongTranslation.Size = new System.Drawing.Size(355, 203);
+			this.textBoxSongTranslation.TabIndex = 11;
+			this.textBoxSongTranslation.TextChanged += new System.EventHandler(this.textBoxSongTranslation_TextChanged);
+			// 
 			// buttonDelSlide
 			// 
-			this.buttonDelSlide.Location = new System.Drawing.Point(419, 9);
+			this.buttonDelSlide.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+			this.buttonDelSlide.Location = new System.Drawing.Point(583, 261);
 			this.buttonDelSlide.Name = "buttonDelSlide";
-			this.buttonDelSlide.Size = new System.Drawing.Size(126, 23);
+			this.buttonDelSlide.Size = new System.Drawing.Size(114, 23);
 			this.buttonDelSlide.TabIndex = 10;
 			this.buttonDelSlide.Text = "Folie löschen";
 			this.buttonDelSlide.UseVisualStyleBackColor = true;
@@ -692,18 +705,21 @@
 			// 
 			// buttonSlideSeparate
 			// 
-			this.buttonSlideSeparate.Location = new System.Drawing.Point(223, 9);
+			this.buttonSlideSeparate.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+			this.buttonSlideSeparate.Location = new System.Drawing.Point(583, 221);
 			this.buttonSlideSeparate.Name = "buttonSlideSeparate";
-			this.buttonSlideSeparate.Size = new System.Drawing.Size(161, 23);
+			this.buttonSlideSeparate.Size = new System.Drawing.Size(114, 23);
 			this.buttonSlideSeparate.TabIndex = 9;
-			this.buttonSlideSeparate.Text = "Auf zwei Folien aufteilen";
+			this.buttonSlideSeparate.Text = "Auf zwei aufteilen";
 			this.buttonSlideSeparate.UseVisualStyleBackColor = true;
+			this.buttonSlideSeparate.Click += new System.EventHandler(this.buttonSlideSeparate_Click);
 			// 
 			// buttonSlideDuplicate
 			// 
-			this.buttonSlideDuplicate.Location = new System.Drawing.Point(62, 9);
+			this.buttonSlideDuplicate.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+			this.buttonSlideDuplicate.Location = new System.Drawing.Point(583, 182);
 			this.buttonSlideDuplicate.Name = "buttonSlideDuplicate";
-			this.buttonSlideDuplicate.Size = new System.Drawing.Size(126, 23);
+			this.buttonSlideDuplicate.Size = new System.Drawing.Size(114, 23);
 			this.buttonSlideDuplicate.TabIndex = 8;
 			this.buttonSlideDuplicate.Text = "Folie duplizieren";
 			this.buttonSlideDuplicate.UseVisualStyleBackColor = true;
@@ -711,9 +727,9 @@
 			// 
 			// label5
 			// 
-			this.label5.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+			this.label5.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
 			this.label5.AutoSize = true;
-			this.label5.Location = new System.Drawing.Point(402, 491);
+			this.label5.Location = new System.Drawing.Point(580, 103);
 			this.label5.Name = "label5";
 			this.label5.Size = new System.Drawing.Size(110, 13);
 			this.label5.TabIndex = 7;
@@ -721,9 +737,9 @@
 			// 
 			// label4
 			// 
-			this.label4.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+			this.label4.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
 			this.label4.AutoSize = true;
-			this.label4.Location = new System.Drawing.Point(144, 491);
+			this.label4.Location = new System.Drawing.Point(580, 52);
 			this.label4.Name = "label4";
 			this.label4.Size = new System.Drawing.Size(122, 13);
 			this.label4.TabIndex = 6;
@@ -731,7 +747,7 @@
 			// 
 			// comboBoxSlideVertOrientation
 			// 
-			this.comboBoxSlideVertOrientation.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+			this.comboBoxSlideVertOrientation.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
 			this.comboBoxSlideVertOrientation.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
 			this.comboBoxSlideVertOrientation.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
 			this.comboBoxSlideVertOrientation.FormattingEnabled = true;
@@ -739,7 +755,7 @@
             "Oben",
             "Mitte",
             "Unten"});
-			this.comboBoxSlideVertOrientation.Location = new System.Drawing.Point(518, 486);
+			this.comboBoxSlideVertOrientation.Location = new System.Drawing.Point(583, 129);
 			this.comboBoxSlideVertOrientation.Name = "comboBoxSlideVertOrientation";
 			this.comboBoxSlideVertOrientation.Size = new System.Drawing.Size(114, 24);
 			this.comboBoxSlideVertOrientation.TabIndex = 5;
@@ -747,7 +763,7 @@
 			// 
 			// comboBoxSlideHorizOrientation
 			// 
-			this.comboBoxSlideHorizOrientation.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+			this.comboBoxSlideHorizOrientation.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
 			this.comboBoxSlideHorizOrientation.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
 			this.comboBoxSlideHorizOrientation.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
 			this.comboBoxSlideHorizOrientation.FormattingEnabled = true;
@@ -755,18 +771,18 @@
             "Linksbündig",
             "Zentriert",
             "Rechtsbündig"});
-			this.comboBoxSlideHorizOrientation.Location = new System.Drawing.Point(272, 486);
+			this.comboBoxSlideHorizOrientation.Location = new System.Drawing.Point(583, 76);
 			this.comboBoxSlideHorizOrientation.Name = "comboBoxSlideHorizOrientation";
-			this.comboBoxSlideHorizOrientation.Size = new System.Drawing.Size(124, 24);
+			this.comboBoxSlideHorizOrientation.Size = new System.Drawing.Size(114, 24);
 			this.comboBoxSlideHorizOrientation.TabIndex = 4;
 			this.comboBoxSlideHorizOrientation.SelectedIndexChanged += new System.EventHandler(this.comboBoxSlideHorizOrientation_SelectedIndexChanged);
 			// 
 			// buttonSlideBackground
 			// 
-			this.buttonSlideBackground.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-			this.buttonSlideBackground.Location = new System.Drawing.Point(13, 486);
+			this.buttonSlideBackground.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+			this.buttonSlideBackground.Location = new System.Drawing.Point(583, 16);
 			this.buttonSlideBackground.Name = "buttonSlideBackground";
-			this.buttonSlideBackground.Size = new System.Drawing.Size(113, 23);
+			this.buttonSlideBackground.Size = new System.Drawing.Size(114, 23);
 			this.buttonSlideBackground.TabIndex = 3;
 			this.buttonSlideBackground.Text = "Hintergrundbild...";
 			this.buttonSlideBackground.UseVisualStyleBackColor = true;
@@ -799,7 +815,7 @@
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-			this.ClientSize = new System.Drawing.Size(918, 710);
+			this.ClientSize = new System.Drawing.Size(992, 710);
 			this.Controls.Add(this.buttonMoveDown);
 			this.Controls.Add(this.buttonMoveUp);
 			this.Controls.Add(this.tabControlEditor);
@@ -811,6 +827,7 @@
 			this.ShowInTaskbar = false;
 			this.Text = "Liededitor";
 			this.Load += new System.EventHandler(this.EditorChild_Load);
+			this.Resize += new System.EventHandler(this.EditorChild_Resize);
 			((System.ComponentModel.ISupportInitialize)(this.pictureBoxPreview)).EndInit();
 			this.groupBoxSongSettings.ResumeLayout(false);
 			this.groupBoxSongSettings.PerformLayout();
@@ -889,5 +906,6 @@
 		private System.Windows.Forms.Button buttonSlideDuplicate;
 		private System.Windows.Forms.Button buttonDelSlide;
 		private System.Windows.Forms.Button buttonDelSongPart;
+		private System.Windows.Forms.TextBox textBoxSongTranslation;
     }
 }
