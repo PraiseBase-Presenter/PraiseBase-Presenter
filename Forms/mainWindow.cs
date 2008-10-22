@@ -48,6 +48,8 @@ namespace Pbp
             songMan = SongManager.getInstance();
             imgMan = ImageManager.getInstance();
 
+			this.WindowState = setting.viewerWindowState;
+
             blackout = false;
             t1 = new Timer(); // Timer anlegen
             t1.Interval = 500; // Intervall festlegen, hier 100 ms
@@ -143,8 +145,15 @@ namespace Pbp
 
         private void songDetailItems_Leave(object sender, EventArgs e)
         {
-            int idx = songDetailItems.SelectedIndices[0];
-            songDetailItems.Items[idx].Selected = false;
+			try
+			{
+				int idx = songDetailItems.SelectedIndices[0];
+				songDetailItems.Items[idx].Selected = false;
+			}
+			catch
+			{
+
+			}
         }
 
 
@@ -272,11 +281,11 @@ namespace Pbp
                 foreach (Song.Part prt in songMan.currentSong.parts)
                 {
                     int sj = 1;
-                    foreach (Song.Slide sld in prt.partSlides)
+                    foreach (Song.Slide sld in prt.slides)
                     {
                         ListViewItem lvi = new ListViewItem(new string[] 
                         { 
-                            prt.partSlides.Count > 1 ? prt.caption + " ("+sj+")" : prt.caption, 
+                            prt.slides.Count > 1 ? prt.caption + " ("+sj+")" : prt.caption, 
                             sld.oneLineText() }
                         );
                         lvi.ImageIndex = sld.imageNumber;
@@ -869,6 +878,12 @@ namespace Pbp
                 buttonSearchImages_Click(sender, e);
             }
         }
+
+		private void mainWindow_FormClosing(object sender, FormClosingEventArgs e)
+		{
+			setting.viewerWindowState = this.WindowState;
+			setting.Save();
+		}
 
     }
 }

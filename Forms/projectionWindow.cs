@@ -149,11 +149,11 @@ namespace Pbp.Forms
                 }
                 else
                 {
-                    font = slide.font();
-                    fontTr = slide.fontTranslation();
-                    lineSpacing = slide.lineSpacint();
-                    fontBrush = new SolidBrush(slide.fontColor());
-                    fontTranslationBrush = new SolidBrush(slide.fontColorTranslation());
+                    font = slide.font;
+                    fontTr = slide.fontTranslation;
+                    lineSpacing = slide.lineSpacint;
+                    fontBrush = new SolidBrush(slide.fontColor);
+                    fontTranslationBrush = new SolidBrush(slide.fontColorTranslation);
                 }
 
 

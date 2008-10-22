@@ -16,6 +16,8 @@ namespace Pbp.Forms
     {
         Settings setting;
         static private EditorWindow _instance;
+		string fileBoxInitialDir;
+		int fileBoxFilterIndex;
 
         private int childFormNumber = 0;
 
@@ -23,6 +25,10 @@ namespace Pbp.Forms
         {
             setting = new Settings();
             InitializeComponent();
+			fileBoxInitialDir = setting.dataDirectory + Path.DirectorySeparatorChar + setting.songDir;
+			fileBoxFilterIndex = 0;
+			this.WindowState = setting.editorWindowState;
+
         }
 
         static public EditorWindow getInstance()
@@ -45,24 +51,23 @@ namespace Pbp.Forms
         private void OpenFile(object sender, EventArgs e)
         {
             OpenFileDialog openFileDialog = new OpenFileDialog();
-            openFileDialog.InitialDirectory = setting.dataDirectory+Path.DirectorySeparatorChar + setting.songDir;
+			openFileDialog.InitialDirectory = fileBoxInitialDir;
+			openFileDialog.CheckFileExists = true;
+			openFileDialog.CheckPathExists = true;
+			openFileDialog.Multiselect = false;
+			openFileDialog.Title = "Lied öffnen";
 
-            String fltr = String.Empty;
-            int i = 0;
-            foreach (String ext in Song.extensions)
-            {
-                fltr += Song.extensionNames[i] + " (" + ext + ")|" + ext + "|";
-                i++;
-            }
-            fltr += "Alle Dateien (*.*)|*.*";
-
-            openFileDialog.Filter = fltr;
+			openFileDialog.Filter = Song.fileType.getFilter();
+			openFileDialog.FilterIndex = fileBoxFilterIndex;
             if (openFileDialog.ShowDialog(this) == DialogResult.OK)
             {
                 string FileName = openFileDialog.FileName;
+				fileBoxInitialDir = Path.GetDirectoryName(FileName);
+				fileBoxFilterIndex = openFileDialog.FilterIndex;
                 EditorChild childForm = new EditorChild(FileName);
                 childForm.MdiParent = this;
-                childForm.Show();
+				if (childForm.valid)
+					childForm.Show();
             }
         }
 
@@ -158,6 +163,8 @@ namespace Pbp.Forms
 
         private void EditorWindow_FormClosing(object sender, FormClosingEventArgs e)
         {
+			setting.editorWindowState = this.WindowState;
+			setting.Save();
             this.Hide();
             e.Cancel = true;
         }

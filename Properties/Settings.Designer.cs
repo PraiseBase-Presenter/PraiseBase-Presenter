@@ -296,5 +296,29 @@ namespace Pbp.Properties {
                 this["projectionUseMaster"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("Normal")]
+        public global::System.Windows.Forms.FormWindowState viewerWindowState {
+            get {
+                return ((global::System.Windows.Forms.FormWindowState)(this["viewerWindowState"]));
+            }
+            set {
+                this["viewerWindowState"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("Normal")]
+        public global::System.Windows.Forms.FormWindowState editorWindowState {
+            get {
+                return ((global::System.Windows.Forms.FormWindowState)(this["editorWindowState"]));
+            }
+            set {
+                this["editorWindowState"] = value;
+            }
+        }
     }
 }

@@ -18,6 +18,8 @@ namespace Pbp.Forms
         Song sng;
         Settings setting;
         projectionWindow projWindow;
+		public bool valid;
+
 
         public EditorChild(string fileName)
         {
@@ -28,27 +30,19 @@ namespace Pbp.Forms
             this.WindowState = FormWindowState.Maximized;
             setting = new Settings();
 
-            if (fileName != null)
+            sng = new Song(fileName);
+            if (sng.isValid)
             {
-                sng = new Song(fileName);
-                if (sng.isValid)
-                {
-                    this.Text = sng.title;
-
-                    populateTree();
-
-                    treeViewContents.SelectedNode = treeViewContents.Nodes[0];
-
-                    
-                }
-                else
-                {
-                    MessageBox.Show("Diese Lieddatei ist leider fehlerhaft!","Liededitor",MessageBoxButtons.OK,MessageBoxIcon.Error);
-                }
+                this.Text = sng.title;
+                populateTree();
+                treeViewContents.SelectedNode = treeViewContents.Nodes[0];
+				valid = true;
             }
             else
             {
-                treeViewContents.Nodes.Add("Neues Lied");
+                MessageBox.Show("Diese Lieddatei ist leider fehlerhaft!","Liededitor",MessageBoxButtons.OK,MessageBoxIcon.Error);
+				valid = false;
+				this.Close();
             }
         }
 
@@ -61,7 +55,7 @@ namespace Pbp.Forms
             {
                 TreeNode partNode = new TreeNode(part.caption);
                 int i = 0;
-                foreach (Song.Slide slide in part.partSlides)
+                foreach (Song.Slide slide in part.slides)
                 {
                     TreeNode slideNode = new TreeNode("Folie " + (i + 1).ToString());
                     i++;
@@ -77,9 +71,26 @@ namespace Pbp.Forms
         {
             if (treeViewContents.SelectedNode.Level == 2)
             {
-                tabControlEditor.SelectedIndex = 2;
+				int partId = treeViewContents.SelectedNode.Parent.Index;
+				int slideId = treeViewContents.SelectedNode.Index;
+
+				buttonAddItem.Enabled = true;
+				if (sng.parts[partId].slides.Count > 1)
+					buttonDelItem.Enabled = true;
+				else
+					buttonDelItem.Enabled = false;
+				if (slideId < sng.parts[partId].slides.Count - 1)
+					buttonMoveDown.Enabled = true;
+				else
+					buttonMoveDown.Enabled = false;
+				if (slideId > 0)
+					buttonMoveUp.Enabled = true;
+				else
+					buttonMoveUp.Enabled = false;
+				
+				tabControlEditor.SelectedIndex = 2;
                
-                Song.Slide sld = sng.parts[treeViewContents.SelectedNode.Parent.Index].partSlides[treeViewContents.SelectedNode.Index];
+				Song.Slide sld = sng.parts[partId].slides[slideId];
                 textBoxSongText.Text = sld.lineBreakText();
 
                 comboBoxSlideHorizOrientation.SelectedIndex = (int)sld.horizAlign;
@@ -90,14 +101,36 @@ namespace Pbp.Forms
             }
             else if (treeViewContents.SelectedNode.Level == 1)
             {
-                tabControlEditor.SelectedIndex = 1;
+				int partId = treeViewContents.SelectedNode.Index;
+
+				buttonAddItem.Enabled = true;
+				if (sng.parts.Count > 1)
+					buttonDelItem.Enabled = true;
+				else
+					buttonDelItem.Enabled = false;
+				if (partId < sng.parts.Count-1)
+					buttonMoveDown.Enabled = true;
+				else
+					buttonMoveDown.Enabled = false;
+				if (partId > 0)
+					buttonMoveUp.Enabled = true;
+				else
+					buttonMoveUp.Enabled = false;
+
+				tabControlEditor.SelectedIndex = 1;
                 
-                Song.Part prt = sng.parts[treeViewContents.SelectedNode.Index];
+                Song.Part prt = sng.parts[partId];
                 textBoxSongPartCaption.Text = prt.caption;
 
             }
             else
             {
+				buttonAddItem.Enabled = true;
+				buttonDelItem.Enabled = false;
+				buttonMoveDown.Enabled = false;
+				buttonMoveUp.Enabled = false;
+
+
                 tabControlEditor.SelectedIndex = 0;
 
                 textBoxSongTitle.Text = sng.title;
@@ -170,20 +203,22 @@ namespace Pbp.Forms
                 comboBoxSongParts.Focus();
                 return;
             }
-            Song.Part prt = new Song.Part();
-            prt.caption = comboBoxSongParts.Text;
-            prt.partSlides = new List<Song.Slide>();
-            Song.Slide sld = new Song.Slide(sng);
-            sld.imageNumber = -1;
-            prt.partSlides.Add(sld);
-            sng.parts.Add(prt);
+			addSongPart(comboBoxSongParts.Text);
 
-            populateTree();
-            treeViewContents.SelectedNode = treeViewContents.Nodes[0].LastNode.LastNode;
-            textBoxSongText.Focus();
-
+			textBoxSongText.Focus();
             comboBoxSongParts.Text = "";
         }
+
+		private void addSongPart(string caption)
+		{
+			Song.Part prt = new Song.Part(sng,caption);
+			Song.Slide sld = new Song.Slide(sng);
+			prt.slides.Add(sld);
+			sng.parts.Add(prt);
+
+			populateTree();
+			treeViewContents.SelectedNode = treeViewContents.Nodes[0].LastNode.LastNode;
+		}
 
         private void button1_Click(object sender, EventArgs e)
         {
@@ -229,14 +264,14 @@ namespace Pbp.Forms
             if (treeViewContents.SelectedNode.Level == 1)
             {
                 partId = treeViewContents.SelectedNode.Index;
-                sng.parts[partId].partSlides.Add(sld);
+                sng.parts[partId].slides.Add(sld);
                 populateTree();
                 treeViewContents.SelectedNode = treeViewContents.Nodes[0].Nodes[partId].LastNode;
             }
             else if (treeViewContents.SelectedNode.Level == 2)
             {
                 partId = treeViewContents.SelectedNode.Parent.Index;
-                sng.parts[partId].partSlides.Add(sld);
+                sng.parts[partId].slides.Add(sld);
                 populateTree();
                 treeViewContents.SelectedNode = treeViewContents.Nodes[0].Nodes[partId].LastNode;
             }           
@@ -256,16 +291,7 @@ namespace Pbp.Forms
                 }
                 else
                 {
-                    Song.Part prt = new Song.Part();
-                    prt.caption = "Neuer Liedteil";
-                    prt.partSlides = new List<Song.Slide>();
-                    Song.Slide sld = new Song.Slide(sng);
-                    sld.imageNumber = -1;
-                    prt.partSlides.Add(sld);
-                    sng.parts.Add(prt);
-
-                    populateTree();
-                    treeViewContents.SelectedNode = treeViewContents.Nodes[0].LastNode.LastNode;
+					addSongPart(null);
                 }
             }
         }
@@ -276,35 +302,67 @@ namespace Pbp.Forms
             {
                 if (treeViewContents.SelectedNode.Level == 2)
                 {
-                    if (MessageBox.Show("Folie wirklich löschen?","Liededitor",MessageBoxButtons.YesNo,MessageBoxIcon.Question) == DialogResult.Yes)
-                    {
-                        int partId = treeViewContents.SelectedNode.Parent.Index;
-                        int slideId = treeViewContents.SelectedNode.Index;
-                        sng.parts[partId].partSlides.RemoveAt(slideId);
-                        populateTree();
-                        treeViewContents.SelectedNode = treeViewContents.Nodes[0].Nodes[partId];
-                    }
+					buttonDelSlide_Click(sender, e);
                 }
                 else if (treeViewContents.SelectedNode.Level == 1)
                 {
-                    if (MessageBox.Show("Liedteil wirklich löschen?", "Liededitor", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
-                    {
-                        int partId = treeViewContents.SelectedNode.Index;
-                        sng.parts.RemoveAt(partId);
-                        populateTree();
-                        treeViewContents.SelectedNode = treeViewContents.Nodes[0];
-                    }
-                }
-                else
-                {
+					buttonDelSongPart_Click(sender, e);
                 }
             }
         }
 
         private void buttonMoveUp_Click(object sender, EventArgs e)
         {
-
+			if (treeViewContents.SelectedNode != null)
+			{
+				if (treeViewContents.SelectedNode.Level == 2)
+				{
+					int partId = treeViewContents.SelectedNode.Parent.Index;
+					int slideId = treeViewContents.SelectedNode.Index;
+					if (sng.parts[partId].swapSlideWithUpperSlide(slideId))
+					{
+						populateTree();
+						treeViewContents.SelectedNode = treeViewContents.Nodes[0].Nodes[partId].Nodes[slideId-1];
+					}
+				}
+				else if (treeViewContents.SelectedNode.Level == 1)
+				{
+					int partId = treeViewContents.SelectedNode.Index;
+					if (sng.swapPartWithUpperPart(partId))
+					{
+						populateTree();
+						treeViewContents.SelectedNode = treeViewContents.Nodes[0].Nodes[partId-1];
+					}
+				}
+			}
         }
+
+
+		private void buttonMoveDown_Click(object sender, EventArgs e)
+		{
+			if (treeViewContents.SelectedNode != null)
+			{
+				if (treeViewContents.SelectedNode.Level == 2)
+				{
+					int partId = treeViewContents.SelectedNode.Parent.Index;
+					int slideId = treeViewContents.SelectedNode.Index;
+					if (sng.parts[partId].swapSlideWithLowerSlide(slideId))
+					{
+						populateTree();
+						treeViewContents.SelectedNode = treeViewContents.Nodes[0].Nodes[partId].Nodes[slideId + 1];
+					}
+				}
+				else if (treeViewContents.SelectedNode.Level == 1)
+				{
+					int partId = treeViewContents.SelectedNode.Index;
+					if (sng.swapPartWithLowerPart(partId))
+					{
+						populateTree();
+						treeViewContents.SelectedNode = treeViewContents.Nodes[0].Nodes[partId + 1];
+					}
+				}
+			}
+		}
 
         private void textBoxComment_TextChanged(object sender, EventArgs e)
         {
@@ -377,9 +435,9 @@ namespace Pbp.Forms
                 int partIdx = treeViewContents.SelectedNode.Parent.Index;
                 int slideIdx = treeViewContents.SelectedNode.Index;
 
-                sng.setSlideText(textBoxSongText.Text, partIdx, slideIdx);
+                sng.parts[partIdx].slides[slideIdx].setSlideText(textBoxSongText.Text);
 
-                pictureBoxPreview.Image = projWindow.showSlide(sng.parts[partIdx].partSlides[slideIdx], sng.getImage(sng.parts[partIdx].partSlides[slideIdx].imageNumber), true);
+                pictureBoxPreview.Image = projWindow.showSlide(sng.parts[partIdx].slides[slideIdx], sng.getImage(sng.parts[partIdx].slides[slideIdx].imageNumber), true);
 
             }
         }
@@ -393,16 +451,16 @@ namespace Pbp.Forms
         {
             int partIdx = treeViewContents.SelectedNode.Parent.Index;
             int slideIdx = treeViewContents.SelectedNode.Index;
-            sng.parts[partIdx].partSlides[slideIdx].horizAlign = (Song.SongTextHorizontalAlign)comboBoxSlideHorizOrientation.SelectedIndex;
-            pictureBoxPreview.Image = projWindow.showSlide(sng.parts[partIdx].partSlides[slideIdx], sng.getImage(sng.parts[partIdx].partSlides[slideIdx].imageNumber), true);
+            sng.parts[partIdx].slides[slideIdx].horizAlign = (Song.SongTextHorizontalAlign)comboBoxSlideHorizOrientation.SelectedIndex;
+            pictureBoxPreview.Image = projWindow.showSlide(sng.parts[partIdx].slides[slideIdx], sng.getImage(sng.parts[partIdx].slides[slideIdx].imageNumber), true);
         }
 
         private void comboBoxSlideVertOrientation_SelectedIndexChanged(object sender, EventArgs e)
         {
             int partIdx = treeViewContents.SelectedNode.Parent.Index;
             int slideIdx = treeViewContents.SelectedNode.Index;
-            sng.parts[partIdx].partSlides[slideIdx].vertAlign = (Song.SongTextVerticalAlign)comboBoxSlideVertOrientation.SelectedIndex;
-            pictureBoxPreview.Image = projWindow.showSlide(sng.parts[partIdx].partSlides[slideIdx], sng.getImage(sng.parts[partIdx].partSlides[slideIdx].imageNumber), true);
+            sng.parts[partIdx].slides[slideIdx].vertAlign = (Song.SongTextVerticalAlign)comboBoxSlideVertOrientation.SelectedIndex;
+            pictureBoxPreview.Image = projWindow.showSlide(sng.parts[partIdx].slides[slideIdx], sng.getImage(sng.parts[partIdx].slides[slideIdx].imageNumber), true);
         }
 
         private void buttonProjectionMasterFont_Click(object sender, EventArgs e)
@@ -495,17 +553,51 @@ namespace Pbp.Forms
 
         }
 
+		private void buttonDelSlide_Click(object sender, EventArgs e)
+		{
+			int partId = treeViewContents.SelectedNode.Parent.Index;
+			if (sng.parts[partId].slides.Count > 1)
+			{
+				if (MessageBox.Show("Folie wirklich löschen?", "Liededitor", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+				{
+					int slideId = treeViewContents.SelectedNode.Index;
+					sng.parts[partId].slides.RemoveAt(slideId);
+					populateTree();
+					treeViewContents.SelectedNode = treeViewContents.Nodes[0].Nodes[partId];
+				}
+			}
+			else
+			{
+				MessageBox.Show("Der Liedteil muss mindestens eine Folie haben!", "Liededitor", MessageBoxButtons.OK, MessageBoxIcon.Stop);
+			}
+		}
 
 
+		private void buttonDelSongPart_Click(object sender, EventArgs e)
+		{
+			if (sng.parts.Count > 1)
+			{
+				if (MessageBox.Show("Liedteil wirklich löschen?", "Liededitor", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+				{
+					int partId = treeViewContents.SelectedNode.Index;
+					sng.parts.RemoveAt(partId);
+					populateTree();
+					treeViewContents.SelectedNode = treeViewContents.Nodes[0];
+				}
+			}
+			else
+			{
+				MessageBox.Show("Das Lied muss mindestens einen Liedteil haben!", "Liededitor", MessageBoxButtons.OK, MessageBoxIcon.Stop);
+			}
+		}
 
+		private void buttonSlideDuplicate_Click(object sender, EventArgs e)
+		{
+			int partId = treeViewContents.SelectedNode.Parent.Index;
+			int slideId = treeViewContents.SelectedNode.Index;
+			sng.parts[partId].duplicateSlide(slideId);
+			populateTree();
+		}
 
-
-
-
-
-
- 
-
-  
     }
 }
