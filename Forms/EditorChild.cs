@@ -1,12 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Linq;
-using System.Text;
 using System.Windows.Forms;
-using System.Xml;
 using System.IO;
 
 using Pbp.Properties;
@@ -15,7 +9,7 @@ namespace Pbp.Forms
 {
     public partial class EditorChild : Form
     {
-        Song sng;
+        EditableSong sng;
         Settings setting;
         projectionWindow projWindow;
 		public bool valid;
@@ -30,7 +24,7 @@ namespace Pbp.Forms
             this.WindowState = FormWindowState.Maximized;
             setting = new Settings();
 
-            sng = new Song(fileName);
+			sng = new EditableSong(fileName);
             if (sng.isValid)
             {
                 this.Text = sng.title;
@@ -173,12 +167,11 @@ namespace Pbp.Forms
                 checkedListBoxTags.Items.Clear();
                 foreach (string str in setting.tags)
                 {
-                    checkedListBoxTags.Items.Add(str);
                     if (sng.tags.Contains(str))
-                    {
-                        checkedListBoxTags.SetItemChecked(i,true);
-                    }
-                    i++;
+						checkedListBoxTags.Items.Add(str, true);
+					else
+						checkedListBoxTags.Items.Add(str);
+					i++;
                 }
             }
         }
@@ -232,19 +225,6 @@ namespace Pbp.Forms
             sng.language = comboBoxLanguage.Text;
         }
 
-        private void checkedListBoxTags_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            sng.resetTags();
-            int i = 0;
-            foreach (string str in checkedListBoxTags.Items)
-            {
-                if (checkedListBoxTags.GetItemChecked(i))
-                {
-                    sng.addTag(str);
-                }
-                i++;
-            }
-        }
 
         private void textBoxSongPartCaption_TextChanged(object sender, EventArgs e)
         {
@@ -631,6 +611,28 @@ namespace Pbp.Forms
 			textBoxSongText.Width = (tabPage3.Width - 20) / 2;
 			textBoxSongTranslation.Left = textBoxSongText.Right + 5;
 			textBoxSongTranslation.Width = tabPage3.Width - 10 - textBoxSongTranslation.Left;
+		}
+
+		private void groupBoxNewSongPart_Enter(object sender, EventArgs e)
+		{
+
+		}
+
+		private void comboBoxLanguage_Enter(object sender, EventArgs e)
+		{
+			comboBoxLanguage.DroppedDown = true;
+		}
+
+		private void checkedListBoxTags_ItemCheck(object sender, ItemCheckEventArgs e)
+		{
+			if (e.CurrentValue == CheckState.Unchecked)
+			{
+				sng.tags.Add(checkedListBoxTags.Items[e.Index].ToString());
+			}
+			else
+			{
+				sng.tags.Remove(checkedListBoxTags.Items[e.Index].ToString());
+			}
 		}
 
     }

@@ -22,55 +22,55 @@ namespace Pbp
 		#region Variables
 
 		/// <summary>
-        /// Indicates if this is a valid song file. Do not use this class if this
-        /// variable is set to false after loading!
-        /// </summary>
-        private bool _isValid;
-        public bool isValid { get { return _isValid; } }
-        /// <summary>
-        /// Path of the song xml file
-        /// </summary>
-        private string _path;
-        public string path { get { return _path; } }
-        private int _id;
-        /// <summary>
-        /// Song number used by the song manager
-        /// </summary>
-        public int id { get {return _id; } set { _id=value; } }
-        public string _title;
+		/// Indicates if this is a valid song file. Do not use this class if this
+		/// variable is set to false after loading!
+		/// </summary>
+		public bool isValid { get; private set; }
+		/// <summary>
+		/// Path of the song xml file
+		/// </summary>
+		public string path  { get; private set; }
+		/// <summary>
+		/// Song number used by the song manager
+		/// </summary>
+		public int id { get; set; }
         /// <summary>
         /// The song title. Usually the same as the file name
         /// </summary>
-        public string title { get { return _title; } set { _title = value; } }
-        public string _language;
+		public string title { get; protected set; }
         /// <summary>
         /// Main language of the song
         /// </summary>
-        public string language { get { return _language; } set { _language = value; } }
-        private List<string> _tags;
-        /// <summary>
+		public string language { get; protected set; }
+         /// <summary>
         /// A list of tags (like categories) which describe the type of the song
         /// </summary>
-        public List<string> tags { get { return _tags; } }
-        private string _comment;
-        /// <summary>
+		public Tags tags;
+		/// <summary>
         /// User defined comment for quality assurance information or presentation issues
         /// </summary>
-        public string comment { get { return _comment; } set { _comment = value; } }
-        protected string _text;
+		public string comment { get; set; }
+		/// <summary>
+		/// The whole songtext, which is used for a quick search by the song manager
+		/// </summary>
+		private string text;
         /// <summary>
-        /// The whole song text used a quick search by the song manager
+        /// Allows searching in the whole songtext
         /// </summary>
-        public string text { get { return _text; } set 
-		{ 
-			_text = value;
-			_text = _text.Trim().ToLower();
-			_text = _text.Replace(",", "");
-			_text = _text.Replace(".", "");
-			_text = _text.Replace(";", "");
-			_text = _text.Replace(Environment.NewLine, "");
-			_text = _text.Replace("  ", " ");
-		} }
+		public string searchText
+		{
+			get { return text; }
+			private set
+			{
+				text = value;
+				text = text.Trim().ToLower();
+				text = text.Replace(",", String.Empty);
+				text = text.Replace(".", String.Empty);
+				text = text.Replace(";", String.Empty);
+				text = text.Replace(Environment.NewLine, String.Empty);
+				text = text.Replace("  ", " ");
+			}
+		}
         /// <summary>
         /// Text font
         /// </summary>
@@ -114,7 +114,7 @@ namespace Pbp
         /// <summary>
         /// The file type of this song
         /// </summary>
-        private fileType _fileType;
+        private fileType originFileType;
         /// <summary>
         /// The list of all parts in the song
         /// </summary>
@@ -186,6 +186,19 @@ namespace Pbp
 		#endregion
 
 		#region Subclasses
+
+		public class Tags : List<string>
+		{
+			public new void Add(string tagName)
+			{
+				if (!Contains(tagName))
+				{
+					Console.WriteLine(tagName);
+					base.Add(tagName);
+				}
+				
+			}
+		}
 
 		/// <summary>
         /// A song part with a given name and one or more slides
@@ -459,14 +472,15 @@ namespace Pbp
         /// <param name="filePath">Full path to the song xml file</param>
         public Song(string filePath)
         {
-            _isValid = false;
-            _path = filePath;
+            isValid = false;
+            path = filePath;
+
 
             bool err = false;
 
 			Settings setting = new Settings();
 
-			_tags = new List<string>();
+			tags = new Tags();
 			SongTextHorizontalAlign defaultHorizAlign = SongTextHorizontalAlign.center;
 			SongTextVerticalAlign defaultVertAlign = SongTextVerticalAlign.center;
 			slides = new List<Slide>();
@@ -494,36 +508,36 @@ namespace Pbp
 					xmlRoot = xmlDoc.DocumentElement;
 
 					// Detect format
-					_fileType = fileType.createFactory(xmlRoot.Name, xmlRoot.GetAttribute("version"));
+					originFileType = fileType.createFactory(xmlRoot.Name, xmlRoot.GetAttribute("version"));
 
-
+					
 					// PraiseBase Presenter Song Format
-					if (_fileType.GetType() == typeof(fileTypePBPS))
+					if (originFileType.GetType() == typeof(fileTypePBPS))
 					{
 						
 					}
 					// PowerPraise Song Format
-					else if (_fileType.GetType() == typeof(fileTypePPL))
+					else if (originFileType.GetType() == typeof(fileTypePPL))
 					{
 						//
 						// General stuff
 						//
-						_title = xmlRoot["general"]["title"].InnerText;
+						title = xmlRoot["general"]["title"].InnerText;
 
 						if (xmlRoot["general"]["language"] != null)
-							_language = xmlRoot["general"]["language"].InnerText;
+							language = xmlRoot["general"]["language"].InnerText;
 						else
-							_language = "Deutsch";
+							language = "Deutsch";
 
 						if (xmlRoot["general"]["category"] != null)
 						{
-							_tags.Add(xmlRoot["general"]["category"].InnerText);
+							tags.Add(xmlRoot["general"]["category"].InnerText);
 						}
 
 						if (xmlRoot["general"]["comment"] != null)
-							_comment = xmlRoot["general"]["comment"].InnerText;
+							comment = xmlRoot["general"]["comment"].InnerText;
 						else
-							_comment = "";
+							comment = "";
 
 
 						if (xmlRoot["formatting"]["textorientation"] != null)
@@ -670,7 +684,7 @@ namespace Pbp
 
 			if (!err)
             {
-                _isValid = true;
+                isValid = true;
             }
         }
 
@@ -690,7 +704,7 @@ namespace Pbp
                 }
                 else
                 {
-                    Console.WriteLine("Image " + path + " does not exist!");
+                    //Console.WriteLine("Image " + path + " does not exist!");
                     Image img = new Bitmap(64, 48);
                     Graphics graph = Graphics.FromImage(img);
                     graph.FillRectangle(new SolidBrush(Color.Black), 0, 0, img.Width, img.Height);
@@ -754,7 +768,7 @@ namespace Pbp
             XmlDocument xmlDoc = new XmlDocument();
             
             
-            if (_fileType.GetType() == typeof(fileTypePPL))
+            if (originFileType.GetType() == typeof(fileTypePPL))
             {
                 xmlDoc.AppendChild(xmlDoc.CreateElement("ppl"));
                 XmlElement xmlRoot = xmlDoc.DocumentElement;
@@ -762,13 +776,13 @@ namespace Pbp
 
                 xmlRoot.AppendChild(xmlDoc.CreateElement("general"));
                 xmlRoot["general"].AppendChild(xmlDoc.CreateElement("title"));
-                xmlRoot["general"]["title"].InnerText = _title;
+                xmlRoot["general"]["title"].InnerText = title;
                 xmlRoot["general"].AppendChild(xmlDoc.CreateElement("category"));
-                xmlRoot["general"]["category"].InnerText = _tags.Count > 0 ? _tags[0] : "Keine Kategorie";
+                xmlRoot["general"]["category"].InnerText = tags.Count > 0 ? tags[0] : "Keine Kategorie";
                 xmlRoot["general"].AppendChild(xmlDoc.CreateElement("language"));
-                xmlRoot["general"]["language"].InnerText = _language;
+                xmlRoot["general"]["language"].InnerText = language;
                 xmlRoot["general"].AppendChild(xmlDoc.CreateElement("comment"));
-                xmlRoot["general"]["comment"].InnerText = _comment;
+                xmlRoot["general"]["comment"].InnerText = comment;
 
                 xmlRoot.AppendChild(xmlDoc.CreateElement("songtext"));
                 foreach (Part prt in parts)
@@ -851,17 +865,6 @@ namespace Pbp
         public void setPartCaption(string text, int partId)
         {
             parts[partId].caption = text;
-        }
-
-        public void resetTags()
-        {
-            _tags.Clear();
-        }
-
-        public void addTag(string str)
-        {
-            if (!_tags.Contains(str))
-            _tags.Add(str);
         }
 
 		public bool swapPartWithUpperPart(int partId)

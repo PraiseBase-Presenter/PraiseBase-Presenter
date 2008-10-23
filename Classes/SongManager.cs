@@ -64,6 +64,7 @@ namespace Pbp
                     }
                 }
             }
+
             
         }
 
@@ -105,7 +106,7 @@ namespace Pbp
             for (int i=0;i<validSongs.Count;i++)
             {
                 if (validSongs[i].title.ToLower().Contains(needle) ||
-                    (mode==1 && validSongs[i].text.Contains(needle)))
+					(mode == 1 && validSongs[i].searchText.Contains(needle)))
                 {
                     tmpList.Add(validSongs[i]);
                 }

@@ -31,9 +31,15 @@
 			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(mainWindow));
 			this.menuStrip1 = new System.Windows.Forms.MenuStrip();
 			this.dateiToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.liededitorToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
 			this.beendenToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.projektionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.projektionEinausToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.blackoutEinausToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.einstellungenToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.optionenToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.toolStripSeparator5 = new System.Windows.Forms.ToolStripSeparator();
 			this.bildschirmeErneutSuchenToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.liederlisteNeuLadenToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.bilderlisteNeuLadenToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -87,8 +93,8 @@
 			this.listViewDias = new System.Windows.Forms.ListView();
 			this.button1 = new System.Windows.Forms.Button();
 			this.toolStrip1 = new System.Windows.Forms.ToolStrip();
-			this.toolStripButton1 = new System.Windows.Forms.ToolStripButton();
-			this.toolStripButton3 = new System.Windows.Forms.ToolStripButton();
+			this.toolStripButtonProjectionOff = new System.Windows.Forms.ToolStripButton();
+			this.toolStripButtonProjectionOn = new System.Windows.Forms.ToolStripButton();
 			this.toolStripButton2 = new System.Windows.Forms.ToolStripButton();
 			this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
 			this.toolStripButton5 = new System.Windows.Forms.ToolStripButton();
@@ -112,6 +118,7 @@
 			// 
 			this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.dateiToolStripMenuItem,
+            this.projektionToolStripMenuItem,
             this.einstellungenToolStripMenuItem,
             this.toolStripMenuItem1});
 			this.menuStrip1.Location = new System.Drawing.Point(0, 0);
@@ -123,22 +130,60 @@
 			// dateiToolStripMenuItem
 			// 
 			this.dateiToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.liededitorToolStripMenuItem,
+            this.toolStripSeparator4,
             this.beendenToolStripMenuItem});
 			this.dateiToolStripMenuItem.Name = "dateiToolStripMenuItem";
 			this.dateiToolStripMenuItem.Size = new System.Drawing.Size(64, 20);
 			this.dateiToolStripMenuItem.Text = "&Allgemein";
 			// 
+			// liededitorToolStripMenuItem
+			// 
+			this.liededitorToolStripMenuItem.Name = "liededitorToolStripMenuItem";
+			this.liededitorToolStripMenuItem.Size = new System.Drawing.Size(132, 22);
+			this.liededitorToolStripMenuItem.Text = "Lied&editor";
+			this.liededitorToolStripMenuItem.Click += new System.EventHandler(this.toolStripButton5_Click);
+			// 
+			// toolStripSeparator4
+			// 
+			this.toolStripSeparator4.Name = "toolStripSeparator4";
+			this.toolStripSeparator4.Size = new System.Drawing.Size(129, 6);
+			// 
 			// beendenToolStripMenuItem
 			// 
 			this.beendenToolStripMenuItem.Name = "beendenToolStripMenuItem";
-			this.beendenToolStripMenuItem.Size = new System.Drawing.Size(127, 22);
+			this.beendenToolStripMenuItem.Size = new System.Drawing.Size(132, 22);
 			this.beendenToolStripMenuItem.Text = "&Beenden";
 			this.beendenToolStripMenuItem.Click += new System.EventHandler(this.beendenToolStripMenuItem_Click);
+			// 
+			// projektionToolStripMenuItem
+			// 
+			this.projektionToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.projektionEinausToolStripMenuItem,
+            this.blackoutEinausToolStripMenuItem});
+			this.projektionToolStripMenuItem.Name = "projektionToolStripMenuItem";
+			this.projektionToolStripMenuItem.Size = new System.Drawing.Size(67, 20);
+			this.projektionToolStripMenuItem.Text = "Projektion";
+			// 
+			// projektionEinausToolStripMenuItem
+			// 
+			this.projektionEinausToolStripMenuItem.Name = "projektionEinausToolStripMenuItem";
+			this.projektionEinausToolStripMenuItem.Size = new System.Drawing.Size(171, 22);
+			this.projektionEinausToolStripMenuItem.Text = "Projektion ein/aus";
+			this.projektionEinausToolStripMenuItem.Click += new System.EventHandler(this.toggleProjection);
+			// 
+			// blackoutEinausToolStripMenuItem
+			// 
+			this.blackoutEinausToolStripMenuItem.Name = "blackoutEinausToolStripMenuItem";
+			this.blackoutEinausToolStripMenuItem.Size = new System.Drawing.Size(171, 22);
+			this.blackoutEinausToolStripMenuItem.Text = "Blackout ein/aus";
+			this.blackoutEinausToolStripMenuItem.Click += new System.EventHandler(this.toggleBlackOut);
 			// 
 			// einstellungenToolStripMenuItem
 			// 
 			this.einstellungenToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.optionenToolStripMenuItem,
+            this.toolStripSeparator5,
             this.bildschirmeErneutSuchenToolStripMenuItem,
             this.liederlisteNeuLadenToolStripMenuItem,
             this.bilderlisteNeuLadenToolStripMenuItem});
@@ -152,6 +197,11 @@
 			this.optionenToolStripMenuItem.Size = new System.Drawing.Size(195, 22);
 			this.optionenToolStripMenuItem.Text = "&Optionen...";
 			this.optionenToolStripMenuItem.Click += new System.EventHandler(this.optionenToolStripMenuItem_Click);
+			// 
+			// toolStripSeparator5
+			// 
+			this.toolStripSeparator5.Name = "toolStripSeparator5";
+			this.toolStripSeparator5.Size = new System.Drawing.Size(192, 6);
 			// 
 			// bildschirmeErneutSuchenToolStripMenuItem
 			// 
@@ -753,8 +803,8 @@
 			this.toolStrip1.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
 			this.toolStrip1.ImageScalingSize = new System.Drawing.Size(64, 64);
 			this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripButton1,
-            this.toolStripButton3,
+            this.toolStripButtonProjectionOff,
+            this.toolStripButtonProjectionOn,
             this.toolStripButton2,
             this.toolStripSeparator1,
             this.toolStripButton5,
@@ -766,28 +816,28 @@
 			this.toolStrip1.TabIndex = 21;
 			this.toolStrip1.Text = "toolStrip1";
 			// 
-			// toolStripButton1
+			// toolStripButtonProjectionOff
 			// 
-			this.toolStripButton1.Checked = true;
-			this.toolStripButton1.CheckState = System.Windows.Forms.CheckState.Checked;
-			this.toolStripButton1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-			this.toolStripButton1.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.toolStripButton1.Image = global::Pbp.Properties.Resources.Projection_off;
-			this.toolStripButton1.ImageTransparentColor = System.Drawing.Color.Magenta;
-			this.toolStripButton1.Name = "toolStripButton1";
-			this.toolStripButton1.Size = new System.Drawing.Size(68, 68);
-			this.toolStripButton1.Text = "Präsentation aus";
-			this.toolStripButton1.Click += new System.EventHandler(this.toolStripButton1_Click);
+			this.toolStripButtonProjectionOff.Checked = true;
+			this.toolStripButtonProjectionOff.CheckState = System.Windows.Forms.CheckState.Checked;
+			this.toolStripButtonProjectionOff.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+			this.toolStripButtonProjectionOff.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.toolStripButtonProjectionOff.Image = global::Pbp.Properties.Resources.Projection_off;
+			this.toolStripButtonProjectionOff.ImageTransparentColor = System.Drawing.Color.Magenta;
+			this.toolStripButtonProjectionOff.Name = "toolStripButtonProjectionOff";
+			this.toolStripButtonProjectionOff.Size = new System.Drawing.Size(68, 68);
+			this.toolStripButtonProjectionOff.Text = "Präsentation aus";
+			this.toolStripButtonProjectionOff.Click += new System.EventHandler(this.toggleProjection);
 			// 
-			// toolStripButton3
+			// toolStripButtonProjectionOn
 			// 
-			this.toolStripButton3.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-			this.toolStripButton3.Image = global::Pbp.Properties.Resources.Projection_on;
-			this.toolStripButton3.ImageTransparentColor = System.Drawing.Color.Magenta;
-			this.toolStripButton3.Name = "toolStripButton3";
-			this.toolStripButton3.Size = new System.Drawing.Size(68, 68);
-			this.toolStripButton3.Text = "Präsentation ein";
-			this.toolStripButton3.Click += new System.EventHandler(this.toolStripButton3_Click);
+			this.toolStripButtonProjectionOn.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+			this.toolStripButtonProjectionOn.Image = global::Pbp.Properties.Resources.Projection_on;
+			this.toolStripButtonProjectionOn.ImageTransparentColor = System.Drawing.Color.Magenta;
+			this.toolStripButtonProjectionOn.Name = "toolStripButtonProjectionOn";
+			this.toolStripButtonProjectionOn.Size = new System.Drawing.Size(68, 68);
+			this.toolStripButtonProjectionOn.Text = "Präsentation ein";
+			this.toolStripButtonProjectionOn.Click += new System.EventHandler(this.toggleProjection);
 			// 
 			// toolStripButton2
 			// 
@@ -797,7 +847,7 @@
 			this.toolStripButton2.Name = "toolStripButton2";
 			this.toolStripButton2.Size = new System.Drawing.Size(68, 68);
 			this.toolStripButton2.Text = "Blackout ein/aus";
-			this.toolStripButton2.Click += new System.EventHandler(this.toolStripButton2_Click);
+			this.toolStripButton2.Click += new System.EventHandler(this.toggleBlackOut);
 			// 
 			// toolStripSeparator1
 			// 
@@ -811,7 +861,7 @@
 			this.toolStripButton5.ImageTransparentColor = System.Drawing.Color.Magenta;
 			this.toolStripButton5.Name = "toolStripButton5";
 			this.toolStripButton5.Size = new System.Drawing.Size(68, 68);
-			this.toolStripButton5.Text = "Editor öffnen";
+			this.toolStripButton5.Text = "Liededitor";
 			this.toolStripButton5.Click += new System.EventHandler(this.toolStripButton5_Click);
 			// 
 			// toolStripSeparator2
@@ -858,7 +908,7 @@
 			this.MainMenuStrip = this.menuStrip1;
 			this.Name = "mainWindow";
 			this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-			this.Text = "PraiseBase Presenter Viewer";
+			this.Text = "PraiseBase-Presenter Viewer";
 			this.Load += new System.EventHandler(this.Form1_Load);
 			this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.mainWindow_FormClosing);
 			this.menuStrip1.ResumeLayout(false);
@@ -908,10 +958,10 @@
         private System.Windows.Forms.ToolStripMenuItem einstellungenToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem bildschirmeErneutSuchenToolStripMenuItem;
         private System.Windows.Forms.ToolStrip toolStrip1;
-        private System.Windows.Forms.ToolStripButton toolStripButton1;
+        private System.Windows.Forms.ToolStripButton toolStripButtonProjectionOff;
         private System.Windows.Forms.ToolStripButton toolStripButton2;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
-        private System.Windows.Forms.ToolStripButton toolStripButton3;
+        private System.Windows.Forms.ToolStripButton toolStripButtonProjectionOn;
         private System.Windows.Forms.ToolStripMenuItem optionenToolStripMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
         private System.Windows.Forms.ToolStripButton toolStripButton4;
@@ -952,6 +1002,12 @@
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.CheckBox checkBoxQASegmentation;
         private System.Windows.Forms.Button buttonSearchImages;
+		private System.Windows.Forms.ToolStripMenuItem liededitorToolStripMenuItem;
+		private System.Windows.Forms.ToolStripSeparator toolStripSeparator4;
+		private System.Windows.Forms.ToolStripSeparator toolStripSeparator5;
+		private System.Windows.Forms.ToolStripMenuItem projektionToolStripMenuItem;
+		private System.Windows.Forms.ToolStripMenuItem projektionEinausToolStripMenuItem;
+		private System.Windows.Forms.ToolStripMenuItem blackoutEinausToolStripMenuItem;
     }
 }
 

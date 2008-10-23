@@ -144,7 +144,7 @@
 			this.textBoxSongTitle.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
 			this.textBoxSongTitle.Location = new System.Drawing.Point(97, 28);
 			this.textBoxSongTitle.Name = "textBoxSongTitle";
-			this.textBoxSongTitle.Size = new System.Drawing.Size(522, 26);
+			this.textBoxSongTitle.Size = new System.Drawing.Size(595, 26);
 			this.textBoxSongTitle.TabIndex = 4;
 			this.textBoxSongTitle.TextChanged += new System.EventHandler(this.textBoxSongTitle_TextChanged);
 			// 
@@ -202,7 +202,7 @@
 			this.groupBoxSongSettings.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
 			this.groupBoxSongSettings.Location = new System.Drawing.Point(7, 6);
 			this.groupBoxSongSettings.Name = "groupBoxSongSettings";
-			this.groupBoxSongSettings.Size = new System.Drawing.Size(633, 589);
+			this.groupBoxSongSettings.Size = new System.Drawing.Size(706, 548);
 			this.groupBoxSongSettings.TabIndex = 8;
 			this.groupBoxSongSettings.TabStop = false;
 			this.groupBoxSongSettings.Text = "Liedeinstellungen";
@@ -211,7 +211,7 @@
 			// 
 			this.pictureBoxFontTranslationColor.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
 			this.pictureBoxFontTranslationColor.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-			this.pictureBoxFontTranslationColor.Location = new System.Drawing.Point(588, 253);
+			this.pictureBoxFontTranslationColor.Location = new System.Drawing.Point(661, 253);
 			this.pictureBoxFontTranslationColor.Name = "pictureBoxFontTranslationColor";
 			this.pictureBoxFontTranslationColor.Size = new System.Drawing.Size(31, 29);
 			this.pictureBoxFontTranslationColor.TabIndex = 67;
@@ -222,7 +222,7 @@
 			// 
 			this.pictureBoxFontColor.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
 			this.pictureBoxFontColor.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-			this.pictureBoxFontColor.Location = new System.Drawing.Point(588, 210);
+			this.pictureBoxFontColor.Location = new System.Drawing.Point(661, 210);
 			this.pictureBoxFontColor.Name = "pictureBoxFontColor";
 			this.pictureBoxFontColor.Size = new System.Drawing.Size(31, 29);
 			this.pictureBoxFontColor.TabIndex = 66;
@@ -243,7 +243,7 @@
 			// 
 			this.buttonProjectionMasterFont.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
 			this.buttonProjectionMasterFont.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.buttonProjectionMasterFont.Location = new System.Drawing.Point(314, 211);
+			this.buttonProjectionMasterFont.Location = new System.Drawing.Point(387, 211);
 			this.buttonProjectionMasterFont.Name = "buttonProjectionMasterFont";
 			this.buttonProjectionMasterFont.Size = new System.Drawing.Size(133, 28);
 			this.buttonProjectionMasterFont.TabIndex = 56;
@@ -265,7 +265,7 @@
 			// 
 			this.buttonChooseProjectionForeColor.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
 			this.buttonChooseProjectionForeColor.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.buttonChooseProjectionForeColor.Location = new System.Drawing.Point(453, 211);
+			this.buttonChooseProjectionForeColor.Location = new System.Drawing.Point(526, 211);
 			this.buttonChooseProjectionForeColor.Name = "buttonChooseProjectionForeColor";
 			this.buttonChooseProjectionForeColor.Size = new System.Drawing.Size(119, 28);
 			this.buttonChooseProjectionForeColor.TabIndex = 55;
@@ -287,7 +287,7 @@
 			// 
 			this.buttonTranslationFont.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
 			this.buttonTranslationFont.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.buttonTranslationFont.Location = new System.Drawing.Point(314, 254);
+			this.buttonTranslationFont.Location = new System.Drawing.Point(387, 254);
 			this.buttonTranslationFont.Name = "buttonTranslationFont";
 			this.buttonTranslationFont.Size = new System.Drawing.Size(133, 28);
 			this.buttonTranslationFont.TabIndex = 57;
@@ -309,7 +309,7 @@
 			// 
 			this.buttonTranslationColor.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
 			this.buttonTranslationColor.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.buttonTranslationColor.Location = new System.Drawing.Point(453, 254);
+			this.buttonTranslationColor.Location = new System.Drawing.Point(526, 254);
 			this.buttonTranslationColor.Name = "buttonTranslationColor";
 			this.buttonTranslationColor.Size = new System.Drawing.Size(119, 28);
 			this.buttonTranslationColor.TabIndex = 58;
@@ -353,7 +353,7 @@
 						| System.Windows.Forms.AnchorStyles.Right)));
 			this.checkBoxQASegmentation.AutoSize = true;
 			this.checkBoxQASegmentation.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.checkBoxQASegmentation.Location = new System.Drawing.Point(364, 558);
+			this.checkBoxQASegmentation.Location = new System.Drawing.Point(364, 517);
 			this.checkBoxQASegmentation.Name = "checkBoxQASegmentation";
 			this.checkBoxQASegmentation.Size = new System.Drawing.Size(162, 20);
 			this.checkBoxQASegmentation.TabIndex = 17;
@@ -367,7 +367,7 @@
 						| System.Windows.Forms.AnchorStyles.Right)));
 			this.label6.AutoSize = true;
 			this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.label6.Location = new System.Drawing.Point(8, 532);
+			this.label6.Location = new System.Drawing.Point(8, 491);
 			this.label6.Name = "label6";
 			this.label6.Size = new System.Drawing.Size(145, 20);
 			this.label6.TabIndex = 16;
@@ -379,7 +379,7 @@
 						| System.Windows.Forms.AnchorStyles.Right)));
 			this.checkBoxQAImages.AutoSize = true;
 			this.checkBoxQAImages.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.checkBoxQAImages.Location = new System.Drawing.Point(188, 558);
+			this.checkBoxQAImages.Location = new System.Drawing.Point(188, 517);
 			this.checkBoxQAImages.Name = "checkBoxQAImages";
 			this.checkBoxQAImages.Size = new System.Drawing.Size(101, 20);
 			this.checkBoxQAImages.TabIndex = 15;
@@ -393,7 +393,7 @@
 						| System.Windows.Forms.AnchorStyles.Right)));
 			this.checkBoxQATranslation.AutoSize = true;
 			this.checkBoxQATranslation.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.checkBoxQATranslation.Location = new System.Drawing.Point(364, 532);
+			this.checkBoxQATranslation.Location = new System.Drawing.Point(364, 491);
 			this.checkBoxQATranslation.Name = "checkBoxQATranslation";
 			this.checkBoxQATranslation.Size = new System.Drawing.Size(229, 20);
 			this.checkBoxQATranslation.TabIndex = 14;
@@ -407,7 +407,7 @@
 						| System.Windows.Forms.AnchorStyles.Right)));
 			this.checkBoxQASpelling.AutoSize = true;
 			this.checkBoxQASpelling.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.checkBoxQASpelling.Location = new System.Drawing.Point(188, 532);
+			this.checkBoxQASpelling.Location = new System.Drawing.Point(188, 491);
 			this.checkBoxQASpelling.Name = "checkBoxQASpelling";
 			this.checkBoxQASpelling.Size = new System.Drawing.Size(136, 20);
 			this.checkBoxQASpelling.TabIndex = 13;
@@ -435,7 +435,7 @@
 			this.textBoxComment.Multiline = true;
 			this.textBoxComment.Name = "textBoxComment";
 			this.textBoxComment.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-			this.textBoxComment.Size = new System.Drawing.Size(510, 174);
+			this.textBoxComment.Size = new System.Drawing.Size(583, 133);
 			this.textBoxComment.TabIndex = 11;
 			this.textBoxComment.TextChanged += new System.EventHandler(this.textBoxComment_TextChanged);
 			// 
@@ -446,9 +446,10 @@
 			this.comboBoxLanguage.FormattingEnabled = true;
 			this.comboBoxLanguage.Location = new System.Drawing.Point(97, 60);
 			this.comboBoxLanguage.Name = "comboBoxLanguage";
-			this.comboBoxLanguage.Size = new System.Drawing.Size(522, 28);
+			this.comboBoxLanguage.Size = new System.Drawing.Size(595, 28);
 			this.comboBoxLanguage.TabIndex = 10;
 			this.comboBoxLanguage.SelectedIndexChanged += new System.EventHandler(this.comboBoxLanguage_SelectedIndexChanged);
+			this.comboBoxLanguage.Enter += new System.EventHandler(this.comboBoxLanguage_Enter);
 			// 
 			// checkedListBoxTags
 			// 
@@ -461,10 +462,10 @@
 			this.checkedListBoxTags.Location = new System.Drawing.Point(97, 94);
 			this.checkedListBoxTags.MultiColumn = true;
 			this.checkedListBoxTags.Name = "checkedListBoxTags";
-			this.checkedListBoxTags.Size = new System.Drawing.Size(522, 109);
+			this.checkedListBoxTags.Size = new System.Drawing.Size(595, 109);
 			this.checkedListBoxTags.Sorted = true;
 			this.checkedListBoxTags.TabIndex = 9;
-			this.checkedListBoxTags.SelectedIndexChanged += new System.EventHandler(this.checkedListBoxTags_SelectedIndexChanged);
+			this.checkedListBoxTags.ItemCheck += new System.Windows.Forms.ItemCheckEventHandler(this.checkedListBoxTags_ItemCheck);
 			// 
 			// label1
 			// 
@@ -484,21 +485,22 @@
 			this.groupBoxNewSongPart.Controls.Add(this.buttonNewSongPart);
 			this.groupBoxNewSongPart.Controls.Add(this.labelNewSongPart);
 			this.groupBoxNewSongPart.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.groupBoxNewSongPart.Location = new System.Drawing.Point(7, 601);
+			this.groupBoxNewSongPart.Location = new System.Drawing.Point(7, 560);
 			this.groupBoxNewSongPart.Name = "groupBoxNewSongPart";
-			this.groupBoxNewSongPart.Size = new System.Drawing.Size(632, 71);
+			this.groupBoxNewSongPart.Size = new System.Drawing.Size(706, 112);
 			this.groupBoxNewSongPart.TabIndex = 9;
 			this.groupBoxNewSongPart.TabStop = false;
 			this.groupBoxNewSongPart.Text = "Neuer Liedteil";
+			this.groupBoxNewSongPart.Enter += new System.EventHandler(this.groupBoxNewSongPart_Enter);
 			// 
 			// comboBoxSongParts
 			// 
 			this.comboBoxSongParts.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
 						| System.Windows.Forms.AnchorStyles.Right)));
 			this.comboBoxSongParts.FormattingEnabled = true;
-			this.comboBoxSongParts.Location = new System.Drawing.Point(100, 25);
+			this.comboBoxSongParts.Location = new System.Drawing.Point(109, 44);
 			this.comboBoxSongParts.Name = "comboBoxSongParts";
-			this.comboBoxSongParts.Size = new System.Drawing.Size(329, 28);
+			this.comboBoxSongParts.Size = new System.Drawing.Size(403, 28);
 			this.comboBoxSongParts.TabIndex = 11;
 			this.comboBoxSongParts.Enter += new System.EventHandler(this.comboBoxSongParts_Enter);
 			// 
@@ -506,7 +508,7 @@
 			// 
 			this.buttonNewSongPart.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
 			this.buttonNewSongPart.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.buttonNewSongPart.Location = new System.Drawing.Point(453, 25);
+			this.buttonNewSongPart.Location = new System.Drawing.Point(536, 44);
 			this.buttonNewSongPart.Name = "buttonNewSongPart";
 			this.buttonNewSongPart.Size = new System.Drawing.Size(157, 28);
 			this.buttonNewSongPart.TabIndex = 10;
@@ -518,7 +520,7 @@
 			// 
 			this.labelNewSongPart.AutoSize = true;
 			this.labelNewSongPart.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.labelNewSongPart.Location = new System.Drawing.Point(8, 29);
+			this.labelNewSongPart.Location = new System.Drawing.Point(17, 48);
 			this.labelNewSongPart.Name = "labelNewSongPart";
 			this.labelNewSongPart.Size = new System.Drawing.Size(55, 20);
 			this.labelNewSongPart.TabIndex = 8;
@@ -534,7 +536,7 @@
 			this.groupBoxSongPart.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
 			this.groupBoxSongPart.Location = new System.Drawing.Point(6, 6);
 			this.groupBoxSongPart.Name = "groupBoxSongPart";
-			this.groupBoxSongPart.Size = new System.Drawing.Size(633, 121);
+			this.groupBoxSongPart.Size = new System.Drawing.Size(707, 121);
 			this.groupBoxSongPart.TabIndex = 10;
 			this.groupBoxSongPart.TabStop = false;
 			this.groupBoxSongPart.Text = "Liedteil-Einstellungen";
@@ -567,7 +569,7 @@
 			this.textBoxSongPartCaption.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
 			this.textBoxSongPartCaption.Location = new System.Drawing.Point(120, 28);
 			this.textBoxSongPartCaption.Name = "textBoxSongPartCaption";
-			this.textBoxSongPartCaption.Size = new System.Drawing.Size(499, 26);
+			this.textBoxSongPartCaption.Size = new System.Drawing.Size(573, 26);
 			this.textBoxSongPartCaption.TabIndex = 4;
 			this.textBoxSongPartCaption.TextChanged += new System.EventHandler(this.textBoxSongPartCaption_TextChanged);
 			// 
@@ -579,7 +581,7 @@
 			this.groupBoxNewSlide.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
 			this.groupBoxNewSlide.Location = new System.Drawing.Point(6, 145);
 			this.groupBoxNewSlide.Name = "groupBoxNewSlide";
-			this.groupBoxNewSlide.Size = new System.Drawing.Size(633, 70);
+			this.groupBoxNewSlide.Size = new System.Drawing.Size(707, 70);
 			this.groupBoxNewSlide.TabIndex = 12;
 			this.groupBoxNewSlide.TabStop = false;
 			this.groupBoxNewSlide.Text = "Neue Folie";

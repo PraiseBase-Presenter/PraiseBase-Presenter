@@ -25,10 +25,7 @@ namespace Pbp
         private Settings setting;
         private projectionWindow projWindow;
 
-        private Font projectionFont;
-        private Color projctionBackgroundColor;
-
-        private Timer t1;
+        private Timer blackOutTimer;
         private Timer diaTimer;
 
         SongManager songMan;
@@ -51,12 +48,9 @@ namespace Pbp
 			this.WindowState = setting.viewerWindowState;
 
             blackout = false;
-            t1 = new Timer(); // Timer anlegen
-            t1.Interval = 500; // Intervall festlegen, hier 100 ms
-            t1.Tick += new EventHandler(t1_Tick); // Eventhandler ezeugen der beim Timerablauf aufgerufen wird
-
-            projectionFont = setting.projectionMasterFont;
-            projctionBackgroundColor = setting.projectionBackColor;
+            blackOutTimer = new Timer(); // Timer anlegen
+            blackOutTimer.Interval = 500; // Intervall festlegen, hier 100 ms
+            blackOutTimer.Tick += new EventHandler(t1_Tick); // Eventhandler ezeugen der beim Timerablauf aufgerufen wird
 
             loadSongList();
             songSearchBox.Focus();
@@ -164,38 +158,31 @@ namespace Pbp
 
 
 
-        // 
-        // Tool Strip
-        //
-
-        private void toolStripButton1_Click(object sender, EventArgs e)
+        private void toggleProjection(object sender, EventArgs e)
         {
-            if (projWindow.Visible)
+			if ((sender.GetType() == typeof(ToolStripButton) && ((ToolStripButton)sender).Name == "toolStripButtonProjectionOff") 
+				|| (projWindow.Visible 
+					&& ((ToolStripButton)sender).Name != "toolStripButtonProjectionOn"))
+			{
+				toolStripButtonProjectionOff.CheckState = CheckState.Checked;
+				toolStripButtonProjectionOn.CheckState = CheckState.Unchecked;
+				projWindow.Hide();
+			}
+            else
             {
-                toolStripButton1.CheckState = CheckState.Checked;
-                toolStripButton3.CheckState = CheckState.Unchecked;
-                projWindow.Hide();
-            }
-            songSearchBox.Focus();
-        }
-
-        private void toolStripButton3_Click(object sender, EventArgs e)
-        {
-            if (!projWindow.Visible)
-            {
-                toolStripButton1.CheckState = CheckState.Unchecked;
-                toolStripButton3.CheckState = CheckState.Checked;
+                toolStripButtonProjectionOff.CheckState = CheckState.Unchecked;
+                toolStripButtonProjectionOn.CheckState = CheckState.Checked;
                 projWindow.Show();
             }
             songSearchBox.Focus();
         }
 
 
-        private void toolStripButton2_Click(object sender, EventArgs e)
+        private void toggleBlackOut(object sender, EventArgs e)
         {
             if (blackout)
             {
-                t1.Stop();
+                blackOutTimer.Stop();
                 blackout = false;
                 toolStripButton2.CheckState = CheckState.Unchecked;
                 toolStripButton2.Image = global::Pbp.Properties.Resources.Blackout_on;
@@ -207,22 +194,22 @@ namespace Pbp
                 toolStripButton2.CheckState = CheckState.Checked;
                 projWindow.blackout(1);
                 toolStripButton2.Image = global::Pbp.Properties.Resources.Blackout_on2;
-                t1.Tag = 1;
-                t1.Start();
+                blackOutTimer.Tag = 1;
+                blackOutTimer.Start();
             }
         }
 
         void t1_Tick(object sender, EventArgs e)
         {
-            if ((int)t1.Tag == 1)
+            if ((int)blackOutTimer.Tag == 1)
             {
                 toolStripButton2.Image = global::Pbp.Properties.Resources.Blackout_on;
-                t1.Tag = 0;
+                blackOutTimer.Tag = 0;
             }
             else
             {
                 toolStripButton2.Image = global::Pbp.Properties.Resources.Blackout_on2;
-                t1.Tag = 1;
+                blackOutTimer.Tag = 1;
             }
         }
 
@@ -884,6 +871,7 @@ namespace Pbp
 			setting.viewerWindowState = this.WindowState;
 			setting.Save();
 		}
+
 
     }
 }
