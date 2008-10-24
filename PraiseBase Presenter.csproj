@@ -77,6 +77,7 @@
     <Compile Include="Classes\EditableSong.cs" />
     <Compile Include="Classes\ImageManager.cs" />
     <Compile Include="Classes\SongManager.cs" />
+    <Compile Include="Classes\SongSubclasses.cs" />
     <Compile Include="Componetns\ColorButton.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -100,6 +101,12 @@
     </Compile>
     <Compile Include="Forms\EditorWindow.Designer.cs">
       <DependentUpon>EditorWindow.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\ImageDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\ImageDialog.Designer.cs">
+      <DependentUpon>ImageDialog.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\mainWindow.cs">
       <SubType>Form</SubType>
@@ -135,6 +142,10 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\EditorWindow.resx">
       <DependentUpon>EditorWindow.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\ImageDialog.resx">
+      <DependentUpon>ImageDialog.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\mainWindow.resx">

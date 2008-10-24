@@ -102,5 +102,8 @@
     <Setting Name="editorWindowState" Type="System.Windows.Forms.FormWindowState" Scope="User">
       <Value Profile="(Default)">Normal</Value>
     </Setting>
+    <Setting Name="version" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">0.8.10.24 BETA</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

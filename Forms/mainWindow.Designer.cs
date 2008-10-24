@@ -336,6 +336,7 @@
 			this.listViewSongs.UseCompatibleStateImageBehavior = false;
 			this.listViewSongs.View = System.Windows.Forms.View.Details;
 			this.listViewSongs.SelectedIndexChanged += new System.EventHandler(this.listViewSongs_SelectedIndexChanged);
+			this.listViewSongs.Click += new System.EventHandler(this.listViewSongs_Click);
 			// 
 			// radioSongSearchAll
 			// 
@@ -710,6 +711,7 @@
 			// radioButtonManualDiashow
 			// 
 			this.radioButtonManualDiashow.AutoSize = true;
+			this.radioButtonManualDiashow.Enabled = false;
 			this.radioButtonManualDiashow.Location = new System.Drawing.Point(17, 72);
 			this.radioButtonManualDiashow.Name = "radioButtonManualDiashow";
 			this.radioButtonManualDiashow.Size = new System.Drawing.Size(116, 17);

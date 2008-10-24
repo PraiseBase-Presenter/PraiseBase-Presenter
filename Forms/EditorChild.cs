@@ -199,7 +199,7 @@ namespace Pbp.Forms
 
 		private void addSongPart(string caption)
 		{
-			Song.Part prt = new Song.Part(sng,caption);
+			Song.Part prt = new Song.Part(caption);
 			Song.Slide sld = new Song.Slide(sng);
 			prt.slides.Add(sld);
 			sng.parts.Add(prt);
@@ -341,7 +341,7 @@ namespace Pbp.Forms
 
         private void textBoxComment_TextChanged(object sender, EventArgs e)
         {
-            sng.comment = textBoxComment.Text.Trim();
+			sng.comment = textBoxComment.Text.Trim();
         }
 
         private void checkBoxQASpelling_CheckedChanged(object sender, EventArgs e)
@@ -603,6 +603,7 @@ namespace Pbp.Forms
 			{
 				sng.save(null);
 				((EditorWindow)MdiParent).setStatus("Lied gespeichert als " + sng.path + "");
+				SongManager.getInstance().reloadSong(sng.path);
 			}
 		}
 
@@ -611,6 +612,7 @@ namespace Pbp.Forms
 			SaveFileDialog saveFileDialog = new SaveFileDialog();
 			saveFileDialog.InitialDirectory = ((EditorWindow)MdiParent).fileBoxInitialDir;
 			saveFileDialog.CheckPathExists = true;
+			saveFileDialog.FileName = sng.title;
 			saveFileDialog.Filter = Song.fileType.getFilterSave();
 			saveFileDialog.FilterIndex = ((EditorWindow)MdiParent).fileBoxFilterIndex;
 			saveFileDialog.AddExtension = true;
@@ -621,6 +623,9 @@ namespace Pbp.Forms
 				sng.save(saveFileDialog.FileName);
 				((EditorWindow)MdiParent).setStatus("Lied gespeichert als " + saveFileDialog.FileName + "");
 			}
+
+			SongManager.getInstance().reloadSong(sng.path);
+
 		}
 
 		private void EditorChild_FormClosing(object sender, FormClosingEventArgs e)
@@ -649,6 +654,48 @@ namespace Pbp.Forms
 
 			}
 		}
+
+		private void checkBoxQATranslation_KeyPress(object sender, KeyPressEventArgs e)
+		{
+				Console.WriteLine(e.KeyChar.ToString());
+		}
+
+		private void buttonSlideBackground_Click(object sender, EventArgs e)
+		{
+			if (treeViewContents.SelectedNode.Level == 2)
+			{
+				int partIdx = treeViewContents.SelectedNode.Parent.Index;
+				int slideIdx = treeViewContents.SelectedNode.Index;
+
+				ImageDialog imd;
+				if (sng.parts[partIdx].slides[slideIdx].imageNumber > 0)
+				{
+					imd = new ImageDialog(setting.dataDirectory + Path.DirectorySeparatorChar + setting.imageDir + Path.DirectorySeparatorChar + sng.imagePaths[sng.parts[partIdx].slides[slideIdx].imageNumber - 1]);
+				}
+				else
+					imd = new ImageDialog();
+
+				if (imd.ShowDialog(this) == DialogResult.OK)
+				{
+					string imString = imd.imagePath.Substring((setting.dataDirectory + Path.DirectorySeparatorChar + setting.imageDir + Path.DirectorySeparatorChar).Length);
+
+					if (sng.imagePaths.Contains(imString))
+					{
+						sng.parts[partIdx].slides[slideIdx].imageNumber = sng.imagePaths.IndexOf(imString) + 1;
+					}
+					else
+					{
+						sng.imagePaths.Add(imString);
+						sng.parts[partIdx].slides[slideIdx].imageNumber = sng.imagePaths.Count;
+					}
+					pictureBoxPreview.Image = projWindow.showSlide(sng.parts[partIdx].slides[slideIdx], sng.getImage(sng.parts[partIdx].slides[slideIdx].imageNumber), true);
+					
+
+				}
+			}
+		}
+
+
 
     }
 }

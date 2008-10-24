@@ -28,7 +28,6 @@ namespace Pbp
         private Timer blackOutTimer;
         private Timer diaTimer;
 
-        SongManager songMan;
         ImageManager imgMan;
 
         private List<String> imageSearchResults;
@@ -42,10 +41,11 @@ namespace Pbp
         private void Form1_Load(object sender, EventArgs e)
         {            
             projWindow = projectionWindow.getInstance();
-            songMan = SongManager.getInstance();
+			SongManager songMan = SongManager.getInstance();
             imgMan = ImageManager.getInstance();
 
 			this.WindowState = setting.viewerWindowState;
+			this.Text += " " + setting.version;
 
             blackout = false;
             blackOutTimer = new Timer(); // Timer anlegen
@@ -86,6 +86,8 @@ namespace Pbp
          */
         void loadSongList()
         {
+			SongManager songMan = SongManager.getInstance();
+
             toolStripStatusLabel.Text = "Lade Liederliste...";
             
             listViewSongs.Items.Clear();
@@ -103,6 +105,8 @@ namespace Pbp
 
         void searchSongs(string needle)
         {
+			SongManager songMan = SongManager.getInstance();
+
             listViewSongs.Items.Clear();
             int cnt = 0;
             foreach (Song sng in songMan.getSearchResults(needle,radioSongSearchAll.Checked ? 1 : 0))
@@ -233,7 +237,9 @@ namespace Pbp
 
         private void liederlisteNeuLadenToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            songSearchBox.Text = "";
+			SongManager songMan = SongManager.getInstance();
+			
+			songSearchBox.Text = "";
             songMan.loadSongs();
             loadSongList();
             songSearchBox.Focus();
@@ -247,7 +253,8 @@ namespace Pbp
         {
             if (listViewSongs.SelectedIndices.Count > 0)
             {
-                songMan.currentSong = songMan.get((int)listViewSongs.SelectedItems[0].Tag);
+				SongManager songMan = SongManager.getInstance();
+				songMan.currentSong = songMan.get((int)listViewSongs.SelectedItems[0].Tag);
 
                 Application.DoEvents();
 
@@ -298,6 +305,8 @@ namespace Pbp
 
         private void songDetailItems_SelectedIndexChanged(object sender, EventArgs e)
         {
+			SongManager songMan = SongManager.getInstance();
+
             if (projWindow != null && songDetailItems.SelectedIndices.Count > 0)
             {
                 Application.DoEvents();
@@ -319,6 +328,8 @@ namespace Pbp
 
         private void songDetailImages_SelectedIndexChanged(object sender, EventArgs e)
         {
+			SongManager songMan = SongManager.getInstance();
+
             if (projWindow != null && songDetailImages.SelectedIndices.Count > 0)
             {
                 Application.DoEvents();
@@ -409,6 +420,8 @@ namespace Pbp
 
         public void saveSongComment()
         {
+			SongManager songMan = SongManager.getInstance();
+
             textBoxSongComment.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
             textBoxSongComment.ReadOnly = true;
             if (songMan.currentSong != null)
@@ -541,6 +554,8 @@ namespace Pbp
 
         private void listViewDirectoryImages_SelectedIndexChanged(object sender, EventArgs e)
         {
+			SongManager songMan = SongManager.getInstance();
+
             if (projWindow != null && listViewDirectoryImages.SelectedIndices.Count > 0)
             {
                 Application.DoEvents();
@@ -712,12 +727,12 @@ namespace Pbp
                 diaTimer.Interval = duration * 1000;
                 diaTimer.Tick += new EventHandler(diaTimer_Tick);
 
-                Stack<string> diaStack = new Stack<string>();
+				Queue<string> diaStack = new Queue<string>();
                 foreach (ListViewItem lvi in listViewDias.Items)
                 {
                     if (lvi.Checked)
                     {
-                        diaStack.Push((string)lvi.Tag);
+                        diaStack.Enqueue((string)lvi.Tag);
                     }
                 }
                 if (diaStack.Count == 0)
@@ -726,21 +741,21 @@ namespace Pbp
                     return;
                 }
                 diaTimer.Tag = diaStack;
-                projWindow.showImage(Image.FromFile(diaStack.Pop()));
+                projWindow.showImage(Image.FromFile(diaStack.Dequeue()));
                 diaTimer.Start();
             }
         }
 
         private void diaTimer_Tick(object sender, EventArgs e)
         {
-            if (((Stack<string>)((Timer)sender).Tag).Count == 0)
+            if (((Queue<string>)((Timer)sender).Tag).Count == 0)
             {
                     ((Timer)sender).Stop();
                     projWindow.showNone();
                     buttonDiaShow.Text = "Diaschau starten";
                     return;                
             }
-            projWindow.showImage(Image.FromFile(((Stack<string>)((Timer)sender).Tag).Pop()));
+			projWindow.showImage(Image.FromFile(((Queue<string>)((Timer)sender).Tag).Dequeue()));
         }
 
         private void radioButton2_CheckedChanged(object sender, EventArgs e)
@@ -755,6 +770,8 @@ namespace Pbp
 
         private void checkBoxQASpelling_CheckedChanged(object sender, EventArgs e)
         {
+			SongManager songMan = SongManager.getInstance();
+
             if (songMan.currentSong != null)
             {
                 songMan.currentSong.QASpelling = ((CheckBox)sender).Checked;
@@ -764,6 +781,8 @@ namespace Pbp
 
         private void checkBoxQATranslation_CheckedChanged(object sender, EventArgs e)
         {
+			SongManager songMan = SongManager.getInstance();
+
             if (songMan.currentSong != null)
             {
                 songMan.currentSong.QATranslation = ((CheckBox)sender).Checked;
@@ -773,6 +792,8 @@ namespace Pbp
 
         private void checkBoxQAImages_CheckedChanged(object sender, EventArgs e)
         {
+			SongManager songMan = SongManager.getInstance();
+
             if (songMan.currentSong != null)
             {
                 songMan.currentSong.QAImage = ((CheckBox)sender).Checked;
@@ -782,6 +803,8 @@ namespace Pbp
 
         private void listViewDirectoryImages_Leave(object sender, EventArgs e)
         {
+			SongManager songMan = SongManager.getInstance();
+
             if (listViewDirectoryImages.SelectedIndices.Count > 0)
             {
                 int idx = listViewDirectoryImages.SelectedIndices[0];
@@ -791,6 +814,8 @@ namespace Pbp
 
         private void listViewImageHistory_SelectedIndexChanged(object sender, EventArgs e)
         {
+			SongManager songMan = SongManager.getInstance();
+
             if (projWindow != null && listViewImageHistory.SelectedIndices.Count > 0)
             {
                 Application.DoEvents();
@@ -824,6 +849,8 @@ namespace Pbp
 
         private void checkBoxQASegmentation_CheckedChanged(object sender, EventArgs e)
         {
+			SongManager songMan = SongManager.getInstance();
+
             if (songMan.currentSong != null)
             {
                 songMan.currentSong.QASegmentation = ((CheckBox)sender).Checked;
@@ -874,6 +901,12 @@ namespace Pbp
 			setting.viewerWindowState = this.WindowState;
 			setting.Save();
 		}
+
+		private void listViewSongs_Click(object sender, EventArgs e)
+		{
+			listViewSongs_SelectedIndexChanged(sender, e);
+		}
+
 
 
     }

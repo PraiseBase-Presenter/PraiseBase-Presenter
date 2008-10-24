@@ -36,6 +36,7 @@
 			this.labelSongTitle = new System.Windows.Forms.Label();
 			this.labelLanguage = new System.Windows.Forms.Label();
 			this.groupBoxSongSettings = new System.Windows.Forms.GroupBox();
+			this.textBoxComment = new System.Windows.Forms.TextBox();
 			this.pictureBoxFontTranslationColor = new System.Windows.Forms.PictureBox();
 			this.pictureBoxFontColor = new System.Windows.Forms.PictureBox();
 			this.label7 = new System.Windows.Forms.Label();
@@ -55,7 +56,6 @@
 			this.checkBoxQATranslation = new System.Windows.Forms.CheckBox();
 			this.checkBoxQASpelling = new System.Windows.Forms.CheckBox();
 			this.label2 = new System.Windows.Forms.Label();
-			this.textBoxComment = new System.Windows.Forms.TextBox();
 			this.comboBoxLanguage = new System.Windows.Forms.ComboBox();
 			this.checkedListBoxTags = new System.Windows.Forms.CheckedListBox();
 			this.label1 = new System.Windows.Forms.Label();
@@ -126,7 +126,6 @@
 			this.textBoxSongText.Size = new System.Drawing.Size(355, 203);
 			this.textBoxSongText.TabIndex = 1;
 			this.textBoxSongText.TextChanged += new System.EventHandler(this.updateSongText);
-			this.textBoxSongText.KeyUp += new System.Windows.Forms.KeyEventHandler(this.updateSongText);
 			// 
 			// pictureBoxPreview
 			// 
@@ -177,6 +176,7 @@
 			this.groupBoxSongSettings.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
 						| System.Windows.Forms.AnchorStyles.Left)
 						| System.Windows.Forms.AnchorStyles.Right)));
+			this.groupBoxSongSettings.Controls.Add(this.textBoxComment);
 			this.groupBoxSongSettings.Controls.Add(this.pictureBoxFontTranslationColor);
 			this.groupBoxSongSettings.Controls.Add(this.pictureBoxFontColor);
 			this.groupBoxSongSettings.Controls.Add(this.label7);
@@ -196,7 +196,6 @@
 			this.groupBoxSongSettings.Controls.Add(this.checkBoxQATranslation);
 			this.groupBoxSongSettings.Controls.Add(this.checkBoxQASpelling);
 			this.groupBoxSongSettings.Controls.Add(this.label2);
-			this.groupBoxSongSettings.Controls.Add(this.textBoxComment);
 			this.groupBoxSongSettings.Controls.Add(this.comboBoxLanguage);
 			this.groupBoxSongSettings.Controls.Add(this.checkedListBoxTags);
 			this.groupBoxSongSettings.Controls.Add(this.label1);
@@ -210,6 +209,20 @@
 			this.groupBoxSongSettings.TabIndex = 8;
 			this.groupBoxSongSettings.TabStop = false;
 			this.groupBoxSongSettings.Text = "Liedeinstellungen";
+			// 
+			// textBoxComment
+			// 
+			this.textBoxComment.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+						| System.Windows.Forms.AnchorStyles.Left)
+						| System.Windows.Forms.AnchorStyles.Right)));
+			this.textBoxComment.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.textBoxComment.Location = new System.Drawing.Point(110, 340);
+			this.textBoxComment.Multiline = true;
+			this.textBoxComment.Name = "textBoxComment";
+			this.textBoxComment.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+			this.textBoxComment.Size = new System.Drawing.Size(582, 145);
+			this.textBoxComment.TabIndex = 68;
+			this.textBoxComment.TextChanged += new System.EventHandler(this.textBoxComment_TextChanged);
 			// 
 			// pictureBoxFontTranslationColor
 			// 
@@ -403,6 +416,7 @@
 			this.checkBoxQATranslation.TabIndex = 14;
 			this.checkBoxQATranslation.Text = "Übersetzung fehlt/ist unvollständig";
 			this.checkBoxQATranslation.UseVisualStyleBackColor = true;
+			this.checkBoxQATranslation.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.checkBoxQATranslation_KeyPress);
 			this.checkBoxQATranslation.CheckedChanged += new System.EventHandler(this.checkBoxQATranslation_CheckedChanged);
 			// 
 			// checkBoxQASpelling
@@ -428,23 +442,6 @@
 			this.label2.Size = new System.Drawing.Size(95, 20);
 			this.label2.TabIndex = 12;
 			this.label2.Text = "Kommentar:";
-			// 
-			// textBoxComment
-			// 
-			this.textBoxComment.AcceptsReturn = true;
-			this.textBoxComment.AcceptsTab = true;
-			this.textBoxComment.AllowDrop = true;
-			this.textBoxComment.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-						| System.Windows.Forms.AnchorStyles.Left)
-						| System.Windows.Forms.AnchorStyles.Right)));
-			this.textBoxComment.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.textBoxComment.Location = new System.Drawing.Point(109, 343);
-			this.textBoxComment.Multiline = true;
-			this.textBoxComment.Name = "textBoxComment";
-			this.textBoxComment.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-			this.textBoxComment.Size = new System.Drawing.Size(583, 133);
-			this.textBoxComment.TabIndex = 11;
-			this.textBoxComment.TextChanged += new System.EventHandler(this.textBoxComment_TextChanged);
 			// 
 			// comboBoxLanguage
 			// 
@@ -708,7 +705,7 @@
 			// buttonDelSlide
 			// 
 			this.buttonDelSlide.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-			this.buttonDelSlide.Location = new System.Drawing.Point(583, 261);
+			this.buttonDelSlide.Location = new System.Drawing.Point(590, 261);
 			this.buttonDelSlide.Name = "buttonDelSlide";
 			this.buttonDelSlide.Size = new System.Drawing.Size(114, 23);
 			this.buttonDelSlide.TabIndex = 10;
@@ -719,7 +716,7 @@
 			// buttonSlideSeparate
 			// 
 			this.buttonSlideSeparate.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-			this.buttonSlideSeparate.Location = new System.Drawing.Point(583, 221);
+			this.buttonSlideSeparate.Location = new System.Drawing.Point(590, 221);
 			this.buttonSlideSeparate.Name = "buttonSlideSeparate";
 			this.buttonSlideSeparate.Size = new System.Drawing.Size(114, 23);
 			this.buttonSlideSeparate.TabIndex = 9;
@@ -730,7 +727,7 @@
 			// buttonSlideDuplicate
 			// 
 			this.buttonSlideDuplicate.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-			this.buttonSlideDuplicate.Location = new System.Drawing.Point(583, 182);
+			this.buttonSlideDuplicate.Location = new System.Drawing.Point(590, 182);
 			this.buttonSlideDuplicate.Name = "buttonSlideDuplicate";
 			this.buttonSlideDuplicate.Size = new System.Drawing.Size(114, 23);
 			this.buttonSlideDuplicate.TabIndex = 8;
@@ -742,7 +739,7 @@
 			// 
 			this.label5.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
 			this.label5.AutoSize = true;
-			this.label5.Location = new System.Drawing.Point(580, 103);
+			this.label5.Location = new System.Drawing.Point(587, 103);
 			this.label5.Name = "label5";
 			this.label5.Size = new System.Drawing.Size(110, 13);
 			this.label5.TabIndex = 7;
@@ -752,7 +749,7 @@
 			// 
 			this.label4.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
 			this.label4.AutoSize = true;
-			this.label4.Location = new System.Drawing.Point(580, 52);
+			this.label4.Location = new System.Drawing.Point(587, 52);
 			this.label4.Name = "label4";
 			this.label4.Size = new System.Drawing.Size(122, 13);
 			this.label4.TabIndex = 6;
@@ -768,7 +765,7 @@
             "Oben",
             "Mitte",
             "Unten"});
-			this.comboBoxSlideVertOrientation.Location = new System.Drawing.Point(583, 129);
+			this.comboBoxSlideVertOrientation.Location = new System.Drawing.Point(590, 129);
 			this.comboBoxSlideVertOrientation.Name = "comboBoxSlideVertOrientation";
 			this.comboBoxSlideVertOrientation.Size = new System.Drawing.Size(114, 24);
 			this.comboBoxSlideVertOrientation.TabIndex = 5;
@@ -784,7 +781,7 @@
             "Linksbündig",
             "Zentriert",
             "Rechtsbündig"});
-			this.comboBoxSlideHorizOrientation.Location = new System.Drawing.Point(583, 76);
+			this.comboBoxSlideHorizOrientation.Location = new System.Drawing.Point(590, 76);
 			this.comboBoxSlideHorizOrientation.Name = "comboBoxSlideHorizOrientation";
 			this.comboBoxSlideHorizOrientation.Size = new System.Drawing.Size(114, 24);
 			this.comboBoxSlideHorizOrientation.TabIndex = 4;
@@ -793,12 +790,13 @@
 			// buttonSlideBackground
 			// 
 			this.buttonSlideBackground.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-			this.buttonSlideBackground.Location = new System.Drawing.Point(583, 16);
+			this.buttonSlideBackground.Location = new System.Drawing.Point(590, 16);
 			this.buttonSlideBackground.Name = "buttonSlideBackground";
 			this.buttonSlideBackground.Size = new System.Drawing.Size(114, 23);
 			this.buttonSlideBackground.TabIndex = 3;
 			this.buttonSlideBackground.Text = "Hintergrundbild...";
 			this.buttonSlideBackground.UseVisualStyleBackColor = true;
+			this.buttonSlideBackground.Click += new System.EventHandler(this.buttonSlideBackground_Click);
 			// 
 			// buttonMoveUp
 			// 
@@ -890,8 +888,7 @@
         private System.Windows.Forms.TabPage tabPage2;
         private System.Windows.Forms.TabPage tabPage3;
         private System.Windows.Forms.Button buttonMoveUp;
-        private System.Windows.Forms.Button buttonMoveDown;
-        private System.Windows.Forms.TextBox textBoxComment;
+		private System.Windows.Forms.Button buttonMoveDown;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.CheckBox checkBoxQASpelling;
         private System.Windows.Forms.CheckBox checkBoxQAImages;
@@ -921,5 +918,6 @@
 		private System.Windows.Forms.Button buttonDelSlide;
 		private System.Windows.Forms.Button buttonDelSongPart;
 		private System.Windows.Forms.TextBox textBoxSongTranslation;
+		private System.Windows.Forms.TextBox textBoxComment;
     }
 }

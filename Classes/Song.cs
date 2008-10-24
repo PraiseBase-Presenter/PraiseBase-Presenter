@@ -7,7 +7,6 @@ using System.IO;
 using System.Windows.Forms;
 using System.Drawing;
 using System.Runtime.Serialization.Formatters.Binary;
-
 using Pbp.Properties; 
 
 namespace Pbp
@@ -17,7 +16,7 @@ namespace Pbp
     /// 
     /// Author: Nicolas Perrenoud <nicolape@ee.ethz.ch>
     /// </summary>
-    public class Song
+    public partial class Song
 	{
 		#region Variables
 
@@ -135,356 +134,11 @@ namespace Pbp
         /// <summary>
         /// List of the paths to all images
         /// </summary>
-        private List<string> imagePaths;
+        public List<string> imagePaths;
         /// <summary>
         /// Thumbnails of all images
         /// </summary>
         private ImageList imageThumbs;
-
-		#endregion
-
-		#region Enums and structs
-
-		/// <summary>
-        /// Horizontal aligning of slide text
-        /// </summary>
-        public enum SongTextHorizontalAlign
-        {
-            /// <summary>
-            /// Text is aligned horizontally to the left
-            /// </summary>
-            left,
-            /// <summary>
-            /// Text is horizontally centered
-            /// </summary>
-            center,
-            /// <summary>
-            /// Text is aligned horizontally to the right
-            /// </summary>
-            right
-        }
-
-        /// <summary>
-        /// Vertical aligning of slide text
-        /// </summary>
-        public enum SongTextVerticalAlign
-        {
-            /// <summary>
-            /// Text is aligned vertically to the top of the page
-            /// </summary>
-            top,
-            /// <summary>
-            /// Text is aligned to the center
-            /// </summary>
-            center,
-            /// <summary>
-            /// Text is aligned vertically to the bottom of the page
-            /// </summary>
-            bottom
-		}
-
-		#endregion
-
-		#region Subclasses
-
-		public class Tags : List<string>
-		{
-			public new void Add(string tagName)
-			{
-				if (!Contains(tagName))
-				{
-					Console.WriteLine(tagName);
-					base.Add(tagName);
-				}
-				
-			}
-		}
-
-		/// <summary>
-        /// A song part with a given name and one or more slides
-        /// </summary>
-        public class Part
-        {
-            /// <summary>
-            /// Song part name like chorus, bridge, part 1 ...
-            /// </summary>
-            public string caption;
-            /// <summary>
-            /// A list of containing slides. Each part has one slide at minimum
-            /// </summary>
-            public List<Slide> slides;
-			/// <summary>
-			/// Pointer to the song object who owns this part
-			/// </summary>
-			private Song ownerSong;
-
-            /// <summary>
-            /// Part constructor
-            /// </summary>
-            public Part(Song owner, string caption)
-            {
-				ownerSong = owner;
-                slides = new List<Slide>();
-				if (caption != null && caption!= String.Empty)
-					this.caption = caption;
-				else
-					this.caption = "Neuer Liedteil";
-            }
-
-			public bool swapSlideWithUpperSlide(int slideId)
-			{
-				if (slideId > 0 && slideId < slides.Count)
-				{
-					Slide tmpPrt = slides[slideId - 1];
-					slides.RemoveAt(slideId - 1);
-					slides.Insert(slideId, tmpPrt);
-					return true;
-				}
-				return false;
-			}
-
-			public bool swapSlideWithLowerSlide(int slideId)
-			{
-				if (slideId >= 0 && slideId < slides.Count - 1)
-				{
-					Slide tmpPrt = slides[slideId + 1];
-					slides.RemoveAt(slideId + 1);
-					slides.Insert(slideId, tmpPrt);
-					return true;
-				}
-				return false;
-			}
-
-			public void duplicateSlide(int slideId)
-			{
-				slides.Insert(slideId, (Slide)slides[slideId].Clone());
-			}
-
-			public void splitSlide(int slideId)
-			{
-				Slide sld = (Slide)slides[slideId].Clone();
-
-				int totl = sld.lines.Count;
-				int rem = totl/2;
-				slides[slideId].lines.RemoveRange(0, rem);
-				sld.lines.RemoveRange(rem, totl-rem);
-
-				totl = sld.translation.Count;
-				rem = totl / 2;
-				slides[slideId].translation.RemoveRange(0, rem);
-				sld.translation.RemoveRange(rem, totl - rem);			
-
-
-				slides.Insert(slideId, sld);
-			}
-        };
-
-        /// <summary>
-        /// A single slide with songtext and/or a background image
-        /// </summary>
-        public class Slide : ICloneable
-        {
-            /// <summary>
-            /// All text lines of this slide
-            /// </summary>
-            public List<string> lines;
-            /// <summary>
-            /// All translation lines of this slide
-            /// </summary>
-            public List<string> translation;
-            /// <summary>
-            /// Number of the slide image. If set to -1, no image is used
-            /// </summary>
-            public int imageNumber;
-            /// <summary>
-            /// Indicates wether this slide has a translation
-            /// </summary>
-            public bool hasTranslation;
-            /// <summary>
-            /// Horizonztal text alignment
-            /// </summary>
-            public SongTextHorizontalAlign horizAlign;
-            /// <summary>
-            /// Vertical text alignment
-            /// </summary>
-            public SongTextVerticalAlign vertAlign;
-            /// <summary>
-            /// Pointer to the song object who owns this slide
-            /// </summary>
-            private Song ownerSong;
-
-			public Font font { get { return ownerSong.font; } }
-
-			public Font fontTranslation {get { return ownerSong.fontTranslation; }}
-			public Color fontColor { get { return ownerSong.fontColor;} }
-			public Color fontColorTranslation { get { return ownerSong.fontColorTranslation; } }
-			public int lineSpacint {get { return ownerSong.lineSpacing; } }
-			
-            /// <summary>
-            /// The slide constructor
-            /// </summary>
-            public Slide(Song ownerSong)
-            {
-                lines = new List<string>();
-                translation = new List<string>();
-                hasTranslation = false;
-                horizAlign = SongTextHorizontalAlign.center;
-                vertAlign = SongTextVerticalAlign.center;
-                this.ownerSong = ownerSong;
-            }
-
-			public void setSlideText(string text)
-			{
-				this.lines = new List<string>();
-				string[] ln = text.Split(new string[] { Environment.NewLine }, StringSplitOptions.None);
-				foreach (string sl in ln)
-				{
-					this.lines.Add(sl.Trim());
-				}
-			}
-
-			public void setSlideTextTranslation(string text)
-			{
-				this.translation = new List<string>();
-				string[] tr = text.Split(new string[] { Environment.NewLine }, StringSplitOptions.None);
-				foreach (string sl in tr)
-				{
-					this.translation.Add(sl.Trim());
-				}
-			}
-
-            /// <summary>
-            /// Returns a string of the wrapped text
-            /// </summary>
-            /// <returns>Wrapped text</returns>
-            public string lineBreakText()
-            {
-                string txt = "";
-                foreach (string str in lines)
-                {
-                    txt += str + Environment.NewLine;
-                }
-                return txt;
-
-            }
-
-            /// <summary>
-            /// Returns the wrapped translation text
-            /// </summary>
-            /// <returns>Wrapped translation</returns>
-            public string lineBreakTranslation()
-            {
-                string txt = "";
-                foreach (string str in translation)
-                {
-                    txt += str + Environment.NewLine;
-                }
-                return txt;
-
-            }
-
-            /// <summary>
-            /// Returns the text on one line. This is mainly used 
-            /// in the song detail overview in the presenter.
-            /// </summary>
-            /// <returns>Text on one line</returns>
-            public string oneLineText()
-            {
-                string txt = "";
-                foreach (string str in lines)
-                {
-                    txt += str + " ";
-                }
-                return txt;
-            }
-
-			public object Clone()
-			{
-				Slide res = new Slide(this.ownerSong);
-				res.hasTranslation = hasTranslation;
-				res.horizAlign = horizAlign;
-				res.imageNumber = imageNumber;
-				foreach (string obj in lines)
-					res.lines.Add(obj);
-				foreach (string obj in translation)
-					res.translation.Add(obj);
-				res.vertAlign = vertAlign;
-				return res;
-			}
-
-        };
-
-		public abstract class fileType
-		{
-			static public fileType createFactory(string ext, string version)
-			{
-				if (ext == fileTypePBPS.extension && version == fileTypePBPS.version)
-				{
-					return new fileTypePBPS();
-				}
-				else if (ext == fileTypePPL.extension && version == fileTypePPL.version)
-				{
-					return new fileTypePPL();
-				}
-				return null;
-			}
-
-			static public fileType createFactory(string ext)
-			{
-				if (ext == fileTypePBPS.extension || ext == "."+fileTypePBPS.extension)
-				{
-					return new fileTypePBPS();
-				}
-				else if (ext == fileTypePPL.extension || ext == "." + fileTypePPL.extension)
-				{
-					return new fileTypePPL();
-				}
-				return null;
-			}
-
-			public static string getFilter()
-			{
-				String fltr = String.Empty;
-				//fltr += fileTypePBPS.name + " (*." + fileTypePBPS.extension + ")|*." + fileTypePBPS.extension + "|";
-				fltr += fileTypePPL.name + " (*." + fileTypePPL.extension + ")|*." + fileTypePPL.extension + "|";
-				fltr += "Alle Dateien (*.*)|*.*";
-				return fltr;
-			}
-
-			public static string getFilterSave()
-			{
-				String fltr = String.Empty;
-				//fltr += fileTypePBPS.name + " (*." + fileTypePBPS.extension + ")|*." + fileTypePBPS.extension + "|";
-				fltr += fileTypePPL.name + " (*." + fileTypePPL.extension + ")|*." + fileTypePPL.extension + "";
-				return fltr;
-			}
-
-
-			public static string[] getAllExtensions()
-			{
-				return new string[] { 
-					"*."+fileTypePBPS.extension, 
-					"*."+fileTypePPL.extension };
-			}
-		}
-
-		protected class fileTypePBPS : fileType
-		{
-			static public string name = "PraiseBase-Presenter Song";
-			static public string extension = "pbps";
-			static public string version = "1.0";
-			static public bool isDefault = true;
-		}
-
-		protected class fileTypePPL : fileType
-		{
-			static public string name = "PowerPraise Lied (veraltet)";
-			static public string extension = "ppl";
-			static public string version = "3.0";
-			static public bool isDefault = false;
-		}
-
-
 
 		#endregion
 
@@ -496,7 +150,6 @@ namespace Pbp
         {
             isValid = false;
             path = filePath;
-
 
             bool err = false;
 
@@ -650,7 +303,7 @@ namespace Pbp
 							if (elem.Name == "part")
 							{
 								string caption = elem.GetAttribute("caption");
-								Part tmpPart = new Part(this,caption);
+								Part tmpPart = new Part(caption);
 								tmpPart.slides = new List<Slide>();
 								foreach (XmlElement slideElem in elem)
 								{
@@ -663,6 +316,7 @@ namespace Pbp
 										int bgNr = System.Convert.ToInt32(slideElem.GetAttribute("backgroundnr")) + 1;
 										bgNr = bgNr<0 ? 0 : bgNr;
 										bgNr = bgNr>imagePaths.Count ? imagePaths.Count : bgNr;
+										//tmpSlide.image = imagePaths[bgNr];
 										tmpSlide.imageNumber = bgNr;
 										foreach (XmlElement lineElem in slideElem)
 										{
@@ -704,7 +358,7 @@ namespace Pbp
 			else
 			{
 				title = "Neues Lied";
-				Part tmpPart = new Part(this,null);
+				Part tmpPart = new Part(null);
 				tmpPart.slides.Add(new Slide(this));
 				parts.Add(tmpPart);
 				originFileType = new fileTypePBPS();
@@ -835,6 +489,26 @@ namespace Pbp
 				}
 
                 xmlRoot.AppendChild(xmlDoc.CreateElement("songtext"));
+
+				List<string> usedImages = new List<string>();
+				foreach (Part prt in parts)
+				{
+					XmlElement tn = xmlDoc.CreateElement("part");
+					tn.SetAttribute("caption", prt.caption);
+					foreach (Slide sld in prt.slides)
+					{
+						if (sld.imageNumber > 0)
+						{
+							if (!usedImages.Contains(imagePaths[sld.imageNumber - 1]))
+							{
+								usedImages.Add(imagePaths[sld.imageNumber - 1]);
+							}
+							sld.imageNumber = usedImages.IndexOf(imagePaths[sld.imageNumber - 1]) + 1;
+						}
+					}
+				}
+				imagePaths = usedImages;
+
                 foreach (Part prt in parts)
                 {
                     XmlElement tn = xmlDoc.CreateElement("part");
@@ -844,6 +518,7 @@ namespace Pbp
                         XmlElement tn2 = xmlDoc.CreateElement("slide");
 						tn2.SetAttribute("mainsize", font.Size.ToString());
 						tn2.SetAttribute("backgroundnr", (sld.imageNumber-1).ToString());
+
                         foreach (string ln in sld.lines)
                         {
                             XmlElement tn3 = xmlDoc.CreateElement("line");
@@ -962,11 +637,11 @@ namespace Pbp
 				xmlRoot["formatting"]["font"]["shadow"]["direction"].InnerText = "125";
 
                 xmlRoot["formatting"].AppendChild(xmlDoc.CreateElement("background"));
-                foreach (string imp in imagePaths)
+				foreach (string imp in usedImages)
                 {
-                    XmlElement tn = xmlDoc.CreateElement("file");
-                    tn.InnerText = imp;
-                    xmlRoot["formatting"]["background"].AppendChild(tn);
+						XmlElement tn = xmlDoc.CreateElement("file");
+						tn.InnerText = imp;
+						xmlRoot["formatting"]["background"].AppendChild(tn);
                 }
                 xmlRoot["formatting"].AppendChild(xmlDoc.CreateElement("linespacing"));
                 
@@ -1011,7 +686,7 @@ namespace Pbp
 
 
 
-				XmlWriter wrt = new XmlTextWriter(fileName, Encoding.Default);
+				XmlWriter wrt = new XmlTextWriter(fileName, Encoding.UTF8);
 				xmlDoc.WriteTo(wrt);
 				wrt.Flush();
 				wrt.Close();

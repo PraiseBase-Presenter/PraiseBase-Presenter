@@ -29,6 +29,7 @@ namespace Pbp.Forms
 			fileBoxInitialDir = setting.dataDirectory + Path.DirectorySeparatorChar + setting.songDir;
 			fileBoxFilterIndex = 0;
 			this.WindowState = setting.editorWindowState;
+			this.Text += " " + setting.version;
 
         }
 
@@ -80,15 +81,36 @@ namespace Pbp.Forms
         }
 
         private void CutToolStripMenuItem_Click(object sender, EventArgs e)
-        {
+		{
+			if (ActiveMdiChild != null)
+			{
+				if (((EditorChild)ActiveMdiChild).ActiveControl.GetType() == typeof(TextBox))
+				{
+					((TextBox)((EditorChild)ActiveMdiChild).ActiveControl).Cut();
+				}
+			}
         }
 
         private void CopyToolStripMenuItem_Click(object sender, EventArgs e)
-        {
+		{
+			if (ActiveMdiChild != null)
+			{
+				if (((EditorChild)ActiveMdiChild).ActiveControl.GetType() == typeof(TextBox))
+				{
+					((TextBox)((EditorChild)ActiveMdiChild).ActiveControl).Copy();
+				}
+			}
         }
 
         private void PasteToolStripMenuItem_Click(object sender, EventArgs e)
-        {
+		{
+			if (ActiveMdiChild != null)
+			{
+				if (((EditorChild)ActiveMdiChild).ActiveControl.GetType() == typeof(TextBox))
+				{
+					((TextBox)((EditorChild)ActiveMdiChild).ActiveControl).Paste();
+				}
+			}
         }
 
         private void ToolBarToolStripMenuItem_Click(object sender, EventArgs e)
@@ -154,12 +176,6 @@ namespace Pbp.Forms
             }
         }
 
-        private void EditorWindow_Load(object sender, EventArgs e)
-        {
-
-
-
-        }
 
         private void EditorWindow_FormClosing(object sender, FormClosingEventArgs e)
         {
@@ -199,6 +215,63 @@ namespace Pbp.Forms
 			toolStripStatusLabel1.Text = string.Empty;
 			((Timer)sender).Stop();
 			((Timer)sender).Dispose();
+		}
+
+		private void selectAllToolStripMenuItem_Click(object sender, EventArgs e)
+		{
+			if (ActiveMdiChild != null)
+			{
+				if (((EditorChild)ActiveMdiChild).ActiveControl.GetType() == typeof(TextBox))
+				{
+					((TextBox)((EditorChild)ActiveMdiChild).ActiveControl).SelectAll();
+				}
+			}
+		}
+
+		private void undoToolStripMenuItem_Click(object sender, EventArgs e)
+		{
+			if (ActiveMdiChild != null)
+			{
+				if (((EditorChild)ActiveMdiChild).ActiveControl.GetType() == typeof(TextBox))
+				{
+					((TextBox)((EditorChild)ActiveMdiChild).ActiveControl).Undo();
+				}
+			}
+		}
+
+		private void redoToolStripMenuItem_Click(object sender, EventArgs e)
+		{
+			if (ActiveMdiChild != null)
+			{
+				if (((EditorChild)ActiveMdiChild).ActiveControl.GetType() == typeof(TextBox))
+				{
+					((TextBox)((EditorChild)ActiveMdiChild).ActiveControl).ClearUndo();
+				}
+			}
+		}
+
+		private void liedSchliessenToolStripMenuItem_Click(object sender, EventArgs e)
+		{
+			if (ActiveMdiChild != null)
+			{
+				((EditorChild)ActiveMdiChild).Close();
+			}
+		}
+
+		private void allesSchliessenToolStripMenuItem_Click(object sender, EventArgs e)
+		{
+			if (MdiChildren.Count() > 0)
+			{
+				foreach (EditorChild c in MdiChildren)
+				{
+					((EditorChild)c).Close();
+				}
+			}
+		}
+
+		private void EditorWindow_Load(object sender, EventArgs e)
+		{
+
 		}
 
 

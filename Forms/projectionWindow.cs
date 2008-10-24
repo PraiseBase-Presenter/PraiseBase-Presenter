@@ -43,7 +43,7 @@ namespace Pbp.Forms
             this.Size = new Size(projScreen.WorkingArea.Width, projScreen.WorkingArea.Height);
             h = this.Height;
             w = this.Width;
-            Console.WriteLine("Projection window has dimensions " + w + "*" + h);
+//            Console.WriteLine("Projection window has dimensions " + w + "*" + h);
         }
 
         static public projectionWindow getInstance()
@@ -62,7 +62,7 @@ namespace Pbp.Forms
             this.Size = new Size(projScreen.WorkingArea.Width, projScreen.WorkingArea.Height);
             h = this.Height;
             w = this.Width;
-            Console.WriteLine("Projection window has dimensions "+w+"*"+h);
+//            Console.WriteLine("Projection window has dimensions "+w+"*"+h);
         }
 
         /**

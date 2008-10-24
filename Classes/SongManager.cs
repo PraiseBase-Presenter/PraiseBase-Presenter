@@ -87,13 +87,35 @@ namespace Pbp
             return validSongs[id];
         }
 
-        /// <summary>
-        /// Search the songlist for a given pattern and returns the matching songs
-        /// </summary>
-        /// <param name="needle">The search pattern</param>
-        /// <param name="mode">If set to 1, the sogtext is also searched for the pattern. If set to 0, only the song title will be used</param>
-        /// <returns>Returns a list of matches songs</returns>
-        public List<Song> getSearchResults(string needle, int mode)
+		public void reloadSong(int i)
+		{
+			validSongs[i] = new Song(validSongs[i].path);
+		}
+
+		public void reloadSong(string path)
+		{
+			if (path != String.Empty && path != null)
+			{
+				for (int i = 0; i < validSongs.Count; i++)
+				{
+					Console.WriteLine(validSongs[i].path);
+					Console.WriteLine(path);
+					if (validSongs[i].path.ToLower() == path.ToLower())
+					{
+						validSongs[i] = new Song(validSongs[i].path);
+						return;
+					}
+				}
+			}
+		}
+
+		/// <summary>
+		/// Search the songlist for a given pattern and returns the matching songs
+		/// </summary>
+		/// <param name="needle">The search pattern</param>
+		/// <param name="mode">If set to 1, the sogtext is also searched for the pattern. If set to 0, only the song title will be used</param>
+		/// <returns>Returns a list of matches songs</returns>
+		public List<Song> getSearchResults(string needle, int mode)
         {
 			needle = needle.Trim().ToLower();
 			needle = needle.Replace(",", "");

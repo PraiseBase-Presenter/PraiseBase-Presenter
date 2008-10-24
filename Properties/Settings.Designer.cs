@@ -320,5 +320,14 @@ namespace Pbp.Properties {
                 this["editorWindowState"] = value;
             }
         }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0.8.10.24 BETA")]
+        public string version {
+            get {
+                return ((string)(this["version"]));
+            }
+        }
     }
 }
