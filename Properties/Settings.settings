@@ -105,5 +105,8 @@
     <Setting Name="version" Type="System.String" Scope="Application">
       <Value Profile="(Default)">0.8.10.24 BETA</Value>
     </Setting>
+    <Setting Name="weburl" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">http://code.google.com/p/praisebasepresenter</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

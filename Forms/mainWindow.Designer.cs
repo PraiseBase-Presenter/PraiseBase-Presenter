@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+			System.Windows.Forms.Button buttonChooseDiaDir;
 			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(mainWindow));
 			this.menuStrip1 = new System.Windows.Forms.MenuStrip();
 			this.dateiToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -40,6 +41,8 @@
 			this.einstellungenToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.optionenToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.toolStripSeparator5 = new System.Windows.Forms.ToolStripSeparator();
+			this.datenverzeichnisÖffnenToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.toolStripSeparator6 = new System.Windows.Forms.ToolStripSeparator();
 			this.bildschirmeErneutSuchenToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.liederlisteNeuLadenToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.bilderlisteNeuLadenToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -59,7 +62,12 @@
 			this.radioSongSearchTitle = new System.Windows.Forms.RadioButton();
 			this.tabControl1 = new System.Windows.Forms.TabControl();
 			this.tabPage1 = new System.Windows.Forms.TabPage();
+			this.groupBox4 = new System.Windows.Forms.GroupBox();
+			this.buttonSetListRem = new System.Windows.Forms.Button();
+			this.buttonSetListDown = new System.Windows.Forms.Button();
+			this.buttonSetListUp = new System.Windows.Forms.Button();
 			this.groupBox3 = new System.Windows.Forms.GroupBox();
+			this.label6 = new System.Windows.Forms.Label();
 			this.groupBox1 = new System.Windows.Forms.GroupBox();
 			this.checkBoxQASegmentation = new System.Windows.Forms.CheckBox();
 			this.checkBoxQAImages = new System.Windows.Forms.CheckBox();
@@ -91,21 +99,26 @@
 			this.buttonEnableAllDias = new System.Windows.Forms.Button();
 			this.labelDiaDirectory = new System.Windows.Forms.Label();
 			this.listViewDias = new System.Windows.Forms.ListView();
-			this.button1 = new System.Windows.Forms.Button();
 			this.toolStrip1 = new System.Windows.Forms.ToolStrip();
 			this.toolStripButtonProjectionOff = new System.Windows.Forms.ToolStripButton();
 			this.toolStripButtonProjectionOn = new System.Windows.Forms.ToolStripButton();
 			this.toolStripButton2 = new System.Windows.Forms.ToolStripButton();
 			this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
 			this.toolStripButton5 = new System.Windows.Forms.ToolStripButton();
+			this.toolStripButtonDataFolder = new System.Windows.Forms.ToolStripButton();
 			this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
 			this.toolStripButton4 = new System.Windows.Forms.ToolStripButton();
 			this.statusStrip1 = new System.Windows.Forms.StatusStrip();
 			this.toolStripStatusLabel = new System.Windows.Forms.ToolStripStatusLabel();
+			this.listViewSetList = new System.Windows.Forms.ListView();
+			this.columnHeader4 = new System.Windows.Forms.ColumnHeader();
+			this.buttonSetListClear = new System.Windows.Forms.Button();
+			buttonChooseDiaDir = new System.Windows.Forms.Button();
 			this.menuStrip1.SuspendLayout();
 			this.groupBox2.SuspendLayout();
 			this.tabControl1.SuspendLayout();
 			this.tabPage1.SuspendLayout();
+			this.groupBox4.SuspendLayout();
 			this.groupBox3.SuspendLayout();
 			this.groupBox1.SuspendLayout();
 			this.tabPage2.SuspendLayout();
@@ -113,6 +126,16 @@
 			this.toolStrip1.SuspendLayout();
 			this.statusStrip1.SuspendLayout();
 			this.SuspendLayout();
+			// 
+			// buttonChooseDiaDir
+			// 
+			buttonChooseDiaDir.Location = new System.Drawing.Point(11, 8);
+			buttonChooseDiaDir.Name = "buttonChooseDiaDir";
+			buttonChooseDiaDir.Size = new System.Drawing.Size(177, 23);
+			buttonChooseDiaDir.TabIndex = 0;
+			buttonChooseDiaDir.Text = "Verzeichnis wählen...";
+			buttonChooseDiaDir.UseVisualStyleBackColor = true;
+			buttonChooseDiaDir.Click += new System.EventHandler(this.button1_Click);
 			// 
 			// menuStrip1
 			// 
@@ -184,6 +207,8 @@
 			this.einstellungenToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.optionenToolStripMenuItem,
             this.toolStripSeparator5,
+            this.datenverzeichnisÖffnenToolStripMenuItem,
+            this.toolStripSeparator6,
             this.bildschirmeErneutSuchenToolStripMenuItem,
             this.liederlisteNeuLadenToolStripMenuItem,
             this.bilderlisteNeuLadenToolStripMenuItem});
@@ -194,33 +219,45 @@
 			// optionenToolStripMenuItem
 			// 
 			this.optionenToolStripMenuItem.Name = "optionenToolStripMenuItem";
-			this.optionenToolStripMenuItem.Size = new System.Drawing.Size(195, 22);
+			this.optionenToolStripMenuItem.Size = new System.Drawing.Size(213, 22);
 			this.optionenToolStripMenuItem.Text = "&Optionen...";
 			this.optionenToolStripMenuItem.Click += new System.EventHandler(this.optionenToolStripMenuItem_Click);
 			// 
 			// toolStripSeparator5
 			// 
 			this.toolStripSeparator5.Name = "toolStripSeparator5";
-			this.toolStripSeparator5.Size = new System.Drawing.Size(192, 6);
+			this.toolStripSeparator5.Size = new System.Drawing.Size(210, 6);
+			// 
+			// datenverzeichnisÖffnenToolStripMenuItem
+			// 
+			this.datenverzeichnisÖffnenToolStripMenuItem.Name = "datenverzeichnisÖffnenToolStripMenuItem";
+			this.datenverzeichnisÖffnenToolStripMenuItem.Size = new System.Drawing.Size(213, 22);
+			this.datenverzeichnisÖffnenToolStripMenuItem.Text = "&Datenverzeichnis anzeigen";
+			this.datenverzeichnisÖffnenToolStripMenuItem.Click += new System.EventHandler(this.datenverzeichnisÖffnenToolStripMenuItem_Click);
+			// 
+			// toolStripSeparator6
+			// 
+			this.toolStripSeparator6.Name = "toolStripSeparator6";
+			this.toolStripSeparator6.Size = new System.Drawing.Size(210, 6);
 			// 
 			// bildschirmeErneutSuchenToolStripMenuItem
 			// 
 			this.bildschirmeErneutSuchenToolStripMenuItem.Name = "bildschirmeErneutSuchenToolStripMenuItem";
-			this.bildschirmeErneutSuchenToolStripMenuItem.Size = new System.Drawing.Size(195, 22);
+			this.bildschirmeErneutSuchenToolStripMenuItem.Size = new System.Drawing.Size(213, 22);
 			this.bildschirmeErneutSuchenToolStripMenuItem.Text = "Bildschirme neu &suchen";
 			this.bildschirmeErneutSuchenToolStripMenuItem.Click += new System.EventHandler(this.bildschirmeErneutSuchenToolStripMenuItem_Click);
 			// 
 			// liederlisteNeuLadenToolStripMenuItem
 			// 
 			this.liederlisteNeuLadenToolStripMenuItem.Name = "liederlisteNeuLadenToolStripMenuItem";
-			this.liederlisteNeuLadenToolStripMenuItem.Size = new System.Drawing.Size(195, 22);
+			this.liederlisteNeuLadenToolStripMenuItem.Size = new System.Drawing.Size(213, 22);
 			this.liederlisteNeuLadenToolStripMenuItem.Text = "&Liederliste neu laden";
 			this.liederlisteNeuLadenToolStripMenuItem.Click += new System.EventHandler(this.liederlisteNeuLadenToolStripMenuItem_Click);
 			// 
 			// bilderlisteNeuLadenToolStripMenuItem
 			// 
 			this.bilderlisteNeuLadenToolStripMenuItem.Name = "bilderlisteNeuLadenToolStripMenuItem";
-			this.bilderlisteNeuLadenToolStripMenuItem.Size = new System.Drawing.Size(195, 22);
+			this.bilderlisteNeuLadenToolStripMenuItem.Size = new System.Drawing.Size(213, 22);
 			this.bilderlisteNeuLadenToolStripMenuItem.Text = "&Bilderliste neu laden";
 			this.bilderlisteNeuLadenToolStripMenuItem.Click += new System.EventHandler(this.bilderlisteNeuLadenToolStripMenuItem_Click);
 			// 
@@ -237,6 +274,7 @@
 			// 
 			// toolStripMenuItem2
 			// 
+			this.toolStripMenuItem2.Enabled = false;
 			this.toolStripMenuItem2.Name = "toolStripMenuItem2";
 			this.toolStripMenuItem2.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.F1)));
 			this.toolStripMenuItem2.Size = new System.Drawing.Size(150, 22);
@@ -313,7 +351,7 @@
 			this.groupBox2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
 			this.groupBox2.Location = new System.Drawing.Point(6, 8);
 			this.groupBox2.Name = "groupBox2";
-			this.groupBox2.Size = new System.Drawing.Size(247, 573);
+			this.groupBox2.Size = new System.Drawing.Size(247, 341);
 			this.groupBox2.TabIndex = 19;
 			this.groupBox2.TabStop = false;
 			this.groupBox2.Text = "Liederliste";
@@ -331,12 +369,12 @@
 			this.listViewSongs.Location = new System.Drawing.Point(5, 68);
 			this.listViewSongs.MultiSelect = false;
 			this.listViewSongs.Name = "listViewSongs";
-			this.listViewSongs.Size = new System.Drawing.Size(234, 499);
+			this.listViewSongs.Size = new System.Drawing.Size(234, 267);
 			this.listViewSongs.TabIndex = 21;
 			this.listViewSongs.UseCompatibleStateImageBehavior = false;
 			this.listViewSongs.View = System.Windows.Forms.View.Details;
+			this.listViewSongs.MouseClick += new System.Windows.Forms.MouseEventHandler(this.listViewSongs_MouseClick);
 			this.listViewSongs.SelectedIndexChanged += new System.EventHandler(this.listViewSongs_SelectedIndexChanged);
-			this.listViewSongs.Click += new System.EventHandler(this.listViewSongs_Click);
 			// 
 			// radioSongSearchAll
 			// 
@@ -381,6 +419,7 @@
 			// 
 			// tabPage1
 			// 
+			this.tabPage1.Controls.Add(this.groupBox4);
 			this.tabPage1.Controls.Add(this.groupBox3);
 			this.tabPage1.Controls.Add(this.groupBox2);
 			this.tabPage1.Location = new System.Drawing.Point(4, 29);
@@ -391,11 +430,61 @@
 			this.tabPage1.Text = "Lieder";
 			this.tabPage1.UseVisualStyleBackColor = true;
 			// 
+			// groupBox4
+			// 
+			this.groupBox4.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+			this.groupBox4.Controls.Add(this.buttonSetListClear);
+			this.groupBox4.Controls.Add(this.listViewSetList);
+			this.groupBox4.Controls.Add(this.buttonSetListRem);
+			this.groupBox4.Controls.Add(this.buttonSetListDown);
+			this.groupBox4.Controls.Add(this.buttonSetListUp);
+			this.groupBox4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.groupBox4.Location = new System.Drawing.Point(6, 355);
+			this.groupBox4.Name = "groupBox4";
+			this.groupBox4.Size = new System.Drawing.Size(247, 226);
+			this.groupBox4.TabIndex = 26;
+			this.groupBox4.TabStop = false;
+			this.groupBox4.Text = "Setliste";
+			// 
+			// buttonSetListRem
+			// 
+			this.buttonSetListRem.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.buttonSetListRem.Location = new System.Drawing.Point(101, 196);
+			this.buttonSetListRem.Name = "buttonSetListRem";
+			this.buttonSetListRem.Size = new System.Drawing.Size(46, 23);
+			this.buttonSetListRem.TabIndex = 26;
+			this.buttonSetListRem.Text = "Weg";
+			this.buttonSetListRem.UseVisualStyleBackColor = true;
+			this.buttonSetListRem.Click += new System.EventHandler(this.buttonSetListRem_Click);
+			// 
+			// buttonSetListDown
+			// 
+			this.buttonSetListDown.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.buttonSetListDown.Location = new System.Drawing.Point(58, 196);
+			this.buttonSetListDown.Name = "buttonSetListDown";
+			this.buttonSetListDown.Size = new System.Drawing.Size(34, 23);
+			this.buttonSetListDown.TabIndex = 25;
+			this.buttonSetListDown.Text = "Ab";
+			this.buttonSetListDown.UseVisualStyleBackColor = true;
+			this.buttonSetListDown.Click += new System.EventHandler(this.buttonSetListDown_Click);
+			// 
+			// buttonSetListUp
+			// 
+			this.buttonSetListUp.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.buttonSetListUp.Location = new System.Drawing.Point(10, 196);
+			this.buttonSetListUp.Name = "buttonSetListUp";
+			this.buttonSetListUp.Size = new System.Drawing.Size(38, 23);
+			this.buttonSetListUp.TabIndex = 24;
+			this.buttonSetListUp.Text = "Auf";
+			this.buttonSetListUp.UseVisualStyleBackColor = true;
+			this.buttonSetListUp.Click += new System.EventHandler(this.buttonSetListUp_Click);
+			// 
 			// groupBox3
 			// 
 			this.groupBox3.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
 						| System.Windows.Forms.AnchorStyles.Left)
 						| System.Windows.Forms.AnchorStyles.Right)));
+			this.groupBox3.Controls.Add(this.label6);
 			this.groupBox3.Controls.Add(this.groupBox1);
 			this.groupBox3.Controls.Add(this.songDetailItems);
 			this.groupBox3.Controls.Add(this.songDetailImages);
@@ -406,6 +495,20 @@
 			this.groupBox3.TabIndex = 25;
 			this.groupBox3.TabStop = false;
 			this.groupBox3.Text = "Lied-Details";
+			// 
+			// label6
+			// 
+			this.label6.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)
+						| System.Windows.Forms.AnchorStyles.Right)));
+			this.label6.AutoSize = true;
+			this.label6.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
+			this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.label6.Location = new System.Drawing.Point(18, 454);
+			this.label6.Name = "label6";
+			this.label6.Size = new System.Drawing.Size(698, 16);
+			this.label6.TabIndex = 30;
+			this.label6.Text = "Klicke auf ein Lied, um es zu projizieren. SHIFT-klicke auf ein Lied, um es mit d" +
+				"em aktuellen Hintergrund zu projizieren.";
 			// 
 			// groupBox1
 			// 
@@ -507,7 +610,7 @@
 			this.songDetailItems.Location = new System.Drawing.Point(6, 79);
 			this.songDetailItems.MultiSelect = false;
 			this.songDetailItems.Name = "songDetailItems";
-			this.songDetailItems.Size = new System.Drawing.Size(721, 392);
+			this.songDetailItems.Size = new System.Drawing.Size(721, 366);
 			this.songDetailItems.TabIndex = 23;
 			this.songDetailItems.UseCompatibleStateImageBehavior = false;
 			this.songDetailItems.View = System.Windows.Forms.View.Details;
@@ -687,7 +790,7 @@
 			this.tabPage3.Controls.Add(this.buttonEnableAllDias);
 			this.tabPage3.Controls.Add(this.labelDiaDirectory);
 			this.tabPage3.Controls.Add(this.listViewDias);
-			this.tabPage3.Controls.Add(this.button1);
+			this.tabPage3.Controls.Add(buttonChooseDiaDir);
 			this.tabPage3.Location = new System.Drawing.Point(4, 29);
 			this.tabPage3.Name = "tabPage3";
 			this.tabPage3.Size = new System.Drawing.Size(998, 587);
@@ -790,16 +893,6 @@
 			this.listViewDias.TabIndex = 1;
 			this.listViewDias.UseCompatibleStateImageBehavior = false;
 			// 
-			// button1
-			// 
-			this.button1.Location = new System.Drawing.Point(11, 8);
-			this.button1.Name = "button1";
-			this.button1.Size = new System.Drawing.Size(177, 23);
-			this.button1.TabIndex = 0;
-			this.button1.Text = "Verzeichnis wählen...";
-			this.button1.UseVisualStyleBackColor = true;
-			this.button1.Click += new System.EventHandler(this.button1_Click);
-			// 
 			// toolStrip1
 			// 
 			this.toolStrip1.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
@@ -810,6 +903,7 @@
             this.toolStripButton2,
             this.toolStripSeparator1,
             this.toolStripButton5,
+            this.toolStripButtonDataFolder,
             this.toolStripSeparator2,
             this.toolStripButton4});
 			this.toolStrip1.Location = new System.Drawing.Point(0, 24);
@@ -866,6 +960,16 @@
 			this.toolStripButton5.Text = "Liededitor";
 			this.toolStripButton5.Click += new System.EventHandler(this.toolStripButton5_Click);
 			// 
+			// toolStripButtonDataFolder
+			// 
+			this.toolStripButtonDataFolder.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+			this.toolStripButtonDataFolder.Image = global::Pbp.Properties.Resources.folder_favorites;
+			this.toolStripButtonDataFolder.ImageTransparentColor = System.Drawing.Color.Magenta;
+			this.toolStripButtonDataFolder.Name = "toolStripButtonDataFolder";
+			this.toolStripButtonDataFolder.Size = new System.Drawing.Size(68, 68);
+			this.toolStripButtonDataFolder.Text = "Datenverzeichnis anzeigen";
+			this.toolStripButtonDataFolder.Click += new System.EventHandler(this.toolStripButtonDataFolder_Click);
+			// 
 			// toolStripSeparator2
 			// 
 			this.toolStripSeparator2.Name = "toolStripSeparator2";
@@ -896,6 +1000,33 @@
 			this.toolStripStatusLabel.Name = "toolStripStatusLabel";
 			this.toolStripStatusLabel.Size = new System.Drawing.Size(0, 17);
 			// 
+			// listViewSetList
+			// 
+			this.listViewSetList.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.columnHeader4});
+			this.listViewSetList.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.listViewSetList.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.None;
+			this.listViewSetList.HideSelection = false;
+			this.listViewSetList.Location = new System.Drawing.Point(5, 19);
+			this.listViewSetList.MultiSelect = false;
+			this.listViewSetList.Name = "listViewSetList";
+			this.listViewSetList.Size = new System.Drawing.Size(234, 171);
+			this.listViewSetList.TabIndex = 27;
+			this.listViewSetList.UseCompatibleStateImageBehavior = false;
+			this.listViewSetList.View = System.Windows.Forms.View.Details;
+			this.listViewSetList.SelectedIndexChanged += new System.EventHandler(this.listViewSetList_SelectedIndexChanged);
+			// 
+			// buttonSetListClear
+			// 
+			this.buttonSetListClear.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.buttonSetListClear.Location = new System.Drawing.Point(157, 196);
+			this.buttonSetListClear.Name = "buttonSetListClear";
+			this.buttonSetListClear.Size = new System.Drawing.Size(75, 23);
+			this.buttonSetListClear.TabIndex = 28;
+			this.buttonSetListClear.Text = "Leeren";
+			this.buttonSetListClear.UseVisualStyleBackColor = true;
+			this.buttonSetListClear.Click += new System.EventHandler(this.buttonSetListClear_Click);
+			// 
 			// mainWindow
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -919,7 +1050,9 @@
 			this.groupBox2.PerformLayout();
 			this.tabControl1.ResumeLayout(false);
 			this.tabPage1.ResumeLayout(false);
+			this.groupBox4.ResumeLayout(false);
 			this.groupBox3.ResumeLayout(false);
+			this.groupBox3.PerformLayout();
 			this.groupBox1.ResumeLayout(false);
 			this.groupBox1.PerformLayout();
 			this.tabPage2.ResumeLayout(false);
@@ -982,8 +1115,7 @@
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.TabPage tabPage3;
         private System.Windows.Forms.Label labelDiaDirectory;
-        private System.Windows.Forms.ListView listViewDias;
-        private System.Windows.Forms.Button button1;
+		private System.Windows.Forms.ListView listViewDias;
         private System.Windows.Forms.Button buttonDisableAllDias;
         private System.Windows.Forms.Button buttonEnableAllDias;
         private System.Windows.Forms.Button buttonDiaShow;
@@ -1010,6 +1142,17 @@
 		private System.Windows.Forms.ToolStripMenuItem projektionToolStripMenuItem;
 		private System.Windows.Forms.ToolStripMenuItem projektionEinausToolStripMenuItem;
 		private System.Windows.Forms.ToolStripMenuItem blackoutEinausToolStripMenuItem;
+		private System.Windows.Forms.ToolStripMenuItem datenverzeichnisÖffnenToolStripMenuItem;
+		private System.Windows.Forms.ToolStripSeparator toolStripSeparator6;
+		private System.Windows.Forms.Label label6;
+		private System.Windows.Forms.ToolStripButton toolStripButtonDataFolder;
+		private System.Windows.Forms.GroupBox groupBox4;
+		private System.Windows.Forms.Button buttonSetListRem;
+		private System.Windows.Forms.Button buttonSetListDown;
+		private System.Windows.Forms.Button buttonSetListUp;
+		private System.Windows.Forms.ListView listViewSetList;
+		private System.Windows.Forms.ColumnHeader columnHeader4;
+		private System.Windows.Forms.Button buttonSetListClear;
     }
 }
 

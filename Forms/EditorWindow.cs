@@ -164,7 +164,7 @@ namespace Pbp.Forms
 
         private void webToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            System.Diagnostics.Process.Start("http://www.nicu.ch/pbp");
+            System.Diagnostics.Process.Start(setting.weburl);
         }
 
         private void optionsToolStripMenuItem_Click(object sender, EventArgs e)
@@ -272,6 +272,16 @@ namespace Pbp.Forms
 		private void EditorWindow_Load(object sender, EventArgs e)
 		{
 
+		}
+
+		private void datenverzeichnisAnzeigenToolStripMenuItem_Click(object sender, EventArgs e)
+		{
+			System.Diagnostics.Process.Start(setting.dataDirectory);
+		}
+
+		private void toolStripButton2_Click(object sender, EventArgs e)
+		{
+			System.Diagnostics.Process.Start(setting.dataDirectory);
 		}
 
 

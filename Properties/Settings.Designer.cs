@@ -329,5 +329,14 @@ namespace Pbp.Properties {
                 return ((string)(this["version"]));
             }
         }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("http://code.google.com/p/praisebasepresenter")]
+        public string weburl {
+            get {
+                return ((string)(this["weburl"]));
+            }
+        }
     }
 }

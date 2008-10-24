@@ -130,6 +130,13 @@ namespace Pbp.Properties {
             }
         }
         
+        internal static System.Drawing.Bitmap folder_favorites {
+            get {
+                object obj = ResourceManager.GetObject("folder_favorites", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
         internal static System.Drawing.Bitmap gpg {
             get {
                 object obj = ResourceManager.GetObject("gpg", resourceCulture);
@@ -180,23 +187,16 @@ namespace Pbp.Properties {
             }
         }
         
+        internal static System.Drawing.Bitmap logo {
+            get {
+                object obj = ResourceManager.GetObject("logo", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
         internal static System.Drawing.Bitmap package_favorite {
             get {
                 object obj = ResourceManager.GetObject("package_favorite", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        internal static System.Drawing.Bitmap pb_mit_schwarz {
-            get {
-                object obj = ResourceManager.GetObject("pb_mit_schwarz", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        internal static System.Drawing.Bitmap pb_web {
-            get {
-                object obj = ResourceManager.GetObject("pb_web", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

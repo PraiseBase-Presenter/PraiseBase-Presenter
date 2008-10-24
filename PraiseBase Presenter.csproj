@@ -239,64 +239,8 @@
     <None Include="Resources\Blackout on2.png" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Backgrounds\Berge\Blumenberg.jpg" />
-    <Content Include="Backgrounds\Berge\Dunsthügel.jpg" />
-    <Content Include="Backgrounds\Berge\Horeb.jpg" />
-    <Content Include="Backgrounds\Berge\Matterhorn.jpg" />
-    <Content Include="Backgrounds\Berge\Nebel.jpg" />
-    <Content Include="Backgrounds\Bäume\Baum in der Dämmerung.jpg" />
-    <Content Include="Backgrounds\Bäume\Baum und Wolken.jpg" />
-    <Content Include="Backgrounds\Bäume\Dürrer Baum.jpg" />
-    <Content Include="Backgrounds\Bäume\Herbstwald.jpg" />
-    <Content Include="Backgrounds\Bäume\Nebelwald.jpg" />
-    <Content Include="Backgrounds\Bäume\Waldlicht.jpg" />
-    <Content Include="Backgrounds\Feuer\Kerzen.jpg" />
-    <Content Include="Backgrounds\Feuer\Lagerfeuer.jpg" />
-    <Content Include="Backgrounds\Gebäude\Burg.jpg" />
-    <Content Include="Backgrounds\Gebäude\Jerusalem.jpg" />
-    <Content Include="Backgrounds\Himmel\Himmel 1.jpg" />
-    <Content Include="Backgrounds\Himmel\Himmel 2.jpg" />
-    <Content Include="Backgrounds\Himmel\Himmel 3.jpg" />
-    <Content Include="Backgrounds\Himmel\Himmel 4.jpg" />
-    <Content Include="Backgrounds\Himmel\Himmel 5.jpg" />
-    <Content Include="Backgrounds\Himmel\Himmel 6.jpg" />
-    <Content Include="Backgrounds\Himmel\Himmel 7.jpg" />
-    <Content Include="Backgrounds\Himmel\Himmel 8.jpg" />
-    <Content Include="Backgrounds\Himmel\Himmel 9.jpg" />
-    <Content Include="Backgrounds\Kreuze\Celtic Cross.jpg" />
-    <Content Include="Backgrounds\Kreuze\Schwarz-Weiss Kreuz.jpg" />
-    <Content Include="Backgrounds\Landschaften\Landschaft 1.jpg" />
-    <Content Include="Backgrounds\Landschaften\Wüste Negev 1.jpg" />
-    <Content Include="Backgrounds\Leuchttürme\Leuchttürme 1.jpg" />
-    <Content Include="Backgrounds\Leuchttürme\Leuchttürme 2.jpg" />
-    <Content Include="Backgrounds\Leuchttürme\Leuchttürme 3.jpg" />
-    <Content Include="Backgrounds\Menschen\Anbetung 1.jpg" />
-    <Content Include="Backgrounds\Menschen\Anbetung 2.jpg" />
-    <Content Include="Backgrounds\Menschen\Anbetung 3.jpg" />
-    <Content Include="Backgrounds\Menschen\Gospel.jpg" />
-    <Content Include="Backgrounds\Tiere\Vogel 1.jpg" />
-    <Content Include="Backgrounds\Wasser\Blaue Nebelküste.jpg" />
-    <Content Include="Backgrounds\Wasser\Kind am Strand.jpg" />
-    <Content Include="Backgrounds\Wasser\Licht über dem Meer.jpg" />
-    <Content Include="Backgrounds\Wasser\Roter Strand.jpg" />
-    <Content Include="Backgrounds\Wasser\Welle 1.jpg" />
-    <Content Include="Backgrounds\Wetter\Blitz 1.jpg" />
-    <Content Include="Backgrounds\Wetter\Blitz 2.jpg" />
-    <Content Include="Backgrounds\Wetter\Blitz 3.jpg" />
-    <Content Include="Backgrounds\Wetter\Mond.jpg" />
-    <Content Include="Backgrounds\Wetter\Pfähle im Nebel.jpg" />
-    <Content Include="Backgrounds\Wetter\Sonnenuntergang 1.jpg" />
-    <Content Include="Backgrounds\Wüste\Blauer Sand.jpg" />
-    <Content Include="Backgrounds\Wüste\Licht in der Schlucht.jpg" />
-    <Content Include="Backgrounds\Wüste\Wüste 1.jpg" />
-    <Content Include="Backgrounds\Wüste\Wüste 2.jpg" />
-    <Content Include="Backgrounds\Wüste\Wüste 3.jpg" />
-    <Content Include="Backgrounds\Wüste\Wüste 4.jpg" />
-    <Content Include="Doc\License.txt" />
-    <Content Include="Songs\A Mighty Fortress Is Our God.ppl" />
     <None Include="Resources\kate.png" />
     <None Include="Resources\gplv3-127x51.png" />
-    <Content Include="Songs\Jesus is my Lord.ppl" />
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include="Microsoft.Net.Framework.2.0">
@@ -329,6 +273,14 @@
       <WrapperTool>primary</WrapperTool>
       <Isolated>False</Isolated>
     </COMReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\logo.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\folder_favorites.png" />
+    <Content Include="Songs\A Mighty Fortress Is Our God.ppl" />
+    <Content Include="Songs\Jesus is my Lord.ppl" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

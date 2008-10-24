@@ -253,55 +253,59 @@ namespace Pbp
         {
             if (listViewSongs.SelectedIndices.Count > 0)
             {
-				SongManager songMan = SongManager.getInstance();
-				songMan.currentSong = songMan.get((int)listViewSongs.SelectedItems[0].Tag);
+				SongManager.getInstance().currentSong = SongManager.getInstance().get((int)listViewSongs.SelectedItems[0].Tag);
+				showCurrentSongDetails();
+            }            
+        }
 
-                Application.DoEvents();
+		private void showCurrentSongDetails()
+		{
+			SongManager songMan = SongManager.getInstance();
+			Application.DoEvents();
 
-                songDetailItems.Items.Clear();
-                songDetailImages.Items.Clear();
+			songDetailItems.Items.Clear();
+			songDetailImages.Items.Clear();
 
-                songDetailItems.SmallImageList = songMan.currentSong.getThumbs();
+			songDetailItems.SmallImageList = songMan.currentSong.getThumbs();
 
-                ImageList songImages = songMan.currentSong.getThumbs();
-                songDetailImages.LargeImageList = songImages;
-                for (int i = 1; i < songImages.Images.Count; i++)
-                {
-                    ListViewItem lvi = new ListViewItem();
-                    lvi.ImageIndex = i;
-                    songDetailImages.Items.Add(lvi);
-                }
+			ImageList songImages = songMan.currentSong.getThumbs();
+			songDetailImages.LargeImageList = songImages;
+			for (int i = 1; i < songImages.Images.Count; i++)
+			{
+				ListViewItem lvi = new ListViewItem();
+				lvi.ImageIndex = i;
+				songDetailImages.Items.Add(lvi);
+			}
 
-                foreach (Song.Part prt in songMan.currentSong.parts)
-                {
-                    int sj = 1;
-                    foreach (Song.Slide sld in prt.slides)
-                    {
-                        ListViewItem lvi = new ListViewItem(new string[] 
+			foreach (Song.Part prt in songMan.currentSong.parts)
+			{
+				int sj = 1;
+				foreach (Song.Slide sld in prt.slides)
+				{
+					ListViewItem lvi = new ListViewItem(new string[] 
                         { 
                             prt.slides.Count > 1 ? prt.caption + " ("+sj+")" : prt.caption, 
                             sld.oneLineText() }
-                        );
-                        lvi.ImageIndex = sld.imageNumber;
-                        songDetailItems.Items.Add(lvi);
-                        sj++;
-                    }
-                }
+					);
+					lvi.ImageIndex = sld.imageNumber;
+					songDetailItems.Items.Add(lvi);
+					sj++;
+				}
+			}
 
-                songDetailItems.Columns[0].Width = -2;
-                songDetailItems.Columns[1].Width = -2;
+			songDetailItems.Columns[0].Width = -2;
+			songDetailItems.Columns[1].Width = -2;
 
-                // Set comment
-                setSongComment(songMan.currentSong.comment);
+			// Set comment
+			setSongComment(songMan.currentSong.comment);
 
-                checkBoxQASpelling.Checked = songMan.currentSong.QASpelling;
-                checkBoxQATranslation.Checked = songMan.currentSong.QATranslation;
-                checkBoxQAImages.Checked = songMan.currentSong.QAImage;
-                checkBoxQASegmentation.Checked = songMan.currentSong.QASegmentation;
+			checkBoxQASpelling.Checked = songMan.currentSong.QASpelling;
+			checkBoxQATranslation.Checked = songMan.currentSong.QATranslation;
+			checkBoxQAImages.Checked = songMan.currentSong.QAImage;
+			checkBoxQASegmentation.Checked = songMan.currentSong.QASegmentation;
 
-                groupBox3.Text = "Lied-Details '" + songMan.currentSong.title + "'";
-            }            
-        }
+			groupBox3.Text = "Lied-Details '" + songMan.currentSong.title + "'";
+		}
 
         private void songDetailItems_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -357,9 +361,8 @@ namespace Pbp
 
         private void webToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            System.Diagnostics.Process.Start("http://www.nicu.ch/pbp");
+			System.Diagnostics.Process.Start(setting.weburl);
         }
-
 
 
         private void songDetailImages_Leave(object sender, EventArgs e)
@@ -902,10 +905,84 @@ namespace Pbp
 			setting.Save();
 		}
 
-		private void listViewSongs_Click(object sender, EventArgs e)
+		private void datenverzeichnisÖffnenToolStripMenuItem_Click(object sender, EventArgs e)
 		{
-			listViewSongs_SelectedIndexChanged(sender, e);
+			System.Diagnostics.Process.Start(setting.dataDirectory);
 		}
+
+		private void toolStripButtonDataFolder_Click(object sender, EventArgs e)
+		{
+			System.Diagnostics.Process.Start(setting.dataDirectory);
+		}
+
+		private void listViewSongs_MouseClick(object sender, MouseEventArgs e)
+		{
+			if (listViewSongs.SelectedItems.Count > 0)
+			{
+				if (e.Button == MouseButtons.Right)
+				{
+					listViewSetList.Items.Add((ListViewItem)listViewSongs.SelectedItems[0].Clone());
+					listViewSetList.Columns[0].Width = -2;
+				}
+				else
+				{
+					listViewSongs_SelectedIndexChanged(sender, e);
+				}
+			}
+		}
+
+		private void buttonSetListRem_Click(object sender, EventArgs e)
+		{
+			if (listViewSetList.SelectedItems.Count > 0)
+			{
+				listViewSetList.Items.RemoveAt(listViewSetList.SelectedIndices[0]);
+			}
+		}
+
+		private void listViewSetList_SelectedIndexChanged(object sender, EventArgs e)
+		{
+			if (listViewSetList.SelectedIndices.Count > 0)
+			{
+				SongManager.getInstance().currentSong = SongManager.getInstance().get((int)listViewSetList.SelectedItems[0].Tag);
+				showCurrentSongDetails();
+			}   
+		}
+
+		private void buttonSetListClear_Click(object sender, EventArgs e)
+		{
+			listViewSetList.Items.Clear();
+		}
+
+		private void buttonSetListUp_Click(object sender, EventArgs e)
+		{
+			if (listViewSetList.SelectedIndices.Count > 0)
+			{
+				int idx = listViewSetList.SelectedIndices[0];
+				if (idx > 0)
+				{
+					ListViewItem lvi = listViewSetList.Items[idx];
+					listViewSetList.Items.RemoveAt(idx);
+					listViewSetList.Items.Insert(idx - 1, lvi);
+					listViewSetList.Items[idx - 1].Selected = true;
+				}
+			}
+		}
+
+		private void buttonSetListDown_Click(object sender, EventArgs e)
+		{
+			if (listViewSetList.SelectedIndices.Count > 0)
+			{
+				int idx = listViewSetList.SelectedIndices[0];
+				if (idx < listViewSetList.Items.Count-1)
+				{
+					ListViewItem lvi = listViewSetList.Items[idx];
+					listViewSetList.Items.RemoveAt(idx);
+					listViewSetList.Items.Insert(idx + 1, lvi);
+					listViewSetList.Items[idx + 1].Selected = true;
+				}
+			}
+		}
+
 
 
 

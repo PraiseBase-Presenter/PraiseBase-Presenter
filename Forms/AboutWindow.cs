@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using System.Reflection;
-
+using Pbp.Properties;
 
 namespace Pbp.Forms
 {
@@ -25,8 +25,9 @@ namespace Pbp.Forms
 
         private void AboutWindow_Load(object sender, EventArgs e)
         {
+			Settings setting = new Settings();
             this.labelProductName.Text = AssemblyProduct;
-            this.labelVersion.Text = String.Format("Version {0} {0}", AssemblyVersion);
+			this.labelVersion.Text = setting.version;
             this.labelCopyright.Text = AssemblyCopyright;
             this.labelCompanyName.Text = AssemblyCompany;
             

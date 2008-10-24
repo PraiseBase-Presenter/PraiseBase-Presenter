@@ -379,7 +379,7 @@ namespace Pbp
 
 			Image img = new Bitmap(64, 48);
 			Graphics graph = Graphics.FromImage(img);
-			graph.FillRectangle(new SolidBrush(Color.Magenta), 0, 0, img.Width, img.Height);
+			graph.FillRectangle(new SolidBrush(setting.projectionBackColor), 0, 0, img.Width, img.Height);
 			imageThumbs.Images.Add(img);
 			graph.Dispose();
 
@@ -431,9 +431,10 @@ namespace Pbp
 			}
 			catch 
 			{
+				Settings setting = new Settings();
 				Image img = new Bitmap(800, 600);
 				Graphics graph = Graphics.FromImage(img);
-				graph.FillRectangle(new SolidBrush(Color.Cyan), 0, 0, img.Width, img.Height);
+				graph.FillRectangle(new SolidBrush(setting.projectionBackColor), 0, 0, img.Width, img.Height);
 				return img;
 			}
         }
