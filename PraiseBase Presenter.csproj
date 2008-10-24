@@ -285,6 +285,7 @@
     <Content Include="Songs\A Mighty Fortress Is Our God.ppl" />
     <None Include="Resources\kate.png" />
     <None Include="Resources\gplv3-127x51.png" />
+    <Content Include="Songs\Jesus is my Lord.ppl" />
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include="Microsoft.Net.Framework.2.0">

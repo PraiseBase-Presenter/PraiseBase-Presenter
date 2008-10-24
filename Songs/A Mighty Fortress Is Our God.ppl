@@ -1,9 +1,10 @@
-<?xml version="1.0" encoding="ISO-8859-1"?>
+<?xml version="1.0"?>
 <ppl version="3.0">
 	<general>
 		<title>A mighty fortress is our God</title>
 		<category>Keine Kategorie</category>
-		<language/>
+		<language />
+		<comment>asdfas dfas dfasdf</comment>
 	</general>
 	<songtext>
 		<part caption="Strophe 1">
@@ -20,7 +21,7 @@
 			</slide>
 		</part>
 		<part caption="Strophe 2">
-			<slide mainsize="26" backgroundnr="3">
+			<slide mainsize="26" backgroundnr="0">
 				<line>Did we in our own strength confide,</line>
 				<line>our striving would be losing,</line>
 				<line>were not the right man on our side,</line>
@@ -33,7 +34,7 @@
 			</slide>
 		</part>
 		<part caption="Strophe 3">
-			<slide mainsize="26" backgroundnr="1">
+			<slide mainsize="26" backgroundnr="0">
 				<line>And though this world, with devils filled,</line>
 				<line>should threaten to undo us,</line>
 				<line>we will not fear, for God hath willed</line>
@@ -46,7 +47,7 @@
 			</slide>
 		</part>
 		<part caption="Strophe 4">
-			<slide mainsize="26" backgroundnr="2">
+			<slide mainsize="26" backgroundnr="0">
 				<line>That word above all earthly powers,</line>
 				<line>no thanks to them, abideth;</line>
 				<line>the Spirit and the gifts are ours,</line>
@@ -68,11 +69,11 @@
 	<information>
 		<copyright>
 			<position>lastslide</position>
-			<text/>
+			<text />
 		</copyright>
 		<source>
 			<position>firstslide</position>
-			<text/>
+			<text />
 		</source>
 	</information>
 	<formatting>
@@ -97,7 +98,7 @@
 			</translationtext>
 			<copyrighttext>
 				<name>Arial</name>
-				<size>14</size>
+				<size>20</size>
 				<bold>false</bold>
 				<italic>false</italic>
 				<color>16777215</color>
@@ -106,7 +107,7 @@
 			</copyrighttext>
 			<sourcetext>
 				<name>Arial</name>
-				<size>30</size>
+				<size>20</size>
 				<bold>false</bold>
 				<italic>false</italic>
 				<color>16777215</color>
@@ -124,14 +125,11 @@
 			</shadow>
 		</font>
 		<background>
-			<file>0</file>
 			<file>Himmel/Himmel 7.jpg</file>
-			<file>0</file>
-			<file>12063522</file>
 		</background>
 		<linespacing>
 			<main>30</main>
-			<translation>20</translation>
+			<translation>30</translation>
 		</linespacing>
 		<textorientation>
 			<horizontal>left</horizontal>

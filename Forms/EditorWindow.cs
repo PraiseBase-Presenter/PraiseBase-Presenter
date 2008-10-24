@@ -16,8 +16,9 @@ namespace Pbp.Forms
     {
         Settings setting;
         static private EditorWindow _instance;
-		string fileBoxInitialDir;
-		int fileBoxFilterIndex;
+		
+		public string fileBoxInitialDir;
+		public int fileBoxFilterIndex;
 
         private int childFormNumber = 0;
 
@@ -71,10 +72,7 @@ namespace Pbp.Forms
             }
         }
 
-        private void SaveAsToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            ((EditorChild)ActiveMdiChild).saveAs();
-        }
+
 
         private void ExitToolsStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -100,7 +98,7 @@ namespace Pbp.Forms
 
         private void StatusBarToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            //statusStrip.Visible = statusBarToolStripMenuItem.Checked;
+            statusStrip1.Visible = statusBarToolStripMenuItem.Checked;
         }
 
         private void CascadeToolStripMenuItem_Click(object sender, EventArgs e)
@@ -159,6 +157,8 @@ namespace Pbp.Forms
         private void EditorWindow_Load(object sender, EventArgs e)
         {
 
+
+
         }
 
         private void EditorWindow_FormClosing(object sender, FormClosingEventArgs e)
@@ -177,10 +177,30 @@ namespace Pbp.Forms
             }
         }
 
+		private void saveChildAs(object sender, EventArgs e)
+		{
+			if (ActiveMdiChild != null)
+			{
+				((EditorChild)ActiveMdiChild).saveAs();
+			}
+		}
+
         public void setStatus(string text)
         {
             toolStripStatusLabel1.Text = text;
-        }
+			Timer statusTimer = new Timer();
+			statusTimer.Interval = 2000;
+			statusTimer.Tick += new EventHandler(statusTimer_Tick);
+			statusTimer.Start();
+		}
+		
+		void statusTimer_Tick(object sender, EventArgs e)
+		{
+			toolStripStatusLabel1.Text = string.Empty;
+			((Timer)sender).Stop();
+			((Timer)sender).Dispose();
+		}
+
 
     }
 }

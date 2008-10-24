@@ -114,6 +114,9 @@
 			// 
 			// textBoxSongText
 			// 
+			this.textBoxSongText.AcceptsReturn = true;
+			this.textBoxSongText.AcceptsTab = true;
+			this.textBoxSongText.AllowDrop = true;
 			this.textBoxSongText.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
 			this.textBoxSongText.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
 			this.textBoxSongText.Location = new System.Drawing.Point(5, 466);
@@ -122,6 +125,7 @@
 			this.textBoxSongText.ScrollBars = System.Windows.Forms.ScrollBars.Both;
 			this.textBoxSongText.Size = new System.Drawing.Size(355, 203);
 			this.textBoxSongText.TabIndex = 1;
+			this.textBoxSongText.TextChanged += new System.EventHandler(this.updateSongText);
 			this.textBoxSongText.KeyUp += new System.Windows.Forms.KeyEventHandler(this.updateSongText);
 			// 
 			// pictureBoxPreview
@@ -427,6 +431,9 @@
 			// 
 			// textBoxComment
 			// 
+			this.textBoxComment.AcceptsReturn = true;
+			this.textBoxComment.AcceptsTab = true;
+			this.textBoxComment.AllowDrop = true;
 			this.textBoxComment.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
 						| System.Windows.Forms.AnchorStyles.Left)
 						| System.Windows.Forms.AnchorStyles.Right)));
@@ -684,12 +691,16 @@
 			// 
 			// textBoxSongTranslation
 			// 
+			this.textBoxSongTranslation.AcceptsReturn = true;
+			this.textBoxSongTranslation.AcceptsTab = true;
+			this.textBoxSongTranslation.AllowDrop = true;
 			this.textBoxSongTranslation.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
 			this.textBoxSongTranslation.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
 			this.textBoxSongTranslation.Location = new System.Drawing.Point(366, 466);
 			this.textBoxSongTranslation.Multiline = true;
 			this.textBoxSongTranslation.Name = "textBoxSongTranslation";
 			this.textBoxSongTranslation.ScrollBars = System.Windows.Forms.ScrollBars.Both;
+			this.textBoxSongTranslation.ShortcutsEnabled = false;
 			this.textBoxSongTranslation.Size = new System.Drawing.Size(355, 203);
 			this.textBoxSongTranslation.TabIndex = 11;
 			this.textBoxSongTranslation.TextChanged += new System.EventHandler(this.textBoxSongTranslation_TextChanged);
@@ -829,6 +840,7 @@
 			this.ShowInTaskbar = false;
 			this.Text = "Liededitor";
 			this.Load += new System.EventHandler(this.EditorChild_Load);
+			this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.EditorChild_FormClosing);
 			this.Resize += new System.EventHandler(this.EditorChild_Resize);
 			((System.ComponentModel.ISupportInitialize)(this.pictureBoxPreview)).EndInit();
 			this.groupBoxSongSettings.ResumeLayout(false);

@@ -258,7 +258,7 @@ namespace Pbp
 
                 ImageList songImages = songMan.currentSong.getThumbs();
                 songDetailImages.LargeImageList = songImages;
-                for (int i = 0; i < songImages.Images.Count; i++)
+                for (int i = 1; i < songImages.Images.Count; i++)
                 {
                     ListViewItem lvi = new ListViewItem();
                     lvi.ImageIndex = i;
@@ -325,11 +325,11 @@ namespace Pbp
                 int idx = songDetailImages.SelectedIndices[0];
                 if ((Control.ModifierKeys & Keys.Shift) == Keys.Shift)
                 {
-                    projWindow.showSlide(songMan.currentSong.slides[songMan.currentSong.currentSlide],songMan.currentSong.getImage(idx), false);
+                    projWindow.showSlide(songMan.currentSong.slides[songMan.currentSong.currentSlide],songMan.currentSong.getImage(idx+1), false);
                 }
                 else
                 {
-                    projWindow.showImage(songMan.currentSong.getImage(idx));
+                    projWindow.showImage(songMan.currentSong.getImage(idx+1));
                 }
             }
         }
@@ -353,8 +353,11 @@ namespace Pbp
 
         private void songDetailImages_Leave(object sender, EventArgs e)
         {
-            int idx = songDetailImages.SelectedIndices[0];
-            songDetailImages.Items[idx].Selected = false;
+			if (songDetailImages.SelectedIndices.Count > 0)
+			{
+				int idx = songDetailImages.SelectedIndices[0];
+				songDetailImages.Items[idx].Selected = false;
+			}
         }
 
 

@@ -13,7 +13,7 @@ namespace Pbp.Forms
         Settings setting;
         projectionWindow projWindow;
 		public bool valid;
-
+		public bool changed = false;
 
         public EditorChild(string fileName)
         {
@@ -174,13 +174,6 @@ namespace Pbp.Forms
 					i++;
                 }
             }
-        }
-
-
-
-        private void updateSongText(object sender, EventArgs e)
-        {
-
         }
 
         private void textBoxSongTitle_TextChanged(object sender, EventArgs e)
@@ -411,19 +404,6 @@ namespace Pbp.Forms
             sng.QASegmentation = checkBoxQASegmentation.Checked;
         }
 
-        private void updateSongText(object sender, KeyEventArgs e)
-        {
-            if (treeViewContents.SelectedNode.Level == 2)
-            {
-                int partIdx = treeViewContents.SelectedNode.Parent.Index;
-                int slideIdx = treeViewContents.SelectedNode.Index;
-
-                sng.parts[partIdx].slides[slideIdx].setSlideText(textBoxSongText.Text);
-
-                pictureBoxPreview.Image = projWindow.showSlide(sng.parts[partIdx].slides[slideIdx], sng.getImage(sng.parts[partIdx].slides[slideIdx].imageNumber), true);
-
-            }
-        }
 
 
         private void comboBoxSlideHorizOrientation_SelectedIndexChanged(object sender, EventArgs e)
@@ -502,27 +482,7 @@ namespace Pbp.Forms
             comboBoxSongParts.DroppedDown = true;
         }
 
-        public void save()
-        {
-            SaveFileDialog saveFileDialog = new SaveFileDialog();
-            saveFileDialog.InitialDirectory = Path.GetDirectoryName(sng.path);
 
-            saveFileDialog.Filter = Song.fileType.getFilter();
-            saveFileDialog.AddExtension = true;
-            saveFileDialog.CheckPathExists = true;
-            saveFileDialog.Title = "Lied speichern unter...";
-
-            if (saveFileDialog.ShowDialog(this) == DialogResult.OK)
-            {
-                sng.save(saveFileDialog.FileName);
-                ((EditorWindow)MdiParent).setStatus("Lied gespeichert als "+saveFileDialog.FileName+"");
-            }
-        }
-
-        public void saveAs()
-        {
-
-        }
 
 		private void buttonDelSlide_Click(object sender, EventArgs e)
 		{
@@ -632,6 +592,61 @@ namespace Pbp.Forms
 			else
 			{
 				sng.tags.Remove(checkedListBoxTags.Items[e.Index].ToString());
+			}
+		}
+
+		public void save()
+		{
+			if (sng.path == null)
+				saveAs();
+			else
+			{
+				sng.save(null);
+				((EditorWindow)MdiParent).setStatus("Lied gespeichert als " + sng.path + "");
+			}
+		}
+
+		public void saveAs()
+		{
+			SaveFileDialog saveFileDialog = new SaveFileDialog();
+			saveFileDialog.InitialDirectory = ((EditorWindow)MdiParent).fileBoxInitialDir;
+			saveFileDialog.CheckPathExists = true;
+			saveFileDialog.Filter = Song.fileType.getFilterSave();
+			saveFileDialog.FilterIndex = ((EditorWindow)MdiParent).fileBoxFilterIndex;
+			saveFileDialog.AddExtension = true;
+			saveFileDialog.Title = "Lied speichern unter...";
+
+			if (saveFileDialog.ShowDialog(this) == DialogResult.OK)
+			{
+				sng.save(saveFileDialog.FileName);
+				((EditorWindow)MdiParent).setStatus("Lied gespeichert als " + saveFileDialog.FileName + "");
+			}
+		}
+
+		private void EditorChild_FormClosing(object sender, FormClosingEventArgs e)
+		{
+			DialogResult dlg = MessageBox.Show("Willst du die Änderungen im Lied "+sng.title+" speichern?", "Liededitor", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
+			if (dlg == DialogResult.Yes)
+			{
+				save();
+			}
+			else if (dlg == DialogResult.Cancel)
+			{
+				e.Cancel = true;
+			}
+		}
+
+		private void updateSongText(object sender, EventArgs e)
+		{
+			if (treeViewContents.SelectedNode.Level == 2)
+			{
+				int partIdx = treeViewContents.SelectedNode.Parent.Index;
+				int slideIdx = treeViewContents.SelectedNode.Index;
+
+				sng.parts[partIdx].slides[slideIdx].setSlideText(textBoxSongText.Text);
+
+				pictureBoxPreview.Image = projWindow.showSlide(sng.parts[partIdx].slides[slideIdx], sng.getImage(sng.parts[partIdx].slides[slideIdx].imageNumber), true);
+
 			}
 		}
 

@@ -429,14 +429,36 @@ namespace Pbp
 				return null;
 			}
 
+			static public fileType createFactory(string ext)
+			{
+				if (ext == fileTypePBPS.extension || ext == "."+fileTypePBPS.extension)
+				{
+					return new fileTypePBPS();
+				}
+				else if (ext == fileTypePPL.extension || ext == "." + fileTypePPL.extension)
+				{
+					return new fileTypePPL();
+				}
+				return null;
+			}
+
 			public static string getFilter()
 			{
 				String fltr = String.Empty;
-				fltr += fileTypePBPS.name + " (*." + fileTypePBPS.extension + ")|*." + fileTypePBPS.extension + "|";
+				//fltr += fileTypePBPS.name + " (*." + fileTypePBPS.extension + ")|*." + fileTypePBPS.extension + "|";
 				fltr += fileTypePPL.name + " (*." + fileTypePPL.extension + ")|*." + fileTypePPL.extension + "|";
 				fltr += "Alle Dateien (*.*)|*.*";
 				return fltr;
 			}
+
+			public static string getFilterSave()
+			{
+				String fltr = String.Empty;
+				//fltr += fileTypePBPS.name + " (*." + fileTypePBPS.extension + ")|*." + fileTypePBPS.extension + "|";
+				fltr += fileTypePPL.name + " (*." + fileTypePPL.extension + ")|*." + fileTypePPL.extension + "";
+				return fltr;
+			}
+
 
 			public static string[] getAllExtensions()
 			{
@@ -605,8 +627,19 @@ namespace Pbp
 							int.TryParse(xmlRoot["formatting"]["linespacing"]["main"].InnerText, out trySize);
 							lineSpacing = trySize > 0 ? trySize: setting.projectionMasterLineSpacing;
 						}
-						
 
+						//
+						// ... and the images
+						//
+						string imPath = setting.dataDirectory + Path.DirectorySeparatorChar + setting.imageDir + Path.DirectorySeparatorChar;
+						foreach (XmlElement elem in xmlRoot["formatting"]["background"])
+						{
+							if (elem.Name == "file")
+							{
+								if (File.Exists(imPath + elem.InnerText))
+									imagePaths.Add(elem.InnerText);
+							}
+						}
 
 						//
 						// Now the song text ... 
@@ -627,7 +660,10 @@ namespace Pbp
 										tmpSlide.lines = new List<string>();
 										tmpSlide.horizAlign = defaultHorizAlign;
 										tmpSlide.vertAlign = defaultVertAlign;
-										tmpSlide.imageNumber = System.Convert.ToInt32(slideElem.GetAttribute("backgroundnr"));
+										int bgNr = System.Convert.ToInt32(slideElem.GetAttribute("backgroundnr")) + 1;
+										bgNr = bgNr<0 ? 0 : bgNr;
+										bgNr = bgNr>imagePaths.Count ? imagePaths.Count : bgNr;
+										tmpSlide.imageNumber = bgNr;
 										foreach (XmlElement lineElem in slideElem)
 										{
 											if (lineElem.Name == "line")
@@ -648,16 +684,7 @@ namespace Pbp
 							}
 						}
 
-						//
-						// ... and the images
-						//
-						foreach (XmlElement elem in xmlRoot["formatting"]["background"])
-						{
-							if (elem.Name == "file")
-							{
-								imagePaths.Add(elem.InnerText);
-							}
-						}
+
 
 
 					}
@@ -680,6 +707,7 @@ namespace Pbp
 				Part tmpPart = new Part(this,null);
 				tmpPart.slides.Add(new Slide(this));
 				parts.Add(tmpPart);
+				originFileType = new fileTypePBPS();
 			}
 
 			if (!err)
@@ -694,6 +722,13 @@ namespace Pbp
             imageThumbs.ImageSize = new Size(64, 48);
             imageThumbs.ColorDepth = ColorDepth.Depth32Bit;
 			Settings setting = new Settings();
+
+			Image img = new Bitmap(64, 48);
+			Graphics graph = Graphics.FromImage(img);
+			graph.FillRectangle(new SolidBrush(Color.Magenta), 0, 0, img.Width, img.Height);
+			imageThumbs.Images.Add(img);
+			graph.Dispose();
+
 			foreach (String path in imagePaths)
             {
 				string imPath = setting.dataDirectory + Path.DirectorySeparatorChar + setting.imageDir + Path.DirectorySeparatorChar + path;
@@ -702,33 +737,34 @@ namespace Pbp
                 {
                     imageThumbs.Images.Add(Image.FromFile(imPath));
                 }
-                else
-                {
-                    //Console.WriteLine("Image " + path + " does not exist!");
-                    Image img = new Bitmap(64, 48);
-                    Graphics graph = Graphics.FromImage(img);
-                    graph.FillRectangle(new SolidBrush(Color.Black), 0, 0, img.Width, img.Height);
-                    imageThumbs.Images.Add(img);
-                }
             }
         }
+
+		public ImageList getThumbs()
+		{
+			if (imageThumbs == null)
+			{
+				loadImageThumbs();
+			}
+			return imageThumbs;
+		}
 
         public Image getImage(int nr)
         {
 			try
 			{
-				if (nr < 0)
+				if (nr < 1)
 				{
 					throw new Exception("Ungültige Bildnummer!");
 				}
 
-				if (imagePaths[nr] == null)
+				if (imagePaths[nr-1] == null)
 				{
 					throw new Exception("Das Bild mit der Nummer " + nr + " existiert nicht!");
 				}
 
 				Settings setting = new Settings();
-				string path = setting.dataDirectory + Path.DirectorySeparatorChar + setting.imageDir + Path.DirectorySeparatorChar + imagePaths[nr];
+				string path = setting.dataDirectory + Path.DirectorySeparatorChar + setting.imageDir + Path.DirectorySeparatorChar + imagePaths[nr-1];
 
 				if (File.Exists(path))
 				{
@@ -739,25 +775,16 @@ namespace Pbp
 					throw new Exception("Das Bild " + path + " existiert nicht!");
 				}
 			}
-			catch (Exception e)
+			catch 
 			{
-				//MessageBox.Show(e.Message, "Lied", MessageBoxButtons.OK, MessageBoxIcon.Error);
-				Console.WriteLine("Fehler im Lied "+title+": " + e.Message);
 				Image img = new Bitmap(800, 600);
 				Graphics graph = Graphics.FromImage(img);
-				graph.FillRectangle(new SolidBrush(Color.Black), 0, 0, img.Width, img.Height);
+				graph.FillRectangle(new SolidBrush(Color.Cyan), 0, 0, img.Width, img.Height);
 				return img;
 			}
         }
 
-        public ImageList getThumbs()
-		{
-            if (imageThumbs == null)
-            {
-                loadImageThumbs();
-            }
-            return imageThumbs;
-		}
+
 
         /// <summary>
         /// Saves the song to an xml file
@@ -765,11 +792,28 @@ namespace Pbp
         /// <param name="fileName">The target filename. Use null to save it back to its original file</param>
         public void save(string fileName)
         {
-            XmlDocument xmlDoc = new XmlDocument();
+			if (fileName == null)
+			{
+				fileName = path;
+			}
+			else
+			{
+				string ext = Path.GetExtension(fileName);
+				originFileType = fileType.createFactory(ext);
+				if (originFileType == null)
+					originFileType = new fileTypePBPS();
+			}
+
+
+			
+			XmlDocument xmlDoc = new XmlDocument();
             
             
             if (originFileType.GetType() == typeof(fileTypePPL))
             {
+				XmlNode xmlnode = xmlDoc.CreateNode(XmlNodeType.XmlDeclaration, "", "");
+				xmlDoc.AppendChild(xmlnode);
+
                 xmlDoc.AppendChild(xmlDoc.CreateElement("ppl"));
                 XmlElement xmlRoot = xmlDoc.DocumentElement;
                 xmlRoot.SetAttribute("version", "3.0");
@@ -780,9 +824,15 @@ namespace Pbp
                 xmlRoot["general"].AppendChild(xmlDoc.CreateElement("category"));
                 xmlRoot["general"]["category"].InnerText = tags.Count > 0 ? tags[0] : "Keine Kategorie";
                 xmlRoot["general"].AppendChild(xmlDoc.CreateElement("language"));
-                xmlRoot["general"]["language"].InnerText = language;
-                xmlRoot["general"].AppendChild(xmlDoc.CreateElement("comment"));
-                xmlRoot["general"]["comment"].InnerText = comment;
+				if (language != string.Empty)
+				{
+					xmlRoot["general"]["language"].InnerText = language;
+				}
+				if (comment != string.Empty)
+				{
+					xmlRoot["general"].AppendChild(xmlDoc.CreateElement("comment"));
+					xmlRoot["general"]["comment"].InnerText = comment;
+				}
 
                 xmlRoot.AppendChild(xmlDoc.CreateElement("songtext"));
                 foreach (Part prt in parts)
@@ -792,14 +842,20 @@ namespace Pbp
                     foreach (Slide sld in prt.slides)
                     {
                         XmlElement tn2 = xmlDoc.CreateElement("slide");
-                        tn2.SetAttribute("backgroundnr", sld.imageNumber.ToString());
-                        tn2.SetAttribute("mainsize", "26"); // Todo
+						tn2.SetAttribute("mainsize", font.Size.ToString());
+						tn2.SetAttribute("backgroundnr", (sld.imageNumber-1).ToString());
                         foreach (string ln in sld.lines)
                         {
                             XmlElement tn3 = xmlDoc.CreateElement("line");
                             tn3.InnerText = ln;
                             tn2.AppendChild(tn3);
                         }
+						foreach (string ln in sld.translation)
+						{
+							XmlElement tn3 = xmlDoc.CreateElement("translation");
+							tn3.InnerText = ln;
+							tn2.AppendChild(tn3);
+						}
                         tn.AppendChild(tn2);
                     }
                     xmlRoot["songtext"].AppendChild(tn);
@@ -824,8 +880,87 @@ namespace Pbp
                 xmlRoot["information"]["source"].AppendChild(xmlDoc.CreateElement("text"));
 
                 xmlRoot.AppendChild(xmlDoc.CreateElement("formatting"));
+
                 xmlRoot["formatting"].AppendChild(xmlDoc.CreateElement("font"));
-                
+				xmlRoot["formatting"]["font"].AppendChild(xmlDoc.CreateElement("maintext"));
+				xmlRoot["formatting"]["font"]["maintext"].AppendChild(xmlDoc.CreateElement("name"));
+				xmlRoot["formatting"]["font"]["maintext"]["name"].InnerText = font.Name.ToString();
+				xmlRoot["formatting"]["font"]["maintext"].AppendChild(xmlDoc.CreateElement("size"));
+				xmlRoot["formatting"]["font"]["maintext"]["size"].InnerText = font.Size.ToString();
+				xmlRoot["formatting"]["font"]["maintext"].AppendChild(xmlDoc.CreateElement("bold"));
+				xmlRoot["formatting"]["font"]["maintext"]["bold"].InnerText = (font.Bold).ToString().ToLower();
+				xmlRoot["formatting"]["font"]["maintext"].AppendChild(xmlDoc.CreateElement("italic"));
+				xmlRoot["formatting"]["font"]["maintext"]["italic"].InnerText = (font.Italic).ToString().ToLower();
+				xmlRoot["formatting"]["font"]["maintext"].AppendChild(xmlDoc.CreateElement("color"));
+				xmlRoot["formatting"]["font"]["maintext"]["color"].InnerText = (16777216 + fontColor.ToArgb()).ToString();
+				xmlRoot["formatting"]["font"]["maintext"].AppendChild(xmlDoc.CreateElement("outline"));
+				xmlRoot["formatting"]["font"]["maintext"]["outline"].InnerText = "25";
+				xmlRoot["formatting"]["font"]["maintext"].AppendChild(xmlDoc.CreateElement("shadow"));
+				xmlRoot["formatting"]["font"]["maintext"]["shadow"].InnerText = "20";
+
+				xmlRoot["formatting"]["font"].AppendChild(xmlDoc.CreateElement("translationtext"));
+				xmlRoot["formatting"]["font"]["translationtext"].AppendChild(xmlDoc.CreateElement("name"));
+				xmlRoot["formatting"]["font"]["translationtext"]["name"].InnerText = fontTranslation.Name.ToString();
+				xmlRoot["formatting"]["font"]["translationtext"].AppendChild(xmlDoc.CreateElement("size"));
+				xmlRoot["formatting"]["font"]["translationtext"]["size"].InnerText = fontTranslation.Size.ToString();
+				xmlRoot["formatting"]["font"]["translationtext"].AppendChild(xmlDoc.CreateElement("bold"));
+				xmlRoot["formatting"]["font"]["translationtext"]["bold"].InnerText = (fontTranslation.Bold).ToString().ToLower();
+				xmlRoot["formatting"]["font"]["translationtext"].AppendChild(xmlDoc.CreateElement("italic"));
+				xmlRoot["formatting"]["font"]["translationtext"]["italic"].InnerText = (fontTranslation.Italic).ToString().ToLower();
+				xmlRoot["formatting"]["font"]["translationtext"].AppendChild(xmlDoc.CreateElement("color"));
+				xmlRoot["formatting"]["font"]["translationtext"]["color"].InnerText = (16777216 +fontColorTranslation.ToArgb()).ToString();
+				xmlRoot["formatting"]["font"]["translationtext"].AppendChild(xmlDoc.CreateElement("outline"));
+				xmlRoot["formatting"]["font"]["translationtext"]["outline"].InnerText = "25";
+				xmlRoot["formatting"]["font"]["translationtext"].AppendChild(xmlDoc.CreateElement("shadow"));
+				xmlRoot["formatting"]["font"]["translationtext"]["shadow"].InnerText = "20";
+
+				xmlRoot["formatting"]["font"].AppendChild(xmlDoc.CreateElement("copyrighttext"));
+				xmlRoot["formatting"]["font"]["copyrighttext"].AppendChild(xmlDoc.CreateElement("name"));
+				xmlRoot["formatting"]["font"]["copyrighttext"]["name"].InnerText = fontTranslation.Name.ToString();
+				xmlRoot["formatting"]["font"]["copyrighttext"].AppendChild(xmlDoc.CreateElement("size"));
+				xmlRoot["formatting"]["font"]["copyrighttext"]["size"].InnerText = fontTranslation.Size.ToString();
+				xmlRoot["formatting"]["font"]["copyrighttext"].AppendChild(xmlDoc.CreateElement("bold"));
+				xmlRoot["formatting"]["font"]["copyrighttext"]["bold"].InnerText = (fontTranslation.Bold).ToString().ToLower();
+				xmlRoot["formatting"]["font"]["copyrighttext"].AppendChild(xmlDoc.CreateElement("italic"));
+				xmlRoot["formatting"]["font"]["copyrighttext"]["italic"].InnerText = (fontTranslation.Italic).ToString().ToLower();
+				xmlRoot["formatting"]["font"]["copyrighttext"].AppendChild(xmlDoc.CreateElement("color"));
+				xmlRoot["formatting"]["font"]["copyrighttext"]["color"].InnerText = (16777216 + fontColorTranslation.ToArgb()).ToString();
+				xmlRoot["formatting"]["font"]["copyrighttext"].AppendChild(xmlDoc.CreateElement("outline"));
+				xmlRoot["formatting"]["font"]["copyrighttext"]["outline"].InnerText = "25";
+				xmlRoot["formatting"]["font"]["copyrighttext"].AppendChild(xmlDoc.CreateElement("shadow"));
+				xmlRoot["formatting"]["font"]["copyrighttext"]["shadow"].InnerText = "20";
+
+				xmlRoot["formatting"]["font"].AppendChild(xmlDoc.CreateElement("sourcetext"));
+				xmlRoot["formatting"]["font"]["sourcetext"].AppendChild(xmlDoc.CreateElement("name"));
+				xmlRoot["formatting"]["font"]["sourcetext"]["name"].InnerText = fontTranslation.Name.ToString();
+				xmlRoot["formatting"]["font"]["sourcetext"].AppendChild(xmlDoc.CreateElement("size"));
+				xmlRoot["formatting"]["font"]["sourcetext"]["size"].InnerText = fontTranslation.Size.ToString();
+				xmlRoot["formatting"]["font"]["sourcetext"].AppendChild(xmlDoc.CreateElement("bold"));
+				xmlRoot["formatting"]["font"]["sourcetext"]["bold"].InnerText = (fontTranslation.Bold).ToString().ToLower();
+				xmlRoot["formatting"]["font"]["sourcetext"].AppendChild(xmlDoc.CreateElement("italic"));
+				xmlRoot["formatting"]["font"]["sourcetext"]["italic"].InnerText = (fontTranslation.Italic).ToString().ToLower();
+				xmlRoot["formatting"]["font"]["sourcetext"].AppendChild(xmlDoc.CreateElement("color"));
+				xmlRoot["formatting"]["font"]["sourcetext"]["color"].InnerText = (16777216 + fontColorTranslation.ToArgb()).ToString();
+				xmlRoot["formatting"]["font"]["sourcetext"].AppendChild(xmlDoc.CreateElement("outline"));
+				xmlRoot["formatting"]["font"]["sourcetext"]["outline"].InnerText = "25";
+				xmlRoot["formatting"]["font"]["sourcetext"].AppendChild(xmlDoc.CreateElement("shadow"));
+				xmlRoot["formatting"]["font"]["sourcetext"]["shadow"].InnerText = "20";
+
+
+				xmlRoot["formatting"]["font"].AppendChild(xmlDoc.CreateElement("outline"));
+				xmlRoot["formatting"]["font"]["outline"].AppendChild(xmlDoc.CreateElement("enabled"));
+				xmlRoot["formatting"]["font"]["outline"]["enabled"].InnerText = "true";
+				xmlRoot["formatting"]["font"]["outline"].AppendChild(xmlDoc.CreateElement("color"));
+				xmlRoot["formatting"]["font"]["outline"]["color"].InnerText = "0";
+
+				xmlRoot["formatting"]["font"].AppendChild(xmlDoc.CreateElement("shadow"));
+				xmlRoot["formatting"]["font"]["shadow"].AppendChild(xmlDoc.CreateElement("enabled"));
+				xmlRoot["formatting"]["font"]["shadow"]["enabled"].InnerText = "true";
+				xmlRoot["formatting"]["font"]["shadow"].AppendChild(xmlDoc.CreateElement("color"));
+				xmlRoot["formatting"]["font"]["shadow"]["color"].InnerText = "0";
+				xmlRoot["formatting"]["font"]["shadow"].AppendChild(xmlDoc.CreateElement("direction"));
+				xmlRoot["formatting"]["font"]["shadow"]["direction"].InnerText = "125";
+
                 xmlRoot["formatting"].AppendChild(xmlDoc.CreateElement("background"));
                 foreach (string imp in imagePaths)
                 {
@@ -842,24 +977,49 @@ namespace Pbp
 
                 xmlRoot["formatting"].AppendChild(xmlDoc.CreateElement("textorientation"));
                 xmlRoot["formatting"]["textorientation"].AppendChild(xmlDoc.CreateElement("horizontal"));
-                xmlRoot["formatting"]["textorientation"].AppendChild(xmlDoc.CreateElement("vertical"));
-                xmlRoot["formatting"]["textorientation"].AppendChild(xmlDoc.CreateElement("transpos"));
+				if (parts[0].slides[0].horizAlign == SongTextHorizontalAlign.left)
+					xmlRoot["formatting"]["textorientation"]["horizontal"].InnerText = "left";
+				else if (parts[0].slides[0].horizAlign == SongTextHorizontalAlign.right)
+					xmlRoot["formatting"]["textorientation"]["horizontal"].InnerText = "right";
+				else
+					xmlRoot["formatting"]["textorientation"]["horizontal"].InnerText = "center";
+				xmlRoot["formatting"]["textorientation"].AppendChild(xmlDoc.CreateElement("vertical"));
+				if (parts[0].slides[0].vertAlign == SongTextVerticalAlign.top)
+					xmlRoot["formatting"]["textorientation"]["vertical"].InnerText = "top";
+				else if (parts[0].slides[0].vertAlign == SongTextVerticalAlign.bottom)
+					xmlRoot["formatting"]["textorientation"]["vertical"].InnerText = "bottom";
+				else
+					xmlRoot["formatting"]["textorientation"]["vertical"].InnerText = "center";
+				xmlRoot["formatting"]["textorientation"].AppendChild(xmlDoc.CreateElement("transpos"));
+				xmlRoot["formatting"]["textorientation"]["transpos"].InnerText = "inline";
 
                 xmlRoot["formatting"].AppendChild(xmlDoc.CreateElement("borders"));
+				xmlRoot["formatting"]["borders"].AppendChild(xmlDoc.CreateElement("mainleft"));
+				xmlRoot["formatting"]["borders"]["mainleft"].InnerText = "40";
+				xmlRoot["formatting"]["borders"].AppendChild(xmlDoc.CreateElement("maintop"));
+				xmlRoot["formatting"]["borders"]["maintop"].InnerText = "70";
+				xmlRoot["formatting"]["borders"].AppendChild(xmlDoc.CreateElement("mainright"));
+				xmlRoot["formatting"]["borders"]["mainright"].InnerText = "40";
+				xmlRoot["formatting"]["borders"].AppendChild(xmlDoc.CreateElement("mainbottom"));
+				xmlRoot["formatting"]["borders"]["mainbottom"].InnerText = "80";
+				xmlRoot["formatting"]["borders"].AppendChild(xmlDoc.CreateElement("copyrightbottom"));
+				xmlRoot["formatting"]["borders"]["copyrightbottom"].InnerText = "30";
+				xmlRoot["formatting"]["borders"].AppendChild(xmlDoc.CreateElement("sourcetop"));
+				xmlRoot["formatting"]["borders"]["sourcetop"].InnerText = "20";
+				xmlRoot["formatting"]["borders"].AppendChild(xmlDoc.CreateElement("sourceright"));
+				xmlRoot["formatting"]["borders"]["sourceright"].InnerText = "40";
 
-                if (fileName != null)
-                {
-                    xmlDoc.Save(fileName);
-                }
-                else
-                {
-                    //xmlDoc.Save(_path);
-                    xmlDoc.Save("c:\\test.ppl");
-                }
-            }
+
+
+				XmlWriter wrt = new XmlTextWriter(fileName, Encoding.Default);
+				xmlDoc.WriteTo(wrt);
+				wrt.Flush();
+				wrt.Close();
+
+				path = fileName;
+			
+			}
         }
-
-
 
 
         public void setPartCaption(string text, int partId)
