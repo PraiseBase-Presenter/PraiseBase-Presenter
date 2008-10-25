@@ -251,11 +251,16 @@ namespace Pbp
          */
         private void listViewSongs_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (listViewSongs.SelectedIndices.Count > 0)
-            {
+			if (listViewSongs.SelectedIndices.Count > 0)
+			{
 				SongManager.getInstance().currentSong = SongManager.getInstance().get((int)listViewSongs.SelectedItems[0].Tag);
 				showCurrentSongDetails();
-            }            
+				buttonSetListAdd.Enabled = true;
+			}
+			else
+			{
+				buttonSetListAdd.Enabled = false;
+			}
         }
 
 		private void showCurrentSongDetails()
@@ -923,6 +928,8 @@ namespace Pbp
 				{
 					listViewSetList.Items.Add((ListViewItem)listViewSongs.SelectedItems[0].Clone());
 					listViewSetList.Columns[0].Width = -2;
+					buttonSetListClear.Enabled = true;
+					buttonSaveSetList.Enabled = true;
 				}
 				else
 				{
@@ -936,6 +943,14 @@ namespace Pbp
 			if (listViewSetList.SelectedItems.Count > 0)
 			{
 				listViewSetList.Items.RemoveAt(listViewSetList.SelectedIndices[0]);
+				buttonSetListRem.Enabled = false;
+				buttonSetListDown.Enabled = false;
+				buttonSetListUp.Enabled = false;
+				if (listViewSetList.Items.Count == 0)
+				{
+					buttonSaveSetList.Enabled = false;
+					buttonSetListClear.Enabled = false;
+				}
 			}
 		}
 
@@ -943,14 +958,33 @@ namespace Pbp
 		{
 			if (listViewSetList.SelectedIndices.Count > 0)
 			{
+				int idx = listViewSetList.SelectedIndices[0];
+				if (idx > 0)
+					buttonSetListUp.Enabled = true;
+				else
+					buttonSetListUp.Enabled = false;
+				if (idx < listViewSetList.Items.Count - 1)
+					buttonSetListDown.Enabled = true;
+				else
+					buttonSetListDown.Enabled = false;
+				buttonSetListRem.Enabled = true;
+
 				SongManager.getInstance().currentSong = SongManager.getInstance().get((int)listViewSetList.SelectedItems[0].Tag);
 				showCurrentSongDetails();
-			}   
+			}
 		}
 
 		private void buttonSetListClear_Click(object sender, EventArgs e)
 		{
-			listViewSetList.Items.Clear();
+			if (MessageBox.Show("Setliste wirklich leeren?", "Viewer", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+			{
+				listViewSetList.Items.Clear();
+				buttonSetListRem.Enabled = false;
+				buttonSetListClear.Enabled = false;
+				buttonSaveSetList.Enabled = false;
+				buttonSetListDown.Enabled = false;
+				buttonSetListUp.Enabled = false;
+			}
 		}
 
 		private void buttonSetListUp_Click(object sender, EventArgs e)
@@ -979,6 +1013,98 @@ namespace Pbp
 					listViewSetList.Items.RemoveAt(idx);
 					listViewSetList.Items.Insert(idx + 1, lvi);
 					listViewSetList.Items[idx + 1].Selected = true;
+				}
+			}
+		}
+
+		private void buttonSetListAdd_Click(object sender, EventArgs e)
+		{
+			if (listViewSongs.SelectedItems.Count > 0)
+			{
+				listViewSetList.Items.Add((ListViewItem)listViewSongs.SelectedItems[0].Clone());
+				listViewSetList.Columns[0].Width = -2;
+				buttonSetListClear.Enabled = true;
+				buttonSaveSetList.Enabled = true;
+			}
+			else
+			{
+				buttonSetListAdd.Enabled = false;
+			}
+		}
+
+		private void buttonSaveSetList_Click(object sender, EventArgs e)
+		{
+			SaveFileDialog dlg = new SaveFileDialog();
+			dlg.AddExtension = true;
+			dlg.CheckPathExists = true;
+			//dlg.FileName = 
+			dlg.Filter = "PraiseBase-Presenter Setliste (*.pbpl)|*.pbpl";
+			dlg.InitialDirectory = setting.dataDirectory + Path.DirectorySeparatorChar + setting.setListDir;
+			dlg.Title = "Setliste speichern unter...";
+			if (dlg.ShowDialog() == DialogResult.OK)
+			{
+				XmlDocument xmlDoc = new XmlDocument();
+				xmlDoc.AppendChild(xmlDoc.CreateNode(XmlNodeType.XmlDeclaration, "", ""));
+				xmlDoc.AppendChild(xmlDoc.CreateElement("setlist"));
+				XmlElement xmlRoot = xmlDoc.DocumentElement;
+				xmlRoot.AppendChild(xmlDoc.CreateElement("items"));
+				for (int i = 0; i < listViewSetList.Items.Count; i++)
+				{
+					XmlNode nd = xmlDoc.CreateElement("item");
+					nd.InnerText = SongManager.getInstance().get((int)listViewSetList.Items[i].Tag).title;
+					xmlRoot["items"].AppendChild(nd);
+				}
+				XmlWriter wrt = new XmlTextWriter(dlg.FileName, Encoding.UTF8);
+				xmlDoc.WriteTo(wrt);
+				wrt.Flush();
+				wrt.Close();
+			}
+		}
+
+		private void buttonOpenSetList_Click(object sender, EventArgs e)
+		{
+			OpenFileDialog dlg = new OpenFileDialog();
+			dlg.AddExtension = true;
+			dlg.CheckPathExists = true;
+			dlg.CheckFileExists = true;
+			dlg.Filter = "PraiseBase-Presenter Setliste (*.pbpl)|*.pbpl";
+			dlg.InitialDirectory = setting.dataDirectory + Path.DirectorySeparatorChar + setting.setListDir;
+			dlg.Title = "Setliste öffnen...";
+			if (dlg.ShowDialog() == DialogResult.OK)
+			{
+				XmlDocument xmlDoc = new XmlDocument();
+				xmlDoc.Load(dlg.FileName);
+				XmlElement xmlRoot = xmlDoc.DocumentElement;
+				try
+				{
+					if (xmlRoot.Name != "setlist")
+						throw new Exception("Ungültige Setlist!");
+
+					if (xmlRoot["items"] != null)
+					{
+						listViewSetList.Items.Clear();
+						for (int i = 0; i < xmlRoot["items"].ChildNodes.Count; i++)
+						{
+							if (xmlRoot["items"].ChildNodes[i].Name == "item")
+							{
+								int id = SongManager.getInstance().getIdByTitle(xmlRoot["items"].ChildNodes[i].InnerText);
+								if (id != -1)
+								{
+									ListViewItem lvi = new ListViewItem(xmlRoot["items"].ChildNodes[i].InnerText);
+									lvi.Tag = id;
+									listViewSetList.Items.Add(lvi);
+									buttonSetListClear.Enabled = true;
+									buttonSaveSetList.Enabled = true;
+								}
+							}
+						}
+						listViewSetList.Columns[0].Width = -2;
+					}
+
+				}
+				catch (Exception err)
+				{
+					MessageBox.Show(err.ToString(),"Viewer",MessageBoxButtons.OK,MessageBoxIcon.Error);
 				}
 			}
 		}

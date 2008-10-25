@@ -60,9 +60,107 @@ namespace Pbp.Properties {
             }
         }
         
+        internal static System.Drawing.Bitmap _14_layer_deletelayer {
+            get {
+                object obj = ResourceManager.GetObject("_14_layer_deletelayer", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap _14_layer_newlayer {
+            get {
+                object obj = ResourceManager.GetObject("_14_layer_newlayer", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap _1downarrow {
+            get {
+                object obj = ResourceManager.GetObject("_1downarrow", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap _1downarrow1 {
+            get {
+                object obj = ResourceManager.GetObject("_1downarrow1", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap _1leftarrow {
+            get {
+                object obj = ResourceManager.GetObject("_1leftarrow", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap _1rightarrow {
+            get {
+                object obj = ResourceManager.GetObject("_1rightarrow", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap _2leftarrow {
+            get {
+                object obj = ResourceManager.GetObject("_2leftarrow", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap _2rightarrow {
+            get {
+                object obj = ResourceManager.GetObject("_2rightarrow", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap _2uparrow {
+            get {
+                object obj = ResourceManager.GetObject("_2uparrow", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap _3dowarrow {
+            get {
+                object obj = ResourceManager.GetObject("_3dowarrow", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
         internal static System.Drawing.Bitmap advancedsettings {
             get {
                 object obj = ResourceManager.GetObject("advancedsettings", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap agt_action_fail1 {
+            get {
+                object obj = ResourceManager.GetObject("agt_action_fail1", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap agt_action_success {
+            get {
+                object obj = ResourceManager.GetObject("agt_action_success", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap agt_back {
+            get {
+                object obj = ResourceManager.GetObject("agt_back", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap agt_forward {
+            get {
+                object obj = ResourceManager.GetObject("agt_forward", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -109,6 +207,20 @@ namespace Pbp.Properties {
             }
         }
         
+        internal static System.Drawing.Bitmap edit_add {
+            get {
+                object obj = ResourceManager.GetObject("edit_add", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap edit_remove {
+            get {
+                object obj = ResourceManager.GetObject("edit_remove", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
         internal static System.Drawing.Bitmap editor {
             get {
                 object obj = ResourceManager.GetObject("editor", resourceCulture);
@@ -126,6 +238,20 @@ namespace Pbp.Properties {
         internal static System.Drawing.Bitmap exit {
             get {
                 object obj = ResourceManager.GetObject("exit", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap fileopen {
+            get {
+                object obj = ResourceManager.GetObject("fileopen", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap filesave {
+            get {
+                object obj = ResourceManager.GetObject("filesave", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

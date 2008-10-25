@@ -87,6 +87,18 @@ namespace Pbp
             return validSongs[id];
         }
 
+		public int getIdByTitle(string title)
+		{
+			for (int i = 0; i < validSongs.Count; i++)
+			{
+				if (validSongs[i].title == title)
+				{
+					return i;
+				}
+			}
+			return -1;			
+		}
+
 		public void reloadSong(int i)
 		{
 			validSongs[i] = new Song(validSongs[i].path);

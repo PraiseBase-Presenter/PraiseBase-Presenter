@@ -279,6 +279,24 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\folder_favorites.png" />
+    <None Include="Resources\agt_action_success.png" />
+    <None Include="Resources\agt_back.png" />
+    <None Include="Resources\agt_forward.png" />
+    <None Include="Resources\1downarrow1.png" />
+    <None Include="Resources\1downarrow.png" />
+    <None Include="Resources\1leftarrow.png" />
+    <None Include="Resources\1rightarrow.png" />
+    <None Include="Resources\2leftarrow.png" />
+    <None Include="Resources\2rightarrow.png" />
+    <None Include="Resources\2uparrow.png" />
+    <None Include="Resources\3dowarrow.png" />
+    <None Include="Resources\14_layer_deletelayer.png" />
+    <None Include="Resources\14_layer_newlayer.png" />
+    <None Include="Resources\agt_action_fail1.png" />
+    <None Include="Resources\edit_add.png" />
+    <None Include="Resources\edit_remove.png" />
+    <None Include="Resources\filesave.png" />
+    <None Include="Resources\fileopen.png" />
     <Content Include="Songs\A Mighty Fortress Is Our God.ppl" />
     <Content Include="Songs\Jesus is my Lord.ppl" />
   </ItemGroup>

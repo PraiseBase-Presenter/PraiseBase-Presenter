@@ -63,6 +63,10 @@
 			this.tabControl1 = new System.Windows.Forms.TabControl();
 			this.tabPage1 = new System.Windows.Forms.TabPage();
 			this.groupBox4 = new System.Windows.Forms.GroupBox();
+			this.buttonSetListAdd = new System.Windows.Forms.Button();
+			this.buttonSetListClear = new System.Windows.Forms.Button();
+			this.listViewSetList = new System.Windows.Forms.ListView();
+			this.columnHeader4 = new System.Windows.Forms.ColumnHeader();
 			this.buttonSetListRem = new System.Windows.Forms.Button();
 			this.buttonSetListDown = new System.Windows.Forms.Button();
 			this.buttonSetListUp = new System.Windows.Forms.Button();
@@ -110,9 +114,8 @@
 			this.toolStripButton4 = new System.Windows.Forms.ToolStripButton();
 			this.statusStrip1 = new System.Windows.Forms.StatusStrip();
 			this.toolStripStatusLabel = new System.Windows.Forms.ToolStripStatusLabel();
-			this.listViewSetList = new System.Windows.Forms.ListView();
-			this.columnHeader4 = new System.Windows.Forms.ColumnHeader();
-			this.buttonSetListClear = new System.Windows.Forms.Button();
+			this.buttonSaveSetList = new System.Windows.Forms.Button();
+			this.buttonOpenSetList = new System.Windows.Forms.Button();
 			buttonChooseDiaDir = new System.Windows.Forms.Button();
 			this.menuStrip1.SuspendLayout();
 			this.groupBox2.SuspendLayout();
@@ -433,6 +436,9 @@
 			// groupBox4
 			// 
 			this.groupBox4.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+			this.groupBox4.Controls.Add(this.buttonOpenSetList);
+			this.groupBox4.Controls.Add(this.buttonSaveSetList);
+			this.groupBox4.Controls.Add(this.buttonSetListAdd);
 			this.groupBox4.Controls.Add(this.buttonSetListClear);
 			this.groupBox4.Controls.Add(this.listViewSetList);
 			this.groupBox4.Controls.Add(this.buttonSetListRem);
@@ -446,36 +452,82 @@
 			this.groupBox4.TabStop = false;
 			this.groupBox4.Text = "Setliste";
 			// 
+			// buttonSetListAdd
+			// 
+			this.buttonSetListAdd.Enabled = false;
+			this.buttonSetListAdd.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.buttonSetListAdd.Image = global::Pbp.Properties.Resources.edit_add;
+			this.buttonSetListAdd.Location = new System.Drawing.Point(9, 196);
+			this.buttonSetListAdd.Name = "buttonSetListAdd";
+			this.buttonSetListAdd.Size = new System.Drawing.Size(26, 23);
+			this.buttonSetListAdd.TabIndex = 29;
+			this.buttonSetListAdd.UseVisualStyleBackColor = true;
+			this.buttonSetListAdd.Click += new System.EventHandler(this.buttonSetListAdd_Click);
+			// 
+			// buttonSetListClear
+			// 
+			this.buttonSetListClear.Enabled = false;
+			this.buttonSetListClear.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.buttonSetListClear.Image = global::Pbp.Properties.Resources._14_layer_deletelayer;
+			this.buttonSetListClear.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+			this.buttonSetListClear.Location = new System.Drawing.Point(137, 196);
+			this.buttonSetListClear.Name = "buttonSetListClear";
+			this.buttonSetListClear.Size = new System.Drawing.Size(28, 23);
+			this.buttonSetListClear.TabIndex = 28;
+			this.buttonSetListClear.UseVisualStyleBackColor = true;
+			this.buttonSetListClear.Click += new System.EventHandler(this.buttonSetListClear_Click);
+			// 
+			// listViewSetList
+			// 
+			this.listViewSetList.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.columnHeader4});
+			this.listViewSetList.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.listViewSetList.FullRowSelect = true;
+			this.listViewSetList.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.None;
+			this.listViewSetList.HideSelection = false;
+			this.listViewSetList.Location = new System.Drawing.Point(5, 19);
+			this.listViewSetList.MultiSelect = false;
+			this.listViewSetList.Name = "listViewSetList";
+			this.listViewSetList.Size = new System.Drawing.Size(234, 171);
+			this.listViewSetList.TabIndex = 27;
+			this.listViewSetList.UseCompatibleStateImageBehavior = false;
+			this.listViewSetList.View = System.Windows.Forms.View.Details;
+			this.listViewSetList.SelectedIndexChanged += new System.EventHandler(this.listViewSetList_SelectedIndexChanged);
+			// 
 			// buttonSetListRem
 			// 
+			this.buttonSetListRem.Enabled = false;
 			this.buttonSetListRem.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.buttonSetListRem.Location = new System.Drawing.Point(101, 196);
+			this.buttonSetListRem.Image = global::Pbp.Properties.Resources.edit_remove;
+			this.buttonSetListRem.ImageAlign = System.Drawing.ContentAlignment.BottomLeft;
+			this.buttonSetListRem.Location = new System.Drawing.Point(103, 196);
 			this.buttonSetListRem.Name = "buttonSetListRem";
-			this.buttonSetListRem.Size = new System.Drawing.Size(46, 23);
+			this.buttonSetListRem.Size = new System.Drawing.Size(28, 23);
 			this.buttonSetListRem.TabIndex = 26;
-			this.buttonSetListRem.Text = "Weg";
 			this.buttonSetListRem.UseVisualStyleBackColor = true;
 			this.buttonSetListRem.Click += new System.EventHandler(this.buttonSetListRem_Click);
 			// 
 			// buttonSetListDown
 			// 
+			this.buttonSetListDown.Enabled = false;
 			this.buttonSetListDown.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.buttonSetListDown.Location = new System.Drawing.Point(58, 196);
+			this.buttonSetListDown.Image = global::Pbp.Properties.Resources._1downarrow1;
+			this.buttonSetListDown.Location = new System.Drawing.Point(71, 196);
 			this.buttonSetListDown.Name = "buttonSetListDown";
-			this.buttonSetListDown.Size = new System.Drawing.Size(34, 23);
+			this.buttonSetListDown.Size = new System.Drawing.Size(26, 23);
 			this.buttonSetListDown.TabIndex = 25;
-			this.buttonSetListDown.Text = "Ab";
 			this.buttonSetListDown.UseVisualStyleBackColor = true;
 			this.buttonSetListDown.Click += new System.EventHandler(this.buttonSetListDown_Click);
 			// 
 			// buttonSetListUp
 			// 
+			this.buttonSetListUp.Enabled = false;
 			this.buttonSetListUp.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.buttonSetListUp.Location = new System.Drawing.Point(10, 196);
+			this.buttonSetListUp.Image = global::Pbp.Properties.Resources._1downarrow;
+			this.buttonSetListUp.Location = new System.Drawing.Point(40, 196);
 			this.buttonSetListUp.Name = "buttonSetListUp";
-			this.buttonSetListUp.Size = new System.Drawing.Size(38, 23);
+			this.buttonSetListUp.Size = new System.Drawing.Size(26, 23);
 			this.buttonSetListUp.TabIndex = 24;
-			this.buttonSetListUp.Text = "Auf";
 			this.buttonSetListUp.UseVisualStyleBackColor = true;
 			this.buttonSetListUp.Click += new System.EventHandler(this.buttonSetListUp_Click);
 			// 
@@ -1000,32 +1052,30 @@
 			this.toolStripStatusLabel.Name = "toolStripStatusLabel";
 			this.toolStripStatusLabel.Size = new System.Drawing.Size(0, 17);
 			// 
-			// listViewSetList
+			// buttonSaveSetList
 			// 
-			this.listViewSetList.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
-            this.columnHeader4});
-			this.listViewSetList.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.listViewSetList.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.None;
-			this.listViewSetList.HideSelection = false;
-			this.listViewSetList.Location = new System.Drawing.Point(5, 19);
-			this.listViewSetList.MultiSelect = false;
-			this.listViewSetList.Name = "listViewSetList";
-			this.listViewSetList.Size = new System.Drawing.Size(234, 171);
-			this.listViewSetList.TabIndex = 27;
-			this.listViewSetList.UseCompatibleStateImageBehavior = false;
-			this.listViewSetList.View = System.Windows.Forms.View.Details;
-			this.listViewSetList.SelectedIndexChanged += new System.EventHandler(this.listViewSetList_SelectedIndexChanged);
+			this.buttonSaveSetList.Enabled = false;
+			this.buttonSaveSetList.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.buttonSaveSetList.Image = global::Pbp.Properties.Resources.filesave;
+			this.buttonSaveSetList.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+			this.buttonSaveSetList.Location = new System.Drawing.Point(171, 196);
+			this.buttonSaveSetList.Name = "buttonSaveSetList";
+			this.buttonSaveSetList.Size = new System.Drawing.Size(28, 23);
+			this.buttonSaveSetList.TabIndex = 30;
+			this.buttonSaveSetList.UseVisualStyleBackColor = true;
+			this.buttonSaveSetList.Click += new System.EventHandler(this.buttonSaveSetList_Click);
 			// 
-			// buttonSetListClear
+			// buttonOpenSetList
 			// 
-			this.buttonSetListClear.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.buttonSetListClear.Location = new System.Drawing.Point(157, 196);
-			this.buttonSetListClear.Name = "buttonSetListClear";
-			this.buttonSetListClear.Size = new System.Drawing.Size(75, 23);
-			this.buttonSetListClear.TabIndex = 28;
-			this.buttonSetListClear.Text = "Leeren";
-			this.buttonSetListClear.UseVisualStyleBackColor = true;
-			this.buttonSetListClear.Click += new System.EventHandler(this.buttonSetListClear_Click);
+			this.buttonOpenSetList.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.buttonOpenSetList.Image = global::Pbp.Properties.Resources.fileopen;
+			this.buttonOpenSetList.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+			this.buttonOpenSetList.Location = new System.Drawing.Point(205, 196);
+			this.buttonOpenSetList.Name = "buttonOpenSetList";
+			this.buttonOpenSetList.Size = new System.Drawing.Size(28, 23);
+			this.buttonOpenSetList.TabIndex = 31;
+			this.buttonOpenSetList.UseVisualStyleBackColor = true;
+			this.buttonOpenSetList.Click += new System.EventHandler(this.buttonOpenSetList_Click);
 			// 
 			// mainWindow
 			// 
@@ -1153,6 +1203,9 @@
 		private System.Windows.Forms.ListView listViewSetList;
 		private System.Windows.Forms.ColumnHeader columnHeader4;
 		private System.Windows.Forms.Button buttonSetListClear;
+		private System.Windows.Forms.Button buttonSetListAdd;
+		private System.Windows.Forms.Button buttonSaveSetList;
+		private System.Windows.Forms.Button buttonOpenSetList;
     }
 }
 

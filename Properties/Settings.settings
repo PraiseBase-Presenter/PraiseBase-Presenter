@@ -64,10 +64,10 @@
 &lt;/ArrayOfString&gt;</Value>
     </Setting>
     <Setting Name="songDir" Type="System.String" Scope="Application">
-      <Value Profile="(Default)">songs</Value>
+      <Value Profile="(Default)">Songs</Value>
     </Setting>
     <Setting Name="imageDir" Type="System.String" Scope="Application">
-      <Value Profile="(Default)">backgrounds</Value>
+      <Value Profile="(Default)">Backgrounds</Value>
     </Setting>
     <Setting Name="dataDirDefaultName" Type="System.String" Scope="Application">
       <Value Profile="(Default)">PraiseBase Presenter</Value>
@@ -103,10 +103,13 @@
       <Value Profile="(Default)">Normal</Value>
     </Setting>
     <Setting Name="version" Type="System.String" Scope="Application">
-      <Value Profile="(Default)">0.8.10.24 BETA</Value>
+      <Value Profile="(Default)">0.8.10.25 BETA</Value>
     </Setting>
     <Setting Name="weburl" Type="System.String" Scope="Application">
       <Value Profile="(Default)">http://code.google.com/p/praisebasepresenter</Value>
+    </Setting>
+    <Setting Name="setListDir" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">Setlists</Value>
     </Setting>
   </Settings>
 </SettingsFile>

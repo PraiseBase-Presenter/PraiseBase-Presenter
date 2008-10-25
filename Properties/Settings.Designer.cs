@@ -176,7 +176,7 @@ namespace Pbp.Properties {
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("songs")]
+        [global::System.Configuration.DefaultSettingValueAttribute("Songs")]
         public string songDir {
             get {
                 return ((string)(this["songDir"]));
@@ -185,7 +185,7 @@ namespace Pbp.Properties {
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("backgrounds")]
+        [global::System.Configuration.DefaultSettingValueAttribute("Backgrounds")]
         public string imageDir {
             get {
                 return ((string)(this["imageDir"]));
@@ -323,7 +323,7 @@ namespace Pbp.Properties {
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("0.8.10.24 BETA")]
+        [global::System.Configuration.DefaultSettingValueAttribute("0.8.10.25 BETA")]
         public string version {
             get {
                 return ((string)(this["version"]));
@@ -336,6 +336,15 @@ namespace Pbp.Properties {
         public string weburl {
             get {
                 return ((string)(this["weburl"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("Setlists")]
+        public string setListDir {
+            get {
+                return ((string)(this["setListDir"]));
             }
         }
     }
