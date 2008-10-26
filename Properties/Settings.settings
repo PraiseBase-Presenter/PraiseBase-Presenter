@@ -111,5 +111,8 @@
     <Setting Name="setListDir" Type="System.String" Scope="Application">
       <Value Profile="(Default)">Setlists</Value>
     </Setting>
+    <Setting Name="projectionFadeTime" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">500</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

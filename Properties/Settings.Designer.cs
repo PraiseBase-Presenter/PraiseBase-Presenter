@@ -347,5 +347,17 @@ namespace Pbp.Properties {
                 return ((string)(this["setListDir"]));
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("500")]
+        public int projectionFadeTime {
+            get {
+                return ((int)(this["projectionFadeTime"]));
+            }
+            set {
+                this["projectionFadeTime"] = value;
+            }
+        }
     }
 }

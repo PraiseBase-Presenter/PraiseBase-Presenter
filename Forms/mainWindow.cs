@@ -56,6 +56,9 @@ namespace Pbp
             songSearchBox.Focus();
 
             imageTreeViewInit();
+
+			trackBarFadeTimer.Value= setting.projectionFadeTime;
+			labelFadeTime.Text = setting.projectionFadeTime.ToString() + " ms";
         }
 
         private void beendenToolStripMenuItem_Click(object sender, EventArgs e)
@@ -1108,6 +1111,24 @@ namespace Pbp
 				}
 			}
 		}
+
+		private void trackBarFadeTimer_Scroll(object sender, EventArgs e)
+		{
+			labelFadeTime.Text = trackBarFadeTimer.Value.ToString()+ " ms";
+			setting.projectionFadeTime = trackBarFadeTimer.Value;
+			setting.Save();
+		}
+
+		private void trackBarFadeTimer_MouseUp(object sender, MouseEventArgs e)
+		{
+			if (e.Button == MouseButtons.Right)
+			{
+				trackBarFadeTimer.Value = 500;
+				labelFadeTime.Text = trackBarFadeTimer.Value.ToString() + " ms";
+			}
+		}
+
+		
 
 
 

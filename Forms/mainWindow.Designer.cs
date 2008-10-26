@@ -63,6 +63,8 @@
 			this.tabControl1 = new System.Windows.Forms.TabControl();
 			this.tabPage1 = new System.Windows.Forms.TabPage();
 			this.groupBox4 = new System.Windows.Forms.GroupBox();
+			this.buttonOpenSetList = new System.Windows.Forms.Button();
+			this.buttonSaveSetList = new System.Windows.Forms.Button();
 			this.buttonSetListAdd = new System.Windows.Forms.Button();
 			this.buttonSetListClear = new System.Windows.Forms.Button();
 			this.listViewSetList = new System.Windows.Forms.ListView();
@@ -114,8 +116,9 @@
 			this.toolStripButton4 = new System.Windows.Forms.ToolStripButton();
 			this.statusStrip1 = new System.Windows.Forms.StatusStrip();
 			this.toolStripStatusLabel = new System.Windows.Forms.ToolStripStatusLabel();
-			this.buttonSaveSetList = new System.Windows.Forms.Button();
-			this.buttonOpenSetList = new System.Windows.Forms.Button();
+			this.trackBarFadeTimer = new System.Windows.Forms.TrackBar();
+			this.label7 = new System.Windows.Forms.Label();
+			this.labelFadeTime = new System.Windows.Forms.Label();
 			buttonChooseDiaDir = new System.Windows.Forms.Button();
 			this.menuStrip1.SuspendLayout();
 			this.groupBox2.SuspendLayout();
@@ -128,6 +131,7 @@
 			this.tabPage3.SuspendLayout();
 			this.toolStrip1.SuspendLayout();
 			this.statusStrip1.SuspendLayout();
+			((System.ComponentModel.ISupportInitialize)(this.trackBarFadeTimer)).BeginInit();
 			this.SuspendLayout();
 			// 
 			// buttonChooseDiaDir
@@ -452,6 +456,31 @@
 			this.groupBox4.TabStop = false;
 			this.groupBox4.Text = "Setliste";
 			// 
+			// buttonOpenSetList
+			// 
+			this.buttonOpenSetList.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.buttonOpenSetList.Image = global::Pbp.Properties.Resources.fileopen;
+			this.buttonOpenSetList.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+			this.buttonOpenSetList.Location = new System.Drawing.Point(205, 196);
+			this.buttonOpenSetList.Name = "buttonOpenSetList";
+			this.buttonOpenSetList.Size = new System.Drawing.Size(28, 23);
+			this.buttonOpenSetList.TabIndex = 31;
+			this.buttonOpenSetList.UseVisualStyleBackColor = true;
+			this.buttonOpenSetList.Click += new System.EventHandler(this.buttonOpenSetList_Click);
+			// 
+			// buttonSaveSetList
+			// 
+			this.buttonSaveSetList.Enabled = false;
+			this.buttonSaveSetList.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.buttonSaveSetList.Image = global::Pbp.Properties.Resources.filesave;
+			this.buttonSaveSetList.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+			this.buttonSaveSetList.Location = new System.Drawing.Point(171, 196);
+			this.buttonSaveSetList.Name = "buttonSaveSetList";
+			this.buttonSaveSetList.Size = new System.Drawing.Size(28, 23);
+			this.buttonSaveSetList.TabIndex = 30;
+			this.buttonSaveSetList.UseVisualStyleBackColor = true;
+			this.buttonSaveSetList.Click += new System.EventHandler(this.buttonSaveSetList_Click);
+			// 
 			// buttonSetListAdd
 			// 
 			this.buttonSetListAdd.Enabled = false;
@@ -536,6 +565,9 @@
 			this.groupBox3.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
 						| System.Windows.Forms.AnchorStyles.Left)
 						| System.Windows.Forms.AnchorStyles.Right)));
+			this.groupBox3.Controls.Add(this.labelFadeTime);
+			this.groupBox3.Controls.Add(this.label7);
+			this.groupBox3.Controls.Add(this.trackBarFadeTimer);
 			this.groupBox3.Controls.Add(this.label6);
 			this.groupBox3.Controls.Add(this.groupBox1);
 			this.groupBox3.Controls.Add(this.songDetailItems);
@@ -688,7 +720,7 @@
 			this.songDetailImages.Location = new System.Drawing.Point(6, 19);
 			this.songDetailImages.MultiSelect = false;
 			this.songDetailImages.Name = "songDetailImages";
-			this.songDetailImages.Size = new System.Drawing.Size(721, 52);
+			this.songDetailImages.Size = new System.Drawing.Size(531, 52);
 			this.songDetailImages.TabIndex = 24;
 			this.songDetailImages.TileSize = new System.Drawing.Size(70, 50);
 			this.songDetailImages.UseCompatibleStateImageBehavior = false;
@@ -1052,30 +1084,38 @@
 			this.toolStripStatusLabel.Name = "toolStripStatusLabel";
 			this.toolStripStatusLabel.Size = new System.Drawing.Size(0, 17);
 			// 
-			// buttonSaveSetList
+			// trackBarFadeTimer
 			// 
-			this.buttonSaveSetList.Enabled = false;
-			this.buttonSaveSetList.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.buttonSaveSetList.Image = global::Pbp.Properties.Resources.filesave;
-			this.buttonSaveSetList.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-			this.buttonSaveSetList.Location = new System.Drawing.Point(171, 196);
-			this.buttonSaveSetList.Name = "buttonSaveSetList";
-			this.buttonSaveSetList.Size = new System.Drawing.Size(28, 23);
-			this.buttonSaveSetList.TabIndex = 30;
-			this.buttonSaveSetList.UseVisualStyleBackColor = true;
-			this.buttonSaveSetList.Click += new System.EventHandler(this.buttonSaveSetList_Click);
+			this.trackBarFadeTimer.LargeChange = 500;
+			this.trackBarFadeTimer.Location = new System.Drawing.Point(543, 33);
+			this.trackBarFadeTimer.Maximum = 5000;
+			this.trackBarFadeTimer.Name = "trackBarFadeTimer";
+			this.trackBarFadeTimer.Size = new System.Drawing.Size(178, 42);
+			this.trackBarFadeTimer.SmallChange = 10;
+			this.trackBarFadeTimer.TabIndex = 31;
+			this.trackBarFadeTimer.TickFrequency = 500;
+			this.trackBarFadeTimer.Value = 500;
+			this.trackBarFadeTimer.Scroll += new System.EventHandler(this.trackBarFadeTimer_Scroll);
+			this.trackBarFadeTimer.MouseUp += new System.Windows.Forms.MouseEventHandler(this.trackBarFadeTimer_MouseUp);
 			// 
-			// buttonOpenSetList
+			// label7
 			// 
-			this.buttonOpenSetList.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.buttonOpenSetList.Image = global::Pbp.Properties.Resources.fileopen;
-			this.buttonOpenSetList.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-			this.buttonOpenSetList.Location = new System.Drawing.Point(205, 196);
-			this.buttonOpenSetList.Name = "buttonOpenSetList";
-			this.buttonOpenSetList.Size = new System.Drawing.Size(28, 23);
-			this.buttonOpenSetList.TabIndex = 31;
-			this.buttonOpenSetList.UseVisualStyleBackColor = true;
-			this.buttonOpenSetList.Click += new System.EventHandler(this.buttonOpenSetList_Click);
+			this.label7.AutoSize = true;
+			this.label7.Location = new System.Drawing.Point(545, 15);
+			this.label7.Name = "label7";
+			this.label7.Size = new System.Drawing.Size(104, 13);
+			this.label7.TabIndex = 32;
+			this.label7.Text = "Übergangsdauer:";
+			// 
+			// labelFadeTime
+			// 
+			this.labelFadeTime.AutoSize = true;
+			this.labelFadeTime.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.labelFadeTime.Location = new System.Drawing.Point(656, 15);
+			this.labelFadeTime.Name = "labelFadeTime";
+			this.labelFadeTime.Size = new System.Drawing.Size(41, 13);
+			this.labelFadeTime.TabIndex = 33;
+			this.labelFadeTime.Text = "500 ms";
 			// 
 			// mainWindow
 			// 
@@ -1113,6 +1153,7 @@
 			this.toolStrip1.PerformLayout();
 			this.statusStrip1.ResumeLayout(false);
 			this.statusStrip1.PerformLayout();
+			((System.ComponentModel.ISupportInitialize)(this.trackBarFadeTimer)).EndInit();
 			this.ResumeLayout(false);
 			this.PerformLayout();
 
@@ -1206,6 +1247,9 @@
 		private System.Windows.Forms.Button buttonSetListAdd;
 		private System.Windows.Forms.Button buttonSaveSetList;
 		private System.Windows.Forms.Button buttonOpenSetList;
+		private System.Windows.Forms.TrackBar trackBarFadeTimer;
+		private System.Windows.Forms.Label labelFadeTime;
+		private System.Windows.Forms.Label label7;
     }
 }
 

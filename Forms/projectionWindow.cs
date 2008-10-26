@@ -11,7 +11,6 @@ using System.Drawing.Drawing2D;
 using System.Drawing.Text;
 using System.Windows.Forms.Integration;
 
-
 using Pbp;
 using Pbp.Properties;
 
@@ -25,6 +24,8 @@ namespace Pbp.Forms
         private Settings setting;
         private Image currentImage;
 
+		UserControl1 uctl;
+
         static private projectionWindow _instance;
 
         private projectionWindow()
@@ -35,15 +36,13 @@ namespace Pbp.Forms
             h = 1;
             w = 1;
 
-
-            this.pictureBoxCommon.BackColor = setting.projectionBackColor;
-
             scanScreens(0);
             this.Location = projScreen.WorkingArea.Location;
             this.Size = new Size(projScreen.WorkingArea.Width, projScreen.WorkingArea.Height);
             h = this.Height;
             w = this.Width;
-//            Console.WriteLine("Projection window has dimensions " + w + "*" + h);
+			uctl = new UserControl1();
+			projectionControlHost.Child = uctl;
         }
 
         static public projectionWindow getInstance()
@@ -290,7 +289,7 @@ namespace Pbp.Forms
             }
 
             if (!simluate)
-                pictureBoxCommon.Image = bmp;
+				uctl.setProjectionImage(bmp);
 
             gr.Dispose();
             return bmp;
@@ -301,7 +300,7 @@ namespace Pbp.Forms
         public void showImage(Image background)
         {
             Application.DoEvents();
-            pictureBoxCommon.Image = background;
+			uctl.setProjectionImage(new Bitmap(background));
             currentImage = background;
         }
 
@@ -312,7 +311,7 @@ namespace Pbp.Forms
             Graphics gr = Graphics.FromImage(bmp);
             Font font = setting.projectionMasterFont;
             gr.FillRectangle(new SolidBrush(setting.projectionBackColor), 0, 0, w, h);
-            pictureBoxCommon.Image = bmp;
+			uctl.setProjectionImage(bmp);
         }
 
 
@@ -327,17 +326,11 @@ namespace Pbp.Forms
 
         private void projectionWindow_Paint(object sender, PaintEventArgs e)
         {
-            
-            pictureBoxCommon.Top = 0;
-            pictureBoxCommon.Left = 0;
-            pictureBoxCommon.Width = this.Width;
-            pictureBoxCommon.Height = this.Height;
-
-            pictureBoxBlackout.Top = 0;
-            pictureBoxBlackout.Left = 0;
-            pictureBoxBlackout.Width = this.Width;
-            pictureBoxBlackout.Height = this.Height;
-            
+			projectionControlHost.Top = 0;
+			projectionControlHost.Left = 0;
+			projectionControlHost.Width = this.Width;
+			projectionControlHost.Height = this.Height;
+			projectionControlHost.Visible = true;
         }
 
 
