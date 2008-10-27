@@ -24,8 +24,6 @@ namespace Pbp.Forms
         private Settings setting;
         private Image currentImage;
 
-		UserControl1 uctl;
-
         static private projectionWindow _instance;
 
         private projectionWindow()
@@ -41,8 +39,7 @@ namespace Pbp.Forms
             this.Size = new Size(projScreen.WorkingArea.Width, projScreen.WorkingArea.Height);
             h = this.Height;
             w = this.Width;
-			uctl = new UserControl1();
-			projectionControlHost.Child = uctl;
+			projectionControlHost.Child = UserControl1.getInstance();
         }
 
         static public projectionWindow getInstance()
@@ -94,14 +91,6 @@ namespace Pbp.Forms
                 msg += "Auflösung: " + projScreen.WorkingArea.Width.ToString() + "x" + projScreen.WorkingArea.Height.ToString() + " Pixel" + Environment.NewLine;
                 MessageBox.Show(msg, "Projektion", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
-        }
-
-        public void blackout(int val)
-        {
-            if (val > 0)
-                pictureBoxBlackout.Visible = true;
-            else
-                pictureBoxBlackout.Visible = false;
         }
 
         public Image showSlide(Song.Slide slide, Image background, bool simluate)
@@ -289,7 +278,7 @@ namespace Pbp.Forms
             }
 
             if (!simluate)
-				uctl.setProjectionImage(bmp);
+				UserControl1.getInstance().setProjectionImage(bmp);
 
             gr.Dispose();
             return bmp;
@@ -297,11 +286,11 @@ namespace Pbp.Forms
 
 
 
-        public void showImage(Image background)
+        public Image showImage(Image background)
         {
             Application.DoEvents();
-			uctl.setProjectionImage(new Bitmap(background));
-            currentImage = background;
+			UserControl1.getInstance().setProjectionImage(new Bitmap(background));
+			return background;
         }
 
         public void showNone()
@@ -311,7 +300,7 @@ namespace Pbp.Forms
             Graphics gr = Graphics.FromImage(bmp);
             Font font = setting.projectionMasterFont;
             gr.FillRectangle(new SolidBrush(setting.projectionBackColor), 0, 0, w, h);
-			uctl.setProjectionImage(bmp);
+			UserControl1.getInstance().setProjectionImage(bmp);
         }
 
 

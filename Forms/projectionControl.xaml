@@ -4,6 +4,6 @@
     Height="300" Width="300" Name="projectionControl" Loaded="projectionControl_Loaded">
     <Grid>
         <Image Name="projectionImageBack"  Stretch="Fill"></Image>
-        <Image Name="projectionImage"  Stretch="Fill"></Image>   
+        <Image Name="projectionImage"  Stretch="Fill"></Image>
     </Grid>
 </UserControl>

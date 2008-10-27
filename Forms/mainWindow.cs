@@ -59,6 +59,7 @@ namespace Pbp
 
 			trackBarFadeTimer.Value= setting.projectionFadeTime;
 			labelFadeTime.Text = setting.projectionFadeTime.ToString() + " ms";
+			UserControl1.getInstance().setFadeSteps(setting.projectionFadeTime);
         }
 
         private void beendenToolStripMenuItem_Click(object sender, EventArgs e)
@@ -193,13 +194,13 @@ namespace Pbp
                 blackout = false;
                 toolStripButton2.CheckState = CheckState.Unchecked;
                 toolStripButton2.Image = global::Pbp.Properties.Resources.Blackout_on;
-                projWindow.blackout(0);
+				UserControl1.getInstance().blackOut(false);
             }
             else
             {
                 blackout = true;
                 toolStripButton2.CheckState = CheckState.Checked;
-                projWindow.blackout(1);
+				UserControl1.getInstance().blackOut(true);
                 toolStripButton2.Image = global::Pbp.Properties.Resources.Blackout_on2;
                 blackOutTimer.Tag = 1;
                 blackOutTimer.Start();
@@ -305,7 +306,7 @@ namespace Pbp
 			songDetailItems.Columns[1].Width = -2;
 
 			// Set comment
-			setSongComment(songMan.currentSong.comment);
+			//	setSongComment(songMan.currentSong.comment);
 
 			checkBoxQASpelling.Checked = songMan.currentSong.QASpelling;
 			checkBoxQATranslation.Checked = songMan.currentSong.QATranslation;
@@ -328,11 +329,11 @@ namespace Pbp
 
                 if ((Control.ModifierKeys & Keys.Shift) == Keys.Shift)
                 {
-                    projWindow.showSlide(songMan.currentSong.slides[songMan.currentSong.currentSlide], null, false);
+					pictureBoxPreview.Image = projWindow.showSlide(songMan.currentSong.slides[songMan.currentSong.currentSlide], null, false);
                 }
                 else
                 {
-                    projWindow.showSlide(songMan.currentSong.slides[songMan.currentSong.currentSlide], songMan.currentSong.getImage(songMan.currentSong.slides[songMan.currentSong.currentSlide].imageNumber), false);
+					pictureBoxPreview.Image = projWindow.showSlide(songMan.currentSong.slides[songMan.currentSong.currentSlide], songMan.currentSong.getImage(songMan.currentSong.slides[songMan.currentSong.currentSlide].imageNumber), false);
                 }
                 toolStripStatusLabel.Text = "'" + songMan.currentSong.title + "' ist aktiv";
             }
@@ -348,11 +349,11 @@ namespace Pbp
                 int idx = songDetailImages.SelectedIndices[0];
                 if ((Control.ModifierKeys & Keys.Shift) == Keys.Shift)
                 {
-                    projWindow.showSlide(songMan.currentSong.slides[songMan.currentSong.currentSlide],songMan.currentSong.getImage(idx+1), false);
+					pictureBoxPreview.Image = projWindow.showSlide(songMan.currentSong.slides[songMan.currentSong.currentSlide], songMan.currentSong.getImage(idx + 1), false);
                 }
                 else
                 {
-                    projWindow.showImage(songMan.currentSong.getImage(idx+1));
+					pictureBoxPreview.Image = projWindow.showImage(songMan.currentSong.getImage(idx + 1));
                 }
             }
         }
@@ -411,6 +412,7 @@ namespace Pbp
         // Song comments
         //
 
+		/*
         private void textBoxSongComment_DoubleClick(object sender, EventArgs e)
         {
             editSongComment();
@@ -455,7 +457,7 @@ namespace Pbp
                 saveSongComment();
             }
         }
-
+		*/
 
         public void imageTreeViewInit()
         {
@@ -961,6 +963,9 @@ namespace Pbp
 		{
 			if (listViewSetList.SelectedIndices.Count > 0)
 			{
+				if (tabControl1.SelectedIndex != 0)
+					tabControl1.SelectedIndex = 0;
+
 				int idx = listViewSetList.SelectedIndices[0];
 				if (idx > 0)
 					buttonSetListUp.Enabled = true;
@@ -1117,16 +1122,14 @@ namespace Pbp
 			labelFadeTime.Text = trackBarFadeTimer.Value.ToString()+ " ms";
 			setting.projectionFadeTime = trackBarFadeTimer.Value;
 			setting.Save();
+			UserControl1.getInstance().setFadeSteps(trackBarFadeTimer.Value);
 		}
 
 		private void trackBarFadeTimer_MouseUp(object sender, MouseEventArgs e)
 		{
-			if (e.Button == MouseButtons.Right)
-			{
-				trackBarFadeTimer.Value = 500;
-				labelFadeTime.Text = trackBarFadeTimer.Value.ToString() + " ms";
-			}
 		}
+
+
 
 		
 

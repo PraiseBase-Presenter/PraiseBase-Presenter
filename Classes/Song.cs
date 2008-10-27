@@ -297,7 +297,7 @@ namespace Pbp
 						//
 						// Now the song text ... 
 						//
-						text = xmlRoot["songtext"].InnerText;
+						searchText = xmlRoot["songtext"].InnerText;
 						foreach (XmlElement elem in xmlRoot["songtext"])
 						{
 							if (elem.Name == "part")

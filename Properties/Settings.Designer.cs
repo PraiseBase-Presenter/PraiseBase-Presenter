@@ -323,7 +323,7 @@ namespace Pbp.Properties {
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("0.8.10.25 BETA")]
+        [global::System.Configuration.DefaultSettingValueAttribute("0.8.10.27 BETA")]
         public string version {
             get {
                 return ((string)(this["version"]));
@@ -350,7 +350,7 @@ namespace Pbp.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("500")]
+        [global::System.Configuration.DefaultSettingValueAttribute("10")]
         public int projectionFadeTime {
             get {
                 return ((int)(this["projectionFadeTime"]));

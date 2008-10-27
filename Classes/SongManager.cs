@@ -136,6 +136,7 @@ namespace Pbp
 			needle = needle.Replace(Environment.NewLine, "");
 			needle = needle.Replace("  ", " ");
 
+			Console.WriteLine(needle);
             List<Song> tmpList = new List<Song>();
             for (int i=0;i<validSongs.Count;i++)
             {

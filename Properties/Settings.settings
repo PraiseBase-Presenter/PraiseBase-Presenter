@@ -103,7 +103,7 @@
       <Value Profile="(Default)">Normal</Value>
     </Setting>
     <Setting Name="version" Type="System.String" Scope="Application">
-      <Value Profile="(Default)">0.8.10.25 BETA</Value>
+      <Value Profile="(Default)">0.8.10.27 BETA</Value>
     </Setting>
     <Setting Name="weburl" Type="System.String" Scope="Application">
       <Value Profile="(Default)">http://code.google.com/p/praisebasepresenter</Value>
@@ -112,7 +112,7 @@
       <Value Profile="(Default)">Setlists</Value>
     </Setting>
     <Setting Name="projectionFadeTime" Type="System.Int32" Scope="User">
-      <Value Profile="(Default)">500</Value>
+      <Value Profile="(Default)">10</Value>
     </Setting>
   </Settings>
 </SettingsFile>

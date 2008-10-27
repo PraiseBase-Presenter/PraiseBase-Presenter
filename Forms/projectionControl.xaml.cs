@@ -24,48 +24,61 @@ namespace Pbp.Forms
 
 	public partial class UserControl1 : UserControl
 	{
-		public UserControl1()
+		DispatcherTimer tmr;
+		static UserControl1 instance;
+		private int fadeSteps;
+		float opCounter;
+
+		private UserControl1()
 		{
 			InitializeComponent();
+			tmr = new DispatcherTimer();
+			fadeSteps = 0;
+		}
+
+		static public UserControl1 getInstance()
+		{
+			if (instance == null)
+				instance = new UserControl1();
+			return instance;
+		}
+
+		public void setFadeSteps(int steps)
+		{
+			fadeSteps = steps >= 0 ? steps : 0;
 		}
 
 		public void setProjectionImage(System.Drawing.Bitmap img)
 		{
-			Settings setting = new Settings();
-
 			projectionImage.Opacity = 0f;
 			projectionImage.Source = loadBitmap(img);
+			opCounter = 0f;
 
-			if (setting.projectionFadeTime >= 100)
+			if (tmr.IsEnabled)
 			{
-				int interval = (int)(setting.projectionFadeTime / 100f);
-
-				Console.WriteLine(interval.ToString());
-				DispatcherTimer tmr = new DispatcherTimer();
-				tmr.Interval = TimeSpan.FromMilliseconds(interval);
-				tmr.Tick += new EventHandler(tmr_Tick);
-				tmr.Tag = 0f;
-				tmr.Start();
+				tmr.Stop();
 			}
-			else
-			{
-				projectionImageBack.Source = projectionImage.Source;
-				projectionImage.Opacity = 1f;
-			}
+			tmr = new DispatcherTimer();
+			tmr.Dispatcher.Thread.Priority = System.Threading.ThreadPriority.AboveNormal;
+			tmr.Interval = TimeSpan.FromMilliseconds(fadeSteps);
+			Console.WriteLine(fadeSteps.ToString());
+			tmr.Tick += new EventHandler(tmr_Tick);
+			tmr.Start();
 		}
 
 		void tmr_Tick(object sender, EventArgs e)
 		{
-			float val = (float)((DispatcherTimer)sender).Tag;
-			if ( val <= 1.0f)
+			if (projectionImage.Opacity < 1.0f)
 			{
-				projectionImage.Opacity = val;
-				((DispatcherTimer)sender).Tag = val + 0.01f;
+				opCounter += 0.02f;
+				projectionImage.Opacity = opCounter;
 			}
 			else
 			{
+				projectionImage.Opacity = 1f;
 				projectionImageBack.Source = projectionImage.Source;
-				((DispatcherTimer)sender).Stop();
+				tmr.Stop();
+				Console.WriteLine(tmr.ToString());
 			}
 		}
 
@@ -78,6 +91,20 @@ namespace Pbp.Forms
 		private void projectionControl_Loaded(object sender, RoutedEventArgs e)
 		{
 
+		}
+
+		public void blackOut(bool val)
+		{
+			if (val)
+			{
+				projectionImage.Visibility = Visibility.Hidden;
+				projectionImageBack.Visibility = Visibility.Hidden;
+			}
+			else
+			{
+				projectionImage.Visibility = Visibility.Visible;
+				projectionImageBack.Visibility = Visibility.Visible;
+			}
 		}
 
 
