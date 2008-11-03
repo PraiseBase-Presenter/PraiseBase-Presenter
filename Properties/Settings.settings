@@ -75,7 +75,7 @@
       <Value Profile="(Default)">PraiseBase Presenter</Value>
     </Setting>
     <Setting Name="ProjectionMasterFontTranslation" Type="System.Drawing.Font" Scope="User">
-      <Value Profile="(Default)">Calibri, 40pt, style=Bold</Value>
+      <Value Profile="(Default)">Calibri, 39.75pt, style=Italic</Value>
     </Setting>
     <Setting Name="ProjectionMasterLineSpacing" Type="System.Int32" Scope="User">
       <Value Profile="(Default)">0</Value>
@@ -93,10 +93,10 @@
       <Value Profile="(Default)">1</Value>
     </Setting>
     <Setting Name="ProjectionShadowSize" Type="System.Int32" Scope="User">
-      <Value Profile="(Default)">0</Value>
+      <Value Profile="(Default)">6</Value>
     </Setting>
     <Setting Name="ProjectionUseMaster" Type="System.Boolean" Scope="User">
-      <Value Profile="(Default)">False</Value>
+      <Value Profile="(Default)">True</Value>
     </Setting>
     <Setting Name="ViewerWindowState" Type="System.Windows.Forms.FormWindowState" Scope="User">
       <Value Profile="(Default)">Normal</Value>

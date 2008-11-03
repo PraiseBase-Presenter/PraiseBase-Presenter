@@ -93,13 +93,28 @@ namespace Pbp.Forms
                 string FileName = openFileDialog.FileName;
 				fileBoxInitialDir = Path.GetDirectoryName(FileName);
 				fileBoxFilterIndex = openFileDialog.FilterIndex;
-                EditorChild childForm = new EditorChild(FileName);
-                childForm.MdiParent = this;
-				if (childForm.valid)
-					childForm.Show();
+				openSong(FileName);
             }
         }
 
+		public void openSong(string fileName)
+		{
+			for (int i = 0; i < MdiChildren.Count(); i++)
+			{
+				if (MdiChildren[i].Tag.ToString() == fileName)
+				{
+					MdiChildren[i].Show();
+					MdiChildren[i].Focus();
+					return;
+				}
+			}
+
+			EditorChild childForm = new EditorChild(fileName);
+			childForm.Tag = fileName;
+			childForm.MdiParent = this;
+			if (childForm.valid)
+				childForm.Show();
+		}
 
 
         private void ExitToolsStripMenuItem_Click(object sender, EventArgs e)

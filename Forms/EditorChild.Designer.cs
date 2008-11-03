@@ -417,7 +417,6 @@
 			this.checkBoxQATranslation.TabIndex = 14;
 			this.checkBoxQATranslation.Text = "Übersetzung fehlt/ist unvollständig";
 			this.checkBoxQATranslation.UseVisualStyleBackColor = true;
-			this.checkBoxQATranslation.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.checkBoxQATranslation_KeyPress);
 			this.checkBoxQATranslation.CheckedChanged += new System.EventHandler(this.checkBoxQATranslation_CheckedChanged);
 			// 
 			// checkBoxQASpelling

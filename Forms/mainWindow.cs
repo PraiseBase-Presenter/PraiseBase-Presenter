@@ -1059,7 +1059,6 @@ namespace Pbp.Forms
 			{
 				buttonSetListAdd.Enabled = false;
 			}
-
 		}
 
 		private void buttonSaveSetList_Click(object sender, EventArgs e)
@@ -1264,6 +1263,23 @@ namespace Pbp.Forms
 		private void datenverzeichnisToolStripMenuItem_Click(object sender, EventArgs e)
 		{
 			System.Diagnostics.Process.Start(setting.DataDirectory);
+		}
+
+		private void toolStripButtonOpenCurrentSong_Click(object sender, EventArgs e)
+		{
+			if (SongManager.getInstance().CurrentSong != null)
+			{
+				EditorWindow wnd = EditorWindow.getInstance();
+				wnd.openSong(SongManager.getInstance().CurrentSong.FilePath);
+				wnd.Show();
+				wnd.Focus();
+			}
+		}
+
+		private void toolStripMenuItem3_Click(object sender, EventArgs e)
+		{
+			SongDialog dlg = new SongDialog();
+			dlg.ShowDialog(this);
 		}
 
     }

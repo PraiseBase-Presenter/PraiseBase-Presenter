@@ -713,11 +713,6 @@ namespace Pbp.Forms
 			}
 		}
 
-		private void checkBoxQATranslation_KeyPress(object sender, KeyPressEventArgs e)
-		{
-				Console.WriteLine(e.KeyChar.ToString());
-		}
-
 		private void buttonSlideBackground_Click(object sender, EventArgs e)
 		{
 			if (treeViewContents.SelectedNode.Level == 2)

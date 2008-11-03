@@ -762,7 +762,6 @@ namespace Pbp
 		public void setQA(QualityAssuranceIndicators quai)
 		{
 			_QA = _QA | (int)quai;
-			Console.WriteLine(_QA);
 		}
 
 		/// <summary>
@@ -772,7 +771,6 @@ namespace Pbp
 		public void remQA(QualityAssuranceIndicators quai)
 		{
 			_QA = _QA & (~(int)quai);
-			Console.WriteLine(_QA);
 		}
 
 		/// <summary>

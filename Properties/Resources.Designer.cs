@@ -242,6 +242,13 @@ namespace Pbp.Properties {
             }
         }
         
+        internal static System.Drawing.Bitmap editsong {
+            get {
+                object obj = ResourceManager.GetObject("editsong", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
         internal static System.Drawing.Bitmap error {
             get {
                 object obj = ResourceManager.GetObject("error", resourceCulture);

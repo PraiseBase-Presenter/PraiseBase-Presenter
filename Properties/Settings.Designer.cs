@@ -205,7 +205,7 @@ namespace Pbp.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("Calibri, 40pt, style=Bold")]
+        [global::System.Configuration.DefaultSettingValueAttribute("Calibri, 39.75pt, style=Italic")]
         public global::System.Drawing.Font ProjectionMasterFontTranslation {
             get {
                 return ((global::System.Drawing.Font)(this["ProjectionMasterFontTranslation"]));
@@ -277,7 +277,7 @@ namespace Pbp.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        [global::System.Configuration.DefaultSettingValueAttribute("6")]
         public int ProjectionShadowSize {
             get {
                 return ((int)(this["ProjectionShadowSize"]));
@@ -289,7 +289,7 @@ namespace Pbp.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
         public bool ProjectionUseMaster {
             get {
                 return ((bool)(this["ProjectionUseMaster"]));
