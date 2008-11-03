@@ -1,4 +1,31 @@
-﻿using System;
+﻿/*
+ *   PraiseBase Presenter 
+ *   The open source lyrics and image projection software for churches
+ *   
+ *   http://code.google.com/p/praisebasepresenter
+ *
+ *   This program is free software; you can redistribute it and/or
+ *   modify it under the terms of the GNU General Public License
+ *   as published by the Free Software Foundation; either version 2
+ *   of the License, or (at your option) any later version.
+ *
+ *   This program is distributed in the hope that it will be useful,
+ *   but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *   GNU General Public License for more details.
+ *
+ *   You should have received a copy of the GNU General Public License
+ *   along with this program; if not, write to the Free Software
+ *   Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+ *
+ *   Author:
+ *      Nicolas Perrenoud <nicu_at_lavine.ch>
+ *   Co-authors:
+ *      ...
+ *
+ */
+
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -14,22 +41,22 @@ namespace Pbp.Forms
 	public partial class ImageDialog : Form
 	{
 		Settings setting;
-		public string imagePath  {get; private set;}
+		public string imagePath  {get; set;}
+		public bool forAll { 
+			get 
+			{ 
+				return checkBoxForAll.Checked; 
+			}
+			set
+			{ 
+				checkBoxForAll.Checked = value;
+			}
+		}
 
 		public ImageDialog()
 		{
 			setting = new Settings();
-			imagePath = string.Empty;
 			InitializeComponent();
-
-		}
-
-		public ImageDialog(string defaultImagePath)
-		{
-			imagePath = defaultImagePath;
-			setting = new Settings();
-			InitializeComponent();
-			Console.WriteLine("Given " + imagePath);
 		}
 
 		private void buttonOK_Click(object sender, EventArgs e)
@@ -52,6 +79,7 @@ namespace Pbp.Forms
 
 		private void ImageDialog_Load(object sender, EventArgs e)
 		{
+			Application.DoEvents();
 			imageTreeViewInit();
 		}
 
@@ -60,6 +88,7 @@ namespace Pbp.Forms
 		{
 			string rootDir = setting.dataDirectory + Path.DirectorySeparatorChar + setting.imageDir;
 
+			Application.DoEvents();
 			treeViewDirs.Nodes.Clear();
 			TreeNode rootTreeNode = new TreeNode("Bilder");
 			rootTreeNode.Tag = rootDir;
@@ -155,6 +184,12 @@ namespace Pbp.Forms
 			if (listViewImages.SelectedItems.Count > 0)
 				buttonOK_Click(sender, e);
 			
+		}
+
+		private void buttonNoImage_Click(object sender, EventArgs e)
+		{
+			imagePath = String.Empty;
+			DialogResult = DialogResult.OK;
 		}
 
 

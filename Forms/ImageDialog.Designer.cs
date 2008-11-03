@@ -32,6 +32,8 @@
 			this.listViewImages = new System.Windows.Forms.ListView();
 			this.buttonCancel = new System.Windows.Forms.Button();
 			this.buttonOK = new System.Windows.Forms.Button();
+			this.buttonNoImage = new System.Windows.Forms.Button();
+			this.checkBoxForAll = new System.Windows.Forms.CheckBox();
 			this.SuspendLayout();
 			// 
 			// treeViewDirs
@@ -76,13 +78,35 @@
 			// 
 			this.buttonOK.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
 			this.buttonOK.Enabled = false;
-			this.buttonOK.Location = new System.Drawing.Point(625, 499);
+			this.buttonOK.Location = new System.Drawing.Point(529, 499);
 			this.buttonOK.Name = "buttonOK";
 			this.buttonOK.Size = new System.Drawing.Size(106, 23);
 			this.buttonOK.TabIndex = 3;
 			this.buttonOK.Text = "Bild verwenden";
 			this.buttonOK.UseVisualStyleBackColor = true;
 			this.buttonOK.Click += new System.EventHandler(this.buttonOK_Click);
+			// 
+			// buttonNoImage
+			// 
+			this.buttonNoImage.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+			this.buttonNoImage.Location = new System.Drawing.Point(641, 499);
+			this.buttonNoImage.Name = "buttonNoImage";
+			this.buttonNoImage.Size = new System.Drawing.Size(106, 23);
+			this.buttonNoImage.TabIndex = 4;
+			this.buttonNoImage.Text = "Kein Bild";
+			this.buttonNoImage.UseVisualStyleBackColor = true;
+			this.buttonNoImage.Click += new System.EventHandler(this.buttonNoImage_Click);
+			// 
+			// checkBoxForAll
+			// 
+			this.checkBoxForAll.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+			this.checkBoxForAll.AutoSize = true;
+			this.checkBoxForAll.Location = new System.Drawing.Point(223, 503);
+			this.checkBoxForAll.Name = "checkBoxForAll";
+			this.checkBoxForAll.Size = new System.Drawing.Size(153, 17);
+			this.checkBoxForAll.TabIndex = 5;
+			this.checkBoxForAll.Text = "Für alle Folien übernehmen";
+			this.checkBoxForAll.UseVisualStyleBackColor = true;
 			// 
 			// ImageDialog
 			// 
@@ -91,6 +115,8 @@
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.CancelButton = this.buttonCancel;
 			this.ClientSize = new System.Drawing.Size(840, 534);
+			this.Controls.Add(this.checkBoxForAll);
+			this.Controls.Add(this.buttonNoImage);
 			this.Controls.Add(this.buttonOK);
 			this.Controls.Add(this.buttonCancel);
 			this.Controls.Add(this.listViewImages);
@@ -103,6 +129,7 @@
 			this.Text = "Bild wählen...";
 			this.Load += new System.EventHandler(this.ImageDialog_Load);
 			this.ResumeLayout(false);
+			this.PerformLayout();
 
 		}
 
@@ -112,5 +139,7 @@
 		private System.Windows.Forms.ListView listViewImages;
 		private System.Windows.Forms.Button buttonCancel;
 		private System.Windows.Forms.Button buttonOK;
+		private System.Windows.Forms.Button buttonNoImage;
+		private System.Windows.Forms.CheckBox checkBoxForAll;
 	}
 }

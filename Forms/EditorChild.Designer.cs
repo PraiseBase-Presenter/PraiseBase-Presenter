@@ -139,6 +139,7 @@
 			this.pictureBoxPreview.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
 			this.pictureBoxPreview.TabIndex = 2;
 			this.pictureBoxPreview.TabStop = false;
+			this.pictureBoxPreview.DoubleClick += new System.EventHandler(this.buttonSlideBackground_Click);
 			// 
 			// textBoxSongTitle
 			// 

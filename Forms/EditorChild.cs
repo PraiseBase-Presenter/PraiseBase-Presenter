@@ -1,4 +1,31 @@
-﻿using System;
+﻿/*
+ *   PraiseBase Presenter 
+ *   The open source lyrics and image projection software for churches
+ *   
+ *   http://code.google.com/p/praisebasepresenter
+ *
+ *   This program is free software; you can redistribute it and/or
+ *   modify it under the terms of the GNU General Public License
+ *   as published by the Free Software Foundation; either version 2
+ *   of the License, or (at your option) any later version.
+ *
+ *   This program is distributed in the hope that it will be useful,
+ *   but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *   GNU General Public License for more details.
+ *
+ *   You should have received a copy of the GNU General Public License
+ *   along with this program; if not, write to the Free Software
+ *   Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+ *
+ *   Author:
+ *      Nicolas Perrenoud <nicu_at_lavine.ch>
+ *   Co-authors:
+ *      ...
+ *
+ */
+
+using System;
 using System.Drawing;
 using System.Windows.Forms;
 using System.IO;
@@ -132,10 +159,10 @@ namespace Pbp.Forms
                 textBoxSongTitle.Text = sng.title;
 
                 textBoxComment.Text = sng.comment;
-                checkBoxQAImages.Checked = sng.QAImage;
-                checkBoxQASpelling.Checked = sng.QASpelling;
-                checkBoxQATranslation.Checked = sng.QATranslation;
-                checkBoxQASegmentation.Checked = sng.QASegmentation;
+                checkBoxQAImages.Checked = sng.getQA(Song.QualityAssuranceItem.images);
+                checkBoxQASpelling.Checked = sng.getQA(Song.QualityAssuranceItem.spelling);
+                checkBoxQATranslation.Checked = sng.getQA(Song.QualityAssuranceItem.translation);
+                checkBoxQASegmentation.Checked = sng.getQA(Song.QualityAssuranceItem.segmentation);
 
                 labelFont.Text = sng.font.Name + ", " + sng.font.Style.ToString() + ", " + sng.font.Size.ToString();
                 labelFontTranslation.Text = sng.fontTranslation.Name + ", " + sng.fontTranslation.Style.ToString() + ", " + sng.fontTranslation.Size.ToString();
@@ -201,6 +228,10 @@ namespace Pbp.Forms
 		{
 			Song.Part prt = new Song.Part(caption);
 			Song.Slide sld = new Song.Slide(sng);
+			sld.imageNumber = 0;
+			sld.horizAlign = sng.defaultHorizAlign;
+			sld.vertAlign = sng.defaultVertAlign;
+
 			prt.slides.Add(sld);
 			sng.parts.Add(prt);
 
@@ -235,7 +266,9 @@ namespace Pbp.Forms
         {
             int partId = 0;
             Song.Slide sld = new Song.Slide(sng);
-            sld.imageNumber = -1;
+            sld.imageNumber = 0;
+			sld.horizAlign = sng.defaultHorizAlign;
+			sld.vertAlign = sng.defaultVertAlign;
             if (treeViewContents.SelectedNode.Level == 1)
             {
                 partId = treeViewContents.SelectedNode.Index;
@@ -346,31 +379,60 @@ namespace Pbp.Forms
 
         private void checkBoxQASpelling_CheckedChanged(object sender, EventArgs e)
         {
-            if (checkBoxQASpelling.Checked)
-                checkBoxQASpelling.ForeColor = Color.Red;
-            else
-                checkBoxQASpelling.ForeColor = SystemColors.ControlText;
-            sng.QASpelling = checkBoxQASpelling.Checked;
+			if (checkBoxQASpelling.Checked)
+			{
+				checkBoxQASpelling.ForeColor = Color.Red;
+				sng.addQA(Song.QualityAssuranceItem.spelling);
+			}
+			else
+			{
+				checkBoxQASpelling.ForeColor = SystemColors.ControlText;
+				sng.remQA(Song.QualityAssuranceItem.spelling);
+			}
         }
 
         private void checkBoxQATranslation_CheckedChanged(object sender, EventArgs e)
         {
-            if (checkBoxQATranslation.Checked)
-                checkBoxQATranslation.ForeColor = Color.Red;
-            else
-                checkBoxQATranslation.ForeColor = SystemColors.ControlText;
-
-            sng.QATranslation = checkBoxQATranslation.Checked;
+			if (checkBoxQATranslation.Checked)
+			{
+				checkBoxQATranslation.ForeColor = Color.Red;
+				sng.addQA(Song.QualityAssuranceItem.translation);
+			}
+			else
+			{
+				checkBoxQATranslation.ForeColor = SystemColors.ControlText;
+				sng.remQA(Song.QualityAssuranceItem.translation);
+			}
         }
 
         private void checkBoxQAImages_CheckedChanged(object sender, EventArgs e)
         {
-            if (checkBoxQAImages.Checked)
-                checkBoxQAImages.ForeColor = Color.Red;
-            else
-                checkBoxQAImages.ForeColor = SystemColors.ControlText;
-            sng.QAImage = checkBoxQAImages.Checked;
+			if (checkBoxQAImages.Checked)
+			{
+				checkBoxQAImages.ForeColor = Color.Red;
+				sng.addQA(Song.QualityAssuranceItem.images);
+			}
+			else
+			{
+				checkBoxQAImages.ForeColor = SystemColors.ControlText;
+				sng.remQA(Song.QualityAssuranceItem.images);
+			}
         }
+
+		private void checkBoxQASegmentation_CheckedChanged(object sender, EventArgs e)
+		{
+			if (checkBoxQASegmentation.Checked)
+			{
+				checkBoxQASegmentation.ForeColor = Color.Red;
+				sng.addQA(Song.QualityAssuranceItem.segmentation);
+			}
+			else
+			{
+				checkBoxQASegmentation.ForeColor = SystemColors.ControlText;
+				sng.remQA(Song.QualityAssuranceItem.segmentation);
+			}
+		}
+
 
         private void tabControlEditor_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -395,14 +457,6 @@ namespace Pbp.Forms
             }
         }
 
-        private void checkBoxQASegmentation_CheckedChanged(object sender, EventArgs e)
-        {
-            if (checkBoxQASegmentation.Checked)
-                checkBoxQASegmentation.ForeColor = Color.Red;
-            else
-                checkBoxQASegmentation.ForeColor = SystemColors.ControlText;
-            sng.QASegmentation = checkBoxQASegmentation.Checked;
-        }
 
 
 
@@ -412,6 +466,8 @@ namespace Pbp.Forms
             int slideIdx = treeViewContents.SelectedNode.Index;
             sng.parts[partIdx].slides[slideIdx].horizAlign = (Song.SongTextHorizontalAlign)comboBoxSlideHorizOrientation.SelectedIndex;
             pictureBoxPreview.Image = projWindow.showSlide(sng.parts[partIdx].slides[slideIdx], sng.getImage(sng.parts[partIdx].slides[slideIdx].imageNumber), true);
+
+			sng.defaultHorizAlign = sng.parts[partIdx].slides[slideIdx].horizAlign;
         }
 
         private void comboBoxSlideVertOrientation_SelectedIndexChanged(object sender, EventArgs e)
@@ -420,6 +476,8 @@ namespace Pbp.Forms
             int slideIdx = treeViewContents.SelectedNode.Index;
             sng.parts[partIdx].slides[slideIdx].vertAlign = (Song.SongTextVerticalAlign)comboBoxSlideVertOrientation.SelectedIndex;
             pictureBoxPreview.Image = projWindow.showSlide(sng.parts[partIdx].slides[slideIdx], sng.getImage(sng.parts[partIdx].slides[slideIdx].imageNumber), true);
+
+			sng.defaultVertAlign = sng.parts[partIdx].slides[slideIdx].vertAlign;
         }
 
         private void buttonProjectionMasterFont_Click(object sender, EventArgs e)
@@ -667,26 +725,62 @@ namespace Pbp.Forms
 				int partIdx = treeViewContents.SelectedNode.Parent.Index;
 				int slideIdx = treeViewContents.SelectedNode.Index;
 
-				ImageDialog imd;
+				ImageDialog imd = new ImageDialog();
+
 				if (sng.parts[partIdx].slides[slideIdx].imageNumber > 0)
-				{
-					imd = new ImageDialog(setting.dataDirectory + Path.DirectorySeparatorChar + setting.imageDir + Path.DirectorySeparatorChar + sng.imagePaths[sng.parts[partIdx].slides[slideIdx].imageNumber - 1]);
-				}
-				else
-					imd = new ImageDialog();
+					imd.imagePath = setting.dataDirectory + Path.DirectorySeparatorChar + setting.imageDir + Path.DirectorySeparatorChar + sng.imagePaths[sng.parts[partIdx].slides[slideIdx].imageNumber - 1];
+
+				if (sng.imagePaths.Count == 0)
+					imd.forAll = true;
 
 				if (imd.ShowDialog(this) == DialogResult.OK)
 				{
-					string imString = imd.imagePath.Substring((setting.dataDirectory + Path.DirectorySeparatorChar + setting.imageDir + Path.DirectorySeparatorChar).Length);
-
-					if (sng.imagePaths.Contains(imString))
+					if (imd.imagePath != "")
 					{
-						sng.parts[partIdx].slides[slideIdx].imageNumber = sng.imagePaths.IndexOf(imString) + 1;
+						string imString = imd.imagePath.Substring((setting.dataDirectory + Path.DirectorySeparatorChar + setting.imageDir + Path.DirectorySeparatorChar).Length);
+
+						if (imd.forAll)
+						{
+							sng.imagePaths.Clear();
+							sng.imagePaths.Add(imString);
+							for (int i = 0; i < sng.parts.Count; i++)
+							{
+								for (int j = 0; j < sng.parts[i].slides.Count; j++)
+								{
+									sng.parts[i].slides[j].imageNumber = 1;
+								}
+							}
+						}
+						else
+						{
+							if (sng.imagePaths.Contains(imString))
+							{
+								sng.parts[partIdx].slides[slideIdx].imageNumber = sng.imagePaths.IndexOf(imString) + 1;
+							}
+							else
+							{
+								sng.imagePaths.Add(imString);
+								sng.parts[partIdx].slides[slideIdx].imageNumber = sng.imagePaths.Count;
+							}
+						}
 					}
 					else
 					{
-						sng.imagePaths.Add(imString);
-						sng.parts[partIdx].slides[slideIdx].imageNumber = sng.imagePaths.Count;
+						if (imd.forAll)
+						{
+							sng.imagePaths.Clear();
+							for (int i = 0; i < sng.parts.Count; i++)
+							{
+								for (int j = 0; j < sng.parts[i].slides.Count; j++)
+								{
+									sng.parts[i].slides[j].imageNumber = 0;
+								}
+							}
+						}
+						else
+						{
+							sng.parts[partIdx].slides[slideIdx].imageNumber = 0;
+						}
 					}
 					pictureBoxPreview.Image = projWindow.showSlide(sng.parts[partIdx].slides[slideIdx], sng.getImage(sng.parts[partIdx].slides[slideIdx].imageNumber), true);
 					

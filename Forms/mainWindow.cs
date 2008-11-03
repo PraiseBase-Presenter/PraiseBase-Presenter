@@ -1,4 +1,31 @@
-﻿using System;
+﻿/*
+ *   PraiseBase Presenter 
+ *   The open source lyrics and image projection software for churches
+ *   
+ *   http://code.google.com/p/praisebasepresenter
+ *
+ *   This program is free software; you can redistribute it and/or
+ *   modify it under the terms of the GNU General Public License
+ *   as published by the Free Software Foundation; either version 2
+ *   of the License, or (at your option) any later version.
+ *
+ *   This program is distributed in the hope that it will be useful,
+ *   but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *   GNU General Public License for more details.
+ *
+ *   You should have received a copy of the GNU General Public License
+ *   along with this program; if not, write to the Free Software
+ *   Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+ *
+ *   Author:
+ *      Nicolas Perrenoud <nicu_at_lavine.ch>
+ *   Co-authors:
+ *      ...
+ *
+ */
+
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -16,28 +43,52 @@ using System.Xml;
 using Pbp.Properties;
 using Pbp.Forms;
 
-namespace Pbp
+
+namespace Pbp.Forms
 {
+	/// <summary>
+	/// The main window class provides the central
+	/// gui of this software, including the songlist, 
+	/// setlist, imagelist and the diashow interface.
+	/// </summary>
     public partial class mainWindow : Form
     {
-        private bool blackout;
 
         private Settings setting;
-        private projectionWindow projWindow;
-
-        private Timer blackOutTimer;
+		static private mainWindow instance;
+        private projectionWindow projWindow; // Todo: use singleton
+		ImageManager imgMan; // Use singleton
+		
+		private Timer blackOutTimer;
         private Timer diaTimer;
-
-        ImageManager imgMan;
-
+		private bool blackout;
         private List<String> imageSearchResults;
 
-        public mainWindow()
+		/// <summary>
+		/// Private constructor
+		/// </summary>
+        private mainWindow()
         {
             setting = new Settings();
             InitializeComponent();
         }
 
+		/// <summary>
+		/// Returns a singleton of mainWindow
+		/// </summary>
+		/// <returns>Returns the mainWindow instance</returns>
+		static public mainWindow getInstance()
+		{
+			if (instance == null)
+				instance = new mainWindow();
+			return instance;
+		}
+
+		/// <summary>
+		/// Initializes some basic form stuff
+		/// </summary>
+		/// <param name="sender"></param>
+		/// <param name="e"></param>
         private void Form1_Load(object sender, EventArgs e)
         {            
             projWindow = projectionWindow.getInstance();
@@ -58,7 +109,7 @@ namespace Pbp
             imageTreeViewInit();
 
 			trackBarFadeTimer.Value= setting.projectionFadeTime;
-			labelFadeTime.Text = setting.projectionFadeTime.ToString() + " ms";
+			labelFadeTime.Text = setting.projectionFadeTime.ToString(); // + " ms";
 			UserControl1.getInstance().setFadeSteps(setting.projectionFadeTime);
         }
 
@@ -104,7 +155,7 @@ namespace Pbp
                 cnt++;
             }
             listViewSongs.Columns[0].Width = -2;
-            toolStripStatusLabel.Text = cnt.ToString() + " Lieder geladen";
+			setStatus(cnt.ToString() + " Lieder geladen");
         }
 
         void searchSongs(string needle)
@@ -305,13 +356,16 @@ namespace Pbp
 			songDetailItems.Columns[0].Width = -2;
 			songDetailItems.Columns[1].Width = -2;
 
-			// Set comment
-			//	setSongComment(songMan.currentSong.comment);
+			commentCancel();
+			buttonCommentEnable.Enabled = true;
+			textBoxComment.Text = songMan.currentSong.comment;
+			if (textBoxComment.Text != "")
+				buttonClearComment.Enabled = true;
 
-			checkBoxQASpelling.Checked = songMan.currentSong.QASpelling;
-			checkBoxQATranslation.Checked = songMan.currentSong.QATranslation;
-			checkBoxQAImages.Checked = songMan.currentSong.QAImage;
-			checkBoxQASegmentation.Checked = songMan.currentSong.QASegmentation;
+			checkBoxQASpelling.Checked = songMan.currentSong.getQA(Song.QualityAssuranceItem.spelling);
+			checkBoxQATranslation.Checked = songMan.currentSong.getQA(Song.QualityAssuranceItem.translation);
+			checkBoxQAImages.Checked = songMan.currentSong.getQA(Song.QualityAssuranceItem.images);
+			checkBoxQASegmentation.Checked = songMan.currentSong.getQA(Song.QualityAssuranceItem.segmentation);
 
 			groupBox3.Text = "Lied-Details '" + songMan.currentSong.title + "'";
 		}
@@ -335,7 +389,7 @@ namespace Pbp
                 {
 					pictureBoxPreview.Image = projWindow.showSlide(songMan.currentSong.slides[songMan.currentSong.currentSlide], songMan.currentSong.getImage(songMan.currentSong.slides[songMan.currentSong.currentSlide].imageNumber), false);
                 }
-                toolStripStatusLabel.Text = "'" + songMan.currentSong.title + "' ist aktiv";
+				setStatus("'" + songMan.currentSong.title + "' ist aktiv");
             }
         }
 
@@ -407,57 +461,6 @@ namespace Pbp
             }
         }
 
-
-        //
-        // Song comments
-        //
-
-		/*
-        private void textBoxSongComment_DoubleClick(object sender, EventArgs e)
-        {
-            editSongComment();
-        }
-
-        public void setSongComment(string cmt)
-        {
-            textBoxSongComment.Text = cmt;
-            textBoxSongComment.Enabled = true;
-        }
-
-        public void editSongComment()
-        {
-            textBoxSongComment.ReadOnly = false;
-            textBoxSongComment.BackColor = Color.White;
-            toolStripStatusLabel.Text = "Zum Beenden der Kommentarfunktion ENTER drücken";
-        }
-
-        public void saveSongComment()
-        {
-			SongManager songMan = SongManager.getInstance();
-
-            textBoxSongComment.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
-            textBoxSongComment.ReadOnly = true;
-            if (songMan.currentSong != null)
-            {
-                toolStripStatusLabel.Text = "Kommentar gespeichert";
-                songMan.currentSong.comment = textBoxSongComment.Text;
-                songMan.currentSong.save(null);
-            }
-        }
-
-        private void textBoxSongComment_Leave(object sender, EventArgs e)
-        {
-            saveSongComment();
-        }
-
-        private void textBoxSongComment_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            if ((int)e.KeyChar == (int)Keys.Enter)
-            {
-                saveSongComment();
-            }
-        }
-		*/
 
         public void imageTreeViewInit()
         {
@@ -577,11 +580,11 @@ namespace Pbp
                 if ((Control.ModifierKeys & Keys.Shift) == Keys.Shift && songMan.currentSong != null && songMan.currentSong.currentSlide>=0)
                 {
 
-                    projWindow.showSlide(songMan.currentSong.slides[songMan.currentSong.currentSlide], Image.FromFile((string)listViewDirectoryImages.Items[idx].Tag), false);
+					pictureBoxPreview.Image = projWindow.showSlide(songMan.currentSong.slides[songMan.currentSong.currentSlide], Image.FromFile((string)listViewDirectoryImages.Items[idx].Tag), false);
                 }
                 else
                 {
-                    projWindow.showImage(Image.FromFile((string)listViewDirectoryImages.Items[idx].Tag));
+					pictureBoxPreview.Image = projWindow.showImage(Image.FromFile((string)listViewDirectoryImages.Items[idx].Tag));
                 }
 
                 // History
@@ -754,7 +757,7 @@ namespace Pbp
                     return;
                 }
                 diaTimer.Tag = diaStack;
-                projWindow.showImage(Image.FromFile(diaStack.Dequeue()));
+				pictureBoxPreview.Image = projWindow.showImage(Image.FromFile(diaStack.Dequeue()));
                 diaTimer.Start();
             }
         }
@@ -768,7 +771,7 @@ namespace Pbp
                     buttonDiaShow.Text = "Diaschau starten";
                     return;                
             }
-			projWindow.showImage(Image.FromFile(((Queue<string>)((Timer)sender).Tag).Dequeue()));
+			pictureBoxPreview.Image = projWindow.showImage(Image.FromFile(((Queue<string>)((Timer)sender).Tag).Dequeue()));
         }
 
         private void radioButton2_CheckedChanged(object sender, EventArgs e)
@@ -787,8 +790,11 @@ namespace Pbp
 
             if (songMan.currentSong != null)
             {
-                songMan.currentSong.QASpelling = ((CheckBox)sender).Checked;
-                songMan.currentSong.save(null);
+				if (((CheckBox)sender).Checked)
+					songMan.currentSong.addQA(Song.QualityAssuranceItem.spelling);
+				else
+					songMan.currentSong.remQA(Song.QualityAssuranceItem.spelling);
+				songMan.currentSong.save(null);
             }
         }
 
@@ -798,8 +804,11 @@ namespace Pbp
 
             if (songMan.currentSong != null)
             {
-                songMan.currentSong.QATranslation = ((CheckBox)sender).Checked;
-                songMan.currentSong.save(null);
+				if (((CheckBox)sender).Checked)
+					songMan.currentSong.addQA(Song.QualityAssuranceItem.translation);
+				else
+					songMan.currentSong.remQA(Song.QualityAssuranceItem.translation);
+				songMan.currentSong.save(null);
             }
         }
 
@@ -809,10 +818,27 @@ namespace Pbp
 
             if (songMan.currentSong != null)
             {
-                songMan.currentSong.QAImage = ((CheckBox)sender).Checked;
-                songMan.currentSong.save(null);
+				if (((CheckBox)sender).Checked)
+					songMan.currentSong.addQA(Song.QualityAssuranceItem.images);
+				else
+					songMan.currentSong.remQA(Song.QualityAssuranceItem.images);
+				songMan.currentSong.save(null);
             }
         }
+
+		private void checkBoxQASegmentation_CheckedChanged(object sender, EventArgs e)
+		{
+			SongManager songMan = SongManager.getInstance();
+
+			if (songMan.currentSong != null)
+			{
+				if (((CheckBox)sender).Checked)
+					songMan.currentSong.addQA(Song.QualityAssuranceItem.segmentation);
+				else
+					songMan.currentSong.remQA(Song.QualityAssuranceItem.segmentation);
+				songMan.currentSong.save(null);
+			}
+		}
 
         private void listViewDirectoryImages_Leave(object sender, EventArgs e)
         {
@@ -837,11 +863,11 @@ namespace Pbp
                 if ((Control.ModifierKeys & Keys.Shift) == Keys.Shift && songMan.currentSong != null && songMan.currentSong.currentSlide >= 0)
                 {
 
-                    projWindow.showSlide(songMan.currentSong.slides[songMan.currentSong.currentSlide], Image.FromFile((string)listViewImageHistory.Items[idx].Tag), false);
+					pictureBoxPreview.Image = projWindow.showSlide(songMan.currentSong.slides[songMan.currentSong.currentSlide], Image.FromFile((string)listViewImageHistory.Items[idx].Tag), false);
                 }
                 else
                 {
-                    projWindow.showImage(Image.FromFile((string)listViewImageHistory.Items[idx].Tag));
+					pictureBoxPreview.Image = projWindow.showImage(Image.FromFile((string)listViewImageHistory.Items[idx].Tag));
                 }
             }
         }
@@ -860,16 +886,7 @@ namespace Pbp
 
         }
 
-        private void checkBoxQASegmentation_CheckedChanged(object sender, EventArgs e)
-        {
-			SongManager songMan = SongManager.getInstance();
 
-            if (songMan.currentSong != null)
-            {
-                songMan.currentSong.QASegmentation = ((CheckBox)sender).Checked;
-                songMan.currentSong.save(null);
-            }
-        }
 
         private void buttonSearchImages_Click(object sender, EventArgs e)
         {
@@ -1038,6 +1055,7 @@ namespace Pbp
 			{
 				buttonSetListAdd.Enabled = false;
 			}
+
 		}
 
 		private void buttonSaveSetList_Click(object sender, EventArgs e)
@@ -1119,7 +1137,7 @@ namespace Pbp
 
 		private void trackBarFadeTimer_Scroll(object sender, EventArgs e)
 		{
-			labelFadeTime.Text = trackBarFadeTimer.Value.ToString()+ " ms";
+			labelFadeTime.Text = trackBarFadeTimer.Value.ToString(); // +" ms";
 			setting.projectionFadeTime = trackBarFadeTimer.Value;
 			setting.Save();
 			UserControl1.getInstance().setFadeSteps(trackBarFadeTimer.Value);
@@ -1129,11 +1147,95 @@ namespace Pbp
 		{
 		}
 
+		private void toolStripButtonDisplaySettings_Click(object sender, EventArgs e)
+		{
+			// Todo: OS Check
+			System.Diagnostics.Process.Start("control", "desk.cpl,@0,4");
+		}
 
+		public void setProgessBarTransitionValue(int value)
+		{
+			progressBarTransition.Value = Math.Min(value,progressBarTransition.Maximum);
+		}
 
-		
+		private void buttonCommentEnable_Click(object sender, EventArgs e)
+		{
+			if (!textBoxComment.ReadOnly)
+			{
+				commentSave();
+			}
+			else
+			{
+				commentEdit();
+			}
+		}
 
+		private void commentEdit()
+		{
+			if (SongManager.getInstance().currentSong != null)
+			{
+				buttonCommentEnable.Image = global::Pbp.Properties.Resources.filesave;
+				textBoxComment.BackColor = SystemColors.Window;
+				textBoxComment.ReadOnly = false;
+				textBoxComment.SelectAll();
+				textBoxComment.Focus();
+			}
+		}
 
+		private void commentCancel()
+		{
+			buttonCommentEnable.Image = global::Pbp.Properties.Resources.edit;
+			textBoxComment.BackColor = SystemColors.Info;
+			textBoxComment.ReadOnly = true;
+		}
+
+		private void commentSave()
+		{
+			buttonCommentEnable.Image = global::Pbp.Properties.Resources.edit;
+			textBoxComment.BackColor = SystemColors.Info;
+			textBoxComment.ReadOnly = true;
+			SongManager.getInstance().currentSong.comment = textBoxComment.Text.Trim();
+			SongManager.getInstance().currentSong.save(null);
+			setStatus("Kommentar gespeichert!");
+		}
+
+		private void textBoxComment_MouseDoubleClick(object sender, MouseEventArgs e)
+		{
+			if (textBoxComment.ReadOnly)
+				commentEdit();
+		}
+
+		private void buttonClearComment_Click(object sender, EventArgs e)
+		{
+			if (SongManager.getInstance().currentSong != null)
+			{
+				textBoxComment.Text = "";
+				commentSave();
+				buttonClearComment.Enabled = false;
+			}
+		}
+
+		private void textBoxComment_TextChanged(object sender, EventArgs e)
+		{
+			if (textBoxComment.Text != "")
+				buttonClearComment.Enabled = true;
+		}
+
+		public void setStatus(string text)
+		{
+			toolStripStatusLabel.Text = text;
+			Timer statusTimer = new Timer();
+			statusTimer.Interval = 2000;
+			statusTimer.Tick += new EventHandler(statusTimer_Tick);
+			statusTimer.Start();
+		}
+
+		void statusTimer_Tick(object sender, EventArgs e)
+		{
+			toolStripStatusLabel.Text = string.Empty;
+			((Timer)sender).Stop();
+			((Timer)sender).Dispose();
+		}		
 
 
     }

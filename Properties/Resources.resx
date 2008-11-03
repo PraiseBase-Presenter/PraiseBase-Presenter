@@ -151,13 +151,13 @@
   <data name="editor" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\kate.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="keditbookmarks" type="System.Resources.ResXFileRef, System.Windows.Forms">
+  <data name="star" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\keditbookmarks.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="ktip" type="System.Resources.ResXFileRef, System.Windows.Forms">
+  <data name="tip" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\ktip.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="package_favorite" type="System.Resources.ResXFileRef, System.Windows.Forms">
+  <data name="love" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\package_favorite.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="search" type="System.Resources.ResXFileRef, System.Windows.Forms">
@@ -234,5 +234,11 @@
   </data>
   <data name="filesave" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\filesave.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="displaysettings" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\background.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="edit" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\easymoblog.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>

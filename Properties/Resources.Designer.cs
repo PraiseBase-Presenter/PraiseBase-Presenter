@@ -207,6 +207,20 @@ namespace Pbp.Properties {
             }
         }
         
+        internal static System.Drawing.Bitmap displaysettings {
+            get {
+                object obj = ResourceManager.GetObject("displaysettings", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap edit {
+            get {
+                object obj = ResourceManager.GetObject("edit", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
         internal static System.Drawing.Bitmap edit_add {
             get {
                 object obj = ResourceManager.GetObject("edit_add", resourceCulture);
@@ -277,20 +291,6 @@ namespace Pbp.Properties {
             }
         }
         
-        internal static System.Drawing.Bitmap keditbookmarks {
-            get {
-                object obj = ResourceManager.GetObject("keditbookmarks", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        internal static System.Drawing.Bitmap ktip {
-            get {
-                object obj = ResourceManager.GetObject("ktip", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
         /// <summary>
         ///   Looks up a localized string similar to                     GNU GENERAL PUBLIC LICENSE
         ///                       Version 3, 29 June 2007
@@ -320,9 +320,9 @@ namespace Pbp.Properties {
             }
         }
         
-        internal static System.Drawing.Bitmap package_favorite {
+        internal static System.Drawing.Bitmap love {
             get {
-                object obj = ResourceManager.GetObject("package_favorite", resourceCulture);
+                object obj = ResourceManager.GetObject("love", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -344,6 +344,20 @@ namespace Pbp.Properties {
         internal static System.Drawing.Bitmap search {
             get {
                 object obj = ResourceManager.GetObject("search", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap star {
+            get {
+                object obj = ResourceManager.GetObject("star", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap tip {
+            get {
+                object obj = ResourceManager.GetObject("tip", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

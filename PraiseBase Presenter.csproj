@@ -51,6 +51,8 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <DocumentationFile>
+    </DocumentationFile>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="PresentationCore">
@@ -90,17 +92,11 @@
     <Compile Include="Classes\ImageManager.cs" />
     <Compile Include="Classes\SongManager.cs" />
     <Compile Include="Classes\SongSubclasses.cs" />
-    <Compile Include="Componetns\ColorButton.cs">
-      <SubType>Component</SubType>
-    </Compile>
     <Compile Include="Forms\AboutWindow.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Forms\AboutWindow.Designer.cs">
       <DependentUpon>AboutWindow.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Forms\ColorDialog.cs">
-      <SubType>Form</SubType>
     </Compile>
     <Compile Include="Forms\EditorChild.cs">
       <SubType>Form</SubType>
@@ -145,10 +141,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Forms\AboutWindow.resx">
       <DependentUpon>AboutWindow.cs</DependentUpon>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\ColorDialog.resx">
-      <DependentUpon>ColorDialog.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\EditorChild.resx">
@@ -312,6 +304,10 @@
     <None Include="Resources\edit_remove.png" />
     <None Include="Resources\filesave.png" />
     <None Include="Resources\fileopen.png" />
+    <None Include="Resources\background.png" />
+    <None Include="Resources\edit.png" />
+    <None Include="Resources\3floppy_unmount.png" />
+    <None Include="Resources\easymoblog.png" />
     <Content Include="Songs\A Mighty Fortress Is Our God.ppl" />
     <Content Include="Songs\Jesus is my Lord.ppl" />
   </ItemGroup>

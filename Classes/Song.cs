@@ -1,4 +1,31 @@
-﻿using System;
+﻿/*
+ *   PraiseBase Presenter 
+ *   The open source lyrics and image projection software for churches
+ *   
+ *   http://code.google.com/p/praisebasepresenter
+ *
+ *   This program is free software; you can redistribute it and/or
+ *   modify it under the terms of the GNU General Public License
+ *   as published by the Free Software Foundation; either version 2
+ *   of the License, or (at your option) any later version.
+ *
+ *   This program is distributed in the hope that it will be useful,
+ *   but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *   GNU General Public License for more details.
+ *
+ *   You should have received a copy of the GNU General Public License
+ *   along with this program; if not, write to the Free Software
+ *   Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+ *
+ *   Author:
+ *      Nicolas Perrenoud <nicu_at_lavine.ch>
+ *   Co-authors:
+ *      ...
+ *
+ */
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -95,21 +122,9 @@ namespace Pbp
         /// </summary>
         public int lineSpacingTranslation;
         /// <summary>
-        /// Quality assurance indicator for spelling errors
+        /// Quality assurance indicator
         /// </summary>
-        public bool QASpelling;
-        /// <summary>
-        /// Quality assurance indicator for missing or wrong translation
-        /// </summary>
-        public bool QATranslation;
-        /// <summary>
-        /// Quality assurance indicator for missing or wrong images
-        /// </summary>
-        public bool QAImage;
-        /// <summary>
-        /// Qualiti assurance indicator for improper segmentation of slide text
-        /// </summary>
-        public bool QASegmentation;
+		private int QASettings;
         /// <summary>
         /// The file type of this song
         /// </summary>
@@ -140,6 +155,9 @@ namespace Pbp
         /// </summary>
         private ImageList imageThumbs;
 
+		public SongTextHorizontalAlign defaultHorizAlign { get; set; }
+		public SongTextVerticalAlign defaultVertAlign { get; set; }
+
 		#endregion
 
 		/// <summary>
@@ -156,8 +174,8 @@ namespace Pbp
 			Settings setting = new Settings();
 
 			tags = new Tags();
-			SongTextHorizontalAlign defaultHorizAlign = SongTextHorizontalAlign.center;
-			SongTextVerticalAlign defaultVertAlign = SongTextVerticalAlign.center;
+			defaultHorizAlign = SongTextHorizontalAlign.center;
+			defaultVertAlign = SongTextVerticalAlign.center;
 			slides = new List<Slide>();
 			parts = new List<Part>();
 			imagePaths = new List<string>();
@@ -214,6 +232,10 @@ namespace Pbp
 						else
 							comment = "";
 
+						if (xmlRoot["general"]["qa"] != null)
+							Int32.TryParse(xmlRoot["general"]["qa"].InnerText, out QASettings);
+						else
+							QASettings = 0;
 
 						if (xmlRoot["formatting"]["textorientation"] != null)
 						{
@@ -316,7 +338,6 @@ namespace Pbp
 										int bgNr = System.Convert.ToInt32(slideElem.GetAttribute("backgroundnr")) + 1;
 										bgNr = bgNr<0 ? 0 : bgNr;
 										bgNr = bgNr>imagePaths.Count ? imagePaths.Count : bgNr;
-										//tmpSlide.image = imagePaths[bgNr];
 										tmpSlide.imageNumber = bgNr;
 										foreach (XmlElement lineElem in slideElem)
 										{
@@ -487,6 +508,12 @@ namespace Pbp
 				{
 					xmlRoot["general"].AppendChild(xmlDoc.CreateElement("comment"));
 					xmlRoot["general"]["comment"].InnerText = comment;
+				}
+
+				if (QASettings > 0)
+				{
+					xmlRoot["general"].AppendChild(xmlDoc.CreateElement("qa"));
+					xmlRoot["general"]["qa"].InnerText = QASettings.ToString();
 				}
 
                 xmlRoot.AppendChild(xmlDoc.CreateElement("songtext"));
@@ -726,5 +753,23 @@ namespace Pbp
 			}
 			return false;
 		}
+
+		public void addQA(QualityAssuranceItem quai)
+		{
+			QASettings = QASettings | (int)quai;
+			Console.WriteLine(QASettings);
+		}
+
+		public void remQA(QualityAssuranceItem quai)
+		{
+			QASettings = QASettings & (~(int)quai);
+			Console.WriteLine(QASettings);
+		}
+
+		public bool getQA(QualityAssuranceItem quai)
+		{
+			return (QASettings & (int)quai) > 0 ? true : false; 
+		}
+
     }
 }

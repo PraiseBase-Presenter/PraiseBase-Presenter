@@ -1,4 +1,31 @@
-﻿using System;
+﻿/*
+ *   PraiseBase Presenter 
+ *   The open source lyrics and image projection software for churches
+ *   
+ *   http://code.google.com/p/praisebasepresenter
+ *
+ *   This program is free software; you can redistribute it and/or
+ *   modify it under the terms of the GNU General Public License
+ *   as published by the Free Software Foundation; either version 2
+ *   of the License, or (at your option) any later version.
+ *
+ *   This program is distributed in the hope that it will be useful,
+ *   but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *   GNU General Public License for more details.
+ *
+ *   You should have received a copy of the GNU General Public License
+ *   along with this program; if not, write to the Free Software
+ *   Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+ *
+ *   Author:
+ *      Nicolas Perrenoud <nicu_at_lavine.ch>
+ *   Co-authors:
+ *      ...
+ *
+ */
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -43,6 +70,23 @@ namespace Pbp.Forms
 			return instance;
 		}
 
+		private void projectionControl_Loaded(object sender, RoutedEventArgs e)
+		{
+			Settings setting = new Settings();
+
+			System.Drawing.Bitmap bmp = new System.Drawing.Bitmap(1, 1);
+			System.Drawing.Graphics gr = System.Drawing.Graphics.FromImage(bmp);
+			gr.FillRectangle(new System.Drawing.SolidBrush(setting.projectionBackColor), 0, 0, 1, 1);
+			blackoutImage.Source = loadBitmap(bmp);
+			blackoutImage.Opacity = 0f;
+		}
+
+		public static BitmapSource loadBitmap(System.Drawing.Bitmap source)
+		{
+			return System.Windows.Interop.Imaging.CreateBitmapSourceFromHBitmap(source.GetHbitmap(), IntPtr.Zero, Int32Rect.Empty,
+				System.Windows.Media.Imaging.BitmapSizeOptions.FromEmptyOptions());
+		}
+
 		public void setFadeSteps(int steps)
 		{
 			fadeSteps = steps >= 0 ? steps : 0;
@@ -61,7 +105,6 @@ namespace Pbp.Forms
 			tmr = new DispatcherTimer();
 			tmr.Dispatcher.Thread.Priority = System.Threading.ThreadPriority.AboveNormal;
 			tmr.Interval = TimeSpan.FromMilliseconds(fadeSteps);
-			Console.WriteLine(fadeSteps.ToString());
 			tmr.Tick += new EventHandler(tmr_Tick);
 			tmr.Start();
 		}
@@ -72,38 +115,54 @@ namespace Pbp.Forms
 			{
 				opCounter += 0.02f;
 				projectionImage.Opacity = opCounter;
+				mainWindow.getInstance().setProgessBarTransitionValue((int)(opCounter * 100));
 			}
 			else
 			{
 				projectionImage.Opacity = 1f;
 				projectionImageBack.Source = projectionImage.Source;
+				mainWindow.getInstance().setProgessBarTransitionValue(0);
 				tmr.Stop();
-				Console.WriteLine(tmr.ToString());
 			}
-		}
-
-		public static BitmapSource loadBitmap(System.Drawing.Bitmap source)
-		{
-			return System.Windows.Interop.Imaging.CreateBitmapSourceFromHBitmap(source.GetHbitmap(), IntPtr.Zero, Int32Rect.Empty,
-				System.Windows.Media.Imaging.BitmapSizeOptions.FromEmptyOptions());
-		}
-
-		private void projectionControl_Loaded(object sender, RoutedEventArgs e)
-		{
-
 		}
 
 		public void blackOut(bool val)
 		{
+			if (tmr.IsEnabled)
+			{
+				tmr.Stop();
+			}
+			tmr = new DispatcherTimer();
+			tmr.Dispatcher.Thread.Priority = System.Threading.ThreadPriority.AboveNormal;
+			tmr.Interval = TimeSpan.FromMilliseconds(fadeSteps);
+			tmr.Tick += new EventHandler(tmr_blTick);
+
 			if (val)
 			{
-				projectionImage.Visibility = Visibility.Hidden;
-				projectionImageBack.Visibility = Visibility.Hidden;
+				opCounter = 0f;
+				blackoutImage.Opacity = 0f;
+				tmr.Tag = 0.02f;
 			}
 			else
 			{
-				projectionImage.Visibility = Visibility.Visible;
-				projectionImageBack.Visibility = Visibility.Visible;
+				opCounter = 1f;
+				blackoutImage.Opacity = 1f;
+				tmr.Tag = -0.02f;
+			}
+			tmr.Start();
+		}
+
+		void tmr_blTick(object sender, EventArgs e)
+		{
+			if ((float)tmr.Tag > 0f && blackoutImage.Opacity <= 1.0f
+				|| (float)tmr.Tag < 0f && blackoutImage.Opacity >= 0.0f )
+			{
+				opCounter += (float)tmr.Tag;
+				blackoutImage.Opacity = opCounter;
+			}
+			else
+			{
+				tmr.Stop();
 			}
 		}
 
