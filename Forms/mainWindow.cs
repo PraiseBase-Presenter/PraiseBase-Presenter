@@ -95,8 +95,8 @@ namespace Pbp.Forms
 			SongManager songMan = SongManager.getInstance();
             imgMan = ImageManager.getInstance();
 
-			this.WindowState = setting.viewerWindowState;
-			this.Text += " " + setting.version;
+			this.WindowState = setting.ViewerWindowState;
+			this.Text += " " + setting.Version;
 
             blackout = false;
             blackOutTimer = new Timer(); // Timer anlegen
@@ -108,9 +108,9 @@ namespace Pbp.Forms
 
             imageTreeViewInit();
 
-			trackBarFadeTimer.Value= setting.projectionFadeTime;
-			labelFadeTime.Text = setting.projectionFadeTime.ToString(); // + " ms";
-			UserControl1.getInstance().setFadeSteps(setting.projectionFadeTime);
+			trackBarFadeTimer.Value= setting.ProjectionFadeTime;
+			labelFadeTime.Text = setting.ProjectionFadeTime.ToString(); // + " ms";
+			UserControl1.getInstance().setFadeSteps(setting.ProjectionFadeTime);
         }
 
         private void beendenToolStripMenuItem_Click(object sender, EventArgs e)
@@ -147,10 +147,10 @@ namespace Pbp.Forms
             
             listViewSongs.Items.Clear();
             int cnt = 0;
-            foreach (Song sng in songMan.getAll())
+            foreach (Song sng in songMan.Songs)
             {
-                ListViewItem lvi = new ListViewItem(sng.title);
-                lvi.Tag = sng.id;
+                ListViewItem lvi = new ListViewItem(sng.Title);
+                lvi.Tag = sng.ID;
                 listViewSongs.Items.Add(lvi);
                 cnt++;
             }
@@ -166,8 +166,8 @@ namespace Pbp.Forms
             int cnt = 0;
             foreach (Song sng in songMan.getSearchResults(needle,radioSongSearchAll.Checked ? 1 : 0))
             {
-                ListViewItem lvi = new ListViewItem(sng.title);
-                lvi.Tag = sng.id;
+                ListViewItem lvi = new ListViewItem(sng.Title);
+                lvi.Tag = sng.ID;
                 listViewSongs.Items.Add(lvi);
                 cnt++;
             }
@@ -295,7 +295,7 @@ namespace Pbp.Forms
 			SongManager songMan = SongManager.getInstance();
 			
 			songSearchBox.Text = "";
-            songMan.loadSongs();
+            songMan.reload();
             loadSongList();
             songSearchBox.Focus();
             GC.Collect();
@@ -308,7 +308,7 @@ namespace Pbp.Forms
         {
 			if (listViewSongs.SelectedIndices.Count > 0)
 			{
-				SongManager.getInstance().currentSong = SongManager.getInstance().get((int)listViewSongs.SelectedItems[0].Tag);
+				SongManager.getInstance().CurrentSong = SongManager.getInstance().Songs[(int)listViewSongs.SelectedItems[0].Tag];
 				showCurrentSongDetails();
 				buttonSetListAdd.Enabled = true;
 			}
@@ -326,9 +326,9 @@ namespace Pbp.Forms
 			songDetailItems.Items.Clear();
 			songDetailImages.Items.Clear();
 
-			songDetailItems.SmallImageList = songMan.currentSong.getThumbs();
+			songDetailItems.SmallImageList = songMan.CurrentSong.getThumbs();
 
-			ImageList songImages = songMan.currentSong.getThumbs();
+			ImageList songImages = songMan.CurrentSong.getThumbs();
 			songDetailImages.LargeImageList = songImages;
 			for (int i = 1; i < songImages.Images.Count; i++)
 			{
@@ -337,17 +337,17 @@ namespace Pbp.Forms
 				songDetailImages.Items.Add(lvi);
 			}
 
-			foreach (Song.Part prt in songMan.currentSong.parts)
+			foreach (Song.Part prt in songMan.CurrentSong.Parts)
 			{
 				int sj = 1;
-				foreach (Song.Slide sld in prt.slides)
+				foreach (Song.Slide sld in prt.Slides)
 				{
 					ListViewItem lvi = new ListViewItem(new string[] 
                         { 
-                            prt.slides.Count > 1 ? prt.caption + " ("+sj+")" : prt.caption, 
+                            prt.Slides.Count > 1 ? prt.Caption + " ("+sj+")" : prt.Caption, 
                             sld.oneLineText() }
 					);
-					lvi.ImageIndex = sld.imageNumber;
+					lvi.ImageIndex = sld.ImageNumber;
 					songDetailItems.Items.Add(lvi);
 					sj++;
 				}
@@ -358,16 +358,16 @@ namespace Pbp.Forms
 
 			commentCancel();
 			buttonCommentEnable.Enabled = true;
-			textBoxComment.Text = songMan.currentSong.comment;
+			textBoxComment.Text = songMan.CurrentSong.Comment;
 			if (textBoxComment.Text != "")
 				buttonClearComment.Enabled = true;
 
-			checkBoxQASpelling.Checked = songMan.currentSong.getQA(Song.QualityAssuranceItem.spelling);
-			checkBoxQATranslation.Checked = songMan.currentSong.getQA(Song.QualityAssuranceItem.translation);
-			checkBoxQAImages.Checked = songMan.currentSong.getQA(Song.QualityAssuranceItem.images);
-			checkBoxQASegmentation.Checked = songMan.currentSong.getQA(Song.QualityAssuranceItem.segmentation);
+			checkBoxQASpelling.Checked = songMan.CurrentSong.getQA(Song.QualityAssuranceIndicators.Spelling);
+			checkBoxQATranslation.Checked = songMan.CurrentSong.getQA(Song.QualityAssuranceIndicators.Translation);
+			checkBoxQAImages.Checked = songMan.CurrentSong.getQA(Song.QualityAssuranceIndicators.Images);
+			checkBoxQASegmentation.Checked = songMan.CurrentSong.getQA(Song.QualityAssuranceIndicators.Segmentation);
 
-			groupBox3.Text = "Lied-Details '" + songMan.currentSong.title + "'";
+			groupBox3.Text = "Lied-Details '" + songMan.CurrentSong.Title + "'";
 		}
 
         private void songDetailItems_SelectedIndexChanged(object sender, EventArgs e)
@@ -377,19 +377,19 @@ namespace Pbp.Forms
             if (projWindow != null && songDetailItems.SelectedIndices.Count > 0)
             {
                 Application.DoEvents();
-                songMan.currentSong.currentSlide = songDetailItems.SelectedIndices[0];
+                songMan.CurrentSong.CurrentSlide = songDetailItems.SelectedIndices[0];
 
-                toolStripStatusLabel.Text = "Projiziere '" + songMan.currentSong.title + "' ...";
+                toolStripStatusLabel.Text = "Projiziere '" + songMan.CurrentSong.Title + "' ...";
 
                 if ((Control.ModifierKeys & Keys.Shift) == Keys.Shift)
                 {
-					pictureBoxPreview.Image = projWindow.showSlide(songMan.currentSong.slides[songMan.currentSong.currentSlide], null, false);
+					pictureBoxPreview.Image = projWindow.showSlide(songMan.CurrentSong.Slides[songMan.CurrentSong.CurrentSlide], null, false);
                 }
                 else
                 {
-					pictureBoxPreview.Image = projWindow.showSlide(songMan.currentSong.slides[songMan.currentSong.currentSlide], songMan.currentSong.getImage(songMan.currentSong.slides[songMan.currentSong.currentSlide].imageNumber), false);
+					pictureBoxPreview.Image = projWindow.showSlide(songMan.CurrentSong.Slides[songMan.CurrentSong.CurrentSlide], songMan.CurrentSong.getImage(songMan.CurrentSong.Slides[songMan.CurrentSong.CurrentSlide].ImageNumber), false);
                 }
-				setStatus("'" + songMan.currentSong.title + "' ist aktiv");
+				setStatus("'" + songMan.CurrentSong.Title + "' ist aktiv");
             }
         }
 
@@ -403,11 +403,11 @@ namespace Pbp.Forms
                 int idx = songDetailImages.SelectedIndices[0];
                 if ((Control.ModifierKeys & Keys.Shift) == Keys.Shift)
                 {
-					pictureBoxPreview.Image = projWindow.showSlide(songMan.currentSong.slides[songMan.currentSong.currentSlide], songMan.currentSong.getImage(idx + 1), false);
+					pictureBoxPreview.Image = projWindow.showSlide(songMan.CurrentSong.Slides[songMan.CurrentSong.CurrentSlide], songMan.CurrentSong.getImage(idx + 1), false);
                 }
                 else
                 {
-					pictureBoxPreview.Image = projWindow.showImage(songMan.currentSong.getImage(idx + 1));
+					pictureBoxPreview.Image = projWindow.showImage(songMan.CurrentSong.getImage(idx + 1));
                 }
             }
         }
@@ -424,7 +424,7 @@ namespace Pbp.Forms
 
         private void webToolStripMenuItem_Click(object sender, EventArgs e)
         {
-			System.Diagnostics.Process.Start(setting.weburl);
+			System.Diagnostics.Process.Start(setting.Weburl);
         }
 
 
@@ -464,7 +464,7 @@ namespace Pbp.Forms
 
         public void imageTreeViewInit()
         {
-            string rootDir = setting.dataDirectory + Path.DirectorySeparatorChar + setting.imageDir;
+            string rootDir = setting.DataDirectory + Path.DirectorySeparatorChar + setting.ImageDir;
             treeViewImageDirectories.Nodes.Clear();
             TreeNode rootTreeNode = new TreeNode("Bilder");
             rootTreeNode.Tag = rootDir;
@@ -577,10 +577,10 @@ namespace Pbp.Forms
                 Application.DoEvents();
                 int idx = listViewDirectoryImages.SelectedIndices[0];
 
-                if ((Control.ModifierKeys & Keys.Shift) == Keys.Shift && songMan.currentSong != null && songMan.currentSong.currentSlide>=0)
+                if ((Control.ModifierKeys & Keys.Shift) == Keys.Shift && songMan.CurrentSong != null && songMan.CurrentSong.CurrentSlide>=0)
                 {
 
-					pictureBoxPreview.Image = projWindow.showSlide(songMan.currentSong.slides[songMan.currentSong.currentSlide], Image.FromFile((string)listViewDirectoryImages.Items[idx].Tag), false);
+					pictureBoxPreview.Image = projWindow.showSlide(songMan.CurrentSong.Slides[songMan.CurrentSong.CurrentSlide], Image.FromFile((string)listViewDirectoryImages.Items[idx].Tag), false);
                 }
                 else
                 {
@@ -788,13 +788,14 @@ namespace Pbp.Forms
         {
 			SongManager songMan = SongManager.getInstance();
 
-            if (songMan.currentSong != null)
+            if (songMan.CurrentSong != null)
             {
 				if (((CheckBox)sender).Checked)
-					songMan.currentSong.addQA(Song.QualityAssuranceItem.spelling);
+					songMan.CurrentSong.setQA(Song.QualityAssuranceIndicators.Spelling);
 				else
-					songMan.currentSong.remQA(Song.QualityAssuranceItem.spelling);
-				songMan.currentSong.save(null);
+					songMan.CurrentSong.remQA(Song.QualityAssuranceIndicators.Spelling);
+				songMan.CurrentSong.save(null);
+				setStatus("Qualitätssicherungs-Information gespeichert!");
             }
         }
 
@@ -802,13 +803,14 @@ namespace Pbp.Forms
         {
 			SongManager songMan = SongManager.getInstance();
 
-            if (songMan.currentSong != null)
+            if (songMan.CurrentSong != null)
             {
 				if (((CheckBox)sender).Checked)
-					songMan.currentSong.addQA(Song.QualityAssuranceItem.translation);
+					songMan.CurrentSong.setQA(Song.QualityAssuranceIndicators.Translation);
 				else
-					songMan.currentSong.remQA(Song.QualityAssuranceItem.translation);
-				songMan.currentSong.save(null);
+					songMan.CurrentSong.remQA(Song.QualityAssuranceIndicators.Translation);
+				songMan.CurrentSong.save(null);
+				setStatus("Qualitätssicherungs-Information gespeichert!");
             }
         }
 
@@ -816,13 +818,14 @@ namespace Pbp.Forms
         {
 			SongManager songMan = SongManager.getInstance();
 
-            if (songMan.currentSong != null)
+            if (songMan.CurrentSong != null)
             {
 				if (((CheckBox)sender).Checked)
-					songMan.currentSong.addQA(Song.QualityAssuranceItem.images);
+					songMan.CurrentSong.setQA(Song.QualityAssuranceIndicators.Images);
 				else
-					songMan.currentSong.remQA(Song.QualityAssuranceItem.images);
-				songMan.currentSong.save(null);
+					songMan.CurrentSong.remQA(Song.QualityAssuranceIndicators.Images);
+				songMan.CurrentSong.save(null);
+				setStatus("Qualitätssicherungs-Information gespeichert!");
             }
         }
 
@@ -830,13 +833,14 @@ namespace Pbp.Forms
 		{
 			SongManager songMan = SongManager.getInstance();
 
-			if (songMan.currentSong != null)
+			if (songMan.CurrentSong != null)
 			{
 				if (((CheckBox)sender).Checked)
-					songMan.currentSong.addQA(Song.QualityAssuranceItem.segmentation);
+					songMan.CurrentSong.setQA(Song.QualityAssuranceIndicators.Segmentation);
 				else
-					songMan.currentSong.remQA(Song.QualityAssuranceItem.segmentation);
-				songMan.currentSong.save(null);
+					songMan.CurrentSong.remQA(Song.QualityAssuranceIndicators.Segmentation);
+				songMan.CurrentSong.save(null);
+				setStatus("Qualitätssicherungs-Information gespeichert!");
 			}
 		}
 
@@ -860,10 +864,10 @@ namespace Pbp.Forms
                 Application.DoEvents();
                 int idx = listViewImageHistory.SelectedIndices[0];
 
-                if ((Control.ModifierKeys & Keys.Shift) == Keys.Shift && songMan.currentSong != null && songMan.currentSong.currentSlide >= 0)
+                if ((Control.ModifierKeys & Keys.Shift) == Keys.Shift && songMan.CurrentSong != null && songMan.CurrentSong.CurrentSlide >= 0)
                 {
 
-					pictureBoxPreview.Image = projWindow.showSlide(songMan.currentSong.slides[songMan.currentSong.currentSlide], Image.FromFile((string)listViewImageHistory.Items[idx].Tag), false);
+					pictureBoxPreview.Image = projWindow.showSlide(songMan.CurrentSong.Slides[songMan.CurrentSong.CurrentSlide], Image.FromFile((string)listViewImageHistory.Items[idx].Tag), false);
                 }
                 else
                 {
@@ -895,7 +899,7 @@ namespace Pbp.Forms
             {
                 treeViewImageDirectories.SelectedNode = null;
                 imageSearchResults.Clear();
-                string[] imgFilePaths = Directory.GetFiles(setting.dataDirectory + Path.DirectorySeparatorChar + setting.imageDir, "*.jpg", SearchOption.AllDirectories);
+                string[] imgFilePaths = Directory.GetFiles(setting.DataDirectory + Path.DirectorySeparatorChar + setting.ImageDir, "*.jpg", SearchOption.AllDirectories);
                 foreach (string ims in imgFilePaths)
                 {
                     if (!ims.Contains("[Thumbnails]"))
@@ -928,18 +932,18 @@ namespace Pbp.Forms
 
 		private void mainWindow_FormClosing(object sender, FormClosingEventArgs e)
 		{
-			setting.viewerWindowState = this.WindowState;
+			setting.ViewerWindowState = this.WindowState;
 			setting.Save();
 		}
 
 		private void datenverzeichnisÖffnenToolStripMenuItem_Click(object sender, EventArgs e)
 		{
-			System.Diagnostics.Process.Start(setting.dataDirectory);
+			System.Diagnostics.Process.Start(setting.DataDirectory);
 		}
 
 		private void toolStripButtonDataFolder_Click(object sender, EventArgs e)
 		{
-			System.Diagnostics.Process.Start(setting.dataDirectory);
+			System.Diagnostics.Process.Start(setting.DataDirectory);
 		}
 
 		private void listViewSongs_MouseClick(object sender, MouseEventArgs e)
@@ -994,7 +998,7 @@ namespace Pbp.Forms
 					buttonSetListDown.Enabled = false;
 				buttonSetListRem.Enabled = true;
 
-				SongManager.getInstance().currentSong = SongManager.getInstance().get((int)listViewSetList.SelectedItems[0].Tag);
+				SongManager.getInstance().CurrentSong = SongManager.getInstance().Songs[(int)listViewSetList.SelectedItems[0].Tag];
 				showCurrentSongDetails();
 			}
 		}
@@ -1065,7 +1069,7 @@ namespace Pbp.Forms
 			dlg.CheckPathExists = true;
 			//dlg.FileName = 
 			dlg.Filter = "PraiseBase-Presenter Setliste (*.pbpl)|*.pbpl";
-			dlg.InitialDirectory = setting.dataDirectory + Path.DirectorySeparatorChar + setting.setListDir;
+			dlg.InitialDirectory = setting.DataDirectory + Path.DirectorySeparatorChar + setting.SetListDir;
 			dlg.Title = "Setliste speichern unter...";
 			if (dlg.ShowDialog() == DialogResult.OK)
 			{
@@ -1077,7 +1081,7 @@ namespace Pbp.Forms
 				for (int i = 0; i < listViewSetList.Items.Count; i++)
 				{
 					XmlNode nd = xmlDoc.CreateElement("item");
-					nd.InnerText = SongManager.getInstance().get((int)listViewSetList.Items[i].Tag).title;
+					nd.InnerText = SongManager.getInstance().Songs[(int)listViewSetList.Items[i].Tag].Title;
 					xmlRoot["items"].AppendChild(nd);
 				}
 				XmlWriter wrt = new XmlTextWriter(dlg.FileName, Encoding.UTF8);
@@ -1094,7 +1098,7 @@ namespace Pbp.Forms
 			dlg.CheckPathExists = true;
 			dlg.CheckFileExists = true;
 			dlg.Filter = "PraiseBase-Presenter Setliste (*.pbpl)|*.pbpl";
-			dlg.InitialDirectory = setting.dataDirectory + Path.DirectorySeparatorChar + setting.setListDir;
+			dlg.InitialDirectory = setting.DataDirectory + Path.DirectorySeparatorChar + setting.SetListDir;
 			dlg.Title = "Setliste öffnen...";
 			if (dlg.ShowDialog() == DialogResult.OK)
 			{
@@ -1138,7 +1142,7 @@ namespace Pbp.Forms
 		private void trackBarFadeTimer_Scroll(object sender, EventArgs e)
 		{
 			labelFadeTime.Text = trackBarFadeTimer.Value.ToString(); // +" ms";
-			setting.projectionFadeTime = trackBarFadeTimer.Value;
+			setting.ProjectionFadeTime = trackBarFadeTimer.Value;
 			setting.Save();
 			UserControl1.getInstance().setFadeSteps(trackBarFadeTimer.Value);
 		}
@@ -1172,7 +1176,7 @@ namespace Pbp.Forms
 
 		private void commentEdit()
 		{
-			if (SongManager.getInstance().currentSong != null)
+			if (SongManager.getInstance().CurrentSong != null)
 			{
 				buttonCommentEnable.Image = global::Pbp.Properties.Resources.filesave;
 				textBoxComment.BackColor = SystemColors.Window;
@@ -1194,8 +1198,8 @@ namespace Pbp.Forms
 			buttonCommentEnable.Image = global::Pbp.Properties.Resources.edit;
 			textBoxComment.BackColor = SystemColors.Info;
 			textBoxComment.ReadOnly = true;
-			SongManager.getInstance().currentSong.comment = textBoxComment.Text.Trim();
-			SongManager.getInstance().currentSong.save(null);
+			SongManager.getInstance().CurrentSong.Comment = textBoxComment.Text.Trim();
+			SongManager.getInstance().CurrentSong.save(null);
 			setStatus("Kommentar gespeichert!");
 		}
 
@@ -1207,7 +1211,7 @@ namespace Pbp.Forms
 
 		private void buttonClearComment_Click(object sender, EventArgs e)
 		{
-			if (SongManager.getInstance().currentSong != null)
+			if (SongManager.getInstance().CurrentSong != null)
 			{
 				textBoxComment.Text = "";
 				commentSave();
@@ -1235,8 +1239,32 @@ namespace Pbp.Forms
 			toolStripStatusLabel.Text = string.Empty;
 			((Timer)sender).Stop();
 			((Timer)sender).Dispose();
-		}		
+		}
 
+		private void liederToolStripMenuItem_Click(object sender, EventArgs e)
+		{
+			System.Diagnostics.Process.Start(setting.DataDirectory + Path.DirectorySeparatorChar + setting.SongDir);
+		}
+
+		private void bilderToolStripMenuItem_Click(object sender, EventArgs e)
+		{
+			System.Diagnostics.Process.Start(setting.DataDirectory + Path.DirectorySeparatorChar + setting.ImageDir);
+		}
+
+		private void setlistenToolStripMenuItem_Click(object sender, EventArgs e)
+		{
+			System.Diagnostics.Process.Start(setting.DataDirectory + Path.DirectorySeparatorChar + setting.SetListDir);
+		}
+
+		private void toolStripButtonDataFolder_ButtonClick(object sender, EventArgs e)
+		{
+			toolStripButtonDataFolder.ShowDropDown();
+		}
+
+		private void datenverzeichnisToolStripMenuItem_Click(object sender, EventArgs e)
+		{
+			System.Diagnostics.Process.Start(setting.DataDirectory);
+		}
 
     }
 }

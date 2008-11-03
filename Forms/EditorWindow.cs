@@ -53,10 +53,10 @@ namespace Pbp.Forms
         {
             setting = new Settings();
             InitializeComponent();
-			fileBoxInitialDir = setting.dataDirectory + Path.DirectorySeparatorChar + setting.songDir;
+			fileBoxInitialDir = setting.DataDirectory + Path.DirectorySeparatorChar + setting.SongDir;
 			fileBoxFilterIndex = 0;
-			this.WindowState = setting.editorWindowState;
-			this.Text += " " + setting.version;
+			this.WindowState = setting.EditorWindowState;
+			this.Text += " " + setting.Version;
 
         }
 
@@ -191,7 +191,7 @@ namespace Pbp.Forms
 
         private void webToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            System.Diagnostics.Process.Start(setting.weburl);
+            System.Diagnostics.Process.Start(setting.Weburl);
         }
 
         private void optionsToolStripMenuItem_Click(object sender, EventArgs e)
@@ -206,7 +206,7 @@ namespace Pbp.Forms
 
         private void EditorWindow_FormClosing(object sender, FormClosingEventArgs e)
         {
-			setting.editorWindowState = this.WindowState;
+			setting.EditorWindowState = this.WindowState;
 			setting.Save();
             this.Hide();
             e.Cancel = true;
@@ -303,12 +303,12 @@ namespace Pbp.Forms
 
 		private void datenverzeichnisAnzeigenToolStripMenuItem_Click(object sender, EventArgs e)
 		{
-			System.Diagnostics.Process.Start(setting.dataDirectory);
+			System.Diagnostics.Process.Start(setting.DataDirectory);
 		}
 
 		private void toolStripButton2_Click(object sender, EventArgs e)
 		{
-			System.Diagnostics.Process.Start(setting.dataDirectory);
+			System.Diagnostics.Process.Start(setting.DataDirectory);
 		}
 
 

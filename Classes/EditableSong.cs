@@ -34,8 +34,8 @@ namespace Pbp
 {
 	class EditableSong : Song 
 	{
-		public new string title { get { return base.title; } set { base.title = value; } }
-		public new string language { get { return base.language; } set { base.language = value; } }
+		public new string Title { get { return base.Title; } set { base.Title = value; } }
+		public new string Language { get { return base.Language; } set { base.Language = value; } }
 
 		public EditableSong(string fileName) : base(fileName)
 		{

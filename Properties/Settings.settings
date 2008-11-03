@@ -2,28 +2,28 @@
 <SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="Pbp.Properties" GeneratedClassName="Settings">
   <Profiles />
   <Settings>
-    <Setting Name="dataDirectory" Type="System.String" Scope="User">
+    <Setting Name="DataDirectory" Type="System.String" Scope="User">
       <Value Profile="(Default)" />
     </Setting>
-    <Setting Name="projectionMasterFont" Type="System.Drawing.Font" Scope="User">
+    <Setting Name="ProjectionMasterFont" Type="System.Drawing.Font" Scope="User">
       <Value Profile="(Default)">Calibri, 60pt, style=Bold</Value>
     </Setting>
-    <Setting Name="projectionBackColor" Type="System.Drawing.Color" Scope="User">
+    <Setting Name="ProjectionBackColor" Type="System.Drawing.Color" Scope="User">
       <Value Profile="(Default)">Black</Value>
     </Setting>
-    <Setting Name="projectionMasterFontColor" Type="System.Drawing.Color" Scope="User">
+    <Setting Name="ProjectionMasterFontColor" Type="System.Drawing.Color" Scope="User">
       <Value Profile="(Default)">White</Value>
     </Setting>
-    <Setting Name="projectionOutlineColor" Type="System.Drawing.Color" Scope="User">
+    <Setting Name="ProjectionOutlineColor" Type="System.Drawing.Color" Scope="User">
       <Value Profile="(Default)">Black</Value>
     </Setting>
-    <Setting Name="projectionFontScaling" Type="System.Boolean" Scope="User">
+    <Setting Name="ProjectionFontScaling" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">True</Value>
     </Setting>
-    <Setting Name="projectionPadding" Type="System.Int32" Scope="User">
+    <Setting Name="ProjectionPadding" Type="System.Int32" Scope="User">
       <Value Profile="(Default)">80</Value>
     </Setting>
-    <Setting Name="languages" Type="System.Collections.Specialized.StringCollection" Scope="User">
+    <Setting Name="Languages" Type="System.Collections.Specialized.StringCollection" Scope="User">
       <Value Profile="(Default)">&lt;?xml version="1.0" encoding="utf-16"?&gt;
 &lt;ArrayOfString xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"&gt;
   &lt;string&gt;Deutsch&lt;/string&gt;
@@ -33,7 +33,7 @@
   &lt;string&gt;Schweizerdeutsch&lt;/string&gt;
 &lt;/ArrayOfString&gt;</Value>
     </Setting>
-    <Setting Name="tags" Type="System.Collections.Specialized.StringCollection" Scope="User">
+    <Setting Name="Tags" Type="System.Collections.Specialized.StringCollection" Scope="User">
       <Value Profile="(Default)">&lt;?xml version="1.0" encoding="utf-16"?&gt;
 &lt;ArrayOfString xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"&gt;
   &lt;string&gt;Lobpreis&lt;/string&gt;
@@ -48,70 +48,72 @@
   &lt;string&gt;Vertrauen&lt;/string&gt;
 &lt;/ArrayOfString&gt;</Value>
     </Setting>
-    <Setting Name="songParts" Type="System.Collections.Specialized.StringCollection" Scope="User">
+    <Setting Name="SongParts" Type="System.Collections.Specialized.StringCollection" Scope="User">
       <Value Profile="(Default)">&lt;?xml version="1.0" encoding="utf-16"?&gt;
 &lt;ArrayOfString xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"&gt;
   &lt;string&gt;Refrain&lt;/string&gt;
+  &lt;string&gt;Pre-Chorus&lt;/string&gt;
+  &lt;string&gt;Chorus&lt;/string&gt;
   &lt;string&gt;Strophe 1&lt;/string&gt;
   &lt;string&gt;Strophe 2&lt;/string&gt;
   &lt;string&gt;Strophe 3&lt;/string&gt;
   &lt;string&gt;Teil 1&lt;/string&gt;
   &lt;string&gt;Teil 2&lt;/string&gt;
   &lt;string&gt;Teil 3&lt;/string&gt;
-  &lt;string&gt;Instrumentalteil&lt;/string&gt;
+  &lt;string&gt;Instrumental&lt;/string&gt;
   &lt;string&gt;Bridge&lt;/string&gt;
   &lt;string&gt;Schluss&lt;/string&gt;
 &lt;/ArrayOfString&gt;</Value>
     </Setting>
-    <Setting Name="songDir" Type="System.String" Scope="Application">
+    <Setting Name="SongDir" Type="System.String" Scope="Application">
       <Value Profile="(Default)">Songs</Value>
     </Setting>
-    <Setting Name="imageDir" Type="System.String" Scope="Application">
+    <Setting Name="ImageDir" Type="System.String" Scope="Application">
       <Value Profile="(Default)">Backgrounds</Value>
     </Setting>
-    <Setting Name="dataDirDefaultName" Type="System.String" Scope="Application">
+    <Setting Name="DataDirDefaultName" Type="System.String" Scope="Application">
       <Value Profile="(Default)">PraiseBase Presenter</Value>
     </Setting>
-    <Setting Name="projectionMasterFontTranslation" Type="System.Drawing.Font" Scope="User">
+    <Setting Name="ProjectionMasterFontTranslation" Type="System.Drawing.Font" Scope="User">
       <Value Profile="(Default)">Calibri, 40pt, style=Bold</Value>
     </Setting>
-    <Setting Name="projectionMasterLineSpacing" Type="System.Int32" Scope="User">
+    <Setting Name="ProjectionMasterLineSpacing" Type="System.Int32" Scope="User">
       <Value Profile="(Default)">0</Value>
     </Setting>
-    <Setting Name="projectionMasterTranslationColor" Type="System.Drawing.Color" Scope="User">
+    <Setting Name="ProjectionMasterTranslationColor" Type="System.Drawing.Color" Scope="User">
       <Value Profile="(Default)">White</Value>
     </Setting>
-    <Setting Name="settingsLastTabIndex" Type="System.Int32" Scope="User">
+    <Setting Name="SettingsLastTabIndex" Type="System.Int32" Scope="User">
       <Value Profile="(Default)">0</Value>
     </Setting>
-    <Setting Name="projectionShadowColor" Type="System.Drawing.Color" Scope="User">
+    <Setting Name="ProjectionShadowColor" Type="System.Drawing.Color" Scope="User">
       <Value Profile="(Default)">Black</Value>
     </Setting>
-    <Setting Name="projectionOutlineSize" Type="System.Int32" Scope="User">
+    <Setting Name="ProjectionOutlineSize" Type="System.Int32" Scope="User">
       <Value Profile="(Default)">1</Value>
     </Setting>
-    <Setting Name="projectionShadowSize" Type="System.Int32" Scope="User">
+    <Setting Name="ProjectionShadowSize" Type="System.Int32" Scope="User">
       <Value Profile="(Default)">0</Value>
     </Setting>
-    <Setting Name="projectionUseMaster" Type="System.Boolean" Scope="User">
+    <Setting Name="ProjectionUseMaster" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
     </Setting>
-    <Setting Name="viewerWindowState" Type="System.Windows.Forms.FormWindowState" Scope="User">
+    <Setting Name="ViewerWindowState" Type="System.Windows.Forms.FormWindowState" Scope="User">
       <Value Profile="(Default)">Normal</Value>
     </Setting>
-    <Setting Name="editorWindowState" Type="System.Windows.Forms.FormWindowState" Scope="User">
+    <Setting Name="EditorWindowState" Type="System.Windows.Forms.FormWindowState" Scope="User">
       <Value Profile="(Default)">Normal</Value>
     </Setting>
-    <Setting Name="version" Type="System.String" Scope="Application">
-      <Value Profile="(Default)">0.8.11.3 BETA</Value>
+    <Setting Name="Version" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">0.8.11.3</Value>
     </Setting>
-    <Setting Name="weburl" Type="System.String" Scope="Application">
+    <Setting Name="Weburl" Type="System.String" Scope="Application">
       <Value Profile="(Default)">http://code.google.com/p/praisebasepresenter</Value>
     </Setting>
-    <Setting Name="setListDir" Type="System.String" Scope="Application">
+    <Setting Name="SetListDir" Type="System.String" Scope="Application">
       <Value Profile="(Default)">Setlists</Value>
     </Setting>
-    <Setting Name="projectionFadeTime" Type="System.Int32" Scope="User">
+    <Setting Name="ProjectionFadeTime" Type="System.Int32" Scope="User">
       <Value Profile="(Default)">5</Value>
     </Setting>
   </Settings>

@@ -86,7 +86,7 @@ namespace Pbp.Forms
 
 		public void imageTreeViewInit()
 		{
-			string rootDir = setting.dataDirectory + Path.DirectorySeparatorChar + setting.imageDir;
+			string rootDir = setting.DataDirectory + Path.DirectorySeparatorChar + setting.ImageDir;
 
 			Application.DoEvents();
 			treeViewDirs.Nodes.Clear();

@@ -76,7 +76,7 @@ namespace Pbp.Forms
 
 			System.Drawing.Bitmap bmp = new System.Drawing.Bitmap(1, 1);
 			System.Drawing.Graphics gr = System.Drawing.Graphics.FromImage(bmp);
-			gr.FillRectangle(new System.Drawing.SolidBrush(setting.projectionBackColor), 0, 0, 1, 1);
+			gr.FillRectangle(new System.Drawing.SolidBrush(setting.ProjectionBackColor), 0, 0, 1, 1);
 			blackoutImage.Source = loadBitmap(bmp);
 			blackoutImage.Opacity = 0f;
 		}

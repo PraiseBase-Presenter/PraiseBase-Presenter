@@ -35,44 +35,66 @@ using System.Windows.Forms;
 
 namespace Pbp
 {
+	/// <summary>
+	/// Holds a list of all songs and provides
+	/// searching in the songlist
+	/// </summary>
     class SongManager
     {
-        static private SongManager instance;
-        private List<Song> validSongs;
-        private Song _currentSong;
+		/// <summary>
+		/// Singleton variable
+		/// </summary>
+        static private SongManager _instance;
 
-        public Song currentSong
-        {
-            get
-            {
-                return _currentSong;
-            }
-            set
-            {
-                _currentSong = value;
-            }
-        }
+        /// <summary>
+        /// List of all availabe songs
+        /// </summary>
+		public List<Song> Songs {get; private set;}
+		/// <summary>
+		/// Gets or sets the current song object
+		/// </summary>
+        public Song CurrentSong {get;set;}
 
+
+		/// <summary>
+		/// The constructor
+		/// </summary>
         private SongManager()
         {
-            loadSongs();
+            reload();
         }
 
-        public void loadSongs()
+		/// <summary>
+		/// Gets the singleton of this class
+		/// </summary>
+		/// <returns>Returns an unique instance of the song manager</returns>
+		static public SongManager getInstance()
+		{
+			if (_instance == null)
+			{
+				_instance = new SongManager();
+			}
+			return _instance;
+		}
+
+		/// <summary>
+		/// Reloads all songs from the song direcory
+		/// specified in the application settings
+		/// </summary>
+        public void reload()
         {
             Settings setting = new Settings();
 
-            if (setting.dataDirectory == "")
+            if (setting.DataDirectory == "")
             {
-                setting.dataDirectory =  Environment.GetFolderPath(Environment.SpecialFolder.Personal).ToString() + Path.DirectorySeparatorChar + setting.dataDirDefaultName;
+				// Todo: check and create
+                setting.DataDirectory =  Environment.GetFolderPath(Environment.SpecialFolder.Personal).ToString() + Path.DirectorySeparatorChar + setting.DataDirDefaultName;
                 setting.Save();
-                Console.WriteLine("Data dir set to " + setting.dataDirectory);
             }
 
-            string searchDir = setting.dataDirectory +  Path.DirectorySeparatorChar + setting.songDir;
+            string searchDir = setting.DataDirectory +  Path.DirectorySeparatorChar + setting.SongDir;
 
-            validSongs = new List<Song>();
-
+			Songs = new List<Song>();
             int i=0;
             if (Directory.Exists(searchDir))
             {
@@ -82,43 +104,27 @@ namespace Pbp
                     foreach (string file in songFilePaths)
                     {
                         Song tmpSong = new Song(file);
-                        if (tmpSong.isValid)
+                        if (tmpSong.IsValid)
                         {
-                            tmpSong.id = i;
-                            validSongs.Add(tmpSong);
+                            tmpSong.ID = i;
+                            Songs.Add(tmpSong);
                             i++;
                         }
                     }
                 }
-            }
-
-            
+            }            
         }
 
-        static public SongManager getInstance()
-        {
-            if (instance == null)
-            {
-                instance = new SongManager();
-            }
-            return instance;
-        }
-
-        public List<Song> getAll()
-        {
-            return validSongs;
-        }
-
-        public Song get(int id)
-        {
-            return validSongs[id];
-        }
-
+		/// <summary>
+		/// Returns the list id of the song with specified title
+		/// </summary>
+		/// <param name="title">The title of the song</param>
+		/// <returns>Returns the position in the songlist</returns>
 		public int getIdByTitle(string title)
 		{
-			for (int i = 0; i < validSongs.Count; i++)
+			for (int i = 0; i < Songs.Count; i++)
 			{
-				if (validSongs[i].title == title)
+				if (Songs[i].Title == title)
 				{
 					return i;
 				}
@@ -126,22 +132,28 @@ namespace Pbp
 			return -1;			
 		}
 
+		/// <summary>
+		/// Reloads the song at the specified position
+		/// </summary>
+		/// <param name="i">The song position</param>
 		public void reloadSong(int i)
 		{
-			validSongs[i] = new Song(validSongs[i].path);
+			Songs[i] = new Song(Songs[i].FilePath);
 		}
 
+		/// <summary>
+		/// Reloads the song with the specified path
+		/// </summary>
+		/// <param name="path">Path to the song file</param>
 		public void reloadSong(string path)
 		{
 			if (path != String.Empty && path != null)
 			{
-				for (int i = 0; i < validSongs.Count; i++)
+				for (int i = 0; i < Songs.Count; i++)
 				{
-					Console.WriteLine(validSongs[i].path);
-					Console.WriteLine(path);
-					if (validSongs[i].path.ToLower() == path.ToLower())
+					if (Songs[i].FilePath.ToLower() == path.ToLower())
 					{
-						validSongs[i] = new Song(validSongs[i].path);
+						Songs[i] = new Song(Songs[i].FilePath);
 						return;
 					}
 				}
@@ -163,14 +175,13 @@ namespace Pbp
 			needle = needle.Replace(Environment.NewLine, "");
 			needle = needle.Replace("  ", " ");
 
-			Console.WriteLine(needle);
             List<Song> tmpList = new List<Song>();
-            for (int i=0;i<validSongs.Count;i++)
+            for (int i=0;i<Songs.Count;i++)
             {
-                if (validSongs[i].title.ToLower().Contains(needle) ||
-					(mode == 1 && validSongs[i].searchText.Contains(needle)))
+                if (Songs[i].Title.ToLower().Contains(needle) ||
+					(mode == 1 && Songs[i].SearchText.Contains(needle)))
                 {
-                    tmpList.Add(validSongs[i]);
+                    tmpList.Add(Songs[i]);
                 }
             }
             return tmpList;

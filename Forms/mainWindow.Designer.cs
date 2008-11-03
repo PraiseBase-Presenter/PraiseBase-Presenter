@@ -71,7 +71,11 @@
 			this.toolStripButton2 = new System.Windows.Forms.ToolStripButton();
 			this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
 			this.toolStripButton5 = new System.Windows.Forms.ToolStripButton();
-			this.toolStripButtonDataFolder = new System.Windows.Forms.ToolStripButton();
+			this.toolStripSeparator7 = new System.Windows.Forms.ToolStripSeparator();
+			this.toolStripButtonDataFolder = new System.Windows.Forms.ToolStripSplitButton();
+			this.liederToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.bilderToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.setlistenToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
 			this.toolStripButton4 = new System.Windows.Forms.ToolStripButton();
 			this.toolStripButtonDisplaySettings = new System.Windows.Forms.ToolStripButton();
@@ -123,7 +127,8 @@
 			this.songSearchResetButton = new System.Windows.Forms.Button();
 			this.songSearchBox = new System.Windows.Forms.TextBox();
 			this.tabControl1 = new System.Windows.Forms.TabControl();
-			this.toolStripSeparator7 = new System.Windows.Forms.ToolStripSeparator();
+			this.datenverzeichnisToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.toolStripSeparator8 = new System.Windows.Forms.ToolStripSeparator();
 			buttonChooseDiaDir = new System.Windows.Forms.Button();
 			this.menuStrip1.SuspendLayout();
 			this.groupBox4.SuspendLayout();
@@ -558,15 +563,47 @@
 			this.toolStripButton5.Text = "Liededitor";
 			this.toolStripButton5.Click += new System.EventHandler(this.toolStripButton5_Click);
 			// 
+			// toolStripSeparator7
+			// 
+			this.toolStripSeparator7.Name = "toolStripSeparator7";
+			this.toolStripSeparator7.Size = new System.Drawing.Size(6, 71);
+			// 
 			// toolStripButtonDataFolder
 			// 
 			this.toolStripButtonDataFolder.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+			this.toolStripButtonDataFolder.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.datenverzeichnisToolStripMenuItem,
+            this.toolStripSeparator8,
+            this.liederToolStripMenuItem,
+            this.bilderToolStripMenuItem,
+            this.setlistenToolStripMenuItem});
 			this.toolStripButtonDataFolder.Image = global::Pbp.Properties.Resources.folder_favorites;
 			this.toolStripButtonDataFolder.ImageTransparentColor = System.Drawing.Color.Magenta;
 			this.toolStripButtonDataFolder.Name = "toolStripButtonDataFolder";
-			this.toolStripButtonDataFolder.Size = new System.Drawing.Size(68, 68);
+			this.toolStripButtonDataFolder.Size = new System.Drawing.Size(80, 68);
 			this.toolStripButtonDataFolder.Text = "Datenverzeichnis anzeigen";
-			this.toolStripButtonDataFolder.Click += new System.EventHandler(this.toolStripButtonDataFolder_Click);
+			this.toolStripButtonDataFolder.ButtonClick += new System.EventHandler(this.toolStripButtonDataFolder_ButtonClick);
+			// 
+			// liederToolStripMenuItem
+			// 
+			this.liederToolStripMenuItem.Name = "liederToolStripMenuItem";
+			this.liederToolStripMenuItem.Size = new System.Drawing.Size(167, 22);
+			this.liederToolStripMenuItem.Text = "Lieder";
+			this.liederToolStripMenuItem.Click += new System.EventHandler(this.liederToolStripMenuItem_Click);
+			// 
+			// bilderToolStripMenuItem
+			// 
+			this.bilderToolStripMenuItem.Name = "bilderToolStripMenuItem";
+			this.bilderToolStripMenuItem.Size = new System.Drawing.Size(167, 22);
+			this.bilderToolStripMenuItem.Text = "Bilder";
+			this.bilderToolStripMenuItem.Click += new System.EventHandler(this.bilderToolStripMenuItem_Click);
+			// 
+			// setlistenToolStripMenuItem
+			// 
+			this.setlistenToolStripMenuItem.Name = "setlistenToolStripMenuItem";
+			this.setlistenToolStripMenuItem.Size = new System.Drawing.Size(167, 22);
+			this.setlistenToolStripMenuItem.Text = "Setlisten";
+			this.setlistenToolStripMenuItem.Click += new System.EventHandler(this.setlistenToolStripMenuItem_Click);
 			// 
 			// toolStripSeparator2
 			// 
@@ -1175,10 +1212,17 @@
 			this.tabControl1.TabIndex = 20;
 			this.tabControl1.SelectedIndexChanged += new System.EventHandler(this.tabControl1_SelectedIndexChanged);
 			// 
-			// toolStripSeparator7
+			// datenverzeichnisToolStripMenuItem
 			// 
-			this.toolStripSeparator7.Name = "toolStripSeparator7";
-			this.toolStripSeparator7.Size = new System.Drawing.Size(6, 71);
+			this.datenverzeichnisToolStripMenuItem.Name = "datenverzeichnisToolStripMenuItem";
+			this.datenverzeichnisToolStripMenuItem.Size = new System.Drawing.Size(167, 22);
+			this.datenverzeichnisToolStripMenuItem.Text = "Datenverzeichnis";
+			this.datenverzeichnisToolStripMenuItem.Click += new System.EventHandler(this.datenverzeichnisToolStripMenuItem_Click);
+			// 
+			// toolStripSeparator8
+			// 
+			this.toolStripSeparator8.Name = "toolStripSeparator8";
+			this.toolStripSeparator8.Size = new System.Drawing.Size(164, 6);
 			// 
 			// mainWindow
 			// 
@@ -1260,7 +1304,6 @@
 		private System.Windows.Forms.ToolStripMenuItem blackoutEinausToolStripMenuItem;
 		private System.Windows.Forms.ToolStripMenuItem datenverzeichnisÖffnenToolStripMenuItem;
 		private System.Windows.Forms.ToolStripSeparator toolStripSeparator6;
-		private System.Windows.Forms.ToolStripButton toolStripButtonDataFolder;
 		private System.Windows.Forms.GroupBox groupBox4;
 		private System.Windows.Forms.Button buttonSetListRem;
 		private System.Windows.Forms.Button buttonSetListDown;
@@ -1322,6 +1365,12 @@
 		private System.Windows.Forms.Button buttonCommentEnable;
 		private System.Windows.Forms.Button buttonClearComment;
 		private System.Windows.Forms.ToolStripSeparator toolStripSeparator7;
+		private System.Windows.Forms.ToolStripSplitButton toolStripButtonDataFolder;
+		private System.Windows.Forms.ToolStripMenuItem liederToolStripMenuItem;
+		private System.Windows.Forms.ToolStripMenuItem bilderToolStripMenuItem;
+		private System.Windows.Forms.ToolStripMenuItem setlistenToolStripMenuItem;
+		private System.Windows.Forms.ToolStripMenuItem datenverzeichnisToolStripMenuItem;
+		private System.Windows.Forms.ToolStripSeparator toolStripSeparator8;
     }
 }
 

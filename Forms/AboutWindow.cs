@@ -54,7 +54,7 @@ namespace Pbp.Forms
         {
 			Settings setting = new Settings();
             this.labelProductName.Text = AssemblyProduct;
-			this.labelVersion.Text = setting.version;
+			this.labelVersion.Text = setting.Version;
             this.labelCopyright.Text = AssemblyCopyright;
             this.labelCompanyName.Text = AssemblyCompany;
             

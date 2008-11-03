@@ -40,7 +40,7 @@ namespace Pbp
 {
 	public partial class Song
 	{
-		#region Enums and structs
+		#region Enums
 
 		/// <summary>
 		/// Horizontal aligning of slide text
@@ -50,15 +50,15 @@ namespace Pbp
 			/// <summary>
 			/// Text is aligned horizontally to the left
 			/// </summary>
-			left,
+			Left,
 			/// <summary>
 			/// Text is horizontally centered
 			/// </summary>
-			center,
+			Center,
 			/// <summary>
 			/// Text is aligned horizontally to the right
 			/// </summary>
-			right
+			Right
 		}
 
 		/// <summary>
@@ -69,47 +69,49 @@ namespace Pbp
 			/// <summary>
 			/// Text is aligned vertically to the top of the page
 			/// </summary>
-			top,
+			Top,
 			/// <summary>
 			/// Text is aligned to the center
 			/// </summary>
-			center,
+			Center,
 			/// <summary>
 			/// Text is aligned vertically to the bottom of the page
 			/// </summary>
-			bottom
+			Bottom
 		}
 
 		/// <summary>
 		/// Different flags for indicating problems with the song 
 		/// whichs needs to be revised
 		/// </summary>
-		public enum QualityAssuranceItem
+		public enum QualityAssuranceIndicators
 		{
 			/// <summary>
 			/// Indicates wether spelling of the songtext is incorrect
 			/// </summary>
-			spelling = 1,
+			Spelling = 1,
 			/// <summary>
 			/// Indicates wether images are broken or incomplete
 			/// </summary>
-			images = 2,
+			Images = 2,
 			/// <summary>
 			/// Indicates wether the translation is missing or incomplete
 			/// </summary>
-			translation = 4,
+			Translation = 4,
 			/// <summary>
 			/// Indicates wether the layout of the slides needs optimization
 			/// </summary>
-			segmentation = 8
+			Segmentation = 8
 		}
 
 		#endregion
 
+		#region Subclasses
+
 		/// <summary>
 		/// Tag class. It allows only unique items
 		/// </summary>
-		public class Tags : List<string>
+		public class TagList : List<string>
 		{
 			/// <summary>
 			/// Adds an unique tag to the taglist
@@ -148,22 +150,29 @@ namespace Pbp
 			/// <summary>
 			/// Song part name like chorus, bridge, part 1 ...
 			/// </summary>
-			public string caption;
+			public string Caption {get;set;}
 			/// <summary>
 			/// A list of containing slides. Each part has one slide at minimum
 			/// </summary>
-			public List<Slide> slides;
+			public List<Slide> Slides { get; set; }
 
 			/// <summary>
 			/// Part constructor
 			/// </summary>
+			public Part()
+			{
+				Slides = new List<Slide>();
+				Caption = "Neuer Liedteil";
+			}
+
+			/// <summary>
+			/// Part constructor
+			/// </summary>
+			/// <param name="caption">The part's caption</param>
 			public Part(string caption)
 			{
-				slides = new List<Slide>();
-				if (caption != null && caption != String.Empty)
-					this.caption = caption;
-				else
-					this.caption = "Neuer Liedteil";
+				Slides = new List<Slide>();
+				Caption = caption;
 			}
 
 			/// <summary>
@@ -173,11 +182,11 @@ namespace Pbp
 			/// <returns>Returns true is swapping was successfull</returns>
 			public bool swapSlideWithUpperSlide(int slideId)
 			{
-				if (slideId > 0 && slideId < slides.Count)
+				if (slideId > 0 && slideId < Slides.Count)
 				{
-					Slide tmpPrt = slides[slideId - 1];
-					slides.RemoveAt(slideId - 1);
-					slides.Insert(slideId, tmpPrt);
+					Slide tmpPrt = Slides[slideId - 1];
+					Slides.RemoveAt(slideId - 1);
+					Slides.Insert(slideId, tmpPrt);
 					return true;
 				}
 				return false;
@@ -190,11 +199,11 @@ namespace Pbp
 			/// <returns>Returns true is swapping was successfull</returns>
 			public bool swapSlideWithLowerSlide(int slideId)
 			{
-				if (slideId >= 0 && slideId < slides.Count - 1)
+				if (slideId >= 0 && slideId < Slides.Count - 1)
 				{
-					Slide tmpPrt = slides[slideId + 1];
-					slides.RemoveAt(slideId + 1);
-					slides.Insert(slideId, tmpPrt);
+					Slide tmpPrt = Slides[slideId + 1];
+					Slides.RemoveAt(slideId + 1);
+					Slides.Insert(slideId, tmpPrt);
 					return true;
 				}
 				return false;
@@ -206,7 +215,7 @@ namespace Pbp
 			/// <param name="slideId">The slide index</param>
 			public void duplicateSlide(int slideId)
 			{
-				slides.Insert(slideId, (Slide)slides[slideId].Clone());
+				Slides.Insert(slideId, (Slide)Slides[slideId].Clone());
 			}
 
 			/// <summary>
@@ -217,19 +226,19 @@ namespace Pbp
 			/// <param name="slideId">The slide index</param>
 			public void splitSlide(int slideId)
 			{
-				Slide sld = (Slide)slides[slideId].Clone();
+				Slide sld = (Slide)Slides[slideId].Clone();
 
-				int totl = sld.lines.Count;
+				int totl = sld.Lines.Count;
 				int rem = totl / 2;
-				slides[slideId].lines.RemoveRange(0, rem);
-				sld.lines.RemoveRange(rem, totl - rem);
+				Slides[slideId].Lines.RemoveRange(0, rem);
+				sld.Lines.RemoveRange(rem, totl - rem);
 
-				totl = sld.translation.Count;
+				totl = sld.Translation.Count;
 				rem = totl / 2;
-				slides[slideId].translation.RemoveRange(0, rem);
-				sld.translation.RemoveRange(rem, totl - rem);
+				Slides[slideId].Translation.RemoveRange(0, rem);
+				sld.Translation.RemoveRange(rem, totl - rem);
 
-				slides.Insert(slideId, sld);
+				Slides.Insert(slideId, sld);
 			}
 		};
 
@@ -241,67 +250,63 @@ namespace Pbp
 			/// <summary>
 			/// Pointer to the song object who owns this slide
 			/// </summary>
-			private Song ownerSong;
+			private Song _ownerSong;
+
 			/// <summary>
 			/// All text lines of this slide
 			/// </summary>
-			public List<string> lines;
+			public List<string> Lines { get; set; }
 			/// <summary>
 			/// All translation lines of this slide
 			/// </summary>
-			public List<string> translation;
+			public List<string> Translation { get; set; }
 			/// <summary>
 			/// Number of the slide image. If set to -1, no image is used
 			/// </summary>
-			public int imageNumber;
-			/// <summary>
-			/// Path to the slides image
-			/// </summary>
-			public string image;
+			public int ImageNumber { get; set; }
 			/// <summary>
 			/// Indicates wether this slide has a translation
 			/// </summary>
-			public bool hasTranslation;
+			public bool Translated { get { return Translation.Count > 0 ? true : false; } }
 			/// <summary>
 			/// Horizonztal text alignment
 			/// </summary>
-			public SongTextHorizontalAlign horizAlign;
+			public SongTextHorizontalAlign HorizontalAlign {get;set;}
 			/// <summary>
 			/// Vertical text alignment
 			/// </summary>
-			public SongTextVerticalAlign vertAlign;
+			public SongTextVerticalAlign VerticalAlign { get; set; }
 			/// <summary>
 			/// The font object of this slide
 			/// </summary>
-			public Font font { get { return ownerSong.font; } }
+			public Font TextFont { get { return _ownerSong.TextFont; } }
 			/// <summary>
 			/// The font object of the translation
 			/// </summary>
-			public Font fontTranslation { get { return ownerSong.fontTranslation; } }
+			public Font TranslationFont { get { return _ownerSong.TranslationFont; } }
 			/// <summary>
 			/// The font color of this slide
 			/// </summary>
-			public Color fontColor { get { return ownerSong.fontColor; } }
+			public Color TextColor { get { return _ownerSong.TextColor; } }
 			/// <summary>
 			/// The translation font color
 			/// </summary>
-			public Color fontColorTranslation { get { return ownerSong.fontColorTranslation; } }
+			public Color TranslationColor { get { return _ownerSong.TranslationColor; } }
 			/// <summary>
 			/// The line spacing of the text
 			/// </summary>
-			public int lineSpacint { get { return ownerSong.lineSpacing; } }
+			public int TextLineSpacing { get { return _ownerSong.TextLineSpacing; } }
 
 			/// <summary>
 			/// The slide constructor
 			/// </summary>
 			public Slide(Song ownerSong)
 			{
-				lines = new List<string>();
-				translation = new List<string>();
-				hasTranslation = false;
-				horizAlign = SongTextHorizontalAlign.center;
-				vertAlign = SongTextVerticalAlign.center;
-				this.ownerSong = ownerSong;
+				Lines = new List<string>();
+				Translation = new List<string>();
+				HorizontalAlign = SongTextHorizontalAlign.Center;
+				VerticalAlign = SongTextVerticalAlign.Center;
+				this._ownerSong = ownerSong;
 			}
 
 			/// <summary>
@@ -310,11 +315,11 @@ namespace Pbp
 			/// <param name="text"></param>
 			public void setSlideText(string text)
 			{
-				this.lines = new List<string>();
+				this.Lines = new List<string>();
 				string[] ln = text.Trim().Split(new string[] { Environment.NewLine }, StringSplitOptions.None);
 				foreach (string sl in ln)
 				{
-					this.lines.Add(sl.Trim());
+					this.Lines.Add(sl.Trim());
 				}
 			}
 
@@ -324,11 +329,11 @@ namespace Pbp
 			/// <param name="text"></param>
 			public void setSlideTextTranslation(string text)
 			{
-				this.translation = new List<string>();
+				this.Translation = new List<string>();
 				string[] tr = text.Split(new string[] { Environment.NewLine }, StringSplitOptions.None);
 				foreach (string sl in tr)
 				{
-					this.translation.Add(sl.Trim());
+					this.Translation.Add(sl.Trim());
 				}
 			}
 
@@ -340,10 +345,10 @@ namespace Pbp
 			{
 				string txt = "";
 				int i = 1;
-				foreach (string str in lines)
+				foreach (string str in Lines)
 				{
 					txt += str;
-					if (i<lines.Count)
+					if (i<Lines.Count)
 						txt += Environment.NewLine;
 					i++;
 				}
@@ -359,10 +364,10 @@ namespace Pbp
 			{
 				string txt = "";
 				int i = 1;
-				foreach (string str in translation)
+				foreach (string str in Translation)
 				{
 					txt += str;
-					if (i<translation.Count)
+					if (i<Translation.Count)
 						txt += Environment.NewLine;
 					i++;
 				}
@@ -378,7 +383,7 @@ namespace Pbp
 			public string oneLineText()
 			{
 				string txt = "";
-				foreach (string str in lines)
+				foreach (string str in Lines)
 				{
 					txt += str + " ";
 				}
@@ -391,15 +396,14 @@ namespace Pbp
 			/// <returns>A duplicate of this slide</returns>
 			public object Clone()
 			{
-				Slide res = new Slide(this.ownerSong);
-				res.hasTranslation = hasTranslation;
-				res.horizAlign = horizAlign;
-				res.imageNumber = imageNumber;
-				foreach (string obj in lines)
-					res.lines.Add(obj);
-				foreach (string obj in translation)
-					res.translation.Add(obj);
-				res.vertAlign = vertAlign;
+				Slide res = new Slide(this._ownerSong);
+				res.HorizontalAlign = HorizontalAlign;
+				res.ImageNumber = ImageNumber;
+				foreach (string obj in Lines)
+					res.Lines.Add(obj);
+				foreach (string obj in Translation)
+					res.Translation.Add(obj);
+				res.VerticalAlign = VerticalAlign;
 				return res;
 			}
 
@@ -474,6 +478,8 @@ namespace Pbp
 			static public string version = "3.0";
 			static public bool isDefault = false;
 		}
+
+		#endregion
 
 	}
 }

@@ -131,7 +131,7 @@ namespace Pbp.Forms
             Graphics gr = Graphics.FromImage(bmp);
 
             // Background color
-            gr.FillRectangle(new SolidBrush(setting.projectionBackColor), 0, 0, w, h);
+            gr.FillRectangle(new SolidBrush(setting.ProjectionBackColor), 0, 0, w, h);
             
             // Background image
             if (background != null)
@@ -145,7 +145,7 @@ namespace Pbp.Forms
             }
 
             // Text
-            if (slide.lines.Count > 0)
+            if (slide.Lines.Count > 0)
             {
                 StringFormat strFormat = new StringFormat();
 
@@ -155,27 +155,27 @@ namespace Pbp.Forms
                 Brush fontBrush;
                 Brush fontTranslationBrush;
 
-                if (setting.projectionUseMaster && !simluate)
+                if (setting.ProjectionUseMaster && !simluate)
                 {
-                    font = setting.projectionMasterFont;
-                    fontTr = setting.projectionMasterFontTranslation;
-                    lineSpacing = setting.projectionMasterLineSpacing;
-                    fontBrush = new SolidBrush(setting.projectionMasterFontColor);
-                    fontTranslationBrush = new SolidBrush(setting.projectionMasterTranslationColor);
+                    font = setting.ProjectionMasterFont;
+                    fontTr = setting.ProjectionMasterFontTranslation;
+                    lineSpacing = setting.ProjectionMasterLineSpacing;
+                    fontBrush = new SolidBrush(setting.ProjectionMasterFontColor);
+                    fontTranslationBrush = new SolidBrush(setting.ProjectionMasterTranslationColor);
                 }
                 else
                 {
-                    font = slide.font;
-                    fontTr = slide.fontTranslation;
-                    lineSpacing = slide.lineSpacint;
-                    fontBrush = new SolidBrush(slide.fontColor);
-                    fontTranslationBrush = new SolidBrush(slide.fontColorTranslation);
+                    font = slide.TextFont;
+                    fontTr = slide.TranslationFont;
+                    lineSpacing = slide.TextLineSpacing;
+                    fontBrush = new SolidBrush(slide.TextColor);
+                    fontTranslationBrush = new SolidBrush(slide.TranslationColor);
                 }
 
 
-                int padding = setting.projectionPadding;
-                int shadowThickness = setting.projectionShadowSize;
-                int outLineThickness = setting.projectionOutlineSize;
+                int padding = setting.ProjectionPadding;
+                int shadowThickness = setting.ProjectionShadowSize;
+                int outLineThickness = setting.ProjectionOutlineSize;
                 String str = String.Empty;
 
                 int usableWidth = w - (2 * padding);
@@ -188,53 +188,53 @@ namespace Pbp.Forms
 
                 SizeF strMeasureTrans;
 
-                if (slide.hasTranslation && false)
+                if (slide.Translated && false)
                 {
                     strMeasureTrans = gr.MeasureString(slide.lineBreakTranslation(), fontTr);
-                    lineSpacing +=  (int)(strMeasureTrans.Height / slide.translation.Count) + lineSpacing;
+                    lineSpacing +=  (int)(strMeasureTrans.Height / slide.Translation.Count) + lineSpacing;
                 }
 
                 SizeF strMeasure = gr.MeasureString(slide.lineBreakText(), font);
                 Brush shadodBrush = Brushes.Transparent;
                 int usedWidth = (int)strMeasure.Width;
-                int usedHeight = (int)strMeasure.Height + (lineSpacing * (slide.lines.Count - 1));
+                int usedHeight = (int)strMeasure.Height + (lineSpacing * (slide.Lines.Count - 1));
 
                 float scalingFactor = 1.0f;
-                if (setting.projectionFontScaling  && (usedWidth > usableWidth || usedHeight > usableHeight))
+                if (setting.ProjectionFontScaling  && (usedWidth > usableWidth || usedHeight > usableHeight))
                 {
                     scalingFactor = Math.Min((float)usableWidth / (float)usedWidth, (float)usableHeight / (float)usedHeight);
                     font = new Font(font.FontFamily, font.Size * scalingFactor, font.Style);
                     strMeasure = gr.MeasureString(slide.lineBreakText(), font);
                     usedWidth = (int)strMeasure.Width;
-                    usedHeight = (int)strMeasure.Height + (lineSpacing * (slide.lines.Count - 1));
+                    usedHeight = (int)strMeasure.Height + (lineSpacing * (slide.Lines.Count - 1));
                 }
-                int lineHeight = (int)(strMeasure.Height / slide.lines.Count);
+                int lineHeight = (int)(strMeasure.Height / slide.Lines.Count);
 
                 // Horizontal stuff
-                switch (slide.horizAlign)
+                switch (slide.HorizontalAlign)
                 {
-                    case Song.SongTextHorizontalAlign.left:
+                    case Song.SongTextHorizontalAlign.Left:
                         strFormat.Alignment = StringAlignment.Near;
                         break;
-                    case Song.SongTextHorizontalAlign.center:
+                    case Song.SongTextHorizontalAlign.Center:
                         textStartX = w / 2;
                         strFormat.Alignment = StringAlignment.Center;
                         break;
-                    case Song.SongTextHorizontalAlign.right:
+                    case Song.SongTextHorizontalAlign.Right:
                         textStartX = textStartX + usableWidth;
                         strFormat.Alignment = StringAlignment.Far;
                         break;
                 }
 
                 // Vertical stuff
-                switch (slide.vertAlign)
+                switch (slide.VerticalAlign)
                 {
-                    case Song.SongTextVerticalAlign.top:
+                    case Song.SongTextVerticalAlign.Top:
                         break;
-                    case Song.SongTextVerticalAlign.center:
+                    case Song.SongTextVerticalAlign.Center:
                         textStartY = textStartY + (usableHeight / 2) - (usedHeight / 2);
                         break;
-                    case Song.SongTextVerticalAlign.bottom:
+                    case Song.SongTextVerticalAlign.Bottom:
                         textStartY = textStartY + usableHeight - usedHeight;
                         break;
                 }
@@ -249,12 +249,12 @@ namespace Pbp.Forms
 
                 if (!simluate && shadowThickness > 0)
                 {
-                    shadodBrush = new SolidBrush(Color.FromArgb(15, setting.projectionShadowColor));
+                    shadodBrush = new SolidBrush(Color.FromArgb(15, setting.ProjectionShadowColor));
                     gr.SmoothingMode = SmoothingMode.HighQuality;
                     gr.InterpolationMode = InterpolationMode.HighQualityBilinear;
                     gr.TextRenderingHint = TextRenderingHint.AntiAliasGridFit;
 
-                    foreach (string s in slide.lines)
+                    foreach (string s in slide.Lines)
                     {
                         for (int x = textX; x <= textX + shadowThickness; x++)
                         {
@@ -273,9 +273,9 @@ namespace Pbp.Forms
                     gr.InterpolationMode = InterpolationMode.Low;
                     gr.TextRenderingHint = TextRenderingHint.ClearTypeGridFit;
 
-                    Brush br = new SolidBrush(setting.projectionOutlineColor);
+                    Brush br = new SolidBrush(setting.ProjectionOutlineColor);
 
-                    foreach (string s in slide.lines)
+                    foreach (string s in slide.Lines)
                     {
                         for (int x = textX - outLineThickness*2; x <= textX + outLineThickness*2; x+=2)
                         {
@@ -289,7 +289,7 @@ namespace Pbp.Forms
                     textY = textStartY;
                 }
 
-                foreach (string s in slide.lines)
+                foreach (string s in slide.Lines)
                 {
                     gr.DrawString(s, font,fontBrush, new Point(textX, textY), strFormat);
                     textY += lineHeight + lineSpacing;
@@ -327,7 +327,7 @@ namespace Pbp.Forms
             Application.DoEvents();
             Bitmap bmp = new Bitmap(w, h);
             Graphics gr = Graphics.FromImage(bmp);
-            gr.FillRectangle(new SolidBrush(setting.projectionBackColor), 0, 0, w, h);
+            gr.FillRectangle(new SolidBrush(setting.ProjectionBackColor), 0, 0, w, h);
 			UserControl1.getInstance().setProjectionImage(bmp);
 			currentImage = bmp;
 			return bmp;

@@ -26,84 +26,84 @@ namespace Pbp.Properties {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("")]
-        public string dataDirectory {
+        public string DataDirectory {
             get {
-                return ((string)(this["dataDirectory"]));
+                return ((string)(this["DataDirectory"]));
             }
             set {
-                this["dataDirectory"] = value;
+                this["DataDirectory"] = value;
             }
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("Calibri, 60pt, style=Bold")]
-        public global::System.Drawing.Font projectionMasterFont {
+        public global::System.Drawing.Font ProjectionMasterFont {
             get {
-                return ((global::System.Drawing.Font)(this["projectionMasterFont"]));
+                return ((global::System.Drawing.Font)(this["ProjectionMasterFont"]));
             }
             set {
-                this["projectionMasterFont"] = value;
+                this["ProjectionMasterFont"] = value;
             }
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("Black")]
-        public global::System.Drawing.Color projectionBackColor {
+        public global::System.Drawing.Color ProjectionBackColor {
             get {
-                return ((global::System.Drawing.Color)(this["projectionBackColor"]));
+                return ((global::System.Drawing.Color)(this["ProjectionBackColor"]));
             }
             set {
-                this["projectionBackColor"] = value;
+                this["ProjectionBackColor"] = value;
             }
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("White")]
-        public global::System.Drawing.Color projectionMasterFontColor {
+        public global::System.Drawing.Color ProjectionMasterFontColor {
             get {
-                return ((global::System.Drawing.Color)(this["projectionMasterFontColor"]));
+                return ((global::System.Drawing.Color)(this["ProjectionMasterFontColor"]));
             }
             set {
-                this["projectionMasterFontColor"] = value;
+                this["ProjectionMasterFontColor"] = value;
             }
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("Black")]
-        public global::System.Drawing.Color projectionOutlineColor {
+        public global::System.Drawing.Color ProjectionOutlineColor {
             get {
-                return ((global::System.Drawing.Color)(this["projectionOutlineColor"]));
+                return ((global::System.Drawing.Color)(this["ProjectionOutlineColor"]));
             }
             set {
-                this["projectionOutlineColor"] = value;
+                this["ProjectionOutlineColor"] = value;
             }
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("True")]
-        public bool projectionFontScaling {
+        public bool ProjectionFontScaling {
             get {
-                return ((bool)(this["projectionFontScaling"]));
+                return ((bool)(this["ProjectionFontScaling"]));
             }
             set {
-                this["projectionFontScaling"] = value;
+                this["ProjectionFontScaling"] = value;
             }
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("80")]
-        public int projectionPadding {
+        public int ProjectionPadding {
             get {
-                return ((int)(this["projectionPadding"]));
+                return ((int)(this["ProjectionPadding"]));
             }
             set {
-                this["projectionPadding"] = value;
+                this["ProjectionPadding"] = value;
             }
         }
         
@@ -117,12 +117,12 @@ namespace Pbp.Properties {
   <string>Italienisch</string>
   <string>Schweizerdeutsch</string>
 </ArrayOfString>")]
-        public global::System.Collections.Specialized.StringCollection languages {
+        public global::System.Collections.Specialized.StringCollection Languages {
             get {
-                return ((global::System.Collections.Specialized.StringCollection)(this["languages"]));
+                return ((global::System.Collections.Specialized.StringCollection)(this["Languages"]));
             }
             set {
-                this["languages"] = value;
+                this["Languages"] = value;
             }
         }
         
@@ -141,12 +141,12 @@ namespace Pbp.Properties {
   <string>Evangelisation</string>
   <string>Vertrauen</string>
 </ArrayOfString>")]
-        public global::System.Collections.Specialized.StringCollection tags {
+        public global::System.Collections.Specialized.StringCollection Tags {
             get {
-                return ((global::System.Collections.Specialized.StringCollection)(this["tags"]));
+                return ((global::System.Collections.Specialized.StringCollection)(this["Tags"]));
             }
             set {
-                this["tags"] = value;
+                this["Tags"] = value;
             }
         }
         
@@ -155,208 +155,210 @@ namespace Pbp.Properties {
         [global::System.Configuration.DefaultSettingValueAttribute(@"<?xml version=""1.0"" encoding=""utf-16""?>
 <ArrayOfString xmlns:xsi=""http://www.w3.org/2001/XMLSchema-instance"" xmlns:xsd=""http://www.w3.org/2001/XMLSchema"">
   <string>Refrain</string>
+  <string>Pre-Chorus</string>
+  <string>Chorus</string>
   <string>Strophe 1</string>
   <string>Strophe 2</string>
   <string>Strophe 3</string>
   <string>Teil 1</string>
   <string>Teil 2</string>
   <string>Teil 3</string>
-  <string>Instrumentalteil</string>
+  <string>Instrumental</string>
   <string>Bridge</string>
   <string>Schluss</string>
 </ArrayOfString>")]
-        public global::System.Collections.Specialized.StringCollection songParts {
+        public global::System.Collections.Specialized.StringCollection SongParts {
             get {
-                return ((global::System.Collections.Specialized.StringCollection)(this["songParts"]));
+                return ((global::System.Collections.Specialized.StringCollection)(this["SongParts"]));
             }
             set {
-                this["songParts"] = value;
+                this["SongParts"] = value;
             }
         }
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("Songs")]
-        public string songDir {
+        public string SongDir {
             get {
-                return ((string)(this["songDir"]));
+                return ((string)(this["SongDir"]));
             }
         }
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("Backgrounds")]
-        public string imageDir {
+        public string ImageDir {
             get {
-                return ((string)(this["imageDir"]));
+                return ((string)(this["ImageDir"]));
             }
         }
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("PraiseBase Presenter")]
-        public string dataDirDefaultName {
+        public string DataDirDefaultName {
             get {
-                return ((string)(this["dataDirDefaultName"]));
+                return ((string)(this["DataDirDefaultName"]));
             }
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("Calibri, 40pt, style=Bold")]
-        public global::System.Drawing.Font projectionMasterFontTranslation {
+        public global::System.Drawing.Font ProjectionMasterFontTranslation {
             get {
-                return ((global::System.Drawing.Font)(this["projectionMasterFontTranslation"]));
+                return ((global::System.Drawing.Font)(this["ProjectionMasterFontTranslation"]));
             }
             set {
-                this["projectionMasterFontTranslation"] = value;
+                this["ProjectionMasterFontTranslation"] = value;
             }
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("0")]
-        public int projectionMasterLineSpacing {
+        public int ProjectionMasterLineSpacing {
             get {
-                return ((int)(this["projectionMasterLineSpacing"]));
+                return ((int)(this["ProjectionMasterLineSpacing"]));
             }
             set {
-                this["projectionMasterLineSpacing"] = value;
+                this["ProjectionMasterLineSpacing"] = value;
             }
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("White")]
-        public global::System.Drawing.Color projectionMasterTranslationColor {
+        public global::System.Drawing.Color ProjectionMasterTranslationColor {
             get {
-                return ((global::System.Drawing.Color)(this["projectionMasterTranslationColor"]));
+                return ((global::System.Drawing.Color)(this["ProjectionMasterTranslationColor"]));
             }
             set {
-                this["projectionMasterTranslationColor"] = value;
+                this["ProjectionMasterTranslationColor"] = value;
             }
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("0")]
-        public int settingsLastTabIndex {
+        public int SettingsLastTabIndex {
             get {
-                return ((int)(this["settingsLastTabIndex"]));
+                return ((int)(this["SettingsLastTabIndex"]));
             }
             set {
-                this["settingsLastTabIndex"] = value;
+                this["SettingsLastTabIndex"] = value;
             }
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("Black")]
-        public global::System.Drawing.Color projectionShadowColor {
+        public global::System.Drawing.Color ProjectionShadowColor {
             get {
-                return ((global::System.Drawing.Color)(this["projectionShadowColor"]));
+                return ((global::System.Drawing.Color)(this["ProjectionShadowColor"]));
             }
             set {
-                this["projectionShadowColor"] = value;
+                this["ProjectionShadowColor"] = value;
             }
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("1")]
-        public int projectionOutlineSize {
+        public int ProjectionOutlineSize {
             get {
-                return ((int)(this["projectionOutlineSize"]));
+                return ((int)(this["ProjectionOutlineSize"]));
             }
             set {
-                this["projectionOutlineSize"] = value;
+                this["ProjectionOutlineSize"] = value;
             }
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("0")]
-        public int projectionShadowSize {
+        public int ProjectionShadowSize {
             get {
-                return ((int)(this["projectionShadowSize"]));
+                return ((int)(this["ProjectionShadowSize"]));
             }
             set {
-                this["projectionShadowSize"] = value;
+                this["ProjectionShadowSize"] = value;
             }
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("False")]
-        public bool projectionUseMaster {
+        public bool ProjectionUseMaster {
             get {
-                return ((bool)(this["projectionUseMaster"]));
+                return ((bool)(this["ProjectionUseMaster"]));
             }
             set {
-                this["projectionUseMaster"] = value;
+                this["ProjectionUseMaster"] = value;
             }
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("Normal")]
-        public global::System.Windows.Forms.FormWindowState viewerWindowState {
+        public global::System.Windows.Forms.FormWindowState ViewerWindowState {
             get {
-                return ((global::System.Windows.Forms.FormWindowState)(this["viewerWindowState"]));
+                return ((global::System.Windows.Forms.FormWindowState)(this["ViewerWindowState"]));
             }
             set {
-                this["viewerWindowState"] = value;
+                this["ViewerWindowState"] = value;
             }
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("Normal")]
-        public global::System.Windows.Forms.FormWindowState editorWindowState {
+        public global::System.Windows.Forms.FormWindowState EditorWindowState {
             get {
-                return ((global::System.Windows.Forms.FormWindowState)(this["editorWindowState"]));
+                return ((global::System.Windows.Forms.FormWindowState)(this["EditorWindowState"]));
             }
             set {
-                this["editorWindowState"] = value;
+                this["EditorWindowState"] = value;
             }
         }
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("0.8.11.3 BETA")]
-        public string version {
+        [global::System.Configuration.DefaultSettingValueAttribute("0.8.11.3")]
+        public string Version {
             get {
-                return ((string)(this["version"]));
+                return ((string)(this["Version"]));
             }
         }
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("http://code.google.com/p/praisebasepresenter")]
-        public string weburl {
+        public string Weburl {
             get {
-                return ((string)(this["weburl"]));
+                return ((string)(this["Weburl"]));
             }
         }
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("Setlists")]
-        public string setListDir {
+        public string SetListDir {
             get {
-                return ((string)(this["setListDir"]));
+                return ((string)(this["SetListDir"]));
             }
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("5")]
-        public int projectionFadeTime {
+        public int ProjectionFadeTime {
             get {
-                return ((int)(this["projectionFadeTime"]));
+                return ((int)(this["ProjectionFadeTime"]));
             }
             set {
-                this["projectionFadeTime"] = value;
+                this["ProjectionFadeTime"] = value;
             }
         }
     }
