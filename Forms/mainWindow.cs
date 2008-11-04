@@ -292,14 +292,18 @@ namespace Pbp.Forms
 
         private void liederlisteNeuLadenToolStripMenuItem_Click(object sender, EventArgs e)
         {
-			SongManager songMan = SongManager.getInstance();
-			
-			songSearchBox.Text = "";
-            songMan.reload();
-            loadSongList();
-            songSearchBox.Focus();
-            GC.Collect();
+			reloadSongList();
         }
+
+		private void reloadSongList()
+		{
+			SongManager songMan = SongManager.getInstance();
+			songSearchBox.Text = "";
+			songMan.reload();
+			loadSongList();
+			songSearchBox.Focus();
+			GC.Collect();
+		}
 
         /**
          * Load song details based on song list selection 
@@ -1274,12 +1278,32 @@ namespace Pbp.Forms
 				wnd.Show();
 				wnd.Focus();
 			}
+			else
+			{
+				EditorWindow wnd = EditorWindow.getInstance();
+				wnd.Show();
+				wnd.Focus();
+			}
 		}
 
 		private void toolStripMenuItem3_Click(object sender, EventArgs e)
 		{
 			SongDialog dlg = new SongDialog();
 			dlg.ShowDialog(this);
+		}
+
+		private void fehlerMeldenToolStripMenuItem_Click(object sender, EventArgs e)
+		{
+			System.Diagnostics.Process.Start(setting.BugReportUrl);
+		}
+
+		private void praiseBoxDatenbankToolStripMenuItem_Click(object sender, EventArgs e)
+		{
+			PraiseBoxImporter dlg = new PraiseBoxImporter();
+			if (dlg.ShowDialog(this) == DialogResult.OK)
+			{
+				reloadSongList();
+			}
 		}
 
     }

@@ -6,6 +6,7 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+using Pbp.Properties;
 
 namespace Pbp.Forms
 {
@@ -18,23 +19,29 @@ namespace Pbp.Forms
 
 		private void SongDialog_Load(object sender, EventArgs e)
 		{
+			checkedListBoxTags.Items.Clear();
+			Settings setting = new Settings();
+			foreach (String str in setting.Tags)
+			{
+				checkedListBoxTags.Items.Add(str);
+			}
 			fillList();
 			textBoxSearch.Focus();
 		}
 
 		private void buttonCancel_Click(object sender, EventArgs e)
 		{
-
+			DialogResult = DialogResult.Cancel;
 		}
 
 		private void buttonUseInEditor_Click(object sender, EventArgs e)
 		{
-			EditorWindow.getInstance().Show();
 			foreach (ListViewItem lvi in listViewItems.SelectedItems)
 			{
 				EditorWindow.getInstance().openSong(SongManager.getInstance().Songs[(int)(lvi.Tag)].FilePath);
 			}
 			EditorWindow.getInstance().Show();
+			DialogResult = DialogResult.OK;
 			this.Close();
 		}
 
@@ -69,6 +76,12 @@ namespace Pbp.Forms
 				if (checkBoxQATranslation.Checked && !sng.getQA(Song.QualityAssuranceIndicators.Translation))
 					use = false;
 
+				foreach (int i in checkedListBoxTags.CheckedIndices)
+				{
+					if (! sng.Tags.Contains(checkedListBoxTags.Items[i].ToString()))
+						use = false;
+				}
+
 				if (use)
 				{
 					ListViewItem lvi = new ListViewItem(sng.Title);
@@ -90,6 +103,10 @@ namespace Pbp.Forms
 			checkBoxQASegmentation.Checked = false;
 			checkBoxQASpelling.Checked = false;
 			checkBoxQATranslation.Checked = false;
+			for (int i = 0; i < checkedListBoxTags.Items.Count; i++)
+			{
+				checkedListBoxTags.SetItemCheckState(i, CheckState.Unchecked);
+			}
 			fillList();
 			textBoxSearch.Focus();
 		}
@@ -98,5 +115,12 @@ namespace Pbp.Forms
 		{
 			textBoxSearch.Focus();
 		}
+
+		private void textBoxSearch_KeyUp(object sender, KeyEventArgs e)
+		{
+			if (e.KeyCode == Keys.Enter)
+				buttonSearch_Click(sender, e);
+		}
+
 	}
 }

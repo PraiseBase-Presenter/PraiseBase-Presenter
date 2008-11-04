@@ -30,21 +30,22 @@
 		{
 			this.listViewItems = new System.Windows.Forms.ListView();
 			this.groupBox1 = new System.Windows.Forms.GroupBox();
-			this.textBoxSearch = new System.Windows.Forms.TextBox();
-			this.checkBoxHasImages = new System.Windows.Forms.CheckBox();
-			this.checkBoxHasNoTranslation = new System.Windows.Forms.CheckBox();
-			this.label1 = new System.Windows.Forms.Label();
-			this.buttonSearch = new System.Windows.Forms.Button();
+			this.checkedListBoxTags = new System.Windows.Forms.CheckedListBox();
+			this.checkBoxQASegmentation = new System.Windows.Forms.CheckBox();
+			this.checkBoxQAImages = new System.Windows.Forms.CheckBox();
+			this.checkBoxQATranslation = new System.Windows.Forms.CheckBox();
+			this.checkBoxQASpelling = new System.Windows.Forms.CheckBox();
+			this.checkBoxHasComments = new System.Windows.Forms.CheckBox();
 			this.buttonReset = new System.Windows.Forms.Button();
+			this.buttonSearch = new System.Windows.Forms.Button();
+			this.label1 = new System.Windows.Forms.Label();
+			this.checkBoxHasNoTranslation = new System.Windows.Forms.CheckBox();
+			this.checkBoxHasImages = new System.Windows.Forms.CheckBox();
+			this.textBoxSearch = new System.Windows.Forms.TextBox();
 			this.buttonUseInEditor = new System.Windows.Forms.Button();
 			this.buttonUseInSetlist = new System.Windows.Forms.Button();
 			this.buttonCancel = new System.Windows.Forms.Button();
 			this.labelResults = new System.Windows.Forms.Label();
-			this.checkBoxHasComments = new System.Windows.Forms.CheckBox();
-			this.checkBoxQASpelling = new System.Windows.Forms.CheckBox();
-			this.checkBoxQATranslation = new System.Windows.Forms.CheckBox();
-			this.checkBoxQAImages = new System.Windows.Forms.CheckBox();
-			this.checkBoxQASegmentation = new System.Windows.Forms.CheckBox();
 			this.groupBox1.SuspendLayout();
 			this.SuspendLayout();
 			// 
@@ -53,9 +54,9 @@
 			this.listViewItems.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
 						| System.Windows.Forms.AnchorStyles.Left)
 						| System.Windows.Forms.AnchorStyles.Right)));
-			this.listViewItems.Location = new System.Drawing.Point(12, 114);
+			this.listViewItems.Location = new System.Drawing.Point(12, 170);
 			this.listViewItems.Name = "listViewItems";
-			this.listViewItems.Size = new System.Drawing.Size(633, 270);
+			this.listViewItems.Size = new System.Drawing.Size(633, 214);
 			this.listViewItems.TabIndex = 0;
 			this.listViewItems.UseCompatibleStateImageBehavior = false;
 			this.listViewItems.View = System.Windows.Forms.View.List;
@@ -64,6 +65,7 @@
 			// 
 			this.groupBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
 						| System.Windows.Forms.AnchorStyles.Right)));
+			this.groupBox1.Controls.Add(this.checkedListBoxTags);
 			this.groupBox1.Controls.Add(this.checkBoxQASegmentation);
 			this.groupBox1.Controls.Add(this.checkBoxQAImages);
 			this.groupBox1.Controls.Add(this.checkBoxQATranslation);
@@ -77,30 +79,103 @@
 			this.groupBox1.Controls.Add(this.textBoxSearch);
 			this.groupBox1.Location = new System.Drawing.Point(12, 12);
 			this.groupBox1.Name = "groupBox1";
-			this.groupBox1.Size = new System.Drawing.Size(633, 96);
+			this.groupBox1.Size = new System.Drawing.Size(633, 152);
 			this.groupBox1.TabIndex = 1;
 			this.groupBox1.TabStop = false;
 			this.groupBox1.Text = "Filter";
 			// 
-			// textBoxSearch
+			// checkedListBoxTags
 			// 
-			this.textBoxSearch.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+			this.checkedListBoxTags.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
 						| System.Windows.Forms.AnchorStyles.Right)));
-			this.textBoxSearch.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.textBoxSearch.Location = new System.Drawing.Point(62, 19);
-			this.textBoxSearch.Name = "textBoxSearch";
-			this.textBoxSearch.Size = new System.Drawing.Size(556, 22);
-			this.textBoxSearch.TabIndex = 0;
+			this.checkedListBoxTags.CheckOnClick = true;
+			this.checkedListBoxTags.FormattingEnabled = true;
+			this.checkedListBoxTags.Location = new System.Drawing.Point(18, 95);
+			this.checkedListBoxTags.MultiColumn = true;
+			this.checkedListBoxTags.Name = "checkedListBoxTags";
+			this.checkedListBoxTags.Size = new System.Drawing.Size(489, 49);
+			this.checkedListBoxTags.TabIndex = 11;
 			// 
-			// checkBoxHasImages
+			// checkBoxQASegmentation
 			// 
-			this.checkBoxHasImages.AutoSize = true;
-			this.checkBoxHasImages.Location = new System.Drawing.Point(18, 47);
-			this.checkBoxHasImages.Name = "checkBoxHasImages";
-			this.checkBoxHasImages.Size = new System.Drawing.Size(101, 17);
-			this.checkBoxHasImages.TabIndex = 1;
-			this.checkBoxHasImages.Text = "Hat keine Bilder";
-			this.checkBoxHasImages.UseVisualStyleBackColor = true;
+			this.checkBoxQASegmentation.AutoSize = true;
+			this.checkBoxQASegmentation.Location = new System.Drawing.Point(344, 72);
+			this.checkBoxQASegmentation.Name = "checkBoxQASegmentation";
+			this.checkBoxQASegmentation.Size = new System.Drawing.Size(94, 17);
+			this.checkBoxQASegmentation.TabIndex = 10;
+			this.checkBoxQASegmentation.Text = "QA: Aufteilung";
+			this.checkBoxQASegmentation.UseVisualStyleBackColor = true;
+			// 
+			// checkBoxQAImages
+			// 
+			this.checkBoxQAImages.AutoSize = true;
+			this.checkBoxQAImages.Location = new System.Drawing.Point(265, 72);
+			this.checkBoxQAImages.Name = "checkBoxQAImages";
+			this.checkBoxQAImages.Size = new System.Drawing.Size(73, 17);
+			this.checkBoxQAImages.TabIndex = 9;
+			this.checkBoxQAImages.Text = "QA: Bilder";
+			this.checkBoxQAImages.UseVisualStyleBackColor = true;
+			// 
+			// checkBoxQATranslation
+			// 
+			this.checkBoxQATranslation.AutoSize = true;
+			this.checkBoxQATranslation.Location = new System.Drawing.Point(152, 72);
+			this.checkBoxQATranslation.Name = "checkBoxQATranslation";
+			this.checkBoxQATranslation.Size = new System.Drawing.Size(107, 17);
+			this.checkBoxQATranslation.TabIndex = 8;
+			this.checkBoxQATranslation.Text = "QA: Übersetzung";
+			this.checkBoxQATranslation.UseVisualStyleBackColor = true;
+			// 
+			// checkBoxQASpelling
+			// 
+			this.checkBoxQASpelling.AutoSize = true;
+			this.checkBoxQASpelling.Location = new System.Drawing.Point(18, 72);
+			this.checkBoxQASpelling.Name = "checkBoxQASpelling";
+			this.checkBoxQASpelling.Size = new System.Drawing.Size(128, 17);
+			this.checkBoxQASpelling.TabIndex = 7;
+			this.checkBoxQASpelling.Text = "QA: Rechtschreibung";
+			this.checkBoxQASpelling.UseVisualStyleBackColor = true;
+			// 
+			// checkBoxHasComments
+			// 
+			this.checkBoxHasComments.AutoSize = true;
+			this.checkBoxHasComments.Location = new System.Drawing.Point(300, 47);
+			this.checkBoxHasComments.Name = "checkBoxHasComments";
+			this.checkBoxHasComments.Size = new System.Drawing.Size(105, 17);
+			this.checkBoxHasComments.TabIndex = 6;
+			this.checkBoxHasComments.Text = "Hat Kommentare";
+			this.checkBoxHasComments.UseVisualStyleBackColor = true;
+			// 
+			// buttonReset
+			// 
+			this.buttonReset.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+			this.buttonReset.Location = new System.Drawing.Point(525, 121);
+			this.buttonReset.Name = "buttonReset";
+			this.buttonReset.Size = new System.Drawing.Size(93, 23);
+			this.buttonReset.TabIndex = 6;
+			this.buttonReset.Text = "Zurücksetzen";
+			this.buttonReset.UseVisualStyleBackColor = true;
+			this.buttonReset.Click += new System.EventHandler(this.buttonReset_Click);
+			// 
+			// buttonSearch
+			// 
+			this.buttonSearch.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+			this.buttonSearch.Location = new System.Drawing.Point(525, 92);
+			this.buttonSearch.Name = "buttonSearch";
+			this.buttonSearch.Size = new System.Drawing.Size(93, 23);
+			this.buttonSearch.TabIndex = 5;
+			this.buttonSearch.Text = "Suchen";
+			this.buttonSearch.UseVisualStyleBackColor = true;
+			this.buttonSearch.Click += new System.EventHandler(this.buttonSearch_Click);
+			// 
+			// label1
+			// 
+			this.label1.AutoSize = true;
+			this.label1.Location = new System.Drawing.Point(15, 22);
+			this.label1.Name = "label1";
+			this.label1.Size = new System.Drawing.Size(41, 13);
+			this.label1.TabIndex = 3;
+			this.label1.Text = "Suche:";
 			// 
 			// checkBoxHasNoTranslation
 			// 
@@ -112,36 +187,26 @@
 			this.checkBoxHasNoTranslation.Text = "Hat keine Übersetzung";
 			this.checkBoxHasNoTranslation.UseVisualStyleBackColor = true;
 			// 
-			// label1
+			// checkBoxHasImages
 			// 
-			this.label1.AutoSize = true;
-			this.label1.Location = new System.Drawing.Point(15, 22);
-			this.label1.Name = "label1";
-			this.label1.Size = new System.Drawing.Size(41, 13);
-			this.label1.TabIndex = 3;
-			this.label1.Text = "Suche:";
+			this.checkBoxHasImages.AutoSize = true;
+			this.checkBoxHasImages.Location = new System.Drawing.Point(18, 47);
+			this.checkBoxHasImages.Name = "checkBoxHasImages";
+			this.checkBoxHasImages.Size = new System.Drawing.Size(101, 17);
+			this.checkBoxHasImages.TabIndex = 1;
+			this.checkBoxHasImages.Text = "Hat keine Bilder";
+			this.checkBoxHasImages.UseVisualStyleBackColor = true;
 			// 
-			// buttonSearch
+			// textBoxSearch
 			// 
-			this.buttonSearch.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-			this.buttonSearch.Location = new System.Drawing.Point(444, 66);
-			this.buttonSearch.Name = "buttonSearch";
-			this.buttonSearch.Size = new System.Drawing.Size(75, 23);
-			this.buttonSearch.TabIndex = 5;
-			this.buttonSearch.Text = "Suchen";
-			this.buttonSearch.UseVisualStyleBackColor = true;
-			this.buttonSearch.Click += new System.EventHandler(this.buttonSearch_Click);
-			// 
-			// buttonReset
-			// 
-			this.buttonReset.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-			this.buttonReset.Location = new System.Drawing.Point(525, 66);
-			this.buttonReset.Name = "buttonReset";
-			this.buttonReset.Size = new System.Drawing.Size(93, 23);
-			this.buttonReset.TabIndex = 6;
-			this.buttonReset.Text = "Zurücksetzen";
-			this.buttonReset.UseVisualStyleBackColor = true;
-			this.buttonReset.Click += new System.EventHandler(this.buttonReset_Click);
+			this.textBoxSearch.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+						| System.Windows.Forms.AnchorStyles.Right)));
+			this.textBoxSearch.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.textBoxSearch.Location = new System.Drawing.Point(62, 19);
+			this.textBoxSearch.Name = "textBoxSearch";
+			this.textBoxSearch.Size = new System.Drawing.Size(556, 22);
+			this.textBoxSearch.TabIndex = 0;
+			this.textBoxSearch.KeyUp += new System.Windows.Forms.KeyEventHandler(this.textBoxSearch_KeyUp);
 			// 
 			// buttonUseInEditor
 			// 
@@ -186,56 +251,6 @@
 			this.labelResults.TabIndex = 5;
 			this.labelResults.Text = "-";
 			// 
-			// checkBoxHasComments
-			// 
-			this.checkBoxHasComments.AutoSize = true;
-			this.checkBoxHasComments.Location = new System.Drawing.Point(300, 47);
-			this.checkBoxHasComments.Name = "checkBoxHasComments";
-			this.checkBoxHasComments.Size = new System.Drawing.Size(105, 17);
-			this.checkBoxHasComments.TabIndex = 6;
-			this.checkBoxHasComments.Text = "Hat Kommentare";
-			this.checkBoxHasComments.UseVisualStyleBackColor = true;
-			// 
-			// checkBoxQASpelling
-			// 
-			this.checkBoxQASpelling.AutoSize = true;
-			this.checkBoxQASpelling.Location = new System.Drawing.Point(18, 72);
-			this.checkBoxQASpelling.Name = "checkBoxQASpelling";
-			this.checkBoxQASpelling.Size = new System.Drawing.Size(128, 17);
-			this.checkBoxQASpelling.TabIndex = 7;
-			this.checkBoxQASpelling.Text = "QA: Rechtschreibung";
-			this.checkBoxQASpelling.UseVisualStyleBackColor = true;
-			// 
-			// checkBoxQATranslation
-			// 
-			this.checkBoxQATranslation.AutoSize = true;
-			this.checkBoxQATranslation.Location = new System.Drawing.Point(152, 72);
-			this.checkBoxQATranslation.Name = "checkBoxQATranslation";
-			this.checkBoxQATranslation.Size = new System.Drawing.Size(107, 17);
-			this.checkBoxQATranslation.TabIndex = 8;
-			this.checkBoxQATranslation.Text = "QA: Übersetzung";
-			this.checkBoxQATranslation.UseVisualStyleBackColor = true;
-			// 
-			// checkBoxQAImages
-			// 
-			this.checkBoxQAImages.AutoSize = true;
-			this.checkBoxQAImages.Location = new System.Drawing.Point(265, 72);
-			this.checkBoxQAImages.Name = "checkBoxQAImages";
-			this.checkBoxQAImages.Size = new System.Drawing.Size(73, 17);
-			this.checkBoxQAImages.TabIndex = 9;
-			this.checkBoxQAImages.Text = "QA: Bilder";
-			this.checkBoxQAImages.UseVisualStyleBackColor = true;
-			// 
-			// checkBoxQASegmentation
-			// 
-			this.checkBoxQASegmentation.AutoSize = true;
-			this.checkBoxQASegmentation.Location = new System.Drawing.Point(344, 72);
-			this.checkBoxQASegmentation.Name = "checkBoxQASegmentation";
-			this.checkBoxQASegmentation.Size = new System.Drawing.Size(94, 17);
-			this.checkBoxQASegmentation.TabIndex = 10;
-			this.checkBoxQASegmentation.Text = "QA: Aufteilung";
-			this.checkBoxQASegmentation.UseVisualStyleBackColor = true;
-			// 
 			// SongDialog
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -251,6 +266,7 @@
 			this.MinimizeBox = false;
 			this.MinimumSize = new System.Drawing.Size(665, 446);
 			this.Name = "SongDialog";
+			this.ShowIcon = false;
 			this.ShowInTaskbar = false;
 			this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
 			this.Text = "Liederbrowser";
@@ -282,5 +298,6 @@
 		private System.Windows.Forms.CheckBox checkBoxQAImages;
 		private System.Windows.Forms.CheckBox checkBoxQATranslation;
 		private System.Windows.Forms.CheckBox checkBoxQASpelling;
+		private System.Windows.Forms.CheckedListBox checkedListBoxTags;
 	}
 }

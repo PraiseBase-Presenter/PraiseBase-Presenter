@@ -361,5 +361,15 @@ namespace Pbp.Properties {
                 this["ProjectionFadeTime"] = value;
             }
         }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("http://code.google.com/p/praisebasepresenter/issues/entry?template=Defect%20repor" +
+            "t%20from%20user")]
+        public string BugReportUrl {
+            get {
+                return ((string)(this["BugReportUrl"]));
+            }
+        }
     }
 }

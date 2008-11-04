@@ -81,11 +81,11 @@ namespace Pbp
         /// <summary>
         /// The song title. Usually the same as the file name
         /// </summary>
-		public string Title { get; protected set; }
+		public string Title { get; set; }
         /// <summary>
         /// Main language of the song
         /// </summary>
-		public string Language { get; protected set; }
+		public string Language { get; set; }
          /// <summary>
         /// A list of tags (like categories) which describe the type of the song
         /// </summary>
@@ -165,6 +165,15 @@ namespace Pbp
 		/// </summary>
 		public SongTextVerticalAlign DefaultVertAlign { get; set; }
 		#endregion
+
+
+		/// <summary>
+        /// The song constructor
+        /// </summary>
+        /// <param name="filePath">Full path to the song xml file</param>
+		public Song() : this(null)
+		{
+		}
 
 		/// <summary>
         /// The song constructor
@@ -461,7 +470,10 @@ namespace Pbp
 			}
         }
 
-
+		public static string getDefaultExtension()
+		{
+			return ".ppl";
+		}
 
         /// <summary>
         /// Saves the song to an xml file
@@ -478,7 +490,7 @@ namespace Pbp
 				string ext = Path.GetExtension(fileName);
 				_originFileType = fileType.createFactory(ext);
 				if (_originFileType == null)
-					_originFileType = new fileTypePBPS();
+					_originFileType = new fileTypePPL();
 			}
 
 

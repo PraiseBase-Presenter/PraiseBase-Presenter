@@ -122,6 +122,12 @@
     <Compile Include="Forms\mainWindow.Designer.cs">
       <DependentUpon>mainWindow.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\PraiseBoxImporter.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\PraiseBoxImporter.Designer.cs">
+      <DependentUpon>PraiseBoxImporter.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\projectionWindow.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -163,6 +169,10 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\mainWindow.resx">
       <DependentUpon>mainWindow.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\PraiseBoxImporter.resx">
+      <DependentUpon>PraiseBoxImporter.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\projectionWindow.resx">
@@ -318,6 +328,7 @@
     <None Include="Resources\edit.png" />
     <None Include="Resources\3floppy_unmount.png" />
     <None Include="Resources\easymoblog.png" />
+    <None Include="Resources\xmag.png" />
     <Content Include="Songs\A Mighty Fortress Is Our God.ppl" />
     <Content Include="Songs\Jesus is my Lord.ppl" />
   </ItemGroup>
@@ -326,6 +337,9 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Components\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

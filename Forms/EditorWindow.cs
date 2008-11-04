@@ -326,6 +326,17 @@ namespace Pbp.Forms
 			System.Diagnostics.Process.Start(setting.DataDirectory);
 		}
 
+		private void fehlerMeldenToolStripMenuItem_Click(object sender, EventArgs e)
+		{
+			System.Diagnostics.Process.Start(setting.BugReportUrl);
+		}
+
+		private void praiseBoxToolStripMenuItem_Click(object sender, EventArgs e)
+		{
+			PraiseBoxImporter dlg = new PraiseBoxImporter();
+			dlg.ShowDialog(this);
+		}
+
 
     }
 }
