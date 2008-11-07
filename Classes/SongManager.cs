@@ -33,6 +33,8 @@ using Pbp.Properties;
 using System.IO;
 using System.Windows.Forms;
 
+using Pbp.Forms;
+
 namespace Pbp
 {
 	/// <summary>
@@ -59,20 +61,20 @@ namespace Pbp
 		/// <summary>
 		/// The constructor
 		/// </summary>
-        private SongManager()
+		private SongManager(params object[] param)
         {
-            reload();
+			reload(param);
         }
 
 		/// <summary>
 		/// Gets the singleton of this class
 		/// </summary>
 		/// <returns>Returns an unique instance of the song manager</returns>
-		static public SongManager getInstance()
+		static public SongManager getInstance(params object[] param)
 		{
 			if (_instance == null)
 			{
-				_instance = new SongManager();
+				_instance = new SongManager(param);
 			}
 			return _instance;
 		}
@@ -81,9 +83,17 @@ namespace Pbp
 		/// Reloads all songs from the song direcory
 		/// specified in the application settings
 		/// </summary>
-        public void reload()
+        public void reload(params object[] param)
         {
             Settings setting = new Settings();
+
+			Loading ldg = null;
+			if (param.Count() == 1 && param[0].GetType() == typeof(Loading))
+			{
+				ldg = (Loading)param[0];
+			}
+			
+				
 
             if (setting.DataDirectory == "")
             {
@@ -95,7 +105,7 @@ namespace Pbp
             string searchDir = setting.DataDirectory +  Path.DirectorySeparatorChar + setting.SongDir;
 
 			Songs = new List<Song>();
-            int i=0;
+			List<string> songPaths = new List<string>();
             if (Directory.Exists(searchDir))
             {
                 foreach (string ext in Song.fileType.getAllExtensions())
@@ -103,16 +113,28 @@ namespace Pbp
                     string[] songFilePaths = Directory.GetFiles(searchDir, ext, SearchOption.AllDirectories);
                     foreach (string file in songFilePaths)
                     {
-                        Song tmpSong = new Song(file);
-                        if (tmpSong.IsValid)
-                        {
-                            tmpSong.ID = i;
-                            Songs.Add(tmpSong);
-                            i++;
-                        }
+						songPaths.Add(file);
                     }
                 }
-            }            
+            }
+
+			int cnt = songPaths.Count;
+			if (ldg != null)
+				ldg.setProgBarMax(cnt);
+			for (int i = 0; i <cnt;i++ )
+			{
+				if (ldg != null && i%5 == 0)
+				{
+					ldg.setProgBarValue(i);
+					ldg.setLabel("Lade Lieder " + i.ToString() + "/" + cnt.ToString());
+				}
+				Song tmpSong = new Song(songPaths[i]);
+				if (tmpSong.IsValid)
+				{
+					tmpSong.ID = i;
+					Songs.Add(tmpSong);
+				}
+			}
         }
 
 		/// <summary>

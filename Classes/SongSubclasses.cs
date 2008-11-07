@@ -154,15 +154,13 @@ namespace Pbp
 			/// <summary>
 			/// A list of containing slides. Each part has one slide at minimum
 			/// </summary>
-			public List<Slide> Slides { get; set; }
+			public SlideList Slides { get; set; }
 
 			/// <summary>
 			/// Part constructor
 			/// </summary>
-			public Part()
+			public Part() : this("Neuer Liedteil")
 			{
-				Slides = new List<Slide>();
-				Caption = "Neuer Liedteil";
 			}
 
 			/// <summary>
@@ -171,76 +169,66 @@ namespace Pbp
 			/// <param name="caption">The part's caption</param>
 			public Part(string caption)
 			{
-				Slides = new List<Slide>();
+				Slides = new SlideList();
 				Caption = caption;
 			}
 
-			/// <summary>
-			/// Swaps the given slide with it's predecessor
-			/// </summary>
-			/// <param name="slideId">The slide index</param>
-			/// <returns>Returns true is swapping was successfull</returns>
-			public bool swapSlideWithUpperSlide(int slideId)
+			public override int GetHashCode()
 			{
-				if (slideId > 0 && slideId < Slides.Count)
-				{
-					Slide tmpPrt = Slides[slideId - 1];
-					Slides.RemoveAt(slideId - 1);
-					Slides.Insert(slideId, tmpPrt);
-					return true;
-				}
-				return false;
+				return Caption.GetHashCode() ^ Slides.GetHashCode();
 			}
 
-			/// <summary>
-			/// Swaps the given slide with it's successor
-			/// </summary>
-			/// <param name="slideId">The slide index</param>
-			/// <returns>Returns true is swapping was successfull</returns>
-			public bool swapSlideWithLowerSlide(int slideId)
-			{
-				if (slideId >= 0 && slideId < Slides.Count - 1)
-				{
-					Slide tmpPrt = Slides[slideId + 1];
-					Slides.RemoveAt(slideId + 1);
-					Slides.Insert(slideId, tmpPrt);
-					return true;
-				}
-				return false;
-			}
-
-			/// <summary>
-			/// Duplicates a given slide
-			/// </summary>
-			/// <param name="slideId">The slide index</param>
-			public void duplicateSlide(int slideId)
-			{
-				Slides.Insert(slideId, (Slide)Slides[slideId].Clone());
-			}
-
-			/// <summary>
-			/// Duplicates a slide and cuts it's text in half,
-			/// assigning the first part to the original slide
-			/// and the second part to the copy
-			/// </summary>
-			/// <param name="slideId">The slide index</param>
-			public void splitSlide(int slideId)
-			{
-				Slide sld = (Slide)Slides[slideId].Clone();
-
-				int totl = sld.Lines.Count;
-				int rem = totl / 2;
-				Slides[slideId].Lines.RemoveRange(0, rem);
-				sld.Lines.RemoveRange(rem, totl - rem);
-
-				totl = sld.Translation.Count;
-				rem = totl / 2;
-				Slides[slideId].Translation.RemoveRange(0, rem);
-				sld.Translation.RemoveRange(rem, totl - rem);
-
-				Slides.Insert(slideId, sld);
-			}
 		};
+
+		/// <summary>
+		/// Provides a list of all parts in the song
+		/// </summary>
+		public class PartList : List<Part>
+		{
+			/// <summary>
+			/// Swaps the part with the previous one
+			/// </summary>
+			/// <param name="partId">Index of the part</param>
+			/// <returns></returns>
+			public bool swapWithUpper(int partId)
+			{
+				if (partId > 0 && partId < this.Count)
+				{
+					Part tmpPrt = this[partId - 1];
+					this.RemoveAt(partId - 1);
+					this.Insert(partId, tmpPrt);
+					return true;
+				}
+				return false;
+			}
+			
+			/// <summary>
+			/// Swaps the part with the next one
+			/// </summary>
+			/// <param name="partId">Index of the part</param>
+			/// <returns></returns>
+			public bool swapWithLower(int partId)
+			{
+				if (partId >= 0 && partId < this.Count - 1)
+				{
+					Part tmpPrt = this[partId + 1];
+					this.RemoveAt(partId + 1);
+					this.Insert(partId, tmpPrt);
+					return true;
+				}
+				return false;
+			}
+
+			public override int GetHashCode()
+			{
+				int res = 0;
+				for (int i = 0; i < Count; i++)
+				{
+					res = (res ^ this[i].GetHashCode()) ^ i.GetHashCode(); 
+				}
+				return res;
+			}
+		}
 
 		/// <summary>
 		/// A single slide with songtext and/or a background image
@@ -407,7 +395,100 @@ namespace Pbp
 				return res;
 			}
 
+			public override int GetHashCode()
+			{
+				int res = ImageNumber.GetHashCode() ^ HorizontalAlign.GetHashCode() ^VerticalAlign.GetHashCode();
+				for (int i = 0; i < Lines.Count; i++)
+				{
+					res = res ^ Lines[i].GetHashCode();
+				}
+				for (int i = 0; i < Translation.Count; i++)
+				{
+					res = res ^ Translation[i].GetHashCode();
+				}
+				return res;
+			}
+
 		};
+
+		public class SlideList : List<Slide>
+		{
+			/// <summary>
+			/// Swaps the given slide with it's predecessor
+			/// </summary>
+			/// <param name="slideId">The slide index</param>
+			/// <returns>Returns true is swapping was successfull</returns>
+			public bool swapWithUpper(int slideId)
+			{
+				if (slideId > 0 && slideId < this.Count)
+				{
+					Slide tmpPrt = this[slideId - 1];
+					this.RemoveAt(slideId - 1);
+					this.Insert(slideId, tmpPrt);
+					return true;
+				}
+				return false;
+			}
+
+			/// <summary>
+			/// Swaps the given slide with it's successor
+			/// </summary>
+			/// <param name="slideId">The slide index</param>
+			/// <returns>Returns true is swapping was successfull</returns>
+			public bool swapWithLower(int slideId)
+			{
+				if (slideId >= 0 && slideId < this.Count - 1)
+				{
+					Slide tmpPrt = this[slideId + 1];
+					this.RemoveAt(slideId + 1);
+					this.Insert(slideId, tmpPrt);
+					return true;
+				}
+				return false;
+			}
+
+			/// <summary>
+			/// Duplicates a given slide
+			/// </summary>
+			/// <param name="slideId">The slide index</param>
+			public void duplicate(int slideId)
+			{
+				this.Insert(slideId, (Slide)this[slideId].Clone());
+			}
+
+			/// <summary>
+			/// Duplicates a slide and cuts it's text in half,
+			/// assigning the first part to the original slide
+			/// and the second part to the copy
+			/// </summary>
+			/// <param name="slideId">The slide index</param>
+			public void split(int slideId)
+			{
+				Slide sld = (Slide)this[slideId].Clone();
+
+				int totl = sld.Lines.Count;
+				int rem = totl / 2;
+				this[slideId].Lines.RemoveRange(0, rem);
+				sld.Lines.RemoveRange(rem, totl - rem);
+
+				totl = sld.Translation.Count;
+				rem = totl / 2;
+				this[slideId].Translation.RemoveRange(0, rem);
+				sld.Translation.RemoveRange(rem, totl - rem);
+
+				this.Insert(slideId, sld);
+			}
+
+			public override int GetHashCode()
+			{
+				int res = 0;
+				for (int i = 0; i < Count; i++)
+				{
+					res = (res ^ this[i].GetHashCode()) ^ i.GetHashCode();
+				}
+				return res;
+			}
+		}
 
 		public abstract class fileType
 		{

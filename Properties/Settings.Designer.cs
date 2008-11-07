@@ -371,5 +371,26 @@ namespace Pbp.Properties {
                 return ((string)(this["BugReportUrl"]));
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("90, 60")]
+        public global::System.Drawing.Size ThumbSize {
+            get {
+                return ((global::System.Drawing.Size)(this["ThumbSize"]));
+            }
+            set {
+                this["ThumbSize"] = value;
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("Thumbs")]
+        public string ThumbDir {
+            get {
+                return ((string)(this["ThumbDir"]));
+            }
+        }
     }
 }

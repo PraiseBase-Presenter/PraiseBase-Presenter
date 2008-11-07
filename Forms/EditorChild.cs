@@ -41,6 +41,7 @@ namespace Pbp.Forms
         projectionWindow projWindow;
 		public bool valid;
 		public bool changed = false;
+		int hashCode;
 
         public EditorChild(string fileName)
         {
@@ -58,7 +59,8 @@ namespace Pbp.Forms
                 populateTree();
                 treeViewContents.SelectedNode = treeViewContents.Nodes[0];
 				valid = true;
-            }
+				hashCode = sng.GetHashCode();
+			}
             else
             {
                 MessageBox.Show("Diese Lieddatei ist leider fehlerhaft!","Liededitor",MessageBoxButtons.OK,MessageBoxIcon.Error);
@@ -327,7 +329,7 @@ namespace Pbp.Forms
 				{
 					int partId = treeViewContents.SelectedNode.Parent.Index;
 					int slideId = treeViewContents.SelectedNode.Index;
-					if (sng.Parts[partId].swapSlideWithUpperSlide(slideId))
+					if (sng.Parts[partId].Slides.swapWithUpper(slideId))
 					{
 						populateTree();
 						treeViewContents.SelectedNode = treeViewContents.Nodes[0].Nodes[partId].Nodes[slideId-1];
@@ -336,7 +338,7 @@ namespace Pbp.Forms
 				else if (treeViewContents.SelectedNode.Level == 1)
 				{
 					int partId = treeViewContents.SelectedNode.Index;
-					if (sng.swapPartWithUpperPart(partId))
+					if (sng.Parts.swapWithUpper(partId))
 					{
 						populateTree();
 						treeViewContents.SelectedNode = treeViewContents.Nodes[0].Nodes[partId-1];
@@ -354,7 +356,7 @@ namespace Pbp.Forms
 				{
 					int partId = treeViewContents.SelectedNode.Parent.Index;
 					int slideId = treeViewContents.SelectedNode.Index;
-					if (sng.Parts[partId].swapSlideWithLowerSlide(slideId))
+					if (sng.Parts[partId].Slides.swapWithLower(slideId))
 					{
 						populateTree();
 						treeViewContents.SelectedNode = treeViewContents.Nodes[0].Nodes[partId].Nodes[slideId + 1];
@@ -363,7 +365,7 @@ namespace Pbp.Forms
 				else if (treeViewContents.SelectedNode.Level == 1)
 				{
 					int partId = treeViewContents.SelectedNode.Index;
-					if (sng.swapPartWithLowerPart(partId))
+					if (sng.Parts.swapWithLower(partId))
 					{
 						populateTree();
 						treeViewContents.SelectedNode = treeViewContents.Nodes[0].Nodes[partId + 1];
@@ -586,7 +588,7 @@ namespace Pbp.Forms
 			{
 				int partId = treeViewContents.SelectedNode.Parent.Index;
 				int slideId = treeViewContents.SelectedNode.Index;
-				sng.Parts[partId].duplicateSlide(slideId);
+				sng.Parts[partId].Slides.duplicate(slideId);
 				populateTree();
 				treeViewContents.SelectedNode = treeViewContents.Nodes[0].Nodes[partId].Nodes[slideId];
 			}
@@ -598,7 +600,7 @@ namespace Pbp.Forms
 			{
 				int partId = treeViewContents.SelectedNode.Parent.Index;
 				int slideId = treeViewContents.SelectedNode.Index;
-				sng.Parts[partId].splitSlide(slideId);
+				sng.Parts[partId].Slides.duplicate(slideId);
 
 				populateTree();
 				treeViewContents.SelectedNode = treeViewContents.Nodes[0].Nodes[partId].Nodes[slideId];
@@ -688,14 +690,17 @@ namespace Pbp.Forms
 
 		private void EditorChild_FormClosing(object sender, FormClosingEventArgs e)
 		{
-			DialogResult dlg = MessageBox.Show("Willst du die Änderungen im Lied "+sng.Title+" speichern?", "Liededitor", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
-			if (dlg == DialogResult.Yes)
+			if (hashCode != sng.GetHashCode())
 			{
-				save();
-			}
-			else if (dlg == DialogResult.Cancel)
-			{
-				e.Cancel = true;
+				DialogResult dlg = MessageBox.Show("Willst du die Änderungen im Lied " + sng.Title + " speichern?", "Liededitor", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
+				if (dlg == DialogResult.Yes)
+				{
+					save();
+				}
+				else if (dlg == DialogResult.Cancel)
+				{
+					e.Cancel = true;
+				}
 			}
 		}
 

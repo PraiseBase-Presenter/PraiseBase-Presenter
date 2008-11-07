@@ -109,7 +109,7 @@ namespace Pbp.Forms
             if (!allowProjection)
             {
                 projScreen = System.Windows.Forms.Screen.PrimaryScreen;
-                MessageBox.Show("Kein zweiter Bildschirm gefunden! Der Primärbildschirm wird stattdessen verwendet.", "Projektion", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                //MessageBox.Show("Kein zweiter Bildschirm gefunden! Der Primärbildschirm wird stattdessen verwendet.", "Projektion", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
             }
             else if (success == 1)
             {

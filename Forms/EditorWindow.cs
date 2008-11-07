@@ -333,7 +333,7 @@ namespace Pbp.Forms
 
 		private void praiseBoxToolStripMenuItem_Click(object sender, EventArgs e)
 		{
-			PraiseBoxImporter dlg = new PraiseBoxImporter();
+			SongImporter dlg = new SongImporter(SongImporter.ImportFormat.PraiseBox);
 			dlg.ShowDialog(this);
 		}
 

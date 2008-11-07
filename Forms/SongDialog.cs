@@ -36,13 +36,20 @@ namespace Pbp.Forms
 
 		private void buttonUseInEditor_Click(object sender, EventArgs e)
 		{
-			foreach (ListViewItem lvi in listViewItems.SelectedItems)
+			if (listViewItems.SelectedItems.Count > 0)
 			{
-				EditorWindow.getInstance().openSong(SongManager.getInstance().Songs[(int)(lvi.Tag)].FilePath);
+				foreach (ListViewItem lvi in listViewItems.SelectedItems)
+				{
+					EditorWindow.getInstance().openSong(SongManager.getInstance().Songs[(int)(lvi.Tag)].FilePath);
+				}
+				EditorWindow.getInstance().Show();
+				DialogResult = DialogResult.OK;
+				this.Close();
 			}
-			EditorWindow.getInstance().Show();
-			DialogResult = DialogResult.OK;
-			this.Close();
+			else
+			{
+				MessageBox.Show("Keine Lieder ausgewählt!", "Liedbrowser");
+			}
 		}
 
 		private void buttonSearch_Click(object sender, EventArgs e)

@@ -51,10 +51,14 @@
 			this.toolStripSeparator6 = new System.Windows.Forms.ToolStripSeparator();
 			this.toolStripMenuItem4 = new System.Windows.Forms.ToolStripMenuItem();
 			this.praiseBoxDatenbankToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.worToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.powerpraiseLiederToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.songbeamerLiederToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.toolStripSeparator9 = new System.Windows.Forms.ToolStripSeparator();
 			this.bildschirmeErneutSuchenToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.liederlisteNeuLadenToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.bilderlisteNeuLadenToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.miniaturbilderPrüfenToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
 			this.toolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
 			this.fehlerMeldenToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -114,6 +118,7 @@
 			this.label5 = new System.Windows.Forms.Label();
 			this.buttonClearImageHistory = new System.Windows.Forms.Button();
 			this.listViewImageHistory = new System.Windows.Forms.ListView();
+			this.columnHeader5 = new System.Windows.Forms.ColumnHeader();
 			this.label4 = new System.Windows.Forms.Label();
 			this.textBoxImageSearch = new System.Windows.Forms.TextBox();
 			this.listViewDirectoryImages = new System.Windows.Forms.ListView();
@@ -141,8 +146,6 @@
 			this.songSearchResetButton = new System.Windows.Forms.Button();
 			this.songSearchBox = new System.Windows.Forms.TextBox();
 			this.tabControl1 = new System.Windows.Forms.TabControl();
-			this.powerpraiseLiederToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-			this.songbeamerLiederToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			buttonChooseDiaDir = new System.Windows.Forms.Button();
 			this.menuStrip1.SuspendLayout();
 			this.groupBox4.SuspendLayout();
@@ -254,7 +257,8 @@
             this.toolStripSeparator9,
             this.bildschirmeErneutSuchenToolStripMenuItem,
             this.liederlisteNeuLadenToolStripMenuItem,
-            this.bilderlisteNeuLadenToolStripMenuItem});
+            this.bilderlisteNeuLadenToolStripMenuItem,
+            this.miniaturbilderPrüfenToolStripMenuItem});
 			this.einstellungenToolStripMenuItem.Name = "einstellungenToolStripMenuItem";
 			this.einstellungenToolStripMenuItem.Size = new System.Drawing.Size(50, 20);
 			this.einstellungenToolStripMenuItem.Text = "&Extras";
@@ -326,6 +330,7 @@
 			// 
 			this.toolStripMenuItem4.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.praiseBoxDatenbankToolStripMenuItem,
+            this.worToolStripMenuItem,
             this.powerpraiseLiederToolStripMenuItem,
             this.songbeamerLiederToolStripMenuItem});
 			this.toolStripMenuItem4.Name = "toolStripMenuItem4";
@@ -335,9 +340,30 @@
 			// praiseBoxDatenbankToolStripMenuItem
 			// 
 			this.praiseBoxDatenbankToolStripMenuItem.Name = "praiseBoxDatenbankToolStripMenuItem";
-			this.praiseBoxDatenbankToolStripMenuItem.Size = new System.Drawing.Size(199, 22);
+			this.praiseBoxDatenbankToolStripMenuItem.Size = new System.Drawing.Size(226, 22);
 			this.praiseBoxDatenbankToolStripMenuItem.Text = "PraiseBox Datenbank...";
 			this.praiseBoxDatenbankToolStripMenuItem.Click += new System.EventHandler(this.praiseBoxDatenbankToolStripMenuItem_Click);
+			// 
+			// worToolStripMenuItem
+			// 
+			this.worToolStripMenuItem.Name = "worToolStripMenuItem";
+			this.worToolStripMenuItem.Size = new System.Drawing.Size(226, 22);
+			this.worToolStripMenuItem.Text = "WorshipSystem Datenbank...";
+			this.worToolStripMenuItem.Click += new System.EventHandler(this.worToolStripMenuItem_Click);
+			// 
+			// powerpraiseLiederToolStripMenuItem
+			// 
+			this.powerpraiseLiederToolStripMenuItem.Name = "powerpraiseLiederToolStripMenuItem";
+			this.powerpraiseLiederToolStripMenuItem.Size = new System.Drawing.Size(226, 22);
+			this.powerpraiseLiederToolStripMenuItem.Text = "Powerpraise Lieder...";
+			this.powerpraiseLiederToolStripMenuItem.Click += new System.EventHandler(this.powerpraiseLiederToolStripMenuItem_Click);
+			// 
+			// songbeamerLiederToolStripMenuItem
+			// 
+			this.songbeamerLiederToolStripMenuItem.Name = "songbeamerLiederToolStripMenuItem";
+			this.songbeamerLiederToolStripMenuItem.Size = new System.Drawing.Size(226, 22);
+			this.songbeamerLiederToolStripMenuItem.Text = "Songbeamer Lieder...";
+			this.songbeamerLiederToolStripMenuItem.Click += new System.EventHandler(this.songbeamerLiederToolStripMenuItem_Click);
 			// 
 			// toolStripSeparator9
 			// 
@@ -364,6 +390,13 @@
 			this.bilderlisteNeuLadenToolStripMenuItem.Size = new System.Drawing.Size(195, 22);
 			this.bilderlisteNeuLadenToolStripMenuItem.Text = "&Bilderliste neu laden";
 			this.bilderlisteNeuLadenToolStripMenuItem.Click += new System.EventHandler(this.bilderlisteNeuLadenToolStripMenuItem_Click);
+			// 
+			// miniaturbilderPrüfenToolStripMenuItem
+			// 
+			this.miniaturbilderPrüfenToolStripMenuItem.Name = "miniaturbilderPrüfenToolStripMenuItem";
+			this.miniaturbilderPrüfenToolStripMenuItem.Size = new System.Drawing.Size(195, 22);
+			this.miniaturbilderPrüfenToolStripMenuItem.Text = "Miniaturbilder prüfen";
+			this.miniaturbilderPrüfenToolStripMenuItem.Click += new System.EventHandler(this.miniaturbilderPrüfenToolStripMenuItem_Click);
 			// 
 			// toolStripMenuItem1
 			// 
@@ -964,7 +997,7 @@
 			this.label5.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
 			this.label5.AutoSize = true;
 			this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.label5.Location = new System.Drawing.Point(484, 10);
+			this.label5.Location = new System.Drawing.Point(638, 10);
 			this.label5.Name = "label5";
 			this.label5.Size = new System.Drawing.Size(51, 13);
 			this.label5.TabIndex = 23;
@@ -973,9 +1006,9 @@
 			// buttonClearImageHistory
 			// 
 			this.buttonClearImageHistory.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-			this.buttonClearImageHistory.Location = new System.Drawing.Point(487, 558);
+			this.buttonClearImageHistory.Location = new System.Drawing.Point(641, 558);
 			this.buttonClearImageHistory.Name = "buttonClearImageHistory";
-			this.buttonClearImageHistory.Size = new System.Drawing.Size(249, 23);
+			this.buttonClearImageHistory.Size = new System.Drawing.Size(95, 23);
 			this.buttonClearImageHistory.TabIndex = 22;
 			this.buttonClearImageHistory.Text = "Verlauf leeren";
 			this.buttonClearImageHistory.UseVisualStyleBackColor = true;
@@ -985,14 +1018,22 @@
 			// 
 			this.listViewImageHistory.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
 						| System.Windows.Forms.AnchorStyles.Right)));
-			this.listViewImageHistory.Location = new System.Drawing.Point(487, 32);
+			this.listViewImageHistory.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.columnHeader5});
+			this.listViewImageHistory.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.None;
+			this.listViewImageHistory.Location = new System.Drawing.Point(641, 32);
 			this.listViewImageHistory.MultiSelect = false;
 			this.listViewImageHistory.Name = "listViewImageHistory";
-			this.listViewImageHistory.Size = new System.Drawing.Size(249, 520);
+			this.listViewImageHistory.Size = new System.Drawing.Size(95, 520);
 			this.listViewImageHistory.TabIndex = 21;
 			this.listViewImageHistory.UseCompatibleStateImageBehavior = false;
+			this.listViewImageHistory.View = System.Windows.Forms.View.Details;
 			this.listViewImageHistory.SelectedIndexChanged += new System.EventHandler(this.listViewImageHistory_SelectedIndexChanged);
 			this.listViewImageHistory.Leave += new System.EventHandler(this.listViewImageHistory_Leave);
+			// 
+			// columnHeader5
+			// 
+			this.columnHeader5.Width = 90;
 			// 
 			// label4
 			// 
@@ -1023,7 +1064,7 @@
 			this.listViewDirectoryImages.Location = new System.Drawing.Point(234, 32);
 			this.listViewDirectoryImages.MultiSelect = false;
 			this.listViewDirectoryImages.Name = "listViewDirectoryImages";
-			this.listViewDirectoryImages.Size = new System.Drawing.Size(247, 549);
+			this.listViewDirectoryImages.Size = new System.Drawing.Size(401, 549);
 			this.listViewDirectoryImages.TabIndex = 1;
 			this.listViewDirectoryImages.UseCompatibleStateImageBehavior = false;
 			this.listViewDirectoryImages.SelectedIndexChanged += new System.EventHandler(this.listViewDirectoryImages_SelectedIndexChanged);
@@ -1192,10 +1233,10 @@
 			this.songDetailItems.FullRowSelect = true;
 			this.songDetailItems.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable;
 			this.songDetailItems.HideSelection = false;
-			this.songDetailItems.Location = new System.Drawing.Point(6, 77);
+			this.songDetailItems.Location = new System.Drawing.Point(6, 87);
 			this.songDetailItems.MultiSelect = false;
 			this.songDetailItems.Name = "songDetailItems";
-			this.songDetailItems.Size = new System.Drawing.Size(465, 360);
+			this.songDetailItems.Size = new System.Drawing.Size(465, 350);
 			this.songDetailItems.TabIndex = 23;
 			this.songDetailItems.UseCompatibleStateImageBehavior = false;
 			this.songDetailItems.View = System.Windows.Forms.View.Details;
@@ -1221,9 +1262,9 @@
 			this.songDetailImages.Location = new System.Drawing.Point(6, 19);
 			this.songDetailImages.MultiSelect = false;
 			this.songDetailImages.Name = "songDetailImages";
-			this.songDetailImages.Size = new System.Drawing.Size(465, 52);
+			this.songDetailImages.Size = new System.Drawing.Size(465, 62);
 			this.songDetailImages.TabIndex = 24;
-			this.songDetailImages.TileSize = new System.Drawing.Size(70, 50);
+			this.songDetailImages.TileSize = new System.Drawing.Size(100, 60);
 			this.songDetailImages.UseCompatibleStateImageBehavior = false;
 			this.songDetailImages.View = System.Windows.Forms.View.Tile;
 			this.songDetailImages.SelectedIndexChanged += new System.EventHandler(this.songDetailImages_SelectedIndexChanged);
@@ -1338,20 +1379,6 @@
 			this.tabControl1.Size = new System.Drawing.Size(750, 620);
 			this.tabControl1.TabIndex = 20;
 			this.tabControl1.SelectedIndexChanged += new System.EventHandler(this.tabControl1_SelectedIndexChanged);
-			// 
-			// powerpraiseLiederToolStripMenuItem
-			// 
-			this.powerpraiseLiederToolStripMenuItem.Enabled = false;
-			this.powerpraiseLiederToolStripMenuItem.Name = "powerpraiseLiederToolStripMenuItem";
-			this.powerpraiseLiederToolStripMenuItem.Size = new System.Drawing.Size(199, 22);
-			this.powerpraiseLiederToolStripMenuItem.Text = "Powerpraise Lieder...";
-			// 
-			// songbeamerLiederToolStripMenuItem
-			// 
-			this.songbeamerLiederToolStripMenuItem.Enabled = false;
-			this.songbeamerLiederToolStripMenuItem.Name = "songbeamerLiederToolStripMenuItem";
-			this.songbeamerLiederToolStripMenuItem.Size = new System.Drawing.Size(199, 22);
-			this.songbeamerLiederToolStripMenuItem.Text = "Songbeamer Lieder...";
 			// 
 			// mainWindow
 			// 
@@ -1514,6 +1541,9 @@
 		private System.Windows.Forms.ToolStripButton toolStripButton1;
 		private System.Windows.Forms.ToolStripMenuItem powerpraiseLiederToolStripMenuItem;
 		private System.Windows.Forms.ToolStripMenuItem songbeamerLiederToolStripMenuItem;
+		private System.Windows.Forms.ToolStripMenuItem worToolStripMenuItem;
+		private System.Windows.Forms.ColumnHeader columnHeader5;
+		private System.Windows.Forms.ToolStripMenuItem miniaturbilderPrüfenToolStripMenuItem;
     }
 }
 

@@ -34,7 +34,8 @@ using System.IO;
 using System.Windows.Forms;
 using System.Drawing;
 using System.Runtime.Serialization.Formatters.Binary;
-using Pbp.Properties; 
+using Pbp.Properties;
+using System.Security.Cryptography;
 
 namespace Pbp
 {
@@ -138,7 +139,7 @@ namespace Pbp
         /// <summary>
         /// The list of all parts in the song
         /// </summary>
-		public List<Part> Parts { get; set; }
+		public PartList Parts { get; set; }
         /// <summary>
         /// A list containing a sequence of part numbers indicating 
         /// the real sequence the song is song
@@ -147,7 +148,7 @@ namespace Pbp
         /// <summary>
         /// List of all slides. Used in the presenter song detail overview.
         /// </summary>
-		public List<Slide> Slides { get; set; }
+		public SlideList Slides { get; set; }
         /// <summary>
         /// Indicates the current slide
         /// </summary>
@@ -187,12 +188,11 @@ namespace Pbp
             bool err = false;
 
 			Settings setting = new Settings();
-
 			Tags = new TagList();
 			DefaultHorizAlign = SongTextHorizontalAlign.Center;
 			DefaultVertAlign = SongTextVerticalAlign.Center;
-			Slides = new List<Slide>();
-			Parts = new List<Part>();
+			Slides = new SlideList();
+			Parts = new PartList();
 			ImagePaths = new List<string>();
 
 			// Default font settings if values in xml invalid
@@ -341,7 +341,6 @@ namespace Pbp
 							{
 								string caption = elem.GetAttribute("caption");
 								Part tmpPart = new Part(caption);
-								tmpPart.Slides = new List<Slide>();
 								foreach (XmlElement slideElem in elem)
 								{
 									if (slideElem.Name == "slide")
@@ -389,7 +388,10 @@ namespace Pbp
 			else
 			{
 				Title = "Neues Lied";
-				Part tmpPart = new Part(null);
+				Language = "Deutsch";
+				Comment = String.Empty;
+				_QA = 0;
+				Part tmpPart = new Part();
 				tmpPart.Slides.Add(new Slide(this));
 				Parts.Add(tmpPart);
 				_originFileType = new fileTypePBPS();
@@ -403,12 +405,13 @@ namespace Pbp
 
         private void loadImageThumbs()
         {
-            _imageThumbs = new ImageList();
-            _imageThumbs.ImageSize = new Size(64, 48);
-            _imageThumbs.ColorDepth = ColorDepth.Depth32Bit;
 			Settings setting = new Settings();
+			
+			_imageThumbs = new ImageList();
+			_imageThumbs.ImageSize = setting.ThumbSize;
+			_imageThumbs.ColorDepth = ColorDepth.Depth32Bit;
 
-			Image img = new Bitmap(64, 48);
+			Image img = new Bitmap(setting.ThumbSize.Width,setting.ThumbSize.Height);
 			Graphics graph = Graphics.FromImage(img);
 			graph.FillRectangle(new SolidBrush(setting.ProjectionBackColor), 0, 0, img.Width, img.Height);
 			_imageThumbs.Images.Add(img);
@@ -416,13 +419,13 @@ namespace Pbp
 
 			foreach (String path in ImagePaths)
             {
-				string imPath = setting.DataDirectory + Path.DirectorySeparatorChar + setting.ImageDir + Path.DirectorySeparatorChar + path;
+				string imPath = setting.DataDirectory + Path.DirectorySeparatorChar + setting.ThumbDir + Path.DirectorySeparatorChar + path;
 
 				if (File.Exists(imPath))
                 {
                     _imageThumbs.Images.Add(Image.FromFile(imPath));
                 }
-            }
+            }			
         }
 
 		public ImageList getThumbs()
@@ -472,7 +475,7 @@ namespace Pbp
 
 		public static string getDefaultExtension()
 		{
-			return ".ppl";
+			return "ppl";
 		}
 
         /// <summary>
@@ -737,36 +740,6 @@ namespace Pbp
 			}
         }
 
-
-        public void setPartCaption(string text, int partId)
-        {
-            Parts[partId].Caption = text;
-        }
-
-		public bool swapPartWithUpperPart(int partId)
-		{
-			if (partId > 0 && partId < Parts.Count)
-			{
-				Part tmpPrt = Parts[partId - 1];
-				Parts.RemoveAt(partId - 1);
-				Parts.Insert(partId, tmpPrt);
-				return true;
-			}
-			return false;
-		}
-
-		public bool swapPartWithLowerPart(int partId)
-		{
-			if (partId >= 0 && partId < Parts.Count-1)
-			{
-				Part tmpPrt = Parts[partId + 1];
-				Parts.RemoveAt(partId + 1);
-				Parts.Insert(partId, tmpPrt);
-				return true;
-			}
-			return false;
-		}
-
 		/// <summary>
 		/// Sets a specific quality assurance indicator
 		/// </summary>
@@ -792,6 +765,28 @@ namespace Pbp
 		public bool getQA(QualityAssuranceIndicators quai)
 		{
 			return (_QA & (int)quai) > 0 ? true : false; 
+		}
+
+		/// <summary>
+		/// Returns a hashcode of the song, used for example in the
+		/// editor to check if the file was changed
+		/// </summary>
+		/// <returns></returns>
+		public override int GetHashCode()
+		{
+			int code = Title.GetHashCode() 
+				^ _QA.GetHashCode()
+				^ TextFont.GetHashCode()
+				^ TextColor.GetHashCode()
+				^ TranslationColor.GetHashCode()
+				^ TranslationFont.GetHashCode()
+				^ Language.GetHashCode()
+				^ Comment.GetHashCode()
+				^ TextLineSpacing.GetHashCode() 
+				^ Tags.GetHashCode()
+				^ Parts.GetHashCode();
+			
+			return code;
 		}
 
     }

@@ -41,12 +41,51 @@ namespace Pbp
         [STAThread]
         static void Main()
         {
+			//DateTime startTime = DateTime.Now;
+
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
 
+			bool loadingScreen = false;
 
+			if (loadingScreen)
+			{
+				Loading ldg = new Loading();
+				ldg.setLabel("PraiseBase Presenter wird gestartet...");
+				ldg.Show();
+				Application.DoEvents();
 
+				ldg.setLabel("Prüfe Miniaturbilder...");
+				ImageManager.getInstance().checkThumbs(ldg);
+
+				ldg.setLabel("Lade Liederdatenbank...");
+				SongManager.getInstance(ldg);
+
+				ldg.setLabel("Suche Projektionsschirm...");
+				projectionWindow.getInstance();
+
+				ldg.setLabel("Initialisiere Programmoberfläche...");
+				GC.Collect();
+				ldg.Close();
+				ldg.Dispose();
+			}
+			else
+			{
+				SongManager.getInstance();
+				ImageManager.getInstance().checkThumbs();
+				projectionWindow.getInstance();
+				GC.Collect();
+			}
+
+			/*
+			DateTime stopTime = DateTime.Now;
+			TimeSpan duration = stopTime - startTime;
+			Console.WriteLine("seconds:" + duration.TotalSeconds);
+			Console.WriteLine("milliseconds:" + duration.TotalMilliseconds);
+			 */
+			
 			Application.Run(mainWindow.getInstance());
+			
         }
     }
 }

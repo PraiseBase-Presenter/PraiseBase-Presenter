@@ -54,6 +54,8 @@
 			this.listViewItems.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
 						| System.Windows.Forms.AnchorStyles.Left)
 						| System.Windows.Forms.AnchorStyles.Right)));
+			this.listViewItems.FullRowSelect = true;
+			this.listViewItems.HideSelection = false;
 			this.listViewItems.Location = new System.Drawing.Point(12, 170);
 			this.listViewItems.Name = "listViewItems";
 			this.listViewItems.Size = new System.Drawing.Size(633, 214);
@@ -211,11 +213,11 @@
 			// buttonUseInEditor
 			// 
 			this.buttonUseInEditor.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-			this.buttonUseInEditor.Location = new System.Drawing.Point(312, 390);
+			this.buttonUseInEditor.Location = new System.Drawing.Point(243, 390);
 			this.buttonUseInEditor.Name = "buttonUseInEditor";
-			this.buttonUseInEditor.Size = new System.Drawing.Size(123, 23);
+			this.buttonUseInEditor.Size = new System.Drawing.Size(192, 23);
 			this.buttonUseInEditor.TabIndex = 2;
-			this.buttonUseInEditor.Text = "In den Editor laden";
+			this.buttonUseInEditor.Text = "Markierte Lieder in den Editor laden";
 			this.buttonUseInEditor.UseVisualStyleBackColor = true;
 			this.buttonUseInEditor.Click += new System.EventHandler(this.buttonUseInEditor_Click);
 			// 
