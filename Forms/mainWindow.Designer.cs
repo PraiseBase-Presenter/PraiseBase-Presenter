@@ -528,6 +528,7 @@
 			// 
 			// listViewSetList
 			// 
+			this.listViewSetList.AllowDrop = true;
 			this.listViewSetList.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
 						| System.Windows.Forms.AnchorStyles.Right)));
 			this.listViewSetList.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
@@ -544,6 +545,9 @@
 			this.listViewSetList.UseCompatibleStateImageBehavior = false;
 			this.listViewSetList.View = System.Windows.Forms.View.Details;
 			this.listViewSetList.SelectedIndexChanged += new System.EventHandler(this.listViewSetList_SelectedIndexChanged);
+			this.listViewSetList.DragDrop += new System.Windows.Forms.DragEventHandler(this.listViewSetList_DragDrop);
+			this.listViewSetList.DragEnter += new System.Windows.Forms.DragEventHandler(this.listViewSetList_DragEnter);
+			this.listViewSetList.ItemDrag += new System.Windows.Forms.ItemDragEventHandler(this.listViewSetList_ItemDrag);
 			// 
 			// buttonSetListRem
 			// 
@@ -1233,10 +1237,10 @@
 			this.songDetailItems.FullRowSelect = true;
 			this.songDetailItems.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable;
 			this.songDetailItems.HideSelection = false;
-			this.songDetailItems.Location = new System.Drawing.Point(6, 87);
+			this.songDetailItems.Location = new System.Drawing.Point(6, 90);
 			this.songDetailItems.MultiSelect = false;
 			this.songDetailItems.Name = "songDetailItems";
-			this.songDetailItems.Size = new System.Drawing.Size(465, 350);
+			this.songDetailItems.Size = new System.Drawing.Size(465, 347);
 			this.songDetailItems.TabIndex = 23;
 			this.songDetailItems.UseCompatibleStateImageBehavior = false;
 			this.songDetailItems.View = System.Windows.Forms.View.Details;
@@ -1262,7 +1266,7 @@
 			this.songDetailImages.Location = new System.Drawing.Point(6, 19);
 			this.songDetailImages.MultiSelect = false;
 			this.songDetailImages.Name = "songDetailImages";
-			this.songDetailImages.Size = new System.Drawing.Size(465, 62);
+			this.songDetailImages.Size = new System.Drawing.Size(465, 66);
 			this.songDetailImages.TabIndex = 24;
 			this.songDetailImages.TileSize = new System.Drawing.Size(100, 60);
 			this.songDetailImages.UseCompatibleStateImageBehavior = false;
@@ -1305,8 +1309,8 @@
 			this.listViewSongs.TabIndex = 21;
 			this.listViewSongs.UseCompatibleStateImageBehavior = false;
 			this.listViewSongs.View = System.Windows.Forms.View.Details;
+			this.listViewSongs.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.listViewSongs_MouseDoubleClick);
 			this.listViewSongs.MouseClick += new System.Windows.Forms.MouseEventHandler(this.listViewSongs_MouseClick);
-			this.listViewSongs.SelectedIndexChanged += new System.EventHandler(this.listViewSongs_SelectedIndexChanged);
 			// 
 			// radioSongSearchAll
 			// 

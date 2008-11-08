@@ -72,11 +72,9 @@ namespace Pbp.Forms
 
 		private void projectionControl_Loaded(object sender, RoutedEventArgs e)
 		{
-			Settings setting = new Settings();
-
 			System.Drawing.Bitmap bmp = new System.Drawing.Bitmap(1, 1);
 			System.Drawing.Graphics gr = System.Drawing.Graphics.FromImage(bmp);
-			gr.FillRectangle(new System.Drawing.SolidBrush(setting.ProjectionBackColor), 0, 0, 1, 1);
+			gr.FillRectangle(new System.Drawing.SolidBrush(Settings.Instance.ProjectionBackColor), 0, 0, 1, 1);
 			blackoutImage.Source = loadBitmap(bmp);
 			blackoutImage.Opacity = 0f;
 		}

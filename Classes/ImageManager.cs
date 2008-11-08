@@ -41,102 +41,67 @@ namespace Pbp
 {
     class ImageManager
     {
-        static private ImageManager instance;
-        private Image _currentImage;
-		private bool _createThumbs;
+		/// <summary>
+		/// The singleton holder
+		/// </summary>
+        static private ImageManager _instance;
 
-        public Image currentImage
-        {
-            get
-            {
-                return _currentImage;
-            }
-            set
-            {
-                _currentImage = value;
-            }
-        }
+		/// <summary>
+		/// Current image
+		/// </summary>
+        public Image currentImage {get;set;}
 
+		/// <summary>
+		/// Private constructor
+		/// </summary>
         private ImageManager()
         {
 
         }
 
-        static public ImageManager getInstance()
+		/// <summary>
+		/// Returns the singleton instance of this class
+		/// </summary>
+		/// <returns></returns>
+        static public ImageManager Instance
         {
-            if (instance == null)
-            {
-                instance = new ImageManager();
-            }
-            return instance;
+			get
+			{
+	            if (_instance == null)
+		            _instance = new ImageManager();
+				return _instance;
+			}
         }
 
 
-		Image FixedSize(Image imgPhoto, int Width, int Height)
+
+		/// <summary>
+		/// Resizes a given image to new dimensions
+		/// </summary>
+		/// <param name="sourceImage"></param>
+		/// <param name="newSize"></param>
+		/// <returns></returns>
+		public Bitmap ResizeBitmap(Image sourceImage, Size newSize)
 		{
-			int sourceWidth = imgPhoto.Width;
-			int sourceHeight = imgPhoto.Height;
-			int sourceX = 0;
-			int sourceY = 0;
-			int destX = 0;
-			int destY = 0;
-
-			float nPercent = 0;
-			float nPercentW = 0;
-			float nPercentH = 0;
-
-			nPercentW = ((float)Width / (float)sourceWidth);
-			nPercentH = ((float)Height / (float)sourceHeight);
-			if (nPercentH < nPercentW)
-			{
-				nPercent = nPercentH;
-				destX = System.Convert.ToInt16((Width -
-							  (sourceWidth * nPercent)) / 2);
-			}
-			else
-			{
-				nPercent = nPercentW;
-				destY = System.Convert.ToInt16((Height -
-							  (sourceHeight * nPercent)) / 2);
-			}
-
-			int destWidth = (int)(sourceWidth * nPercent);
-			int destHeight = (int)(sourceHeight * nPercent);
-
-			Bitmap bmPhoto = new Bitmap(Width, Height,
-							  PixelFormat.Format24bppRgb);
-			bmPhoto.SetResolution(imgPhoto.HorizontalResolution,
-							 imgPhoto.VerticalResolution);
-
-			Graphics grPhoto = Graphics.FromImage(bmPhoto);
-			grPhoto.Clear(Color.Black);
-			grPhoto.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.HighQualityBicubic;
-			
-			grPhoto.DrawImage(imgPhoto,
-				new Rectangle(destX, destY, destWidth, destHeight),
-				new Rectangle(sourceX, sourceY, sourceWidth, sourceHeight),
-				GraphicsUnit.Pixel);
-
-			grPhoto.Dispose();
-			return bmPhoto;
-		}
-
-		public Bitmap ResizeBitmap(Image b, int nWidth, int nHeight)
-		{
-			Bitmap result = new Bitmap(nWidth, nHeight);
+			Bitmap result = new Bitmap(newSize.Width, newSize.Height);
 			using (Graphics g = Graphics.FromImage((Image)result))
-				g.DrawImage(b, 0, 0, nWidth, nHeight);
+				g.DrawImage(sourceImage, 0, 0, newSize.Width, newSize.Height);
 			return result;
 		}
 
+		/// <summary>
+		/// Creates a resized version of the given file and stores it
+		/// </summary>
+		/// <param name="inFile"></param>
+		/// <param name="outFile"></param>
+		/// <param name="size"></param>
 		public void createThumb(string inFile, string outFile, Size size)
 		{
 			Image img;
 			try
 			{
 				img = Image.FromFile(inFile);
-				//Image imgPhoto = FixedSize(img, size.Width, size.Height);
-				Image imgPhoto = ResizeBitmap(img, size.Width, size.Height);
+				Image imgPhoto = ResizeBitmap(img, size);
 
 				string dir = Path.GetDirectoryName(outFile);
 				if (!Directory.Exists(dir))
@@ -153,17 +118,22 @@ namespace Pbp
 			}
 		}
 
-
+		/// <summary>
+		/// Check and create thumbnails if necessary
+		/// </summary>
 		public void checkThumbs()
 		{
 			checkThumbs(null);
 		}
 
+		/// <summary>
+		/// Check and create thumbnails if necessary
+		/// </summary>
+		/// <param name="ldg"></param>
 		public void checkThumbs(Loading ldg)
 		{
-			Settings setting = new Settings();
-			string imageRootDir = setting.DataDirectory + Path.DirectorySeparatorChar + setting.ImageDir;
-			string thumbDir = setting.DataDirectory + Path.DirectorySeparatorChar + setting.ThumbDir;
+			string imageRootDir = Settings.Instance.DataDirectory + Path.DirectorySeparatorChar + Settings.Instance.ImageDir;
+			string thumbDir = Settings.Instance.DataDirectory + Path.DirectorySeparatorChar + Settings.Instance.ThumbDir;
 
 			if (!Directory.Exists(thumbDir))
 			{
@@ -197,65 +167,31 @@ namespace Pbp
 				{
 					if (ldg == null)
 					{
-						Form frm = new Form();
-						frm.Text = "Erstelle Miniaturbilder...";
-						frm.Width = 450;
-						frm.Height = 100;
-						frm.ShowIcon = false;
-						frm.StartPosition = FormStartPosition.CenterScreen;
-						frm.ShowInTaskbar = false;
-						frm.MaximizeBox = false;
-						frm.MinimizeBox = false;
+						ProgressWindow wnd = new ProgressWindow("Erstelle Miniaturbilder...",cnt);
+						wnd.Show();
 
-						ProgressBar prBr = new ProgressBar();
-						prBr.Minimum = 0;
-						prBr.Maximum = cnt;
-						prBr.Height = 20;
-						prBr.Width = 260;
-						prBr.Style = ProgressBarStyle.Continuous;
-						prBr.Location = new Point(15, 25);
-						frm.Controls.Add(prBr);
-
-						Label lbl = new Label();
-						lbl.Location = new Point(prBr.Right + 5, prBr.Top + 3);
-						frm.Controls.Add(lbl);
-						lbl.Width = 50;
-
-						Button btn = new Button();
-						btn.Text = "Abbrechen";
-						btn.Location = new Point(lbl.Right + 5, prBr.Top);
-						btn.Click += new EventHandler(btn_Click);
-						btn.Width = 80;
-						frm.Controls.Add(btn);
-						frm.Show();
-
-						Settings stn = new Settings();
-						_createThumbs = true;
 						for (int i = 0; i < cnt; i++)
 						{
-							createThumb(missingThumbsSrc[i], missingThumbsTrg[i], stn.ThumbSize);
+							createThumb(missingThumbsSrc[i], missingThumbsTrg[i], Settings.Instance.ThumbSize);
 							if (i % 5 == 0)
 							{
-								prBr.Value = i;
-								lbl.Text = i.ToString() + "/" + cnt.ToString();
-								if (!_createThumbs)
+								wnd.UpdateStatus("Erstelle Miniaturbilder " + i.ToString() + "/" + cnt.ToString(), i);
+								if (wnd.Cancelled)
 								{
-									frm.Close();
+									wnd.Close();
 									Application.DoEvents();
 									break;
 								}
-								Application.DoEvents();
 							}
 						}
-						frm.Hide();
+						wnd.Close();
 					}
 					else
 					{
-						Settings stn = new Settings();
 						ldg.setProgBarMax(cnt);
 						for (int i = 0; i < cnt; i++)
 						{
-							createThumb(missingThumbsSrc[i], missingThumbsTrg[i], stn.ThumbSize);
+							createThumb(missingThumbsSrc[i], missingThumbsTrg[i], Settings.Instance.ThumbSize);
 							if (i % 5 == 0)
 							{
 								ldg.setLabel("Erstelle Miniaturbilder " + i.ToString() + "/" + cnt.ToString());
@@ -264,15 +200,29 @@ namespace Pbp
 							}
 						}
 					}
-
-
 				}
 			}
 		}
 
-		void btn_Click(object sender, EventArgs e)
+
+		public Image getThumbFromRelPath(string relativePath)
 		{
-			_createThumbs = false;
+			string imPath = Settings.Instance.DataDirectory + Path.DirectorySeparatorChar + Settings.Instance.ThumbDir + Path.DirectorySeparatorChar + relativePath;
+
+			if (File.Exists(imPath))
+			{
+				return Image.FromFile(imPath);
+			}
+			return null;
+		}
+
+		public Image getEmptyThumb()
+		{
+			Image img = new Bitmap(Settings.Instance.ThumbSize.Width, Settings.Instance.ThumbSize.Height);
+			Graphics graph = Graphics.FromImage(img);
+			graph.FillRectangle(new SolidBrush(Settings.Instance.ProjectionBackColor), 0, 0, img.Width, img.Height);
+			graph.Dispose();
+			return img;			
 		}
 
     }

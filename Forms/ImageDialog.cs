@@ -40,7 +40,6 @@ namespace Pbp.Forms
 {
 	public partial class ImageDialog : Form
 	{
-		Settings setting;
 		public string imagePath  {get; set;}
 		public bool forAll { 
 			get 
@@ -55,7 +54,6 @@ namespace Pbp.Forms
 
 		public ImageDialog()
 		{
-			setting = new Settings();
 			InitializeComponent();
 		}
 
@@ -86,7 +84,7 @@ namespace Pbp.Forms
 
 		public void imageTreeViewInit()
 		{
-			string rootDir = setting.DataDirectory + Path.DirectorySeparatorChar + setting.ImageDir;
+			string rootDir = Settings.Instance.DataDirectory + Path.DirectorySeparatorChar + Settings.Instance.ImageDir;
 
 			Application.DoEvents();
 			treeViewDirs.Nodes.Clear();

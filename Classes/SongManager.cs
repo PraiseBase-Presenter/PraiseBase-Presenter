@@ -52,10 +52,22 @@ namespace Pbp
         /// List of all availabe songs
         /// </summary>
 		public List<Song> Songs {get; private set;}
+
 		/// <summary>
 		/// Gets or sets the current song object
 		/// </summary>
         public Song CurrentSong {get;set;}
+
+		/// <summary>
+		/// Gets the singleton of this class
+		/// </summary>
+		static public SongManager Instance
+		{
+			get
+			{
+				return getInstance();
+			}
+		}
 
 
 		/// <summary>
@@ -85,32 +97,28 @@ namespace Pbp
 		/// </summary>
         public void reload(params object[] param)
         {
-            Settings setting = new Settings();
-
 			Loading ldg = null;
 			if (param.Count() == 1 && param[0].GetType() == typeof(Loading))
 			{
 				ldg = (Loading)param[0];
-			}
-			
-				
+			}				
 
-            if (setting.DataDirectory == "")
+            if (Settings.Instance.DataDirectory == "")
             {
 				// Todo: check and create
-                setting.DataDirectory =  Environment.GetFolderPath(Environment.SpecialFolder.Personal).ToString() + Path.DirectorySeparatorChar + setting.DataDirDefaultName;
-                setting.Save();
+                Settings.Instance.DataDirectory =  Environment.GetFolderPath(Environment.SpecialFolder.Personal).ToString() + Path.DirectorySeparatorChar + Settings.Instance.DataDirDefaultName;
+                Settings.Instance.Save();
             }
 
-            string searchDir = setting.DataDirectory +  Path.DirectorySeparatorChar + setting.SongDir;
+            string searchDir = Settings.Instance.DataDirectory +  Path.DirectorySeparatorChar + Settings.Instance.SongDir;
 
 			Songs = new List<Song>();
 			List<string> songPaths = new List<string>();
             if (Directory.Exists(searchDir))
             {
-                foreach (string ext in Song.fileType.getAllExtensions())
+                foreach (string ext in Enum.GetNames(typeof(Song.FileFormat)))
                 {
-                    string[] songFilePaths = Directory.GetFiles(searchDir, ext, SearchOption.AllDirectories);
+                    string[] songFilePaths = Directory.GetFiles(searchDir, "*."+ext, SearchOption.AllDirectories);
                     foreach (string file in songFilePaths)
                     {
 						songPaths.Add(file);
@@ -123,7 +131,7 @@ namespace Pbp
 				ldg.setProgBarMax(cnt);
 			for (int i = 0; i <cnt;i++ )
 			{
-				if (ldg != null && i%5 == 0)
+				if (ldg != null && i%10 == 0)
 				{
 					ldg.setProgBarValue(i);
 					ldg.setLabel("Lade Lieder " + i.ToString() + "/" + cnt.ToString());

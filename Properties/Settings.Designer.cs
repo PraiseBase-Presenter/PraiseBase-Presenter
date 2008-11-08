@@ -392,5 +392,17 @@ namespace Pbp.Properties {
                 return ((string)(this["ThumbDir"]));
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool ShowLoadingScreen {
+            get {
+                return ((bool)(this["ShowLoadingScreen"]));
+            }
+            set {
+                this["ShowLoadingScreen"] = value;
+            }
+        }
     }
 }

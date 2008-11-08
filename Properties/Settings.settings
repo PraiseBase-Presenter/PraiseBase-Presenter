@@ -125,5 +125,8 @@
     <Setting Name="ThumbDir" Type="System.String" Scope="Application">
       <Value Profile="(Default)">Thumbs</Value>
     </Setting>
+    <Setting Name="ShowLoadingScreen" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

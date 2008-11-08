@@ -53,11 +53,8 @@ namespace Pbp.Forms
 	/// </summary>
     public partial class mainWindow : Form
     {
-
-        private Settings setting;
 		static private mainWindow instance;
         private projectionWindow projWindow; // Todo: use singleton
-		ImageManager imgMan; // Use singleton
 		
 		private Timer blackOutTimer;
         private Timer diaTimer;
@@ -69,7 +66,6 @@ namespace Pbp.Forms
 		/// </summary>
         private mainWindow()
         {
-            setting = new Settings();
             InitializeComponent();
         }
 
@@ -92,10 +88,9 @@ namespace Pbp.Forms
         private void Form1_Load(object sender, EventArgs e)
         {            
             projWindow = projectionWindow.getInstance();
-            imgMan = ImageManager.getInstance();
 
-			this.WindowState = setting.ViewerWindowState;
-			this.Text += " " + setting.Version;
+			this.WindowState = Settings.Instance.ViewerWindowState;
+			this.Text += " " + Settings.Instance.Version;
 
             blackout = false;
             blackOutTimer = new Timer(); // Timer anlegen
@@ -107,9 +102,9 @@ namespace Pbp.Forms
 
             imageTreeViewInit();
 
-			trackBarFadeTimer.Value= setting.ProjectionFadeTime;
-			labelFadeTime.Text = setting.ProjectionFadeTime.ToString(); // + " ms";
-			UserControl1.getInstance().setFadeSteps(setting.ProjectionFadeTime);
+			trackBarFadeTimer.Value = Settings.Instance.ProjectionFadeTime;
+			labelFadeTime.Text = Settings.Instance.ProjectionFadeTime.ToString(); // + " ms";
+			UserControl1.getInstance().setFadeSteps(Settings.Instance.ProjectionFadeTime);
 
         }
 
@@ -275,19 +270,13 @@ namespace Pbp.Forms
         private void optionenToolStripMenuItem_Click(object sender, EventArgs e)
         {
             settingsWindow stWnd = new settingsWindow();
-            if (stWnd.ShowDialog(this) == DialogResult.OK)
-            {
-                setting.Reload();
-            }            
+            stWnd.ShowDialog(this);           
         }
 
         private void toolStripButton4_Click(object sender, EventArgs e)
         {
             settingsWindow stWnd = new settingsWindow();
-            if (stWnd.ShowDialog(this) == DialogResult.OK)
-            {
-                setting.Reload();
-            }
+            stWnd.ShowDialog(this);
         }
 
         private void liederlisteNeuLadenToolStripMenuItem_Click(object sender, EventArgs e)
@@ -297,9 +286,8 @@ namespace Pbp.Forms
 
 		private void reloadSongList()
 		{
-			SongManager songMan = SongManager.getInstance();
 			songSearchBox.Text = "";
-			songMan.reload();
+			SongManager.getInstance().reload();
 			loadSongList();
 			songSearchBox.Focus();
 			GC.Collect();
@@ -308,6 +296,7 @@ namespace Pbp.Forms
         /**
          * Load song details based on song list selection 
          */
+		/*
         private void listViewSongs_SelectedIndexChanged(object sender, EventArgs e)
         {
 			if (listViewSongs.SelectedIndices.Count > 0)
@@ -321,6 +310,38 @@ namespace Pbp.Forms
 				buttonSetListAdd.Enabled = false;
 			}
         }
+		*/
+
+		private void listViewSongs_MouseClick(object sender, MouseEventArgs e)
+		{
+			if (listViewSongs.SelectedItems.Count > 0)
+			{
+				if (e.Button == MouseButtons.Right)
+				{
+					listViewSetList.Items.Add((ListViewItem)listViewSongs.SelectedItems[0].Clone());
+					listViewSetList.Columns[0].Width = -2;
+					buttonSetListClear.Enabled = true;
+					buttonSaveSetList.Enabled = true;
+				}
+				buttonSetListAdd.Enabled = true;
+			}
+			else
+			{
+				buttonSetListAdd.Enabled = false;
+			}
+		}
+
+
+		private void listViewSongs_MouseDoubleClick(object sender, MouseEventArgs e)
+		{
+			if (listViewSongs.SelectedIndices.Count > 0)
+			{
+				SongManager.getInstance().CurrentSong = SongManager.getInstance().Songs[(int)listViewSongs.SelectedItems[0].Tag];
+				showCurrentSongDetails();
+				buttonSetListAdd.Enabled = true;
+			}
+		}
+
 
 		private void showCurrentSongDetails()
 		{
@@ -427,7 +448,7 @@ namespace Pbp.Forms
 
         private void webToolStripMenuItem_Click(object sender, EventArgs e)
         {
-			System.Diagnostics.Process.Start(setting.Weburl);
+			System.Diagnostics.Process.Start(Settings.Instance.Weburl);
         }
 
 
@@ -467,7 +488,7 @@ namespace Pbp.Forms
 
         public void imageTreeViewInit()
         {
-            string rootDir = setting.DataDirectory + Path.DirectorySeparatorChar + setting.ImageDir;
+			string rootDir = Settings.Instance.DataDirectory + Path.DirectorySeparatorChar + Settings.Instance.ImageDir;
             treeViewImageDirectories.Nodes.Clear();
             TreeNode rootTreeNode = new TreeNode("Bilder");
             rootTreeNode.Tag = rootDir;
@@ -479,7 +500,7 @@ namespace Pbp.Forms
             imageSearchResults = new List<String>();
 
             ImageList iml = new ImageList();
-			iml.ImageSize = setting.ThumbSize;
+			iml.ImageSize = Settings.Instance.ThumbSize;
             iml.ColorDepth = ColorDepth.Depth32Bit;
             listViewImageHistory.SmallImageList = iml;
         }
@@ -495,7 +516,7 @@ namespace Pbp.Forms
 
                     if (directoryArray.Length != 0)
                     {
-						int subLen = (setting.DataDirectory + Path.DirectorySeparatorChar + setting.ImageDir + Path.DirectorySeparatorChar).Length;
+						int subLen = (Settings.Instance.DataDirectory + Path.DirectorySeparatorChar + Settings.Instance.ImageDir + Path.DirectorySeparatorChar).Length;
                         foreach (string directory in directoryArray)
                         {
                             string dName = Path.GetFileName(directory);
@@ -529,7 +550,7 @@ namespace Pbp.Forms
                     labelImgDirName.Text = "Suchergebnisse";
 
                     ImageList imList = new ImageList();
-					imList.ImageSize = setting.ThumbSize;
+					imList.ImageSize = Settings.Instance.ThumbSize;
                     imList.ColorDepth = ColorDepth.Depth32Bit;
                     listViewDirectoryImages.LargeImageList = imList;
 
@@ -547,14 +568,14 @@ namespace Pbp.Forms
             }
             else
             {
-				string imDir = setting.DataDirectory + Path.DirectorySeparatorChar + setting.ThumbDir + Path.DirectorySeparatorChar + ((string)treeViewImageDirectories.SelectedNode.Tag);
+				string imDir = Settings.Instance.DataDirectory + Path.DirectorySeparatorChar + Settings.Instance.ThumbDir + Path.DirectorySeparatorChar + ((string)treeViewImageDirectories.SelectedNode.Tag);
 
 				if (Directory.Exists(imDir))
 				{
 					labelImgDirName.Text = "Verzeichnisinhalt '" + Path.GetFileName((string)treeViewImageDirectories.SelectedNode.Tag) + "':";
 
 					ImageList imList = new ImageList();
-					imList.ImageSize = setting.ThumbSize;
+					imList.ImageSize = Settings.Instance.ThumbSize;
 					imList.ColorDepth = ColorDepth.Depth32Bit;
 
 
@@ -586,7 +607,7 @@ namespace Pbp.Forms
                 Application.DoEvents();
                 int idx = listViewDirectoryImages.SelectedIndices[0];
 
-				Image img = Image.FromFile(setting.DataDirectory + Path.DirectorySeparatorChar + setting.ImageDir + Path.DirectorySeparatorChar + (string)listViewDirectoryImages.Items[idx].Tag);
+				Image img = Image.FromFile(Settings.Instance.DataDirectory + Path.DirectorySeparatorChar + Settings.Instance.ImageDir + Path.DirectorySeparatorChar + (string)listViewDirectoryImages.Items[idx].Tag);
                 if ((Control.ModifierKeys & Keys.Shift) == Keys.Shift && songMan.CurrentSong != null && songMan.CurrentSong.CurrentSlide>=0)
                 {
 					pictureBoxPreview.Image = projWindow.showSlide(songMan.CurrentSong.Slides[songMan.CurrentSong.CurrentSlide], img, false);
@@ -670,7 +691,7 @@ namespace Pbp.Forms
                 }
 
                 ImageList imList = new ImageList();
-				imList.ImageSize = setting.ThumbSize;
+				imList.ImageSize = Settings.Instance.ThumbSize;
                 imList.ColorDepth = ColorDepth.Depth32Bit;
 
                 string[] extensions = { "*.jpg", "*.png", "*.bmp", "*.gif" };
@@ -912,7 +933,7 @@ namespace Pbp.Forms
             {
                 treeViewImageDirectories.SelectedNode = null;
                 imageSearchResults.Clear();
-                string[] imgFilePaths = Directory.GetFiles(setting.DataDirectory + Path.DirectorySeparatorChar + setting.ImageDir, "*.jpg", SearchOption.AllDirectories);
+				string[] imgFilePaths = Directory.GetFiles(Settings.Instance.DataDirectory + Path.DirectorySeparatorChar + Settings.Instance.ImageDir, "*.jpg", SearchOption.AllDirectories);
                 foreach (string ims in imgFilePaths)
                 {
                     if (!ims.Contains("[Thumbnails]"))
@@ -945,36 +966,18 @@ namespace Pbp.Forms
 
 		private void mainWindow_FormClosing(object sender, FormClosingEventArgs e)
 		{
-			setting.ViewerWindowState = this.WindowState;
-			setting.Save();
+			Settings.Instance.ViewerWindowState = this.WindowState;
+			Settings.Instance.Save();
 		}
 
 		private void datenverzeichnisÖffnenToolStripMenuItem_Click(object sender, EventArgs e)
 		{
-			System.Diagnostics.Process.Start(setting.DataDirectory);
+			System.Diagnostics.Process.Start(Settings.Instance.DataDirectory);
 		}
 
 		private void toolStripButtonDataFolder_Click(object sender, EventArgs e)
 		{
-			System.Diagnostics.Process.Start(setting.DataDirectory);
-		}
-
-		private void listViewSongs_MouseClick(object sender, MouseEventArgs e)
-		{
-			if (listViewSongs.SelectedItems.Count > 0)
-			{
-				if (e.Button == MouseButtons.Right)
-				{
-					listViewSetList.Items.Add((ListViewItem)listViewSongs.SelectedItems[0].Clone());
-					listViewSetList.Columns[0].Width = -2;
-					buttonSetListClear.Enabled = true;
-					buttonSaveSetList.Enabled = true;
-				}
-				else
-				{
-					listViewSongs_SelectedIndexChanged(sender, e);
-				}
-			}
+			System.Diagnostics.Process.Start(Settings.Instance.DataDirectory);
 		}
 
 		private void buttonSetListRem_Click(object sender, EventArgs e)
@@ -1081,7 +1084,7 @@ namespace Pbp.Forms
 			dlg.CheckPathExists = true;
 			//dlg.FileName = 
 			dlg.Filter = "PraiseBase-Presenter Setliste (*.pbpl)|*.pbpl";
-			dlg.InitialDirectory = setting.DataDirectory + Path.DirectorySeparatorChar + setting.SetListDir;
+			dlg.InitialDirectory = Settings.Instance.DataDirectory + Path.DirectorySeparatorChar + Settings.Instance.SetListDir;
 			dlg.Title = "Setliste speichern unter...";
 			if (dlg.ShowDialog() == DialogResult.OK)
 			{
@@ -1110,7 +1113,7 @@ namespace Pbp.Forms
 			dlg.CheckPathExists = true;
 			dlg.CheckFileExists = true;
 			dlg.Filter = "PraiseBase-Presenter Setliste (*.pbpl)|*.pbpl";
-			dlg.InitialDirectory = setting.DataDirectory + Path.DirectorySeparatorChar + setting.SetListDir;
+			dlg.InitialDirectory = Settings.Instance.DataDirectory + Path.DirectorySeparatorChar + Settings.Instance.SetListDir;
 			dlg.Title = "Setliste öffnen...";
 			if (dlg.ShowDialog() == DialogResult.OK)
 			{
@@ -1154,8 +1157,8 @@ namespace Pbp.Forms
 		private void trackBarFadeTimer_Scroll(object sender, EventArgs e)
 		{
 			labelFadeTime.Text = trackBarFadeTimer.Value.ToString(); // +" ms";
-			setting.ProjectionFadeTime = trackBarFadeTimer.Value;
-			setting.Save();
+			Settings.Instance.ProjectionFadeTime = trackBarFadeTimer.Value;
+			Settings.Instance.Save();
 			UserControl1.getInstance().setFadeSteps(trackBarFadeTimer.Value);
 		}
 
@@ -1255,17 +1258,17 @@ namespace Pbp.Forms
 
 		private void liederToolStripMenuItem_Click(object sender, EventArgs e)
 		{
-			System.Diagnostics.Process.Start(setting.DataDirectory + Path.DirectorySeparatorChar + setting.SongDir);
+			System.Diagnostics.Process.Start(Settings.Instance.DataDirectory + Path.DirectorySeparatorChar + Settings.Instance.SongDir);
 		}
 
 		private void bilderToolStripMenuItem_Click(object sender, EventArgs e)
 		{
-			System.Diagnostics.Process.Start(setting.DataDirectory + Path.DirectorySeparatorChar + setting.ImageDir);
+			System.Diagnostics.Process.Start(Settings.Instance.DataDirectory + Path.DirectorySeparatorChar + Settings.Instance.ImageDir);
 		}
 
 		private void setlistenToolStripMenuItem_Click(object sender, EventArgs e)
 		{
-			System.Diagnostics.Process.Start(setting.DataDirectory + Path.DirectorySeparatorChar + setting.SetListDir);
+			System.Diagnostics.Process.Start(Settings.Instance.DataDirectory + Path.DirectorySeparatorChar + Settings.Instance.SetListDir);
 		}
 
 		private void toolStripButtonDataFolder_ButtonClick(object sender, EventArgs e)
@@ -1275,7 +1278,7 @@ namespace Pbp.Forms
 
 		private void datenverzeichnisToolStripMenuItem_Click(object sender, EventArgs e)
 		{
-			System.Diagnostics.Process.Start(setting.DataDirectory);
+			System.Diagnostics.Process.Start(Settings.Instance.DataDirectory);
 		}
 
 		private void toolStripButtonOpenCurrentSong_Click(object sender, EventArgs e)
@@ -1303,7 +1306,7 @@ namespace Pbp.Forms
 
 		private void fehlerMeldenToolStripMenuItem_Click(object sender, EventArgs e)
 		{
-			System.Diagnostics.Process.Start(setting.BugReportUrl);
+			System.Diagnostics.Process.Start(Settings.Instance.BugReportUrl);
 		}
 
 		private void praiseBoxDatenbankToolStripMenuItem_Click(object sender, EventArgs e)
@@ -1344,8 +1347,24 @@ namespace Pbp.Forms
 
 		private void miniaturbilderPrüfenToolStripMenuItem_Click(object sender, EventArgs e)
 		{
-			ImageManager.getInstance().checkThumbs();
+			ImageManager.Instance.checkThumbs();
 		}
+
+		private void listViewSetList_DragEnter(object sender, DragEventArgs e)
+		{
+			e.Effect = DragDropEffects.Move;
+		}
+
+		private void listViewSetList_ItemDrag(object sender, ItemDragEventArgs e)
+		{
+			listViewSetList.DoDragDrop(listViewSetList.SelectedItems[0],DragDropEffects.Move);
+		}
+
+		private void listViewSetList_DragDrop(object sender, DragEventArgs e)
+		{
+			//listViewSetList.Items.Add((ListViewItem)e.Data.GetData(typeof(ListViewItem)));
+		}
+
 
     }
 }

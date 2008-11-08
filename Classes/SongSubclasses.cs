@@ -104,6 +104,25 @@ namespace Pbp
 			Segmentation = 8
 		}
 
+		/// <summary>
+		/// Available song filetypes
+		/// </summary>
+		public enum FileFormat
+		{
+			/// <summary>
+			/// Powerpraise song file format (deprecated)
+			/// </summary>
+			ppl,
+			/// <summary>
+			/// Default PBP file format
+			/// </summary>
+			pbps,
+			/// <summary>
+			/// Invalid file type
+			/// </summary>
+			invalid
+		}
+
 		#endregion
 
 		#region Subclasses
@@ -411,6 +430,9 @@ namespace Pbp
 
 		};
 
+		/// <summary>
+		/// Provides a list of all slides
+		/// </summary>
 		public class SlideList : List<Slide>
 		{
 			/// <summary>
@@ -479,6 +501,10 @@ namespace Pbp
 				this.Insert(slideId, sld);
 			}
 
+			/// <summary>
+			/// Returns the slidelist's hashcode
+			/// </summary>
+			/// <returns></returns>
 			public override int GetHashCode()
 			{
 				int res = 0;
@@ -488,76 +514,6 @@ namespace Pbp
 				}
 				return res;
 			}
-		}
-
-		public abstract class fileType
-		{
-			static public fileType createFactory(string ext, string version)
-			{
-				if (ext == fileTypePBPS.extension && version == fileTypePBPS.version)
-				{
-					return new fileTypePBPS();
-				}
-				else if (ext == fileTypePPL.extension && version == fileTypePPL.version)
-				{
-					return new fileTypePPL();
-				}
-				return null;
-			}
-
-			static public fileType createFactory(string ext)
-			{
-				if (ext == fileTypePBPS.extension || ext == "." + fileTypePBPS.extension)
-				{
-					return new fileTypePBPS();
-				}
-				else if (ext == fileTypePPL.extension || ext == "." + fileTypePPL.extension)
-				{
-					return new fileTypePPL();
-				}
-				return null;
-			}
-
-			public static string getFilter()
-			{
-				String fltr = String.Empty;
-				//fltr += fileTypePBPS.name + " (*." + fileTypePBPS.extension + ")|*." + fileTypePBPS.extension + "|";
-				fltr += fileTypePPL.name + " (*." + fileTypePPL.extension + ")|*." + fileTypePPL.extension + "|";
-				fltr += "Alle Dateien (*.*)|*.*";
-				return fltr;
-			}
-
-			public static string getFilterSave()
-			{
-				String fltr = String.Empty;
-				//fltr += fileTypePBPS.name + " (*." + fileTypePBPS.extension + ")|*." + fileTypePBPS.extension + "|";
-				fltr += fileTypePPL.name + " (*." + fileTypePPL.extension + ")|*." + fileTypePPL.extension + "";
-				return fltr;
-			}
-
-
-			public static string[] getAllExtensions()
-			{
-				return new string[] { 
-					"*."+fileTypePBPS.extension, 
-					"*."+fileTypePPL.extension };
-			}
-		}
-
-		protected class fileTypePBPS : fileType
-		{
-			static public string name = "PraiseBase-Presenter Song";
-			static public string extension = "pbps";
-			static public string version = "1.0";
-			static public bool isDefault = true;
-		}
-
-		protected class fileTypePPL : fileType
-		{
-			static public string name = "PowerPraise Lied (veraltet)";
-			static public string extension = "ppl";
-			static public string version = "3.0";
-			static public bool isDefault = false;
 		}
 
 		#endregion

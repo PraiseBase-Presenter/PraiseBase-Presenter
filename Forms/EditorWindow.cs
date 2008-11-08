@@ -41,7 +41,6 @@ namespace Pbp.Forms
 {
     public partial class EditorWindow : Form
     {
-        Settings setting;
         static private EditorWindow _instance;
 		
 		public string fileBoxInitialDir;
@@ -51,12 +50,11 @@ namespace Pbp.Forms
 
         private EditorWindow()
         {
-            setting = new Settings();
             InitializeComponent();
-			fileBoxInitialDir = setting.DataDirectory + Path.DirectorySeparatorChar + setting.SongDir;
+			fileBoxInitialDir = Settings.Instance.DataDirectory + Path.DirectorySeparatorChar + Settings.Instance.SongDir;
 			fileBoxFilterIndex = 0;
-			this.WindowState = setting.EditorWindowState;
-			this.Text += " " + setting.Version;
+			this.WindowState = Settings.Instance.EditorWindowState;
+			this.Text += " " + Settings.Instance.Version;
 
         }
 
@@ -86,7 +84,7 @@ namespace Pbp.Forms
 			openFileDialog.Multiselect = false;
 			openFileDialog.Title = "Lied öffnen";
 
-			openFileDialog.Filter = Song.fileType.getFilter();
+			openFileDialog.Filter = Song.getFileBoxFilter();
 			openFileDialog.FilterIndex = fileBoxFilterIndex;
             if (openFileDialog.ShowDialog(this) == DialogResult.OK)
             {
@@ -206,23 +204,20 @@ namespace Pbp.Forms
 
         private void webToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            System.Diagnostics.Process.Start(setting.Weburl);
+			System.Diagnostics.Process.Start(Settings.Instance.Weburl);
         }
 
         private void optionsToolStripMenuItem_Click(object sender, EventArgs e)
         {
             settingsWindow stWnd = new settingsWindow();
-            if (stWnd.ShowDialog(this) == DialogResult.OK)
-            {
-                setting.Reload();
-            }
+            stWnd.ShowDialog(this);
         }
 
 
         private void EditorWindow_FormClosing(object sender, FormClosingEventArgs e)
         {
-			setting.EditorWindowState = this.WindowState;
-			setting.Save();
+			Settings.Instance.EditorWindowState = this.WindowState;
+			Settings.Instance.Save();
             this.Hide();
             e.Cancel = true;
         }
@@ -318,17 +313,17 @@ namespace Pbp.Forms
 
 		private void datenverzeichnisAnzeigenToolStripMenuItem_Click(object sender, EventArgs e)
 		{
-			System.Diagnostics.Process.Start(setting.DataDirectory);
+			System.Diagnostics.Process.Start(Settings.Instance.DataDirectory);
 		}
 
 		private void toolStripButton2_Click(object sender, EventArgs e)
 		{
-			System.Diagnostics.Process.Start(setting.DataDirectory);
+			System.Diagnostics.Process.Start(Settings.Instance.DataDirectory);
 		}
 
 		private void fehlerMeldenToolStripMenuItem_Click(object sender, EventArgs e)
 		{
-			System.Diagnostics.Process.Start(setting.BugReportUrl);
+			System.Diagnostics.Process.Start(Settings.Instance.BugReportUrl);
 		}
 
 		private void praiseBoxToolStripMenuItem_Click(object sender, EventArgs e)

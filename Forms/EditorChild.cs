@@ -37,7 +37,6 @@ namespace Pbp.Forms
     public partial class EditorChild : Form
     {
         EditableSong sng;
-        Settings setting;
         projectionWindow projWindow;
 		public bool valid;
 		public bool changed = false;
@@ -50,7 +49,6 @@ namespace Pbp.Forms
             projWindow = projectionWindow.getInstance();
 
             this.WindowState = FormWindowState.Maximized;
-            setting = new Settings();
 
 			sng = new EditableSong(fileName);
             if (sng.IsValid)
@@ -178,7 +176,7 @@ namespace Pbp.Forms
                 comboBoxLanguage.Text = sng.Language;
                 comboBoxLanguage.AutoCompleteMode = AutoCompleteMode.Suggest;
                 comboBoxLanguage.AutoCompleteSource = AutoCompleteSource.ListItems;
-                foreach (string str in setting.Languages)
+				foreach (string str in Settings.Instance.Languages)
                 {
                     comboBoxLanguage.Items.Add(str);
                 }
@@ -187,14 +185,14 @@ namespace Pbp.Forms
                 comboBoxSongParts.Text = "";
                 comboBoxSongParts.AutoCompleteMode = AutoCompleteMode.Suggest;
                 comboBoxSongParts.AutoCompleteSource = AutoCompleteSource.ListItems;
-                foreach (string str in setting.SongParts)
+				foreach (string str in Settings.Instance.SongParts)
                 {
                     comboBoxSongParts.Items.Add(str);
                 }
 
                 int i=0;
                 checkedListBoxTags.Items.Clear();
-                foreach (string str in setting.Tags)
+				foreach (string str in Settings.Instance.Tags)
                 {
                     if (sng.Tags.Contains(str))
 						checkedListBoxTags.Items.Add(str, true);
@@ -673,7 +671,7 @@ namespace Pbp.Forms
 			saveFileDialog.InitialDirectory = ((EditorWindow)MdiParent).fileBoxInitialDir;
 			saveFileDialog.CheckPathExists = true;
 			saveFileDialog.FileName = sng.Title;
-			saveFileDialog.Filter = Song.fileType.getFilterSave();
+			saveFileDialog.Filter = Song.getFileBoxFilterSave();
 			saveFileDialog.FilterIndex = ((EditorWindow)MdiParent).fileBoxFilterIndex;
 			saveFileDialog.AddExtension = true;
 			saveFileDialog.Title = "Lied speichern unter...";
@@ -728,7 +726,7 @@ namespace Pbp.Forms
 				ImageDialog imd = new ImageDialog();
 
 				if (sng.Parts[partIdx].Slides[slideIdx].ImageNumber > 0)
-					imd.imagePath = setting.DataDirectory + Path.DirectorySeparatorChar + setting.ImageDir + Path.DirectorySeparatorChar + sng.ImagePaths[sng.Parts[partIdx].Slides[slideIdx].ImageNumber - 1];
+					imd.imagePath = Settings.Instance.DataDirectory + Path.DirectorySeparatorChar + Settings.Instance.ImageDir + Path.DirectorySeparatorChar + sng.ImagePaths[sng.Parts[partIdx].Slides[slideIdx].ImageNumber - 1];
 
 				if (sng.ImagePaths.Count == 0)
 					imd.forAll = true;
@@ -737,7 +735,7 @@ namespace Pbp.Forms
 				{
 					if (imd.imagePath != "")
 					{
-						string imString = imd.imagePath.Substring((setting.DataDirectory + Path.DirectorySeparatorChar + setting.ImageDir + Path.DirectorySeparatorChar).Length);
+						string imString = imd.imagePath.Substring((Settings.Instance.DataDirectory + Path.DirectorySeparatorChar + Settings.Instance.ImageDir + Path.DirectorySeparatorChar).Length);
 
 						if (imd.forAll)
 						{

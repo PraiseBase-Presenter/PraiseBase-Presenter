@@ -41,48 +41,46 @@ namespace Pbp.Forms
 {
     public partial class settingsWindow : Form
     {
-        Settings stn;
-
         public settingsWindow()
         {
-            stn = new Settings();
             InitializeComponent();
         }
 
         public void updateLabels()
         {
-            textBox1.Text = stn.DataDirectory;
+			textBox1.Text = Settings.Instance.DataDirectory;
 
-            checkBoxUseMasterFormat.Checked = stn.ProjectionUseMaster;
-            groupBoxUseMaster.Enabled = stn.ProjectionUseMaster;
+			checkBoxUseMasterFormat.Checked = Settings.Instance.ProjectionUseMaster;
+			groupBoxUseMaster.Enabled = Settings.Instance.ProjectionUseMaster;
 
-            trackBarProjectionShadowSize.Value = stn.ProjectionShadowSize;
-            trackBarProjectionOutlineSize.Value = stn.ProjectionOutlineSize;
+			trackBarProjectionShadowSize.Value = Settings.Instance.ProjectionShadowSize;
+			trackBarProjectionOutlineSize.Value = Settings.Instance.ProjectionOutlineSize;
 
-            label3.Text = stn.ProjectionMasterFont.FontFamily.Name + ", " + stn.ProjectionMasterFont.Size.ToString() + ", " + stn.ProjectionMasterFont.Style.ToString();
-            label3.ForeColor = stn.ProjectionMasterFontColor;
+			label3.Text = Settings.Instance.ProjectionMasterFont.FontFamily.Name + ", " + Settings.Instance.ProjectionMasterFont.Size.ToString() + ", " + Settings.Instance.ProjectionMasterFont.Style.ToString();
+			label3.ForeColor = Settings.Instance.ProjectionMasterFontColor;
 
-            label9.Text = stn.ProjectionMasterFontTranslation.FontFamily.Name + ", " + stn.ProjectionMasterFontTranslation.Size.ToString() + ", " + stn.ProjectionMasterFontTranslation.Style.ToString();
-            label9.ForeColor = stn.ProjectionMasterTranslationColor;
+			label9.Text = Settings.Instance.ProjectionMasterFontTranslation.FontFamily.Name + ", " + Settings.Instance.ProjectionMasterFontTranslation.Size.ToString() + ", " + Settings.Instance.ProjectionMasterFontTranslation.Style.ToString();
+			label9.ForeColor = Settings.Instance.ProjectionMasterTranslationColor;
 
 
-            pictureBoxProjectionBackColor.BackColor = stn.ProjectionBackColor;
-            pictureBoxProjectionOutlineColor.BackColor = stn.ProjectionOutlineColor;
-            pictureBoxProjectionShadowColor.BackColor = stn.ProjectionShadowColor;
+			pictureBoxProjectionBackColor.BackColor = Settings.Instance.ProjectionBackColor;
+			pictureBoxProjectionOutlineColor.BackColor = Settings.Instance.ProjectionOutlineColor;
+			pictureBoxProjectionShadowColor.BackColor = Settings.Instance.ProjectionShadowColor;
 
-            trackBarProjectionPadding.Value = stn.ProjectionPadding;
-            trackBarLineSpacing.Value = stn.ProjectionMasterLineSpacing;
-            labelLineSpacing.Text = stn.ProjectionMasterLineSpacing.ToString();
-            labelProjectionPadding.Text = stn.ProjectionPadding.ToString();
-           
+			trackBarProjectionPadding.Value = Settings.Instance.ProjectionPadding;
+			trackBarLineSpacing.Value = Settings.Instance.ProjectionMasterLineSpacing;
+			labelLineSpacing.Text = Settings.Instance.ProjectionMasterLineSpacing.ToString();
+            labelProjectionPadding.Text = Settings.Instance.ProjectionPadding.ToString();
 
-            checkBoxProjectionFontScaling.Checked = stn.ProjectionFontScaling;
+			checkBoxShowLoadingScreen.Checked = Settings.Instance.ShowLoadingScreen;
+
+			checkBoxProjectionFontScaling.Checked = Settings.Instance.ProjectionFontScaling;
 
             List<string> strList;
             
             listBoxTags.Items.Clear();
             strList = new List<string>();
-            foreach (string str in stn.Tags)
+			foreach (string str in Settings.Instance.Tags)
             {
                 strList.Add(str);
             }
@@ -94,7 +92,7 @@ namespace Pbp.Forms
 
             listBoxLanguages.Items.Clear();
             strList = new List<string>();
-            foreach (string str in stn.Languages)
+			foreach (string str in Settings.Instance.Languages)
             {
                 strList.Add(str);
             }
@@ -106,7 +104,7 @@ namespace Pbp.Forms
 
             listBoxSongParts.Items.Clear();
             strList = new List<string>();
-            foreach (string str in stn.SongParts)
+			foreach (string str in Settings.Instance.SongParts)
             {
                 strList.Add(str);
             }
@@ -126,14 +124,14 @@ namespace Pbp.Forms
 
         private void exitButton_Click(object sender, EventArgs e)
         {
-            stn.Save();
+			Settings.Instance.Save();
             DialogResult = DialogResult.OK;
             this.Close();
         }
 
         private void settingsWindow_Load(object sender, EventArgs e)
         {
-            tabControl1.SelectedIndex = stn.SettingsLastTabIndex;
+			tabControl1.SelectedIndex = Settings.Instance.SettingsLastTabIndex;
             updateLabels();
         }
 
@@ -142,22 +140,22 @@ namespace Pbp.Forms
             FolderBrowserDialog dlg = new FolderBrowserDialog();
             dlg.ShowNewFolderButton = true;
 
-            if (Directory.Exists(stn.DataDirectory))
-                dlg.SelectedPath = stn.DataDirectory;
+			if (Directory.Exists(Settings.Instance.DataDirectory))
+				dlg.SelectedPath = Settings.Instance.DataDirectory;
             
             if (dlg.ShowDialog(this) == DialogResult.OK)
             {
-                 textBox1.Text = stn.DataDirectory = dlg.SelectedPath;
+				textBox1.Text = Settings.Instance.DataDirectory = dlg.SelectedPath;
             }
         }
 
         private void buttonChosseBackgroundColor_Click(object sender, EventArgs e)
         {
             ColorDialog colDlg = new ColorDialog();
-            colDlg.Color = stn.ProjectionBackColor;
+			colDlg.Color = Settings.Instance.ProjectionBackColor;
             if (colDlg.ShowDialog() == DialogResult.OK)
             {
-                stn.ProjectionBackColor = colDlg.Color;
+				Settings.Instance.ProjectionBackColor = colDlg.Color;
                 updateLabels();
             }
         }
@@ -165,10 +163,10 @@ namespace Pbp.Forms
         private void buttonFontSelector_Click(object sender, EventArgs e)
         {
             FontDialog fontDlg = new FontDialog();
-            fontDlg.Font = stn.ProjectionMasterFont;
+			fontDlg.Font = Settings.Instance.ProjectionMasterFont;
             if (fontDlg.ShowDialog() == DialogResult.OK)
             {
-                stn.ProjectionMasterFont = fontDlg.Font;
+				Settings.Instance.ProjectionMasterFont = fontDlg.Font;
                 updateLabels();
             }
         }
@@ -182,7 +180,7 @@ namespace Pbp.Forms
         {
             if (MessageBox.Show("Sollen die Standardwerte wirklich geladen werden?","Reset",MessageBoxButtons.YesNo,MessageBoxIcon.Question) == DialogResult.Yes)
             {
-                stn.Reset();
+				Settings.Instance.Reset();
                 updateLabels();
             }
         }
@@ -190,10 +188,10 @@ namespace Pbp.Forms
         private void buttonChooseProjectionForeColor_Click(object sender, EventArgs e)
         {
             ColorDialog colDlg = new ColorDialog();
-            colDlg.Color = stn.ProjectionMasterFontColor;
+			colDlg.Color = Settings.Instance.ProjectionMasterFontColor;
             if (colDlg.ShowDialog() == DialogResult.OK)
             {
-                stn.ProjectionMasterFontColor = colDlg.Color;
+				Settings.Instance.ProjectionMasterFontColor = colDlg.Color;
                 updateLabels();
             }
         }
@@ -202,7 +200,7 @@ namespace Pbp.Forms
 
         private void checkBoxFontScaling_CheckedChanged(object sender, EventArgs e)
         {
-            stn.ProjectionFontScaling = checkBoxProjectionFontScaling.Checked;
+			Settings.Instance.ProjectionFontScaling = checkBoxProjectionFontScaling.Checked;
         }
 
         private void buttonAddTag_Click(object sender, EventArgs e)
@@ -210,9 +208,9 @@ namespace Pbp.Forms
             string str = textBoxNewTag.Text.Trim();
             if (str != "")
             {
-                if (!stn.Tags.Contains(str))
+				if (!Settings.Instance.Tags.Contains(str))
                 {
-                    stn.Tags.Add(str);
+					Settings.Instance.Tags.Add(str);
                     textBoxNewTag.Text = "";
                     updateLabels();
                 }
@@ -234,7 +232,7 @@ namespace Pbp.Forms
             {
                 if (listBoxTags.GetSelected(i))
                 {
-                    stn.Tags.Remove(listBoxTags.Items[i].ToString());
+					Settings.Instance.Tags.Remove(listBoxTags.Items[i].ToString());
                 }
             }
             updateLabels();
@@ -245,9 +243,9 @@ namespace Pbp.Forms
             string str = textBoxNewLang.Text.Trim();
             if (str != "")
             {
-                if (!stn.Languages.Contains(str))
+				if (!Settings.Instance.Languages.Contains(str))
                 {
-                    stn.Languages.Add(str);
+					Settings.Instance.Languages.Add(str);
                     textBoxNewLang.Text = "";
                     updateLabels();
                 }
@@ -269,7 +267,7 @@ namespace Pbp.Forms
             {
                 if (listBoxLanguages.GetSelected(i))
                 {
-                    stn.Languages.Remove(listBoxLanguages.Items[i].ToString());
+					Settings.Instance.Languages.Remove(listBoxLanguages.Items[i].ToString());
                 }
             }
             updateLabels();
@@ -280,9 +278,9 @@ namespace Pbp.Forms
             string str = textBoxNewSongPart.Text.Trim();
             if (str != "")
             {
-                if (!stn.SongParts.Contains(str))
+				if (!Settings.Instance.SongParts.Contains(str))
                 {
-                    stn.SongParts.Add(str);
+					Settings.Instance.SongParts.Add(str);
                     textBoxNewSongPart.Text = "";
                     updateLabels();
                 }
@@ -305,7 +303,7 @@ namespace Pbp.Forms
             {
                 if (listBoxSongParts.GetSelected(i))
                 {
-                    stn.SongParts.Remove(listBoxSongParts.Items[i].ToString());
+					Settings.Instance.SongParts.Remove(listBoxSongParts.Items[i].ToString());
                 }
             }
             updateLabels();
@@ -315,10 +313,10 @@ namespace Pbp.Forms
         private void buttonTranslationColor_Click(object sender, EventArgs e)
         {
             ColorDialog colDlg = new ColorDialog();
-            colDlg.Color = stn.ProjectionMasterTranslationColor;
+			colDlg.Color = Settings.Instance.ProjectionMasterTranslationColor;
             if (colDlg.ShowDialog() == DialogResult.OK)
             {
-                stn.ProjectionMasterTranslationColor = colDlg.Color;
+				Settings.Instance.ProjectionMasterTranslationColor = colDlg.Color;
                 updateLabels();
             }
         }
@@ -326,10 +324,10 @@ namespace Pbp.Forms
         private void buttonTranslationFont_Click(object sender, EventArgs e)
         {
             FontDialog fontDlg = new FontDialog();
-            fontDlg.Font = stn.ProjectionMasterFontTranslation;
+			fontDlg.Font = Settings.Instance.ProjectionMasterFontTranslation;
             if (fontDlg.ShowDialog() == DialogResult.OK)
             {
-                stn.ProjectionMasterFontTranslation = fontDlg.Font;
+				Settings.Instance.ProjectionMasterFontTranslation = fontDlg.Font;
                 updateLabels();
             }
             
@@ -342,28 +340,28 @@ namespace Pbp.Forms
 
         private void trackBarLineSpacing_Scroll(object sender, EventArgs e)
         {
-            stn.ProjectionMasterLineSpacing = trackBarLineSpacing.Value;
+			Settings.Instance.ProjectionMasterLineSpacing = trackBarLineSpacing.Value;
             updateLabels();
         }
 
         private void trackBarPadding_Scroll(object sender, EventArgs e)
         {
-            stn.ProjectionPadding = trackBarProjectionPadding.Value;
+			Settings.Instance.ProjectionPadding = trackBarProjectionPadding.Value;
             updateLabels();
         }
 
         private void tabControl1_SelectedIndexChanged(object sender, EventArgs e)
         {
-            stn.SettingsLastTabIndex = tabControl1.SelectedIndex;
+			Settings.Instance.SettingsLastTabIndex = tabControl1.SelectedIndex;
         }
 
         private void buttonProjectionShadowColor_Click(object sender, EventArgs e)
         {
             ColorDialog colDlg = new ColorDialog();
-            colDlg.Color = stn.ProjectionShadowColor;
+			colDlg.Color = Settings.Instance.ProjectionShadowColor;
             if (colDlg.ShowDialog() == DialogResult.OK)
             {
-                stn.ProjectionShadowColor = colDlg.Color;
+				Settings.Instance.ProjectionShadowColor = colDlg.Color;
                 updateLabels();
             }
         }
@@ -371,22 +369,22 @@ namespace Pbp.Forms
         private void buttonProjectionOutlineColor_Click(object sender, EventArgs e)
         {
             ColorDialog colDlg = new ColorDialog();
-            colDlg.Color = stn.ProjectionOutlineColor;
+			colDlg.Color = Settings.Instance.ProjectionOutlineColor;
             if (colDlg.ShowDialog() == DialogResult.OK)
             {
-                stn.ProjectionOutlineColor = colDlg.Color;
+				Settings.Instance.ProjectionOutlineColor = colDlg.Color;
                 updateLabels();
             }
         }
 
         private void trackBarProjectionShadowSize_Scroll(object sender, EventArgs e)
         {
-            stn.ProjectionShadowSize = trackBarProjectionShadowSize.Value;
+			Settings.Instance.ProjectionShadowSize = trackBarProjectionShadowSize.Value;
         }
 
         private void trackBarProjectionOutlineSize_Scroll(object sender, EventArgs e)
         {
-            stn.ProjectionOutlineSize = trackBarProjectionOutlineSize.Value;
+			Settings.Instance.ProjectionOutlineSize = trackBarProjectionOutlineSize.Value;
         }
 
         private void checkBoxUseMasterFormat_CheckedChanged(object sender, EventArgs e)
@@ -395,8 +393,13 @@ namespace Pbp.Forms
                 groupBoxUseMaster.Enabled = true;
             else
                 groupBoxUseMaster.Enabled = false;
-            stn.ProjectionUseMaster = checkBoxUseMasterFormat.Checked;
+			Settings.Instance.ProjectionUseMaster = checkBoxUseMasterFormat.Checked;
         }
+
+		private void checkBoxShowLoadingScreen_CheckedChanged(object sender, EventArgs e)
+		{
+			Settings.Instance.ShowLoadingScreen = checkBoxShowLoadingScreen.Checked;
+		}
 
 
     }

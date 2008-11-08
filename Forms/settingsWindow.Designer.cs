@@ -39,6 +39,8 @@
 			this.checkBoxProjectionFontScaling = new System.Windows.Forms.CheckBox();
 			this.tabControl1 = new System.Windows.Forms.TabControl();
 			this.tabPage1 = new System.Windows.Forms.TabPage();
+			this.checkBoxShowLoadingScreen = new System.Windows.Forms.CheckBox();
+			this.textBox2 = new System.Windows.Forms.TextBox();
 			this.tabPage3 = new System.Windows.Forms.TabPage();
 			this.label6 = new System.Windows.Forms.Label();
 			this.buttonAddSongPart = new System.Windows.Forms.Button();
@@ -67,8 +69,6 @@
 			this.labelProjectionPadding = new System.Windows.Forms.Label();
 			this.trackBarProjectionPadding = new System.Windows.Forms.TrackBar();
 			this.label11 = new System.Windows.Forms.Label();
-			this.tabPage4 = new System.Windows.Forms.TabPage();
-			this.label7 = new System.Windows.Forms.Label();
 			this.tabPage5 = new System.Windows.Forms.TabPage();
 			this.groupBoxUseMaster = new System.Windows.Forms.GroupBox();
 			this.label2 = new System.Windows.Forms.Label();
@@ -83,7 +83,8 @@
 			this.label3 = new System.Windows.Forms.Label();
 			this.label8 = new System.Windows.Forms.Label();
 			this.checkBoxUseMasterFormat = new System.Windows.Forms.CheckBox();
-			this.textBox2 = new System.Windows.Forms.TextBox();
+			this.groupBox1 = new System.Windows.Forms.GroupBox();
+			this.groupBox2 = new System.Windows.Forms.GroupBox();
 			this.tabControl1.SuspendLayout();
 			this.tabPage1.SuspendLayout();
 			this.tabPage3.SuspendLayout();
@@ -94,10 +95,11 @@
 			((System.ComponentModel.ISupportInitialize)(this.trackBarProjectionOutlineSize)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.trackBarProjectionShadowSize)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.trackBarProjectionPadding)).BeginInit();
-			this.tabPage4.SuspendLayout();
 			this.tabPage5.SuspendLayout();
 			this.groupBoxUseMaster.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.trackBarLineSpacing)).BeginInit();
+			this.groupBox1.SuspendLayout();
+			this.groupBox2.SuspendLayout();
 			this.SuspendLayout();
 			// 
 			// exitButton
@@ -124,16 +126,16 @@
 			// label1
 			// 
 			this.label1.AutoSize = true;
-			this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.label1.Location = new System.Drawing.Point(11, 16);
+			this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.label1.Location = new System.Drawing.Point(20, 25);
 			this.label1.Name = "label1";
-			this.label1.Size = new System.Drawing.Size(180, 13);
+			this.label1.Size = new System.Drawing.Size(149, 13);
 			this.label1.TabIndex = 2;
 			this.label1.Text = "Benutzerdaten (Bilder, Lieder):";
 			// 
 			// button1
 			// 
-			this.button1.Location = new System.Drawing.Point(436, 11);
+			this.button1.Location = new System.Drawing.Point(445, 20);
 			this.button1.Name = "button1";
 			this.button1.Size = new System.Drawing.Size(116, 23);
 			this.button1.TabIndex = 4;
@@ -143,7 +145,7 @@
 			// 
 			// textBox1
 			// 
-			this.textBox1.Location = new System.Drawing.Point(197, 13);
+			this.textBox1.Location = new System.Drawing.Point(206, 22);
 			this.textBox1.Name = "textBox1";
 			this.textBox1.ReadOnly = true;
 			this.textBox1.Size = new System.Drawing.Size(233, 20);
@@ -197,7 +199,6 @@
 			this.tabControl1.Controls.Add(this.tabPage1);
 			this.tabControl1.Controls.Add(this.tabPage3);
 			this.tabControl1.Controls.Add(this.tabPage2);
-			this.tabControl1.Controls.Add(this.tabPage4);
 			this.tabControl1.Controls.Add(this.tabPage5);
 			this.tabControl1.Location = new System.Drawing.Point(8, 12);
 			this.tabControl1.Name = "tabControl1";
@@ -208,10 +209,8 @@
 			// 
 			// tabPage1
 			// 
-			this.tabPage1.Controls.Add(this.textBox2);
-			this.tabPage1.Controls.Add(this.label1);
-			this.tabPage1.Controls.Add(this.button1);
-			this.tabPage1.Controls.Add(this.textBox1);
+			this.tabPage1.Controls.Add(this.groupBox2);
+			this.tabPage1.Controls.Add(this.groupBox1);
 			this.tabPage1.Location = new System.Drawing.Point(4, 22);
 			this.tabPage1.Name = "tabPage1";
 			this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
@@ -219,6 +218,33 @@
 			this.tabPage1.TabIndex = 0;
 			this.tabPage1.Text = "Allgemeines";
 			this.tabPage1.UseVisualStyleBackColor = true;
+			// 
+			// checkBoxShowLoadingScreen
+			// 
+			this.checkBoxShowLoadingScreen.AutoSize = true;
+			this.checkBoxShowLoadingScreen.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.checkBoxShowLoadingScreen.Location = new System.Drawing.Point(23, 28);
+			this.checkBoxShowLoadingScreen.Name = "checkBoxShowLoadingScreen";
+			this.checkBoxShowLoadingScreen.Size = new System.Drawing.Size(142, 17);
+			this.checkBoxShowLoadingScreen.TabIndex = 8;
+			this.checkBoxShowLoadingScreen.Text = "Ladebildschirm anzeigen";
+			this.checkBoxShowLoadingScreen.UseVisualStyleBackColor = true;
+			this.checkBoxShowLoadingScreen.CheckedChanged += new System.EventHandler(this.checkBoxShowLoadingScreen_CheckedChanged);
+			// 
+			// textBox2
+			// 
+			this.textBox2.BackColor = System.Drawing.SystemColors.Info;
+			this.textBox2.BorderStyle = System.Windows.Forms.BorderStyle.None;
+			this.textBox2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.textBox2.Location = new System.Drawing.Point(42, 58);
+			this.textBox2.Multiline = true;
+			this.textBox2.Name = "textBox2";
+			this.textBox2.ReadOnly = true;
+			this.textBox2.Size = new System.Drawing.Size(497, 35);
+			this.textBox2.TabIndex = 7;
+			this.textBox2.Text = "Falls du den Datenordner neu setzt, musst du anschliessend die Liederliste und di" +
+				"e Bilderliste neu laden (über das Optionen-Menü) oder das Programm neu starten.";
+			this.textBox2.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
 			// 
 			// tabPage3
 			// 
@@ -515,26 +541,6 @@
 			this.label11.Text = "Randabstand:";
 			this.label11.Click += new System.EventHandler(this.label11_Click);
 			// 
-			// tabPage4
-			// 
-			this.tabPage4.Controls.Add(this.label7);
-			this.tabPage4.Location = new System.Drawing.Point(4, 22);
-			this.tabPage4.Name = "tabPage4";
-			this.tabPage4.Padding = new System.Windows.Forms.Padding(3);
-			this.tabPage4.Size = new System.Drawing.Size(604, 276);
-			this.tabPage4.TabIndex = 3;
-			this.tabPage4.Text = "Editor";
-			this.tabPage4.UseVisualStyleBackColor = true;
-			// 
-			// label7
-			// 
-			this.label7.AutoSize = true;
-			this.label7.Location = new System.Drawing.Point(20, 21);
-			this.label7.Name = "label7";
-			this.label7.Size = new System.Drawing.Size(316, 13);
-			this.label7.TabIndex = 0;
-			this.label7.Text = "Momentan sind noch keine Einstellungsmöglichkeiten vorhanden!";
-			// 
 			// tabPage5
 			// 
 			this.tabPage5.Controls.Add(this.groupBoxUseMaster);
@@ -678,7 +684,7 @@
 			// checkBoxUseMasterFormat
 			// 
 			this.checkBoxUseMasterFormat.AutoSize = true;
-			this.checkBoxUseMasterFormat.Location = new System.Drawing.Point(18, 19);
+			this.checkBoxUseMasterFormat.Location = new System.Drawing.Point(18, 16);
 			this.checkBoxUseMasterFormat.Name = "checkBoxUseMasterFormat";
 			this.checkBoxUseMasterFormat.Size = new System.Drawing.Size(172, 17);
 			this.checkBoxUseMasterFormat.TabIndex = 55;
@@ -686,20 +692,30 @@
 			this.checkBoxUseMasterFormat.UseVisualStyleBackColor = true;
 			this.checkBoxUseMasterFormat.CheckedChanged += new System.EventHandler(this.checkBoxUseMasterFormat_CheckedChanged);
 			// 
-			// textBox2
+			// groupBox1
 			// 
-			this.textBox2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
-			this.textBox2.BorderStyle = System.Windows.Forms.BorderStyle.None;
-			this.textBox2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.textBox2.Location = new System.Drawing.Point(41, 52);
-			this.textBox2.Multiline = true;
-			this.textBox2.Name = "textBox2";
-			this.textBox2.ReadOnly = true;
-			this.textBox2.Size = new System.Drawing.Size(497, 43);
-			this.textBox2.TabIndex = 7;
-			this.textBox2.Text = "Falls du den Datenordner neu setzt, musst du anschliessend die Liederliste und di" +
-				"e Bilderliste neu laden (über das Optionen-Menü) oder das Programm neu starten.";
-			this.textBox2.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+			this.groupBox1.Controls.Add(this.textBox2);
+			this.groupBox1.Controls.Add(this.textBox1);
+			this.groupBox1.Controls.Add(this.button1);
+			this.groupBox1.Controls.Add(this.label1);
+			this.groupBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.groupBox1.Location = new System.Drawing.Point(6, 6);
+			this.groupBox1.Name = "groupBox1";
+			this.groupBox1.Size = new System.Drawing.Size(592, 109);
+			this.groupBox1.TabIndex = 9;
+			this.groupBox1.TabStop = false;
+			this.groupBox1.Text = "Datenverzeichnis";
+			// 
+			// groupBox2
+			// 
+			this.groupBox2.Controls.Add(this.checkBoxShowLoadingScreen);
+			this.groupBox2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.groupBox2.Location = new System.Drawing.Point(6, 121);
+			this.groupBox2.Name = "groupBox2";
+			this.groupBox2.Size = new System.Drawing.Size(592, 68);
+			this.groupBox2.TabIndex = 10;
+			this.groupBox2.TabStop = false;
+			this.groupBox2.Text = "Diverses";
 			// 
 			// settingsWindow
 			// 
@@ -721,7 +737,6 @@
 			this.Load += new System.EventHandler(this.settingsWindow_Load);
 			this.tabControl1.ResumeLayout(false);
 			this.tabPage1.ResumeLayout(false);
-			this.tabPage1.PerformLayout();
 			this.tabPage3.ResumeLayout(false);
 			this.tabPage3.PerformLayout();
 			this.tabPage2.ResumeLayout(false);
@@ -732,13 +747,15 @@
 			((System.ComponentModel.ISupportInitialize)(this.trackBarProjectionOutlineSize)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.trackBarProjectionShadowSize)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.trackBarProjectionPadding)).EndInit();
-			this.tabPage4.ResumeLayout(false);
-			this.tabPage4.PerformLayout();
 			this.tabPage5.ResumeLayout(false);
 			this.tabPage5.PerformLayout();
 			this.groupBoxUseMaster.ResumeLayout(false);
 			this.groupBoxUseMaster.PerformLayout();
 			((System.ComponentModel.ISupportInitialize)(this.trackBarLineSpacing)).EndInit();
+			this.groupBox1.ResumeLayout(false);
+			this.groupBox1.PerformLayout();
+			this.groupBox2.ResumeLayout(false);
+			this.groupBox2.PerformLayout();
 			this.ResumeLayout(false);
 
         }
@@ -772,9 +789,7 @@
         private System.Windows.Forms.Button buttonAddSongPart;
         private System.Windows.Forms.TextBox textBoxNewSongPart;
         private System.Windows.Forms.Button buttonDelSongParts;
-        private System.Windows.Forms.ListBox listBoxSongParts;
-        private System.Windows.Forms.TabPage tabPage4;
-        private System.Windows.Forms.Label label7;
+		private System.Windows.Forms.ListBox listBoxSongParts;
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.TrackBar trackBarProjectionPadding;
         private System.Windows.Forms.TabPage tabPage5;
@@ -801,5 +816,8 @@
         private System.Windows.Forms.CheckBox checkBoxUseMasterFormat;
 		private System.Windows.Forms.GroupBox groupBoxUseMaster;
 		private System.Windows.Forms.TextBox textBox2;
+		private System.Windows.Forms.CheckBox checkBoxShowLoadingScreen;
+		private System.Windows.Forms.GroupBox groupBox2;
+		private System.Windows.Forms.GroupBox groupBox1;
     }
 }

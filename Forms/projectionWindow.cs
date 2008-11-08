@@ -48,14 +48,12 @@ namespace Pbp.Forms
         private int h;
         private int w;
         private Screen projScreen;
-        private Settings setting;
         private Image currentImage;
 
         static private projectionWindow _instance;
 
         private projectionWindow()
         {
-            setting = new Settings();
             InitializeComponent();
 
             h = 1;
@@ -122,15 +120,13 @@ namespace Pbp.Forms
 
         public Image showSlide(Song.Slide slide, Image background, bool simluate)
         {
-            setting.Reload();
-
             Application.DoEvents();
 
             Bitmap bmp = new Bitmap(w, h);
             Graphics gr = Graphics.FromImage(bmp);
 
             // Background color
-            gr.FillRectangle(new SolidBrush(setting.ProjectionBackColor), 0, 0, w, h);
+			gr.FillRectangle(new SolidBrush(Settings.Instance.ProjectionBackColor), 0, 0, w, h);
             
             // Background image
             if (background != null)
@@ -154,13 +150,13 @@ namespace Pbp.Forms
                 Brush fontBrush;
                 Brush fontTranslationBrush;
 
-                if (setting.ProjectionUseMaster && !simluate)
+				if (Settings.Instance.ProjectionUseMaster && !simluate)
                 {
-                    font = setting.ProjectionMasterFont;
-                    fontTr = setting.ProjectionMasterFontTranslation;
-                    lineSpacing = setting.ProjectionMasterLineSpacing;
-                    fontBrush = new SolidBrush(setting.ProjectionMasterFontColor);
-                    fontTranslationBrush = new SolidBrush(setting.ProjectionMasterTranslationColor);
+					font = Settings.Instance.ProjectionMasterFont;
+					fontTr = Settings.Instance.ProjectionMasterFontTranslation;
+					lineSpacing = Settings.Instance.ProjectionMasterLineSpacing;
+					fontBrush = new SolidBrush(Settings.Instance.ProjectionMasterFontColor);
+					fontTranslationBrush = new SolidBrush(Settings.Instance.ProjectionMasterTranslationColor);
                 }
                 else
                 {
@@ -172,9 +168,9 @@ namespace Pbp.Forms
                 }
 
 
-                int padding = setting.ProjectionPadding;
-                int shadowThickness = setting.ProjectionShadowSize;
-                int outLineThickness = setting.ProjectionOutlineSize;
+				int padding = Settings.Instance.ProjectionPadding;
+				int shadowThickness = Settings.Instance.ProjectionShadowSize;
+				int outLineThickness = Settings.Instance.ProjectionOutlineSize;
                 String str = String.Empty;
 
                 int usableWidth = w - (2 * padding);
@@ -199,7 +195,7 @@ namespace Pbp.Forms
 				int usedHeight = (int)strMeasure.Height + (lineSpacing * (slide.Lines.Count - 1)) + endSpacing;
 
                 float scalingFactor = 1.0f;
-                if (setting.ProjectionFontScaling  && (usedWidth > usableWidth || usedHeight > usableHeight))
+				if (Settings.Instance.ProjectionFontScaling && (usedWidth > usableWidth || usedHeight > usableHeight))
                 {
                     scalingFactor = Math.Min((float)usableWidth / (float)usedWidth, (float)usableHeight / (float)usedHeight);
                     font = new Font(font.FontFamily, font.Size * scalingFactor, font.Style);
@@ -243,7 +239,7 @@ namespace Pbp.Forms
 
                 if (!simluate && shadowThickness > 0)
                 {
-                    shadodBrush = new SolidBrush(Color.FromArgb(15, setting.ProjectionShadowColor));
+					shadodBrush = new SolidBrush(Color.FromArgb(15, Settings.Instance.ProjectionShadowColor));
                     gr.SmoothingMode = SmoothingMode.HighQuality;
                     gr.InterpolationMode = InterpolationMode.HighQualityBilinear;
                     gr.TextRenderingHint = TextRenderingHint.AntiAliasGridFit;
@@ -267,7 +263,7 @@ namespace Pbp.Forms
                     gr.InterpolationMode = InterpolationMode.Low;
                     gr.TextRenderingHint = TextRenderingHint.ClearTypeGridFit;
 
-                    Brush br = new SolidBrush(setting.ProjectionOutlineColor);
+					Brush br = new SolidBrush(Settings.Instance.ProjectionOutlineColor);
 
                     foreach (string s in slide.Lines)
                     {
@@ -298,7 +294,7 @@ namespace Pbp.Forms
 
 					if (!simluate && shadowThickness > 0)
 					{
-						shadodBrush = new SolidBrush(Color.FromArgb(15, setting.ProjectionShadowColor));
+						shadodBrush = new SolidBrush(Color.FromArgb(15, Settings.Instance.ProjectionShadowColor));
 						gr.SmoothingMode = SmoothingMode.HighQuality;
 						gr.InterpolationMode = InterpolationMode.HighQualityBilinear;
 						gr.TextRenderingHint = TextRenderingHint.AntiAliasGridFit;
@@ -322,7 +318,7 @@ namespace Pbp.Forms
 						gr.InterpolationMode = InterpolationMode.Low;
 						gr.TextRenderingHint = TextRenderingHint.ClearTypeGridFit;
 
-						Brush br = new SolidBrush(setting.ProjectionOutlineColor);
+						Brush br = new SolidBrush(Settings.Instance.ProjectionOutlineColor);
 
 						foreach (string s in slide.Translation)
 						{
@@ -370,7 +366,7 @@ namespace Pbp.Forms
             Application.DoEvents();
             Bitmap bmp = new Bitmap(w, h);
             Graphics gr = Graphics.FromImage(bmp);
-            gr.FillRectangle(new SolidBrush(setting.ProjectionBackColor), 0, 0, w, h);
+			gr.FillRectangle(new SolidBrush(Settings.Instance.ProjectionBackColor), 0, 0, w, h);
 			UserControl1.getInstance().setProjectionImage(bmp);
 			currentImage = bmp;
 			return bmp;

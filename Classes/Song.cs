@@ -58,7 +58,7 @@ namespace Pbp
 		/// <summary>
 		/// The file type of this song
 		/// </summary>
-		private fileType _originFileType;
+		private FileFormat _fileType;
         /// <summary>
         /// Thumbnails of all images
         /// </summary>
@@ -157,6 +157,7 @@ namespace Pbp
         /// List of the paths to all images
         /// </summary>
 		public List<string> ImagePaths { get; set; }
+		public List<string> Images { get; set; }
 		/// <summary>
 		/// Default horizontal text aligning
 		/// </summary>
@@ -166,7 +167,6 @@ namespace Pbp
 		/// </summary>
 		public SongTextVerticalAlign DefaultVertAlign { get; set; }
 		#endregion
-
 
 		/// <summary>
         /// The song constructor
@@ -183,194 +183,40 @@ namespace Pbp
         public Song(string filePath)
         {
             IsValid = false;
-            FilePath = filePath;
-
-            bool err = false;
-
-			Settings setting = new Settings();
+			bool err = false;
+			
+			FilePath = filePath;
 			Tags = new TagList();
 			DefaultHorizAlign = SongTextHorizontalAlign.Center;
 			DefaultVertAlign = SongTextVerticalAlign.Center;
 			Slides = new SlideList();
 			Parts = new PartList();
 			ImagePaths = new List<string>();
+			Images = new List<string>();
 
-			// Default font settings if values in xml invalid
-			TextFont = setting.ProjectionMasterFont;
-			TextColor = setting.ProjectionMasterFontColor;
-			TranslationFont = setting.ProjectionMasterFontTranslation;
-			TranslationColor = setting.ProjectionMasterTranslationColor;
-			TextLineSpacing = setting.ProjectionMasterLineSpacing;
-
-			#region File loader
 			if (filePath != null)
 			{
 				try
 				{
+					// Init xml
 					XmlDocument xmlDoc;
 					XmlElement xmlRoot;
-
-					// Init xml
 					xmlDoc = new XmlDocument();
 					xmlDoc.Load(filePath);
 					xmlRoot = xmlDoc.DocumentElement;
 
-					// Detect format
-					_originFileType = fileType.createFactory(xmlRoot.Name, xmlRoot.GetAttribute("version"));
+					// Detect type
+					_fileType = detectFileType(xmlRoot);
 
-					
 					// PraiseBase Presenter Song Format
-					if (_originFileType.GetType() == typeof(fileTypePBPS))
+					if (_fileType == FileFormat.pbps)
 					{
-						
+						throw new NotImplementedException();
 					}
 					// PowerPraise Song Format
-					else if (_originFileType.GetType() == typeof(fileTypePPL))
+					else if (_fileType == FileFormat.ppl)
 					{
-						//
-						// General stuff
-						//
-						Title = xmlRoot["general"]["title"].InnerText;
-
-						if (xmlRoot["general"]["language"] != null)
-							Language = xmlRoot["general"]["language"].InnerText;
-						else
-							Language = "Deutsch";
-
-						if (xmlRoot["general"]["category"] != null)
-						{
-							Tags.Add(xmlRoot["general"]["category"].InnerText);
-						}
-
-						if (xmlRoot["general"]["comment"] != null)
-							Comment = xmlRoot["general"]["comment"].InnerText;
-						else
-							Comment = "";
-
-						if (xmlRoot["general"]["qa"] != null)
-							Int32.TryParse(xmlRoot["general"]["qa"].InnerText, out _QA);
-						else
-							_QA = 0;
-
-						if (xmlRoot["formatting"]["textorientation"] != null)
-						{
-							if (xmlRoot["formatting"]["textorientation"]["horizontal"] != null)
-							{
-								switch (xmlRoot["formatting"]["textorientation"]["horizontal"].InnerText)
-								{
-									case "left":
-										DefaultHorizAlign = SongTextHorizontalAlign.Left;
-										break;
-									case "center":
-										DefaultHorizAlign = SongTextHorizontalAlign.Center;
-										break;
-									case "right":
-										DefaultHorizAlign = SongTextHorizontalAlign.Right;
-										break;
-								}
-							}
-							if (xmlRoot["formatting"]["textorientation"]["vertical"] != null)
-							{
-								switch (xmlRoot["formatting"]["textorientation"]["vertical"].InnerText)
-								{
-									case "top":
-										DefaultVertAlign = SongTextVerticalAlign.Top;
-										break;
-									case "center":
-										DefaultVertAlign = SongTextVerticalAlign.Center;
-										break;
-									case "bottom":
-										DefaultVertAlign = SongTextVerticalAlign.Bottom;
-										break;
-								}
-							}
-						}
-
-						if (xmlRoot["formatting"]["font"]["maintext"] != null)
-						{
-							int trySize;
-							XmlElement tmpElem = xmlRoot["formatting"]["font"];
-
-							int.TryParse(tmpElem["maintext"]["size"].InnerText, out trySize);
-							TextFont = new Font(
-								tmpElem["maintext"]["name"].InnerText, 
-								trySize>0 ? trySize : setting.ProjectionMasterFont.Size,
-								(FontStyle)((int)(tmpElem["maintext"]["bold"].InnerText == "true" ? FontStyle.Bold : FontStyle.Regular) + (int)(tmpElem["maintext"]["italic"].InnerText == "true" ? FontStyle.Italic : FontStyle.Regular)));
-
-							int.TryParse(tmpElem["translationtext"]["size"].InnerText, out trySize);
-							TranslationFont = new Font(
-								tmpElem["translationtext"]["name"].InnerText,
-								trySize > 0 ? trySize : setting.ProjectionMasterFont.Size,
-								(FontStyle)((int)(tmpElem["translationtext"]["bold"].InnerText == "true" ? FontStyle.Bold : FontStyle.Regular) + (int)(tmpElem["translationtext"]["italic"].InnerText == "true" ? FontStyle.Italic : FontStyle.Regular)));
-
-							int.TryParse(tmpElem["maintext"]["color"].InnerText, out trySize);
-							TextColor = Color.FromArgb(255,Color.FromArgb(trySize));
-							
-							int.TryParse(tmpElem["translationtext"]["color"].InnerText, out trySize);
-							TranslationColor = Color.FromArgb(255,Color.FromArgb(trySize));
-
-
-						}
-						if (xmlRoot["formatting"]["linespacing"]["main"] != null)
-						{
-							int trySize;
-							int.TryParse(xmlRoot["formatting"]["linespacing"]["main"].InnerText, out trySize);
-							TextLineSpacing = trySize > 0 ? trySize: setting.ProjectionMasterLineSpacing;
-						}
-
-						//
-						// ... and the images
-						//
-						string imPath = setting.DataDirectory + Path.DirectorySeparatorChar + setting.ImageDir + Path.DirectorySeparatorChar;
-						foreach (XmlElement elem in xmlRoot["formatting"]["background"])
-						{
-							if (elem.Name == "file")
-							{
-								if (File.Exists(imPath + elem.InnerText))
-									ImagePaths.Add(elem.InnerText);
-							}
-						}
-
-						//
-						// Now the song text ... 
-						//
-						SearchText = xmlRoot["songtext"].InnerText;
-						foreach (XmlElement elem in xmlRoot["songtext"])
-						{
-							if (elem.Name == "part")
-							{
-								string caption = elem.GetAttribute("caption");
-								Part tmpPart = new Part(caption);
-								foreach (XmlElement slideElem in elem)
-								{
-									if (slideElem.Name == "slide")
-									{
-										Slide tmpSlide = new Slide(this);
-										tmpSlide.Lines = new List<string>();
-										tmpSlide.HorizontalAlign = DefaultHorizAlign;
-										tmpSlide.VerticalAlign = DefaultVertAlign;
-										int bgNr = System.Convert.ToInt32(slideElem.GetAttribute("backgroundnr")) + 1;
-										bgNr = bgNr<0 ? 0 : bgNr;
-										bgNr = bgNr>ImagePaths.Count ? ImagePaths.Count : bgNr;
-										tmpSlide.ImageNumber = bgNr;
-										foreach (XmlElement lineElem in slideElem)
-										{
-											if (lineElem.Name == "line")
-											{
-												tmpSlide.Lines.Add(lineElem.InnerText);
-											}
-											if (lineElem.Name == "translation")
-											{
-												tmpSlide.Translation.Add(lineElem.InnerText);
-											}
-										}
-										Slides.Add(tmpSlide);
-										tmpPart.Slides.Add(tmpSlide);
-									}
-								}
-								Parts.Add(tmpPart);
-							}
-						}
+						loadPowerPraiseFile(xmlRoot);
 					}
 					else
 					{
@@ -384,9 +230,9 @@ namespace Pbp
 					Console.WriteLine("ERROR loading song " + filePath + " : " + e.Message);
 				}
 			}
-			#endregion
 			else
 			{
+
 				Title = "Neues Lied";
 				Language = "Deutsch";
 				Comment = String.Empty;
@@ -394,7 +240,14 @@ namespace Pbp
 				Part tmpPart = new Part();
 				tmpPart.Slides.Add(new Slide(this));
 				Parts.Add(tmpPart);
-				_originFileType = new fileTypePBPS();
+				_fileType = FileFormat.ppl;
+
+				// Default font settings if values in xml invalid
+				TextFont = Settings.Instance.ProjectionMasterFont;
+				TextColor = Settings.Instance.ProjectionMasterFontColor;
+				TranslationFont = Settings.Instance.ProjectionMasterFontTranslation;
+				TranslationColor = Settings.Instance.ProjectionMasterTranslationColor;
+				TextLineSpacing = Settings.Instance.ProjectionMasterLineSpacing;
 			}
 
 			if (!err)
@@ -403,38 +256,218 @@ namespace Pbp
             }
         }
 
-        private void loadImageThumbs()
-        {
-			Settings setting = new Settings();
-			
-			_imageThumbs = new ImageList();
-			_imageThumbs.ImageSize = setting.ThumbSize;
-			_imageThumbs.ColorDepth = ColorDepth.Depth32Bit;
 
-			Image img = new Bitmap(setting.ThumbSize.Width,setting.ThumbSize.Height);
-			Graphics graph = Graphics.FromImage(img);
-			graph.FillRectangle(new SolidBrush(setting.ProjectionBackColor), 0, 0, img.Width, img.Height);
-			_imageThumbs.Images.Add(img);
-			graph.Dispose();
 
-			foreach (String path in ImagePaths)
-            {
-				string imPath = setting.DataDirectory + Path.DirectorySeparatorChar + setting.ThumbDir + Path.DirectorySeparatorChar + path;
+		private FileFormat detectFileType(XmlElement xmlRoot)
+		{
+			if (xmlRoot.Name == "ppl" && xmlRoot.GetAttribute("version") == "3.0")
+			{
+				return FileFormat.ppl;
+			}
+			else if (xmlRoot.Name == "pbps" && xmlRoot.GetAttribute("version") == "1.0")
+			{
+				return FileFormat.pbps;
+			}
+			return FileFormat.invalid;
+		}
 
-				if (File.Exists(imPath))
-                {
-                    _imageThumbs.Images.Add(Image.FromFile(imPath));
-                }
-            }			
-        }
+		private FileFormat detectFileType(string ext)
+		{
+			if (ext == "ppl")
+				return FileFormat.ppl;
+			if (ext == "pbps")
+				return FileFormat.pbps;
+			return FileFormat.invalid;
+		}
+
+		public static string getFileBoxFilter()
+		{
+			String fltr = String.Empty;
+			//fltr += "PraiseBase-Presenter Song (*.pbps)|*.pbps|";
+			fltr += "PowerPraise Lied Lied (*.ppl)|*.ppl|";
+			fltr += "Alle Dateien (*.*)|*.*";
+			return fltr;
+		}
+
+		public static string getFileBoxFilterSave()
+		{
+			String fltr = String.Empty;
+			//fltr += "PraiseBase-Presenter Song (*.pbps)|*.pbps|";
+			fltr += "PowerPraise Lied Lied (*.ppl)|*.ppl";
+			return fltr;
+		}
+
+		/// <summary>
+		/// Loads the song contents from a Powerpraise file
+		/// </summary>
+		/// <param name="xmlRoot">Pointer to the XML-Root Element</param>
+		private void loadPowerPraiseFile(XmlNode xmlRoot)
+		{
+			//
+			// General stuff
+			//
+			Title = xmlRoot["general"]["title"].InnerText;
+
+			if (xmlRoot["general"]["language"] != null)
+				Language = xmlRoot["general"]["language"].InnerText;
+			else
+				Language = "Deutsch";
+
+			if (xmlRoot["general"]["category"] != null)
+			{
+				Tags.Add(xmlRoot["general"]["category"].InnerText);
+			}
+
+			if (xmlRoot["general"]["comment"] != null)
+				Comment = xmlRoot["general"]["comment"].InnerText;
+			else
+				Comment = "";
+
+			if (xmlRoot["general"]["qa"] != null)
+				Int32.TryParse(xmlRoot["general"]["qa"].InnerText, out _QA);
+			else
+				_QA = 0;
+
+			if (xmlRoot["formatting"]["textorientation"] != null)
+			{
+				if (xmlRoot["formatting"]["textorientation"]["horizontal"] != null)
+				{
+					switch (xmlRoot["formatting"]["textorientation"]["horizontal"].InnerText)
+					{
+						case "left":
+							DefaultHorizAlign = SongTextHorizontalAlign.Left;
+							break;
+						case "center":
+							DefaultHorizAlign = SongTextHorizontalAlign.Center;
+							break;
+						case "right":
+							DefaultHorizAlign = SongTextHorizontalAlign.Right;
+							break;
+					}
+				}
+				if (xmlRoot["formatting"]["textorientation"]["vertical"] != null)
+				{
+					switch (xmlRoot["formatting"]["textorientation"]["vertical"].InnerText)
+					{
+						case "top":
+							DefaultVertAlign = SongTextVerticalAlign.Top;
+							break;
+						case "center":
+							DefaultVertAlign = SongTextVerticalAlign.Center;
+							break;
+						case "bottom":
+							DefaultVertAlign = SongTextVerticalAlign.Bottom;
+							break;
+					}
+				}
+			}
+
+			if (xmlRoot["formatting"]["font"]["maintext"] != null)
+			{
+				int trySize;
+				XmlElement tmpElem = xmlRoot["formatting"]["font"];
+
+				int.TryParse(tmpElem["maintext"]["size"].InnerText, out trySize);
+				TextFont = new Font(
+					tmpElem["maintext"]["name"].InnerText,
+					trySize > 0 ? trySize : Settings.Instance.ProjectionMasterFont.Size,
+					(FontStyle)((int)(tmpElem["maintext"]["bold"].InnerText == "true" ? FontStyle.Bold : FontStyle.Regular) + (int)(tmpElem["maintext"]["italic"].InnerText == "true" ? FontStyle.Italic : FontStyle.Regular)));
+
+				int.TryParse(tmpElem["translationtext"]["size"].InnerText, out trySize);
+				TranslationFont = new Font(
+					tmpElem["translationtext"]["name"].InnerText,
+					trySize > 0 ? trySize : Settings.Instance.ProjectionMasterFont.Size,
+					(FontStyle)((int)(tmpElem["translationtext"]["bold"].InnerText == "true" ? FontStyle.Bold : FontStyle.Regular) + (int)(tmpElem["translationtext"]["italic"].InnerText == "true" ? FontStyle.Italic : FontStyle.Regular)));
+
+				int.TryParse(tmpElem["maintext"]["color"].InnerText, out trySize);
+				TextColor = Color.FromArgb(255, Color.FromArgb(trySize));
+
+				int.TryParse(tmpElem["translationtext"]["color"].InnerText, out trySize);
+				TranslationColor = Color.FromArgb(255, Color.FromArgb(trySize));
+
+
+			}
+			if (xmlRoot["formatting"]["linespacing"]["main"] != null)
+			{
+				int trySize;
+				int.TryParse(xmlRoot["formatting"]["linespacing"]["main"].InnerText, out trySize);
+				TextLineSpacing = trySize > 0 ? trySize : Settings.Instance.ProjectionMasterLineSpacing;
+			}
+
+			//
+			// ... and the images
+			//
+
+			// remove
+			string imPath = Settings.Instance.DataDirectory + Path.DirectorySeparatorChar + Settings.Instance.ImageDir + Path.DirectorySeparatorChar;
+			foreach (XmlElement elem in xmlRoot["formatting"]["background"])
+			{
+				if (elem.Name == "file")
+				{
+					Images.Add(elem.InnerText);
+
+					//remove
+					if (File.Exists(imPath + elem.InnerText))
+						ImagePaths.Add(elem.InnerText);
+				}
+			}
+
+			//
+			// Now the song text ... 
+			//
+			SearchText = xmlRoot["songtext"].InnerText;
+			foreach (XmlElement elem in xmlRoot["songtext"])
+			{
+				if (elem.Name == "part")
+				{
+					string caption = elem.GetAttribute("caption");
+					Part tmpPart = new Part(caption);
+					foreach (XmlElement slideElem in elem)
+					{
+						if (slideElem.Name == "slide")
+						{
+							Slide tmpSlide = new Slide(this);
+							tmpSlide.Lines = new List<string>();
+							tmpSlide.HorizontalAlign = DefaultHorizAlign;
+							tmpSlide.VerticalAlign = DefaultVertAlign;
+							int bgNr = System.Convert.ToInt32(slideElem.GetAttribute("backgroundnr")) + 1;
+							bgNr = bgNr < 0 ? 0 : bgNr;
+							bgNr = bgNr > ImagePaths.Count ? ImagePaths.Count : bgNr;
+							tmpSlide.ImageNumber = bgNr;
+							foreach (XmlElement lineElem in slideElem)
+							{
+								if (lineElem.Name == "line")
+								{
+									tmpSlide.Lines.Add(lineElem.InnerText);
+								}
+								if (lineElem.Name == "translation")
+								{
+									tmpSlide.Translation.Add(lineElem.InnerText);
+								}
+							}
+							Slides.Add(tmpSlide);
+							tmpPart.Slides.Add(tmpSlide);
+						}
+					}
+					Parts.Add(tmpPart);
+				}
+			}
+		}
 
 		public ImageList getThumbs()
 		{
-			if (_imageThumbs == null)
+			ImageList thumbList = new ImageList();
+			thumbList.ImageSize = Settings.Instance.ThumbSize;
+			thumbList.ColorDepth = ColorDepth.Depth32Bit;
+
+			thumbList.Images.Add(ImageManager.Instance.getEmptyThumb());
+			foreach (String relPath in Images)
 			{
-				loadImageThumbs();
+				Image img = ImageManager.Instance.getThumbFromRelPath(relPath);
+				if (img!=null)
+					thumbList.Images.Add(img);
 			}
-			return _imageThumbs;
+			return thumbList;
 		}
 
         public Image getImage(int nr)
@@ -451,8 +484,7 @@ namespace Pbp
 					throw new Exception("Das Bild mit der Nummer " + nr + " existiert nicht!");
 				}
 
-				Settings setting = new Settings();
-				string path = setting.DataDirectory + Path.DirectorySeparatorChar + setting.ImageDir + Path.DirectorySeparatorChar + ImagePaths[nr-1];
+				string path = Settings.Instance.DataDirectory + Path.DirectorySeparatorChar + Settings.Instance.ImageDir + Path.DirectorySeparatorChar + ImagePaths[nr - 1];
 
 				if (File.Exists(path))
 				{
@@ -465,10 +497,9 @@ namespace Pbp
 			}
 			catch 
 			{
-				Settings setting = new Settings();
 				Image img = new Bitmap(800, 600);
 				Graphics graph = Graphics.FromImage(img);
-				graph.FillRectangle(new SolidBrush(setting.ProjectionBackColor), 0, 0, img.Width, img.Height);
+				graph.FillRectangle(new SolidBrush(Settings.Instance.ProjectionBackColor), 0, 0, img.Width, img.Height);
 				return img;
 			}
         }
@@ -491,17 +522,15 @@ namespace Pbp
 			else
 			{
 				string ext = Path.GetExtension(fileName);
-				_originFileType = fileType.createFactory(ext);
-				if (_originFileType == null)
-					_originFileType = new fileTypePPL();
+				_fileType = detectFileType(ext);
 			}
 
 
 			
 			XmlDocument xmlDoc = new XmlDocument();
-            
-            
-            if (_originFileType.GetType() == typeof(fileTypePPL))
+
+
+			if (_fileType == FileFormat.ppl)
             {
 				XmlNode xmlnode = xmlDoc.CreateNode(XmlNodeType.XmlDeclaration, "", "");
 				xmlDoc.AppendChild(xmlnode);

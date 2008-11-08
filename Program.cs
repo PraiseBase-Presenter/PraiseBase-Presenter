@@ -30,6 +30,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
 using Pbp.Forms;
+using Pbp.Properties;
 
 namespace Pbp
 {
@@ -41,14 +42,12 @@ namespace Pbp
         [STAThread]
         static void Main()
         {
-			//DateTime startTime = DateTime.Now;
+			DateTime startTime = DateTime.Now;
 
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
 
-			bool loadingScreen = false;
-
-			if (loadingScreen)
+			if (Settings.Instance.ShowLoadingScreen)
 			{
 				Loading ldg = new Loading();
 				ldg.setLabel("PraiseBase Presenter wird gestartet...");
@@ -56,7 +55,7 @@ namespace Pbp
 				Application.DoEvents();
 
 				ldg.setLabel("Prüfe Miniaturbilder...");
-				ImageManager.getInstance().checkThumbs(ldg);
+				ImageManager.Instance.checkThumbs(ldg);
 
 				ldg.setLabel("Lade Liederdatenbank...");
 				SongManager.getInstance(ldg);
@@ -72,20 +71,13 @@ namespace Pbp
 			else
 			{
 				SongManager.getInstance();
-				ImageManager.getInstance().checkThumbs();
+				ImageManager.Instance.checkThumbs();
 				projectionWindow.getInstance();
 				GC.Collect();
 			}
 
-			/*
-			DateTime stopTime = DateTime.Now;
-			TimeSpan duration = stopTime - startTime;
-			Console.WriteLine("seconds:" + duration.TotalSeconds);
-			Console.WriteLine("milliseconds:" + duration.TotalMilliseconds);
-			 */
-			
+			Console.WriteLine("Loading took " + (DateTime.Now - startTime).TotalSeconds + " seconds!");
 			Application.Run(mainWindow.getInstance());
-			
         }
     }
 }

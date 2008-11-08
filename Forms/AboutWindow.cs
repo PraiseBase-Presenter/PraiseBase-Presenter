@@ -52,9 +52,8 @@ namespace Pbp.Forms
 
         private void AboutWindow_Load(object sender, EventArgs e)
         {
-			Settings setting = new Settings();
             this.labelProductName.Text = AssemblyProduct;
-			this.labelVersion.Text = setting.Version;
+			this.labelVersion.Text = Settings.Instance.Version;
             this.labelCopyright.Text = AssemblyCopyright;
             this.labelCompanyName.Text = AssemblyCompany;
             
