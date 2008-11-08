@@ -66,12 +66,11 @@ namespace Pbp.Forms
 				if (searchText != String.Empty && !sng.SearchText.Contains(searchText))
 					use = false;
 
-				if (checkBoxHasImages.Checked && sng.ImagePaths.Count > 0)
+				if (checkBoxHasImages.Checked && sng.RelativeImagePaths.Count > 0)
 					use = false;
 
 				if (checkBoxHasComments.Checked && sng.Comment==string.Empty)
 					use = false;
-
 
 				if (checkBoxQAImages.Checked && !sng.getQA(Song.QualityAssuranceIndicators.Images))
 					use = false;

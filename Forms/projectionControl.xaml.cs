@@ -113,13 +113,13 @@ namespace Pbp.Forms
 			{
 				opCounter += 0.02f;
 				projectionImage.Opacity = opCounter;
-				mainWindow.getInstance().setProgessBarTransitionValue((int)(opCounter * 100));
+				MainWindow.getInstance().setProgessBarTransitionValue((int)(opCounter * 100));
 			}
 			else
 			{
 				projectionImage.Opacity = 1f;
 				projectionImageBack.Source = projectionImage.Source;
-				mainWindow.getInstance().setProgessBarTransitionValue(0);
+				MainWindow.getInstance().setProgessBarTransitionValue(0);
 				tmr.Stop();
 			}
 		}

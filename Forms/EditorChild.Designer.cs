@@ -140,6 +140,7 @@
 			this.pictureBoxPreview.TabIndex = 2;
 			this.pictureBoxPreview.TabStop = false;
 			this.pictureBoxPreview.DoubleClick += new System.EventHandler(this.buttonSlideBackground_Click);
+			this.pictureBoxPreview.Click += new System.EventHandler(this.pictureBoxPreview_Click);
 			// 
 			// textBoxSongTitle
 			// 

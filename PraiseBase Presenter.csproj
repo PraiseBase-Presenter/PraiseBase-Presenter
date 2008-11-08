@@ -117,17 +117,17 @@
     <Compile Include="Forms\ImageDialog.Designer.cs">
       <DependentUpon>ImageDialog.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\Loading.cs">
+    <Compile Include="Forms\LoadingScreen.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\Loading.Designer.cs">
-      <DependentUpon>Loading.cs</DependentUpon>
+    <Compile Include="Forms\LoadingScreen.Designer.cs">
+      <DependentUpon>LoadingScreen.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\mainWindow.cs">
+    <Compile Include="Forms\MainWindow.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\mainWindow.Designer.cs">
-      <DependentUpon>mainWindow.cs</DependentUpon>
+    <Compile Include="Forms\MainWindow.Designer.cs">
+      <DependentUpon>MainWindow.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\ProgressWindow.cs">
       <SubType>Form</SubType>
@@ -180,12 +180,12 @@
       <DependentUpon>ImageDialog.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\Loading.resx">
-      <DependentUpon>Loading.cs</DependentUpon>
+    <EmbeddedResource Include="Forms\LoadingScreen.resx">
+      <DependentUpon>LoadingScreen.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\mainWindow.resx">
-      <DependentUpon>mainWindow.cs</DependentUpon>
+    <EmbeddedResource Include="Forms\MainWindow.resx">
+      <DependentUpon>MainWindow.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\ProgressWindow.resx">

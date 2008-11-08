@@ -49,7 +49,7 @@ namespace Pbp
 
 			if (Settings.Instance.ShowLoadingScreen)
 			{
-				Loading ldg = new Loading();
+				LoadingScreen ldg = new LoadingScreen();
 				ldg.setLabel("PraiseBase Presenter wird gestartet...");
 				ldg.Show();
 				Application.DoEvents();
@@ -77,7 +77,7 @@ namespace Pbp
 			}
 
 			Console.WriteLine("Loading took " + (DateTime.Now - startTime).TotalSeconds + " seconds!");
-			Application.Run(mainWindow.getInstance());
+			Application.Run(MainWindow.getInstance());
         }
     }
 }

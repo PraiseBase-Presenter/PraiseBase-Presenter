@@ -27,7 +27,7 @@
 
 namespace Pbp.Forms
 {
-	partial class Loading
+	partial class LoadingScreen
 	{
 		/// <summary>
 		/// Required designer variable.

@@ -36,9 +36,9 @@ using System.Windows.Forms;
 
 namespace Pbp.Forms
 {
-	public partial class Loading : Form
+	public partial class LoadingScreen : Form
 	{
-		public Loading()
+		public LoadingScreen()
 		{
 			InitializeComponent();
 		}

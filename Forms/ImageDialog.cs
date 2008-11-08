@@ -93,7 +93,7 @@ namespace Pbp.Forms
 			treeViewDirs.Nodes.Add(rootTreeNode);
 			PopulateTreeView(rootDir, treeViewDirs.Nodes[0]);
 			treeViewDirs.Nodes[0].Expand();
-
+			listViewImages.Focus();
 
 		}
 
@@ -108,16 +108,17 @@ namespace Pbp.Forms
 
 					if (directoryArray.Length != 0)
 					{
+						int subLen = (Settings.Instance.DataDirectory + Path.DirectorySeparatorChar + Settings.Instance.ImageDir + Path.DirectorySeparatorChar).Length;
 						foreach (string directory in directoryArray)
 						{
 							string dName = Path.GetFileName(directory);
 							if (dName.Substring(0, 1) != "[" && dName.Substring(0, 1) != ".")
 							{
 								TreeNode myNode = new TreeNode(dName);
-								myNode.Tag = directory;
+								myNode.Tag = directory.Substring(subLen) ;
 								parentNode.Nodes.Add(myNode);
 
-								if (imagePath!= string.Empty && directory == Path.GetDirectoryName(imagePath))
+								if (imagePath != string.Empty && directory.Substring(subLen) == Path.GetDirectoryName(imagePath))
 								{
 									treeViewDirs.SelectedNode = myNode;
 								}
@@ -143,30 +144,34 @@ namespace Pbp.Forms
 				listViewImages.LargeImageList.Dispose();
 			}
 
-			if (Directory.Exists((string)treeViewDirs.SelectedNode.Tag))
+			string relativeDir = (string)treeViewDirs.SelectedNode.Tag;
+			string absoluteDir = Settings.Instance.DataDirectory + Path.DirectorySeparatorChar + Settings.Instance.ImageDir + Path.DirectorySeparatorChar +relativeDir;
+
+			if (Directory.Exists(absoluteDir))
 			{
 				ImageList imList = new ImageList();
 				imList.ImageSize = new Size(150, 112);
 				imList.ColorDepth = ColorDepth.Depth32Bit;
 
-				string[] songFilePaths = Directory.GetFiles((string)treeViewDirs.SelectedNode.Tag, "*.jpg", SearchOption.TopDirectoryOnly);
+				string[] songFilePaths = Directory.GetFiles(absoluteDir, "*.jpg", SearchOption.TopDirectoryOnly);
 				int i = 0;
 				foreach (string file in songFilePaths)
 				{
+					string relativePath = relativeDir + Path.DirectorySeparatorChar + Path.GetFileName(file);
 					Application.DoEvents();
 					ListViewItem lvi = new ListViewItem(Path.GetFileNameWithoutExtension(file));
-					lvi.Tag = file;
+					lvi.Tag = relativePath;
 					lvi.ImageIndex = i;
 					listViewImages.Items.Add(lvi);
-					imList.Images.Add(Image.FromFile(file));
-					if (file == imagePath)
+					imList.Images.Add(ImageManager.Instance.getThumbFromRelPath(relativePath));
+					if (relativePath == imagePath)
 						listViewImages.Items[i].Selected = true;
 
 					i++;
 				}
 				listViewImages.LargeImageList = imList;
-
 			}
+			
 		}
 
 		private void listViewImages_ItemSelectionChanged(object sender, ListViewItemSelectionChangedEventArgs e)

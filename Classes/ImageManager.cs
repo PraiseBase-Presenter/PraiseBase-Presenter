@@ -95,13 +95,13 @@ namespace Pbp
 		/// <param name="inFile"></param>
 		/// <param name="outFile"></param>
 		/// <param name="size"></param>
-		public void createThumb(string inFile, string outFile, Size size)
+		public void createThumb(string inFile, string outFile)
 		{
 			Image img;
 			try
 			{
 				img = Image.FromFile(inFile);
-				Image imgPhoto = ResizeBitmap(img, size);
+				Image imgPhoto = ResizeBitmap(img, Settings.Instance.ThumbSize);
 
 				string dir = Path.GetDirectoryName(outFile);
 				if (!Directory.Exists(dir))
@@ -130,7 +130,7 @@ namespace Pbp
 		/// Check and create thumbnails if necessary
 		/// </summary>
 		/// <param name="ldg"></param>
-		public void checkThumbs(Loading ldg)
+		public void checkThumbs(LoadingScreen ldg)
 		{
 			string imageRootDir = Settings.Instance.DataDirectory + Path.DirectorySeparatorChar + Settings.Instance.ImageDir;
 			string thumbDir = Settings.Instance.DataDirectory + Path.DirectorySeparatorChar + Settings.Instance.ThumbDir;
@@ -172,7 +172,7 @@ namespace Pbp
 
 						for (int i = 0; i < cnt; i++)
 						{
-							createThumb(missingThumbsSrc[i], missingThumbsTrg[i], Settings.Instance.ThumbSize);
+							createThumb(missingThumbsSrc[i], missingThumbsTrg[i]);
 							if (i % 5 == 0)
 							{
 								wnd.UpdateStatus("Erstelle Miniaturbilder " + i.ToString() + "/" + cnt.ToString(), i);
@@ -191,7 +191,7 @@ namespace Pbp
 						ldg.setProgBarMax(cnt);
 						for (int i = 0; i < cnt; i++)
 						{
-							createThumb(missingThumbsSrc[i], missingThumbsTrg[i], Settings.Instance.ThumbSize);
+							createThumb(missingThumbsSrc[i], missingThumbsTrg[i]);
 							if (i % 5 == 0)
 							{
 								ldg.setLabel("Erstelle Miniaturbilder " + i.ToString() + "/" + cnt.ToString());
@@ -205,10 +205,28 @@ namespace Pbp
 		}
 
 
+		public bool imageExists(string relativePath)
+		{
+			if (File.Exists(Settings.Instance.DataDirectory + Path.DirectorySeparatorChar + Settings.Instance.ImageDir + Path.DirectorySeparatorChar + relativePath))
+			{
+				return true;
+			}
+			return false;
+		}
+
 		public Image getThumbFromRelPath(string relativePath)
 		{
 			string imPath = Settings.Instance.DataDirectory + Path.DirectorySeparatorChar + Settings.Instance.ThumbDir + Path.DirectorySeparatorChar + relativePath;
+			if (File.Exists(imPath))
+			{
+				return Image.FromFile(imPath);
+			}
+			return null;
+		}
 
+		public Image getImageFromRelPath(string relativePath)
+		{
+			string imPath = Settings.Instance.DataDirectory + Path.DirectorySeparatorChar + Settings.Instance.ImageDir + Path.DirectorySeparatorChar + relativePath;
 			if (File.Exists(imPath))
 			{
 				return Image.FromFile(imPath);
@@ -223,6 +241,15 @@ namespace Pbp
 			graph.FillRectangle(new SolidBrush(Settings.Instance.ProjectionBackColor), 0, 0, img.Width, img.Height);
 			graph.Dispose();
 			return img;			
+		}
+
+		public Image getEmptyImage()
+		{
+			Image img = new Bitmap(1024,768);
+			Graphics graph = Graphics.FromImage(img);
+			graph.FillRectangle(new SolidBrush(Settings.Instance.ProjectionBackColor), 0, 0, img.Width, img.Height);
+			graph.Dispose();
+			return img;
 		}
 
     }

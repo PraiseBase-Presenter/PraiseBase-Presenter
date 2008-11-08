@@ -59,10 +59,6 @@ namespace Pbp
 		/// The file type of this song
 		/// </summary>
 		private FileFormat _fileType;
-        /// <summary>
-        /// Thumbnails of all images
-        /// </summary>
-		private ImageList _imageThumbs;
 		#endregion
 
 		#region Fields
@@ -156,8 +152,7 @@ namespace Pbp
         /// <summary>
         /// List of the paths to all images
         /// </summary>
-		public List<string> ImagePaths { get; set; }
-		public List<string> Images { get; set; }
+		public List<string> RelativeImagePaths { get; set; }
 		/// <summary>
 		/// Default horizontal text aligning
 		/// </summary>
@@ -191,8 +186,7 @@ namespace Pbp
 			DefaultVertAlign = SongTextVerticalAlign.Center;
 			Slides = new SlideList();
 			Parts = new PartList();
-			ImagePaths = new List<string>();
-			Images = new List<string>();
+			RelativeImagePaths = new List<string>();
 
 			if (filePath != null)
 			{
@@ -280,6 +274,11 @@ namespace Pbp
 			return FileFormat.invalid;
 		}
 
+		public static string getDefaultExtension()
+		{
+			return "ppl";
+		}
+
 		public static string getFileBoxFilter()
 		{
 			String fltr = String.Empty;
@@ -296,6 +295,51 @@ namespace Pbp
 			fltr += "PowerPraise Lied Lied (*.ppl)|*.ppl";
 			return fltr;
 		}
+
+		public ImageList getThumbs()
+		{
+			ImageList thumbList = new ImageList();
+			thumbList.ImageSize = Settings.Instance.ThumbSize;
+			thumbList.ColorDepth = ColorDepth.Depth32Bit;
+
+			thumbList.Images.Add(ImageManager.Instance.getEmptyThumb());
+			foreach (String relPath in RelativeImagePaths)
+			{
+				Image img = ImageManager.Instance.getThumbFromRelPath(relPath);
+				if (img!=null)
+					thumbList.Images.Add(img);
+			}
+			return thumbList;
+		}
+
+        public Image getImage(int nr)
+        {
+			try
+			{
+				if (nr < 1)
+				{
+					return ImageManager.Instance.getEmptyImage();
+				}
+				if (RelativeImagePaths[nr - 1] == null)
+				{
+					throw new Exception("Das Bild mit der Nummer " + nr + " existiert nicht!");
+				}
+				Image img = ImageManager.Instance.getImageFromRelPath(RelativeImagePaths[nr - 1]);
+				if (img!=null)
+				{
+					return img;
+				}
+				else
+				{
+					throw new Exception("Das Bild " + RelativeImagePaths[nr - 1] + " existiert nicht!");
+				}
+			}
+			catch (Exception e)
+			{
+				Console.WriteLine(e.Message);
+				return ImageManager.Instance.getEmptyImage();
+			}
+        }
 
 		/// <summary>
 		/// Loads the song contents from a Powerpraise file
@@ -398,17 +442,12 @@ namespace Pbp
 			// ... and the images
 			//
 
-			// remove
-			string imPath = Settings.Instance.DataDirectory + Path.DirectorySeparatorChar + Settings.Instance.ImageDir + Path.DirectorySeparatorChar;
 			foreach (XmlElement elem in xmlRoot["formatting"]["background"])
 			{
 				if (elem.Name == "file")
 				{
-					Images.Add(elem.InnerText);
-
-					//remove
-					if (File.Exists(imPath + elem.InnerText))
-						ImagePaths.Add(elem.InnerText);
+					if (ImageManager.Instance.imageExists(elem.InnerText))
+						RelativeImagePaths.Add(elem.InnerText);
 				}
 			}
 
@@ -430,9 +469,10 @@ namespace Pbp
 							tmpSlide.Lines = new List<string>();
 							tmpSlide.HorizontalAlign = DefaultHorizAlign;
 							tmpSlide.VerticalAlign = DefaultVertAlign;
+
 							int bgNr = System.Convert.ToInt32(slideElem.GetAttribute("backgroundnr")) + 1;
 							bgNr = bgNr < 0 ? 0 : bgNr;
-							bgNr = bgNr > ImagePaths.Count ? ImagePaths.Count : bgNr;
+							bgNr = bgNr > RelativeImagePaths.Count ? RelativeImagePaths.Count : bgNr;
 							tmpSlide.ImageNumber = bgNr;
 							foreach (XmlElement lineElem in slideElem)
 							{
@@ -452,61 +492,6 @@ namespace Pbp
 					Parts.Add(tmpPart);
 				}
 			}
-		}
-
-		public ImageList getThumbs()
-		{
-			ImageList thumbList = new ImageList();
-			thumbList.ImageSize = Settings.Instance.ThumbSize;
-			thumbList.ColorDepth = ColorDepth.Depth32Bit;
-
-			thumbList.Images.Add(ImageManager.Instance.getEmptyThumb());
-			foreach (String relPath in Images)
-			{
-				Image img = ImageManager.Instance.getThumbFromRelPath(relPath);
-				if (img!=null)
-					thumbList.Images.Add(img);
-			}
-			return thumbList;
-		}
-
-        public Image getImage(int nr)
-        {
-			try
-			{
-				if (nr < 1)
-				{
-					throw new Exception("Ungültige Bildnummer!");
-				}
-
-				if (ImagePaths[nr-1] == null)
-				{
-					throw new Exception("Das Bild mit der Nummer " + nr + " existiert nicht!");
-				}
-
-				string path = Settings.Instance.DataDirectory + Path.DirectorySeparatorChar + Settings.Instance.ImageDir + Path.DirectorySeparatorChar + ImagePaths[nr - 1];
-
-				if (File.Exists(path))
-				{
-					return Image.FromFile(path);
-				}
-				else
-				{
-					throw new Exception("Das Bild " + path + " existiert nicht!");
-				}
-			}
-			catch 
-			{
-				Image img = new Bitmap(800, 600);
-				Graphics graph = Graphics.FromImage(img);
-				graph.FillRectangle(new SolidBrush(Settings.Instance.ProjectionBackColor), 0, 0, img.Width, img.Height);
-				return img;
-			}
-        }
-
-		public static string getDefaultExtension()
-		{
-			return "ppl";
 		}
 
         /// <summary>
@@ -572,15 +557,15 @@ namespace Pbp
 					{
 						if (sld.ImageNumber > 0)
 						{
-							if (!usedImages.Contains(ImagePaths[sld.ImageNumber - 1]))
+							if (!usedImages.Contains(RelativeImagePaths[sld.ImageNumber - 1]))
 							{
-								usedImages.Add(ImagePaths[sld.ImageNumber - 1]);
+								usedImages.Add(RelativeImagePaths[sld.ImageNumber - 1]);
 							}
-							sld.ImageNumber = usedImages.IndexOf(ImagePaths[sld.ImageNumber - 1]) + 1;
+							sld.ImageNumber = usedImages.IndexOf(RelativeImagePaths[sld.ImageNumber - 1]) + 1;
 						}
 					}
 				}
-				ImagePaths = usedImages;
+				RelativeImagePaths = usedImages;
 
                 foreach (Part prt in Parts)
                 {

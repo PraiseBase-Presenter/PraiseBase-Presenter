@@ -51,9 +51,9 @@ namespace Pbp.Forms
 	/// gui of this software, including the songlist, 
 	/// setlist, imagelist and the diashow interface.
 	/// </summary>
-    public partial class mainWindow : Form
+    public partial class MainWindow : Form
     {
-		static private mainWindow instance;
+		static private MainWindow instance;
         private projectionWindow projWindow; // Todo: use singleton
 		
 		private Timer blackOutTimer;
@@ -64,7 +64,7 @@ namespace Pbp.Forms
 		/// <summary>
 		/// Private constructor
 		/// </summary>
-        private mainWindow()
+        private MainWindow()
         {
             InitializeComponent();
         }
@@ -73,10 +73,10 @@ namespace Pbp.Forms
 		/// Returns a singleton of mainWindow
 		/// </summary>
 		/// <returns>Returns the mainWindow instance</returns>
-		static public mainWindow getInstance()
+		static public MainWindow getInstance()
 		{
 			if (instance == null)
-				instance = new mainWindow();
+				instance = new MainWindow();
 			return instance;
 		}
 
@@ -351,9 +351,8 @@ namespace Pbp.Forms
 			songDetailItems.Items.Clear();
 			songDetailImages.Items.Clear();
 
-			ImageList songImages = songMan.CurrentSong.getThumbs();
-			songDetailImages.LargeImageList = songImages;
-			for (int i = 1; i < songImages.Images.Count; i++)
+			songDetailImages.LargeImageList = songMan.CurrentSong.getThumbs();
+			for (int i = 1; i < songDetailImages.LargeImageList.Images.Count; i++)
 			{
 				ListViewItem lvi = new ListViewItem();
 				lvi.ImageIndex = i;
@@ -502,7 +501,8 @@ namespace Pbp.Forms
             ImageList iml = new ImageList();
 			iml.ImageSize = Settings.Instance.ThumbSize;
             iml.ColorDepth = ColorDepth.Depth32Bit;
-            listViewImageHistory.SmallImageList = iml;
+			listViewImageHistory.LargeImageList = iml;
+			listViewImageHistory.TileSize = new Size(Settings.Instance.ThumbSize.Width + 8,Settings.Instance.ThumbSize.Height + 5) ;
         }
 
         public void PopulateTreeView(string directoryValue, TreeNode parentNode)
@@ -568,16 +568,16 @@ namespace Pbp.Forms
             }
             else
             {
-				string imDir = Settings.Instance.DataDirectory + Path.DirectorySeparatorChar + Settings.Instance.ThumbDir + Path.DirectorySeparatorChar + ((string)treeViewImageDirectories.SelectedNode.Tag);
+				string relativeImageDir = ((string)treeViewImageDirectories.SelectedNode.Tag);
+				string imDir = Settings.Instance.DataDirectory + Path.DirectorySeparatorChar + Settings.Instance.ThumbDir + Path.DirectorySeparatorChar + relativeImageDir;
 
 				if (Directory.Exists(imDir))
 				{
-					labelImgDirName.Text = "Verzeichnisinhalt '" + Path.GetFileName((string)treeViewImageDirectories.SelectedNode.Tag) + "':";
+					labelImgDirName.Text = "Verzeichnisinhalt '" + Path.GetFileName(relativeImageDir) + "':";
 
 					ImageList imList = new ImageList();
 					imList.ImageSize = Settings.Instance.ThumbSize;
 					imList.ColorDepth = ColorDepth.Depth32Bit;
-
 
 					string[] songFilePaths = Directory.GetFiles(imDir, "*.jpg", SearchOption.TopDirectoryOnly);
 					int i = 0;
@@ -586,7 +586,7 @@ namespace Pbp.Forms
 					{
 						Application.DoEvents();
 						ListViewItem lvi = new ListViewItem(Path.GetFileNameWithoutExtension(file));
-						lvi.Tag = ((string)treeViewImageDirectories.SelectedNode.Tag) + Path.DirectorySeparatorChar + Path.GetFileName(file);
+						lvi.Tag = relativeImageDir + Path.DirectorySeparatorChar + Path.GetFileName(file);
 						lvi.ImageIndex = i;
 						listViewDirectoryImages.Items.Add(lvi);
 						imList.Images.Add(Image.FromFile(file));
@@ -607,7 +607,7 @@ namespace Pbp.Forms
                 Application.DoEvents();
                 int idx = listViewDirectoryImages.SelectedIndices[0];
 
-				Image img = Image.FromFile(Settings.Instance.DataDirectory + Path.DirectorySeparatorChar + Settings.Instance.ImageDir + Path.DirectorySeparatorChar + (string)listViewDirectoryImages.Items[idx].Tag);
+				Image img = ImageManager.Instance.getImageFromRelPath((string)listViewDirectoryImages.Items[idx].Tag);
                 if ((Control.ModifierKeys & Keys.Shift) == Keys.Shift && songMan.CurrentSong != null && songMan.CurrentSong.CurrentSlide>=0)
                 {
 					pictureBoxPreview.Image = projWindow.showSlide(songMan.CurrentSong.Slides[songMan.CurrentSong.CurrentSlide], img, false);
@@ -617,25 +617,22 @@ namespace Pbp.Forms
 					pictureBoxPreview.Image = projWindow.showImage(img);
                 }
 
-				/*
                 // History
                 if (listViewImageHistory.Items.Count==0 || (string)listViewImageHistory.Items[listViewImageHistory.Items.Count - 1].Tag != (string)listViewDirectoryImages.Items[idx].Tag)
                 {
-                    listViewImageHistory.SmallImageList.Images.Add(Image.FromFile((string)listViewDirectoryImages.Items[idx].Tag));
+                    listViewImageHistory.LargeImageList.Images.Add(ImageManager.Instance.getThumbFromRelPath((string)listViewDirectoryImages.Items[idx].Tag));
 
-                    if (listViewImageHistory.Items.Count > 10)
+                    if (listViewImageHistory.Items.Count > 20)
                     {
                         listViewImageHistory.Items.RemoveAt(0);
                     }
 
-                    ListViewItem lvi = new ListViewItem(listViewDirectoryImages.Items[idx].Text);
+                    ListViewItem lvi = new ListViewItem("");
                     lvi.Tag = listViewDirectoryImages.Items[idx].Tag;
-                    lvi.ImageIndex = listViewImageHistory.SmallImageList.Images.Count-1;
+					lvi.ImageIndex = listViewImageHistory.LargeImageList.Images.Count - 1;
                     listViewImageHistory.Items.Add(lvi);
                     listViewImageHistory.EnsureVisible(listViewImageHistory.Items.Count-1);
                 }
-				 */
-
 
             }
         }
@@ -896,14 +893,14 @@ namespace Pbp.Forms
                 Application.DoEvents();
                 int idx = listViewImageHistory.SelectedIndices[0];
 
+				Image img = ImageManager.Instance.getImageFromRelPath((string)listViewImageHistory.Items[idx].Tag);
                 if ((Control.ModifierKeys & Keys.Shift) == Keys.Shift && songMan.CurrentSong != null && songMan.CurrentSong.CurrentSlide >= 0)
                 {
-
-					pictureBoxPreview.Image = projWindow.showSlide(songMan.CurrentSong.Slides[songMan.CurrentSong.CurrentSlide], Image.FromFile((string)listViewImageHistory.Items[idx].Tag), false);
+					pictureBoxPreview.Image = projWindow.showSlide(songMan.CurrentSong.Slides[songMan.CurrentSong.CurrentSlide], img, false);
                 }
                 else
                 {
-					pictureBoxPreview.Image = projWindow.showImage(Image.FromFile((string)listViewImageHistory.Items[idx].Tag));
+					pictureBoxPreview.Image = projWindow.showImage(img);
                 }
             }
         }
@@ -911,7 +908,7 @@ namespace Pbp.Forms
         private void buttonClearImageHistory_Click(object sender, EventArgs e)
         {
             listViewImageHistory.Items.Clear();
-            listViewImageHistory.SmallImageList.Images.Clear();
+			listViewImageHistory.LargeImageList.Images.Clear();
             GC.Collect();
         }
 
@@ -1283,10 +1280,10 @@ namespace Pbp.Forms
 
 		private void toolStripButtonOpenCurrentSong_Click(object sender, EventArgs e)
 		{
-			if (SongManager.getInstance().CurrentSong != null)
+			if (listViewSongs.SelectedItems.Count > 0)
 			{
 				EditorWindow wnd = EditorWindow.getInstance();
-				wnd.openSong(SongManager.getInstance().CurrentSong.FilePath);
+				wnd.openSong(SongManager.Instance.Songs[(int)listViewSongs.SelectedItems[0].Tag].FilePath);
 				wnd.Show();
 				wnd.Focus();
 			}
@@ -1364,6 +1361,7 @@ namespace Pbp.Forms
 		{
 			//listViewSetList.Items.Add((ListViewItem)e.Data.GetData(typeof(ListViewItem)));
 		}
+
 
 
     }

@@ -1,6 +1,6 @@
 ﻿namespace Pbp.Forms
 {
-    partial class mainWindow
+    partial class MainWindow
     {
         /// <summary>
         /// Required designer variable.
@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
 			System.Windows.Forms.Button buttonChooseDiaDir;
-			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(mainWindow));
+			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainWindow));
 			this.menuStrip1 = new System.Windows.Forms.MenuStrip();
 			this.dateiToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.liededitorToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -1010,9 +1010,9 @@
 			// buttonClearImageHistory
 			// 
 			this.buttonClearImageHistory.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-			this.buttonClearImageHistory.Location = new System.Drawing.Point(641, 558);
+			this.buttonClearImageHistory.Location = new System.Drawing.Point(624, 558);
 			this.buttonClearImageHistory.Name = "buttonClearImageHistory";
-			this.buttonClearImageHistory.Size = new System.Drawing.Size(95, 23);
+			this.buttonClearImageHistory.Size = new System.Drawing.Size(112, 23);
 			this.buttonClearImageHistory.TabIndex = 22;
 			this.buttonClearImageHistory.Text = "Verlauf leeren";
 			this.buttonClearImageHistory.UseVisualStyleBackColor = true;
@@ -1025,13 +1025,13 @@
 			this.listViewImageHistory.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.columnHeader5});
 			this.listViewImageHistory.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.None;
-			this.listViewImageHistory.Location = new System.Drawing.Point(641, 32);
+			this.listViewImageHistory.Location = new System.Drawing.Point(615, 32);
 			this.listViewImageHistory.MultiSelect = false;
 			this.listViewImageHistory.Name = "listViewImageHistory";
-			this.listViewImageHistory.Size = new System.Drawing.Size(95, 520);
+			this.listViewImageHistory.Size = new System.Drawing.Size(121, 520);
 			this.listViewImageHistory.TabIndex = 21;
 			this.listViewImageHistory.UseCompatibleStateImageBehavior = false;
-			this.listViewImageHistory.View = System.Windows.Forms.View.Details;
+			this.listViewImageHistory.View = System.Windows.Forms.View.Tile;
 			this.listViewImageHistory.SelectedIndexChanged += new System.EventHandler(this.listViewImageHistory_SelectedIndexChanged);
 			this.listViewImageHistory.Leave += new System.EventHandler(this.listViewImageHistory_Leave);
 			// 
@@ -1068,7 +1068,7 @@
 			this.listViewDirectoryImages.Location = new System.Drawing.Point(234, 32);
 			this.listViewDirectoryImages.MultiSelect = false;
 			this.listViewDirectoryImages.Name = "listViewDirectoryImages";
-			this.listViewDirectoryImages.Size = new System.Drawing.Size(401, 549);
+			this.listViewDirectoryImages.Size = new System.Drawing.Size(375, 549);
 			this.listViewDirectoryImages.TabIndex = 1;
 			this.listViewDirectoryImages.UseCompatibleStateImageBehavior = false;
 			this.listViewDirectoryImages.SelectedIndexChanged += new System.EventHandler(this.listViewDirectoryImages_SelectedIndexChanged);
@@ -1384,7 +1384,7 @@
 			this.tabControl1.TabIndex = 20;
 			this.tabControl1.SelectedIndexChanged += new System.EventHandler(this.tabControl1_SelectedIndexChanged);
 			// 
-			// mainWindow
+			// MainWindow
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -1398,7 +1398,7 @@
 			this.Controls.Add(this.menuStrip1);
 			this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
 			this.MainMenuStrip = this.menuStrip1;
-			this.Name = "mainWindow";
+			this.Name = "MainWindow";
 			this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
 			this.Text = "PraiseBase-Presenter Viewer";
 			this.Load += new System.EventHandler(this.Form1_Load);

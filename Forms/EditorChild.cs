@@ -726,21 +726,21 @@ namespace Pbp.Forms
 				ImageDialog imd = new ImageDialog();
 
 				if (sng.Parts[partIdx].Slides[slideIdx].ImageNumber > 0)
-					imd.imagePath = Settings.Instance.DataDirectory + Path.DirectorySeparatorChar + Settings.Instance.ImageDir + Path.DirectorySeparatorChar + sng.ImagePaths[sng.Parts[partIdx].Slides[slideIdx].ImageNumber - 1];
+				{
+					imd.imagePath = sng.RelativeImagePaths[sng.Parts[partIdx].Slides[slideIdx].ImageNumber - 1];
+				}
 
-				if (sng.ImagePaths.Count == 0)
+				if (sng.RelativeImagePaths.Count == 0)
 					imd.forAll = true;
 
 				if (imd.ShowDialog(this) == DialogResult.OK)
 				{
 					if (imd.imagePath != "")
 					{
-						string imString = imd.imagePath.Substring((Settings.Instance.DataDirectory + Path.DirectorySeparatorChar + Settings.Instance.ImageDir + Path.DirectorySeparatorChar).Length);
-
 						if (imd.forAll)
 						{
-							sng.ImagePaths.Clear();
-							sng.ImagePaths.Add(imString);
+							sng.RelativeImagePaths.Clear();
+							sng.RelativeImagePaths.Add(imd.imagePath);
 							for (int i = 0; i < sng.Parts.Count; i++)
 							{
 								for (int j = 0; j < sng.Parts[i].Slides.Count; j++)
@@ -751,14 +751,14 @@ namespace Pbp.Forms
 						}
 						else
 						{
-							if (sng.ImagePaths.Contains(imString))
+							if (sng.RelativeImagePaths.Contains(imd.imagePath))
 							{
-								sng.Parts[partIdx].Slides[slideIdx].ImageNumber = sng.ImagePaths.IndexOf(imString) + 1;
+								sng.Parts[partIdx].Slides[slideIdx].ImageNumber = sng.RelativeImagePaths.IndexOf(imd.imagePath) + 1;
 							}
 							else
 							{
-								sng.ImagePaths.Add(imString);
-								sng.Parts[partIdx].Slides[slideIdx].ImageNumber = sng.ImagePaths.Count;
+								sng.RelativeImagePaths.Add(imd.imagePath);
+								sng.Parts[partIdx].Slides[slideIdx].ImageNumber = sng.RelativeImagePaths.Count;
 							}
 						}
 					}
@@ -766,7 +766,7 @@ namespace Pbp.Forms
 					{
 						if (imd.forAll)
 						{
-							sng.ImagePaths.Clear();
+							sng.RelativeImagePaths.Clear();
 							for (int i = 0; i < sng.Parts.Count; i++)
 							{
 								for (int j = 0; j < sng.Parts[i].Slides.Count; j++)
@@ -785,6 +785,11 @@ namespace Pbp.Forms
 
 				}
 			}
+		}
+
+		private void pictureBoxPreview_Click(object sender, EventArgs e)
+		{
+
 		}
 
 

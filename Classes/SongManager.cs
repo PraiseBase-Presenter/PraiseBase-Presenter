@@ -97,10 +97,10 @@ namespace Pbp
 		/// </summary>
         public void reload(params object[] param)
         {
-			Loading ldg = null;
-			if (param.Count() == 1 && param[0].GetType() == typeof(Loading))
+			LoadingScreen ldg = null;
+			if (param.Count() == 1 && param[0].GetType() == typeof(LoadingScreen))
 			{
-				ldg = (Loading)param[0];
+				ldg = (LoadingScreen)param[0];
 			}				
 
             if (Settings.Instance.DataDirectory == "")
