@@ -150,7 +150,7 @@ namespace Pbp.Forms
 			if (Directory.Exists(absoluteDir))
 			{
 				ImageList imList = new ImageList();
-				imList.ImageSize = new Size(150, 112);
+				imList.ImageSize = Settings.Instance.ThumbSize;
 				imList.ColorDepth = ColorDepth.Depth32Bit;
 
 				string[] songFilePaths = Directory.GetFiles(absoluteDir, "*.jpg", SearchOption.TopDirectoryOnly);

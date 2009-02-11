@@ -313,6 +313,7 @@ namespace Pbp
 				Translation = new List<string>();
 				HorizontalAlign = SongTextHorizontalAlign.Center;
 				VerticalAlign = SongTextVerticalAlign.Center;
+				ImageNumber = 0;
 				this._ownerSong = ownerSong;
 			}
 

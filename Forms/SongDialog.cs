@@ -12,8 +12,11 @@ namespace Pbp.Forms
 {
 	public partial class SongDialog : Form
 	{
+		public bool OpenInEditor { get; private set; }
+
 		public SongDialog()
 		{
+			OpenInEditor = false;
 			InitializeComponent();
 		}
 
@@ -41,7 +44,7 @@ namespace Pbp.Forms
 				{
 					EditorWindow.getInstance().openSong(SongManager.getInstance().Songs[(int)(lvi.Tag)].FilePath);
 				}
-				EditorWindow.getInstance().Show();
+				OpenInEditor = true;
 				DialogResult = DialogResult.OK;
 				this.Close();
 			}

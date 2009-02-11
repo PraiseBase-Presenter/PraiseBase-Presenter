@@ -69,9 +69,9 @@ namespace Pbp.Forms
         {
             EditorChild childForm = new EditorChild(null);
             childForm.MdiParent = this;
+			childForm.Tag = "";
             
-            
-            childForm.Text = "Neues Lied " + childFormNumber++;
+            childForm.Text = "Neues Lied " + ++childFormNumber;
             childForm.Show();
         }
 
@@ -217,12 +217,12 @@ namespace Pbp.Forms
         private void EditorWindow_FormClosing(object sender, FormClosingEventArgs e)
         {
 			Settings.Instance.EditorWindowState = this.WindowState;
-			Settings.Instance.Save();
-            this.Hide();
-            e.Cancel = true;
+		
+			//this.Hide();
+			//e.Cancel = true;
         }
 
-        private void saveChild(object sender, EventArgs e)
+		private void saveChild(object sender, EventArgs e)
         {
             if (ActiveMdiChild != null)
             {
@@ -330,6 +330,12 @@ namespace Pbp.Forms
 		{
 			SongImporter dlg = new SongImporter(SongImporter.ImportFormat.PraiseBox);
 			dlg.ShowDialog(this);
+		}
+
+		private void EditorWindow_FormClosed(object sender, FormClosedEventArgs e)
+		{
+			_instance = null;
+			GC.Collect();
 		}
 
 

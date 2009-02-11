@@ -581,6 +581,7 @@
 			this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
 			this.Text = "PraiseBase-Presenter Editor";
 			this.Load += new System.EventHandler(this.EditorWindow_Load);
+			this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.EditorWindow_FormClosed);
 			this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.EditorWindow_FormClosing);
 			this.menuStrip.ResumeLayout(false);
 			this.menuStrip.PerformLayout();

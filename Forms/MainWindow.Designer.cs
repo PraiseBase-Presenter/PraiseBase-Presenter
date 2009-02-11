@@ -146,6 +146,10 @@
 			this.songSearchResetButton = new System.Windows.Forms.Button();
 			this.songSearchBox = new System.Windows.Forms.TextBox();
 			this.tabControl1 = new System.Windows.Forms.TabControl();
+			this.listViewImageQueue = new System.Windows.Forms.ListView();
+			this.columnHeader6 = new System.Windows.Forms.ColumnHeader();
+			this.label3 = new System.Windows.Forms.Label();
+			this.button1 = new System.Windows.Forms.Button();
 			buttonChooseDiaDir = new System.Windows.Forms.Button();
 			this.menuStrip1.SuspendLayout();
 			this.groupBox4.SuspendLayout();
@@ -959,6 +963,9 @@
 			// 
 			// tabPage2
 			// 
+			this.tabPage2.Controls.Add(this.button1);
+			this.tabPage2.Controls.Add(this.label3);
+			this.tabPage2.Controls.Add(this.listViewImageQueue);
 			this.tabPage2.Controls.Add(this.buttonSearchImages);
 			this.tabPage2.Controls.Add(this.labelImgDirName);
 			this.tabPage2.Controls.Add(this.label5);
@@ -990,7 +997,7 @@
 			// 
 			this.labelImgDirName.AutoSize = true;
 			this.labelImgDirName.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.labelImgDirName.Location = new System.Drawing.Point(241, 11);
+			this.labelImgDirName.Location = new System.Drawing.Point(234, 11);
 			this.labelImgDirName.Name = "labelImgDirName";
 			this.labelImgDirName.Size = new System.Drawing.Size(107, 13);
 			this.labelImgDirName.TabIndex = 24;
@@ -1001,7 +1008,7 @@
 			this.label5.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
 			this.label5.AutoSize = true;
 			this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.label5.Location = new System.Drawing.Point(638, 10);
+			this.label5.Location = new System.Drawing.Point(621, 11);
 			this.label5.Name = "label5";
 			this.label5.Size = new System.Drawing.Size(51, 13);
 			this.label5.TabIndex = 23;
@@ -1010,9 +1017,9 @@
 			// buttonClearImageHistory
 			// 
 			this.buttonClearImageHistory.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-			this.buttonClearImageHistory.Location = new System.Drawing.Point(624, 558);
+			this.buttonClearImageHistory.Location = new System.Drawing.Point(615, 558);
 			this.buttonClearImageHistory.Name = "buttonClearImageHistory";
-			this.buttonClearImageHistory.Size = new System.Drawing.Size(112, 23);
+			this.buttonClearImageHistory.Size = new System.Drawing.Size(121, 23);
 			this.buttonClearImageHistory.TabIndex = 22;
 			this.buttonClearImageHistory.Text = "Verlauf leeren";
 			this.buttonClearImageHistory.UseVisualStyleBackColor = true;
@@ -1068,7 +1075,7 @@
 			this.listViewDirectoryImages.Location = new System.Drawing.Point(234, 32);
 			this.listViewDirectoryImages.MultiSelect = false;
 			this.listViewDirectoryImages.Name = "listViewDirectoryImages";
-			this.listViewDirectoryImages.Size = new System.Drawing.Size(375, 549);
+			this.listViewDirectoryImages.Size = new System.Drawing.Size(248, 549);
 			this.listViewDirectoryImages.TabIndex = 1;
 			this.listViewDirectoryImages.UseCompatibleStateImageBehavior = false;
 			this.listViewDirectoryImages.SelectedIndexChanged += new System.EventHandler(this.listViewDirectoryImages_SelectedIndexChanged);
@@ -1311,6 +1318,7 @@
 			this.listViewSongs.View = System.Windows.Forms.View.Details;
 			this.listViewSongs.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.listViewSongs_MouseDoubleClick);
 			this.listViewSongs.MouseClick += new System.Windows.Forms.MouseEventHandler(this.listViewSongs_MouseClick);
+			this.listViewSongs.SelectedIndexChanged += new System.EventHandler(this.listViewSongs_SelectedIndexChanged);
 			// 
 			// radioSongSearchAll
 			// 
@@ -1383,6 +1391,48 @@
 			this.tabControl1.Size = new System.Drawing.Size(750, 620);
 			this.tabControl1.TabIndex = 20;
 			this.tabControl1.SelectedIndexChanged += new System.EventHandler(this.tabControl1_SelectedIndexChanged);
+			// 
+			// listViewImageQueue
+			// 
+			this.listViewImageQueue.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+						| System.Windows.Forms.AnchorStyles.Right)));
+			this.listViewImageQueue.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.columnHeader6});
+			this.listViewImageQueue.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.None;
+			this.listViewImageQueue.Location = new System.Drawing.Point(488, 32);
+			this.listViewImageQueue.MultiSelect = false;
+			this.listViewImageQueue.Name = "listViewImageQueue";
+			this.listViewImageQueue.Size = new System.Drawing.Size(121, 520);
+			this.listViewImageQueue.TabIndex = 26;
+			this.listViewImageQueue.UseCompatibleStateImageBehavior = false;
+			this.listViewImageQueue.View = System.Windows.Forms.View.Tile;
+			this.listViewImageQueue.SelectedIndexChanged += new System.EventHandler(this.listViewImageQueue_SelectedIndexChanged);
+			// 
+			// columnHeader6
+			// 
+			this.columnHeader6.Width = 90;
+			// 
+			// label3
+			// 
+			this.label3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+			this.label3.AutoSize = true;
+			this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.label3.Location = new System.Drawing.Point(485, 11);
+			this.label3.Name = "label3";
+			this.label3.Size = new System.Drawing.Size(92, 13);
+			this.label3.TabIndex = 27;
+			this.label3.Text = "Warteschlange";
+			// 
+			// button1
+			// 
+			this.button1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+			this.button1.Location = new System.Drawing.Point(488, 558);
+			this.button1.Name = "button1";
+			this.button1.Size = new System.Drawing.Size(121, 23);
+			this.button1.TabIndex = 28;
+			this.button1.Text = "Warteschlange leeren";
+			this.button1.UseVisualStyleBackColor = true;
+			this.button1.Click += new System.EventHandler(this.button1_Click_1);
 			// 
 			// MainWindow
 			// 
@@ -1548,6 +1598,10 @@
 		private System.Windows.Forms.ToolStripMenuItem worToolStripMenuItem;
 		private System.Windows.Forms.ColumnHeader columnHeader5;
 		private System.Windows.Forms.ToolStripMenuItem miniaturbilderPrüfenToolStripMenuItem;
+		private System.Windows.Forms.Label label3;
+		private System.Windows.Forms.ListView listViewImageQueue;
+		private System.Windows.Forms.ColumnHeader columnHeader6;
+		private System.Windows.Forms.Button button1;
     }
 }
 
