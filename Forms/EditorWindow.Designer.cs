@@ -123,6 +123,7 @@
 			this.fileMenu.Name = "fileMenu";
 			this.fileMenu.Size = new System.Drawing.Size(38, 20);
 			this.fileMenu.Text = "&Lied";
+			
 			// 
 			// newToolStripMenuItem
 			// 

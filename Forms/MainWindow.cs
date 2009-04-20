@@ -138,7 +138,7 @@ namespace Pbp.Forms
         {
 			SongManager songMan = SongManager.getInstance();
 
-            toolStripStatusLabel.Text = "Lade Liederliste...";
+            setStatus("Lade Liederliste...");
             
             listViewSongs.Items.Clear();
             int cnt = 0;
@@ -385,31 +385,41 @@ namespace Pbp.Forms
 
 			songDetailItems.Columns[0].Width = -2;
 			songDetailItems.Columns[1].Width = -2;
-
-			commentCancel();
-			buttonCommentEnable.Enabled = true;
-			textBoxComment.Text = songMan.CurrentSong.Comment;
-			if (textBoxComment.Text != "")
-				buttonClearComment.Enabled = true;
-
-			checkBoxQASpelling.Checked = songMan.CurrentSong.getQA(Song.QualityAssuranceIndicators.Spelling);
-			checkBoxQATranslation.Checked = songMan.CurrentSong.getQA(Song.QualityAssuranceIndicators.Translation);
-			checkBoxQAImages.Checked = songMan.CurrentSong.getQA(Song.QualityAssuranceIndicators.Images);
-			checkBoxQASegmentation.Checked = songMan.CurrentSong.getQA(Song.QualityAssuranceIndicators.Segmentation);
+			
+			labelComment.Text = songMan.CurrentSong.Comment;
+			alignCommentLabel();
 
 			groupBox3.Text = "Lied-Details '" + songMan.CurrentSong.Title + "'";
+		}
+
+		private void alignCommentLabel()
+		{
+			if (labelComment.Text != String.Empty)
+			{
+				// TODO: Find a way to measure average font width...
+				float fontWidth = 10;
+				float lettersPerRow = ((float)labelComment.Width / (float)fontWidth);
+				int totalRows = (int)Math.Ceiling((float)labelComment.Text.Length / (float)lettersPerRow);
+				labelComment.Height = totalRows * ((int)labelComment.Font.Height);
+			}
+			else
+			{
+				labelComment.Height = 0;
+			}
+			songDetailItems.Top = labelComment.Bottom + 5;
+			songDetailItems.Height = groupBox3.Height - songDetailItems.Top - 5;
 		}
 
         private void songDetailItems_SelectedIndexChanged(object sender, EventArgs e)
         {
 			SongManager songMan = SongManager.getInstance();
-
+			
             if (projWindow != null && songDetailItems.SelectedIndices.Count > 0)
             {
                 Application.DoEvents();
                 songMan.CurrentSong.CurrentSlide = songDetailItems.SelectedIndices[0];
 
-                toolStripStatusLabel.Text = "Projiziere '" + songMan.CurrentSong.Title + "' ...";
+                setStatus("Projiziere '" + songMan.CurrentSong.Title + "' ...");
 
 				if ((Control.ModifierKeys & Keys.Control) == Keys.Control)
 				{
@@ -433,6 +443,9 @@ namespace Pbp.Forms
                 {
 					pictureBoxPreview.Image = projWindow.showSlide(songMan.CurrentSong.Slides[songMan.CurrentSong.CurrentSlide], songMan.CurrentSong.getImage(songMan.CurrentSong.Slides[songMan.CurrentSong.CurrentSlide].ImageNumber), false);
                 }
+
+
+
 				setStatus("'" + songMan.CurrentSong.Title + "' ist aktiv");
             }
         }
@@ -514,7 +527,7 @@ namespace Pbp.Forms
             rootTreeNode.Tag = rootDir;
             treeViewImageDirectories.Nodes.Add(rootTreeNode);
             PopulateTreeView(rootDir, treeViewImageDirectories.Nodes[0]);
-            treeViewImageDirectories.Nodes[0].Expand();
+			treeViewImageDirectories.ExpandAll();
             treeViewImageDirectories.Nodes.Add("Suchergebnisse");
 
             imageSearchResults = new List<String>();
@@ -661,11 +674,6 @@ namespace Pbp.Forms
 					if (listViewImageHistory.Items.Count == 0 || (string)listViewImageHistory.Items[listViewImageHistory.Items.Count - 1].Tag != (string)listViewDirectoryImages.Items[idx].Tag)
 					{
 						listViewImageHistory.LargeImageList.Images.Add(ImageManager.Instance.getThumbFromRelPath((string)listViewDirectoryImages.Items[idx].Tag));
-
-						if (listViewImageHistory.Items.Count > 20)
-						{
-							listViewImageHistory.Items.RemoveAt(0);
-						}
 
 						ListViewItem lvi = new ListViewItem("");
 						lvi.Tag = listViewDirectoryImages.Items[idx].Tag;
@@ -1214,72 +1222,10 @@ namespace Pbp.Forms
 			progressBarTransition.Value = Math.Min(value,progressBarTransition.Maximum);
 		}
 
-		private void buttonCommentEnable_Click(object sender, EventArgs e)
-		{
-			if (!textBoxComment.ReadOnly)
-			{
-				commentSave();
-			}
-			else
-			{
-				commentEdit();
-			}
-		}
-
-		private void commentEdit()
-		{
-			if (SongManager.getInstance().CurrentSong != null)
-			{
-				buttonCommentEnable.Image = global::Pbp.Properties.Resources.filesave;
-				textBoxComment.BackColor = SystemColors.Window;
-				textBoxComment.ReadOnly = false;
-				textBoxComment.SelectAll();
-				textBoxComment.Focus();
-			}
-		}
-
-		private void commentCancel()
-		{
-			buttonCommentEnable.Image = global::Pbp.Properties.Resources.edit;
-			textBoxComment.BackColor = SystemColors.Info;
-			textBoxComment.ReadOnly = true;
-		}
-
-		private void commentSave()
-		{
-			buttonCommentEnable.Image = global::Pbp.Properties.Resources.edit;
-			textBoxComment.BackColor = SystemColors.Info;
-			textBoxComment.ReadOnly = true;
-			SongManager.getInstance().CurrentSong.Comment = textBoxComment.Text.Trim();
-			SongManager.getInstance().CurrentSong.save(null);
-			setStatus("Kommentar gespeichert!");
-		}
-
-		private void textBoxComment_MouseDoubleClick(object sender, MouseEventArgs e)
-		{
-			if (textBoxComment.ReadOnly)
-				commentEdit();
-		}
-
-		private void buttonClearComment_Click(object sender, EventArgs e)
-		{
-			if (SongManager.getInstance().CurrentSong != null)
-			{
-				textBoxComment.Text = "";
-				commentSave();
-				buttonClearComment.Enabled = false;
-			}
-		}
-
-		private void textBoxComment_TextChanged(object sender, EventArgs e)
-		{
-			if (textBoxComment.Text != "")
-				buttonClearComment.Enabled = true;
-		}
 
 		public void setStatus(string text)
 		{
-			toolStripStatusLabel.Text = text;
+            toolStripStatusLabelInfo.Text = text;
 			Timer statusTimer = new Timer();
 			statusTimer.Interval = 2000;
 			statusTimer.Tick += new EventHandler(statusTimer_Tick);
@@ -1288,7 +1234,7 @@ namespace Pbp.Forms
 
 		void statusTimer_Tick(object sender, EventArgs e)
 		{
-			toolStripStatusLabel.Text = string.Empty;
+            toolStripStatusLabelInfo.Text = string.Empty;
 			((Timer)sender).Stop();
 			((Timer)sender).Dispose();
 		}
@@ -1434,7 +1380,40 @@ namespace Pbp.Forms
 			}
 		}
 
-		private void listViewSongs_SelectedIndexChanged(object sender, EventArgs e)
+		private void labelComment_Paint(object sender, PaintEventArgs e)
+		{
+			alignCommentLabel();
+		}
+
+		private void toolStripButton3_Click(object sender, EventArgs e)
+		{
+			if (SongManager.Instance.CurrentSong != null)
+			{
+				QADialog qd = new QADialog();
+				qd.ShowDialog(this);
+				if (qd.DialogResult == DialogResult.OK)
+				{
+					labelComment.Text = SongManager.Instance.CurrentSong.Comment;
+					alignCommentLabel();
+				}
+			}
+			else
+			{
+				MessageBox.Show("Kein aktives Lied!");
+			}			
+		}
+
+		private void labelComment_Click(object sender, EventArgs e)
+		{
+			toolStripButton3_Click(sender, e);
+		}
+
+		private void tabPage4_Click(object sender, EventArgs e)
+		{
+
+		}
+
+		private void tabPage3_Click(object sender, EventArgs e)
 		{
 
 		}

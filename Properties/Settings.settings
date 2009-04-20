@@ -105,7 +105,7 @@
       <Value Profile="(Default)">Normal</Value>
     </Setting>
     <Setting Name="Version" Type="System.String" Scope="Application">
-      <Value Profile="(Default)">0.8.11.3</Value>
+      <Value Profile="(Default)">0.9.4.05</Value>
     </Setting>
     <Setting Name="Weburl" Type="System.String" Scope="Application">
       <Value Profile="(Default)">http://code.google.com/p/praisebasepresenter</Value>

@@ -138,6 +138,12 @@
     <Compile Include="Forms\ProgressWindow.Designer.cs">
       <DependentUpon>ProgressWindow.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\QADialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\QADialog.Designer.cs">
+      <DependentUpon>QADialog.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\SongImporter.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -197,6 +203,9 @@
     <EmbeddedResource Include="Forms\ProgressWindow.resx">
       <DependentUpon>ProgressWindow.cs</DependentUpon>
       <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\QADialog.resx">
+      <DependentUpon>QADialog.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\SongImporter.resx">
       <DependentUpon>SongImporter.cs</DependentUpon>

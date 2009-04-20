@@ -68,31 +68,31 @@ namespace Pbp
 		/// </summary>
 		public bool IsValid { get; private set; }
 		/// <summary>
-		/// Path of the song xml file
+		/// Gets the path of the song xml file
 		/// </summary>
 		public string FilePath  { get; private set; }
 		/// <summary>
-		/// Song number used by the song manager
+		/// Gets or sets the song number used by the song manager
 		/// </summary>
 		public int ID { get; set; }
         /// <summary>
-        /// The song title. Usually the same as the file name
+        /// Gets or sets the song title. Usually the same as the file name
         /// </summary>
 		public string Title { get; set; }
         /// <summary>
-        /// Main language of the song
+        /// Gets or sets the main language of the song
         /// </summary>
 		public string Language { get; set; }
          /// <summary>
-        /// A list of tags (like categories) which describe the type of the song
+        /// Gets or sets a list of tags (like categories) which describe the type of the song
         /// </summary>
 		public TagList Tags {get;set;}
 		/// <summary>
-        /// User defined comment for quality assurance information or presentation issues
+        /// Gets or sets a user defined comment for quality assurance information or presentation issues
         /// </summary>
 		public string Comment { get; set; }
         /// <summary>
-        /// Allows searching in the whole songtext
+        /// Gets the whole songtext improved for full-text search
         /// </summary>
 		public string SearchText
 		{
@@ -109,44 +109,44 @@ namespace Pbp
 			}
 		}
         /// <summary>
-        /// Text font
+        /// Gets or sets the text font
         /// </summary>
         public Font TextFont {get;set;}
         /// <summary>
-        /// Text color
+        /// Gets or sets the text color
         /// </summary>
 		public Color TextColor { get; set; }
         /// <summary>
-        /// Font of tanslation text
+        /// Gets or sets the font of tanslation text
         /// </summary>
 		public Font TranslationFont { get; set; }
         /// <summary>
-        /// Color of translation text
+        /// Gets or sets the color of translation text
         /// </summary>
 		public Color TranslationColor { get; set; }
         /// <summary>
-        /// Additional height between lines
+        /// Gets or sets the additional height between lines
         /// </summary>
 		public int TextLineSpacing { get; set; }
         /// <summary>
-        /// Additional height between a line and its translation
+        /// Gets or sets the additional height between a line and its translation
         /// </summary>
 		public int TranslationLineSpacing { get; set; }
         /// <summary>
-        /// The list of all parts in the song
+        /// Gets or sets the list of all parts in the song
         /// </summary>
 		public PartList Parts { get; set; }
         /// <summary>
-        /// A list containing a sequence of part numbers indicating 
-        /// the real sequence the song is song
+        /// Gets or sets a sequence of part numbers indicating 
+        /// the real order in which the song is sung
         /// </summary>
 		public List<int> PartSequence { get; set; }
         /// <summary>
-        /// List of all slides. Used in the presenter song detail overview.
+        /// Gets a list of all slides. Used in the presenter song detail overview.
         /// </summary>
-		public SlideList Slides { get; set; }
+		public SlideList Slides { get; private set; }
         /// <summary>
-        /// Indicates the current slide
+        /// Gets or sets the current slide index
         /// </summary>
 		public int CurrentSlide { get; set; }
         /// <summary>
@@ -267,9 +267,9 @@ namespace Pbp
 
 		private FileFormat detectFileType(string ext)
 		{
-			if (ext == "ppl")
+			if (ext == ".ppl")
 				return FileFormat.ppl;
-			if (ext == "pbps")
+			if (ext == ".pbps")
 				return FileFormat.pbps;
 			return FileFormat.invalid;
 		}
@@ -494,6 +494,11 @@ namespace Pbp
 			}
 		}
 
+		public void save()
+		{
+			save(FilePath);
+		}
+
         /// <summary>
         /// Saves the song to an xml file
         /// </summary>
@@ -504,32 +509,28 @@ namespace Pbp
 			{
 				fileName = FilePath;
 			}
-			else
-			{
-				string ext = Path.GetExtension(fileName);
-				_fileType = detectFileType(ext);
-			}
-
-
 			
+			string ext = Path.GetExtension(fileName);
+			_fileType = detectFileType(ext);
+			
+
 			XmlDocument xmlDoc = new XmlDocument();
 
-
 			if (_fileType == FileFormat.ppl)
-            {
+			{
 				XmlNode xmlnode = xmlDoc.CreateNode(XmlNodeType.XmlDeclaration, "", "");
 				xmlDoc.AppendChild(xmlnode);
 
-                xmlDoc.AppendChild(xmlDoc.CreateElement("ppl"));
-                XmlElement xmlRoot = xmlDoc.DocumentElement;
-                xmlRoot.SetAttribute("version", "3.0");
+				xmlDoc.AppendChild(xmlDoc.CreateElement("ppl"));
+				XmlElement xmlRoot = xmlDoc.DocumentElement;
+				xmlRoot.SetAttribute("version", "3.0");
 
-                xmlRoot.AppendChild(xmlDoc.CreateElement("general"));
-                xmlRoot["general"].AppendChild(xmlDoc.CreateElement("title"));
-                xmlRoot["general"]["title"].InnerText = Title;
-                xmlRoot["general"].AppendChild(xmlDoc.CreateElement("category"));
-                xmlRoot["general"]["category"].InnerText = Tags.Count > 0 ? Tags[0] : "Keine Kategorie";
-                xmlRoot["general"].AppendChild(xmlDoc.CreateElement("language"));
+				xmlRoot.AppendChild(xmlDoc.CreateElement("general"));
+				xmlRoot["general"].AppendChild(xmlDoc.CreateElement("title"));
+				xmlRoot["general"]["title"].InnerText = Title;
+				xmlRoot["general"].AppendChild(xmlDoc.CreateElement("category"));
+				xmlRoot["general"]["category"].InnerText = Tags.Count > 0 ? Tags[0] : "Keine Kategorie";
+				xmlRoot["general"].AppendChild(xmlDoc.CreateElement("language"));
 				if (Language != string.Empty)
 				{
 					xmlRoot["general"]["language"].InnerText = Language;
@@ -546,7 +547,7 @@ namespace Pbp
 					xmlRoot["general"]["qa"].InnerText = _QA.ToString();
 				}
 
-                xmlRoot.AppendChild(xmlDoc.CreateElement("songtext"));
+				xmlRoot.AppendChild(xmlDoc.CreateElement("songtext"));
 
 				List<string> usedImages = new List<string>();
 				foreach (Part prt in Parts)
@@ -567,54 +568,54 @@ namespace Pbp
 				}
 				RelativeImagePaths = usedImages;
 
-                foreach (Part prt in Parts)
-                {
-                    XmlElement tn = xmlDoc.CreateElement("part");
-                    tn.SetAttribute("caption", prt.Caption);
-                    foreach (Slide sld in prt.Slides)
-                    {
-                        XmlElement tn2 = xmlDoc.CreateElement("slide");
+				foreach (Part prt in Parts)
+				{
+					XmlElement tn = xmlDoc.CreateElement("part");
+					tn.SetAttribute("caption", prt.Caption);
+					foreach (Slide sld in prt.Slides)
+					{
+						XmlElement tn2 = xmlDoc.CreateElement("slide");
 						tn2.SetAttribute("mainsize", TextFont.Size.ToString());
-						tn2.SetAttribute("backgroundnr", (sld.ImageNumber-1).ToString());
+						tn2.SetAttribute("backgroundnr", (sld.ImageNumber - 1).ToString());
 
-                        foreach (string ln in sld.Lines)
-                        {
-                            XmlElement tn3 = xmlDoc.CreateElement("line");
-                            tn3.InnerText = ln;
-                            tn2.AppendChild(tn3);
-                        }
+						foreach (string ln in sld.Lines)
+						{
+							XmlElement tn3 = xmlDoc.CreateElement("line");
+							tn3.InnerText = ln;
+							tn2.AppendChild(tn3);
+						}
 						foreach (string ln in sld.Translation)
 						{
 							XmlElement tn3 = xmlDoc.CreateElement("translation");
 							tn3.InnerText = ln;
 							tn2.AppendChild(tn3);
 						}
-                        tn.AppendChild(tn2);
-                    }
-                    xmlRoot["songtext"].AppendChild(tn);
-                }
+						tn.AppendChild(tn2);
+					}
+					xmlRoot["songtext"].AppendChild(tn);
+				}
 
-                xmlRoot.AppendChild(xmlDoc.CreateElement("order"));
-                foreach (Part prt in Parts)
-                {
-                    XmlElement tn = xmlDoc.CreateElement("item");
-                    tn.InnerText = prt.Caption;
-                    xmlRoot["order"].AppendChild(tn);
-                }
+				xmlRoot.AppendChild(xmlDoc.CreateElement("order"));
+				foreach (Part prt in Parts)
+				{
+					XmlElement tn = xmlDoc.CreateElement("item");
+					tn.InnerText = prt.Caption;
+					xmlRoot["order"].AppendChild(tn);
+				}
 
-                xmlRoot.AppendChild(xmlDoc.CreateElement("information"));
-                xmlRoot["information"].AppendChild(xmlDoc.CreateElement("copyright"));
-                xmlRoot["information"]["copyright"].AppendChild(xmlDoc.CreateElement("position"));
-                xmlRoot["information"]["copyright"]["position"].InnerText = "lastslide";
-                xmlRoot["information"]["copyright"].AppendChild(xmlDoc.CreateElement("text"));
-                xmlRoot["information"].AppendChild(xmlDoc.CreateElement("source"));
-                xmlRoot["information"]["source"].AppendChild(xmlDoc.CreateElement("position"));
-                xmlRoot["information"]["source"]["position"].InnerText = "firstslide";
-                xmlRoot["information"]["source"].AppendChild(xmlDoc.CreateElement("text"));
+				xmlRoot.AppendChild(xmlDoc.CreateElement("information"));
+				xmlRoot["information"].AppendChild(xmlDoc.CreateElement("copyright"));
+				xmlRoot["information"]["copyright"].AppendChild(xmlDoc.CreateElement("position"));
+				xmlRoot["information"]["copyright"]["position"].InnerText = "lastslide";
+				xmlRoot["information"]["copyright"].AppendChild(xmlDoc.CreateElement("text"));
+				xmlRoot["information"].AppendChild(xmlDoc.CreateElement("source"));
+				xmlRoot["information"]["source"].AppendChild(xmlDoc.CreateElement("position"));
+				xmlRoot["information"]["source"]["position"].InnerText = "firstslide";
+				xmlRoot["information"]["source"].AppendChild(xmlDoc.CreateElement("text"));
 
-                xmlRoot.AppendChild(xmlDoc.CreateElement("formatting"));
+				xmlRoot.AppendChild(xmlDoc.CreateElement("formatting"));
 
-                xmlRoot["formatting"].AppendChild(xmlDoc.CreateElement("font"));
+				xmlRoot["formatting"].AppendChild(xmlDoc.CreateElement("font"));
 				xmlRoot["formatting"]["font"].AppendChild(xmlDoc.CreateElement("maintext"));
 				xmlRoot["formatting"]["font"]["maintext"].AppendChild(xmlDoc.CreateElement("name"));
 				xmlRoot["formatting"]["font"]["maintext"]["name"].InnerText = TextFont.Name.ToString();
@@ -641,7 +642,7 @@ namespace Pbp
 				xmlRoot["formatting"]["font"]["translationtext"].AppendChild(xmlDoc.CreateElement("italic"));
 				xmlRoot["formatting"]["font"]["translationtext"]["italic"].InnerText = (TranslationFont.Italic).ToString().ToLower();
 				xmlRoot["formatting"]["font"]["translationtext"].AppendChild(xmlDoc.CreateElement("color"));
-				xmlRoot["formatting"]["font"]["translationtext"]["color"].InnerText = (16777216 +TranslationColor.ToArgb()).ToString();
+				xmlRoot["formatting"]["font"]["translationtext"]["color"].InnerText = (16777216 + TranslationColor.ToArgb()).ToString();
 				xmlRoot["formatting"]["font"]["translationtext"].AppendChild(xmlDoc.CreateElement("outline"));
 				xmlRoot["formatting"]["font"]["translationtext"]["outline"].InnerText = "25";
 				xmlRoot["formatting"]["font"]["translationtext"].AppendChild(xmlDoc.CreateElement("shadow"));
@@ -694,22 +695,22 @@ namespace Pbp
 				xmlRoot["formatting"]["font"]["shadow"].AppendChild(xmlDoc.CreateElement("direction"));
 				xmlRoot["formatting"]["font"]["shadow"]["direction"].InnerText = "125";
 
-                xmlRoot["formatting"].AppendChild(xmlDoc.CreateElement("background"));
+				xmlRoot["formatting"].AppendChild(xmlDoc.CreateElement("background"));
 				foreach (string imp in usedImages)
-                {
-						XmlElement tn = xmlDoc.CreateElement("file");
-						tn.InnerText = imp;
-						xmlRoot["formatting"]["background"].AppendChild(tn);
-                }
-                xmlRoot["formatting"].AppendChild(xmlDoc.CreateElement("linespacing"));
-                
-                xmlRoot["formatting"]["linespacing"].AppendChild(xmlDoc.CreateElement("main"));
-                xmlRoot["formatting"]["linespacing"].AppendChild(xmlDoc.CreateElement("translation"));
-                xmlRoot["formatting"]["linespacing"]["main"].InnerText = TextLineSpacing.ToString();
-                xmlRoot["formatting"]["linespacing"]["translation"].InnerText = TextLineSpacing.ToString();
+				{
+					XmlElement tn = xmlDoc.CreateElement("file");
+					tn.InnerText = imp;
+					xmlRoot["formatting"]["background"].AppendChild(tn);
+				}
+				xmlRoot["formatting"].AppendChild(xmlDoc.CreateElement("linespacing"));
 
-                xmlRoot["formatting"].AppendChild(xmlDoc.CreateElement("textorientation"));
-                xmlRoot["formatting"]["textorientation"].AppendChild(xmlDoc.CreateElement("horizontal"));
+				xmlRoot["formatting"]["linespacing"].AppendChild(xmlDoc.CreateElement("main"));
+				xmlRoot["formatting"]["linespacing"].AppendChild(xmlDoc.CreateElement("translation"));
+				xmlRoot["formatting"]["linespacing"]["main"].InnerText = TextLineSpacing.ToString();
+				xmlRoot["formatting"]["linespacing"]["translation"].InnerText = TextLineSpacing.ToString();
+
+				xmlRoot["formatting"].AppendChild(xmlDoc.CreateElement("textorientation"));
+				xmlRoot["formatting"]["textorientation"].AppendChild(xmlDoc.CreateElement("horizontal"));
 				if (Parts[0].Slides[0].HorizontalAlign == SongTextHorizontalAlign.Left)
 					xmlRoot["formatting"]["textorientation"]["horizontal"].InnerText = "left";
 				else if (Parts[0].Slides[0].HorizontalAlign == SongTextHorizontalAlign.Right)
@@ -726,7 +727,7 @@ namespace Pbp
 				xmlRoot["formatting"]["textorientation"].AppendChild(xmlDoc.CreateElement("transpos"));
 				xmlRoot["formatting"]["textorientation"]["transpos"].InnerText = "inline";
 
-                xmlRoot["formatting"].AppendChild(xmlDoc.CreateElement("borders"));
+				xmlRoot["formatting"].AppendChild(xmlDoc.CreateElement("borders"));
 				xmlRoot["formatting"]["borders"].AppendChild(xmlDoc.CreateElement("mainleft"));
 				xmlRoot["formatting"]["borders"]["mainleft"].InnerText = "40";
 				xmlRoot["formatting"]["borders"].AppendChild(xmlDoc.CreateElement("maintop"));
@@ -750,7 +751,11 @@ namespace Pbp
 				wrt.Close();
 
 				FilePath = fileName;
-			
+
+			}
+			else
+			{
+				throw new NotImplementedException();
 			}
         }
 
