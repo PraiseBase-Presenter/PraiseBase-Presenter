@@ -51,7 +51,8 @@ namespace Pbp
         /// <summary>
         /// List of all availabe songs
         /// </summary>
-		public List<Song> Songs {get; private set;}
+        public Dictionary<System.Guid, Song> SongList {get;private set;}
+
 
 		/// <summary>
 		/// Gets or sets the current song object
@@ -112,7 +113,6 @@ namespace Pbp
 
             string searchDir = Settings.Instance.DataDirectory +  Path.DirectorySeparatorChar + Settings.Instance.SongDir;
 
-			Songs = new List<Song>();
 			List<string> songPaths = new List<string>();
             if (Directory.Exists(searchDir))
             {
@@ -126,9 +126,14 @@ namespace Pbp
                 }
             }
 
+
+
 			int cnt = songPaths.Count;
 			if (ldg != null)
 				ldg.setProgBarMax(cnt);
+
+            SongList = new Dictionary<System.Guid, Song>();
+
 			for (int i = 0; i <cnt;i++ )
 			{
 				if (ldg != null && i%10 == 0)
@@ -139,10 +144,13 @@ namespace Pbp
 				Song tmpSong = new Song(songPaths[i]);
 				if (tmpSong.IsValid)
 				{
-					tmpSong.ID = i;
-					Songs.Add(tmpSong);
+                    SongList[tmpSong.GUID] = tmpSong;
 				}
 			}
+
+            
+
+
         }
 
 		/// <summary>
@@ -150,25 +158,26 @@ namespace Pbp
 		/// </summary>
 		/// <param name="title">The title of the song</param>
 		/// <returns>Returns the position in the songlist</returns>
-		public int getIdByTitle(string title)
+		public Guid getGUID(string title)
 		{
-			for (int i = 0; i < Songs.Count; i++)
+			foreach (KeyValuePair<Guid,Song> kvp in SongList)
 			{
-				if (Songs[i].Title == title)
+				if (kvp.Value.Title == title)
 				{
-					return i;
+					return kvp.Key;
 				}
 			}
-			return -1;			
+            MessageBox.Show("Titel " + title + " nicht vorhanden");
+            return Guid.Empty;
 		}
 
 		/// <summary>
 		/// Reloads the song at the specified position
 		/// </summary>
 		/// <param name="i">The song position</param>
-		public void reloadSong(int i)
+		public void reloadSong(Guid g)
 		{
-			Songs[i] = new Song(Songs[i].FilePath);
+			SongList[g] = new Song(SongList[g].FilePath);
 		}
 
 		/// <summary>
@@ -179,14 +188,14 @@ namespace Pbp
 		{
 			if (path != String.Empty && path != null)
 			{
-				for (int i = 0; i < Songs.Count; i++)
-				{
-					if (Songs[i].FilePath.ToLower() == path.ToLower())
-					{
-						Songs[i] = new Song(Songs[i].FilePath);
-						return;
-					}
-				}
+                foreach (KeyValuePair<Guid, Song> kvp in SongList)
+                {
+                    if (kvp.Value.FilePath == path)
+                    {
+                        SongList[kvp.Key] = new Song(path);
+                        return;
+                    }
+                }
 			}
 		}
 
@@ -206,12 +215,12 @@ namespace Pbp
 			needle = needle.Replace("  ", " ");
 
             List<Song> tmpList = new List<Song>();
-            for (int i=0;i<Songs.Count;i++)
+            foreach (KeyValuePair<Guid,Song> kvp in SongList)
             {
-                if (Songs[i].Title.ToLower().Contains(needle) ||
-					(mode == 1 && Songs[i].SearchText.Contains(needle)))
+                if (SongList[kvp.Key].Title.ToLower().Contains(needle) ||
+					(mode == 1 && SongList[kvp.Key].SearchText.Contains(needle)))
                 {
-                    tmpList.Add(Songs[i]);
+                    tmpList.Add(SongList[kvp.Key]);
                 }
             }
             return tmpList;

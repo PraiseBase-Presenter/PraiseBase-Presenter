@@ -142,10 +142,10 @@ namespace Pbp.Forms
             
             listViewSongs.Items.Clear();
             int cnt = 0;
-            foreach (Song sng in songMan.Songs)
+            foreach (KeyValuePair<Guid,Song> kvp in songMan.SongList)
             {
-                ListViewItem lvi = new ListViewItem(sng.Title);
-                lvi.Tag = sng.ID;
+                ListViewItem lvi = new ListViewItem(kvp.Value.Title);
+                lvi.Tag = kvp.Key;
                 listViewSongs.Items.Add(lvi);
                 cnt++;
             }
@@ -162,7 +162,7 @@ namespace Pbp.Forms
             foreach (Song sng in songMan.getSearchResults(needle,radioSongSearchAll.Checked ? 1 : 0))
             {
                 ListViewItem lvi = new ListViewItem(sng.Title);
-                lvi.Tag = sng.ID;
+                lvi.Tag = sng.GUID;
                 listViewSongs.Items.Add(lvi);
                 cnt++;
             }
@@ -173,7 +173,7 @@ namespace Pbp.Forms
                     try
                     {
 						listViewSongs.Items[0].Selected = true;
-						SongManager.getInstance().CurrentSong = SongManager.getInstance().Songs[(int)listViewSongs.SelectedItems[0].Tag];
+						SongManager.getInstance().CurrentSong = SongManager.getInstance().SongList[(Guid)listViewSongs.SelectedItems[0].Tag];
 						showCurrentSongDetails();
                     }
                     catch (Exception e)
@@ -326,7 +326,7 @@ namespace Pbp.Forms
 				}
 				else
 				{
-					SongManager.getInstance().CurrentSong = SongManager.getInstance().Songs[(int)listViewSongs.SelectedItems[0].Tag];
+					SongManager.getInstance().CurrentSong = SongManager.getInstance().SongList[(Guid)listViewSongs.SelectedItems[0].Tag];
 					showCurrentSongDetails();
 					buttonSetListAdd.Enabled = true;
 				}
@@ -343,7 +343,7 @@ namespace Pbp.Forms
 		{
 			if (listViewSongs.SelectedIndices.Count > 0)
 			{
-				SongManager.getInstance().CurrentSong = SongManager.getInstance().Songs[(int)listViewSongs.SelectedItems[0].Tag];
+				SongManager.getInstance().CurrentSong = SongManager.getInstance().SongList[(Guid)listViewSongs.SelectedItems[0].Tag];
 				showCurrentSongDetails();
 				buttonSetListAdd.Enabled = true;
 			}
@@ -1059,7 +1059,7 @@ namespace Pbp.Forms
 					buttonSetListDown.Enabled = false;
 				buttonSetListRem.Enabled = true;
 
-				SongManager.getInstance().CurrentSong = SongManager.getInstance().Songs[(int)listViewSetList.SelectedItems[0].Tag];
+				SongManager.getInstance().CurrentSong = SongManager.getInstance().SongList[(Guid)listViewSetList.SelectedItems[0].Tag];
 				showCurrentSongDetails();
 			}
 		}
@@ -1141,7 +1141,7 @@ namespace Pbp.Forms
 				for (int i = 0; i < listViewSetList.Items.Count; i++)
 				{
 					XmlNode nd = xmlDoc.CreateElement("item");
-					nd.InnerText = SongManager.getInstance().Songs[(int)listViewSetList.Items[i].Tag].Title;
+					nd.InnerText = SongManager.getInstance().SongList[(Guid)listViewSetList.Items[i].Tag].Title;
 					xmlRoot["items"].AppendChild(nd);
 				}
 				XmlWriter wrt = new XmlTextWriter(dlg.FileName, Encoding.UTF8);
@@ -1177,11 +1177,11 @@ namespace Pbp.Forms
 						{
 							if (xmlRoot["items"].ChildNodes[i].Name == "item")
 							{
-								int id = SongManager.getInstance().getIdByTitle(xmlRoot["items"].ChildNodes[i].InnerText);
-								if (id != -1)
+								Guid g = SongManager.getInstance().getGUID(xmlRoot["items"].ChildNodes[i].InnerText);
+								if (g != Guid.Empty)
 								{
-									ListViewItem lvi = new ListViewItem(xmlRoot["items"].ChildNodes[i].InnerText);
-									lvi.Tag = id;
+									ListViewItem lvi = new ListViewItem(SongManager.Instance.SongList[g].Title);
+									lvi.Tag = g;
 									listViewSetList.Items.Add(lvi);
 									buttonSetListClear.Enabled = true;
 									buttonSaveSetList.Enabled = true;
@@ -1269,7 +1269,7 @@ namespace Pbp.Forms
 			if (listViewSongs.SelectedItems.Count > 0)
 			{
 				EditorWindow wnd = EditorWindow.getInstance();
-				wnd.openSong(SongManager.Instance.Songs[(int)listViewSongs.SelectedItems[0].Tag].FilePath);
+				wnd.openSong(SongManager.Instance.CurrentSong.FilePath);
 				wnd.Show();
 				wnd.Focus();
 			}
@@ -1417,6 +1417,11 @@ namespace Pbp.Forms
 		{
 
 		}
+
+        private void listViewSongs_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
 
 
 

@@ -163,6 +163,8 @@ namespace Pbp
 		public SongTextVerticalAlign DefaultVertAlign { get; set; }
 		#endregion
 
+        public System.Guid GUID {  get;private set;}
+
 		/// <summary>
         /// The song constructor
         /// </summary>
@@ -179,7 +181,9 @@ namespace Pbp
         {
             IsValid = false;
 			bool err = false;
-			
+
+            GUID = System.Guid.NewGuid();
+
 			FilePath = filePath;
 			Tags = new TagList();
 			DefaultHorizAlign = SongTextHorizontalAlign.Center;

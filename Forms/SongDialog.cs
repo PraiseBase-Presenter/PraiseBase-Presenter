@@ -42,7 +42,7 @@ namespace Pbp.Forms
 			{
 				foreach (ListViewItem lvi in listViewItems.SelectedItems)
 				{
-					EditorWindow.getInstance().openSong(SongManager.getInstance().Songs[(int)(lvi.Tag)].FilePath);
+					EditorWindow.getInstance().openSong(SongManager.getInstance().SongList[(Guid)(lvi.Tag)].FilePath);
 				}
 				OpenInEditor = true;
 				DialogResult = DialogResult.OK;
@@ -63,8 +63,9 @@ namespace Pbp.Forms
 		{
 			listViewItems.Items.Clear();
 			string searchText = textBoxSearch.Text.Trim().ToLower();
-			foreach (Song sng in SongManager.getInstance().Songs)
+			foreach (KeyValuePair<Guid,Song> kvp in SongManager.Instance.SongList)
 			{
+                Song sng = (Song)kvp.Value;
 				bool use = true;
 				if (searchText != String.Empty && !sng.SearchText.Contains(searchText))
 					use = false;
@@ -93,7 +94,7 @@ namespace Pbp.Forms
 				if (use)
 				{
 					ListViewItem lvi = new ListViewItem(sng.Title);
-					lvi.Tag = sng.ID;
+					lvi.Tag = sng.GUID;
 					listViewItems.Items.Add(lvi);
 				}
 			}

@@ -99,6 +99,8 @@
             this.toolStripButtonDisplaySettings = new System.Windows.Forms.ToolStripButton();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.toolStripStatusLabel = new System.Windows.Forms.ToolStripStatusLabel();
+            this.toolStripStatusLabelCtrl = new System.Windows.Forms.ToolStripStatusLabel();
+            this.toolStripStatusLabelInfo = new System.Windows.Forms.ToolStripStatusLabel();
             this.groupBox5 = new System.Windows.Forms.GroupBox();
             this.progressBarTransition = new System.Windows.Forms.ProgressBar();
             this.pictureBoxPreview = new System.Windows.Forms.PictureBox();
@@ -128,15 +130,9 @@
             this.songSearchBox = new System.Windows.Forms.TextBox();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
+            this.button1 = new System.Windows.Forms.Button();
             this.tabControl2 = new System.Windows.Forms.TabControl();
             this.tabPageImageHistory = new System.Windows.Forms.TabPage();
-            this.button1 = new System.Windows.Forms.Button();
-            this.label8 = new System.Windows.Forms.Label();
-            this.label6 = new System.Windows.Forms.Label();
-            this.songDetailImages = new System.Windows.Forms.ListView();
-            this.columnHeader7 = new System.Windows.Forms.ColumnHeader();
-            this.listViewImageQueue = new System.Windows.Forms.ListView();
-            this.columnHeader6 = new System.Windows.Forms.ColumnHeader();
             this.listViewImageHistory = new System.Windows.Forms.ListView();
             this.columnHeader5 = new System.Windows.Forms.ColumnHeader();
             this.tabPageImageBrowser = new System.Windows.Forms.TabPage();
@@ -147,11 +143,15 @@
             this.textBoxImageSearch = new System.Windows.Forms.TextBox();
             this.labelImgDirName = new System.Windows.Forms.Label();
             this.buttonClearImageHistory = new System.Windows.Forms.Button();
-            this.tabPageSlideShow = new System.Windows.Forms.TabPage();
             this.tabPageImageFavorites = new System.Windows.Forms.TabPage();
             this.listView1 = new System.Windows.Forms.ListView();
-            this.toolStripStatusLabelCtrl = new System.Windows.Forms.ToolStripStatusLabel();
-            this.toolStripStatusLabelInfo = new System.Windows.Forms.ToolStripStatusLabel();
+            this.tabPageSlideShow = new System.Windows.Forms.TabPage();
+            this.songDetailImages = new System.Windows.Forms.ListView();
+            this.columnHeader7 = new System.Windows.Forms.ColumnHeader();
+            this.label8 = new System.Windows.Forms.Label();
+            this.listViewImageQueue = new System.Windows.Forms.ListView();
+            this.columnHeader6 = new System.Windows.Forms.ColumnHeader();
+            this.label6 = new System.Windows.Forms.Label();
             buttonChooseDiaDir = new System.Windows.Forms.Button();
             this.menuStrip1.SuspendLayout();
             this.groupBox4.SuspendLayout();
@@ -170,8 +170,8 @@
             this.tabControl2.SuspendLayout();
             this.tabPageImageHistory.SuspendLayout();
             this.tabPageImageBrowser.SuspendLayout();
-            this.tabPageSlideShow.SuspendLayout();
             this.tabPageImageFavorites.SuspendLayout();
+            this.tabPageSlideShow.SuspendLayout();
             this.SuspendLayout();
             // 
             // buttonChooseDiaDir
@@ -205,32 +205,32 @@
             this.toolStripSeparator4,
             this.beendenToolStripMenuItem});
             this.dateiToolStripMenuItem.Name = "dateiToolStripMenuItem";
-            this.dateiToolStripMenuItem.Size = new System.Drawing.Size(64, 20);
+            this.dateiToolStripMenuItem.Size = new System.Drawing.Size(73, 20);
             this.dateiToolStripMenuItem.Text = "&Allgemein";
             // 
             // liededitorToolStripMenuItem
             // 
             this.liededitorToolStripMenuItem.Name = "liededitorToolStripMenuItem";
-            this.liededitorToolStripMenuItem.Size = new System.Drawing.Size(153, 22);
+            this.liededitorToolStripMenuItem.Size = new System.Drawing.Size(148, 22);
             this.liededitorToolStripMenuItem.Text = "Lied&editor";
             this.liededitorToolStripMenuItem.Click += new System.EventHandler(this.toolStripButton5_Click);
             // 
             // toolStripMenuItem3
             // 
             this.toolStripMenuItem3.Name = "toolStripMenuItem3";
-            this.toolStripMenuItem3.Size = new System.Drawing.Size(153, 22);
+            this.toolStripMenuItem3.Size = new System.Drawing.Size(148, 22);
             this.toolStripMenuItem3.Text = "Lieder&browser";
             this.toolStripMenuItem3.Click += new System.EventHandler(this.toolStripMenuItem3_Click);
             // 
             // toolStripSeparator4
             // 
             this.toolStripSeparator4.Name = "toolStripSeparator4";
-            this.toolStripSeparator4.Size = new System.Drawing.Size(150, 6);
+            this.toolStripSeparator4.Size = new System.Drawing.Size(145, 6);
             // 
             // beendenToolStripMenuItem
             // 
             this.beendenToolStripMenuItem.Name = "beendenToolStripMenuItem";
-            this.beendenToolStripMenuItem.Size = new System.Drawing.Size(153, 22);
+            this.beendenToolStripMenuItem.Size = new System.Drawing.Size(148, 22);
             this.beendenToolStripMenuItem.Text = "&Beenden";
             this.beendenToolStripMenuItem.Click += new System.EventHandler(this.beendenToolStripMenuItem_Click);
             // 
@@ -240,20 +240,20 @@
             this.projektionEinausToolStripMenuItem,
             this.blackoutEinausToolStripMenuItem});
             this.projektionToolStripMenuItem.Name = "projektionToolStripMenuItem";
-            this.projektionToolStripMenuItem.Size = new System.Drawing.Size(67, 20);
+            this.projektionToolStripMenuItem.Size = new System.Drawing.Size(73, 20);
             this.projektionToolStripMenuItem.Text = "Projektion";
             // 
             // projektionEinausToolStripMenuItem
             // 
             this.projektionEinausToolStripMenuItem.Name = "projektionEinausToolStripMenuItem";
-            this.projektionEinausToolStripMenuItem.Size = new System.Drawing.Size(171, 22);
+            this.projektionEinausToolStripMenuItem.Size = new System.Drawing.Size(170, 22);
             this.projektionEinausToolStripMenuItem.Text = "Projektion ein/aus";
             this.projektionEinausToolStripMenuItem.Click += new System.EventHandler(this.toggleProjection);
             // 
             // blackoutEinausToolStripMenuItem
             // 
             this.blackoutEinausToolStripMenuItem.Name = "blackoutEinausToolStripMenuItem";
-            this.blackoutEinausToolStripMenuItem.Size = new System.Drawing.Size(171, 22);
+            this.blackoutEinausToolStripMenuItem.Size = new System.Drawing.Size(170, 22);
             this.blackoutEinausToolStripMenuItem.Text = "Blackout ein/aus";
             this.blackoutEinausToolStripMenuItem.Click += new System.EventHandler(this.toggleBlackOut);
             // 
@@ -271,20 +271,20 @@
             this.bilderlisteNeuLadenToolStripMenuItem,
             this.miniaturbilderPrüfenToolStripMenuItem});
             this.einstellungenToolStripMenuItem.Name = "einstellungenToolStripMenuItem";
-            this.einstellungenToolStripMenuItem.Size = new System.Drawing.Size(50, 20);
+            this.einstellungenToolStripMenuItem.Size = new System.Drawing.Size(49, 20);
             this.einstellungenToolStripMenuItem.Text = "&Extras";
             // 
             // optionenToolStripMenuItem
             // 
             this.optionenToolStripMenuItem.Name = "optionenToolStripMenuItem";
-            this.optionenToolStripMenuItem.Size = new System.Drawing.Size(195, 22);
+            this.optionenToolStripMenuItem.Size = new System.Drawing.Size(200, 22);
             this.optionenToolStripMenuItem.Text = "&Optionen...";
             this.optionenToolStripMenuItem.Click += new System.EventHandler(this.optionenToolStripMenuItem_Click);
             // 
             // toolStripSeparator5
             // 
             this.toolStripSeparator5.Name = "toolStripSeparator5";
-            this.toolStripSeparator5.Size = new System.Drawing.Size(192, 6);
+            this.toolStripSeparator5.Size = new System.Drawing.Size(197, 6);
             // 
             // datenverzeichnisÖffnenToolStripMenuItem
             // 
@@ -295,47 +295,47 @@
             this.bilderToolStripMenuItem1,
             this.setlistenToolStripMenuItem1});
             this.datenverzeichnisÖffnenToolStripMenuItem.Name = "datenverzeichnisÖffnenToolStripMenuItem";
-            this.datenverzeichnisÖffnenToolStripMenuItem.Size = new System.Drawing.Size(195, 22);
+            this.datenverzeichnisÖffnenToolStripMenuItem.Size = new System.Drawing.Size(200, 22);
             this.datenverzeichnisÖffnenToolStripMenuItem.Text = "&Verzeichnis anzeigen";
             this.datenverzeichnisÖffnenToolStripMenuItem.Click += new System.EventHandler(this.datenverzeichnisÖffnenToolStripMenuItem_Click);
             // 
             // datenverzeichnisToolStripMenuItem1
             // 
             this.datenverzeichnisToolStripMenuItem1.Name = "datenverzeichnisToolStripMenuItem1";
-            this.datenverzeichnisToolStripMenuItem1.Size = new System.Drawing.Size(167, 22);
+            this.datenverzeichnisToolStripMenuItem1.Size = new System.Drawing.Size(163, 22);
             this.datenverzeichnisToolStripMenuItem1.Text = "&Datenverzeichnis";
             this.datenverzeichnisToolStripMenuItem1.Click += new System.EventHandler(this.datenverzeichnisÖffnenToolStripMenuItem_Click);
             // 
             // toolStripSeparator10
             // 
             this.toolStripSeparator10.Name = "toolStripSeparator10";
-            this.toolStripSeparator10.Size = new System.Drawing.Size(164, 6);
+            this.toolStripSeparator10.Size = new System.Drawing.Size(160, 6);
             // 
             // liederToolStripMenuItem1
             // 
             this.liederToolStripMenuItem1.Name = "liederToolStripMenuItem1";
-            this.liederToolStripMenuItem1.Size = new System.Drawing.Size(167, 22);
+            this.liederToolStripMenuItem1.Size = new System.Drawing.Size(163, 22);
             this.liederToolStripMenuItem1.Text = "&Lieder";
             this.liederToolStripMenuItem1.Click += new System.EventHandler(this.liederToolStripMenuItem_Click);
             // 
             // bilderToolStripMenuItem1
             // 
             this.bilderToolStripMenuItem1.Name = "bilderToolStripMenuItem1";
-            this.bilderToolStripMenuItem1.Size = new System.Drawing.Size(167, 22);
+            this.bilderToolStripMenuItem1.Size = new System.Drawing.Size(163, 22);
             this.bilderToolStripMenuItem1.Text = "&Bilder";
             this.bilderToolStripMenuItem1.Click += new System.EventHandler(this.bilderToolStripMenuItem_Click);
             // 
             // setlistenToolStripMenuItem1
             // 
             this.setlistenToolStripMenuItem1.Name = "setlistenToolStripMenuItem1";
-            this.setlistenToolStripMenuItem1.Size = new System.Drawing.Size(167, 22);
+            this.setlistenToolStripMenuItem1.Size = new System.Drawing.Size(163, 22);
             this.setlistenToolStripMenuItem1.Text = "&Setlisten";
             this.setlistenToolStripMenuItem1.Click += new System.EventHandler(this.setlistenToolStripMenuItem_Click);
             // 
             // toolStripSeparator6
             // 
             this.toolStripSeparator6.Name = "toolStripSeparator6";
-            this.toolStripSeparator6.Size = new System.Drawing.Size(192, 6);
+            this.toolStripSeparator6.Size = new System.Drawing.Size(197, 6);
             // 
             // toolStripMenuItem4
             // 
@@ -345,67 +345,67 @@
             this.powerpraiseLiederToolStripMenuItem,
             this.songbeamerLiederToolStripMenuItem});
             this.toolStripMenuItem4.Name = "toolStripMenuItem4";
-            this.toolStripMenuItem4.Size = new System.Drawing.Size(195, 22);
+            this.toolStripMenuItem4.Size = new System.Drawing.Size(200, 22);
             this.toolStripMenuItem4.Text = "&Import";
             // 
             // praiseBoxDatenbankToolStripMenuItem
             // 
             this.praiseBoxDatenbankToolStripMenuItem.Name = "praiseBoxDatenbankToolStripMenuItem";
-            this.praiseBoxDatenbankToolStripMenuItem.Size = new System.Drawing.Size(226, 22);
+            this.praiseBoxDatenbankToolStripMenuItem.Size = new System.Drawing.Size(225, 22);
             this.praiseBoxDatenbankToolStripMenuItem.Text = "PraiseBox Datenbank...";
             this.praiseBoxDatenbankToolStripMenuItem.Click += new System.EventHandler(this.praiseBoxDatenbankToolStripMenuItem_Click);
             // 
             // worToolStripMenuItem
             // 
             this.worToolStripMenuItem.Name = "worToolStripMenuItem";
-            this.worToolStripMenuItem.Size = new System.Drawing.Size(226, 22);
+            this.worToolStripMenuItem.Size = new System.Drawing.Size(225, 22);
             this.worToolStripMenuItem.Text = "WorshipSystem Datenbank...";
             this.worToolStripMenuItem.Click += new System.EventHandler(this.worToolStripMenuItem_Click);
             // 
             // powerpraiseLiederToolStripMenuItem
             // 
             this.powerpraiseLiederToolStripMenuItem.Name = "powerpraiseLiederToolStripMenuItem";
-            this.powerpraiseLiederToolStripMenuItem.Size = new System.Drawing.Size(226, 22);
+            this.powerpraiseLiederToolStripMenuItem.Size = new System.Drawing.Size(225, 22);
             this.powerpraiseLiederToolStripMenuItem.Text = "Powerpraise Lieder...";
             this.powerpraiseLiederToolStripMenuItem.Click += new System.EventHandler(this.powerpraiseLiederToolStripMenuItem_Click);
             // 
             // songbeamerLiederToolStripMenuItem
             // 
             this.songbeamerLiederToolStripMenuItem.Name = "songbeamerLiederToolStripMenuItem";
-            this.songbeamerLiederToolStripMenuItem.Size = new System.Drawing.Size(226, 22);
+            this.songbeamerLiederToolStripMenuItem.Size = new System.Drawing.Size(225, 22);
             this.songbeamerLiederToolStripMenuItem.Text = "Songbeamer Lieder...";
             this.songbeamerLiederToolStripMenuItem.Click += new System.EventHandler(this.songbeamerLiederToolStripMenuItem_Click);
             // 
             // toolStripSeparator9
             // 
             this.toolStripSeparator9.Name = "toolStripSeparator9";
-            this.toolStripSeparator9.Size = new System.Drawing.Size(192, 6);
+            this.toolStripSeparator9.Size = new System.Drawing.Size(197, 6);
             // 
             // bildschirmeErneutSuchenToolStripMenuItem
             // 
             this.bildschirmeErneutSuchenToolStripMenuItem.Name = "bildschirmeErneutSuchenToolStripMenuItem";
-            this.bildschirmeErneutSuchenToolStripMenuItem.Size = new System.Drawing.Size(195, 22);
+            this.bildschirmeErneutSuchenToolStripMenuItem.Size = new System.Drawing.Size(200, 22);
             this.bildschirmeErneutSuchenToolStripMenuItem.Text = "Bildschirme neu &suchen";
             this.bildschirmeErneutSuchenToolStripMenuItem.Click += new System.EventHandler(this.bildschirmeErneutSuchenToolStripMenuItem_Click);
             // 
             // liederlisteNeuLadenToolStripMenuItem
             // 
             this.liederlisteNeuLadenToolStripMenuItem.Name = "liederlisteNeuLadenToolStripMenuItem";
-            this.liederlisteNeuLadenToolStripMenuItem.Size = new System.Drawing.Size(195, 22);
+            this.liederlisteNeuLadenToolStripMenuItem.Size = new System.Drawing.Size(200, 22);
             this.liederlisteNeuLadenToolStripMenuItem.Text = "&Liederliste neu laden";
             this.liederlisteNeuLadenToolStripMenuItem.Click += new System.EventHandler(this.liederlisteNeuLadenToolStripMenuItem_Click);
             // 
             // bilderlisteNeuLadenToolStripMenuItem
             // 
             this.bilderlisteNeuLadenToolStripMenuItem.Name = "bilderlisteNeuLadenToolStripMenuItem";
-            this.bilderlisteNeuLadenToolStripMenuItem.Size = new System.Drawing.Size(195, 22);
+            this.bilderlisteNeuLadenToolStripMenuItem.Size = new System.Drawing.Size(200, 22);
             this.bilderlisteNeuLadenToolStripMenuItem.Text = "&Bilderliste neu laden";
             this.bilderlisteNeuLadenToolStripMenuItem.Click += new System.EventHandler(this.bilderlisteNeuLadenToolStripMenuItem_Click);
             // 
             // miniaturbilderPrüfenToolStripMenuItem
             // 
             this.miniaturbilderPrüfenToolStripMenuItem.Name = "miniaturbilderPrüfenToolStripMenuItem";
-            this.miniaturbilderPrüfenToolStripMenuItem.Size = new System.Drawing.Size(195, 22);
+            this.miniaturbilderPrüfenToolStripMenuItem.Size = new System.Drawing.Size(200, 22);
             this.miniaturbilderPrüfenToolStripMenuItem.Text = "Miniaturbilder prüfen";
             this.miniaturbilderPrüfenToolStripMenuItem.Click += new System.EventHandler(this.miniaturbilderPrüfenToolStripMenuItem_Click);
             // 
@@ -426,32 +426,32 @@
             this.toolStripMenuItem2.Enabled = false;
             this.toolStripMenuItem2.Name = "toolStripMenuItem2";
             this.toolStripMenuItem2.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.F1)));
-            this.toolStripMenuItem2.Size = new System.Drawing.Size(152, 22);
+            this.toolStripMenuItem2.Size = new System.Drawing.Size(149, 22);
             this.toolStripMenuItem2.Text = "&Hilfe";
             // 
             // fehlerMeldenToolStripMenuItem
             // 
             this.fehlerMeldenToolStripMenuItem.Name = "fehlerMeldenToolStripMenuItem";
-            this.fehlerMeldenToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.fehlerMeldenToolStripMenuItem.Size = new System.Drawing.Size(149, 22);
             this.fehlerMeldenToolStripMenuItem.Text = "&Fehler melden";
             this.fehlerMeldenToolStripMenuItem.Click += new System.EventHandler(this.fehlerMeldenToolStripMenuItem_Click);
             // 
             // webToolStripMenuItem
             // 
             this.webToolStripMenuItem.Name = "webToolStripMenuItem";
-            this.webToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.webToolStripMenuItem.Size = new System.Drawing.Size(149, 22);
             this.webToolStripMenuItem.Text = "&Web";
             this.webToolStripMenuItem.Click += new System.EventHandler(this.webToolStripMenuItem_Click);
             // 
             // toolStripSeparator3
             // 
             this.toolStripSeparator3.Name = "toolStripSeparator3";
-            this.toolStripSeparator3.Size = new System.Drawing.Size(149, 6);
+            this.toolStripSeparator3.Size = new System.Drawing.Size(146, 6);
             // 
             // infoToolStripMenuItem
             // 
             this.infoToolStripMenuItem.Name = "infoToolStripMenuItem";
-            this.infoToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.infoToolStripMenuItem.Size = new System.Drawing.Size(149, 22);
             this.infoToolStripMenuItem.Text = "&Info...";
             this.infoToolStripMenuItem.Click += new System.EventHandler(this.infoToolStripMenuItem_Click);
             // 
@@ -620,7 +620,7 @@
             this.trackBarFadeTimer.Location = new System.Drawing.Point(9, 39);
             this.trackBarFadeTimer.Maximum = 100;
             this.trackBarFadeTimer.Name = "trackBarFadeTimer";
-            this.trackBarFadeTimer.Size = new System.Drawing.Size(226, 42);
+            this.trackBarFadeTimer.Size = new System.Drawing.Size(226, 45);
             this.trackBarFadeTimer.TabIndex = 31;
             this.trackBarFadeTimer.TickFrequency = 5;
             this.trackBarFadeTimer.Value = 10;
@@ -722,7 +722,7 @@
             // toolStripButton3
             // 
             this.toolStripButton3.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolStripButton3.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton3.Image")));
+            this.toolStripButton3.Image = global::Pbp.Properties.Resources.highlight;
             this.toolStripButton3.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripButton3.Name = "toolStripButton3";
             this.toolStripButton3.Size = new System.Drawing.Size(68, 68);
@@ -753,33 +753,33 @@
             // datenverzeichnisToolStripMenuItem
             // 
             this.datenverzeichnisToolStripMenuItem.Name = "datenverzeichnisToolStripMenuItem";
-            this.datenverzeichnisToolStripMenuItem.Size = new System.Drawing.Size(167, 22);
+            this.datenverzeichnisToolStripMenuItem.Size = new System.Drawing.Size(163, 22);
             this.datenverzeichnisToolStripMenuItem.Text = "Datenverzeichnis";
             this.datenverzeichnisToolStripMenuItem.Click += new System.EventHandler(this.datenverzeichnisToolStripMenuItem_Click);
             // 
             // toolStripSeparator8
             // 
             this.toolStripSeparator8.Name = "toolStripSeparator8";
-            this.toolStripSeparator8.Size = new System.Drawing.Size(164, 6);
+            this.toolStripSeparator8.Size = new System.Drawing.Size(160, 6);
             // 
             // liederToolStripMenuItem
             // 
             this.liederToolStripMenuItem.Name = "liederToolStripMenuItem";
-            this.liederToolStripMenuItem.Size = new System.Drawing.Size(167, 22);
+            this.liederToolStripMenuItem.Size = new System.Drawing.Size(163, 22);
             this.liederToolStripMenuItem.Text = "Lieder";
             this.liederToolStripMenuItem.Click += new System.EventHandler(this.liederToolStripMenuItem_Click);
             // 
             // bilderToolStripMenuItem
             // 
             this.bilderToolStripMenuItem.Name = "bilderToolStripMenuItem";
-            this.bilderToolStripMenuItem.Size = new System.Drawing.Size(167, 22);
+            this.bilderToolStripMenuItem.Size = new System.Drawing.Size(163, 22);
             this.bilderToolStripMenuItem.Text = "Bilder";
             this.bilderToolStripMenuItem.Click += new System.EventHandler(this.bilderToolStripMenuItem_Click);
             // 
             // setlistenToolStripMenuItem
             // 
             this.setlistenToolStripMenuItem.Name = "setlistenToolStripMenuItem";
-            this.setlistenToolStripMenuItem.Size = new System.Drawing.Size(167, 22);
+            this.setlistenToolStripMenuItem.Size = new System.Drawing.Size(163, 22);
             this.setlistenToolStripMenuItem.Text = "Setlisten";
             this.setlistenToolStripMenuItem.Click += new System.EventHandler(this.setlistenToolStripMenuItem_Click);
             // 
@@ -825,6 +825,28 @@
             // 
             this.toolStripStatusLabel.Name = "toolStripStatusLabel";
             this.toolStripStatusLabel.Size = new System.Drawing.Size(0, 17);
+            // 
+            // toolStripStatusLabelCtrl
+            // 
+            this.toolStripStatusLabelCtrl.AutoSize = false;
+            this.toolStripStatusLabelCtrl.BorderSides = ((System.Windows.Forms.ToolStripStatusLabelBorderSides)((((System.Windows.Forms.ToolStripStatusLabelBorderSides.Left | System.Windows.Forms.ToolStripStatusLabelBorderSides.Top)
+                        | System.Windows.Forms.ToolStripStatusLabelBorderSides.Right)
+                        | System.Windows.Forms.ToolStripStatusLabelBorderSides.Bottom)));
+            this.toolStripStatusLabelCtrl.BorderStyle = System.Windows.Forms.Border3DStyle.SunkenOuter;
+            this.toolStripStatusLabelCtrl.Name = "toolStripStatusLabelCtrl";
+            this.toolStripStatusLabelCtrl.Size = new System.Drawing.Size(100, 17);
+            this.toolStripStatusLabelCtrl.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // toolStripStatusLabelInfo
+            // 
+            this.toolStripStatusLabelInfo.BorderSides = ((System.Windows.Forms.ToolStripStatusLabelBorderSides)((((System.Windows.Forms.ToolStripStatusLabelBorderSides.Left | System.Windows.Forms.ToolStripStatusLabelBorderSides.Top)
+                        | System.Windows.Forms.ToolStripStatusLabelBorderSides.Right)
+                        | System.Windows.Forms.ToolStripStatusLabelBorderSides.Bottom)));
+            this.toolStripStatusLabelInfo.BorderStyle = System.Windows.Forms.Border3DStyle.SunkenOuter;
+            this.toolStripStatusLabelInfo.Name = "toolStripStatusLabelInfo";
+            this.toolStripStatusLabelInfo.Size = new System.Drawing.Size(903, 17);
+            this.toolStripStatusLabelInfo.Spring = true;
+            this.toolStripStatusLabelInfo.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // groupBox5
             // 
@@ -1077,6 +1099,7 @@
             this.listViewSongs.View = System.Windows.Forms.View.Details;
             this.listViewSongs.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.listViewSongs_MouseDoubleClick);
             this.listViewSongs.MouseClick += new System.Windows.Forms.MouseEventHandler(this.listViewSongs_MouseClick);
+            this.listViewSongs.SelectedIndexChanged += new System.EventHandler(this.listViewSongs_SelectedIndexChanged);
             // 
             // radioSongSearchAll
             // 
@@ -1177,6 +1200,17 @@
             this.splitContainer1.SplitterWidth = 1;
             this.splitContainer1.TabIndex = 35;
             // 
+            // button1
+            // 
+            this.button1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.button1.Location = new System.Drawing.Point(132, 268);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(125, 23);
+            this.button1.TabIndex = 33;
+            this.button1.Text = "Stapel leeren";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click_1);
+            // 
             // tabControl2
             // 
             this.tabControl2.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
@@ -1203,79 +1237,6 @@
             this.tabPageImageHistory.Text = "Verlauf";
             this.tabPageImageHistory.UseVisualStyleBackColor = true;
             this.tabPageImageHistory.Click += new System.EventHandler(this.tabPage3_Click);
-            // 
-            // button1
-            // 
-            this.button1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.button1.Location = new System.Drawing.Point(132, 268);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(125, 23);
-            this.button1.TabIndex = 33;
-            this.button1.Text = "Stapel leeren";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click_1);
-            // 
-            // label8
-            // 
-            this.label8.AutoSize = true;
-            this.label8.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label8.Location = new System.Drawing.Point(135, 4);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(47, 13);
-            this.label8.TabIndex = 31;
-            this.label8.Text = "Stapel:";
-            // 
-            // label6
-            // 
-            this.label6.AutoSize = true;
-            this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label6.Location = new System.Drawing.Point(6, 4);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(109, 13);
-            this.label6.TabIndex = 30;
-            this.label6.Text = "Verknpüfte Bilder:";
-            // 
-            // songDetailImages
-            // 
-            this.songDetailImages.Alignment = System.Windows.Forms.ListViewAlignment.SnapToGrid;
-            this.songDetailImages.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Left)));
-            this.songDetailImages.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
-            this.columnHeader7});
-            this.songDetailImages.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.None;
-            this.songDetailImages.Location = new System.Drawing.Point(4, 20);
-            this.songDetailImages.MultiSelect = false;
-            this.songDetailImages.Name = "songDetailImages";
-            this.songDetailImages.Size = new System.Drawing.Size(122, 271);
-            this.songDetailImages.TabIndex = 28;
-            this.songDetailImages.TileSize = new System.Drawing.Size(100, 60);
-            this.songDetailImages.UseCompatibleStateImageBehavior = false;
-            this.songDetailImages.View = System.Windows.Forms.View.Tile;
-            this.songDetailImages.SelectedIndexChanged += new System.EventHandler(this.songDetailImages_SelectedIndexChanged);
-            this.songDetailImages.Leave += new System.EventHandler(this.songDetailImages_Leave);
-            // 
-            // columnHeader7
-            // 
-            this.columnHeader7.Width = 90;
-            // 
-            // listViewImageQueue
-            // 
-            this.listViewImageQueue.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Left)));
-            this.listViewImageQueue.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
-            this.columnHeader6});
-            this.listViewImageQueue.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.None;
-            this.listViewImageQueue.Location = new System.Drawing.Point(131, 20);
-            this.listViewImageQueue.MultiSelect = false;
-            this.listViewImageQueue.Name = "listViewImageQueue";
-            this.listViewImageQueue.Size = new System.Drawing.Size(126, 242);
-            this.listViewImageQueue.TabIndex = 29;
-            this.listViewImageQueue.UseCompatibleStateImageBehavior = false;
-            this.listViewImageQueue.View = System.Windows.Forms.View.Tile;
-            // 
-            // columnHeader6
-            // 
-            this.columnHeader6.Width = 90;
             // 
             // listViewImageHistory
             // 
@@ -1393,26 +1354,6 @@
             this.buttonClearImageHistory.UseVisualStyleBackColor = true;
             this.buttonClearImageHistory.Click += new System.EventHandler(this.buttonClearImageHistory_Click);
             // 
-            // tabPageSlideShow
-            // 
-            this.tabPageSlideShow.Controls.Add(this.radioButtonAutoDiaShow);
-            this.tabPageSlideShow.Controls.Add(buttonChooseDiaDir);
-            this.tabPageSlideShow.Controls.Add(this.radioButtonManualDiashow);
-            this.tabPageSlideShow.Controls.Add(this.listViewDias);
-            this.tabPageSlideShow.Controls.Add(this.label1);
-            this.tabPageSlideShow.Controls.Add(this.labelDiaDirectory);
-            this.tabPageSlideShow.Controls.Add(this.textBoxDiaDuration);
-            this.tabPageSlideShow.Controls.Add(this.buttonEnableAllDias);
-            this.tabPageSlideShow.Controls.Add(this.buttonDiaShow);
-            this.tabPageSlideShow.Controls.Add(this.buttonDisableAllDias);
-            this.tabPageSlideShow.Location = new System.Drawing.Point(4, 25);
-            this.tabPageSlideShow.Name = "tabPageSlideShow";
-            this.tabPageSlideShow.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageSlideShow.Size = new System.Drawing.Size(488, 263);
-            this.tabPageSlideShow.TabIndex = 1;
-            this.tabPageSlideShow.Text = "Diaschau";
-            this.tabPageSlideShow.UseVisualStyleBackColor = true;
-            // 
             // tabPageImageFavorites
             // 
             this.tabPageImageFavorites.Controls.Add(this.listView1);
@@ -1436,27 +1377,87 @@
             this.listView1.TabIndex = 2;
             this.listView1.UseCompatibleStateImageBehavior = false;
             // 
-            // toolStripStatusLabelCtrl
+            // tabPageSlideShow
             // 
-            this.toolStripStatusLabelCtrl.AutoSize = false;
-            this.toolStripStatusLabelCtrl.BorderSides = ((System.Windows.Forms.ToolStripStatusLabelBorderSides)((((System.Windows.Forms.ToolStripStatusLabelBorderSides.Left | System.Windows.Forms.ToolStripStatusLabelBorderSides.Top)
-                        | System.Windows.Forms.ToolStripStatusLabelBorderSides.Right)
-                        | System.Windows.Forms.ToolStripStatusLabelBorderSides.Bottom)));
-            this.toolStripStatusLabelCtrl.BorderStyle = System.Windows.Forms.Border3DStyle.SunkenOuter;
-            this.toolStripStatusLabelCtrl.Name = "toolStripStatusLabelCtrl";
-            this.toolStripStatusLabelCtrl.Size = new System.Drawing.Size(100, 17);
-            this.toolStripStatusLabelCtrl.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.tabPageSlideShow.Controls.Add(this.radioButtonAutoDiaShow);
+            this.tabPageSlideShow.Controls.Add(buttonChooseDiaDir);
+            this.tabPageSlideShow.Controls.Add(this.radioButtonManualDiashow);
+            this.tabPageSlideShow.Controls.Add(this.listViewDias);
+            this.tabPageSlideShow.Controls.Add(this.label1);
+            this.tabPageSlideShow.Controls.Add(this.labelDiaDirectory);
+            this.tabPageSlideShow.Controls.Add(this.textBoxDiaDuration);
+            this.tabPageSlideShow.Controls.Add(this.buttonEnableAllDias);
+            this.tabPageSlideShow.Controls.Add(this.buttonDiaShow);
+            this.tabPageSlideShow.Controls.Add(this.buttonDisableAllDias);
+            this.tabPageSlideShow.Location = new System.Drawing.Point(4, 25);
+            this.tabPageSlideShow.Name = "tabPageSlideShow";
+            this.tabPageSlideShow.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPageSlideShow.Size = new System.Drawing.Size(488, 263);
+            this.tabPageSlideShow.TabIndex = 1;
+            this.tabPageSlideShow.Text = "Diaschau";
+            this.tabPageSlideShow.UseVisualStyleBackColor = true;
             // 
-            // toolStripStatusLabelInfo
+            // songDetailImages
             // 
-            this.toolStripStatusLabelInfo.BorderSides = ((System.Windows.Forms.ToolStripStatusLabelBorderSides)((((System.Windows.Forms.ToolStripStatusLabelBorderSides.Left | System.Windows.Forms.ToolStripStatusLabelBorderSides.Top)
-                        | System.Windows.Forms.ToolStripStatusLabelBorderSides.Right)
-                        | System.Windows.Forms.ToolStripStatusLabelBorderSides.Bottom)));
-            this.toolStripStatusLabelInfo.BorderStyle = System.Windows.Forms.Border3DStyle.SunkenOuter;
-            this.toolStripStatusLabelInfo.Name = "toolStripStatusLabelInfo";
-            this.toolStripStatusLabelInfo.Size = new System.Drawing.Size(872, 17);
-            this.toolStripStatusLabelInfo.Spring = true;
-            this.toolStripStatusLabelInfo.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.songDetailImages.Alignment = System.Windows.Forms.ListViewAlignment.SnapToGrid;
+            this.songDetailImages.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+                        | System.Windows.Forms.AnchorStyles.Left)));
+            this.songDetailImages.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.columnHeader7});
+            this.songDetailImages.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.None;
+            this.songDetailImages.Location = new System.Drawing.Point(4, 20);
+            this.songDetailImages.MultiSelect = false;
+            this.songDetailImages.Name = "songDetailImages";
+            this.songDetailImages.Size = new System.Drawing.Size(122, 271);
+            this.songDetailImages.TabIndex = 28;
+            this.songDetailImages.TileSize = new System.Drawing.Size(100, 60);
+            this.songDetailImages.UseCompatibleStateImageBehavior = false;
+            this.songDetailImages.View = System.Windows.Forms.View.Tile;
+            this.songDetailImages.SelectedIndexChanged += new System.EventHandler(this.songDetailImages_SelectedIndexChanged);
+            this.songDetailImages.Leave += new System.EventHandler(this.songDetailImages_Leave);
+            // 
+            // columnHeader7
+            // 
+            this.columnHeader7.Width = 90;
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label8.Location = new System.Drawing.Point(135, 4);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(47, 13);
+            this.label8.TabIndex = 31;
+            this.label8.Text = "Stapel:";
+            // 
+            // listViewImageQueue
+            // 
+            this.listViewImageQueue.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+                        | System.Windows.Forms.AnchorStyles.Left)));
+            this.listViewImageQueue.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.columnHeader6});
+            this.listViewImageQueue.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.None;
+            this.listViewImageQueue.Location = new System.Drawing.Point(131, 20);
+            this.listViewImageQueue.MultiSelect = false;
+            this.listViewImageQueue.Name = "listViewImageQueue";
+            this.listViewImageQueue.Size = new System.Drawing.Size(126, 242);
+            this.listViewImageQueue.TabIndex = 29;
+            this.listViewImageQueue.UseCompatibleStateImageBehavior = false;
+            this.listViewImageQueue.View = System.Windows.Forms.View.Tile;
+            // 
+            // columnHeader6
+            // 
+            this.columnHeader6.Width = 90;
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label6.Location = new System.Drawing.Point(6, 4);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(109, 13);
+            this.label6.TabIndex = 30;
+            this.label6.Text = "Verknpüfte Bilder:";
             // 
             // MainWindow
             // 
@@ -1500,9 +1501,9 @@
             this.tabPageImageHistory.ResumeLayout(false);
             this.tabPageImageBrowser.ResumeLayout(false);
             this.tabPageImageBrowser.PerformLayout();
+            this.tabPageImageFavorites.ResumeLayout(false);
             this.tabPageSlideShow.ResumeLayout(false);
             this.tabPageSlideShow.PerformLayout();
-            this.tabPageImageFavorites.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 

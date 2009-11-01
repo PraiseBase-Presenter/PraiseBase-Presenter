@@ -3,7 +3,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProductVersion>9.0.30729</ProductVersion>
+    <ProductVersion>9.0.21022</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{33D2BC6A-0AD1-4E2E-AF35-FFFB744F22C6}</ProjectGuid>
     <OutputType>WinExe</OutputType>
@@ -175,6 +175,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Components\TreeLE.resx">
       <DependentUpon>TreeLE.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\AboutWindow.resx">
       <DependentUpon>AboutWindow.cs</DependentUpon>
@@ -206,6 +207,7 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\QADialog.resx">
       <DependentUpon>QADialog.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\SongImporter.resx">
       <DependentUpon>SongImporter.cs</DependentUpon>
@@ -365,6 +367,7 @@
     <None Include="Resources\3floppy_unmount.png" />
     <None Include="Resources\easymoblog.png" />
     <None Include="Resources\xmag.png" />
+    <None Include="Resources\highlight.png" />
     <Content Include="Songs\A Mighty Fortress Is Our God.ppl" />
     <Content Include="Songs\Jesus is my Lord.ppl" />
   </ItemGroup>
