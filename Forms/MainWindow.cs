@@ -61,13 +61,20 @@ namespace Pbp.Forms
 		private bool blackout;
         private List<String> imageSearchResults;
 
+        private Timer keyStrokeTimer;
+
 		/// <summary>
 		/// Private constructor
 		/// </summary>
         private MainWindow()
         {
             InitializeComponent();
+
+            keyStrokeTimer = new Timer();
+            keyStrokeTimer.Interval = 250;
+            keyStrokeTimer.Tick += new EventHandler(keyStrokeTimer_Tick);
         }
+
 
 		/// <summary>
 		/// Returns a singleton of mainWindow
@@ -121,9 +128,23 @@ namespace Pbp.Forms
 
         private void songSearchBox_TextChanged(object sender, EventArgs e)
         {
-            searchSongs(songSearchBox.Text);
+            if (songSearchBox.Text == "")
+            {
+                searchSongs("");
+                keyStrokeTimer.Stop();
+                return;
+            }
+            if (keyStrokeTimer.Enabled)
+                keyStrokeTimer.Stop();
+            keyStrokeTimer.Start();
+            keyStrokeTimer.Tag = songSearchBox.Text;            
         }
 
+        void keyStrokeTimer_Tick(object sender, EventArgs e)
+        {
+            searchSongs((string)keyStrokeTimer.Tag);
+            keyStrokeTimer.Stop();
+        }
 
         private void songSearchResetButton_Click(object sender, EventArgs e)
         {
@@ -139,7 +160,8 @@ namespace Pbp.Forms
 			SongManager songMan = SongManager.getInstance();
 
             setStatus("Lade Liederliste...");
-            
+
+            listViewSongs.SuspendLayout();
             listViewSongs.Items.Clear();
             int cnt = 0;
             foreach (KeyValuePair<Guid,Song> kvp in songMan.SongList)
@@ -151,12 +173,15 @@ namespace Pbp.Forms
             }
             listViewSongs.Columns[0].Width = -2;
 			setStatus(cnt.ToString() + " Lieder geladen");
+
+            listViewSongs.ResumeLayout();
         }
 
         void searchSongs(string needle)
         {
 			SongManager songMan = SongManager.getInstance();
 
+            listViewSongs.SuspendLayout();
             listViewSongs.Items.Clear();
             int cnt = 0;
             foreach (Song sng in songMan.getSearchResults(needle,radioSongSearchAll.Checked ? 1 : 0))
@@ -184,11 +209,13 @@ namespace Pbp.Forms
                  }
             }
             listViewSongs.Columns[0].Width = -2;
+            listViewSongs.ResumeLayout();
         }
 
 
         private void radioSongSearchAll_CheckedChanged(object sender, EventArgs e)
         {
+
             searchSongs(songSearchBox.Text);
         }
 
@@ -196,8 +223,8 @@ namespace Pbp.Forms
         {
 			try
 			{
-				int idx = songDetailItems.SelectedIndices[0];
-				songDetailItems.Items[idx].Selected = false;
+				//int idx = songDetailItems.SelectedIndices[0];
+//				songDetailItems.Items[idx].Selected = false;
 			}
 			catch
 			{
@@ -290,6 +317,12 @@ namespace Pbp.Forms
 			songSearchBox.Text = "";
 			SongManager.getInstance().reload();
 			loadSongList();
+
+            for (int i=0;i<listViewSetList.Items.Count;i++)
+            {
+                listViewSetList.Items[i].Tag = SongManager.getInstance().getGUID(listViewSetList.Items[i].Text);
+            }
+
 			songSearchBox.Focus();
 			GC.Collect();
 		}
@@ -355,7 +388,7 @@ namespace Pbp.Forms
 			SongManager songMan = SongManager.getInstance();
 			Application.DoEvents();
 
-			songDetailItems.Items.Clear();
+			//songDetailItems.Items.Clear();
 			songDetailImages.Items.Clear();
 
 			songDetailImages.LargeImageList = songMan.CurrentSong.getThumbs();
@@ -366,32 +399,19 @@ namespace Pbp.Forms
 				songDetailImages.Items.Add(lvi);
 			}
 
-			songDetailItems.SmallImageList = songMan.CurrentSong.getThumbs();
-			foreach (Song.Part prt in songMan.CurrentSong.Parts)
-			{
-				int sj = 1;
-				foreach (Song.Slide sld in prt.Slides)
-				{
-					ListViewItem lvi = new ListViewItem(new string[] 
-                        { 
-                            prt.Slides.Count > 1 ? prt.Caption + " ("+sj+")" : prt.Caption, 
-                            sld.oneLineText() }
-					);
-					lvi.ImageIndex = sld.ImageNumber;
-					songDetailItems.Items.Add(lvi);
-					sj++;
-				}
-			}
+			//songDetailItems.SmallImageList = songMan.CurrentSong.getThumbs();
+            songDetailElement.setSong(songMan.CurrentSong);
 
-			songDetailItems.Columns[0].Width = -2;
-			songDetailItems.Columns[1].Width = -2;
+			//songDetailItems.Columns[0].Width = -2;
+			//songDetailItems.Columns[1].Width = -2;
 			
-			labelComment.Text = songMan.CurrentSong.Comment;
-			alignCommentLabel();
+			//labelComment.Text = songMan.CurrentSong.Comment;
+			//alignCommentLabel();
 
-			groupBox3.Text = "Lied-Details '" + songMan.CurrentSong.Title + "'";
+			//groupBox3.Text = "Lied-Details '" + songMan.CurrentSong.Title + "'";
 		}
 
+        /*
 		private void alignCommentLabel()
 		{
 			if (labelComment.Text != String.Empty)
@@ -410,8 +430,11 @@ namespace Pbp.Forms
 			songDetailItems.Height = groupBox3.Height - songDetailItems.Top - 5;
 		}
 
+        */
+
         private void songDetailItems_SelectedIndexChanged(object sender, EventArgs e)
         {
+            /*
 			SongManager songMan = SongManager.getInstance();
 			
             if (projWindow != null && songDetailItems.SelectedIndices.Count > 0)
@@ -447,7 +470,8 @@ namespace Pbp.Forms
 
 
 				setStatus("'" + songMan.CurrentSong.Title + "' ist aktiv");
-            }
+            } */
+            
         }
 
         private void songDetailImages_SelectedIndexChanged(object sender, EventArgs e)
@@ -497,6 +521,7 @@ namespace Pbp.Forms
 
         private void songSearchBox_KeyDown(object sender, KeyEventArgs e)
         {
+            /*
             if (e.KeyCode == Keys.Return 
                 && listViewSongs.Items.Count == 1 
                 && listViewSongs.Items[0].Selected == true 
@@ -515,7 +540,7 @@ namespace Pbp.Forms
                 }
                 songDetailItems.Items[sldIdx].Selected = true;
                 
-            }
+            } */
         }
 
 
@@ -580,6 +605,8 @@ namespace Pbp.Forms
 
         private void treeViewImageDirectories_AfterSelect(object sender, TreeViewEventArgs e)
         {
+            listViewDirectoryImages.SuspendLayout();
+            
             listViewDirectoryImages.Items.Clear();
             if (listViewDirectoryImages.LargeImageList != null)
             {
@@ -624,7 +651,7 @@ namespace Pbp.Forms
 					
 					foreach (string file in songFilePaths)
 					{
-						Application.DoEvents();
+						//Application.DoEvents();
 						ListViewItem lvi = new ListViewItem(Path.GetFileNameWithoutExtension(file));
 						lvi.Tag = relativeImageDir + Path.DirectorySeparatorChar + Path.GetFileName(file);
 						lvi.ImageIndex = i;
@@ -635,7 +662,9 @@ namespace Pbp.Forms
 					listViewDirectoryImages.LargeImageList = imList;
 				}
             }
-
+            
+            listViewDirectoryImages.ResumeLayout();
+            
         }
 
         private void listViewDirectoryImages_SelectedIndexChanged(object sender, EventArgs e)
@@ -1382,7 +1411,7 @@ namespace Pbp.Forms
 
 		private void labelComment_Paint(object sender, PaintEventArgs e)
 		{
-			alignCommentLabel();
+		//	alignCommentLabel();
 		}
 
 		private void toolStripButton3_Click(object sender, EventArgs e)
@@ -1393,8 +1422,8 @@ namespace Pbp.Forms
 				qd.ShowDialog(this);
 				if (qd.DialogResult == DialogResult.OK)
 				{
-					labelComment.Text = SongManager.Instance.CurrentSong.Comment;
-					alignCommentLabel();
+					//labelComment.Text = SongManager.Instance.CurrentSong.Comment;
+					//alignCommentLabel();
 				}
 			}
 			else

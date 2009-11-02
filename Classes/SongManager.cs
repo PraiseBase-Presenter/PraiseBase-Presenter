@@ -177,14 +177,14 @@ namespace Pbp
 		/// <param name="i">The song position</param>
 		public void reloadSong(Guid g)
 		{
-			SongList[g] = new Song(SongList[g].FilePath);
+			SongList[g] = new Song(SongList[g].FilePath,g);
 		}
 
 		/// <summary>
 		/// Reloads the song with the specified path
 		/// </summary>
 		/// <param name="path">Path to the song file</param>
-		public void reloadSong(string path)
+		public void reloadSongByPath(string path)
 		{
 			if (path != String.Empty && path != null)
 			{
@@ -192,12 +192,15 @@ namespace Pbp
                 {
                     if (kvp.Value.FilePath == path)
                     {
-                        SongList[kvp.Key] = new Song(path);
+                        SongList[kvp.Key] = new Song(path,kvp.Key);
                         return;
                     }
                 }
 			}
 		}
+
+
+
 
 		/// <summary>
 		/// Search the songlist for a given pattern and returns the matching songs

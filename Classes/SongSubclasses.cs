@@ -398,6 +398,16 @@ namespace Pbp
 				return txt;
 			}
 
+			public string oneLineTranslation()
+			{
+				string txt = "";
+				foreach (string str in Translation)
+				{
+					txt += str + " ";
+				}
+				return txt;
+			}
+
 			/// <summary>
 			/// Clones this slide
 			/// </summary>

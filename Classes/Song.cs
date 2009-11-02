@@ -169,20 +169,27 @@ namespace Pbp
         /// The song constructor
         /// </summary>
         /// <param name="filePath">Full path to the song xml file</param>
-		public Song() : this(null)
+		public Song() : this(null, Guid.Empty)
 		{
 		}
+
+        public Song(string filePath)
+            : this(filePath, Guid.Empty)
+        {
+        }
+
 
 		/// <summary>
         /// The song constructor
         /// </summary>
         /// <param name="filePath">Full path to the song xml file</param>
-        public Song(string filePath)
+        public Song(string filePath, Guid g)
         {
             IsValid = false;
 			bool err = false;
 
-            GUID = System.Guid.NewGuid();
+            // TODO: Think about implementing a GUID that stays the same for each file
+            GUID = g!=Guid.Empty ? g : System.Guid.NewGuid();
 
 			FilePath = filePath;
 			Tags = new TagList();

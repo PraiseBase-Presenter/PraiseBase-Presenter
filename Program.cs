@@ -47,6 +47,8 @@ namespace Pbp
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
 
+            
+
 			if (Settings.Instance.ShowLoadingScreen)
 			{
 				LoadingScreen ldg = new LoadingScreen();

@@ -620,7 +620,8 @@ namespace Pbp.Forms
 				sng.save(null);
 				hashCode = sng.GetHashCode();
 				((EditorWindow)MdiParent).setStatus("Lied gespeichert als " + sng.FilePath + "");
-				SongManager.getInstance().reloadSong(sng.FilePath);
+                
+				SongManager.getInstance().reloadSongByPath(sng.FilePath);
 			}
 		}
 
@@ -642,7 +643,7 @@ namespace Pbp.Forms
 				((EditorWindow)MdiParent).setStatus("Lied gespeichert als " + saveFileDialog.FileName + "");
 			}
 
-			SongManager.getInstance().reloadSong(sng.FilePath);
+			SongManager.getInstance().reloadSongByPath(sng.FilePath);
 
 		}
 

@@ -93,6 +93,12 @@
     <Compile Include="Classes\ImageManager.cs" />
     <Compile Include="Classes\SongManager.cs" />
     <Compile Include="Classes\SongSubclasses.cs" />
+    <Compile Include="Components\SongDetail.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Components\SongDetail.Designer.cs">
+      <DependentUpon>SongDetail.cs</DependentUpon>
+    </Compile>
     <Compile Include="Components\TreeLE.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -173,6 +179,10 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="Components\SongDetail.resx">
+      <DependentUpon>SongDetail.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
     <EmbeddedResource Include="Components\TreeLE.resx">
       <DependentUpon>TreeLE.cs</DependentUpon>
       <SubType>Designer</SubType>
