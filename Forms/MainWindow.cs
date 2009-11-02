@@ -432,6 +432,43 @@ namespace Pbp.Forms
 
         */
 
+		private void songDetailElement_SlideClicked(object sender, SongDetails.SlideClickEventArgs e)
+		{
+			int pn = e.PartNumber;
+			int sn = e.SlideNumber;
+			SongManager songMan = SongManager.Instance;
+
+			if (projWindow != null)
+			{
+				setStatus("Projiziere '" + songMan.CurrentSong.Title + "' ...");
+
+
+				if ((Control.ModifierKeys & Keys.Control) == Keys.Control)
+				{
+					if (listViewImageQueue.Items.Count > 0)
+					{
+						Image img = ImageManager.Instance.getImageFromRelPath((string)listViewImageQueue.Items[0].Tag);
+						pictureBoxPreview.Image = projWindow.showSlide(songMan.CurrentSong.Parts[pn].Slides[sn], img, false);
+						listViewImageQueue.Items[0].Remove();
+					}
+					else
+					{
+						pictureBoxPreview.Image = projWindow.showSlide(songMan.CurrentSong.Parts[pn].Slides[sn], null, false);
+					}
+
+				}
+				else if ((Control.ModifierKeys & Keys.Shift) == Keys.Shift)
+				{
+					pictureBoxPreview.Image = projWindow.showSlide(songMan.CurrentSong.Parts[pn].Slides[sn], null, false);
+				}
+				else
+				{
+					pictureBoxPreview.Image = projWindow.showSlide(songMan.CurrentSong.Parts[pn].Slides[sn], songMan.CurrentSong.getImage(songMan.CurrentSong.Parts[pn].Slides[sn].ImageNumber), false);
+				}
+				setStatus("'" + songMan.CurrentSong.Title + "' ist aktiv");
+			}
+		}
+
         private void songDetailItems_SelectedIndexChanged(object sender, EventArgs e)
         {
             /*
@@ -1450,7 +1487,10 @@ namespace Pbp.Forms
         private void listViewSongs_SelectedIndexChanged(object sender, EventArgs e)
         {
 
-        }
+		}
+
+
+			
 
 
 

@@ -1398,10 +1398,12 @@
 						| System.Windows.Forms.AnchorStyles.Right)));
 			this.songDetailElement.AutoScroll = true;
 			this.songDetailElement.BackColor = System.Drawing.Color.White;
+			this.songDetailElement.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
 			this.songDetailElement.Location = new System.Drawing.Point(259, 8);
 			this.songDetailElement.Name = "songDetailElement";
 			this.songDetailElement.Size = new System.Drawing.Size(466, 256);
 			this.songDetailElement.TabIndex = 20;
+			this.songDetailElement.SlideClicked += new SongDetails.SongDetail.slideClick(this.songDetailElement_SlideClicked);
 			// 
 			// MainWindow
 			// 
