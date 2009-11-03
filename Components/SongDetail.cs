@@ -13,7 +13,7 @@ namespace SongDetails
     {
 		Pbp.Song currentSong;
 
-		int elemHeight = 70;
+		int elemHeight = 62;
 		int numParts = 0;
 		int slidePanelOffset = 0;
 
@@ -75,13 +75,12 @@ namespace SongDetails
 				plbl.Text = sng.Parts[numParts].Caption;
 				plbl.Font = pfnt;
 				plbl.Location = new Point(5,5);
-				//plbl.BackColor = Color.Blue;
 				plbl.Size = labelSize;
 				pnl.Controls.Add(plbl);
 
 				ypos += pnl.Height + 10;
 				this.Controls.Add(pnl);
-
+				
 				if (numParts < sng.Parts.Count - 1)
 				{
 					Panel lpnl = new Panel();
@@ -98,7 +97,7 @@ namespace SongDetails
 				{
 					Panel spnl = new Panel();
 					spnl.Tag = j;
-					spnl.BackColor = Color.Transparent;
+					//spnl.BackColor = Color.Blue;
 					spnl.Location = new Point(slidePanelOffset, j * elemHeight);
 					spnl.Height = elemHeight;
 					spnl.Paint += new PaintEventHandler(spnl_Paint);
@@ -108,8 +107,8 @@ namespace SongDetails
 
 					PictureBox pcBox = new PictureBox();
 					pcBox.Image = thumbs.Images[sng.Parts[numParts].Slides[j].ImageNumber];
-					pcBox.Location = new Point(5, 5);
-					pcBox.Size = new Size(90, spnl.Height - 10);
+					pcBox.Location = new Point(1, 1);
+					pcBox.Size = new Size(90, spnl.Height);
 					pcBox.Enabled = false;
 					spnl.Controls.Add(pcBox);
 
@@ -171,21 +170,15 @@ namespace SongDetails
 		void lpnl_Paint(object sender, PaintEventArgs e)
 		{
 			Panel pnl = ((Panel)sender);
-			pnl.Width = this.Width - 30;
+			pnl.Width = this.Width - pnl.Left - 24;
 		}
 
 		void partPnl_Paint(object sender, PaintEventArgs e)
 		{
 			Panel pnl = ((Panel)sender);
-			pnl.Width = this.Width-25; 
-
+			pnl.Width = this.Width - pnl.Left - 24;
+			
 		}
-
-
-
-
-
-
     }
 
 	public class SlideClickEventArgs : EventArgs

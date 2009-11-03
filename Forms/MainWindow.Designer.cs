@@ -1403,6 +1403,7 @@
 			this.songDetailElement.Name = "songDetailElement";
 			this.songDetailElement.Size = new System.Drawing.Size(466, 256);
 			this.songDetailElement.TabIndex = 20;
+			this.songDetailElement.Load += new System.EventHandler(this.songDetailElement_Load);
 			this.songDetailElement.SlideClicked += new SongDetails.SongDetail.slideClick(this.songDetailElement_SlideClicked);
 			// 
 			// MainWindow

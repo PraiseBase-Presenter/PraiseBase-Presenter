@@ -219,19 +219,6 @@ namespace Pbp.Forms
             searchSongs(songSearchBox.Text);
         }
 
-        private void songDetailItems_Leave(object sender, EventArgs e)
-        {
-			try
-			{
-				//int idx = songDetailItems.SelectedIndices[0];
-//				songDetailItems.Items[idx].Selected = false;
-			}
-			catch
-			{
-
-			}
-        }
-
 
         private void bildschirmeErneutSuchenToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -388,7 +375,6 @@ namespace Pbp.Forms
 			SongManager songMan = SongManager.getInstance();
 			Application.DoEvents();
 
-			//songDetailItems.Items.Clear();
 			songDetailImages.Items.Clear();
 
 			songDetailImages.LargeImageList = songMan.CurrentSong.getThumbs();
@@ -399,38 +385,10 @@ namespace Pbp.Forms
 				songDetailImages.Items.Add(lvi);
 			}
 
-			//songDetailItems.SmallImageList = songMan.CurrentSong.getThumbs();
             songDetailElement.setSong(songMan.CurrentSong);
-
-			//songDetailItems.Columns[0].Width = -2;
-			//songDetailItems.Columns[1].Width = -2;
-			
-			//labelComment.Text = songMan.CurrentSong.Comment;
-			//alignCommentLabel();
 
 			//groupBox3.Text = "Lied-Details '" + songMan.CurrentSong.Title + "'";
 		}
-
-        /*
-		private void alignCommentLabel()
-		{
-			if (labelComment.Text != String.Empty)
-			{
-				// TODO: Find a way to measure average font width...
-				float fontWidth = 10;
-				float lettersPerRow = ((float)labelComment.Width / (float)fontWidth);
-				int totalRows = (int)Math.Ceiling((float)labelComment.Text.Length / (float)lettersPerRow);
-				labelComment.Height = totalRows * ((int)labelComment.Font.Height);
-			}
-			else
-			{
-				labelComment.Height = 0;
-			}
-			songDetailItems.Top = labelComment.Bottom + 5;
-			songDetailItems.Height = groupBox3.Height - songDetailItems.Top - 5;
-		}
-
-        */
 
 		private void songDetailElement_SlideClicked(object sender, SongDetails.SlideClickEventArgs e)
 		{
@@ -1487,6 +1445,16 @@ namespace Pbp.Forms
         private void listViewSongs_SelectedIndexChanged(object sender, EventArgs e)
         {
 
+		}
+
+		private void songDetailElement_Load(object sender, EventArgs e)
+		{
+
+		}
+
+		private void songDetailElement_Scroll(object sender, ScrollEventArgs e)
+		{
+			
 		}
 
 
