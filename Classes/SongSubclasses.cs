@@ -42,6 +42,19 @@ namespace Pbp
 	{
 		#region Enums
 
+		public enum TextAlign
+		{
+			TopLeft,
+			TopCenter,
+			TopRight,
+			MittleLeft,
+			MiddleCenter,
+			MiddleRight,
+			BottomLeft,
+			BottomCenter,
+			BottomRight
+		}
+
 		/// <summary>
 		/// Horizontal aligning of slide text
 		/// </summary>
@@ -283,6 +296,9 @@ namespace Pbp
 			/// Vertical text alignment
 			/// </summary>
 			public SongTextVerticalAlign VerticalAlign { get; set; }
+
+			public TextAlign SongTextAlign {get;set;} 
+
 			/// <summary>
 			/// The font object of this slide
 			/// </summary>
@@ -313,6 +329,7 @@ namespace Pbp
 				Translation = new List<string>();
 				HorizontalAlign = SongTextHorizontalAlign.Center;
 				VerticalAlign = SongTextVerticalAlign.Center;
+				SongTextAlign = TextAlign.MittleLeft;
 				ImageNumber = 0;
 				this._ownerSong = ownerSong;
 			}
