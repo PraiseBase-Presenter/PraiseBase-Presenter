@@ -643,6 +643,8 @@ namespace Pbp.Forms
 				hashCode = sng.GetHashCode();
 				sng.save(saveFileDialog.FileName);
 				((EditorWindow)MdiParent).setStatus("Lied gespeichert als " + saveFileDialog.FileName + "");
+
+                
 			}
 
 			SongManager.getInstance().reloadSongByPath(sng.FilePath);

@@ -508,8 +508,8 @@ namespace Pbp.Forms
             treeViewImageDirectories.Nodes.Clear();
             PopulateTreeView(rootDir, null);
 			treeViewImageDirectories.ExpandAll();
-            treeViewImageDirectories.SelectedNode = treeViewImageDirectories.Nodes[0];
             treeViewImageDirectories.Nodes.Add("Suchergebnisse");
+            treeViewImageDirectories.SelectedNode = treeViewImageDirectories.Nodes[0];
 
             imageSearchResults = new List<String>();
 
