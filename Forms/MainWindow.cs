@@ -118,7 +118,6 @@ namespace Pbp.Forms
             linkLayers = Settings.Instance.LinkLayers;
             setLinkLayerUI();
 
-
             Bible currentBible = new Bible("C:/Users/Nicolas/Documents/PraiseBase Presenter Church/Bible/sample.xml");
         }
 
@@ -284,7 +283,6 @@ namespace Pbp.Forms
 
             }
             songSearchBox.Focus();
-            //projWindow.Visible
         }
 
         void t1_Tick(object sender, EventArgs e)
@@ -333,25 +331,6 @@ namespace Pbp.Forms
 			GC.Collect();
 		}
 
-        /**
-         * Load song details based on song list selection 
-         */
-		/*
-        private void listViewSongs_SelectedIndexChanged(object sender, EventArgs e)
-        {
-			if (listViewSongs.SelectedIndices.Count > 0)
-			{
-				SongManager.getInstance().CurrentSong = SongManager.getInstance().Songs[(int)listViewSongs.SelectedItems[0].Tag];
-				showCurrentSongDetails();
-				buttonSetListAdd.Enabled = true;
-			}
-			else
-			{
-				buttonSetListAdd.Enabled = false;
-			}
-        }
-		*/
-
 		private void listViewSongs_MouseClick(object sender, MouseEventArgs e)
 		{
 			if (listViewSongs.SelectedItems.Count > 0)
@@ -397,7 +376,12 @@ namespace Pbp.Forms
 
 			songDetailImages.Items.Clear();
 
-			songDetailImages.LargeImageList = songMan.CurrentSong.getThumbs();
+            ImageList iml = songMan.CurrentSong.getThumbs();
+            iml.ImageSize = Settings.Instance.ThumbSize;
+            iml.ColorDepth = ColorDepth.Depth32Bit;
+			songDetailImages.LargeImageList = iml;
+            songDetailImages.TileSize = new Size(Settings.Instance.ThumbSize.Width + 8, Settings.Instance.ThumbSize.Height + 5);
+
 			for (int i = 1; i < songDetailImages.LargeImageList.Images.Count; i++)
 			{
 				ListViewItem lvi = new ListViewItem();
@@ -408,7 +392,6 @@ namespace Pbp.Forms
             groupBoxSongContents.Text = songMan.CurrentSong.Title;
             songDetailElement.setSong(songMan.CurrentSong);
 
-			//groupBox3.Text = "Lied-Details '" + songMan.CurrentSong.Title + "'";
 		}
 
 		private void songDetailElement_SlideClicked(object sender, SongDetails.SlideClickEventArgs e)
@@ -427,25 +410,29 @@ namespace Pbp.Forms
 					if (listViewImageQueue.Items.Count > 0)
 					{
 						Image img = ImageManager.Instance.getImageFromRelPath((string)listViewImageQueue.Items[0].Tag);
-						pictureBoxPreview.Image = projWindow.showSlide(songMan.CurrentSong.Parts[pn].Slides[sn], img, false);
+                        object[] args = {pn,sn};
+						pictureBoxPreview.Image = projWindow.showSlide(songMan.CurrentSong, img, args);
                         imageHistoryAdd((string)listViewImageQueue.Items[0].Tag);
 						listViewImageQueue.Items[0].Remove();
 					}
 					else
 					{
-						pictureBoxPreview.Image = projWindow.showSlide(songMan.CurrentSong.Parts[pn].Slides[sn], null, false);
+                        object [] args = {pn,sn};
+						pictureBoxPreview.Image = projWindow.showSlide(songMan.CurrentSong, null, args);
 					}
 				}
 
                 // SHIFT pressed, use current slide
                 else if (!linkLayers ^ ((Control.ModifierKeys & Keys.Shift) == Keys.Shift))
 				{
-					pictureBoxPreview.Image = projWindow.showSlide(songMan.CurrentSong.Parts[pn].Slides[sn], null, false);
+                    object[] args = { pn, sn };
+					pictureBoxPreview.Image = projWindow.showSlide(songMan.CurrentSong, null, args);
 				}
                 // Current slide + attached image
 				else
 				{
-					pictureBoxPreview.Image = projWindow.showSlide(songMan.CurrentSong.Parts[pn].Slides[sn], songMan.CurrentSong.getImage(songMan.CurrentSong.Parts[pn].Slides[sn].ImageNumber), false);
+                    object[] args = { pn, sn };
+					pictureBoxPreview.Image = projWindow.showSlide(songMan.CurrentSong, songMan.CurrentSong.getImage(songMan.CurrentSong.Parts[pn].Slides[sn].ImageNumber), args);
                     //if (songMan.CurrentSong.RelativeImagePaths.Count > 0)
                     //    imageHistoryAdd(songMan.CurrentSong.RelativeImagePaths[songMan.CurrentSong.Parts[pn].Slides[sn].ImageNumber-1]);
 				}
@@ -472,7 +459,8 @@ namespace Pbp.Forms
                 int idx = songDetailImages.SelectedIndices[0];
                 if (!linkLayers ^ ((Control.ModifierKeys & Keys.Shift) == Keys.Shift))
                 {
-					pictureBoxPreview.Image = projWindow.showSlide(songMan.CurrentSlide, songMan.CurrentSong.getImage(idx + 1), false);
+                    object[] args = { songMan.CurrentPartNr, songMan.CurrentSlideNr };
+					pictureBoxPreview.Image = projWindow.showSlide(songMan.CurrentSong, songMan.CurrentSong.getImage(idx + 1), args);
                 }
                 else
                 {
@@ -508,31 +496,6 @@ namespace Pbp.Forms
         }
 
 
-        private void songSearchBox_KeyDown(object sender, KeyEventArgs e)
-        {
-            /*
-            if (e.KeyCode == Keys.Return 
-                && listViewSongs.Items.Count == 1 
-                && listViewSongs.Items[0].Selected == true 
-                && songDetailItems.Items.Count >0)
-            {
-                int i = 0;
-                int sldIdx = 0;
-                foreach (ListViewItem itm in songDetailItems.Items)
-                {
-                    if (itm.SubItems[1].Text.ToLower().Contains(songSearchBox.Text.ToLower()))
-                    {
-                        sldIdx = i;
-                        break;
-                    }
-                    i++;
-                }
-                songDetailItems.Items[sldIdx].Selected = true;
-                
-            } */
-        }
-
-
         public void imageTreeViewInit()
         {
 			string rootDir = Settings.Instance.DataDirectory + Path.DirectorySeparatorChar + Settings.Instance.ImageDir;
@@ -555,6 +518,25 @@ namespace Pbp.Forms
             iml2.ColorDepth = ColorDepth.Depth32Bit;
 			listViewImageQueue.LargeImageList = iml2;
 			listViewImageQueue.TileSize = new Size(Settings.Instance.ThumbSize.Width + 8, Settings.Instance.ThumbSize.Height + 5);
+
+            if (Settings.Instance.ImageFavorites == null)
+                Settings.Instance.ImageFavorites = new System.Collections.ArrayList();
+
+            ImageList iml3 = new ImageList();
+            iml3.ImageSize = Settings.Instance.ThumbSize;
+            iml3.ColorDepth = ColorDepth.Depth32Bit;
+            listViewFavorites.LargeImageList = iml3;
+            listViewFavorites.TileSize = new Size(Settings.Instance.ThumbSize.Width + 8, Settings.Instance.ThumbSize.Height + 5);
+
+            foreach (string relImagePath in Settings.Instance.ImageFavorites)
+            {
+                listViewFavorites.LargeImageList.Images.Add(ImageManager.Instance.getThumbFromRelPath(relImagePath));
+                ListViewItem lvi = new ListViewItem("");
+                lvi.Tag = relImagePath;
+                lvi.ImageIndex = listViewFavorites.LargeImageList.Images.Count - 1;
+                listViewFavorites.Items.Add(lvi);
+                listViewFavorites.EnsureVisible(listViewFavorites.Items.Count - 1);
+            }
 		}
 
         public void PopulateTreeView(string directoryValue, TreeNode parentNode)
@@ -679,13 +661,18 @@ namespace Pbp.Forms
 					listViewImageQueue.Items.Add(lvi);
 					//listViewImageQueue.EnsureVisible(listViewImageHistory.Items.Count - 1);
 				}
+                else if ((Control.ModifierKeys & Keys.Alt) == Keys.Alt)
+				{
+                    imageFavoriteAdd((string)listViewDirectoryImages.Items[idx].Tag);                   
+				}
 				else
 				{
 					Image img = ImageManager.Instance.getImageFromRelPath((string)listViewDirectoryImages.Items[idx].Tag);
                     // Linked layers
 					if (!linkLayers ^ ((Control.ModifierKeys & Keys.Shift) == Keys.Shift && songMan.CurrentSong != null && songMan.CurrentSong.CurrentSlide >= 0))
 					{
-						pictureBoxPreview.Image = projWindow.showSlide(songMan.CurrentSlide, img, false);
+                        Object[] args = {songMan.CurrentPartNr,songMan.CurrentSlideNr};
+						pictureBoxPreview.Image = projWindow.showSlide(songMan.CurrentSong, img, args);
 					}
 					else
 					{
@@ -708,6 +695,30 @@ namespace Pbp.Forms
                 lvi.ImageIndex = listViewImageHistory.LargeImageList.Images.Count - 1;
                 listViewImageHistory.Items.Add(lvi);
                 listViewImageHistory.EnsureVisible(listViewImageHistory.Items.Count - 1);
+            }
+        }
+
+        private void imageFavoriteAdd(string relImagePath)
+        {
+            if (!Settings.Instance.ImageFavorites.Contains(relImagePath))
+            {
+                listViewFavorites.LargeImageList.Images.Add(ImageManager.Instance.getThumbFromRelPath(relImagePath));
+                ListViewItem lvi = new ListViewItem("");
+                lvi.Tag = relImagePath;
+                lvi.ImageIndex = listViewFavorites.LargeImageList.Images.Count - 1;
+                listViewFavorites.Items.Add(lvi);
+                listViewFavorites.EnsureVisible(listViewFavorites.Items.Count - 1);
+                Settings.Instance.ImageFavorites.Add(relImagePath);
+                Settings.Instance.Save();
+            }
+        }
+
+        private void imageFavoriterRemove(string relImagePath)
+        {
+            if (Settings.Instance.ImageFavorites.Contains(relImagePath))
+            {
+                Settings.Instance.ImageFavorites.Remove(relImagePath);
+                Settings.Instance.Save();
             }
         }
 
@@ -982,12 +993,17 @@ namespace Pbp.Forms
                     lvi.ImageIndex = listViewImageQueue.LargeImageList.Images.Count - 1;
                     listViewImageQueue.Items.Add(lvi);
                 }
+                else if ((Control.ModifierKeys & Keys.Alt) == Keys.Alt)
+                {
+                    imageFavoriteAdd((string)listViewImageHistory.Items[idx].Tag);
+                }
                 else
                 {
                     Image img = ImageManager.Instance.getImageFromRelPath((string)listViewImageHistory.Items[idx].Tag);
                     if (!linkLayers ^ ((Control.ModifierKeys & Keys.Shift) == Keys.Shift && songMan.CurrentSong != null && songMan.CurrentSong.CurrentSlide >= 0))
                     {
-                        pictureBoxPreview.Image = projWindow.showSlide(songMan.CurrentSong.Slides[songMan.CurrentSong.CurrentSlide], img, false);
+                        Object[] args = { songMan.CurrentPartNr,songMan.CurrentSlideNr};
+                        pictureBoxPreview.Image = projWindow.showSlide(songMan.CurrentSong, img, args);
                     }
                     else
                     {
@@ -1422,7 +1438,8 @@ namespace Pbp.Forms
 				Image img = ImageManager.Instance.getImageFromRelPath((string)listViewImageQueue.Items[idx].Tag);
 				if ((Control.ModifierKeys & Keys.Shift) == Keys.Shift && songMan.CurrentSong != null && songMan.CurrentSong.CurrentSlide >= 0)
 				{
-					pictureBoxPreview.Image = projWindow.showSlide(songMan.CurrentSong.Slides[songMan.CurrentSong.CurrentSlide], img, false);
+                    Object[] args = { songMan.CurrentPartNr, songMan.CurrentSlideNr };
+					pictureBoxPreview.Image = projWindow.showSlide(songMan.CurrentSong, img, args);
 				}
 				else
 				{
@@ -1481,6 +1498,64 @@ namespace Pbp.Forms
                 label3.Text = "Text und Bild sind unabhängig";
             }
         }
+
+        private void listViewFavorites_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            SongManager songMan = SongManager.getInstance();
+
+            if (projWindow != null && listViewFavorites.SelectedIndices.Count > 0)
+            {
+                Application.DoEvents();
+                int idx = listViewFavorites.SelectedIndices[0];
+                
+                // Stack
+                if ((Control.ModifierKeys & Keys.Control) == Keys.Control)
+                {
+                    listViewImageQueue.LargeImageList.Images.Add(ImageManager.Instance.getThumbFromRelPath((string)listViewFavorites.Items[idx].Tag));
+                    ListViewItem lvi = new ListViewItem("");
+                    lvi.Tag = listViewFavorites.Items[idx].Tag;
+                    lvi.ImageIndex = listViewImageQueue.LargeImageList.Images.Count - 1;
+                    listViewImageQueue.Items.Add(lvi);
+                }
+                // ALT remove from history
+                else if ((Control.ModifierKeys & Keys.Alt) == Keys.Alt)
+                {
+                    imageFavoriterRemove((string)listViewFavorites.Items[idx].Tag);
+                    listViewFavorites.Items.RemoveAt(idx);
+                }
+                else
+                {
+                    Image img = ImageManager.Instance.getImageFromRelPath((string)listViewFavorites.Items[idx].Tag);
+                    if (!linkLayers ^ ((Control.ModifierKeys & Keys.Shift) == Keys.Shift && songMan.CurrentSong != null && songMan.CurrentSong.CurrentSlide >= 0))
+                    {
+                        Object[] args = { songMan.CurrentPartNr, songMan.CurrentSlideNr };
+                        pictureBoxPreview.Image = projWindow.showSlide(songMan.CurrentSong, img, args);
+                    }
+                    else
+                    {
+                        pictureBoxPreview.Image = projWindow.showImage(img);
+                    }
+                }
+            }
+        }
+
+        private void listViewSetList_MouseClick(object sender, MouseEventArgs e)
+        {
+            listViewSetList_SelectedIndexChanged(sender, e);
+        }
+
+        private void buttonShowLiveText_Click(object sender, EventArgs e)
+        {
+            LiveText lt = new LiveText(textBoxLiveText.Text);
+            projWindow.showSlide(lt,null);
+        }
+
+        private void buttonClearText_Click(object sender, EventArgs e)
+        {
+
+        }
+
+
 
     }
 }

@@ -128,7 +128,6 @@ namespace Pbp.Forms
 				MainWindow.getInstance().setProgessBarTransitionValue(0);
                 pbi = 0;
 				tmr.Stop();
-                Console.WriteLine("finshed");
 			}
 		}
 

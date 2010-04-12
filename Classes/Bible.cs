@@ -67,6 +67,10 @@ namespace Pbp
             return true;
         }
 
+        public override void writeOut(System.Drawing.Graphics gr, object[] args, ProjectionMode pr)
+        {
+            throw new NotImplementedException();
+        }
 
     }
 
@@ -90,5 +94,7 @@ namespace Pbp
             Number = nr;
         }
     }
+
+
 
 }

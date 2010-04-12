@@ -266,7 +266,9 @@ namespace Pbp.Forms
 			textBoxSongTranslation.Text = sld.lineBreakTranslation();
 			comboBoxSlideHorizOrientation.SelectedIndex = (int)sld.HorizontalAlign;
 			comboBoxSlideVertOrientation.SelectedIndex = (int)sld.VerticalAlign;
-			pictureBoxPreview.Image = projWindow.showSlide(sld, sng.getImage(sld.ImageNumber), true);
+
+            object[] songArgs = {partId,slideId};
+            pictureBoxPreview.Image = projWindow.showSlide(sng, sng.getImage(sld.ImageNumber), songArgs, ProjectionMode.Simulate);
 
 			currentPartId = partId;
 			currentSlideId = slideId;
@@ -577,8 +579,8 @@ namespace Pbp.Forms
 
 				sng.Parts[partIdx].Slides[slideIdx].setSlideTextTranslation(textBoxSongTranslation.Text);
 
-				pictureBoxPreview.Image = projWindow.showSlide(sng.Parts[partIdx].Slides[slideIdx], sng.getImage(sng.Parts[partIdx].Slides[slideIdx].ImageNumber), true);
-
+                object[] songArgs = { partIdx, slideIdx };
+                pictureBoxPreview.Image = projWindow.showSlide(sng, sng.getImage(sng.Parts[partIdx].Slides[slideIdx].ImageNumber), songArgs, ProjectionMode.Simulate);
 			}
 		}
 
@@ -672,7 +674,8 @@ namespace Pbp.Forms
 
 				sng.Parts[partIdx].Slides[slideIdx].setSlideText(textBoxSongText.Text);
 
-				pictureBoxPreview.Image = projWindow.showSlide(sng.Parts[partIdx].Slides[slideIdx], sng.getImage(sng.Parts[partIdx].Slides[slideIdx].ImageNumber), true);
+                object[] songArgs = { partIdx, slideIdx };
+                pictureBoxPreview.Image = projWindow.showSlide(sng, sng.getImage(sng.Parts[partIdx].Slides[slideIdx].ImageNumber), songArgs, ProjectionMode.Simulate);
 
 			}
 		}
@@ -768,7 +771,8 @@ namespace Pbp.Forms
 
 		private void previewSlide()
 		{
-			pictureBoxPreview.Image = projWindow.showSlide(sng.Parts[currentPartId].Slides[currentSlideId], sng.getImage(sng.Parts[currentPartId].Slides[currentSlideId].ImageNumber), true);
+            object[] songArgs = { currentPartId, currentSlideId };
+            pictureBoxPreview.Image = projWindow.showSlide(sng, sng.getImage(sng.Parts[currentPartId].Slides[currentSlideId].ImageNumber), songArgs, ProjectionMode.Simulate);
 		}
 
 		private void textBoxSongTranslation_KeyUp(object sender, KeyEventArgs e)

@@ -36,9 +36,6 @@
             this.toolStripMenuItem3 = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
             this.beendenToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.projektionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.projektionEinausToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.blackoutEinausToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.einstellungenToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.optionenToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator5 = new System.Windows.Forms.ToolStripSeparator();
@@ -120,7 +117,9 @@
             this.label2 = new System.Windows.Forms.Label();
             this.songSearchResetButton = new System.Windows.Forms.Button();
             this.songSearchBox = new System.Windows.Forms.TextBox();
-            this.tabPage3 = new System.Windows.Forms.TabPage();
+            this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.buttonShowLiveText = new System.Windows.Forms.Button();
+            this.textBoxLiveText = new System.Windows.Forms.TextBox();
             this.tabControl2 = new System.Windows.Forms.TabControl();
             this.tabPageImageBrowser = new System.Windows.Forms.TabPage();
             this.label4 = new System.Windows.Forms.Label();
@@ -134,7 +133,7 @@
             this.listViewImageHistory = new System.Windows.Forms.ListView();
             this.columnHeader5 = new System.Windows.Forms.ColumnHeader();
             this.tabPageImageFavorites = new System.Windows.Forms.TabPage();
-            this.listView1 = new System.Windows.Forms.ListView();
+            this.listViewFavorites = new System.Windows.Forms.ListView();
             this.tabPageSlideShow = new System.Windows.Forms.TabPage();
             this.radioButtonAutoDiaShow = new System.Windows.Forms.RadioButton();
             this.radioButtonManualDiashow = new System.Windows.Forms.RadioButton();
@@ -152,6 +151,7 @@
             this.columnHeader6 = new System.Windows.Forms.ColumnHeader();
             this.button1 = new System.Windows.Forms.Button();
             this.songDetailElement = new SongDetails.SongDetail();
+            this.buttonClearText = new System.Windows.Forms.Button();
             buttonChooseDiaDir = new System.Windows.Forms.Button();
             this.menuStrip1.SuspendLayout();
             this.groupBox4.SuspendLayout();
@@ -164,6 +164,7 @@
             this.tabPage1.SuspendLayout();
             this.groupBoxSongContents.SuspendLayout();
             this.groupBox2.SuspendLayout();
+            this.tabPage2.SuspendLayout();
             this.tabControl2.SuspendLayout();
             this.tabPageImageBrowser.SuspendLayout();
             this.tabPageImageHistory.SuspendLayout();
@@ -188,7 +189,6 @@
             // 
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.dateiToolStripMenuItem,
-            this.projektionToolStripMenuItem,
             this.einstellungenToolStripMenuItem,
             this.toolStripMenuItem1});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
@@ -233,28 +233,6 @@
             this.beendenToolStripMenuItem.Size = new System.Drawing.Size(148, 22);
             this.beendenToolStripMenuItem.Text = "&Beenden";
             this.beendenToolStripMenuItem.Click += new System.EventHandler(this.beendenToolStripMenuItem_Click);
-            // 
-            // projektionToolStripMenuItem
-            // 
-            this.projektionToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.projektionEinausToolStripMenuItem,
-            this.blackoutEinausToolStripMenuItem});
-            this.projektionToolStripMenuItem.Name = "projektionToolStripMenuItem";
-            this.projektionToolStripMenuItem.Size = new System.Drawing.Size(73, 20);
-            this.projektionToolStripMenuItem.Text = "Projektion";
-            // 
-            // projektionEinausToolStripMenuItem
-            // 
-            this.projektionEinausToolStripMenuItem.Name = "projektionEinausToolStripMenuItem";
-            this.projektionEinausToolStripMenuItem.Size = new System.Drawing.Size(170, 22);
-            this.projektionEinausToolStripMenuItem.Text = "Projektion ein/aus";
-            this.projektionEinausToolStripMenuItem.Click += new System.EventHandler(this.toggleProjection);
-            // 
-            // blackoutEinausToolStripMenuItem
-            // 
-            this.blackoutEinausToolStripMenuItem.Name = "blackoutEinausToolStripMenuItem";
-            this.blackoutEinausToolStripMenuItem.Size = new System.Drawing.Size(170, 22);
-            this.blackoutEinausToolStripMenuItem.Text = "Blackout ein/aus";
             // 
             // einstellungenToolStripMenuItem
             // 
@@ -546,6 +524,7 @@
             this.listViewSetList.TabIndex = 27;
             this.listViewSetList.UseCompatibleStateImageBehavior = false;
             this.listViewSetList.View = System.Windows.Forms.View.Details;
+            this.listViewSetList.MouseClick += new System.Windows.Forms.MouseEventHandler(this.listViewSetList_MouseClick);
             this.listViewSetList.SelectedIndexChanged += new System.EventHandler(this.listViewSetList_SelectedIndexChanged);
             this.listViewSetList.DragDrop += new System.Windows.Forms.DragEventHandler(this.listViewSetList_DragDrop);
             this.listViewSetList.DragEnter += new System.Windows.Forms.DragEventHandler(this.listViewSetList_DragEnter);
@@ -912,7 +891,7 @@
                         | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
             this.tabControl1.Controls.Add(this.tabPage1);
-            this.tabControl1.Controls.Add(this.tabPage3);
+            this.tabControl1.Controls.Add(this.tabPage2);
             this.tabControl1.ItemSize = new System.Drawing.Size(60, 25);
             this.tabControl1.Location = new System.Drawing.Point(3, 3);
             this.tabControl1.Name = "tabControl1";
@@ -962,7 +941,6 @@
             this.songDetailImages.Name = "songDetailImages";
             this.songDetailImages.Size = new System.Drawing.Size(122, 233);
             this.songDetailImages.TabIndex = 28;
-            this.songDetailImages.TileSize = new System.Drawing.Size(100, 60);
             this.songDetailImages.UseCompatibleStateImageBehavior = false;
             this.songDetailImages.View = System.Windows.Forms.View.Tile;
             this.songDetailImages.SelectedIndexChanged += new System.EventHandler(this.songDetailImages_SelectedIndexChanged);
@@ -1075,17 +1053,40 @@
             this.songSearchBox.TabIndex = 0;
             this.songSearchBox.TextChanged += new System.EventHandler(this.songSearchBox_TextChanged);
             this.songSearchBox.Click += new System.EventHandler(this.songSearchBox_Click);
-            this.songSearchBox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.songSearchBox_KeyDown);
             // 
-            // tabPage3
+            // tabPage2
             // 
-            this.tabPage3.Location = new System.Drawing.Point(4, 29);
-            this.tabPage3.Name = "tabPage3";
-            this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage3.Size = new System.Drawing.Size(743, 271);
-            this.tabPage3.TabIndex = 2;
-            this.tabPage3.Text = "Live-Text";
-            this.tabPage3.UseVisualStyleBackColor = true;
+            this.tabPage2.Controls.Add(this.buttonClearText);
+            this.tabPage2.Controls.Add(this.buttonShowLiveText);
+            this.tabPage2.Controls.Add(this.textBoxLiveText);
+            this.tabPage2.Location = new System.Drawing.Point(4, 29);
+            this.tabPage2.Name = "tabPage2";
+            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage2.Size = new System.Drawing.Size(743, 271);
+            this.tabPage2.TabIndex = 1;
+            this.tabPage2.Text = "Live-Text";
+            this.tabPage2.UseVisualStyleBackColor = true;
+            // 
+            // buttonShowLiveText
+            // 
+            this.buttonShowLiveText.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.buttonShowLiveText.Location = new System.Drawing.Point(523, 242);
+            this.buttonShowLiveText.Name = "buttonShowLiveText";
+            this.buttonShowLiveText.Size = new System.Drawing.Size(104, 23);
+            this.buttonShowLiveText.TabIndex = 1;
+            this.buttonShowLiveText.Text = "Text einblenden";
+            this.buttonShowLiveText.UseVisualStyleBackColor = true;
+            this.buttonShowLiveText.Click += new System.EventHandler(this.buttonShowLiveText_Click);
+            // 
+            // textBoxLiveText
+            // 
+            this.textBoxLiveText.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.textBoxLiveText.Location = new System.Drawing.Point(179, 7);
+            this.textBoxLiveText.Multiline = true;
+            this.textBoxLiveText.Name = "textBoxLiveText";
+            this.textBoxLiveText.Size = new System.Drawing.Size(558, 229);
+            this.textBoxLiveText.TabIndex = 0;
             // 
             // tabControl2
             // 
@@ -1150,7 +1151,7 @@
             this.listViewDirectoryImages.Location = new System.Drawing.Point(234, 31);
             this.listViewDirectoryImages.MultiSelect = false;
             this.listViewDirectoryImages.Name = "listViewDirectoryImages";
-            this.listViewDirectoryImages.Size = new System.Drawing.Size(356, 233);
+            this.listViewDirectoryImages.Size = new System.Drawing.Size(357, 233);
             this.listViewDirectoryImages.TabIndex = 1;
             this.listViewDirectoryImages.UseCompatibleStateImageBehavior = false;
             this.listViewDirectoryImages.SelectedIndexChanged += new System.EventHandler(this.listViewDirectoryImages_SelectedIndexChanged);
@@ -1200,7 +1201,7 @@
             // 
             // tabPageImageHistory
             // 
-            this.tabPageImageHistory.BackColor = System.Drawing.Color.Transparent;
+            this.tabPageImageHistory.BackColor = System.Drawing.Color.White;
             this.tabPageImageHistory.Controls.Add(this.listViewImageHistory);
             this.tabPageImageHistory.Location = new System.Drawing.Point(4, 29);
             this.tabPageImageHistory.Name = "tabPageImageHistory";
@@ -1216,10 +1217,10 @@
             this.listViewImageHistory.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.columnHeader5});
             this.listViewImageHistory.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.None;
-            this.listViewImageHistory.Location = new System.Drawing.Point(3, 3);
+            this.listViewImageHistory.Location = new System.Drawing.Point(0, 3);
             this.listViewImageHistory.MultiSelect = false;
             this.listViewImageHistory.Name = "listViewImageHistory";
-            this.listViewImageHistory.Size = new System.Drawing.Size(587, 258);
+            this.listViewImageHistory.Size = new System.Drawing.Size(591, 261);
             this.listViewImageHistory.TabIndex = 27;
             this.listViewImageHistory.UseCompatibleStateImageBehavior = false;
             this.listViewImageHistory.View = System.Windows.Forms.View.Tile;
@@ -1231,7 +1232,7 @@
             // 
             // tabPageImageFavorites
             // 
-            this.tabPageImageFavorites.Controls.Add(this.listView1);
+            this.tabPageImageFavorites.Controls.Add(this.listViewFavorites);
             this.tabPageImageFavorites.Location = new System.Drawing.Point(4, 29);
             this.tabPageImageFavorites.Name = "tabPageImageFavorites";
             this.tabPageImageFavorites.Padding = new System.Windows.Forms.Padding(3);
@@ -1240,17 +1241,19 @@
             this.tabPageImageFavorites.Text = "Bildfavoriten";
             this.tabPageImageFavorites.UseVisualStyleBackColor = true;
             // 
-            // listView1
+            // listViewFavorites
             // 
-            this.listView1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+            this.listViewFavorites.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
                         | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
-            this.listView1.Location = new System.Drawing.Point(3, 3);
-            this.listView1.MultiSelect = false;
-            this.listView1.Name = "listView1";
-            this.listView1.Size = new System.Drawing.Size(587, 255);
-            this.listView1.TabIndex = 2;
-            this.listView1.UseCompatibleStateImageBehavior = false;
+            this.listViewFavorites.Location = new System.Drawing.Point(0, 3);
+            this.listViewFavorites.MultiSelect = false;
+            this.listViewFavorites.Name = "listViewFavorites";
+            this.listViewFavorites.Size = new System.Drawing.Size(591, 261);
+            this.listViewFavorites.TabIndex = 2;
+            this.listViewFavorites.UseCompatibleStateImageBehavior = false;
+            this.listViewFavorites.View = System.Windows.Forms.View.Tile;
+            this.listViewFavorites.SelectedIndexChanged += new System.EventHandler(this.listViewFavorites_SelectedIndexChanged);
             // 
             // tabPageSlideShow
             // 
@@ -1434,6 +1437,7 @@
             // button1
             // 
             this.button1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.button1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button1.Location = new System.Drawing.Point(8, 261);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(125, 23);
@@ -1456,6 +1460,17 @@
             this.songDetailElement.Size = new System.Drawing.Size(353, 249);
             this.songDetailElement.TabIndex = 20;
             this.songDetailElement.SlideClicked += new SongDetails.SongDetail.slideClick(this.songDetailElement_SlideClicked);
+            // 
+            // buttonClearText
+            // 
+            this.buttonClearText.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.buttonClearText.Location = new System.Drawing.Point(633, 242);
+            this.buttonClearText.Name = "buttonClearText";
+            this.buttonClearText.Size = new System.Drawing.Size(104, 23);
+            this.buttonClearText.TabIndex = 2;
+            this.buttonClearText.Text = "Text ausblenden";
+            this.buttonClearText.UseVisualStyleBackColor = true;
+            this.buttonClearText.Click += new System.EventHandler(this.buttonClearText_Click);
             // 
             // MainWindow
             // 
@@ -1492,6 +1507,8 @@
             this.groupBoxSongContents.PerformLayout();
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
+            this.tabPage2.ResumeLayout(false);
+            this.tabPage2.PerformLayout();
             this.tabControl2.ResumeLayout(false);
             this.tabPageImageBrowser.ResumeLayout(false);
             this.tabPageImageBrowser.PerformLayout();
@@ -1534,10 +1551,7 @@
 		private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
 		private System.Windows.Forms.ToolStripMenuItem liededitorToolStripMenuItem;
 		private System.Windows.Forms.ToolStripSeparator toolStripSeparator4;
-		private System.Windows.Forms.ToolStripSeparator toolStripSeparator5;
-		private System.Windows.Forms.ToolStripMenuItem projektionToolStripMenuItem;
-		private System.Windows.Forms.ToolStripMenuItem projektionEinausToolStripMenuItem;
-		private System.Windows.Forms.ToolStripMenuItem blackoutEinausToolStripMenuItem;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator5;
 		private System.Windows.Forms.ToolStripMenuItem datenverzeichnisÖffnenToolStripMenuItem;
 		private System.Windows.Forms.ToolStripSeparator toolStripSeparator6;
 		private System.Windows.Forms.GroupBox groupBox4;
@@ -1617,12 +1631,11 @@
         private System.Windows.Forms.Button buttonClearImageHistory;
         private System.Windows.Forms.Label label6;
 		private System.Windows.Forms.ColumnHeader columnHeader7;
-        private System.Windows.Forms.ListView listView1;
+        private System.Windows.Forms.ListView listViewFavorites;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabelCtrl;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabelInfo;
         private SongDetails.SongDetail songDetailElement;
         private System.Windows.Forms.GroupBox groupBoxSongContents;
-        private System.Windows.Forms.TabPage tabPage3;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.GroupBox groupBoxImageStack;
@@ -1631,6 +1644,10 @@
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button buttonToggleLayerMode;
         private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.TabPage tabPage2;
+        private System.Windows.Forms.TextBox textBoxLiveText;
+        private System.Windows.Forms.Button buttonShowLiveText;
+        private System.Windows.Forms.Button buttonClearText;
     }
 }
 

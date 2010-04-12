@@ -91,6 +91,7 @@
     <Compile Include="Classes\BaseLayer.cs" />
     <Compile Include="Classes\Bible.cs" />
     <Compile Include="Classes\EditableSong.cs" />
+    <Compile Include="Classes\LiveText.cs" />
     <Compile Include="Classes\TextLayer.cs" />
     <Compile Include="Classes\Util.cs" />
     <Compile Include="Classes\ImageManager.cs" />
