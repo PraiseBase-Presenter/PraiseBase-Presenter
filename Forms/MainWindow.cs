@@ -63,6 +63,8 @@ namespace Pbp.Forms
 
         private Timer keyStrokeTimer;
 
+        private bool linkLayers = true;
+
 		/// <summary>
 		/// Private constructor
 		/// </summary>
@@ -113,6 +115,8 @@ namespace Pbp.Forms
 			labelFadeTime.Text = Settings.Instance.ProjectionFadeTime.ToString(); // + " ms";
 			UserControl1.getInstance().setFadeSteps(Settings.Instance.ProjectionFadeTime);
 
+
+            Bible currentBible = new Bible("C:/Users/Nicolas/Documents/PraiseBase Presenter Church/Bible/sample.xml");
         }
 
         private void beendenToolStripMenuItem_Click(object sender, EventArgs e)
@@ -346,6 +350,7 @@ namespace Pbp.Forms
 				}
 				else
 				{
+                    
 					SongManager.getInstance().CurrentSong = SongManager.getInstance().SongList[(Guid)listViewSongs.SelectedItems[0].Tag];
 					showCurrentSongDetails();
 					buttonSetListAdd.Enabled = true;
@@ -385,6 +390,7 @@ namespace Pbp.Forms
 				songDetailImages.Items.Add(lvi);
 			}
 
+            groupBoxSongContents.Text = songMan.CurrentSong.Title;
             songDetailElement.setSong(songMan.CurrentSong);
 
 			//groupBox3.Text = "Lied-Details '" + songMan.CurrentSong.Title + "'";
@@ -400,7 +406,7 @@ namespace Pbp.Forms
 			{
 				setStatus("Projiziere '" + songMan.CurrentSong.Title + "' ...");
 
-
+                // CTRL pressed, use image stack
 				if ((Control.ModifierKeys & Keys.Control) == Keys.Control)
 				{
 					if (listViewImageQueue.Items.Count > 0)
@@ -413,62 +419,31 @@ namespace Pbp.Forms
 					{
 						pictureBoxPreview.Image = projWindow.showSlide(songMan.CurrentSong.Parts[pn].Slides[sn], null, false);
 					}
-
 				}
-				else if ((Control.ModifierKeys & Keys.Shift) == Keys.Shift)
+
+                // SHIFT pressed, use current slide
+                else if (!linkLayers ^ ((Control.ModifierKeys & Keys.Shift) == Keys.Shift))
 				{
 					pictureBoxPreview.Image = projWindow.showSlide(songMan.CurrentSong.Parts[pn].Slides[sn], null, false);
 				}
+                // Current slide + attached image
 				else
 				{
 					pictureBoxPreview.Image = projWindow.showSlide(songMan.CurrentSong.Parts[pn].Slides[sn], songMan.CurrentSong.getImage(songMan.CurrentSong.Parts[pn].Slides[sn].ImageNumber), false);
 				}
 				setStatus("'" + songMan.CurrentSong.Title + "' ist aktiv");
+
+                songMan.CurrentPartNr = pn;
+                songMan.CurrentSlideNr = sn;
+
 			}
 		}
 
-        private void songDetailItems_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            /*
-			SongManager songMan = SongManager.getInstance();
-			
-            if (projWindow != null && songDetailItems.SelectedIndices.Count > 0)
-            {
-                Application.DoEvents();
-                songMan.CurrentSong.CurrentSlide = songDetailItems.SelectedIndices[0];
-
-                setStatus("Projiziere '" + songMan.CurrentSong.Title + "' ...");
-
-				if ((Control.ModifierKeys & Keys.Control) == Keys.Control)
-				{
-					if (listViewImageQueue.Items.Count > 0)
-					{
-						Image img = ImageManager.Instance.getImageFromRelPath((string)listViewImageQueue.Items[0].Tag);
-						pictureBoxPreview.Image = projWindow.showSlide(songMan.CurrentSong.Slides[songMan.CurrentSong.CurrentSlide], img, false);
-						listViewImageQueue.Items[0].Remove();
-					}
-					else
-					{
-						pictureBoxPreview.Image = projWindow.showSlide(songMan.CurrentSong.Slides[songMan.CurrentSong.CurrentSlide], null, false);
-					}
-
-				}
-                else if ((Control.ModifierKeys & Keys.Shift) == Keys.Shift)
-                {
-					pictureBoxPreview.Image = projWindow.showSlide(songMan.CurrentSong.Slides[songMan.CurrentSong.CurrentSlide], null, false);
-                }
-                else
-                {
-					pictureBoxPreview.Image = projWindow.showSlide(songMan.CurrentSong.Slides[songMan.CurrentSong.CurrentSlide], songMan.CurrentSong.getImage(songMan.CurrentSong.Slides[songMan.CurrentSong.CurrentSlide].ImageNumber), false);
-                }
-
-
-
-				setStatus("'" + songMan.CurrentSong.Title + "' ist aktiv");
-            } */
-            
-        }
-
+        /// <summary>
+        /// Change background when song details image is clicked
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void songDetailImages_SelectedIndexChanged(object sender, EventArgs e)
         {
 			SongManager songMan = SongManager.getInstance();
@@ -477,9 +452,9 @@ namespace Pbp.Forms
             {
                 Application.DoEvents();
                 int idx = songDetailImages.SelectedIndices[0];
-                if ((Control.ModifierKeys & Keys.Shift) == Keys.Shift)
+                if (!linkLayers ^ ((Control.ModifierKeys & Keys.Shift) == Keys.Shift))
                 {
-					pictureBoxPreview.Image = projWindow.showSlide(songMan.CurrentSong.Slides[songMan.CurrentSong.CurrentSlide], songMan.CurrentSong.getImage(idx + 1), false);
+					pictureBoxPreview.Image = projWindow.showSlide(songMan.CurrentSlide, songMan.CurrentSong.getImage(idx + 1), false);
                 }
                 else
                 {
@@ -543,12 +518,10 @@ namespace Pbp.Forms
         {
 			string rootDir = Settings.Instance.DataDirectory + Path.DirectorySeparatorChar + Settings.Instance.ImageDir;
             treeViewImageDirectories.Nodes.Clear();
-            TreeNode rootTreeNode = new TreeNode("Bilder");
-            rootTreeNode.Tag = rootDir;
-            treeViewImageDirectories.Nodes.Add(rootTreeNode);
-            PopulateTreeView(rootDir, treeViewImageDirectories.Nodes[0]);
+            PopulateTreeView(rootDir, null);
 			treeViewImageDirectories.ExpandAll();
-            treeViewImageDirectories.Nodes.Add("Suchergebnisse");
+            treeViewImageDirectories.SelectedNode = treeViewImageDirectories.Nodes[0];
+            //treeViewImageDirectories.Nodes.Add("Suchergebnisse");
 
             imageSearchResults = new List<String>();
 
@@ -585,7 +558,10 @@ namespace Pbp.Forms
                                 TreeNode myNode = new TreeNode(dName);
 
 								myNode.Tag = directory.Substring(subLen);
-                                parentNode.Nodes.Add(myNode);
+                                if (parentNode == null)
+                                    treeViewImageDirectories.Nodes.Add(myNode);
+                                else
+                                    parentNode.Nodes.Add(myNode);
                                 PopulateTreeView(directory, myNode);
                             }
                         }
@@ -607,7 +583,7 @@ namespace Pbp.Forms
             {
                 listViewDirectoryImages.LargeImageList.Dispose();
             }
-            if (treeViewImageDirectories.SelectedNode == treeViewImageDirectories.Nodes[1])
+            if (false && treeViewImageDirectories.SelectedNode == treeViewImageDirectories.Nodes[1])
             {
                     labelImgDirName.Text = "Suchergebnisse";
 
@@ -671,6 +647,7 @@ namespace Pbp.Forms
 				Application.DoEvents();
 				int idx = listViewDirectoryImages.SelectedIndices[0];
 
+                // Stack
 				if ((Control.ModifierKeys & Keys.Control) == Keys.Control)
 				{
 					listViewImageQueue.LargeImageList.Images.Add(ImageManager.Instance.getThumbFromRelPath((string)listViewDirectoryImages.Items[idx].Tag));
@@ -685,16 +662,17 @@ namespace Pbp.Forms
 
 
 					Image img = ImageManager.Instance.getImageFromRelPath((string)listViewDirectoryImages.Items[idx].Tag);
-					if ((Control.ModifierKeys & Keys.Shift) == Keys.Shift && songMan.CurrentSong != null && songMan.CurrentSong.CurrentSlide >= 0)
+                    // Linked layers
+					if (!linkLayers ^ ((Control.ModifierKeys & Keys.Shift) == Keys.Shift && songMan.CurrentSong != null && songMan.CurrentSong.CurrentSlide >= 0))
 					{
-						pictureBoxPreview.Image = projWindow.showSlide(songMan.CurrentSong.Slides[songMan.CurrentSong.CurrentSlide], img, false);
+						pictureBoxPreview.Image = projWindow.showSlide(songMan.CurrentSlide, img, false);
 					}
 					else
 					{
 						pictureBoxPreview.Image = projWindow.showImage(img);
 					}
 
-					// History
+					// Add image to history
 					if (listViewImageHistory.Items.Count == 0 || (string)listViewImageHistory.Items[listViewImageHistory.Items.Count - 1].Tag != (string)listViewDirectoryImages.Items[idx].Tag)
 					{
 						listViewImageHistory.LargeImageList.Images.Add(ImageManager.Instance.getThumbFromRelPath((string)listViewDirectoryImages.Items[idx].Tag));
@@ -956,6 +934,11 @@ namespace Pbp.Forms
             }
         }
 
+        /// <summary>
+        /// Show image from history
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void listViewImageHistory_SelectedIndexChanged(object sender, EventArgs e)
         {
 			SongManager songMan = SongManager.getInstance();
@@ -966,7 +949,7 @@ namespace Pbp.Forms
                 int idx = listViewImageHistory.SelectedIndices[0];
 
 				Image img = ImageManager.Instance.getImageFromRelPath((string)listViewImageHistory.Items[idx].Tag);
-                if ((Control.ModifierKeys & Keys.Shift) == Keys.Shift && songMan.CurrentSong != null && songMan.CurrentSong.CurrentSlide >= 0)
+                if (!linkLayers ^ ((Control.ModifierKeys & Keys.Shift) == Keys.Shift && songMan.CurrentSong != null && songMan.CurrentSong.CurrentSlide >= 0))
                 {
 					pictureBoxPreview.Image = projWindow.showSlide(songMan.CurrentSong.Slides[songMan.CurrentSong.CurrentSlide], img, false);
                 }
@@ -1382,7 +1365,12 @@ namespace Pbp.Forms
 			listViewImageQueue.Items.Clear();
 			listViewImageQueue.LargeImageList.Images.Clear();
 		}
-
+        
+        /// <summary>
+        /// Show image from image queue
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
 		private void listViewImageQueue_SelectedIndexChanged(object sender, EventArgs e)
 		{
 			SongManager songMan = SongManager.getInstance();
@@ -1456,6 +1444,46 @@ namespace Pbp.Forms
 		{
 			
 		}
+
+        private void textBox1_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void toolStrip1_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
+        {
+
+        }
+
+        private void label6_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button2_Click_1(object sender, EventArgs e)
+        {
+            linkLayers = !linkLayers;
+            if (linkLayers)
+            {
+                ((Button)sender).Text = "Lösen";
+                label3.Text = "Text und Bild sind verknüpft";
+            }
+            else
+            {
+                ((Button)sender).Text = "Verknüpfen";
+                label3.Text = "Text und Bild sind unabhängig";
+            }
+        }
+
+        private void label4_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void labelImgDirName_Click(object sender, EventArgs e)
+        {
+
+        }
 
 
 			

@@ -59,6 +59,18 @@ namespace Pbp
 		/// </summary>
         public Song CurrentSong {get;set;}
 
+        public int CurrentPartNr { get; set; }
+        public int CurrentSlideNr { get; set; } 
+
+        public Song.Slide CurrentSlide 
+        { 
+            get 
+            {
+                return this.CurrentSong.Parts[CurrentPartNr].Slides[CurrentSlideNr];
+            } 
+        }
+
+
 		/// <summary>
 		/// Gets the singleton of this class
 		/// </summary>
@@ -76,6 +88,8 @@ namespace Pbp
 		/// </summary>
 		private SongManager(params object[] param)
         {
+            CurrentPartNr = 0;
+            CurrentSlideNr = 0;
 			reload(param);
         }
 
