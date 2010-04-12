@@ -384,6 +384,9 @@
     <None Include="Resources\highlight.png" />
     <None Include="Resources\link.png" />
     <None Include="Resources\unlink.png" />
+    <None Include="Resources\text_align_center.png" />
+    <None Include="Resources\text_align_right.png" />
+    <None Include="Resources\text_align_left.png" />
     <Content Include="Songs\A Mighty Fortress Is Our God.ppl" />
     <Content Include="Songs\Jesus is my Lord.ppl" />
   </ItemGroup>

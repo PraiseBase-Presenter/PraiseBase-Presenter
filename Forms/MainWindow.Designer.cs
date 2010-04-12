@@ -118,6 +118,7 @@
             this.songSearchResetButton = new System.Windows.Forms.Button();
             this.songSearchBox = new System.Windows.Forms.TextBox();
             this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.buttonClearText = new System.Windows.Forms.Button();
             this.buttonShowLiveText = new System.Windows.Forms.Button();
             this.textBoxLiveText = new System.Windows.Forms.TextBox();
             this.tabControl2 = new System.Windows.Forms.TabControl();
@@ -150,8 +151,12 @@
             this.listViewImageQueue = new System.Windows.Forms.ListView();
             this.columnHeader6 = new System.Windows.Forms.ColumnHeader();
             this.button1 = new System.Windows.Forms.Button();
+            this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.comboBox2 = new System.Windows.Forms.ComboBox();
+            this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
+            this.label5 = new System.Windows.Forms.Label();
+            this.label8 = new System.Windows.Forms.Label();
             this.songDetailElement = new SongDetails.SongDetail();
-            this.buttonClearText = new System.Windows.Forms.Button();
             buttonChooseDiaDir = new System.Windows.Forms.Button();
             this.menuStrip1.SuspendLayout();
             this.groupBox4.SuspendLayout();
@@ -173,6 +178,7 @@
             this.tableLayoutPanel1.SuspendLayout();
             this.panel1.SuspendLayout();
             this.groupBoxImageStack.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
             this.SuspendLayout();
             // 
             // buttonChooseDiaDir
@@ -1056,6 +1062,11 @@
             // 
             // tabPage2
             // 
+            this.tabPage2.Controls.Add(this.label8);
+            this.tabPage2.Controls.Add(this.label5);
+            this.tabPage2.Controls.Add(this.numericUpDown1);
+            this.tabPage2.Controls.Add(this.comboBox2);
+            this.tabPage2.Controls.Add(this.comboBox1);
             this.tabPage2.Controls.Add(this.buttonClearText);
             this.tabPage2.Controls.Add(this.buttonShowLiveText);
             this.tabPage2.Controls.Add(this.textBoxLiveText);
@@ -1066,6 +1077,17 @@
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Live-Text";
             this.tabPage2.UseVisualStyleBackColor = true;
+            // 
+            // buttonClearText
+            // 
+            this.buttonClearText.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.buttonClearText.Location = new System.Drawing.Point(633, 242);
+            this.buttonClearText.Name = "buttonClearText";
+            this.buttonClearText.Size = new System.Drawing.Size(104, 23);
+            this.buttonClearText.TabIndex = 2;
+            this.buttonClearText.Text = "Text ausblenden";
+            this.buttonClearText.UseVisualStyleBackColor = true;
+            this.buttonClearText.Click += new System.EventHandler(this.buttonClearText_Click);
             // 
             // buttonShowLiveText
             // 
@@ -1080,12 +1102,13 @@
             // 
             // textBoxLiveText
             // 
-            this.textBoxLiveText.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+            this.textBoxLiveText.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+                        | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
-            this.textBoxLiveText.Location = new System.Drawing.Point(179, 7);
+            this.textBoxLiveText.Location = new System.Drawing.Point(6, 7);
             this.textBoxLiveText.Multiline = true;
             this.textBoxLiveText.Name = "textBoxLiveText";
-            this.textBoxLiveText.Size = new System.Drawing.Size(558, 229);
+            this.textBoxLiveText.Size = new System.Drawing.Size(731, 229);
             this.textBoxLiveText.TabIndex = 0;
             // 
             // tabControl2
@@ -1446,6 +1469,78 @@
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click_1);
             // 
+            // comboBox1
+            // 
+            this.comboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBox1.FormattingEnabled = true;
+            this.comboBox1.Items.AddRange(new object[] {
+            "Links",
+            "Zentriert",
+            "Rechts"});
+            this.comboBox1.Location = new System.Drawing.Point(222, 242);
+            this.comboBox1.Name = "comboBox1";
+            this.comboBox1.Size = new System.Drawing.Size(80, 21);
+            this.comboBox1.TabIndex = 3;
+            // 
+            // comboBox2
+            // 
+            this.comboBox2.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBox2.FormattingEnabled = true;
+            this.comboBox2.Items.AddRange(new object[] {
+            "Oben",
+            "Mitte",
+            "Unten"});
+            this.comboBox2.Location = new System.Drawing.Point(311, 242);
+            this.comboBox2.Name = "comboBox2";
+            this.comboBox2.Size = new System.Drawing.Size(80, 21);
+            this.comboBox2.TabIndex = 4;
+            // 
+            // numericUpDown1
+            // 
+            this.numericUpDown1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.numericUpDown1.Location = new System.Drawing.Point(83, 243);
+            this.numericUpDown1.Maximum = new decimal(new int[] {
+            150,
+            0,
+            0,
+            0});
+            this.numericUpDown1.Minimum = new decimal(new int[] {
+            10,
+            0,
+            0,
+            0});
+            this.numericUpDown1.Name = "numericUpDown1";
+            this.numericUpDown1.Size = new System.Drawing.Size(52, 20);
+            this.numericUpDown1.TabIndex = 5;
+            this.numericUpDown1.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.numericUpDown1.Value = new decimal(new int[] {
+            60,
+            0,
+            0,
+            0});
+            this.numericUpDown1.ValueChanged += new System.EventHandler(this.numericUpDown1_ValueChanged);
+            // 
+            // label5
+            // 
+            this.label5.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(6, 247);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(71, 13);
+            this.label5.TabIndex = 6;
+            this.label5.Text = "Schriftgrösse:";
+            this.label5.Click += new System.EventHandler(this.label5_Click);
+            // 
+            // label8
+            // 
+            this.label8.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(150, 247);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(66, 13);
+            this.label8.TabIndex = 7;
+            this.label8.Text = "Ausrichtung:";
+            // 
             // songDetailElement
             // 
             this.songDetailElement.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
@@ -1460,17 +1555,6 @@
             this.songDetailElement.Size = new System.Drawing.Size(353, 249);
             this.songDetailElement.TabIndex = 20;
             this.songDetailElement.SlideClicked += new SongDetails.SongDetail.slideClick(this.songDetailElement_SlideClicked);
-            // 
-            // buttonClearText
-            // 
-            this.buttonClearText.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.buttonClearText.Location = new System.Drawing.Point(633, 242);
-            this.buttonClearText.Name = "buttonClearText";
-            this.buttonClearText.Size = new System.Drawing.Size(104, 23);
-            this.buttonClearText.TabIndex = 2;
-            this.buttonClearText.Text = "Text ausblenden";
-            this.buttonClearText.UseVisualStyleBackColor = true;
-            this.buttonClearText.Click += new System.EventHandler(this.buttonClearText_Click);
             // 
             // MainWindow
             // 
@@ -1519,6 +1603,7 @@
             this.tableLayoutPanel1.ResumeLayout(false);
             this.panel1.ResumeLayout(false);
             this.groupBoxImageStack.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1648,6 +1733,11 @@
         private System.Windows.Forms.TextBox textBoxLiveText;
         private System.Windows.Forms.Button buttonShowLiveText;
         private System.Windows.Forms.Button buttonClearText;
+        private System.Windows.Forms.ComboBox comboBox1;
+        private System.Windows.Forms.ComboBox comboBox2;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.NumericUpDown numericUpDown1;
+        private System.Windows.Forms.Label label8;
     }
 }
 

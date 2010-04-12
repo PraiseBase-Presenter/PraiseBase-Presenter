@@ -48,8 +48,7 @@ namespace Pbp.Forms
         private int h;
         private int w;
         private Screen projScreen;
-        private Image currentImage;
-
+        
         static private projectionWindow _instance;
 
         private projectionWindow()
@@ -143,44 +142,20 @@ namespace Pbp.Forms
             if (background != null)
             {
                 gr.DrawImage(background, new Rectangle(0, 0, w, h), 0, 0, background.Width, background.Height, GraphicsUnit.Pixel);
-                currentImage = background;
-            }
-            else if (currentImage!=null)
-            {
-                gr.DrawImage(currentImage, new Rectangle(0, 0, w, h), 0, 0, currentImage.Width, currentImage.Height, GraphicsUnit.Pixel);
             }
 
             // Apply text layer
-            tl.writeOut(gr,textLayerArgs,pm);
-            
+            if (tl != null)
+            {
+                tl.writeOut(gr, textLayerArgs, pm);
+            }
+
             if (pm == ProjectionMode.Projection)
 				UserControl1.getInstance().setProjectionImage(bmp);
 
             gr.Dispose();
             return bmp;
         }
-
-
-
-        public Image showImage(Image background)
-        {
-            Application.DoEvents();
-			UserControl1.getInstance().setProjectionImage(new Bitmap(background));
-			currentImage = background;
-			return background;
-        }
-
-        public Image showNone()
-        {
-            Application.DoEvents();
-            Bitmap bmp = new Bitmap(w, h);
-            Graphics gr = Graphics.FromImage(bmp);
-			gr.FillRectangle(new SolidBrush(Settings.Instance.ProjectionBackColor), 0, 0, w, h);
-			UserControl1.getInstance().setProjectionImage(bmp);
-			currentImage = bmp;
-			return bmp;
-        }
-
 
         public string ConvertString(string unicode)
         {
@@ -199,9 +174,5 @@ namespace Pbp.Forms
 			projectionControlHost.Height = this.Height;
 			projectionControlHost.Visible = true;
         }
-
-
     }
-
-
 }

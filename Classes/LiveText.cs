@@ -14,21 +14,50 @@ namespace Pbp
     class LiveText : TextLayer
     {
         public string Text {get;set;}
-        private StringFormat strFormat;
+        public StringAlignment HorizontalAlign { get; set; }
+        public StringAlignment VerticalAlign { get; set; }
+        public float FontSize { get; set; }
+
+        public LiveText() : this("")
+        {
+            
+        }
 
         public LiveText(string initText)
         {
             Text = initText;
-            strFormat = new StringFormat();
-            strFormat.Alignment = StringAlignment.Near;
+            FontSize = Settings.Instance.ProjectionMasterFont.Size;
         }
 
         public override void writeOut(System.Drawing.Graphics gr, object[] args, ProjectionMode pr)
         {
-            Font font = Settings.Instance.ProjectionMasterFont;
+            Font font = new Font(Settings.Instance.ProjectionMasterFont.FontFamily,FontSize,Settings.Instance.ProjectionMasterFont.Style);
             Brush fontBrush = new SolidBrush(Settings.Instance.ProjectionMasterFontColor);
+            StringFormat strFormat = new StringFormat();
+            strFormat.Alignment = HorizontalAlign;
 
-            gr.DrawString(Text, font, fontBrush, new Point(5, 5), strFormat);
+            int w = (int)gr.VisibleClipBounds.Width;
+            int h = (int)gr.VisibleClipBounds.Height;
+            int padding = 20;
+
+            SizeF coveredArea = gr.MeasureString(Text, font);
+            
+            int x, y;
+            if (strFormat.Alignment == StringAlignment.Far)
+                x = w - padding;
+            else if (strFormat.Alignment == StringAlignment.Center)
+                x = w/2;
+            else
+                x = padding;
+
+            if (VerticalAlign == StringAlignment.Far)
+                y = h - padding - (int)coveredArea.Height;
+            else if (VerticalAlign == StringAlignment.Center)
+                y = (h / 2) - (int)(coveredArea.Height/2);
+            else
+                y = padding;
+
+            gr.DrawString(Text, font, fontBrush, new Point(x, y), strFormat);
 
         }
     }

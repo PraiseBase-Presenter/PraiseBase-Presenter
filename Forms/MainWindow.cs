@@ -55,7 +55,9 @@ namespace Pbp.Forms
     {
 		static private MainWindow instance;
         private projectionWindow projWindow; // Todo: use singleton
-		
+
+        private Image currentBackground;
+
 		private Timer blackOutTimer;
         private Timer diaTimer;
 		private bool blackout;
@@ -117,6 +119,9 @@ namespace Pbp.Forms
 
             linkLayers = Settings.Instance.LinkLayers;
             setLinkLayerUI();
+
+            comboBox1.SelectedIndex = 0;
+            comboBox2.SelectedIndex = 0;
 
             Bible currentBible = new Bible("C:/Users/Nicolas/Documents/PraiseBase Presenter Church/Bible/sample.xml");
         }
@@ -418,7 +423,7 @@ namespace Pbp.Forms
 					else
 					{
                         object [] args = {pn,sn};
-						pictureBoxPreview.Image = projWindow.showSlide(songMan.CurrentSong, null, args);
+                        pictureBoxPreview.Image = projWindow.showSlide(songMan.CurrentSong, currentBackground, args);
 					}
 				}
 
@@ -426,7 +431,7 @@ namespace Pbp.Forms
                 else if (!linkLayers ^ ((Control.ModifierKeys & Keys.Shift) == Keys.Shift))
 				{
                     object[] args = { pn, sn };
-					pictureBoxPreview.Image = projWindow.showSlide(songMan.CurrentSong, null, args);
+					pictureBoxPreview.Image = projWindow.showSlide(songMan.CurrentSong, currentBackground, args);
 				}
                 // Current slide + attached image
 				else
@@ -457,15 +462,19 @@ namespace Pbp.Forms
             {
                 Application.DoEvents();
                 int idx = songDetailImages.SelectedIndices[0];
+
+                // Show current songtext with new image
                 if (!linkLayers ^ ((Control.ModifierKeys & Keys.Shift) == Keys.Shift))
                 {
                     object[] args = { songMan.CurrentPartNr, songMan.CurrentSlideNr };
 					pictureBoxPreview.Image = projWindow.showSlide(songMan.CurrentSong, songMan.CurrentSong.getImage(idx + 1), args);
                 }
+                // Show image only
                 else
                 {
-					pictureBoxPreview.Image = projWindow.showImage(songMan.CurrentSong.getImage(idx + 1));
+                    pictureBoxPreview.Image = projWindow.showSlide(null,songMan.CurrentSong.getImage(idx + 1));
                 }
+                this.currentBackground = songMan.CurrentSong.getImage(idx + 1);
                 imageHistoryAdd(songMan.CurrentSong.RelativeImagePaths[idx]);
             }
         }
@@ -626,7 +635,6 @@ namespace Pbp.Forms
 					
 					foreach (string file in songFilePaths)
 					{
-						//Application.DoEvents();
 						ListViewItem lvi = new ListViewItem(Path.GetFileNameWithoutExtension(file));
 						lvi.Tag = relativeImageDir + Path.DirectorySeparatorChar + Path.GetFileName(file);
 						lvi.ImageIndex = i;
@@ -676,8 +684,9 @@ namespace Pbp.Forms
 					}
 					else
 					{
-						pictureBoxPreview.Image = projWindow.showImage(img);
+                        pictureBoxPreview.Image = projWindow.showSlide(null,img);
 					}
+                    this.currentBackground = img;
 
 					// Add image to history
                     imageHistoryAdd((string)listViewDirectoryImages.Items[idx].Tag);
@@ -824,68 +833,68 @@ namespace Pbp.Forms
 
         private void button2_Click(object sender, EventArgs e)
         {
-            if (diaTimer!= null && diaTimer.Enabled)
-            {
-                diaTimer.Stop();
-                projWindow.showNone();
-                buttonDiaShow.Text = "Diaschau starten";
-                return;
-            }
+            //if (diaTimer!= null && diaTimer.Enabled)
+            //{
+            //    diaTimer.Stop();
+            //    projWindow.showNone();
+            //    buttonDiaShow.Text = "Diaschau starten";
+            //    return;
+            //}
 
-            if (listViewDias.Items.Count == 0)
-            {
-                MessageBox.Show("Keine Bilder ausgewählt!");
-                return;
-            }
-            buttonDiaShow.Text = "Diaschau stoppen";
+            //if (listViewDias.Items.Count == 0)
+            //{
+            //    MessageBox.Show("Keine Bilder ausgewählt!");
+            //    return;
+            //}
+            //buttonDiaShow.Text = "Diaschau stoppen";
 
-            if (radioButtonAutoDiaShow.Checked)
-            {
-                int duration;
-                try
-                {
-                    duration = int.Parse(textBoxDiaDuration.Text);
-                }
-                catch
-                {
-                    duration = 3;
-                }
-                duration = duration > 0 ? duration : 3;
-                textBoxDiaDuration.Text = duration.ToString();
+            //if (radioButtonAutoDiaShow.Checked)
+            //{
+            //    int duration;
+            //    try
+            //    {
+            //        duration = int.Parse(textBoxDiaDuration.Text);
+            //    }
+            //    catch
+            //    {
+            //        duration = 3;
+            //    }
+            //    duration = duration > 0 ? duration : 3;
+            //    textBoxDiaDuration.Text = duration.ToString();
 
-                diaTimer = new Timer();
-                diaTimer.Interval = duration * 1000;
-                diaTimer.Tick += new EventHandler(diaTimer_Tick);
+            //    diaTimer = new Timer();
+            //    diaTimer.Interval = duration * 1000;
+            //    diaTimer.Tick += new EventHandler(diaTimer_Tick);
 
-				Queue<string> diaStack = new Queue<string>();
-                foreach (ListViewItem lvi in listViewDias.Items)
-                {
-                    if (lvi.Checked)
-                    {
-                        diaStack.Enqueue((string)lvi.Tag);
-                    }
-                }
-                if (diaStack.Count == 0)
-                {
-                    MessageBox.Show("Keine Bilder ausgewählt!");
-                    return;
-                }
-                diaTimer.Tag = diaStack;
-				pictureBoxPreview.Image = projWindow.showImage(Image.FromFile(diaStack.Dequeue()));
-                diaTimer.Start();
-            }
+            //    Queue<string> diaStack = new Queue<string>();
+            //    foreach (ListViewItem lvi in listViewDias.Items)
+            //    {
+            //        if (lvi.Checked)
+            //        {
+            //            diaStack.Enqueue((string)lvi.Tag);
+            //        }
+            //    }
+            //    if (diaStack.Count == 0)
+            //    {
+            //        MessageBox.Show("Keine Bilder ausgewählt!");
+            //        return;
+            //    }
+            //    diaTimer.Tag = diaStack;
+            //    pictureBoxPreview.Image = projWindow.showImage(Image.FromFile(diaStack.Dequeue()));
+            //    diaTimer.Start();
+            //}
         }
 
         private void diaTimer_Tick(object sender, EventArgs e)
         {
-            if (((Queue<string>)((Timer)sender).Tag).Count == 0)
-            {
-                    ((Timer)sender).Stop();
-                    projWindow.showNone();
-                    buttonDiaShow.Text = "Diaschau starten";
-                    return;                
-            }
-			pictureBoxPreview.Image = projWindow.showImage(Image.FromFile(((Queue<string>)((Timer)sender).Tag).Dequeue()));
+            //if (((Queue<string>)((Timer)sender).Tag).Count == 0)
+            //{
+            //        ((Timer)sender).Stop();
+            //        projWindow.showNone();
+            //        buttonDiaShow.Text = "Diaschau starten";
+            //        return;                
+            //}
+            //pictureBoxPreview.Image = projWindow.showImage(Image.FromFile(((Queue<string>)((Timer)sender).Tag).Dequeue()));
         }
 
         private void radioButton2_CheckedChanged(object sender, EventArgs e)
@@ -1007,8 +1016,9 @@ namespace Pbp.Forms
                     }
                     else
                     {
-                        pictureBoxPreview.Image = projWindow.showImage(img);
+                        pictureBoxPreview.Image = projWindow.showSlide(null,img);
                     }
+                    this.currentBackground = img;
                 }
             }
         }
@@ -1443,8 +1453,9 @@ namespace Pbp.Forms
 				}
 				else
 				{
-					pictureBoxPreview.Image = projWindow.showImage(img);
+                    pictureBoxPreview.Image = projWindow.showSlide(null, img);
 				}
+                this.currentBackground = img;
 			}
 		}
 
@@ -1533,8 +1544,9 @@ namespace Pbp.Forms
                     }
                     else
                     {
-                        pictureBoxPreview.Image = projWindow.showImage(img);
+                        pictureBoxPreview.Image = projWindow.showSlide(null,img);
                     }
+                    this.currentBackground = img;
                 }
             }
         }
@@ -1547,14 +1559,38 @@ namespace Pbp.Forms
         private void buttonShowLiveText_Click(object sender, EventArgs e)
         {
             LiveText lt = new LiveText(textBoxLiveText.Text);
-            projWindow.showSlide(lt,null);
+            if (comboBox1.SelectedIndex == 2)
+                lt.HorizontalAlign = StringAlignment.Far;
+            else if (comboBox1.SelectedIndex == 1)
+                lt.HorizontalAlign = StringAlignment.Center;
+            else
+                lt.HorizontalAlign = StringAlignment.Near;
+
+            if (comboBox2.SelectedIndex == 2)
+                lt.VerticalAlign = StringAlignment.Far;
+            else if (comboBox2.SelectedIndex == 1)
+                lt.VerticalAlign = StringAlignment.Center;
+            else
+                lt.VerticalAlign = StringAlignment.Near;
+            lt.FontSize = (float)numericUpDown1.Value;
+            pictureBoxPreview.Image = projWindow.showSlide(lt, currentBackground);
+            
         }
 
         private void buttonClearText_Click(object sender, EventArgs e)
         {
+            pictureBoxPreview.Image = projWindow.showSlide(null, currentBackground);
+        }
+
+        private void numericUpDown1_ValueChanged(object sender, EventArgs e)
+        {
 
         }
 
+        private void label5_Click(object sender, EventArgs e)
+        {
+
+        }
 
 
     }
