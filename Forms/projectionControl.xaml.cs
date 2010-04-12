@@ -56,6 +56,8 @@ namespace Pbp.Forms
 		private int fadeSteps;
 		float opCounter;
 
+        bool isBlackout = false;
+
         int pbi = 0;
 
 		private UserControl1()
@@ -78,7 +80,8 @@ namespace Pbp.Forms
 			System.Drawing.Graphics gr = System.Drawing.Graphics.FromImage(bmp);
 			gr.FillRectangle(new System.Drawing.SolidBrush(Settings.Instance.ProjectionBackColor), 0, 0, 1, 1);
 			blackoutImage.Source = loadBitmap(bmp);
-			blackoutImage.Opacity = 0f;
+            gr.Dispose();
+            blackoutImage.Opacity = isBlackout ? 100f : 0f;
 		}
 
 		public static BitmapSource loadBitmap(System.Drawing.Bitmap source)
@@ -133,6 +136,7 @@ namespace Pbp.Forms
 
 		public void blackOut(bool val,bool fade)
 		{
+            isBlackout = val;
             if (fade)
             {
                 if (tmr.IsEnabled)

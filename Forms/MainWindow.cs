@@ -273,12 +273,9 @@ namespace Pbp.Forms
                 toolStripButtonProjectionOn.CheckState = CheckState.Checked;
                 if (!projWindow.Visible)
                 {
-                    if (blackout)
-                    {
-                        UserControl1.getInstance().blackOut(false,false);
-                        blackout = false;
-                    }
                     projWindow.Show();
+                    UserControl1.getInstance().blackOut(false,false);
+                    blackout = false;
                 }
                 else if (blackout)
                 {
@@ -745,11 +742,6 @@ namespace Pbp.Forms
             wnd.Focus();
         }
 
-        private void textBoxSongComment_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
         private void songSearchBox_Click(object sender, EventArgs e)
         {
             songSearchBox.SelectAll();
@@ -833,68 +825,68 @@ namespace Pbp.Forms
 
         private void button2_Click(object sender, EventArgs e)
         {
-            //if (diaTimer!= null && diaTimer.Enabled)
-            //{
-            //    diaTimer.Stop();
-            //    projWindow.showNone();
-            //    buttonDiaShow.Text = "Diaschau starten";
-            //    return;
-            //}
+            if (diaTimer != null && diaTimer.Enabled)
+            {
+                diaTimer.Stop();
+                projWindow.showSlide(null, null);
+                buttonDiaShow.Text = "Diaschau starten";
+                return;
+            }
 
-            //if (listViewDias.Items.Count == 0)
-            //{
-            //    MessageBox.Show("Keine Bilder ausgewählt!");
-            //    return;
-            //}
-            //buttonDiaShow.Text = "Diaschau stoppen";
+            if (listViewDias.Items.Count == 0)
+            {
+                MessageBox.Show("Keine Bilder ausgewählt!");
+                return;
+            }
+            buttonDiaShow.Text = "Diaschau stoppen";
 
-            //if (radioButtonAutoDiaShow.Checked)
-            //{
-            //    int duration;
-            //    try
-            //    {
-            //        duration = int.Parse(textBoxDiaDuration.Text);
-            //    }
-            //    catch
-            //    {
-            //        duration = 3;
-            //    }
-            //    duration = duration > 0 ? duration : 3;
-            //    textBoxDiaDuration.Text = duration.ToString();
+            if (radioButtonAutoDiaShow.Checked)
+            {
+                int duration;
+                try
+                {
+                    duration = int.Parse(textBoxDiaDuration.Text);
+                }
+                catch
+                {
+                    duration = 3;
+                }
+                duration = duration > 0 ? duration : 3;
+                textBoxDiaDuration.Text = duration.ToString();
 
-            //    diaTimer = new Timer();
-            //    diaTimer.Interval = duration * 1000;
-            //    diaTimer.Tick += new EventHandler(diaTimer_Tick);
+                diaTimer = new Timer();
+                diaTimer.Interval = duration * 1000;
+                diaTimer.Tick += new EventHandler(diaTimer_Tick);
 
-            //    Queue<string> diaStack = new Queue<string>();
-            //    foreach (ListViewItem lvi in listViewDias.Items)
-            //    {
-            //        if (lvi.Checked)
-            //        {
-            //            diaStack.Enqueue((string)lvi.Tag);
-            //        }
-            //    }
-            //    if (diaStack.Count == 0)
-            //    {
-            //        MessageBox.Show("Keine Bilder ausgewählt!");
-            //        return;
-            //    }
-            //    diaTimer.Tag = diaStack;
-            //    pictureBoxPreview.Image = projWindow.showImage(Image.FromFile(diaStack.Dequeue()));
-            //    diaTimer.Start();
-            //}
+                Queue<string> diaStack = new Queue<string>();
+                foreach (ListViewItem lvi in listViewDias.Items)
+                {
+                    if (lvi.Checked)
+                    {
+                        diaStack.Enqueue((string)lvi.Tag);
+                    }
+                }
+                if (diaStack.Count == 0)
+                {
+                    MessageBox.Show("Keine Bilder ausgewählt!");
+                    return;
+                }
+                diaTimer.Tag = diaStack;
+                pictureBoxPreview.Image = projWindow.showSlide(null,Image.FromFile(diaStack.Dequeue()));
+                diaTimer.Start();
+            }
         }
 
         private void diaTimer_Tick(object sender, EventArgs e)
         {
-            //if (((Queue<string>)((Timer)sender).Tag).Count == 0)
-            //{
-            //        ((Timer)sender).Stop();
-            //        projWindow.showNone();
-            //        buttonDiaShow.Text = "Diaschau starten";
-            //        return;                
-            //}
-            //pictureBoxPreview.Image = projWindow.showImage(Image.FromFile(((Queue<string>)((Timer)sender).Tag).Dequeue()));
+            if (((Queue<string>)((Timer)sender).Tag).Count == 0)
+            {
+                ((Timer)sender).Stop();
+                projWindow.showSlide(null, null);
+                buttonDiaShow.Text = "Diaschau starten";
+                return;
+            }
+            pictureBoxPreview.Image = projWindow.showSlide(null,Image.FromFile(((Queue<string>)((Timer)sender).Tag).Dequeue()));
         }
 
         private void radioButton2_CheckedChanged(object sender, EventArgs e)
@@ -1279,14 +1271,17 @@ namespace Pbp.Forms
 			UserControl1.getInstance().setFadeSteps(trackBarFadeTimer.Value);
 		}
 
-		private void trackBarFadeTimer_MouseUp(object sender, MouseEventArgs e)
-		{
-		}
-
 		private void toolStripButtonDisplaySettings_Click(object sender, EventArgs e)
 		{
 			// Todo: OS Check
-			System.Diagnostics.Process.Start("control", "desk.cpl,@0,4");
+            try
+            {
+                System.Diagnostics.Process.Start("displayswitch.exe");
+            }
+            catch
+            {
+                System.Diagnostics.Process.Start("control", "desk.cpl,@0,4");
+            }
 		}
 
 		public void setProgessBarTransitionValue(int value)
@@ -1581,17 +1576,6 @@ namespace Pbp.Forms
         {
             pictureBoxPreview.Image = projWindow.showSlide(null, currentBackground);
         }
-
-        private void numericUpDown1_ValueChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label5_Click(object sender, EventArgs e)
-        {
-
-        }
-
 
     }
 }
