@@ -583,21 +583,23 @@ namespace Pbp.Forms
 
         private void treeViewImageDirectories_AfterSelect(object sender, TreeViewEventArgs e)
         {
-            listViewDirectoryImages.SuspendLayout();
-            
-            listViewDirectoryImages.Items.Clear();
-            if (listViewDirectoryImages.LargeImageList != null)
+            if (treeViewImageDirectories.Nodes.Count > 1)
             {
-                listViewDirectoryImages.LargeImageList.Dispose();
-            }
+                listViewDirectoryImages.SuspendLayout();
 
-            // Search
-            if (treeViewImageDirectories.SelectedNode.Index == treeViewImageDirectories.Nodes.Count-1)
-            {
+                listViewDirectoryImages.Items.Clear();
+                if (listViewDirectoryImages.LargeImageList != null)
+                {
+                    listViewDirectoryImages.LargeImageList.Dispose();
+                }
+
+                // Search
+                if (treeViewImageDirectories.SelectedNode.Index == treeViewImageDirectories.Nodes.Count - 1)
+                {
                     labelImgDirName.Text = "Suchergebnisse";
 
                     ImageList imList = new ImageList();
-					imList.ImageSize = Settings.Instance.ThumbSize;
+                    imList.ImageSize = Settings.Instance.ThumbSize;
                     imList.ColorDepth = ColorDepth.Depth32Bit;
                     listViewDirectoryImages.LargeImageList = imList;
 
@@ -613,38 +615,38 @@ namespace Pbp.Forms
                         i++;
                         Application.DoEvents();
                     }
+                }
+                else
+                {
+                    string relativeImageDir = ((string)treeViewImageDirectories.SelectedNode.Tag);
+                    string imDir = Settings.Instance.DataDirectory + Path.DirectorySeparatorChar + Settings.Instance.ThumbDir + Path.DirectorySeparatorChar + relativeImageDir;
+
+                    if (Directory.Exists(imDir))
+                    {
+                        labelImgDirName.Text = "Verzeichnisinhalt '" + Path.GetFileName(relativeImageDir) + "':";
+
+                        ImageList imList = new ImageList();
+                        imList.ImageSize = Settings.Instance.ThumbSize;
+                        imList.ColorDepth = ColorDepth.Depth32Bit;
+
+                        string[] songFilePaths = Directory.GetFiles(imDir, "*.jpg", SearchOption.TopDirectoryOnly);
+                        int i = 0;
+
+                        foreach (string file in songFilePaths)
+                        {
+                            ListViewItem lvi = new ListViewItem(Path.GetFileNameWithoutExtension(file));
+                            lvi.Tag = relativeImageDir + Path.DirectorySeparatorChar + Path.GetFileName(file);
+                            lvi.ImageIndex = i;
+                            listViewDirectoryImages.Items.Add(lvi);
+                            imList.Images.Add(Image.FromFile(file));
+                            i++;
+                        }
+                        listViewDirectoryImages.LargeImageList = imList;
+                    }
+                }
+
+                listViewDirectoryImages.ResumeLayout();
             }
-            else
-            {
-				string relativeImageDir = ((string)treeViewImageDirectories.SelectedNode.Tag);
-				string imDir = Settings.Instance.DataDirectory + Path.DirectorySeparatorChar + Settings.Instance.ThumbDir + Path.DirectorySeparatorChar + relativeImageDir;
-
-				if (Directory.Exists(imDir))
-				{
-					labelImgDirName.Text = "Verzeichnisinhalt '" + Path.GetFileName(relativeImageDir) + "':";
-
-					ImageList imList = new ImageList();
-					imList.ImageSize = Settings.Instance.ThumbSize;
-					imList.ColorDepth = ColorDepth.Depth32Bit;
-
-					string[] songFilePaths = Directory.GetFiles(imDir, "*.jpg", SearchOption.TopDirectoryOnly);
-					int i = 0;
-					
-					foreach (string file in songFilePaths)
-					{
-						ListViewItem lvi = new ListViewItem(Path.GetFileNameWithoutExtension(file));
-						lvi.Tag = relativeImageDir + Path.DirectorySeparatorChar + Path.GetFileName(file);
-						lvi.ImageIndex = i;
-						listViewDirectoryImages.Items.Add(lvi);
-						imList.Images.Add(Image.FromFile(file));
-						i++;
-					}
-					listViewDirectoryImages.LargeImageList = imList;
-				}
-            }
-            
-            listViewDirectoryImages.ResumeLayout();
-            
         }
 
         private void listViewDirectoryImages_SelectedIndexChanged(object sender, EventArgs e)

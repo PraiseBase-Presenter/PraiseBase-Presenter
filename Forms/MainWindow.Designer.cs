@@ -654,7 +654,7 @@
             this.toolStripButtonBlackout.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripButtonBlackout.Name = "toolStripButtonBlackout";
             this.toolStripButtonBlackout.Size = new System.Drawing.Size(68, 68);
-            this.toolStripButtonBlackout.Text = "Blackout ein/aus";
+            this.toolStripButtonBlackout.Text = "Blackout";
             this.toolStripButtonBlackout.Click += new System.EventHandler(this.toggleProjection);
             // 
             // toolStripButtonProjectionOn
