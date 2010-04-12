@@ -105,7 +105,7 @@
       <Value Profile="(Default)">Normal</Value>
     </Setting>
     <Setting Name="Version" Type="System.String" Scope="Application">
-      <Value Profile="(Default)">0.9.11.1</Value>
+      <Value Profile="(Default)">0.10.4.12</Value>
     </Setting>
     <Setting Name="Weburl" Type="System.String" Scope="Application">
       <Value Profile="(Default)">http://code.google.com/p/praisebasepresenter</Value>
@@ -126,6 +126,9 @@
       <Value Profile="(Default)">Thumbs</Value>
     </Setting>
     <Setting Name="ShowLoadingScreen" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
+    <Setting Name="LinkLayers" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">True</Value>
     </Setting>
   </Settings>

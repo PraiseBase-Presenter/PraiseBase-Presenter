@@ -327,6 +327,13 @@ namespace Pbp.Properties {
             }
         }
         
+        internal static System.Drawing.Bitmap link {
+            get {
+                object obj = ResourceManager.GetObject("link", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
         internal static System.Drawing.Bitmap logo {
             get {
                 object obj = ResourceManager.GetObject("logo", resourceCulture);
@@ -372,6 +379,13 @@ namespace Pbp.Properties {
         internal static System.Drawing.Bitmap tip {
             get {
                 object obj = ResourceManager.GetObject("tip", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap unlink {
+            get {
+                object obj = ResourceManager.GetObject("unlink", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

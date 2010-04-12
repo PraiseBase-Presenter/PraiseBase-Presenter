@@ -325,7 +325,7 @@ namespace Pbp.Properties {
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("0.9.11.1")]
+        [global::System.Configuration.DefaultSettingValueAttribute("0.10.4.12")]
         public string Version {
             get {
                 return ((string)(this["Version"]));
@@ -402,6 +402,18 @@ namespace Pbp.Properties {
             }
             set {
                 this["ShowLoadingScreen"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool LinkLayers {
+            get {
+                return ((bool)(this["LinkLayers"]));
+            }
+            set {
+                this["LinkLayers"] = value;
             }
         }
     }
