@@ -83,7 +83,7 @@ namespace Pbp.Forms
             this.Size = new Size(projScreen.WorkingArea.Width, projScreen.WorkingArea.Height);
             h = this.Height;
             w = this.Width;
-			showNone();
+			//showNone();
         }
 
         /**

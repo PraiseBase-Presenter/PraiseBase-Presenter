@@ -56,6 +56,8 @@ namespace Pbp.Forms
 		private int fadeSteps;
 		float opCounter;
 
+        int pbi = 0;
+
 		private UserControl1()
 		{
 			InitializeComponent();
@@ -113,41 +115,54 @@ namespace Pbp.Forms
 			{
 				opCounter += 0.02f;
 				projectionImage.Opacity = opCounter;
-				MainWindow.getInstance().setProgessBarTransitionValue((int)(opCounter * 100));
-			}
+                int x = (int)(opCounter * 100);
+                if (pbi++ % 10 == 0)
+                {
+                    MainWindow.getInstance().setProgessBarTransitionValue(x);
+                }
+            }
 			else
 			{
 				projectionImage.Opacity = 1f;
 				projectionImageBack.Source = projectionImage.Source;
 				MainWindow.getInstance().setProgessBarTransitionValue(0);
+                pbi = 0;
 				tmr.Stop();
+                Console.WriteLine("finshed");
 			}
 		}
 
-		public void blackOut(bool val)
+		public void blackOut(bool val,bool fade)
 		{
-			if (tmr.IsEnabled)
-			{
-				tmr.Stop();
-			}
-			tmr = new DispatcherTimer();
-			tmr.Dispatcher.Thread.Priority = System.Threading.ThreadPriority.AboveNormal;
-			tmr.Interval = TimeSpan.FromMilliseconds(fadeSteps);
-			tmr.Tick += new EventHandler(tmr_blTick);
+            if (fade)
+            {
+                if (tmr.IsEnabled)
+                {
+                    tmr.Stop();
+                }
+                tmr = new DispatcherTimer();
+                tmr.Dispatcher.Thread.Priority = System.Threading.ThreadPriority.AboveNormal;
+                tmr.Interval = TimeSpan.FromMilliseconds(fadeSteps);
+                tmr.Tick += new EventHandler(tmr_blTick);
 
-			if (val)
-			{
-				opCounter = 0f;
-				blackoutImage.Opacity = 0f;
-				tmr.Tag = 0.02f;
-			}
-			else
-			{
-				opCounter = 1f;
-				blackoutImage.Opacity = 1f;
-				tmr.Tag = -0.02f;
-			}
-			tmr.Start();
+                if (val)
+                {
+                    opCounter = 0f;
+                    blackoutImage.Opacity = 0f;
+                    tmr.Tag = 0.02f;
+                }
+                else
+                {
+                    opCounter = 1f;
+                    blackoutImage.Opacity = 1f;
+                    tmr.Tag = -0.02f;
+                }
+                tmr.Start();
+            }
+            else
+            {
+                blackoutImage.Opacity = val ? 100 : 0;
+            }
 		}
 
 		void tmr_blTick(object sender, EventArgs e)

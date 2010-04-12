@@ -231,9 +231,7 @@ namespace Pbp.Forms
         {
             projWindow.scanScreens(1);
         }
-
-
-
+        
         private void toggleProjection(object sender, EventArgs e)
         {
 			if (((ToolStripButton)sender).Name == "toolStripButtonProjectionOff")
@@ -244,7 +242,7 @@ namespace Pbp.Forms
 				projWindow.Hide();
                 if (blackout)
                 {
-                    UserControl1.getInstance().blackOut(false);
+                    UserControl1.getInstance().blackOut(false,false);
                     blackout = false;
                 }
             }
@@ -254,8 +252,14 @@ namespace Pbp.Forms
                 toolStripButtonBlackout.CheckState = CheckState.Checked;
                 toolStripButtonProjectionOn.CheckState = CheckState.Unchecked;
                 if (!projWindow.Visible)
+                {
                     projWindow.Show();
-                UserControl1.getInstance().blackOut(true);
+                    UserControl1.getInstance().blackOut(true,false);
+                }
+                else
+                {
+                    UserControl1.getInstance().blackOut(true, true);
+                }
                 blackout = true;
             }
             else
@@ -263,13 +267,21 @@ namespace Pbp.Forms
                 toolStripButtonProjectionOff.CheckState = CheckState.Unchecked;
                 toolStripButtonBlackout.CheckState = CheckState.Unchecked;
                 toolStripButtonProjectionOn.CheckState = CheckState.Checked;
-                if (blackout)
+                if (!projWindow.Visible)
                 {
-                    UserControl1.getInstance().blackOut(false);
+                    if (blackout)
+                    {
+                        UserControl1.getInstance().blackOut(false,false);
+                        blackout = false;
+                    }
+                    projWindow.Show();
+                }
+                else if (blackout)
+                {
+                    UserControl1.getInstance().blackOut(false,true);
                     blackout = false;
                 }
-                if (!projWindow.Visible)
-                    projWindow.Show();
+
             }
             songSearchBox.Focus();
             //projWindow.Visible
