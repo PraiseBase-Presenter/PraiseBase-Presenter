@@ -123,6 +123,8 @@ namespace Pbp.Forms
             comboBox1.SelectedIndex = 0;
             comboBox2.SelectedIndex = 0;
 
+            numericUpDown1.Value = (int)Settings.Instance.ProjectionMasterFont.Size;
+
             Bible currentBible = new Bible("C:/Users/Nicolas/Documents/PraiseBase Presenter Church/Bible/sample.xml");
         }
 
@@ -252,19 +254,22 @@ namespace Pbp.Forms
             }
             else if (((ToolStripButton)sender).Name == "toolStripButtonBlackout")
             {
-                toolStripButtonProjectionOff.CheckState = CheckState.Unchecked;
-                toolStripButtonBlackout.CheckState = CheckState.Checked;
-                toolStripButtonProjectionOn.CheckState = CheckState.Unchecked;
-                if (!projWindow.Visible)
+                if (!blackout)
                 {
-                    projWindow.Show();
-                    UserControl1.getInstance().blackOut(true,false);
+                    toolStripButtonProjectionOff.CheckState = CheckState.Unchecked;
+                    toolStripButtonBlackout.CheckState = CheckState.Checked;
+                    toolStripButtonProjectionOn.CheckState = CheckState.Unchecked;
+                    if (!projWindow.Visible)
+                    {
+                        projWindow.Show();
+                        UserControl1.getInstance().blackOut(true, false);
+                    }
+                    else
+                    {
+                        UserControl1.getInstance().blackOut(true, true);
+                    }
+                    blackout = true;
                 }
-                else
-                {
-                    UserControl1.getInstance().blackOut(true, true);
-                }
-                blackout = true;
             }
             else
             {
@@ -668,6 +673,7 @@ namespace Pbp.Forms
 					listViewImageQueue.Items.Add(lvi);
 					//listViewImageQueue.EnsureVisible(listViewImageHistory.Items.Count - 1);
 				}
+                // Favorite
                 else if ((Control.ModifierKeys & Keys.Alt) == Keys.Alt)
 				{
                     imageFavoriteAdd((string)listViewDirectoryImages.Items[idx].Tag);                   
@@ -1525,7 +1531,7 @@ namespace Pbp.Forms
                     lvi.ImageIndex = listViewImageQueue.LargeImageList.Images.Count - 1;
                     listViewImageQueue.Items.Add(lvi);
                 }
-                // ALT remove from history
+                // ALT remove from favorites
                 else if ((Control.ModifierKeys & Keys.Alt) == Keys.Alt)
                 {
                     imageFavoriterRemove((string)listViewFavorites.Items[idx].Tag);
@@ -1544,6 +1550,9 @@ namespace Pbp.Forms
                         pictureBoxPreview.Image = projWindow.showSlide(null,img);
                     }
                     this.currentBackground = img;
+
+                    // Add image to history
+                    imageHistoryAdd((string)listViewFavorites.Items[idx].Tag);
                 }
             }
         }
