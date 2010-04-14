@@ -29,7 +29,13 @@ namespace SongDetails
 
 		private void SongDetail_Load(object sender, EventArgs e)
         {
+            this.KeyDown += new KeyEventHandler(SongDetail_KeyDown);
+        }
 
+        // TODO
+        void SongDetail_KeyDown(object sender, KeyEventArgs e)
+        {
+            Console.WriteLine(e.KeyCode);
         }
 
         public void setSong(Pbp.Song sng)
@@ -144,13 +150,17 @@ namespace SongDetails
 			pnl.BackColor = Color.LightBlue;
 			currentSlidePanel = pnl;
 
+
+
 			if (SlideClicked != null)
 			{
+                this.Focus();
 				SlideClickEventArgs p = new SlideClickEventArgs((int)pnl.Parent.Tag,(int)pnl.Tag);
 				SlideClicked(this, p);
 			}
 		}
 
+        
 
 		/* Paint Events */
 

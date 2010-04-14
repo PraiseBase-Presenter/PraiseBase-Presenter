@@ -800,8 +800,13 @@ namespace Pbp
 		/// <param name="quai">The desired indicator</param>
 		public bool getQA(QualityAssuranceIndicators quai)
 		{
-			return (_QA & (int)quai) > 0 ? true : false; 
+			return (_QA & (int)quai) > 0; 
 		}
+
+        public bool hasQA()
+        {
+            return (_QA != 0);
+        }
 
 		/// <summary>
 		/// Returns a hashcode of the song, used for example in the

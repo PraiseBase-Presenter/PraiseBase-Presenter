@@ -305,6 +305,13 @@ namespace Pbp.Properties {
             }
         }
         
+        internal static System.Drawing.Bitmap highlight_red {
+            get {
+                object obj = ResourceManager.GetObject("highlight_red", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
         /// <summary>
         ///   Looks up a localized string similar to                     GNU GENERAL PUBLIC LICENSE
         ///                       Version 3, 29 June 2007

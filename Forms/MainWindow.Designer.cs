@@ -28,14 +28,22 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.Windows.Forms.Button buttonChooseDiaDir;
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainWindow));
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.dateiToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.liedSuchenToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.liededitorToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem3 = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
             this.beendenToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.präsentationToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.präsentationausToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.blackoutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.präsentationeinToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator11 = new System.Windows.Forms.ToolStripSeparator();
+            this.bildschirmeSuchenToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.einstellungenToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.optionenToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator5 = new System.Windows.Forms.ToolStripSeparator();
@@ -52,7 +60,6 @@
             this.powerpraiseLiederToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.songbeamerLiederToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator9 = new System.Windows.Forms.ToolStripSeparator();
-            this.bildschirmeErneutSuchenToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.liederlisteNeuLadenToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.bilderlisteNeuLadenToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.miniaturbilderPrüfenToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -67,7 +74,7 @@
             this.buttonSaveSetList = new System.Windows.Forms.Button();
             this.buttonSetListAdd = new System.Windows.Forms.Button();
             this.buttonSetListClear = new System.Windows.Forms.Button();
-            this.listViewSetList = new System.Windows.Forms.ListView();
+            this.listViewSetList = new Bol.WinControls.ListViewEx();
             this.columnHeader4 = new System.Windows.Forms.ColumnHeader();
             this.buttonSetListRem = new System.Windows.Forms.Button();
             this.buttonSetListDown = new System.Windows.Forms.Button();
@@ -99,6 +106,7 @@
             this.toolStripStatusLabelCtrl = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStripStatusLabelInfo = new System.Windows.Forms.ToolStripStatusLabel();
             this.groupBox5 = new System.Windows.Forms.GroupBox();
+            this.buttonHideTextLayer = new System.Windows.Forms.Button();
             this.label3 = new System.Windows.Forms.Label();
             this.buttonToggleLayerMode = new System.Windows.Forms.Button();
             this.progressBarTransition = new System.Windows.Forms.ProgressBar();
@@ -106,6 +114,7 @@
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.groupBoxSongContents = new System.Windows.Forms.GroupBox();
+            this.songDetailElement = new SongDetails.SongDetail();
             this.songDetailImages = new System.Windows.Forms.ListView();
             this.columnHeader7 = new System.Windows.Forms.ColumnHeader();
             this.label6 = new System.Windows.Forms.Label();
@@ -155,8 +164,8 @@
             this.groupBoxImageStack = new System.Windows.Forms.GroupBox();
             this.listViewImageQueue = new System.Windows.Forms.ListView();
             this.columnHeader6 = new System.Windows.Forms.ColumnHeader();
-            this.button1 = new System.Windows.Forms.Button();
-            this.songDetailElement = new SongDetails.SongDetail();
+            this.buttonResetImageQueue = new System.Windows.Forms.Button();
+            this.timerElementHighlight = new System.Windows.Forms.Timer(this.components);
             buttonChooseDiaDir = new System.Windows.Forms.Button();
             this.menuStrip1.SuspendLayout();
             this.groupBox4.SuspendLayout();
@@ -195,6 +204,7 @@
             // 
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.dateiToolStripMenuItem,
+            this.präsentationToolStripMenuItem,
             this.einstellungenToolStripMenuItem,
             this.toolStripMenuItem1});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
@@ -206,6 +216,7 @@
             // dateiToolStripMenuItem
             // 
             this.dateiToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.liedSuchenToolStripMenuItem,
             this.liededitorToolStripMenuItem,
             this.toolStripMenuItem3,
             this.toolStripSeparator4,
@@ -214,31 +225,89 @@
             this.dateiToolStripMenuItem.Size = new System.Drawing.Size(73, 20);
             this.dateiToolStripMenuItem.Text = "&Allgemein";
             // 
+            // liedSuchenToolStripMenuItem
+            // 
+            this.liedSuchenToolStripMenuItem.Name = "liedSuchenToolStripMenuItem";
+            this.liedSuchenToolStripMenuItem.ShortcutKeys = System.Windows.Forms.Keys.F2;
+            this.liedSuchenToolStripMenuItem.Size = new System.Drawing.Size(176, 22);
+            this.liedSuchenToolStripMenuItem.Text = "Lied suchen";
+            this.liedSuchenToolStripMenuItem.Click += new System.EventHandler(this.liedSuchenToolStripMenuItem_Click);
+            // 
             // liededitorToolStripMenuItem
             // 
             this.liededitorToolStripMenuItem.Name = "liededitorToolStripMenuItem";
-            this.liededitorToolStripMenuItem.Size = new System.Drawing.Size(148, 22);
+            this.liededitorToolStripMenuItem.ShortcutKeys = System.Windows.Forms.Keys.F3;
+            this.liededitorToolStripMenuItem.Size = new System.Drawing.Size(176, 22);
             this.liededitorToolStripMenuItem.Text = "Lied&editor";
             this.liededitorToolStripMenuItem.Click += new System.EventHandler(this.toolStripButton5_Click);
             // 
             // toolStripMenuItem3
             // 
             this.toolStripMenuItem3.Name = "toolStripMenuItem3";
-            this.toolStripMenuItem3.Size = new System.Drawing.Size(148, 22);
-            this.toolStripMenuItem3.Text = "Lieder&browser";
+            this.toolStripMenuItem3.ShortcutKeys = System.Windows.Forms.Keys.F4;
+            this.toolStripMenuItem3.Size = new System.Drawing.Size(176, 22);
+            this.toolStripMenuItem3.Text = "Lieder&browser...";
             this.toolStripMenuItem3.Click += new System.EventHandler(this.toolStripMenuItem3_Click);
             // 
             // toolStripSeparator4
             // 
             this.toolStripSeparator4.Name = "toolStripSeparator4";
-            this.toolStripSeparator4.Size = new System.Drawing.Size(145, 6);
+            this.toolStripSeparator4.Size = new System.Drawing.Size(173, 6);
             // 
             // beendenToolStripMenuItem
             // 
             this.beendenToolStripMenuItem.Name = "beendenToolStripMenuItem";
-            this.beendenToolStripMenuItem.Size = new System.Drawing.Size(148, 22);
+            this.beendenToolStripMenuItem.Size = new System.Drawing.Size(176, 22);
             this.beendenToolStripMenuItem.Text = "&Beenden";
             this.beendenToolStripMenuItem.Click += new System.EventHandler(this.beendenToolStripMenuItem_Click);
+            // 
+            // präsentationToolStripMenuItem
+            // 
+            this.präsentationToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.präsentationausToolStripMenuItem,
+            this.blackoutToolStripMenuItem,
+            this.präsentationeinToolStripMenuItem,
+            this.toolStripSeparator11,
+            this.bildschirmeSuchenToolStripMenuItem});
+            this.präsentationToolStripMenuItem.Name = "präsentationToolStripMenuItem";
+            this.präsentationToolStripMenuItem.Size = new System.Drawing.Size(85, 20);
+            this.präsentationToolStripMenuItem.Text = "&Präsentation";
+            // 
+            // präsentationausToolStripMenuItem
+            // 
+            this.präsentationausToolStripMenuItem.Name = "präsentationausToolStripMenuItem";
+            this.präsentationausToolStripMenuItem.ShortcutKeys = System.Windows.Forms.Keys.F6;
+            this.präsentationausToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.präsentationausToolStripMenuItem.Text = "Präsentation &aus";
+            this.präsentationausToolStripMenuItem.Click += new System.EventHandler(this.toggleProjection);
+            // 
+            // blackoutToolStripMenuItem
+            // 
+            this.blackoutToolStripMenuItem.Name = "blackoutToolStripMenuItem";
+            this.blackoutToolStripMenuItem.ShortcutKeys = System.Windows.Forms.Keys.F7;
+            this.blackoutToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.blackoutToolStripMenuItem.Text = "&Blackout";
+            this.blackoutToolStripMenuItem.Click += new System.EventHandler(this.toggleProjection);
+            // 
+            // präsentationeinToolStripMenuItem
+            // 
+            this.präsentationeinToolStripMenuItem.Name = "präsentationeinToolStripMenuItem";
+            this.präsentationeinToolStripMenuItem.ShortcutKeys = System.Windows.Forms.Keys.F8;
+            this.präsentationeinToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.präsentationeinToolStripMenuItem.Text = "Präsentation &ein";
+            this.präsentationeinToolStripMenuItem.Click += new System.EventHandler(this.toggleProjection);
+            // 
+            // toolStripSeparator11
+            // 
+            this.toolStripSeparator11.Name = "toolStripSeparator11";
+            this.toolStripSeparator11.Size = new System.Drawing.Size(177, 6);
+            // 
+            // bildschirmeSuchenToolStripMenuItem
+            // 
+            this.bildschirmeSuchenToolStripMenuItem.Name = "bildschirmeSuchenToolStripMenuItem";
+            this.bildschirmeSuchenToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.bildschirmeSuchenToolStripMenuItem.Text = "&Bildschirme suchen";
+            this.bildschirmeSuchenToolStripMenuItem.Click += new System.EventHandler(this.bildschirmeSuchenToolStripMenuItem_Click);
             // 
             // einstellungenToolStripMenuItem
             // 
@@ -249,7 +318,6 @@
             this.toolStripSeparator6,
             this.toolStripMenuItem4,
             this.toolStripSeparator9,
-            this.bildschirmeErneutSuchenToolStripMenuItem,
             this.liederlisteNeuLadenToolStripMenuItem,
             this.bilderlisteNeuLadenToolStripMenuItem,
             this.miniaturbilderPrüfenToolStripMenuItem});
@@ -260,14 +328,14 @@
             // optionenToolStripMenuItem
             // 
             this.optionenToolStripMenuItem.Name = "optionenToolStripMenuItem";
-            this.optionenToolStripMenuItem.Size = new System.Drawing.Size(200, 22);
+            this.optionenToolStripMenuItem.Size = new System.Drawing.Size(187, 22);
             this.optionenToolStripMenuItem.Text = "&Optionen...";
             this.optionenToolStripMenuItem.Click += new System.EventHandler(this.optionenToolStripMenuItem_Click);
             // 
             // toolStripSeparator5
             // 
             this.toolStripSeparator5.Name = "toolStripSeparator5";
-            this.toolStripSeparator5.Size = new System.Drawing.Size(197, 6);
+            this.toolStripSeparator5.Size = new System.Drawing.Size(184, 6);
             // 
             // datenverzeichnisÖffnenToolStripMenuItem
             // 
@@ -278,7 +346,7 @@
             this.bilderToolStripMenuItem1,
             this.setlistenToolStripMenuItem1});
             this.datenverzeichnisÖffnenToolStripMenuItem.Name = "datenverzeichnisÖffnenToolStripMenuItem";
-            this.datenverzeichnisÖffnenToolStripMenuItem.Size = new System.Drawing.Size(200, 22);
+            this.datenverzeichnisÖffnenToolStripMenuItem.Size = new System.Drawing.Size(187, 22);
             this.datenverzeichnisÖffnenToolStripMenuItem.Text = "&Verzeichnis anzeigen";
             this.datenverzeichnisÖffnenToolStripMenuItem.Click += new System.EventHandler(this.datenverzeichnisÖffnenToolStripMenuItem_Click);
             // 
@@ -318,7 +386,7 @@
             // toolStripSeparator6
             // 
             this.toolStripSeparator6.Name = "toolStripSeparator6";
-            this.toolStripSeparator6.Size = new System.Drawing.Size(197, 6);
+            this.toolStripSeparator6.Size = new System.Drawing.Size(184, 6);
             // 
             // toolStripMenuItem4
             // 
@@ -328,7 +396,7 @@
             this.powerpraiseLiederToolStripMenuItem,
             this.songbeamerLiederToolStripMenuItem});
             this.toolStripMenuItem4.Name = "toolStripMenuItem4";
-            this.toolStripMenuItem4.Size = new System.Drawing.Size(200, 22);
+            this.toolStripMenuItem4.Size = new System.Drawing.Size(187, 22);
             this.toolStripMenuItem4.Text = "&Import";
             // 
             // praiseBoxDatenbankToolStripMenuItem
@@ -362,33 +430,26 @@
             // toolStripSeparator9
             // 
             this.toolStripSeparator9.Name = "toolStripSeparator9";
-            this.toolStripSeparator9.Size = new System.Drawing.Size(197, 6);
-            // 
-            // bildschirmeErneutSuchenToolStripMenuItem
-            // 
-            this.bildschirmeErneutSuchenToolStripMenuItem.Name = "bildschirmeErneutSuchenToolStripMenuItem";
-            this.bildschirmeErneutSuchenToolStripMenuItem.Size = new System.Drawing.Size(200, 22);
-            this.bildschirmeErneutSuchenToolStripMenuItem.Text = "Bildschirme neu &suchen";
-            this.bildschirmeErneutSuchenToolStripMenuItem.Click += new System.EventHandler(this.bildschirmeErneutSuchenToolStripMenuItem_Click);
+            this.toolStripSeparator9.Size = new System.Drawing.Size(184, 6);
             // 
             // liederlisteNeuLadenToolStripMenuItem
             // 
             this.liederlisteNeuLadenToolStripMenuItem.Name = "liederlisteNeuLadenToolStripMenuItem";
-            this.liederlisteNeuLadenToolStripMenuItem.Size = new System.Drawing.Size(200, 22);
+            this.liederlisteNeuLadenToolStripMenuItem.Size = new System.Drawing.Size(187, 22);
             this.liederlisteNeuLadenToolStripMenuItem.Text = "&Liederliste neu laden";
             this.liederlisteNeuLadenToolStripMenuItem.Click += new System.EventHandler(this.liederlisteNeuLadenToolStripMenuItem_Click);
             // 
             // bilderlisteNeuLadenToolStripMenuItem
             // 
             this.bilderlisteNeuLadenToolStripMenuItem.Name = "bilderlisteNeuLadenToolStripMenuItem";
-            this.bilderlisteNeuLadenToolStripMenuItem.Size = new System.Drawing.Size(200, 22);
+            this.bilderlisteNeuLadenToolStripMenuItem.Size = new System.Drawing.Size(187, 22);
             this.bilderlisteNeuLadenToolStripMenuItem.Text = "&Bilderliste neu laden";
             this.bilderlisteNeuLadenToolStripMenuItem.Click += new System.EventHandler(this.bilderlisteNeuLadenToolStripMenuItem_Click);
             // 
             // miniaturbilderPrüfenToolStripMenuItem
             // 
             this.miniaturbilderPrüfenToolStripMenuItem.Name = "miniaturbilderPrüfenToolStripMenuItem";
-            this.miniaturbilderPrüfenToolStripMenuItem.Size = new System.Drawing.Size(200, 22);
+            this.miniaturbilderPrüfenToolStripMenuItem.Size = new System.Drawing.Size(187, 22);
             this.miniaturbilderPrüfenToolStripMenuItem.Text = "Miniaturbilder prüfen";
             this.miniaturbilderPrüfenToolStripMenuItem.Click += new System.EventHandler(this.miniaturbilderPrüfenToolStripMenuItem_Click);
             // 
@@ -406,11 +467,11 @@
             // 
             // toolStripMenuItem2
             // 
-            this.toolStripMenuItem2.Enabled = false;
             this.toolStripMenuItem2.Name = "toolStripMenuItem2";
-            this.toolStripMenuItem2.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.F1)));
+            this.toolStripMenuItem2.ShortcutKeys = System.Windows.Forms.Keys.F1;
             this.toolStripMenuItem2.Size = new System.Drawing.Size(149, 22);
             this.toolStripMenuItem2.Text = "&Hilfe";
+            this.toolStripMenuItem2.Click += new System.EventHandler(this.toolStripMenuItem2_Click);
             // 
             // fehlerMeldenToolStripMenuItem
             // 
@@ -451,9 +512,9 @@
             this.groupBox4.Controls.Add(this.buttonSetListDown);
             this.groupBox4.Controls.Add(this.buttonSetListUp);
             this.groupBox4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.groupBox4.Location = new System.Drawing.Point(753, 386);
+            this.groupBox4.Location = new System.Drawing.Point(753, 416);
             this.groupBox4.Name = "groupBox4";
-            this.groupBox4.Size = new System.Drawing.Size(247, 319);
+            this.groupBox4.Size = new System.Drawing.Size(247, 289);
             this.groupBox4.TabIndex = 26;
             this.groupBox4.TabStop = false;
             this.groupBox4.Text = "Setliste";
@@ -464,7 +525,7 @@
             this.buttonOpenSetList.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.buttonOpenSetList.Image = global::Pbp.Properties.Resources.fileopen;
             this.buttonOpenSetList.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.buttonOpenSetList.Location = new System.Drawing.Point(209, 287);
+            this.buttonOpenSetList.Location = new System.Drawing.Point(209, 257);
             this.buttonOpenSetList.Name = "buttonOpenSetList";
             this.buttonOpenSetList.Size = new System.Drawing.Size(26, 23);
             this.buttonOpenSetList.TabIndex = 31;
@@ -478,7 +539,7 @@
             this.buttonSaveSetList.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.buttonSaveSetList.Image = global::Pbp.Properties.Resources.filesave;
             this.buttonSaveSetList.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.buttonSaveSetList.Location = new System.Drawing.Point(175, 287);
+            this.buttonSaveSetList.Location = new System.Drawing.Point(175, 257);
             this.buttonSaveSetList.Name = "buttonSaveSetList";
             this.buttonSaveSetList.Size = new System.Drawing.Size(26, 23);
             this.buttonSaveSetList.TabIndex = 30;
@@ -491,7 +552,7 @@
             this.buttonSetListAdd.Enabled = false;
             this.buttonSetListAdd.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.buttonSetListAdd.Image = global::Pbp.Properties.Resources.edit_add;
-            this.buttonSetListAdd.Location = new System.Drawing.Point(13, 287);
+            this.buttonSetListAdd.Location = new System.Drawing.Point(13, 257);
             this.buttonSetListAdd.Name = "buttonSetListAdd";
             this.buttonSetListAdd.Size = new System.Drawing.Size(24, 23);
             this.buttonSetListAdd.TabIndex = 29;
@@ -505,7 +566,7 @@
             this.buttonSetListClear.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.buttonSetListClear.Image = global::Pbp.Properties.Resources._14_layer_deletelayer;
             this.buttonSetListClear.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.buttonSetListClear.Location = new System.Drawing.Point(141, 287);
+            this.buttonSetListClear.Location = new System.Drawing.Point(141, 257);
             this.buttonSetListClear.Name = "buttonSetListClear";
             this.buttonSetListClear.Size = new System.Drawing.Size(26, 23);
             this.buttonSetListClear.TabIndex = 28;
@@ -515,6 +576,7 @@
             // listViewSetList
             // 
             this.listViewSetList.AllowDrop = true;
+            this.listViewSetList.AllowRowReorder = true;
             this.listViewSetList.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
                         | System.Windows.Forms.AnchorStyles.Right)));
             this.listViewSetList.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
@@ -526,15 +588,12 @@
             this.listViewSetList.Location = new System.Drawing.Point(5, 19);
             this.listViewSetList.MultiSelect = false;
             this.listViewSetList.Name = "listViewSetList";
-            this.listViewSetList.Size = new System.Drawing.Size(234, 262);
+            this.listViewSetList.Size = new System.Drawing.Size(234, 232);
             this.listViewSetList.TabIndex = 27;
             this.listViewSetList.UseCompatibleStateImageBehavior = false;
             this.listViewSetList.View = System.Windows.Forms.View.Details;
             this.listViewSetList.MouseClick += new System.Windows.Forms.MouseEventHandler(this.listViewSetList_MouseClick);
             this.listViewSetList.SelectedIndexChanged += new System.EventHandler(this.listViewSetList_SelectedIndexChanged);
-            this.listViewSetList.DragDrop += new System.Windows.Forms.DragEventHandler(this.listViewSetList_DragDrop);
-            this.listViewSetList.DragEnter += new System.Windows.Forms.DragEventHandler(this.listViewSetList_DragEnter);
-            this.listViewSetList.ItemDrag += new System.Windows.Forms.ItemDragEventHandler(this.listViewSetList_ItemDrag);
             // 
             // buttonSetListRem
             // 
@@ -543,7 +602,7 @@
             this.buttonSetListRem.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.buttonSetListRem.Image = global::Pbp.Properties.Resources.edit_remove;
             this.buttonSetListRem.ImageAlign = System.Drawing.ContentAlignment.BottomLeft;
-            this.buttonSetListRem.Location = new System.Drawing.Point(107, 287);
+            this.buttonSetListRem.Location = new System.Drawing.Point(107, 257);
             this.buttonSetListRem.Name = "buttonSetListRem";
             this.buttonSetListRem.Size = new System.Drawing.Size(26, 23);
             this.buttonSetListRem.TabIndex = 26;
@@ -556,7 +615,7 @@
             this.buttonSetListDown.Enabled = false;
             this.buttonSetListDown.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.buttonSetListDown.Image = global::Pbp.Properties.Resources._1downarrow1;
-            this.buttonSetListDown.Location = new System.Drawing.Point(75, 287);
+            this.buttonSetListDown.Location = new System.Drawing.Point(75, 257);
             this.buttonSetListDown.Name = "buttonSetListDown";
             this.buttonSetListDown.Size = new System.Drawing.Size(24, 23);
             this.buttonSetListDown.TabIndex = 25;
@@ -569,7 +628,7 @@
             this.buttonSetListUp.Enabled = false;
             this.buttonSetListUp.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.buttonSetListUp.Image = global::Pbp.Properties.Resources._1downarrow;
-            this.buttonSetListUp.Location = new System.Drawing.Point(44, 287);
+            this.buttonSetListUp.Location = new System.Drawing.Point(44, 257);
             this.buttonSetListUp.Name = "buttonSetListUp";
             this.buttonSetListUp.Size = new System.Drawing.Size(24, 23);
             this.buttonSetListUp.TabIndex = 24;
@@ -834,6 +893,7 @@
             // groupBox5
             // 
             this.groupBox5.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupBox5.Controls.Add(this.buttonHideTextLayer);
             this.groupBox5.Controls.Add(this.label3);
             this.groupBox5.Controls.Add(this.buttonToggleLayerMode);
             this.groupBox5.Controls.Add(this.progressBarTransition);
@@ -844,10 +904,21 @@
             this.groupBox5.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.groupBox5.Location = new System.Drawing.Point(753, 98);
             this.groupBox5.Name = "groupBox5";
-            this.groupBox5.Size = new System.Drawing.Size(247, 282);
+            this.groupBox5.Size = new System.Drawing.Size(247, 312);
             this.groupBox5.TabIndex = 34;
             this.groupBox5.TabStop = false;
             this.groupBox5.Text = "Projektion";
+            // 
+            // buttonHideTextLayer
+            // 
+            this.buttonHideTextLayer.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.buttonHideTextLayer.Location = new System.Drawing.Point(13, 283);
+            this.buttonHideTextLayer.Name = "buttonHideTextLayer";
+            this.buttonHideTextLayer.Size = new System.Drawing.Size(94, 23);
+            this.buttonHideTextLayer.TabIndex = 38;
+            this.buttonHideTextLayer.Text = "Text ausblenden";
+            this.buttonHideTextLayer.UseVisualStyleBackColor = true;
+            this.buttonHideTextLayer.Click += new System.EventHandler(this.button1_Click_2);
             // 
             // label3
             // 
@@ -926,12 +997,27 @@
             this.groupBoxSongContents.Controls.Add(this.songDetailImages);
             this.groupBoxSongContents.Controls.Add(this.label6);
             this.groupBoxSongContents.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.groupBoxSongContents.Location = new System.Drawing.Point(249, 0);
+            this.groupBoxSongContents.Location = new System.Drawing.Point(249, 2);
             this.groupBoxSongContents.Name = "groupBoxSongContents";
-            this.groupBoxSongContents.Size = new System.Drawing.Size(482, 264);
+            this.groupBoxSongContents.Size = new System.Drawing.Size(482, 262);
             this.groupBoxSongContents.TabIndex = 32;
             this.groupBoxSongContents.TabStop = false;
             this.groupBoxSongContents.Text = "Liedinhalt";
+            // 
+            // songDetailElement
+            // 
+            this.songDetailElement.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+                        | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.songDetailElement.AutoScroll = true;
+            this.songDetailElement.BackColor = System.Drawing.Color.White;
+            this.songDetailElement.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.songDetailElement.ForeColor = System.Drawing.SystemColors.WindowText;
+            this.songDetailElement.Location = new System.Drawing.Point(6, 16);
+            this.songDetailElement.Name = "songDetailElement";
+            this.songDetailElement.Size = new System.Drawing.Size(343, 240);
+            this.songDetailElement.TabIndex = 20;
+            this.songDetailElement.SlideClicked += new SongDetails.SongDetail.slideClick(this.songDetailElement_SlideClicked);
             // 
             // songDetailImages
             // 
@@ -941,10 +1027,10 @@
             this.songDetailImages.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.columnHeader7});
             this.songDetailImages.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.None;
-            this.songDetailImages.Location = new System.Drawing.Point(354, 32);
+            this.songDetailImages.Location = new System.Drawing.Point(355, 32);
             this.songDetailImages.MultiSelect = false;
             this.songDetailImages.Name = "songDetailImages";
-            this.songDetailImages.Size = new System.Drawing.Size(122, 226);
+            this.songDetailImages.Size = new System.Drawing.Size(121, 224);
             this.songDetailImages.TabIndex = 28;
             this.songDetailImages.UseCompatibleStateImageBehavior = false;
             this.songDetailImages.View = System.Windows.Forms.View.Tile;
@@ -977,9 +1063,9 @@
             this.groupBox2.Controls.Add(this.songSearchResetButton);
             this.groupBox2.Controls.Add(this.songSearchBox);
             this.groupBox2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.groupBox2.Location = new System.Drawing.Point(0, 0);
+            this.groupBox2.Location = new System.Drawing.Point(0, 2);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(246, 264);
+            this.groupBox2.Size = new System.Drawing.Size(246, 262);
             this.groupBox2.TabIndex = 19;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Liederliste";
@@ -997,12 +1083,12 @@
             this.listViewSongs.Location = new System.Drawing.Point(5, 68);
             this.listViewSongs.MultiSelect = false;
             this.listViewSongs.Name = "listViewSongs";
-            this.listViewSongs.Size = new System.Drawing.Size(238, 190);
+            this.listViewSongs.Size = new System.Drawing.Size(238, 188);
             this.listViewSongs.TabIndex = 21;
             this.listViewSongs.UseCompatibleStateImageBehavior = false;
             this.listViewSongs.View = System.Windows.Forms.View.Details;
-            this.listViewSongs.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.listViewSongs_MouseDoubleClick);
             this.listViewSongs.MouseClick += new System.Windows.Forms.MouseEventHandler(this.listViewSongs_MouseClick);
+            this.listViewSongs.SelectedIndexChanged += new System.EventHandler(this.listViewSongs_SelectedIndexChanged);
             // 
             // radioSongSearchAll
             // 
@@ -1196,7 +1282,7 @@
             this.tabControl2.Location = new System.Drawing.Point(4, 4);
             this.tabControl2.Name = "tabControl2";
             this.tabControl2.SelectedIndex = 0;
-            this.tabControl2.Size = new System.Drawing.Size(591, 291);
+            this.tabControl2.Size = new System.Drawing.Size(598, 291);
             this.tabControl2.TabIndex = 0;
             // 
             // tabPageImageBrowser
@@ -1211,7 +1297,7 @@
             this.tabPageImageBrowser.Location = new System.Drawing.Point(4, 29);
             this.tabPageImageBrowser.Name = "tabPageImageBrowser";
             this.tabPageImageBrowser.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageImageBrowser.Size = new System.Drawing.Size(583, 258);
+            this.tabPageImageBrowser.Size = new System.Drawing.Size(590, 258);
             this.tabPageImageBrowser.TabIndex = 0;
             this.tabPageImageBrowser.Text = "Bildsammlung";
             this.tabPageImageBrowser.UseVisualStyleBackColor = true;
@@ -1246,7 +1332,7 @@
             this.listViewDirectoryImages.Location = new System.Drawing.Point(234, 31);
             this.listViewDirectoryImages.MultiSelect = false;
             this.listViewDirectoryImages.Name = "listViewDirectoryImages";
-            this.listViewDirectoryImages.Size = new System.Drawing.Size(347, 227);
+            this.listViewDirectoryImages.Size = new System.Drawing.Size(354, 227);
             this.listViewDirectoryImages.TabIndex = 1;
             this.listViewDirectoryImages.UseCompatibleStateImageBehavior = false;
             this.listViewDirectoryImages.SelectedIndexChanged += new System.EventHandler(this.listViewDirectoryImages_SelectedIndexChanged);
@@ -1286,7 +1372,7 @@
             // buttonClearImageHistory
             // 
             this.buttonClearImageHistory.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.buttonClearImageHistory.Location = new System.Drawing.Point(440, 279);
+            this.buttonClearImageHistory.Location = new System.Drawing.Point(447, 279);
             this.buttonClearImageHistory.Name = "buttonClearImageHistory";
             this.buttonClearImageHistory.Size = new System.Drawing.Size(121, 23);
             this.buttonClearImageHistory.TabIndex = 22;
@@ -1300,7 +1386,7 @@
             this.tabPageImageHistory.Controls.Add(this.listViewImageHistory);
             this.tabPageImageHistory.Location = new System.Drawing.Point(4, 29);
             this.tabPageImageHistory.Name = "tabPageImageHistory";
-            this.tabPageImageHistory.Size = new System.Drawing.Size(583, 258);
+            this.tabPageImageHistory.Size = new System.Drawing.Size(590, 258);
             this.tabPageImageHistory.TabIndex = 3;
             this.tabPageImageHistory.Text = "Verlauf";
             // 
@@ -1315,11 +1401,12 @@
             this.listViewImageHistory.Location = new System.Drawing.Point(0, 3);
             this.listViewImageHistory.MultiSelect = false;
             this.listViewImageHistory.Name = "listViewImageHistory";
-            this.listViewImageHistory.Size = new System.Drawing.Size(591, 261);
+            this.listViewImageHistory.Size = new System.Drawing.Size(588, 255);
             this.listViewImageHistory.TabIndex = 27;
             this.listViewImageHistory.UseCompatibleStateImageBehavior = false;
             this.listViewImageHistory.View = System.Windows.Forms.View.Tile;
             this.listViewImageHistory.SelectedIndexChanged += new System.EventHandler(this.listViewImageHistory_SelectedIndexChanged);
+            this.listViewImageHistory.Leave += new System.EventHandler(this.listViewImageHistory_Leave_1);
             // 
             // columnHeader5
             // 
@@ -1331,9 +1418,9 @@
             this.tabPageImageFavorites.Location = new System.Drawing.Point(4, 29);
             this.tabPageImageFavorites.Name = "tabPageImageFavorites";
             this.tabPageImageFavorites.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageImageFavorites.Size = new System.Drawing.Size(583, 258);
+            this.tabPageImageFavorites.Size = new System.Drawing.Size(590, 258);
             this.tabPageImageFavorites.TabIndex = 2;
-            this.tabPageImageFavorites.Text = "Bildfavoriten";
+            this.tabPageImageFavorites.Text = "Favoriten";
             this.tabPageImageFavorites.UseVisualStyleBackColor = true;
             // 
             // listViewFavorites
@@ -1344,11 +1431,12 @@
             this.listViewFavorites.Location = new System.Drawing.Point(0, 3);
             this.listViewFavorites.MultiSelect = false;
             this.listViewFavorites.Name = "listViewFavorites";
-            this.listViewFavorites.Size = new System.Drawing.Size(591, 261);
+            this.listViewFavorites.Size = new System.Drawing.Size(588, 255);
             this.listViewFavorites.TabIndex = 2;
             this.listViewFavorites.UseCompatibleStateImageBehavior = false;
             this.listViewFavorites.View = System.Windows.Forms.View.Tile;
             this.listViewFavorites.SelectedIndexChanged += new System.EventHandler(this.listViewFavorites_SelectedIndexChanged);
+            this.listViewFavorites.Leave += new System.EventHandler(this.listViewFavorites_Leave);
             // 
             // tabPageSlideShow
             // 
@@ -1365,7 +1453,7 @@
             this.tabPageSlideShow.Location = new System.Drawing.Point(4, 29);
             this.tabPageSlideShow.Name = "tabPageSlideShow";
             this.tabPageSlideShow.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageSlideShow.Size = new System.Drawing.Size(583, 258);
+            this.tabPageSlideShow.Size = new System.Drawing.Size(590, 258);
             this.tabPageSlideShow.TabIndex = 1;
             this.tabPageSlideShow.Text = "Diaschau";
             this.tabPageSlideShow.UseVisualStyleBackColor = true;
@@ -1404,7 +1492,7 @@
             this.listViewDias.Location = new System.Drawing.Point(192, 29);
             this.listViewDias.MultiSelect = false;
             this.listViewDias.Name = "listViewDias";
-            this.listViewDias.Size = new System.Drawing.Size(385, 227);
+            this.listViewDias.Size = new System.Drawing.Size(392, 227);
             this.listViewDias.TabIndex = 1;
             this.listViewDias.UseCompatibleStateImageBehavior = false;
             // 
@@ -1501,11 +1589,11 @@
             this.groupBoxImageStack.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
                         | System.Windows.Forms.AnchorStyles.Right)));
             this.groupBoxImageStack.Controls.Add(this.listViewImageQueue);
-            this.groupBoxImageStack.Controls.Add(this.button1);
+            this.groupBoxImageStack.Controls.Add(this.buttonResetImageQueue);
             this.groupBoxImageStack.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.groupBoxImageStack.Location = new System.Drawing.Point(601, 12);
+            this.groupBoxImageStack.Location = new System.Drawing.Point(605, 12);
             this.groupBoxImageStack.Name = "groupBoxImageStack";
-            this.groupBoxImageStack.Size = new System.Drawing.Size(140, 280);
+            this.groupBoxImageStack.Size = new System.Drawing.Size(134, 283);
             this.groupBoxImageStack.TabIndex = 35;
             this.groupBoxImageStack.TabStop = false;
             this.groupBoxImageStack.Text = "Stapel";
@@ -1517,10 +1605,10 @@
             this.listViewImageQueue.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.columnHeader6});
             this.listViewImageQueue.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.None;
-            this.listViewImageQueue.Location = new System.Drawing.Point(6, 19);
+            this.listViewImageQueue.Location = new System.Drawing.Point(7, 19);
             this.listViewImageQueue.MultiSelect = false;
             this.listViewImageQueue.Name = "listViewImageQueue";
-            this.listViewImageQueue.Size = new System.Drawing.Size(127, 230);
+            this.listViewImageQueue.Size = new System.Drawing.Size(121, 231);
             this.listViewImageQueue.TabIndex = 29;
             this.listViewImageQueue.UseCompatibleStateImageBehavior = false;
             this.listViewImageQueue.View = System.Windows.Forms.View.Tile;
@@ -1529,32 +1617,22 @@
             // 
             this.columnHeader6.Width = 90;
             // 
-            // button1
+            // buttonResetImageQueue
             // 
-            this.button1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.button1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button1.Location = new System.Drawing.Point(8, 255);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(125, 23);
-            this.button1.TabIndex = 33;
-            this.button1.Text = "Stapel leeren";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click_1);
+            this.buttonResetImageQueue.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.buttonResetImageQueue.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.buttonResetImageQueue.Location = new System.Drawing.Point(7, 254);
+            this.buttonResetImageQueue.Name = "buttonResetImageQueue";
+            this.buttonResetImageQueue.Size = new System.Drawing.Size(121, 23);
+            this.buttonResetImageQueue.TabIndex = 33;
+            this.buttonResetImageQueue.Text = "Stapel leeren";
+            this.buttonResetImageQueue.UseVisualStyleBackColor = true;
+            this.buttonResetImageQueue.Click += new System.EventHandler(this.button1_Click_1);
             // 
-            // songDetailElement
+            // timerElementHighlight
             // 
-            this.songDetailElement.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
-            this.songDetailElement.AutoScroll = true;
-            this.songDetailElement.BackColor = System.Drawing.Color.White;
-            this.songDetailElement.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.songDetailElement.ForeColor = System.Drawing.SystemColors.WindowText;
-            this.songDetailElement.Location = new System.Drawing.Point(6, 16);
-            this.songDetailElement.Name = "songDetailElement";
-            this.songDetailElement.Size = new System.Drawing.Size(343, 242);
-            this.songDetailElement.TabIndex = 20;
-            this.songDetailElement.SlideClicked += new SongDetails.SongDetail.slideClick(this.songDetailElement_SlideClicked);
+            this.timerElementHighlight.Interval = 250;
+            this.timerElementHighlight.Tick += new System.EventHandler(this.timerSearchBoxHL_Tick);
             // 
             // MainWindow
             // 
@@ -1618,7 +1696,6 @@
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem1;
 		private System.Windows.Forms.ToolStripMenuItem infoToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem einstellungenToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem bildschirmeErneutSuchenToolStripMenuItem;
         private System.Windows.Forms.ToolStrip toolStrip1;
         private System.Windows.Forms.ToolStripButton toolStripButtonProjectionOff;
         private System.Windows.Forms.ToolStripButton toolStripButtonBlackout;
@@ -1643,8 +1720,7 @@
 		private System.Windows.Forms.GroupBox groupBox4;
 		private System.Windows.Forms.Button buttonSetListRem;
 		private System.Windows.Forms.Button buttonSetListDown;
-		private System.Windows.Forms.Button buttonSetListUp;
-		private System.Windows.Forms.ListView listViewSetList;
+        private System.Windows.Forms.Button buttonSetListUp;
 		private System.Windows.Forms.ColumnHeader columnHeader4;
 		private System.Windows.Forms.Button buttonSetListClear;
 		private System.Windows.Forms.Button buttonSetListAdd;
@@ -1725,9 +1801,7 @@
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.GroupBox groupBoxImageStack;
-        private System.Windows.Forms.ListView listViewImageQueue;
-        private System.Windows.Forms.ColumnHeader columnHeader6;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button buttonResetImageQueue;
         private System.Windows.Forms.Button buttonToggleLayerMode;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.TabPage tabPage2;
@@ -1739,6 +1813,18 @@
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.NumericUpDown numericUpDown1;
         private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.ListView listViewImageQueue;
+        private System.Windows.Forms.ColumnHeader columnHeader6;
+        private Bol.WinControls.ListViewEx listViewSetList;
+        private System.Windows.Forms.Button buttonHideTextLayer;
+        private System.Windows.Forms.ToolStripMenuItem präsentationToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem präsentationausToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem blackoutToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem präsentationeinToolStripMenuItem;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator11;
+        private System.Windows.Forms.ToolStripMenuItem bildschirmeSuchenToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem liedSuchenToolStripMenuItem;
+        private System.Windows.Forms.Timer timerElementHighlight;
     }
 }
 
