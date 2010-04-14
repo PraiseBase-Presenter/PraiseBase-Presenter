@@ -125,7 +125,6 @@ namespace Pbp.Forms
 
             numericUpDown1.Value = (int)Settings.Instance.ProjectionMasterFont.Size;
 
-            Bible currentBible = new Bible("C:/Users/Nicolas/Documents/PraiseBase Presenter Church/Bible/sample.xml");
         }
 
         private void beendenToolStripMenuItem_Click(object sender, EventArgs e)
@@ -1527,7 +1526,7 @@ namespace Pbp.Forms
 
         private void button1_Click_2(object sender, EventArgs e)
         {
-            projWindow.showSlide(null, currentBackground);
+            pictureBoxPreview.Image = projWindow.showSlide(null, currentBackground);
         }
 
 
@@ -1622,9 +1621,5 @@ namespace Pbp.Forms
                 ((ListView)sender).Items[((ListView)sender).SelectedIndices[0]].Selected = false;
             }
         }
-
-
-
-
     }
 }

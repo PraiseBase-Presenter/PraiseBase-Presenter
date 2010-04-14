@@ -106,7 +106,6 @@
             this.toolStripStatusLabelCtrl = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStripStatusLabelInfo = new System.Windows.Forms.ToolStripStatusLabel();
             this.groupBox5 = new System.Windows.Forms.GroupBox();
-            this.buttonHideTextLayer = new System.Windows.Forms.Button();
             this.label3 = new System.Windows.Forms.Label();
             this.buttonToggleLayerMode = new System.Windows.Forms.Button();
             this.progressBarTransition = new System.Windows.Forms.ProgressBar();
@@ -512,9 +511,9 @@
             this.groupBox4.Controls.Add(this.buttonSetListDown);
             this.groupBox4.Controls.Add(this.buttonSetListUp);
             this.groupBox4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.groupBox4.Location = new System.Drawing.Point(753, 416);
+            this.groupBox4.Location = new System.Drawing.Point(753, 394);
             this.groupBox4.Name = "groupBox4";
-            this.groupBox4.Size = new System.Drawing.Size(247, 289);
+            this.groupBox4.Size = new System.Drawing.Size(247, 311);
             this.groupBox4.TabIndex = 26;
             this.groupBox4.TabStop = false;
             this.groupBox4.Text = "Setliste";
@@ -525,7 +524,7 @@
             this.buttonOpenSetList.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.buttonOpenSetList.Image = global::Pbp.Properties.Resources.fileopen;
             this.buttonOpenSetList.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.buttonOpenSetList.Location = new System.Drawing.Point(209, 257);
+            this.buttonOpenSetList.Location = new System.Drawing.Point(209, 279);
             this.buttonOpenSetList.Name = "buttonOpenSetList";
             this.buttonOpenSetList.Size = new System.Drawing.Size(26, 23);
             this.buttonOpenSetList.TabIndex = 31;
@@ -539,7 +538,7 @@
             this.buttonSaveSetList.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.buttonSaveSetList.Image = global::Pbp.Properties.Resources.filesave;
             this.buttonSaveSetList.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.buttonSaveSetList.Location = new System.Drawing.Point(175, 257);
+            this.buttonSaveSetList.Location = new System.Drawing.Point(175, 279);
             this.buttonSaveSetList.Name = "buttonSaveSetList";
             this.buttonSaveSetList.Size = new System.Drawing.Size(26, 23);
             this.buttonSaveSetList.TabIndex = 30;
@@ -552,7 +551,7 @@
             this.buttonSetListAdd.Enabled = false;
             this.buttonSetListAdd.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.buttonSetListAdd.Image = global::Pbp.Properties.Resources.edit_add;
-            this.buttonSetListAdd.Location = new System.Drawing.Point(13, 257);
+            this.buttonSetListAdd.Location = new System.Drawing.Point(13, 279);
             this.buttonSetListAdd.Name = "buttonSetListAdd";
             this.buttonSetListAdd.Size = new System.Drawing.Size(24, 23);
             this.buttonSetListAdd.TabIndex = 29;
@@ -566,7 +565,7 @@
             this.buttonSetListClear.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.buttonSetListClear.Image = global::Pbp.Properties.Resources._14_layer_deletelayer;
             this.buttonSetListClear.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.buttonSetListClear.Location = new System.Drawing.Point(141, 257);
+            this.buttonSetListClear.Location = new System.Drawing.Point(141, 279);
             this.buttonSetListClear.Name = "buttonSetListClear";
             this.buttonSetListClear.Size = new System.Drawing.Size(26, 23);
             this.buttonSetListClear.TabIndex = 28;
@@ -588,7 +587,7 @@
             this.listViewSetList.Location = new System.Drawing.Point(5, 19);
             this.listViewSetList.MultiSelect = false;
             this.listViewSetList.Name = "listViewSetList";
-            this.listViewSetList.Size = new System.Drawing.Size(234, 232);
+            this.listViewSetList.Size = new System.Drawing.Size(234, 254);
             this.listViewSetList.TabIndex = 27;
             this.listViewSetList.UseCompatibleStateImageBehavior = false;
             this.listViewSetList.View = System.Windows.Forms.View.Details;
@@ -602,7 +601,7 @@
             this.buttonSetListRem.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.buttonSetListRem.Image = global::Pbp.Properties.Resources.edit_remove;
             this.buttonSetListRem.ImageAlign = System.Drawing.ContentAlignment.BottomLeft;
-            this.buttonSetListRem.Location = new System.Drawing.Point(107, 257);
+            this.buttonSetListRem.Location = new System.Drawing.Point(107, 279);
             this.buttonSetListRem.Name = "buttonSetListRem";
             this.buttonSetListRem.Size = new System.Drawing.Size(26, 23);
             this.buttonSetListRem.TabIndex = 26;
@@ -615,7 +614,7 @@
             this.buttonSetListDown.Enabled = false;
             this.buttonSetListDown.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.buttonSetListDown.Image = global::Pbp.Properties.Resources._1downarrow1;
-            this.buttonSetListDown.Location = new System.Drawing.Point(75, 257);
+            this.buttonSetListDown.Location = new System.Drawing.Point(75, 279);
             this.buttonSetListDown.Name = "buttonSetListDown";
             this.buttonSetListDown.Size = new System.Drawing.Size(24, 23);
             this.buttonSetListDown.TabIndex = 25;
@@ -628,7 +627,7 @@
             this.buttonSetListUp.Enabled = false;
             this.buttonSetListUp.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.buttonSetListUp.Image = global::Pbp.Properties.Resources._1downarrow;
-            this.buttonSetListUp.Location = new System.Drawing.Point(44, 257);
+            this.buttonSetListUp.Location = new System.Drawing.Point(44, 279);
             this.buttonSetListUp.Name = "buttonSetListUp";
             this.buttonSetListUp.Size = new System.Drawing.Size(24, 23);
             this.buttonSetListUp.TabIndex = 24;
@@ -893,7 +892,6 @@
             // groupBox5
             // 
             this.groupBox5.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.groupBox5.Controls.Add(this.buttonHideTextLayer);
             this.groupBox5.Controls.Add(this.label3);
             this.groupBox5.Controls.Add(this.buttonToggleLayerMode);
             this.groupBox5.Controls.Add(this.progressBarTransition);
@@ -904,21 +902,10 @@
             this.groupBox5.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.groupBox5.Location = new System.Drawing.Point(753, 98);
             this.groupBox5.Name = "groupBox5";
-            this.groupBox5.Size = new System.Drawing.Size(247, 312);
+            this.groupBox5.Size = new System.Drawing.Size(247, 290);
             this.groupBox5.TabIndex = 34;
             this.groupBox5.TabStop = false;
             this.groupBox5.Text = "Projektion";
-            // 
-            // buttonHideTextLayer
-            // 
-            this.buttonHideTextLayer.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.buttonHideTextLayer.Location = new System.Drawing.Point(13, 283);
-            this.buttonHideTextLayer.Name = "buttonHideTextLayer";
-            this.buttonHideTextLayer.Size = new System.Drawing.Size(94, 23);
-            this.buttonHideTextLayer.TabIndex = 38;
-            this.buttonHideTextLayer.Text = "Text ausblenden";
-            this.buttonHideTextLayer.UseVisualStyleBackColor = true;
-            this.buttonHideTextLayer.Click += new System.EventHandler(this.button1_Click_2);
             // 
             // label3
             // 
@@ -1816,7 +1803,6 @@
         private System.Windows.Forms.ListView listViewImageQueue;
         private System.Windows.Forms.ColumnHeader columnHeader6;
         private Bol.WinControls.ListViewEx listViewSetList;
-        private System.Windows.Forms.Button buttonHideTextLayer;
         private System.Windows.Forms.ToolStripMenuItem präsentationToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem präsentationausToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem blackoutToolStripMenuItem;
