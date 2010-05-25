@@ -9,7 +9,7 @@ namespace Bol.WinControls
 	{
 		private const string REORDER = "Reorder";
 
-        ListViewItem lastHoverItem;
+        //ListViewItem lastHoverItem;
 
 		private bool allowRowReorder = true;
 		public bool AllowRowReorder

@@ -56,44 +56,6 @@ namespace Pbp
 		}
 
 		/// <summary>
-		/// Horizontal aligning of slide text
-		/// </summary>
-		public enum SongTextHorizontalAlign
-		{
-			/// <summary>
-			/// Text is aligned horizontally to the left
-			/// </summary>
-			Left,
-			/// <summary>
-			/// Text is horizontally centered
-			/// </summary>
-			Center,
-			/// <summary>
-			/// Text is aligned horizontally to the right
-			/// </summary>
-			Right
-		}
-
-		/// <summary>
-		/// Vertical aligning of slide text
-		/// </summary>
-		public enum SongTextVerticalAlign
-		{
-			/// <summary>
-			/// Text is aligned vertically to the top of the page
-			/// </summary>
-			Top,
-			/// <summary>
-			/// Text is aligned to the center
-			/// </summary>
-			Center,
-			/// <summary>
-			/// Text is aligned vertically to the bottom of the page
-			/// </summary>
-			Bottom
-		}
-
-		/// <summary>
 		/// Different flags for indicating problems with the song 
 		/// whichs needs to be revised
 		/// </summary>
@@ -289,15 +251,80 @@ namespace Pbp
 			/// </summary>
 			public bool Translated { get { return Translation.Count > 0 ? true : false; } }
 			/// <summary>
-			/// Horizonztal text alignment
+			/// Text alignment
 			/// </summary>
-			public SongTextHorizontalAlign HorizontalAlign {get;set;}
-			/// <summary>
-			/// Vertical text alignment
-			/// </summary>
-			public SongTextVerticalAlign VerticalAlign { get; set; }
+			public TextAlign SongTextAlign {get;set;}
+            /// <summary>
+            /// Text alignment
+            /// </summary>
+            public int SongTextAlignInt { 
+                get { 
+                    return (int)SongTextAlign;
+                }
+                set 
+                { 
+                    SongTextAlign = (TextAlign)value;
+                    _ownerSong.DefaultSongTextAlign = SongTextAlign;
+                    OnContentChanged(); 
+                }
+            }
+            /// <summary>
+            /// Gets or sets the text
+            /// </summary>
+            public string EditableText
+            {
+                get
+                {
+                    string txt = "";
+                    int i = 1;
+                    foreach (string str in Lines)
+                    {
+                        txt += str;
+                        if (i < Lines.Count)
+                            txt += Environment.NewLine;
+                        i++;
+                    }
+                    return txt;
+                }
+                set
+                {
+			        this.Lines = new List<string>();
+			        string[] ln = value.Trim().Split(new string[] { Environment.NewLine }, StringSplitOptions.None);
+			        foreach (string sl in ln)
+			        {
+				        this.Lines.Add(sl.Trim());
+			        }
+                    OnContentChanged();
+                }
+            }
 
-			public TextAlign SongTextAlign {get;set;} 
+            /// <summary>
+            /// Gets or sets the translated text
+            /// </summary>
+            public string EditableTranslation {
+                get {
+                    string txt = "";
+                    int i = 1;
+                    foreach (string str in Translation)
+                    {
+                        txt += str;
+                        if (i < Translation.Count)
+                            txt += Environment.NewLine;
+                        i++;
+                    }
+                    return txt;                
+                }
+                set {
+                    this.Translation = new List<string>();
+                    string[] tr = value.Split(new string[] { Environment.NewLine }, StringSplitOptions.None);
+                    foreach (string sl in tr)
+                    {
+                        this.Translation.Add(sl.Trim());
+                    }
+                    OnContentChanged();
+                }
+            }
+
 
 			/// <summary>
 			/// The font object of this slide
@@ -327,78 +354,23 @@ namespace Pbp
 			{
 				Lines = new List<string>();
 				Translation = new List<string>();
-				HorizontalAlign = SongTextHorizontalAlign.Center;
-				VerticalAlign = SongTextVerticalAlign.Center;
-				SongTextAlign = TextAlign.MittleLeft;
+                SongTextAlign = ownerSong.DefaultSongTextAlign;
 				ImageNumber = 0;
 				this._ownerSong = ownerSong;
 			}
 
-			/// <summary>
-			/// Sets the text of this slide
-			/// </summary>
-			/// <param name="text"></param>
-			public void setSlideText(string text)
-			{
-				this.Lines = new List<string>();
-				string[] ln = text.Trim().Split(new string[] { Environment.NewLine }, StringSplitOptions.None);
-				foreach (string sl in ln)
-				{
-					this.Lines.Add(sl.Trim());
-				}
-			}
+            public delegate void ContenChangedHandler();
+            public event ContenChangedHandler ContentChanged;
 
-			/// <summary>
-			/// Sets the translation of this slide
-			/// </summary>
-			/// <param name="text"></param>
-			public void setSlideTextTranslation(string text)
-			{
-				this.Translation = new List<string>();
-				string[] tr = text.Split(new string[] { Environment.NewLine }, StringSplitOptions.None);
-				foreach (string sl in tr)
-				{
-					this.Translation.Add(sl.Trim());
-				}
-			}
+            protected void OnContentChanged()
+            {
+                if (ContentChanged != null)
+                {
+                    ContentChanged();
+                }
+            }
 
-			/// <summary>
-			/// Returns a string of the wrapped text
-			/// </summary>
-			/// <returns>Wrapped text</returns>
-			public string lineBreakText()
-			{
-				string txt = "";
-				int i = 1;
-				foreach (string str in Lines)
-				{
-					txt += str;
-					if (i<Lines.Count)
-						txt += Environment.NewLine;
-					i++;
-				}
-				return txt;
 
-			}
-
-			/// <summary>
-			/// Returns the wrapped translation text
-			/// </summary>
-			/// <returns>Wrapped translation</returns>
-			public string lineBreakTranslation()
-			{
-				string txt = "";
-				int i = 1;
-				foreach (string str in Translation)
-				{
-					txt += str;
-					if (i<Translation.Count)
-						txt += Environment.NewLine;
-					i++;
-				}
-				return txt;
-
-			}
 
 			/// <summary>
 			/// Returns the text on one line. This is mainly used 
@@ -432,19 +404,18 @@ namespace Pbp
 			public object Clone()
 			{
 				Slide res = new Slide(this._ownerSong);
-				res.HorizontalAlign = HorizontalAlign;
+				res.SongTextAlign = SongTextAlign;
 				res.ImageNumber = ImageNumber;
 				foreach (string obj in Lines)
 					res.Lines.Add(obj);
 				foreach (string obj in Translation)
 					res.Translation.Add(obj);
-				res.VerticalAlign = VerticalAlign;
 				return res;
 			}
 
 			public override int GetHashCode()
 			{
-				int res = ImageNumber.GetHashCode() ^ HorizontalAlign.GetHashCode() ^VerticalAlign.GetHashCode();
+                int res = ImageNumber.GetHashCode() ^ SongTextAlign.GetHashCode();
 				for (int i = 0; i < Lines.Count; i++)
 				{
 					res = res ^ Lines[i].GetHashCode();

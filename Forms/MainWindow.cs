@@ -170,39 +170,32 @@ namespace Pbp.Forms
         void loadSongList()
         {
             setStatus("Lade Liederliste...");
-
-            listViewSongs.SuspendLayout();
-            listViewSongs.Items.Clear();
-            int cnt = 0;
-            foreach (KeyValuePair<Guid, Song> kvp in SongManager.Instance.SongList)
-            {
-                ListViewItem lvi = new ListViewItem(kvp.Value.Title);
-                lvi.Tag = kvp.Key;
-                listViewSongs.Items.Add(lvi);
-                cnt++;
-            }
-            listViewSongs.Columns[0].Width = -2;
-			setStatus(cnt.ToString() + " Lieder geladen");
-
-            listViewSongs.ResumeLayout();
+            //Console.WriteLine("loadsonglist");
+            searchSongs("");
+            setStatus(listViewSongs.Items.Count.ToString() + " Lieder geladen");
         }
 
         void searchSongs(string needle)
         {
+            DateTime startTime = DateTime.Now;
+
+            listViewSongs.BeginUpdate();
             listViewSongs.SuspendLayout();
             listViewSongs.Items.Clear();
             int cnt = 0;
+            
+            List<ListViewItem> lviList = new List<ListViewItem>();
             foreach (Song sng in SongManager.Instance.getSearchResults(needle, radioSongSearchAll.Checked ? 1 : 0))
             {
                 ListViewItem lvi = new ListViewItem(sng.Title);
                 lvi.Tag = sng.GUID;
-                listViewSongs.Items.Add(lvi);
+                lviList.Add(lvi);
                 cnt++;
             }
-            if (cnt == 1)
+            listViewSongs.Items.AddRange(lviList.ToArray());
+
+            if (cnt == 1 && listViewSongs.Items.Count>0)
             {
-                if (listViewSongs.Items.Count>0)
-                {
                     try
                     {
 						listViewSongs.Items[0].Selected = true;
@@ -213,11 +206,10 @@ namespace Pbp.Forms
                     {
                         Console.WriteLine(e.ToString());
                     }
-
-                 }
             }
             listViewSongs.Columns[0].Width = -2;
             listViewSongs.ResumeLayout();
+            listViewSongs.EndUpdate();
         }
 
 
@@ -1620,6 +1612,11 @@ namespace Pbp.Forms
             {
                 ((ListView)sender).Items[((ListView)sender).SelectedIndices[0]].Selected = false;
             }
+        }
+
+        private void toolStrip1_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
+        {
+
         }
     }
 }

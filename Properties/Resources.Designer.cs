@@ -60,93 +60,9 @@ namespace Pbp.Properties {
             }
         }
         
-        internal static System.Drawing.Bitmap _14_layer_deletelayer {
-            get {
-                object obj = ResourceManager.GetObject("_14_layer_deletelayer", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        internal static System.Drawing.Bitmap _14_layer_newlayer {
-            get {
-                object obj = ResourceManager.GetObject("_14_layer_newlayer", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        internal static System.Drawing.Bitmap _1downarrow {
-            get {
-                object obj = ResourceManager.GetObject("_1downarrow", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        internal static System.Drawing.Bitmap _1downarrow1 {
-            get {
-                object obj = ResourceManager.GetObject("_1downarrow1", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        internal static System.Drawing.Bitmap _1leftarrow {
-            get {
-                object obj = ResourceManager.GetObject("_1leftarrow", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        internal static System.Drawing.Bitmap _1rightarrow {
-            get {
-                object obj = ResourceManager.GetObject("_1rightarrow", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        internal static System.Drawing.Bitmap _2leftarrow {
-            get {
-                object obj = ResourceManager.GetObject("_2leftarrow", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        internal static System.Drawing.Bitmap _2rightarrow {
-            get {
-                object obj = ResourceManager.GetObject("_2rightarrow", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        internal static System.Drawing.Bitmap _2uparrow {
-            get {
-                object obj = ResourceManager.GetObject("_2uparrow", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        internal static System.Drawing.Bitmap _3dowarrow {
-            get {
-                object obj = ResourceManager.GetObject("_3dowarrow", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
         internal static System.Drawing.Bitmap advancedsettings {
             get {
                 object obj = ResourceManager.GetObject("advancedsettings", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        internal static System.Drawing.Bitmap agt_action_fail1 {
-            get {
-                object obj = ResourceManager.GetObject("agt_action_fail1", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        internal static System.Drawing.Bitmap agt_action_success {
-            get {
-                object obj = ResourceManager.GetObject("agt_action_success", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -165,6 +81,62 @@ namespace Pbp.Properties {
             }
         }
         
+        internal static System.Drawing.Bitmap arrowdown {
+            get {
+                object obj = ResourceManager.GetObject("arrowdown", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap arrowdowndown {
+            get {
+                object obj = ResourceManager.GetObject("arrowdowndown", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap arrowleft {
+            get {
+                object obj = ResourceManager.GetObject("arrowleft", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap arrowleftleft {
+            get {
+                object obj = ResourceManager.GetObject("arrowleftleft", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap arrowright {
+            get {
+                object obj = ResourceManager.GetObject("arrowright", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap arrowrightright {
+            get {
+                object obj = ResourceManager.GetObject("arrowrightright", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap arrowup {
+            get {
+                object obj = ResourceManager.GetObject("arrowup", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap arrowupup {
+            get {
+                object obj = ResourceManager.GetObject("arrowupup", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
         internal static System.Drawing.Bitmap Blackout_on {
             get {
                 object obj = ResourceManager.GetObject("Blackout_on", resourceCulture);
@@ -175,6 +147,13 @@ namespace Pbp.Properties {
         internal static System.Drawing.Bitmap Blackout_on2 {
             get {
                 object obj = ResourceManager.GetObject("Blackout_on2", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap blank {
+            get {
+                object obj = ResourceManager.GetObject("blank", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -259,6 +238,13 @@ namespace Pbp.Properties {
         internal static System.Drawing.Bitmap exit {
             get {
                 object obj = ResourceManager.GetObject("exit", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap fail {
+            get {
+                object obj = ResourceManager.GetObject("fail", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -383,6 +369,13 @@ namespace Pbp.Properties {
             }
         }
         
+        internal static System.Drawing.Bitmap success {
+            get {
+                object obj = ResourceManager.GetObject("success", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
         internal static System.Drawing.Bitmap text_align_center {
             get {
                 object obj = ResourceManager.GetObject("text_align_center", resourceCulture);
@@ -407,6 +400,13 @@ namespace Pbp.Properties {
         internal static System.Drawing.Bitmap tip {
             get {
                 object obj = ResourceManager.GetObject("tip", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap trash {
+            get {
+                object obj = ResourceManager.GetObject("trash", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

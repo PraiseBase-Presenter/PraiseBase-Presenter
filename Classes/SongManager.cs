@@ -234,7 +234,7 @@ namespace Pbp
             List<Song> tmpList = new List<Song>();
             foreach (KeyValuePair<Guid,Song> kvp in SongList)
             {
-                if (SongList[kvp.Key].Title.ToLower().Contains(needle) ||
+                if (needle == string.Empty || SongList[kvp.Key].Title.ToLower().Contains(needle) ||
 					(mode == 1 && SongList[kvp.Key].SearchText.Contains(needle)))
                 {
                     tmpList.Add(SongList[kvp.Key]);
