@@ -47,7 +47,7 @@ namespace Pbp
 			TopLeft,
 			TopCenter,
 			TopRight,
-			MittleLeft,
+			MiddleLeft,
 			MiddleCenter,
 			MiddleRight,
 			BottomLeft,

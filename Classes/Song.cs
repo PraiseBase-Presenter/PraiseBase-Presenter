@@ -196,7 +196,7 @@ namespace Pbp
 
 			FilePath = filePath;
 			Tags = new TagList();
-            DefaultSongTextAlign = TextAlign.MittleLeft;
+            DefaultSongTextAlign = TextAlign.MiddleLeft;
 			Slides = new SlideList();
 			Parts = new PartList();
 			RelativeImagePaths = new List<string>();
@@ -267,7 +267,7 @@ namespace Pbp
 
 		private FileFormat detectFileType(XmlElement xmlRoot)
 		{
-			if (xmlRoot.Name == "ppl" && xmlRoot.GetAttribute("version") == "3.0")
+			if (xmlRoot.Name == "ppl" && (xmlRoot.GetAttribute("version") == "3.0" || xmlRoot.GetAttribute("version") == "4.0"))
 			{
 				return FileFormat.ppl;
 			}
@@ -393,7 +393,7 @@ namespace Pbp
                     string vert = xmlRoot["formatting"]["textorientation"]["vertical"].InnerText;
                     if (horiz == "left" && vert == "")
                     {
-                        DefaultSongTextAlign = TextAlign.MittleLeft;
+                        DefaultSongTextAlign = TextAlign.MiddleLeft;
                     }
                     else if (horiz == "left" && vert == "top")
                     {
@@ -409,7 +409,7 @@ namespace Pbp
                     }
                     else if (horiz == "left" && vert == "center")
                     {
-                        DefaultSongTextAlign = TextAlign.MittleLeft;
+                        DefaultSongTextAlign = TextAlign.MiddleLeft;
                     }
                     else if (horiz == "center" && vert == "center")
                     {
@@ -496,9 +496,19 @@ namespace Pbp
 						{
 							Slide tmpSlide = new Slide(this);
 							tmpSlide.Lines = new List<string>();
-                            // REMARK: PHP format does not support align defs per slide
-                            // TODO: Implement per-slide store of aligning info
-                            tmpSlide.SongTextAlign = DefaultSongTextAlign;
+                            if (slideElem.Attributes["align"] != null)
+                            {
+                                try
+                                {
+                                    tmpSlide.SongTextAlign = (TextAlign)Enum.Parse(typeof(TextAlign), slideElem.GetAttribute("align"), true);
+                                }
+                                catch (Exception ex)
+                                {
+                                    tmpSlide.SongTextAlign = DefaultSongTextAlign;
+                                }
+                            }
+                            else
+                                tmpSlide.SongTextAlign = DefaultSongTextAlign;
 
 							int bgNr = System.Convert.ToInt32(slideElem.GetAttribute("backgroundnr")) + 1;
 							bgNr = bgNr < 0 ? 0 : bgNr;
@@ -553,7 +563,7 @@ namespace Pbp
 
 				xmlDoc.AppendChild(xmlDoc.CreateElement("ppl"));
 				XmlElement xmlRoot = xmlDoc.DocumentElement;
-				xmlRoot.SetAttribute("version", "3.0");
+				xmlRoot.SetAttribute("version", "4.0");
 
 				xmlRoot.AppendChild(xmlDoc.CreateElement("general"));
 				xmlRoot["general"].AppendChild(xmlDoc.CreateElement("title"));
@@ -607,8 +617,9 @@ namespace Pbp
 						XmlElement tn2 = xmlDoc.CreateElement("slide");
 						tn2.SetAttribute("mainsize", TextFont.Size.ToString());
 						tn2.SetAttribute("backgroundnr", (sld.ImageNumber - 1).ToString());
+                        tn2.SetAttribute("align", sld.SongTextAlign.ToString());
 
-						foreach (string ln in sld.Lines)
+                        foreach (string ln in sld.Lines)
 						{
 							XmlElement tn3 = xmlDoc.CreateElement("line");
 							tn3.InnerText = ln;
@@ -742,8 +753,8 @@ namespace Pbp
 				xmlRoot["formatting"].AppendChild(xmlDoc.CreateElement("textorientation"));
 				xmlRoot["formatting"]["textorientation"].AppendChild(xmlDoc.CreateElement("horizontal"));
 				xmlRoot["formatting"]["textorientation"].AppendChild(xmlDoc.CreateElement("vertical"));
-                // TODO: Future versions should support per-slide aligning definitions
-    			switch (Parts[0].Slides[0].SongTextAlign)
+
+    			switch (DefaultSongTextAlign)
                 {
                     case TextAlign.TopLeft:
                         xmlRoot["formatting"]["textorientation"]["vertical"].InnerText = "top";
@@ -757,7 +768,7 @@ namespace Pbp
                         xmlRoot["formatting"]["textorientation"]["vertical"].InnerText = "top";
         				xmlRoot["formatting"]["textorientation"]["horizontal"].InnerText = "right";
                         break;
-                    case TextAlign.MittleLeft:
+                    case TextAlign.MiddleLeft:
         				xmlRoot["formatting"]["textorientation"]["vertical"].InnerText = "center";
         				xmlRoot["formatting"]["textorientation"]["horizontal"].InnerText = "left";
                         break;
@@ -889,7 +900,7 @@ namespace Pbp
                 Brush fontBrush;
                 Brush fontTranslationBrush;
 
-                if (Settings.Instance.ProjectionUseMaster && pr != ProjectionMode.Simulate)
+                if (Settings.Instance.ProjectionUseMaster) // && pr != ProjectionMode.Simulate
                 {
                     font = Settings.Instance.ProjectionMasterFont;
                     fontTr = Settings.Instance.ProjectionMasterFontTranslation;
@@ -958,7 +969,7 @@ namespace Pbp
                         textStartX = textStartX + usableWidth;
                         strFormat.Alignment = StringAlignment.Far;
                         break;
-                    case TextAlign.MittleLeft:
+                    case TextAlign.MiddleLeft:
                         strFormat.Alignment = StringAlignment.Near;
                         textStartY = textStartY + (usableHeight / 2) - (usedHeight / 2);
                         break;

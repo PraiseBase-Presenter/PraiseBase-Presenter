@@ -76,9 +76,6 @@ namespace Pbp.Forms
 				buttonChooseProjectionForeColor.BackColor= sng.TextColor;
 				buttonTranslationColor.BackColor = sng.TranslationColor;
 
-				trackBarLineSpacing.Value = sng.TextLineSpacing;
-				labelLineSpacing.Text = sng.TextLineSpacing.ToString();
-
 				comboBoxLanguage.Items.Clear();
 				comboBoxLanguage.Text = sng.Language;
 				comboBoxLanguage.AutoCompleteMode = AutoCompleteMode.Suggest;
@@ -295,6 +292,8 @@ namespace Pbp.Forms
 			prt.Slides.Add(sld);
 			sng.Parts.Add(prt);
 
+            textBoxSongTitle.DataBindings.Add("Text", sng, "Title");
+
 			populateTree();
 			treeViewContents.SelectedNode = treeViewContents.Nodes[0].LastNode.LastNode;
 		}
@@ -313,8 +312,6 @@ namespace Pbp.Forms
         private void EditorChild_Load(object sender, EventArgs e)
         {
             ((EditorWindow)MdiParent).setStatus("Lied " + sng.FilePath + " geöffnet");
-
-            textBoxSongTitle.DataBindings.Add("Text", sng, "Title");
 
         }
 
@@ -495,14 +492,6 @@ namespace Pbp.Forms
 				previewSlide();
 			}
         }
-
-        private void trackBarLineSpacing_Scroll(object sender, EventArgs e)
-        {
-            sng.TextLineSpacing = trackBarLineSpacing.Value;
-            labelLineSpacing.Text = trackBarLineSpacing.Value.ToString();
-			previewSlide();
-		}
-
 
 		private void buttonDelSlide_Click(object sender, EventArgs e)
 		{
@@ -859,6 +848,14 @@ namespace Pbp.Forms
         private void textBoxSongTitle_TextChanged(object sender, EventArgs e)
         {
            this.Name = ((TextBox)sender).Text;
+        }
+
+        private void buttonApplyAlignmentToAll_Click(object sender, EventArgs e)
+        {
+            for (int i = 0; i < sng.Slides.Count; i++)
+            {
+                sng.Slides[i].SongTextAlign = currentSlide.SongTextAlign;
+            }
         }
 
     }

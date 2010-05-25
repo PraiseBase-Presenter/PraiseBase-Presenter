@@ -58,14 +58,12 @@
             this.umbenennenToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
-            this.label2 = new System.Windows.Forms.Label();
-            this.labelLineSpacing = new System.Windows.Forms.Label();
-            this.trackBarLineSpacing = new System.Windows.Forms.TrackBar();
             this.buttonTranslationColor = new System.Windows.Forms.Button();
             this.buttonTranslationFont = new System.Windows.Forms.Button();
             this.labelFontTranslation = new System.Windows.Forms.Label();
             this.buttonChooseProjectionForeColor = new System.Windows.Forms.Button();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.buttonApplyAlignmentToAll = new System.Windows.Forms.Button();
             this.comboBoxSlideTextOrientation = new System.Windows.Forms.ComboBox();
             this.label5 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
@@ -95,7 +93,6 @@
             this.songContextMenu.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.trackBarLineSpacing)).BeginInit();
             this.panel2.SuspendLayout();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -384,9 +381,6 @@
             // 
             // tabPage1
             // 
-            this.tabPage1.Controls.Add(this.label2);
-            this.tabPage1.Controls.Add(this.labelLineSpacing);
-            this.tabPage1.Controls.Add(this.trackBarLineSpacing);
             this.tabPage1.Controls.Add(this.buttonTranslationColor);
             this.tabPage1.Controls.Add(this.buttonTranslationFont);
             this.tabPage1.Controls.Add(this.labelFontTranslation);
@@ -405,35 +399,7 @@
             this.tabPage1.Text = "Inhalt";
             this.tabPage1.UseVisualStyleBackColor = true;
             this.tabPage1.Click += new System.EventHandler(this.tabPage1_Click);
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(14, 552);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(77, 13);
-            this.label2.TabIndex = 106;
-            this.label2.Text = "Zeilenabstand:";
-            // 
-            // labelLineSpacing
-            // 
-            this.labelLineSpacing.AutoSize = true;
-            this.labelLineSpacing.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelLineSpacing.Location = new System.Drawing.Point(229, 618);
-            this.labelLineSpacing.Name = "labelLineSpacing";
-            this.labelLineSpacing.Size = new System.Drawing.Size(14, 20);
-            this.labelLineSpacing.TabIndex = 105;
-            this.labelLineSpacing.Text = "-";
-            // 
-            // trackBarLineSpacing
-            // 
-            this.trackBarLineSpacing.Location = new System.Drawing.Point(97, 545);
-            this.trackBarLineSpacing.Maximum = 50;
-            this.trackBarLineSpacing.Name = "trackBarLineSpacing";
-            this.trackBarLineSpacing.Size = new System.Drawing.Size(130, 45);
-            this.trackBarLineSpacing.TabIndex = 104;
-            this.trackBarLineSpacing.TickFrequency = 5;
+
             // 
             // buttonTranslationColor
             // 
@@ -449,7 +415,7 @@
             // 
             this.buttonTranslationFont.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.buttonTranslationFont.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.buttonTranslationFont.Location = new System.Drawing.Point(9, 509);
+            this.buttonTranslationFont.Location = new System.Drawing.Point(15, 542);
             this.buttonTranslationFont.Name = "buttonTranslationFont";
             this.buttonTranslationFont.Size = new System.Drawing.Size(100, 23);
             this.buttonTranslationFont.TabIndex = 101;
@@ -481,6 +447,7 @@
             // 
             this.panel2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
+            this.panel2.Controls.Add(this.buttonApplyAlignmentToAll);
             this.panel2.Controls.Add(this.comboBoxSlideTextOrientation);
             this.panel2.Controls.Add(this.label5);
             this.panel2.Controls.Add(this.label3);
@@ -489,6 +456,16 @@
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(261, 300);
             this.panel2.TabIndex = 100;
+            // 
+            // buttonApplyAlignmentToAll
+            // 
+            this.buttonApplyAlignmentToAll.Location = new System.Drawing.Point(99, 71);
+            this.buttonApplyAlignmentToAll.Name = "buttonApplyAlignmentToAll";
+            this.buttonApplyAlignmentToAll.Size = new System.Drawing.Size(114, 23);
+            this.buttonApplyAlignmentToAll.TabIndex = 107;
+            this.buttonApplyAlignmentToAll.Text = "Für alle übernehmen";
+            this.buttonApplyAlignmentToAll.UseVisualStyleBackColor = true;
+            this.buttonApplyAlignmentToAll.Click += new System.EventHandler(this.buttonApplyAlignmentToAll_Click);
             // 
             // comboBoxSlideTextOrientation
             // 
@@ -676,7 +653,7 @@
             // 
             this.buttonProjectionMasterFont.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.buttonProjectionMasterFont.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.buttonProjectionMasterFont.Location = new System.Drawing.Point(9, 480);
+            this.buttonProjectionMasterFont.Location = new System.Drawing.Point(15, 571);
             this.buttonProjectionMasterFont.Name = "buttonProjectionMasterFont";
             this.buttonProjectionMasterFont.Size = new System.Drawing.Size(100, 23);
             this.buttonProjectionMasterFont.TabIndex = 56;
@@ -789,7 +766,6 @@
             this.tabControl1.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
             this.tabPage1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.trackBarLineSpacing)).EndInit();
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
             this.splitContainer1.Panel1.ResumeLayout(false);
@@ -857,9 +833,6 @@
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Button buttonSlideBackground;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Label labelLineSpacing;
-        private System.Windows.Forms.TrackBar trackBarLineSpacing;
         private System.Windows.Forms.Button buttonTranslationColor;
         private System.Windows.Forms.Button buttonTranslationFont;
         private System.Windows.Forms.Label labelFontTranslation;
@@ -869,5 +842,6 @@
         private System.Windows.Forms.GroupBox groupBox4;
         private System.Windows.Forms.ComboBox comboBoxSlideTextOrientation;
         private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button buttonApplyAlignmentToAll;
     }
 }
