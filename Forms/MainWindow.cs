@@ -325,17 +325,6 @@ namespace Pbp.Forms
 			GC.Collect();
 		}
 
-
-        private void listViewSongs_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            if (listViewSongs.SelectedItems.Count > 0)
-            {
-                SongManager.Instance.CurrentSong = SongManager.Instance.SongList[(Guid)listViewSongs.SelectedItems[0].Tag];
-                showCurrentSongDetails();
-                buttonSetListAdd.Enabled = true;
-            }
-        }
-
 		private void listViewSongs_MouseClick(object sender, MouseEventArgs e)
 		{
             if (listViewSongs.SelectedIndices.Count > 0)
@@ -349,8 +338,12 @@ namespace Pbp.Forms
                 }
                 else
                 {
-                    if (SongManager.Instance.CurrentSong.GUID != (Guid)listViewSongs.SelectedItems[0].Tag)
-                        listViewSongs_SelectedIndexChanged(sender, e);
+                    if (SongManager.Instance.CurrentSong==null || SongManager.Instance.CurrentSong.GUID != (Guid)listViewSongs.SelectedItems[0].Tag)
+                    {
+                            SongManager.Instance.CurrentSong = SongManager.Instance.SongList[(Guid)listViewSongs.SelectedItems[0].Tag];
+                            showCurrentSongDetails();
+                            buttonSetListAdd.Enabled = true;
+                    }
                 }
                 buttonSetListAdd.Enabled = true;                
             }
@@ -359,6 +352,16 @@ namespace Pbp.Forms
                 buttonSetListAdd.Enabled = false;
             }
 		}
+
+        private void listViewSongs_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (SongManager.Instance.CurrentSong == null || SongManager.Instance.CurrentSong.GUID != (Guid)listViewSongs.SelectedItems[0].Tag)
+            {
+                SongManager.Instance.CurrentSong = SongManager.Instance.SongList[(Guid)listViewSongs.SelectedItems[0].Tag];
+                showCurrentSongDetails();
+                buttonSetListAdd.Enabled = true;
+            }
+        }
 
         private void listViewSetList_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -1612,11 +1615,6 @@ namespace Pbp.Forms
             {
                 ((ListView)sender).Items[((ListView)sender).SelectedIndices[0]].Selected = false;
             }
-        }
-
-        private void toolStrip1_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
-        {
-
         }
     }
 }

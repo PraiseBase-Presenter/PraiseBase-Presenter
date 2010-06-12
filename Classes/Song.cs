@@ -118,6 +118,38 @@ namespace Pbp
         /// Gets or sets the text font
         /// </summary>
         public Font TextFont {get;set;}
+        /*
+        /// <summary>
+        /// Gets or sets the text font
+        /// </summary>
+        public String TextFontFamily { 
+            get {
+                return TextFont.FontFamily.Name;
+            }
+            set {
+                FontFamily ff = new FontFamily(value);
+                List<FontStyle> supportedStyles = new List<FontStyle>();
+                if (ff.IsStyleAvailable(FontStyle.Bold))
+                    supportedStyles.Add(FontStyle.Bold);
+                if (ff.IsStyleAvailable(FontStyle.Italic))
+                    supportedStyles.Add(FontStyle.Italic);
+                if (ff.IsStyleAvailable(FontStyle.Regular))
+                    supportedStyles.Add(FontStyle.Regular);
+                if (ff.IsStyleAvailable(FontStyle.Strikeout))
+                    supportedStyles.Add(FontStyle.Strikeout);
+                if (ff.IsStyleAvailable(FontStyle.Underline))
+                    supportedStyles.Add(FontStyle.Underline);
+                if (supportedStyles.Contains(TextFont.Style))
+                {
+                    TextFont = new Font(ff, TextFont.Size, TextFont.Style);
+                }
+                else
+                {
+                    TextFont = new Font(ff, TextFont.Size, supportedStyles[0]);
+                }
+            } 
+        }*/
+        
         /// <summary>
         /// Gets or sets the text color
         /// </summary>
@@ -900,9 +932,23 @@ namespace Pbp
                 Brush fontBrush;
                 Brush fontTranslationBrush;
 
-                if (Settings.Instance.ProjectionUseMaster) // && pr != ProjectionMode.Simulate
+
+                int padding = Settings.Instance.ProjectionPadding;
+                int shadowThickness = Settings.Instance.ProjectionShadowSize;
+                int outLineThickness = Settings.Instance.ProjectionOutlineSize;
+                String str = String.Empty;
+
+                int usableWidth = w - (2 * padding);
+                int usableHeight = h - (2 * padding);
+
+                float maxFontHeigthPercent = 0.15f; // 0.125f;
+
+                if (Settings.Instance.ProjectionUseMaster && pr != ProjectionMode.Simulate)
                 {
+                    //float bar = 12 * maxFontHeigthPercent * usableHeight / gr.MeasureString("M", new Font(Settings.Instance.ProjectionMasterFont.FontFamily, 12f, Settings.Instance.ProjectionMasterFont.Style)).Height;
+                    //font = new Font(Settings.Instance.ProjectionMasterFont.FontFamily, bar, Settings.Instance.ProjectionMasterFont.Style);
                     font = Settings.Instance.ProjectionMasterFont;
+
                     fontTr = Settings.Instance.ProjectionMasterFontTranslation;
                     lineSpacing = Settings.Instance.ProjectionMasterLineSpacing;
                     fontBrush = new SolidBrush(Settings.Instance.ProjectionMasterFontColor);
@@ -918,13 +964,6 @@ namespace Pbp
                 }
 
 
-                int padding = Settings.Instance.ProjectionPadding;
-                int shadowThickness = Settings.Instance.ProjectionShadowSize;
-                int outLineThickness = Settings.Instance.ProjectionOutlineSize;
-                String str = String.Empty;
-
-                int usableWidth = w - (2 * padding);
-                int usableHeight = h - (2 * padding);
 
                 int textStartX = padding;
                 int textStartY = padding;
@@ -1002,12 +1041,14 @@ namespace Pbp
                 int textX = textStartX;
                 int textY = textStartY;
 
+                // Apply shadow
                 if (pr != ProjectionMode.Simulate && shadowThickness > 0)
                 {
                     shadodBrush = new SolidBrush(Color.FromArgb(15, Settings.Instance.ProjectionShadowColor));
                     gr.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.HighQuality;
                     gr.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.HighQualityBilinear;
-                    gr.TextRenderingHint = TextRenderingHint.AntiAliasGridFit;
+                    // Does some problems when scaling the font
+                    //gr.TextRenderingHint = TextRenderingHint.AntiAliasGridFit;
 
                     foreach (string s in slide.Lines)
                     {
@@ -1022,6 +1063,7 @@ namespace Pbp
                     }
                     textY = textStartY;
                 }
+                // Apply thickness
                 if (pr != ProjectionMode.Simulate && outLineThickness > 0)
                 {
                     gr.SmoothingMode = SmoothingMode.None;

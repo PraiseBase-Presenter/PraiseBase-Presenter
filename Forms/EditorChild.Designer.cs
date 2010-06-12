@@ -83,9 +83,11 @@
             this.panel1 = new System.Windows.Forms.Panel();
             this.label4 = new System.Windows.Forms.Label();
             this.textBoxSongTitle = new System.Windows.Forms.TextBox();
-            this.treeViewContents = new TreeEx.TreeLE();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
+            this.comboBoxFont = new System.Windows.Forms.ComboBox();
+            this.comboBoxTextFontStyle = new System.Windows.Forms.ComboBox();
+            this.treeViewContents = new TreeEx.TreeLE();
             this.addContextMenu.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.slideContextMenu.SuspendLayout();
@@ -381,6 +383,8 @@
             // 
             // tabPage1
             // 
+            this.tabPage1.Controls.Add(this.comboBoxTextFontStyle);
+            this.tabPage1.Controls.Add(this.comboBoxFont);
             this.tabPage1.Controls.Add(this.buttonTranslationColor);
             this.tabPage1.Controls.Add(this.buttonTranslationFont);
             this.tabPage1.Controls.Add(this.labelFontTranslation);
@@ -399,7 +403,6 @@
             this.tabPage1.Text = "Inhalt";
             this.tabPage1.UseVisualStyleBackColor = true;
             this.tabPage1.Click += new System.EventHandler(this.tabPage1_Click);
-
             // 
             // buttonTranslationColor
             // 
@@ -415,7 +418,7 @@
             // 
             this.buttonTranslationFont.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.buttonTranslationFont.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.buttonTranslationFont.Location = new System.Drawing.Point(15, 542);
+            this.buttonTranslationFont.Location = new System.Drawing.Point(6, 483);
             this.buttonTranslationFont.Name = "buttonTranslationFont";
             this.buttonTranslationFont.Size = new System.Drawing.Size(100, 23);
             this.buttonTranslationFont.TabIndex = 101;
@@ -452,9 +455,9 @@
             this.panel2.Controls.Add(this.label5);
             this.panel2.Controls.Add(this.label3);
             this.panel2.Controls.Add(this.buttonSlideBackground);
-            this.panel2.Location = new System.Drawing.Point(645, 6);
+            this.panel2.Location = new System.Drawing.Point(651, 9);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(261, 300);
+            this.panel2.Size = new System.Drawing.Size(255, 300);
             this.panel2.TabIndex = 100;
             // 
             // buttonApplyAlignmentToAll
@@ -534,7 +537,7 @@
                         | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
             this.splitContainer1.IsSplitterFixed = true;
-            this.splitContainer1.Location = new System.Drawing.Point(239, 312);
+            this.splitContainer1.Location = new System.Drawing.Point(239, 315);
             this.splitContainer1.Name = "splitContainer1";
             // 
             // splitContainer1.Panel1
@@ -544,7 +547,7 @@
             // splitContainer1.Panel2
             // 
             this.splitContainer1.Panel2.Controls.Add(this.groupBox3);
-            this.splitContainer1.Size = new System.Drawing.Size(667, 317);
+            this.splitContainer1.Size = new System.Drawing.Size(667, 314);
             this.splitContainer1.SplitterDistance = 335;
             this.splitContainer1.TabIndex = 98;
             this.splitContainer1.Paint += new System.Windows.Forms.PaintEventHandler(this.splitContainer1_Paint);
@@ -558,7 +561,7 @@
             this.groupBox2.Controls.Add(this.textBoxSongText);
             this.groupBox2.Location = new System.Drawing.Point(3, 3);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(329, 311);
+            this.groupBox2.Size = new System.Drawing.Size(329, 308);
             this.groupBox2.TabIndex = 94;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Liedtext";
@@ -585,7 +588,7 @@
             this.textBoxSongText.Multiline = true;
             this.textBoxSongText.Name = "textBoxSongText";
             this.textBoxSongText.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.textBoxSongText.Size = new System.Drawing.Size(317, 229);
+            this.textBoxSongText.Size = new System.Drawing.Size(317, 226);
             this.textBoxSongText.TabIndex = 70;
             // 
             // groupBox3
@@ -599,7 +602,7 @@
             this.groupBox3.Controls.Add(this.textBoxSongTranslation);
             this.groupBox3.Location = new System.Drawing.Point(3, 3);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(322, 311);
+            this.groupBox3.Size = new System.Drawing.Size(322, 308);
             this.groupBox3.TabIndex = 95;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Übersetzung";
@@ -646,14 +649,14 @@
             this.textBoxSongTranslation.Multiline = true;
             this.textBoxSongTranslation.Name = "textBoxSongTranslation";
             this.textBoxSongTranslation.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.textBoxSongTranslation.Size = new System.Drawing.Size(310, 229);
+            this.textBoxSongTranslation.Size = new System.Drawing.Size(310, 226);
             this.textBoxSongTranslation.TabIndex = 80;
             // 
             // buttonProjectionMasterFont
             // 
             this.buttonProjectionMasterFont.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.buttonProjectionMasterFont.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.buttonProjectionMasterFont.Location = new System.Drawing.Point(15, 571);
+            this.buttonProjectionMasterFont.Location = new System.Drawing.Point(6, 512);
             this.buttonProjectionMasterFont.Name = "buttonProjectionMasterFont";
             this.buttonProjectionMasterFont.Size = new System.Drawing.Size(100, 23);
             this.buttonProjectionMasterFont.TabIndex = 56;
@@ -663,13 +666,15 @@
             // pictureBoxPreview
             // 
             this.pictureBoxPreview.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pictureBoxPreview.Location = new System.Drawing.Point(239, 6);
+            this.pictureBoxPreview.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.pictureBoxPreview.Location = new System.Drawing.Point(245, 9);
             this.pictureBoxPreview.MinimumSize = new System.Drawing.Size(400, 300);
             this.pictureBoxPreview.Name = "pictureBoxPreview";
             this.pictureBoxPreview.Size = new System.Drawing.Size(400, 300);
             this.pictureBoxPreview.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureBoxPreview.TabIndex = 90;
             this.pictureBoxPreview.TabStop = false;
+            this.pictureBoxPreview.Click += new System.EventHandler(this.pictureBoxPreview_Click);
             // 
             // panel1
             // 
@@ -704,23 +709,6 @@
             this.textBoxSongTitle.TabIndex = 18;
             this.textBoxSongTitle.TextChanged += new System.EventHandler(this.textBoxSongTitle_TextChanged);
             // 
-            // treeViewContents
-            // 
-            this.treeViewContents.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Left)));
-            this.treeViewContents.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.treeViewContents.HideSelection = false;
-            this.treeViewContents.Location = new System.Drawing.Point(3, 30);
-            this.treeViewContents.Name = "treeViewContents";
-            this.treeViewContents.ShowPlusMinus = false;
-            this.treeViewContents.Size = new System.Drawing.Size(218, 397);
-            this.treeViewContents.TabIndex = 0;
-            this.treeViewContents.ValidateLabelEdit += new TreeEx.TreeLE.ValidateLabelEditEventHandler(this.treeViewContents_ValidateLabelEdit);
-            this.treeViewContents.BeforeLabelEdit += new System.Windows.Forms.NodeLabelEditEventHandler(this.treeViewContents_BeforeLabelEdit);
-            this.treeViewContents.AfterLabelEdit += new System.Windows.Forms.NodeLabelEditEventHandler(this.treeViewContents_AfterLabelEdit);
-            this.treeViewContents.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.treeViewContents_AfterSelect);
-            this.treeViewContents.KeyDown += new System.Windows.Forms.KeyEventHandler(this.treeViewContents_KeyDown);
-            // 
             // tabPage2
             // 
             this.tabPage2.Controls.Add(this.groupBox4);
@@ -742,6 +730,43 @@
             this.groupBox4.TabIndex = 70;
             this.groupBox4.TabStop = false;
             this.groupBox4.Text = "Tags";
+            // 
+            // comboBoxFont
+            // 
+            this.comboBoxFont.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBoxFont.FormattingEnabled = true;
+            this.comboBoxFont.Location = new System.Drawing.Point(6, 552);
+            this.comboBoxFont.Name = "comboBoxFont";
+            this.comboBoxFont.Size = new System.Drawing.Size(121, 21);
+            this.comboBoxFont.TabIndex = 104;
+            this.comboBoxFont.SelectedIndexChanged += new System.EventHandler(this.comboBoxFont_SelectedIndexChanged);
+            // 
+            // comboBoxTextFontStyle
+            // 
+            this.comboBoxTextFontStyle.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBoxTextFontStyle.FormattingEnabled = true;
+            this.comboBoxTextFontStyle.Location = new System.Drawing.Point(144, 552);
+            this.comboBoxTextFontStyle.Name = "comboBoxTextFontStyle";
+            this.comboBoxTextFontStyle.Size = new System.Drawing.Size(83, 21);
+            this.comboBoxTextFontStyle.TabIndex = 105;
+            this.comboBoxTextFontStyle.SelectedIndexChanged += new System.EventHandler(this.comboBoxTextFontStyle_SelectedIndexChanged);
+            // 
+            // treeViewContents
+            // 
+            this.treeViewContents.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+                        | System.Windows.Forms.AnchorStyles.Left)));
+            this.treeViewContents.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.treeViewContents.HideSelection = false;
+            this.treeViewContents.Location = new System.Drawing.Point(3, 30);
+            this.treeViewContents.Name = "treeViewContents";
+            this.treeViewContents.ShowPlusMinus = false;
+            this.treeViewContents.Size = new System.Drawing.Size(218, 397);
+            this.treeViewContents.TabIndex = 0;
+            this.treeViewContents.ValidateLabelEdit += new TreeEx.TreeLE.ValidateLabelEditEventHandler(this.treeViewContents_ValidateLabelEdit);
+            this.treeViewContents.BeforeLabelEdit += new System.Windows.Forms.NodeLabelEditEventHandler(this.treeViewContents_BeforeLabelEdit);
+            this.treeViewContents.AfterLabelEdit += new System.Windows.Forms.NodeLabelEditEventHandler(this.treeViewContents_AfterLabelEdit);
+            this.treeViewContents.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.treeViewContents_AfterSelect);
+            this.treeViewContents.KeyDown += new System.Windows.Forms.KeyEventHandler(this.treeViewContents_KeyDown);
             // 
             // EditorChild
             // 
@@ -843,5 +868,7 @@
         private System.Windows.Forms.ComboBox comboBoxSlideTextOrientation;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button buttonApplyAlignmentToAll;
+        private System.Windows.Forms.ComboBox comboBoxFont;
+        private System.Windows.Forms.ComboBox comboBoxTextFontStyle;
     }
 }
