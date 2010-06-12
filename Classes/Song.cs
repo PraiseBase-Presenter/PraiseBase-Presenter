@@ -941,7 +941,7 @@ namespace Pbp
                 int usableWidth = w - (2 * padding);
                 int usableHeight = h - (2 * padding);
 
-                float maxFontHeigthPercent = 0.15f; // 0.125f;
+                //float maxFontHeigthPercent = 0.15f; // 0.125f;
 
                 if (Settings.Instance.ProjectionUseMaster && pr != ProjectionMode.Simulate)
                 {
