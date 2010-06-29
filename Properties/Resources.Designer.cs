@@ -362,6 +362,20 @@ namespace Pbp.Properties {
             }
         }
         
+        internal static System.Drawing.Bitmap searchg {
+            get {
+                object obj = ResourceManager.GetObject("searchg", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap searchx {
+            get {
+                object obj = ResourceManager.GetObject("searchx", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
         internal static System.Drawing.Bitmap star {
             get {
                 object obj = ResourceManager.GetObject("star", resourceCulture);

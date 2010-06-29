@@ -69,14 +69,6 @@
             this.webToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
             this.infoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.groupBox4 = new System.Windows.Forms.GroupBox();
-            this.buttonOpenSetList = new System.Windows.Forms.Button();
-            this.buttonSaveSetList = new System.Windows.Forms.Button();
-            this.buttonSetListAdd = new System.Windows.Forms.Button();
-            this.buttonSetListClear = new System.Windows.Forms.Button();
-            this.buttonSetListRem = new System.Windows.Forms.Button();
-            this.buttonSetListDown = new System.Windows.Forms.Button();
-            this.buttonSetListUp = new System.Windows.Forms.Button();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.toolStripButtonProjectionOff = new System.Windows.Forms.ToolStripButton();
             this.toolStripButtonBlackout = new System.Windows.Forms.ToolStripButton();
@@ -102,7 +94,18 @@
             this.toolStripStatusLabelInfo = new System.Windows.Forms.ToolStripStatusLabel();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.groupBox4 = new System.Windows.Forms.GroupBox();
+            this.buttonOpenSetList = new System.Windows.Forms.Button();
+            this.buttonSaveSetList = new System.Windows.Forms.Button();
+            this.buttonSetListAdd = new System.Windows.Forms.Button();
+            this.buttonSetListClear = new System.Windows.Forms.Button();
+            this.listViewSetList = new Bol.WinControls.ListViewEx();
+            this.columnHeader4 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.buttonSetListRem = new System.Windows.Forms.Button();
+            this.buttonSetListDown = new System.Windows.Forms.Button();
+            this.buttonSetListUp = new System.Windows.Forms.Button();
             this.groupBoxSongContents = new System.Windows.Forms.GroupBox();
+            this.songDetailElement = new SongDetails.SongDetail();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.listViewSongs = new System.Windows.Forms.ListView();
             this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
@@ -112,9 +115,9 @@
             this.songSearchResetButton = new System.Windows.Forms.Button();
             this.songSearchBox = new System.Windows.Forms.TextBox();
             this.tabPage2 = new System.Windows.Forms.TabPage();
-            this.label8 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
+            this.label8 = new System.Windows.Forms.Label();
             this.comboBox2 = new System.Windows.Forms.ComboBox();
             this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.buttonClearText = new System.Windows.Forms.Button();
@@ -150,25 +153,24 @@
             this.listViewImageQueue = new System.Windows.Forms.ListView();
             this.columnHeader6 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.buttonResetImageQueue = new System.Windows.Forms.Button();
-            this.timerElementHighlight = new System.Windows.Forms.Timer(this.components);
-            this.trackBarFadeTimer = new System.Windows.Forms.TrackBar();
-            this.labelFadeTime = new System.Windows.Forms.Label();
-            this.label7 = new System.Windows.Forms.Label();
-            this.pictureBoxPreview = new System.Windows.Forms.PictureBox();
-            this.progressBarTransition = new System.Windows.Forms.ProgressBar();
-            this.buttonToggleLayerMode = new System.Windows.Forms.Button();
-            this.label3 = new System.Windows.Forms.Label();
             this.groupBox5 = new System.Windows.Forms.GroupBox();
-            this.songDetailElement = new SongDetails.SongDetail();
-            this.listViewSetList = new Bol.WinControls.ListViewEx();
-            this.columnHeader4 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.label6 = new System.Windows.Forms.Label();
+            this.radioButtonFade3 = new System.Windows.Forms.RadioButton();
+            this.radioButtonFade2 = new System.Windows.Forms.RadioButton();
+            this.radioButtonFade1 = new System.Windows.Forms.RadioButton();
+            this.radioButtonFade0 = new System.Windows.Forms.RadioButton();
+            this.label3 = new System.Windows.Forms.Label();
+            this.buttonToggleLayerMode = new System.Windows.Forms.Button();
+            this.progressBarTransition = new System.Windows.Forms.ProgressBar();
+            this.pictureBoxPreview = new System.Windows.Forms.PictureBox();
+            this.timerElementHighlight = new System.Windows.Forms.Timer(this.components);
             buttonChooseDiaDir = new System.Windows.Forms.Button();
             this.menuStrip1.SuspendLayout();
-            this.groupBox4.SuspendLayout();
             this.toolStrip1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
+            this.groupBox4.SuspendLayout();
             this.groupBoxSongContents.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.tabPage2.SuspendLayout();
@@ -181,9 +183,8 @@
             this.tableLayoutPanel1.SuspendLayout();
             this.panel1.SuspendLayout();
             this.groupBoxImageStack.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.trackBarFadeTimer)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxPreview)).BeginInit();
             this.groupBox5.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxPreview)).BeginInit();
             this.SuspendLayout();
             // 
             // buttonChooseDiaDir
@@ -495,120 +496,6 @@
             this.infoToolStripMenuItem.Text = "&Info...";
             this.infoToolStripMenuItem.Click += new System.EventHandler(this.infoToolStripMenuItem_Click);
             // 
-            // groupBox4
-            // 
-            this.groupBox4.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Right)));
-            this.groupBox4.Controls.Add(this.buttonOpenSetList);
-            this.groupBox4.Controls.Add(this.buttonSaveSetList);
-            this.groupBox4.Controls.Add(this.buttonSetListAdd);
-            this.groupBox4.Controls.Add(this.buttonSetListClear);
-            this.groupBox4.Controls.Add(this.listViewSetList);
-            this.groupBox4.Controls.Add(this.buttonSetListRem);
-            this.groupBox4.Controls.Add(this.buttonSetListDown);
-            this.groupBox4.Controls.Add(this.buttonSetListUp);
-            this.groupBox4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.groupBox4.Location = new System.Drawing.Point(753, 404);
-            this.groupBox4.Name = "groupBox4";
-            this.groupBox4.Size = new System.Drawing.Size(247, 301);
-            this.groupBox4.TabIndex = 26;
-            this.groupBox4.TabStop = false;
-            this.groupBox4.Text = "Setliste";
-            // 
-            // buttonOpenSetList
-            // 
-            this.buttonOpenSetList.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.buttonOpenSetList.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.buttonOpenSetList.Image = global::Pbp.Properties.Resources.fileopen;
-            this.buttonOpenSetList.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.buttonOpenSetList.Location = new System.Drawing.Point(209, 269);
-            this.buttonOpenSetList.Name = "buttonOpenSetList";
-            this.buttonOpenSetList.Size = new System.Drawing.Size(26, 23);
-            this.buttonOpenSetList.TabIndex = 31;
-            this.buttonOpenSetList.UseVisualStyleBackColor = true;
-            this.buttonOpenSetList.Click += new System.EventHandler(this.buttonOpenSetList_Click);
-            // 
-            // buttonSaveSetList
-            // 
-            this.buttonSaveSetList.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.buttonSaveSetList.Enabled = false;
-            this.buttonSaveSetList.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.buttonSaveSetList.Image = global::Pbp.Properties.Resources.filesave;
-            this.buttonSaveSetList.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.buttonSaveSetList.Location = new System.Drawing.Point(175, 269);
-            this.buttonSaveSetList.Name = "buttonSaveSetList";
-            this.buttonSaveSetList.Size = new System.Drawing.Size(26, 23);
-            this.buttonSaveSetList.TabIndex = 30;
-            this.buttonSaveSetList.UseVisualStyleBackColor = true;
-            this.buttonSaveSetList.Click += new System.EventHandler(this.buttonSaveSetList_Click);
-            // 
-            // buttonSetListAdd
-            // 
-            this.buttonSetListAdd.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.buttonSetListAdd.Enabled = false;
-            this.buttonSetListAdd.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.buttonSetListAdd.Image = global::Pbp.Properties.Resources.edit_add;
-            this.buttonSetListAdd.Location = new System.Drawing.Point(13, 269);
-            this.buttonSetListAdd.Name = "buttonSetListAdd";
-            this.buttonSetListAdd.Size = new System.Drawing.Size(24, 23);
-            this.buttonSetListAdd.TabIndex = 29;
-            this.buttonSetListAdd.UseVisualStyleBackColor = true;
-            this.buttonSetListAdd.Click += new System.EventHandler(this.buttonSetListAdd_Click);
-            // 
-            // buttonSetListClear
-            // 
-            this.buttonSetListClear.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.buttonSetListClear.Enabled = false;
-            this.buttonSetListClear.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.buttonSetListClear.Image = global::Pbp.Properties.Resources.trash;
-            this.buttonSetListClear.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.buttonSetListClear.Location = new System.Drawing.Point(141, 269);
-            this.buttonSetListClear.Name = "buttonSetListClear";
-            this.buttonSetListClear.Size = new System.Drawing.Size(26, 23);
-            this.buttonSetListClear.TabIndex = 28;
-            this.buttonSetListClear.UseVisualStyleBackColor = true;
-            this.buttonSetListClear.Click += new System.EventHandler(this.buttonSetListClear_Click);
-            // 
-            // buttonSetListRem
-            // 
-            this.buttonSetListRem.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.buttonSetListRem.Enabled = false;
-            this.buttonSetListRem.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.buttonSetListRem.Image = global::Pbp.Properties.Resources.edit_remove;
-            this.buttonSetListRem.ImageAlign = System.Drawing.ContentAlignment.BottomLeft;
-            this.buttonSetListRem.Location = new System.Drawing.Point(107, 269);
-            this.buttonSetListRem.Name = "buttonSetListRem";
-            this.buttonSetListRem.Size = new System.Drawing.Size(26, 23);
-            this.buttonSetListRem.TabIndex = 26;
-            this.buttonSetListRem.UseVisualStyleBackColor = true;
-            this.buttonSetListRem.Click += new System.EventHandler(this.buttonSetListRem_Click);
-            // 
-            // buttonSetListDown
-            // 
-            this.buttonSetListDown.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.buttonSetListDown.Enabled = false;
-            this.buttonSetListDown.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.buttonSetListDown.Image = global::Pbp.Properties.Resources.arrowdown;
-            this.buttonSetListDown.Location = new System.Drawing.Point(75, 269);
-            this.buttonSetListDown.Name = "buttonSetListDown";
-            this.buttonSetListDown.Size = new System.Drawing.Size(24, 23);
-            this.buttonSetListDown.TabIndex = 25;
-            this.buttonSetListDown.UseVisualStyleBackColor = true;
-            this.buttonSetListDown.Click += new System.EventHandler(this.buttonSetListDown_Click);
-            // 
-            // buttonSetListUp
-            // 
-            this.buttonSetListUp.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.buttonSetListUp.Enabled = false;
-            this.buttonSetListUp.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.buttonSetListUp.Image = global::Pbp.Properties.Resources.arrowup;
-            this.buttonSetListUp.Location = new System.Drawing.Point(44, 269);
-            this.buttonSetListUp.Name = "buttonSetListUp";
-            this.buttonSetListUp.Size = new System.Drawing.Size(24, 23);
-            this.buttonSetListUp.TabIndex = 24;
-            this.buttonSetListUp.UseVisualStyleBackColor = true;
-            this.buttonSetListUp.Click += new System.EventHandler(this.buttonSetListUp_Click);
-            // 
             // toolStrip1
             // 
             this.toolStrip1.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
@@ -835,27 +722,164 @@
             this.tabControl1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
                         | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
+            this.tableLayoutPanel1.SetColumnSpan(this.tabControl1, 2);
             this.tabControl1.Controls.Add(this.tabPage1);
             this.tabControl1.Controls.Add(this.tabPage2);
             this.tabControl1.ItemSize = new System.Drawing.Size(60, 25);
             this.tabControl1.Location = new System.Drawing.Point(3, 3);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(741, 297);
+            this.tabControl1.Size = new System.Drawing.Size(1002, 297);
             this.tabControl1.TabIndex = 20;
             this.tabControl1.SelectedIndexChanged += new System.EventHandler(this.tabControl1_SelectedIndexChanged);
             // 
             // tabPage1
             // 
+            this.tabPage1.Controls.Add(this.groupBox4);
             this.tabPage1.Controls.Add(this.groupBoxSongContents);
             this.tabPage1.Controls.Add(this.groupBox2);
             this.tabPage1.Location = new System.Drawing.Point(4, 29);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(733, 264);
+            this.tabPage1.Size = new System.Drawing.Size(994, 264);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Liedetexte";
             this.tabPage1.UseVisualStyleBackColor = true;
+            // 
+            // groupBox4
+            // 
+            this.groupBox4.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupBox4.Controls.Add(this.buttonOpenSetList);
+            this.groupBox4.Controls.Add(this.buttonSaveSetList);
+            this.groupBox4.Controls.Add(this.buttonSetListAdd);
+            this.groupBox4.Controls.Add(this.buttonSetListClear);
+            this.groupBox4.Controls.Add(this.listViewSetList);
+            this.groupBox4.Controls.Add(this.buttonSetListRem);
+            this.groupBox4.Controls.Add(this.buttonSetListDown);
+            this.groupBox4.Controls.Add(this.buttonSetListUp);
+            this.groupBox4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.groupBox4.Location = new System.Drawing.Point(741, 2);
+            this.groupBox4.Name = "groupBox4";
+            this.groupBox4.Size = new System.Drawing.Size(247, 262);
+            this.groupBox4.TabIndex = 41;
+            this.groupBox4.TabStop = false;
+            this.groupBox4.Text = "Setliste";
+            // 
+            // buttonOpenSetList
+            // 
+            this.buttonOpenSetList.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.buttonOpenSetList.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.buttonOpenSetList.Image = global::Pbp.Properties.Resources.fileopen;
+            this.buttonOpenSetList.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.buttonOpenSetList.Location = new System.Drawing.Point(209, 230);
+            this.buttonOpenSetList.Name = "buttonOpenSetList";
+            this.buttonOpenSetList.Size = new System.Drawing.Size(26, 23);
+            this.buttonOpenSetList.TabIndex = 31;
+            this.buttonOpenSetList.UseVisualStyleBackColor = true;
+            this.buttonOpenSetList.Click += new System.EventHandler(this.buttonOpenSetList_Click);
+            // 
+            // buttonSaveSetList
+            // 
+            this.buttonSaveSetList.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.buttonSaveSetList.Enabled = false;
+            this.buttonSaveSetList.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.buttonSaveSetList.Image = global::Pbp.Properties.Resources.filesave;
+            this.buttonSaveSetList.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.buttonSaveSetList.Location = new System.Drawing.Point(175, 230);
+            this.buttonSaveSetList.Name = "buttonSaveSetList";
+            this.buttonSaveSetList.Size = new System.Drawing.Size(26, 23);
+            this.buttonSaveSetList.TabIndex = 30;
+            this.buttonSaveSetList.UseVisualStyleBackColor = true;
+            this.buttonSaveSetList.Click += new System.EventHandler(this.buttonSaveSetList_Click);
+            // 
+            // buttonSetListAdd
+            // 
+            this.buttonSetListAdd.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.buttonSetListAdd.Enabled = false;
+            this.buttonSetListAdd.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.buttonSetListAdd.Image = global::Pbp.Properties.Resources.edit_add;
+            this.buttonSetListAdd.Location = new System.Drawing.Point(13, 230);
+            this.buttonSetListAdd.Name = "buttonSetListAdd";
+            this.buttonSetListAdd.Size = new System.Drawing.Size(24, 23);
+            this.buttonSetListAdd.TabIndex = 29;
+            this.buttonSetListAdd.UseVisualStyleBackColor = true;
+            this.buttonSetListAdd.Click += new System.EventHandler(this.buttonSetListAdd_Click);
+            // 
+            // buttonSetListClear
+            // 
+            this.buttonSetListClear.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.buttonSetListClear.Enabled = false;
+            this.buttonSetListClear.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.buttonSetListClear.Image = global::Pbp.Properties.Resources.trash;
+            this.buttonSetListClear.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.buttonSetListClear.Location = new System.Drawing.Point(141, 230);
+            this.buttonSetListClear.Name = "buttonSetListClear";
+            this.buttonSetListClear.Size = new System.Drawing.Size(26, 23);
+            this.buttonSetListClear.TabIndex = 28;
+            this.buttonSetListClear.UseVisualStyleBackColor = true;
+            this.buttonSetListClear.Click += new System.EventHandler(this.buttonSetListClear_Click);
+            // 
+            // listViewSetList
+            // 
+            this.listViewSetList.AllowDrop = true;
+            this.listViewSetList.AllowRowReorder = true;
+            this.listViewSetList.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.listViewSetList.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.columnHeader4});
+            this.listViewSetList.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.listViewSetList.FullRowSelect = true;
+            this.listViewSetList.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.None;
+            this.listViewSetList.HideSelection = false;
+            this.listViewSetList.Location = new System.Drawing.Point(5, 16);
+            this.listViewSetList.MultiSelect = false;
+            this.listViewSetList.Name = "listViewSetList";
+            this.listViewSetList.Size = new System.Drawing.Size(234, 208);
+            this.listViewSetList.TabIndex = 27;
+            this.listViewSetList.UseCompatibleStateImageBehavior = false;
+            this.listViewSetList.View = System.Windows.Forms.View.Details;
+            this.listViewSetList.SelectedIndexChanged += new System.EventHandler(this.listViewSetList_SelectedIndexChanged);
+            // 
+            // buttonSetListRem
+            // 
+            this.buttonSetListRem.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.buttonSetListRem.Enabled = false;
+            this.buttonSetListRem.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.buttonSetListRem.Image = global::Pbp.Properties.Resources.edit_remove;
+            this.buttonSetListRem.ImageAlign = System.Drawing.ContentAlignment.BottomLeft;
+            this.buttonSetListRem.Location = new System.Drawing.Point(107, 230);
+            this.buttonSetListRem.Name = "buttonSetListRem";
+            this.buttonSetListRem.Size = new System.Drawing.Size(26, 23);
+            this.buttonSetListRem.TabIndex = 26;
+            this.buttonSetListRem.UseVisualStyleBackColor = true;
+            this.buttonSetListRem.Click += new System.EventHandler(this.buttonSetListRem_Click);
+            // 
+            // buttonSetListDown
+            // 
+            this.buttonSetListDown.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.buttonSetListDown.Enabled = false;
+            this.buttonSetListDown.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.buttonSetListDown.Image = global::Pbp.Properties.Resources.arrowdown;
+            this.buttonSetListDown.Location = new System.Drawing.Point(75, 230);
+            this.buttonSetListDown.Name = "buttonSetListDown";
+            this.buttonSetListDown.Size = new System.Drawing.Size(24, 23);
+            this.buttonSetListDown.TabIndex = 25;
+            this.buttonSetListDown.UseVisualStyleBackColor = true;
+            this.buttonSetListDown.Click += new System.EventHandler(this.buttonSetListDown_Click);
+            // 
+            // buttonSetListUp
+            // 
+            this.buttonSetListUp.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.buttonSetListUp.Enabled = false;
+            this.buttonSetListUp.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.buttonSetListUp.Image = global::Pbp.Properties.Resources.arrowup;
+            this.buttonSetListUp.Location = new System.Drawing.Point(44, 230);
+            this.buttonSetListUp.Name = "buttonSetListUp";
+            this.buttonSetListUp.Size = new System.Drawing.Size(24, 23);
+            this.buttonSetListUp.TabIndex = 24;
+            this.buttonSetListUp.UseVisualStyleBackColor = true;
+            this.buttonSetListUp.Click += new System.EventHandler(this.buttonSetListUp_Click);
             // 
             // groupBoxSongContents
             // 
@@ -866,10 +890,26 @@
             this.groupBoxSongContents.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.groupBoxSongContents.Location = new System.Drawing.Point(249, 2);
             this.groupBoxSongContents.Name = "groupBoxSongContents";
-            this.groupBoxSongContents.Size = new System.Drawing.Size(482, 262);
+            this.groupBoxSongContents.Size = new System.Drawing.Size(486, 262);
             this.groupBoxSongContents.TabIndex = 32;
             this.groupBoxSongContents.TabStop = false;
             this.groupBoxSongContents.Text = "Liedinhalt";
+            // 
+            // songDetailElement
+            // 
+            this.songDetailElement.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+                        | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.songDetailElement.AutoScroll = true;
+            this.songDetailElement.BackColor = System.Drawing.Color.White;
+            this.songDetailElement.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.songDetailElement.ForeColor = System.Drawing.SystemColors.WindowText;
+            this.songDetailElement.Location = new System.Drawing.Point(6, 16);
+            this.songDetailElement.Name = "songDetailElement";
+            this.songDetailElement.Size = new System.Drawing.Size(474, 240);
+            this.songDetailElement.TabIndex = 20;
+            this.songDetailElement.SlideClicked += new SongDetails.SongDetail.slideClick(this.songDetailElement_SlideClicked);
+            this.songDetailElement.ImageClicked += new SongDetails.SongDetail.imageClick(this.songDetailElement_ImageClicked);
             // 
             // groupBox2
             // 
@@ -966,9 +1006,9 @@
             // 
             // tabPage2
             // 
-            this.tabPage2.Controls.Add(this.label8);
             this.tabPage2.Controls.Add(this.label5);
             this.tabPage2.Controls.Add(this.numericUpDown1);
+            this.tabPage2.Controls.Add(this.label8);
             this.tabPage2.Controls.Add(this.comboBox2);
             this.tabPage2.Controls.Add(this.comboBox1);
             this.tabPage2.Controls.Add(this.buttonClearText);
@@ -977,35 +1017,25 @@
             this.tabPage2.Location = new System.Drawing.Point(4, 29);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(733, 264);
+            this.tabPage2.Size = new System.Drawing.Size(994, 264);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Live-Text";
             this.tabPage2.UseVisualStyleBackColor = true;
             // 
-            // label8
-            // 
-            this.label8.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(150, 242);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(66, 13);
-            this.label8.TabIndex = 7;
-            this.label8.Text = "Ausrichtung:";
-            // 
             // label5
             // 
-            this.label5.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.label5.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(6, 242);
+            this.label5.Location = new System.Drawing.Point(748, 15);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(71, 13);
-            this.label5.TabIndex = 6;
+            this.label5.TabIndex = 9;
             this.label5.Text = "Schriftgrösse:";
             // 
             // numericUpDown1
             // 
-            this.numericUpDown1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.numericUpDown1.Location = new System.Drawing.Point(83, 238);
+            this.numericUpDown1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.numericUpDown1.Location = new System.Drawing.Point(825, 11);
             this.numericUpDown1.Maximum = new decimal(new int[] {
             150,
             0,
@@ -1018,7 +1048,7 @@
             0});
             this.numericUpDown1.Name = "numericUpDown1";
             this.numericUpDown1.Size = new System.Drawing.Size(52, 20);
-            this.numericUpDown1.TabIndex = 5;
+            this.numericUpDown1.TabIndex = 8;
             this.numericUpDown1.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.numericUpDown1.Value = new decimal(new int[] {
             60,
@@ -1026,40 +1056,50 @@
             0,
             0});
             // 
+            // label8
+            // 
+            this.label8.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(748, 41);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(66, 13);
+            this.label8.TabIndex = 7;
+            this.label8.Text = "Ausrichtung:";
+            // 
             // comboBox2
             // 
-            this.comboBox2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.comboBox2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.comboBox2.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBox2.FormattingEnabled = true;
             this.comboBox2.Items.AddRange(new object[] {
             "Oben",
             "Mitte",
             "Unten"});
-            this.comboBox2.Location = new System.Drawing.Point(311, 237);
+            this.comboBox2.Location = new System.Drawing.Point(909, 36);
             this.comboBox2.Name = "comboBox2";
             this.comboBox2.Size = new System.Drawing.Size(80, 21);
             this.comboBox2.TabIndex = 4;
             // 
             // comboBox1
             // 
-            this.comboBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.comboBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.comboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBox1.FormattingEnabled = true;
             this.comboBox1.Items.AddRange(new object[] {
             "Links",
             "Zentriert",
             "Rechts"});
-            this.comboBox1.Location = new System.Drawing.Point(222, 237);
+            this.comboBox1.Location = new System.Drawing.Point(820, 36);
             this.comboBox1.Name = "comboBox1";
             this.comboBox1.Size = new System.Drawing.Size(80, 21);
             this.comboBox1.TabIndex = 3;
             // 
             // buttonClearText
             // 
-            this.buttonClearText.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.buttonClearText.Location = new System.Drawing.Point(624, 237);
+            this.buttonClearText.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.buttonClearText.Location = new System.Drawing.Point(874, 72);
             this.buttonClearText.Name = "buttonClearText";
-            this.buttonClearText.Size = new System.Drawing.Size(104, 23);
+            this.buttonClearText.Size = new System.Drawing.Size(115, 23);
             this.buttonClearText.TabIndex = 2;
             this.buttonClearText.Text = "Text ausblenden";
             this.buttonClearText.UseVisualStyleBackColor = true;
@@ -1067,10 +1107,10 @@
             // 
             // buttonShowLiveText
             // 
-            this.buttonShowLiveText.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.buttonShowLiveText.Location = new System.Drawing.Point(514, 237);
+            this.buttonShowLiveText.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.buttonShowLiveText.Location = new System.Drawing.Point(750, 72);
             this.buttonShowLiveText.Name = "buttonShowLiveText";
-            this.buttonShowLiveText.Size = new System.Drawing.Size(104, 23);
+            this.buttonShowLiveText.Size = new System.Drawing.Size(115, 23);
             this.buttonShowLiveText.TabIndex = 1;
             this.buttonShowLiveText.Text = "Text einblenden";
             this.buttonShowLiveText.UseVisualStyleBackColor = true;
@@ -1085,7 +1125,7 @@
             this.textBoxLiveText.Location = new System.Drawing.Point(6, 7);
             this.textBoxLiveText.Multiline = true;
             this.textBoxLiveText.Name = "textBoxLiveText";
-            this.textBoxLiveText.Size = new System.Drawing.Size(721, 224);
+            this.textBoxLiveText.Size = new System.Drawing.Size(736, 251);
             this.textBoxLiveText.TabIndex = 0;
             // 
             // tabControl2
@@ -1101,7 +1141,7 @@
             this.tabControl2.Location = new System.Drawing.Point(4, 4);
             this.tabControl2.Name = "tabControl2";
             this.tabControl2.SelectedIndex = 0;
-            this.tabControl2.Size = new System.Drawing.Size(598, 291);
+            this.tabControl2.Size = new System.Drawing.Size(599, 291);
             this.tabControl2.TabIndex = 0;
             // 
             // tabPageImageBrowser
@@ -1116,7 +1156,7 @@
             this.tabPageImageBrowser.Location = new System.Drawing.Point(4, 29);
             this.tabPageImageBrowser.Name = "tabPageImageBrowser";
             this.tabPageImageBrowser.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageImageBrowser.Size = new System.Drawing.Size(590, 258);
+            this.tabPageImageBrowser.Size = new System.Drawing.Size(591, 258);
             this.tabPageImageBrowser.TabIndex = 0;
             this.tabPageImageBrowser.Text = "Bildsammlung";
             this.tabPageImageBrowser.UseVisualStyleBackColor = true;
@@ -1151,7 +1191,7 @@
             this.listViewDirectoryImages.Location = new System.Drawing.Point(234, 31);
             this.listViewDirectoryImages.MultiSelect = false;
             this.listViewDirectoryImages.Name = "listViewDirectoryImages";
-            this.listViewDirectoryImages.Size = new System.Drawing.Size(354, 227);
+            this.listViewDirectoryImages.Size = new System.Drawing.Size(355, 227);
             this.listViewDirectoryImages.TabIndex = 1;
             this.listViewDirectoryImages.UseCompatibleStateImageBehavior = false;
             this.listViewDirectoryImages.SelectedIndexChanged += new System.EventHandler(this.listViewDirectoryImages_SelectedIndexChanged);
@@ -1191,7 +1231,7 @@
             // buttonClearImageHistory
             // 
             this.buttonClearImageHistory.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.buttonClearImageHistory.Location = new System.Drawing.Point(447, 279);
+            this.buttonClearImageHistory.Location = new System.Drawing.Point(448, 279);
             this.buttonClearImageHistory.Name = "buttonClearImageHistory";
             this.buttonClearImageHistory.Size = new System.Drawing.Size(121, 23);
             this.buttonClearImageHistory.TabIndex = 22;
@@ -1205,7 +1245,7 @@
             this.tabPageImageHistory.Controls.Add(this.listViewImageHistory);
             this.tabPageImageHistory.Location = new System.Drawing.Point(4, 29);
             this.tabPageImageHistory.Name = "tabPageImageHistory";
-            this.tabPageImageHistory.Size = new System.Drawing.Size(590, 258);
+            this.tabPageImageHistory.Size = new System.Drawing.Size(591, 258);
             this.tabPageImageHistory.TabIndex = 3;
             this.tabPageImageHistory.Text = "Verlauf";
             // 
@@ -1237,7 +1277,7 @@
             this.tabPageImageFavorites.Location = new System.Drawing.Point(4, 29);
             this.tabPageImageFavorites.Name = "tabPageImageFavorites";
             this.tabPageImageFavorites.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageImageFavorites.Size = new System.Drawing.Size(590, 258);
+            this.tabPageImageFavorites.Size = new System.Drawing.Size(591, 258);
             this.tabPageImageFavorites.TabIndex = 2;
             this.tabPageImageFavorites.Text = "Favoriten";
             this.tabPageImageFavorites.UseVisualStyleBackColor = true;
@@ -1272,7 +1312,7 @@
             this.tabPageSlideShow.Location = new System.Drawing.Point(4, 29);
             this.tabPageSlideShow.Name = "tabPageSlideShow";
             this.tabPageSlideShow.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageSlideShow.Size = new System.Drawing.Size(590, 258);
+            this.tabPageSlideShow.Size = new System.Drawing.Size(591, 258);
             this.tabPageSlideShow.TabIndex = 1;
             this.tabPageSlideShow.Text = "Diaschau";
             this.tabPageSlideShow.UseVisualStyleBackColor = true;
@@ -1377,17 +1417,18 @@
             this.tableLayoutPanel1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
                         | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
-            this.tableLayoutPanel1.ColumnCount = 1;
+            this.tableLayoutPanel1.ColumnCount = 2;
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 260F));
             this.tableLayoutPanel1.Controls.Add(this.tabControl1, 0, 0);
             this.tableLayoutPanel1.Controls.Add(this.panel1, 0, 1);
+            this.tableLayoutPanel1.Controls.Add(this.groupBox5, 1, 1);
             this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 98);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 2;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(747, 607);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(1008, 607);
             this.tableLayoutPanel1.TabIndex = 37;
             // 
             // panel1
@@ -1400,7 +1441,7 @@
             this.panel1.Controls.Add(this.groupBoxImageStack);
             this.panel1.Location = new System.Drawing.Point(3, 306);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(741, 298);
+            this.panel1.Size = new System.Drawing.Size(742, 298);
             this.panel1.TabIndex = 36;
             // 
             // groupBoxImageStack
@@ -1410,7 +1451,7 @@
             this.groupBoxImageStack.Controls.Add(this.listViewImageQueue);
             this.groupBoxImageStack.Controls.Add(this.buttonResetImageQueue);
             this.groupBoxImageStack.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.groupBoxImageStack.Location = new System.Drawing.Point(605, 12);
+            this.groupBoxImageStack.Location = new System.Drawing.Point(606, 12);
             this.groupBoxImageStack.Name = "groupBoxImageStack";
             this.groupBoxImageStack.Size = new System.Drawing.Size(134, 283);
             this.groupBoxImageStack.TabIndex = 35;
@@ -1448,63 +1489,97 @@
             this.buttonResetImageQueue.UseVisualStyleBackColor = true;
             this.buttonResetImageQueue.Click += new System.EventHandler(this.button1_Click_1);
             // 
-            // timerElementHighlight
+            // groupBox5
             // 
-            this.timerElementHighlight.Interval = 250;
-            this.timerElementHighlight.Tick += new System.EventHandler(this.timerSearchBoxHL_Tick);
+            this.groupBox5.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+                        | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupBox5.Controls.Add(this.label6);
+            this.groupBox5.Controls.Add(this.radioButtonFade3);
+            this.groupBox5.Controls.Add(this.radioButtonFade2);
+            this.groupBox5.Controls.Add(this.radioButtonFade1);
+            this.groupBox5.Controls.Add(this.radioButtonFade0);
+            this.groupBox5.Controls.Add(this.label3);
+            this.groupBox5.Controls.Add(this.buttonToggleLayerMode);
+            this.groupBox5.Controls.Add(this.progressBarTransition);
+            this.groupBox5.Controls.Add(this.pictureBoxPreview);
+            this.groupBox5.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.groupBox5.Location = new System.Drawing.Point(751, 306);
+            this.groupBox5.Name = "groupBox5";
+            this.groupBox5.Size = new System.Drawing.Size(254, 298);
+            this.groupBox5.TabIndex = 42;
+            this.groupBox5.TabStop = false;
+            this.groupBox5.Text = "Projektion";
             // 
-            // trackBarFadeTimer
+            // label6
             // 
-            this.trackBarFadeTimer.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.trackBarFadeTimer.Location = new System.Drawing.Point(9, 39);
-            this.trackBarFadeTimer.Maximum = 100;
-            this.trackBarFadeTimer.Name = "trackBarFadeTimer";
-            this.trackBarFadeTimer.Size = new System.Drawing.Size(226, 45);
-            this.trackBarFadeTimer.TabIndex = 31;
-            this.trackBarFadeTimer.TickFrequency = 5;
-            this.trackBarFadeTimer.Value = 10;
-            this.trackBarFadeTimer.Scroll += new System.EventHandler(this.trackBarFadeTimer_Scroll);
+            this.label6.AutoSize = true;
+            this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label6.Location = new System.Drawing.Point(7, 224);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(88, 13);
+            this.label6.TabIndex = 42;
+            this.label6.Text = "Geschwindigkeit:";
             // 
-            // labelFadeTime
+            // radioButtonFade3
             // 
-            this.labelFadeTime.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.labelFadeTime.AutoSize = true;
-            this.labelFadeTime.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelFadeTime.Location = new System.Drawing.Point(144, 23);
-            this.labelFadeTime.Name = "labelFadeTime";
-            this.labelFadeTime.Size = new System.Drawing.Size(41, 13);
-            this.labelFadeTime.TabIndex = 33;
-            this.labelFadeTime.Text = "500 ms";
+            this.radioButtonFade3.AutoSize = true;
+            this.radioButtonFade3.Location = new System.Drawing.Point(169, 245);
+            this.radioButtonFade3.Name = "radioButtonFade3";
+            this.radioButtonFade3.Size = new System.Drawing.Size(75, 17);
+            this.radioButtonFade3.TabIndex = 41;
+            this.radioButtonFade3.Tag = "3";
+            this.radioButtonFade3.Text = "Langsam";
+            this.radioButtonFade3.UseVisualStyleBackColor = true;
+            this.radioButtonFade3.CheckedChanged += new System.EventHandler(this.radioButtonFade0_CheckedChanged);
             // 
-            // label7
+            // radioButtonFade2
             // 
-            this.label7.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.label7.AutoSize = true;
-            this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label7.Location = new System.Drawing.Point(18, 23);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(89, 13);
-            this.label7.TabIndex = 32;
-            this.label7.Text = "Übergangsdauer:";
+            this.radioButtonFade2.AutoSize = true;
+            this.radioButtonFade2.Location = new System.Drawing.Point(104, 245);
+            this.radioButtonFade2.Name = "radioButtonFade2";
+            this.radioButtonFade2.Size = new System.Drawing.Size(56, 17);
+            this.radioButtonFade2.TabIndex = 40;
+            this.radioButtonFade2.Tag = "2";
+            this.radioButtonFade2.Text = "Mittel";
+            this.radioButtonFade2.UseVisualStyleBackColor = true;
+            this.radioButtonFade2.CheckedChanged += new System.EventHandler(this.radioButtonFade0_CheckedChanged);
             // 
-            // pictureBoxPreview
+            // radioButtonFade1
             // 
-            this.pictureBoxPreview.BackColor = System.Drawing.Color.Black;
-            this.pictureBoxPreview.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pictureBoxPreview.Location = new System.Drawing.Point(11, 75);
-            this.pictureBoxPreview.Name = "pictureBoxPreview";
-            this.pictureBoxPreview.Size = new System.Drawing.Size(228, 171);
-            this.pictureBoxPreview.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pictureBoxPreview.TabIndex = 34;
-            this.pictureBoxPreview.TabStop = false;
+            this.radioButtonFade1.AutoSize = true;
+            this.radioButtonFade1.Checked = true;
+            this.radioButtonFade1.Location = new System.Drawing.Point(169, 222);
+            this.radioButtonFade1.Name = "radioButtonFade1";
+            this.radioButtonFade1.Size = new System.Drawing.Size(67, 17);
+            this.radioButtonFade1.TabIndex = 39;
+            this.radioButtonFade1.TabStop = true;
+            this.radioButtonFade1.Tag = "1";
+            this.radioButtonFade1.Text = "Schnell";
+            this.radioButtonFade1.UseVisualStyleBackColor = true;
+            this.radioButtonFade1.CheckedChanged += new System.EventHandler(this.radioButtonFade0_CheckedChanged);
             // 
-            // progressBarTransition
+            // radioButtonFade0
             // 
-            this.progressBarTransition.Location = new System.Drawing.Point(7, 252);
-            this.progressBarTransition.Name = "progressBarTransition";
-            this.progressBarTransition.Size = new System.Drawing.Size(228, 10);
-            this.progressBarTransition.Step = 1;
-            this.progressBarTransition.TabIndex = 35;
+            this.radioButtonFade0.AutoSize = true;
+            this.radioButtonFade0.Location = new System.Drawing.Point(104, 222);
+            this.radioButtonFade0.Name = "radioButtonFade0";
+            this.radioButtonFade0.Size = new System.Drawing.Size(59, 17);
+            this.radioButtonFade0.TabIndex = 38;
+            this.radioButtonFade0.Tag = "0";
+            this.radioButtonFade0.Text = "Sofort";
+            this.radioButtonFade0.UseVisualStyleBackColor = true;
+            this.radioButtonFade0.CheckedChanged += new System.EventHandler(this.radioButtonFade0_CheckedChanged);
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label3.Location = new System.Drawing.Point(40, 274);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(58, 13);
+            this.label3.TabIndex = 37;
+            this.label3.Text = "LinkLayers";
             // 
             // buttonToggleLayerMode
             // 
@@ -1518,71 +1593,29 @@
             this.buttonToggleLayerMode.UseVisualStyleBackColor = true;
             this.buttonToggleLayerMode.Click += new System.EventHandler(this.button2_Click_1);
             // 
-            // label3
+            // progressBarTransition
             // 
-            this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(40, 274);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(58, 13);
-            this.label3.TabIndex = 37;
-            this.label3.Text = "LinkLayers";
+            this.progressBarTransition.Location = new System.Drawing.Point(6, 206);
+            this.progressBarTransition.Name = "progressBarTransition";
+            this.progressBarTransition.Size = new System.Drawing.Size(242, 10);
+            this.progressBarTransition.Step = 1;
+            this.progressBarTransition.TabIndex = 35;
             // 
-            // groupBox5
+            // pictureBoxPreview
             // 
-            this.groupBox5.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.groupBox5.Controls.Add(this.label3);
-            this.groupBox5.Controls.Add(this.buttonToggleLayerMode);
-            this.groupBox5.Controls.Add(this.progressBarTransition);
-            this.groupBox5.Controls.Add(this.pictureBoxPreview);
-            this.groupBox5.Controls.Add(this.label7);
-            this.groupBox5.Controls.Add(this.labelFadeTime);
-            this.groupBox5.Controls.Add(this.trackBarFadeTimer);
-            this.groupBox5.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.groupBox5.Location = new System.Drawing.Point(753, 98);
-            this.groupBox5.Name = "groupBox5";
-            this.groupBox5.Size = new System.Drawing.Size(247, 300);
-            this.groupBox5.TabIndex = 34;
-            this.groupBox5.TabStop = false;
-            this.groupBox5.Text = "Projektion";
+            this.pictureBoxPreview.BackColor = System.Drawing.Color.Black;
+            this.pictureBoxPreview.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pictureBoxPreview.Location = new System.Drawing.Point(6, 19);
+            this.pictureBoxPreview.Name = "pictureBoxPreview";
+            this.pictureBoxPreview.Size = new System.Drawing.Size(242, 181);
+            this.pictureBoxPreview.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBoxPreview.TabIndex = 34;
+            this.pictureBoxPreview.TabStop = false;
             // 
-            // songDetailElement
+            // timerElementHighlight
             // 
-            this.songDetailElement.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
-            this.songDetailElement.AutoScroll = true;
-            this.songDetailElement.BackColor = System.Drawing.Color.White;
-            this.songDetailElement.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.songDetailElement.ForeColor = System.Drawing.SystemColors.WindowText;
-            this.songDetailElement.Location = new System.Drawing.Point(6, 16);
-            this.songDetailElement.Name = "songDetailElement";
-            this.songDetailElement.Size = new System.Drawing.Size(470, 240);
-            this.songDetailElement.TabIndex = 20;
-            this.songDetailElement.SlideClicked += new SongDetails.SongDetail.slideClick(this.songDetailElement_SlideClicked);
-            this.songDetailElement.ImageClicked += new SongDetails.SongDetail.imageClick(this.songDetailElement_ImageClicked);
-            // 
-            // listViewSetList
-            // 
-            this.listViewSetList.AllowDrop = true;
-            this.listViewSetList.AllowRowReorder = true;
-            this.listViewSetList.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Right)));
-            this.listViewSetList.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
-            this.columnHeader4});
-            this.listViewSetList.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.listViewSetList.FullRowSelect = true;
-            this.listViewSetList.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.None;
-            this.listViewSetList.HideSelection = false;
-            this.listViewSetList.Location = new System.Drawing.Point(5, 19);
-            this.listViewSetList.MultiSelect = false;
-            this.listViewSetList.Name = "listViewSetList";
-            this.listViewSetList.Size = new System.Drawing.Size(234, 244);
-            this.listViewSetList.TabIndex = 27;
-            this.listViewSetList.UseCompatibleStateImageBehavior = false;
-            this.listViewSetList.View = System.Windows.Forms.View.Details;
-            this.listViewSetList.SelectedIndexChanged += new System.EventHandler(this.listViewSetList_SelectedIndexChanged);
-            this.listViewSetList.MouseClick += new System.Windows.Forms.MouseEventHandler(this.listViewSetList_MouseClick);
+            this.timerElementHighlight.Interval = 250;
+            this.timerElementHighlight.Tick += new System.EventHandler(this.timerSearchBoxHL_Tick);
             // 
             // MainWindow
             // 
@@ -1590,8 +1623,6 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1008, 730);
             this.Controls.Add(this.tableLayoutPanel1);
-            this.Controls.Add(this.groupBox4);
-            this.Controls.Add(this.groupBox5);
             this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.toolStrip1);
             this.Controls.Add(this.menuStrip1);
@@ -1605,13 +1636,13 @@
             this.Load += new System.EventHandler(this.Form1_Load);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
-            this.groupBox4.ResumeLayout(false);
             this.toolStrip1.ResumeLayout(false);
             this.toolStrip1.PerformLayout();
             this.statusStrip1.ResumeLayout(false);
             this.statusStrip1.PerformLayout();
             this.tabControl1.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
+            this.groupBox4.ResumeLayout(false);
             this.groupBoxSongContents.ResumeLayout(false);
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
@@ -1628,10 +1659,9 @@
             this.tableLayoutPanel1.ResumeLayout(false);
             this.panel1.ResumeLayout(false);
             this.groupBoxImageStack.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.trackBarFadeTimer)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxPreview)).EndInit();
             this.groupBox5.ResumeLayout(false);
             this.groupBox5.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxPreview)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1665,16 +1695,7 @@
 		private System.Windows.Forms.ToolStripSeparator toolStripSeparator4;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator5;
 		private System.Windows.Forms.ToolStripMenuItem datenverzeichnisÖffnenToolStripMenuItem;
-		private System.Windows.Forms.ToolStripSeparator toolStripSeparator6;
-		private System.Windows.Forms.GroupBox groupBox4;
-		private System.Windows.Forms.Button buttonSetListRem;
-		private System.Windows.Forms.Button buttonSetListDown;
-        private System.Windows.Forms.Button buttonSetListUp;
-		private System.Windows.Forms.ColumnHeader columnHeader4;
-		private System.Windows.Forms.Button buttonSetListClear;
-		private System.Windows.Forms.Button buttonSetListAdd;
-		private System.Windows.Forms.Button buttonSaveSetList;
-        private System.Windows.Forms.Button buttonOpenSetList;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator6;
         private System.Windows.Forms.ToolStripButton toolStripButtonDisplaySettings;
 		private System.Windows.Forms.RadioButton radioButtonAutoDiaShow;
 		private System.Windows.Forms.RadioButton radioButtonManualDiashow;
@@ -1748,12 +1769,9 @@
         private System.Windows.Forms.Button buttonClearText;
         private System.Windows.Forms.ComboBox comboBox1;
         private System.Windows.Forms.ComboBox comboBox2;
-        private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.NumericUpDown numericUpDown1;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.ListView listViewImageQueue;
         private System.Windows.Forms.ColumnHeader columnHeader6;
-        private Bol.WinControls.ListViewEx listViewSetList;
         private System.Windows.Forms.ToolStripMenuItem präsentationToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem präsentationausToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem blackoutToolStripMenuItem;
@@ -1762,14 +1780,29 @@
         private System.Windows.Forms.ToolStripMenuItem bildschirmeSuchenToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem liedSuchenToolStripMenuItem;
         private System.Windows.Forms.Timer timerElementHighlight;
-        private System.Windows.Forms.TrackBar trackBarFadeTimer;
-        private System.Windows.Forms.Label labelFadeTime;
-        private System.Windows.Forms.Label label7;
-        private System.Windows.Forms.PictureBox pictureBoxPreview;
-        private System.Windows.Forms.ProgressBar progressBarTransition;
-        private System.Windows.Forms.Button buttonToggleLayerMode;
-        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.GroupBox groupBox4;
+        private System.Windows.Forms.Button buttonOpenSetList;
+        private System.Windows.Forms.Button buttonSaveSetList;
+        private System.Windows.Forms.Button buttonSetListAdd;
+        private System.Windows.Forms.Button buttonSetListClear;
+        private Bol.WinControls.ListViewEx listViewSetList;
+        private System.Windows.Forms.ColumnHeader columnHeader4;
+        private System.Windows.Forms.Button buttonSetListRem;
+        private System.Windows.Forms.Button buttonSetListDown;
+        private System.Windows.Forms.Button buttonSetListUp;
         private System.Windows.Forms.GroupBox groupBox5;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Button buttonToggleLayerMode;
+        private System.Windows.Forms.ProgressBar progressBarTransition;
+        private System.Windows.Forms.PictureBox pictureBoxPreview;
+        private System.Windows.Forms.RadioButton radioButtonFade3;
+        private System.Windows.Forms.RadioButton radioButtonFade2;
+        private System.Windows.Forms.RadioButton radioButtonFade1;
+        private System.Windows.Forms.RadioButton radioButtonFade0;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.NumericUpDown numericUpDown1;
+        
     }
 }
 

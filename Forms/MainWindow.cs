@@ -113,8 +113,16 @@ namespace Pbp.Forms
 
             imageTreeViewInit();
 
-			trackBarFadeTimer.Value = Settings.Instance.ProjectionFadeTime;
-			labelFadeTime.Text = Settings.Instance.ProjectionFadeTime.ToString(); // + " ms";
+            if (Settings.Instance.ProjectionFadeTime==3)
+                radioButtonFade3.Checked = true;
+            else if (Settings.Instance.ProjectionFadeTime == 2)
+                radioButtonFade2.Checked = true;
+            else if (Settings.Instance.ProjectionFadeTime == 1)
+                radioButtonFade1.Checked = true;
+            else
+                radioButtonFade0.Checked = true;
+
+			
 			UserControl1.getInstance().setFadeSteps(Settings.Instance.ProjectionFadeTime);
 
             linkLayers = Settings.Instance.LinkLayers;
@@ -281,16 +289,7 @@ namespace Pbp.Forms
 
         void t1_Tick(object sender, EventArgs e)
         {
-            if ((int)blackOutTimer.Tag == 1)
-            {
-                toolStripButtonBlackout.Image = global::Pbp.Properties.Resources.Blackout_on;
-                blackOutTimer.Tag = 0;
-            }
-            else
-            {
-                toolStripButtonBlackout.Image = global::Pbp.Properties.Resources.Blackout_on2;
-                blackOutTimer.Tag = 1;
-            }
+
         }
 
         private void optionenToolStripMenuItem_Click(object sender, EventArgs e)
@@ -417,6 +416,8 @@ namespace Pbp.Forms
 
 		private void songDetailElement_SlideClicked(object sender, SongDetails.SlideClickEventArgs e)
 		{
+            Application.DoEvents();
+
 			int pn = e.PartNumber;
 			int sn = e.SlideNumber;
 
@@ -1252,14 +1253,6 @@ namespace Pbp.Forms
 			}
 		}
 
-		private void trackBarFadeTimer_Scroll(object sender, EventArgs e)
-		{
-			labelFadeTime.Text = trackBarFadeTimer.Value.ToString(); // +" ms";
-			Settings.Instance.ProjectionFadeTime = trackBarFadeTimer.Value;
-			Settings.Instance.Save();
-			UserControl1.getInstance().setFadeSteps(trackBarFadeTimer.Value);
-		}
-
 		private void toolStripButtonDisplaySettings_Click(object sender, EventArgs e)
 		{
 			// Todo: OS Check
@@ -1525,7 +1518,7 @@ namespace Pbp.Forms
 
         private void buttonShowLiveText_Click(object sender, EventArgs e)
         {
-            LiveText lt = new LiveText(textBoxLiveText.Text);
+            LiveText lt = new LiveText(textBoxLiveText.SelectedText != String.Empty ? textBoxLiveText.SelectedText  : textBoxLiveText.Text);
             if (comboBox1.SelectedIndex == 2)
                 lt.HorizontalAlign = StringAlignment.Far;
             else if (comboBox1.SelectedIndex == 1)
@@ -1597,6 +1590,19 @@ namespace Pbp.Forms
             }
         }
 
+        private void radioButtonFade0_CheckedChanged(object sender, EventArgs e)
+        {
+            if (((RadioButton)sender).Checked == true)
+            {                
+                setFadeTimeState(int.Parse((string)((RadioButton)sender).Tag));
+            }
+        }
 
+        private void setFadeTimeState(int value)
+        {
+            Settings.Instance.ProjectionFadeTime = value;
+            Settings.Instance.Save();
+            UserControl1.getInstance().setFadeSteps(value);
+        }
     }
 }

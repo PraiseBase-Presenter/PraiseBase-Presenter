@@ -5,6 +5,6 @@
     <Grid>
         <Image Name="projectionImageBack"  Stretch="Fill"></Image>
         <Image Name="projectionImage"  Stretch="Fill" Opacity="0"></Image>
-        <Image Name="blackoutImage"  Stretch="Fill"></Image>
+        <Image Name="blackoutImage"  Stretch="Fill" ImageFailed="blackoutImage_ImageFailed"></Image>
     </Grid>
 </UserControl>

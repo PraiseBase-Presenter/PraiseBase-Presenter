@@ -64,7 +64,7 @@ namespace Pbp.Forms
 		{
 			InitializeComponent();
 			tmr = new DispatcherTimer();
-			fadeSteps = 0;
+            setFadeSteps(Settings.Instance.ProjectionFadeTime);
 		}
 
 		static public UserControl1 getInstance()
@@ -92,7 +92,17 @@ namespace Pbp.Forms
 
 		public void setFadeSteps(int steps)
 		{
-			fadeSteps = steps >= 0 ? steps : 0;
+			steps = steps >= 0 ? steps : 0;
+
+            if (steps == 3)
+                fadeSteps = 100;
+            else if (steps == 2)
+                fadeSteps = 20;
+            else if (steps == 1)
+                fadeSteps = 3;
+            else
+                fadeSteps = 0;
+
 		}
 
 		public void setProjectionImage(System.Drawing.Bitmap img)
@@ -181,6 +191,11 @@ namespace Pbp.Forms
 				tmr.Stop();
 			}
 		}
+
+        private void blackoutImage_ImageFailed(object sender, ExceptionRoutedEventArgs e)
+        {
+
+        }
 
 
 

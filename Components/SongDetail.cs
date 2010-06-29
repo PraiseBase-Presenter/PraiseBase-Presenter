@@ -105,61 +105,112 @@ namespace SongDetails
 
 				for (int j = 0; j < numSlides; j++)
 				{
-					Panel spnl = new Panel();
-					spnl.Tag = j;
-					//spnl.BackColor = Color.Blue;
-					spnl.Location = new Point(slidePanelOffset, j * elemHeight);
-					spnl.Height = elemHeight;
-					spnl.Paint += new PaintEventHandler(spnl_Paint);
-					//spnl.Cursor = Cursors.Hand;
-					//spnl.Click += new EventHandler(spnl_Click);
-					pnl.Controls.Add(spnl);
+					Panel slidePanel = new Panel();
+					slidePanel.Tag = j;
+					slidePanel.Location = new Point(slidePanelOffset, j * elemHeight);
+					slidePanel.Height = elemHeight;
+					slidePanel.Paint += new PaintEventHandler(spnl_Paint);
+					pnl.Controls.Add(slidePanel);
 
-					PictureBox pcBox = new PictureBox();
+                    Panel panelPreviewPictureBoxContainer = new Panel();
+                    panelPreviewPictureBoxContainer.Location = new Point(1, 1);
+                    panelPreviewPictureBoxContainer.Size = new Size(90, slidePanel.Height);
+                    panelPreviewPictureBoxContainer.BackColor = Color.Transparent;
+                    slidePanel.Controls.Add(panelPreviewPictureBoxContainer);
+
+					PictureBox previewPictureBox = new PictureBox();
+                    previewPictureBox.Location = new Point(2, 2);
+                    previewPictureBox.Size = new Size(panelPreviewPictureBoxContainer.Width - 4, panelPreviewPictureBoxContainer.Height - 5);
                     int imgNr = sng.Parts[numParts].Slides[j].ImageNumber;
-                    pcBox.Image = thumbs.Images[imgNr];
-                    pcBox.Tag = sng.RelativeImagePaths.Count >= imgNr && imgNr > 0 ? sng.RelativeImagePaths[imgNr - 1] : String.Empty;
-					pcBox.Location = new Point(1, 1);
-					pcBox.Size = new Size(90, spnl.Height);
-					pcBox.Enabled = true;
-                    pcBox.Cursor = Cursors.Hand;
-                    pcBox.Click += new EventHandler(pcBox_Click);
-					spnl.Controls.Add(pcBox);
+                    previewPictureBox.Image = thumbs.Images[imgNr];
+                    previewPictureBox.Tag = sng.RelativeImagePaths.Count >= imgNr && imgNr > 0 ? sng.RelativeImagePaths[imgNr - 1] : String.Empty;
+					previewPictureBox.Enabled = true;
+                    previewPictureBox.Cursor = Cursors.Hand;
+                    previewPictureBox.Click += new EventHandler(pcBox_Click);
+                    previewPictureBox.MouseEnter += new EventHandler(previewPictureBox_MouseEnter);
+                    previewPictureBox.MouseLeave += new EventHandler(previewPictureBox_MouseLeave);
+                    panelPreviewPictureBoxContainer.Controls.Add(previewPictureBox);
+
+                    Panel panelTextLabelContainer = new Panel();
+                    panelTextLabelContainer.Location = new Point(100, 1);
+                    panelTextLabelContainer.Height = slidePanel.Height - 1;
+                    panelTextLabelContainer.BackColor = Color.Transparent;
+                    panelTextLabelContainer.Padding = new System.Windows.Forms.Padding(2, 3, 2, 3);
+                    panelTextLabelContainer.Paint += new PaintEventHandler(tpnl_Paint);
+                    slidePanel.Controls.Add(panelTextLabelContainer);
 
 					Label textLbl = new Label();
-					textLbl.Text = sng.Parts[numParts].Slides[j].oneLineText();
+                    textLbl.Location = new Point(2, 2);
+                    textLbl.Height = panelTextLabelContainer.Height-4;
+                    textLbl.Text = sng.Parts[numParts].Slides[j].oneLineText();
 					textLbl.ForeColor = Color.Black;
-					//textLbl.BackColor = Color.Brown;
-					textLbl.Location = new Point(100,1);
-                    textLbl.Height = spnl.Height - 2;
-                    textLbl.Padding = new System.Windows.Forms.Padding(2, 3, 2, 3);
+                    textLbl.BackColor = Color.White;
 					textLbl.Font = txfnt;
-					textLbl.Paint += new PaintEventHandler(textLbl_Paint);
 					textLbl.Enabled = true;
+                    textLbl.AutoEllipsis = true;
                     textLbl.Cursor = Cursors.Hand;
                     textLbl.Tag = j;
-					textLbl.Click += new EventHandler(textLbl_Click);
+                    textLbl.Paint += new PaintEventHandler(textLbl_Paint);
+                    textLbl.Click += new EventHandler(textLbl_Click);
                     textLbl.MouseEnter += new EventHandler(textLbl_MouseEnter);
                     textLbl.MouseLeave += new EventHandler(textLbl_MouseLeave);
-					spnl.Controls.Add(textLbl);
+                    panelTextLabelContainer.Controls.Add(textLbl);
 				}
 			}
 			currentSong = sng;
 			this.ResumeLayout();
 		}
 
-        void textLbl_MouseLeave(object sender, EventArgs e)
+        void previewPictureBox_MouseLeave(object sender, EventArgs e)
         {
-            if (currentSlidePanel == (Label)sender)
-                ((Label)sender).BackColor = Color.AliceBlue;
-            else
-                ((Label)sender).BackColor = Color.Transparent;
+            ((PictureBox)sender).Parent.BackColor = Color.Transparent;
         }
+
+        void previewPictureBox_MouseEnter(object sender, EventArgs e)
+        {
+            ((PictureBox)sender).Parent.BackColor = Color.DarkGray; 
+        }
+
+
 
         void textLbl_MouseEnter(object sender, EventArgs e)
         {
-            ((Label)sender).BackColor = Color.LightBlue;
+            if (currentSlidePanel != (Label)sender)
+            {
+                ((Label)sender).Parent.BackColor = Color.DarkGray;
+            }
         }
+
+        void textLbl_MouseLeave(object sender, EventArgs e)
+        {
+            if (currentSlidePanel != (Label)sender)
+            {
+                ((Label)sender).Parent.BackColor = Color.Transparent;
+            }
+        }
+        
+		void textLbl_Click(object sender, EventArgs e)
+		{
+            Label pnl = ((Label)sender);
+
+            if (currentSlidePanel != null)
+            {
+                currentSlidePanel.BackColor = Color.White;
+                currentSlidePanel.Parent.BackColor = Color.Transparent;
+            }
+
+            pnl.BackColor = Color.LightBlue;
+            pnl.Parent.BackColor = Color.Black;
+            currentSlidePanel = pnl;
+
+
+            if (SlideClicked != null)
+            {
+                this.Focus();
+                SlideClickEventArgs p = new SlideClickEventArgs((int)pnl.Parent.Parent.Parent.Tag, (int)pnl.Tag);
+                SlideClicked(this, p);
+            }
+		}
 
         void pcBox_Click(object sender, EventArgs e)
         {
@@ -171,37 +222,22 @@ namespace SongDetails
             }
         }
 
-
-		void textLbl_Click(object sender, EventArgs e)
-		{
-            Label pnl = ((Label)sender);
-
-            if (currentSlidePanel != null)
-            {
-                currentSlidePanel.BackColor = Color.Transparent;
-            }
-
-            pnl.BackColor = Color.AliceBlue;
-            currentSlidePanel = pnl;
-
-
-            if (SlideClicked != null)
-            {
-                this.Focus();
-                SlideClickEventArgs p = new SlideClickEventArgs((int)pnl.Parent.Parent.Tag, (int)pnl.Tag);
-                SlideClicked(this, p);
-            }
-		}
         
 
 		/* Paint Events */
 
+        void tpnl_Paint(object sender, PaintEventArgs e)
+        {
+            Panel lbl = ((Panel)sender);
+            lbl.Width = (lbl.Parent.Width - 100);
+        }
+
 		void textLbl_Paint(object sender, PaintEventArgs e)
 		{
 			Label lbl = ((Label)sender);
-			lbl.Width = (lbl.Parent.Width - 100) - 10;			
+			lbl.Width = (lbl.Parent.Width) - 4;
 		}
-
+        
 		void spnl_Paint(object sender, PaintEventArgs e)
 		{
 			Panel pnl = ((Panel)sender);

@@ -104,7 +104,7 @@
     <Compile Include="Classes\SongManager.cs" />
     <Compile Include="Classes\SongSubclasses.cs" />
     <Compile Include="Components\SearchTextBox.cs">
-      <SubType>Component</SubType>
+      <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="Components\SearchTextBox.Designer.cs">
       <DependentUpon>SearchTextBox.cs</DependentUpon>
@@ -198,6 +198,9 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="Components\SearchTextBox.resx">
+      <DependentUpon>SearchTextBox.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Components\SongDetail.resx">
       <DependentUpon>SongDetail.cs</DependentUpon>
       <SubType>Designer</SubType>
@@ -417,6 +420,8 @@
     <None Include="Resources\1downarrow11.png" />
     <None Include="Resources\1leftarrow1.png" />
     <None Include="Resources\1rightarrow1.png" />
+    <None Include="Resources\searchx.png" />
+    <None Include="Resources\searchg.png" />
     <Content Include="Songs\A Mighty Fortress Is Our God.ppl" />
     <Content Include="Songs\Jesus is my Lord.ppl" />
   </ItemGroup>

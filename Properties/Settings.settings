@@ -114,7 +114,7 @@
       <Value Profile="(Default)">Setlists</Value>
     </Setting>
     <Setting Name="ProjectionFadeTime" Type="System.Int32" Scope="User">
-      <Value Profile="(Default)">5</Value>
+      <Value Profile="(Default)">1</Value>
     </Setting>
     <Setting Name="BugReportUrl" Type="System.String" Scope="Application">
       <Value Profile="(Default)">http://code.google.com/p/praisebasepresenter/issues/entry?template=Defect%20report%20from%20user</Value>

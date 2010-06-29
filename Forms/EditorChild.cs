@@ -36,7 +36,7 @@ namespace Pbp.Forms
 {
     public partial class EditorChild : Form
     {
-        EditableSong sng;
+        Song sng;
         projectionWindow projWindow;
 		public bool valid;
 		public bool changed = false;
@@ -53,7 +53,7 @@ namespace Pbp.Forms
 
             this.WindowState = FormWindowState.Maximized;
 
-			sng = new EditableSong(fileName);
+			sng = new Song(fileName);
             if (sng.IsValid)
             {
                 this.Text = sng.Title;
