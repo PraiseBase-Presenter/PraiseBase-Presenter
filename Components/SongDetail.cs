@@ -38,7 +38,7 @@ namespace SongDetails
             InitializeComponent();
             slideTexts = new List<Label>();
             slideImages = new List<PictureBox>();
-            
+            this.AutoScroll = true;
         }
 
 		private void SongDetail_Load(object sender, EventArgs e)
@@ -50,25 +50,32 @@ namespace SongDetails
         {
             if (e.KeyCode == Keys.Down && currentSlideTextIdx>=0 && currentSlideTextIdx < slideTexts.Count - 1)
             {
-                textLbl_Click(slideTexts[currentSlideTextIdx + 1], new EventArgs());
-                //Label sld = slideTexts[currentSlideTextIdx];
-                //if (sld.Parent.Parent.Top + sld.Parent.Parent.Parent.Top + sld.Height > this.Height + VerticalScroll.Value)
-                //    VerticalScroll.Value = sld.Parent.Parent.Top + sld.Parent.Parent.Parent.Top + sld.Height;
+                int tOffset = ((Panel)slideTexts[currentSlideTextIdx+1].Parent.Parent).Parent.Bottom; 
+                if (tOffset + VerticalScroll.Value > this.Height)
+                    VerticalScroll.Value = tOffset + VerticalScroll.Value - this.Height;
                 PerformLayout();
+
+                textLbl_Click(slideTexts[currentSlideTextIdx + 1], new EventArgs());
             }
             else if (e.KeyCode == Keys.Up && currentSlideTextIdx>0)
             {
+                int tOffset = ((Panel)slideTexts[currentSlideTextIdx - 1].Parent.Parent).Parent.Top;
+                if (tOffset < 0)
+                    VerticalScroll.Value += tOffset -5;
+                PerformLayout();
+
                 textLbl_Click(slideTexts[currentSlideTextIdx - 1], new EventArgs());
             }
-
-
         }        
 
         public void setSong(Pbp.Song sng)
         {
+            this.VerticalScroll.Value = 0;
+            PerformLayout();
             this.SuspendLayout();
             slideTexts.Clear();
             slideImages.Clear();
+            currentSlideTextIdx = -1;
 	
 			// Clear
 			for (int j = numParts-1; j >= 0; j--)
@@ -101,7 +108,7 @@ namespace SongDetails
 				Panel pnl = new Panel();
 				pnl.Name = "partPanel"+numParts.ToString();
 				pnl.Tag = numParts;
-				//pnl.BackColor = Color.Red;
+
 				pnl.Paint+=new PaintEventHandler(partPnl_Paint);
 				pnl.Location = new Point(startPoint.X, ypos);
 				pnl.Height = numSlides * (elemHeight)+4;
