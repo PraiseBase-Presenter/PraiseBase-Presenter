@@ -9,6 +9,7 @@ using System.Windows.Forms;
 
 namespace SongDetails
 {
+    [DefaultEvent("SlideClicked")]
     public partial class SongDetail : UserControl
     {
 		Pbp.Song currentSong;
@@ -25,25 +26,49 @@ namespace SongDetails
         public delegate void imageClick(object sender, SlideImageClickEventArgs e);
         public event imageClick ImageClicked;
 
+        private List<Label> slideTexts;
+        private List<PictureBox> slideImages;
+        private int currentSlideTextIdx;
+
+        Color borderHoverColor = Color.DarkGray;
+        Color borderActiveColor = Color.Black;
+
         public SongDetail()
         {
             InitializeComponent();
+            slideTexts = new List<Label>();
+            slideImages = new List<PictureBox>();
+            
         }
 
 		private void SongDetail_Load(object sender, EventArgs e)
         {
-            this.KeyDown += new KeyEventHandler(SongDetail_KeyDown);
+            this.KeyUp += new KeyEventHandler(SongDetail_KeyUp);
         }
 
-        // TODO
-        void SongDetail_KeyDown(object sender, KeyEventArgs e)
+        void SongDetail_KeyUp(object sender, KeyEventArgs e)
         {
-            Console.WriteLine(e.KeyCode);
-        }
+            if (e.KeyCode == Keys.Down && currentSlideTextIdx>=0 && currentSlideTextIdx < slideTexts.Count - 1)
+            {
+                textLbl_Click(slideTexts[currentSlideTextIdx + 1], new EventArgs());
+                //Label sld = slideTexts[currentSlideTextIdx];
+                //if (sld.Parent.Parent.Top + sld.Parent.Parent.Parent.Top + sld.Height > this.Height + VerticalScroll.Value)
+                //    VerticalScroll.Value = sld.Parent.Parent.Top + sld.Parent.Parent.Parent.Top + sld.Height;
+                PerformLayout();
+            }
+            else if (e.KeyCode == Keys.Up && currentSlideTextIdx>0)
+            {
+                textLbl_Click(slideTexts[currentSlideTextIdx - 1], new EventArgs());
+            }
+
+
+        }        
 
         public void setSong(Pbp.Song sng)
         {
             this.SuspendLayout();
+            slideTexts.Clear();
+            slideImages.Clear();
 	
 			// Clear
 			for (int j = numParts-1; j >= 0; j--)
@@ -131,6 +156,8 @@ namespace SongDetails
                     previewPictureBox.MouseLeave += new EventHandler(previewPictureBox_MouseLeave);
                     panelPreviewPictureBoxContainer.Controls.Add(previewPictureBox);
 
+                    slideImages.Add(previewPictureBox);
+
                     Panel panelTextLabelContainer = new Panel();
                     panelTextLabelContainer.Location = new Point(100, 1);
                     panelTextLabelContainer.Height = slidePanel.Height - 1;
@@ -154,6 +181,9 @@ namespace SongDetails
                     textLbl.Click += new EventHandler(textLbl_Click);
                     textLbl.MouseEnter += new EventHandler(textLbl_MouseEnter);
                     textLbl.MouseLeave += new EventHandler(textLbl_MouseLeave);
+
+                    slideTexts.Add(textLbl);
+
                     panelTextLabelContainer.Controls.Add(textLbl);
 				}
 			}
@@ -163,12 +193,14 @@ namespace SongDetails
 
         void previewPictureBox_MouseLeave(object sender, EventArgs e)
         {
-            ((PictureBox)sender).Parent.BackColor = Color.Transparent;
+            if (slideImages.IndexOf((PictureBox)sender) != currentSlideTextIdx)
+                ((PictureBox)sender).Parent.BackColor = Color.Transparent;
         }
 
         void previewPictureBox_MouseEnter(object sender, EventArgs e)
         {
-            ((PictureBox)sender).Parent.BackColor = Color.DarkGray; 
+            if (slideImages.IndexOf((PictureBox)sender) != currentSlideTextIdx)
+                ((PictureBox)sender).Parent.BackColor = borderHoverColor; 
         }
 
 
@@ -177,7 +209,8 @@ namespace SongDetails
         {
             if (currentSlidePanel != (Label)sender)
             {
-                ((Label)sender).Parent.BackColor = Color.DarkGray;
+                ((Label)sender).Parent.BackColor = borderHoverColor;
+                slideImages[slideTexts.IndexOf((Label)sender)].Parent.BackColor = borderHoverColor;
             }
         }
 
@@ -186,6 +219,7 @@ namespace SongDetails
             if (currentSlidePanel != (Label)sender)
             {
                 ((Label)sender).Parent.BackColor = Color.Transparent;
+                slideImages[slideTexts.IndexOf((Label)sender)].Parent.BackColor = Color.Transparent;
             }
         }
         
@@ -197,12 +231,17 @@ namespace SongDetails
             {
                 currentSlidePanel.BackColor = Color.White;
                 currentSlidePanel.Parent.BackColor = Color.Transparent;
+                if (currentSlideTextIdx >= 0)
+                    slideImages[currentSlideTextIdx].Parent.BackColor = Color.Transparent;
             }
 
+            currentSlideTextIdx = slideTexts.IndexOf(pnl);
+
             pnl.BackColor = Color.LightBlue;
-            pnl.Parent.BackColor = Color.Black;
+            pnl.Parent.BackColor = borderActiveColor;
             currentSlidePanel = pnl;
 
+            slideImages[currentSlideTextIdx].Parent.BackColor = borderActiveColor;
 
             if (SlideClicked != null)
             {
