@@ -18,8 +18,6 @@ namespace SongDetails
 		int numParts = 0;
 		int slidePanelOffset = 0;
 
-		Label currentSlidePanel = null;
-
 		public delegate void slideClick(object sender, SlideClickEventArgs e);
 		public event slideClick SlideClicked;
 
@@ -28,7 +26,8 @@ namespace SongDetails
 
         private List<Label> slideTexts;
         private List<PictureBox> slideImages;
-        private int currentSlideTextIdx;
+        private int currentSlideTextIdx = -1;
+        private int currentSlideImageIdx = -1;
 
         Color borderHoverColor = Color.DarkGray;
         Color borderActiveColor = Color.Black;
@@ -38,35 +37,7 @@ namespace SongDetails
             InitializeComponent();
             slideTexts = new List<Label>();
             slideImages = new List<PictureBox>();
-            this.AutoScroll = true;
         }
-
-		private void SongDetail_Load(object sender, EventArgs e)
-        {
-            this.KeyUp += new KeyEventHandler(SongDetail_KeyUp);
-        }
-
-        void SongDetail_KeyUp(object sender, KeyEventArgs e)
-        {
-            if (e.KeyCode == Keys.Down && currentSlideTextIdx>=0 && currentSlideTextIdx < slideTexts.Count - 1)
-            {
-                int tOffset = ((Panel)slideTexts[currentSlideTextIdx+1].Parent.Parent).Parent.Bottom; 
-                if (tOffset + VerticalScroll.Value > this.Height)
-                    VerticalScroll.Value = tOffset + VerticalScroll.Value - this.Height;
-                PerformLayout();
-
-                textLbl_Click(slideTexts[currentSlideTextIdx + 1], new EventArgs());
-            }
-            else if (e.KeyCode == Keys.Up && currentSlideTextIdx>0)
-            {
-                int tOffset = ((Panel)slideTexts[currentSlideTextIdx - 1].Parent.Parent).Parent.Top;
-                if (tOffset < 0)
-                    VerticalScroll.Value += tOffset -5;
-                PerformLayout();
-
-                textLbl_Click(slideTexts[currentSlideTextIdx - 1], new EventArgs());
-            }
-        }        
 
         public void setSong(Pbp.Song sng)
         {
@@ -198,55 +169,46 @@ namespace SongDetails
 			this.ResumeLayout();
 		}
 
-        void previewPictureBox_MouseLeave(object sender, EventArgs e)
+        #region Events caused by user action
+
+        void SongDetail_KeyUp(object sender, KeyEventArgs e)
         {
-            if (slideImages.IndexOf((PictureBox)sender) != currentSlideTextIdx)
-                ((PictureBox)sender).Parent.BackColor = Color.Transparent;
-        }
-
-        void previewPictureBox_MouseEnter(object sender, EventArgs e)
-        {
-            if (slideImages.IndexOf((PictureBox)sender) != currentSlideTextIdx)
-                ((PictureBox)sender).Parent.BackColor = borderHoverColor; 
-        }
-
-
-
-        void textLbl_MouseEnter(object sender, EventArgs e)
-        {
-            if (currentSlidePanel != (Label)sender)
+            if (e.KeyCode == Keys.Down && currentSlideTextIdx >= 0 && currentSlideTextIdx < slideTexts.Count - 1)
             {
-                ((Label)sender).Parent.BackColor = borderHoverColor;
-                slideImages[slideTexts.IndexOf((Label)sender)].Parent.BackColor = borderHoverColor;
+                int tOffset = ((Panel)slideTexts[currentSlideTextIdx + 1].Parent.Parent).Parent.Bottom;
+                if (tOffset + VerticalScroll.Value > this.Height)
+                    VerticalScroll.Value = tOffset + VerticalScroll.Value - this.Height + 2;
+                PerformLayout();
+
+                textLbl_Click(slideTexts[currentSlideTextIdx + 1], new EventArgs());
+            }
+            else if (e.KeyCode == Keys.Up && currentSlideTextIdx > 0)
+            {
+                int tOffset = ((Panel)slideTexts[currentSlideTextIdx - 1].Parent.Parent).Parent.Top;
+                if (tOffset < 0)
+                    VerticalScroll.Value += tOffset - 5;
+                PerformLayout();
+
+                textLbl_Click(slideTexts[currentSlideTextIdx - 1], new EventArgs());
             }
         }
 
-        void textLbl_MouseLeave(object sender, EventArgs e)
+        void textLbl_Click(object sender, EventArgs e)
         {
-            if (currentSlidePanel != (Label)sender)
-            {
-                ((Label)sender).Parent.BackColor = Color.Transparent;
-                slideImages[slideTexts.IndexOf((Label)sender)].Parent.BackColor = Color.Transparent;
-            }
-        }
-        
-		void textLbl_Click(object sender, EventArgs e)
-		{
             Label pnl = ((Label)sender);
 
-            if (currentSlidePanel != null)
+            if (currentSlideTextIdx >= 0)
             {
-                currentSlidePanel.BackColor = Color.White;
-                currentSlidePanel.Parent.BackColor = Color.Transparent;
-                if (currentSlideTextIdx >= 0)
-                    slideImages[currentSlideTextIdx].Parent.BackColor = Color.Transparent;
+                slideTexts[currentSlideTextIdx].BackColor = Color.White;
+                slideTexts[currentSlideTextIdx].Parent.BackColor = Color.Transparent;
+
+                slideImages[currentSlideTextIdx].Parent.BackColor = Color.Transparent;
             }
 
             currentSlideTextIdx = slideTexts.IndexOf(pnl);
 
             pnl.BackColor = Color.LightBlue;
             pnl.Parent.BackColor = borderActiveColor;
-            currentSlidePanel = pnl;
 
             slideImages[currentSlideTextIdx].Parent.BackColor = borderActiveColor;
 
@@ -256,21 +218,62 @@ namespace SongDetails
                 SlideClickEventArgs p = new SlideClickEventArgs((int)pnl.Parent.Parent.Parent.Tag, (int)pnl.Tag);
                 SlideClicked(this, p);
             }
-		}
+        }
 
         void pcBox_Click(object sender, EventArgs e)
         {
+            PictureBox pb = ((PictureBox)sender);
+
+            if (currentSlideTextIdx >= 0)
+            {
+                slideTexts[currentSlideTextIdx].Parent.BackColor = Color.Transparent;
+                slideTexts[currentSlideTextIdx].BackColor = Color.White;
+                currentSlideTextIdx = -1;
+            }
+
+            pb.Parent.BackColor = borderActiveColor;
+
             if (ImageClicked != null)
             {
                 this.Focus();
-                SlideImageClickEventArgs p = new SlideImageClickEventArgs((string)((PictureBox)sender).Tag);
+                SlideImageClickEventArgs p = new SlideImageClickEventArgs((string)pb.Tag);
                 ImageClicked(this, p);
             }
         }
-
         
+        void previewPictureBox_MouseEnter(object sender, EventArgs e)
+        {
+            if (slideImages.IndexOf((PictureBox)sender) != currentSlideTextIdx)
+                ((PictureBox)sender).Parent.BackColor = borderHoverColor;
+        }
 
-		/* Paint Events */
+        void previewPictureBox_MouseLeave(object sender, EventArgs e)
+        {
+            if (slideImages.IndexOf((PictureBox)sender) != currentSlideTextIdx) 
+                ((PictureBox)sender).Parent.BackColor = Color.Transparent;
+        }
+
+        void textLbl_MouseEnter(object sender, EventArgs e)
+        {
+            if (currentSlideTextIdx < 0 || slideTexts[currentSlideTextIdx] != (Label)sender)
+            {
+                ((Label)sender).Parent.BackColor = borderHoverColor;
+                slideImages[slideTexts.IndexOf((Label)sender)].Parent.BackColor = borderHoverColor;
+            }
+        }
+
+        void textLbl_MouseLeave(object sender, EventArgs e)
+        {
+            if (currentSlideTextIdx < 0 || slideTexts[currentSlideTextIdx] != (Label)sender)
+            {
+                ((Label)sender).Parent.BackColor = Color.Transparent;
+                slideImages[slideTexts.IndexOf((Label)sender)].Parent.BackColor = Color.Transparent;
+            }
+        }
+        
+        #endregion
+
+        #region Paint Events
 
         void tpnl_Paint(object sender, PaintEventArgs e)
         {
@@ -289,8 +292,7 @@ namespace SongDetails
 			Panel pnl = ((Panel)sender);
 			pnl.Width = pnl.Parent.Width - slidePanelOffset;
 		}
-
-
+        
 		void lpnl_Paint(object sender, PaintEventArgs e)
 		{
 			Panel pnl = ((Panel)sender);
@@ -301,11 +303,14 @@ namespace SongDetails
 		{
 			Panel pnl = ((Panel)sender);
 			pnl.Width = this.Width - pnl.Left - 24;
-			
-		}
+
+        }
+
+        #endregion
     }
 
-	public class SlideClickEventArgs : EventArgs
+    #region Helper classes
+    public class SlideClickEventArgs : EventArgs
 	{
 		public SlideClickEventArgs(int partNum, int slideNum)
 		{
@@ -327,7 +332,7 @@ namespace SongDetails
 
 	}
 
-
+    #endregion
 
 }
 
