@@ -29,11 +29,6 @@ using System;
 using System.Drawing;
 using System.Windows.Forms;
 using System.IO;
-using System.Drawing.Text;
-using System.Collections;
-using System.ComponentModel;
-using System.Data;
-using System.Collections.Generic;
 
 using Pbp.Properties;
 
@@ -41,7 +36,7 @@ namespace Pbp.Forms
 {
     public partial class EditorChild : Form
     {
-        Song sng;
+        EditableSong sng;
         projectionWindow projWindow;
 		public bool valid;
 		public bool changed = false;
@@ -49,9 +44,6 @@ namespace Pbp.Forms
 
 		private int currentPartId = 0;
 		private int currentSlideId = 0;
-        private Song.Slide currentSlide;
-
-        Dictionary<String, FontStyle> fontStylemap;
 
         public EditorChild(string fileName)
         {
@@ -61,7 +53,7 @@ namespace Pbp.Forms
 
             this.WindowState = FormWindowState.Maximized;
 
-			sng = new Song(fileName);
+			sng = new EditableSong(fileName);
             if (sng.IsValid)
             {
                 this.Text = sng.Title;
@@ -83,6 +75,9 @@ namespace Pbp.Forms
 				buttonChooseProjectionForeColor.BackColor= sng.TextColor;
 				buttonTranslationColor.BackColor = sng.TranslationColor;
 
+				trackBarLineSpacing.Value = sng.TextLineSpacing;
+				labelLineSpacing.Text = sng.TextLineSpacing.ToString();
+
 				comboBoxLanguage.Items.Clear();
 				comboBoxLanguage.Text = sng.Language;
 				comboBoxLanguage.AutoCompleteMode = AutoCompleteMode.Suggest;
@@ -92,7 +87,6 @@ namespace Pbp.Forms
 					comboBoxLanguage.Items.Add(str);
 				}
 
-                /*
 				int i = 0;
 				checkedListBoxTags.Items.Clear();
 				foreach (string str in Settings.Instance.Tags)
@@ -104,13 +98,7 @@ namespace Pbp.Forms
 					i++;
 				}
 
-                fontStylemap = new Dictionary<string, FontStyle>();
-                fontStylemap.Add("Regular", FontStyle.Regular);
-                fontStylemap.Add("Fett", FontStyle.Bold);
-                fontStylemap.Add("Kursiv", FontStyle.Italic);
-                fontStylemap.Add("Durchgestrichen", FontStyle.Strikeout);
-                fontStylemap.Add("Unterstrichen", FontStyle.Underline);
-                 */
+				
 			}
             else
             {
@@ -194,7 +182,7 @@ namespace Pbp.Forms
         public void populateTree()
         {
             treeViewContents.Nodes.Clear();
-            //treeViewContents.Nodes.Add(sng.Title);
+            treeViewContents.Nodes.Add(sng.Title);
             int j = 0;
             foreach (Song.Part part in sng.Parts)
             {
@@ -208,10 +196,10 @@ namespace Pbp.Forms
                     partNode.Nodes.Add(slideNode);
                 }
 				partNode.ContextMenuStrip = partContextMenu;
-                treeViewContents.Nodes.Add(partNode);
+                treeViewContents.Nodes[0].Nodes.Add(partNode);
                 j++;
             }
-			//treeViewContents.Nodes[0].ContextMenuStrip = songContextMenu;
+			treeViewContents.Nodes[0].ContextMenuStrip = songContextMenu;
             treeViewContents.ExpandAll();
         }
 
@@ -219,7 +207,7 @@ namespace Pbp.Forms
         {
 			int partId = -1;
 			int slideId = -1;
-            if (treeViewContents.SelectedNode.Level == 1)
+            if (treeViewContents.SelectedNode.Level == 2)
             {
 				partId = treeViewContents.SelectedNode.Parent.Index;
 				slideId = treeViewContents.SelectedNode.Index;
@@ -238,7 +226,7 @@ namespace Pbp.Forms
 					buttonMoveUp.Enabled = false;				
 				
             }
-            else if (treeViewContents.SelectedNode.Level == 0)
+            else if (treeViewContents.SelectedNode.Level == 1)
             {
 				partId = treeViewContents.SelectedNode.Index;
 
@@ -256,6 +244,12 @@ namespace Pbp.Forms
 					buttonMoveUp.Enabled = false;
 				                
             }
+            else
+            {
+				buttonDelItem.Enabled = false;
+				buttonMoveDown.Enabled = false;
+				buttonMoveUp.Enabled = false;
+            }
 
 			if (partId < 0)
 				partId = currentPartId;
@@ -265,73 +259,31 @@ namespace Pbp.Forms
 			if (partId >= sng.Parts.Count)
 				partId = sng.Parts.Count - 1;
 			if (slideId >= sng.Parts[partId].Slides.Count)
-				slideId = sng.Parts[partId].Slides.Count -1;
-
-            currentSlide = sng.Parts[partId].Slides[slideId];
+				slideId = sng.Parts[partId].Slides.Count;
 			
-            comboBoxSlideTextOrientation.DataBindings.Clear();
-            comboBoxSlideTextOrientation.DataBindings.Add("SelectedIndex", currentSlide, "SongTextAlignInt",false,DataSourceUpdateMode.OnPropertyChanged);
+			Song.Slide sld = sng.Parts[partId].Slides[slideId];
+			textBoxSongText.Text = sld.lineBreakText();
+			textBoxSongTranslation.Text = sld.lineBreakTranslation();
+			comboBoxSlideHorizOrientation.SelectedIndex = (int)sld.HorizontalAlign;
+			comboBoxSlideVertOrientation.SelectedIndex = (int)sld.VerticalAlign;
 
-            currentSlide.ContentChanged -= new Song.Slide.ContenChangedHandler(sld_ContentChanged);
-            currentSlide.ContentChanged += new Song.Slide.ContenChangedHandler(sld_ContentChanged);
-
-            textBoxSongText.DataBindings.Clear();
-            textBoxSongText.DataBindings.Add("Text", currentSlide, "EditableText", false, DataSourceUpdateMode.OnPropertyChanged);
-            textBoxSongTranslation.DataBindings.Clear();
-            textBoxSongTranslation.DataBindings.Add("Text", currentSlide, "EditableTranslation", false, DataSourceUpdateMode.OnPropertyChanged);
-
-            InstalledFontCollection fonts = new InstalledFontCollection();
-            int masterFontIdx = -1;
-            for(int i = 0; i < fonts.Families.Length; i++)
-            {
-                comboBoxFont.Items.Add(fonts.Families[i].Name);
-                if (Settings.Instance.ProjectionMasterFont.FontFamily.Name == fonts.Families[i].Name)
-                    masterFontIdx = i;
-                if (sng.TextFont.FontFamily.Name == fonts.Families[i].Name)
-                    comboBoxFont.SelectedIndex = i;
-            }
-            if (comboBoxFont.SelectedIndex < 0)
-            {
-                comboBoxFont.SelectedIndex = masterFontIdx;
-            }
+            object[] songArgs = {partId,slideId};
+            pictureBoxPreview.Image = projWindow.showSlide(sng, sng.getImage(sld.ImageNumber), songArgs, ProjectionMode.Simulate);
 
 			currentPartId = partId;
 			currentSlideId = slideId;
-            previewSlide();
         }
-
-
-        private void EditorChild_Load(object sender, EventArgs e)
-        {
-            ((EditorWindow)MdiParent).setStatus("Lied " + sng.FilePath + " geöffnet");
-
-        }
-
-        void sld_ContentChanged()
-        {
-            previewSlide();
-        }
-
-        int sldprevcnt = 0;
-        private void previewSlide()
-        {
-            Console.WriteLine("prev" + sldprevcnt++);
-            object[] songArgs = { currentPartId, currentSlideId };
-            pictureBoxPreview.Image = projWindow.showSlide(sng, sng.getImage(sng.Parts[currentPartId].Slides[currentSlideId].ImageNumber), songArgs, ProjectionMode.Simulate);
-        }
-
 
 		private void addSongPart(string caption)
 		{
 			Song.Part prt = new Song.Part(caption);
 			Song.Slide sld = new Song.Slide(sng);
 			sld.ImageNumber = 0;
-			sld.SongTextAlign = sng.DefaultSongTextAlign;
+			sld.HorizontalAlign = sng.DefaultHorizAlign;
+			sld.VerticalAlign = sng.DefaultVertAlign;
 
 			prt.Slides.Add(sld);
 			sng.Parts.Add(prt);
-
-            textBoxSongTitle.DataBindings.Add("Text", sng, "Title");
 
 			populateTree();
 			treeViewContents.SelectedNode = treeViewContents.Nodes[0].LastNode.LastNode;
@@ -348,6 +300,10 @@ namespace Pbp.Forms
         }
 
 
+        private void EditorChild_Load(object sender, EventArgs e)
+        {
+            ((EditorWindow)MdiParent).setStatus("Lied " + sng.FilePath + " geöffnet");
+        }
 
         private void buttonAddNewSlide_Click(object sender, EventArgs e)
         {
@@ -361,11 +317,11 @@ namespace Pbp.Forms
         {
             if (treeViewContents.SelectedNode != null)
             {
-                if (treeViewContents.SelectedNode.Level == 1)
+                if (treeViewContents.SelectedNode.Level == 2)
                 {
 					buttonDelSlide_Click(sender, e);
                 }
-                else if (treeViewContents.SelectedNode.Level == 0)
+                else if (treeViewContents.SelectedNode.Level == 1)
                 {
 					buttonDelSongPart_Click(sender, e);
                 }
@@ -376,23 +332,23 @@ namespace Pbp.Forms
         {
 			if (treeViewContents.SelectedNode != null)
 			{
-				if (treeViewContents.SelectedNode.Level == 1)
+				if (treeViewContents.SelectedNode.Level == 2)
 				{
 					int partId = treeViewContents.SelectedNode.Parent.Index;
 					int slideId = treeViewContents.SelectedNode.Index;
 					if (sng.Parts[partId].Slides.swapWithUpper(slideId))
 					{
 						populateTree();
-						treeViewContents.SelectedNode = treeViewContents.Nodes[partId].Nodes[slideId-1];
+						treeViewContents.SelectedNode = treeViewContents.Nodes[0].Nodes[partId].Nodes[slideId-1];
 					}
 				}
-				else if (treeViewContents.SelectedNode.Level == 0)
+				else if (treeViewContents.SelectedNode.Level == 1)
 				{
 					int partId = treeViewContents.SelectedNode.Index;
 					if (sng.Parts.swapWithUpper(partId))
 					{
 						populateTree();
-						treeViewContents.SelectedNode = treeViewContents.Nodes[partId-1];
+						treeViewContents.SelectedNode = treeViewContents.Nodes[0].Nodes[partId-1];
 					}
 				}
 			}
@@ -403,23 +359,23 @@ namespace Pbp.Forms
 		{
 			if (treeViewContents.SelectedNode != null)
 			{
-				if (treeViewContents.SelectedNode.Level == 1)
+				if (treeViewContents.SelectedNode.Level == 2)
 				{
 					int partId = treeViewContents.SelectedNode.Parent.Index;
 					int slideId = treeViewContents.SelectedNode.Index;
 					if (sng.Parts[partId].Slides.swapWithLower(slideId))
 					{
 						populateTree();
-						treeViewContents.SelectedNode = treeViewContents.Nodes[partId].Nodes[slideId + 1];
+						treeViewContents.SelectedNode = treeViewContents.Nodes[0].Nodes[partId].Nodes[slideId + 1];
 					}
 				}
-				else if (treeViewContents.SelectedNode.Level == 0)
+				else if (treeViewContents.SelectedNode.Level == 1)
 				{
 					int partId = treeViewContents.SelectedNode.Index;
 					if (sng.Parts.swapWithLower(partId))
 					{
 						populateTree();
-						treeViewContents.SelectedNode = treeViewContents.Nodes[partId + 1];
+						treeViewContents.SelectedNode = treeViewContents.Nodes[0].Nodes[partId + 1];
 					}
 				}
 			}
@@ -486,6 +442,21 @@ namespace Pbp.Forms
 			}
 		}
 
+
+        private void comboBoxSlideHorizOrientation_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            sng.Parts[currentPartId].Slides[currentSlideId].HorizontalAlign = (Song.SongTextHorizontalAlign)comboBoxSlideHorizOrientation.SelectedIndex;
+			sng.DefaultHorizAlign = sng.Parts[currentPartId].Slides[currentSlideId].HorizontalAlign;
+			previewSlide();
+        }
+
+        private void comboBoxSlideVertOrientation_SelectedIndexChanged(object sender, EventArgs e)
+        {
+			sng.Parts[currentPartId].Slides[currentSlideId].VerticalAlign = (Song.SongTextVerticalAlign)comboBoxSlideVertOrientation.SelectedIndex;
+			sng.DefaultVertAlign = sng.Parts[currentPartId].Slides[currentSlideId].VerticalAlign;
+			previewSlide();
+		}
+
         private void buttonProjectionMasterFont_Click(object sender, EventArgs e)
         {
             FontDialog dlg = new FontDialog();
@@ -500,7 +471,14 @@ namespace Pbp.Forms
 
         private void buttonTranslationFont_Click(object sender, EventArgs e)
         {
-
+            FontDialog dlg = new FontDialog();
+            dlg.Font = sng.TranslationFont;
+            if (dlg.ShowDialog() == DialogResult.OK)
+            {
+                sng.TranslationFont = dlg.Font;
+                labelFontTranslation.Text = sng.TranslationFont.Name + ", " + sng.TranslationFont.Style.ToString() + ", " + sng.TranslationFont.Size.ToString();
+				previewSlide();
+			}
         }
 
         private void buttonChooseProjectionForeColor_Click(object sender, EventArgs e)
@@ -526,6 +504,14 @@ namespace Pbp.Forms
 				previewSlide();
 			}
         }
+
+        private void trackBarLineSpacing_Scroll(object sender, EventArgs e)
+        {
+            sng.TextLineSpacing = trackBarLineSpacing.Value;
+            labelLineSpacing.Text = trackBarLineSpacing.Value.ToString();
+			previewSlide();
+		}
+
 
 		private void buttonDelSlide_Click(object sender, EventArgs e)
 		{
@@ -582,6 +568,20 @@ namespace Pbp.Forms
 		private void EditorChild_Resize(object sender, EventArgs e)
 		{
 			alignTextFields();
+		}
+
+		private void textBoxSongTranslation_TextChanged(object sender, EventArgs e)
+		{
+			if (treeViewContents.SelectedNode.Level == 2)
+			{
+				int partIdx = treeViewContents.SelectedNode.Parent.Index;
+				int slideIdx = treeViewContents.SelectedNode.Index;
+
+				sng.Parts[partIdx].Slides[slideIdx].setSlideTextTranslation(textBoxSongTranslation.Text);
+
+                object[] songArgs = { partIdx, slideIdx };
+                pictureBoxPreview.Image = projWindow.showSlide(sng, sng.getImage(sng.Parts[partIdx].Slides[slideIdx].ImageNumber), songArgs, ProjectionMode.Simulate);
+			}
 		}
 
 		private void alignTextFields()
@@ -667,6 +667,21 @@ namespace Pbp.Forms
 			}
 		}
 
+		private void updateSongText(object sender, EventArgs e)
+		{
+			if (treeViewContents.SelectedNode.Level == 2)
+			{
+				int partIdx = treeViewContents.SelectedNode.Parent.Index;
+				int slideIdx = treeViewContents.SelectedNode.Index;
+
+				sng.Parts[partIdx].Slides[slideIdx].setSlideText(textBoxSongText.Text);
+
+                object[] songArgs = { partIdx, slideIdx };
+                pictureBoxPreview.Image = projWindow.showSlide(sng, sng.getImage(sng.Parts[partIdx].Slides[slideIdx].ImageNumber), songArgs, ProjectionMode.Simulate);
+
+			}
+		}
+
 		private void buttonSlideBackground_Click(object sender, EventArgs e)
 		{
 				ImageDialog imd = new ImageDialog();
@@ -749,6 +764,26 @@ namespace Pbp.Forms
 			addContextMenu.Show(buttonAddItem.PointToScreen(new Point(0, buttonAddItem.Height-1)));
 		}
 
+		private void textBoxSongText_KeyUp(object sender, KeyEventArgs e)
+		{
+			string text = ((TextBox)sender).Text.Trim();
+			sng.Parts[currentPartId].Slides[currentSlideId].setSlideText(text);
+			previewSlide();
+		}
+
+		private void previewSlide()
+		{
+            object[] songArgs = { currentPartId, currentSlideId };
+            pictureBoxPreview.Image = projWindow.showSlide(sng, sng.getImage(sng.Parts[currentPartId].Slides[currentSlideId].ImageNumber), songArgs, ProjectionMode.Simulate);
+		}
+
+		private void textBoxSongTranslation_KeyUp(object sender, KeyEventArgs e)
+		{
+			string text = ((TextBox)sender).Text.Trim();
+			sng.Parts[currentPartId].Slides[currentSlideId].setSlideTextTranslation(text);
+			previewSlide();
+		}
+
 		private void neueFolieToolStripMenuItem_Click(object sender, EventArgs e)
 		{
 			buttonAddNewSlide_Click(sender, e);
@@ -804,7 +839,7 @@ namespace Pbp.Forms
 		{
 			// --- Here we can customize label for editing ---
 			TreeNode tn = treeViewContents.SelectedNode;
-			if (tn.Level > 0)
+			if (tn.Level > 1)
 				e.CancelEdit = true;
 		}
 
@@ -812,16 +847,13 @@ namespace Pbp.Forms
 		{
 			// --- Here we can transform edited label back to its original format ---
 			TreeNode tn = treeViewContents.SelectedNode;
-            /*
 			if (tn.Level == 0)
 			{
 				tn.Text = e.Label;
 				sng.Title = e.Label;
 				this.Text = e.Label;
 			}
-			else 
-             * */
-            if (tn.Level == 0)
+			else if (tn.Level == 1)
 			{
 				tn.Text = e.Label;
 				sng.Parts[tn.Index].Caption = e.Label;
@@ -862,104 +894,5 @@ namespace Pbp.Forms
 		{
 			buttonDelSongPart_Click(sender, e);
 		}
-
-        private void pictureBoxPreview_Click(object sender, EventArgs e)
-        {
-            Form previewFrm = new Form();
-            previewFrm.Location = Screen.PrimaryScreen.Bounds.Location;
-            //previewFrm.WindowState = FormWindowState.Maximized;
-            previewFrm.Size = Screen.PrimaryScreen.Bounds.Size;
-            previewFrm.TopMost = true;
-            previewFrm.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
-            object[] songArgs = { currentPartId, currentSlideId };
-            PictureBox prevPic = new PictureBox();
-            prevPic.BackColor = Color.Black;
-            prevPic.Image = projWindow.showSlide(sng, sng.getImage(sng.Parts[currentPartId].Slides[currentSlideId].ImageNumber), songArgs, ProjectionMode.Simulate);
-            prevPic.Location = new Point(0, 0);
-            prevPic.Size = previewFrm.Size;
-            prevPic.SizeMode = PictureBoxSizeMode.StretchImage;
-            prevPic.Click += new EventHandler(prevPic_Click);
-            previewFrm.Controls.Add(prevPic);
-            previewFrm.KeyDown += new KeyEventHandler(previewFrm_KeyDown);
-            previewFrm.Show();
-
-        }
-
-        void previewFrm_KeyDown(object sender, KeyEventArgs e)
-        {
-            ((Form)sender).Close();
-        }
-
-        void prevPic_Click(object sender, EventArgs e)
-        {
-            ((Form)((Control)sender).Parent).Close();
-        }
-
-        private void tabPage1_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void splitContainer1_Paint(object sender, PaintEventArgs e)
-        {
-            base.OnPaint(e);
-            splitContainer1.SplitterDistance = splitContainer1.Size.Width / 2;
-        }
-
-        private void textBoxSongTitle_TextChanged(object sender, EventArgs e)
-        {
-           this.Name = ((TextBox)sender).Text;
-        }
-
-        private void buttonApplyAlignmentToAll_Click(object sender, EventArgs e)
-        {
-            for (int i = 0; i < sng.Slides.Count; i++)
-            {
-                sng.Slides[i].SongTextAlign = currentSlide.SongTextAlign;
-            }
-        }
-
-        
-
-        private void comboBoxFont_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            /*
-            FontFamily ff = new FontFamily(comboBoxFont.SelectedItem.ToString());
-            List<FontStyle> supportedStyles = new List<FontStyle>();
-            String oldStyle = string.Empty;
-            if (comboBoxTextFontStyle.SelectedIndex>=0)
-                oldStyle = comboBoxTextFontStyle.SelectedItem.ToString();
-            comboBoxTextFontStyle.Items.Clear();
-
-            foreach (KeyValuePair<String, FontStyle> kvp in fontStylemap)
-            {
-                if (ff.IsStyleAvailable(kvp.Value))
-                {
-                    supportedStyles.Add(kvp.Value);
-                    comboBoxTextFontStyle.Items.Add(kvp.Key);
-                }
-            }
-
-            for (int i = 0; i < comboBoxTextFontStyle.Items.Count; i++)
-            {
-                if (comboBoxTextFontStyle.Items[i].ToString() == oldStyle)
-                    comboBoxTextFontStyle.SelectedIndex = i;
-            }
-            if (comboBoxTextFontStyle.SelectedIndex < 0)
-                comboBoxTextFontStyle.SelectedIndex = 0;*/
-        }
-
-        private void comboBoxTextFontStyle_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            /*
-            FontFamily ff = new FontFamily(comboBoxFont.SelectedItem.ToString());
-            if (comboBoxTextFontStyle.SelectedIndex >= 0)
-            {
-                sng.TextFont = new Font(ff, sng.TextFont.Size, fontStylemap[comboBoxTextFontStyle.SelectedItem.ToString()]);
-            }
-            previewSlide();
-             */
-        }
-
     }
 }

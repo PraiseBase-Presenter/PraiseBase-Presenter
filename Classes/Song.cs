@@ -118,38 +118,6 @@ namespace Pbp
         /// Gets or sets the text font
         /// </summary>
         public Font TextFont {get;set;}
-        /*
-        /// <summary>
-        /// Gets or sets the text font
-        /// </summary>
-        public String TextFontFamily { 
-            get {
-                return TextFont.FontFamily.Name;
-            }
-            set {
-                FontFamily ff = new FontFamily(value);
-                List<FontStyle> supportedStyles = new List<FontStyle>();
-                if (ff.IsStyleAvailable(FontStyle.Bold))
-                    supportedStyles.Add(FontStyle.Bold);
-                if (ff.IsStyleAvailable(FontStyle.Italic))
-                    supportedStyles.Add(FontStyle.Italic);
-                if (ff.IsStyleAvailable(FontStyle.Regular))
-                    supportedStyles.Add(FontStyle.Regular);
-                if (ff.IsStyleAvailable(FontStyle.Strikeout))
-                    supportedStyles.Add(FontStyle.Strikeout);
-                if (ff.IsStyleAvailable(FontStyle.Underline))
-                    supportedStyles.Add(FontStyle.Underline);
-                if (supportedStyles.Contains(TextFont.Style))
-                {
-                    TextFont = new Font(ff, TextFont.Size, TextFont.Style);
-                }
-                else
-                {
-                    TextFont = new Font(ff, TextFont.Size, supportedStyles[0]);
-                }
-            } 
-        }*/
-        
         /// <summary>
         /// Gets or sets the text color
         /// </summary>
@@ -191,11 +159,14 @@ namespace Pbp
         /// List of the paths to all images
         /// </summary>
 		public List<string> RelativeImagePaths { get; set; }
-        /// <summary>
-        /// Default vertical text aligning
-        /// </summary>
-        public TextAlign DefaultSongTextAlign { get; set; }
-
+		/// <summary>
+		/// Default horizontal text aligning
+		/// </summary>
+		public SongTextHorizontalAlign DefaultHorizAlign { get; set; }
+		/// <summary>
+		/// Default vertical text aligning
+		/// </summary>
+		public SongTextVerticalAlign DefaultVertAlign { get; set; }
 		#endregion
 
         public System.Guid GUID {  get;private set;}
@@ -228,7 +199,8 @@ namespace Pbp
 
 			FilePath = filePath;
 			Tags = new TagList();
-            DefaultSongTextAlign = TextAlign.MiddleLeft;
+			DefaultHorizAlign = SongTextHorizontalAlign.Center;
+			DefaultVertAlign = SongTextVerticalAlign.Center;
 			Slides = new SlideList();
 			Parts = new PartList();
 			RelativeImagePaths = new List<string>();
@@ -299,7 +271,7 @@ namespace Pbp
 
 		private FileFormat detectFileType(XmlElement xmlRoot)
 		{
-			if (xmlRoot.Name == "ppl" && (xmlRoot.GetAttribute("version") == "3.0" || xmlRoot.GetAttribute("version") == "4.0"))
+			if (xmlRoot.Name == "ppl" && xmlRoot.GetAttribute("version") == "3.0")
 			{
 				return FileFormat.ppl;
 			}
@@ -419,52 +391,36 @@ namespace Pbp
 
 			if (xmlRoot["formatting"]["textorientation"] != null)
 			{
-                if (xmlRoot["formatting"]["textorientation"]["horizontal"] != null && xmlRoot["formatting"]["textorientation"]["vertical"] != null)
+				if (xmlRoot["formatting"]["textorientation"]["horizontal"] != null)
 				{
-                    string horiz = xmlRoot["formatting"]["textorientation"]["horizontal"].InnerText;
-                    string vert = xmlRoot["formatting"]["textorientation"]["vertical"].InnerText;
-                    if (horiz == "left" && vert == "")
-                    {
-                        DefaultSongTextAlign = TextAlign.MiddleLeft;
-                    }
-                    else if (horiz == "left" && vert == "top")
-                    {
-                        DefaultSongTextAlign = TextAlign.TopLeft;
-                    }
-                    else if (horiz == "center" && vert == "top")
-                    {
-                        DefaultSongTextAlign = TextAlign.TopCenter;
-                    }
-                    else if (horiz == "right" && vert == "top")
-                    {
-                        DefaultSongTextAlign = TextAlign.TopRight;
-                    }
-                    else if (horiz == "left" && vert == "center")
-                    {
-                        DefaultSongTextAlign = TextAlign.MiddleLeft;
-                    }
-                    else if (horiz == "center" && vert == "center")
-                    {
-                        DefaultSongTextAlign = TextAlign.MiddleCenter;
-                    }
-                    else if (horiz == "right" && vert == "center")
-                    {
-                        DefaultSongTextAlign = TextAlign.MiddleRight;
-                    }
-                    else if (horiz == "left" && vert == "bottom")
-                    {
-                        DefaultSongTextAlign = TextAlign.BottomLeft;
-                    }
-                    else if (horiz == "center" && vert == "bottom")
-                    {
-                        DefaultSongTextAlign = TextAlign.BottomCenter;
-                    }
-                    else if (horiz == "right" && vert == "bottom")
-                    {
-                        DefaultSongTextAlign = TextAlign.BottomRight;
-                    }
+					switch (xmlRoot["formatting"]["textorientation"]["horizontal"].InnerText)
+					{
+						case "left":
+							DefaultHorizAlign = SongTextHorizontalAlign.Left;
+							break;
+						case "center":
+							DefaultHorizAlign = SongTextHorizontalAlign.Center;
+							break;
+						case "right":
+							DefaultHorizAlign = SongTextHorizontalAlign.Right;
+							break;
+					}
 				}
-
+				if (xmlRoot["formatting"]["textorientation"]["vertical"] != null)
+				{
+					switch (xmlRoot["formatting"]["textorientation"]["vertical"].InnerText)
+					{
+						case "top":
+							DefaultVertAlign = SongTextVerticalAlign.Top;
+							break;
+						case "center":
+							DefaultVertAlign = SongTextVerticalAlign.Center;
+							break;
+						case "bottom":
+							DefaultVertAlign = SongTextVerticalAlign.Bottom;
+							break;
+					}
+				}
 			}
 
 			if (xmlRoot["formatting"]["font"]["maintext"] != null)
@@ -528,19 +484,8 @@ namespace Pbp
 						{
 							Slide tmpSlide = new Slide(this);
 							tmpSlide.Lines = new List<string>();
-                            if (slideElem.Attributes["align"] != null)
-                            {
-                                try
-                                {
-                                    tmpSlide.SongTextAlign = (TextAlign)Enum.Parse(typeof(TextAlign), slideElem.GetAttribute("align"), true);
-                                }
-                                catch (Exception ex)
-                                {
-                                    tmpSlide.SongTextAlign = DefaultSongTextAlign;
-                                }
-                            }
-                            else
-                                tmpSlide.SongTextAlign = DefaultSongTextAlign;
+							tmpSlide.HorizontalAlign = DefaultHorizAlign;
+							tmpSlide.VerticalAlign = DefaultVertAlign;
 
 							int bgNr = System.Convert.ToInt32(slideElem.GetAttribute("backgroundnr")) + 1;
 							bgNr = bgNr < 0 ? 0 : bgNr;
@@ -595,7 +540,7 @@ namespace Pbp
 
 				xmlDoc.AppendChild(xmlDoc.CreateElement("ppl"));
 				XmlElement xmlRoot = xmlDoc.DocumentElement;
-				xmlRoot.SetAttribute("version", "4.0");
+				xmlRoot.SetAttribute("version", "3.0");
 
 				xmlRoot.AppendChild(xmlDoc.CreateElement("general"));
 				xmlRoot["general"].AppendChild(xmlDoc.CreateElement("title"));
@@ -649,9 +594,8 @@ namespace Pbp
 						XmlElement tn2 = xmlDoc.CreateElement("slide");
 						tn2.SetAttribute("mainsize", TextFont.Size.ToString());
 						tn2.SetAttribute("backgroundnr", (sld.ImageNumber - 1).ToString());
-                        tn2.SetAttribute("align", sld.SongTextAlign.ToString());
 
-                        foreach (string ln in sld.Lines)
+						foreach (string ln in sld.Lines)
 						{
 							XmlElement tn3 = xmlDoc.CreateElement("line");
 							tn3.InnerText = ln;
@@ -784,49 +728,19 @@ namespace Pbp
 
 				xmlRoot["formatting"].AppendChild(xmlDoc.CreateElement("textorientation"));
 				xmlRoot["formatting"]["textorientation"].AppendChild(xmlDoc.CreateElement("horizontal"));
+				if (Parts[0].Slides[0].HorizontalAlign == SongTextHorizontalAlign.Left)
+					xmlRoot["formatting"]["textorientation"]["horizontal"].InnerText = "left";
+				else if (Parts[0].Slides[0].HorizontalAlign == SongTextHorizontalAlign.Right)
+					xmlRoot["formatting"]["textorientation"]["horizontal"].InnerText = "right";
+				else
+					xmlRoot["formatting"]["textorientation"]["horizontal"].InnerText = "center";
 				xmlRoot["formatting"]["textorientation"].AppendChild(xmlDoc.CreateElement("vertical"));
-
-    			switch (DefaultSongTextAlign)
-                {
-                    case TextAlign.TopLeft:
-                        xmlRoot["formatting"]["textorientation"]["vertical"].InnerText = "top";
-    					xmlRoot["formatting"]["textorientation"]["horizontal"].InnerText = "left";
-                        break;
-                    case TextAlign.TopCenter:
-                        xmlRoot["formatting"]["textorientation"]["vertical"].InnerText = "top";
-        				xmlRoot["formatting"]["textorientation"]["horizontal"].InnerText = "center";
-                        break;
-                    case TextAlign.TopRight:
-                        xmlRoot["formatting"]["textorientation"]["vertical"].InnerText = "top";
-        				xmlRoot["formatting"]["textorientation"]["horizontal"].InnerText = "right";
-                        break;
-                    case TextAlign.MiddleLeft:
-        				xmlRoot["formatting"]["textorientation"]["vertical"].InnerText = "center";
-        				xmlRoot["formatting"]["textorientation"]["horizontal"].InnerText = "left";
-                        break;
-                    case TextAlign.MiddleCenter:
-        				xmlRoot["formatting"]["textorientation"]["vertical"].InnerText = "center";
-    					xmlRoot["formatting"]["textorientation"]["horizontal"].InnerText = "center";
-                        break;
-                    case TextAlign.MiddleRight:
-        				xmlRoot["formatting"]["textorientation"]["vertical"].InnerText = "center";
-        				xmlRoot["formatting"]["textorientation"]["horizontal"].InnerText = "right";
-                        break;
-                    case TextAlign.BottomLeft:
-        				xmlRoot["formatting"]["textorientation"]["vertical"].InnerText = "bottom";
-    					xmlRoot["formatting"]["textorientation"]["horizontal"].InnerText = "left";
-                        break;
-                    case TextAlign.BottomCenter:
-		        		xmlRoot["formatting"]["textorientation"]["vertical"].InnerText = "bottom";
-        				xmlRoot["formatting"]["textorientation"]["horizontal"].InnerText = "center";
-                        break;
-                    case TextAlign.BottomRight:
-				        xmlRoot["formatting"]["textorientation"]["vertical"].InnerText = "bottom";
-        				xmlRoot["formatting"]["textorientation"]["horizontal"].InnerText = "right";
-                        break;
-                }
-
-
+				if (Parts[0].Slides[0].VerticalAlign == SongTextVerticalAlign.Top)
+					xmlRoot["formatting"]["textorientation"]["vertical"].InnerText = "top";
+				else if (Parts[0].Slides[0].VerticalAlign == SongTextVerticalAlign.Bottom)
+					xmlRoot["formatting"]["textorientation"]["vertical"].InnerText = "bottom";
+				else
+					xmlRoot["formatting"]["textorientation"]["vertical"].InnerText = "center";
 				xmlRoot["formatting"]["textorientation"].AppendChild(xmlDoc.CreateElement("transpos"));
 				xmlRoot["formatting"]["textorientation"]["transpos"].InnerText = "inline";
 
@@ -932,23 +846,9 @@ namespace Pbp
                 Brush fontBrush;
                 Brush fontTranslationBrush;
 
-
-                int padding = Settings.Instance.ProjectionPadding;
-                int shadowThickness = Settings.Instance.ProjectionShadowSize;
-                int outLineThickness = Settings.Instance.ProjectionOutlineSize;
-                String str = String.Empty;
-
-                int usableWidth = w - (2 * padding);
-                int usableHeight = h - (2 * padding);
-
-                //float maxFontHeigthPercent = 0.15f; // 0.125f;
-
                 if (Settings.Instance.ProjectionUseMaster && pr != ProjectionMode.Simulate)
                 {
-                    //float bar = 12 * maxFontHeigthPercent * usableHeight / gr.MeasureString("M", new Font(Settings.Instance.ProjectionMasterFont.FontFamily, 12f, Settings.Instance.ProjectionMasterFont.Style)).Height;
-                    //font = new Font(Settings.Instance.ProjectionMasterFont.FontFamily, bar, Settings.Instance.ProjectionMasterFont.Style);
                     font = Settings.Instance.ProjectionMasterFont;
-
                     fontTr = Settings.Instance.ProjectionMasterFontTranslation;
                     lineSpacing = Settings.Instance.ProjectionMasterLineSpacing;
                     fontBrush = new SolidBrush(Settings.Instance.ProjectionMasterFontColor);
@@ -964,6 +864,13 @@ namespace Pbp
                 }
 
 
+                int padding = Settings.Instance.ProjectionPadding;
+                int shadowThickness = Settings.Instance.ProjectionShadowSize;
+                int outLineThickness = Settings.Instance.ProjectionOutlineSize;
+                String str = String.Empty;
+
+                int usableWidth = w - (2 * padding);
+                int usableHeight = h - (2 * padding);
 
                 int textStartX = padding;
                 int textStartY = padding;
@@ -973,12 +880,12 @@ namespace Pbp
                 int endSpacing = 0;
                 if (slide.Translated)
                 {
-                    strMeasureTrans = gr.MeasureString(slide.EditableTranslation, fontTr);
+                    strMeasureTrans = gr.MeasureString(slide.lineBreakTranslation(), fontTr);
                     lineSpacing += (int)(strMeasureTrans.Height / slide.Translation.Count) + lineSpacing;
                     endSpacing = (int)(strMeasureTrans.Height / slide.Translation.Count) + lineSpacing;
                 }
 
-                SizeF strMeasure = gr.MeasureString(slide.EditableText, font);
+                SizeF strMeasure = gr.MeasureString(slide.lineBreakText(), font);
                 Brush shadodBrush = Brushes.Transparent;
                 int usedWidth = (int)strMeasure.Width;
                 int usedHeight = (int)strMeasure.Height + (lineSpacing * (slide.Lines.Count - 1)) + endSpacing;
@@ -988,52 +895,37 @@ namespace Pbp
                 {
                     scalingFactor = Math.Min((float)usableWidth / (float)usedWidth, (float)usableHeight / (float)usedHeight);
                     font = new Font(font.FontFamily, font.Size * scalingFactor, font.Style);
-                    strMeasure = gr.MeasureString(slide.EditableText, font);
+                    strMeasure = gr.MeasureString(slide.lineBreakText(), font);
                     usedWidth = (int)strMeasure.Width;
                     usedHeight = (int)strMeasure.Height + (lineSpacing * (slide.Lines.Count - 1));
                 }
                 int lineHeight = (int)(strMeasure.Height / slide.Lines.Count);
 
                 // Horizontal stuff
-                switch (slide.SongTextAlign)
+                switch (slide.HorizontalAlign)
                 {
-                    case TextAlign.TopLeft:
+                    case Song.SongTextHorizontalAlign.Left:
                         strFormat.Alignment = StringAlignment.Near;
                         break;
-                    case TextAlign.TopCenter:
+                    case Song.SongTextHorizontalAlign.Center:
                         textStartX = w / 2;
                         strFormat.Alignment = StringAlignment.Center;
                         break;
-                    case TextAlign.TopRight:
+                    case Song.SongTextHorizontalAlign.Right:
                         textStartX = textStartX + usableWidth;
                         strFormat.Alignment = StringAlignment.Far;
                         break;
-                    case TextAlign.MiddleLeft:
-                        strFormat.Alignment = StringAlignment.Near;
+                }
+
+                // Vertical stuff
+                switch (slide.VerticalAlign)
+                {
+                    case Song.SongTextVerticalAlign.Top:
+                        break;
+                    case Song.SongTextVerticalAlign.Center:
                         textStartY = textStartY + (usableHeight / 2) - (usedHeight / 2);
                         break;
-                    case TextAlign.MiddleCenter:
-                        textStartX = w / 2;
-                        strFormat.Alignment = StringAlignment.Center;
-                        textStartY = textStartY + (usableHeight / 2) - (usedHeight / 2);
-                        break;
-                    case TextAlign.MiddleRight:
-                        textStartX = textStartX + usableWidth;
-                        strFormat.Alignment = StringAlignment.Far;
-                        textStartY = textStartY + (usableHeight / 2) - (usedHeight / 2);
-                        break;
-                    case TextAlign.BottomLeft:
-                        strFormat.Alignment = StringAlignment.Near;
-                        textStartY = textStartY + usableHeight - usedHeight;
-                        break;
-                    case TextAlign.BottomCenter:
-                        textStartX = w / 2;
-                        strFormat.Alignment = StringAlignment.Center;
-                        textStartY = textStartY + usableHeight - usedHeight;
-                        break;
-                    case TextAlign.BottomRight:
-                        textStartX = textStartX + usableWidth;
-                        strFormat.Alignment = StringAlignment.Far;
+                    case Song.SongTextVerticalAlign.Bottom:
                         textStartY = textStartY + usableHeight - usedHeight;
                         break;
                 }
@@ -1041,14 +933,12 @@ namespace Pbp
                 int textX = textStartX;
                 int textY = textStartY;
 
-                // Apply shadow
                 if (pr != ProjectionMode.Simulate && shadowThickness > 0)
                 {
                     shadodBrush = new SolidBrush(Color.FromArgb(15, Settings.Instance.ProjectionShadowColor));
                     gr.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.HighQuality;
                     gr.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.HighQualityBilinear;
-                    // Does some problems when scaling the font
-                    //gr.TextRenderingHint = TextRenderingHint.AntiAliasGridFit;
+                    gr.TextRenderingHint = TextRenderingHint.AntiAliasGridFit;
 
                     foreach (string s in slide.Lines)
                     {
@@ -1063,7 +953,6 @@ namespace Pbp
                     }
                     textY = textStartY;
                 }
-                // Apply thickness
                 if (pr != ProjectionMode.Simulate && outLineThickness > 0)
                 {
                     gr.SmoothingMode = SmoothingMode.None;
