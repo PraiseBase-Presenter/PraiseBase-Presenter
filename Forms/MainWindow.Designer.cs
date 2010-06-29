@@ -74,14 +74,9 @@
             this.buttonSaveSetList = new System.Windows.Forms.Button();
             this.buttonSetListAdd = new System.Windows.Forms.Button();
             this.buttonSetListClear = new System.Windows.Forms.Button();
-            this.listViewSetList = new Bol.WinControls.ListViewEx();
-            this.columnHeader4 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.buttonSetListRem = new System.Windows.Forms.Button();
             this.buttonSetListDown = new System.Windows.Forms.Button();
             this.buttonSetListUp = new System.Windows.Forms.Button();
-            this.labelFadeTime = new System.Windows.Forms.Label();
-            this.label7 = new System.Windows.Forms.Label();
-            this.trackBarFadeTimer = new System.Windows.Forms.TrackBar();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.toolStripButtonProjectionOff = new System.Windows.Forms.ToolStripButton();
             this.toolStripButtonBlackout = new System.Windows.Forms.ToolStripButton();
@@ -105,18 +100,9 @@
             this.toolStripStatusLabel = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStripStatusLabelCtrl = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStripStatusLabelInfo = new System.Windows.Forms.ToolStripStatusLabel();
-            this.groupBox5 = new System.Windows.Forms.GroupBox();
-            this.label3 = new System.Windows.Forms.Label();
-            this.buttonToggleLayerMode = new System.Windows.Forms.Button();
-            this.progressBarTransition = new System.Windows.Forms.ProgressBar();
-            this.pictureBoxPreview = new System.Windows.Forms.PictureBox();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.groupBoxSongContents = new System.Windows.Forms.GroupBox();
-            this.songDetailElement = new SongDetails.SongDetail();
-            this.songDetailImages = new System.Windows.Forms.ListView();
-            this.columnHeader7 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.label6 = new System.Windows.Forms.Label();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.listViewSongs = new System.Windows.Forms.ListView();
             this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
@@ -165,14 +151,22 @@
             this.columnHeader6 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.buttonResetImageQueue = new System.Windows.Forms.Button();
             this.timerElementHighlight = new System.Windows.Forms.Timer(this.components);
+            this.trackBarFadeTimer = new System.Windows.Forms.TrackBar();
+            this.labelFadeTime = new System.Windows.Forms.Label();
+            this.label7 = new System.Windows.Forms.Label();
+            this.pictureBoxPreview = new System.Windows.Forms.PictureBox();
+            this.progressBarTransition = new System.Windows.Forms.ProgressBar();
+            this.buttonToggleLayerMode = new System.Windows.Forms.Button();
+            this.label3 = new System.Windows.Forms.Label();
+            this.groupBox5 = new System.Windows.Forms.GroupBox();
+            this.songDetailElement = new SongDetails.SongDetail();
+            this.listViewSetList = new Bol.WinControls.ListViewEx();
+            this.columnHeader4 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             buttonChooseDiaDir = new System.Windows.Forms.Button();
             this.menuStrip1.SuspendLayout();
             this.groupBox4.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.trackBarFadeTimer)).BeginInit();
             this.toolStrip1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
-            this.groupBox5.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxPreview)).BeginInit();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.groupBoxSongContents.SuspendLayout();
@@ -187,6 +181,9 @@
             this.tableLayoutPanel1.SuspendLayout();
             this.panel1.SuspendLayout();
             this.groupBoxImageStack.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.trackBarFadeTimer)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxPreview)).BeginInit();
+            this.groupBox5.SuspendLayout();
             this.SuspendLayout();
             // 
             // buttonChooseDiaDir
@@ -572,28 +569,6 @@
             this.buttonSetListClear.UseVisualStyleBackColor = true;
             this.buttonSetListClear.Click += new System.EventHandler(this.buttonSetListClear_Click);
             // 
-            // listViewSetList
-            // 
-            this.listViewSetList.AllowDrop = true;
-            this.listViewSetList.AllowRowReorder = true;
-            this.listViewSetList.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Right)));
-            this.listViewSetList.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
-            this.columnHeader4});
-            this.listViewSetList.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.listViewSetList.FullRowSelect = true;
-            this.listViewSetList.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.None;
-            this.listViewSetList.HideSelection = false;
-            this.listViewSetList.Location = new System.Drawing.Point(5, 19);
-            this.listViewSetList.MultiSelect = false;
-            this.listViewSetList.Name = "listViewSetList";
-            this.listViewSetList.Size = new System.Drawing.Size(234, 244);
-            this.listViewSetList.TabIndex = 27;
-            this.listViewSetList.UseCompatibleStateImageBehavior = false;
-            this.listViewSetList.View = System.Windows.Forms.View.Details;
-            this.listViewSetList.SelectedIndexChanged += new System.EventHandler(this.listViewSetList_SelectedIndexChanged);
-            this.listViewSetList.MouseClick += new System.Windows.Forms.MouseEventHandler(this.listViewSetList_MouseClick);
-            // 
             // buttonSetListRem
             // 
             this.buttonSetListRem.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
@@ -633,40 +608,6 @@
             this.buttonSetListUp.TabIndex = 24;
             this.buttonSetListUp.UseVisualStyleBackColor = true;
             this.buttonSetListUp.Click += new System.EventHandler(this.buttonSetListUp_Click);
-            // 
-            // labelFadeTime
-            // 
-            this.labelFadeTime.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.labelFadeTime.AutoSize = true;
-            this.labelFadeTime.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelFadeTime.Location = new System.Drawing.Point(144, 23);
-            this.labelFadeTime.Name = "labelFadeTime";
-            this.labelFadeTime.Size = new System.Drawing.Size(41, 13);
-            this.labelFadeTime.TabIndex = 33;
-            this.labelFadeTime.Text = "500 ms";
-            // 
-            // label7
-            // 
-            this.label7.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.label7.AutoSize = true;
-            this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label7.Location = new System.Drawing.Point(18, 23);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(89, 13);
-            this.label7.TabIndex = 32;
-            this.label7.Text = "Übergangsdauer:";
-            // 
-            // trackBarFadeTimer
-            // 
-            this.trackBarFadeTimer.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.trackBarFadeTimer.Location = new System.Drawing.Point(9, 39);
-            this.trackBarFadeTimer.Maximum = 100;
-            this.trackBarFadeTimer.Name = "trackBarFadeTimer";
-            this.trackBarFadeTimer.Size = new System.Drawing.Size(226, 45);
-            this.trackBarFadeTimer.TabIndex = 31;
-            this.trackBarFadeTimer.TickFrequency = 5;
-            this.trackBarFadeTimer.Value = 10;
-            this.trackBarFadeTimer.Scroll += new System.EventHandler(this.trackBarFadeTimer_Scroll);
             // 
             // toolStrip1
             // 
@@ -889,65 +830,6 @@
             this.toolStripStatusLabelInfo.Spring = true;
             this.toolStripStatusLabelInfo.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
-            // groupBox5
-            // 
-            this.groupBox5.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.groupBox5.Controls.Add(this.label3);
-            this.groupBox5.Controls.Add(this.buttonToggleLayerMode);
-            this.groupBox5.Controls.Add(this.progressBarTransition);
-            this.groupBox5.Controls.Add(this.pictureBoxPreview);
-            this.groupBox5.Controls.Add(this.label7);
-            this.groupBox5.Controls.Add(this.labelFadeTime);
-            this.groupBox5.Controls.Add(this.trackBarFadeTimer);
-            this.groupBox5.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.groupBox5.Location = new System.Drawing.Point(753, 98);
-            this.groupBox5.Name = "groupBox5";
-            this.groupBox5.Size = new System.Drawing.Size(247, 300);
-            this.groupBox5.TabIndex = 34;
-            this.groupBox5.TabStop = false;
-            this.groupBox5.Text = "Projektion";
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(40, 274);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(58, 13);
-            this.label3.TabIndex = 37;
-            this.label3.Text = "LinkLayers";
-            // 
-            // buttonToggleLayerMode
-            // 
-            this.buttonToggleLayerMode.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.buttonToggleLayerMode.Image = global::Pbp.Properties.Resources.unlink;
-            this.buttonToggleLayerMode.Location = new System.Drawing.Point(7, 268);
-            this.buttonToggleLayerMode.Name = "buttonToggleLayerMode";
-            this.buttonToggleLayerMode.Size = new System.Drawing.Size(29, 25);
-            this.buttonToggleLayerMode.TabIndex = 36;
-            this.buttonToggleLayerMode.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.buttonToggleLayerMode.UseVisualStyleBackColor = true;
-            this.buttonToggleLayerMode.Click += new System.EventHandler(this.button2_Click_1);
-            // 
-            // progressBarTransition
-            // 
-            this.progressBarTransition.Location = new System.Drawing.Point(7, 252);
-            this.progressBarTransition.Name = "progressBarTransition";
-            this.progressBarTransition.Size = new System.Drawing.Size(228, 10);
-            this.progressBarTransition.Step = 1;
-            this.progressBarTransition.TabIndex = 35;
-            // 
-            // pictureBoxPreview
-            // 
-            this.pictureBoxPreview.BackColor = System.Drawing.Color.Black;
-            this.pictureBoxPreview.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pictureBoxPreview.Location = new System.Drawing.Point(11, 75);
-            this.pictureBoxPreview.Name = "pictureBoxPreview";
-            this.pictureBoxPreview.Size = new System.Drawing.Size(228, 171);
-            this.pictureBoxPreview.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pictureBoxPreview.TabIndex = 34;
-            this.pictureBoxPreview.TabStop = false;
-            // 
             // tabControl1
             // 
             this.tabControl1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
@@ -981,8 +863,6 @@
                         | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
             this.groupBoxSongContents.Controls.Add(this.songDetailElement);
-            this.groupBoxSongContents.Controls.Add(this.songDetailImages);
-            this.groupBoxSongContents.Controls.Add(this.label6);
             this.groupBoxSongContents.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.groupBoxSongContents.Location = new System.Drawing.Point(249, 2);
             this.groupBoxSongContents.Name = "groupBoxSongContents";
@@ -990,54 +870,6 @@
             this.groupBoxSongContents.TabIndex = 32;
             this.groupBoxSongContents.TabStop = false;
             this.groupBoxSongContents.Text = "Liedinhalt";
-            // 
-            // songDetailElement
-            // 
-            this.songDetailElement.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
-            this.songDetailElement.AutoScroll = true;
-            this.songDetailElement.BackColor = System.Drawing.Color.White;
-            this.songDetailElement.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.songDetailElement.ForeColor = System.Drawing.SystemColors.WindowText;
-            this.songDetailElement.Location = new System.Drawing.Point(6, 16);
-            this.songDetailElement.Name = "songDetailElement";
-            this.songDetailElement.Size = new System.Drawing.Size(343, 240);
-            this.songDetailElement.TabIndex = 20;
-            this.songDetailElement.SlideClicked += new SongDetails.SongDetail.slideClick(this.songDetailElement_SlideClicked);
-            // 
-            // songDetailImages
-            // 
-            this.songDetailImages.Alignment = System.Windows.Forms.ListViewAlignment.SnapToGrid;
-            this.songDetailImages.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Right)));
-            this.songDetailImages.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
-            this.columnHeader7});
-            this.songDetailImages.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.None;
-            this.songDetailImages.Location = new System.Drawing.Point(355, 32);
-            this.songDetailImages.MultiSelect = false;
-            this.songDetailImages.Name = "songDetailImages";
-            this.songDetailImages.Size = new System.Drawing.Size(121, 224);
-            this.songDetailImages.TabIndex = 28;
-            this.songDetailImages.UseCompatibleStateImageBehavior = false;
-            this.songDetailImages.View = System.Windows.Forms.View.Tile;
-            this.songDetailImages.SelectedIndexChanged += new System.EventHandler(this.songDetailImages_SelectedIndexChanged);
-            this.songDetailImages.Leave += new System.EventHandler(this.songDetailImages_Leave);
-            // 
-            // columnHeader7
-            // 
-            this.columnHeader7.Width = 90;
-            // 
-            // label6
-            // 
-            this.label6.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.label6.AutoSize = true;
-            this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label6.Location = new System.Drawing.Point(355, 16);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(109, 13);
-            this.label6.TabIndex = 30;
-            this.label6.Text = "Verknpüfte Bilder:";
             // 
             // groupBox2
             // 
@@ -1621,6 +1453,137 @@
             this.timerElementHighlight.Interval = 250;
             this.timerElementHighlight.Tick += new System.EventHandler(this.timerSearchBoxHL_Tick);
             // 
+            // trackBarFadeTimer
+            // 
+            this.trackBarFadeTimer.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.trackBarFadeTimer.Location = new System.Drawing.Point(9, 39);
+            this.trackBarFadeTimer.Maximum = 100;
+            this.trackBarFadeTimer.Name = "trackBarFadeTimer";
+            this.trackBarFadeTimer.Size = new System.Drawing.Size(226, 45);
+            this.trackBarFadeTimer.TabIndex = 31;
+            this.trackBarFadeTimer.TickFrequency = 5;
+            this.trackBarFadeTimer.Value = 10;
+            this.trackBarFadeTimer.Scroll += new System.EventHandler(this.trackBarFadeTimer_Scroll);
+            // 
+            // labelFadeTime
+            // 
+            this.labelFadeTime.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.labelFadeTime.AutoSize = true;
+            this.labelFadeTime.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelFadeTime.Location = new System.Drawing.Point(144, 23);
+            this.labelFadeTime.Name = "labelFadeTime";
+            this.labelFadeTime.Size = new System.Drawing.Size(41, 13);
+            this.labelFadeTime.TabIndex = 33;
+            this.labelFadeTime.Text = "500 ms";
+            // 
+            // label7
+            // 
+            this.label7.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.label7.AutoSize = true;
+            this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label7.Location = new System.Drawing.Point(18, 23);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(89, 13);
+            this.label7.TabIndex = 32;
+            this.label7.Text = "Übergangsdauer:";
+            // 
+            // pictureBoxPreview
+            // 
+            this.pictureBoxPreview.BackColor = System.Drawing.Color.Black;
+            this.pictureBoxPreview.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pictureBoxPreview.Location = new System.Drawing.Point(11, 75);
+            this.pictureBoxPreview.Name = "pictureBoxPreview";
+            this.pictureBoxPreview.Size = new System.Drawing.Size(228, 171);
+            this.pictureBoxPreview.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBoxPreview.TabIndex = 34;
+            this.pictureBoxPreview.TabStop = false;
+            // 
+            // progressBarTransition
+            // 
+            this.progressBarTransition.Location = new System.Drawing.Point(7, 252);
+            this.progressBarTransition.Name = "progressBarTransition";
+            this.progressBarTransition.Size = new System.Drawing.Size(228, 10);
+            this.progressBarTransition.Step = 1;
+            this.progressBarTransition.TabIndex = 35;
+            // 
+            // buttonToggleLayerMode
+            // 
+            this.buttonToggleLayerMode.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.buttonToggleLayerMode.Image = global::Pbp.Properties.Resources.unlink;
+            this.buttonToggleLayerMode.Location = new System.Drawing.Point(7, 268);
+            this.buttonToggleLayerMode.Name = "buttonToggleLayerMode";
+            this.buttonToggleLayerMode.Size = new System.Drawing.Size(29, 25);
+            this.buttonToggleLayerMode.TabIndex = 36;
+            this.buttonToggleLayerMode.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.buttonToggleLayerMode.UseVisualStyleBackColor = true;
+            this.buttonToggleLayerMode.Click += new System.EventHandler(this.button2_Click_1);
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label3.Location = new System.Drawing.Point(40, 274);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(58, 13);
+            this.label3.TabIndex = 37;
+            this.label3.Text = "LinkLayers";
+            // 
+            // groupBox5
+            // 
+            this.groupBox5.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupBox5.Controls.Add(this.label3);
+            this.groupBox5.Controls.Add(this.buttonToggleLayerMode);
+            this.groupBox5.Controls.Add(this.progressBarTransition);
+            this.groupBox5.Controls.Add(this.pictureBoxPreview);
+            this.groupBox5.Controls.Add(this.label7);
+            this.groupBox5.Controls.Add(this.labelFadeTime);
+            this.groupBox5.Controls.Add(this.trackBarFadeTimer);
+            this.groupBox5.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.groupBox5.Location = new System.Drawing.Point(753, 98);
+            this.groupBox5.Name = "groupBox5";
+            this.groupBox5.Size = new System.Drawing.Size(247, 300);
+            this.groupBox5.TabIndex = 34;
+            this.groupBox5.TabStop = false;
+            this.groupBox5.Text = "Projektion";
+            // 
+            // songDetailElement
+            // 
+            this.songDetailElement.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+                        | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.songDetailElement.AutoScroll = true;
+            this.songDetailElement.BackColor = System.Drawing.Color.White;
+            this.songDetailElement.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.songDetailElement.ForeColor = System.Drawing.SystemColors.WindowText;
+            this.songDetailElement.Location = new System.Drawing.Point(6, 16);
+            this.songDetailElement.Name = "songDetailElement";
+            this.songDetailElement.Size = new System.Drawing.Size(470, 240);
+            this.songDetailElement.TabIndex = 20;
+            this.songDetailElement.SlideClicked += new SongDetails.SongDetail.slideClick(this.songDetailElement_SlideClicked);
+            this.songDetailElement.ImageClicked += new SongDetails.SongDetail.imageClick(this.songDetailElement_ImageClicked);
+            // 
+            // listViewSetList
+            // 
+            this.listViewSetList.AllowDrop = true;
+            this.listViewSetList.AllowRowReorder = true;
+            this.listViewSetList.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.listViewSetList.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.columnHeader4});
+            this.listViewSetList.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.listViewSetList.FullRowSelect = true;
+            this.listViewSetList.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.None;
+            this.listViewSetList.HideSelection = false;
+            this.listViewSetList.Location = new System.Drawing.Point(5, 19);
+            this.listViewSetList.MultiSelect = false;
+            this.listViewSetList.Name = "listViewSetList";
+            this.listViewSetList.Size = new System.Drawing.Size(234, 244);
+            this.listViewSetList.TabIndex = 27;
+            this.listViewSetList.UseCompatibleStateImageBehavior = false;
+            this.listViewSetList.View = System.Windows.Forms.View.Details;
+            this.listViewSetList.SelectedIndexChanged += new System.EventHandler(this.listViewSetList_SelectedIndexChanged);
+            this.listViewSetList.MouseClick += new System.Windows.Forms.MouseEventHandler(this.listViewSetList_MouseClick);
+            // 
             // MainWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1643,18 +1606,13 @@
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             this.groupBox4.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.trackBarFadeTimer)).EndInit();
             this.toolStrip1.ResumeLayout(false);
             this.toolStrip1.PerformLayout();
             this.statusStrip1.ResumeLayout(false);
             this.statusStrip1.PerformLayout();
-            this.groupBox5.ResumeLayout(false);
-            this.groupBox5.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxPreview)).EndInit();
             this.tabControl1.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
             this.groupBoxSongContents.ResumeLayout(false);
-            this.groupBoxSongContents.PerformLayout();
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
             this.tabPage2.ResumeLayout(false);
@@ -1670,6 +1628,10 @@
             this.tableLayoutPanel1.ResumeLayout(false);
             this.panel1.ResumeLayout(false);
             this.groupBoxImageStack.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.trackBarFadeTimer)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxPreview)).EndInit();
+            this.groupBox5.ResumeLayout(false);
+            this.groupBox5.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1712,14 +1674,8 @@
 		private System.Windows.Forms.Button buttonSetListClear;
 		private System.Windows.Forms.Button buttonSetListAdd;
 		private System.Windows.Forms.Button buttonSaveSetList;
-		private System.Windows.Forms.Button buttonOpenSetList;
-		private System.Windows.Forms.TrackBar trackBarFadeTimer;
-		private System.Windows.Forms.Label labelFadeTime;
-		private System.Windows.Forms.Label label7;
-		private System.Windows.Forms.GroupBox groupBox5;
-		private System.Windows.Forms.PictureBox pictureBoxPreview;
-		private System.Windows.Forms.ToolStripButton toolStripButtonDisplaySettings;
-		private System.Windows.Forms.ProgressBar progressBarTransition;
+        private System.Windows.Forms.Button buttonOpenSetList;
+        private System.Windows.Forms.ToolStripButton toolStripButtonDisplaySettings;
 		private System.Windows.Forms.RadioButton radioButtonAutoDiaShow;
 		private System.Windows.Forms.RadioButton radioButtonManualDiashow;
 		private System.Windows.Forms.Label label1;
@@ -1766,8 +1722,7 @@
 		private System.Windows.Forms.TabControl tabControl2;
 		private System.Windows.Forms.TabPage tabPageSlideShow;
 		private System.Windows.Forms.TabPage tabPageImageFavorites;
-		private System.Windows.Forms.TabPage tabPageImageHistory;
-        private System.Windows.Forms.ListView songDetailImages;
+        private System.Windows.Forms.TabPage tabPageImageHistory;
 		private System.Windows.Forms.ListView listViewImageHistory;
 		private System.Windows.Forms.ColumnHeader columnHeader5;
 		private System.Windows.Forms.TabPage tabPageImageBrowser;
@@ -1778,8 +1733,6 @@
 		private System.Windows.Forms.TextBox textBoxImageSearch;
 		private System.Windows.Forms.Label labelImgDirName;
         private System.Windows.Forms.Button buttonClearImageHistory;
-        private System.Windows.Forms.Label label6;
-		private System.Windows.Forms.ColumnHeader columnHeader7;
         private System.Windows.Forms.ListView listViewFavorites;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabelCtrl;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabelInfo;
@@ -1789,8 +1742,6 @@
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.GroupBox groupBoxImageStack;
         private System.Windows.Forms.Button buttonResetImageQueue;
-        private System.Windows.Forms.Button buttonToggleLayerMode;
-        private System.Windows.Forms.Label label3;
         private System.Windows.Forms.TabPage tabPage2;
         private System.Windows.Forms.TextBox textBoxLiveText;
         private System.Windows.Forms.Button buttonShowLiveText;
@@ -1811,6 +1762,14 @@
         private System.Windows.Forms.ToolStripMenuItem bildschirmeSuchenToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem liedSuchenToolStripMenuItem;
         private System.Windows.Forms.Timer timerElementHighlight;
+        private System.Windows.Forms.TrackBar trackBarFadeTimer;
+        private System.Windows.Forms.Label labelFadeTime;
+        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.PictureBox pictureBoxPreview;
+        private System.Windows.Forms.ProgressBar progressBarTransition;
+        private System.Windows.Forms.Button buttonToggleLayerMode;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.GroupBox groupBox5;
     }
 }
 

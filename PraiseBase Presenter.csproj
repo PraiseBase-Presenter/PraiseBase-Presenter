@@ -103,6 +103,12 @@
     <Compile Include="Classes\ImageManager.cs" />
     <Compile Include="Classes\SongManager.cs" />
     <Compile Include="Classes\SongSubclasses.cs" />
+    <Compile Include="Components\SearchTextBox.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Components\SearchTextBox.Designer.cs">
+      <DependentUpon>SearchTextBox.cs</DependentUpon>
+    </Compile>
     <Compile Include="Components\DragAndDropListView.cs">
       <SubType>Component</SubType>
     </Compile>

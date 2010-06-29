@@ -325,7 +325,7 @@ namespace Pbp.Properties {
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("0.10.4.14")]
+        [global::System.Configuration.DefaultSettingValueAttribute("0.10.6.25")]
         public string Version {
             get {
                 return ((string)(this["Version"]));

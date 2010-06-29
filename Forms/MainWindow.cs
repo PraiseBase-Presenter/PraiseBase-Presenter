@@ -338,11 +338,11 @@ namespace Pbp.Forms
                 }
                 else
                 {
-                    if (SongManager.Instance.CurrentSong==null || SongManager.Instance.CurrentSong.GUID != (Guid)listViewSongs.SelectedItems[0].Tag)
+                    if (SongManager.Instance.CurrentSong == null || SongManager.Instance.CurrentSong.GUID != (Guid)listViewSongs.SelectedItems[0].Tag)
                     {
-                            SongManager.Instance.CurrentSong = SongManager.Instance.SongList[(Guid)listViewSongs.SelectedItems[0].Tag];
-                            showCurrentSongDetails();
-                            buttonSetListAdd.Enabled = true;
+                        SongManager.Instance.CurrentSong = SongManager.Instance.SongList[(Guid)listViewSongs.SelectedItems[0].Tag];
+                        showCurrentSongDetails();
+                        buttonSetListAdd.Enabled = true;
                     }
                 }
                 buttonSetListAdd.Enabled = true;                
@@ -355,13 +355,17 @@ namespace Pbp.Forms
 
         private void listViewSongs_KeyUp(object sender, KeyEventArgs e)
         {
-            if (SongManager.Instance.CurrentSong == null || SongManager.Instance.CurrentSong.GUID != (Guid)listViewSongs.SelectedItems[0].Tag)
+            if (listViewSongs.SelectedItems.Count > 0)
             {
-                SongManager.Instance.CurrentSong = SongManager.Instance.SongList[(Guid)listViewSongs.SelectedItems[0].Tag];
-                showCurrentSongDetails();
-                buttonSetListAdd.Enabled = true;
+                if (SongManager.Instance.CurrentSong == null || SongManager.Instance.CurrentSong.GUID != (Guid)listViewSongs.SelectedItems[0].Tag)
+                {
+                    SongManager.Instance.CurrentSong = SongManager.Instance.SongList[(Guid)listViewSongs.SelectedItems[0].Tag];
+                    showCurrentSongDetails();
+                    buttonSetListAdd.Enabled = true;
+                }
             }
         }
+
 
         private void listViewSetList_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -397,21 +401,6 @@ namespace Pbp.Forms
 		private void showCurrentSongDetails()
 		{
 			Application.DoEvents();
-
-			songDetailImages.Items.Clear();
-
-            ImageList iml = SongManager.Instance.CurrentSong.getThumbs();
-            iml.ImageSize = Settings.Instance.ThumbSize;
-            iml.ColorDepth = ColorDepth.Depth32Bit;
-			songDetailImages.LargeImageList = iml;
-            songDetailImages.TileSize = new Size(Settings.Instance.ThumbSize.Width + 8, Settings.Instance.ThumbSize.Height + 5);
-
-			for (int i = 1; i < songDetailImages.LargeImageList.Images.Count; i++)
-			{
-				ListViewItem lvi = new ListViewItem();
-				lvi.ImageIndex = i;
-				songDetailImages.Items.Add(lvi);
-			}
 
             groupBoxSongContents.Text = SongManager.Instance.CurrentSong.Title;
             songDetailElement.setSong(SongManager.Instance.CurrentSong);
@@ -476,6 +465,47 @@ namespace Pbp.Forms
 
 			}
 		}
+
+        private void songDetailElement_ImageClicked(object sender, SongDetails.SlideImageClickEventArgs e)
+        {
+            Application.DoEvents();
+
+            // Stack
+            if ((Control.ModifierKeys & Keys.Control) == Keys.Control)
+            {
+                listViewImageQueue.LargeImageList.Images.Add(ImageManager.Instance.getThumbFromRelPath(e.relativePath));
+                ListViewItem lvi = new ListViewItem("");
+                lvi.Tag = e.relativePath;
+                lvi.ImageIndex = listViewImageQueue.LargeImageList.Images.Count - 1;
+                listViewImageQueue.Items.Add(lvi);
+            }
+            // Favorite
+            else if ((Control.ModifierKeys & Keys.Alt) == Keys.Alt)
+            {
+                imageFavoriteAdd(e.relativePath);
+            }
+            else
+            {
+                Image img = ImageManager.Instance.getImageFromRelPath(e.relativePath);
+
+                // Show current songtext with new image
+                if (!linkLayers ^ ((Control.ModifierKeys & Keys.Shift) == Keys.Shift))
+                {
+                    object[] args = { SongManager.Instance.CurrentPartNr, SongManager.Instance.CurrentSlideNr };
+                    pictureBoxPreview.Image = projWindow.showSlide(SongManager.Instance.CurrentSong, img, args);
+                }
+                // Show image only
+                else
+                {
+                    pictureBoxPreview.Image = projWindow.showSlide(null, img);
+                }
+                this.currentBackground = img;
+                if (e.relativePath!=String.Empty)
+                    imageHistoryAdd(e.relativePath);
+            }
+
+
+        }
 
 
         private void tabControl1_SelectedIndexChanged(object sender, EventArgs e)
@@ -1525,57 +1555,7 @@ namespace Pbp.Forms
         }
 
 
-        private void songDetailImages_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            if (projWindow != null && songDetailImages.SelectedIndices.Count > 0)
-            {
-                Application.DoEvents();
-                int idx = songDetailImages.SelectedIndices[0];
-
-                // Stack
-                if ((Control.ModifierKeys & Keys.Control) == Keys.Control)
-                {
-                    listViewImageQueue.LargeImageList.Images.Add(ImageManager.Instance.getThumbFromRelPath(SongManager.Instance.CurrentSong.RelativeImagePaths[idx]));
-                    ListViewItem lvi = new ListViewItem("");
-                    lvi.Tag = SongManager.Instance.CurrentSong.RelativeImagePaths[idx];
-                    lvi.ImageIndex = listViewImageQueue.LargeImageList.Images.Count - 1;
-                    listViewImageQueue.Items.Add(lvi);
-                }
-                // Favorite
-                else if ((Control.ModifierKeys & Keys.Alt) == Keys.Alt)
-                {
-                    imageFavoriteAdd(SongManager.Instance.CurrentSong.RelativeImagePaths[idx]);
-                }
-                else
-                {
-
-                    // Show current songtext with new image
-                    if (!linkLayers ^ ((Control.ModifierKeys & Keys.Shift) == Keys.Shift))
-                    {
-                        object[] args = { SongManager.Instance.CurrentPartNr, SongManager.Instance.CurrentSlideNr };
-                        pictureBoxPreview.Image = projWindow.showSlide(SongManager.Instance.CurrentSong, SongManager.Instance.CurrentSong.getImage(idx + 1), args);
-                    }
-                    // Show image only
-                    else
-                    {
-                        pictureBoxPreview.Image = projWindow.showSlide(null, SongManager.Instance.CurrentSong.getImage(idx + 1));
-                    }
-                    this.currentBackground = SongManager.Instance.CurrentSong.getImage(idx + 1);
-                    imageHistoryAdd(SongManager.Instance.CurrentSong.RelativeImagePaths[idx]);
-                }
-            }
-        }
-
-        private void songDetailImages_Leave(object sender, EventArgs e)
-        {
-            if (songDetailImages.SelectedIndices.Count > 0)
-            {
-                int idx = songDetailImages.SelectedIndices[0];
-                songDetailImages.Items[idx].Selected = false;
-            }
-        }
-
-        
+       
         private void liedSuchenToolStripMenuItem_Click(object sender, EventArgs e)
         {
             timerElementHighlight.Tag = songSearchBox;
@@ -1616,5 +1596,7 @@ namespace Pbp.Forms
                 ((ListView)sender).Items[((ListView)sender).SelectedIndices[0]].Selected = false;
             }
         }
+
+
     }
 }
