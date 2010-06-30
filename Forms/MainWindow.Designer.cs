@@ -1145,6 +1145,7 @@
             // 
             this.treeViewImageDirectories.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
                         | System.Windows.Forms.AnchorStyles.Left)));
+            this.treeViewImageDirectories.FullRowSelect = true;
             this.treeViewImageDirectories.HideSelection = false;
             this.treeViewImageDirectories.Location = new System.Drawing.Point(0, 36);
             this.treeViewImageDirectories.Name = "treeViewImageDirectories";

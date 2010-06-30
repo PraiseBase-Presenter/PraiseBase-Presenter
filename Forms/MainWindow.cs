@@ -156,8 +156,6 @@ namespace Pbp.Forms
 
         void searchSongs(string needle)
         {
-            DateTime startTime = DateTime.Now;
-
             listViewSongs.BeginUpdate();
             listViewSongs.SuspendLayout();
             listViewSongs.Items.Clear();
@@ -190,7 +188,6 @@ namespace Pbp.Forms
             listViewSongs.ResumeLayout();
             listViewSongs.EndUpdate();
 
-            Console.WriteLine("SongSearch: "+(DateTime.Now - startTime).Milliseconds);
         }
 
 
@@ -577,7 +574,7 @@ namespace Pbp.Forms
         {
             if (treeViewImageDirectories.Nodes.Count > 1)
             {
-                DateTime startTime = DateTime.Now;
+                DateTime starttime = DateTime.Now;
 
                 listViewDirectoryImages.BeginUpdate();
                 listViewDirectoryImages.SuspendLayout();
@@ -591,37 +588,33 @@ namespace Pbp.Forms
                 // Search
                 if (treeViewImageDirectories.SelectedNode.Index == treeViewImageDirectories.Nodes.Count - 1)
                 {
-                    labelImgDirName.Text = "Suchergebnisse";
-
                     ImageList imList = new ImageList();
                     imList.ImageSize = Settings.Instance.ThumbSize;
                     imList.ColorDepth = ColorDepth.Depth32Bit;
-                    listViewDirectoryImages.LargeImageList = imList;
-
-                    int i = 0;
-                    int pathPrefixLength = (Settings.Instance.DataDirectory + Path.DirectorySeparatorChar + Settings.Instance.ImageDir + Path.DirectorySeparatorChar).Length;
 
                     List<ListViewItem> lviList = new List<ListViewItem>();
+                    
+                    string pathPrefix = Settings.Instance.DataDirectory + Path.DirectorySeparatorChar + Settings.Instance.ThumbDir + Path.DirectorySeparatorChar;
+                    int i = 0;
+
                     foreach (string file in imageSearchResults)
                     {
                         ListViewItem lvi = new ListViewItem(Path.GetFileNameWithoutExtension(file));
-                        lvi.Tag = file.Substring(pathPrefixLength);
+                        lvi.Tag = file;
                         lvi.ImageIndex = i;
-                        listViewDirectoryImages.LargeImageList.Images.Add(Image.FromFile(file));
-                        //lviList.Add(lvi);
-                        listViewDirectoryImages.Items.Add(lvi);
+                        imList.Images.Add(Image.FromFile(pathPrefix + file));
+                        lviList.Add(lvi);
                         i++;
-                        if (i > 20)
-                        {
-                            break;
-                        }
-                        //Application.DoEvents();
                     }
-                    //listViewDirectoryImages.Items.AddRange(lviList.ToArray());
+                    listViewDirectoryImages.Items.AddRange(lviList.ToArray());
+                    listViewDirectoryImages.LargeImageList = imList;
+
+                    labelImgDirName.Text = "Suchergebnisse ("+i+" Bilder)";
+
                 }
                 else
                 {
-                    string relativeImageDir = ((string)treeViewImageDirectories.SelectedNode.Tag);
+                    string relativeImageDir = ((string)treeViewImageDirectories.SelectedNode.Tag) + Path.DirectorySeparatorChar;
                     string imDir = Settings.Instance.DataDirectory + Path.DirectorySeparatorChar + Settings.Instance.ThumbDir + Path.DirectorySeparatorChar + relativeImageDir;
 
                     if (Directory.Exists(imDir))
@@ -632,25 +625,25 @@ namespace Pbp.Forms
 
                         string[] songFilePaths = Directory.GetFiles(imDir, "*.jpg", SearchOption.TopDirectoryOnly);
                         int i = 0;
-
                         foreach (string file in songFilePaths)
                         {
                             ListViewItem lvi = new ListViewItem(Path.GetFileNameWithoutExtension(file));
-                            lvi.Tag = relativeImageDir + Path.DirectorySeparatorChar + Path.GetFileName(file);
+                            lvi.Tag = relativeImageDir + Path.GetFileName(file);
                             lvi.ImageIndex = i;
                             listViewDirectoryImages.Items.Add(lvi);
                             imList.Images.Add(Image.FromFile(file));
                             i++;
                         }
                         listViewDirectoryImages.LargeImageList = imList;
-                        labelImgDirName.Text = "Verzeichnisinhalt '" + Path.GetFileName(relativeImageDir) + "' ("+i+" Bilder):";
+
+                        labelImgDirName.Text = "Kategorie '" + Path.GetFileName(((string)treeViewImageDirectories.SelectedNode.Tag)) + "' (" + i + " Bilder):";
                     }
                 }
 
                 listViewDirectoryImages.ResumeLayout();
                 listViewDirectoryImages.EndUpdate();
 
-                Console.WriteLine("ImageLoad: " + (DateTime.Now - startTime).Milliseconds);
+                Console.Write("Images: "+(DateTime.Now - starttime).Milliseconds);
             }
         }
 
@@ -1025,13 +1018,13 @@ namespace Pbp.Forms
         private void searchTextBoxImages_TextChanged(object sender, EventArgs e)
         {
             string needle = searchTextBoxImages.Text.ToLower().Trim();
-            if (needle != String.Empty)
+            if (needle != String.Empty && needle.Length>2)
             {
                 treeViewImageDirectories.SelectedNode = null;
                 imageSearchResults.Clear();
-                string[] imgFilePaths = Directory.GetFiles(Settings.Instance.DataDirectory + Path.DirectorySeparatorChar + Settings.Instance.ImageDir, "*.jpg", SearchOption.AllDirectories);
-
-                Console.WriteLine(needle);
+                string rootDir = Settings.Instance.DataDirectory + Path.DirectorySeparatorChar + Settings.Instance.ThumbDir + Path.DirectorySeparatorChar;
+                int rootDirStrLen = rootDir.Length;
+                string[] imgFilePaths = Directory.GetFiles(rootDir, "*.jpg", SearchOption.AllDirectories);
 
                 foreach (string ims in imgFilePaths)
                 {
@@ -1040,7 +1033,7 @@ namespace Pbp.Forms
                         string haystack = Path.GetFileNameWithoutExtension(ims);
                         if (haystack.ToLower().Contains(needle))
                         {
-                            imageSearchResults.Add(ims);
+                            imageSearchResults.Add(ims.Substring(rootDirStrLen));
                         }
                     }
                 }
