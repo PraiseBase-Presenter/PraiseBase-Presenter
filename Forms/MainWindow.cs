@@ -109,7 +109,7 @@ namespace Pbp.Forms
             blackOutTimer.Tick += new EventHandler(t1_Tick); // Eventhandler ezeugen der beim Timerablauf aufgerufen wird
 
             loadSongList();
-            songSearchBox.Focus();
+            songSearchTextBox.Focus();
 
             imageTreeViewInit();
 
@@ -148,7 +148,7 @@ namespace Pbp.Forms
 
         private void songSearchBox_TextChanged(object sender, EventArgs e)
         {
-            if (songSearchBox.Text == "")
+            if (songSearchTextBox.Text == "")
             {
                 searchSongs("");
                 keyStrokeTimer.Stop();
@@ -157,19 +157,13 @@ namespace Pbp.Forms
             if (keyStrokeTimer.Enabled)
                 keyStrokeTimer.Stop();
             keyStrokeTimer.Start();
-            keyStrokeTimer.Tag = songSearchBox.Text;            
+            keyStrokeTimer.Tag = songSearchTextBox.Text;            
         }
 
         void keyStrokeTimer_Tick(object sender, EventArgs e)
         {
             searchSongs((string)keyStrokeTimer.Tag);
             keyStrokeTimer.Stop();
-        }
-
-        private void songSearchResetButton_Click(object sender, EventArgs e)
-        {
-            songSearchBox.Text = "";
-            songSearchBox.Focus();
         }
 
         /**
@@ -223,12 +217,8 @@ namespace Pbp.Forms
 
         private void radioSongSearchAll_CheckedChanged(object sender, EventArgs e)
         {
-
-            searchSongs(songSearchBox.Text);
+            searchSongs(songSearchTextBox.Text);
         }
-
-
-
 
         private void toggleProjection(object sender, EventArgs e)
         {
@@ -284,7 +274,7 @@ namespace Pbp.Forms
                 }
 
             }
-            songSearchBox.Focus();
+            songSearchTextBox.Focus();
         }
 
         void t1_Tick(object sender, EventArgs e)
@@ -311,7 +301,7 @@ namespace Pbp.Forms
 
 		private void reloadSongList()
 		{
-			songSearchBox.Text = "";
+            songSearchTextBox.Text = "";
             SongManager.Instance.reload();
 			loadSongList();
 
@@ -320,7 +310,7 @@ namespace Pbp.Forms
                 listViewSetList.Items[i].Tag = SongManager.Instance.getGUID(listViewSetList.Items[i].Text);
             }
 
-			songSearchBox.Focus();
+            songSearchTextBox.Focus();
 			GC.Collect();
 		}
 
@@ -512,7 +502,7 @@ namespace Pbp.Forms
         private void tabControl1_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (tabControl1.SelectedIndex == 0)
-                songSearchBox.Focus();
+                songSearchTextBox.Focus();
             else if (tabControl1.SelectedIndex == 1)
             {
                 textBoxImageSearch.Focus();
@@ -766,11 +756,6 @@ namespace Pbp.Forms
             EditorWindow wnd = EditorWindow.getInstance();
             wnd.Show();
             wnd.Focus();
-        }
-
-        private void songSearchBox_Click(object sender, EventArgs e)
-        {
-            songSearchBox.SelectAll();
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -1551,11 +1536,10 @@ namespace Pbp.Forms
        
         private void liedSuchenToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            timerElementHighlight.Tag = songSearchBox;
+            timerElementHighlight.Tag = songSearchTextBox;
             timerElementHighlight.Start();
-            songSearchBox.BackColor = Color.LightBlue;
-            songSearchBox.Text = "";
-            songSearchBox.Focus();
+            songSearchTextBox.Text = "";
+            songSearchTextBox.Focus();
         }
 
         private void toolStripMenuItem2_Click(object sender, EventArgs e)
@@ -1604,5 +1588,7 @@ namespace Pbp.Forms
             Settings.Instance.Save();
             UserControl1.getInstance().setFadeSteps(value);
         }
+
+
     }
 }

@@ -99,21 +99,15 @@
             this.buttonSaveSetList = new System.Windows.Forms.Button();
             this.buttonSetListAdd = new System.Windows.Forms.Button();
             this.buttonSetListClear = new System.Windows.Forms.Button();
-            this.listViewSetList = new Bol.WinControls.ListViewEx();
-            this.columnHeader4 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.buttonSetListRem = new System.Windows.Forms.Button();
             this.buttonSetListDown = new System.Windows.Forms.Button();
             this.buttonSetListUp = new System.Windows.Forms.Button();
             this.groupBoxSongContents = new System.Windows.Forms.GroupBox();
-            this.songDetailElement = new SongDetails.SongDetail();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.listViewSongs = new System.Windows.Forms.ListView();
             this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.radioSongSearchAll = new System.Windows.Forms.RadioButton();
             this.radioSongSearchTitle = new System.Windows.Forms.RadioButton();
-            this.label2 = new System.Windows.Forms.Label();
-            this.songSearchResetButton = new System.Windows.Forms.Button();
-            this.songSearchBox = new System.Windows.Forms.TextBox();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.label5 = new System.Windows.Forms.Label();
             this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
@@ -164,6 +158,10 @@
             this.progressBarTransition = new System.Windows.Forms.ProgressBar();
             this.pictureBoxPreview = new System.Windows.Forms.PictureBox();
             this.timerElementHighlight = new System.Windows.Forms.Timer(this.components);
+            this.listViewSetList = new Bol.WinControls.ListViewEx();
+            this.columnHeader4 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.songDetailElement = new SongDetails.SongDetail();
+            this.songSearchTextBox = new Pbp.Components.SearchTextBox();
             buttonChooseDiaDir = new System.Windows.Forms.Button();
             this.menuStrip1.SuspendLayout();
             this.toolStrip1.SuspendLayout();
@@ -820,27 +818,6 @@
             this.buttonSetListClear.UseVisualStyleBackColor = true;
             this.buttonSetListClear.Click += new System.EventHandler(this.buttonSetListClear_Click);
             // 
-            // listViewSetList
-            // 
-            this.listViewSetList.AllowDrop = true;
-            this.listViewSetList.AllowRowReorder = true;
-            this.listViewSetList.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Right)));
-            this.listViewSetList.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
-            this.columnHeader4});
-            this.listViewSetList.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.listViewSetList.FullRowSelect = true;
-            this.listViewSetList.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.None;
-            this.listViewSetList.HideSelection = false;
-            this.listViewSetList.Location = new System.Drawing.Point(5, 16);
-            this.listViewSetList.MultiSelect = false;
-            this.listViewSetList.Name = "listViewSetList";
-            this.listViewSetList.Size = new System.Drawing.Size(234, 208);
-            this.listViewSetList.TabIndex = 27;
-            this.listViewSetList.UseCompatibleStateImageBehavior = false;
-            this.listViewSetList.View = System.Windows.Forms.View.Details;
-            this.listViewSetList.SelectedIndexChanged += new System.EventHandler(this.listViewSetList_SelectedIndexChanged);
-            // 
             // buttonSetListRem
             // 
             this.buttonSetListRem.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
@@ -895,31 +872,14 @@
             this.groupBoxSongContents.TabStop = false;
             this.groupBoxSongContents.Text = "Liedinhalt";
             // 
-            // songDetailElement
-            // 
-            this.songDetailElement.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
-            this.songDetailElement.BackColor = System.Drawing.Color.White;
-            this.songDetailElement.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.songDetailElement.ForeColor = System.Drawing.SystemColors.WindowText;
-            this.songDetailElement.Location = new System.Drawing.Point(6, 16);
-            this.songDetailElement.Name = "songDetailElement";
-            this.songDetailElement.Size = new System.Drawing.Size(474, 240);
-            this.songDetailElement.TabIndex = 20;
-            this.songDetailElement.SlideClicked += new SongDetails.SongDetail.slideClick(this.songDetailElement_SlideClicked);
-            this.songDetailElement.ImageClicked += new SongDetails.SongDetail.imageClick(this.songDetailElement_ImageClicked);
-            // 
             // groupBox2
             // 
             this.groupBox2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
                         | System.Windows.Forms.AnchorStyles.Left)));
+            this.groupBox2.Controls.Add(this.songSearchTextBox);
             this.groupBox2.Controls.Add(this.listViewSongs);
             this.groupBox2.Controls.Add(this.radioSongSearchAll);
             this.groupBox2.Controls.Add(this.radioSongSearchTitle);
-            this.groupBox2.Controls.Add(this.label2);
-            this.groupBox2.Controls.Add(this.songSearchResetButton);
-            this.groupBox2.Controls.Add(this.songSearchBox);
             this.groupBox2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.groupBox2.Location = new System.Drawing.Point(0, 2);
             this.groupBox2.Name = "groupBox2";
@@ -941,7 +901,7 @@
             this.listViewSongs.Location = new System.Drawing.Point(5, 68);
             this.listViewSongs.MultiSelect = false;
             this.listViewSongs.Name = "listViewSongs";
-            this.listViewSongs.Size = new System.Drawing.Size(238, 188);
+            this.listViewSongs.Size = new System.Drawing.Size(235, 188);
             this.listViewSongs.TabIndex = 21;
             this.listViewSongs.UseCompatibleStateImageBehavior = false;
             this.listViewSongs.View = System.Windows.Forms.View.Details;
@@ -972,36 +932,6 @@
             this.radioSongSearchTitle.TabIndex = 19;
             this.radioSongSearchTitle.Text = "Suche im Titel";
             this.radioSongSearchTitle.UseVisualStyleBackColor = true;
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(7, 22);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(41, 13);
-            this.label2.TabIndex = 17;
-            this.label2.Text = "Suche:";
-            // 
-            // songSearchResetButton
-            // 
-            this.songSearchResetButton.Location = new System.Drawing.Point(222, 16);
-            this.songSearchResetButton.Name = "songSearchResetButton";
-            this.songSearchResetButton.Size = new System.Drawing.Size(21, 23);
-            this.songSearchResetButton.TabIndex = 18;
-            this.songSearchResetButton.Text = "X";
-            this.songSearchResetButton.UseVisualStyleBackColor = true;
-            this.songSearchResetButton.Click += new System.EventHandler(this.songSearchResetButton_Click);
-            // 
-            // songSearchBox
-            // 
-            this.songSearchBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.songSearchBox.Location = new System.Drawing.Point(53, 19);
-            this.songSearchBox.Name = "songSearchBox";
-            this.songSearchBox.Size = new System.Drawing.Size(163, 20);
-            this.songSearchBox.TabIndex = 0;
-            this.songSearchBox.Click += new System.EventHandler(this.songSearchBox_Click);
-            this.songSearchBox.TextChanged += new System.EventHandler(this.songSearchBox_TextChanged);
             // 
             // tabPage2
             // 
@@ -1616,6 +1546,51 @@
             this.timerElementHighlight.Interval = 250;
             this.timerElementHighlight.Tick += new System.EventHandler(this.timerSearchBoxHL_Tick);
             // 
+            // listViewSetList
+            // 
+            this.listViewSetList.AllowDrop = true;
+            this.listViewSetList.AllowRowReorder = true;
+            this.listViewSetList.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.listViewSetList.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.columnHeader4});
+            this.listViewSetList.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.listViewSetList.FullRowSelect = true;
+            this.listViewSetList.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.None;
+            this.listViewSetList.HideSelection = false;
+            this.listViewSetList.Location = new System.Drawing.Point(5, 16);
+            this.listViewSetList.MultiSelect = false;
+            this.listViewSetList.Name = "listViewSetList";
+            this.listViewSetList.Size = new System.Drawing.Size(234, 208);
+            this.listViewSetList.TabIndex = 27;
+            this.listViewSetList.UseCompatibleStateImageBehavior = false;
+            this.listViewSetList.View = System.Windows.Forms.View.Details;
+            this.listViewSetList.SelectedIndexChanged += new System.EventHandler(this.listViewSetList_SelectedIndexChanged);
+            // 
+            // songDetailElement
+            // 
+            this.songDetailElement.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+                        | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.songDetailElement.AutoScroll = true;
+            this.songDetailElement.BackColor = System.Drawing.Color.White;
+            this.songDetailElement.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.songDetailElement.ForeColor = System.Drawing.SystemColors.WindowText;
+            this.songDetailElement.Location = new System.Drawing.Point(6, 16);
+            this.songDetailElement.Name = "songDetailElement";
+            this.songDetailElement.Size = new System.Drawing.Size(474, 240);
+            this.songDetailElement.TabIndex = 20;
+            this.songDetailElement.SlideClicked += new SongDetails.SongDetail.slideClick(this.songDetailElement_SlideClicked);
+            this.songDetailElement.ImageClicked += new SongDetails.SongDetail.imageClick(this.songDetailElement_ImageClicked);
+            // 
+            // songSearchTextBox
+            // 
+            this.songSearchTextBox.Location = new System.Drawing.Point(5, 16);
+            this.songSearchTextBox.Name = "songSearchTextBox";
+            this.songSearchTextBox.Size = new System.Drawing.Size(235, 24);
+            this.songSearchTextBox.TabIndex = 22;
+            this.songSearchTextBox.TextChanged += new Pbp.Components.SearchTextBox.textChange(this.songSearchBox_TextChanged);
+            // 
             // MainWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1710,10 +1685,7 @@
 		private System.Windows.Forms.ListView listViewSongs;
 		private System.Windows.Forms.ColumnHeader columnHeader2;
 		private System.Windows.Forms.RadioButton radioSongSearchAll;
-		private System.Windows.Forms.RadioButton radioSongSearchTitle;
-		private System.Windows.Forms.Label label2;
-		private System.Windows.Forms.Button songSearchResetButton;
-		private System.Windows.Forms.TextBox songSearchBox;
+        private System.Windows.Forms.RadioButton radioSongSearchTitle;
 		private System.Windows.Forms.TabControl tabControl1;
 		private System.Windows.Forms.ToolStripSeparator toolStripSeparator7;
 		private System.Windows.Forms.ToolStripSplitButton toolStripButtonDataFolder;
@@ -1801,6 +1773,7 @@
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.NumericUpDown numericUpDown1;
+        private Components.SearchTextBox songSearchTextBox;
         
     }
 }

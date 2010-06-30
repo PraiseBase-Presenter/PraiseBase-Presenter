@@ -259,7 +259,6 @@ namespace SongDetails
             {
                 textLbl_Click(slideTexts[verse4Index], new EventArgs());
             }
-
         }
 
         void textLbl_Click(object sender, EventArgs e)
@@ -332,6 +331,9 @@ namespace SongDetails
         
         void previewPictureBox_MouseEnter(object sender, EventArgs e)
         {
+            if (!this.Focused)
+                this.Focus();
+
             if (slideImages.IndexOf((PictureBox)sender) != currentSlideTextIdx)
                 ((PictureBox)sender).Parent.BackColor = borderHoverColor;
         }
@@ -344,6 +346,9 @@ namespace SongDetails
 
         void textLbl_MouseEnter(object sender, EventArgs e)
         {
+            if (! this.Focused)
+                this.Focus();
+
             if (currentSlideTextIdx < 0 || slideTexts[currentSlideTextIdx] != (Label)sender)
             {
                 ((Label)sender).Parent.BackColor = borderHoverColor;
@@ -403,6 +408,7 @@ namespace SongDetails
         {
 
         }
+
     }
 
     #region Helper classes
