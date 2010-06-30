@@ -15,19 +15,7 @@ namespace Pbp.Components
         public string Text
         {
             get { return textBox.Text!="Lied suchen" ? textBox.Text : String.Empty; }
-            set
-            {
-                if (value == string.Empty)
-                {
-                    textBox.ForeColor = Color.Gray;
-                    textBox.Text = "Lied suchen";
-                }
-                else
-                {
-                    textBox.ForeColor = Color.Black;
-                    textBox.Text = value; 
-                }
-            }
+            set { textBox.Text = value; textBox.ForeColor = Color.Black; }
         }
 
         public Font Font
@@ -87,6 +75,7 @@ namespace Pbp.Components
         void xPictureBox_Click(object sender, EventArgs e)
         {
             textBox.Text = String.Empty;
+            textBox.Focus();
         }
 
         void textBox_KeyDown(object sender, KeyEventArgs e)
