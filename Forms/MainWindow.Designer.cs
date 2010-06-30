@@ -99,11 +99,15 @@
             this.buttonSaveSetList = new System.Windows.Forms.Button();
             this.buttonSetListAdd = new System.Windows.Forms.Button();
             this.buttonSetListClear = new System.Windows.Forms.Button();
+            this.listViewSetList = new Bol.WinControls.ListViewEx();
+            this.columnHeader4 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.buttonSetListRem = new System.Windows.Forms.Button();
             this.buttonSetListDown = new System.Windows.Forms.Button();
             this.buttonSetListUp = new System.Windows.Forms.Button();
             this.groupBoxSongContents = new System.Windows.Forms.GroupBox();
+            this.songDetailElement = new SongDetails.SongDetail();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.songSearchTextBox = new Pbp.Components.SearchTextBox();
             this.listViewSongs = new System.Windows.Forms.ListView();
             this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.radioSongSearchAll = new System.Windows.Forms.RadioButton();
@@ -119,11 +123,9 @@
             this.textBoxLiveText = new System.Windows.Forms.TextBox();
             this.tabControl2 = new System.Windows.Forms.TabControl();
             this.tabPageImageBrowser = new System.Windows.Forms.TabPage();
-            this.label4 = new System.Windows.Forms.Label();
+            this.searchTextBoxImages = new Pbp.Components.SearchTextBox();
             this.treeViewImageDirectories = new System.Windows.Forms.TreeView();
             this.listViewDirectoryImages = new System.Windows.Forms.ListView();
-            this.buttonSearchImages = new System.Windows.Forms.Button();
-            this.textBoxImageSearch = new System.Windows.Forms.TextBox();
             this.labelImgDirName = new System.Windows.Forms.Label();
             this.buttonClearImageHistory = new System.Windows.Forms.Button();
             this.tabPageImageHistory = new System.Windows.Forms.TabPage();
@@ -158,10 +160,6 @@
             this.progressBarTransition = new System.Windows.Forms.ProgressBar();
             this.pictureBoxPreview = new System.Windows.Forms.PictureBox();
             this.timerElementHighlight = new System.Windows.Forms.Timer(this.components);
-            this.listViewSetList = new Bol.WinControls.ListViewEx();
-            this.columnHeader4 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.songDetailElement = new SongDetails.SongDetail();
-            this.songSearchTextBox = new Pbp.Components.SearchTextBox();
             buttonChooseDiaDir = new System.Windows.Forms.Button();
             this.menuStrip1.SuspendLayout();
             this.toolStrip1.SuspendLayout();
@@ -818,6 +816,27 @@
             this.buttonSetListClear.UseVisualStyleBackColor = true;
             this.buttonSetListClear.Click += new System.EventHandler(this.buttonSetListClear_Click);
             // 
+            // listViewSetList
+            // 
+            this.listViewSetList.AllowDrop = true;
+            this.listViewSetList.AllowRowReorder = true;
+            this.listViewSetList.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.listViewSetList.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.columnHeader4});
+            this.listViewSetList.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.listViewSetList.FullRowSelect = true;
+            this.listViewSetList.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.None;
+            this.listViewSetList.HideSelection = false;
+            this.listViewSetList.Location = new System.Drawing.Point(5, 16);
+            this.listViewSetList.MultiSelect = false;
+            this.listViewSetList.Name = "listViewSetList";
+            this.listViewSetList.Size = new System.Drawing.Size(234, 208);
+            this.listViewSetList.TabIndex = 27;
+            this.listViewSetList.UseCompatibleStateImageBehavior = false;
+            this.listViewSetList.View = System.Windows.Forms.View.Details;
+            this.listViewSetList.SelectedIndexChanged += new System.EventHandler(this.listViewSetList_SelectedIndexChanged);
+            // 
             // buttonSetListRem
             // 
             this.buttonSetListRem.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
@@ -872,6 +891,22 @@
             this.groupBoxSongContents.TabStop = false;
             this.groupBoxSongContents.Text = "Liedinhalt";
             // 
+            // songDetailElement
+            // 
+            this.songDetailElement.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+                        | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.songDetailElement.AutoScroll = true;
+            this.songDetailElement.BackColor = System.Drawing.Color.White;
+            this.songDetailElement.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.songDetailElement.ForeColor = System.Drawing.SystemColors.WindowText;
+            this.songDetailElement.Location = new System.Drawing.Point(6, 16);
+            this.songDetailElement.Name = "songDetailElement";
+            this.songDetailElement.Size = new System.Drawing.Size(474, 240);
+            this.songDetailElement.TabIndex = 20;
+            this.songDetailElement.SlideClicked += new SongDetails.SongDetail.slideClick(this.songDetailElement_SlideClicked);
+            this.songDetailElement.ImageClicked += new SongDetails.SongDetail.imageClick(this.songDetailElement_ImageClicked);
+            // 
             // groupBox2
             // 
             this.groupBox2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
@@ -887,6 +922,15 @@
             this.groupBox2.TabIndex = 19;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Liederliste";
+            // 
+            // songSearchTextBox
+            // 
+            this.songSearchTextBox.Location = new System.Drawing.Point(5, 16);
+            this.songSearchTextBox.Name = "songSearchTextBox";
+            this.songSearchTextBox.PlaceHolderText = "Lied suchen";
+            this.songSearchTextBox.Size = new System.Drawing.Size(235, 24);
+            this.songSearchTextBox.TabIndex = 22;
+            this.songSearchTextBox.TextChanged += new Pbp.Components.SearchTextBox.textChange(this.songSearchBox_TextChanged);
             // 
             // listViewSongs
             // 
@@ -1075,11 +1119,9 @@
             // 
             // tabPageImageBrowser
             // 
-            this.tabPageImageBrowser.Controls.Add(this.label4);
+            this.tabPageImageBrowser.Controls.Add(this.searchTextBoxImages);
             this.tabPageImageBrowser.Controls.Add(this.treeViewImageDirectories);
             this.tabPageImageBrowser.Controls.Add(this.listViewDirectoryImages);
-            this.tabPageImageBrowser.Controls.Add(this.buttonSearchImages);
-            this.tabPageImageBrowser.Controls.Add(this.textBoxImageSearch);
             this.tabPageImageBrowser.Controls.Add(this.labelImgDirName);
             this.tabPageImageBrowser.Controls.Add(this.buttonClearImageHistory);
             this.tabPageImageBrowser.Location = new System.Drawing.Point(4, 29);
@@ -1090,25 +1132,24 @@
             this.tabPageImageBrowser.Text = "Bildsammlung";
             this.tabPageImageBrowser.UseVisualStyleBackColor = true;
             // 
-            // label4
+            // searchTextBoxImages
             // 
-            this.label4.AutoSize = true;
-            this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.Location = new System.Drawing.Point(6, 8);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(41, 13);
-            this.label4.TabIndex = 20;
-            this.label4.Text = "Suche:";
+            this.searchTextBoxImages.Location = new System.Drawing.Point(3, 6);
+            this.searchTextBoxImages.Name = "searchTextBoxImages";
+            this.searchTextBoxImages.PlaceHolderText = "Bild suchen";
+            this.searchTextBoxImages.Size = new System.Drawing.Size(225, 24);
+            this.searchTextBoxImages.TabIndex = 26;
+            this.searchTextBoxImages.TextChanged += new Pbp.Components.SearchTextBox.textChange(this.searchTextBoxImages_TextChanged);
             // 
             // treeViewImageDirectories
             // 
             this.treeViewImageDirectories.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
                         | System.Windows.Forms.AnchorStyles.Left)));
             this.treeViewImageDirectories.HideSelection = false;
-            this.treeViewImageDirectories.Location = new System.Drawing.Point(0, 31);
+            this.treeViewImageDirectories.Location = new System.Drawing.Point(0, 36);
             this.treeViewImageDirectories.Name = "treeViewImageDirectories";
             this.treeViewImageDirectories.ShowPlusMinus = false;
-            this.treeViewImageDirectories.Size = new System.Drawing.Size(228, 227);
+            this.treeViewImageDirectories.Size = new System.Drawing.Size(228, 222);
             this.treeViewImageDirectories.TabIndex = 0;
             this.treeViewImageDirectories.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.treeViewImageDirectories_AfterSelect);
             // 
@@ -1117,41 +1158,20 @@
             this.listViewDirectoryImages.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
                         | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
-            this.listViewDirectoryImages.Location = new System.Drawing.Point(234, 31);
+            this.listViewDirectoryImages.Location = new System.Drawing.Point(234, 36);
             this.listViewDirectoryImages.MultiSelect = false;
             this.listViewDirectoryImages.Name = "listViewDirectoryImages";
-            this.listViewDirectoryImages.Size = new System.Drawing.Size(355, 227);
+            this.listViewDirectoryImages.Size = new System.Drawing.Size(355, 222);
             this.listViewDirectoryImages.TabIndex = 1;
             this.listViewDirectoryImages.UseCompatibleStateImageBehavior = false;
             this.listViewDirectoryImages.SelectedIndexChanged += new System.EventHandler(this.listViewDirectoryImages_SelectedIndexChanged);
             this.listViewDirectoryImages.Leave += new System.EventHandler(this.listViewDirectoryImages_Leave);
             // 
-            // buttonSearchImages
-            // 
-            this.buttonSearchImages.Location = new System.Drawing.Point(175, 3);
-            this.buttonSearchImages.Name = "buttonSearchImages";
-            this.buttonSearchImages.Size = new System.Drawing.Size(53, 23);
-            this.buttonSearchImages.TabIndex = 25;
-            this.buttonSearchImages.Text = "Suchen";
-            this.buttonSearchImages.UseVisualStyleBackColor = true;
-            this.buttonSearchImages.Click += new System.EventHandler(this.buttonSearchImages_Click);
-            // 
-            // textBoxImageSearch
-            // 
-            this.textBoxImageSearch.AcceptsReturn = true;
-            this.textBoxImageSearch.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBoxImageSearch.Location = new System.Drawing.Point(53, 5);
-            this.textBoxImageSearch.Name = "textBoxImageSearch";
-            this.textBoxImageSearch.Size = new System.Drawing.Size(116, 20);
-            this.textBoxImageSearch.TabIndex = 19;
-            this.textBoxImageSearch.Click += new System.EventHandler(this.textBoxImageSearch_Click);
-            this.textBoxImageSearch.KeyUp += new System.Windows.Forms.KeyEventHandler(this.textBoxImageSearch_KeyUp);
-            // 
             // labelImgDirName
             // 
             this.labelImgDirName.AutoSize = true;
             this.labelImgDirName.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelImgDirName.Location = new System.Drawing.Point(234, 8);
+            this.labelImgDirName.Location = new System.Drawing.Point(234, 12);
             this.labelImgDirName.Name = "labelImgDirName";
             this.labelImgDirName.Size = new System.Drawing.Size(107, 13);
             this.labelImgDirName.TabIndex = 24;
@@ -1546,52 +1566,6 @@
             this.timerElementHighlight.Interval = 250;
             this.timerElementHighlight.Tick += new System.EventHandler(this.timerSearchBoxHL_Tick);
             // 
-            // listViewSetList
-            // 
-            this.listViewSetList.AllowDrop = true;
-            this.listViewSetList.AllowRowReorder = true;
-            this.listViewSetList.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Right)));
-            this.listViewSetList.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
-            this.columnHeader4});
-            this.listViewSetList.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.listViewSetList.FullRowSelect = true;
-            this.listViewSetList.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.None;
-            this.listViewSetList.HideSelection = false;
-            this.listViewSetList.Location = new System.Drawing.Point(5, 16);
-            this.listViewSetList.MultiSelect = false;
-            this.listViewSetList.Name = "listViewSetList";
-            this.listViewSetList.Size = new System.Drawing.Size(234, 208);
-            this.listViewSetList.TabIndex = 27;
-            this.listViewSetList.UseCompatibleStateImageBehavior = false;
-            this.listViewSetList.View = System.Windows.Forms.View.Details;
-            this.listViewSetList.SelectedIndexChanged += new System.EventHandler(this.listViewSetList_SelectedIndexChanged);
-            // 
-            // songDetailElement
-            // 
-            this.songDetailElement.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
-            this.songDetailElement.AutoScroll = true;
-            this.songDetailElement.BackColor = System.Drawing.Color.White;
-            this.songDetailElement.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.songDetailElement.ForeColor = System.Drawing.SystemColors.WindowText;
-            this.songDetailElement.Location = new System.Drawing.Point(6, 16);
-            this.songDetailElement.Name = "songDetailElement";
-            this.songDetailElement.Size = new System.Drawing.Size(474, 240);
-            this.songDetailElement.TabIndex = 20;
-            this.songDetailElement.SlideClicked += new SongDetails.SongDetail.slideClick(this.songDetailElement_SlideClicked);
-            this.songDetailElement.ImageClicked += new SongDetails.SongDetail.imageClick(this.songDetailElement_ImageClicked);
-            // 
-            // songSearchTextBox
-            // 
-            this.songSearchTextBox.Location = new System.Drawing.Point(5, 16);
-            this.songSearchTextBox.Name = "songSearchTextBox";
-            this.songSearchTextBox.PlaceHolderText = "Lied suchen";
-            this.songSearchTextBox.Size = new System.Drawing.Size(235, 24);
-            this.songSearchTextBox.TabIndex = 22;
-            this.songSearchTextBox.TextChanged += new Pbp.Components.SearchTextBox.textChange(this.songSearchBox_TextChanged);
-            // 
             // MainWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1718,12 +1692,9 @@
         private System.Windows.Forms.TabPage tabPageImageHistory;
 		private System.Windows.Forms.ListView listViewImageHistory;
 		private System.Windows.Forms.ColumnHeader columnHeader5;
-		private System.Windows.Forms.TabPage tabPageImageBrowser;
-		private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.TabPage tabPageImageBrowser;
 		private System.Windows.Forms.TreeView treeViewImageDirectories;
-		private System.Windows.Forms.ListView listViewDirectoryImages;
-		private System.Windows.Forms.Button buttonSearchImages;
-		private System.Windows.Forms.TextBox textBoxImageSearch;
+        private System.Windows.Forms.ListView listViewDirectoryImages;
 		private System.Windows.Forms.Label labelImgDirName;
         private System.Windows.Forms.Button buttonClearImageHistory;
         private System.Windows.Forms.ListView listViewFavorites;
@@ -1775,6 +1746,7 @@
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.NumericUpDown numericUpDown1;
         private Components.SearchTextBox songSearchTextBox;
+        private Components.SearchTextBox searchTextBoxImages;
         
     }
 }
