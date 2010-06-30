@@ -336,8 +336,8 @@ namespace Pbp.Forms
         {
             if (listViewSetList.SelectedIndices.Count > 0)
             {
-                if (tabControl1.SelectedIndex != 0)
-                    tabControl1.SelectedIndex = 0;
+                if (tabControlTextLayer.SelectedIndex != 0)
+                    tabControlTextLayer.SelectedIndex = 0;
 
                 int idx = listViewSetList.SelectedIndices[0];
                 if (idx > 0)
@@ -470,18 +470,18 @@ namespace Pbp.Forms
                 if (e.relativePath!=String.Empty)
                     imageHistoryAdd(e.relativePath);
             }
-
-
         }
 
 
         private void tabControl1_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (tabControl1.SelectedIndex == 0)
-                songSearchTextBox.Focus();
-            else if (tabControl1.SelectedIndex == 1)
+            if (tabControlTextLayer.SelectedIndex == 0)
             {
-                searchTextBoxImages.Focus();
+                songSearchTextBox.Focus();
+            }
+            else if (tabControlTextLayer.SelectedIndex == 1)
+            {
+                textBoxLiveText.Focus();
             }
         }
 
@@ -574,8 +574,6 @@ namespace Pbp.Forms
         {
             if (treeViewImageDirectories.Nodes.Count > 1)
             {
-                DateTime starttime = DateTime.Now;
-
                 listViewDirectoryImages.BeginUpdate();
                 listViewDirectoryImages.SuspendLayout();
                 listViewDirectoryImages.Items.Clear();
@@ -642,8 +640,6 @@ namespace Pbp.Forms
 
                 listViewDirectoryImages.ResumeLayout();
                 listViewDirectoryImages.EndUpdate();
-
-                Console.Write("Images: "+(DateTime.Now - starttime).Milliseconds);
             }
         }
 
@@ -694,6 +690,12 @@ namespace Pbp.Forms
         {
             if (listViewImageHistory.Items.Count == 0 || (string)listViewImageHistory.Items[listViewImageHistory.Items.Count - 1].Tag != relImagePath)
             {
+                for (int i = 0; i < listViewImageHistory.Items.Count; i++)
+                {
+                    if ((string)listViewImageHistory.Items[i].Tag == relImagePath)
+                        listViewImageHistory.Items.RemoveAt(i);
+
+                }
                 listViewImageHistory.LargeImageList.Images.Add(ImageManager.Instance.getThumbFromRelPath(relImagePath));
                 ListViewItem lvi = new ListViewItem("");
                 lvi.Tag = relImagePath;

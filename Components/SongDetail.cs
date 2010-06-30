@@ -53,7 +53,9 @@ namespace SongDetails
         {
             this.VerticalScroll.Value = 0;
             PerformLayout();
+            
             this.SuspendLayout();
+
             slideTexts.Clear();
             slideImages.Clear();
             currentSlideTextIdx = -1;
@@ -216,6 +218,7 @@ namespace SongDetails
 				}
 			}
 			currentSong = sng;
+
 			this.ResumeLayout();
 		}
 
