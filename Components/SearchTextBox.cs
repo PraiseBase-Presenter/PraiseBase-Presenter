@@ -12,47 +12,53 @@ namespace Pbp.Components
     [DefaultEvent("TextChanged")]
     public partial class SearchTextBox : UserControl
     {
-        public string Text
-        {
-            get { return textBox.Text!="Lied suchen" ? textBox.Text : String.Empty; }
-            set { textBox.Text = value; textBox.ForeColor = Color.Black; }
-        }
+        private string _placeHolderText = "Suchen";
+        [Description("The placeholder is displayed when the field is empty and does not have the focus."), Category("SearchTextBox"), DefaultValue("Suchen")]
+        public string PlaceHolderText { 
+            get { 
+                return _placeHolderText; 
+            } 
+            set { 
+                _placeHolderText = value;
+                textBox.ForeColor = Color.Gray;
+                textBox.Text = _placeHolderText;
+            } 
+        } 
 
-        public Font Font
+        public new Font Font
         {
             get { return textBox.Font; }
             set { textBox.Font = value; }
         }
 
+        public new string Text
+        {
+            get
+            {
+                return textBox.Text != _placeHolderText ? textBox.Text : String.Empty;
+            }
+            set
+            {
+                textBox.Text = value;
+                textBox.ForeColor = Color.Black;
+            }
+        }
+
+        [Description("If greater than 0, waits this amount of miliseconds after a key has been pressed before raising the TextChanged event."), Category("SearchTextBox"), DefaultValue(250)]
+        public int KeyStrokeDelay { 
+            get { return keyStrokeTimer.Interval; } 
+            set { keyStrokeTimer.Interval = value;  } }
+
         public delegate void textChange(object sender, EventArgs e);
-        public event textChange TextChanged;
+        public new event textChange TextChanged;
  
-        TextBox textBox = new TextBox();
-        PictureBox xPictureBox = new PictureBox();
 
         public SearchTextBox()
         {
             InitializeComponent();
-            this.Paint += new PaintEventHandler(UserControl1_Paint);
-            this.Resize += new EventHandler(UserControl1_Resize);
-            textBox.Multiline = true;
-            textBox.Font = new Font(textBox.Font.FontFamily,10,FontStyle.Regular);
             
             textBox.ForeColor = Color.Gray;
-            textBox.Text = "Lied suchen";
-            textBox.Enter += new EventHandler(textBox_Enter);
-            textBox.Leave += new EventHandler(textBox_Leave);
-            textBox.Click += new EventHandler(textBox_Click);
-            textBox.KeyDown += new KeyEventHandler(textBox_KeyDown);
-            textBox.TextChanged += new EventHandler(textBox_TextChanged);
-
-            textBox.BorderStyle = BorderStyle.None;
-            this.Controls.Add(textBox);
-
-            xPictureBox.Image = Properties.Resources.searchx;
-            xPictureBox.Click += new EventHandler(xPictureBox_Click);
-            xPictureBox.Visible = false;
-            this.Controls.Add(xPictureBox);
+            textBox.Text = _placeHolderText;
         }
 
         /// <summary>
@@ -62,15 +68,28 @@ namespace Pbp.Components
         /// <param name="e"></param>
         void textBox_TextChanged(object sender, EventArgs e)
         {
-            if (textBox.Text == String.Empty || textBox.Text=="Lied suchen")
+            if (keyStrokeTimer.Enabled)
+                keyStrokeTimer.Stop();
+            if (textBox.Text == String.Empty || textBox.Text == _placeHolderText)
+            {
+                if (TextChanged != null)
+                    TextChanged(this, e);
                 xPictureBox.Visible = false;
+            }
             else
+            {
                 xPictureBox.Visible = true;
-
-
-            if (textBox.Text!="Lied suchen" && TextChanged != null)
-                TextChanged(this, e);
+                keyStrokeTimer.Start();
+            }
         }
+
+        void keyStrokeTimer_Tick(object sender, EventArgs e)
+        {
+            if (textBox.Text != _placeHolderText && TextChanged != null)
+                TextChanged(this, e);
+            keyStrokeTimer.Stop();
+        }
+
 
         void xPictureBox_Click(object sender, EventArgs e)
         {
@@ -93,7 +112,7 @@ namespace Pbp.Components
 
         void textBox_Enter(object sender, EventArgs e)
         {
-            if (textBox.Text == "Lied suchen")
+            if (textBox.Text == _placeHolderText)
             {
                 textBox.ForeColor = Color.Black;
                 textBox.Text = string.Empty;
@@ -109,7 +128,7 @@ namespace Pbp.Components
             if (textBox.Text == string.Empty)
             {
                 textBox.ForeColor = Color.Gray;
-                textBox.Text = "Lied suchen";
+                textBox.Text = _placeHolderText;
             }
         }
  
@@ -127,9 +146,5 @@ namespace Pbp.Components
             ControlPaint.DrawBorder(e.Graphics, this.ClientRectangle, Color.Gray, ButtonBorderStyle.Solid);
          }
 
-        private void SearchTextBox_Load(object sender, EventArgs e)
-        {
-
-        }
     }
 }

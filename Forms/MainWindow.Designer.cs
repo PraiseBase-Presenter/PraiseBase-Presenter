@@ -1587,6 +1587,7 @@
             // 
             this.songSearchTextBox.Location = new System.Drawing.Point(5, 16);
             this.songSearchTextBox.Name = "songSearchTextBox";
+            this.songSearchTextBox.PlaceHolderText = "Lied suchen";
             this.songSearchTextBox.Size = new System.Drawing.Size(235, 24);
             this.songSearchTextBox.TabIndex = 22;
             this.songSearchTextBox.TextChanged += new Pbp.Components.SearchTextBox.textChange(this.songSearchBox_TextChanged);

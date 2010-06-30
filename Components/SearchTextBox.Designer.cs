@@ -2,6 +2,10 @@
 {
     partial class SearchTextBox
     {
+        System.Windows.Forms.TextBox textBox = new System.Windows.Forms.TextBox();
+        System.Windows.Forms.PictureBox xPictureBox = new System.Windows.Forms.PictureBox();
+        private System.Windows.Forms.Timer keyStrokeTimer = new System.Windows.Forms.Timer();
+
         /// <summary>
         /// Required designer variable.
         /// </summary>
@@ -33,7 +37,28 @@
             // SearchTextBox
             // 
             this.Name = "SearchTextBox";
-            this.Load += new System.EventHandler(this.SearchTextBox_Load);
+            this.Paint += new System.Windows.Forms.PaintEventHandler(UserControl1_Paint);
+            this.Resize += new System.EventHandler(UserControl1_Resize);
+
+            textBox.Multiline = true;
+            textBox.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            textBox.Font = new System.Drawing.Font(textBox.Font.FontFamily, 10, System.Drawing.FontStyle.Regular);
+            textBox.Enter += new System.EventHandler(textBox_Enter);
+            textBox.Leave += new System.EventHandler(textBox_Leave);
+            textBox.Click += new System.EventHandler(textBox_Click);
+            textBox.KeyDown += new System.Windows.Forms.KeyEventHandler(textBox_KeyDown);
+            textBox.TextChanged += new System.EventHandler(textBox_TextChanged);
+
+            xPictureBox.Image = Properties.Resources.searchx;
+            xPictureBox.Click += new System.EventHandler(xPictureBox_Click);
+            xPictureBox.Visible = false;
+
+            keyStrokeTimer.Interval = 250;
+            keyStrokeTimer.Tick += new System.EventHandler(keyStrokeTimer_Tick);          
+
+            this.Controls.Add(textBox);
+            this.Controls.Add(xPictureBox);
+
             this.ResumeLayout(false);
         }
 

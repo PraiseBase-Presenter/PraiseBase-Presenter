@@ -63,8 +63,6 @@ namespace Pbp.Forms
 		private bool blackout;
         private List<String> imageSearchResults;
 
-        private Timer keyStrokeTimer;
-
         private bool linkLayers = true;
 
 		/// <summary>
@@ -73,12 +71,7 @@ namespace Pbp.Forms
         private MainWindow()
         {
             InitializeComponent();
-
-            keyStrokeTimer = new Timer();
-            keyStrokeTimer.Interval = 250;
-            keyStrokeTimer.Tick += new EventHandler(keyStrokeTimer_Tick);
         }
-
 
 		/// <summary>
 		/// Returns a singleton of mainWindow
@@ -148,22 +141,7 @@ namespace Pbp.Forms
 
         private void songSearchBox_TextChanged(object sender, EventArgs e)
         {
-            if (songSearchTextBox.Text == "")
-            {
-                searchSongs("");
-                keyStrokeTimer.Stop();
-                return;
-            }
-            if (keyStrokeTimer.Enabled)
-                keyStrokeTimer.Stop();
-            keyStrokeTimer.Start();
-            keyStrokeTimer.Tag = songSearchTextBox.Text;            
-        }
-
-        void keyStrokeTimer_Tick(object sender, EventArgs e)
-        {
-            searchSongs((string)keyStrokeTimer.Tag);
-            keyStrokeTimer.Stop();
+            searchSongs(songSearchTextBox.Text);
         }
 
         /**
@@ -172,7 +150,6 @@ namespace Pbp.Forms
         void loadSongList()
         {
             setStatus("Lade Liederliste...");
-            //Console.WriteLine("loadsonglist");
             searchSongs("");
             setStatus(listViewSongs.Items.Count.ToString() + " Lieder geladen");
         }
