@@ -28,20 +28,27 @@
         /// </summary>
         private void InitializeComponent()
         {
-			this.SuspendLayout();
-			// 
-			// SongDetail
-			// 
-			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
-			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-			this.BackColor = System.Drawing.Color.White;
-			this.Name = "SongDetail";
-			this.Size = new System.Drawing.Size(392, 266);
-            this.KeyUp += new System.Windows.Forms.KeyEventHandler(SongDetail_KeyUp);
+            this.SuspendLayout();
+            // 
+            // SongDetail
+            // 
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoScroll = true;
-			this.ResumeLayout(false);
+            this.BackColor = System.Drawing.Color.White;
+            this.Name = "SongDetail";
+            this.Size = new System.Drawing.Size(392, 266);
+            this.Load += new System.EventHandler(this.SongDetail_Load);
+            this.KeyUp += new System.Windows.Forms.KeyEventHandler(this.SongDetail_KeyUp);
+            this.ResumeLayout(false);
 
         }
+
+
+
+
+
+
 
         #endregion
 

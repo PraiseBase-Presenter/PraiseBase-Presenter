@@ -29,8 +29,18 @@ namespace SongDetails
         private int currentSlideTextIdx = -1;
         private int currentSlideImageIdx = -1;
 
+        private int refrainIndex;
+        private int prechorusIndex;
+        private int bridgeIndex;
+        private int verse1Index;
+        private int verse2Index;
+        private int verse3Index;
+        private int verse4Index;
+
         Color borderHoverColor = Color.DarkGray;
         Color borderActiveColor = Color.Black;
+        Color itemActiveFG = Color.White;
+        Color itemActiveBG = SystemColors.Highlight;
 
         public SongDetail()
         {
@@ -47,6 +57,13 @@ namespace SongDetails
             slideTexts.Clear();
             slideImages.Clear();
             currentSlideTextIdx = -1;
+            refrainIndex = -1;
+            prechorusIndex = -1;
+            bridgeIndex = -1;
+            verse1Index = -1;
+            verse2Index = -1;
+            verse3Index = -1;
+            verse4Index = -1;
 	
 			// Clear
 			for (int j = numParts-1; j >= 0; j--)
@@ -105,7 +122,7 @@ namespace SongDetails
 					this.Controls.Add(lpnl);
 				}
 
-
+                 
 				for (int j = 0; j < numSlides; j++)
 				{
 					Panel slidePanel = new Panel();
@@ -162,6 +179,39 @@ namespace SongDetails
 
                     slideTexts.Add(textLbl);
 
+                    if (j == 0)
+                    {
+                        if (refrainIndex < 0 && (sng.Parts[numParts].Caption == "Refrain" || sng.Parts[numParts].Caption == "Chorus"))
+                        {
+                            refrainIndex = slideTexts.Count - 1;
+                        }
+                        else if (prechorusIndex < 0 && (sng.Parts[numParts].Caption == "Pre-Chorus" || sng.Parts[numParts].Caption == "Prechorus"))
+                        {
+                            prechorusIndex = slideTexts.Count - 1;
+                        }
+                        else if (bridgeIndex < 0 && (sng.Parts[numParts].Caption == "Bridge"))
+                        {
+                            bridgeIndex = slideTexts.Count - 1;
+                        }
+                        else if (verse1Index < 0 && (sng.Parts[numParts].Caption == "Strophe 1" || sng.Parts[numParts].Caption == "Teil 1" || sng.Parts[numParts].Caption == "Verse 1"))
+                        {
+                            verse1Index = slideTexts.Count - 1;
+                        }
+                        else if (verse2Index < 0 && (sng.Parts[numParts].Caption == "Strophe 2" || sng.Parts[numParts].Caption == "Teil 2" || sng.Parts[numParts].Caption == "Verse 2"))
+                        {
+                            verse2Index = slideTexts.Count - 1;
+                        }
+                        else if (verse3Index < 0 && (sng.Parts[numParts].Caption == "Strophe 3" || sng.Parts[numParts].Caption == "Teil 3" || sng.Parts[numParts].Caption == "Verse 3"))
+                        {
+                            verse3Index = slideTexts.Count - 1;
+                        }
+                        else if (verse4Index < 0 && (sng.Parts[numParts].Caption == "Strophe 4" || sng.Parts[numParts].Caption == "Teil 4" || sng.Parts[numParts].Caption == "Verse 4"))
+                        {
+                            verse4Index = slideTexts.Count - 1;
+                        }
+
+                    }
+
                     panelTextLabelContainer.Controls.Add(textLbl);
 				}
 			}
@@ -175,47 +225,85 @@ namespace SongDetails
         {
             if (e.KeyCode == Keys.Down && currentSlideTextIdx >= 0 && currentSlideTextIdx < slideTexts.Count - 1)
             {
-                int tOffset = ((Panel)slideTexts[currentSlideTextIdx + 1].Parent.Parent).Parent.Bottom;
-                if (tOffset + VerticalScroll.Value > this.Height)
-                    VerticalScroll.Value = tOffset + VerticalScroll.Value - this.Height + 2;
-                PerformLayout();
-
                 textLbl_Click(slideTexts[currentSlideTextIdx + 1], new EventArgs());
             }
             else if (e.KeyCode == Keys.Up && currentSlideTextIdx > 0)
             {
-                int tOffset = ((Panel)slideTexts[currentSlideTextIdx - 1].Parent.Parent).Parent.Top;
-                if (tOffset < 0)
-                    VerticalScroll.Value += tOffset - 5;
-                PerformLayout();
-
                 textLbl_Click(slideTexts[currentSlideTextIdx - 1], new EventArgs());
             }
+            else if ((e.KeyCode == Keys.R || e.KeyCode == Keys.C) && refrainIndex >= 0)
+            {
+                textLbl_Click(slideTexts[refrainIndex], new EventArgs());
+            }
+            else if ((e.KeyCode == Keys.P) && prechorusIndex >= 0)
+            {
+                textLbl_Click(slideTexts[prechorusIndex], new EventArgs());
+            }
+            else if ((e.KeyCode == Keys.B ) && bridgeIndex >= 0)
+            {
+                textLbl_Click(slideTexts[bridgeIndex], new EventArgs());
+            }
+            else if ((e.KeyCode == Keys.D1) && verse1Index >= 0)
+            {
+                textLbl_Click(slideTexts[verse1Index], new EventArgs());
+            }
+            else if ((e.KeyCode == Keys.D2) && verse2Index >= 0)
+            {
+                textLbl_Click(slideTexts[verse2Index], new EventArgs());
+            }
+            else if ((e.KeyCode == Keys.D3) && verse3Index >= 0)
+            {
+                textLbl_Click(slideTexts[verse3Index], new EventArgs());
+            }
+            else if ((e.KeyCode == Keys.D4) && verse4Index >= 0)
+            {
+                textLbl_Click(slideTexts[verse4Index], new EventArgs());
+            }
+
         }
 
         void textLbl_Click(object sender, EventArgs e)
         {
-            Label pnl = ((Label)sender);
+            Label lbl = ((Label)sender);
 
             if (currentSlideTextIdx >= 0)
             {
                 slideTexts[currentSlideTextIdx].BackColor = Color.White;
+                slideTexts[currentSlideTextIdx].ForeColor = Color.Black;
                 slideTexts[currentSlideTextIdx].Parent.BackColor = Color.Transparent;
 
                 slideImages[currentSlideTextIdx].Parent.BackColor = Color.Transparent;
             }
 
-            currentSlideTextIdx = slideTexts.IndexOf(pnl);
+            int newSlideIdx = slideTexts.IndexOf(lbl);
 
-            pnl.BackColor = Color.LightBlue;
-            pnl.Parent.BackColor = borderActiveColor;
+            if (currentSlideTextIdx < newSlideIdx)
+            {
+                int tOffset = ((Panel)lbl.Parent.Parent).Parent.Bottom;
+                if (tOffset + VerticalScroll.Value > this.Height)
+                    VerticalScroll.Value = tOffset + VerticalScroll.Value - this.Height + 2;
+                PerformLayout();
+            }
+            else
+            {
+                int tOffset = ((Panel)lbl.Parent.Parent).Parent.Top;
+                if (tOffset < 0)
+                    VerticalScroll.Value += tOffset - 5;
+                PerformLayout();
+            }
+
+            currentSlideTextIdx = newSlideIdx;
+
+            lbl.BackColor = itemActiveBG;
+            lbl.ForeColor = itemActiveFG;
+            lbl.Parent.BackColor = borderActiveColor;
 
             slideImages[currentSlideTextIdx].Parent.BackColor = borderActiveColor;
 
             if (SlideClicked != null)
             {
                 this.Focus();
-                SlideClickEventArgs p = new SlideClickEventArgs((int)pnl.Parent.Parent.Parent.Tag, (int)pnl.Tag);
+                SlideClickEventArgs p = new SlideClickEventArgs((int)lbl.Parent.Parent.Parent.Tag, (int)lbl.Tag);
                 SlideClicked(this, p);
             }
         }
@@ -228,6 +316,7 @@ namespace SongDetails
             {
                 slideTexts[currentSlideTextIdx].Parent.BackColor = Color.Transparent;
                 slideTexts[currentSlideTextIdx].BackColor = Color.White;
+                slideTexts[currentSlideTextIdx].ForeColor = Color.Black;
                 currentSlideTextIdx = -1;
             }
 
@@ -258,6 +347,7 @@ namespace SongDetails
             if (currentSlideTextIdx < 0 || slideTexts[currentSlideTextIdx] != (Label)sender)
             {
                 ((Label)sender).Parent.BackColor = borderHoverColor;
+                ((Label)sender).BackColor = Color.LightBlue;
                 slideImages[slideTexts.IndexOf((Label)sender)].Parent.BackColor = borderHoverColor;
             }
         }
@@ -267,6 +357,7 @@ namespace SongDetails
             if (currentSlideTextIdx < 0 || slideTexts[currentSlideTextIdx] != (Label)sender)
             {
                 ((Label)sender).Parent.BackColor = Color.Transparent;
+                ((Label)sender).BackColor = Color.White;
                 slideImages[slideTexts.IndexOf((Label)sender)].Parent.BackColor = Color.Transparent;
             }
         }
@@ -307,6 +398,11 @@ namespace SongDetails
         }
 
         #endregion
+
+        private void SongDetail_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 
     #region Helper classes
