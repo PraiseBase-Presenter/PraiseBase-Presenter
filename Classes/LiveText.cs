@@ -40,8 +40,10 @@ namespace Pbp
             int h = (int)gr.VisibleClipBounds.Height;
             int padding = 20;
 
+            string[] lines = Text.Split(Environment.NewLine.ToCharArray());
+
             SizeF coveredArea = gr.MeasureString(Text, font);
-            
+                        
             int x, y;
             if (strFormat.Alignment == StringAlignment.Far)
                 x = w - padding;
@@ -57,7 +59,25 @@ namespace Pbp
             else
                 y = padding;
 
-            gr.DrawString(Text, font, fontBrush, new Point(x, y), strFormat);
+
+            foreach (string l in lines)
+            {
+                SizeF lm = gr.MeasureString(l, font);
+
+                if (lm.Width > (float)(w - padding))
+                {
+                    int nc = l.Length / ((int)Math.Ceiling(lm.Width / (float)(w - padding)));
+                    string s = string.Join(Environment.NewLine, Util.Wrap(l, nc)).Trim();
+                    gr.DrawString(s, font, fontBrush, new Point(x, y), strFormat);
+                    y += (int)gr.MeasureString(s, font).Height + Settings.Instance.ProjectionMasterLineSpacing;
+                }
+                else
+                {
+                    gr.DrawString(l, font, fontBrush, new Point(x, y), strFormat);
+                    y += (int)lm.Height + Settings.Instance.ProjectionMasterLineSpacing;
+                }
+            }
+           
 
         }
     }

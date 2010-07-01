@@ -120,6 +120,15 @@
             this.buttonShowLiveText = new System.Windows.Forms.Button();
             this.textBoxLiveText = new System.Windows.Forms.TextBox();
             this.tabPage5 = new System.Windows.Forms.TabPage();
+            this.label10 = new System.Windows.Forms.Label();
+            this.numericUpDown2 = new System.Windows.Forms.NumericUpDown();
+            this.listBoxBibleVerseTo = new System.Windows.Forms.ListBox();
+            this.labelBibleTextName = new System.Windows.Forms.Label();
+            this.buttonBibleTextHide = new System.Windows.Forms.Button();
+            this.buttonBibleTextShow = new System.Windows.Forms.Button();
+            this.textBoxBibleText = new System.Windows.Forms.TextBox();
+            this.label9 = new System.Windows.Forms.Label();
+            this.listBoxBibleVerse = new System.Windows.Forms.ListBox();
             this.label7 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
@@ -164,10 +173,7 @@
             this.columnHeader6 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.buttonResetImageQueue = new System.Windows.Forms.Button();
             this.timerElementHighlight = new System.Windows.Forms.Timer(this.components);
-            this.listBoxBibleVerse = new System.Windows.Forms.ListBox();
-            this.label9 = new System.Windows.Forms.Label();
-            this.textBoxBibleText = new System.Windows.Forms.TextBox();
-            this.buttonBibleTextShow = new System.Windows.Forms.Button();
+            this.label11 = new System.Windows.Forms.Label();
             this.searchTextBoxImages = new Pbp.Components.SearchTextBox();
             this.songDetailElement = new SongDetails.SongDetail();
             this.listViewSetList = new Bol.WinControls.ListViewEx();
@@ -175,8 +181,6 @@
             this.listViewSongHistory = new Bol.WinControls.ListViewEx();
             this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.songSearchTextBox = new Pbp.Components.SearchTextBox();
-            this.buttonBibleTextHide = new System.Windows.Forms.Button();
-            this.labelBibleTextName = new System.Windows.Forms.Label();
             buttonChooseDiaDir = new System.Windows.Forms.Button();
             this.menuStrip1.SuspendLayout();
             this.toolStrip1.SuspendLayout();
@@ -191,6 +195,7 @@
             this.tabPage2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
             this.tabPage5.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown2)).BeginInit();
             this.tabControl2.SuspendLayout();
             this.tabPageImageBrowser.SuspendLayout();
             this.tabPageImageHistory.SuspendLayout();
@@ -1098,6 +1103,10 @@
             // 
             // tabPage5
             // 
+            this.tabPage5.Controls.Add(this.label11);
+            this.tabPage5.Controls.Add(this.label10);
+            this.tabPage5.Controls.Add(this.numericUpDown2);
+            this.tabPage5.Controls.Add(this.listBoxBibleVerseTo);
             this.tabPage5.Controls.Add(this.labelBibleTextName);
             this.tabPage5.Controls.Add(this.buttonBibleTextHide);
             this.tabPage5.Controls.Add(this.buttonBibleTextShow);
@@ -1117,6 +1126,112 @@
             this.tabPage5.TabIndex = 2;
             this.tabPage5.Text = "Bibel";
             this.tabPage5.UseVisualStyleBackColor = true;
+            // 
+            // label10
+            // 
+            this.label10.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.label10.AutoSize = true;
+            this.label10.Location = new System.Drawing.Point(457, 237);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(71, 13);
+            this.label10.TabIndex = 14;
+            this.label10.Text = "Schriftgrösse:";
+            // 
+            // numericUpDown2
+            // 
+            this.numericUpDown2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.numericUpDown2.Location = new System.Drawing.Point(534, 233);
+            this.numericUpDown2.Maximum = new decimal(new int[] {
+            150,
+            0,
+            0,
+            0});
+            this.numericUpDown2.Minimum = new decimal(new int[] {
+            10,
+            0,
+            0,
+            0});
+            this.numericUpDown2.Name = "numericUpDown2";
+            this.numericUpDown2.Size = new System.Drawing.Size(52, 20);
+            this.numericUpDown2.TabIndex = 13;
+            this.numericUpDown2.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.numericUpDown2.Value = new decimal(new int[] {
+            40,
+            0,
+            0,
+            0});
+            // 
+            // listBoxBibleVerseTo
+            // 
+            this.listBoxBibleVerseTo.FormattingEnabled = true;
+            this.listBoxBibleVerseTo.Location = new System.Drawing.Point(401, 33);
+            this.listBoxBibleVerseTo.Name = "listBoxBibleVerseTo";
+            this.listBoxBibleVerseTo.Size = new System.Drawing.Size(50, 225);
+            this.listBoxBibleVerseTo.TabIndex = 12;
+            this.listBoxBibleVerseTo.SelectedIndexChanged += new System.EventHandler(this.listBoxBibleVerseTo_SelectedIndexChanged);
+            // 
+            // labelBibleTextName
+            // 
+            this.labelBibleTextName.AutoSize = true;
+            this.labelBibleTextName.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelBibleTextName.Location = new System.Drawing.Point(454, 9);
+            this.labelBibleTextName.Name = "labelBibleTextName";
+            this.labelBibleTextName.Size = new System.Drawing.Size(36, 13);
+            this.labelBibleTextName.TabIndex = 11;
+            this.labelBibleTextName.Text = "Text:";
+            // 
+            // buttonBibleTextHide
+            // 
+            this.buttonBibleTextHide.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.buttonBibleTextHide.Location = new System.Drawing.Point(869, 232);
+            this.buttonBibleTextHide.Name = "buttonBibleTextHide";
+            this.buttonBibleTextHide.Size = new System.Drawing.Size(115, 23);
+            this.buttonBibleTextHide.TabIndex = 10;
+            this.buttonBibleTextHide.Text = "Text ausblenden";
+            this.buttonBibleTextHide.UseVisualStyleBackColor = true;
+            this.buttonBibleTextHide.Click += new System.EventHandler(this.button1_Click_3);
+            // 
+            // buttonBibleTextShow
+            // 
+            this.buttonBibleTextShow.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.buttonBibleTextShow.Location = new System.Drawing.Point(748, 232);
+            this.buttonBibleTextShow.Name = "buttonBibleTextShow";
+            this.buttonBibleTextShow.Size = new System.Drawing.Size(115, 23);
+            this.buttonBibleTextShow.TabIndex = 9;
+            this.buttonBibleTextShow.Text = "Text einblenden";
+            this.buttonBibleTextShow.UseVisualStyleBackColor = true;
+            this.buttonBibleTextShow.Click += new System.EventHandler(this.buttonBibleTextShow_Click);
+            // 
+            // textBoxBibleText
+            // 
+            this.textBoxBibleText.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+                        | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.textBoxBibleText.Location = new System.Drawing.Point(457, 33);
+            this.textBoxBibleText.Multiline = true;
+            this.textBoxBibleText.Name = "textBoxBibleText";
+            this.textBoxBibleText.ReadOnly = true;
+            this.textBoxBibleText.Size = new System.Drawing.Size(527, 193);
+            this.textBoxBibleText.TabIndex = 8;
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label9.Location = new System.Drawing.Point(342, 9);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(36, 13);
+            this.label9.TabIndex = 7;
+            this.label9.Text = "Vers:";
+            // 
+            // listBoxBibleVerse
+            // 
+            this.listBoxBibleVerse.FormattingEnabled = true;
+            this.listBoxBibleVerse.Location = new System.Drawing.Point(345, 33);
+            this.listBoxBibleVerse.Name = "listBoxBibleVerse";
+            this.listBoxBibleVerse.Size = new System.Drawing.Size(50, 225);
+            this.listBoxBibleVerse.TabIndex = 6;
+            this.listBoxBibleVerse.SelectedIndexChanged += new System.EventHandler(this.listBoxBibleVerse_SelectedIndexChanged);
             // 
             // label7
             // 
@@ -1632,47 +1747,15 @@
             this.timerElementHighlight.Interval = 250;
             this.timerElementHighlight.Tick += new System.EventHandler(this.timerSearchBoxHL_Tick);
             // 
-            // listBoxBibleVerse
+            // label11
             // 
-            this.listBoxBibleVerse.FormattingEnabled = true;
-            this.listBoxBibleVerse.Location = new System.Drawing.Point(345, 33);
-            this.listBoxBibleVerse.Name = "listBoxBibleVerse";
-            this.listBoxBibleVerse.Size = new System.Drawing.Size(50, 225);
-            this.listBoxBibleVerse.TabIndex = 6;
-            this.listBoxBibleVerse.SelectedIndexChanged += new System.EventHandler(this.listBoxBibleVerse_SelectedIndexChanged);
-            // 
-            // label9
-            // 
-            this.label9.AutoSize = true;
-            this.label9.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label9.Location = new System.Drawing.Point(342, 9);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(36, 13);
-            this.label9.TabIndex = 7;
-            this.label9.Text = "Vers:";
-            // 
-            // textBoxBibleText
-            // 
-            this.textBoxBibleText.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
-            this.textBoxBibleText.Location = new System.Drawing.Point(401, 33);
-            this.textBoxBibleText.Multiline = true;
-            this.textBoxBibleText.Name = "textBoxBibleText";
-            this.textBoxBibleText.ReadOnly = true;
-            this.textBoxBibleText.Size = new System.Drawing.Size(583, 193);
-            this.textBoxBibleText.TabIndex = 8;
-            // 
-            // buttonBibleTextShow
-            // 
-            this.buttonBibleTextShow.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.buttonBibleTextShow.Location = new System.Drawing.Point(748, 232);
-            this.buttonBibleTextShow.Name = "buttonBibleTextShow";
-            this.buttonBibleTextShow.Size = new System.Drawing.Size(115, 23);
-            this.buttonBibleTextShow.TabIndex = 9;
-            this.buttonBibleTextShow.Text = "Text einblenden";
-            this.buttonBibleTextShow.UseVisualStyleBackColor = true;
-            this.buttonBibleTextShow.Click += new System.EventHandler(this.buttonBibleTextShow_Click);
+            this.label11.AutoSize = true;
+            this.label11.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label11.Location = new System.Drawing.Point(398, 9);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(28, 13);
+            this.label11.TabIndex = 15;
+            this.label11.Text = "Bis:";
             // 
             // searchTextBoxImages
             // 
@@ -1750,27 +1833,6 @@
             this.songSearchTextBox.TabIndex = 22;
             this.songSearchTextBox.TextChanged += new Pbp.Components.SearchTextBox.textChange(this.songSearchBox_TextChanged);
             // 
-            // buttonBibleTextHide
-            // 
-            this.buttonBibleTextHide.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.buttonBibleTextHide.Location = new System.Drawing.Point(869, 232);
-            this.buttonBibleTextHide.Name = "buttonBibleTextHide";
-            this.buttonBibleTextHide.Size = new System.Drawing.Size(115, 23);
-            this.buttonBibleTextHide.TabIndex = 10;
-            this.buttonBibleTextHide.Text = "Text ausblenden";
-            this.buttonBibleTextHide.UseVisualStyleBackColor = true;
-            this.buttonBibleTextHide.Click += new System.EventHandler(this.button1_Click_3);
-            // 
-            // labelBibleTextName
-            // 
-            this.labelBibleTextName.AutoSize = true;
-            this.labelBibleTextName.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelBibleTextName.Location = new System.Drawing.Point(398, 9);
-            this.labelBibleTextName.Name = "labelBibleTextName";
-            this.labelBibleTextName.Size = new System.Drawing.Size(36, 13);
-            this.labelBibleTextName.TabIndex = 11;
-            this.labelBibleTextName.Text = "Text:";
-            // 
             // MainWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1807,6 +1869,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).EndInit();
             this.tabPage5.ResumeLayout(false);
             this.tabPage5.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown2)).EndInit();
             this.tabControl2.ResumeLayout(false);
             this.tabPageImageBrowser.ResumeLayout(false);
             this.tabPageImageBrowser.PerformLayout();
@@ -1973,6 +2036,10 @@
         private System.Windows.Forms.Button buttonBibleTextShow;
         private System.Windows.Forms.Button buttonBibleTextHide;
         private System.Windows.Forms.Label labelBibleTextName;
+        private System.Windows.Forms.ListBox listBoxBibleVerseTo;
+        private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.NumericUpDown numericUpDown2;
+        private System.Windows.Forms.Label label11;
         
     }
 }
