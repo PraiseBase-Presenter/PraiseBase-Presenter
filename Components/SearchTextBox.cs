@@ -51,7 +51,8 @@ namespace Pbp.Components
 
         public delegate void textChange(object sender, EventArgs e);
         public new event textChange TextChanged;
- 
+
+        private string currentText = String.Empty;
 
         public SearchTextBox()
         {
@@ -98,14 +99,21 @@ namespace Pbp.Components
                 keyStrokeTimer.Stop();
             if (textBox.Text == String.Empty || textBox.Text == _placeHolderText)
             {
-                if (TextChanged != null)
+                if (currentText != textBox.Text && textBox.Text == String.Empty && TextChanged != null)
+                {
+                    currentText = textBox.Text;
                     TextChanged(this, e);
+                }
                 xPictureBox.Visible = false;
             }
             else
             {
                 xPictureBox.Visible = true;
-                keyStrokeTimer.Start();
+                if (currentText != textBox.Text)
+                {
+                    currentText = textBox.Text;
+                    keyStrokeTimer.Start();
+                }
             }
         }
 

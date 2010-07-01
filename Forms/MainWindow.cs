@@ -125,7 +125,7 @@ namespace Pbp.Forms
             comboBox2.SelectedIndex = 0;
 
             numericUpDown1.Value = (int)Settings.Instance.ProjectionMasterFont.Size;
-
+            
         }
 
         private void beendenToolStripMenuItem_Click(object sender, EventArgs e)
@@ -307,6 +307,7 @@ namespace Pbp.Forms
                     {
                         SongManager.Instance.CurrentSong = SongManager.Instance.SongList[(Guid)listViewSongs.SelectedItems[0].Tag];
                         showCurrentSongDetails();
+
                         buttonSetListAdd.Enabled = true;
                     }
                 }
@@ -326,6 +327,7 @@ namespace Pbp.Forms
                 {
                     SongManager.Instance.CurrentSong = SongManager.Instance.SongList[(Guid)listViewSongs.SelectedItems[0].Tag];
                     showCurrentSongDetails();
+                    
                     buttonSetListAdd.Enabled = true;
                 }
             }
@@ -383,6 +385,15 @@ namespace Pbp.Forms
 		private void songDetailElement_SlideClicked(object sender, SongDetails.SlideClickEventArgs e)
 		{
             Application.DoEvents();
+
+            if (listViewSongHistory.Items.Count==0 || (Guid)listViewSongHistory.Items[0].Tag != SongManager.Instance.CurrentSong.GUID)
+            {
+                ListViewItem lvi = new ListViewItem(SongManager.Instance.CurrentSong.Title);
+                lvi.Tag = SongManager.Instance.CurrentSong.GUID;
+                listViewSongHistory.Items.Insert(0, lvi);
+                listViewSongHistory.Columns[0].Width = -2;
+            }
+
 
 			int pn = e.PartNumber;
 			int sn = e.SlideNumber;
@@ -482,6 +493,24 @@ namespace Pbp.Forms
             else if (tabControlTextLayer.SelectedIndex == 1)
             {
                 textBoxLiveText.Focus();
+            }
+            else if (tabControlTextLayer.SelectedIndex == 2)
+            {
+                if (comboBoxBible.Items.Count == 0)
+                {
+                    comboBoxBible.Items.Add("Übersetzung wählen...");
+                    comboBoxBible.SelectedIndex = 0;
+                    comboBoxBible.DisplayMember = "Title";
+
+                    foreach (string fi in XMLBible.getBibleFiles())
+                    {
+                        XMLBible bbl = new XMLBible(fi);
+                        if (bbl.isValid)
+                        {
+                            comboBoxBible.Items.Add(bbl);
+                        }
+                    }
+                }
             }
         }
 
@@ -1558,6 +1587,52 @@ namespace Pbp.Forms
             Settings.Instance.ProjectionFadeTime = value;
             Settings.Instance.Save();
             UserControl1.getInstance().setFadeSteps(value);
+        }
+
+        private void listViewSongHistory_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (listViewSongHistory.SelectedIndices.Count > 0)
+            {
+                SongManager.getInstance().CurrentSong = SongManager.getInstance().SongList[(Guid)listViewSongHistory.SelectedItems[0].Tag];
+                showCurrentSongDetails();
+            }
+        }
+
+        private void comboBoxBible_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (comboBoxBible.SelectedIndex > 0)
+            {
+                listBoxBibleChapter.Items.Clear();
+
+                listBoxBibleBook.Items.Clear();
+                listBoxBibleBook.DisplayMember = "Name";
+
+                XMLBible bbl = ((XMLBible)comboBoxBible.SelectedItem);
+                
+                foreach (XMLBible.Book bk in bbl.getBooks())
+                {
+                    listBoxBibleBook.Items.Add(bk);
+                }
+            }
+        }
+
+        private void listBoxBibleBook_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            XMLBible.Book bk = ((XMLBible.Book)listBoxBibleBook.SelectedItem);
+
+            listBoxBibleChapter.Items.Clear();
+            listBoxBibleChapter.DisplayMember = "Number";
+
+            foreach (XMLBible.Chapter cp in bk.getChapters())
+            {
+                listBoxBibleChapter.Items.Add(cp);
+            }
+            
+        }
+
+        private void listBoxBibleChapter_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
         }
 
 
