@@ -1602,6 +1602,7 @@ namespace Pbp.Forms
         {
             if (comboBoxBible.SelectedIndex > 0)
             {
+                listBoxBibleVerse.Items.Clear();
                 listBoxBibleChapter.Items.Clear();
 
                 listBoxBibleBook.Items.Clear();
@@ -1620,6 +1621,8 @@ namespace Pbp.Forms
         {
             XMLBible.Book bk = ((XMLBible.Book)listBoxBibleBook.SelectedItem);
 
+            listBoxBibleVerse.Items.Clear();
+
             listBoxBibleChapter.Items.Clear();
             listBoxBibleChapter.DisplayMember = "Number";
 
@@ -1632,7 +1635,37 @@ namespace Pbp.Forms
 
         private void listBoxBibleChapter_SelectedIndexChanged(object sender, EventArgs e)
         {
+            XMLBible.Chapter cp = ((XMLBible.Chapter)listBoxBibleChapter.SelectedItem);
 
+            listBoxBibleVerse.Items.Clear();
+            listBoxBibleVerse.DisplayMember = "Number";
+
+            foreach (XMLBible.Vers v in cp.getVerses())
+            {
+                listBoxBibleVerse.Items.Add(v);
+            }
+        }
+
+        private void listBoxBibleVerse_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            XMLBible.Vers v = ((XMLBible.Vers)listBoxBibleVerse.SelectedItem);
+            labelBibleTextName.Text = v.Chapter.Book.Name + " " + v.Chapter.Number + "." + v.Number;
+            textBoxBibleText.Text = v.Text + Environment.NewLine; //v.Number.ToString() + ": "+ 
+        }
+
+        private void buttonBibleTextShow_Click(object sender, EventArgs e)
+        {
+            String text = labelBibleTextName.Text + Environment.NewLine + Environment.NewLine;
+            text += textBoxBibleText.SelectedText != String.Empty ? textBoxBibleText.SelectedText : textBoxBibleText.Text;
+
+            LiveText lt = new LiveText(text);
+            //lt.FontSize = (float)numericUpDown1.Value;
+            pictureBoxPreview.Image = projWindow.showSlide(lt, currentBackground);
+        }
+
+        private void button1_Click_3(object sender, EventArgs e)
+        {
+            pictureBoxPreview.Image = projWindow.showSlide(null, currentBackground);
         }
 
 

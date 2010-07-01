@@ -99,13 +99,13 @@ namespace Pbp
             public int Number {get;private set;}
             public string Name { get; private set; }
             public string SName { get; private set; }
+            public XMLBible Bible { get; private set; }
 
-            private XMLBible _owner;
             private XmlNode node;
 
             public Book(XmlNode bookNode, XMLBible owner)
             {
-                this._owner = owner;
+                this.Bible = owner;
                 this.node = bookNode;
                 Number = int.Parse(bookNode.Attributes["bnumber"].InnerText);
                 Name = bookNode.Attributes["bname"] != null ? bookNode.Attributes["bname"].InnerText : XMLBible.bookMap[Number - 1];
@@ -136,14 +136,52 @@ namespace Pbp
         public class Chapter
         {
             public int Number {get;private set;}
-            private XMLBible.Book _owner;
+            public XMLBible.Book Book { get; private set; }
+
             private XmlNode node;
 
-            public Chapter(XmlNode bookNode, XMLBible.Book owner)
+            public Chapter(XmlNode chapterNode, XMLBible.Book owner)
             {
-                this._owner = owner;
-                this.node = bookNode;
-                Number = int.Parse(bookNode.Attributes["cnumber"].InnerText);
+                this.Book = owner;
+                this.node = chapterNode;
+                Number = int.Parse(chapterNode.Attributes["cnumber"].InnerText);
+            }
+
+            public string toString()
+            {
+                return Number.ToString();
+            }
+
+            public List<XMLBible.Vers> getVerses()
+            {
+                List<XMLBible.Vers> ret = new List<Vers>();
+
+                foreach (XmlNode versNode in node.ChildNodes)
+                {
+                    if (versNode.Name.ToLower() == "vers")
+                    {
+                        ret.Add(new Vers(versNode, this));
+                    }
+                }
+                return ret;
+            }
+
+        }
+
+        public class Vers
+        {
+            public int Number { get; private set; }
+            public string Text { get; private set; }
+            public XMLBible.Chapter Chapter { get; private set; }
+
+            private XmlNode node;
+
+            public Vers(XmlNode verseNode, XMLBible.Chapter owner)
+            {
+                this.Chapter = owner;
+                this.node = verseNode;
+                Number = int.Parse(verseNode.Attributes["vnumber"].InnerText);
+                Text = verseNode.InnerText;
             }
 
             public string toString()
