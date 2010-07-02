@@ -47,14 +47,19 @@ namespace Pbp
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
 
-            
-
 			if (Settings.Instance.ShowLoadingScreen)
 			{
 				LoadingScreen ldg = new LoadingScreen();
 				ldg.setLabel("PraiseBase Presenter wird gestartet...");
 				ldg.Show();
 				Application.DoEvents();
+
+                if (Settings.Instance.DataDirectory == "")
+                {
+                    // Todo: check and create
+                    Settings.Instance.DataDirectory = Environment.GetFolderPath(Environment.SpecialFolder.Personal).ToString() + System.IO.Path.DirectorySeparatorChar + Settings.Instance.DataDirDefaultName;
+                    Settings.Instance.Save();
+                }
 
 				ldg.setLabel("Prüfe Miniaturbilder...");
 				ImageManager.Instance.checkThumbs(ldg);

@@ -118,13 +118,6 @@ namespace Pbp
 				ldg = (LoadingScreen)param[0];
 			}				
 
-            if (Settings.Instance.DataDirectory == "")
-            {
-				// Todo: check and create
-                Settings.Instance.DataDirectory =  Environment.GetFolderPath(Environment.SpecialFolder.Personal).ToString() + Path.DirectorySeparatorChar + Settings.Instance.DataDirDefaultName;
-                Settings.Instance.Save();
-            }
-
             string searchDir = Settings.Instance.DataDirectory +  Path.DirectorySeparatorChar + Settings.Instance.SongDir;
 
 			List<string> songPaths = new List<string>();
