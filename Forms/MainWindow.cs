@@ -496,21 +496,7 @@ namespace Pbp.Forms
             }
             else if (tabControlTextLayer.SelectedIndex == 2)
             {
-                if (comboBoxBible.Items.Count == 0)
-                {
-                    comboBoxBible.Items.Add("Übersetzung wählen...");
-                    comboBoxBible.SelectedIndex = 0;
-                    comboBoxBible.DisplayMember = "Title";
-
-                    foreach (string fi in XMLBible.getBibleFiles())
-                    {
-                        XMLBible bbl = new XMLBible(fi);
-                        if (bbl.isValid)
-                        {
-                            comboBoxBible.Items.Add(bbl);
-                        }
-                    }
-                }
+                loadBibles();
             }
         }
 
@@ -1598,6 +1584,31 @@ namespace Pbp.Forms
             }
         }
 
+
+        #region Bible
+
+        int bookIdx = -1, chapterIdx = -1, verseIdx = -1, verseToIdx = -1;
+
+        private void loadBibles(bool reload=false)
+        {
+            if (comboBoxBible.Items.Count == 0 || reload)
+            {
+                comboBoxBible.Items.Clear();
+                comboBoxBible.Items.Add("Übersetzung wählen...");
+                comboBoxBible.SelectedIndex = 0;
+                comboBoxBible.DisplayMember = "Title";
+
+                foreach (string fi in XMLBible.getBibleFiles())
+                {
+                    XMLBible bbl = new XMLBible(fi);
+                    if (bbl.isValid)
+                    {
+                        comboBoxBible.Items.Add(bbl);
+                    }
+                }
+            }
+        }
+
         private void comboBoxBible_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (comboBoxBible.SelectedIndex > 0)
@@ -1615,6 +1626,12 @@ namespace Pbp.Forms
                 {
                     listBoxBibleBook.Items.Add(bk);
                 }
+
+                if (bookIdx >= 0 && bookIdx < listBoxBibleBook.Items.Count)
+                {
+                    listBoxBibleBook.SelectedIndex = bookIdx;
+                }
+
             }
         }
 
@@ -1632,7 +1649,13 @@ namespace Pbp.Forms
             {
                 listBoxBibleChapter.Items.Add(cp);
             }
-            
+
+            if (bookIdx == listBoxBibleBook.SelectedIndex && chapterIdx >= 0)
+            {
+                listBoxBibleChapter.SelectedIndex = chapterIdx;
+            }
+
+            bookIdx = listBoxBibleBook.SelectedIndex;
         }
 
         private void listBoxBibleChapter_SelectedIndexChanged(object sender, EventArgs e)
@@ -1649,6 +1672,14 @@ namespace Pbp.Forms
                 listBoxBibleVerse.Items.Add(v);
                 listBoxBibleVerseTo.Items.Add(v);
             }
+
+            if (chapterIdx == listBoxBibleChapter.SelectedIndex && verseIdx >= 0)
+            {
+                listBoxBibleVerse.SelectedIndex = verseIdx;
+            }
+
+            chapterIdx = listBoxBibleChapter.SelectedIndex;
+
         }
 
         private void listBoxBibleVerse_SelectedIndexChanged(object sender, EventArgs e)
@@ -1663,7 +1694,15 @@ namespace Pbp.Forms
                     listBoxBibleVerseTo.Items.Add(tv);
                 }
             }
-            listBoxBibleVerseTo.SelectedIndex = 0;
+
+            if (verseIdx == listBoxBibleVerse.SelectedIndex && verseToIdx >= 0)
+            {
+                listBoxBibleVerseTo.SelectedIndex = verseToIdx;
+            }
+            else
+                listBoxBibleVerseTo.SelectedIndex = 0;
+
+            verseIdx = listBoxBibleVerse.SelectedIndex;
 
         }
 
@@ -1674,26 +1713,26 @@ namespace Pbp.Forms
                 XMLBible.Vers v = ((XMLBible.Vers)listBoxBibleVerse.SelectedItem);
                 XMLBible.Vers v2 = ((XMLBible.Vers)listBoxBibleVerseTo.SelectedItem);
 
-                labelBibleTextName.Text = v.Chapter.Book.Name + " " + v.Chapter.Number + "." + (v.Number != v2.Number ? v.Number.ToString()+"-"+v2.Number.ToString() : v.Number.ToString());
+                labelBibleTextName.Text = v.getTitle(v2.Number);
 
                 textBoxBibleText.Text = "";
                 for (int i = v.Number; i <= v2.Number; i++)
                 {
-                    textBoxBibleText.Text += v.Chapter.getVerses()[i - 1].Number.ToString() + ": " + v.Chapter.getVerses()[i - 1].Text + Environment.NewLine; 
+                    textBoxBibleText.Text += v.Chapter.getVerses()[i - 1].ToString() + Environment.NewLine;
                 }
 
+                verseToIdx = listBoxBibleVerseTo.SelectedIndex;
             }
         }
 
-
         private void buttonBibleTextShow_Click(object sender, EventArgs e)
         {
-            String text = labelBibleTextName.Text + Environment.NewLine + Environment.NewLine;
-            text += textBoxBibleText.SelectedText != String.Empty ? textBoxBibleText.SelectedText : textBoxBibleText.Text;
+            BibleLayer bl = new BibleLayer();
+            bl.FontSize = (float)numericUpDown2.Value;
 
-            LiveText lt = new LiveText(text);
-            lt.FontSize = (float)numericUpDown2.Value;
-            pictureBoxPreview.Image = projWindow.showSlide(lt, currentBackground);
+            object[] args = { ((XMLBible.Vers)listBoxBibleVerse.SelectedItem), ((XMLBible.Vers)listBoxBibleVerseTo.SelectedItem) };
+
+            pictureBoxPreview.Image = projWindow.showSlide(bl, currentBackground,args);
         }
 
         private void button1_Click_3(object sender, EventArgs e)
@@ -1701,7 +1740,7 @@ namespace Pbp.Forms
             pictureBoxPreview.Image = projWindow.showSlide(null, currentBackground);
         }
 
-
+        #endregion
 
 
 

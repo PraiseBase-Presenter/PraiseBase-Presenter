@@ -96,7 +96,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Classes\BaseLayer.cs" />
-    <Compile Include="Classes\Bible.cs" />
+    <Compile Include="Classes\BibleLayer.cs" />
     <Compile Include="Classes\XMLBible.cs" />
     <Compile Include="Classes\LiveText.cs" />
     <Compile Include="Classes\TextLayer.cs" />

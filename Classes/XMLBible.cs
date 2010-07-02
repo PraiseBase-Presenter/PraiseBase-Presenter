@@ -12,7 +12,7 @@ namespace Pbp
     /// 
     /// Author: Nicolas Perrenoud<nicu@lavine.ch>
     /// 
-    /// Project Website: http://sourceforge.net/projects/zefania-sharp/
+    /// Zefania XML Project Website: http://sourceforge.net/projects/zefania-sharp/
     /// Wikipedia: http://de.wikipedia.org/wiki/Zefania_XML
     /// Docs: http://bgfdb.de/zefaniaxml/bml/
     /// </summary>
@@ -22,7 +22,7 @@ namespace Pbp
         public bool isValid { get; private set; }
         public string FileName { get; private set; }
 
-        public static string[] bookMap = { "1 Mose", "2 Mose", "3 Mose", "4 Mose", "5 Mose", "Josua", "Richter", "Rut", "1 Samuel", "2 Samuel", "1 Könige", "2 Könige", "1 Chronik", "2 Chronik", "Esra", "Nehemia", "Ester", "Hiob", "Psalm", "Sprüche", "Prediger", "Hohelied", "Jesaja", "Jeremia", "Klagelieder", "Hesekiel", "Daniel", "Hosea", "Joel", "Amos", "Obadja", "Jona", "Micha", "Nahum", "Habakuk", "Zephanja", "Haggai", "Sacharja", "Maleachi", "Matthäus", "Markus", "Lukas", "Johannes", "Apostelgeschichte", "Römer", "1 Korinther", "2 Korinther", "Galater", "Epheser", "Philipper", "Kolosser", "1 Thessalonicher", "2 Thessalonicher", "1 Timotheus", "2 Timotheus", "Titus", "Philemon", "Hebräer", "Jakobus", "1 Petrus", "2 Petrus", "1 Johannes", "2 Johannes", "3 Johannes", "Judas", "Offenbarung", "Judit", "Weisheit", "Tobia", "Sirach", "Baruch", "1 Makkabäer", "2 Makkabäer", "xDaniel", "xEster", "Manasse"};
+        public static string[] bookMap = { "1. Mose", "2. Mose", "3. Mose", "4. Mose", "5. Mose", "Josua", "Richter", "Rut", "1. Samuel", "2. Samuel", "1. Könige", "2. Könige", "1. Chronik", "2. Chronik", "Esra", "Nehemia", "Ester", "Hiob", "Psalm", "Sprüche", "Prediger", "Hohelied", "Jesaja", "Jeremia", "Klagelieder", "Hesekiel", "Daniel", "Hosea", "Joel", "Amos", "Obadja", "Jona", "Micha", "Nahum", "Habakuk", "Zephanja", "Haggai", "Sacharja", "Maleachi", "Matthäus", "Markus", "Lukas", "Johannes", "Apostelgeschichte", "Römer", "1. Korinther", "2. Korinther", "Galater", "Epheser", "Philipper", "Kolosser", "1. Thessalonicher", "2. Thessalonicher", "1. Timotheus", "2. Timotheus", "Titus", "Philemon", "Hebräer", "Jakobus", "1. Petrus", "2. Petrus", "1. Johannes", "2. Johannes", "3. Johannes", "Judas", "Offenbarung", "Judit", "Weisheit", "Tobia", "Sirach", "Baruch", "1 Makkabäer", "2 Makkabäer", "xDaniel", "xEster", "Manasse"};
 
         XmlDocument xmlDoc;
         XmlElement xmlRoot;
@@ -57,7 +57,7 @@ namespace Pbp
             }
         }
 
-        public string toString()
+        public override string ToString()
         {
             return Title;
         }
@@ -90,7 +90,6 @@ namespace Pbp
             return ret;
         }
 
-
         static public List<string> getBibleFiles()
         {
             List<string> res = new List<string>();
@@ -121,7 +120,7 @@ namespace Pbp
                 SName = bookNode.Attributes["bsname"] != null ? bookNode.Attributes["bsname"].InnerText : Name;
             }
 
-            public string toString()
+            public override string ToString()
             {
                 return Name;
             }
@@ -156,7 +155,7 @@ namespace Pbp
                 Number = int.Parse(chapterNode.Attributes["cnumber"].InnerText);
             }
 
-            public string toString()
+            public override string ToString()
             {
                 return Number.ToString();
             }
@@ -193,11 +192,15 @@ namespace Pbp
                 Text = verseNode.InnerText;
             }
 
-            public string toString()
+            public override string ToString()
             {
-                return Number.ToString();
+                return Number.ToString()+": "+ Text;
+            }
+
+            public string getTitle(int to = 0)
+            {
+                return Chapter.Book + " " + Chapter + "." + (to != 0 && Number != to ? Number.ToString() + "-" + to : Number.ToString());
             }
         }
-
     }
 }
