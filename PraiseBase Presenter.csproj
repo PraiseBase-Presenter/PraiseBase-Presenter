@@ -280,13 +280,8 @@
     </Compile>
     <Compile Include="Settings.cs" />
     <Compile Include="Classes\Song.cs" />
-    <None Include="Songs\.svn\all-wcprops" />
-    <None Include="Songs\.svn\entries" />
-    <None Include="Songs\.svn\lock" />
-    <None Include="Songs\.svn\text-base\A Mighty Fortress Is Our God.ppl.svn-base" />
-    <None Include="Songs\.svn\text-base\Jesus is my Lord.ppl.svn-base" />
-    <None Include="Songs\A Mighty Fortress Is Our God.ppl" />
-    <None Include="Songs\Jesus is my Lord.ppl" />
+    <Content Include="Songs\A Mighty Fortress Is Our God.ppl" />
+    <Content Include="Songs\Jesus is my Lord.ppl" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\pb web.png" />
@@ -463,13 +458,7 @@
     <Content Include="Bibles\luther1912.xml" />
     <Content Include="Bibles\sf_luther_1545_letzte_hand_rev1.xml" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Songs\.svn\prop-base\" />
-    <Folder Include="Songs\.svn\props\" />
-    <Folder Include="Songs\.svn\tmp\prop-base\" />
-    <Folder Include="Songs\.svn\tmp\props\" />
-    <Folder Include="Songs\.svn\tmp\text-base\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
