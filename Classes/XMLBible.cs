@@ -160,15 +160,15 @@ namespace Pbp
                 return Number.ToString();
             }
 
-            public List<XMLBible.Vers> getVerses()
+            public List<XMLBible.Verse> getVerses()
             {
-                List<XMLBible.Vers> ret = new List<Vers>();
+                List<XMLBible.Verse> ret = new List<Verse>();
 
                 foreach (XmlNode versNode in node.ChildNodes)
                 {
                     if (versNode.Name.ToLower() == "vers")
                     {
-                        ret.Add(new Vers(versNode, this));
+                        ret.Add(new Verse(versNode, this));
                     }
                 }
                 return ret;
@@ -176,7 +176,7 @@ namespace Pbp
 
         }
 
-        public class Vers
+        public class Verse
         {
             public int Number { get; private set; }
             public string Text { get; private set; }
@@ -184,7 +184,7 @@ namespace Pbp
 
             private XmlNode node;
 
-            public Vers(XmlNode verseNode, XMLBible.Chapter owner)
+            public Verse(XmlNode verseNode, XMLBible.Chapter owner)
             {
                 this.Chapter = owner;
                 this.node = verseNode;
@@ -196,10 +196,55 @@ namespace Pbp
             {
                 return Number.ToString()+": "+ Text;
             }
+        }
 
-            public string getTitle(int to = 0)
+        public class VerseSelection
+        {
+            public XMLBible.Verse StartVerse { get; private set; }
+            public XMLBible.Verse EndVerse { 
+                get { 
+                    return StartVerse.Chapter.getVerses()[endVerseNumber - 1]; 
+                } 
+            }
+            public XMLBible.Chapter Chapter { 
+                get { 
+                    return StartVerse.Chapter; 
+                }
+            }
+            public string Text { 
+                get {
+                    string str = "";
+                    for (int i = StartVerse.Number; i <= endVerseNumber; i++)
+                    {
+                        str += StartVerse.Chapter.getVerses()[i - 1] + Environment.NewLine;
+                    }
+                    return str;
+                } 
+            }
+            
+            int endVerseNumber = 0;
+
+            public VerseSelection(XMLBible.Verse start)
             {
-                return Chapter.Book + " " + Chapter + "." + (to != 0 && Number != to ? Number.ToString() + "-" + to : Number.ToString());
+                StartVerse = start;
+                endVerseNumber = start.Number;
+            }
+
+            public VerseSelection(XMLBible.Verse start, XMLBible.Verse end)
+            {
+                StartVerse = start;
+                endVerseNumber = end.Number;
+            }
+
+            public VerseSelection(XMLBible.Verse start, int end)
+            {
+                StartVerse = start;
+                endVerseNumber = end;
+            }
+
+            public override string ToString()
+            {
+                return StartVerse.Chapter.Book + " " + StartVerse.Chapter + "." + (endVerseNumber != 0 && StartVerse.Number != endVerseNumber ? StartVerse.Number.ToString() + "-" + endVerseNumber : StartVerse.Number.ToString());
             }
         }
     }

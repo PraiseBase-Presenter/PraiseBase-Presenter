@@ -29,17 +29,10 @@ namespace Pbp
 
         public override void writeOut(System.Drawing.Graphics gr, object[] args, ProjectionMode pr)
         {
-            XMLBible.Vers v = (XMLBible.Vers)args[0];
-            XMLBible.Vers v2 = (XMLBible.Vers)args[1];
+            XMLBible.VerseSelection v = (XMLBible.VerseSelection)args[0];
 
-            string Title = v.getTitle(v2.Number);
-
-            string Text = "";
-            for (int i = v.Number; i <= v2.Number; i++)
-            {
-                Text += v.Chapter.getVerses()[i - 1] + Environment.NewLine;
-            }
-
+            string Title = v.ToString();
+            string Text = v.Text;
 
             Font font = new Font(Settings.Instance.ProjectionMasterFont.FontFamily, FontSize, Settings.Instance.ProjectionMasterFont.Style);
             Font titleFont = new Font(Settings.Instance.ProjectionMasterFont.FontFamily, FontSize+10f, Settings.Instance.ProjectionMasterFont.Style);

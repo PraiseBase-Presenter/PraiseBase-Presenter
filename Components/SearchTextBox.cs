@@ -180,5 +180,10 @@ namespace Pbp.Components
             ControlPaint.DrawBorder(e.Graphics, this.ClientRectangle, Color.Gray, ButtonBorderStyle.Solid);
          }
 
+        public void select(int start, int length)
+        {
+            textBox.Select(start, length);
+        }
+
     }
 }
