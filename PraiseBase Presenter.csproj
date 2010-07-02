@@ -280,6 +280,13 @@
     </Compile>
     <Compile Include="Settings.cs" />
     <Compile Include="Classes\Song.cs" />
+    <None Include="Songs\.svn\all-wcprops" />
+    <None Include="Songs\.svn\entries" />
+    <None Include="Songs\.svn\lock" />
+    <None Include="Songs\.svn\text-base\A Mighty Fortress Is Our God.ppl.svn-base" />
+    <None Include="Songs\.svn\text-base\Jesus is my Lord.ppl.svn-base" />
+    <None Include="Songs\A Mighty Fortress Is Our God.ppl" />
+    <None Include="Songs\Jesus is my Lord.ppl" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\pb web.png" />
@@ -423,8 +430,6 @@
     <None Include="Resources\1rightarrow1.png" />
     <None Include="Resources\searchx.png" />
     <None Include="Resources\searchg.png" />
-    <Content Include="Songs\A Mighty Fortress Is Our God.ppl" />
-    <Content Include="Songs\Jesus is my Lord.ppl" />
   </ItemGroup>
   <ItemGroup>
     <Page Include="Forms\projectionControl.xaml">
@@ -439,6 +444,31 @@
       <Project>{09A9686F-D9B1-4829-A52A-33DF72EBFC10}</Project>
       <Name>PBP Controls</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Backgrounds\Sample\Berge.jpg" />
+    <Content Include="Backgrounds\Sample\Blume.jpg" />
+    <Content Include="Backgrounds\Sample\Feuer.jpg" />
+    <Content Include="Backgrounds\Sample\Landschaft.jpg" />
+    <Content Include="Backgrounds\Sample\Meer.jpg" />
+    <Content Include="Backgrounds\Sample\Menschen.jpg" />
+    <Content Include="Backgrounds\Sample\night_sky_1024.jpg" />
+    <Content Include="Backgrounds\Sample\Sonne.jpg" />
+    <Content Include="Backgrounds\Sample\Wald.jpg" />
+    <Content Include="Backgrounds\Sample\Wasser.JPG" />
+    <Content Include="Backgrounds\Sample\Wolken.jpg" />
+    <Content Include="Backgrounds\Sample\Wüste.jpg" />
+    <Content Include="Bibles\Elberfelder_1905.xml" />
+    <Content Include="Bibles\kjv.xml" />
+    <Content Include="Bibles\luther1912.xml" />
+    <Content Include="Bibles\sf_luther_1545_letzte_hand_rev1.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Songs\.svn\prop-base\" />
+    <Folder Include="Songs\.svn\props\" />
+    <Folder Include="Songs\.svn\tmp\prop-base\" />
+    <Folder Include="Songs\.svn\tmp\props\" />
+    <Folder Include="Songs\.svn\tmp\text-base\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

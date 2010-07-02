@@ -7,6 +7,15 @@ using System.IO;
 
 namespace Pbp
 {
+    /// <summary>
+    /// XML bible reader based on Zefania XML format
+    /// 
+    /// Author: Nicolas Perrenoud<nicu@lavine.ch>
+    /// 
+    /// Project Website: http://sourceforge.net/projects/zefania-sharp/
+    /// Wikipedia: http://de.wikipedia.org/wiki/Zefania_XML
+    /// Docs: http://bgfdb.de/zefaniaxml/bml/
+    /// </summary>
     class XMLBible
     {
         public string Title { get; private set; }
@@ -85,7 +94,7 @@ namespace Pbp
         static public List<string> getBibleFiles()
         {
             List<string> res = new List<string>();
-            DirectoryInfo di = new DirectoryInfo(Pbp.Properties.Settings.Instance.DataDirectory + Path.DirectorySeparatorChar + "Bible");
+            DirectoryInfo di = new DirectoryInfo(Pbp.Properties.Settings.Instance.DataDirectory + Path.DirectorySeparatorChar + "Bibles");
             FileInfo[] rgFiles = di.GetFiles("*.xml");
             foreach (FileInfo fi in rgFiles)
             {
