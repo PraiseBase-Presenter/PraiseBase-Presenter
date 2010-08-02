@@ -122,6 +122,8 @@
             this.buttonShowLiveText = new System.Windows.Forms.Button();
             this.textBoxLiveText = new System.Windows.Forms.TextBox();
             this.tabPage5 = new System.Windows.Forms.TabPage();
+            this.labelBibleSearchMsg = new System.Windows.Forms.Label();
+            this.checkBoxBibleShowVerseFromListDirectly = new System.Windows.Forms.CheckBox();
             this.buttonAddToBibleVerseList = new System.Windows.Forms.Button();
             this.buttonRemoveFromBibleVerseList = new System.Windows.Forms.Button();
             this.label12 = new System.Windows.Forms.Label();
@@ -141,6 +143,8 @@
             this.listBoxBibleChapter = new System.Windows.Forms.ListBox();
             this.listBoxBibleBook = new System.Windows.Forms.ListBox();
             this.comboBoxBible = new System.Windows.Forms.ComboBox();
+            this.tabPage7 = new System.Windows.Forms.TabPage();
+            this.button1 = new System.Windows.Forms.Button();
             this.tabControl2 = new System.Windows.Forms.TabControl();
             this.tabPageImageBrowser = new System.Windows.Forms.TabPage();
             this.treeViewImageDirectories = new System.Windows.Forms.TreeView();
@@ -162,6 +166,7 @@
             this.buttonEnableAllDias = new System.Windows.Forms.Button();
             this.buttonDiaShow = new System.Windows.Forms.Button();
             this.buttonDisableAllDias = new System.Windows.Forms.Button();
+            this.tabPage6 = new System.Windows.Forms.TabPage();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.panel1 = new System.Windows.Forms.Panel();
             this.groupBox5 = new System.Windows.Forms.GroupBox();
@@ -179,9 +184,8 @@
             this.columnHeader6 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.buttonResetImageQueue = new System.Windows.Forms.Button();
             this.timerElementHighlight = new System.Windows.Forms.Timer(this.components);
-            this.checkBoxBibleShowVerseFromListDirectly = new System.Windows.Forms.CheckBox();
-            this.labelBibleSearchMsg = new System.Windows.Forms.Label();
             this.searchTextBoxImages = new Pbp.Components.SearchTextBox();
+            this.colorPicker1 = new Pbp.Components.ColorPicker();
             this.songDetailElement = new SongDetails.SongDetail();
             this.listViewSetList = new Bol.WinControls.ListViewEx();
             this.columnHeader4 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
@@ -204,11 +208,13 @@
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
             this.tabPage5.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown2)).BeginInit();
+            this.tabPage7.SuspendLayout();
             this.tabControl2.SuspendLayout();
             this.tabPageImageBrowser.SuspendLayout();
             this.tabPageImageHistory.SuspendLayout();
             this.tabPageImageFavorites.SuspendLayout();
             this.tabPageSlideShow.SuspendLayout();
+            this.tabPage6.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
             this.panel1.SuspendLayout();
             this.groupBox5.SuspendLayout();
@@ -754,6 +760,7 @@
             this.tabControlTextLayer.Controls.Add(this.tabPage1);
             this.tabControlTextLayer.Controls.Add(this.tabPage2);
             this.tabControlTextLayer.Controls.Add(this.tabPage5);
+            this.tabControlTextLayer.Controls.Add(this.tabPage7);
             this.tabControlTextLayer.ItemSize = new System.Drawing.Size(60, 25);
             this.tabControlTextLayer.Location = new System.Drawing.Point(3, 3);
             this.tabControlTextLayer.Name = "tabControlTextLayer";
@@ -1132,11 +1139,11 @@
             // tabPage5
             // 
             this.tabPage5.Controls.Add(this.labelBibleSearchMsg);
-            this.tabPage5.Controls.Add(this.searchTextBoxBible);
             this.tabPage5.Controls.Add(this.checkBoxBibleShowVerseFromListDirectly);
             this.tabPage5.Controls.Add(this.buttonAddToBibleVerseList);
             this.tabPage5.Controls.Add(this.buttonRemoveFromBibleVerseList);
             this.tabPage5.Controls.Add(this.label12);
+            this.tabPage5.Controls.Add(this.searchTextBoxBible);
             this.tabPage5.Controls.Add(this.listViewBibleVerseList);
             this.tabPage5.Controls.Add(this.label11);
             this.tabPage5.Controls.Add(this.label10);
@@ -1161,6 +1168,25 @@
             this.tabPage5.TabIndex = 2;
             this.tabPage5.Text = "Bibel";
             this.tabPage5.UseVisualStyleBackColor = true;
+            // 
+            // labelBibleSearchMsg
+            // 
+            this.labelBibleSearchMsg.AutoSize = true;
+            this.labelBibleSearchMsg.Location = new System.Drawing.Point(9, 91);
+            this.labelBibleSearchMsg.Name = "labelBibleSearchMsg";
+            this.labelBibleSearchMsg.Size = new System.Drawing.Size(0, 13);
+            this.labelBibleSearchMsg.TabIndex = 39;
+            // 
+            // checkBoxBibleShowVerseFromListDirectly
+            // 
+            this.checkBoxBibleShowVerseFromListDirectly.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.checkBoxBibleShowVerseFromListDirectly.AutoSize = true;
+            this.checkBoxBibleShowVerseFromListDirectly.Location = new System.Drawing.Point(858, 234);
+            this.checkBoxBibleShowVerseFromListDirectly.Name = "checkBoxBibleShowVerseFromListDirectly";
+            this.checkBoxBibleShowVerseFromListDirectly.Size = new System.Drawing.Size(109, 17);
+            this.checkBoxBibleShowVerseFromListDirectly.TabIndex = 37;
+            this.checkBoxBibleShowVerseFromListDirectly.Text = "Direkt einblenden";
+            this.checkBoxBibleShowVerseFromListDirectly.UseVisualStyleBackColor = true;
             // 
             // buttonAddToBibleVerseList
             // 
@@ -1381,6 +1407,28 @@
             this.comboBoxBible.TabIndex = 0;
             this.comboBoxBible.SelectedIndexChanged += new System.EventHandler(this.comboBoxBible_SelectedIndexChanged);
             // 
+            // tabPage7
+            // 
+            this.tabPage7.Controls.Add(this.button1);
+            this.tabPage7.Location = new System.Drawing.Point(4, 29);
+            this.tabPage7.Name = "tabPage7";
+            this.tabPage7.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage7.Size = new System.Drawing.Size(994, 264);
+            this.tabPage7.TabIndex = 3;
+            this.tabPage7.Text = "PowerPoint";
+            this.tabPage7.UseVisualStyleBackColor = true;
+            // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(10, 6);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(75, 23);
+            this.button1.TabIndex = 0;
+            this.button1.Text = "button1";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Visible = false;
+            this.button1.Click += new System.EventHandler(this.button1_Click_4);
+            // 
             // tabControl2
             // 
             this.tabControl2.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
@@ -1390,6 +1438,7 @@
             this.tabControl2.Controls.Add(this.tabPageImageHistory);
             this.tabControl2.Controls.Add(this.tabPageImageFavorites);
             this.tabControl2.Controls.Add(this.tabPageSlideShow);
+            this.tabControl2.Controls.Add(this.tabPage6);
             this.tabControl2.ItemSize = new System.Drawing.Size(80, 25);
             this.tabControl2.Location = new System.Drawing.Point(4, 4);
             this.tabControl2.Name = "tabControl2";
@@ -1633,6 +1682,17 @@
             this.buttonDisableAllDias.UseVisualStyleBackColor = true;
             this.buttonDisableAllDias.Click += new System.EventHandler(this.buttonDisableAllDias_Click);
             // 
+            // tabPage6
+            // 
+            this.tabPage6.Controls.Add(this.colorPicker1);
+            this.tabPage6.Location = new System.Drawing.Point(4, 29);
+            this.tabPage6.Name = "tabPage6";
+            this.tabPage6.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage6.Size = new System.Drawing.Size(607, 258);
+            this.tabPage6.TabIndex = 4;
+            this.tabPage6.Text = "Farbe";
+            this.tabPage6.UseVisualStyleBackColor = true;
+            // 
             // tableLayoutPanel1
             // 
             this.tableLayoutPanel1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
@@ -1837,32 +1897,25 @@
             this.timerElementHighlight.Interval = 250;
             this.timerElementHighlight.Tick += new System.EventHandler(this.timerSearchBoxHL_Tick);
             // 
-            // checkBoxBibleShowVerseFromListDirectly
-            // 
-            this.checkBoxBibleShowVerseFromListDirectly.AutoSize = true;
-            this.checkBoxBibleShowVerseFromListDirectly.Location = new System.Drawing.Point(858, 234);
-            this.checkBoxBibleShowVerseFromListDirectly.Name = "checkBoxBibleShowVerseFromListDirectly";
-            this.checkBoxBibleShowVerseFromListDirectly.Size = new System.Drawing.Size(109, 17);
-            this.checkBoxBibleShowVerseFromListDirectly.TabIndex = 37;
-            this.checkBoxBibleShowVerseFromListDirectly.Text = "Direkt einblenden";
-            this.checkBoxBibleShowVerseFromListDirectly.UseVisualStyleBackColor = true;
-            // 
-            // labelBibleSearchMsg
-            // 
-            this.labelBibleSearchMsg.AutoSize = true;
-            this.labelBibleSearchMsg.Location = new System.Drawing.Point(9, 91);
-            this.labelBibleSearchMsg.Name = "labelBibleSearchMsg";
-            this.labelBibleSearchMsg.Size = new System.Drawing.Size(0, 13);
-            this.labelBibleSearchMsg.TabIndex = 39;
-            // 
             // searchTextBoxImages
             // 
-            this.searchTextBoxImages.Location = new System.Drawing.Point(3, 6);
+            this.searchTextBoxImages.Location = new System.Drawing.Point(0, 6);
             this.searchTextBoxImages.Name = "searchTextBoxImages";
             this.searchTextBoxImages.PlaceHolderText = "Bild suchen";
-            this.searchTextBoxImages.Size = new System.Drawing.Size(225, 24);
+            this.searchTextBoxImages.Size = new System.Drawing.Size(228, 24);
             this.searchTextBoxImages.TabIndex = 26;
             this.searchTextBoxImages.TextChanged += new Pbp.Components.SearchTextBox.textChange(this.searchTextBoxImages_TextChanged);
+            // 
+            // colorPicker1
+            // 
+            this.colorPicker1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+                        | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.colorPicker1.Location = new System.Drawing.Point(6, 6);
+            this.colorPicker1.Name = "colorPicker1";
+            this.colorPicker1.Size = new System.Drawing.Size(595, 246);
+            this.colorPicker1.TabIndex = 0;
+            this.colorPicker1.ColorPicked += new Pbp.Components.ColorPicker.colorPick(this.colorPicker1_ColorPicked);
             // 
             // songDetailElement
             // 
@@ -1977,6 +2030,7 @@
             this.tabPage5.ResumeLayout(false);
             this.tabPage5.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown2)).EndInit();
+            this.tabPage7.ResumeLayout(false);
             this.tabControl2.ResumeLayout(false);
             this.tabPageImageBrowser.ResumeLayout(false);
             this.tabPageImageBrowser.PerformLayout();
@@ -1984,6 +2038,7 @@
             this.tabPageImageFavorites.ResumeLayout(false);
             this.tabPageSlideShow.ResumeLayout(false);
             this.tabPageSlideShow.PerformLayout();
+            this.tabPage6.ResumeLayout(false);
             this.tableLayoutPanel1.ResumeLayout(false);
             this.panel1.ResumeLayout(false);
             this.groupBox5.ResumeLayout(false);
@@ -2155,6 +2210,10 @@
         private System.Windows.Forms.CheckBox checkBoxBibleShowVerseFromListDirectly;
         private Components.SearchTextBox searchTextBoxBible;
         private System.Windows.Forms.Label labelBibleSearchMsg;
+        private System.Windows.Forms.TabPage tabPage6;
+        private Components.ColorPicker colorPicker1;
+        private System.Windows.Forms.TabPage tabPage7;
+        private System.Windows.Forms.Button button1;
         
     }
 }

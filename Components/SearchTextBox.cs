@@ -65,12 +65,15 @@ namespace Pbp.Components
 
             textBox.Multiline = true;
             textBox.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            textBox.BackColor = Color.White;
             textBox.Font = new System.Drawing.Font(textBox.Font.FontFamily, 10, System.Drawing.FontStyle.Regular);
             textBox.Enter += new System.EventHandler(textBox_Enter);
             textBox.Leave += new System.EventHandler(textBox_Leave);
             textBox.Click += new System.EventHandler(textBox_Click);
             textBox.KeyDown += new System.Windows.Forms.KeyEventHandler(textBox_KeyDown);
             textBox.TextChanged += new System.EventHandler(textBox_TextChanged);
+
+            this.EnabledChanged += new EventHandler(SearchTextBox_EnabledChanged);
 
             xPictureBox.Image = Properties.Resources.searchx;
             xPictureBox.Click += new System.EventHandler(xPictureBox_Click);
@@ -86,6 +89,20 @@ namespace Pbp.Components
 
             textBox.ForeColor = Color.Gray;
             textBox.Text = _placeHolderText;
+        }
+
+        void SearchTextBox_EnabledChanged(object sender, EventArgs e)
+        {
+            if (!this.Enabled)
+            {
+                this.BackColor = Color.LightGray;
+                textBox.BackColor = Color.LightGray;
+            }
+            else
+            {
+                this.BackColor = Color.White;
+                textBox.BackColor = Color.White;
+            }
         }
 
         /// <summary>

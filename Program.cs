@@ -82,9 +82,11 @@ namespace Pbp
 				projectionWindow.getInstance();
 				GC.Collect();
 			}
-
+            
 			Console.WriteLine("Loading took " + (DateTime.Now - startTime).TotalSeconds + " seconds!");
+
 			Application.Run(MainWindow.getInstance());
+
         }
     }
 }

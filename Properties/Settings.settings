@@ -104,9 +104,6 @@
     <Setting Name="EditorWindowState" Type="System.Windows.Forms.FormWindowState" Scope="User">
       <Value Profile="(Default)">Normal</Value>
     </Setting>
-    <Setting Name="Version" Type="System.String" Scope="Application">
-      <Value Profile="(Default)">0.10.7.2</Value>
-    </Setting>
     <Setting Name="Weburl" Type="System.String" Scope="Application">
       <Value Profile="(Default)">http://code.google.com/p/praisebasepresenter</Value>
     </Setting>

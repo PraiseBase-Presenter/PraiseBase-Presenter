@@ -43,6 +43,8 @@ using System.Xml;
 using Pbp.Properties;
 using Pbp.Forms;
 
+//using PowerPoint = Microsoft.Office.Interop.PowerPoint;
+
 
 namespace Pbp.Forms
 {
@@ -90,11 +92,22 @@ namespace Pbp.Forms
 		/// <param name="sender"></param>
 		/// <param name="e"></param>
         private void Form1_Load(object sender, EventArgs e)
-        {            
+        {
+            System.Threading.Thread newThread;
+            newThread = new System.Threading.Thread(checkForUpdate);
+            newThread.Name = "UpdateChecker";
+            newThread.Start();
+
+            System.Threading.Thread bThread;
+            bThread = new System.Threading.Thread(loadBibles);
+            bThread.Name = "BibleLoader";
+            bThread.Start();
+            
+
             projWindow = projectionWindow.getInstance();
 
 			this.WindowState = Settings.Instance.ViewerWindowState;
-			this.Text += " " + Settings.Instance.Version;
+            this.Text += " " + System.Reflection.Assembly.GetExecutingAssembly().GetName().Version.ToString();
 
             blackout = false;
             blackOutTimer = new Timer(); // Timer anlegen
@@ -125,7 +138,98 @@ namespace Pbp.Forms
             comboBox2.SelectedIndex = 0;
 
             numericUpDown1.Value = (int)Settings.Instance.ProjectionMasterFont.Size;
-            
+
+
+        }
+
+        void checkForUpdate()
+        {
+            // in newVersion variable we will store the
+            // version info from xml file
+            Version newVersion = null;
+            // and in this variable we will put the url we
+            // would like to open so that the user can
+            // download the new version
+            // it can be a homepage or a direct
+            // link to zip/exe file
+            string url = "";
+            System.Xml.XmlTextReader reader;
+            try
+            {
+                // provide the XmlTextReader with the URL of
+                // our xml document
+                string xmlURL = "http://www.dysign.ch/praisebasepresenter/version.xml";
+                reader = new System.Xml.XmlTextReader(xmlURL);
+                // simply (and easily) skip the junk at the beginning
+                reader.MoveToContent();
+                // internal - as the XmlTextReader moves only
+                // forward, we save current xml element name
+                // in elementName variable. When we parse a
+                // text node, we refer to elementName to check
+                // what was the node name
+                string elementName = "";
+                // we check if the xml starts with a proper
+                // "ourfancyapp" element node
+                if ((reader.NodeType == System.Xml.XmlNodeType.Element) &&
+                    (reader.Name == "praisebasepresenter"))
+                {
+                    while (reader.Read())
+                    {
+                        // when we find an element node,
+                        // we remember its name
+                        if (reader.NodeType == System.Xml.XmlNodeType.Element)
+                            elementName = reader.Name;
+                        else
+                        {
+                            // for text nodes...
+                            if ((reader.NodeType == System.Xml.XmlNodeType.Text) &&
+                                (reader.HasValue))
+                            {
+                                // we check what the name of the node was
+                                switch (elementName)
+                                {
+                                    case "version":
+                                        // thats why we keep the version info
+                                        // in xxx.xxx.xxx.xxx format
+                                        // the Version class does the
+                                        // parsing for us
+                                        newVersion = new Version(reader.Value);
+                                        break;
+                                    case "url":
+                                        url = reader.Value;
+                                        break;
+                                }
+                            }
+                        }
+                    }
+                }
+                if (reader != null) reader.Close();
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("Update check failed! " + e.Message);
+            }
+
+            // get the running version
+            Version curVersion = System.Reflection.Assembly.GetExecutingAssembly().GetName().Version;
+            // compare the versions
+            if (newVersion != null && curVersion.CompareTo(newVersion) < 0)
+            {
+                // ask the user if he would like
+                // to download the new version
+                string title = "Update verfügbar";
+                string question = "Es ist ein Update auf Version " + newVersion + " verfügbar (Sie haben " + curVersion + "). \nSoll das Update heruntergeladen werden?";
+                if (DialogResult.Yes == System.Windows.Forms.MessageBox.Show(question, title,
+                                 MessageBoxButtons.YesNo,
+                                 MessageBoxIcon.Question))
+                {
+                    // navigate the default web
+                    // browser to our app
+                    // homepage (the url
+                    // comes from the xml content)
+                    System.Diagnostics.Process.Start(url);
+                }
+            }
         }
 
         private void beendenToolStripMenuItem_Click(object sender, EventArgs e)
@@ -412,6 +516,7 @@ namespace Pbp.Forms
                         pictureBoxPreview.Image = projWindow.showSlide(SongManager.Instance.CurrentSong, img, args);
                         imageHistoryAdd((string)listViewImageQueue.Items[0].Tag);
 						listViewImageQueue.Items[0].Remove();
+                        this.currentBackground = img;
 					}
 					else
 					{
@@ -496,7 +601,7 @@ namespace Pbp.Forms
             }
             else if (tabControlTextLayer.SelectedIndex == 2)
             {
-                loadBibles();
+                
             }
         }
 
@@ -1589,8 +1694,9 @@ namespace Pbp.Forms
 
         int bookIdx = -1, chapterIdx = -1, verseIdx = -1, verseToIdx = -1;
 
-        private void loadBibles(bool reload=false)
+        private void loadBibles()
         {
+            bool reload = false;
             if (comboBoxBible.Items.Count == 0 || reload)
             {
                 comboBoxBible.Items.Clear();
@@ -1842,7 +1948,53 @@ namespace Pbp.Forms
 
         #endregion
 
+        private void colorPicker1_ColorPicked(object sender, Components.ColorPickEventArgs e)
+        {
+            Bitmap bmp = new Bitmap(projectionWindow.ActiveForm.Width, projectionWindow.ActiveForm.Height);
+            Graphics gr = Graphics.FromImage(bmp);
+            gr.FillRectangle(new SolidBrush(e.Color), 0, 0, bmp.Width, bmp.Height);
+            
+            // Linked layers
+            if (!linkLayers ^ ((Control.ModifierKeys & Keys.Shift) == Keys.Shift && SongManager.Instance.CurrentSong != null && SongManager.Instance.CurrentSong.CurrentSlide >= 0))
+            {
+                Object[] args = { SongManager.Instance.CurrentPartNr, SongManager.Instance.CurrentSlideNr };
+                pictureBoxPreview.Image = projWindow.showSlide(SongManager.Instance.CurrentSong, bmp, args);
+            }
+            else
+            {
+                pictureBoxPreview.Image = projWindow.showSlide(null, bmp);
+            }
+            this.currentBackground = bmp;
 
-       
+        }
+
+        private void button1_Click_4(object sender, EventArgs e)
+        {
+            /*
+            PowerPoint.Application oPPT = new PowerPoint.ApplicationClass();
+            PowerPoint.Presentations objPresetSet;
+            string strPres = "C:/Users/Nicolas/Documents/Visual Studio 2010/Projects/praisebase/Presenter/trunk/bin/Release/foo.pptx";
+            //oPPT.Visible = Microsoft.Office.Core.MsoTriState.msoTrue;
+            objPresetSet = oPPT.Presentations;
+            PowerPoint.Presentation objPreset = objPresetSet.Open2007(strPres, Microsoft.Office.Core.MsoTriState.msoFalse, Microsoft.Office.Core.MsoTriState.msoTrue, Microsoft.Office.Core.MsoTriState.msoFalse);
+            PowerPoint.SlideShowSettings objSSS = objPreset.SlideShowSettings;
+            objSSS.StartingSlide = 1;
+            objSSS.EndingSlide = objPreset.Slides.Count;
+            objSSS.Run();
+            while (oPPT.SlideShowWindows.Count >= 1)
+            {
+                System.Threading.Thread.Sleep(100);
+            }
+            try
+            {
+                objPreset.Close();
+            }
+            catch(
+            { 
+
+            }
+            oPPT.Quit();
+             */ 
+        }       
     }
 }
