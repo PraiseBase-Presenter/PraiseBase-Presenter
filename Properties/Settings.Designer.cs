@@ -365,7 +365,7 @@ namespace Pbp.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("90, 60")]
+        [global::System.Configuration.DefaultSettingValueAttribute("80, 60")]
         public global::System.Drawing.Size ThumbSize {
             get {
                 return ((global::System.Drawing.Size)(this["ThumbSize"]));

@@ -108,6 +108,12 @@
     <Compile Include="Classes\ImageManager.cs" />
     <Compile Include="Classes\SongManager.cs" />
     <Compile Include="Classes\SongSubclasses.cs" />
+    <Compile Include="Components\BackgrundImageBrowser.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Components\BackgrundImageBrowser.Designer.cs">
+      <DependentUpon>BackgrundImageBrowser.cs</DependentUpon>
+    </Compile>
     <Compile Include="Components\ColorPicker.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -209,6 +215,9 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="Components\BackgrundImageBrowser.resx">
+      <DependentUpon>BackgrundImageBrowser.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Components\ColorPicker.resx">
       <DependentUpon>ColorPicker.cs</DependentUpon>
     </EmbeddedResource>
@@ -297,6 +306,7 @@
     <None Include="Resources\ok16.png" />
     <None Include="Resources\wheel16.png" />
     <None Include="Resources\aqua-blue.jpg" />
+    <None Include="Resources\fade1blue.png" />
     <Content Include="Songs\A Mighty Fortress Is Our God.ppl" />
     <Content Include="Songs\Jesus is my Lord.ppl" />
   </ItemGroup>

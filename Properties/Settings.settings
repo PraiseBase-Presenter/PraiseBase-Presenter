@@ -117,7 +117,7 @@
       <Value Profile="(Default)">http://code.google.com/p/praisebasepresenter/issues/entry?template=Defect%20report%20from%20user</Value>
     </Setting>
     <Setting Name="ThumbSize" Type="System.Drawing.Size" Scope="User">
-      <Value Profile="(Default)">90, 60</Value>
+      <Value Profile="(Default)">80, 60</Value>
     </Setting>
     <Setting Name="ThumbDir" Type="System.String" Scope="Application">
       <Value Profile="(Default)">Thumbs</Value>

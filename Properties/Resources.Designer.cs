@@ -242,6 +242,13 @@ namespace Pbp.Properties {
             }
         }
         
+        internal static System.Drawing.Bitmap fade1blue {
+            get {
+                object obj = ResourceManager.GetObject("fade1blue", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
         internal static System.Drawing.Bitmap fail {
             get {
                 object obj = ResourceManager.GetObject("fail", resourceCulture);
