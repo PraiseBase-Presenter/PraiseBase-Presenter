@@ -254,11 +254,11 @@ namespace Pbp
 				_fileType = FileFormat.ppl;
 
 				// Default font settings if values in xml invalid
-				TextFont = Settings.Instance.ProjectionMasterFont;
-				TextColor = Settings.Instance.ProjectionMasterFontColor;
-				TranslationFont = Settings.Instance.ProjectionMasterFontTranslation;
-				TranslationColor = Settings.Instance.ProjectionMasterTranslationColor;
-				TextLineSpacing = Settings.Instance.ProjectionMasterLineSpacing;
+				TextFont = Settings.Default.ProjectionMasterFont;
+				TextColor = Settings.Default.ProjectionMasterFontColor;
+				TranslationFont = Settings.Default.ProjectionMasterFontTranslation;
+				TranslationColor = Settings.Default.ProjectionMasterTranslationColor;
+				TextLineSpacing = Settings.Default.ProjectionMasterLineSpacing;
 			}
 
 			if (!err)
@@ -316,7 +316,7 @@ namespace Pbp
 		public ImageList getThumbs()
 		{
 			ImageList thumbList = new ImageList();
-			thumbList.ImageSize = Settings.Instance.ThumbSize;
+			thumbList.ImageSize = Settings.Default.ThumbSize;
 			thumbList.ColorDepth = ColorDepth.Depth32Bit;
 
 			thumbList.Images.Add(ImageManager.Instance.getEmptyThumb());
@@ -431,13 +431,13 @@ namespace Pbp
 				int.TryParse(tmpElem["maintext"]["size"].InnerText, out trySize);
 				TextFont = new Font(
 					tmpElem["maintext"]["name"].InnerText,
-					trySize > 0 ? trySize : Settings.Instance.ProjectionMasterFont.Size,
+					trySize > 0 ? trySize : Settings.Default.ProjectionMasterFont.Size,
 					(FontStyle)((int)(tmpElem["maintext"]["bold"].InnerText == "true" ? FontStyle.Bold : FontStyle.Regular) + (int)(tmpElem["maintext"]["italic"].InnerText == "true" ? FontStyle.Italic : FontStyle.Regular)));
 
 				int.TryParse(tmpElem["translationtext"]["size"].InnerText, out trySize);
 				TranslationFont = new Font(
 					tmpElem["translationtext"]["name"].InnerText,
-					trySize > 0 ? trySize : Settings.Instance.ProjectionMasterFont.Size,
+					trySize > 0 ? trySize : Settings.Default.ProjectionMasterFont.Size,
 					(FontStyle)((int)(tmpElem["translationtext"]["bold"].InnerText == "true" ? FontStyle.Bold : FontStyle.Regular) + (int)(tmpElem["translationtext"]["italic"].InnerText == "true" ? FontStyle.Italic : FontStyle.Regular)));
 
 				int.TryParse(tmpElem["maintext"]["color"].InnerText, out trySize);
@@ -452,7 +452,7 @@ namespace Pbp
 			{
 				int trySize;
 				int.TryParse(xmlRoot["formatting"]["linespacing"]["main"].InnerText, out trySize);
-				TextLineSpacing = trySize > 0 ? trySize : Settings.Instance.ProjectionMasterLineSpacing;
+				TextLineSpacing = trySize > 0 ? trySize : Settings.Default.ProjectionMasterLineSpacing;
 			}
 
 			//
@@ -846,13 +846,13 @@ namespace Pbp
                 Brush fontBrush;
                 Brush fontTranslationBrush;
 
-                if (Settings.Instance.ProjectionUseMaster && pr != ProjectionMode.Simulate)
+                if (Settings.Default.ProjectionUseMaster && pr != ProjectionMode.Simulate)
                 {
-                    font = Settings.Instance.ProjectionMasterFont;
-                    fontTr = Settings.Instance.ProjectionMasterFontTranslation;
-                    lineSpacing = Settings.Instance.ProjectionMasterLineSpacing;
-                    fontBrush = new SolidBrush(Settings.Instance.ProjectionMasterFontColor);
-                    fontTranslationBrush = new SolidBrush(Settings.Instance.ProjectionMasterTranslationColor);
+                    font = Settings.Default.ProjectionMasterFont;
+                    fontTr = Settings.Default.ProjectionMasterFontTranslation;
+                    lineSpacing = Settings.Default.ProjectionMasterLineSpacing;
+                    fontBrush = new SolidBrush(Settings.Default.ProjectionMasterFontColor);
+                    fontTranslationBrush = new SolidBrush(Settings.Default.ProjectionMasterTranslationColor);
                 }
                 else
                 {
@@ -864,9 +864,9 @@ namespace Pbp
                 }
 
 
-                int padding = Settings.Instance.ProjectionPadding;
-                int shadowThickness = Settings.Instance.ProjectionShadowSize;
-                int outLineThickness = Settings.Instance.ProjectionOutlineSize;
+                int padding = Settings.Default.ProjectionPadding;
+                int shadowThickness = Settings.Default.ProjectionShadowSize;
+                int outLineThickness = Settings.Default.ProjectionOutlineSize;
                 String str = String.Empty;
 
                 int usableWidth = w - (2 * padding);
@@ -891,7 +891,7 @@ namespace Pbp
                 int usedHeight = (int)strMeasure.Height + (lineSpacing * (slide.Lines.Count - 1)) + endSpacing;
 
                 float scalingFactor = 1.0f;
-                if (Settings.Instance.ProjectionFontScaling && (usedWidth > usableWidth || usedHeight > usableHeight))
+                if (Settings.Default.ProjectionFontScaling && (usedWidth > usableWidth || usedHeight > usableHeight))
                 {
                     scalingFactor = Math.Min((float)usableWidth / (float)usedWidth, (float)usableHeight / (float)usedHeight);
                     font = new Font(font.FontFamily, font.Size * scalingFactor, font.Style);
@@ -935,7 +935,7 @@ namespace Pbp
 
                 if (pr != ProjectionMode.Simulate && shadowThickness > 0)
                 {
-                    shadodBrush = new SolidBrush(Color.FromArgb(15, Settings.Instance.ProjectionShadowColor));
+                    shadodBrush = new SolidBrush(Color.FromArgb(15, Settings.Default.ProjectionShadowColor));
                     gr.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.HighQuality;
                     gr.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.HighQualityBilinear;
                     gr.TextRenderingHint = TextRenderingHint.AntiAliasGridFit;
@@ -959,7 +959,7 @@ namespace Pbp
                     gr.InterpolationMode = InterpolationMode.Low;
                     gr.TextRenderingHint = TextRenderingHint.ClearTypeGridFit;
 
-                    Brush br = new SolidBrush(Settings.Instance.ProjectionOutlineColor);
+                    Brush br = new SolidBrush(Settings.Default.ProjectionOutlineColor);
 
                     foreach (string s in slide.Lines)
                     {
@@ -990,7 +990,7 @@ namespace Pbp
 
                     if (pr != ProjectionMode.Simulate && shadowThickness > 0)
                     {
-                        shadodBrush = new SolidBrush(Color.FromArgb(15, Settings.Instance.ProjectionShadowColor));
+                        shadodBrush = new SolidBrush(Color.FromArgb(15, Settings.Default.ProjectionShadowColor));
                         gr.SmoothingMode = SmoothingMode.HighQuality;
                         gr.InterpolationMode = InterpolationMode.HighQualityBilinear;
                         gr.TextRenderingHint = TextRenderingHint.AntiAliasGridFit;
@@ -1014,7 +1014,7 @@ namespace Pbp
                         gr.InterpolationMode = InterpolationMode.Low;
                         gr.TextRenderingHint = TextRenderingHint.ClearTypeGridFit;
 
-                        Brush br = new SolidBrush(Settings.Instance.ProjectionOutlineColor);
+                        Brush br = new SolidBrush(Settings.Default.ProjectionOutlineColor);
 
                         foreach (string s in slide.Translation)
                         {

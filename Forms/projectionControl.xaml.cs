@@ -64,7 +64,7 @@ namespace Pbp.Forms
 		{
 			InitializeComponent();
 			tmr = new DispatcherTimer();
-            setFadeSteps(Settings.Instance.ProjectionFadeTime);
+            setFadeSteps(Settings.Default.ProjectionFadeTime);
 		}
 
 		static public UserControl1 getInstance()
@@ -78,7 +78,7 @@ namespace Pbp.Forms
 		{
 			System.Drawing.Bitmap bmp = new System.Drawing.Bitmap(1, 1);
 			System.Drawing.Graphics gr = System.Drawing.Graphics.FromImage(bmp);
-			gr.FillRectangle(new System.Drawing.SolidBrush(Settings.Instance.ProjectionBackColor), 0, 0, 1, 1);
+			gr.FillRectangle(new System.Drawing.SolidBrush(Settings.Default.ProjectionBackColor), 0, 0, 1, 1);
 			blackoutImage.Source = loadBitmap(bmp);
             gr.Dispose();
             blackoutImage.Opacity = isBlackout ? 100f : 0f;

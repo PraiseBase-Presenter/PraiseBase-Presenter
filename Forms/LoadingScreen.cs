@@ -61,5 +61,10 @@ namespace Pbp.Forms
 			Application.DoEvents();
 		}
 
+        private void LoadingScreen_Load(object sender, EventArgs e)
+        {
+
+        }
+
 	}
 }

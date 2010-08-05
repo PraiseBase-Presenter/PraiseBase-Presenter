@@ -93,7 +93,7 @@ namespace Pbp
         static public List<string> getBibleFiles()
         {
             List<string> res = new List<string>();
-            DirectoryInfo di = new DirectoryInfo(Pbp.Properties.Settings.Instance.DataDirectory + Path.DirectorySeparatorChar + "Bibles");
+            DirectoryInfo di = new DirectoryInfo(Pbp.Properties.Settings.Default.DataDirectory + Path.DirectorySeparatorChar + "Bibles");
             FileInfo[] rgFiles = di.GetFiles("*.xml");
             foreach (FileInfo fi in rgFiles)
             {

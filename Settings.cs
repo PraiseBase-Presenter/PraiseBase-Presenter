@@ -35,9 +35,7 @@ namespace Pbp.Properties
     //  The SettingsLoaded event is raised after the setting values are loaded.
     //  The SettingsSaving event is raised before the setting values are saved.
     public sealed partial class Settings 
-	{
-		static private Settings _instance;
-        
+	{    
         private Settings() {
             // // To add event handlers for saving and changing settings, uncomment the lines below:
             //
@@ -46,19 +44,6 @@ namespace Pbp.Properties
             // this.SettingsSaving += this.SettingsSavingEventHandler;
             //
         }
-
-		/// <summary>
-		/// Access the singleton of this class
-		/// </summary>
-		static public Settings Instance 
-		{ 
-			get 
-			{
-				if (_instance == null)
-					_instance = new Settings();
-				return _instance;
-			} 
-		}
         
         private void SettingChangingEventHandler(object sender, System.Configuration.SettingChangingEventArgs e) {
             // Add code to handle the SettingChangingEvent event here.

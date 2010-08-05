@@ -101,7 +101,7 @@ namespace Pbp
 			try
 			{
 				img = Image.FromFile(inFile);
-				Image imgPhoto = ResizeBitmap(img, Settings.Instance.ThumbSize);
+				Image imgPhoto = ResizeBitmap(img, Settings.Default.ThumbSize);
 
 				string dir = Path.GetDirectoryName(outFile);
 				if (!Directory.Exists(dir))
@@ -132,8 +132,8 @@ namespace Pbp
 		/// <param name="ldg"></param>
 		public void checkThumbs(LoadingScreen ldg)
 		{
-			string imageRootDir = Settings.Instance.DataDirectory + Path.DirectorySeparatorChar + Settings.Instance.ImageDir;
-			string thumbDir = Settings.Instance.DataDirectory + Path.DirectorySeparatorChar + Settings.Instance.ThumbDir;
+			string imageRootDir = Settings.Default.DataDirectory + Path.DirectorySeparatorChar + Settings.Default.ImageDir;
+			string thumbDir = Settings.Default.DataDirectory + Path.DirectorySeparatorChar + Settings.Default.ThumbDir;
 
 			if (!Directory.Exists(thumbDir))
 			{
@@ -207,7 +207,7 @@ namespace Pbp
 
 		public bool imageExists(string relativePath)
 		{
-			if (File.Exists(Settings.Instance.DataDirectory + Path.DirectorySeparatorChar + Settings.Instance.ImageDir + Path.DirectorySeparatorChar + relativePath))
+			if (File.Exists(Settings.Default.DataDirectory + Path.DirectorySeparatorChar + Settings.Default.ImageDir + Path.DirectorySeparatorChar + relativePath))
 			{
 				return true;
 			}
@@ -216,7 +216,7 @@ namespace Pbp
 
 		public Image getThumbFromRelPath(string relativePath)
 		{
-			string imPath = Settings.Instance.DataDirectory + Path.DirectorySeparatorChar + Settings.Instance.ThumbDir + Path.DirectorySeparatorChar + relativePath;
+			string imPath = Settings.Default.DataDirectory + Path.DirectorySeparatorChar + Settings.Default.ThumbDir + Path.DirectorySeparatorChar + relativePath;
 			if (File.Exists(imPath))
 			{
 				return Image.FromFile(imPath);
@@ -226,7 +226,7 @@ namespace Pbp
 
 		public Image getImageFromRelPath(string relativePath)
 		{
-			string imPath = Settings.Instance.DataDirectory + Path.DirectorySeparatorChar + Settings.Instance.ImageDir + Path.DirectorySeparatorChar + relativePath;
+			string imPath = Settings.Default.DataDirectory + Path.DirectorySeparatorChar + Settings.Default.ImageDir + Path.DirectorySeparatorChar + relativePath;
 			if (File.Exists(imPath))
 			{
 				return Image.FromFile(imPath);
@@ -236,9 +236,9 @@ namespace Pbp
 
 		public Image getEmptyThumb()
 		{
-			Image img = new Bitmap(Settings.Instance.ThumbSize.Width, Settings.Instance.ThumbSize.Height);
+			Image img = new Bitmap(Settings.Default.ThumbSize.Width, Settings.Default.ThumbSize.Height);
 			Graphics graph = Graphics.FromImage(img);
-			graph.FillRectangle(new SolidBrush(Settings.Instance.ProjectionBackColor), 0, 0, img.Width, img.Height);
+			graph.FillRectangle(new SolidBrush(Settings.Default.ProjectionBackColor), 0, 0, img.Width, img.Height);
 			graph.Dispose();
 			return img;			
 		}
@@ -247,7 +247,7 @@ namespace Pbp
 		{
 			Image img = new Bitmap(1024,768);
 			Graphics graph = Graphics.FromImage(img);
-			graph.FillRectangle(new SolidBrush(Settings.Instance.ProjectionBackColor), 0, 0, img.Width, img.Height);
+			graph.FillRectangle(new SolidBrush(Settings.Default.ProjectionBackColor), 0, 0, img.Width, img.Height);
 			graph.Dispose();
 			return img;
 		}

@@ -294,8 +294,8 @@ namespace Pbp.Forms
 			{
 				if (listViewSongs.Items[x].Checked)
 				{
-					string fileName = Settings.Instance.DataDirectory + Path.DirectorySeparatorChar 
-						+ Settings.Instance.SongDir + Path.DirectorySeparatorChar 
+					string fileName = Settings.Default.DataDirectory + Path.DirectorySeparatorChar 
+						+ Settings.Default.SongDir + Path.DirectorySeparatorChar 
 						+((Song)listViewSongs.Items[x].Tag).Title+ "."+ Song.getDefaultExtension();
 					if ((File.Exists(fileName) && (MessageBox.Show("Das Lied '" + ((Song)listViewSongs.Items[x].Tag).Title + "' existiert bereits. Überschreiben?", "PraiseBox Importer", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)) || !File.Exists(fileName)) 
 					{

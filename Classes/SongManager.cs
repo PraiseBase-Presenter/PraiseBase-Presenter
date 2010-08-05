@@ -118,7 +118,7 @@ namespace Pbp
 				ldg = (LoadingScreen)param[0];
 			}				
 
-            string searchDir = Settings.Instance.DataDirectory +  Path.DirectorySeparatorChar + Settings.Instance.SongDir;
+            string searchDir = Settings.Default.DataDirectory +  Path.DirectorySeparatorChar + Settings.Default.SongDir;
 
 			List<string> songPaths = new List<string>();
             if (Directory.Exists(searchDir))

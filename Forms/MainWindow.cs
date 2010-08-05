@@ -106,7 +106,7 @@ namespace Pbp.Forms
 
             projWindow = projectionWindow.getInstance();
 
-			this.WindowState = Settings.Instance.ViewerWindowState;
+			this.WindowState = Settings.Default.ViewerWindowState;
             this.Text += " " + System.Reflection.Assembly.GetExecutingAssembly().GetName().Version.ToString();
 
             blackout = false;
@@ -119,25 +119,25 @@ namespace Pbp.Forms
 
             imageTreeViewInit();
 
-            if (Settings.Instance.ProjectionFadeTime==3)
+            if (Settings.Default.ProjectionFadeTime==3)
                 radioButtonFade3.Checked = true;
-            else if (Settings.Instance.ProjectionFadeTime == 2)
+            else if (Settings.Default.ProjectionFadeTime == 2)
                 radioButtonFade2.Checked = true;
-            else if (Settings.Instance.ProjectionFadeTime == 1)
+            else if (Settings.Default.ProjectionFadeTime == 1)
                 radioButtonFade1.Checked = true;
             else
                 radioButtonFade0.Checked = true;
 
 			
-			UserControl1.getInstance().setFadeSteps(Settings.Instance.ProjectionFadeTime);
+			UserControl1.getInstance().setFadeSteps(Settings.Default.ProjectionFadeTime);
 
-            linkLayers = Settings.Instance.LinkLayers;
+            linkLayers = Settings.Default.LinkLayers;
             setLinkLayerUI();
 
             comboBox1.SelectedIndex = 0;
             comboBox2.SelectedIndex = 0;
 
-            numericUpDown1.Value = (int)Settings.Instance.ProjectionMasterFont.Size;
+            numericUpDown1.Value = (int)Settings.Default.ProjectionMasterFont.Size;
 
 
         }
@@ -518,12 +518,12 @@ namespace Pbp.Forms
 
         private void webToolStripMenuItem_Click(object sender, EventArgs e)
         {
-			System.Diagnostics.Process.Start(Settings.Instance.Weburl);
+			System.Diagnostics.Process.Start(Settings.Default.Weburl);
         }
 
         public void imageTreeViewInit()
         {
-			string rootDir = Settings.Instance.DataDirectory + Path.DirectorySeparatorChar + Settings.Instance.ImageDir;
+			string rootDir = Settings.Default.DataDirectory + Path.DirectorySeparatorChar + Settings.Default.ImageDir;
             treeViewImageDirectories.Nodes.Clear();
             PopulateTreeView(rootDir, null);
 			treeViewImageDirectories.ExpandAll();
@@ -533,27 +533,27 @@ namespace Pbp.Forms
             imageSearchResults = new List<String>();
 
             ImageList iml = new ImageList();
-			iml.ImageSize = Settings.Instance.ThumbSize;
+			iml.ImageSize = Settings.Default.ThumbSize;
             iml.ColorDepth = ColorDepth.Depth32Bit;
 			listViewImageHistory.LargeImageList = iml;
-			listViewImageHistory.TileSize = new Size(Settings.Instance.ThumbSize.Width + 8,Settings.Instance.ThumbSize.Height + 5) ;
+			listViewImageHistory.TileSize = new Size(Settings.Default.ThumbSize.Width + 8,Settings.Default.ThumbSize.Height + 5) ;
 
 			ImageList iml2 = new ImageList();
-			iml2.ImageSize = Settings.Instance.ThumbSize;
+			iml2.ImageSize = Settings.Default.ThumbSize;
             iml2.ColorDepth = ColorDepth.Depth32Bit;
 			listViewImageQueue.LargeImageList = iml2;
-			listViewImageQueue.TileSize = new Size(Settings.Instance.ThumbSize.Width + 8, Settings.Instance.ThumbSize.Height + 5);
+			listViewImageQueue.TileSize = new Size(Settings.Default.ThumbSize.Width + 8, Settings.Default.ThumbSize.Height + 5);
 
-            if (Settings.Instance.ImageFavorites == null)
-                Settings.Instance.ImageFavorites = new System.Collections.ArrayList();
+            if (Settings.Default.ImageFavorites == null)
+                Settings.Default.ImageFavorites = new System.Collections.ArrayList();
 
             ImageList iml3 = new ImageList();
-            iml3.ImageSize = Settings.Instance.ThumbSize;
+            iml3.ImageSize = Settings.Default.ThumbSize;
             iml3.ColorDepth = ColorDepth.Depth32Bit;
             listViewFavorites.LargeImageList = iml3;
-            listViewFavorites.TileSize = new Size(Settings.Instance.ThumbSize.Width + 8, Settings.Instance.ThumbSize.Height + 5);
+            listViewFavorites.TileSize = new Size(Settings.Default.ThumbSize.Width + 8, Settings.Default.ThumbSize.Height + 5);
 
-            foreach (string relImagePath in Settings.Instance.ImageFavorites)
+            foreach (string relImagePath in Settings.Default.ImageFavorites)
             {
                 listViewFavorites.LargeImageList.Images.Add(ImageManager.Instance.getThumbFromRelPath(relImagePath));
                 ListViewItem lvi = new ListViewItem("");
@@ -562,7 +562,7 @@ namespace Pbp.Forms
                 listViewFavorites.Items.Add(lvi);
                 listViewFavorites.EnsureVisible(listViewFavorites.Items.Count - 1);
             }
-            tabPageImageFavorites.Text = "Favoriten (" + Settings.Instance.ImageFavorites.Count + ")";
+            tabPageImageFavorites.Text = "Favoriten (" + Settings.Default.ImageFavorites.Count + ")";
 		}
 
         public void PopulateTreeView(string directoryValue, TreeNode parentNode)
@@ -576,7 +576,7 @@ namespace Pbp.Forms
 
                     if (directoryArray.Length != 0)
                     {
-						int subLen = (Settings.Instance.DataDirectory + Path.DirectorySeparatorChar + Settings.Instance.ImageDir + Path.DirectorySeparatorChar).Length;
+						int subLen = (Settings.Default.DataDirectory + Path.DirectorySeparatorChar + Settings.Default.ImageDir + Path.DirectorySeparatorChar).Length;
                         foreach (string directory in directoryArray)
                         {
                             string dName = Path.GetFileName(directory);
@@ -618,12 +618,12 @@ namespace Pbp.Forms
                 if (treeViewImageDirectories.SelectedNode.Index == treeViewImageDirectories.Nodes.Count - 1)
                 {
                     ImageList imList = new ImageList();
-                    imList.ImageSize = Settings.Instance.ThumbSize;
+                    imList.ImageSize = Settings.Default.ThumbSize;
                     imList.ColorDepth = ColorDepth.Depth32Bit;
 
                     List<ListViewItem> lviList = new List<ListViewItem>();
                     
-                    string pathPrefix = Settings.Instance.DataDirectory + Path.DirectorySeparatorChar + Settings.Instance.ThumbDir + Path.DirectorySeparatorChar;
+                    string pathPrefix = Settings.Default.DataDirectory + Path.DirectorySeparatorChar + Settings.Default.ThumbDir + Path.DirectorySeparatorChar;
                     int i = 0;
 
                     foreach (string file in imageSearchResults)
@@ -644,12 +644,12 @@ namespace Pbp.Forms
                 else
                 {
                     string relativeImageDir = ((string)treeViewImageDirectories.SelectedNode.Tag) + Path.DirectorySeparatorChar;
-                    string imDir = Settings.Instance.DataDirectory + Path.DirectorySeparatorChar + Settings.Instance.ThumbDir + Path.DirectorySeparatorChar + relativeImageDir;
+                    string imDir = Settings.Default.DataDirectory + Path.DirectorySeparatorChar + Settings.Default.ThumbDir + Path.DirectorySeparatorChar + relativeImageDir;
 
                     if (Directory.Exists(imDir))
                     {
                         ImageList imList = new ImageList();
-                        imList.ImageSize = Settings.Instance.ThumbSize;
+                        imList.ImageSize = Settings.Default.ThumbSize;
                         imList.ColorDepth = ColorDepth.Depth32Bit;
 
                         string[] songFilePaths = Directory.GetFiles(imDir, "*.jpg", SearchOption.TopDirectoryOnly);
@@ -738,7 +738,7 @@ namespace Pbp.Forms
 
         private void imageFavoriteAdd(string relImagePath)
         {
-            if (!Settings.Instance.ImageFavorites.Contains(relImagePath))
+            if (!Settings.Default.ImageFavorites.Contains(relImagePath))
             {
                 listViewFavorites.LargeImageList.Images.Add(ImageManager.Instance.getThumbFromRelPath(relImagePath));
                 ListViewItem lvi = new ListViewItem("");
@@ -746,19 +746,19 @@ namespace Pbp.Forms
                 lvi.ImageIndex = listViewFavorites.LargeImageList.Images.Count - 1;
                 listViewFavorites.Items.Add(lvi);
                 listViewFavorites.EnsureVisible(listViewFavorites.Items.Count - 1);
-                Settings.Instance.ImageFavorites.Add(relImagePath);
-                Settings.Instance.Save();
-                tabPageImageFavorites.Text = "Favoriten (" + Settings.Instance.ImageFavorites.Count+ ")";
+                Settings.Default.ImageFavorites.Add(relImagePath);
+                Settings.Default.Save();
+                tabPageImageFavorites.Text = "Favoriten (" + Settings.Default.ImageFavorites.Count+ ")";
             }
         }
 
         private void imageFavoriterRemove(string relImagePath)
         {
-            if (Settings.Instance.ImageFavorites.Contains(relImagePath))
+            if (Settings.Default.ImageFavorites.Contains(relImagePath))
             {
-                Settings.Instance.ImageFavorites.Remove(relImagePath);
-                Settings.Instance.Save();
-                tabPageImageFavorites.Text = "Favoriten (" + Settings.Instance.ImageFavorites.Count + ")";
+                Settings.Default.ImageFavorites.Remove(relImagePath);
+                Settings.Default.Save();
+                tabPageImageFavorites.Text = "Favoriten (" + Settings.Default.ImageFavorites.Count + ")";
             }
         }
 
@@ -803,7 +803,7 @@ namespace Pbp.Forms
                 }
 
                 ImageList imList = new ImageList();
-				imList.ImageSize = Settings.Instance.ThumbSize;
+				imList.ImageSize = Settings.Default.ThumbSize;
                 imList.ColorDepth = ColorDepth.Depth32Bit;
 
                 string[] extensions = { "*.jpg", "*.png", "*.bmp", "*.gif" };
@@ -1055,7 +1055,7 @@ namespace Pbp.Forms
             {
                 treeViewImageDirectories.SelectedNode = null;
                 imageSearchResults.Clear();
-                string rootDir = Settings.Instance.DataDirectory + Path.DirectorySeparatorChar + Settings.Instance.ThumbDir + Path.DirectorySeparatorChar;
+                string rootDir = Settings.Default.DataDirectory + Path.DirectorySeparatorChar + Settings.Default.ThumbDir + Path.DirectorySeparatorChar;
                 int rootDirStrLen = rootDir.Length;
                 string[] imgFilePaths = Directory.GetFiles(rootDir, "*.jpg", SearchOption.AllDirectories);
 
@@ -1076,18 +1076,18 @@ namespace Pbp.Forms
 
 		private void mainWindow_FormClosing(object sender, FormClosingEventArgs e)
 		{
-			Settings.Instance.ViewerWindowState = this.WindowState;
-			Settings.Instance.Save();
+			Settings.Default.ViewerWindowState = this.WindowState;
+			Settings.Default.Save();
 		}
 
 		private void datenverzeichnisÖffnenToolStripMenuItem_Click(object sender, EventArgs e)
 		{
-			System.Diagnostics.Process.Start(Settings.Instance.DataDirectory);
+			System.Diagnostics.Process.Start(Settings.Default.DataDirectory);
 		}
 
 		private void toolStripButtonDataFolder_Click(object sender, EventArgs e)
 		{
-			System.Diagnostics.Process.Start(Settings.Instance.DataDirectory);
+			System.Diagnostics.Process.Start(Settings.Default.DataDirectory);
 		}
 
 		private void buttonSetListRem_Click(object sender, EventArgs e)
@@ -1170,7 +1170,7 @@ namespace Pbp.Forms
 			dlg.AddExtension = true;
 			dlg.CheckPathExists = true;
 			dlg.Filter = "PraiseBase-Presenter Setliste (*.pbpl)|*.pbpl";
-			dlg.InitialDirectory = Settings.Instance.DataDirectory + Path.DirectorySeparatorChar + Settings.Instance.SetListDir;
+			dlg.InitialDirectory = Settings.Default.DataDirectory + Path.DirectorySeparatorChar + Settings.Default.SetListDir;
 			dlg.Title = "Setliste speichern unter...";
 			if (dlg.ShowDialog() == DialogResult.OK)
 			{
@@ -1199,7 +1199,7 @@ namespace Pbp.Forms
 			dlg.CheckPathExists = true;
 			dlg.CheckFileExists = true;
 			dlg.Filter = "PraiseBase-Presenter Setliste (*.pbpl)|*.pbpl";
-			dlg.InitialDirectory = Settings.Instance.DataDirectory + Path.DirectorySeparatorChar + Settings.Instance.SetListDir;
+			dlg.InitialDirectory = Settings.Default.DataDirectory + Path.DirectorySeparatorChar + Settings.Default.SetListDir;
 			dlg.Title = "Setliste öffnen...";
 			if (dlg.ShowDialog() == DialogResult.OK)
 			{
@@ -1277,17 +1277,17 @@ namespace Pbp.Forms
 
 		private void liederToolStripMenuItem_Click(object sender, EventArgs e)
 		{
-			System.Diagnostics.Process.Start(Settings.Instance.DataDirectory + Path.DirectorySeparatorChar + Settings.Instance.SongDir);
+			System.Diagnostics.Process.Start(Settings.Default.DataDirectory + Path.DirectorySeparatorChar + Settings.Default.SongDir);
 		}
 
 		private void bilderToolStripMenuItem_Click(object sender, EventArgs e)
 		{
-			System.Diagnostics.Process.Start(Settings.Instance.DataDirectory + Path.DirectorySeparatorChar + Settings.Instance.ImageDir);
+			System.Diagnostics.Process.Start(Settings.Default.DataDirectory + Path.DirectorySeparatorChar + Settings.Default.ImageDir);
 		}
 
 		private void setlistenToolStripMenuItem_Click(object sender, EventArgs e)
 		{
-			System.Diagnostics.Process.Start(Settings.Instance.DataDirectory + Path.DirectorySeparatorChar + Settings.Instance.SetListDir);
+			System.Diagnostics.Process.Start(Settings.Default.DataDirectory + Path.DirectorySeparatorChar + Settings.Default.SetListDir);
 		}
 
 		private void toolStripButtonDataFolder_ButtonClick(object sender, EventArgs e)
@@ -1297,7 +1297,7 @@ namespace Pbp.Forms
 
 		private void datenverzeichnisToolStripMenuItem_Click(object sender, EventArgs e)
 		{
-			System.Diagnostics.Process.Start(Settings.Instance.DataDirectory);
+			System.Diagnostics.Process.Start(Settings.Default.DataDirectory);
 		}
 
 		private void toolStripButtonOpenCurrentSong_Click(object sender, EventArgs e)
@@ -1330,7 +1330,7 @@ namespace Pbp.Forms
 
 		private void fehlerMeldenToolStripMenuItem_Click(object sender, EventArgs e)
 		{
-			System.Diagnostics.Process.Start(Settings.Instance.BugReportUrl);
+			System.Diagnostics.Process.Start(Settings.Default.BugReportUrl);
 		}
 
 		private void praiseBoxDatenbankToolStripMenuItem_Click(object sender, EventArgs e)
@@ -1440,8 +1440,8 @@ namespace Pbp.Forms
         private void button2_Click_1(object sender, EventArgs e)
         {
             linkLayers = !linkLayers;
-            Settings.Instance.LinkLayers=linkLayers;
-            Settings.Instance.Save();
+            Settings.Default.LinkLayers=linkLayers;
+            Settings.Default.Save();
             setLinkLayerUI();
         }
 
@@ -1546,7 +1546,7 @@ namespace Pbp.Forms
 
         private void toolStripMenuItem2_Click(object sender, EventArgs e)
         {
-            System.Diagnostics.Process.Start(Settings.Instance.HelpUrl);
+            System.Diagnostics.Process.Start(Settings.Default.HelpUrl);
         }
 
         private void timerSearchBoxHL_Tick(object sender, EventArgs e)
@@ -1586,8 +1586,8 @@ namespace Pbp.Forms
 
         private void setFadeTimeState(int value)
         {
-            Settings.Instance.ProjectionFadeTime = value;
-            Settings.Instance.Save();
+            Settings.Default.ProjectionFadeTime = value;
+            Settings.Default.Save();
             UserControl1.getInstance().setFadeSteps(value);
         }
 

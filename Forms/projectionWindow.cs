@@ -136,7 +136,7 @@ namespace Pbp.Forms
             Graphics gr = Graphics.FromImage(bmp);
 
             // Background color
-			gr.FillRectangle(new SolidBrush(Settings.Instance.ProjectionBackColor), 0, 0, w, h);
+			gr.FillRectangle(new SolidBrush(Settings.Default.ProjectionBackColor), 0, 0, w, h);
             
             // Background image
             if (background != null)

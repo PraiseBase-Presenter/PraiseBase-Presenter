@@ -23,7 +23,7 @@ namespace Pbp.Forms
 		private void SongDialog_Load(object sender, EventArgs e)
 		{
 			checkedListBoxTags.Items.Clear();
-			foreach (String str in Settings.Instance.Tags)
+			foreach (String str in Settings.Default.Tags)
 			{
 				checkedListBoxTags.Items.Add(str);
 			}

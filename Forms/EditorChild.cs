@@ -82,14 +82,14 @@ namespace Pbp.Forms
 				comboBoxLanguage.Text = sng.Language;
 				comboBoxLanguage.AutoCompleteMode = AutoCompleteMode.Suggest;
 				comboBoxLanguage.AutoCompleteSource = AutoCompleteSource.ListItems;
-				foreach (string str in Settings.Instance.Languages)
+				foreach (string str in Settings.Default.Languages)
 				{
 					comboBoxLanguage.Items.Add(str);
 				}
 
 				int i = 0;
 				checkedListBoxTags.Items.Clear();
-				foreach (string str in Settings.Instance.Tags)
+				foreach (string str in Settings.Default.Tags)
 				{
 					if (sng.Tags.Contains(str))
 						checkedListBoxTags.Items.Add(str, true);
@@ -111,7 +111,7 @@ namespace Pbp.Forms
 
 		public void populatePartList()
 		{
-			foreach (string str in Settings.Instance.SongParts)
+			foreach (string str in Settings.Default.SongParts)
 			{
 				ToolStripMenuItem tItem = new ToolStripMenuItem(str);
 				tItem.Click += new EventHandler(partAddMenu_click);

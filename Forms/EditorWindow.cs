@@ -51,9 +51,9 @@ namespace Pbp.Forms
         private EditorWindow()
         {
             InitializeComponent();
-			fileBoxInitialDir = Settings.Instance.DataDirectory + Path.DirectorySeparatorChar + Settings.Instance.SongDir;
+			fileBoxInitialDir = Settings.Default.DataDirectory + Path.DirectorySeparatorChar + Settings.Default.SongDir;
 			fileBoxFilterIndex = 0;
-			this.WindowState = Settings.Instance.EditorWindowState;
+			this.WindowState = Settings.Default.EditorWindowState;
             this.Text += " " + System.Reflection.Assembly.GetExecutingAssembly().GetName().Version.ToString();
 
         }
@@ -204,7 +204,7 @@ namespace Pbp.Forms
 
         private void webToolStripMenuItem_Click(object sender, EventArgs e)
         {
-			System.Diagnostics.Process.Start(Settings.Instance.Weburl);
+			System.Diagnostics.Process.Start(Settings.Default.Weburl);
         }
 
         private void optionsToolStripMenuItem_Click(object sender, EventArgs e)
@@ -216,7 +216,7 @@ namespace Pbp.Forms
 
         private void EditorWindow_FormClosing(object sender, FormClosingEventArgs e)
         {
-			Settings.Instance.EditorWindowState = this.WindowState;
+			Settings.Default.EditorWindowState = this.WindowState;
 		
 			//this.Hide();
 			//e.Cancel = true;
@@ -313,17 +313,17 @@ namespace Pbp.Forms
 
 		private void datenverzeichnisAnzeigenToolStripMenuItem_Click(object sender, EventArgs e)
 		{
-			System.Diagnostics.Process.Start(Settings.Instance.DataDirectory);
+			System.Diagnostics.Process.Start(Settings.Default.DataDirectory);
 		}
 
 		private void toolStripButton2_Click(object sender, EventArgs e)
 		{
-			System.Diagnostics.Process.Start(Settings.Instance.DataDirectory);
+			System.Diagnostics.Process.Start(Settings.Default.DataDirectory);
 		}
 
 		private void fehlerMeldenToolStripMenuItem_Click(object sender, EventArgs e)
 		{
-			System.Diagnostics.Process.Start(Settings.Instance.BugReportUrl);
+			System.Diagnostics.Process.Start(Settings.Default.BugReportUrl);
 		}
 
 		private void praiseBoxToolStripMenuItem_Click(object sender, EventArgs e)

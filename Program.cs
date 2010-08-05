@@ -70,18 +70,18 @@ namespace Pbp
                 mutex = new System.Threading.Mutex(true, mutexName);
             } 
 
-			if (Settings.Instance.ShowLoadingScreen)
+			if (Settings.Default.ShowLoadingScreen)
 			{
 				LoadingScreen ldg = new LoadingScreen();
 				ldg.setLabel("PraiseBase Presenter wird gestartet...");
 				ldg.Show();
 				Application.DoEvents();
 
-                if (Settings.Instance.DataDirectory == "")
+                if (Settings.Default.DataDirectory == "")
                 {
                     // Todo: check and create
-                    Settings.Instance.DataDirectory = Environment.GetFolderPath(Environment.SpecialFolder.Personal).ToString() + System.IO.Path.DirectorySeparatorChar + Settings.Instance.DataDirDefaultName;
-                    Settings.Instance.Save();
+                    Settings.Default.DataDirectory = Environment.GetFolderPath(Environment.SpecialFolder.Personal).ToString() + System.IO.Path.DirectorySeparatorChar + Settings.Default.DataDirDefaultName;
+                    Settings.Default.Save();
                 }
 
 				ldg.setLabel("Prüfe Miniaturbilder...");

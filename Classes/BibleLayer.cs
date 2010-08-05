@@ -34,9 +34,9 @@ namespace Pbp
             string Title = v.ToString();
             string Text = v.Text;
 
-            Font font = new Font(Settings.Instance.ProjectionMasterFont.FontFamily, FontSize, Settings.Instance.ProjectionMasterFont.Style);
-            Font titleFont = new Font(Settings.Instance.ProjectionMasterFont.FontFamily, FontSize+10f, Settings.Instance.ProjectionMasterFont.Style);
-            Brush fontBrush = new SolidBrush(Settings.Instance.ProjectionMasterFontColor);
+            Font font = new Font(Settings.Default.ProjectionMasterFont.FontFamily, FontSize, Settings.Default.ProjectionMasterFont.Style);
+            Font titleFont = new Font(Settings.Default.ProjectionMasterFont.FontFamily, FontSize+10f, Settings.Default.ProjectionMasterFont.Style);
+            Brush fontBrush = new SolidBrush(Settings.Default.ProjectionMasterFontColor);
             StringFormat strFormat = new StringFormat();
             strFormat.Alignment = HorizontalAlign;
 
@@ -77,12 +77,12 @@ namespace Pbp
                     int nc = l.Length / ((int)Math.Ceiling(lm.Width / (float)(w - padding)));
                     string s = string.Join(Environment.NewLine, Util.Wrap(l, nc)).Trim();
                     gr.DrawString(s, font, fontBrush, new Point(x, y), strFormat);
-                    y += (int)gr.MeasureString(s, font).Height + Settings.Instance.ProjectionMasterLineSpacing;
+                    y += (int)gr.MeasureString(s, font).Height + Settings.Default.ProjectionMasterLineSpacing;
                 }
                 else
                 {
                     gr.DrawString(l, font, fontBrush, new Point(x, y), strFormat);
-                    y += (int)lm.Height + Settings.Instance.ProjectionMasterLineSpacing;
+                    y += (int)lm.Height + Settings.Default.ProjectionMasterLineSpacing;
                 }
             }
 

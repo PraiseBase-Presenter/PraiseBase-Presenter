@@ -84,7 +84,7 @@ namespace Pbp.Forms
 
 		public void imageTreeViewInit()
 		{
-			string rootDir = Settings.Instance.DataDirectory + Path.DirectorySeparatorChar + Settings.Instance.ImageDir;
+			string rootDir = Settings.Default.DataDirectory + Path.DirectorySeparatorChar + Settings.Default.ImageDir;
 
 			Application.DoEvents();
 			treeViewDirs.Nodes.Clear();
@@ -108,7 +108,7 @@ namespace Pbp.Forms
 
 					if (directoryArray.Length != 0)
 					{
-						int subLen = (Settings.Instance.DataDirectory + Path.DirectorySeparatorChar + Settings.Instance.ImageDir + Path.DirectorySeparatorChar).Length;
+						int subLen = (Settings.Default.DataDirectory + Path.DirectorySeparatorChar + Settings.Default.ImageDir + Path.DirectorySeparatorChar).Length;
 						foreach (string directory in directoryArray)
 						{
 							string dName = Path.GetFileName(directory);
@@ -145,12 +145,12 @@ namespace Pbp.Forms
 			}
 
 			string relativeDir = (string)treeViewDirs.SelectedNode.Tag;
-			string absoluteDir = Settings.Instance.DataDirectory + Path.DirectorySeparatorChar + Settings.Instance.ImageDir + Path.DirectorySeparatorChar +relativeDir;
+			string absoluteDir = Settings.Default.DataDirectory + Path.DirectorySeparatorChar + Settings.Default.ImageDir + Path.DirectorySeparatorChar +relativeDir;
 
 			if (Directory.Exists(absoluteDir))
 			{
 				ImageList imList = new ImageList();
-				imList.ImageSize = Settings.Instance.ThumbSize;
+				imList.ImageSize = Settings.Default.ThumbSize;
 				imList.ColorDepth = ColorDepth.Depth32Bit;
 
 				string[] songFilePaths = Directory.GetFiles(absoluteDir, "*.jpg", SearchOption.TopDirectoryOnly);
