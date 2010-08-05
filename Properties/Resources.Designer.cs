@@ -341,6 +341,13 @@ namespace Pbp.Properties {
             }
         }
         
+        internal static System.Drawing.Bitmap ok16 {
+            get {
+                object obj = ResourceManager.GetObject("ok16", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
         internal static System.Drawing.Bitmap Projection_off {
             get {
                 object obj = ResourceManager.GetObject("Projection_off", resourceCulture);
@@ -428,6 +435,20 @@ namespace Pbp.Properties {
         internal static System.Drawing.Bitmap unlink {
             get {
                 object obj = ResourceManager.GetObject("unlink", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap update16 {
+            get {
+                object obj = ResourceManager.GetObject("update16", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap wheel16 {
+            get {
+                object obj = ResourceManager.GetObject("wheel16", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

@@ -430,5 +430,14 @@ namespace Pbp.Properties {
                 this["HelpUrl"] = value;
             }
         }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("http://www.dysign.ch/praisebasepresenter/version.xml")]
+        public string UpdateCheckUrl {
+            get {
+                return ((string)(this["UpdateCheckUrl"]));
+            }
+        }
     }
 }

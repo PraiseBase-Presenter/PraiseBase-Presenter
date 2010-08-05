@@ -100,6 +100,7 @@
   <ItemGroup>
     <Compile Include="Classes\BaseLayer.cs" />
     <Compile Include="Classes\BibleLayer.cs" />
+    <Compile Include="Classes\UpdateCheck.cs" />
     <Compile Include="Classes\XMLBible.cs" />
     <Compile Include="Classes\LiveText.cs" />
     <Compile Include="Classes\TextLayer.cs" />
@@ -292,6 +293,9 @@
     </Compile>
     <Compile Include="Settings.cs" />
     <Compile Include="Classes\Song.cs" />
+    <None Include="Resources\update16.png" />
+    <None Include="Resources\ok16.png" />
+    <None Include="Resources\wheel16.png" />
     <Content Include="Songs\A Mighty Fortress Is Our God.ppl" />
     <Content Include="Songs\Jesus is my Lord.ppl" />
   </ItemGroup>

@@ -166,7 +166,6 @@
             this.buttonEnableAllDias = new System.Windows.Forms.Button();
             this.buttonDiaShow = new System.Windows.Forms.Button();
             this.buttonDisableAllDias = new System.Windows.Forms.Button();
-            this.tabPage6 = new System.Windows.Forms.TabPage();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.panel1 = new System.Windows.Forms.Panel();
             this.groupBox5 = new System.Windows.Forms.GroupBox();
@@ -185,7 +184,6 @@
             this.buttonResetImageQueue = new System.Windows.Forms.Button();
             this.timerElementHighlight = new System.Windows.Forms.Timer(this.components);
             this.searchTextBoxImages = new Pbp.Components.SearchTextBox();
-            this.colorPicker1 = new Pbp.Components.ColorPicker();
             this.songDetailElement = new SongDetails.SongDetail();
             this.listViewSetList = new Bol.WinControls.ListViewEx();
             this.columnHeader4 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
@@ -214,7 +212,6 @@
             this.tabPageImageHistory.SuspendLayout();
             this.tabPageImageFavorites.SuspendLayout();
             this.tabPageSlideShow.SuspendLayout();
-            this.tabPage6.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
             this.panel1.SuspendLayout();
             this.groupBox5.SuspendLayout();
@@ -1025,7 +1022,7 @@
             this.tabPage2.Location = new System.Drawing.Point(4, 29);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(994, 264);
+            this.tabPage2.Size = new System.Drawing.Size(994, 267);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Live-Text";
             this.tabPage2.UseVisualStyleBackColor = true;
@@ -1164,7 +1161,7 @@
             this.tabPage5.Location = new System.Drawing.Point(4, 29);
             this.tabPage5.Name = "tabPage5";
             this.tabPage5.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage5.Size = new System.Drawing.Size(994, 264);
+            this.tabPage5.Size = new System.Drawing.Size(994, 267);
             this.tabPage5.TabIndex = 2;
             this.tabPage5.Text = "Bibel";
             this.tabPage5.UseVisualStyleBackColor = true;
@@ -1413,7 +1410,7 @@
             this.tabPage7.Location = new System.Drawing.Point(4, 29);
             this.tabPage7.Name = "tabPage7";
             this.tabPage7.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage7.Size = new System.Drawing.Size(994, 264);
+            this.tabPage7.Size = new System.Drawing.Size(994, 267);
             this.tabPage7.TabIndex = 3;
             this.tabPage7.Text = "PowerPoint";
             this.tabPage7.UseVisualStyleBackColor = true;
@@ -1438,7 +1435,6 @@
             this.tabControl2.Controls.Add(this.tabPageImageHistory);
             this.tabControl2.Controls.Add(this.tabPageImageFavorites);
             this.tabControl2.Controls.Add(this.tabPageSlideShow);
-            this.tabControl2.Controls.Add(this.tabPage6);
             this.tabControl2.ItemSize = new System.Drawing.Size(80, 25);
             this.tabControl2.Location = new System.Drawing.Point(4, 4);
             this.tabControl2.Name = "tabControl2";
@@ -1682,17 +1678,6 @@
             this.buttonDisableAllDias.UseVisualStyleBackColor = true;
             this.buttonDisableAllDias.Click += new System.EventHandler(this.buttonDisableAllDias_Click);
             // 
-            // tabPage6
-            // 
-            this.tabPage6.Controls.Add(this.colorPicker1);
-            this.tabPage6.Location = new System.Drawing.Point(4, 29);
-            this.tabPage6.Name = "tabPage6";
-            this.tabPage6.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage6.Size = new System.Drawing.Size(607, 258);
-            this.tabPage6.TabIndex = 4;
-            this.tabPage6.Text = "Farbe";
-            this.tabPage6.UseVisualStyleBackColor = true;
-            // 
             // tableLayoutPanel1
             // 
             this.tableLayoutPanel1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
@@ -1906,17 +1891,6 @@
             this.searchTextBoxImages.TabIndex = 26;
             this.searchTextBoxImages.TextChanged += new Pbp.Components.SearchTextBox.textChange(this.searchTextBoxImages_TextChanged);
             // 
-            // colorPicker1
-            // 
-            this.colorPicker1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
-            this.colorPicker1.Location = new System.Drawing.Point(6, 6);
-            this.colorPicker1.Name = "colorPicker1";
-            this.colorPicker1.Size = new System.Drawing.Size(595, 246);
-            this.colorPicker1.TabIndex = 0;
-            this.colorPicker1.ColorPicked += new Pbp.Components.ColorPicker.colorPick(this.colorPicker1_ColorPicked);
-            // 
             // songDetailElement
             // 
             this.songDetailElement.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
@@ -2038,7 +2012,6 @@
             this.tabPageImageFavorites.ResumeLayout(false);
             this.tabPageSlideShow.ResumeLayout(false);
             this.tabPageSlideShow.PerformLayout();
-            this.tabPage6.ResumeLayout(false);
             this.tableLayoutPanel1.ResumeLayout(false);
             this.panel1.ResumeLayout(false);
             this.groupBox5.ResumeLayout(false);
@@ -2210,8 +2183,6 @@
         private System.Windows.Forms.CheckBox checkBoxBibleShowVerseFromListDirectly;
         private Components.SearchTextBox searchTextBoxBible;
         private System.Windows.Forms.Label labelBibleSearchMsg;
-        private System.Windows.Forms.TabPage tabPage6;
-        private Components.ColorPicker colorPicker1;
         private System.Windows.Forms.TabPage tabPage7;
         private System.Windows.Forms.Button button1;
         

@@ -56,9 +56,11 @@ namespace Pbp.Forms
 			this.labelVersion.Text = AssemblyVersion;
             this.labelCopyright.Text = AssemblyCopyright;
             this.labelCompanyName.Text = AssemblyCompany;
-            
 
             this.textBox1.Text = global::Pbp.Properties.Resources.License;
+
+            timer1.Interval = 1;
+            timer1.Start();
 
         }
 
@@ -141,5 +143,36 @@ namespace Pbp.Forms
             }
         }
         #endregion
+
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+            Pbp.UpdateCheck.UpdateInformation ui = Pbp.UpdateCheck.getNewVersion();
+            if (ui.UpdateAvailable)
+            {
+                linkLabel1.Text = "Aktualisierung auf Version "+ui.OnlineVersion+" verfügbar! Herunterladen";
+                linkLabel1.LinkArea = new LinkArea(linkLabel1.Text.Length - 13, 13);
+                linkLabel1.Image = Properties.Resources.update16;
+                linkLabel1.ForeColor = Color.DarkGreen;
+                linkLabel1.Tag = ui.DownloadUrl;
+            }
+            else
+            {
+                if (ui.OnlineVersion != null)
+                {
+                    linkLabel1.Text = "Sie haben die aktuellste Version!";
+                    linkLabel1.Image = Properties.Resources.ok16;
+                }
+                else
+                {
+                    linkLabel1.Text = "Verbindung zum Update-Server nicht möglich!";
+                }
+            }
+            timer1.Stop();
+        }
+
+        private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            System.Diagnostics.Process.Start((string)linkLabel1.Tag);
+        }
     }
 }
