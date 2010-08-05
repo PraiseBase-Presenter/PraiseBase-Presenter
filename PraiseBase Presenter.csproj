@@ -296,6 +296,7 @@
     <None Include="Resources\update16.png" />
     <None Include="Resources\ok16.png" />
     <None Include="Resources\wheel16.png" />
+    <None Include="Resources\aqua-blue.jpg" />
     <Content Include="Songs\A Mighty Fortress Is Our God.ppl" />
     <Content Include="Songs\Jesus is my Lord.ppl" />
   </ItemGroup>

@@ -183,6 +183,7 @@
             this.columnHeader6 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.buttonResetImageQueue = new System.Windows.Forms.Button();
             this.timerElementHighlight = new System.Windows.Forms.Timer(this.components);
+            this.label13 = new System.Windows.Forms.Label();
             this.searchTextBoxImages = new Pbp.Components.SearchTextBox();
             this.songDetailElement = new SongDetails.SongDetail();
             this.listViewSetList = new Bol.WinControls.ListViewEx();
@@ -1022,7 +1023,7 @@
             this.tabPage2.Location = new System.Drawing.Point(4, 29);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(994, 267);
+            this.tabPage2.Size = new System.Drawing.Size(994, 264);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Live-Text";
             this.tabPage2.UseVisualStyleBackColor = true;
@@ -1161,7 +1162,7 @@
             this.tabPage5.Location = new System.Drawing.Point(4, 29);
             this.tabPage5.Name = "tabPage5";
             this.tabPage5.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage5.Size = new System.Drawing.Size(994, 267);
+            this.tabPage5.Size = new System.Drawing.Size(994, 264);
             this.tabPage5.TabIndex = 2;
             this.tabPage5.Text = "Bibel";
             this.tabPage5.UseVisualStyleBackColor = true;
@@ -1410,7 +1411,7 @@
             this.tabPage7.Location = new System.Drawing.Point(4, 29);
             this.tabPage7.Name = "tabPage7";
             this.tabPage7.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage7.Size = new System.Drawing.Size(994, 267);
+            this.tabPage7.Size = new System.Drawing.Size(994, 264);
             this.tabPage7.TabIndex = 3;
             this.tabPage7.Text = "PowerPoint";
             this.tabPage7.UseVisualStyleBackColor = true;
@@ -1436,10 +1437,10 @@
             this.tabControl2.Controls.Add(this.tabPageImageFavorites);
             this.tabControl2.Controls.Add(this.tabPageSlideShow);
             this.tabControl2.ItemSize = new System.Drawing.Size(80, 25);
-            this.tabControl2.Location = new System.Drawing.Point(4, 4);
+            this.tabControl2.Location = new System.Drawing.Point(4, 34);
             this.tabControl2.Name = "tabControl2";
             this.tabControl2.SelectedIndex = 0;
-            this.tabControl2.Size = new System.Drawing.Size(615, 291);
+            this.tabControl2.Size = new System.Drawing.Size(615, 261);
             this.tabControl2.TabIndex = 0;
             // 
             // tabPageImageBrowser
@@ -1452,7 +1453,7 @@
             this.tabPageImageBrowser.Location = new System.Drawing.Point(4, 29);
             this.tabPageImageBrowser.Name = "tabPageImageBrowser";
             this.tabPageImageBrowser.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageImageBrowser.Size = new System.Drawing.Size(607, 258);
+            this.tabPageImageBrowser.Size = new System.Drawing.Size(607, 228);
             this.tabPageImageBrowser.TabIndex = 0;
             this.tabPageImageBrowser.Text = "Bildsammlung";
             this.tabPageImageBrowser.UseVisualStyleBackColor = true;
@@ -1466,7 +1467,7 @@
             this.treeViewImageDirectories.Location = new System.Drawing.Point(0, 36);
             this.treeViewImageDirectories.Name = "treeViewImageDirectories";
             this.treeViewImageDirectories.ShowPlusMinus = false;
-            this.treeViewImageDirectories.Size = new System.Drawing.Size(228, 222);
+            this.treeViewImageDirectories.Size = new System.Drawing.Size(228, 192);
             this.treeViewImageDirectories.TabIndex = 0;
             this.treeViewImageDirectories.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.treeViewImageDirectories_AfterSelect);
             // 
@@ -1478,7 +1479,7 @@
             this.listViewDirectoryImages.Location = new System.Drawing.Point(234, 36);
             this.listViewDirectoryImages.MultiSelect = false;
             this.listViewDirectoryImages.Name = "listViewDirectoryImages";
-            this.listViewDirectoryImages.Size = new System.Drawing.Size(371, 222);
+            this.listViewDirectoryImages.Size = new System.Drawing.Size(371, 192);
             this.listViewDirectoryImages.TabIndex = 1;
             this.listViewDirectoryImages.UseCompatibleStateImageBehavior = false;
             this.listViewDirectoryImages.SelectedIndexChanged += new System.EventHandler(this.listViewDirectoryImages_SelectedIndexChanged);
@@ -1497,7 +1498,7 @@
             // buttonClearImageHistory
             // 
             this.buttonClearImageHistory.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.buttonClearImageHistory.Location = new System.Drawing.Point(464, 279);
+            this.buttonClearImageHistory.Location = new System.Drawing.Point(464, 249);
             this.buttonClearImageHistory.Name = "buttonClearImageHistory";
             this.buttonClearImageHistory.Size = new System.Drawing.Size(121, 23);
             this.buttonClearImageHistory.TabIndex = 22;
@@ -1511,7 +1512,7 @@
             this.tabPageImageHistory.Controls.Add(this.listViewImageHistory);
             this.tabPageImageHistory.Location = new System.Drawing.Point(4, 29);
             this.tabPageImageHistory.Name = "tabPageImageHistory";
-            this.tabPageImageHistory.Size = new System.Drawing.Size(607, 258);
+            this.tabPageImageHistory.Size = new System.Drawing.Size(607, 228);
             this.tabPageImageHistory.TabIndex = 3;
             this.tabPageImageHistory.Text = "Verlauf";
             // 
@@ -1543,7 +1544,7 @@
             this.tabPageImageFavorites.Location = new System.Drawing.Point(4, 29);
             this.tabPageImageFavorites.Name = "tabPageImageFavorites";
             this.tabPageImageFavorites.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageImageFavorites.Size = new System.Drawing.Size(607, 258);
+            this.tabPageImageFavorites.Size = new System.Drawing.Size(607, 228);
             this.tabPageImageFavorites.TabIndex = 2;
             this.tabPageImageFavorites.Text = "Favoriten";
             this.tabPageImageFavorites.UseVisualStyleBackColor = true;
@@ -1578,7 +1579,7 @@
             this.tabPageSlideShow.Location = new System.Drawing.Point(4, 29);
             this.tabPageSlideShow.Name = "tabPageSlideShow";
             this.tabPageSlideShow.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageSlideShow.Size = new System.Drawing.Size(607, 258);
+            this.tabPageSlideShow.Size = new System.Drawing.Size(607, 228);
             this.tabPageSlideShow.TabIndex = 1;
             this.tabPageSlideShow.Text = "Diaschau";
             this.tabPageSlideShow.UseVisualStyleBackColor = true;
@@ -1683,6 +1684,7 @@
             this.tableLayoutPanel1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
                         | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
+            this.tableLayoutPanel1.BackColor = System.Drawing.Color.Transparent;
             this.tableLayoutPanel1.ColumnCount = 1;
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
@@ -1701,7 +1703,8 @@
             this.panel1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
                         | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
-            this.panel1.BackColor = System.Drawing.SystemColors.Control;
+            this.panel1.BackColor = System.Drawing.Color.Transparent;
+            this.panel1.Controls.Add(this.label13);
             this.panel1.Controls.Add(this.tabControl2);
             this.panel1.Controls.Add(this.groupBox5);
             this.panel1.Controls.Add(this.groupBoxImageStack);
@@ -1839,9 +1842,9 @@
             this.groupBoxImageStack.Controls.Add(this.listViewImageQueue);
             this.groupBoxImageStack.Controls.Add(this.buttonResetImageQueue);
             this.groupBoxImageStack.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.groupBoxImageStack.Location = new System.Drawing.Point(625, 12);
+            this.groupBoxImageStack.Location = new System.Drawing.Point(625, 34);
             this.groupBoxImageStack.Name = "groupBoxImageStack";
-            this.groupBoxImageStack.Size = new System.Drawing.Size(134, 283);
+            this.groupBoxImageStack.Size = new System.Drawing.Size(134, 261);
             this.groupBoxImageStack.TabIndex = 35;
             this.groupBoxImageStack.TabStop = false;
             this.groupBoxImageStack.Text = "Stapel";
@@ -1856,7 +1859,7 @@
             this.listViewImageQueue.Location = new System.Drawing.Point(7, 19);
             this.listViewImageQueue.MultiSelect = false;
             this.listViewImageQueue.Name = "listViewImageQueue";
-            this.listViewImageQueue.Size = new System.Drawing.Size(121, 231);
+            this.listViewImageQueue.Size = new System.Drawing.Size(121, 209);
             this.listViewImageQueue.TabIndex = 29;
             this.listViewImageQueue.UseCompatibleStateImageBehavior = false;
             this.listViewImageQueue.View = System.Windows.Forms.View.Tile;
@@ -1869,7 +1872,7 @@
             // 
             this.buttonResetImageQueue.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.buttonResetImageQueue.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.buttonResetImageQueue.Location = new System.Drawing.Point(7, 254);
+            this.buttonResetImageQueue.Location = new System.Drawing.Point(7, 232);
             this.buttonResetImageQueue.Name = "buttonResetImageQueue";
             this.buttonResetImageQueue.Size = new System.Drawing.Size(121, 23);
             this.buttonResetImageQueue.TabIndex = 33;
@@ -1881,6 +1884,18 @@
             // 
             this.timerElementHighlight.Interval = 250;
             this.timerElementHighlight.Tick += new System.EventHandler(this.timerSearchBoxHL_Tick);
+            // 
+            // label13
+            // 
+            this.label13.BackColor = System.Drawing.Color.RoyalBlue;
+            this.label13.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label13.ForeColor = System.Drawing.Color.White;
+            this.label13.Location = new System.Drawing.Point(3, 0);
+            this.label13.Name = "label13";
+            this.label13.Padding = new System.Windows.Forms.Padding(5, 5, 0, 0);
+            this.label13.Size = new System.Drawing.Size(756, 31);
+            this.label13.TabIndex = 43;
+            this.label13.Text = "Hintergrund";
             // 
             // searchTextBoxImages
             // 
@@ -2185,6 +2200,7 @@
         private System.Windows.Forms.Label labelBibleSearchMsg;
         private System.Windows.Forms.TabPage tabPage7;
         private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Label label13;
         
     }
 }

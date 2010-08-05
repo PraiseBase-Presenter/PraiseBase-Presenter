@@ -47,6 +47,29 @@ namespace Pbp
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
 
+            // code to ensure that only one copy of the software is running.
+            System.Threading.Mutex mutex;
+            string strLoc = System.Reflection.Assembly.GetExecutingAssembly().Location;
+            System.IO.FileSystemInfo fileInfo = new System.IO.FileInfo(strLoc);
+            string sExeName = fileInfo.Name;
+            string mutexName = "Global\\" + sExeName;
+            try
+            {
+                mutex = System.Threading.Mutex.OpenExisting(mutexName);
+                //since it hasn’t thrown an exception, then we already have one copy of the app open.
+
+                object[] attributes = System.Reflection.Assembly.GetExecutingAssembly().GetCustomAttributes(typeof(System.Reflection.AssemblyProductAttribute), false);
+                String appTitle = ((System.Reflection.AssemblyProductAttribute)attributes[0]).Product;
+
+                MessageBox.Show("Eine Instanz dieser Software läuft bereits!", appTitle, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                Environment.Exit(0);
+            }
+            catch
+            {
+                //since we didn’t find a mutex with that name, create one
+                mutex = new System.Threading.Mutex(true, mutexName);
+            } 
+
 			if (Settings.Instance.ShowLoadingScreen)
 			{
 				LoadingScreen ldg = new LoadingScreen();
@@ -86,6 +109,8 @@ namespace Pbp
 			Console.WriteLine("Loading took " + (DateTime.Now - startTime).TotalSeconds + " seconds!");
 
 			Application.Run(MainWindow.getInstance());
+
+            GC.KeepAlive(mutex);
 
         }
     }
