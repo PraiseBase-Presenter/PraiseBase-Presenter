@@ -42,11 +42,15 @@ namespace SongDetails
         Color itemActiveFG = Color.White;
         Color itemActiveBG = SystemColors.Highlight;
 
+        int thumbWidth;
+
         public SongDetail()
         {
             InitializeComponent();
             slideTexts = new List<Label>();
             slideImages = new List<PictureBox>();
+
+            thumbWidth = Pbp.Properties.Settings.Default.ThumbSize.Width;
         }
 
         public void setSong(Pbp.Song sng)
@@ -136,7 +140,7 @@ namespace SongDetails
 
                     Panel panelPreviewPictureBoxContainer = new Panel();
                     panelPreviewPictureBoxContainer.Location = new Point(1, 1);
-                    panelPreviewPictureBoxContainer.Size = new Size(90, slidePanel.Height);
+                    panelPreviewPictureBoxContainer.Size = new Size(thumbWidth, slidePanel.Height);
                     panelPreviewPictureBoxContainer.BackColor = Color.Transparent;
                     slidePanel.Controls.Add(panelPreviewPictureBoxContainer);
 
@@ -156,7 +160,7 @@ namespace SongDetails
                     slideImages.Add(previewPictureBox);
 
                     Panel panelTextLabelContainer = new Panel();
-                    panelTextLabelContainer.Location = new Point(100, 1);
+                    panelTextLabelContainer.Location = new Point(thumbWidth+10, 1);
                     panelTextLabelContainer.Height = slidePanel.Height - 1;
                     panelTextLabelContainer.BackColor = Color.Transparent;
                     panelTextLabelContainer.Padding = new System.Windows.Forms.Padding(2, 3, 2, 3);
@@ -371,7 +375,7 @@ namespace SongDetails
         void tpnl_Paint(object sender, PaintEventArgs e)
         {
             Panel lbl = ((Panel)sender);
-            lbl.Width = (lbl.Parent.Width - 100);
+            lbl.Width = (lbl.Parent.Width - lbl.Location.X);
         }
 
 		void textLbl_Paint(object sender, PaintEventArgs e)
