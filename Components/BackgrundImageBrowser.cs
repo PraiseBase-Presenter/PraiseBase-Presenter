@@ -14,7 +14,7 @@ namespace Pbp.Components
     public partial class BackgrundImageBrowser : UserControl
     {
         public delegate void imageSelect(object sender, BackgroundImageSelecteEventArgs e);
-        public new event imageSelect ImageSelected;
+        public event imageSelect ImageSelected;
 
         private string _rootDirectory;
         public string RootDirectory

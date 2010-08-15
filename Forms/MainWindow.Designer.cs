@@ -1786,7 +1786,7 @@
             // 
             this.label6.AutoSize = true;
             this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label6.Location = new System.Drawing.Point(6, 206);
+            this.label6.Location = new System.Drawing.Point(6, 187);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(88, 13);
             this.label6.TabIndex = 42;
@@ -1795,7 +1795,7 @@
             // radioButtonFade3
             // 
             this.radioButtonFade3.AutoSize = true;
-            this.radioButtonFade3.Location = new System.Drawing.Point(156, 227);
+            this.radioButtonFade3.Location = new System.Drawing.Point(156, 208);
             this.radioButtonFade3.Name = "radioButtonFade3";
             this.radioButtonFade3.Size = new System.Drawing.Size(75, 17);
             this.radioButtonFade3.TabIndex = 41;
@@ -1807,7 +1807,7 @@
             // radioButtonFade2
             // 
             this.radioButtonFade2.AutoSize = true;
-            this.radioButtonFade2.Location = new System.Drawing.Point(97, 227);
+            this.radioButtonFade2.Location = new System.Drawing.Point(97, 208);
             this.radioButtonFade2.Name = "radioButtonFade2";
             this.radioButtonFade2.Size = new System.Drawing.Size(56, 17);
             this.radioButtonFade2.TabIndex = 40;
@@ -1820,7 +1820,7 @@
             // 
             this.radioButtonFade1.AutoSize = true;
             this.radioButtonFade1.Checked = true;
-            this.radioButtonFade1.Location = new System.Drawing.Point(156, 204);
+            this.radioButtonFade1.Location = new System.Drawing.Point(156, 185);
             this.radioButtonFade1.Name = "radioButtonFade1";
             this.radioButtonFade1.Size = new System.Drawing.Size(67, 17);
             this.radioButtonFade1.TabIndex = 39;
@@ -1833,7 +1833,7 @@
             // radioButtonFade0
             // 
             this.radioButtonFade0.AutoSize = true;
-            this.radioButtonFade0.Location = new System.Drawing.Point(97, 204);
+            this.radioButtonFade0.Location = new System.Drawing.Point(97, 185);
             this.radioButtonFade0.Name = "radioButtonFade0";
             this.radioButtonFade0.Size = new System.Drawing.Size(59, 17);
             this.radioButtonFade0.TabIndex = 38;
@@ -1866,7 +1866,7 @@
             // 
             // progressBarTransition
             // 
-            this.progressBarTransition.Location = new System.Drawing.Point(6, 188);
+            this.progressBarTransition.Location = new System.Drawing.Point(6, 170);
             this.progressBarTransition.Name = "progressBarTransition";
             this.progressBarTransition.Size = new System.Drawing.Size(220, 10);
             this.progressBarTransition.Step = 1;
@@ -1876,7 +1876,7 @@
             // 
             this.pictureBoxPreview.BackColor = System.Drawing.Color.Black;
             this.pictureBoxPreview.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pictureBoxPreview.Location = new System.Drawing.Point(6, 19);
+            this.pictureBoxPreview.Location = new System.Drawing.Point(6, 3);
             this.pictureBoxPreview.Name = "pictureBoxPreview";
             this.pictureBoxPreview.Size = new System.Drawing.Size(220, 165);
             this.pictureBoxPreview.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;

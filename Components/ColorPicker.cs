@@ -15,7 +15,7 @@ namespace Pbp.Components
         List<Panel> colorpanels = new List<Panel>();
 
         public delegate void colorPick(object sender, ColorPickEventArgs e);
-        public new event colorPick ColorPicked;
+        public event colorPick ColorPicked;
 
 
         public ColorPicker()

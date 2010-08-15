@@ -27,7 +27,7 @@ namespace SongDetails
         private List<Label> slideTexts;
         private List<PictureBox> slideImages;
         private int currentSlideTextIdx = -1;
-        private int currentSlideImageIdx = -1;
+        //private int currentSlideImageIdx = -1;
 
         private int refrainIndex;
         private int prechorusIndex;

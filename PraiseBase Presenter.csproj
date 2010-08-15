@@ -471,12 +471,6 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\PBP Controls\PBP Controls.csproj">
-      <Project>{09A9686F-D9B1-4829-A52A-33DF72EBFC10}</Project>
-      <Name>PBP Controls</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
     <Content Include="Backgrounds\Sample\Berge.jpg" />
     <Content Include="Backgrounds\Sample\Blume.jpg" />
     <Content Include="Backgrounds\Sample\Feuer.jpg" />
