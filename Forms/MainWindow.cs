@@ -139,7 +139,7 @@ namespace Pbp.Forms
 
             numericUpDown1.Value = (int)Settings.Default.ProjectionMasterFont.Size;
 
-            backgrundImageBrowser1.ImageSize = Properties.Settings.Default.ThumbSize; 
+
         }
 
 
@@ -601,12 +601,11 @@ namespace Pbp.Forms
             } // end catch
         }
 
-        
         private void treeViewImageDirectories_AfterSelect(object sender, TreeViewEventArgs e)
         {
             if (treeViewImageDirectories.Nodes.Count > 1)
             {
-                /*listViewDirectoryImages.BeginUpdate();
+                listViewDirectoryImages.BeginUpdate();
                 listViewDirectoryImages.SuspendLayout();
                 listViewDirectoryImages.Items.Clear();
 
@@ -614,12 +613,10 @@ namespace Pbp.Forms
                 {
                     listViewDirectoryImages.LargeImageList.Dispose();
                 }
-                 * */
 
                 // Search
                 if (treeViewImageDirectories.SelectedNode.Index == treeViewImageDirectories.Nodes.Count - 1)
                 {
-                    /*
                     ImageList imList = new ImageList();
                     imList.ImageSize = Settings.Default.ThumbSize;
                     imList.ColorDepth = ColorDepth.Depth32Bit;
@@ -642,18 +639,15 @@ namespace Pbp.Forms
                     listViewDirectoryImages.LargeImageList = imList;
 
                     labelImgDirName.Text = "Suchergebnisse ("+i+" Bilder)";
-                    */
+
                 }
                 else
                 {
                     string relativeImageDir = ((string)treeViewImageDirectories.SelectedNode.Tag) + Path.DirectorySeparatorChar;
                     string imDir = Settings.Default.DataDirectory + Path.DirectorySeparatorChar + Settings.Default.ThumbDir + Path.DirectorySeparatorChar + relativeImageDir;
-                    
+
                     if (Directory.Exists(imDir))
                     {
-                        backgrundImageBrowser1.RootDirectory = imDir;
-
-                        /*
                         ImageList imList = new ImageList();
                         imList.ImageSize = Settings.Default.ThumbSize;
                         imList.ColorDepth = ColorDepth.Depth32Bit;
@@ -670,17 +664,16 @@ namespace Pbp.Forms
                             i++;
                         }
                         listViewDirectoryImages.LargeImageList = imList;
-                        */
-                        labelImgDirName.Text = "Kategorie '" + Path.GetFileName(((string)treeViewImageDirectories.SelectedNode.Tag)) + "' (" + backgrundImageBrowser1.NumberOfImages + " Bilder):";
+
+                        labelImgDirName.Text = "Kategorie '" + Path.GetFileName(((string)treeViewImageDirectories.SelectedNode.Tag)) + "' (" + i + " Bilder):";
                     }
                 }
 
-                //listViewDirectoryImages.ResumeLayout();
-                //listViewDirectoryImages.EndUpdate();*/
+                listViewDirectoryImages.ResumeLayout();
+                listViewDirectoryImages.EndUpdate();
             }
         }
 
-        /*
         private void listViewDirectoryImages_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (projWindow != null && listViewDirectoryImages.SelectedIndices.Count > 0)
@@ -722,53 +715,7 @@ namespace Pbp.Forms
                     imageHistoryAdd((string)listViewDirectoryImages.Items[idx].Tag);
 				}
             }
-        }*/
-
-        private void backgrundImageBrowser1_ImageSelected(object sender, Components.BackgroundImageSelecteEventArgs e)
-        {
-            string relImageName = ((string)treeViewImageDirectories.SelectedNode.Tag) + Path.DirectorySeparatorChar + e.ImageName;
-            
-            if (projWindow != null && relImageName != null)
-            {
-                Application.DoEvents();
-
-                // Stack
-                if ((Control.ModifierKeys & Keys.Control) == Keys.Control)
-                {
-                    listViewImageQueue.LargeImageList.Images.Add(ImageManager.Instance.getThumbFromRelPath(relImageName));
-                    ListViewItem lvi = new ListViewItem("");
-                    lvi.Tag = relImageName;
-                    lvi.ImageIndex = listViewImageQueue.LargeImageList.Images.Count - 1;
-                    listViewImageQueue.Items.Add(lvi);
-                    //listViewImageQueue.EnsureVisible(listViewImageHistory.Items.Count - 1);
-                }
-                // Favorite
-                else if ((Control.ModifierKeys & Keys.Alt) == Keys.Alt)
-                {
-                    imageFavoriteAdd(relImageName);
-                }
-                else
-                {
-                    Image img = ImageManager.Instance.getImageFromRelPath(relImageName);
-                    // Linked layers
-                    if (!linkLayers ^ ((Control.ModifierKeys & Keys.Shift) == Keys.Shift && SongManager.Instance.CurrentSong != null && SongManager.Instance.CurrentSong.CurrentSlide >= 0))
-                    {
-                        Object[] args = { SongManager.Instance.CurrentPartNr, SongManager.Instance.CurrentSlideNr };
-                        pictureBoxPreview.Image = projWindow.showSlide(SongManager.Instance.CurrentSong, img, args);
-                    }
-                    else
-                    {
-                        pictureBoxPreview.Image = projWindow.showSlide(null, img);
-                    }
-                    this.currentBackground = img;
-
-                    // Add image to history
-                    imageHistoryAdd(relImageName);
-                }
-            }
-
         }
-
 
         private void imageHistoryAdd(string relImagePath)
         {
@@ -818,7 +765,7 @@ namespace Pbp.Forms
         private void bilderlisteNeuLadenToolStripMenuItem_Click(object sender, EventArgs e)
         {
             imageTreeViewInit();
-            //listViewDirectoryImages.Items.Clear();
+            listViewDirectoryImages.Items.Clear();
             GC.Collect();
         }
 
@@ -1033,7 +980,6 @@ namespace Pbp.Forms
 			}
 		}
 
-        /*
         private void listViewDirectoryImages_Leave(object sender, EventArgs e)
         {
             if (listViewDirectoryImages.SelectedIndices.Count > 0)
@@ -1042,7 +988,6 @@ namespace Pbp.Forms
                 listViewDirectoryImages.Items[idx].Selected = false;
             }
         }
-         */
 
         /// <summary>
         /// Show image from history
@@ -1944,7 +1889,6 @@ namespace Pbp.Forms
             oPPT.Quit();
              */ 
         }
-
 
 
     }

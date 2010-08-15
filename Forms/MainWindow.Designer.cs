@@ -95,9 +95,12 @@
             this.tabControlTextLayer = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.groupBoxSongContents = new System.Windows.Forms.GroupBox();
+            this.songDetailElement = new SongDetails.SongDetail();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage3 = new System.Windows.Forms.TabPage();
             this.buttonOpenSetList = new System.Windows.Forms.Button();
+            this.listViewSetList = new Bol.WinControls.ListViewEx();
+            this.columnHeader4 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.buttonSaveSetList = new System.Windows.Forms.Button();
             this.buttonSetListAdd = new System.Windows.Forms.Button();
             this.buttonSetListUp = new System.Windows.Forms.Button();
@@ -108,6 +111,7 @@
             this.listViewSongHistory = new System.Windows.Forms.ListView();
             this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.songSearchTextBox = new Pbp.Components.SearchTextBox();
             this.listViewSongs = new System.Windows.Forms.ListView();
             this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.radioSongSearchAll = new System.Windows.Forms.RadioButton();
@@ -127,6 +131,9 @@
             this.buttonAddToBibleVerseList = new System.Windows.Forms.Button();
             this.buttonRemoveFromBibleVerseList = new System.Windows.Forms.Button();
             this.label12 = new System.Windows.Forms.Label();
+            this.searchTextBoxBible = new Pbp.Components.SearchTextBox();
+            this.listViewBibleVerseList = new Bol.WinControls.ListViewEx();
+            this.columnHeader3 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.label11 = new System.Windows.Forms.Label();
             this.label10 = new System.Windows.Forms.Label();
             this.numericUpDown2 = new System.Windows.Forms.NumericUpDown();
@@ -143,11 +150,11 @@
             this.listBoxBibleChapter = new System.Windows.Forms.ListBox();
             this.listBoxBibleBook = new System.Windows.Forms.ListBox();
             this.comboBoxBible = new System.Windows.Forms.ComboBox();
-            this.tabPage7 = new System.Windows.Forms.TabPage();
-            this.button1 = new System.Windows.Forms.Button();
             this.tabControl2 = new System.Windows.Forms.TabControl();
             this.tabPageImageBrowser = new System.Windows.Forms.TabPage();
+            this.searchTextBoxImages = new Pbp.Components.SearchTextBox();
             this.treeViewImageDirectories = new System.Windows.Forms.TreeView();
+            this.listViewDirectoryImages = new System.Windows.Forms.ListView();
             this.labelImgDirName = new System.Windows.Forms.Label();
             this.buttonClearImageHistory = new System.Windows.Forms.Button();
             this.tabPageImageHistory = new System.Windows.Forms.TabPage();
@@ -167,11 +174,7 @@
             this.buttonDisableAllDias = new System.Windows.Forms.Button();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.panel4 = new System.Windows.Forms.Panel();
-            this.label15 = new System.Windows.Forms.Label();
-            this.panel2 = new System.Windows.Forms.Panel();
-            this.label13 = new System.Windows.Forms.Label();
-            this.groupBox5 = new System.Windows.Forms.Panel();
+            this.groupBox5 = new System.Windows.Forms.GroupBox();
             this.label6 = new System.Windows.Forms.Label();
             this.radioButtonFade3 = new System.Windows.Forms.RadioButton();
             this.radioButtonFade2 = new System.Windows.Forms.RadioButton();
@@ -186,17 +189,6 @@
             this.columnHeader6 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.buttonResetImageQueue = new System.Windows.Forms.Button();
             this.timerElementHighlight = new System.Windows.Forms.Timer(this.components);
-            this.panel3 = new System.Windows.Forms.Panel();
-            this.label14 = new System.Windows.Forms.Label();
-            this.backgrundImageBrowser1 = new Pbp.Components.BackgrundImageBrowser();
-            this.searchTextBoxImages = new Pbp.Components.SearchTextBox();
-            this.songDetailElement = new SongDetails.SongDetail();
-            this.listViewSetList = new Bol.WinControls.ListViewEx();
-            this.columnHeader4 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.songSearchTextBox = new Pbp.Components.SearchTextBox();
-            this.searchTextBoxBible = new Pbp.Components.SearchTextBox();
-            this.listViewBibleVerseList = new Bol.WinControls.ListViewEx();
-            this.columnHeader3 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             buttonChooseDiaDir = new System.Windows.Forms.Button();
             this.menuStrip1.SuspendLayout();
             this.toolStrip1.SuspendLayout();
@@ -212,7 +204,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
             this.tabPage5.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown2)).BeginInit();
-            this.tabPage7.SuspendLayout();
             this.tabControl2.SuspendLayout();
             this.tabPageImageBrowser.SuspendLayout();
             this.tabPageImageHistory.SuspendLayout();
@@ -220,12 +211,9 @@
             this.tabPageSlideShow.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
             this.panel1.SuspendLayout();
-            this.panel4.SuspendLayout();
-            this.panel2.SuspendLayout();
             this.groupBox5.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxPreview)).BeginInit();
             this.groupBoxImageStack.SuspendLayout();
-            this.panel3.SuspendLayout();
             this.SuspendLayout();
             // 
             // buttonChooseDiaDir
@@ -766,12 +754,11 @@
             this.tabControlTextLayer.Controls.Add(this.tabPage1);
             this.tabControlTextLayer.Controls.Add(this.tabPage2);
             this.tabControlTextLayer.Controls.Add(this.tabPage5);
-            this.tabControlTextLayer.Controls.Add(this.tabPage7);
             this.tabControlTextLayer.ItemSize = new System.Drawing.Size(60, 25);
             this.tabControlTextLayer.Location = new System.Drawing.Point(3, 3);
             this.tabControlTextLayer.Name = "tabControlTextLayer";
             this.tabControlTextLayer.SelectedIndex = 0;
-            this.tabControlTextLayer.Size = new System.Drawing.Size(1002, 280);
+            this.tabControlTextLayer.Size = new System.Drawing.Size(1002, 297);
             this.tabControlTextLayer.TabIndex = 20;
             this.tabControlTextLayer.SelectedIndexChanged += new System.EventHandler(this.tabControl1_SelectedIndexChanged);
             // 
@@ -783,7 +770,7 @@
             this.tabPage1.Location = new System.Drawing.Point(4, 29);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(994, 247);
+            this.tabPage1.Size = new System.Drawing.Size(994, 264);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Liedetexte";
             this.tabPage1.UseVisualStyleBackColor = true;
@@ -797,10 +784,26 @@
             this.groupBoxSongContents.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.groupBoxSongContents.Location = new System.Drawing.Point(249, 2);
             this.groupBoxSongContents.Name = "groupBoxSongContents";
-            this.groupBoxSongContents.Size = new System.Drawing.Size(486, 245);
+            this.groupBoxSongContents.Size = new System.Drawing.Size(486, 262);
             this.groupBoxSongContents.TabIndex = 32;
             this.groupBoxSongContents.TabStop = false;
             this.groupBoxSongContents.Text = "Liedinhalt";
+            // 
+            // songDetailElement
+            // 
+            this.songDetailElement.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+                        | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.songDetailElement.AutoScroll = true;
+            this.songDetailElement.BackColor = System.Drawing.Color.White;
+            this.songDetailElement.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.songDetailElement.ForeColor = System.Drawing.SystemColors.WindowText;
+            this.songDetailElement.Location = new System.Drawing.Point(6, 16);
+            this.songDetailElement.Name = "songDetailElement";
+            this.songDetailElement.Size = new System.Drawing.Size(474, 240);
+            this.songDetailElement.TabIndex = 20;
+            this.songDetailElement.SlideClicked += new SongDetails.SongDetail.slideClick(this.songDetailElement_SlideClicked);
+            this.songDetailElement.ImageClicked += new SongDetails.SongDetail.imageClick(this.songDetailElement_ImageClicked);
             // 
             // tabControl1
             // 
@@ -811,7 +814,7 @@
             this.tabControl1.Location = new System.Drawing.Point(741, 6);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(250, 238);
+            this.tabControl1.Size = new System.Drawing.Size(250, 255);
             this.tabControl1.TabIndex = 21;
             // 
             // tabPage3
@@ -827,7 +830,7 @@
             this.tabPage3.Location = new System.Drawing.Point(4, 22);
             this.tabPage3.Name = "tabPage3";
             this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage3.Size = new System.Drawing.Size(242, 212);
+            this.tabPage3.Size = new System.Drawing.Size(242, 229);
             this.tabPage3.TabIndex = 0;
             this.tabPage3.Text = "Setliste";
             this.tabPage3.UseVisualStyleBackColor = true;
@@ -838,12 +841,33 @@
             this.buttonOpenSetList.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.buttonOpenSetList.Image = global::Pbp.Properties.Resources.fileopen;
             this.buttonOpenSetList.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.buttonOpenSetList.Location = new System.Drawing.Point(202, 183);
+            this.buttonOpenSetList.Location = new System.Drawing.Point(202, 200);
             this.buttonOpenSetList.Name = "buttonOpenSetList";
             this.buttonOpenSetList.Size = new System.Drawing.Size(26, 23);
             this.buttonOpenSetList.TabIndex = 31;
             this.buttonOpenSetList.UseVisualStyleBackColor = true;
             this.buttonOpenSetList.Click += new System.EventHandler(this.buttonOpenSetList_Click);
+            // 
+            // listViewSetList
+            // 
+            this.listViewSetList.AllowDrop = true;
+            this.listViewSetList.AllowRowReorder = true;
+            this.listViewSetList.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.listViewSetList.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.columnHeader4});
+            this.listViewSetList.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.listViewSetList.FullRowSelect = true;
+            this.listViewSetList.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.None;
+            this.listViewSetList.HideSelection = false;
+            this.listViewSetList.Location = new System.Drawing.Point(0, 1);
+            this.listViewSetList.MultiSelect = false;
+            this.listViewSetList.Name = "listViewSetList";
+            this.listViewSetList.Size = new System.Drawing.Size(241, 194);
+            this.listViewSetList.TabIndex = 27;
+            this.listViewSetList.UseCompatibleStateImageBehavior = false;
+            this.listViewSetList.View = System.Windows.Forms.View.Details;
+            this.listViewSetList.SelectedIndexChanged += new System.EventHandler(this.listViewSetList_SelectedIndexChanged);
             // 
             // buttonSaveSetList
             // 
@@ -852,7 +876,7 @@
             this.buttonSaveSetList.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.buttonSaveSetList.Image = global::Pbp.Properties.Resources.filesave;
             this.buttonSaveSetList.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.buttonSaveSetList.Location = new System.Drawing.Point(168, 183);
+            this.buttonSaveSetList.Location = new System.Drawing.Point(168, 200);
             this.buttonSaveSetList.Name = "buttonSaveSetList";
             this.buttonSaveSetList.Size = new System.Drawing.Size(26, 23);
             this.buttonSaveSetList.TabIndex = 30;
@@ -865,7 +889,7 @@
             this.buttonSetListAdd.Enabled = false;
             this.buttonSetListAdd.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.buttonSetListAdd.Image = global::Pbp.Properties.Resources.edit_add;
-            this.buttonSetListAdd.Location = new System.Drawing.Point(6, 183);
+            this.buttonSetListAdd.Location = new System.Drawing.Point(6, 200);
             this.buttonSetListAdd.Name = "buttonSetListAdd";
             this.buttonSetListAdd.Size = new System.Drawing.Size(24, 23);
             this.buttonSetListAdd.TabIndex = 29;
@@ -878,7 +902,7 @@
             this.buttonSetListUp.Enabled = false;
             this.buttonSetListUp.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.buttonSetListUp.Image = global::Pbp.Properties.Resources.arrowup;
-            this.buttonSetListUp.Location = new System.Drawing.Point(37, 183);
+            this.buttonSetListUp.Location = new System.Drawing.Point(37, 200);
             this.buttonSetListUp.Name = "buttonSetListUp";
             this.buttonSetListUp.Size = new System.Drawing.Size(24, 23);
             this.buttonSetListUp.TabIndex = 24;
@@ -892,7 +916,7 @@
             this.buttonSetListClear.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.buttonSetListClear.Image = global::Pbp.Properties.Resources.trash;
             this.buttonSetListClear.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.buttonSetListClear.Location = new System.Drawing.Point(134, 183);
+            this.buttonSetListClear.Location = new System.Drawing.Point(134, 200);
             this.buttonSetListClear.Name = "buttonSetListClear";
             this.buttonSetListClear.Size = new System.Drawing.Size(26, 23);
             this.buttonSetListClear.TabIndex = 28;
@@ -905,7 +929,7 @@
             this.buttonSetListDown.Enabled = false;
             this.buttonSetListDown.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.buttonSetListDown.Image = global::Pbp.Properties.Resources.arrowdown;
-            this.buttonSetListDown.Location = new System.Drawing.Point(68, 183);
+            this.buttonSetListDown.Location = new System.Drawing.Point(68, 200);
             this.buttonSetListDown.Name = "buttonSetListDown";
             this.buttonSetListDown.Size = new System.Drawing.Size(24, 23);
             this.buttonSetListDown.TabIndex = 25;
@@ -919,7 +943,7 @@
             this.buttonSetListRem.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.buttonSetListRem.Image = global::Pbp.Properties.Resources.edit_remove;
             this.buttonSetListRem.ImageAlign = System.Drawing.ContentAlignment.BottomLeft;
-            this.buttonSetListRem.Location = new System.Drawing.Point(100, 183);
+            this.buttonSetListRem.Location = new System.Drawing.Point(100, 200);
             this.buttonSetListRem.Name = "buttonSetListRem";
             this.buttonSetListRem.Size = new System.Drawing.Size(26, 23);
             this.buttonSetListRem.TabIndex = 26;
@@ -932,7 +956,7 @@
             this.tabPage4.Location = new System.Drawing.Point(4, 22);
             this.tabPage4.Name = "tabPage4";
             this.tabPage4.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage4.Size = new System.Drawing.Size(242, 212);
+            this.tabPage4.Size = new System.Drawing.Size(242, 229);
             this.tabPage4.TabIndex = 1;
             this.tabPage4.Text = "Verlauf";
             this.tabPage4.UseVisualStyleBackColor = true;
@@ -951,7 +975,7 @@
             this.listViewSongHistory.Location = new System.Drawing.Point(1, 1);
             this.listViewSongHistory.MultiSelect = false;
             this.listViewSongHistory.Name = "listViewSongHistory";
-            this.listViewSongHistory.Size = new System.Drawing.Size(241, 211);
+            this.listViewSongHistory.Size = new System.Drawing.Size(241, 228);
             this.listViewSongHistory.TabIndex = 28;
             this.listViewSongHistory.UseCompatibleStateImageBehavior = false;
             this.listViewSongHistory.View = System.Windows.Forms.View.Details;
@@ -968,10 +992,19 @@
             this.groupBox2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.groupBox2.Location = new System.Drawing.Point(0, 2);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(246, 245);
+            this.groupBox2.Size = new System.Drawing.Size(246, 262);
             this.groupBox2.TabIndex = 19;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Liederliste";
+            // 
+            // songSearchTextBox
+            // 
+            this.songSearchTextBox.Location = new System.Drawing.Point(5, 16);
+            this.songSearchTextBox.Name = "songSearchTextBox";
+            this.songSearchTextBox.PlaceHolderText = "Lied suchen";
+            this.songSearchTextBox.Size = new System.Drawing.Size(235, 24);
+            this.songSearchTextBox.TabIndex = 22;
+            this.songSearchTextBox.TextChanged += new Pbp.Components.SearchTextBox.textChange(this.songSearchBox_TextChanged);
             // 
             // listViewSongs
             // 
@@ -986,7 +1019,7 @@
             this.listViewSongs.Location = new System.Drawing.Point(5, 68);
             this.listViewSongs.MultiSelect = false;
             this.listViewSongs.Name = "listViewSongs";
-            this.listViewSongs.Size = new System.Drawing.Size(235, 171);
+            this.listViewSongs.Size = new System.Drawing.Size(235, 188);
             this.listViewSongs.TabIndex = 21;
             this.listViewSongs.UseCompatibleStateImageBehavior = false;
             this.listViewSongs.View = System.Windows.Forms.View.Details;
@@ -1031,7 +1064,7 @@
             this.tabPage2.Location = new System.Drawing.Point(4, 29);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(994, 247);
+            this.tabPage2.Size = new System.Drawing.Size(994, 264);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Live-Text";
             this.tabPage2.UseVisualStyleBackColor = true;
@@ -1170,7 +1203,7 @@
             this.tabPage5.Location = new System.Drawing.Point(4, 29);
             this.tabPage5.Name = "tabPage5";
             this.tabPage5.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage5.Size = new System.Drawing.Size(994, 247);
+            this.tabPage5.Size = new System.Drawing.Size(994, 264);
             this.tabPage5.TabIndex = 2;
             this.tabPage5.Text = "Bibel";
             this.tabPage5.UseVisualStyleBackColor = true;
@@ -1230,6 +1263,36 @@
             this.label12.Size = new System.Drawing.Size(67, 13);
             this.label12.TabIndex = 29;
             this.label12.Text = "Vers-Liste:";
+            // 
+            // searchTextBoxBible
+            // 
+            this.searchTextBoxBible.Enabled = false;
+            this.searchTextBoxBible.Location = new System.Drawing.Point(9, 60);
+            this.searchTextBoxBible.Name = "searchTextBoxBible";
+            this.searchTextBoxBible.PlaceHolderText = "Bibelstelle";
+            this.searchTextBoxBible.Size = new System.Drawing.Size(148, 24);
+            this.searchTextBoxBible.TabIndex = 38;
+            this.searchTextBoxBible.TextChanged += new Pbp.Components.SearchTextBox.textChange(this.searchTextBoxBible_TextChanged);
+            // 
+            // listViewBibleVerseList
+            // 
+            this.listViewBibleVerseList.AllowDrop = true;
+            this.listViewBibleVerseList.AllowRowReorder = true;
+            this.listViewBibleVerseList.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.listViewBibleVerseList.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.columnHeader3});
+            this.listViewBibleVerseList.FullRowSelect = true;
+            this.listViewBibleVerseList.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.None;
+            this.listViewBibleVerseList.HideSelection = false;
+            this.listViewBibleVerseList.Location = new System.Drawing.Point(858, 33);
+            this.listViewBibleVerseList.MultiSelect = false;
+            this.listViewBibleVerseList.Name = "listViewBibleVerseList";
+            this.listViewBibleVerseList.Size = new System.Drawing.Size(126, 165);
+            this.listViewBibleVerseList.TabIndex = 28;
+            this.listViewBibleVerseList.UseCompatibleStateImageBehavior = false;
+            this.listViewBibleVerseList.View = System.Windows.Forms.View.Details;
+            this.listViewBibleVerseList.SelectedIndexChanged += new System.EventHandler(this.listViewBibleVerseList_SelectedIndexChanged);
             // 
             // label11
             // 
@@ -1413,28 +1476,6 @@
             this.comboBoxBible.TabIndex = 0;
             this.comboBoxBible.SelectedIndexChanged += new System.EventHandler(this.comboBoxBible_SelectedIndexChanged);
             // 
-            // tabPage7
-            // 
-            this.tabPage7.Controls.Add(this.button1);
-            this.tabPage7.Location = new System.Drawing.Point(4, 29);
-            this.tabPage7.Name = "tabPage7";
-            this.tabPage7.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage7.Size = new System.Drawing.Size(994, 247);
-            this.tabPage7.TabIndex = 3;
-            this.tabPage7.Text = "PowerPoint";
-            this.tabPage7.UseVisualStyleBackColor = true;
-            // 
-            // button1
-            // 
-            this.button1.Location = new System.Drawing.Point(10, 6);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 0;
-            this.button1.Text = "button1";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Visible = false;
-            this.button1.Click += new System.EventHandler(this.button1_Click_4);
-            // 
             // tabControl2
             // 
             this.tabControl2.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
@@ -1445,26 +1486,35 @@
             this.tabControl2.Controls.Add(this.tabPageImageFavorites);
             this.tabControl2.Controls.Add(this.tabPageSlideShow);
             this.tabControl2.ItemSize = new System.Drawing.Size(80, 25);
-            this.tabControl2.Location = new System.Drawing.Point(0, 33);
+            this.tabControl2.Location = new System.Drawing.Point(4, 4);
             this.tabControl2.Name = "tabControl2";
             this.tabControl2.SelectedIndex = 0;
-            this.tabControl2.Size = new System.Drawing.Size(619, 244);
+            this.tabControl2.Size = new System.Drawing.Size(615, 291);
             this.tabControl2.TabIndex = 0;
             // 
             // tabPageImageBrowser
             // 
-            this.tabPageImageBrowser.Controls.Add(this.backgrundImageBrowser1);
             this.tabPageImageBrowser.Controls.Add(this.searchTextBoxImages);
             this.tabPageImageBrowser.Controls.Add(this.treeViewImageDirectories);
+            this.tabPageImageBrowser.Controls.Add(this.listViewDirectoryImages);
             this.tabPageImageBrowser.Controls.Add(this.labelImgDirName);
             this.tabPageImageBrowser.Controls.Add(this.buttonClearImageHistory);
             this.tabPageImageBrowser.Location = new System.Drawing.Point(4, 29);
             this.tabPageImageBrowser.Name = "tabPageImageBrowser";
             this.tabPageImageBrowser.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageImageBrowser.Size = new System.Drawing.Size(611, 211);
+            this.tabPageImageBrowser.Size = new System.Drawing.Size(607, 258);
             this.tabPageImageBrowser.TabIndex = 0;
             this.tabPageImageBrowser.Text = "Bildsammlung";
             this.tabPageImageBrowser.UseVisualStyleBackColor = true;
+            // 
+            // searchTextBoxImages
+            // 
+            this.searchTextBoxImages.Location = new System.Drawing.Point(0, 6);
+            this.searchTextBoxImages.Name = "searchTextBoxImages";
+            this.searchTextBoxImages.PlaceHolderText = "Bild suchen";
+            this.searchTextBoxImages.Size = new System.Drawing.Size(228, 24);
+            this.searchTextBoxImages.TabIndex = 26;
+            this.searchTextBoxImages.TextChanged += new Pbp.Components.SearchTextBox.textChange(this.searchTextBoxImages_TextChanged);
             // 
             // treeViewImageDirectories
             // 
@@ -1475,9 +1525,23 @@
             this.treeViewImageDirectories.Location = new System.Drawing.Point(0, 36);
             this.treeViewImageDirectories.Name = "treeViewImageDirectories";
             this.treeViewImageDirectories.ShowPlusMinus = false;
-            this.treeViewImageDirectories.Size = new System.Drawing.Size(228, 175);
+            this.treeViewImageDirectories.Size = new System.Drawing.Size(228, 222);
             this.treeViewImageDirectories.TabIndex = 0;
             this.treeViewImageDirectories.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.treeViewImageDirectories_AfterSelect);
+            // 
+            // listViewDirectoryImages
+            // 
+            this.listViewDirectoryImages.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+                        | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.listViewDirectoryImages.Location = new System.Drawing.Point(234, 36);
+            this.listViewDirectoryImages.MultiSelect = false;
+            this.listViewDirectoryImages.Name = "listViewDirectoryImages";
+            this.listViewDirectoryImages.Size = new System.Drawing.Size(371, 222);
+            this.listViewDirectoryImages.TabIndex = 1;
+            this.listViewDirectoryImages.UseCompatibleStateImageBehavior = false;
+            this.listViewDirectoryImages.SelectedIndexChanged += new System.EventHandler(this.listViewDirectoryImages_SelectedIndexChanged);
+            this.listViewDirectoryImages.Leave += new System.EventHandler(this.listViewDirectoryImages_Leave);
             // 
             // labelImgDirName
             // 
@@ -1492,7 +1556,7 @@
             // buttonClearImageHistory
             // 
             this.buttonClearImageHistory.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.buttonClearImageHistory.Location = new System.Drawing.Point(468, 232);
+            this.buttonClearImageHistory.Location = new System.Drawing.Point(464, 279);
             this.buttonClearImageHistory.Name = "buttonClearImageHistory";
             this.buttonClearImageHistory.Size = new System.Drawing.Size(121, 23);
             this.buttonClearImageHistory.TabIndex = 22;
@@ -1506,7 +1570,7 @@
             this.tabPageImageHistory.Controls.Add(this.listViewImageHistory);
             this.tabPageImageHistory.Location = new System.Drawing.Point(4, 29);
             this.tabPageImageHistory.Name = "tabPageImageHistory";
-            this.tabPageImageHistory.Size = new System.Drawing.Size(611, 211);
+            this.tabPageImageHistory.Size = new System.Drawing.Size(607, 258);
             this.tabPageImageHistory.TabIndex = 3;
             this.tabPageImageHistory.Text = "Verlauf";
             // 
@@ -1538,7 +1602,7 @@
             this.tabPageImageFavorites.Location = new System.Drawing.Point(4, 29);
             this.tabPageImageFavorites.Name = "tabPageImageFavorites";
             this.tabPageImageFavorites.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageImageFavorites.Size = new System.Drawing.Size(611, 211);
+            this.tabPageImageFavorites.Size = new System.Drawing.Size(607, 258);
             this.tabPageImageFavorites.TabIndex = 2;
             this.tabPageImageFavorites.Text = "Favoriten";
             this.tabPageImageFavorites.UseVisualStyleBackColor = true;
@@ -1573,7 +1637,7 @@
             this.tabPageSlideShow.Location = new System.Drawing.Point(4, 29);
             this.tabPageSlideShow.Name = "tabPageSlideShow";
             this.tabPageSlideShow.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageSlideShow.Size = new System.Drawing.Size(611, 211);
+            this.tabPageSlideShow.Size = new System.Drawing.Size(607, 258);
             this.tabPageSlideShow.TabIndex = 1;
             this.tabPageSlideShow.Text = "Diaschau";
             this.tabPageSlideShow.UseVisualStyleBackColor = true;
@@ -1678,18 +1742,17 @@
             this.tableLayoutPanel1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
                         | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
-            this.tableLayoutPanel1.BackColor = System.Drawing.Color.Transparent;
             this.tableLayoutPanel1.ColumnCount = 1;
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.tableLayoutPanel1.Controls.Add(this.panel1, 0, 1);
             this.tableLayoutPanel1.Controls.Add(this.tabControlTextLayer, 0, 0);
-            this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 128);
+            this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 98);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 2;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(1008, 573);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(1008, 607);
             this.tableLayoutPanel1.TabIndex = 37;
             // 
             // panel1
@@ -1697,70 +1760,14 @@
             this.panel1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
                         | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
-            this.panel1.BackColor = System.Drawing.Color.Transparent;
-            this.panel1.Controls.Add(this.panel4);
-            this.panel1.Controls.Add(this.panel2);
+            this.panel1.BackColor = System.Drawing.SystemColors.Control;
             this.panel1.Controls.Add(this.tabControl2);
             this.panel1.Controls.Add(this.groupBox5);
             this.panel1.Controls.Add(this.groupBoxImageStack);
-            this.panel1.Location = new System.Drawing.Point(3, 289);
+            this.panel1.Location = new System.Drawing.Point(3, 306);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(1002, 281);
+            this.panel1.Size = new System.Drawing.Size(1002, 298);
             this.panel1.TabIndex = 36;
-            // 
-            // panel4
-            // 
-            this.panel4.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.panel4.BackColor = System.Drawing.Color.RoyalBlue;
-            this.panel4.BackgroundImage = global::Pbp.Properties.Resources.fade1blue;
-            this.panel4.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.panel4.Controls.Add(this.label15);
-            this.panel4.Location = new System.Drawing.Point(765, 0);
-            this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(237, 28);
-            this.panel4.TabIndex = 45;
-            // 
-            // label15
-            // 
-            this.label15.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.label15.AutoSize = true;
-            this.label15.BackColor = System.Drawing.Color.Transparent;
-            this.label15.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label15.ForeColor = System.Drawing.Color.White;
-            this.label15.Location = new System.Drawing.Point(2, -1);
-            this.label15.Name = "label15";
-            this.label15.Padding = new System.Windows.Forms.Padding(5, 5, 0, 0);
-            this.label15.Size = new System.Drawing.Size(108, 23);
-            this.label15.TabIndex = 43;
-            this.label15.Text = "Präsentation";
-            // 
-            // panel2
-            // 
-            this.panel2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
-            this.panel2.BackColor = System.Drawing.Color.RoyalBlue;
-            this.panel2.BackgroundImage = global::Pbp.Properties.Resources.fade1blue;
-            this.panel2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.panel2.Controls.Add(this.label13);
-            this.panel2.Location = new System.Drawing.Point(1, 0);
-            this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(758, 28);
-            this.panel2.TabIndex = 44;
-            // 
-            // label13
-            // 
-            this.label13.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
-            this.label13.AutoSize = true;
-            this.label13.BackColor = System.Drawing.Color.Transparent;
-            this.label13.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label13.ForeColor = System.Drawing.Color.White;
-            this.label13.Location = new System.Drawing.Point(2, -1);
-            this.label13.Name = "label13";
-            this.label13.Padding = new System.Windows.Forms.Padding(5, 5, 0, 0);
-            this.label13.Size = new System.Drawing.Size(100, 23);
-            this.label13.TabIndex = 43;
-            this.label13.Text = "Hintergrund";
             // 
             // groupBox5
             // 
@@ -1776,17 +1783,18 @@
             this.groupBox5.Controls.Add(this.progressBarTransition);
             this.groupBox5.Controls.Add(this.pictureBoxPreview);
             this.groupBox5.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.groupBox5.Location = new System.Drawing.Point(765, 34);
+            this.groupBox5.Location = new System.Drawing.Point(765, 12);
             this.groupBox5.Name = "groupBox5";
-            this.groupBox5.Size = new System.Drawing.Size(233, 244);
+            this.groupBox5.Size = new System.Drawing.Size(233, 283);
             this.groupBox5.TabIndex = 42;
+            this.groupBox5.TabStop = false;
             this.groupBox5.Text = "Projektion";
             // 
             // label6
             // 
             this.label6.AutoSize = true;
             this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label6.Location = new System.Drawing.Point(6, 187);
+            this.label6.Location = new System.Drawing.Point(6, 206);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(88, 13);
             this.label6.TabIndex = 42;
@@ -1795,7 +1803,7 @@
             // radioButtonFade3
             // 
             this.radioButtonFade3.AutoSize = true;
-            this.radioButtonFade3.Location = new System.Drawing.Point(156, 208);
+            this.radioButtonFade3.Location = new System.Drawing.Point(156, 227);
             this.radioButtonFade3.Name = "radioButtonFade3";
             this.radioButtonFade3.Size = new System.Drawing.Size(75, 17);
             this.radioButtonFade3.TabIndex = 41;
@@ -1807,7 +1815,7 @@
             // radioButtonFade2
             // 
             this.radioButtonFade2.AutoSize = true;
-            this.radioButtonFade2.Location = new System.Drawing.Point(97, 208);
+            this.radioButtonFade2.Location = new System.Drawing.Point(97, 227);
             this.radioButtonFade2.Name = "radioButtonFade2";
             this.radioButtonFade2.Size = new System.Drawing.Size(56, 17);
             this.radioButtonFade2.TabIndex = 40;
@@ -1820,7 +1828,7 @@
             // 
             this.radioButtonFade1.AutoSize = true;
             this.radioButtonFade1.Checked = true;
-            this.radioButtonFade1.Location = new System.Drawing.Point(156, 185);
+            this.radioButtonFade1.Location = new System.Drawing.Point(156, 204);
             this.radioButtonFade1.Name = "radioButtonFade1";
             this.radioButtonFade1.Size = new System.Drawing.Size(67, 17);
             this.radioButtonFade1.TabIndex = 39;
@@ -1833,7 +1841,7 @@
             // radioButtonFade0
             // 
             this.radioButtonFade0.AutoSize = true;
-            this.radioButtonFade0.Location = new System.Drawing.Point(97, 185);
+            this.radioButtonFade0.Location = new System.Drawing.Point(97, 204);
             this.radioButtonFade0.Name = "radioButtonFade0";
             this.radioButtonFade0.Size = new System.Drawing.Size(59, 17);
             this.radioButtonFade0.TabIndex = 38;
@@ -1866,7 +1874,7 @@
             // 
             // progressBarTransition
             // 
-            this.progressBarTransition.Location = new System.Drawing.Point(6, 170);
+            this.progressBarTransition.Location = new System.Drawing.Point(6, 188);
             this.progressBarTransition.Name = "progressBarTransition";
             this.progressBarTransition.Size = new System.Drawing.Size(220, 10);
             this.progressBarTransition.Step = 1;
@@ -1876,7 +1884,7 @@
             // 
             this.pictureBoxPreview.BackColor = System.Drawing.Color.Black;
             this.pictureBoxPreview.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pictureBoxPreview.Location = new System.Drawing.Point(6, 3);
+            this.pictureBoxPreview.Location = new System.Drawing.Point(6, 19);
             this.pictureBoxPreview.Name = "pictureBoxPreview";
             this.pictureBoxPreview.Size = new System.Drawing.Size(220, 165);
             this.pictureBoxPreview.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -1890,9 +1898,9 @@
             this.groupBoxImageStack.Controls.Add(this.listViewImageQueue);
             this.groupBoxImageStack.Controls.Add(this.buttonResetImageQueue);
             this.groupBoxImageStack.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.groupBoxImageStack.Location = new System.Drawing.Point(625, 41);
+            this.groupBoxImageStack.Location = new System.Drawing.Point(625, 12);
             this.groupBoxImageStack.Name = "groupBoxImageStack";
-            this.groupBoxImageStack.Size = new System.Drawing.Size(134, 235);
+            this.groupBoxImageStack.Size = new System.Drawing.Size(134, 283);
             this.groupBoxImageStack.TabIndex = 35;
             this.groupBoxImageStack.TabStop = false;
             this.groupBoxImageStack.Text = "Stapel";
@@ -1907,7 +1915,7 @@
             this.listViewImageQueue.Location = new System.Drawing.Point(7, 19);
             this.listViewImageQueue.MultiSelect = false;
             this.listViewImageQueue.Name = "listViewImageQueue";
-            this.listViewImageQueue.Size = new System.Drawing.Size(121, 183);
+            this.listViewImageQueue.Size = new System.Drawing.Size(121, 231);
             this.listViewImageQueue.TabIndex = 29;
             this.listViewImageQueue.UseCompatibleStateImageBehavior = false;
             this.listViewImageQueue.View = System.Windows.Forms.View.Tile;
@@ -1920,7 +1928,7 @@
             // 
             this.buttonResetImageQueue.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.buttonResetImageQueue.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.buttonResetImageQueue.Location = new System.Drawing.Point(7, 206);
+            this.buttonResetImageQueue.Location = new System.Drawing.Point(7, 254);
             this.buttonResetImageQueue.Name = "buttonResetImageQueue";
             this.buttonResetImageQueue.Size = new System.Drawing.Size(121, 23);
             this.buttonResetImageQueue.TabIndex = 33;
@@ -1933,140 +1941,11 @@
             this.timerElementHighlight.Interval = 250;
             this.timerElementHighlight.Tick += new System.EventHandler(this.timerSearchBoxHL_Tick);
             // 
-            // panel3
-            // 
-            this.panel3.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
-            this.panel3.BackColor = System.Drawing.Color.RoyalBlue;
-            this.panel3.BackgroundImage = global::Pbp.Properties.Resources.fade1blue;
-            this.panel3.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.panel3.Controls.Add(this.label14);
-            this.panel3.Location = new System.Drawing.Point(3, 98);
-            this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(1002, 28);
-            this.panel3.TabIndex = 45;
-            // 
-            // label14
-            // 
-            this.label14.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
-            this.label14.AutoSize = true;
-            this.label14.BackColor = System.Drawing.Color.Transparent;
-            this.label14.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label14.ForeColor = System.Drawing.Color.White;
-            this.label14.Location = new System.Drawing.Point(2, -1);
-            this.label14.Name = "label14";
-            this.label14.Padding = new System.Windows.Forms.Padding(5, 5, 0, 0);
-            this.label14.Size = new System.Drawing.Size(105, 23);
-            this.label14.TabIndex = 43;
-            this.label14.Text = "Vordergrund";
-            // 
-            // backgrundImageBrowser1
-            // 
-            this.backgrundImageBrowser1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
-            this.backgrundImageBrowser1.AutoScroll = true;
-            this.backgrundImageBrowser1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.backgrundImageBrowser1.ImageSize = new System.Drawing.Size(80, 60);
-            this.backgrundImageBrowser1.Location = new System.Drawing.Point(234, 36);
-            this.backgrundImageBrowser1.Name = "backgrundImageBrowser1";
-            this.backgrundImageBrowser1.RootDirectory = null;
-            this.backgrundImageBrowser1.Size = new System.Drawing.Size(371, 175);
-            this.backgrundImageBrowser1.TabIndex = 27;
-            this.backgrundImageBrowser1.ImageSelected += new Pbp.Components.BackgrundImageBrowser.imageSelect(this.backgrundImageBrowser1_ImageSelected);
-            // 
-            // searchTextBoxImages
-            // 
-            this.searchTextBoxImages.Location = new System.Drawing.Point(0, 6);
-            this.searchTextBoxImages.Name = "searchTextBoxImages";
-            this.searchTextBoxImages.PlaceHolderText = "Bild suchen";
-            this.searchTextBoxImages.Size = new System.Drawing.Size(228, 24);
-            this.searchTextBoxImages.TabIndex = 26;
-            this.searchTextBoxImages.TextChanged += new Pbp.Components.SearchTextBox.textChange(this.searchTextBoxImages_TextChanged);
-            // 
-            // songDetailElement
-            // 
-            this.songDetailElement.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
-            this.songDetailElement.AutoScroll = true;
-            this.songDetailElement.BackColor = System.Drawing.Color.White;
-            this.songDetailElement.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.songDetailElement.ForeColor = System.Drawing.SystemColors.WindowText;
-            this.songDetailElement.Location = new System.Drawing.Point(6, 16);
-            this.songDetailElement.Name = "songDetailElement";
-            this.songDetailElement.Size = new System.Drawing.Size(474, 223);
-            this.songDetailElement.TabIndex = 20;
-            this.songDetailElement.SlideClicked += new SongDetails.SongDetail.slideClick(this.songDetailElement_SlideClicked);
-            this.songDetailElement.ImageClicked += new SongDetails.SongDetail.imageClick(this.songDetailElement_ImageClicked);
-            // 
-            // listViewSetList
-            // 
-            this.listViewSetList.AllowDrop = true;
-            this.listViewSetList.AllowRowReorder = true;
-            this.listViewSetList.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Right)));
-            this.listViewSetList.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
-            this.columnHeader4});
-            this.listViewSetList.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.listViewSetList.FullRowSelect = true;
-            this.listViewSetList.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.None;
-            this.listViewSetList.HideSelection = false;
-            this.listViewSetList.Location = new System.Drawing.Point(0, 1);
-            this.listViewSetList.MultiSelect = false;
-            this.listViewSetList.Name = "listViewSetList";
-            this.listViewSetList.Size = new System.Drawing.Size(241, 177);
-            this.listViewSetList.TabIndex = 27;
-            this.listViewSetList.UseCompatibleStateImageBehavior = false;
-            this.listViewSetList.View = System.Windows.Forms.View.Details;
-            this.listViewSetList.SelectedIndexChanged += new System.EventHandler(this.listViewSetList_SelectedIndexChanged);
-            // 
-            // songSearchTextBox
-            // 
-            this.songSearchTextBox.Location = new System.Drawing.Point(5, 16);
-            this.songSearchTextBox.Name = "songSearchTextBox";
-            this.songSearchTextBox.PlaceHolderText = "Lied suchen";
-            this.songSearchTextBox.Size = new System.Drawing.Size(235, 24);
-            this.songSearchTextBox.TabIndex = 22;
-            this.songSearchTextBox.TextChanged += new Pbp.Components.SearchTextBox.textChange(this.songSearchBox_TextChanged);
-            // 
-            // searchTextBoxBible
-            // 
-            this.searchTextBoxBible.Enabled = false;
-            this.searchTextBoxBible.Location = new System.Drawing.Point(9, 60);
-            this.searchTextBoxBible.Name = "searchTextBoxBible";
-            this.searchTextBoxBible.PlaceHolderText = "Bibelstelle";
-            this.searchTextBoxBible.Size = new System.Drawing.Size(148, 24);
-            this.searchTextBoxBible.TabIndex = 38;
-            this.searchTextBoxBible.TextChanged += new Pbp.Components.SearchTextBox.textChange(this.searchTextBoxBible_TextChanged);
-            // 
-            // listViewBibleVerseList
-            // 
-            this.listViewBibleVerseList.AllowDrop = true;
-            this.listViewBibleVerseList.AllowRowReorder = true;
-            this.listViewBibleVerseList.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Right)));
-            this.listViewBibleVerseList.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
-            this.columnHeader3});
-            this.listViewBibleVerseList.FullRowSelect = true;
-            this.listViewBibleVerseList.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.None;
-            this.listViewBibleVerseList.HideSelection = false;
-            this.listViewBibleVerseList.Location = new System.Drawing.Point(858, 33);
-            this.listViewBibleVerseList.MultiSelect = false;
-            this.listViewBibleVerseList.Name = "listViewBibleVerseList";
-            this.listViewBibleVerseList.Size = new System.Drawing.Size(126, 165);
-            this.listViewBibleVerseList.TabIndex = 28;
-            this.listViewBibleVerseList.UseCompatibleStateImageBehavior = false;
-            this.listViewBibleVerseList.View = System.Windows.Forms.View.Details;
-            this.listViewBibleVerseList.SelectedIndexChanged += new System.EventHandler(this.listViewBibleVerseList_SelectedIndexChanged);
-            // 
             // MainWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1008, 730);
-            this.Controls.Add(this.panel3);
             this.Controls.Add(this.tableLayoutPanel1);
             this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.toolStrip1);
@@ -2099,7 +1978,6 @@
             this.tabPage5.ResumeLayout(false);
             this.tabPage5.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown2)).EndInit();
-            this.tabPage7.ResumeLayout(false);
             this.tabControl2.ResumeLayout(false);
             this.tabPageImageBrowser.ResumeLayout(false);
             this.tabPageImageBrowser.PerformLayout();
@@ -2109,16 +1987,10 @@
             this.tabPageSlideShow.PerformLayout();
             this.tableLayoutPanel1.ResumeLayout(false);
             this.panel1.ResumeLayout(false);
-            this.panel4.ResumeLayout(false);
-            this.panel4.PerformLayout();
-            this.panel2.ResumeLayout(false);
-            this.panel2.PerformLayout();
             this.groupBox5.ResumeLayout(false);
             this.groupBox5.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxPreview)).EndInit();
             this.groupBoxImageStack.ResumeLayout(false);
-            this.panel3.ResumeLayout(false);
-            this.panel3.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -2201,7 +2073,8 @@
 		private System.Windows.Forms.ListView listViewImageHistory;
 		private System.Windows.Forms.ColumnHeader columnHeader5;
         private System.Windows.Forms.TabPage tabPageImageBrowser;
-        private System.Windows.Forms.TreeView treeViewImageDirectories;
+		private System.Windows.Forms.TreeView treeViewImageDirectories;
+        private System.Windows.Forms.ListView listViewDirectoryImages;
 		private System.Windows.Forms.Label labelImgDirName;
         private System.Windows.Forms.Button buttonClearImageHistory;
         private System.Windows.Forms.ListView listViewFavorites;
@@ -2239,7 +2112,7 @@
         private System.Windows.Forms.Button buttonSetListRem;
         private System.Windows.Forms.Button buttonSetListDown;
         private System.Windows.Forms.Button buttonSetListUp;
-        private System.Windows.Forms.Panel groupBox5;
+        private System.Windows.Forms.GroupBox groupBox5;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Button buttonToggleLayerMode;
         private System.Windows.Forms.ProgressBar progressBarTransition;
@@ -2283,15 +2156,6 @@
         private System.Windows.Forms.CheckBox checkBoxBibleShowVerseFromListDirectly;
         private Components.SearchTextBox searchTextBoxBible;
         private System.Windows.Forms.Label labelBibleSearchMsg;
-        private System.Windows.Forms.TabPage tabPage7;
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Label label13;
-        private Components.BackgrundImageBrowser backgrundImageBrowser1;
-        private System.Windows.Forms.Panel panel2;
-        private System.Windows.Forms.Panel panel3;
-        private System.Windows.Forms.Label label14;
-        private System.Windows.Forms.Panel panel4;
-        private System.Windows.Forms.Label label15;
         
     }
 }

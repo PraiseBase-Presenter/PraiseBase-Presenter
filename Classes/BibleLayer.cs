@@ -61,9 +61,9 @@ namespace Pbp
             else
                 y = padding;
 
-            gr.DrawString(Title, titleFont, fontBrush, new Point(x, y), strFormat);
+            drawString(gr, Title, x, y, titleFont, fontBrush, strFormat);
             y += (int)coveredTitleArea.Height + 20;
-            
+
             foreach (string l in lines)
             {
                 SizeF lm = gr.MeasureString(l, font);
@@ -72,12 +72,15 @@ namespace Pbp
                 {
                     int nc = l.Length / ((int)Math.Ceiling(lm.Width / (float)(w - padding)));
                     string s = string.Join(Environment.NewLine, Util.Wrap(l, nc)).Trim();
-                    gr.DrawString(s, font, fontBrush, new Point(x, y), strFormat);
+
+                    drawString(gr, s, x, y, font, fontBrush, strFormat);
+
                     y += (int)gr.MeasureString(s, font).Height + Settings.Default.ProjectionMasterLineSpacing;
                 }
                 else
                 {
-                    gr.DrawString(l, font, fontBrush, new Point(x, y), strFormat);
+                    drawString(gr, l, x, y, font, fontBrush, strFormat);                   
+                    
                     y += (int)lm.Height + Settings.Default.ProjectionMasterLineSpacing;
                 }
             }
