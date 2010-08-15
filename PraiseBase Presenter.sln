@@ -1,0 +1,24 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PraiseBase Presenter", "Presenter\PraiseBase Presenter.csproj", "{33D2BC6A-0AD1-4E2E-AF35-FFFB744F22C6}"
+EndProject
+Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "PraiseBase Presenter Setup", "Setup\PBP Setup.vdproj", "{CEE0B9EB-5445-43AE-A9BB-95CA7FFB27D1}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{33D2BC6A-0AD1-4E2E-AF35-FFFB744F22C6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{33D2BC6A-0AD1-4E2E-AF35-FFFB744F22C6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{33D2BC6A-0AD1-4E2E-AF35-FFFB744F22C6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{33D2BC6A-0AD1-4E2E-AF35-FFFB744F22C6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CEE0B9EB-5445-43AE-A9BB-95CA7FFB27D1}.Debug|Any CPU.ActiveCfg = Debug
+		{CEE0B9EB-5445-43AE-A9BB-95CA7FFB27D1}.Release|Any CPU.ActiveCfg = Release
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
