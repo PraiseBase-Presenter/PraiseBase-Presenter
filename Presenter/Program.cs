@@ -108,7 +108,7 @@ namespace Pbp
             
 			Console.WriteLine("Loading took " + (DateTime.Now - startTime).TotalSeconds + " seconds!");
 
-			Application.Run(MainWindow.getInstance());
+			Application.Run(MainWindow.Instance);
 
             GC.KeepAlive(mutex);
 

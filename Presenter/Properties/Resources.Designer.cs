@@ -81,6 +81,13 @@ namespace Pbp.Properties {
             }
         }
         
+        internal static System.Drawing.Bitmap AJ_Portable_Projection_Screen {
+            get {
+                object obj = ResourceManager.GetObject("AJ_Portable_Projection_Screen", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
         internal static System.Drawing.Bitmap arrowdown {
             get {
                 object obj = ResourceManager.GetObject("arrowdown", resourceCulture);
@@ -344,6 +351,13 @@ namespace Pbp.Properties {
         internal static System.Drawing.Bitmap love {
             get {
                 object obj = ResourceManager.GetObject("love", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap monitor_256 {
+            get {
+                object obj = ResourceManager.GetObject("monitor_256", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

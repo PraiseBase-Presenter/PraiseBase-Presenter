@@ -131,14 +131,14 @@ namespace Pbp.Forms
                 int x = (int)(opCounter * 100);
                 if (pbi++ % 10 == 0)
                 {
-                    MainWindow.getInstance().setProgessBarTransitionValue(x);
+                    MainWindow.Instance.setProgessBarTransitionValue(x);
                 }
             }
 			else
 			{
 				projectionImage.Opacity = 1f;
 				projectionImageBack.Source = projectionImage.Source;
-				MainWindow.getInstance().setProgessBarTransitionValue(0);
+				MainWindow.Instance.setProgessBarTransitionValue(0);
                 pbi = 0;
 				tmr.Stop();
 			}
