@@ -83,6 +83,7 @@ namespace Pbp.Forms
             h = this.Height;
             w = this.Width;
 			//showNone();
+
         }
 
         /**
@@ -168,11 +169,16 @@ namespace Pbp.Forms
 
         private void projectionWindow_Paint(object sender, PaintEventArgs e)
         {
-			projectionControlHost.Top = 0;
-			projectionControlHost.Left = 0;
-			projectionControlHost.Width = this.Width;
-			projectionControlHost.Height = this.Height;
-			projectionControlHost.Visible = true;
+			//projectionControlHost.Top = 0;
+			//projectionControlHost.Left = 0;
+			//projectionControlHost.Width = this.Width;
+			//projectionControlHost.Height = this.Height;
+			//projectionControlHost.Visible = true;
+        }
+
+        private void projectionControlHost_ChildChanged(object sender, ChildChangedEventArgs e)
+        {
+
         }
     }
 }
