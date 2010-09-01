@@ -95,9 +95,12 @@
             this.tabControlTextLayer = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.groupBoxSongContents = new System.Windows.Forms.GroupBox();
+            this.songDetailElement = new SongDetails.SongDetail();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage3 = new System.Windows.Forms.TabPage();
             this.buttonOpenSetList = new System.Windows.Forms.Button();
+            this.listViewSetList = new Bol.WinControls.ListViewEx();
+            this.columnHeader4 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.buttonSaveSetList = new System.Windows.Forms.Button();
             this.buttonSetListAdd = new System.Windows.Forms.Button();
             this.buttonSetListUp = new System.Windows.Forms.Button();
@@ -108,6 +111,7 @@
             this.listViewSongHistory = new System.Windows.Forms.ListView();
             this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.songSearchTextBox = new Pbp.Components.SearchTextBox();
             this.listViewSongs = new System.Windows.Forms.ListView();
             this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.radioSongSearchAll = new System.Windows.Forms.RadioButton();
@@ -127,6 +131,9 @@
             this.buttonAddToBibleVerseList = new System.Windows.Forms.Button();
             this.buttonRemoveFromBibleVerseList = new System.Windows.Forms.Button();
             this.label12 = new System.Windows.Forms.Label();
+            this.searchTextBoxBible = new Pbp.Components.SearchTextBox();
+            this.listViewBibleVerseList = new Bol.WinControls.ListViewEx();
+            this.columnHeader3 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.label11 = new System.Windows.Forms.Label();
             this.label10 = new System.Windows.Forms.Label();
             this.numericUpDown2 = new System.Windows.Forms.NumericUpDown();
@@ -145,6 +152,7 @@
             this.comboBoxBible = new System.Windows.Forms.ComboBox();
             this.tabControl2 = new System.Windows.Forms.TabControl();
             this.tabPageImageBrowser = new System.Windows.Forms.TabPage();
+            this.searchTextBoxImages = new Pbp.Components.SearchTextBox();
             this.treeViewImageDirectories = new System.Windows.Forms.TreeView();
             this.listViewDirectoryImages = new System.Windows.Forms.ListView();
             this.labelImgDirName = new System.Windows.Forms.Label();
@@ -167,11 +175,9 @@
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.panel1 = new System.Windows.Forms.Panel();
             this.groupBox5 = new System.Windows.Forms.GroupBox();
+            this.labelFadeTime = new System.Windows.Forms.Label();
+            this.trackBarFadeTime = new System.Windows.Forms.TrackBar();
             this.label6 = new System.Windows.Forms.Label();
-            this.radioButtonFade3 = new System.Windows.Forms.RadioButton();
-            this.radioButtonFade2 = new System.Windows.Forms.RadioButton();
-            this.radioButtonFade1 = new System.Windows.Forms.RadioButton();
-            this.radioButtonFade0 = new System.Windows.Forms.RadioButton();
             this.label3 = new System.Windows.Forms.Label();
             this.buttonToggleLayerMode = new System.Windows.Forms.Button();
             this.progressBarTransition = new System.Windows.Forms.ProgressBar();
@@ -181,14 +187,6 @@
             this.columnHeader6 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.buttonResetImageQueue = new System.Windows.Forms.Button();
             this.timerElementHighlight = new System.Windows.Forms.Timer(this.components);
-            this.searchTextBoxImages = new Pbp.Components.SearchTextBox();
-            this.songDetailElement = new SongDetails.SongDetail();
-            this.listViewSetList = new Bol.WinControls.ListViewEx();
-            this.columnHeader4 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.songSearchTextBox = new Pbp.Components.SearchTextBox();
-            this.searchTextBoxBible = new Pbp.Components.SearchTextBox();
-            this.listViewBibleVerseList = new Bol.WinControls.ListViewEx();
-            this.columnHeader3 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             buttonChooseDiaDir = new System.Windows.Forms.Button();
             this.menuStrip1.SuspendLayout();
             this.toolStrip1.SuspendLayout();
@@ -212,6 +210,7 @@
             this.tableLayoutPanel1.SuspendLayout();
             this.panel1.SuspendLayout();
             this.groupBox5.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.trackBarFadeTime)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxPreview)).BeginInit();
             this.groupBoxImageStack.SuspendLayout();
             this.SuspendLayout();
@@ -789,6 +788,22 @@
             this.groupBoxSongContents.TabStop = false;
             this.groupBoxSongContents.Text = "Liedinhalt";
             // 
+            // songDetailElement
+            // 
+            this.songDetailElement.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+                        | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.songDetailElement.AutoScroll = true;
+            this.songDetailElement.BackColor = System.Drawing.Color.White;
+            this.songDetailElement.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.songDetailElement.ForeColor = System.Drawing.SystemColors.WindowText;
+            this.songDetailElement.Location = new System.Drawing.Point(6, 16);
+            this.songDetailElement.Name = "songDetailElement";
+            this.songDetailElement.Size = new System.Drawing.Size(474, 240);
+            this.songDetailElement.TabIndex = 20;
+            this.songDetailElement.SlideClicked += new SongDetails.SongDetail.slideClick(this.songDetailElement_SlideClicked);
+            this.songDetailElement.ImageClicked += new SongDetails.SongDetail.imageClick(this.songDetailElement_ImageClicked);
+            // 
             // tabControl1
             // 
             this.tabControl1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
@@ -831,6 +846,27 @@
             this.buttonOpenSetList.TabIndex = 31;
             this.buttonOpenSetList.UseVisualStyleBackColor = true;
             this.buttonOpenSetList.Click += new System.EventHandler(this.buttonOpenSetList_Click);
+            // 
+            // listViewSetList
+            // 
+            this.listViewSetList.AllowDrop = true;
+            this.listViewSetList.AllowRowReorder = true;
+            this.listViewSetList.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.listViewSetList.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.columnHeader4});
+            this.listViewSetList.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.listViewSetList.FullRowSelect = true;
+            this.listViewSetList.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.None;
+            this.listViewSetList.HideSelection = false;
+            this.listViewSetList.Location = new System.Drawing.Point(0, 1);
+            this.listViewSetList.MultiSelect = false;
+            this.listViewSetList.Name = "listViewSetList";
+            this.listViewSetList.Size = new System.Drawing.Size(241, 194);
+            this.listViewSetList.TabIndex = 27;
+            this.listViewSetList.UseCompatibleStateImageBehavior = false;
+            this.listViewSetList.View = System.Windows.Forms.View.Details;
+            this.listViewSetList.SelectedIndexChanged += new System.EventHandler(this.listViewSetList_SelectedIndexChanged);
             // 
             // buttonSaveSetList
             // 
@@ -959,6 +995,15 @@
             this.groupBox2.TabIndex = 19;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Liederliste";
+            // 
+            // songSearchTextBox
+            // 
+            this.songSearchTextBox.Location = new System.Drawing.Point(5, 16);
+            this.songSearchTextBox.Name = "songSearchTextBox";
+            this.songSearchTextBox.PlaceHolderText = "Lied suchen";
+            this.songSearchTextBox.Size = new System.Drawing.Size(235, 24);
+            this.songSearchTextBox.TabIndex = 22;
+            this.songSearchTextBox.TextChanged += new Pbp.Components.SearchTextBox.textChange(this.songSearchBox_TextChanged);
             // 
             // listViewSongs
             // 
@@ -1218,6 +1263,36 @@
             this.label12.TabIndex = 29;
             this.label12.Text = "Vers-Liste:";
             // 
+            // searchTextBoxBible
+            // 
+            this.searchTextBoxBible.Enabled = false;
+            this.searchTextBoxBible.Location = new System.Drawing.Point(9, 60);
+            this.searchTextBoxBible.Name = "searchTextBoxBible";
+            this.searchTextBoxBible.PlaceHolderText = "Bibelstelle";
+            this.searchTextBoxBible.Size = new System.Drawing.Size(148, 24);
+            this.searchTextBoxBible.TabIndex = 38;
+            this.searchTextBoxBible.TextChanged += new Pbp.Components.SearchTextBox.textChange(this.searchTextBoxBible_TextChanged);
+            // 
+            // listViewBibleVerseList
+            // 
+            this.listViewBibleVerseList.AllowDrop = true;
+            this.listViewBibleVerseList.AllowRowReorder = true;
+            this.listViewBibleVerseList.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.listViewBibleVerseList.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.columnHeader3});
+            this.listViewBibleVerseList.FullRowSelect = true;
+            this.listViewBibleVerseList.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.None;
+            this.listViewBibleVerseList.HideSelection = false;
+            this.listViewBibleVerseList.Location = new System.Drawing.Point(858, 33);
+            this.listViewBibleVerseList.MultiSelect = false;
+            this.listViewBibleVerseList.Name = "listViewBibleVerseList";
+            this.listViewBibleVerseList.Size = new System.Drawing.Size(126, 165);
+            this.listViewBibleVerseList.TabIndex = 28;
+            this.listViewBibleVerseList.UseCompatibleStateImageBehavior = false;
+            this.listViewBibleVerseList.View = System.Windows.Forms.View.Details;
+            this.listViewBibleVerseList.SelectedIndexChanged += new System.EventHandler(this.listViewBibleVerseList_SelectedIndexChanged);
+            // 
             // label11
             // 
             this.label11.AutoSize = true;
@@ -1430,6 +1505,15 @@
             this.tabPageImageBrowser.TabIndex = 0;
             this.tabPageImageBrowser.Text = "Bildsammlung";
             this.tabPageImageBrowser.UseVisualStyleBackColor = true;
+            // 
+            // searchTextBoxImages
+            // 
+            this.searchTextBoxImages.Location = new System.Drawing.Point(0, 6);
+            this.searchTextBoxImages.Name = "searchTextBoxImages";
+            this.searchTextBoxImages.PlaceHolderText = "Bild suchen";
+            this.searchTextBoxImages.Size = new System.Drawing.Size(228, 24);
+            this.searchTextBoxImages.TabIndex = 26;
+            this.searchTextBoxImages.TextChanged += new Pbp.Components.SearchTextBox.textChange(this.searchTextBoxImages_TextChanged);
             // 
             // treeViewImageDirectories
             // 
@@ -1688,11 +1772,9 @@
             // 
             this.groupBox5.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
                         | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupBox5.Controls.Add(this.labelFadeTime);
+            this.groupBox5.Controls.Add(this.trackBarFadeTime);
             this.groupBox5.Controls.Add(this.label6);
-            this.groupBox5.Controls.Add(this.radioButtonFade3);
-            this.groupBox5.Controls.Add(this.radioButtonFade2);
-            this.groupBox5.Controls.Add(this.radioButtonFade1);
-            this.groupBox5.Controls.Add(this.radioButtonFade0);
             this.groupBox5.Controls.Add(this.label3);
             this.groupBox5.Controls.Add(this.buttonToggleLayerMode);
             this.groupBox5.Controls.Add(this.progressBarTransition);
@@ -1705,6 +1787,25 @@
             this.groupBox5.TabStop = false;
             this.groupBox5.Text = "Projektion";
             // 
+            // labelFadeTime
+            // 
+            this.labelFadeTime.AutoSize = true;
+            this.labelFadeTime.Location = new System.Drawing.Point(192, 206);
+            this.labelFadeTime.Name = "labelFadeTime";
+            this.labelFadeTime.Size = new System.Drawing.Size(11, 13);
+            this.labelFadeTime.TabIndex = 44;
+            this.labelFadeTime.Text = "-";
+            // 
+            // trackBarFadeTime
+            // 
+            this.trackBarFadeTime.LargeChange = 1;
+            this.trackBarFadeTime.Location = new System.Drawing.Point(91, 204);
+            this.trackBarFadeTime.Name = "trackBarFadeTime";
+            this.trackBarFadeTime.Size = new System.Drawing.Size(95, 45);
+            this.trackBarFadeTime.TabIndex = 43;
+            this.trackBarFadeTime.Value = 1;
+            this.trackBarFadeTime.Scroll += new System.EventHandler(this.trackBarFadeTime_Scroll);
+            // 
             // label6
             // 
             this.label6.AutoSize = true;
@@ -1714,56 +1815,6 @@
             this.label6.Size = new System.Drawing.Size(88, 13);
             this.label6.TabIndex = 42;
             this.label6.Text = "Geschwindigkeit:";
-            // 
-            // radioButtonFade3
-            // 
-            this.radioButtonFade3.AutoSize = true;
-            this.radioButtonFade3.Location = new System.Drawing.Point(156, 227);
-            this.radioButtonFade3.Name = "radioButtonFade3";
-            this.radioButtonFade3.Size = new System.Drawing.Size(75, 17);
-            this.radioButtonFade3.TabIndex = 41;
-            this.radioButtonFade3.Tag = "3";
-            this.radioButtonFade3.Text = "Langsam";
-            this.radioButtonFade3.UseVisualStyleBackColor = true;
-            this.radioButtonFade3.CheckedChanged += new System.EventHandler(this.radioButtonFade0_CheckedChanged);
-            // 
-            // radioButtonFade2
-            // 
-            this.radioButtonFade2.AutoSize = true;
-            this.radioButtonFade2.Location = new System.Drawing.Point(97, 227);
-            this.radioButtonFade2.Name = "radioButtonFade2";
-            this.radioButtonFade2.Size = new System.Drawing.Size(56, 17);
-            this.radioButtonFade2.TabIndex = 40;
-            this.radioButtonFade2.Tag = "2";
-            this.radioButtonFade2.Text = "Mittel";
-            this.radioButtonFade2.UseVisualStyleBackColor = true;
-            this.radioButtonFade2.CheckedChanged += new System.EventHandler(this.radioButtonFade0_CheckedChanged);
-            // 
-            // radioButtonFade1
-            // 
-            this.radioButtonFade1.AutoSize = true;
-            this.radioButtonFade1.Checked = true;
-            this.radioButtonFade1.Location = new System.Drawing.Point(156, 204);
-            this.radioButtonFade1.Name = "radioButtonFade1";
-            this.radioButtonFade1.Size = new System.Drawing.Size(67, 17);
-            this.radioButtonFade1.TabIndex = 39;
-            this.radioButtonFade1.TabStop = true;
-            this.radioButtonFade1.Tag = "1";
-            this.radioButtonFade1.Text = "Schnell";
-            this.radioButtonFade1.UseVisualStyleBackColor = true;
-            this.radioButtonFade1.CheckedChanged += new System.EventHandler(this.radioButtonFade0_CheckedChanged);
-            // 
-            // radioButtonFade0
-            // 
-            this.radioButtonFade0.AutoSize = true;
-            this.radioButtonFade0.Location = new System.Drawing.Point(97, 204);
-            this.radioButtonFade0.Name = "radioButtonFade0";
-            this.radioButtonFade0.Size = new System.Drawing.Size(59, 17);
-            this.radioButtonFade0.TabIndex = 38;
-            this.radioButtonFade0.Tag = "0";
-            this.radioButtonFade0.Text = "Sofort";
-            this.radioButtonFade0.UseVisualStyleBackColor = true;
-            this.radioButtonFade0.CheckedChanged += new System.EventHandler(this.radioButtonFade0_CheckedChanged);
             // 
             // label3
             // 
@@ -1856,91 +1907,6 @@
             this.timerElementHighlight.Interval = 250;
             this.timerElementHighlight.Tick += new System.EventHandler(this.timerSearchBoxHL_Tick);
             // 
-            // searchTextBoxImages
-            // 
-            this.searchTextBoxImages.Location = new System.Drawing.Point(0, 6);
-            this.searchTextBoxImages.Name = "searchTextBoxImages";
-            this.searchTextBoxImages.PlaceHolderText = "Bild suchen";
-            this.searchTextBoxImages.Size = new System.Drawing.Size(228, 24);
-            this.searchTextBoxImages.TabIndex = 26;
-            this.searchTextBoxImages.TextChanged += new Pbp.Components.SearchTextBox.textChange(this.searchTextBoxImages_TextChanged);
-            // 
-            // songDetailElement
-            // 
-            this.songDetailElement.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
-            this.songDetailElement.AutoScroll = true;
-            this.songDetailElement.BackColor = System.Drawing.Color.White;
-            this.songDetailElement.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.songDetailElement.ForeColor = System.Drawing.SystemColors.WindowText;
-            this.songDetailElement.Location = new System.Drawing.Point(6, 16);
-            this.songDetailElement.Name = "songDetailElement";
-            this.songDetailElement.Size = new System.Drawing.Size(474, 240);
-            this.songDetailElement.TabIndex = 20;
-            this.songDetailElement.SlideClicked += new SongDetails.SongDetail.slideClick(this.songDetailElement_SlideClicked);
-            this.songDetailElement.ImageClicked += new SongDetails.SongDetail.imageClick(this.songDetailElement_ImageClicked);
-            // 
-            // listViewSetList
-            // 
-            this.listViewSetList.AllowDrop = true;
-            this.listViewSetList.AllowRowReorder = true;
-            this.listViewSetList.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Right)));
-            this.listViewSetList.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
-            this.columnHeader4});
-            this.listViewSetList.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.listViewSetList.FullRowSelect = true;
-            this.listViewSetList.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.None;
-            this.listViewSetList.HideSelection = false;
-            this.listViewSetList.Location = new System.Drawing.Point(0, 1);
-            this.listViewSetList.MultiSelect = false;
-            this.listViewSetList.Name = "listViewSetList";
-            this.listViewSetList.Size = new System.Drawing.Size(241, 194);
-            this.listViewSetList.TabIndex = 27;
-            this.listViewSetList.UseCompatibleStateImageBehavior = false;
-            this.listViewSetList.View = System.Windows.Forms.View.Details;
-            this.listViewSetList.SelectedIndexChanged += new System.EventHandler(this.listViewSetList_SelectedIndexChanged);
-            // 
-            // songSearchTextBox
-            // 
-            this.songSearchTextBox.Location = new System.Drawing.Point(5, 16);
-            this.songSearchTextBox.Name = "songSearchTextBox";
-            this.songSearchTextBox.PlaceHolderText = "Lied suchen";
-            this.songSearchTextBox.Size = new System.Drawing.Size(235, 24);
-            this.songSearchTextBox.TabIndex = 22;
-            this.songSearchTextBox.TextChanged += new Pbp.Components.SearchTextBox.textChange(this.songSearchBox_TextChanged);
-            // 
-            // searchTextBoxBible
-            // 
-            this.searchTextBoxBible.Enabled = false;
-            this.searchTextBoxBible.Location = new System.Drawing.Point(9, 60);
-            this.searchTextBoxBible.Name = "searchTextBoxBible";
-            this.searchTextBoxBible.PlaceHolderText = "Bibelstelle";
-            this.searchTextBoxBible.Size = new System.Drawing.Size(148, 24);
-            this.searchTextBoxBible.TabIndex = 38;
-            this.searchTextBoxBible.TextChanged += new Pbp.Components.SearchTextBox.textChange(this.searchTextBoxBible_TextChanged);
-            // 
-            // listViewBibleVerseList
-            // 
-            this.listViewBibleVerseList.AllowDrop = true;
-            this.listViewBibleVerseList.AllowRowReorder = true;
-            this.listViewBibleVerseList.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Right)));
-            this.listViewBibleVerseList.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
-            this.columnHeader3});
-            this.listViewBibleVerseList.FullRowSelect = true;
-            this.listViewBibleVerseList.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.None;
-            this.listViewBibleVerseList.HideSelection = false;
-            this.listViewBibleVerseList.Location = new System.Drawing.Point(858, 33);
-            this.listViewBibleVerseList.MultiSelect = false;
-            this.listViewBibleVerseList.Name = "listViewBibleVerseList";
-            this.listViewBibleVerseList.Size = new System.Drawing.Size(126, 165);
-            this.listViewBibleVerseList.TabIndex = 28;
-            this.listViewBibleVerseList.UseCompatibleStateImageBehavior = false;
-            this.listViewBibleVerseList.View = System.Windows.Forms.View.Details;
-            this.listViewBibleVerseList.SelectedIndexChanged += new System.EventHandler(this.listViewBibleVerseList_SelectedIndexChanged);
-            // 
             // MainWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1989,6 +1955,7 @@
             this.panel1.ResumeLayout(false);
             this.groupBox5.ResumeLayout(false);
             this.groupBox5.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.trackBarFadeTime)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxPreview)).EndInit();
             this.groupBoxImageStack.ResumeLayout(false);
             this.ResumeLayout(false);
@@ -2117,10 +2084,6 @@
         private System.Windows.Forms.Button buttonToggleLayerMode;
         private System.Windows.Forms.ProgressBar progressBarTransition;
         private System.Windows.Forms.PictureBox pictureBoxPreview;
-        private System.Windows.Forms.RadioButton radioButtonFade3;
-        private System.Windows.Forms.RadioButton radioButtonFade2;
-        private System.Windows.Forms.RadioButton radioButtonFade1;
-        private System.Windows.Forms.RadioButton radioButtonFade0;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.NumericUpDown numericUpDown1;
@@ -2156,6 +2119,8 @@
         private System.Windows.Forms.CheckBox checkBoxBibleShowVerseFromListDirectly;
         private Components.SearchTextBox searchTextBoxBible;
         private System.Windows.Forms.Label labelBibleSearchMsg;
+        private System.Windows.Forms.Label labelFadeTime;
+        private System.Windows.Forms.TrackBar trackBarFadeTime;
         
     }
 }

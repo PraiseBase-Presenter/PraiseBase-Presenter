@@ -23,6 +23,22 @@ namespace Pbp
             
         }
 
+        public override List<TextBlock> getTextBlocks(Object[] args)
+        {
+            List<TextBlock> blocks = new List<TextBlock>();
+
+            TextBlock tb = new TextBlock();
+            tb.Margin = 50;
+            tb.Alignment = TextAlignment.MiddleCenter;
+            TextLine tl = new TextLine();
+            tl.Text = "Lorem ipsum dolor sit amet!";
+            tl.Font = Pbp.Properties.Settings.Default.ProjectionMasterFont;
+            tl.FontBrush = Brushes.Green;
+            tb.Lines.Add(tl);
+            blocks.Add(tb);
+            return blocks;
+        }
+
         public override void writeOut(System.Drawing.Graphics gr, object[] args, ProjectionMode pr)
         {
             XMLBible.VerseSelection v = (XMLBible.VerseSelection)args[0];

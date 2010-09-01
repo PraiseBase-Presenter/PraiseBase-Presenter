@@ -101,6 +101,10 @@
   <ItemGroup>
     <Compile Include="Classes\BaseLayer.cs" />
     <Compile Include="Classes\BibleLayer.cs" />
+    <Compile Include="Classes\ProjectionItem.cs" />
+    <Compile Include="Classes\TextAlignment.cs" />
+    <Compile Include="Classes\TextBlock.cs" />
+    <Compile Include="Classes\TextLine.cs" />
     <Compile Include="Classes\UpdateCheck.cs" />
     <Compile Include="Classes\XMLBible.cs" />
     <Compile Include="Classes\LiveText.cs" />
@@ -220,6 +224,8 @@
     <Compile Include="Forms\SongDialog.Designer.cs">
       <DependentUpon>SongDialog.cs</DependentUpon>
     </Compile>
+    <Compile Include="Classes\OutlinedText.cs" />
+    <Compile Include="Forms\CustomRender.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Components\BackgrundImageBrowser.resx">

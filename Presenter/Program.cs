@@ -91,7 +91,7 @@ namespace Pbp
 				SongManager.getInstance(ldg);
 
 				ldg.setLabel("Suche Projektionsschirm...");
-				projectionWindow.getInstance();
+                ProjectionWindow prjw = ProjectionWindow.Instance;
 
 				ldg.setLabel("Initialisiere Programmoberfläche...");
 				GC.Collect();
@@ -102,7 +102,7 @@ namespace Pbp
 			{
 				SongManager.getInstance();
 				ImageManager.Instance.checkThumbs();
-				projectionWindow.getInstance();
+                ProjectionWindow prjw = ProjectionWindow.Instance;
 				GC.Collect();
 			}
             

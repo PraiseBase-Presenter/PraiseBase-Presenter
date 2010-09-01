@@ -39,8 +39,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Windows.Threading;
-
-using Pbp.Properties;
+using System.Windows.Media.Animation;
 
 namespace Pbp.Forms
 {
@@ -49,159 +48,112 @@ namespace Pbp.Forms
 	/// </summary>
 	/// 
 
-	public partial class UserControl1 : UserControl
+	public partial class WPFProjectionControl : UserControl
 	{
-		DispatcherTimer tmr;
-		static UserControl1 instance;
-		private int fadeSteps;
-		float opCounter;
+        public System.Drawing.Color ProjectionBackgroundColor {get;set;}
 
-        bool isBlackout = false;
+        public delegate void animationFinish(object sender, EventArgs e);
+        public event animationFinish AnimationFinished;
 
-        int pbi = 0;
-
-		private UserControl1()
+        public WPFProjectionControl()
 		{
 			InitializeComponent();
-			tmr = new DispatcherTimer();
-            setFadeSteps(Settings.Default.ProjectionFadeTime);
-		}
-
-		static public UserControl1 getInstance()
-		{
-			if (instance == null)
-				instance = new UserControl1();
-			return instance;
-		}
+            ProjectionBackgroundColor = System.Drawing.Color.Black;
+        }
 
 		private void projectionControl_Loaded(object sender, RoutedEventArgs e)
 		{
-			System.Drawing.Bitmap bmp = new System.Drawing.Bitmap(1, 1);
+            System.Drawing.Bitmap bmp = new System.Drawing.Bitmap(1, 1);
 			System.Drawing.Graphics gr = System.Drawing.Graphics.FromImage(bmp);
-			gr.FillRectangle(new System.Drawing.SolidBrush(Settings.Default.ProjectionBackColor), 0, 0, 1, 1);
+            gr.FillRectangle(new System.Drawing.SolidBrush(ProjectionBackgroundColor), 0, 0, 1, 1);
 			blackoutImage.Source = loadBitmap(bmp);
             gr.Dispose();
-            blackoutImage.Opacity = isBlackout ? 100f : 0f;
+            blackoutImage.Opacity = 0f;
 		}
 
-		public static BitmapSource loadBitmap(System.Drawing.Bitmap source)
+        /// <summary>
+        /// Load a bitmap and convert it to a WPF image source
+        /// </summary>
+        /// <param name="source"></param>
+        /// <returns></returns>
+		protected static BitmapSource loadBitmap(System.Drawing.Bitmap source)
 		{
 			return System.Windows.Interop.Imaging.CreateBitmapSourceFromHBitmap(source.GetHbitmap(), IntPtr.Zero, Int32Rect.Empty,
 				System.Windows.Media.Imaging.BitmapSizeOptions.FromEmptyOptions());
 		}
 
-		public void setFadeSteps(int steps)
+        /// <summary>
+        /// Set a new image
+        /// </summary>
+        /// <param name="img">Image that will be shown</param>
+        /// <param name="fadeTime">Animation time in miliseconds</param>
+		public void setProjectionImage(System.Drawing.Bitmap img, int fadeTime)
 		{
-			steps = steps >= 0 ? steps : 0;
-
-            if (steps == 3)
-                fadeSteps = 100;
-            else if (steps == 2)
-                fadeSteps = 20;
-            else if (steps == 1)
-                fadeSteps = 3;
-            else
-                fadeSteps = 0;
-
-		}
-
-		public void setProjectionImage(System.Drawing.Bitmap img)
-		{
-			projectionImage.Opacity = 0f;
-			projectionImage.Source = loadBitmap(img);
-			opCounter = 0f;
-
-			if (tmr.IsEnabled)
-			{
-				tmr.Stop();
-			}
-			tmr = new DispatcherTimer();
-			tmr.Dispatcher.Thread.Priority = System.Threading.ThreadPriority.AboveNormal;
-			tmr.Interval = TimeSpan.FromMilliseconds(fadeSteps);
-			tmr.Tick += new EventHandler(tmr_Tick);
-			tmr.Start();
-		}
-
-		void tmr_Tick(object sender, EventArgs e)
-		{
-			if (projectionImage.Opacity < 1.0f)
-			{
-				opCounter += 0.02f;
-				projectionImage.Opacity = opCounter;
-                int x = (int)(opCounter * 100);
-                if (pbi++ % 10 == 0)
-                {
-                    MainWindow.Instance.setProgessBarTransitionValue(x);
-                }
-            }
-			else
-			{
-				projectionImage.Opacity = 1f;
-				projectionImageBack.Source = projectionImage.Source;
-				MainWindow.Instance.setProgessBarTransitionValue(0);
-                pbi = 0;
-				tmr.Stop();
-			}
-		}
-
-		public void blackOut(bool val,bool fade)
-		{
-            isBlackout = val;
-            if (fade)
+            if (fadeTime > 0)
             {
-                if (tmr.IsEnabled)
-                {
-                    tmr.Stop();
-                }
-                tmr = new DispatcherTimer();
-                tmr.Dispatcher.Thread.Priority = System.Threading.ThreadPriority.AboveNormal;
-                tmr.Interval = TimeSpan.FromMilliseconds(fadeSteps);
-                tmr.Tick += new EventHandler(tmr_blTick);
-
-                if (val)
-                {
-                    opCounter = 0f;
-                    blackoutImage.Opacity = 0f;
-                    tmr.Tag = 0.02f;
-                }
-                else
-                {
-                    opCounter = 1f;
-                    blackoutImage.Opacity = 1f;
-                    tmr.Tag = -0.02f;
-                }
-                tmr.Start();
+                projectionImage.Opacity = 0f;
+                projectionImage.Source = loadBitmap(img);
+                Storyboard ImageAnimation = (Storyboard)FindResource("imageAnimation");
+                ImageAnimation.SpeedRatio = 1000f / (float)fadeTime;
+                ImageAnimation.Begin(this);
             }
             else
             {
-                blackoutImage.Opacity = val ? 100 : 0;
+                projectionImage.Source = loadBitmap(img);
+                projectionImageBack.Source = projectionImage.Source;
             }
 		}
 
-		void tmr_blTick(object sender, EventArgs e)
-		{
-			if ((float)tmr.Tag > 0f && blackoutImage.Opacity <= 1.0f
-				|| (float)tmr.Tag < 0f && blackoutImage.Opacity >= 0.0f )
-			{
-				opCounter += (float)tmr.Tag;
-				blackoutImage.Opacity = opCounter;
-			}
-			else
-			{
-				tmr.Stop();
-			}
-		}
-
-        private void blackoutImage_ImageFailed(object sender, ExceptionRoutedEventArgs e)
+        /// <summary>
+        /// Fired when the animation is finished
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void DoubleAnimation_Completed(object sender, EventArgs e)
         {
-
+            projectionImageBack.Source = projectionImage.Source;
+            if (AnimationFinished != null)
+            {
+                AnimationFinished(this, new EventArgs());
+            }
         }
 
+        /// <summary>
+        /// Toggle blackout mode
+        /// </summary>
+        /// <param name="val">True if blackout should be enabled, else false</param>
+        /// <param name="animationTime">Animation duration in miliseconds</param>
+        public void blackOut(bool val, int animationTime)
+		{
+            System.Windows.Media.Animation.Storyboard blackoutAnimation = (System.Windows.Media.Animation.Storyboard)FindResource(val ? "blackoutAnimationOn" : "blackoutAnimationOff");
+            blackoutAnimation.SpeedRatio = (animationTime == 0 ? 100 : 1000f / (float)animationTime);
+            blackoutAnimation.Begin(this);
+		}
 
+        public void setText(List<TextBlock> textBlocks)
+        {
+            TextBlock bl = textBlocks[0];
+            String str = string.Empty;
+            for (int i=0;i<bl.Lines.Count;i++)
+            {
+                str += bl.Lines[i].Text + "\n"; ;
+            }
+            textBlock1.Text = str;
+            //textBlock1.Width = this.Width - (2 * textBlock1.Margin.Left);
+            //textBlock1.Height = this.Height - (2 * textBlock1.Margin.Top);
+        }
 
-
-
-
+        /*
+        TextContent.Text = "aasdfasdfasdf\naasdfasdfasdf\naasdfasdfasdf\naasdfasdfasdf\naasdfasdfasdf\n";
+        TextContent.Width = this.Width - (2 * TextContent.Margin.Left);
+        TextContent.Height = this.Height - (2 * TextContent.Margin.Top);
+        */
+        /*
+                    textBlock1.Text = "Animation: "+fadeTime+" ms";
+                    textBlock1.Visibility = System.Windows.Visibility.Visible;
+                    textBlock1.Width = this.Width - (2 * textBlock1.Margin.Left);
+                    textBlock1.Height = this.Height - (2 * textBlock1.Margin.Top);
+                    */
 	}
 }
 

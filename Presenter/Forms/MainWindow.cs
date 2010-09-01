@@ -55,11 +55,10 @@ namespace Pbp.Forms
 	/// </summary>
     public partial class MainWindow : Form
     {
-        private projectionWindow projWindow; // Todo: use singleton
+        private ProjectionWindow projWindow; // Todo: use singleton
 
         private Image currentBackground;
 
-		private Timer blackOutTimer;
         private Timer diaTimer;
 		private bool blackout;
         private List<String> imageSearchResults;
@@ -75,6 +74,7 @@ namespace Pbp.Forms
         }
 
         static private MainWindow instance;
+        static readonly object singletonPadlock = new object();
 
 		/// <summary>
 		/// Returns a singleton of mainWindow
@@ -84,9 +84,13 @@ namespace Pbp.Forms
 		{
             get 
             {
-                if (instance == null)
-                    instance = new MainWindow();
-                return instance;
+                // Thread safety
+                lock (singletonPadlock)
+                {
+                    if (instance == null)
+                        instance = new MainWindow();
+                    return instance;
+                }
             }
 		}
 
@@ -106,34 +110,23 @@ namespace Pbp.Forms
             bThread = new System.Threading.Thread(loadBibles);
             bThread.Name = "BibleLoader";
             bThread.Start();
-            
 
-            projWindow = projectionWindow.getInstance();
+
+            projWindow = ProjectionWindow.Instance;
 
 			this.WindowState = Settings.Default.ViewerWindowState;
             this.Text += " " + System.Reflection.Assembly.GetExecutingAssembly().GetName().Version.ToString();
 
             blackout = false;
-            blackOutTimer = new Timer(); // Timer anlegen
-            blackOutTimer.Interval = 500; // Intervall festlegen, hier 100 ms
-            blackOutTimer.Tick += new EventHandler(t1_Tick); // Eventhandler ezeugen der beim Timerablauf aufgerufen wird
 
             loadSongList();
             songSearchTextBox.Focus();
 
             imageTreeViewInit();
 
-            if (Settings.Default.ProjectionFadeTime==3)
-                radioButtonFade3.Checked = true;
-            else if (Settings.Default.ProjectionFadeTime == 2)
-                radioButtonFade2.Checked = true;
-            else if (Settings.Default.ProjectionFadeTime == 1)
-                radioButtonFade1.Checked = true;
-            else
-                radioButtonFade0.Checked = true;
+            trackBarFadeTime.Value = Settings.Default.ProjectionFadeTime / 500;
+            labelFadeTime.Text = ((float)trackBarFadeTime.Value * 0.5).ToString() + " s";
 
-			
-			UserControl1.getInstance().setFadeSteps(Settings.Default.ProjectionFadeTime);
 
             linkLayers = Settings.Default.LinkLayers;
             setLinkLayerUI();
@@ -226,7 +219,7 @@ namespace Pbp.Forms
 				projWindow.Hide();
                 if (blackout)
                 {
-                    UserControl1.getInstance().blackOut(false,false);
+                    projWindow.setBlackout(false, false);
                     blackout = false;
                 }
             }
@@ -241,11 +234,11 @@ namespace Pbp.Forms
                     if (!projWindow.Visible)
                     {
                         projWindow.Show();
-                        UserControl1.getInstance().blackOut(true, false);
+                        projWindow.setBlackout(true, false);
                     }
                     else
                     {
-                        UserControl1.getInstance().blackOut(true, true);
+                        projWindow.setBlackout(true, true);
                     }
                     blackout = true;
                 }
@@ -259,22 +252,17 @@ namespace Pbp.Forms
                 if (!projWindow.Visible)
                 {
                     projWindow.Show();
-                    UserControl1.getInstance().blackOut(false,false);
+                    projWindow.setBlackout(false, false);
                     blackout = false;
                 }
                 else if (blackout)
                 {
-                    UserControl1.getInstance().blackOut(false,true);
+                    projWindow.setBlackout(false, true);
                     blackout = false;
                 }
 
             }
             songSearchTextBox.Focus();
-        }
-
-        void t1_Tick(object sender, EventArgs e)
-        {
-
         }
 
         private void optionenToolStripMenuItem_Click(object sender, EventArgs e)
@@ -1580,19 +1568,10 @@ namespace Pbp.Forms
             }
         }
 
-        private void radioButtonFade0_CheckedChanged(object sender, EventArgs e)
+        private void trackBarFadeTime_Scroll(object sender, EventArgs e)
         {
-            if (((RadioButton)sender).Checked == true)
-            {                
-                setFadeTimeState(int.Parse((string)((RadioButton)sender).Tag));
-            }
-        }
-
-        private void setFadeTimeState(int value)
-        {
-            Settings.Default.ProjectionFadeTime = value;
-            Settings.Default.Save();
-            UserControl1.getInstance().setFadeSteps(value);
+            labelFadeTime.Text = ((float)trackBarFadeTime.Value * 0.5).ToString() + " s";
+            Settings.Default.ProjectionFadeTime = trackBarFadeTime.Value * 500;
         }
 
         private void listViewSongHistory_SelectedIndexChanged(object sender, EventArgs e)
@@ -1893,6 +1872,7 @@ namespace Pbp.Forms
             oPPT.Quit();
              */ 
         }
+
 
 
     }

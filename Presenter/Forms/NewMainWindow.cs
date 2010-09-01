@@ -55,7 +55,7 @@ namespace Pbp.Forms
 	/// </summary>
     public partial class NewMainWindow : Form
     {
-        private projectionWindow projWindow; // Todo: use singleton
+        private ProjectionWindow projWindow; // Todo: use singleton
 
         private Image currentBackground;
 
@@ -111,9 +111,8 @@ namespace Pbp.Forms
             bThread = new System.Threading.Thread(loadBibles);
             bThread.Name = "BibleLoader";
             bThread.Start();
-            
 
-            projWindow = projectionWindow.getInstance();
+            projWindow = ProjectionWindow.Instance;
 
 			this.WindowState = Settings.Default.ViewerWindowState;
             this.Text += " " + System.Reflection.Assembly.GetExecutingAssembly().GetName().Version.ToString();
@@ -140,8 +139,6 @@ namespace Pbp.Forms
              */
 
 			
-			UserControl1.getInstance().setFadeSteps(Settings.Default.ProjectionFadeTime);
-
             linkLayers = Settings.Default.LinkLayers;
             setLinkLayerUI();
 
@@ -224,22 +221,22 @@ namespace Pbp.Forms
 
         private void toggleProjection(object sender, EventArgs e)
         {
-            if (((ToolStripItem)sender).Name == "toolStripButtonProjectionOff" 
+            if (((ToolStripItem)sender).Name == "toolStripButtonProjectionOff"
                 || ((ToolStripItem)sender).Name == "präsentationausToolStripMenuItem")
-			{
-				toolStripButtonProjectionOff.CheckState = CheckState.Checked;
-				toolStripButtonProjectionOn.CheckState = CheckState.Unchecked;
+            {
+                toolStripButtonProjectionOff.CheckState = CheckState.Checked;
+                toolStripButtonProjectionOn.CheckState = CheckState.Unchecked;
                 toolStripButtonBlackout.CheckState = CheckState.Unchecked;
-				projWindow.Hide();
+                projWindow.Hide();
                 if (blackout)
                 {
-                    UserControl1.getInstance().blackOut(false,false);
+                    projWindow.setBlackout(false, false);
                     blackout = false;
                 }
             }
             else if (((ToolStripItem)sender).Name == "toolStripButtonBlackout"
                   || ((ToolStripItem)sender).Name == "blackoutToolStripMenuItem")
-            { 
+            {
                 if (!blackout)
                 {
                     toolStripButtonProjectionOff.CheckState = CheckState.Unchecked;
@@ -248,11 +245,11 @@ namespace Pbp.Forms
                     if (!projWindow.Visible)
                     {
                         projWindow.Show();
-                        UserControl1.getInstance().blackOut(true, false);
+                        projWindow.setBlackout(true, false);
                     }
                     else
                     {
-                        UserControl1.getInstance().blackOut(true, true);
+                        projWindow.setBlackout(true, true);
                     }
                     blackout = true;
                 }
@@ -266,12 +263,12 @@ namespace Pbp.Forms
                 if (!projWindow.Visible)
                 {
                     projWindow.Show();
-                    UserControl1.getInstance().blackOut(false,false);
+                    projWindow.setBlackout(false, false);
                     blackout = false;
                 }
                 else if (blackout)
                 {
-                    UserControl1.getInstance().blackOut(false,true);
+                    projWindow.setBlackout(false, true);
                     blackout = false;
                 }
 
@@ -1596,21 +1593,6 @@ namespace Pbp.Forms
             {
                 ((ListView)sender).Items[((ListView)sender).SelectedIndices[0]].Selected = false;
             }
-        }
-
-        private void radioButtonFade0_CheckedChanged(object sender, EventArgs e)
-        {
-            if (((RadioButton)sender).Checked == true)
-            {                
-                setFadeTimeState(int.Parse((string)((RadioButton)sender).Tag));
-            }
-        }
-
-        private void setFadeTimeState(int value)
-        {
-            Settings.Default.ProjectionFadeTime = value;
-            Settings.Default.Save();
-            UserControl1.getInstance().setFadeSteps(value);
         }
 
         private void listViewSongHistory_SelectedIndexChanged(object sender, EventArgs e)

@@ -43,15 +43,14 @@ using Pbp.Properties;
 
 namespace Pbp.Forms
 {
-    public partial class projectionWindow : Form
+    public partial class ProjectionWindow : Form
     {
         private int h;
         private int w;
         private Screen projScreen;
+        Timer tmr;
         
-        static private projectionWindow _instance;
-
-        private projectionWindow()
+        private ProjectionWindow()
         {
             InitializeComponent();
 
@@ -63,16 +62,35 @@ namespace Pbp.Forms
             this.Size = new Size(projScreen.WorkingArea.Width, projScreen.WorkingArea.Height);
             h = this.Height;
             w = this.Width;
-			projectionControlHost.Child = UserControl1.getInstance();
+
+            WPFProjectionControl wpc = new WPFProjectionControl();
+            wpc.ProjectionBackgroundColor = Pbp.Properties.Settings.Default.ProjectionBackColor;
+            wpc.AnimationFinished += new WPFProjectionControl.animationFinish(wpc_AnimationFinished);
+            projectionControlHost.Child = wpc;
+
+            tmr = new Timer();
+            tmr.Tick += new EventHandler(tmr_Tick);
         }
 
-        static public projectionWindow getInstance()
+        static private ProjectionWindow instance;
+        static readonly object singletonPadlock = new object();
+
+        /// <summary>
+        /// Returns a singleton of mainWindow
+        /// </summary>
+        /// <returns>Returns the mainWindow instance</returns>
+        static public ProjectionWindow Instance
         {
-            if (_instance == null)
+            get
             {
-                _instance = new projectionWindow();
+                // Thread safety
+                lock (singletonPadlock)
+                {
+                    if (instance == null)
+                        instance = new ProjectionWindow();
+                    return instance;
+                }
             }
-            return _instance;
         }
 
         private void projectionWindow_Load(object sender, EventArgs e)
@@ -84,6 +102,11 @@ namespace Pbp.Forms
             w = this.Width;
 			//showNone();
 
+        }
+
+        public void setBlackout(bool enable, bool animate)
+        {
+            ((WPFProjectionControl)(projectionControlHost.Child)).blackOut(enable, (animate ? Settings.Default.ProjectionFadeTime : 0));
         }
 
         /**
@@ -129,8 +152,12 @@ namespace Pbp.Forms
             return showSlide(tl, background, textLayerArgs, ProjectionMode.Projection);
         }
 
+        int tmri = 0;
+
         public Image showSlide(TextLayer tl, Image background, Object[] textLayerArgs,ProjectionMode pm)
         {
+            MainWindow.Instance.setProgessBarTransitionValue(0);
+
             Application.DoEvents();
 
             Bitmap bmp = new Bitmap(w, h);
@@ -152,11 +179,33 @@ namespace Pbp.Forms
             }
 
             if (pm == ProjectionMode.Projection)
-				UserControl1.getInstance().setProjectionImage(bmp);
+            {
+                tmr.Interval = Settings.Default.ProjectionFadeTime / 10;
+                tmr.Start();
+                ((WPFProjectionControl)(projectionControlHost.Child)).setProjectionImage(bmp, Settings.Default.ProjectionFadeTime);
+            }
 
+            if (tl != null)
+            {
+                //((WPFProjectionControl)(projectionControlHost.Child)).setText(tl.getTextBlocks(textLayerArgs));
+            }
             gr.Dispose();
             return bmp;
         }
+
+        void tmr_Tick(object sender, EventArgs e)
+        {
+            tmri += 10;
+            MainWindow.Instance.setProgessBarTransitionValue(tmri);
+        }
+
+        void wpc_AnimationFinished(object sender, EventArgs e)
+        {
+            tmr.Stop();
+            int tmri = 0;
+            //MainWindow.Instance.setProgessBarTransitionValue(100);
+        }
+
 
         public string ConvertString(string unicode)
         {
@@ -165,20 +214,6 @@ namespace Pbp.Forms
                 if (c >= 32 && c <= 255)
                     sb.Append(c);
             return sb.ToString();
-        }
-
-        private void projectionWindow_Paint(object sender, PaintEventArgs e)
-        {
-			//projectionControlHost.Top = 0;
-			//projectionControlHost.Left = 0;
-			//projectionControlHost.Width = this.Width;
-			//projectionControlHost.Height = this.Height;
-			//projectionControlHost.Visible = true;
-        }
-
-        private void projectionControlHost_ChildChanged(object sender, ChildChangedEventArgs e)
-        {
-
         }
     }
 }

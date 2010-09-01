@@ -37,7 +37,7 @@ namespace Pbp.Forms
     public partial class EditorChild : Form
     {
         Song sng;
-        projectionWindow projWindow;
+        ProjectionWindow projWindow;
 		public bool valid;
 		public bool changed = false;
 		int hashCode;
@@ -49,7 +49,7 @@ namespace Pbp.Forms
         {
             InitializeComponent();
 
-            projWindow = projectionWindow.getInstance();
+            projWindow = ProjectionWindow.Instance;
 
             this.WindowState = FormWindowState.Maximized;
 

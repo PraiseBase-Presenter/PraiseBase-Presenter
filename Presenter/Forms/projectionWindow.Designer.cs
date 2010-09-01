@@ -1,6 +1,6 @@
 ﻿namespace Pbp.Forms
 {
-    partial class projectionWindow
+    partial class ProjectionWindow
     {
         /// <summary>
         /// Required designer variable.
@@ -41,7 +41,6 @@
             this.projectionControlHost.Size = new System.Drawing.Size(640, 480);
             this.projectionControlHost.TabIndex = 2;
             this.projectionControlHost.Text = "elementHost1";
-            this.projectionControlHost.ChildChanged += new System.EventHandler<System.Windows.Forms.Integration.ChildChangedEventArgs>(this.projectionControlHost_ChildChanged);
             this.projectionControlHost.Child = null;
             // 
             // projectionWindow
@@ -61,7 +60,6 @@
             this.ShowInTaskbar = false;
             this.Text = "projectionWindow";
             this.Load += new System.EventHandler(this.projectionWindow_Load);
-            this.Paint += new System.Windows.Forms.PaintEventHandler(this.projectionWindow_Paint);
             this.ResumeLayout(false);
 
         }

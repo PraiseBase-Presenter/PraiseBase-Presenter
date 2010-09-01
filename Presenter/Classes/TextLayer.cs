@@ -22,6 +22,8 @@ namespace Pbp
         }
         public abstract void writeOut(System.Drawing.Graphics gr, Object[] args, ProjectionMode pm);
 
+        public abstract List<TextBlock> getTextBlocks(Object[] args);
+
         protected void drawString(Graphics gr, string str, int x, int y, Font font, Brush fontBrush, StringFormat strFormat)
         {
             int shadowThickness = Settings.Default.ProjectionShadowSize;
