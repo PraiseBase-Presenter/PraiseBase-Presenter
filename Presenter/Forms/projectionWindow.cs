@@ -180,15 +180,22 @@ namespace Pbp.Forms
 
             if (pm == ProjectionMode.Projection)
             {
-                tmr.Interval = Settings.Default.ProjectionFadeTime / 10;
-                tmr.Start();
+                if (Settings.Default.ProjectionFadeTime > 0)
+                {
+                    int timerInterval = (int)((float)Settings.Default.ProjectionFadeTime / 10f);
+                    if (timerInterval > 0)
+                    {
+                        tmr.Interval = timerInterval;
+                        tmr.Start();
+                    }
+                }
                 ((WPFProjectionControl)(projectionControlHost.Child)).setProjectionImage(bmp, Settings.Default.ProjectionFadeTime);
             }
 
-            if (tl != null)
-            {
+            //if (tl != null)
+            //{
                 //((WPFProjectionControl)(projectionControlHost.Child)).setText(tl.getTextBlocks(textLayerArgs));
-            }
+            //}
             gr.Dispose();
             return bmp;
         }
@@ -202,8 +209,8 @@ namespace Pbp.Forms
         void wpc_AnimationFinished(object sender, EventArgs e)
         {
             tmr.Stop();
-            int tmri = 0;
-            //MainWindow.Instance.setProgessBarTransitionValue(100);
+            tmri = 0;
+            MainWindow.Instance.setProgessBarTransitionValue(0);
         }
 
 
@@ -214,6 +221,11 @@ namespace Pbp.Forms
                 if (c >= 32 && c <= 255)
                     sb.Append(c);
             return sb.ToString();
+        }
+
+        private void projectionControlHost_ChildChanged(object sender, ChildChangedEventArgs e)
+        {
+
         }
     }
 }

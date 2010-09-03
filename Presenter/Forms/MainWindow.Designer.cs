@@ -1772,10 +1772,10 @@
             // 
             this.groupBox5.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
                         | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupBox5.Controls.Add(this.label3);
             this.groupBox5.Controls.Add(this.labelFadeTime);
             this.groupBox5.Controls.Add(this.trackBarFadeTime);
             this.groupBox5.Controls.Add(this.label6);
-            this.groupBox5.Controls.Add(this.label3);
             this.groupBox5.Controls.Add(this.buttonToggleLayerMode);
             this.groupBox5.Controls.Add(this.progressBarTransition);
             this.groupBox5.Controls.Add(this.pictureBoxPreview);
@@ -1820,7 +1820,7 @@
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(39, 255);
+            this.label3.Location = new System.Drawing.Point(42, 241);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(58, 13);
             this.label3.TabIndex = 37;
@@ -1830,7 +1830,7 @@
             // 
             this.buttonToggleLayerMode.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.buttonToggleLayerMode.Image = global::Pbp.Properties.Resources.unlink;
-            this.buttonToggleLayerMode.Location = new System.Drawing.Point(6, 249);
+            this.buttonToggleLayerMode.Location = new System.Drawing.Point(9, 235);
             this.buttonToggleLayerMode.Name = "buttonToggleLayerMode";
             this.buttonToggleLayerMode.Size = new System.Drawing.Size(29, 25);
             this.buttonToggleLayerMode.TabIndex = 36;

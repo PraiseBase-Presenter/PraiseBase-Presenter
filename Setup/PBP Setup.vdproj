@@ -147,7 +147,7 @@
                 {
                 "Name" = "8:.NET Framework"
                 "Message" = "8:[VSDNETMSG]"
-                "FrameworkVersion" = "8:3.5.21022  "
+                "FrameworkVersion" = "8:3.5.21022    "
                 "AllowLaterVersions" = "11:FALSE"
                 "InstallUrl" = "8:http://go.microsoft.com/fwlink/?LinkId=76617"
                 }
@@ -401,15 +401,15 @@
         {
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:PraiseBase Presenter"
-        "ProductCode" = "8:{ACE23AFE-E8B8-4E02-ACDB-D06004564E85}"
-        "PackageCode" = "8:{5F66111D-04DA-44DD-8B68-88E89EAB01DD}"
+        "ProductCode" = "8:{209FD8B6-EE1F-4E85-96E7-284BD5C0752F}"
+        "PackageCode" = "8:{10EB9433-1A29-4CEA-AA3F-09682FBB6B71}"
         "UpgradeCode" = "8:{42A8F680-7229-4303-8772-04605BB741C7}"
         "AspNetVersion" = "8:4.0.30319.0"
         "RestartWWWService" = "11:FALSE"
         "RemovePreviousVersions" = "11:TRUE"
         "DetectNewerInstalledVersion" = "11:TRUE"
         "InstallAllUsers" = "11:TRUE"
-        "ProductVersion" = "8:1.0.1"
+        "ProductVersion" = "8:1.0.6"
         "Manufacturer" = "8:PraiseBase Langenthal"
         "ARPHELPTELEPHONE" = "8:"
         "ARPHELPLINK" = "8:"
@@ -1002,34 +1002,6 @@
         }
         "ProjectOutput"
         {
-            "{5259A561-127C-4D43-A0A1-72F10C7B3BF8}:_1D06C3AD735741AD99429465D6E2D82E"
-            {
-            "SourcePath" = "8:"
-            "TargetName" = "8:"
-            "Tag" = "8:"
-            "Folder" = "8:_DC640BA9A4354D3A998561FFCE1A4BCE"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            "ProjectOutputGroupRegister" = "3:1"
-            "OutputConfiguration" = "8:"
-            "OutputGroupCanonicalName" = "8:SourceFiles"
-            "OutputProjectGuid" = "8:{33D2BC6A-0AD1-4E2E-AF35-FFFB744F22C6}"
-            "ShowKeyOutput" = "11:TRUE"
-                "ExcludeFilters"
-                {
-                }
-            }
             "{5259A561-127C-4D43-A0A1-72F10C7B3BF8}:_495524917C884E8190B8D542E05F5E63"
             {
             "SourcePath" = "8:"
