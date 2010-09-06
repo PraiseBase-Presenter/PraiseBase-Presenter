@@ -193,6 +193,24 @@ namespace Pbp.Properties {
             }
         }
         
+        /// <summary>
+        ///   Looks up a localized string similar to Diaschau starten.
+        /// </summary>
+        internal static string Diaschau_starten {
+            get {
+                return ResourceManager.GetString("Diaschau_starten", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Diaschau stoppen.
+        /// </summary>
+        internal static string Diaschau_stoppen {
+            get {
+                return ResourceManager.GetString("Diaschau_stoppen", resourceCulture);
+            }
+        }
+        
         internal static System.Drawing.Bitmap displaysettings {
             get {
                 object obj = ResourceManager.GetObject("displaysettings", resourceCulture);
@@ -232,6 +250,15 @@ namespace Pbp.Properties {
             get {
                 object obj = ResourceManager.GetObject("editsong", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Eine Instanz dieser Software läuft bereits!.
+        /// </summary>
+        internal static string Eine_Instanz_dieser_Software_läuft_bereits_ {
+            get {
+                return ResourceManager.GetString("Eine_Instanz_dieser_Software_läuft_bereits_", resourceCulture);
             }
         }
         
@@ -313,6 +340,15 @@ namespace Pbp.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Keine Bilder ausgewählt!.
+        /// </summary>
+        internal static string Keine_Bilder_ausgewählt_ {
+            get {
+                return ResourceManager.GetString("Keine_Bilder_ausgewählt_", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to                     GNU GENERAL PUBLIC LICENSE
         ///                       Version 3, 29 June 2007
         ///
@@ -331,6 +367,15 @@ namespace Pbp.Properties {
         internal static string License {
             get {
                 return ResourceManager.GetString("License", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Lied speichern unter....
+        /// </summary>
+        internal static string Lied_speichern_unter___ {
+            get {
+                return ResourceManager.GetString("Lied_speichern_unter___", resourceCulture);
             }
         }
         
@@ -359,6 +404,15 @@ namespace Pbp.Properties {
             get {
                 object obj = ResourceManager.GetObject("monitor_256", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to nicht vorhanden.
+        /// </summary>
+        internal static string nicht_vorhanden {
+            get {
+                return ResourceManager.GetString("nicht_vorhanden", resourceCulture);
             }
         }
         
@@ -443,6 +497,15 @@ namespace Pbp.Properties {
             get {
                 object obj = ResourceManager.GetObject("tip", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Titel.
+        /// </summary>
+        internal static string Titel {
+            get {
+                return ResourceManager.GetString("Titel", resourceCulture);
             }
         }
         

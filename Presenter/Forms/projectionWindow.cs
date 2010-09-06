@@ -63,9 +63,9 @@ namespace Pbp.Forms
             h = this.Height;
             w = this.Width;
 
-            WPFProjectionControl wpc = new WPFProjectionControl();
+            WpfProjectionControl wpc = new WpfProjectionControl();
             wpc.ProjectionBackgroundColor = Pbp.Properties.Settings.Default.ProjectionBackColor;
-            wpc.AnimationFinished += new WPFProjectionControl.animationFinish(wpc_AnimationFinished);
+            wpc.AnimationFinished += new WpfProjectionControl.AnimationFinish(wpc_AnimationFinished);
             projectionControlHost.Child = wpc;
 
             tmr = new Timer();
@@ -106,7 +106,7 @@ namespace Pbp.Forms
 
         public void setBlackout(bool enable, bool animate)
         {
-            ((WPFProjectionControl)(projectionControlHost.Child)).blackOut(enable, (animate ? Settings.Default.ProjectionFadeTime : 0));
+            ((WpfProjectionControl)(projectionControlHost.Child)).BlackOut(enable, (animate ? Settings.Default.ProjectionFadeTime : 0));
         }
 
         /**
@@ -141,9 +141,9 @@ namespace Pbp.Forms
             }
         }
 
-        public void displayLayer(int layer, TextLayer tl, Object[] textLayerArgs)
+        public void displayLayer(int layer, TextLayer tl)
         {
-            displayLayer(layer, tl, textLayerArgs, Settings.Default.ProjectionFadeTime);
+            displayLayer(layer, tl, Settings.Default.ProjectionFadeTime);
         }
 
         public void displayLayer(int layer, Image background)
@@ -151,16 +151,16 @@ namespace Pbp.Forms
             displayLayer(layer, background, Settings.Default.ProjectionFadeTime);
         }
         
-        public void displayLayer(int layer, TextLayer tl, Object[] textLayerArgs, int fadetime)
+        public void displayLayer(int layer, TextLayer tl, int fadetime)
         {
             Bitmap bmp = new Bitmap(w, h);
             Graphics gr = Graphics.FromImage(bmp);
-            tl.writeOut(gr, textLayerArgs);
+            tl.writeOut(gr);
 
             if (layer == 2)
-                ((WPFProjectionControl)(projectionControlHost.Child)).setProjectionText(bmp, fadetime);
+                ((WpfProjectionControl)(projectionControlHost.Child)).SetProjectionText(bmp, fadetime);
             else
-                ((WPFProjectionControl)(projectionControlHost.Child)).setProjectionImage(bmp, fadetime);
+                ((WpfProjectionControl)(projectionControlHost.Child)).SetProjectionImage(bmp, fadetime);
         }
 
         public void displayLayer(int layer, Image background, int fadetime)
@@ -171,9 +171,9 @@ namespace Pbp.Forms
             gr.DrawImage(background, new Rectangle(0, 0, w, h), 0, 0, background.Width, background.Height, GraphicsUnit.Pixel);
 
             if (layer == 2)
-                ((WPFProjectionControl)(projectionControlHost.Child)).setProjectionText(bmp, fadetime);
+                ((WpfProjectionControl)(projectionControlHost.Child)).SetProjectionText(bmp, fadetime);
             else
-                ((WPFProjectionControl)(projectionControlHost.Child)).setProjectionImage(bmp, fadetime);
+                ((WpfProjectionControl)(projectionControlHost.Child)).SetProjectionImage(bmp, fadetime);
         }
 
         public void hideLayer(int layer)
@@ -185,9 +185,9 @@ namespace Pbp.Forms
         {
             Bitmap bmp = new Bitmap(w, h);
             if (layer == 2)
-                ((WPFProjectionControl)(projectionControlHost.Child)).setProjectionText(bmp, fadetime);
+                ((WpfProjectionControl)(projectionControlHost.Child)).SetProjectionText(bmp, fadetime);
             else
-                ((WPFProjectionControl)(projectionControlHost.Child)).setProjectionImage(bmp, fadetime);
+                ((WpfProjectionControl)(projectionControlHost.Child)).SetProjectionImage(bmp, fadetime);
         }
 
         int tmri = 0;

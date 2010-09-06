@@ -42,7 +42,7 @@ namespace Pbp.Forms
 			{
 				foreach (ListViewItem lvi in listViewItems.SelectedItems)
 				{
-					EditorWindow.getInstance().openSong(SongManager.getInstance().SongList[(Guid)(lvi.Tag)].FilePath);
+					EditorWindow.getInstance().openSong(SongManager.GetInstance().SongList[(Guid)(lvi.Tag)].FilePath);
 				}
 				OpenInEditor = true;
 				DialogResult = DialogResult.OK;

@@ -170,7 +170,7 @@ namespace SongDetails
 					Label textLbl = new Label();
                     textLbl.Location = new Point(2, 2);
                     textLbl.Height = panelTextLabelContainer.Height-4;
-                    textLbl.Text = sng.Parts[numParts].Slides[j].oneLineText();
+                    textLbl.Text = sng.Parts[numParts].Slides[j].OneLineText();
 					textLbl.ForeColor = Color.Black;
                     textLbl.BackColor = Color.White;
 					textLbl.Font = txfnt;

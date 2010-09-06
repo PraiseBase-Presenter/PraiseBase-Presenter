@@ -26,102 +26,98 @@
  */
 
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+using System.Drawing;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
-using System.Windows.Threading;
+using System.Windows.Interop;
 using System.Windows.Media.Animation;
+using System.Windows.Media.Imaging;
 
 namespace Pbp.Forms
 {
-	/// <summary>
-	/// Interaction logic for UserControl1.xaml
-	/// </summary>
-	/// 
+    /// <summary>
+    /// Interaction logic for UserControl1.xaml
+    /// </summary>
+    /// 
+    public partial class WpfProjectionControl : UserControl
+    {
+        #region Delegates
 
-	public partial class WPFProjectionControl : UserControl
-	{
-        public System.Drawing.Color ProjectionBackgroundColor {get;set;}
+        public delegate void AnimationFinish(object sender, EventArgs e);
 
-        public delegate void animationFinish(object sender, EventArgs e);
-        public event animationFinish AnimationFinished;
+        #endregion
 
-        public WPFProjectionControl()
-		{
-			InitializeComponent();
-            ProjectionBackgroundColor = System.Drawing.Color.Black;
+        public WpfProjectionControl()
+        {
+            InitializeComponent();
+            ProjectionBackgroundColor = Color.Black;
         }
 
-		private void projectionControl_Loaded(object sender, RoutedEventArgs e)
-		{
-            System.Drawing.Bitmap bmp = new System.Drawing.Bitmap(1, 1);
-			System.Drawing.Graphics gr = System.Drawing.Graphics.FromImage(bmp);
-            gr.FillRectangle(new System.Drawing.SolidBrush(ProjectionBackgroundColor), 0, 0, 1, 1);
-			blackoutImage.Source = loadBitmap(bmp);
+        public Color ProjectionBackgroundColor { get; set; }
+        public event AnimationFinish AnimationFinished;
+
+        private void ProjectionControlLoaded(object sender, RoutedEventArgs e)
+        {
+            var bmp = new Bitmap(1, 1);
+            Graphics gr = Graphics.FromImage(bmp);
+            gr.FillRectangle(new SolidBrush(ProjectionBackgroundColor), 0, 0, 1, 1);
+            blackoutImage.Source = LoadBitmap(bmp);
             gr.Dispose();
             blackoutImage.Opacity = 0f;
-		}
+        }
 
         /// <summary>
         /// Load a bitmap and convert it to a WPF image source
         /// </summary>
         /// <param name="source"></param>
         /// <returns></returns>
-		protected static BitmapSource loadBitmap(System.Drawing.Bitmap source)
-		{
-			return System.Windows.Interop.Imaging.CreateBitmapSourceFromHBitmap(source.GetHbitmap(), IntPtr.Zero, Int32Rect.Empty,
-				System.Windows.Media.Imaging.BitmapSizeOptions.FromEmptyOptions());
-		}
+        protected static BitmapSource LoadBitmap(Bitmap source)
+        {
+            return Imaging.CreateBitmapSourceFromHBitmap(source.GetHbitmap(), IntPtr.Zero, Int32Rect.Empty,
+                                                         BitmapSizeOptions.FromEmptyOptions());
+        }
 
         /// <summary>
         /// Set a new image
         /// </summary>
         /// <param name="img">Image that will be shown</param>
         /// <param name="fadeTime">Animation time in miliseconds</param>
-		public void setProjectionImage(System.Drawing.Bitmap img, int fadeTime)
-		{
+        public void SetProjectionImage(Bitmap img, int fadeTime)
+        {
             if (fadeTime > 0)
             {
                 projectionImage.Opacity = 0f;
-                projectionImage.Source = loadBitmap(img);
-                Storyboard ImageAnimation = (Storyboard)FindResource("imageAnimation");
-                ImageAnimation.SpeedRatio = 1000f / (float)fadeTime;
-                ImageAnimation.Begin(this);
+                projectionImage.Source = LoadBitmap(img);
+                var imageAnimation = (Storyboard) FindResource("imageAnimation");
+                imageAnimation.SpeedRatio = 1000f/fadeTime;
+                imageAnimation.Begin(this);
             }
             else
             {
-                projectionImage.Source = loadBitmap(img);
+                projectionImage.Source = LoadBitmap(img);
                 projectionImageBack.Source = projectionImage.Source;
             }
-		}
+        }
 
-        public void setProjectionText(System.Drawing.Bitmap img, int fadeTime)
+        public void SetProjectionText(Bitmap img, int fadeTime)
         {
             if (fadeTime > 0)
             {
                 textImage.Opacity = 0f;
-                textImage.Source = loadBitmap(img);
 
-                Storyboard ImageAnimation2 = (Storyboard)FindResource("textAnimation2");
-                ImageAnimation2.SpeedRatio = 1000f / (float)fadeTime;
-                ImageAnimation2.Begin(this);
+                textImage.Source = LoadBitmap(img);
 
-                Storyboard ImageAnimation = (Storyboard)FindResource("textAnimation");
-                ImageAnimation.SpeedRatio = 1000f / (float)fadeTime;
-                ImageAnimation.Begin(this);
+                var imageAnimation2 = (Storyboard) FindResource("textAnimation2");
+                imageAnimation2.SpeedRatio = 1000f/fadeTime;
+                imageAnimation2.Begin(this);
+
+                var imageAnimation = (Storyboard) FindResource("textAnimation");
+                imageAnimation.SpeedRatio = 1000f/fadeTime;
+                imageAnimation.Begin(this);
             }
             else
             {
-                textImage.Source = loadBitmap(img);
+                textImage.Source = LoadBitmap(img);
                 textImageBack.Source = textImage.Source;
                 textImageBack.Opacity = 1f;
             }
@@ -132,7 +128,7 @@ namespace Pbp.Forms
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void DoubleAnimation_Completed(object sender, EventArgs e)
+        private void DoubleAnimationCompleted(object sender, EventArgs e)
         {
             projectionImageBack.Source = projectionImage.Source;
             if (AnimationFinished != null)
@@ -141,7 +137,7 @@ namespace Pbp.Forms
             }
         }
 
-        private void DoubleAnimation_Completed2(object sender, EventArgs e)
+        private void DoubleAnimationCompleted2(object sender, EventArgs e)
         {
             textImageBack.Source = textImage.Source;
             textImageBack.Opacity = 1f;
@@ -156,25 +152,27 @@ namespace Pbp.Forms
         /// </summary>
         /// <param name="val">True if blackout should be enabled, else false</param>
         /// <param name="animationTime">Animation duration in miliseconds</param>
-        public void blackOut(bool val, int animationTime)
-		{
-            System.Windows.Media.Animation.Storyboard blackoutAnimation = (System.Windows.Media.Animation.Storyboard)FindResource(val ? "blackoutAnimationOn" : "blackoutAnimationOff");
-            blackoutAnimation.SpeedRatio = (animationTime == 0 ? 100 : 1000f / (float)animationTime);
-            blackoutAnimation.Begin(this);
-		}
-
-        public void setText(List<TextBlock> textBlocks)
+        public void BlackOut(bool val, int animationTime)
         {
-            TextBlock bl = textBlocks[0];
-            String str = string.Empty;
-            for (int i=0;i<bl.Lines.Count;i++)
-            {
-                str += bl.Lines[i].Text + "\n"; ;
-            }
-            //textBlock1.Text = str;
-            //textBlock1.Width = this.Width - (2 * textBlock1.Margin.Left);
-            //textBlock1.Height = this.Height - (2 * textBlock1.Margin.Top);
+            var blackoutAnimation = (Storyboard) FindResource(val ? "blackoutAnimationOn" : "blackoutAnimationOff");
+            blackoutAnimation.SpeedRatio = (animationTime == 0 ? 100 : 1000f/animationTime);
+            blackoutAnimation.Begin(this);
         }
+
+
+        //public void SetText(List<TextBlock> textBlocks)
+        //{
+        //    TextBlock bl = textBlocks[0];
+        //    String str = string.Empty;
+        //    for (int i = 0; i < bl.Lines.Count; i++)
+        //    {
+        //        str += bl.Lines[i].Text + "\n";
+        //        ;
+        //    }
+        //    //textBlock1.Text = str;
+        //    //textBlock1.Width = this.Width - (2 * textBlock1.Margin.Left);
+        //    //textBlock1.Height = this.Height - (2 * textBlock1.Margin.Top);
+        //}
 
         /*
         TextContent.Text = "aasdfasdfasdf\naasdfasdfasdf\naasdfasdfasdf\naasdfasdfasdf\naasdfasdfasdf\n";
@@ -187,6 +185,5 @@ namespace Pbp.Forms
                     textBlock1.Width = this.Width - (2 * textBlock1.Margin.Left);
                     textBlock1.Height = this.Height - (2 * textBlock1.Margin.Top);
                     */
-	}
+    }
 }
-

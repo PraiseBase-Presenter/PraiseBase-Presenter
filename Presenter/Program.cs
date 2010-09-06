@@ -26,8 +26,6 @@
  */
 
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Windows.Forms;
 using Pbp.Forms;
 using Pbp.Properties;
@@ -61,7 +59,7 @@ namespace Pbp
                 object[] attributes = System.Reflection.Assembly.GetExecutingAssembly().GetCustomAttributes(typeof(System.Reflection.AssemblyProductAttribute), false);
                 String appTitle = ((System.Reflection.AssemblyProductAttribute)attributes[0]).Product;
 
-                MessageBox.Show("Eine Instanz dieser Software läuft bereits!", appTitle, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show(Resources.Eine_Instanz_dieser_Software_läuft_bereits_, appTitle, MessageBoxButtons.OK, MessageBoxIcon.Information);
                 Environment.Exit(0);
             }
             catch
@@ -72,7 +70,7 @@ namespace Pbp
 
 			if (Settings.Default.ShowLoadingScreen)
 			{
-				LoadingScreen ldg = new LoadingScreen();
+				var ldg = new LoadingScreen();
 				ldg.setLabel("PraiseBase Presenter wird gestartet...");
 				ldg.Show();
 				Application.DoEvents();
@@ -80,7 +78,7 @@ namespace Pbp
                 if (Settings.Default.DataDirectory == "")
                 {
                     // Todo: check and create
-                    Settings.Default.DataDirectory = Environment.GetFolderPath(Environment.SpecialFolder.Personal).ToString() + System.IO.Path.DirectorySeparatorChar + Settings.Default.DataDirDefaultName;
+                    Settings.Default.DataDirectory = Environment.GetFolderPath(Environment.SpecialFolder.Personal) + System.IO.Path.DirectorySeparatorChar + Settings.Default.DataDirDefaultName;
                     Settings.Default.Save();
                 }
 
@@ -88,10 +86,10 @@ namespace Pbp
 				ImageManager.Instance.checkThumbs(ldg);
 
 				ldg.setLabel("Lade Liederdatenbank...");
-				SongManager.getInstance(ldg);
+				SongManager.GetInstance(ldg);
 
 				ldg.setLabel("Suche Projektionsschirm...");
-                ProjectionWindow prjw = ProjectionWindow.Instance;
+                var prjw = ProjectionWindow.Instance;
 
 				ldg.setLabel("Initialisiere Programmoberfläche...");
 				GC.Collect();
@@ -100,13 +98,13 @@ namespace Pbp
 			}
 			else
 			{
-				SongManager.getInstance();
+				SongManager.GetInstance();
 				ImageManager.Instance.checkThumbs();
-                ProjectionWindow prjw = ProjectionWindow.Instance;
+                var prjw = ProjectionWindow.Instance;
 				GC.Collect();
 			}
             
-			Console.WriteLine("Loading took " + (DateTime.Now - startTime).TotalSeconds + " seconds!");
+			//Console.WriteLine("Loading took " + (DateTime.Now - startTime).TotalSeconds + " seconds!");
 
 			Application.Run(MainWindow.Instance);
 

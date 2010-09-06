@@ -27,208 +27,185 @@
 
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using Pbp.Properties;
 using System.IO;
+using System.Linq;
 using System.Windows.Forms;
-
 using Pbp.Forms;
+using Pbp.Properties;
 
 namespace Pbp
 {
-	/// <summary>
-	/// Holds a list of all songs and provides
-	/// searching in the songlist
-	/// </summary>
-    class SongManager
+    /// <summary>
+    /// Holds a list of all songs and provides
+    /// searching in the songlist
+    /// </summary>
+    internal class SongManager
     {
-		/// <summary>
-		/// Singleton variable
-		/// </summary>
-        static private SongManager _instance;
+        /// <summary>
+        /// Singleton variable
+        /// </summary>
+        private static SongManager _instance;
+
+        /// <summary>
+        /// The constructor
+        /// </summary>
+        private SongManager(params object[] param)
+        {
+            CurrentPartNr = 0;
+            CurrentSlideNr = 0;
+            Reload(param);
+        }
 
         /// <summary>
         /// List of all availabe songs
         /// </summary>
-        public Dictionary<System.Guid, Song> SongList {get;private set;}
+        public Dictionary<Guid, Song> SongList { get; private set; }
 
 
-		/// <summary>
-		/// Gets or sets the current song object
-		/// </summary>
-        public Song CurrentSong {get;set;}
+        /// <summary>
+        /// Gets or sets the current song object
+        /// </summary>
+        public Song CurrentSong { get; set; }
 
         public int CurrentPartNr { get; set; }
-        public int CurrentSlideNr { get; set; } 
+        public int CurrentSlideNr { get; set; }
 
-        public Song.Slide CurrentSlide 
-        { 
-            get 
+        public Song.Slide CurrentSlide
+        {
+            get { return CurrentSong.Parts[CurrentPartNr].Slides[CurrentSlideNr]; }
+        }
+
+
+        /// <summary>
+        /// Gets the singleton of this class
+        /// </summary>
+        public static SongManager Instance
+        {
+            get { return GetInstance(); }
+        }
+
+
+        /// <summary>
+        /// Gets the singleton of this class
+        /// </summary>
+        /// <returns>Returns an unique instance of the song manager</returns>
+        public static SongManager GetInstance(params object[] param)
+        {
+            return _instance ?? (_instance = new SongManager(param));
+        }
+
+        /// <summary>
+        /// Reloads all songs from the song direcory
+        /// specified in the application settings
+        /// </summary>
+        public void Reload(params object[] param)
+        {
+            LoadingScreen ldg = null;
+            if (param.Count() == 1 && param[0].GetType() == typeof (LoadingScreen))
             {
-                return this.CurrentSong.Parts[CurrentPartNr].Slides[CurrentSlideNr];
-            } 
-        }
+                ldg = (LoadingScreen) param[0];
+            }
 
+            string searchDir = Settings.Default.DataDirectory + Path.DirectorySeparatorChar + Settings.Default.SongDir;
 
-		/// <summary>
-		/// Gets the singleton of this class
-		/// </summary>
-		static public SongManager Instance
-		{
-			get
-			{
-				return getInstance();
-			}
-		}
-
-
-		/// <summary>
-		/// The constructor
-		/// </summary>
-		private SongManager(params object[] param)
-        {
-            CurrentPartNr = 0;
-            CurrentSlideNr = 0;
-			reload(param);
-        }
-
-		/// <summary>
-		/// Gets the singleton of this class
-		/// </summary>
-		/// <returns>Returns an unique instance of the song manager</returns>
-		static public SongManager getInstance(params object[] param)
-		{
-			if (_instance == null)
-			{
-				_instance = new SongManager(param);
-			}
-			return _instance;
-		}
-
-		/// <summary>
-		/// Reloads all songs from the song direcory
-		/// specified in the application settings
-		/// </summary>
-        public void reload(params object[] param)
-        {
-			LoadingScreen ldg = null;
-			if (param.Count() == 1 && param[0].GetType() == typeof(LoadingScreen))
-			{
-				ldg = (LoadingScreen)param[0];
-			}				
-
-            string searchDir = Settings.Default.DataDirectory +  Path.DirectorySeparatorChar + Settings.Default.SongDir;
-
-			List<string> songPaths = new List<string>();
+            var songPaths = new List<string>();
             if (Directory.Exists(searchDir))
             {
-                foreach (string ext in Enum.GetNames(typeof(Song.FileFormat)))
+                foreach (string ext in Enum.GetNames(typeof (Song.FileFormat)))
                 {
-                    string[] songFilePaths = Directory.GetFiles(searchDir, "*."+ext, SearchOption.AllDirectories);
-                    foreach (string file in songFilePaths)
-                    {
-						songPaths.Add(file);
-                    }
+                    string[] songFilePaths = Directory.GetFiles(searchDir, "*." + ext, SearchOption.AllDirectories);
+                    songPaths.AddRange(songFilePaths);
                 }
             }
 
 
+            int cnt = songPaths.Count;
+            if (ldg != null)
+                ldg.setProgBarMax(cnt);
 
-			int cnt = songPaths.Count;
-			if (ldg != null)
-				ldg.setProgBarMax(cnt);
+            SongList = new Dictionary<Guid, Song>();
 
-            SongList = new Dictionary<System.Guid, Song>();
-
-			for (int i = 0; i <cnt;i++ )
-			{
-				if (ldg != null && i%10 == 0)
-				{
-					ldg.setProgBarValue(i);
-					ldg.setLabel("Lade Lieder " + i.ToString() + "/" + cnt.ToString());
-				}
-				Song tmpSong = new Song(songPaths[i]);
-				if (tmpSong.IsValid)
-				{
+            for (int i = 0; i < cnt; i++)
+            {
+                if (ldg != null && i%10 == 0)
+                {
+                    ldg.setProgBarValue(i);
+                    ldg.setLabel("Lade Lieder " + i + "/" + cnt);
+                }
+                var tmpSong = new Song(songPaths[i]);
+                if (tmpSong.IsValid)
+                {
                     SongList[tmpSong.GUID] = tmpSong;
-				}
-			}
-
-            
-
-
+                }
+            }
         }
 
-		/// <summary>
-		/// Returns the list id of the song with specified title
-		/// </summary>
-		/// <param name="title">The title of the song</param>
-		/// <returns>Returns the position in the songlist</returns>
-		public Guid getGUID(string title)
-		{
-			foreach (KeyValuePair<Guid,Song> kvp in SongList)
-			{
-				if (kvp.Value.Title == title)
-				{
-					return kvp.Key;
-				}
-			}
-            MessageBox.Show("Titel " + title + " nicht vorhanden");
+        /// <summary>
+        /// Returns the list id of the song with specified title
+        /// </summary>
+        /// <param name="title">The title of the song</param>
+        /// <returns>Returns the position in the songlist</returns>
+        public Guid GetGuid(string title)
+        {
+            foreach (var kvp in SongList)
+            {
+                if (kvp.Value.Title == title)
+                {
+                    return kvp.Key;
+                }
+            }
+            MessageBox.Show(Resources.Titel +" "+ title + " " +Resources.nicht_vorhanden);
             return Guid.Empty;
-		}
+        }
 
-		/// <summary>
-		/// Reloads the song at the specified position
-		/// </summary>
-		/// <param name="i">The song position</param>
-		public void reloadSong(Guid g)
-		{
-			SongList[g] = new Song(SongList[g].FilePath,g);
-		}
+        /// <summary>
+        /// Reloads the song at the specified position
+        /// </summary>
+        public void ReloadSong(Guid g)
+        {
+            SongList[g] = new Song(SongList[g].FilePath, g);
+        }
 
-		/// <summary>
-		/// Reloads the song with the specified path
-		/// </summary>
-		/// <param name="path">Path to the song file</param>
-		public void reloadSongByPath(string path)
-		{
-			if (path != String.Empty && path != null)
-			{
-                foreach (KeyValuePair<Guid, Song> kvp in SongList)
+        /// <summary>
+        /// Reloads the song with the specified path
+        /// </summary>
+        /// <param name="path">Path to the song file</param>
+        public void ReloadSongByPath(string path)
+        {
+            if (!string.IsNullOrEmpty(path))
+            {
+                foreach (var kvp in SongList)
                 {
                     if (kvp.Value.FilePath == path)
                     {
-                        SongList[kvp.Key] = new Song(path,kvp.Key);
+                        SongList[kvp.Key] = new Song(path, kvp.Key);
                         return;
                     }
                 }
-			}
-		}
+            }
+        }
 
 
-
-
-		/// <summary>
-		/// Search the songlist for a given pattern and returns the matching songs
-		/// </summary>
-		/// <param name="needle">The search pattern</param>
-		/// <param name="mode">If set to 1, the sogtext is also searched for the pattern. If set to 0, only the song title will be used</param>
-		/// <returns>Returns a list of matches songs</returns>
-		public List<Song> getSearchResults(string needle, int mode)
+        /// <summary>
+        /// Search the songlist for a given pattern and returns the matching songs
+        /// </summary>
+        /// <param name="needle">The search pattern</param>
+        /// <param name="mode">If set to 1, the sogtext is also searched for the pattern. If set to 0, only the song title will be used</param>
+        /// <returns>Returns a list of matches songs</returns>
+        public List<Song> GetSearchResults(string needle, int mode)
         {
-			needle = needle.Trim().ToLower();
-			needle = needle.Replace(",", "");
-			needle = needle.Replace(".", "");
-			needle = needle.Replace(";", "");
-			needle = needle.Replace(Environment.NewLine, "");
-			needle = needle.Replace("  ", " ");
+            needle = needle.Trim().ToLower();
+            needle = needle.Replace(",", "");
+            needle = needle.Replace(".", "");
+            needle = needle.Replace(";", "");
+            needle = needle.Replace(Environment.NewLine, "");
+            needle = needle.Replace("  ", " ");
 
-            List<Song> tmpList = new List<Song>();
-            foreach (KeyValuePair<Guid,Song> kvp in SongList)
+            var tmpList = new List<Song>();
+            foreach (var kvp in SongList)
             {
                 if (SongList[kvp.Key].Title.ToLower().Contains(needle) ||
-					(mode == 1 && SongList[kvp.Key].SearchText.Contains(needle)))
+                    (mode == 1 && SongList[kvp.Key].SearchText.Contains(needle)))
                 {
                     tmpList.Add(SongList[kvp.Key]);
                 }

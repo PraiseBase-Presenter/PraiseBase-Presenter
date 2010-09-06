@@ -32,6 +32,7 @@ namespace Pbp
             Brush outlineBrush = new SolidBrush(Settings.Default.ProjectionOutlineColor);
             Brush shadowBrush = new SolidBrush(Color.FromArgb(15, Settings.Default.ProjectionShadowColor));
 
+            /*
             if (shadowThickness > 0)
             {
                 gr.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.HighQuality;
@@ -47,7 +48,7 @@ namespace Pbp
                 gr.SmoothingMode = SmoothingMode.None;
                 gr.InterpolationMode = InterpolationMode.Low;
                 gr.TextRenderingHint = TextRenderingHint.ClearTypeGridFit;
-            }
+            }*/
 
             if (outLineThickness > 0)
             {

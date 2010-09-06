@@ -262,8 +262,8 @@ namespace Pbp.Forms
 				slideId = sng.Parts[partId].Slides.Count;
 			
 			Song.Slide sld = sng.Parts[partId].Slides[slideId];
-			textBoxSongText.Text = sld.lineBreakText();
-			textBoxSongTranslation.Text = sld.lineBreakTranslation();
+			textBoxSongText.Text = sld.LineBreakText();
+			textBoxSongTranslation.Text = sld.LineBreakTranslation();
 			comboBoxSlideHorizOrientation.SelectedIndex = (int)sld.HorizontalAlign;
 			comboBoxSlideVertOrientation.SelectedIndex = (int)sld.VerticalAlign;
 
@@ -337,7 +337,7 @@ namespace Pbp.Forms
 				{
 					int partId = treeViewContents.SelectedNode.Parent.Index;
 					int slideId = treeViewContents.SelectedNode.Index;
-					if (sng.Parts[partId].Slides.swapWithUpper(slideId))
+					if (sng.Parts[partId].Slides.SwapWithUpper(slideId))
 					{
 						populateTree();
 						treeViewContents.SelectedNode = treeViewContents.Nodes[0].Nodes[partId].Nodes[slideId-1];
@@ -346,7 +346,7 @@ namespace Pbp.Forms
 				else if (treeViewContents.SelectedNode.Level == 1)
 				{
 					int partId = treeViewContents.SelectedNode.Index;
-					if (sng.Parts.swapWithUpper(partId))
+					if (sng.Parts.SwapWithUpper(partId))
 					{
 						populateTree();
 						treeViewContents.SelectedNode = treeViewContents.Nodes[0].Nodes[partId-1];
@@ -364,7 +364,7 @@ namespace Pbp.Forms
 				{
 					int partId = treeViewContents.SelectedNode.Parent.Index;
 					int slideId = treeViewContents.SelectedNode.Index;
-					if (sng.Parts[partId].Slides.swapWithLower(slideId))
+					if (sng.Parts[partId].Slides.SwapWithLower(slideId))
 					{
 						populateTree();
 						treeViewContents.SelectedNode = treeViewContents.Nodes[0].Nodes[partId].Nodes[slideId + 1];
@@ -373,7 +373,7 @@ namespace Pbp.Forms
 				else if (treeViewContents.SelectedNode.Level == 1)
 				{
 					int partId = treeViewContents.SelectedNode.Index;
-					if (sng.Parts.swapWithLower(partId))
+					if (sng.Parts.SwapWithLower(partId))
 					{
 						populateTree();
 						treeViewContents.SelectedNode = treeViewContents.Nodes[0].Nodes[partId + 1];
@@ -554,14 +554,14 @@ namespace Pbp.Forms
 
 		private void buttonSlideDuplicate_Click(object sender, EventArgs e)
 		{
-				sng.Parts[currentPartId].Slides.duplicate(currentSlideId);
+				sng.Parts[currentPartId].Slides.Duplicate(currentSlideId);
 				populateTree();
 				treeViewContents.SelectedNode = treeViewContents.Nodes[0].Nodes[currentPartId].Nodes[currentSlideId];
 		}
 
 		private void buttonSlideSeparate_Click(object sender, EventArgs e)
 		{
-			sng.Parts[currentPartId].Slides.split(currentSlideId);
+			sng.Parts[currentPartId].Slides.Split(currentSlideId);
 			populateTree();
 			treeViewContents.SelectedNode = treeViewContents.Nodes[0].Nodes[currentPartId].Nodes[currentSlideId];
 		}
@@ -578,7 +578,7 @@ namespace Pbp.Forms
 				int partIdx = treeViewContents.SelectedNode.Parent.Index;
 				int slideIdx = treeViewContents.SelectedNode.Index;
 
-				sng.Parts[partIdx].Slides[slideIdx].setSlideTextTranslation(textBoxSongTranslation.Text);
+				sng.Parts[partIdx].Slides[slideIdx].SetSlideTextTranslation(textBoxSongTranslation.Text);
 
                 // TODO
                 //object[] songArgs = { partIdx, slideIdx };
@@ -625,7 +625,7 @@ namespace Pbp.Forms
 				hashCode = sng.GetHashCode();
 				((EditorWindow)MdiParent).setStatus("Lied gespeichert als " + sng.FilePath + "");
                 
-				SongManager.getInstance().reloadSongByPath(sng.FilePath);
+				SongManager.GetInstance().ReloadSongByPath(sng.FilePath);
 			}
 		}
 
@@ -638,7 +638,7 @@ namespace Pbp.Forms
 			saveFileDialog.Filter = Song.getFileBoxFilterSave();
 			saveFileDialog.FilterIndex = ((EditorWindow)MdiParent).fileBoxFilterIndex;
 			saveFileDialog.AddExtension = true;
-			saveFileDialog.Title = "Lied speichern unter...";
+			saveFileDialog.Title = Resources.Lied_speichern_unter___;
 
 			if (saveFileDialog.ShowDialog(this) == DialogResult.OK)
 			{
@@ -649,7 +649,7 @@ namespace Pbp.Forms
                 
 			}
 
-			SongManager.getInstance().reloadSongByPath(sng.FilePath);
+			SongManager.GetInstance().ReloadSongByPath(sng.FilePath);
 
 		}
 
@@ -676,7 +676,7 @@ namespace Pbp.Forms
 				int partIdx = treeViewContents.SelectedNode.Parent.Index;
 				int slideIdx = treeViewContents.SelectedNode.Index;
 
-				sng.Parts[partIdx].Slides[slideIdx].setSlideText(textBoxSongText.Text);
+				sng.Parts[partIdx].Slides[slideIdx].SetSlideText(textBoxSongText.Text);
 
                 // TODO
                 //object[] songArgs = { partIdx, slideIdx };
@@ -770,7 +770,7 @@ namespace Pbp.Forms
 		private void textBoxSongText_KeyUp(object sender, KeyEventArgs e)
 		{
 			string text = ((TextBox)sender).Text.Trim();
-			sng.Parts[currentPartId].Slides[currentSlideId].setSlideText(text);
+			sng.Parts[currentPartId].Slides[currentSlideId].SetSlideText(text);
 			previewSlide();
 		}
 
@@ -784,7 +784,7 @@ namespace Pbp.Forms
 		private void textBoxSongTranslation_KeyUp(object sender, KeyEventArgs e)
 		{
 			string text = ((TextBox)sender).Text.Trim();
-			sng.Parts[currentPartId].Slides[currentSlideId].setSlideTextTranslation(text);
+			sng.Parts[currentPartId].Slides[currentSlideId].SetSlideTextTranslation(text);
 			previewSlide();
 		}
 

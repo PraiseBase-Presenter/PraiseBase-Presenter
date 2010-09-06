@@ -395,8 +395,28 @@
   <data name="monitor_256" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\monitor_256.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="AJ_Portable_Projection_Screen" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\AJ_Portable_Projection_Screen.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="Titel" xml:space="preserve">
+    <value>Titel</value>
+  </data>
+  <data name="nicht_vorhanden" xml:space="preserve">
+    <value>nicht vorhanden</value>
+  </data>
+  <data name="Eine_Instanz_dieser_Software_läuft_bereits_" xml:space="preserve">
+    <value>Eine Instanz dieser Software läuft bereits!</value>
+  </data>
+	<data name="Lied_speichern_unter___">
+		<value xml:space="preserve">Lied speichern unter...</value>
+	</data>
+	<data name="Diaschau_starten">
+		<value xml:space="preserve">Diaschau starten</value>
+	</data>
+	<data name="Diaschau_stoppen">
+		<value xml:space="preserve">Diaschau stoppen</value>
+	</data>
+	<data name="Keine_Bilder_ausgewählt_">
+		<value xml:space="preserve">Keine Bilder ausgewählt!</value>
+	</data>
 </root>
