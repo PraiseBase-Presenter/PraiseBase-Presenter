@@ -104,6 +104,29 @@ namespace Pbp.Forms
             }
 		}
 
+        public void setProjectionText(System.Drawing.Bitmap img, int fadeTime)
+        {
+            if (fadeTime > 0)
+            {
+                textImage.Opacity = 0f;
+                textImage.Source = loadBitmap(img);
+
+                Storyboard ImageAnimation2 = (Storyboard)FindResource("textAnimation2");
+                ImageAnimation2.SpeedRatio = 1000f / (float)fadeTime;
+                ImageAnimation2.Begin(this);
+
+                Storyboard ImageAnimation = (Storyboard)FindResource("textAnimation");
+                ImageAnimation.SpeedRatio = 1000f / (float)fadeTime;
+                ImageAnimation.Begin(this);
+            }
+            else
+            {
+                textImage.Source = loadBitmap(img);
+                textImageBack.Source = textImage.Source;
+                textImageBack.Opacity = 1f;
+            }
+        }
+
         /// <summary>
         /// Fired when the animation is finished
         /// </summary>
@@ -112,6 +135,16 @@ namespace Pbp.Forms
         private void DoubleAnimation_Completed(object sender, EventArgs e)
         {
             projectionImageBack.Source = projectionImage.Source;
+            if (AnimationFinished != null)
+            {
+                AnimationFinished(this, new EventArgs());
+            }
+        }
+
+        private void DoubleAnimation_Completed2(object sender, EventArgs e)
+        {
+            textImageBack.Source = textImage.Source;
+            textImageBack.Opacity = 1f;
             if (AnimationFinished != null)
             {
                 AnimationFinished(this, new EventArgs());
@@ -138,7 +171,7 @@ namespace Pbp.Forms
             {
                 str += bl.Lines[i].Text + "\n"; ;
             }
-            textBlock1.Text = str;
+            //textBlock1.Text = str;
             //textBlock1.Width = this.Width - (2 * textBlock1.Margin.Left);
             //textBlock1.Height = this.Height - (2 * textBlock1.Margin.Top);
         }

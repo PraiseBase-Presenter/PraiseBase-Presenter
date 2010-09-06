@@ -57,8 +57,6 @@ namespace Pbp.Forms
     {
         private ProjectionWindow projWindow; // Todo: use singleton
 
-        private Image currentBackground;
-
         private Timer diaTimer;
 		private bool blackout;
         private List<String> imageSearchResults;
@@ -416,15 +414,15 @@ namespace Pbp.Forms
 					{
 						Image img = ImageManager.Instance.getImageFromRelPath((string)listViewImageQueue.Items[0].Tag);
                         object[] args = {pn,sn};
-                        pictureBoxPreview.Image = projWindow.showSlide(SongManager.Instance.CurrentSong, img, args);
+                        projWindow.displayLayer(1, img);
+                        projWindow.displayLayer(2, SongManager.Instance.CurrentSong, args);
                         imageHistoryAdd((string)listViewImageQueue.Items[0].Tag);
 						listViewImageQueue.Items[0].Remove();
-                        this.currentBackground = img;
 					}
 					else
 					{
                         object [] args = {pn,sn};
-                        pictureBoxPreview.Image = projWindow.showSlide(SongManager.Instance.CurrentSong, currentBackground, args);
+                        projWindow.displayLayer(2, SongManager.Instance.CurrentSong, args);
 					}
 				}
 
@@ -432,15 +430,18 @@ namespace Pbp.Forms
                 else if (!linkLayers ^ ((Control.ModifierKeys & Keys.Shift) == Keys.Shift))
 				{
                     object[] args = { pn, sn };
-					pictureBoxPreview.Image = projWindow.showSlide(SongManager.Instance.CurrentSong, currentBackground, args);
+                    projWindow.displayLayer(2, SongManager.Instance.CurrentSong, args);
 				}
+
                 // Current slide + attached image
 				else
 				{
                     object[] args = { pn, sn };
                     Image img = SongManager.Instance.CurrentSong.getImage(SongManager.Instance.CurrentSong.Parts[pn].Slides[sn].ImageNumber);
-					pictureBoxPreview.Image = projWindow.showSlide(SongManager.Instance.CurrentSong, img, args);
-                    this.currentBackground = img;
+
+                    projWindow.displayLayer(1, img);
+                    projWindow.displayLayer(2, SongManager.Instance.CurrentSong, args);
+
                     if (SongManager.Instance.CurrentSong.RelativeImagePaths.Count > 0)
                         imageHistoryAdd(SongManager.Instance.CurrentSong.RelativeImagePaths[SongManager.Instance.CurrentSong.Parts[pn].Slides[sn].ImageNumber-1]);
 				}
@@ -472,20 +473,16 @@ namespace Pbp.Forms
             }
             else
             {
-                Image img = ImageManager.Instance.getImageFromRelPath(e.relativePath);
+                // Hide text if layers are linked OR shift is pressed and the layers are not linked
+                if (!(!linkLayers ^ ((Control.ModifierKeys & Keys.Shift) == Keys.Shift)))
+                {
+                    projWindow.hideLayer(2);
+                }
 
-                // Show current songtext with new image
-                if (!linkLayers ^ ((Control.ModifierKeys & Keys.Shift) == Keys.Shift))
-                {
-                    object[] args = { SongManager.Instance.CurrentPartNr, SongManager.Instance.CurrentSlideNr };
-                    pictureBoxPreview.Image = projWindow.showSlide(SongManager.Instance.CurrentSong, img, args);
-                }
-                // Show image only
-                else
-                {
-                    pictureBoxPreview.Image = projWindow.showSlide(null, img);
-                }
-                this.currentBackground = img;
+                // Show image
+                Image img = ImageManager.Instance.getImageFromRelPath(e.relativePath);
+                projWindow.displayLayer(1, img);
+
                 if (e.relativePath!=String.Empty)
                     imageHistoryAdd(e.relativePath);
             }
@@ -691,17 +688,19 @@ namespace Pbp.Forms
 				else
 				{
 					Image img = ImageManager.Instance.getImageFromRelPath((string)listViewDirectoryImages.Items[idx].Tag);
+                    
+                    // TODO
                     // Linked layers
 					if (!linkLayers ^ ((Control.ModifierKeys & Keys.Shift) == Keys.Shift && SongManager.Instance.CurrentSong != null && SongManager.Instance.CurrentSong.CurrentSlide >= 0))
 					{
-                        Object[] args = {SongManager.Instance.CurrentPartNr,SongManager.Instance.CurrentSlideNr};
-						pictureBoxPreview.Image = projWindow.showSlide(SongManager.Instance.CurrentSong, img, args);
+						//pictureBoxPreview.Image = projWindow.showSlide(SongManager.Instance.CurrentSong, img, args);
 					}
 					else
 					{
-                        pictureBoxPreview.Image = projWindow.showSlide(null,img);
+                        projWindow.hideLayer(2, Settings.Default.ProjectionFadeTime);
+                        //pictureBoxPreview.Image = projWindow.showSlide(null,img);
 					}
-                    this.currentBackground = img;
+                    projWindow.displayLayer(1, img);
 
 					// Add image to history
                     imageHistoryAdd((string)listViewDirectoryImages.Items[idx].Tag);
@@ -849,7 +848,7 @@ namespace Pbp.Forms
             if (diaTimer != null && diaTimer.Enabled)
             {
                 diaTimer.Stop();
-                projWindow.showSlide(null, null);
+                projWindow.hideLayer(1);
                 buttonDiaShow.Text = "Diaschau starten";
                 return;
             }
@@ -893,7 +892,7 @@ namespace Pbp.Forms
                     return;
                 }
                 diaTimer.Tag = diaStack;
-                pictureBoxPreview.Image = projWindow.showSlide(null,Image.FromFile(diaStack.Dequeue()));
+                projWindow.displayLayer(1,Image.FromFile(diaStack.Dequeue()));
                 diaTimer.Start();
             }
         }
@@ -903,11 +902,11 @@ namespace Pbp.Forms
             if (((Queue<string>)((Timer)sender).Tag).Count == 0)
             {
                 ((Timer)sender).Stop();
-                projWindow.showSlide(null, null);
+                projWindow.hideLayer(1);
                 buttonDiaShow.Text = "Diaschau starten";
                 return;
             }
-            pictureBoxPreview.Image = projWindow.showSlide(null,Image.FromFile(((Queue<string>)((Timer)sender).Tag).Dequeue()));
+            projWindow.displayLayer(1, Image.FromFile(((Queue<string>)((Timer)sender).Tag).Dequeue()));
         }
 
         private void radioButton2_CheckedChanged(object sender, EventArgs e)
@@ -1012,14 +1011,13 @@ namespace Pbp.Forms
                     Image img = ImageManager.Instance.getImageFromRelPath((string)listViewImageHistory.Items[idx].Tag);
                     if (!linkLayers ^ ((Control.ModifierKeys & Keys.Shift) == Keys.Shift && SongManager.Instance.CurrentSong != null && SongManager.Instance.CurrentSong.CurrentSlide >= 0))
                     {
-                        Object[] args = { SongManager.Instance.CurrentPartNr,SongManager.Instance.CurrentSlideNr};
-                        pictureBoxPreview.Image = projWindow.showSlide(SongManager.Instance.CurrentSong, img, args);
+
                     }
                     else
                     {
-                        pictureBoxPreview.Image = projWindow.showSlide(null,img);
+                        projWindow.hideLayer(2);
                     }
-                    this.currentBackground = img;
+                    projWindow.displayLayer(1, img);
                 }
             }
         }
@@ -1387,14 +1385,13 @@ namespace Pbp.Forms
 				Image img = ImageManager.Instance.getImageFromRelPath((string)listViewImageQueue.Items[idx].Tag);
 				if ((Control.ModifierKeys & Keys.Shift) == Keys.Shift && SongManager.Instance.CurrentSong != null && SongManager.Instance.CurrentSong.CurrentSlide >= 0)
 				{
-                    Object[] args = { SongManager.Instance.CurrentPartNr, SongManager.Instance.CurrentSlideNr };
-					pictureBoxPreview.Image = projWindow.showSlide(SongManager.Instance.CurrentSong, img, args);
-				}
+
+                }
 				else
 				{
-                    pictureBoxPreview.Image = projWindow.showSlide(null, img);
-				}
-                this.currentBackground = img;
+                    projWindow.hideLayer(2);
+				}                       
+                projWindow.displayLayer(1, img);
 			}
 		}
 
@@ -1479,15 +1476,14 @@ namespace Pbp.Forms
                     Image img = ImageManager.Instance.getImageFromRelPath((string)listViewFavorites.Items[idx].Tag);
                     if (!linkLayers ^ ((Control.ModifierKeys & Keys.Shift) == Keys.Shift && SongManager.Instance.CurrentSong != null && SongManager.Instance.CurrentSong.CurrentSlide >= 0))
                     {
-                        Object[] args = { SongManager.Instance.CurrentPartNr, SongManager.Instance.CurrentSlideNr };
-                        pictureBoxPreview.Image = projWindow.showSlide(SongManager.Instance.CurrentSong, img, args);
+
                     }
                     else
                     {
-                        pictureBoxPreview.Image = projWindow.showSlide(null,img);
+                        projWindow.hideLayer(2);
                     }
-                    this.currentBackground = img;
-
+                    projWindow.displayLayer(2, img);
+                    
                     // Add image to history
                     imageHistoryAdd((string)listViewFavorites.Items[idx].Tag);
                 }
@@ -1512,22 +1508,15 @@ namespace Pbp.Forms
             else
                 lt.VerticalAlign = StringAlignment.Near;
             lt.FontSize = (float)numericUpDown1.Value;
-            pictureBoxPreview.Image = projWindow.showSlide(lt, currentBackground);
-            
+
+            projWindow.displayLayer(2, lt, null);
         }
 
         private void buttonClearText_Click(object sender, EventArgs e)
         {
-            pictureBoxPreview.Image = projWindow.showSlide(null, currentBackground);
+            projWindow.hideLayer(2);
         }
 
-        private void button1_Click_2(object sender, EventArgs e)
-        {
-            pictureBoxPreview.Image = projWindow.showSlide(null, currentBackground);
-        }
-
-
-       
         private void liedSuchenToolStripMenuItem_Click(object sender, EventArgs e)
         {
             timerElementHighlight.Tag = songSearchTextBox;
@@ -1731,12 +1720,12 @@ namespace Pbp.Forms
 
             object[] args = { new XMLBible.VerseSelection(((XMLBible.Verse)listBoxBibleVerse.SelectedItem), ((XMLBible.Verse)listBoxBibleVerseTo.SelectedItem)) };
 
-            pictureBoxPreview.Image = projWindow.showSlide(bl, currentBackground,args);
+            projWindow.displayLayer(2, bl, args);
         }
 
         private void button1_Click_3(object sender, EventArgs e)
         {
-            pictureBoxPreview.Image = projWindow.showSlide(null, currentBackground);
+            projWindow.hideLayer(2);
         }
 
         private void buttonAddToBibleVerseList_Click(object sender, EventArgs e)

@@ -954,6 +954,8 @@ namespace Pbp
                 int textX = textStartX;
                 int textY = textStartY;
 
+                // TODO
+                /*
                 if (pr != ProjectionMode.Simulate && shadowThickness > 0)
                 {
                     shadodBrush = new SolidBrush(Color.FromArgb(15, Settings.Default.ProjectionShadowColor));
@@ -973,7 +975,7 @@ namespace Pbp
                         textY += lineHeight + lineSpacing;
                     }
                     textY = textStartY;
-                }
+                }*/
                 if (pr != ProjectionMode.Simulate && outLineThickness > 0)
                 {
                     gr.SmoothingMode = SmoothingMode.None;
@@ -1001,7 +1003,7 @@ namespace Pbp
                     gr.DrawString(s, font, fontBrush, new Point(textX, textY), strFormat);
                     textY += lineHeight + lineSpacing;
                 }
-
+                
                 if (slide.Translated)
                 {
                     int transStartX = textStartX + 10;

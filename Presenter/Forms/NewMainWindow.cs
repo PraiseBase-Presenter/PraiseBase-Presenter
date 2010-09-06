@@ -448,7 +448,7 @@ namespace Pbp.Forms
                 else if (!linkLayers ^ ((Control.ModifierKeys & Keys.Shift) == Keys.Shift))
 				{
                     object[] args = { pn, sn };
-					pictureBoxPreview.Image = projWindow.showSlide(SongManager.Instance.CurrentSong, currentBackground, args);
+					//pictureBoxPreview.Image = projWindow.showSlide(SongManager.Instance.CurrentSong, currentBackground, args);
 				}
                 // Current slide + attached image
 				else

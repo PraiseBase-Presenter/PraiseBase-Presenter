@@ -135,12 +135,63 @@ namespace Pbp.Forms
             else if (success == 1)
             {
                 string msg = "Projektionsbildschirm gefunden!" + Environment.NewLine;
-                msg += "Name: " + ConvertString(projScreen.DeviceName) + Environment.NewLine;
+                msg += "Name: " + Util.ConvertString(projScreen.DeviceName) + Environment.NewLine;
                 msg += "Auflösung: " + projScreen.WorkingArea.Width.ToString() + "x" + projScreen.WorkingArea.Height.ToString() + " Pixel" + Environment.NewLine;
                 MessageBox.Show(msg, "Projektion", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
         }
 
+        public void displayLayer(int layer, TextLayer tl, Object[] textLayerArgs)
+        {
+            displayLayer(layer, tl, textLayerArgs, Settings.Default.ProjectionFadeTime);
+        }
+
+        public void displayLayer(int layer, Image background)
+        {
+            displayLayer(layer, background, Settings.Default.ProjectionFadeTime);
+        }
+        
+        public void displayLayer(int layer, TextLayer tl, Object[] textLayerArgs, int fadetime)
+        {
+            Bitmap bmp = new Bitmap(w, h);
+            Graphics gr = Graphics.FromImage(bmp);
+            tl.writeOut(gr, textLayerArgs);
+
+            if (layer == 2)
+                ((WPFProjectionControl)(projectionControlHost.Child)).setProjectionText(bmp, fadetime);
+            else
+                ((WPFProjectionControl)(projectionControlHost.Child)).setProjectionImage(bmp, fadetime);
+        }
+
+        public void displayLayer(int layer, Image background, int fadetime)
+        {
+            Bitmap bmp = new Bitmap(w, h);
+            Graphics gr = Graphics.FromImage(bmp);
+            gr.FillRectangle(new SolidBrush(Settings.Default.ProjectionBackColor), 0, 0, w, h);
+            gr.DrawImage(background, new Rectangle(0, 0, w, h), 0, 0, background.Width, background.Height, GraphicsUnit.Pixel);
+
+            if (layer == 2)
+                ((WPFProjectionControl)(projectionControlHost.Child)).setProjectionText(bmp, fadetime);
+            else
+                ((WPFProjectionControl)(projectionControlHost.Child)).setProjectionImage(bmp, fadetime);
+        }
+
+        public void hideLayer(int layer)
+        {
+            hideLayer(layer, Settings.Default.ProjectionFadeTime);
+        }
+
+        public void hideLayer(int layer, int fadetime)
+        {
+            Bitmap bmp = new Bitmap(w, h);
+            if (layer == 2)
+                ((WPFProjectionControl)(projectionControlHost.Child)).setProjectionText(bmp, fadetime);
+            else
+                ((WPFProjectionControl)(projectionControlHost.Child)).setProjectionImage(bmp, fadetime);
+        }
+
+        int tmri = 0;
+        /*
         public Image showSlide(TextLayer tl, Image background)
         {
             Object[] textLayerArgs = { };
@@ -151,11 +202,11 @@ namespace Pbp.Forms
         {
             return showSlide(tl, background, textLayerArgs, ProjectionMode.Projection);
         }
-
-        int tmri = 0;
-
+        
         public Image showSlide(TextLayer tl, Image background, Object[] textLayerArgs,ProjectionMode pm)
         {
+            //DateTime startTime = DateTime.Now;
+
             MainWindow.Instance.setProgessBarTransitionValue(0);
 
             Application.DoEvents();
@@ -163,8 +214,14 @@ namespace Pbp.Forms
             Bitmap bmp = new Bitmap(w, h);
             Graphics gr = Graphics.FromImage(bmp);
 
+            //Console.WriteLine("Init " + (DateTime.Now - startTime).TotalSeconds);
+            //startTime = DateTime.Now;
+
             // Background color
 			gr.FillRectangle(new SolidBrush(Settings.Default.ProjectionBackColor), 0, 0, w, h);
+
+            //Console.WriteLine("BG color " + (DateTime.Now - startTime).TotalSeconds);
+            //startTime = DateTime.Now;
             
             // Background image
             if (background != null)
@@ -172,11 +229,23 @@ namespace Pbp.Forms
                 gr.DrawImage(background, new Rectangle(0, 0, w, h), 0, 0, background.Width, background.Height, GraphicsUnit.Pixel);
             }
 
+            //Console.WriteLine("BG image " + (DateTime.Now - startTime).TotalSeconds);
+            //startTime = DateTime.Now;
+
+            Bitmap bmp2 = new Bitmap(w, h);
+            Graphics gr2 = Graphics.FromImage(bmp2);
+
             // Apply text layer
             if (tl != null)
             {
-                tl.writeOut(gr, textLayerArgs, pm);
+                tl.writeOut(gr2, textLayerArgs, pm);
             }
+
+            //Console.WriteLine("Text " + (DateTime.Now - startTime).TotalSeconds);
+            //startTime = DateTime.Now;
+
+            //Console.WriteLine("Hash " + (DateTime.Now - startTime).TotalSeconds);
+            //startTime = DateTime.Now;
 
             if (pm == ProjectionMode.Projection)
             {
@@ -190,15 +259,23 @@ namespace Pbp.Forms
                     }
                 }
                 ((WPFProjectionControl)(projectionControlHost.Child)).setProjectionImage(bmp, Settings.Default.ProjectionFadeTime);
+                ((WPFProjectionControl)(projectionControlHost.Child)).setProjectionText(bmp2, Settings.Default.ProjectionFadeTime);
             }
+
+            //Console.WriteLine("Projection " + (DateTime.Now - startTime).TotalSeconds);
+            //startTime = DateTime.Now;
+
 
             //if (tl != null)
             //{
                 //((WPFProjectionControl)(projectionControlHost.Child)).setText(tl.getTextBlocks(textLayerArgs));
             //}
             gr.Dispose();
+
+            //String hash = Util.GetMD5Hash(bmp);
+
             return bmp;
-        }
+        }*/
 
         void tmr_Tick(object sender, EventArgs e)
         {
@@ -211,21 +288,6 @@ namespace Pbp.Forms
             tmr.Stop();
             tmri = 0;
             MainWindow.Instance.setProgessBarTransitionValue(0);
-        }
-
-
-        public string ConvertString(string unicode)
-        {
-            StringBuilder sb = new StringBuilder();
-            foreach (char c in unicode)
-                if (c >= 32 && c <= 255)
-                    sb.Append(c);
-            return sb.ToString();
-        }
-
-        private void projectionControlHost_ChildChanged(object sender, ChildChangedEventArgs e)
-        {
-
         }
     }
 }

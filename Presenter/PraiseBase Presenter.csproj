@@ -149,12 +149,12 @@
     <Compile Include="Forms\AboutWindow.Designer.cs">
       <DependentUpon>AboutWindow.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\NewMainWindow.cs">
+    <None Include="Forms\NewMainWindow.cs">
       <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\NewMainWindow.Designer.cs">
+    </None>
+    <None Include="Forms\NewMainWindow.Designer.cs">
       <DependentUpon>NewMainWindow.cs</DependentUpon>
-    </Compile>
+    </None>
     <Compile Include="Forms\EditorChild.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -203,20 +203,20 @@
     <Compile Include="Forms\SongImporter.Designer.cs">
       <DependentUpon>SongImporter.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\projectionWindow.cs">
+    <Compile Include="Forms\ProjectionWindow.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\projectionWindow.Designer.cs">
-      <DependentUpon>projectionWindow.cs</DependentUpon>
+    <Compile Include="Forms\ProjectionWindow.Designer.cs">
+      <DependentUpon>ProjectionWindow.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\settingsWindow.cs">
+    <Compile Include="Forms\SettingsWindow.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\settingsWindow.Designer.cs">
-      <DependentUpon>settingsWindow.cs</DependentUpon>
+    <Compile Include="Forms\SettingsWindow.Designer.cs">
+      <DependentUpon>SettingsWindow.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\projectionControl.xaml.cs">
-      <DependentUpon>projectionControl.xaml</DependentUpon>
+    <Compile Include="Forms\ProjectionControl.xaml.cs">
+      <DependentUpon>ProjectionControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Forms\SongDialog.cs">
       <SubType>Form</SubType>
@@ -285,12 +285,12 @@
       <DependentUpon>SongImporter.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\projectionWindow.resx">
-      <DependentUpon>projectionWindow.cs</DependentUpon>
+    <EmbeddedResource Include="Forms\ProjectionWindow.resx">
+      <DependentUpon>ProjectionWindow.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\settingsWindow.resx">
-      <DependentUpon>settingsWindow.cs</DependentUpon>
+    <EmbeddedResource Include="Forms\SettingsWindow.resx">
+      <DependentUpon>SettingsWindow.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\SongDialog.resx">
@@ -482,7 +482,7 @@
     <None Include="Resources\searchg.png" />
   </ItemGroup>
   <ItemGroup>
-    <Page Include="Forms\projectionControl.xaml">
+    <Page Include="Forms\ProjectionControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
       <Generator>MSBuild:Compile</Generator>

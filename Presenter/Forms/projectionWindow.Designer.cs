@@ -41,7 +41,6 @@
             this.projectionControlHost.Size = new System.Drawing.Size(640, 480);
             this.projectionControlHost.TabIndex = 2;
             this.projectionControlHost.Text = "elementHost1";
-            this.projectionControlHost.ChildChanged += new System.EventHandler<System.Windows.Forms.Integration.ChildChangedEventArgs>(this.projectionControlHost_ChildChanged);
             this.projectionControlHost.Child = null;
             // 
             // ProjectionWindow

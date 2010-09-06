@@ -7,6 +7,13 @@
         <Storyboard x:Key="imageAnimation">
             <DoubleAnimation  Storyboard.TargetName="projectionImage"  Storyboard.TargetProperty="(Image.Opacity)"  From="0"  To="1" Completed="DoubleAnimation_Completed" Duration="0:0:1" />
         </Storyboard>
+        <Storyboard x:Key="textAnimation">
+            <DoubleAnimation  Storyboard.TargetName="textImage"  Storyboard.TargetProperty="(Image.Opacity)"  From="0"  To="1" Completed="DoubleAnimation_Completed2" Duration="0:0:1" />
+        </Storyboard>
+        <Storyboard x:Key="textAnimation2">
+            <DoubleAnimation  Storyboard.TargetName="textImageBack"  Storyboard.TargetProperty="(Image.Opacity)"  From="1"  To="0" Duration="0:0:1" />
+        </Storyboard>
+
         <Storyboard x:Key="blackoutAnimationOn">
             <DoubleAnimation  Storyboard.TargetName="blackoutImage"  Storyboard.TargetProperty="(Image.Opacity)"  From="0"  To="1"  Duration="0:0:1"  />
         </Storyboard>
@@ -17,12 +24,25 @@
     </UserControl.Resources>
 
     <Grid Name="MainGrid">
+        
         <Image Name="projectionImageBack"  Stretch="Fill"></Image>
         <Image Name="projectionImage"  Stretch="Fill" Opacity="0"></Image>
+        
+        <Image Name="textImageBack"  Stretch="Fill">
+            <Image.Effect>
+                <DropShadowEffect BlurRadius="3" Opacity="0.8" ShadowDepth="3" />
+            </Image.Effect>
+        </Image>
+        <Image Name="textImage"  Stretch="Fill" Opacity="0">
+            <Image.Effect>
+                <DropShadowEffect BlurRadius="3" Opacity="0.8" ShadowDepth="3" />
+            </Image.Effect>
+        </Image>
+
         <Image Name="blackoutImage"  Stretch="Fill"></Image>
 
-        <TextBlock Margin="40" Name="textBlock1" Text="" Foreground="White" FontFamily="Calibri" FontSize="60" FontWeight="Bold" Opacity="1">
         <!--
+        <TextBlock Margin="40" Name="textBlock1" Text="" Foreground="White" FontFamily="Calibri" FontSize="60" FontWeight="Bold" Opacity="1">
             <TextBlock.BitmapEffect>
             <DropShadowBitmapEffect
               ShadowDepth="4"
@@ -31,8 +51,8 @@
               Opacity="0.8"
               Softness="0.25" />
           </TextBlock.BitmapEffect>
-        -->
         </TextBlock>
+        -->
 
         <!--
         <my:CustomRender Margin="22,29,26,26">
