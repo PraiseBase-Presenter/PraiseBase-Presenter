@@ -39,9 +39,9 @@ using Pbp.Properties;
 
 namespace Pbp.Forms
 {
-    public partial class settingsWindow : Form
+    public partial class SettingsWindow : Form
     {
-        public settingsWindow()
+        public SettingsWindow()
         {
             InitializeComponent();
         }

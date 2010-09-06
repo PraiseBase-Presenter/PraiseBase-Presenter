@@ -283,13 +283,13 @@ namespace Pbp.Forms
 
         private void optionenToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            settingsWindow stWnd = new settingsWindow();
+            SettingsWindow stWnd = new SettingsWindow();
             stWnd.ShowDialog(this);           
         }
 
         private void toolStripButton4_Click(object sender, EventArgs e)
         {
-            settingsWindow stWnd = new settingsWindow();
+            SettingsWindow stWnd = new SettingsWindow();
             stWnd.ShowDialog(this);
         }
 

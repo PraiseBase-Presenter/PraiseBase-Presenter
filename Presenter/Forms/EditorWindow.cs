@@ -209,7 +209,7 @@ namespace Pbp.Forms
 
         private void optionsToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            settingsWindow stWnd = new settingsWindow();
+            SettingsWindow stWnd = new SettingsWindow();
             stWnd.ShowDialog(this);
         }
 
