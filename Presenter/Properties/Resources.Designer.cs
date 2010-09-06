@@ -348,6 +348,20 @@ namespace Pbp.Properties {
             }
         }
         
+        internal static System.Drawing.Bitmap leinwand16 {
+            get {
+                object obj = ResourceManager.GetObject("leinwand16", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap leinwand16_no {
+            get {
+                object obj = ResourceManager.GetObject("leinwand16_no", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
         /// <summary>
         ///   Looks up a localized string similar to                     GNU GENERAL PUBLIC LICENSE
         ///                       Version 3, 29 June 2007

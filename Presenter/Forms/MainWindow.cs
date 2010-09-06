@@ -1405,13 +1405,12 @@ namespace Pbp.Forms
             if (linkLayers)
             {
                 buttonToggleLayerMode.Image = Resources.link;
-                label3.Text = "Text und Bild sind verknüpft";
+                //label3.Text = "Text und Bild sind verknüpft";
             }
             else
             {
                 buttonToggleLayerMode.Image = Resources.unlink;
-
-                label3.Text = "Text und Bild sind unabhängig";
+                //label3.Text = "Text und Bild sind unabhängig";
             }
         }
 
@@ -1532,6 +1531,11 @@ namespace Pbp.Forms
             Settings.Default.ProjectionFadeTime = trackBarFadeTime.Value*500;
         }
 
+        private void trackBarFadeTimeLayer1_Scroll(object sender, EventArgs e)
+        {
+            labelFadeTimeLayer2.Text = (trackBarFadeTimeLayer1.Value * 0.5) + " s";
+        }
+
         private void listViewSongHistory_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (listViewSongHistory.SelectedIndices.Count > 0)
@@ -1542,8 +1546,7 @@ namespace Pbp.Forms
             }
         }
 
-        private void button1_Click_4(object sender, EventArgs e)
-        {
+
             /*
             PowerPoint.Application oPPT = new PowerPoint.ApplicationClass();
             PowerPoint.Presentations objPresetSet;
@@ -1569,7 +1572,6 @@ namespace Pbp.Forms
             }
             oPPT.Quit();
              */
-        }
 
         #region Bible
 
@@ -1820,6 +1822,18 @@ namespace Pbp.Forms
         }
 
         #endregion
+
+        private void buttonToggleLayer2_Click(object sender, EventArgs e)
+        {
+            ProjectionWindow.Instance.hideLayer(2);
+        }
+
+        private void buttonToggleLayer1_Click(object sender, EventArgs e)
+        {
+            ProjectionWindow.Instance.hideLayer(1);
+        }
+
+
 
     }
 }

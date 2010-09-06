@@ -127,6 +127,12 @@
     <Compile Include="Components\ColorPicker.Designer.cs">
       <DependentUpon>ColorPicker.cs</DependentUpon>
     </Compile>
+    <Compile Include="Components\CustomGroupBox.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Components\CustomGroupBox.Designer.cs">
+      <DependentUpon>CustomGroupBox.cs</DependentUpon>
+    </Compile>
     <Compile Include="Components\SearchTextBox.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -236,6 +242,9 @@
     <EmbeddedResource Include="Components\ColorPicker.resx">
       <DependentUpon>ColorPicker.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Components\CustomGroupBox.resx">
+      <DependentUpon>CustomGroupBox.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Components\SearchTextBox.resx">
       <DependentUpon>SearchTextBox.cs</DependentUpon>
     </EmbeddedResource>
@@ -328,6 +337,9 @@
     <None Include="Resources\fade1blue.png" />
     <None Include="Resources\monitor_256.png" />
     <None Include="Resources\AJ_Portable_Projection_Screen.png" />
+    <None Include="Resources\leinwand19.png" />
+    <None Include="Resources\leinwand16.png" />
+    <None Include="Resources\leinwand16_no.png" />
     <Content Include="Songs\A Mighty Fortress Is Our God.ppl" />
     <Content Include="Songs\Jesus is my Lord.ppl" />
   </ItemGroup>

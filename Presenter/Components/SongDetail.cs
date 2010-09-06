@@ -82,7 +82,7 @@ namespace SongDetails
 
 			Point startPoint = new Point(0, 5);
 			Font pfnt = new Font("Arial",16);
-			Font txfnt = new Font("Arial", 12);
+			Font txfnt = new Font("Arial", 11);
 			int ypos = startPoint.Y;
 			ImageList thumbs = sng.getThumbs();
             

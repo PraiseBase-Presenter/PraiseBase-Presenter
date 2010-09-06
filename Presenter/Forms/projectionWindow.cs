@@ -165,7 +165,7 @@ namespace Pbp.Forms
 
         public void displayLayer(int layer, Image background, int fadetime)
         {
-            Bitmap bmp = new Bitmap(w, h);
+            var bmp = new Bitmap(w, h);
             Graphics gr = Graphics.FromImage(bmp);
             gr.FillRectangle(new SolidBrush(Settings.Default.ProjectionBackColor), 0, 0, w, h);
             gr.DrawImage(background, new Rectangle(0, 0, w, h), 0, 0, background.Width, background.Height, GraphicsUnit.Pixel);
@@ -183,7 +183,7 @@ namespace Pbp.Forms
 
         public void hideLayer(int layer, int fadetime)
         {
-            Bitmap bmp = new Bitmap(w, h);
+            var bmp = new Bitmap(w, h);
             if (layer == 2)
                 ((WpfProjectionControl)(projectionControlHost.Child)).SetProjectionText(bmp, fadetime);
             else
