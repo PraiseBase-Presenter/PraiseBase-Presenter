@@ -1,29 +1,94 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Linq;
-using System.Text;
 using System.Windows.Forms;
+using Pbp.Properties;
 
 namespace Pbp.Components
 {
     [DefaultEvent("TextChanged")]
     public partial class SearchTextBox : UserControl
     {
+        #region Delegates
+
+        public delegate void textChange(object sender, EventArgs e);
+
+        #endregion
+
+        private readonly PictureBox _cmPictureBox = new PictureBox();
+        private ContextMenuStrip _contextMenu;
+
         private string _placeHolderText = "Suchen";
-        [Description("The placeholder is displayed when the field is empty and does not have the focus."), Category("SearchTextBox"), DefaultValue("Suchen")]
-        public string PlaceHolderText { 
-            get { 
-                return _placeHolderText; 
-            } 
-            set { 
+        private string _currentText = String.Empty;
+
+        public SearchTextBox()
+        {
+            InitializeComponent();
+
+            SuspendLayout();
+
+            Paint += UserControl1_Paint;
+            Resize += UserControl1_Resize;
+
+            textBox.Multiline = true;
+            textBox.BorderStyle = BorderStyle.None;
+            textBox.BackColor = Color.White;
+            textBox.Font = new Font(textBox.Font.FontFamily, 10, FontStyle.Regular);
+            textBox.Enter += textBox_Enter;
+            textBox.Leave += textBox_Leave;
+            textBox.Click += textBox_Click;
+            textBox.KeyDown += textBox_KeyDown;
+            textBox.TextChanged += textBox_TextChanged;
+
+            EnabledChanged += SearchTextBox_EnabledChanged;
+
+            xPictureBox.Image = Resources.searchx;
+            xPictureBox.Click += xPictureBox_Click;
+            xPictureBox.Visible = false;
+
+            keyStrokeTimer.Interval = 250;
+            keyStrokeTimer.Tick += keyStrokeTimer_Tick;
+
+            _cmPictureBox.SizeMode = PictureBoxSizeMode.StretchImage;
+            _cmPictureBox.Image = Resources.arrowdown;
+            _cmPictureBox.Size = new Size(8, 8);
+            _cmPictureBox.Location = new Point(19, 7);
+            _cmPictureBox.MouseClick += cmPictureBox_MouseClick;
+            _cmPictureBox.Visible = false;
+
+            Controls.Add(textBox);
+            Controls.Add(xPictureBox);
+            Controls.Add(_cmPictureBox);
+
+            ResumeLayout(false);
+
+            textBox.ForeColor = Color.Gray;
+            textBox.Text = _placeHolderText;
+        }
+
+        [Description("The placeholder is displayed when the field is empty and does not have the focus."),
+         Category("SearchTextBox"), DefaultValue("Suchen")]
+        public string PlaceHolderText
+        {
+            get { return _placeHolderText; }
+            set
+            {
                 _placeHolderText = value;
                 textBox.ForeColor = Color.Gray;
                 textBox.Text = _placeHolderText;
-            } 
-        } 
+            }
+        }
+
+        [Description("Assign a context menu to set search options"), Category("SearchTextBox")]
+        public ContextMenuStrip OptionsMenu
+        {
+            get { return _contextMenu; }
+            set
+            {
+                _contextMenu = value;
+                _cmPictureBox.Visible = _contextMenu != null;
+            }
+        }
 
         public new Font Font
         {
@@ -33,10 +98,7 @@ namespace Pbp.Components
 
         public new string Text
         {
-            get
-            {
-                return textBox.Text != _placeHolderText ? textBox.Text : String.Empty;
-            }
+            get { return textBox.Text != _placeHolderText ? textBox.Text : String.Empty; }
             set
             {
                 textBox.Text = value;
@@ -44,63 +106,36 @@ namespace Pbp.Components
             }
         }
 
-        [Description("If greater than 0, waits this amount of miliseconds after a key has been pressed before raising the TextChanged event."), Category("SearchTextBox"), DefaultValue(250)]
-        public int KeyStrokeDelay { 
-            get { return keyStrokeTimer.Interval; } 
-            set { keyStrokeTimer.Interval = value;  } }
-
-        public delegate void textChange(object sender, EventArgs e);
-        public new event textChange TextChanged;
-
-        private string currentText = String.Empty;
-
-        public SearchTextBox()
+        [Description(
+            "If greater than 0, waits this amount of miliseconds after a key has been pressed before raising the TextChanged event."
+            ), Category("SearchTextBox"), DefaultValue(250)]
+        public int KeyStrokeDelay
         {
-            InitializeComponent();
-
-            SuspendLayout();
-
-            this.Paint += new System.Windows.Forms.PaintEventHandler(UserControl1_Paint);
-            this.Resize += new System.EventHandler(UserControl1_Resize);
-
-            textBox.Multiline = true;
-            textBox.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            textBox.BackColor = Color.White;
-            textBox.Font = new System.Drawing.Font(textBox.Font.FontFamily, 10, System.Drawing.FontStyle.Regular);
-            textBox.Enter += new System.EventHandler(textBox_Enter);
-            textBox.Leave += new System.EventHandler(textBox_Leave);
-            textBox.Click += new System.EventHandler(textBox_Click);
-            textBox.KeyDown += new System.Windows.Forms.KeyEventHandler(textBox_KeyDown);
-            textBox.TextChanged += new System.EventHandler(textBox_TextChanged);
-
-            this.EnabledChanged += new EventHandler(SearchTextBox_EnabledChanged);
-
-            xPictureBox.Image = Properties.Resources.searchx;
-            xPictureBox.Click += new System.EventHandler(xPictureBox_Click);
-            xPictureBox.Visible = false;
-
-            keyStrokeTimer.Interval = 250;
-            keyStrokeTimer.Tick += new System.EventHandler(keyStrokeTimer_Tick);
-
-            this.Controls.Add(textBox);
-            this.Controls.Add(xPictureBox);
-            
-            ResumeLayout(false);
-
-            textBox.ForeColor = Color.Gray;
-            textBox.Text = _placeHolderText;
+            get { return keyStrokeTimer.Interval; }
+            set { keyStrokeTimer.Interval = value; }
         }
 
-        void SearchTextBox_EnabledChanged(object sender, EventArgs e)
+        public new event textChange TextChanged;
+
+        private void cmPictureBox_MouseClick(object sender, MouseEventArgs e)
         {
-            if (!this.Enabled)
+            if (_contextMenu != null)
             {
-                this.BackColor = Color.LightGray;
+                Point loc = Parent.PointToScreen(Location);
+                _contextMenu.Show(loc.X + 3, loc.Y + Height);
+            }
+        }
+
+        private void SearchTextBox_EnabledChanged(object sender, EventArgs e)
+        {
+            if (!Enabled)
+            {
+                BackColor = Color.LightGray;
                 textBox.BackColor = Color.LightGray;
             }
             else
             {
-                this.BackColor = Color.White;
+                BackColor = Color.White;
                 textBox.BackColor = Color.White;
             }
         }
@@ -110,15 +145,15 @@ namespace Pbp.Components
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        void textBox_TextChanged(object sender, EventArgs e)
+        private void textBox_TextChanged(object sender, EventArgs e)
         {
             if (keyStrokeTimer.Enabled)
                 keyStrokeTimer.Stop();
             if (textBox.Text == String.Empty || textBox.Text == _placeHolderText)
             {
-                if (currentText != textBox.Text && textBox.Text == String.Empty && TextChanged != null)
+                if (_currentText != textBox.Text && textBox.Text == String.Empty && TextChanged != null)
                 {
-                    currentText = textBox.Text;
+                    _currentText = textBox.Text;
                     TextChanged(this, e);
                 }
                 xPictureBox.Visible = false;
@@ -126,15 +161,15 @@ namespace Pbp.Components
             else
             {
                 xPictureBox.Visible = true;
-                if (currentText != textBox.Text)
+                if (_currentText != textBox.Text)
                 {
-                    currentText = textBox.Text;
+                    _currentText = textBox.Text;
                     keyStrokeTimer.Start();
                 }
             }
         }
 
-        void keyStrokeTimer_Tick(object sender, EventArgs e)
+        private void keyStrokeTimer_Tick(object sender, EventArgs e)
         {
             if (textBox.Text != _placeHolderText && TextChanged != null)
                 TextChanged(this, e);
@@ -142,26 +177,26 @@ namespace Pbp.Components
         }
 
 
-        void xPictureBox_Click(object sender, EventArgs e)
+        private void xPictureBox_Click(object sender, EventArgs e)
         {
             textBox.Text = String.Empty;
             textBox.Focus();
         }
 
-        void textBox_KeyDown(object sender, KeyEventArgs e)
+        private void textBox_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Escape)
             {
                 textBox.Text = String.Empty;
             }
-        } 
+        }
 
-        void textBox_Click(object sender, EventArgs e)
+        private void textBox_Click(object sender, EventArgs e)
         {
             textBox.SelectAll();
         }
 
-        void textBox_Enter(object sender, EventArgs e)
+        private void textBox_Enter(object sender, EventArgs e)
         {
             if (textBox.Text == _placeHolderText)
             {
@@ -174,7 +209,7 @@ namespace Pbp.Components
             }
         }
 
-        void textBox_Leave(object sender, EventArgs e)
+        private void textBox_Leave(object sender, EventArgs e)
         {
             if (textBox.Text == string.Empty)
             {
@@ -182,25 +217,26 @@ namespace Pbp.Components
                 textBox.Text = _placeHolderText;
             }
         }
- 
+
         private void UserControl1_Resize(object sender, EventArgs e)
         {
-            textBox.Size = new Size(this.Width - 43, this.Height - 6);
-            textBox.Location = new Point(23, 4);
-            xPictureBox.Size = new Size(15,15);
-            xPictureBox.Location = new Point(this.Width - 18, (this.Height - 15) / 2);
-         }
- 
+            int offset = _contextMenu != null ? 10 : 0;
+            textBox.Size = new Size(Width - 43 - offset, Height - 6);
+            textBox.Location = new Point(23 + offset, 4);
+
+            xPictureBox.Size = new Size(15, 15);
+            xPictureBox.Location = new Point(Width - 18, (Height - 15)/2);
+        }
+
         private void UserControl1_Paint(object sender, PaintEventArgs e)
         {
-            e.Graphics.DrawImage(Properties.Resources.searchg, 3, (this.Height - 18) / 2, 18, 18);
-            ControlPaint.DrawBorder(e.Graphics, this.ClientRectangle, Color.Gray, ButtonBorderStyle.Solid);
-         }
+            e.Graphics.DrawImage(Resources.searchg, 3, (Height - 18)/2, 18, 18);
+            ControlPaint.DrawBorder(e.Graphics, ClientRectangle, Color.Gray, ButtonBorderStyle.Solid);
+        }
 
         public void select(int start, int length)
         {
             textBox.Select(start, length);
         }
-
     }
 }

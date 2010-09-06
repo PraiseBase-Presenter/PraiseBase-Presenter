@@ -57,6 +57,8 @@ namespace Pbp.Forms
         private Timer diaTimer;
         private List<String> imageSearchResults;
 
+        private SongSearchMode searchMode = SongSearchMode.TitleAndText;
+
         private bool linkLayers = true;
 
         /// <summary>
@@ -102,7 +104,6 @@ namespace Pbp.Forms
             blackout = false;
 
             loadSongList();
-            songSearchTextBox.Focus();
 
             imageTreeViewInit();
 
@@ -154,7 +155,7 @@ namespace Pbp.Forms
             int cnt = 0;
 
             var lviList = new List<ListViewItem>();
-            foreach (Song sng in SongManager.Instance.GetSearchResults(needle, radioSongSearchAll.Checked ? 1 : 0))
+            foreach (Song sng in SongManager.Instance.GetSearchResults(needle, searchMode))
             {
                 var lvi = new ListViewItem(sng.Title);
                 lvi.Tag = sng.GUID;
@@ -350,7 +351,7 @@ namespace Pbp.Forms
         {
             Application.DoEvents();
 
-            groupBoxSongContents.Text = SongManager.Instance.CurrentSong.Title;
+            label3.Text = SongManager.Instance.CurrentSong.Title;
             songDetailElement.setSong(SongManager.Instance.CurrentSong);
 
             if (SongManager.Instance.CurrentSong.Comment != String.Empty || SongManager.Instance.CurrentSong.hasQA())
@@ -1831,6 +1832,22 @@ namespace Pbp.Forms
         private void buttonToggleLayer1_Click(object sender, EventArgs e)
         {
             ProjectionWindow.Instance.hideLayer(1);
+        }
+
+        private void titelToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            searchMode = SongSearchMode.Title;
+            titelToolStripMenuItem.Checked = true;
+            titelUndTextToolStripMenuItem.Checked = false;
+            searchSongs(songSearchTextBox.Text);
+        }
+
+        private void titelUndTextToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            searchMode = SongSearchMode.TitleAndText;
+            titelToolStripMenuItem.Checked = false;
+            titelUndTextToolStripMenuItem.Checked = true;
+            searchSongs(songSearchTextBox.Text);
         }
 
 

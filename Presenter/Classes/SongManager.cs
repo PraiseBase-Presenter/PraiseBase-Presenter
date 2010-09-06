@@ -192,7 +192,7 @@ namespace Pbp
         /// <param name="needle">The search pattern</param>
         /// <param name="mode">If set to 1, the sogtext is also searched for the pattern. If set to 0, only the song title will be used</param>
         /// <returns>Returns a list of matches songs</returns>
-        public List<Song> GetSearchResults(string needle, int mode)
+        public List<Song> GetSearchResults(string needle, SongSearchMode searchMode)
         {
             needle = needle.Trim().ToLower();
             needle = needle.Replace(",", "");
@@ -205,12 +205,18 @@ namespace Pbp
             foreach (var kvp in SongList)
             {
                 if (SongList[kvp.Key].Title.ToLower().Contains(needle) ||
-                    (mode == 1 && SongList[kvp.Key].SearchText.Contains(needle)))
+                    (searchMode == SongSearchMode.TitleAndText && SongList[kvp.Key].SearchText.Contains(needle)))
                 {
                     tmpList.Add(SongList[kvp.Key]);
                 }
             }
             return tmpList;
         }
+    }
+
+    public enum SongSearchMode
+    {
+        Title,
+        TitleAndText
     }
 }

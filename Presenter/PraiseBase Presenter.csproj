@@ -101,7 +101,6 @@
   <ItemGroup>
     <Compile Include="Classes\BaseLayer.cs" />
     <Compile Include="Classes\BibleLayer.cs" />
-    <Compile Include="Classes\ProjectionItem.cs" />
     <Compile Include="Classes\SongSlideLayer.cs" />
     <Compile Include="Classes\TextAlignment.cs" />
     <Compile Include="Classes\TextBlock.cs" />
@@ -157,12 +156,6 @@
     <Compile Include="Forms\AboutWindow.Designer.cs">
       <DependentUpon>AboutWindow.cs</DependentUpon>
     </Compile>
-    <None Include="Forms\NewMainWindow.cs">
-      <SubType>Form</SubType>
-    </None>
-    <None Include="Forms\NewMainWindow.Designer.cs">
-      <DependentUpon>NewMainWindow.cs</DependentUpon>
-    </None>
     <Compile Include="Forms\EditorChild.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -232,8 +225,6 @@
     <Compile Include="Forms\SongDialog.Designer.cs">
       <DependentUpon>SongDialog.cs</DependentUpon>
     </Compile>
-    <Compile Include="Classes\OutlinedText.cs" />
-    <Compile Include="Forms\CustomRender.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Components\BackgrundImageBrowser.resx">
@@ -258,10 +249,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\AboutWindow.resx">
       <DependentUpon>AboutWindow.cs</DependentUpon>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\NewMainWindow.resx">
-      <DependentUpon>NewMainWindow.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\EditorChild.resx">
@@ -337,7 +324,6 @@
     <None Include="Resources\fade1blue.png" />
     <None Include="Resources\monitor_256.png" />
     <None Include="Resources\AJ_Portable_Projection_Screen.png" />
-    <None Include="Resources\leinwand19.png" />
     <None Include="Resources\leinwand16.png" />
     <None Include="Resources\leinwand16_no.png" />
     <Content Include="Songs\A Mighty Fortress Is Our God.ppl" />
