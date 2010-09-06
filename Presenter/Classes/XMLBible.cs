@@ -16,7 +16,7 @@ namespace Pbp
     /// Wikipedia: http://de.wikipedia.org/wiki/Zefania_XML
     /// Docs: http://bgfdb.de/zefaniaxml/bml/
     /// </summary>
-    class XMLBible
+    public class XMLBible
     {
         public string Title { get; private set; }
         public bool isValid { get; private set; }

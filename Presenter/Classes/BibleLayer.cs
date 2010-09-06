@@ -18,30 +18,16 @@ namespace Pbp
         public StringAlignment HorizontalAlign { get; set; }
         public StringAlignment VerticalAlign { get; set; }
 
-        public BibleLayer()
-        {
-            
-        }
+        XMLBible.VerseSelection verseSelection;
 
-        public override List<TextBlock> getTextBlocks(Object[] args)
+        public BibleLayer(XMLBible.VerseSelection verseSelection)
         {
-            List<TextBlock> blocks = new List<TextBlock>();
-
-            TextBlock tb = new TextBlock();
-            tb.Margin = 50;
-            tb.Alignment = TextAlignment.MiddleCenter;
-            TextLine tl = new TextLine();
-            tl.Text = "Lorem ipsum dolor sit amet!";
-            tl.Font = Pbp.Properties.Settings.Default.ProjectionMasterFont;
-            tl.FontBrush = Brushes.Green;
-            tb.Lines.Add(tl);
-            blocks.Add(tb);
-            return blocks;
+            this.verseSelection = verseSelection;
         }
 
         public override void writeOut(System.Drawing.Graphics gr, object[] args, ProjectionMode pr)
         {
-            XMLBible.VerseSelection v = (XMLBible.VerseSelection)args[0];
+            XMLBible.VerseSelection v = verseSelection;
 
             string Title = v.ToString();
             string Text = v.Text;

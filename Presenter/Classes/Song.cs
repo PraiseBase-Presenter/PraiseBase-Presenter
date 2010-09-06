@@ -830,27 +830,6 @@ namespace Pbp
 			return code;
 		}
 
-        public override List<TextBlock> getTextBlocks(Object[] args)
-        {
-            List<TextBlock> blocks = new List<TextBlock>();
-
-            Slide slide = Parts[(int)args[0]].Slides[(int)args[1]];
-
-            TextBlock tb = new TextBlock();
-            tb.Margin = 50;
-            tb.Alignment = TextAlignment.MiddleCenter;
-            foreach (string s in slide.Lines)
-            {
-                TextLine tl = new TextLine();
-                tl.Text = s;
-                tl.Font = Pbp.Properties.Settings.Default.ProjectionMasterFont;
-                tl.FontBrush = Brushes.Green;
-                tb.Lines.Add(tl);
-            }
-            blocks.Add(tb);
-            return blocks;
-        }
-
         public override void writeOut(System.Drawing.Graphics gr, object[] args, ProjectionMode pr)
         {
             Slide slide = Parts[(int)args[0]].Slides[(int)args[1]];

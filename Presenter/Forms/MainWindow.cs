@@ -499,10 +499,6 @@ namespace Pbp.Forms
             {
                 textBoxLiveText.Focus();
             }
-            else if (tabControlTextLayer.SelectedIndex == 2)
-            {
-                
-            }
         }
 
         private void webToolStripMenuItem_Click(object sender, EventArgs e)
@@ -687,19 +683,13 @@ namespace Pbp.Forms
 				}
 				else
 				{
-					Image img = ImageManager.Instance.getImageFromRelPath((string)listViewDirectoryImages.Items[idx].Tag);
-                    
-                    // TODO
                     // Linked layers
-					if (!linkLayers ^ ((Control.ModifierKeys & Keys.Shift) == Keys.Shift && SongManager.Instance.CurrentSong != null && SongManager.Instance.CurrentSong.CurrentSlide >= 0))
-					{
-						//pictureBoxPreview.Image = projWindow.showSlide(SongManager.Instance.CurrentSong, img, args);
-					}
-					else
+					if (! (!linkLayers ^ ((Control.ModifierKeys & Keys.Shift) == Keys.Shift && SongManager.Instance.CurrentSong != null && SongManager.Instance.CurrentSong.CurrentSlide >= 0)))
 					{
                         projWindow.hideLayer(2, Settings.Default.ProjectionFadeTime);
-                        //pictureBoxPreview.Image = projWindow.showSlide(null,img);
-					}
+                    }
+
+                    Image img = ImageManager.Instance.getImageFromRelPath((string)listViewDirectoryImages.Items[idx].Tag);
                     projWindow.displayLayer(1, img);
 
 					// Add image to history
@@ -715,8 +705,9 @@ namespace Pbp.Forms
                 for (int i = 0; i < listViewImageHistory.Items.Count; i++)
                 {
                     if ((string)listViewImageHistory.Items[i].Tag == relImagePath)
+                    {
                         listViewImageHistory.Items.RemoveAt(i);
-
+                    }
                 }
                 listViewImageHistory.LargeImageList.Images.Add(ImageManager.Instance.getThumbFromRelPath(relImagePath));
                 ListViewItem lvi = new ListViewItem("");
@@ -1008,15 +999,12 @@ namespace Pbp.Forms
                 }
                 else
                 {
-                    Image img = ImageManager.Instance.getImageFromRelPath((string)listViewImageHistory.Items[idx].Tag);
-                    if (!linkLayers ^ ((Control.ModifierKeys & Keys.Shift) == Keys.Shift && SongManager.Instance.CurrentSong != null && SongManager.Instance.CurrentSong.CurrentSlide >= 0))
-                    {
-
-                    }
-                    else
+                    if (!(!linkLayers ^ ((Control.ModifierKeys & Keys.Shift) == Keys.Shift && SongManager.Instance.CurrentSong != null && SongManager.Instance.CurrentSong.CurrentSlide >= 0)))
                     {
                         projWindow.hideLayer(2);
                     }
+
+                    Image img = ImageManager.Instance.getImageFromRelPath((string)listViewImageHistory.Items[idx].Tag);
                     projWindow.displayLayer(1, img);
                 }
             }
@@ -1380,17 +1368,14 @@ namespace Pbp.Forms
 			if (projWindow != null && listViewImageQueue.SelectedIndices.Count > 0)
 			{
 				Application.DoEvents();
-				int idx = listViewImageQueue.SelectedIndices[0];
 
-				Image img = ImageManager.Instance.getImageFromRelPath((string)listViewImageQueue.Items[idx].Tag);
-				if ((Control.ModifierKeys & Keys.Shift) == Keys.Shift && SongManager.Instance.CurrentSong != null && SongManager.Instance.CurrentSong.CurrentSlide >= 0)
-				{
-
-                }
-				else
+				if (! ((Control.ModifierKeys & Keys.Shift) == Keys.Shift && SongManager.Instance.CurrentSong != null && SongManager.Instance.CurrentSong.CurrentSlide >= 0))
 				{
                     projWindow.hideLayer(2);
-				}                       
+				}
+
+                int idx = listViewImageQueue.SelectedIndices[0];
+                Image img = ImageManager.Instance.getImageFromRelPath((string)listViewImageQueue.Items[idx].Tag);
                 projWindow.displayLayer(1, img);
 			}
 		}
@@ -1473,15 +1458,11 @@ namespace Pbp.Forms
                 }
                 else
                 {
-                    Image img = ImageManager.Instance.getImageFromRelPath((string)listViewFavorites.Items[idx].Tag);
-                    if (!linkLayers ^ ((Control.ModifierKeys & Keys.Shift) == Keys.Shift && SongManager.Instance.CurrentSong != null && SongManager.Instance.CurrentSong.CurrentSlide >= 0))
-                    {
-
-                    }
-                    else
+                    if (! (!linkLayers ^ ((Control.ModifierKeys & Keys.Shift) == Keys.Shift && SongManager.Instance.CurrentSong != null && SongManager.Instance.CurrentSong.CurrentSlide >= 0)))
                     {
                         projWindow.hideLayer(2);
                     }
+                    Image img = ImageManager.Instance.getImageFromRelPath((string)listViewFavorites.Items[idx].Tag);
                     projWindow.displayLayer(2, img);
                     
                     // Add image to history
@@ -1715,10 +1696,10 @@ namespace Pbp.Forms
 
         private void buttonBibleTextShow_Click(object sender, EventArgs e)
         {
-            BibleLayer bl = new BibleLayer();
+            BibleLayer bl = new BibleLayer(new XMLBible.VerseSelection(((XMLBible.Verse)listBoxBibleVerse.SelectedItem), ((XMLBible.Verse)listBoxBibleVerseTo.SelectedItem)) );
             bl.FontSize = (float)numericUpDown2.Value;
 
-            object[] args = { new XMLBible.VerseSelection(((XMLBible.Verse)listBoxBibleVerse.SelectedItem), ((XMLBible.Verse)listBoxBibleVerseTo.SelectedItem)) };
+            object[] args = {  };
 
             projWindow.displayLayer(2, bl, args);
         }
