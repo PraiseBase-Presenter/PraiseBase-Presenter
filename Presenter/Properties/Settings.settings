@@ -111,7 +111,7 @@
       <Value Profile="(Default)">Setlists</Value>
     </Setting>
     <Setting Name="ProjectionFadeTime" Type="System.Int32" Scope="User">
-      <Value Profile="(Default)">1</Value>
+      <Value Profile="(Default)">1000</Value>
     </Setting>
     <Setting Name="BugReportUrl" Type="System.String" Scope="Application">
       <Value Profile="(Default)">http://code.google.com/p/praisebasepresenter/issues/entry?template=Defect%20report%20from%20user</Value>
@@ -136,6 +136,12 @@
     </Setting>
     <Setting Name="UpdateCheckUrl" Type="System.String" Scope="Application">
       <Value Profile="(Default)">http://www.dysign.ch/praisebasepresenter/version.xml</Value>
+    </Setting>
+    <Setting Name="SongSearchMode" Type="Pbp.SongSearchMode" Scope="User">
+      <Value Profile="(Default)">TitleAndText</Value>
+    </Setting>
+    <Setting Name="ProjectionFadeTimeLayer1" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">1000</Value>
     </Setting>
   </Settings>
 </SettingsFile>

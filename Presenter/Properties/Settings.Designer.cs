@@ -343,7 +343,7 @@ namespace Pbp.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("1")]
+        [global::System.Configuration.DefaultSettingValueAttribute("1000")]
         public int ProjectionFadeTime {
             get {
                 return ((int)(this["ProjectionFadeTime"]));
@@ -437,6 +437,30 @@ namespace Pbp.Properties {
         public string UpdateCheckUrl {
             get {
                 return ((string)(this["UpdateCheckUrl"]));
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("TitleAndText")]
+        public global::Pbp.SongSearchMode SongSearchMode {
+            get {
+                return ((global::Pbp.SongSearchMode)(this["SongSearchMode"]));
+            }
+            set {
+                this["SongSearchMode"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("1000")]
+        public int ProjectionFadeTimeLayer1 {
+            get {
+                return ((int)(this["ProjectionFadeTimeLayer1"]));
+            }
+            set {
+                this["ProjectionFadeTimeLayer1"] = value;
             }
         }
     }

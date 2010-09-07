@@ -57,8 +57,6 @@ namespace Pbp.Forms
         private Timer diaTimer;
         private List<String> imageSearchResults;
 
-        private SongSearchMode searchMode = SongSearchMode.TitleAndText;
-
         private bool linkLayers = true;
 
         /// <summary>
@@ -110,6 +108,8 @@ namespace Pbp.Forms
             trackBarFadeTime.Value = Settings.Default.ProjectionFadeTime/500;
             labelFadeTime.Text = (trackBarFadeTime.Value*0.5) + " s";
 
+            trackBarFadeTimeLayer1.Value = Settings.Default.ProjectionFadeTimeLayer1/500;
+            labelFadeTimeLayer1.Text = (trackBarFadeTimeLayer1.Value * 0.5) + " s";
 
             linkLayers = Settings.Default.LinkLayers;
             setLinkLayerUI();
@@ -118,6 +118,18 @@ namespace Pbp.Forms
             comboBox2.SelectedIndex = 0;
 
             numericUpDown1.Value = (int) Settings.Default.ProjectionMasterFont.Size;
+
+            if (Settings.Default.SongSearchMode == SongSearchMode.Title)
+            {
+                titelToolStripMenuItem.Checked = true;
+                titelUndTextToolStripMenuItem.Checked = false;
+            }
+            else
+            {
+                    titelToolStripMenuItem.Checked = false;
+                    titelUndTextToolStripMenuItem.Checked = true;
+            }
+            
         }
 
         private void beendenToolStripMenuItem_Click(object sender, EventArgs e)
@@ -155,7 +167,7 @@ namespace Pbp.Forms
             int cnt = 0;
 
             var lviList = new List<ListViewItem>();
-            foreach (Song sng in SongManager.Instance.GetSearchResults(needle, searchMode))
+            foreach (Song sng in SongManager.Instance.GetSearchResults(needle, Settings.Default.SongSearchMode))
             {
                 var lvi = new ListViewItem(sng.Title);
                 lvi.Tag = sng.GUID;
@@ -1212,7 +1224,7 @@ namespace Pbp.Forms
 
         public void setProgessBarTransitionValue(int value)
         {
-            progressBarTransition.Value = Math.Min(value, progressBarTransition.Maximum);
+            //progressBarTransition.Value = Math.Min(value, progressBarTransition.Maximum);
         }
 
 
@@ -1534,7 +1546,8 @@ namespace Pbp.Forms
 
         private void trackBarFadeTimeLayer1_Scroll(object sender, EventArgs e)
         {
-            labelFadeTimeLayer2.Text = (trackBarFadeTimeLayer1.Value * 0.5) + " s";
+            labelFadeTimeLayer1.Text = (trackBarFadeTimeLayer1.Value * 0.5) + " s";
+            Settings.Default.ProjectionFadeTimeLayer1 = trackBarFadeTimeLayer1.Value * 500;
         }
 
         private void listViewSongHistory_SelectedIndexChanged(object sender, EventArgs e)
@@ -1836,7 +1849,7 @@ namespace Pbp.Forms
 
         private void titelToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            searchMode = SongSearchMode.Title;
+            Settings.Default.SongSearchMode = SongSearchMode.Title;
             titelToolStripMenuItem.Checked = true;
             titelUndTextToolStripMenuItem.Checked = false;
             searchSongs(songSearchTextBox.Text);
@@ -1844,7 +1857,7 @@ namespace Pbp.Forms
 
         private void titelUndTextToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            searchMode = SongSearchMode.TitleAndText;
+            Settings.Default.SongSearchMode = SongSearchMode.TitleAndText;
             titelToolStripMenuItem.Checked = false;
             titelUndTextToolStripMenuItem.Checked = true;
             searchSongs(songSearchTextBox.Text);

@@ -177,6 +177,7 @@ namespace Pbp
                     textX = transStartX;
                     textY = transStartY;
 
+                    /*
                     if (pr != ProjectionMode.Simulate && shadowThickness > 0)
                     {
                         shadodBrush = new SolidBrush(Color.FromArgb(15, Settings.Default.ProjectionShadowColor));
@@ -196,7 +197,7 @@ namespace Pbp
                             textY += lineHeight + lineSpacing;
                         }
                         textY = transStartY;
-                    }
+                    }*/
                     if (pr != ProjectionMode.Simulate && outLineThickness > 0)
                     {
                         gr.SmoothingMode = SmoothingMode.None;
