@@ -1230,18 +1230,11 @@ namespace Pbp.Forms
 
         public void setStatus(string text)
         {
-            toolStripStatusLabelInfo.Text = text;
+            /*toolStripStatusLabelInfo.Text = text;
             var statusTimer = new Timer();
             statusTimer.Interval = 2000;
             statusTimer.Tick += statusTimer_Tick;
-            statusTimer.Start();
-        }
-
-        private void statusTimer_Tick(object sender, EventArgs e)
-        {
-            toolStripStatusLabelInfo.Text = string.Empty;
-            ((Timer) sender).Stop();
-            ((Timer) sender).Dispose();
+            statusTimer.Start();*/
         }
 
         private void liederToolStripMenuItem_Click(object sender, EventArgs e)
