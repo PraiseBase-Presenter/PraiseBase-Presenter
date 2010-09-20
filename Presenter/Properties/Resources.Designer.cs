@@ -451,6 +451,15 @@ namespace Pbp.Properties {
             }
         }
         
+        /// <summary>
+        ///   Looks up a localized string similar to Projektion.
+        /// </summary>
+        internal static string Projektion {
+            get {
+                return ResourceManager.GetString("Projektion", resourceCulture);
+            }
+        }
+        
         internal static System.Drawing.Bitmap search {
             get {
                 object obj = ResourceManager.GetObject("search", resourceCulture);

@@ -1079,7 +1079,7 @@
             this.searchTextBoxImages.PlaceHolderText = "Bild suchen";
             this.searchTextBoxImages.Size = new System.Drawing.Size(228, 24);
             this.searchTextBoxImages.TabIndex = 26;
-            this.searchTextBoxImages.TextChanged += new Pbp.Components.SearchTextBox.textChange(this.searchTextBoxImages_TextChanged);
+            this.searchTextBoxImages.TextChanged += new Pbp.Components.SearchTextBox.TextChange(this.searchTextBoxImages_TextChanged);
             // 
             // treeViewImageDirectories
             // 
@@ -1395,7 +1395,7 @@
             this.songSearchTextBox.PlaceHolderText = "Lied suchen";
             this.songSearchTextBox.Size = new System.Drawing.Size(228, 24);
             this.songSearchTextBox.TabIndex = 22;
-            this.songSearchTextBox.TextChanged += new Pbp.Components.SearchTextBox.textChange(this.songSearchBox_TextChanged);
+            this.songSearchTextBox.TextChanged += new Pbp.Components.SearchTextBox.TextChange(this.songSearchBox_TextChanged);
             // 
             // listViewSongs
             // 
@@ -1656,7 +1656,7 @@
             this.searchTextBoxBible.PlaceHolderText = "Bibelstelle";
             this.searchTextBoxBible.Size = new System.Drawing.Size(148, 24);
             this.searchTextBoxBible.TabIndex = 38;
-            this.searchTextBoxBible.TextChanged += new Pbp.Components.SearchTextBox.textChange(this.searchTextBoxBible_TextChanged);
+            this.searchTextBoxBible.TextChanged += new Pbp.Components.SearchTextBox.TextChange(this.searchTextBoxBible_TextChanged);
             // 
             // listViewBibleVerseList
             // 

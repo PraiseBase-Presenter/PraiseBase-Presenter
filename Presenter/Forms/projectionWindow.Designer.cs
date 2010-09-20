@@ -59,7 +59,7 @@
             this.ShowIcon = false;
             this.ShowInTaskbar = false;
             this.Text = "projectionWindow";
-            this.Load += new System.EventHandler(this.projectionWindow_Load);
+            this.Load += new System.EventHandler(this.ProjectionWindow_Load);
             this.ResumeLayout(false);
 
         }

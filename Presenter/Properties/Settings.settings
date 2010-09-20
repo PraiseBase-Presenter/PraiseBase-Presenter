@@ -6,7 +6,7 @@
       <Value Profile="(Default)" />
     </Setting>
     <Setting Name="ProjectionMasterFont" Type="System.Drawing.Font" Scope="User">
-      <Value Profile="(Default)">Calibri, 60pt, style=Bold</Value>
+      <Value Profile="(Default)">Calibri, 50.25pt, style=Bold</Value>
     </Setting>
     <Setting Name="ProjectionBackColor" Type="System.Drawing.Color" Scope="User">
       <Value Profile="(Default)">Black</Value>
@@ -75,7 +75,7 @@
       <Value Profile="(Default)">PraiseBase Presenter</Value>
     </Setting>
     <Setting Name="ProjectionMasterFontTranslation" Type="System.Drawing.Font" Scope="User">
-      <Value Profile="(Default)">Calibri, 39.75pt, style=Italic</Value>
+      <Value Profile="(Default)">Calibri, 30pt, style=Italic</Value>
     </Setting>
     <Setting Name="ProjectionMasterLineSpacing" Type="System.Int32" Scope="User">
       <Value Profile="(Default)">0</Value>

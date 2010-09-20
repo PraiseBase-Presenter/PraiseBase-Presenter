@@ -212,7 +212,7 @@ namespace Pbp.Forms
                 ProjectionWindow.Instance.Hide();
                 if (blackout)
                 {
-                    ProjectionWindow.Instance.setBlackout(false, false);
+                    ProjectionWindow.Instance.SetBlackout(false, false);
                     blackout = false;
                 }
             }
@@ -227,11 +227,11 @@ namespace Pbp.Forms
                     if (!ProjectionWindow.Instance.Visible)
                     {
                         ProjectionWindow.Instance.Show();
-                        ProjectionWindow.Instance.setBlackout(true, false);
+                        ProjectionWindow.Instance.SetBlackout(true, false);
                     }
                     else
                     {
-                        ProjectionWindow.Instance.setBlackout(true, true);
+                        ProjectionWindow.Instance.SetBlackout(true, true);
                     }
                     blackout = true;
                 }
@@ -245,12 +245,12 @@ namespace Pbp.Forms
                 if (!ProjectionWindow.Instance.Visible)
                 {
                     ProjectionWindow.Instance.Show();
-                    ProjectionWindow.Instance.setBlackout(false, false);
+                    ProjectionWindow.Instance.SetBlackout(false, false);
                     blackout = false;
                 }
                 else if (blackout)
                 {
-                    ProjectionWindow.Instance.setBlackout(false, true);
+                    ProjectionWindow.Instance.SetBlackout(false, true);
                     blackout = false;
                 }
             }
@@ -403,29 +403,29 @@ namespace Pbp.Forms
                     if (listViewImageQueue.Items.Count > 0)
                     {
                         Image img = ImageManager.Instance.getImageFromRelPath((string) listViewImageQueue.Items[0].Tag);
-                        ProjectionWindow.Instance.displayLayer(1, img);
-                        ProjectionWindow.Instance.displayLayer(2, ssl);
+                        ProjectionWindow.Instance.DisplayLayer(1, img, Settings.Default.ProjectionFadeTimeLayer1);
+                        ProjectionWindow.Instance.DisplayLayer(2, ssl);
                         imageHistoryAdd((string) listViewImageQueue.Items[0].Tag);
                         listViewImageQueue.Items[0].Remove();
                     }
                     else
                     {
-                        ProjectionWindow.Instance.displayLayer(2, ssl);
+                        ProjectionWindow.Instance.DisplayLayer(2, ssl);
                     }
                 }
 
                     // SHIFT pressed, use current slide
                 else if (!linkLayers ^ ((ModifierKeys & Keys.Shift) == Keys.Shift))
                 {
-                    ProjectionWindow.Instance.displayLayer(2, ssl);
+                    ProjectionWindow.Instance.DisplayLayer(2, ssl);
                 }
 
                     // Current slide + attached image
                 else
                 {
                     Image img = SongManager.Instance.CurrentSong.getImage(cs.ImageNumber);
-                    ProjectionWindow.Instance.displayLayer(1, img);
-                    ProjectionWindow.Instance.displayLayer(2, ssl);
+                    ProjectionWindow.Instance.DisplayLayer(1, img, Settings.Default.ProjectionFadeTimeLayer1);
+                    ProjectionWindow.Instance.DisplayLayer(2, ssl);
 
                     if (SongManager.Instance.CurrentSong.RelativeImagePaths.Count > 0)
                         imageHistoryAdd(SongManager.Instance.CurrentSong.RelativeImagePaths[cs.ImageNumber - 1]);
@@ -457,12 +457,12 @@ namespace Pbp.Forms
                 // Hide text if layers are linked OR shift is pressed and the layers are not linked
                 if (!(!linkLayers ^ ((ModifierKeys & Keys.Shift) == Keys.Shift)))
                 {
-                    ProjectionWindow.Instance.hideLayer(2);
+                    ProjectionWindow.Instance.HideLayer(2);
                 }
 
                 // Show image
                 Image img = ImageManager.Instance.getImageFromRelPath(e.relativePath);
-                ProjectionWindow.Instance.displayLayer(1, img);
+                ProjectionWindow.Instance.DisplayLayer(1, img, Settings.Default.ProjectionFadeTimeLayer1);
 
                 if (e.relativePath != String.Empty)
                     imageHistoryAdd(e.relativePath);
@@ -679,12 +679,12 @@ namespace Pbp.Forms
                            ((ModifierKeys & Keys.Shift) == Keys.Shift && SongManager.Instance.CurrentSong != null &&
                             SongManager.Instance.CurrentSong.CurrentSlide >= 0)))
                     {
-                        ProjectionWindow.Instance.hideLayer(2, Settings.Default.ProjectionFadeTime);
+                        ProjectionWindow.Instance.HideLayer(2, Settings.Default.ProjectionFadeTime);
                     }
 
                     Image img =
                         ImageManager.Instance.getImageFromRelPath((string) listViewDirectoryImages.Items[idx].Tag);
-                    ProjectionWindow.Instance.displayLayer(1, img);
+                    ProjectionWindow.Instance.DisplayLayer(1, img, Settings.Default.ProjectionFadeTimeLayer1);
 
                     // Add image to history
                     imageHistoryAdd((string) listViewDirectoryImages.Items[idx].Tag);
@@ -834,7 +834,7 @@ namespace Pbp.Forms
             if (diaTimer != null && diaTimer.Enabled)
             {
                 diaTimer.Stop();
-                ProjectionWindow.Instance.hideLayer(1);
+                ProjectionWindow.Instance.HideLayer(1);
                 buttonDiaShow.Text = Resources.Diaschau_starten;
                 return;
             }
@@ -878,7 +878,7 @@ namespace Pbp.Forms
                     return;
                 }
                 diaTimer.Tag = diaStack;
-                ProjectionWindow.Instance.displayLayer(1, Image.FromFile(diaStack.Dequeue()));
+                ProjectionWindow.Instance.DisplayLayer(1, Image.FromFile(diaStack.Dequeue()), Settings.Default.ProjectionFadeTimeLayer1);
                 diaTimer.Start();
             }
         }
@@ -888,11 +888,11 @@ namespace Pbp.Forms
             if (((Queue<string>) ((Timer) sender).Tag).Count == 0)
             {
                 ((Timer) sender).Stop();
-                ProjectionWindow.Instance.hideLayer(1);
+                ProjectionWindow.Instance.HideLayer(1);
                 buttonDiaShow.Text = Resources.Diaschau_starten;
                 return;
             }
-            ProjectionWindow.Instance.displayLayer(1, Image.FromFile(((Queue<string>) ((Timer) sender).Tag).Dequeue()));
+            ProjectionWindow.Instance.DisplayLayer(1, Image.FromFile(((Queue<string>)((Timer)sender).Tag).Dequeue()), Settings.Default.ProjectionFadeTimeLayer1);
         }
 
         private void radioButton2_CheckedChanged(object sender, EventArgs e)
@@ -1001,11 +1001,11 @@ namespace Pbp.Forms
                           ((ModifierKeys & Keys.Shift) == Keys.Shift && SongManager.Instance.CurrentSong != null &&
                            SongManager.Instance.CurrentSong.CurrentSlide >= 0)))
                     {
-                        ProjectionWindow.Instance.hideLayer(2);
+                        ProjectionWindow.Instance.HideLayer(2);
                     }
 
                     Image img = ImageManager.Instance.getImageFromRelPath((string) listViewImageHistory.Items[idx].Tag);
-                    ProjectionWindow.Instance.displayLayer(1, img);
+                    ProjectionWindow.Instance.DisplayLayer(1, img, Settings.Default.ProjectionFadeTimeLayer1);
                 }
             }
         }
@@ -1357,12 +1357,12 @@ namespace Pbp.Forms
                     ! ((ModifierKeys & Keys.Shift) == Keys.Shift && SongManager.Instance.CurrentSong != null &&
                        SongManager.Instance.CurrentSong.CurrentSlide >= 0))
                 {
-                    ProjectionWindow.Instance.hideLayer(2);
+                    ProjectionWindow.Instance.HideLayer(2);
                 }
 
                 int idx = listViewImageQueue.SelectedIndices[0];
                 Image img = ImageManager.Instance.getImageFromRelPath((string) listViewImageQueue.Items[idx].Tag);
-                ProjectionWindow.Instance.displayLayer(1, img);
+                ProjectionWindow.Instance.DisplayLayer(1, img, Settings.Default.ProjectionFadeTimeLayer1);
             }
         }
 
@@ -1450,10 +1450,10 @@ namespace Pbp.Forms
                            ((ModifierKeys & Keys.Shift) == Keys.Shift && SongManager.Instance.CurrentSong != null &&
                             SongManager.Instance.CurrentSong.CurrentSlide >= 0)))
                     {
-                        ProjectionWindow.Instance.hideLayer(2);
+                        ProjectionWindow.Instance.HideLayer(2);
                     }
                     Image img = ImageManager.Instance.getImageFromRelPath((string) listViewFavorites.Items[idx].Tag);
-                    ProjectionWindow.Instance.displayLayer(2, img);
+                    ProjectionWindow.Instance.DisplayLayer(2, img);
 
                     // Add image to history
                     imageHistoryAdd((string) listViewFavorites.Items[idx].Tag);
@@ -1483,12 +1483,12 @@ namespace Pbp.Forms
                 lt.VerticalAlign = StringAlignment.Near;
             lt.FontSize = (float) numericUpDown1.Value;
 
-            ProjectionWindow.Instance.displayLayer(2, lt);
+            ProjectionWindow.Instance.DisplayLayer(2, lt);
         }
 
         private void buttonClearText_Click(object sender, EventArgs e)
         {
-            ProjectionWindow.Instance.hideLayer(2);
+            ProjectionWindow.Instance.HideLayer(2);
         }
 
         private void liedSuchenToolStripMenuItem_Click(object sender, EventArgs e)
@@ -1512,7 +1512,7 @@ namespace Pbp.Forms
 
         private void bildschirmeSuchenToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            ProjectionWindow.Instance.scanScreens(1);
+            ProjectionWindow.Instance.ScanScreens(1);
         }
 
         private void listViewFavorites_Leave(object sender, EventArgs e)
@@ -1727,12 +1727,12 @@ namespace Pbp.Forms
                 new BibleLayer(new XMLBible.VerseSelection(((XMLBible.Verse) listBoxBibleVerse.SelectedItem),
                                                            ((XMLBible.Verse) listBoxBibleVerseTo.SelectedItem)));
             bl.FontSize = (float) numericUpDown2.Value;
-            ProjectionWindow.Instance.displayLayer(2, bl);
+            ProjectionWindow.Instance.DisplayLayer(2, bl);
         }
 
         private void button1_Click_3(object sender, EventArgs e)
         {
-            ProjectionWindow.Instance.hideLayer(2);
+            ProjectionWindow.Instance.HideLayer(2);
         }
 
         private void buttonAddToBibleVerseList_Click(object sender, EventArgs e)
@@ -1832,12 +1832,12 @@ namespace Pbp.Forms
 
         private void buttonToggleLayer2_Click(object sender, EventArgs e)
         {
-            ProjectionWindow.Instance.hideLayer(2);
+            ProjectionWindow.Instance.HideLayer(2);
         }
 
         private void buttonToggleLayer1_Click(object sender, EventArgs e)
         {
-            ProjectionWindow.Instance.hideLayer(1);
+            ProjectionWindow.Instance.HideLayer(1);
         }
 
         private void titelToolStripMenuItem_Click(object sender, EventArgs e)

@@ -37,7 +37,7 @@ namespace Pbp.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("Calibri, 60pt, style=Bold")]
+        [global::System.Configuration.DefaultSettingValueAttribute("Calibri, 50.25pt, style=Bold")]
         public global::System.Drawing.Font ProjectionMasterFont {
             get {
                 return ((global::System.Drawing.Font)(this["ProjectionMasterFont"]));
@@ -205,7 +205,7 @@ namespace Pbp.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("Calibri, 39.75pt, style=Italic")]
+        [global::System.Configuration.DefaultSettingValueAttribute("Calibri, 30pt, style=Italic")]
         public global::System.Drawing.Font ProjectionMasterFontTranslation {
             get {
                 return ((global::System.Drawing.Font)(this["ProjectionMasterFontTranslation"]));

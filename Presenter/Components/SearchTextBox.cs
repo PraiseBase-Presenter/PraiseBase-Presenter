@@ -11,7 +11,7 @@ namespace Pbp.Components
     {
         #region Delegates
 
-        public delegate void textChange(object sender, EventArgs e);
+        public delegate void TextChange(object sender, EventArgs e);
 
         #endregion
 
@@ -115,7 +115,7 @@ namespace Pbp.Components
             set { keyStrokeTimer.Interval = value; }
         }
 
-        public new event textChange TextChanged;
+        public new event TextChange TextChanged;
 
         private void cmPictureBox_MouseClick(object sender, MouseEventArgs e)
         {
