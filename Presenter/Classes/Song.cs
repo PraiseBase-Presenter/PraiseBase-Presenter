@@ -91,6 +91,16 @@ namespace Pbp
         public string Language { get; set; }
 
         /// <summary>
+        /// CCLI Song ID
+        /// </summary>
+        public string CcliID { get; set; }
+
+        /// <summary>
+        /// Copyright information
+        /// </summary>
+        public string Copyright { get; set; }
+
+        /// <summary>
         /// Gets or sets a list of tags (like categories) which describe the type of the song
         /// </summary>
         public TagList Tags { get; set; }
@@ -401,6 +411,12 @@ namespace Pbp
             else
                 _qa = 0;
 
+            // Set CCLI Song ID
+            if (xmlRoot["general"]["ccliNo"] != null)
+            {
+                CcliID = xmlRoot["general"]["ccliNo"].InnerText;
+            }
+
             if (xmlRoot["formatting"]["textorientation"] != null)
             {
                 if (xmlRoot["formatting"]["textorientation"]["horizontal"] != null)
@@ -481,6 +497,11 @@ namespace Pbp
                     if (ImageManager.Instance.imageExists(elem.InnerText))
                         RelativeImagePaths.Add(elem.InnerText);
                 }
+            }
+
+            // Read copyright text
+            if (xmlRoot["information"]["Copyright"] != null && xmlRoot["information"]["Copyright"]["text"] != null) {
+                Copyright = xmlRoot["information"]["Copyright"]["text"].InnerText;
             }
 
             //
@@ -578,6 +599,11 @@ namespace Pbp
                     xmlRoot["general"].AppendChild(xmlDoc.CreateElement("qa"));
                     xmlRoot["general"]["qa"].InnerText = _qa.ToString();
                 }
+                if (CcliID != String.Empty)
+                {
+                    xmlRoot["general"].AppendChild(xmlDoc.CreateElement("ccliNo"));
+                    xmlRoot["general"]["ccliNo"].InnerText = CcliID;
+                }
 
                 xmlRoot.AppendChild(xmlDoc.CreateElement("songtext"));
 
@@ -640,6 +666,7 @@ namespace Pbp
                 xmlRoot["information"]["copyright"].AppendChild(xmlDoc.CreateElement("position"));
                 xmlRoot["information"]["copyright"]["position"].InnerText = "lastslide";
                 xmlRoot["information"]["copyright"].AppendChild(xmlDoc.CreateElement("text"));
+                xmlRoot["information"]["Copyright"]["text"].InnerText = Copyright;                
                 xmlRoot["information"].AppendChild(xmlDoc.CreateElement("source"));
                 xmlRoot["information"]["source"].AppendChild(xmlDoc.CreateElement("position"));
                 xmlRoot["information"]["source"]["position"].InnerText = "firstslide";

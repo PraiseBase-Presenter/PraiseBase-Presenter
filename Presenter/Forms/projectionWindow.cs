@@ -155,7 +155,10 @@ namespace Pbp.Forms
             var bmp = new Bitmap(Width, Height);
             Graphics gr = Graphics.FromImage(bmp);
             gr.FillRectangle(new SolidBrush(Settings.Default.ProjectionBackColor), 0, 0, Width, Height);
-            gr.DrawImage(background, new Rectangle(0, 0, Width, Height), 0, 0, background.Width, background.Height, GraphicsUnit.Pixel);
+            if (background != null)
+            {
+                gr.DrawImage(background, new Rectangle(0, 0, Width, Height), 0, 0, background.Width, background.Height, GraphicsUnit.Pixel);
+            }
 
             if (layer == 2)
                 ((WpfProjectionControl)(projectionControlHost.Child)).SetProjectionText(bmp, fadetime);
