@@ -103,9 +103,6 @@
     <Compile Include="Classes\BibleLayer.cs" />
     <Compile Include="Classes\SongSlideLayer.cs" />
     <Compile Include="Classes\TextAlignment.cs" />
-    <Compile Include="Classes\TextBlock.cs" />
-    <Compile Include="Classes\TextLine.cs" />
-    <Compile Include="Classes\TextPath.cs" />
     <Compile Include="Classes\UpdateCheck.cs" />
     <Compile Include="Classes\XMLBible.cs" />
     <Compile Include="Classes\LiveText.cs" />

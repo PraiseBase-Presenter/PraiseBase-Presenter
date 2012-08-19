@@ -785,8 +785,10 @@ namespace Pbp
                 xmlRoot["formatting"]["borders"].AppendChild(xmlDoc.CreateElement("sourceright"));
                 xmlRoot["formatting"]["borders"]["sourceright"].InnerText = "40";
 
-
-                XmlWriter wrt = new XmlTextWriter(fileName, Encoding.UTF8);
+                XmlWriterSettings wrtStn = new XmlWriterSettings();
+                wrtStn.Encoding = Encoding.UTF8;
+                wrtStn.Indent = true;
+                XmlWriter wrt = XmlTextWriter.Create(fileName, wrtStn);
                 xmlDoc.WriteTo(wrt);
                 wrt.Flush();
                 wrt.Close();

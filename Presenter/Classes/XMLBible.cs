@@ -94,6 +94,10 @@ namespace Pbp
         {
             List<string> res = new List<string>();
             DirectoryInfo di = new DirectoryInfo(Pbp.Properties.Settings.Default.DataDirectory + Path.DirectorySeparatorChar + "Bibles");
+            if (!di.Exists)
+            {
+                di.Create();
+            }
             FileInfo[] rgFiles = di.GetFiles("*.xml");
             foreach (FileInfo fi in rgFiles)
             {

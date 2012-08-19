@@ -109,14 +109,17 @@ namespace Pbp
             string searchDir = Settings.Default.DataDirectory + Path.DirectorySeparatorChar + Settings.Default.SongDir;
 
             var songPaths = new List<string>();
-            if (Directory.Exists(searchDir))
+            if (!Directory.Exists(searchDir))
             {
-                foreach (string ext in Enum.GetNames(typeof (Song.FileFormat)))
-                {
-                    string[] songFilePaths = Directory.GetFiles(searchDir, "*." + ext, SearchOption.AllDirectories);
-                    songPaths.AddRange(songFilePaths);
-                }
+                Directory.CreateDirectory(searchDir);
             }
+
+            foreach (string ext in Enum.GetNames(typeof (Song.FileFormat)))
+            {
+                string[] songFilePaths = Directory.GetFiles(searchDir, "*." + ext, SearchOption.AllDirectories);
+                songPaths.AddRange(songFilePaths);
+            }
+            
 
 
             int cnt = songPaths.Count;

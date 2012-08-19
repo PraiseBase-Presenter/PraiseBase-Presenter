@@ -57,6 +57,7 @@ namespace Pbp.Forms
             if (sng.IsValid)
             {
                 this.Text = sng.Title;
+                this.textBoxSongTitle.Text = sng.Title;
                 populateTree();
                 treeViewContents.SelectedNode = treeViewContents.Nodes[0];
 				valid = true;
@@ -98,7 +99,8 @@ namespace Pbp.Forms
 					i++;
 				}
 
-				
+                textBoxSongTitle.Focus();
+                textBoxSongTitle.SelectAll();
 			}
             else
             {
@@ -182,7 +184,7 @@ namespace Pbp.Forms
         public void populateTree()
         {
             treeViewContents.Nodes.Clear();
-            treeViewContents.Nodes.Add(sng.Title);
+            //treeViewContents.Nodes.Add(sng.Title);
             int j = 0;
             foreach (Song.Part part in sng.Parts)
             {
@@ -196,10 +198,10 @@ namespace Pbp.Forms
                     partNode.Nodes.Add(slideNode);
                 }
 				partNode.ContextMenuStrip = partContextMenu;
-                treeViewContents.Nodes[0].Nodes.Add(partNode);
+                treeViewContents.Nodes.Add(partNode);
                 j++;
             }
-			treeViewContents.Nodes[0].ContextMenuStrip = songContextMenu;
+			treeViewContents.ContextMenuStrip = songContextMenu;
             treeViewContents.ExpandAll();
         }
 
@@ -207,7 +209,7 @@ namespace Pbp.Forms
         {
 			int partId = -1;
 			int slideId = -1;
-            if (treeViewContents.SelectedNode.Level == 2)
+            if (treeViewContents.SelectedNode.Level == 1)
             {
 				partId = treeViewContents.SelectedNode.Parent.Index;
 				slideId = treeViewContents.SelectedNode.Index;
@@ -226,7 +228,7 @@ namespace Pbp.Forms
 					buttonMoveUp.Enabled = false;				
 				
             }
-            else if (treeViewContents.SelectedNode.Level == 1)
+            else if (treeViewContents.SelectedNode.Level == 0)
             {
 				partId = treeViewContents.SelectedNode.Index;
 
@@ -270,6 +272,7 @@ namespace Pbp.Forms
             // TODO
             //object[] songArgs = {partId,slideId};
             //pictureBoxPreview.Image = projWindow.showSlide(sng, sng.getImage(sld.ImageNumber), songArgs, ProjectionMode.Simulate);
+            pictureBoxPreview.Image = sng.getImage(sld.ImageNumber);
 
 			currentPartId = partId;
 			currentSlideId = slideId;
@@ -287,7 +290,7 @@ namespace Pbp.Forms
 			sng.Parts.Add(prt);
 
 			populateTree();
-			treeViewContents.SelectedNode = treeViewContents.Nodes[0].LastNode.LastNode;
+            treeViewContents.SelectedNode = treeViewContents.Nodes[treeViewContents.Nodes.Count].LastNode;
 		}
 
         private void button1_Click(object sender, EventArgs e)
@@ -311,18 +314,18 @@ namespace Pbp.Forms
             Song.Slide sld = new Song.Slide(sng);
 			sng.Parts[currentPartId].Slides.Add(sld);
             populateTree();
-			treeViewContents.SelectedNode = treeViewContents.Nodes[0].Nodes[currentPartId].LastNode;
+			treeViewContents.SelectedNode = treeViewContents.Nodes[currentPartId].LastNode;
         }
 
         private void buttonDelItem_Click(object sender, EventArgs e)
         {
             if (treeViewContents.SelectedNode != null)
             {
-                if (treeViewContents.SelectedNode.Level == 2)
+                if (treeViewContents.SelectedNode.Level == 1)
                 {
 					buttonDelSlide_Click(sender, e);
                 }
-                else if (treeViewContents.SelectedNode.Level == 1)
+                else if (treeViewContents.SelectedNode.Level == 0)
                 {
 					buttonDelSongPart_Click(sender, e);
                 }
@@ -333,23 +336,23 @@ namespace Pbp.Forms
         {
 			if (treeViewContents.SelectedNode != null)
 			{
-				if (treeViewContents.SelectedNode.Level == 2)
+				if (treeViewContents.SelectedNode.Level == 1)
 				{
 					int partId = treeViewContents.SelectedNode.Parent.Index;
 					int slideId = treeViewContents.SelectedNode.Index;
 					if (sng.Parts[partId].Slides.SwapWithUpper(slideId))
 					{
 						populateTree();
-						treeViewContents.SelectedNode = treeViewContents.Nodes[0].Nodes[partId].Nodes[slideId-1];
+						treeViewContents.SelectedNode = treeViewContents.Nodes[partId].Nodes[slideId-1];
 					}
 				}
-				else if (treeViewContents.SelectedNode.Level == 1)
+				else if (treeViewContents.SelectedNode.Level == 0)
 				{
 					int partId = treeViewContents.SelectedNode.Index;
 					if (sng.Parts.SwapWithUpper(partId))
 					{
 						populateTree();
-						treeViewContents.SelectedNode = treeViewContents.Nodes[0].Nodes[partId-1];
+						treeViewContents.SelectedNode = treeViewContents.Nodes[partId-1];
 					}
 				}
 			}
@@ -360,23 +363,23 @@ namespace Pbp.Forms
 		{
 			if (treeViewContents.SelectedNode != null)
 			{
-				if (treeViewContents.SelectedNode.Level == 2)
+				if (treeViewContents.SelectedNode.Level == 1)
 				{
 					int partId = treeViewContents.SelectedNode.Parent.Index;
 					int slideId = treeViewContents.SelectedNode.Index;
 					if (sng.Parts[partId].Slides.SwapWithLower(slideId))
 					{
 						populateTree();
-						treeViewContents.SelectedNode = treeViewContents.Nodes[0].Nodes[partId].Nodes[slideId + 1];
+						treeViewContents.SelectedNode = treeViewContents.Nodes[partId].Nodes[slideId + 1];
 					}
 				}
-				else if (treeViewContents.SelectedNode.Level == 1)
+				else if (treeViewContents.SelectedNode.Level == 0)
 				{
 					int partId = treeViewContents.SelectedNode.Index;
 					if (sng.Parts.SwapWithLower(partId))
 					{
 						populateTree();
-						treeViewContents.SelectedNode = treeViewContents.Nodes[0].Nodes[partId + 1];
+						treeViewContents.SelectedNode = treeViewContents.Nodes[partId + 1];
 					}
 				}
 			}
@@ -524,7 +527,7 @@ namespace Pbp.Forms
 					sng.Parts[currentPartId].Slides.RemoveAt(slideId);
 					populateTree();
 					currentSlideId = slideId - 1;
-					treeViewContents.SelectedNode = treeViewContents.Nodes[0].Nodes[currentPartId].Nodes[currentSlideId];
+					treeViewContents.SelectedNode = treeViewContents.Nodes[currentPartId].Nodes[currentSlideId];
 				}
 			}
 			else
@@ -556,14 +559,14 @@ namespace Pbp.Forms
 		{
 				sng.Parts[currentPartId].Slides.Duplicate(currentSlideId);
 				populateTree();
-				treeViewContents.SelectedNode = treeViewContents.Nodes[0].Nodes[currentPartId].Nodes[currentSlideId];
+				treeViewContents.SelectedNode = treeViewContents.Nodes[currentPartId].Nodes[currentSlideId];
 		}
 
 		private void buttonSlideSeparate_Click(object sender, EventArgs e)
 		{
 			sng.Parts[currentPartId].Slides.Split(currentSlideId);
 			populateTree();
-			treeViewContents.SelectedNode = treeViewContents.Nodes[0].Nodes[currentPartId].Nodes[currentSlideId];
+			treeViewContents.SelectedNode = treeViewContents.Nodes[currentPartId].Nodes[currentSlideId];
 		}
 
 		private void EditorChild_Resize(object sender, EventArgs e)
@@ -573,7 +576,7 @@ namespace Pbp.Forms
 
 		private void textBoxSongTranslation_TextChanged(object sender, EventArgs e)
 		{
-			if (treeViewContents.SelectedNode.Level == 2)
+			if (treeViewContents.SelectedNode.Level == 1)
 			{
 				int partIdx = treeViewContents.SelectedNode.Parent.Index;
 				int slideIdx = treeViewContents.SelectedNode.Index;
@@ -779,6 +782,7 @@ namespace Pbp.Forms
             object[] songArgs = { currentPartId, currentSlideId };
             // TODO
             //pictureBoxPreview.Image = projWindow.showSlide(sng, sng.getImage(sng.Parts[currentPartId].Slides[currentSlideId].ImageNumber), songArgs, ProjectionMode.Simulate);
+            pictureBoxPreview.Image = sng.getImage(sng.Parts[currentPartId].Slides[currentSlideId].ImageNumber);
 		}
 
 		private void textBoxSongTranslation_KeyUp(object sender, KeyEventArgs e)
@@ -898,5 +902,16 @@ namespace Pbp.Forms
 		{
 			buttonDelSongPart_Click(sender, e);
 		}
+
+        private void label6_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void buttonSlideBackground_Click_1(object sender, EventArgs e)
+        {
+
+        }
+
     }
 }

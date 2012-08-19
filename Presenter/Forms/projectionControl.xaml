@@ -1,7 +1,7 @@
 ﻿<UserControl x:Class="Pbp.Forms.WpfProjectionControl"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:OutlineTextTest="clr-namespace:OutlineTextTest"
+    
     Height="300" Width="300" Name="projectionControl" Loaded="ProjectionControlLoaded">
     <!--xmlns:my="clr-namespace:Knom.WPF.XmlNs"-->
     <UserControl.Resources>
