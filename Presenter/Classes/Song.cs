@@ -599,7 +599,7 @@ namespace Pbp
                     xmlRoot["general"].AppendChild(xmlDoc.CreateElement("qa"));
                     xmlRoot["general"]["qa"].InnerText = _qa.ToString();
                 }
-                if (CcliID != String.Empty)
+                if (CcliID!= null && CcliID != String.Empty)
                 {
                     xmlRoot["general"].AppendChild(xmlDoc.CreateElement("ccliNo"));
                     xmlRoot["general"]["ccliNo"].InnerText = CcliID;
@@ -666,7 +666,10 @@ namespace Pbp
                 xmlRoot["information"]["copyright"].AppendChild(xmlDoc.CreateElement("position"));
                 xmlRoot["information"]["copyright"]["position"].InnerText = "lastslide";
                 xmlRoot["information"]["copyright"].AppendChild(xmlDoc.CreateElement("text"));
-                xmlRoot["information"]["Copyright"]["text"].InnerText = Copyright;                
+                if (Copyright != null && Copyright != string.Empty)
+                {
+                    xmlRoot["information"].AppendChild(xmlDoc.CreateElement("source"));
+                }
                 xmlRoot["information"].AppendChild(xmlDoc.CreateElement("source"));
                 xmlRoot["information"]["source"].AppendChild(xmlDoc.CreateElement("position"));
                 xmlRoot["information"]["source"]["position"].InnerText = "firstslide";

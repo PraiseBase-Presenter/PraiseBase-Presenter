@@ -105,8 +105,6 @@ namespace Pbp.Forms
 					i++;
 				}
 
-				textBoxSongTitle.Focus();
-				textBoxSongTitle.SelectAll();
 			}
 			else
 			{
@@ -634,6 +632,16 @@ namespace Pbp.Forms
 
 		public void saveAs()
 		{
+            if (sng.Title == "Neues Lied")
+            {
+                if (MessageBox.Show("Hat das Lied wirklich den Standardnamen 'Neues Lied'?", "Achtung", MessageBoxButtons.YesNo) == System.Windows.Forms.DialogResult.No)
+                {
+                    textBoxSongTitle.SelectAll();
+                    textBoxSongTitle.Focus();
+                    return;
+                }
+            }
+
 			SaveFileDialog saveFileDialog = new SaveFileDialog();
 			saveFileDialog.InitialDirectory = ((EditorWindow)MdiParent).fileBoxInitialDir;
 			saveFileDialog.CheckPathExists = true;
@@ -905,6 +913,22 @@ namespace Pbp.Forms
         private void buttonAddSlide_Click(object sender, EventArgs e)
         {
             buttonAddNewSlide_Click(sender, e);
+        }
+
+        private void EditorChild_Shown(object sender, EventArgs e)
+        {
+            if (textBoxSongTitle.Text == "Neues Lied") {
+                textBoxSongTitle.SelectAll();
+                textBoxSongTitle.Focus();
+            }
+        }
+
+        private void textBoxSongTitle_Enter(object sender, EventArgs e)
+        {
+            if (textBoxSongTitle.Text == "Neues Lied")
+            {
+                textBoxSongTitle.SelectAll();
+            }
         }
 
 	}

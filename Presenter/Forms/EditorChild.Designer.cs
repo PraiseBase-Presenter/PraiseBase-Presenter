@@ -69,10 +69,19 @@
             this.label11 = new System.Windows.Forms.Label();
             this.pictureBoxPreview = new System.Windows.Forms.PictureBox();
             this.tabPageData = new System.Windows.Forms.TabPage();
-            this.label4 = new System.Windows.Forms.Label();
-            this.textBoxCopyright = new System.Windows.Forms.TextBox();
-            this.label12 = new System.Windows.Forms.Label();
+            this.groupBox4 = new System.Windows.Forms.GroupBox();
+            this.checkBoxQASegmentation = new System.Windows.Forms.CheckBox();
+            this.textBoxComment = new System.Windows.Forms.TextBox();
+            this.checkBoxQATranslation = new System.Windows.Forms.CheckBox();
+            this.label13 = new System.Windows.Forms.Label();
+            this.checkBoxQASpelling = new System.Windows.Forms.CheckBox();
+            this.checkBoxQAImages = new System.Windows.Forms.CheckBox();
+            this.label14 = new System.Windows.Forms.Label();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.textBoxCCLISongID = new System.Windows.Forms.TextBox();
+            this.label4 = new System.Windows.Forms.Label();
+            this.label12 = new System.Windows.Forms.Label();
+            this.textBoxCopyright = new System.Windows.Forms.TextBox();
             this.checkedListBoxTags = new System.Windows.Forms.CheckedListBox();
             this.label1 = new System.Windows.Forms.Label();
             this.tabPageFormatting = new System.Windows.Forms.TabPage();
@@ -87,15 +96,6 @@
             this.label9 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.label13 = new System.Windows.Forms.Label();
-            this.textBoxComment = new System.Windows.Forms.TextBox();
-            this.checkBoxQAImages = new System.Windows.Forms.CheckBox();
-            this.label14 = new System.Windows.Forms.Label();
-            this.checkBoxQASpelling = new System.Windows.Forms.CheckBox();
-            this.checkBoxQATranslation = new System.Windows.Forms.CheckBox();
-            this.checkBoxQASegmentation = new System.Windows.Forms.CheckBox();
-            this.groupBox4 = new System.Windows.Forms.GroupBox();
             this.treeViewContents = new TreeEx.TreeLE();
             this.slideContextMenu.SuspendLayout();
             this.partContextMenu.SuspendLayout();
@@ -107,12 +107,12 @@
             this.splitContainer1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxPreview)).BeginInit();
             this.tabPageData.SuspendLayout();
+            this.groupBox4.SuspendLayout();
+            this.groupBox1.SuspendLayout();
             this.tabPageFormatting.SuspendLayout();
             this.groupBox3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.trackBarLineSpacing)).BeginInit();
             this.groupBox2.SuspendLayout();
-            this.groupBox1.SuspendLayout();
-            this.groupBox4.SuspendLayout();
             this.SuspendLayout();
             // 
             // labelLanguage
@@ -386,6 +386,7 @@
             this.textBoxSongTitle.Name = "textBoxSongTitle";
             this.textBoxSongTitle.Size = new System.Drawing.Size(238, 22);
             this.textBoxSongTitle.TabIndex = 86;
+            this.textBoxSongTitle.Enter += new System.EventHandler(this.textBoxSongTitle_Enter);
             // 
             // tabControlTextLayer
             // 
@@ -537,6 +538,121 @@
             this.tabPageData.Text = "Daten";
             this.tabPageData.UseVisualStyleBackColor = true;
             // 
+            // groupBox4
+            // 
+            this.groupBox4.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupBox4.Controls.Add(this.checkBoxQASegmentation);
+            this.groupBox4.Controls.Add(this.textBoxComment);
+            this.groupBox4.Controls.Add(this.checkBoxQATranslation);
+            this.groupBox4.Controls.Add(this.label13);
+            this.groupBox4.Controls.Add(this.checkBoxQASpelling);
+            this.groupBox4.Controls.Add(this.checkBoxQAImages);
+            this.groupBox4.Controls.Add(this.label14);
+            this.groupBox4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.groupBox4.Location = new System.Drawing.Point(470, 6);
+            this.groupBox4.Name = "groupBox4";
+            this.groupBox4.Size = new System.Drawing.Size(494, 517);
+            this.groupBox4.TabIndex = 102;
+            this.groupBox4.TabStop = false;
+            this.groupBox4.Text = "Qualitätssicherung";
+            // 
+            // checkBoxQASegmentation
+            // 
+            this.checkBoxQASegmentation.AutoSize = true;
+            this.checkBoxQASegmentation.Location = new System.Drawing.Point(109, 278);
+            this.checkBoxQASegmentation.Name = "checkBoxQASegmentation";
+            this.checkBoxQASegmentation.Size = new System.Drawing.Size(159, 17);
+            this.checkBoxQASegmentation.TabIndex = 98;
+            this.checkBoxQASegmentation.Text = "Aufteilung nicht optimal";
+            this.checkBoxQASegmentation.UseVisualStyleBackColor = true;
+            // 
+            // textBoxComment
+            // 
+            this.textBoxComment.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.textBoxComment.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.textBoxComment.Location = new System.Drawing.Point(109, 28);
+            this.textBoxComment.Multiline = true;
+            this.textBoxComment.Name = "textBoxComment";
+            this.textBoxComment.Size = new System.Drawing.Size(379, 175);
+            this.textBoxComment.TabIndex = 93;
+            // 
+            // checkBoxQATranslation
+            // 
+            this.checkBoxQATranslation.AutoSize = true;
+            this.checkBoxQATranslation.Location = new System.Drawing.Point(109, 255);
+            this.checkBoxQATranslation.Name = "checkBoxQATranslation";
+            this.checkBoxQATranslation.Size = new System.Drawing.Size(213, 17);
+            this.checkBoxQATranslation.TabIndex = 97;
+            this.checkBoxQATranslation.Text = "Übersetzung fehlt oder fehlerhaft";
+            this.checkBoxQATranslation.UseVisualStyleBackColor = true;
+            // 
+            // label13
+            // 
+            this.label13.AutoSize = true;
+            this.label13.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label13.Location = new System.Drawing.Point(7, 33);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(63, 13);
+            this.label13.TabIndex = 92;
+            this.label13.Text = "Kommentar:";
+            // 
+            // checkBoxQASpelling
+            // 
+            this.checkBoxQASpelling.AutoSize = true;
+            this.checkBoxQASpelling.Location = new System.Drawing.Point(109, 232);
+            this.checkBoxQASpelling.Name = "checkBoxQASpelling";
+            this.checkBoxQASpelling.Size = new System.Drawing.Size(167, 17);
+            this.checkBoxQASpelling.TabIndex = 96;
+            this.checkBoxQASpelling.Text = "Text fehlt oder fehlerhaft";
+            this.checkBoxQASpelling.UseVisualStyleBackColor = true;
+            // 
+            // checkBoxQAImages
+            // 
+            this.checkBoxQAImages.AutoSize = true;
+            this.checkBoxQAImages.Location = new System.Drawing.Point(110, 209);
+            this.checkBoxQAImages.Name = "checkBoxQAImages";
+            this.checkBoxQAImages.Size = new System.Drawing.Size(97, 17);
+            this.checkBoxQAImages.TabIndex = 94;
+            this.checkBoxQAImages.Text = "Bilder fehlen";
+            this.checkBoxQAImages.UseVisualStyleBackColor = true;
+            // 
+            // label14
+            // 
+            this.label14.AutoSize = true;
+            this.label14.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label14.Location = new System.Drawing.Point(7, 209);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(75, 13);
+            this.label14.TabIndex = 95;
+            this.label14.Text = "Markierungen:";
+            // 
+            // groupBox1
+            // 
+            this.groupBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
+            this.groupBox1.Controls.Add(this.textBoxCCLISongID);
+            this.groupBox1.Controls.Add(this.label4);
+            this.groupBox1.Controls.Add(this.label12);
+            this.groupBox1.Controls.Add(this.textBoxCopyright);
+            this.groupBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.groupBox1.Location = new System.Drawing.Point(6, 6);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(458, 517);
+            this.groupBox1.TabIndex = 101;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "Informationen";
+            // 
+            // textBoxCCLISongID
+            // 
+            this.textBoxCCLISongID.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.textBoxCCLISongID.Location = new System.Drawing.Point(109, 28);
+            this.textBoxCCLISongID.Name = "textBoxCCLISongID";
+            this.textBoxCCLISongID.Size = new System.Drawing.Size(110, 22);
+            this.textBoxCCLISongID.TabIndex = 88;
+            // 
             // label4
             // 
             this.label4.AutoSize = true;
@@ -546,14 +662,6 @@
             this.label4.Size = new System.Drawing.Size(54, 13);
             this.label4.TabIndex = 91;
             this.label4.Text = "Copyright:";
-            // 
-            // textBoxCopyright
-            // 
-            this.textBoxCopyright.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBoxCopyright.Location = new System.Drawing.Point(109, 56);
-            this.textBoxCopyright.Name = "textBoxCopyright";
-            this.textBoxCopyright.Size = new System.Drawing.Size(305, 22);
-            this.textBoxCopyright.TabIndex = 90;
             // 
             // label12
             // 
@@ -565,13 +673,13 @@
             this.label12.TabIndex = 89;
             this.label12.Text = "CCLI ID:";
             // 
-            // textBoxCCLISongID
+            // textBoxCopyright
             // 
-            this.textBoxCCLISongID.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBoxCCLISongID.Location = new System.Drawing.Point(109, 28);
-            this.textBoxCCLISongID.Name = "textBoxCCLISongID";
-            this.textBoxCCLISongID.Size = new System.Drawing.Size(110, 22);
-            this.textBoxCCLISongID.TabIndex = 88;
+            this.textBoxCopyright.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.textBoxCopyright.Location = new System.Drawing.Point(109, 56);
+            this.textBoxCopyright.Name = "textBoxCopyright";
+            this.textBoxCopyright.Size = new System.Drawing.Size(305, 22);
+            this.textBoxCopyright.TabIndex = 90;
             // 
             // checkedListBoxTags
             // 
@@ -751,113 +859,6 @@
             this.label2.TabIndex = 90;
             this.label2.Text = "Zeilenabstand:";
             // 
-            // groupBox1
-            // 
-            this.groupBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left)));
-            this.groupBox1.Controls.Add(this.textBoxCCLISongID);
-            this.groupBox1.Controls.Add(this.label4);
-            this.groupBox1.Controls.Add(this.label12);
-            this.groupBox1.Controls.Add(this.textBoxCopyright);
-            this.groupBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.groupBox1.Location = new System.Drawing.Point(6, 6);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(458, 517);
-            this.groupBox1.TabIndex = 101;
-            this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Informationen";
-            // 
-            // label13
-            // 
-            this.label13.AutoSize = true;
-            this.label13.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label13.Location = new System.Drawing.Point(7, 33);
-            this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(63, 13);
-            this.label13.TabIndex = 92;
-            this.label13.Text = "Kommentar:";
-            // 
-            // textBoxComment
-            // 
-            this.textBoxComment.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.textBoxComment.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBoxComment.Location = new System.Drawing.Point(109, 28);
-            this.textBoxComment.Multiline = true;
-            this.textBoxComment.Name = "textBoxComment";
-            this.textBoxComment.Size = new System.Drawing.Size(379, 175);
-            this.textBoxComment.TabIndex = 93;
-            // 
-            // checkBoxQAImages
-            // 
-            this.checkBoxQAImages.AutoSize = true;
-            this.checkBoxQAImages.Location = new System.Drawing.Point(110, 209);
-            this.checkBoxQAImages.Name = "checkBoxQAImages";
-            this.checkBoxQAImages.Size = new System.Drawing.Size(97, 17);
-            this.checkBoxQAImages.TabIndex = 94;
-            this.checkBoxQAImages.Text = "Bilder fehlen";
-            this.checkBoxQAImages.UseVisualStyleBackColor = true;
-            // 
-            // label14
-            // 
-            this.label14.AutoSize = true;
-            this.label14.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label14.Location = new System.Drawing.Point(7, 209);
-            this.label14.Name = "label14";
-            this.label14.Size = new System.Drawing.Size(75, 13);
-            this.label14.TabIndex = 95;
-            this.label14.Text = "Markierungen:";
-            // 
-            // checkBoxQASpelling
-            // 
-            this.checkBoxQASpelling.AutoSize = true;
-            this.checkBoxQASpelling.Location = new System.Drawing.Point(109, 232);
-            this.checkBoxQASpelling.Name = "checkBoxQASpelling";
-            this.checkBoxQASpelling.Size = new System.Drawing.Size(167, 17);
-            this.checkBoxQASpelling.TabIndex = 96;
-            this.checkBoxQASpelling.Text = "Text fehlt oder fehlerhaft";
-            this.checkBoxQASpelling.UseVisualStyleBackColor = true;
-            // 
-            // checkBoxQATranslation
-            // 
-            this.checkBoxQATranslation.AutoSize = true;
-            this.checkBoxQATranslation.Location = new System.Drawing.Point(109, 255);
-            this.checkBoxQATranslation.Name = "checkBoxQATranslation";
-            this.checkBoxQATranslation.Size = new System.Drawing.Size(213, 17);
-            this.checkBoxQATranslation.TabIndex = 97;
-            this.checkBoxQATranslation.Text = "Übersetzung fehlt oder fehlerhaft";
-            this.checkBoxQATranslation.UseVisualStyleBackColor = true;
-            // 
-            // checkBoxQASegmentation
-            // 
-            this.checkBoxQASegmentation.AutoSize = true;
-            this.checkBoxQASegmentation.Location = new System.Drawing.Point(109, 278);
-            this.checkBoxQASegmentation.Name = "checkBoxQASegmentation";
-            this.checkBoxQASegmentation.Size = new System.Drawing.Size(159, 17);
-            this.checkBoxQASegmentation.TabIndex = 98;
-            this.checkBoxQASegmentation.Text = "Aufteilung nicht optimal";
-            this.checkBoxQASegmentation.UseVisualStyleBackColor = true;
-            // 
-            // groupBox4
-            // 
-            this.groupBox4.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.groupBox4.Controls.Add(this.checkBoxQASegmentation);
-            this.groupBox4.Controls.Add(this.textBoxComment);
-            this.groupBox4.Controls.Add(this.checkBoxQATranslation);
-            this.groupBox4.Controls.Add(this.label13);
-            this.groupBox4.Controls.Add(this.checkBoxQASpelling);
-            this.groupBox4.Controls.Add(this.checkBoxQAImages);
-            this.groupBox4.Controls.Add(this.label14);
-            this.groupBox4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.groupBox4.Location = new System.Drawing.Point(470, 6);
-            this.groupBox4.Name = "groupBox4";
-            this.groupBox4.Size = new System.Drawing.Size(494, 517);
-            this.groupBox4.TabIndex = 102;
-            this.groupBox4.TabStop = false;
-            this.groupBox4.Text = "Qualitätssicherung";
-            // 
             // treeViewContents
             // 
             this.treeViewContents.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
@@ -887,6 +888,7 @@
             this.Text = "Liededitor";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.EditorChild_FormClosing);
             this.Load += new System.EventHandler(this.EditorChild_Load);
+            this.Shown += new System.EventHandler(this.EditorChild_Shown);
             this.Resize += new System.EventHandler(this.EditorChild_Resize);
             this.slideContextMenu.ResumeLayout(false);
             this.partContextMenu.ResumeLayout(false);
@@ -902,6 +904,10 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxPreview)).EndInit();
             this.tabPageData.ResumeLayout(false);
             this.tabPageData.PerformLayout();
+            this.groupBox4.ResumeLayout(false);
+            this.groupBox4.PerformLayout();
+            this.groupBox1.ResumeLayout(false);
+            this.groupBox1.PerformLayout();
             this.tabPageFormatting.ResumeLayout(false);
             this.tabPageFormatting.PerformLayout();
             this.groupBox3.ResumeLayout(false);
@@ -909,10 +915,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.trackBarLineSpacing)).EndInit();
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
-            this.groupBox1.ResumeLayout(false);
-            this.groupBox1.PerformLayout();
-            this.groupBox4.ResumeLayout(false);
-            this.groupBox4.PerformLayout();
             this.ResumeLayout(false);
 
         }
