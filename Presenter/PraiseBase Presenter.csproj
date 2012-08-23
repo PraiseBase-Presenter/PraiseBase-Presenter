@@ -332,8 +332,8 @@
     <None Include="Resources\Application\AJ_Portable_Projection_Screen.png" />
     <None Include="Resources\Application\leinwand16.png" />
     <None Include="Resources\Application\leinwand16_no.png" />
-    <Content Include="Songs\A Mighty Fortress Is Our God.ppl" />
-    <Content Include="Songs\Jesus is my Lord.ppl" />
+    <Content Include="Resources\Dist\Songs\A Mighty Fortress Is Our God.ppl" />
+    <Content Include="Resources\Dist\Songs\Jesus is my Lord.ppl" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\Application\pb web.png" />
