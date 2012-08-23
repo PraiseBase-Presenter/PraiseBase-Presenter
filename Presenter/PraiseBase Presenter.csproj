@@ -12,7 +12,7 @@
     <AssemblyName>PraiseBase Presenter</AssemblyName>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
-    <ApplicationIcon>Resources\Computer.ico</ApplicationIcon>
+    <ApplicationIcon>Resources\Application\Computer.ico</ApplicationIcon>
     <StartupObject>Pbp.Program</StartupObject>
     <ManifestCertificateThumbprint>D45E90FD57F45BDB54368ACE3A1D7A9016546503</ManifestCertificateThumbprint>
     <ManifestKeyFile>PraiseBase Presenter_TemporaryKey.pfx</ManifestKeyFile>
@@ -101,11 +101,6 @@
   <ItemGroup>
     <Compile Include="Classes\BaseLayer.cs" />
     <Compile Include="Classes\BibleLayer.cs" />
-    <Compile Include="Classes\DataSet1.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>DataSet1.xsd</DependentUpon>
-    </Compile>
     <Compile Include="Classes\SongFileType.cs" />
     <Compile Include="Classes\SongPartList.cs" />
     <Compile Include="Classes\SongSlideList.cs" />
@@ -318,17 +313,6 @@
       <DesignTime>True</DesignTime>
     </Compile>
     <None Include="app.config" />
-    <None Include="Classes\DataSet1.xsc">
-      <DependentUpon>DataSet1.xsd</DependentUpon>
-    </None>
-    <None Include="Classes\DataSet1.xsd">
-      <SubType>Designer</SubType>
-      <Generator>MSDataSetGenerator</Generator>
-      <LastGenOutput>DataSet1.Designer.cs</LastGenOutput>
-    </None>
-    <None Include="Classes\DataSet1.xss">
-      <DependentUpon>DataSet1.xsd</DependentUpon>
-    </None>
     <None Include="Properties\Settings.settings">
       <Generator>PublicSettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -340,76 +324,75 @@
     </Compile>
     <Compile Include="Settings.cs" />
     <Compile Include="Classes\Song.cs" />
-    <None Include="Resources\update16.png" />
-    <None Include="Resources\ok16.png" />
-    <None Include="Resources\wheel16.png" />
-    <None Include="Resources\aqua-blue.jpg" />
-    <None Include="Resources\fade1blue.png" />
-    <None Include="Resources\monitor_256.png" />
-    <None Include="Resources\AJ_Portable_Projection_Screen.png" />
-    <None Include="Resources\leinwand16.png" />
-    <None Include="Resources\leinwand16_no.png" />
+    <None Include="Resources\Application\update16.png" />
+    <None Include="Resources\Application\ok16.png" />
+    <None Include="Resources\Application\wheel16.png" />
+    <None Include="Resources\Application\fade1blue.png" />
+    <None Include="Resources\Application\monitor_256.png" />
+    <None Include="Resources\Application\AJ_Portable_Projection_Screen.png" />
+    <None Include="Resources\Application\leinwand16.png" />
+    <None Include="Resources\Application\leinwand16_no.png" />
     <Content Include="Songs\A Mighty Fortress Is Our God.ppl" />
     <Content Include="Songs\Jesus is my Lord.ppl" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\pb web.png" />
+    <None Include="Resources\Application\pb web.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\pb mit schwarz.jpg" />
+    <None Include="Resources\Application\pb mit schwarz.jpg" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\Blackout on.png" />
+    <None Include="Resources\Application\Blackout on.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\Projection off.png" />
+    <None Include="Resources\Application\Projection off.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\Projection on.png" />
+    <None Include="Resources\Application\Projection on.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\search.png" />
+    <None Include="Resources\Application\search.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\advancedsettings.png" />
+    <None Include="Resources\Application\advancedsettings.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\clean.png" />
+    <None Include="Resources\Application\clean.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\clock.png" />
+    <None Include="Resources\Application\clock.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\colors.png" />
+    <None Include="Resources\Application\colors.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\error.png" />
+    <None Include="Resources\Application\error.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\exit.png" />
+    <None Include="Resources\Application\exit.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\gpg.png" />
+    <None Include="Resources\Application\gpg.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\keditbookmarks.png" />
+    <None Include="Resources\Application\keditbookmarks.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\ktip.png" />
+    <None Include="Resources\Application\ktip.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\package_favorite.png" />
+    <None Include="Resources\Application\package_favorite.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\Computer.ico" />
+    <None Include="Resources\Application\Computer.ico" />
   </ItemGroup>
   <ItemGroup>
     <None Include="PraiseBase Presenter_TemporaryKey.pfx" />
-    <None Include="Resources\Blackout on2.png" />
+    <None Include="Resources\Application\Blackout on2.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\kate.png" />
-    <None Include="Resources\gplv3-127x51.png" />
+    <None Include="Resources\Application\kate.png" />
+    <None Include="Resources\Application\gplv3-127x51.png" />
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
@@ -463,46 +446,46 @@
     </COMReference>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\logo.png" />
+    <None Include="Resources\Application\logo.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\folder_favorites.png" />
-    <None Include="Resources\agt_action_success.png" />
-    <None Include="Resources\agt_back.png" />
-    <None Include="Resources\agt_forward.png" />
-    <None Include="Resources\1downarrow1.png" />
-    <None Include="Resources\1downarrow.png" />
-    <None Include="Resources\1leftarrow.png" />
-    <None Include="Resources\1rightarrow.png" />
-    <None Include="Resources\2leftarrow.png" />
-    <None Include="Resources\2rightarrow.png" />
-    <None Include="Resources\2uparrow.png" />
-    <None Include="Resources\3dowarrow.png" />
-    <None Include="Resources\14_layer_deletelayer.png" />
-    <None Include="Resources\14_layer_newlayer.png" />
-    <None Include="Resources\agt_action_fail1.png" />
-    <None Include="Resources\edit_add.png" />
-    <None Include="Resources\edit_remove.png" />
-    <None Include="Resources\filesave.png" />
-    <None Include="Resources\fileopen.png" />
-    <None Include="Resources\background.png" />
-    <None Include="Resources\edit.png" />
-    <None Include="Resources\3floppy_unmount.png" />
-    <None Include="Resources\easymoblog.png" />
-    <None Include="Resources\xmag.png" />
-    <None Include="Resources\highlight.png" />
-    <None Include="Resources\link.png" />
-    <None Include="Resources\unlink.png" />
-    <None Include="Resources\text_align_center.png" />
-    <None Include="Resources\text_align_right.png" />
-    <None Include="Resources\text_align_left.png" />
-    <None Include="Resources\highlight_red.png" />
-    <None Include="Resources\1downarrow2.png" />
-    <None Include="Resources\1downarrow11.png" />
-    <None Include="Resources\1leftarrow1.png" />
-    <None Include="Resources\1rightarrow1.png" />
-    <None Include="Resources\searchx.png" />
-    <None Include="Resources\searchg.png" />
+    <None Include="Resources\Application\folder_favorites.png" />
+    <None Include="Resources\Application\agt_action_success.png" />
+    <None Include="Resources\Application\agt_back.png" />
+    <None Include="Resources\Application\agt_forward.png" />
+    <None Include="Resources\Application\1downarrow1.png" />
+    <None Include="Resources\Application\1downarrow.png" />
+    <None Include="Resources\Application\1leftarrow.png" />
+    <None Include="Resources\Application\1rightarrow.png" />
+    <None Include="Resources\Application\2leftarrow.png" />
+    <None Include="Resources\Application\2rightarrow.png" />
+    <None Include="Resources\Application\2uparrow.png" />
+    <None Include="Resources\Application\3dowarrow.png" />
+    <None Include="Resources\Application\14_layer_deletelayer.png" />
+    <None Include="Resources\Application\14_layer_newlayer.png" />
+    <None Include="Resources\Application\agt_action_fail1.png" />
+    <None Include="Resources\Application\edit_add.png" />
+    <None Include="Resources\Application\edit_remove.png" />
+    <None Include="Resources\Application\filesave.png" />
+    <None Include="Resources\Application\fileopen.png" />
+    <None Include="Resources\Application\background.png" />
+    <None Include="Resources\Application\edit.png" />
+    <None Include="Resources\Application\3floppy_unmount.png" />
+    <None Include="Resources\Application\easymoblog.png" />
+    <None Include="Resources\Application\xmag.png" />
+    <None Include="Resources\Application\highlight.png" />
+    <None Include="Resources\Application\link.png" />
+    <None Include="Resources\Application\unlink.png" />
+    <None Include="Resources\Application\text_align_center.png" />
+    <None Include="Resources\Application\text_align_right.png" />
+    <None Include="Resources\Application\text_align_left.png" />
+    <None Include="Resources\Application\highlight_red.png" />
+    <None Include="Resources\Application\1downarrow2.png" />
+    <None Include="Resources\Application\1downarrow11.png" />
+    <None Include="Resources\Application\1leftarrow1.png" />
+    <None Include="Resources\Application\1rightarrow1.png" />
+    <None Include="Resources\Application\searchx.png" />
+    <None Include="Resources\Application\searchg.png" />
   </ItemGroup>
   <ItemGroup>
     <Page Include="Forms\ProjectionControl.xaml">
@@ -513,22 +496,22 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Backgrounds\Sample\Berge.jpg" />
-    <Content Include="Backgrounds\Sample\Blume.jpg" />
-    <Content Include="Backgrounds\Sample\Feuer.jpg" />
-    <Content Include="Backgrounds\Sample\Landschaft.jpg" />
-    <Content Include="Backgrounds\Sample\Meer.jpg" />
-    <Content Include="Backgrounds\Sample\Menschen.jpg" />
-    <Content Include="Backgrounds\Sample\night_sky_1024.jpg" />
-    <Content Include="Backgrounds\Sample\Sonne.jpg" />
-    <Content Include="Backgrounds\Sample\Wald.jpg" />
-    <Content Include="Backgrounds\Sample\Wasser.JPG" />
-    <Content Include="Backgrounds\Sample\Wolken.jpg" />
-    <Content Include="Backgrounds\Sample\Wüste.jpg" />
-    <Content Include="Bibles\Elberfelder_1905.xml" />
-    <Content Include="Bibles\kjv.xml" />
-    <Content Include="Bibles\luther1912.xml" />
-    <Content Include="Bibles\sf_luther_1545_letzte_hand_rev1.xml" />
+    <Content Include="Resources\Dist\Backgrounds\Sample\Berge.jpg" />
+    <Content Include="Resources\Dist\Backgrounds\Sample\Blume.jpg" />
+    <Content Include="Resources\Dist\Backgrounds\Sample\Feuer.jpg" />
+    <Content Include="Resources\Dist\Backgrounds\Sample\Landschaft.jpg" />
+    <Content Include="Resources\Dist\Backgrounds\Sample\Meer.jpg" />
+    <Content Include="Resources\Dist\Backgrounds\Sample\Menschen.jpg" />
+    <Content Include="Resources\Dist\Backgrounds\Sample\night_sky_1024.jpg" />
+    <Content Include="Resources\Dist\Backgrounds\Sample\Sonne.jpg" />
+    <Content Include="Resources\Dist\Backgrounds\Sample\Wald.jpg" />
+    <Content Include="Resources\Dist\Backgrounds\Sample\Wasser.JPG" />
+    <Content Include="Resources\Dist\Backgrounds\Sample\Wolken.jpg" />
+    <Content Include="Resources\Dist\Backgrounds\Sample\Wüste.jpg" />
+    <Content Include="Resources\Dist\Bibles\Elberfelder_1905.xml" />
+    <Content Include="Resources\Dist\Bibles\kjv.xml" />
+    <Content Include="Resources\Dist\Bibles\luther1912.xml" />
+    <Content Include="Resources\Dist\Bibles\sf_luther_1545_letzte_hand_rev1.xml" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
