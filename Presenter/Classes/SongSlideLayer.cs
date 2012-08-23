@@ -11,9 +11,9 @@ namespace Pbp
 {
     class SongSlideLayer : TextLayer
     {
-        Song.Slide slide;
+        SongSlide slide;
 
-        public SongSlideLayer(Song.Slide slide)
+        public SongSlideLayer(SongSlide slide)
         {
             this.slide = slide;
         }

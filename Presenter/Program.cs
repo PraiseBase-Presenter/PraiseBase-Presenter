@@ -86,7 +86,7 @@ namespace Pbp
 				ImageManager.Instance.checkThumbs(ldg);
 
 				ldg.setLabel("Lade Liederdatenbank...");
-				SongManager.GetInstance(ldg);
+				SongManager.Instance.reload();
 
 				ldg.setLabel("Suche Projektionsschirm...");
                 var prjw = ProjectionWindow.Instance;
@@ -98,7 +98,7 @@ namespace Pbp
 			}
 			else
 			{
-				SongManager.GetInstance();
+                SongManager.Instance.reload();
 				ImageManager.Instance.checkThumbs();
                 var prjw = ProjectionWindow.Instance;
 				GC.Collect();

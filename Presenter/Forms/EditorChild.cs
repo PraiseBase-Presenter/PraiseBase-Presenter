@@ -36,7 +36,9 @@ namespace Pbp.Forms
 {
 	public partial class EditorChild : Form
 	{
-		Song sng;
+		protected Song sng;
+		protected String songFilename;
+
 		ProjectionWindow projWindow;
 		public bool valid;
 		public bool changed = false;
@@ -53,66 +55,76 @@ namespace Pbp.Forms
 
 			this.WindowState = FormWindowState.Maximized;
 
-			sng = new Song(fileName);
-			if (sng.IsValid)
+			if (fileName != null)
 			{
-                // Set window title
-				this.Text = sng.Title;
-
-                // Data bindings
-                textBoxSongTitle.DataBindings.Add("Text", sng, "Title");
-                textBoxCCLISongID.DataBindings.Add("Text", sng, "CcliID");
-                textBoxCopyright.DataBindings.Add("Text", sng, "Copyright");
-                textBoxComment.DataBindings.Add("Text", sng, "Comment");
-
-                populateTree();
-				treeViewContents.SelectedNode = treeViewContents.Nodes[0];
-				valid = true;
-				hashCode = sng.GetHashCode();
-
-				populatePartList();
-
-				checkBoxQAImages.Checked = sng.getQA(Song.QualityAssuranceIndicators.Images);
-				checkBoxQASpelling.Checked = sng.getQA(Song.QualityAssuranceIndicators.Spelling);
-				checkBoxQATranslation.Checked = sng.getQA(Song.QualityAssuranceIndicators.Translation);
-				checkBoxQASegmentation.Checked = sng.getQA(Song.QualityAssuranceIndicators.Segmentation);
-
-				labelFont.Text = sng.TextFont.Name + ", " + sng.TextFont.Style.ToString() + ", " + sng.TextFont.Size.ToString();
-				labelFontTranslation.Text = sng.TranslationFont.Name + ", " + sng.TranslationFont.Style.ToString() + ", " + sng.TranslationFont.Size.ToString();
-				buttonChooseProjectionForeColor.BackColor= sng.TextColor;
-				buttonTranslationColor.BackColor = sng.TranslationColor;
-
-				trackBarLineSpacing.Value = sng.TextLineSpacing;
-				labelLineSpacing.Text = sng.TextLineSpacing.ToString();
-
-				comboBoxLanguage.Items.Clear();
-				comboBoxLanguage.Text = sng.Language;
-				comboBoxLanguage.AutoCompleteMode = AutoCompleteMode.Suggest;
-				comboBoxLanguage.AutoCompleteSource = AutoCompleteSource.ListItems;
-				foreach (string str in Settings.Default.Languages)
+				try
 				{
-					comboBoxLanguage.Items.Add(str);
+					sng = SongFileReader.createFactoryByFile(fileName).load(fileName);
 				}
-
-				int i = 0;
-				checkedListBoxTags.Items.Clear();
-				foreach (string str in Settings.Default.Tags)
+				catch (Exception e)
 				{
-					if (sng.Tags.Contains(str))
-						checkedListBoxTags.Items.Add(str, true);
-					else
-						checkedListBoxTags.Items.Add(str);
-					i++;
+					MessageBox.Show("Diese Lieddatei ist leider fehlerhaft ("+e.Message+")!","Liededitor",MessageBoxButtons.OK,MessageBoxIcon.Error);
+					valid = false;
+					this.Close();
 				}
-
+				songFilename = fileName;
 			}
 			else
 			{
-				MessageBox.Show("Diese Lieddatei ist leider fehlerhaft!","Liededitor",MessageBoxButtons.OK,MessageBoxIcon.Error);
-				valid = false;
-				this.Close();
+				sng = new Song();
+				var tmpPart = new SongPart();
+				tmpPart.Slides.Add(new SongSlide(sng));
+				sng.Parts.Add(tmpPart);
 			}
 
+			// Set window title
+			this.Text = sng.Title;
+
+			// Data bindings
+			textBoxSongTitle.DataBindings.Add("Text", sng, "Title");
+			textBoxCCLISongID.DataBindings.Add("Text", sng, "CcliID");
+			textBoxCopyright.DataBindings.Add("Text", sng, "Copyright");
+			textBoxComment.DataBindings.Add("Text", sng, "Comment");
+
+			populateTree();
+			treeViewContents.SelectedNode = treeViewContents.Nodes[0];
+			valid = true;
+			hashCode = sng.GetHashCode();
+
+			populatePartList();
+
+			checkBoxQAImages.Checked = sng.getQA(QualityAssuranceIndicators.Images);
+			checkBoxQASpelling.Checked = sng.getQA(QualityAssuranceIndicators.Spelling);
+			checkBoxQATranslation.Checked = sng.getQA(QualityAssuranceIndicators.Translation);
+			checkBoxQASegmentation.Checked = sng.getQA(QualityAssuranceIndicators.Segmentation);
+
+			labelFont.Text = sng.TextFont.Name + ", " + sng.TextFont.Style.ToString() + ", " + sng.TextFont.Size.ToString();
+			labelFontTranslation.Text = sng.TranslationFont.Name + ", " + sng.TranslationFont.Style.ToString() + ", " + sng.TranslationFont.Size.ToString();
+			buttonChooseProjectionForeColor.BackColor= sng.TextColor;
+			buttonTranslationColor.BackColor = sng.TranslationColor;
+
+			trackBarLineSpacing.Value = sng.TextLineSpacing;
+			labelLineSpacing.Text = sng.TextLineSpacing.ToString();
+
+			comboBoxLanguage.Items.Clear();
+			comboBoxLanguage.Text = sng.Language;
+			comboBoxLanguage.AutoCompleteMode = AutoCompleteMode.Suggest;
+			comboBoxLanguage.AutoCompleteSource = AutoCompleteSource.ListItems;
+			foreach (string str in Settings.Default.Languages)
+			{
+				comboBoxLanguage.Items.Add(str);
+			}
+
+			int i = 0;
+			checkedListBoxTags.Items.Clear();
+			foreach (string str in Settings.Default.Tags)
+			{
+				if (sng.Tags.Contains(str))
+					checkedListBoxTags.Items.Add(str, true);
+				else
+					checkedListBoxTags.Items.Add(str);
+				i++;
+			}
 		}
 
 		public void populatePartList()
@@ -121,12 +133,12 @@ namespace Pbp.Forms
 			{
 				ToolStripMenuItem tItem = new ToolStripMenuItem(str);
 				tItem.Click += new EventHandler(partAddMenu_click);
-                addContextMenu.Items.Add(tItem);
+				addContextMenu.Items.Add(tItem);
 			}
-            addContextMenu.Items.Add(new ToolStripSeparator());
+			addContextMenu.Items.Add(new ToolStripSeparator());
 			ToolStripMenuItem oItem = new ToolStripMenuItem("Anderer Name...");
 			oItem.Click += new EventHandler(partAddMenuOther_click);
-            addContextMenu.Items.Add(oItem);
+			addContextMenu.Items.Add(oItem);
 		}
 
 		public void partAddMenuOther_click(object sender, EventArgs e)
@@ -189,11 +201,11 @@ namespace Pbp.Forms
 		{
 			treeViewContents.Nodes.Clear();
 			int j = 0;
-			foreach (Song.Part part in sng.Parts)
+			foreach (SongPart part in sng.Parts)
 			{
 				TreeNode partNode = new TreeNode(part.Caption);
 				int i = 0;
-				foreach (Song.Slide slide in part.Slides)
+				foreach (SongSlide slide in part.Slides)
 				{
 					TreeNode slideNode = new TreeNode("Folie " + (i + 1).ToString());
 					slideNode.ContextMenuStrip = slideContextMenu;
@@ -266,7 +278,7 @@ namespace Pbp.Forms
 			if (slideId >= sng.Parts[partId].Slides.Count)
 				slideId = sng.Parts[partId].Slides.Count;
 			
-			Song.Slide sld = sng.Parts[partId].Slides[slideId];
+			SongSlide sld = sng.Parts[partId].Slides[slideId];
 			textBoxSongText.Text = sld.LineBreakText();
 			textBoxSongTranslation.Text = sld.LineBreakTranslation();
 			comboBoxSlideHorizOrientation.SelectedIndex = (int)sld.HorizontalAlign;
@@ -283,8 +295,8 @@ namespace Pbp.Forms
 
 		private void addSongPart(string caption)
 		{
-			Song.Part prt = new Song.Part(caption);
-			Song.Slide sld = new Song.Slide(sng);
+			SongPart prt = new SongPart(caption);
+			SongSlide sld = new SongSlide(sng);
 			sld.ImageNumber = 0;
 			sld.HorizontalAlign = sng.DefaultHorizAlign;
 			sld.VerticalAlign = sng.DefaultVertAlign;
@@ -309,12 +321,12 @@ namespace Pbp.Forms
 
 		private void EditorChild_Load(object sender, EventArgs e)
 		{
-			((EditorWindow)MdiParent).setStatus("Lied " + sng.FilePath + " geöffnet");
+			((EditorWindow)MdiParent).setStatus("Lied " + sng.Title + " geöffnet");
 		}
 
 		private void buttonAddNewSlide_Click(object sender, EventArgs e)
 		{
-			Song.Slide sld = new Song.Slide(sng);
+			SongSlide sld = new SongSlide(sng);
 			sng.Parts[currentPartId].Slides.Add(sld);
 			populateTree();
 			treeViewContents.SelectedNode = treeViewContents.Nodes[currentPartId].LastNode;
@@ -393,12 +405,12 @@ namespace Pbp.Forms
 			if (checkBoxQASpelling.Checked)
 			{
 				checkBoxQASpelling.ForeColor = Color.Red;
-				sng.setQA(Song.QualityAssuranceIndicators.Spelling);
+				sng.setQA(QualityAssuranceIndicators.Spelling);
 			}
 			else
 			{
 				checkBoxQASpelling.ForeColor = SystemColors.ControlText;
-				sng.remQA(Song.QualityAssuranceIndicators.Spelling);
+				sng.remQA(QualityAssuranceIndicators.Spelling);
 			}
 		}
 
@@ -407,12 +419,12 @@ namespace Pbp.Forms
 			if (checkBoxQATranslation.Checked)
 			{
 				checkBoxQATranslation.ForeColor = Color.Red;
-				sng.setQA(Song.QualityAssuranceIndicators.Translation);
+				sng.setQA(QualityAssuranceIndicators.Translation);
 			}
 			else
 			{
 				checkBoxQATranslation.ForeColor = SystemColors.ControlText;
-				sng.remQA(Song.QualityAssuranceIndicators.Translation);
+				sng.remQA(QualityAssuranceIndicators.Translation);
 			}
 		}
 
@@ -421,12 +433,12 @@ namespace Pbp.Forms
 			if (checkBoxQAImages.Checked)
 			{
 				checkBoxQAImages.ForeColor = Color.Red;
-				sng.setQA(Song.QualityAssuranceIndicators.Images);
+				sng.setQA(QualityAssuranceIndicators.Images);
 			}
 			else
 			{
 				checkBoxQAImages.ForeColor = SystemColors.ControlText;
-				sng.remQA(Song.QualityAssuranceIndicators.Images);
+				sng.remQA(QualityAssuranceIndicators.Images);
 			}
 		}
 
@@ -435,15 +447,14 @@ namespace Pbp.Forms
 			if (checkBoxQASegmentation.Checked)
 			{
 				checkBoxQASegmentation.ForeColor = Color.Red;
-				sng.setQA(Song.QualityAssuranceIndicators.Segmentation);
+				sng.setQA(QualityAssuranceIndicators.Segmentation);
 			}
 			else
 			{
 				checkBoxQASegmentation.ForeColor = SystemColors.ControlText;
-				sng.remQA(Song.QualityAssuranceIndicators.Segmentation);
+				sng.remQA(QualityAssuranceIndicators.Segmentation);
 			}
 		}
-
 
 		private void comboBoxSlideHorizOrientation_SelectedIndexChanged(object sender, EventArgs e)
 		{
@@ -618,35 +629,45 @@ namespace Pbp.Forms
 
 		public void save()
 		{
-			if (sng.FilePath == null)
+			if (songFilename == null)
+			{
 				saveAs();
+			}
 			else
 			{
-				sng.save(null);
+				SongFileWriter.createFactoryByFile(songFilename).save(songFilename, sng);
+
 				hashCode = sng.GetHashCode();
-				((EditorWindow)MdiParent).setStatus("Lied gespeichert als " + sng.FilePath + "");
-				
-				SongManager.GetInstance().ReloadSongByPath(sng.FilePath);
+				((EditorWindow)MdiParent).setStatus("Lied gespeichert als " + songFilename + "");
+
+				SongManager.Instance.ReloadSongByPath(songFilename);
 			}
 		}
 
 		public void saveAs()
 		{
-            if (sng.Title == "Neues Lied")
-            {
-                if (MessageBox.Show("Hat das Lied wirklich den Standardnamen 'Neues Lied'?", "Achtung", MessageBoxButtons.YesNo) == System.Windows.Forms.DialogResult.No)
-                {
-                    textBoxSongTitle.SelectAll();
-                    textBoxSongTitle.Focus();
-                    return;
-                }
-            }
+			if (sng.Title == "Neues Lied")
+			{
+				if (MessageBox.Show("Hat das Lied wirklich den Standardnamen 'Neues Lied'?", "Achtung", MessageBoxButtons.YesNo) == System.Windows.Forms.DialogResult.No)
+				{
+					textBoxSongTitle.SelectAll();
+					textBoxSongTitle.Focus();
+					return;
+				}
+			}
 
 			SaveFileDialog saveFileDialog = new SaveFileDialog();
-			saveFileDialog.InitialDirectory = ((EditorWindow)MdiParent).fileBoxInitialDir;
+			if (songFilename != null)
+			{
+				saveFileDialog.InitialDirectory = Path.GetDirectoryName(songFilename);
+			}
+			else
+			{
+				saveFileDialog.InitialDirectory = ((EditorWindow)MdiParent).fileBoxInitialDir;
+			}
 			saveFileDialog.CheckPathExists = true;
 			saveFileDialog.FileName = sng.Title;
-			saveFileDialog.Filter = Song.getFileBoxFilterSave();
+			saveFileDialog.Filter = SongFileWriter.getFileBoxFilter();
 			saveFileDialog.FilterIndex = ((EditorWindow)MdiParent).fileBoxFilterIndex;
 			saveFileDialog.AddExtension = true;
 			saveFileDialog.Title = Resources.Lied_speichern_unter___;
@@ -654,14 +675,12 @@ namespace Pbp.Forms
 			if (saveFileDialog.ShowDialog(this) == DialogResult.OK)
 			{
 				hashCode = sng.GetHashCode();
-				sng.save(saveFileDialog.FileName);
+
+				SongFileWriter.createFactoryByFile(saveFileDialog.FileName).save(saveFileDialog.FileName, sng);
+
 				((EditorWindow)MdiParent).setStatus("Lied gespeichert als " + saveFileDialog.FileName + "");
-
-				
 			}
-
-			SongManager.GetInstance().ReloadSongByPath(sng.FilePath);
-
+			SongManager.Instance.ReloadSongByPath(saveFileDialog.FileName);
 		}
 
 		private void EditorChild_FormClosing(object sender, FormClosingEventArgs e)
@@ -910,26 +929,26 @@ namespace Pbp.Forms
 			buttonDelSongPart_Click(sender, e);
 		}
 
-        private void buttonAddSlide_Click(object sender, EventArgs e)
-        {
-            buttonAddNewSlide_Click(sender, e);
-        }
+		private void buttonAddSlide_Click(object sender, EventArgs e)
+		{
+			buttonAddNewSlide_Click(sender, e);
+		}
 
-        private void EditorChild_Shown(object sender, EventArgs e)
-        {
-            if (textBoxSongTitle.Text == "Neues Lied") {
-                textBoxSongTitle.SelectAll();
-                textBoxSongTitle.Focus();
-            }
-        }
+		private void EditorChild_Shown(object sender, EventArgs e)
+		{
+			if (textBoxSongTitle.Text == "Neues Lied") {
+				textBoxSongTitle.SelectAll();
+				textBoxSongTitle.Focus();
+			}
+		}
 
-        private void textBoxSongTitle_Enter(object sender, EventArgs e)
-        {
-            if (textBoxSongTitle.Text == "Neues Lied")
-            {
-                textBoxSongTitle.SelectAll();
-            }
-        }
+		private void textBoxSongTitle_Enter(object sender, EventArgs e)
+		{
+			if (textBoxSongTitle.Text == "Neues Lied")
+			{
+				textBoxSongTitle.SelectAll();
+			}
+		}
 
 	}
 }

@@ -101,7 +101,22 @@
   <ItemGroup>
     <Compile Include="Classes\BaseLayer.cs" />
     <Compile Include="Classes\BibleLayer.cs" />
+    <Compile Include="Classes\DataSet1.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DataSet1.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Classes\SongFileType.cs" />
+    <Compile Include="Classes\SongPartList.cs" />
+    <Compile Include="Classes\SongSlideList.cs" />
+    <Compile Include="Classes\SongPart.cs" />
+    <Compile Include="Classes\PowerPraiseSongFileReader.cs" />
+    <Compile Include="Classes\QualityAssuranceIndicator.cs" />
+    <Compile Include="Classes\SongFileWriter.cs" />
+    <Compile Include="Classes\PowerPraiseSongFileWriter.cs" />
+    <Compile Include="Classes\SongFileReader.cs" />
     <Compile Include="Classes\SongSlideLayer.cs" />
+    <Compile Include="Classes\TagList.cs" />
     <Compile Include="Classes\TextAlignment.cs" />
     <Compile Include="Classes\UpdateCheck.cs" />
     <Compile Include="Classes\XMLBible.cs" />
@@ -110,7 +125,7 @@
     <Compile Include="Classes\Util.cs" />
     <Compile Include="Classes\ImageManager.cs" />
     <Compile Include="Classes\SongManager.cs" />
-    <Compile Include="Classes\SongSubclasses.cs" />
+    <Compile Include="Classes\SongSlide.cs" />
     <Compile Include="Components\BackgrundImageBrowser.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -303,6 +318,17 @@
       <DesignTime>True</DesignTime>
     </Compile>
     <None Include="app.config" />
+    <None Include="Classes\DataSet1.xsc">
+      <DependentUpon>DataSet1.xsd</DependentUpon>
+    </None>
+    <None Include="Classes\DataSet1.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>DataSet1.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="Classes\DataSet1.xss">
+      <DependentUpon>DataSet1.xsd</DependentUpon>
+    </None>
     <None Include="Properties\Settings.settings">
       <Generator>PublicSettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>

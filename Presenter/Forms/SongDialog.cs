@@ -42,7 +42,7 @@ namespace Pbp.Forms
 			{
 				foreach (ListViewItem lvi in listViewItems.SelectedItems)
 				{
-					EditorWindow.getInstance().openSong(SongManager.GetInstance().SongList[(Guid)(lvi.Tag)].FilePath);
+					EditorWindow.getInstance().openSong(SongManager.Instance.SongList[(Guid)(lvi.Tag)].Filename);
 				}
 				OpenInEditor = true;
 				DialogResult = DialogResult.OK;
@@ -63,9 +63,9 @@ namespace Pbp.Forms
 		{
 			listViewItems.Items.Clear();
 			string searchText = textBoxSearch.Text.Trim().ToLower();
-			foreach (KeyValuePair<Guid,Song> kvp in SongManager.Instance.SongList)
+			foreach (KeyValuePair<Guid, SongManager.SongItem> kvp in SongManager.Instance.SongList)
 			{
-                Song sng = (Song)kvp.Value;
+                Song sng = (Song)kvp.Value.Song;
 				bool use = true;
 				if (searchText != String.Empty && !sng.SearchText.Contains(searchText))
 					use = false;
@@ -76,13 +76,13 @@ namespace Pbp.Forms
 				if (checkBoxHasComments.Checked && sng.Comment==string.Empty)
 					use = false;
 
-				if (checkBoxQAImages.Checked && !sng.getQA(Song.QualityAssuranceIndicators.Images))
+				if (checkBoxQAImages.Checked && !sng.getQA(QualityAssuranceIndicators.Images))
 					use = false;
-				if (checkBoxQASegmentation.Checked && !sng.getQA(Song.QualityAssuranceIndicators.Segmentation))
+				if (checkBoxQASegmentation.Checked && !sng.getQA(QualityAssuranceIndicators.Segmentation))
 					use = false;
-				if (checkBoxQASpelling.Checked && !sng.getQA(Song.QualityAssuranceIndicators.Spelling))
+				if (checkBoxQASpelling.Checked && !sng.getQA(QualityAssuranceIndicators.Spelling))
 					use = false;
-				if (checkBoxQATranslation.Checked && !sng.getQA(Song.QualityAssuranceIndicators.Translation))
+				if (checkBoxQATranslation.Checked && !sng.getQA(QualityAssuranceIndicators.Translation))
 					use = false;
 
 				foreach (int i in checkedListBoxTags.CheckedIndices)

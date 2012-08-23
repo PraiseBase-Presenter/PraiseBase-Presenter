@@ -113,8 +113,8 @@ namespace Pbp.Forms
 								{
 									if (p > 0)
 									{
-										sng.Parts.Add(new Song.Part());
-										sng.Parts[p].Slides.Add(new Song.Slide(sng));
+										sng.Parts.Add(new SongPart());
+										sng.Parts[p].Slides.Add(new SongSlide(sng));
 									}
 									Match mat = rex.Match(pri);
 									sng.Parts[p].Caption = mat.Value.Substring(0,mat.Value.Length-1);
@@ -213,8 +213,8 @@ namespace Pbp.Forms
 								
 								if (p > 0)
 								{
-									sng.Parts.Add(new Song.Part());
-									sng.Parts[p].Slides.Add(new Song.Slide(sng));
+									sng.Parts.Add(new SongPart());
+									sng.Parts[p].Slides.Add(new SongSlide(sng));
 								}
 								//Match mat = rex.Match(pri);
 								sng.Parts[p].Caption = "Teil " + (p+1).ToString();
@@ -258,9 +258,9 @@ namespace Pbp.Forms
 				Song sng = ((Song)(listViewSongs.SelectedItems[0].Tag));
 
 				listViewDetails.Items.Clear();
-				foreach (Song.Part prt in sng.Parts)
+				foreach (SongPart prt in sng.Parts)
 				{
-					foreach (Song.Slide sld in prt.Slides)
+					foreach (SongSlide sld in prt.Slides)
 					{
 						ListViewItem lvi = new ListViewItem(new string[] {prt.Caption, sld.OneLineText()});
 						listViewDetails.Items.Add(lvi);
@@ -289,6 +289,7 @@ namespace Pbp.Forms
 
 		private void buttonImport_Click(object sender, EventArgs e)
 		{
+            List<String> filesToOpen = new List<string>();
 			int cnt=0;
 			for (int x = 0; x < listViewSongs.Items.Count; x++)
 			{
@@ -296,10 +297,11 @@ namespace Pbp.Forms
 				{
 					string fileName = Settings.Default.DataDirectory + Path.DirectorySeparatorChar 
 						+ Settings.Default.SongDir + Path.DirectorySeparatorChar 
-						+((Song)listViewSongs.Items[x].Tag).Title+ "."+ Song.getDefaultExtension();
+						+((Song)listViewSongs.Items[x].Tag).Title+ "."+ SongFileWriter.SupportedFileTypes[SongFileWriter.PreferredType].Extension;
 					if ((File.Exists(fileName) && (MessageBox.Show("Das Lied '" + ((Song)listViewSongs.Items[x].Tag).Title + "' existiert bereits. Überschreiben?", "PraiseBox Importer", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)) || !File.Exists(fileName)) 
 					{
-						((Song)listViewSongs.Items[x].Tag).save(fileName);
+                        SongFileWriter.createFactoryByFile(fileName).save(fileName, (Song)listViewSongs.Items[x].Tag);
+                        filesToOpen.Add(fileName);
 						cnt++;
 					}
 				}
@@ -314,7 +316,7 @@ namespace Pbp.Forms
 					{
 						if (listViewSongs.Items[x].Checked)
 						{
-							EditorWindow.getInstance().openSong(((Song)listViewSongs.Items[x].Tag).FilePath);
+                            EditorWindow.getInstance().openSong(filesToOpen[x]);
 						}
 					}
 					EditorWindow.getInstance().Show();

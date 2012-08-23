@@ -27,32 +27,47 @@
 
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Windows.Forms;
 
-namespace Pbp.Forms
+namespace Pbp
 {
-	public partial class LoadingScreen : Form
-	{
-		public LoadingScreen()
-		{
-			InitializeComponent();
-            SongManager.Instance.SongLoaded += new SongManager.SongLoad(SongManager_SongLoaded);
-		}
-
-        void SongManager_SongLoaded(SongManager.SongLoadEventArgs e)
+    /// <summary>
+    /// A song part with a given name and one or more slides
+    /// </summary>
+    public class SongPart
+    {
+        /// <summary>
+        /// Part constructor
+        /// </summary>
+        public SongPart()
+            : this("Neuer Liedteil")
         {
-            this.setLabel("Lade Lieder " + e.Number + "/" + e.Total + ": "+e.Title);
         }
 
-		public void setLabel(string message)
-		{
-			label1.Text = message;
-            Application.DoEvents();
+        /// <summary>
+        /// Part constructor
+        /// </summary>
+        /// <param name="caption">The part's caption</param>
+        public SongPart(string caption)
+        {
+            Slides = new SongSlideList();
+            Caption = caption;
         }
-	}
+
+        /// <summary>
+        /// Song part name like chorus, bridge, part 1 ...
+        /// </summary>
+        public string Caption { get; set; }
+
+        /// <summary>
+        /// A list of containing slides. Each part has one slide at minimum
+        /// </summary>
+        public SongSlideList Slides { get; set; }
+
+        public override int GetHashCode()
+        {
+            return Caption.GetHashCode() ^ Slides.GetHashCode();
+        }
+    }
 }

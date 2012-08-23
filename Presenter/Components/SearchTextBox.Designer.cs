@@ -37,6 +37,7 @@
             // SearchTextBox
             // 
             this.Name = "SearchTextBox";
+            this.Load += new System.EventHandler(this.SearchTextBox_Load);
             this.ResumeLayout(false);
 
         }

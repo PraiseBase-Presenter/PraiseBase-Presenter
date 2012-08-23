@@ -238,5 +238,10 @@ namespace Pbp.Components
         {
             textBox.Select(start, length);
         }
+
+        private void SearchTextBox_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }

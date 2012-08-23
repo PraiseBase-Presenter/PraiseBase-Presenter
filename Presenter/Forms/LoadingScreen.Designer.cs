@@ -55,26 +55,16 @@ namespace Pbp.Forms
 		/// </summary>
 		private void InitializeComponent()
 		{
-            this.progressBar = new System.Windows.Forms.ProgressBar();
             this.label1 = new System.Windows.Forms.Label();
             this.SuspendLayout();
-            // 
-            // progressBar
-            // 
-            this.progressBar.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.progressBar.Location = new System.Drawing.Point(1, 199);
-            this.progressBar.Name = "progressBar";
-            this.progressBar.Size = new System.Drawing.Size(797, 17);
-            this.progressBar.Style = System.Windows.Forms.ProgressBarStyle.Continuous;
-            this.progressBar.TabIndex = 0;
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(327, 166);
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Location = new System.Drawing.Point(299, 175);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(14, 20);
+            this.label1.Size = new System.Drawing.Size(12, 16);
             this.label1.TabIndex = 1;
             this.label1.Text = "-";
             this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -86,10 +76,9 @@ namespace Pbp.Forms
             this.BackColor = System.Drawing.Color.White;
             this.BackgroundImage = global::Pbp.Properties.Resources.logo;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.ClientSize = new System.Drawing.Size(801, 217);
+            this.ClientSize = new System.Drawing.Size(801, 200);
             this.ControlBox = false;
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.progressBar);
             this.Cursor = System.Windows.Forms.Cursors.IBeam;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "LoadingScreen";
@@ -97,7 +86,6 @@ namespace Pbp.Forms
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Loading";
             this.TopMost = true;
-            this.Load += new System.EventHandler(this.LoadingScreen_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -105,7 +93,6 @@ namespace Pbp.Forms
 
 		#endregion
 
-		private System.Windows.Forms.ProgressBar progressBar;
-		private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label label1;
 	}
 }

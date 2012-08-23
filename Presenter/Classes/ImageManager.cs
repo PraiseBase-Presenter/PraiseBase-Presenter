@@ -188,14 +188,14 @@ namespace Pbp
 					}
 					else
 					{
-						ldg.setProgBarMax(cnt);
+						//ldg.setProgBarMax(cnt);
 						for (int i = 0; i < cnt; i++)
 						{
 							createThumb(missingThumbsSrc[i], missingThumbsTrg[i]);
 							if (i % 5 == 0)
 							{
 								ldg.setLabel("Erstelle Miniaturbilder " + i.ToString() + "/" + cnt.ToString());
-								ldg.setProgBarValue(i);
+								//ldg.setProgBarValue(i);
 								Application.DoEvents();
 							}
 						}

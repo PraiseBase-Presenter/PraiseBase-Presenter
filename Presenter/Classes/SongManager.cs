@@ -29,8 +29,6 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Windows.Forms;
-using Pbp.Forms;
 using Pbp.Properties;
 
 namespace Pbp
@@ -42,104 +40,140 @@ namespace Pbp
     internal class SongManager
     {
         /// <summary>
+        /// Song item structure
+        /// </summary>
+        public struct SongItem
+        {
+            public Song Song { get; set; }
+            public string Filetype { get; set; }
+            public string Filename { get; set; }
+        }
+
+        /// <summary>
         /// Singleton variable
         /// </summary>
         private static SongManager _instance;
 
         /// <summary>
-        /// The constructor
-        /// </summary>
-        private SongManager(params object[] param)
-        {
-            CurrentPartNr = 0;
-            CurrentSlideNr = 0;
-            Reload(param);
-        }
-
-        /// <summary>
         /// List of all availabe songs
         /// </summary>
-        public Dictionary<Guid, Song> SongList { get; private set; }
-
-
+        public Dictionary<Guid, SongItem> SongList { get; protected set; }
+        
         /// <summary>
         /// Gets or sets the current song object
         /// </summary>
-        public Song CurrentSong { get; set; }
-
-        public int CurrentPartNr { get; set; }
-        public int CurrentSlideNr { get; set; }
-
-        public Song.Slide CurrentSlide
-        {
-            get { return CurrentSong.Parts[CurrentPartNr].Slides[CurrentSlideNr]; }
-        }
-
+        public SongItem CurrentSong { get; set; }
 
         /// <summary>
-        /// Gets the singleton of this class
+        /// Gets or sets the current part number
+        /// </summary>
+        public int CurrentPartNr { get; set; }
+
+        /// <summary>
+        /// Gets or sets the current slide number
+        /// </summary>
+        public int CurrentSlideNr { get; set; }
+
+        /// <summary>
+        /// Gets the current slide
+        /// </summary>
+        public SongSlide CurrentSlide
+        {
+            get { return CurrentSong.Song.Parts[CurrentPartNr].Slides[CurrentSlideNr]; }
+        }
+
+        #region Events
+
+        public delegate void SongLoad(SongLoadEventArgs e);
+        public event SongLoad SongLoaded;
+        public class SongLoadEventArgs : EventArgs
+        {
+            public int Number { get; set; }
+            public int Total { get; set; }
+            public string Title { get; set; }
+            public SongLoadEventArgs(int number, int total, string title)
+            {
+                this.Number = number;
+                this.Total = total;
+                this.Title = title;
+            }
+        }
+
+        #endregion
+
+        /// <summary>
+        /// Gets the singleton of this class (field alternative)
         /// </summary>
         public static SongManager Instance
         {
-            get { return GetInstance(); }
+            get { return _instance ?? (_instance = new SongManager()); }
         }
 
-
         /// <summary>
-        /// Gets the singleton of this class
+        /// The constructor
         /// </summary>
-        /// <returns>Returns an unique instance of the song manager</returns>
-        public static SongManager GetInstance(params object[] param)
+        private SongManager()
         {
-            return _instance ?? (_instance = new SongManager(param));
+            CurrentPartNr = 0;
+            CurrentSlideNr = 0;
         }
 
         /// <summary>
         /// Reloads all songs from the song direcory
         /// specified in the application settings
         /// </summary>
-        public void Reload(params object[] param)
+        public void reload()
         {
-            LoadingScreen ldg = null;
-            if (param.Count() == 1 && param[0].GetType() == typeof (LoadingScreen))
-            {
-                ldg = (LoadingScreen) param[0];
-            }
-
+            // Define search directory
             string searchDir = Settings.Default.DataDirectory + Path.DirectorySeparatorChar + Settings.Default.SongDir;
-
-            var songPaths = new List<string>();
             if (!Directory.Exists(searchDir))
             {
                 Directory.CreateDirectory(searchDir);
             }
 
-            foreach (string ext in Enum.GetNames(typeof (Song.FileFormat)))
+            // Find song files
+            var songPaths = new List<string>();
+            foreach (string ext in SongFileReader.getSupportedExtensions())
             {
                 string[] songFilePaths = Directory.GetFiles(searchDir, "*." + ext, SearchOption.AllDirectories);
                 songPaths.AddRange(songFilePaths);
             }
-            
-
-
             int cnt = songPaths.Count;
-            if (ldg != null)
-                ldg.setProgBarMax(cnt);
 
-            SongList = new Dictionary<Guid, Song>();
-
-            for (int i = 0; i < cnt; i++)
+            // Load songs into list
+            int i = 0;
+            SongList = new Dictionary<Guid, SongItem>();
+            foreach (string path in songPaths)
             {
-                if (ldg != null && i%10 == 0)
+                try
                 {
-                    ldg.setProgBarValue(i);
-                    ldg.setLabel("Lade Lieder " + i + "/" + cnt);
+                    SongItem si = new SongItem();
+                    SongFileReader sfr = SongFileReader.createFactoryByFile(path);
+                    si.Song = sfr.load(path);
+                    si.Filename = path;
+                    si.Filetype = Path.GetExtension(path);
+
+                    SongList.Add(si.Song.GUID, si);
+                    if (i % 10 == 0)
+                    {
+                        SongLoadEventArgs e = new SongLoadEventArgs(i, cnt, si.Song.Title);
+                        OnSongLoaded(e);
+                    }
+                    i++;
                 }
-                var tmpSong = new Song(songPaths[i]);
-                if (tmpSong.IsValid)
+                catch (Exception e)
                 {
-                    SongList[tmpSong.GUID] = tmpSong;
+                    Console.WriteLine("Unable to load song file "+path + " ("+e.Message+")");
+                    Console.WriteLine(e.StackTrace);
                 }
+            }
+        }
+
+        protected virtual void OnSongLoaded(SongLoadEventArgs e)
+        {
+            if (SongLoaded != null)
+            {
+                SongLoaded(e);
             }
         }
 
@@ -148,16 +182,15 @@ namespace Pbp
         /// </summary>
         /// <param name="title">The title of the song</param>
         /// <returns>Returns the position in the songlist</returns>
-        public Guid GetGuid(string title)
+        public Guid getGuidByTitle(string title)
         {
             foreach (var kvp in SongList)
             {
-                if (kvp.Value.Title == title)
+                if (kvp.Value.Song.Title == title)
                 {
                     return kvp.Key;
                 }
             }
-            MessageBox.Show(Resources.Titel +" "+ title + " " +Resources.nicht_vorhanden);
             return Guid.Empty;
         }
 
@@ -166,7 +199,31 @@ namespace Pbp
         /// </summary>
         public void ReloadSong(Guid g)
         {
-            SongList[g] = new Song(SongList[g].FilePath, g);
+            // TODO Check for inexistent items
+            string path = SongList[g].Filename;
+            try
+            {
+                SongItem si = new SongItem();
+                SongFileReader sfr = SongFileReader.createFactoryByFile(path);
+                si.Song = sfr.load(path);
+                si.Filename = path;
+                // TODO
+                si.Filetype = Path.GetExtension(path);
+                if (g == si.Song.GUID)
+                {
+                    SongList[g] = si;
+                }
+                else
+                {
+                    SongList.Remove(g);
+                    SongList[si.Song.GUID] = si;
+                    // TODO Inform others that guid has changed
+                }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("Unable to load song file " + path + " (" + e.Message + ")");
+            }
         }
 
         /// <summary>
@@ -179,15 +236,14 @@ namespace Pbp
             {
                 foreach (var kvp in SongList)
                 {
-                    if (kvp.Value.FilePath == path)
+                    if (kvp.Value.Filename == path)
                     {
-                        SongList[kvp.Key] = new Song(path, kvp.Key);
+                        ReloadSong(kvp.Key);
                         return;
                     }
                 }
             }
         }
-
 
         /// <summary>
         /// Search the songlist for a given pattern and returns the matching songs
@@ -195,7 +251,7 @@ namespace Pbp
         /// <param name="needle">The search pattern</param>
         /// <param name="mode">If set to 1, the sogtext is also searched for the pattern. If set to 0, only the song title will be used</param>
         /// <returns>Returns a list of matches songs</returns>
-        public List<Song> GetSearchResults(string needle, SongSearchMode searchMode)
+        public List<SongItem> GetSearchResults(string needle, SongSearchMode searchMode)
         {
             needle = needle.Trim().ToLower();
             needle = needle.Replace(",", "");
@@ -204,19 +260,28 @@ namespace Pbp
             needle = needle.Replace(Environment.NewLine, "");
             needle = needle.Replace("  ", " ");
 
-            var tmpList = new List<Song>();
+            var tmpList = new List<SongItem>();
             foreach (var kvp in SongList)
             {
-                if (SongList[kvp.Key].Title.ToLower().Contains(needle) ||
-                    (searchMode == SongSearchMode.TitleAndText && SongList[kvp.Key].SearchText.Contains(needle)))
+                if (SongList[kvp.Key].Song.Title.ToLower().Contains(needle) ||
+                    (searchMode == SongSearchMode.TitleAndText && SongList[kvp.Key].Song.SearchText.Contains(needle)))
                 {
                     tmpList.Add(SongList[kvp.Key]);
                 }
             }
             return tmpList;
         }
+
+        public void saveCurrentSong()
+        {
+            SongFileWriter sfw = SongFileWriter.createFactoryByFile(CurrentSong.Filename);
+            sfw.save(CurrentSong.Filename, CurrentSong.Song);
+        }
     }
 
+    /// <summary>
+    /// Search options
+    /// </summary>
     public enum SongSearchMode
     {
         Title,

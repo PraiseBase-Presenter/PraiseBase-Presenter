@@ -167,10 +167,10 @@ namespace Pbp.Forms
             int cnt = 0;
 
             var lviList = new List<ListViewItem>();
-            foreach (Song sng in SongManager.Instance.GetSearchResults(needle, Settings.Default.SongSearchMode))
+            foreach (SongManager.SongItem si in SongManager.Instance.GetSearchResults(needle, Settings.Default.SongSearchMode))
             {
-                var lvi = new ListViewItem(sng.Title);
-                lvi.Tag = sng.GUID;
+                var lvi = new ListViewItem(si.Song.Title);
+                lvi.Tag = si.Song.GUID;
                 lviList.Add(lvi);
                 cnt++;
             }
@@ -181,8 +181,7 @@ namespace Pbp.Forms
                 try
                 {
                     listViewSongs.Items[0].Selected = true;
-                    SongManager.Instance.CurrentSong =
-                        SongManager.Instance.SongList[(Guid) listViewSongs.SelectedItems[0].Tag];
+                    SongManager.Instance.CurrentSong = SongManager.Instance.SongList[(Guid) listViewSongs.SelectedItems[0].Tag];
                     showCurrentSongDetails();
                 }
                 catch (Exception e)
@@ -275,12 +274,20 @@ namespace Pbp.Forms
         private void reloadSongList()
         {
             songSearchTextBox.Text = "";
-            SongManager.Instance.Reload();
+            SongManager.Instance.reload();
             loadSongList();
 
             for (int i = 0; i < listViewSetList.Items.Count; i++)
             {
-                listViewSetList.Items[i].Tag = SongManager.Instance.GetGuid(listViewSetList.Items[i].Text);
+                Guid g = SongManager.Instance.getGuidByTitle(listViewSetList.Items[i].Text);
+                if (g != Guid.Empty)
+                {
+                    listViewSetList.Items[i].Tag = g;
+                }
+                else
+                {
+                    MessageBox.Show(Resources.Titel + " " + listViewSetList.Items[i].Text + " " + Resources.nicht_vorhanden);
+                }
             }
 
             songSearchTextBox.Focus();
@@ -300,11 +307,9 @@ namespace Pbp.Forms
                 }
                 else
                 {
-                    if (SongManager.Instance.CurrentSong == null ||
-                        SongManager.Instance.CurrentSong.GUID != (Guid) listViewSongs.SelectedItems[0].Tag)
+                    if ((Nullable<SongManager.SongItem>)SongManager.Instance.CurrentSong == null || SongManager.Instance.CurrentSong.Song == null || SongManager.Instance.CurrentSong.Song.GUID != (Guid) listViewSongs.SelectedItems[0].Tag)
                     {
-                        SongManager.Instance.CurrentSong =
-                            SongManager.Instance.SongList[(Guid) listViewSongs.SelectedItems[0].Tag];
+                        SongManager.Instance.CurrentSong = SongManager.Instance.SongList[(Guid) listViewSongs.SelectedItems[0].Tag];
                         showCurrentSongDetails();
 
                         buttonSetListAdd.Enabled = true;
@@ -322,11 +327,10 @@ namespace Pbp.Forms
         {
             if (listViewSongs.SelectedItems.Count > 0)
             {
-                if (SongManager.Instance.CurrentSong == null ||
-                    SongManager.Instance.CurrentSong.GUID != (Guid) listViewSongs.SelectedItems[0].Tag)
+                if ((Nullable<SongManager.SongItem>)SongManager.Instance.CurrentSong == null ||
+                    SongManager.Instance.CurrentSong.Song.GUID != (Guid) listViewSongs.SelectedItems[0].Tag)
                 {
-                    SongManager.Instance.CurrentSong =
-                        SongManager.Instance.SongList[(Guid) listViewSongs.SelectedItems[0].Tag];
+                    SongManager.Instance.CurrentSong = SongManager.Instance.SongList[(Guid) listViewSongs.SelectedItems[0].Tag];
                     showCurrentSongDetails();
 
                     buttonSetListAdd.Enabled = true;
@@ -353,8 +357,7 @@ namespace Pbp.Forms
                     buttonSetListDown.Enabled = false;
                 buttonSetListRem.Enabled = true;
 
-                SongManager.GetInstance().CurrentSong =
-                    SongManager.GetInstance().SongList[(Guid) listViewSetList.SelectedItems[0].Tag];
+                SongManager.Instance.CurrentSong = SongManager.Instance.SongList[(Guid)listViewSetList.SelectedItems[0].Tag];
                 showCurrentSongDetails();
             }
         }
@@ -363,10 +366,10 @@ namespace Pbp.Forms
         {
             Application.DoEvents();
 
-            label3.Text = SongManager.Instance.CurrentSong.Title;
-            songDetailElement.setSong(SongManager.Instance.CurrentSong);
+            label3.Text = SongManager.Instance.CurrentSong.Song.Title;
+            songDetailElement.setSong(SongManager.Instance.CurrentSong.Song);
 
-            if (SongManager.Instance.CurrentSong.Comment != String.Empty || SongManager.Instance.CurrentSong.hasQA())
+            if (SongManager.Instance.CurrentSong.Song.Comment != String.Empty || SongManager.Instance.CurrentSong.Song.hasQA())
             {
                 toolStripButton3.Image = Resources.highlight_red;
             }
@@ -381,10 +384,10 @@ namespace Pbp.Forms
             Application.DoEvents();
 
             if (listViewSongHistory.Items.Count == 0 ||
-                (Guid) listViewSongHistory.Items[0].Tag != SongManager.Instance.CurrentSong.GUID)
+                (Guid) listViewSongHistory.Items[0].Tag != SongManager.Instance.CurrentSong.Song.GUID)
             {
-                var lvi = new ListViewItem(SongManager.Instance.CurrentSong.Title);
-                lvi.Tag = SongManager.Instance.CurrentSong.GUID;
+                var lvi = new ListViewItem(SongManager.Instance.CurrentSong.Song.Title);
+                lvi.Tag = SongManager.Instance.CurrentSong.Song.GUID;
                 listViewSongHistory.Items.Insert(0, lvi);
                 listViewSongHistory.Columns[0].Width = -2;
             }
@@ -392,9 +395,9 @@ namespace Pbp.Forms
 
             if (ProjectionWindow.Instance != null)
             {
-                setStatus("Projiziere '" + SongManager.Instance.CurrentSong.Title + "' ...");
+                setStatus("Projiziere '" + SongManager.Instance.CurrentSong.Song.Title + "' ...");
 
-                Song.Slide cs = SongManager.Instance.CurrentSong.Parts[e.PartNumber].Slides[e.SlideNumber];
+                SongSlide cs = SongManager.Instance.CurrentSong.Song.Parts[e.PartNumber].Slides[e.SlideNumber];
                 var ssl = new SongSlideLayer(cs);
 
                 // CTRL pressed, use image stack
@@ -423,14 +426,14 @@ namespace Pbp.Forms
                     // Current slide + attached image
                 else
                 {
-                    Image img = SongManager.Instance.CurrentSong.getImage(cs.ImageNumber);
+                    Image img = SongManager.Instance.CurrentSong.Song.getImage(cs.ImageNumber);
                     ProjectionWindow.Instance.DisplayLayer(1, img, Settings.Default.ProjectionFadeTimeLayer1);
                     ProjectionWindow.Instance.DisplayLayer(2, ssl);
 
-                    if (SongManager.Instance.CurrentSong.RelativeImagePaths.Count > 0)
-                        imageHistoryAdd(SongManager.Instance.CurrentSong.RelativeImagePaths[cs.ImageNumber - 1]);
+                    if (SongManager.Instance.CurrentSong.Song.RelativeImagePaths.Count > 0)
+                        imageHistoryAdd(SongManager.Instance.CurrentSong.Song.RelativeImagePaths[cs.ImageNumber - 1]);
                 }
-                setStatus("'" + SongManager.Instance.CurrentSong.Title + "' ist aktiv");
+                setStatus("'" + SongManager.Instance.CurrentSong.Song.Title + "' ist aktiv");
             }
         }
 
@@ -676,8 +679,8 @@ namespace Pbp.Forms
                     // Linked layers
                     if (
                         ! (!linkLayers ^
-                           ((ModifierKeys & Keys.Shift) == Keys.Shift && SongManager.Instance.CurrentSong != null &&
-                            SongManager.Instance.CurrentSong.CurrentSlide >= 0)))
+                           ((ModifierKeys & Keys.Shift) == Keys.Shift && (Nullable<SongManager.SongItem>)SongManager.Instance.CurrentSong != null &&
+                            SongManager.Instance.CurrentSong.Song.CurrentSlide >= 0)))
                     {
                         ProjectionWindow.Instance.HideLayer(2, Settings.Default.ProjectionFadeTime);
                     }
@@ -907,13 +910,19 @@ namespace Pbp.Forms
 
         private void checkBoxQASpelling_CheckedChanged(object sender, EventArgs e)
         {
-            if (SongManager.Instance.CurrentSong != null)
+            if ((Nullable<SongManager.SongItem>)SongManager.Instance.CurrentSong != null)
             {
-                if (((CheckBox) sender).Checked)
-                    SongManager.Instance.CurrentSong.setQA(Song.QualityAssuranceIndicators.Spelling);
+                if (((CheckBox)sender).Checked)
+                {
+                    SongManager.Instance.CurrentSong.Song.setQA(QualityAssuranceIndicators.Spelling);
+                }
                 else
-                    SongManager.Instance.CurrentSong.remQA(Song.QualityAssuranceIndicators.Spelling);
-                SongManager.Instance.CurrentSong.save(null);
+                {
+                    SongManager.Instance.CurrentSong.Song.remQA(QualityAssuranceIndicators.Spelling);
+                }
+
+                SongManager.Instance.saveCurrentSong();
+
                 setStatus("Qualitätssicherungs-Information gespeichert!");
             }
         }
@@ -998,8 +1007,8 @@ namespace Pbp.Forms
                 {
                     if (
                         !(!linkLayers ^
-                          ((ModifierKeys & Keys.Shift) == Keys.Shift && SongManager.Instance.CurrentSong != null &&
-                           SongManager.Instance.CurrentSong.CurrentSlide >= 0)))
+                          ((ModifierKeys & Keys.Shift) == Keys.Shift && (Nullable<SongManager.SongItem>)SongManager.Instance.CurrentSong != null &&
+                           SongManager.Instance.CurrentSong.Song.CurrentSlide >= 0)))
                     {
                         ProjectionWindow.Instance.HideLayer(2);
                     }
@@ -1151,7 +1160,7 @@ namespace Pbp.Forms
                 for (int i = 0; i < listViewSetList.Items.Count; i++)
                 {
                     XmlNode nd = xmlDoc.CreateElement("item");
-                    nd.InnerText = SongManager.GetInstance().SongList[(Guid) listViewSetList.Items[i].Tag].Title;
+                    nd.InnerText = SongManager.Instance.SongList[(Guid) listViewSetList.Items[i].Tag].Song.Title;
                     xmlRoot["items"].AppendChild(nd);
                 }
                 XmlWriter wrt = new XmlTextWriter(dlg.FileName, Encoding.UTF8);
@@ -1188,14 +1197,18 @@ namespace Pbp.Forms
                         {
                             if (xmlRoot["items"].ChildNodes[i].Name == "item")
                             {
-                                Guid g = SongManager.GetInstance().GetGuid(xmlRoot["items"].ChildNodes[i].InnerText);
+                                Guid g = SongManager.Instance.getGuidByTitle(xmlRoot["items"].ChildNodes[i].InnerText);
                                 if (g != Guid.Empty)
                                 {
-                                    var lvi = new ListViewItem(SongManager.Instance.SongList[g].Title);
+                                    var lvi = new ListViewItem(SongManager.Instance.SongList[g].Song.Title);
                                     lvi.Tag = g;
                                     listViewSetList.Items.Add(lvi);
                                     buttonSetListClear.Enabled = true;
                                     buttonSaveSetList.Enabled = true;
+                                }
+                                else
+                                {
+                                    MessageBox.Show(Resources.Titel + " " + xmlRoot["items"].ChildNodes[i].InnerText + " " + Resources.nicht_vorhanden);
                                 }
                             }
                         }
@@ -1267,7 +1280,7 @@ namespace Pbp.Forms
             if (listViewSongs.SelectedItems.Count > 0)
             {
                 EditorWindow wnd = EditorWindow.getInstance();
-                wnd.openSong(SongManager.Instance.CurrentSong.FilePath);
+                wnd.openSong(SongManager.Instance.CurrentSong.Filename);
                 wnd.Show();
                 wnd.Focus();
             }
@@ -1354,8 +1367,8 @@ namespace Pbp.Forms
                 Application.DoEvents();
 
                 if (
-                    ! ((ModifierKeys & Keys.Shift) == Keys.Shift && SongManager.Instance.CurrentSong != null &&
-                       SongManager.Instance.CurrentSong.CurrentSlide >= 0))
+                    ! ((ModifierKeys & Keys.Shift) == Keys.Shift && (Nullable<SongManager.SongItem>)SongManager.Instance.CurrentSong != null &&
+                       SongManager.Instance.CurrentSong.Song.CurrentSlide >= 0))
                 {
                     ProjectionWindow.Instance.HideLayer(2);
                 }
@@ -1368,7 +1381,7 @@ namespace Pbp.Forms
 
         private void toolStripButton3_Click(object sender, EventArgs e)
         {
-            if (SongManager.Instance.CurrentSong != null)
+            if ((Nullable<SongManager.SongItem>)SongManager.Instance.CurrentSong != null)
             {
                 var qd = new QADialog();
                 qd.ShowDialog(this);
@@ -1376,8 +1389,8 @@ namespace Pbp.Forms
                 {
                     //labelComment.Text = SongManager.Instance.CurrentSong.Comment;
                     //alignCommentLabel(;
-                    if (SongManager.Instance.CurrentSong.Comment != String.Empty ||
-                        SongManager.Instance.CurrentSong.hasQA())
+                    if (SongManager.Instance.CurrentSong.Song.Comment != String.Empty ||
+                        SongManager.Instance.CurrentSong.Song.hasQA())
                     {
                         toolStripButton3.Image = Resources.highlight_red;
                     }
@@ -1447,8 +1460,8 @@ namespace Pbp.Forms
                 {
                     if (
                         ! (!linkLayers ^
-                           ((ModifierKeys & Keys.Shift) == Keys.Shift && SongManager.Instance.CurrentSong != null &&
-                            SongManager.Instance.CurrentSong.CurrentSlide >= 0)))
+                           ((ModifierKeys & Keys.Shift) == Keys.Shift && (Nullable<SongManager.SongItem>)SongManager.Instance.CurrentSong != null &&
+                            SongManager.Instance.CurrentSong.Song.CurrentSlide >= 0)))
                     {
                         ProjectionWindow.Instance.HideLayer(2);
                     }
@@ -1547,8 +1560,8 @@ namespace Pbp.Forms
         {
             if (listViewSongHistory.SelectedIndices.Count > 0)
             {
-                SongManager.GetInstance().CurrentSong =
-                    SongManager.GetInstance().SongList[(Guid) listViewSongHistory.SelectedItems[0].Tag];
+                SongManager.Instance.CurrentSong =
+                    SongManager.Instance.SongList[(Guid) listViewSongHistory.SelectedItems[0].Tag];
                 showCurrentSongDetails();
             }
         }
