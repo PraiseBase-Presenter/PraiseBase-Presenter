@@ -1,11 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Text;
 using System.Xml;
-using System.IO;
-using System.Drawing;
-using Pbp.Properties;
 
 namespace Pbp
 {
@@ -45,7 +41,7 @@ namespace Pbp
                 foreach (QualityAssuranceIndicators i in sng.QualityIssues)
                 {
                     XmlNode qaChld = xmlRoot["general"]["qualityissues"].AppendChild(xmlDoc.CreateElement("issue"));
-                    qaChld.InnerText = Enum.GetName(typeof(QualityAssuranceIndicators),  i);
+                    qaChld.InnerText = Enum.GetName(typeof(QualityAssuranceIndicators), i);
                 }
             }
             if (sng.CcliID != null && sng.CcliID != String.Empty)
@@ -201,7 +197,6 @@ namespace Pbp
             xmlRoot["formatting"]["font"]["sourcetext"]["outline"].InnerText = "25";
             xmlRoot["formatting"]["font"]["sourcetext"].AppendChild(xmlDoc.CreateElement("shadow"));
             xmlRoot["formatting"]["font"]["sourcetext"]["shadow"].InnerText = "20";
-
 
             xmlRoot["formatting"]["font"].AppendChild(xmlDoc.CreateElement("outline"));
             xmlRoot["formatting"]["font"]["outline"].AppendChild(xmlDoc.CreateElement("enabled"));

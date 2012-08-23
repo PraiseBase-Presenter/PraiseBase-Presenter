@@ -1,7 +1,7 @@
 ﻿/*
- *   PraiseBase Presenter 
+ *   PraiseBase Presenter
  *   The open source lyrics and image projection software for churches
- *   
+ *
  *   http://code.google.com/p/praisebasepresenter
  *
  *   This program is free software; you can redistribute it and/or
@@ -25,10 +25,7 @@
  *
  */
 
-using System;
 using System.Collections.Generic;
-using System.Drawing;
-using System.Linq;
 
 namespace Pbp
 {
@@ -81,5 +78,4 @@ namespace Pbp
             return res;
         }
     }
-
 }

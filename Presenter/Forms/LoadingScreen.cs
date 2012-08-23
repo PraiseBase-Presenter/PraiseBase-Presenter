@@ -1,7 +1,7 @@
 ﻿/*
- *   PraiseBase Presenter 
+ *   PraiseBase Presenter
  *   The open source lyrics and image projection software for churches
- *   
+ *
  *   http://code.google.com/p/praisebasepresenter
  *
  *   This program is free software; you can redistribute it and/or
@@ -25,34 +25,27 @@
  *
  */
 
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
 using System.Windows.Forms;
 
 namespace Pbp.Forms
 {
-	public partial class LoadingScreen : Form
-	{
-		public LoadingScreen()
-		{
-			InitializeComponent();
-            SongManager.Instance.SongLoaded += new SongManager.SongLoad(SongManager_SongLoaded);
-		}
-
-        void SongManager_SongLoaded(SongManager.SongLoadEventArgs e)
+    public partial class LoadingScreen : Form
+    {
+        public LoadingScreen()
         {
-            this.setLabel("Lade Lieder " + e.Number + "/" + e.Total + ": "+e.Title);
+            InitializeComponent();
+            SongManager.Instance.SongLoaded += new SongManager.SongLoad(SongManager_SongLoaded);
         }
 
-		public void setLabel(string message)
-		{
-			label1.Text = message;
+        private void SongManager_SongLoaded(SongManager.SongLoadEventArgs e)
+        {
+            this.setLabel("Lade Lieder " + e.Number + "/" + e.Total + ": " + e.Title);
+        }
+
+        public void setLabel(string message)
+        {
+            label1.Text = message;
             Application.DoEvents();
         }
-	}
+    }
 }

@@ -1,7 +1,7 @@
 ﻿/*
- *   PraiseBase Presenter 
+ *   PraiseBase Presenter
  *   The open source lyrics and image projection software for churches
- *   
+ *
  *   http://code.google.com/p/praisebasepresenter
  *
  *   This program is free software; you can redistribute it and/or
@@ -26,15 +26,9 @@
  */
 
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Windows.Forms;
-using System.Xml;
 using System.IO;
+using System.Linq;
+using System.Windows.Forms;
 using Pbp.Properties;
 
 namespace Pbp.Forms
@@ -42,25 +36,24 @@ namespace Pbp.Forms
     public partial class EditorWindow : Form
     {
         static private EditorWindow _instance;
-		
-		public string fileBoxInitialDir;
-		public int fileBoxFilterIndex;
+
+        public string fileBoxInitialDir;
+        public int fileBoxFilterIndex;
 
         private int childFormNumber = 0;
 
         private EditorWindow()
         {
             InitializeComponent();
-			fileBoxInitialDir = Settings.Default.DataDirectory + Path.DirectorySeparatorChar + Settings.Default.SongDir;
-			fileBoxFilterIndex = 0;
-			this.WindowState = Settings.Default.EditorWindowState;
+            fileBoxInitialDir = Settings.Default.DataDirectory + Path.DirectorySeparatorChar + Settings.Default.SongDir;
+            fileBoxFilterIndex = 0;
+            this.WindowState = Settings.Default.EditorWindowState;
             this.Text += " " + System.Reflection.Assembly.GetExecutingAssembly().GetName().Version.ToString();
-
         }
 
         static public EditorWindow getInstance()
         {
-            if (_instance==null)
+            if (_instance == null)
                 _instance = new EditorWindow();
             return _instance;
         }
@@ -69,8 +62,8 @@ namespace Pbp.Forms
         {
             EditorChild childForm = new EditorChild(null);
             childForm.MdiParent = this;
-			childForm.Tag = "";
-            
+            childForm.Tag = "";
+
             childForm.Text = "Neues Lied " + ++childFormNumber;
             childForm.Show();
         }
@@ -78,42 +71,41 @@ namespace Pbp.Forms
         private void OpenFile(object sender, EventArgs e)
         {
             OpenFileDialog openFileDialog = new OpenFileDialog();
-			openFileDialog.InitialDirectory = fileBoxInitialDir;
-			openFileDialog.CheckFileExists = true;
-			openFileDialog.CheckPathExists = true;
-			openFileDialog.Multiselect = false;
-			openFileDialog.Title = "Lied öffnen";
+            openFileDialog.InitialDirectory = fileBoxInitialDir;
+            openFileDialog.CheckFileExists = true;
+            openFileDialog.CheckPathExists = true;
+            openFileDialog.Multiselect = false;
+            openFileDialog.Title = "Lied öffnen";
 
-			openFileDialog.Filter = SongFileReader.getFileBoxFilter();
-			openFileDialog.FilterIndex = fileBoxFilterIndex;
+            openFileDialog.Filter = SongFileReader.getFileBoxFilter();
+            openFileDialog.FilterIndex = fileBoxFilterIndex;
             if (openFileDialog.ShowDialog(this) == DialogResult.OK)
             {
                 string FileName = openFileDialog.FileName;
-				fileBoxInitialDir = Path.GetDirectoryName(FileName);
-				fileBoxFilterIndex = openFileDialog.FilterIndex;
-				openSong(FileName);
+                fileBoxInitialDir = Path.GetDirectoryName(FileName);
+                fileBoxFilterIndex = openFileDialog.FilterIndex;
+                openSong(FileName);
             }
         }
 
-		public void openSong(string fileName)
-		{
-			for (int i = 0; i < MdiChildren.Count(); i++)
-			{
-				if (MdiChildren[i].Tag.ToString() == fileName)
-				{
-					MdiChildren[i].Show();
-					MdiChildren[i].Focus();
-					return;
-				}
-			}
+        public void openSong(string fileName)
+        {
+            for (int i = 0; i < MdiChildren.Count(); i++)
+            {
+                if (MdiChildren[i].Tag.ToString() == fileName)
+                {
+                    MdiChildren[i].Show();
+                    MdiChildren[i].Focus();
+                    return;
+                }
+            }
 
-			EditorChild childForm = new EditorChild(fileName);
-			childForm.Tag = fileName;
-			childForm.MdiParent = this;
-			if (childForm.valid)
-				childForm.Show();
-		}
-
+            EditorChild childForm = new EditorChild(fileName);
+            childForm.Tag = fileName;
+            childForm.MdiParent = this;
+            if (childForm.valid)
+                childForm.Show();
+        }
 
         private void ExitToolsStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -121,36 +113,36 @@ namespace Pbp.Forms
         }
 
         private void CutToolStripMenuItem_Click(object sender, EventArgs e)
-		{
-			if (ActiveMdiChild != null)
-			{
-				if (((EditorChild)ActiveMdiChild).ActiveControl.GetType() == typeof(TextBox))
-				{
-					((TextBox)((EditorChild)ActiveMdiChild).ActiveControl).Cut();
-				}
-			}
+        {
+            if (ActiveMdiChild != null)
+            {
+                if (((EditorChild)ActiveMdiChild).ActiveControl.GetType() == typeof(TextBox))
+                {
+                    ((TextBox)((EditorChild)ActiveMdiChild).ActiveControl).Cut();
+                }
+            }
         }
 
         private void CopyToolStripMenuItem_Click(object sender, EventArgs e)
-		{
-			if (ActiveMdiChild != null)
-			{
-				if (((EditorChild)ActiveMdiChild).ActiveControl.GetType() == typeof(TextBox))
-				{
-					((TextBox)((EditorChild)ActiveMdiChild).ActiveControl).Copy();
-				}
-			}
+        {
+            if (ActiveMdiChild != null)
+            {
+                if (((EditorChild)ActiveMdiChild).ActiveControl.GetType() == typeof(TextBox))
+                {
+                    ((TextBox)((EditorChild)ActiveMdiChild).ActiveControl).Copy();
+                }
+            }
         }
 
         private void PasteToolStripMenuItem_Click(object sender, EventArgs e)
-		{
-			if (ActiveMdiChild != null)
-			{
-				if (((EditorChild)ActiveMdiChild).ActiveControl.GetType() == typeof(TextBox))
-				{
-					((TextBox)((EditorChild)ActiveMdiChild).ActiveControl).Paste();
-				}
-			}
+        {
+            if (ActiveMdiChild != null)
+            {
+                if (((EditorChild)ActiveMdiChild).ActiveControl.GetType() == typeof(TextBox))
+                {
+                    ((TextBox)((EditorChild)ActiveMdiChild).ActiveControl).Paste();
+                }
+            }
         }
 
         private void ToolBarToolStripMenuItem_Click(object sender, EventArgs e)
@@ -193,7 +185,6 @@ namespace Pbp.Forms
 
         private void contentsToolStripMenuItem_Click(object sender, EventArgs e)
         {
-
         }
 
         private void aboutToolStripMenuItem_Click(object sender, EventArgs e)
@@ -204,7 +195,7 @@ namespace Pbp.Forms
 
         private void webToolStripMenuItem_Click(object sender, EventArgs e)
         {
-			System.Diagnostics.Process.Start(Settings.Default.Weburl);
+            System.Diagnostics.Process.Start(Settings.Default.Weburl);
         }
 
         private void optionsToolStripMenuItem_Click(object sender, EventArgs e)
@@ -213,16 +204,15 @@ namespace Pbp.Forms
             stWnd.ShowDialog(this);
         }
 
-
         private void EditorWindow_FormClosing(object sender, FormClosingEventArgs e)
         {
-			Settings.Default.EditorWindowState = this.WindowState;
-		
-			//this.Hide();
-			//e.Cancel = true;
+            Settings.Default.EditorWindowState = this.WindowState;
+
+            //this.Hide();
+            //e.Cancel = true;
         }
 
-		private void saveChild(object sender, EventArgs e)
+        private void saveChild(object sender, EventArgs e)
         {
             if (ActiveMdiChild != null)
             {
@@ -230,115 +220,111 @@ namespace Pbp.Forms
             }
         }
 
-		private void saveChildAs(object sender, EventArgs e)
-		{
-			if (ActiveMdiChild != null)
-			{
-				((EditorChild)ActiveMdiChild).saveAs();
-			}
-		}
+        private void saveChildAs(object sender, EventArgs e)
+        {
+            if (ActiveMdiChild != null)
+            {
+                ((EditorChild)ActiveMdiChild).saveAs();
+            }
+        }
 
         public void setStatus(string text)
         {
             toolStripStatusLabel1.Text = text;
-			Timer statusTimer = new Timer();
-			statusTimer.Interval = 2000;
-			statusTimer.Tick += new EventHandler(statusTimer_Tick);
-			statusTimer.Start();
-		}
-		
-		void statusTimer_Tick(object sender, EventArgs e)
-		{
-			toolStripStatusLabel1.Text = string.Empty;
-			((Timer)sender).Stop();
-			((Timer)sender).Dispose();
-		}
+            Timer statusTimer = new Timer();
+            statusTimer.Interval = 2000;
+            statusTimer.Tick += new EventHandler(statusTimer_Tick);
+            statusTimer.Start();
+        }
 
-		private void selectAllToolStripMenuItem_Click(object sender, EventArgs e)
-		{
-			if (ActiveMdiChild != null)
-			{
-				if (((EditorChild)ActiveMdiChild).ActiveControl.GetType() == typeof(TextBox))
-				{
-					((TextBox)((EditorChild)ActiveMdiChild).ActiveControl).SelectAll();
-				}
-			}
-		}
+        private void statusTimer_Tick(object sender, EventArgs e)
+        {
+            toolStripStatusLabel1.Text = string.Empty;
+            ((Timer)sender).Stop();
+            ((Timer)sender).Dispose();
+        }
 
-		private void undoToolStripMenuItem_Click(object sender, EventArgs e)
-		{
-			if (ActiveMdiChild != null)
-			{
-				if (((EditorChild)ActiveMdiChild).ActiveControl.GetType() == typeof(TextBox))
-				{
-					((TextBox)((EditorChild)ActiveMdiChild).ActiveControl).Undo();
-				}
-			}
-		}
+        private void selectAllToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (ActiveMdiChild != null)
+            {
+                if (((EditorChild)ActiveMdiChild).ActiveControl.GetType() == typeof(TextBox))
+                {
+                    ((TextBox)((EditorChild)ActiveMdiChild).ActiveControl).SelectAll();
+                }
+            }
+        }
 
-		private void redoToolStripMenuItem_Click(object sender, EventArgs e)
-		{
-			if (ActiveMdiChild != null)
-			{
-				if (((EditorChild)ActiveMdiChild).ActiveControl.GetType() == typeof(TextBox))
-				{
-					((TextBox)((EditorChild)ActiveMdiChild).ActiveControl).ClearUndo();
-				}
-			}
-		}
+        private void undoToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (ActiveMdiChild != null)
+            {
+                if (((EditorChild)ActiveMdiChild).ActiveControl.GetType() == typeof(TextBox))
+                {
+                    ((TextBox)((EditorChild)ActiveMdiChild).ActiveControl).Undo();
+                }
+            }
+        }
 
-		private void liedSchliessenToolStripMenuItem_Click(object sender, EventArgs e)
-		{
-			if (ActiveMdiChild != null)
-			{
-				((EditorChild)ActiveMdiChild).Close();
-			}
-		}
+        private void redoToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (ActiveMdiChild != null)
+            {
+                if (((EditorChild)ActiveMdiChild).ActiveControl.GetType() == typeof(TextBox))
+                {
+                    ((TextBox)((EditorChild)ActiveMdiChild).ActiveControl).ClearUndo();
+                }
+            }
+        }
 
-		private void allesSchliessenToolStripMenuItem_Click(object sender, EventArgs e)
-		{
-			if (MdiChildren.Count() > 0)
-			{
-				foreach (EditorChild c in MdiChildren)
-				{
-					((EditorChild)c).Close();
-				}
-			}
-		}
+        private void liedSchliessenToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (ActiveMdiChild != null)
+            {
+                ((EditorChild)ActiveMdiChild).Close();
+            }
+        }
 
-		private void EditorWindow_Load(object sender, EventArgs e)
-		{
+        private void allesSchliessenToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (MdiChildren.Count() > 0)
+            {
+                foreach (EditorChild c in MdiChildren)
+                {
+                    ((EditorChild)c).Close();
+                }
+            }
+        }
 
-		}
+        private void EditorWindow_Load(object sender, EventArgs e)
+        {
+        }
 
-		private void datenverzeichnisAnzeigenToolStripMenuItem_Click(object sender, EventArgs e)
-		{
-			System.Diagnostics.Process.Start(Settings.Default.DataDirectory);
-		}
+        private void datenverzeichnisAnzeigenToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            System.Diagnostics.Process.Start(Settings.Default.DataDirectory);
+        }
 
-		private void toolStripButton2_Click(object sender, EventArgs e)
-		{
-			System.Diagnostics.Process.Start(Settings.Default.DataDirectory);
-		}
+        private void toolStripButton2_Click(object sender, EventArgs e)
+        {
+            System.Diagnostics.Process.Start(Settings.Default.DataDirectory);
+        }
 
-		private void fehlerMeldenToolStripMenuItem_Click(object sender, EventArgs e)
-		{
-			System.Diagnostics.Process.Start(Settings.Default.BugReportUrl);
-		}
+        private void fehlerMeldenToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            System.Diagnostics.Process.Start(Settings.Default.BugReportUrl);
+        }
 
-		private void praiseBoxToolStripMenuItem_Click(object sender, EventArgs e)
-		{
-			SongImporter dlg = new SongImporter(SongImporter.ImportFormat.PraiseBox);
-			dlg.ShowDialog(this);
-		}
+        private void praiseBoxToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            SongImporter dlg = new SongImporter(SongImporter.ImportFormat.PraiseBox);
+            dlg.ShowDialog(this);
+        }
 
-		private void EditorWindow_FormClosed(object sender, FormClosedEventArgs e)
-		{
-			_instance = null;
-			GC.Collect();
-		}
-
-
-
+        private void EditorWindow_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            _instance = null;
+            GC.Collect();
+        }
     }
 }

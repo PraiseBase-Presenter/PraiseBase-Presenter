@@ -1,10 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Xml;
-using System.IO;
 using System.Drawing;
+using System.Xml;
 using Pbp.Properties;
 
 namespace Pbp
@@ -98,9 +95,11 @@ namespace Pbp
                         case "left":
                             sng.DefaultHorizAlign = Song.SongTextHorizontalAlign.Left;
                             break;
+
                         case "center":
                             sng.DefaultHorizAlign = Song.SongTextHorizontalAlign.Center;
                             break;
+
                         case "right":
                             sng.DefaultHorizAlign = Song.SongTextHorizontalAlign.Right;
                             break;
@@ -113,9 +112,11 @@ namespace Pbp
                         case "top":
                             sng.DefaultVertAlign = Song.SongTextVerticalAlign.Top;
                             break;
+
                         case "center":
                             sng.DefaultVertAlign = Song.SongTextVerticalAlign.Center;
                             break;
+
                         case "bottom":
                             sng.DefaultVertAlign = Song.SongTextVerticalAlign.Bottom;
                             break;
@@ -179,7 +180,7 @@ namespace Pbp
             }
 
             //
-            // Now the song text ... 
+            // Now the song text ...
             //
             foreach (XmlElement elem in xmlRoot["songtext"])
             {

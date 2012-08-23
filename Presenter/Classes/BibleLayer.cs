@@ -1,13 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Xml;
-using System.Windows.Documents;
 using System.Drawing;
-using System.Drawing.Imaging;
-using System.Drawing.Drawing2D;
-using System.Drawing.Text;
 using Pbp.Properties;
 
 namespace Pbp
@@ -15,10 +7,12 @@ namespace Pbp
     public class BibleLayer : TextLayer
     {
         public float FontSize { get; set; }
+
         public StringAlignment HorizontalAlign { get; set; }
+
         public StringAlignment VerticalAlign { get; set; }
 
-        XMLBible.VerseSelection verseSelection;
+        private XMLBible.VerseSelection verseSelection;
 
         public BibleLayer(XMLBible.VerseSelection verseSelection)
         {
@@ -33,7 +27,7 @@ namespace Pbp
             string Text = v.Text;
 
             Font font = new Font(Settings.Default.ProjectionMasterFont.FontFamily, FontSize, Settings.Default.ProjectionMasterFont.Style);
-            Font titleFont = new Font(Settings.Default.ProjectionMasterFont.FontFamily, FontSize+10f, Settings.Default.ProjectionMasterFont.Style);
+            Font titleFont = new Font(Settings.Default.ProjectionMasterFont.FontFamily, FontSize + 10f, Settings.Default.ProjectionMasterFont.Style);
             Brush fontBrush = new SolidBrush(Settings.Default.ProjectionMasterFontColor);
             StringFormat strFormat = new StringFormat();
             strFormat.Alignment = HorizontalAlign;
@@ -81,17 +75,11 @@ namespace Pbp
                 }
                 else
                 {
-                    drawString(gr, l, x, y, font, fontBrush, strFormat);                   
-                    
+                    drawString(gr, l, x, y, font, fontBrush, strFormat);
+
                     y += (int)lm.Height + Settings.Default.ProjectionMasterLineSpacing;
                 }
             }
-
         }
-
     }
-
-
-
-
 }

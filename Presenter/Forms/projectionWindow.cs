@@ -1,7 +1,7 @@
 ﻿/*
- *   PraiseBase Presenter 
+ *   PraiseBase Presenter
  *   The open source lyrics and image projection software for churches
- *   
+ *
  *   http://code.google.com/p/praisebasepresenter
  *
  *   This program is free software; you can redistribute it and/or
@@ -40,11 +40,10 @@ namespace Pbp.Forms
 
         public delegate void ProjectionChange(object sender, ProjectionChangedEventArgs e);
 
-        #endregion
+        #endregion Delegates
 
         public event ProjectionChange ProjectionChanged;
 
-        
         private ProjectionWindow()
         {
             InitializeComponent();
@@ -61,7 +60,7 @@ namespace Pbp.Forms
         }
 
         static private ProjectionWindow _instance;
-        static readonly object SingletonPadlock = new object();
+        private static readonly object SingletonPadlock = new object();
 
         /// <summary>
         /// Returns a singleton of mainWindow
@@ -96,6 +95,7 @@ namespace Pbp.Forms
          * error message is displayed and the primary screen is chosen
          * for projection.
          */
+
         public void ScanScreens(int success)
         {
             bool allowProjection = false;
@@ -112,6 +112,7 @@ namespace Pbp.Forms
             if (!allowProjection)
             {
                 _projScreen = Screen.PrimaryScreen;
+
                 //MessageBox.Show("Kein zweiter Bildschirm gefunden! Der Primärbildschirm wird stattdessen verwendet.", "Projektion", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
             }
             else if (success == 1)
@@ -132,10 +133,10 @@ namespace Pbp.Forms
         {
             DisplayLayer(layer, background, Settings.Default.ProjectionFadeTime);
         }
-        
+
         public void DisplayLayer(int layer, TextLayer tl, int fadetime)
         {
-            var bmp = new Bitmap(Width,Height);
+            var bmp = new Bitmap(Width, Height);
             Graphics gr = Graphics.FromImage(bmp);
             tl.writeOut(gr);
 
@@ -146,7 +147,7 @@ namespace Pbp.Forms
 
             if (ProjectionChanged != null)
             {
-                ProjectionChanged(this, new ProjectionChangedEventArgs { Image = bmp, Layer = layer});
+                ProjectionChanged(this, new ProjectionChangedEventArgs { Image = bmp, Layer = layer });
             }
         }
 
@@ -193,6 +194,7 @@ namespace Pbp.Forms
         public class ProjectionChangedEventArgs : EventArgs
         {
             public Image Image { get; set; }
+
             public int Layer { get; set; }
         }
     }

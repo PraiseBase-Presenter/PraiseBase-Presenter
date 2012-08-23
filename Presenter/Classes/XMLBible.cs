@@ -1,17 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Xml;
 using System.IO;
+using System.Xml;
 
 namespace Pbp
 {
     /// <summary>
     /// XML bible reader based on Zefania XML format
-    /// 
+    ///
     /// Author: Nicolas Perrenoud<nicu@lavine.ch>
-    /// 
+    ///
     /// Zefania XML Project Website: http://sourceforge.net/projects/zefania-sharp/
     /// Wikipedia: http://de.wikipedia.org/wiki/Zefania_XML
     /// Docs: http://bgfdb.de/zefaniaxml/bml/
@@ -19,13 +17,15 @@ namespace Pbp
     public class XMLBible
     {
         public string Title { get; private set; }
+
         public bool isValid { get; private set; }
+
         public string FileName { get; private set; }
 
-        public static string[] bookMap = { "1. Mose", "2. Mose", "3. Mose", "4. Mose", "5. Mose", "Josua", "Richter", "Rut", "1. Samuel", "2. Samuel", "1. Könige", "2. Könige", "1. Chronik", "2. Chronik", "Esra", "Nehemia", "Ester", "Hiob", "Psalm", "Sprüche", "Prediger", "Hohelied", "Jesaja", "Jeremia", "Klagelieder", "Hesekiel", "Daniel", "Hosea", "Joel", "Amos", "Obadja", "Jona", "Micha", "Nahum", "Habakuk", "Zephanja", "Haggai", "Sacharja", "Maleachi", "Matthäus", "Markus", "Lukas", "Johannes", "Apostelgeschichte", "Römer", "1. Korinther", "2. Korinther", "Galater", "Epheser", "Philipper", "Kolosser", "1. Thessalonicher", "2. Thessalonicher", "1. Timotheus", "2. Timotheus", "Titus", "Philemon", "Hebräer", "Jakobus", "1. Petrus", "2. Petrus", "1. Johannes", "2. Johannes", "3. Johannes", "Judas", "Offenbarung", "Judit", "Weisheit", "Tobia", "Sirach", "Baruch", "1 Makkabäer", "2 Makkabäer", "xDaniel", "xEster", "Manasse"};
+        public static string[] bookMap = { "1. Mose", "2. Mose", "3. Mose", "4. Mose", "5. Mose", "Josua", "Richter", "Rut", "1. Samuel", "2. Samuel", "1. Könige", "2. Könige", "1. Chronik", "2. Chronik", "Esra", "Nehemia", "Ester", "Hiob", "Psalm", "Sprüche", "Prediger", "Hohelied", "Jesaja", "Jeremia", "Klagelieder", "Hesekiel", "Daniel", "Hosea", "Joel", "Amos", "Obadja", "Jona", "Micha", "Nahum", "Habakuk", "Zephanja", "Haggai", "Sacharja", "Maleachi", "Matthäus", "Markus", "Lukas", "Johannes", "Apostelgeschichte", "Römer", "1. Korinther", "2. Korinther", "Galater", "Epheser", "Philipper", "Kolosser", "1. Thessalonicher", "2. Thessalonicher", "1. Timotheus", "2. Timotheus", "Titus", "Philemon", "Hebräer", "Jakobus", "1. Petrus", "2. Petrus", "1. Johannes", "2. Johannes", "3. Johannes", "Judas", "Offenbarung", "Judit", "Weisheit", "Tobia", "Sirach", "Baruch", "1 Makkabäer", "2 Makkabäer", "xDaniel", "xEster", "Manasse" };
 
-        XmlDocument xmlDoc;
-        XmlElement xmlRoot;
+        private XmlDocument xmlDoc;
+        private XmlElement xmlRoot;
 
         public XMLBible(string fileName)
         {
@@ -33,6 +33,7 @@ namespace Pbp
 
             // Read a document
             XmlTextReader textReader = new XmlTextReader(fileName);
+
             // Read until end of file
             while (textReader.Read())
             {
@@ -47,7 +48,7 @@ namespace Pbp
                             {
                                 Title = textReader.Value;
                                 FileName = fileName;
-                                isValid = true;                                
+                                isValid = true;
                             }
                             break;
                         }
@@ -83,7 +84,7 @@ namespace Pbp
                 {
                     if (bookNode.Name.ToLower() == "biblebook")
                     {
-                        ret.Add(new Book(bookNode,this));                        
+                        ret.Add(new Book(bookNode, this));
                     }
                 }
             }
@@ -108,9 +109,12 @@ namespace Pbp
 
         public class Book
         {
-            public int Number {get;private set;}
+            public int Number { get; private set; }
+
             public string Name { get; private set; }
+
             public string SName { get; private set; }
+
             public XMLBible Bible { get; private set; }
 
             private XmlNode node;
@@ -142,12 +146,12 @@ namespace Pbp
                 }
                 return ret;
             }
-
         }
 
         public class Chapter
         {
-            public int Number {get;private set;}
+            public int Number { get; private set; }
+
             public XMLBible.Book Book { get; private set; }
 
             private XmlNode node;
@@ -177,13 +181,14 @@ namespace Pbp
                 }
                 return ret;
             }
-
         }
 
         public class Verse
         {
             public int Number { get; private set; }
+
             public string Text { get; private set; }
+
             public XMLBible.Chapter Chapter { get; private set; }
 
             private XmlNode node;
@@ -198,35 +203,44 @@ namespace Pbp
 
             public override string ToString()
             {
-                return Number.ToString()+": "+ Text;
+                return Number.ToString() + ": " + Text;
             }
         }
 
         public class VerseSelection
         {
             public XMLBible.Verse StartVerse { get; private set; }
-            public XMLBible.Verse EndVerse { 
-                get { 
-                    return StartVerse.Chapter.getVerses()[endVerseNumber - 1]; 
-                } 
-            }
-            public XMLBible.Chapter Chapter { 
-                get { 
-                    return StartVerse.Chapter; 
+
+            public XMLBible.Verse EndVerse
+            {
+                get
+                {
+                    return StartVerse.Chapter.getVerses()[endVerseNumber - 1];
                 }
             }
-            public string Text { 
-                get {
+
+            public XMLBible.Chapter Chapter
+            {
+                get
+                {
+                    return StartVerse.Chapter;
+                }
+            }
+
+            public string Text
+            {
+                get
+                {
                     string str = "";
                     for (int i = StartVerse.Number; i <= endVerseNumber; i++)
                     {
                         str += StartVerse.Chapter.getVerses()[i - 1] + Environment.NewLine;
                     }
                     return str;
-                } 
+                }
             }
-            
-            int endVerseNumber = 0;
+
+            private int endVerseNumber = 0;
 
             public VerseSelection(XMLBible.Verse start)
             {

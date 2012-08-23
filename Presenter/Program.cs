@@ -1,7 +1,7 @@
 ﻿/*
- *   PraiseBase Presenter 
+ *   PraiseBase Presenter
  *   The open source lyrics and image projection software for churches
- *   
+ *
  *   http://code.google.com/p/praisebasepresenter
  *
  *   This program is free software; you can redistribute it and/or
@@ -32,15 +32,15 @@ using Pbp.Properties;
 
 namespace Pbp
 {
-    static class Program
+    internal static class Program
     {
         /// <summary>
         /// The main entry point for the application.
         /// </summary>
         [STAThread]
-        static void Main()
+        private static void Main()
         {
-			DateTime startTime = DateTime.Now;
+            DateTime startTime = DateTime.Now;
 
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
@@ -54,6 +54,7 @@ namespace Pbp
             try
             {
                 mutex = System.Threading.Mutex.OpenExisting(mutexName);
+
                 //since it hasn’t thrown an exception, then we already have one copy of the app open.
 
                 object[] attributes = System.Reflection.Assembly.GetExecutingAssembly().GetCustomAttributes(typeof(System.Reflection.AssemblyProductAttribute), false);
@@ -66,14 +67,14 @@ namespace Pbp
             {
                 //since we didn’t find a mutex with that name, create one
                 mutex = new System.Threading.Mutex(true, mutexName);
-            } 
+            }
 
-			if (Settings.Default.ShowLoadingScreen)
-			{
-				var ldg = new LoadingScreen();
-				ldg.setLabel("PraiseBase Presenter wird gestartet...");
-				ldg.Show();
-				Application.DoEvents();
+            if (Settings.Default.ShowLoadingScreen)
+            {
+                var ldg = new LoadingScreen();
+                ldg.setLabel("PraiseBase Presenter wird gestartet...");
+                ldg.Show();
+                Application.DoEvents();
 
                 if (Settings.Default.DataDirectory == "")
                 {
@@ -82,34 +83,33 @@ namespace Pbp
                     Settings.Default.Save();
                 }
 
-				ldg.setLabel("Prüfe Miniaturbilder...");
-				ImageManager.Instance.checkThumbs(ldg);
+                ldg.setLabel("Prüfe Miniaturbilder...");
+                ImageManager.Instance.checkThumbs(ldg);
 
-				ldg.setLabel("Lade Liederdatenbank...");
-				SongManager.Instance.reload();
-
-				ldg.setLabel("Suche Projektionsschirm...");
-                var prjw = ProjectionWindow.Instance;
-
-				ldg.setLabel("Initialisiere Programmoberfläche...");
-				GC.Collect();
-				ldg.Close();
-				ldg.Dispose();
-			}
-			else
-			{
+                ldg.setLabel("Lade Liederdatenbank...");
                 SongManager.Instance.reload();
-				ImageManager.Instance.checkThumbs();
-                var prjw = ProjectionWindow.Instance;
-				GC.Collect();
-			}
-            
-			//Console.WriteLine("Loading took " + (DateTime.Now - startTime).TotalSeconds + " seconds!");
 
-			Application.Run(MainWindow.Instance);
+                ldg.setLabel("Suche Projektionsschirm...");
+                var prjw = ProjectionWindow.Instance;
+
+                ldg.setLabel("Initialisiere Programmoberfläche...");
+                GC.Collect();
+                ldg.Close();
+                ldg.Dispose();
+            }
+            else
+            {
+                SongManager.Instance.reload();
+                ImageManager.Instance.checkThumbs();
+                var prjw = ProjectionWindow.Instance;
+                GC.Collect();
+            }
+
+            //Console.WriteLine("Loading took " + (DateTime.Now - startTime).TotalSeconds + " seconds!");
+
+            Application.Run(MainWindow.Instance);
 
             GC.KeepAlive(mutex);
-
         }
     }
 }

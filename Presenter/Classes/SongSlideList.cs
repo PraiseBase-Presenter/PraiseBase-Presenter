@@ -1,7 +1,7 @@
 ﻿/*
- *   PraiseBase Presenter 
+ *   PraiseBase Presenter
  *   The open source lyrics and image projection software for churches
- *   
+ *
  *   http://code.google.com/p/praisebasepresenter
  *
  *   This program is free software; you can redistribute it and/or
@@ -25,10 +25,7 @@
  *
  */
 
-using System;
 using System.Collections.Generic;
-using System.Drawing;
-using System.Linq;
 
 namespace Pbp
 {
@@ -91,12 +88,12 @@ namespace Pbp
             var sld = (SongSlide)this[slideId].Clone();
 
             int totl = sld.Lines.Count;
-            int rem = totl/2;
+            int rem = totl / 2;
             this[slideId].Lines.RemoveRange(0, rem);
             sld.Lines.RemoveRange(rem, totl - rem);
 
             totl = sld.Translation.Count;
-            rem = totl/2;
+            rem = totl / 2;
             this[slideId].Translation.RemoveRange(0, rem);
             sld.Translation.RemoveRange(rem, totl - rem);
 

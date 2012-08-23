@@ -1,7 +1,7 @@
 ﻿/*
- *   PraiseBase Presenter 
+ *   PraiseBase Presenter
  *   The open source lyrics and image projection software for churches
- *   
+ *
  *   http://code.google.com/p/praisebasepresenter
  *
  *   This program is free software; you can redistribute it and/or
@@ -38,14 +38,14 @@ namespace Pbp.Forms
     /// <summary>
     /// Interaction logic for UserControl1.xaml
     /// </summary>
-    /// 
+    ///
     public partial class WpfProjectionControl : UserControl
     {
         #region Delegates
 
         public delegate void AnimationFinish(object sender, EventArgs e);
 
-        #endregion
+        #endregion Delegates
 
         public WpfProjectionControl()
         {
@@ -54,6 +54,7 @@ namespace Pbp.Forms
         }
 
         public Color ProjectionBackgroundColor { get; set; }
+
         public event AnimationFinish AnimationFinished;
 
         private void ProjectionControlLoaded(object sender, RoutedEventArgs e)
@@ -88,8 +89,8 @@ namespace Pbp.Forms
             {
                 projectionImage.Opacity = 0f;
                 projectionImage.Source = LoadBitmap(img);
-                var imageAnimation = (Storyboard) FindResource("imageAnimation");
-                imageAnimation.SpeedRatio = 1000f/fadeTime;
+                var imageAnimation = (Storyboard)FindResource("imageAnimation");
+                imageAnimation.SpeedRatio = 1000f / fadeTime;
                 imageAnimation.Begin(this);
             }
             else
@@ -107,12 +108,12 @@ namespace Pbp.Forms
 
                 textImage.Source = LoadBitmap(img);
 
-                var imageAnimation2 = (Storyboard) FindResource("textAnimation2");
-                imageAnimation2.SpeedRatio = 1000f/fadeTime;
+                var imageAnimation2 = (Storyboard)FindResource("textAnimation2");
+                imageAnimation2.SpeedRatio = 1000f / fadeTime;
                 imageAnimation2.Begin(this);
 
-                var imageAnimation = (Storyboard) FindResource("textAnimation");
-                imageAnimation.SpeedRatio = 1000f/fadeTime;
+                var imageAnimation = (Storyboard)FindResource("textAnimation");
+                imageAnimation.SpeedRatio = 1000f / fadeTime;
                 imageAnimation.Begin(this);
             }
             else
@@ -154,11 +155,10 @@ namespace Pbp.Forms
         /// <param name="animationTime">Animation duration in miliseconds</param>
         public void BlackOut(bool val, int animationTime)
         {
-            var blackoutAnimation = (Storyboard) FindResource(val ? "blackoutAnimationOn" : "blackoutAnimationOff");
-            blackoutAnimation.SpeedRatio = (animationTime == 0 ? 100 : 1000f/animationTime);
+            var blackoutAnimation = (Storyboard)FindResource(val ? "blackoutAnimationOn" : "blackoutAnimationOff");
+            blackoutAnimation.SpeedRatio = (animationTime == 0 ? 100 : 1000f / animationTime);
             blackoutAnimation.Begin(this);
         }
-
 
         //public void SetText(List<TextBlock> textBlocks)
         //{

@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 namespace Pbp
 {
@@ -10,9 +7,12 @@ namespace Pbp
         public class UpdateInformation
         {
             public Version CurrentVersion { get; set; }
+
             public Version OnlineVersion { get; set; }
+
             public string DownloadUrl { get; set; }
-            public bool UpdateAvailable {get; set; }
+
+            public bool UpdateAvailable { get; set; }
 
             public UpdateInformation()
             {
@@ -47,8 +47,8 @@ namespace Pbp
         public static void downloadNewVersion()
         {
             System.Net.WebClient Client = new System.Net.WebClient();
-            //Client.DownloadFile("http://www.csharpfriends.com/Members/index.aspx", " index.aspx");
 
+            //Client.DownloadFile("http://www.csharpfriends.com/Members/index.aspx", " index.aspx");
         }
 
         public static UpdateInformation getNewVersion()
@@ -70,6 +70,7 @@ namespace Pbp
                 // text node, we refer to elementName to check
                 // what was the node name
                 string elementName = "";
+
                 // we check if the xml starts with a proper
                 // "ourfancyapp" element node
                 if ((reader.NodeType == System.Xml.XmlNodeType.Element) &&
@@ -91,12 +92,14 @@ namespace Pbp
                                 switch (elementName)
                                 {
                                     case "version":
+
                                         // thats why we keep the version info
                                         // in xxx.xxx.xxx.xxx format
                                         // the Version class does the
                                         // parsing for us
                                         rtn.OnlineVersion = new Version(reader.Value);
                                         break;
+
                                     case "url":
                                         rtn.DownloadUrl = reader.Value;
                                         break;
@@ -111,7 +114,7 @@ namespace Pbp
             {
                 Console.WriteLine("Update check failed! " + e.Message);
             }
-            
+
             // get the running version
             rtn.CurrentVersion = System.Reflection.Assembly.GetExecutingAssembly().GetName().Version;
             // compare the versions
@@ -121,6 +124,5 @@ namespace Pbp
             }
             return rtn;
         }
-
     }
 }

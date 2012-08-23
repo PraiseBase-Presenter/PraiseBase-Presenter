@@ -1,7 +1,7 @@
 ﻿/*
- *   PraiseBase Presenter 
+ *   PraiseBase Presenter
  *   The open source lyrics and image projection software for churches
- *   
+ *
  *   http://code.google.com/p/praisebasepresenter
  *
  *   This program is free software; you can redistribute it and/or
@@ -26,15 +26,9 @@
  */
 
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Windows.Forms;
 using System.Reflection;
-using Pbp.Properties;
+using System.Windows.Forms;
 
 namespace Pbp.Forms
 {
@@ -53,7 +47,7 @@ namespace Pbp.Forms
         private void AboutWindow_Load(object sender, EventArgs e)
         {
             this.labelProductName.Text = AssemblyProduct;
-			this.labelVersion.Text = AssemblyVersion;
+            this.labelVersion.Text = AssemblyVersion;
             this.labelCopyright.Text = AssemblyCopyright;
             this.labelCompanyName.Text = AssemblyCompany;
 
@@ -61,7 +55,6 @@ namespace Pbp.Forms
 
             timer1.Interval = 1;
             timer1.Start();
-
         }
 
         #region Assembly Attribute Accessors
@@ -142,14 +135,15 @@ namespace Pbp.Forms
                 return ((AssemblyCompanyAttribute)attributes[0]).Company;
             }
         }
-        #endregion
+
+        #endregion Assembly Attribute Accessors
 
         private void timer1_Tick(object sender, EventArgs e)
         {
             Pbp.UpdateCheck.UpdateInformation ui = Pbp.UpdateCheck.getNewVersion();
             if (ui.UpdateAvailable)
             {
-                linkLabel1.Text = "Aktualisierung auf Version "+ui.OnlineVersion+" verfügbar! Herunterladen";
+                linkLabel1.Text = "Aktualisierung auf Version " + ui.OnlineVersion + " verfügbar! Herunterladen";
                 linkLabel1.LinkArea = new LinkArea(linkLabel1.Text.Length - 13, 13);
                 linkLabel1.Image = Properties.Resources.update16;
                 linkLabel1.ForeColor = Color.DarkGreen;

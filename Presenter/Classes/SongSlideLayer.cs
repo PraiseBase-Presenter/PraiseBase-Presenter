@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Drawing.Text;
@@ -9,9 +6,9 @@ using Pbp.Properties;
 
 namespace Pbp
 {
-    class SongSlideLayer : TextLayer
+    internal class SongSlideLayer : TextLayer
     {
-        SongSlide slide;
+        private SongSlide slide;
 
         public SongSlideLayer(SongSlide slide)
         {
@@ -49,7 +46,6 @@ namespace Pbp
                     fontBrush = new SolidBrush(slide.TextColor);
                     fontTranslationBrush = new SolidBrush(slide.TranslationColor);
                 }
-
 
                 int padding = Settings.Default.ProjectionPadding;
                 int shadowThickness = Settings.Default.ProjectionShadowSize;
@@ -94,10 +90,12 @@ namespace Pbp
                     case Song.SongTextHorizontalAlign.Left:
                         strFormat.Alignment = StringAlignment.Near;
                         break;
+
                     case Song.SongTextHorizontalAlign.Center:
                         textStartX = w / 2;
                         strFormat.Alignment = StringAlignment.Center;
                         break;
+
                     case Song.SongTextHorizontalAlign.Right:
                         textStartX = textStartX + usableWidth;
                         strFormat.Alignment = StringAlignment.Far;
@@ -109,9 +107,11 @@ namespace Pbp
                 {
                     case Song.SongTextVerticalAlign.Top:
                         break;
+
                     case Song.SongTextVerticalAlign.Center:
                         textStartY = textStartY + (usableHeight / 2) - (usedHeight / 2);
                         break;
+
                     case Song.SongTextVerticalAlign.Bottom:
                         textStartY = textStartY + usableHeight - usedHeight;
                         break;

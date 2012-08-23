@@ -1,7 +1,7 @@
 ﻿/*
- *   PraiseBase Presenter 
+ *   PraiseBase Presenter
  *   The open source lyrics and image projection software for churches
- *   
+ *
  *   http://code.google.com/p/praisebasepresenter
  *
  *   This program is free software; you can redistribute it and/or
@@ -148,7 +148,7 @@ namespace Pbp
             return res;
         }
 
-        #endregion
+        #endregion ICloneable Members
 
         /// <summary>
         /// Sets the text of this slide
@@ -157,7 +157,7 @@ namespace Pbp
         public void SetSlideText(string text)
         {
             Lines = new List<string>();
-            string[] ln = text.Trim().Split(new[] {Environment.NewLine}, StringSplitOptions.None);
+            string[] ln = text.Trim().Split(new[] { Environment.NewLine }, StringSplitOptions.None);
             foreach (string sl in ln)
             {
                 Lines.Add(sl.Trim());
@@ -171,7 +171,7 @@ namespace Pbp
         public void SetSlideTextTranslation(string text)
         {
             Translation = new List<string>();
-            string[] tr = text.Split(new[] {Environment.NewLine}, StringSplitOptions.None);
+            string[] tr = text.Split(new[] { Environment.NewLine }, StringSplitOptions.None);
             foreach (string sl in tr)
             {
                 Translation.Add(sl.Trim());
@@ -215,7 +215,7 @@ namespace Pbp
         }
 
         /// <summary>
-        /// Returns the text on one line. This is mainly used 
+        /// Returns the text on one line. This is mainly used
         /// in the song detail overview in the presenter.
         /// </summary>
         /// <returns>Text on one line</returns>

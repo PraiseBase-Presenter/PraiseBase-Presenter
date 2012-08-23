@@ -2,9 +2,6 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing;
-using System.Data;
-using System.Linq;
-using System.Text;
 using System.Windows.Forms;
 
 namespace Pbp.Components
@@ -12,11 +9,11 @@ namespace Pbp.Components
     [DefaultEvent("ColorPicked")]
     public partial class ColorPicker : UserControl
     {
-        List<Panel> colorpanels = new List<Panel>();
+        private List<Panel> colorpanels = new List<Panel>();
 
         public delegate void colorPick(object sender, ColorPickEventArgs e);
-        public event colorPick ColorPicked;
 
+        public event colorPick ColorPicked;
 
         public ColorPicker()
         {
@@ -28,10 +25,10 @@ namespace Pbp.Components
             this.Paint += new PaintEventHandler(ColorPicker_Paint);
         }
 
-        void ColorPicker_Paint(object sender, PaintEventArgs e)
+        private void ColorPicker_Paint(object sender, PaintEventArgs e)
         {
-            int i=0;
-            int sx=10,sy=10,x=0, y=0;
+            int i = 0;
+            int sx = 10, sy = 10, x = 0, y = 0;
             foreach (System.Reflection.PropertyInfo p in typeof(Color).GetProperties())
             {
                 Color c = new Color();
@@ -55,17 +52,16 @@ namespace Pbp.Components
                     i++;
 
                     x += 20;
-                    if (x > this.Width-30)
+                    if (x > this.Width - 30)
                     {
                         x = 0;
                         y += 20;
                     }
                 }
-            }   
-
+            }
         }
 
-        void pnl_Click(object sender, EventArgs e)
+        private void pnl_Click(object sender, EventArgs e)
         {
             if (ColorPicked != null)
             {
@@ -78,9 +74,10 @@ namespace Pbp.Components
     public class ColorPickEventArgs : EventArgs
     {
         public ColorPickEventArgs(Color clr)
-		{
+        {
             this.Color = clr;
-		}
-		public Color Color {get;set;}
+        }
+
+        public Color Color { get; set; }
     }
 }

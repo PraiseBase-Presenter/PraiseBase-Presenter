@@ -1,10 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Drawing;
-using System.Drawing.Text;
-using System.Drawing.Drawing2D;
 using Pbp.Properties;
 
 namespace Pbp
@@ -13,7 +8,7 @@ namespace Pbp
     {
         public void writeOut(System.Drawing.Graphics gr)
         {
-            Object [] args = {};
+            Object[] args = { };
             writeOut(gr, args, ProjectionMode.Projection);
         }
 

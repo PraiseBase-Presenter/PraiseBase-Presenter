@@ -13,7 +13,7 @@ namespace Pbp.Components
 
         public delegate void TextChange(object sender, EventArgs e);
 
-        #endregion
+        #endregion Delegates
 
         private readonly PictureBox _cmPictureBox = new PictureBox();
         private ContextMenuStrip _contextMenu;
@@ -176,7 +176,6 @@ namespace Pbp.Components
             keyStrokeTimer.Stop();
         }
 
-
         private void xPictureBox_Click(object sender, EventArgs e)
         {
             textBox.Text = String.Empty;
@@ -225,12 +224,12 @@ namespace Pbp.Components
             textBox.Location = new Point(23 + offset, 4);
 
             xPictureBox.Size = new Size(15, 15);
-            xPictureBox.Location = new Point(Width - 18, (Height - 15)/2);
+            xPictureBox.Location = new Point(Width - 18, (Height - 15) / 2);
         }
 
         private void UserControl1_Paint(object sender, PaintEventArgs e)
         {
-            e.Graphics.DrawImage(Resources.searchg, 3, (Height - 18)/2, 18, 18);
+            e.Graphics.DrawImage(Resources.searchg, 3, (Height - 18) / 2, 18, 18);
             ControlPaint.DrawBorder(e.Graphics, ClientRectangle, Color.Gray, ButtonBorderStyle.Solid);
         }
 
@@ -241,7 +240,6 @@ namespace Pbp.Components
 
         private void SearchTextBox_Load(object sender, EventArgs e)
         {
-
         }
     }
 }

@@ -1,7 +1,7 @@
 ﻿/*
- *   PraiseBase Presenter 
+ *   PraiseBase Presenter
  *   The open source lyrics and image projection software for churches
- *   
+ *
  *   http://code.google.com/p/praisebasepresenter
  *
  *   This program is free software; you can redistribute it and/or
@@ -46,7 +46,7 @@ namespace Pbp.Forms
 {
     /// <summary>
     /// The main window class provides the central
-    /// gui of this software, including the songlist, 
+    /// gui of this software, including the songlist,
     /// setlist, imagelist and the diashow interface.
     /// </summary>
     public partial class MainWindow : Form
@@ -90,10 +90,10 @@ namespace Pbp.Forms
         /// <param name="e"></param>
         private void Form1_Load(object sender, EventArgs e)
         {
-            var newThread = new Thread(UpdateCheck.DoCheck) {Name = "UpdateChecker"};
+            var newThread = new Thread(UpdateCheck.DoCheck) { Name = "UpdateChecker" };
             newThread.Start();
 
-            var bThread = new Thread(loadBibles) {Name = "BibleLoader"};
+            var bThread = new Thread(loadBibles) { Name = "BibleLoader" };
             bThread.Start();
 
             WindowState = Settings.Default.ViewerWindowState;
@@ -105,10 +105,10 @@ namespace Pbp.Forms
 
             imageTreeViewInit();
 
-            trackBarFadeTime.Value = Settings.Default.ProjectionFadeTime/500;
-            labelFadeTime.Text = (trackBarFadeTime.Value*0.5) + " s";
+            trackBarFadeTime.Value = Settings.Default.ProjectionFadeTime / 500;
+            labelFadeTime.Text = (trackBarFadeTime.Value * 0.5) + " s";
 
-            trackBarFadeTimeLayer1.Value = Settings.Default.ProjectionFadeTimeLayer1/500;
+            trackBarFadeTimeLayer1.Value = Settings.Default.ProjectionFadeTimeLayer1 / 500;
             labelFadeTimeLayer1.Text = (trackBarFadeTimeLayer1.Value * 0.5) + " s";
 
             linkLayers = Settings.Default.LinkLayers;
@@ -117,7 +117,7 @@ namespace Pbp.Forms
             comboBox1.SelectedIndex = 0;
             comboBox2.SelectedIndex = 0;
 
-            numericUpDown1.Value = (int) Settings.Default.ProjectionMasterFont.Size;
+            numericUpDown1.Value = (int)Settings.Default.ProjectionMasterFont.Size;
 
             if (Settings.Default.SongSearchMode == SongSearchMode.Title)
             {
@@ -126,10 +126,9 @@ namespace Pbp.Forms
             }
             else
             {
-                    titelToolStripMenuItem.Checked = false;
-                    titelUndTextToolStripMenuItem.Checked = true;
+                titelToolStripMenuItem.Checked = false;
+                titelUndTextToolStripMenuItem.Checked = true;
             }
-            
         }
 
         private void beendenToolStripMenuItem_Click(object sender, EventArgs e)
@@ -181,7 +180,7 @@ namespace Pbp.Forms
                 try
                 {
                     listViewSongs.Items[0].Selected = true;
-                    SongManager.Instance.CurrentSong = SongManager.Instance.SongList[(Guid) listViewSongs.SelectedItems[0].Tag];
+                    SongManager.Instance.CurrentSong = SongManager.Instance.SongList[(Guid)listViewSongs.SelectedItems[0].Tag];
                     showCurrentSongDetails();
                 }
                 catch (Exception e)
@@ -194,7 +193,6 @@ namespace Pbp.Forms
             listViewSongs.EndUpdate();
         }
 
-
         private void radioSongSearchAll_CheckedChanged(object sender, EventArgs e)
         {
             searchSongs(songSearchTextBox.Text);
@@ -202,8 +200,8 @@ namespace Pbp.Forms
 
         private void toggleProjection(object sender, EventArgs e)
         {
-            if (((ToolStripItem) sender).Name == "toolStripButtonProjectionOff"
-                || ((ToolStripItem) sender).Name == "präsentationausToolStripMenuItem")
+            if (((ToolStripItem)sender).Name == "toolStripButtonProjectionOff"
+                || ((ToolStripItem)sender).Name == "präsentationausToolStripMenuItem")
             {
                 toolStripButtonProjectionOff.CheckState = CheckState.Checked;
                 toolStripButtonProjectionOn.CheckState = CheckState.Unchecked;
@@ -215,8 +213,8 @@ namespace Pbp.Forms
                     blackout = false;
                 }
             }
-            else if (((ToolStripItem) sender).Name == "toolStripButtonBlackout"
-                     || ((ToolStripItem) sender).Name == "blackoutToolStripMenuItem")
+            else if (((ToolStripItem)sender).Name == "toolStripButtonBlackout"
+                     || ((ToolStripItem)sender).Name == "blackoutToolStripMenuItem")
             {
                 if (!blackout)
                 {
@@ -235,8 +233,8 @@ namespace Pbp.Forms
                     blackout = true;
                 }
             }
-            else if (((ToolStripItem) sender).Name == "toolStripButtonProjectionOn"
-                     || ((ToolStripItem) sender).Name == "präsentationeinToolStripMenuItem")
+            else if (((ToolStripItem)sender).Name == "toolStripButtonProjectionOn"
+                     || ((ToolStripItem)sender).Name == "präsentationeinToolStripMenuItem")
             {
                 toolStripButtonProjectionOff.CheckState = CheckState.Unchecked;
                 toolStripButtonBlackout.CheckState = CheckState.Unchecked;
@@ -300,16 +298,16 @@ namespace Pbp.Forms
             {
                 if (e.Button == MouseButtons.Right)
                 {
-                    listViewSetList.Items.Add((ListViewItem) listViewSongs.SelectedItems[0].Clone());
+                    listViewSetList.Items.Add((ListViewItem)listViewSongs.SelectedItems[0].Clone());
                     listViewSetList.Columns[0].Width = -2;
                     buttonSetListClear.Enabled = true;
                     buttonSaveSetList.Enabled = true;
                 }
                 else
                 {
-                    if ((Nullable<SongManager.SongItem>)SongManager.Instance.CurrentSong == null || SongManager.Instance.CurrentSong.Song == null || SongManager.Instance.CurrentSong.Song.GUID != (Guid) listViewSongs.SelectedItems[0].Tag)
+                    if ((Nullable<SongManager.SongItem>)SongManager.Instance.CurrentSong == null || SongManager.Instance.CurrentSong.Song == null || SongManager.Instance.CurrentSong.Song.GUID != (Guid)listViewSongs.SelectedItems[0].Tag)
                     {
-                        SongManager.Instance.CurrentSong = SongManager.Instance.SongList[(Guid) listViewSongs.SelectedItems[0].Tag];
+                        SongManager.Instance.CurrentSong = SongManager.Instance.SongList[(Guid)listViewSongs.SelectedItems[0].Tag];
                         showCurrentSongDetails();
 
                         buttonSetListAdd.Enabled = true;
@@ -328,16 +326,15 @@ namespace Pbp.Forms
             if (listViewSongs.SelectedItems.Count > 0)
             {
                 if ((Nullable<SongManager.SongItem>)SongManager.Instance.CurrentSong == null ||
-                    SongManager.Instance.CurrentSong.Song.GUID != (Guid) listViewSongs.SelectedItems[0].Tag)
+                    SongManager.Instance.CurrentSong.Song.GUID != (Guid)listViewSongs.SelectedItems[0].Tag)
                 {
-                    SongManager.Instance.CurrentSong = SongManager.Instance.SongList[(Guid) listViewSongs.SelectedItems[0].Tag];
+                    SongManager.Instance.CurrentSong = SongManager.Instance.SongList[(Guid)listViewSongs.SelectedItems[0].Tag];
                     showCurrentSongDetails();
 
                     buttonSetListAdd.Enabled = true;
                 }
             }
         }
-
 
         private void listViewSetList_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -384,14 +381,13 @@ namespace Pbp.Forms
             Application.DoEvents();
 
             if (listViewSongHistory.Items.Count == 0 ||
-                (Guid) listViewSongHistory.Items[0].Tag != SongManager.Instance.CurrentSong.Song.GUID)
+                (Guid)listViewSongHistory.Items[0].Tag != SongManager.Instance.CurrentSong.Song.GUID)
             {
                 var lvi = new ListViewItem(SongManager.Instance.CurrentSong.Song.Title);
                 lvi.Tag = SongManager.Instance.CurrentSong.Song.GUID;
                 listViewSongHistory.Items.Insert(0, lvi);
                 listViewSongHistory.Columns[0].Width = -2;
             }
-
 
             if (ProjectionWindow.Instance != null)
             {
@@ -405,10 +401,10 @@ namespace Pbp.Forms
                 {
                     if (listViewImageQueue.Items.Count > 0)
                     {
-                        Image img = ImageManager.Instance.getImageFromRelPath((string) listViewImageQueue.Items[0].Tag);
+                        Image img = ImageManager.Instance.getImageFromRelPath((string)listViewImageQueue.Items[0].Tag);
                         ProjectionWindow.Instance.DisplayLayer(1, img, Settings.Default.ProjectionFadeTimeLayer1);
                         ProjectionWindow.Instance.DisplayLayer(2, ssl);
-                        imageHistoryAdd((string) listViewImageQueue.Items[0].Tag);
+                        imageHistoryAdd((string)listViewImageQueue.Items[0].Tag);
                         listViewImageQueue.Items[0].Remove();
                     }
                     else
@@ -450,7 +446,8 @@ namespace Pbp.Forms
                 lvi.ImageIndex = listViewImageQueue.LargeImageList.Images.Count - 1;
                 listViewImageQueue.Items.Add(lvi);
             }
-                // Favorite
+
+            // Favorite
             else if ((ModifierKeys & Keys.Alt) == Keys.Alt)
             {
                 imageFavoriteAdd(e.relativePath);
@@ -471,7 +468,6 @@ namespace Pbp.Forms
                     imageHistoryAdd(e.relativePath);
             }
         }
-
 
         private void tabControl1_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -616,7 +612,7 @@ namespace Pbp.Forms
                 }
                 else
                 {
-                    string relativeImageDir = ((string) treeViewImageDirectories.SelectedNode.Tag) +
+                    string relativeImageDir = ((string)treeViewImageDirectories.SelectedNode.Tag) +
                                               Path.DirectorySeparatorChar;
                     string imDir = Settings.Default.DataDirectory + Path.DirectorySeparatorChar +
                                    Settings.Default.ThumbDir + Path.DirectorySeparatorChar + relativeImageDir;
@@ -641,7 +637,7 @@ namespace Pbp.Forms
                         listViewDirectoryImages.LargeImageList = imList;
 
                         labelImgDirName.Text = "Kategorie '" +
-                                               Path.GetFileName(((string) treeViewImageDirectories.SelectedNode.Tag)) +
+                                               Path.GetFileName(((string)treeViewImageDirectories.SelectedNode.Tag)) +
                                                "' (" + i + " Bilder):";
                     }
                 }
@@ -662,23 +658,25 @@ namespace Pbp.Forms
                 if ((ModifierKeys & Keys.Control) == Keys.Control)
                 {
                     listViewImageQueue.LargeImageList.Images.Add(
-                        ImageManager.Instance.getThumbFromRelPath((string) listViewDirectoryImages.Items[idx].Tag));
+                        ImageManager.Instance.getThumbFromRelPath((string)listViewDirectoryImages.Items[idx].Tag));
                     var lvi = new ListViewItem("");
                     lvi.Tag = listViewDirectoryImages.Items[idx].Tag;
                     lvi.ImageIndex = listViewImageQueue.LargeImageList.Images.Count - 1;
                     listViewImageQueue.Items.Add(lvi);
+
                     //listViewImageQueue.EnsureVisible(listViewImageHistory.Items.Count - 1);
                 }
-                    // Favorite
+
+                // Favorite
                 else if ((ModifierKeys & Keys.Alt) == Keys.Alt)
                 {
-                    imageFavoriteAdd((string) listViewDirectoryImages.Items[idx].Tag);
+                    imageFavoriteAdd((string)listViewDirectoryImages.Items[idx].Tag);
                 }
                 else
                 {
                     // Linked layers
                     if (
-                        ! (!linkLayers ^
+                        !(!linkLayers ^
                            ((ModifierKeys & Keys.Shift) == Keys.Shift && (Nullable<SongManager.SongItem>)SongManager.Instance.CurrentSong != null &&
                             SongManager.Instance.CurrentSong.Song.CurrentSlide >= 0)))
                     {
@@ -686,11 +684,11 @@ namespace Pbp.Forms
                     }
 
                     Image img =
-                        ImageManager.Instance.getImageFromRelPath((string) listViewDirectoryImages.Items[idx].Tag);
+                        ImageManager.Instance.getImageFromRelPath((string)listViewDirectoryImages.Items[idx].Tag);
                     ProjectionWindow.Instance.DisplayLayer(1, img, Settings.Default.ProjectionFadeTimeLayer1);
 
                     // Add image to history
-                    imageHistoryAdd((string) listViewDirectoryImages.Items[idx].Tag);
+                    imageHistoryAdd((string)listViewDirectoryImages.Items[idx].Tag);
                 }
             }
         }
@@ -698,11 +696,11 @@ namespace Pbp.Forms
         private void imageHistoryAdd(string relImagePath)
         {
             if (listViewImageHistory.Items.Count == 0 ||
-                (string) listViewImageHistory.Items[listViewImageHistory.Items.Count - 1].Tag != relImagePath)
+                (string)listViewImageHistory.Items[listViewImageHistory.Items.Count - 1].Tag != relImagePath)
             {
                 for (int i = 0; i < listViewImageHistory.Items.Count; i++)
                 {
-                    if ((string) listViewImageHistory.Items[i].Tag == relImagePath)
+                    if ((string)listViewImageHistory.Items[i].Tag == relImagePath)
                     {
                         listViewImageHistory.Items.RemoveAt(i);
                     }
@@ -760,7 +758,7 @@ namespace Pbp.Forms
         {
             var dlg = new FolderBrowserDialog();
             if (listViewDias.Tag != null)
-                dlg.SelectedPath = (string) listViewDias.Tag;
+                dlg.SelectedPath = (string)listViewDias.Tag;
             else
                 dlg.SelectedPath = Environment.GetFolderPath(Environment.SpecialFolder.MyPictures);
 
@@ -786,7 +784,7 @@ namespace Pbp.Forms
                 imList.ImageSize = Settings.Default.ThumbSize;
                 imList.ColorDepth = ColorDepth.Depth32Bit;
 
-                string[] extensions = {"*.jpg", "*.png", "*.bmp", "*.gif"};
+                string[] extensions = { "*.jpg", "*.png", "*.bmp", "*.gif" };
                 int i = 0;
                 foreach (string ext in extensions)
                 {
@@ -864,7 +862,7 @@ namespace Pbp.Forms
                 textBoxDiaDuration.Text = duration.ToString();
 
                 diaTimer = new Timer();
-                diaTimer.Interval = duration*1000;
+                diaTimer.Interval = duration * 1000;
                 diaTimer.Tick += diaTimer_Tick;
 
                 var diaStack = new Queue<string>();
@@ -872,7 +870,7 @@ namespace Pbp.Forms
                 {
                     if (lvi.Checked)
                     {
-                        diaStack.Enqueue((string) lvi.Tag);
+                        diaStack.Enqueue((string)lvi.Tag);
                     }
                 }
                 if (diaStack.Count == 0)
@@ -888,9 +886,9 @@ namespace Pbp.Forms
 
         private void diaTimer_Tick(object sender, EventArgs e)
         {
-            if (((Queue<string>) ((Timer) sender).Tag).Count == 0)
+            if (((Queue<string>)((Timer)sender).Tag).Count == 0)
             {
-                ((Timer) sender).Stop();
+                ((Timer)sender).Stop();
                 ProjectionWindow.Instance.HideLayer(1);
                 buttonDiaShow.Text = Resources.Diaschau_starten;
                 return;
@@ -988,12 +986,11 @@ namespace Pbp.Forms
                 Application.DoEvents();
                 int idx = listViewImageHistory.SelectedIndices[0];
 
-
                 // Stack
                 if ((ModifierKeys & Keys.Control) == Keys.Control)
                 {
                     listViewImageQueue.LargeImageList.Images.Add(
-                        ImageManager.Instance.getThumbFromRelPath((string) listViewImageHistory.Items[idx].Tag));
+                        ImageManager.Instance.getThumbFromRelPath((string)listViewImageHistory.Items[idx].Tag));
                     var lvi = new ListViewItem("");
                     lvi.Tag = listViewImageHistory.Items[idx].Tag;
                     lvi.ImageIndex = listViewImageQueue.LargeImageList.Images.Count - 1;
@@ -1001,7 +998,7 @@ namespace Pbp.Forms
                 }
                 else if ((ModifierKeys & Keys.Alt) == Keys.Alt)
                 {
-                    imageFavoriteAdd((string) listViewImageHistory.Items[idx].Tag);
+                    imageFavoriteAdd((string)listViewImageHistory.Items[idx].Tag);
                 }
                 else
                 {
@@ -1013,7 +1010,7 @@ namespace Pbp.Forms
                         ProjectionWindow.Instance.HideLayer(2);
                     }
 
-                    Image img = ImageManager.Instance.getImageFromRelPath((string) listViewImageHistory.Items[idx].Tag);
+                    Image img = ImageManager.Instance.getImageFromRelPath((string)listViewImageHistory.Items[idx].Tag);
                     ProjectionWindow.Instance.DisplayLayer(1, img, Settings.Default.ProjectionFadeTimeLayer1);
                 }
             }
@@ -1130,7 +1127,7 @@ namespace Pbp.Forms
         {
             if (listViewSongs.SelectedItems.Count > 0)
             {
-                listViewSetList.Items.Add((ListViewItem) listViewSongs.SelectedItems[0].Clone());
+                listViewSetList.Items.Add((ListViewItem)listViewSongs.SelectedItems[0].Clone());
                 listViewSetList.Columns[0].Width = -2;
                 buttonSetListClear.Enabled = true;
                 buttonSaveSetList.Enabled = true;
@@ -1160,7 +1157,7 @@ namespace Pbp.Forms
                 for (int i = 0; i < listViewSetList.Items.Count; i++)
                 {
                     XmlNode nd = xmlDoc.CreateElement("item");
-                    nd.InnerText = SongManager.Instance.SongList[(Guid) listViewSetList.Items[i].Tag].Song.Title;
+                    nd.InnerText = SongManager.Instance.SongList[(Guid)listViewSetList.Items[i].Tag].Song.Title;
                     xmlRoot["items"].AppendChild(nd);
                 }
                 XmlWriter wrt = new XmlTextWriter(dlg.FileName, Encoding.UTF8);
@@ -1239,7 +1236,6 @@ namespace Pbp.Forms
         {
             //progressBarTransition.Value = Math.Min(value, progressBarTransition.Maximum);
         }
-
 
         public void setStatus(string text)
         {
@@ -1367,14 +1363,14 @@ namespace Pbp.Forms
                 Application.DoEvents();
 
                 if (
-                    ! ((ModifierKeys & Keys.Shift) == Keys.Shift && (Nullable<SongManager.SongItem>)SongManager.Instance.CurrentSong != null &&
+                    !((ModifierKeys & Keys.Shift) == Keys.Shift && (Nullable<SongManager.SongItem>)SongManager.Instance.CurrentSong != null &&
                        SongManager.Instance.CurrentSong.Song.CurrentSlide >= 0))
                 {
                     ProjectionWindow.Instance.HideLayer(2);
                 }
 
                 int idx = listViewImageQueue.SelectedIndices[0];
-                Image img = ImageManager.Instance.getImageFromRelPath((string) listViewImageQueue.Items[idx].Tag);
+                Image img = ImageManager.Instance.getImageFromRelPath((string)listViewImageQueue.Items[idx].Tag);
                 ProjectionWindow.Instance.DisplayLayer(1, img, Settings.Default.ProjectionFadeTimeLayer1);
             }
         }
@@ -1424,11 +1420,13 @@ namespace Pbp.Forms
             if (linkLayers)
             {
                 buttonToggleLayerMode.Image = Resources.link;
+
                 //label3.Text = "Text und Bild sind verknüpft";
             }
             else
             {
                 buttonToggleLayerMode.Image = Resources.unlink;
+
                 //label3.Text = "Text und Bild sind unabhängig";
             }
         }
@@ -1444,36 +1442,36 @@ namespace Pbp.Forms
                 if ((ModifierKeys & Keys.Control) == Keys.Control)
                 {
                     listViewImageQueue.LargeImageList.Images.Add(
-                        ImageManager.Instance.getThumbFromRelPath((string) listViewFavorites.Items[idx].Tag));
+                        ImageManager.Instance.getThumbFromRelPath((string)listViewFavorites.Items[idx].Tag));
                     var lvi = new ListViewItem("");
                     lvi.Tag = listViewFavorites.Items[idx].Tag;
                     lvi.ImageIndex = listViewImageQueue.LargeImageList.Images.Count - 1;
                     listViewImageQueue.Items.Add(lvi);
                 }
-                    // ALT remove from favorites
+
+                // ALT remove from favorites
                 else if ((ModifierKeys & Keys.Alt) == Keys.Alt)
                 {
-                    imageFavoriterRemove((string) listViewFavorites.Items[idx].Tag);
+                    imageFavoriterRemove((string)listViewFavorites.Items[idx].Tag);
                     listViewFavorites.Items.RemoveAt(idx);
                 }
                 else
                 {
                     if (
-                        ! (!linkLayers ^
+                        !(!linkLayers ^
                            ((ModifierKeys & Keys.Shift) == Keys.Shift && (Nullable<SongManager.SongItem>)SongManager.Instance.CurrentSong != null &&
                             SongManager.Instance.CurrentSong.Song.CurrentSlide >= 0)))
                     {
                         ProjectionWindow.Instance.HideLayer(2);
                     }
-                    Image img = ImageManager.Instance.getImageFromRelPath((string) listViewFavorites.Items[idx].Tag);
+                    Image img = ImageManager.Instance.getImageFromRelPath((string)listViewFavorites.Items[idx].Tag);
                     ProjectionWindow.Instance.DisplayLayer(2, img);
 
                     // Add image to history
-                    imageHistoryAdd((string) listViewFavorites.Items[idx].Tag);
+                    imageHistoryAdd((string)listViewFavorites.Items[idx].Tag);
                 }
             }
         }
-
 
         private void buttonShowLiveText_Click(object sender, EventArgs e)
         {
@@ -1494,7 +1492,7 @@ namespace Pbp.Forms
                 lt.VerticalAlign = StringAlignment.Center;
             else
                 lt.VerticalAlign = StringAlignment.Near;
-            lt.FontSize = (float) numericUpDown1.Value;
+            lt.FontSize = (float)numericUpDown1.Value;
 
             ProjectionWindow.Instance.DisplayLayer(2, lt);
         }
@@ -1519,8 +1517,8 @@ namespace Pbp.Forms
 
         private void timerSearchBoxHL_Tick(object sender, EventArgs e)
         {
-            ((Control) ((Timer) sender).Tag).BackColor = SystemColors.Window;
-            ((Timer) sender).Stop();
+            ((Control)((Timer)sender).Tag).BackColor = SystemColors.Window;
+            ((Timer)sender).Stop();
         }
 
         private void bildschirmeSuchenToolStripMenuItem_Click(object sender, EventArgs e)
@@ -1530,24 +1528,24 @@ namespace Pbp.Forms
 
         private void listViewFavorites_Leave(object sender, EventArgs e)
         {
-            if (((ListView) sender).SelectedIndices.Count > 0)
+            if (((ListView)sender).SelectedIndices.Count > 0)
             {
-                ((ListView) sender).Items[((ListView) sender).SelectedIndices[0]].Selected = false;
+                ((ListView)sender).Items[((ListView)sender).SelectedIndices[0]].Selected = false;
             }
         }
 
         private void listViewImageHistory_Leave_1(object sender, EventArgs e)
         {
-            if (((ListView) sender).SelectedIndices.Count > 0)
+            if (((ListView)sender).SelectedIndices.Count > 0)
             {
-                ((ListView) sender).Items[((ListView) sender).SelectedIndices[0]].Selected = false;
+                ((ListView)sender).Items[((ListView)sender).SelectedIndices[0]].Selected = false;
             }
         }
 
         private void trackBarFadeTime_Scroll(object sender, EventArgs e)
         {
-            labelFadeTime.Text = (trackBarFadeTime.Value*0.5) + " s";
-            Settings.Default.ProjectionFadeTime = trackBarFadeTime.Value*500;
+            labelFadeTime.Text = (trackBarFadeTime.Value * 0.5) + " s";
+            Settings.Default.ProjectionFadeTime = trackBarFadeTime.Value * 500;
         }
 
         private void trackBarFadeTimeLayer1_Scroll(object sender, EventArgs e)
@@ -1561,37 +1559,36 @@ namespace Pbp.Forms
             if (listViewSongHistory.SelectedIndices.Count > 0)
             {
                 SongManager.Instance.CurrentSong =
-                    SongManager.Instance.SongList[(Guid) listViewSongHistory.SelectedItems[0].Tag];
+                    SongManager.Instance.SongList[(Guid)listViewSongHistory.SelectedItems[0].Tag];
                 showCurrentSongDetails();
             }
         }
 
+        /*
+        PowerPoint.Application oPPT = new PowerPoint.ApplicationClass();
+        PowerPoint.Presentations objPresetSet;
+        string strPres = "C:/Users/Nicolas/Documents/Visual Studio 2010/Projects/praisebase/Presenter/trunk/bin/Release/foo.pptx";
 
-            /*
-            PowerPoint.Application oPPT = new PowerPoint.ApplicationClass();
-            PowerPoint.Presentations objPresetSet;
-            string strPres = "C:/Users/Nicolas/Documents/Visual Studio 2010/Projects/praisebase/Presenter/trunk/bin/Release/foo.pptx";
-            //oPPT.Visible = Microsoft.Office.Core.MsoTriState.msoTrue;
-            objPresetSet = oPPT.Presentations;
-            PowerPoint.Presentation objPreset = objPresetSet.Open2007(strPres, Microsoft.Office.Core.MsoTriState.msoFalse, Microsoft.Office.Core.MsoTriState.msoTrue, Microsoft.Office.Core.MsoTriState.msoFalse);
-            PowerPoint.SlideShowSettings objSSS = objPreset.SlideShowSettings;
-            objSSS.StartingSlide = 1;
-            objSSS.EndingSlide = objPreset.Slides.Count;
-            objSSS.Run();
-            while (oPPT.SlideShowWindows.Count >= 1)
-            {
-                System.Threading.Thread.Sleep(100);
-            }
-            try
-            {
-                objPreset.Close();
-            }
-            catch(
-            { 
-
-            }
-            oPPT.Quit();
-             */
+        //oPPT.Visible = Microsoft.Office.Core.MsoTriState.msoTrue;
+        objPresetSet = oPPT.Presentations;
+        PowerPoint.Presentation objPreset = objPresetSet.Open2007(strPres, Microsoft.Office.Core.MsoTriState.msoFalse, Microsoft.Office.Core.MsoTriState.msoTrue, Microsoft.Office.Core.MsoTriState.msoFalse);
+        PowerPoint.SlideShowSettings objSSS = objPreset.SlideShowSettings;
+        objSSS.StartingSlide = 1;
+        objSSS.EndingSlide = objPreset.Slides.Count;
+        objSSS.Run();
+        while (oPPT.SlideShowWindows.Count >= 1)
+        {
+            System.Threading.Thread.Sleep(100);
+        }
+        try
+        {
+            objPreset.Close();
+        }
+        catch(
+        {
+        }
+        oPPT.Quit();
+         */
 
         #region Bible
 
@@ -1631,7 +1628,7 @@ namespace Pbp.Forms
                 listBoxBibleBook.Items.Clear();
                 listBoxBibleBook.DisplayMember = "Name";
 
-                var bbl = ((XMLBible) comboBoxBible.SelectedItem);
+                var bbl = ((XMLBible)comboBoxBible.SelectedItem);
 
                 foreach (XMLBible.Book bk in bbl.getBooks())
                 {
@@ -1651,7 +1648,7 @@ namespace Pbp.Forms
 
         private void listBoxBibleBook_SelectedIndexChanged(object sender, EventArgs e)
         {
-            var bk = ((XMLBible.Book) listBoxBibleBook.SelectedItem);
+            var bk = ((XMLBible.Book)listBoxBibleBook.SelectedItem);
 
             listBoxBibleVerse.Items.Clear();
             listBoxBibleVerseTo.Items.Clear();
@@ -1674,7 +1671,7 @@ namespace Pbp.Forms
 
         private void listBoxBibleChapter_SelectedIndexChanged(object sender, EventArgs e)
         {
-            var cp = ((XMLBible.Chapter) listBoxBibleChapter.SelectedItem);
+            var cp = ((XMLBible.Chapter)listBoxBibleChapter.SelectedItem);
 
             listBoxBibleVerse.Items.Clear();
             listBoxBibleVerseTo.Items.Clear();
@@ -1697,7 +1694,7 @@ namespace Pbp.Forms
 
         private void listBoxBibleVerse_SelectedIndexChanged(object sender, EventArgs e)
         {
-            var v = ((XMLBible.Verse) listBoxBibleVerse.SelectedItem);
+            var v = ((XMLBible.Verse)listBoxBibleVerse.SelectedItem);
 
             listBoxBibleVerseTo.Items.Clear();
             foreach (XMLBible.Verse tv in v.Chapter.getVerses())
@@ -1722,8 +1719,8 @@ namespace Pbp.Forms
         {
             if (listBoxBibleVerse.SelectedItem != null && listBoxBibleVerseTo.SelectedItem != null)
             {
-                var vs = new XMLBible.VerseSelection(((XMLBible.Verse) listBoxBibleVerse.SelectedItem),
-                                                     ((XMLBible.Verse) listBoxBibleVerseTo.SelectedItem));
+                var vs = new XMLBible.VerseSelection(((XMLBible.Verse)listBoxBibleVerse.SelectedItem),
+                                                     ((XMLBible.Verse)listBoxBibleVerseTo.SelectedItem));
 
                 labelBibleTextName.Text = vs.ToString();
                 textBoxBibleText.Text = vs.Text;
@@ -1737,9 +1734,9 @@ namespace Pbp.Forms
         private void buttonBibleTextShow_Click(object sender, EventArgs e)
         {
             var bl =
-                new BibleLayer(new XMLBible.VerseSelection(((XMLBible.Verse) listBoxBibleVerse.SelectedItem),
-                                                           ((XMLBible.Verse) listBoxBibleVerseTo.SelectedItem)));
-            bl.FontSize = (float) numericUpDown2.Value;
+                new BibleLayer(new XMLBible.VerseSelection(((XMLBible.Verse)listBoxBibleVerse.SelectedItem),
+                                                           ((XMLBible.Verse)listBoxBibleVerseTo.SelectedItem)));
+            bl.FontSize = (float)numericUpDown2.Value;
             ProjectionWindow.Instance.DisplayLayer(2, bl);
         }
 
@@ -1750,8 +1747,8 @@ namespace Pbp.Forms
 
         private void buttonAddToBibleVerseList_Click(object sender, EventArgs e)
         {
-            var vs = new XMLBible.VerseSelection(((XMLBible.Verse) listBoxBibleVerse.SelectedItem),
-                                                 ((XMLBible.Verse) listBoxBibleVerseTo.SelectedItem));
+            var vs = new XMLBible.VerseSelection(((XMLBible.Verse)listBoxBibleVerse.SelectedItem),
+                                                 ((XMLBible.Verse)listBoxBibleVerseTo.SelectedItem));
             var lvi = new ListViewItem(vs.ToString());
             lvi.Tag = vs;
             listViewBibleVerseList.Items.Add(lvi);
@@ -1775,7 +1772,7 @@ namespace Pbp.Forms
         {
             if (listViewBibleVerseList.SelectedItems.Count > 0)
             {
-                var vs = (XMLBible.VerseSelection) listViewBibleVerseList.SelectedItems[0].Tag;
+                var vs = (XMLBible.VerseSelection)listViewBibleVerseList.SelectedItems[0].Tag;
                 listBoxBibleBook.SelectedIndex = vs.Chapter.Book.Number - 1;
                 listBoxBibleChapter.SelectedIndex = vs.Chapter.Number - 1;
                 listBoxBibleVerse.SelectedIndex = vs.StartVerse.Number - 1;
@@ -1805,7 +1802,7 @@ namespace Pbp.Forms
                 {
                     var bkCandidates = new List<XMLBible.Book>();
 
-                    var bbl = ((XMLBible) comboBoxBible.SelectedItem);
+                    var bbl = ((XMLBible)comboBoxBible.SelectedItem);
                     foreach (XMLBible.Book bk in bbl.getBooks())
                     {
                         if (needle.Length <= bk.Name.Length && needle == bk.Name.ToLower().Substring(0, needle.Length))
@@ -1841,7 +1838,7 @@ namespace Pbp.Forms
             }
         }
 
-        #endregion
+        #endregion Bible
 
         private void buttonToggleLayer2_Click(object sender, EventArgs e)
         {
@@ -1868,8 +1865,5 @@ namespace Pbp.Forms
             titelUndTextToolStripMenuItem.Checked = true;
             searchSongs(songSearchTextBox.Text);
         }
-
-
-
     }
 }

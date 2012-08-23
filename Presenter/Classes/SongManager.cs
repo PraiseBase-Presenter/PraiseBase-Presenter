@@ -1,7 +1,7 @@
 ﻿/*
- *   PraiseBase Presenter 
+ *   PraiseBase Presenter
  *   The open source lyrics and image projection software for churches
- *   
+ *
  *   http://code.google.com/p/praisebasepresenter
  *
  *   This program is free software; you can redistribute it and/or
@@ -28,7 +28,6 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using Pbp.Properties;
 
 namespace Pbp
@@ -45,7 +44,9 @@ namespace Pbp
         public struct SongItem
         {
             public Song Song { get; set; }
+
             public string Filetype { get; set; }
+
             public string Filename { get; set; }
         }
 
@@ -58,7 +59,7 @@ namespace Pbp
         /// List of all availabe songs
         /// </summary>
         public Dictionary<Guid, SongItem> SongList { get; protected set; }
-        
+
         /// <summary>
         /// Gets or sets the current song object
         /// </summary>
@@ -85,12 +86,17 @@ namespace Pbp
         #region Events
 
         public delegate void SongLoad(SongLoadEventArgs e);
+
         public event SongLoad SongLoaded;
+
         public class SongLoadEventArgs : EventArgs
         {
             public int Number { get; set; }
+
             public int Total { get; set; }
+
             public string Title { get; set; }
+
             public SongLoadEventArgs(int number, int total, string title)
             {
                 this.Number = number;
@@ -99,7 +105,7 @@ namespace Pbp
             }
         }
 
-        #endregion
+        #endregion Events
 
         /// <summary>
         /// Gets the singleton of this class (field alternative)
@@ -163,7 +169,7 @@ namespace Pbp
                 }
                 catch (Exception e)
                 {
-                    Console.WriteLine("Unable to load song file "+path + " ("+e.Message+")");
+                    Console.WriteLine("Unable to load song file " + path + " (" + e.Message + ")");
                     Console.WriteLine(e.StackTrace);
                 }
             }
@@ -207,6 +213,7 @@ namespace Pbp
                 SongFileReader sfr = SongFileReader.createFactoryByFile(path);
                 si.Song = sfr.load(path);
                 si.Filename = path;
+
                 // TODO
                 si.Filetype = Path.GetExtension(path);
                 if (g == si.Song.GUID)
@@ -217,6 +224,7 @@ namespace Pbp
                 {
                     SongList.Remove(g);
                     SongList[si.Song.GUID] = si;
+
                     // TODO Inform others that guid has changed
                 }
             }

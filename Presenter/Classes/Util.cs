@@ -1,7 +1,7 @@
 ﻿/*
- *   PraiseBase Presenter 
+ *   PraiseBase Presenter
  *   The open source lyrics and image projection software for churches
- *   
+ *
  *   http://code.google.com/p/praisebasepresenter
  *
  *   This program is free software; you can redistribute it and/or
@@ -26,15 +26,13 @@
  */
 
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Drawing;
+using System.Text;
 
 namespace Pbp
 {
-	public class Util
-	{
+    public class Util
+    {
         /// <summary>
         /// Gibt einen MD5 Hash als String zurück
         /// </summary>
@@ -105,8 +103,8 @@ namespace Pbp
                 //ignore html
                 if (currentWord.Length > 0)
                 {
-                    if (currentWord.Substring(0,1) == "<")
-                       InTag = true;
+                    if (currentWord.Substring(0, 1) == "<")
+                        InTag = true;
 
                     if (InTag)
                     {
@@ -144,5 +142,5 @@ namespace Pbp
             Lines.CopyTo(textLinesStr, 0);
             return textLinesStr;
         }
-	}
+    }
 }

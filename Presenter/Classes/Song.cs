@@ -1,7 +1,7 @@
 ﻿/*
- *   PraiseBase Presenter 
+ *   PraiseBase Presenter
  *   The open source lyrics and image projection software for churches
- *   
+ *
  *   http://code.google.com/p/praisebasepresenter
  *
  *   This program is free software; you can redistribute it and/or
@@ -28,17 +28,14 @@
 using System;
 using System.Collections.Generic;
 using System.Drawing;
-using System.Text;
 using System.Windows.Forms;
-using System.Xml;
-using System.IO;
 using Pbp.Properties;
 
 namespace Pbp
 {
     /// <summary>
     /// Keeps and manages all song related data loaded form an xml file
-    /// 
+    ///
     /// Author: Nicolas Perrenoud, nicu_at_lavine.ch
     /// </summary>
     public class Song
@@ -86,7 +83,7 @@ namespace Pbp
         /// <summary>
         /// Gets the whole songtext improved for full-text search
         /// </summary>
-        public string SearchText { get; protected set;}
+        public string SearchText { get; protected set; }
 
         /// <summary>
         /// Gets or sets the text font
@@ -124,7 +121,7 @@ namespace Pbp
         public SongPartList Parts { get; set; }
 
         /// <summary>
-        /// Gets or sets a sequence of part numbers indicating 
+        /// Gets or sets a sequence of part numbers indicating
         /// the real order in which the song is sung
         /// </summary>
         public List<int> PartSequence { get; set; }
@@ -159,7 +156,7 @@ namespace Pbp
         /// </summary>
         public List<QualityAssuranceIndicators> QualityIssues { get; set; }
 
-        #endregion
+        #endregion Fields
 
         #region Enums
 
@@ -174,17 +171,19 @@ namespace Pbp
             /// Text is aligned horizontally to the left
             /// </summary>
             Left,
+
             /// <summary>
             /// Text is horizontally centered
             /// </summary>
             Center,
+
             /// <summary>
             /// Text is aligned horizontally to the right
             /// </summary>
             Right
         }
 
-        #endregion
+        #endregion SongTextHorizontalAlign enum
 
         #region SongTextVerticalAlign enum
 
@@ -197,17 +196,19 @@ namespace Pbp
             /// Text is aligned vertically to the top of the page
             /// </summary>
             Top,
+
             /// <summary>
             /// Text is aligned to the center
             /// </summary>
             Center,
+
             /// <summary>
             /// Text is aligned vertically to the bottom of the page
             /// </summary>
             Bottom
         }
 
-        #endregion
+        #endregion SongTextVerticalAlign enum
 
         #region TextAlign enum
 
@@ -224,9 +225,9 @@ namespace Pbp
             BottomRight
         }
 
-        #endregion
+        #endregion TextAlign enum
 
-        #endregion
+        #endregion Enums
 
         /// <summary>
         /// The song constructor

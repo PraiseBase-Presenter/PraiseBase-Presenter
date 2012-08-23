@@ -1,20 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 namespace Pbp
 {
     public abstract class SongFileWriter
     {
         public const string PreferredType = "ppl";
-        
+
         public static readonly Dictionary<String, SongFileType> SupportedFileTypes = new Dictionary<string, SongFileType>{
             { "ppl", new SongFileType("PowerPraise Lied", "ppl")},
             //{ "openlyrics", new SongFileType("OpenLyrics", "xml")},
             //{ "pbps", new SongFileType("PraiseBase-Presenter Song", "pbps")}
         };
-        
+
         abstract public void save(string filename, Song sng);
 
         public static SongFileWriter createFactory(string type)

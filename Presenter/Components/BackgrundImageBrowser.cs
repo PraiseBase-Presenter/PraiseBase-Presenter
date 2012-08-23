@@ -2,11 +2,8 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing;
-using System.Data;
-using System.Linq;
-using System.Text;
-using System.Windows.Forms;
 using System.IO;
+using System.Windows.Forms;
 
 namespace Pbp.Components
 {
@@ -14,13 +11,16 @@ namespace Pbp.Components
     public partial class BackgrundImageBrowser : UserControl
     {
         public delegate void imageSelect(object sender, BackgroundImageSelecteEventArgs e);
+
         public event imageSelect ImageSelected;
 
         private string _rootDirectory;
+
         public string RootDirectory
         {
-            get { return _rootDirectory;  }
-            set {
+            get { return _rootDirectory; }
+            set
+            {
                 if (System.IO.Directory.Exists(value))
                 {
                     _rootDirectory = value;
@@ -40,17 +40,18 @@ namespace Pbp.Components
 
         public int NumberOfImages
         {
-            get {
+            get
+            {
                 return imList.Images.Count;
             }
         }
 
-        ImageList imList = new ImageList();
-        Dictionary<string, ImageList> savedImLists = new Dictionary<string, ImageList>();
+        private ImageList imList = new ImageList();
+        private Dictionary<string, ImageList> savedImLists = new Dictionary<string, ImageList>();
 
-        int iw, ih;
-        int p = 5;
-        int numRows, imagesPerRow;
+        private int iw, ih;
+        private int p = 5;
+        private int numRows, imagesPerRow;
 
         public BackgrundImageBrowser()
         {
@@ -59,7 +60,7 @@ namespace Pbp.Components
 
             this.SetStyle(ControlStyles.AllPaintingInWmPaint | ControlStyles.UserPaint | ControlStyles.DoubleBuffer, true);
 
-            imList.ImageSize = new Size(80,60);
+            imList.ImageSize = new Size(80, 60);
             imList.ColorDepth = ColorDepth.Depth32Bit;
 
             iw = imList.ImageSize.Width;
@@ -68,7 +69,6 @@ namespace Pbp.Components
 
         private void BackgrundImageBrowser_Load(object sender, EventArgs e)
         {
-            
         }
 
         private Bitmap bImg;
@@ -77,7 +77,7 @@ namespace Pbp.Components
         {
             imList.Images.Clear();
 
-            this.AutoScrollPosition = new Point(0,0);
+            this.AutoScrollPosition = new Point(0, 0);
 
             if (System.IO.Directory.Exists(_rootDirectory))
             {
@@ -91,18 +91,19 @@ namespace Pbp.Components
                     foreach (string file in songFilePaths)
                     {
                         FileInfo f = new FileInfo(file);
-                        imList.Images.Add(f.Name,Image.FromFile(file));
+                        imList.Images.Add(f.Name, Image.FromFile(file));
                     }
+
                     //savedImLists.Add(_rootDirectory, );
-                }           
-                
-                PaintImages();                
+                }
+
+                PaintImages();
             }
         }
 
         //private Bitmap _backBuffer;
 
-        void PaintImages()
+        private void PaintImages()
         {
             imagesPerRow = (int)Math.Floor((float)(this.Width - p) / (float)(iw + p));
             numRows = (int)Math.Ceiling((float)imList.Images.Count / (float)imagesPerRow);
@@ -132,11 +133,12 @@ namespace Pbp.Components
 
             Console.WriteLine(pictureBox1.Size);
 
-
             /*
+
             //if (_backBuffer == null)
             //{
             _backBuffer = new Bitmap(this.ClientSize.Width, this.ClientSize.Width);
+
             //}
             Graphics g = Graphics.FromImage(_backBuffer);
 
@@ -152,8 +154,10 @@ namespace Pbp.Components
                 if (y >= -ih)
                 {
                     g.DrawImageUnscaled(imList.Images[i], x, y);
+
                     //g.DrawImage(imList.Images[i], x, y,iw,ih);
                 }
+
                 //g.DrawRectangle(new Pen(Brushes.Black,3),new Rectangle(x,y,iw,ih));
 
                 x += iw + p;
@@ -165,7 +169,7 @@ namespace Pbp.Components
 
                 if (y - ih  > h )
                     break;
-            }  
+            }
             g.Dispose();
 
             //Copy the back buffer to the screen
@@ -175,7 +179,7 @@ namespace Pbp.Components
 
         private void BackgrundImageBrowser_Resize(object sender, EventArgs e)
         {
-            PaintImages();                
+            PaintImages();
         }
 
         private void pictureBox1_MouseClick(object sender, MouseEventArgs e)
@@ -217,16 +221,15 @@ namespace Pbp.Components
             else
                 Cursor = Cursors.Default;
         }
-
     }
 
     public class BackgroundImageSelecteEventArgs : EventArgs
     {
         public BackgroundImageSelecteEventArgs(String imageName)
-		{
+        {
             this.ImageName = imageName;
-		}
-		public String ImageName {get;set;}
-    }
+        }
 
+        public String ImageName { get; set; }
+    }
 }

@@ -1,7 +1,7 @@
 ﻿/*
- *   PraiseBase Presenter 
+ *   PraiseBase Presenter
  *   The open source lyrics and image projection software for churches
- *   
+ *
  *   http://code.google.com/p/praisebasepresenter
  *
  *   This program is free software; you can redistribute it and/or
@@ -26,175 +26,164 @@
  */
 
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
+using System.IO;
 using System.Windows.Forms;
 using Pbp.Properties;
-using System.IO;
 
 namespace Pbp.Forms
 {
-	public partial class ImageDialog : Form
-	{
-		public string imagePath  {get; set;}
-		public bool forAll { 
-			get 
-			{ 
-				return checkBoxForAll.Checked; 
-			}
-			set
-			{ 
-				checkBoxForAll.Checked = value;
-			}
-		}
+    public partial class ImageDialog : Form
+    {
+        public string imagePath { get; set; }
 
-		public ImageDialog()
-		{
-			InitializeComponent();
-		}
+        public bool forAll
+        {
+            get
+            {
+                return checkBoxForAll.Checked;
+            }
+            set
+            {
+                checkBoxForAll.Checked = value;
+            }
+        }
 
-		private void buttonOK_Click(object sender, EventArgs e)
-		{
-			if (listViewImages.SelectedItems.Count > 0)
-			{
-				imagePath = (string)listViewImages.SelectedItems[0].Tag;
-				DialogResult = DialogResult.OK;
-			}
-			else
-			{
-				MessageBox.Show("Kein Bild gewählt!", "Bildmanager", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-			}
-		}
+        public ImageDialog()
+        {
+            InitializeComponent();
+        }
 
-		private void buttonCancel_Click(object sender, EventArgs e)
-		{
-			DialogResult = DialogResult.Cancel;
-		}
+        private void buttonOK_Click(object sender, EventArgs e)
+        {
+            if (listViewImages.SelectedItems.Count > 0)
+            {
+                imagePath = (string)listViewImages.SelectedItems[0].Tag;
+                DialogResult = DialogResult.OK;
+            }
+            else
+            {
+                MessageBox.Show("Kein Bild gewählt!", "Bildmanager", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+            }
+        }
 
-		private void ImageDialog_Load(object sender, EventArgs e)
-		{
-			Application.DoEvents();
-			imageTreeViewInit();
-		}
+        private void buttonCancel_Click(object sender, EventArgs e)
+        {
+            DialogResult = DialogResult.Cancel;
+        }
 
+        private void ImageDialog_Load(object sender, EventArgs e)
+        {
+            Application.DoEvents();
+            imageTreeViewInit();
+        }
 
-		public void imageTreeViewInit()
-		{
-			string rootDir = Settings.Default.DataDirectory + Path.DirectorySeparatorChar + Settings.Default.ImageDir;
+        public void imageTreeViewInit()
+        {
+            string rootDir = Settings.Default.DataDirectory + Path.DirectorySeparatorChar + Settings.Default.ImageDir;
 
-			Application.DoEvents();
-			treeViewDirs.Nodes.Clear();
-			TreeNode rootTreeNode = new TreeNode("Bilder");
-			rootTreeNode.Tag = rootDir;
-			treeViewDirs.Nodes.Add(rootTreeNode);
-			PopulateTreeView(rootDir, treeViewDirs.Nodes[0]);
-			treeViewDirs.Nodes[0].Expand();
-			listViewImages.Focus();
+            Application.DoEvents();
+            treeViewDirs.Nodes.Clear();
+            TreeNode rootTreeNode = new TreeNode("Bilder");
+            rootTreeNode.Tag = rootDir;
+            treeViewDirs.Nodes.Add(rootTreeNode);
+            PopulateTreeView(rootDir, treeViewDirs.Nodes[0]);
+            treeViewDirs.Nodes[0].Expand();
+            listViewImages.Focus();
+        }
 
-		}
+        public void PopulateTreeView(string directoryValue, TreeNode parentNode)
+        {
+            try
+            {
+                if (Directory.Exists(directoryValue))
+                {
+                    string[] directoryArray =
+                    Directory.GetDirectories(directoryValue);
 
-		public void PopulateTreeView(string directoryValue, TreeNode parentNode)
-		{
-			try
-			{
-				if (Directory.Exists(directoryValue))
-				{
-					string[] directoryArray =
-					Directory.GetDirectories(directoryValue);
+                    if (directoryArray.Length != 0)
+                    {
+                        int subLen = (Settings.Default.DataDirectory + Path.DirectorySeparatorChar + Settings.Default.ImageDir + Path.DirectorySeparatorChar).Length;
+                        foreach (string directory in directoryArray)
+                        {
+                            string dName = Path.GetFileName(directory);
+                            if (dName.Substring(0, 1) != "[" && dName.Substring(0, 1) != ".")
+                            {
+                                TreeNode myNode = new TreeNode(dName);
+                                myNode.Tag = directory.Substring(subLen);
+                                parentNode.Nodes.Add(myNode);
 
-					if (directoryArray.Length != 0)
-					{
-						int subLen = (Settings.Default.DataDirectory + Path.DirectorySeparatorChar + Settings.Default.ImageDir + Path.DirectorySeparatorChar).Length;
-						foreach (string directory in directoryArray)
-						{
-							string dName = Path.GetFileName(directory);
-							if (dName.Substring(0, 1) != "[" && dName.Substring(0, 1) != ".")
-							{
-								TreeNode myNode = new TreeNode(dName);
-								myNode.Tag = directory.Substring(subLen) ;
-								parentNode.Nodes.Add(myNode);
+                                if (imagePath != string.Empty && directory.Substring(subLen) == Path.GetDirectoryName(imagePath))
+                                {
+                                    treeViewDirs.SelectedNode = myNode;
+                                }
 
-								if (imagePath != string.Empty && directory.Substring(subLen) == Path.GetDirectoryName(imagePath))
-								{
-									treeViewDirs.SelectedNode = myNode;
-								}
+                                PopulateTreeView(directory, myNode);
+                            }
+                        }
+                    }
+                }
+            }
+            catch (UnauthorizedAccessException)
+            {
+            } // end catch
+        }
 
-								PopulateTreeView(directory, myNode);
-							}
-						}
-					}
-				}
-			}
-			catch (UnauthorizedAccessException)
-			{
+        private void treeViewDirs_AfterSelect(object sender, TreeViewEventArgs e)
+        {
+            listViewImages.Items.Clear();
+            buttonOK.Enabled = false;
+            if (listViewImages.LargeImageList != null)
+            {
+                listViewImages.LargeImageList.Dispose();
+            }
 
-			} // end catch
-		}
+            string relativeDir = (string)treeViewDirs.SelectedNode.Tag;
+            string absoluteDir = Settings.Default.DataDirectory + Path.DirectorySeparatorChar + Settings.Default.ImageDir + Path.DirectorySeparatorChar + relativeDir;
 
-		private void treeViewDirs_AfterSelect(object sender, TreeViewEventArgs e)
-		{
-			listViewImages.Items.Clear();
-			buttonOK.Enabled = false;
-			if (listViewImages.LargeImageList != null)
-			{
-				listViewImages.LargeImageList.Dispose();
-			}
+            if (Directory.Exists(absoluteDir))
+            {
+                ImageList imList = new ImageList();
+                imList.ImageSize = Settings.Default.ThumbSize;
+                imList.ColorDepth = ColorDepth.Depth32Bit;
 
-			string relativeDir = (string)treeViewDirs.SelectedNode.Tag;
-			string absoluteDir = Settings.Default.DataDirectory + Path.DirectorySeparatorChar + Settings.Default.ImageDir + Path.DirectorySeparatorChar +relativeDir;
+                string[] songFilePaths = Directory.GetFiles(absoluteDir, "*.jpg", SearchOption.TopDirectoryOnly);
+                int i = 0;
+                foreach (string file in songFilePaths)
+                {
+                    string relativePath = relativeDir + Path.DirectorySeparatorChar + Path.GetFileName(file);
+                    Application.DoEvents();
+                    ListViewItem lvi = new ListViewItem(Path.GetFileNameWithoutExtension(file));
+                    lvi.Tag = relativePath;
+                    lvi.ImageIndex = i;
+                    listViewImages.Items.Add(lvi);
+                    imList.Images.Add(ImageManager.Instance.getThumbFromRelPath(relativePath));
+                    if (relativePath == imagePath)
+                        listViewImages.Items[i].Selected = true;
 
-			if (Directory.Exists(absoluteDir))
-			{
-				ImageList imList = new ImageList();
-				imList.ImageSize = Settings.Default.ThumbSize;
-				imList.ColorDepth = ColorDepth.Depth32Bit;
+                    i++;
+                }
+                listViewImages.LargeImageList = imList;
+            }
+        }
 
-				string[] songFilePaths = Directory.GetFiles(absoluteDir, "*.jpg", SearchOption.TopDirectoryOnly);
-				int i = 0;
-				foreach (string file in songFilePaths)
-				{
-					string relativePath = relativeDir + Path.DirectorySeparatorChar + Path.GetFileName(file);
-					Application.DoEvents();
-					ListViewItem lvi = new ListViewItem(Path.GetFileNameWithoutExtension(file));
-					lvi.Tag = relativePath;
-					lvi.ImageIndex = i;
-					listViewImages.Items.Add(lvi);
-					imList.Images.Add(ImageManager.Instance.getThumbFromRelPath(relativePath));
-					if (relativePath == imagePath)
-						listViewImages.Items[i].Selected = true;
+        private void listViewImages_ItemSelectionChanged(object sender, ListViewItemSelectionChangedEventArgs e)
+        {
+            if (listViewImages.SelectedItems.Count > 0)
+                buttonOK.Enabled = true;
+            else
+                buttonOK.Enabled = false;
+        }
 
-					i++;
-				}
-				listViewImages.LargeImageList = imList;
-			}
-			
-		}
+        private void listViewImages_DoubleClick(object sender, EventArgs e)
+        {
+            if (listViewImages.SelectedItems.Count > 0)
+                buttonOK_Click(sender, e);
+        }
 
-		private void listViewImages_ItemSelectionChanged(object sender, ListViewItemSelectionChangedEventArgs e)
-		{
-			if (listViewImages.SelectedItems.Count > 0)
-				buttonOK.Enabled = true;
-			else
-				buttonOK.Enabled = false;
-		}
-
-		private void listViewImages_DoubleClick(object sender, EventArgs e)
-		{
-			if (listViewImages.SelectedItems.Count > 0)
-				buttonOK_Click(sender, e);
-			
-		}
-
-		private void buttonNoImage_Click(object sender, EventArgs e)
-		{
-			imagePath = String.Empty;
-			DialogResult = DialogResult.OK;
-		}
-
-
-	}
+        private void buttonNoImage_Click(object sender, EventArgs e)
+        {
+            imagePath = String.Empty;
+            DialogResult = DialogResult.OK;
+        }
+    }
 }
