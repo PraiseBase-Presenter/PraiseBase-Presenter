@@ -31,7 +31,7 @@ using System.Text;
 
 namespace Pbp
 {
-    public class Util
+    public class StringUtils
     {
         /// <summary>
         /// Gibt einen MD5 Hash als String zurück

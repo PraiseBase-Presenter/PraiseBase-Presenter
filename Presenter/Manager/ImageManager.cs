@@ -129,6 +129,10 @@ namespace Pbp
             string imageRootDir = Settings.Default.DataDirectory + Path.DirectorySeparatorChar + Settings.Default.ImageDir;
             string thumbDir = Settings.Default.DataDirectory + Path.DirectorySeparatorChar + Settings.Default.ThumbDir;
 
+            if (!Directory.Exists(imageRootDir))
+            {
+                Directory.CreateDirectory(imageRootDir);
+            }
             if (!Directory.Exists(thumbDir))
             {
                 Directory.CreateDirectory(thumbDir);

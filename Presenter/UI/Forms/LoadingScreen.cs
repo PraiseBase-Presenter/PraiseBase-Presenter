@@ -34,7 +34,7 @@ namespace Pbp.Forms
         public LoadingScreen()
         {
             InitializeComponent();
-            SongManager.Instance.SongLoaded += new SongManager.SongLoad(SongManager_SongLoaded);
+            //SongManager.Instance.SongLoaded += new SongManager.SongLoad(SongManager_SongLoaded);
         }
 
         private void SongManager_SongLoaded(SongManager.SongLoadEventArgs e)

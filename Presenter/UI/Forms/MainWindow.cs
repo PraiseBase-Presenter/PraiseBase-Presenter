@@ -1140,75 +1140,60 @@ namespace Pbp.Forms
 
         private void buttonSaveSetList_Click(object sender, EventArgs e)
         {
+            string setlistDir = Settings.Default.DataDirectory + Path.DirectorySeparatorChar + Settings.Default.SetListDir;
+            if (!Directory.Exists(setlistDir))
+            {
+                Directory.CreateDirectory(setlistDir);
+            }
+
             var dlg = new SaveFileDialog();
             dlg.AddExtension = true;
             dlg.CheckPathExists = true;
             dlg.Filter = "PraiseBase-Presenter Setliste (*.pbpl)|*.pbpl";
-            dlg.InitialDirectory = Settings.Default.DataDirectory + Path.DirectorySeparatorChar +
-                                   Settings.Default.SetListDir;
+            dlg.InitialDirectory = setlistDir;
             dlg.Title = "Setliste speichern unter...";
             if (dlg.ShowDialog() == DialogResult.OK)
             {
-                var xmlDoc = new XmlDocument();
-                xmlDoc.AppendChild(xmlDoc.CreateNode(XmlNodeType.XmlDeclaration, "", ""));
-                xmlDoc.AppendChild(xmlDoc.CreateElement("setlist"));
-                XmlElement xmlRoot = xmlDoc.DocumentElement;
-                xmlRoot.AppendChild(xmlDoc.CreateElement("items"));
+                Setlist sl = new Setlist();
                 for (int i = 0; i < listViewSetList.Items.Count; i++)
                 {
-                    XmlNode nd = xmlDoc.CreateElement("item");
-                    nd.InnerText = SongManager.Instance.SongList[(Guid)listViewSetList.Items[i].Tag].Song.Title;
-                    xmlRoot["items"].AppendChild(nd);
+                    sl.Items.Add(SongManager.Instance.SongList[(Guid)listViewSetList.Items[i].Tag].Song);
                 }
-                XmlWriter wrt = new XmlTextWriter(dlg.FileName, Encoding.UTF8);
-                xmlDoc.WriteTo(wrt);
-                wrt.Flush();
-                wrt.Close();
+                SetlistWriter swr = new SetlistWriter();
+                swr.write(dlg.FileName, sl);
             }
         }
 
         private void buttonOpenSetList_Click(object sender, EventArgs e)
         {
+            string setlistDir = Settings.Default.DataDirectory + Path.DirectorySeparatorChar + Settings.Default.SetListDir;
+            if (!Directory.Exists(setlistDir))
+            {
+                Directory.CreateDirectory(setlistDir);
+            }
+
             var dlg = new OpenFileDialog();
             dlg.AddExtension = true;
             dlg.CheckPathExists = true;
             dlg.CheckFileExists = true;
             dlg.Filter = "PraiseBase-Presenter Setliste (*.pbpl)|*.pbpl";
-            dlg.InitialDirectory = Settings.Default.DataDirectory + Path.DirectorySeparatorChar +
-                                   Settings.Default.SetListDir;
+            dlg.InitialDirectory = setlistDir;
             dlg.Title = "Setliste öffnen...";
             if (dlg.ShowDialog() == DialogResult.OK)
             {
-                var xmlDoc = new XmlDocument();
-                xmlDoc.Load(dlg.FileName);
-                XmlElement xmlRoot = xmlDoc.DocumentElement;
-                try
-                {
-                    if (xmlRoot.Name != "setlist")
-                        throw new Exception("Ungültige Setlist!");
-
-                    if (xmlRoot["items"] != null)
+                SetlistReader sr = new SetlistReader();
+                try {
+                    Setlist sl = sr.read(dlg.FileName);
+                    if (sl.Items.Count > 0)
                     {
-                        listViewSetList.Items.Clear();
-                        for (int i = 0; i < xmlRoot["items"].ChildNodes.Count; i++)
+                        foreach (var i in sl.Items)                
                         {
-                            if (xmlRoot["items"].ChildNodes[i].Name == "item")
-                            {
-                                Guid g = SongManager.Instance.getGuidByTitle(xmlRoot["items"].ChildNodes[i].InnerText);
-                                if (g != Guid.Empty)
-                                {
-                                    var lvi = new ListViewItem(SongManager.Instance.SongList[g].Song.Title);
-                                    lvi.Tag = g;
-                                    listViewSetList.Items.Add(lvi);
-                                    buttonSetListClear.Enabled = true;
-                                    buttonSaveSetList.Enabled = true;
-                                }
-                                else
-                                {
-                                    MessageBox.Show(Resources.Titel + " " + xmlRoot["items"].ChildNodes[i].InnerText + " " + Resources.nicht_vorhanden);
-                                }
-                            }
+                            var lvi = new ListViewItem(i.Title);
+                            lvi.Tag = i.GUID;
+                            listViewSetList.Items.Add(lvi);
                         }
+                        buttonSetListClear.Enabled = true;
+                        buttonSaveSetList.Enabled = true;
                         listViewSetList.Columns[0].Width = -2;
                     }
                 }
@@ -1593,7 +1578,7 @@ namespace Pbp.Forms
         #region Bible
 
         private int bookIdx = -1, chapterIdx = -1;
-        private XMLBible.Book searchedBook;
+        private Pbp.Data.Bible.Book searchedBook;
         private int verseIdx = -1, verseToIdx = -1;
 
         private void loadBibles()
@@ -1602,25 +1587,16 @@ namespace Pbp.Forms
             if (comboBoxBible.Items.Count == 0 || reload)
             {
                 comboBoxBible.Items.Clear();
-                comboBoxBible.Items.Add("Übersetzung wählen...");
+                BibleManager.Instance.loadBibleInfo();
+                comboBoxBible.DataSource =  new BindingSource(BibleManager.Instance.BibleList, null);
+                comboBoxBible.DisplayMember = "Value";
+                comboBoxBible.ValueMember = "Key";
                 comboBoxBible.SelectedIndex = 0;
-                comboBoxBible.DisplayMember = "Title";
-
-                foreach (string fi in XMLBible.getBibleFiles())
-                {
-                    var bbl = new XMLBible(fi);
-                    if (bbl.isValid)
-                    {
-                        comboBoxBible.Items.Add(bbl);
-                    }
-                }
             }
         }
 
         private void comboBoxBible_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (comboBoxBible.SelectedIndex > 0)
-            {
                 listBoxBibleVerse.Items.Clear();
                 listBoxBibleVerseTo.Items.Clear();
                 listBoxBibleChapter.Items.Clear();
@@ -1628,9 +1604,13 @@ namespace Pbp.Forms
                 listBoxBibleBook.Items.Clear();
                 listBoxBibleBook.DisplayMember = "Name";
 
-                var bbl = ((XMLBible)comboBoxBible.SelectedItem);
+                var bi = ((KeyValuePair<string, BibleManager.BibleItem>)comboBoxBible.SelectedItem);
+                if (bi.Value.Bible.Books == null)
+                {
+                    BibleManager.Instance.loadBibleData(bi.Key);
+                }
 
-                foreach (XMLBible.Book bk in bbl.getBooks())
+                foreach (Pbp.Data.Bible.Book bk in  bi.Value.Bible.Books)
                 {
                     listBoxBibleBook.Items.Add(bk);
                 }
@@ -1641,14 +1621,11 @@ namespace Pbp.Forms
                 }
 
                 searchTextBoxBible.Enabled = true;
-            }
-            else
-                searchTextBoxBible.Enabled = false;
         }
 
         private void listBoxBibleBook_SelectedIndexChanged(object sender, EventArgs e)
         {
-            var bk = ((XMLBible.Book)listBoxBibleBook.SelectedItem);
+            var bk = ((Pbp.Data.Bible.Book)listBoxBibleBook.SelectedItem);
 
             listBoxBibleVerse.Items.Clear();
             listBoxBibleVerseTo.Items.Clear();
@@ -1656,7 +1633,7 @@ namespace Pbp.Forms
             listBoxBibleChapter.Items.Clear();
             listBoxBibleChapter.DisplayMember = "Number";
 
-            foreach (XMLBible.Chapter cp in bk.getChapters())
+            foreach (Pbp.Data.Bible.Chapter cp in bk.Chapters)
             {
                 listBoxBibleChapter.Items.Add(cp);
             }
@@ -1671,14 +1648,14 @@ namespace Pbp.Forms
 
         private void listBoxBibleChapter_SelectedIndexChanged(object sender, EventArgs e)
         {
-            var cp = ((XMLBible.Chapter)listBoxBibleChapter.SelectedItem);
+            var cp = ((Pbp.Data.Bible.Chapter)listBoxBibleChapter.SelectedItem);
 
             listBoxBibleVerse.Items.Clear();
             listBoxBibleVerseTo.Items.Clear();
             listBoxBibleVerse.DisplayMember = "Number";
             listBoxBibleVerseTo.DisplayMember = "Number";
 
-            foreach (XMLBible.Verse v in cp.getVerses())
+            foreach (Pbp.Data.Bible.Verse v in cp.Verses)
             {
                 listBoxBibleVerse.Items.Add(v);
                 listBoxBibleVerseTo.Items.Add(v);
@@ -1694,10 +1671,10 @@ namespace Pbp.Forms
 
         private void listBoxBibleVerse_SelectedIndexChanged(object sender, EventArgs e)
         {
-            var v = ((XMLBible.Verse)listBoxBibleVerse.SelectedItem);
+            var v = ((Pbp.Data.Bible.Verse)listBoxBibleVerse.SelectedItem);
 
             listBoxBibleVerseTo.Items.Clear();
-            foreach (XMLBible.Verse tv in v.Chapter.getVerses())
+            foreach (Pbp.Data.Bible.Verse tv in v.Chapter.Verses)
             {
                 if (tv.Number >= v.Number)
                 {
@@ -1719,8 +1696,8 @@ namespace Pbp.Forms
         {
             if (listBoxBibleVerse.SelectedItem != null && listBoxBibleVerseTo.SelectedItem != null)
             {
-                var vs = new XMLBible.VerseSelection(((XMLBible.Verse)listBoxBibleVerse.SelectedItem),
-                                                     ((XMLBible.Verse)listBoxBibleVerseTo.SelectedItem));
+                var vs = new Pbp.Data.Bible.VerseSelection(((Pbp.Data.Bible.Verse)listBoxBibleVerse.SelectedItem),
+                                                     ((Pbp.Data.Bible.Verse)listBoxBibleVerseTo.SelectedItem));
 
                 labelBibleTextName.Text = vs.ToString();
                 textBoxBibleText.Text = vs.Text;
@@ -1734,8 +1711,8 @@ namespace Pbp.Forms
         private void buttonBibleTextShow_Click(object sender, EventArgs e)
         {
             var bl =
-                new BibleLayer(new XMLBible.VerseSelection(((XMLBible.Verse)listBoxBibleVerse.SelectedItem),
-                                                           ((XMLBible.Verse)listBoxBibleVerseTo.SelectedItem)));
+                new BibleLayer(new Pbp.Data.Bible.VerseSelection(((Pbp.Data.Bible.Verse)listBoxBibleVerse.SelectedItem),
+                                                           ((Pbp.Data.Bible.Verse)listBoxBibleVerseTo.SelectedItem)));
             bl.FontSize = (float)numericUpDown2.Value;
             ProjectionWindow.Instance.DisplayLayer(2, bl);
         }
@@ -1747,8 +1724,8 @@ namespace Pbp.Forms
 
         private void buttonAddToBibleVerseList_Click(object sender, EventArgs e)
         {
-            var vs = new XMLBible.VerseSelection(((XMLBible.Verse)listBoxBibleVerse.SelectedItem),
-                                                 ((XMLBible.Verse)listBoxBibleVerseTo.SelectedItem));
+            var vs = new Pbp.Data.Bible.VerseSelection(((Pbp.Data.Bible.Verse)listBoxBibleVerse.SelectedItem),
+                                                 ((Pbp.Data.Bible.Verse)listBoxBibleVerseTo.SelectedItem));
             var lvi = new ListViewItem(vs.ToString());
             lvi.Tag = vs;
             listViewBibleVerseList.Items.Add(lvi);
@@ -1772,7 +1749,7 @@ namespace Pbp.Forms
         {
             if (listViewBibleVerseList.SelectedItems.Count > 0)
             {
-                var vs = (XMLBible.VerseSelection)listViewBibleVerseList.SelectedItems[0].Tag;
+                var vs = (Pbp.Data.Bible.VerseSelection)listViewBibleVerseList.SelectedItems[0].Tag;
                 listBoxBibleBook.SelectedIndex = vs.Chapter.Book.Number - 1;
                 listBoxBibleChapter.SelectedIndex = vs.Chapter.Number - 1;
                 listBoxBibleVerse.SelectedIndex = vs.StartVerse.Number - 1;
@@ -1800,10 +1777,10 @@ namespace Pbp.Forms
                 }
                 else
                 {
-                    var bkCandidates = new List<XMLBible.Book>();
+                    var bkCandidates = new List<Pbp.Data.Bible.Book>();
 
-                    var bbl = ((XMLBible)comboBoxBible.SelectedItem);
-                    foreach (XMLBible.Book bk in bbl.getBooks())
+                    var bbl = ((Pbp.Data.Bible.Bible)comboBoxBible.SelectedItem);
+                    foreach (Pbp.Data.Bible.Book bk in bbl.Books)
                     {
                         if (needle.Length <= bk.Name.Length && needle == bk.Name.ToLower().Substring(0, needle.Length))
                         {

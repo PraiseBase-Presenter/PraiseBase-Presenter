@@ -118,7 +118,7 @@ namespace Pbp.Forms
             else if (success == 1)
             {
                 string msg = "Projektionsbildschirm gefunden!" + Environment.NewLine;
-                msg += "Name: " + Util.ConvertString(_projScreen.DeviceName) + Environment.NewLine;
+                msg += "Name: " + StringUtils.ConvertString(_projScreen.DeviceName) + Environment.NewLine;
                 msg += "Auflösung: " + _projScreen.WorkingArea.Width + "x" + _projScreen.WorkingArea.Height + " Pixel" + Environment.NewLine;
                 MessageBox.Show(msg, Resources.Projektion, MessageBoxButtons.OK, MessageBoxIcon.Information);
             }

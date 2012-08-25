@@ -15,10 +15,6 @@ namespace Pbp.Forms
             progressBarStatus.Maximum = maximum;
         }
 
-        private void ProgressWindow_Load(object sender, EventArgs e)
-        {
-        }
-
         public void UpdateStatus(string message, int value)
         {
             label1.Text = message;

@@ -82,6 +82,7 @@ namespace Pbp.Forms
             this.Cursor = System.Windows.Forms.Cursors.IBeam;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "LoadingScreen";
+            this.Icon = global::Pbp.Properties.Resources.Computer;
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Loading";

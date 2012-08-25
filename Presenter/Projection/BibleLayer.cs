@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Drawing;
 using Pbp.Properties;
+using Pbp.Data.Bible;
 
 namespace Pbp
 {
@@ -12,16 +13,16 @@ namespace Pbp
 
         public StringAlignment VerticalAlign { get; set; }
 
-        private XMLBible.VerseSelection verseSelection;
+        private VerseSelection verseSelection;
 
-        public BibleLayer(XMLBible.VerseSelection verseSelection)
+        public BibleLayer(Pbp.Data.Bible.VerseSelection verseSelection)
         {
             this.verseSelection = verseSelection;
         }
 
         public override void writeOut(System.Drawing.Graphics gr, object[] args, ProjectionMode pr)
         {
-            XMLBible.VerseSelection v = verseSelection;
+            VerseSelection v = verseSelection;
 
             string Title = v.ToString();
             string Text = v.Text;
@@ -67,7 +68,7 @@ namespace Pbp
                 if (lm.Width > (float)(w - padding))
                 {
                     int nc = l.Length / ((int)Math.Ceiling(lm.Width / (float)(w - padding)));
-                    string s = string.Join(Environment.NewLine, Util.Wrap(l, nc)).Trim();
+                    string s = string.Join(Environment.NewLine, StringUtils.Wrap(l, nc)).Trim();
 
                     drawString(gr, s, x, y, font, fontBrush, strFormat);
 

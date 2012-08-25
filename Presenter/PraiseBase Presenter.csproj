@@ -99,206 +99,214 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Classes\BaseLayer.cs" />
-    <Compile Include="Classes\BibleLayer.cs" />
-    <Compile Include="Classes\SongFileType.cs" />
-    <Compile Include="Classes\SongPartList.cs" />
-    <Compile Include="Classes\SongSlideList.cs" />
-    <Compile Include="Classes\SongPart.cs" />
-    <Compile Include="Classes\PowerPraiseSongFileReader.cs" />
-    <Compile Include="Classes\QualityAssuranceIndicator.cs" />
-    <Compile Include="Classes\SongFileWriter.cs" />
-    <Compile Include="Classes\PowerPraiseSongFileWriter.cs" />
-    <Compile Include="Classes\SongFileReader.cs" />
-    <Compile Include="Classes\SongSlideLayer.cs" />
-    <Compile Include="Classes\TagList.cs" />
-    <Compile Include="Classes\TextAlignment.cs" />
-    <Compile Include="Classes\UpdateCheck.cs" />
-    <Compile Include="Classes\XMLBible.cs" />
-    <Compile Include="Classes\LiveText.cs" />
-    <Compile Include="Classes\TextLayer.cs" />
-    <Compile Include="Classes\Util.cs" />
-    <Compile Include="Classes\ImageManager.cs" />
-    <Compile Include="Classes\SongManager.cs" />
-    <Compile Include="Classes\SongSlide.cs" />
-    <Compile Include="Components\BackgrundImageBrowser.cs">
+    <Compile Include="Data\Bible\Book.cs" />
+    <Compile Include="Data\Bible\Chapter.cs" />
+    <Compile Include="Data\Bible\Verse.cs" />
+    <Compile Include="Data\Bible\VerseSelection.cs" />
+    <Compile Include="IO\XMLBibleReader.cs" />
+    <Compile Include="Manager\BibleManager.cs" />
+    <Compile Include="Projection\BaseLayer.cs" />
+    <Compile Include="Projection\BibleLayer.cs" />
+    <Compile Include="IO\SetlistWriter.cs" />
+    <Compile Include="Data\Setlist.cs" />
+    <Compile Include="IO\SetlistReader.cs" />
+    <Compile Include="Data\Song\SongFileType.cs" />
+    <Compile Include="Data\Song\SongPartList.cs" />
+    <Compile Include="Data\Song\SongSlideList.cs" />
+    <Compile Include="Data\Song\SongPart.cs" />
+    <Compile Include="IO\PowerPraiseSongFileReader.cs" />
+    <Compile Include="Data\Song\QualityAssuranceIndicator.cs" />
+    <Compile Include="IO\SongFileWriter.cs" />
+    <Compile Include="IO\PowerPraiseSongFileWriter.cs" />
+    <Compile Include="IO\SongFileReader.cs" />
+    <Compile Include="Projection\SongSlideLayer.cs" />
+    <Compile Include="Data\TagList.cs" />
+    <Compile Include="Utils\UpdateCheck.cs" />
+    <Compile Include="Data\Bible\Bible.cs" />
+    <Compile Include="Projection\LiveText.cs" />
+    <Compile Include="Projection\TextLayer.cs" />
+    <Compile Include="Utils\StringUtils.cs" />
+    <Compile Include="Manager\ImageManager.cs" />
+    <Compile Include="Manager\SongManager.cs" />
+    <Compile Include="Data\Song\SongSlide.cs" />
+    <Compile Include="UI\Components\BackgrundImageBrowser.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Components\BackgrundImageBrowser.Designer.cs">
+    <Compile Include="UI\Components\BackgrundImageBrowser.Designer.cs">
       <DependentUpon>BackgrundImageBrowser.cs</DependentUpon>
     </Compile>
-    <Compile Include="Components\ColorPicker.cs">
+    <Compile Include="UI\Components\ColorPicker.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Components\ColorPicker.Designer.cs">
+    <Compile Include="UI\Components\ColorPicker.Designer.cs">
       <DependentUpon>ColorPicker.cs</DependentUpon>
     </Compile>
-    <Compile Include="Components\CustomGroupBox.cs">
+    <Compile Include="UI\Components\CustomGroupBox.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Components\CustomGroupBox.Designer.cs">
+    <Compile Include="UI\Components\CustomGroupBox.Designer.cs">
       <DependentUpon>CustomGroupBox.cs</DependentUpon>
     </Compile>
-    <Compile Include="Components\SearchTextBox.cs">
+    <Compile Include="UI\Components\SearchTextBox.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Components\SearchTextBox.Designer.cs">
+    <Compile Include="UI\Components\SearchTextBox.Designer.cs">
       <DependentUpon>SearchTextBox.cs</DependentUpon>
     </Compile>
-    <Compile Include="Components\DragAndDropListView.cs">
+    <Compile Include="UI\Components\DragAndDropListView.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Components\SongDetail.cs">
+    <Compile Include="UI\Components\SongDetail.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Components\SongDetail.Designer.cs">
+    <Compile Include="UI\Components\SongDetail.Designer.cs">
       <DependentUpon>SongDetail.cs</DependentUpon>
     </Compile>
-    <Compile Include="Components\TreeLE.cs">
+    <Compile Include="UI\Components\TreeLE.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Forms\AboutWindow.cs">
+    <Compile Include="UI\Forms\AboutWindow.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\AboutWindow.Designer.cs">
+    <Compile Include="UI\Forms\AboutWindow.Designer.cs">
       <DependentUpon>AboutWindow.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\EditorChild.cs">
+    <Compile Include="UI\Forms\EditorChild.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\EditorChild.Designer.cs">
+    <Compile Include="UI\Forms\EditorChild.Designer.cs">
       <DependentUpon>EditorChild.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\EditorWindow.cs">
+    <Compile Include="UI\Forms\EditorWindow.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\EditorWindow.Designer.cs">
+    <Compile Include="UI\Forms\EditorWindow.Designer.cs">
       <DependentUpon>EditorWindow.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\ImageDialog.cs">
+    <Compile Include="UI\Forms\ImageDialog.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\ImageDialog.Designer.cs">
+    <Compile Include="UI\Forms\ImageDialog.Designer.cs">
       <DependentUpon>ImageDialog.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\LoadingScreen.cs">
+    <Compile Include="UI\Forms\LoadingScreen.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\LoadingScreen.Designer.cs">
+    <Compile Include="UI\Forms\LoadingScreen.Designer.cs">
       <DependentUpon>LoadingScreen.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\MainWindow.cs">
+    <Compile Include="UI\Forms\MainWindow.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\MainWindow.Designer.cs">
+    <Compile Include="UI\Forms\MainWindow.Designer.cs">
       <DependentUpon>MainWindow.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\ProgressWindow.cs">
+    <Compile Include="UI\Forms\ProgressWindow.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\ProgressWindow.Designer.cs">
+    <Compile Include="UI\Forms\ProgressWindow.Designer.cs">
       <DependentUpon>ProgressWindow.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\QADialog.cs">
+    <Compile Include="UI\Forms\QADialog.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\QADialog.Designer.cs">
+    <Compile Include="UI\Forms\QADialog.Designer.cs">
       <DependentUpon>QADialog.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\SongImporter.cs">
+    <Compile Include="UI\Forms\SongImporter.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\SongImporter.Designer.cs">
+    <Compile Include="UI\Forms\SongImporter.Designer.cs">
       <DependentUpon>SongImporter.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\ProjectionWindow.cs">
+    <Compile Include="UI\Forms\ProjectionWindow.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\ProjectionWindow.Designer.cs">
+    <Compile Include="UI\Forms\ProjectionWindow.Designer.cs">
       <DependentUpon>ProjectionWindow.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\SettingsWindow.cs">
+    <Compile Include="UI\Forms\SettingsWindow.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\SettingsWindow.Designer.cs">
+    <Compile Include="UI\Forms\SettingsWindow.Designer.cs">
       <DependentUpon>SettingsWindow.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\ProjectionControl.xaml.cs">
+    <Compile Include="UI\WPF\ProjectionControl.xaml.cs">
       <DependentUpon>ProjectionControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Forms\SongDialog.cs">
+    <Compile Include="UI\Forms\SongDialog.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\SongDialog.Designer.cs">
+    <Compile Include="UI\Forms\SongDialog.Designer.cs">
       <DependentUpon>SongDialog.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="Components\BackgrundImageBrowser.resx">
+    <EmbeddedResource Include="UI\Components\BackgrundImageBrowser.resx">
       <DependentUpon>BackgrundImageBrowser.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Components\ColorPicker.resx">
+    <EmbeddedResource Include="UI\Components\ColorPicker.resx">
       <DependentUpon>ColorPicker.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Components\CustomGroupBox.resx">
+    <EmbeddedResource Include="UI\Components\CustomGroupBox.resx">
       <DependentUpon>CustomGroupBox.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Components\SearchTextBox.resx">
+    <EmbeddedResource Include="UI\Components\SearchTextBox.resx">
       <DependentUpon>SearchTextBox.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Components\SongDetail.resx">
+    <EmbeddedResource Include="UI\Components\SongDetail.resx">
       <DependentUpon>SongDetail.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="Components\TreeLE.resx">
+    <EmbeddedResource Include="UI\Components\TreeLE.resx">
       <DependentUpon>TreeLE.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\AboutWindow.resx">
+    <EmbeddedResource Include="UI\Forms\AboutWindow.resx">
       <DependentUpon>AboutWindow.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\EditorChild.resx">
+    <EmbeddedResource Include="UI\Forms\EditorChild.resx">
       <DependentUpon>EditorChild.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\EditorWindow.resx">
+    <EmbeddedResource Include="UI\Forms\EditorWindow.resx">
       <DependentUpon>EditorWindow.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\ImageDialog.resx">
+    <EmbeddedResource Include="UI\Forms\ImageDialog.resx">
       <DependentUpon>ImageDialog.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\LoadingScreen.resx">
+    <EmbeddedResource Include="UI\Forms\LoadingScreen.resx">
       <DependentUpon>LoadingScreen.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\MainWindow.resx">
+    <EmbeddedResource Include="UI\Forms\MainWindow.resx">
       <DependentUpon>MainWindow.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\ProgressWindow.resx">
+    <EmbeddedResource Include="UI\Forms\ProgressWindow.resx">
       <DependentUpon>ProgressWindow.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\QADialog.resx">
+    <EmbeddedResource Include="UI\Forms\QADialog.resx">
       <DependentUpon>QADialog.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\SongImporter.resx">
+    <EmbeddedResource Include="UI\Forms\SongImporter.resx">
       <DependentUpon>SongImporter.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\ProjectionWindow.resx">
+    <EmbeddedResource Include="UI\Forms\ProjectionWindow.resx">
       <DependentUpon>ProjectionWindow.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\SettingsWindow.resx">
+    <EmbeddedResource Include="UI\Forms\SettingsWindow.resx">
       <DependentUpon>SettingsWindow.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\SongDialog.resx">
+    <EmbeddedResource Include="UI\Forms\SongDialog.resx">
       <DependentUpon>SongDialog.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
@@ -323,7 +331,7 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
     <Compile Include="Settings.cs" />
-    <Compile Include="Classes\Song.cs" />
+    <Compile Include="Data\Song\Song.cs" />
     <None Include="Resources\Application\update16.png" />
     <None Include="Resources\Application\ok16.png" />
     <None Include="Resources\Application\wheel16.png" />
@@ -488,7 +496,7 @@
     <None Include="Resources\Application\searchg.png" />
   </ItemGroup>
   <ItemGroup>
-    <Page Include="Forms\ProjectionControl.xaml">
+    <Page Include="UI\WPF\ProjectionControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
       <Generator>MSBuild:Compile</Generator>

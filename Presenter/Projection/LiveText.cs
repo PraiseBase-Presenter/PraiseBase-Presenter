@@ -62,7 +62,7 @@ namespace Pbp
                 if (lm.Width > (float)(w - padding))
                 {
                     int nc = l.Length / ((int)Math.Ceiling(lm.Width / (float)(w - padding)));
-                    string s = string.Join(Environment.NewLine, Util.Wrap(l, nc)).Trim();
+                    string s = string.Join(Environment.NewLine, StringUtils.Wrap(l, nc)).Trim();
                     drawString(gr, s, x, y, font, fontBrush, strFormat);
                     y += (int)gr.MeasureString(s, font).Height + Settings.Default.ProjectionMasterLineSpacing;
                 }
