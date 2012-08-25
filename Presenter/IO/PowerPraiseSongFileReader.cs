@@ -219,6 +219,7 @@ namespace Pbp
                     sng.Parts.Add(tmpPart);
                 }
             }
+            sng.updateSearchText();
             return sng;
         }
     }
