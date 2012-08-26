@@ -242,6 +242,7 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Content Include="Resources\Doc\License.txt" />
     <EmbeddedResource Include="UI\Components\BackgrundImageBrowser.resx">
       <DependentUpon>BackgrundImageBrowser.cs</DependentUpon>
     </EmbeddedResource>
@@ -342,6 +343,7 @@
     <None Include="Resources\Application\leinwand16_no.png" />
     <Content Include="Resources\Dist\Songs\A Mighty Fortress Is Our God.ppl" />
     <Content Include="Resources\Dist\Songs\Jesus is my Lord.ppl" />
+    <None Include="Resources\Doc\License.rtf" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\Application\pb web.png" />
