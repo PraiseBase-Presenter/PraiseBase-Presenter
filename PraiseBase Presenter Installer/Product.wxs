@@ -1,10 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<?define ProductName="$(fileVersion.ProductName($(var.PraiseBase_Presenter.TargetPath)))" ?>
+<?define CompanyName="$(fileVersion.CompanyName($(var.PraiseBase_Presenter.TargetPath)))" ?>
+<?define ProductVersion="$(fileVersion.ProductVersion($(var.PraiseBase_Presenter.TargetPath)))" ?>
 <Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
-  <Product Id="88143924-1c44-4a5f-8dab-9b12d5c02979" 
-           Name="$(var.PraiseBase_Presenter.ProjectName)" 
-           Language="1033" 
-           Version="1.0.0.0" 
-           Manufacturer="PraiseBase Langenthal" 
+  <Product Id="88143924-1c44-4a5f-8dab-9b12d5c02979"
+           Name="$(var.ProductName) $(var.ProductVersion)"
+           Version="$(var.ProductVersion)"
+           Manufacturer="$(var.CompanyName)"
+           Language="1031" 
            UpgradeCode="ae6f4ec6-c8e4-4ce0-8db8-0a1cac2ac529">
     <Package InstallerVersion="200" Compressed="yes" />
 
@@ -40,7 +43,18 @@
         </Directory>
       </Directory>
 
-      <Directory Id="ProgramMenuFolder" Name="Programs">
+    
+        <Directory Id="PersonalFolder">
+          <Directory Id="DataFolder" Name="$(var.PraiseBase_Presenter.ProjectName)">
+            <Component Id="DataFolder" Guid="184dc8b6-43d3-46fa-854f-5c3c6abe209e">
+              <CreateFolder />
+              <RemoveFolder Id='DataFolder' On='uninstall'/>
+              <RegistryValue Root='HKCU' Key='Software\[Manufacturer]\[ProductName]' Type='string' Value='' KeyPath='yes' />
+            </Component>
+          </Directory>
+        </Directory>
+
+        <Directory Id="ProgramMenuFolder" Name="Programs">
         <Component Id="ApplicationStartMenuShortcut" Guid="A07A731E-7E98-44CE-B049-C477CC0A2B00">
           <Shortcut Id="ApplicationStartMenuShortcut"
                     Name="$(var.PraiseBase_Presenter.ProjectName)"
@@ -64,7 +78,103 @@
       
     </Directory>
 
-    <Feature Id="ProductFeature" 
+    <DirectoryRef Id='DataFolder'>
+      <Directory Id="BackgroundsFolder" Name="Backgrounds">
+        <Component Id="BackgroundsFolder" Guid="dad73b0d-d467-4cda-b9dc-7cb6768d0cc3" Permanent="yes">
+          <CreateFolder/>
+          <RemoveFolder Id='BackgroundsFolder' On='uninstall'/>
+          <RegistryValue Root='HKCU' Key='Software\[Manufacturer]\[ProductName]' Type='string' Value='' KeyPath='yes' />
+        </Component>
+      </Directory>
+      <Directory Id="SongsFolder" Name="Songs">
+        <Component Id="SongsFolder" Guid="67d7d24a-a6bc-49ae-b976-d1b891bc0d30" Permanent="yes">
+          <CreateFolder />
+          <RemoveFolder Id='SongsFolder' On='uninstall'/>
+          <RegistryValue Root='HKCU' Key='Software\[Manufacturer]\[ProductName]' Type='string' Value='' KeyPath='yes' />
+          <File Id="A_Mighty_Fortress_Is_Our_God.ppl"
+                Name="A Mighty Fortress Is Our God.ppl"
+                Source="$(var.PraiseBase_Presenter.ProjectDir)Resources\Dist\Songs\A Mighty Fortress Is Our God.ppl" />
+          <File Id="Jesus_is_my_Lord.ppl"
+                Name="Jesus is my Lord.ppl"
+                Source="$(var.PraiseBase_Presenter.ProjectDir)Resources\Dist\Songs\Jesus is my Lord.ppl" />
+        </Component>
+      </Directory>
+      <Directory Id="BiblesFolder" Name="Bibles">
+        <Component Id="BiblesFolder" Guid="5a922d36-2237-420c-b458-0ddad6044e88" Permanent="yes">
+          <CreateFolder />
+          <RemoveFolder Id='BiblesFolder' On='uninstall'/>
+          <RegistryValue Root='HKCU' Key='Software\[Manufacturer]\[ProductName]' Type='string' Value='' KeyPath='yes' />
+          <File Id="Elberfelder_1905.xml"
+                Name="Elberfelder_1905.xml"
+                Source="$(var.PraiseBase_Presenter.ProjectDir)Resources\Dist\Bibles\Elberfelder_1905.xml" />
+          <File Id="kjv.xml"
+                Name="kjv.xml"
+                Source="$(var.PraiseBase_Presenter.ProjectDir)Resources\Dist\Bibles\kjv.xml" />
+          <File Id="sf_luther_1545_letzte_hand_rev1.xml"
+                Name="sf_luther_1545_letzte_hand_rev1.xml"
+                Source="$(var.PraiseBase_Presenter.ProjectDir)Resources\Dist\Bibles\sf_luther_1545_letzte_hand_rev1.xml" />
+          <File Id="luther1912.xml"
+                Name="luther1912.xml"
+                Source="$(var.PraiseBase_Presenter.ProjectDir)Resources\Dist\Bibles\luther1912.xml" />
+        </Component>
+      </Directory>
+      <Directory Id="SetlistsFolder" Name="Setlists">
+        <Component Id="SetlistsFolder" Guid="8ae9f663-8f93-4b44-b8d2-a889dc92982e" Permanent="yes">
+          <CreateFolder />
+          <RemoveFolder Id='SetlistsFolder' On='uninstall'/>
+          <RegistryValue Root='HKCU' Key='Software\[Manufacturer]\[ProductName]' Type='string' Value='' KeyPath='yes' />
+        </Component>
+      </Directory>
+    </DirectoryRef>
+
+    <DirectoryRef Id="BackgroundsFolder">
+      <Directory Id="BackgroundSamplesFolder" Name="Sample">
+        <Component Id="BackgroundSamplesFolder" Guid="c0f93bb4-48d9-4952-8acb-aeaa8e1e66d3" Permanent="yes">
+          <CreateFolder />
+          <RemoveFolder Id='BackgroundSamplesFolder' On='uninstall'/>
+          <RegistryValue Root='HKCU' Key='Software\[Manufacturer]\[ProductName]' Type='string' Value='' KeyPath='yes' />
+          <File Id="Berge.jpg"
+                Name="Berge.jpg"
+                Source="$(var.PraiseBase_Presenter.ProjectDir)Resources\Dist\Backgrounds\Sample\Berge.jpg" />
+          <File Id="Blume.jpg"
+                Name="Blume.jpg"
+                Source="$(var.PraiseBase_Presenter.ProjectDir)Resources\Dist\Backgrounds\Sample\Blume.jpg" />
+          <File Id="Feuer.jpg"
+                Name="Feuer.jpg"
+                Source="$(var.PraiseBase_Presenter.ProjectDir)Resources\Dist\Backgrounds\Sample\Feuer.jpg" />
+          <File Id="Landschaft.jpg"
+                Name="Landschaft.jpg"
+                Source="$(var.PraiseBase_Presenter.ProjectDir)Resources\Dist\Backgrounds\Sample\Landschaft.jpg" />
+          <File Id="Meer.jpg"
+                Name="Meer.jpg"
+                Source="$(var.PraiseBase_Presenter.ProjectDir)Resources\Dist\Backgrounds\Sample\Meer.jpg" />
+          <File Id="Menschen.jpg"
+                Name="Menschen.jpg"
+                Source="$(var.PraiseBase_Presenter.ProjectDir)Resources\Dist\Backgrounds\Sample\Menschen.jpg" />
+          <File Id="night_sky_1024.jpg"
+                Name="night_sky_1024.jpg"
+                Source="$(var.PraiseBase_Presenter.ProjectDir)Resources\Dist\Backgrounds\Sample\night_sky_1024.jpg" />
+          <File Id="Sonne.jpg"
+                Name="Sonne.jpg"
+                Source="$(var.PraiseBase_Presenter.ProjectDir)Resources\Dist\Backgrounds\Sample\Sonne.jpg" />
+          <File Id="Wald.jpg"
+                Name="Wald.jpg"
+                Source="$(var.PraiseBase_Presenter.ProjectDir)Resources\Dist\Backgrounds\Sample\Wald.jpg" />
+          <File Id="Wasser.jpg"
+                Name="Wasser.jpg"
+                Source="$(var.PraiseBase_Presenter.ProjectDir)Resources\Dist\Backgrounds\Sample\Wasser.jpg" />
+          <File Id="Wolken.jpg"
+                Name="Wolken.jpg"
+                Source="$(var.PraiseBase_Presenter.ProjectDir)Resources\Dist\Backgrounds\Sample\Wolken.jpg" />
+          <File Id="Wueste.jpg"
+                Name="Wüste.jpg"
+                Source="$(var.PraiseBase_Presenter.ProjectDir)Resources\Dist\Backgrounds\Sample\Wüste.jpg" />
+        </Component>
+      </Directory>
+    </DirectoryRef>
+
+
+        <Feature Id="ProductFeature" 
              Title="$(var.PraiseBase_Presenter.ProjectName)" 
              Level="1">
       <ComponentRef Id="ProductComponent" />
@@ -72,6 +182,12 @@
       <ComponentRef Id="LicenseTxt" />
       <ComponentRef Id="ApplicationStartMenuShortcut" />
       <ComponentRef Id="DesktopShortcut" />
+      <ComponentRef Id="DataFolder" />
+      <ComponentRef Id="BackgroundsFolder" />
+      <ComponentRef Id="BackgroundSamplesFolder" />
+      <ComponentRef Id="SongsFolder" />
+      <ComponentRef Id="SetlistsFolder" />
+      <ComponentRef Id="BiblesFolder" />
       <!-- Note: The following ComponentGroupRef is required to pull in generated authoring from project references. -->
       <ComponentGroupRef Id="Product.Generated" />
     </Feature>

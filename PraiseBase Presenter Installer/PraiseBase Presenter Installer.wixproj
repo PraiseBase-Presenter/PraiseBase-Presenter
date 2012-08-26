@@ -36,13 +36,23 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <WixExtension Include="WixFileVersionExtension">
+      <HintPath>Extensions\WixFileVersionExtension.dll</HintPath>
+      <Name>WixFileVersionExtension</Name>
+    </WixExtension>
     <WixExtension Include="WixUIExtension">
       <HintPath>$(WixExtDir)\WixUIExtension.dll</HintPath>
       <Name>WixUIExtension</Name>
     </WixExtension>
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Extensions" />
     <Folder Include="Resources" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Extensions\WixFileVersionExtension.dll" />
+    <Content Include="Resources\Background.bmp" />
+    <Content Include="Resources\Banner.bmp" />
   </ItemGroup>
   <Import Project="$(WixTargetsPath)" />
   <!--

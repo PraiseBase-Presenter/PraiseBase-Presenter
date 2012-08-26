@@ -1588,10 +1588,13 @@ namespace Pbp.Forms
             {
                 comboBoxBible.Items.Clear();
                 BibleManager.Instance.loadBibleInfo();
-                comboBoxBible.DataSource =  new BindingSource(BibleManager.Instance.BibleList, null);
-                comboBoxBible.DisplayMember = "Value";
-                comboBoxBible.ValueMember = "Key";
-                comboBoxBible.SelectedIndex = 0;
+                if (BibleManager.Instance.BibleList.Count > 0)
+                {
+                    comboBoxBible.DataSource = new BindingSource(BibleManager.Instance.BibleList, null);
+                    comboBoxBible.DisplayMember = "Value";
+                    comboBoxBible.ValueMember = "Key";
+                    comboBoxBible.SelectedIndex = 0;
+                }
             }
         }
 
