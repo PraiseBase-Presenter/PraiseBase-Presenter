@@ -143,5 +143,14 @@
     <Setting Name="ProjectionFadeTimeLayer1" Type="System.Int32" Scope="User">
       <Value Profile="(Default)">1000</Value>
     </Setting>
+    <Setting Name="SongDefaultName" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">Neues Lied</Value>
+    </Setting>
+    <Setting Name="SongDefaultLanguage" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">Deutsch</Value>
+    </Setting>
+    <Setting Name="SongPartDefaultName" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">Teil 1</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

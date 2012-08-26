@@ -64,7 +64,7 @@ namespace Pbp.Forms
             childForm.MdiParent = this;
             childForm.Tag = "";
 
-            childForm.Text = "Neues Lied " + ++childFormNumber;
+            childForm.Text = childForm.sng.Title + ++childFormNumber;
             childForm.Show();
         }
 

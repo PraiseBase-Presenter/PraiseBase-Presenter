@@ -186,8 +186,8 @@ namespace Pbp
             {
                 if (elem.Name == "part")
                 {
-                    string caption = elem.GetAttribute("caption");
-                    var tmpPart = new SongPart(caption);
+                    var tmpPart = new SongPart();
+                    tmpPart.Caption = elem.GetAttribute("caption");
                     foreach (XmlElement slideElem in elem)
                     {
                         if (slideElem.Name == "slide")

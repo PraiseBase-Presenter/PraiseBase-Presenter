@@ -40,9 +40,6 @@ namespace Pbp
     /// </summary>
     public class Song
     {
-        public const string DefaultTitle = "Neues Lied";
-        public const string DefaultLanguage = "Deutsch";
-
         #region Fields
 
         /// <summary>
@@ -244,8 +241,6 @@ namespace Pbp
             RelativeImagePaths = new List<string>();
             SearchText = String.Empty;
 
-            Title = DefaultTitle;
-            Language = DefaultLanguage;
             Comment = String.Empty;
 
             QualityIssues = new List<QualityAssuranceIndicators>();

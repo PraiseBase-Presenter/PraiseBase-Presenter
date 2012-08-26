@@ -36,18 +36,8 @@ namespace Pbp
         /// Part constructor
         /// </summary>
         public SongPart()
-            : this("Neuer Liedteil")
-        {
-        }
-
-        /// <summary>
-        /// Part constructor
-        /// </summary>
-        /// <param name="caption">The part's caption</param>
-        public SongPart(string caption)
         {
             Slides = new SongSlideList();
-            Caption = caption;
         }
 
         /// <summary>

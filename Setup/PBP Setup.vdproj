@@ -7,6 +7,10 @@
 "LanguageId" = "3:1031"
 "CodePage" = "3:1252"
 "UILanguageId" = "3:1031"
+"SccProjectName" = "8:"
+"SccLocalPath" = "8:"
+"SccAuxPath" = "8:"
+"SccProvider" = "8:"
     "Hierarchy"
     {
         "Entry"
@@ -143,7 +147,7 @@
                 {
                 "Name" = "8:.NET Framework"
                 "Message" = "8:[VSDNETMSG]"
-                "FrameworkVersion" = "8:3.5.21022    "
+                "FrameworkVersion" = "8:3.5.21022     "
                 "AllowLaterVersions" = "11:FALSE"
                 "InstallUrl" = "8:http://go.microsoft.com/fwlink/?LinkId=76617"
                 }
@@ -1112,7 +1116,7 @@
             }
             "{5259A561-127C-4D43-A0A1-72F10C7B3BF8}:_F5E4D3943A5E465F9CE60DADF7E565F8"
             {
-            "SourcePath" = "8:..\\Presenter\\obj\\Release\\PraiseBase Presenter.exe"
+            "SourcePath" = "8:..\\Presenter\\obj\\Debug\\PraiseBase Presenter.exe"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_652006A2EF4547DB9902B153D90966C9"

@@ -463,5 +463,32 @@ namespace Pbp.Properties {
                 this["ProjectionFadeTimeLayer1"] = value;
             }
         }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("Neues Lied")]
+        public string SongDefaultName {
+            get {
+                return ((string)(this["SongDefaultName"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("Deutsch")]
+        public string SongDefaultLanguage {
+            get {
+                return ((string)(this["SongDefaultLanguage"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("Teil 1")]
+        public string SongPartDefaultName {
+            get {
+                return ((string)(this["SongPartDefaultName"]));
+            }
+        }
     }
 }

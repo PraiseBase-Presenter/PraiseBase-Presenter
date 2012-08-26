@@ -35,7 +35,7 @@ namespace Pbp.Forms
 {
     public partial class EditorChild : Form
     {
-        protected Song sng;
+        public Song sng { get; protected set; }
         protected String songFilename;
 
         private ProjectionWindow projWindow;
@@ -71,7 +71,10 @@ namespace Pbp.Forms
             else
             {
                 sng = new Song();
-                var tmpPart = new SongPart();
+                sng.Title = Pbp.Properties.Settings.Default.SongDefaultName;
+                sng.Language = Pbp.Properties.Settings.Default.SongDefaultLanguage;
+                SongPart tmpPart = new SongPart();
+                tmpPart.Caption = Pbp.Properties.Settings.Default.SongPartDefaultName;
                 tmpPart.Slides.Add(new SongSlide(sng));
                 sng.Parts.Add(tmpPart);
             }
@@ -292,7 +295,8 @@ namespace Pbp.Forms
 
         private void addSongPart(string caption)
         {
-            SongPart prt = new SongPart(caption);
+            SongPart prt = new SongPart();
+            prt.Caption = caption;
             SongSlide sld = new SongSlide(sng);
             sld.ImageNumber = 0;
             sld.HorizontalAlign = sng.DefaultHorizAlign;
@@ -638,9 +642,9 @@ namespace Pbp.Forms
 
         public void saveAs()
         {
-            if (sng.Title == "Neues Lied")
+            if (sng.Title == Pbp.Properties.Settings.Default.SongDefaultName)
             {
-                if (MessageBox.Show("Hat das Lied wirklich den Standardnamen 'Neues Lied'?", "Achtung", MessageBoxButtons.YesNo) == System.Windows.Forms.DialogResult.No)
+                if (MessageBox.Show("Hat das Lied wirklich den Standardnamen '" + sng.Title + "'?", "Achtung", MessageBoxButtons.YesNo) == System.Windows.Forms.DialogResult.No)
                 {
                     textBoxSongTitle.SelectAll();
                     textBoxSongTitle.Focus();
@@ -927,7 +931,7 @@ namespace Pbp.Forms
 
         private void EditorChild_Shown(object sender, EventArgs e)
         {
-            if (textBoxSongTitle.Text == "Neues Lied")
+            if (textBoxSongTitle.Text == Pbp.Properties.Settings.Default.SongDefaultName)
             {
                 textBoxSongTitle.SelectAll();
                 textBoxSongTitle.Focus();
@@ -936,7 +940,7 @@ namespace Pbp.Forms
 
         private void textBoxSongTitle_Enter(object sender, EventArgs e)
         {
-            if (textBoxSongTitle.Text == "Neues Lied")
+            if (textBoxSongTitle.Text == Pbp.Properties.Settings.Default.SongDefaultName)
             {
                 textBoxSongTitle.SelectAll();
             }

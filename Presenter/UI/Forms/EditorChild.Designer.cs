@@ -266,7 +266,7 @@
             this.textBoxSongText.Name = "textBoxSongText";
             this.textBoxSongText.ScrollBars = System.Windows.Forms.ScrollBars.Both;
             this.textBoxSongText.Size = new System.Drawing.Size(318, 596);
-            this.textBoxSongText.TabIndex = 70;
+            this.textBoxSongText.TabIndex = 2;
             this.textBoxSongText.KeyUp += new System.Windows.Forms.KeyEventHandler(this.textBoxSongText_KeyUp);
             // 
             // slideContextMenu
@@ -385,7 +385,7 @@
             this.textBoxSongTitle.Location = new System.Drawing.Point(9, 31);
             this.textBoxSongTitle.Name = "textBoxSongTitle";
             this.textBoxSongTitle.Size = new System.Drawing.Size(238, 22);
-            this.textBoxSongTitle.TabIndex = 86;
+            this.textBoxSongTitle.TabIndex = 1;
             this.textBoxSongTitle.Enter += new System.EventHandler(this.textBoxSongTitle_Enter);
             // 
             // tabControlTextLayer
