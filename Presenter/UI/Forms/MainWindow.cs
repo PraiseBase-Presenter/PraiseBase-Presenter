@@ -153,9 +153,7 @@ namespace Pbp.Forms
 
         private void loadSongList()
         {
-            setStatus("Lade Liederliste...");
             searchSongs("");
-            setStatus(listViewSongs.Items.Count + " Lieder geladen");
         }
 
         private void searchSongs(string needle)
@@ -391,8 +389,6 @@ namespace Pbp.Forms
 
             if (ProjectionWindow.Instance != null)
             {
-                setStatus("Projiziere '" + SongManager.Instance.CurrentSong.Song.Title + "' ...");
-
                 SongSlide cs = SongManager.Instance.CurrentSong.Song.Parts[e.PartNumber].Slides[e.SlideNumber];
                 var ssl = new SongSlideLayer(cs);
 
@@ -429,7 +425,6 @@ namespace Pbp.Forms
                     if (SongManager.Instance.CurrentSong.Song.RelativeImagePaths.Count > 0)
                         imageHistoryAdd(SongManager.Instance.CurrentSong.Song.RelativeImagePaths[cs.ImageNumber - 1]);
                 }
-                setStatus("'" + SongManager.Instance.CurrentSong.Song.Title + "' ist aktiv");
             }
         }
 
@@ -488,7 +483,7 @@ namespace Pbp.Forms
 
         public void imageTreeViewInit()
         {
-            string rootDir = Settings.Default.DataDirectory + Path.DirectorySeparatorChar + Settings.Default.ImageDir;
+            string rootDir = ImageManager.Instance.ImageDirPath;
             treeViewImageDirectories.Nodes.Clear();
             PopulateTreeView(rootDir, null);
             treeViewImageDirectories.ExpandAll();
@@ -544,9 +539,7 @@ namespace Pbp.Forms
 
                     if (directoryArray.Length != 0)
                     {
-                        int subLen =
-                            (Settings.Default.DataDirectory + Path.DirectorySeparatorChar + Settings.Default.ImageDir +
-                             Path.DirectorySeparatorChar).Length;
+                        int subLen = (ImageManager.Instance.ImageDirPath + Path.DirectorySeparatorChar).Length;
                         foreach (string directory in directoryArray)
                         {
                             string dName = Path.GetFileName(directory);
@@ -592,8 +585,7 @@ namespace Pbp.Forms
 
                     var lviList = new List<ListViewItem>();
 
-                    string pathPrefix = Settings.Default.DataDirectory + Path.DirectorySeparatorChar +
-                                        Settings.Default.ThumbDir + Path.DirectorySeparatorChar;
+                    string pathPrefix = ImageManager.Instance.ThumbDirPath + Path.DirectorySeparatorChar;
                     int i = 0;
 
                     foreach (string file in imageSearchResults)
@@ -612,10 +604,8 @@ namespace Pbp.Forms
                 }
                 else
                 {
-                    string relativeImageDir = ((string)treeViewImageDirectories.SelectedNode.Tag) +
-                                              Path.DirectorySeparatorChar;
-                    string imDir = Settings.Default.DataDirectory + Path.DirectorySeparatorChar +
-                                   Settings.Default.ThumbDir + Path.DirectorySeparatorChar + relativeImageDir;
+                    string relativeImageDir = ((string)treeViewImageDirectories.SelectedNode.Tag) + Path.DirectorySeparatorChar;
+                    string imDir = ImageManager.Instance.ThumbDirPath + Path.DirectorySeparatorChar + relativeImageDir;
 
                     if (Directory.Exists(imDir))
                     {
@@ -906,65 +896,6 @@ namespace Pbp.Forms
             textBoxDiaDuration.Enabled = false;
         }
 
-        private void checkBoxQASpelling_CheckedChanged(object sender, EventArgs e)
-        {
-            if ((Nullable<SongManager.SongItem>)SongManager.Instance.CurrentSong != null)
-            {
-                if (((CheckBox)sender).Checked)
-                {
-                    SongManager.Instance.CurrentSong.Song.setQA(QualityAssuranceIndicators.Spelling);
-                }
-                else
-                {
-                    SongManager.Instance.CurrentSong.Song.remQA(QualityAssuranceIndicators.Spelling);
-                }
-
-                SongManager.Instance.saveCurrentSong();
-
-                setStatus("Qualitätssicherungs-Information gespeichert!");
-            }
-        }
-
-        /*
-        private void checkBoxQATranslation_CheckedChanged(object sender, EventArgs e)
-        {
-            if (SongManager.Instance.CurrentSong != null)
-            {
-                if (((CheckBox) sender).Checked)
-                    SongManager.Instance.CurrentSong.setQA(Song.QualityAssuranceIndicators.Translation);
-                else
-                    SongManager.Instance.CurrentSong.remQA(Song.QualityAssuranceIndicators.Translation);
-                SongManager.Instance.CurrentSong.save(null);
-                setStatus("Qualitätssicherungs-Information gespeichert!");
-            }
-        }
-
-        private void checkBoxQAImages_CheckedChanged(object sender, EventArgs e)
-        {
-            if (SongManager.Instance.CurrentSong != null)
-            {
-                if (((CheckBox) sender).Checked)
-                    SongManager.Instance.CurrentSong.setQA(Song.QualityAssuranceIndicators.Images);
-                else
-                    SongManager.Instance.CurrentSong.remQA(Song.QualityAssuranceIndicators.Images);
-                SongManager.Instance.CurrentSong.save(null);
-                setStatus("Qualitätssicherungs-Information gespeichert!");
-            }
-        }
-
-        private void checkBoxQASegmentation_CheckedChanged(object sender, EventArgs e)
-        {
-            if (SongManager.Instance.CurrentSong != null)
-            {
-                if (((CheckBox) sender).Checked)
-                    SongManager.Instance.CurrentSong.setQA(Song.QualityAssuranceIndicators.Segmentation);
-                else
-                    SongManager.Instance.CurrentSong.remQA(Song.QualityAssuranceIndicators.Segmentation);
-                SongManager.Instance.CurrentSong.save(null);
-                setStatus("Qualitätssicherungs-Information gespeichert!");
-            }
-        } */
-
         private void listViewDirectoryImages_Leave(object sender, EventArgs e)
         {
             if (listViewDirectoryImages.SelectedIndices.Count > 0)
@@ -1030,8 +961,7 @@ namespace Pbp.Forms
             {
                 treeViewImageDirectories.SelectedNode = null;
                 imageSearchResults.Clear();
-                string rootDir = Settings.Default.DataDirectory + Path.DirectorySeparatorChar +
-                                 Settings.Default.ThumbDir + Path.DirectorySeparatorChar;
+                string rootDir = ImageManager.Instance.ThumbDirPath + Path.DirectorySeparatorChar;
                 int rootDirStrLen = rootDir.Length;
                 string[] imgFilePaths = Directory.GetFiles(rootDir, "*.jpg", SearchOption.AllDirectories);
 
@@ -1216,15 +1146,6 @@ namespace Pbp.Forms
             }
         }
 
-        public void setStatus(string text)
-        {
-            /*toolStripStatusLabelInfo.Text = text;
-            var statusTimer = new Timer();
-            statusTimer.Interval = 2000;
-            statusTimer.Tick += statusTimer_Tick;
-            statusTimer.Start();*/
-        }
-
         private void liederToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Process.Start(Settings.Default.DataDirectory + Path.DirectorySeparatorChar + Settings.Default.SongDir);
@@ -1232,7 +1153,7 @@ namespace Pbp.Forms
 
         private void bilderToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Process.Start(Settings.Default.DataDirectory + Path.DirectorySeparatorChar + Settings.Default.ImageDir);
+            Process.Start(ImageManager.Instance.ImageDirPath);
         }
 
         private void setlistenToolStripMenuItem_Click(object sender, EventArgs e)

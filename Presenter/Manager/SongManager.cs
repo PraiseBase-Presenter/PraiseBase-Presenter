@@ -83,6 +83,11 @@ namespace Pbp
             get { return CurrentSong.Song.Parts[CurrentPartNr].Slides[CurrentSlideNr]; }
         }
 
+        /// <summary>
+        /// Path to the song root directory
+        /// </summary>
+        public string SongDirPath { get; protected set; }
+
         #region Events
 
         public delegate void SongLoad(SongLoadEventArgs e);
@@ -95,13 +100,10 @@ namespace Pbp
 
             public int Total { get; set; }
 
-            public string Title { get; set; }
-
-            public SongLoadEventArgs(int number, int total, string title)
+            public SongLoadEventArgs(int number, int total)
             {
                 this.Number = number;
                 this.Total = total;
-                this.Title = title;
             }
         }
 
@@ -122,6 +124,12 @@ namespace Pbp
         {
             CurrentPartNr = 0;
             CurrentSlideNr = 0;
+
+            SongDirPath = Settings.Default.DataDirectory + Path.DirectorySeparatorChar + Settings.Default.SongDir;
+            if (!Directory.Exists(SongDirPath))
+            {
+                Directory.CreateDirectory(SongDirPath);
+            }
         }
 
         /// <summary>
@@ -130,18 +138,11 @@ namespace Pbp
         /// </summary>
         public void reload()
         {
-            // Define search directory
-            string searchDir = Settings.Default.DataDirectory + Path.DirectorySeparatorChar + Settings.Default.SongDir;
-            if (!Directory.Exists(searchDir))
-            {
-                Directory.CreateDirectory(searchDir);
-            }
-
             // Find song files
             var songPaths = new List<string>();
             foreach (string ext in SongFileReader.getSupportedExtensions())
             {
-                string[] songFilePaths = Directory.GetFiles(searchDir, "*." + ext, SearchOption.AllDirectories);
+                string[] songFilePaths = Directory.GetFiles(SongDirPath, "*." + ext, SearchOption.AllDirectories);
                 songPaths.AddRange(songFilePaths);
             }
             int cnt = songPaths.Count;
@@ -160,9 +161,9 @@ namespace Pbp
                     si.Filetype = Path.GetExtension(path);
 
                     SongList.Add(si.Song.GUID, si);
-                    if (i % 10 == 0)
+                    if (i % 25 == 0)
                     {
-                        SongLoadEventArgs e = new SongLoadEventArgs(i, cnt, si.Song.Title);
+                        SongLoadEventArgs e = new SongLoadEventArgs(i, cnt);
                         OnSongLoaded(e);
                     }
                     i++;

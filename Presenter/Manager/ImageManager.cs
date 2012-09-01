@@ -54,15 +54,17 @@ namespace Pbp
         /// </summary>
         public Image currentImage { get; set; }
 
+
+
         /// <summary>
         /// Base path to the image directory
         /// </summary>
-        protected string imageDirPath;
+        public string ImageDirPath { get; protected set; }
 
         /// <summary>
         /// Base path to the thumbnails directory
         /// </summary>
-        protected string thumbDirPath;
+        public string ThumbDirPath { get; protected set; }
 
         #region Events
 
@@ -98,10 +100,19 @@ namespace Pbp
         /// </summary>
         protected ImageManager()
         {
-            imageDirPath = Settings.Default.DataDirectory + Path.DirectorySeparatorChar + 
-                Settings.Default.ImageDir + Path.DirectorySeparatorChar;
-            thumbDirPath = Settings.Default.DataDirectory + Path.DirectorySeparatorChar + 
-                Settings.Default.ThumbDir + Path.DirectorySeparatorChar;
+            ImageDirPath = Settings.Default.DataDirectory + Path.DirectorySeparatorChar + 
+                Settings.Default.ImageDir;
+            if (!Directory.Exists(ImageDirPath))
+            {
+                Directory.CreateDirectory(ImageDirPath);
+            }
+
+            ThumbDirPath = Settings.Default.DataDirectory + Path.DirectorySeparatorChar +
+                Settings.Default.ThumbDir;
+            if (!Directory.Exists(ThumbDirPath))
+            {
+                Directory.CreateDirectory(ThumbDirPath);
+            }
         }
 
         /// <summary>
@@ -124,30 +135,24 @@ namespace Pbp
         /// <param name="ldg"></param>
         public void checkThumbs()
         {
-            if (!Directory.Exists(imageDirPath))
-            {
-                Directory.CreateDirectory(imageDirPath);
-            }
-            if (!Directory.Exists(thumbDirPath))
-            {
-                Directory.CreateDirectory(thumbDirPath);
-            }
-
             string[] imgExtensions = { "*.jpg" };
 
             List<string> missingThumbsSrc = new List<string>();
             List<string> missingThumbsTrg = new List<string>();
             foreach (string ext in imgExtensions)
             {
-                string[] paths = Directory.GetFiles(imageDirPath, ext, SearchOption.AllDirectories);
+                string[] paths = Directory.GetFiles(ImageDirPath, ext, SearchOption.AllDirectories);
                 foreach (string file in paths)
                 {
-                    string relativePath = file.Substring((imageDirPath + Path.DirectorySeparatorChar).Length);
-                    string thumbPath = thumbDirPath + relativePath;
-                    if (!File.Exists(thumbPath))
+                    if (!file.Contains("[Thumbnails]"))
                     {
-                        missingThumbsSrc.Add(file);
-                        missingThumbsTrg.Add(thumbPath);
+                        string relativePath = file.Substring((ImageDirPath + Path.DirectorySeparatorChar).Length);
+                        string thumbPath = ThumbDirPath + Path.DirectorySeparatorChar + relativePath;
+                        if (!File.Exists(thumbPath))
+                        {
+                            missingThumbsSrc.Add(file);
+                            missingThumbsTrg.Add(thumbPath);
+                        }
                     }
                 }
             }
@@ -158,7 +163,7 @@ namespace Pbp
                 for (int i = 0; i < cnt; i++)
                 {
                     ImageUtils.createThumb(missingThumbsSrc[i], missingThumbsTrg[i], Settings.Default.ThumbSize);
-                    if (i % 5 == 0)
+                    if (i % 10 == 0)
                     {
                         ThumbnailCreateEventArgs e = new ThumbnailCreateEventArgs(i, cnt);
                         OnThumbnailCreated(e);
@@ -169,23 +174,23 @@ namespace Pbp
 
         public bool imageExists(string relativePath)
         {
-            return File.Exists(imageDirPath + relativePath);
+            return File.Exists(ImageDirPath + Path.DirectorySeparatorChar + relativePath);
         }
 
         public Image getThumbFromRelPath(string relativePath)
         {
-            if (File.Exists(thumbDirPath + relativePath))
+            if (File.Exists(ThumbDirPath + Path.DirectorySeparatorChar + relativePath))
             {
-                return Image.FromFile(thumbDirPath + relativePath);
+                return Image.FromFile(ThumbDirPath + Path.DirectorySeparatorChar + relativePath);
             }
             return null;
         }
 
         public Image getImageFromRelPath(string relativePath)
         {
-            if (File.Exists(imageDirPath + relativePath))
+            if (File.Exists(ImageDirPath + Path.DirectorySeparatorChar + relativePath))
             {
-                return Image.FromFile(imageDirPath + relativePath);
+                return Image.FromFile(ImageDirPath + Path.DirectorySeparatorChar + relativePath);
             }
             return null;
         }

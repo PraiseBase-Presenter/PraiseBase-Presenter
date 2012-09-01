@@ -56,7 +56,6 @@ namespace Pbp
                 mutex = System.Threading.Mutex.OpenExisting(mutexName);
 
                 //since it hasn’t thrown an exception, then we already have one copy of the app open.
-
                 object[] attributes = System.Reflection.Assembly.GetExecutingAssembly().GetCustomAttributes(typeof(System.Reflection.AssemblyProductAttribute), false);
                 String appTitle = ((System.Reflection.AssemblyProductAttribute)attributes[0]).Product;
 
@@ -82,10 +81,9 @@ namespace Pbp
 
             if (Settings.Default.ShowLoadingScreen)
             {
-                var ldg = new LoadingScreen();
+                LoadingScreen ldg = new LoadingScreen();
                 ldg.setLabel("PraiseBase Presenter wird gestartet...");
                 ldg.Show();
-                Application.DoEvents();
 
                 ldg.setLabel("Prüfe Miniaturbilder...");
                 ImageManager.Instance.checkThumbs();
@@ -96,23 +94,20 @@ namespace Pbp
                 ldg.setLabel("Suche Projektionsschirm...");
                 var prjw = ProjectionWindow.Instance;
 
-                ldg.setLabel("Initialisiere Programmoberfläche...");
                 GC.Collect();
                 ldg.Close();
                 ldg.Dispose();
             }
             else
             {
-                SongManager.Instance.reload();
                 ImageManager.Instance.checkThumbs();
+                SongManager.Instance.reload();
                 var prjw = ProjectionWindow.Instance;
                 GC.Collect();
             }
 
             Console.WriteLine("Loading took " + (DateTime.Now - startTime).TotalSeconds + " seconds!");
-
             Application.Run(MainWindow.Instance);
-
             GC.KeepAlive(mutex);
         }
     }
