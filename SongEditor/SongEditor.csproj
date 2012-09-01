@@ -41,9 +41,9 @@
     <Compile Include="Editor.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Presenter\Core.csproj">
+    <ProjectReference Include="..\Presenter\PraiseBase Presenter.csproj">
       <Project>{33D2BC6A-0AD1-4E2E-AF35-FFFB744F22C6}</Project>
-      <Name>Core</Name>
+      <Name>PraiseBase Presenter</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

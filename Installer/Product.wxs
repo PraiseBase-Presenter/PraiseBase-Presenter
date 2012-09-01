@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<?define UpgradeId="42A8F680-7229-4303-8772-04605BB741C7"?>
 <!-- Preprocessor variables (fileVersion requires WixFileVersionExtension -->
 <?define ProductName="$(fileVersion.ProductName($(var.PraiseBase_Presenter.TargetPath)))" ?>
 <?define CompanyName="$(fileVersion.CompanyName($(var.PraiseBase_Presenter.TargetPath)))" ?>
@@ -9,10 +10,22 @@
            Version="$(var.ProductVersion)"
            Manufacturer="$(var.CompanyName)"
            Language="1031" 
-           UpgradeCode="ae6f4ec6-c8e4-4ce0-8db8-0a1cac2ac529">
+           UpgradeCode="$(var.UpgradeId)">
     <Package InstallerVersion="200" Compressed="yes" />
     <Media Id="1" Cabinet="media1.cab" EmbedCab="yes" />
-    
+
+    <Property Id="PREVIOUSVERSIONSINSTALLED" Secure="yes" />
+    <Upgrade Id="$(var.UpgradeId)">
+      <UpgradeVersion
+         Minimum="0.0.0.0" Maximum="$(var.ProductVersion)"
+         Property="PREVIOUSVERSIONSINSTALLED"
+         IncludeMinimum="yes" IncludeMaximum="no" />
+    </Upgrade>
+
+    <InstallExecuteSequence>
+      <RemoveExistingProducts After="InstallInitialize" />
+    </InstallExecuteSequence>
+
     <!-- Set icon -->
     <Icon Id="icon.ico" SourceFile="$(var.PraiseBase_Presenter.ProjectDir)Resources\Application\Computer.ico"/>
     <Property Id="ARPPRODUCTICON" Value="icon.ico" />
@@ -31,7 +44,7 @@
       <Directory Id="ProgramFilesFolder">
         <Directory Id="INSTALLLOCATION" Name="$(var.PraiseBase_Presenter.ProjectName)">
           <Component Id="ProductComponent" Guid="973a7a66-c64c-42c4-9bb0-19ed07c65f57">
-            <File Id="MyApplicationFile" 
+            <File Id="MainProgramFile" 
                   Name="$(var.PraiseBase_Presenter.TargetFileName)" 
                   Source="$(var.PraiseBase_Presenter.TargetPath)"
                   KeyPath="yes" />

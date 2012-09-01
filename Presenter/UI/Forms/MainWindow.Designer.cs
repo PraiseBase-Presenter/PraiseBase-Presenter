@@ -105,6 +105,7 @@
             this.toolStripButtonDisplaySettings = new System.Windows.Forms.ToolStripButton();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.customGroupBox1 = new Pbp.Components.CustomGroupBox();
+            this.pictureBoxbeamerPreview = new System.Windows.Forms.PictureBox();
             this.labelFadeTimeLayer1 = new System.Windows.Forms.Label();
             this.labelFadeTime = new System.Windows.Forms.Label();
             this.buttonToggleLayerMode = new System.Windows.Forms.Button();
@@ -112,7 +113,6 @@
             this.buttonToggleLayer2 = new System.Windows.Forms.Button();
             this.buttonToggleLayer1 = new System.Windows.Forms.Button();
             this.label14 = new System.Windows.Forms.Label();
-            this.pictureBoxPreview = new System.Windows.Forms.PictureBox();
             this.trackBarFadeTimeLayer1 = new System.Windows.Forms.TrackBar();
             this.trackBarFadeTime = new System.Windows.Forms.TrackBar();
             this.customGroupBox3 = new Pbp.Components.CustomGroupBox();
@@ -193,7 +193,7 @@
             this.contextMenuStrip1.SuspendLayout();
             this.toolStrip1.SuspendLayout();
             this.customGroupBox1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxPreview)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxbeamerPreview)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackBarFadeTimeLayer1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackBarFadeTime)).BeginInit();
             this.customGroupBox3.SuspendLayout();
@@ -512,8 +512,8 @@
             // 
             // tabControl1
             // 
-            this.tabControl1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Left)));
+            this.tabControl1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
             this.tabControl1.Controls.Add(this.tabPage3);
             this.tabControl1.Controls.Add(this.tabPage4);
             this.tabControl1.Location = new System.Drawing.Point(3, 405);
@@ -648,8 +648,8 @@
             // listViewSongHistory
             // 
             this.listViewSongHistory.AllowDrop = true;
-            this.listViewSongHistory.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.listViewSongHistory.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.listViewSongHistory.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.columnHeader1});
             this.listViewSongHistory.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -667,9 +667,9 @@
             // 
             // tableLayoutPanel1
             // 
-            this.tableLayoutPanel1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.tableLayoutPanel1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.tableLayoutPanel1.ColumnCount = 1;
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
@@ -891,6 +891,7 @@
             // 
             this.customGroupBox1.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.customGroupBox1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.customGroupBox1.Controls.Add(this.pictureBoxbeamerPreview);
             this.customGroupBox1.Controls.Add(this.labelFadeTimeLayer1);
             this.customGroupBox1.Controls.Add(this.labelFadeTime);
             this.customGroupBox1.Controls.Add(this.buttonToggleLayerMode);
@@ -898,7 +899,6 @@
             this.customGroupBox1.Controls.Add(this.buttonToggleLayer2);
             this.customGroupBox1.Controls.Add(this.buttonToggleLayer1);
             this.customGroupBox1.Controls.Add(this.label14);
-            this.customGroupBox1.Controls.Add(this.pictureBoxPreview);
             this.customGroupBox1.Controls.Add(this.trackBarFadeTimeLayer1);
             this.customGroupBox1.Controls.Add(this.trackBarFadeTime);
             this.customGroupBox1.Location = new System.Drawing.Point(3, 101);
@@ -906,6 +906,17 @@
             this.customGroupBox1.Size = new System.Drawing.Size(254, 296);
             this.customGroupBox1.TabIndex = 21;
             this.customGroupBox1.Title = "Projektion";
+            // 
+            // pictureBoxbeamerPreview
+            // 
+            this.pictureBoxbeamerPreview.BackColor = System.Drawing.Color.Black;
+            this.pictureBoxbeamerPreview.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.pictureBoxbeamerPreview.Location = new System.Drawing.Point(3, 32);
+            this.pictureBoxbeamerPreview.Name = "pictureBoxbeamerPreview";
+            this.pictureBoxbeamerPreview.Size = new System.Drawing.Size(246, 181);
+            this.pictureBoxbeamerPreview.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBoxbeamerPreview.TabIndex = 50;
+            this.pictureBoxbeamerPreview.TabStop = false;
             // 
             // labelFadeTimeLayer1
             // 
@@ -979,17 +990,6 @@
             this.label14.TabIndex = 46;
             this.label14.Text = "Hintergrund:";
             // 
-            // pictureBoxPreview
-            // 
-            this.pictureBoxPreview.BackColor = System.Drawing.Color.Black;
-            this.pictureBoxPreview.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pictureBoxPreview.Location = new System.Drawing.Point(6, 33);
-            this.pictureBoxPreview.Name = "pictureBoxPreview";
-            this.pictureBoxPreview.Size = new System.Drawing.Size(240, 180);
-            this.pictureBoxPreview.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pictureBoxPreview.TabIndex = 34;
-            this.pictureBoxPreview.TabStop = false;
-            // 
             // trackBarFadeTimeLayer1
             // 
             this.trackBarFadeTimeLayer1.AutoSize = false;
@@ -1014,9 +1014,9 @@
             // 
             // customGroupBox3
             // 
-            this.customGroupBox3.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.customGroupBox3.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.customGroupBox3.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.customGroupBox3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.customGroupBox3.Controls.Add(this.label13);
@@ -1042,9 +1042,9 @@
             // 
             // tabControl2
             // 
-            this.tabControl2.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.tabControl2.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.tabControl2.Controls.Add(this.tabPageImageBrowser);
             this.tabControl2.Controls.Add(this.tabPageImageHistory);
             this.tabControl2.Controls.Add(this.tabPageImageFavorites);
@@ -1083,8 +1083,8 @@
             // 
             // treeViewImageDirectories
             // 
-            this.treeViewImageDirectories.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Left)));
+            this.treeViewImageDirectories.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
             this.treeViewImageDirectories.FullRowSelect = true;
             this.treeViewImageDirectories.HideSelection = false;
             this.treeViewImageDirectories.Location = new System.Drawing.Point(0, 36);
@@ -1096,9 +1096,9 @@
             // 
             // listViewDirectoryImages
             // 
-            this.listViewDirectoryImages.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.listViewDirectoryImages.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.listViewDirectoryImages.Location = new System.Drawing.Point(234, 36);
             this.listViewDirectoryImages.MultiSelect = false;
             this.listViewDirectoryImages.Name = "listViewDirectoryImages";
@@ -1141,9 +1141,9 @@
             // 
             // listViewImageHistory
             // 
-            this.listViewImageHistory.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.listViewImageHistory.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.listViewImageHistory.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.columnHeader5});
             this.listViewImageHistory.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.None;
@@ -1174,9 +1174,9 @@
             // 
             // listViewFavorites
             // 
-            this.listViewFavorites.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.listViewFavorites.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.listViewFavorites.Location = new System.Drawing.Point(0, 3);
             this.listViewFavorites.MultiSelect = false;
             this.listViewFavorites.Name = "listViewFavorites";
@@ -1244,9 +1244,9 @@
             // 
             // listViewDias
             // 
-            this.listViewDias.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.listViewDias.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.listViewDias.CheckBoxes = true;
             this.listViewDias.Location = new System.Drawing.Point(192, 29);
             this.listViewDias.MultiSelect = false;
@@ -1314,8 +1314,8 @@
             // 
             // listViewImageQueue
             // 
-            this.listViewImageQueue.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.listViewImageQueue.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.listViewImageQueue.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.columnHeader6});
             this.listViewImageQueue.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.None;
@@ -1345,9 +1345,9 @@
             // 
             // customGroupBox2
             // 
-            this.customGroupBox2.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.customGroupBox2.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.customGroupBox2.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.customGroupBox2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.customGroupBox2.Controls.Add(this.tabControlTextLayer);
@@ -1359,9 +1359,9 @@
             // 
             // tabControlTextLayer
             // 
-            this.tabControlTextLayer.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.tabControlTextLayer.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.tabControlTextLayer.Controls.Add(this.tabPage1);
             this.tabControlTextLayer.Controls.Add(this.tabPage2);
             this.tabControlTextLayer.Controls.Add(this.tabPage5);
@@ -1399,8 +1399,8 @@
             // 
             // listViewSongs
             // 
-            this.listViewSongs.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Left)));
+            this.listViewSongs.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
             this.listViewSongs.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.columnHeader2});
             this.listViewSongs.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -1429,9 +1429,9 @@
             // 
             // songDetailElement
             // 
-            this.songDetailElement.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.songDetailElement.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.songDetailElement.AutoScroll = true;
             this.songDetailElement.BackColor = System.Drawing.Color.White;
             this.songDetailElement.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
@@ -1455,7 +1455,7 @@
             this.tabPage2.Location = new System.Drawing.Point(4, 29);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(724, 239);
+            this.tabPage2.Size = new System.Drawing.Size(724, 238);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Mitteilung";
             this.tabPage2.UseVisualStyleBackColor = true;
@@ -1549,9 +1549,9 @@
             // 
             // textBoxLiveText
             // 
-            this.textBoxLiveText.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.textBoxLiveText.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.textBoxLiveText.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.textBoxLiveText.Location = new System.Drawing.Point(6, 7);
             this.textBoxLiveText.Multiline = true;
@@ -1586,7 +1586,7 @@
             this.tabPage5.Location = new System.Drawing.Point(4, 29);
             this.tabPage5.Name = "tabPage5";
             this.tabPage5.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage5.Size = new System.Drawing.Size(724, 239);
+            this.tabPage5.Size = new System.Drawing.Size(724, 238);
             this.tabPage5.TabIndex = 2;
             this.tabPage5.Text = "Bibel";
             this.tabPage5.UseVisualStyleBackColor = true;
@@ -1662,8 +1662,8 @@
             // 
             this.listViewBibleVerseList.AllowDrop = true;
             this.listViewBibleVerseList.AllowRowReorder = true;
-            this.listViewBibleVerseList.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.listViewBibleVerseList.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.listViewBibleVerseList.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.columnHeader3});
             this.listViewBibleVerseList.FullRowSelect = true;
@@ -1724,8 +1724,8 @@
             // 
             // listBoxBibleVerseTo
             // 
-            this.listBoxBibleVerseTo.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Left)));
+            this.listBoxBibleVerseTo.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
             this.listBoxBibleVerseTo.FormattingEnabled = true;
             this.listBoxBibleVerseTo.Location = new System.Drawing.Point(401, 33);
             this.listBoxBibleVerseTo.Name = "listBoxBibleVerseTo";
@@ -1760,9 +1760,9 @@
             // 
             // textBoxBibleText
             // 
-            this.textBoxBibleText.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.textBoxBibleText.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.textBoxBibleText.Location = new System.Drawing.Point(457, 33);
             this.textBoxBibleText.Multiline = true;
             this.textBoxBibleText.Name = "textBoxBibleText";
@@ -1782,8 +1782,8 @@
             // 
             // listBoxBibleVerse
             // 
-            this.listBoxBibleVerse.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Left)));
+            this.listBoxBibleVerse.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
             this.listBoxBibleVerse.FormattingEnabled = true;
             this.listBoxBibleVerse.Location = new System.Drawing.Point(345, 33);
             this.listBoxBibleVerse.Name = "listBoxBibleVerse";
@@ -1823,8 +1823,8 @@
             // 
             // listBoxBibleChapter
             // 
-            this.listBoxBibleChapter.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Left)));
+            this.listBoxBibleChapter.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
             this.listBoxBibleChapter.FormattingEnabled = true;
             this.listBoxBibleChapter.Location = new System.Drawing.Point(289, 33);
             this.listBoxBibleChapter.Name = "listBoxBibleChapter";
@@ -1834,8 +1834,8 @@
             // 
             // listBoxBibleBook
             // 
-            this.listBoxBibleBook.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Left)));
+            this.listBoxBibleBook.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
             this.listBoxBibleBook.FormattingEnabled = true;
             this.listBoxBibleBook.Location = new System.Drawing.Point(163, 33);
             this.listBoxBibleBook.Name = "listBoxBibleBook";
@@ -1857,8 +1857,8 @@
             // 
             this.listViewSetList.AllowDrop = true;
             this.listViewSetList.AllowRowReorder = true;
-            this.listViewSetList.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.listViewSetList.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.listViewSetList.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.columnHeader4});
             this.listViewSetList.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -1904,7 +1904,7 @@
             this.toolStrip1.PerformLayout();
             this.customGroupBox1.ResumeLayout(false);
             this.customGroupBox1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxPreview)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxbeamerPreview)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackBarFadeTimeLayer1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackBarFadeTime)).EndInit();
             this.customGroupBox3.ResumeLayout(false);
@@ -2076,7 +2076,6 @@
         private System.Windows.Forms.Button buttonToggleLayer2;
         private System.Windows.Forms.Label labelFadeTime;
         private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.PictureBox pictureBoxPreview;
         private System.Windows.Forms.TrackBar trackBarFadeTime;
         private Components.CustomGroupBox customGroupBox1;
         private Components.CustomGroupBox customGroupBox2;
@@ -2086,6 +2085,7 @@
         private System.Windows.Forms.ToolStripMenuItem titelToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem titelUndTextToolStripMenuItem;
         private System.Windows.Forms.Label label13;
+        private System.Windows.Forms.PictureBox pictureBoxbeamerPreview;
         
     }
 }

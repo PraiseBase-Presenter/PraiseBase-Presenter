@@ -48,7 +48,7 @@ namespace Pbp.Forms
             fileBoxInitialDir = Settings.Default.DataDirectory + Path.DirectorySeparatorChar + Settings.Default.SongDir;
             fileBoxFilterIndex = 0;
             this.WindowState = Settings.Default.EditorWindowState;
-            this.Text += " " + System.Reflection.Assembly.GetExecutingAssembly().GetName().Version.ToString();
+            //this.Text += " " + System.Reflection.Assembly.GetExecutingAssembly().GetName().Version.ToString();
         }
 
         static public EditorWindow getInstance()

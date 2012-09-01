@@ -236,5 +236,29 @@ namespace Pbp
                 return ImageUtils.getEmptyImage(DefaultImageSize, Settings.Default.ProjectionBackColor);
             }
         }
+
+        /// <summary>
+        /// Searches images and returns their relative paths
+        /// </summary>
+        /// <param name="needle"></param>
+        /// <returns></returns>
+        public List<string> searchImages(string needle) {
+            List<string> results = new List<string>();
+            string rootDir = ImageManager.Instance.ThumbDirPath + Path.DirectorySeparatorChar;
+            int rootDirStrLen = rootDir.Length;
+            string[] imgFilePaths = Directory.GetFiles(rootDir, "*.jpg", SearchOption.AllDirectories);
+            foreach (string ims in imgFilePaths)
+            {
+                if (!ims.Contains("[Thumbnails]"))
+                {
+                    string haystack = Path.GetFileNameWithoutExtension(ims);
+                    if (haystack.ToLower().Contains(needle))
+                    {
+                        results.Add(ims.Substring(rootDirStrLen));
+                    }
+                }
+            }
+            return results;
+        }
     }
 }

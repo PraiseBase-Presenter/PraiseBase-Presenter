@@ -6,7 +6,7 @@
     <ProductVersion>3.5</ProductVersion>
     <ProjectGuid>{16af6a73-f74b-4934-8864-a27635f6022f}</ProjectGuid>
     <SchemaVersion>2.0</SchemaVersion>
-    <OutputName>PraiseBase Presenter Installer</OutputName>
+    <OutputName>PraiseBase_Presenter</OutputName>
     <OutputType>Package</OutputType>
     <WixTargetsPath Condition=" '$(WixTargetsPath)' == '' AND '$(MSBuildExtensionsPath32)' != '' ">$(MSBuildExtensionsPath32)\Microsoft\WiX\v3.x\Wix.targets</WixTargetsPath>
     <WixTargetsPath Condition=" '$(WixTargetsPath)' == '' ">$(MSBuildExtensionsPath)\Microsoft\WiX\v3.x\Wix.targets</WixTargetsPath>
@@ -46,7 +46,7 @@
     <Content Include="Resources\Banner.bmp" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Presenter\Core.csproj">
+    <ProjectReference Include="..\Presenter\PraiseBase Presenter.csproj">
       <Name>PraiseBase_Presenter</Name>
       <Project>{33d2bc6a-0ad1-4e2e-af35-fffb744f22c6}</Project>
       <Private>True</Private>
@@ -56,12 +56,18 @@
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(WixTargetsPath)" />
-  <!--
-	To modify your build process, add your task inside one of the targets below and uncomment it.
-	Other similar extension points exist, see Wix.targets.
-	<Target Name="BeforeBuild">
-	</Target>
-	<Target Name="AfterBuild">
-	</Target>
-	-->
+  <Target Name="BeforeBuild">
+    <GetAssemblyIdentity AssemblyFiles="$(SolutionDir)Presenter\bin\$(Configuration)\PraiseBase Presenter.exe">
+      <Output TaskParameter="Assemblies" ItemName="AssemblyVersions" />
+    </GetAssemblyIdentity>
+    <CreateProperty Value="$(OutputName)-%(AssemblyVersions.Version)">
+      <Output TaskParameter="Value" PropertyName="TargetName" />
+    </CreateProperty>
+    <CreateProperty Value="$(TargetName)$(TargetExt)">
+      <Output TaskParameter="Value" PropertyName="TargetFileName" />
+    </CreateProperty>
+    <CreateProperty Value="$(TargetDir)$(TargetFileName)">
+      <Output TaskParameter="Value" PropertyName="TargetPath" />
+    </CreateProperty>
+  </Target>
 </Project>

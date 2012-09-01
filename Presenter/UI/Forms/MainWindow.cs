@@ -97,7 +97,7 @@ namespace Pbp.Forms
             bThread.Start();
 
             WindowState = Settings.Default.ViewerWindowState;
-            Text += " " + Assembly.GetExecutingAssembly().GetName().Version;
+            //Text += " " + Assembly.GetExecutingAssembly().GetName().Version;
 
             blackout = false;
 
@@ -128,6 +128,20 @@ namespace Pbp.Forms
             {
                 titelToolStripMenuItem.Checked = false;
                 titelUndTextToolStripMenuItem.Checked = true;
+            }
+
+            ProjectionWindow.Instance.ProjectionChanged += Instance_ProjectionChanged;
+        }
+
+        void Instance_ProjectionChanged(object sender, ProjectionWindow.ProjectionChangedEventArgs e)
+        {
+            if (e.Layer == 1)
+            {
+                pictureBoxbeamerPreview.BackgroundImage = e.Image;
+            }
+            if (e.Layer == 2)
+            {
+                pictureBoxbeamerPreview.Image = e.Image;
             }
         }
 
@@ -961,20 +975,10 @@ namespace Pbp.Forms
             {
                 treeViewImageDirectories.SelectedNode = null;
                 imageSearchResults.Clear();
-                string rootDir = ImageManager.Instance.ThumbDirPath + Path.DirectorySeparatorChar;
-                int rootDirStrLen = rootDir.Length;
-                string[] imgFilePaths = Directory.GetFiles(rootDir, "*.jpg", SearchOption.AllDirectories);
 
-                foreach (string ims in imgFilePaths)
+                foreach (string ims in ImageManager.Instance.searchImages(needle))
                 {
-                    if (!ims.Contains("[Thumbnails]"))
-                    {
-                        string haystack = Path.GetFileNameWithoutExtension(ims);
-                        if (haystack.ToLower().Contains(needle))
-                        {
-                            imageSearchResults.Add(ims.Substring(rootDirStrLen));
-                        }
-                    }
+                    imageSearchResults.Add(ims);
                 }
                 treeViewImageDirectories.SelectedNode =
                     treeViewImageDirectories.Nodes[treeViewImageDirectories.Nodes.Count - 1];
@@ -1473,32 +1477,6 @@ namespace Pbp.Forms
                 showCurrentSongDetails();
             }
         }
-
-        /*
-        PowerPoint.Application oPPT = new PowerPoint.ApplicationClass();
-        PowerPoint.Presentations objPresetSet;
-        string strPres = "C:/Users/Nicolas/Documents/Visual Studio 2010/Projects/praisebase/Presenter/trunk/bin/Release/foo.pptx";
-
-        //oPPT.Visible = Microsoft.Office.Core.MsoTriState.msoTrue;
-        objPresetSet = oPPT.Presentations;
-        PowerPoint.Presentation objPreset = objPresetSet.Open2007(strPres, Microsoft.Office.Core.MsoTriState.msoFalse, Microsoft.Office.Core.MsoTriState.msoTrue, Microsoft.Office.Core.MsoTriState.msoFalse);
-        PowerPoint.SlideShowSettings objSSS = objPreset.SlideShowSettings;
-        objSSS.StartingSlide = 1;
-        objSSS.EndingSlide = objPreset.Slides.Count;
-        objSSS.Run();
-        while (oPPT.SlideShowWindows.Count >= 1)
-        {
-            System.Threading.Thread.Sleep(100);
-        }
-        try
-        {
-            objPreset.Close();
-        }
-        catch(
-        {
-        }
-        oPPT.Quit();
-         */
 
         #region Bible
 

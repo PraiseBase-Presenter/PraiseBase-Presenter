@@ -184,11 +184,11 @@ namespace Pbp.Forms
                 ((WpfProjectionControl)(projectionControlHost.Child)).SetProjectionText(bmp, fadetime);
             else
                 ((WpfProjectionControl)(projectionControlHost.Child)).SetProjectionImage(bmp, fadetime);
-            /*
+            
             if (ProjectionChanged != null)
             {
                 ProjectionChanged(this, new ProjectionChangedEventArgs { Image = bmp, Layer = layer });
-            }*/
+            }
         }
 
         public class ProjectionChangedEventArgs : EventArgs
