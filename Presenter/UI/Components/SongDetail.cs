@@ -84,7 +84,7 @@ namespace SongDetails
             Font pfnt = new Font("Arial", 16);
             Font txfnt = new Font("Arial", 11);
             int ypos = startPoint.Y;
-            ImageList thumbs = sng.getThumbs();
+            ImageList thumbs = Pbp.ImageManager.Instance.getThumbsFromList(sng.RelativeImagePaths);
 
             Size labelSize = new Size(0, 0);
             for (int i = 0; i < sng.Parts.Count; i++)

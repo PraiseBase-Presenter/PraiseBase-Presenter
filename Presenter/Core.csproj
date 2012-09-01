@@ -99,36 +99,37 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Data\Bible\Bible.cs" />
     <Compile Include="Data\Bible\Book.cs" />
     <Compile Include="Data\Bible\Chapter.cs" />
     <Compile Include="Data\Bible\Verse.cs" />
     <Compile Include="Data\Bible\VerseSelection.cs" />
+    <Compile Include="Data\Setlist.cs" />
+    <Compile Include="Data\Song\QualityAssuranceIndicator.cs" />
+    <Compile Include="Data\Song\Song.cs" />
+    <Compile Include="Data\Song\SongFileType.cs" />
+    <Compile Include="Data\Song\SongPart.cs" />
+    <Compile Include="Data\Song\SongPartList.cs" />
+    <Compile Include="Data\Song\SongSlide.cs" />
+    <Compile Include="Data\Song\SongSlideList.cs" />
+    <Compile Include="Data\TagList.cs" />
+    <Compile Include="Editor.cs" />
+    <Compile Include="IO\PowerPraiseSongFileReader.cs" />
+    <Compile Include="IO\PowerPraiseSongFileWriter.cs" />
+    <Compile Include="IO\SetlistReader.cs" />
+    <Compile Include="IO\SetlistWriter.cs" />
+    <Compile Include="IO\SongFileReader.cs" />
+    <Compile Include="IO\SongFileWriter.cs" />
     <Compile Include="IO\XMLBibleReader.cs" />
     <Compile Include="Manager\BibleManager.cs" />
     <Compile Include="Projection\BaseLayer.cs" />
     <Compile Include="Projection\BibleLayer.cs" />
-    <Compile Include="IO\SetlistWriter.cs" />
-    <Compile Include="Data\Setlist.cs" />
-    <Compile Include="IO\SetlistReader.cs" />
-    <Compile Include="Data\Song\SongFileType.cs" />
-    <Compile Include="Data\Song\SongPartList.cs" />
-    <Compile Include="Data\Song\SongSlideList.cs" />
-    <Compile Include="Data\Song\SongPart.cs" />
-    <Compile Include="IO\PowerPraiseSongFileReader.cs" />
-    <Compile Include="Data\Song\QualityAssuranceIndicator.cs" />
-    <Compile Include="IO\SongFileWriter.cs" />
-    <Compile Include="IO\PowerPraiseSongFileWriter.cs" />
-    <Compile Include="IO\SongFileReader.cs" />
     <Compile Include="Projection\SongSlideLayer.cs" />
-    <Compile Include="Data\TagList.cs" />
-    <Compile Include="Utils\UpdateCheck.cs" />
-    <Compile Include="Data\Bible\Bible.cs" />
+    <Compile Include="UpdateCheck.cs" />
     <Compile Include="Projection\LiveText.cs" />
     <Compile Include="Projection\TextLayer.cs" />
-    <Compile Include="Utils\StringUtils.cs" />
     <Compile Include="Manager\ImageManager.cs" />
     <Compile Include="Manager\SongManager.cs" />
-    <Compile Include="Data\Song\SongSlide.cs" />
     <Compile Include="UI\Components\BackgrundImageBrowser.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -242,6 +243,8 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Utils\ImageUtils.cs" />
+    <Compile Include="Utils\StringUtils.cs" />
     <Content Include="Resources\Doc\License.txt" />
     <EmbeddedResource Include="UI\Components\BackgrundImageBrowser.resx">
       <DependentUpon>BackgrundImageBrowser.cs</DependentUpon>
@@ -312,7 +315,7 @@
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
+      <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
     </EmbeddedResource>
@@ -332,7 +335,6 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
     <Compile Include="Settings.cs" />
-    <Compile Include="Data\Song\Song.cs" />
     <None Include="Resources\Application\update16.png" />
     <None Include="Resources\Application\ok16.png" />
     <None Include="Resources\Application\wheel16.png" />
@@ -523,7 +525,6 @@
     <Content Include="Resources\Dist\Bibles\luther1912.xml" />
     <Content Include="Resources\Dist\Bibles\sf_luther_1545_letzte_hand_rev1.xml" />
   </ItemGroup>
-  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

@@ -10,6 +10,7 @@
     <OutputType>Package</OutputType>
     <WixTargetsPath Condition=" '$(WixTargetsPath)' == '' AND '$(MSBuildExtensionsPath32)' != '' ">$(MSBuildExtensionsPath32)\Microsoft\WiX\v3.x\Wix.targets</WixTargetsPath>
     <WixTargetsPath Condition=" '$(WixTargetsPath)' == '' ">$(MSBuildExtensionsPath)\Microsoft\WiX\v3.x\Wix.targets</WixTargetsPath>
+    <Name>Installer</Name>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
     <OutputPath>bin\$(Configuration)\</OutputPath>
@@ -24,16 +25,6 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Product.wxs" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\Presenter\PraiseBase Presenter.csproj">
-      <Name>PraiseBase_Presenter</Name>
-      <Project>{33d2bc6a-0ad1-4e2e-af35-fffb744f22c6}</Project>
-      <Private>True</Private>
-      <DoNotHarvest>True</DoNotHarvest>
-      <RefProjectOutputGroups>Binaries;Content;Satellites</RefProjectOutputGroups>
-      <RefTargetDir>INSTALLLOCATION</RefTargetDir>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <WixExtension Include="WixFileVersionExtension">
@@ -53,6 +44,16 @@
     <Content Include="Extensions\WixFileVersionExtension.dll" />
     <Content Include="Resources\Background.bmp" />
     <Content Include="Resources\Banner.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Presenter\Core.csproj">
+      <Name>PraiseBase_Presenter</Name>
+      <Project>{33d2bc6a-0ad1-4e2e-af35-fffb744f22c6}</Project>
+      <Private>True</Private>
+      <DoNotHarvest>True</DoNotHarvest>
+      <RefProjectOutputGroups>Binaries;Content;Satellites</RefProjectOutputGroups>
+      <RefTargetDir>INSTALLLOCATION</RefTargetDir>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(WixTargetsPath)" />
   <!--

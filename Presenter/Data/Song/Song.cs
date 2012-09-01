@@ -29,7 +29,6 @@ using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
-using Pbp.Properties;
 
 namespace Pbp
 {
@@ -244,13 +243,6 @@ namespace Pbp
             Comment = String.Empty;
 
             QualityIssues = new List<QualityAssuranceIndicators>();
-
-            // Default font settings if values in xml invalid
-            TextFont = Settings.Default.ProjectionMasterFont;
-            TextColor = Settings.Default.ProjectionMasterFontColor;
-            TranslationFont = Settings.Default.ProjectionMasterFontTranslation;
-            TranslationColor = Settings.Default.ProjectionMasterTranslationColor;
-            TextLineSpacing = Settings.Default.ProjectionMasterLineSpacing;
         }
 
         public void updateSearchText()
@@ -277,48 +269,24 @@ namespace Pbp
             SearchText = _text;
         }
 
-        public ImageList getThumbs()
-        {
-            var thumbList = new ImageList();
-            thumbList.ImageSize = Settings.Default.ThumbSize;
-            thumbList.ColorDepth = ColorDepth.Depth32Bit;
-
-            thumbList.Images.Add(ImageManager.Instance.getEmptyThumb());
-            foreach (String relPath in RelativeImagePaths)
-            {
-                Image img = ImageManager.Instance.getThumbFromRelPath(relPath);
-                if (img != null)
-                    thumbList.Images.Add(img);
-            }
-            return thumbList;
-        }
-
-        public Image getImage(int nr)
+        public string getImage(int nr)
         {
             try
             {
                 if (nr < 1)
                 {
-                    return ImageManager.Instance.getEmptyImage();
+                    return null;
                 }
                 if (RelativeImagePaths[nr - 1] == null)
                 {
                     throw new Exception("Das Bild mit der Nummer " + nr + " existiert nicht!");
                 }
-                Image img = ImageManager.Instance.getImageFromRelPath(RelativeImagePaths[nr - 1]);
-                if (img != null)
-                {
-                    return img;
-                }
-                else
-                {
-                    throw new Exception("Das Bild " + RelativeImagePaths[nr - 1] + " existiert nicht!");
-                }
+                return RelativeImagePaths[nr - 1];
             }
             catch (Exception e)
             {
                 Console.WriteLine(e.Message);
-                return ImageManager.Instance.getEmptyImage();
+                return null;
             }
         }
 

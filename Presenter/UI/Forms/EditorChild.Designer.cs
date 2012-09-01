@@ -265,7 +265,7 @@
             this.textBoxSongText.Multiline = true;
             this.textBoxSongText.Name = "textBoxSongText";
             this.textBoxSongText.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.textBoxSongText.Size = new System.Drawing.Size(318, 596);
+            this.textBoxSongText.Size = new System.Drawing.Size(318, 463);
             this.textBoxSongText.TabIndex = 2;
             this.textBoxSongText.KeyUp += new System.Windows.Forms.KeyEventHandler(this.textBoxSongText_KeyUp);
             // 
@@ -746,9 +746,9 @@
             this.groupBox3.Controls.Add(this.comboBoxSlideVertOrientation);
             this.groupBox3.Controls.Add(this.comboBoxSlideHorizOrientation);
             this.groupBox3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.groupBox3.Location = new System.Drawing.Point(462, 6);
+            this.groupBox3.Location = new System.Drawing.Point(470, 6);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(502, 517);
+            this.groupBox3.Size = new System.Drawing.Size(494, 517);
             this.groupBox3.TabIndex = 100;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Sonstiges";
@@ -839,7 +839,7 @@
             this.groupBox2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.groupBox2.Location = new System.Drawing.Point(6, 6);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(450, 517);
+            this.groupBox2.Size = new System.Drawing.Size(458, 517);
             this.groupBox2.TabIndex = 99;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Schrift und Farbe";

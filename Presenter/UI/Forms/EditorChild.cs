@@ -287,7 +287,7 @@ namespace Pbp.Forms
             // TODO
             //object[] songArgs = {partId,slideId};
             //pictureBoxPreview.Image = projWindow.showSlide(sng, sng.getImage(sld.ImageNumber), songArgs, ProjectionMode.Simulate);
-            pictureBoxPreview.Image = sng.getImage(sld.ImageNumber);
+            pictureBoxPreview.Image = ImageManager.Instance.getImage(sng.getImage(sld.ImageNumber));
 
             currentPartId = partId;
             currentSlideId = slideId;
@@ -804,7 +804,7 @@ namespace Pbp.Forms
 
             // TODO
             //pictureBoxPreview.Image = projWindow.showSlide(sng, sng.getImage(sng.Parts[currentPartId].Slides[currentSlideId].ImageNumber), songArgs, ProjectionMode.Simulate);
-            pictureBoxPreview.Image = sng.getImage(sng.Parts[currentPartId].Slides[currentSlideId].ImageNumber);
+            pictureBoxPreview.Image = ImageManager.Instance.getImage(sng.getImage(sng.Parts[currentPartId].Slides[currentSlideId].ImageNumber));
         }
 
         private void textBoxSongTranslation_KeyUp(object sender, KeyEventArgs e)

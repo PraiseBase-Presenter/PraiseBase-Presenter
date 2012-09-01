@@ -35,11 +35,17 @@ namespace Pbp.Forms
         {
             InitializeComponent();
             //SongManager.Instance.SongLoaded += new SongManager.SongLoad(SongManager_SongLoaded);
+            //ImageManager.Instance.ThumbnailCreated += new ImageManager.ThumbnailCreate(ImageManager_ThumbnailCreated);
         }
 
         private void SongManager_SongLoaded(SongManager.SongLoadEventArgs e)
         {
             this.setLabel("Lade Lieder " + e.Number + "/" + e.Total + ": " + e.Title);
+        }
+
+        void  ImageManager_ThumbnailCreated(ImageManager.ThumbnailCreateEventArgs e)
+        {
+            this.setLabel("Erstelle Miniaturbilder " + e.Number + "/" + e.Total);
         }
 
         public void setLabel(string message)

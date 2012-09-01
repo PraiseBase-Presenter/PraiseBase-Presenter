@@ -32,7 +32,7 @@ using Pbp.Properties;
 
 namespace Pbp
 {
-    internal static class Program
+    internal static class Editor
     {
         /// <summary>
         /// The main entry point for the application.
@@ -40,8 +40,6 @@ namespace Pbp
         [STAThread]
         private static void Main()
         {
-            DateTime startTime = DateTime.Now;
-
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
 
@@ -69,49 +67,7 @@ namespace Pbp
                 mutex = new System.Threading.Mutex(true, mutexName);
             }
 
-            // Check Data directory
-            if (Settings.Default.DataDirectory == "")
-            {
-                Settings.Default.DataDirectory = Environment.GetFolderPath(Environment.SpecialFolder.Personal) + System.IO.Path.DirectorySeparatorChar + Settings.Default.DataDirDefaultName;
-                if (System.IO.Directory.Exists(Settings.Default.DataDirectory))
-                {
-                    System.IO.Directory.CreateDirectory(Settings.Default.DataDirectory);
-                }
-                Settings.Default.Save();
-            }
-
-            if (Settings.Default.ShowLoadingScreen)
-            {
-                var ldg = new LoadingScreen();
-                ldg.setLabel("PraiseBase Presenter wird gestartet...");
-                ldg.Show();
-                Application.DoEvents();
-
-                ldg.setLabel("Prüfe Miniaturbilder...");
-                ImageManager.Instance.checkThumbs();
-
-                ldg.setLabel("Lade Liederdatenbank...");
-                SongManager.Instance.reload();
-
-                ldg.setLabel("Suche Projektionsschirm...");
-                var prjw = ProjectionWindow.Instance;
-
-                ldg.setLabel("Initialisiere Programmoberfläche...");
-                GC.Collect();
-                ldg.Close();
-                ldg.Dispose();
-            }
-            else
-            {
-                SongManager.Instance.reload();
-                ImageManager.Instance.checkThumbs();
-                var prjw = ProjectionWindow.Instance;
-                GC.Collect();
-            }
-
-            Console.WriteLine("Loading took " + (DateTime.Now - startTime).TotalSeconds + " seconds!");
-
-            Application.Run(MainWindow.Instance);
+            Application.Run(EditorWindow.getInstance());
 
             GC.KeepAlive(mutex);
         }

@@ -1,27 +1,33 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!-- Preprocessor variables (fileVersion requires WixFileVersionExtension -->
 <?define ProductName="$(fileVersion.ProductName($(var.PraiseBase_Presenter.TargetPath)))" ?>
 <?define CompanyName="$(fileVersion.CompanyName($(var.PraiseBase_Presenter.TargetPath)))" ?>
 <?define ProductVersion="$(fileVersion.ProductVersion($(var.PraiseBase_Presenter.TargetPath)))" ?>
 <Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
-  <Product Id="88143924-1c44-4a5f-8dab-9b12d5c02979"
+  <Product Id="*"
            Name="$(var.ProductName) $(var.ProductVersion)"
            Version="$(var.ProductVersion)"
            Manufacturer="$(var.CompanyName)"
            Language="1031" 
            UpgradeCode="ae6f4ec6-c8e4-4ce0-8db8-0a1cac2ac529">
     <Package InstallerVersion="200" Compressed="yes" />
-
     <Media Id="1" Cabinet="media1.cab" EmbedCab="yes" />
+    
+    <!-- Set icon -->
     <Icon Id="icon.ico" SourceFile="$(var.PraiseBase_Presenter.ProjectDir)Resources\Application\Computer.ico"/>
     <Property Id="ARPPRODUCTICON" Value="icon.ico" />
 
+    <!-- GUI (requires WixUIExtension) -->
     <UIRef Id="WixUI_Minimal"/>
     <WixVariable Id="WixUILicenseRtf" Value="$(var.PraiseBase_Presenter.ProjectDir)Resources\Doc\License.rtf" />
     <!-- Source: http://www.flickr.com/photos/malcorp/3703556108/ -->
     <WixVariable Id="WixUIDialogBmp" Value="Resources\Background.bmp" />
     <WixVariable Id="WixUIBannerBmp" Value="Resources\Banner.bmp" />
 
+    <!-- Target directory structure -->
     <Directory Id="TARGETDIR" Name="SourceDir">
+      
+      <!-- Program files -->
       <Directory Id="ProgramFilesFolder">
         <Directory Id="INSTALLLOCATION" Name="$(var.PraiseBase_Presenter.ProjectName)">
           <Component Id="ProductComponent" Guid="973a7a66-c64c-42c4-9bb0-19ed07c65f57">
@@ -43,18 +49,19 @@
         </Directory>
       </Directory>
 
-    
-        <Directory Id="PersonalFolder">
-          <Directory Id="DataFolder" Name="$(var.PraiseBase_Presenter.ProjectName)">
-            <Component Id="DataFolder" Guid="184dc8b6-43d3-46fa-854f-5c3c6abe209e">
-              <CreateFolder />
-              <RemoveFolder Id='DataFolder' On='uninstall'/>
-              <RegistryValue Root='HKCU' Key='Software\[Manufacturer]\[ProductName]' Type='string' Value='' KeyPath='yes' />
-            </Component>
-          </Directory>
+      <!-- Personal folder -->
+      <Directory Id="PersonalFolder">
+        <Directory Id="DataFolder" Name="$(var.PraiseBase_Presenter.ProjectName)">
+          <Component Id="DataFolder" Guid="184dc8b6-43d3-46fa-854f-5c3c6abe209e">
+            <CreateFolder />
+            <RemoveFolder Id='DataFolder' On='uninstall'/>
+            <RegistryValue Root='HKCU' Key='Software\[Manufacturer]\[ProductName]' Type='string' Value='' KeyPath='yes' />
+          </Component>
         </Directory>
+      </Directory>
 
-        <Directory Id="ProgramMenuFolder" Name="Programs">
+      <!-- Start menu -->
+      <Directory Id="ProgramMenuFolder" Name="Programs">
         <Component Id="ApplicationStartMenuShortcut" Guid="A07A731E-7E98-44CE-B049-C477CC0A2B00">
           <Shortcut Id="ApplicationStartMenuShortcut"
                     Name="$(var.PraiseBase_Presenter.ProjectName)"
@@ -65,6 +72,7 @@
         </Component>
       </Directory>
 
+      <!-- Desktop -->
       <Directory Id="DesktopFolder" Name="Desktop">
         <Component Id="DesktopShortcut" Guid="d690bbf6-896d-44cb-86d0-9f42ece563cb">
           <Shortcut Id="DesktopShortcut"
@@ -78,6 +86,7 @@
       
     </Directory>
 
+    <!-- Data directory contents (Samples) -->
     <DirectoryRef Id='DataFolder'>
       <Directory Id="BackgroundsFolder" Name="Backgrounds">
         <Component Id="BackgroundsFolder" Guid="dad73b0d-d467-4cda-b9dc-7cb6768d0cc3" Permanent="yes">
@@ -127,6 +136,7 @@
       </Directory>
     </DirectoryRef>
 
+    <!-- Sample Backgrounds -->
     <DirectoryRef Id="BackgroundsFolder">
       <Directory Id="BackgroundSamplesFolder" Name="Sample">
         <Component Id="BackgroundSamplesFolder" Guid="c0f93bb4-48d9-4952-8acb-aeaa8e1e66d3" Permanent="yes">
@@ -172,11 +182,9 @@
         </Component>
       </Directory>
     </DirectoryRef>
-
-
-        <Feature Id="ProductFeature" 
-             Title="$(var.PraiseBase_Presenter.ProjectName)" 
-             Level="1">
+  
+    <!-- Features -->
+    <Feature Id="ProductFeature" Title="$(var.PraiseBase_Presenter.ProjectName)" Level="1">
       <ComponentRef Id="ProductComponent" />
       <ComponentRef Id="LicenseRtf" />
       <ComponentRef Id="LicenseTxt" />

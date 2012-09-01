@@ -22,7 +22,7 @@ namespace Pbp.Properties {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "4.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    internal class Resources {
+    public class Resources {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
@@ -36,7 +36,7 @@ namespace Pbp.Properties {
         ///   Returns the cached ResourceManager instance used by this class.
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        internal static global::System.Resources.ResourceManager ResourceManager {
+        public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
                     global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Pbp.Properties.Resources", typeof(Resources).Assembly);
@@ -51,7 +51,7 @@ namespace Pbp.Properties {
         ///   resource lookups using this strongly typed resource class.
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        internal static global::System.Globalization.CultureInfo Culture {
+        public static global::System.Globalization.CultureInfo Culture {
             get {
                 return resourceCulture;
             }
@@ -60,133 +60,133 @@ namespace Pbp.Properties {
             }
         }
         
-        internal static System.Drawing.Bitmap advancedsettings {
+        public static System.Drawing.Bitmap advancedsettings {
             get {
                 object obj = ResourceManager.GetObject("advancedsettings", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
         
-        internal static System.Drawing.Bitmap agt_back {
+        public static System.Drawing.Bitmap agt_back {
             get {
                 object obj = ResourceManager.GetObject("agt_back", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
         
-        internal static System.Drawing.Bitmap agt_forward {
+        public static System.Drawing.Bitmap agt_forward {
             get {
                 object obj = ResourceManager.GetObject("agt_forward", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
         
-        internal static System.Drawing.Bitmap AJ_Portable_Projection_Screen {
+        public static System.Drawing.Bitmap AJ_Portable_Projection_Screen {
             get {
                 object obj = ResourceManager.GetObject("AJ_Portable_Projection_Screen", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
         
-        internal static System.Drawing.Bitmap arrowdown {
+        public static System.Drawing.Bitmap arrowdown {
             get {
                 object obj = ResourceManager.GetObject("arrowdown", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
         
-        internal static System.Drawing.Bitmap arrowdowndown {
+        public static System.Drawing.Bitmap arrowdowndown {
             get {
                 object obj = ResourceManager.GetObject("arrowdowndown", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
         
-        internal static System.Drawing.Bitmap arrowleft {
+        public static System.Drawing.Bitmap arrowleft {
             get {
                 object obj = ResourceManager.GetObject("arrowleft", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
         
-        internal static System.Drawing.Bitmap arrowleftleft {
+        public static System.Drawing.Bitmap arrowleftleft {
             get {
                 object obj = ResourceManager.GetObject("arrowleftleft", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
         
-        internal static System.Drawing.Bitmap arrowright {
+        public static System.Drawing.Bitmap arrowright {
             get {
                 object obj = ResourceManager.GetObject("arrowright", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
         
-        internal static System.Drawing.Bitmap arrowrightright {
+        public static System.Drawing.Bitmap arrowrightright {
             get {
                 object obj = ResourceManager.GetObject("arrowrightright", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
         
-        internal static System.Drawing.Bitmap arrowup {
+        public static System.Drawing.Bitmap arrowup {
             get {
                 object obj = ResourceManager.GetObject("arrowup", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
         
-        internal static System.Drawing.Bitmap arrowupup {
+        public static System.Drawing.Bitmap arrowupup {
             get {
                 object obj = ResourceManager.GetObject("arrowupup", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
         
-        internal static System.Drawing.Bitmap Blackout_on {
+        public static System.Drawing.Bitmap Blackout_on {
             get {
                 object obj = ResourceManager.GetObject("Blackout_on", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
         
-        internal static System.Drawing.Bitmap Blackout_on2 {
+        public static System.Drawing.Bitmap Blackout_on2 {
             get {
                 object obj = ResourceManager.GetObject("Blackout_on2", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
         
-        internal static System.Drawing.Bitmap blank {
+        public static System.Drawing.Bitmap blank {
             get {
                 object obj = ResourceManager.GetObject("blank", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
         
-        internal static System.Drawing.Bitmap clean {
+        public static System.Drawing.Bitmap clean {
             get {
                 object obj = ResourceManager.GetObject("clean", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
         
-        internal static System.Drawing.Bitmap clock {
+        public static System.Drawing.Bitmap clock {
             get {
                 object obj = ResourceManager.GetObject("clock", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
         
-        internal static System.Drawing.Bitmap colors {
+        public static System.Drawing.Bitmap colors {
             get {
                 object obj = ResourceManager.GetObject("colors", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
         
-        internal static System.Drawing.Icon Computer {
+        public static System.Drawing.Icon Computer {
             get {
                 object obj = ResourceManager.GetObject("Computer", resourceCulture);
                 return ((System.Drawing.Icon)(obj));
@@ -196,7 +196,7 @@ namespace Pbp.Properties {
         /// <summary>
         ///   Looks up a localized string similar to Diaschau starten.
         /// </summary>
-        internal static string Diaschau_starten {
+        public static string Diaschau_starten {
             get {
                 return ResourceManager.GetString("Diaschau_starten", resourceCulture);
             }
@@ -205,48 +205,48 @@ namespace Pbp.Properties {
         /// <summary>
         ///   Looks up a localized string similar to Diaschau stoppen.
         /// </summary>
-        internal static string Diaschau_stoppen {
+        public static string Diaschau_stoppen {
             get {
                 return ResourceManager.GetString("Diaschau_stoppen", resourceCulture);
             }
         }
         
-        internal static System.Drawing.Bitmap displaysettings {
+        public static System.Drawing.Bitmap displaysettings {
             get {
                 object obj = ResourceManager.GetObject("displaysettings", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
         
-        internal static System.Drawing.Bitmap edit {
+        public static System.Drawing.Bitmap edit {
             get {
                 object obj = ResourceManager.GetObject("edit", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
         
-        internal static System.Drawing.Bitmap edit_add {
+        public static System.Drawing.Bitmap edit_add {
             get {
                 object obj = ResourceManager.GetObject("edit_add", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
         
-        internal static System.Drawing.Bitmap edit_remove {
+        public static System.Drawing.Bitmap edit_remove {
             get {
                 object obj = ResourceManager.GetObject("edit_remove", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
         
-        internal static System.Drawing.Bitmap editor {
+        public static System.Drawing.Bitmap editor {
             get {
                 object obj = ResourceManager.GetObject("editor", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
         
-        internal static System.Drawing.Bitmap editsong {
+        public static System.Drawing.Bitmap editsong {
             get {
                 object obj = ResourceManager.GetObject("editsong", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -256,83 +256,83 @@ namespace Pbp.Properties {
         /// <summary>
         ///   Looks up a localized string similar to Eine Instanz dieser Software läuft bereits!.
         /// </summary>
-        internal static string Eine_Instanz_dieser_Software_läuft_bereits_ {
+        public static string Eine_Instanz_dieser_Software_läuft_bereits_ {
             get {
                 return ResourceManager.GetString("Eine_Instanz_dieser_Software_läuft_bereits_", resourceCulture);
             }
         }
         
-        internal static System.Drawing.Bitmap error {
+        public static System.Drawing.Bitmap error {
             get {
                 object obj = ResourceManager.GetObject("error", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
         
-        internal static System.Drawing.Bitmap exit {
+        public static System.Drawing.Bitmap exit {
             get {
                 object obj = ResourceManager.GetObject("exit", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
         
-        internal static System.Drawing.Bitmap fade1blue {
+        public static System.Drawing.Bitmap fade1blue {
             get {
                 object obj = ResourceManager.GetObject("fade1blue", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
         
-        internal static System.Drawing.Bitmap fail {
+        public static System.Drawing.Bitmap fail {
             get {
                 object obj = ResourceManager.GetObject("fail", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
         
-        internal static System.Drawing.Bitmap fileopen {
+        public static System.Drawing.Bitmap fileopen {
             get {
                 object obj = ResourceManager.GetObject("fileopen", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
         
-        internal static System.Drawing.Bitmap filesave {
+        public static System.Drawing.Bitmap filesave {
             get {
                 object obj = ResourceManager.GetObject("filesave", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
         
-        internal static System.Drawing.Bitmap folder_favorites {
+        public static System.Drawing.Bitmap folder_favorites {
             get {
                 object obj = ResourceManager.GetObject("folder_favorites", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
         
-        internal static System.Drawing.Bitmap gpg {
+        public static System.Drawing.Bitmap gpg {
             get {
                 object obj = ResourceManager.GetObject("gpg", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
         
-        internal static System.Drawing.Bitmap gplv3_127x51 {
+        public static System.Drawing.Bitmap gplv3_127x51 {
             get {
                 object obj = ResourceManager.GetObject("gplv3_127x51", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
         
-        internal static System.Drawing.Bitmap highlight {
+        public static System.Drawing.Bitmap highlight {
             get {
                 object obj = ResourceManager.GetObject("highlight", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
         
-        internal static System.Drawing.Bitmap highlight_red {
+        public static System.Drawing.Bitmap highlight_red {
             get {
                 object obj = ResourceManager.GetObject("highlight_red", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -342,20 +342,20 @@ namespace Pbp.Properties {
         /// <summary>
         ///   Looks up a localized string similar to Keine Bilder ausgewählt!.
         /// </summary>
-        internal static string Keine_Bilder_ausgewählt_ {
+        public static string Keine_Bilder_ausgewählt_ {
             get {
                 return ResourceManager.GetString("Keine_Bilder_ausgewählt_", resourceCulture);
             }
         }
         
-        internal static System.Drawing.Bitmap leinwand16 {
+        public static System.Drawing.Bitmap leinwand16 {
             get {
                 object obj = ResourceManager.GetObject("leinwand16", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
         
-        internal static System.Drawing.Bitmap leinwand16_no {
+        public static System.Drawing.Bitmap leinwand16_no {
             get {
                 object obj = ResourceManager.GetObject("leinwand16_no", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -378,7 +378,7 @@ namespace Pbp.Properties {
         ///  The licenses for most software and other practical works are designed
         ///to [rest of string was truncated]&quot;;.
         /// </summary>
-        internal static string License {
+        public static string License {
             get {
                 return ResourceManager.GetString("License", resourceCulture);
             }
@@ -387,34 +387,34 @@ namespace Pbp.Properties {
         /// <summary>
         ///   Looks up a localized string similar to Lied speichern unter....
         /// </summary>
-        internal static string Lied_speichern_unter___ {
+        public static string Lied_speichern_unter___ {
             get {
                 return ResourceManager.GetString("Lied_speichern_unter___", resourceCulture);
             }
         }
         
-        internal static System.Drawing.Bitmap link {
+        public static System.Drawing.Bitmap link {
             get {
                 object obj = ResourceManager.GetObject("link", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
         
-        internal static System.Drawing.Bitmap logo {
+        public static System.Drawing.Bitmap logo {
             get {
                 object obj = ResourceManager.GetObject("logo", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
         
-        internal static System.Drawing.Bitmap love {
+        public static System.Drawing.Bitmap love {
             get {
                 object obj = ResourceManager.GetObject("love", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
         
-        internal static System.Drawing.Bitmap monitor_256 {
+        public static System.Drawing.Bitmap monitor_256 {
             get {
                 object obj = ResourceManager.GetObject("monitor_256", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -424,27 +424,27 @@ namespace Pbp.Properties {
         /// <summary>
         ///   Looks up a localized string similar to nicht vorhanden.
         /// </summary>
-        internal static string nicht_vorhanden {
+        public static string nicht_vorhanden {
             get {
                 return ResourceManager.GetString("nicht_vorhanden", resourceCulture);
             }
         }
         
-        internal static System.Drawing.Bitmap ok16 {
+        public static System.Drawing.Bitmap ok16 {
             get {
                 object obj = ResourceManager.GetObject("ok16", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
         
-        internal static System.Drawing.Bitmap Projection_off {
+        public static System.Drawing.Bitmap Projection_off {
             get {
                 object obj = ResourceManager.GetObject("Projection_off", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
         
-        internal static System.Drawing.Bitmap Projection_on {
+        public static System.Drawing.Bitmap Projection_on {
             get {
                 object obj = ResourceManager.GetObject("Projection_on", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -454,69 +454,69 @@ namespace Pbp.Properties {
         /// <summary>
         ///   Looks up a localized string similar to Projektion.
         /// </summary>
-        internal static string Projektion {
+        public static string Projektion {
             get {
                 return ResourceManager.GetString("Projektion", resourceCulture);
             }
         }
         
-        internal static System.Drawing.Bitmap search {
+        public static System.Drawing.Bitmap search {
             get {
                 object obj = ResourceManager.GetObject("search", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
         
-        internal static System.Drawing.Bitmap searchg {
+        public static System.Drawing.Bitmap searchg {
             get {
                 object obj = ResourceManager.GetObject("searchg", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
         
-        internal static System.Drawing.Bitmap searchx {
+        public static System.Drawing.Bitmap searchx {
             get {
                 object obj = ResourceManager.GetObject("searchx", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
         
-        internal static System.Drawing.Bitmap star {
+        public static System.Drawing.Bitmap star {
             get {
                 object obj = ResourceManager.GetObject("star", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
         
-        internal static System.Drawing.Bitmap success {
+        public static System.Drawing.Bitmap success {
             get {
                 object obj = ResourceManager.GetObject("success", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
         
-        internal static System.Drawing.Bitmap text_align_center {
+        public static System.Drawing.Bitmap text_align_center {
             get {
                 object obj = ResourceManager.GetObject("text_align_center", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
         
-        internal static System.Drawing.Bitmap text_align_left {
+        public static System.Drawing.Bitmap text_align_left {
             get {
                 object obj = ResourceManager.GetObject("text_align_left", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
         
-        internal static System.Drawing.Bitmap text_align_right {
+        public static System.Drawing.Bitmap text_align_right {
             get {
                 object obj = ResourceManager.GetObject("text_align_right", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
         
-        internal static System.Drawing.Bitmap tip {
+        public static System.Drawing.Bitmap tip {
             get {
                 object obj = ResourceManager.GetObject("tip", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -526,34 +526,34 @@ namespace Pbp.Properties {
         /// <summary>
         ///   Looks up a localized string similar to Titel.
         /// </summary>
-        internal static string Titel {
+        public static string Titel {
             get {
                 return ResourceManager.GetString("Titel", resourceCulture);
             }
         }
         
-        internal static System.Drawing.Bitmap trash {
+        public static System.Drawing.Bitmap trash {
             get {
                 object obj = ResourceManager.GetObject("trash", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
         
-        internal static System.Drawing.Bitmap unlink {
+        public static System.Drawing.Bitmap unlink {
             get {
                 object obj = ResourceManager.GetObject("unlink", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
         
-        internal static System.Drawing.Bitmap update16 {
+        public static System.Drawing.Bitmap update16 {
             get {
                 object obj = ResourceManager.GetObject("update16", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
         
-        internal static System.Drawing.Bitmap wheel16 {
+        public static System.Drawing.Bitmap wheel16 {
             get {
                 object obj = ResourceManager.GetObject("wheel16", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));

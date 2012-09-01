@@ -33,11 +33,17 @@ using System.IO;
 using System.Windows.Forms;
 using Pbp.Forms;
 using Pbp.Properties;
+using Pbp.Utils;
 
 namespace Pbp
 {
     internal class ImageManager
     {
+        /// <summary>
+        /// Default size for new images
+        /// </summary>
+        protected readonly static Size DefaultImageSize = new Size(1024, 768);
+
         /// <summary>
         /// The singleton holder
         /// </summary>
@@ -49,10 +55,53 @@ namespace Pbp
         public Image currentImage { get; set; }
 
         /// <summary>
+        /// Base path to the image directory
+        /// </summary>
+        protected string imageDirPath;
+
+        /// <summary>
+        /// Base path to the thumbnails directory
+        /// </summary>
+        protected string thumbDirPath;
+
+        #region Events
+
+        public delegate void ThumbnailCreate(ThumbnailCreateEventArgs e);
+
+        public event ThumbnailCreate ThumbnailCreated;
+
+        public class ThumbnailCreateEventArgs : EventArgs
+        {
+            public int Number { get; set; }
+
+            public int Total { get; set; }
+
+            public ThumbnailCreateEventArgs(int number, int total)
+            {
+                this.Number = number;
+                this.Total = total;
+            }
+        }
+
+        protected virtual void OnThumbnailCreated(ThumbnailCreateEventArgs e)
+        {
+            if (ThumbnailCreated != null)
+            {
+                ThumbnailCreated(e);
+            }
+        }
+
+        #endregion Events
+
+        /// <summary>
         /// Private constructor
         /// </summary>
-        private ImageManager()
+        protected ImageManager()
         {
+            imageDirPath = Settings.Default.DataDirectory + Path.DirectorySeparatorChar + 
+                Settings.Default.ImageDir + Path.DirectorySeparatorChar;
+            thumbDirPath = Settings.Default.DataDirectory + Path.DirectorySeparatorChar + 
+                Settings.Default.ThumbDir + Path.DirectorySeparatorChar;
         }
 
         /// <summary>
@@ -70,133 +119,49 @@ namespace Pbp
         }
 
         /// <summary>
-        /// Resizes a given image to new dimensions
-        /// </summary>
-        /// <param name="sourceImage"></param>
-        /// <param name="newSize"></param>
-        /// <returns></returns>
-        public Bitmap ResizeBitmap(Image sourceImage, Size newSize)
-        {
-            Bitmap result = new Bitmap(newSize.Width, newSize.Height);
-            using (Graphics g = Graphics.FromImage((Image)result))
-                g.DrawImage(sourceImage, 0, 0, newSize.Width, newSize.Height);
-            return result;
-        }
-
-        /// <summary>
-        /// Creates a resized version of the given file and stores it
-        /// </summary>
-        /// <param name="inFile"></param>
-        /// <param name="outFile"></param>
-        /// <param name="size"></param>
-        public void createThumb(string inFile, string outFile)
-        {
-            Image img;
-            try
-            {
-                img = Image.FromFile(inFile);
-                Image imgPhoto = ResizeBitmap(img, Settings.Default.ThumbSize);
-
-                string dir = Path.GetDirectoryName(outFile);
-                if (!Directory.Exists(dir))
-                {
-                    Directory.CreateDirectory(dir);
-                }
-                imgPhoto.Save(outFile, ImageFormat.Jpeg);
-                imgPhoto.Dispose();
-                img.Dispose();
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine("Image Error: " + e);
-            }
-        }
-
-        /// <summary>
-        /// Check and create thumbnails if necessary
-        /// </summary>
-        public void checkThumbs()
-        {
-            checkThumbs(null);
-        }
-
-        /// <summary>
         /// Check and create thumbnails if necessary
         /// </summary>
         /// <param name="ldg"></param>
-        public void checkThumbs(LoadingScreen ldg)
+        public void checkThumbs()
         {
-            string imageRootDir = Settings.Default.DataDirectory + Path.DirectorySeparatorChar + Settings.Default.ImageDir;
-            string thumbDir = Settings.Default.DataDirectory + Path.DirectorySeparatorChar + Settings.Default.ThumbDir;
-
-            if (!Directory.Exists(imageRootDir))
+            if (!Directory.Exists(imageDirPath))
             {
-                Directory.CreateDirectory(imageRootDir);
+                Directory.CreateDirectory(imageDirPath);
             }
-            if (!Directory.Exists(thumbDir))
+            if (!Directory.Exists(thumbDirPath))
             {
-                Directory.CreateDirectory(thumbDir);
+                Directory.CreateDirectory(thumbDirPath);
             }
 
             string[] imgExtensions = { "*.jpg" };
 
-            if (Directory.Exists(imageRootDir))
+            List<string> missingThumbsSrc = new List<string>();
+            List<string> missingThumbsTrg = new List<string>();
+            foreach (string ext in imgExtensions)
             {
-                List<string> missingThumbsSrc = new List<string>();
-                List<string> missingThumbsTrg = new List<string>();
-                foreach (string ext in imgExtensions)
+                string[] paths = Directory.GetFiles(imageDirPath, ext, SearchOption.AllDirectories);
+                foreach (string file in paths)
                 {
-                    string[] paths = Directory.GetFiles(imageRootDir, ext, SearchOption.AllDirectories);
-                    foreach (string file in paths)
+                    string relativePath = file.Substring((imageDirPath + Path.DirectorySeparatorChar).Length);
+                    string thumbPath = thumbDirPath + relativePath;
+                    if (!File.Exists(thumbPath))
                     {
-                        string relativePath = file.Substring((imageRootDir + Path.DirectorySeparatorChar).Length);
-                        string thumbPath = thumbDir + Path.DirectorySeparatorChar + relativePath;
-                        if (!File.Exists(thumbPath))
-                        {
-                            missingThumbsSrc.Add(file);
-                            missingThumbsTrg.Add(thumbPath);
-                        }
+                        missingThumbsSrc.Add(file);
+                        missingThumbsTrg.Add(thumbPath);
                     }
                 }
+            }
 
-                int cnt = missingThumbsSrc.Count;
-                if (cnt > 0)
+            int cnt = missingThumbsSrc.Count;
+            if (cnt > 0)
+            {
+                for (int i = 0; i < cnt; i++)
                 {
-                    if (ldg == null)
+                    ImageUtils.createThumb(missingThumbsSrc[i], missingThumbsTrg[i], Settings.Default.ThumbSize);
+                    if (i % 5 == 0)
                     {
-                        ProgressWindow wnd = new ProgressWindow("Erstelle Miniaturbilder...", cnt);
-                        wnd.Show();
-
-                        for (int i = 0; i < cnt; i++)
-                        {
-                            createThumb(missingThumbsSrc[i], missingThumbsTrg[i]);
-                            if (i % 5 == 0)
-                            {
-                                wnd.UpdateStatus("Erstelle Miniaturbilder " + i.ToString() + "/" + cnt.ToString(), i);
-                                if (wnd.Cancelled)
-                                {
-                                    wnd.Close();
-                                    Application.DoEvents();
-                                    break;
-                                }
-                            }
-                        }
-                        wnd.Close();
-                    }
-                    else
-                    {
-                        //ldg.setProgBarMax(cnt);
-                        for (int i = 0; i < cnt; i++)
-                        {
-                            createThumb(missingThumbsSrc[i], missingThumbsTrg[i]);
-                            if (i % 5 == 0)
-                            {
-                                ldg.setLabel("Erstelle Miniaturbilder " + i.ToString() + "/" + cnt.ToString());
-
-                                //ldg.setProgBarValue(i);
-                                Application.DoEvents();
-                            }
-                        }
+                        ThumbnailCreateEventArgs e = new ThumbnailCreateEventArgs(i, cnt);
+                        OnThumbnailCreated(e);
                     }
                 }
             }
@@ -204,49 +169,67 @@ namespace Pbp
 
         public bool imageExists(string relativePath)
         {
-            if (File.Exists(Settings.Default.DataDirectory + Path.DirectorySeparatorChar + Settings.Default.ImageDir + Path.DirectorySeparatorChar + relativePath))
-            {
-                return true;
-            }
-            return false;
+            return File.Exists(imageDirPath + relativePath);
         }
 
         public Image getThumbFromRelPath(string relativePath)
         {
-            string imPath = Settings.Default.DataDirectory + Path.DirectorySeparatorChar + Settings.Default.ThumbDir + Path.DirectorySeparatorChar + relativePath;
-            if (File.Exists(imPath))
+            if (File.Exists(thumbDirPath + relativePath))
             {
-                return Image.FromFile(imPath);
+                return Image.FromFile(thumbDirPath + relativePath);
             }
             return null;
         }
 
         public Image getImageFromRelPath(string relativePath)
         {
-            string imPath = Settings.Default.DataDirectory + Path.DirectorySeparatorChar + Settings.Default.ImageDir + Path.DirectorySeparatorChar + relativePath;
-            if (File.Exists(imPath))
+            if (File.Exists(imageDirPath + relativePath))
             {
-                return Image.FromFile(imPath);
+                return Image.FromFile(imageDirPath + relativePath);
             }
             return null;
         }
 
-        public Image getEmptyThumb()
+        public ImageList getThumbsFromList(List<string> imageList)
         {
-            Image img = new Bitmap(Settings.Default.ThumbSize.Width, Settings.Default.ThumbSize.Height);
-            Graphics graph = Graphics.FromImage(img);
-            graph.FillRectangle(new SolidBrush(Settings.Default.ProjectionBackColor), 0, 0, img.Width, img.Height);
-            graph.Dispose();
-            return img;
+            var thumbList = new ImageList();
+            thumbList.ImageSize = Settings.Default.ThumbSize;
+            thumbList.ColorDepth = ColorDepth.Depth32Bit;
+
+            Image th = ImageUtils.getEmptyImage(Settings.Default.ThumbSize, Settings.Default.ProjectionBackColor);
+            thumbList.Images.Add(th);
+            foreach (String relPath in imageList)
+            {
+                Image img = getThumbFromRelPath(relPath);
+                if (img != null)
+                    thumbList.Images.Add(img);
+            }
+            return thumbList;
         }
 
-        public Image getEmptyImage()
+        public Image getImage(string path)
         {
-            Image img = new Bitmap(1024, 768);
-            Graphics graph = Graphics.FromImage(img);
-            graph.FillRectangle(new SolidBrush(Settings.Default.ProjectionBackColor), 0, 0, img.Width, img.Height);
-            graph.Dispose();
-            return img;
+            if (path == null)
+            {
+                return ImageUtils.getEmptyImage(DefaultImageSize, Settings.Default.ProjectionBackColor);
+            }
+            try
+            {
+                Image img = getImageFromRelPath(path);
+                if (img != null)
+                {
+                    return img;
+                }
+                else
+                {
+                    throw new Exception("Das Bild " + path + " existiert nicht!");
+                }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+                return ImageUtils.getEmptyImage(DefaultImageSize, Settings.Default.ProjectionBackColor);
+            }
         }
     }
 }

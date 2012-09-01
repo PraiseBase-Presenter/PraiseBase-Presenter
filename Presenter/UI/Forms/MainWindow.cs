@@ -422,7 +422,7 @@ namespace Pbp.Forms
                     // Current slide + attached image
                 else
                 {
-                    Image img = SongManager.Instance.CurrentSong.Song.getImage(cs.ImageNumber);
+                    Image img = ImageManager.Instance.getImage(SongManager.Instance.CurrentSong.Song.getImage(cs.ImageNumber));
                     ProjectionWindow.Instance.DisplayLayer(1, img, Settings.Default.ProjectionFadeTimeLayer1);
                     ProjectionWindow.Instance.DisplayLayer(2, ssl);
 
@@ -1206,7 +1206,6 @@ namespace Pbp.Forms
 
         private void toolStripButtonDisplaySettings_Click(object sender, EventArgs e)
         {
-            // Todo: OS Check
             try
             {
                 Process.Start("displayswitch.exe");
@@ -1215,11 +1214,6 @@ namespace Pbp.Forms
             {
                 Process.Start("control", "desk.cpl,@0,4");
             }
-        }
-
-        public void setProgessBarTransitionValue(int value)
-        {
-            //progressBarTransition.Value = Math.Min(value, progressBarTransition.Maximum);
         }
 
         public void setStatus(string text)
@@ -1327,7 +1321,17 @@ namespace Pbp.Forms
 
         private void miniaturbilderPrüfenToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            ProgressWindow wnd = new ProgressWindow("Erstelle Miniaturbilder...", 0);
+            wnd.Show();
+            ImageManager.Instance.ThumbnailCreated += new ImageManager.ThumbnailCreate(Instance_ThumbnailCreated);
             ImageManager.Instance.checkThumbs();
+            wnd.Close();
+        }
+
+        void Instance_ThumbnailCreated(ImageManager.ThumbnailCreateEventArgs e)
+        {
+            //TODO
+            //wnd.UpdateStatus("Erstelle Miniaturbilder " + i.ToString() + "/" + cnt.ToString(), i);
         }
 
         private void button1_Click_1(object sender, EventArgs e)
