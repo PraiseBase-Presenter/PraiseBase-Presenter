@@ -111,6 +111,7 @@
     <Compile Include="Data\Song\SongSlideList.cs" />
     <Compile Include="Data\TagList.cs" />
     <Compile Include="Editor.cs" />
+    <Compile Include="IO\OpenLyricsSongFileReader.cs" />
     <Compile Include="IO\PowerPraiseSongFileReader.cs" />
     <Compile Include="IO\PowerPraiseSongFileWriter.cs" />
     <Compile Include="IO\SetlistReader.cs" />
@@ -243,6 +244,10 @@
     <Compile Include="Utils\ImageUtils.cs" />
     <Compile Include="Utils\StringUtils.cs" />
     <Content Include="Resources\Doc\License.txt" />
+    <Content Include="Resources\Test\openlyrics\complex.xml" />
+    <Content Include="Resources\Test\openlyrics\simple.xml">
+      <SubType>Designer</SubType>
+    </Content>
     <EmbeddedResource Include="UI\Components\BackgrundImageBrowser.resx">
       <DependentUpon>BackgrundImageBrowser.cs</DependentUpon>
     </EmbeddedResource>
@@ -322,6 +327,7 @@
       <DesignTime>True</DesignTime>
     </Compile>
     <None Include="app.config" />
+    <None Include="ClassDiagram1.cd" />
     <None Include="Properties\Settings.settings">
       <Generator>PublicSettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -513,6 +519,7 @@
     <Content Include="Resources\Dist\Bibles\luther1912.xml" />
     <Content Include="Resources\Dist\Bibles\sf_luther_1545_letzte_hand_rev1.xml" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
