@@ -244,8 +244,8 @@
     <Compile Include="Utils\ImageUtils.cs" />
     <Compile Include="Utils\StringUtils.cs" />
     <Content Include="Resources\Doc\License.txt" />
-    <Content Include="Resources\Test\openlyrics\complex.xml" />
-    <Content Include="Resources\Test\openlyrics\simple.xml">
+    <Content Include="Resources\Samples\openlyrics\complex.xml" />
+    <Content Include="Resources\Samples\openlyrics\simple.xml">
       <SubType>Designer</SubType>
     </Content>
     <EmbeddedResource Include="UI\Components\BackgrundImageBrowser.resx">
@@ -327,7 +327,6 @@
       <DesignTime>True</DesignTime>
     </Compile>
     <None Include="app.config" />
-    <None Include="ClassDiagram1.cd" />
     <None Include="Properties\Settings.settings">
       <Generator>PublicSettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>

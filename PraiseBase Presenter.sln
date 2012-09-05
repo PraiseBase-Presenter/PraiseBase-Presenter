@@ -7,7 +7,19 @@ Project("{930C7802-8A8C-48F9-8165-68863BCCD9DD}") = "Installer", "Installer\Inst
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SongEditor", "SongEditor\SongEditor.csproj", "{62A96DBA-FEC1-470E-8EBE-3ECC2464D322}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Test", "Test\Test.csproj", "{22057E9A-E0CA-4D82-80AE-B7A8B9A4FFCA}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{118A05E7-E3B9-473F-8617-2B413DD4E1F7}"
+	ProjectSection(SolutionItems) = preProject
+		Local.testsettings = Local.testsettings
+		PraiseBase Presenter.vsmdi = PraiseBase Presenter.vsmdi
+		TraceAndTestImpact.testsettings = TraceAndTestImpact.testsettings
+	EndProjectSection
+EndProject
 Global
+	GlobalSection(TestCaseManagementSettings) = postSolution
+		CategoryFile = PraiseBase Presenter.vsmdi
+	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Debug|Mixed Platforms = Debug|Mixed Platforms
@@ -44,6 +56,16 @@ Global
 		{62A96DBA-FEC1-470E-8EBE-3ECC2464D322}.Release|Mixed Platforms.ActiveCfg = Release|x86
 		{62A96DBA-FEC1-470E-8EBE-3ECC2464D322}.Release|x86.ActiveCfg = Release|x86
 		{62A96DBA-FEC1-470E-8EBE-3ECC2464D322}.Release|x86.Build.0 = Release|x86
+		{22057E9A-E0CA-4D82-80AE-B7A8B9A4FFCA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{22057E9A-E0CA-4D82-80AE-B7A8B9A4FFCA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{22057E9A-E0CA-4D82-80AE-B7A8B9A4FFCA}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{22057E9A-E0CA-4D82-80AE-B7A8B9A4FFCA}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{22057E9A-E0CA-4D82-80AE-B7A8B9A4FFCA}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{22057E9A-E0CA-4D82-80AE-B7A8B9A4FFCA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{22057E9A-E0CA-4D82-80AE-B7A8B9A4FFCA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{22057E9A-E0CA-4D82-80AE-B7A8B9A4FFCA}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{22057E9A-E0CA-4D82-80AE-B7A8B9A4FFCA}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{22057E9A-E0CA-4D82-80AE-B7A8B9A4FFCA}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

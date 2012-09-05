@@ -5,7 +5,7 @@ using System.Text;
 using System.Xml;
 using Pbp.Properties;
 
-namespace Pbp
+namespace Pbp.IO
 {
     class OpenLyricsSongFileReader : SongFileReader
     {

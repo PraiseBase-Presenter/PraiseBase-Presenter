@@ -30,7 +30,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Xml;
 
-namespace Pbp
+namespace Pbp.IO
 {
     public class PowerPraiseSongFileWriter : SongFileWriter
     {

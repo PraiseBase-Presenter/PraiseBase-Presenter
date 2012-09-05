@@ -31,7 +31,7 @@ using System.Drawing;
 using System.Xml;
 using Pbp.Properties;
 
-namespace Pbp
+namespace Pbp.IO
 {
     public class PowerPraiseSongFileReader : SongFileReader
     {

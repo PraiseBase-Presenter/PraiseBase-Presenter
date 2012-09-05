@@ -28,7 +28,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace Pbp
+namespace Pbp.IO
 {
     public abstract class SongFileReader
     {
