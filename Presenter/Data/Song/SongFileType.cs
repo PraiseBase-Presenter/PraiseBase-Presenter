@@ -1,4 +1,4 @@
-﻿namespace Pbp
+﻿namespace Pbp.Data.Song
 {
     public class SongFileType
     {

@@ -27,6 +27,7 @@
 
 using System;
 using System.Collections.Generic;
+using Pbp.Data.Song;
 
 namespace Pbp.IO
 {
@@ -80,5 +81,13 @@ namespace Pbp.IO
             }
             return l;
         }
+    }
+
+    public class IncompleteSongSourceFileException : Exception
+    {
+    }
+
+    public class InvalidSongSourceFileException : Exception
+    {
     }
 }

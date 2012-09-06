@@ -29,6 +29,8 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using Pbp.Properties;
+using Pbp.IO;
+using Pbp.Data.Song;
 
 namespace Pbp
 {

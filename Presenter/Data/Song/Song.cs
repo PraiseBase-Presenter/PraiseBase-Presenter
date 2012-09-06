@@ -30,7 +30,7 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
 
-namespace Pbp
+namespace Pbp.Data.Song
 {
     /// <summary>
     /// Keeps and manages all song related data loaded form an xml file
@@ -45,6 +45,21 @@ namespace Pbp
         /// Unique identifier of this song
         /// </summary>
         public Guid GUID { get; protected set; }
+
+        /// <summary>
+        /// Timestamp when the song has been last modified
+        /// </summary>
+        public string ModifiedTimestamp { get; set; }
+
+        /// <summary>
+        /// Application the song was created in
+        /// </summary>
+        public string CreatedIn { get; set; }
+
+        /// <summary>
+        /// Application the song was modified in
+        /// </summary>
+        public string ModifiedIn { get; set; }
 
         /// <summary>
         /// Gets or sets the song title. Usually the same as the file name
@@ -66,6 +81,46 @@ namespace Pbp
         /// </summary>
         public string Copyright { get; set; }
 
+        /// <summary>
+        /// Release year
+        /// </summary>
+        public string ReleaseYear { get; set; }
+
+        /// <summary>
+        /// Authors of the song
+        /// </summary>
+        public List<SongAuthor> Author { get; set; }
+
+        /// <summary>
+        /// Publisher
+        /// </summary>
+        public string Publisher { get; set; }
+
+        /// <summary>
+        /// Version
+        /// </summary>
+        public string Version { get; set; }
+
+        /// <summary>
+        /// Key
+        /// </summary>
+        public string Key { get; set; }
+
+        /// <summary>
+        /// Transposition
+        /// </summary>
+        public int Transposition { get; set; }
+
+        /// <summary>
+        /// Tempo
+        /// </summary>
+        public SongTempo Tempo  { get; set; }
+
+        /// <summary>
+        /// Variant
+        /// </summary>
+        public string Variant  { get; set; }
+    
         /// <summary>
         /// Gets or sets a list of tags (like categories) which describe the type of the song
         /// </summary>
@@ -245,16 +300,19 @@ namespace Pbp
             QualityIssues = new List<QualityAssuranceIndicators>();
         }
 
-        public void updateSearchText()
+        /// <summary>
+        /// Updates the search text
+        /// </summary>
+        public void UpdateSearchText()
         {
-            string _text = String.Empty;
+            string _text = this.Title + " ";
             foreach (SongPart prt in Parts)
             {
                 foreach (SongSlide sld in prt.Slides)
                 {
                     foreach (string ln in sld.Lines)
                     {
-                        _text += ln;
+                        _text += ln + " ";
                     }
                 }
             }
@@ -269,7 +327,12 @@ namespace Pbp
             SearchText = _text;
         }
 
-        public string getImage(int nr)
+        /// <summary>
+        /// Returns the path of the image at the specified index
+        /// </summary>
+        /// <param name="nr"></param>
+        /// <returns></returns>
+        public string GetImage(int nr)
         {
             try
             {
@@ -294,7 +357,7 @@ namespace Pbp
         /// Sets a specific quality assurance indicator
         /// </summary>
         /// <param name="quai">The indicator to be added</param>
-        public void setQA(QualityAssuranceIndicators quai)
+        public void SetQA(QualityAssuranceIndicators quai)
         {
             QualityIssues.Add(quai);
         }
@@ -303,7 +366,7 @@ namespace Pbp
         /// Removes a specific quality assurance indicator
         /// </summary>
         /// <param name="quai">The indicator to be removed</param>
-        public void remQA(QualityAssuranceIndicators quai)
+        public void RemQA(QualityAssuranceIndicators quai)
         {
             QualityIssues.Remove(quai);
         }
@@ -312,7 +375,7 @@ namespace Pbp
         /// Returns if a specific quality assurance indicator is set
         /// </summary>
         /// <param name="quai">The desired indicator</param>
-        public bool getQA(QualityAssuranceIndicators quai)
+        public bool GetQA(QualityAssuranceIndicators quai)
         {
             return QualityIssues.IndexOf(quai) >= 0;
         }
@@ -321,7 +384,7 @@ namespace Pbp
         /// Indicates îf the song has quality issues
         /// </summary>
         /// <returns></returns>
-        public bool hasQA()
+        public bool HasQA()
         {
             return QualityIssues.Count > 0;
         }

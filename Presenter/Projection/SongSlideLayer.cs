@@ -3,6 +3,7 @@ using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Drawing.Text;
 using Pbp.Properties;
+using Pbp.Data.Song;
 
 namespace Pbp
 {

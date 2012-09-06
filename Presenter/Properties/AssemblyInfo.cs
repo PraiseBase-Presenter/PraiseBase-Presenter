@@ -35,3 +35,4 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyVersion("1.1.0")]
 [assembly: AssemblyFileVersion("1.1.0")]
 [assembly: NeutralResourcesLanguageAttribute("de-CH")]
+[assembly: System.Runtime.CompilerServices.InternalsVisibleTo("Test")]

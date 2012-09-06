@@ -25,7 +25,7 @@
  *
  */
 
-namespace Pbp
+namespace Pbp.Data.Song
 {
     /// <summary>
     /// A song part with a given name and one or more slides
@@ -44,6 +44,11 @@ namespace Pbp
         /// Song part name like chorus, bridge, part 1 ...
         /// </summary>
         public string Caption { get; set; }
+
+        /// <summary>
+        /// Language
+        /// </summary>
+        public string Language { get; set; }
 
         /// <summary>
         /// A list of containing slides. Each part has one slide at minimum

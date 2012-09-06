@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Windows.Forms;
 using Pbp.Properties;
+using Pbp.Data.Song;
 
 namespace Pbp.Forms
 {
@@ -71,13 +72,13 @@ namespace Pbp.Forms
                 if (checkBoxHasComments.Checked && sng.Comment == string.Empty)
                     use = false;
 
-                if (checkBoxQAImages.Checked && !sng.getQA(QualityAssuranceIndicators.Images))
+                if (checkBoxQAImages.Checked && !sng.GetQA(QualityAssuranceIndicators.Images))
                     use = false;
-                if (checkBoxQASegmentation.Checked && !sng.getQA(QualityAssuranceIndicators.Segmentation))
+                if (checkBoxQASegmentation.Checked && !sng.GetQA(QualityAssuranceIndicators.Segmentation))
                     use = false;
-                if (checkBoxQASpelling.Checked && !sng.getQA(QualityAssuranceIndicators.Spelling))
+                if (checkBoxQASpelling.Checked && !sng.GetQA(QualityAssuranceIndicators.Spelling))
                     use = false;
-                if (checkBoxQATranslation.Checked && !sng.getQA(QualityAssuranceIndicators.Translation))
+                if (checkBoxQATranslation.Checked && !sng.GetQA(QualityAssuranceIndicators.Translation))
                     use = false;
 
                 foreach (int i in checkedListBoxTags.CheckedIndices)

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Windows.Forms;
+using Pbp.Data.Song;
 
 namespace Pbp.Forms
 {
@@ -14,10 +15,10 @@ namespace Pbp.Forms
         {
             textBoxComment.Text = SongManager.Instance.CurrentSong.Song.Comment;
 
-            checkBoxQASpelling.Checked = SongManager.Instance.CurrentSong.Song.getQA(QualityAssuranceIndicators.Spelling);
-            checkBoxQATranslation.Checked = SongManager.Instance.CurrentSong.Song.getQA(QualityAssuranceIndicators.Translation);
-            checkBoxQAImages.Checked = SongManager.Instance.CurrentSong.Song.getQA(QualityAssuranceIndicators.Images);
-            checkBoxQASegmentation.Checked = SongManager.Instance.CurrentSong.Song.getQA(QualityAssuranceIndicators.Segmentation);
+            checkBoxQASpelling.Checked = SongManager.Instance.CurrentSong.Song.GetQA(QualityAssuranceIndicators.Spelling);
+            checkBoxQATranslation.Checked = SongManager.Instance.CurrentSong.Song.GetQA(QualityAssuranceIndicators.Translation);
+            checkBoxQAImages.Checked = SongManager.Instance.CurrentSong.Song.GetQA(QualityAssuranceIndicators.Images);
+            checkBoxQASegmentation.Checked = SongManager.Instance.CurrentSong.Song.GetQA(QualityAssuranceIndicators.Segmentation);
         }
 
         private void buttonAccept_Click(object sender, EventArgs e)
@@ -25,24 +26,24 @@ namespace Pbp.Forms
             SongManager.Instance.CurrentSong.Song.Comment = textBoxComment.Text;
 
             if (checkBoxQASpelling.Checked)
-                SongManager.Instance.CurrentSong.Song.setQA(QualityAssuranceIndicators.Spelling);
+                SongManager.Instance.CurrentSong.Song.SetQA(QualityAssuranceIndicators.Spelling);
             else
-                SongManager.Instance.CurrentSong.Song.remQA(QualityAssuranceIndicators.Spelling);
+                SongManager.Instance.CurrentSong.Song.RemQA(QualityAssuranceIndicators.Spelling);
 
             if (checkBoxQATranslation.Checked)
-                SongManager.Instance.CurrentSong.Song.setQA(QualityAssuranceIndicators.Translation);
+                SongManager.Instance.CurrentSong.Song.SetQA(QualityAssuranceIndicators.Translation);
             else
-                SongManager.Instance.CurrentSong.Song.remQA(QualityAssuranceIndicators.Translation);
+                SongManager.Instance.CurrentSong.Song.RemQA(QualityAssuranceIndicators.Translation);
 
             if (checkBoxQAImages.Checked)
-                SongManager.Instance.CurrentSong.Song.setQA(QualityAssuranceIndicators.Images);
+                SongManager.Instance.CurrentSong.Song.SetQA(QualityAssuranceIndicators.Images);
             else
-                SongManager.Instance.CurrentSong.Song.remQA(QualityAssuranceIndicators.Images);
+                SongManager.Instance.CurrentSong.Song.RemQA(QualityAssuranceIndicators.Images);
 
             if (checkBoxQASegmentation.Checked)
-                SongManager.Instance.CurrentSong.Song.setQA(QualityAssuranceIndicators.Segmentation);
+                SongManager.Instance.CurrentSong.Song.SetQA(QualityAssuranceIndicators.Segmentation);
             else
-                SongManager.Instance.CurrentSong.Song.remQA(QualityAssuranceIndicators.Segmentation);
+                SongManager.Instance.CurrentSong.Song.RemQA(QualityAssuranceIndicators.Segmentation);
 
             SongManager.Instance.saveCurrentSong();
 

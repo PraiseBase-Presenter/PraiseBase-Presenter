@@ -77,7 +77,7 @@ namespace Pbp.Forms
             openFileDialog.Multiselect = false;
             openFileDialog.Title = "Lied öffnen";
 
-            openFileDialog.Filter = SongFileReader.getFileBoxFilter();
+            openFileDialog.Filter = Pbp.IO.SongFileReader.getFileBoxFilter();
             openFileDialog.FilterIndex = fileBoxFilterIndex;
             if (openFileDialog.ShowDialog(this) == DialogResult.OK)
             {

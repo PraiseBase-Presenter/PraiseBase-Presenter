@@ -30,6 +30,7 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Xml;
 using Pbp.Properties;
+using Pbp.Data.Song;
 
 namespace Pbp.IO
 {
@@ -253,7 +254,7 @@ namespace Pbp.IO
                     sng.Parts.Add(tmpPart);
                 }
             }
-            sng.updateSearchText();
+            sng.UpdateSearchText();
             return sng;
         }
     }

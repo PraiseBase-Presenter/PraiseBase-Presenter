@@ -30,6 +30,7 @@ using System.Drawing;
 using System.IO;
 using System.Windows.Forms;
 using Pbp.Properties;
+using Pbp.Data.Song;
 
 namespace Pbp.Forms
 {
@@ -58,7 +59,7 @@ namespace Pbp.Forms
             {
                 try
                 {
-                    sng = SongFileReader.createFactoryByFile(fileName).load(fileName);
+                    sng = Pbp.IO.SongFileReader.createFactoryByFile(fileName).load(fileName);
                 }
                 catch (Exception e)
                 {
@@ -95,10 +96,10 @@ namespace Pbp.Forms
 
             populatePartList();
 
-            checkBoxQAImages.Checked = sng.getQA(QualityAssuranceIndicators.Images);
-            checkBoxQASpelling.Checked = sng.getQA(QualityAssuranceIndicators.Spelling);
-            checkBoxQATranslation.Checked = sng.getQA(QualityAssuranceIndicators.Translation);
-            checkBoxQASegmentation.Checked = sng.getQA(QualityAssuranceIndicators.Segmentation);
+            checkBoxQAImages.Checked = sng.GetQA(QualityAssuranceIndicators.Images);
+            checkBoxQASpelling.Checked = sng.GetQA(QualityAssuranceIndicators.Spelling);
+            checkBoxQATranslation.Checked = sng.GetQA(QualityAssuranceIndicators.Translation);
+            checkBoxQASegmentation.Checked = sng.GetQA(QualityAssuranceIndicators.Segmentation);
 
             labelFont.Text = sng.TextFont.Name + ", " + sng.TextFont.Style.ToString() + ", " + sng.TextFont.Size.ToString();
             labelFontTranslation.Text = sng.TranslationFont.Name + ", " + sng.TranslationFont.Style.ToString() + ", " + sng.TranslationFont.Size.ToString();
@@ -287,7 +288,7 @@ namespace Pbp.Forms
             // TODO
             //object[] songArgs = {partId,slideId};
             //pictureBoxPreview.Image = projWindow.showSlide(sng, sng.getImage(sld.ImageNumber), songArgs, ProjectionMode.Simulate);
-            pictureBoxPreview.Image = ImageManager.Instance.getImage(sng.getImage(sld.ImageNumber));
+            pictureBoxPreview.Image = ImageManager.Instance.getImage(sng.GetImage(sld.ImageNumber));
 
             currentPartId = partId;
             currentSlideId = slideId;
@@ -404,12 +405,12 @@ namespace Pbp.Forms
             if (checkBoxQASpelling.Checked)
             {
                 checkBoxQASpelling.ForeColor = Color.Red;
-                sng.setQA(QualityAssuranceIndicators.Spelling);
+                sng.SetQA(QualityAssuranceIndicators.Spelling);
             }
             else
             {
                 checkBoxQASpelling.ForeColor = SystemColors.ControlText;
-                sng.remQA(QualityAssuranceIndicators.Spelling);
+                sng.RemQA(QualityAssuranceIndicators.Spelling);
             }
         }
 
@@ -418,12 +419,12 @@ namespace Pbp.Forms
             if (checkBoxQATranslation.Checked)
             {
                 checkBoxQATranslation.ForeColor = Color.Red;
-                sng.setQA(QualityAssuranceIndicators.Translation);
+                sng.SetQA(QualityAssuranceIndicators.Translation);
             }
             else
             {
                 checkBoxQATranslation.ForeColor = SystemColors.ControlText;
-                sng.remQA(QualityAssuranceIndicators.Translation);
+                sng.RemQA(QualityAssuranceIndicators.Translation);
             }
         }
 
@@ -432,12 +433,12 @@ namespace Pbp.Forms
             if (checkBoxQAImages.Checked)
             {
                 checkBoxQAImages.ForeColor = Color.Red;
-                sng.setQA(QualityAssuranceIndicators.Images);
+                sng.SetQA(QualityAssuranceIndicators.Images);
             }
             else
             {
                 checkBoxQAImages.ForeColor = SystemColors.ControlText;
-                sng.remQA(QualityAssuranceIndicators.Images);
+                sng.RemQA(QualityAssuranceIndicators.Images);
             }
         }
 
@@ -446,12 +447,12 @@ namespace Pbp.Forms
             if (checkBoxQASegmentation.Checked)
             {
                 checkBoxQASegmentation.ForeColor = Color.Red;
-                sng.setQA(QualityAssuranceIndicators.Segmentation);
+                sng.SetQA(QualityAssuranceIndicators.Segmentation);
             }
             else
             {
                 checkBoxQASegmentation.ForeColor = SystemColors.ControlText;
-                sng.remQA(QualityAssuranceIndicators.Segmentation);
+                sng.RemQA(QualityAssuranceIndicators.Segmentation);
             }
         }
 
@@ -631,7 +632,7 @@ namespace Pbp.Forms
             }
             else
             {
-                SongFileWriter.createFactoryByFile(songFilename).save(songFilename, sng);
+                Pbp.IO.SongFileWriter.createFactoryByFile(songFilename).save(songFilename, sng);
 
                 hashCode = sng.GetHashCode();
                 ((EditorWindow)MdiParent).setStatus("Lied gespeichert als " + songFilename + "");
@@ -663,7 +664,7 @@ namespace Pbp.Forms
             }
             saveFileDialog.CheckPathExists = true;
             saveFileDialog.FileName = sng.Title;
-            saveFileDialog.Filter = SongFileWriter.getFileBoxFilter();
+            saveFileDialog.Filter = Pbp.IO.SongFileWriter.getFileBoxFilter();
             saveFileDialog.FilterIndex = ((EditorWindow)MdiParent).fileBoxFilterIndex;
             saveFileDialog.AddExtension = true;
             saveFileDialog.Title = Resources.Lied_speichern_unter___;
@@ -672,7 +673,7 @@ namespace Pbp.Forms
             {
                 hashCode = sng.GetHashCode();
 
-                SongFileWriter.createFactoryByFile(saveFileDialog.FileName).save(saveFileDialog.FileName, sng);
+                Pbp.IO.SongFileWriter.createFactoryByFile(saveFileDialog.FileName).save(saveFileDialog.FileName, sng);
 
                 ((EditorWindow)MdiParent).setStatus("Lied gespeichert als " + saveFileDialog.FileName + "");
             }
@@ -804,7 +805,7 @@ namespace Pbp.Forms
 
             // TODO
             //pictureBoxPreview.Image = projWindow.showSlide(sng, sng.getImage(sng.Parts[currentPartId].Slides[currentSlideId].ImageNumber), songArgs, ProjectionMode.Simulate);
-            pictureBoxPreview.Image = ImageManager.Instance.getImage(sng.getImage(sng.Parts[currentPartId].Slides[currentSlideId].ImageNumber));
+            pictureBoxPreview.Image = ImageManager.Instance.getImage(sng.GetImage(sng.Parts[currentPartId].Slides[currentSlideId].ImageNumber));
         }
 
         private void textBoxSongTranslation_KeyUp(object sender, KeyEventArgs e)

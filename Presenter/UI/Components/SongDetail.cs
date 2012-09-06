@@ -3,13 +3,14 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing;
 using System.Windows.Forms;
+using Pbp.Data.Song;
 
 namespace SongDetails
 {
     [DefaultEvent("SlideClicked")]
     public partial class SongDetail : UserControl
     {
-        private Pbp.Song currentSong;
+        private Song currentSong;
 
         private int elemHeight = 62;
         private int numParts = 0;
@@ -53,7 +54,7 @@ namespace SongDetails
             thumbWidth = Pbp.Properties.Settings.Default.ThumbSize.Width;
         }
 
-        public void setSong(Pbp.Song sng)
+        public void setSong(Song sng)
         {
             this.VerticalScroll.Value = 0;
             PerformLayout();

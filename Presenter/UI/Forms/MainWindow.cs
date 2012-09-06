@@ -378,7 +378,7 @@ namespace Pbp.Forms
             label3.Text = SongManager.Instance.CurrentSong.Song.Title;
             songDetailElement.setSong(SongManager.Instance.CurrentSong.Song);
 
-            if (SongManager.Instance.CurrentSong.Song.Comment != String.Empty || SongManager.Instance.CurrentSong.Song.hasQA())
+            if (SongManager.Instance.CurrentSong.Song.Comment != String.Empty || SongManager.Instance.CurrentSong.Song.HasQA())
             {
                 toolStripButton3.Image = Resources.highlight_red;
             }
@@ -403,7 +403,7 @@ namespace Pbp.Forms
 
             if (ProjectionWindow.Instance != null)
             {
-                SongSlide cs = SongManager.Instance.CurrentSong.Song.Parts[e.PartNumber].Slides[e.SlideNumber];
+                Pbp.Data.Song.SongSlide cs = SongManager.Instance.CurrentSong.Song.Parts[e.PartNumber].Slides[e.SlideNumber];
                 var ssl = new SongSlideLayer(cs);
 
                 // CTRL pressed, use image stack
@@ -432,7 +432,7 @@ namespace Pbp.Forms
                     // Current slide + attached image
                 else
                 {
-                    Image img = ImageManager.Instance.getImage(SongManager.Instance.CurrentSong.Song.getImage(cs.ImageNumber));
+                    Image img = ImageManager.Instance.getImage(SongManager.Instance.CurrentSong.Song.GetImage(cs.ImageNumber));
                     ProjectionWindow.Instance.DisplayLayer(1, img, Settings.Default.ProjectionFadeTimeLayer1);
                     ProjectionWindow.Instance.DisplayLayer(2, ssl);
 
@@ -1088,12 +1088,12 @@ namespace Pbp.Forms
             dlg.Title = "Setliste speichern unter...";
             if (dlg.ShowDialog() == DialogResult.OK)
             {
-                Setlist sl = new Setlist();
+                Pbp.Data.Setlist sl = new Pbp.Data.Setlist();
                 for (int i = 0; i < listViewSetList.Items.Count; i++)
                 {
                     sl.Items.Add(SongManager.Instance.SongList[(Guid)listViewSetList.Items[i].Tag].Song);
                 }
-                SetlistWriter swr = new SetlistWriter();
+                Pbp.IO.SetlistWriter swr = new Pbp.IO.SetlistWriter();
                 swr.write(dlg.FileName, sl);
             }
         }
@@ -1115,9 +1115,9 @@ namespace Pbp.Forms
             dlg.Title = "Setliste öffnen...";
             if (dlg.ShowDialog() == DialogResult.OK)
             {
-                SetlistReader sr = new SetlistReader();
+                Pbp.IO.SetlistReader sr = new Pbp.IO.SetlistReader();
                 try {
-                    Setlist sl = sr.read(dlg.FileName);
+                    Pbp.Data.Setlist sl = sr.read(dlg.FileName);
                     if (sl.Items.Count > 0)
                     {
                         foreach (var i in sl.Items)                
@@ -1300,7 +1300,7 @@ namespace Pbp.Forms
                     //labelComment.Text = SongManager.Instance.CurrentSong.Comment;
                     //alignCommentLabel(;
                     if (SongManager.Instance.CurrentSong.Song.Comment != String.Empty ||
-                        SongManager.Instance.CurrentSong.Song.hasQA())
+                        SongManager.Instance.CurrentSong.Song.HasQA())
                     {
                         toolStripButton3.Image = Resources.highlight_red;
                     }

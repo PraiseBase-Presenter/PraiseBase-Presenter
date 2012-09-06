@@ -28,7 +28,7 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Pbp
+namespace Pbp.Data
 {
     /// <summary>
     /// Tag class. It allows only unique items

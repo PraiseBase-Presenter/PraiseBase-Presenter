@@ -1,4 +1,4 @@
-﻿namespace Pbp
+﻿namespace Pbp.Data.Song
 {
     /// <summary>
     /// Different flags for indicating problems with the song

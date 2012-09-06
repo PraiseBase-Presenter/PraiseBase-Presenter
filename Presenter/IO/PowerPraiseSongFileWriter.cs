@@ -29,6 +29,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Xml;
+using Pbp.Data.Song;
 
 namespace Pbp.IO
 {
@@ -124,7 +125,7 @@ namespace Pbp.IO
                 }
                 xmlRoot["songtext"].AppendChild(tn);
             }
-            sng.updateSearchText();
+            sng.UpdateSearchText();
 
             xmlRoot.AppendChild(xmlDoc.CreateElement("order"));
             foreach (SongPart prt in sng.Parts)

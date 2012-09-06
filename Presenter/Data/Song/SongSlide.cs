@@ -30,7 +30,7 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
 
-namespace Pbp
+namespace Pbp.Data.Song
 {
     /// <summary>
     /// A single slide with songtext and/or a background image
@@ -60,6 +60,11 @@ namespace Pbp
         /// All text lines of this slide
         /// </summary>
         public List<string> Lines { get; set; }
+
+        /// <summary>
+        /// Part
+        /// </summary>
+        public string Part { get; set; }
 
         /// <summary>
         /// All translation lines of this slide
@@ -157,7 +162,7 @@ namespace Pbp
         public void SetSlideText(string text)
         {
             Lines = new List<string>();
-            string[] ln = text.Trim().Split(new[] { Environment.NewLine }, StringSplitOptions.None);
+            string[] ln = text.Trim().Split(new[] { Environment.NewLine, "<br/>" }, StringSplitOptions.None);
             foreach (string sl in ln)
             {
                 Lines.Add(sl.Trim());

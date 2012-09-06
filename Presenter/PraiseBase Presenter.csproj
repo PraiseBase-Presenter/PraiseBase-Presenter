@@ -104,11 +104,13 @@
     <Compile Include="Data\Setlist.cs" />
     <Compile Include="Data\Song\QualityAssuranceIndicator.cs" />
     <Compile Include="Data\Song\Song.cs" />
+    <Compile Include="Data\Song\SongAuthor.cs" />
     <Compile Include="Data\Song\SongFileType.cs" />
     <Compile Include="Data\Song\SongPart.cs" />
     <Compile Include="Data\Song\SongPartList.cs" />
     <Compile Include="Data\Song\SongSlide.cs" />
     <Compile Include="Data\Song\SongSlideList.cs" />
+    <Compile Include="Data\Song\SongTempo.cs" />
     <Compile Include="Data\TagList.cs" />
     <Compile Include="Editor.cs" />
     <Compile Include="IO\OpenLyricsSongFileReader.cs" />
@@ -244,7 +246,9 @@
     <Compile Include="Utils\ImageUtils.cs" />
     <Compile Include="Utils\StringUtils.cs" />
     <Content Include="Resources\Doc\License.txt" />
-    <Content Include="Resources\Samples\openlyrics\complex.xml" />
+    <Content Include="Resources\Samples\openlyrics\complex.xml">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Resources\Samples\openlyrics\simple.xml">
       <SubType>Designer</SubType>
     </Content>

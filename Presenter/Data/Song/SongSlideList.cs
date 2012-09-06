@@ -27,7 +27,7 @@
 
 using System.Collections.Generic;
 
-namespace Pbp
+namespace Pbp.Data.Song
 {
     /// <summary>
     /// Provides a list of all slides

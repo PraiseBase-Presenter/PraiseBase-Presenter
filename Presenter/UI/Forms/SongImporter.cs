@@ -7,6 +7,8 @@ using System.Linq;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
 using Pbp.Properties;
+using Pbp.IO;
+using Pbp.Data.Song;
 
 namespace Pbp.Forms
 {
