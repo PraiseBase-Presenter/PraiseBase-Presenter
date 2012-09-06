@@ -98,7 +98,7 @@ namespace Test
             expected.Parts.Add(part);
 
             Song actual;
-            actual = target.load(filename);
+            actual = target.Load(filename);
             Assert.AreEqual(expected.Title, actual.Title, "Wrong song title");
             Assert.AreEqual(expected.ModifiedTimestamp, actual.ModifiedTimestamp, "Wrong song modified date");
             Assert.AreEqual(expected.CreatedIn, actual.CreatedIn, "Wrong creator app");
@@ -215,7 +215,7 @@ namespace Test
             part.Slides.Add(slide);
             expected.Parts.Add(part);
 
-            Song actual = target.load(filename);
+            Song actual = target.Load(filename);
             Assert.AreEqual(expected.Title, actual.Title, "Wrong song title");
             Assert.AreEqual(expected.ModifiedTimestamp, actual.ModifiedTimestamp, "Wrong song modified date");
             Assert.AreEqual(expected.CreatedIn, actual.CreatedIn, "Wrong creator app");

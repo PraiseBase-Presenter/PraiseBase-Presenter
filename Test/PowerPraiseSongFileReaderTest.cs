@@ -120,7 +120,7 @@ namespace Test
             part.Slides.Add(slide);
             expected.Parts.Add(part);
             
-            Song actual = target.load(filename);
+            Song actual = target.Load(filename);
             Assert.AreEqual(expected.Title, actual.Title, "Wrong song title");
             Assert.AreEqual(expected.Language, actual.Language, "Wrong language");
 
