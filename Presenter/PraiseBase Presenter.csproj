@@ -118,8 +118,8 @@
     <Compile Include="IO\Writer\PowerPraiseSongFileWriter.cs" />
     <Compile Include="IO\Reader\SetlistReader.cs" />
     <Compile Include="IO\Writer\SetlistWriter.cs" />
-    <Compile Include="IO\SongFileReader.cs" />
-    <Compile Include="IO\SongFileWriter.cs" />
+    <Compile Include="IO\Reader\SongFileReader.cs" />
+    <Compile Include="IO\Writer\SongFileWriter.cs" />
     <Compile Include="IO\Reader\XMLBibleReader.cs" />
     <Compile Include="Manager\BibleManager.cs" />
     <Compile Include="Projection\BaseLayer.cs" />
