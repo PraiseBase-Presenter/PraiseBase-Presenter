@@ -305,10 +305,11 @@ namespace Pbp.Forms
                 {
                     string fileName = Settings.Default.DataDirectory + Path.DirectorySeparatorChar
                         + Settings.Default.SongDir + Path.DirectorySeparatorChar
-                        + ((Song)listViewSongs.Items[x].Tag).Title + "." + SongFileWriter.SupportedFileTypes[SongFileWriter.PreferredType].Extension;
+                        + ((Song)listViewSongs.Items[x].Tag).Title + SongFileWriterFactory.Instance.CreateFactory(SongFileWriterFactory.Instance.PreferredType).FileExtension;
                     if ((File.Exists(fileName) && (MessageBox.Show("Das Lied '" + ((Song)listViewSongs.Items[x].Tag).Title + "' existiert bereits. Überschreiben?", "PraiseBox Importer", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)) || !File.Exists(fileName))
                     {
-                        SongFileWriter.createFactoryByFile(fileName).save(fileName, (Song)listViewSongs.Items[x].Tag);
+                        // TODO Exception handling
+                        SongFileWriterFactory.Instance.CreateFactoryByFile(fileName).Save(fileName, (Song)listViewSongs.Items[x].Tag);
                         filesToOpen.Add(fileName);
                         cnt++;
                     }

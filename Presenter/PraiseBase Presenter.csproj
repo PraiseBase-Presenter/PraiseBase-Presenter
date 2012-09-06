@@ -113,12 +113,14 @@
     <Compile Include="DataObjects\Song\SongTempo.cs" />
     <Compile Include="DataObjects\TagList.cs" />
     <Compile Include="Editor.cs" />
+    <Compile Include="IO\Reader\SongFileReaderFactory.cs" />
     <Compile Include="IO\Reader\OpenLyricsSongFileReader.cs" />
     <Compile Include="IO\Reader\PowerPraiseSongFileReader.cs" />
     <Compile Include="IO\Writer\PowerPraiseSongFileWriter.cs" />
     <Compile Include="IO\Reader\SetlistReader.cs" />
     <Compile Include="IO\Writer\SetlistWriter.cs" />
     <Compile Include="IO\Reader\SongFileReader.cs" />
+    <Compile Include="IO\Writer\SongFileWriterFactory.cs" />
     <Compile Include="IO\Writer\SongFileWriter.cs" />
     <Compile Include="IO\Reader\XMLBibleReader.cs" />
     <Compile Include="Manager\BibleManager.cs" />

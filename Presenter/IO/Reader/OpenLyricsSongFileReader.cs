@@ -37,6 +37,14 @@ namespace Pbp.IO
 {
     class OpenLyricsSongFileReader : SongFileReader
     {
+        public override string FileExtension { get { return ".xml"; } }
+
+        public override string FileTypeDescription { get { return "OpenLyrics Song"; } }
+
+        protected const string SupportedFileFormatVersion = "0.8";
+
+        protected const string XmlRootNodeName = "song";
+
         public override Song Load(string filename)
         {
             Song sng = new Song();
@@ -54,7 +62,7 @@ namespace Pbp.IO
             XmlElement xmlRoot = xmlDoc.DocumentElement;
 
             // Check for correct root node and version
-            if (xmlRoot.Name != "song" || xmlRoot.GetAttribute("version") != "0.8")
+            if (xmlRoot.Name != XmlRootNodeName || xmlRoot.GetAttribute("version") != SupportedFileFormatVersion)
             {
                 throw new InvalidSongSourceFileException();
             }
@@ -145,7 +153,7 @@ namespace Pbp.IO
                             var slide = new SongSlide(sng);
                             if (linesNode.Attributes["part"] != null)
                             {
-                                slide.Part = linesNode.Attributes["part"].InnerText;
+                                slide.PartName = linesNode.Attributes["part"].InnerText;
                             }
                             string lineText = string.Empty;
                             foreach (XmlNode line in linesNode)

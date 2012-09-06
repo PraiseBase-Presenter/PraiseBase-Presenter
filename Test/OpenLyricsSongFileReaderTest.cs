@@ -150,7 +150,7 @@ namespace Test
             slide.Lines.Add("Amazing grace how sweet the sound that saved a wretch like me;");
             part.Slides.Add(slide);
             slide = new SongSlide(expected);
-            slide.Part = "women";
+            slide.PartName = "women";
             slide.Lines.Add("A b c");
             slide.Lines.Add("D e f");
             part.Slides.Add(slide);
@@ -176,7 +176,7 @@ namespace Test
             part.Caption = "v2";
             part.Language = "en-US";
             slide = new SongSlide(expected);
-            slide.Part = "men";
+            slide.PartName = "men";
             slide.Lines.Add("");
             slide.Lines.Add("Amazing grace how sweet the sound that saved a wretch like me;");
             slide.Lines.Add("");
@@ -184,7 +184,7 @@ namespace Test
             slide.Lines.Add("Amazing grace how sweet the sound that saved a wretch like me;");
             part.Slides.Add(slide);
             slide = new SongSlide(expected);
-            slide.Part = "women";
+            slide.PartName = "women";
             slide.Lines.Add("A b c");
             slide.Lines.Add("");
             slide.Lines.Add("D e f");
@@ -233,7 +233,7 @@ namespace Test
                 for (int j = 0; j < expected.Parts[i].Slides.Count; j++)
                 {
                     Assert.AreEqual(expected.Parts[i].Slides[j].Lines.Count, actual.Parts[i].Slides[j].Lines.Count, "Slide lines incomplete "+i+" "+j);
-                    Assert.AreEqual(expected.Parts[i].Slides[j].Part, actual.Parts[i].Slides[j].Part, "Wrong slide part name");
+                    Assert.AreEqual(expected.Parts[i].Slides[j].PartName, actual.Parts[i].Slides[j].PartName, "Wrong slide part name");
                     for (int k = 0; k < expected.Parts[i].Slides[j].Lines.Count; k++)
                     {
                         Assert.AreEqual(expected.Parts[i].Slides[j].Lines[k], actual.Parts[i].Slides[j].Lines[k], "Wrong slide lyrics");

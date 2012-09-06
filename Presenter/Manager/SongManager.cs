@@ -142,9 +142,9 @@ namespace Pbp
         {
             // Find song files
             var songPaths = new List<string>();
-            foreach (string ext in SongFileReader.GetSupportedExtensions())
+            foreach (string ext in SongFileReaderFactory.Instance.SupportedExtensions)
             {
-                string[] songFilePaths = Directory.GetFiles(SongDirPath, "*." + ext, SearchOption.AllDirectories);
+                string[] songFilePaths = Directory.GetFiles(SongDirPath, "*" + ext, SearchOption.AllDirectories);
                 songPaths.AddRange(songFilePaths);
             }
             int cnt = songPaths.Count;
@@ -157,7 +157,7 @@ namespace Pbp
                 try
                 {
                     SongItem si = new SongItem();
-                    SongFileReader sfr = SongFileReader.CreateFactoryByFile(path);
+                    SongFileReader sfr = SongFileReaderFactory.Instance.CreateFactoryByFile(path);
                     si.Song = sfr.Load(path);
                     si.Filename = path;
                     si.Filetype = Path.GetExtension(path);
@@ -213,7 +213,7 @@ namespace Pbp
             try
             {
                 SongItem si = new SongItem();
-                SongFileReader sfr = SongFileReader.CreateFactoryByFile(path);
+                SongFileReader sfr = SongFileReaderFactory.Instance.CreateFactoryByFile(path);
                 si.Song = sfr.Load(path);
                 si.Filename = path;
 
@@ -285,8 +285,8 @@ namespace Pbp
 
         public void SaveCurrentSong()
         {
-            SongFileWriter sfw = SongFileWriter.createFactoryByFile(CurrentSong.Filename);
-            sfw.save(CurrentSong.Filename, CurrentSong.Song);
+            SongFileWriter sfw = SongFileWriterFactory.Instance.CreateFactoryByFile(CurrentSong.Filename);
+            sfw.Save(CurrentSong.Filename, CurrentSong.Song);
         }
     }
 

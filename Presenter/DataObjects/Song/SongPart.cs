@@ -25,12 +25,16 @@
  *
  */
 
+using System;
+using System.Runtime.Serialization;
+
 namespace Pbp.Data.Song
 {
     /// <summary>
     /// A song part with a given name and one or more slides
     /// </summary>
-    public class SongPart
+    [Serializable()]
+    public class SongPart : ISerializable
     {
         /// <summary>
         /// Part constructor
@@ -55,9 +59,25 @@ namespace Pbp.Data.Song
         /// </summary>
         public SongSlideList Slides { get; set; }
 
+        /// <summary>
+        /// Gets the hash code
+        /// </summary>
+        /// <returns></returns>
         public override int GetHashCode()
         {
             return Caption.GetHashCode() ^ Slides.GetHashCode();
+        }
+
+        /// <summary>
+        /// Gets the object data for serialization
+        /// </summary>
+        /// <param name="info"></param>
+        /// <param name="context"></param>
+        public void GetObjectData(SerializationInfo info, StreamingContext context)
+        {
+            info.AddValue("Caption", this.Caption);
+            info.AddValue("Language", this.Language);
+            info.AddValue("Slides", this.Slides);
         }
     }
 }

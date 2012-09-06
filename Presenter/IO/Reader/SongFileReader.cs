@@ -28,59 +28,24 @@
 using System;
 using System.Collections.Generic;
 using Pbp.Data.Song;
+using System.Reflection;
+using System.Linq;
 
 namespace Pbp.IO
 {
     public abstract class SongFileReader
     {
-        public static readonly Dictionary<String, SongFileType> SupportedFileTypes = new Dictionary<string, SongFileType>{
-            { "ppl", new SongFileType("PowerPraise Lied", "ppl")},
-            //{ "openlyrics", new SongFileType("OpenLyrics", "xml")},
-            //{ "pbps", new SongFileType("PraiseBase-Presenter Song", "pbps")}
-        };
-
+        /// <summary>
+        /// Loads and instantiates a song from a file
+        /// </summary>
+        /// <param name="filename">Absolute path to the song file</param>
+        /// <returns>Song object instance</returns>
         abstract public Song Load(string filename);
 
-        public static SongFileReader CreateFactory(string type)
-        {
-            if (type == "ppl")
-            {
-                return new PowerPraiseSongFileReader();
-            }
+        abstract public string FileExtension { get; }
 
-            throw new NotImplementedException();
-        }
+        abstract public string FileTypeDescription { get; }
 
-        public static SongFileReader CreateFactoryByFile(string filename)
-        {
-            string ext = System.IO.Path.GetExtension(filename);
-            if (ext == ".ppl")
-            {
-                return CreateFactory("ppl");
-            }
-            throw new NotImplementedException();
-        }
-
-        public static string GetFileBoxFilter()
-        {
-            String fltr = String.Empty;
-            foreach (var t in SupportedFileTypes)
-            {
-                fltr += t.Value.Name + " (*." + t.Value.Extension + ")|*." + t.Value.Extension + "|";
-            }
-            fltr += "Alle Dateien (*.*)|*.*";
-            return fltr;
-        }
-
-        public static HashSet<string> GetSupportedExtensions()
-        {
-            HashSet<string> l = new HashSet<string>();
-            foreach (var t in SupportedFileTypes)
-            {
-                l.Add(t.Value.Extension);
-            }
-            return l;
-        }
     }
 
     public class IncompleteSongSourceFileException : Exception

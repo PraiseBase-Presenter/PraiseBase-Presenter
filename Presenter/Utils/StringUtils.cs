@@ -28,10 +28,12 @@
 using System;
 using System.Drawing;
 using System.Text;
+using System.Xml.Serialization;
+using System.IO;
 
 namespace Pbp
 {
-    public class StringUtils
+    public static class StringUtils
     {
         /// <summary>
         /// Gibt einen MD5 Hash als String zurück
@@ -141,6 +143,25 @@ namespace Pbp
             string[] textLinesStr = new string[Lines.Count];
             Lines.CopyTo(textLinesStr, 0);
             return textLinesStr;
+        }
+
+        /// <summary>
+        /// Serialize object to string
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="toSerialize"></param>
+        /// <returns></returns>
+        public static string SerializeObject<T>(this T toSerialize, bool returnHash)
+        {
+            XmlSerializer xmlSerializer = new XmlSerializer(toSerialize.GetType());
+            StringWriter textWriter = new StringWriter();
+
+            xmlSerializer.Serialize(textWriter, toSerialize);
+            if (returnHash)
+            {
+                return GetMD5Hash(textWriter.ToString());
+            }
+            return textWriter.ToString();
         }
     }
 }

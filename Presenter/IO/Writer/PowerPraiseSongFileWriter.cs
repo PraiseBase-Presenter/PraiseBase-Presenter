@@ -35,18 +35,24 @@ namespace Pbp.IO
 {
     public class PowerPraiseSongFileWriter : SongFileWriter
     {
-        public const string FileFormatVersion = "3.0";
+        public override string FileExtension { get { return ".ppl"; } }
 
-        public override void save(string filename, Song sng)
+        public override string FileTypeDescription { get { return "PowerPraise Lied"; } }
+
+        protected const string SupportedFileFormatVersion = "3.0";
+
+        protected const string XmlRootNodeName = "ppl";
+
+        public override void Save(string filename, Song sng)
         {
             var xmlDoc = new XmlDocument();
 
             XmlNode xmlnode = xmlDoc.CreateNode(XmlNodeType.XmlDeclaration, "", "");
             xmlDoc.AppendChild(xmlnode);
 
-            xmlDoc.AppendChild(xmlDoc.CreateElement("ppl"));
+            xmlDoc.AppendChild(xmlDoc.CreateElement(XmlRootNodeName));
             XmlElement xmlRoot = xmlDoc.DocumentElement;
-            xmlRoot.SetAttribute("version", FileFormatVersion);
+            xmlRoot.SetAttribute("version", SupportedFileFormatVersion);
 
             xmlRoot.AppendChild(xmlDoc.CreateElement("general"));
             xmlRoot["general"].AppendChild(xmlDoc.CreateElement("title"));

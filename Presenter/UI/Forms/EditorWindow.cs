@@ -30,6 +30,7 @@ using System.IO;
 using System.Linq;
 using System.Windows.Forms;
 using Pbp.Properties;
+using Pbp.IO;
 
 namespace Pbp.Forms
 {
@@ -77,7 +78,7 @@ namespace Pbp.Forms
             openFileDialog.Multiselect = false;
             openFileDialog.Title = "Lied öffnen";
 
-            openFileDialog.Filter = Pbp.IO.SongFileReader.GetFileBoxFilter();
+            openFileDialog.Filter = SongFileReaderFactory.Instance.GetFileBoxFilter();
             openFileDialog.FilterIndex = fileBoxFilterIndex;
             if (openFileDialog.ShowDialog(this) == DialogResult.OK)
             {

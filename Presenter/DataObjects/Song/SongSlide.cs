@@ -29,13 +29,15 @@ using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
+using System.Runtime.Serialization;
 
 namespace Pbp.Data.Song
 {
     /// <summary>
     /// A single slide with songtext and/or a background image
     /// </summary>
-    public class SongSlide : ICloneable
+    [Serializable()]
+    public class SongSlide : ICloneable, ISerializable 
     {
         /// <summary>
         /// Pointer to the song object who owns this slide
@@ -51,7 +53,6 @@ namespace Pbp.Data.Song
             Translation = new List<string>();
             HorizontalAlign = Song.SongTextHorizontalAlign.Center;
             VerticalAlign = Song.SongTextVerticalAlign.Center;
-            SongTextAlign = Song.TextAlign.MittleLeft;
             ImageNumber = 0;
             _ownerSong = ownerSong;
         }
@@ -64,7 +65,7 @@ namespace Pbp.Data.Song
         /// <summary>
         /// Part
         /// </summary>
-        public string Part { get; set; }
+        public string PartName { get; set; }
 
         /// <summary>
         /// All translation lines of this slide
@@ -93,8 +94,6 @@ namespace Pbp.Data.Song
         /// Vertical text alignment
         /// </summary>
         public Song.SongTextVerticalAlign VerticalAlign { get; set; }
-
-        public Song.TextAlign SongTextAlign { get; set; }
 
         /// <summary>
         /// The font object of this slide
@@ -229,11 +228,19 @@ namespace Pbp.Data.Song
             return Lines.Aggregate("", (current, str) => current + (str + " "));
         }
 
+        /// <summary>
+        /// Gets the translation on one line
+        /// </summary>
+        /// <returns></returns>
         public string GetOneLineTranslation()
         {
             return Translation.Aggregate("", (current, str) => current + (str + " "));
         }
 
+        /// <summary>
+        /// Gets the hash code
+        /// </summary>
+        /// <returns></returns>
         public override int GetHashCode()
         {
             int res = ImageNumber.GetHashCode() ^ HorizontalAlign.GetHashCode() ^ VerticalAlign.GetHashCode();
@@ -246,6 +253,21 @@ namespace Pbp.Data.Song
                 res = res ^ Translation[i].GetHashCode();
             }
             return res;
+        }
+
+        /// <summary>
+        /// Gets the object data for serialization
+        /// </summary>
+        /// <param name="info"></param>
+        /// <param name="context"></param>
+        public void GetObjectData(SerializationInfo info, StreamingContext context)
+        {
+            info.AddValue("HorizontalAlign", this.HorizontalAlign);
+            info.AddValue("VerticalAlign", this.VerticalAlign);
+            info.AddValue("ImageNumber", this.ImageNumber);
+            info.AddValue("PartName", this.PartName);
+            info.AddValue("Lines", this.Lines);
+            info.AddValue("Translation", this.Translation);
         }
     } ;
 }

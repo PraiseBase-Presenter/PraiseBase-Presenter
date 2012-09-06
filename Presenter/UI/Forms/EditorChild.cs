@@ -31,6 +31,7 @@ using System.IO;
 using System.Windows.Forms;
 using Pbp.Properties;
 using Pbp.Data.Song;
+using Pbp.IO;
 
 namespace Pbp.Forms
 {
@@ -59,7 +60,7 @@ namespace Pbp.Forms
             {
                 try
                 {
-                    sng = Pbp.IO.SongFileReader.CreateFactoryByFile(fileName).Load(fileName);
+                    sng = SongFileReaderFactory.Instance.CreateFactoryByFile(fileName).Load(fileName);
                 }
                 catch (Exception e)
                 {
@@ -98,6 +99,7 @@ namespace Pbp.Forms
             populateTree();
             treeViewContents.SelectedNode = treeViewContents.Nodes[0];
             valid = true;
+
             hashCode = sng.GetHashCode();
 
             populatePartList();
@@ -638,7 +640,7 @@ namespace Pbp.Forms
             }
             else
             {
-                Pbp.IO.SongFileWriter.createFactoryByFile(songFilename).save(songFilename, sng);
+                SongFileWriterFactory.Instance.CreateFactoryByFile(songFilename).Save(songFilename, sng);
 
                 hashCode = sng.GetHashCode();
                 ((EditorWindow)MdiParent).setStatus("Lied gespeichert als " + songFilename + "");
@@ -670,7 +672,7 @@ namespace Pbp.Forms
             }
             saveFileDialog.CheckPathExists = true;
             saveFileDialog.FileName = sng.Title;
-            saveFileDialog.Filter = Pbp.IO.SongFileWriter.getFileBoxFilter();
+            saveFileDialog.Filter = SongFileWriterFactory.Instance.GetFileBoxFilter();
             saveFileDialog.FilterIndex = ((EditorWindow)MdiParent).fileBoxFilterIndex;
             saveFileDialog.AddExtension = true;
             saveFileDialog.Title = Resources.Lied_speichern_unter___;
@@ -679,7 +681,7 @@ namespace Pbp.Forms
             {
                 hashCode = sng.GetHashCode();
 
-                Pbp.IO.SongFileWriter.createFactoryByFile(saveFileDialog.FileName).save(saveFileDialog.FileName, sng);
+                SongFileWriterFactory.Instance.CreateFactoryByFile(saveFileDialog.FileName).Save(saveFileDialog.FileName, sng);
 
                 ((EditorWindow)MdiParent).setStatus("Lied gespeichert als " + saveFileDialog.FileName + "");
             }

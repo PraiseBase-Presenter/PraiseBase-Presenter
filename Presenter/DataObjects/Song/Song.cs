@@ -29,6 +29,9 @@ using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
+using System.Runtime.Serialization;
+using System.Xml.Serialization;
+using System.IO;
 
 namespace Pbp.Data.Song
 {
@@ -37,7 +40,8 @@ namespace Pbp.Data.Song
     ///
     /// Author: Nicolas Perrenoud, nicu_at_lavine.ch
     /// </summary>
-    public class Song
+    [Serializable()]
+    public class Song : ISerializable
     {
         #region Fields
 
@@ -397,18 +401,55 @@ namespace Pbp.Data.Song
         public override int GetHashCode()
         {
             int code = Title.GetHashCode()
+                       ^ Parts.GetHashCode()
                        ^ QualityIssues.GetHashCode()
                        ^ TextFont.GetHashCode()
                        ^ TextColor.GetHashCode()
                        ^ TranslationColor.GetHashCode()
                        ^ TranslationFont.GetHashCode()
-                       ^ Language.GetHashCode()
-                       ^ Comment.GetHashCode()
                        ^ TextLineSpacing.GetHashCode()
-                       ^ Tags.GetHashCode()
-                       ^ Parts.GetHashCode();
+                       ^ Tags.GetHashCode();
 
+            if (Language != null)
+            {
+                code ^= Language.GetHashCode();
+            }
+            if (Comment != null)
+            {
+                code ^= Comment.GetHashCode();
+            }
+            if (CcliID != null)
+            {
+                code ^= CcliID.GetHashCode();
+            }
+            if (Copyright != null)
+            {
+                code ^= Copyright.GetHashCode();
+            }
             return code;
         }
+
+        /// <summary>
+        /// Serialize song object
+        /// </summary>
+        /// <param name="info"></param>
+        /// <param name="context"></param>
+        public void GetObjectData(SerializationInfo info, StreamingContext context)
+        {
+            info.AddValue("Parts", this.Parts);
+            info.AddValue("Title", this.Title);
+            info.AddValue("QualityIssues", this.QualityIssues);
+            info.AddValue("TextFont", this.TextFont.ToString());
+            info.AddValue("TextColor", this.TextColor);
+            info.AddValue("TranslationColor", this.TranslationColor);
+            info.AddValue("TranslationFont", this.TranslationFont.ToString());
+            info.AddValue("Language", this.Language);
+            info.AddValue("Comment", this.Comment);
+            info.AddValue("TextLineSpacing", this.TextLineSpacing);
+            info.AddValue("Tags", this.Tags);
+            info.AddValue("CcliID", this.CcliID);
+            info.AddValue("Copyright", this.Copyright);
+        }
+
     }
 }

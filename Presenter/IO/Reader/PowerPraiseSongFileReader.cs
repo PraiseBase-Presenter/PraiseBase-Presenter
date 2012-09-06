@@ -36,7 +36,13 @@ namespace Pbp.IO
 {
     public class PowerPraiseSongFileReader : SongFileReader
     {
+        public override string FileExtension { get { return ".ppl"; } }
+
+        public override string FileTypeDescription { get { return "PowerPraise Lied"; } }
+
         protected const string SupportedFileFormatVersion = "3.0";
+
+        protected const string XmlRootNodeName = "ppl";
 
         public override Song Load(string filename)
         {
@@ -54,7 +60,7 @@ namespace Pbp.IO
             xmlDoc.Load(filename);
             XmlElement xmlRoot = xmlDoc.DocumentElement;
 
-            if (xmlRoot.Name != "ppl" || xmlRoot.GetAttribute("version") != SupportedFileFormatVersion)
+            if (xmlRoot.Name != XmlRootNodeName || xmlRoot.GetAttribute("version") != SupportedFileFormatVersion)
             {
                 throw new Exception("Invalid file type!");
             }
