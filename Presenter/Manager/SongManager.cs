@@ -138,11 +138,11 @@ namespace Pbp
         /// Reloads all songs from the song direcory
         /// specified in the application settings
         /// </summary>
-        public void reload()
+        public void Reload()
         {
             // Find song files
             var songPaths = new List<string>();
-            foreach (string ext in SongFileReader.getSupportedExtensions())
+            foreach (string ext in SongFileReader.GetSupportedExtensions())
             {
                 string[] songFilePaths = Directory.GetFiles(SongDirPath, "*." + ext, SearchOption.AllDirectories);
                 songPaths.AddRange(songFilePaths);
@@ -157,8 +157,8 @@ namespace Pbp
                 try
                 {
                     SongItem si = new SongItem();
-                    SongFileReader sfr = SongFileReader.createFactoryByFile(path);
-                    si.Song = sfr.load(path);
+                    SongFileReader sfr = SongFileReader.CreateFactoryByFile(path);
+                    si.Song = sfr.Load(path);
                     si.Filename = path;
                     si.Filetype = Path.GetExtension(path);
 
@@ -191,7 +191,7 @@ namespace Pbp
         /// </summary>
         /// <param name="title">The title of the song</param>
         /// <returns>Returns the position in the songlist</returns>
-        public Guid getGuidByTitle(string title)
+        public Guid GetGuidByTitle(string title)
         {
             foreach (var kvp in SongList)
             {
@@ -213,8 +213,8 @@ namespace Pbp
             try
             {
                 SongItem si = new SongItem();
-                SongFileReader sfr = SongFileReader.createFactoryByFile(path);
-                si.Song = sfr.load(path);
+                SongFileReader sfr = SongFileReader.CreateFactoryByFile(path);
+                si.Song = sfr.Load(path);
                 si.Filename = path;
 
                 // TODO
@@ -283,7 +283,7 @@ namespace Pbp
             return tmpList;
         }
 
-        public void saveCurrentSong()
+        public void SaveCurrentSong()
         {
             SongFileWriter sfw = SongFileWriter.createFactoryByFile(CurrentSong.Filename);
             sfw.save(CurrentSong.Filename, CurrentSong.Song);

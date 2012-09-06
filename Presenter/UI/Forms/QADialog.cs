@@ -45,7 +45,7 @@ namespace Pbp.Forms
             else
                 SongManager.Instance.CurrentSong.Song.RemQA(QualityAssuranceIndicators.Segmentation);
 
-            SongManager.Instance.saveCurrentSong();
+            SongManager.Instance.SaveCurrentSong();
 
             DialogResult = DialogResult.OK;
             this.Close();

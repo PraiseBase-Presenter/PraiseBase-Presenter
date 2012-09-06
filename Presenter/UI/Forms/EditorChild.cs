@@ -59,7 +59,7 @@ namespace Pbp.Forms
             {
                 try
                 {
-                    sng = Pbp.IO.SongFileReader.createFactoryByFile(fileName).load(fileName);
+                    sng = Pbp.IO.SongFileReader.CreateFactoryByFile(fileName).Load(fileName);
                 }
                 catch (Exception e)
                 {
@@ -78,6 +78,12 @@ namespace Pbp.Forms
                 tmpPart.Caption = Pbp.Properties.Settings.Default.SongPartDefaultName;
                 tmpPart.Slides.Add(new SongSlide(sng));
                 sng.Parts.Add(tmpPart);
+
+                sng.TextFont = Settings.Default.ProjectionMasterFont;
+                sng.TextColor = Settings.Default.ProjectionMasterFontColor;
+                sng.TranslationFont = Settings.Default.ProjectionMasterFontTranslation;
+                sng.TranslationColor = Settings.Default.ProjectionMasterTranslationColor;
+                sng.TextLineSpacing = Settings.Default.ProjectionMasterLineSpacing;
             }
 
             // Set window title
@@ -280,15 +286,15 @@ namespace Pbp.Forms
                 slideId = sng.Parts[partId].Slides.Count;
 
             SongSlide sld = sng.Parts[partId].Slides[slideId];
-            textBoxSongText.Text = sld.LineBreakText();
-            textBoxSongTranslation.Text = sld.LineBreakTranslation();
+            textBoxSongText.Text = sld.GetLineBreakText();
+            textBoxSongTranslation.Text = sld.GetLineBreakTranslation();
             comboBoxSlideHorizOrientation.SelectedIndex = (int)sld.HorizontalAlign;
             comboBoxSlideVertOrientation.SelectedIndex = (int)sld.VerticalAlign;
 
             // TODO
             //object[] songArgs = {partId,slideId};
             //pictureBoxPreview.Image = projWindow.showSlide(sng, sng.getImage(sld.ImageNumber), songArgs, ProjectionMode.Simulate);
-            pictureBoxPreview.Image = ImageManager.Instance.getImage(sng.GetImage(sld.ImageNumber));
+            pictureBoxPreview.Image = ImageManager.Instance.GetImage(sng.GetImage(sld.ImageNumber));
 
             currentPartId = partId;
             currentSlideId = slideId;
@@ -805,7 +811,7 @@ namespace Pbp.Forms
 
             // TODO
             //pictureBoxPreview.Image = projWindow.showSlide(sng, sng.getImage(sng.Parts[currentPartId].Slides[currentSlideId].ImageNumber), songArgs, ProjectionMode.Simulate);
-            pictureBoxPreview.Image = ImageManager.Instance.getImage(sng.GetImage(sng.Parts[currentPartId].Slides[currentSlideId].ImageNumber));
+            pictureBoxPreview.Image = ImageManager.Instance.GetImage(sng.GetImage(sng.Parts[currentPartId].Slides[currentSlideId].ImageNumber));
         }
 
         private void textBoxSongTranslation_KeyUp(object sender, KeyEventArgs e)

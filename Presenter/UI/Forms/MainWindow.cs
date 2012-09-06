@@ -284,12 +284,12 @@ namespace Pbp.Forms
         private void reloadSongList()
         {
             songSearchTextBox.Text = "";
-            SongManager.Instance.reload();
+            SongManager.Instance.Reload();
             loadSongList();
 
             for (int i = 0; i < listViewSetList.Items.Count; i++)
             {
-                Guid g = SongManager.Instance.getGuidByTitle(listViewSetList.Items[i].Text);
+                Guid g = SongManager.Instance.GetGuidByTitle(listViewSetList.Items[i].Text);
                 if (g != Guid.Empty)
                 {
                     listViewSetList.Items[i].Tag = g;
@@ -411,7 +411,7 @@ namespace Pbp.Forms
                 {
                     if (listViewImageQueue.Items.Count > 0)
                     {
-                        Image img = ImageManager.Instance.getImageFromRelPath((string)listViewImageQueue.Items[0].Tag);
+                        Image img = ImageManager.Instance.GetImageFromRelPath((string)listViewImageQueue.Items[0].Tag);
                         ProjectionWindow.Instance.DisplayLayer(1, img, Settings.Default.ProjectionFadeTimeLayer1);
                         ProjectionWindow.Instance.DisplayLayer(2, ssl);
                         imageHistoryAdd((string)listViewImageQueue.Items[0].Tag);
@@ -432,7 +432,7 @@ namespace Pbp.Forms
                     // Current slide + attached image
                 else
                 {
-                    Image img = ImageManager.Instance.getImage(SongManager.Instance.CurrentSong.Song.GetImage(cs.ImageNumber));
+                    Image img = ImageManager.Instance.GetImage(SongManager.Instance.CurrentSong.Song.GetImage(cs.ImageNumber));
                     ProjectionWindow.Instance.DisplayLayer(1, img, Settings.Default.ProjectionFadeTimeLayer1);
                     ProjectionWindow.Instance.DisplayLayer(2, ssl);
 
@@ -449,7 +449,7 @@ namespace Pbp.Forms
             // Stack
             if ((ModifierKeys & Keys.Control) == Keys.Control)
             {
-                listViewImageQueue.LargeImageList.Images.Add(ImageManager.Instance.getThumbFromRelPath(e.relativePath));
+                listViewImageQueue.LargeImageList.Images.Add(ImageManager.Instance.GetThumbFromRelPath(e.relativePath));
                 var lvi = new ListViewItem("");
                 lvi.Tag = e.relativePath;
                 lvi.ImageIndex = listViewImageQueue.LargeImageList.Images.Count - 1;
@@ -470,7 +470,7 @@ namespace Pbp.Forms
                 }
 
                 // Show image
-                Image img = ImageManager.Instance.getImageFromRelPath(e.relativePath);
+                Image img = ImageManager.Instance.GetImageFromRelPath(e.relativePath);
                 ProjectionWindow.Instance.DisplayLayer(1, img, Settings.Default.ProjectionFadeTimeLayer1);
 
                 if (e.relativePath != String.Empty)
@@ -532,7 +532,7 @@ namespace Pbp.Forms
 
             foreach (string relImagePath in Settings.Default.ImageFavorites)
             {
-                listViewFavorites.LargeImageList.Images.Add(ImageManager.Instance.getThumbFromRelPath(relImagePath));
+                listViewFavorites.LargeImageList.Images.Add(ImageManager.Instance.GetThumbFromRelPath(relImagePath));
                 var lvi = new ListViewItem("");
                 lvi.Tag = relImagePath;
                 lvi.ImageIndex = listViewFavorites.LargeImageList.Images.Count - 1;
@@ -662,7 +662,7 @@ namespace Pbp.Forms
                 if ((ModifierKeys & Keys.Control) == Keys.Control)
                 {
                     listViewImageQueue.LargeImageList.Images.Add(
-                        ImageManager.Instance.getThumbFromRelPath((string)listViewDirectoryImages.Items[idx].Tag));
+                        ImageManager.Instance.GetThumbFromRelPath((string)listViewDirectoryImages.Items[idx].Tag));
                     var lvi = new ListViewItem("");
                     lvi.Tag = listViewDirectoryImages.Items[idx].Tag;
                     lvi.ImageIndex = listViewImageQueue.LargeImageList.Images.Count - 1;
@@ -688,7 +688,7 @@ namespace Pbp.Forms
                     }
 
                     Image img =
-                        ImageManager.Instance.getImageFromRelPath((string)listViewDirectoryImages.Items[idx].Tag);
+                        ImageManager.Instance.GetImageFromRelPath((string)listViewDirectoryImages.Items[idx].Tag);
                     ProjectionWindow.Instance.DisplayLayer(1, img, Settings.Default.ProjectionFadeTimeLayer1);
 
                     // Add image to history
@@ -709,7 +709,7 @@ namespace Pbp.Forms
                         listViewImageHistory.Items.RemoveAt(i);
                     }
                 }
-                listViewImageHistory.LargeImageList.Images.Add(ImageManager.Instance.getThumbFromRelPath(relImagePath));
+                listViewImageHistory.LargeImageList.Images.Add(ImageManager.Instance.GetThumbFromRelPath(relImagePath));
                 var lvi = new ListViewItem("");
                 lvi.Tag = relImagePath;
                 lvi.ImageIndex = listViewImageHistory.LargeImageList.Images.Count - 1;
@@ -722,7 +722,7 @@ namespace Pbp.Forms
         {
             if (!Settings.Default.ImageFavorites.Contains(relImagePath))
             {
-                listViewFavorites.LargeImageList.Images.Add(ImageManager.Instance.getThumbFromRelPath(relImagePath));
+                listViewFavorites.LargeImageList.Images.Add(ImageManager.Instance.GetThumbFromRelPath(relImagePath));
                 var lvi = new ListViewItem("");
                 lvi.Tag = relImagePath;
                 lvi.ImageIndex = listViewFavorites.LargeImageList.Images.Count - 1;
@@ -935,7 +935,7 @@ namespace Pbp.Forms
                 if ((ModifierKeys & Keys.Control) == Keys.Control)
                 {
                     listViewImageQueue.LargeImageList.Images.Add(
-                        ImageManager.Instance.getThumbFromRelPath((string)listViewImageHistory.Items[idx].Tag));
+                        ImageManager.Instance.GetThumbFromRelPath((string)listViewImageHistory.Items[idx].Tag));
                     var lvi = new ListViewItem("");
                     lvi.Tag = listViewImageHistory.Items[idx].Tag;
                     lvi.ImageIndex = listViewImageQueue.LargeImageList.Images.Count - 1;
@@ -955,7 +955,7 @@ namespace Pbp.Forms
                         ProjectionWindow.Instance.HideLayer(2);
                     }
 
-                    Image img = ImageManager.Instance.getImageFromRelPath((string)listViewImageHistory.Items[idx].Tag);
+                    Image img = ImageManager.Instance.GetImageFromRelPath((string)listViewImageHistory.Items[idx].Tag);
                     ProjectionWindow.Instance.DisplayLayer(1, img, Settings.Default.ProjectionFadeTimeLayer1);
                 }
             }
@@ -976,7 +976,7 @@ namespace Pbp.Forms
                 treeViewImageDirectories.SelectedNode = null;
                 imageSearchResults.Clear();
 
-                foreach (string ims in ImageManager.Instance.searchImages(needle))
+                foreach (string ims in ImageManager.Instance.SearchImages(needle))
                 {
                     imageSearchResults.Add(ims);
                 }
@@ -1249,7 +1249,7 @@ namespace Pbp.Forms
             ProgressWindow wnd = new ProgressWindow("Erstelle Miniaturbilder...", 0);
             wnd.Show();
             ImageManager.Instance.ThumbnailCreated += new ImageManager.ThumbnailCreate(Instance_ThumbnailCreated);
-            ImageManager.Instance.checkThumbs();
+            ImageManager.Instance.CheckThumbs();
             wnd.Close();
         }
 
@@ -1284,7 +1284,7 @@ namespace Pbp.Forms
                 }
 
                 int idx = listViewImageQueue.SelectedIndices[0];
-                Image img = ImageManager.Instance.getImageFromRelPath((string)listViewImageQueue.Items[idx].Tag);
+                Image img = ImageManager.Instance.GetImageFromRelPath((string)listViewImageQueue.Items[idx].Tag);
                 ProjectionWindow.Instance.DisplayLayer(1, img, Settings.Default.ProjectionFadeTimeLayer1);
             }
         }
@@ -1356,7 +1356,7 @@ namespace Pbp.Forms
                 if ((ModifierKeys & Keys.Control) == Keys.Control)
                 {
                     listViewImageQueue.LargeImageList.Images.Add(
-                        ImageManager.Instance.getThumbFromRelPath((string)listViewFavorites.Items[idx].Tag));
+                        ImageManager.Instance.GetThumbFromRelPath((string)listViewFavorites.Items[idx].Tag));
                     var lvi = new ListViewItem("");
                     lvi.Tag = listViewFavorites.Items[idx].Tag;
                     lvi.ImageIndex = listViewImageQueue.LargeImageList.Images.Count - 1;
@@ -1378,7 +1378,7 @@ namespace Pbp.Forms
                     {
                         ProjectionWindow.Instance.HideLayer(2);
                     }
-                    Image img = ImageManager.Instance.getImageFromRelPath((string)listViewFavorites.Items[idx].Tag);
+                    Image img = ImageManager.Instance.GetImageFromRelPath((string)listViewFavorites.Items[idx].Tag);
                     ProjectionWindow.Instance.DisplayLayer(2, img);
 
                     // Add image to history
@@ -1490,7 +1490,7 @@ namespace Pbp.Forms
             if (comboBoxBible.Items.Count == 0 || reload)
             {
                 comboBoxBible.Items.Clear();
-                BibleManager.Instance.loadBibleInfo();
+                BibleManager.Instance.LoadBibleInfo();
                 if (BibleManager.Instance.BibleList.Count > 0)
                 {
                     comboBoxBible.DataSource = new BindingSource(BibleManager.Instance.BibleList, null);
@@ -1513,7 +1513,7 @@ namespace Pbp.Forms
                 var bi = ((KeyValuePair<string, BibleManager.BibleItem>)comboBoxBible.SelectedItem);
                 if (bi.Value.Bible.Books == null)
                 {
-                    BibleManager.Instance.loadBibleData(bi.Key);
+                    BibleManager.Instance.LoadBibleData(bi.Key);
                 }
 
                 foreach (Pbp.Data.Bible.Book bk in  bi.Value.Bible.Books)

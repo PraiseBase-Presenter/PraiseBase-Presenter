@@ -187,7 +187,7 @@ namespace Pbp.Data.Song
         /// Returns a string of the wrapped text
         /// </summary>
         /// <returns>Wrapped text</returns>
-        public string LineBreakText()
+        public string GetLineBreakText()
         {
             string txt = "";
             int i = 1;
@@ -205,7 +205,7 @@ namespace Pbp.Data.Song
         /// Returns the wrapped translation text
         /// </summary>
         /// <returns>Wrapped translation</returns>
-        public string LineBreakTranslation()
+        public string GetLineBreakTranslation()
         {
             string txt = "";
             int i = 1;
@@ -224,12 +224,12 @@ namespace Pbp.Data.Song
         /// in the song detail overview in the presenter.
         /// </summary>
         /// <returns>Text on one line</returns>
-        public string OneLineText()
+        public string GetOneLineText()
         {
             return Lines.Aggregate("", (current, str) => current + (str + " "));
         }
 
-        public string OneLineTranslation()
+        public string GetOneLineTranslation()
         {
             return Translation.Aggregate("", (current, str) => current + (str + " "));
         }

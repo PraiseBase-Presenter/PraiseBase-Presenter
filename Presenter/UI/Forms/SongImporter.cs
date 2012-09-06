@@ -270,7 +270,7 @@ namespace Pbp.Forms
                 {
                     foreach (SongSlide sld in prt.Slides)
                     {
-                        ListViewItem lvi = new ListViewItem(new string[] { prt.Caption, sld.OneLineText() });
+                        ListViewItem lvi = new ListViewItem(new string[] { prt.Caption, sld.GetOneLineText() });
                         listViewDetails.Items.Add(lvi);
                     }
                 }

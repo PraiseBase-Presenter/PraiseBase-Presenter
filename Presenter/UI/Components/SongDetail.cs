@@ -85,7 +85,7 @@ namespace SongDetails
             Font pfnt = new Font("Arial", 16);
             Font txfnt = new Font("Arial", 11);
             int ypos = startPoint.Y;
-            ImageList thumbs = Pbp.ImageManager.Instance.getThumbsFromList(sng.RelativeImagePaths);
+            ImageList thumbs = Pbp.ImageManager.Instance.GetThumbsFromList(sng.RelativeImagePaths);
 
             Size labelSize = new Size(0, 0);
             for (int i = 0; i < sng.Parts.Count; i++)
@@ -169,7 +169,7 @@ namespace SongDetails
                     Label textLbl = new Label();
                     textLbl.Location = new Point(2, 2);
                     textLbl.Height = panelTextLabelContainer.Height - 4;
-                    textLbl.Text = sng.Parts[numParts].Slides[j].OneLineText();
+                    textLbl.Text = sng.Parts[numParts].Slides[j].GetOneLineText();
                     textLbl.ForeColor = Color.Black;
                     textLbl.BackColor = Color.White;
                     textLbl.Font = txfnt;

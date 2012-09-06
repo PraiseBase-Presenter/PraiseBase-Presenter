@@ -37,7 +37,7 @@ namespace Pbp.IO
 {
     public class XMLBibleReblader
     {
-        private bool getNodeText(XmlTextReader textReader, string name, ref Bible target, string fieldName)
+        private bool GetNodeText(XmlTextReader textReader, string name, ref Bible target, string fieldName)
         {
             if (textReader.NodeType == XmlNodeType.Element && textReader.Name.ToString().ToLower() == name)
             {
@@ -52,7 +52,7 @@ namespace Pbp.IO
             return false;
         }
 
-        public Bible loadMeta(string fileName)
+        public Bible LoadMeta(string fileName)
         {
             Bible b = new Bible();
 
@@ -69,14 +69,14 @@ namespace Pbp.IO
                     {
                         if (textReader.NodeType == XmlNodeType.Element)
                         {
-                            if (getNodeText(textReader, "title", ref b, "Title")) continue;
-                            if (getNodeText(textReader, "description", ref b, "Description")) continue;
-                            if (getNodeText(textReader, "contributors", ref b, "Contributors")) continue;
-                            if (getNodeText(textReader, "language", ref b, "Language")) continue;
-                            if (getNodeText(textReader, "publisher", ref b, "Publisher")) continue;
-                            if (getNodeText(textReader, "date", ref b, "Source")) continue;
-                            if (getNodeText(textReader, "source", ref b, "Date")) continue;
-                            if (getNodeText(textReader, "identifier", ref b, "Identifier")) continue;
+                            if (GetNodeText(textReader, "title", ref b, "Title")) continue;
+                            if (GetNodeText(textReader, "description", ref b, "Description")) continue;
+                            if (GetNodeText(textReader, "contributors", ref b, "Contributors")) continue;
+                            if (GetNodeText(textReader, "language", ref b, "Language")) continue;
+                            if (GetNodeText(textReader, "publisher", ref b, "Publisher")) continue;
+                            if (GetNodeText(textReader, "date", ref b, "Source")) continue;
+                            if (GetNodeText(textReader, "source", ref b, "Date")) continue;
+                            if (GetNodeText(textReader, "identifier", ref b, "Identifier")) continue;
                         }
                     }
                     break;
@@ -85,7 +85,7 @@ namespace Pbp.IO
             return b;
         }
 
-        public Bible loadContent(string fileName, Bible b)
+        public Bible LoadContent(string fileName, Bible b)
         {
             XmlDocument xmlDoc = new XmlDocument();
             xmlDoc.Load(fileName);

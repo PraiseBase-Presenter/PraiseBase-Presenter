@@ -54,7 +54,7 @@ namespace Pbp.IO
                 {
                     if (xmlRoot["items"].ChildNodes[i].Name == "item")
                     {
-                        Guid g = SongManager.Instance.getGuidByTitle(xmlRoot["items"].ChildNodes[i].InnerText);
+                        Guid g = SongManager.Instance.GetGuidByTitle(xmlRoot["items"].ChildNodes[i].InnerText);
                         if (g != Guid.Empty)
                         {
                             sl.Items.Add(SongManager.Instance.SongList[g].Song);

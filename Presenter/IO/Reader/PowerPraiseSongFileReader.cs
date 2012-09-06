@@ -36,9 +36,9 @@ namespace Pbp.IO
 {
     public class PowerPraiseSongFileReader : SongFileReader
     {
-        public const string FileFormatVersion = "3.0";
+        protected const string SupportedFileFormatVersion = "3.0";
 
-        public override Song load(string filename)
+        public override Song Load(string filename)
         {
             Song sng = new Song();
 
@@ -54,7 +54,7 @@ namespace Pbp.IO
             xmlDoc.Load(filename);
             XmlElement xmlRoot = xmlDoc.DocumentElement;
 
-            if (xmlRoot.Name != "ppl" || xmlRoot.GetAttribute("version") != "3.0")
+            if (xmlRoot.Name != "ppl" || xmlRoot.GetAttribute("version") != SupportedFileFormatVersion)
             {
                 throw new Exception("Invalid file type!");
             }
@@ -203,7 +203,7 @@ namespace Pbp.IO
             {
                 if (elem.Name == "file")
                 {
-                    if (ImageManager.Instance.imageExists(elem.InnerText))
+                    if (ImageManager.Instance.ImageExists(elem.InnerText))
                         sng.RelativeImagePaths.Add(elem.InnerText);
                 }
             }

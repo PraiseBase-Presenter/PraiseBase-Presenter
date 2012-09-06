@@ -133,7 +133,7 @@ namespace Pbp
         /// Check and create thumbnails if necessary
         /// </summary>
         /// <param name="ldg"></param>
-        public void checkThumbs()
+        public void CheckThumbs()
         {
             string[] imgExtensions = { "*.jpg" };
 
@@ -172,12 +172,12 @@ namespace Pbp
             }
         }
 
-        public bool imageExists(string relativePath)
+        public bool ImageExists(string relativePath)
         {
             return File.Exists(ImageDirPath + Path.DirectorySeparatorChar + relativePath);
         }
 
-        public Image getThumbFromRelPath(string relativePath)
+        public Image GetThumbFromRelPath(string relativePath)
         {
             if (File.Exists(ThumbDirPath + Path.DirectorySeparatorChar + relativePath))
             {
@@ -186,7 +186,7 @@ namespace Pbp
             return null;
         }
 
-        public Image getImageFromRelPath(string relativePath)
+        public Image GetImageFromRelPath(string relativePath)
         {
             if (File.Exists(ImageDirPath + Path.DirectorySeparatorChar + relativePath))
             {
@@ -195,7 +195,7 @@ namespace Pbp
             return null;
         }
 
-        public ImageList getThumbsFromList(List<string> imageList)
+        public ImageList GetThumbsFromList(List<string> imageList)
         {
             var thumbList = new ImageList();
             thumbList.ImageSize = Settings.Default.ThumbSize;
@@ -205,14 +205,14 @@ namespace Pbp
             thumbList.Images.Add(th);
             foreach (String relPath in imageList)
             {
-                Image img = getThumbFromRelPath(relPath);
+                Image img = GetThumbFromRelPath(relPath);
                 if (img != null)
                     thumbList.Images.Add(img);
             }
             return thumbList;
         }
 
-        public Image getImage(string path)
+        public Image GetImage(string path)
         {
             if (path == null)
             {
@@ -220,7 +220,7 @@ namespace Pbp
             }
             try
             {
-                Image img = getImageFromRelPath(path);
+                Image img = GetImageFromRelPath(path);
                 if (img != null)
                 {
                     return img;
@@ -242,7 +242,7 @@ namespace Pbp
         /// </summary>
         /// <param name="needle"></param>
         /// <returns></returns>
-        public List<string> searchImages(string needle) {
+        public List<string> SearchImages(string needle) {
             List<string> results = new List<string>();
             string rootDir = ImageManager.Instance.ThumbDirPath + Path.DirectorySeparatorChar;
             int rootDirStrLen = rootDir.Length;

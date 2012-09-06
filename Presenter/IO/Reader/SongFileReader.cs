@@ -39,9 +39,9 @@ namespace Pbp.IO
             //{ "pbps", new SongFileType("PraiseBase-Presenter Song", "pbps")}
         };
 
-        abstract public Song load(string filename);
+        abstract public Song Load(string filename);
 
-        public static SongFileReader createFactory(string type)
+        public static SongFileReader CreateFactory(string type)
         {
             if (type == "ppl")
             {
@@ -51,17 +51,17 @@ namespace Pbp.IO
             throw new NotImplementedException();
         }
 
-        public static SongFileReader createFactoryByFile(string filename)
+        public static SongFileReader CreateFactoryByFile(string filename)
         {
             string ext = System.IO.Path.GetExtension(filename);
             if (ext == ".ppl")
             {
-                return createFactory("ppl");
+                return CreateFactory("ppl");
             }
             throw new NotImplementedException();
         }
 
-        public static string getFileBoxFilter()
+        public static string GetFileBoxFilter()
         {
             String fltr = String.Empty;
             foreach (var t in SupportedFileTypes)
@@ -72,7 +72,7 @@ namespace Pbp.IO
             return fltr;
         }
 
-        public static HashSet<string> getSupportedExtensions()
+        public static HashSet<string> GetSupportedExtensions()
         {
             HashSet<string> l = new HashSet<string>();
             foreach (var t in SupportedFileTypes)

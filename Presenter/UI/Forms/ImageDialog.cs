@@ -156,7 +156,7 @@ namespace Pbp.Forms
                     lvi.Tag = relativePath;
                     lvi.ImageIndex = i;
                     listViewImages.Items.Add(lvi);
-                    imList.Images.Add(ImageManager.Instance.getThumbFromRelPath(relativePath));
+                    imList.Images.Add(ImageManager.Instance.GetThumbFromRelPath(relativePath));
                     if (relativePath == imagePath)
                         listViewImages.Items[i].Selected = true;
 

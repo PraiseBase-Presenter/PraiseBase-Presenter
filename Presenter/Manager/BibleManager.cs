@@ -84,7 +84,7 @@ namespace Pbp
         {
         }
 
-        public List<string> getBibleFiles()
+        public List<string> GetBibleFiles()
         {
             List<string> res = new List<string>();
             DirectoryInfo di = new DirectoryInfo(Pbp.Properties.Settings.Default.DataDirectory + Path.DirectorySeparatorChar + "Bibles");
@@ -100,16 +100,16 @@ namespace Pbp
             return res;
         }
 
-        public void loadBibleInfo()
+        public void LoadBibleInfo()
         {
             BibleList = new Dictionary<string, BibleItem>();
-            foreach (string file in getBibleFiles())
+            foreach (string file in GetBibleFiles())
             {
                 Pbp.IO.XMLBibleReblader rdr = new Pbp.IO.XMLBibleReblader();
                 try
                 {
                     BibleItem bi = new BibleItem();
-                    bi.Bible = rdr.loadMeta(file);
+                    bi.Bible = rdr.LoadMeta(file);
                     bi.Filename = file;
                     BibleList.Add(bi.Bible.Identifier != null ? bi.Bible.Identifier : bi.Filename, bi);
                 }
@@ -120,12 +120,12 @@ namespace Pbp
             }
         }
 
-        public void loadBibleData(string key)
+        public void LoadBibleData(string key)
         {
             Pbp.IO.XMLBibleReblader rdr = new Pbp.IO.XMLBibleReblader();
             try
             {
-                rdr.loadContent(BibleList[key].Filename, BibleList[key].Bible);
+                rdr.LoadContent(BibleList[key].Filename, BibleList[key].Bible);
             }
             catch (Exception e)
             {
