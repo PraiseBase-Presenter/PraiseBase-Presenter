@@ -47,8 +47,8 @@ namespace Pbp.IO
         {
             var xmlDoc = new XmlDocument();
 
-            XmlNode xmlnode = xmlDoc.CreateNode(XmlNodeType.XmlDeclaration, "", "");
-            xmlDoc.AppendChild(xmlnode);
+            XmlDeclaration xmlDeclaration = xmlDoc.CreateXmlDeclaration("1.0", "UTF-8", null);
+            xmlDoc.AppendChild(xmlDeclaration);
 
             xmlDoc.AppendChild(xmlDoc.CreateElement(XmlRootNodeName));
             XmlElement xmlRoot = xmlDoc.DocumentElement;
@@ -142,19 +142,39 @@ namespace Pbp.IO
             }
 
             xmlRoot.AppendChild(xmlDoc.CreateElement("information"));
+
+            // Copyright
             xmlRoot["information"].AppendChild(xmlDoc.CreateElement("copyright"));
             xmlRoot["information"]["copyright"].AppendChild(xmlDoc.CreateElement("position"));
-            xmlRoot["information"]["copyright"]["position"].InnerText = "lastslide";
+            xmlRoot["information"]["copyright"]["position"].InnerText = (sng.CopyrightPosition != null ? sng.CopyrightPosition  : "lastslide");
             xmlRoot["information"]["copyright"].AppendChild(xmlDoc.CreateElement("text"));
-            if (sng.Copyright != null && sng.Copyright != string.Empty)
+            if (sng.Copyright != null)
             {
-                xmlRoot["information"].AppendChild(xmlDoc.CreateElement("source"));
+                xmlRoot["information"]["copyright"]["text"].AppendChild(xmlDoc.CreateElement("line"));
+                xmlRoot["information"]["copyright"]["text"]["line"].InnerText = sng.Copyright;
             }
+
             xmlRoot["information"].AppendChild(xmlDoc.CreateElement("source"));
             xmlRoot["information"]["source"].AppendChild(xmlDoc.CreateElement("position"));
-            xmlRoot["information"]["source"]["position"].InnerText = "firstslide";
+            xmlRoot["information"]["source"]["position"].InnerText = (sng.SourcePosition != null ? sng.SourcePosition : "firstslide");
             xmlRoot["information"]["source"].AppendChild(xmlDoc.CreateElement("text"));
+            if (sng.SongBooks.Count > 0)
+            {
+                xmlRoot["information"]["source"]["text"].AppendChild(xmlDoc.CreateElement("line"));
+                string sbooks = String.Empty;
+                foreach (var sb in sng.SongBooks) 
+                {
+                    if (sbooks != String.Empty)
+                    {
+                        sbooks += ";";
+                    }
+                    sbooks += sb.Name;
+                }
+                xmlRoot["information"]["source"]["text"]["line"].InnerText = sbooks;
+            }
 
+
+            // Formatting
             xmlRoot.AppendChild(xmlDoc.CreateElement("formatting"));
 
             xmlRoot["formatting"].AppendChild(xmlDoc.CreateElement("font"));

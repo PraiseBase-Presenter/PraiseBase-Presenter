@@ -86,6 +86,16 @@ namespace Pbp.Data.Song
         public string Copyright { get; set; }
 
         /// <summary>
+        /// Copyright position (PowerPraise)
+        /// </summary>
+        public string CopyrightPosition { get; set; }
+        
+        /// <summary>
+        /// Source position (PowerPraise)
+        /// </summary>
+        public string SourcePosition { get; set; }
+
+        /// <summary>
         /// Release year
         /// </summary>
         public string ReleaseYear { get; set; }
@@ -134,6 +144,11 @@ namespace Pbp.Data.Song
         /// Gets or sets a user defined comment for quality assurance information or presentation issues
         /// </summary>
         public string Comment { get; set; }
+
+        /// <summary>
+        /// Songbooks the song appears in
+        /// </summary>
+        public List<SongBook> SongBooks { get; set; }
 
         /// <summary>
         /// Gets the whole songtext improved for full-text search
@@ -298,7 +313,7 @@ namespace Pbp.Data.Song
             Parts = new SongPartList();
             RelativeImagePaths = new List<string>();
             SearchText = String.Empty;
-
+            SongBooks = new List<SongBook>();
             Comment = String.Empty;
 
             QualityIssues = new List<QualityAssuranceIndicators>();

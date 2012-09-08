@@ -105,6 +105,7 @@
     <Compile Include="DataObjects\Song\QualityAssuranceIndicator.cs" />
     <Compile Include="DataObjects\Song\Song.cs" />
     <Compile Include="DataObjects\Song\SongAuthor.cs" />
+    <Compile Include="DataObjects\Song\SongBook.cs" />
     <Compile Include="DataObjects\Song\SongFileType.cs" />
     <Compile Include="DataObjects\Song\SongPart.cs" />
     <Compile Include="DataObjects\Song\SongPartList.cs" />

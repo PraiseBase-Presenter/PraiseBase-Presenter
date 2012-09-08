@@ -214,10 +214,50 @@ namespace Pbp.IO
                 }
             }
 
-            // Read copyright text
-            if (xmlRoot["information"]["Copyright"] != null && xmlRoot["information"]["Copyright"]["text"] != null)
+            //
+            // Information
+            //
+
+            if (xmlRoot["information"] != null)
             {
-                sng.Copyright = xmlRoot["information"]["Copyright"]["text"].InnerText;
+                // Read copyright text
+                if (xmlRoot["information"]["copyright"] != null)
+                {
+                    if (xmlRoot["information"]["copyright"]["text"] != null && xmlRoot["information"]["copyright"]["text"].ChildNodes.Count > 0)
+                    {
+                        sng.Copyright = String.Empty;
+                        foreach (XmlNode xn in xmlRoot["information"]["copyright"]["text"])
+                        {
+                            if (sng.Copyright != String.Empty)
+                            {
+                                sng.Copyright += " ";
+                            }
+                            sng.Copyright += xn.InnerText;
+                        }
+                    }
+                    if (xmlRoot["information"]["copyright"]["position"] != null)
+                    {
+                        sng.CopyrightPosition = xmlRoot["information"]["copyright"]["position"].InnerText;
+                    }
+                }
+
+                // Read sourcesource text
+                if (xmlRoot["information"]["source"] != null)
+                {
+                    if (xmlRoot["information"]["source"]["text"] != null && xmlRoot["information"]["source"]["text"].ChildNodes.Count > 0)
+                    {
+                        foreach (var bookName in xmlRoot["information"]["source"]["text"].InnerText.Split(new[] { ";" }, StringSplitOptions.RemoveEmptyEntries))
+                        {
+                            var sb = new SongBook();
+                            sb.Name = bookName;
+                            sng.SongBooks.Add(sb);
+                        }
+                    }
+                    if (xmlRoot["information"]["source"]["position"] != null)
+                    {
+                        sng.SourcePosition = xmlRoot["information"]["source"]["position"].InnerText;
+                    }
+                }
             }
 
             //
