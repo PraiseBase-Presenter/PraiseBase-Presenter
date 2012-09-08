@@ -48,7 +48,7 @@ namespace Pbp.Data.Song
         /// <summary>
         /// Unique identifier of this song
         /// </summary>
-        public Guid GUID { get; protected set; }
+        public Guid GUID { get; set; }
 
         /// <summary>
         /// Timestamp when the song has been last modified
@@ -104,6 +104,11 @@ namespace Pbp.Data.Song
         /// Authors of the song
         /// </summary>
         public List<SongAuthor> Author { get; set; }
+
+        /// <summary>
+        /// Admin
+        /// </summary>
+        public string Admin { get; set; }
 
         /// <summary>
         /// Publisher

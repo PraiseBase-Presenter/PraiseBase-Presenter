@@ -122,6 +122,12 @@ namespace Pbp.IO
                 sng.CcliID = xmlRoot["general"]["ccliNo"].InnerText;
             }
 
+            // Guid
+            if (xmlRoot["general"]["guid"] != null)
+            {
+                sng.GUID = new Guid(xmlRoot["general"]["guid"].InnerText);
+            }
+
             //
             // Formatting
             //

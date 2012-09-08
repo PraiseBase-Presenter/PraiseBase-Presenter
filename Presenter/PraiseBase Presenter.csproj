@@ -114,6 +114,7 @@
     <Compile Include="DataObjects\Song\SongTempo.cs" />
     <Compile Include="DataObjects\TagList.cs" />
     <Compile Include="Editor.cs" />
+    <Compile Include="IO\Reader\CcliUsrSongFileReader.cs" />
     <Compile Include="IO\Reader\SongFileReaderFactory.cs" />
     <Compile Include="IO\Reader\OpenLyricsSongFileReader.cs" />
     <Compile Include="IO\Reader\PowerPraiseSongFileReader.cs" />

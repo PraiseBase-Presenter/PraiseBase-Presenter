@@ -1,0 +1,200 @@
+﻿/*
+ *   PraiseBase Presenter
+ *   The open source lyrics and image projection software for churches
+ *
+ *   http://code.google.com/p/praisebasepresenter
+ *
+ *   This program is free software; you can redistribute it and/or
+ *   modify it under the terms of the GNU General Public License
+ *   as published by the Free Software Foundation; either version 2
+ *   of the License, or (at your option) any later version.
+ *
+ *   This program is distributed in the hope that it will be useful,
+ *   but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *   GNU General Public License for more details.
+ *
+ *   You should have received a copy of the GNU General Public License
+ *   along with this program; if not, write to the Free Software
+ *   Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+ *
+ *   Author:
+ *      Nicolas Perrenoud <nicu_at_lavine.ch>
+ *   Co-authors:
+ *      ...
+ *
+ */
+
+using System;
+using System.Collections.Generic;
+using System.Drawing;
+using System.Xml;
+using Pbp.Properties;
+using Pbp.Data.Song;
+using System.IO;
+using System.Text.RegularExpressions;
+
+namespace Pbp.IO
+{
+    public class CcliUsrSongFileReader : SongFileReader
+    {
+        public override string FileExtension { get { return ".usr"; } }
+
+        public override string FileTypeDescription { get { return "SongSelect Import File"; } }
+
+        protected const string SupportedFileFormatVersion = "3.0";
+
+        protected const string TypeString = "SongSelect Import File";
+
+        public override Song Load(string filename)
+        {
+            Song sng = new Song();
+
+            // Default font settings if values in xml invalid
+            sng.TextFont = Settings.Default.ProjectionMasterFont;
+            sng.TextColor = Settings.Default.ProjectionMasterFontColor;
+            sng.TranslationFont = Settings.Default.ProjectionMasterFontTranslation;
+            sng.TranslationColor = Settings.Default.ProjectionMasterTranslationColor;
+            sng.TextLineSpacing = Settings.Default.ProjectionMasterLineSpacing;
+
+            List<String> fields = new List<string>();
+            List<String> words = new List<string>();
+
+            string[] lines = System.IO.File.ReadAllLines(@filename);
+            foreach (string l in lines)
+            {
+                string li = l.Trim();
+                string[] s = li.Split(new [] { "="}, StringSplitOptions.None);
+                if (s.Length > 1)
+                {
+                    string k = s[0];
+                    string v = s[1];
+                    switch (k)
+                    {
+                        case "Title":
+                            sng.Title = v;
+                            break;
+                        case "Author":
+                            var a = new SongAuthor();
+                            a.Name = v;
+                            sng.Author = new List<SongAuthor>();
+                            sng.Author.Add(a);
+                            break;
+                        case "Copyright":
+                            sng.Copyright = v;
+                            break;
+                        case "Admin":
+                            sng.Admin = v;
+                            break;
+                        case "Themes":
+                            foreach (var t in v.Split(new[] { "/t" }, StringSplitOptions.None))
+                            {
+                                sng.Tags.Add(t);
+                            }
+                            break;
+                        case "Keys":
+                            sng.Key = v;
+                            break;
+                        case "Fields":
+                            foreach (var t in v.Split(new[] { "/t" }, StringSplitOptions.RemoveEmptyEntries))
+                            {
+                                fields.Add(t);
+                            }
+                            break;
+                        case "Words":
+                            foreach (var t in v.Split(new[] { "/t" }, StringSplitOptions.RemoveEmptyEntries))
+                            {
+                                words.Add(t);
+                            }
+                            break;
+                    }
+                }
+                else
+                {
+                    var m = Regex.Matches(li, "^\\[S A[0-9]+\\]$");
+                    if (m.Count > 0)
+                    {
+                        sng.CcliID = m[0].Value;
+                    }
+                }
+            }
+
+            if (fields.Count == 0 || fields.Count != words.Count || sng.Title == null)
+            {
+                throw new IncompleteSongSourceFileException();
+            }
+
+            for (int fx=0; fx < fields.Count; fx++)
+            {
+                SongPart p = new SongPart();
+                p.Caption = fields[fx];
+                SongSlide s = new SongSlide(sng);
+                foreach (var l in words[fx].Split(new[] { "/n" }, StringSplitOptions.None))
+                {
+                    s.Lines.Add(l);
+                }
+                p.Slides.Add(s);
+                sng.Parts.Add(p);
+            }
+
+            sng.UpdateSearchText();
+            return sng;
+        }
+
+        /// <summary>
+        /// Tests if a given file is supported by this reader
+        /// </summary>
+        /// <param name="filename"></param>
+        /// <returns></returns>
+        public override bool IsFileSupported(string filename)
+        {
+            try
+            {
+                bool versionOk = false;
+                bool typeOk = false;
+
+                using (StreamReader sr = new StreamReader(filename))
+                {
+                    while (!sr.EndOfStream)
+                    {
+                        String l = sr.ReadLine();
+                        string[] s = l.Split(new[] { "=" }, StringSplitOptions.None);
+                        if (s.Length > 1)
+                        {
+                            string k = s[0];
+                            string v = s[1].Trim();
+                            switch (k)
+                            {
+                                case "Version":
+                                    if (v != SupportedFileFormatVersion)
+                                    {
+                                        return false;
+                                    }
+                                    versionOk = true;
+                                    break;
+                                case "Type":
+                                    if (v != TypeString)
+                                    {
+                                        return false;
+                                    }
+                                    typeOk = true;
+                                    break;
+                                default:
+                                    if (versionOk && typeOk)
+                                    {
+                                        return true;
+                                    }
+                                    break;
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                return false;
+            }
+            return true;
+        }
+    }
+}

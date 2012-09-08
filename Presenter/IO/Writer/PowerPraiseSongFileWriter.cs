@@ -83,7 +83,12 @@ namespace Pbp.IO
                 xmlRoot["general"].AppendChild(xmlDoc.CreateElement("ccliNo"));
                 xmlRoot["general"]["ccliNo"].InnerText = sng.CcliID;
             }
-
+            if (sng.GUID != null)
+            {
+                xmlRoot["general"].AppendChild(xmlDoc.CreateElement("guid"));
+                xmlRoot["general"]["guid"].InnerText = sng.GUID.ToString();
+            }
+            
             xmlRoot.AppendChild(xmlDoc.CreateElement("songtext"));
 
             var usedImages = new List<string>();
