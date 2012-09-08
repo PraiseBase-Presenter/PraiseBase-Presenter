@@ -1,6 +1,6 @@
 ﻿namespace Pbp.Forms
 {
-	partial class SongDialog
+	partial class SongBrowserDialog
 	{
 		/// <summary>
 		/// Required designer variable.

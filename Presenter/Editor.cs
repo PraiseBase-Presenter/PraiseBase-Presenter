@@ -67,7 +67,7 @@ namespace Pbp
                 mutex = new System.Threading.Mutex(true, mutexName);
             }
 
-            Application.Run(EditorWindow.getInstance());
+            Application.Run(SongEditor.getInstance());
 
             GC.KeepAlive(mutex);
         }

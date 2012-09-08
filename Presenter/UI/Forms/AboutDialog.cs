@@ -32,9 +32,9 @@ using System.Windows.Forms;
 
 namespace Pbp.Forms
 {
-    public partial class AboutWindow : Form
+    public partial class AboutDialog : Form
     {
-        public AboutWindow()
+        public AboutDialog()
         {
             InitializeComponent();
         }

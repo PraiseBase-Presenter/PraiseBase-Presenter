@@ -6,11 +6,11 @@ using Pbp.Data.Song;
 
 namespace Pbp.Forms
 {
-    public partial class SongDialog : Form
+    public partial class SongBrowserDialog : Form
     {
         public bool OpenInEditor { get; private set; }
 
-        public SongDialog()
+        public SongBrowserDialog()
         {
             OpenInEditor = false;
             InitializeComponent();
@@ -38,7 +38,7 @@ namespace Pbp.Forms
             {
                 foreach (ListViewItem lvi in listViewItems.SelectedItems)
                 {
-                    EditorWindow.getInstance().openSong(SongManager.Instance.SongList[(Guid)(lvi.Tag)].Filename);
+                    SongEditor.getInstance().openSong(SongManager.Instance.SongList[(Guid)(lvi.Tag)].Filename);
                 }
                 OpenInEditor = true;
                 DialogResult = DialogResult.OK;

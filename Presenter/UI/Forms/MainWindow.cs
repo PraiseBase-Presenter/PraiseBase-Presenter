@@ -152,7 +152,7 @@ namespace Pbp.Forms
 
         private void infoToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            var ab = new AboutWindow();
+            var ab = new AboutDialog();
             ab.ShowDialog(this);
         }
 
@@ -268,12 +268,12 @@ namespace Pbp.Forms
 
         private void optionenToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            new SettingsWindow().ShowDialog(this);
+            new ProgramSettingsDialog().ShowDialog(this);
         }
 
         private void toolStripButton4_Click(object sender, EventArgs e)
         {
-            new SettingsWindow().ShowDialog(this);
+            new ProgramSettingsDialog().ShowDialog(this);
         }
 
         private void liederlisteNeuLadenToolStripMenuItem_Click(object sender, EventArgs e)
@@ -753,7 +753,7 @@ namespace Pbp.Forms
 
         private void toolStripButton5_Click(object sender, EventArgs e)
         {
-            EditorWindow wnd = EditorWindow.getInstance();
+            SongEditor wnd = SongEditor.getInstance();
             wnd.Show();
             wnd.Focus();
         }
@@ -1179,14 +1179,14 @@ namespace Pbp.Forms
         {
             if (listViewSongs.SelectedItems.Count > 0)
             {
-                EditorWindow wnd = EditorWindow.getInstance();
+                SongEditor wnd = SongEditor.getInstance();
                 wnd.openSong(SongManager.Instance.CurrentSong.Filename);
                 wnd.Show();
                 wnd.Focus();
             }
             else
             {
-                EditorWindow wnd = EditorWindow.getInstance();
+                SongEditor wnd = SongEditor.getInstance();
                 wnd.Show();
                 wnd.Focus();
             }
@@ -1194,12 +1194,12 @@ namespace Pbp.Forms
 
         private void toolStripMenuItem3_Click(object sender, EventArgs e)
         {
-            var dlg = new SongDialog();
+            var dlg = new SongBrowserDialog();
             dlg.ShowDialog(this);
             if (dlg.OpenInEditor)
             {
-                EditorWindow.getInstance().Show();
-                EditorWindow.getInstance().BringToFront();
+                SongEditor.getInstance().Show();
+                SongEditor.getInstance().BringToFront();
             }
         }
 

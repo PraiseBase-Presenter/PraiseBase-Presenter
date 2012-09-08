@@ -168,23 +168,23 @@
     <Compile Include="UI\Components\TreeLE.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="UI\Forms\AboutWindow.cs">
+    <Compile Include="UI\Forms\AboutDialog.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="UI\Forms\AboutWindow.Designer.cs">
-      <DependentUpon>AboutWindow.cs</DependentUpon>
+    <Compile Include="UI\Forms\AboutDialog.Designer.cs">
+      <DependentUpon>AboutDialog.cs</DependentUpon>
     </Compile>
-    <Compile Include="UI\Forms\EditorChild.cs">
+    <Compile Include="UI\Forms\SongEditorChild.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="UI\Forms\EditorChild.Designer.cs">
-      <DependentUpon>EditorChild.cs</DependentUpon>
+    <Compile Include="UI\Forms\SongEditorChild.Designer.cs">
+      <DependentUpon>SongEditorChild.cs</DependentUpon>
     </Compile>
-    <Compile Include="UI\Forms\EditorWindow.cs">
+    <Compile Include="UI\Forms\SongEditor.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="UI\Forms\EditorWindow.Designer.cs">
-      <DependentUpon>EditorWindow.cs</DependentUpon>
+    <Compile Include="UI\Forms\SongEditor.Designer.cs">
+      <DependentUpon>SongEditor.cs</DependentUpon>
     </Compile>
     <Compile Include="UI\Forms\ImageDialog.cs">
       <SubType>Form</SubType>
@@ -228,26 +228,27 @@
     <Compile Include="UI\Forms\ProjectionWindow.Designer.cs">
       <DependentUpon>ProjectionWindow.cs</DependentUpon>
     </Compile>
-    <Compile Include="UI\Forms\SettingsWindow.cs">
+    <Compile Include="UI\Forms\ProgramSettingsDialog.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="UI\Forms\SettingsWindow.Designer.cs">
-      <DependentUpon>SettingsWindow.cs</DependentUpon>
+    <Compile Include="UI\Forms\ProgramSettingsDialog.Designer.cs">
+      <DependentUpon>ProgramSettingsDialog.cs</DependentUpon>
     </Compile>
     <Compile Include="UI\WPF\ProjectionControl.xaml.cs">
       <DependentUpon>ProjectionControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="UI\Forms\SongDialog.cs">
+    <Compile Include="UI\Forms\SongBrowserDialog.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="UI\Forms\SongDialog.Designer.cs">
-      <DependentUpon>SongDialog.cs</DependentUpon>
+    <Compile Include="UI\Forms\SongBrowserDialog.Designer.cs">
+      <DependentUpon>SongBrowserDialog.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Utils\ImageUtils.cs" />
     <Compile Include="Utils\StringUtils.cs" />
     <Content Include="Resources\Doc\License.txt" />
+    <None Include="Resources\Application\editcopy.png" />
     <Content Include="Resources\Samples\openlyrics\complex.xml">
       <SubType>Designer</SubType>
     </Content>
@@ -274,16 +275,16 @@
       <DependentUpon>TreeLE.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="UI\Forms\AboutWindow.resx">
-      <DependentUpon>AboutWindow.cs</DependentUpon>
+    <EmbeddedResource Include="UI\Forms\AboutDialog.resx">
+      <DependentUpon>AboutDialog.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="UI\Forms\EditorChild.resx">
-      <DependentUpon>EditorChild.cs</DependentUpon>
+    <EmbeddedResource Include="UI\Forms\SongEditorChild.resx">
+      <DependentUpon>SongEditorChild.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="UI\Forms\EditorWindow.resx">
-      <DependentUpon>EditorWindow.cs</DependentUpon>
+    <EmbeddedResource Include="UI\Forms\SongEditor.resx">
+      <DependentUpon>SongEditor.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="UI\Forms\ImageDialog.resx">
@@ -314,12 +315,12 @@
       <DependentUpon>ProjectionWindow.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="UI\Forms\SettingsWindow.resx">
-      <DependentUpon>SettingsWindow.cs</DependentUpon>
+    <EmbeddedResource Include="UI\Forms\ProgramSettingsDialog.resx">
+      <DependentUpon>ProgramSettingsDialog.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="UI\Forms\SongDialog.resx">
-      <DependentUpon>SongDialog.cs</DependentUpon>
+    <EmbeddedResource Include="UI\Forms\SongBrowserDialog.resx">
+      <DependentUpon>SongBrowserDialog.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">

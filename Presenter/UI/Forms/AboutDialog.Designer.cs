@@ -1,6 +1,6 @@
 ﻿namespace Pbp.Forms
 {
-    partial class AboutWindow
+    partial class AboutDialog
     {
         /// <summary>
         /// Required designer variable.

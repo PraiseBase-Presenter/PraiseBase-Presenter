@@ -37,7 +37,7 @@ namespace Pbp.IO
     {
         public readonly Type PreferredType = typeof(PowerPraiseSongFileWriter);
 
-        private Dictionary<Type, SongFileWriter> readers = new Dictionary<Type,SongFileWriter>();
+        private Dictionary<Type, SongFileWriter> writers = new Dictionary<Type,SongFileWriter>();
         private Dictionary<String, HashSet<Type>> SupportedExtensionMapping = new Dictionary<string, HashSet<Type>>();
 
         /// <summary>
@@ -67,7 +67,7 @@ namespace Pbp.IO
             foreach (var atype in AllTypes)
             {
                 SongFileWriter inst = (SongFileWriter)Activator.CreateInstance(atype);
-                readers.Add(atype, inst);
+                writers.Add(atype, inst);
                 if (! SupportedExtensionMapping.Keys.Contains(inst.FileExtension))
                 {
                     SupportedExtensionMapping.Add(inst.FileExtension, new HashSet<Type>(new[] { atype }));
@@ -82,10 +82,19 @@ namespace Pbp.IO
 
         public SongFileWriter CreateFactory(Type type)
         {
-            if (readers[type] != null)
+            if (writers[type] != null)
             {
-                return readers[type];
+                return writers[type];
             }            
+            throw new NotImplementedException();
+        }
+
+        public SongFileWriter CreateFactoryByTypeIndex(int index)
+        {
+            if (index >= 0 && index < writers.Values.Count)
+            {
+                return writers.Values.ToArray()[index];
+            }
             throw new NotImplementedException();
         }
 
@@ -106,7 +115,7 @@ namespace Pbp.IO
         public string GetFileBoxFilter()
         {
             String fltr = String.Empty;
-            foreach (var t in readers.Values)
+            foreach (var t in writers.Values)
             {
                 if (fltr != string.Empty)
                 {

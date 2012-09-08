@@ -325,10 +325,10 @@ namespace Pbp.Forms
                     {
                         if (listViewSongs.Items[x].Checked)
                         {
-                            EditorWindow.getInstance().openSong(filesToOpen[x]);
+                            SongEditor.getInstance().openSong(filesToOpen[x]);
                         }
                     }
-                    EditorWindow.getInstance().Show();
+                    SongEditor.getInstance().Show();
                 }
 
                 DialogResult = DialogResult.OK;

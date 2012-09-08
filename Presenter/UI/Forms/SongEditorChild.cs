@@ -35,7 +35,7 @@ using Pbp.IO;
 
 namespace Pbp.Forms
 {
-    public partial class EditorChild : Form
+    public partial class SongEditorChild : Form
     {
         public Song sng { get; protected set; }
         protected String songFilename;
@@ -48,7 +48,7 @@ namespace Pbp.Forms
         private int currentPartId = 0;
         private int currentSlideId = 0;
 
-        public EditorChild(string fileName)
+        public SongEditorChild(string fileName)
         {
             InitializeComponent();
 
@@ -260,6 +260,8 @@ namespace Pbp.Forms
                     buttonMoveUp.Enabled = true;
                 else
                     buttonMoveUp.Enabled = false;
+
+                buttonDuplicateSlide.Enabled = true;
             }
             else if (treeViewContents.SelectedNode.Level == 0)
             {
@@ -277,12 +279,15 @@ namespace Pbp.Forms
                     buttonMoveUp.Enabled = true;
                 else
                     buttonMoveUp.Enabled = false;
+
+                buttonDuplicateSlide.Enabled = false;
             }
             else
             {
                 buttonDelItem.Enabled = false;
                 buttonMoveDown.Enabled = false;
                 buttonMoveUp.Enabled = false;
+                buttonDuplicateSlide.Enabled = false;
             }
 
             if (partId < 0)
@@ -293,13 +298,15 @@ namespace Pbp.Forms
             if (partId >= sng.Parts.Count)
                 partId = sng.Parts.Count - 1;
             if (slideId >= sng.Parts[partId].Slides.Count)
-                slideId = sng.Parts[partId].Slides.Count;
+                slideId = sng.Parts[partId].Slides.Count-1;
 
             SongSlide sld = sng.Parts[partId].Slides[slideId];
             textBoxSongText.Text = sld.GetLineBreakText();
             textBoxSongTranslation.Text = sld.GetLineBreakTranslation();
             comboBoxSlideHorizOrientation.SelectedIndex = (int)sld.HorizontalAlign;
             comboBoxSlideVertOrientation.SelectedIndex = (int)sld.VerticalAlign;
+
+            textBoxPartCaption.Text = sng.Parts[partId].Caption;
 
             // TODO
             //object[] songArgs = {partId,slideId};
@@ -338,7 +345,7 @@ namespace Pbp.Forms
 
         private void EditorChild_Load(object sender, EventArgs e)
         {
-            ((EditorWindow)MdiParent).setStatus("Lied " + sng.Title + " geöffnet");
+            ((SongEditor)MdiParent).setStatus("Lied " + sng.Title + " geöffnet");
         }
 
         private void buttonAddNewSlide_Click(object sender, EventArgs e)
@@ -651,7 +658,7 @@ namespace Pbp.Forms
                 SongFileWriterFactory.Instance.CreateFactoryByFile(songFilename).Save(songFilename, sng);
 
                 hashCode = sng.GetHashCode();
-                ((EditorWindow)MdiParent).setStatus("Lied gespeichert als " + songFilename + "");
+                ((SongEditor)MdiParent).setStatus("Lied gespeichert als " + songFilename + "");
 
                 SongManager.Instance.ReloadSongByPath(songFilename);
             }
@@ -659,6 +666,8 @@ namespace Pbp.Forms
 
         public void saveAs()
         {
+            sng.Title = textBoxSongTitle.Text;
+
             if (sng.Title == Pbp.Properties.Settings.Default.SongDefaultName)
             {
                 if (MessageBox.Show("Hat das Lied wirklich den Standardnamen '" + sng.Title + "'?", "Achtung", MessageBoxButtons.YesNo) == System.Windows.Forms.DialogResult.No)
@@ -676,23 +685,27 @@ namespace Pbp.Forms
             }
             else
             {
-                saveFileDialog.InitialDirectory = ((EditorWindow)MdiParent).fileBoxInitialDir;
+                saveFileDialog.InitialDirectory = ((SongEditor)MdiParent).fileBoxInitialDir;
             }
             saveFileDialog.CheckPathExists = true;
             saveFileDialog.FileName = sng.Title;
             saveFileDialog.Filter = SongFileWriterFactory.Instance.GetFileBoxFilter();
-            saveFileDialog.FilterIndex = ((EditorWindow)MdiParent).fileSaveBoxFilterIndex;
+            saveFileDialog.FilterIndex = ((SongEditor)MdiParent).fileSaveBoxFilterIndex;
             saveFileDialog.AddExtension = true;
             saveFileDialog.Title = Resources.Lied_speichern_unter___;
 
             if (saveFileDialog.ShowDialog(this) == DialogResult.OK)
             {
                 hashCode = sng.GetHashCode();
-                ((EditorWindow)MdiParent).fileSaveBoxFilterIndex = saveFileDialog.FilterIndex;
-
-                SongFileWriterFactory.Instance.CreateFactoryByFile(saveFileDialog.FileName).Save(saveFileDialog.FileName, sng);
-
-                ((EditorWindow)MdiParent).setStatus("Lied gespeichert als " + saveFileDialog.FileName + "");
+                try {
+                    SongFileWriterFactory.Instance.CreateFactoryByTypeIndex(saveFileDialog.FilterIndex-1).Save(saveFileDialog.FileName, sng);
+                    ((SongEditor)MdiParent).fileSaveBoxFilterIndex = saveFileDialog.FilterIndex;
+                    ((SongEditor)MdiParent).setStatus("Lied gespeichert als " + saveFileDialog.FileName + "");
+                }
+                catch (NotImplementedException e)
+                {
+                    MessageBox.Show("Dieses Dateiformat wird leider nicht unterstüzt!", "Liededitor", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
             }
             SongManager.Instance.ReloadSongByPath(saveFileDialog.FileName);
         }
@@ -887,14 +900,15 @@ namespace Pbp.Forms
         private void treeViewContents_BeforeLabelEdit(object sender, NodeLabelEditEventArgs e)
         {
             // --- Here we can customize label for editing ---
-            TreeNode tn = treeViewContents.SelectedNode;
-            if (tn.Level > 1)
-                e.CancelEdit = true;
+            //TreeNode tn = treeViewContents.SelectedNode;
+            //if (tn.Level > 1)
+            e.CancelEdit = true;
         }
 
         private void treeViewContents_AfterLabelEdit(object sender, NodeLabelEditEventArgs e)
         {
             // --- Here we can transform edited label back to its original format ---
+            /*
             TreeNode tn = treeViewContents.SelectedNode;
             if (tn.Level == 0)
             {
@@ -906,10 +920,12 @@ namespace Pbp.Forms
                 tn.Text = e.Label;
                 sng.Parts[tn.Index].Caption = e.Label;
             }
+            */
         }
 
         private void treeViewContents_ValidateLabelEdit(object sender, TreeEx.ValidateLabelEditEventArgs e)
         {
+            /*
             if (e.Label.Trim() == "")
             {
                 MessageBox.Show("The tree node label cannot be empty",
@@ -925,16 +941,18 @@ namespace Pbp.Forms
                 e.Cancel = true;
                 return;
             }
+            */
+            e.Cancel = true;
         }
 
         private void umbenennenToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            treeViewContents.BeginEdit();
+            //treeViewContents.BeginEdit();
         }
 
         private void umbenennenToolStripMenuItem1_Click(object sender, EventArgs e)
         {
-            treeViewContents.BeginEdit();
+           // treeViewContents.BeginEdit();
         }
 
         private void löschenToolStripMenuItem2_Click(object sender, EventArgs e)
@@ -961,6 +979,39 @@ namespace Pbp.Forms
             if (textBoxSongTitle.Text == Pbp.Properties.Settings.Default.SongDefaultName)
             {
                 textBoxSongTitle.SelectAll();
+            }
+        }
+
+        private void textBoxSongTitle_TextChanged(object sender, EventArgs e)
+        {
+            this.Text = textBoxSongTitle.Text;
+        }
+
+        private void tabPageContent_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void addContextMenu_Opening(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+
+        }
+
+        private void textBoxPartCaption_TextChanged(object sender, EventArgs e)
+        {
+            int partId = -1;
+            if (treeViewContents.SelectedNode.Level == 1)
+            {
+                partId = treeViewContents.SelectedNode.Parent.Index;
+            }
+            else if (treeViewContents.SelectedNode.Level == 0)
+            {
+                partId = treeViewContents.SelectedNode.Index;
+            }
+            if (partId >= 0)
+            {
+                sng.Parts[partId].Caption = textBoxPartCaption.Text;
+                treeViewContents.Nodes[partId].Text = sng.Parts[partId].Caption;
             }
         }
     }

@@ -34,9 +34,9 @@ using Pbp.IO;
 
 namespace Pbp.Forms
 {
-    public partial class EditorWindow : Form
+    public partial class SongEditor : Form
     {
-        static private EditorWindow _instance;
+        static private SongEditor _instance;
 
         public string fileBoxInitialDir;
         public int fileOpenBoxFilterIndex;
@@ -44,7 +44,7 @@ namespace Pbp.Forms
 
         private int childFormNumber = 0;
 
-        private EditorWindow()
+        private SongEditor()
         {
             InitializeComponent();
             fileBoxInitialDir = Settings.Default.DataDirectory + Path.DirectorySeparatorChar + Settings.Default.SongDir;
@@ -54,16 +54,16 @@ namespace Pbp.Forms
             //this.Text += " " + System.Reflection.Assembly.GetExecutingAssembly().GetName().Version.ToString();
         }
 
-        static public EditorWindow getInstance()
+        static public SongEditor getInstance()
         {
             if (_instance == null)
-                _instance = new EditorWindow();
+                _instance = new SongEditor();
             return _instance;
         }
 
         private void ShowNewForm(object sender, EventArgs e)
         {
-            EditorChild childForm = new EditorChild(null);
+            SongEditorChild childForm = new SongEditorChild(null);
             childForm.MdiParent = this;
             childForm.Tag = "";
 
@@ -103,7 +103,7 @@ namespace Pbp.Forms
                 }
             }
 
-            EditorChild childForm = new EditorChild(fileName);
+            SongEditorChild childForm = new SongEditorChild(fileName);
             childForm.Tag = fileName;
             childForm.MdiParent = this;
             if (childForm.valid)
@@ -119,9 +119,9 @@ namespace Pbp.Forms
         {
             if (ActiveMdiChild != null)
             {
-                if (((EditorChild)ActiveMdiChild).ActiveControl.GetType() == typeof(TextBox))
+                if (((SongEditorChild)ActiveMdiChild).ActiveControl.GetType() == typeof(TextBox))
                 {
-                    ((TextBox)((EditorChild)ActiveMdiChild).ActiveControl).Cut();
+                    ((TextBox)((SongEditorChild)ActiveMdiChild).ActiveControl).Cut();
                 }
             }
         }
@@ -130,9 +130,9 @@ namespace Pbp.Forms
         {
             if (ActiveMdiChild != null)
             {
-                if (((EditorChild)ActiveMdiChild).ActiveControl.GetType() == typeof(TextBox))
+                if (((SongEditorChild)ActiveMdiChild).ActiveControl.GetType() == typeof(TextBox))
                 {
-                    ((TextBox)((EditorChild)ActiveMdiChild).ActiveControl).Copy();
+                    ((TextBox)((SongEditorChild)ActiveMdiChild).ActiveControl).Copy();
                 }
             }
         }
@@ -141,9 +141,9 @@ namespace Pbp.Forms
         {
             if (ActiveMdiChild != null)
             {
-                if (((EditorChild)ActiveMdiChild).ActiveControl.GetType() == typeof(TextBox))
+                if (((SongEditorChild)ActiveMdiChild).ActiveControl.GetType() == typeof(TextBox))
                 {
-                    ((TextBox)((EditorChild)ActiveMdiChild).ActiveControl).Paste();
+                    ((TextBox)((SongEditorChild)ActiveMdiChild).ActiveControl).Paste();
                 }
             }
         }
@@ -192,7 +192,7 @@ namespace Pbp.Forms
 
         private void aboutToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            AboutWindow ab = new AboutWindow();
+            AboutDialog ab = new AboutDialog();
             ab.ShowDialog(this);
         }
 
@@ -203,7 +203,7 @@ namespace Pbp.Forms
 
         private void optionsToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            SettingsWindow stWnd = new SettingsWindow();
+            ProgramSettingsDialog stWnd = new ProgramSettingsDialog();
             stWnd.ShowDialog(this);
         }
 
@@ -219,7 +219,7 @@ namespace Pbp.Forms
         {
             if (ActiveMdiChild != null)
             {
-                ((EditorChild)ActiveMdiChild).save();
+                ((SongEditorChild)ActiveMdiChild).save();
             }
         }
 
@@ -227,7 +227,7 @@ namespace Pbp.Forms
         {
             if (ActiveMdiChild != null)
             {
-                ((EditorChild)ActiveMdiChild).saveAs();
+                ((SongEditorChild)ActiveMdiChild).saveAs();
             }
         }
 
@@ -251,9 +251,9 @@ namespace Pbp.Forms
         {
             if (ActiveMdiChild != null)
             {
-                if (((EditorChild)ActiveMdiChild).ActiveControl.GetType() == typeof(TextBox))
+                if (((SongEditorChild)ActiveMdiChild).ActiveControl.GetType() == typeof(TextBox))
                 {
-                    ((TextBox)((EditorChild)ActiveMdiChild).ActiveControl).SelectAll();
+                    ((TextBox)((SongEditorChild)ActiveMdiChild).ActiveControl).SelectAll();
                 }
             }
         }
@@ -262,9 +262,9 @@ namespace Pbp.Forms
         {
             if (ActiveMdiChild != null)
             {
-                if (((EditorChild)ActiveMdiChild).ActiveControl.GetType() == typeof(TextBox))
+                if (((SongEditorChild)ActiveMdiChild).ActiveControl.GetType() == typeof(TextBox))
                 {
-                    ((TextBox)((EditorChild)ActiveMdiChild).ActiveControl).Undo();
+                    ((TextBox)((SongEditorChild)ActiveMdiChild).ActiveControl).Undo();
                 }
             }
         }
@@ -273,9 +273,9 @@ namespace Pbp.Forms
         {
             if (ActiveMdiChild != null)
             {
-                if (((EditorChild)ActiveMdiChild).ActiveControl.GetType() == typeof(TextBox))
+                if (((SongEditorChild)ActiveMdiChild).ActiveControl.GetType() == typeof(TextBox))
                 {
-                    ((TextBox)((EditorChild)ActiveMdiChild).ActiveControl).ClearUndo();
+                    ((TextBox)((SongEditorChild)ActiveMdiChild).ActiveControl).ClearUndo();
                 }
             }
         }
@@ -284,7 +284,7 @@ namespace Pbp.Forms
         {
             if (ActiveMdiChild != null)
             {
-                ((EditorChild)ActiveMdiChild).Close();
+                ((SongEditorChild)ActiveMdiChild).Close();
             }
         }
 
@@ -292,9 +292,9 @@ namespace Pbp.Forms
         {
             if (MdiChildren.Count() > 0)
             {
-                foreach (EditorChild c in MdiChildren)
+                foreach (SongEditorChild c in MdiChildren)
                 {
-                    ((EditorChild)c).Close();
+                    ((SongEditorChild)c).Close();
                 }
             }
         }
