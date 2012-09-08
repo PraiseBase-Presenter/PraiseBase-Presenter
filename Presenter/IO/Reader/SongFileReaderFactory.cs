@@ -38,6 +38,9 @@ namespace Pbp.IO
         private Dictionary<Type, SongFileReader> readers = new Dictionary<Type,SongFileReader>();
         private Dictionary<String, HashSet<Type>> SupportedExtensionMapping = new Dictionary<string, HashSet<Type>>();
 
+        /// <summary>
+        /// A list of supported file name extensions
+        /// </summary>
         public List<String> SupportedExtensions { get { return SupportedExtensionMapping.Keys.ToList(); } }
 
         /// <summary>
@@ -53,6 +56,9 @@ namespace Pbp.IO
             get { return _instance ?? (_instance = new SongFileReaderFactory()); }
         }
 
+        /// <summary>
+        /// Initializes the available types and extensions
+        /// </summary>
         private SongFileReaderFactory() 
         {
             IEnumerable<Type> AllTypes = Assembly.GetExecutingAssembly().GetTypes().Where(t => t.IsSubclassOf(typeof(SongFileReader)));
@@ -72,6 +78,11 @@ namespace Pbp.IO
             }
         }
 
+        /// <summary>
+        /// Returns a SongFileReader based on the requested type
+        /// </summary>
+        /// <param name="type"></param>
+        /// <returns></returns>
         public SongFileReader CreateFactory(Type type)
         {
             if (readers[type] != null)
@@ -81,6 +92,11 @@ namespace Pbp.IO
             throw new NotImplementedException();
         }
 
+        /// <summary>
+        /// Returns a SongFileReader based on the file name
+        /// </summary>
+        /// <param name="filename"></param>
+        /// <returns></returns>
         public SongFileReader CreateFactoryByFile(string filename)
         {
             string ext = System.IO.Path.GetExtension(filename);
@@ -89,21 +105,32 @@ namespace Pbp.IO
             {
                 foreach (Type t in SupportedExtensionMapping[ext])
                 {
-                    return CreateFactory(t);
+                    var reader = CreateFactory(t);
+                    if (reader.IsFileSupported(filename))
+                    {
+                        return reader;
+                    }
                 }
             }
             throw new NotImplementedException();
         }
-
+         
+        /// <summary>
+        /// Returns the filter string used in open file dialogs
+        /// </summary>
+        /// <returns></returns>
         public string GetFileBoxFilter()
         {
-            String fltr = String.Empty;
+            String exts = String.Empty;
             foreach (var t in readers.Values)
             {
-                fltr += t.FileTypeDescription + " (*" + t.FileExtension + ")|*" + t.FileExtension + "|";
+                if (exts != String.Empty)
+                {
+                    exts += ";";
+                }
+                exts += "*" + t.FileExtension;
             }
-            fltr += "Alle Dateien (*.*)|*.*";
-            return fltr;
+            return "Lieddateien (" + exts + ")|" + exts + "|Alle Dateien (*.*)|*.*";
         }
     }
 }

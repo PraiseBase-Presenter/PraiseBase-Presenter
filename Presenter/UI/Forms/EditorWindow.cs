@@ -39,7 +39,8 @@ namespace Pbp.Forms
         static private EditorWindow _instance;
 
         public string fileBoxInitialDir;
-        public int fileBoxFilterIndex;
+        public int fileOpenBoxFilterIndex;
+        public int fileSaveBoxFilterIndex;
 
         private int childFormNumber = 0;
 
@@ -47,7 +48,8 @@ namespace Pbp.Forms
         {
             InitializeComponent();
             fileBoxInitialDir = Settings.Default.DataDirectory + Path.DirectorySeparatorChar + Settings.Default.SongDir;
-            fileBoxFilterIndex = 0;
+            fileOpenBoxFilterIndex = 0;
+            fileSaveBoxFilterIndex = 0;
             this.WindowState = Settings.Default.EditorWindowState;
             //this.Text += " " + System.Reflection.Assembly.GetExecutingAssembly().GetName().Version.ToString();
         }
@@ -79,12 +81,12 @@ namespace Pbp.Forms
             openFileDialog.Title = "Lied öffnen";
 
             openFileDialog.Filter = SongFileReaderFactory.Instance.GetFileBoxFilter();
-            openFileDialog.FilterIndex = fileBoxFilterIndex;
+            openFileDialog.FilterIndex = fileOpenBoxFilterIndex;
             if (openFileDialog.ShowDialog(this) == DialogResult.OK)
             {
                 string FileName = openFileDialog.FileName;
                 fileBoxInitialDir = Path.GetDirectoryName(FileName);
-                fileBoxFilterIndex = openFileDialog.FilterIndex;
+                fileOpenBoxFilterIndex = openFileDialog.FilterIndex;
                 openSong(FileName);
             }
         }

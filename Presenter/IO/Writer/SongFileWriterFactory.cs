@@ -40,6 +40,9 @@ namespace Pbp.IO
         private Dictionary<Type, SongFileWriter> readers = new Dictionary<Type,SongFileWriter>();
         private Dictionary<String, HashSet<Type>> SupportedExtensionMapping = new Dictionary<string, HashSet<Type>>();
 
+        /// <summary>
+        /// A list of supported file name extensions
+        /// </summary>
         public List<String> SupportedExtensions { get { return SupportedExtensionMapping.Keys.ToList(); } }
 
         /// <summary>
@@ -55,6 +58,9 @@ namespace Pbp.IO
             get { return _instance ?? (_instance = new SongFileWriterFactory()); }
         }
 
+        /// <summary>
+        /// Initializes the available types and extensions
+        /// </summary>
         private SongFileWriterFactory() 
         {
             IEnumerable<Type> AllTypes = Assembly.GetExecutingAssembly().GetTypes().Where(t => t.IsSubclassOf(typeof(SongFileWriter)));
@@ -70,7 +76,7 @@ namespace Pbp.IO
                 {
                     SupportedExtensionMapping[inst.FileExtension].Add(atype);
                 }
-                Console.WriteLine("Loaded song reader: " + atype);
+                Console.WriteLine("Loaded song writer: " + atype);
             }
         }
 

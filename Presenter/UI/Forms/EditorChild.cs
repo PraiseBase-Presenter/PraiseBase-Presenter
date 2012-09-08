@@ -62,11 +62,19 @@ namespace Pbp.Forms
                 {
                     sng = SongFileReaderFactory.Instance.CreateFactoryByFile(fileName).Load(fileName);
                 }
+                catch (NotImplementedException e)
+                {
+                    MessageBox.Show("Dieses Dateiformat wird leider nicht unterstüzt!", "Liededitor", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    valid = false;
+                    this.Close();
+                    return;
+                }
                 catch (Exception e)
                 {
                     MessageBox.Show("Diese Lieddatei ist leider fehlerhaft (" + e.Message + ")!", "Liededitor", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     valid = false;
                     this.Close();
+                    return;
                 }
                 songFilename = fileName;
             }
@@ -673,13 +681,14 @@ namespace Pbp.Forms
             saveFileDialog.CheckPathExists = true;
             saveFileDialog.FileName = sng.Title;
             saveFileDialog.Filter = SongFileWriterFactory.Instance.GetFileBoxFilter();
-            saveFileDialog.FilterIndex = ((EditorWindow)MdiParent).fileBoxFilterIndex;
+            saveFileDialog.FilterIndex = ((EditorWindow)MdiParent).fileSaveBoxFilterIndex;
             saveFileDialog.AddExtension = true;
             saveFileDialog.Title = Resources.Lied_speichern_unter___;
 
             if (saveFileDialog.ShowDialog(this) == DialogResult.OK)
             {
                 hashCode = sng.GetHashCode();
+                ((EditorWindow)MdiParent).fileSaveBoxFilterIndex = saveFileDialog.FilterIndex;
 
                 SongFileWriterFactory.Instance.CreateFactoryByFile(saveFileDialog.FileName).Save(saveFileDialog.FileName, sng);
 

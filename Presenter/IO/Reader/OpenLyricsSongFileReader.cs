@@ -188,5 +188,44 @@ namespace Pbp.IO
             sng.UpdateSearchText();
             return sng;
         }
+
+        /// <summary>
+        /// Tests if a given file is supported by this reader
+        /// </summary>
+        /// <param name="filename"></param>
+        /// <returns></returns>
+        public override bool IsFileSupported(string filename)
+        {
+            try
+            {
+                XmlTextReader t = new XmlTextReader(filename);
+                while (t.Read())
+                {
+                    if (t.NodeType == XmlNodeType.Element)
+                    {
+                        if (t.Name == XmlRootNodeName)
+                        {
+                            if (t.GetAttribute("version").ToString() == SupportedFileFormatVersion)
+                            {
+                                return true;
+                            }
+                            else
+                            {
+                                return false;
+                            }
+                        }
+                        else
+                        {
+                            return false;
+                        }
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                return false;
+            }
+            return true;
+        }
     }
 }
