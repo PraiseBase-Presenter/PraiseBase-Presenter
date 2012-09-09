@@ -85,7 +85,7 @@ namespace Pbp.IO
             // Category (Tag)
             if (xmlRoot["general"]["category"] != null)
             {
-                sng.Tags.Add(xmlRoot["general"]["category"].InnerText);
+                sng.Themes.Add(xmlRoot["general"]["category"].InnerText);
             }
 
             // Comment
@@ -342,7 +342,7 @@ namespace Pbp.IO
                     }
                 }
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 return false;
             }

@@ -81,6 +81,11 @@ namespace Pbp.Data.Song
         public string CcliID { get; set; }
 
         /// <summary>
+        /// Should the CCLI ID be readonly?
+        /// </summary>
+        public bool CCliIDReadonly { get; set; }
+
+        /// <summary>
         /// Copyright information
         /// </summary>
         public string Copyright { get; set; }
@@ -108,7 +113,7 @@ namespace Pbp.Data.Song
         /// <summary>
         /// Admin
         /// </summary>
-        public string Admin { get; set; }
+        public string RightsManagement { get; set; }
 
         /// <summary>
         /// Publisher
@@ -143,7 +148,7 @@ namespace Pbp.Data.Song
         /// <summary>
         /// Gets or sets a list of tags (like categories) which describe the type of the song
         /// </summary>
-        public TagList Tags { get; set; }
+        public TagList Themes { get; set; }
 
         /// <summary>
         /// Gets or sets a user defined comment for quality assurance information or presentation issues
@@ -311,7 +316,7 @@ namespace Pbp.Data.Song
         {
             GUID = Guid.NewGuid();
 
-            Tags = new TagList();
+            Themes = new TagList();
             DefaultHorizAlign = SongTextHorizontalAlign.Center;
             DefaultVertAlign = SongTextVerticalAlign.Center;
             Slides = new SongSlideList();
@@ -319,6 +324,7 @@ namespace Pbp.Data.Song
             RelativeImagePaths = new List<string>();
             SearchText = String.Empty;
             SongBooks = new List<SongBook>();
+            Author = new List<SongAuthor>();
             Comment = String.Empty;
 
             QualityIssues = new List<QualityAssuranceIndicators>();
@@ -428,7 +434,7 @@ namespace Pbp.Data.Song
                        ^ TranslationColor.GetHashCode()
                        ^ TranslationFont.GetHashCode()
                        ^ TextLineSpacing.GetHashCode()
-                       ^ Tags.GetHashCode();
+                       ^ Themes.GetHashCode();
 
             if (Language != null)
             {
@@ -466,7 +472,7 @@ namespace Pbp.Data.Song
             info.AddValue("Language", this.Language);
             info.AddValue("Comment", this.Comment);
             info.AddValue("TextLineSpacing", this.TextLineSpacing);
-            info.AddValue("Tags", this.Tags);
+            info.AddValue("Tags", this.Themes);
             info.AddValue("CcliID", this.CcliID);
             info.AddValue("Copyright", this.Copyright);
         }

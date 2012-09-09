@@ -83,7 +83,7 @@ namespace Pbp.Forms
 
                 foreach (int i in checkedListBoxTags.CheckedIndices)
                 {
-                    if (!sng.Tags.Contains(checkedListBoxTags.Items[i].ToString()))
+                    if (!sng.Themes.Contains(checkedListBoxTags.Items[i].ToString()))
                         use = false;
                 }
 

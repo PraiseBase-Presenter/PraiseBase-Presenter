@@ -58,7 +58,7 @@ namespace Pbp.IO
             xmlRoot["general"].AppendChild(xmlDoc.CreateElement("title"));
             xmlRoot["general"]["title"].InnerText = sng.Title;
             xmlRoot["general"].AppendChild(xmlDoc.CreateElement("category"));
-            xmlRoot["general"]["category"].InnerText = sng.Tags.Count > 0 ? sng.Tags[0] : "Keine Kategorie";
+            xmlRoot["general"]["category"].InnerText = sng.Themes.Count > 0 ? sng.Themes[0] : "Keine Kategorie";
             xmlRoot["general"].AppendChild(xmlDoc.CreateElement("language"));
             if (sng.Language != string.Empty)
             {

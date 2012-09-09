@@ -62,7 +62,7 @@ namespace Pbp.Forms
                 {
                     sng = SongFileReaderFactory.Instance.CreateFactoryByFile(fileName).Load(fileName);
                 }
-                catch (NotImplementedException e)
+                catch (NotImplementedException)
                 {
                     MessageBox.Show("Dieses Dateiformat wird leider nicht unterstüzt!", "Liededitor", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     valid = false;
@@ -101,8 +101,40 @@ namespace Pbp.Forms
             // Data bindings
             textBoxSongTitle.DataBindings.Add("Text", sng, "Title");
             textBoxCCLISongID.DataBindings.Add("Text", sng, "CcliID");
+            if (sng.CCliIDReadonly)
+            {
+                textBoxCCLISongID.ReadOnly = true;
+            }
             textBoxCopyright.DataBindings.Add("Text", sng, "Copyright");
             textBoxComment.DataBindings.Add("Text", sng, "Comment");
+            textBoxRightsManagement.DataBindings.Add("Text", sng, "RightsManagement");
+            textBoxPublisher.DataBindings.Add("Text", sng, "Publisher");
+
+            string autstr = string.Empty;
+            foreach (var aut in sng.Author)
+            {
+                if (autstr != string.Empty)
+                {
+                    autstr += ";";
+                }
+                autstr += aut.Name;
+            }
+            textBoxAuthors.Text = autstr;
+
+            string sbkstr = string.Empty;
+            foreach (var sbk in sng.SongBooks)
+            {
+                if (sbkstr != string.Empty)
+                {
+                    sbkstr += ";";
+                }
+                sbkstr += sbk.Name;
+                if (sbk.Entry != null)
+                {
+                    sbkstr += " " + sbk.Entry;
+                }
+            }
+            textBoxSongbooks.Text = sbkstr;
 
             populateTree();
             treeViewContents.SelectedNode = treeViewContents.Nodes[0];
@@ -138,7 +170,7 @@ namespace Pbp.Forms
             checkedListBoxTags.Items.Clear();
             foreach (string str in Settings.Default.Tags)
             {
-                if (sng.Tags.Contains(str))
+                if (sng.Themes.Contains(str))
                     checkedListBoxTags.Items.Add(str, true);
                 else
                     checkedListBoxTags.Items.Add(str);
@@ -639,11 +671,11 @@ namespace Pbp.Forms
         {
             if (e.CurrentValue == CheckState.Unchecked)
             {
-                sng.Tags.Add(checkedListBoxTags.Items[e.Index].ToString());
+                sng.Themes.Add(checkedListBoxTags.Items[e.Index].ToString());
             }
             else
             {
-                sng.Tags.Remove(checkedListBoxTags.Items[e.Index].ToString());
+                sng.Themes.Remove(checkedListBoxTags.Items[e.Index].ToString());
             }
         }
 
@@ -655,12 +687,20 @@ namespace Pbp.Forms
             }
             else
             {
-                SongFileWriterFactory.Instance.CreateFactoryByFile(songFilename).Save(songFilename, sng);
+                try
+                {
+                    SongFileWriterFactory.Instance.CreateFactoryByFile(songFilename).Save(songFilename, sng);
 
-                hashCode = sng.GetHashCode();
-                ((SongEditor)MdiParent).setStatus("Lied gespeichert als " + songFilename + "");
+                    hashCode = sng.GetHashCode();
+                    ((SongEditor)MdiParent).setStatus("Lied gespeichert als " + songFilename + "");
 
-                SongManager.Instance.ReloadSongByPath(songFilename);
+                    SongManager.Instance.ReloadSongByPath(songFilename);
+                }
+                catch (NotImplementedException)
+                {
+                    MessageBox.Show("Das Lied kann leider nicht in diesem Format gespeichert werden! Bitte wähle ein anderes Dateiformat!", "Format nicht unterstüzt!", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    saveAs();
+                }
             }
         }
 
@@ -702,7 +742,7 @@ namespace Pbp.Forms
                     ((SongEditor)MdiParent).fileSaveBoxFilterIndex = saveFileDialog.FilterIndex;
                     ((SongEditor)MdiParent).setStatus("Lied gespeichert als " + saveFileDialog.FileName + "");
                 }
-                catch (NotImplementedException e)
+                catch (NotImplementedException)
                 {
                     MessageBox.Show("Dieses Dateiformat wird leider nicht unterstüzt!", "Liededitor", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
@@ -1013,6 +1053,11 @@ namespace Pbp.Forms
                 sng.Parts[partId].Caption = textBoxPartCaption.Text;
                 treeViewContents.Nodes[partId].Text = sng.Parts[partId].Caption;
             }
+        }
+
+        private void label16_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

@@ -60,6 +60,8 @@ namespace Pbp.IO
             List<String> fields = new List<string>();
             List<String> words = new List<string>();
 
+            String section = string.Empty;
+
             string[] lines = System.IO.File.ReadAllLines(@filename);
             foreach (string l in lines)
             {
@@ -69,52 +71,65 @@ namespace Pbp.IO
                 {
                     string k = s[0];
                     string v = s[1];
-                    switch (k)
+
+                    if (section == "content")
                     {
-                        case "Title":
-                            sng.Title = v;
-                            break;
-                        case "Author":
-                            var a = new SongAuthor();
-                            a.Name = v;
-                            sng.Author = new List<SongAuthor>();
-                            sng.Author.Add(a);
-                            break;
-                        case "Copyright":
-                            sng.Copyright = v;
-                            break;
-                        case "Admin":
-                            sng.Admin = v;
-                            break;
-                        case "Themes":
-                            foreach (var t in v.Split(new[] { "/t" }, StringSplitOptions.None))
-                            {
-                                sng.Tags.Add(t);
-                            }
-                            break;
-                        case "Keys":
-                            sng.Key = v;
-                            break;
-                        case "Fields":
-                            foreach (var t in v.Split(new[] { "/t" }, StringSplitOptions.RemoveEmptyEntries))
-                            {
-                                fields.Add(t);
-                            }
-                            break;
-                        case "Words":
-                            foreach (var t in v.Split(new[] { "/t" }, StringSplitOptions.RemoveEmptyEntries))
-                            {
-                                words.Add(t);
-                            }
-                            break;
+                        switch (k)
+                        {
+                            case "Title":
+                                sng.Title = v;
+                                break;
+                            case "Author":
+                                var a = new SongAuthor();
+                                a.Name = v;
+                                sng.Author = new List<SongAuthor>();
+                                sng.Author.Add(a);
+                                break;
+                            case "Copyright":
+                                sng.Copyright = v;
+                                break;
+                            case "Admin":
+                                sng.RightsManagement = v;
+                                break;
+                            case "Themes":
+                                foreach (var t in v.Split(new[] { "/t" }, StringSplitOptions.None))
+                                {
+                                    sng.Themes.Add(t);
+                                }
+                                break;
+                            case "Keys":
+                                sng.Key = v;
+                                break;
+                            case "Fields":
+                                foreach (var t in v.Split(new[] { "/t" }, StringSplitOptions.RemoveEmptyEntries))
+                                {
+                                    fields.Add(t);
+                                }
+                                break;
+                            case "Words":
+                                foreach (var t in v.Split(new[] { "/t" }, StringSplitOptions.RemoveEmptyEntries))
+                                {
+                                    words.Add(t);
+                                }
+                                break;
+                        }
                     }
                 }
                 else
                 {
-                    var m = Regex.Matches(li, "^\\[S A[0-9]+\\]$");
-                    if (m.Count > 0)
+                    if (li == "[File]")
                     {
-                        sng.CcliID = m[0].Value;
+                        section = "file";
+                    }
+                    else
+                    {
+                        Match m = Regex.Match(li, "^\\[S A([0-9]+)\\]$");
+                        if (m.Success)
+                        {
+                            sng.CcliID = m.Groups[1].Value;
+                            sng.CCliIDReadonly = true;
+                            section = "content";
+                        }
                     }
                 }
             }
@@ -190,7 +205,7 @@ namespace Pbp.IO
                     }
                 }
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 return false;
             }

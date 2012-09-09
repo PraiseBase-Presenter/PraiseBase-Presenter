@@ -102,6 +102,11 @@ namespace Pbp.IO
         {
             string ext = System.IO.Path.GetExtension(filename);
 
+            if (!SupportedExtensionMapping.ContainsKey(ext))
+            {
+                throw new NotImplementedException();
+            }
+
             if (SupportedExtensionMapping[ext] != null)
             {
                 foreach (Type t in SupportedExtensionMapping[ext])

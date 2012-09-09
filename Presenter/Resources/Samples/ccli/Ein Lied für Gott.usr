@@ -1,0 +1,12 @@
+[File]
+Type=SongSelect Import File
+Version=3.0
+[S A1234567]
+Title=Ein Lied für Gott
+Author=Muster, Hans
+Copyright=Gemeinfrei (Public Domain) 
+Admin=Verlag ABC
+Themes=Celebration/tGod's Attributes /t Love/tJoy
+Keys=
+Fields=Vers 1/tVers 2/tVers 3
+Words=Lorem ipsum dolor sit amet,/nconsectetur adipiscing elit./nVivamus odio massa,/nlacinia in mollis quis,/nvehicula sed justo/n/tNunc cursus libero non quam lobortis/nac pharetra leo facilisis./nProin tortor tellus,/n fermentum mattis euismod eu,/nfaucibus vel justo./n/tFusce pellentesque rhoncus felis,/neu convallis ante tempus a./nCum sociis natoque penatibus/net magnis dis parturient montes,/nnascetur ridiculus mus./n/t

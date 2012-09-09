@@ -91,12 +91,20 @@
             this.comboBoxLanguageTranslated = new System.Windows.Forms.ComboBox();
             this.label11 = new System.Windows.Forms.Label();
             this.pictureBoxPreview = new System.Windows.Forms.PictureBox();
+            this.treeViewContents = new TreeEx.TreeLE();
             this.buttonAddItem = new System.Windows.Forms.Button();
             this.buttonMoveUp = new System.Windows.Forms.Button();
             this.buttonDelItem = new System.Windows.Forms.Button();
             this.buttonMoveDown = new System.Windows.Forms.Button();
             this.tabControlTextLayer = new System.Windows.Forms.TabControl();
-            this.treeViewContents = new TreeEx.TreeLE();
+            this.textBoxAuthors = new System.Windows.Forms.TextBox();
+            this.label15 = new System.Windows.Forms.Label();
+            this.textBoxPublisher = new System.Windows.Forms.TextBox();
+            this.label16 = new System.Windows.Forms.Label();
+            this.textBoxSongbooks = new System.Windows.Forms.TextBox();
+            this.label17 = new System.Windows.Forms.Label();
+            this.textBoxRightsManagement = new System.Windows.Forms.TextBox();
+            this.label18 = new System.Windows.Forms.Label();
             this.slideContextMenu.SuspendLayout();
             this.partContextMenu.SuspendLayout();
             this.songContextMenu.SuspendLayout();
@@ -487,6 +495,14 @@
             // 
             // tabPageContent
             // 
+            this.tabPageContent.Controls.Add(this.textBoxRightsManagement);
+            this.tabPageContent.Controls.Add(this.label18);
+            this.tabPageContent.Controls.Add(this.textBoxSongbooks);
+            this.tabPageContent.Controls.Add(this.label17);
+            this.tabPageContent.Controls.Add(this.textBoxPublisher);
+            this.tabPageContent.Controls.Add(this.label16);
+            this.tabPageContent.Controls.Add(this.textBoxAuthors);
+            this.tabPageContent.Controls.Add(this.label15);
             this.tabPageContent.Controls.Add(this.label1);
             this.tabPageContent.Controls.Add(this.label3);
             this.tabPageContent.Controls.Add(this.comboBoxSlideVertOrientation);
@@ -584,7 +600,7 @@
             // 
             this.textBoxCCLISongID.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.textBoxCCLISongID.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBoxCCLISongID.Location = new System.Drawing.Point(318, 343);
+            this.textBoxCCLISongID.Location = new System.Drawing.Point(320, 343);
             this.textBoxCCLISongID.Name = "textBoxCCLISongID";
             this.textBoxCCLISongID.Size = new System.Drawing.Size(110, 22);
             this.textBoxCCLISongID.TabIndex = 88;
@@ -593,9 +609,9 @@
             // 
             this.textBoxCopyright.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.textBoxCopyright.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBoxCopyright.Location = new System.Drawing.Point(318, 371);
+            this.textBoxCopyright.Location = new System.Drawing.Point(320, 371);
             this.textBoxCopyright.Name = "textBoxCopyright";
-            this.textBoxCopyright.Size = new System.Drawing.Size(275, 22);
+            this.textBoxCopyright.Size = new System.Drawing.Size(306, 22);
             this.textBoxCopyright.TabIndex = 90;
             // 
             // textBoxSongTitle
@@ -801,6 +817,22 @@
             this.pictureBoxPreview.TabStop = false;
             this.pictureBoxPreview.Click += new System.EventHandler(this.buttonSlideBackground_Click);
             // 
+            // treeViewContents
+            // 
+            this.treeViewContents.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+                        | System.Windows.Forms.AnchorStyles.Left)));
+            this.treeViewContents.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.treeViewContents.HideSelection = false;
+            this.treeViewContents.Location = new System.Drawing.Point(9, 64);
+            this.treeViewContents.Name = "treeViewContents";
+            this.treeViewContents.Size = new System.Drawing.Size(240, 243);
+            this.treeViewContents.TabIndex = 0;
+            this.treeViewContents.ValidateLabelEdit += new TreeEx.TreeLE.ValidateLabelEditEventHandler(this.treeViewContents_ValidateLabelEdit);
+            this.treeViewContents.BeforeLabelEdit += new System.Windows.Forms.NodeLabelEditEventHandler(this.treeViewContents_BeforeLabelEdit);
+            this.treeViewContents.AfterLabelEdit += new System.Windows.Forms.NodeLabelEditEventHandler(this.treeViewContents_AfterLabelEdit);
+            this.treeViewContents.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.treeViewContents_AfterSelect);
+            this.treeViewContents.KeyDown += new System.Windows.Forms.KeyEventHandler(this.treeViewContents_KeyDown);
+            // 
             // buttonAddItem
             // 
             this.buttonAddItem.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
@@ -865,21 +897,86 @@
             this.tabControlTextLayer.Size = new System.Drawing.Size(978, 562);
             this.tabControlTextLayer.TabIndex = 88;
             // 
-            // treeViewContents
+            // textBoxAuthors
             // 
-            this.treeViewContents.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Left)));
-            this.treeViewContents.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.treeViewContents.HideSelection = false;
-            this.treeViewContents.Location = new System.Drawing.Point(9, 64);
-            this.treeViewContents.Name = "treeViewContents";
-            this.treeViewContents.Size = new System.Drawing.Size(240, 243);
-            this.treeViewContents.TabIndex = 0;
-            this.treeViewContents.ValidateLabelEdit += new TreeEx.TreeLE.ValidateLabelEditEventHandler(this.treeViewContents_ValidateLabelEdit);
-            this.treeViewContents.BeforeLabelEdit += new System.Windows.Forms.NodeLabelEditEventHandler(this.treeViewContents_BeforeLabelEdit);
-            this.treeViewContents.AfterLabelEdit += new System.Windows.Forms.NodeLabelEditEventHandler(this.treeViewContents_AfterLabelEdit);
-            this.treeViewContents.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.treeViewContents_AfterSelect);
-            this.treeViewContents.KeyDown += new System.Windows.Forms.KeyEventHandler(this.treeViewContents_KeyDown);
+            this.textBoxAuthors.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.textBoxAuthors.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.textBoxAuthors.Location = new System.Drawing.Point(320, 399);
+            this.textBoxAuthors.Name = "textBoxAuthors";
+            this.textBoxAuthors.Size = new System.Drawing.Size(306, 22);
+            this.textBoxAuthors.TabIndex = 109;
+            // 
+            // label15
+            // 
+            this.label15.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.label15.AutoSize = true;
+            this.label15.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label15.Location = new System.Drawing.Point(256, 404);
+            this.label15.Name = "label15";
+            this.label15.Size = new System.Drawing.Size(35, 13);
+            this.label15.TabIndex = 110;
+            this.label15.Text = "Autor:";
+            // 
+            // textBoxPublisher
+            // 
+            this.textBoxPublisher.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.textBoxPublisher.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.textBoxPublisher.Location = new System.Drawing.Point(320, 427);
+            this.textBoxPublisher.Name = "textBoxPublisher";
+            this.textBoxPublisher.Size = new System.Drawing.Size(306, 22);
+            this.textBoxPublisher.TabIndex = 111;
+            // 
+            // label16
+            // 
+            this.label16.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.label16.AutoSize = true;
+            this.label16.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label16.Location = new System.Drawing.Point(256, 432);
+            this.label16.Name = "label16";
+            this.label16.Size = new System.Drawing.Size(53, 13);
+            this.label16.TabIndex = 112;
+            this.label16.Text = "Publisher:";
+            this.label16.Click += new System.EventHandler(this.label16_Click);
+            // 
+            // textBoxSongbooks
+            // 
+            this.textBoxSongbooks.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.textBoxSongbooks.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.textBoxSongbooks.Location = new System.Drawing.Point(320, 483);
+            this.textBoxSongbooks.Name = "textBoxSongbooks";
+            this.textBoxSongbooks.Size = new System.Drawing.Size(306, 22);
+            this.textBoxSongbooks.TabIndex = 113;
+            // 
+            // label17
+            // 
+            this.label17.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.label17.AutoSize = true;
+            this.label17.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label17.Location = new System.Drawing.Point(256, 488);
+            this.label17.Name = "label17";
+            this.label17.Size = new System.Drawing.Size(63, 13);
+            this.label17.TabIndex = 114;
+            this.label17.Text = "Liederbuch:";
+            // 
+            // textBoxRightsManagement
+            // 
+            this.textBoxRightsManagement.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.textBoxRightsManagement.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.textBoxRightsManagement.Location = new System.Drawing.Point(320, 455);
+            this.textBoxRightsManagement.Name = "textBoxRightsManagement";
+            this.textBoxRightsManagement.Size = new System.Drawing.Size(306, 22);
+            this.textBoxRightsManagement.TabIndex = 115;
+            // 
+            // label18
+            // 
+            this.label18.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.label18.AutoSize = true;
+            this.label18.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label18.Location = new System.Drawing.Point(256, 460);
+            this.label18.Name = "label18";
+            this.label18.Size = new System.Drawing.Size(54, 13);
+            this.label18.TabIndex = 116;
+            this.label18.Text = "Verwalter:";
             // 
             // SongEditorChild
             // 
@@ -989,5 +1086,13 @@
         private System.Windows.Forms.CheckedListBox checkedListBoxTags;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.TextBox textBoxPublisher;
+        private System.Windows.Forms.Label label16;
+        private System.Windows.Forms.TextBox textBoxAuthors;
+        private System.Windows.Forms.Label label15;
+        private System.Windows.Forms.TextBox textBoxSongbooks;
+        private System.Windows.Forms.Label label17;
+        private System.Windows.Forms.TextBox textBoxRightsManagement;
+        private System.Windows.Forms.Label label18;
     }
 }

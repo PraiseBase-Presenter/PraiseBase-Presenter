@@ -221,7 +221,7 @@ namespace Pbp.IO
                     }
                 }
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 return false;
             }
