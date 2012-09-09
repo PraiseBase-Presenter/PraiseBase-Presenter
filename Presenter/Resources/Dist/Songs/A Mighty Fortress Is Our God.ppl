@@ -1,9 +1,10 @@
-﻿<?xml version="1.0"?>
+﻿<?xml version="1.0" encoding="UTF-8"?>
 <ppl version="3.0">
   <general>
     <title>A mighty fortress is our God</title>
     <category>Keine Kategorie</category>
     <language />
+    <guid>b532c18d-a042-4978-80f4-5bfc8785614a</guid>
   </general>
   <songtext>
     <part caption="Strophe 1">
