@@ -61,6 +61,7 @@
     </CodeAnalysisDependentAssemblyPaths>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CcliUsrSongFileReaderTest.cs" />
     <Compile Include="OpenLyricsSongFileReaderTest.cs" />
     <Compile Include="PowerPraiseSongFileReaderTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

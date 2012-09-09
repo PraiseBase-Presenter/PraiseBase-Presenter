@@ -94,7 +94,7 @@ namespace Pbp.IO
                             case "Themes":
                                 foreach (var t in v.Split(new[] { "/t" }, StringSplitOptions.None))
                                 {
-                                    sng.Themes.Add(t);
+                                    sng.Themes.Add(t.Trim());
                                 }
                                 break;
                             case "Keys":
@@ -144,7 +144,7 @@ namespace Pbp.IO
                 SongPart p = new SongPart();
                 p.Caption = fields[fx];
                 SongSlide s = new SongSlide(sng);
-                foreach (var l in words[fx].Split(new[] { "/n" }, StringSplitOptions.None))
+                foreach (var l in words[fx].Split(new[] { "/n" }, StringSplitOptions.RemoveEmptyEntries))
                 {
                     s.Lines.Add(l);
                 }

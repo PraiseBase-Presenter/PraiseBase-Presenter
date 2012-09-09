@@ -357,6 +357,7 @@
     <Content Include="Resources\Dist\Songs\A Mighty Fortress Is Our God.ppl" />
     <Content Include="Resources\Dist\Songs\Jesus is my Lord.ppl" />
     <None Include="Resources\Doc\License.rtf" />
+    <None Include="Resources\Samples\ccli\Ein Lied für Gott.usr" />
     <None Include="Resources\Samples\powerpraise\Näher, mein Gott zu Dir.ppl" />
     <None Include="Resources\Samples\songbeamer\Ehre, Macht, und Stärke.sng" />
   </ItemGroup>
