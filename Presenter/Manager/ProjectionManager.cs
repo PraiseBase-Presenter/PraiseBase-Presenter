@@ -45,15 +45,11 @@ namespace Pbp.Manager
 
         #endregion Delegates
 
-        // TODO currently not used
-        public Size PreviewImageSize { get; set; }
-
         /// <summary>
         /// The constructor
         /// </summary>
         private ProjectionManager()
         {
-            PreviewImageSize = new Size(240, 180);
             InitializeWindows();
         }
 
@@ -203,14 +199,16 @@ namespace Pbp.Manager
         /// <param name="layerContent"></param>
         public void DisplayLayer(int layerNum, BaseLayer layerContent)
         {
-            foreach (var pw in projectionWindows)
+            if (projectionWindows.Count > 0)
             {
-                pw.DisplayLayer(layerNum, layerContent);
-            }
-
-            if (projectionWindows.Count > 0 && ProjectionChanged != null)
-            {
-                ProjectionChanged(this, new ProjectionChangedEventArgs { Image = projectionWindows[0].GetPreviewImage() });
+                foreach (var pw in projectionWindows)
+                {
+                    pw.DisplayLayer(layerNum, layerContent);
+                }
+                if (ProjectionChanged != null)
+                {
+                    ProjectionChanged(this, new ProjectionChangedEventArgs { Image = projectionWindows[0].GetPreviewImage() });
+                }
             }
         }
 
@@ -222,14 +220,16 @@ namespace Pbp.Manager
         /// <param name="fadetime"></param>
         public void DisplayLayer(int layerNum, BaseLayer layerContent, int fadetime)
         {
-            foreach (var pw in projectionWindows)
+            if (projectionWindows.Count > 0)
             {
-                pw.DisplayLayer(layerNum, layerContent, fadetime);
-            }
-
-            if (projectionWindows.Count > 0 && ProjectionChanged != null)
-            {
-                ProjectionChanged(this, new ProjectionChangedEventArgs { Image = projectionWindows[0].GetPreviewImage() });
+                foreach (var pw in projectionWindows)
+                {
+                    pw.DisplayLayer(layerNum, layerContent, fadetime);
+                }
+                if (ProjectionChanged != null)
+                {
+                    ProjectionChanged(this, new ProjectionChangedEventArgs { Image = projectionWindows[0].GetPreviewImage() });
+                }
             }
         }
 
@@ -239,9 +239,16 @@ namespace Pbp.Manager
         /// <param name="layerNum"></param>
         public void HideLayer(int layerNum)
         {
-            foreach (var pw in projectionWindows)
+            if (projectionWindows.Count > 0)
             {
-                pw.HideLayer(layerNum);
+                foreach (var pw in projectionWindows)
+                {
+                    pw.HideLayer(layerNum);
+                }
+                if (ProjectionChanged != null)
+                {
+                    ProjectionChanged(this, new ProjectionChangedEventArgs { Image = projectionWindows[0].GetPreviewImage() });
+                }
             }
         }
 
@@ -252,9 +259,16 @@ namespace Pbp.Manager
         /// <param name="fadetime"></param>
         public void HideLayer(int layerNum, int fadetime)
         {
-            foreach (var pw in projectionWindows)
+            if (projectionWindows.Count > 0)
             {
-                pw.HideLayer(layerNum, fadetime);
+                foreach (var pw in projectionWindows)
+                {
+                    pw.HideLayer(layerNum, fadetime);
+                }
+                if (ProjectionChanged != null)
+                {
+                    ProjectionChanged(this, new ProjectionChangedEventArgs { Image = projectionWindows[0].GetPreviewImage() });
+                }
             }
         }
     }

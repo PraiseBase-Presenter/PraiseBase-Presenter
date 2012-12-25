@@ -129,7 +129,6 @@ namespace Pbp.Forms
                 titelUndTextToolStripMenuItem.Checked = true;
             }
 
-            ProjectionManager.Instance.PreviewImageSize = pictureBoxbeamerPreview.Size;
             ProjectionManager.Instance.ProjectionChanged += Instance_ProjectionChanged;
         }
 

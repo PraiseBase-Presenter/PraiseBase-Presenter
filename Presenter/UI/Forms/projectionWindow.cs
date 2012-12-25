@@ -117,14 +117,16 @@ namespace Pbp.Forms
         /// </summary>
         /// <param name="layer"></param>
         /// <param name="fadetime"></param>
-        public void HideLayer(int layer, int fadetime)
+        public void HideLayer(int layerNum, int fadetime)
         {
             var bmp = new Bitmap(Width, Height);
-            if (layer == 2)
+
+            if (layerNum == 2)
                 ((WpfProjectionControl)(projectionControlHost.Child)).SetProjectionText(bmp, fadetime);
             else
                 ((WpfProjectionControl)(projectionControlHost.Child)).SetProjectionImage(bmp, fadetime);
-            
+
+            currentLayerImages[layerNum] = bmp;            
         }
 
         public void RedrawLayers()
