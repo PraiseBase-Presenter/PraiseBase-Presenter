@@ -29,6 +29,7 @@ using System;
 using System.Windows.Forms;
 using Pbp.Forms;
 using Pbp.Properties;
+using Pbp.Manager;
 
 namespace Pbp
 {
@@ -91,9 +92,6 @@ namespace Pbp
                 ldg.setLabel("Lade Liederdatenbank...");
                 SongManager.Instance.Reload();
 
-                ldg.setLabel("Suche Projektionsschirm...");
-                var prjw = ProjectionWindow.Instance;
-
                 GC.Collect();
                 ldg.Close();
                 ldg.Dispose();
@@ -102,7 +100,6 @@ namespace Pbp
             {
                 ImageManager.Instance.CheckThumbs();
                 SongManager.Instance.Reload();
-                var prjw = ProjectionWindow.Instance;
                 GC.Collect();
             }
 

@@ -6,19 +6,6 @@ namespace Pbp
 {
     public abstract class TextLayer : BaseLayer
     {
-        public void writeOut(System.Drawing.Graphics gr)
-        {
-            Object[] args = { };
-            writeOut(gr, args, ProjectionMode.Projection);
-        }
-
-        public void writeOut(System.Drawing.Graphics gr, Object[] args)
-        {
-            writeOut(gr, args, ProjectionMode.Projection);
-        }
-
-        public abstract void writeOut(System.Drawing.Graphics gr, Object[] args, ProjectionMode pm);
-
         protected void drawString(Graphics gr, string str, int x, int y, Font font, Brush fontBrush, StringFormat strFormat)
         {
             int shadowThickness = Settings.Default.ProjectionShadowSize;

@@ -23,10 +23,24 @@ namespace Pbp
 
         public static void DoCheck()
         {
+            DoCheck(false);
+        }
+
+        public static void DoCheck(bool force)
+        {
             UpdateInformation ui = getNewVersion();
 
             if (ui.UpdateAvailable)
             {
+                if (!force && Properties.Settings.Default.HideUpdateVersion != String.Empty)
+                {
+                    Version hideVer = new Version(Properties.Settings.Default.HideUpdateVersion);
+                    if (hideVer == ui.OnlineVersion)
+                    {
+                        return;
+                    }
+                }
+
                 // ask the user if he would like
                 // to download the new version
                 string title = "Update verfügbar";
@@ -41,6 +55,25 @@ namespace Pbp
                     // comes from the xml content)
                     System.Diagnostics.Process.Start(ui.DownloadUrl);
                 }
+                else if (!force)
+                {   
+                    question = "Möchten Sie weitere Meldungen zu diesem Update deaktivieren?";
+                    if (System.Windows.Forms.DialogResult.Yes == System.Windows.Forms.MessageBox.Show(question, title,
+                                     System.Windows.Forms.MessageBoxButtons.YesNo,
+                                     System.Windows.Forms.MessageBoxIcon.Question))
+                    {
+                        Properties.Settings.Default.HideUpdateVersion = ui.OnlineVersion.ToString();
+                        Properties.Settings.Default.Save();
+                    }
+                }
+            }
+            else if (force)
+            {
+                string title = "Update-Check";
+                string question = "Sie haben bereits die aktuellste Version!";
+                System.Windows.Forms.MessageBox.Show(question, title,
+                                 System.Windows.Forms.MessageBoxButtons.OK,
+                                 System.Windows.Forms.MessageBoxIcon.Information);
             }
         }
 

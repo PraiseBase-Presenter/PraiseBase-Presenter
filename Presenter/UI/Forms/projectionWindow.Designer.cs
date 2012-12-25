@@ -33,9 +33,9 @@
             // 
             // projectionControlHost
             // 
-            this.projectionControlHost.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.projectionControlHost.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.projectionControlHost.Location = new System.Drawing.Point(0, 0);
             this.projectionControlHost.Name = "projectionControlHost";
             this.projectionControlHost.Size = new System.Drawing.Size(640, 480);
@@ -58,8 +58,8 @@
             this.Name = "ProjectionWindow";
             this.ShowIcon = false;
             this.ShowInTaskbar = false;
+            this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
             this.Text = "projectionWindow";
-            this.Load += new System.EventHandler(this.ProjectionWindow_Load);
             this.ResumeLayout(false);
 
         }

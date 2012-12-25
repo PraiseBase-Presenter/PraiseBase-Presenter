@@ -29,28 +29,23 @@ using System;
 using System.Drawing;
 using System.Windows.Forms;
 using Pbp.Properties;
+using System.Collections.Generic;
 
 namespace Pbp.Forms
 {
     public partial class ProjectionWindow : Form
     {
-        private Screen _projScreen;
+        protected Dictionary<int, BaseLayer> currentLayers;
+        protected Dictionary<int, Image> currentLayerImages;
 
-        #region Delegates
-
-        public delegate void ProjectionChange(object sender, ProjectionChangedEventArgs e);
-
-        #endregion Delegates
-
-        public event ProjectionChange ProjectionChanged;
-
-        private ProjectionWindow()
+        public ProjectionWindow(Screen projScreen)
         {
             InitializeComponent();
+            currentLayers = new Dictionary<int, BaseLayer>();
+            currentLayerImages = new Dictionary<int, Image>();
 
-            ScanScreens(0);
-            Location = _projScreen.WorkingArea.Location;
-            Size = new Size(_projScreen.WorkingArea.Width, _projScreen.WorkingArea.Height);
+            Location = projScreen.WorkingArea.Location;
+            Size = new Size(projScreen.WorkingArea.Width, projScreen.WorkingArea.Height);
 
             var wpc = new WpfProjectionControl
             {
@@ -59,124 +54,69 @@ namespace Pbp.Forms
             projectionControlHost.Child = wpc;
         }
 
-        static private ProjectionWindow _instance;
-        private static readonly object SingletonPadlock = new object();
+        public void AssignToScreen(Screen projScreen)
+        {
+            Location = projScreen.WorkingArea.Location;
+            Size = new Size(projScreen.WorkingArea.Width, projScreen.WorkingArea.Height);
+            
+        }
 
         /// <summary>
-        /// Returns a singleton of mainWindow
+        /// Set to blackout
         /// </summary>
-        /// <returns>Returns the mainWindow instance</returns>
-        static public ProjectionWindow Instance
-        {
-            get
-            {
-                // Thread safety
-                lock (SingletonPadlock)
-                {
-                    return _instance ?? (_instance = new ProjectionWindow());
-                }
-            }
-        }
-
-        private void ProjectionWindow_Load(object sender, EventArgs e)
-        {
-            ScanScreens(0);
-            Location = _projScreen.WorkingArea.Location;
-            Size = new Size(_projScreen.WorkingArea.Width, _projScreen.WorkingArea.Height);
-        }
-
+        /// <param name="enable"></param>
+        /// <param name="animate"></param>
         public void SetBlackout(bool enable, bool animate)
         {
             ((WpfProjectionControl)(projectionControlHost.Child)).BlackOut(enable, (animate ? Settings.Default.ProjectionFadeTime : 0));
         }
 
-        /**
-         * Scans for suitable secondary screens. If none is found, an
-         * error message is displayed and the primary screen is chosen
-         * for projection.
-         */
-
-        public void ScanScreens(int success)
+        /// <summary>
+        /// Display text layer
+        /// </summary>
+        /// <param name="layer"></param>
+        /// <param name="tl"></param>
+        public void DisplayLayer(int layerNum, BaseLayer layerContents)
         {
-            bool allowProjection = false;
-            Screen[] screenList = Screen.AllScreens;
-            foreach (Screen t in screenList)
-            {
-                if (!t.Primary)
-                {
-                    _projScreen = t;
-                    allowProjection = true;
-                    break;
-                }
-            }
-            if (!allowProjection)
-            {
-                _projScreen = Screen.PrimaryScreen;
-
-                //MessageBox.Show("Kein zweiter Bildschirm gefunden! Der Primärbildschirm wird stattdessen verwendet.", "Projektion", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-            }
-            else if (success == 1)
-            {
-                string msg = "Projektionsbildschirm gefunden!" + Environment.NewLine;
-                msg += "Name: " + StringUtils.ConvertString(_projScreen.DeviceName) + Environment.NewLine;
-                msg += "Auflösung: " + _projScreen.WorkingArea.Width + "x" + _projScreen.WorkingArea.Height + " Pixel" + Environment.NewLine;
-                MessageBox.Show(msg, Resources.Projektion, MessageBoxButtons.OK, MessageBoxIcon.Information);
-            }
+            DisplayLayer(layerNum, layerContents, Settings.Default.ProjectionFadeTime);
         }
 
-        public void DisplayLayer(int layer, TextLayer tl)
-        {
-            DisplayLayer(layer, tl, Settings.Default.ProjectionFadeTime);
-        }
-
-        public void DisplayLayer(int layer, Image background)
-        {
-            DisplayLayer(layer, background, Settings.Default.ProjectionFadeTime);
-        }
-
-        public void DisplayLayer(int layer, TextLayer tl, int fadetime)
+        /// <summary>
+        /// Display text layer with transition
+        /// </summary>
+        /// <param name="layer"></param>
+        /// <param name="tl"></param>
+        /// <param name="fadetime"></param>
+        public void DisplayLayer(int layerNum, BaseLayer layerContents, int fadetime)
         {
             var bmp = new Bitmap(Width, Height);
             Graphics gr = Graphics.FromImage(bmp);
-            tl.writeOut(gr);
-
-            if (layer == 2)
+            layerContents.writeOut(gr);
+            
+            if (layerNum == 2)
                 ((WpfProjectionControl)(projectionControlHost.Child)).SetProjectionText(bmp, fadetime);
             else
                 ((WpfProjectionControl)(projectionControlHost.Child)).SetProjectionImage(bmp, fadetime);
 
-            if (ProjectionChanged != null)
-            {
-                ProjectionChanged(this, new ProjectionChangedEventArgs { Image = bmp, Layer = layer });
-            }
+            currentLayers[layerNum] = layerContents;
+            currentLayerImages[layerNum] = bmp;
         }
 
-        public void DisplayLayer(int layer, Image background, int fadetime)
-        {
-            var bmp = new Bitmap(Width, Height);
-            Graphics gr = Graphics.FromImage(bmp);
-            gr.FillRectangle(new SolidBrush(Settings.Default.ProjectionBackColor), 0, 0, Width, Height);
-            if (background != null)
-            {
-                gr.DrawImage(background, new Rectangle(0, 0, Width, Height), 0, 0, background.Width, background.Height, GraphicsUnit.Pixel);
-            }
 
-            if (layer == 2)
-                ((WpfProjectionControl)(projectionControlHost.Child)).SetProjectionText(bmp, fadetime);
-            else
-                ((WpfProjectionControl)(projectionControlHost.Child)).SetProjectionImage(bmp, fadetime);
-
-            if (ProjectionChanged != null)
-            {
-                ProjectionChanged(this, new ProjectionChangedEventArgs { Image = bmp, Layer = layer });
-            }
-        }
-
+        /// <summary>
+        /// Hide layer
+        /// </summary>
+        /// <param name="layer"></param>
         public void HideLayer(int layer)
         {
             HideLayer(layer, Settings.Default.ProjectionFadeTime);
         }
 
+        /// <summary>
+        /// Hide layer with transition
+        /// </summary>
+        /// <param name="layer"></param>
+        /// <param name="fadetime"></param>
         public void HideLayer(int layer, int fadetime)
         {
             var bmp = new Bitmap(Width, Height);
@@ -185,17 +125,52 @@ namespace Pbp.Forms
             else
                 ((WpfProjectionControl)(projectionControlHost.Child)).SetProjectionImage(bmp, fadetime);
             
-            if (ProjectionChanged != null)
+        }
+
+        public void RedrawLayers()
+        {
+            Dictionary<int, BaseLayer> tempDict = new Dictionary<int, BaseLayer>();
+            foreach (var kvp in currentLayers)
             {
-                ProjectionChanged(this, new ProjectionChangedEventArgs { Image = bmp, Layer = layer });
+                tempDict.Add(kvp.Key, kvp.Value);
+            }
+            foreach (var kvp in tempDict)
+            {
+                var layerContents = kvp.Value;
+                var layerNum = kvp.Key;
+                if (layerContents.GetType() == typeof(TextLayer) || (typeof(TextLayer).IsAssignableFrom(layerContents.GetType())))
+                {
+                    DisplayLayer(layerNum, (TextLayer)layerContents, 0);
+                }
+                else if (layerContents.GetType() == typeof(ImageLayer))
+                {
+                    DisplayLayer(layerNum, (ImageLayer)layerContents, 0);
+                }
             }
         }
 
-        public class ProjectionChangedEventArgs : EventArgs
+        public Image GetPreviewImage()
         {
-            public Image Image { get; set; }
-
-            public int Layer { get; set; }
+            Image frame = new Bitmap(Width, Height);
+            Graphics gr = Graphics.FromImage(frame);
+            
+            int usedLayers = 0;
+            int i = 0;
+            while (true)
+            {
+                if (currentLayerImages.ContainsKey(i))
+                {
+                    gr.DrawImage(currentLayerImages[i], new Rectangle(0, 0, frame.Width, frame.Height), new Rectangle(0, 0, frame.Width, frame.Height), GraphicsUnit.Pixel);
+                    usedLayers++;
+                }
+                if (usedLayers >= currentLayerImages.Count)
+                {
+                    break;
+                }
+                i++;
+            }
+            return frame;
         }
+
     }
 }

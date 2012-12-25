@@ -89,6 +89,7 @@ namespace Pbp.Forms
             {
                 projectionImage.Opacity = 0f;
                 projectionImage.Source = LoadBitmap(img);
+
                 var imageAnimation = (Storyboard)FindResource("imageAnimation");
                 imageAnimation.SpeedRatio = 1000f / fadeTime;
                 imageAnimation.Begin(this);
@@ -105,7 +106,6 @@ namespace Pbp.Forms
             if (fadeTime > 0)
             {
                 textImage.Opacity = 0f;
-
                 textImage.Source = LoadBitmap(img);
 
                 var imageAnimation2 = (Storyboard)FindResource("textAnimation2");

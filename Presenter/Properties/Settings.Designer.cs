@@ -490,5 +490,28 @@ namespace Pbp.Properties {
                 return ((string)(this["SongPartDefaultName"]));
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        public int SelectedProjectionScreen {
+            get {
+                return ((int)(this["SelectedProjectionScreen"]));
+            }
+            set {
+                this["SelectedProjectionScreen"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string HideUpdateVersion {
+            get {
+                return ((string)(this["HideUpdateVersion"]));
+            }
+            set {
+                this["HideUpdateVersion"] = value;
+            }
+        }
     }
 }

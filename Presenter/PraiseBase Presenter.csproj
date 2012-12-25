@@ -126,8 +126,11 @@
     <Compile Include="IO\Writer\SongFileWriter.cs" />
     <Compile Include="IO\Reader\XMLBibleReader.cs" />
     <Compile Include="Manager\BibleManager.cs" />
+    <Compile Include="Manager\ProjectionManager.cs" />
+    <Compile Include="Manager\ScreenManager.cs" />
     <Compile Include="Projection\BaseLayer.cs" />
     <Compile Include="Projection\BibleLayer.cs" />
+    <Compile Include="Projection\ImageLayer.cs" />
     <Compile Include="Projection\SongSlideLayer.cs" />
     <Compile Include="UpdateCheck.cs" />
     <Compile Include="Projection\LiveText.cs" />

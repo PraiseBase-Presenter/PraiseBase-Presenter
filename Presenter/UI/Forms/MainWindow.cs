@@ -39,6 +39,7 @@ using System.Xml;
 using Pbp.Properties;
 using SongDetails;
 using Timer = System.Windows.Forms.Timer;
+using Pbp.Manager;
 
 //using PowerPoint = Microsoft.Office.Interop.PowerPoint;
 
@@ -53,7 +54,7 @@ namespace Pbp.Forms
     {
         private static MainWindow _instance;
         private static readonly object singletonPadlock = new object();
-        private bool blackout;
+
         private Timer diaTimer;
         private List<String> imageSearchResults;
 
@@ -99,8 +100,6 @@ namespace Pbp.Forms
             WindowState = Settings.Default.ViewerWindowState;
             //Text += " " + Assembly.GetExecutingAssembly().GetName().Version;
 
-            blackout = false;
-
             loadSongList();
 
             imageTreeViewInit();
@@ -130,19 +129,13 @@ namespace Pbp.Forms
                 titelUndTextToolStripMenuItem.Checked = true;
             }
 
-            ProjectionWindow.Instance.ProjectionChanged += Instance_ProjectionChanged;
+            ProjectionManager.Instance.PreviewImageSize = pictureBoxbeamerPreview.Size;
+            ProjectionManager.Instance.ProjectionChanged += Instance_ProjectionChanged;
         }
 
-        void Instance_ProjectionChanged(object sender, ProjectionWindow.ProjectionChangedEventArgs e)
+        void Instance_ProjectionChanged(object sender, ProjectionManager.ProjectionChangedEventArgs e)
         {
-            if (e.Layer == 1)
-            {
-                pictureBoxbeamerPreview.BackgroundImage = e.Image;
-            }
-            if (e.Layer == 2)
-            {
-                pictureBoxbeamerPreview.Image = e.Image;
-            }
+            pictureBoxbeamerPreview.Image = e.Image;
         }
 
         private void beendenToolStripMenuItem_Click(object sender, EventArgs e)
@@ -212,56 +205,35 @@ namespace Pbp.Forms
 
         private void toggleProjection(object sender, EventArgs e)
         {
+            // Disable projection
             if (((ToolStripItem)sender).Name == "toolStripButtonProjectionOff"
                 || ((ToolStripItem)sender).Name == "präsentationausToolStripMenuItem")
             {
                 toolStripButtonProjectionOff.CheckState = CheckState.Checked;
                 toolStripButtonProjectionOn.CheckState = CheckState.Unchecked;
                 toolStripButtonBlackout.CheckState = CheckState.Unchecked;
-                ProjectionWindow.Instance.Hide();
-                if (blackout)
-                {
-                    ProjectionWindow.Instance.SetBlackout(false, false);
-                    blackout = false;
-                }
+                
+                ProjectionManager.Instance.HideProjectionWindow();
             }
+            // Blackout
             else if (((ToolStripItem)sender).Name == "toolStripButtonBlackout"
                      || ((ToolStripItem)sender).Name == "blackoutToolStripMenuItem")
             {
-                if (!blackout)
-                {
-                    toolStripButtonProjectionOff.CheckState = CheckState.Unchecked;
-                    toolStripButtonBlackout.CheckState = CheckState.Checked;
-                    toolStripButtonProjectionOn.CheckState = CheckState.Unchecked;
-                    if (!ProjectionWindow.Instance.Visible)
-                    {
-                        ProjectionWindow.Instance.Show();
-                        ProjectionWindow.Instance.SetBlackout(true, false);
-                    }
-                    else
-                    {
-                        ProjectionWindow.Instance.SetBlackout(true, true);
-                    }
-                    blackout = true;
-                }
+                toolStripButtonProjectionOff.CheckState = CheckState.Unchecked;
+                toolStripButtonBlackout.CheckState = CheckState.Checked;
+                toolStripButtonProjectionOn.CheckState = CheckState.Unchecked;
+                
+                ProjectionManager.Instance.ShowBlackout();
             }
+            // Show projection
             else if (((ToolStripItem)sender).Name == "toolStripButtonProjectionOn"
                      || ((ToolStripItem)sender).Name == "präsentationeinToolStripMenuItem")
             {
                 toolStripButtonProjectionOff.CheckState = CheckState.Unchecked;
                 toolStripButtonBlackout.CheckState = CheckState.Unchecked;
                 toolStripButtonProjectionOn.CheckState = CheckState.Checked;
-                if (!ProjectionWindow.Instance.Visible)
-                {
-                    ProjectionWindow.Instance.Show();
-                    ProjectionWindow.Instance.SetBlackout(false, false);
-                    blackout = false;
-                }
-                else if (blackout)
-                {
-                    ProjectionWindow.Instance.SetBlackout(false, true);
-                    blackout = false;
-                }
+
+                ProjectionManager.Instance.ShowProjectionWindow();
             }
             songSearchTextBox.Focus();
         }
@@ -401,44 +373,43 @@ namespace Pbp.Forms
                 listViewSongHistory.Columns[0].Width = -2;
             }
 
-            if (ProjectionWindow.Instance != null)
+            Pbp.Data.Song.SongSlide cs = SongManager.Instance.CurrentSong.Song.Parts[e.PartNumber].Slides[e.SlideNumber];
+            var ssl = new SongSlideLayer(cs);
+
+            // CTRL pressed, use image stack
+            if ((ModifierKeys & Keys.Control) == Keys.Control)
             {
-                Pbp.Data.Song.SongSlide cs = SongManager.Instance.CurrentSong.Song.Parts[e.PartNumber].Slides[e.SlideNumber];
-                var ssl = new SongSlideLayer(cs);
-
-                // CTRL pressed, use image stack
-                if ((ModifierKeys & Keys.Control) == Keys.Control)
+                if (listViewImageQueue.Items.Count > 0)
                 {
-                    if (listViewImageQueue.Items.Count > 0)
-                    {
-                        Image img = ImageManager.Instance.GetImageFromRelPath((string)listViewImageQueue.Items[0].Tag);
-                        ProjectionWindow.Instance.DisplayLayer(1, img, Settings.Default.ProjectionFadeTimeLayer1);
-                        ProjectionWindow.Instance.DisplayLayer(2, ssl);
-                        imageHistoryAdd((string)listViewImageQueue.Items[0].Tag);
-                        listViewImageQueue.Items[0].Remove();
-                    }
-                    else
-                    {
-                        ProjectionWindow.Instance.DisplayLayer(2, ssl);
-                    }
+                    ImageLayer iml = new ImageLayer();
+                    iml.Image = ImageManager.Instance.GetImageFromRelPath((string)listViewImageQueue.Items[0].Tag);
+                    ProjectionManager.Instance.DisplayLayer(1, iml, Settings.Default.ProjectionFadeTimeLayer1);
+                    ProjectionManager.Instance.DisplayLayer(2, ssl);
+                    imageHistoryAdd((string)listViewImageQueue.Items[0].Tag);
+                    listViewImageQueue.Items[0].Remove();
                 }
-
-                    // SHIFT pressed, use current slide
-                else if (!linkLayers ^ ((ModifierKeys & Keys.Shift) == Keys.Shift))
-                {
-                    ProjectionWindow.Instance.DisplayLayer(2, ssl);
-                }
-
-                    // Current slide + attached image
                 else
                 {
-                    Image img = ImageManager.Instance.GetImage(SongManager.Instance.CurrentSong.Song.GetImage(cs.ImageNumber));
-                    ProjectionWindow.Instance.DisplayLayer(1, img, Settings.Default.ProjectionFadeTimeLayer1);
-                    ProjectionWindow.Instance.DisplayLayer(2, ssl);
-
-                    if (SongManager.Instance.CurrentSong.Song.RelativeImagePaths.Count > 0)
-                        imageHistoryAdd(SongManager.Instance.CurrentSong.Song.RelativeImagePaths[cs.ImageNumber - 1]);
+                    ProjectionManager.Instance.DisplayLayer(2, ssl);
                 }
+            }
+
+                // SHIFT pressed, use current slide
+            else if (!linkLayers ^ ((ModifierKeys & Keys.Shift) == Keys.Shift))
+            {
+                ProjectionManager.Instance.DisplayLayer(2, ssl);
+            }
+
+                // Current slide + attached image
+            else
+            {
+                ImageLayer iml = new ImageLayer();
+                iml.Image = ImageManager.Instance.GetImage(SongManager.Instance.CurrentSong.Song.GetImage(cs.ImageNumber));
+                ProjectionManager.Instance.DisplayLayer(1, iml, Settings.Default.ProjectionFadeTimeLayer1);
+                ProjectionManager.Instance.DisplayLayer(2, ssl);
+
+                if (SongManager.Instance.CurrentSong.Song.RelativeImagePaths.Count > 0)
+                    imageHistoryAdd(SongManager.Instance.CurrentSong.Song.RelativeImagePaths[cs.ImageNumber - 1]);
             }
         }
 
@@ -466,12 +437,13 @@ namespace Pbp.Forms
                 // Hide text if layers are linked OR shift is pressed and the layers are not linked
                 if (!(!linkLayers ^ ((ModifierKeys & Keys.Shift) == Keys.Shift)))
                 {
-                    ProjectionWindow.Instance.HideLayer(2);
+                    ProjectionManager.Instance.HideLayer(2);
                 }
 
                 // Show image
-                Image img = ImageManager.Instance.GetImageFromRelPath(e.relativePath);
-                ProjectionWindow.Instance.DisplayLayer(1, img, Settings.Default.ProjectionFadeTimeLayer1);
+                ImageLayer iml = new ImageLayer();
+                iml.Image = ImageManager.Instance.GetImageFromRelPath(e.relativePath);
+                ProjectionManager.Instance.DisplayLayer(1, iml, Settings.Default.ProjectionFadeTimeLayer1);
 
                 if (e.relativePath != String.Empty)
                     imageHistoryAdd(e.relativePath);
@@ -653,7 +625,7 @@ namespace Pbp.Forms
 
         private void listViewDirectoryImages_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (ProjectionWindow.Instance != null && listViewDirectoryImages.SelectedIndices.Count > 0)
+            if (listViewDirectoryImages.SelectedIndices.Count > 0)
             {
                 Application.DoEvents();
                 int idx = listViewDirectoryImages.SelectedIndices[0];
@@ -684,12 +656,12 @@ namespace Pbp.Forms
                            ((ModifierKeys & Keys.Shift) == Keys.Shift && (Nullable<SongManager.SongItem>)SongManager.Instance.CurrentSong != null &&
                             SongManager.Instance.CurrentSong.Song.CurrentSlide >= 0)))
                     {
-                        ProjectionWindow.Instance.HideLayer(2, Settings.Default.ProjectionFadeTime);
+                        ProjectionManager.Instance.HideLayer(2, Settings.Default.ProjectionFadeTime);
                     }
 
-                    Image img =
-                        ImageManager.Instance.GetImageFromRelPath((string)listViewDirectoryImages.Items[idx].Tag);
-                    ProjectionWindow.Instance.DisplayLayer(1, img, Settings.Default.ProjectionFadeTimeLayer1);
+                    ImageLayer iml = new ImageLayer();
+                    iml.Image = ImageManager.Instance.GetImageFromRelPath((string)listViewDirectoryImages.Items[idx].Tag);
+                    ProjectionManager.Instance.DisplayLayer(1, iml, Settings.Default.ProjectionFadeTimeLayer1);
 
                     // Add image to history
                     imageHistoryAdd((string)listViewDirectoryImages.Items[idx].Tag);
@@ -839,7 +811,7 @@ namespace Pbp.Forms
             if (diaTimer != null && diaTimer.Enabled)
             {
                 diaTimer.Stop();
-                ProjectionWindow.Instance.HideLayer(1);
+                ProjectionManager.Instance.HideLayer(1);
                 buttonDiaShow.Text = Resources.Diaschau_starten;
                 return;
             }
@@ -883,7 +855,9 @@ namespace Pbp.Forms
                     return;
                 }
                 diaTimer.Tag = diaStack;
-                ProjectionWindow.Instance.DisplayLayer(1, Image.FromFile(diaStack.Dequeue()), Settings.Default.ProjectionFadeTimeLayer1);
+                ImageLayer iml = new ImageLayer();
+                iml.Image = Image.FromFile(diaStack.Dequeue());
+                ProjectionManager.Instance.DisplayLayer(1, iml, Settings.Default.ProjectionFadeTimeLayer1);
                 diaTimer.Start();
             }
         }
@@ -893,11 +867,13 @@ namespace Pbp.Forms
             if (((Queue<string>)((Timer)sender).Tag).Count == 0)
             {
                 ((Timer)sender).Stop();
-                ProjectionWindow.Instance.HideLayer(1);
+                ProjectionManager.Instance.HideLayer(1);
                 buttonDiaShow.Text = Resources.Diaschau_starten;
                 return;
             }
-            ProjectionWindow.Instance.DisplayLayer(1, Image.FromFile(((Queue<string>)((Timer)sender).Tag).Dequeue()), Settings.Default.ProjectionFadeTimeLayer1);
+            ImageLayer iml = new ImageLayer();
+            iml.Image = Image.FromFile(((Queue<string>)((Timer)sender).Tag).Dequeue());
+            ProjectionManager.Instance.DisplayLayer(1, iml, Settings.Default.ProjectionFadeTimeLayer1);
         }
 
         private void radioButton2_CheckedChanged(object sender, EventArgs e)
@@ -926,7 +902,7 @@ namespace Pbp.Forms
         /// <param name="e"></param>
         private void listViewImageHistory_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (ProjectionWindow.Instance != null && listViewImageHistory.SelectedIndices.Count > 0)
+            if (listViewImageHistory.SelectedIndices.Count > 0)
             {
                 Application.DoEvents();
                 int idx = listViewImageHistory.SelectedIndices[0];
@@ -952,11 +928,12 @@ namespace Pbp.Forms
                           ((ModifierKeys & Keys.Shift) == Keys.Shift && (Nullable<SongManager.SongItem>)SongManager.Instance.CurrentSong != null &&
                            SongManager.Instance.CurrentSong.Song.CurrentSlide >= 0)))
                     {
-                        ProjectionWindow.Instance.HideLayer(2);
+                        ProjectionManager.Instance.HideLayer(2);
                     }
 
-                    Image img = ImageManager.Instance.GetImageFromRelPath((string)listViewImageHistory.Items[idx].Tag);
-                    ProjectionWindow.Instance.DisplayLayer(1, img, Settings.Default.ProjectionFadeTimeLayer1);
+                    ImageLayer iml = new ImageLayer();
+                    iml.Image = ImageManager.Instance.GetImageFromRelPath((string)listViewImageHistory.Items[idx].Tag);
+                    ProjectionManager.Instance.DisplayLayer(1, iml, Settings.Default.ProjectionFadeTimeLayer1);
                 }
             }
         }
@@ -1272,7 +1249,7 @@ namespace Pbp.Forms
         /// <param name="e"></param>
         private void listViewImageQueue_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (ProjectionWindow.Instance != null && listViewImageQueue.SelectedIndices.Count > 0)
+            if (listViewImageQueue.SelectedIndices.Count > 0)
             {
                 Application.DoEvents();
 
@@ -1280,12 +1257,13 @@ namespace Pbp.Forms
                     !((ModifierKeys & Keys.Shift) == Keys.Shift && (Nullable<SongManager.SongItem>)SongManager.Instance.CurrentSong != null &&
                        SongManager.Instance.CurrentSong.Song.CurrentSlide >= 0))
                 {
-                    ProjectionWindow.Instance.HideLayer(2);
+                    ProjectionManager.Instance.HideLayer(2);
                 }
 
                 int idx = listViewImageQueue.SelectedIndices[0];
-                Image img = ImageManager.Instance.GetImageFromRelPath((string)listViewImageQueue.Items[idx].Tag);
-                ProjectionWindow.Instance.DisplayLayer(1, img, Settings.Default.ProjectionFadeTimeLayer1);
+                ImageLayer iml = new ImageLayer();
+                iml.Image = ImageManager.Instance.GetImageFromRelPath((string)listViewImageQueue.Items[idx].Tag);
+                ProjectionManager.Instance.DisplayLayer(1, iml, Settings.Default.ProjectionFadeTimeLayer1);
             }
         }
 
@@ -1347,7 +1325,7 @@ namespace Pbp.Forms
 
         private void listViewFavorites_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (ProjectionWindow.Instance != null && listViewFavorites.SelectedIndices.Count > 0)
+            if (listViewFavorites.SelectedIndices.Count > 0)
             {
                 Application.DoEvents();
                 int idx = listViewFavorites.SelectedIndices[0];
@@ -1376,10 +1354,11 @@ namespace Pbp.Forms
                            ((ModifierKeys & Keys.Shift) == Keys.Shift && (Nullable<SongManager.SongItem>)SongManager.Instance.CurrentSong != null &&
                             SongManager.Instance.CurrentSong.Song.CurrentSlide >= 0)))
                     {
-                        ProjectionWindow.Instance.HideLayer(2);
+                        ProjectionManager.Instance.HideLayer(2);
                     }
-                    Image img = ImageManager.Instance.GetImageFromRelPath((string)listViewFavorites.Items[idx].Tag);
-                    ProjectionWindow.Instance.DisplayLayer(2, img);
+                    ImageLayer iml = new ImageLayer();
+                    iml.Image = ImageManager.Instance.GetImageFromRelPath((string)listViewFavorites.Items[idx].Tag);
+                    ProjectionManager.Instance.DisplayLayer(2, iml);
 
                     // Add image to history
                     imageHistoryAdd((string)listViewFavorites.Items[idx].Tag);
@@ -1408,12 +1387,12 @@ namespace Pbp.Forms
                 lt.VerticalAlign = StringAlignment.Near;
             lt.FontSize = (float)numericUpDown1.Value;
 
-            ProjectionWindow.Instance.DisplayLayer(2, lt);
+            ProjectionManager.Instance.DisplayLayer(2, lt);
         }
 
         private void buttonClearText_Click(object sender, EventArgs e)
         {
-            ProjectionWindow.Instance.HideLayer(2);
+            ProjectionManager.Instance.HideLayer(2);
         }
 
         private void liedSuchenToolStripMenuItem_Click(object sender, EventArgs e)
@@ -1437,7 +1416,11 @@ namespace Pbp.Forms
 
         private void bildschirmeSuchenToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            ProjectionWindow.Instance.ScanScreens(1);
+            if (!ProjectionManager.Instance.InitializeWindows())
+            {
+                String msg = "Kein zweiter Bildschirm gefunden! Der Primärbildschirm wird stattdessen verwendet.";
+                MessageBox.Show(msg, Resources.Projektion, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+            }
         }
 
         private void listViewFavorites_Leave(object sender, EventArgs e)
@@ -1620,12 +1603,12 @@ namespace Pbp.Forms
                 new BibleLayer(new Pbp.Data.Bible.VerseSelection(((Pbp.Data.Bible.Verse)listBoxBibleVerse.SelectedItem),
                                                            ((Pbp.Data.Bible.Verse)listBoxBibleVerseTo.SelectedItem)));
             bl.FontSize = (float)numericUpDown2.Value;
-            ProjectionWindow.Instance.DisplayLayer(2, bl);
+            ProjectionManager.Instance.DisplayLayer(2, bl);
         }
 
         private void button1_Click_3(object sender, EventArgs e)
         {
-            ProjectionWindow.Instance.HideLayer(2);
+            ProjectionManager.Instance.HideLayer(2);
         }
 
         private void buttonAddToBibleVerseList_Click(object sender, EventArgs e)
@@ -1725,12 +1708,12 @@ namespace Pbp.Forms
 
         private void buttonToggleLayer2_Click(object sender, EventArgs e)
         {
-            ProjectionWindow.Instance.HideLayer(2);
+            ProjectionManager.Instance.HideLayer(2);
         }
 
         private void buttonToggleLayer1_Click(object sender, EventArgs e)
         {
-            ProjectionWindow.Instance.HideLayer(1);
+            ProjectionManager.Instance.HideLayer(1);
         }
 
         private void titelToolStripMenuItem_Click(object sender, EventArgs e)
@@ -1748,5 +1731,11 @@ namespace Pbp.Forms
             titelUndTextToolStripMenuItem.Checked = true;
             searchSongs(songSearchTextBox.Text);
         }
+
+        private void aufUpdatePrüfenToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            UpdateCheck.DoCheck(true);
+        }
+
     }
 }

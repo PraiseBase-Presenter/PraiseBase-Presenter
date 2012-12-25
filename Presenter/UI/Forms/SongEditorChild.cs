@@ -40,7 +40,6 @@ namespace Pbp.Forms
         public Song sng { get; protected set; }
         protected String songFilename;
 
-        private ProjectionWindow projWindow;
         public bool valid;
         public bool changed = false;
         private int hashCode;
@@ -51,8 +50,6 @@ namespace Pbp.Forms
         public SongEditorChild(string fileName)
         {
             InitializeComponent();
-
-            projWindow = ProjectionWindow.Instance;
 
             this.WindowState = FormWindowState.Maximized;
 
@@ -339,10 +336,6 @@ namespace Pbp.Forms
             comboBoxSlideVertOrientation.SelectedIndex = (int)sld.VerticalAlign;
 
             textBoxPartCaption.Text = sng.Parts[partId].Caption;
-
-            // TODO
-            //object[] songArgs = {partId,slideId};
-            //pictureBoxPreview.Image = projWindow.showSlide(sng, sng.getImage(sld.ImageNumber), songArgs, ProjectionMode.Simulate);
             pictureBoxPreview.Image = ImageManager.Instance.GetImage(sng.GetImage(sld.ImageNumber));
 
             currentPartId = partId;
@@ -644,10 +637,6 @@ namespace Pbp.Forms
                 int slideIdx = treeViewContents.SelectedNode.Index;
 
                 sng.Parts[partIdx].Slides[slideIdx].SetSlideTextTranslation(textBoxSongTranslation.Text);
-
-                // TODO
-                //object[] songArgs = { partIdx, slideIdx };
-                //pictureBoxPreview.Image = projWindow.showSlide(sng, sng.getImage(sng.Parts[partIdx].Slides[slideIdx].ImageNumber), songArgs, ProjectionMode.Simulate);
             }
         }
 
