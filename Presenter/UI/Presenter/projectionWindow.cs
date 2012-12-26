@@ -44,8 +44,7 @@ namespace Pbp.Forms
             currentLayers = new Dictionary<int, BaseLayer>();
             currentLayerImages = new Dictionary<int, Image>();
 
-            Location = projScreen.WorkingArea.Location;
-            Size = new Size(projScreen.WorkingArea.Width, projScreen.WorkingArea.Height);
+            AssignToScreen(projScreen);
 
             var wpc = new WpfProjectionControl
             {
@@ -54,11 +53,19 @@ namespace Pbp.Forms
             projectionControlHost.Child = wpc;
         }
 
+        /// <summary>
+        /// Assigns the window to a screen's coordinates
+        /// </summary>
+        /// <param name="projScreen"></param>
         public void AssignToScreen(Screen projScreen)
         {
             Location = projScreen.WorkingArea.Location;
             Size = new Size(projScreen.WorkingArea.Width, projScreen.WorkingArea.Height);
-            
+
+            if (currentLayers.Count > 0)
+            {
+                RedrawLayers();
+            }
         }
 
         /// <summary>
@@ -92,12 +99,15 @@ namespace Pbp.Forms
             var bmp = new Bitmap(Width, Height);
             Graphics gr = Graphics.FromImage(bmp);
             layerContents.writeOut(gr);
-            
-            if (layerNum == 2)
-                ((WpfProjectionControl)(projectionControlHost.Child)).SetProjectionText(bmp, fadetime);
-            else
-                ((WpfProjectionControl)(projectionControlHost.Child)).SetProjectionImage(bmp, fadetime);
 
+            if (layerNum == 2)
+            {
+                ((WpfProjectionControl)(projectionControlHost.Child)).SetProjectionText(bmp, fadetime);
+            }
+            else
+            {
+                ((WpfProjectionControl)(projectionControlHost.Child)).SetProjectionImage(bmp, fadetime);
+            }
             currentLayers[layerNum] = layerContents;
             currentLayerImages[layerNum] = bmp;
         }
@@ -122,13 +132,20 @@ namespace Pbp.Forms
             var bmp = new Bitmap(Width, Height);
 
             if (layerNum == 2)
+            {
                 ((WpfProjectionControl)(projectionControlHost.Child)).SetProjectionText(bmp, fadetime);
-            else
+            }
+            else if (layerNum == 1)
+            {
                 ((WpfProjectionControl)(projectionControlHost.Child)).SetProjectionImage(bmp, fadetime);
+            }
 
             currentLayerImages[layerNum] = bmp;            
         }
 
+        /// <summary>
+        /// Redraw all layers (e.g. after screen change)
+        /// </summary>
         public void RedrawLayers()
         {
             Dictionary<int, BaseLayer> tempDict = new Dictionary<int, BaseLayer>();
@@ -138,19 +155,14 @@ namespace Pbp.Forms
             }
             foreach (var kvp in tempDict)
             {
-                var layerContents = kvp.Value;
-                var layerNum = kvp.Key;
-                if (layerContents.GetType() == typeof(TextLayer) || (typeof(TextLayer).IsAssignableFrom(layerContents.GetType())))
-                {
-                    DisplayLayer(layerNum, (TextLayer)layerContents, 0);
-                }
-                else if (layerContents.GetType() == typeof(ImageLayer))
-                {
-                    DisplayLayer(layerNum, (ImageLayer)layerContents, 0);
-                }
+                DisplayLayer(kvp.Key, kvp.Value, 0);
             }
         }
 
+        /// <summary>
+        /// Create preview image
+        /// </summary>
+        /// <returns></returns>
         public Image GetPreviewImage()
         {
             Image frame = new Bitmap(Width, Height);
@@ -173,6 +185,11 @@ namespace Pbp.Forms
             }
             return frame;
         }
+
+        //
+        //if (layerContents.GetType() == typeof(TextLayer) || (typeof(TextLayer).IsAssignableFrom(layerContents.GetType())))
+        //else if (layerContents.GetType() == typeof(ImageLayer))
+        //
 
     }
 }

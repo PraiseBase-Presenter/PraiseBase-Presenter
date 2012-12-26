@@ -96,7 +96,6 @@ namespace Pbp.Manager
                             if (i < projectionWindows.Count && i < ScreenManager.Instance.AvailableProjectionScreens.Count)
                             {
                                 projectionWindows[i].AssignToScreen(ScreenManager.Instance.AvailableProjectionScreens[i]);
-                                projectionWindows[i].RedrawLayers();
                             }
                             // Create new window if a screen has been added
                             else if (i < ScreenManager.Instance.AvailableProjectionScreens.Count)
