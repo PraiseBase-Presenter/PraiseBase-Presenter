@@ -8,7 +8,7 @@ using System.Windows.Forms;
 namespace Pbp.Components
 {
     [DefaultEvent("ImageSelected")]
-    public partial class BackgrundImageBrowser : UserControl
+    public partial class BackgroundImageBrowser : UserControl
     {
         public delegate void imageSelect(object sender, BackgroundImageSelecteEventArgs e);
 
@@ -53,7 +53,7 @@ namespace Pbp.Components
         private int p = 5;
         private int numRows, imagesPerRow;
 
-        public BackgrundImageBrowser()
+        public BackgroundImageBrowser()
         {
             InitializeComponent();
             this.AutoScroll = true;

@@ -1,6 +1,6 @@
 ﻿namespace Pbp.Components
 {
-    partial class BackgrundImageBrowser
+    partial class BackgroundImageBrowser
     {
         /// <summary> 
         /// Required designer variable.
