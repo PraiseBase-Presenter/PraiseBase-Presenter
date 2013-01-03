@@ -81,12 +81,10 @@ namespace Test
         public void IsFileSupportedTest()
         {
             CcliUsrSongFileReader target = new CcliUsrSongFileReader(); // TODO: Initialize to an appropriate value
-            string filename = string.Empty; // TODO: Initialize to an appropriate value
-            bool expected = false; // TODO: Initialize to an appropriate value
-            bool actual;
-            actual = target.IsFileSupported(filename);
+            string filename = "ccli/Ein Lied für Gott.usr";
+            bool expected = true;
+            bool actual = target.IsFileSupported(filename);
             Assert.AreEqual(expected, actual);
-            Assert.Inconclusive("Verify the correctness of this test method.");
         }
 
         /// <summary>
@@ -183,9 +181,9 @@ namespace Test
         public void FileExtensionTest()
         {
             CcliUsrSongFileReader target = new CcliUsrSongFileReader(); // TODO: Initialize to an appropriate value
-            string actual;
+            string actual  = ".usr";
             actual = target.FileExtension;
-            Assert.Inconclusive("Verify the correctness of this test method.");
+            Assert.AreEqual(target.FileExtension, actual);
         }
 
         /// <summary>
@@ -195,9 +193,9 @@ namespace Test
         public void FileTypeDescriptionTest()
         {
             CcliUsrSongFileReader target = new CcliUsrSongFileReader(); // TODO: Initialize to an appropriate value
-            string actual;
+            string actual = "SongSelect Import File";
             actual = target.FileTypeDescription;
-            Assert.Inconclusive("Verify the correctness of this test method.");
+            Assert.AreEqual(target.FileTypeDescription, actual);
         }
     }
 }

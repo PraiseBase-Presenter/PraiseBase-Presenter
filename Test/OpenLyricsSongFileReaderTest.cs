@@ -93,7 +93,7 @@ namespace Test
             part.Caption = "v1";
 
             var slide = new SongSlide(expected);
-            slide.SetSlideText("Amazing grace how sweet the sound<br/>that saved a wretch like me;");
+            slide.Text = "Amazing grace how sweet the sound<br/>that saved a wretch like me;";
             part.Slides.Add(slide);
             expected.Parts.Add(part);
 
@@ -160,7 +160,7 @@ namespace Test
             part.Caption = "v1";
             part.Language = "de";
             slide = new SongSlide(expected);
-            slide.SetSlideText("Erstaunliche Ahmut, wie");
+            slide.Text = "Erstaunliche Ahmut, wie";
             part.Slides.Add(slide);
             expected.Parts.Add(part);
 
@@ -211,7 +211,7 @@ namespace Test
             part.Caption = "e";
             part.Language = "de";
             slide = new SongSlide(expected);
-            slide.SetSlideText("This is text of ending.");
+            slide.Text = "This is text of ending.";
             part.Slides.Add(slide);
             expected.Parts.Add(part);
 
