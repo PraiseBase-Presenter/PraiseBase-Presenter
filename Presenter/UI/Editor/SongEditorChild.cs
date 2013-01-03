@@ -992,16 +992,6 @@ namespace Pbp.Forms
             this.Text = textBoxSongTitle.Text;
         }
 
-        private void tabPageContent_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void addContextMenu_Opening(object sender, System.ComponentModel.CancelEventArgs e)
-        {
-
-        }
-
         private void textBoxPartCaption_TextChanged(object sender, EventArgs e)
         {
             int partId = -1;

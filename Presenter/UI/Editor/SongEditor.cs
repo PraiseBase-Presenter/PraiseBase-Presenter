@@ -115,14 +115,47 @@ namespace Pbp.Forms
             this.Close();
         }
 
+        private void DoCopy(Control control)
+        {
+            if (control is ContainerControl)
+                DoCopy(((ContainerControl)control).ActiveControl);
+            else if (control is TextBox)
+                ((TextBox)control).Copy();
+            else if (control is RichTextBox)
+                ((RichTextBox)control).Copy();
+            else
+                throw new NotSupportedException("The selected control can't copy!");
+        }
+
+        private void DoCut(Control control)
+        {
+            if (control is ContainerControl)
+                DoCut(((ContainerControl)control).ActiveControl);
+            else if (control is TextBox)
+                ((TextBox)control).Cut();
+            else if (control is RichTextBox)
+                ((RichTextBox)control).Cut();
+            else
+                throw new NotSupportedException("The selected control can't cut!");
+        }
+
+        private void DoPaste(Control control)
+        {
+            if (control is ContainerControl)
+                DoPaste(((ContainerControl)control).ActiveControl);
+            else if (control is TextBox)
+                ((TextBox)control).Paste();
+            else if (control is RichTextBox)
+                ((RichTextBox)control).Paste();
+            else
+                throw new NotSupportedException("The selected control can't paste!");
+        }
+
         private void CutToolStripMenuItem_Click(object sender, EventArgs e)
         {
             if (ActiveMdiChild != null)
             {
-                if (((SongEditorChild)ActiveMdiChild).ActiveControl.GetType() == typeof(TextBox))
-                {
-                    ((TextBox)((SongEditorChild)ActiveMdiChild).ActiveControl).Cut();
-                }
+                DoCut(((SongEditorChild)ActiveMdiChild).ActiveControl);
             }
         }
 
@@ -130,10 +163,7 @@ namespace Pbp.Forms
         {
             if (ActiveMdiChild != null)
             {
-                if (((SongEditorChild)ActiveMdiChild).ActiveControl.GetType() == typeof(TextBox))
-                {
-                    ((TextBox)((SongEditorChild)ActiveMdiChild).ActiveControl).Copy();
-                }
+                DoCopy(((SongEditorChild)ActiveMdiChild).ActiveControl);
             }
         }
 
@@ -141,10 +171,7 @@ namespace Pbp.Forms
         {
             if (ActiveMdiChild != null)
             {
-                if (((SongEditorChild)ActiveMdiChild).ActiveControl.GetType() == typeof(TextBox))
-                {
-                    ((TextBox)((SongEditorChild)ActiveMdiChild).ActiveControl).Paste();
-                }
+                DoPaste(((SongEditorChild)ActiveMdiChild).ActiveControl);
             }
         }
 

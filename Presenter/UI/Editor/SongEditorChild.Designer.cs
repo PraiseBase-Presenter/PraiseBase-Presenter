@@ -125,7 +125,6 @@
             // 
             this.addContextMenu.Name = "addContextMenu";
             this.addContextMenu.Size = new System.Drawing.Size(61, 4);
-            this.addContextMenu.Opening += new System.ComponentModel.CancelEventHandler(this.addContextMenu_Opening);
             this.addContextMenu.VisibleChanged += new System.EventHandler(this.addContextMenu_VisibleChanged);
             // 
             // slideContextMenu
@@ -530,7 +529,6 @@
             this.tabPageContent.TabIndex = 0;
             this.tabPageContent.Text = "Inhalt";
             this.tabPageContent.UseVisualStyleBackColor = true;
-            this.tabPageContent.Click += new System.EventHandler(this.tabPageContent_Click);
             // 
             // textBoxRightsManagement
             // 
