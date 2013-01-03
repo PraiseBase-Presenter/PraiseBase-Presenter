@@ -329,13 +329,18 @@ namespace Pbp.Forms
             if (slideId >= sng.Parts[partId].Slides.Count)
                 slideId = sng.Parts[partId].Slides.Count-1;
 
+            textBoxPartCaption.DataBindings.Clear();
+            textBoxPartCaption.DataBindings.Add("Text", sng.Parts[partId], "Caption");
+
             SongSlide sld = sng.Parts[partId].Slides[slideId];
-            textBoxSongText.Text = sld.GetLineBreakText();
-            textBoxSongTranslation.Text = sld.GetLineBreakTranslation();
+            textBoxSongText.DataBindings.Clear();
+            textBoxSongText.DataBindings.Add("Text", sld, "Text");
+            textBoxSongTranslation.DataBindings.Clear();
+            textBoxSongTranslation.DataBindings.Add("Text", sld, "TranslationText");
+
             comboBoxSlideHorizOrientation.SelectedIndex = (int)sld.HorizontalAlign;
             comboBoxSlideVertOrientation.SelectedIndex = (int)sld.VerticalAlign;
 
-            textBoxPartCaption.Text = sng.Parts[partId].Caption;
             pictureBoxPreview.Image = ImageManager.Instance.GetImage(sng.GetImage(sld.ImageNumber));
 
             currentPartId = partId;
@@ -636,7 +641,7 @@ namespace Pbp.Forms
                 int partIdx = treeViewContents.SelectedNode.Parent.Index;
                 int slideIdx = treeViewContents.SelectedNode.Index;
 
-                sng.Parts[partIdx].Slides[slideIdx].SetSlideTextTranslation(textBoxSongTranslation.Text);
+                sng.Parts[partIdx].Slides[slideIdx].TranslationText = textBoxSongTranslation.Text;
             }
         }
 
@@ -755,21 +760,6 @@ namespace Pbp.Forms
             }
         }
 
-        private void updateSongText(object sender, EventArgs e)
-        {
-            if (treeViewContents.SelectedNode.Level == 2)
-            {
-                int partIdx = treeViewContents.SelectedNode.Parent.Index;
-                int slideIdx = treeViewContents.SelectedNode.Index;
-
-                sng.Parts[partIdx].Slides[slideIdx].SetSlideText(textBoxSongText.Text);
-
-                // TODO
-                //object[] songArgs = { partIdx, slideIdx };
-                //pictureBoxPreview.Image = projWindow.showSlide(sng, sng.getImage(sng.Parts[partIdx].Slides[slideIdx].ImageNumber), songArgs, ProjectionMode.Simulate);
-            }
-        }
-
         private void buttonSlideBackground_Click(object sender, EventArgs e)
         {
             ImageDialog imd = new ImageDialog();
@@ -851,13 +841,6 @@ namespace Pbp.Forms
             addContextMenu.Show(buttonAddItem.PointToScreen(new Point(0, buttonAddItem.Height - 1)));
         }
 
-        private void textBoxSongText_KeyUp(object sender, KeyEventArgs e)
-        {
-            string text = ((TextBox)sender).Text.Trim();
-            sng.Parts[currentPartId].Slides[currentSlideId].SetSlideText(text);
-            previewSlide();
-        }
-
         private void previewSlide()
         {
             object[] songArgs = { currentPartId, currentSlideId };
@@ -865,13 +848,6 @@ namespace Pbp.Forms
             // TODO
             //pictureBoxPreview.Image = projWindow.showSlide(sng, sng.getImage(sng.Parts[currentPartId].Slides[currentSlideId].ImageNumber), songArgs, ProjectionMode.Simulate);
             pictureBoxPreview.Image = ImageManager.Instance.GetImage(sng.GetImage(sng.Parts[currentPartId].Slides[currentSlideId].ImageNumber));
-        }
-
-        private void textBoxSongTranslation_KeyUp(object sender, KeyEventArgs e)
-        {
-            string text = ((TextBox)sender).Text.Trim();
-            sng.Parts[currentPartId].Slides[currentSlideId].SetSlideTextTranslation(text);
-            previewSlide();
         }
 
         private void neueFolieToolStripMenuItem_Click(object sender, EventArgs e)
@@ -1039,14 +1015,9 @@ namespace Pbp.Forms
             }
             if (partId >= 0)
             {
-                sng.Parts[partId].Caption = textBoxPartCaption.Text;
-                treeViewContents.Nodes[partId].Text = sng.Parts[partId].Caption;
+                treeViewContents.Nodes[partId].Text = textBoxPartCaption.Text;
             }
         }
 
-        private void label16_Click(object sender, EventArgs e)
-        {
-
-        }
     }
 }

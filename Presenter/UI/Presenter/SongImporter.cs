@@ -121,7 +121,7 @@ namespace Pbp.Forms
                                 }
                                 Match mat = rex.Match(pri);
                                 sng.Parts[p].Caption = mat.Value.Substring(0, mat.Value.Length - 1);
-                                sng.Parts[p].Slides[0].SetSlideText(pri.Substring(mat.Value.Length + 1));
+                                sng.Parts[p].Slides[0].Text = pri.Substring(mat.Value.Length + 1);
                                 p++;
                             }
 
@@ -225,9 +225,11 @@ namespace Pbp.Forms
 
                                 //Match mat = rex.Match(pri);
                                 sng.Parts[p].Caption = "Teil " + (p + 1).ToString();
-                                sng.Parts[p].Slides[0].SetSlideText(txt);
+                                sng.Parts[p].Slides[0].Text = txt;
                                 if (transl != string.Empty)
-                                    sng.Parts[p].Slides[0].SetSlideTextTranslation(transl);
+                                {
+                                    sng.Parts[p].Slides[0].Text = transl;
+                                }
                                 p++;
                             }
 

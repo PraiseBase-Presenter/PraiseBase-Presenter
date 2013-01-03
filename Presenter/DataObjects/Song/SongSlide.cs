@@ -155,67 +155,61 @@ namespace Pbp.Data.Song
         #endregion ICloneable Members
 
         /// <summary>
-        /// Sets the text of this slide
+        /// Gets or sets the text of this slide
         /// </summary>
         /// <param name="text"></param>
-        public void SetSlideText(string text)
+        public String Text
         {
-            Lines = new List<string>();
-            string[] ln = text.Trim().Split(new[] { Environment.NewLine, "<br/>" }, StringSplitOptions.None);
-            foreach (string sl in ln)
-            {
-                Lines.Add(sl.Trim());
+            get {
+                string txt = "";
+                int i = 1;
+                foreach (string str in Lines)
+                {
+                    txt += str;
+                    if (i < Lines.Count)
+                        txt += Environment.NewLine;
+                    i++;
+                }
+                return txt;                
+            }
+            set {
+                Lines = new List<string>();
+                string[] ln = value.Trim().Split(new[] { Environment.NewLine, "<br/>" }, StringSplitOptions.None);
+                foreach (string sl in ln)
+                {
+                    Lines.Add(sl.Trim());
+                }            
             }
         }
 
         /// <summary>
-        /// Sets the translation of this slide
+        /// Gets or sets the translation of this slide
         /// </summary>
         /// <param name="text"></param>
-        public void SetSlideTextTranslation(string text)
+        public String TranslationText
         {
-            Translation = new List<string>();
-            string[] tr = text.Split(new[] { Environment.NewLine }, StringSplitOptions.None);
-            foreach (string sl in tr)
+            get
             {
-                Translation.Add(sl.Trim());
+                string txt = "";
+                int i = 1;
+                foreach (string str in Translation)
+                {
+                    txt += str;
+                    if (i < Translation.Count)
+                        txt += Environment.NewLine;
+                    i++;
+                }
+                return txt;
             }
-        }
-
-        /// <summary>
-        /// Returns a string of the wrapped text
-        /// </summary>
-        /// <returns>Wrapped text</returns>
-        public string GetLineBreakText()
-        {
-            string txt = "";
-            int i = 1;
-            foreach (string str in Lines)
+            set
             {
-                txt += str;
-                if (i < Lines.Count)
-                    txt += Environment.NewLine;
-                i++;
+                Translation = new List<string>();
+                string[] tr = value.Split(new[] { Environment.NewLine }, StringSplitOptions.None);
+                foreach (string sl in tr)
+                {
+                    Translation.Add(sl.Trim());
+                }
             }
-            return txt;
-        }
-
-        /// <summary>
-        /// Returns the wrapped translation text
-        /// </summary>
-        /// <returns>Wrapped translation</returns>
-        public string GetLineBreakTranslation()
-        {
-            string txt = "";
-            int i = 1;
-            foreach (string str in Translation)
-            {
-                txt += str;
-                if (i < Translation.Count)
-                    txt += Environment.NewLine;
-                i++;
-            }
-            return txt;
         }
 
         /// <summary>

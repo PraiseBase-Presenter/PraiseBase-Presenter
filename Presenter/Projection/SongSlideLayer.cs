@@ -64,12 +64,12 @@ namespace Pbp
                 int endSpacing = 0;
                 if (slide.Translated)
                 {
-                    strMeasureTrans = gr.MeasureString(slide.GetLineBreakTranslation(), fontTr);
+                    strMeasureTrans = gr.MeasureString(slide.TranslationText, fontTr);
                     lineSpacing += (int)(strMeasureTrans.Height / slide.Translation.Count) + lineSpacing;
                     endSpacing = (int)(strMeasureTrans.Height / slide.Translation.Count) + lineSpacing;
                 }
 
-                SizeF strMeasure = gr.MeasureString(slide.GetLineBreakText(), font);
+                SizeF strMeasure = gr.MeasureString(slide.Text, font);
                 Brush shadodBrush = Brushes.Transparent;
                 int usedWidth = (int)strMeasure.Width;
                 int usedHeight = (int)strMeasure.Height + (lineSpacing * (slide.Lines.Count - 1)) + endSpacing;
@@ -79,7 +79,7 @@ namespace Pbp
                 {
                     scalingFactor = Math.Min((float)usableWidth / (float)usedWidth, (float)usableHeight / (float)usedHeight);
                     font = new Font(font.FontFamily, font.Size * scalingFactor, font.Style);
-                    strMeasure = gr.MeasureString(slide.GetLineBreakText(), font);
+                    strMeasure = gr.MeasureString(slide.Text, font);
                     usedWidth = (int)strMeasure.Width;
                     usedHeight = (int)strMeasure.Height + (lineSpacing * (slide.Lines.Count - 1));
                 }
