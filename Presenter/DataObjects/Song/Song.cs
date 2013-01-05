@@ -314,6 +314,7 @@ namespace Pbp.Data.Song
         /// </summary>
         public Song()
         {
+            // Assign a default GUID; it can be overwriten by a GUID in a song file
             GUID = Guid.NewGuid();
 
             Themes = new TagList();

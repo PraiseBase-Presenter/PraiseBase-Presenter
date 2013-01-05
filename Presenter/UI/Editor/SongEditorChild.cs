@@ -55,23 +55,33 @@ namespace Pbp.Forms
 
             if (fileName != null)
             {
-                try
+                Console.WriteLine("Loading song from file " + fileName);
+                sng = SongManager.Instance.GetSongByPath(fileName);
+                if (sng == null)
                 {
-                    sng = SongFileReaderFactory.Instance.CreateFactoryByFile(fileName).Load(fileName);
+                    try
+                    {
+                        sng = SongFileReaderFactory.Instance.CreateFactoryByFile(fileName).Load(fileName);
+                        Console.WriteLine("Song loaded with GUID " + sng.GUID);
+                    }
+                    catch (NotImplementedException)
+                    {
+                        MessageBox.Show("Dieses Dateiformat wird leider nicht unterstüzt!", "Liededitor", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        valid = false;
+                        this.Close();
+                        return;
+                    }
+                    catch (Exception e)
+                    {
+                        MessageBox.Show("Diese Lieddatei ist leider fehlerhaft (" + e.Message + ")!", "Liededitor", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        valid = false;
+                        this.Close();
+                        return;
+                    }
                 }
-                catch (NotImplementedException)
+                else
                 {
-                    MessageBox.Show("Dieses Dateiformat wird leider nicht unterstüzt!", "Liededitor", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    valid = false;
-                    this.Close();
-                    return;
-                }
-                catch (Exception e)
-                {
-                    MessageBox.Show("Diese Lieddatei ist leider fehlerhaft (" + e.Message + ")!", "Liededitor", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    valid = false;
-                    this.Close();
-                    return;
+                    Console.WriteLine("Song loaded from songmanager with GUID " + sng.GUID);
                 }
                 songFilename = fileName;
             }
@@ -106,6 +116,8 @@ namespace Pbp.Forms
             textBoxComment.DataBindings.Add("Text", sng, "Comment");
             textBoxRightsManagement.DataBindings.Add("Text", sng, "RightsManagement");
             textBoxPublisher.DataBindings.Add("Text", sng, "Publisher");
+
+            labelGUID.DataBindings.Add("Text", sng, "GUID");
 
             string autstr = string.Empty;
             foreach (var aut in sng.Author)
