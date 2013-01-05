@@ -78,6 +78,16 @@ namespace Pbp.Manager
         private ProjectionManager()
         {
             InitializeWindows();
+            ScreenManager.Instance.ScreensChanged += new ScreenManager.ScreensChange(Instance_ScreensChanged);
+        }
+
+        /// <summary>
+        /// If the screen configuration is changed, initialize the windows again
+        /// </summary>
+        /// <param name="e"></param>
+        void Instance_ScreensChanged(ScreenManager.ScreensChangedEventArgs e)
+        {
+            InitializeWindows();
         }
 
         /// <summary>

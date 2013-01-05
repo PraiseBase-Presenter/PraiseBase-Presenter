@@ -30,6 +30,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+using Microsoft.Win32;
 
 namespace Pbp.Manager
 {
@@ -86,9 +87,7 @@ namespace Pbp.Manager
         protected int scannedScreensHash = 0;
         public bool ScreensChangedSinceLastScan { get; protected set; }
 
-        // Screen change detect timner and event
-        Timer screenNumberSupervisorTimer;
-        int recordedNumberOfScreens;
+        // Screen change detection event
         public delegate void ScreensChange(ScreensChangedEventArgs e);
         public event ScreensChange ScreensChanged;
         public class ScreensChangedEventArgs : EventArgs { }
@@ -98,24 +97,35 @@ namespace Pbp.Manager
         /// </summary>
         private ScreenManager()
         {
-            screenNumberSupervisorTimer = new Timer();
-            screenNumberSupervisorTimer.Interval = 1000;
-            screenNumberSupervisorTimer.Start();
-            screenNumberSupervisorTimer.Tick += new EventHandler(screenNumberSupervisorTimer_Tick);
+            SystemEvents.DisplaySettingsChanged += new EventHandler(SystemEvents_DisplaySettingsChanged);
         }
 
-        void screenNumberSupervisorTimer_Tick(object sender, EventArgs e)
+        /// <summary>
+        /// Throws a ScreensChange event if screen configuration has been changed
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void SystemEvents_DisplaySettingsChanged(object sender, EventArgs e)
         {
-            if (recordedNumberOfScreens != Screen.AllScreens.Count())
-            {
-                if (ScreensChanged != null)
-                {
-                    ScreensChanged(new ScreensChangedEventArgs { });
-                }
-            }
-            recordedNumberOfScreens = Screen.AllScreens.Count();
+            // Use a delay of one second to give the screen api enough time to detect new resolution
+            Timer tmr = new Timer();
+            tmr.Interval = 1000;
+            tmr.Tick += new EventHandler(tmr_Tick);
+            tmr.Start();
         }
 
+        void tmr_Tick(object sender, EventArgs e)
+        {
+            if (ScreensChanged != null)
+            {
+                ScreensChanged(new ScreensChangedEventArgs { });
+            }
+        }
+
+        /// <summary>
+        /// Detect screen configuration
+        /// </summary>
+        /// <returns></returns>
         public bool detectScreens() 
         {
             AvailableProjectionScreens = new List<Screen>();
