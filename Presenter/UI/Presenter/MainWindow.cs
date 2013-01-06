@@ -290,10 +290,17 @@ namespace Pbp.Forms
                 {
                     if ((Nullable<SongManager.SongItem>)SongManager.Instance.CurrentSong == null || SongManager.Instance.CurrentSong.Song == null || SongManager.Instance.CurrentSong.Song.GUID != (Guid)listViewSongs.SelectedItems[0].Tag)
                     {
-                        SongManager.Instance.CurrentSong = SongManager.Instance.SongList[(Guid)listViewSongs.SelectedItems[0].Tag];
-                        showCurrentSongDetails();
-
-                        buttonSetListAdd.Enabled = true;
+                        var g = (Guid)listViewSongs.SelectedItems[0].Tag;
+                        if (SongManager.Instance.SongList.ContainsKey(g))
+                        {
+                            SongManager.Instance.CurrentSong = SongManager.Instance.SongList[g];
+                            showCurrentSongDetails();
+                            buttonSetListAdd.Enabled = true;
+                        }
+                        else
+                        {
+                            MessageBox.Show("Dieses Lied existiert nicht mehr in der Liederliste!", "Fehler", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        }
                     }
                 }
                 buttonSetListAdd.Enabled = true;

@@ -6,11 +6,11 @@ using System.Runtime.InteropServices;
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
 [assembly: AssemblyTitle("PraiseBase Presenter")]
-[assembly: AssemblyDescription("Projects Songs and Images using Dual Screen")]
+[assembly: AssemblyDescription("Projects song lyrics and images using multiple screens")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("PraiseBase Langenthal")]
 [assembly: AssemblyProduct("PraiseBase Presenter")]
-[assembly: AssemblyCopyright("Copyright © PraiseBase 2008")]
+[assembly: AssemblyCopyright("Copyright © PraiseBase.org 2008")]
 [assembly: AssemblyTrademark("PraiseBase")]
 [assembly: AssemblyCulture("")]
 
@@ -32,7 +32,7 @@ using System.Runtime.InteropServices;
 // You can specify all the values or you can default the Build and Revision Numbers
 // by using the '*' as shown below:
 // [assembly: AssemblyVersion("1.0.*")]
-[assembly: AssemblyVersion("1.1.2")]
-[assembly: AssemblyFileVersion("1.1.2")]
+[assembly: AssemblyVersion("1.1.3")]
+[assembly: AssemblyFileVersion("1.1.3")]
 [assembly: NeutralResourcesLanguageAttribute("de-CH")]
 [assembly: System.Runtime.CompilerServices.InternalsVisibleTo("Test")]

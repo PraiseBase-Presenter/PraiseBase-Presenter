@@ -310,8 +310,13 @@ namespace Pbp.Forms
                         + ((Song)listViewSongs.Items[x].Tag).Title + SongFileWriterFactory.Instance.CreateFactory(SongFileWriterFactory.Instance.PreferredType).FileExtension;
                     if ((File.Exists(fileName) && (MessageBox.Show("Das Lied '" + ((Song)listViewSongs.Items[x].Tag).Title + "' existiert bereits. Überschreiben?", "PraiseBox Importer", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)) || !File.Exists(fileName))
                     {
+                        Song sng = (Song)listViewSongs.Items[x].Tag;
+                        if (sng.GUID == Guid.Empty)
+                        {
+                            sng.GUID = SongManager.Instance.GenerateGuid();
+                        }
                         // TODO Exception handling
-                        SongFileWriterFactory.Instance.CreateFactoryByFile(fileName).Save(fileName, (Song)listViewSongs.Items[x].Tag);
+                        SongFileWriterFactory.Instance.CreateFactoryByFile(fileName).Save(fileName, sng);
                         filesToOpen.Add(fileName);
                         cnt++;
                     }

@@ -314,8 +314,6 @@ namespace Pbp.Data.Song
         /// </summary>
         public Song()
         {
-            GUID = Guid.NewGuid();
-
             Themes = new TagList();
             DefaultHorizAlign = SongTextHorizontalAlign.Center;
             DefaultVertAlign = SongTextVerticalAlign.Center;

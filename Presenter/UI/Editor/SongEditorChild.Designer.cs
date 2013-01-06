@@ -99,12 +99,13 @@
             this.comboBoxLanguageTranslated = new System.Windows.Forms.ComboBox();
             this.label11 = new System.Windows.Forms.Label();
             this.pictureBoxPreview = new System.Windows.Forms.PictureBox();
-            this.treeViewContents = new TreeEx.TreeLE();
             this.buttonAddItem = new System.Windows.Forms.Button();
             this.buttonMoveUp = new System.Windows.Forms.Button();
             this.buttonDelItem = new System.Windows.Forms.Button();
             this.buttonMoveDown = new System.Windows.Forms.Button();
             this.tabControlTextLayer = new System.Windows.Forms.TabControl();
+            this.labelGUID = new System.Windows.Forms.Label();
+            this.treeViewContents = new TreeEx.TreeLE();
             this.slideContextMenu.SuspendLayout();
             this.partContextMenu.SuspendLayout();
             this.songContextMenu.SuspendLayout();
@@ -494,6 +495,7 @@
             // 
             // tabPageContent
             // 
+            this.tabPageContent.Controls.Add(this.labelGUID);
             this.tabPageContent.Controls.Add(this.textBoxRightsManagement);
             this.tabPageContent.Controls.Add(this.label18);
             this.tabPageContent.Controls.Add(this.textBoxSongbooks);
@@ -895,22 +897,6 @@
             this.pictureBoxPreview.TabStop = false;
             this.pictureBoxPreview.Click += new System.EventHandler(this.buttonSlideBackground_Click);
             // 
-            // treeViewContents
-            // 
-            this.treeViewContents.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left)));
-            this.treeViewContents.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.treeViewContents.HideSelection = false;
-            this.treeViewContents.Location = new System.Drawing.Point(9, 64);
-            this.treeViewContents.Name = "treeViewContents";
-            this.treeViewContents.Size = new System.Drawing.Size(240, 243);
-            this.treeViewContents.TabIndex = 0;
-            this.treeViewContents.ValidateLabelEdit += new TreeEx.TreeLE.ValidateLabelEditEventHandler(this.treeViewContents_ValidateLabelEdit);
-            this.treeViewContents.BeforeLabelEdit += new System.Windows.Forms.NodeLabelEditEventHandler(this.treeViewContents_BeforeLabelEdit);
-            this.treeViewContents.AfterLabelEdit += new System.Windows.Forms.NodeLabelEditEventHandler(this.treeViewContents_AfterLabelEdit);
-            this.treeViewContents.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.treeViewContents_AfterSelect);
-            this.treeViewContents.KeyDown += new System.Windows.Forms.KeyEventHandler(this.treeViewContents_KeyDown);
-            // 
             // buttonAddItem
             // 
             this.buttonAddItem.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
@@ -974,6 +960,33 @@
             this.tabControlTextLayer.SelectedIndex = 0;
             this.tabControlTextLayer.Size = new System.Drawing.Size(978, 562);
             this.tabControlTextLayer.TabIndex = 88;
+            // 
+            // labelGUID
+            // 
+            this.labelGUID.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.labelGUID.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelGUID.ForeColor = System.Drawing.Color.DarkGray;
+            this.labelGUID.Location = new System.Drawing.Point(794, 510);
+            this.labelGUID.Name = "labelGUID";
+            this.labelGUID.Size = new System.Drawing.Size(170, 13);
+            this.labelGUID.TabIndex = 117;
+            this.labelGUID.Text = "-";
+            // 
+            // treeViewContents
+            // 
+            this.treeViewContents.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
+            this.treeViewContents.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.treeViewContents.HideSelection = false;
+            this.treeViewContents.Location = new System.Drawing.Point(9, 64);
+            this.treeViewContents.Name = "treeViewContents";
+            this.treeViewContents.Size = new System.Drawing.Size(240, 243);
+            this.treeViewContents.TabIndex = 0;
+            this.treeViewContents.ValidateLabelEdit += new TreeEx.TreeLE.ValidateLabelEditEventHandler(this.treeViewContents_ValidateLabelEdit);
+            this.treeViewContents.BeforeLabelEdit += new System.Windows.Forms.NodeLabelEditEventHandler(this.treeViewContents_BeforeLabelEdit);
+            this.treeViewContents.AfterLabelEdit += new System.Windows.Forms.NodeLabelEditEventHandler(this.treeViewContents_AfterLabelEdit);
+            this.treeViewContents.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.treeViewContents_AfterSelect);
+            this.treeViewContents.KeyDown += new System.Windows.Forms.KeyEventHandler(this.treeViewContents_KeyDown);
             // 
             // SongEditorChild
             // 
@@ -1091,5 +1104,6 @@
         private System.Windows.Forms.Label label17;
         private System.Windows.Forms.TextBox textBoxRightsManagement;
         private System.Windows.Forms.Label label18;
+        private System.Windows.Forms.Label labelGUID;
     }
 }

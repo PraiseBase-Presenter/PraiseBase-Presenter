@@ -95,7 +95,11 @@ namespace Pbp.Forms
         {
             for (int i = 0; i < MdiChildren.Count(); i++)
             {
-                if (MdiChildren[i].Tag.ToString() == fileName)
+                if (MdiChildren[i].Tag.ToString() != String.Empty && 
+                    String.Compare(
+                    Path.GetFullPath(MdiChildren[i].Tag.ToString()).TrimEnd('\\'),
+                    Path.GetFullPath(fileName).TrimEnd('\\'),
+                    StringComparison.InvariantCultureIgnoreCase) == 0)
                 {
                     MdiChildren[i].Show();
                     MdiChildren[i].Focus();

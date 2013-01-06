@@ -46,9 +46,6 @@ namespace Pbp
         public struct SongItem
         {
             public Song Song { get; set; }
-
-            public string Filetype { get; set; }
-
             public string Filename { get; set; }
         }
 
@@ -160,8 +157,10 @@ namespace Pbp
                     SongFileReader sfr = SongFileReaderFactory.Instance.CreateFactoryByFile(path);
                     si.Song = sfr.Load(path);
                     si.Filename = path;
-                    si.Filetype = Path.GetExtension(path);
-
+                    if (si.Song.GUID == Guid.Empty)
+                    {
+                        si.Song.GUID = GenerateGuid();
+                    }
                     SongList.Add(si.Song.GUID, si);
                     if (i % 25 == 0)
                     {
@@ -176,6 +175,11 @@ namespace Pbp
                     Console.WriteLine(e.StackTrace);
                 }
             }
+        }
+
+        public Guid GenerateGuid()
+        {
+            return Guid.NewGuid();
         }
 
         protected virtual void OnSongLoaded(SongLoadEventArgs e)
@@ -218,7 +222,6 @@ namespace Pbp
                 si.Filename = path;
 
                 // TODO
-                si.Filetype = Path.GetExtension(path);
                 if (g == si.Song.GUID)
                 {
                     SongList[g] = si;
@@ -247,13 +250,60 @@ namespace Pbp
             {
                 foreach (var kvp in SongList)
                 {
-                    if (kvp.Value.Filename == path)
+                    if (String.Compare(
+                        Path.GetFullPath(kvp.Value.Filename).TrimEnd('\\'),
+                        Path.GetFullPath(path).TrimEnd('\\'),
+                        StringComparison.InvariantCultureIgnoreCase) == 0)
                     {
                         ReloadSong(kvp.Key);
                         return;
                     }
                 }
             }
+        }
+
+        /// <summary>
+        /// Gets the song with the specified path
+        /// </summary>
+        /// <param name="path">Path to the song file</param>
+        public Song GetSongByPath(string path)
+        {
+            if (!string.IsNullOrEmpty(path))
+            {
+                foreach (var kvp in SongList)
+                {
+                    if (String.Compare(
+                        Path.GetFullPath(kvp.Value.Filename).TrimEnd('\\'),
+                        Path.GetFullPath(path).TrimEnd('\\'),
+                        StringComparison.InvariantCultureIgnoreCase) == 0)
+                    {
+                        return kvp.Value.Song;
+                    }
+                }
+            }
+            return null;
+        }
+
+        /// <summary>
+        /// Gets the song with the specified path
+        /// </summary>
+        /// <param name="path">Path to the song file</param>
+        public Guid GetGUIDByPath(string path)
+        {
+            if (!string.IsNullOrEmpty(path))
+            {
+                foreach (var kvp in SongList)
+                {
+                    if (String.Compare(
+                        Path.GetFullPath(kvp.Value.Filename).TrimEnd('\\'),
+                        Path.GetFullPath(path).TrimEnd('\\'),
+                        StringComparison.InvariantCultureIgnoreCase) == 0)
+                    {
+                        return kvp.Key;
+                    }
+                }
+            }
+            return Guid.Empty;
         }
 
         /// <summary>

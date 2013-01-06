@@ -55,9 +55,22 @@ namespace Pbp.Forms
 
             if (fileName != null)
             {
+                Console.WriteLine("Loading song from file " + fileName);
                 try
                 {
                     sng = SongFileReaderFactory.Instance.CreateFactoryByFile(fileName).Load(fileName);
+                    if (sng.GUID == Guid.Empty)
+                    {
+                        var smGuid = SongManager.Instance.GetGUIDByPath(fileName);
+                        if (smGuid != Guid.Empty)
+                        {
+                            sng.GUID = smGuid;
+                        }
+                        else
+                        {
+                            sng.GUID = SongManager.Instance.GenerateGuid();
+                        }
+                    }
                 }
                 catch (NotImplementedException)
                 {
@@ -73,11 +86,13 @@ namespace Pbp.Forms
                     this.Close();
                     return;
                 }
+
                 songFilename = fileName;
             }
             else
             {
                 sng = new Song();
+                sng.GUID = SongManager.Instance.GenerateGuid();
                 sng.Title = Pbp.Properties.Settings.Default.SongDefaultName;
                 sng.Language = Pbp.Properties.Settings.Default.SongDefaultLanguage;
                 SongPart tmpPart = new SongPart();
@@ -106,6 +121,8 @@ namespace Pbp.Forms
             textBoxComment.DataBindings.Add("Text", sng, "Comment");
             textBoxRightsManagement.DataBindings.Add("Text", sng, "RightsManagement");
             textBoxPublisher.DataBindings.Add("Text", sng, "Publisher");
+
+            labelGUID.DataBindings.Add("Text", sng, "GUID");
 
             string autstr = string.Empty;
             foreach (var aut in sng.Author)
