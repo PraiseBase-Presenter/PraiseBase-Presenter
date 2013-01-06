@@ -45,8 +45,6 @@
             this.toolStripSeparator11 = new System.Windows.Forms.ToolStripSeparator();
             this.bildschirmeSuchenToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.einstellungenToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.optionenToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparator5 = new System.Windows.Forms.ToolStripSeparator();
             this.datenverzeichnisÖffnenToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.datenverzeichnisToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator10 = new System.Windows.Forms.ToolStripSeparator();
@@ -105,6 +103,8 @@
             this.toolStripButton4 = new System.Windows.Forms.ToolStripButton();
             this.toolStripButtonDisplaySettings = new System.Windows.Forms.ToolStripButton();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
+            this.optionenToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator5 = new System.Windows.Forms.ToolStripSeparator();
             this.customGroupBox1 = new Pbp.Components.CustomGroupBox();
             this.pictureBoxbeamerPreview = new System.Windows.Forms.PictureBox();
             this.labelFadeTimeLayer1 = new System.Windows.Forms.Label();
@@ -232,6 +232,8 @@
             this.liededitorToolStripMenuItem,
             this.toolStripMenuItem3,
             this.toolStripSeparator4,
+            this.optionenToolStripMenuItem,
+            this.toolStripSeparator5,
             this.beendenToolStripMenuItem});
             this.dateiToolStripMenuItem.Name = "dateiToolStripMenuItem";
             this.dateiToolStripMenuItem.Size = new System.Drawing.Size(73, 20);
@@ -324,8 +326,6 @@
             // einstellungenToolStripMenuItem
             // 
             this.einstellungenToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.optionenToolStripMenuItem,
-            this.toolStripSeparator5,
             this.datenverzeichnisÖffnenToolStripMenuItem,
             this.toolStripSeparator6,
             this.toolStripMenuItem4,
@@ -334,20 +334,8 @@
             this.bilderlisteNeuLadenToolStripMenuItem,
             this.miniaturbilderPrüfenToolStripMenuItem});
             this.einstellungenToolStripMenuItem.Name = "einstellungenToolStripMenuItem";
-            this.einstellungenToolStripMenuItem.Size = new System.Drawing.Size(49, 20);
-            this.einstellungenToolStripMenuItem.Text = "&Extras";
-            // 
-            // optionenToolStripMenuItem
-            // 
-            this.optionenToolStripMenuItem.Name = "optionenToolStripMenuItem";
-            this.optionenToolStripMenuItem.Size = new System.Drawing.Size(187, 22);
-            this.optionenToolStripMenuItem.Text = "&Optionen...";
-            this.optionenToolStripMenuItem.Click += new System.EventHandler(this.optionenToolStripMenuItem_Click);
-            // 
-            // toolStripSeparator5
-            // 
-            this.toolStripSeparator5.Name = "toolStripSeparator5";
-            this.toolStripSeparator5.Size = new System.Drawing.Size(184, 6);
+            this.einstellungenToolStripMenuItem.Size = new System.Drawing.Size(59, 20);
+            this.einstellungenToolStripMenuItem.Text = "&Medien";
             // 
             // datenverzeichnisÖffnenToolStripMenuItem
             // 
@@ -661,14 +649,14 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.listViewSongHistory.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.columnHeader1});
-            this.listViewSongHistory.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.listViewSongHistory.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.listViewSongHistory.FullRowSelect = true;
             this.listViewSongHistory.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.None;
             this.listViewSongHistory.HideSelection = false;
             this.listViewSongHistory.Location = new System.Drawing.Point(6, 6);
             this.listViewSongHistory.MultiSelect = false;
             this.listViewSongHistory.Name = "listViewSongHistory";
-            this.listViewSongHistory.Size = new System.Drawing.Size(236, 263);
+            this.listViewSongHistory.Size = new System.Drawing.Size(236, 284);
             this.listViewSongHistory.TabIndex = 28;
             this.listViewSongHistory.UseCompatibleStateImageBehavior = false;
             this.listViewSongHistory.View = System.Windows.Forms.View.Details;
@@ -895,6 +883,18 @@
             this.toolStrip1.Size = new System.Drawing.Size(1008, 71);
             this.toolStrip1.TabIndex = 21;
             this.toolStrip1.Text = "toolStrip1";
+            // 
+            // optionenToolStripMenuItem
+            // 
+            this.optionenToolStripMenuItem.Name = "optionenToolStripMenuItem";
+            this.optionenToolStripMenuItem.Size = new System.Drawing.Size(176, 22);
+            this.optionenToolStripMenuItem.Text = "&Optionen...";
+            this.optionenToolStripMenuItem.Click += new System.EventHandler(this.optionenToolStripMenuItem_Click);
+            // 
+            // toolStripSeparator5
+            // 
+            this.toolStripSeparator5.Name = "toolStripSeparator5";
+            this.toolStripSeparator5.Size = new System.Drawing.Size(173, 6);
             // 
             // customGroupBox1
             // 
@@ -1870,7 +1870,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.listViewSetList.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.columnHeader4});
-            this.listViewSetList.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.listViewSetList.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.listViewSetList.FullRowSelect = true;
             this.listViewSetList.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.None;
             this.listViewSetList.HideSelection = false;
@@ -1948,15 +1948,13 @@
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem1;
 		private System.Windows.Forms.ToolStripMenuItem infoToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem einstellungenToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem optionenToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem liederlisteNeuLadenToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem webToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem bilderlisteNeuLadenToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem2;
 		private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
 		private System.Windows.Forms.ToolStripMenuItem liededitorToolStripMenuItem;
-		private System.Windows.Forms.ToolStripSeparator toolStripSeparator4;
-        private System.Windows.Forms.ToolStripSeparator toolStripSeparator5;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator4;
 		private System.Windows.Forms.ToolStripMenuItem datenverzeichnisÖffnenToolStripMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator6;
 		private System.Windows.Forms.RadioButton radioButtonAutoDiaShow;
@@ -2096,6 +2094,8 @@
         private System.Windows.Forms.Label label13;
         private System.Windows.Forms.PictureBox pictureBoxbeamerPreview;
         private System.Windows.Forms.ToolStripMenuItem aufUpdatePrüfenToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem optionenToolStripMenuItem;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator5;
         
     }
 }
