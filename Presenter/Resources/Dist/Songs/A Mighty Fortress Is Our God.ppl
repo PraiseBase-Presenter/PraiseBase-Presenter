@@ -4,6 +4,7 @@
     <title>A mighty fortress is our God</title>
     <category>Keine Kategorie</category>
     <language />
+    <ccliNo>42964</ccliNo>
     <guid>b532c18d-a042-4978-80f4-5bfc8785614a</guid>
   </general>
   <songtext>
@@ -69,7 +70,9 @@
   <information>
     <copyright>
       <position>lastslide</position>
-      <text />
+      <text>
+        <line>Public Domain</line>
+      </text>
     </copyright>
     <source>
       <position>firstslide</position>
