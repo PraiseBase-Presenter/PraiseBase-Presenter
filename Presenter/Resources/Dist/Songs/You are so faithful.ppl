@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<ppl version="3.0">
+  <general>
+    <title>You are so faithful</title>
+    <category>Lobpreis</category>
+    <language>Englisch</language>
+  </general>
+  <songtext>
+    <part caption="Strophe 1">
+      <slide mainsize="30" backgroundnr="0">
+        <line>You are so faithful</line>
+        <line>so faithful, so faithful.</line>
+        <translation>Du bist so treu</translation>
+        <translation>so treu, so treu.</translation>
+      </slide>
+      <slide mainsize="30" backgroundnr="0">
+        <line>You are so faithful</line>
+        <line>so faithful, so faithful.</line>
+        <translation>Du bist so treu</translation>
+        <translation>so treu, so treu.</translation>
+      </slide>
+    </part>
+    <part caption="Refrain">
+      <slide mainsize="30" backgroundnr="0">
+        <line>That's why I praise you</line>
+        <line>in the morning</line>
+        <line>That's why I praise you</line>
+        <line>in the noontime.</line>
+        <translation>Deshalb preise ich Dich</translation>
+        <translation>am Morgen</translation>
+        <translation>Deshalb preise ich Dich</translation>
+        <translation>am Mittag.</translation>
+      </slide>
+      <slide mainsize="30" backgroundnr="0">
+        <line>That's why I praise you</line>
+        <line>in the evening</line>
+        <line>That's why I praise you</line>
+        <line>all the time.</line>
+        <translation>Deshalb preise ich Dich</translation>
+        <translation>am Abend</translation>
+        <translation>Deshalb preise ich Dich</translation>
+        <translation>allezeit.</translation>
+      </slide>
+    </part>
+    <part caption="Strophe 2">
+      <slide mainsize="30" backgroundnr="0">
+        <line>You are so loving</line>
+        <line>so loving, so loving.</line>
+        <translation>Du bist so liebevoll</translation>
+        <translation>so liebevoll, so liebevoll.</translation>
+      </slide>
+      <slide mainsize="30" backgroundnr="0">
+        <line>You are so loving</line>
+        <line>so loving, so loving.</line>
+        <translation>Du bist so liebevoll</translation>
+        <translation>so liebevoll, so liebevoll.</translation>
+      </slide>
+    </part>
+    <part caption="Strophe 3">
+      <slide mainsize="30" backgroundnr="0">
+        <line>You are so caring</line>
+        <line>so caring, so caring.</line>
+        <translation>Du sorgst so gut</translation>
+        <translation>Du kümmerst dich um uns.</translation>
+      </slide>
+      <slide mainsize="30" backgroundnr="0">
+        <line>You are so caring</line>
+        <line>so caring, so caring.</line>
+        <translation>Du sorgst so gut</translation>
+        <translation>Du kümmerst dich um uns.</translation>
+      </slide>
+    </part>
+    <part caption="Strophe 4">
+      <slide mainsize="30" backgroundnr="0">
+        <line>You are so mighty</line>
+        <line>so mighty, so mighty.</line>
+        <translation>Du bist so mächtig</translation>
+        <translation>so mächtig, so mächtig.</translation>
+      </slide>
+      <slide mainsize="30" backgroundnr="0">
+        <line>You are so mighty</line>
+        <line>so mighty, so mighty.</line>
+        <translation>Du bist so mächtig</translation>
+        <translation>so mächtig, so mächtig.</translation>
+      </slide>
+    </part>
+  </songtext>
+  <order>
+    <item>Strophe 1</item>
+    <item>Refrain</item>
+    <item>Strophe 2</item>
+    <item>Refrain</item>
+    <item>Strophe 3</item>
+    <item>Refrain</item>
+    <item>Strophe 4</item>
+  </order>
+  <information>
+    <copyright>
+      <position>lastslide</position>
+      <text>
+        <line>Musik &amp; Copyright unbekannt</line>
+      </text>
+    </copyright>
+    <source>
+      <position>firstslide</position>
+      <text/>
+    </source>
+  </information>
+  <formatting>
+    <font>
+      <maintext>
+        <name>Tahoma</name>
+        <size>30</size>
+        <bold>true</bold>
+        <italic>false</italic>
+        <color>16777215</color>
+        <outline>30</outline>
+        <shadow>20</shadow>
+      </maintext>
+      <translationtext>
+        <name>Tahoma</name>
+        <size>20</size>
+        <bold>false</bold>
+        <italic>false</italic>
+        <color>16777215</color>
+        <outline>30</outline>
+        <shadow>20</shadow>
+      </translationtext>
+      <copyrighttext>
+        <name>Tahoma</name>
+        <size>14</size>
+        <bold>false</bold>
+        <italic>false</italic>
+        <color>16777215</color>
+        <outline>30</outline>
+        <shadow>20</shadow>
+      </copyrighttext>
+      <sourcetext>
+        <name>Tahoma</name>
+        <size>30</size>
+        <bold>false</bold>
+        <italic>false</italic>
+        <color>16777215</color>
+        <outline>30</outline>
+        <shadow>20</shadow>
+      </sourcetext>
+      <outline>
+        <enabled>true</enabled>
+        <color>0</color>
+      </outline>
+      <shadow>
+        <enabled>true</enabled>
+        <color>0</color>
+        <direction>125</direction>
+      </shadow>
+    </font>
+    <background>
+      <file>Blumen\Blume 6.jpg</file>
+    </background>
+    <linespacing>
+      <main>30</main>
+      <translation>20</translation>
+    </linespacing>
+    <textorientation>
+      <horizontal>center</horizontal>
+      <vertical>center</vertical>
+      <transpos>inline</transpos>
+    </textorientation>
+    <borders>
+      <mainleft>50</mainleft>
+      <maintop>40</maintop>
+      <mainright>60</mainright>
+      <mainbottom>70</mainbottom>
+      <copyrightbottom>30</copyrightbottom>
+      <sourcetop>20</sourcetop>
+      <sourceright>40</sourceright>
+    </borders>
+  </formatting>
+</ppl>
