@@ -65,6 +65,11 @@
     <Compile Include="OpenLyricsSongFileReaderTest.cs" />
     <Compile Include="PowerPraiseSongFileReaderTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Presenter\PraiseBase Presenter.csproj">
@@ -74,6 +79,25 @@
   </ItemGroup>
   <ItemGroup>
     <Shadow Include="Test References\PraiseBase Presenter.accessor" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ccli\Ein Lied für Gott.usr" />
+    <None Include="Resources\powerpraise\Näher, mein Gott zu Dir.ppl" />
+    <None Include="Resources\songbeamer\Ehre, Macht, und Stärke.sng" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Resources\openlyrics\complex.xml">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Resources\openlyrics\simple.xml">
+      <SubType>Designer</SubType>
+    </Content>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
