@@ -56,38 +56,43 @@ namespace Pbp.Forms
             if (fileName != null)
             {
                 Console.WriteLine("Loading song from file " + fileName);
-                sng = SongManager.Instance.GetSongByPath(fileName);
-                if (sng == null)
+                try
                 {
-                    try
+                    sng = SongFileReaderFactory.Instance.CreateFactoryByFile(fileName).Load(fileName);
+                    if (sng.GUID == Guid.Empty)
                     {
-                        sng = SongFileReaderFactory.Instance.CreateFactoryByFile(fileName).Load(fileName);
-                        Console.WriteLine("Song loaded with GUID " + sng.GUID);
-                    }
-                    catch (NotImplementedException)
-                    {
-                        MessageBox.Show("Dieses Dateiformat wird leider nicht unterstüzt!", "Liededitor", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                        valid = false;
-                        this.Close();
-                        return;
-                    }
-                    catch (Exception e)
-                    {
-                        MessageBox.Show("Diese Lieddatei ist leider fehlerhaft (" + e.Message + ")!", "Liededitor", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                        valid = false;
-                        this.Close();
-                        return;
+                        var smGuid = SongManager.Instance.GetGUIDByPath(fileName);
+                        if (smGuid != Guid.Empty)
+                        {
+                            sng.GUID = smGuid;
+                        }
+                        else
+                        {
+                            sng.GUID = SongManager.Instance.GenerateGuid();
+                        }
                     }
                 }
-                else
+                catch (NotImplementedException)
                 {
-                    Console.WriteLine("Song loaded from songmanager with GUID " + sng.GUID);
+                    MessageBox.Show("Dieses Dateiformat wird leider nicht unterstüzt!", "Liededitor", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    valid = false;
+                    this.Close();
+                    return;
                 }
+                catch (Exception e)
+                {
+                    MessageBox.Show("Diese Lieddatei ist leider fehlerhaft (" + e.Message + ")!", "Liededitor", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    valid = false;
+                    this.Close();
+                    return;
+                }
+
                 songFilename = fileName;
             }
             else
             {
                 sng = new Song();
+                sng.GUID = SongManager.Instance.GenerateGuid();
                 sng.Title = Pbp.Properties.Settings.Default.SongDefaultName;
                 sng.Language = Pbp.Properties.Settings.Default.SongDefaultLanguage;
                 SongPart tmpPart = new SongPart();

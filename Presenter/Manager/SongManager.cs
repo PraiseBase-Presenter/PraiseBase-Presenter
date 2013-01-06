@@ -157,7 +157,10 @@ namespace Pbp
                     SongFileReader sfr = SongFileReaderFactory.Instance.CreateFactoryByFile(path);
                     si.Song = sfr.Load(path);
                     si.Filename = path;
-
+                    if (si.Song.GUID == Guid.Empty)
+                    {
+                        si.Song.GUID = GenerateGuid();
+                    }
                     SongList.Add(si.Song.GUID, si);
                     if (i % 25 == 0)
                     {
@@ -172,6 +175,11 @@ namespace Pbp
                     Console.WriteLine(e.StackTrace);
                 }
             }
+        }
+
+        public Guid GenerateGuid()
+        {
+            return Guid.NewGuid();
         }
 
         protected virtual void OnSongLoaded(SongLoadEventArgs e)
@@ -274,6 +282,28 @@ namespace Pbp
                 }
             }
             return null;
+        }
+
+        /// <summary>
+        /// Gets the song with the specified path
+        /// </summary>
+        /// <param name="path">Path to the song file</param>
+        public Guid GetGUIDByPath(string path)
+        {
+            if (!string.IsNullOrEmpty(path))
+            {
+                foreach (var kvp in SongList)
+                {
+                    if (String.Compare(
+                        Path.GetFullPath(kvp.Value.Filename).TrimEnd('\\'),
+                        Path.GetFullPath(path).TrimEnd('\\'),
+                        StringComparison.InvariantCultureIgnoreCase) == 0)
+                    {
+                        return kvp.Key;
+                    }
+                }
+            }
+            return Guid.Empty;
         }
 
         /// <summary>
