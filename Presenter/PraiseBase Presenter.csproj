@@ -122,6 +122,7 @@
     <Compile Include="IO\Reader\SongFileReaderFactory.cs" />
     <Compile Include="IO\Reader\OpenLyricsSongFileReader.cs" />
     <Compile Include="IO\Reader\PowerPraiseSongFileReader.cs" />
+    <Compile Include="IO\Writer\XmlWriterHelper.cs" />
     <Compile Include="IO\Writer\StatisticsWriter.cs" />
     <Compile Include="IO\Writer\PowerPraiseSongFileWriter.cs" />
     <Compile Include="IO\Reader\SetlistReader.cs" />

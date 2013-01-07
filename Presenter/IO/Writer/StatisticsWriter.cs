@@ -36,31 +36,23 @@ namespace Pbp.IO
 {
     class StatisticsWriter
     {
-        protected const string XmlRootNodeName = "statistics";
-        protected const string FileFormatVersion = "1.0";
-
-        public void write(string filename, Statistics stat)
+        public void Write(string filename, Statistics stat)
         {
-            var xmlDoc = new XmlDocument();
-            XmlDeclaration xmlDeclaration = xmlDoc.CreateXmlDeclaration("1.0", "UTF-8", null);
-            xmlDoc.AppendChild(xmlDeclaration);
-            xmlDoc.AppendChild(xmlDoc.CreateElement(XmlRootNodeName));
-            XmlElement xmlRoot = xmlDoc.DocumentElement;
-            xmlRoot.SetAttribute("version", FileFormatVersion);
+            XmlWriterHelper xml = new XmlWriterHelper("statistics", "1.0");
 
             XmlElement node;
             foreach (var date in stat.Dates)
             {
-                node = xmlDoc.CreateElement("date");
+                node = xml.Doc.CreateElement("date");
                 node.SetAttribute("year", date.Value.Year.ToString());
                 node.SetAttribute("month", date.Value.Month.ToString());
                 node.SetAttribute("day", date.Value.Day.ToString());
-                XmlNode dateNode = xmlRoot.AppendChild(node);
+                XmlNode dateNode = xml.Root.AppendChild(node);
                 foreach (var item in date.Value.Items)
                 {
                     if (item.Value.Type == StatisticsItemType.Song)
                     {
-                        node = xmlDoc.CreateElement("song");
+                        node = xml.Doc.CreateElement("song");
                         node.SetAttribute("title", item.Value.Title);
                         node.SetAttribute("copyright", item.Value.Copyright);
                         node.SetAttribute("ccli", item.Value.CcliID);
@@ -70,13 +62,7 @@ namespace Pbp.IO
                 }
             }
 
-            XmlWriterSettings wrtStn = new XmlWriterSettings();
-            wrtStn.Encoding = Encoding.UTF8;
-            wrtStn.Indent = true;
-            XmlWriter wrt = XmlTextWriter.Create(filename, wrtStn);
-            xmlDoc.WriteTo(wrt);
-            wrt.Flush();
-            wrt.Close();
+            xml.Write(filename);
         }
     }
 }

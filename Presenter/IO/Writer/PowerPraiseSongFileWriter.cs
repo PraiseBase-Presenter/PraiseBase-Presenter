@@ -45,13 +45,9 @@ namespace Pbp.IO
 
         public override void Save(string filename, Song sng)
         {
-            var xmlDoc = new XmlDocument();
-            XmlDeclaration xmlDeclaration = xmlDoc.CreateXmlDeclaration("1.0", "UTF-8", null);
-            xmlDoc.AppendChild(xmlDeclaration);
-            xmlDoc.AppendChild(xmlDoc.CreateElement(XmlRootNodeName));
-
-            XmlElement xmlRoot = xmlDoc.DocumentElement;
-            xmlRoot.SetAttribute("version", SupportedFileFormatVersion);
+            XmlWriterHelper xml = new XmlWriterHelper(XmlRootNodeName, SupportedFileFormatVersion);
+            XmlElement xmlRoot = xml.Root;
+            XmlDocument xmlDoc = xml.Doc;
 
             xmlRoot.AppendChild(xmlDoc.CreateElement("general"));
             xmlRoot["general"].AppendChild(xmlDoc.CreateElement("title"));
@@ -176,7 +172,6 @@ namespace Pbp.IO
                 }
                 xmlRoot["information"]["source"]["text"]["line"].InnerText = sbooks;
             }
-
 
             // Formatting
             xmlRoot.AppendChild(xmlDoc.CreateElement("formatting"));
@@ -318,13 +313,7 @@ namespace Pbp.IO
             xmlRoot["formatting"]["borders"].AppendChild(xmlDoc.CreateElement("sourceright"));
             xmlRoot["formatting"]["borders"]["sourceright"].InnerText = "40";
 
-            XmlWriterSettings wrtStn = new XmlWriterSettings();
-            wrtStn.Encoding = Encoding.UTF8;
-            wrtStn.Indent = true;
-            XmlWriter wrt = XmlTextWriter.Create(filename, wrtStn);
-            xmlDoc.WriteTo(wrt);
-            wrt.Flush();
-            wrt.Close();
+            xml.Write(filename);
         }
     }
 }

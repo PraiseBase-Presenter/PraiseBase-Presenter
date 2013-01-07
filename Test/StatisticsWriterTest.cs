@@ -128,7 +128,7 @@ namespace Test
 
             expected.Dates.Add(date.ID, date);
 
-            target.write(filename, expected);
+            target.Write(filename, expected);
 
             Assert.IsTrue(FileEquals(filename, referenceFilename));
 

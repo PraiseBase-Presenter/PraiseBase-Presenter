@@ -1077,7 +1077,7 @@ namespace Pbp.Forms
                     sl.Items.Add(SongManager.Instance.SongList[(Guid)listViewSetList.Items[i].Tag].Song);
                 }
                 Pbp.IO.SetlistWriter swr = new Pbp.IO.SetlistWriter();
-                swr.write(dlg.FileName, sl);
+                swr.Write(dlg.FileName, sl);
             }
         }
 
