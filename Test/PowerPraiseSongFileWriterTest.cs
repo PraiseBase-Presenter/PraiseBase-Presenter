@@ -8,11 +8,11 @@ namespace Test
     
     
     /// <summary>
-    ///This is a test class for PowerPraiseSongFileReaderTest and is intended
-    ///to contain all PowerPraiseSongFileReaderTest Unit Tests
+    ///This is a test class for PowerPraiseSongFileWriterTest and is intended
+    ///to contain all PowerPraiseSongFileWriterTest Unit Tests
     ///</summary>
     [TestClass()]
-    public class PowerPraiseSongFileReaderTest
+    public class PowerPraiseSongFileWriterTest
     {
 
 
@@ -66,106 +66,106 @@ namespace Test
 
 
         /// <summary>
-        ///A test for PowerPraiseSongFileReader Constructor
+        ///A test for Save
         ///</summary>
         [TestMethod()]
-        public void PowerPraiseSongFileReaderConstructorTest()
+        public void SaveTest()
         {
+            PowerPraiseSongFileWriter target = new PowerPraiseSongFileWriter();
+            string referenceFilename = "powerpraise/Näher, mein Gott zu Dir.ppl";
+            string filename = "powerpraise/Näher, mein Gott zu Dir - neu.ppl";
 
-        }
-
-        /// <summary>
-        ///A test for load
-        ///</summary>
-        [TestMethod()]
-        public void loadTest()
-        {
-            PowerPraiseSongFileReader target = new PowerPraiseSongFileReader();
-            string filename = "powerpraise/Näher, mein Gott zu Dir.ppl";
-
-            Song expected = new Song();
-            expected.Title = "Näher, mein Gott, zu Dir";
-            expected.Language = "Deutsch";
-            expected.Themes.Add("Anbetung");
-            expected.Copyright = "Text und Musik: Lowell Mason, 1792-1872";
+            Song sng = new Song();
+            sng.Title = "Näher, mein Gott, zu Dir";
+            sng.Language = "Deutsch";
+            sng.Themes.Add("Anbetung");
+            sng.Copyright = "Text und Musik: Lowell Mason, 1792-1872";
             var sb = new SongBook();
             sb.Name = "grünes Buch 339";
-            expected.SongBooks.Add(sb);
+            sng.SongBooks.Add(sb);
 
             var part = new SongPart();
             part.Caption = "Teil 1";
-            var slide = new SongSlide(expected);
+            var slide = new SongSlide(sng);
             slide.Lines.Add("Näher, mein Gott, zu Dir,");
             slide.Lines.Add("sei meine Bitt'!");
             slide.Lines.Add("Näher, o Herr, zu Dir");
             slide.Lines.Add("mit jedem Schritt.");
             part.Slides.Add(slide);
-            slide = new SongSlide(expected);
+            slide = new SongSlide(sng);
             slide.Lines.Add("Nur an dem Herzen Dein");
             slide.Lines.Add("kann ich geborgen sein;");
             slide.Lines.Add("deshalb die Bitte mein:");
             slide.Lines.Add("Näher zu Dir!");
             part.Slides.Add(slide);
-            expected.Parts.Add(part);
+            sng.Parts.Add(part);
 
             part = new SongPart();
             part.Caption = "Teil 2";
-            slide = new SongSlide(expected);
+            slide = new SongSlide(sng);
             slide.Lines.Add("Näher, mein Gott, zu Dir!");
             slide.Lines.Add("Ein jeder Tag");
             slide.Lines.Add("soll es neu zeigen mir,");
             slide.Lines.Add("was er vermag:");
             part.Slides.Add(slide);
-            slide = new SongSlide(expected);
+            slide = new SongSlide(sng);
             slide.Lines.Add("Wie seiner Gnade Macht,");
             slide.Lines.Add("Erlösung hat gebracht,");
             slide.Lines.Add("in uns're Sündennacht.");
             slide.Lines.Add("Näher zu Dir!");
             part.Slides.Add(slide);
-            expected.Parts.Add(part);
+            sng.Parts.Add(part);
 
             part = new SongPart();
             part.Caption = "Teil 3";
-            slide = new SongSlide(expected);
-            slide = new SongSlide(expected);
+            slide = new SongSlide(sng);
+            slide = new SongSlide(sng);
             slide.Lines.Add("Näher, mein Gott, zu Dir!");
             slide.Lines.Add("Dich bet' ich an.");
             slide.Lines.Add("Wie vieles hast an mir,");
             slide.Lines.Add("Du doch getan!");
             part.Slides.Add(slide);
-            slide = new SongSlide(expected);
+            slide = new SongSlide(sng);
             slide.Lines.Add("Von Banden frei und los,");
             slide.Lines.Add("ruh' ich in Deinem Schoss.");
             slide.Lines.Add("Ja, Deine Gnad' ist gross!");
             slide.Lines.Add("Näher zu Dir!");
             part.Slides.Add(slide);
-            expected.Parts.Add(part);
+            sng.Parts.Add(part);
 
-            Song actual = target.Load(filename);
-            Assert.AreEqual(expected.Title, actual.Title, "Wrong song title");
-            Assert.AreEqual(expected.GUID, actual.GUID, "Wrong GUID");
-            Assert.AreEqual(expected.Language, actual.Language, "Wrong language");
-            Assert.AreEqual(expected.Themes[0], actual.Themes[0], "Wrong theme");
-            Assert.AreEqual(expected.Copyright, actual.Copyright, "Wrong copyright");
-            Assert.AreEqual(expected.SongBooks[0].Name, actual.SongBooks[0].Name, "Wrong songbook");
+            target.Save(filename, sng);
 
-            Assert.AreEqual(expected.Parts.Count, actual.Parts.Count, "Parts incomplete");
-            for (int i = 0; i < expected.Parts.Count; i++)
-            {
-                Assert.AreEqual(expected.Parts[i].Caption, actual.Parts[i].Caption, "Wrong verse name in verse "+i);
-                Assert.AreEqual(expected.Parts[i].Slides.Count, actual.Parts[i].Slides.Count, "Slides incomplete in verse " + i);
-                for (int j = 0; j < expected.Parts[i].Slides.Count; j++)
-                {
-                    Assert.AreEqual(expected.Parts[i].Slides[j].Lines.Count, actual.Parts[i].Slides[j].Lines.Count, "Slide lines incomplete in verse "+i+" slide "+j);
-                    for (int k = 0; k < expected.Parts[i].Slides[j].Lines.Count; k++)
-                    {
-                        Assert.AreEqual(expected.Parts[i].Slides[j].Lines[k], actual.Parts[i].Slides[j].Lines[k], "Wrong slide lyrics");
-                    }
-                }
+            try {
+                Pbp.Utils.FileUtils.FileEquals(filename, referenceFilename, true);
             }
+            catch (Exception e)
+            {
+                Assert.Fail("Written file is not the same as the original! " + e.Message);
+            }
+        }
 
-            Assert.IsTrue(actual.SearchText.Contains("näher mein gott zu dir"));
-            Assert.IsTrue(actual.SearchText.Contains("geborgen"));
+        /// <summary>
+        ///A test for FileTypeDescription
+        ///</summary>
+        [TestMethod()]
+        public void FileTypeDescriptionTest()
+        {
+            PowerPraiseSongFileWriter target = new PowerPraiseSongFileWriter(); // TODO: Initialize to an appropriate value
+            string actual;
+            actual = target.FileTypeDescription;
+            Assert.AreEqual(actual, "PowerPraise Lied");
+        }
+
+        /// <summary>
+        ///A test for FileExtension
+        ///</summary>
+        [TestMethod()]
+        public void FileExtensionTest()
+        {
+            PowerPraiseSongFileWriter target = new PowerPraiseSongFileWriter(); // TODO: Initialize to an appropriate value
+            string actual;
+            actual = target.FileExtension;
+            Assert.AreEqual(actual, ".ppl");
         }
     }
 }
