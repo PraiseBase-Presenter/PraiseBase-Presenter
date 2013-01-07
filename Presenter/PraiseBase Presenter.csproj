@@ -101,6 +101,9 @@
     <Compile Include="DataObjects\Bible\Chapter.cs" />
     <Compile Include="DataObjects\Bible\Verse.cs" />
     <Compile Include="DataObjects\Bible\VerseSelection.cs" />
+    <Compile Include="DataObjects\Statistics\StatisticsItem.cs" />
+    <Compile Include="DataObjects\Statistics\StatisticsDate.cs" />
+    <Compile Include="DataObjects\Statistics\Statistics.cs" />
     <Compile Include="DataObjects\Setlist.cs" />
     <Compile Include="DataObjects\Song\QualityAssuranceIndicator.cs" />
     <Compile Include="DataObjects\Song\Song.cs" />
@@ -115,9 +118,11 @@
     <Compile Include="DataObjects\TagList.cs" />
     <Compile Include="Editor.cs" />
     <Compile Include="IO\Reader\CcliUsrSongFileReader.cs" />
+    <Compile Include="IO\Reader\StatisticsReader.cs" />
     <Compile Include="IO\Reader\SongFileReaderFactory.cs" />
     <Compile Include="IO\Reader\OpenLyricsSongFileReader.cs" />
     <Compile Include="IO\Reader\PowerPraiseSongFileReader.cs" />
+    <Compile Include="IO\Writer\StatisticsWriter.cs" />
     <Compile Include="IO\Writer\PowerPraiseSongFileWriter.cs" />
     <Compile Include="IO\Reader\SetlistReader.cs" />
     <Compile Include="IO\Writer\SetlistWriter.cs" />
@@ -352,7 +357,9 @@
     <None Include="Resources\Application\leinwand16.png" />
     <None Include="Resources\Application\leinwand16_no.png" />
     <Content Include="Resources\Dist\Songs\A Mighty Fortress Is Our God.ppl" />
-    <Content Include="Resources\Dist\Songs\Jesus is my Lord.ppl" />
+    <None Include="Resources\Dist\Songs\Allein Gott in der Hoeh.ppl" />
+    <None Include="Resources\Dist\Songs\Näher, mein Gott zu Dir.ppl" />
+    <None Include="Resources\Dist\Songs\You are so faithful.ppl" />
     <None Include="Resources\Doc\License.rtf" />
   </ItemGroup>
   <ItemGroup>

@@ -70,6 +70,8 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <Compile Include="StatisticsReaderTest.cs" />
+    <Compile Include="StatisticsWriterTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Presenter\PraiseBase Presenter.csproj">
@@ -98,7 +100,11 @@
     <Content Include="Resources\openlyrics\simple.xml">
       <SubType>Designer</SubType>
     </Content>
+    <Content Include="Resources\statistics\statistics.xml">
+      <SubType>Designer</SubType>
+    </Content>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

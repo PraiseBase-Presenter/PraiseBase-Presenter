@@ -1,17 +1,17 @@
-<?xml version="1.0" encoding="ISO-8859-1"?>
+ï»¿<?xml version="1.0" encoding="UTF-8"?>
 <ppl version="3.0">
   <general>
-    <title>Allein Gott in der Höh</title>
+    <title>Allein Gott in der HÃ¶h</title>
     <category>Anbetung</category>
     <language>Deutsch</language>
   </general>
   <songtext>
     <part caption="Strophe 1">
       <slide mainsize="30" backgroundnr="0">
-        <line>Allein Gott in der Höh sei Ehr</line>
-        <line>und Dank für seine Gnade</line>
+        <line>Allein Gott in der HÃ¶h sei Ehr</line>
+        <line>und Dank fÃ¼r seine Gnade</line>
         <line>darum, dass nun und nimmermehr</line>
-        <line>uns rühren kann ein Schade.</line>
+        <line>uns rÃ¼hren kann ein Schade.</line>
       </slide>
       <slide mainsize="30" backgroundnr="0">
         <line>Ein Wohlgefalln</line>
@@ -37,7 +37,7 @@
     <part caption="Strophe 3">
       <slide mainsize="30" backgroundnr="0">
         <line>O Jesu Christe, Gottes Sohn,</line>
-        <line>für uns ein Mensch geboren,</line>
+        <line>fÃ¼r uns ein Mensch geboren,</line>
         <line>gesandt von Deines Vaters Thron,</line>
         <line>zu retten, was verloren:</line>
       </slide>
@@ -67,7 +67,7 @@
     <source>
       <position>firstslide</position>
       <text>
-        <line>grünes Buch 4</line>
+        <line>grÃ¼nes Buch 4</line>
       </text>
     </source>
   </information>

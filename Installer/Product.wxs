@@ -116,9 +116,15 @@
           <File Id="A_Mighty_Fortress_Is_Our_God.ppl"
                 Name="A Mighty Fortress Is Our God.ppl"
                 Source="$(var.PraiseBase_Presenter.ProjectDir)Resources\Dist\Songs\A Mighty Fortress Is Our God.ppl" />
-          <File Id="Jesus_is_my_Lord.ppl"
-                Name="Jesus is my Lord.ppl"
-                Source="$(var.PraiseBase_Presenter.ProjectDir)Resources\Dist\Songs\Jesus is my Lord.ppl" />
+          <File Id="Allein_Gott_in_der_Hoeh_ppl"
+                Name="Allein Gott in der Hoeh.ppl"
+                Source="$(var.PraiseBase_Presenter.ProjectDir)Resources\Dist\Songs\Allein Gott in der Hoeh.ppl" />
+          <File Id="You_are_so_faithful_ppl"
+                Name="You are so faithful.ppl"
+                Source="$(var.PraiseBase_Presenter.ProjectDir)Resources\Dist\Songs\You are so faithful.ppl" />
+          <File Id="Naeher_mein_Gott_zu_Dir_ppl"
+                Name="Näher, mein Gott zu Dir.ppl"
+                Source="$(var.PraiseBase_Presenter.ProjectDir)Resources\Dist\Songs\Näher, mein Gott zu Dir.ppl" />
         </Component>
       </Directory>
       <Directory Id="BiblesFolder" Name="Bibles">

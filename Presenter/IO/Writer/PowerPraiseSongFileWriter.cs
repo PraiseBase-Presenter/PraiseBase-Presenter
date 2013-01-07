@@ -46,11 +46,10 @@ namespace Pbp.IO
         public override void Save(string filename, Song sng)
         {
             var xmlDoc = new XmlDocument();
-
             XmlDeclaration xmlDeclaration = xmlDoc.CreateXmlDeclaration("1.0", "UTF-8", null);
             xmlDoc.AppendChild(xmlDeclaration);
-
             xmlDoc.AppendChild(xmlDoc.CreateElement(XmlRootNodeName));
+
             XmlElement xmlRoot = xmlDoc.DocumentElement;
             xmlRoot.SetAttribute("version", SupportedFileFormatVersion);
 

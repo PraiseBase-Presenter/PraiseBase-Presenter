@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="ISO-8859-1"?>
+ï»¿<?xml version="1.0" encoding="UTF-8"?>
 <ppl version="3.0">
   <general>
     <title>You are so faithful</title>
@@ -61,27 +61,27 @@
         <line>You are so caring</line>
         <line>so caring, so caring.</line>
         <translation>Du sorgst so gut</translation>
-        <translation>Du kümmerst dich um uns.</translation>
+        <translation>Du kÃ¼mmerst dich um uns.</translation>
       </slide>
       <slide mainsize="30" backgroundnr="0">
         <line>You are so caring</line>
         <line>so caring, so caring.</line>
         <translation>Du sorgst so gut</translation>
-        <translation>Du kümmerst dich um uns.</translation>
+        <translation>Du kÃ¼mmerst dich um uns.</translation>
       </slide>
     </part>
     <part caption="Strophe 4">
       <slide mainsize="30" backgroundnr="0">
         <line>You are so mighty</line>
         <line>so mighty, so mighty.</line>
-        <translation>Du bist so mächtig</translation>
-        <translation>so mächtig, so mächtig.</translation>
+        <translation>Du bist so mÃ¤chtig</translation>
+        <translation>so mÃ¤chtig, so mÃ¤chtig.</translation>
       </slide>
       <slide mainsize="30" backgroundnr="0">
         <line>You are so mighty</line>
         <line>so mighty, so mighty.</line>
-        <translation>Du bist so mächtig</translation>
-        <translation>so mächtig, so mächtig.</translation>
+        <translation>Du bist so mÃ¤chtig</translation>
+        <translation>so mÃ¤chtig, so mÃ¤chtig.</translation>
       </slide>
     </part>
   </songtext>

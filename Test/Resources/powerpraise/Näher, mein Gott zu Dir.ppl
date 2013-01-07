@@ -1,42 +1,42 @@
-<?xml version="1.0" encoding="ISO-8859-1"?>
+ï»¿<?xml version="1.0" encoding="UTF-8"?>
 <ppl version="3.0">
   <general>
-    <title>Näher, mein Gott, zu Dir</title>
+    <title>NÃ¤her, mein Gott, zu Dir</title>
     <category>Anbetung</category>
     <language>Deutsch</language>
   </general>
   <songtext>
     <part caption="Teil 1">
       <slide mainsize="42" backgroundnr="0">
-        <line>Näher, mein Gott, zu Dir,</line>
+        <line>NÃ¤her, mein Gott, zu Dir,</line>
         <line>sei meine Bitt'!</line>
-        <line>Näher, o Herr, zu Dir</line>
+        <line>NÃ¤her, o Herr, zu Dir</line>
         <line>mit jedem Schritt.</line>
       </slide>
       <slide mainsize="44" backgroundnr="0">
         <line>Nur an dem Herzen Dein</line>
         <line>kann ich geborgen sein;</line>
         <line>deshalb die Bitte mein:</line>
-        <line>Näher zu Dir!</line>
+        <line>NÃ¤her zu Dir!</line>
       </slide>
     </part>
     <part caption="Teil 2">
       <slide mainsize="42" backgroundnr="0">
-        <line>Näher, mein Gott, zu Dir!</line>
+        <line>NÃ¤her, mein Gott, zu Dir!</line>
         <line>Ein jeder Tag</line>
         <line>soll es neu zeigen mir,</line>
         <line>was er vermag:</line>
       </slide>
       <slide mainsize="42" backgroundnr="0">
         <line>Wie seiner Gnade Macht,</line>
-        <line>Erlösung hat gebracht,</line>
-        <line>in uns're Sündennacht.</line>
-        <line>Näher zu Dir!</line>
+        <line>ErlÃ¶sung hat gebracht,</line>
+        <line>in uns're SÃ¼ndennacht.</line>
+        <line>NÃ¤her zu Dir!</line>
       </slide>
     </part>
     <part caption="Teil 3">
       <slide mainsize="42" backgroundnr="0">
-        <line>Näher, mein Gott, zu Dir!</line>
+        <line>NÃ¤her, mein Gott, zu Dir!</line>
         <line>Dich bet' ich an.</line>
         <line>Wie vieles hast an mir,</line>
         <line>Du doch getan!</line>
@@ -45,7 +45,7 @@
         <line>Von Banden frei und los,</line>
         <line>ruh' ich in Deinem Schoss.</line>
         <line>Ja, Deine Gnad' ist gross!</line>
-        <line>Näher zu Dir!</line>
+        <line>NÃ¤her zu Dir!</line>
       </slide>
     </part>
   </songtext>
@@ -64,7 +64,7 @@
     <source>
       <position>firstslide</position>
       <text>
-        <line>grünes Buch 339</line>
+        <line>grÃ¼nes Buch 339</line>
       </text>
     </source>
   </information>
