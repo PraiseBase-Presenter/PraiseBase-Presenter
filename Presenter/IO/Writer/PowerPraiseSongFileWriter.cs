@@ -30,7 +30,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Xml;
 using Pbp.Data.Song;
-using System.Drawing;
+using Pbp.Data;
 
 namespace Pbp.IO
 {
@@ -46,20 +46,16 @@ namespace Pbp.IO
 
         public override void Save(string filename, Song sng)
         {
+            // Fonts and colors (default values are consitent with the PowerPraise default song template)
+            TextFormatting mainText = sng.MainText != null ? sng.MainText : PowerPraiseConstants.MainText;
+            TextFormatting translationText = sng.TranslationText != null ? sng.TranslationText : PowerPraiseConstants.TranslationText;
+            TextFormatting copyrightText = sng.CopyrightText != null ? sng.CopyrightText : PowerPraiseConstants.CopyrightText;
+            TextFormatting sourceText = sng.SourceText != null ? sng.SourceText : PowerPraiseConstants.SourceText;
+
             XmlWriterHelper xml = new XmlWriterHelper(XmlRootNodeName, SupportedFileFormatVersion);
             XmlElement xmlRoot = xml.Root;
             XmlDocument xmlDoc = xml.Doc;
-
-            // Define default values if not set by song object
-            Font textFont = sng.TextFont != null ? sng.TextFont : new Font("Arial", 30, FontStyle.Bold | FontStyle.Italic);
-            Font translationFont = sng.TranslationFont != null ? sng.TranslationFont : new Font("Arial", 20, FontStyle.Regular);
-            Font copyrightFont = new Font("Arial", 14, FontStyle.Regular);
-            Font sourceFont = new Font("Arial", 30, FontStyle.Regular);
-            Color textColor = sng.TextColor != null ? sng.TextColor : Color.FromArgb(255, Color.FromArgb(16777215));
-            Color translationColor = sng.TranslationColor != null ? sng.TranslationColor : Color.FromArgb(255, Color.FromArgb(16777215));
-            Color copyrightColor = Color.FromArgb(255, Color.FromArgb(16777215));
-            Color sourceColor = Color.FromArgb(255, Color.FromArgb(16777215));
-
+            
             xmlRoot.AppendChild(xmlDoc.CreateElement("general"));
             xmlRoot["general"].AppendChild(xmlDoc.CreateElement("title"));
             xmlRoot["general"]["title"].InnerText = sng.Title;
@@ -89,7 +85,7 @@ namespace Pbp.IO
                 xmlRoot["general"].AppendChild(xmlDoc.CreateElement("ccliNo"));
                 xmlRoot["general"]["ccliNo"].InnerText = sng.CcliID;
             }
-            if (sng.GUID != null)
+            if (sng.GUID != null && sng.GUID != Guid.Empty)
             {
                 xmlRoot["general"].AppendChild(xmlDoc.CreateElement("guid"));
                 xmlRoot["general"]["guid"].InnerText = sng.GUID.ToString();
@@ -123,7 +119,7 @@ namespace Pbp.IO
                 foreach (SongSlide sld in prt.Slides)
                 {
                     XmlElement tn2 = xmlDoc.CreateElement("slide");
-                    tn2.SetAttribute("mainsize", textFont.Size.ToString());
+                    tn2.SetAttribute("mainsize", sld.TextSize > 0 ? sld.TextSize.ToString() : mainText.Font.Size.ToString());
                     tn2.SetAttribute("backgroundnr", (sld.ImageNumber - 1).ToString());
 
                     foreach (string ln in sld.Lines)
@@ -185,89 +181,43 @@ namespace Pbp.IO
             }
 
             // Formatting
+
+            Dictionary<string, TextFormatting> fmtMapping = new Dictionary<string, TextFormatting>();
+            fmtMapping.Add("maintext", mainText);
+            fmtMapping.Add("translationtext", translationText);
+            fmtMapping.Add("copyrighttext", copyrightText);
+            fmtMapping.Add("sourcetext", sourceText);
+
             xmlRoot.AppendChild(xmlDoc.CreateElement("formatting"));
-
             xmlRoot["formatting"].AppendChild(xmlDoc.CreateElement("font"));
-            xmlRoot["formatting"]["font"].AppendChild(xmlDoc.CreateElement("maintext"));
-            xmlRoot["formatting"]["font"]["maintext"].AppendChild(xmlDoc.CreateElement("name"));
-            xmlRoot["formatting"]["font"]["maintext"]["name"].InnerText = textFont.Name;
-            xmlRoot["formatting"]["font"]["maintext"].AppendChild(xmlDoc.CreateElement("size"));
-            xmlRoot["formatting"]["font"]["maintext"]["size"].InnerText = textFont.Size.ToString();
-            xmlRoot["formatting"]["font"]["maintext"].AppendChild(xmlDoc.CreateElement("bold"));
-            xmlRoot["formatting"]["font"]["maintext"]["bold"].InnerText = (textFont.Bold).ToString().ToLower();
-            xmlRoot["formatting"]["font"]["maintext"].AppendChild(xmlDoc.CreateElement("italic"));
-            xmlRoot["formatting"]["font"]["maintext"]["italic"].InnerText = (textFont.Italic).ToString().ToLower();
-            xmlRoot["formatting"]["font"]["maintext"].AppendChild(xmlDoc.CreateElement("color"));
-            xmlRoot["formatting"]["font"]["maintext"]["color"].InnerText =
-                (16777216 + textColor.ToArgb()).ToString();
-            xmlRoot["formatting"]["font"]["maintext"].AppendChild(xmlDoc.CreateElement("outline"));
-            xmlRoot["formatting"]["font"]["maintext"]["outline"].InnerText = "25";
-            xmlRoot["formatting"]["font"]["maintext"].AppendChild(xmlDoc.CreateElement("shadow"));
-            xmlRoot["formatting"]["font"]["maintext"]["shadow"].InnerText = "20";
 
-            xmlRoot["formatting"]["font"].AppendChild(xmlDoc.CreateElement("translationtext"));
-            xmlRoot["formatting"]["font"]["translationtext"].AppendChild(xmlDoc.CreateElement("name"));
-            xmlRoot["formatting"]["font"]["translationtext"]["name"].InnerText = translationFont.Name;
-            xmlRoot["formatting"]["font"]["translationtext"].AppendChild(xmlDoc.CreateElement("size"));
-            xmlRoot["formatting"]["font"]["translationtext"]["size"].InnerText = translationFont.Size.ToString();
-            xmlRoot["formatting"]["font"]["translationtext"].AppendChild(xmlDoc.CreateElement("bold"));
-            xmlRoot["formatting"]["font"]["translationtext"]["bold"].InnerText =
-                (translationFont.Bold).ToString().ToLower();
-            xmlRoot["formatting"]["font"]["translationtext"].AppendChild(xmlDoc.CreateElement("italic"));
-            xmlRoot["formatting"]["font"]["translationtext"]["italic"].InnerText =
-                (translationFont.Italic).ToString().ToLower();
-            xmlRoot["formatting"]["font"]["translationtext"].AppendChild(xmlDoc.CreateElement("color"));
-            xmlRoot["formatting"]["font"]["translationtext"]["color"].InnerText =
-                (16777216 + translationColor.ToArgb()).ToString();
-            xmlRoot["formatting"]["font"]["translationtext"].AppendChild(xmlDoc.CreateElement("outline"));
-            xmlRoot["formatting"]["font"]["translationtext"]["outline"].InnerText = "25";
-            xmlRoot["formatting"]["font"]["translationtext"].AppendChild(xmlDoc.CreateElement("shadow"));
-            xmlRoot["formatting"]["font"]["translationtext"]["shadow"].InnerText = "20";
+            foreach (var f in fmtMapping)
+            {
+                xmlRoot["formatting"]["font"].AppendChild(xmlDoc.CreateElement(f.Key));
+                xmlRoot["formatting"]["font"][f.Key].AppendChild(xmlDoc.CreateElement("name"));
+                xmlRoot["formatting"]["font"][f.Key]["name"].InnerText = f.Value.Font.Name;
+                xmlRoot["formatting"]["font"][f.Key].AppendChild(xmlDoc.CreateElement("size"));
+                xmlRoot["formatting"]["font"][f.Key]["size"].InnerText = f.Value.Font.Size.ToString();
+                xmlRoot["formatting"]["font"][f.Key].AppendChild(xmlDoc.CreateElement("bold"));
+                xmlRoot["formatting"]["font"][f.Key]["bold"].InnerText = (f.Value.Font.Bold).ToString().ToLower();
+                xmlRoot["formatting"]["font"][f.Key].AppendChild(xmlDoc.CreateElement("italic"));
+                xmlRoot["formatting"]["font"][f.Key]["italic"].InnerText = (f.Value.Font.Italic).ToString().ToLower();
+                xmlRoot["formatting"]["font"][f.Key].AppendChild(xmlDoc.CreateElement("color"));
+                xmlRoot["formatting"]["font"][f.Key]["color"].InnerText = (16777216 + f.Value.Color.ToArgb()).ToString();
+                xmlRoot["formatting"]["font"][f.Key].AppendChild(xmlDoc.CreateElement("outline"));
+                xmlRoot["formatting"]["font"][f.Key]["outline"].InnerText = f.Value.Outline.ToString();
+                xmlRoot["formatting"]["font"][f.Key].AppendChild(xmlDoc.CreateElement("shadow"));
+                xmlRoot["formatting"]["font"][f.Key]["shadow"].InnerText = f.Value.Shadow.ToString();
+            }
 
-            xmlRoot["formatting"]["font"].AppendChild(xmlDoc.CreateElement("copyrighttext"));
-            xmlRoot["formatting"]["font"]["copyrighttext"].AppendChild(xmlDoc.CreateElement("name"));
-            xmlRoot["formatting"]["font"]["copyrighttext"]["name"].InnerText = copyrightFont.Name;
-            xmlRoot["formatting"]["font"]["copyrighttext"].AppendChild(xmlDoc.CreateElement("size"));
-            xmlRoot["formatting"]["font"]["copyrighttext"]["size"].InnerText = copyrightFont.Size.ToString();
-            xmlRoot["formatting"]["font"]["copyrighttext"].AppendChild(xmlDoc.CreateElement("bold"));
-            xmlRoot["formatting"]["font"]["copyrighttext"]["bold"].InnerText =
-                (copyrightFont.Bold).ToString().ToLower();
-            xmlRoot["formatting"]["font"]["copyrighttext"].AppendChild(xmlDoc.CreateElement("italic"));
-            xmlRoot["formatting"]["font"]["copyrighttext"]["italic"].InnerText =
-                (copyrightFont.Italic).ToString().ToLower();
-            xmlRoot["formatting"]["font"]["copyrighttext"].AppendChild(xmlDoc.CreateElement("color"));
-            xmlRoot["formatting"]["font"]["copyrighttext"]["color"].InnerText =
-                (16777216 + copyrightColor.ToArgb()).ToString();
-            xmlRoot["formatting"]["font"]["copyrighttext"].AppendChild(xmlDoc.CreateElement("outline"));
-            xmlRoot["formatting"]["font"]["copyrighttext"]["outline"].InnerText = "25";
-            xmlRoot["formatting"]["font"]["copyrighttext"].AppendChild(xmlDoc.CreateElement("shadow"));
-            xmlRoot["formatting"]["font"]["copyrighttext"]["shadow"].InnerText = "20";
-
-            xmlRoot["formatting"]["font"].AppendChild(xmlDoc.CreateElement("sourcetext"));
-            xmlRoot["formatting"]["font"]["sourcetext"].AppendChild(xmlDoc.CreateElement("name"));
-            xmlRoot["formatting"]["font"]["sourcetext"]["name"].InnerText = sourceFont.Name;
-            xmlRoot["formatting"]["font"]["sourcetext"].AppendChild(xmlDoc.CreateElement("size"));
-            xmlRoot["formatting"]["font"]["sourcetext"]["size"].InnerText = sourceFont.Size.ToString();
-            xmlRoot["formatting"]["font"]["sourcetext"].AppendChild(xmlDoc.CreateElement("bold"));
-            xmlRoot["formatting"]["font"]["sourcetext"]["bold"].InnerText =
-                (sourceFont.Bold).ToString().ToLower();
-            xmlRoot["formatting"]["font"]["sourcetext"].AppendChild(xmlDoc.CreateElement("italic"));
-            xmlRoot["formatting"]["font"]["sourcetext"]["italic"].InnerText =
-                (sourceFont.Italic).ToString().ToLower();
-            xmlRoot["formatting"]["font"]["sourcetext"].AppendChild(xmlDoc.CreateElement("color"));
-            xmlRoot["formatting"]["font"]["sourcetext"]["color"].InnerText =
-                (16777216 + sourceColor.ToArgb()).ToString();
-            xmlRoot["formatting"]["font"]["sourcetext"].AppendChild(xmlDoc.CreateElement("outline"));
-            xmlRoot["formatting"]["font"]["sourcetext"]["outline"].InnerText = "25";
-            xmlRoot["formatting"]["font"]["sourcetext"].AppendChild(xmlDoc.CreateElement("shadow"));
-            xmlRoot["formatting"]["font"]["sourcetext"]["shadow"].InnerText = "20";
-
+            // Outline
             xmlRoot["formatting"]["font"].AppendChild(xmlDoc.CreateElement("outline"));
             xmlRoot["formatting"]["font"]["outline"].AppendChild(xmlDoc.CreateElement("enabled"));
             xmlRoot["formatting"]["font"]["outline"]["enabled"].InnerText = "true";
             xmlRoot["formatting"]["font"]["outline"].AppendChild(xmlDoc.CreateElement("color"));
             xmlRoot["formatting"]["font"]["outline"]["color"].InnerText = "0";
 
+            // Shadow
             xmlRoot["formatting"]["font"].AppendChild(xmlDoc.CreateElement("shadow"));
             xmlRoot["formatting"]["font"]["shadow"].AppendChild(xmlDoc.CreateElement("enabled"));
             xmlRoot["formatting"]["font"]["shadow"]["enabled"].InnerText = "true";
@@ -276,6 +226,7 @@ namespace Pbp.IO
             xmlRoot["formatting"]["font"]["shadow"].AppendChild(xmlDoc.CreateElement("direction"));
             xmlRoot["formatting"]["font"]["shadow"]["direction"].InnerText = "125";
 
+            // Backgrounds
             xmlRoot["formatting"].AppendChild(xmlDoc.CreateElement("background"));
             foreach (string imp in usedImages)
             {
@@ -283,13 +234,15 @@ namespace Pbp.IO
                 tn.InnerText = imp;
                 xmlRoot["formatting"]["background"].AppendChild(tn);
             }
-            xmlRoot["formatting"].AppendChild(xmlDoc.CreateElement("linespacing"));
 
+            // Linespacing
+            xmlRoot["formatting"].AppendChild(xmlDoc.CreateElement("linespacing"));
             xmlRoot["formatting"]["linespacing"].AppendChild(xmlDoc.CreateElement("main"));
             xmlRoot["formatting"]["linespacing"].AppendChild(xmlDoc.CreateElement("translation"));
-            xmlRoot["formatting"]["linespacing"]["main"].InnerText = sng.TextLineSpacing.ToString();
-            xmlRoot["formatting"]["linespacing"]["translation"].InnerText = sng.TextLineSpacing.ToString();
+            xmlRoot["formatting"]["linespacing"]["main"].InnerText = mainText.LineSpacing.ToString();
+            xmlRoot["formatting"]["linespacing"]["translation"].InnerText = translationText.LineSpacing.ToString();
 
+            // Orientation
             xmlRoot["formatting"].AppendChild(xmlDoc.CreateElement("textorientation"));
             xmlRoot["formatting"]["textorientation"].AppendChild(xmlDoc.CreateElement("horizontal"));
             if (sng.Parts[0].Slides[0].HorizontalAlign == Song.SongTextHorizontalAlign.Left)
@@ -308,6 +261,7 @@ namespace Pbp.IO
             xmlRoot["formatting"]["textorientation"].AppendChild(xmlDoc.CreateElement("transpos"));
             xmlRoot["formatting"]["textorientation"]["transpos"].InnerText = "inline";
 
+            // Borders
             xmlRoot["formatting"].AppendChild(xmlDoc.CreateElement("borders"));
             xmlRoot["formatting"]["borders"].AppendChild(xmlDoc.CreateElement("mainleft"));
             xmlRoot["formatting"]["borders"]["mainleft"].InnerText = "40";

@@ -101,6 +101,8 @@
     <Compile Include="DataObjects\Bible\Chapter.cs" />
     <Compile Include="DataObjects\Bible\Verse.cs" />
     <Compile Include="DataObjects\Bible\VerseSelection.cs" />
+    <Compile Include="DataObjects\TextAlign.cs" />
+    <Compile Include="DataObjects\TextFormatting.cs" />
     <Compile Include="DataObjects\Statistics\StatisticsItem.cs" />
     <Compile Include="DataObjects\Statistics\StatisticsDate.cs" />
     <Compile Include="DataObjects\Statistics\Statistics.cs" />
@@ -117,6 +119,7 @@
     <Compile Include="DataObjects\Song\SongTempo.cs" />
     <Compile Include="DataObjects\TagList.cs" />
     <Compile Include="Editor.cs" />
+    <Compile Include="IO\PowerPraiseConstants.cs" />
     <Compile Include="IO\Reader\CcliUsrSongFileReader.cs" />
     <Compile Include="IO\Reader\StatisticsReader.cs" />
     <Compile Include="IO\Reader\SongFileReaderFactory.cs" />

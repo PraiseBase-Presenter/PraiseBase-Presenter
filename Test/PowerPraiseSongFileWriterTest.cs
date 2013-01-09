@@ -83,6 +83,22 @@ namespace Test
             var sb = new SongBook();
             sb.Name = "grünes Buch 339";
             sng.SongBooks.Add(sb);
+            
+            sng.RelativeImagePaths.Add("Blumen\\Blume 3.jpg");
+
+            sng.MainText = PowerPraiseConstants.MainText;
+            sng.MainText.Font = new System.Drawing.Font("Times New Roman", 44, System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic);
+            sng.MainText.Shadow = 15;
+
+            sng.TranslationText = PowerPraiseConstants.TranslationText;
+            sng.TranslationText.Font = new System.Drawing.Font("Times New Roman", 20, System.Drawing.FontStyle.Regular);
+
+            sng.CopyrightText = PowerPraiseConstants.CopyrightText;
+            sng.CopyrightText.Font = new System.Drawing.Font("Times New Roman", 14, System.Drawing.FontStyle.Regular);
+
+            sng.SourceText = PowerPraiseConstants.SourceText;
+            sng.SourceText.Font = new System.Drawing.Font("Times New Roman", 30, System.Drawing.FontStyle.Regular);
+
 
             var part = new SongPart();
             part.Caption = "Teil 1";
@@ -91,12 +107,15 @@ namespace Test
             slide.Lines.Add("sei meine Bitt'!");
             slide.Lines.Add("Näher, o Herr, zu Dir");
             slide.Lines.Add("mit jedem Schritt.");
+            slide.ImageNumber = 1;
+            slide.TextSize = 42;
             part.Slides.Add(slide);
             slide = new SongSlide(sng);
             slide.Lines.Add("Nur an dem Herzen Dein");
             slide.Lines.Add("kann ich geborgen sein;");
             slide.Lines.Add("deshalb die Bitte mein:");
             slide.Lines.Add("Näher zu Dir!");
+            slide.ImageNumber = 1;
             part.Slides.Add(slide);
             sng.Parts.Add(part);
 
@@ -107,12 +126,16 @@ namespace Test
             slide.Lines.Add("Ein jeder Tag");
             slide.Lines.Add("soll es neu zeigen mir,");
             slide.Lines.Add("was er vermag:");
+            slide.ImageNumber = 1;
+            slide.TextSize = 42;
             part.Slides.Add(slide);
             slide = new SongSlide(sng);
             slide.Lines.Add("Wie seiner Gnade Macht,");
             slide.Lines.Add("Erlösung hat gebracht,");
             slide.Lines.Add("in uns're Sündennacht.");
             slide.Lines.Add("Näher zu Dir!");
+            slide.ImageNumber = 1;
+            slide.TextSize = 42;
             part.Slides.Add(slide);
             sng.Parts.Add(part);
 
@@ -124,12 +147,16 @@ namespace Test
             slide.Lines.Add("Dich bet' ich an.");
             slide.Lines.Add("Wie vieles hast an mir,");
             slide.Lines.Add("Du doch getan!");
+            slide.ImageNumber = 1;
+            slide.TextSize = 42;
             part.Slides.Add(slide);
             slide = new SongSlide(sng);
             slide.Lines.Add("Von Banden frei und los,");
             slide.Lines.Add("ruh' ich in Deinem Schoss.");
             slide.Lines.Add("Ja, Deine Gnad' ist gross!");
             slide.Lines.Add("Näher zu Dir!");
+            slide.ImageNumber = 1;
+            slide.TextSize = 42;
             part.Slides.Add(slide);
             sng.Parts.Add(part);
 

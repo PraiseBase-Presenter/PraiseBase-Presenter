@@ -33,6 +33,7 @@ using Pbp.Properties;
 using Pbp.Data.Song;
 using System.IO;
 using System.Text.RegularExpressions;
+using Pbp.Data;
 
 namespace Pbp.IO
 {
@@ -51,11 +52,21 @@ namespace Pbp.IO
             Song sng = new Song();
 
             // Default font settings if values in xml invalid
-            sng.TextFont = Settings.Default.ProjectionMasterFont;
-            sng.TextColor = Settings.Default.ProjectionMasterFontColor;
-            sng.TranslationFont = Settings.Default.ProjectionMasterFontTranslation;
-            sng.TranslationColor = Settings.Default.ProjectionMasterTranslationColor;
-            sng.TextLineSpacing = Settings.Default.ProjectionMasterLineSpacing;
+            sng.MainText = new TextFormatting(
+                Settings.Default.ProjectionMasterFont,
+                Settings.Default.ProjectionMasterFontColor, 30, 20, Settings.Default.ProjectionMasterLineSpacing);
+
+            sng.TranslationText = new TextFormatting(
+                Settings.Default.ProjectionMasterFontTranslation,
+                Settings.Default.ProjectionMasterTranslationColor, 30, 20, Settings.Default.ProjectionMasterLineSpacing);
+
+            sng.CopyrightText = new TextFormatting(
+                Settings.Default.ProjectionMasterFontTranslation,
+                Settings.Default.ProjectionMasterTranslationColor, 30, 20, Settings.Default.ProjectionMasterLineSpacing);
+
+            sng.SourceText = new TextFormatting(
+               Settings.Default.ProjectionMasterFontTranslation,
+               Settings.Default.ProjectionMasterTranslationColor, 30, 20, Settings.Default.ProjectionMasterLineSpacing);
 
             List<String> fields = new List<string>();
             List<String> words = new List<string>();

@@ -166,36 +166,6 @@ namespace Pbp.Data.Song
         public string SearchText { get; protected set; }
 
         /// <summary>
-        /// Gets or sets the text font
-        /// </summary>
-        public Font TextFont { get; set; }
-
-        /// <summary>
-        /// Gets or sets the text color
-        /// </summary>
-        public Color TextColor { get; set; }
-
-        /// <summary>
-        /// Gets or sets the font of tanslation text
-        /// </summary>
-        public Font TranslationFont { get; set; }
-
-        /// <summary>
-        /// Gets or sets the color of translation text
-        /// </summary>
-        public Color TranslationColor { get; set; }
-
-        /// <summary>
-        /// Gets or sets the additional height between lines
-        /// </summary>
-        public int TextLineSpacing { get; set; }
-
-        /// <summary>
-        /// Gets or sets the additional height between a line and its translation
-        /// </summary>
-        public int TranslationLineSpacing { get; set; }
-
-        /// <summary>
         /// Gets or sets the list of all parts in the song
         /// </summary>
         public SongPartList Parts { get; set; }
@@ -236,11 +206,29 @@ namespace Pbp.Data.Song
         /// </summary>
         public List<QualityAssuranceIndicators> QualityIssues { get; set; }
 
+        /// <summary>
+        /// Gets or sets the text font and color for the main text
+        /// </summary>
+        public TextFormatting MainText { get; set; }
+
+        /// <summary>
+        /// Gets or sets the font of tanslation text
+        /// </summary>
+        public TextFormatting TranslationText { get; set; }
+
+        /// <summary>
+        /// Gets or sets the font for the copyright text
+        /// </summary>
+        public TextFormatting CopyrightText { get; set; }
+
+        /// <summary>
+        /// Gets or sets the font for the source text
+        /// </summary>
+        public TextFormatting SourceText { get; set; }
+
         #endregion Fields
 
         #region Enums
-
-        #region SongTextHorizontalAlign enum
 
         /// <summary>
         /// Horizontal aligning of slide text
@@ -263,10 +251,6 @@ namespace Pbp.Data.Song
             Right
         }
 
-        #endregion SongTextHorizontalAlign enum
-
-        #region SongTextVerticalAlign enum
-
         /// <summary>
         /// Vertical aligning of slide text
         /// </summary>
@@ -287,25 +271,6 @@ namespace Pbp.Data.Song
             /// </summary>
             Bottom
         }
-
-        #endregion SongTextVerticalAlign enum
-
-        #region TextAlign enum
-
-        public enum TextAlign
-        {
-            TopLeft,
-            TopCenter,
-            TopRight,
-            MittleLeft,
-            MiddleCenter,
-            MiddleRight,
-            BottomLeft,
-            BottomCenter,
-            BottomRight
-        }
-
-        #endregion TextAlign enum
 
         #endregion Enums
 
@@ -427,11 +392,10 @@ namespace Pbp.Data.Song
             int code = Title.GetHashCode()
                        ^ Parts.GetHashCode()
                        ^ QualityIssues.GetHashCode()
-                       ^ TextFont.GetHashCode()
-                       ^ TextColor.GetHashCode()
-                       ^ TranslationColor.GetHashCode()
-                       ^ TranslationFont.GetHashCode()
-                       ^ TextLineSpacing.GetHashCode()
+                       ^ MainText.GetHashCode()
+                       ^ TranslationText.GetHashCode()
+                       ^ CopyrightText.GetHashCode()
+                       ^ SourceText.GetHashCode()
                        ^ Themes.GetHashCode();
 
             if (Language != null)
@@ -463,13 +427,12 @@ namespace Pbp.Data.Song
             info.AddValue("Parts", this.Parts);
             info.AddValue("Title", this.Title);
             info.AddValue("QualityIssues", this.QualityIssues);
-            info.AddValue("TextFont", this.TextFont.ToString());
-            info.AddValue("TextColor", this.TextColor);
-            info.AddValue("TranslationColor", this.TranslationColor);
-            info.AddValue("TranslationFont", this.TranslationFont.ToString());
+            info.AddValue("MainText", this.MainText.ToString());
+            info.AddValue("TranslationText", this.TranslationText.ToString());
+            info.AddValue("CopyrightText", this.CopyrightText.ToString());
+            info.AddValue("SourceText", this.SourceText.ToString());
             info.AddValue("Language", this.Language);
             info.AddValue("Comment", this.Comment);
-            info.AddValue("TextLineSpacing", this.TextLineSpacing);
             info.AddValue("Tags", this.Themes);
             info.AddValue("CcliID", this.CcliID);
             info.AddValue("Copyright", this.Copyright);

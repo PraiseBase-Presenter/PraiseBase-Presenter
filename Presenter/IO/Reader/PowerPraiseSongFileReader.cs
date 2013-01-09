@@ -29,8 +29,8 @@ using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Xml;
-using Pbp.Properties;
 using Pbp.Data.Song;
+using Pbp.Data;
 
 namespace Pbp.IO
 {
@@ -47,13 +47,6 @@ namespace Pbp.IO
         public override Song Load(string filename)
         {
             Song sng = new Song();
-
-            // Default font settings if values in xml invalid
-            sng.TextFont = Settings.Default.ProjectionMasterFont;
-            sng.TextColor = Settings.Default.ProjectionMasterFontColor;
-            sng.TranslationFont = Settings.Default.ProjectionMasterFontTranslation;
-            sng.TranslationColor = Settings.Default.ProjectionMasterTranslationColor;
-            sng.TextLineSpacing = Settings.Default.ProjectionMasterLineSpacing;
 
             // Init xml
             XmlDocument xmlDoc = new XmlDocument();
@@ -171,40 +164,69 @@ namespace Pbp.IO
                 }
             }
 
-            // Fonts
-            if (xmlRoot["formatting"]["font"]["maintext"] != null)
+
+            // Default font settings if values in xml invalid
+            sng.MainText = PowerPraiseConstants.MainText;
+            sng.TranslationText = PowerPraiseConstants.TranslationText;
+            sng.CopyrightText = PowerPraiseConstants.CopyrightText;
+            sng.SourceText = PowerPraiseConstants.SourceText;
+
+            Dictionary<string, TextFormatting> fmtMapping = new Dictionary<string,TextFormatting>();
+            fmtMapping.Add("maintext", sng.MainText);
+            fmtMapping.Add("translationtext", sng.TranslationText);
+            fmtMapping.Add("copyrighttext", sng.CopyrightText);
+            fmtMapping.Add("sourcetext", sng.SourceText);
+
+            // Iterate over all font formatting definitions
+            foreach (var f in fmtMapping)
             {
-                int trySize;
-                XmlElement tmpElem = xmlRoot["formatting"]["font"];
+                if (xmlRoot["formatting"]["font"][f.Key] != null)
+                {
+                    int trySize;
+                    XmlElement tmpElem = xmlRoot["formatting"]["font"];
 
-                int.TryParse(tmpElem["maintext"]["size"].InnerText, out trySize);
-                sng.TextFont = new Font(
-                    tmpElem["maintext"]["name"].InnerText,
-                    trySize > 0 ? trySize : Settings.Default.ProjectionMasterFont.Size,
-                    (FontStyle)
-                    ((int)(tmpElem["maintext"]["bold"].InnerText == "true" ? FontStyle.Bold : FontStyle.Regular) +
-                     (int)(tmpElem["maintext"]["italic"].InnerText == "true" ? FontStyle.Italic : FontStyle.Regular)));
+                    // Parse font
+                    int.TryParse(tmpElem[f.Key]["size"].InnerText, out trySize);
+                    f.Value.Font = new Font(
+                        tmpElem[f.Key]["name"].InnerText,
+                        trySize > 0 ? trySize : f.Value.Font.Size,
+                        (FontStyle)
+                        ((int)(tmpElem[f.Key]["bold"].InnerText == "true" ? FontStyle.Bold : FontStyle.Regular) +
+                         (int)(tmpElem[f.Key]["italic"].InnerText == "true" ? FontStyle.Italic : FontStyle.Regular)));
 
-                int.TryParse(tmpElem["translationtext"]["size"].InnerText, out trySize);
-                sng.TranslationFont = new Font(
-                    tmpElem["translationtext"]["name"].InnerText,
-                    trySize > 0 ? trySize : Settings.Default.ProjectionMasterFont.Size,
-                    (FontStyle)
-                    ((int)(tmpElem["translationtext"]["bold"].InnerText == "true" ? FontStyle.Bold : FontStyle.Regular) +
-                     (int)
-                     (tmpElem["translationtext"]["italic"].InnerText == "true" ? FontStyle.Italic : FontStyle.Regular)));
+                    // Parse color
+                    int.TryParse(tmpElem[f.Key]["color"].InnerText, out trySize);
+                    f.Value.Color = Color.FromArgb(255, Color.FromArgb(trySize));
 
-                int.TryParse(tmpElem["maintext"]["color"].InnerText, out trySize);
-                sng.TextColor = Color.FromArgb(255, Color.FromArgb(trySize));
-
-                int.TryParse(tmpElem["translationtext"]["color"].InnerText, out trySize);
-                sng.TranslationColor = Color.FromArgb(255, Color.FromArgb(trySize));
+                    // Parse outline width
+                    if (int.TryParse(tmpElem[f.Key]["outline"].InnerText, out trySize))
+                    {
+                        f.Value.Outline = trySize;
+                    }
+                    // Parse shadow width
+                    if (int.TryParse(tmpElem[f.Key]["shadow"].InnerText, out trySize))
+                    {
+                        f.Value.Shadow = trySize;
+                    }
+                }
             }
+
+            // Linespacing
             if (xmlRoot["formatting"]["linespacing"]["main"] != null)
             {
                 int trySize;
-                int.TryParse(xmlRoot["formatting"]["linespacing"]["main"].InnerText, out trySize);
-                sng.TextLineSpacing = trySize > 0 ? trySize : Settings.Default.ProjectionMasterLineSpacing;
+                if (int.TryParse(xmlRoot["formatting"]["linespacing"]["main"].InnerText, out trySize) && trySize > 0)
+                {
+                    sng.MainText.LineSpacing = trySize;
+                }
+            }
+            if (xmlRoot["formatting"]["linespacing"]["translation"] != null)
+            {
+                int trySize;
+                if (int.TryParse(xmlRoot["formatting"]["linespacing"]["translation"].InnerText, out trySize) && trySize > 0)
+                {
+                    sng.TranslationText.LineSpacing = trySize;
+                }
             }
 
             //
@@ -216,7 +238,9 @@ namespace Pbp.IO
                 if (elem.Name == "file")
                 {
                     if (ImageManager.Instance.ImageExists(elem.InnerText))
+                    {
                         sng.RelativeImagePaths.Add(elem.InnerText);
+                    }
                 }
             }
 
@@ -284,10 +308,13 @@ namespace Pbp.IO
                             tmpSlide.HorizontalAlign = sng.DefaultHorizAlign;
                             tmpSlide.VerticalAlign = sng.DefaultVertAlign;
 
+                            // Image number
                             int bgNr = Convert.ToInt32(slideElem.GetAttribute("backgroundnr")) + 1;
                             bgNr = bgNr < 0 ? 0 : bgNr;
                             bgNr = bgNr > sng.RelativeImagePaths.Count ? sng.RelativeImagePaths.Count : bgNr;
                             tmpSlide.ImageNumber = bgNr;
+                            
+                            // Lyrics
                             foreach (XmlElement lineElem in slideElem)
                             {
                                 if (lineElem.Name == "line")
@@ -299,6 +326,18 @@ namespace Pbp.IO
                                     tmpSlide.Translation.Add(lineElem.InnerText);
                                 }
                             }
+
+                            // Slide-specific text size 
+                            tmpSlide.TextSize = sng.MainText.Font.Size;
+                            if (slideElem.HasAttribute("mainsize"))
+                            {
+                                float trySize;
+                                if (float.TryParse(slideElem.GetAttribute("mainsize"), out trySize))
+                                {
+                                    tmpSlide.TextSize = trySize;
+                                }
+                            }
+
                             sng.Slides.Add(tmpSlide);
                             tmpPart.Slides.Add(tmpSlide);
                         }

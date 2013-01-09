@@ -45,19 +45,6 @@ namespace Pbp.Data.Song
         private readonly Song _ownerSong;
 
         /// <summary>
-        /// The slide constructor
-        /// </summary>
-        public SongSlide(Song ownerSong)
-        {
-            Lines = new List<string>();
-            Translation = new List<string>();
-            HorizontalAlign = Song.SongTextHorizontalAlign.Center;
-            VerticalAlign = Song.SongTextVerticalAlign.Center;
-            ImageNumber = 0;
-            _ownerSong = ownerSong;
-        }
-
-        /// <summary>
         /// All text lines of this slide
         /// </summary>
         public List<string> Lines { get; set; }
@@ -76,6 +63,11 @@ namespace Pbp.Data.Song
         /// Number of the slide image. If set to -1, no image is used
         /// </summary>
         public int ImageNumber { get; set; }
+
+        /// <summary>
+        /// Size of the main text. This is used to maintain compatibility with PowerPraise
+        /// </summary>
+        public float TextSize { get; set; }
 
         /// <summary>
         /// Indicates wether this slide has a translation
@@ -98,61 +90,18 @@ namespace Pbp.Data.Song
         /// <summary>
         /// The font object of this slide
         /// </summary>
-        public Font TextFont
+        public TextFormatting MainTextFormatting
         {
-            get { return _ownerSong.TextFont; }
+            get { return _ownerSong.MainText; }
         }
 
         /// <summary>
         /// The font object of the translation
         /// </summary>
-        public Font TranslationFont
+        public TextFormatting TranslationTextFormatting
         {
-            get { return _ownerSong.TranslationFont; }
+            get { return _ownerSong.TranslationText; }
         }
-
-        /// <summary>
-        /// The font color of this slide
-        /// </summary>
-        public Color TextColor
-        {
-            get { return _ownerSong.TextColor; }
-        }
-
-        /// <summary>
-        /// The translation font color
-        /// </summary>
-        public Color TranslationColor
-        {
-            get { return _ownerSong.TranslationColor; }
-        }
-
-        /// <summary>
-        /// The line spacing of the text
-        /// </summary>
-        public int TextLineSpacing
-        {
-            get { return _ownerSong.TextLineSpacing; }
-        }
-
-        #region ICloneable Members
-
-        /// <summary>
-        /// Clones this slide
-        /// </summary>
-        /// <returns>A duplicate of this slide</returns>
-        public object Clone()
-        {
-            var res = new SongSlide(_ownerSong) { HorizontalAlign = HorizontalAlign, ImageNumber = ImageNumber };
-            foreach (string obj in Lines)
-                res.Lines.Add(obj);
-            foreach (string obj in Translation)
-                res.Translation.Add(obj);
-            res.VerticalAlign = VerticalAlign;
-            return res;
-        }
-
-        #endregion ICloneable Members
 
         /// <summary>
         /// Gets or sets the text of this slide
@@ -211,6 +160,42 @@ namespace Pbp.Data.Song
                 }
             }
         }
+
+        /// <summary>
+        /// The slide constructor
+        /// </summary>
+        public SongSlide(Song ownerSong)
+        {
+            Lines = new List<string>();
+            Translation = new List<string>();
+            HorizontalAlign = Song.SongTextHorizontalAlign.Center;
+            VerticalAlign = Song.SongTextVerticalAlign.Center;
+            ImageNumber = 0;
+            _ownerSong = ownerSong;
+        }
+
+        #region ICloneable Members
+
+        /// <summary>
+        /// Clones this slide
+        /// </summary>
+        /// <returns>A duplicate of this slide</returns>
+        public object Clone()
+        {
+            var res = new SongSlide(_ownerSong) { HorizontalAlign = HorizontalAlign, ImageNumber = ImageNumber };
+            foreach (string obj in Lines)
+            {
+                res.Lines.Add(obj);
+            }
+            foreach (string obj in Translation)
+            {
+                res.Translation.Add(obj);
+            }
+            res.VerticalAlign = VerticalAlign;
+            return res;
+        }
+
+        #endregion ICloneable Members
 
         /// <summary>
         /// Returns the text on one line. This is mainly used

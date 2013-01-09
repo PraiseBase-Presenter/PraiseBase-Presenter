@@ -32,6 +32,7 @@ using System.Windows.Forms;
 using Pbp.Properties;
 using Pbp.Data.Song;
 using Pbp.IO;
+using Pbp.Data;
 
 namespace Pbp.Forms
 {
@@ -100,11 +101,22 @@ namespace Pbp.Forms
                 tmpPart.Slides.Add(new SongSlide(sng));
                 sng.Parts.Add(tmpPart);
 
-                sng.TextFont = Settings.Default.ProjectionMasterFont;
-                sng.TextColor = Settings.Default.ProjectionMasterFontColor;
-                sng.TranslationFont = Settings.Default.ProjectionMasterFontTranslation;
-                sng.TranslationColor = Settings.Default.ProjectionMasterTranslationColor;
-                sng.TextLineSpacing = Settings.Default.ProjectionMasterLineSpacing;
+                sng.MainText = new TextFormatting(
+                    Settings.Default.ProjectionMasterFont,
+                    Settings.Default.ProjectionMasterFontColor, 30, 20, Settings.Default.ProjectionMasterLineSpacing);
+
+                sng.TranslationText = new TextFormatting(
+                    Settings.Default.ProjectionMasterFontTranslation,
+                    Settings.Default.ProjectionMasterTranslationColor, 30, 20, Settings.Default.ProjectionMasterLineSpacing);
+
+                sng.CopyrightText = new TextFormatting(
+                    Settings.Default.ProjectionMasterFontTranslation,
+                    Settings.Default.ProjectionMasterTranslationColor, 30, 20, Settings.Default.ProjectionMasterLineSpacing);
+
+                sng.SourceText = new TextFormatting(
+                   Settings.Default.ProjectionMasterFontTranslation,
+                   Settings.Default.ProjectionMasterTranslationColor, 30, 20, Settings.Default.ProjectionMasterLineSpacing);
+
             }
 
             // Set window title
@@ -163,13 +175,13 @@ namespace Pbp.Forms
             checkBoxQATranslation.Checked = sng.GetQA(QualityAssuranceIndicators.Translation);
             checkBoxQASegmentation.Checked = sng.GetQA(QualityAssuranceIndicators.Segmentation);
 
-            labelFont.Text = sng.TextFont.Name + ", " + sng.TextFont.Style.ToString() + ", " + sng.TextFont.Size.ToString();
-            labelFontTranslation.Text = sng.TranslationFont.Name + ", " + sng.TranslationFont.Style.ToString() + ", " + sng.TranslationFont.Size.ToString();
-            buttonChooseProjectionForeColor.BackColor = sng.TextColor;
-            buttonTranslationColor.BackColor = sng.TranslationColor;
+            labelFont.Text = getFontNameString(sng.MainText.Font);
+            labelFontTranslation.Text = getFontNameString(sng.TranslationText.Font);
+            buttonChooseProjectionForeColor.BackColor = sng.MainText.Color;
+            buttonTranslationColor.BackColor = sng.TranslationText.Color;
 
-            trackBarLineSpacing.Value = sng.TextLineSpacing;
-            labelLineSpacing.Text = sng.TextLineSpacing.ToString();
+            trackBarLineSpacing.Value = sng.MainText.LineSpacing;
+            labelLineSpacing.Text = sng.MainText.LineSpacing.ToString();
 
             comboBoxLanguage.Items.Clear();
             comboBoxLanguage.Text = sng.Language;
@@ -190,6 +202,11 @@ namespace Pbp.Forms
                     checkedListBoxTags.Items.Add(str);
                 i++;
             }
+        }
+
+        protected String getFontNameString(Font f) 
+        {
+            return f.Name + ", " + f.Style.ToString() + ", " + f.Size.ToString();
         }
 
         public void populatePartList()
@@ -543,11 +560,11 @@ namespace Pbp.Forms
         private void buttonProjectionMasterFont_Click(object sender, EventArgs e)
         {
             FontDialog dlg = new FontDialog();
-            dlg.Font = sng.TextFont;
+            dlg.Font = sng.MainText.Font;
             if (dlg.ShowDialog() == DialogResult.OK)
             {
-                sng.TextFont = dlg.Font;
-                labelFont.Text = sng.TextFont.Name + ", " + sng.TextFont.Style.ToString() + ", " + sng.TextFont.Size.ToString();
+                sng.MainText.Font = dlg.Font;
+                labelFont.Text = getFontNameString(sng.MainText.Font);
                 previewSlide();
             }
         }
@@ -555,11 +572,11 @@ namespace Pbp.Forms
         private void buttonTranslationFont_Click(object sender, EventArgs e)
         {
             FontDialog dlg = new FontDialog();
-            dlg.Font = sng.TranslationFont;
+            dlg.Font = sng.TranslationText.Font;
             if (dlg.ShowDialog() == DialogResult.OK)
             {
-                sng.TranslationFont = dlg.Font;
-                labelFontTranslation.Text = sng.TranslationFont.Name + ", " + sng.TranslationFont.Style.ToString() + ", " + sng.TranslationFont.Size.ToString();
+                sng.TranslationText.Font = dlg.Font;
+                labelFontTranslation.Text = getFontNameString(sng.TranslationText.Font);
                 previewSlide();
             }
         }
@@ -567,11 +584,11 @@ namespace Pbp.Forms
         private void buttonChooseProjectionForeColor_Click(object sender, EventArgs e)
         {
             ColorDialog dlg = new ColorDialog();
-            dlg.Color = sng.TextColor;
+            dlg.Color = sng.MainText.Color;
             if (dlg.ShowDialog() == DialogResult.OK)
             {
-                sng.TextColor = dlg.Color;
-                buttonChooseProjectionForeColor.BackColor = sng.TextColor;
+                sng.MainText.Color = dlg.Color;
+                buttonChooseProjectionForeColor.BackColor = sng.MainText.Color;
                 previewSlide();
             }
         }
@@ -579,18 +596,18 @@ namespace Pbp.Forms
         private void buttonTranslationColor_Click(object sender, EventArgs e)
         {
             ColorDialog dlg = new ColorDialog();
-            dlg.Color = sng.TranslationColor;
+            dlg.Color = sng.TranslationText.Color;
             if (dlg.ShowDialog() == DialogResult.OK)
             {
-                sng.TranslationColor = dlg.Color;
-                buttonTranslationColor.BackColor = sng.TranslationColor;
+                sng.TranslationText.Color = dlg.Color;
+                buttonTranslationColor.BackColor = sng.TranslationText.Color;
                 previewSlide();
             }
         }
 
         private void trackBarLineSpacing_Scroll(object sender, EventArgs e)
         {
-            sng.TextLineSpacing = trackBarLineSpacing.Value;
+            sng.MainText.LineSpacing = trackBarLineSpacing.Value;
             labelLineSpacing.Text = trackBarLineSpacing.Value.ToString();
             previewSlide();
         }

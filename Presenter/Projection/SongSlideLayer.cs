@@ -68,11 +68,11 @@ namespace Pbp
                 }
                 else
                 {
-                    font = slide.TextFont;
-                    fontTr = slide.TranslationFont;
-                    lineSpacing = slide.TextLineSpacing;
-                    fontBrush = new SolidBrush(slide.TextColor);
-                    fontTranslationBrush = new SolidBrush(slide.TranslationColor);
+                    font = slide.MainTextFormatting.Font;
+                    fontTr = slide.TranslationTextFormatting.Font;
+                    lineSpacing = slide.MainTextFormatting.LineSpacing;
+                    fontBrush = new SolidBrush(slide.MainTextFormatting.Color);
+                    fontTranslationBrush = new SolidBrush(slide.TranslationTextFormatting.Color);
                 }
 
                 int padding = Settings.Default.ProjectionPadding;
