@@ -103,19 +103,38 @@ namespace Pbp.Forms
 
                 sng.MainText = new TextFormatting(
                     Settings.Default.ProjectionMasterFont,
-                    Settings.Default.ProjectionMasterFontColor, 30, 20, Settings.Default.ProjectionMasterLineSpacing);
+                    Settings.Default.ProjectionMasterFontColor,
+                    new TextOutline(30, Color.Black),
+                    new TextShadow(10, 20, 125, Color.Black),
+                    Settings.Default.ProjectionMasterLineSpacing);
 
                 sng.TranslationText = new TextFormatting(
                     Settings.Default.ProjectionMasterFontTranslation,
-                    Settings.Default.ProjectionMasterTranslationColor, 30, 20, Settings.Default.ProjectionMasterLineSpacing);
+                    Settings.Default.ProjectionMasterTranslationColor,
+                    new TextOutline(30, Color.Black),
+                    new TextShadow(10, 20, 125, Color.Black),
+                    Settings.Default.ProjectionMasterLineSpacing);
 
                 sng.CopyrightText = new TextFormatting(
                     Settings.Default.ProjectionMasterFontTranslation,
-                    Settings.Default.ProjectionMasterTranslationColor, 30, 20, Settings.Default.ProjectionMasterLineSpacing);
+                    Settings.Default.ProjectionMasterTranslationColor,
+                    new TextOutline(30, Color.Black),
+                    new TextShadow(10, 20, 125, Color.Black),
+                    Settings.Default.ProjectionMasterLineSpacing);
 
                 sng.SourceText = new TextFormatting(
                    Settings.Default.ProjectionMasterFontTranslation,
-                   Settings.Default.ProjectionMasterTranslationColor, 30, 20, Settings.Default.ProjectionMasterLineSpacing);
+                   Settings.Default.ProjectionMasterTranslationColor,
+                   new TextOutline(30, Color.Black),
+                   new TextShadow(10, 20, 125, Color.Black),
+                   Settings.Default.ProjectionMasterLineSpacing);
+
+                // TODO: Define a default in the configuration
+                sng.HorizontalTextOrientation = TextOrientationHorizontal.Center;
+                sng.VerticalTextOrientation = TextOrientationVertical.Middle;
+
+                sng.TextOutlineEnabled = true;
+                sng.TextShadowEnabled = true;
 
             }
 
@@ -182,6 +201,11 @@ namespace Pbp.Forms
 
             trackBarLineSpacing.Value = sng.MainText.LineSpacing;
             labelLineSpacing.Text = sng.MainText.LineSpacing.ToString();
+
+            comboBoxSlideHorizOrientation.DataSource = Enum.GetValues(typeof(TextOrientationHorizontal));
+            comboBoxSlideHorizOrientation.DataBindings.Add("SelectedItem", sng, "HorizontalTextOrientation", false, DataSourceUpdateMode.OnPropertyChanged);
+            comboBoxSlideVertOrientation.DataSource = Enum.GetValues(typeof(TextOrientationVertical));
+            comboBoxSlideVertOrientation.DataBindings.Add("SelectedItem", sng, "VerticalTextOrientation", false, DataSourceUpdateMode.OnPropertyChanged);
 
             comboBoxLanguage.Items.Clear();
             comboBoxLanguage.Text = sng.Language;
@@ -372,9 +396,6 @@ namespace Pbp.Forms
             textBoxSongTranslation.DataBindings.Clear();
             textBoxSongTranslation.DataBindings.Add("Text", sld, "TranslationText");
 
-            comboBoxSlideHorizOrientation.SelectedIndex = (int)sld.HorizontalAlign;
-            comboBoxSlideVertOrientation.SelectedIndex = (int)sld.VerticalAlign;
-
             pictureBoxPreview.Image = ImageManager.Instance.GetImage(sng.GetImage(sld.ImageNumber));
 
             currentPartId = partId;
@@ -387,8 +408,6 @@ namespace Pbp.Forms
             prt.Caption = caption;
             SongSlide sld = new SongSlide(sng);
             sld.ImageNumber = 0;
-            sld.HorizontalAlign = sng.DefaultHorizAlign;
-            sld.VerticalAlign = sng.DefaultVertAlign;
 
             prt.Slides.Add(sld);
             sng.Parts.Add(prt);
@@ -545,15 +564,11 @@ namespace Pbp.Forms
 
         private void comboBoxSlideHorizOrientation_SelectedIndexChanged(object sender, EventArgs e)
         {
-            sng.Parts[currentPartId].Slides[currentSlideId].HorizontalAlign = (Song.SongTextHorizontalAlign)comboBoxSlideHorizOrientation.SelectedIndex;
-            sng.DefaultHorizAlign = sng.Parts[currentPartId].Slides[currentSlideId].HorizontalAlign;
             previewSlide();
         }
 
         private void comboBoxSlideVertOrientation_SelectedIndexChanged(object sender, EventArgs e)
         {
-            sng.Parts[currentPartId].Slides[currentSlideId].VerticalAlign = (Song.SongTextVerticalAlign)comboBoxSlideVertOrientation.SelectedIndex;
-            sng.DefaultVertAlign = sng.Parts[currentPartId].Slides[currentSlideId].VerticalAlign;
             previewSlide();
         }
 

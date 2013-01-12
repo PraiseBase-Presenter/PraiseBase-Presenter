@@ -33,6 +33,7 @@ using System.Xml;
 using Pbp.Properties;
 using Pbp.Data.Song;
 using Pbp.Data;
+using System.Drawing;
 
 namespace Pbp.IO
 {
@@ -52,19 +53,31 @@ namespace Pbp.IO
 
             sng.MainText = new TextFormatting(
                 Settings.Default.ProjectionMasterFont,
-                Settings.Default.ProjectionMasterFontColor, 30, 20, Settings.Default.ProjectionMasterLineSpacing);
+                Settings.Default.ProjectionMasterFontColor, 
+                new TextOutline(30, Color.Black),
+                new TextShadow(10, 20, 125, Color.Black),
+                Settings.Default.ProjectionMasterLineSpacing);
 
             sng.TranslationText = new TextFormatting(
                 Settings.Default.ProjectionMasterFontTranslation,
-                Settings.Default.ProjectionMasterTranslationColor, 30, 20, Settings.Default.ProjectionMasterLineSpacing);
+                Settings.Default.ProjectionMasterTranslationColor,
+                new TextOutline(30, Color.Black),
+                new TextShadow(10, 20, 125, Color.Black),
+                Settings.Default.ProjectionMasterLineSpacing);
 
             sng.CopyrightText = new TextFormatting(
                 Settings.Default.ProjectionMasterFontTranslation,
-                Settings.Default.ProjectionMasterTranslationColor, 30, 20, Settings.Default.ProjectionMasterLineSpacing);
+                Settings.Default.ProjectionMasterTranslationColor,
+                new TextOutline(30, Color.Black),
+                new TextShadow(10, 20, 125, Color.Black),
+                Settings.Default.ProjectionMasterLineSpacing);
 
             sng.SourceText = new TextFormatting(
                Settings.Default.ProjectionMasterFontTranslation,
-               Settings.Default.ProjectionMasterTranslationColor, 30, 20, Settings.Default.ProjectionMasterLineSpacing);
+               Settings.Default.ProjectionMasterTranslationColor,
+               new TextOutline(30, Color.Black),
+               new TextShadow(10, 20, 125, Color.Black),
+               Settings.Default.ProjectionMasterLineSpacing);
 
             // Init xml
             XmlDocument xmlDoc = new XmlDocument();

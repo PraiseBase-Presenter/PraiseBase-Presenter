@@ -31,21 +31,26 @@ using System.Drawing;
 
 namespace Pbp.Data
 {
-    public class TextFormatting
+    public class SongTextBorders
     {
-        public Font Font { get; set; }
-        public Color Color { get; set; }
-        public TextOutline Outline { get; set; }
-        public TextShadow Shadow { get; set; }
-        public int LineSpacing { get; set; }
+        public int TextLeft { get; set; }
+        public int TextTop { get; set; }
+        public int TextRight { get; set; }
+        public int TextBottom { get; set; }
+        public int CopyrightBottom { get; set; }
+        public int SourceTop { get; set; }
+        public int SourceRight { get; set; }
 
-        public TextFormatting(Font font, Color color, TextOutline outline, TextShadow shadow, int lineSpacing)
+
+        public SongTextBorders(int textLeft, int textTop, int textRight, int textBottom, int copyrightBottom, int sourceTop, int sourceRight)
         {
-            Font = font;
-            Color = color;
-            Outline = outline;
-            Shadow = shadow;
-            LineSpacing = lineSpacing;
+            TextLeft = textLeft;
+            TextTop = textTop;
+            TextRight = textRight;
+            TextBottom = textBottom;
+            CopyrightBottom = copyrightBottom;
+            SourceTop = sourceTop;
+            SourceRight = sourceRight;
         }
 
         /// <summary>
@@ -55,12 +60,13 @@ namespace Pbp.Data
         /// <returns></returns>
         public override int GetHashCode()
         {
-            int code = Font.GetHashCode()
-                       ^ Color.GetHashCode()
-                       ^ Outline.GetHashCode()
-                       ^ Shadow.GetHashCode()
-                       ^ LineSpacing.GetHashCode();
-            return code;
+            return TextLeft.GetHashCode()
+                 ^ TextTop.GetHashCode()
+                 ^ TextRight.GetHashCode()
+                 ^ TextBottom.GetHashCode()
+                 ^ CopyrightBottom.GetHashCode()
+                 ^ SourceTop.GetHashCode()
+                 ^ SourceRight.GetHashCode();
         }
     }
 }

@@ -88,7 +88,7 @@ namespace Test
 
             sng.MainText = PowerPraiseConstants.MainText;
             sng.MainText.Font = new System.Drawing.Font("Times New Roman", 44, System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic);
-            sng.MainText.Shadow = 15;
+            sng.MainText.Shadow.Distance = 15;
 
             sng.TranslationText = PowerPraiseConstants.TranslationText;
             sng.TranslationText.Font = new System.Drawing.Font("Times New Roman", 20, System.Drawing.FontStyle.Regular);
@@ -99,6 +99,16 @@ namespace Test
             sng.SourceText = PowerPraiseConstants.SourceText;
             sng.SourceText.Font = new System.Drawing.Font("Times New Roman", 30, System.Drawing.FontStyle.Regular);
 
+            sng.HorizontalTextOrientation = Pbp.Data.TextOrientationHorizontal.Left;
+            sng.VerticalTextOrientation = Pbp.Data.TextOrientationVertical.Middle;
+            sng.TextOutlineEnabled = false;
+            sng.TextShadowEnabled = true;
+
+            sng.TextBorders = PowerPraiseConstants.TextBorders;
+            sng.TextBorders.TextLeft = 50;
+            sng.TextBorders.TextTop = 40;
+            sng.TextBorders.TextRight = 60;
+            sng.TextBorders.TextBottom = 70;
 
             var part = new SongPart();
             part.Caption = "Teil 1";
@@ -167,7 +177,7 @@ namespace Test
             }
             catch (Exception e)
             {
-                Assert.Fail("Written file is not the same as the original! " + e.Message);
+                Assert.Fail(e.Message);
             }
         }
 

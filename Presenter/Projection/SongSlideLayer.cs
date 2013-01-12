@@ -31,6 +31,7 @@ using System.Drawing.Drawing2D;
 using System.Drawing.Text;
 using Pbp.Properties;
 using Pbp.Data.Song;
+using Pbp.Data;
 
 namespace Pbp
 {
@@ -113,34 +114,31 @@ namespace Pbp
                 int lineHeight = (int)(strMeasure.Height / slide.Lines.Count);
 
                 // Horizontal stuff
-                switch (slide.HorizontalAlign)
+                switch (slide.HorizontalTextOrientation)
                 {
-                    case Song.SongTextHorizontalAlign.Left:
+                    case TextOrientationHorizontal.Left:
                         strFormat.Alignment = StringAlignment.Near;
                         break;
-
-                    case Song.SongTextHorizontalAlign.Center:
+                    case TextOrientationHorizontal.Center:
                         textStartX = w / 2;
                         strFormat.Alignment = StringAlignment.Center;
                         break;
-
-                    case Song.SongTextHorizontalAlign.Right:
+                    case TextOrientationHorizontal.Right:
                         textStartX = textStartX + usableWidth;
                         strFormat.Alignment = StringAlignment.Far;
                         break;
                 }
 
                 // Vertical stuff
-                switch (slide.VerticalAlign)
+                switch (slide.VerticalTextOrientation)
                 {
-                    case Song.SongTextVerticalAlign.Top:
+                    case TextOrientationVertical.Top:
+                        // Nothing to do
                         break;
-
-                    case Song.SongTextVerticalAlign.Center:
+                    case TextOrientationVertical.Middle:
                         textStartY = textStartY + (usableHeight / 2) - (usedHeight / 2);
                         break;
-
-                    case Song.SongTextVerticalAlign.Bottom:
+                    case TextOrientationVertical.Bottom:
                         textStartY = textStartY + usableHeight - usedHeight;
                         break;
                 }

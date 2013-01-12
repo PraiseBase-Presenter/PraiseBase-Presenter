@@ -27,7 +27,7 @@ namespace Pbp.Utils
                     {
                         if (throwException)
                         {
-                            throw new Exception("Difference at position " + i);
+                             throw new Exception("Difference at position " + i + "! " + FindDifference(path1, path2));
                         }
                         return false;
                     }
@@ -36,9 +36,27 @@ namespace Pbp.Utils
             }
             if (throwException)
             {
-                throw new Exception("File lenght not equal");
+                throw new Exception("File lenght not equal! " + FindDifference(path1, path2));
             }
             return false;
+        }
+
+        public static String FindDifference(string path1, string path2)
+        {
+            String[] lines1 = File.ReadAllLines(path1);
+            String[] lines2 = File.ReadAllLines(path2);
+            for (int j = 0; j < Math.Max(lines1.Length, lines2.Length); j++)
+            {
+                if (lines1.Length <= j || lines2.Length <= j)
+                {
+                    return String.Empty;
+                }
+                if (!lines1[j].Equals(lines2[j]))
+                {
+                    return "Difference at line " + j.ToString() + ": < " + lines1[j] + " > " + lines2[j];
+                }
+            }
+            return String.Empty;
         }
     }
 }

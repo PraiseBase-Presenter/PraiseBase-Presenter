@@ -126,6 +126,8 @@ namespace Pbp.IO
             //
 
             // Text orientation
+            sng.HorizontalTextOrientation = PowerPraiseConstants.HorizontalTextOrientation;
+            sng.VerticalTextOrientation = PowerPraiseConstants.VerticalTextOrientation;
             if (xmlRoot["formatting"]["textorientation"] != null)
             {
                 if (xmlRoot["formatting"]["textorientation"]["horizontal"] != null)
@@ -133,15 +135,15 @@ namespace Pbp.IO
                     switch (xmlRoot["formatting"]["textorientation"]["horizontal"].InnerText)
                     {
                         case "left":
-                            sng.DefaultHorizAlign = Song.SongTextHorizontalAlign.Left;
+                            sng.HorizontalTextOrientation = TextOrientationHorizontal.Left;
                             break;
 
                         case "center":
-                            sng.DefaultHorizAlign = Song.SongTextHorizontalAlign.Center;
+                            sng.HorizontalTextOrientation = TextOrientationHorizontal.Center;
                             break;
 
                         case "right":
-                            sng.DefaultHorizAlign = Song.SongTextHorizontalAlign.Right;
+                            sng.HorizontalTextOrientation = TextOrientationHorizontal.Right;
                             break;
                     }
                 }
@@ -150,20 +152,19 @@ namespace Pbp.IO
                     switch (xmlRoot["formatting"]["textorientation"]["vertical"].InnerText)
                     {
                         case "top":
-                            sng.DefaultVertAlign = Song.SongTextVerticalAlign.Top;
+                            sng.VerticalTextOrientation = TextOrientationVertical.Top;
                             break;
 
                         case "center":
-                            sng.DefaultVertAlign = Song.SongTextVerticalAlign.Center;
+                            sng.VerticalTextOrientation = TextOrientationVertical.Middle;
                             break;
 
                         case "bottom":
-                            sng.DefaultVertAlign = Song.SongTextVerticalAlign.Bottom;
+                            sng.VerticalTextOrientation = TextOrientationVertical.Bottom;
                             break;
                     }
                 }
             }
-
 
             // Default font settings if values in xml invalid
             sng.MainText = PowerPraiseConstants.MainText;
@@ -176,6 +177,20 @@ namespace Pbp.IO
             fmtMapping.Add("translationtext", sng.TranslationText);
             fmtMapping.Add("copyrighttext", sng.CopyrightText);
             fmtMapping.Add("sourcetext", sng.SourceText);
+
+            int tryColor;
+            Color outlineColor = sng.MainText.Outline.Color;
+            if (int.TryParse(xmlRoot["formatting"]["font"]["outline"]["color"].InnerText, out tryColor))
+            {
+                outlineColor = Color.FromArgb(255, Color.FromArgb(tryColor));
+            }
+            Color shadowColor = sng.MainText.Shadow.Color;
+            if (int.TryParse(xmlRoot["formatting"]["font"]["shadow"]["color"].InnerText, out tryColor))
+            {
+                shadowColor = Color.FromArgb(255, Color.FromArgb(tryColor));
+            }
+            int shadowDirection = sng.MainText.Shadow.Direction;
+            int.TryParse(xmlRoot["formatting"]["font"]["shadow"]["direction"].InnerText, out shadowDirection);
 
             // Iterate over all font formatting definitions
             foreach (var f in fmtMapping)
@@ -201,15 +216,22 @@ namespace Pbp.IO
                     // Parse outline width
                     if (int.TryParse(tmpElem[f.Key]["outline"].InnerText, out trySize))
                     {
-                        f.Value.Outline = trySize;
+                        f.Value.Outline.Width = trySize;
                     }
                     // Parse shadow width
                     if (int.TryParse(tmpElem[f.Key]["shadow"].InnerText, out trySize))
                     {
-                        f.Value.Shadow = trySize;
+                        f.Value.Shadow.Distance = trySize;
                     }
+                    f.Value.Outline.Color = outlineColor;
+                    f.Value.Shadow.Color = shadowColor;
+                    f.Value.Shadow.Direction = shadowDirection;
                 }
             }
+
+            // Enable or disable outline/shadow
+            sng.TextOutlineEnabled = (xmlRoot["formatting"]["font"]["outline"]["enabled"] != null && xmlRoot["formatting"]["font"]["outline"]["enabled"].InnerText == "true");
+            sng.TextShadowEnabled = (xmlRoot["formatting"]["font"]["shadow"]["enabled"] != null && xmlRoot["formatting"]["font"]["outline"]["enabled"].InnerText == "true");
 
             // Linespacing
             if (xmlRoot["formatting"]["linespacing"]["main"] != null)
@@ -226,6 +248,40 @@ namespace Pbp.IO
                 if (int.TryParse(xmlRoot["formatting"]["linespacing"]["translation"].InnerText, out trySize) && trySize > 0)
                 {
                     sng.TranslationText.LineSpacing = trySize;
+                }
+            }
+
+            sng.TextBorders = PowerPraiseConstants.TextBorders;
+            if (xmlRoot["formatting"]["borders"] != null)
+            {
+                int trySize;
+                if (xmlRoot["formatting"]["borders"]["mainleft"] != null && int.TryParse(xmlRoot["formatting"]["borders"]["mainleft"].InnerText, out trySize))
+                {
+                    sng.TextBorders.TextLeft = trySize;
+                }
+                if (xmlRoot["formatting"]["borders"]["maintop"] != null && int.TryParse(xmlRoot["formatting"]["borders"]["maintop"].InnerText, out trySize))
+                {
+                    sng.TextBorders.TextTop = trySize;
+                }
+                if (xmlRoot["formatting"]["borders"]["mainright"] != null && int.TryParse(xmlRoot["formatting"]["borders"]["mainright"].InnerText, out trySize))
+                {
+                    sng.TextBorders.TextRight = trySize;
+                }
+                if (xmlRoot["formatting"]["borders"]["mainbottom"] != null && int.TryParse(xmlRoot["formatting"]["borders"]["mainbottom"].InnerText, out trySize))
+                {
+                    sng.TextBorders.TextBottom = trySize;
+                }
+                if (xmlRoot["formatting"]["borders"]["copyrightbottom"] != null && int.TryParse(xmlRoot["formatting"]["borders"]["copyrightbottom"].InnerText, out trySize))
+                {
+                    sng.TextBorders.CopyrightBottom = trySize;
+                }
+                if (xmlRoot["formatting"]["borders"]["sourcetop"] != null && int.TryParse(xmlRoot["formatting"]["borders"]["sourcetop"].InnerText, out trySize))
+                {
+                    sng.TextBorders.SourceTop = trySize;
+                }
+                if (xmlRoot["formatting"]["borders"]["sourceright"] != null && int.TryParse(xmlRoot["formatting"]["borders"]["sourceright"].InnerText, out trySize))
+                {
+                    sng.TextBorders.SourceRight = trySize;
                 }
             }
 
@@ -305,8 +361,6 @@ namespace Pbp.IO
                         {
                             var tmpSlide = new SongSlide(sng);
                             tmpSlide.Lines = new List<string>();
-                            tmpSlide.HorizontalAlign = sng.DefaultHorizAlign;
-                            tmpSlide.VerticalAlign = sng.DefaultVertAlign;
 
                             // Image number
                             int bgNr = Convert.ToInt32(slideElem.GetAttribute("backgroundnr")) + 1;

@@ -50,7 +50,7 @@ namespace Pbp.Data.Song
         public List<string> Lines { get; set; }
 
         /// <summary>
-        /// Part
+        /// Part name
         /// </summary>
         public string PartName { get; set; }
 
@@ -78,16 +78,6 @@ namespace Pbp.Data.Song
         }
 
         /// <summary>
-        /// Horizonztal text alignment
-        /// </summary>
-        public Song.SongTextHorizontalAlign HorizontalAlign { get; set; }
-
-        /// <summary>
-        /// Vertical text alignment
-        /// </summary>
-        public Song.SongTextVerticalAlign VerticalAlign { get; set; }
-
-        /// <summary>
         /// The font object of this slide
         /// </summary>
         public TextFormatting MainTextFormatting
@@ -102,6 +92,23 @@ namespace Pbp.Data.Song
         {
             get { return _ownerSong.TranslationText; }
         }
+
+        /// <summary>
+        /// The font object of the translation
+        /// </summary>
+        public TextOrientationVertical VerticalTextOrientation
+        {
+            get { return _ownerSong.VerticalTextOrientation; }
+        }
+
+        /// <summary>
+        /// The font object of the translation
+        /// </summary>
+        public TextOrientationHorizontal HorizontalTextOrientation
+        {
+            get { return _ownerSong.HorizontalTextOrientation; }
+        }
+
 
         /// <summary>
         /// Gets or sets the text of this slide
@@ -168,8 +175,6 @@ namespace Pbp.Data.Song
         {
             Lines = new List<string>();
             Translation = new List<string>();
-            HorizontalAlign = Song.SongTextHorizontalAlign.Center;
-            VerticalAlign = Song.SongTextVerticalAlign.Center;
             ImageNumber = 0;
             _ownerSong = ownerSong;
         }
@@ -182,7 +187,7 @@ namespace Pbp.Data.Song
         /// <returns>A duplicate of this slide</returns>
         public object Clone()
         {
-            var res = new SongSlide(_ownerSong) { HorizontalAlign = HorizontalAlign, ImageNumber = ImageNumber };
+            var res = new SongSlide(_ownerSong) { ImageNumber = ImageNumber };
             foreach (string obj in Lines)
             {
                 res.Lines.Add(obj);
@@ -191,7 +196,6 @@ namespace Pbp.Data.Song
             {
                 res.Translation.Add(obj);
             }
-            res.VerticalAlign = VerticalAlign;
             return res;
         }
 
@@ -222,7 +226,7 @@ namespace Pbp.Data.Song
         /// <returns></returns>
         public override int GetHashCode()
         {
-            int res = ImageNumber.GetHashCode() ^ HorizontalAlign.GetHashCode() ^ VerticalAlign.GetHashCode();
+            int res = ImageNumber.GetHashCode() + TextSize.GetHashCode();
             for (int i = 0; i < Lines.Count; i++)
             {
                 res = res ^ Lines[i].GetHashCode();
@@ -241,9 +245,8 @@ namespace Pbp.Data.Song
         /// <param name="context"></param>
         public void GetObjectData(SerializationInfo info, StreamingContext context)
         {
-            info.AddValue("HorizontalAlign", this.HorizontalAlign);
-            info.AddValue("VerticalAlign", this.VerticalAlign);
             info.AddValue("ImageNumber", this.ImageNumber);
+            info.AddValue("TextSize", this.TextSize);
             info.AddValue("PartName", this.PartName);
             info.AddValue("Lines", this.Lines);
             info.AddValue("Translation", this.Translation);

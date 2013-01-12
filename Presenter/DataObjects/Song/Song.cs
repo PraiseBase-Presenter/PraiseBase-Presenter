@@ -192,16 +192,6 @@ namespace Pbp.Data.Song
         public List<string> RelativeImagePaths { get; set; }
 
         /// <summary>
-        /// Default horizontal text aligning
-        /// </summary>
-        public SongTextHorizontalAlign DefaultHorizAlign { get; set; }
-
-        /// <summary>
-        /// Default vertical text aligning
-        /// </summary>
-        public SongTextVerticalAlign DefaultVertAlign { get; set; }
-
-        /// <summary>
         /// Quality assurance indicators
         /// </summary>
         public List<QualityAssuranceIndicators> QualityIssues { get; set; }
@@ -226,53 +216,32 @@ namespace Pbp.Data.Song
         /// </summary>
         public TextFormatting SourceText { get; set; }
 
+        /// <summary>
+        /// Horizontal text orientation
+        /// </summary>
+        public TextOrientationHorizontal HorizontalTextOrientation { get; set; }
+
+        /// <summary>
+        /// Vertical text orientation
+        /// </summary>
+        public TextOrientationVertical VerticalTextOrientation { get; set; }
+
+        /// <summary>
+        /// True of the text should be outlined
+        /// </summary>
+        public bool TextOutlineEnabled { get; set; }
+
+        /// <summary>
+        /// True if the text should have a shadow
+        /// </summary>
+        public bool TextShadowEnabled { get; set; }
+
+        /// <summary>
+        /// Text borders (used by PowerPraise)
+        /// </summary>
+        public SongTextBorders TextBorders { get; set; }
+
         #endregion Fields
-
-        #region Enums
-
-        /// <summary>
-        /// Horizontal aligning of slide text
-        /// </summary>
-        public enum SongTextHorizontalAlign
-        {
-            /// <summary>
-            /// Text is aligned horizontally to the left
-            /// </summary>
-            Left,
-
-            /// <summary>
-            /// Text is horizontally centered
-            /// </summary>
-            Center,
-
-            /// <summary>
-            /// Text is aligned horizontally to the right
-            /// </summary>
-            Right
-        }
-
-        /// <summary>
-        /// Vertical aligning of slide text
-        /// </summary>
-        public enum SongTextVerticalAlign
-        {
-            /// <summary>
-            /// Text is aligned vertically to the top of the page
-            /// </summary>
-            Top,
-
-            /// <summary>
-            /// Text is aligned to the center
-            /// </summary>
-            Center,
-
-            /// <summary>
-            /// Text is aligned vertically to the bottom of the page
-            /// </summary>
-            Bottom
-        }
-
-        #endregion Enums
 
         /// <summary>
         /// The song constructor
@@ -280,8 +249,6 @@ namespace Pbp.Data.Song
         public Song()
         {
             Themes = new TagList();
-            DefaultHorizAlign = SongTextHorizontalAlign.Center;
-            DefaultVertAlign = SongTextVerticalAlign.Center;
             Slides = new SongSlideList();
             Parts = new SongPartList();
             RelativeImagePaths = new List<string>();
@@ -289,7 +256,6 @@ namespace Pbp.Data.Song
             SongBooks = new List<SongBook>();
             Author = new List<SongAuthor>();
             Comment = String.Empty;
-
             QualityIssues = new List<QualityAssuranceIndicators>();
         }
 

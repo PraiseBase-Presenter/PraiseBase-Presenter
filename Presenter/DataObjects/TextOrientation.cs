@@ -30,16 +30,17 @@ using System.Linq;
 
 namespace Pbp.Data
 {
-    public enum TextAlign
+    public enum TextOrientationHorizontal
     {
-        TopLeft,
-        TopCenter,
-        TopRight,
-        MittleLeft,
-        MiddleCenter,
-        MiddleRight,
-        BottomLeft,
-        BottomCenter,
-        BottomRight
+        Left = 1,
+        Center = 2,
+        Right = 3
+    }
+
+    public enum TextOrientationVertical
+    {
+        Top = 1,
+        Middle = 2,
+        Bottom = 3
     }
 }

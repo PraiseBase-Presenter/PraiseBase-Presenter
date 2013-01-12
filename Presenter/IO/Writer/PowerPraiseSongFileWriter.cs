@@ -205,26 +205,26 @@ namespace Pbp.IO
                 xmlRoot["formatting"]["font"][f.Key].AppendChild(xmlDoc.CreateElement("color"));
                 xmlRoot["formatting"]["font"][f.Key]["color"].InnerText = (16777216 + f.Value.Color.ToArgb()).ToString();
                 xmlRoot["formatting"]["font"][f.Key].AppendChild(xmlDoc.CreateElement("outline"));
-                xmlRoot["formatting"]["font"][f.Key]["outline"].InnerText = f.Value.Outline.ToString();
+                xmlRoot["formatting"]["font"][f.Key]["outline"].InnerText = f.Value.Outline.Width.ToString();
                 xmlRoot["formatting"]["font"][f.Key].AppendChild(xmlDoc.CreateElement("shadow"));
-                xmlRoot["formatting"]["font"][f.Key]["shadow"].InnerText = f.Value.Shadow.ToString();
+                xmlRoot["formatting"]["font"][f.Key]["shadow"].InnerText = f.Value.Shadow.Distance.ToString();
             }
 
             // Outline
             xmlRoot["formatting"]["font"].AppendChild(xmlDoc.CreateElement("outline"));
             xmlRoot["formatting"]["font"]["outline"].AppendChild(xmlDoc.CreateElement("enabled"));
-            xmlRoot["formatting"]["font"]["outline"]["enabled"].InnerText = "true";
+            xmlRoot["formatting"]["font"]["outline"]["enabled"].InnerText = sng.TextOutlineEnabled ? "true" : "false";
             xmlRoot["formatting"]["font"]["outline"].AppendChild(xmlDoc.CreateElement("color"));
-            xmlRoot["formatting"]["font"]["outline"]["color"].InnerText = "0";
+            xmlRoot["formatting"]["font"]["outline"]["color"].InnerText = (16777216 + mainText.Outline.Color.ToArgb()).ToString();
 
             // Shadow
             xmlRoot["formatting"]["font"].AppendChild(xmlDoc.CreateElement("shadow"));
             xmlRoot["formatting"]["font"]["shadow"].AppendChild(xmlDoc.CreateElement("enabled"));
-            xmlRoot["formatting"]["font"]["shadow"]["enabled"].InnerText = "true";
+            xmlRoot["formatting"]["font"]["shadow"]["enabled"].InnerText = sng.TextShadowEnabled ? "true" : "false";
             xmlRoot["formatting"]["font"]["shadow"].AppendChild(xmlDoc.CreateElement("color"));
-            xmlRoot["formatting"]["font"]["shadow"]["color"].InnerText = "0";
+            xmlRoot["formatting"]["font"]["shadow"]["color"].InnerText = (16777216 + mainText.Shadow.Color.ToArgb()).ToString();
             xmlRoot["formatting"]["font"]["shadow"].AppendChild(xmlDoc.CreateElement("direction"));
-            xmlRoot["formatting"]["font"]["shadow"]["direction"].InnerText = "125";
+            xmlRoot["formatting"]["font"]["shadow"]["direction"].InnerText = mainText.Shadow.Direction.ToString();
 
             // Backgrounds
             xmlRoot["formatting"].AppendChild(xmlDoc.CreateElement("background"));
@@ -244,39 +244,54 @@ namespace Pbp.IO
 
             // Orientation
             xmlRoot["formatting"].AppendChild(xmlDoc.CreateElement("textorientation"));
+            
             xmlRoot["formatting"]["textorientation"].AppendChild(xmlDoc.CreateElement("horizontal"));
-            if (sng.Parts[0].Slides[0].HorizontalAlign == Song.SongTextHorizontalAlign.Left)
-                xmlRoot["formatting"]["textorientation"]["horizontal"].InnerText = "left";
-            else if (sng.Parts[0].Slides[0].HorizontalAlign == Song.SongTextHorizontalAlign.Right)
-                xmlRoot["formatting"]["textorientation"]["horizontal"].InnerText = "right";
-            else
-                xmlRoot["formatting"]["textorientation"]["horizontal"].InnerText = "center";
+            switch (sng.HorizontalTextOrientation != 0 ? sng.HorizontalTextOrientation : PowerPraiseConstants.HorizontalTextOrientation)
+            {
+                case TextOrientationHorizontal.Left:
+                    xmlRoot["formatting"]["textorientation"]["horizontal"].InnerText = "left";
+                    break;
+                case TextOrientationHorizontal.Center:
+                    xmlRoot["formatting"]["textorientation"]["horizontal"].InnerText = "center";
+                    break;
+                case TextOrientationHorizontal.Right:
+                     xmlRoot["formatting"]["textorientation"]["horizontal"].InnerText = "right";
+                    break;
+            }
+
             xmlRoot["formatting"]["textorientation"].AppendChild(xmlDoc.CreateElement("vertical"));
-            if (sng.Parts[0].Slides[0].VerticalAlign == Song.SongTextVerticalAlign.Top)
-                xmlRoot["formatting"]["textorientation"]["vertical"].InnerText = "top";
-            else if (sng.Parts[0].Slides[0].VerticalAlign == Song.SongTextVerticalAlign.Bottom)
-                xmlRoot["formatting"]["textorientation"]["vertical"].InnerText = "bottom";
-            else
-                xmlRoot["formatting"]["textorientation"]["vertical"].InnerText = "center";
+            switch (sng.VerticalTextOrientation != 0 ? sng.VerticalTextOrientation : PowerPraiseConstants.VerticalTextOrientation)
+            {
+                case TextOrientationVertical.Top:
+                    xmlRoot["formatting"]["textorientation"]["vertical"].InnerText = "top";
+                    break;
+                case TextOrientationVertical.Middle:
+                    xmlRoot["formatting"]["textorientation"]["vertical"].InnerText = "center";
+                    break;
+                case TextOrientationVertical.Bottom:
+                    xmlRoot["formatting"]["textorientation"]["vertical"].InnerText = "bottom";
+                    break;
+            }
             xmlRoot["formatting"]["textorientation"].AppendChild(xmlDoc.CreateElement("transpos"));
             xmlRoot["formatting"]["textorientation"]["transpos"].InnerText = "inline";
 
             // Borders
+            SongTextBorders borders = sng.TextBorders != null ? sng.TextBorders : PowerPraiseConstants.TextBorders;
             xmlRoot["formatting"].AppendChild(xmlDoc.CreateElement("borders"));
             xmlRoot["formatting"]["borders"].AppendChild(xmlDoc.CreateElement("mainleft"));
-            xmlRoot["formatting"]["borders"]["mainleft"].InnerText = "40";
+            xmlRoot["formatting"]["borders"]["mainleft"].InnerText = borders.TextLeft.ToString();
             xmlRoot["formatting"]["borders"].AppendChild(xmlDoc.CreateElement("maintop"));
-            xmlRoot["formatting"]["borders"]["maintop"].InnerText = "70";
+            xmlRoot["formatting"]["borders"]["maintop"].InnerText = borders.TextTop.ToString();
             xmlRoot["formatting"]["borders"].AppendChild(xmlDoc.CreateElement("mainright"));
-            xmlRoot["formatting"]["borders"]["mainright"].InnerText = "40";
+            xmlRoot["formatting"]["borders"]["mainright"].InnerText = borders.TextRight.ToString();
             xmlRoot["formatting"]["borders"].AppendChild(xmlDoc.CreateElement("mainbottom"));
-            xmlRoot["formatting"]["borders"]["mainbottom"].InnerText = "80";
+            xmlRoot["formatting"]["borders"]["mainbottom"].InnerText = borders.TextBottom.ToString();
             xmlRoot["formatting"]["borders"].AppendChild(xmlDoc.CreateElement("copyrightbottom"));
-            xmlRoot["formatting"]["borders"]["copyrightbottom"].InnerText = "30";
+            xmlRoot["formatting"]["borders"]["copyrightbottom"].InnerText = borders.CopyrightBottom.ToString();
             xmlRoot["formatting"]["borders"].AppendChild(xmlDoc.CreateElement("sourcetop"));
-            xmlRoot["formatting"]["borders"]["sourcetop"].InnerText = "20";
+            xmlRoot["formatting"]["borders"]["sourcetop"].InnerText = borders.SourceTop.ToString();
             xmlRoot["formatting"]["borders"].AppendChild(xmlDoc.CreateElement("sourceright"));
-            xmlRoot["formatting"]["borders"]["sourceright"].InnerText = "40";
+            xmlRoot["formatting"]["borders"]["sourceright"].InnerText = borders.SourceRight.ToString();
 
             xml.Write(filename);
         }

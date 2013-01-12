@@ -31,21 +31,15 @@ using System.Drawing;
 
 namespace Pbp.Data
 {
-    public class TextFormatting
+    public class TextOutline
     {
-        public Font Font { get; set; }
+        public int Width { get; set; }
         public Color Color { get; set; }
-        public TextOutline Outline { get; set; }
-        public TextShadow Shadow { get; set; }
-        public int LineSpacing { get; set; }
 
-        public TextFormatting(Font font, Color color, TextOutline outline, TextShadow shadow, int lineSpacing)
+        public TextOutline(int width, Color color)
         {
-            Font = font;
+            Width = width;
             Color = color;
-            Outline = outline;
-            Shadow = shadow;
-            LineSpacing = lineSpacing;
         }
 
         /// <summary>
@@ -55,12 +49,8 @@ namespace Pbp.Data
         /// <returns></returns>
         public override int GetHashCode()
         {
-            int code = Font.GetHashCode()
-                       ^ Color.GetHashCode()
-                       ^ Outline.GetHashCode()
-                       ^ Shadow.GetHashCode()
-                       ^ LineSpacing.GetHashCode();
-            return code;
+            return Width.GetHashCode()
+                   ^ Color.GetHashCode();
         }
     }
 }
