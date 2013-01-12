@@ -101,6 +101,7 @@
     <Compile Include="DataObjects\Bible\Chapter.cs" />
     <Compile Include="DataObjects\Bible\Verse.cs" />
     <Compile Include="DataObjects\Bible\VerseSelection.cs" />
+    <Compile Include="DataObjects\EnumHelper.cs" />
     <Compile Include="DataObjects\Song\SongTextBorders.cs" />
     <Compile Include="DataObjects\TextShadow.cs" />
     <Compile Include="DataObjects\TextOutline.cs" />

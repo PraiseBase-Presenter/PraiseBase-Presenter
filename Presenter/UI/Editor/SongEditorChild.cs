@@ -154,32 +154,8 @@ namespace Pbp.Forms
             textBoxPublisher.DataBindings.Add("Text", sng, "Publisher");
 
             labelGUID.DataBindings.Add("Text", sng, "GUID");
-
-            string autstr = string.Empty;
-            foreach (var aut in sng.Author)
-            {
-                if (autstr != string.Empty)
-                {
-                    autstr += ";";
-                }
-                autstr += aut.Name;
-            }
-            textBoxAuthors.Text = autstr;
-
-            string sbkstr = string.Empty;
-            foreach (var sbk in sng.SongBooks)
-            {
-                if (sbkstr != string.Empty)
-                {
-                    sbkstr += ";";
-                }
-                sbkstr += sbk.Name;
-                if (sbk.Entry != null)
-                {
-                    sbkstr += " " + sbk.Entry;
-                }
-            }
-            textBoxSongbooks.Text = sbkstr;
+            textBoxAuthors.DataBindings.Add("Text", sng, "AuthorString");
+            textBoxSongbooks.DataBindings.Add("Text", sng, "SongBooksString");
 
             populateTree();
             treeViewContents.SelectedNode = treeViewContents.Nodes[0];
@@ -201,6 +177,10 @@ namespace Pbp.Forms
 
             trackBarLineSpacing.Value = sng.MainText.LineSpacing;
             labelLineSpacing.Text = sng.MainText.LineSpacing.ToString();
+
+            //comboBoxSlideHorizOrientation.DataSource = Pbp.DataObjects.EnumHelper.ToList(typeof(TextOrientationHorizontal));
+            //comboBoxSlideHorizOrientation.DisplayMember = "Value";
+            //comboBoxSlideHorizOrientation.ValueMember = "Key";
 
             comboBoxSlideHorizOrientation.DataSource = Enum.GetValues(typeof(TextOrientationHorizontal));
             comboBoxSlideHorizOrientation.DataBindings.Add("SelectedItem", sng, "HorizontalTextOrientation", false, DataSourceUpdateMode.OnPropertyChanged);

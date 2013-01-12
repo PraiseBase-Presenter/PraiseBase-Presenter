@@ -115,6 +115,22 @@ namespace Pbp.IO
                 sng.CcliID = xmlRoot["general"]["ccliNo"].InnerText;
             }
 
+            // Author(s)
+            if (xmlRoot["general"]["author"] != null)
+            {
+                sng.AuthorString = xmlRoot["general"]["author"].InnerText;
+            }
+            // Publisher
+            if (xmlRoot["general"]["publisher"] != null)
+            {
+                sng.Publisher = xmlRoot["general"]["publisher"].InnerText;
+            }
+            // Rights management
+            if (xmlRoot["general"]["admin"] != null)
+            {
+                sng.RightsManagement = xmlRoot["general"]["admin"].InnerText;
+            }
+
             // Guid
             if (xmlRoot["general"]["guid"] != null)
             {
@@ -231,7 +247,7 @@ namespace Pbp.IO
 
             // Enable or disable outline/shadow
             sng.TextOutlineEnabled = (xmlRoot["formatting"]["font"]["outline"]["enabled"] != null && xmlRoot["formatting"]["font"]["outline"]["enabled"].InnerText == "true");
-            sng.TextShadowEnabled = (xmlRoot["formatting"]["font"]["shadow"]["enabled"] != null && xmlRoot["formatting"]["font"]["outline"]["enabled"].InnerText == "true");
+            sng.TextShadowEnabled = (xmlRoot["formatting"]["font"]["shadow"]["enabled"] != null && xmlRoot["formatting"]["font"]["shadow"]["enabled"].InnerText == "true");
 
             // Linespacing
             if (xmlRoot["formatting"]["linespacing"]["main"] != null)
@@ -332,12 +348,7 @@ namespace Pbp.IO
                 {
                     if (xmlRoot["information"]["source"]["text"] != null && xmlRoot["information"]["source"]["text"].ChildNodes.Count > 0)
                     {
-                        foreach (var bookName in xmlRoot["information"]["source"]["text"].InnerText.Split(new[] { ";" }, StringSplitOptions.RemoveEmptyEntries))
-                        {
-                            var sb = new SongBook();
-                            sb.Name = bookName;
-                            sng.SongBooks.Add(sb);
-                        }
+                        sng.SongBooksString = xmlRoot["information"]["source"]["text"].InnerText;
                     }
                     if (xmlRoot["information"]["source"]["position"] != null)
                     {

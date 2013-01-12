@@ -111,6 +111,36 @@ namespace Pbp.Data.Song
         public List<SongAuthor> Author { get; set; }
 
         /// <summary>
+        /// All authors as semicolon-separated string
+        /// </summary>
+        public String AuthorString { 
+            get 
+            {
+                string autstr = string.Empty;
+                foreach (var aut in Author)
+                {
+                    if (autstr != string.Empty)
+                    {
+                        autstr += ";";
+                    }
+                    autstr += aut.Name;
+                }
+                return autstr;
+            } 
+            set
+            {
+                int i = 0;
+                foreach (String s in value.Split(new char[] { ';' }, StringSplitOptions.RemoveEmptyEntries))
+                {
+                    SongAuthor author = new SongAuthor();
+                    author.Name = s.Trim();
+                    author.Type = (i++ == 0) ? SongAuthorType.words : SongAuthorType.music;
+                    Author.Add(author);
+                }
+            } 
+        }
+
+        /// <summary>
         /// Admin
         /// </summary>
         public string RightsManagement { get; set; }
@@ -159,6 +189,35 @@ namespace Pbp.Data.Song
         /// Songbooks the song appears in
         /// </summary>
         public List<SongBook> SongBooks { get; set; }
+
+        /// <summary>
+        /// All songbooks as semicolon-separated string
+        /// </summary>
+        public String SongBooksString
+        {
+            get
+            {
+                string autstr = string.Empty;
+                foreach (var aut in SongBooks)
+                {
+                    if (autstr != string.Empty)
+                    {
+                        autstr += ";";
+                    }
+                    autstr += aut.Name;
+                }
+                return autstr;
+            }
+            set
+            {
+                foreach (String s in value.Split(new char[] { ';' }, StringSplitOptions.RemoveEmptyEntries))
+                {
+                    SongBook sb = new SongBook();
+                    sb.Name= s.Trim();
+                    SongBooks.Add(sb);
+                }
+            }
+        }
 
         /// <summary>
         /// Gets the whole songtext improved for full-text search

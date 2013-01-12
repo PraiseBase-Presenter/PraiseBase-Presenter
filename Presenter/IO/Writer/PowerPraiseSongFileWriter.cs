@@ -66,11 +66,24 @@ namespace Pbp.IO
             {
                 xmlRoot["general"]["language"].InnerText = sng.Language;
             }
+
+            //
+            // Non-standard meta-info
+            //
+            // GUID
+            if (sng.GUID != null && sng.GUID != Guid.Empty)
+            {
+                xmlRoot["general"].AppendChild(xmlDoc.CreateElement("guid"));
+                xmlRoot["general"]["guid"].InnerText = sng.GUID.ToString();
+            }
+
+            // Comment
             if (sng.Comment != string.Empty)
             {
                 xmlRoot["general"].AppendChild(xmlDoc.CreateElement("comment"));
                 xmlRoot["general"]["comment"].InnerText = sng.Comment;
             }
+            // QA-Issues
             if (sng.QualityIssues.Count > 0)
             {
                 xmlRoot["general"].AppendChild(xmlDoc.CreateElement("qualityissues"));
@@ -80,15 +93,31 @@ namespace Pbp.IO
                     qaChld.InnerText = Enum.GetName(typeof(QualityAssuranceIndicators), i);
                 }
             }
+            
+            // CCLI-ID
             if (sng.CcliID != null && sng.CcliID != String.Empty)
             {
                 xmlRoot["general"].AppendChild(xmlDoc.CreateElement("ccliNo"));
                 xmlRoot["general"]["ccliNo"].InnerText = sng.CcliID;
             }
-            if (sng.GUID != null && sng.GUID != Guid.Empty)
+
+            // Author(s)
+            if (sng.Author != null && sng.Author.Count > 0)
             {
-                xmlRoot["general"].AppendChild(xmlDoc.CreateElement("guid"));
-                xmlRoot["general"]["guid"].InnerText = sng.GUID.ToString();
+                xmlRoot["general"].AppendChild(xmlDoc.CreateElement("author"));
+                xmlRoot["general"]["author"].InnerText = sng.AuthorString;
+            }
+            // Publisher
+            if (sng.Publisher != null && sng.Publisher != String.Empty)
+            {
+                xmlRoot["general"].AppendChild(xmlDoc.CreateElement("publisher"));
+                xmlRoot["general"]["publisher"].InnerText = sng.Publisher;
+            }
+            // Rights management
+            if (sng.RightsManagement != null && sng.RightsManagement != String.Empty)
+            {
+                xmlRoot["general"].AppendChild(xmlDoc.CreateElement("admin"));
+                xmlRoot["general"]["admin"].InnerText = sng.RightsManagement;
             }
             
             xmlRoot.AppendChild(xmlDoc.CreateElement("songtext"));
@@ -165,22 +194,15 @@ namespace Pbp.IO
             xmlRoot["information"]["source"].AppendChild(xmlDoc.CreateElement("position"));
             xmlRoot["information"]["source"]["position"].InnerText = (sng.SourcePosition != null ? sng.SourcePosition : "firstslide");
             xmlRoot["information"]["source"].AppendChild(xmlDoc.CreateElement("text"));
-            if (sng.SongBooks.Count > 0)
+            if (sng.SongBooks != null && sng.SongBooks.Count > 0)
             {
                 xmlRoot["information"]["source"]["text"].AppendChild(xmlDoc.CreateElement("line"));
-                string sbooks = String.Empty;
-                foreach (var sb in sng.SongBooks) 
-                {
-                    if (sbooks != String.Empty)
-                    {
-                        sbooks += ";";
-                    }
-                    sbooks += sb.Name;
-                }
-                xmlRoot["information"]["source"]["text"]["line"].InnerText = sbooks;
+                xmlRoot["information"]["source"]["text"]["line"].InnerText = sng.SongBooksString;
             }
 
+            //
             // Formatting
+            //
 
             Dictionary<string, TextFormatting> fmtMapping = new Dictionary<string, TextFormatting>();
             fmtMapping.Add("maintext", mainText);
