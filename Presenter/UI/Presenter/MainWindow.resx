@@ -143,14 +143,8 @@
   <data name="toolStripSeparator1.Size" type="System.Drawing.Size, System.Drawing">
     <value>6, 71</value>
   </data>
-  <data name="&gt;&gt;buttonSetListRem.Name" xml:space="preserve">
-    <value>buttonSetListRem</value>
-  </data>
   <data name="textBoxLiveText.Location" type="System.Drawing.Point, System.Drawing">
     <value>6, 7</value>
-  </data>
-  <data name="&gt;&gt;toolStripButton4.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="präsentationausToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>200, 22</value>
@@ -161,11 +155,11 @@
   <data name="menuStrip1.Location" type="System.Drawing.Point, System.Drawing">
     <value>0, 0</value>
   </data>
+  <data name="customGroupBox1.Title" xml:space="preserve">
+    <value>Projektion</value>
+  </data>
   <data name="&gt;&gt;datenverzeichnisToolStripMenuItem.Name" xml:space="preserve">
     <value>datenverzeichnisToolStripMenuItem</value>
-  </data>
-  <data name="&gt;&gt;textBoxDiaDuration.ZOrder" xml:space="preserve">
-    <value>6</value>
   </data>
   <data name="&gt;&gt;tableLayoutPanel1.ZOrder" xml:space="preserve">
     <value>2</value>
@@ -209,8 +203,8 @@
   <data name="buttonSetListRem.ImageAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>BottomLeft</value>
   </data>
-  <data name="&gt;&gt;columnHeader3.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ColumnHeader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="&gt;&gt;songDetailElement.Name" xml:space="preserve">
+    <value>songDetailElement</value>
   </data>
   <data name="labelBibleTextName.Location" type="System.Drawing.Point, System.Drawing">
     <value>454, 9</value>
@@ -238,6 +232,9 @@
   </data>
   <data name="label6.Text" xml:space="preserve">
     <value>Vordergrund:</value>
+  </data>
+  <data name="tabPage1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>724, 238</value>
   </data>
   <data name="&gt;&gt;datenverzeichnisToolStripMenuItem.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -267,6 +264,9 @@
   <data name="comboBoxBible.Size" type="System.Drawing.Size, System.Drawing">
     <value>150, 21</value>
   </data>
+  <data name="&gt;&gt;comboBoxBible.Parent" xml:space="preserve">
+    <value>tabPage5</value>
+  </data>
   <data name="&gt;&gt;listViewDias.Name" xml:space="preserve">
     <value>listViewDias</value>
   </data>
@@ -281,9 +281,6 @@
   </data>
   <data name="&gt;&gt;buttonShowLiveText.Parent" xml:space="preserve">
     <value>tabPage2</value>
-  </data>
-  <data name="&gt;&gt;label13.Parent" xml:space="preserve">
-    <value>customGroupBox3</value>
   </data>
   <data name="&gt;&gt;listViewSongHistory.ZOrder" xml:space="preserve">
     <value>0</value>
@@ -303,8 +300,8 @@
   <data name="tabPageImageFavorites.Text" xml:space="preserve">
     <value>Favoriten</value>
   </data>
-  <data name="listViewSongs.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Bottom, Left</value>
+  <data name="tabPageImageBrowser.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>3, 3, 3, 3</value>
   </data>
   <data name="label5.Text" xml:space="preserve">
     <value>Schriftgrösse:</value>
@@ -312,8 +309,8 @@
   <data name="&gt;&gt;label8.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
-  <data name="labelFadeTime.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
+  <data name="listViewSongs.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Bottom, Left</value>
   </data>
   <data name="spracheToolStripMenuItem.Text" xml:space="preserve">
     <value>Sprache</value>
@@ -327,26 +324,20 @@
   <data name="buttonRemoveFromBibleVerseList.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 8.25pt</value>
   </data>
-  <data name="buttonToggleLayer1.TabIndex" type="System.Int32, mscorlib">
-    <value>49</value>
-  </data>
   <data name="songDetailElement.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Bottom, Left, Right</value>
   </data>
-  <data name="tabPage1.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>3, 3, 3, 3</value>
+  <data name="customGroupBox2.TabIndex" type="System.Int32, mscorlib">
+    <value>21</value>
   </data>
-  <data name="labelFadeTimeLayer1.Text" xml:space="preserve">
-    <value>-</value>
+  <data name="buttonClearImageHistory.TabIndex" type="System.Int32, mscorlib">
+    <value>22</value>
   </data>
   <data name="&gt;&gt;tabPage3.Type" xml:space="preserve">
     <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;buttonEnableAllDias.Parent" xml:space="preserve">
     <value>tabPageSlideShow</value>
-  </data>
-  <data name="&gt;&gt;labelBibleTextName.Name" xml:space="preserve">
-    <value>labelBibleTextName</value>
   </data>
   <data name="buttonAddToBibleVerseList.TabIndex" type="System.Int32, mscorlib">
     <value>36</value>
@@ -357,20 +348,11 @@
   <data name="&gt;&gt;buttonToggleLayer2.Name" xml:space="preserve">
     <value>buttonToggleLayer2</value>
   </data>
-  <data name="&gt;&gt;pictureBoxbeamerPreview.Parent" xml:space="preserve">
-    <value>customGroupBox1</value>
-  </data>
   <data name="einstellungenToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>49, 20</value>
   </data>
   <data name="buttonSaveSetList.ImageAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>MiddleLeft</value>
-  </data>
-  <data name="&gt;&gt;toolStripSeparator5.Name" xml:space="preserve">
-    <value>toolStripSeparator5</value>
-  </data>
-  <data name="&gt;&gt;listBoxBibleVerseTo.Name" xml:space="preserve">
-    <value>listBoxBibleVerseTo</value>
   </data>
   <data name="radioButtonManualDiashow.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -378,26 +360,26 @@
   <data name="buttonSetListAdd.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 8.25pt</value>
   </data>
+  <data name="buttonChooseDiaDir.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
   <data name="&gt;&gt;tabControl1.ZOrder" xml:space="preserve">
     <value>3</value>
   </data>
   <data name="songbeamerLiederToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>225, 22</value>
   </data>
+  <data name="listViewSetList.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 9.75pt</value>
+  </data>
   <data name="tabPageSlideShow.Size" type="System.Drawing.Size, System.Drawing">
     <value>584, 241</value>
-  </data>
-  <data name="&gt;&gt;buttonSetListAdd.ZOrder" xml:space="preserve">
-    <value>3</value>
   </data>
   <data name="label2.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
   </data>
   <data name="radioButtonManualDiashow.Size" type="System.Drawing.Size, System.Drawing">
     <value>116, 17</value>
-  </data>
-  <data name="&gt;&gt;buttonRemoveFromBibleVerseList.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="numericUpDown1.Size" type="System.Drawing.Size, System.Drawing">
     <value>52, 20</value>
@@ -408,14 +390,14 @@
   <data name="toolStripButton4.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
     <value>Magenta</value>
   </data>
-  <data name="toolStripMenuItem3.Text" xml:space="preserve">
-    <value>Lieder&amp;browser...</value>
-  </data>
   <data name="radioButtonManualDiashow.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
   <data name="&gt;&gt;contextMenuStrip1.Type" xml:space="preserve">
     <value>System.Windows.Forms.ContextMenuStrip, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;bilderToolStripMenuItem.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;label7.ZOrder" xml:space="preserve">
     <value>16</value>
@@ -426,8 +408,8 @@
   <data name="label8.Text" xml:space="preserve">
     <value>Ausrichtung:</value>
   </data>
-  <data name="&gt;&gt;listViewBibleVerseList.ZOrder" xml:space="preserve">
-    <value>6</value>
+  <data name="&gt;&gt;tabPage3.ZOrder" xml:space="preserve">
+    <value>0</value>
   </data>
   <data name="&gt;&gt;buttonToggleLayer1.ZOrder" xml:space="preserve">
     <value>7</value>
@@ -459,20 +441,20 @@
   <data name="label2.Text" xml:space="preserve">
     <value>Buch:</value>
   </data>
-  <data name="&gt;&gt;bildschirmeSuchenToolStripMenuItem.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="titelToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>146, 22</value>
   </data>
-  <data name="&gt;&gt;buttonSetListDown.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;tabPage5.ZOrder" xml:space="preserve">
-    <value>2</value>
+  <data name="&gt;&gt;menuStrip1.ZOrder" xml:space="preserve">
+    <value>5</value>
   </data>
   <data name="&gt;&gt;pictureBoxbeamerPreview.Type" xml:space="preserve">
     <value>System.Windows.Forms.PictureBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="menuStrip1.Text" xml:space="preserve">
     <value>menuStrip1</value>
+  </data>
+  <data name="buttonToggleLayer2.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
   <data name="&gt;&gt;einstellungenToolStripMenuItem.Name" xml:space="preserve">
     <value>einstellungenToolStripMenuItem</value>
@@ -483,14 +465,11 @@
   <data name="praiseBoxDatenbankToolStripMenuItem.Text" xml:space="preserve">
     <value>PraiseBox Datenbank...</value>
   </data>
-  <data name="&gt;&gt;toolStripButtonOpenCurrentSong.Name" xml:space="preserve">
-    <value>toolStripButtonOpenCurrentSong</value>
-  </data>
   <data name="&gt;&gt;tabPageImageHistory.Name" xml:space="preserve">
     <value>tabPageImageHistory</value>
   </data>
-  <data name="customGroupBox2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>740, 309</value>
+  <data name="&gt;&gt;listViewDirectoryImages.Parent" xml:space="preserve">
+    <value>tabPageImageBrowser</value>
   </data>
   <data name="label5.Location" type="System.Drawing.Point, System.Drawing">
     <value>11, 215</value>
@@ -501,8 +480,8 @@
   <data name="label10.Size" type="System.Drawing.Size, System.Drawing">
     <value>71, 13</value>
   </data>
-  <data name="&gt;&gt;buttonOpenSetList.ZOrder" xml:space="preserve">
-    <value>0</value>
+  <data name="dateiToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>73, 20</value>
   </data>
   <data name="&gt;&gt;textBoxBibleText.Parent" xml:space="preserve">
     <value>tabPage5</value>
@@ -513,8 +492,14 @@
   <data name="listViewSetList.TabIndex" type="System.Int32, mscorlib">
     <value>27</value>
   </data>
+  <data name="&gt;&gt;tabControl2.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TabControl, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
   <data name="&gt;&gt;listViewSongs.Parent" xml:space="preserve">
     <value>tabPage1</value>
+  </data>
+  <data name="&gt;&gt;listViewSetList.Type" xml:space="preserve">
+    <value>Bol.WinControls.ListViewEx, PraiseBase Presenter, Version=1.1.3.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="listBoxBibleBook.Size" type="System.Drawing.Size, System.Drawing">
     <value>120, 186</value>
@@ -534,9 +519,6 @@
   <data name="listViewSongs.TabIndex" type="System.Int32, mscorlib">
     <value>21</value>
   </data>
-  <data name="label11.Location" type="System.Drawing.Point, System.Drawing">
-    <value>398, 9</value>
-  </data>
   <data name="&gt;&gt;tabControlTextLayer.Parent" xml:space="preserve">
     <value>customGroupBox2</value>
   </data>
@@ -549,8 +531,8 @@
   <data name="buttonResetImageQueue.TabIndex" type="System.Int32, mscorlib">
     <value>33</value>
   </data>
-  <data name="&gt;&gt;label14.ZOrder" xml:space="preserve">
-    <value>8</value>
+  <data name="customGroupBox3.TabIndex" type="System.Int32, mscorlib">
+    <value>40</value>
   </data>
   <data name="tableLayoutPanel1.RowCount" type="System.Int32, mscorlib">
     <value>2</value>
@@ -558,11 +540,14 @@
   <data name="buttonSetListRem.Location" type="System.Drawing.Point, System.Drawing">
     <value>98, 267</value>
   </data>
-  <data name="&gt;&gt;listViewImageQueue.ZOrder" xml:space="preserve">
-    <value>3</value>
+  <data name="buttonRemoveFromBibleVerseList.Location" type="System.Drawing.Point, System.Drawing">
+    <value>885, 178</value>
   </data>
   <data name="&gt;&gt;buttonSetListUp.Type" xml:space="preserve">
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="buttonDisableAllDias.Size" type="System.Drawing.Size, System.Drawing">
+    <value>82, 23</value>
   </data>
   <data name="buttonSaveSetList.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
@@ -576,6 +561,9 @@
   <data name="listViewImageQueue.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Bottom, Right</value>
   </data>
+  <data name="toolStripSeparator11.Size" type="System.Drawing.Size, System.Drawing">
+    <value>197, 6</value>
+  </data>
   <data name="listBoxBibleVerseTo.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Bottom, Left</value>
   </data>
@@ -585,17 +573,11 @@
   <data name="&gt;&gt;buttonRemoveFromBibleVerseList.Parent" xml:space="preserve">
     <value>tabPage5</value>
   </data>
-  <data name="&gt;&gt;toolStripButtonDisplaySettings.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
   <data name="labelBibleSearchMsg.TabIndex" type="System.Int32, mscorlib">
     <value>39</value>
   </data>
   <data name="&gt;&gt;labelDiaDirectory.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;fehlerMeldenToolStripMenuItem.Name" xml:space="preserve">
-    <value>fehlerMeldenToolStripMenuItem</value>
   </data>
   <data name="&gt;&gt;tabPage5.Type" xml:space="preserve">
     <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -624,8 +606,8 @@
   <data name="&gt;&gt;customGroupBox1.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;labelDiaDirectory.Name" xml:space="preserve">
-    <value>labelDiaDirectory</value>
+  <data name="&gt;&gt;tableLayoutPanel1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TableLayoutPanel, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;tabControl2.Parent" xml:space="preserve">
     <value>customGroupBox3</value>
@@ -684,6 +666,9 @@
   <data name="&gt;&gt;searchTextBoxImages.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
+  <data name="buttonDisableAllDias.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
   <data name="&gt;&gt;labelFadeTime.Parent" xml:space="preserve">
     <value>customGroupBox1</value>
   </data>
@@ -693,14 +678,17 @@
   <data name="labelImgDirName.Size" type="System.Drawing.Size, System.Drawing">
     <value>107, 13</value>
   </data>
-  <data name="&gt;&gt;toolStripButton1.Name" xml:space="preserve">
-    <value>toolStripButton1</value>
+  <data name="label10.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
   </data>
   <data name="&gt;&gt;tabPage2.Type" xml:space="preserve">
     <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="liedSuchenToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>176, 22</value>
+  </data>
+  <data name="&gt;&gt;searchTextBoxBible.Parent" xml:space="preserve">
+    <value>tabPage5</value>
   </data>
   <data name="&gt;&gt;titelUndTextToolStripMenuItem.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -716,6 +704,9 @@
   </data>
   <data name="&gt;&gt;setlistenToolStripMenuItem1.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="checkBoxBibleShowVerseFromListDirectly.Size" type="System.Drawing.Size, System.Drawing">
+    <value>109, 17</value>
   </data>
   <data name="&gt;&gt;columnHeader6.Type" xml:space="preserve">
     <value>System.Windows.Forms.ColumnHeader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -744,8 +735,8 @@
   <data name="comboBox2.Location" type="System.Drawing.Point, System.Drawing">
     <value>313, 210</value>
   </data>
-  <data name="buttonClearImageHistory.Text" xml:space="preserve">
-    <value>Verlauf leeren</value>
+  <data name="&gt;&gt;aufUpdatePrüfenToolStripMenuItem.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="listBoxBibleVerse.Location" type="System.Drawing.Point, System.Drawing">
     <value>345, 33</value>
@@ -768,8 +759,11 @@
   <data name="buttonDiaShow.Size" type="System.Drawing.Size, System.Drawing">
     <value>177, 23</value>
   </data>
-  <data name="labelFadeTimeLayer1.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
+  <data name="buttonShowLiveText.TextImageRelation" type="System.Windows.Forms.TextImageRelation, System.Windows.Forms">
+    <value>ImageBeforeText</value>
+  </data>
+  <data name="tabControlTextLayer.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 32</value>
   </data>
   <data name="&gt;&gt;buttonToggleLayer1.Type" xml:space="preserve">
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -777,11 +771,8 @@
   <data name="&gt;&gt;liederToolStripMenuItem.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="radioButtonManualDiashow.Enabled" type="System.Boolean, mscorlib">
-    <value>False</value>
-  </data>
-  <data name="tabPageImageBrowser.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>3, 3, 3, 3</value>
+  <data name="tabControl1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>256, 322</value>
   </data>
   <data name="buttonResetImageQueue.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
@@ -801,14 +792,11 @@
   <data name="songDetailElement.AutoScroll" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
-  <data name="label9.Text" xml:space="preserve">
-    <value>Vers:</value>
+  <data name="&gt;&gt;buttonClearImageHistory.Parent" xml:space="preserve">
+    <value>tabPageImageBrowser</value>
   </data>
-  <data name="&gt;&gt;textBoxBibleText.Name" xml:space="preserve">
-    <value>textBoxBibleText</value>
-  </data>
-  <data name="&gt;&gt;bilderToolStripMenuItem.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="labelFadeTimeLayer1.Text" xml:space="preserve">
+    <value>-</value>
   </data>
   <data name="label13.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
@@ -816,11 +804,11 @@
   <data name="buttonToggleLayer1.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
+  <data name="tabPage3.Text" xml:space="preserve">
+    <value>Setliste</value>
+  </data>
   <data name="&gt;&gt;listViewImageHistory.ZOrder" xml:space="preserve">
     <value>0</value>
-  </data>
-  <data name="labelImgDirName.Text" xml:space="preserve">
-    <value>Verzeichnisinhalt:</value>
   </data>
   <data name="tabPageImageFavorites.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>3, 3, 3, 3</value>
@@ -840,8 +828,8 @@
   <data name="&gt;&gt;buttonShowLiveText.Name" xml:space="preserve">
     <value>buttonShowLiveText</value>
   </data>
-  <data name="buttonShowLiveText.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
+  <data name="&gt;&gt;timerElementHighlight.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Timer, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="labelBibleSearchMsg.Location" type="System.Drawing.Point, System.Drawing">
     <value>9, 91</value>
@@ -852,17 +840,17 @@
   <data name="einstellungenToolStripMenuItem.Text" xml:space="preserve">
     <value>&amp;Extras</value>
   </data>
-  <data name="listViewFavorites.TabIndex" type="System.Int32, mscorlib">
-    <value>2</value>
-  </data>
   <data name="&gt;&gt;label10.Name" xml:space="preserve">
     <value>label10</value>
   </data>
   <data name="&gt;&gt;label11.ZOrder" xml:space="preserve">
     <value>7</value>
   </data>
-  <data name="&gt;&gt;setlistenToolStripMenuItem1.Name" xml:space="preserve">
-    <value>setlistenToolStripMenuItem1</value>
+  <data name="buttonAddToBibleVerseList.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 8.25pt</value>
+  </data>
+  <data name="toolStripSeparator2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>184, 6</value>
   </data>
   <data name="bilderlisteNeuLadenToolStripMenuItem.Text" xml:space="preserve">
     <value>&amp;Bilderliste neu laden</value>
@@ -878,6 +866,9 @@
   </data>
   <data name="setlistenToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>163, 22</value>
+  </data>
+  <data name="customGroupBox2.Title" xml:space="preserve">
+    <value>Vordergrund</value>
   </data>
   <data name="label10.Location" type="System.Drawing.Point, System.Drawing">
     <value>459, 215</value>
@@ -933,6 +924,9 @@
   <data name="&gt;&gt;tabControl1.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
+  <data name="labelFadeTimeLayer1.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
   <data name="tabPageImageBrowser.Text" xml:space="preserve">
     <value>Bildsammlung</value>
   </data>
@@ -969,6 +963,9 @@
   <data name="radioButtonManualDiashow.TabIndex" type="System.Int32, mscorlib">
     <value>8</value>
   </data>
+  <data name="&gt;&gt;buttonDiaShow.ZOrder" xml:space="preserve">
+    <value>8</value>
+  </data>
   <data name="buttonToggleLayerMode.TabIndex" type="System.Int32, mscorlib">
     <value>36</value>
   </data>
@@ -980,9 +977,6 @@
   </data>
   <data name="&gt;&gt;buttonDisableAllDias.ZOrder" xml:space="preserve">
     <value>9</value>
-  </data>
-  <data name="buttonSetListDown.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Microsoft Sans Serif, 8.25pt</value>
   </data>
   <data name="&gt;&gt;label3.ZOrder" xml:space="preserve">
     <value>2</value>
@@ -1002,20 +996,26 @@
   <data name="&gt;&gt;buttonToggleLayerMode.Type" xml:space="preserve">
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
+  <data name="&gt;&gt;liedSuchenToolStripMenuItem.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
   <data name="buttonDiaShow.Text" xml:space="preserve">
     <value>Diaschau starten</value>
   </data>
   <data name="numericUpDown1.TextAlign" type="System.Windows.Forms.HorizontalAlignment, System.Windows.Forms">
     <value>Right</value>
   </data>
-  <data name="customGroupBox2.TabIndex" type="System.Int32, mscorlib">
-    <value>21</value>
-  </data>
-  <data name="buttonSaveSetList.Location" type="System.Drawing.Point, System.Drawing">
-    <value>183, 267</value>
+  <data name="label5.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
   </data>
   <data name="tabPage5.Size" type="System.Drawing.Size, System.Drawing">
     <value>724, 238</value>
+  </data>
+  <data name="buttonClearImageHistory.Text" xml:space="preserve">
+    <value>Verlauf leeren</value>
+  </data>
+  <data name="buttonResetImageQueue.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 8.25pt</value>
   </data>
   <data name="labelFadeTime.Size" type="System.Drawing.Size, System.Drawing">
     <value>32, 13</value>
@@ -1023,8 +1023,8 @@
   <data name="&gt;&gt;customGroupBox3.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
-  <data name="&gt;&gt;listViewSongHistory.Name" xml:space="preserve">
-    <value>listViewSongHistory</value>
+  <data name="radioButtonManualDiashow.Enabled" type="System.Boolean, mscorlib">
+    <value>False</value>
   </data>
   <data name="labelDiaDirectory.Size" type="System.Drawing.Size, System.Drawing">
     <value>162, 13</value>
@@ -1044,8 +1044,8 @@
   <data name="label11.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 8.25pt, style=Bold</value>
   </data>
-  <data name="&gt;&gt;label8.Name" xml:space="preserve">
-    <value>label8</value>
+  <data name="tableLayoutPanel1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>260, 98</value>
   </data>
   <data name="infoToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>181, 22</value>
@@ -1056,14 +1056,14 @@
   <data name="buttonBibleTextShow.Size" type="System.Drawing.Size, System.Drawing">
     <value>78, 23</value>
   </data>
+  <data name="präsentationeinToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>200, 22</value>
+  </data>
   <data name="&gt;&gt;setlistenToolStripMenuItem.Name" xml:space="preserve">
     <value>setlistenToolStripMenuItem</value>
   </data>
   <data name="&gt;&gt;tabPageSlideShow.Type" xml:space="preserve">
     <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;listViewDirectoryImages.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ListView, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;menuStrip1.Name" xml:space="preserve">
     <value>menuStrip1</value>
@@ -1085,6 +1085,9 @@
   </data>
   <data name="label7.Text" xml:space="preserve">
     <value>Übersetzung:</value>
+  </data>
+  <data name="&gt;&gt;listBoxBibleVerseTo.Parent" xml:space="preserve">
+    <value>tabPage5</value>
   </data>
   <data name="&gt;&gt;columnHeader4.Name" xml:space="preserve">
     <value>columnHeader4</value>
@@ -1110,6 +1113,12 @@
   <data name="labelImgDirName.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
+  <data name="&gt;&gt;buttonSetListDown.Name" xml:space="preserve">
+    <value>buttonSetListDown</value>
+  </data>
+  <data name="&gt;&gt;textBoxBibleText.Name" xml:space="preserve">
+    <value>textBoxBibleText</value>
+  </data>
   <data name="listViewBibleVerseList.TabIndex" type="System.Int32, mscorlib">
     <value>28</value>
   </data>
@@ -1119,6 +1128,9 @@
   <data name="liededitorToolStripMenuItem.ShortcutKeys" type="System.Windows.Forms.Keys, System.Windows.Forms">
     <value>F3</value>
   </data>
+  <data name="&gt;&gt;customGroupBox1.Type" xml:space="preserve">
+    <value>Pbp.Components.CustomGroupBox, PraiseBase Presenter, Version=1.1.3.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
   <data name="label12.Location" type="System.Drawing.Point, System.Drawing">
     <value>855, 9</value>
   </data>
@@ -1127,9 +1139,6 @@
   </data>
   <data name="&gt;&gt;buttonSetListRem.ZOrder" xml:space="preserve">
     <value>7</value>
-  </data>
-  <data name="&gt;&gt;textBoxBibleText.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="checkBoxBibleShowVerseFromListDirectly.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Bottom, Right</value>
@@ -1167,11 +1176,11 @@
   <data name="&gt;&gt;tabPageImageFavorites.Parent" xml:space="preserve">
     <value>tabControl2</value>
   </data>
+  <data name="buttonToggleLayer2.TabIndex" type="System.Int32, mscorlib">
+    <value>45</value>
+  </data>
   <data name="&gt;&gt;label13.ZOrder" xml:space="preserve">
     <value>1</value>
-  </data>
-  <data name="präsentationausToolStripMenuItem.ShortcutKeys" type="System.Windows.Forms.Keys, System.Windows.Forms">
-    <value>F6</value>
   </data>
   <data name="tabPage1.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -1187,9 +1196,6 @@
   </data>
   <data name="buttonSetListRem.Enabled" type="System.Boolean, mscorlib">
     <value>False</value>
-  </data>
-  <data name="&gt;&gt;liededitorToolStripMenuItem.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="tableLayoutPanel1.Size" type="System.Drawing.Size, System.Drawing">
     <value>746, 631</value>
@@ -1215,8 +1221,8 @@
   <data name="tabPage4.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
   </data>
-  <data name="toolStripButtonProjectionOff.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
-    <value>Magenta</value>
+  <data name="textBoxDiaDuration.MaxLength" type="System.Int32, mscorlib">
+    <value>2</value>
   </data>
   <data name="&gt;&gt;timerElementHighlight.Name" xml:space="preserve">
     <value>timerElementHighlight</value>
@@ -1233,11 +1239,8 @@
   <data name="numericUpDown1.Location" type="System.Drawing.Point, System.Drawing">
     <value>88, 211</value>
   </data>
-  <data name="customGroupBox3.TabIndex" type="System.Int32, mscorlib">
-    <value>40</value>
-  </data>
-  <data name="&gt;&gt;numericUpDown2.Name" xml:space="preserve">
-    <value>numericUpDown2</value>
+  <data name="listBoxBibleBook.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Bottom, Left</value>
   </data>
   <data name="&gt;&gt;labelImgDirName.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -1254,13 +1257,10 @@
   <data name="label13.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Right</value>
   </data>
-  <data name="&gt;&gt;labelDiaDirectory.Parent" xml:space="preserve">
-    <value>tabPageSlideShow</value>
-  </data>
   <data name="comboBox1.Items2" xml:space="preserve">
     <value>Rechts</value>
   </data>
-  <data name="&gt;&gt;tabPage2.Name" xml:space="preserve">
+  <data name="&gt;&gt;comboBox1.Parent" xml:space="preserve">
     <value>tabPage2</value>
   </data>
   <data name="buttonDisableAllDias.Location" type="System.Drawing.Point, System.Drawing">
@@ -1299,8 +1299,8 @@
   <data name="&gt;&gt;dateiToolStripMenuItem.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;timerElementHighlight.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Timer, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="&gt;&gt;buttonSetListClear.Parent" xml:space="preserve">
+    <value>tabPage3</value>
   </data>
   <data name="tabControl2.Size" type="System.Drawing.Size, System.Drawing">
     <value>592, 274</value>
@@ -1314,20 +1314,23 @@
   <data name="&gt;&gt;labelBibleTextName.Parent" xml:space="preserve">
     <value>tabPage5</value>
   </data>
-  <data name="label7.Size" type="System.Drawing.Size, System.Drawing">
-    <value>82, 13</value>
+  <data name="&gt;&gt;listViewImageQueue.ZOrder" xml:space="preserve">
+    <value>3</value>
   </data>
-  <data name="buttonBibleTextShow.TextImageRelation" type="System.Windows.Forms.TextImageRelation, System.Windows.Forms">
-    <value>ImageBeforeText</value>
+  <data name="&gt;&gt;listViewBibleVerseList.ZOrder" xml:space="preserve">
+    <value>6</value>
   </data>
   <data name="&gt;&gt;buttonShowLiveText.ZOrder" xml:space="preserve">
     <value>5</value>
   </data>
-  <data name="buttonSaveSetList.TabIndex" type="System.Int32, mscorlib">
-    <value>30</value>
+  <data name="buttonSetListUp.TabIndex" type="System.Int32, mscorlib">
+    <value>24</value>
   </data>
   <data name="toolStripButtonDisplaySettings.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
     <value>Magenta</value>
+  </data>
+  <data name="&gt;&gt;comboBox2.ZOrder" xml:space="preserve">
+    <value>3</value>
   </data>
   <data name="$this.StartPosition" type="System.Windows.Forms.FormStartPosition, System.Windows.Forms">
     <value>CenterScreen</value>
@@ -1338,17 +1341,14 @@
   <data name="toolStripButtonProjectionOn.Size" type="System.Drawing.Size, System.Drawing">
     <value>68, 68</value>
   </data>
-  <data name="&gt;&gt;songDetailElement.Name" xml:space="preserve">
-    <value>songDetailElement</value>
+  <data name="liederToolStripMenuItem1.Text" xml:space="preserve">
+    <value>&amp;Lieder</value>
   </data>
   <data name="&gt;&gt;buttonSetListClear.ZOrder" xml:space="preserve">
     <value>5</value>
   </data>
   <data name="textBoxDiaDuration.Location" type="System.Drawing.Point, System.Drawing">
     <value>138, 119</value>
-  </data>
-  <data name="tabPage5.Text" xml:space="preserve">
-    <value>Bibel</value>
   </data>
   <data name="label5.Size" type="System.Drawing.Size, System.Drawing">
     <value>71, 13</value>
@@ -1359,6 +1359,9 @@
   <data name="bildschirmeSuchenToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>200, 22</value>
   </data>
+  <data name="&gt;&gt;tabPage5.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
   <data name="buttonClearImageHistory.Location" type="System.Drawing.Point, System.Drawing">
     <value>447, 262</value>
   </data>
@@ -1367,9 +1370,6 @@
   </data>
   <data name="liededitorToolStripMenuItem.Text" xml:space="preserve">
     <value>Lied&amp;editor</value>
-  </data>
-  <data name="textBoxBibleText.Size" type="System.Drawing.Size, System.Drawing">
-    <value>260, 168</value>
   </data>
   <data name="label14.Location" type="System.Drawing.Point, System.Drawing">
     <value>4, 261</value>
@@ -1386,14 +1386,17 @@
   <data name="listViewFavorites.Location" type="System.Drawing.Point, System.Drawing">
     <value>0, 3</value>
   </data>
+  <data name="columnHeader6.Width" type="System.Int32, mscorlib">
+    <value>90</value>
+  </data>
   <data name="&gt;&gt;label2.Parent" xml:space="preserve">
     <value>tabPage5</value>
   </data>
   <data name="miniaturbilderPrüfenToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>187, 22</value>
   </data>
-  <data name="tabPage3.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>3, 3, 3, 3</value>
+  <data name="fehlerMeldenToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>181, 22</value>
   </data>
   <data name="&gt;&gt;buttonSetListAdd.Parent" xml:space="preserve">
     <value>tabPage3</value>
@@ -1407,17 +1410,11 @@
   <data name="&gt;&gt;customGroupBox3.Name" xml:space="preserve">
     <value>customGroupBox3</value>
   </data>
-  <data name="label5.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
   <data name="buttonSetListDown.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Bottom, Right</value>
   </data>
   <data name="&gt;&gt;buttonClearImageHistory.Type" xml:space="preserve">
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="label7.Location" type="System.Drawing.Point, System.Drawing">
-    <value>6, 9</value>
   </data>
   <data name="buttonSetListDown.Location" type="System.Drawing.Point, System.Drawing">
     <value>68, 267</value>
@@ -1440,8 +1437,8 @@
   <data name="&gt;&gt;checkBoxBibleShowVerseFromListDirectly.Type" xml:space="preserve">
     <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="bilderToolStripMenuItem1.Text" xml:space="preserve">
-    <value>&amp;Bilder</value>
+  <data name="&gt;&gt;label11.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="buttonOpenSetList.Size" type="System.Drawing.Size, System.Drawing">
     <value>26, 23</value>
@@ -1458,14 +1455,17 @@
   <data name="label2.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 8.25pt, style=Bold</value>
   </data>
+  <data name="&gt;&gt;labelBibleSearchMsg.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
   <data name="&gt;&gt;customGroupBox2.Name" xml:space="preserve">
     <value>customGroupBox2</value>
   </data>
   <data name="buttonBibleTextShow.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
-  <data name="&gt;&gt;toolStripMenuItem1.Name" xml:space="preserve">
-    <value>toolStripMenuItem1</value>
+  <data name="&gt;&gt;präsentationeinToolStripMenuItem.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;label1.Parent" xml:space="preserve">
     <value>tabPageSlideShow</value>
@@ -1494,29 +1494,32 @@
   <data name="label8.Size" type="System.Drawing.Size, System.Drawing">
     <value>66, 13</value>
   </data>
-  <data name="&gt;&gt;buttonChooseDiaDir.Name" xml:space="preserve">
-    <value>buttonChooseDiaDir</value>
+  <data name="&gt;&gt;numericUpDown2.Type" xml:space="preserve">
+    <value>System.Windows.Forms.NumericUpDown, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="buttonDiaShow.TabIndex" type="System.Int32, mscorlib">
-    <value>5</value>
+  <data name="checkBoxBibleShowVerseFromListDirectly.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
   </data>
   <data name="pictureBoxbeamerPreview.TabIndex" type="System.Int32, mscorlib">
     <value>50</value>
   </data>
-  <data name="&gt;&gt;listBoxBibleVerseTo.Parent" xml:space="preserve">
-    <value>tabPage5</value>
+  <data name="label7.Location" type="System.Drawing.Point, System.Drawing">
+    <value>6, 9</value>
   </data>
   <data name="&gt;&gt;infoToolStripMenuItem.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="setlistenToolStripMenuItem1.Text" xml:space="preserve">
-    <value>&amp;Setlisten</value>
+  <data name="&gt;&gt;label13.Parent" xml:space="preserve">
+    <value>customGroupBox3</value>
   </data>
   <data name="&gt;&gt;toolStripButtonProjectionOff.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;songSearchTextBox.Name" xml:space="preserve">
     <value>songSearchTextBox</value>
+  </data>
+  <data name="&gt;&gt;buttonResetImageQueue.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="label5.TabIndex" type="System.Int32, mscorlib">
     <value>9</value>
@@ -1530,8 +1533,8 @@
   <data name="customGroupBox3.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Bottom, Left, Right</value>
   </data>
-  <data name="&gt;&gt;präsentationeinToolStripMenuItem.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="&gt;&gt;listViewDirectoryImages.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ListView, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;labelFadeTimeLayer1.Name" xml:space="preserve">
     <value>labelFadeTimeLayer1</value>
@@ -1563,8 +1566,8 @@
   <data name="listBoxBibleVerse.Size" type="System.Drawing.Size, System.Drawing">
     <value>50, 186</value>
   </data>
-  <data name="&gt;&gt;praiseBoxDatenbankToolStripMenuItem.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="&gt;&gt;comboBox1.ZOrder" xml:space="preserve">
+    <value>4</value>
   </data>
   <data name="buttonEnableAllDias.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
@@ -1574,6 +1577,9 @@
   </data>
   <data name="&gt;&gt;buttonEnableAllDias.ZOrder" xml:space="preserve">
     <value>7</value>
+  </data>
+  <data name="listViewSongHistory.Location" type="System.Drawing.Point, System.Drawing">
+    <value>6, 6</value>
   </data>
   <data name="listBoxBibleBook.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -1590,11 +1596,14 @@
   <data name="&gt;&gt;label13.Name" xml:space="preserve">
     <value>label13</value>
   </data>
+  <data name="&gt;&gt;textBoxLiveText.ZOrder" xml:space="preserve">
+    <value>6</value>
+  </data>
   <data name="blackoutToolStripMenuItem.Text" xml:space="preserve">
     <value>&amp;Blackout</value>
   </data>
-  <data name="buttonBibleTextShow.Location" type="System.Drawing.Point, System.Drawing">
-    <value>640, 210</value>
+  <data name="buttonSetListClear.ImageAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleLeft</value>
   </data>
   <data name="&gt;&gt;bildschirmeSuchenToolStripMenuItem.Name" xml:space="preserve">
     <value>bildschirmeSuchenToolStripMenuItem</value>
@@ -1602,17 +1611,17 @@
   <data name="buttonSetListDown.Size" type="System.Drawing.Size, System.Drawing">
     <value>24, 23</value>
   </data>
-  <data name="label6.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="&gt;&gt;datenverzeichnisToolStripMenuItem1.Name" xml:space="preserve">
-    <value>datenverzeichnisToolStripMenuItem1</value>
-  </data>
   <data name="textBoxDiaDuration.Text" xml:space="preserve">
     <value>3</value>
   </data>
   <data name="bilderToolStripMenuItem.Text" xml:space="preserve">
     <value>Bilder</value>
+  </data>
+  <data name="buttonSaveSetList.TabIndex" type="System.Int32, mscorlib">
+    <value>30</value>
+  </data>
+  <data name="&gt;&gt;textBoxBibleText.ZOrder" xml:space="preserve">
+    <value>13</value>
   </data>
   <data name="buttonToggleLayer1.Size" type="System.Drawing.Size, System.Drawing">
     <value>24, 23</value>
@@ -1620,8 +1629,8 @@
   <data name="&gt;&gt;customGroupBox2.Type" xml:space="preserve">
     <value>Pbp.Components.CustomGroupBox, PraiseBase Presenter, Version=1.1.3.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name="dateiToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>73, 20</value>
+  <data name="toolStripMenuItem2.ShortcutKeys" type="System.Windows.Forms.Keys, System.Windows.Forms">
+    <value>F1</value>
   </data>
   <data name="buttonSetListClear.Enabled" type="System.Boolean, mscorlib">
     <value>False</value>
@@ -1634,6 +1643,9 @@
   </data>
   <data name="datenverzeichnisÖffnenToolStripMenuItem.Text" xml:space="preserve">
     <value>&amp;Verzeichnis anzeigen</value>
+  </data>
+  <data name="&gt;&gt;toolStripButtonBlackout.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="label13.TabIndex" type="System.Int32, mscorlib">
     <value>34</value>
@@ -1650,11 +1662,17 @@
   <data name="buttonToggleLayerMode.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 8.25pt</value>
   </data>
+  <data name="buttonSetListRem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>26, 23</value>
+  </data>
+  <data name="buttonRemoveFromBibleVerseList.TabIndex" type="System.Int32, mscorlib">
+    <value>34</value>
+  </data>
+  <data name="label3.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
   <data name="tabControl2.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
-  </data>
-  <data name="trackBarFadeTimeLayer1.AutoSize" type="System.Boolean, mscorlib">
-    <value>False</value>
   </data>
   <data name="&gt;&gt;listBoxBibleChapter.ZOrder" xml:space="preserve">
     <value>19</value>
@@ -1667,6 +1685,9 @@
   </data>
   <data name="&gt;&gt;liederToolStripMenuItem1.Name" xml:space="preserve">
     <value>liederToolStripMenuItem1</value>
+  </data>
+  <data name="&gt;&gt;tabPageImageBrowser.ZOrder" xml:space="preserve">
+    <value>0</value>
   </data>
   <data name="label1.Size" type="System.Drawing.Size, System.Drawing">
     <value>113, 13</value>
@@ -1701,8 +1722,14 @@
   <data name="comboBox2.Items" xml:space="preserve">
     <value>Oben</value>
   </data>
+  <data name="buttonChooseDiaDir.Text" xml:space="preserve">
+    <value>Verzeichnis wählen...</value>
+  </data>
   <data name="searchTextBoxImages.Size" type="System.Drawing.Size, System.Drawing">
     <value>228, 24</value>
+  </data>
+  <data name="&gt;&gt;textBoxDiaDuration.Name" xml:space="preserve">
+    <value>textBoxDiaDuration</value>
   </data>
   <data name="&gt;&gt;toolStripSeparator8.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -1725,6 +1752,9 @@
   <data name="optionenToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>187, 22</value>
   </data>
+  <data name="&gt;&gt;toolStripButton1.Name" xml:space="preserve">
+    <value>toolStripButton1</value>
+  </data>
   <data name="listBoxBibleVerse.TabIndex" type="System.Int32, mscorlib">
     <value>6</value>
   </data>
@@ -1742,6 +1772,9 @@
   </data>
   <data name="&gt;&gt;listViewImageHistory.Type" xml:space="preserve">
     <value>System.Windows.Forms.ListView, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;label14.ZOrder" xml:space="preserve">
+    <value>8</value>
   </data>
   <data name="&gt;&gt;customGroupBox1.Name" xml:space="preserve">
     <value>customGroupBox1</value>
@@ -1815,14 +1848,17 @@
   <data name="&gt;&gt;label6.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
+  <data name="&gt;&gt;listViewDias.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ListView, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
   <data name="&gt;&gt;labelFadeTimeLayer1.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
   <data name="buttonSetListClear.TabIndex" type="System.Int32, mscorlib">
     <value>28</value>
   </data>
-  <data name="&gt;&gt;comboBoxBible.ZOrder" xml:space="preserve">
-    <value>21</value>
+  <data name="buttonSetListRem.TabIndex" type="System.Int32, mscorlib">
+    <value>26</value>
   </data>
   <data name="&gt;&gt;buttonResetImageQueue.ZOrder" xml:space="preserve">
     <value>4</value>
@@ -1832,9 +1868,6 @@
   </data>
   <data name="buttonSaveSetList.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Bottom, Right</value>
-  </data>
-  <data name="tabControl1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>256, 322</value>
   </data>
   <data name="toolStripButtonDataFolder.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
     <value>Magenta</value>
@@ -1854,17 +1887,29 @@
   <data name="&gt;&gt;buttonDiaShow.Name" xml:space="preserve">
     <value>buttonDiaShow</value>
   </data>
+  <data name="tabPage4.Text" xml:space="preserve">
+    <value>Verlauf</value>
+  </data>
   <data name="setlistenToolStripMenuItem1.Size" type="System.Drawing.Size, System.Drawing">
     <value>163, 22</value>
   </data>
-  <data name="&gt;&gt;tabControl2.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TabControl, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="tabPage5.Text" xml:space="preserve">
+    <value>Bibel</value>
+  </data>
+  <data name="searchTextBoxImages.TabIndex" type="System.Int32, mscorlib">
+    <value>26</value>
   </data>
   <data name="&gt;&gt;label2.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;songDetailElement.ZOrder" xml:space="preserve">
     <value>3</value>
+  </data>
+  <data name="buttonSaveSetList.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 8.25pt</value>
+  </data>
+  <data name="&gt;&gt;buttonOpenSetList.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="toolStrip1.Location" type="System.Drawing.Point, System.Drawing">
     <value>0, 24</value>
@@ -1884,26 +1929,32 @@
   <data name="&gt;&gt;liederToolStripMenuItem.Name" xml:space="preserve">
     <value>liederToolStripMenuItem</value>
   </data>
+  <data name="setlistenToolStripMenuItem1.Text" xml:space="preserve">
+    <value>&amp;Setlisten</value>
+  </data>
   <data name="&gt;&gt;tabPageSlideShow.Name" xml:space="preserve">
     <value>tabPageSlideShow</value>
   </data>
-  <data name="&gt;&gt;tabPage1.Parent" xml:space="preserve">
-    <value>tabControlTextLayer</value>
+  <data name="&gt;&gt;listViewSongHistory.Name" xml:space="preserve">
+    <value>listViewSongHistory</value>
   </data>
   <data name="&gt;&gt;label7.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
+  <data name="label12.TabIndex" type="System.Int32, mscorlib">
+    <value>29</value>
+  </data>
   <data name="searchTextBoxImages.Location" type="System.Drawing.Point, System.Drawing">
     <value>0, 6</value>
+  </data>
+  <data name="label5.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Bottom, Left</value>
   </data>
   <data name="tabPage1.Text" xml:space="preserve">
     <value>Liedetexte</value>
   </data>
   <data name="label7.TabIndex" type="System.Int32, mscorlib">
     <value>5</value>
-  </data>
-  <data name="&gt;&gt;webToolStripMenuItem.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="powerpraiseLiederToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>225, 22</value>
@@ -1926,9 +1977,6 @@
   <data name="&gt;&gt;fehlerMeldenToolStripMenuItem.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="liederToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>163, 22</value>
-  </data>
   <data name="buttonSetListClear.Size" type="System.Drawing.Size, System.Drawing">
     <value>26, 23</value>
   </data>
@@ -1938,14 +1986,14 @@
   <data name="&gt;&gt;label3.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;textBoxDiaDuration.Name" xml:space="preserve">
-    <value>textBoxDiaDuration</value>
+  <data name="&gt;&gt;radioButtonAutoDiaShow.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="buttonSetListClear.Location" type="System.Drawing.Point, System.Drawing">
+    <value>149, 267</value>
   </data>
   <data name="&gt;&gt;buttonChooseDiaDir.Type" xml:space="preserve">
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;titelToolStripMenuItem.Name" xml:space="preserve">
-    <value>titelToolStripMenuItem</value>
   </data>
   <data name="&gt;&gt;labelBibleTextName.ZOrder" xml:space="preserve">
     <value>11</value>
@@ -1959,8 +2007,8 @@
   <data name="treeViewImageDirectories.Size" type="System.Drawing.Size, System.Drawing">
     <value>228, 205</value>
   </data>
-  <data name="&gt;&gt;searchTextBoxBible.Parent" xml:space="preserve">
-    <value>tabPage5</value>
+  <data name="toolStrip1.Text" xml:space="preserve">
+    <value>toolStrip1</value>
   </data>
   <data name="labelBibleTextName.TabIndex" type="System.Int32, mscorlib">
     <value>11</value>
@@ -1980,17 +2028,20 @@
   <data name="buttonShowLiveText.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Bottom, Right</value>
   </data>
-  <data name="buttonToggleLayer2.TabIndex" type="System.Int32, mscorlib">
-    <value>45</value>
+  <data name="buttonBibleTextShow.TextImageRelation" type="System.Windows.Forms.TextImageRelation, System.Windows.Forms">
+    <value>ImageBeforeText</value>
   </data>
   <data name="buttonAddToBibleVerseList.Enabled" type="System.Boolean, mscorlib">
     <value>False</value>
   </data>
-  <data name="tabPage4.Text" xml:space="preserve">
-    <value>Verlauf</value>
+  <data name="&gt;&gt;tabPage2.Name" xml:space="preserve">
+    <value>tabPage2</value>
   </data>
   <data name="buttonToggleLayer2.Size" type="System.Drawing.Size, System.Drawing">
     <value>24, 23</value>
+  </data>
+  <data name="tabPage3.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>3, 3, 3, 3</value>
   </data>
   <data name="präsentationToolStripMenuItem.Text" xml:space="preserve">
     <value>&amp;Präsentation</value>
@@ -1998,17 +2049,20 @@
   <data name="&gt;&gt;blackoutToolStripMenuItem.Name" xml:space="preserve">
     <value>blackoutToolStripMenuItem</value>
   </data>
+  <data name="&gt;&gt;label3.Name" xml:space="preserve">
+    <value>label3</value>
+  </data>
   <data name="buttonOpenSetList.ImageAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>MiddleLeft</value>
   </data>
   <data name="fehlerMeldenToolStripMenuItem.Text" xml:space="preserve">
     <value>&amp;Fehler melden</value>
   </data>
-  <data name="labelDiaDirectory.Text" xml:space="preserve">
-    <value>Bitte wähle ein Verzeichnis aus...</value>
+  <data name="toolStripMenuItem3.ShortcutKeys" type="System.Windows.Forms.Keys, System.Windows.Forms">
+    <value>F4</value>
   </data>
-  <data name="toolStripButtonBlackout.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
-    <value>Magenta</value>
+  <data name="buttonAddToBibleVerseList.Size" type="System.Drawing.Size, System.Drawing">
+    <value>24, 23</value>
   </data>
   <data name="&gt;&gt;numericUpDown2.Parent" xml:space="preserve">
     <value>tabPage5</value>
@@ -2043,9 +2097,6 @@
   <data name="&gt;&gt;toolStripMenuItem1.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;buttonDisableAllDias.Name" xml:space="preserve">
-    <value>buttonDisableAllDias</value>
-  </data>
   <data name="&gt;&gt;tabPage4.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
@@ -2053,9 +2104,6 @@
     <value>tabPage3</value>
   </data>
   <data name="label9.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="$this.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
   <data name="listViewSongHistory.Size" type="System.Drawing.Size, System.Drawing">
@@ -2079,17 +2127,14 @@
   <data name="toolStripButtonBlackout.Size" type="System.Drawing.Size, System.Drawing">
     <value>68, 68</value>
   </data>
-  <data name="buttonOpenSetList.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
   <data name="buttonDiaShow.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
   <data name="label6.Size" type="System.Drawing.Size, System.Drawing">
     <value>68, 13</value>
   </data>
-  <data name="bilderlisteNeuLadenToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>187, 22</value>
+  <data name="bilderToolStripMenuItem1.Text" xml:space="preserve">
+    <value>&amp;Bilder</value>
   </data>
   <data name="&gt;&gt;tableLayoutPanel1.Parent" xml:space="preserve">
     <value>$this</value>
@@ -2100,11 +2145,11 @@
   <data name="buttonRemoveFromBibleVerseList.Enabled" type="System.Boolean, mscorlib">
     <value>False</value>
   </data>
-  <data name="&gt;&gt;checkBoxBibleShowVerseFromListDirectly.Parent" xml:space="preserve">
-    <value>tabPage5</value>
+  <data name="textBoxBibleText.Location" type="System.Drawing.Point, System.Drawing">
+    <value>457, 33</value>
   </data>
-  <data name="tableLayoutPanel1.ColumnCount" type="System.Int32, mscorlib">
-    <value>1</value>
+  <data name="searchTextBoxBible.PlaceHolderText" xml:space="preserve">
+    <value>Search bible text</value>
   </data>
   <data name="toolStripButton1.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
     <value>Magenta</value>
@@ -2114,6 +2159,9 @@
   </data>
   <data name="&gt;&gt;trackBarFadeTime.Name" xml:space="preserve">
     <value>trackBarFadeTime</value>
+  </data>
+  <data name="&gt;&gt;buttonOpenSetList.ZOrder" xml:space="preserve">
+    <value>0</value>
   </data>
   <data name="buttonShowLiveText.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -2148,8 +2196,14 @@
   <data name="bilderToolStripMenuItem1.Size" type="System.Drawing.Size, System.Drawing">
     <value>163, 22</value>
   </data>
+  <data name="&gt;&gt;label13.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
   <data name="&gt;&gt;toolStripSeparator9.Name" xml:space="preserve">
     <value>toolStripSeparator9</value>
+  </data>
+  <data name="&gt;&gt;tabPage1.Parent" xml:space="preserve">
+    <value>tabControlTextLayer</value>
   </data>
   <data name="&gt;&gt;columnHeader1.Type" xml:space="preserve">
     <value>System.Windows.Forms.ColumnHeader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -2166,8 +2220,8 @@
   <data name="&gt;&gt;customGroupBox2.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
-  <data name="buttonSetListRem.TabIndex" type="System.Int32, mscorlib">
-    <value>26</value>
+  <data name="listViewFavorites.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
   </data>
   <data name="&gt;&gt;buttonRemoveFromBibleVerseList.Name" xml:space="preserve">
     <value>buttonRemoveFromBibleVerseList</value>
@@ -2193,8 +2247,8 @@
   <data name="toolStripMenuItem1.Text" xml:space="preserve">
     <value>&amp;?</value>
   </data>
-  <data name="toolStripButtonProjectionOff.Text" xml:space="preserve">
-    <value>Präsentation aus</value>
+  <data name="buttonEnableAllDias.TabIndex" type="System.Int32, mscorlib">
+    <value>3</value>
   </data>
   <data name="&gt;&gt;beendenToolStripMenuItem.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -2208,14 +2262,14 @@
   <data name="buttonOpenSetList.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 8.25pt</value>
   </data>
-  <data name="&gt;&gt;toolStripSeparator7.Name" xml:space="preserve">
-    <value>toolStripSeparator7</value>
-  </data>
   <data name="buttonSetListRem.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Bottom, Right</value>
   </data>
-  <data name="&gt;&gt;toolStripButtonBlackout.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="&gt;&gt;tabControl2.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="buttonSaveSetList.Location" type="System.Drawing.Point, System.Drawing">
+    <value>183, 267</value>
   </data>
   <data name="&gt;&gt;comboBox2.Type" xml:space="preserve">
     <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -2226,8 +2280,8 @@
   <data name="comboBox2.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Bottom, Left</value>
   </data>
-  <data name="buttonClearImageHistory.TabIndex" type="System.Int32, mscorlib">
-    <value>22</value>
+  <data name="trackBarFadeTime.Location" type="System.Drawing.Point, System.Drawing">
+    <value>71, 219</value>
   </data>
   <data name="&gt;&gt;buttonSetListDown.Parent" xml:space="preserve">
     <value>tabPage3</value>
@@ -2238,8 +2292,11 @@
   <data name="&gt;&gt;tabPageImageBrowser.Name" xml:space="preserve">
     <value>tabPageImageBrowser</value>
   </data>
-  <data name="&gt;&gt;labelBibleSearchMsg.ZOrder" xml:space="preserve">
-    <value>0</value>
+  <data name="&gt;&gt;listViewSetList.Name" xml:space="preserve">
+    <value>listViewSetList</value>
+  </data>
+  <data name="&gt;&gt;setlistenToolStripMenuItem1.Name" xml:space="preserve">
+    <value>setlistenToolStripMenuItem1</value>
   </data>
   <data name="tabPage5.Location" type="System.Drawing.Point, System.Drawing">
     <value>4, 29</value>
@@ -2250,11 +2307,8 @@
   <data name="&gt;&gt;columnHeader3.Name" xml:space="preserve">
     <value>columnHeader3</value>
   </data>
-  <data name="buttonChooseDiaDir.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="&gt;&gt;beendenToolStripMenuItem.Name" xml:space="preserve">
-    <value>beendenToolStripMenuItem</value>
+  <data name="&gt;&gt;textBoxDiaDuration.ZOrder" xml:space="preserve">
+    <value>6</value>
   </data>
   <data name="listBoxBibleVerse.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Bottom, Left</value>
@@ -2289,14 +2343,11 @@
   <data name="label11.Size" type="System.Drawing.Size, System.Drawing">
     <value>28, 13</value>
   </data>
-  <data name="&gt;&gt;buttonSetListAdd.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
   <data name="tabControl2.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Bottom, Left, Right</value>
   </data>
-  <data name="tabControlTextLayer.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 32</value>
+  <data name="&gt;&gt;toolStripMenuItem1.Name" xml:space="preserve">
+    <value>toolStripMenuItem1</value>
   </data>
   <data name="tabPageSlideShow.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -2313,14 +2364,14 @@
   <data name="buttonToggleLayerMode.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
-  <data name="buttonDisableAllDias.Size" type="System.Drawing.Size, System.Drawing">
-    <value>82, 23</value>
+  <data name="label5.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="labelImgDirName.Text" xml:space="preserve">
+    <value>Verzeichnisinhalt:</value>
   </data>
   <data name="label2.Size" type="System.Drawing.Size, System.Drawing">
     <value>40, 13</value>
-  </data>
-  <data name="&gt;&gt;praiseBoxDatenbankToolStripMenuItem.Name" xml:space="preserve">
-    <value>praiseBoxDatenbankToolStripMenuItem</value>
   </data>
   <data name="&gt;&gt;comboBoxBible.Type" xml:space="preserve">
     <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -2331,14 +2382,14 @@
   <data name="customGroupBox3.Location" type="System.Drawing.Point, System.Drawing">
     <value>3, 318</value>
   </data>
-  <data name="label13.Size" type="System.Drawing.Size, System.Drawing">
-    <value>47, 13</value>
+  <data name="&gt;&gt;titelUndTextToolStripMenuItem.Name" xml:space="preserve">
+    <value>titelUndTextToolStripMenuItem</value>
   </data>
   <data name="&gt;&gt;label5.Parent" xml:space="preserve">
     <value>tabPage2</value>
   </data>
-  <data name="&gt;&gt;label9.Parent" xml:space="preserve">
-    <value>tabPage5</value>
+  <data name="buttonResetImageQueue.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Right</value>
   </data>
   <data name="&gt;&gt;columnHeader4.Type" xml:space="preserve">
     <value>System.Windows.Forms.ColumnHeader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -2388,17 +2439,20 @@
   <data name="&gt;&gt;datenverzeichnisÖffnenToolStripMenuItem.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="toolStripSeparator11.Size" type="System.Drawing.Size, System.Drawing">
-    <value>197, 6</value>
+  <data name="buttonDiaShow.TabIndex" type="System.Int32, mscorlib">
+    <value>5</value>
   </data>
-  <data name="toolStripSeparator2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>184, 6</value>
+  <data name="&gt;&gt;tabPageImageFavorites.Name" xml:space="preserve">
+    <value>tabPageImageFavorites</value>
+  </data>
+  <data name="präsentationausToolStripMenuItem.ShortcutKeys" type="System.Windows.Forms.Keys, System.Windows.Forms">
+    <value>F6</value>
   </data>
   <data name="liederlisteNeuLadenToolStripMenuItem.Text" xml:space="preserve">
     <value>&amp;Liederliste neu laden</value>
   </data>
-  <data name="buttonAddToBibleVerseList.Size" type="System.Drawing.Size, System.Drawing">
-    <value>24, 23</value>
+  <data name="buttonShowLiveText.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
   <data name="&gt;&gt;buttonOpenSetList.Parent" xml:space="preserve">
     <value>tabPage3</value>
@@ -2406,8 +2460,8 @@
   <data name="numericUpDown2.Location" type="System.Drawing.Point, System.Drawing">
     <value>536, 211</value>
   </data>
-  <data name="checkBoxBibleShowVerseFromListDirectly.Size" type="System.Drawing.Size, System.Drawing">
-    <value>109, 17</value>
+  <data name="liederToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>163, 22</value>
   </data>
   <data name="&gt;&gt;buttonAddToBibleVerseList.Type" xml:space="preserve">
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -2442,8 +2496,8 @@
   <data name="datenverzeichnisToolStripMenuItem1.Text" xml:space="preserve">
     <value>&amp;Datenverzeichnis</value>
   </data>
-  <data name="searchTextBoxImages.TabIndex" type="System.Int32, mscorlib">
-    <value>26</value>
+  <data name="&gt;&gt;songSearchTextBox.Type" xml:space="preserve">
+    <value>Pbp.Components.SearchTextBox, PraiseBase Presenter, Version=1.1.3.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="listViewBibleVerseList.Size" type="System.Drawing.Size, System.Drawing">
     <value>126, 140</value>
@@ -2460,8 +2514,14 @@
   <data name="label4.TabIndex" type="System.Int32, mscorlib">
     <value>4</value>
   </data>
+  <data name="textBoxLiveText.Size" type="System.Drawing.Size, System.Drawing">
+    <value>712, 197</value>
+  </data>
   <data name="tabPage4.Location" type="System.Drawing.Point, System.Drawing">
     <value>4, 22</value>
+  </data>
+  <data name="&gt;&gt;radioButtonAutoDiaShow.Type" xml:space="preserve">
+    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;buttonClearImageHistory.ZOrder" xml:space="preserve">
     <value>4</value>
@@ -2472,29 +2532,29 @@
   <data name="miniaturbilderPrüfenToolStripMenuItem.Text" xml:space="preserve">
     <value>Miniaturbilder prüfen</value>
   </data>
+  <data name="&gt;&gt;columnHeader6.Name" xml:space="preserve">
+    <value>columnHeader6</value>
+  </data>
   <data name="listViewDias.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Bottom, Left, Right</value>
   </data>
-  <data name="fehlerMeldenToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>181, 22</value>
-  </data>
-  <data name="&gt;&gt;worToolStripMenuItem.Name" xml:space="preserve">
-    <value>worToolStripMenuItem</value>
+  <data name="&gt;&gt;comboBoxBible.ZOrder" xml:space="preserve">
+    <value>21</value>
   </data>
   <data name="buttonShowLiveText.Size" type="System.Drawing.Size, System.Drawing">
     <value>78, 23</value>
   </data>
-  <data name="&gt;&gt;radioButtonAutoDiaShow.Type" xml:space="preserve">
-    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="label11.Location" type="System.Drawing.Point, System.Drawing">
+    <value>398, 9</value>
   </data>
-  <data name="buttonDisableAllDias.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
+  <data name="&gt;&gt;labelBibleTextName.Name" xml:space="preserve">
+    <value>labelBibleTextName</value>
   </data>
   <data name="label14.Text" xml:space="preserve">
     <value>Hintergrund:</value>
   </data>
-  <data name="radioButtonAutoDiaShow.Size" type="System.Drawing.Size, System.Drawing">
-    <value>137, 17</value>
+  <data name="&gt;&gt;beendenToolStripMenuItem.Name" xml:space="preserve">
+    <value>beendenToolStripMenuItem</value>
   </data>
   <data name="tableLayoutPanel1.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
     <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="customGroupBox3" Row="1" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="customGroupBox2" Row="0" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;/Controls&gt;&lt;Columns Styles="Percent,100,Absolute,20" /&gt;&lt;Rows Styles="Percent,50,Percent,50" /&gt;&lt;/TableLayoutSettings&gt;</value>
@@ -2511,8 +2571,8 @@
   <data name="listBoxBibleChapter.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Bottom, Left</value>
   </data>
-  <data name="toolStripMenuItem3.ShortcutKeys" type="System.Windows.Forms.Keys, System.Windows.Forms">
-    <value>F4</value>
+  <data name="&gt;&gt;toolStripButtonDisplaySettings.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;listBoxBibleBook.Name" xml:space="preserve">
     <value>listBoxBibleBook</value>
@@ -2520,8 +2580,8 @@
   <data name="&gt;&gt;buttonClearImageHistory.Name" xml:space="preserve">
     <value>buttonClearImageHistory</value>
   </data>
-  <data name="label5.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Bottom, Left</value>
+  <data name="listViewSetList.Location" type="System.Drawing.Point, System.Drawing">
+    <value>6, 6</value>
   </data>
   <data name="&gt;&gt;buttonBibleTextShow.Parent" xml:space="preserve">
     <value>tabPage5</value>
@@ -2529,14 +2589,14 @@
   <data name="&gt;&gt;trackBarFadeTimeLayer1.ZOrder" xml:space="preserve">
     <value>9</value>
   </data>
-  <data name="&gt;&gt;buttonDiaShow.ZOrder" xml:space="preserve">
-    <value>8</value>
+  <data name="label6.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
   </data>
-  <data name="&gt;&gt;listViewDirectoryImages.Parent" xml:space="preserve">
-    <value>tabPageImageBrowser</value>
+  <data name="buttonBibleTextShow.Text" xml:space="preserve">
+    <value>Anzeigen</value>
   </data>
-  <data name="&gt;&gt;tabPage3.ZOrder" xml:space="preserve">
-    <value>0</value>
+  <data name="&gt;&gt;setlistenToolStripMenuItem.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;label5.ZOrder" xml:space="preserve">
     <value>0</value>
@@ -2550,11 +2610,8 @@
   <data name="toolStripButtonDisplaySettings.Text" xml:space="preserve">
     <value>Bildschirmeinstellungen</value>
   </data>
-  <data name="&gt;&gt;titelUndTextToolStripMenuItem.Name" xml:space="preserve">
-    <value>titelUndTextToolStripMenuItem</value>
-  </data>
-  <data name="&gt;&gt;buttonClearImageHistory.Parent" xml:space="preserve">
-    <value>tabPageImageBrowser</value>
+  <data name="songSearchTextBox.PlaceHolderText" xml:space="preserve">
+    <value>Lied suchen</value>
   </data>
   <data name="&gt;&gt;label2.Name" xml:space="preserve">
     <value>label2</value>
@@ -2565,8 +2622,8 @@
   <data name="&gt;&gt;toolStripButton1.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;numericUpDown2.Type" xml:space="preserve">
-    <value>System.Windows.Forms.NumericUpDown, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="tabPage1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>4, 29</value>
   </data>
   <data name="&gt;&gt;dateiToolStripMenuItem.Name" xml:space="preserve">
     <value>dateiToolStripMenuItem</value>
@@ -2580,14 +2637,17 @@
   <data name="&gt;&gt;listViewImageQueue.Name" xml:space="preserve">
     <value>listViewImageQueue</value>
   </data>
-  <data name="&gt;&gt;liedSuchenToolStripMenuItem.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="&gt;&gt;buttonSetListRem.Name" xml:space="preserve">
+    <value>buttonSetListRem</value>
   </data>
-  <data name="präsentationeinToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>200, 22</value>
+  <data name="&gt;&gt;praiseBoxDatenbankToolStripMenuItem.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="comboBoxBible.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
+  </data>
+  <data name="&gt;&gt;labelBibleSearchMsg.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;radioButtonManualDiashow.Parent" xml:space="preserve">
     <value>tabPageSlideShow</value>
@@ -2613,11 +2673,11 @@
   <data name="label10.TabIndex" type="System.Int32, mscorlib">
     <value>14</value>
   </data>
-  <data name="&gt;&gt;customGroupBox1.Type" xml:space="preserve">
-    <value>Pbp.Components.CustomGroupBox, PraiseBase Presenter, Version=1.1.3.0, Culture=neutral, PublicKeyToken=null</value>
+  <data name="&gt;&gt;titelToolStripMenuItem.Name" xml:space="preserve">
+    <value>titelToolStripMenuItem</value>
   </data>
-  <data name="&gt;&gt;comboBox1.Parent" xml:space="preserve">
-    <value>tabPage2</value>
+  <data name="bilderlisteNeuLadenToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>187, 22</value>
   </data>
   <data name="&gt;&gt;worToolStripMenuItem.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -4825,9 +4885,6 @@
         gAEAAP//AAA=
 </value>
   </data>
-  <data name="&gt;&gt;label7.Name" xml:space="preserve">
-    <value>label7</value>
-  </data>
   <data name="label11.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
@@ -4861,8 +4918,8 @@
   <data name="label2.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
-  <data name="&gt;&gt;columnHeader2.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ColumnHeader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="customGroupBox3.Title" xml:space="preserve">
+    <value>Hintergrund</value>
   </data>
   <data name="toolStripButton3.Size" type="System.Drawing.Size, System.Drawing">
     <value>68, 68</value>
@@ -4873,8 +4930,8 @@
   <data name="&gt;&gt;buttonResetImageQueue.Parent" xml:space="preserve">
     <value>customGroupBox3</value>
   </data>
-  <data name="&gt;&gt;columnHeader6.Name" xml:space="preserve">
-    <value>columnHeader6</value>
+  <data name="tabPage1.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>3, 3, 3, 3</value>
   </data>
   <data name="&gt;&gt;datenverzeichnisÖffnenToolStripMenuItem.Name" xml:space="preserve">
     <value>datenverzeichnisÖffnenToolStripMenuItem</value>
@@ -4888,8 +4945,11 @@
   <data name="listBoxBibleVerseTo.TabIndex" type="System.Int32, mscorlib">
     <value>12</value>
   </data>
-  <data name="tabPage1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>724, 238</value>
+  <data name="toolStripButtonBlackout.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
+    <value>Magenta</value>
+  </data>
+  <data name="&gt;&gt;label1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;label9.Name" xml:space="preserve">
     <value>label9</value>
@@ -4900,6 +4960,9 @@
   <data name="&gt;&gt;label14.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
+  <data name="&gt;&gt;labelFadeTime.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
   <data name="&gt;&gt;label3.Parent" xml:space="preserve">
     <value>tabPage1</value>
   </data>
@@ -4909,14 +4972,11 @@
   <data name="&gt;&gt;columnHeader2.Name" xml:space="preserve">
     <value>columnHeader2</value>
   </data>
-  <data name="tableLayoutPanel1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>260, 98</value>
+  <data name="&gt;&gt;toolStripButton4.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;songSearchTextBox.Type" xml:space="preserve">
-    <value>Pbp.Components.SearchTextBox, PraiseBase Presenter, Version=1.1.3.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;listViewDias.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ListView, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="&gt;&gt;webToolStripMenuItem.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="toolStripButton4.Text" xml:space="preserve">
     <value>Einstellungen</value>
@@ -4936,17 +4996,14 @@
   <data name="&gt;&gt;optionenToolStripMenuItem.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="textBoxLiveText.Size" type="System.Drawing.Size, System.Drawing">
-    <value>712, 197</value>
+  <data name="buttonOpenSetList.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
   <data name="&gt;&gt;listViewFavorites.Parent" xml:space="preserve">
     <value>tabPageImageFavorites</value>
   </data>
   <data name="textBoxLiveText.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Bottom, Left, Right</value>
-  </data>
-  <data name="label14.TabIndex" type="System.Int32, mscorlib">
-    <value>46</value>
   </data>
   <data name="&gt;&gt;toolStripButton3.Name" xml:space="preserve">
     <value>toolStripButton3</value>
@@ -4978,8 +5035,8 @@
   <data name="menuStrip1.TabIndex" type="System.Int32, mscorlib">
     <value>5</value>
   </data>
-  <data name="label12.TabIndex" type="System.Int32, mscorlib">
-    <value>29</value>
+  <data name="&gt;&gt;listBoxBibleVerseTo.Name" xml:space="preserve">
+    <value>listBoxBibleVerseTo</value>
   </data>
   <data name="&gt;&gt;toolStripSeparator9.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -4990,8 +5047,8 @@
   <data name="&gt;&gt;treeViewImageDirectories.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
-  <data name="buttonAddToBibleVerseList.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Microsoft Sans Serif, 8.25pt</value>
+  <data name="&gt;&gt;toolStripButtonOpenCurrentSong.Name" xml:space="preserve">
+    <value>toolStripButtonOpenCurrentSong</value>
   </data>
   <data name="tabPage4.Size" type="System.Drawing.Size, System.Drawing">
     <value>248, 296</value>
@@ -5005,8 +5062,8 @@
   <data name="toolStripMenuItem4.Text" xml:space="preserve">
     <value>&amp;Import</value>
   </data>
-  <data name="buttonSetListClear.Location" type="System.Drawing.Point, System.Drawing">
-    <value>149, 267</value>
+  <data name="toolStripButton3.Text" xml:space="preserve">
+    <value>Qualitätssicherung &amp; Bemerkungen</value>
   </data>
   <data name="&gt;&gt;songbeamerLiederToolStripMenuItem.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -5032,8 +5089,8 @@
   <data name="label13.Location" type="System.Drawing.Point, System.Drawing">
     <value>601, 39</value>
   </data>
-  <data name="checkBoxBibleShowVerseFromListDirectly.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
+  <data name="&gt;&gt;pictureBoxbeamerPreview.Parent" xml:space="preserve">
+    <value>customGroupBox1</value>
   </data>
   <data name="&gt;&gt;toolStripSeparator2.Name" xml:space="preserve">
     <value>toolStripSeparator2</value>
@@ -5044,20 +5101,14 @@
   <data name="&gt;&gt;tabControl2.Name" xml:space="preserve">
     <value>tabControl2</value>
   </data>
-  <data name="titelToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>146, 22</value>
-  </data>
-  <data name="listViewFavorites.Size" type="System.Drawing.Size, System.Drawing">
-    <value>581, 238</value>
+  <data name="buttonToggleLayer1.TabIndex" type="System.Int32, mscorlib">
+    <value>49</value>
   </data>
   <data name="&gt;&gt;toolStripSeparator11.Name" xml:space="preserve">
     <value>toolStripSeparator11</value>
   </data>
   <data name="&gt;&gt;label12.Name" xml:space="preserve">
     <value>label12</value>
-  </data>
-  <data name="buttonToggleLayer2.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
   </data>
   <data name="&gt;&gt;blackoutToolStripMenuItem.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -5080,17 +5131,11 @@
   <data name="&gt;&gt;liededitorToolStripMenuItem.Name" xml:space="preserve">
     <value>liededitorToolStripMenuItem</value>
   </data>
-  <data name="toolStripButton3.Text" xml:space="preserve">
-    <value>Qualitätssicherung &amp; Bemerkungen</value>
-  </data>
   <data name="blackoutToolStripMenuItem.ShortcutKeys" type="System.Windows.Forms.Keys, System.Windows.Forms">
     <value>F7</value>
   </data>
-  <data name="buttonSaveSetList.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Microsoft Sans Serif, 8.25pt</value>
-  </data>
-  <data name="&gt;&gt;radioButtonAutoDiaShow.ZOrder" xml:space="preserve">
-    <value>0</value>
+  <data name="buttonToggleLayer1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>220, 260</value>
   </data>
   <data name="tabPage2.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>3, 3, 3, 3</value>
@@ -5110,11 +5155,11 @@
   <data name="label14.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
-  <data name="&gt;&gt;label13.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="&gt;&gt;contextMenuStrip1.Name" xml:space="preserve">
+    <value>contextMenuStrip1</value>
   </data>
-  <data name="&gt;&gt;tabPageImageFavorites.Name" xml:space="preserve">
-    <value>tabPageImageFavorites</value>
+  <data name="songDetailElement.Location" type="System.Drawing.Point, System.Drawing">
+    <value>234, 36</value>
   </data>
   <data name="webToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>181, 22</value>
@@ -5137,8 +5182,8 @@
   <data name="label13.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 8.25pt, style=Bold</value>
   </data>
-  <data name="&gt;&gt;aufUpdatePrüfenToolStripMenuItem.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="listViewFavorites.Size" type="System.Drawing.Size, System.Drawing">
+    <value>581, 238</value>
   </data>
   <data name="buttonOpenSetList.TabIndex" type="System.Int32, mscorlib">
     <value>31</value>
@@ -5146,11 +5191,11 @@
   <data name="&gt;&gt;liedSuchenToolStripMenuItem.Name" xml:space="preserve">
     <value>liedSuchenToolStripMenuItem</value>
   </data>
-  <data name="&gt;&gt;setlistenToolStripMenuItem.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="tableLayoutPanel1.ColumnCount" type="System.Int32, mscorlib">
+    <value>1</value>
   </data>
-  <data name="tabPage3.Text" xml:space="preserve">
-    <value>Setliste</value>
+  <data name="&gt;&gt;checkBoxBibleShowVerseFromListDirectly.Parent" xml:space="preserve">
+    <value>tabPage5</value>
   </data>
   <data name="&gt;&gt;label2.ZOrder" xml:space="preserve">
     <value>18</value>
@@ -5161,17 +5206,17 @@
   <data name="toolStripButtonProjectionOff.Size" type="System.Drawing.Size, System.Drawing">
     <value>68, 68</value>
   </data>
+  <data name="searchTextBoxImages.PlaceHolderText" xml:space="preserve">
+    <value>Bild suchen</value>
+  </data>
   <data name="&gt;&gt;listViewSongHistory.Type" xml:space="preserve">
     <value>System.Windows.Forms.ListView, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;label3.Name" xml:space="preserve">
-    <value>label3</value>
+  <data name="label7.Size" type="System.Drawing.Size, System.Drawing">
+    <value>82, 13</value>
   </data>
-  <data name="buttonRemoveFromBibleVerseList.Location" type="System.Drawing.Point, System.Drawing">
-    <value>885, 178</value>
-  </data>
-  <data name="&gt;&gt;contextMenuStrip1.Name" xml:space="preserve">
-    <value>contextMenuStrip1</value>
+  <data name="&gt;&gt;aufUpdatePrüfenToolStripMenuItem.Name" xml:space="preserve">
+    <value>aufUpdatePrüfenToolStripMenuItem</value>
   </data>
   <data name="buttonToggleLayerMode.Size" type="System.Drawing.Size, System.Drawing">
     <value>25, 20</value>
@@ -5182,8 +5227,8 @@
   <data name="tabPageImageBrowser.Size" type="System.Drawing.Size, System.Drawing">
     <value>584, 241</value>
   </data>
-  <data name="&gt;&gt;labelBibleSearchMsg.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="&gt;&gt;label7.Name" xml:space="preserve">
+    <value>label7</value>
   </data>
   <data name="&gt;&gt;listViewImageQueue.Type" xml:space="preserve">
     <value>System.Windows.Forms.ListView, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -5197,8 +5242,8 @@
   <data name="&gt;&gt;label6.Parent" xml:space="preserve">
     <value>customGroupBox1</value>
   </data>
-  <data name="label10.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
+  <data name="&gt;&gt;buttonSetListAdd.ZOrder" xml:space="preserve">
+    <value>3</value>
   </data>
   <data name="songDetailElement.Size" type="System.Drawing.Size, System.Drawing">
     <value>487, 200</value>
@@ -5209,8 +5254,8 @@
   <data name="&gt;&gt;bilderToolStripMenuItem.Name" xml:space="preserve">
     <value>bilderToolStripMenuItem</value>
   </data>
-  <data name="&gt;&gt;label1.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="customGroupBox2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>740, 309</value>
   </data>
   <data name="toolStripButtonDisplaySettings.Size" type="System.Drawing.Size, System.Drawing">
     <value>68, 68</value>
@@ -5221,8 +5266,8 @@
   <data name="&gt;&gt;tabPageSlideShow.Parent" xml:space="preserve">
     <value>tabControl2</value>
   </data>
-  <data name="&gt;&gt;textBoxBibleText.ZOrder" xml:space="preserve">
-    <value>13</value>
+  <data name="&gt;&gt;columnHeader3.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ColumnHeader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="beendenToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>176, 22</value>
@@ -5233,8 +5278,8 @@
   <data name="buttonSetListDown.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
-  <data name="&gt;&gt;tabPageImageBrowser.ZOrder" xml:space="preserve">
-    <value>0</value>
+  <data name="&gt;&gt;buttonSetListDown.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;toolStripSeparator6.Name" xml:space="preserve">
     <value>toolStripSeparator6</value>
@@ -5251,8 +5296,8 @@
   <data name="&gt;&gt;label6.ZOrder" xml:space="preserve">
     <value>5</value>
   </data>
-  <data name="&gt;&gt;comboBox1.ZOrder" xml:space="preserve">
-    <value>4</value>
+  <data name="buttonClearImageHistory.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Bottom, Right</value>
   </data>
   <data name="numericUpDown2.Size" type="System.Drawing.Size, System.Drawing">
     <value>52, 20</value>
@@ -5260,23 +5305,23 @@
   <data name="listViewSetList.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Bottom, Right</value>
   </data>
-  <data name="listViewSetList.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Microsoft Sans Serif, 9.75pt</value>
+  <data name="&gt;&gt;buttonSetListAdd.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;$this.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Form, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>Pbp.UI.LocalizableForm, PraiseBase Presenter, Version=1.1.3.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name="listViewSongHistory.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Microsoft Sans Serif, 9.75pt</value>
+  <data name="&gt;&gt;liededitorToolStripMenuItem.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;powerpraiseLiederToolStripMenuItem.Name" xml:space="preserve">
     <value>powerpraiseLiederToolStripMenuItem</value>
   </data>
-  <data name="&gt;&gt;listViewSetList.Name" xml:space="preserve">
-    <value>listViewSetList</value>
+  <data name="textBoxBibleText.Size" type="System.Drawing.Size, System.Drawing">
+    <value>260, 168</value>
   </data>
-  <data name="buttonEnableAllDias.TabIndex" type="System.Int32, mscorlib">
-    <value>3</value>
+  <data name="&gt;&gt;buttonChooseDiaDir.Name" xml:space="preserve">
+    <value>buttonChooseDiaDir</value>
   </data>
   <data name="tabPage2.Text" xml:space="preserve">
     <value>Mitteilung</value>
@@ -5296,8 +5341,8 @@
   <data name="&gt;&gt;toolStripButtonProjectionOn.Name" xml:space="preserve">
     <value>toolStripButtonProjectionOn</value>
   </data>
-  <data name="&gt;&gt;comboBox2.ZOrder" xml:space="preserve">
-    <value>3</value>
+  <data name="buttonSetListDown.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 8.25pt</value>
   </data>
   <data name="&gt;&gt;datenverzeichnisToolStripMenuItem1.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -5305,35 +5350,32 @@
   <data name="label2.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
-  <data name="&gt;&gt;labelFadeTime.ZOrder" xml:space="preserve">
-    <value>3</value>
+  <data name="&gt;&gt;toolStripSeparator7.Name" xml:space="preserve">
+    <value>toolStripSeparator7</value>
   </data>
   <data name="textBoxBibleText.TabIndex" type="System.Int32, mscorlib">
     <value>8</value>
   </data>
-  <data name="buttonResetImageQueue.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Microsoft Sans Serif, 8.25pt</value>
+  <data name="buttonBibleTextShow.TabIndex" type="System.Int32, mscorlib">
+    <value>9</value>
   </data>
-  <data name="&gt;&gt;textBoxLiveText.Parent" xml:space="preserve">
-    <value>tabPage2</value>
+  <data name="&gt;&gt;buttonToggleLayer2.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="datenverzeichnisToolStripMenuItem1.Size" type="System.Drawing.Size, System.Drawing">
     <value>163, 22</value>
   </data>
-  <data name="&gt;&gt;comboBoxBible.Parent" xml:space="preserve">
-    <value>tabPage5</value>
+  <data name="trackBarFadeTimeLayer1.AutoSize" type="System.Boolean, mscorlib">
+    <value>False</value>
   </data>
-  <data name="buttonSetListUp.TabIndex" type="System.Int32, mscorlib">
-    <value>24</value>
+  <data name="&gt;&gt;numericUpDown2.Name" xml:space="preserve">
+    <value>numericUpDown2</value>
+  </data>
+  <data name="setlistenToolStripMenuItem.Text" xml:space="preserve">
+    <value>Setlisten</value>
   </data>
   <data name="&gt;&gt;buttonToggleLayer2.ZOrder" xml:space="preserve">
     <value>6</value>
-  </data>
-  <data name="&gt;&gt;menuStrip1.ZOrder" xml:space="preserve">
-    <value>5</value>
-  </data>
-  <data name="trackBarFadeTimeLayer1.TabIndex" type="System.Int32, mscorlib">
-    <value>47</value>
   </data>
   <data name="toolStripButtonDataFolder.Size" type="System.Drawing.Size, System.Drawing">
     <value>80, 68</value>
@@ -5350,26 +5392,23 @@
   <data name="label12.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
-  <data name="&gt;&gt;tableLayoutPanel1.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TableLayoutPanel, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
   <data name="&gt;&gt;toolStripSeparator11.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="tabPageImageFavorites.Location" type="System.Drawing.Point, System.Drawing">
     <value>4, 29</value>
   </data>
+  <data name="labelDiaDirectory.Text" xml:space="preserve">
+    <value>Bitte wähle ein Verzeichnis aus...</value>
+  </data>
   <data name="numericUpDown1.TabIndex" type="System.Int32, mscorlib">
     <value>8</value>
-  </data>
-  <data name="label3.Size" type="System.Drawing.Size, System.Drawing">
-    <value>66, 13</value>
   </data>
   <data name="&gt;&gt;searchTextBoxImages.Parent" xml:space="preserve">
     <value>tabPageImageBrowser</value>
   </data>
-  <data name="setlistenToolStripMenuItem.Text" xml:space="preserve">
-    <value>Setlisten</value>
+  <data name="label13.Size" type="System.Drawing.Size, System.Drawing">
+    <value>47, 13</value>
   </data>
   <data name="&gt;&gt;tabControl1.Name" xml:space="preserve">
     <value>tabControl1</value>
@@ -5389,14 +5428,11 @@
   <data name="&gt;&gt;tabPage3.Parent" xml:space="preserve">
     <value>tabControl1</value>
   </data>
-  <data name="buttonSetListClear.ImageAlign" type="System.Drawing.ContentAlignment, System.Drawing">
-    <value>MiddleLeft</value>
+  <data name="buttonBibleTextShow.Location" type="System.Drawing.Point, System.Drawing">
+    <value>640, 210</value>
   </data>
-  <data name="buttonChooseDiaDir.Text" xml:space="preserve">
-    <value>Verzeichnis wählen...</value>
-  </data>
-  <data name="buttonClearImageHistory.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Bottom, Right</value>
+  <data name="toolStripButtonProjectionOff.Text" xml:space="preserve">
+    <value>Präsentation aus</value>
   </data>
   <data name="labelBibleSearchMsg.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
@@ -5407,14 +5443,11 @@
   <data name="listViewImageHistory.Size" type="System.Drawing.Size, System.Drawing">
     <value>581, 238</value>
   </data>
-  <data name="columnHeader6.Width" type="System.Int32, mscorlib">
-    <value>90</value>
+  <data name="&gt;&gt;columnHeader2.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ColumnHeader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="toolStripMenuItem2.ShortcutKeys" type="System.Windows.Forms.Keys, System.Windows.Forms">
-    <value>F1</value>
-  </data>
-  <data name="&gt;&gt;buttonSetListDown.Name" xml:space="preserve">
-    <value>buttonSetListDown</value>
+  <data name="label3.Size" type="System.Drawing.Size, System.Drawing">
+    <value>66, 13</value>
   </data>
   <data name="&gt;&gt;toolStripSeparator1.Name" xml:space="preserve">
     <value>toolStripSeparator1</value>
@@ -5425,14 +5458,14 @@
   <data name="label4.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 8.25pt, style=Bold</value>
   </data>
-  <data name="buttonRemoveFromBibleVerseList.TabIndex" type="System.Int32, mscorlib">
-    <value>34</value>
+  <data name="label14.TabIndex" type="System.Int32, mscorlib">
+    <value>46</value>
   </data>
   <data name="&gt;&gt;toolStripMenuItem2.Name" xml:space="preserve">
     <value>toolStripMenuItem2</value>
   </data>
-  <data name="toolStrip1.Text" xml:space="preserve">
-    <value>toolStrip1</value>
+  <data name="radioButtonAutoDiaShow.Size" type="System.Drawing.Size, System.Drawing">
+    <value>137, 17</value>
   </data>
   <data name="&gt;&gt;label1.Name" xml:space="preserve">
     <value>label1</value>
@@ -5442,9 +5475,6 @@
   </data>
   <data name="numericUpDown2.TabIndex" type="System.Int32, mscorlib">
     <value>13</value>
-  </data>
-  <data name="listViewSetList.Location" type="System.Drawing.Point, System.Drawing">
-    <value>6, 6</value>
   </data>
   <data name="tabPageImageHistory.Location" type="System.Drawing.Point, System.Drawing">
     <value>4, 29</value>
@@ -5461,8 +5491,8 @@
   <data name="&gt;&gt;bilderToolStripMenuItem1.Name" xml:space="preserve">
     <value>bilderToolStripMenuItem1</value>
   </data>
-  <data name="buttonResetImageQueue.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Right</value>
+  <data name="&gt;&gt;textBoxBibleText.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="buttonSetListAdd.Enabled" type="System.Boolean, mscorlib">
     <value>False</value>
@@ -5482,7 +5512,7 @@
   <data name="&gt;&gt;powerpraiseLiederToolStripMenuItem.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;buttonResetImageQueue.Type" xml:space="preserve">
+  <data name="&gt;&gt;buttonRemoveFromBibleVerseList.Type" xml:space="preserve">
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;label4.Type" xml:space="preserve">
@@ -5503,17 +5533,11 @@
   <data name="toolStripMenuItem2.Size" type="System.Drawing.Size, System.Drawing">
     <value>181, 22</value>
   </data>
-  <data name="songDetailElement.Location" type="System.Drawing.Point, System.Drawing">
-    <value>234, 36</value>
-  </data>
   <data name="toolStripSeparator8.Size" type="System.Drawing.Size, System.Drawing">
     <value>160, 6</value>
   </data>
-  <data name="buttonBibleTextShow.TabIndex" type="System.Int32, mscorlib">
-    <value>9</value>
-  </data>
-  <data name="&gt;&gt;aufUpdatePrüfenToolStripMenuItem.Name" xml:space="preserve">
-    <value>aufUpdatePrüfenToolStripMenuItem</value>
+  <data name="&gt;&gt;label9.Parent" xml:space="preserve">
+    <value>tabPage5</value>
   </data>
   <data name="comboBox2.Items1" xml:space="preserve">
     <value>Mitte</value>
@@ -5539,11 +5563,11 @@
   <data name="&gt;&gt;searchTextBoxBible.Name" xml:space="preserve">
     <value>searchTextBoxBible</value>
   </data>
-  <data name="listViewSongHistory.Location" type="System.Drawing.Point, System.Drawing">
-    <value>6, 6</value>
+  <data name="&gt;&gt;label8.Name" xml:space="preserve">
+    <value>label8</value>
   </data>
-  <data name="listBoxBibleBook.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Bottom, Left</value>
+  <data name="&gt;&gt;praiseBoxDatenbankToolStripMenuItem.Name" xml:space="preserve">
+    <value>praiseBoxDatenbankToolStripMenuItem</value>
   </data>
   <data name="listBoxBibleChapter.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
@@ -5551,14 +5575,11 @@
   <data name="labelDiaDirectory.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
   </data>
-  <data name="&gt;&gt;buttonOpenSetList.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="&gt;&gt;labelDiaDirectory.Parent" xml:space="preserve">
+    <value>tabPageSlideShow</value>
   </data>
   <data name="searchTextBoxBible.Location" type="System.Drawing.Point, System.Drawing">
     <value>9, 60</value>
-  </data>
-  <data name="tabPage1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>4, 29</value>
   </data>
   <data name="&gt;&gt;listBoxBibleVerse.Parent" xml:space="preserve">
     <value>tabPage5</value>
@@ -5566,14 +5587,11 @@
   <data name="toolStripSeparator6.Size" type="System.Drawing.Size, System.Drawing">
     <value>184, 6</value>
   </data>
-  <data name="trackBarFadeTime.Location" type="System.Drawing.Point, System.Drawing">
-    <value>71, 219</value>
+  <data name="&gt;&gt;textBoxLiveText.Parent" xml:space="preserve">
+    <value>tabPage2</value>
   </data>
   <data name="&gt;&gt;präsentationToolStripMenuItem.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;buttonToggleLayer2.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="listViewDias.Location" type="System.Drawing.Point, System.Drawing">
     <value>192, 29</value>
@@ -5581,14 +5599,14 @@
   <data name="buttonToggleLayerMode.Location" type="System.Drawing.Point, System.Drawing">
     <value>20, 237</value>
   </data>
-  <data name="&gt;&gt;textBoxLiveText.ZOrder" xml:space="preserve">
-    <value>6</value>
+  <data name="toolStripButtonProjectionOff.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
+    <value>Magenta</value>
   </data>
-  <data name="buttonShowLiveText.TextImageRelation" type="System.Windows.Forms.TextImageRelation, System.Windows.Forms">
-    <value>ImageBeforeText</value>
+  <data name="labelFadeTime.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
-  <data name="&gt;&gt;label11.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="trackBarFadeTimeLayer1.TabIndex" type="System.Int32, mscorlib">
+    <value>47</value>
   </data>
   <data name="&gt;&gt;buttonToggleLayer1.Parent" xml:space="preserve">
     <value>customGroupBox1</value>
@@ -5599,23 +5617,23 @@
   <data name="&gt;&gt;präsentationeinToolStripMenuItem.Name" xml:space="preserve">
     <value>präsentationeinToolStripMenuItem</value>
   </data>
-  <data name="textBoxBibleText.Location" type="System.Drawing.Point, System.Drawing">
-    <value>457, 33</value>
+  <data name="&gt;&gt;datenverzeichnisToolStripMenuItem1.Name" xml:space="preserve">
+    <value>datenverzeichnisToolStripMenuItem1</value>
   </data>
   <data name="$this.Text" xml:space="preserve">
     <value>PraiseBase-Presenter Viewer</value>
   </data>
-  <data name="buttonBibleTextShow.Text" xml:space="preserve">
-    <value>Anzeigen</value>
+  <data name="listViewSongHistory.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 9.75pt</value>
   </data>
   <data name="&gt;&gt;searchTextBoxImages.Type" xml:space="preserve">
     <value>Pbp.Components.SearchTextBox, PraiseBase Presenter, Version=1.1.3.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name="textBoxDiaDuration.MaxLength" type="System.Int32, mscorlib">
-    <value>2</value>
+  <data name="&gt;&gt;buttonDisableAllDias.Name" xml:space="preserve">
+    <value>buttonDisableAllDias</value>
   </data>
-  <data name="buttonSetListRem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>26, 23</value>
+  <data name="&gt;&gt;labelDiaDirectory.Name" xml:space="preserve">
+    <value>labelDiaDirectory</value>
   </data>
   <data name="buttonSetListClear.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Bottom, Right</value>
@@ -5623,11 +5641,11 @@
   <data name="tabPageSlideShow.Location" type="System.Drawing.Point, System.Drawing">
     <value>4, 29</value>
   </data>
-  <data name="buttonToggleLayer1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>220, 260</value>
+  <data name="toolStripMenuItem3.Text" xml:space="preserve">
+    <value>Lieder&amp;browser...</value>
   </data>
-  <data name="label3.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
+  <data name="&gt;&gt;fehlerMeldenToolStripMenuItem.Name" xml:space="preserve">
+    <value>fehlerMeldenToolStripMenuItem</value>
   </data>
   <data name="&gt;&gt;toolStripMenuItem2.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -5647,8 +5665,8 @@
   <data name="aufUpdatePrüfenToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>181, 22</value>
   </data>
-  <data name="label5.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
+  <data name="&gt;&gt;toolStripSeparator5.Name" xml:space="preserve">
+    <value>toolStripSeparator5</value>
   </data>
   <data name="buttonBibleTextShow.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Bottom, Right</value>
@@ -5659,8 +5677,8 @@
   <data name="&gt;&gt;spracheToolStripMenuItem.Name" xml:space="preserve">
     <value>spracheToolStripMenuItem</value>
   </data>
-  <data name="&gt;&gt;tabControl2.ZOrder" xml:space="preserve">
-    <value>2</value>
+  <data name="label9.Text" xml:space="preserve">
+    <value>Vers:</value>
   </data>
   <data name="buttonToggleLayerMode.FlatStyle" type="System.Windows.Forms.FlatStyle, System.Windows.Forms">
     <value>Flat</value>
@@ -5677,14 +5695,11 @@
   <data name="buttonResetImageQueue.Location" type="System.Drawing.Point, System.Drawing">
     <value>700, 34</value>
   </data>
-  <data name="&gt;&gt;buttonSetListClear.Parent" xml:space="preserve">
-    <value>tabPage3</value>
+  <data name="&gt;&gt;worToolStripMenuItem.Name" xml:space="preserve">
+    <value>worToolStripMenuItem</value>
   </data>
-  <data name="liederToolStripMenuItem1.Text" xml:space="preserve">
-    <value>&amp;Lieder</value>
-  </data>
-  <data name="&gt;&gt;listViewSetList.Type" xml:space="preserve">
-    <value>Bol.WinControls.ListViewEx, PraiseBase Presenter, Version=1.1.3.0, Culture=neutral, PublicKeyToken=null</value>
+  <data name="&gt;&gt;bildschirmeSuchenToolStripMenuItem.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="buttonSetListDown.TabIndex" type="System.Int32, mscorlib">
     <value>25</value>
@@ -5707,9 +5722,6 @@
   <data name="&gt;&gt;buttonToggleLayerMode.Name" xml:space="preserve">
     <value>buttonToggleLayerMode</value>
   </data>
-  <metadata name="$this.Language" type="System.Globalization.CultureInfo, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>en-US</value>
-  </metadata>
   <metadata name="buttonChooseDiaDir.GenerateMember" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>False</value>
   </metadata>

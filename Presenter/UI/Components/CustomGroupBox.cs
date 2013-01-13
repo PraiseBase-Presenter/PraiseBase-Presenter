@@ -6,8 +6,18 @@ namespace Pbp.Components
 {
     public partial class CustomGroupBox : Panel
     {
-        [Description("Title of the groupbox"), Category("CustomGroupBox"), DefaultValue("Title")]
-        public String Title { get { return labelTitle.Text; } set { labelTitle.Text = value; } }
+        [Description("Title of the groupbox"), Category("CustomGroupBox"), DefaultValue("Title"), Localizable(true)]
+        public String Title 
+        { 
+            get 
+            { 
+                return labelTitle.Text; 
+            } 
+            set
+            { 
+                labelTitle.Text = value; 
+            } 
+        }
 
         public CustomGroupBox()
         {

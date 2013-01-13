@@ -121,6 +121,12 @@
     <value>Choose directory...</value>
   </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="dateiToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>59, 20</value>
+  </data>
+  <data name="dateiToolStripMenuItem.Text" xml:space="preserve">
+    <value>&amp;General</value>
+  </data>
   <data name="liedSuchenToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>174, 22</value>
   </data>
@@ -148,11 +154,8 @@
   <data name="beendenToolStripMenuItem.Text" xml:space="preserve">
     <value>&amp;Exit</value>
   </data>
-  <data name="dateiToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>59, 20</value>
-  </data>
-  <data name="dateiToolStripMenuItem.Text" xml:space="preserve">
-    <value>&amp;General</value>
+  <data name="präsentationToolStripMenuItem.Text" xml:space="preserve">
+    <value>&amp;Presentation</value>
   </data>
   <data name="präsentationausToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>177, 22</value>
@@ -178,8 +181,11 @@
   <data name="bildschirmeSuchenToolStripMenuItem.Text" xml:space="preserve">
     <value>&amp;Rescan screens</value>
   </data>
-  <data name="präsentationToolStripMenuItem.Text" xml:space="preserve">
-    <value>&amp;Presentation</value>
+  <data name="einstellungenToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>48, 20</value>
+  </data>
+  <data name="einstellungenToolStripMenuItem.Text" xml:space="preserve">
+    <value>&amp;Tools</value>
   </data>
   <data name="optionenToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>170, 22</value>
@@ -205,6 +211,9 @@
   <data name="toolStripSeparator6.Size" type="System.Drawing.Size, System.Drawing">
     <value>167, 6</value>
   </data>
+  <data name="toolStripMenuItem4.Size" type="System.Drawing.Size, System.Drawing">
+    <value>170, 22</value>
+  </data>
   <data name="praiseBoxDatenbankToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>215, 22</value>
   </data>
@@ -229,9 +238,6 @@
   <data name="songbeamerLiederToolStripMenuItem.Text" xml:space="preserve">
     <value>Songbeamer songs...</value>
   </data>
-  <data name="toolStripMenuItem4.Size" type="System.Drawing.Size, System.Drawing">
-    <value>170, 22</value>
-  </data>
   <data name="toolStripSeparator9.Size" type="System.Drawing.Size, System.Drawing">
     <value>167, 6</value>
   </data>
@@ -252,12 +258,6 @@
   </data>
   <data name="miniaturbilderPrüfenToolStripMenuItem.Text" xml:space="preserve">
     <value>Check thumbnails</value>
-  </data>
-  <data name="einstellungenToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>48, 20</value>
-  </data>
-  <data name="einstellungenToolStripMenuItem.Text" xml:space="preserve">
-    <value>&amp;Tools</value>
   </data>
   <data name="toolStripMenuItem2.Size" type="System.Drawing.Size, System.Drawing">
     <value>180, 22</value>
@@ -292,11 +292,20 @@
   <data name="tabPage4.Text" xml:space="preserve">
     <value>History</value>
   </data>
+  <data name="customGroupBox3.Title" xml:space="preserve">
+    <value>Background</value>
+  </data>
   <data name="label13.Size" type="System.Drawing.Size, System.Drawing">
     <value>44, 13</value>
   </data>
   <data name="label13.Text" xml:space="preserve">
     <value>Stack:</value>
+  </data>
+  <data name="tabPageImageBrowser.Text" xml:space="preserve">
+    <value>Image collection</value>
+  </data>
+  <data name="searchTextBoxImages.PlaceHolderText" xml:space="preserve">
+    <value>Search image</value>
   </data>
   <data name="labelImgDirName.Size" type="System.Drawing.Size, System.Drawing">
     <value>61, 13</value>
@@ -304,14 +313,14 @@
   <data name="labelImgDirName.Text" xml:space="preserve">
     <value>Contents:</value>
   </data>
-  <data name="tabPageImageBrowser.Text" xml:space="preserve">
-    <value>Image collection</value>
-  </data>
   <data name="tabPageImageHistory.Text" xml:space="preserve">
     <value>History</value>
   </data>
   <data name="tabPageImageFavorites.Text" xml:space="preserve">
     <value>Favorites</value>
+  </data>
+  <data name="tabPageSlideShow.Text" xml:space="preserve">
+    <value>Slideshow</value>
   </data>
   <data name="radioButtonAutoDiaShow.Size" type="System.Drawing.Size, System.Drawing">
     <value>72, 17</value>
@@ -346,8 +355,29 @@
   <data name="buttonDisableAllDias.Text" xml:space="preserve">
     <value>Select none</value>
   </data>
-  <data name="tabPageSlideShow.Text" xml:space="preserve">
-    <value>Slideshow</value>
+  <data name="customGroupBox2.Title" xml:space="preserve">
+    <value>Foreground</value>
+  </data>
+  <data name="tabPage1.Text" xml:space="preserve">
+    <value>Lyrics</value>
+  </data>
+  <data name="contextMenuStrip1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>143, 48</value>
+  </data>
+  <data name="songSearchTextBox.PlaceHolderText" xml:space="preserve">
+    <value>Search song</value>
+  </data>
+  <data name="titelToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>142, 22</value>
+  </data>
+  <data name="titelToolStripMenuItem.Text" xml:space="preserve">
+    <value>Title</value>
+  </data>
+  <data name="titelUndTextToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>142, 22</value>
+  </data>
+  <data name="titelUndTextToolStripMenuItem.Text" xml:space="preserve">
+    <value>Title and text</value>
   </data>
   <data name="label3.Size" type="System.Drawing.Size, System.Drawing">
     <value>94, 13</value>
@@ -355,8 +385,8 @@
   <data name="label3.Text" xml:space="preserve">
     <value>Song structure:</value>
   </data>
-  <data name="tabPage1.Text" xml:space="preserve">
-    <value>Lyrics</value>
+  <data name="tabPage2.Text" xml:space="preserve">
+    <value>Message</value>
   </data>
   <data name="label5.Size" type="System.Drawing.Size, System.Drawing">
     <value>52, 13</value>
@@ -373,8 +403,8 @@
   <data name="buttonShowLiveText.Text" xml:space="preserve">
     <value>Show</value>
   </data>
-  <data name="tabPage2.Text" xml:space="preserve">
-    <value>Message</value>
+  <data name="tabPage5.Text" xml:space="preserve">
+    <value>Bible</value>
   </data>
   <data name="label11.Size" type="System.Drawing.Size, System.Drawing">
     <value>26, 13</value>
@@ -412,8 +442,8 @@
   <data name="label2.Text" xml:space="preserve">
     <value>Book:</value>
   </data>
-  <data name="tabPage5.Text" xml:space="preserve">
-    <value>Bible</value>
+  <data name="customGroupBox1.Title" xml:space="preserve">
+    <value>Projection</value>
   </data>
   <data name="label6.Size" type="System.Drawing.Size, System.Drawing">
     <value>64, 13</value>

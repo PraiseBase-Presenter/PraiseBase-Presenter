@@ -145,6 +145,9 @@
     <Compile Include="Projection\BibleLayer.cs" />
     <Compile Include="Projection\ImageLayer.cs" />
     <Compile Include="Projection\SongSlideLayer.cs" />
+    <Compile Include="UI\LocalizedForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="UpdateCheck.cs" />
     <Compile Include="Projection\LiveText.cs" />
     <Compile Include="Projection\TextLayer.cs" />
@@ -296,6 +299,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UI\Editor\SongEditorChild.en-US.resx">
       <DependentUpon>SongEditorChild.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\LocalizedForm.resx">
+      <DependentUpon>LocalizedForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UI\Presenter\AboutDialog.en-US.resx">
       <DependentUpon>AboutDialog.cs</DependentUpon>

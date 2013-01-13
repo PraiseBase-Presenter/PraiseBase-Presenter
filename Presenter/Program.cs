@@ -30,7 +30,6 @@ using System.Windows.Forms;
 using Pbp.Forms;
 using Pbp.Properties;
 using Pbp.Manager;
-using System.ComponentModel;
 using System.Globalization;
 using System.Collections.Generic;
 
@@ -39,6 +38,12 @@ namespace Pbp
     internal static class Program
     {
         static public List<CultureInfo> AvailableLanguages = new List<CultureInfo>();
+
+        static Program()
+        {
+            AvailableLanguages.Add(CultureInfo.CreateSpecificCulture("de-CH"));
+            AvailableLanguages.Add(CultureInfo.CreateSpecificCulture("en-US"));
+        }
         
         /// <summary>
         /// The main entry point for the application.
@@ -46,9 +51,6 @@ namespace Pbp
         [STAThread]
         private static void Main()
         {
-            AvailableLanguages.Add(CultureInfo.CreateSpecificCulture("de-CH"));
-            AvailableLanguages.Add(CultureInfo.CreateSpecificCulture("en-US"));
-
             DateTime startTime = DateTime.Now;
 
             Application.EnableVisualStyles();
@@ -117,78 +119,5 @@ namespace Pbp
             Application.Run(MainWindow.Instance);
             GC.KeepAlive(mutex);
         }
-
-        /// <summary>
-        /// Change language at runtime in the specified form
-        /// </summary>
-        internal static void SetLanguage(this Form form, CultureInfo lang)
-        {
-            //Set the language in the application
-            System.Threading.Thread.CurrentThread.CurrentUICulture = lang;
-
-            ComponentResourceManager resources = new ComponentResourceManager(form.GetType());
-
-            if (form.MainMenuStrip != null)
-            {
-                ApplyResourceToControl(resources, form.MainMenuStrip, lang);
-            }
-            ApplyResourceToControl(resources, form, lang);
-
-            //resources.ApplyResources(form, "$this", lang);
-            form.Text = resources.GetString("$this.Text", lang);
-
-            Settings.Default.SelectedCulture = lang.Name;
-        }
-
-        private static void ApplyResourceToControl(ComponentResourceManager resources, Control control, CultureInfo lang)
-        {
-            foreach (Control c in control.Controls)
-            {
-                ApplyResourceToControl(resources, c, lang);
-                //resources.ApplyResources(c, c.Name, lang);
-                string text = resources.GetString(c.Name + ".Text", lang);
-                if (text != null)
-                    c.Text = text;
-            }
-        }
-
-        private static void ApplyResourceToControl(ComponentResourceManager resources, MenuStrip menu, CultureInfo lang)
-        {
-            foreach (ToolStripItem m in menu.Items)
-            {
-                //resources.ApplyResources(m, m.Name, lang);
-                string text = resources.GetString(m.Name + ".Text", lang);
-                if (text != null)
-                {
-                    m.Text = text;
-                }
-                if (m.GetType() == typeof(ToolStripMenuItem))
-                {
-                    foreach (var d in ((ToolStripMenuItem)m).DropDownItems)
-                    {
-                        if (d.GetType() == typeof(ToolStripMenuItem))
-                        {
-                            ApplyResourceToControl(resources, (ToolStripMenuItem)d, lang);
-                        }
-                    }
-                }
-            }
-        }
-        private static void ApplyResourceToControl(ComponentResourceManager resources, ToolStripMenuItem menu, CultureInfo lang)
-        {
-            string text = resources.GetString(menu.Name + ".Text", lang);
-            if (text != null)
-            {
-                menu.Text = text;
-            }
-            foreach (var d in ((ToolStripMenuItem)menu).DropDownItems)
-            {
-                if (d.GetType() == typeof(ToolStripMenuItem))
-                {
-                    ApplyResourceToControl(resources, (ToolStripMenuItem)d, lang);
-                }
-            }
-        }
-
     }
 }

@@ -67,7 +67,7 @@ namespace Pbp.Components
         }
 
         [Description("The placeholder is displayed when the field is empty and does not have the focus."),
-         Category("SearchTextBox"), DefaultValue("Suchen")]
+         Category("SearchTextBox"), DefaultValue("Suchen"), Localizable(true)]
         public string PlaceHolderText
         {
             get { return _placeHolderText; }
@@ -86,9 +86,19 @@ namespace Pbp.Components
             set
             {
                 _contextMenu = value;
-                _cmPictureBox.Visible = _contextMenu != null;
+                _cmPictureBox.Visible = (value != null);
+                UpdateTextBoxPosition();
             }
         }
+
+        [Description("If greater than 0, waits this amount of miliseconds after a key has been pressed before raising the TextChanged event."), 
+         Category("SearchTextBox"), DefaultValue(250)]
+        public int KeyStrokeDelay
+        {
+            get { return keyStrokeTimer.Interval; }
+            set { keyStrokeTimer.Interval = value; }
+        }
+
 
         public new Font Font
         {
@@ -104,15 +114,6 @@ namespace Pbp.Components
                 textBox.Text = value;
                 textBox.ForeColor = Color.Black;
             }
-        }
-
-        [Description(
-            "If greater than 0, waits this amount of miliseconds after a key has been pressed before raising the TextChanged event."
-            ), Category("SearchTextBox"), DefaultValue(250)]
-        public int KeyStrokeDelay
-        {
-            get { return keyStrokeTimer.Interval; }
-            set { keyStrokeTimer.Interval = value; }
         }
 
         public new event TextChange TextChanged;
@@ -219,12 +220,16 @@ namespace Pbp.Components
 
         private void UserControl1_Resize(object sender, EventArgs e)
         {
+            UpdateTextBoxPosition();
+            xPictureBox.Size = new Size(15, 15);
+            xPictureBox.Location = new Point(Width - 18, (Height - 15) / 2);
+        }
+
+        private void UpdateTextBoxPosition()
+        {
             int offset = _contextMenu != null ? 10 : 0;
             textBox.Size = new Size(Width - 43 - offset, Height - 6);
             textBox.Location = new Point(23 + offset, 4);
-
-            xPictureBox.Size = new Size(15, 15);
-            xPictureBox.Location = new Point(Width - 18, (Height - 15) / 2);
         }
 
         private void UserControl1_Paint(object sender, PaintEventArgs e)

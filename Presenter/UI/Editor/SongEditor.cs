@@ -34,10 +34,11 @@ using Pbp.IO;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Globalization;
+using Pbp.UI;
 
 namespace Pbp.Forms
 {
-    public partial class SongEditor : Form
+    public partial class SongEditor : LocalizableForm
     {
         static private SongEditor _instance;
 
@@ -71,11 +72,11 @@ namespace Pbp.Forms
 
         void selectLanguageToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Program.SetLanguage(this, (CultureInfo)((ToolStripMenuItem)sender).Tag);
+            SetLanguage(this, (CultureInfo)((ToolStripMenuItem)sender).Tag);
 
             for (int i = 0; i < MdiChildren.Count(); i++)
             {
-                Program.SetLanguage(MdiChildren[i], (CultureInfo)((ToolStripMenuItem)sender).Tag);
+                SetLanguage(MdiChildren[i], (CultureInfo)((ToolStripMenuItem)sender).Tag);
             }
 
             foreach (ToolStripMenuItem i in this.spracheToolStripMenuItem.DropDownItems)

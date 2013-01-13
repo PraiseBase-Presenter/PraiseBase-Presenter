@@ -41,6 +41,7 @@ using SongDetails;
 using Timer = System.Windows.Forms.Timer;
 using Pbp.Manager;
 using System.Globalization;
+using Pbp.UI;
 
 //using PowerPoint = Microsoft.Office.Interop.PowerPoint;
 
@@ -51,7 +52,7 @@ namespace Pbp.Forms
     /// gui of this software, including the songlist,
     /// setlist, imagelist and the diashow interface.
     /// </summary>
-    public partial class MainWindow : Form
+    public partial class MainWindow : LocalizableForm
     {
         private static MainWindow _instance;
         private static readonly object singletonPadlock = new object();
@@ -147,7 +148,7 @@ namespace Pbp.Forms
 
         void selectLanguageToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Program.SetLanguage(this, (CultureInfo)((ToolStripMenuItem)sender).Tag);
+            SetLanguage(this, (CultureInfo)((ToolStripMenuItem)sender).Tag);
             foreach (ToolStripMenuItem i in this.spracheToolStripMenuItem.DropDownItems)
             {
                 i.Checked = ((CultureInfo)i.Tag == System.Threading.Thread.CurrentThread.CurrentUICulture);

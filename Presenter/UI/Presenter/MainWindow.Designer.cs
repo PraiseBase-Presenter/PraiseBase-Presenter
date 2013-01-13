@@ -633,7 +633,6 @@
             this.customGroupBox3.Controls.Add(this.listViewImageQueue);
             this.customGroupBox3.Controls.Add(this.buttonResetImageQueue);
             this.customGroupBox3.Name = "customGroupBox3";
-            this.customGroupBox3.Title = "Background";
             // 
             // label13
             // 
@@ -666,7 +665,6 @@
             resources.ApplyResources(this.searchTextBoxImages, "searchTextBoxImages");
             this.searchTextBoxImages.Name = "searchTextBoxImages";
             this.searchTextBoxImages.OptionsMenu = null;
-            this.searchTextBoxImages.PlaceHolderText = "Search image";
             this.searchTextBoxImages.TextChanged += new Pbp.Components.SearchTextBox.TextChange(this.searchTextBoxImages_TextChanged);
             // 
             // treeViewImageDirectories
@@ -846,7 +844,6 @@
             this.customGroupBox2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.customGroupBox2.Controls.Add(this.tabControlTextLayer);
             this.customGroupBox2.Name = "customGroupBox2";
-            this.customGroupBox2.Title = "Foreground";
             // 
             // tabControlTextLayer
             // 
@@ -873,7 +870,6 @@
             resources.ApplyResources(this.songSearchTextBox, "songSearchTextBox");
             this.songSearchTextBox.Name = "songSearchTextBox";
             this.songSearchTextBox.OptionsMenu = this.contextMenuStrip1;
-            this.songSearchTextBox.PlaceHolderText = "Search song";
             this.songSearchTextBox.TextChanged += new Pbp.Components.SearchTextBox.TextChange(this.songSearchBox_TextChanged);
             // 
             // contextMenuStrip1
@@ -1075,7 +1071,6 @@
             resources.ApplyResources(this.searchTextBoxBible, "searchTextBoxBible");
             this.searchTextBoxBible.Name = "searchTextBoxBible";
             this.searchTextBoxBible.OptionsMenu = null;
-            this.searchTextBoxBible.PlaceHolderText = "Search bible text";
             this.searchTextBoxBible.TextChanged += new Pbp.Components.SearchTextBox.TextChange(this.searchTextBoxBible_TextChanged);
             // 
             // listViewBibleVerseList
@@ -1371,7 +1366,6 @@
             this.customGroupBox1.Controls.Add(this.trackBarFadeTimeLayer1);
             this.customGroupBox1.Controls.Add(this.trackBarFadeTime);
             this.customGroupBox1.Name = "customGroupBox1";
-            this.customGroupBox1.Title = "Projection";
             // 
             // pictureBoxbeamerPreview
             // 
@@ -1501,53 +1495,53 @@
         private System.Windows.Forms.ToolStripMenuItem dateiToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem beendenToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem1;
-		private System.Windows.Forms.ToolStripMenuItem infoToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem infoToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem einstellungenToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem liederlisteNeuLadenToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem webToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem bilderlisteNeuLadenToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem2;
-		private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
         private System.Windows.Forms.ToolStripMenuItem liededitorToolStripMenuItem;
-		private System.Windows.Forms.ToolStripMenuItem datenverzeichnisÖffnenToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem datenverzeichnisÖffnenToolStripMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator6;
-		private System.Windows.Forms.RadioButton radioButtonAutoDiaShow;
-		private System.Windows.Forms.RadioButton radioButtonManualDiashow;
-		private System.Windows.Forms.Label label1;
-		private System.Windows.Forms.TextBox textBoxDiaDuration;
-		private System.Windows.Forms.Button buttonDiaShow;
-		private System.Windows.Forms.Button buttonDisableAllDias;
-		private System.Windows.Forms.Button buttonEnableAllDias;
-		private System.Windows.Forms.Label labelDiaDirectory;
+        private System.Windows.Forms.RadioButton radioButtonAutoDiaShow;
+        private System.Windows.Forms.RadioButton radioButtonManualDiashow;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.TextBox textBoxDiaDuration;
+        private System.Windows.Forms.Button buttonDiaShow;
+        private System.Windows.Forms.Button buttonDisableAllDias;
+        private System.Windows.Forms.Button buttonEnableAllDias;
+        private System.Windows.Forms.Label labelDiaDirectory;
         private System.Windows.Forms.ListView listViewDias;
         private System.Windows.Forms.TabPage tabPage1;
-		private System.Windows.Forms.ListView listViewSongs;
+        private System.Windows.Forms.ListView listViewSongs;
         private System.Windows.Forms.ColumnHeader columnHeader2;
         private System.Windows.Forms.TabControl tabControlTextLayer;
-		private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem3;
-		private System.Windows.Forms.ToolStripMenuItem fehlerMeldenToolStripMenuItem;
-		private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem4;
-		private System.Windows.Forms.ToolStripMenuItem praiseBoxDatenbankToolStripMenuItem;
-		private System.Windows.Forms.ToolStripSeparator toolStripSeparator9;
-		private System.Windows.Forms.ToolStripMenuItem datenverzeichnisToolStripMenuItem1;
-		private System.Windows.Forms.ToolStripSeparator toolStripSeparator10;
-		private System.Windows.Forms.ToolStripMenuItem liederToolStripMenuItem1;
-		private System.Windows.Forms.ToolStripMenuItem bilderToolStripMenuItem1;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem3;
+        private System.Windows.Forms.ToolStripMenuItem fehlerMeldenToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem4;
+        private System.Windows.Forms.ToolStripMenuItem praiseBoxDatenbankToolStripMenuItem;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator9;
+        private System.Windows.Forms.ToolStripMenuItem datenverzeichnisToolStripMenuItem1;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator10;
+        private System.Windows.Forms.ToolStripMenuItem liederToolStripMenuItem1;
+        private System.Windows.Forms.ToolStripMenuItem bilderToolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem setlistenToolStripMenuItem1;
-		private System.Windows.Forms.ToolStripMenuItem powerpraiseLiederToolStripMenuItem;
-		private System.Windows.Forms.ToolStripMenuItem songbeamerLiederToolStripMenuItem;
-		private System.Windows.Forms.ToolStripMenuItem worToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem powerpraiseLiederToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem songbeamerLiederToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem worToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem miniaturbilderPrüfenToolStripMenuItem;
-		private System.Windows.Forms.TabControl tabControl2;
-		private System.Windows.Forms.TabPage tabPageSlideShow;
-		private System.Windows.Forms.TabPage tabPageImageFavorites;
+        private System.Windows.Forms.TabControl tabControl2;
+        private System.Windows.Forms.TabPage tabPageSlideShow;
+        private System.Windows.Forms.TabPage tabPageImageFavorites;
         private System.Windows.Forms.TabPage tabPageImageHistory;
-		private System.Windows.Forms.ListView listViewImageHistory;
-		private System.Windows.Forms.ColumnHeader columnHeader5;
+        private System.Windows.Forms.ListView listViewImageHistory;
+        private System.Windows.Forms.ColumnHeader columnHeader5;
         private System.Windows.Forms.TabPage tabPageImageBrowser;
-		private System.Windows.Forms.TreeView treeViewImageDirectories;
+        private System.Windows.Forms.TreeView treeViewImageDirectories;
         private System.Windows.Forms.ListView listViewDirectoryImages;
-		private System.Windows.Forms.Label labelImgDirName;
+        private System.Windows.Forms.Label labelImgDirName;
         private System.Windows.Forms.Button buttonClearImageHistory;
         private System.Windows.Forms.ListView listViewFavorites;
         private SongDetails.SongDetail songDetailElement;
