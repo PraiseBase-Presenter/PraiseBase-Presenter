@@ -297,6 +297,9 @@
     <EmbeddedResource Include="UI\Editor\SongEditorChild.en-US.resx">
       <DependentUpon>SongEditorChild.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="UI\Presenter\AboutDialog.en-US.resx">
+      <DependentUpon>AboutDialog.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="UI\Presenter\AboutDialog.resx">
       <DependentUpon>AboutDialog.cs</DependentUpon>
       <SubType>Designer</SubType>
