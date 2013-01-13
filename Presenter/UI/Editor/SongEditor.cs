@@ -31,6 +31,9 @@ using System.Linq;
 using System.Windows.Forms;
 using Pbp.Properties;
 using Pbp.IO;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Globalization;
 
 namespace Pbp.Forms
 {
@@ -52,6 +55,33 @@ namespace Pbp.Forms
             fileSaveBoxFilterIndex = 0;
             this.WindowState = Settings.Default.EditorWindowState;
             //this.Text += " " + System.Reflection.Assembly.GetExecutingAssembly().GetName().Version.ToString();
+
+            foreach (var l in Program.AvailableLanguages)
+            {
+                ToolStripMenuItem selectLanguageToolStripMenuItem = new ToolStripMenuItem(l.DisplayName);
+                selectLanguageToolStripMenuItem.Tag = l;
+                selectLanguageToolStripMenuItem.Click += new EventHandler(selectLanguageToolStripMenuItem_Click);
+                if (l.Name == System.Threading.Thread.CurrentThread.CurrentUICulture.Name)
+                {
+                    selectLanguageToolStripMenuItem.Checked = true;
+                }
+                this.spracheToolStripMenuItem.DropDownItems.Add(selectLanguageToolStripMenuItem);
+            }            
+        }
+
+        void selectLanguageToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Program.SetLanguage(this, (CultureInfo)((ToolStripMenuItem)sender).Tag);
+
+            for (int i = 0; i < MdiChildren.Count(); i++)
+            {
+                Program.SetLanguage(MdiChildren[i], (CultureInfo)((ToolStripMenuItem)sender).Tag);
+            }
+
+            foreach (ToolStripMenuItem i in this.spracheToolStripMenuItem.DropDownItems)
+            {
+                i.Checked = ((CultureInfo)i.Tag == System.Threading.Thread.CurrentThread.CurrentUICulture);
+            }
         }
 
         static public SongEditor getInstance()

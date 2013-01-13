@@ -40,6 +40,7 @@ using Pbp.Properties;
 using SongDetails;
 using Timer = System.Windows.Forms.Timer;
 using Pbp.Manager;
+using System.Globalization;
 
 //using PowerPoint = Microsoft.Office.Interop.PowerPoint;
 
@@ -129,7 +130,28 @@ namespace Pbp.Forms
                 titelUndTextToolStripMenuItem.Checked = true;
             }
 
+            foreach (var l in Program.AvailableLanguages)
+            {
+                ToolStripMenuItem selectLanguageToolStripMenuItem = new ToolStripMenuItem(l.DisplayName);
+                selectLanguageToolStripMenuItem.Tag = l;
+                selectLanguageToolStripMenuItem.Click += new EventHandler(selectLanguageToolStripMenuItem_Click);
+                if (l.Name == System.Threading.Thread.CurrentThread.CurrentUICulture.Name)
+                {
+                    selectLanguageToolStripMenuItem.Checked = true;
+                }
+                this.spracheToolStripMenuItem.DropDownItems.Add(selectLanguageToolStripMenuItem);
+            }
+
             ProjectionManager.Instance.ProjectionChanged += Instance_ProjectionChanged;
+        }
+
+        void selectLanguageToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Program.SetLanguage(this, (CultureInfo)((ToolStripMenuItem)sender).Tag);
+            foreach (ToolStripMenuItem i in this.spracheToolStripMenuItem.DropDownItems)
+            {
+                i.Checked = ((CultureInfo)i.Tag == System.Threading.Thread.CurrentThread.CurrentUICulture);
+            }
         }
 
         void Instance_ProjectionChanged(object sender, ProjectionManager.ProjectionChangedEventArgs e)

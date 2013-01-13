@@ -158,5 +158,8 @@
     <Setting Name="HideUpdateVersion" Type="System.String" Scope="User">
       <Value Profile="(Default)" />
     </Setting>
+    <Setting Name="SelectedCulture" Type="System.String" Scope="User">
+      <Value Profile="(Default)">de-CH</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

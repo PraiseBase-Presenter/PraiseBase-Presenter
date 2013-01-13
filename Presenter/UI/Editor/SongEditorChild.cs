@@ -181,11 +181,14 @@ namespace Pbp.Forms
             //comboBoxSlideHorizOrientation.DataSource = Pbp.DataObjects.EnumHelper.ToList(typeof(TextOrientationHorizontal));
             //comboBoxSlideHorizOrientation.DisplayMember = "Value";
             //comboBoxSlideHorizOrientation.ValueMember = "Key";
-
             comboBoxSlideHorizOrientation.DataSource = Enum.GetValues(typeof(TextOrientationHorizontal));
-            comboBoxSlideHorizOrientation.DataBindings.Add("SelectedItem", sng, "HorizontalTextOrientation", false, DataSourceUpdateMode.OnPropertyChanged);
+            comboBoxSlideHorizOrientation.DataBindings.Add("SelectedItem", sng, "HorizontalTextOrientation");
+
+            //comboBoxSlideVertOrientation.DataSource = Pbp.DataObjects.EnumHelper.ToList(typeof(TextOrientationVertical));
+            //comboBoxSlideVertOrientation.DisplayMember = "Value";
+            //comboBoxSlideVertOrientation.ValueMember = "Key";
             comboBoxSlideVertOrientation.DataSource = Enum.GetValues(typeof(TextOrientationVertical));
-            comboBoxSlideVertOrientation.DataBindings.Add("SelectedItem", sng, "VerticalTextOrientation", false, DataSourceUpdateMode.OnPropertyChanged);
+            comboBoxSlideVertOrientation.DataBindings.Add("SelectedItem", sng, "VerticalTextOrientation");
 
             comboBoxLanguage.Items.Clear();
             comboBoxLanguage.Text = sng.Language;
@@ -704,6 +707,9 @@ namespace Pbp.Forms
 
         public void save()
         {
+            Console.WriteLine(this.ActiveControl.Name);
+            this.ValidateChildren();
+
             if (songFilename == null)
             {
                 saveAs();
