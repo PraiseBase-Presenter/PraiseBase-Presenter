@@ -47,37 +47,33 @@ namespace Pbp.UI
             {
                 ApplyResourceToControl(resources, form.MainMenuStrip, lang);
             }
+
             ApplyResourceToControl(resources, form, lang);
 
             //resources.ApplyResources(form, "$this", lang);
             form.Text = resources.GetString("$this.Text", lang);
         }
 
-        protected void ApplyResourceToControl(ComponentResourceManager resources, Control control, CultureInfo lang)
+        protected void ApplyResourceToToolStrip(ComponentResourceManager resources, ToolStrip menu, CultureInfo lang)
         {
-            foreach (Control c in control.Controls)
+            foreach (ToolStripItem m in menu.Items)
             {
-                ApplyResourceToControl(resources, c, lang);
-                //resources.ApplyResources(c, c.Name, lang);
-                string text = resources.GetString(c.Name + ".Text", lang);
+                //resources.ApplyResources(m, m.Name, lang);
+                string text = resources.GetString(m.Name + ".Text", lang);
+                string ttext = resources.GetString(m.Name + ".ToolTipText", lang);
                 if (text != null)
                 {
-                    c.Text = text;
+                    m.Text = text;
+                    m.ToolTipText = ttext;
                 }
-                if (c.GetType() == typeof(Pbp.Components.CustomGroupBox))
+                if (m.GetType() == typeof(ToolStripMenuItem))
                 {
-                    string title = resources.GetString(c.Name + ".Title", lang);
-                    if (title != null)
+                    foreach (var d in ((ToolStripMenuItem)m).DropDownItems)
                     {
-                        ((Pbp.Components.CustomGroupBox)c).Title = title;
-                    }                
-                }
-                else if (c.GetType() == typeof(Pbp.Components.SearchTextBox))
-                {
-                    string title = resources.GetString(c.Name + ".PlaceHolderText", lang);
-                    if (title != null)
-                    {
-                        ((Pbp.Components.SearchTextBox)c).PlaceHolderText = title;
+                        if (d.GetType() == typeof(ToolStripMenuItem))
+                        {
+                            ApplyResourceToControl(resources, (ToolStripMenuItem)d, lang);
+                        }
                     }
                 }
             }
@@ -121,6 +117,39 @@ namespace Pbp.UI
             }
         }
 
+        protected void ApplyResourceToControl(ComponentResourceManager resources, Control control, CultureInfo lang)
+        {
+            foreach (Control c in control.Controls)
+            {
+                if (c.GetType() == typeof(ToolStrip))
+                {
+                    ApplyResourceToToolStrip(resources, (ToolStrip)c, lang);
+                }
+                ApplyResourceToControl(resources, c, lang);
+                //resources.ApplyResources(c, c.Name, lang);
+                string text = resources.GetString(c.Name + ".Text", lang);
+                if (text != null)
+                {
+                    c.Text = text;
+                }
 
+                if (c.GetType() == typeof(Pbp.Components.CustomGroupBox))
+                {
+                    string title = resources.GetString(c.Name + ".Title", lang);
+                    if (title != null)
+                    {
+                        ((Pbp.Components.CustomGroupBox)c).Title = title;
+                    }
+                }
+                else if (c.GetType() == typeof(Pbp.Components.SearchTextBox))
+                {
+                    string title = resources.GetString(c.Name + ".PlaceHolderText", lang);
+                    if (title != null)
+                    {
+                        ((Pbp.Components.SearchTextBox)c).PlaceHolderText = title;
+                    }
+                }
+            }
+        }
     }
 }
