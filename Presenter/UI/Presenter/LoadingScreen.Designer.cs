@@ -74,7 +74,7 @@ namespace Pbp.Forms
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.BackgroundImage = global::Pbp.Properties.Resources.logo;
+            this.BackgroundImage = global::Pbp.Resources.ImageResources.logo;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.ClientSize = new System.Drawing.Size(801, 200);
             this.ControlBox = false;
@@ -82,7 +82,7 @@ namespace Pbp.Forms
             this.Cursor = System.Windows.Forms.Cursors.IBeam;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "LoadingScreen";
-            this.Icon = global::Pbp.Properties.Resources.Computer;
+            this.Icon = global::Pbp.Resources.ImageResources.Computer;
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Loading";

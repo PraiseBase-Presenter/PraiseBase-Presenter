@@ -29,11 +29,14 @@ using System;
 using System.Drawing;
 using System.Reflection;
 using System.Windows.Forms;
+using Pbp.Resources;
 
 namespace Pbp.Forms
 {
     public partial class AboutDialog : Form
     {
+        private String updateDownloadUrl = string.Empty;
+
         public AboutDialog()
         {
             InitializeComponent();
@@ -51,7 +54,7 @@ namespace Pbp.Forms
             this.labelCopyright.Text = AssemblyCopyright;
             this.labelCompanyName.Text = AssemblyCompany;
 
-            this.textBox1.Text = global::Pbp.Properties.Resources.License;
+            this.textBox1.Text = global::Pbp.Resources.ImageResources.License;
 
             timer1.Interval = 1;
             timer1.Start();
@@ -143,30 +146,34 @@ namespace Pbp.Forms
             Pbp.UpdateCheck.UpdateInformation ui = Pbp.UpdateCheck.getNewVersion();
             if (ui.UpdateAvailable)
             {
-                linkLabel1.Text = "Aktualisierung auf Version " + ui.OnlineVersion + " verfügbar! Herunterladen";
-                linkLabel1.LinkArea = new LinkArea(linkLabel1.Text.Length - 13, 13);
-                linkLabel1.Image = Properties.Resources.update16;
+                linkLabel1.Text = String.Format(StringResources.UpdateAvailable, ui.OnlineVersion);
+                linkLabel1.Image = Pbp.Resources.ImageResources.update16;
                 linkLabel1.ForeColor = Color.DarkGreen;
-                linkLabel1.Tag = ui.DownloadUrl;
+                updateDownloadUrl = ui.DownloadUrl;
+                buttonDownloadUpdate.Visible = true;
             }
             else
             {
                 if (ui.OnlineVersion != null)
                 {
-                    linkLabel1.Text = "Sie haben die aktuellste Version!";
-                    linkLabel1.Image = Properties.Resources.ok16;
+                    linkLabel1.Text = StringResources.ProgramVersionUptodate;
+                    linkLabel1.Image = Pbp.Resources.ImageResources.ok16;
                 }
                 else
                 {
-                    linkLabel1.Text = "Verbindung zum Update-Server nicht möglich!";
+                    linkLabel1.Text = StringResources.ConnectionToUpdateServerFailed;
                 }
+                buttonDownloadUpdate.Visible = false;
             }
             timer1.Stop();
         }
 
-        private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        private void buttonDownloadUpdate_Click(object sender, EventArgs e)
         {
-            System.Diagnostics.Process.Start((string)linkLabel1.Tag);
+            if (updateDownloadUrl != string.Empty)
+            {
+                System.Diagnostics.Process.Start(updateDownloadUrl);
+            }
         }
     }
 }

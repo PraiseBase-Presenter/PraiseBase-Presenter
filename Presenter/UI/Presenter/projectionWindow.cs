@@ -185,11 +185,5 @@ namespace Pbp.Forms
             }
             return frame;
         }
-
-        //
-        //if (layerContents.GetType() == typeof(TextLayer) || (typeof(TextLayer).IsAssignableFrom(layerContents.GetType())))
-        //else if (layerContents.GetType() == typeof(ImageLayer))
-        //
-
     }
 }

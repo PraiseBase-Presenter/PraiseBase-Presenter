@@ -109,7 +109,7 @@ namespace Pbp.Forms
             openFileDialog.CheckFileExists = true;
             openFileDialog.CheckPathExists = true;
             openFileDialog.Multiselect = false;
-            openFileDialog.Title = "Lied öffnen";
+            openFileDialog.Title = Resources.StringResources.OpenSong;
 
             openFileDialog.Filter = SongFileReaderFactory.Instance.GetFileBoxFilter();
             openFileDialog.FilterIndex = fileOpenBoxFilterIndex;

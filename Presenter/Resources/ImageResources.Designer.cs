@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Pbp.Properties {
+namespace Pbp.Resources {
     using System;
     
     
@@ -22,14 +22,14 @@ namespace Pbp.Properties {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "4.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    public class Resources {
+    public class ImageResources {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
         private static global::System.Globalization.CultureInfo resourceCulture;
         
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        internal Resources() {
+        internal ImageResources() {
         }
         
         /// <summary>
@@ -39,7 +39,7 @@ namespace Pbp.Properties {
         public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Pbp.Properties.Resources", typeof(Resources).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Pbp.Resources.ImageResources", typeof(ImageResources).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -251,24 +251,6 @@ namespace Pbp.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Diaschau starten.
-        /// </summary>
-        public static string Diaschau_starten {
-            get {
-                return ResourceManager.GetString("Diaschau_starten", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Diaschau stoppen.
-        /// </summary>
-        public static string Diaschau_stoppen {
-            get {
-                return ResourceManager.GetString("Diaschau_stoppen", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
         public static System.Drawing.Bitmap displaysettings {
@@ -335,15 +317,6 @@ namespace Pbp.Properties {
             get {
                 object obj = ResourceManager.GetObject("editsong", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Eine Instanz dieser Software läuft bereits!.
-        /// </summary>
-        public static string Eine_Instanz_dieser_Software_läuft_bereits_ {
-            get {
-                return ResourceManager.GetString("Eine_Instanz_dieser_Software_läuft_bereits_", resourceCulture);
             }
         }
         
@@ -458,15 +431,6 @@ namespace Pbp.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Keine Bilder ausgewählt!.
-        /// </summary>
-        public static string Keine_Bilder_ausgewählt_ {
-            get {
-                return ResourceManager.GetString("Keine_Bilder_ausgewählt_", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
         public static System.Drawing.Bitmap leinwand16 {
@@ -505,15 +469,6 @@ namespace Pbp.Properties {
         public static string License {
             get {
                 return ResourceManager.GetString("License", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Lied speichern unter....
-        /// </summary>
-        public static string Lied_speichern_unter___ {
-            get {
-                return ResourceManager.GetString("Lied_speichern_unter___", resourceCulture);
             }
         }
         
@@ -558,15 +513,6 @@ namespace Pbp.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to nicht vorhanden.
-        /// </summary>
-        public static string nicht_vorhanden {
-            get {
-                return ResourceManager.GetString("nicht_vorhanden", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
         public static System.Drawing.Bitmap ok16 {
@@ -593,15 +539,6 @@ namespace Pbp.Properties {
             get {
                 object obj = ResourceManager.GetObject("Projection_on", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Projektion.
-        /// </summary>
-        public static string Projektion {
-            get {
-                return ResourceManager.GetString("Projektion", resourceCulture);
             }
         }
         
@@ -692,15 +629,6 @@ namespace Pbp.Properties {
             get {
                 object obj = ResourceManager.GetObject("tip", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Titel.
-        /// </summary>
-        public static string Titel {
-            get {
-                return ResourceManager.GetString("Titel", resourceCulture);
             }
         }
         

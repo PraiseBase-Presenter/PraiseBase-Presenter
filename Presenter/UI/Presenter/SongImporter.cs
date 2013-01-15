@@ -63,8 +63,8 @@ namespace Pbp.Forms
                     #region PraiseBox Importer
 
                     dlg = new OpenFileDialog();
-                    dlg.Title = "PraiseBox Datenbank öffnen";
-                    dlg.Filter = "PraiseBox Datenbank (*.pbd)|*.pbd|Alle Dateien (*.*)|*.*";
+                    dlg.Title = Resources.StringResources.OpenPraiseBoxDatabase;
+                    dlg.Filter = Resources.StringResources.OpenPraiseBoxDatabase + " (*.pbd)|*.pbd|Alle Dateien (*.*)|*.*";
 
                     if (dlg.ShowDialog() == DialogResult.OK)
                     {
@@ -78,7 +78,8 @@ namespace Pbp.Forms
                         }
                         catch (Exception ex)
                         {
-                            MessageBox.Show("Sorry! " + ex.Message, "Datenbankfehler", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            MessageBox.Show(Resources.StringResources.Sorry + "! " + ex.Message, Resources.StringResources.DatabaseError, 
+                                MessageBoxButtons.OK, MessageBoxIcon.Error);
                             DialogResult = DialogResult.Cancel;
                             this.Close();
                             return;
@@ -92,7 +93,8 @@ namespace Pbp.Forms
                         }
                         catch (Exception ex)
                         {
-                            MessageBox.Show("Sorry! " + ex.Message, "Datenbankfehler", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            MessageBox.Show(Resources.StringResources.Sorry + "! " + ex.Message, Resources.StringResources.DatabaseError, 
+                                MessageBoxButtons.OK, MessageBoxIcon.Error);
                             DialogResult = DialogResult.Cancel;
                             this.Close();
                             return;
@@ -150,8 +152,8 @@ namespace Pbp.Forms
                     #region WorshipSystem Importer
 
                     dlg = new OpenFileDialog();
-                    dlg.Title = "WorshipSystem Datenbank öffnen";
-                    dlg.Filter = "WorshipSystem Datenbank (*.mdb)|*.mdb|Alle Dateien (*.*)|*.*";
+                    dlg.Title = Resources.StringResources.OpenWorshipSystemDatabase;
+                    dlg.Filter = Resources.StringResources.OpenWorshipSystemDatabase + " (*.mdb)|*.mdb|Alle Dateien (*.*)|*.*";
 
                     if (dlg.ShowDialog() == DialogResult.OK)
                     {
@@ -165,7 +167,8 @@ namespace Pbp.Forms
                         }
                         catch (Exception ex)
                         {
-                            MessageBox.Show("Sorry! " + ex.Message, "Datenbankfehler", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            MessageBox.Show(Resources.StringResources.Sorry + "! " + ex.Message, Resources.StringResources.DatabaseError, 
+                                MessageBoxButtons.OK, MessageBoxIcon.Error);
                             DialogResult = DialogResult.Cancel;
                             this.Close();
                             return;
@@ -179,7 +182,8 @@ namespace Pbp.Forms
                         }
                         catch (Exception ex)
                         {
-                            MessageBox.Show("Sorry! " + ex.Message, "Datenbankfehler", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            MessageBox.Show(Resources.StringResources.Sorry + "! " + ex.Message, Resources.StringResources.DatabaseError, 
+                                MessageBoxButtons.OK, MessageBoxIcon.Error);
                             DialogResult = DialogResult.Cancel;
                             this.Close();
                             return;
@@ -254,7 +258,8 @@ namespace Pbp.Forms
                     #endregion WorshipSystem Importer
 
                 default:
-                    MessageBox.Show("Sorry! Es ist kein entsprechender Importer vorhanden!", "Liederimport", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show(Resources.StringResources.Sorry + "! " + Resources.StringResources.NoSongImporterAvailable, 
+                        Resources.StringResources.SongImporter, MessageBoxButtons.OK, MessageBoxIcon.Error);
                     DialogResult = DialogResult.Cancel;
                     this.Close();
                     return;
@@ -308,7 +313,9 @@ namespace Pbp.Forms
                     string fileName = Settings.Default.DataDirectory + Path.DirectorySeparatorChar
                         + Settings.Default.SongDir + Path.DirectorySeparatorChar
                         + ((Song)listViewSongs.Items[x].Tag).Title + SongFileWriterFactory.Instance.CreateFactory(SongFileWriterFactory.Instance.PreferredType).FileExtension;
-                    if ((File.Exists(fileName) && (MessageBox.Show("Das Lied '" + ((Song)listViewSongs.Items[x].Tag).Title + "' existiert bereits. Überschreiben?", "PraiseBox Importer", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)) || !File.Exists(fileName))
+                    if ((File.Exists(fileName) && (MessageBox.Show(string.Format(Resources.StringResources.SongExistsAlready, ((Song)listViewSongs.Items[x].Tag).Title) 
+                        + Resources.StringResources.Overwrite + "?", Resources.StringResources.SongImporter, 
+                        MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)) || !File.Exists(fileName))
                     {
                         Song sng = (Song)listViewSongs.Items[x].Tag;
                         if (sng.GUID == Guid.Empty)
@@ -324,7 +331,8 @@ namespace Pbp.Forms
             }
             if (cnt > 0)
             {
-                MessageBox.Show(cnt.ToString() + " Lieder importiert!", "PraiseBox Importer", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show(string.Format(Resources.StringResources.SongsImported, cnt.ToString()), Resources.StringResources.SongImporter, 
+                    MessageBoxButtons.OK, MessageBoxIcon.Information);
 
                 if (checkBoxUseEditor.Checked)
                 {

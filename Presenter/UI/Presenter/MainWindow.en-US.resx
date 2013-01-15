@@ -206,7 +206,34 @@
     <value>170, 22</value>
   </data>
   <data name="datenverzeichnisÖffnenToolStripMenuItem.Text" xml:space="preserve">
-    <value>&amp;Show directories</value>
+    <value>&amp;Directories</value>
+  </data>
+  <data name="datenverzeichnisToolStripMenuItem1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>152, 22</value>
+  </data>
+  <data name="datenverzeichnisToolStripMenuItem1.Text" xml:space="preserve">
+    <value>&amp;Data directory</value>
+  </data>
+  <data name="toolStripSeparator10.Size" type="System.Drawing.Size, System.Drawing">
+    <value>149, 6</value>
+  </data>
+  <data name="liederToolStripMenuItem1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>152, 22</value>
+  </data>
+  <data name="liederToolStripMenuItem1.Text" xml:space="preserve">
+    <value>&amp;Songs</value>
+  </data>
+  <data name="bilderToolStripMenuItem1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>152, 22</value>
+  </data>
+  <data name="bilderToolStripMenuItem1.Text" xml:space="preserve">
+    <value>&amp;Images</value>
+  </data>
+  <data name="setlistenToolStripMenuItem1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>152, 22</value>
+  </data>
+  <data name="setlistenToolStripMenuItem1.Text" xml:space="preserve">
+    <value>&amp;Setlists</value>
   </data>
   <data name="toolStripSeparator6.Size" type="System.Drawing.Size, System.Drawing">
     <value>167, 6</value>
@@ -355,6 +382,9 @@
   <data name="buttonDisableAllDias.Text" xml:space="preserve">
     <value>Select none</value>
   </data>
+  <data name="buttonResetImageQueue.Text" xml:space="preserve">
+    <value>Clear stack</value>
+  </data>
   <data name="customGroupBox2.Title" xml:space="preserve">
     <value>Foreground</value>
   </data>
@@ -441,6 +471,60 @@
   </data>
   <data name="label2.Text" xml:space="preserve">
     <value>Book:</value>
+  </data>
+  <data name="toolStripButtonProjectionOff.ToolTipText" xml:space="preserve">
+    <value>Disable presentation screen</value>
+  </data>
+  <data name="toolStripButtonProjectionOn.ToolTipText" xml:space="preserve">
+    <value>Enable presentation screen</value>
+  </data>
+  <data name="toolStripButton5.ToolTipText" xml:space="preserve">
+    <value>Song editor</value>
+  </data>
+  <data name="toolStripButtonOpenCurrentSong.ToolTipText" xml:space="preserve">
+    <value>Edit current song</value>
+  </data>
+  <data name="toolStripButton1.ToolTipText" xml:space="preserve">
+    <value>Song browser</value>
+  </data>
+  <data name="toolStripButton3.ToolTipText" xml:space="preserve">
+    <value>QA and comments</value>
+  </data>
+  <data name="toolStripButtonDataFolder.Text" xml:space="preserve">
+    <value>Directories</value>
+  </data>
+  <data name="datenverzeichnisToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>152, 22</value>
+  </data>
+  <data name="datenverzeichnisToolStripMenuItem.Text" xml:space="preserve">
+    <value>Data directory</value>
+  </data>
+  <data name="toolStripSeparator8.Size" type="System.Drawing.Size, System.Drawing">
+    <value>149, 6</value>
+  </data>
+  <data name="liederToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>152, 22</value>
+  </data>
+  <data name="liederToolStripMenuItem.Text" xml:space="preserve">
+    <value>Songs</value>
+  </data>
+  <data name="bilderToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>152, 22</value>
+  </data>
+  <data name="bilderToolStripMenuItem.Text" xml:space="preserve">
+    <value>Images</value>
+  </data>
+  <data name="setlistenToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>152, 22</value>
+  </data>
+  <data name="setlistenToolStripMenuItem.Text" xml:space="preserve">
+    <value>Setlists</value>
+  </data>
+  <data name="toolStripButton4.ToolTipText" xml:space="preserve">
+    <value>Settings</value>
+  </data>
+  <data name="toolStripButtonDisplaySettings.ToolTipText" xml:space="preserve">
+    <value>Multiple screen setup</value>
   </data>
   <data name="customGroupBox1.Title" xml:space="preserve">
     <value>Projection</value>

@@ -525,5 +525,32 @@ namespace Pbp.Properties {
                 this["SelectedCulture"] = value;
             }
         }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("displayswitch.exe")]
+        public string DisplaySwitchCommand {
+            get {
+                return ((string)(this["DisplaySwitchCommand"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("desk.cpl,@0,4")]
+        public string DisplayControlCommand {
+            get {
+                return ((string)(this["DisplayControlCommand"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("control")]
+        public string SystemControlCommand {
+            get {
+                return ((string)(this["SystemControlCommand"]));
+            }
+        }
     }
 }

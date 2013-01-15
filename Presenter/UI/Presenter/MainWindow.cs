@@ -42,6 +42,7 @@ using Timer = System.Windows.Forms.Timer;
 using Pbp.Manager;
 using System.Globalization;
 using Pbp.UI;
+using Pbp.Resources;
 
 //using PowerPoint = Microsoft.Office.Interop.PowerPoint;
 
@@ -290,7 +291,7 @@ namespace Pbp.Forms
                 }
                 else
                 {
-                    MessageBox.Show(Resources.Titel + " " + listViewSetList.Items[i].Text + " " + Resources.nicht_vorhanden);
+                    MessageBox.Show(String.Format(StringResources.SongDoesNotExist, listViewSetList.Items[i].Text));
                 }
             }
 
@@ -322,7 +323,8 @@ namespace Pbp.Forms
                         }
                         else
                         {
-                            MessageBox.Show("Dieses Lied existiert nicht mehr in der Liederliste!", "Fehler", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            MessageBox.Show(StringResources.SongDoesNotExistInSonglist, StringResources.Error, 
+                                MessageBoxButtons.OK, MessageBoxIcon.Error);
                         }
                     }
                 }
@@ -381,11 +383,11 @@ namespace Pbp.Forms
 
             if (SongManager.Instance.CurrentSong.Song.Comment != String.Empty || SongManager.Instance.CurrentSong.Song.HasQA())
             {
-                toolStripButton3.Image = Resources.highlight_red;
+                toolStripButton3.Image = ImageResources.highlight_red;
             }
             else
             {
-                toolStripButton3.Image = Resources.highlight;
+                toolStripButton3.Image = ImageResources.highlight;
             }
         }
 
@@ -502,7 +504,7 @@ namespace Pbp.Forms
             treeViewImageDirectories.Nodes.Clear();
             PopulateTreeView(rootDir, null);
             treeViewImageDirectories.ExpandAll();
-            treeViewImageDirectories.Nodes.Add("Suchergebnisse");
+            treeViewImageDirectories.Nodes.Add(StringResources.SearchResults);
             treeViewImageDirectories.SelectedNode = treeViewImageDirectories.Nodes[0];
 
             imageSearchResults = new List<String>();
@@ -540,7 +542,7 @@ namespace Pbp.Forms
                 listViewFavorites.Items.Add(lvi);
                 listViewFavorites.EnsureVisible(listViewFavorites.Items.Count - 1);
             }
-            tabPageImageFavorites.Text = "Favoriten (" + Settings.Default.ImageFavorites.Count + ")";
+            tabPageImageFavorites.Text = StringResources.Favorites + " (" + Settings.Default.ImageFavorites.Count + ")";
         }
 
         public void PopulateTreeView(string directoryValue, TreeNode parentNode)
@@ -615,7 +617,7 @@ namespace Pbp.Forms
                     listViewDirectoryImages.Items.AddRange(lviList.ToArray());
                     listViewDirectoryImages.LargeImageList = imList;
 
-                    labelImgDirName.Text = "Suchergebnisse (" + i + " Bilder)";
+                    labelImgDirName.Text = StringResources.SearchResults + " (" + i + " " + StringResources.Images + ")";
                 }
                 else
                 {
@@ -641,9 +643,9 @@ namespace Pbp.Forms
                         }
                         listViewDirectoryImages.LargeImageList = imList;
 
-                        labelImgDirName.Text = "Kategorie '" +
+                        labelImgDirName.Text = StringResources.Category + " '" +
                                                Path.GetFileName(((string)treeViewImageDirectories.SelectedNode.Tag)) +
-                                               "' (" + i + " Bilder):";
+                                               "' (" + i + " " + StringResources.Images + "):";
                     }
                 }
 
@@ -731,7 +733,7 @@ namespace Pbp.Forms
                 listViewFavorites.EnsureVisible(listViewFavorites.Items.Count - 1);
                 Settings.Default.ImageFavorites.Add(relImagePath);
                 Settings.Default.Save();
-                tabPageImageFavorites.Text = "Favoriten (" + Settings.Default.ImageFavorites.Count + ")";
+                tabPageImageFavorites.Text = StringResources.Favorites +  " (" + Settings.Default.ImageFavorites.Count + ")";
             }
         }
 
@@ -741,7 +743,7 @@ namespace Pbp.Forms
             {
                 Settings.Default.ImageFavorites.Remove(relImagePath);
                 Settings.Default.Save();
-                tabPageImageFavorites.Text = "Favoriten (" + Settings.Default.ImageFavorites.Count + ")";
+                tabPageImageFavorites.Text = StringResources.Favorites + " (" + Settings.Default.ImageFavorites.Count + ")";
             }
         }
 
@@ -841,16 +843,16 @@ namespace Pbp.Forms
             {
                 diaTimer.Stop();
                 ProjectionManager.Instance.HideLayer(1);
-                buttonDiaShow.Text = Resources.Diaschau_starten;
+                buttonDiaShow.Text = StringResources.StartSlideshow;
                 return;
             }
 
             if (listViewDias.Items.Count == 0)
             {
-                MessageBox.Show(Resources.Keine_Bilder_ausgewählt_);
+                MessageBox.Show(StringResources.NoImagesSelected, StringResources.Error);
                 return;
             }
-            buttonDiaShow.Text = Resources.Diaschau_stoppen;
+            buttonDiaShow.Text = StringResources.StopSlideshow;
 
             if (radioButtonAutoDiaShow.Checked)
             {
@@ -880,7 +882,7 @@ namespace Pbp.Forms
                 }
                 if (diaStack.Count == 0)
                 {
-                    MessageBox.Show(Resources.Keine_Bilder_ausgewählt_);
+                    MessageBox.Show(StringResources.NoImagesSelected, StringResources.Error);
                     return;
                 }
                 diaTimer.Tag = diaStack;
@@ -897,7 +899,7 @@ namespace Pbp.Forms
             {
                 ((Timer)sender).Stop();
                 ProjectionManager.Instance.HideLayer(1);
-                buttonDiaShow.Text = Resources.Diaschau_starten;
+                buttonDiaShow.Text = StringResources.StartSlideshow;
                 return;
             }
             ImageLayer iml = new ImageLayer();
@@ -1021,7 +1023,7 @@ namespace Pbp.Forms
         private void buttonSetListClear_Click(object sender, EventArgs e)
         {
             if (
-                MessageBox.Show("Setliste wirklich leeren?", "Viewer", MessageBoxButtons.YesNo, MessageBoxIcon.Question) ==
+                MessageBox.Show(StringResources.ReallyEmptySetlist, this.Text, MessageBoxButtons.YesNo, MessageBoxIcon.Question) ==
                 DialogResult.Yes)
             {
                 listViewSetList.Items.Clear();
@@ -1089,9 +1091,9 @@ namespace Pbp.Forms
             var dlg = new SaveFileDialog();
             dlg.AddExtension = true;
             dlg.CheckPathExists = true;
-            dlg.Filter = "PraiseBase-Presenter Setliste (*.pbpl)|*.pbpl";
+            dlg.Filter = StringResources.SetlistFile + " (*.pbpl)|*.pbpl";
             dlg.InitialDirectory = setlistDir;
-            dlg.Title = "Setliste speichern unter...";
+            dlg.Title = StringResources.SaveSetlistAs;
             if (dlg.ShowDialog() == DialogResult.OK)
             {
                 Pbp.Data.Setlist sl = new Pbp.Data.Setlist();
@@ -1116,9 +1118,9 @@ namespace Pbp.Forms
             dlg.AddExtension = true;
             dlg.CheckPathExists = true;
             dlg.CheckFileExists = true;
-            dlg.Filter = "PraiseBase-Presenter Setliste (*.pbpl)|*.pbpl";
+            dlg.Filter = StringResources.SetlistFile + " (*.pbpl)|*.pbpl";
             dlg.InitialDirectory = setlistDir;
-            dlg.Title = "Setliste öffnen...";
+            dlg.Title = StringResources.OpenSetlist;
             if (dlg.ShowDialog() == DialogResult.OK)
             {
                 Pbp.IO.SetlistReader sr = new Pbp.IO.SetlistReader();
@@ -1139,7 +1141,7 @@ namespace Pbp.Forms
                 }
                 catch (Exception err)
                 {
-                    MessageBox.Show(err.ToString(), "Viewer", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show(err.ToString(), this.Text, MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
         }
@@ -1148,11 +1150,11 @@ namespace Pbp.Forms
         {
             try
             {
-                Process.Start("displayswitch.exe");
+                Process.Start(Settings.Default.DisplaySwitchCommand);
             }
             catch
             {
-                Process.Start("control", "desk.cpl,@0,4");
+                Process.Start(Settings.Default.SystemControlCommand, Settings.Default.DisplayControlCommand);
             }
         }
 
@@ -1252,7 +1254,7 @@ namespace Pbp.Forms
 
         private void miniaturbilderPrüfenToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            ProgressWindow wnd = new ProgressWindow("Erstelle Miniaturbilder...", 0);
+            ProgressWindow wnd = new ProgressWindow(StringResources.CreatingThumbnails + "...", 0);
             wnd.Show();
             ImageManager.Instance.ThumbnailCreated += new ImageManager.ThumbnailCreate(Instance_ThumbnailCreated);
             ImageManager.Instance.CheckThumbs();
@@ -1309,17 +1311,17 @@ namespace Pbp.Forms
                     if (SongManager.Instance.CurrentSong.Song.Comment != String.Empty ||
                         SongManager.Instance.CurrentSong.Song.HasQA())
                     {
-                        toolStripButton3.Image = Resources.highlight_red;
+                        toolStripButton3.Image = ImageResources.highlight_red;
                     }
                     else
                     {
-                        toolStripButton3.Image = Resources.highlight;
+                        toolStripButton3.Image = ImageResources.highlight;
                     }
                 }
             }
             else
             {
-                MessageBox.Show("Kein aktives Lied!");
+                MessageBox.Show(StringResources.NoActiveSong);
             }
         }
 
@@ -1340,13 +1342,13 @@ namespace Pbp.Forms
         {
             if (linkLayers)
             {
-                buttonToggleLayerMode.Image = Resources.link;
+                buttonToggleLayerMode.Image = ImageResources.link;
 
                 //label3.Text = "Text und Bild sind verknüpft";
             }
             else
             {
-                buttonToggleLayerMode.Image = Resources.unlink;
+                buttonToggleLayerMode.Image = ImageResources.unlink;
 
                 //label3.Text = "Text und Bild sind unabhängig";
             }
@@ -1447,8 +1449,7 @@ namespace Pbp.Forms
         {
             if (!ProjectionManager.Instance.InitializeWindows())
             {
-                String msg = "Kein zweiter Bildschirm gefunden! Der Primärbildschirm wird stattdessen verwendet.";
-                MessageBox.Show(msg, Resources.Projektion, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                MessageBox.Show(StringResources.NoSecondScreenFoundUsingMainScreen, StringResources.Projection, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
             }
         }
 
@@ -1722,7 +1723,7 @@ namespace Pbp.Forms
                     else if (bkCandidates.Count == 0)
                     {
                         labelBibleSearchMsg.ForeColor = Color.Red;
-                        labelBibleSearchMsg.Text = "Nichts gefunden!";
+                        labelBibleSearchMsg.Text = StringResources.NothingFound;
                     }
                     else
                     {

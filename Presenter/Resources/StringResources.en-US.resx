@@ -1,0 +1,306 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="Add" xml:space="preserve">
+    <value>Add</value>
+  </data>
+  <data name="Attention" xml:space="preserve">
+    <value>Attention</value>
+  </data>
+  <data name="Cancel" xml:space="preserve">
+    <value>Cancel</value>
+  </data>
+  <data name="Category" xml:space="preserve">
+    <value>Category</value>
+  </data>
+  <data name="ConnectionToUpdateServerFailed" xml:space="preserve">
+    <value>The connection to the update server failed!</value>
+  </data>
+  <data name="CreatingThumbnails" xml:space="preserve">
+    <value>Creating thumbnails</value>
+  </data>
+  <data name="DatabaseError" xml:space="preserve">
+    <value>Database error</value>
+  </data>
+  <data name="DoesTheSongReallyHaveTheDefaultTitle" xml:space="preserve">
+    <value>Does the song really have the default title '{0}'?</value>
+  </data>
+  <data name="EmptyEntriesAreNotAllowed" xml:space="preserve">
+    <value>Empty entries are not allowed!</value>
+  </data>
+  <data name="Error" xml:space="preserve">
+    <value>Error</value>
+  </data>
+  <data name="Favorites" xml:space="preserve">
+    <value>Favorites</value>
+  </data>
+  <data name="FormatNotSupported" xml:space="preserve">
+    <value>Format not supported!</value>
+  </data>
+  <data name="Images" xml:space="preserve">
+    <value>images</value>
+  </data>
+  <data name="LanguageExistsAlready" xml:space="preserve">
+    <value>This language exists already!</value>
+  </data>
+  <data name="LoadedSong" xml:space="preserve">
+    <value>Loaded song {0}</value>
+  </data>
+  <data name="NameExistsAlready" xml:space="preserve">
+    <value>This name exists already!</value>
+  </data>
+  <data name="NameOfTheSongPart" xml:space="preserve">
+    <value>Name of the song part</value>
+  </data>
+  <data name="NoActiveSong" xml:space="preserve">
+    <value>No active song!</value>
+  </data>
+  <data name="NoImagesSelected" xml:space="preserve">
+    <value>No images have been selected!</value>
+  </data>
+  <data name="NoSecondScreenFoundUsingMainScreen" xml:space="preserve">
+    <value>No secondary screen has been found! Using the main screen instead.</value>
+  </data>
+  <data name="NoSongImporterAvailable" xml:space="preserve">
+    <value>No song importer available!</value>
+  </data>
+  <data name="NoSongsSelected" xml:space="preserve">
+    <value>No songs have been selected!</value>
+  </data>
+  <data name="NothingFound" xml:space="preserve">
+    <value>Nothing has been found!</value>
+  </data>
+  <data name="OpenPraiseBoxDatabase" xml:space="preserve">
+    <value>Open PraiseBox database</value>
+  </data>
+  <data name="OpenSetlist" xml:space="preserve">
+    <value>Open setlist...</value>
+  </data>
+  <data name="OpenSong" xml:space="preserve">
+    <value>Open song</value>
+  </data>
+  <data name="OpenWorshipSystemDatabase" xml:space="preserve">
+    <value>Open WorshipSystem database</value>
+  </data>
+  <data name="OtherName" xml:space="preserve">
+    <value>Other name</value>
+  </data>
+  <data name="Overwrite" xml:space="preserve">
+    <value>Overwrite</value>
+  </data>
+  <data name="ProgramInstanceAlreadyRunning" xml:space="preserve">
+    <value>Another instance of this software is already running!</value>
+  </data>
+  <data name="ProgramVersionUptodate" xml:space="preserve">
+    <value>Your software version is up to date!</value>
+  </data>
+  <data name="Projection" xml:space="preserve">
+    <value>Projection</value>
+  </data>
+  <data name="ReallyDeleteSlide" xml:space="preserve">
+    <value>Really delete the slide?</value>
+  </data>
+  <data name="ReallyDeleteSongPart" xml:space="preserve">
+    <value>Really delete the song part?</value>
+  </data>
+  <data name="ReallyEmptySetlist" xml:space="preserve">
+    <value>Do you really want to empty the setlist?</value>
+  </data>
+  <data name="ReallyResetFactoryDefaults" xml:space="preserve">
+    <value>Really reset all settings to factory defaults?</value>
+  </data>
+  <data name="Reset" xml:space="preserve">
+    <value>Reset</value>
+  </data>
+  <data name="SaveChangesMadeToTheSong" xml:space="preserve">
+    <value>Do you want to save the changes made to the song '{0}'?</value>
+  </data>
+  <data name="SaveSetlistAs" xml:space="preserve">
+    <value>Save setlist as...</value>
+  </data>
+  <data name="SaveSongAs" xml:space="preserve">
+    <value>Save song as...</value>
+  </data>
+  <data name="SearchResults" xml:space="preserve">
+    <value>Search results</value>
+  </data>
+  <data name="SetlistFile" xml:space="preserve">
+    <value>PraiseBase presenter setlist</value>
+  </data>
+  <data name="Settings" xml:space="preserve">
+    <value>Settings</value>
+  </data>
+  <data name="Slide" xml:space="preserve">
+    <value>Slide</value>
+  </data>
+  <data name="SongBrowser" xml:space="preserve">
+    <value>Song browser</value>
+  </data>
+  <data name="SongCannotBeSavedInThisFormat" xml:space="preserve">
+    <value>The song cannot be saved in this file format! Please choose another format!</value>
+  </data>
+  <data name="SongDoesNotExist" xml:space="preserve">
+    <value>The song {0} does not exist!</value>
+  </data>
+  <data name="SongDoesNotExistInSonglist" xml:space="preserve">
+    <value>This song does not exist in the songlist!</value>
+  </data>
+  <data name="SongEditor" xml:space="preserve">
+    <value>Song editor</value>
+  </data>
+  <data name="SongExistsAlready" xml:space="preserve">
+    <value>The song '{0}' exists already!</value>
+  </data>
+  <data name="SongFileHasErrors" xml:space="preserve">
+    <value>This song file has errors!</value>
+  </data>
+  <data name="SongFormatNotSupported" xml:space="preserve">
+    <value>We're sorry, this song format is not supported!</value>
+  </data>
+  <data name="SongImporter" xml:space="preserve">
+    <value>Song Importer</value>
+  </data>
+  <data name="SongNeedsAtLeastOneSongPart" xml:space="preserve">
+    <value>The song needs at leas one song part!</value>
+  </data>
+  <data name="SongPartsNeedsAtLeastOneSlide" xml:space="preserve">
+    <value>The song part needs at least one slide!</value>
+  </data>
+  <data name="SongSavedAs" xml:space="preserve">
+    <value>Song has been saved as {0}</value>
+  </data>
+  <data name="SongsImported" xml:space="preserve">
+    <value>{0} songs have been imported!</value>
+  </data>
+  <data name="Sorry" xml:space="preserve">
+    <value>Sorry</value>
+  </data>
+  <data name="StartSlideshow" xml:space="preserve">
+    <value>Start slideshow</value>
+  </data>
+  <data name="StopSlideshow" xml:space="preserve">
+    <value>Stop slideshow</value>
+  </data>
+  <data name="TagExistsAlready" xml:space="preserve">
+    <value>This tag exists already!</value>
+  </data>
+  <data name="UpdateAvailable" xml:space="preserve">
+    <value>A software update to version {0} is available.</value>
+  </data>
+</root>

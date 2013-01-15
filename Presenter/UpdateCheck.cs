@@ -104,13 +104,6 @@ namespace Pbp
             }
         }
 
-        public static void downloadNewVersion()
-        {
-            System.Net.WebClient Client = new System.Net.WebClient();
-
-            //Client.DownloadFile("http://www.csharpfriends.com/Members/index.aspx", " index.aspx");
-        }
-
         public static UpdateInformation getNewVersion()
         {
             UpdateInformation rtn = new UpdateInformation();

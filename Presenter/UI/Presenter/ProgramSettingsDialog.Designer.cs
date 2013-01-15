@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ProgramSettingsDialog));
             this.exitButton = new System.Windows.Forms.Button();
             this.cancelButton = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
@@ -104,175 +105,119 @@
             // 
             // exitButton
             // 
-            this.exitButton.Location = new System.Drawing.Point(8, 330);
+            resources.ApplyResources(this.exitButton, "exitButton");
             this.exitButton.Name = "exitButton";
-            this.exitButton.Size = new System.Drawing.Size(75, 23);
-            this.exitButton.TabIndex = 0;
-            this.exitButton.Text = "&Ok";
             this.exitButton.UseVisualStyleBackColor = true;
             this.exitButton.Click += new System.EventHandler(this.exitButton_Click);
             // 
             // cancelButton
             // 
+            resources.ApplyResources(this.cancelButton, "cancelButton");
             this.cancelButton.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.cancelButton.Location = new System.Drawing.Point(89, 330);
             this.cancelButton.Name = "cancelButton";
-            this.cancelButton.Size = new System.Drawing.Size(75, 23);
-            this.cancelButton.TabIndex = 1;
-            this.cancelButton.Text = "&Abbrechen";
             this.cancelButton.UseVisualStyleBackColor = true;
             this.cancelButton.Click += new System.EventHandler(this.cancelButton_Click);
             // 
             // label1
             // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(20, 25);
+            resources.ApplyResources(this.label1, "label1");
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(149, 13);
-            this.label1.TabIndex = 2;
-            this.label1.Text = "Benutzerdaten (Bilder, Lieder):";
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(445, 20);
+            resources.ApplyResources(this.button1, "button1");
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(116, 23);
-            this.button1.TabIndex = 4;
-            this.button1.Text = "Ordner wählen...";
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // textBox1
             // 
-            this.textBox1.Location = new System.Drawing.Point(206, 22);
+            resources.ApplyResources(this.textBox1, "textBox1");
             this.textBox1.Name = "textBox1";
             this.textBox1.ReadOnly = true;
-            this.textBox1.Size = new System.Drawing.Size(233, 20);
-            this.textBox1.TabIndex = 5;
             // 
             // buttonProjectionBackColor
             // 
-            this.buttonProjectionBackColor.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.buttonProjectionBackColor.Location = new System.Drawing.Point(21, 18);
+            resources.ApplyResources(this.buttonProjectionBackColor, "buttonProjectionBackColor");
             this.buttonProjectionBackColor.Name = "buttonProjectionBackColor";
-            this.buttonProjectionBackColor.Size = new System.Drawing.Size(158, 23);
-            this.buttonProjectionBackColor.TabIndex = 30;
-            this.buttonProjectionBackColor.Text = "Hintergrundfarbe...";
             this.buttonProjectionBackColor.UseVisualStyleBackColor = true;
             this.buttonProjectionBackColor.Click += new System.EventHandler(this.buttonChosseBackgroundColor_Click);
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(468, 330);
+            resources.ApplyResources(this.button2, "button2");
             this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(148, 23);
-            this.button2.TabIndex = 36;
-            this.button2.Text = "Auf &Standard zurücksetzen";
             this.button2.UseVisualStyleBackColor = true;
             this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
             // buttonProjectionOutlineColor
             // 
-            this.buttonProjectionOutlineColor.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.buttonProjectionOutlineColor.Location = new System.Drawing.Point(293, 190);
+            resources.ApplyResources(this.buttonProjectionOutlineColor, "buttonProjectionOutlineColor");
             this.buttonProjectionOutlineColor.Name = "buttonProjectionOutlineColor";
-            this.buttonProjectionOutlineColor.Size = new System.Drawing.Size(162, 23);
-            this.buttonProjectionOutlineColor.TabIndex = 32;
-            this.buttonProjectionOutlineColor.Text = "Umrandungsfarbe...";
             this.buttonProjectionOutlineColor.UseVisualStyleBackColor = true;
             this.buttonProjectionOutlineColor.Click += new System.EventHandler(this.buttonProjectionOutlineColor_Click);
             // 
             // checkBoxProjectionFontScaling
             // 
-            this.checkBoxProjectionFontScaling.AutoSize = true;
-            this.checkBoxProjectionFontScaling.Location = new System.Drawing.Point(21, 61);
+            resources.ApplyResources(this.checkBoxProjectionFontScaling, "checkBoxProjectionFontScaling");
             this.checkBoxProjectionFontScaling.Name = "checkBoxProjectionFontScaling";
-            this.checkBoxProjectionFontScaling.Size = new System.Drawing.Size(279, 17);
-            this.checkBoxProjectionFontScaling.TabIndex = 38;
-            this.checkBoxProjectionFontScaling.Text = "Schriften herunterskalieren falls Schriftgrösse zu gross";
             this.checkBoxProjectionFontScaling.UseVisualStyleBackColor = true;
             this.checkBoxProjectionFontScaling.CheckedChanged += new System.EventHandler(this.checkBoxFontScaling_CheckedChanged);
             // 
             // tabControl1
             // 
+            resources.ApplyResources(this.tabControl1, "tabControl1");
             this.tabControl1.Controls.Add(this.tabPage1);
             this.tabControl1.Controls.Add(this.tabPage3);
             this.tabControl1.Controls.Add(this.tabPage2);
             this.tabControl1.Controls.Add(this.tabPage5);
-            this.tabControl1.Location = new System.Drawing.Point(8, 12);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(612, 302);
-            this.tabControl1.TabIndex = 39;
             this.tabControl1.SelectedIndexChanged += new System.EventHandler(this.tabControl1_SelectedIndexChanged);
             // 
             // tabPage1
             // 
+            resources.ApplyResources(this.tabPage1, "tabPage1");
             this.tabPage1.Controls.Add(this.groupBox2);
             this.tabPage1.Controls.Add(this.groupBox1);
-            this.tabPage1.Location = new System.Drawing.Point(4, 22);
             this.tabPage1.Name = "tabPage1";
-            this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(604, 276);
-            this.tabPage1.TabIndex = 0;
-            this.tabPage1.Text = "Allgemeines";
             this.tabPage1.UseVisualStyleBackColor = true;
             // 
             // groupBox2
             // 
+            resources.ApplyResources(this.groupBox2, "groupBox2");
             this.groupBox2.Controls.Add(this.checkBoxShowLoadingScreen);
-            this.groupBox2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.groupBox2.Location = new System.Drawing.Point(6, 121);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(592, 68);
-            this.groupBox2.TabIndex = 10;
             this.groupBox2.TabStop = false;
-            this.groupBox2.Text = "Diverses";
             // 
             // checkBoxShowLoadingScreen
             // 
-            this.checkBoxShowLoadingScreen.AutoSize = true;
-            this.checkBoxShowLoadingScreen.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.checkBoxShowLoadingScreen.Location = new System.Drawing.Point(23, 28);
+            resources.ApplyResources(this.checkBoxShowLoadingScreen, "checkBoxShowLoadingScreen");
             this.checkBoxShowLoadingScreen.Name = "checkBoxShowLoadingScreen";
-            this.checkBoxShowLoadingScreen.Size = new System.Drawing.Size(142, 17);
-            this.checkBoxShowLoadingScreen.TabIndex = 8;
-            this.checkBoxShowLoadingScreen.Text = "Ladebildschirm anzeigen";
             this.checkBoxShowLoadingScreen.UseVisualStyleBackColor = true;
             this.checkBoxShowLoadingScreen.CheckedChanged += new System.EventHandler(this.checkBoxShowLoadingScreen_CheckedChanged);
             // 
             // groupBox1
             // 
+            resources.ApplyResources(this.groupBox1, "groupBox1");
             this.groupBox1.Controls.Add(this.textBox2);
             this.groupBox1.Controls.Add(this.textBox1);
             this.groupBox1.Controls.Add(this.button1);
             this.groupBox1.Controls.Add(this.label1);
-            this.groupBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.groupBox1.Location = new System.Drawing.Point(6, 6);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(592, 109);
-            this.groupBox1.TabIndex = 9;
             this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Datenverzeichnis";
             // 
             // textBox2
             // 
+            resources.ApplyResources(this.textBox2, "textBox2");
             this.textBox2.BackColor = System.Drawing.SystemColors.Info;
             this.textBox2.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.textBox2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox2.Location = new System.Drawing.Point(42, 58);
-            this.textBox2.Multiline = true;
             this.textBox2.Name = "textBox2";
             this.textBox2.ReadOnly = true;
-            this.textBox2.Size = new System.Drawing.Size(497, 35);
-            this.textBox2.TabIndex = 7;
-            this.textBox2.Text = "Falls du den Datenordner neu setzt, musst du anschliessend die Liederliste und di" +
-                "e Bilderliste neu laden (über das Optionen-Menü) oder das Programm neu starten.";
-            this.textBox2.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // tabPage3
             // 
+            resources.ApplyResources(this.tabPage3, "tabPage3");
             this.tabPage3.Controls.Add(this.label6);
             this.tabPage3.Controls.Add(this.buttonAddSongPart);
             this.tabPage3.Controls.Add(this.textBoxNewSongPart);
@@ -288,154 +233,105 @@
             this.tabPage3.Controls.Add(this.textBoxNewTag);
             this.tabPage3.Controls.Add(this.buttonDelTags);
             this.tabPage3.Controls.Add(this.listBoxTags);
-            this.tabPage3.Location = new System.Drawing.Point(4, 22);
             this.tabPage3.Name = "tabPage3";
-            this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage3.Size = new System.Drawing.Size(604, 276);
-            this.tabPage3.TabIndex = 2;
-            this.tabPage3.Text = "Vorgaben";
             this.tabPage3.UseVisualStyleBackColor = true;
             // 
             // label6
             // 
-            this.label6.AutoSize = true;
-            this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label6.Location = new System.Drawing.Point(412, 7);
+            resources.ApplyResources(this.label6, "label6");
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(59, 13);
-            this.label6.TabIndex = 14;
-            this.label6.Text = "Liedteile:";
             // 
             // buttonAddSongPart
             // 
-            this.buttonAddSongPart.Location = new System.Drawing.Point(522, 25);
+            resources.ApplyResources(this.buttonAddSongPart, "buttonAddSongPart");
             this.buttonAddSongPart.Name = "buttonAddSongPart";
-            this.buttonAddSongPart.Size = new System.Drawing.Size(75, 23);
-            this.buttonAddSongPart.TabIndex = 13;
-            this.buttonAddSongPart.Text = "Hinzufügen";
             this.buttonAddSongPart.UseVisualStyleBackColor = true;
             this.buttonAddSongPart.Click += new System.EventHandler(this.buttonAddSongPart_Click);
             // 
             // textBoxNewSongPart
             // 
-            this.textBoxNewSongPart.Location = new System.Drawing.Point(411, 26);
+            resources.ApplyResources(this.textBoxNewSongPart, "textBoxNewSongPart");
             this.textBoxNewSongPart.Name = "textBoxNewSongPart";
-            this.textBoxNewSongPart.Size = new System.Drawing.Size(105, 20);
-            this.textBoxNewSongPart.TabIndex = 12;
             // 
             // buttonDelSongParts
             // 
-            this.buttonDelSongParts.Location = new System.Drawing.Point(411, 247);
+            resources.ApplyResources(this.buttonDelSongParts, "buttonDelSongParts");
             this.buttonDelSongParts.Name = "buttonDelSongParts";
-            this.buttonDelSongParts.Size = new System.Drawing.Size(186, 23);
-            this.buttonDelSongParts.TabIndex = 11;
-            this.buttonDelSongParts.Text = "Markierte löschen";
             this.buttonDelSongParts.UseVisualStyleBackColor = true;
             this.buttonDelSongParts.Click += new System.EventHandler(this.buttonDelSongParts_Click);
             // 
             // listBoxSongParts
             // 
+            resources.ApplyResources(this.listBoxSongParts, "listBoxSongParts");
             this.listBoxSongParts.FormattingEnabled = true;
-            this.listBoxSongParts.Location = new System.Drawing.Point(411, 52);
             this.listBoxSongParts.Name = "listBoxSongParts";
             this.listBoxSongParts.SelectionMode = System.Windows.Forms.SelectionMode.MultiExtended;
-            this.listBoxSongParts.Size = new System.Drawing.Size(186, 186);
-            this.listBoxSongParts.TabIndex = 10;
             // 
             // label5
             // 
-            this.label5.AutoSize = true;
-            this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.Location = new System.Drawing.Point(208, 7);
+            resources.ApplyResources(this.label5, "label5");
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(65, 13);
-            this.label5.TabIndex = 9;
-            this.label5.Text = "Sprachen:";
             // 
             // buttonAddLang
             // 
-            this.buttonAddLang.Location = new System.Drawing.Point(318, 25);
+            resources.ApplyResources(this.buttonAddLang, "buttonAddLang");
             this.buttonAddLang.Name = "buttonAddLang";
-            this.buttonAddLang.Size = new System.Drawing.Size(75, 23);
-            this.buttonAddLang.TabIndex = 8;
-            this.buttonAddLang.Text = "Hinzufügen";
             this.buttonAddLang.UseVisualStyleBackColor = true;
             this.buttonAddLang.Click += new System.EventHandler(this.buttonAddLang_Click);
             // 
             // textBoxNewLang
             // 
-            this.textBoxNewLang.Location = new System.Drawing.Point(207, 26);
+            resources.ApplyResources(this.textBoxNewLang, "textBoxNewLang");
             this.textBoxNewLang.Name = "textBoxNewLang";
-            this.textBoxNewLang.Size = new System.Drawing.Size(105, 20);
-            this.textBoxNewLang.TabIndex = 7;
             // 
             // buttonDelLang
             // 
-            this.buttonDelLang.Location = new System.Drawing.Point(207, 247);
+            resources.ApplyResources(this.buttonDelLang, "buttonDelLang");
             this.buttonDelLang.Name = "buttonDelLang";
-            this.buttonDelLang.Size = new System.Drawing.Size(186, 23);
-            this.buttonDelLang.TabIndex = 6;
-            this.buttonDelLang.Text = "Markierte löschen";
             this.buttonDelLang.UseVisualStyleBackColor = true;
             this.buttonDelLang.Click += new System.EventHandler(this.buttonDelLang_Click);
             // 
             // listBoxLanguages
             // 
+            resources.ApplyResources(this.listBoxLanguages, "listBoxLanguages");
             this.listBoxLanguages.FormattingEnabled = true;
-            this.listBoxLanguages.Location = new System.Drawing.Point(207, 52);
             this.listBoxLanguages.Name = "listBoxLanguages";
             this.listBoxLanguages.SelectionMode = System.Windows.Forms.SelectionMode.MultiExtended;
-            this.listBoxLanguages.Size = new System.Drawing.Size(186, 186);
-            this.listBoxLanguages.TabIndex = 5;
             // 
             // label4
             // 
-            this.label4.AutoSize = true;
-            this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.Location = new System.Drawing.Point(7, 7);
+            resources.ApplyResources(this.label4, "label4");
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(39, 13);
-            this.label4.TabIndex = 4;
-            this.label4.Text = "Tags:";
             // 
             // buttonAddTag
             // 
-            this.buttonAddTag.Location = new System.Drawing.Point(117, 25);
+            resources.ApplyResources(this.buttonAddTag, "buttonAddTag");
             this.buttonAddTag.Name = "buttonAddTag";
-            this.buttonAddTag.Size = new System.Drawing.Size(75, 23);
-            this.buttonAddTag.TabIndex = 3;
-            this.buttonAddTag.Text = "Hinzufügen";
             this.buttonAddTag.UseVisualStyleBackColor = true;
             this.buttonAddTag.Click += new System.EventHandler(this.buttonAddTag_Click);
             // 
             // textBoxNewTag
             // 
-            this.textBoxNewTag.Location = new System.Drawing.Point(6, 26);
+            resources.ApplyResources(this.textBoxNewTag, "textBoxNewTag");
             this.textBoxNewTag.Name = "textBoxNewTag";
-            this.textBoxNewTag.Size = new System.Drawing.Size(105, 20);
-            this.textBoxNewTag.TabIndex = 2;
             // 
             // buttonDelTags
             // 
-            this.buttonDelTags.Location = new System.Drawing.Point(6, 247);
+            resources.ApplyResources(this.buttonDelTags, "buttonDelTags");
             this.buttonDelTags.Name = "buttonDelTags";
-            this.buttonDelTags.Size = new System.Drawing.Size(186, 23);
-            this.buttonDelTags.TabIndex = 1;
-            this.buttonDelTags.Text = "Markierte löschen";
             this.buttonDelTags.UseVisualStyleBackColor = true;
             this.buttonDelTags.Click += new System.EventHandler(this.buttonDelTags_Click);
             // 
             // listBoxTags
             // 
+            resources.ApplyResources(this.listBoxTags, "listBoxTags");
             this.listBoxTags.FormattingEnabled = true;
-            this.listBoxTags.Location = new System.Drawing.Point(6, 52);
             this.listBoxTags.Name = "listBoxTags";
             this.listBoxTags.SelectionMode = System.Windows.Forms.SelectionMode.MultiExtended;
-            this.listBoxTags.Size = new System.Drawing.Size(186, 186);
-            this.listBoxTags.TabIndex = 0;
             // 
             // tabPage2
             // 
+            resources.ApplyResources(this.tabPage2, "tabPage2");
             this.tabPage2.Controls.Add(this.pictureBoxProjectionOutlineColor);
             this.tabPage2.Controls.Add(this.pictureBoxProjectionShadowColor);
             this.tabPage2.Controls.Add(this.pictureBoxProjectionBackColor);
@@ -450,139 +346,97 @@
             this.tabPage2.Controls.Add(this.trackBarProjectionPadding);
             this.tabPage2.Controls.Add(this.label11);
             this.tabPage2.Controls.Add(this.checkBoxProjectionFontScaling);
-            this.tabPage2.Location = new System.Drawing.Point(4, 22);
             this.tabPage2.Name = "tabPage2";
-            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(604, 276);
-            this.tabPage2.TabIndex = 1;
-            this.tabPage2.Text = "Projektion";
             this.tabPage2.UseVisualStyleBackColor = true;
             // 
             // pictureBoxProjectionOutlineColor
             // 
+            resources.ApplyResources(this.pictureBoxProjectionOutlineColor, "pictureBoxProjectionOutlineColor");
             this.pictureBoxProjectionOutlineColor.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pictureBoxProjectionOutlineColor.Location = new System.Drawing.Point(486, 184);
             this.pictureBoxProjectionOutlineColor.Name = "pictureBoxProjectionOutlineColor";
-            this.pictureBoxProjectionOutlineColor.Size = new System.Drawing.Size(36, 36);
-            this.pictureBoxProjectionOutlineColor.TabIndex = 56;
             this.pictureBoxProjectionOutlineColor.TabStop = false;
             // 
             // pictureBoxProjectionShadowColor
             // 
+            resources.ApplyResources(this.pictureBoxProjectionShadowColor, "pictureBoxProjectionShadowColor");
             this.pictureBoxProjectionShadowColor.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pictureBoxProjectionShadowColor.Location = new System.Drawing.Point(486, 136);
             this.pictureBoxProjectionShadowColor.Name = "pictureBoxProjectionShadowColor";
-            this.pictureBoxProjectionShadowColor.Size = new System.Drawing.Size(36, 36);
-            this.pictureBoxProjectionShadowColor.TabIndex = 55;
             this.pictureBoxProjectionShadowColor.TabStop = false;
             // 
             // pictureBoxProjectionBackColor
             // 
+            resources.ApplyResources(this.pictureBoxProjectionBackColor, "pictureBoxProjectionBackColor");
             this.pictureBoxProjectionBackColor.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pictureBoxProjectionBackColor.Location = new System.Drawing.Point(198, 12);
             this.pictureBoxProjectionBackColor.Name = "pictureBoxProjectionBackColor";
-            this.pictureBoxProjectionBackColor.Size = new System.Drawing.Size(36, 36);
-            this.pictureBoxProjectionBackColor.TabIndex = 54;
             this.pictureBoxProjectionBackColor.TabStop = false;
             // 
             // trackBarProjectionOutlineSize
             // 
+            resources.ApplyResources(this.trackBarProjectionOutlineSize, "trackBarProjectionOutlineSize");
             this.trackBarProjectionOutlineSize.BackColor = System.Drawing.SystemColors.Window;
             this.trackBarProjectionOutlineSize.LargeChange = 1;
-            this.trackBarProjectionOutlineSize.Location = new System.Drawing.Point(110, 191);
             this.trackBarProjectionOutlineSize.Maximum = 5;
             this.trackBarProjectionOutlineSize.Name = "trackBarProjectionOutlineSize";
-            this.trackBarProjectionOutlineSize.Size = new System.Drawing.Size(156, 45);
-            this.trackBarProjectionOutlineSize.TabIndex = 53;
             this.trackBarProjectionOutlineSize.Value = 1;
             this.trackBarProjectionOutlineSize.Scroll += new System.EventHandler(this.trackBarProjectionOutlineSize_Scroll);
             // 
             // label13
             // 
-            this.label13.AutoSize = true;
-            this.label13.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label13.Location = new System.Drawing.Point(18, 195);
+            resources.ApplyResources(this.label13, "label13");
             this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(75, 13);
-            this.label13.TabIndex = 52;
-            this.label13.Text = "Umrandung:";
             // 
             // label12
             // 
-            this.label12.AutoSize = true;
-            this.label12.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label12.Location = new System.Drawing.Point(18, 148);
+            resources.ApplyResources(this.label12, "label12");
             this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(62, 13);
-            this.label12.TabIndex = 51;
-            this.label12.Text = "Schatten:";
             // 
             // trackBarProjectionShadowSize
             // 
+            resources.ApplyResources(this.trackBarProjectionShadowSize, "trackBarProjectionShadowSize");
             this.trackBarProjectionShadowSize.BackColor = System.Drawing.SystemColors.Window;
             this.trackBarProjectionShadowSize.LargeChange = 1;
-            this.trackBarProjectionShadowSize.Location = new System.Drawing.Point(110, 143);
             this.trackBarProjectionShadowSize.Name = "trackBarProjectionShadowSize";
-            this.trackBarProjectionShadowSize.Size = new System.Drawing.Size(156, 45);
-            this.trackBarProjectionShadowSize.TabIndex = 50;
             this.trackBarProjectionShadowSize.Value = 5;
             this.trackBarProjectionShadowSize.Scroll += new System.EventHandler(this.trackBarProjectionShadowSize_Scroll);
             // 
             // buttonProjectionShadowColor
             // 
-            this.buttonProjectionShadowColor.Location = new System.Drawing.Point(293, 143);
+            resources.ApplyResources(this.buttonProjectionShadowColor, "buttonProjectionShadowColor");
             this.buttonProjectionShadowColor.Name = "buttonProjectionShadowColor";
-            this.buttonProjectionShadowColor.Size = new System.Drawing.Size(162, 23);
-            this.buttonProjectionShadowColor.TabIndex = 49;
-            this.buttonProjectionShadowColor.Text = "Schattenfarbe...";
             this.buttonProjectionShadowColor.UseVisualStyleBackColor = true;
             this.buttonProjectionShadowColor.Click += new System.EventHandler(this.buttonProjectionShadowColor_Click);
             // 
             // labelProjectionPadding
             // 
-            this.labelProjectionPadding.AutoSize = true;
-            this.labelProjectionPadding.Location = new System.Drawing.Point(290, 100);
+            resources.ApplyResources(this.labelProjectionPadding, "labelProjectionPadding");
             this.labelProjectionPadding.Name = "labelProjectionPadding";
-            this.labelProjectionPadding.Size = new System.Drawing.Size(10, 13);
-            this.labelProjectionPadding.TabIndex = 48;
-            this.labelProjectionPadding.Text = "-";
             // 
             // trackBarProjectionPadding
             // 
+            resources.ApplyResources(this.trackBarProjectionPadding, "trackBarProjectionPadding");
             this.trackBarProjectionPadding.BackColor = System.Drawing.SystemColors.Window;
-            this.trackBarProjectionPadding.Location = new System.Drawing.Point(110, 95);
             this.trackBarProjectionPadding.Maximum = 200;
             this.trackBarProjectionPadding.Name = "trackBarProjectionPadding";
-            this.trackBarProjectionPadding.Size = new System.Drawing.Size(156, 45);
-            this.trackBarProjectionPadding.TabIndex = 46;
             this.trackBarProjectionPadding.TickFrequency = 10;
             this.trackBarProjectionPadding.Scroll += new System.EventHandler(this.trackBarPadding_Scroll);
             // 
             // label11
             // 
-            this.label11.AutoSize = true;
-            this.label11.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label11.Location = new System.Drawing.Point(18, 100);
+            resources.ApplyResources(this.label11, "label11");
             this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(86, 13);
-            this.label11.TabIndex = 45;
-            this.label11.Text = "Randabstand:";
             this.label11.Click += new System.EventHandler(this.label11_Click);
             // 
             // tabPage5
             // 
+            resources.ApplyResources(this.tabPage5, "tabPage5");
             this.tabPage5.Controls.Add(this.groupBoxUseMaster);
             this.tabPage5.Controls.Add(this.checkBoxUseMasterFormat);
-            this.tabPage5.Location = new System.Drawing.Point(4, 22);
             this.tabPage5.Name = "tabPage5";
-            this.tabPage5.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage5.Size = new System.Drawing.Size(604, 276);
-            this.tabPage5.TabIndex = 4;
-            this.tabPage5.Text = "Masterformatierung";
             this.tabPage5.UseVisualStyleBackColor = true;
             // 
             // groupBoxUseMaster
             // 
+            resources.ApplyResources(this.groupBoxUseMaster, "groupBoxUseMaster");
             this.groupBoxUseMaster.Controls.Add(this.label2);
             this.groupBoxUseMaster.Controls.Add(this.buttonProjectionMasterFont);
             this.groupBoxUseMaster.Controls.Add(this.labelLineSpacing);
@@ -594,150 +448,97 @@
             this.groupBoxUseMaster.Controls.Add(this.label9);
             this.groupBoxUseMaster.Controls.Add(this.label3);
             this.groupBoxUseMaster.Controls.Add(this.label8);
-            this.groupBoxUseMaster.Location = new System.Drawing.Point(6, 42);
             this.groupBoxUseMaster.Name = "groupBoxUseMaster";
-            this.groupBoxUseMaster.Size = new System.Drawing.Size(579, 126);
-            this.groupBoxUseMaster.TabIndex = 56;
             this.groupBoxUseMaster.TabStop = false;
-            this.groupBoxUseMaster.Text = "Masterformatierung";
             // 
             // label2
             // 
-            this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(20, 21);
+            resources.ApplyResources(this.label2, "label2");
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(109, 13);
-            this.label2.TabIndex = 48;
-            this.label2.Text = "Projektionsschrift:";
             // 
             // buttonProjectionMasterFont
             // 
-            this.buttonProjectionMasterFont.Location = new System.Drawing.Point(320, 16);
+            resources.ApplyResources(this.buttonProjectionMasterFont, "buttonProjectionMasterFont");
             this.buttonProjectionMasterFont.Name = "buttonProjectionMasterFont";
-            this.buttonProjectionMasterFont.Size = new System.Drawing.Size(124, 23);
-            this.buttonProjectionMasterFont.TabIndex = 44;
-            this.buttonProjectionMasterFont.Text = "Schrift wählen...";
             this.buttonProjectionMasterFont.UseVisualStyleBackColor = true;
             this.buttonProjectionMasterFont.Click += new System.EventHandler(this.buttonFontSelector_Click);
             // 
             // labelLineSpacing
             // 
-            this.labelLineSpacing.AutoSize = true;
-            this.labelLineSpacing.Location = new System.Drawing.Point(267, 79);
+            resources.ApplyResources(this.labelLineSpacing, "labelLineSpacing");
             this.labelLineSpacing.Name = "labelLineSpacing";
-            this.labelLineSpacing.Size = new System.Drawing.Size(10, 13);
-            this.labelLineSpacing.TabIndex = 54;
-            this.labelLineSpacing.Text = "-";
             // 
             // buttonChooseProjectionForeColor
             // 
-            this.buttonChooseProjectionForeColor.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.buttonChooseProjectionForeColor.Location = new System.Drawing.Point(450, 16);
+            resources.ApplyResources(this.buttonChooseProjectionForeColor, "buttonChooseProjectionForeColor");
             this.buttonChooseProjectionForeColor.Name = "buttonChooseProjectionForeColor";
-            this.buttonChooseProjectionForeColor.Size = new System.Drawing.Size(119, 23);
-            this.buttonChooseProjectionForeColor.TabIndex = 43;
-            this.buttonChooseProjectionForeColor.Text = "Schriftfarbe...";
             this.buttonChooseProjectionForeColor.UseVisualStyleBackColor = true;
             this.buttonChooseProjectionForeColor.Click += new System.EventHandler(this.buttonChooseProjectionForeColor_Click);
             // 
             // trackBarLineSpacing
             // 
+            resources.ApplyResources(this.trackBarLineSpacing, "trackBarLineSpacing");
             this.trackBarLineSpacing.BackColor = System.Drawing.SystemColors.Window;
-            this.trackBarLineSpacing.Location = new System.Drawing.Point(120, 75);
             this.trackBarLineSpacing.Maximum = 50;
             this.trackBarLineSpacing.Name = "trackBarLineSpacing";
-            this.trackBarLineSpacing.Size = new System.Drawing.Size(141, 45);
-            this.trackBarLineSpacing.TabIndex = 53;
             this.trackBarLineSpacing.TickFrequency = 5;
             this.trackBarLineSpacing.Scroll += new System.EventHandler(this.trackBarLineSpacing_Scroll);
             // 
             // buttonTranslationFont
             // 
-            this.buttonTranslationFont.Location = new System.Drawing.Point(320, 45);
+            resources.ApplyResources(this.buttonTranslationFont, "buttonTranslationFont");
             this.buttonTranslationFont.Name = "buttonTranslationFont";
-            this.buttonTranslationFont.Size = new System.Drawing.Size(124, 23);
-            this.buttonTranslationFont.TabIndex = 45;
-            this.buttonTranslationFont.Text = "Schrift wählen...";
             this.buttonTranslationFont.UseVisualStyleBackColor = true;
             this.buttonTranslationFont.Click += new System.EventHandler(this.buttonTranslationFont_Click);
             // 
             // label10
             // 
-            this.label10.AutoSize = true;
-            this.label10.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label10.Location = new System.Drawing.Point(23, 79);
+            resources.ApplyResources(this.label10, "label10");
             this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(91, 13);
-            this.label10.TabIndex = 52;
-            this.label10.Text = "Zeilenabstand:";
             // 
             // buttonTranslationColor
             // 
-            this.buttonTranslationColor.Location = new System.Drawing.Point(450, 45);
+            resources.ApplyResources(this.buttonTranslationColor, "buttonTranslationColor");
             this.buttonTranslationColor.Name = "buttonTranslationColor";
-            this.buttonTranslationColor.Size = new System.Drawing.Size(119, 23);
-            this.buttonTranslationColor.TabIndex = 46;
-            this.buttonTranslationColor.Text = "Schriftfarbe...";
             this.buttonTranslationColor.UseVisualStyleBackColor = true;
             this.buttonTranslationColor.Click += new System.EventHandler(this.buttonTranslationColor_Click);
             // 
             // label9
             // 
-            this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(149, 50);
+            resources.ApplyResources(this.label9, "label9");
             this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(35, 13);
-            this.label9.TabIndex = 51;
-            this.label9.Text = "label9";
             // 
             // label3
             // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(136, 21);
+            resources.ApplyResources(this.label3, "label3");
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(35, 13);
-            this.label3.TabIndex = 49;
-            this.label3.Text = "label3";
             // 
             // label8
             // 
-            this.label8.AutoSize = true;
-            this.label8.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label8.Location = new System.Drawing.Point(20, 50);
+            resources.ApplyResources(this.label8, "label8");
             this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(123, 13);
-            this.label8.TabIndex = 50;
-            this.label8.Text = "Übersetzungsschrift:";
             // 
             // checkBoxUseMasterFormat
             // 
-            this.checkBoxUseMasterFormat.AutoSize = true;
-            this.checkBoxUseMasterFormat.Location = new System.Drawing.Point(18, 16);
+            resources.ApplyResources(this.checkBoxUseMasterFormat, "checkBoxUseMasterFormat");
             this.checkBoxUseMasterFormat.Name = "checkBoxUseMasterFormat";
-            this.checkBoxUseMasterFormat.Size = new System.Drawing.Size(172, 17);
-            this.checkBoxUseMasterFormat.TabIndex = 55;
-            this.checkBoxUseMasterFormat.Text = "Masterformatierung verwenden";
             this.checkBoxUseMasterFormat.UseVisualStyleBackColor = true;
             this.checkBoxUseMasterFormat.CheckedChanged += new System.EventHandler(this.checkBoxUseMasterFormat_CheckedChanged);
             // 
-            // SettingsWindow
+            // ProgramSettingsDialog
             // 
             this.AcceptButton = this.exitButton;
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.cancelButton;
-            this.ClientSize = new System.Drawing.Size(626, 365);
             this.ControlBox = false;
             this.Controls.Add(this.tabControl1);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.cancelButton);
             this.Controls.Add(this.exitButton);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
-            this.Name = "SettingsWindow";
+            this.Name = "ProgramSettingsDialog";
             this.ShowInTaskbar = false;
-            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Einstellungen";
             this.Load += new System.EventHandler(this.settingsWindow_Load);
             this.tabControl1.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);

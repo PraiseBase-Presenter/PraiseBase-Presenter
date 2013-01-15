@@ -46,7 +46,7 @@ namespace Pbp.Forms
             }
             else
             {
-                MessageBox.Show("Keine Lieder ausgewählt!", "Liedbrowser");
+                MessageBox.Show(Resources.StringResources.NoSongsSelected, Resources.StringResources.SongBrowser);
             }
         }
 

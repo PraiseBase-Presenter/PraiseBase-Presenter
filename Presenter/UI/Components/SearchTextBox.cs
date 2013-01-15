@@ -42,7 +42,7 @@ namespace Pbp.Components
 
             EnabledChanged += SearchTextBox_EnabledChanged;
 
-            xPictureBox.Image = Resources.searchx;
+            xPictureBox.Image = Pbp.Resources.ImageResources.searchx;
             xPictureBox.Click += xPictureBox_Click;
             xPictureBox.Visible = false;
 
@@ -50,7 +50,7 @@ namespace Pbp.Components
             keyStrokeTimer.Tick += keyStrokeTimer_Tick;
 
             _cmPictureBox.SizeMode = PictureBoxSizeMode.StretchImage;
-            _cmPictureBox.Image = Resources.arrowdown;
+            _cmPictureBox.Image = Pbp.Resources.ImageResources.arrowdown;
             _cmPictureBox.Size = new Size(8, 8);
             _cmPictureBox.Location = new Point(19, 7);
             _cmPictureBox.MouseClick += cmPictureBox_MouseClick;
@@ -234,7 +234,7 @@ namespace Pbp.Components
 
         private void UserControl1_Paint(object sender, PaintEventArgs e)
         {
-            e.Graphics.DrawImage(Resources.searchg, 3, (Height - 18) / 2, 18, 18);
+            e.Graphics.DrawImage(Pbp.Resources.ImageResources.searchg, 3, (Height - 18) / 2, 18, 18);
             ControlPaint.DrawBorder(e.Graphics, ClientRectangle, Color.Gray, ButtonBorderStyle.Solid);
         }
 

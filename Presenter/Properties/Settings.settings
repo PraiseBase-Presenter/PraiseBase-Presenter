@@ -161,5 +161,14 @@
     <Setting Name="SelectedCulture" Type="System.String" Scope="User">
       <Value Profile="(Default)">de-CH</Value>
     </Setting>
+    <Setting Name="DisplaySwitchCommand" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">displayswitch.exe</Value>
+    </Setting>
+    <Setting Name="DisplayControlCommand" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">desk.cpl,@0,4</Value>
+    </Setting>
+    <Setting Name="SystemControlCommand" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">control</Value>
+    </Setting>
   </Settings>
 </SettingsFile>
