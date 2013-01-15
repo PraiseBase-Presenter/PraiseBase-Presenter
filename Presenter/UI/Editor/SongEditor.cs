@@ -67,17 +67,14 @@ namespace Pbp.Forms
                     selectLanguageToolStripMenuItem.Checked = true;
                 }
                 this.spracheToolStripMenuItem.DropDownItems.Add(selectLanguageToolStripMenuItem);
-            }            
+            }
+
+            base.registerChild(this);
         }
 
         void selectLanguageToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            SetLanguage(this, (CultureInfo)((ToolStripMenuItem)sender).Tag);
-
-            for (int i = 0; i < MdiChildren.Count(); i++)
-            {
-                SetLanguage(MdiChildren[i], (CultureInfo)((ToolStripMenuItem)sender).Tag);
-            }
+            SetLanguage((CultureInfo)((ToolStripMenuItem)sender).Tag);
 
             foreach (ToolStripMenuItem i in this.spracheToolStripMenuItem.DropDownItems)
             {
@@ -100,6 +97,8 @@ namespace Pbp.Forms
 
             childForm.Text = childForm.sng.Title + ++childFormNumber;
             childForm.Show();
+
+            base.registerChild(childForm);
         }
 
         private void OpenFile(object sender, EventArgs e)
@@ -142,7 +141,10 @@ namespace Pbp.Forms
             childForm.Tag = fileName;
             childForm.MdiParent = this;
             if (childForm.valid)
+            {
                 childForm.Show();
+                base.registerChild(childForm);
+            }
         }
 
         private void ExitToolsStripMenuItem_Click(object sender, EventArgs e)

@@ -69,6 +69,7 @@ namespace Pbp.Forms
         private MainWindow()
         {
             InitializeComponent();
+            base.registerChild(this);
         }
 
         /// <summary>
@@ -149,7 +150,7 @@ namespace Pbp.Forms
 
         void selectLanguageToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            SetLanguage(this, (CultureInfo)((ToolStripMenuItem)sender).Tag);
+            SetLanguage((CultureInfo)((ToolStripMenuItem)sender).Tag);
             foreach (ToolStripMenuItem i in this.spracheToolStripMenuItem.DropDownItems)
             {
                 i.Checked = ((CultureInfo)i.Tag == System.Threading.Thread.CurrentThread.CurrentUICulture);

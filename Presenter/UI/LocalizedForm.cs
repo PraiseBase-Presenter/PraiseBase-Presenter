@@ -11,16 +11,38 @@ namespace Pbp.UI
 {
     public class LocalizableForm : Form
     {
+        static List<Form> allForms = new List<Form>();
+
+        protected void registerChild(Form child)
+        {
+            allForms.Add(child);
+        }
+
+        /// <summary>
+        /// Change language at runtime in the specified form
+        /// </summary>
+        protected void SetLanguage(CultureInfo lang)
+        {
+            //Set the language in the application
+            System.Threading.Thread.CurrentThread.CurrentUICulture = lang;
+
+            foreach (Form form in allForms) 
+            {
+                if (form != null)
+                {
+                    SetLanguage(form, lang);
+                }
+            }
+
+            Settings.Default.SelectedCulture = lang.Name;
+        }
+
         /// <summary>
         /// Change language at runtime in the specified form
         /// </summary>
         protected void SetLanguage(Form form, CultureInfo lang)
         {
-            //Set the language in the application
-            System.Threading.Thread.CurrentThread.CurrentUICulture = lang;
-
             ComponentResourceManager resources = new ComponentResourceManager(form.GetType());
-
             if (form.MainMenuStrip != null)
             {
                 ApplyResourceToControl(resources, form.MainMenuStrip, lang);
@@ -29,8 +51,6 @@ namespace Pbp.UI
 
             //resources.ApplyResources(form, "$this", lang);
             form.Text = resources.GetString("$this.Text", lang);
-
-            Settings.Default.SelectedCulture = lang.Name;
         }
 
         protected void ApplyResourceToControl(ComponentResourceManager resources, Control control, CultureInfo lang)
