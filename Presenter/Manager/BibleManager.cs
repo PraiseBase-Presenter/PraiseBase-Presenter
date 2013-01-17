@@ -30,6 +30,7 @@ using System.Collections.Generic;
 using System.IO;
 using Pbp.Properties;
 using Pbp.Data.Bible;
+using System.Text.RegularExpressions;
 
 namespace Pbp
 {
@@ -52,6 +53,26 @@ namespace Pbp
             {
                 return Bible.Title;
             }
+        }
+
+        public enum BiblePassageSearchStatus
+        {
+            Ongoing,
+            Found,
+            NotFound
+        } 
+
+        public struct BiblePassageSearchResult
+        {
+            public BiblePassage Passage { get; set; }
+            public BiblePassageSearchStatus Status { get; set; }
+        }
+
+        public class BiblePassage
+        {
+            public Book Book { get; set; }
+            public Chapter Chapter { get; set; }
+            public Verse Verse { get; set; }
         }
 
         /// <summary>
@@ -131,6 +152,111 @@ namespace Pbp
             {
                 Console.WriteLine(e.Message);
             }
+        }
+
+        private List<Book> SearchBookCandiates(Bible bible, string needle)
+        {
+            var bkCandidates = new List<Pbp.Data.Bible.Book>();
+            foreach (Pbp.Data.Bible.Book bk in bible.Books)
+            {
+                if (needle.Length <= bk.Name.Length && needle == bk.Name.ToLower().Substring(0, needle.Length))
+                {
+                    bkCandidates.Add(bk);
+                }
+            }
+            return bkCandidates;
+        }
+
+        public BiblePassageSearchResult SearchPassage(Bible bible, string needle)
+        {
+            BiblePassageSearchResult result = new BiblePassageSearchResult();
+            result.Status = BiblePassageSearchStatus.Ongoing;
+            result.Passage = new BiblePassage();
+
+            Match match;
+
+            // Book only
+            match = Regex.Match(needle, @"^(.*[a-z])$", RegexOptions.IgnoreCase);
+            if (match.Success)
+            {
+                List<Book> bkCandidates = SearchBookCandiates(bible, match.Groups[1].Value);
+                if (bkCandidates.Count == 1)
+                {
+                    result.Passage.Book = bkCandidates[0];
+                    result.Status = BiblePassageSearchStatus.Found;
+                }
+                else if (bkCandidates.Count == 0)
+                {
+                    result.Status = BiblePassageSearchStatus.NotFound;
+                }
+                return result;
+            }
+
+            // Book and chapter
+            match = Regex.Match(needle, @"^(.*[a-z]) ([0-9]+)$", RegexOptions.IgnoreCase);
+            if (match.Success)
+            {
+                List<Book> bkCandidates = SearchBookCandiates(bible, match.Groups[1].Value);
+                if (bkCandidates.Count == 1)
+                {
+                    result.Passage.Book = bkCandidates[0];
+
+                    int chapterNumber = int.Parse(match.Groups[2].Value);
+                    if (chapterNumber > 0 && chapterNumber <= result.Passage.Book.Chapters.Count)
+                    {
+                        result.Passage.Chapter = result.Passage.Book.Chapters[chapterNumber - 1];
+                        result.Status = BiblePassageSearchStatus.Found;
+                    }
+                    else
+                    {
+                        result.Status = BiblePassageSearchStatus.NotFound;
+                    }
+                }
+                else if (bkCandidates.Count == 0)
+                {
+                    result.Status = BiblePassageSearchStatus.NotFound;
+                }
+                return result;
+            }
+
+            // Book and chapter and verse
+            match = Regex.Match(needle, @"^(.*[a-z]) ([0-9]+),([0-9]+)$", RegexOptions.IgnoreCase);
+            if (match.Success)
+            {
+                List<Book> bkCandidates = SearchBookCandiates(bible, match.Groups[1].Value);
+                if (bkCandidates.Count == 1)
+                {
+                    result.Passage.Book = bkCandidates[0];
+
+                    int chapterNumber = int.Parse(match.Groups[2].Value);
+                    if (chapterNumber > 0 && chapterNumber <= result.Passage.Book.Chapters.Count)
+                    {
+                        result.Passage.Chapter = result.Passage.Book.Chapters[chapterNumber - 1];
+
+                        int verseNumber = int.Parse(match.Groups[3].Value);
+                        if (verseNumber > 0 && verseNumber <= result.Passage.Chapter.Verses.Count)
+                        {
+                            result.Passage.Verse = result.Passage.Chapter.Verses[verseNumber - 1];
+                            result.Status = BiblePassageSearchStatus.Found;
+                        }
+                        else
+                        {
+                            result.Status = BiblePassageSearchStatus.NotFound;
+                        }
+                    }
+                    else
+                    {
+                        result.Status = BiblePassageSearchStatus.NotFound;
+                    }
+                }
+                else if (bkCandidates.Count == 0)
+                {
+                    result.Status = BiblePassageSearchStatus.NotFound;
+                }
+                return result;
+            }
+
+            return result;
         }
     }
 }

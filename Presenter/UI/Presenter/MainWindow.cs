@@ -43,6 +43,7 @@ using Pbp.Manager;
 using System.Globalization;
 using Pbp.UI;
 using Pbp.Resources;
+using Pbp.Data.Bible;
 
 //using PowerPoint = Microsoft.Office.Interop.PowerPoint;
 
@@ -1495,8 +1496,8 @@ namespace Pbp.Forms
         #region Bible
 
         private int bookIdx = -1, chapterIdx = -1;
-        private Pbp.Data.Bible.Book searchedBook;
         private int verseIdx = -1, verseToIdx = -1;
+        BibleManager.BiblePassageSearchResult biblePassageSearchResult;
 
         private void loadBibles()
         {
@@ -1580,6 +1581,7 @@ namespace Pbp.Forms
                 listBoxBibleVerse.Items.Add(v);
                 listBoxBibleVerseTo.Items.Add(v);
             }
+
 
             if (chapterIdx == listBoxBibleChapter.SelectedIndex && verseIdx >= 0)
             {
@@ -1693,35 +1695,38 @@ namespace Pbp.Forms
 
                 if (needle == string.Empty)
                 {
-                    searchedBook = null;
+                    labelBibleSearchMsg.ForeColor = Color.Black;
+                    labelBibleSearchMsg.Text = "";
                 }
                 else
                 {
-                    var bkCandidates = new List<Pbp.Data.Bible.Book>();
+                    Pbp.BibleManager.BibleItem bibleItem = ((KeyValuePair<String,Pbp.BibleManager.BibleItem>)comboBoxBible.SelectedItem).Value;
 
-                    var bbl = ((Pbp.Data.Bible.Bible)comboBoxBible.SelectedItem);
-                    foreach (Pbp.Data.Bible.Book bk in bbl.Books)
+                    biblePassageSearchResult = BibleManager.Instance.SearchPassage(bibleItem.Bible, needle);
+                    if (biblePassageSearchResult.Status == BibleManager.BiblePassageSearchStatus.Found)
                     {
-                        if (needle.Length <= bk.Name.Length && needle == bk.Name.ToLower().Substring(0, needle.Length))
+                        if (biblePassageSearchResult.Passage.Book != null)
                         {
-                            bkCandidates.Add(bk);
-                        }
-                    }
-                    if (bkCandidates.Count == 1)
-                    {
-                        searchedBook = bkCandidates[0];
+                            if (needle.Length < biblePassageSearchResult.Passage.Book.Name.Length)
+                            {
+                                searchTextBoxBible.Text = biblePassageSearchResult.Passage.Book.Name + " ";
+                                searchTextBoxBible.select(searchTextBoxBible.Text.Length, 0);
+                            }
+                            
+                            listBoxBibleBook.SelectedIndex = biblePassageSearchResult.Passage.Book.Number - 1;
 
-                        if (bkCandidates[0].Name.Length != needle.Length)
-                        {
-                            searchTextBoxBible.Text = bkCandidates[0].Name + " ";
-                            searchTextBoxBible.select(searchTextBoxBible.Text.Length, 0);
+                            if (biblePassageSearchResult.Passage.Chapter != null)
+                            {
+                                chapterIdx = biblePassageSearchResult.Passage.Chapter.Number - 1;
+                            }
+                            
+
                         }
 
-                        listBoxBibleBook.SelectedIndex = bkCandidates[0].Number - 1;
                         labelBibleSearchMsg.ForeColor = Color.Black;
                         labelBibleSearchMsg.Text = "";
                     }
-                    else if (bkCandidates.Count == 0)
+                    else if (biblePassageSearchResult.Status == BibleManager.BiblePassageSearchStatus.NotFound)
                     {
                         labelBibleSearchMsg.ForeColor = Color.Red;
                         labelBibleSearchMsg.Text = StringResources.NothingFound;
@@ -1731,6 +1736,7 @@ namespace Pbp.Forms
                         labelBibleSearchMsg.ForeColor = Color.Black;
                         labelBibleSearchMsg.Text = "";
                     }
+
                 }
             }
         }
