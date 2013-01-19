@@ -40,16 +40,16 @@ namespace Pbp
 
         public StringAlignment VerticalAlign { get; set; }
 
-        private VerseSelection verseSelection;
+        private BibleVerseSelection verseSelection;
 
-        public BibleLayer(Pbp.Data.Bible.VerseSelection verseSelection)
+        public BibleLayer(Pbp.Data.Bible.BibleVerseSelection verseSelection)
         {
             this.verseSelection = verseSelection;
         }
 
         public override void writeOut(System.Drawing.Graphics gr, object[] args, ProjectionMode pr)
         {
-            VerseSelection v = verseSelection;
+            BibleVerseSelection v = verseSelection;
 
             string Title = v.ToString();
             string Text = v.Text;

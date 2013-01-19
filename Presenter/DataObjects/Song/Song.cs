@@ -253,7 +253,7 @@ namespace Pbp.Data.Song
         /// <summary>
         /// Quality assurance indicators
         /// </summary>
-        public List<QualityAssuranceIndicators> QualityIssues { get; set; }
+        public List<SongQualityAssuranceIndicator> QualityIssues { get; set; }
 
         /// <summary>
         /// Gets or sets the text font and color for the main text
@@ -315,7 +315,7 @@ namespace Pbp.Data.Song
             SongBooks = new List<SongBook>();
             Author = new List<SongAuthor>();
             Comment = String.Empty;
-            QualityIssues = new List<QualityAssuranceIndicators>();
+            QualityIssues = new List<SongQualityAssuranceIndicator>();
         }
 
         /// <summary>
@@ -375,7 +375,7 @@ namespace Pbp.Data.Song
         /// Sets a specific quality assurance indicator
         /// </summary>
         /// <param name="quai">The indicator to be added</param>
-        public void SetQA(QualityAssuranceIndicators quai)
+        public void SetQA(SongQualityAssuranceIndicator quai)
         {
             QualityIssues.Add(quai);
         }
@@ -384,7 +384,7 @@ namespace Pbp.Data.Song
         /// Removes a specific quality assurance indicator
         /// </summary>
         /// <param name="quai">The indicator to be removed</param>
-        public void RemQA(QualityAssuranceIndicators quai)
+        public void RemQA(SongQualityAssuranceIndicator quai)
         {
             QualityIssues.Remove(quai);
         }
@@ -393,7 +393,7 @@ namespace Pbp.Data.Song
         /// Returns if a specific quality assurance indicator is set
         /// </summary>
         /// <param name="quai">The desired indicator</param>
-        public bool GetQA(QualityAssuranceIndicators quai)
+        public bool GetQA(SongQualityAssuranceIndicator quai)
         {
             return QualityIssues.IndexOf(quai) >= 0;
         }

@@ -32,19 +32,21 @@ using System.Text;
 
 namespace Pbp.Data.Bible
 {
-    public class Verse
+    public class BibleChapter
     {
         public int Number { get; set; }
-        public string Text { get; set; }
-        public Chapter Chapter { get; set; }
 
-        public Verse()
+        public BibleBook Book { get; set; }
+
+        public List<BibleVerse> Verses { get; set; }
+        
+        public BibleChapter()
         {
         }
 
         public override string ToString()
         {
-            return Number.ToString() + ": " + Text;
+            return Number.ToString();
         }
     }
 }

@@ -1531,7 +1531,7 @@ namespace Pbp.Forms
                     BibleManager.Instance.LoadBibleData(bi.Key);
                 }
 
-                foreach (Pbp.Data.Bible.Book bk in  bi.Value.Bible.Books)
+                foreach (Pbp.Data.Bible.BibleBook bk in  bi.Value.Bible.Books)
                 {
                     listBoxBibleBook.Items.Add(bk);
                 }
@@ -1546,7 +1546,7 @@ namespace Pbp.Forms
 
         private void listBoxBibleBook_SelectedIndexChanged(object sender, EventArgs e)
         {
-            var bk = ((Pbp.Data.Bible.Book)listBoxBibleBook.SelectedItem);
+            var bk = ((Pbp.Data.Bible.BibleBook)listBoxBibleBook.SelectedItem);
 
             listBoxBibleVerse.Items.Clear();
             listBoxBibleVerseTo.Items.Clear();
@@ -1554,7 +1554,7 @@ namespace Pbp.Forms
             listBoxBibleChapter.Items.Clear();
             listBoxBibleChapter.DisplayMember = "Number";
 
-            foreach (Pbp.Data.Bible.Chapter cp in bk.Chapters)
+            foreach (Pbp.Data.Bible.BibleChapter cp in bk.Chapters)
             {
                 listBoxBibleChapter.Items.Add(cp);
             }
@@ -1569,14 +1569,14 @@ namespace Pbp.Forms
 
         private void listBoxBibleChapter_SelectedIndexChanged(object sender, EventArgs e)
         {
-            var cp = ((Pbp.Data.Bible.Chapter)listBoxBibleChapter.SelectedItem);
+            var cp = ((Pbp.Data.Bible.BibleChapter)listBoxBibleChapter.SelectedItem);
 
             listBoxBibleVerse.Items.Clear();
             listBoxBibleVerseTo.Items.Clear();
             listBoxBibleVerse.DisplayMember = "Number";
             listBoxBibleVerseTo.DisplayMember = "Number";
 
-            foreach (Pbp.Data.Bible.Verse v in cp.Verses)
+            foreach (Pbp.Data.Bible.BibleVerse v in cp.Verses)
             {
                 listBoxBibleVerse.Items.Add(v);
                 listBoxBibleVerseTo.Items.Add(v);
@@ -1593,10 +1593,10 @@ namespace Pbp.Forms
 
         private void listBoxBibleVerse_SelectedIndexChanged(object sender, EventArgs e)
         {
-            var v = ((Pbp.Data.Bible.Verse)listBoxBibleVerse.SelectedItem);
+            var v = ((Pbp.Data.Bible.BibleVerse)listBoxBibleVerse.SelectedItem);
 
             listBoxBibleVerseTo.Items.Clear();
-            foreach (Pbp.Data.Bible.Verse tv in v.Chapter.Verses)
+            foreach (Pbp.Data.Bible.BibleVerse tv in v.Chapter.Verses)
             {
                 if (tv.Number >= v.Number)
                 {
@@ -1618,8 +1618,8 @@ namespace Pbp.Forms
         {
             if (listBoxBibleVerse.SelectedItem != null && listBoxBibleVerseTo.SelectedItem != null)
             {
-                var vs = new Pbp.Data.Bible.VerseSelection(((Pbp.Data.Bible.Verse)listBoxBibleVerse.SelectedItem),
-                                                     ((Pbp.Data.Bible.Verse)listBoxBibleVerseTo.SelectedItem));
+                var vs = new Pbp.Data.Bible.BibleVerseSelection(((Pbp.Data.Bible.BibleVerse)listBoxBibleVerse.SelectedItem),
+                                                     ((Pbp.Data.Bible.BibleVerse)listBoxBibleVerseTo.SelectedItem));
 
                 labelBibleTextName.Text = vs.ToString();
                 textBoxBibleText.Text = vs.Text;
@@ -1633,8 +1633,8 @@ namespace Pbp.Forms
         private void buttonBibleTextShow_Click(object sender, EventArgs e)
         {
             var bl =
-                new BibleLayer(new Pbp.Data.Bible.VerseSelection(((Pbp.Data.Bible.Verse)listBoxBibleVerse.SelectedItem),
-                                                           ((Pbp.Data.Bible.Verse)listBoxBibleVerseTo.SelectedItem)));
+                new BibleLayer(new Pbp.Data.Bible.BibleVerseSelection(((Pbp.Data.Bible.BibleVerse)listBoxBibleVerse.SelectedItem),
+                                                           ((Pbp.Data.Bible.BibleVerse)listBoxBibleVerseTo.SelectedItem)));
             bl.FontSize = (float)numericUpDown2.Value;
             ProjectionManager.Instance.DisplayLayer(2, bl);
         }
@@ -1646,8 +1646,8 @@ namespace Pbp.Forms
 
         private void buttonAddToBibleVerseList_Click(object sender, EventArgs e)
         {
-            var vs = new Pbp.Data.Bible.VerseSelection(((Pbp.Data.Bible.Verse)listBoxBibleVerse.SelectedItem),
-                                                 ((Pbp.Data.Bible.Verse)listBoxBibleVerseTo.SelectedItem));
+            var vs = new Pbp.Data.Bible.BibleVerseSelection(((Pbp.Data.Bible.BibleVerse)listBoxBibleVerse.SelectedItem),
+                                                 ((Pbp.Data.Bible.BibleVerse)listBoxBibleVerseTo.SelectedItem));
             var lvi = new ListViewItem(vs.ToString());
             lvi.Tag = vs;
             listViewBibleVerseList.Items.Add(lvi);
@@ -1671,7 +1671,7 @@ namespace Pbp.Forms
         {
             if (listViewBibleVerseList.SelectedItems.Count > 0)
             {
-                var vs = (Pbp.Data.Bible.VerseSelection)listViewBibleVerseList.SelectedItems[0].Tag;
+                var vs = (Pbp.Data.Bible.BibleVerseSelection)listViewBibleVerseList.SelectedItems[0].Tag;
                 listBoxBibleBook.SelectedIndex = vs.Chapter.Book.Number - 1;
                 listBoxBibleChapter.SelectedIndex = vs.Chapter.Number - 1;
                 listBoxBibleVerse.SelectedIndex = vs.StartVerse.Number - 1;

@@ -97,10 +97,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DataObjects\Bible\Bible.cs" />
-    <Compile Include="DataObjects\Bible\Book.cs" />
-    <Compile Include="DataObjects\Bible\Chapter.cs" />
-    <Compile Include="DataObjects\Bible\Verse.cs" />
-    <Compile Include="DataObjects\Bible\VerseSelection.cs" />
+    <Compile Include="DataObjects\Bible\BibleBook.cs" />
+    <Compile Include="DataObjects\Bible\BibleChapter.cs" />
+    <Compile Include="DataObjects\Bible\BibleVerse.cs" />
+    <Compile Include="DataObjects\Bible\BibleVerseSelection.cs" />
     <Compile Include="DataObjects\EnumHelper.cs" />
     <Compile Include="DataObjects\Song\SongTextBorders.cs" />
     <Compile Include="DataObjects\TextShadow.cs" />
@@ -111,7 +111,7 @@
     <Compile Include="DataObjects\Statistics\StatisticsDate.cs" />
     <Compile Include="DataObjects\Statistics\Statistics.cs" />
     <Compile Include="DataObjects\Setlist.cs" />
-    <Compile Include="DataObjects\Song\QualityAssuranceIndicator.cs" />
+    <Compile Include="DataObjects\Song\SongQualityAssuranceIndicator.cs" />
     <Compile Include="DataObjects\Song\Song.cs" />
     <Compile Include="DataObjects\Song\SongAuthor.cs" />
     <Compile Include="DataObjects\Song\SongBook.cs" />

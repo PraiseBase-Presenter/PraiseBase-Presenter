@@ -52,7 +52,7 @@ namespace Pbp.Data.Bible
         public string Language { get; set; }
         public string Identifier { get; set; }
 
-        public List<Book> Books { get; set; }
+        public List<BibleBook> Books { get; set; }
 
         public Bible()
         {

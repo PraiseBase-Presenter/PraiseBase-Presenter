@@ -32,11 +32,11 @@ using System.Text;
 
 namespace Pbp.Data.Bible
 {
-    public class VerseSelection
+    public class BibleVerseSelection
     {
-        public Verse StartVerse { get; private set; }
+        public BibleVerse StartVerse { get; private set; }
 
-        public Verse EndVerse
+        public BibleVerse EndVerse
         {
             get
             {
@@ -44,7 +44,7 @@ namespace Pbp.Data.Bible
             }
         }
 
-        public Chapter Chapter
+        public BibleChapter Chapter
         {
             get
             {
@@ -67,19 +67,19 @@ namespace Pbp.Data.Bible
 
         private int endVerseNumber = 0;
 
-        public VerseSelection(Verse start)
+        public BibleVerseSelection(BibleVerse start)
         {
             StartVerse = start;
             endVerseNumber = start.Number;
         }
 
-        public VerseSelection(Verse start, Verse end)
+        public BibleVerseSelection(BibleVerse start, BibleVerse end)
         {
             StartVerse = start;
             endVerseNumber = end.Number;
         }
 
-        public VerseSelection(Verse start, int end)
+        public BibleVerseSelection(BibleVerse start, int end)
         {
             StartVerse = start;
             endVerseNumber = end;

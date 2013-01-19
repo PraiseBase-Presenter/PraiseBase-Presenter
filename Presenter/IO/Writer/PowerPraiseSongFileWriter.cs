@@ -87,10 +87,10 @@ namespace Pbp.IO
             if (sng.QualityIssues.Count > 0)
             {
                 xmlRoot["general"].AppendChild(xmlDoc.CreateElement("qualityissues"));
-                foreach (QualityAssuranceIndicators i in sng.QualityIssues)
+                foreach (SongQualityAssuranceIndicator i in sng.QualityIssues)
                 {
                     XmlNode qaChld = xmlRoot["general"]["qualityissues"].AppendChild(xmlDoc.CreateElement("issue"));
-                    qaChld.InnerText = Enum.GetName(typeof(QualityAssuranceIndicators), i);
+                    qaChld.InnerText = Enum.GetName(typeof(SongQualityAssuranceIndicator), i);
                 }
             }
             

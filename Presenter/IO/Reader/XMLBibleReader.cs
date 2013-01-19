@@ -92,30 +92,30 @@ namespace Pbp.IO
             XmlElement xmlRoot = xmlDoc.DocumentElement;
             if (xmlRoot.Name == "XMLBIBLE")
             {
-                b.Books = new List<Book>();
+                b.Books = new List<BibleBook>();
                 foreach (XmlNode bookNode in xmlRoot.ChildNodes)
                 {
                     if (bookNode.Name.ToLower() == "biblebook")
                     {
-                        Book bo = new Book();
+                        BibleBook bo = new BibleBook();
                         bo.Bible = b;
                         bo.Number = int.Parse(bookNode.Attributes["bnumber"].InnerText);
                         bo.Name = bookNode.Attributes["bname"] != null ? bookNode.Attributes["bname"].InnerText : Bible.bookMap[bo.Number - 1];
                         bo.ShortName = bookNode.Attributes["bsname"] != null ? bookNode.Attributes["bsname"].InnerText : bo.Name;
-                        bo.Chapters = new List<Chapter>();
+                        bo.Chapters = new List<BibleChapter>();
                         foreach (XmlNode chapNode in bookNode.ChildNodes)
                         {
                             if (chapNode.Name.ToLower() == "chapter")
                             {
-                                Chapter ch = new Chapter();
+                                BibleChapter ch = new BibleChapter();
                                 ch.Book = bo;
                                 ch.Number = int.Parse(chapNode.Attributes["cnumber"].InnerText);
-                                ch.Verses = new List<Verse>();
+                                ch.Verses = new List<BibleVerse>();
                                 foreach (XmlNode verseNode in chapNode.ChildNodes)
                                 {
                                     if (verseNode.Name.ToLower() == "vers")
                                     {
-                                        Verse v = new Verse();
+                                        BibleVerse v = new BibleVerse();
                                         v.Chapter = ch;
                                         v.Number = int.Parse(verseNode.Attributes["vnumber"].InnerText);
                                         v.Text = verseNode.InnerText;

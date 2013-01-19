@@ -72,13 +72,13 @@ namespace Pbp.Forms
                 if (checkBoxHasComments.Checked && sng.Comment == string.Empty)
                     use = false;
 
-                if (checkBoxQAImages.Checked && !sng.GetQA(QualityAssuranceIndicators.Images))
+                if (checkBoxQAImages.Checked && !sng.GetQA(SongQualityAssuranceIndicator.Images))
                     use = false;
-                if (checkBoxQASegmentation.Checked && !sng.GetQA(QualityAssuranceIndicators.Segmentation))
+                if (checkBoxQASegmentation.Checked && !sng.GetQA(SongQualityAssuranceIndicator.Segmentation))
                     use = false;
-                if (checkBoxQASpelling.Checked && !sng.GetQA(QualityAssuranceIndicators.Spelling))
+                if (checkBoxQASpelling.Checked && !sng.GetQA(SongQualityAssuranceIndicator.Spelling))
                     use = false;
-                if (checkBoxQATranslation.Checked && !sng.GetQA(QualityAssuranceIndicators.Translation))
+                if (checkBoxQATranslation.Checked && !sng.GetQA(SongQualityAssuranceIndicator.Translation))
                     use = false;
 
                 foreach (int i in checkedListBoxTags.CheckedIndices)

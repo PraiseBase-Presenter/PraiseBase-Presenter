@@ -70,9 +70,9 @@ namespace Pbp
 
         public class BiblePassage
         {
-            public Book Book { get; set; }
-            public Chapter Chapter { get; set; }
-            public Verse Verse { get; set; }
+            public BibleBook Book { get; set; }
+            public BibleChapter Chapter { get; set; }
+            public BibleVerse Verse { get; set; }
         }
 
         /// <summary>
@@ -154,10 +154,10 @@ namespace Pbp
             }
         }
 
-        private List<Book> SearchBookCandiates(Bible bible, string needle)
+        private List<BibleBook> SearchBookCandiates(Bible bible, string needle)
         {
-            var bkCandidates = new List<Pbp.Data.Bible.Book>();
-            foreach (Pbp.Data.Bible.Book bk in bible.Books)
+            var bkCandidates = new List<Pbp.Data.Bible.BibleBook>();
+            foreach (Pbp.Data.Bible.BibleBook bk in bible.Books)
             {
                 if (needle.Length <= bk.Name.Length && needle == bk.Name.ToLower().Substring(0, needle.Length))
                 {
@@ -179,7 +179,7 @@ namespace Pbp
             match = Regex.Match(needle, @"^(.*[a-z])$", RegexOptions.IgnoreCase);
             if (match.Success)
             {
-                List<Book> bkCandidates = SearchBookCandiates(bible, match.Groups[1].Value);
+                List<BibleBook> bkCandidates = SearchBookCandiates(bible, match.Groups[1].Value);
                 if (bkCandidates.Count == 1)
                 {
                     result.Passage.Book = bkCandidates[0];
@@ -196,7 +196,7 @@ namespace Pbp
             match = Regex.Match(needle, @"^(.*[a-z]) ([0-9]+)$", RegexOptions.IgnoreCase);
             if (match.Success)
             {
-                List<Book> bkCandidates = SearchBookCandiates(bible, match.Groups[1].Value);
+                List<BibleBook> bkCandidates = SearchBookCandiates(bible, match.Groups[1].Value);
                 if (bkCandidates.Count == 1)
                 {
                     result.Passage.Book = bkCandidates[0];
@@ -223,7 +223,7 @@ namespace Pbp
             match = Regex.Match(needle, @"^(.*[a-z]) ([0-9]+),([0-9]+)$", RegexOptions.IgnoreCase);
             if (match.Success)
             {
-                List<Book> bkCandidates = SearchBookCandiates(bible, match.Groups[1].Value);
+                List<BibleBook> bkCandidates = SearchBookCandiates(bible, match.Groups[1].Value);
                 if (bkCandidates.Count == 1)
                 {
                     result.Passage.Book = bkCandidates[0];

@@ -165,10 +165,10 @@ namespace Pbp.Forms
 
             populatePartList();
 
-            checkBoxQAImages.Checked = sng.GetQA(QualityAssuranceIndicators.Images);
-            checkBoxQASpelling.Checked = sng.GetQA(QualityAssuranceIndicators.Spelling);
-            checkBoxQATranslation.Checked = sng.GetQA(QualityAssuranceIndicators.Translation);
-            checkBoxQASegmentation.Checked = sng.GetQA(QualityAssuranceIndicators.Segmentation);
+            checkBoxQAImages.Checked = sng.GetQA(SongQualityAssuranceIndicator.Images);
+            checkBoxQASpelling.Checked = sng.GetQA(SongQualityAssuranceIndicator.Spelling);
+            checkBoxQATranslation.Checked = sng.GetQA(SongQualityAssuranceIndicator.Translation);
+            checkBoxQASegmentation.Checked = sng.GetQA(SongQualityAssuranceIndicator.Segmentation);
 
             labelFont.Text = getFontNameString(sng.MainText.Font);
             labelFontTranslation.Text = getFontNameString(sng.TranslationText.Font);
@@ -494,12 +494,12 @@ namespace Pbp.Forms
             if (checkBoxQASpelling.Checked)
             {
                 checkBoxQASpelling.ForeColor = Color.Red;
-                sng.SetQA(QualityAssuranceIndicators.Spelling);
+                sng.SetQA(SongQualityAssuranceIndicator.Spelling);
             }
             else
             {
                 checkBoxQASpelling.ForeColor = SystemColors.ControlText;
-                sng.RemQA(QualityAssuranceIndicators.Spelling);
+                sng.RemQA(SongQualityAssuranceIndicator.Spelling);
             }
         }
 
@@ -508,12 +508,12 @@ namespace Pbp.Forms
             if (checkBoxQATranslation.Checked)
             {
                 checkBoxQATranslation.ForeColor = Color.Red;
-                sng.SetQA(QualityAssuranceIndicators.Translation);
+                sng.SetQA(SongQualityAssuranceIndicator.Translation);
             }
             else
             {
                 checkBoxQATranslation.ForeColor = SystemColors.ControlText;
-                sng.RemQA(QualityAssuranceIndicators.Translation);
+                sng.RemQA(SongQualityAssuranceIndicator.Translation);
             }
         }
 
@@ -522,12 +522,12 @@ namespace Pbp.Forms
             if (checkBoxQAImages.Checked)
             {
                 checkBoxQAImages.ForeColor = Color.Red;
-                sng.SetQA(QualityAssuranceIndicators.Images);
+                sng.SetQA(SongQualityAssuranceIndicator.Images);
             }
             else
             {
                 checkBoxQAImages.ForeColor = SystemColors.ControlText;
-                sng.RemQA(QualityAssuranceIndicators.Images);
+                sng.RemQA(SongQualityAssuranceIndicator.Images);
             }
         }
 
@@ -536,12 +536,12 @@ namespace Pbp.Forms
             if (checkBoxQASegmentation.Checked)
             {
                 checkBoxQASegmentation.ForeColor = Color.Red;
-                sng.SetQA(QualityAssuranceIndicators.Segmentation);
+                sng.SetQA(SongQualityAssuranceIndicator.Segmentation);
             }
             else
             {
                 checkBoxQASegmentation.ForeColor = SystemColors.ControlText;
-                sng.RemQA(QualityAssuranceIndicators.Segmentation);
+                sng.RemQA(SongQualityAssuranceIndicator.Segmentation);
             }
         }
 

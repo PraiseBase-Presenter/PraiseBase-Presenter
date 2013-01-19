@@ -98,9 +98,9 @@ namespace Pbp.IO
                 {
                     if (elem.Name == "issue")
                     {
-                        foreach (QualityAssuranceIndicators i in sng.QualityIssues)
+                        foreach (SongQualityAssuranceIndicator i in sng.QualityIssues)
                         {
-                            if (elem.InnerText == Enum.GetName(typeof(QualityAssuranceIndicators), i))
+                            if (elem.InnerText == Enum.GetName(typeof(SongQualityAssuranceIndicator), i))
                             {
                                 sng.QualityIssues.Add(i);
                             }
