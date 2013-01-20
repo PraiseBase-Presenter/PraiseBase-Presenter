@@ -63,8 +63,6 @@ namespace Pbp.Forms
 
         private bool linkLayers = true;
 
-        private bool switchTextAndTranlation = false;
-
         /// <summary>
         /// Private constructor
         /// </summary>
@@ -315,7 +313,7 @@ namespace Pbp.Forms
                 }
                 else
                 {
-                    if ((Nullable<SongManager.SongItem>)SongManager.Instance.CurrentSong == null || SongManager.Instance.CurrentSong.Song == null || SongManager.Instance.CurrentSong.Song.GUID != (Guid)listViewSongs.SelectedItems[0].Tag)
+                    if (SongManager.Instance.CurrentSong == null || SongManager.Instance.CurrentSong.Song == null || SongManager.Instance.CurrentSong.Song.GUID != (Guid)listViewSongs.SelectedItems[0].Tag)
                     {
                         var g = (Guid)listViewSongs.SelectedItems[0].Tag;
                         if (SongManager.Instance.SongList.ContainsKey(g))
@@ -343,7 +341,7 @@ namespace Pbp.Forms
         {
             if (listViewSongs.SelectedItems.Count > 0)
             {
-                if ((Nullable<SongManager.SongItem>)SongManager.Instance.CurrentSong == null ||
+                if (SongManager.Instance.CurrentSong == null ||
                     SongManager.Instance.CurrentSong.Song.GUID != (Guid)listViewSongs.SelectedItems[0].Tag)
                 {
                     SongManager.Instance.CurrentSong = SongManager.Instance.SongList[(Guid)listViewSongs.SelectedItems[0].Tag];
@@ -392,6 +390,14 @@ namespace Pbp.Forms
             {
                 toolStripButton3.Image = Pbp.Properties.Resources.highlight;
             }
+            if (SongManager.Instance.CurrentSong.SwitchTextAndTranlation)
+            {
+                buttonSwitchTextAndTranslation.Image = Properties.Resources.translate_cross_small;
+            }
+            else
+            {
+                buttonSwitchTextAndTranslation.Image = Properties.Resources.translate_small;
+            }
         }
 
         private void songDetailElement_SlideClicked(object sender, SlideClickEventArgs e)
@@ -409,7 +415,7 @@ namespace Pbp.Forms
 
             Pbp.Data.Song.SongSlide cs = SongManager.Instance.CurrentSong.Song.Parts[e.PartNumber].Slides[e.SlideNumber];
             var ssl = new SongSlideLayer(cs);
-            ssl.SwitchTextAndTranslation = switchTextAndTranlation;
+            ssl.SwitchTextAndTranslation = SongManager.Instance.CurrentSong.SwitchTextAndTranlation;
 
             // CTRL pressed, use image stack
             if ((ModifierKeys & Keys.Control) == Keys.Control)
@@ -688,7 +694,7 @@ namespace Pbp.Forms
                     // Linked layers
                     if (
                         !(!linkLayers ^
-                           ((ModifierKeys & Keys.Shift) == Keys.Shift && (Nullable<SongManager.SongItem>)SongManager.Instance.CurrentSong != null &&
+                           ((ModifierKeys & Keys.Shift) == Keys.Shift && SongManager.Instance.CurrentSong != null &&
                             SongManager.Instance.CurrentSong.Song.CurrentSlide >= 0)))
                     {
                         ProjectionManager.Instance.HideLayer(2, Settings.Default.ProjectionFadeTime);
@@ -960,7 +966,7 @@ namespace Pbp.Forms
                 {
                     if (
                         !(!linkLayers ^
-                          ((ModifierKeys & Keys.Shift) == Keys.Shift && (Nullable<SongManager.SongItem>)SongManager.Instance.CurrentSong != null &&
+                          ((ModifierKeys & Keys.Shift) == Keys.Shift && SongManager.Instance.CurrentSong != null &&
                            SongManager.Instance.CurrentSong.Song.CurrentSlide >= 0)))
                     {
                         ProjectionManager.Instance.HideLayer(2);
@@ -1289,7 +1295,7 @@ namespace Pbp.Forms
                 Application.DoEvents();
 
                 if (
-                    !((ModifierKeys & Keys.Shift) == Keys.Shift && (Nullable<SongManager.SongItem>)SongManager.Instance.CurrentSong != null &&
+                    !((ModifierKeys & Keys.Shift) == Keys.Shift && SongManager.Instance.CurrentSong != null &&
                        SongManager.Instance.CurrentSong.Song.CurrentSlide >= 0))
                 {
                     ProjectionManager.Instance.HideLayer(2);
@@ -1304,7 +1310,7 @@ namespace Pbp.Forms
 
         private void toolStripButton3_Click(object sender, EventArgs e)
         {
-            if ((Nullable<SongManager.SongItem>)SongManager.Instance.CurrentSong != null)
+            if (SongManager.Instance.CurrentSong != null)
             {
                 var qd = new QADialog();
                 qd.ShowDialog(this);
@@ -1386,7 +1392,7 @@ namespace Pbp.Forms
                 {
                     if (
                         !(!linkLayers ^
-                           ((ModifierKeys & Keys.Shift) == Keys.Shift && (Nullable<SongManager.SongItem>)SongManager.Instance.CurrentSong != null &&
+                           ((ModifierKeys & Keys.Shift) == Keys.Shift && SongManager.Instance.CurrentSong != null &&
                             SongManager.Instance.CurrentSong.Song.CurrentSlide >= 0)))
                     {
                         ProjectionManager.Instance.HideLayer(2);
@@ -1783,15 +1789,18 @@ namespace Pbp.Forms
 
         private void buttonSwitchTextAndTranslation_Click(object sender, EventArgs e)
         {
-            if (switchTextAndTranlation)
+            if (SongManager.Instance.CurrentSong != null)
             {
-                buttonSwitchTextAndTranslation.Image = Properties.Resources.translate_disabled_small;
-                switchTextAndTranlation = false;
-            }
-            else
-            {
-                buttonSwitchTextAndTranslation.Image = Properties.Resources.translate_small;
-                switchTextAndTranlation = true;
+                if (SongManager.Instance.CurrentSong.SwitchTextAndTranlation)
+                {
+                    buttonSwitchTextAndTranslation.Image = Properties.Resources.translate_small;
+                    SongManager.Instance.CurrentSong.SwitchTextAndTranlation = false;
+                }
+                else
+                {
+                    buttonSwitchTextAndTranslation.Image = Properties.Resources.translate_cross_small;
+                    SongManager.Instance.CurrentSong.SwitchTextAndTranlation = true;
+                }
             }
         }
 

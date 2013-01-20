@@ -474,6 +474,13 @@ namespace Pbp.Properties {
             }
         }
         
+        public static System.Drawing.Bitmap translate_cross_small {
+            get {
+                object obj = ResourceManager.GetObject("translate_cross_small", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
         public static System.Drawing.Bitmap translate_disabled {
             get {
                 object obj = ResourceManager.GetObject("translate_disabled", resourceCulture);

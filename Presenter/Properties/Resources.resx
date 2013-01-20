@@ -413,11 +413,14 @@
   <data name="translate_disabled" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Application\translate_disabled.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="translate_disabled_small" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Application\translate_disabled_small.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="translate_small" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Application\translate_small.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="translate_cross_small" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Application\translate_cross_small.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>

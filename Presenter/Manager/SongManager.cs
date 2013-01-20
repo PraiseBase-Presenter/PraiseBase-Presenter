@@ -43,10 +43,11 @@ namespace Pbp
         /// <summary>
         /// Song item structure
         /// </summary>
-        public struct SongItem
+        public class SongItem
         {
             public Song Song { get; set; }
             public string Filename { get; set; }
+            public bool SwitchTextAndTranlation { get; set; }
         }
 
         /// <summary>
