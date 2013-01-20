@@ -563,7 +563,7 @@ namespace Pbp.Forms
                 {
                     if (parentNode == null)
                     {
-                        var myNode = new TreeNode(Properties.StringResources.ImageCollection);
+                        var myNode = new TreeNode(Properties.StringResources.TopDirectory);
                         myNode.Tag = "";
                         treeViewImageDirectories.Nodes.Add(myNode);
                         parentNode = myNode;
@@ -612,7 +612,7 @@ namespace Pbp.Forms
                 }
 
                 // Search
-                if (treeViewImageDirectories.SelectedNode.Index == treeViewImageDirectories.Nodes.Count - 1)
+                if (treeViewImageDirectories.SelectedNode.Level == 0 && treeViewImageDirectories.SelectedNode.Index == treeViewImageDirectories.Nodes.Count - 1)
                 {
                     var imList = new ImageList();
                     imList.ImageSize = Settings.Default.ThumbSize;
@@ -661,9 +661,17 @@ namespace Pbp.Forms
                         }
                         listViewDirectoryImages.LargeImageList = imList;
 
-                        labelImgDirName.Text = StringResources.Category + " '" +
-                                               Path.GetFileName(((string)treeViewImageDirectories.SelectedNode.Tag)) +
-                                               "' (" + i + " " + StringResources.Images + "):";
+                        string categoryName;
+                        if (treeViewImageDirectories.SelectedNode.Level == 0)
+                        {
+                            categoryName = StringResources.TopDirectory;
+                        }
+                        else
+                        {
+                            categoryName = StringResources.Category + " '" + Path.GetFileName(((string)treeViewImageDirectories.SelectedNode.Tag));
+                        }
+
+                        labelImgDirName.Text = categoryName + "' (" + i + " " + StringResources.Images + "):";
                     }
                 }
 
@@ -1007,7 +1015,7 @@ namespace Pbp.Forms
                     Console.WriteLine("Found: " + ims);
                     imageSearchResults.Add(ims);
                 }
-                //treeViewImageDirectories.SelectedNode = treeViewImageDirectories.Nodes[treeViewImageDirectories.Nodes.Count - 1];
+                treeViewImageDirectories.SelectedNode = treeViewImageDirectories.Nodes[treeViewImageDirectories.Nodes.Count - 1];
             }
         }
 

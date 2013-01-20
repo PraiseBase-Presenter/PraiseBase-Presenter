@@ -153,9 +153,6 @@
   <data name="FormatNotSupported" xml:space="preserve">
     <value>Format nicht unterstüzt!</value>
   </data>
-  <data name="ImageCollection" xml:space="preserve">
-    <value>Bildsammlung</value>
-  </data>
   <data name="Images" xml:space="preserve">
     <value>Bilder</value>
   </data>
@@ -302,6 +299,9 @@
   </data>
   <data name="TagExistsAlready" xml:space="preserve">
     <value>Tag bereits vorhanden!</value>
+  </data>
+  <data name="TopDirectory" xml:space="preserve">
+    <value>Hauptverzeichnis</value>
   </data>
   <data name="UpdateAvailable" xml:space="preserve">
     <value>Ein Update auf Version {0} ist verfügbar!</value>
