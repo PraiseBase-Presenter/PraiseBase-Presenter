@@ -29,7 +29,6 @@ using System;
 using System.Drawing;
 using System.Reflection;
 using System.Windows.Forms;
-using Pbp.Resources;
 
 namespace Pbp.Forms
 {
@@ -54,7 +53,7 @@ namespace Pbp.Forms
             this.labelCopyright.Text = AssemblyCopyright;
             this.labelCompanyName.Text = AssemblyCompany;
 
-            this.textBox1.Text = global::Pbp.Resources.ImageResources.License;
+            this.textBox1.Text = global::Pbp.Properties.Resources.License;
 
             timer1.Interval = 1;
             timer1.Start();
@@ -146,8 +145,8 @@ namespace Pbp.Forms
             Pbp.UpdateCheck.UpdateInformation ui = Pbp.UpdateCheck.getNewVersion();
             if (ui.UpdateAvailable)
             {
-                linkLabel1.Text = String.Format(StringResources.UpdateAvailable, ui.OnlineVersion);
-                linkLabel1.Image = Pbp.Resources.ImageResources.update16;
+                linkLabel1.Text = String.Format(Pbp.Properties.StringResources.UpdateAvailable, ui.OnlineVersion);
+                linkLabel1.Image = Pbp.Properties.Resources.update16;
                 linkLabel1.ForeColor = Color.DarkGreen;
                 updateDownloadUrl = ui.DownloadUrl;
                 buttonDownloadUpdate.Visible = true;
@@ -156,12 +155,12 @@ namespace Pbp.Forms
             {
                 if (ui.OnlineVersion != null)
                 {
-                    linkLabel1.Text = StringResources.ProgramVersionUptodate;
-                    linkLabel1.Image = Pbp.Resources.ImageResources.ok16;
+                    linkLabel1.Text = Pbp.Properties.StringResources.ProgramVersionUptodate;
+                    linkLabel1.Image = Pbp.Properties.Resources.ok16;
                 }
                 else
                 {
-                    linkLabel1.Text = StringResources.ConnectionToUpdateServerFailed;
+                    linkLabel1.Text = Pbp.Properties.StringResources.ConnectionToUpdateServerFailed;
                 }
                 buttonDownloadUpdate.Visible = false;
             }

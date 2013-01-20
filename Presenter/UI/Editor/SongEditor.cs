@@ -108,7 +108,7 @@ namespace Pbp.Forms
             openFileDialog.CheckFileExists = true;
             openFileDialog.CheckPathExists = true;
             openFileDialog.Multiselect = false;
-            openFileDialog.Title = Resources.StringResources.OpenSong;
+            openFileDialog.Title = Properties.StringResources.OpenSong;
 
             openFileDialog.Filter = SongFileReaderFactory.Instance.GetFileBoxFilter();
             openFileDialog.FilterIndex = fileOpenBoxFilterIndex;

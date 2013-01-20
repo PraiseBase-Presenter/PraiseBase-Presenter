@@ -71,7 +71,7 @@
             this.CancelButton = this.buttonCancel;
             this.ClientSize = new System.Drawing.Size(409, 86);
             this.ControlBox = false;
-            this.Icon = global::Pbp.Resources.ImageResources.Computer;
+            this.Icon = global::Pbp.Properties.Resources.Computer;
             this.Controls.Add(this.label1);
             this.Controls.Add(this.buttonCancel);
             this.Controls.Add(this.progressBarStatus);

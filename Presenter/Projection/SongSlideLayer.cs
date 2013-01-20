@@ -32,12 +32,15 @@ using System.Drawing.Text;
 using Pbp.Properties;
 using Pbp.Data.Song;
 using Pbp.Data;
+using System.Collections.Generic;
 
 namespace Pbp
 {
     internal class SongSlideLayer : TextLayer
     {
         private SongSlide slide;
+
+        public bool SwitchTextAndTranslation { get; set; }
 
         public SongSlideLayer(SongSlide slide)
         {
@@ -49,7 +52,20 @@ namespace Pbp
             int w = (int)gr.VisibleClipBounds.Width;
             int h = (int)gr.VisibleClipBounds.Height;
 
-            if (slide.Lines.Count > 0)
+            List<String> mainText;
+            List<String> subText;
+            if (slide.Translated && SwitchTextAndTranslation)
+            {
+                mainText = slide.Translation;
+                subText = slide.Lines;
+            }
+            else
+            {
+                mainText = slide.Lines;
+                subText = slide.Translation;
+            }
+
+            if (mainText.Count > 0)
             {
                 StringFormat strFormat = new StringFormat();
 
@@ -93,14 +109,14 @@ namespace Pbp
                 if (slide.Translated)
                 {
                     strMeasureTrans = gr.MeasureString(slide.TranslationText, fontTr);
-                    lineSpacing += (int)(strMeasureTrans.Height / slide.Translation.Count) + lineSpacing;
-                    endSpacing = (int)(strMeasureTrans.Height / slide.Translation.Count) + lineSpacing;
+                    lineSpacing += (int)(strMeasureTrans.Height / subText.Count) + lineSpacing;
+                    endSpacing = (int)(strMeasureTrans.Height / subText.Count) + lineSpacing;
                 }
 
                 SizeF strMeasure = gr.MeasureString(slide.Text, font);
                 Brush shadodBrush = Brushes.Transparent;
                 int usedWidth = (int)strMeasure.Width;
-                int usedHeight = (int)strMeasure.Height + (lineSpacing * (slide.Lines.Count - 1)) + endSpacing;
+                int usedHeight = (int)strMeasure.Height + (lineSpacing * (mainText.Count - 1)) + endSpacing;
 
                 float scalingFactor = 1.0f;
                 if (Settings.Default.ProjectionFontScaling && (usedWidth > usableWidth || usedHeight > usableHeight))
@@ -109,9 +125,9 @@ namespace Pbp
                     font = new Font(font.FontFamily, font.Size * scalingFactor, font.Style);
                     strMeasure = gr.MeasureString(slide.Text, font);
                     usedWidth = (int)strMeasure.Width;
-                    usedHeight = (int)strMeasure.Height + (lineSpacing * (slide.Lines.Count - 1));
+                    usedHeight = (int)strMeasure.Height + (lineSpacing * (mainText.Count - 1));
                 }
-                int lineHeight = (int)(strMeasure.Height / slide.Lines.Count);
+                int lineHeight = (int)(strMeasure.Height / mainText.Count);
 
                 // Horizontal stuff
                 switch (slide.HorizontalTextOrientation)
@@ -155,7 +171,7 @@ namespace Pbp
                     gr.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.HighQualityBilinear;
                     gr.TextRenderingHint = TextRenderingHint.AntiAliasGridFit;
 
-                    foreach (string s in slide.Lines)
+                    foreach (string s in mainText)
                     {
                         for (int x = textX; x <= textX + shadowThickness; x++)
                         {
@@ -176,7 +192,7 @@ namespace Pbp
 
                     Brush br = new SolidBrush(Settings.Default.ProjectionOutlineColor);
 
-                    foreach (string s in slide.Lines)
+                    foreach (string s in mainText)
                     {
                         for (int x = textX - outLineThickness * 2; x <= textX + outLineThickness * 2; x += 2)
                         {
@@ -190,7 +206,7 @@ namespace Pbp
                     textY = textStartY;
                 }
 
-                foreach (string s in slide.Lines)
+                foreach (string s in mainText)
                 {
                     gr.DrawString(s, font, fontBrush, new Point(textX, textY), strFormat);
                     textY += lineHeight + lineSpacing;
@@ -211,7 +227,7 @@ namespace Pbp
                         gr.InterpolationMode = InterpolationMode.HighQualityBilinear;
                         gr.TextRenderingHint = TextRenderingHint.AntiAliasGridFit;
 
-                        foreach (string s in slide.Translation)
+                        foreach (string s in subText)
                         {
                             for (int x = textX; x <= textX + shadowThickness; x++)
                             {
@@ -232,7 +248,7 @@ namespace Pbp
 
                         Brush br = new SolidBrush(Settings.Default.ProjectionOutlineColor);
 
-                        foreach (string s in slide.Translation)
+                        foreach (string s in subText)
                         {
                             for (int x = textX - outLineThickness * 2; x <= textX + outLineThickness * 2; x += 2)
                             {
@@ -246,7 +262,7 @@ namespace Pbp
                         textY = transStartY;
                     }
 
-                    foreach (string s in slide.Translation)
+                    foreach (string s in subText)
                     {
                         gr.DrawString(s, fontTr, fontTranslationBrush, new Point(textX, textY), strFormat);
                         textY += lineHeight + lineSpacing;

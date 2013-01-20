@@ -75,14 +75,14 @@ namespace Pbp.Forms
                 }
                 catch (NotImplementedException)
                 {
-                    MessageBox.Show(Resources.StringResources.SongFormatNotSupported, this.Text, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show(Properties.StringResources.SongFormatNotSupported, this.Text, MessageBoxButtons.OK, MessageBoxIcon.Error);
                     valid = false;
                     this.Close();
                     return;
                 }
                 catch (Exception e)
                 {
-                    MessageBox.Show(Resources.StringResources.SongFileHasErrors + " (" + e.Message + ")!", this.Text, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show(Properties.StringResources.SongFileHasErrors + " (" + e.Message + ")!", this.Text, MessageBoxButtons.OK, MessageBoxIcon.Error);
                     valid = false;
                     this.Close();
                     return;
@@ -225,7 +225,7 @@ namespace Pbp.Forms
                 addContextMenu.Items.Add(tItem);
             }
             addContextMenu.Items.Add(new ToolStripSeparator());
-            ToolStripMenuItem oItem = new ToolStripMenuItem(Resources.StringResources.OtherName + "...");
+            ToolStripMenuItem oItem = new ToolStripMenuItem(Properties.StringResources.OtherName + "...");
             oItem.Click += new EventHandler(partAddMenuOther_click);
             addContextMenu.Items.Add(oItem);
         }
@@ -239,20 +239,20 @@ namespace Pbp.Forms
             iTBox.Font = new Font(iTBox.Font.FontFamily, 12);
 
             Button okButton = new Button();
-            okButton.Text = Resources.StringResources.Add;
+            okButton.Text = Properties.StringResources.Add;
             okButton.Location = new Point(310, 5);
             okButton.Name = "okButton";
             okButton.Click += new EventHandler(addSongPartFormokButton_Click);
 
             Button cancelButton = new Button();
-            cancelButton.Text = Resources.StringResources.Cancel;
+            cancelButton.Text = Properties.StringResources.Cancel;
             cancelButton.Location = new Point(310 + okButton.Width + 5, 5);
             cancelButton.Name = "cancelButton";
 
             Form iForm = new Form();
             iForm.Width = cancelButton.Right + 15;
             iForm.Height = 60;
-            iForm.Text = Resources.StringResources.NameOfTheSongPart;
+            iForm.Text = Properties.StringResources.NameOfTheSongPart;
             iForm.ShowInTaskbar = false;
             iForm.ControlBox = false;
             iForm.AcceptButton = okButton;
@@ -296,7 +296,7 @@ namespace Pbp.Forms
                 int i = 0;
                 foreach (SongSlide slide in part.Slides)
                 {
-                    TreeNode slideNode = new TreeNode(Resources.StringResources.Slide + " " + (i + 1).ToString());
+                    TreeNode slideNode = new TreeNode(Properties.StringResources.Slide + " " + (i + 1).ToString());
                     slideNode.ContextMenuStrip = slideContextMenu;
                     i++;
                     partNode.Nodes.Add(slideNode);
@@ -411,7 +411,7 @@ namespace Pbp.Forms
 
         private void EditorChild_Load(object sender, EventArgs e)
         {
-            ((SongEditor)MdiParent).setStatus(string.Format(Resources.StringResources.LoadedSong, sng.Title));
+            ((SongEditor)MdiParent).setStatus(string.Format(Properties.StringResources.LoadedSong, sng.Title));
         }
 
         private void buttonAddNewSlide_Click(object sender, EventArgs e)
@@ -614,7 +614,7 @@ namespace Pbp.Forms
         {
             if (sng.Parts[currentPartId].Slides.Count > 1)
             {
-                if (MessageBox.Show(Resources.StringResources.ReallyDeleteSlide, Resources.StringResources.SongEditor, 
+                if (MessageBox.Show(Properties.StringResources.ReallyDeleteSlide, Properties.StringResources.SongEditor, 
                     MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                 {
                     int slideId = treeViewContents.SelectedNode.Index;
@@ -626,7 +626,7 @@ namespace Pbp.Forms
             }
             else
             {
-                MessageBox.Show(Resources.StringResources.SongPartsNeedsAtLeastOneSlide, Resources.StringResources.SongEditor, 
+                MessageBox.Show(Properties.StringResources.SongPartsNeedsAtLeastOneSlide, Properties.StringResources.SongEditor, 
                     MessageBoxButtons.OK, MessageBoxIcon.Stop);
             }
         }
@@ -635,7 +635,7 @@ namespace Pbp.Forms
         {
             if (sng.Parts.Count > 1)
             {
-                if (MessageBox.Show(Resources.StringResources.ReallyDeleteSongPart, Resources.StringResources.SongEditor, 
+                if (MessageBox.Show(Properties.StringResources.ReallyDeleteSongPart, Properties.StringResources.SongEditor, 
                     MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                 {
                     int partId = treeViewContents.SelectedNode.Index;
@@ -646,7 +646,7 @@ namespace Pbp.Forms
             }
             else
             {
-                MessageBox.Show(Resources.StringResources.SongNeedsAtLeastOneSongPart, Resources.StringResources.SongEditor, 
+                MessageBox.Show(Properties.StringResources.SongNeedsAtLeastOneSongPart, Properties.StringResources.SongEditor, 
                     MessageBoxButtons.OK, MessageBoxIcon.Stop);
             }
         }
@@ -725,13 +725,13 @@ namespace Pbp.Forms
                     SongFileWriterFactory.Instance.CreateFactoryByFile(songFilename).Save(songFilename, sng);
 
                     hashCode = sng.GetHashCode();
-                    ((SongEditor)MdiParent).setStatus(String.Format(Resources.StringResources.SongSavedAs, songFilename));
+                    ((SongEditor)MdiParent).setStatus(String.Format(Properties.StringResources.SongSavedAs, songFilename));
 
                     SongManager.Instance.ReloadSongByPath(songFilename);
                 }
                 catch (NotImplementedException)
                 {
-                    MessageBox.Show(Resources.StringResources.SongCannotBeSavedInThisFormat, Resources.StringResources.FormatNotSupported, 
+                    MessageBox.Show(Properties.StringResources.SongCannotBeSavedInThisFormat, Properties.StringResources.FormatNotSupported, 
                         MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     saveAs();
                 }
@@ -744,7 +744,7 @@ namespace Pbp.Forms
 
             if (sng.Title == Pbp.Properties.Settings.Default.SongDefaultName)
             {
-                if (MessageBox.Show(string.Format(Resources.StringResources.DoesTheSongReallyHaveTheDefaultTitle, sng.Title), Resources.StringResources.Attention, 
+                if (MessageBox.Show(string.Format(Properties.StringResources.DoesTheSongReallyHaveTheDefaultTitle, sng.Title), Properties.StringResources.Attention, 
                     MessageBoxButtons.YesNo) == System.Windows.Forms.DialogResult.No)
                 {
                     textBoxSongTitle.SelectAll();
@@ -767,7 +767,7 @@ namespace Pbp.Forms
             saveFileDialog.Filter = SongFileWriterFactory.Instance.GetFileBoxFilter();
             saveFileDialog.FilterIndex = ((SongEditor)MdiParent).fileSaveBoxFilterIndex;
             saveFileDialog.AddExtension = true;
-            saveFileDialog.Title = Resources.StringResources.SaveSongAs;
+            saveFileDialog.Title = Properties.StringResources.SaveSongAs;
 
             if (saveFileDialog.ShowDialog(this) == DialogResult.OK)
             {
@@ -775,11 +775,11 @@ namespace Pbp.Forms
                 try {
                     SongFileWriterFactory.Instance.CreateFactoryByTypeIndex(saveFileDialog.FilterIndex-1).Save(saveFileDialog.FileName, sng);
                     ((SongEditor)MdiParent).fileSaveBoxFilterIndex = saveFileDialog.FilterIndex;
-                    ((SongEditor)MdiParent).setStatus(string.Format(Resources.StringResources.SongSavedAs, saveFileDialog.FileName));
+                    ((SongEditor)MdiParent).setStatus(string.Format(Properties.StringResources.SongSavedAs, saveFileDialog.FileName));
                 }
                 catch (NotImplementedException)
                 {
-                    MessageBox.Show(Resources.StringResources.SongCannotBeSavedInThisFormat, Resources.StringResources.SongEditor, 
+                    MessageBox.Show(Properties.StringResources.SongCannotBeSavedInThisFormat, Properties.StringResources.SongEditor, 
                         MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
@@ -790,8 +790,8 @@ namespace Pbp.Forms
         {
             if (hashCode != sng.GetHashCode())
             {
-                DialogResult dlg = MessageBox.Show(string.Format(Resources.StringResources.SaveChangesMadeToTheSong, sng.Title), 
-                    Resources.StringResources.SongEditor, 
+                DialogResult dlg = MessageBox.Show(string.Format(Properties.StringResources.SaveChangesMadeToTheSong, sng.Title), 
+                    Properties.StringResources.SongEditor, 
                     MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
                 if (dlg == DialogResult.Yes)
                 {

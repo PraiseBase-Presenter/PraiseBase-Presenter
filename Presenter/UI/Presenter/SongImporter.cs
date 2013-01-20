@@ -63,8 +63,8 @@ namespace Pbp.Forms
                     #region PraiseBox Importer
 
                     dlg = new OpenFileDialog();
-                    dlg.Title = Resources.StringResources.OpenPraiseBoxDatabase;
-                    dlg.Filter = Resources.StringResources.OpenPraiseBoxDatabase + " (*.pbd)|*.pbd|Alle Dateien (*.*)|*.*";
+                    dlg.Title = Properties.StringResources.OpenPraiseBoxDatabase;
+                    dlg.Filter = Properties.StringResources.OpenPraiseBoxDatabase + " (*.pbd)|*.pbd|Alle Dateien (*.*)|*.*";
 
                     if (dlg.ShowDialog() == DialogResult.OK)
                     {
@@ -78,7 +78,7 @@ namespace Pbp.Forms
                         }
                         catch (Exception ex)
                         {
-                            MessageBox.Show(Resources.StringResources.Sorry + "! " + ex.Message, Resources.StringResources.DatabaseError, 
+                            MessageBox.Show(Properties.StringResources.Sorry + "! " + ex.Message, Properties.StringResources.DatabaseError, 
                                 MessageBoxButtons.OK, MessageBoxIcon.Error);
                             DialogResult = DialogResult.Cancel;
                             this.Close();
@@ -93,7 +93,7 @@ namespace Pbp.Forms
                         }
                         catch (Exception ex)
                         {
-                            MessageBox.Show(Resources.StringResources.Sorry + "! " + ex.Message, Resources.StringResources.DatabaseError, 
+                            MessageBox.Show(Properties.StringResources.Sorry + "! " + ex.Message, Properties.StringResources.DatabaseError, 
                                 MessageBoxButtons.OK, MessageBoxIcon.Error);
                             DialogResult = DialogResult.Cancel;
                             this.Close();
@@ -152,8 +152,8 @@ namespace Pbp.Forms
                     #region WorshipSystem Importer
 
                     dlg = new OpenFileDialog();
-                    dlg.Title = Resources.StringResources.OpenWorshipSystemDatabase;
-                    dlg.Filter = Resources.StringResources.OpenWorshipSystemDatabase + " (*.mdb)|*.mdb|Alle Dateien (*.*)|*.*";
+                    dlg.Title = Properties.StringResources.OpenWorshipSystemDatabase;
+                    dlg.Filter = Properties.StringResources.OpenWorshipSystemDatabase + " (*.mdb)|*.mdb|Alle Dateien (*.*)|*.*";
 
                     if (dlg.ShowDialog() == DialogResult.OK)
                     {
@@ -167,7 +167,7 @@ namespace Pbp.Forms
                         }
                         catch (Exception ex)
                         {
-                            MessageBox.Show(Resources.StringResources.Sorry + "! " + ex.Message, Resources.StringResources.DatabaseError, 
+                            MessageBox.Show(Properties.StringResources.Sorry + "! " + ex.Message, Properties.StringResources.DatabaseError, 
                                 MessageBoxButtons.OK, MessageBoxIcon.Error);
                             DialogResult = DialogResult.Cancel;
                             this.Close();
@@ -182,7 +182,7 @@ namespace Pbp.Forms
                         }
                         catch (Exception ex)
                         {
-                            MessageBox.Show(Resources.StringResources.Sorry + "! " + ex.Message, Resources.StringResources.DatabaseError, 
+                            MessageBox.Show(Properties.StringResources.Sorry + "! " + ex.Message, Properties.StringResources.DatabaseError, 
                                 MessageBoxButtons.OK, MessageBoxIcon.Error);
                             DialogResult = DialogResult.Cancel;
                             this.Close();
@@ -258,8 +258,8 @@ namespace Pbp.Forms
                     #endregion WorshipSystem Importer
 
                 default:
-                    MessageBox.Show(Resources.StringResources.Sorry + "! " + Resources.StringResources.NoSongImporterAvailable, 
-                        Resources.StringResources.SongImporter, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show(Properties.StringResources.Sorry + "! " + Properties.StringResources.NoSongImporterAvailable, 
+                        Properties.StringResources.SongImporter, MessageBoxButtons.OK, MessageBoxIcon.Error);
                     DialogResult = DialogResult.Cancel;
                     this.Close();
                     return;
@@ -313,8 +313,8 @@ namespace Pbp.Forms
                     string fileName = Settings.Default.DataDirectory + Path.DirectorySeparatorChar
                         + Settings.Default.SongDir + Path.DirectorySeparatorChar
                         + ((Song)listViewSongs.Items[x].Tag).Title + SongFileWriterFactory.Instance.CreateFactory(SongFileWriterFactory.Instance.PreferredType).FileExtension;
-                    if ((File.Exists(fileName) && (MessageBox.Show(string.Format(Resources.StringResources.SongExistsAlready, ((Song)listViewSongs.Items[x].Tag).Title) 
-                        + Resources.StringResources.Overwrite + "?", Resources.StringResources.SongImporter, 
+                    if ((File.Exists(fileName) && (MessageBox.Show(string.Format(Properties.StringResources.SongExistsAlready, ((Song)listViewSongs.Items[x].Tag).Title) 
+                        + Properties.StringResources.Overwrite + "?", Properties.StringResources.SongImporter, 
                         MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)) || !File.Exists(fileName))
                     {
                         Song sng = (Song)listViewSongs.Items[x].Tag;
@@ -331,7 +331,7 @@ namespace Pbp.Forms
             }
             if (cnt > 0)
             {
-                MessageBox.Show(string.Format(Resources.StringResources.SongsImported, cnt.ToString()), Resources.StringResources.SongImporter, 
+                MessageBox.Show(string.Format(Properties.StringResources.SongsImported, cnt.ToString()), Properties.StringResources.SongImporter, 
                     MessageBoxButtons.OK, MessageBoxIcon.Information);
 
                 if (checkBoxUseEditor.Checked)

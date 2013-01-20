@@ -72,7 +72,7 @@ namespace Pbp
                 object[] attributes = System.Reflection.Assembly.GetExecutingAssembly().GetCustomAttributes(typeof(System.Reflection.AssemblyProductAttribute), false);
                 String appTitle = ((System.Reflection.AssemblyProductAttribute)attributes[0]).Product;
 
-                MessageBox.Show(Resources.StringResources.ProgramInstanceAlreadyRunning, appTitle, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show(Properties.StringResources.ProgramInstanceAlreadyRunning, appTitle, MessageBoxButtons.OK, MessageBoxIcon.Information);
                 Environment.Exit(0);
             }
             catch

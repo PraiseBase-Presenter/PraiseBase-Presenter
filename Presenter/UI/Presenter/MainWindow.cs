@@ -42,7 +42,6 @@ using Timer = System.Windows.Forms.Timer;
 using Pbp.Manager;
 using System.Globalization;
 using Pbp.UI;
-using Pbp.Resources;
 using Pbp.Data.Bible;
 
 //using PowerPoint = Microsoft.Office.Interop.PowerPoint;
@@ -63,6 +62,8 @@ namespace Pbp.Forms
         private List<String> imageSearchResults;
 
         private bool linkLayers = true;
+
+        private bool switchTextAndTranlation = false;
 
         /// <summary>
         /// Private constructor
@@ -385,11 +386,11 @@ namespace Pbp.Forms
 
             if (SongManager.Instance.CurrentSong.Song.Comment != String.Empty || SongManager.Instance.CurrentSong.Song.HasQA())
             {
-                toolStripButton3.Image = ImageResources.highlight_red;
+                toolStripButton3.Image = Pbp.Properties.Resources.highlight_red;
             }
             else
             {
-                toolStripButton3.Image = ImageResources.highlight;
+                toolStripButton3.Image = Pbp.Properties.Resources.highlight;
             }
         }
 
@@ -408,6 +409,7 @@ namespace Pbp.Forms
 
             Pbp.Data.Song.SongSlide cs = SongManager.Instance.CurrentSong.Song.Parts[e.PartNumber].Slides[e.SlideNumber];
             var ssl = new SongSlideLayer(cs);
+            ssl.SwitchTextAndTranslation = switchTextAndTranlation;
 
             // CTRL pressed, use image stack
             if ((ModifierKeys & Keys.Control) == Keys.Control)
@@ -1313,11 +1315,11 @@ namespace Pbp.Forms
                     if (SongManager.Instance.CurrentSong.Song.Comment != String.Empty ||
                         SongManager.Instance.CurrentSong.Song.HasQA())
                     {
-                        toolStripButton3.Image = ImageResources.highlight_red;
+                        toolStripButton3.Image = Pbp.Properties.Resources.highlight_red;
                     }
                     else
                     {
-                        toolStripButton3.Image = ImageResources.highlight;
+                        toolStripButton3.Image = Pbp.Properties.Resources.highlight;
                     }
                 }
             }
@@ -1344,13 +1346,13 @@ namespace Pbp.Forms
         {
             if (linkLayers)
             {
-                buttonToggleLayerMode.Image = ImageResources.link;
+                buttonToggleLayerMode.Image = Pbp.Properties.Resources.link;
 
                 //label3.Text = "Text und Bild sind verknüpft";
             }
             else
             {
-                buttonToggleLayerMode.Image = ImageResources.unlink;
+                buttonToggleLayerMode.Image = Pbp.Properties.Resources.unlink;
 
                 //label3.Text = "Text und Bild sind unabhängig";
             }
@@ -1712,13 +1714,18 @@ namespace Pbp.Forms
                                 searchTextBoxBible.Text = biblePassageSearchResult.Passage.Book.Name + " ";
                                 searchTextBoxBible.select(searchTextBoxBible.Text.Length, 0);
                             }
-                            
-                            listBoxBibleBook.SelectedIndex = biblePassageSearchResult.Passage.Book.Number - 1;
 
+                            /*
                             if (biblePassageSearchResult.Passage.Chapter != null)
                             {
                                 chapterIdx = biblePassageSearchResult.Passage.Chapter.Number - 1;
                             }
+                            if (biblePassageSearchResult.Passage.Verse != null)
+                            {
+                                verseIdx = biblePassageSearchResult.Passage.Verse.Number - 1;
+                            }*/
+
+                            listBoxBibleBook.SelectedIndex = biblePassageSearchResult.Passage.Book.Number - 1;
                             
 
                         }
@@ -1772,6 +1779,20 @@ namespace Pbp.Forms
         private void aufUpdatePrüfenToolStripMenuItem_Click(object sender, EventArgs e)
         {
             UpdateCheck.DoCheck(true);
+        }
+
+        private void buttonSwitchTextAndTranslation_Click(object sender, EventArgs e)
+        {
+            if (switchTextAndTranlation)
+            {
+                buttonSwitchTextAndTranslation.Image = Properties.Resources.translate_disabled_small;
+                switchTextAndTranlation = false;
+            }
+            else
+            {
+                buttonSwitchTextAndTranslation.Image = Properties.Resources.translate_small;
+                switchTextAndTranlation = true;
+            }
         }
 
     }

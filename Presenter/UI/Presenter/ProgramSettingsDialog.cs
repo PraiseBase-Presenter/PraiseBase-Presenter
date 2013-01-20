@@ -169,7 +169,7 @@ namespace Pbp.Forms
 
         private void button2_Click(object sender, EventArgs e)
         {
-            if (MessageBox.Show(Resources.StringResources.ReallyResetFactoryDefaults, Resources.StringResources.Reset, MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+            if (MessageBox.Show(Properties.StringResources.ReallyResetFactoryDefaults, Properties.StringResources.Reset, MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
             {
                 Settings.Default.Reset();
                 updateLabels();
@@ -205,12 +205,12 @@ namespace Pbp.Forms
                 }
                 else
                 {
-                    MessageBox.Show(Resources.StringResources.TagExistsAlready, Resources.StringResources.Settings, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                    MessageBox.Show(Properties.StringResources.TagExistsAlready, Properties.StringResources.Settings, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 }
             }
             else
             {
-                MessageBox.Show(Resources.StringResources.EmptyEntriesAreNotAllowed, Resources.StringResources.Settings, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                MessageBox.Show(Properties.StringResources.EmptyEntriesAreNotAllowed, Properties.StringResources.Settings, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
             }
             textBoxNewTag.Focus();
         }
@@ -240,12 +240,12 @@ namespace Pbp.Forms
                 }
                 else
                 {
-                    MessageBox.Show(Resources.StringResources.LanguageExistsAlready, Resources.StringResources.Settings, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                    MessageBox.Show(Properties.StringResources.LanguageExistsAlready, Properties.StringResources.Settings, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 }
             }
             else
             {
-                MessageBox.Show(Resources.StringResources.EmptyEntriesAreNotAllowed, Resources.StringResources.Settings, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                MessageBox.Show(Properties.StringResources.EmptyEntriesAreNotAllowed, Properties.StringResources.Settings, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
             }
             textBoxNewLang.Focus();
         }
@@ -275,12 +275,12 @@ namespace Pbp.Forms
                 }
                 else
                 {
-                    MessageBox.Show(Resources.StringResources.NameExistsAlready, Resources.StringResources.Settings, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                    MessageBox.Show(Properties.StringResources.NameExistsAlready, Properties.StringResources.Settings, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 }
             }
             else
             {
-                MessageBox.Show(Resources.StringResources.EmptyEntriesAreNotAllowed, Resources.StringResources.Settings, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                MessageBox.Show(Properties.StringResources.EmptyEntriesAreNotAllowed, Properties.StringResources.Settings, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
             }
             textBoxNewSongPart.Focus();
         }

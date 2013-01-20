@@ -46,7 +46,7 @@ namespace Pbp.Forms
             }
             else
             {
-                MessageBox.Show(Resources.StringResources.NoSongsSelected, Resources.StringResources.SongBrowser);
+                MessageBox.Show(Properties.StringResources.NoSongsSelected, Properties.StringResources.SongBrowser);
             }
         }
 
