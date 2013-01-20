@@ -153,6 +153,9 @@
   <data name="FormatNotSupported" xml:space="preserve">
     <value>Format not supported!</value>
   </data>
+  <data name="ImageCollection" xml:space="preserve">
+    <value>Image collection</value>
+  </data>
   <data name="Images" xml:space="preserve">
     <value>images</value>
   </data>

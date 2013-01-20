@@ -214,7 +214,7 @@ namespace Pbp.Forms
                 }
                 catch (Exception e)
                 {
-                    Console.WriteLine(e.ToString());
+                    Console.WriteLine("Song search exception: " + e.ToString());
                 }
             }
             listViewSongs.Columns[0].Width = -2;
@@ -561,6 +561,14 @@ namespace Pbp.Forms
             {
                 if (Directory.Exists(directoryValue))
                 {
+                    if (parentNode == null)
+                    {
+                        var myNode = new TreeNode(Properties.StringResources.ImageCollection);
+                        myNode.Tag = "";
+                        treeViewImageDirectories.Nodes.Add(myNode);
+                        parentNode = myNode;
+                    }
+
                     string[] directoryArray =
                         Directory.GetDirectories(directoryValue);
 
@@ -993,13 +1001,13 @@ namespace Pbp.Forms
             {
                 treeViewImageDirectories.SelectedNode = null;
                 imageSearchResults.Clear();
-
+                Console.WriteLine("Search: "+ needle);
                 foreach (string ims in ImageManager.Instance.SearchImages(needle))
                 {
+                    Console.WriteLine("Found: " + ims);
                     imageSearchResults.Add(ims);
                 }
-                treeViewImageDirectories.SelectedNode =
-                    treeViewImageDirectories.Nodes[treeViewImageDirectories.Nodes.Count - 1];
+                //treeViewImageDirectories.SelectedNode = treeViewImageDirectories.Nodes[treeViewImageDirectories.Nodes.Count - 1];
             }
         }
 

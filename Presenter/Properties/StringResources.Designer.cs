@@ -169,6 +169,15 @@ namespace Pbp.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Bildsammlung.
+        /// </summary>
+        internal static string ImageCollection {
+            get {
+                return ResourceManager.GetString("ImageCollection", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Bilder.
         /// </summary>
         internal static string Images {
