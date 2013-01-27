@@ -1488,6 +1488,12 @@
   <data name="tabControlTextLayer.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Bottom, Left, Right</value>
   </data>
+  <data name="buttonSwitchTextAndTranslation.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Right</value>
+  </data>
+  <data name="buttonSwitchTextAndTranslation.Enabled" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
   <data name="buttonSwitchTextAndTranslation.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>

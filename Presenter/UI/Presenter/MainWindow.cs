@@ -390,12 +390,21 @@ namespace Pbp.Forms
             {
                 toolStripButton3.Image = Pbp.Properties.Resources.highlight;
             }
-            if (SongManager.Instance.CurrentSong.SwitchTextAndTranlation)
+            if (SongManager.Instance.CurrentSong.Song.HasTranslation)
             {
-                buttonSwitchTextAndTranslation.Image = Properties.Resources.translate_cross_small;
+                buttonSwitchTextAndTranslation.Enabled = true;
+                if (SongManager.Instance.CurrentSong.SwitchTextAndTranlation)
+                {
+                    buttonSwitchTextAndTranslation.Image = Properties.Resources.translate_cross_small;
+                }
+                else
+                {
+                    buttonSwitchTextAndTranslation.Image = Properties.Resources.translate_small;
+                }
             }
             else
             {
+                buttonSwitchTextAndTranslation.Enabled = false;
                 buttonSwitchTextAndTranslation.Image = Properties.Resources.translate_small;
             }
         }

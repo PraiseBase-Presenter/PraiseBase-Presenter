@@ -300,6 +300,24 @@ namespace Pbp.Data.Song
         /// </summary>
         public SongTextBorders TextBorders { get; set; }
 
+        public bool HasTranslation
+        {
+            get
+            {
+                bool translated = false;
+                foreach (SongSlide s in Slides)
+                {
+                    if (s.Translated)
+                    {
+                        translated = true;
+                        break;
+                    }
+
+                }
+                return translated;
+            }
+        }
+
         #endregion Fields
 
         /// <summary>

@@ -862,8 +862,8 @@
             // 
             // buttonSwitchTextAndTranslation
             // 
-            this.buttonSwitchTextAndTranslation.Image = global::Pbp.Properties.Resources.translate_small;
             resources.ApplyResources(this.buttonSwitchTextAndTranslation, "buttonSwitchTextAndTranslation");
+            this.buttonSwitchTextAndTranslation.Image = global::Pbp.Properties.Resources.translate_small;
             this.buttonSwitchTextAndTranslation.Name = "buttonSwitchTextAndTranslation";
             this.toolTipMyTooltip.SetToolTip(this.buttonSwitchTextAndTranslation, resources.GetString("buttonSwitchTextAndTranslation.ToolTip"));
             this.buttonSwitchTextAndTranslation.UseVisualStyleBackColor = true;
