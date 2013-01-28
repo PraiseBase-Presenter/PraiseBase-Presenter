@@ -51,6 +51,9 @@ namespace Pbp.Forms
         private SongEditor()
         {
             InitializeComponent();
+
+            this.Size = Settings.Default.EditorWindowSize;
+
             fileBoxInitialDir = Settings.Default.DataDirectory + Path.DirectorySeparatorChar + Settings.Default.SongDir;
             fileOpenBoxFilterIndex = 0;
             fileSaveBoxFilterIndex = 0;
@@ -273,6 +276,7 @@ namespace Pbp.Forms
 
         private void EditorWindow_FormClosing(object sender, FormClosingEventArgs e)
         {
+            Settings.Default.EditorWindowSize = this.Size;
             Settings.Default.EditorWindowState = this.WindowState;
 
             //this.Hide();

@@ -69,6 +69,9 @@ namespace Pbp.Forms
         private MainWindow()
         {
             InitializeComponent();
+
+            this.Size = Settings.Default.MainWindowSize;
+            
             base.registerChild(this);
         }
 
@@ -1031,6 +1034,7 @@ namespace Pbp.Forms
         private void mainWindow_FormClosing(object sender, FormClosingEventArgs e)
         {
             Settings.Default.ViewerWindowState = WindowState;
+            Settings.Default.MainWindowSize = this.Size;
             Settings.Default.Save();
         }
 

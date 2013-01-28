@@ -552,5 +552,29 @@ namespace Pbp.Properties {
                 return ((string)(this["SystemControlCommand"]));
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("1024, 768")]
+        public global::System.Drawing.Size MainWindowSize {
+            get {
+                return ((global::System.Drawing.Size)(this["MainWindowSize"]));
+            }
+            set {
+                this["MainWindowSize"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("1024, 768")]
+        public global::System.Drawing.Size EditorWindowSize {
+            get {
+                return ((global::System.Drawing.Size)(this["EditorWindowSize"]));
+            }
+            set {
+                this["EditorWindowSize"] = value;
+            }
+        }
     }
 }
