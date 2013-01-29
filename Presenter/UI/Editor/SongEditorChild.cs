@@ -376,13 +376,14 @@ namespace Pbp.Forms
             SongSlide sld = sng.Parts[partId].Slides[slideId];
             textBoxSongText.DataBindings.Clear();
             textBoxSongText.DataBindings.Add("Text", sld, "Text");
+
             textBoxSongTranslation.DataBindings.Clear();
             textBoxSongTranslation.DataBindings.Add("Text", sld, "TranslationText");
 
-            pictureBoxPreview.Image = ImageManager.Instance.GetImage(sng.GetImage(sld.ImageNumber));
-
             currentPartId = partId;
             currentSlideId = slideId;
+
+            previewSlide();
         }
 
         private void addSongPart(string caption)
@@ -887,11 +888,23 @@ namespace Pbp.Forms
 
         private void previewSlide()
         {
-            object[] songArgs = { currentPartId, currentSlideId };
+            SongSlide slide = (SongSlide)sng.Parts[currentPartId].Slides[currentSlideId].Clone();
+            slide.Text = textBoxSongText.Text;
+            slide.TranslationText = textBoxSongTranslation.Text;
+            SongSlideLayer sl = new SongSlideLayer(slide);
 
-            // TODO
-            //pictureBoxPreview.Image = projWindow.showSlide(sng, sng.getImage(sng.Parts[currentPartId].Slides[currentSlideId].ImageNumber), songArgs, ProjectionMode.Simulate);
-            pictureBoxPreview.Image = ImageManager.Instance.GetImage(sng.GetImage(sng.Parts[currentPartId].Slides[currentSlideId].ImageNumber));
+            ImageLayer il = new ImageLayer();
+            il.Image = ImageManager.Instance.GetImage(sng.GetImage(sng.Parts[currentPartId].Slides[currentSlideId].ImageNumber));
+
+            var bmp = new Bitmap(1024, 768);
+            Graphics gr = Graphics.FromImage(bmp);
+            gr.CompositingQuality = System.Drawing.Drawing2D.CompositingQuality.HighSpeed;
+            gr.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.HighSpeed;
+
+            il.writeOut(gr, null, ProjectionMode.Simulate);
+            sl.writeOut(gr, null, ProjectionMode.Simulate);
+
+            pictureBoxPreview.Image = bmp;
         }
 
         private void neueFolieToolStripMenuItem_Click(object sender, EventArgs e)
@@ -1051,6 +1064,24 @@ namespace Pbp.Forms
             {
                 treeViewContents.Nodes[partId].Text = textBoxPartCaption.Text;
             }
+        }
+
+        private void panelPreview_Resize(object sender, EventArgs e)
+        {
+            pictureBoxPreview.Height = panelPreview.Height;
+            pictureBoxPreview.Width = (int)Math.Floor(pictureBoxPreview.Height / 0.75);
+            pictureBoxPreview.Top = 0;
+            pictureBoxPreview.Left = (int)(panelPreview.Width / 2 - (pictureBoxPreview.Width/2));
+        }
+
+        private void textBoxSongText_KeyUp(object sender, KeyEventArgs e)
+        {
+            previewSlide();
+        }
+
+        private void textBoxSongTranslation_KeyUp(object sender, KeyEventArgs e)
+        {
+            previewSlide();
         }
 
     }

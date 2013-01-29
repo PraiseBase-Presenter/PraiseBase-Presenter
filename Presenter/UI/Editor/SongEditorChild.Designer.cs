@@ -54,6 +54,10 @@
             this.umbenennenToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.tabPageFormatting = new System.Windows.Forms.TabPage();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.label1 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
+            this.comboBoxSlideVertOrientation = new System.Windows.Forms.ComboBox();
+            this.comboBoxSlideHorizOrientation = new System.Windows.Forms.ComboBox();
             this.checkedListBoxTags = new System.Windows.Forms.CheckedListBox();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
             this.checkBoxQASegmentation = new System.Windows.Forms.CheckBox();
@@ -77,6 +81,8 @@
             this.buttonTranslationColor = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
             this.tabPageContent = new System.Windows.Forms.TabPage();
+            this.panelPreview = new System.Windows.Forms.Panel();
+            this.pictureBoxPreview = new System.Windows.Forms.PictureBox();
             this.labelGUID = new System.Windows.Forms.Label();
             this.textBoxRightsManagement = new System.Windows.Forms.TextBox();
             this.label18 = new System.Windows.Forms.Label();
@@ -86,10 +92,6 @@
             this.label16 = new System.Windows.Forms.Label();
             this.textBoxAuthors = new System.Windows.Forms.TextBox();
             this.label15 = new System.Windows.Forms.Label();
-            this.label1 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
-            this.comboBoxSlideVertOrientation = new System.Windows.Forms.ComboBox();
-            this.comboBoxSlideHorizOrientation = new System.Windows.Forms.ComboBox();
             this.buttonDuplicateSlide = new System.Windows.Forms.Button();
             this.textBoxCCLISongID = new System.Windows.Forms.TextBox();
             this.textBoxCopyright = new System.Windows.Forms.TextBox();
@@ -99,13 +101,12 @@
             this.label12 = new System.Windows.Forms.Label();
             this.buttonAddSlide = new System.Windows.Forms.Button();
             this.label11 = new System.Windows.Forms.Label();
-            this.pictureBoxPreview = new System.Windows.Forms.PictureBox();
-            this.treeViewContents = new TreeEx.TreeLE();
             this.buttonAddItem = new System.Windows.Forms.Button();
             this.buttonMoveUp = new System.Windows.Forms.Button();
             this.buttonDelItem = new System.Windows.Forms.Button();
             this.buttonMoveDown = new System.Windows.Forms.Button();
             this.tabControlTextLayer = new System.Windows.Forms.TabControl();
+            this.treeViewContents = new TreeEx.TreeLE();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
             this.splitContainer1.SuspendLayout();
@@ -118,6 +119,7 @@
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.trackBarLineSpacing)).BeginInit();
             this.tabPageContent.SuspendLayout();
+            this.panelPreview.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxPreview)).BeginInit();
             this.tabControlTextLayer.SuspendLayout();
             this.SuspendLayout();
@@ -167,6 +169,7 @@
             this.textBoxSongText.AllowDrop = true;
             resources.ApplyResources(this.textBoxSongText, "textBoxSongText");
             this.textBoxSongText.Name = "textBoxSongText";
+            this.textBoxSongText.KeyUp += new System.Windows.Forms.KeyEventHandler(this.textBoxSongText_KeyUp);
             // 
             // textBoxPartCaptionTranslated
             // 
@@ -185,6 +188,7 @@
             this.textBoxSongTranslation.AllowDrop = true;
             resources.ApplyResources(this.textBoxSongTranslation, "textBoxSongTranslation");
             this.textBoxSongTranslation.Name = "textBoxSongTranslation";
+            this.textBoxSongTranslation.KeyUp += new System.Windows.Forms.KeyEventHandler(this.textBoxSongTranslation_KeyUp);
             // 
             // comboBoxLanguageTranslated
             // 
@@ -292,9 +296,47 @@
             // groupBox1
             // 
             resources.ApplyResources(this.groupBox1, "groupBox1");
+            this.groupBox1.Controls.Add(this.label1);
+            this.groupBox1.Controls.Add(this.label3);
+            this.groupBox1.Controls.Add(this.comboBoxSlideVertOrientation);
+            this.groupBox1.Controls.Add(this.comboBoxSlideHorizOrientation);
             this.groupBox1.Controls.Add(this.checkedListBoxTags);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.TabStop = false;
+            // 
+            // label1
+            // 
+            resources.ApplyResources(this.label1, "label1");
+            this.label1.Name = "label1";
+            // 
+            // label3
+            // 
+            resources.ApplyResources(this.label3, "label3");
+            this.label3.Name = "label3";
+            // 
+            // comboBoxSlideVertOrientation
+            // 
+            resources.ApplyResources(this.comboBoxSlideVertOrientation, "comboBoxSlideVertOrientation");
+            this.comboBoxSlideVertOrientation.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBoxSlideVertOrientation.FormattingEnabled = true;
+            this.comboBoxSlideVertOrientation.Items.AddRange(new object[] {
+            resources.GetString("comboBoxSlideVertOrientation.Items"),
+            resources.GetString("comboBoxSlideVertOrientation.Items1"),
+            resources.GetString("comboBoxSlideVertOrientation.Items2")});
+            this.comboBoxSlideVertOrientation.Name = "comboBoxSlideVertOrientation";
+            this.comboBoxSlideVertOrientation.SelectedIndexChanged += new System.EventHandler(this.comboBoxSlideVertOrientation_SelectedIndexChanged);
+            // 
+            // comboBoxSlideHorizOrientation
+            // 
+            resources.ApplyResources(this.comboBoxSlideHorizOrientation, "comboBoxSlideHorizOrientation");
+            this.comboBoxSlideHorizOrientation.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBoxSlideHorizOrientation.FormattingEnabled = true;
+            this.comboBoxSlideHorizOrientation.Items.AddRange(new object[] {
+            resources.GetString("comboBoxSlideHorizOrientation.Items"),
+            resources.GetString("comboBoxSlideHorizOrientation.Items1"),
+            resources.GetString("comboBoxSlideHorizOrientation.Items2")});
+            this.comboBoxSlideHorizOrientation.Name = "comboBoxSlideHorizOrientation";
+            this.comboBoxSlideHorizOrientation.SelectedIndexChanged += new System.EventHandler(this.comboBoxSlideHorizOrientation_SelectedIndexChanged);
             // 
             // checkedListBoxTags
             // 
@@ -447,6 +489,7 @@
             // 
             // tabPageContent
             // 
+            this.tabPageContent.Controls.Add(this.panelPreview);
             this.tabPageContent.Controls.Add(this.labelGUID);
             this.tabPageContent.Controls.Add(this.textBoxRightsManagement);
             this.tabPageContent.Controls.Add(this.label18);
@@ -456,10 +499,6 @@
             this.tabPageContent.Controls.Add(this.label16);
             this.tabPageContent.Controls.Add(this.textBoxAuthors);
             this.tabPageContent.Controls.Add(this.label15);
-            this.tabPageContent.Controls.Add(this.label1);
-            this.tabPageContent.Controls.Add(this.label3);
-            this.tabPageContent.Controls.Add(this.comboBoxSlideVertOrientation);
-            this.tabPageContent.Controls.Add(this.comboBoxSlideHorizOrientation);
             this.tabPageContent.Controls.Add(this.buttonDuplicateSlide);
             this.tabPageContent.Controls.Add(this.textBoxCCLISongID);
             this.tabPageContent.Controls.Add(this.textBoxCopyright);
@@ -470,7 +509,6 @@
             this.tabPageContent.Controls.Add(this.buttonAddSlide);
             this.tabPageContent.Controls.Add(this.splitContainer1);
             this.tabPageContent.Controls.Add(this.label11);
-            this.tabPageContent.Controls.Add(this.pictureBoxPreview);
             this.tabPageContent.Controls.Add(this.treeViewContents);
             this.tabPageContent.Controls.Add(this.buttonAddItem);
             this.tabPageContent.Controls.Add(this.buttonMoveUp);
@@ -479,6 +517,24 @@
             resources.ApplyResources(this.tabPageContent, "tabPageContent");
             this.tabPageContent.Name = "tabPageContent";
             this.tabPageContent.UseVisualStyleBackColor = true;
+            // 
+            // panelPreview
+            // 
+            resources.ApplyResources(this.panelPreview, "panelPreview");
+            this.panelPreview.BackColor = System.Drawing.Color.Black;
+            this.panelPreview.Controls.Add(this.pictureBoxPreview);
+            this.panelPreview.Name = "panelPreview";
+            this.panelPreview.Resize += new System.EventHandler(this.panelPreview_Resize);
+            // 
+            // pictureBoxPreview
+            // 
+            resources.ApplyResources(this.pictureBoxPreview, "pictureBoxPreview");
+            this.pictureBoxPreview.BackColor = System.Drawing.Color.Black;
+            this.pictureBoxPreview.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pictureBoxPreview.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.pictureBoxPreview.Name = "pictureBoxPreview";
+            this.pictureBoxPreview.TabStop = false;
+            this.pictureBoxPreview.Click += new System.EventHandler(this.buttonSlideBackground_Click);
             // 
             // labelGUID
             // 
@@ -525,40 +581,6 @@
             // 
             resources.ApplyResources(this.label15, "label15");
             this.label15.Name = "label15";
-            // 
-            // label1
-            // 
-            resources.ApplyResources(this.label1, "label1");
-            this.label1.Name = "label1";
-            // 
-            // label3
-            // 
-            resources.ApplyResources(this.label3, "label3");
-            this.label3.Name = "label3";
-            // 
-            // comboBoxSlideVertOrientation
-            // 
-            resources.ApplyResources(this.comboBoxSlideVertOrientation, "comboBoxSlideVertOrientation");
-            this.comboBoxSlideVertOrientation.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboBoxSlideVertOrientation.FormattingEnabled = true;
-            this.comboBoxSlideVertOrientation.Items.AddRange(new object[] {
-            resources.GetString("comboBoxSlideVertOrientation.Items"),
-            resources.GetString("comboBoxSlideVertOrientation.Items1"),
-            resources.GetString("comboBoxSlideVertOrientation.Items2")});
-            this.comboBoxSlideVertOrientation.Name = "comboBoxSlideVertOrientation";
-            this.comboBoxSlideVertOrientation.SelectedIndexChanged += new System.EventHandler(this.comboBoxSlideVertOrientation_SelectedIndexChanged);
-            // 
-            // comboBoxSlideHorizOrientation
-            // 
-            resources.ApplyResources(this.comboBoxSlideHorizOrientation, "comboBoxSlideHorizOrientation");
-            this.comboBoxSlideHorizOrientation.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboBoxSlideHorizOrientation.FormattingEnabled = true;
-            this.comboBoxSlideHorizOrientation.Items.AddRange(new object[] {
-            resources.GetString("comboBoxSlideHorizOrientation.Items"),
-            resources.GetString("comboBoxSlideHorizOrientation.Items1"),
-            resources.GetString("comboBoxSlideHorizOrientation.Items2")});
-            this.comboBoxSlideHorizOrientation.Name = "comboBoxSlideHorizOrientation";
-            this.comboBoxSlideHorizOrientation.SelectedIndexChanged += new System.EventHandler(this.comboBoxSlideHorizOrientation_SelectedIndexChanged);
             // 
             // buttonDuplicateSlide
             // 
@@ -613,27 +635,6 @@
             resources.ApplyResources(this.label11, "label11");
             this.label11.Name = "label11";
             // 
-            // pictureBoxPreview
-            // 
-            resources.ApplyResources(this.pictureBoxPreview, "pictureBoxPreview");
-            this.pictureBoxPreview.BackColor = System.Drawing.Color.Black;
-            this.pictureBoxPreview.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pictureBoxPreview.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.pictureBoxPreview.Name = "pictureBoxPreview";
-            this.pictureBoxPreview.TabStop = false;
-            this.pictureBoxPreview.Click += new System.EventHandler(this.buttonSlideBackground_Click);
-            // 
-            // treeViewContents
-            // 
-            resources.ApplyResources(this.treeViewContents, "treeViewContents");
-            this.treeViewContents.HideSelection = false;
-            this.treeViewContents.Name = "treeViewContents";
-            this.treeViewContents.ValidateLabelEdit += new TreeEx.TreeLE.ValidateLabelEditEventHandler(this.treeViewContents_ValidateLabelEdit);
-            this.treeViewContents.BeforeLabelEdit += new System.Windows.Forms.NodeLabelEditEventHandler(this.treeViewContents_BeforeLabelEdit);
-            this.treeViewContents.AfterLabelEdit += new System.Windows.Forms.NodeLabelEditEventHandler(this.treeViewContents_AfterLabelEdit);
-            this.treeViewContents.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.treeViewContents_AfterSelect);
-            this.treeViewContents.KeyDown += new System.Windows.Forms.KeyEventHandler(this.treeViewContents_KeyDown);
-            // 
             // buttonAddItem
             // 
             resources.ApplyResources(this.buttonAddItem, "buttonAddItem");
@@ -674,6 +675,17 @@
             this.tabControlTextLayer.Name = "tabControlTextLayer";
             this.tabControlTextLayer.SelectedIndex = 0;
             // 
+            // treeViewContents
+            // 
+            resources.ApplyResources(this.treeViewContents, "treeViewContents");
+            this.treeViewContents.HideSelection = false;
+            this.treeViewContents.Name = "treeViewContents";
+            this.treeViewContents.ValidateLabelEdit += new TreeEx.TreeLE.ValidateLabelEditEventHandler(this.treeViewContents_ValidateLabelEdit);
+            this.treeViewContents.BeforeLabelEdit += new System.Windows.Forms.NodeLabelEditEventHandler(this.treeViewContents_BeforeLabelEdit);
+            this.treeViewContents.AfterLabelEdit += new System.Windows.Forms.NodeLabelEditEventHandler(this.treeViewContents_AfterLabelEdit);
+            this.treeViewContents.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.treeViewContents_AfterSelect);
+            this.treeViewContents.KeyDown += new System.Windows.Forms.KeyEventHandler(this.treeViewContents_KeyDown);
+            // 
             // SongEditorChild
             // 
             resources.ApplyResources(this, "$this");
@@ -696,6 +708,7 @@
             this.tabPageFormatting.ResumeLayout(false);
             this.tabPageFormatting.PerformLayout();
             this.groupBox1.ResumeLayout(false);
+            this.groupBox1.PerformLayout();
             this.groupBox4.ResumeLayout(false);
             this.groupBox4.PerformLayout();
             this.groupBox2.ResumeLayout(false);
@@ -703,6 +716,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.trackBarLineSpacing)).EndInit();
             this.tabPageContent.ResumeLayout(false);
             this.tabPageContent.PerformLayout();
+            this.panelPreview.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxPreview)).EndInit();
             this.tabControlTextLayer.ResumeLayout(false);
             this.ResumeLayout(false);
@@ -764,9 +778,6 @@
         private System.Windows.Forms.Button buttonDelItem;
         private System.Windows.Forms.Button buttonMoveDown;
         private System.Windows.Forms.TabControl tabControlTextLayer;
-        private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.ComboBox comboBoxSlideVertOrientation;
-        private System.Windows.Forms.ComboBox comboBoxSlideHorizOrientation;
         private System.Windows.Forms.GroupBox groupBox4;
         private System.Windows.Forms.CheckBox checkBoxQASegmentation;
         private System.Windows.Forms.TextBox textBoxComment;
@@ -777,7 +788,6 @@
         private System.Windows.Forms.Label label14;
         private System.Windows.Forms.CheckedListBox checkedListBoxTags;
         private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox textBoxPublisher;
         private System.Windows.Forms.Label label16;
         private System.Windows.Forms.TextBox textBoxAuthors;
@@ -787,5 +797,10 @@
         private System.Windows.Forms.TextBox textBoxRightsManagement;
         private System.Windows.Forms.Label label18;
         private System.Windows.Forms.Label labelGUID;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.ComboBox comboBoxSlideVertOrientation;
+        private System.Windows.Forms.ComboBox comboBoxSlideHorizOrientation;
+        private System.Windows.Forms.Panel panelPreview;
     }
 }

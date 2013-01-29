@@ -387,11 +387,11 @@ namespace Pbp.Forms
 
             if (SongManager.Instance.CurrentSong.Song.Comment != String.Empty || SongManager.Instance.CurrentSong.Song.HasQA())
             {
-                toolStripButton3.Image = Pbp.Properties.Resources.highlight_red;
+                toolStripButton3.Image = Pbp.Properties.Resources.highlight_red__36;
             }
             else
             {
-                toolStripButton3.Image = Pbp.Properties.Resources.highlight;
+                toolStripButton3.Image = Pbp.Properties.Resources.highlight_36;
             }
             if (SongManager.Instance.CurrentSong.Song.HasTranslation)
             {
@@ -1214,7 +1214,7 @@ namespace Pbp.Forms
 
         private void toolStripButtonDataFolder_ButtonClick(object sender, EventArgs e)
         {
-            toolStripButtonDataFolder.ShowDropDown();
+            Process.Start(Settings.Default.DataDirectory);
         }
 
         private void datenverzeichnisToolStripMenuItem_Click(object sender, EventArgs e)
@@ -1350,11 +1350,11 @@ namespace Pbp.Forms
                     if (SongManager.Instance.CurrentSong.Song.Comment != String.Empty ||
                         SongManager.Instance.CurrentSong.Song.HasQA())
                     {
-                        toolStripButton3.Image = Pbp.Properties.Resources.highlight_red;
+                        toolStripButton3.Image = Pbp.Properties.Resources.highlight_red__36;
                     }
                     else
                     {
-                        toolStripButton3.Image = Pbp.Properties.Resources.highlight;
+                        toolStripButton3.Image = Pbp.Properties.Resources.highlight_36;
                     }
                 }
             }
@@ -1831,6 +1831,11 @@ namespace Pbp.Forms
                     SongManager.Instance.CurrentSong.SwitchTextAndTranlation = true;
                 }
             }
+        }
+
+        private void toolStripButtonDataFolder_Click(object sender, EventArgs e)
+        {
+            Process.Start(Settings.Default.DataDirectory);
         }
 
     }

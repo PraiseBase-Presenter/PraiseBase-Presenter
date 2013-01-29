@@ -77,9 +77,8 @@
             this.openToolStripButton = new System.Windows.Forms.ToolStripButton();
             this.saveToolStripButton = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
-            this.toolStripButton2 = new System.Windows.Forms.ToolStripButton();
-            this.toolStripSeparator9 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripButton1 = new System.Windows.Forms.ToolStripButton();
+            this.toolStripButton2 = new System.Windows.Forms.ToolStripButton();
             this.toolTip = new System.Windows.Forms.ToolTip(this.components);
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
@@ -384,21 +383,21 @@
             // 
             this.toolStrip.AllowMerge = false;
             resources.ApplyResources(this.toolStrip, "toolStrip");
-            this.toolStrip.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
+            this.toolStrip.ImageScalingSize = new System.Drawing.Size(36, 36);
             this.toolStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.newToolStripButton,
             this.openToolStripButton,
             this.saveToolStripButton,
             this.toolStripSeparator1,
-            this.toolStripButton2,
-            this.toolStripSeparator9,
-            this.toolStripButton1});
+            this.toolStripButton1,
+            this.toolStripButton2});
             this.toolStrip.Name = "toolStrip";
             this.toolStrip.TextDirection = System.Windows.Forms.ToolStripTextDirection.Vertical90;
             // 
             // newToolStripButton
             // 
             this.newToolStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.newToolStripButton.Image = global::Pbp.Properties.Resources.newsong_36;
             resources.ApplyResources(this.newToolStripButton, "newToolStripButton");
             this.newToolStripButton.Name = "newToolStripButton";
             this.newToolStripButton.Click += new System.EventHandler(this.ShowNewForm);
@@ -406,6 +405,7 @@
             // openToolStripButton
             // 
             this.openToolStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.openToolStripButton.Image = global::Pbp.Properties.Resources.editsong_36;
             resources.ApplyResources(this.openToolStripButton, "openToolStripButton");
             this.openToolStripButton.Name = "openToolStripButton";
             this.openToolStripButton.Click += new System.EventHandler(this.OpenFile);
@@ -413,6 +413,7 @@
             // saveToolStripButton
             // 
             this.saveToolStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.saveToolStripButton.Image = global::Pbp.Properties.Resources.save_36;
             resources.ApplyResources(this.saveToolStripButton, "saveToolStripButton");
             this.saveToolStripButton.Name = "saveToolStripButton";
             this.saveToolStripButton.Click += new System.EventHandler(this.saveChild);
@@ -423,25 +424,21 @@
             resources.ApplyResources(this.toolStripSeparator1, "toolStripSeparator1");
             this.toolStripSeparator1.TextDirection = System.Windows.Forms.ToolStripTextDirection.Vertical90;
             // 
-            // toolStripButton2
-            // 
-            this.toolStripButton2.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            resources.ApplyResources(this.toolStripButton2, "toolStripButton2");
-            this.toolStripButton2.Name = "toolStripButton2";
-            this.toolStripButton2.Click += new System.EventHandler(this.toolStripButton2_Click);
-            // 
-            // toolStripSeparator9
-            // 
-            this.toolStripSeparator9.Name = "toolStripSeparator9";
-            resources.ApplyResources(this.toolStripSeparator9, "toolStripSeparator9");
-            this.toolStripSeparator9.TextDirection = System.Windows.Forms.ToolStripTextDirection.Vertical90;
-            // 
             // toolStripButton1
             // 
             this.toolStripButton1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.toolStripButton1.Image = global::Pbp.Properties.Resources.advancedsettings_36;
             resources.ApplyResources(this.toolStripButton1, "toolStripButton1");
             this.toolStripButton1.Name = "toolStripButton1";
             this.toolStripButton1.Click += new System.EventHandler(this.optionsToolStripMenuItem_Click);
+            // 
+            // toolStripButton2
+            // 
+            this.toolStripButton2.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.toolStripButton2.Image = global::Pbp.Properties.Resources.folder_favorites_36;
+            resources.ApplyResources(this.toolStripButton2, "toolStripButton2");
+            this.toolStripButton2.Name = "toolStripButton2";
+            this.toolStripButton2.Click += new System.EventHandler(this.toolStripButton2_Click);
             // 
             // statusStrip1
             // 
@@ -530,8 +527,7 @@
 		private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
 		private System.Windows.Forms.ToolStripMenuItem datenverzeichnisAnzeigenToolStripMenuItem;
 		private System.Windows.Forms.ToolStripSeparator toolStripSeparator5;
-		private System.Windows.Forms.ToolStripButton toolStripButton2;
-		private System.Windows.Forms.ToolStripSeparator toolStripSeparator9;
+        private System.Windows.Forms.ToolStripButton toolStripButton2;
         private System.Windows.Forms.ToolStripMenuItem fehlerMeldenToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem spracheToolStripMenuItem;
     }

@@ -167,12 +167,7 @@
             this.toolStripButton1 = new System.Windows.Forms.ToolStripButton();
             this.toolStripButton3 = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator7 = new System.Windows.Forms.ToolStripSeparator();
-            this.toolStripButtonDataFolder = new System.Windows.Forms.ToolStripSplitButton();
-            this.datenverzeichnisToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparator8 = new System.Windows.Forms.ToolStripSeparator();
-            this.liederToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.bilderToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.setlistenToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripButtonDataFolder = new System.Windows.Forms.ToolStripButton();
             this.toolStripButton4 = new System.Windows.Forms.ToolStripButton();
             this.toolStripButtonDisplaySettings = new System.Windows.Forms.ToolStripButton();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
@@ -1205,14 +1200,14 @@
             this.toolStripButtonProjectionOff.CheckState = System.Windows.Forms.CheckState.Checked;
             this.toolStripButtonProjectionOff.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
             resources.ApplyResources(this.toolStripButtonProjectionOff, "toolStripButtonProjectionOff");
-            this.toolStripButtonProjectionOff.Image = global::Pbp.Properties.Resources.Projection_off;
+            this.toolStripButtonProjectionOff.Image = global::Pbp.Properties.Resources.Projection_off_36;
             this.toolStripButtonProjectionOff.Name = "toolStripButtonProjectionOff";
             this.toolStripButtonProjectionOff.Click += new System.EventHandler(this.toggleProjection);
             // 
             // toolStripButtonBlackout
             // 
             this.toolStripButtonBlackout.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolStripButtonBlackout.Image = global::Pbp.Properties.Resources.Blackout_on;
+            this.toolStripButtonBlackout.Image = global::Pbp.Properties.Resources.Blackout_on_36;
             resources.ApplyResources(this.toolStripButtonBlackout, "toolStripButtonBlackout");
             this.toolStripButtonBlackout.Name = "toolStripButtonBlackout";
             this.toolStripButtonBlackout.Click += new System.EventHandler(this.toggleProjection);
@@ -1220,7 +1215,7 @@
             // toolStripButtonProjectionOn
             // 
             this.toolStripButtonProjectionOn.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolStripButtonProjectionOn.Image = global::Pbp.Properties.Resources.Projection_on;
+            this.toolStripButtonProjectionOn.Image = global::Pbp.Properties.Resources.Projection_on_36;
             resources.ApplyResources(this.toolStripButtonProjectionOn, "toolStripButtonProjectionOn");
             this.toolStripButtonProjectionOn.Name = "toolStripButtonProjectionOn";
             this.toolStripButtonProjectionOn.Click += new System.EventHandler(this.toggleProjection);
@@ -1233,7 +1228,7 @@
             // toolStripButton5
             // 
             this.toolStripButton5.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolStripButton5.Image = global::Pbp.Properties.Resources.editor;
+            this.toolStripButton5.Image = global::Pbp.Properties.Resources.kate_36;
             resources.ApplyResources(this.toolStripButton5, "toolStripButton5");
             this.toolStripButton5.Name = "toolStripButton5";
             this.toolStripButton5.Click += new System.EventHandler(this.toolStripButton5_Click);
@@ -1241,7 +1236,7 @@
             // toolStripButtonOpenCurrentSong
             // 
             this.toolStripButtonOpenCurrentSong.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolStripButtonOpenCurrentSong.Image = global::Pbp.Properties.Resources.editsong;
+            this.toolStripButtonOpenCurrentSong.Image = global::Pbp.Properties.Resources.editsong_36;
             resources.ApplyResources(this.toolStripButtonOpenCurrentSong, "toolStripButtonOpenCurrentSong");
             this.toolStripButtonOpenCurrentSong.Name = "toolStripButtonOpenCurrentSong";
             this.toolStripButtonOpenCurrentSong.Click += new System.EventHandler(this.toolStripButtonOpenCurrentSong_Click);
@@ -1249,7 +1244,7 @@
             // toolStripButton1
             // 
             this.toolStripButton1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolStripButton1.Image = global::Pbp.Properties.Resources.search;
+            this.toolStripButton1.Image = global::Pbp.Properties.Resources.search_36;
             resources.ApplyResources(this.toolStripButton1, "toolStripButton1");
             this.toolStripButton1.Name = "toolStripButton1";
             this.toolStripButton1.Click += new System.EventHandler(this.toolStripMenuItem3_Click);
@@ -1257,7 +1252,7 @@
             // toolStripButton3
             // 
             this.toolStripButton3.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolStripButton3.Image = global::Pbp.Properties.Resources.highlight;
+            this.toolStripButton3.Image = global::Pbp.Properties.Resources.highlight_36;
             resources.ApplyResources(this.toolStripButton3, "toolStripButton3");
             this.toolStripButton3.Name = "toolStripButton3";
             this.toolStripButton3.Click += new System.EventHandler(this.toolStripButton3_Click);
@@ -1270,50 +1265,15 @@
             // toolStripButtonDataFolder
             // 
             this.toolStripButtonDataFolder.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolStripButtonDataFolder.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.datenverzeichnisToolStripMenuItem,
-            this.toolStripSeparator8,
-            this.liederToolStripMenuItem,
-            this.bilderToolStripMenuItem,
-            this.setlistenToolStripMenuItem});
-            this.toolStripButtonDataFolder.Image = global::Pbp.Properties.Resources.folder_favorites;
+            this.toolStripButtonDataFolder.Image = global::Pbp.Properties.Resources.folder_favorites_36;
             resources.ApplyResources(this.toolStripButtonDataFolder, "toolStripButtonDataFolder");
             this.toolStripButtonDataFolder.Name = "toolStripButtonDataFolder";
-            this.toolStripButtonDataFolder.ButtonClick += new System.EventHandler(this.toolStripButtonDataFolder_ButtonClick);
-            // 
-            // datenverzeichnisToolStripMenuItem
-            // 
-            this.datenverzeichnisToolStripMenuItem.Name = "datenverzeichnisToolStripMenuItem";
-            resources.ApplyResources(this.datenverzeichnisToolStripMenuItem, "datenverzeichnisToolStripMenuItem");
-            this.datenverzeichnisToolStripMenuItem.Click += new System.EventHandler(this.datenverzeichnisToolStripMenuItem_Click);
-            // 
-            // toolStripSeparator8
-            // 
-            this.toolStripSeparator8.Name = "toolStripSeparator8";
-            resources.ApplyResources(this.toolStripSeparator8, "toolStripSeparator8");
-            // 
-            // liederToolStripMenuItem
-            // 
-            this.liederToolStripMenuItem.Name = "liederToolStripMenuItem";
-            resources.ApplyResources(this.liederToolStripMenuItem, "liederToolStripMenuItem");
-            this.liederToolStripMenuItem.Click += new System.EventHandler(this.liederToolStripMenuItem_Click);
-            // 
-            // bilderToolStripMenuItem
-            // 
-            this.bilderToolStripMenuItem.Name = "bilderToolStripMenuItem";
-            resources.ApplyResources(this.bilderToolStripMenuItem, "bilderToolStripMenuItem");
-            this.bilderToolStripMenuItem.Click += new System.EventHandler(this.bilderToolStripMenuItem_Click);
-            // 
-            // setlistenToolStripMenuItem
-            // 
-            this.setlistenToolStripMenuItem.Name = "setlistenToolStripMenuItem";
-            resources.ApplyResources(this.setlistenToolStripMenuItem, "setlistenToolStripMenuItem");
-            this.setlistenToolStripMenuItem.Click += new System.EventHandler(this.setlistenToolStripMenuItem_Click);
+            this.toolStripButtonDataFolder.Click += new System.EventHandler(this.toolStripButtonDataFolder_Click);
             // 
             // toolStripButton4
             // 
             this.toolStripButton4.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolStripButton4.Image = global::Pbp.Properties.Resources.advancedsettings;
+            this.toolStripButton4.Image = global::Pbp.Properties.Resources.advancedsettings_36;
             resources.ApplyResources(this.toolStripButton4, "toolStripButton4");
             this.toolStripButton4.Name = "toolStripButton4";
             this.toolStripButton4.Click += new System.EventHandler(this.toolStripButton4_Click);
@@ -1321,15 +1281,14 @@
             // toolStripButtonDisplaySettings
             // 
             this.toolStripButtonDisplaySettings.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolStripButtonDisplaySettings.Image = global::Pbp.Properties.Resources.displaysettings;
+            this.toolStripButtonDisplaySettings.Image = global::Pbp.Properties.Resources.background_36;
             resources.ApplyResources(this.toolStripButtonDisplaySettings, "toolStripButtonDisplaySettings");
             this.toolStripButtonDisplaySettings.Name = "toolStripButtonDisplaySettings";
             this.toolStripButtonDisplaySettings.Click += new System.EventHandler(this.toolStripButtonDisplaySettings_Click);
             // 
             // toolStrip1
             // 
-            this.toolStrip1.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
-            this.toolStrip1.ImageScalingSize = new System.Drawing.Size(64, 64);
+            this.toolStrip1.ImageScalingSize = new System.Drawing.Size(36, 36);
             this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripButtonProjectionOff,
             this.toolStripButtonBlackout,
@@ -1610,12 +1569,7 @@
         private System.Windows.Forms.ToolStripButton toolStripButton1;
         private System.Windows.Forms.ToolStripButton toolStripButton3;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator7;
-        private System.Windows.Forms.ToolStripSplitButton toolStripButtonDataFolder;
-        private System.Windows.Forms.ToolStripMenuItem datenverzeichnisToolStripMenuItem;
-        private System.Windows.Forms.ToolStripSeparator toolStripSeparator8;
-        private System.Windows.Forms.ToolStripMenuItem liederToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem bilderToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem setlistenToolStripMenuItem;
+        private System.Windows.Forms.ToolStripButton toolStripButtonDataFolder;
         private System.Windows.Forms.ToolStripButton toolStripButton4;
         private System.Windows.Forms.ToolStripButton toolStripButtonDisplaySettings;
         private System.Windows.Forms.ToolStrip toolStrip1;

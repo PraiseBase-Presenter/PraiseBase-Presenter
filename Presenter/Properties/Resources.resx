@@ -419,8 +419,47 @@
   <data name="translate_small" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Application\translate_small.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="translate_cross_small" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Application\translate_cross_small.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="advancedsettings_36" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Application\advancedsettings_36.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="background_36" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Application\background_36.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Blackout_on_36" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Application\Blackout on 36.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="folder_favorites_36" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Application\folder_favorites_36.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="highlight_36" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Application\highlight_36.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="highlight_red__36" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Application\highlight_red _36.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="kate_36" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Application\kate_36.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Projection_off_36" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Application\Projection off 36.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Projection_on_36" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Application\Projection on 36.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="search_36" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Application\search_36.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="editsong_36" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Application\editsong_36.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="newsong_36" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Application\newsong_36.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="save_36" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Application\save_36.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>
