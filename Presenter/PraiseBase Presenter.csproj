@@ -605,7 +605,9 @@
     <Content Include="Resources\Dist\Bibles\luther1912.xml" />
     <Content Include="Resources\Dist\Bibles\sf_luther_1545_letzte_hand_rev1.xml" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

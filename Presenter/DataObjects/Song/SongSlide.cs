@@ -50,11 +50,6 @@ namespace Pbp.Data.Song
         public List<string> Lines { get; set; }
 
         /// <summary>
-        /// Part name
-        /// </summary>
-        public string PartName { get; set; }
-
-        /// <summary>
         /// All translation lines of this slide
         /// </summary>
         public List<string> Translation { get; set; }
@@ -68,6 +63,11 @@ namespace Pbp.Data.Song
         /// Size of the main text. This is used to maintain compatibility with PowerPraise
         /// </summary>
         public float TextSize { get; set; }
+
+        /// <summary>
+        /// Part name
+        /// </summary>
+        public string PartName { get; set; }
 
         /// <summary>
         /// Indicates wether this slide has a translation
@@ -187,15 +187,12 @@ namespace Pbp.Data.Song
         /// <returns>A duplicate of this slide</returns>
         public object Clone()
         {
-            var res = new SongSlide(_ownerSong) { ImageNumber = ImageNumber };
-            foreach (string obj in Lines)
-            {
-                res.Lines.Add(obj);
-            }
-            foreach (string obj in Translation)
-            {
-                res.Translation.Add(obj);
-            }
+            var res = new SongSlide(_ownerSong);
+            res.Text = Text;
+            res.TranslationText = TranslationText;
+            res.PartName = PartName;
+            res.TextSize = TextSize;
+            res.ImageNumber = ImageNumber;
             return res;
         }
 

@@ -157,6 +157,19 @@ namespace Pbp.Forms
             textBoxAuthors.DataBindings.Add("Text", sng, "AuthorString");
             textBoxSongbooks.DataBindings.Add("Text", sng, "SongBooksString");
 
+            checkBoxOutlineEnabled.DataBindings.Add("Checked", sng, "TextOutlineEnabled", false, DataSourceUpdateMode.OnPropertyChanged);
+            checkBoxShadowEnabled.DataBindings.Add("Checked", sng, "TextShadowEnabled", false, DataSourceUpdateMode.OnPropertyChanged);
+            
+            numericUpDownShadowDirection.DataBindings.Add("Value", sng.MainText.Shadow, "Direction", false, DataSourceUpdateMode.OnPropertyChanged);
+
+            numericUpDownMainTextLineSpacing.DataBindings.Add("Value", sng.MainText, "LineSpacing", false, DataSourceUpdateMode.OnPropertyChanged);
+            numericUpDownMainTextOutline.DataBindings.Add("Value", sng.MainText.Outline, "Width", false, DataSourceUpdateMode.OnPropertyChanged);
+            numericUpDownMainTextShadow.DataBindings.Add("Value", sng.MainText.Shadow, "Distance", false, DataSourceUpdateMode.OnPropertyChanged);
+
+            numericUpDownTranslationTextLineSpacing.DataBindings.Add("Value", sng.TranslationText, "LineSpacing", false, DataSourceUpdateMode.OnPropertyChanged);
+            numericUpDownTranslationTextOutline.DataBindings.Add("Value", sng.TranslationText.Outline, "Width", false, DataSourceUpdateMode.OnPropertyChanged);
+            numericUpDownTranslationTextShadow.DataBindings.Add("Value", sng.TranslationText.Shadow, "Distance", false, DataSourceUpdateMode.OnPropertyChanged);
+
             populateTree();
             treeViewContents.SelectedNode = treeViewContents.Nodes[0];
             valid = true;
@@ -170,25 +183,14 @@ namespace Pbp.Forms
             checkBoxQATranslation.Checked = sng.GetQA(SongQualityAssuranceIndicator.Translation);
             checkBoxQASegmentation.Checked = sng.GetQA(SongQualityAssuranceIndicator.Segmentation);
 
-            labelFont.Text = getFontNameString(sng.MainText.Font);
-            labelFontTranslation.Text = getFontNameString(sng.TranslationText.Font);
             buttonChooseProjectionForeColor.BackColor = sng.MainText.Color;
             buttonTranslationColor.BackColor = sng.TranslationText.Color;
-
-            trackBarLineSpacing.Value = sng.MainText.LineSpacing;
-            labelLineSpacing.Text = sng.MainText.LineSpacing.ToString();
-
-            //comboBoxSlideHorizOrientation.DataSource = Pbp.DataObjects.EnumHelper.ToList(typeof(TextOrientationHorizontal));
-            //comboBoxSlideHorizOrientation.DisplayMember = "Value";
-            //comboBoxSlideHorizOrientation.ValueMember = "Key";
+            
             comboBoxSlideHorizOrientation.DataSource = Enum.GetValues(typeof(TextOrientationHorizontal));
-            comboBoxSlideHorizOrientation.DataBindings.Add("SelectedItem", sng, "HorizontalTextOrientation");
-
-            //comboBoxSlideVertOrientation.DataSource = Pbp.DataObjects.EnumHelper.ToList(typeof(TextOrientationVertical));
-            //comboBoxSlideVertOrientation.DisplayMember = "Value";
-            //comboBoxSlideVertOrientation.ValueMember = "Key";
+            comboBoxSlideHorizOrientation.DataBindings.Add("SelectedItem", sng, "HorizontalTextOrientation", false, DataSourceUpdateMode.OnPropertyChanged);
+          
             comboBoxSlideVertOrientation.DataSource = Enum.GetValues(typeof(TextOrientationVertical));
-            comboBoxSlideVertOrientation.DataBindings.Add("SelectedItem", sng, "VerticalTextOrientation");
+            comboBoxSlideVertOrientation.DataBindings.Add("SelectedItem", sng, "VerticalTextOrientation", false, DataSourceUpdateMode.OnPropertyChanged);
 
             comboBoxLanguage.Items.Clear();
             comboBoxLanguage.Text = sng.Language;
@@ -413,6 +415,8 @@ namespace Pbp.Forms
         private void EditorChild_Load(object sender, EventArgs e)
         {
             ((SongEditor)MdiParent).setStatus(string.Format(Properties.StringResources.LoadedSong, sng.Title));
+
+            previewSlide();
         }
 
         private void buttonAddNewSlide_Click(object sender, EventArgs e)
@@ -563,7 +567,6 @@ namespace Pbp.Forms
             if (dlg.ShowDialog() == DialogResult.OK)
             {
                 sng.MainText.Font = dlg.Font;
-                labelFont.Text = getFontNameString(sng.MainText.Font);
                 previewSlide();
             }
         }
@@ -575,7 +578,6 @@ namespace Pbp.Forms
             if (dlg.ShowDialog() == DialogResult.OK)
             {
                 sng.TranslationText.Font = dlg.Font;
-                labelFontTranslation.Text = getFontNameString(sng.TranslationText.Font);
                 previewSlide();
             }
         }
@@ -602,13 +604,6 @@ namespace Pbp.Forms
                 buttonTranslationColor.BackColor = sng.TranslationText.Color;
                 previewSlide();
             }
-        }
-
-        private void trackBarLineSpacing_Scroll(object sender, EventArgs e)
-        {
-            sng.MainText.LineSpacing = trackBarLineSpacing.Value;
-            labelLineSpacing.Text = trackBarLineSpacing.Value.ToString();
-            previewSlide();
         }
 
         private void buttonDelSlide_Click(object sender, EventArgs e)
@@ -1081,6 +1076,60 @@ namespace Pbp.Forms
 
         private void textBoxSongTranslation_KeyUp(object sender, KeyEventArgs e)
         {
+            previewSlide();
+        }
+
+        private void numericUpDownMainTextLineSpacing_ValueChanged(object sender, EventArgs e)
+        {
+            if (numericUpDownMainTextLineSpacing.DataBindings.Count > 0)
+            {
+                numericUpDownMainTextLineSpacing.DataBindings[0].WriteValue();
+            }
+            previewSlide();
+        }
+
+        private void numericUpDownTranslationTextLineSpacing_ValueChanged(object sender, EventArgs e)
+        {
+            if (numericUpDownTranslationTextLineSpacing.DataBindings.Count > 0)
+            {
+                numericUpDownTranslationTextLineSpacing.DataBindings[0].WriteValue();
+            }
+            previewSlide();
+        }
+
+        private void checkBoxOutlineEnabled_CheckedChanged(object sender, EventArgs e)
+        {
+            numericUpDownMainTextOutline.Enabled = checkBoxOutlineEnabled.Checked;
+            numericUpDownTranslationTextOutline.Enabled = checkBoxOutlineEnabled.Checked;
+            label20.Enabled = checkBoxOutlineEnabled.Checked;
+            label23.Enabled = checkBoxOutlineEnabled.Checked;
+        }
+
+        private void checkBoxShadowEnabled_CheckedChanged(object sender, EventArgs e)
+        {
+            numericUpDownMainTextShadow.Enabled = checkBoxShadowEnabled.Checked;
+            numericUpDownTranslationTextShadow.Enabled = checkBoxShadowEnabled.Checked;
+            numericUpDownShadowDirection.Enabled = checkBoxShadowEnabled.Checked;
+            label21.Enabled = checkBoxShadowEnabled.Checked;
+            label22.Enabled = checkBoxShadowEnabled.Checked;
+            label24.Enabled = checkBoxShadowEnabled.Checked;
+        }
+
+        private void comboBoxSlideHorizOrientation_SelectedIndexChanged_1(object sender, EventArgs e)
+        {
+            if (comboBoxSlideHorizOrientation.DataBindings.Count > 0) 
+            {
+                comboBoxSlideHorizOrientation.DataBindings[0].WriteValue();
+            }
+            previewSlide();
+        }
+
+        private void comboBoxSlideVertOrientation_SelectedIndexChanged_1(object sender, EventArgs e)
+        {
+            if (comboBoxSlideVertOrientation.DataBindings.Count > 0)
+            {
+                comboBoxSlideVertOrientation.DataBindings[0].WriteValue();
+            }
             previewSlide();
         }
 
