@@ -81,6 +81,9 @@
     <Compile Include="Persistence\Writer\StatisticsWriter.cs" />
     <Compile Include="Persistence\Writer\XmlWriterHelper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Util\FileUtils.cs" />
+    <Compile Include="Util\ImageUtils.cs" />
+    <Compile Include="Util\StringUtils.cs" />
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Service References\" />

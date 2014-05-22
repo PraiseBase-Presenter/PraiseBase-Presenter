@@ -230,9 +230,6 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Utils\FileUtils.cs" />
-    <Compile Include="Utils\ImageUtils.cs" />
-    <Compile Include="Utils\StringUtils.cs" />
     <None Include="ClassDiagram1.cd" />
     <None Include="Properties\Application\translate_disabled_small.png" />
     <None Include="Properties\Application\translate_small.png" />

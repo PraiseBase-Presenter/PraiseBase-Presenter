@@ -174,7 +174,7 @@ namespace Test
             target.Save(filename, sng);
 
             try {
-                Pbp.Utils.FileUtils.FileEquals(filename, referenceFilename, true);
+                Pbp.Util.FileUtils.FileEquals(filename, referenceFilename, true);
             }
             catch (Exception e)
             {

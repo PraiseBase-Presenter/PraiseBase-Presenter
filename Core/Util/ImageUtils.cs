@@ -33,9 +33,9 @@ using System.Drawing;
 using System.IO;
 using System.Drawing.Imaging;
 
-namespace Pbp.Utils
+namespace Pbp.Util
 {
-    class ImageUtils
+    public class ImageUtils
     {
         /// <summary>
         /// Resizes a given image to new dimensions

@@ -113,7 +113,7 @@ namespace Test
 
             target.Write(filename, expected);
 
-            Assert.IsTrue(Pbp.Utils.FileUtils.FileEquals(filename, referenceFilename));
+            Assert.IsTrue(Pbp.Util.FileUtils.FileEquals(filename, referenceFilename));
 
         }
     }

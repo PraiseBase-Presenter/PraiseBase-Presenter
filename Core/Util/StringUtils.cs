@@ -31,7 +31,7 @@ using System.Text;
 using System.Xml.Serialization;
 using System.IO;
 
-namespace Pbp
+namespace Pbp.Util
 {
     public static class StringUtils
     {

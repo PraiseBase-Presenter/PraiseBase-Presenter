@@ -33,7 +33,7 @@ using System.IO;
 using System.Windows.Forms;
 using Pbp.Forms;
 using Pbp.Properties;
-using Pbp.Utils;
+using Pbp.Util;
 
 namespace Pbp
 {

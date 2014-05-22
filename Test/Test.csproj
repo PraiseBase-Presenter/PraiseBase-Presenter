@@ -61,31 +61,24 @@
     </CodeAnalysisDependentAssemblyPaths>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CcliUsrSongFileReaderTest.cs" />
-    <Compile Include="OpenLyricsSongFileReaderTest.cs" />
-    <Compile Include="PowerPraiseSongFileReaderTest.cs" />
-    <Compile Include="PowerPraiseSongFileWriterTest.cs" />
+    <Compile Include="Persistence\CcliUsrSongFileReaderTest.cs" />
+    <Compile Include="Persistence\OpenLyricsSongFileReaderTest.cs" />
+    <Compile Include="Persistence\PowerPraiseSongFileReaderTest.cs" />
+    <Compile Include="Persistence\PowerPraiseSongFileWriterTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <Compile Include="StatisticsReaderTest.cs" />
-    <Compile Include="StatisticsWriterTest.cs" />
+    <Compile Include="Persistence\StatisticsReaderTest.cs" />
+    <Compile Include="Persistence\StatisticsWriterTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Core\PraiseBase Core Libraries.csproj">
       <Project>{67651B76-5ABD-4040-9A8F-3833130FC77D}</Project>
       <Name>PraiseBase Core Libraries</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Presenter\PraiseBase Presenter.csproj">
-      <Project>{33D2BC6A-0AD1-4E2E-AF35-FFFB744F22C6}</Project>
-      <Name>PraiseBase Presenter</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <Shadow Include="Test References\PraiseBase Presenter.accessor" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Properties\Resources.resx">
@@ -109,7 +102,9 @@
       <SubType>Designer</SubType>
     </Content>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Test References\" />
+  </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

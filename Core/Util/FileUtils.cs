@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.IO;
 
-namespace Pbp.Utils
+namespace Pbp.Util
 {
     public static class FileUtils
     {

@@ -29,6 +29,7 @@ using System;
 using System.Drawing;
 using Pbp.Properties;
 using Pbp.Model.Bible;
+using Pbp.Util;
 
 namespace Pbp
 {
