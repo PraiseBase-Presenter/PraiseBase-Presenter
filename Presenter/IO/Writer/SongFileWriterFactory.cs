@@ -31,7 +31,7 @@ using Pbp.Data.Song;
 using System.Reflection;
 using System.Linq;
 
-namespace Pbp.IO
+namespace Pbp.IO.Writer
 {
     public class SongFileWriterFactory
     {

@@ -31,6 +31,8 @@ using System.IO;
 using Pbp.Properties;
 using Pbp.IO;
 using Pbp.Data.Song;
+using Pbp.IO.Reader;
+using Pbp.IO.Writer;
 
 namespace Pbp
 {

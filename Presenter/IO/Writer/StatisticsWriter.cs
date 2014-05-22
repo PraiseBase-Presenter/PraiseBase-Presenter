@@ -32,7 +32,7 @@ using System.Text;
 using System.Xml;
 using Pbp.Data.Statistics;
 
-namespace Pbp.IO
+namespace Pbp.IO.Writer
 {
     class StatisticsWriter
     {

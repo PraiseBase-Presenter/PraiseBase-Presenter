@@ -31,7 +31,7 @@ using System.Linq;
 using System.Text;
 using System.Xml;
 
-namespace Pbp.IO
+namespace Pbp.IO.Writer
 {
     class XmlWriterHelper
     {

@@ -35,7 +35,7 @@ using Pbp.Data.Song;
 using Pbp.Data;
 using System.Drawing;
 
-namespace Pbp.IO
+namespace Pbp.IO.Reader
 {
     class OpenLyricsSongFileReader : SongFileReader
     {

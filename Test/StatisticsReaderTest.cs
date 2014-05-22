@@ -2,6 +2,7 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using Pbp.Data.Statistics;
+using Pbp.IO.Reader;
 
 namespace Test
 {

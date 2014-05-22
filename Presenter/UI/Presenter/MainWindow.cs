@@ -1140,7 +1140,7 @@ namespace Pbp.Forms
                 {
                     sl.Items.Add(SongManager.Instance.SongList[(Guid)listViewSetList.Items[i].Tag].Song);
                 }
-                Pbp.IO.SetlistWriter swr = new Pbp.IO.SetlistWriter();
+                Pbp.IO.Writer.SetlistWriter swr = new Pbp.IO.Writer.SetlistWriter();
                 swr.Write(dlg.FileName, sl);
             }
         }
@@ -1162,7 +1162,7 @@ namespace Pbp.Forms
             dlg.Title = StringResources.OpenSetlist;
             if (dlg.ShowDialog() == DialogResult.OK)
             {
-                Pbp.IO.SetlistReader sr = new Pbp.IO.SetlistReader();
+                Pbp.IO.Reader.SetlistReader sr = new Pbp.IO.Reader.SetlistReader();
                 try {
                     Pbp.Data.Setlist sl = sr.read(dlg.FileName);
                     if (sl.Items.Count > 0)

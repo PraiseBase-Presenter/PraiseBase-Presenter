@@ -3,6 +3,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using Pbp.Data.Statistics;
 using System.IO;
+using Pbp.IO.Writer;
 
 namespace Test
 {

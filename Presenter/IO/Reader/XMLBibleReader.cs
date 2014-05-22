@@ -33,9 +33,9 @@ using Pbp.Data.Bible;
 using System.Xml;
 using System.IO;
 
-namespace Pbp.IO
+namespace Pbp.IO.Reader
 {
-    public class XMLBibleReblader
+    public class XMLBibleReader
     {
         private bool GetNodeText(XmlTextReader textReader, string name, ref Bible target, string fieldName)
         {

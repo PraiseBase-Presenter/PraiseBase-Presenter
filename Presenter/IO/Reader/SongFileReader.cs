@@ -31,7 +31,7 @@ using Pbp.Data.Song;
 using System.Reflection;
 using System.Linq;
 
-namespace Pbp.IO
+namespace Pbp.IO.Reader
 {
     public abstract class SongFileReader
     {

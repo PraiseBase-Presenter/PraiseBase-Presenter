@@ -2,6 +2,7 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using Pbp.Data.Song;
+using Pbp.IO.Writer;
 
 namespace Test
 {

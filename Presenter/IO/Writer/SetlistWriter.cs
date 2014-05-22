@@ -32,9 +32,9 @@ using System.Text;
 using System.Xml;
 using Pbp.Data;
 
-namespace Pbp.IO
+namespace Pbp.IO.Writer
 {
-    class SetlistWriter
+    public class SetlistWriter
     {
         public void Write(string filename, Setlist list)
         {

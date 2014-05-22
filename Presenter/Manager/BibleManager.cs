@@ -126,7 +126,7 @@ namespace Pbp
             BibleList = new Dictionary<string, BibleItem>();
             foreach (string file in GetBibleFiles())
             {
-                Pbp.IO.XMLBibleReblader rdr = new Pbp.IO.XMLBibleReblader();
+                Pbp.IO.Reader.XMLBibleReader rdr = new Pbp.IO.Reader.XMLBibleReader();
                 try
                 {
                     BibleItem bi = new BibleItem();
@@ -143,7 +143,7 @@ namespace Pbp
 
         public void LoadBibleData(string key)
         {
-            Pbp.IO.XMLBibleReblader rdr = new Pbp.IO.XMLBibleReblader();
+            Pbp.IO.Reader.XMLBibleReader rdr = new Pbp.IO.Reader.XMLBibleReader();
             try
             {
                 rdr.LoadContent(BibleList[key].Filename, BibleList[key].Bible);
