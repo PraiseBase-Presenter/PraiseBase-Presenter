@@ -35,7 +35,7 @@ using Pbp.Model.Statistics;
 
 namespace Pbp.Persistence.Reader
 {
-    class StatisticsReader
+    public class StatisticsReader
     {
         public Statistics read(string filename)
         {

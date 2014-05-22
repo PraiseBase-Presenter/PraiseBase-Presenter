@@ -34,7 +34,7 @@ using Pbp.Model.Statistics;
 
 namespace Pbp.Persistence.Writer
 {
-    class StatisticsWriter
+    public class StatisticsWriter
     {
         public void Write(string filename, Statistics stat)
         {

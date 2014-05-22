@@ -65,6 +65,21 @@
     <Compile Include="Model\TextOrientation.cs" />
     <Compile Include="Model\TextOutline.cs" />
     <Compile Include="Model\TextShadow.cs" />
+    <Compile Include="Persistence\PowerPraiseConstants.cs" />
+    <Compile Include="Persistence\Reader\CcliUsrSongFileReader.cs" />
+    <Compile Include="Persistence\Reader\OpenLyricsSongFileReader.cs" />
+    <Compile Include="Persistence\Reader\PowerPraiseSongFileReader.cs" />
+    <Compile Include="Persistence\Reader\SetlistReader.cs" />
+    <Compile Include="Persistence\Reader\SongFileReader.cs" />
+    <Compile Include="Persistence\Reader\SongFileReaderFactory.cs" />
+    <Compile Include="Persistence\Reader\StatisticsReader.cs" />
+    <Compile Include="Persistence\Reader\XMLBibleReader.cs" />
+    <Compile Include="Persistence\Writer\PowerPraiseSongFileWriter.cs" />
+    <Compile Include="Persistence\Writer\SetlistWriter.cs" />
+    <Compile Include="Persistence\Writer\SongFileWriter.cs" />
+    <Compile Include="Persistence\Writer\SongFileWriterFactory.cs" />
+    <Compile Include="Persistence\Writer\StatisticsWriter.cs" />
+    <Compile Include="Persistence\Writer\XmlWriterHelper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

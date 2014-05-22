@@ -36,7 +36,7 @@ using System.Drawing;
 
 namespace Pbp.Persistence.Reader
 {
-    class OpenLyricsSongFileReader : SongFileReader
+    public class OpenLyricsSongFileReader : SongFileReader
     {
         public override string FileExtension { get { return ".xml"; } }
 
