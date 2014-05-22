@@ -29,22 +29,19 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using Pbp.Data.Song;
 
-namespace Pbp.Data
+namespace Pbp.Model.Song
 {
-    /// <summary>
-    /// The setlist containts a list of songs ready for projection. 
-    /// It can be saved to and loaded from setlist files.
-    /// </summary>
-    public class Setlist
+    public enum SongAuthorType
     {
-        public String Name { get; set; }
-        public List<Song.Song> Items { get; set; }
+        words,
+        music,
+        translation
+    }
 
-        public Setlist()
-        {
-            Items = new List<Song.Song>();
-        }
+    public class SongAuthor
+    {
+        public string Name { get; set; }
+        public SongAuthorType Type { get; set; }
     }
 }

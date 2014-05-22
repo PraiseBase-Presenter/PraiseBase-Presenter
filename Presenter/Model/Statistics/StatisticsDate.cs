@@ -29,28 +29,32 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Pbp.Model.Song;
 
-namespace Pbp.Data.Bible
+namespace Pbp.Model.Statistics
 {
-    public class BibleBook
+    public class StatisticsDate
     {
-        public int Number { get; set; }
+        public SortedList<String, StatisticsItem> Items { get; set; }
 
-        public string Name { get; set; }
+        public int Year { get; set; }
+        public int Month { get; set; }
+        public int Day { get; set; }
 
-        public string ShortName { get; set; }
-
-        public Bible Bible { get; set; }
-
-        public List<BibleChapter> Chapters { get; set; }
-
-        public BibleBook()
+        public string ID
         {
+            get
+            {
+                return Year + "-" + Month + "-" + Day;
+            }
         }
-
-        public override string ToString()
+        
+        public StatisticsDate(int year, int month, int day)
         {
-            return Name;
+            Year = year;
+            Month = month;
+            Day = day;
+            Items = new SortedList<String, StatisticsItem>();
         }
     }
 }

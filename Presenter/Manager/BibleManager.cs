@@ -29,7 +29,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using Pbp.Properties;
-using Pbp.Data.Bible;
+using Pbp.Model.Bible;
 using System.Text.RegularExpressions;
 
 namespace Pbp
@@ -156,8 +156,8 @@ namespace Pbp
 
         private List<BibleBook> SearchBookCandiates(Bible bible, string needle)
         {
-            var bkCandidates = new List<Pbp.Data.Bible.BibleBook>();
-            foreach (Pbp.Data.Bible.BibleBook bk in bible.Books)
+            var bkCandidates = new List<Pbp.Model.Bible.BibleBook>();
+            foreach (Pbp.Model.Bible.BibleBook bk in bible.Books)
             {
                 if (needle.Length <= bk.Name.Length && needle == bk.Name.ToLower().Substring(0, needle.Length))
                 {

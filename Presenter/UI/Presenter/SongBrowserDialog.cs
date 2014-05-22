@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Windows.Forms;
 using Pbp.Properties;
-using Pbp.Data.Song;
+using Pbp.Model.Song;
 
 namespace Pbp.Forms
 {

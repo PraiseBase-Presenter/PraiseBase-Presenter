@@ -25,7 +25,7 @@
  *
  */
 
-namespace Pbp.Data.Song
+namespace Pbp.Model.Song
 {
     public class SongFileType
     {

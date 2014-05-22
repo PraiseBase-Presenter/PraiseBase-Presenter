@@ -30,8 +30,8 @@ using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Drawing.Text;
 using Pbp.Properties;
-using Pbp.Data.Song;
-using Pbp.Data;
+using Pbp.Model.Song;
+using Pbp.Model;
 using System.Collections.Generic;
 
 namespace Pbp

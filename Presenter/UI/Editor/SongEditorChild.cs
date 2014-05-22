@@ -30,9 +30,9 @@ using System.Drawing;
 using System.IO;
 using System.Windows.Forms;
 using Pbp.Properties;
-using Pbp.Data.Song;
+using Pbp.Model.Song;
 using Pbp.Persistence;
-using Pbp.Data;
+using Pbp.Model;
 using Pbp.Persistence.Reader;
 using Pbp.Persistence.Writer;
 

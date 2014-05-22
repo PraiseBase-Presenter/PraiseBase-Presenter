@@ -30,8 +30,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Xml;
-using Pbp.Data;
-using Pbp.Data.Statistics;
+using Pbp.Model;
+using Pbp.Model.Statistics;
 
 namespace Pbp.Persistence.Reader
 {

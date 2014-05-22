@@ -25,28 +25,32 @@
  *
  */
 
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-namespace Pbp.Data.Bible
+namespace Pbp.Model.Song
 {
-    public class BibleChapter
+    /// <summary>
+    /// Different flags for indicating problems with the song
+    /// whichs needs to be revised
+    /// </summary>
+    public enum SongQualityAssuranceIndicator
     {
-        public int Number { get; set; }
+        /// <summary>
+        /// Indicates wether spelling of the songtext is incorrect
+        /// </summary>
+        Spelling = 1,
 
-        public BibleBook Book { get; set; }
+        /// <summary>
+        /// Indicates wether images are broken or incomplete
+        /// </summary>
+        Images = 2,
 
-        public List<BibleVerse> Verses { get; set; }
-        
-        public BibleChapter()
-        {
-        }
+        /// <summary>
+        /// Indicates wether the translation is missing or incomplete
+        /// </summary>
+        Translation = 4,
 
-        public override string ToString()
-        {
-            return Number.ToString();
-        }
+        /// <summary>
+        /// Indicates wether the layout of the slides needs optimization
+        /// </summary>
+        Segmentation = 8
     }
 }

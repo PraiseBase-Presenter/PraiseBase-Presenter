@@ -28,7 +28,7 @@
 using System;
 using System.Drawing;
 using Pbp.Properties;
-using Pbp.Data.Bible;
+using Pbp.Model.Bible;
 
 namespace Pbp
 {
@@ -42,7 +42,7 @@ namespace Pbp
 
         private BibleVerseSelection verseSelection;
 
-        public BibleLayer(Pbp.Data.Bible.BibleVerseSelection verseSelection)
+        public BibleLayer(Pbp.Model.Bible.BibleVerseSelection verseSelection)
         {
             this.verseSelection = verseSelection;
         }

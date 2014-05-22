@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace Pbp.Data.Song
+namespace Pbp.Model.Song
 {
     /// <summary>
     /// Song tempo in bpm (beats per minute, maybe 30-250) or some words like

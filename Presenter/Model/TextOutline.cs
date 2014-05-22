@@ -27,40 +27,30 @@
 
 using System.Collections.Generic;
 using System.Linq;
+using System.Drawing;
 
-namespace Pbp.Data
+namespace Pbp.Model
 {
-    /// <summary>
-    /// Tag class. It allows only unique items
-    /// </summary>
-    public class TagList : List<string>
+    public class TextOutline
     {
-        /// <summary>
-        /// Adds an unique tag to the taglist
-        /// </summary>
-        /// <param name="tagName"></param>
-        public new void Add(string tagName)
+        public int Width { get; set; }
+        public Color Color { get; set; }
+
+        public TextOutline(int width, Color color)
         {
-            if (!Contains(tagName))
-            {
-                base.Add(tagName);
-            }
+            Width = width;
+            Color = color;
         }
 
         /// <summary>
-        /// Returns a comma separated string of all tags
+        /// Returns a hashcode of the text formatting object, used for example in the
+        /// editor to check if the file was changed
         /// </summary>
         /// <returns></returns>
-        public override string ToString()
+        public override int GetHashCode()
         {
-            string res = string.Empty;
-            for (int i = 0; i < Count; i++)
-            {
-                res += this.ElementAt(i);
-                if (i < Count - 1)
-                    res += ", ";
-            }
-            return res;
+            return Width.GetHashCode()
+                   ^ Color.GetHashCode();
         }
     }
 }

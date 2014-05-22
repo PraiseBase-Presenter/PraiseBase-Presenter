@@ -29,8 +29,8 @@ using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Xml;
-using Pbp.Data.Song;
-using Pbp.Data;
+using Pbp.Model.Song;
+using Pbp.Model;
 
 namespace Pbp.Persistence.Reader
 {

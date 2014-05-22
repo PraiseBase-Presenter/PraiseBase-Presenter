@@ -25,23 +25,24 @@
  *
  */
 
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
+using System.ComponentModel;
+using Pbp.Model;
 
-namespace Pbp.Data.Song
+namespace Pbp.Model
 {
-    public enum SongAuthorType
+    public enum TextOrientationHorizontal
     {
-        words,
-        music,
-        translation
+        Left = 1,
+        Center = 2,
+        Right = 3
     }
 
-    public class SongAuthor
+    public enum TextOrientationVertical
     {
-        public string Name { get; set; }
-        public SongAuthorType Type { get; set; }
+        Top = 1,
+        Middle = 2,
+        Bottom = 3
     }
 }

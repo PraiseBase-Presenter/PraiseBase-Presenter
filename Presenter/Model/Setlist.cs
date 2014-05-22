@@ -25,38 +25,26 @@
  *
  */
 
+using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Drawing;
+using System.Text;
+using Pbp.Model.Song;
 
-namespace Pbp.Data
+namespace Pbp.Model
 {
-    public class TextShadow
+    /// <summary>
+    /// The setlist containts a list of songs ready for projection. 
+    /// It can be saved to and loaded from setlist files.
+    /// </summary>
+    public class Setlist
     {
-        public int Size { get; set; }
-        public int Distance { get; set; }
-        public int Direction { get; set; }
-        public Color Color { get; set; }
+        public String Name { get; set; }
+        public List<Song.Song> Items { get; set; }
 
-        public TextShadow(int size, int distance, int direction, Color color)
+        public Setlist()
         {
-            Size = size;
-            Distance = distance;
-            Direction = direction;
-            Color = color;
-        }
-
-        /// <summary>
-        /// Returns a hashcode of the text formatting object, used for example in the
-        /// editor to check if the file was changed
-        /// </summary>
-        /// <returns></returns>
-        public override int GetHashCode()
-        {
-            return Size.GetHashCode()
-                 ^ Distance.GetHashCode()
-                 ^ Direction.GetHashCode()
-                 ^ Color.GetHashCode();
+            Items = new List<Song.Song>();
         }
     }
 }

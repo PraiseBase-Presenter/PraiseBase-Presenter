@@ -29,7 +29,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using Pbp.Data.Bible;
+using Pbp.Model.Bible;
 using System.Xml;
 using System.IO;
 

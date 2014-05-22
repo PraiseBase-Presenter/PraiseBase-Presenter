@@ -30,7 +30,7 @@ using System.Collections.Generic;
 using System.IO;
 using Pbp.Properties;
 using Pbp.Persistence;
-using Pbp.Data.Song;
+using Pbp.Model.Song;
 using Pbp.Persistence.Reader;
 using Pbp.Persistence.Writer;
 

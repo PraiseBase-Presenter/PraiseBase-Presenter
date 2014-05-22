@@ -25,32 +25,27 @@
  *
  */
 
+using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Drawing;
+using System.Text;
 
-namespace Pbp.Data
+namespace Pbp.Model.Song
 {
-    public class TextOutline
+    /// <summary>
+    /// Most songs come from some sort of collection of songs, be it a book or a 
+    /// folder of some sort. It may be useful to track where the song comes from
+    /// </summary>
+    public class SongBook
     {
-        public int Width { get; set; }
-        public Color Color { get; set; }
-
-        public TextOutline(int width, Color color)
-        {
-            Width = width;
-            Color = color;
-        }
+        /// <summary>
+        /// The name of a song book
+        /// </summary>
+        public string Name { get; set; }
 
         /// <summary>
-        /// Returns a hashcode of the text formatting object, used for example in the
-        /// editor to check if the file was changed
+        /// The index of the song
         /// </summary>
-        /// <returns></returns>
-        public override int GetHashCode()
-        {
-            return Width.GetHashCode()
-                   ^ Color.GetHashCode();
-        }
+        public string Entry { get; set; }
     }
 }

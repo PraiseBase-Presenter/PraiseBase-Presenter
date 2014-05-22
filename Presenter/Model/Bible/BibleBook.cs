@@ -25,24 +25,32 @@
  *
  */
 
+using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.ComponentModel;
-using Pbp.DataObjects;
+using System.Text;
 
-namespace Pbp.Data
+namespace Pbp.Model.Bible
 {
-    public enum TextOrientationHorizontal
+    public class BibleBook
     {
-        Left = 1,
-        Center = 2,
-        Right = 3
-    }
+        public int Number { get; set; }
 
-    public enum TextOrientationVertical
-    {
-        Top = 1,
-        Middle = 2,
-        Bottom = 3
+        public string Name { get; set; }
+
+        public string ShortName { get; set; }
+
+        public Bible Bible { get; set; }
+
+        public List<BibleChapter> Chapters { get; set; }
+
+        public BibleBook()
+        {
+        }
+
+        public override string ToString()
+        {
+            return Name;
+        }
     }
 }

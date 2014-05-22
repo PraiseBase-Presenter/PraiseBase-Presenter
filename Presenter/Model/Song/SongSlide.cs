@@ -31,7 +31,7 @@ using System.Drawing;
 using System.Linq;
 using System.Runtime.Serialization;
 
-namespace Pbp.Data.Song
+namespace Pbp.Model.Song
 {
     /// <summary>
     /// A single slide with songtext and/or a background image

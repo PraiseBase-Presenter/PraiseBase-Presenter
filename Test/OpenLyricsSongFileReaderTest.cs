@@ -1,7 +1,7 @@
 ﻿using Pbp.Persistence;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
-using Pbp.Data.Song;
+using Pbp.Model.Song;
 using Pbp.Persistence.Reader;
 
 namespace Test

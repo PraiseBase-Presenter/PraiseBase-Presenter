@@ -31,8 +31,8 @@ using System.Linq;
 using System.Text;
 using System.Xml;
 using Pbp.Properties;
-using Pbp.Data.Song;
-using Pbp.Data;
+using Pbp.Model.Song;
+using Pbp.Model;
 using System.Drawing;
 
 namespace Pbp.Persistence.Reader

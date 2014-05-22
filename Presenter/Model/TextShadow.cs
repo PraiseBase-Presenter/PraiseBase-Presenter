@@ -25,32 +25,38 @@
  *
  */
 
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using Pbp.Data.Song;
+using System.Drawing;
 
-namespace Pbp.Data.Statistics
+namespace Pbp.Model
 {
-    public enum StatisticsItemType
+    public class TextShadow
     {
-        Song
-    }
+        public int Size { get; set; }
+        public int Distance { get; set; }
+        public int Direction { get; set; }
+        public Color Color { get; set; }
 
-    public class StatisticsItem
-    {
-        public String ID { 
-            get 
-            {
-                return Type.ToString() + "-" + Title;
-            }
+        public TextShadow(int size, int distance, int direction, Color color)
+        {
+            Size = size;
+            Distance = distance;
+            Direction = direction;
+            Color = color;
         }
 
-        public StatisticsItemType Type { get; set; }
-        public string Title { get; set; }
-        public string Copyright { get; set; }
-        public string CcliID { get; set; }
-        public int Count { get; set; }
+        /// <summary>
+        /// Returns a hashcode of the text formatting object, used for example in the
+        /// editor to check if the file was changed
+        /// </summary>
+        /// <returns></returns>
+        public override int GetHashCode()
+        {
+            return Size.GetHashCode()
+                 ^ Distance.GetHashCode()
+                 ^ Direction.GetHashCode()
+                 ^ Color.GetHashCode();
+        }
     }
 }

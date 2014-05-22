@@ -25,26 +25,42 @@
  *
  */
 
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
+using System.Drawing;
 
-namespace Pbp.Data.Bible
+namespace Pbp.Model
 {
-    public class BibleVerse
+    public class TextFormatting
     {
-        public int Number { get; set; }
-        public string Text { get; set; }
-        public BibleChapter Chapter { get; set; }
+        public Font Font { get; set; }
+        public Color Color { get; set; }
+        public TextOutline Outline { get; set; }
+        public TextShadow Shadow { get; set; }
+        public int LineSpacing { get; set; }
 
-        public BibleVerse()
+        public TextFormatting(Font font, Color color, TextOutline outline, TextShadow shadow, int lineSpacing)
         {
+            Font = font;
+            Color = color;
+            Outline = outline;
+            Shadow = shadow;
+            LineSpacing = lineSpacing;
         }
 
-        public override string ToString()
+        /// <summary>
+        /// Returns a hashcode of the text formatting object, used for example in the
+        /// editor to check if the file was changed
+        /// </summary>
+        /// <returns></returns>
+        public override int GetHashCode()
         {
-            return Number.ToString() + ": " + Text;
+            int code = Font.GetHashCode()
+                       ^ Color.GetHashCode()
+                       ^ Outline.GetHashCode()
+                       ^ Shadow.GetHashCode()
+                       ^ LineSpacing.GetHashCode();
+            return code;
         }
     }
 }

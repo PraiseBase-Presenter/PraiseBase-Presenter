@@ -1,7 +1,7 @@
 ﻿using Pbp.Persistence;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
-using Pbp.Data.Song;
+using Pbp.Model.Song;
 using Pbp.Persistence.Writer;
 
 namespace Test
@@ -100,8 +100,8 @@ namespace Test
             sng.SourceText = PowerPraiseConstants.SourceText;
             sng.SourceText.Font = new System.Drawing.Font("Times New Roman", 30, System.Drawing.FontStyle.Regular);
 
-            sng.HorizontalTextOrientation = Pbp.Data.TextOrientationHorizontal.Left;
-            sng.VerticalTextOrientation = Pbp.Data.TextOrientationVertical.Middle;
+            sng.HorizontalTextOrientation = Pbp.Model.TextOrientationHorizontal.Left;
+            sng.VerticalTextOrientation = Pbp.Model.TextOrientationVertical.Middle;
             sng.TextOutlineEnabled = false;
             sng.TextShadowEnabled = true;
 

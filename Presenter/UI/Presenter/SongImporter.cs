@@ -8,7 +8,7 @@ using System.Text.RegularExpressions;
 using System.Windows.Forms;
 using Pbp.Properties;
 using Pbp.Persistence;
-using Pbp.Data.Song;
+using Pbp.Model.Song;
 using Pbp.Persistence.Writer;
 
 namespace Pbp.Forms

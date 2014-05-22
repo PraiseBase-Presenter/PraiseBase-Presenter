@@ -1,7 +1,7 @@
 ﻿using Pbp.Persistence;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
-using Pbp.Data.Statistics;
+using Pbp.Model.Statistics;
 using System.IO;
 using Pbp.Persistence.Writer;
 

@@ -33,7 +33,7 @@ using System.Runtime.Serialization;
 using System.Xml.Serialization;
 using System.IO;
 
-namespace Pbp.Data.Song
+namespace Pbp.Model.Song
 {
     /// <summary>
     /// Keeps and manages all song related data loaded form an xml file
