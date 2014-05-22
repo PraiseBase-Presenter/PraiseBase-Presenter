@@ -75,6 +75,10 @@
     <Compile Include="StatisticsWriterTest.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Core\PraiseBase Core Libraries.csproj">
+      <Project>{67651B76-5ABD-4040-9A8F-3833130FC77D}</Project>
+      <Name>PraiseBase Core Libraries</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Presenter\PraiseBase Presenter.csproj">
       <Project>{33D2BC6A-0AD1-4E2E-AF35-FFFB744F22C6}</Project>
       <Name>PraiseBase Presenter</Name>

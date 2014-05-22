@@ -30,7 +30,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Xml;
-using Pbp.Properties;
 using Pbp.Model.Song;
 using Pbp.Model;
 using System.Drawing;
@@ -52,32 +51,32 @@ namespace Pbp.Persistence.Reader
             Song sng = new Song();
 
             sng.MainText = new TextFormatting(
-                Settings.Default.ProjectionMasterFont,
-                Settings.Default.ProjectionMasterFontColor, 
+                PowerPraiseConstants.MainText.Font,
+                PowerPraiseConstants.MainText.Color,
                 new TextOutline(30, Color.Black),
                 new TextShadow(10, 20, 125, Color.Black),
-                Settings.Default.ProjectionMasterLineSpacing);
+                PowerPraiseConstants.MainText.LineSpacing);
 
             sng.TranslationText = new TextFormatting(
-                Settings.Default.ProjectionMasterFontTranslation,
-                Settings.Default.ProjectionMasterTranslationColor,
+                PowerPraiseConstants.TranslationText.Font,
+                PowerPraiseConstants.TranslationText.Color,
                 new TextOutline(30, Color.Black),
                 new TextShadow(10, 20, 125, Color.Black),
-                Settings.Default.ProjectionMasterLineSpacing);
+                PowerPraiseConstants.TranslationText.LineSpacing);
 
             sng.CopyrightText = new TextFormatting(
-                Settings.Default.ProjectionMasterFontTranslation,
-                Settings.Default.ProjectionMasterTranslationColor,
+                PowerPraiseConstants.CopyrightText.Font,
+                PowerPraiseConstants.CopyrightText.Color,
                 new TextOutline(30, Color.Black),
                 new TextShadow(10, 20, 125, Color.Black),
-                Settings.Default.ProjectionMasterLineSpacing);
+                PowerPraiseConstants.CopyrightText.LineSpacing);
 
             sng.SourceText = new TextFormatting(
-               Settings.Default.ProjectionMasterFontTranslation,
-               Settings.Default.ProjectionMasterTranslationColor,
+               PowerPraiseConstants.SourceText.Font,
+               PowerPraiseConstants.SourceText.Color,
                new TextOutline(30, Color.Black),
                new TextShadow(10, 20, 125, Color.Black),
-               Settings.Default.ProjectionMasterLineSpacing);
+               PowerPraiseConstants.SourceText.LineSpacing);
 
             // Init xml
             XmlDocument xmlDoc = new XmlDocument();

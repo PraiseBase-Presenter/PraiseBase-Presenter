@@ -96,50 +96,25 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Model\Bible\Bible.cs" />
-    <Compile Include="Model\Bible\BibleBook.cs" />
-    <Compile Include="Model\Bible\BibleChapter.cs" />
-    <Compile Include="Model\Bible\BibleVerse.cs" />
-    <Compile Include="Model\Bible\BibleVerseSelection.cs" />
-    <Compile Include="Model\Song\SongTextBorders.cs" />
-    <Compile Include="Model\TextShadow.cs" />
-    <Compile Include="Model\TextOutline.cs" />
-    <Compile Include="Model\TextOrientation.cs" />
-    <Compile Include="Model\TextFormatting.cs" />
-    <Compile Include="Model\Statistics\StatisticsItem.cs" />
-    <Compile Include="Model\Statistics\StatisticsDate.cs" />
-    <Compile Include="Model\Statistics\Statistics.cs" />
-    <Compile Include="Model\Setlist.cs" />
-    <Compile Include="Model\Song\SongQualityAssuranceIndicator.cs" />
-    <Compile Include="Model\Song\Song.cs" />
-    <Compile Include="Model\Song\SongAuthor.cs" />
-    <Compile Include="Model\Song\SongBook.cs" />
-    <Compile Include="Model\Song\SongFileType.cs" />
-    <Compile Include="Model\Song\SongPart.cs" />
-    <Compile Include="Model\Song\SongPartList.cs" />
-    <Compile Include="Model\Song\SongSlide.cs" />
-    <Compile Include="Model\Song\SongSlideList.cs" />
-    <Compile Include="Model\Song\SongTempo.cs" />
-    <Compile Include="Model\TagList.cs" />
     <Compile Include="Editor.cs" />
-    <Compile Include="Persistence\PowerPraiseConstants.cs" />
-    <Compile Include="Persistence\Reader\CcliUsrSongFileReader.cs" />
-    <Compile Include="Persistence\Reader\StatisticsReader.cs" />
-    <Compile Include="Persistence\Reader\SongFileReaderFactory.cs" />
-    <Compile Include="Persistence\Reader\OpenLyricsSongFileReader.cs" />
-    <Compile Include="Persistence\Reader\PowerPraiseSongFileReader.cs" />
-    <Compile Include="Persistence\Writer\XmlWriterHelper.cs" />
-    <Compile Include="Persistence\Writer\StatisticsWriter.cs" />
-    <Compile Include="Persistence\Writer\PowerPraiseSongFileWriter.cs" />
-    <Compile Include="Persistence\Reader\SetlistReader.cs" />
-    <Compile Include="Persistence\Writer\SetlistWriter.cs" />
-    <Compile Include="Persistence\Reader\SongFileReader.cs" />
-    <Compile Include="Persistence\Writer\SongFileWriterFactory.cs" />
-    <Compile Include="Persistence\Writer\SongFileWriter.cs" />
-    <Compile Include="Persistence\Reader\XMLBibleReader.cs" />
     <Compile Include="Manager\BibleManager.cs" />
     <Compile Include="Manager\ProjectionManager.cs" />
     <Compile Include="Manager\ScreenManager.cs" />
+    <Compile Include="Persistence\PowerPraiseConstants.cs" />
+    <Compile Include="Persistence\Reader\CcliUsrSongFileReader.cs" />
+    <Compile Include="Persistence\Reader\OpenLyricsSongFileReader.cs" />
+    <Compile Include="Persistence\Reader\PowerPraiseSongFileReader.cs" />
+    <Compile Include="Persistence\Reader\SetlistReader.cs" />
+    <Compile Include="Persistence\Reader\SongFileReader.cs" />
+    <Compile Include="Persistence\Reader\SongFileReaderFactory.cs" />
+    <Compile Include="Persistence\Reader\StatisticsReader.cs" />
+    <Compile Include="Persistence\Reader\XMLBibleReader.cs" />
+    <Compile Include="Persistence\Writer\PowerPraiseSongFileWriter.cs" />
+    <Compile Include="Persistence\Writer\SetlistWriter.cs" />
+    <Compile Include="Persistence\Writer\SongFileWriter.cs" />
+    <Compile Include="Persistence\Writer\SongFileWriterFactory.cs" />
+    <Compile Include="Persistence\Writer\StatisticsWriter.cs" />
+    <Compile Include="Persistence\Writer\XmlWriterHelper.cs" />
     <Compile Include="Projection\BaseLayer.cs" />
     <Compile Include="Projection\BibleLayer.cs" />
     <Compile Include="Projection\ImageLayer.cs" />
@@ -607,6 +582,12 @@
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Service References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Core\PraiseBase Core Libraries.csproj">
+      <Project>{67651B76-5ABD-4040-9A8F-3833130FC77D}</Project>
+      <Name>PraiseBase Core Libraries</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
