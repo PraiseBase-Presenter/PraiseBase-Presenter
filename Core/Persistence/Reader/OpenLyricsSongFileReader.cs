@@ -26,13 +26,10 @@
  */
 
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Xml;
-using Pbp.Model.Song;
-using Pbp.Model;
 using System.Drawing;
+using System.Xml;
+using Pbp.Model;
+using Pbp.Model.Song;
 
 namespace Pbp.Persistence.Reader
 {
@@ -110,14 +107,14 @@ namespace Pbp.Persistence.Reader
             {
                 sng.ModifiedIn = xmlRoot.Attributes["modifiedIn"].InnerText;
             }
-            
+
             //
             // Properties
             //
-            
+
             // Check if properties sections exists
-            if (xmlRoot["properties"] == null 
-                || xmlRoot["properties"]["titles"] == null 
+            if (xmlRoot["properties"] == null
+                || xmlRoot["properties"]["titles"] == null
                 || xmlRoot["properties"]["titles"]["title"] == null)
             {
                 throw new IncompleteSongSourceFileException();
@@ -143,7 +140,7 @@ namespace Pbp.Persistence.Reader
             {
                 sng.ReleaseYear = xmlRoot["properties"]["released"].InnerText;
             }
-            
+
             //
             // Lyrics
             //
@@ -154,7 +151,7 @@ namespace Pbp.Persistence.Reader
                 throw new IncompleteSongSourceFileException();
             }
 
-            foreach (XmlNode verseNode in xmlRoot["lyrics"]) 
+            foreach (XmlNode verseNode in xmlRoot["lyrics"])
             {
                 if (verseNode.Name == "verse")
                 {
@@ -184,7 +181,7 @@ namespace Pbp.Persistence.Reader
                                 {
                                     lineText += line.InnerText;
                                 }
-                                else if (line.NodeType == XmlNodeType.Element && line.Name=="br")
+                                else if (line.NodeType == XmlNodeType.Element && line.Name == "br")
                                 {
                                     slide.Lines.Add(lineText);
                                     lineText = string.Empty;

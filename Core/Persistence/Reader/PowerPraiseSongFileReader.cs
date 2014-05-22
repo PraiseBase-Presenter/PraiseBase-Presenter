@@ -29,8 +29,8 @@ using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Xml;
-using Pbp.Model.Song;
 using Pbp.Model;
+using Pbp.Model.Song;
 
 namespace Pbp.Persistence.Reader
 {
@@ -188,7 +188,7 @@ namespace Pbp.Persistence.Reader
             sng.CopyrightText = PowerPraiseConstants.CopyrightText;
             sng.SourceText = PowerPraiseConstants.SourceText;
 
-            Dictionary<string, TextFormatting> fmtMapping = new Dictionary<string,TextFormatting>();
+            Dictionary<string, TextFormatting> fmtMapping = new Dictionary<string, TextFormatting>();
             fmtMapping.Add("maintext", sng.MainText);
             fmtMapping.Add("translationtext", sng.TranslationText);
             fmtMapping.Add("copyrighttext", sng.CopyrightText);
@@ -375,7 +375,7 @@ namespace Pbp.Persistence.Reader
                             bgNr = bgNr < 0 ? 0 : bgNr;
                             bgNr = bgNr > sng.RelativeImagePaths.Count ? sng.RelativeImagePaths.Count : bgNr;
                             tmpSlide.ImageNumber = bgNr;
-                            
+
                             // Lyrics
                             foreach (XmlElement lineElem in slideElem)
                             {
@@ -389,7 +389,7 @@ namespace Pbp.Persistence.Reader
                                 }
                             }
 
-                            // Slide-specific text size 
+                            // Slide-specific text size
                             tmpSlide.TextSize = sng.MainText.Font.Size;
                             if (slideElem.HasAttribute("mainsize"))
                             {

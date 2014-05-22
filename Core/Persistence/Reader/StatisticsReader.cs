@@ -26,11 +26,7 @@
  */
 
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Xml;
-using Pbp.Model;
 using Pbp.Model.Statistics;
 
 namespace Pbp.Persistence.Reader
@@ -72,7 +68,7 @@ namespace Pbp.Persistence.Reader
                             item.Count = Int32.Parse(cnode.Attributes["count"].Value);
                             date.Items.Add(item.ID, item);
                         }
-                    }                    
+                    }
                 }
             }
             return sl;

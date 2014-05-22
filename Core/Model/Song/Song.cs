@@ -27,10 +27,7 @@
 
 using System;
 using System.Collections.Generic;
-using System.Drawing;
 using System.Runtime.Serialization;
-using System.Xml.Serialization;
-using System.IO;
 
 namespace Pbp.Model.Song
 {
@@ -93,7 +90,7 @@ namespace Pbp.Model.Song
         /// Copyright position (PowerPraise)
         /// </summary>
         public string CopyrightPosition { get; set; }
-        
+
         /// <summary>
         /// Source position (PowerPraise)
         /// </summary>
@@ -112,8 +109,9 @@ namespace Pbp.Model.Song
         /// <summary>
         /// All authors as semicolon-separated string
         /// </summary>
-        public String AuthorString { 
-            get 
+        public String AuthorString
+        {
+            get
             {
                 string autstr = string.Empty;
                 foreach (var aut in Author)
@@ -125,7 +123,7 @@ namespace Pbp.Model.Song
                     autstr += aut.Name;
                 }
                 return autstr;
-            } 
+            }
             set
             {
                 int i = 0;
@@ -136,7 +134,7 @@ namespace Pbp.Model.Song
                     author.Type = (i++ == 0) ? SongAuthorType.words : SongAuthorType.music;
                     Author.Add(author);
                 }
-            } 
+            }
         }
 
         /// <summary>
@@ -167,13 +165,13 @@ namespace Pbp.Model.Song
         /// <summary>
         /// Tempo
         /// </summary>
-        public SongTempo Tempo  { get; set; }
+        public SongTempo Tempo { get; set; }
 
         /// <summary>
         /// Variant
         /// </summary>
-        public string Variant  { get; set; }
-    
+        public string Variant { get; set; }
+
         /// <summary>
         /// Gets or sets a list of tags (like categories) which describe the type of the song
         /// </summary>
@@ -212,7 +210,7 @@ namespace Pbp.Model.Song
                 foreach (String s in value.Split(new char[] { ';' }, StringSplitOptions.RemoveEmptyEntries))
                 {
                     SongBook sb = new SongBook();
-                    sb.Name= s.Trim();
+                    sb.Name = s.Trim();
                     SongBooks.Add(sb);
                 }
             }
@@ -311,7 +309,6 @@ namespace Pbp.Model.Song
                         translated = true;
                         break;
                     }
-
                 }
                 return translated;
             }
@@ -479,6 +476,5 @@ namespace Pbp.Model.Song
             info.AddValue("CcliID", this.CcliID);
             info.AddValue("Copyright", this.Copyright);
         }
-
     }
 }

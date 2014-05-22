@@ -27,9 +27,6 @@
 
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using Pbp.Model.Song;
 
 namespace Pbp.Model.Statistics
 {

@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Drawing;
+﻿using System.Drawing;
 using Pbp.Model;
 
 namespace Pbp.Persistence
@@ -10,8 +6,8 @@ namespace Pbp.Persistence
     public static class PowerPraiseConstants
     {
         public static readonly TextFormatting MainText = new TextFormatting(
-            new Font("Tahoma", 30, FontStyle.Bold | FontStyle.Italic), 
-            Color.FromArgb(255, Color.FromArgb(16777215)), 
+            new Font("Tahoma", 30, FontStyle.Bold | FontStyle.Italic),
+            Color.FromArgb(255, Color.FromArgb(16777215)),
             new TextOutline(30, Color.Black),
             new TextShadow(10, 20, 125, Color.Black),
             30);

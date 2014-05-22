@@ -27,15 +27,14 @@
 
 using System;
 using System.Collections.Generic;
-using Pbp.Model.Song;
-using System.Reflection;
 using System.Linq;
+using System.Reflection;
 
 namespace Pbp.Persistence.Reader
 {
     public class SongFileReaderFactory
     {
-        private Dictionary<Type, SongFileReader> readers = new Dictionary<Type,SongFileReader>();
+        private Dictionary<Type, SongFileReader> readers = new Dictionary<Type, SongFileReader>();
         private Dictionary<String, HashSet<Type>> SupportedExtensionMapping = new Dictionary<string, HashSet<Type>>();
 
         /// <summary>
@@ -59,14 +58,14 @@ namespace Pbp.Persistence.Reader
         /// <summary>
         /// Initializes the available types and extensions
         /// </summary>
-        private SongFileReaderFactory() 
+        private SongFileReaderFactory()
         {
             IEnumerable<Type> AllTypes = Assembly.GetExecutingAssembly().GetTypes().Where(t => t.IsSubclassOf(typeof(SongFileReader)));
             foreach (var atype in AllTypes)
             {
                 SongFileReader inst = (SongFileReader)Activator.CreateInstance(atype);
                 readers.Add(atype, inst);
-                if (! SupportedExtensionMapping.Keys.Contains(inst.FileExtension))
+                if (!SupportedExtensionMapping.Keys.Contains(inst.FileExtension))
                 {
                     SupportedExtensionMapping.Add(inst.FileExtension, new HashSet<Type>(new[] { atype }));
                 }
@@ -88,7 +87,7 @@ namespace Pbp.Persistence.Reader
             if (readers[type] != null)
             {
                 return readers[type];
-            }            
+            }
             throw new NotImplementedException();
         }
 
@@ -114,7 +113,7 @@ namespace Pbp.Persistence.Reader
             }
             throw new NotImplementedException();
         }
-         
+
         /// <summary>
         /// Returns the filter string used in open file dialogs
         /// </summary>

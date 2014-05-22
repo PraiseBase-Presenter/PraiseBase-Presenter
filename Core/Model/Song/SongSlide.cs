@@ -27,7 +27,6 @@
 
 using System;
 using System.Collections.Generic;
-using System.Drawing;
 using System.Linq;
 using System.Runtime.Serialization;
 
@@ -37,7 +36,7 @@ namespace Pbp.Model.Song
     /// A single slide with songtext and/or a background image
     /// </summary>
     [Serializable()]
-    public class SongSlide : ICloneable, ISerializable 
+    public class SongSlide : ICloneable, ISerializable
     {
         /// <summary>
         /// Pointer to the song object who owns this slide
@@ -109,14 +108,14 @@ namespace Pbp.Model.Song
             get { return _ownerSong.HorizontalTextOrientation; }
         }
 
-
         /// <summary>
         /// Gets or sets the text of this slide
         /// </summary>
         /// <param name="text"></param>
         public String Text
         {
-            get {
+            get
+            {
                 string txt = "";
                 int i = 1;
                 foreach (string str in Lines)
@@ -126,15 +125,16 @@ namespace Pbp.Model.Song
                         txt += Environment.NewLine;
                     i++;
                 }
-                return txt;                
+                return txt;
             }
-            set {
+            set
+            {
                 Lines = new List<string>();
                 string[] ln = value.Trim().Split(new[] { Environment.NewLine, "<br/>" }, StringSplitOptions.None);
                 foreach (string sl in ln)
                 {
                     Lines.Add(sl.Trim());
-                }            
+                }
             }
         }
 

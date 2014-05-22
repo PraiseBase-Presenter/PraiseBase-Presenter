@@ -25,8 +25,6 @@
  *
  */
 
-using System.Collections.Generic;
-using System.Linq;
 using System.Drawing;
 
 namespace Pbp.Model
@@ -34,9 +32,13 @@ namespace Pbp.Model
     public class TextFormatting
     {
         public Font Font { get; set; }
+
         public Color Color { get; set; }
+
         public TextOutline Outline { get; set; }
+
         public TextShadow Shadow { get; set; }
+
         public int LineSpacing { get; set; }
 
         public TextFormatting(Font font, Color color, TextOutline outline, TextShadow shadow, int lineSpacing)

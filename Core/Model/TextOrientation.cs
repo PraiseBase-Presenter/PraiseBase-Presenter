@@ -25,11 +25,6 @@
  *
  */
 
-using System.Collections.Generic;
-using System.Linq;
-using System.ComponentModel;
-using Pbp.Model;
-
 namespace Pbp.Model
 {
     public enum TextOrientationHorizontal

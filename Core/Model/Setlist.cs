@@ -27,19 +27,17 @@
 
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using Pbp.Model.Song;
 
 namespace Pbp.Model
 {
     /// <summary>
-    /// The setlist containts a list of songs ready for projection. 
+    /// The setlist containts a list of songs ready for projection.
     /// It can be saved to and loaded from setlist files.
     /// </summary>
     public class Setlist
     {
         public String Name { get; set; }
+
         public List<String> Items { get; set; }
 
         public Setlist()

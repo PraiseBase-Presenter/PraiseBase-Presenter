@@ -25,10 +25,7 @@
  *
  */
 
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 namespace Pbp.Model.Bible
 {
@@ -39,7 +36,7 @@ namespace Pbp.Model.Bible
         public BibleBook Book { get; set; }
 
         public List<BibleVerse> Verses { get; set; }
-        
+
         public BibleChapter()
         {
         }

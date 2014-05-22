@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.IO;
 
 namespace Pbp.Util
@@ -27,7 +24,7 @@ namespace Pbp.Util
                     {
                         if (throwException)
                         {
-                             throw new Exception("Difference at position " + i + "! " + FindDifference(path1, path2));
+                            throw new Exception("Difference at position " + i + "! " + FindDifference(path1, path2));
                         }
                         return false;
                     }

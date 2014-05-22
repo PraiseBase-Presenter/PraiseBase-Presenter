@@ -25,22 +25,23 @@
  *
  */
 
-using System.Collections.Generic;
-using System.Linq;
-using System.Drawing;
-
 namespace Pbp.Model
 {
     public class SongTextBorders
     {
         public int TextLeft { get; set; }
-        public int TextTop { get; set; }
-        public int TextRight { get; set; }
-        public int TextBottom { get; set; }
-        public int CopyrightBottom { get; set; }
-        public int SourceTop { get; set; }
-        public int SourceRight { get; set; }
 
+        public int TextTop { get; set; }
+
+        public int TextRight { get; set; }
+
+        public int TextBottom { get; set; }
+
+        public int CopyrightBottom { get; set; }
+
+        public int SourceTop { get; set; }
+
+        public int SourceRight { get; set; }
 
         public SongTextBorders(int textLeft, int textTop, int textRight, int textBottom, int copyrightBottom, int sourceTop, int sourceRight)
         {

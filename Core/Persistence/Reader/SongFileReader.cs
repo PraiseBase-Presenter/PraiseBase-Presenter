@@ -26,10 +26,7 @@
  */
 
 using System;
-using System.Collections.Generic;
 using Pbp.Model.Song;
-using System.Reflection;
-using System.Linq;
 
 namespace Pbp.Persistence.Reader
 {
@@ -58,7 +55,6 @@ namespace Pbp.Persistence.Reader
         /// The common name of the file format
         /// </summary>
         abstract public string FileTypeDescription { get; }
-
     }
 
     /// <summary>

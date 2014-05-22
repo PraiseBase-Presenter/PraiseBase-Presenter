@@ -27,11 +27,8 @@
 
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using Pbp.Model.Bible;
 using System.Xml;
-using System.IO;
+using Pbp.Model.Bible;
 
 namespace Pbp.Persistence.Reader
 {
@@ -46,7 +43,7 @@ namespace Pbp.Persistence.Reader
                 {
                     Type myType = typeof(Bible);
                     System.Reflection.PropertyInfo myFields = myType.GetProperty(fieldName);
-                    myFields.SetValue(target, textReader.Value,null);
+                    myFields.SetValue(target, textReader.Value, null);
                 }
             }
             return false;
@@ -56,10 +53,9 @@ namespace Pbp.Persistence.Reader
         {
             Bible b = new Bible();
 
-            
             // Read a document
             XmlTextReader textReader = new XmlTextReader(fileName);
-            
+
             // Read until end of file
             while (textReader.Read())
             {

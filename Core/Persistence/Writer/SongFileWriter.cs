@@ -25,8 +25,6 @@
  *
  */
 
-using System;
-using System.Collections.Generic;
 using Pbp.Model.Song;
 
 namespace Pbp.Persistence.Writer

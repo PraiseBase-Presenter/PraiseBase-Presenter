@@ -28,11 +28,10 @@
 using System;
 using System.Collections.Generic;
 using System.Drawing;
-using System.Xml;
-using Pbp.Model.Song;
 using System.IO;
 using System.Text.RegularExpressions;
 using Pbp.Model;
+using Pbp.Model.Song;
 
 namespace Pbp.Persistence.Reader
 {
@@ -88,7 +87,7 @@ namespace Pbp.Persistence.Reader
             foreach (string l in lines)
             {
                 string li = l.Trim();
-                string[] s = li.Split(new [] { "="}, StringSplitOptions.None);
+                string[] s = li.Split(new[] { "=" }, StringSplitOptions.None);
                 if (s.Length > 1)
                 {
                     string k = s[0];
@@ -101,33 +100,40 @@ namespace Pbp.Persistence.Reader
                             case "Title":
                                 sng.Title = v;
                                 break;
+
                             case "Author":
                                 var a = new SongAuthor();
                                 a.Name = v;
                                 sng.Author = new List<SongAuthor>();
                                 sng.Author.Add(a);
                                 break;
+
                             case "Copyright":
                                 sng.Copyright = v;
                                 break;
+
                             case "Admin":
                                 sng.RightsManagement = v;
                                 break;
+
                             case "Themes":
                                 foreach (var t in v.Split(new[] { "/t" }, StringSplitOptions.None))
                                 {
                                     sng.Themes.Add(t.Trim());
                                 }
                                 break;
+
                             case "Keys":
                                 sng.Key = v;
                                 break;
+
                             case "Fields":
                                 foreach (var t in v.Split(new[] { "/t" }, StringSplitOptions.RemoveEmptyEntries))
                                 {
                                     fields.Add(t);
                                 }
                                 break;
+
                             case "Words":
                                 foreach (var t in v.Split(new[] { "/t" }, StringSplitOptions.RemoveEmptyEntries))
                                 {
@@ -161,7 +167,7 @@ namespace Pbp.Persistence.Reader
                 throw new IncompleteSongSourceFileException();
             }
 
-            for (int fx=0; fx < fields.Count; fx++)
+            for (int fx = 0; fx < fields.Count; fx++)
             {
                 SongPart p = new SongPart();
                 p.Caption = fields[fx];
@@ -209,6 +215,7 @@ namespace Pbp.Persistence.Reader
                                     }
                                     versionOk = true;
                                     break;
+
                                 case "Type":
                                     if (v != TypeString)
                                     {
@@ -216,6 +223,7 @@ namespace Pbp.Persistence.Reader
                                     }
                                     typeOk = true;
                                     break;
+
                                 default:
                                     if (versionOk && typeOk)
                                     {

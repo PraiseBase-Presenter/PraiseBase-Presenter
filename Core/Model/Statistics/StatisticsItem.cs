@@ -26,10 +26,6 @@
  */
 
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using Pbp.Model.Song;
 
 namespace Pbp.Model.Statistics
 {
@@ -40,17 +36,22 @@ namespace Pbp.Model.Statistics
 
     public class StatisticsItem
     {
-        public String ID { 
-            get 
+        public String ID
+        {
+            get
             {
                 return Type.ToString() + "-" + Title;
             }
         }
 
         public StatisticsItemType Type { get; set; }
+
         public string Title { get; set; }
+
         public string Copyright { get; set; }
+
         public string CcliID { get; set; }
+
         public int Count { get; set; }
     }
 }

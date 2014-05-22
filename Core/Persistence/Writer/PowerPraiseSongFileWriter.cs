@@ -27,10 +27,9 @@
 
 using System;
 using System.Collections.Generic;
-using System.Text;
 using System.Xml;
-using Pbp.Model.Song;
 using Pbp.Model;
+using Pbp.Model.Song;
 
 namespace Pbp.Persistence.Writer
 {
@@ -55,7 +54,7 @@ namespace Pbp.Persistence.Writer
             XmlWriterHelper xml = new XmlWriterHelper(XmlRootNodeName, SupportedFileFormatVersion);
             XmlElement xmlRoot = xml.Root;
             XmlDocument xmlDoc = xml.Doc;
-            
+
             xmlRoot.AppendChild(xmlDoc.CreateElement("general"));
             xmlRoot["general"].AppendChild(xmlDoc.CreateElement("title"));
             xmlRoot["general"]["title"].InnerText = sng.Title;
@@ -93,7 +92,7 @@ namespace Pbp.Persistence.Writer
                     qaChld.InnerText = Enum.GetName(typeof(SongQualityAssuranceIndicator), i);
                 }
             }
-            
+
             // CCLI-ID
             if (sng.CcliID != null && sng.CcliID != String.Empty)
             {
@@ -119,7 +118,7 @@ namespace Pbp.Persistence.Writer
                 xmlRoot["general"].AppendChild(xmlDoc.CreateElement("admin"));
                 xmlRoot["general"]["admin"].InnerText = sng.RightsManagement;
             }
-            
+
             xmlRoot.AppendChild(xmlDoc.CreateElement("songtext"));
 
             var usedImages = new List<string>();
@@ -182,7 +181,7 @@ namespace Pbp.Persistence.Writer
             // Copyright
             xmlRoot["information"].AppendChild(xmlDoc.CreateElement("copyright"));
             xmlRoot["information"]["copyright"].AppendChild(xmlDoc.CreateElement("position"));
-            xmlRoot["information"]["copyright"]["position"].InnerText = (sng.CopyrightPosition != null ? sng.CopyrightPosition  : "lastslide");
+            xmlRoot["information"]["copyright"]["position"].InnerText = (sng.CopyrightPosition != null ? sng.CopyrightPosition : "lastslide");
             xmlRoot["information"]["copyright"].AppendChild(xmlDoc.CreateElement("text"));
             if (sng.Copyright != null)
             {
@@ -266,18 +265,20 @@ namespace Pbp.Persistence.Writer
 
             // Orientation
             xmlRoot["formatting"].AppendChild(xmlDoc.CreateElement("textorientation"));
-            
+
             xmlRoot["formatting"]["textorientation"].AppendChild(xmlDoc.CreateElement("horizontal"));
             switch (sng.HorizontalTextOrientation != 0 ? sng.HorizontalTextOrientation : PowerPraiseConstants.HorizontalTextOrientation)
             {
                 case TextOrientationHorizontal.Left:
                     xmlRoot["formatting"]["textorientation"]["horizontal"].InnerText = "left";
                     break;
+
                 case TextOrientationHorizontal.Center:
                     xmlRoot["formatting"]["textorientation"]["horizontal"].InnerText = "center";
                     break;
+
                 case TextOrientationHorizontal.Right:
-                     xmlRoot["formatting"]["textorientation"]["horizontal"].InnerText = "right";
+                    xmlRoot["formatting"]["textorientation"]["horizontal"].InnerText = "right";
                     break;
             }
 
@@ -287,9 +288,11 @@ namespace Pbp.Persistence.Writer
                 case TextOrientationVertical.Top:
                     xmlRoot["formatting"]["textorientation"]["vertical"].InnerText = "top";
                     break;
+
                 case TextOrientationVertical.Middle:
                     xmlRoot["formatting"]["textorientation"]["vertical"].InnerText = "center";
                     break;
+
                 case TextOrientationVertical.Bottom:
                     xmlRoot["formatting"]["textorientation"]["vertical"].InnerText = "bottom";
                     break;

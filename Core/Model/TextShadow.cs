@@ -25,8 +25,6 @@
  *
  */
 
-using System.Collections.Generic;
-using System.Linq;
 using System.Drawing;
 
 namespace Pbp.Model
@@ -34,8 +32,11 @@ namespace Pbp.Model
     public class TextShadow
     {
         public int Size { get; set; }
+
         public int Distance { get; set; }
+
         public int Direction { get; set; }
+
         public Color Color { get; set; }
 
         public TextShadow(int size, int distance, int direction, Color color)

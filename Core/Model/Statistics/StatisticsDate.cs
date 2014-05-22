@@ -27,9 +27,6 @@
 
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using Pbp.Model.Song;
 
 namespace Pbp.Model.Statistics
 {
@@ -38,7 +35,9 @@ namespace Pbp.Model.Statistics
         public SortedList<String, StatisticsItem> Items { get; set; }
 
         public int Year { get; set; }
+
         public int Month { get; set; }
+
         public int Day { get; set; }
 
         public string ID
@@ -48,7 +47,7 @@ namespace Pbp.Model.Statistics
                 return Year + "-" + Month + "-" + Day;
             }
         }
-        
+
         public StatisticsDate(int year, int month, int day)
         {
             Year = year;
