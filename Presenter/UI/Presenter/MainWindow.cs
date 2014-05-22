@@ -1138,7 +1138,7 @@ namespace Pbp.Forms
                 Pbp.Model.Setlist sl = new Pbp.Model.Setlist();
                 for (int i = 0; i < listViewSetList.Items.Count; i++)
                 {
-                    sl.Items.Add(SongManager.Instance.SongList[(Guid)listViewSetList.Items[i].Tag].Song);
+                    sl.Items.Add(SongManager.Instance.SongList[(Guid)listViewSetList.Items[i].Tag].Song.Title);
                 }
                 Pbp.Persistence.Writer.SetlistWriter swr = new Pbp.Persistence.Writer.SetlistWriter();
                 swr.Write(dlg.FileName, sl);
@@ -1169,9 +1169,14 @@ namespace Pbp.Forms
                     {
                         foreach (var i in sl.Items)                
                         {
-                            var lvi = new ListViewItem(i.Title);
-                            lvi.Tag = i.GUID;
-                            listViewSetList.Items.Add(lvi);
+                            Guid g = SongManager.Instance.GetGuidByTitle(i);
+                            if (g != Guid.Empty)
+                            {
+                                var s = SongManager.Instance.SongList[g].Song;
+                                var lvi = new ListViewItem(s.Title);
+                                lvi.Tag = s.GUID;
+                                listViewSetList.Items.Add(lvi);
+                            }
                         }
                         buttonSetListClear.Enabled = true;
                         buttonSaveSetList.Enabled = true;

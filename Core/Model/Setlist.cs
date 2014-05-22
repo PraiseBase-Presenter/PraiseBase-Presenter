@@ -40,11 +40,11 @@ namespace Pbp.Model
     public class Setlist
     {
         public String Name { get; set; }
-        public List<Song.Song> Items { get; set; }
+        public List<String> Items { get; set; }
 
         public Setlist()
         {
-            Items = new List<Song.Song>();
+            Items = new List<String>();
         }
     }
 }

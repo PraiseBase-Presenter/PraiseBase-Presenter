@@ -54,11 +54,7 @@ namespace Pbp.Persistence.Reader
                 {
                     if (xmlRoot["items"].ChildNodes[i].Name == "item")
                     {
-                        Guid g = SongManager.Instance.GetGuidByTitle(xmlRoot["items"].ChildNodes[i].InnerText);
-                        if (g != Guid.Empty)
-                        {
-                            sl.Items.Add(SongManager.Instance.SongList[g].Song);
-                        }
+                        sl.Items.Add(xmlRoot["items"].ChildNodes[i].InnerText);
                     }
                 }
             }

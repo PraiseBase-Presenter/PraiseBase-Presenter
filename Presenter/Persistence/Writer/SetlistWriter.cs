@@ -44,7 +44,7 @@ namespace Pbp.Persistence.Writer
             for (int i = 0; i < list.Items.Count; i++)
             {
                 XmlNode nd = xml.Doc.CreateElement("item");
-                nd.InnerText = list.Items[i].Title;
+                nd.InnerText = list.Items[i];
                 XmlNode ni = xml.Root["items"].AppendChild(nd);
             }
 
