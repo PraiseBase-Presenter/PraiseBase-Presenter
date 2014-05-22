@@ -165,6 +165,9 @@ namespace Test
                 }
             }
 
+            Assert.AreEqual(1, actual.RelativeImagePaths.Count);
+            Assert.AreEqual("Blumen\\Blume 3.jpg", actual.RelativeImagePaths[0]);
+
             Assert.IsTrue(actual.SearchText.Contains("näher mein gott zu dir"));
             Assert.IsTrue(actual.SearchText.Contains("geborgen"));
         }

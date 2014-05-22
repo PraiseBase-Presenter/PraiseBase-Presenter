@@ -309,10 +309,7 @@ namespace Pbp.Persistence.Reader
             {
                 if (elem.Name == "file")
                 {
-                    if (ImageManager.Instance.ImageExists(elem.InnerText))
-                    {
-                        sng.RelativeImagePaths.Add(elem.InnerText);
-                    }
+                    sng.RelativeImagePaths.Add(elem.InnerText);
                 }
             }
 
