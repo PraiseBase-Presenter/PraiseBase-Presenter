@@ -30,12 +30,12 @@ using System.IO;
 using System.Linq;
 using System.Windows.Forms;
 using Pbp.Properties;
-using Pbp.IO;
+using Pbp.Persistence;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Globalization;
 using Pbp.UI;
-using Pbp.IO.Reader;
+using Pbp.Persistence.Reader;
 
 namespace Pbp.Forms
 {

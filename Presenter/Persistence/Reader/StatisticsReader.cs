@@ -33,7 +33,7 @@ using System.Xml;
 using Pbp.Data;
 using Pbp.Data.Statistics;
 
-namespace Pbp.IO.Reader
+namespace Pbp.Persistence.Reader
 {
     class StatisticsReader
     {

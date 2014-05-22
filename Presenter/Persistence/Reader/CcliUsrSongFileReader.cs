@@ -35,7 +35,7 @@ using System.IO;
 using System.Text.RegularExpressions;
 using Pbp.Data;
 
-namespace Pbp.IO.Reader
+namespace Pbp.Persistence.Reader
 {
     public class CcliUsrSongFileReader : SongFileReader
     {

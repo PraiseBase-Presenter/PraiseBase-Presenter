@@ -28,50 +28,15 @@
 using System;
 using System.Collections.Generic;
 using Pbp.Data.Song;
-using System.Reflection;
-using System.Linq;
 
-namespace Pbp.IO.Reader
+namespace Pbp.Persistence.Writer
 {
-    public abstract class SongFileReader
+    public abstract class SongFileWriter
     {
-        /// <summary>
-        /// Loads and instantiates a song from a file
-        /// </summary>
-        /// <param name="filename">Absolute path to the song file</param>
-        /// <returns>Song object instance</returns>
-        abstract public Song Load(string filename);
+        abstract public void Save(string filename, Song sng);
 
-        /// <summary>
-        /// Tests if a given file is supported by this reader
-        /// </summary>
-        /// <param name="filename"></param>
-        /// <returns></returns>
-        abstract public bool IsFileSupported(string filename);
-
-        /// <summary>
-        /// Defines the extensions this file format uses, e.g. ".xml"
-        /// </summary>
         abstract public string FileExtension { get; }
 
-        /// <summary>
-        /// The common name of the file format
-        /// </summary>
         abstract public string FileTypeDescription { get; }
-
-    }
-
-    /// <summary>
-    /// Thrown when the file format is invalid
-    /// </summary>
-    public class IncompleteSongSourceFileException : Exception
-    {
-    }
-
-    /// <summary>
-    /// Thrown when the file lacks important contents
-    /// </summary>
-    public class InvalidSongSourceFileException : Exception
-    {
     }
 }

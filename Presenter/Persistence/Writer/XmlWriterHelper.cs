@@ -30,25 +30,38 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Xml;
-using Pbp.Data;
 
-namespace Pbp.IO.Writer
+namespace Pbp.Persistence.Writer
 {
-    public class SetlistWriter
+    class XmlWriterHelper
     {
-        public void Write(string filename, Setlist list)
+        public XmlDocument Doc { get; protected set; }
+
+        public XmlElement Root { 
+            get {
+                return  Doc.DocumentElement;
+            }  
+        }
+
+        public XmlWriterHelper(string rootNodeName, string fileFormatVersion)
         {
-            XmlWriterHelper xml = new XmlWriterHelper("setlist", "1.0");
+            Doc = new XmlDocument();
+            XmlDeclaration xmlDeclaration = Doc.CreateXmlDeclaration("1.0", "UTF-8", null);
+            Doc.AppendChild(xmlDeclaration);
+            Doc.AppendChild(Doc.CreateElement(rootNodeName));
+            XmlElement xmlRoot = Doc.DocumentElement;
+            xmlRoot.SetAttribute("version", fileFormatVersion);
+        }
 
-            xml.Root.AppendChild(xml.Doc.CreateElement("items"));
-            for (int i = 0; i < list.Items.Count; i++)
-            {
-                XmlNode nd = xml.Doc.CreateElement("item");
-                nd.InnerText = list.Items[i].Title;
-                XmlNode ni = xml.Root["items"].AppendChild(nd);
-            }
-
-            xml.Write(filename);
+        public void Write(string filename)
+        {
+            XmlWriterSettings wrtStn = new XmlWriterSettings();
+            wrtStn.Encoding = Encoding.UTF8;
+            wrtStn.Indent = true;
+            XmlWriter wrt = XmlTextWriter.Create(filename, wrtStn);
+            Doc.WriteTo(wrt);
+            wrt.Flush();
+            wrt.Close();
         }
     }
 }

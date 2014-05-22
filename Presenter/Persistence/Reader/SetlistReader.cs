@@ -32,7 +32,7 @@ using System.Text;
 using System.Xml;
 using Pbp.Data;
 
-namespace Pbp.IO.Reader
+namespace Pbp.Persistence.Reader
 {
     public class SetlistReader
     {

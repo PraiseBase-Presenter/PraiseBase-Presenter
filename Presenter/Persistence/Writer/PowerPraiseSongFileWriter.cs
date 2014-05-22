@@ -32,7 +32,7 @@ using System.Xml;
 using Pbp.Data.Song;
 using Pbp.Data;
 
-namespace Pbp.IO.Writer
+namespace Pbp.Persistence.Writer
 {
     public class PowerPraiseSongFileWriter : SongFileWriter
     {

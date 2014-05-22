@@ -32,7 +32,7 @@ using System.Xml;
 using Pbp.Data.Song;
 using Pbp.Data;
 
-namespace Pbp.IO.Reader
+namespace Pbp.Persistence.Reader
 {
     public class PowerPraiseSongFileReader : SongFileReader
     {

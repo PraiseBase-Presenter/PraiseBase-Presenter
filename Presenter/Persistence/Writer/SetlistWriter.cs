@@ -27,16 +27,28 @@
 
 using System;
 using System.Collections.Generic;
-using Pbp.Data.Song;
+using System.Linq;
+using System.Text;
+using System.Xml;
+using Pbp.Data;
 
-namespace Pbp.IO.Writer
+namespace Pbp.Persistence.Writer
 {
-    public abstract class SongFileWriter
+    public class SetlistWriter
     {
-        abstract public void Save(string filename, Song sng);
+        public void Write(string filename, Setlist list)
+        {
+            XmlWriterHelper xml = new XmlWriterHelper("setlist", "1.0");
 
-        abstract public string FileExtension { get; }
+            xml.Root.AppendChild(xml.Doc.CreateElement("items"));
+            for (int i = 0; i < list.Items.Count; i++)
+            {
+                XmlNode nd = xml.Doc.CreateElement("item");
+                nd.InnerText = list.Items[i].Title;
+                XmlNode ni = xml.Root["items"].AppendChild(nd);
+            }
 
-        abstract public string FileTypeDescription { get; }
+            xml.Write(filename);
+        }
     }
 }

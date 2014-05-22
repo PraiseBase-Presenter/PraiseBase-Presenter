@@ -5,7 +5,7 @@ using System.Text;
 using System.Drawing;
 using Pbp.Data;
 
-namespace Pbp.IO
+namespace Pbp.Persistence
 {
     public static class PowerPraiseConstants
     {

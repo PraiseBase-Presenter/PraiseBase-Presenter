@@ -33,7 +33,7 @@ using Pbp.Data.Bible;
 using System.Xml;
 using System.IO;
 
-namespace Pbp.IO.Reader
+namespace Pbp.Persistence.Reader
 {
     public class XMLBibleReader
     {

@@ -1,8 +1,8 @@
-﻿using Pbp.IO;
+﻿using Pbp.Persistence;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using Pbp.Data.Statistics;
-using Pbp.IO.Reader;
+using Pbp.Persistence.Reader;
 
 namespace Test
 {
