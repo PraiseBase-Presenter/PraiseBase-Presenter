@@ -85,7 +85,7 @@ namespace SongDetails
             Font pfnt = new Font("Arial", 16);
             Font txfnt = new Font("Arial", 11);
             int ypos = startPoint.Y;
-            ImageList thumbs = Pbp.ImageManager.Instance.GetThumbsFromList(sng.RelativeImagePaths);
+            var thumbs = Pbp.ImageManager.Instance.GetThumbsFromList(sng.RelativeImagePaths);
 
             Size labelSize = new Size(0, 0);
             for (int i = 0; i < sng.Parts.Count; i++)
@@ -147,7 +147,7 @@ namespace SongDetails
                     previewPictureBox.Location = new Point(2, 2);
                     previewPictureBox.Size = new Size(panelPreviewPictureBoxContainer.Width - 4, panelPreviewPictureBoxContainer.Height - 5);
                     int imgNr = sng.Parts[numParts].Slides[j].ImageNumber;
-                    previewPictureBox.Image = thumbs.Images[imgNr];
+                    previewPictureBox.Image = thumbs.ContainsKey(imgNr) ? thumbs[imgNr] : thumbs[0];
                     previewPictureBox.Tag = sng.RelativeImagePaths.Count >= imgNr && imgNr > 0 ? sng.RelativeImagePaths[imgNr - 1] : String.Empty;
                     previewPictureBox.Enabled = true;
                     previewPictureBox.Cursor = Cursors.Hand;

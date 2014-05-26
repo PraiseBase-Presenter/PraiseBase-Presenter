@@ -750,12 +750,16 @@ namespace Pbp.Forms
                         listViewImageHistory.Items.RemoveAt(i);
                     }
                 }
-                listViewImageHistory.LargeImageList.Images.Add(ImageManager.Instance.GetThumbFromRelPath(relImagePath));
-                var lvi = new ListViewItem("");
-                lvi.Tag = relImagePath;
-                lvi.ImageIndex = listViewImageHistory.LargeImageList.Images.Count - 1;
-                listViewImageHistory.Items.Add(lvi);
-                listViewImageHistory.EnsureVisible(listViewImageHistory.Items.Count - 1);
+                var img = ImageManager.Instance.GetThumbFromRelPath(relImagePath);
+                if (img != null)
+                {
+                    listViewImageHistory.LargeImageList.Images.Add(img);
+                    var lvi = new ListViewItem("");
+                    lvi.Tag = relImagePath;
+                    lvi.ImageIndex = listViewImageHistory.LargeImageList.Images.Count - 1;
+                    listViewImageHistory.Items.Add(lvi);
+                    listViewImageHistory.EnsureVisible(listViewImageHistory.Items.Count - 1);
+                }
             }
         }
 
