@@ -142,44 +142,39 @@ namespace Pbp.Persistence.Reader
             //
 
             // Text orientation
-            sng.HorizontalTextOrientation = PowerPraiseConstants.HorizontalTextOrientation;
-            sng.VerticalTextOrientation = PowerPraiseConstants.VerticalTextOrientation;
-            if (xmlRoot["formatting"]["textorientation"] != null)
+            sng.TextOrientation = new TextOrientation(VerticalOrientation.Middle, HorizontalOrientation.Center);
+            if (xmlRoot["formatting"]["textorientation"] != null
+                && xmlRoot["formatting"]["textorientation"]["horizontal"] != null 
+                && xmlRoot["formatting"]["textorientation"]["vertical"] != null)
             {
-                if (xmlRoot["formatting"]["textorientation"]["horizontal"] != null)
-                {
                     switch (xmlRoot["formatting"]["textorientation"]["horizontal"].InnerText)
                     {
                         case "left":
-                            sng.HorizontalTextOrientation = TextOrientationHorizontal.Left;
+                            sng.TextOrientation.Horizontal = HorizontalOrientation.Left;
                             break;
 
                         case "center":
-                            sng.HorizontalTextOrientation = TextOrientationHorizontal.Center;
+                            sng.TextOrientation.Horizontal = HorizontalOrientation.Center;
                             break;
 
                         case "right":
-                            sng.HorizontalTextOrientation = TextOrientationHorizontal.Right;
+                            sng.TextOrientation.Horizontal = HorizontalOrientation.Right;
                             break;
                     }
-                }
-                if (xmlRoot["formatting"]["textorientation"]["vertical"] != null)
-                {
                     switch (xmlRoot["formatting"]["textorientation"]["vertical"].InnerText)
                     {
                         case "top":
-                            sng.VerticalTextOrientation = TextOrientationVertical.Top;
+                            sng.TextOrientation.Vertical = VerticalOrientation.Top;
                             break;
 
                         case "center":
-                            sng.VerticalTextOrientation = TextOrientationVertical.Middle;
+                            sng.TextOrientation.Vertical = VerticalOrientation.Middle;
                             break;
 
                         case "bottom":
-                            sng.VerticalTextOrientation = TextOrientationVertical.Bottom;
+                            sng.TextOrientation.Vertical = VerticalOrientation.Bottom;
                             break;
                     }
-                }
             }
 
             // Default font settings if values in xml invalid

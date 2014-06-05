@@ -267,33 +267,33 @@ namespace Pbp.Persistence.Writer
             xmlRoot["formatting"].AppendChild(xmlDoc.CreateElement("textorientation"));
 
             xmlRoot["formatting"]["textorientation"].AppendChild(xmlDoc.CreateElement("horizontal"));
-            switch (sng.HorizontalTextOrientation != 0 ? sng.HorizontalTextOrientation : PowerPraiseConstants.HorizontalTextOrientation)
+            switch (sng.TextOrientation != null ? sng.TextOrientation.Horizontal : HorizontalOrientation.Center)
             {
-                case TextOrientationHorizontal.Left:
+                case HorizontalOrientation.Left:
                     xmlRoot["formatting"]["textorientation"]["horizontal"].InnerText = "left";
                     break;
 
-                case TextOrientationHorizontal.Center:
+                case HorizontalOrientation.Center:
                     xmlRoot["formatting"]["textorientation"]["horizontal"].InnerText = "center";
                     break;
 
-                case TextOrientationHorizontal.Right:
+                case HorizontalOrientation.Right:
                     xmlRoot["formatting"]["textorientation"]["horizontal"].InnerText = "right";
                     break;
             }
 
             xmlRoot["formatting"]["textorientation"].AppendChild(xmlDoc.CreateElement("vertical"));
-            switch (sng.VerticalTextOrientation != 0 ? sng.VerticalTextOrientation : PowerPraiseConstants.VerticalTextOrientation)
+            switch (sng.TextOrientation != null ? sng.TextOrientation.Vertical : VerticalOrientation.Middle)
             {
-                case TextOrientationVertical.Top:
+                case VerticalOrientation.Top:
                     xmlRoot["formatting"]["textorientation"]["vertical"].InnerText = "top";
                     break;
 
-                case TextOrientationVertical.Middle:
+                case VerticalOrientation.Middle:
                     xmlRoot["formatting"]["textorientation"]["vertical"].InnerText = "center";
                     break;
 
-                case TextOrientationVertical.Bottom:
+                case VerticalOrientation.Bottom:
                     xmlRoot["formatting"]["textorientation"]["vertical"].InnerText = "bottom";
                     break;
             }

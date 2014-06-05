@@ -132,8 +132,7 @@ namespace Pbp.Forms
                    Settings.Default.ProjectionMasterLineSpacing);
 
                 // TODO: Define a default in the configuration
-                sng.HorizontalTextOrientation = TextOrientationHorizontal.Center;
-                sng.VerticalTextOrientation = TextOrientationVertical.Middle;
+                sng.TextOrientation = new TextOrientation(VerticalOrientation.Middle, HorizontalOrientation.Center);
 
                 sng.TextOutlineEnabled = true;
                 sng.TextShadowEnabled = true;
@@ -187,12 +186,12 @@ namespace Pbp.Forms
 
             buttonChooseProjectionForeColor.BackColor = sng.MainText.Color;
             buttonTranslationColor.BackColor = sng.TranslationText.Color;
-            
-            comboBoxSlideHorizOrientation.DataSource = Enum.GetValues(typeof(TextOrientationHorizontal));
-            comboBoxSlideHorizOrientation.DataBindings.Add("SelectedItem", sng, "HorizontalTextOrientation", false, DataSourceUpdateMode.OnPropertyChanged);
-          
-            comboBoxSlideVertOrientation.DataSource = Enum.GetValues(typeof(TextOrientationVertical));
-            comboBoxSlideVertOrientation.DataBindings.Add("SelectedItem", sng, "VerticalTextOrientation", false, DataSourceUpdateMode.OnPropertyChanged);
+
+            comboBoxSlideHorizOrientation.DataSource = Enum.GetValues(typeof(HorizontalOrientation));
+            comboBoxSlideHorizOrientation.DataBindings.Add("SelectedItem", sng.TextOrientation, "Horizontal", false, DataSourceUpdateMode.OnPropertyChanged);
+
+            comboBoxSlideVertOrientation.DataSource = Enum.GetValues(typeof(VerticalOrientation));
+            comboBoxSlideVertOrientation.DataBindings.Add("SelectedItem", sng.TextOrientation, "Vertical", false, DataSourceUpdateMode.OnPropertyChanged);
 
             comboBoxLanguage.Items.Clear();
             comboBoxLanguage.Text = sng.Language;

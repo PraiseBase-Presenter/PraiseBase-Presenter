@@ -33,9 +33,6 @@ namespace Pbp.Persistence
             new TextShadow(10, 20, 125, Color.Black),
             30);
 
-        public static readonly TextOrientationHorizontal HorizontalTextOrientation = TextOrientationHorizontal.Center;
-        public static readonly TextOrientationVertical VerticalTextOrientation = TextOrientationVertical.Middle;
-
         public static readonly bool TextOutlineEnabled = true;
         public static readonly bool TextShadowEnabled = true;
 

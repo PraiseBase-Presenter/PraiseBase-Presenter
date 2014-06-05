@@ -130,31 +130,31 @@ namespace Pbp
                 int lineHeight = (int)(strMeasure.Height / mainText.Count);
 
                 // Horizontal stuff
-                switch (slide.HorizontalTextOrientation)
+                switch (slide.TextOrientation.Horizontal)
                 {
-                    case TextOrientationHorizontal.Left:
+                    case HorizontalOrientation.Left:
                         strFormat.Alignment = StringAlignment.Near;
                         break;
-                    case TextOrientationHorizontal.Center:
+                    case HorizontalOrientation.Center:
                         textStartX = w / 2;
                         strFormat.Alignment = StringAlignment.Center;
                         break;
-                    case TextOrientationHorizontal.Right:
+                    case HorizontalOrientation.Right:
                         textStartX = textStartX + usableWidth;
                         strFormat.Alignment = StringAlignment.Far;
                         break;
                 }
 
                 // Vertical stuff
-                switch (slide.VerticalTextOrientation)
+                switch (slide.TextOrientation.Vertical)
                 {
-                    case TextOrientationVertical.Top:
+                    case VerticalOrientation.Top:
                         // Nothing to do
                         break;
-                    case TextOrientationVertical.Middle:
+                    case VerticalOrientation.Middle:
                         textStartY = textStartY + (usableHeight / 2) - (usedHeight / 2);
                         break;
-                    case TextOrientationVertical.Bottom:
+                    case VerticalOrientation.Bottom:
                         textStartY = textStartY + usableHeight - usedHeight;
                         break;
                 }

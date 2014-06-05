@@ -273,14 +273,9 @@ namespace Pbp.Model.Song
         public TextFormatting SourceText { get; set; }
 
         /// <summary>
-        /// Horizontal text orientation
+        /// Text orientation
         /// </summary>
-        public TextOrientationHorizontal HorizontalTextOrientation { get; set; }
-
-        /// <summary>
-        /// Vertical text orientation
-        /// </summary>
-        public TextOrientationVertical VerticalTextOrientation { get; set; }
+        public TextOrientation TextOrientation { get; set; }
 
         /// <summary>
         /// True of the text should be outlined
@@ -435,7 +430,8 @@ namespace Pbp.Model.Song
                        ^ TranslationText.GetHashCode()
                        ^ CopyrightText.GetHashCode()
                        ^ SourceText.GetHashCode()
-                       ^ Themes.GetHashCode();
+                       ^ Themes.GetHashCode() 
+                       ^ TextOrientation.GetHashCode();
 
             if (Language != null)
             {

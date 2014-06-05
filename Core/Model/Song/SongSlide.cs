@@ -93,19 +93,11 @@ namespace Pbp.Model.Song
         }
 
         /// <summary>
-        /// The font object of the translation
+        /// The text orientation
         /// </summary>
-        public TextOrientationVertical VerticalTextOrientation
+        public TextOrientation TextOrientation
         {
-            get { return _ownerSong.VerticalTextOrientation; }
-        }
-
-        /// <summary>
-        /// The font object of the translation
-        /// </summary>
-        public TextOrientationHorizontal HorizontalTextOrientation
-        {
-            get { return _ownerSong.HorizontalTextOrientation; }
+            get { return _ownerSong.TextOrientation; }
         }
 
         /// <summary>

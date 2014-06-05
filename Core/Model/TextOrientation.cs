@@ -27,17 +27,62 @@
 
 namespace Pbp.Model
 {
-    public enum TextOrientationHorizontal
+    public sealed class TextOrientation
     {
-        Left = 1,
-        Center = 2,
-        Right = 3
+        public VerticalOrientation Vertical { get; set; }
+        public HorizontalOrientation Horizontal { get; set; }
+
+        public TextOrientation(VerticalOrientation vertical, HorizontalOrientation horizontal) 
+        {
+            this.Vertical = vertical;
+            this.Horizontal = horizontal;
+        }
+
+        public override string ToString()
+        {
+            return this.Vertical.ToString() + " " + this.Horizontal.ToString();
+        }
+
+        public bool Equals(TextOrientation ori)
+        {
+            if ((object)ori == null)
+            {
+                return false;
+            }
+            return this.Horizontal == ori.Horizontal && this.Vertical == ori.Vertical;
+        }
+
+        public override bool Equals(System.Object o)
+        {
+            if (o == null)
+            {
+                return false;
+            }
+            TextOrientation ori = o as TextOrientation;
+            if ((System.Object)ori == null)
+            {
+                return false;
+            }
+            return this.Horizontal == ori.Horizontal && this.Vertical == ori.Vertical;
+        }
+
+        public override int GetHashCode()
+        {
+            return this.Horizontal.GetHashCode() ^ (17 * this.Vertical.GetHashCode());
+        }
     }
 
-    public enum TextOrientationVertical
+    public enum VerticalOrientation
     {
-        Top = 1,
-        Middle = 2,
-        Bottom = 3
+        Top,
+        Middle,
+        Bottom
+    }
+
+    public enum HorizontalOrientation
+    {
+        Left,
+        Center,
+        Right
     }
 }
