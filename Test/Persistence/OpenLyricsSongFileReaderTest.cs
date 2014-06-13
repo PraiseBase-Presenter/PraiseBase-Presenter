@@ -65,23 +65,13 @@ namespace Test
         //
         #endregion
 
-
         /// <summary>
-        ///A test for OpenLyricsSongFileReader Constructor
+        ///A test for Load
         ///</summary>
         [TestMethod()]
-        public void OpenLyricsSongFileReaderConstructorTest()
+        public void LoadSimpleTest()
         {
-            OpenLyricsSongFileReader target = new OpenLyricsSongFileReader();
-        }
-
-        /// <summary>
-        ///A test for load
-        ///</summary>
-        [TestMethod()]
-        public void loadSimpleTest()
-        {
-            OpenLyricsSongFileReader target = new OpenLyricsSongFileReader();
+            SongFileReader target = new OpenLyricsSongFileReader();
             string filename = "openlyrics/simple.xml";
             
             Song expected = new Song();
@@ -125,12 +115,12 @@ namespace Test
         }
 
         /// <summary>
-        ///A test for load
+        ///A test for Load
         ///</summary>
         [TestMethod()]
-        public void loadComplexTest()
+        public void LoadComplexTest()
         {
-            OpenLyricsSongFileReader target = new OpenLyricsSongFileReader();
+            SongFileReader target = new OpenLyricsSongFileReader();
             string filename = "openlyrics/complex.xml";
 
             Song expected = new Song();
@@ -241,6 +231,27 @@ namespace Test
                     }
                 }
             }
+        }
+
+        /// <summary>
+        ///A test for ReadTitle
+        ///</summary>
+        [TestMethod()]
+        public void ReadTitleTestSimple()
+        {
+            SongFileReader reader = new OpenLyricsSongFileReader();
+            Assert.AreEqual("Amazing Grace", reader.ReadTitle("openlyrics/simple.xml"));
+            Assert.IsNull(reader.ReadTitle("openlyrics/non-existing-file.xml"));
+        }
+
+        /// <summary>
+        ///A test for ReadTitle
+        ///</summary>
+        [TestMethod()]
+        public void ReadTitleTestComplex()
+        {
+            SongFileReader reader = new OpenLyricsSongFileReader();
+            Assert.AreEqual("Amazing Grace", reader.ReadTitle("openlyrics/complex.xml"));
         }
     }
 }

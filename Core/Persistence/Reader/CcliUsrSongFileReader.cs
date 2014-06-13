@@ -45,6 +45,12 @@ namespace Pbp.Persistence.Reader
 
         protected const string TypeString = "SongSelect Import File";
 
+        private enum CcliSongFileSection {
+            NONE,
+            FILE,
+            CONTENT
+        }
+
         public override Song Load(string filename)
         {
             Song sng = new Song();
@@ -81,7 +87,7 @@ namespace Pbp.Persistence.Reader
             List<String> fields = new List<string>();
             List<String> words = new List<string>();
 
-            String section = string.Empty;
+            CcliSongFileSection section = CcliSongFileSection.NONE;
 
             string[] lines = System.IO.File.ReadAllLines(@filename);
             foreach (string l in lines)
@@ -93,7 +99,7 @@ namespace Pbp.Persistence.Reader
                     string k = s[0];
                     string v = s[1];
 
-                    if (section == "content")
+                    if (section == CcliSongFileSection.CONTENT)
                     {
                         switch (k)
                         {
@@ -147,7 +153,7 @@ namespace Pbp.Persistence.Reader
                 {
                     if (li == "[File]")
                     {
-                        section = "file";
+                        section = CcliSongFileSection.FILE;
                     }
                     else
                     {
@@ -156,7 +162,7 @@ namespace Pbp.Persistence.Reader
                         {
                             sng.CcliID = m.Groups[1].Value;
                             sng.CCliIDReadonly = true;
-                            section = "content";
+                            section = CcliSongFileSection.CONTENT;
                         }
                     }
                 }
@@ -182,6 +188,63 @@ namespace Pbp.Persistence.Reader
 
             sng.UpdateSearchText();
             return sng;
+        }
+
+        /// <summary>
+        /// Reads the title of a song from a file
+        /// </summary>
+        /// <param name="filename">Absolute path to the song file</param>
+        /// <returns></returns>
+        public override String ReadTitle(string filename)
+        {
+            try
+            {
+                if (!System.IO.File.Exists(filename))
+                {
+                    return null;
+                }
+
+                CcliSongFileSection section = CcliSongFileSection.NONE;
+                System.IO.StreamReader file = new System.IO.StreamReader(filename);
+                string l;
+                while ((l = file.ReadLine()) != null)
+                {
+                    string li = l.Trim();
+                    string[] s = li.Split(new[] { "=" }, StringSplitOptions.None);
+                    if (s.Length > 1)
+                    {
+                        string k = s[0];
+                        string v = s[1];
+
+                        if (section == CcliSongFileSection.CONTENT && k == "Title")
+                        {
+                            file.Close();
+                            return v;
+                        }
+                    }
+                    else
+                    {
+                        if (li == "[File]")
+                        {
+                            section = CcliSongFileSection.FILE;
+                        }
+                        else
+                        {
+                            Match m = Regex.Match(li, "^\\[S A([0-9]+)\\]$");
+                            if (m.Success)
+                            {
+                                section = CcliSongFileSection.CONTENT;
+                            }
+                        }
+                    }
+                }
+                file.Close();
+            }
+            catch (Exception e)
+            {
+                System.Console.WriteLine(e.Message);
+            }
+            return null;
         }
 
         /// <summary>

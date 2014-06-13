@@ -65,23 +65,13 @@ namespace Test
         //
         #endregion
 
-
-        /// <summary>
-        ///A test for CcliUsrSongFileReader Constructor
-        ///</summary>
-        [TestMethod()]
-        public void CcliUsrSongFileReaderConstructorTest()
-        {
-            CcliUsrSongFileReader target = new CcliUsrSongFileReader();
-        }
-
         /// <summary>
         ///A test for IsFileSupported
         ///</summary>
         [TestMethod()]
         public void IsFileSupportedTest()
         {
-            CcliUsrSongFileReader target = new CcliUsrSongFileReader(); // TODO: Initialize to an appropriate value
+            SongFileReader target = new CcliUsrSongFileReader(); // TODO: Initialize to an appropriate value
             string filename = "ccli/Ein Lied für Gott.usr";
             bool expected = true;
             bool actual = target.IsFileSupported(filename);
@@ -94,7 +84,7 @@ namespace Test
         [TestMethod()]
         public void LoadTest()
         {
-            CcliUsrSongFileReader target = new CcliUsrSongFileReader();
+            SongFileReader target = new CcliUsrSongFileReader();
             string filename = "ccli/Ein Lied für Gott.usr";
             Song expected = new Song();
 
@@ -176,12 +166,23 @@ namespace Test
         }
 
         /// <summary>
+        ///A test for ReadTitle
+        ///</summary>
+        [TestMethod()]
+        public void ReadTitleTest()
+        {
+            SongFileReader reader = new CcliUsrSongFileReader();
+            Assert.AreEqual("Ein Lied für Gott", reader.ReadTitle("ccli/Ein Lied für Gott.usr"));
+            Assert.IsNull(reader.ReadTitle("ccli/non-existing-file.usr"));
+        }
+
+        /// <summary>
         ///A test for FileExtension
         ///</summary>
         [TestMethod()]
         public void FileExtensionTest()
         {
-            CcliUsrSongFileReader target = new CcliUsrSongFileReader(); // TODO: Initialize to an appropriate value
+            SongFileReader target = new CcliUsrSongFileReader(); // TODO: Initialize to an appropriate value
             string actual  = ".usr";
             actual = target.FileExtension;
             Assert.AreEqual(target.FileExtension, actual);
@@ -193,7 +194,7 @@ namespace Test
         [TestMethod()]
         public void FileTypeDescriptionTest()
         {
-            CcliUsrSongFileReader target = new CcliUsrSongFileReader(); // TODO: Initialize to an appropriate value
+            SongFileReader target = new CcliUsrSongFileReader(); // TODO: Initialize to an appropriate value
             string actual = "SongSelect Import File";
             actual = target.FileTypeDescription;
             Assert.AreEqual(target.FileTypeDescription, actual);

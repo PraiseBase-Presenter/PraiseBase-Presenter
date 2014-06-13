@@ -40,6 +40,13 @@ namespace Pbp.Persistence.Reader
         abstract public Song Load(string filename);
 
         /// <summary>
+        /// Reads the title of a song from a file
+        /// </summary>
+        /// <param name="filename">Absolute path to the song file</param>
+        /// <returns></returns>
+        abstract public String ReadTitle(string filename);
+
+        /// <summary>
         /// Tests if a given file is supported by this reader
         /// </summary>
         /// <param name="filename"></param>

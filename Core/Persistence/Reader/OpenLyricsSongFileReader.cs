@@ -209,6 +209,58 @@ namespace Pbp.Persistence.Reader
         }
 
         /// <summary>
+        /// Reads the title of a song from a file
+        /// </summary>
+        /// <param name="filename">Absolute path to the song file</param>
+        /// <returns></returns>
+        public override String ReadTitle(string filename)
+        {
+            try
+            {
+                if (!System.IO.File.Exists(filename))
+                {
+                    return null;
+                }
+                string parentNode = String.Empty;
+                XmlTextReader t = new XmlTextReader(filename);
+                while (t.Read())
+                {
+                    if (t.NodeType == XmlNodeType.Element)
+                    {
+                        if (t.Name == XmlRootNodeName)
+                        {
+                            parentNode = t.Name;
+                        }
+                        else if (parentNode == XmlRootNodeName && t.Name == "properties")
+                        {
+                            parentNode = t.Name;
+                        }
+                        else if (parentNode == "properties" && t.Name == "titles")
+                        {
+                            parentNode = t.Name;
+                        }
+                        else if (parentNode == "titles" && t.Name == "title")
+                        {
+                            parentNode = t.Name;
+                        }
+                    }
+                    else if (t.NodeType == XmlNodeType.Text && parentNode == "title")
+                    {
+                        string title = t.ReadContentAsString();
+                        t.Close();
+                        return title;
+                    }
+                }
+                t.Close();
+            }
+            catch (Exception e)
+            {
+                System.Console.WriteLine(e.Message);
+            }
+            return null;
+        }
+
+        /// <summary>
         /// Tests if a given file is supported by this reader
         /// </summary>
         /// <param name="filename"></param>

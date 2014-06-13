@@ -65,23 +65,13 @@ namespace Test
         //
         #endregion
 
-
         /// <summary>
-        ///A test for PowerPraiseSongFileReader Constructor
+        ///A test for Load
         ///</summary>
         [TestMethod()]
-        public void PowerPraiseSongFileReaderConstructorTest()
+        public void LoadTest()
         {
-
-        }
-
-        /// <summary>
-        ///A test for load
-        ///</summary>
-        [TestMethod()]
-        public void loadTest()
-        {
-            PowerPraiseSongFileReader target = new PowerPraiseSongFileReader();
+            SongFileReader target = new PowerPraiseSongFileReader();
             string filename = "powerpraise/Näher, mein Gott zu Dir.ppl";
 
             Song expected = new Song();
@@ -171,5 +161,17 @@ namespace Test
             Assert.IsTrue(actual.SearchText.Contains("näher mein gott zu dir"));
             Assert.IsTrue(actual.SearchText.Contains("geborgen"));
         }
+
+        /// <summary>
+        ///A test for ReadTitle
+        ///</summary>
+        [TestMethod()]
+        public void ReadTitleTest()
+        {
+            SongFileReader reader = new PowerPraiseSongFileReader();
+            Assert.AreEqual("Näher, mein Gott, zu Dir", reader.ReadTitle("powerpraise/Näher, mein Gott zu Dir.ppl"));
+            Assert.IsNull(reader.ReadTitle("powerpraise/non-existing-file.ppl"));
+        }
+
     }
 }

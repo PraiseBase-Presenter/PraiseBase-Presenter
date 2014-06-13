@@ -73,7 +73,7 @@ namespace Test
         [TestMethod()]
         public void SaveTest()
         {
-            PowerPraiseSongFileWriter target = new PowerPraiseSongFileWriter();
+            SongFileWriter target = new PowerPraiseSongFileWriter();
             string referenceFilename = "powerpraise/Näher, mein Gott zu Dir.ppl";
             string filename = "powerpraise/Näher, mein Gott zu Dir - neu.ppl";
 
@@ -188,7 +188,7 @@ namespace Test
         [TestMethod()]
         public void FileTypeDescriptionTest()
         {
-            PowerPraiseSongFileWriter target = new PowerPraiseSongFileWriter(); // TODO: Initialize to an appropriate value
+            SongFileWriter target = new PowerPraiseSongFileWriter(); // TODO: Initialize to an appropriate value
             string actual;
             actual = target.FileTypeDescription;
             Assert.AreEqual(actual, "PowerPraise Lied");
@@ -200,7 +200,7 @@ namespace Test
         [TestMethod()]
         public void FileExtensionTest()
         {
-            PowerPraiseSongFileWriter target = new PowerPraiseSongFileWriter(); // TODO: Initialize to an appropriate value
+            SongFileWriter target = new PowerPraiseSongFileWriter(); // TODO: Initialize to an appropriate value
             string actual;
             actual = target.FileExtension;
             Assert.AreEqual(actual, ".ppl");

@@ -67,10 +67,10 @@ namespace Test
         #endregion
 
         /// <summary>
-        ///A test for write
+        ///A test for Write
         ///</summary>
         [TestMethod()]
-        public void writeTest()
+        public void WriteTest()
         {
             StatisticsWriter target = new StatisticsWriter();
             string referenceFilename = "statistics/statistics.xml";

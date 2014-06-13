@@ -66,10 +66,10 @@ namespace Test
         #endregion
 
         /// <summary>
-        ///A test for read
+        ///A test for Read
         ///</summary>
         [TestMethod()]
-        public void readTest()
+        public void ReadTest()
         {
             StatisticsReader target = new StatisticsReader();
             string filename = "statistics/statistics.xml";
