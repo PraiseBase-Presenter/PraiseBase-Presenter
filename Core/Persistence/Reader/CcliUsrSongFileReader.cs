@@ -205,40 +205,41 @@ namespace Pbp.Persistence.Reader
                 }
 
                 CcliSongFileSection section = CcliSongFileSection.NONE;
-                System.IO.StreamReader file = new System.IO.StreamReader(filename);
-                string l;
-                while ((l = file.ReadLine()) != null)
+                using (StreamReader sr = new StreamReader(filename))
                 {
-                    string li = l.Trim();
-                    string[] s = li.Split(new[] { "=" }, StringSplitOptions.None);
-                    if (s.Length > 1)
+                    while (!sr.EndOfStream)
                     {
-                        string k = s[0];
-                        string v = s[1];
+                        string l = sr.ReadLine();
+                        string li = l.Trim();
+                        string[] s = li.Split(new[] { "=" }, StringSplitOptions.None);
+                        if (s.Length > 1)
+                        {
+                            string k = s[0];
+                            string v = s[1];
 
-                        if (section == CcliSongFileSection.CONTENT && k == "Title")
-                        {
-                            file.Close();
-                            return v;
-                        }
-                    }
-                    else
-                    {
-                        if (li == "[File]")
-                        {
-                            section = CcliSongFileSection.FILE;
+                            if (section == CcliSongFileSection.CONTENT && k == "Title")
+                            {
+                                sr.Close();
+                                return v;
+                            }
                         }
                         else
                         {
-                            Match m = Regex.Match(li, "^\\[S A([0-9]+)\\]$");
-                            if (m.Success)
+                            if (li == "[File]")
                             {
-                                section = CcliSongFileSection.CONTENT;
+                                section = CcliSongFileSection.FILE;
+                            }
+                            else
+                            {
+                                Match m = Regex.Match(li, "^\\[S A([0-9]+)\\]$");
+                                if (m.Success)
+                                {
+                                    section = CcliSongFileSection.CONTENT;
+                                }
                             }
                         }
                     }
                 }
-                file.Close();
             }
             catch (Exception e)
             {
@@ -274,6 +275,7 @@ namespace Pbp.Persistence.Reader
                                 case "Version":
                                     if (v != SupportedFileFormatVersion)
                                     {
+                                        sr.Close();
                                         return false;
                                     }
                                     versionOk = true;
@@ -282,6 +284,7 @@ namespace Pbp.Persistence.Reader
                                 case "Type":
                                     if (v != TypeString)
                                     {
+                                        sr.Close();
                                         return false;
                                     }
                                     typeOk = true;
@@ -290,6 +293,7 @@ namespace Pbp.Persistence.Reader
                                 default:
                                     if (versionOk && typeOk)
                                     {
+                                        sr.Close();
                                         return true;
                                     }
                                     break;

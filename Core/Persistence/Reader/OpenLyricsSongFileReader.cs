@@ -278,19 +278,23 @@ namespace Pbp.Persistence.Reader
                         {
                             if (t.GetAttribute("version").ToString() == SupportedFileFormatVersion)
                             {
+                                t.Close();
                                 return true;
                             }
                             else
                             {
+                                t.Close();
                                 return false;
                             }
                         }
                         else
                         {
+                            t.Close();
                             return false;
                         }
                     }
                 }
+                t.Close();
             }
             catch (Exception)
             {
