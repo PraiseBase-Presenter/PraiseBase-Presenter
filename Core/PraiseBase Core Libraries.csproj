@@ -46,6 +46,9 @@
     <Compile Include="Model\Bible\BibleVerse.cs" />
     <Compile Include="Model\Bible\BibleVerseSelection.cs" />
     <Compile Include="Model\Setlist.cs" />
+    <Compile Include="Model\Song\PowerPraise\PowerPraiseSong.cs" />
+    <Compile Include="Model\Song\PowerPraise\PowerPraiseSongPart.cs" />
+    <Compile Include="Model\Song\PowerPraise\PowerPraiseSongSlide.cs" />
     <Compile Include="Model\Song\Song.cs" />
     <Compile Include="Model\Song\SongAuthor.cs" />
     <Compile Include="Model\Song\SongBook.cs" />
