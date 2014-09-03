@@ -35,15 +35,15 @@ namespace Pbp.Persistence.Writer
 {
     public class ExtendedSongFileWriter : SongFileWriter
     {
-        public override string FileExtension { get { return ".ppl"; } }
+        public string GetFileExtension() { return ".ppl"; }
 
-        public override string FileTypeDescription { get { return "PowerPraise Lied"; } }
+        public string GetFileTypeDescription() { return "PowerPraise Lied"; }
 
         protected const string SupportedFileFormatVersion = "3.0";
 
         protected const string XmlRootNodeName = "ppl";
 
-        public override void Save(string filename, Song sng)
+        public void Save(string filename, Song sng)
         {
             // Fonts and colors (default values are consitent with the PowerPraise default song template)
             TextFormatting mainText = sng.MainText != null ? sng.MainText : new TextFormatting(

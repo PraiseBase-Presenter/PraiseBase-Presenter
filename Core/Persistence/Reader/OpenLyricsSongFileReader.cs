@@ -35,15 +35,15 @@ namespace Pbp.Persistence.Reader
 {
     public class OpenLyricsSongFileReader : SongFileReader
     {
-        public override string FileExtension { get { return ".xml"; } }
+        public string GetFileExtension() { return ".xml"; }
 
-        public override string FileTypeDescription { get { return "OpenLyrics Song"; } }
+        public string GetFileTypeDescription() { return "OpenLyrics Song"; }
 
         protected const string SupportedFileFormatVersion = "0.8";
 
         protected const string XmlRootNodeName = "song";
 
-        public override Song Load(string filename)
+        public Song Load(string filename)
         {
             Song sng = new Song();
 
@@ -213,7 +213,7 @@ namespace Pbp.Persistence.Reader
         /// </summary>
         /// <param name="filename">Absolute path to the song file</param>
         /// <returns></returns>
-        public override String ReadTitle(string filename)
+        public String ReadTitle(string filename)
         {
             try
             {
@@ -265,7 +265,7 @@ namespace Pbp.Persistence.Reader
         /// </summary>
         /// <param name="filename"></param>
         /// <returns></returns>
-        public override bool IsFileSupported(string filename)
+        public bool IsFileSupported(string filename)
         {
             try
             {

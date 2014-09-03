@@ -63,18 +63,21 @@ namespace Pbp.Persistence.Writer
         /// </summary>
         private SongFileWriterFactory() 
         {
-            IEnumerable<Type> AllTypes = Assembly.GetExecutingAssembly().GetTypes().Where(t => t.IsSubclassOf(typeof(SongFileWriter)));
+            var interfaceType = typeof(SongFileWriter);
+            var AllTypes = AppDomain.CurrentDomain.GetAssemblies()
+              .SelectMany(x => x.GetTypes())
+              .Where(x => interfaceType.IsAssignableFrom(x) && !x.IsInterface && !x.IsAbstract);
             foreach (var atype in AllTypes)
             {
                 SongFileWriter inst = (SongFileWriter)Activator.CreateInstance(atype);
                 writers.Add(atype, inst);
-                if (! SupportedExtensionMapping.Keys.Contains(inst.FileExtension))
+                if (! SupportedExtensionMapping.Keys.Contains(inst.GetFileExtension()))
                 {
-                    SupportedExtensionMapping.Add(inst.FileExtension, new HashSet<Type>(new[] { atype }));
+                    SupportedExtensionMapping.Add(inst.GetFileExtension(), new HashSet<Type>(new[] { atype }));
                 }
                 else
                 {
-                    SupportedExtensionMapping[inst.FileExtension].Add(atype);
+                    SupportedExtensionMapping[inst.GetFileExtension()].Add(atype);
                 }
                 Console.WriteLine("Loaded song writer: " + atype);
             }
@@ -126,7 +129,7 @@ namespace Pbp.Persistence.Writer
                 {
                     fltr += "|";
                 }
-                fltr += t.FileTypeDescription + " (*" + t.FileExtension + ")|*" + t.FileExtension;
+                fltr += t.GetFileTypeDescription() + " (*" + t.GetFileExtension() + ")|*" + t.GetFileExtension();
             }
             return fltr;
         }

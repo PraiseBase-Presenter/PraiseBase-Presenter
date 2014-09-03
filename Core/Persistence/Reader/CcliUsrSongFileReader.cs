@@ -37,9 +37,9 @@ namespace Pbp.Persistence.Reader
 {
     public class CcliUsrSongFileReader : SongFileReader
     {
-        public override string FileExtension { get { return ".usr"; } }
+        public string GetFileExtension() { return ".usr"; }
 
-        public override string FileTypeDescription { get { return "SongSelect Import File"; } }
+        public string GetFileTypeDescription() { return "SongSelect Import File"; }
 
         protected const string SupportedFileFormatVersion = "3.0";
 
@@ -51,7 +51,7 @@ namespace Pbp.Persistence.Reader
             CONTENT
         }
 
-        public override Song Load(string filename)
+        public Song Load(string filename)
         {
             Song sng = new Song();
 
@@ -195,7 +195,7 @@ namespace Pbp.Persistence.Reader
         /// </summary>
         /// <param name="filename">Absolute path to the song file</param>
         /// <returns></returns>
-        public override String ReadTitle(string filename)
+        public String ReadTitle(string filename)
         {
             try
             {
@@ -253,7 +253,7 @@ namespace Pbp.Persistence.Reader
         /// </summary>
         /// <param name="filename"></param>
         /// <returns></returns>
-        public override bool IsFileSupported(string filename)
+        public bool IsFileSupported(string filename)
         {
             try
             {

@@ -60,18 +60,21 @@ namespace Pbp.Persistence.Reader
         /// </summary>
         private SongFileReaderFactory()
         {
-            IEnumerable<Type> AllTypes = Assembly.GetExecutingAssembly().GetTypes().Where(t => t.IsSubclassOf(typeof(SongFileReader)));
+            var interfaceType = typeof(SongFileReader);
+            var AllTypes = AppDomain.CurrentDomain.GetAssemblies()
+              .SelectMany(x => x.GetTypes())
+              .Where(x => interfaceType.IsAssignableFrom(x) && !x.IsInterface && !x.IsAbstract);
             foreach (var atype in AllTypes)
             {
                 SongFileReader inst = (SongFileReader)Activator.CreateInstance(atype);
                 readers.Add(atype, inst);
-                if (!SupportedExtensionMapping.Keys.Contains(inst.FileExtension))
+                if (!SupportedExtensionMapping.Keys.Contains(inst.GetFileExtension()))
                 {
-                    SupportedExtensionMapping.Add(inst.FileExtension, new HashSet<Type>(new[] { atype }));
+                    SupportedExtensionMapping.Add(inst.GetFileExtension(), new HashSet<Type>(new[] { atype }));
                 }
                 else
                 {
-                    SupportedExtensionMapping[inst.FileExtension].Add(atype);
+                    SupportedExtensionMapping[inst.GetFileExtension()].Add(atype);
                 }
                 Console.WriteLine("Loaded song reader: " + atype);
             }
@@ -127,7 +130,7 @@ namespace Pbp.Persistence.Reader
                 {
                     exts += ";";
                 }
-                exts += "*" + t.FileExtension;
+                exts += "*" + t.GetFileExtension();
             }
             return "Lieddateien (" + exts + ")|" + exts + "|Alle Dateien (*.*)|*.*";
         }

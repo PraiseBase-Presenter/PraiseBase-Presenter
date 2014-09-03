@@ -313,7 +313,7 @@ namespace Pbp.Forms
                 {
                     string fileName = Settings.Default.DataDirectory + Path.DirectorySeparatorChar
                         + Settings.Default.SongDir + Path.DirectorySeparatorChar
-                        + ((Song)listViewSongs.Items[x].Tag).Title + SongFileWriterFactory.Instance.CreateFactory(SongFileWriterFactory.Instance.PreferredType).FileExtension;
+                        + ((Song)listViewSongs.Items[x].Tag).Title + SongFileWriterFactory.Instance.CreateFactory(SongFileWriterFactory.Instance.PreferredType).GetFileExtension();
                     if ((File.Exists(fileName) && (MessageBox.Show(string.Format(Properties.StringResources.SongExistsAlready, ((Song)listViewSongs.Items[x].Tag).Title) 
                         + Properties.StringResources.Overwrite + "?", Properties.StringResources.SongImporter, 
                         MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)) || !File.Exists(fileName))

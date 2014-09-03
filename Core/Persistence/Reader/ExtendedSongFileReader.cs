@@ -36,15 +36,15 @@ namespace Pbp.Persistence.Reader
 {
     public class ExtendedSongFileReader : SongFileReader
     {
-        public override string FileExtension { get { return ".ppl"; } }
+        public string GetFileExtension() { return ".ppl"; }
 
-        public override string FileTypeDescription { get { return "PowerPraise Lied"; } }
+        public string GetFileTypeDescription() { return "PowerPraise Lied"; }
 
         protected const string SupportedFileFormatVersion = "3.0";
 
         protected const string XmlRootNodeName = "ppl";
 
-        public override Song Load(string filename)
+        public Song Load(string filename)
         {
             Song sng = new Song();
 
@@ -443,7 +443,7 @@ namespace Pbp.Persistence.Reader
         /// </summary>
         /// <param name="filename">Absolute path to the song file</param>
         /// <returns></returns>
-        public override String ReadTitle(string filename)
+        public String ReadTitle(string filename)
         {
             try
             {
@@ -491,7 +491,7 @@ namespace Pbp.Persistence.Reader
         /// </summary>
         /// <param name="filename"></param>
         /// <returns></returns>
-        public override bool IsFileSupported(string filename)
+        public bool IsFileSupported(string filename)
         {
             try
             {

@@ -30,38 +30,38 @@ using Pbp.Model.Song;
 
 namespace Pbp.Persistence.Reader
 {
-    public abstract class SongFileReader
+    public interface SongFileReader
     {
         /// <summary>
         /// Loads and instantiates a song from a file
         /// </summary>
         /// <param name="filename">Absolute path to the song file</param>
         /// <returns>Song object instance</returns>
-        abstract public Song Load(string filename);
+        Song Load(string filename);
 
         /// <summary>
         /// Reads the title of a song from a file
         /// </summary>
         /// <param name="filename">Absolute path to the song file</param>
         /// <returns></returns>
-        abstract public String ReadTitle(string filename);
+        String ReadTitle(string filename);
 
         /// <summary>
         /// Tests if a given file is supported by this reader
         /// </summary>
         /// <param name="filename"></param>
         /// <returns></returns>
-        abstract public bool IsFileSupported(string filename);
+        bool IsFileSupported(string filename);
 
         /// <summary>
         /// Defines the extensions this file format uses, e.g. ".xml"
         /// </summary>
-        abstract public string FileExtension { get; }
+        string GetFileExtension();
 
         /// <summary>
         /// The common name of the file format
         /// </summary>
-        abstract public string FileTypeDescription { get; }
+        string GetFileTypeDescription();
     }
 
     /// <summary>

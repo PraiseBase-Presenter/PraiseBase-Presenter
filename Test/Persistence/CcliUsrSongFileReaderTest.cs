@@ -184,8 +184,8 @@ namespace Test
         {
             SongFileReader target = new CcliUsrSongFileReader(); // TODO: Initialize to an appropriate value
             string actual  = ".usr";
-            actual = target.FileExtension;
-            Assert.AreEqual(target.FileExtension, actual);
+            actual = target.GetFileExtension();
+            Assert.AreEqual(target.GetFileExtension(), actual);
         }
 
         /// <summary>
@@ -196,8 +196,8 @@ namespace Test
         {
             SongFileReader target = new CcliUsrSongFileReader(); // TODO: Initialize to an appropriate value
             string actual = "SongSelect Import File";
-            actual = target.FileTypeDescription;
-            Assert.AreEqual(target.FileTypeDescription, actual);
+            actual = target.GetFileTypeDescription();
+            Assert.AreEqual(target.GetFileTypeDescription(), actual);
         }
     }
 }

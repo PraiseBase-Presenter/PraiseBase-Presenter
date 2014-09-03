@@ -29,12 +29,12 @@ using Pbp.Model.Song;
 
 namespace Pbp.Persistence.Writer
 {
-    public abstract class SongFileWriter
+    public interface SongFileWriter
     {
-        abstract public void Save(string filename, Song sng);
+        void Save(string filename, Song sng);
 
-        abstract public string FileExtension { get; }
+        string GetFileExtension();
 
-        abstract public string FileTypeDescription { get; }
+        string GetFileTypeDescription();
     }
 }

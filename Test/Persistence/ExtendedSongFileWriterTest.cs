@@ -209,7 +209,7 @@ namespace Test
         {
             SongFileWriter target = new ExtendedSongFileWriter(); // TODO: Initialize to an appropriate value
             string actual;
-            actual = target.FileTypeDescription;
+            actual = target.GetFileTypeDescription();
             Assert.AreEqual(actual, "PowerPraise Lied");
         }
 
@@ -221,7 +221,7 @@ namespace Test
         {
             SongFileWriter target = new ExtendedSongFileWriter(); // TODO: Initialize to an appropriate value
             string actual;
-            actual = target.FileExtension;
+            actual = target.GetFileExtension();
             Assert.AreEqual(actual, ".ppl");
         }
     }
