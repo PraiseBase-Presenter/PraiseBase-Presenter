@@ -61,28 +61,28 @@ namespace Pbp.Persistence.Reader
                 PowerPraiseConstants.MainText.Color,
                 new TextOutline(30, Color.Black),
                 new TextShadow(10, 20, 125, Color.Black),
-                PowerPraiseConstants.MainText.LineSpacing);
+                PowerPraiseConstants.MainLineSpacing);
 
             sng.TranslationText = new TextFormatting(
                 PowerPraiseConstants.TranslationText.Font,
                 PowerPraiseConstants.TranslationText.Color,
                 new TextOutline(30, Color.Black),
                 new TextShadow(10, 20, 125, Color.Black),
-                PowerPraiseConstants.TranslationText.LineSpacing);
+                PowerPraiseConstants.TranslationLineSpacing);
 
             sng.CopyrightText = new TextFormatting(
                 PowerPraiseConstants.CopyrightText.Font,
                 PowerPraiseConstants.CopyrightText.Color,
                 new TextOutline(30, Color.Black),
                 new TextShadow(10, 20, 125, Color.Black),
-                PowerPraiseConstants.CopyrightText.LineSpacing);
+                PowerPraiseConstants.MainLineSpacing);
 
             sng.SourceText = new TextFormatting(
                PowerPraiseConstants.SourceText.Font,
                PowerPraiseConstants.SourceText.Color,
                new TextOutline(30, Color.Black),
                new TextShadow(10, 20, 125, Color.Black),
-               PowerPraiseConstants.SourceText.LineSpacing);
+               PowerPraiseConstants.MainLineSpacing);
 
             List<String> fields = new List<string>();
             List<String> words = new List<string>();

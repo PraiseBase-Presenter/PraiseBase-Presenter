@@ -62,6 +62,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Persistence\CcliUsrSongFileReaderTest.cs" />
+    <Compile Include="Persistence\ExtendedSongFileReaderTest.cs" />
+    <Compile Include="Persistence\ExtendedSongFileWriterTest.cs" />
     <Compile Include="Persistence\OpenLyricsSongFileReaderTest.cs" />
     <Compile Include="Persistence\PowerPraiseSongFileReaderTest.cs" />
     <Compile Include="Persistence\PowerPraiseSongFileWriterTest.cs" />

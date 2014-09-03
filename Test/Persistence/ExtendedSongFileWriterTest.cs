@@ -1,7 +1,7 @@
 ﻿using Pbp.Persistence;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
-using Pbp.Model.Song.PowerPraise;
+using Pbp.Model.Song;
 using Pbp.Persistence.Writer;
 using Pbp.Model;
 
@@ -14,7 +14,7 @@ namespace Test
     ///to contain all PowerPraiseSongFileWriterTest Unit Tests
     ///</summary>
     [TestClass()]
-    public class PowerPraiseSongFileWriterTest
+    public class ExtendedSongFileWriterTest
     {
 
 
@@ -73,139 +73,122 @@ namespace Test
         [TestMethod()]
         public void SaveTest()
         {
-            PowerPraiseSongFileWriter target = new PowerPraiseSongFileWriter();
+            SongFileWriter target = new ExtendedSongFileWriter();
             string referenceFilename = "powerpraise/Näher, mein Gott zu Dir.ppl";
             string filename = "powerpraise/Näher, mein Gott zu Dir - neu.ppl";
 
-            PowerPraiseSong sng = new PowerPraiseSong();
+            Song sng = new Song();
             sng.Title = "Näher, mein Gott, zu Dir";
             sng.Language = "Deutsch";
-            sng.Category = "Anbetung";
-
-            sng.CopyrightTextPosition = PowerPraiseSong.AnnotationTextPosition.LastSlide;
-            sng.CopyrightText.Add("Text und Musik: Lowell Mason, 1792-1872");
-            sng.SourceTextEnabled = true;
-            sng.SourceText = "grünes Buch 339";
+            sng.Themes.Add("Anbetung");
+            sng.Copyright = "Text und Musik: Lowell Mason, 1792-1872";
+            var sb = new SongBook();
+            sb.Name = "grünes Buch 339";
+            sng.SongBooks.Add(sb);
             
-            sng.BackgroundImages.Add("Blumen\\Blume 3.jpg");
+            sng.RelativeImagePaths.Add("Blumen\\Blume 3.jpg");
 
-            sng.MainTextFormatting = new PowerPraiseSong.TextFormatting
-            {
-                Font = new System.Drawing.Font("Times New Roman", 44, System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic),
-                Color = System.Drawing.Color.White,
-                OutlineWidth = 30,
-                ShadowDistance = 15
-            };
-            sng.TranslationTextFormatting = new PowerPraiseSong.TextFormatting
-            {
-                Font = new System.Drawing.Font("Times New Roman", 20, System.Drawing.FontStyle.Regular),
-                Color = System.Drawing.Color.White,
-                OutlineWidth = 30,
-                ShadowDistance = 20
-            };
-            sng.CopyrightTextFormatting = new PowerPraiseSong.TextFormatting
-            {
-                Font = new System.Drawing.Font("Times New Roman", 14, System.Drawing.FontStyle.Regular),
-                Color = System.Drawing.Color.White,
-                OutlineWidth = 30,
-                ShadowDistance = 20
-            };
-            sng.SourceTextFormatting = new PowerPraiseSong.TextFormatting
-            {
-                Font = new System.Drawing.Font("Times New Roman", 30, System.Drawing.FontStyle.Regular),
-                Color = System.Drawing.Color.White,
-                OutlineWidth = 30,
-                ShadowDistance = 20
-            };
-            sng.TextOutlineFormatting = new PowerPraiseSong.TextOutline
-            {
-                Enabled = false,
-                Color = System.Drawing.Color.Black,
-            };
-            sng.TextShadowFormatting = new PowerPraiseSong.TextShadow 
-            {
-                Enabled = true,
-                Color = System.Drawing.Color.Black,
-                Direction = 125                
-            };
+            sng.MainText = new TextFormatting(
+                new System.Drawing.Font("Times New Roman", 44, System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic),
+                System.Drawing.Color.White, 
+                new TextOutline(30,  System.Drawing.Color.Black),
+                new TextShadow(1, 15, 125, System.Drawing.Color.Black),
+                30);
+
+            sng.TranslationText = new TextFormatting(
+                new System.Drawing.Font("Times New Roman", 20, System.Drawing.FontStyle.Regular),
+                System.Drawing.Color.White, 
+                new TextOutline(30,  System.Drawing.Color.Black),
+                new TextShadow(1, 20, 125, System.Drawing.Color.Black),
+                20);
+
+            sng.CopyrightText = new TextFormatting(
+                new System.Drawing.Font("Times New Roman", 14, System.Drawing.FontStyle.Regular),
+                System.Drawing.Color.White,
+                new TextOutline(30, System.Drawing.Color.Black),
+                new TextShadow(1, 20, 125, System.Drawing.Color.Black),
+                30);
+
+            sng.SourceText = new TextFormatting(
+                new System.Drawing.Font("Times New Roman", 30, System.Drawing.FontStyle.Regular),
+                System.Drawing.Color.White,
+                new TextOutline(30, System.Drawing.Color.Black),
+                new TextShadow(1, 20, 125, System.Drawing.Color.Black),
+                30);
 
             sng.TextOrientation = new TextOrientation(VerticalOrientation.Middle, HorizontalOrientation.Left);
-            sng.TranslationPosition = PowerPraiseSong.TextDisplayMode.Inline;
+            sng.TextOutlineEnabled = false;
+            sng.TextShadowEnabled = true;
 
-            sng.SongTextBorders = new PowerPraiseSong.TextBorders 
-            {
-                TextLeft = 50,
-                TextTop = 40,
-                TextRight = 60,
-                TextBottom = 70,
-                CopyrightBottom = 30,
-                SourceTop = 20,
-                SourceRight = 40
-            };
+            sng.TextBorders = new SongTextBorders(
+                50,
+                40,
+                60,
+                70,
+                30,
+                20,
+                40
+            );
 
-            var part = new PowerPraiseSongTextPart();
+            var part = new SongPart();
             part.Caption = "Teil 1";
-            var slide = new PowerPraiseSongTextSlide();
+            var slide = new SongSlide(sng);
             slide.Lines.Add("Näher, mein Gott, zu Dir,");
             slide.Lines.Add("sei meine Bitt'!");
             slide.Lines.Add("Näher, o Herr, zu Dir");
             slide.Lines.Add("mit jedem Schritt.");
-            slide.BackgroundNr = 1;
-            slide.MainSize = 42;
+            slide.ImageNumber = 1;
+            slide.TextSize = 42;
             part.Slides.Add(slide);
-            slide = new PowerPraiseSongTextSlide();
+            slide = new SongSlide(sng);
             slide.Lines.Add("Nur an dem Herzen Dein");
             slide.Lines.Add("kann ich geborgen sein;");
             slide.Lines.Add("deshalb die Bitte mein:");
             slide.Lines.Add("Näher zu Dir!");
-            slide.BackgroundNr = 1;
+            slide.ImageNumber = 1;
             part.Slides.Add(slide);
-            sng.SongTextParts.Add(part);
+            sng.Parts.Add(part);
 
-            part = new PowerPraiseSongTextPart();
+            part = new SongPart();
             part.Caption = "Teil 2";
-            slide = new PowerPraiseSongTextSlide();
+            slide = new SongSlide(sng);
             slide.Lines.Add("Näher, mein Gott, zu Dir!");
             slide.Lines.Add("Ein jeder Tag");
             slide.Lines.Add("soll es neu zeigen mir,");
             slide.Lines.Add("was er vermag:");
-            slide.BackgroundNr = 1;
-            slide.MainSize = 42;
+            slide.ImageNumber = 1;
+            slide.TextSize = 42;
             part.Slides.Add(slide);
-            slide = new PowerPraiseSongTextSlide();
+            slide = new SongSlide(sng);
             slide.Lines.Add("Wie seiner Gnade Macht,");
             slide.Lines.Add("Erlösung hat gebracht,");
             slide.Lines.Add("in uns're Sündennacht.");
             slide.Lines.Add("Näher zu Dir!");
-            slide.BackgroundNr = 1;
-            slide.MainSize = 42;
+            slide.ImageNumber = 1;
+            slide.TextSize = 42;
             part.Slides.Add(slide);
-            sng.SongTextParts.Add(part);
+            sng.Parts.Add(part);
 
-            part = new PowerPraiseSongTextPart();
+            part = new SongPart();
             part.Caption = "Teil 3";
-            slide = new PowerPraiseSongTextSlide();
-            slide = new PowerPraiseSongTextSlide();
+            slide = new SongSlide(sng);
+            slide = new SongSlide(sng);
             slide.Lines.Add("Näher, mein Gott, zu Dir!");
             slide.Lines.Add("Dich bet' ich an.");
             slide.Lines.Add("Wie vieles hast an mir,");
             slide.Lines.Add("Du doch getan!");
-            slide.BackgroundNr = 1;
-            slide.MainSize = 42;
+            slide.ImageNumber = 1;
+            slide.TextSize = 42;
             part.Slides.Add(slide);
-            slide = new PowerPraiseSongTextSlide();
+            slide = new SongSlide(sng);
             slide.Lines.Add("Von Banden frei und los,");
             slide.Lines.Add("ruh' ich in Deinem Schoss.");
             slide.Lines.Add("Ja, Deine Gnad' ist gross!");
             slide.Lines.Add("Näher zu Dir!");
-            slide.BackgroundNr = 1;
-            slide.MainSize = 42;
+            slide.ImageNumber = 1;
+            slide.TextSize = 42;
             part.Slides.Add(slide);
-            sng.SongTextParts.Add(part);
-
-            sng.SongTextOrder.Add(sng.SongTextParts[0]);
-            sng.SongTextOrder.Add(sng.SongTextParts[1]);
-            sng.SongTextOrder.Add(sng.SongTextParts[2]);
+            sng.Parts.Add(part);
 
             target.Save(filename, sng);
 
@@ -224,7 +207,7 @@ namespace Test
         [TestMethod()]
         public void FileTypeDescriptionTest()
         {
-            PowerPraiseSongFileWriter target = new PowerPraiseSongFileWriter();
+            SongFileWriter target = new ExtendedSongFileWriter(); // TODO: Initialize to an appropriate value
             string actual;
             actual = target.FileTypeDescription;
             Assert.AreEqual(actual, "PowerPraise Lied");
@@ -236,7 +219,7 @@ namespace Test
         [TestMethod()]
         public void FileExtensionTest()
         {
-            PowerPraiseSongFileWriter target = new PowerPraiseSongFileWriter();
+            SongFileWriter target = new ExtendedSongFileWriter(); // TODO: Initialize to an appropriate value
             string actual;
             actual = target.FileExtension;
             Assert.AreEqual(actual, ".ppl");

@@ -70,6 +70,7 @@
     <Compile Include="Model\TextShadow.cs" />
     <Compile Include="Persistence\PowerPraiseConstants.cs" />
     <Compile Include="Persistence\Reader\CcliUsrSongFileReader.cs" />
+    <Compile Include="Persistence\Reader\ExtendedSongFileReader.cs" />
     <Compile Include="Persistence\Reader\OpenLyricsSongFileReader.cs" />
     <Compile Include="Persistence\Reader\PowerPraiseSongFileReader.cs" />
     <Compile Include="Persistence\Reader\SetlistReader.cs" />
@@ -77,6 +78,7 @@
     <Compile Include="Persistence\Reader\SongFileReaderFactory.cs" />
     <Compile Include="Persistence\Reader\StatisticsReader.cs" />
     <Compile Include="Persistence\Reader\XMLBibleReader.cs" />
+    <Compile Include="Persistence\Writer\ExtendedSongFileWriter.cs" />
     <Compile Include="Persistence\Writer\PowerPraiseSongFileWriter.cs" />
     <Compile Include="Persistence\Writer\SetlistWriter.cs" />
     <Compile Include="Persistence\Writer\SongFileWriter.cs" />
@@ -91,6 +93,7 @@
   <ItemGroup>
     <WCFMetadata Include="Service References\" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
