@@ -349,6 +349,8 @@ namespace Pbp.Persistence.Writer
             xmlRoot["formatting"]["borders"]["sourcetop"].InnerText = borders.SourceTop.ToString();
             xmlRoot["formatting"]["borders"].AppendChild(xmlDoc.CreateElement("sourceright"));
             xmlRoot["formatting"]["borders"]["sourceright"].InnerText = borders.SourceRight.ToString();
+
+            xml.Write(filename);
         }
     }
 }
