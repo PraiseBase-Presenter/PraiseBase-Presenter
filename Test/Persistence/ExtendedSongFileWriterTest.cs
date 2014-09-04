@@ -75,7 +75,7 @@ namespace Test
         {
             SongFileWriter target = new ExtendedSongFileWriter();
             string referenceFilename = "powerpraise/Näher, mein Gott zu Dir.ppl";
-            string filename = "powerpraise/Näher, mein Gott zu Dir - neu.ppl";
+            string filename = "powerpraise/Näher, mein Gott zu Dir - neu - extended.ppl";
 
             Song sng = new Song();
             sng.Title = "Näher, mein Gott, zu Dir";
