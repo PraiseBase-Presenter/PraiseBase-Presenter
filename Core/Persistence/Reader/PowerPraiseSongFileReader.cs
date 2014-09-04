@@ -72,12 +72,12 @@ namespace Pbp.Persistence.Reader
             {
                 if (elem.Name == "part")
                 {
-                    sng.SongTextParts.Add(parseSongPart(elem, PowerPraiseConstants.SlideMainTextSize));
+                    sng.Parts.Add(parseSongPart(elem, PowerPraiseConstants.SlideMainTextSize));
                 }
             }
 
             // Order
-            sng.SongTextOrder.AddRange(parseOrder(xmlRoot["order"], sng));
+            sng.Order.AddRange(parseOrder(xmlRoot["order"], sng));
 
             // Copyright text
             if (xmlRoot["information"] != null)
@@ -106,10 +106,10 @@ namespace Pbp.Persistence.Reader
             XmlElement fontElem = xmlRoot["formatting"]["font"];
 
             // Font formatting
-            sng.MainTextFormatting = parseTextFormatting(fontElem["maintext"], PowerPraiseConstants.MainText);
-            sng.TranslationTextFormatting = parseTextFormatting(fontElem["translationtext"], PowerPraiseConstants.TranslationText);
-            sng.CopyrightTextFormatting = parseTextFormatting(fontElem["copyrighttext"], PowerPraiseConstants.CopyrightText);
-            sng.SourceTextFormatting = parseTextFormatting(fontElem["sourcetext"], PowerPraiseConstants.SourceText);
+            sng.MainTextFontFormatting = parseTextFormatting(fontElem["maintext"], PowerPraiseConstants.MainText);
+            sng.TranslationTextFontFormatting = parseTextFormatting(fontElem["translationtext"], PowerPraiseConstants.TranslationText);
+            sng.CopyrightTextFontFormatting = parseTextFormatting(fontElem["copyrighttext"], PowerPraiseConstants.CopyrightText);
+            sng.SourceTextFontFormatting = parseTextFormatting(fontElem["sourcetext"], PowerPraiseConstants.SourceText);
 
             // Font outline
             sng.TextOutlineFormatting = parseFontOutline(fontElem["outline"], PowerPraiseConstants.FontOutline);
@@ -133,10 +133,10 @@ namespace Pbp.Persistence.Reader
             sng.TextOrientation = parseOrientation(textOrientationElem, PowerPraiseConstants.TextOrientation);
 
             // Translation position
-            sng.TranslationPosition = parseTranslationPosition(textOrientationElem, PowerPraiseConstants.TranslationPosition);
+            sng.TranslationTextPosition = parseTranslationPosition(textOrientationElem, PowerPraiseConstants.TranslationPosition);
 
             // Borders
-            sng.SongTextBorders = parseBorders(xmlRoot["formatting"]["borders"], PowerPraiseConstants.TextBorders);
+            sng.Borders = parseBorders(xmlRoot["formatting"]["borders"], PowerPraiseConstants.TextBorders);
 
             return sng;
         }
@@ -168,9 +168,9 @@ namespace Pbp.Persistence.Reader
         /// </summary>
         /// <param name="elem"></param>
         /// <returns></returns>
-        private PowerPraiseSongTextPart parseSongPart(XmlElement elem, int defaultMainSize)
+        private PowerPraiseSongPart parseSongPart(XmlElement elem, int defaultMainSize)
         {
-            PowerPraiseSongTextPart part = new PowerPraiseSongTextPart();
+            PowerPraiseSongPart part = new PowerPraiseSongPart();
 
             // Caption
             part.Caption = elem.GetAttribute("caption");
@@ -192,9 +192,9 @@ namespace Pbp.Persistence.Reader
         /// </summary>
         /// <param name="elem"></param>
         /// <returns></returns>
-        private PowerPraiseSongTextSlide parseSongSlide(XmlElement elem, int defaultMainSize)
+        private PowerPraiseSongSlide parseSongSlide(XmlElement elem, int defaultMainSize)
         {
-            PowerPraiseSongTextSlide slide = new PowerPraiseSongTextSlide();
+            PowerPraiseSongSlide slide = new PowerPraiseSongSlide();
 
             // Slide-specific text size
             slide.MainSize = defaultMainSize;
@@ -219,7 +219,7 @@ namespace Pbp.Persistence.Reader
                 }
                 if (lineElem.Name == "translation")
                 {
-                    slide.TranslatedLines.Add(lineElem.InnerText);
+                    slide.Translation.Add(lineElem.InnerText);
                 }
             }
 
@@ -232,9 +232,9 @@ namespace Pbp.Persistence.Reader
         /// <param name="xelem"></param>
         /// <param name="sng"></param>
         /// <returns></returns>
-        private List<PowerPraiseSongTextPart> parseOrder(XmlElement xelem, PowerPraiseSong sng)
+        private List<PowerPraiseSongPart> parseOrder(XmlElement xelem, PowerPraiseSong sng)
         {
-            List<PowerPraiseSongTextPart> list = new List<PowerPraiseSongTextPart>();
+            List<PowerPraiseSongPart> list = new List<PowerPraiseSongPart>();
             foreach (XmlElement elem in xelem)
             {
                 if (elem.Name == "item")
@@ -242,7 +242,7 @@ namespace Pbp.Persistence.Reader
                     if (!String.IsNullOrEmpty(elem.InnerText))
                     {
                         string val = elem.InnerText.Trim();
-                        foreach (var part in sng.SongTextParts)
+                        foreach (var part in sng.Parts)
                         {
                             if (part.Caption == val)
                             {
@@ -262,22 +262,22 @@ namespace Pbp.Persistence.Reader
         /// <param name="elem"></param>
         /// <param name="defaultValue"></param>
         /// <returns></returns>
-        private PowerPraiseSong.AnnotationTextPosition parseCopyRightPosition(XmlElement elem, PowerPraiseSong.AnnotationTextPosition defaultValue)
+        private PowerPraiseSong.CopyrightPosition parseCopyRightPosition(XmlElement elem, PowerPraiseSong.CopyrightPosition defaultValue)
         {
-            PowerPraiseSong.AnnotationTextPosition position = defaultValue;
+            PowerPraiseSong.CopyrightPosition position = defaultValue;
             if (elem != null)
             {
                 if (elem.InnerText == "firstslide")
                 {
-                    position = PowerPraiseSong.AnnotationTextPosition.FirstSlide;
+                    position = PowerPraiseSong.CopyrightPosition.FirstSlide;
                 }
                 else if (elem.InnerText == "lastslide")
                 {
-                    position = PowerPraiseSong.AnnotationTextPosition.LastSlide;
+                    position = PowerPraiseSong.CopyrightPosition.LastSlide;
                 }
                 else if (elem.InnerText == "none")
                 {
-                    position = PowerPraiseSong.AnnotationTextPosition.None;
+                    position = PowerPraiseSong.CopyrightPosition.None;
                 }
             }
             return position;
@@ -344,9 +344,9 @@ namespace Pbp.Persistence.Reader
         /// <param name="elem"></param>
         /// <param name="defaultValue"></param>
         /// <returns></returns>
-        private PowerPraiseSong.TextFormatting parseTextFormatting(XmlElement elem, PowerPraiseSong.TextFormatting defaultValue)
+        private PowerPraiseSong.FontFormatting parseTextFormatting(XmlElement elem, PowerPraiseSong.FontFormatting defaultValue)
         {
-            PowerPraiseSong.TextFormatting f = defaultValue;
+            PowerPraiseSong.FontFormatting f = defaultValue;
             if (elem != null)
             {
                 int trySize;
@@ -385,9 +385,9 @@ namespace Pbp.Persistence.Reader
         /// <param name="elem"></param>
         /// <param name="defaultValue"></param>
         /// <returns></returns>
-        private PowerPraiseSong.TextOutline parseFontOutline(XmlElement elem, PowerPraiseSong.TextOutline defaultValue)
+        private PowerPraiseSong.OutlineFormatting parseFontOutline(XmlElement elem, PowerPraiseSong.OutlineFormatting defaultValue)
         {
-            PowerPraiseSong.TextOutline outline = defaultValue;
+            PowerPraiseSong.OutlineFormatting outline = defaultValue;
             if (elem != null)
             {
                 outline.Enabled = (elem["enabled"] != null && elem["enabled"].InnerText == "true");
@@ -406,9 +406,9 @@ namespace Pbp.Persistence.Reader
         /// <param name="elem"></param>
         /// <param name="defaultValue"></param>
         /// <returns></returns>
-        private PowerPraiseSong.TextShadow parseFontShadow(XmlElement elem, PowerPraiseSong.TextShadow defaultValue)
+        private PowerPraiseSong.ShadowFormatting parseFontShadow(XmlElement elem, PowerPraiseSong.ShadowFormatting defaultValue)
         {
-            PowerPraiseSong.TextShadow shadow = defaultValue;
+            PowerPraiseSong.ShadowFormatting shadow = defaultValue;
             if (elem != null)
             {
                 shadow.Enabled = (elem["enabled"] != null && elem["enabled"].InnerText == "true");
@@ -448,7 +448,7 @@ namespace Pbp.Persistence.Reader
         /// <param name="numBackgrounds"></param>
         private void ensureValidBackgroundIDs(PowerPraiseSong sng, int numBackgrounds)
         {
-            foreach (var part in sng.SongTextParts)
+            foreach (var part in sng.Parts)
             {
                 foreach (var slide in part.Slides)
                 {
@@ -532,18 +532,18 @@ namespace Pbp.Persistence.Reader
         /// <param name="elem"></param>
         /// <param name="defaultValue"></param>
         /// <returns></returns>
-        private PowerPraiseSong.TextDisplayMode parseTranslationPosition(XmlElement elem, PowerPraiseSong.TextDisplayMode defaultValue)
+        private PowerPraiseSong.TranslationPosition parseTranslationPosition(XmlElement elem, PowerPraiseSong.TranslationPosition defaultValue)
         {
-            PowerPraiseSong.TextDisplayMode position = PowerPraiseConstants.TranslationPosition;
+            PowerPraiseSong.TranslationPosition position = PowerPraiseConstants.TranslationPosition;
             if (elem != null && elem["transpos"] != null)
             {
                 if (elem["transpos"].InnerText == "inline")
                 {
-                    position = PowerPraiseSong.TextDisplayMode.Inline;
+                    position = PowerPraiseSong.TranslationPosition.Inline;
                 }
                 else if (elem["transpos"].InnerText == "block")
                 {
-                    position = PowerPraiseSong.TextDisplayMode.Block;
+                    position = PowerPraiseSong.TranslationPosition.Block;
                 }
             }
             return position;

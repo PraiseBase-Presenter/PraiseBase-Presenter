@@ -5,17 +5,32 @@ using System.Text;
 
 namespace Pbp.Model.Song.PowerPraise
 {
-    public class PowerPraiseSongTextSlide
+    public class PowerPraiseSongSlide
     {
+        /// <summary>
+        /// Font size of the main text
+        /// </summary>
         public int MainSize { get; set; }
-        public int BackgroundNr { get; set; }
-        public List<string> Lines { get; private set; }
-        public List<string> TranslatedLines { get; private set; }
 
-        public PowerPraiseSongTextSlide()
+        /// <summary>
+        /// Background number (starting from 0)
+        /// </summary>
+        public int BackgroundNr { get; set; }
+
+        /// <summary>
+        /// Song text lines
+        /// </summary>
+        public List<string> Lines { get; private set; }
+
+        /// <summary>
+        /// Translation text lines
+        /// </summary>
+        public List<string> Translation { get; private set; }
+
+        public PowerPraiseSongSlide()
         {
             Lines = new List<string>();
-            TranslatedLines = new List<string>();
+            Translation = new List<string>();
         }
     }
 }

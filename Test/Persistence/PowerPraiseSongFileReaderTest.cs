@@ -81,54 +81,54 @@ namespace Test
             expected.CopyrightText.Add("Text und Musik: Lowell Mason, 1792-1872");
             expected.SourceText = "grünes Buch 339";
 
-            var part = new PowerPraiseSongTextPart();
+            var part = new PowerPraiseSongPart();
             part.Caption = "Teil 1";
-            var slide = new PowerPraiseSongTextSlide();
+            var slide = new PowerPraiseSongSlide();
             slide.Lines.Add("Näher, mein Gott, zu Dir,");
             slide.Lines.Add("sei meine Bitt'!");
             slide.Lines.Add("Näher, o Herr, zu Dir");
             slide.Lines.Add("mit jedem Schritt.");
             part.Slides.Add(slide);
-            slide = new PowerPraiseSongTextSlide();
+            slide = new PowerPraiseSongSlide();
             slide.Lines.Add("Nur an dem Herzen Dein");
             slide.Lines.Add("kann ich geborgen sein;");
             slide.Lines.Add("deshalb die Bitte mein:");
             slide.Lines.Add("Näher zu Dir!");
             part.Slides.Add(slide);
-            expected.SongTextParts.Add(part);
+            expected.Parts.Add(part);
 
-            part = new PowerPraiseSongTextPart();
+            part = new PowerPraiseSongPart();
             part.Caption = "Teil 2";
-            slide = new PowerPraiseSongTextSlide();
+            slide = new PowerPraiseSongSlide();
             slide.Lines.Add("Näher, mein Gott, zu Dir!");
             slide.Lines.Add("Ein jeder Tag");
             slide.Lines.Add("soll es neu zeigen mir,");
             slide.Lines.Add("was er vermag:");
             part.Slides.Add(slide);
-            slide = new PowerPraiseSongTextSlide();
+            slide = new PowerPraiseSongSlide();
             slide.Lines.Add("Wie seiner Gnade Macht,");
             slide.Lines.Add("Erlösung hat gebracht,");
             slide.Lines.Add("in uns're Sündennacht.");
             slide.Lines.Add("Näher zu Dir!");
             part.Slides.Add(slide);
-            expected.SongTextParts.Add(part);
+            expected.Parts.Add(part);
 
-            part = new PowerPraiseSongTextPart();
+            part = new PowerPraiseSongPart();
             part.Caption = "Teil 3";
-            slide = new PowerPraiseSongTextSlide();
-            slide = new PowerPraiseSongTextSlide();
+            slide = new PowerPraiseSongSlide();
+            slide = new PowerPraiseSongSlide();
             slide.Lines.Add("Näher, mein Gott, zu Dir!");
             slide.Lines.Add("Dich bet' ich an.");
             slide.Lines.Add("Wie vieles hast an mir,");
             slide.Lines.Add("Du doch getan!");
             part.Slides.Add(slide);
-            slide = new PowerPraiseSongTextSlide();
+            slide = new PowerPraiseSongSlide();
             slide.Lines.Add("Von Banden frei und los,");
             slide.Lines.Add("ruh' ich in Deinem Schoss.");
             slide.Lines.Add("Ja, Deine Gnad' ist gross!");
             slide.Lines.Add("Näher zu Dir!");
             part.Slides.Add(slide);
-            expected.SongTextParts.Add(part);
+            expected.Parts.Add(part);
 
             PowerPraiseSong actual = target.Load(filename);
             Assert.AreEqual(expected.Title, actual.Title, "Wrong song title");
@@ -137,17 +137,17 @@ namespace Test
             CollectionAssert.AreEqual(expected.CopyrightText, actual.CopyrightText, "Wrong copyright");
             Assert.AreEqual(expected.SourceText, actual.SourceText, "Wrong songbook");
 
-            Assert.AreEqual(expected.SongTextParts.Count, actual.SongTextParts.Count, "Parts incomplete");
-            for (int i = 0; i < expected.SongTextParts.Count; i++)
+            Assert.AreEqual(expected.Parts.Count, actual.Parts.Count, "Parts incomplete");
+            for (int i = 0; i < expected.Parts.Count; i++)
             {
-                Assert.AreEqual(expected.SongTextParts[i].Caption, actual.SongTextParts[i].Caption, "Wrong verse name in verse " + i);
-                Assert.AreEqual(expected.SongTextParts[i].Slides.Count, actual.SongTextParts[i].Slides.Count, "Slides incomplete in verse " + i);
-                for (int j = 0; j < expected.SongTextParts[i].Slides.Count; j++)
+                Assert.AreEqual(expected.Parts[i].Caption, actual.Parts[i].Caption, "Wrong verse name in verse " + i);
+                Assert.AreEqual(expected.Parts[i].Slides.Count, actual.Parts[i].Slides.Count, "Slides incomplete in verse " + i);
+                for (int j = 0; j < expected.Parts[i].Slides.Count; j++)
                 {
-                    Assert.AreEqual(expected.SongTextParts[i].Slides[j].Lines.Count, actual.SongTextParts[i].Slides[j].Lines.Count, "Slide lines incomplete in verse " + i + " slide " + j);
-                    for (int k = 0; k < expected.SongTextParts[i].Slides[j].Lines.Count; k++)
+                    Assert.AreEqual(expected.Parts[i].Slides[j].Lines.Count, actual.Parts[i].Slides[j].Lines.Count, "Slide lines incomplete in verse " + i + " slide " + j);
+                    for (int k = 0; k < expected.Parts[i].Slides[j].Lines.Count; k++)
                     {
-                        Assert.AreEqual(expected.SongTextParts[i].Slides[j].Lines[k], actual.SongTextParts[i].Slides[j].Lines[k], "Wrong slide lyrics");
+                        Assert.AreEqual(expected.Parts[i].Slides[j].Lines[k], actual.Parts[i].Slides[j].Lines[k], "Wrong slide lyrics");
                     }
                 }
             }

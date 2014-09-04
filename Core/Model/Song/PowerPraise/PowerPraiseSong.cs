@@ -8,46 +8,118 @@ namespace Pbp.Model.Song.PowerPraise
 {
     public class PowerPraiseSong
     {
-        public struct TextFormatting
+        /// <summary>
+        /// Font formatting (Font, Color, Outline, Shadow)
+        /// </summary>
+        public struct FontFormatting
         {
+            /// <summary>
+            /// Text font
+            /// </summary>
             public Font Font { get; set; }
+
+            /// <summary>
+            /// Text color
+            /// </summary>
             public Color Color { get; set; }
+
+            /// <summary>
+            /// Outline width (percent)
+            /// </summary>
             public int OutlineWidth { get; set; }
+
+            /// <summary>
+            /// Shadow distance (percent)
+            /// </summary>
             public int ShadowDistance { get; set; }
         }
 
-        public struct TextOutline
+        /// <summary>
+        /// Outline formatting
+        /// </summary>
+        public struct OutlineFormatting
         {
+            /// <summary>
+            /// Enabled
+            /// </summary>
             public Boolean Enabled { get; set; }
+
+            /// <summary>
+            /// Color
+            /// </summary>
             public Color Color { get; set; }
         }
 
-        public struct TextShadow
+        /// <summary>
+        /// Shadow formatting
+        /// </summary>
+        public struct ShadowFormatting
         {
+            /// <summary>
+            /// Enabled
+            /// </summary>
             public Boolean Enabled { get; set; }
+
+            /// <summary>
+            /// Color
+            /// </summary>
             public Color Color { get; set; }
+
+            /// <summary>
+            /// Direction (0-359)
+            /// </summary>
             public int Direction { get; set; }
         }
 
+        /// <summary>
+        /// Borders
+        /// </summary>
         public struct TextBorders
         {
+            /// <summary>
+            /// Distance of text to left
+            /// </summary>
             public int TextLeft { get; set; }
+
+            /// <summary>
+            /// Distance of text to top
+            /// </summary>
             public int TextTop { get; set; }
+
+            /// <summary>
+            /// Distance of text to right
+            /// </summary>
             public int TextRight { get; set; }
+
+            /// <summary>
+            /// Distance of text to bottom
+            /// </summary>
             public int TextBottom { get; set; }
+
+            /// <summary>
+            /// Distance of copyright text to bottom
+            /// </summary>
             public int CopyrightBottom { get; set; }
+
+            /// <summary>
+            /// Distance of source text to top
+            /// </summary>
             public int SourceTop { get; set; }
+
+            /// <summary>
+            /// Distance of source text to right
+            /// </summary>
             public int SourceRight { get; set; }
         }
 
-        public enum AnnotationTextPosition
+        public enum CopyrightPosition
         {
             FirstSlide,
             LastSlide,
             None
         }
 
-        public enum TextDisplayMode
+        public enum TranslationPosition
         {
             Inline,
             Block
@@ -71,12 +143,12 @@ namespace Pbp.Model.Song.PowerPraise
         /// <summary>
         /// Song text parts
         /// </summary>
-        public List<PowerPraiseSongTextPart> SongTextParts { get; private set; }
+        public List<PowerPraiseSongPart> Parts { get; private set; }
 
         /// <summary>
         /// Song text order
         /// </summary>
-        public List<PowerPraiseSongTextPart> SongTextOrder { get; private set; }
+        public List<PowerPraiseSongPart> Order { get; private set; }
 
         /// <summary>
         /// Copyright text
@@ -86,7 +158,7 @@ namespace Pbp.Model.Song.PowerPraise
         /// <summary>
         /// Position of the copyright text
         /// </summary>
-        public AnnotationTextPosition CopyrightTextPosition { get; set; }
+        public CopyrightPosition CopyrightTextPosition { get; set; }
 
         /// <summary>
         /// Source text
@@ -101,32 +173,32 @@ namespace Pbp.Model.Song.PowerPraise
         /// <summary>
         /// Font, color, outline and shadow of the main text
         /// </summary>
-        public TextFormatting MainTextFormatting { get; set; }
+        public FontFormatting MainTextFontFormatting { get; set; }
 
         /// <summary>
         /// Font, color, outline and shadow of the tanslation text
         /// </summary>
-        public TextFormatting TranslationTextFormatting { get; set; }
+        public FontFormatting TranslationTextFontFormatting { get; set; }
 
         /// <summary>
         /// Font, color, outline and shadow of the copyright text
         /// </summary>
-        public TextFormatting CopyrightTextFormatting { get; set; }
+        public FontFormatting CopyrightTextFontFormatting { get; set; }
 
         /// <summary>
         /// Font, color, outline and shadow of the source text
         /// </summary>
-        public TextFormatting SourceTextFormatting { get; set; }
+        public FontFormatting SourceTextFontFormatting { get; set; }
 
         /// <summary>
         /// True of the text should be outlined
         /// </summary>
-        public TextOutline TextOutlineFormatting { get; set; }
+        public OutlineFormatting TextOutlineFormatting { get; set; }
 
         /// <summary>
         /// True if the text should have a shadow
         /// </summary>
-        public TextShadow TextShadowFormatting { get; set; }
+        public ShadowFormatting TextShadowFormatting { get; set; }
         
         /// <summary>
         /// Background image paths (relative)
@@ -151,17 +223,17 @@ namespace Pbp.Model.Song.PowerPraise
         /// <summary>
         /// Position of the translation
         /// </summary>
-        public TextDisplayMode TranslationPosition { get; set; }
+        public TranslationPosition TranslationTextPosition { get; set; }
 
         /// <summary>
         /// Borders
         /// </summary>
-        public TextBorders SongTextBorders { get; set; }
+        public TextBorders Borders { get; set; }
 
         public PowerPraiseSong()
         {
-            SongTextParts = new List<PowerPraiseSongTextPart>();
-            SongTextOrder = new List<PowerPraiseSongTextPart>();
+            Parts = new List<PowerPraiseSongPart>();
+            Order = new List<PowerPraiseSongPart>();
             CopyrightText = new List<string>();
             BackgroundImages = new List<string>();
         }

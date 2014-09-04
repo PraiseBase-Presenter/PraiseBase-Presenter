@@ -5,14 +5,21 @@ using System.Text;
 
 namespace Pbp.Model.Song.PowerPraise
 {
-    public class PowerPraiseSongTextPart
+    public class PowerPraiseSongPart
     {
+        /// <summary>
+        /// Caption
+        /// </summary>
         public string Caption { get; set; }
-        public List<PowerPraiseSongTextSlide> Slides { get; private set; }
 
-        public PowerPraiseSongTextPart()
+        /// <summary>
+        /// Slides
+        /// </summary>
+        public List<PowerPraiseSongSlide> Slides { get; private set; }
+
+        public PowerPraiseSongPart()
         {
-            Slides = new List<PowerPraiseSongTextSlide>();
+            Slides = new List<PowerPraiseSongSlide>();
         }
     }
 }

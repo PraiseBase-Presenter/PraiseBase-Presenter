@@ -12,11 +12,11 @@ namespace Pbp.Persistence
 
         public static readonly int SlideMainTextSize = 30;
 
-        public static readonly PowerPraiseSong.AnnotationTextPosition CopyrightTextPosition = PowerPraiseSong.AnnotationTextPosition.LastSlide;
+        public static readonly PowerPraiseSong.CopyrightPosition CopyrightTextPosition = PowerPraiseSong.CopyrightPosition.LastSlide;
 
         public static readonly bool SourceTextEnabled = true;
 
-        public static readonly PowerPraiseSong.TextFormatting MainText = new PowerPraiseSong.TextFormatting
+        public static readonly PowerPraiseSong.FontFormatting MainText = new PowerPraiseSong.FontFormatting
         {
             Font = new Font("Tahoma", 30, FontStyle.Bold),
             Color = Color.FromArgb(255, Color.FromArgb(16777215)),
@@ -24,7 +24,7 @@ namespace Pbp.Persistence
             ShadowDistance = 20
         };
         
-        public static readonly PowerPraiseSong.TextFormatting TranslationText = new PowerPraiseSong.TextFormatting
+        public static readonly PowerPraiseSong.FontFormatting TranslationText = new PowerPraiseSong.FontFormatting
         {
             Font = new Font("Tahoma", 20, FontStyle.Regular),
             Color = Color.FromArgb(255, Color.FromArgb(16777215)),
@@ -32,7 +32,7 @@ namespace Pbp.Persistence
             ShadowDistance = 20
         };
 
-        public static readonly PowerPraiseSong.TextFormatting CopyrightText = new PowerPraiseSong.TextFormatting
+        public static readonly PowerPraiseSong.FontFormatting CopyrightText = new PowerPraiseSong.FontFormatting
         {
             Font = new Font("Tahoma", 14, FontStyle.Regular),
             Color = Color.FromArgb(255, Color.FromArgb(16777215)),
@@ -40,7 +40,7 @@ namespace Pbp.Persistence
             ShadowDistance = 20
         };
 
-        public static readonly PowerPraiseSong.TextFormatting SourceText = new PowerPraiseSong.TextFormatting
+        public static readonly PowerPraiseSong.FontFormatting SourceText = new PowerPraiseSong.FontFormatting
         {
             Font = new Font("Tahoma", 30, FontStyle.Regular),
             Color = Color.FromArgb(255, Color.FromArgb(16777215)),
@@ -48,13 +48,13 @@ namespace Pbp.Persistence
             ShadowDistance = 20
         };
 
-        public static readonly PowerPraiseSong.TextOutline FontOutline = new PowerPraiseSong.TextOutline
+        public static readonly PowerPraiseSong.OutlineFormatting FontOutline = new PowerPraiseSong.OutlineFormatting
         {
             Enabled = false,
             Color = Color.FromArgb(0, Color.FromArgb(16777215)),
         };
 
-        public static readonly PowerPraiseSong.TextShadow FontShadow = new PowerPraiseSong.TextShadow
+        public static readonly PowerPraiseSong.ShadowFormatting FontShadow = new PowerPraiseSong.ShadowFormatting
         {
             Enabled = true,
             Color = Color.FromArgb(0, Color.FromArgb(16777215)),
@@ -67,7 +67,7 @@ namespace Pbp.Persistence
 
         public static readonly TextOrientation TextOrientation = new TextOrientation(VerticalOrientation.Middle, HorizontalOrientation.Center);
 
-        public static readonly PowerPraiseSong.TextDisplayMode TranslationPosition = PowerPraiseSong.TextDisplayMode.Inline;
+        public static readonly PowerPraiseSong.TranslationPosition TranslationPosition = PowerPraiseSong.TranslationPosition.Inline;
 
         public static readonly PowerPraiseSong.TextBorders TextBorders = new PowerPraiseSong.TextBorders { 
             TextLeft = 40,
@@ -76,7 +76,7 @@ namespace Pbp.Persistence
             TextBottom = 80,
             CopyrightBottom = 30,
             SourceTop = 20,
-            SourceRight = 40            
+            SourceRight = 40
         };
     }
 }
