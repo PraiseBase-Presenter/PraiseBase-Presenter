@@ -28,7 +28,7 @@
 using System.Text;
 using System.Xml;
 
-namespace PraiseBase.Presenter.Persistence.Writer
+namespace PraiseBase.Presenter.Persistence
 {
     internal class XmlWriterHelper
     {

@@ -84,7 +84,7 @@
     <Compile Include="Persistence\Writer\SongFileWriter.cs" />
     <Compile Include="Persistence\Writer\SongFileWriterFactory.cs" />
     <Compile Include="Persistence\Writer\StatisticsWriter.cs" />
-    <Compile Include="Persistence\Writer\XmlWriterHelper.cs" />
+    <Compile Include="Persistence\XmlWriterHelper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Util\FileUtils.cs" />
     <Compile Include="Util\ImageUtils.cs" />
