@@ -30,7 +30,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 
-namespace PraiseBase.Presenter.Persistence.Reader
+namespace PraiseBase.Presenter.Persistence
 {
     public class SongFileReaderFactory
     {

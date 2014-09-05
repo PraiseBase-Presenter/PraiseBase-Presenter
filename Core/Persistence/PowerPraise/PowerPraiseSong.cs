@@ -3,8 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Drawing;
+using PraiseBase.Presenter.Model;
 
-namespace PraiseBase.Presenter.Model.Song.PowerPraise
+namespace PraiseBase.Presenter.Persistence.PowerPraise
 {
     public class PowerPraiseSong
     {

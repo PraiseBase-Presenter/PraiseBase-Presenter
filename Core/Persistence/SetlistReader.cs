@@ -25,16 +25,37 @@
  *
  */
 
-using PraiseBase.Presenter.Model.Song;
+using System;
+using System.Xml;
+using PraiseBase.Presenter.Model;
 
-namespace PraiseBase.Presenter.Persistence.Writer
+namespace PraiseBase.Presenter.Persistence
 {
-    public interface SongFileWriter
+    public class SetlistReader
     {
-        void Save(string filename, Song sng);
+        public Setlist read(string filename)
+        {
+            var xmlDoc = new XmlDocument();
+            xmlDoc.Load(filename);
+            XmlElement xmlRoot = xmlDoc.DocumentElement;
 
-        string GetFileExtension();
-
-        string GetFileTypeDescription();
+            if (xmlRoot.Name != "setlist")
+            {
+                throw new Exception("Ungültige Setlist!");
+            }
+            Setlist sl = new Setlist();
+            if (xmlRoot["items"] != null)
+            {
+                sl.Items.Clear();
+                for (int i = 0; i < xmlRoot["items"].ChildNodes.Count; i++)
+                {
+                    if (xmlRoot["items"].ChildNodes[i].Name == "item")
+                    {
+                        sl.Items.Add(xmlRoot["items"].ChildNodes[i].InnerText);
+                    }
+                }
+            }
+            return sl;
+        }
     }
 }

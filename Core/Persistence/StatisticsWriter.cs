@@ -29,7 +29,7 @@ using System.Xml;
 using PraiseBase.Presenter.Model.Statistics;
 using PraiseBase.Presenter.Persistence;
 
-namespace PraiseBase.Presenter.Persistence.Writer
+namespace PraiseBase.Presenter.Persistence
 {
     public class StatisticsWriter
     {

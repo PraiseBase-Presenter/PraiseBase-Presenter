@@ -2,9 +2,8 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using PraiseBase.Presenter.Model.Song;
-using PraiseBase.Presenter.Persistence.Reader;
 
-namespace Test
+namespace PraiseBase.Presenter.Persistence.OpenLyrics
 {
     
     

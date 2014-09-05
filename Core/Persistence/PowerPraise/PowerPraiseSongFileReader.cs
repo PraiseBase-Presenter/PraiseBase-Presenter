@@ -30,9 +30,8 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Xml;
 using PraiseBase.Presenter.Model;
-using PraiseBase.Presenter.Model.Song.PowerPraise;
 
-namespace PraiseBase.Presenter.Persistence.Reader
+namespace PraiseBase.Presenter.Persistence.PowerPraise
 {
     public class PowerPraiseSongFileReader
     {

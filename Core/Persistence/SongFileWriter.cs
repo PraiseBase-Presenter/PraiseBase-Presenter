@@ -25,26 +25,16 @@
  *
  */
 
-using System.Xml;
-using PraiseBase.Presenter.Model;
+using PraiseBase.Presenter.Model.Song;
 
-namespace PraiseBase.Presenter.Persistence.Writer
+namespace PraiseBase.Presenter.Persistence
 {
-    public class SetlistWriter
+    public interface SongFileWriter
     {
-        public void Write(string filename, Setlist list)
-        {
-            XmlWriterHelper xml = new XmlWriterHelper("setlist", "1.0");
+        void Save(string filename, Song sng);
 
-            xml.Root.AppendChild(xml.Doc.CreateElement("items"));
-            for (int i = 0; i < list.Items.Count; i++)
-            {
-                XmlNode nd = xml.Doc.CreateElement("item");
-                nd.InnerText = list.Items[i];
-                XmlNode ni = xml.Root["items"].AppendChild(nd);
-            }
+        string GetFileExtension();
 
-            xml.Write(filename);
-        }
+        string GetFileTypeDescription();
     }
 }

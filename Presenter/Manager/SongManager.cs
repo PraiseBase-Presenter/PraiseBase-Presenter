@@ -31,8 +31,6 @@ using System.IO;
 using PraiseBase.Presenter.Properties;
 using PraiseBase.Presenter.Persistence;
 using PraiseBase.Presenter.Model.Song;
-using PraiseBase.Presenter.Persistence.Reader;
-using PraiseBase.Presenter.Persistence.Writer;
 
 namespace PraiseBase.Presenter
 {

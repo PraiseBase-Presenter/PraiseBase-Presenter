@@ -35,7 +35,6 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Globalization;
 using PraiseBase.Presenter.UI;
-using PraiseBase.Presenter.Persistence.Reader;
 
 namespace PraiseBase.Presenter.Forms
 {

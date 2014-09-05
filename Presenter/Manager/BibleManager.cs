@@ -31,6 +31,7 @@ using System.IO;
 using PraiseBase.Presenter.Properties;
 using PraiseBase.Presenter.Model.Bible;
 using System.Text.RegularExpressions;
+using PraiseBase.Presenter.Persistence.ZefaniaXML;
 
 namespace PraiseBase.Presenter
 {
@@ -126,7 +127,7 @@ namespace PraiseBase.Presenter
             BibleList = new Dictionary<string, BibleItem>();
             foreach (string file in GetBibleFiles())
             {
-                PraiseBase.Presenter.Persistence.Reader.XMLBibleReader rdr = new PraiseBase.Presenter.Persistence.Reader.XMLBibleReader();
+                XMLBibleReader rdr = new XMLBibleReader();
                 try
                 {
                     BibleItem bi = new BibleItem();
@@ -143,7 +144,7 @@ namespace PraiseBase.Presenter
 
         public void LoadBibleData(string key)
         {
-            PraiseBase.Presenter.Persistence.Reader.XMLBibleReader rdr = new PraiseBase.Presenter.Persistence.Reader.XMLBibleReader();
+            XMLBibleReader rdr = new XMLBibleReader();
             try
             {
                 rdr.LoadContent(BibleList[key].Filename, BibleList[key].Bible);

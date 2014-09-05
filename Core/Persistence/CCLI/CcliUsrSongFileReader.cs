@@ -32,8 +32,9 @@ using System.IO;
 using System.Text.RegularExpressions;
 using PraiseBase.Presenter.Model;
 using PraiseBase.Presenter.Model.Song;
+using PraiseBase.Presenter.Persistence.PowerPraise;
 
-namespace PraiseBase.Presenter.Persistence.Reader
+namespace PraiseBase.Presenter.Persistence.CCLI
 {
     public class CcliUsrSongFileReader : SongFileReader
     {

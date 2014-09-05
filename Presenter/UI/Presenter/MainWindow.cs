@@ -43,8 +43,7 @@ using PraiseBase.Presenter.Manager;
 using System.Globalization;
 using PraiseBase.Presenter.UI;
 using PraiseBase.Presenter.Model.Bible;
-
-//using PowerPoint = Microsoft.Office.Interop.PowerPoint;
+using PraiseBase.Presenter.Persistence;
 
 namespace PraiseBase.Presenter.Forms
 {
@@ -1144,7 +1143,7 @@ namespace PraiseBase.Presenter.Forms
                 {
                     sl.Items.Add(SongManager.Instance.SongList[(Guid)listViewSetList.Items[i].Tag].Song.Title);
                 }
-                PraiseBase.Presenter.Persistence.Writer.SetlistWriter swr = new PraiseBase.Presenter.Persistence.Writer.SetlistWriter();
+                SetlistWriter swr = new SetlistWriter();
                 swr.Write(dlg.FileName, sl);
             }
         }
@@ -1166,7 +1165,7 @@ namespace PraiseBase.Presenter.Forms
             dlg.Title = StringResources.OpenSetlist;
             if (dlg.ShowDialog() == DialogResult.OK)
             {
-                PraiseBase.Presenter.Persistence.Reader.SetlistReader sr = new PraiseBase.Presenter.Persistence.Reader.SetlistReader();
+                SetlistReader sr = new SetlistReader();
                 try {
                     PraiseBase.Presenter.Model.Setlist sl = sr.read(dlg.FileName);
                     if (sl.Items.Count > 0)

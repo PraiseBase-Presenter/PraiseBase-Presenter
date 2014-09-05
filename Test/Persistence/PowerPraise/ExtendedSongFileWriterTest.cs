@@ -2,10 +2,9 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using PraiseBase.Presenter.Model.Song;
-using PraiseBase.Presenter.Persistence.Writer;
 using PraiseBase.Presenter.Model;
 
-namespace Test
+namespace PraiseBase.Presenter.Persistence.PowerPraise
 {
     
     

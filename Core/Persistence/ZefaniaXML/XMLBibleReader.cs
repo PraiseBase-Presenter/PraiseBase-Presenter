@@ -30,7 +30,7 @@ using System.Collections.Generic;
 using System.Xml;
 using PraiseBase.Presenter.Model.Bible;
 
-namespace PraiseBase.Presenter.Persistence.Reader
+namespace PraiseBase.Presenter.Persistence.ZefaniaXML
 {
     public class XMLBibleReader
     {

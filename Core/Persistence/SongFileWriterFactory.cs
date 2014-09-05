@@ -31,11 +31,11 @@ using PraiseBase.Presenter.Model.Song;
 using System.Reflection;
 using System.Linq;
 
-namespace PraiseBase.Presenter.Persistence.Writer
+namespace PraiseBase.Presenter.Persistence
 {
     public class SongFileWriterFactory
     {
-        public readonly Type PreferredType = typeof(PowerPraiseSongFileWriter);
+        public readonly Type PreferredType = typeof(PowerPraise.ExtendedSongFileWriter);
 
         private Dictionary<Type, SongFileWriter> writers = new Dictionary<Type,SongFileWriter>();
         private Dictionary<String, HashSet<Type>> SupportedExtensionMapping = new Dictionary<string, HashSet<Type>>();

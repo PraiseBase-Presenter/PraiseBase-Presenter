@@ -9,7 +9,6 @@ using System.Windows.Forms;
 using PraiseBase.Presenter.Properties;
 using PraiseBase.Presenter.Persistence;
 using PraiseBase.Presenter.Model.Song;
-using PraiseBase.Presenter.Persistence.Writer;
 
 namespace PraiseBase.Presenter.Forms
 {

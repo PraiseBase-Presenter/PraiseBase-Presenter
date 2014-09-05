@@ -3,9 +3,8 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using PraiseBase.Presenter.Model.Statistics;
 using System.IO;
-using PraiseBase.Presenter.Persistence.Writer;
 
-namespace Test
+namespace PraiseBase.Presenter.Persistence
 {
     
     

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace PraiseBase.Presenter.Model.Song.PowerPraise
+namespace PraiseBase.Presenter.Persistence.PowerPraise
 {
     public class PowerPraiseSongSlide
     {
