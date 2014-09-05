@@ -29,10 +29,10 @@ using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Xml;
-using Pbp.Model;
-using Pbp.Model.Song.PowerPraise;
+using PraiseBase.Presenter.Model;
+using PraiseBase.Presenter.Model.Song.PowerPraise;
 
-namespace Pbp.Persistence.Reader
+namespace PraiseBase.Presenter.Persistence.Reader
 {
     public class PowerPraiseSongFileReader
     {

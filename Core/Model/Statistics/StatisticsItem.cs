@@ -27,7 +27,7 @@
 
 using System;
 
-namespace Pbp.Model.Statistics
+namespace PraiseBase.Presenter.Model.Statistics
 {
     public enum StatisticsItemType
     {

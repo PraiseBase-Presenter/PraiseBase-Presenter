@@ -30,7 +30,7 @@ using System.Drawing;
 using System.Reflection;
 using System.Windows.Forms;
 
-namespace Pbp.Forms
+namespace PraiseBase.Presenter.Forms
 {
     public partial class AboutDialog : Form
     {
@@ -53,7 +53,7 @@ namespace Pbp.Forms
             this.labelCopyright.Text = AssemblyCopyright;
             this.labelCompanyName.Text = AssemblyCompany;
 
-            this.textBox1.Text = global::Pbp.Properties.Resources.License;
+            this.textBox1.Text = global::PraiseBase.Presenter.Properties.Resources.License;
 
             timer1.Interval = 1;
             timer1.Start();
@@ -142,11 +142,11 @@ namespace Pbp.Forms
 
         private void timer1_Tick(object sender, EventArgs e)
         {
-            Pbp.UpdateCheck.UpdateInformation ui = Pbp.UpdateCheck.getNewVersion();
+            PraiseBase.Presenter.UpdateCheck.UpdateInformation ui = PraiseBase.Presenter.UpdateCheck.getNewVersion();
             if (ui.UpdateAvailable)
             {
-                linkLabel1.Text = String.Format(Pbp.Properties.StringResources.UpdateAvailable, ui.OnlineVersion);
-                linkLabel1.Image = Pbp.Properties.Resources.update16;
+                linkLabel1.Text = String.Format(PraiseBase.Presenter.Properties.StringResources.UpdateAvailable, ui.OnlineVersion);
+                linkLabel1.Image = PraiseBase.Presenter.Properties.Resources.update16;
                 linkLabel1.ForeColor = Color.DarkGreen;
                 updateDownloadUrl = ui.DownloadUrl;
                 buttonDownloadUpdate.Visible = true;
@@ -155,12 +155,12 @@ namespace Pbp.Forms
             {
                 if (ui.OnlineVersion != null)
                 {
-                    linkLabel1.Text = Pbp.Properties.StringResources.ProgramVersionUptodate;
-                    linkLabel1.Image = Pbp.Properties.Resources.ok16;
+                    linkLabel1.Text = PraiseBase.Presenter.Properties.StringResources.ProgramVersionUptodate;
+                    linkLabel1.Image = PraiseBase.Presenter.Properties.Resources.ok16;
                 }
                 else
                 {
-                    linkLabel1.Text = Pbp.Properties.StringResources.ConnectionToUpdateServerFailed;
+                    linkLabel1.Text = PraiseBase.Presenter.Properties.StringResources.ConnectionToUpdateServerFailed;
                 }
                 buttonDownloadUpdate.Visible = false;
             }

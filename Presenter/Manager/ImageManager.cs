@@ -31,11 +31,11 @@ using System.Drawing;
 using System.Drawing.Imaging;
 using System.IO;
 using System.Windows.Forms;
-using Pbp.Forms;
-using Pbp.Properties;
-using Pbp.Util;
+using PraiseBase.Presenter.Forms;
+using PraiseBase.Presenter.Properties;
+using PraiseBase.Presenter.Util;
 
-namespace Pbp
+namespace PraiseBase.Presenter
 {
     internal class ImageManager
     {

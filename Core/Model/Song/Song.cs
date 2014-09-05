@@ -29,7 +29,7 @@ using System;
 using System.Collections.Generic;
 using System.Runtime.Serialization;
 
-namespace Pbp.Model.Song
+namespace PraiseBase.Presenter.Model.Song
 {
     /// <summary>
     /// Keeps and manages all song related data loaded form an xml file

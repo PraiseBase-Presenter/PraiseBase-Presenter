@@ -29,9 +29,9 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Windows.Forms;
-using Pbp.Properties;
+using PraiseBase.Presenter.Properties;
 
-namespace Pbp.Forms
+namespace PraiseBase.Presenter.Forms
 {
     public partial class ProgramSettingsDialog : Form
     {

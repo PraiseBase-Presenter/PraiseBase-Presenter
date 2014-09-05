@@ -1,7 +1,7 @@
 ﻿using System;
 using System.IO;
 
-namespace Pbp.Util
+namespace PraiseBase.Presenter.Util
 {
     public static class FileUtils
     {

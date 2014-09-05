@@ -28,7 +28,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace Pbp.Model
+namespace PraiseBase.Presenter.Model
 {
     /// <summary>
     /// The setlist containts a list of songs ready for projection.

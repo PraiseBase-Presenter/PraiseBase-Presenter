@@ -29,15 +29,15 @@ using System;
 using System.IO;
 using System.Linq;
 using System.Windows.Forms;
-using Pbp.Properties;
-using Pbp.Persistence;
+using PraiseBase.Presenter.Properties;
+using PraiseBase.Presenter.Persistence;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Globalization;
-using Pbp.UI;
-using Pbp.Persistence.Reader;
+using PraiseBase.Presenter.UI;
+using PraiseBase.Presenter.Persistence.Reader;
 
-namespace Pbp.Forms
+namespace PraiseBase.Presenter.Forms
 {
     public partial class SongEditor : LocalizableForm
     {

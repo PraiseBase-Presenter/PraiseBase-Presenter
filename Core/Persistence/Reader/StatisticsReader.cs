@@ -27,9 +27,9 @@
 
 using System;
 using System.Xml;
-using Pbp.Model.Statistics;
+using PraiseBase.Presenter.Model.Statistics;
 
-namespace Pbp.Persistence.Reader
+namespace PraiseBase.Presenter.Persistence.Reader
 {
     public class StatisticsReader
     {

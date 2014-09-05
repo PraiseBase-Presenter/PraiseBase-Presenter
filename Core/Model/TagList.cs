@@ -28,7 +28,7 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Pbp.Model
+namespace PraiseBase.Presenter.Model
 {
     /// <summary>
     /// Tag class. It allows only unique items

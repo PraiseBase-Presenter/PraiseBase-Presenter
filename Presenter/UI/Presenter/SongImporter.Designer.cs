@@ -1,4 +1,4 @@
-﻿namespace Pbp.Forms
+﻿namespace PraiseBase.Presenter.Forms
 {
 	partial class SongImporter
 	{

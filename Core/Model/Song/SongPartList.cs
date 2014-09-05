@@ -27,7 +27,7 @@
 
 using System.Collections.Generic;
 
-namespace Pbp.Model.Song
+namespace PraiseBase.Presenter.Model.Song
 {
     /// <summary>
     /// Provides a list of all parts in the song

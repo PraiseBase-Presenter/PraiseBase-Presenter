@@ -27,7 +27,7 @@
 
 using System.Collections.Generic;
 
-namespace Pbp.Model.Bible
+namespace PraiseBase.Presenter.Model.Bible
 {
     /// <summary>
     /// XML bible reader based on Zefania XML format

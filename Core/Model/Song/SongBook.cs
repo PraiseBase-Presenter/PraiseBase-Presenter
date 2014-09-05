@@ -25,7 +25,7 @@
  *
  */
 
-namespace Pbp.Model.Song
+namespace PraiseBase.Presenter.Model.Song
 {
     /// <summary>
     /// Most songs come from some sort of collection of songs, be it a book or a

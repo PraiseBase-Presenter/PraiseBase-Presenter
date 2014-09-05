@@ -28,9 +28,9 @@
 using System;
 using System.Collections.Generic;
 using System.Xml;
-using Pbp.Model.Bible;
+using PraiseBase.Presenter.Model.Bible;
 
-namespace Pbp.Persistence.Reader
+namespace PraiseBase.Presenter.Persistence.Reader
 {
     public class XMLBibleReader
     {

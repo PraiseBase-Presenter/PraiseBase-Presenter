@@ -26,9 +26,9 @@
  */
 
 using System.Xml;
-using Pbp.Model;
+using PraiseBase.Presenter.Model;
 
-namespace Pbp.Persistence.Writer
+namespace PraiseBase.Presenter.Persistence.Writer
 {
     public class SetlistWriter
     {

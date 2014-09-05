@@ -28,7 +28,7 @@
 using System;
 using System.Runtime.Serialization;
 
-namespace Pbp.Model.Song
+namespace PraiseBase.Presenter.Model.Song
 {
     /// <summary>
     /// A song part with a given name and one or more slides

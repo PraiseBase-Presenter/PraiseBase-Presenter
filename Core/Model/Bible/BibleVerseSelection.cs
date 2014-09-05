@@ -27,7 +27,7 @@
 
 using System;
 
-namespace Pbp.Model.Bible
+namespace PraiseBase.Presenter.Model.Bible
 {
     public class BibleVerseSelection
     {

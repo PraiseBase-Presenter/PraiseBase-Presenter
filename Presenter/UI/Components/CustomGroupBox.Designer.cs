@@ -1,4 +1,4 @@
-﻿namespace Pbp.Components
+﻿namespace PraiseBase.Presenter.Components
 {
     partial class CustomGroupBox
     {
@@ -36,7 +36,7 @@
             // panelTitleBG
             // 
             this.panelTitleBG.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left))));
-            this.panelTitleBG.BackgroundImage = global::Pbp.Properties.Resources.fade1blue;
+            this.panelTitleBG.BackgroundImage = global::PraiseBase.Presenter.Properties.Resources.fade1blue;
             this.panelTitleBG.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.panelTitleBG.Controls.Add(this.labelTitle);
             this.panelTitleBG.Location = new System.Drawing.Point(0, 0);

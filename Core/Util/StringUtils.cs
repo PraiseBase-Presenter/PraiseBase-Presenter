@@ -31,7 +31,7 @@ using System.IO;
 using System.Text;
 using System.Xml.Serialization;
 
-namespace Pbp.Util
+namespace PraiseBase.Presenter.Util
 {
     public static class StringUtils
     {

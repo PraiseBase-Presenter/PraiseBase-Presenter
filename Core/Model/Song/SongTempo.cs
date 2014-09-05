@@ -1,4 +1,4 @@
-﻿namespace Pbp.Model.Song
+﻿namespace PraiseBase.Presenter.Model.Song
 {
     /// <summary>
     /// Song tempo in bpm (beats per minute, maybe 30-250) or some words like

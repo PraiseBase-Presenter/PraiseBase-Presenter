@@ -1,8 +1,8 @@
 ﻿using System.Drawing;
-using Pbp.Model;
-using Pbp.Model.Song.PowerPraise;
+using PraiseBase.Presenter.Model;
+using PraiseBase.Presenter.Model.Song.PowerPraise;
 
-namespace Pbp.Persistence
+namespace PraiseBase.Presenter.Persistence
 {
     public static class PowerPraiseConstants
     {

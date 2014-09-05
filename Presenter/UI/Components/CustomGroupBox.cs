@@ -2,7 +2,7 @@
 using System.ComponentModel;
 using System.Windows.Forms;
 
-namespace Pbp.Components
+namespace PraiseBase.Presenter.Components
 {
     public partial class CustomGroupBox : Panel
     {

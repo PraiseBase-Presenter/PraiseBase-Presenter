@@ -30,7 +30,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.Serialization;
 
-namespace Pbp.Model.Song
+namespace PraiseBase.Presenter.Model.Song
 {
     /// <summary>
     /// A single slide with songtext and/or a background image

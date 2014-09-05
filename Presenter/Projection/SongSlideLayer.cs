@@ -29,12 +29,12 @@ using System;
 using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Drawing.Text;
-using Pbp.Properties;
-using Pbp.Model.Song;
-using Pbp.Model;
+using PraiseBase.Presenter.Properties;
+using PraiseBase.Presenter.Model.Song;
+using PraiseBase.Presenter.Model;
 using System.Collections.Generic;
 
-namespace Pbp
+namespace PraiseBase.Presenter
 {
     internal class SongSlideLayer : TextLayer
     {

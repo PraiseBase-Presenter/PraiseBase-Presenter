@@ -28,13 +28,13 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
-using Pbp.Properties;
-using Pbp.Persistence;
-using Pbp.Model.Song;
-using Pbp.Persistence.Reader;
-using Pbp.Persistence.Writer;
+using PraiseBase.Presenter.Properties;
+using PraiseBase.Presenter.Persistence;
+using PraiseBase.Presenter.Model.Song;
+using PraiseBase.Presenter.Persistence.Reader;
+using PraiseBase.Presenter.Persistence.Writer;
 
-namespace Pbp
+namespace PraiseBase.Presenter
 {
     /// <summary>
     /// Holds a list of all songs and provides

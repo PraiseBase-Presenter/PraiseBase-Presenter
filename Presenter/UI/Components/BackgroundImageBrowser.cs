@@ -5,7 +5,7 @@ using System.Drawing;
 using System.IO;
 using System.Windows.Forms;
 
-namespace Pbp.Components
+namespace PraiseBase.Presenter.Components
 {
     [DefaultEvent("ImageSelected")]
     public partial class BackgroundImageBrowser : UserControl

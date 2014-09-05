@@ -8,7 +8,7 @@
     <ProjectGuid>{67651B76-5ABD-4040-9A8F-3833130FC77D}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Pbp</RootNamespace>
+    <RootNamespace>PraiseBase.Presenter</RootNamespace>
     <AssemblyName>PraiseBase Core Libraries</AssemblyName>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>

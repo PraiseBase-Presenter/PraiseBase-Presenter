@@ -28,10 +28,10 @@
 using System;
 using System.Drawing;
 using System.Xml;
-using Pbp.Model;
-using Pbp.Model.Song;
+using PraiseBase.Presenter.Model;
+using PraiseBase.Presenter.Model.Song;
 
-namespace Pbp.Persistence.Reader
+namespace PraiseBase.Presenter.Persistence.Reader
 {
     public class OpenLyricsSongFileReader : SongFileReader
     {

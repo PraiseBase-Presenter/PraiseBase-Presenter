@@ -8,12 +8,12 @@
     <ProjectGuid>{33D2BC6A-0AD1-4E2E-AF35-FFFB744F22C6}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Pbp</RootNamespace>
+    <RootNamespace>PraiseBase.Presenter</RootNamespace>
     <AssemblyName>PraiseBase Presenter</AssemblyName>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ApplicationIcon>Properties\Application\Computer.ico</ApplicationIcon>
-    <StartupObject>Pbp.Program</StartupObject>
+    <StartupObject>PraiseBase.Presenter.Program</StartupObject>
     <ManifestCertificateThumbprint>D45E90FD57F45BDB54368ACE3A1D7A9016546503</ManifestCertificateThumbprint>
     <ManifestKeyFile>PraiseBase Presenter_TemporaryKey.pfx</ManifestKeyFile>
     <GenerateManifests>true</GenerateManifests>

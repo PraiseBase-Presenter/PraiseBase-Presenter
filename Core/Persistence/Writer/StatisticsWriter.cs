@@ -26,9 +26,9 @@
  */
 
 using System.Xml;
-using Pbp.Model.Statistics;
+using PraiseBase.Presenter.Model.Statistics;
 
-namespace Pbp.Persistence.Writer
+namespace PraiseBase.Presenter.Persistence.Writer
 {
     public class StatisticsWriter
     {

@@ -25,7 +25,7 @@
  *
  */
 
-namespace Pbp.Model
+namespace PraiseBase.Presenter.Model
 {
     public sealed class TextOrientation
     {

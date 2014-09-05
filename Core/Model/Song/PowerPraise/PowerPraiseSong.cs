@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Drawing;
 
-namespace Pbp.Model.Song.PowerPraise
+namespace PraiseBase.Presenter.Model.Song.PowerPraise
 {
     public class PowerPraiseSong
     {

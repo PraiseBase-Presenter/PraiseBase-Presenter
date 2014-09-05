@@ -30,10 +30,10 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
 using System.Text.RegularExpressions;
-using Pbp.Model;
-using Pbp.Model.Song;
+using PraiseBase.Presenter.Model;
+using PraiseBase.Presenter.Model.Song;
 
-namespace Pbp.Persistence.Reader
+namespace PraiseBase.Presenter.Persistence.Reader
 {
     public class CcliUsrSongFileReader : SongFileReader
     {

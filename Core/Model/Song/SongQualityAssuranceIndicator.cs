@@ -25,7 +25,7 @@
  *
  */
 
-namespace Pbp.Model.Song
+namespace PraiseBase.Presenter.Model.Song
 {
     /// <summary>
     /// Different flags for indicating problems with the song

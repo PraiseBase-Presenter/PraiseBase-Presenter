@@ -1,9 +1,9 @@
-﻿using Pbp.Persistence;
+﻿using PraiseBase.Presenter.Persistence;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
-using Pbp.Model.Statistics;
+using PraiseBase.Presenter.Model.Statistics;
 using System.IO;
-using Pbp.Persistence.Writer;
+using PraiseBase.Presenter.Persistence.Writer;
 
 namespace Test
 {
@@ -113,7 +113,7 @@ namespace Test
 
             target.Write(filename, expected);
 
-            Assert.IsTrue(Pbp.Util.FileUtils.FileEquals(filename, referenceFilename));
+            Assert.IsTrue(PraiseBase.Presenter.Util.FileUtils.FileEquals(filename, referenceFilename));
 
         }
     }

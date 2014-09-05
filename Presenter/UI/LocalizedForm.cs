@@ -5,9 +5,9 @@ using System.Text;
 using System.Windows.Forms;
 using System.ComponentModel;
 using System.Globalization;
-using Pbp.Properties;
+using PraiseBase.Presenter.Properties;
 
-namespace Pbp.UI
+namespace PraiseBase.Presenter.UI
 {
     public class LocalizableForm : Form
     {
@@ -133,20 +133,20 @@ namespace Pbp.UI
                     c.Text = text;
                 }
 
-                if (c.GetType() == typeof(Pbp.Components.CustomGroupBox))
+                if (c.GetType() == typeof(PraiseBase.Presenter.Components.CustomGroupBox))
                 {
                     string title = resources.GetString(c.Name + ".Title", lang);
                     if (title != null)
                     {
-                        ((Pbp.Components.CustomGroupBox)c).Title = title;
+                        ((PraiseBase.Presenter.Components.CustomGroupBox)c).Title = title;
                     }
                 }
-                else if (c.GetType() == typeof(Pbp.Components.SearchTextBox))
+                else if (c.GetType() == typeof(PraiseBase.Presenter.Components.SearchTextBox))
                 {
                     string title = resources.GetString(c.Name + ".PlaceHolderText", lang);
                     if (title != null)
                     {
-                        ((Pbp.Components.SearchTextBox)c).PlaceHolderText = title;
+                        ((PraiseBase.Presenter.Components.SearchTextBox)c).PlaceHolderText = title;
                     }
                 }
             }

@@ -2,9 +2,9 @@
 using System.ComponentModel;
 using System.Drawing;
 using System.Windows.Forms;
-using Pbp.Properties;
+using PraiseBase.Presenter.Properties;
 
-namespace Pbp.Components
+namespace PraiseBase.Presenter.Components
 {
     [DefaultEvent("TextChanged")]
     public partial class SearchTextBox : UserControl
@@ -42,7 +42,7 @@ namespace Pbp.Components
 
             EnabledChanged += SearchTextBox_EnabledChanged;
 
-            xPictureBox.Image = Pbp.Properties.Resources.searchx;
+            xPictureBox.Image = PraiseBase.Presenter.Properties.Resources.searchx;
             xPictureBox.Click += xPictureBox_Click;
             xPictureBox.Visible = false;
 
@@ -50,7 +50,7 @@ namespace Pbp.Components
             keyStrokeTimer.Tick += keyStrokeTimer_Tick;
 
             _cmPictureBox.SizeMode = PictureBoxSizeMode.StretchImage;
-            _cmPictureBox.Image = Pbp.Properties.Resources.arrowdown;
+            _cmPictureBox.Image = PraiseBase.Presenter.Properties.Resources.arrowdown;
             _cmPictureBox.Size = new Size(8, 8);
             _cmPictureBox.Location = new Point(19, 7);
             _cmPictureBox.MouseClick += cmPictureBox_MouseClick;
@@ -234,7 +234,7 @@ namespace Pbp.Components
 
         private void UserControl1_Paint(object sender, PaintEventArgs e)
         {
-            e.Graphics.DrawImage(Pbp.Properties.Resources.searchg, 3, (Height - 18) / 2, 18, 18);
+            e.Graphics.DrawImage(PraiseBase.Presenter.Properties.Resources.searchg, 3, (Height - 18) / 2, 18, 18);
             ControlPaint.DrawBorder(e.Graphics, ClientRectangle, Color.Gray, ButtonBorderStyle.Solid);
         }
 

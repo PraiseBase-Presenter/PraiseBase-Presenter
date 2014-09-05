@@ -28,7 +28,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace Pbp.Model.Statistics
+namespace PraiseBase.Presenter.Model.Statistics
 {
     public class StatisticsDate
     {

@@ -6,12 +6,12 @@ using System.IO;
 using System.Linq;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
-using Pbp.Properties;
-using Pbp.Persistence;
-using Pbp.Model.Song;
-using Pbp.Persistence.Writer;
+using PraiseBase.Presenter.Properties;
+using PraiseBase.Presenter.Persistence;
+using PraiseBase.Presenter.Model.Song;
+using PraiseBase.Presenter.Persistence.Writer;
 
-namespace Pbp.Forms
+namespace PraiseBase.Presenter.Forms
 {
     public partial class SongImporter : Form
     {

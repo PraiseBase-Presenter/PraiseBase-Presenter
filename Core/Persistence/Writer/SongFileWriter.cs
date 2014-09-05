@@ -25,9 +25,9 @@
  *
  */
 
-using Pbp.Model.Song;
+using PraiseBase.Presenter.Model.Song;
 
-namespace Pbp.Persistence.Writer
+namespace PraiseBase.Presenter.Persistence.Writer
 {
     public interface SongFileWriter
     {

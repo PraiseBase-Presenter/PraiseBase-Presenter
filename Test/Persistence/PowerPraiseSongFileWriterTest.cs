@@ -1,9 +1,9 @@
-﻿using Pbp.Persistence;
+﻿using PraiseBase.Presenter.Persistence;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
-using Pbp.Model.Song.PowerPraise;
-using Pbp.Persistence.Writer;
-using Pbp.Model;
+using PraiseBase.Presenter.Model.Song.PowerPraise;
+using PraiseBase.Presenter.Persistence.Writer;
+using PraiseBase.Presenter.Model;
 
 namespace Test
 {
@@ -210,7 +210,7 @@ namespace Test
             target.Save(filename, sng);
 
             try {
-                Pbp.Util.FileUtils.FileEquals(filename, referenceFilename, true);
+                PraiseBase.Presenter.Util.FileUtils.FileEquals(filename, referenceFilename, true);
             }
             catch (Exception e)
             {

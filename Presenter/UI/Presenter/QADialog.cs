@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Windows.Forms;
-using Pbp.Model.Song;
+using PraiseBase.Presenter.Model.Song;
 
-namespace Pbp.Forms
+namespace PraiseBase.Presenter.Forms
 {
     public partial class QADialog : Form
     {

@@ -26,9 +26,9 @@
  */
 
 using System;
-using Pbp.Model.Song;
+using PraiseBase.Presenter.Model.Song;
 
-namespace Pbp.Persistence.Reader
+namespace PraiseBase.Presenter.Persistence.Reader
 {
     public interface SongFileReader
     {

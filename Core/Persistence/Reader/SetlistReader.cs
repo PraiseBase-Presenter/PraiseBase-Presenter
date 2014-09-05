@@ -27,9 +27,9 @@
 
 using System;
 using System.Xml;
-using Pbp.Model;
+using PraiseBase.Presenter.Model;
 
-namespace Pbp.Persistence.Reader
+namespace PraiseBase.Presenter.Persistence.Reader
 {
     public class SetlistReader
     {

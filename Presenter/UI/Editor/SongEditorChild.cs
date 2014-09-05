@@ -29,14 +29,14 @@ using System;
 using System.Drawing;
 using System.IO;
 using System.Windows.Forms;
-using Pbp.Properties;
-using Pbp.Model.Song;
-using Pbp.Persistence;
-using Pbp.Model;
-using Pbp.Persistence.Reader;
-using Pbp.Persistence.Writer;
+using PraiseBase.Presenter.Properties;
+using PraiseBase.Presenter.Model.Song;
+using PraiseBase.Presenter.Persistence;
+using PraiseBase.Presenter.Model;
+using PraiseBase.Presenter.Persistence.Reader;
+using PraiseBase.Presenter.Persistence.Writer;
 
-namespace Pbp.Forms
+namespace PraiseBase.Presenter.Forms
 {
     public partial class SongEditorChild : Form
     {
@@ -96,10 +96,10 @@ namespace Pbp.Forms
             {
                 sng = new Song();
                 sng.GUID = SongManager.Instance.GenerateGuid();
-                sng.Title = Pbp.Properties.Settings.Default.SongDefaultName;
-                sng.Language = Pbp.Properties.Settings.Default.SongDefaultLanguage;
+                sng.Title = PraiseBase.Presenter.Properties.Settings.Default.SongDefaultName;
+                sng.Language = PraiseBase.Presenter.Properties.Settings.Default.SongDefaultLanguage;
                 SongPart tmpPart = new SongPart();
-                tmpPart.Caption = Pbp.Properties.Settings.Default.SongPartDefaultName;
+                tmpPart.Caption = PraiseBase.Presenter.Properties.Settings.Default.SongPartDefaultName;
                 tmpPart.Slides.Add(new SongSlide(sng));
                 sng.Parts.Add(tmpPart);
 
@@ -739,7 +739,7 @@ namespace Pbp.Forms
         {
             sng.Title = textBoxSongTitle.Text;
 
-            if (sng.Title == Pbp.Properties.Settings.Default.SongDefaultName)
+            if (sng.Title == PraiseBase.Presenter.Properties.Settings.Default.SongDefaultName)
             {
                 if (MessageBox.Show(string.Format(Properties.StringResources.DoesTheSongReallyHaveTheDefaultTitle, sng.Title), Properties.StringResources.Attention, 
                     MessageBoxButtons.YesNo) == System.Windows.Forms.DialogResult.No)
@@ -1025,7 +1025,7 @@ namespace Pbp.Forms
 
         private void EditorChild_Shown(object sender, EventArgs e)
         {
-            if (textBoxSongTitle.Text == Pbp.Properties.Settings.Default.SongDefaultName)
+            if (textBoxSongTitle.Text == PraiseBase.Presenter.Properties.Settings.Default.SongDefaultName)
             {
                 textBoxSongTitle.SelectAll();
                 textBoxSongTitle.Focus();
@@ -1034,7 +1034,7 @@ namespace Pbp.Forms
 
         private void textBoxSongTitle_Enter(object sender, EventArgs e)
         {
-            if (textBoxSongTitle.Text == Pbp.Properties.Settings.Default.SongDefaultName)
+            if (textBoxSongTitle.Text == PraiseBase.Presenter.Properties.Settings.Default.SongDefaultName)
             {
                 textBoxSongTitle.SelectAll();
             }

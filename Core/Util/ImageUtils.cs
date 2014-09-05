@@ -30,7 +30,7 @@ using System.Drawing;
 using System.Drawing.Imaging;
 using System.IO;
 
-namespace Pbp.Util
+namespace PraiseBase.Presenter.Util
 {
     public class ImageUtils
     {

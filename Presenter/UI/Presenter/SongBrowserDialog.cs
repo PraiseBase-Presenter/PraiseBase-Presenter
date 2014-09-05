@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
-using Pbp.Properties;
-using Pbp.Model.Song;
+using PraiseBase.Presenter.Properties;
+using PraiseBase.Presenter.Model.Song;
 
-namespace Pbp.Forms
+namespace PraiseBase.Presenter.Forms
 {
     public partial class SongBrowserDialog : Form
     {

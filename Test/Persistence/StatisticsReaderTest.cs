@@ -1,8 +1,8 @@
-﻿using Pbp.Persistence;
+﻿using PraiseBase.Presenter.Persistence;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
-using Pbp.Model.Statistics;
-using Pbp.Persistence.Reader;
+using PraiseBase.Presenter.Model.Statistics;
+using PraiseBase.Presenter.Persistence.Reader;
 
 namespace Test
 {
