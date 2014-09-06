@@ -27,16 +27,12 @@
 
 using System;
 using System.Collections.Generic;
-using System.Drawing;
 using System.IO;
 using System.Text.RegularExpressions;
-using PraiseBase.Presenter.Model;
-using PraiseBase.Presenter.Model.Song;
-using PraiseBase.Presenter.Persistence.PowerPraise;
 
 namespace PraiseBase.Presenter.Persistence.CCLI
 {
-    public class CcliUsrSongFileReader : SongFileReader
+    public class SongSelectFileReader
     {
         public string GetFileExtension() { return ".usr"; }
 
@@ -52,39 +48,10 @@ namespace PraiseBase.Presenter.Persistence.CCLI
             CONTENT
         }
 
-        public Song Load(string filename)
+        public SongSelectFile Load(string filename)
         {
-            Song sng = new Song();
-
-            // Default font settings if values in xml invalid
-            sng.MainText = new TextFormatting(
-                PowerPraiseConstants.MainText.Font,
-                PowerPraiseConstants.MainText.Color,
-                new TextOutline(30, Color.Black),
-                new TextShadow(10, 20, 125, Color.Black),
-                PowerPraiseConstants.MainLineSpacing);
-
-            sng.TranslationText = new TextFormatting(
-                PowerPraiseConstants.TranslationText.Font,
-                PowerPraiseConstants.TranslationText.Color,
-                new TextOutline(30, Color.Black),
-                new TextShadow(10, 20, 125, Color.Black),
-                PowerPraiseConstants.TranslationLineSpacing);
-
-            sng.CopyrightText = new TextFormatting(
-                PowerPraiseConstants.CopyrightText.Font,
-                PowerPraiseConstants.CopyrightText.Color,
-                new TextOutline(30, Color.Black),
-                new TextShadow(10, 20, 125, Color.Black),
-                PowerPraiseConstants.MainLineSpacing);
-
-            sng.SourceText = new TextFormatting(
-               PowerPraiseConstants.SourceText.Font,
-               PowerPraiseConstants.SourceText.Color,
-               new TextOutline(30, Color.Black),
-               new TextShadow(10, 20, 125, Color.Black),
-               PowerPraiseConstants.MainLineSpacing);
-
+            SongSelectFile sng = new SongSelectFile();
+            
             List<String> fields = new List<string>();
             List<String> words = new List<string>();
 
@@ -109,10 +76,7 @@ namespace PraiseBase.Presenter.Persistence.CCLI
                                 break;
 
                             case "Author":
-                                var a = new SongAuthor();
-                                a.Name = v;
-                                sng.Author = new List<SongAuthor>();
-                                sng.Author.Add(a);
+                                sng.Author = v;
                                 break;
 
                             case "Copyright":
@@ -120,11 +84,11 @@ namespace PraiseBase.Presenter.Persistence.CCLI
                                 break;
 
                             case "Admin":
-                                sng.RightsManagement = v;
+                                sng.Admin = v;
                                 break;
 
                             case "Themes":
-                                foreach (var t in v.Split(new[] { "/t" }, StringSplitOptions.None))
+                                foreach (var t in v.Split(new[] { "/t" }, StringSplitOptions.RemoveEmptyEntries))
                                 {
                                     sng.Themes.Add(t.Trim());
                                 }
@@ -161,8 +125,7 @@ namespace PraiseBase.Presenter.Persistence.CCLI
                         Match m = Regex.Match(li, "^\\[S A([0-9]+)\\]$");
                         if (m.Success)
                         {
-                            sng.CcliID = m.Groups[1].Value;
-                            sng.CCliIDReadonly = true;
+                            sng.ID = m.Groups[1].Value;
                             section = CcliSongFileSection.CONTENT;
                         }
                     }
@@ -176,18 +139,16 @@ namespace PraiseBase.Presenter.Persistence.CCLI
 
             for (int fx = 0; fx < fields.Count; fx++)
             {
-                SongPart p = new SongPart();
+                SongSelectVerse p = new SongSelectVerse();
                 p.Caption = fields[fx];
-                SongSlide s = new SongSlide(sng);
                 foreach (var l in words[fx].Split(new[] { "/n" }, StringSplitOptions.RemoveEmptyEntries))
                 {
-                    s.Lines.Add(l);
+                    p.Lines.Add(l);
                 }
-                p.Slides.Add(s);
-                sng.Parts.Add(p);
+                sng.Verses.Add(p);
             }
 
-            sng.UpdateSearchText();
+
             return sng;
         }
 

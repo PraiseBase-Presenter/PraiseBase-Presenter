@@ -46,6 +46,9 @@
     <Compile Include="Model\Bible\BibleVerse.cs" />
     <Compile Include="Model\Bible\BibleVerseSelection.cs" />
     <Compile Include="Model\Setlist.cs" />
+    <Compile Include="Persistence\CCLI\SongSelectVerse.cs" />
+    <Compile Include="Persistence\CCLI\SongSelectFile.cs" />
+    <Compile Include="Persistence\CCLI\SongSelectFileMapper.cs" />
     <Compile Include="Persistence\PowerPraise\PowerPraiseSong.cs" />
     <Compile Include="Persistence\PowerPraise\PowerPraiseSongPart.cs" />
     <Compile Include="Persistence\PowerPraise\PowerPraiseSongSlide.cs" />
@@ -69,7 +72,7 @@
     <Compile Include="Model\TextOutline.cs" />
     <Compile Include="Model\TextShadow.cs" />
     <Compile Include="Persistence\PowerPraise\PowerPraiseConstants.cs" />
-    <Compile Include="Persistence\CCLI\CcliUsrSongFileReader.cs" />
+    <Compile Include="Persistence\CCLI\SongSelectFileReader.cs" />
     <Compile Include="Persistence\PowerPraise\ExtendedSongFileReader.cs" />
     <Compile Include="Persistence\OpenLyrics\OpenLyricsSongFileReader.cs" />
     <Compile Include="Persistence\PowerPraise\PowerPraiseSongFileReader.cs" />

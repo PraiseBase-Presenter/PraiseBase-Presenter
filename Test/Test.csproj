@@ -61,7 +61,8 @@
     </CodeAnalysisDependentAssemblyPaths>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Persistence\CCLI\CcliUsrSongFileReaderTest.cs" />
+    <Compile Include="Persistence\CCLI\SongSelectFileMapperTest.cs" />
+    <Compile Include="Persistence\CCLI\SongSelectFileReaderTest.cs" />
     <Compile Include="Persistence\PowerPraise\ExtendedSongFileReaderTest.cs" />
     <Compile Include="Persistence\PowerPraise\ExtendedSongFileWriterTest.cs" />
     <Compile Include="Persistence\OpenLyrics\OpenLyricsSongFileReaderTest.cs" />

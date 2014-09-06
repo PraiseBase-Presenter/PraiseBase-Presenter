@@ -12,7 +12,7 @@ namespace PraiseBase.Presenter.Persistence.CCLI
     ///to contain all CcliUsrSongFileReaderTest Unit Tests
     ///</summary>
     [TestClass()]
-    public class CcliUsrSongFileReaderTest
+    public class SongSelectFileReaderTest
     {
 
 
@@ -70,7 +70,7 @@ namespace PraiseBase.Presenter.Persistence.CCLI
         [TestMethod()]
         public void IsFileSupportedTest()
         {
-            SongFileReader target = new CcliUsrSongFileReader(); // TODO: Initialize to an appropriate value
+            SongSelectFileReader target = new SongSelectFileReader(); // TODO: Initialize to an appropriate value
             string filename = "ccli/Ein Lied für Gott.usr";
             bool expected = true;
             bool actual = target.IsFileSupported(filename);
@@ -83,84 +83,61 @@ namespace PraiseBase.Presenter.Persistence.CCLI
         [TestMethod()]
         public void LoadTest()
         {
-            SongFileReader target = new CcliUsrSongFileReader();
+            SongSelectFileReader reader = new SongSelectFileReader();
             string filename = "ccli/Ein Lied für Gott.usr";
-            Song expected = new Song();
+
+            SongSelectFile expected = new SongSelectFile();
 
             expected.Title = "Ein Lied für Gott";
             expected.Themes.Add("Celebration");
             expected.Themes.Add("God's Attributes");
             expected.Themes.Add("Love");
             expected.Themes.Add("Joy");
-            var aut = new SongAuthor();
-            aut.Name = "Muster, Hans";
-            expected.Author.Add(aut);
+            expected.Author = "Muster, Hans";
             expected.Copyright = "Gemeinfrei (Public Domain)";
-            expected.RightsManagement = "Verlag ABC";
+            expected.Admin = "Verlag ABC";
             expected.Key = "E";
 
-            var part = new SongPart();
+            var part = new SongSelectVerse();
             part.Caption = "Vers 1";
-            var slide = new SongSlide(expected);
-            slide.Lines.Add("Lorem ipsum dolor sit amet,");
-            slide.Lines.Add("consectetur adipiscing elit.");
-            slide.Lines.Add("Vivamus odio massa,");
-            slide.Lines.Add("lacinia in mollis quis,");
-            slide.Lines.Add("vehicula sed justo");
-            part.Slides.Add(slide);
-            expected.Parts.Add(part);
+            part.Lines.Add("Lorem ipsum dolor sit amet,");
+            part.Lines.Add("consectetur adipiscing elit.");
+            part.Lines.Add("Vivamus odio massa,");
+            part.Lines.Add("lacinia in mollis quis,");
+            part.Lines.Add("vehicula sed justo");
+            expected.Verses.Add(part);
 
-            part = new SongPart();
+            part = new SongSelectVerse();
             part.Caption = "Vers 2";
-            slide = new SongSlide(expected);
-            slide.Lines.Add("Nunc cursus libero non quam lobortis");
-            slide.Lines.Add("ac pharetra leo facilisis.");
-            slide.Lines.Add("Proin tortor tellus,");
-            slide.Lines.Add("fermentum mattis euismod eu,");
-            slide.Lines.Add("faucibus vel justo.");
-            part.Slides.Add(slide);
-            expected.Parts.Add(part);
+            part.Lines.Add("Nunc cursus libero non quam lobortis");
+            part.Lines.Add("ac pharetra leo facilisis.");
+            part.Lines.Add("Proin tortor tellus,");
+            part.Lines.Add("fermentum mattis euismod eu,");
+            part.Lines.Add("faucibus vel justo.");
+            expected.Verses.Add(part);
 
-            part = new SongPart();
+            part = new SongSelectVerse();
             part.Caption = "Vers 3";
-            slide = new SongSlide(expected);
-            slide = new SongSlide(expected);
-            slide.Lines.Add("Fusce pellentesque rhoncus felis,");
-            slide.Lines.Add("eu convallis ante tempus a.");
-            slide.Lines.Add("Cum sociis natoque penatibus");
-            slide.Lines.Add("et magnis dis parturient montes,");
-            slide.Lines.Add("nascetur ridiculus mus.");
-            part.Slides.Add(slide);
-            expected.Parts.Add(part);
+            part.Lines.Add("Fusce pellentesque rhoncus felis,");
+            part.Lines.Add("eu convallis ante tempus a.");
+            part.Lines.Add("Cum sociis natoque penatibus");
+            part.Lines.Add("et magnis dis parturient montes,");
+            part.Lines.Add("nascetur ridiculus mus.");
+            expected.Verses.Add(part);
 
-            Song actual = target.Load(filename);
+            SongSelectFile actual = reader.Load(filename);
             Assert.AreEqual(expected.Title, actual.Title, "Wrong song title");
-            Assert.AreEqual(expected.Language, actual.Language, "Wrong language");
+            Assert.AreEqual(expected.Author, actual.Author, "Wrong song title");
             Assert.AreEqual(expected.Copyright, actual.Copyright, "Wrong copyright");
-            Assert.AreEqual(expected.RightsManagement, actual.RightsManagement, "Wrong RightsManagement");
+            Assert.AreEqual(expected.Admin, actual.Admin, "Wrong RightsManagement");
             Assert.AreEqual(expected.Key, actual.Key, "Wrong key");
-            for (int i = 0; i < expected.Themes.Count; i++) 
-            {
-                Assert.AreEqual(expected.Themes[i], actual.Themes[i], "Wrong theme");
-            }
-            for (int i = 0; i < expected.Author.Count; i++)
-            {
-                Assert.AreEqual(expected.Author[i].Name, actual.Author[i].Name, "Wrong Author");
-            }
+            CollectionAssert.AreEqual(expected.Themes, actual.Themes, "Wrong themes");
 
-            Assert.AreEqual(expected.Parts.Count, actual.Parts.Count, "Parts incomplete");
-            for (int i = 0; i < expected.Parts.Count; i++)
+            Assert.AreEqual(expected.Verses.Count, actual.Verses.Count, "Verses incomplete");
+            for (int i = 0; i < expected.Verses.Count; i++)
             {
-                Assert.AreEqual(expected.Parts[i].Caption, actual.Parts[i].Caption, "Wrong verse name in verse " + i);
-                Assert.AreEqual(expected.Parts[i].Slides.Count, actual.Parts[i].Slides.Count, "Slides incomplete in verse " + i);
-                for (int j = 0; j < expected.Parts[i].Slides.Count; j++)
-                {
-                    Assert.AreEqual(expected.Parts[i].Slides[j].Lines.Count, actual.Parts[i].Slides[j].Lines.Count, "Slide lines incomplete in verse " + i + " slide " + j);
-                    for (int k = 0; k < expected.Parts[i].Slides[j].Lines.Count; k++)
-                    {
-                        Assert.AreEqual(expected.Parts[i].Slides[j].Lines[k], actual.Parts[i].Slides[j].Lines[k], "Wrong slide lyrics");
-                    }
-                }
+                Assert.AreEqual(expected.Verses[i].Caption, actual.Verses[i].Caption, "Wrong verse name in verse " + i);
+                CollectionAssert.AreEqual(expected.Verses[i].Lines, actual.Verses[i].Lines, "Verse lines incomplete in verse " + i);
             }
         }
 
@@ -170,7 +147,7 @@ namespace PraiseBase.Presenter.Persistence.CCLI
         [TestMethod()]
         public void ReadTitleTest()
         {
-            SongFileReader reader = new CcliUsrSongFileReader();
+            SongSelectFileReader reader = new SongSelectFileReader();
             Assert.AreEqual("Ein Lied für Gott", reader.ReadTitle("ccli/Ein Lied für Gott.usr"));
             Assert.IsNull(reader.ReadTitle("ccli/non-existing-file.usr"));
         }
@@ -181,7 +158,7 @@ namespace PraiseBase.Presenter.Persistence.CCLI
         [TestMethod()]
         public void FileExtensionTest()
         {
-            SongFileReader target = new CcliUsrSongFileReader(); // TODO: Initialize to an appropriate value
+            SongSelectFileReader target = new SongSelectFileReader(); // TODO: Initialize to an appropriate value
             string actual  = ".usr";
             actual = target.GetFileExtension();
             Assert.AreEqual(target.GetFileExtension(), actual);
@@ -193,7 +170,7 @@ namespace PraiseBase.Presenter.Persistence.CCLI
         [TestMethod()]
         public void FileTypeDescriptionTest()
         {
-            SongFileReader target = new CcliUsrSongFileReader(); // TODO: Initialize to an appropriate value
+            SongSelectFileReader target = new SongSelectFileReader(); // TODO: Initialize to an appropriate value
             string actual = "SongSelect Import File";
             actual = target.GetFileTypeDescription();
             Assert.AreEqual(target.GetFileTypeDescription(), actual);
