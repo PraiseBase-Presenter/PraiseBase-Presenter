@@ -26,15 +26,11 @@
  */
 
 using System;
-using System.Drawing;
 using System.Xml;
-using PraiseBase.Presenter.Model;
-using PraiseBase.Presenter.Model.Song;
-using PraiseBase.Presenter.Persistence.PowerPraise;
 
 namespace PraiseBase.Presenter.Persistence.OpenLyrics
 {
-    public class OpenLyricsSongFileReader : SongFileReader
+    public class OpenLyricsSongFileReader
     {
         public string GetFileExtension() { return ".xml"; }
 
@@ -44,37 +40,9 @@ namespace PraiseBase.Presenter.Persistence.OpenLyrics
 
         protected const string XmlRootNodeName = "song";
 
-        public Song Load(string filename)
+        public OpenLyricsSong Load(string filename)
         {
-            Song sng = new Song();
-
-            sng.MainText = new TextFormatting(
-                PowerPraiseConstants.MainText.Font,
-                PowerPraiseConstants.MainText.Color,
-                new TextOutline(30, Color.Black),
-                new TextShadow(10, 20, 125, Color.Black),
-                PowerPraiseConstants.MainLineSpacing);
-
-            sng.TranslationText = new TextFormatting(
-                PowerPraiseConstants.TranslationText.Font,
-                PowerPraiseConstants.TranslationText.Color,
-                new TextOutline(30, Color.Black),
-                new TextShadow(10, 20, 125, Color.Black),
-                PowerPraiseConstants.TranslationLineSpacing);
-
-            sng.CopyrightText = new TextFormatting(
-                PowerPraiseConstants.CopyrightText.Font,
-                PowerPraiseConstants.CopyrightText.Color,
-                new TextOutline(30, Color.Black),
-                new TextShadow(10, 20, 125, Color.Black),
-                PowerPraiseConstants.MainLineSpacing);
-
-            sng.SourceText = new TextFormatting(
-               PowerPraiseConstants.SourceText.Font,
-               PowerPraiseConstants.SourceText.Color,
-               new TextOutline(30, Color.Black),
-               new TextShadow(10, 20, 125, Color.Black),
-               PowerPraiseConstants.MainLineSpacing);
+            OpenLyricsSong sng = new OpenLyricsSong();
 
             // Init xml
             XmlDocument xmlDoc = new XmlDocument();
@@ -142,6 +110,18 @@ namespace PraiseBase.Presenter.Persistence.OpenLyrics
                 sng.ReleaseYear = xmlRoot["properties"]["released"].InnerText;
             }
 
+            // Comments
+            if (xmlRoot["properties"]["comments"] != null)
+            {
+                foreach (XmlNode commentNode in xmlRoot["properties"]["comments"])
+                {
+                    if (commentNode.Name == "comment")
+                    {
+                        sng.Comments.Add(commentNode.InnerText);
+                    }
+                }
+            }
+
             //
             // Lyrics
             //
@@ -156,56 +136,55 @@ namespace PraiseBase.Presenter.Persistence.OpenLyrics
             {
                 if (verseNode.Name == "verse")
                 {
-                    var part = new SongPart();
+                    OpenLyricsSongVerse verse = new OpenLyricsSongVerse();
                     if (verseNode.Attributes["name"] != null)
                     {
-                        part.Caption = verseNode.Attributes["name"].InnerText;
+                        verse.Name = verseNode.Attributes["name"].InnerText;
                     }
                     if (verseNode.Attributes["lang"] != null)
                     {
-                        part.Language = verseNode.Attributes["lang"].InnerText;
+                        verse.Language = verseNode.Attributes["lang"].InnerText;
                     }
 
                     foreach (XmlNode linesNode in verseNode.ChildNodes)
                     {
                         if (linesNode.Name == "lines")
                         {
-                            var slide = new SongSlide(sng);
+                            OpenLyricsSongLines line = new OpenLyricsSongLines();
                             if (linesNode.Attributes["part"] != null)
                             {
-                                slide.PartName = linesNode.Attributes["part"].InnerText;
+                                line.Part = linesNode.Attributes["part"].InnerText;
                             }
                             string lineText = string.Empty;
-                            foreach (XmlNode line in linesNode)
+                            foreach (XmlNode l in linesNode)
                             {
-                                if (line.NodeType == XmlNodeType.Text)
+                                if (l.NodeType == XmlNodeType.Text)
                                 {
-                                    lineText += line.InnerText;
+                                    lineText += l.InnerText;
                                 }
-                                else if (line.NodeType == XmlNodeType.Element && line.Name == "br")
+                                else if (l.NodeType == XmlNodeType.Element && l.Name == "br")
                                 {
-                                    slide.Lines.Add(lineText);
+                                    line.Text.Add(lineText);
                                     lineText = string.Empty;
                                 }
                             }
-                            slide.Lines.Add(lineText);
-                            part.Slides.Add(slide);
+                            line.Text.Add(lineText);
+                            verse.Lines.Add(line);
                         }
                     }
-                    if (part.Slides.Count > 0)
+                    if (verse.Lines.Count > 0)
                     {
-                        sng.Parts.Add(part);
+                        sng.Verses.Add(verse);
                     }
                 }
             }
 
             // Check if at leas one part exists
-            if (sng.Parts.Count == 0)
+            if (sng.Verses.Count == 0)
             {
                 throw new IncompleteSongSourceFileException();
             }
 
-            sng.UpdateSearchText();
             return sng;
         }
 

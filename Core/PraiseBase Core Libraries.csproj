@@ -49,6 +49,10 @@
     <Compile Include="Persistence\CCLI\SongSelectVerse.cs" />
     <Compile Include="Persistence\CCLI\SongSelectFile.cs" />
     <Compile Include="Persistence\CCLI\SongSelectFileMapper.cs" />
+    <Compile Include="Persistence\OpenLyrics\OpenLyricsSongLines.cs" />
+    <Compile Include="Persistence\OpenLyrics\OpenLyricsSongFileMapper.cs" />
+    <Compile Include="Persistence\OpenLyrics\OpenLyricsSong.cs" />
+    <Compile Include="Persistence\OpenLyrics\OpenLyricsSongVerse.cs" />
     <Compile Include="Persistence\PowerPraise\PowerPraiseSong.cs" />
     <Compile Include="Persistence\PowerPraise\PowerPraiseSongPart.cs" />
     <Compile Include="Persistence\PowerPraise\PowerPraiseSongSlide.cs" />
