@@ -79,6 +79,8 @@ namespace PraiseBase.Presenter.Persistence.PowerPraise
             expected.CopyrightText.Add("Text und Musik: Lowell Mason, 1792-1872");
             expected.SourceText = "grünes Buch 339";
 
+            expected.BackgroundImages.Add("Blumen\\Blume 3.jpg");
+
             var part = new PowerPraiseSongPart();
             part.Caption = "Teil 1";
             var slide = new PowerPraiseSongSlide();
@@ -150,8 +152,7 @@ namespace PraiseBase.Presenter.Persistence.PowerPraise
                 }
             }
 
-            Assert.AreEqual(1, actual.BackgroundImages.Count);
-            Assert.AreEqual("Blumen\\Blume 3.jpg", actual.BackgroundImages[0]);
+            CollectionAssert.AreEqual(expected.BackgroundImages, actual.BackgroundImages);
         }
 
         /// <summary>

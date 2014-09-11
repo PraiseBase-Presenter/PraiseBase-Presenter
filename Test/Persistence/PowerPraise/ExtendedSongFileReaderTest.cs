@@ -82,6 +82,8 @@ namespace PraiseBase.Presenter.Persistence.PowerPraise
             sb.Name = "grünes Buch 339";
             expected.SongBooks.Add(sb);
 
+            expected.RelativeImagePaths.Add("Blumen\\Blume 3.jpg");
+
             var part = new SongPart();
             part.Caption = "Teil 1";
             var slide = new SongSlide(expected);
@@ -154,8 +156,7 @@ namespace PraiseBase.Presenter.Persistence.PowerPraise
                 }
             }
 
-            Assert.AreEqual(1, actual.RelativeImagePaths.Count);
-            Assert.AreEqual("Blumen\\Blume 3.jpg", actual.RelativeImagePaths[0]);
+            CollectionAssert.AreEqual(expected.RelativeImagePaths, actual.RelativeImagePaths);
 
             Assert.IsTrue(actual.SearchText.Contains("näher mein gott zu dir"));
             Assert.IsTrue(actual.SearchText.Contains("geborgen"));
