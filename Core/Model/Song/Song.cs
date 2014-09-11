@@ -319,6 +319,7 @@ namespace PraiseBase.Presenter.Model.Song
             Themes = new TagList();
             Slides = new SongSlideList();
             Parts = new SongPartList();
+            PartSequence = new List<int>();
             RelativeImagePaths = new List<string>();
             SearchText = String.Empty;
             SongBooks = new List<SongBook>();
