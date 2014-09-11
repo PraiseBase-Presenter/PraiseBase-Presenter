@@ -286,6 +286,7 @@ namespace PraiseBase.Presenter.Persistence.PowerPraise
                 }
             }
 
+            // Borders
             sng.TextBorders = new SongTextBorders(
                 PowerPraiseConstants.TextBorders.TextLeft,
                 PowerPraiseConstants.TextBorders.TextTop,
