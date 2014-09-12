@@ -82,6 +82,7 @@
     <Compile Include="Persistence\OpenLyrics\OpenLyricsSongFileReader.cs" />
     <Compile Include="Persistence\PowerPraise\PowerPraiseSongFileReader.cs" />
     <Compile Include="Persistence\SetlistReader.cs" />
+    <Compile Include="Persistence\SongFileMapper.cs" />
     <Compile Include="Persistence\SongFileReader.cs" />
     <Compile Include="Persistence\SongFileReaderFactory.cs" />
     <Compile Include="Persistence\StatisticsReader.cs" />

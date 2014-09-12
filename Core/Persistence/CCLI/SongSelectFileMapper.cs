@@ -6,7 +6,7 @@ using PraiseBase.Presenter.Model.Song;
 
 namespace PraiseBase.Presenter.Persistence.CCLI
 {
-    public class SongSelectFileMapper
+    public class SongSelectFileMapper : SongFileMapper<SongSelectFile>
     {
         public Song map(SongSelectFile source)
         {
@@ -54,7 +54,7 @@ namespace PraiseBase.Presenter.Persistence.CCLI
 
         public void map(Song source, SongSelectFile target)
         {
-
+            throw new NotImplementedException("Not implemented yet");
         }
     }
 }

@@ -32,7 +32,7 @@ using PraiseBase.Presenter.Model.Song;
 
 namespace PraiseBase.Presenter.Persistence.OpenLyrics
 {
-    public class OpenLyricsSongFileMapper
+    public class OpenLyricsSongFileMapper : SongFileMapper<OpenLyricsSong>
     {
         public Song map(OpenLyricsSong source)
         {
@@ -94,7 +94,7 @@ namespace PraiseBase.Presenter.Persistence.OpenLyrics
 
         public void map(Song source, OpenLyricsSong target)
         {
-
+            throw new NotImplementedException("Not implemented yet");
         }
     }
 }
