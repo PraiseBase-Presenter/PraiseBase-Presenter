@@ -385,6 +385,7 @@ namespace PraiseBase.Presenter.Persistence.PowerPraise
             //
             // Now the song text ...
             //
+            int px = 0;
             foreach (XmlElement elem in xmlRoot["songtext"])
             {
                 if (elem.Name == "part")
@@ -400,9 +401,7 @@ namespace PraiseBase.Presenter.Persistence.PowerPraise
 
                             // Image number
                             int bgNr = Convert.ToInt32(slideElem.GetAttribute("backgroundnr")) + 1;
-                            bgNr = bgNr < 0 ? 0 : bgNr;
-                            bgNr = bgNr > sng.RelativeImagePaths.Count ? sng.RelativeImagePaths.Count : bgNr;
-                            tmpSlide.ImageNumber = bgNr;
+                            tmpSlide.ImageNumber = Math.Min(sng.RelativeImagePaths.Count - 1, Math.Max(0, bgNr));
 
                             // Lyrics
                             foreach (XmlElement lineElem in slideElem)
@@ -433,6 +432,7 @@ namespace PraiseBase.Presenter.Persistence.PowerPraise
                         }
                     }
                     sng.Parts.Add(tmpPart);
+                    sng.PartSequence.Add(px++);
                 }
             }
             sng.UpdateSearchText();

@@ -152,13 +152,13 @@ namespace PraiseBase.Presenter.Persistence.PowerPraise
                 tn.SetAttribute("caption", prt.Caption);
                 foreach (SongSlide sld in prt.Slides)
                 {
-                    if (sld.ImageNumber > 0)
+                    if (sld.ImageNumber >= 0)
                     {
-                        if (!usedImages.Contains(sng.RelativeImagePaths[sld.ImageNumber - 1]))
+                        if (!usedImages.Contains(sng.RelativeImagePaths[sld.ImageNumber]))
                         {
-                            usedImages.Add(sng.RelativeImagePaths[sld.ImageNumber - 1]);
+                            usedImages.Add(sng.RelativeImagePaths[sld.ImageNumber]);
                         }
-                        sld.ImageNumber = usedImages.IndexOf(sng.RelativeImagePaths[sld.ImageNumber - 1]) + 1;
+                        sld.ImageNumber = usedImages.IndexOf(sng.RelativeImagePaths[sld.ImageNumber]);
                     }
                 }
             }
@@ -172,7 +172,7 @@ namespace PraiseBase.Presenter.Persistence.PowerPraise
                 {
                     XmlElement tn2 = xmlDoc.CreateElement("slide");
                     tn2.SetAttribute("mainsize", sld.TextSize > 0 ? sld.TextSize.ToString() : mainText.Font.Size.ToString());
-                    tn2.SetAttribute("backgroundnr", (sld.ImageNumber - 1).ToString());
+                    tn2.SetAttribute("backgroundnr", (sld.ImageNumber).ToString());
 
                     foreach (string ln in sld.Lines)
                     {

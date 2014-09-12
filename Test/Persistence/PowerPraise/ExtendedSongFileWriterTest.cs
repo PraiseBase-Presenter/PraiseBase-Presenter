@@ -76,118 +76,7 @@ namespace PraiseBase.Presenter.Persistence.PowerPraise
             string referenceFilename = "powerpraise/Näher, mein Gott zu Dir.ppl";
             string filename = "powerpraise/Näher, mein Gott zu Dir - neu - extended.ppl";
 
-            Song sng = new Song();
-            sng.Title = "Näher, mein Gott, zu Dir";
-            sng.Language = "Deutsch";
-            sng.Themes.Add("Anbetung");
-            sng.Copyright = "Text und Musik: Lowell Mason, 1792-1872";
-            var sb = new SongBook();
-            sb.Name = "grünes Buch 339";
-            sng.SongBooks.Add(sb);
-            
-            sng.RelativeImagePaths.Add("Blumen\\Blume 3.jpg");
-
-            sng.MainText = new TextFormatting(
-                new System.Drawing.Font("Times New Roman", 44, System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic),
-                System.Drawing.Color.White, 
-                new TextOutline(30,  System.Drawing.Color.Black),
-                new TextShadow(1, 15, 125, System.Drawing.Color.Black),
-                30);
-
-            sng.TranslationText = new TextFormatting(
-                new System.Drawing.Font("Times New Roman", 20, System.Drawing.FontStyle.Regular),
-                System.Drawing.Color.White, 
-                new TextOutline(30,  System.Drawing.Color.Black),
-                new TextShadow(1, 20, 125, System.Drawing.Color.Black),
-                20);
-
-            sng.CopyrightText = new TextFormatting(
-                new System.Drawing.Font("Times New Roman", 14, System.Drawing.FontStyle.Regular),
-                System.Drawing.Color.White,
-                new TextOutline(30, System.Drawing.Color.Black),
-                new TextShadow(1, 20, 125, System.Drawing.Color.Black),
-                30);
-
-            sng.SourceText = new TextFormatting(
-                new System.Drawing.Font("Times New Roman", 30, System.Drawing.FontStyle.Regular),
-                System.Drawing.Color.White,
-                new TextOutline(30, System.Drawing.Color.Black),
-                new TextShadow(1, 20, 125, System.Drawing.Color.Black),
-                30);
-
-            sng.TextOrientation = new TextOrientation(VerticalOrientation.Middle, HorizontalOrientation.Left);
-            sng.TextOutlineEnabled = false;
-            sng.TextShadowEnabled = true;
-
-            sng.TextBorders = new SongTextBorders(
-                50,
-                40,
-                60,
-                70,
-                30,
-                20,
-                40
-            );
-
-            var part = new SongPart();
-            part.Caption = "Teil 1";
-            var slide = new SongSlide(sng);
-            slide.Lines.Add("Näher, mein Gott, zu Dir,");
-            slide.Lines.Add("sei meine Bitt'!");
-            slide.Lines.Add("Näher, o Herr, zu Dir");
-            slide.Lines.Add("mit jedem Schritt.");
-            slide.ImageNumber = 1;
-            slide.TextSize = 42;
-            part.Slides.Add(slide);
-            slide = new SongSlide(sng);
-            slide.Lines.Add("Nur an dem Herzen Dein");
-            slide.Lines.Add("kann ich geborgen sein;");
-            slide.Lines.Add("deshalb die Bitte mein:");
-            slide.Lines.Add("Näher zu Dir!");
-            slide.ImageNumber = 1;
-            part.Slides.Add(slide);
-            sng.Parts.Add(part);
-
-            part = new SongPart();
-            part.Caption = "Teil 2";
-            slide = new SongSlide(sng);
-            slide.Lines.Add("Näher, mein Gott, zu Dir!");
-            slide.Lines.Add("Ein jeder Tag");
-            slide.Lines.Add("soll es neu zeigen mir,");
-            slide.Lines.Add("was er vermag:");
-            slide.ImageNumber = 1;
-            slide.TextSize = 42;
-            part.Slides.Add(slide);
-            slide = new SongSlide(sng);
-            slide.Lines.Add("Wie seiner Gnade Macht,");
-            slide.Lines.Add("Erlösung hat gebracht,");
-            slide.Lines.Add("in uns're Sündennacht.");
-            slide.Lines.Add("Näher zu Dir!");
-            slide.ImageNumber = 1;
-            slide.TextSize = 42;
-            part.Slides.Add(slide);
-            sng.Parts.Add(part);
-
-            part = new SongPart();
-            part.Caption = "Teil 3";
-            slide = new SongSlide(sng);
-            slide = new SongSlide(sng);
-            slide.Lines.Add("Näher, mein Gott, zu Dir!");
-            slide.Lines.Add("Dich bet' ich an.");
-            slide.Lines.Add("Wie vieles hast an mir,");
-            slide.Lines.Add("Du doch getan!");
-            slide.ImageNumber = 1;
-            slide.TextSize = 42;
-            part.Slides.Add(slide);
-            slide = new SongSlide(sng);
-            slide.Lines.Add("Von Banden frei und los,");
-            slide.Lines.Add("ruh' ich in Deinem Schoss.");
-            slide.Lines.Add("Ja, Deine Gnad' ist gross!");
-            slide.Lines.Add("Näher zu Dir!");
-            slide.ImageNumber = 1;
-            slide.TextSize = 42;
-            part.Slides.Add(slide);
-            sng.Parts.Add(part);
+            Song sng = PowerPraiseTestUtil.GetExpectedSong();
 
             target.Save(filename, sng);
 
@@ -222,6 +111,29 @@ namespace PraiseBase.Presenter.Persistence.PowerPraise
             string actual;
             actual = target.GetFileExtension();
             Assert.AreEqual(actual, ".ppl");
+        }
+
+        [TestMethod()]
+        public void WriteUsingMapperSaveTest()
+        {
+            PowerPraiseSongsFileMapper mapper = new PowerPraiseSongsFileMapper();
+            PowerPraiseSongFileWriter writer = new PowerPraiseSongFileWriter();
+            string referenceFilename = "powerpraise/Näher, mein Gott zu Dir.ppl";
+            string filename = "powerpraise/Näher, mein Gott zu Dir - neu - extended2.ppl";
+
+            Song sng = PowerPraiseTestUtil.GetExpectedSong();;
+            PowerPraiseSong ppl = new PowerPraiseSong();
+            mapper.map(sng, ppl);
+            writer.Save(filename, ppl);
+
+            try
+            {
+                PraiseBase.Presenter.Util.FileUtils.FileEquals(filename, referenceFilename, true);
+            }
+            catch (Exception e)
+            {
+                Assert.Fail(e.Message);
+            }
         }
     }
 }

@@ -73,90 +73,100 @@ namespace PraiseBase.Presenter.Persistence.PowerPraise
             SongFileReader target = new ExtendedSongFileReader();
             string filename = "powerpraise/Näher, mein Gott zu Dir.ppl";
 
-            Song expected = new Song();
-            expected.Title = "Näher, mein Gott, zu Dir";
-            expected.Language = "Deutsch";
-            expected.Themes.Add("Anbetung");
-            expected.Copyright = "Text und Musik: Lowell Mason, 1792-1872";
-            var sb = new SongBook();
-            sb.Name = "grünes Buch 339";
-            expected.SongBooks.Add(sb);
-
-            expected.RelativeImagePaths.Add("Blumen\\Blume 3.jpg");
-
-            var part = new SongPart();
-            part.Caption = "Teil 1";
-            var slide = new SongSlide(expected);
-            slide.Lines.Add("Näher, mein Gott, zu Dir,");
-            slide.Lines.Add("sei meine Bitt'!");
-            slide.Lines.Add("Näher, o Herr, zu Dir");
-            slide.Lines.Add("mit jedem Schritt.");
-            part.Slides.Add(slide);
-            slide = new SongSlide(expected);
-            slide.Lines.Add("Nur an dem Herzen Dein");
-            slide.Lines.Add("kann ich geborgen sein;");
-            slide.Lines.Add("deshalb die Bitte mein:");
-            slide.Lines.Add("Näher zu Dir!");
-            part.Slides.Add(slide);
-            expected.Parts.Add(part);
-
-            part = new SongPart();
-            part.Caption = "Teil 2";
-            slide = new SongSlide(expected);
-            slide.Lines.Add("Näher, mein Gott, zu Dir!");
-            slide.Lines.Add("Ein jeder Tag");
-            slide.Lines.Add("soll es neu zeigen mir,");
-            slide.Lines.Add("was er vermag:");
-            part.Slides.Add(slide);
-            slide = new SongSlide(expected);
-            slide.Lines.Add("Wie seiner Gnade Macht,");
-            slide.Lines.Add("Erlösung hat gebracht,");
-            slide.Lines.Add("in uns're Sündennacht.");
-            slide.Lines.Add("Näher zu Dir!");
-            part.Slides.Add(slide);
-            expected.Parts.Add(part);
-
-            part = new SongPart();
-            part.Caption = "Teil 3";
-            slide = new SongSlide(expected);
-            slide = new SongSlide(expected);
-            slide.Lines.Add("Näher, mein Gott, zu Dir!");
-            slide.Lines.Add("Dich bet' ich an.");
-            slide.Lines.Add("Wie vieles hast an mir,");
-            slide.Lines.Add("Du doch getan!");
-            part.Slides.Add(slide);
-            slide = new SongSlide(expected);
-            slide.Lines.Add("Von Banden frei und los,");
-            slide.Lines.Add("ruh' ich in Deinem Schoss.");
-            slide.Lines.Add("Ja, Deine Gnad' ist gross!");
-            slide.Lines.Add("Näher zu Dir!");
-            part.Slides.Add(slide);
-            expected.Parts.Add(part);
-
+            Song expected = PowerPraiseTestUtil.GetExpectedSong();
             Song actual = target.Load(filename);
-            Assert.AreEqual(expected.Title, actual.Title, "Wrong song title");
+
             Assert.AreEqual(expected.GUID, actual.GUID, "Wrong GUID");
+            Assert.AreEqual(expected.ModifiedTimestamp, actual.ModifiedTimestamp, "Wrong modified timestamp");
+            Assert.AreEqual(expected.CreatedIn, actual.CreatedIn, "Wrong created in");
+            Assert.AreEqual(expected.ModifiedIn, actual.ModifiedIn, "Wrong modified in");
+            Assert.AreEqual(expected.Title, actual.Title, "Wrong song title");
             Assert.AreEqual(expected.Language, actual.Language, "Wrong language");
-            Assert.AreEqual(expected.Themes[0], actual.Themes[0], "Wrong theme");
+            Assert.AreEqual(expected.CcliID, actual.CcliID, "Wrong CcliID");
             Assert.AreEqual(expected.Copyright, actual.Copyright, "Wrong copyright");
+            Assert.AreEqual(expected.CopyrightPosition, actual.CopyrightPosition, "Wrong copyright position");
+            Assert.AreEqual(expected.SourcePosition, actual.SourcePosition, "Wrong source position");
+            Assert.AreEqual(expected.ReleaseYear, actual.ReleaseYear, "Wrong release year");
+            CollectionAssert.AreEqual(expected.Author, actual.Author, "Wrong author");
+            Assert.AreEqual(expected.RightsManagement, actual.RightsManagement, "Wrong rights Management");
+            Assert.AreEqual(expected.Publisher, actual.Publisher, "Wrong publisher");
+            Assert.AreEqual(expected.Version, actual.Version, "Wrong version");
+            Assert.AreEqual(expected.Key, actual.Key, "Wrong key");
+            Assert.AreEqual(expected.Transposition, actual.Transposition, "Wrong transposition");
+            Assert.AreEqual(expected.Tempo, actual.Tempo, "Wrong tempo");
+            Assert.AreEqual(expected.Variant, actual.Variant, "Wrong variant");
+            Assert.AreEqual(expected.Themes[0], actual.Themes[0], "Wrong theme");
+            Assert.AreEqual(expected.Comment, actual.Comment, "Wrong comment");
             Assert.AreEqual(expected.SongBooks[0].Name, actual.SongBooks[0].Name, "Wrong songbook");
 
             Assert.AreEqual(expected.Parts.Count, actual.Parts.Count, "Parts incomplete");
             for (int i = 0; i < expected.Parts.Count; i++)
             {
-                Assert.AreEqual(expected.Parts[i].Caption, actual.Parts[i].Caption, "Wrong verse name in verse "+i);
+                Assert.AreEqual(expected.Parts[i].Caption, actual.Parts[i].Caption, "Wrong verse name in verse " + i);
                 Assert.AreEqual(expected.Parts[i].Slides.Count, actual.Parts[i].Slides.Count, "Slides incomplete in verse " + i);
                 for (int j = 0; j < expected.Parts[i].Slides.Count; j++)
                 {
-                    Assert.AreEqual(expected.Parts[i].Slides[j].Lines.Count, actual.Parts[i].Slides[j].Lines.Count, "Slide lines incomplete in verse "+i+" slide "+j);
-                    for (int k = 0; k < expected.Parts[i].Slides[j].Lines.Count; k++)
-                    {
-                        Assert.AreEqual(expected.Parts[i].Slides[j].Lines[k], actual.Parts[i].Slides[j].Lines[k], "Wrong slide lyrics");
-                    }
+                    CollectionAssert.AreEqual(expected.Parts[i].Slides[j].Lines, actual.Parts[i].Slides[j].Lines, "Slide lines incomplete in verse " + i + " slide " + j);
+                    CollectionAssert.AreEqual(expected.Parts[i].Slides[j].Translation, actual.Parts[i].Slides[j].Translation, "Slide translation lines incomplete in verse " + i + " slide " + j);
                 }
             }
+            CollectionAssert.AreEqual(expected.PartSequence, actual.PartSequence, "Wrong part sequence");
 
-            CollectionAssert.AreEqual(expected.RelativeImagePaths, actual.RelativeImagePaths);
+            CollectionAssert.AreEqual(expected.RelativeImagePaths, actual.RelativeImagePaths, "Wrong image paths");
+
+            CollectionAssert.AreEqual(expected.QualityIssues, actual.QualityIssues, "Wrong QA issues");
+
+            Assert.AreEqual(expected.MainText.Font, actual.MainText.Font);
+            Assert.AreEqual(expected.MainText.Color.ToArgb(), actual.MainText.Color.ToArgb());
+            Assert.AreEqual(expected.MainText.Outline.Color.ToArgb(), actual.MainText.Outline.Color.ToArgb());
+            Assert.AreEqual(expected.MainText.Outline.Width, actual.MainText.Outline.Width);
+            Assert.AreEqual(expected.MainText.Shadow.Color.ToArgb(), actual.MainText.Shadow.Color.ToArgb());
+            Assert.AreEqual(expected.MainText.Shadow.Direction, actual.MainText.Shadow.Direction);
+            Assert.AreEqual(expected.MainText.Shadow.Distance, actual.MainText.Shadow.Distance);
+            Assert.AreEqual(expected.MainText.Shadow.Size, actual.MainText.Shadow.Size);
+            Assert.AreEqual(expected.MainText.LineSpacing, actual.MainText.LineSpacing);
+
+            Assert.AreEqual(expected.TranslationText.Font, actual.TranslationText.Font);
+            Assert.AreEqual(expected.TranslationText.Color.ToArgb(), actual.TranslationText.Color.ToArgb());
+            Assert.AreEqual(expected.TranslationText.Outline.Color.ToArgb(), actual.TranslationText.Outline.Color.ToArgb());
+            Assert.AreEqual(expected.TranslationText.Outline.Width, actual.TranslationText.Outline.Width);
+            Assert.AreEqual(expected.TranslationText.Shadow.Color.ToArgb(), actual.TranslationText.Shadow.Color.ToArgb());
+            Assert.AreEqual(expected.TranslationText.Shadow.Direction, actual.TranslationText.Shadow.Direction);
+            Assert.AreEqual(expected.TranslationText.Shadow.Distance, actual.TranslationText.Shadow.Distance);
+            Assert.AreEqual(expected.TranslationText.Shadow.Size, actual.TranslationText.Shadow.Size);
+            Assert.AreEqual(expected.TranslationText.LineSpacing, actual.TranslationText.LineSpacing);
+
+            Assert.AreEqual(expected.CopyrightText.Font, actual.CopyrightText.Font);
+            Assert.AreEqual(expected.CopyrightText.Color.ToArgb(), actual.CopyrightText.Color.ToArgb());
+            Assert.AreEqual(expected.CopyrightText.Outline.Color.ToArgb(), actual.CopyrightText.Outline.Color.ToArgb());
+            Assert.AreEqual(expected.CopyrightText.Outline.Width, actual.CopyrightText.Outline.Width);
+            Assert.AreEqual(expected.CopyrightText.Shadow.Color.ToArgb(), actual.CopyrightText.Shadow.Color.ToArgb());
+            Assert.AreEqual(expected.CopyrightText.Shadow.Direction, actual.CopyrightText.Shadow.Direction);
+            Assert.AreEqual(expected.CopyrightText.Shadow.Distance, actual.CopyrightText.Shadow.Distance);
+            Assert.AreEqual(expected.CopyrightText.Shadow.Size, actual.CopyrightText.Shadow.Size);
+            Assert.AreEqual(expected.CopyrightText.LineSpacing, actual.CopyrightText.LineSpacing);
+
+            Assert.AreEqual(expected.SourceText.Font, actual.SourceText.Font);
+            Assert.AreEqual(expected.SourceText.Color.ToArgb(), actual.SourceText.Color.ToArgb());
+            Assert.AreEqual(expected.SourceText.Outline.Color.ToArgb(), actual.SourceText.Outline.Color.ToArgb());
+            Assert.AreEqual(expected.SourceText.Outline.Width, actual.SourceText.Outline.Width);
+            Assert.AreEqual(expected.SourceText.Shadow.Color.ToArgb(), actual.SourceText.Shadow.Color.ToArgb());
+            Assert.AreEqual(expected.SourceText.Shadow.Direction, actual.SourceText.Shadow.Direction);
+            Assert.AreEqual(expected.SourceText.Shadow.Distance, actual.SourceText.Shadow.Distance);
+            Assert.AreEqual(expected.SourceText.Shadow.Size, actual.SourceText.Shadow.Size);
+            Assert.AreEqual(expected.SourceText.LineSpacing, actual.SourceText.LineSpacing);
+
+            Assert.AreEqual(expected.TextOrientation, actual.TextOrientation);
+            Assert.AreEqual(expected.TextOutlineEnabled, actual.TextOutlineEnabled);
+            Assert.AreEqual(expected.TextShadowEnabled, actual.TextShadowEnabled);
+
+            Assert.AreEqual(expected.TextBorders.TextLeft, actual.TextBorders.TextLeft);
+            Assert.AreEqual(expected.TextBorders.TextTop, actual.TextBorders.TextTop);
+            Assert.AreEqual(expected.TextBorders.TextRight, actual.TextBorders.TextRight);
+            Assert.AreEqual(expected.TextBorders.TextBottom, actual.TextBorders.TextBottom);
+            Assert.AreEqual(expected.TextBorders.CopyrightBottom, actual.TextBorders.CopyrightBottom);
+            Assert.AreEqual(expected.TextBorders.SourceRight, actual.TextBorders.SourceRight);
+            Assert.AreEqual(expected.TextBorders.SourceTop, actual.TextBorders.SourceTop);
 
             Assert.IsTrue(actual.SearchText.Contains("näher mein gott zu dir"));
             Assert.IsTrue(actual.SearchText.Contains("geborgen"));
@@ -173,5 +183,110 @@ namespace PraiseBase.Presenter.Persistence.PowerPraise
             Assert.IsNull(reader.ReadTitle("powerpraise/non-existing-file.ppl"));
         }
 
+        [TestMethod()]
+        public void ReadUsingLoadMapperTest()
+        {
+            PowerPraiseSongFileReader reader = new PowerPraiseSongFileReader();
+            PowerPraiseSongsFileMapper mapper = new PowerPraiseSongsFileMapper();
+            string filename = "powerpraise/Näher, mein Gott zu Dir.ppl";
+            Song actual = mapper.map(reader.Load(filename));
+            Song expected = PowerPraiseTestUtil.GetExpectedSong();
+
+            Assert.AreEqual(expected.GUID, actual.GUID, "Wrong GUID");
+            Assert.AreEqual(expected.ModifiedTimestamp, actual.ModifiedTimestamp, "Wrong modified timestamp");
+            Assert.AreEqual(expected.CreatedIn, actual.CreatedIn, "Wrong created in");
+            Assert.AreEqual(expected.ModifiedIn, actual.ModifiedIn, "Wrong modified in");
+            Assert.AreEqual(expected.Title, actual.Title, "Wrong song title");
+            Assert.AreEqual(expected.Language, actual.Language, "Wrong language");
+            Assert.AreEqual(expected.CcliID, actual.CcliID, "Wrong CcliID");
+            Assert.AreEqual(expected.Copyright, actual.Copyright, "Wrong copyright");
+            Assert.AreEqual(expected.CopyrightPosition, actual.CopyrightPosition, "Wrong copyright position");
+            Assert.AreEqual(expected.SourcePosition, actual.SourcePosition, "Wrong source position");
+            Assert.AreEqual(expected.ReleaseYear, actual.ReleaseYear, "Wrong release year");
+            CollectionAssert.AreEqual(expected.Author, actual.Author, "Wrong author");
+            Assert.AreEqual(expected.RightsManagement, actual.RightsManagement, "Wrong rights Management");
+            Assert.AreEqual(expected.Publisher, actual.Publisher, "Wrong publisher");
+            Assert.AreEqual(expected.Version, actual.Version, "Wrong version");
+            Assert.AreEqual(expected.Key, actual.Key, "Wrong key");
+            Assert.AreEqual(expected.Transposition, actual.Transposition, "Wrong transposition");
+            Assert.AreEqual(expected.Tempo, actual.Tempo, "Wrong tempo");
+            Assert.AreEqual(expected.Variant, actual.Variant, "Wrong variant");
+            Assert.AreEqual(expected.Themes[0], actual.Themes[0], "Wrong theme");
+            Assert.AreEqual(expected.Comment, actual.Comment, "Wrong comment");
+            Assert.AreEqual(expected.SongBooks[0].Name, actual.SongBooks[0].Name, "Wrong songbook");
+
+            Assert.AreEqual(expected.Parts.Count, actual.Parts.Count, "Parts incomplete");
+            for (int i = 0; i < expected.Parts.Count; i++)
+            {
+                Assert.AreEqual(expected.Parts[i].Caption, actual.Parts[i].Caption, "Wrong verse name in verse " + i);
+                Assert.AreEqual(expected.Parts[i].Slides.Count, actual.Parts[i].Slides.Count, "Slides incomplete in verse " + i);
+                for (int j = 0; j < expected.Parts[i].Slides.Count; j++)
+                {
+                    CollectionAssert.AreEqual(expected.Parts[i].Slides[j].Lines, actual.Parts[i].Slides[j].Lines, "Slide lines incomplete in verse " + i + " slide " + j);
+                    CollectionAssert.AreEqual(expected.Parts[i].Slides[j].Translation, actual.Parts[i].Slides[j].Translation, "Slide translation lines incomplete in verse " + i + " slide " + j);
+                }
+            }
+            CollectionAssert.AreEqual(expected.PartSequence, actual.PartSequence, "Wrong part sequence");
+
+            CollectionAssert.AreEqual(expected.RelativeImagePaths, actual.RelativeImagePaths, "Wrong image paths");
+
+            CollectionAssert.AreEqual(expected.QualityIssues, actual.QualityIssues, "Wrong QA issues");
+
+            Assert.AreEqual(expected.MainText.Font, actual.MainText.Font);
+            Assert.AreEqual(expected.MainText.Color.ToArgb(), actual.MainText.Color.ToArgb());
+            Assert.AreEqual(expected.MainText.Outline.Color.ToArgb(), actual.MainText.Outline.Color.ToArgb());
+            Assert.AreEqual(expected.MainText.Outline.Width, actual.MainText.Outline.Width);
+            Assert.AreEqual(expected.MainText.Shadow.Color.ToArgb(), actual.MainText.Shadow.Color.ToArgb());
+            Assert.AreEqual(expected.MainText.Shadow.Direction, actual.MainText.Shadow.Direction);
+            Assert.AreEqual(expected.MainText.Shadow.Distance, actual.MainText.Shadow.Distance);
+            Assert.AreEqual(expected.MainText.Shadow.Size, actual.MainText.Shadow.Size);
+            Assert.AreEqual(expected.MainText.LineSpacing, actual.MainText.LineSpacing);
+
+            Assert.AreEqual(expected.TranslationText.Font, actual.TranslationText.Font);
+            Assert.AreEqual(expected.TranslationText.Color.ToArgb(), actual.TranslationText.Color.ToArgb());
+            Assert.AreEqual(expected.TranslationText.Outline.Color.ToArgb(), actual.TranslationText.Outline.Color.ToArgb());
+            Assert.AreEqual(expected.TranslationText.Outline.Width, actual.TranslationText.Outline.Width);
+            Assert.AreEqual(expected.TranslationText.Shadow.Color.ToArgb(), actual.TranslationText.Shadow.Color.ToArgb());
+            Assert.AreEqual(expected.TranslationText.Shadow.Direction, actual.TranslationText.Shadow.Direction);
+            Assert.AreEqual(expected.TranslationText.Shadow.Distance, actual.TranslationText.Shadow.Distance);
+            Assert.AreEqual(expected.TranslationText.Shadow.Size, actual.TranslationText.Shadow.Size);
+            Assert.AreEqual(expected.TranslationText.LineSpacing, actual.TranslationText.LineSpacing);
+
+            Assert.AreEqual(expected.CopyrightText.Font, actual.CopyrightText.Font);
+            Assert.AreEqual(expected.CopyrightText.Color.ToArgb(), actual.CopyrightText.Color.ToArgb());
+            Assert.AreEqual(expected.CopyrightText.Outline.Color.ToArgb(), actual.CopyrightText.Outline.Color.ToArgb());
+            Assert.AreEqual(expected.CopyrightText.Outline.Width, actual.CopyrightText.Outline.Width);
+            Assert.AreEqual(expected.CopyrightText.Shadow.Color.ToArgb(), actual.CopyrightText.Shadow.Color.ToArgb());
+            Assert.AreEqual(expected.CopyrightText.Shadow.Direction, actual.CopyrightText.Shadow.Direction);
+            Assert.AreEqual(expected.CopyrightText.Shadow.Distance, actual.CopyrightText.Shadow.Distance);
+            Assert.AreEqual(expected.CopyrightText.Shadow.Size, actual.CopyrightText.Shadow.Size);
+            Assert.AreEqual(expected.CopyrightText.LineSpacing, actual.CopyrightText.LineSpacing);
+
+            Assert.AreEqual(expected.SourceText.Font, actual.SourceText.Font);
+            Assert.AreEqual(expected.SourceText.Color.ToArgb(), actual.SourceText.Color.ToArgb());
+            Assert.AreEqual(expected.SourceText.Outline.Color.ToArgb(), actual.SourceText.Outline.Color.ToArgb());
+            Assert.AreEqual(expected.SourceText.Outline.Width, actual.SourceText.Outline.Width);
+            Assert.AreEqual(expected.SourceText.Shadow.Color.ToArgb(), actual.SourceText.Shadow.Color.ToArgb());
+            Assert.AreEqual(expected.SourceText.Shadow.Direction, actual.SourceText.Shadow.Direction);
+            Assert.AreEqual(expected.SourceText.Shadow.Distance, actual.SourceText.Shadow.Distance);
+            Assert.AreEqual(expected.SourceText.Shadow.Size, actual.SourceText.Shadow.Size);
+            Assert.AreEqual(expected.SourceText.LineSpacing, actual.SourceText.LineSpacing);
+
+            Assert.AreEqual(expected.TextOrientation, actual.TextOrientation);
+            Assert.AreEqual(expected.TextOutlineEnabled, actual.TextOutlineEnabled);
+            Assert.AreEqual(expected.TextShadowEnabled, actual.TextShadowEnabled);
+
+            Assert.AreEqual(expected.TextBorders.TextLeft, actual.TextBorders.TextLeft);
+            Assert.AreEqual(expected.TextBorders.TextTop, actual.TextBorders.TextTop);
+            Assert.AreEqual(expected.TextBorders.TextRight, actual.TextBorders.TextRight);
+            Assert.AreEqual(expected.TextBorders.TextBottom, actual.TextBorders.TextBottom);
+            Assert.AreEqual(expected.TextBorders.CopyrightBottom, actual.TextBorders.CopyrightBottom);
+            Assert.AreEqual(expected.TextBorders.SourceRight, actual.TextBorders.SourceRight);
+            Assert.AreEqual(expected.TextBorders.SourceTop, actual.TextBorders.SourceTop);
+
+            Assert.IsTrue(actual.SearchText.Contains("näher mein gott zu dir"));
+            Assert.IsTrue(actual.SearchText.Contains("geborgen"));
+
+        }
     }
 }
