@@ -46,7 +46,12 @@ namespace PraiseBase.Presenter.Persistence.PowerPraise
         public PowerPraiseSong Load(string filename)
         {
             PowerPraiseSong sng = new PowerPraiseSong();
+            parse(filename, sng);
+            return sng;
+        }
 
+        protected void parse(string filename, PowerPraiseSong sng) 
+        {
             // Init xml
             XmlDocument xmlDoc = new XmlDocument();
             xmlDoc.Load(filename);
@@ -65,6 +70,9 @@ namespace PraiseBase.Presenter.Persistence.PowerPraise
 
             // Language
             sng.Language = parseString(xmlRoot["general"]["language"], PowerPraiseConstants.Language);
+
+            // Parse additional fields (hook)
+            parseAdditionalFields(xmlRoot, sng);
 
             // Song text
             foreach (XmlElement elem in xmlRoot["songtext"])
@@ -136,8 +144,6 @@ namespace PraiseBase.Presenter.Persistence.PowerPraise
 
             // Borders
             sng.Borders = parseBorders(xmlRoot["formatting"]["borders"], PowerPraiseConstants.TextBorders);
-
-            return sng;
         }
 
         /// <summary>
@@ -160,6 +166,16 @@ namespace PraiseBase.Presenter.Persistence.PowerPraise
                 }
             }
             return val;
+        }
+
+        /// <summary>
+        /// Parses additional fields (hook)
+        /// </summary>
+        /// <param name="xmlRoot"></param>
+        /// <param name="sng"></param>
+        protected void parseAdditionalFields(XmlElement xmlRoot, PowerPraiseSong sng)
+        {
+            // Noop
         }
 
         /// <summary>
