@@ -71,7 +71,7 @@ namespace PraiseBase.Presenter.Persistence.PowerPraise
         [TestMethod()]
         public void MapTest()
         {
-            PowerPraiseSongsFileMapper mapper = new PowerPraiseSongsFileMapper();
+            PowerPraiseSongFileMapper mapper = new PowerPraiseSongFileMapper();
 
             PowerPraiseSong source = PowerPraiseTestUtil.GetExpectedPowerPraiseSong();
             Song expected = PowerPraiseTestUtil.GetExpectedSong();
@@ -179,7 +179,7 @@ namespace PraiseBase.Presenter.Persistence.PowerPraise
         [TestMethod()]
         public void MapSongPowerPraiseSongTest()
         {
-            PowerPraiseSongsFileMapper mapper = new PowerPraiseSongsFileMapper();
+            PowerPraiseSongFileMapper mapper = new PowerPraiseSongFileMapper();
 
             Song source = PowerPraiseTestUtil.GetExpectedSong();
             PowerPraiseSong expected = PowerPraiseTestUtil.GetExpectedPowerPraiseSong();

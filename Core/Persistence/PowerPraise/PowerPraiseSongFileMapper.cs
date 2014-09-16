@@ -34,7 +34,7 @@ using PraiseBase.Presenter.Model.Song;
 
 namespace PraiseBase.Presenter.Persistence.PowerPraise
 {
-    public class PowerPraiseSongsFileMapper : SongFileMapper<PowerPraiseSong>
+    public class PowerPraiseSongFileMapper : SongFileMapper<PowerPraiseSong>
     {
         /// <summary>
         /// Maps a PowerPraise song to a Song object

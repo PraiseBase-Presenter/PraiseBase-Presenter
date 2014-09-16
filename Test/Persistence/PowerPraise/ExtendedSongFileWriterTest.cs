@@ -116,7 +116,7 @@ namespace PraiseBase.Presenter.Persistence.PowerPraise
         [TestMethod()]
         public void WriteUsingMapperSaveTest()
         {
-            SongFileMapper<PowerPraiseSong> mapper = new PowerPraiseSongsFileMapper();
+            SongFileMapper<PowerPraiseSong> mapper = new PowerPraiseSongFileMapper();
             ISongFileWriter<PowerPraiseSong> writer = new PowerPraiseSongFileWriter();
             string referenceFilename = "powerpraise/Näher, mein Gott zu Dir.ppl";
             string filename = "powerpraise/Näher, mein Gott zu Dir - neu - extended2.ppl";
