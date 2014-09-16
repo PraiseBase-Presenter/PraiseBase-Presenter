@@ -70,10 +70,10 @@ namespace PraiseBase.Presenter.Persistence.CCLI
         [TestMethod()]
         public void IsFileSupportedTest()
         {
-            SongSelectFileReader target = new SongSelectFileReader(); // TODO: Initialize to an appropriate value
+            ISongFileReader<SongSelectFile> reader = new SongSelectFileReader(); // TODO: Initialize to an appropriate value
             string filename = "ccli/Ein Lied für Gott.usr";
             bool expected = true;
-            bool actual = target.IsFileSupported(filename);
+            bool actual = reader.IsFileSupported(filename);
             Assert.AreEqual(expected, actual);
         }
 
@@ -83,7 +83,7 @@ namespace PraiseBase.Presenter.Persistence.CCLI
         [TestMethod()]
         public void LoadTest()
         {
-            SongSelectFileReader reader = new SongSelectFileReader();
+            ISongFileReader<SongSelectFile> reader = new SongSelectFileReader();
             string filename = "ccli/Ein Lied für Gott.usr";
 
             SongSelectFile expected = new SongSelectFile();
@@ -147,7 +147,7 @@ namespace PraiseBase.Presenter.Persistence.CCLI
         [TestMethod()]
         public void ReadTitleTest()
         {
-            SongSelectFileReader reader = new SongSelectFileReader();
+            ISongFileReader<SongSelectFile> reader = new SongSelectFileReader();
             Assert.AreEqual("Ein Lied für Gott", reader.ReadTitle("ccli/Ein Lied für Gott.usr"));
             Assert.IsNull(reader.ReadTitle("ccli/non-existing-file.usr"));
         }
@@ -158,7 +158,7 @@ namespace PraiseBase.Presenter.Persistence.CCLI
         [TestMethod()]
         public void FileExtensionTest()
         {
-            SongSelectFileReader target = new SongSelectFileReader(); // TODO: Initialize to an appropriate value
+            ISongFileReader<SongSelectFile> target = new SongSelectFileReader(); // TODO: Initialize to an appropriate value
             string actual  = ".usr";
             actual = target.GetFileExtension();
             Assert.AreEqual(target.GetFileExtension(), actual);

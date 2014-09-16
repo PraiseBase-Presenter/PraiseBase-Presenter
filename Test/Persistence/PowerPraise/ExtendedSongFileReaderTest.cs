@@ -186,8 +186,8 @@ namespace PraiseBase.Presenter.Persistence.PowerPraise
         [TestMethod()]
         public void ReadUsingLoadMapperTest()
         {
-            PowerPraiseSongFileReader reader = new PowerPraiseSongFileReader();
-            PowerPraiseSongsFileMapper mapper = new PowerPraiseSongsFileMapper();
+            ISongFileReader<PowerPraiseSong> reader = new PowerPraiseSongFileReader();
+            SongFileMapper<PowerPraiseSong> mapper = new PowerPraiseSongsFileMapper();
             string filename = "powerpraise/Näher, mein Gott zu Dir.ppl";
             Song actual = mapper.map(reader.Load(filename));
             Song expected = PowerPraiseTestUtil.GetExpectedSong();

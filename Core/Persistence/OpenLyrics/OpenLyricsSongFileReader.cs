@@ -30,7 +30,7 @@ using System.Xml;
 
 namespace PraiseBase.Presenter.Persistence.OpenLyrics
 {
-    public class OpenLyricsSongFileReader
+    public class OpenLyricsSongFileReader : ISongFileReader<OpenLyricsSong>
     {
         public string GetFileExtension() { return ".xml"; }
 

@@ -70,7 +70,7 @@ namespace PraiseBase.Presenter.Persistence.OpenLyrics
         [TestMethod()]
         public void LoadSimpleTest()
         {
-            OpenLyricsSongFileReader target = new OpenLyricsSongFileReader();
+            ISongFileReader<OpenLyricsSong> target = new OpenLyricsSongFileReader();
             string filename = "openlyrics/simple.xml";
 
             OpenLyricsSong expected = new OpenLyricsSong();
@@ -118,7 +118,7 @@ namespace PraiseBase.Presenter.Persistence.OpenLyrics
         [TestMethod()]
         public void LoadComplexTest()
         {
-            OpenLyricsSongFileReader target = new OpenLyricsSongFileReader();
+            ISongFileReader<OpenLyricsSong> target = new OpenLyricsSongFileReader();
             string filename = "openlyrics/complex.xml";
 
             OpenLyricsSong expected = new OpenLyricsSong();
@@ -238,7 +238,7 @@ namespace PraiseBase.Presenter.Persistence.OpenLyrics
         [TestMethod()]
         public void ReadTitleTestSimple()
         {
-            OpenLyricsSongFileReader reader = new OpenLyricsSongFileReader();
+            ISongFileReader<OpenLyricsSong> reader = new OpenLyricsSongFileReader();
             Assert.AreEqual("Amazing Grace", reader.ReadTitle("openlyrics/simple.xml"));
             Assert.IsNull(reader.ReadTitle("openlyrics/non-existing-file.xml"));
         }
@@ -249,7 +249,7 @@ namespace PraiseBase.Presenter.Persistence.OpenLyrics
         [TestMethod()]
         public void ReadTitleTestComplex()
         {
-            OpenLyricsSongFileReader reader = new OpenLyricsSongFileReader();
+            ISongFileReader<OpenLyricsSong> reader = new OpenLyricsSongFileReader();
             Assert.AreEqual("Amazing Grace", reader.ReadTitle("openlyrics/complex.xml"));
         }
     }

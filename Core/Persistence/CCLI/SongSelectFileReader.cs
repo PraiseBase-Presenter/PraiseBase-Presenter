@@ -32,7 +32,7 @@ using System.Text.RegularExpressions;
 
 namespace PraiseBase.Presenter.Persistence.CCLI
 {
-    public class SongSelectFileReader
+    public class SongSelectFileReader : ISongFileReader<SongSelectFile>
     {
         public string GetFileExtension() { return ".usr"; }
 

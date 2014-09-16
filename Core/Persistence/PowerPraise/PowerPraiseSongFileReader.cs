@@ -33,11 +33,11 @@ using PraiseBase.Presenter.Model;
 
 namespace PraiseBase.Presenter.Persistence.PowerPraise
 {
-    public class PowerPraiseSongFileReader
+    public class PowerPraiseSongFileReader : ISongFileReader<PowerPraiseSong>
     {
-        public string FileExtension { get { return ".ppl"; } }
+        public string GetFileExtension() { return ".ppl"; }
 
-        public string FileTypeDescription { get { return "PowerPraise Lied"; } }
+        public string GetFileTypeDescription() { return "PowerPraise Lied"; }
 
         protected const string SupportedFileFormatVersion = "3.0";
 

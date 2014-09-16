@@ -71,7 +71,7 @@ namespace PraiseBase.Presenter.Persistence.PowerPraise
         [TestMethod()]
         public void SaveTest()
         {
-            PowerPraiseSongFileWriter target = new PowerPraiseSongFileWriter();
+            ISongFileWriter<PowerPraiseSong> target = new PowerPraiseSongFileWriter();
             string referenceFilename = "powerpraise/Näher, mein Gott zu Dir.ppl";
             string filename = "powerpraise/Näher, mein Gott zu Dir - neu.ppl";
 
@@ -94,9 +94,9 @@ namespace PraiseBase.Presenter.Persistence.PowerPraise
         [TestMethod()]
         public void FileTypeDescriptionTest()
         {
-            PowerPraiseSongFileWriter target = new PowerPraiseSongFileWriter();
+            ISongFileWriter<PowerPraiseSong> target = new PowerPraiseSongFileWriter();
             string actual;
-            actual = target.FileTypeDescription;
+            actual = target.GetFileTypeDescription();
             Assert.AreEqual(actual, "PowerPraise Lied");
         }
 
@@ -106,9 +106,9 @@ namespace PraiseBase.Presenter.Persistence.PowerPraise
         [TestMethod()]
         public void FileExtensionTest()
         {
-            PowerPraiseSongFileWriter target = new PowerPraiseSongFileWriter();
+            ISongFileWriter<PowerPraiseSong> target = new PowerPraiseSongFileWriter();
             string actual;
-            actual = target.FileExtension;
+            actual = target.GetFileExtension();
             Assert.AreEqual(actual, ".ppl");
         }
     }
