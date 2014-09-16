@@ -49,6 +49,10 @@
     <Compile Include="Persistence\CCLI\SongSelectVerse.cs" />
     <Compile Include="Persistence\CCLI\SongSelectFile.cs" />
     <Compile Include="Persistence\CCLI\SongSelectFileMapper.cs" />
+    <Compile Include="Persistence\ISongFileWriter.cs" />
+    <Compile Include="Persistence\IncompleteSongSourceFileException.cs" />
+    <Compile Include="Persistence\InvalidSongSourceFileException.cs" />
+    <Compile Include="Persistence\ISongFileReader.cs" />
     <Compile Include="Persistence\OpenLyrics\OpenLyricsSongLines.cs" />
     <Compile Include="Persistence\OpenLyrics\OpenLyricsSongFileMapper.cs" />
     <Compile Include="Persistence\OpenLyrics\OpenLyricsSong.cs" />

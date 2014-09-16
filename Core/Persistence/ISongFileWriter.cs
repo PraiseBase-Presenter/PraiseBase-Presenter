@@ -25,42 +25,14 @@
  *
  */
 
-using System;
-using PraiseBase.Presenter.Model.Song;
-
 namespace PraiseBase.Presenter.Persistence
 {
-    public interface SongFileReader
+    public interface ISongFileWriter<T>
     {
-        /// <summary>
-        /// Loads and instantiates a song from a file
-        /// </summary>
-        /// <param name="filename">Absolute path to the song file</param>
-        /// <returns>Song object instance</returns>
-        Song Load(string filename);
+        void Save(string filename, T sng);
 
-        /// <summary>
-        /// Reads the title of a song from a file
-        /// </summary>
-        /// <param name="filename">Absolute path to the song file</param>
-        /// <returns></returns>
-        String ReadTitle(string filename);
-
-        /// <summary>
-        /// Tests if a given file is supported by this reader
-        /// </summary>
-        /// <param name="filename"></param>
-        /// <returns></returns>
-        bool IsFileSupported(string filename);
-
-        /// <summary>
-        /// Defines the extensions this file format uses, e.g. ".xml"
-        /// </summary>
         string GetFileExtension();
 
-        /// <summary>
-        /// The common name of the file format
-        /// </summary>
         string GetFileTypeDescription();
     }
 }

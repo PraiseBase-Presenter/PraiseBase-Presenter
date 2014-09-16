@@ -26,18 +26,17 @@
  */
 
 using System;
-using PraiseBase.Presenter.Model.Song;
 
 namespace PraiseBase.Presenter.Persistence
 {
-    public interface SongFileReader
+    public interface ISongFileReader<T>
     {
         /// <summary>
         /// Loads and instantiates a song from a file
         /// </summary>
         /// <param name="filename">Absolute path to the song file</param>
         /// <returns>Song object instance</returns>
-        Song Load(string filename);
+        T Load(string filename);
 
         /// <summary>
         /// Reads the title of a song from a file
