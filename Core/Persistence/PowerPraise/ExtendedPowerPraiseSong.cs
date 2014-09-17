@@ -47,7 +47,8 @@ namespace PraiseBase.Presenter.Persistence.PowerPraise
 
         public ExtendedPowerPraiseSong()
         {
-
+            QualityIssues = new List<SongQualityAssuranceIndicator>();
+            Author = new List<SongAuthor>();
         }
     }
 }

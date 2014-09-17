@@ -39,5 +39,19 @@ namespace PraiseBase.Presenter.Model.Song
         public string Name { get; set; }
 
         public SongAuthorType Type { get; set; }
+
+        public override bool Equals(object obj)
+        {
+            if (obj == null || GetType() != obj.GetType()) {
+                return false;
+            }
+            SongAuthor a = (SongAuthor)obj;
+            return this.Name == a.Name && this.Type == a.Type;
+        }
+
+        public override int GetHashCode()
+        {
+            return Name.GetHashCode() ^ Type.GetHashCode();
+        }
     }
 }
