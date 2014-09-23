@@ -5,15 +5,15 @@
     <category>Anbetung</category>
     <language>Deutsch</language>
     <guid>78dd30b2-078b-4eef-9767-dc41a6e6ab27</guid>
-    <ccliNo>12123</ccliNo>
-    <author>asd as d</author>
-    <publisher>Sparrow Records</publisher>
-	<admin>Verlag ABC</admin>
     <comment>Test</comment>
     <qualityissues>
       <issue>Translation</issue>
       <issue>Segmentation</issue>
     </qualityissues>
+    <ccliNo>12123</ccliNo>
+    <author>asd as d</author>
+    <publisher>Sparrow Records</publisher>
+    <admin>Verlag ABC</admin>
   </general>
   <songtext>
     <part caption="Teil 1">
