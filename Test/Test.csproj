@@ -64,6 +64,7 @@
     <Compile Include="Persistence\CCLI\SongSelectFileMapperTest.cs" />
     <Compile Include="Persistence\CCLI\SongSelectFileReaderTest.cs" />
     <Compile Include="Persistence\OpenLyrics\OpenLyricsSongFileMapperTest.cs" />
+    <Compile Include="Persistence\PowerPraise\ExtendedPowerPraiseSongFileMapperTest.cs" />
     <Compile Include="Persistence\PowerPraise\ExtendedPowerPraiseSongFileWriterTest.cs" />
     <Compile Include="Persistence\PowerPraise\ExtendedPowerPraiseSongFileReaderTest.cs" />
     <Compile Include="Persistence\PowerPraise\PowerPraiseSongFileMapperTest.cs" />
