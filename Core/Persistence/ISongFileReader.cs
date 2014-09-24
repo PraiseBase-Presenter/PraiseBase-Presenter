@@ -29,7 +29,7 @@ using System;
 
 namespace PraiseBase.Presenter.Persistence
 {
-    public interface ISongFileReader<T>
+    public interface ISongFileReader<T> where T : PersistentSong
     {
         /// <summary>
         /// Loads and instantiates a song from a file

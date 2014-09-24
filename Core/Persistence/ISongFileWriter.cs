@@ -27,7 +27,7 @@
 
 namespace PraiseBase.Presenter.Persistence
 {
-    public interface ISongFileWriter<T>
+    public interface ISongFileWriter<T> where T : PersistentSong
     {
         void Save(string filename, T sng);
 
