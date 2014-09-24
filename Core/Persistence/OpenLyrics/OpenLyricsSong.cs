@@ -5,7 +5,7 @@ using System.Text;
 
 namespace PraiseBase.Presenter.Persistence.OpenLyrics
 {
-    public class OpenLyricsSong
+    public class OpenLyricsSong : PersistentSong
     {
         /// <summary>
         /// Timestamp when the song has been last modified

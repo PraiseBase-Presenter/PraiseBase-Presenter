@@ -57,6 +57,7 @@
     <Compile Include="Persistence\OpenLyrics\OpenLyricsSongFileMapper.cs" />
     <Compile Include="Persistence\OpenLyrics\OpenLyricsSong.cs" />
     <Compile Include="Persistence\OpenLyrics\OpenLyricsSongVerse.cs" />
+    <Compile Include="Persistence\PersistentSong.cs" />
     <Compile Include="Persistence\PowerPraise\AbstractPowerPraiseSongFileReader.cs" />
     <Compile Include="Persistence\PowerPraise\AbstractPowerPraiseSongFileWriter.cs" />
     <Compile Include="Persistence\PowerPraise\ExtendedPowerPraiseSongFileMapper.cs" />

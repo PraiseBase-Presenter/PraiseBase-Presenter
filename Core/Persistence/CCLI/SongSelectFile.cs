@@ -5,7 +5,7 @@ using System.Text;
 
 namespace PraiseBase.Presenter.Persistence.CCLI
 {
-    public class SongSelectFile
+    public class SongSelectFile : PersistentSong
     {
         /// <summary>
         /// CCLI ID

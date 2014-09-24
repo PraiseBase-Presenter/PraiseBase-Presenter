@@ -7,7 +7,7 @@ using PraiseBase.Presenter.Model;
 
 namespace PraiseBase.Presenter.Persistence.PowerPraise
 {
-    public class PowerPraiseSong
+    public class PowerPraiseSong : PersistentSong
     {
         /// <summary>
         /// Font formatting (Font, Color, Outline, Shadow)
