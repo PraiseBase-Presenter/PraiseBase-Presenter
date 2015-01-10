@@ -73,8 +73,8 @@ namespace PraiseBase.Presenter.Persistence.PowerPraise
         public void SaveTest()
         {
             SongFileWriter target = new ExtendedSongFileWriter();
-            string referenceFilename = "powerpraise/Näher, mein Gott zu Dir.ppl";
-            string filename = "powerpraise/Näher, mein Gott zu Dir - neu - extended.ppl";
+            string referenceFilename = "Resources/powerpraise/Näher, mein Gott zu Dir.ppl";
+            string filename = "Resources/powerpraise/Näher, mein Gott zu Dir - neu - extended.ppl";
 
             Song sng = PowerPraiseTestUtil.GetExpectedSong();
 
@@ -118,8 +118,8 @@ namespace PraiseBase.Presenter.Persistence.PowerPraise
         {
             SongFileMapper<PowerPraiseSong> mapper = new PowerPraiseSongFileMapper();
             ISongFileWriter<PowerPraiseSong> writer = new PowerPraiseSongFileWriter();
-            string referenceFilename = "powerpraise/Näher, mein Gott zu Dir.ppl";
-            string filename = "powerpraise/Näher, mein Gott zu Dir - neu - extended2.ppl";
+            string referenceFilename = "Resources/powerpraise/Näher, mein Gott zu Dir.ppl";
+            string filename = "Resources/powerpraise/Näher, mein Gott zu Dir - neu - extended2.ppl";
 
             Song sng = PowerPraiseTestUtil.GetExpectedSong();;
             PowerPraiseSong ppl = new PowerPraiseSong();

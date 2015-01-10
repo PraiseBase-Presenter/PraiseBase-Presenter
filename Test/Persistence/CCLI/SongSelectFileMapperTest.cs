@@ -71,7 +71,7 @@ namespace PraiseBase.Presenter.Persistence.CCLI
         public void IsFileSupportedTest()
         {
             SongSelectFileReader target = new SongSelectFileReader(); // TODO: Initialize to an appropriate value
-            string filename = "ccli/Ein Lied für Gott.usr";
+            string filename = "Resources/ccli/Ein Lied für Gott.usr";
             bool expected = true;
             bool actual = target.IsFileSupported(filename);
             Assert.AreEqual(expected, actual);
@@ -210,8 +210,8 @@ namespace PraiseBase.Presenter.Persistence.CCLI
         public void ReadTitleTest()
         {
             SongSelectFileReader reader = new SongSelectFileReader();
-            Assert.AreEqual("Ein Lied für Gott", reader.ReadTitle("ccli/Ein Lied für Gott.usr"));
-            Assert.IsNull(reader.ReadTitle("ccli/non-existing-file.usr"));
+            Assert.AreEqual("Ein Lied für Gott", reader.ReadTitle("Resources/ccli/Ein Lied für Gott.usr"));
+            Assert.IsNull(reader.ReadTitle("Resources/ccli/non-existing-file.usr"));
         }
 
         /// <summary>

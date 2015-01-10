@@ -70,7 +70,7 @@ namespace PraiseBase.Presenter.Persistence.PowerPraise
         public void LoadTest()
         {
             ISongFileReader<ExtendedPowerPraiseSong> reader = new ExtendedPowerPraiseSongFileReader();
-            string filename = "powerpraise/Näher, mein Gott zu Dir.ppl";
+            string filename = "Resources/powerpraise/Näher, mein Gott zu Dir.ppl";
 
             PowerPraiseSong expected = PowerPraiseTestUtil.GetExpectedPowerPraiseSong();
 
@@ -168,7 +168,7 @@ namespace PraiseBase.Presenter.Persistence.PowerPraise
         public void LoadTest2()
         {
             ISongFileReader<ExtendedPowerPraiseSong> reader = new ExtendedPowerPraiseSongFileReader();
-            string filename = "powerpraise/Näher, mein Gott zu Dir - extended.ppl";
+            string filename = "Resources/powerpraise/Näher, mein Gott zu Dir - extended.ppl";
 
             ExtendedPowerPraiseSong expected = PowerPraiseTestUtil.GetExpectedExtendedPowerPraiseSong();
 

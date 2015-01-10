@@ -71,7 +71,7 @@ namespace PraiseBase.Presenter.Persistence
         public void ReadTest()
         {
             StatisticsReader target = new StatisticsReader();
-            string filename = "statistics/statistics.xml";
+            string filename = "Resources/statistics/statistics.xml";
             
             Statistics expected = new Statistics();
 

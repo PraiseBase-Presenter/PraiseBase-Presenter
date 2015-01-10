@@ -72,8 +72,8 @@ namespace PraiseBase.Presenter.Persistence
         public void WriteTest()
         {
             StatisticsWriter target = new StatisticsWriter();
-            string referenceFilename = "statistics/statistics.xml";
-            string filename = "statistics/statistics-neu.xml";
+            string referenceFilename = "Resources/statistics/statistics.xml";
+            string filename = "Resources/statistics/statistics-neu.xml";
 
             Statistics expected = new Statistics();
 

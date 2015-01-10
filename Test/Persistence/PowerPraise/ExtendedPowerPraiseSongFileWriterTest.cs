@@ -72,8 +72,8 @@ namespace PraiseBase.Presenter.Persistence.PowerPraise
         public void SaveTest()
         {
             ISongFileWriter<ExtendedPowerPraiseSong> target = new ExtendedPowerPraiseSongFileWriter();
-            string referenceFilename = "powerpraise/Näher, mein Gott zu Dir - extended.ppl";
-            string filename = "powerpraise/Näher, mein Gott zu Dir - extended - out.ppl";
+            string referenceFilename = "Resources/powerpraise/Näher, mein Gott zu Dir - extended.ppl";
+            string filename = "Resources/powerpraise/Näher, mein Gott zu Dir - extended - out.ppl";
 
             ExtendedPowerPraiseSong sng = PowerPraiseTestUtil.GetExpectedExtendedPowerPraiseSong();
 

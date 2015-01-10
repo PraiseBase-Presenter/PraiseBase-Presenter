@@ -287,7 +287,7 @@ namespace PraiseBase.Presenter.Persistence.PowerPraise
         [TestMethod()]
         public void ReadAndMapTest()
         {
-            string filename = "powerpraise/Näher, mein Gott zu Dir - extended.ppl";
+            string filename = "Resources/powerpraise/Näher, mein Gott zu Dir - extended.ppl";
 
             ISongFileReader<ExtendedPowerPraiseSong> reader = new ExtendedPowerPraiseSongFileReader();
             ExtendedPowerPraiseSongFileMapper mapper = new ExtendedPowerPraiseSongFileMapper();
@@ -399,8 +399,8 @@ namespace PraiseBase.Presenter.Persistence.PowerPraise
         [TestMethod()]
         public void MapAndWriteTest()
         {
-            string referenceFilename = "powerpraise/Näher, mein Gott zu Dir - extended.ppl";
-            string filename = "powerpraise/Näher, mein Gott zu Dir - extended - out.ppl";
+            string referenceFilename = "Resources/powerpraise/Näher, mein Gott zu Dir - extended.ppl";
+            string filename = "Resources/powerpraise/Näher, mein Gott zu Dir - extended - out.ppl";
 
             ExtendedPowerPraiseSongFileMapper mapper = new ExtendedPowerPraiseSongFileMapper();
             ISongFileWriter<ExtendedPowerPraiseSong> target = new ExtendedPowerPraiseSongFileWriter();
