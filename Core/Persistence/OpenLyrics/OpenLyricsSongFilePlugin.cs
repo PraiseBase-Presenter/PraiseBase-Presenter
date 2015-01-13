@@ -8,7 +8,7 @@ namespace PraiseBase.Presenter.Persistence.OpenLyrics
 {
     public class OpenLyricsSongFilePlugin : AbstractSongFilePlugin<OpenLyricsSong>
     {
-        public OpenLyricsSongFilePlugin()
+        public OpenLyricsSongFilePlugin() : base()
         {
             reader = new OpenLyricsSongFileReader();
             mapper = new OpenLyricsSongFileMapper();

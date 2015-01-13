@@ -8,7 +8,7 @@ namespace PraiseBase.Presenter.Persistence.CCLI
 {
     public class SongSelectFilePlugin : AbstractSongFilePlugin<SongSelectFile>
     {
-        public SongSelectFilePlugin()
+        public SongSelectFilePlugin() : base()
         {
             reader = new SongSelectFileReader();
             mapper = new SongSelectFileMapper();

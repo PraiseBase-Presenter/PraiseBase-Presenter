@@ -7,7 +7,7 @@ namespace PraiseBase.Presenter.Persistence.PowerPraise
 {
     class ExtendedPowerPraiseSongFilePlugin : AbstractSongFilePlugin<ExtendedPowerPraiseSong>
     {
-        public ExtendedPowerPraiseSongFilePlugin()
+        public ExtendedPowerPraiseSongFilePlugin() : base()
         {
             reader = new ExtendedPowerPraiseSongFileReader();
             mapper = new ExtendedPowerPraiseSongFileMapper();

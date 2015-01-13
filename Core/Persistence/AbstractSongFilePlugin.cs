@@ -11,15 +11,25 @@ namespace PraiseBase.Presenter.Persistence
         protected ISongFileReader<T> reader;
         protected SongFileMapper<T> mapper;
 
+        public AbstractSongFilePlugin()
+        {
+            Console.WriteLine("Loaded song file plugin: " + this.GetType().ToString());
+        }
+
         public Song Load(String filePath)
         {
             T song = reader.Load(filePath);
             return mapper.map(song);
         }
 
-        public Boolean IsSupported(String filePath)
+        public Boolean IsFileSupported(String filePath)
         {
             return reader.IsFileSupported(filePath);
+        }
+
+        public string GetFileExtension()
+        {
+            return reader.GetFileExtension();
         }
     }
 }

@@ -9,6 +9,9 @@ namespace PraiseBase.Presenter.Persistence
     public interface ISongFilePlugin
     {
         Song Load(String filePath);
-        Boolean IsSupported(String filePath);
+        
+        Boolean IsFileSupported(String filePath);
+        
+        string GetFileExtension();
     }
 }
