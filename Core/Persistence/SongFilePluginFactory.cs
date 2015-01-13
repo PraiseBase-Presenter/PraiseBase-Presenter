@@ -34,7 +34,6 @@ namespace PraiseBase.Presenter.Persistence
                 {
                     SupportedExtensionMapping[inst.GetFileExtension()].Add(atype);
                 }
-                Console.WriteLine("Loaded song reader: " + atype);
             }
         }
 

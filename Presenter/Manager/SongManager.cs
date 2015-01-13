@@ -140,7 +140,7 @@ namespace PraiseBase.Presenter
         {
             // Find song files
             var songPaths = new List<string>();
-            foreach (string ext in SongFileReaderFactory.Instance.SupportedExtensions)
+            foreach (string ext in SongFilePluginFactory.SupportedExtensions)
             {
                 string[] songFilePaths = Directory.GetFiles(SongDirPath, "*" + ext, SearchOption.AllDirectories);
                 songPaths.AddRange(songFilePaths);
@@ -155,7 +155,7 @@ namespace PraiseBase.Presenter
                 try
                 {
                     SongItem si = new SongItem();
-                    SongFileReader sfr = SongFileReaderFactory.Instance.CreateFactoryByFile(path);
+                    ISongFilePlugin sfr = SongFilePluginFactory.Create(path);
                     si.Song = sfr.Load(path);
                     si.Filename = path;
                     if (si.Song.GUID == Guid.Empty)
@@ -218,7 +218,7 @@ namespace PraiseBase.Presenter
             try
             {
                 SongItem si = new SongItem();
-                SongFileReader sfr = SongFileReaderFactory.Instance.CreateFactoryByFile(path);
+                ISongFilePlugin sfr = SongFilePluginFactory.Create(path);
                 si.Song = sfr.Load(path);
                 si.Filename = path;
 
