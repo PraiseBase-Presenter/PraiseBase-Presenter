@@ -95,14 +95,11 @@
     <Compile Include="Model\TextShadow.cs" />
     <Compile Include="Persistence\PowerPraise\PowerPraiseConstants.cs" />
     <Compile Include="Persistence\CCLI\SongSelectFileReader.cs" />
-    <Compile Include="Persistence\PowerPraise\ExtendedSongFileReader.cs" />
     <Compile Include="Persistence\OpenLyrics\OpenLyricsSongFileReader.cs" />
     <Compile Include="Persistence\PowerPraise\PowerPraiseSongFileReader.cs" />
     <Compile Include="Persistence\SetlistReader.cs" />
     <Compile Include="Persistence\SongFileMapper.cs" />
     <Compile Include="Persistence\SongFilePluginFactory.cs" />
-    <Compile Include="Persistence\SongFileReader.cs" />
-    <Compile Include="Persistence\SongFileReaderFactory.cs" />
     <Compile Include="Persistence\StatisticsReader.cs" />
     <Compile Include="Persistence\ZefaniaXML\XMLBibleReader.cs" />
     <Compile Include="Persistence\PowerPraise\ExtendedSongFileWriter.cs" />

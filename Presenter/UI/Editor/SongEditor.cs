@@ -113,7 +113,7 @@ namespace PraiseBase.Presenter.Forms
             openFileDialog.Multiselect = false;
             openFileDialog.Title = Properties.StringResources.OpenSong;
 
-            openFileDialog.Filter = SongFileReaderFactory.Instance.GetFileBoxFilter();
+            openFileDialog.Filter = GetFileBoxFilter();
             openFileDialog.FilterIndex = fileOpenBoxFilterIndex;
             if (openFileDialog.ShowDialog(this) == DialogResult.OK)
             {
@@ -122,6 +122,24 @@ namespace PraiseBase.Presenter.Forms
                 fileOpenBoxFilterIndex = openFileDialog.FilterIndex;
                 openSong(FileName);
             }
+        }
+
+        /// <summary>
+        /// Returns the filter string used in open file dialogs
+        /// </summary>
+        /// <returns></returns>
+        public string GetFileBoxFilter()
+        {
+            String exts = String.Empty;
+            foreach (var ext in SongFilePluginFactory.SupportedExtensions)
+            {
+                if (exts != String.Empty)
+                {
+                    exts += ";";
+                }
+                exts += "*" + ext;
+            }
+            return "Lieddateien (" + exts + ")|" + exts + "|Alle Dateien (*.*)|*.*";
         }
 
         public void openSong(string fileName)

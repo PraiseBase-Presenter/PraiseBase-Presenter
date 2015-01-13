@@ -12,7 +12,7 @@ namespace PraiseBase.Presenter.Persistence.PowerPraise
     ///to contain all PowerPraiseSongFileReaderTest Unit Tests
     ///</summary>
     [TestClass()]
-    public class ExtendedSongFileReaderTest
+    public class ExtendedPowerPraiseSongFilePluginTest
     {
 
 
@@ -70,7 +70,7 @@ namespace PraiseBase.Presenter.Persistence.PowerPraise
         [TestMethod()]
         public void LoadTest()
         {
-            SongFileReader target = new ExtendedSongFileReader();
+            ISongFilePlugin target = new ExtendedPowerPraiseSongFilePlugin();
             string filename = "Resources/powerpraise/Näher, mein Gott zu Dir.ppl";
 
             Song expected = PowerPraiseTestUtil.GetExpectedSong();
@@ -178,7 +178,7 @@ namespace PraiseBase.Presenter.Persistence.PowerPraise
         [TestMethod()]
         public void ReadTitleTest()
         {
-            SongFileReader reader = new ExtendedSongFileReader();
+            ISongFilePlugin reader = new ExtendedPowerPraiseSongFilePlugin();
             Assert.AreEqual("Näher, mein Gott, zu Dir", reader.ReadTitle("Resources/powerpraise/Näher, mein Gott zu Dir.ppl"));
             Assert.IsNull(reader.ReadTitle("Resources/powerpraise/non-existing-file.ppl"));
         }

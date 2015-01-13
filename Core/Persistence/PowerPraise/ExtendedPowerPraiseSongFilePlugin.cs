@@ -5,7 +5,7 @@ using System.Text;
 
 namespace PraiseBase.Presenter.Persistence.PowerPraise
 {
-    class ExtendedPowerPraiseSongFilePlugin : AbstractSongFilePlugin<ExtendedPowerPraiseSong>
+    public class ExtendedPowerPraiseSongFilePlugin : AbstractSongFilePlugin<ExtendedPowerPraiseSong>
     {
         public ExtendedPowerPraiseSongFilePlugin() : base()
         {

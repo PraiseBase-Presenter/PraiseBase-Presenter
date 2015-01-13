@@ -59,7 +59,7 @@ namespace PraiseBase.Presenter.Forms
                 Console.WriteLine("Loading song from file " + fileName);
                 try
                 {
-                    sng = SongFileReaderFactory.Instance.CreateFactoryByFile(fileName).Load(fileName);
+                    sng = SongFilePluginFactory.Create(fileName).Load(fileName);
                     if (sng.GUID == Guid.Empty)
                     {
                         var smGuid = SongManager.Instance.GetGUIDByPath(fileName);

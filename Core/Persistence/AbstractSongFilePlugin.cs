@@ -15,6 +15,10 @@ namespace PraiseBase.Presenter.Persistence
         {
             Console.WriteLine("Loaded song file plugin: " + this.GetType().ToString());
         }
+        public String ReadTitle(string filePath)
+        {
+            return reader.ReadTitle(filePath);
+        }
 
         public Song Load(String filePath)
         {
