@@ -32,7 +32,7 @@ using System.Xml;
 using PraiseBase.Presenter.Model;
 using PraiseBase.Presenter.Model.Song;
 
-namespace PraiseBase.Presenter.Persistence.PowerPraise
+namespace PraiseBase.Presenter.Persistence.PowerPraise.Extended
 {
     public class ExtendedPowerPraiseSongFileReader : AbstractPowerPraiseSongFileReader<ExtendedPowerPraiseSong>
     {

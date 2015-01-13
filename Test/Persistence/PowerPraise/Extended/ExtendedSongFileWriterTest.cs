@@ -1,9 +1,10 @@
 ﻿using PraiseBase.Presenter.Persistence;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
+using PraiseBase.Presenter.Model.Song;
 using PraiseBase.Presenter.Model;
 
-namespace PraiseBase.Presenter.Persistence.PowerPraise
+namespace PraiseBase.Presenter.Persistence.PowerPraise.Extended
 {
     
     
@@ -12,7 +13,7 @@ namespace PraiseBase.Presenter.Persistence.PowerPraise
     ///to contain all PowerPraiseSongFileWriterTest Unit Tests
     ///</summary>
     [TestClass()]
-    public class ExtendedPowerPraiseSongFileWriterTest
+    public class ExtendedSongFileWriterTest
     {
 
 
@@ -71,11 +72,11 @@ namespace PraiseBase.Presenter.Persistence.PowerPraise
         [TestMethod()]
         public void SaveTest()
         {
-            ISongFileWriter<ExtendedPowerPraiseSong> target = new ExtendedPowerPraiseSongFileWriter();
-            string referenceFilename = "Resources/powerpraise/Näher, mein Gott zu Dir - extended.ppl";
-            string filename = "Resources/powerpraise/Näher, mein Gott zu Dir - extended - out.ppl";
+            SongFileWriter target = new ExtendedSongFileWriter();
+            string referenceFilename = "Resources/powerpraise/Näher, mein Gott zu Dir.ppl";
+            string filename = "Resources/powerpraise/Näher, mein Gott zu Dir - neu - extended.ppl";
 
-            ExtendedPowerPraiseSong sng = PowerPraiseTestUtil.GetExpectedExtendedPowerPraiseSong();
+            Song sng = PowerPraiseTestUtil.GetExpectedSong();
 
             target.Save(filename, sng);
 
@@ -94,7 +95,7 @@ namespace PraiseBase.Presenter.Persistence.PowerPraise
         [TestMethod()]
         public void FileTypeDescriptionTest()
         {
-            ISongFileWriter<ExtendedPowerPraiseSong> target = new ExtendedPowerPraiseSongFileWriter();
+            SongFileWriter target = new ExtendedSongFileWriter(); // TODO: Initialize to an appropriate value
             string actual;
             actual = target.GetFileTypeDescription();
             Assert.AreEqual(actual, "PowerPraise Lied");
@@ -106,10 +107,33 @@ namespace PraiseBase.Presenter.Persistence.PowerPraise
         [TestMethod()]
         public void FileExtensionTest()
         {
-            ISongFileWriter<ExtendedPowerPraiseSong> target = new ExtendedPowerPraiseSongFileWriter();
+            SongFileWriter target = new ExtendedSongFileWriter(); // TODO: Initialize to an appropriate value
             string actual;
             actual = target.GetFileExtension();
             Assert.AreEqual(actual, ".ppl");
+        }
+
+        [TestMethod()]
+        public void WriteUsingMapperSaveTest()
+        {
+            SongFileMapper<PowerPraiseSong> mapper = new PowerPraiseSongFileMapper();
+            ISongFileWriter<PowerPraiseSong> writer = new PowerPraiseSongFileWriter();
+            string referenceFilename = "Resources/powerpraise/Näher, mein Gott zu Dir.ppl";
+            string filename = "Resources/powerpraise/Näher, mein Gott zu Dir - neu - extended2.ppl";
+
+            Song sng = PowerPraiseTestUtil.GetExpectedSong();;
+            PowerPraiseSong ppl = new PowerPraiseSong();
+            mapper.map(sng, ppl);
+            writer.Save(filename, ppl);
+
+            try
+            {
+                PraiseBase.Presenter.Util.FileUtils.FileEquals(filename, referenceFilename, true);
+            }
+            catch (Exception e)
+            {
+                Assert.Fail(e.Message);
+            }
         }
     }
 }

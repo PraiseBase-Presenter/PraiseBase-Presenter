@@ -64,11 +64,11 @@
     <Compile Include="Persistence\PersistentSong.cs" />
     <Compile Include="Persistence\PowerPraise\AbstractPowerPraiseSongFileReader.cs" />
     <Compile Include="Persistence\PowerPraise\AbstractPowerPraiseSongFileWriter.cs" />
-    <Compile Include="Persistence\PowerPraise\ExtendedPowerPraiseSongFilePlugin.cs" />
-    <Compile Include="Persistence\PowerPraise\ExtendedPowerPraiseSongFileMapper.cs" />
-    <Compile Include="Persistence\PowerPraise\ExtendedPowerPraiseSongFileWriter.cs" />
-    <Compile Include="Persistence\PowerPraise\ExtendedPowerPraiseSongFileReader.cs" />
-    <Compile Include="Persistence\PowerPraise\ExtendedPowerPraiseSong.cs" />
+    <Compile Include="Persistence\PowerPraise\Extended\ExtendedPowerPraiseSongFilePlugin.cs" />
+    <Compile Include="Persistence\PowerPraise\Extended\ExtendedPowerPraiseSongFileMapper.cs" />
+    <Compile Include="Persistence\PowerPraise\Extended\ExtendedPowerPraiseSongFileWriter.cs" />
+    <Compile Include="Persistence\PowerPraise\Extended\ExtendedPowerPraiseSongFileReader.cs" />
+    <Compile Include="Persistence\PowerPraise\Extended\ExtendedPowerPraiseSong.cs" />
     <Compile Include="Persistence\PowerPraise\PowerPraiseSongFileMapper.cs" />
     <Compile Include="Persistence\PowerPraise\PowerPraiseSong.cs" />
     <Compile Include="Persistence\PowerPraise\PowerPraiseSongFilePlugin.cs" />
@@ -102,7 +102,7 @@
     <Compile Include="Persistence\SongFilePluginFactory.cs" />
     <Compile Include="Persistence\StatisticsReader.cs" />
     <Compile Include="Persistence\ZefaniaXML\XMLBibleReader.cs" />
-    <Compile Include="Persistence\PowerPraise\ExtendedSongFileWriter.cs" />
+    <Compile Include="Persistence\PowerPraise\Extended\ExtendedSongFileWriter.cs" />
     <Compile Include="Persistence\PowerPraise\PowerPraiseSongFileWriter.cs" />
     <Compile Include="Persistence\SetlistWriter.cs" />
     <Compile Include="Persistence\SongFileWriter.cs" />

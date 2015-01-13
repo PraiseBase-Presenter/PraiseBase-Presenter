@@ -2,7 +2,7 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 
-namespace PraiseBase.Presenter.Persistence.PowerPraise
+namespace PraiseBase.Presenter.Persistence.PowerPraise.Extended
 {
     
     
@@ -170,7 +170,7 @@ namespace PraiseBase.Presenter.Persistence.PowerPraise
             ISongFileReader<ExtendedPowerPraiseSong> reader = new ExtendedPowerPraiseSongFileReader();
             string filename = "Resources/powerpraise/Näher, mein Gott zu Dir - extended.ppl";
 
-            ExtendedPowerPraiseSong expected = PowerPraiseTestUtil.GetExpectedExtendedPowerPraiseSong();
+            ExtendedPowerPraiseSong expected = ExtendedPowerPraiseTestUtil.GetExpectedExtendedPowerPraiseSong();
 
             ExtendedPowerPraiseSong actual = reader.Load(filename);
 

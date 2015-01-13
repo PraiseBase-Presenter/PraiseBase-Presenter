@@ -4,7 +4,7 @@ using System;
 using PraiseBase.Presenter.Model.Song;
 using System.Drawing;
 
-namespace PraiseBase.Presenter.Persistence.PowerPraise
+namespace PraiseBase.Presenter.Persistence.PowerPraise.Extended
 {
     
     
@@ -73,7 +73,7 @@ namespace PraiseBase.Presenter.Persistence.PowerPraise
         {
             ExtendedPowerPraiseSongFileMapper mapper = new ExtendedPowerPraiseSongFileMapper();
 
-            ExtendedPowerPraiseSong source = PowerPraiseTestUtil.GetExpectedExtendedPowerPraiseSong();
+            ExtendedPowerPraiseSong source = ExtendedPowerPraiseTestUtil.GetExpectedExtendedPowerPraiseSong();
             Song expected = PowerPraiseTestUtil.GetExpectedSongExtended();
             Song actual = mapper.map(source);
 
@@ -182,7 +182,7 @@ namespace PraiseBase.Presenter.Persistence.PowerPraise
             ExtendedPowerPraiseSongFileMapper mapper = new ExtendedPowerPraiseSongFileMapper();
 
             Song source = PowerPraiseTestUtil.GetExpectedSongExtended();
-            ExtendedPowerPraiseSong expected = PowerPraiseTestUtil.GetExpectedExtendedPowerPraiseSong();
+            ExtendedPowerPraiseSong expected = ExtendedPowerPraiseTestUtil.GetExpectedExtendedPowerPraiseSong();
             ExtendedPowerPraiseSong actual = new ExtendedPowerPraiseSong();
             
             mapper.map(source, actual);

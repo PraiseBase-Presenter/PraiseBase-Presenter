@@ -3,7 +3,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using PraiseBase.Presenter.Model.Song;
 
-namespace PraiseBase.Presenter.Persistence.PowerPraise
+namespace PraiseBase.Presenter.Persistence.PowerPraise.Extended
 {
     
     

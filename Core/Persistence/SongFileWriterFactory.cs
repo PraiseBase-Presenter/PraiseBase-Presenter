@@ -35,7 +35,7 @@ namespace PraiseBase.Presenter.Persistence
 {
     public class SongFileWriterFactory
     {
-        public readonly Type PreferredType = typeof(PowerPraise.ExtendedSongFileWriter);
+        public readonly Type PreferredType = typeof(PowerPraise.Extended.ExtendedSongFileWriter);
 
         private Dictionary<Type, SongFileWriter> writers = new Dictionary<Type,SongFileWriter>();
         private Dictionary<String, HashSet<Type>> SupportedExtensionMapping = new Dictionary<string, HashSet<Type>>();
