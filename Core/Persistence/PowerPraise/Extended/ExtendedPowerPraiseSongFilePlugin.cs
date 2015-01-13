@@ -11,6 +11,7 @@ namespace PraiseBase.Presenter.Persistence.PowerPraise.Extended
         {
             reader = new ExtendedPowerPraiseSongFileReader();
             mapper = new ExtendedPowerPraiseSongFileMapper();
+            writer = new ExtendedPowerPraiseSongFileWriter();
         }
     }
 }

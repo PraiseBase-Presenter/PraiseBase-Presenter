@@ -6,10 +6,11 @@ using PraiseBase.Presenter.Model.Song;
 
 namespace PraiseBase.Presenter.Persistence
 {
-    public abstract class AbstractSongFilePlugin<T> : ISongFilePlugin where T : PersistentSong
+    public abstract class AbstractSongFilePlugin<T> : ISongFilePlugin where T : PersistentSong, new()
     {
         protected ISongFileReader<T> reader;
         protected SongFileMapper<T> mapper;
+        protected ISongFileWriter<T> writer;
 
         public AbstractSongFilePlugin()
         {
@@ -34,6 +35,23 @@ namespace PraiseBase.Presenter.Persistence
         public string GetFileExtension()
         {
             return reader.GetFileExtension();
+        }
+
+        public Boolean IsWritingSupported()
+        {
+            return writer != null;
+        }
+
+        public void Save(Song sng, string filePath)
+        {
+            if (!IsWritingSupported())
+            {
+                throw new NotImplementedException("Writing not supported by " + this.GetType());
+            }
+            
+            T song = new T();
+            mapper.map(sng, song);
+            writer.Save(filePath, song);
         }
     }
 }

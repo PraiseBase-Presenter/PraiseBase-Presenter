@@ -33,5 +33,18 @@ namespace PraiseBase.Presenter.Persistence
         /// Defines the extensions this file format uses, e.g. ".xml"
         /// </summary>
         string GetFileExtension();
+
+        /// <summary>
+        /// Returns true if writing files is supported
+        /// </summary>
+        /// <returns></returns>
+        Boolean IsWritingSupported();
+
+        /// <summary>
+        /// Writes a song to the specified path
+        /// </summary>
+        /// <param name="sng">Absolute path to the song file</param>
+        /// <param name="filePath"></param>
+        void Save(Song sng, string filePath);
     }
 }
