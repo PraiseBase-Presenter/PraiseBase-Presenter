@@ -37,6 +37,11 @@ namespace PraiseBase.Presenter.Persistence
             return reader.GetFileExtension();
         }
 
+        public string GetFileTypeDescription()
+        {
+            return reader.GetFileTypeDescription();
+        }
+
         public Boolean IsWritingSupported()
         {
             return writer != null;

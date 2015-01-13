@@ -35,6 +35,11 @@ namespace PraiseBase.Presenter.Persistence
         string GetFileExtension();
 
         /// <summary>
+        /// The common name of the file format
+        /// </summary>
+        string GetFileTypeDescription();
+
+        /// <summary>
         /// Returns true if writing files is supported
         /// </summary>
         /// <returns></returns>
