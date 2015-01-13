@@ -97,14 +97,14 @@
     <Compile Include="Persistence\CCLI\SongSelectFileReader.cs" />
     <Compile Include="Persistence\OpenLyrics\OpenLyricsSongFileReader.cs" />
     <Compile Include="Persistence\PowerPraise\PowerPraiseSongFileReader.cs" />
-    <Compile Include="Persistence\SetlistReader.cs" />
+    <Compile Include="Persistence\Setlists\SetlistReader.cs" />
     <Compile Include="Persistence\SongFileMapper.cs" />
     <Compile Include="Persistence\SongFilePluginFactory.cs" />
     <Compile Include="Persistence\StatisticsReader.cs" />
     <Compile Include="Persistence\ZefaniaXML\XMLBibleReader.cs" />
     <Compile Include="Persistence\PowerPraise\Extended\ExtendedSongFileWriter.cs" />
     <Compile Include="Persistence\PowerPraise\PowerPraiseSongFileWriter.cs" />
-    <Compile Include="Persistence\SetlistWriter.cs" />
+    <Compile Include="Persistence\Setlists\SetlistWriter.cs" />
     <Compile Include="Persistence\SongFileWriter.cs" />
     <Compile Include="Persistence\SongFileWriterFactory.cs" />
     <Compile Include="Persistence\StatisticsWriter.cs" />

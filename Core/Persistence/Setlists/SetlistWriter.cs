@@ -25,37 +25,26 @@
  *
  */
 
-using System;
 using System.Xml;
 using PraiseBase.Presenter.Model;
 
-namespace PraiseBase.Presenter.Persistence
+namespace PraiseBase.Presenter.Persistence.Setlists
 {
-    public class SetlistReader
+    public class SetlistWriter
     {
-        public Setlist read(string filename)
+        public void Write(string filename, Setlist list)
         {
-            var xmlDoc = new XmlDocument();
-            xmlDoc.Load(filename);
-            XmlElement xmlRoot = xmlDoc.DocumentElement;
+            XmlWriterHelper xml = new XmlWriterHelper("setlist", "1.0");
 
-            if (xmlRoot.Name != "setlist")
+            xml.Root.AppendChild(xml.Doc.CreateElement("items"));
+            for (int i = 0; i < list.Items.Count; i++)
             {
-                throw new Exception("Ungültige Setlist!");
+                XmlNode nd = xml.Doc.CreateElement("item");
+                nd.InnerText = list.Items[i];
+                XmlNode ni = xml.Root["items"].AppendChild(nd);
             }
-            Setlist sl = new Setlist();
-            if (xmlRoot["items"] != null)
-            {
-                sl.Items.Clear();
-                for (int i = 0; i < xmlRoot["items"].ChildNodes.Count; i++)
-                {
-                    if (xmlRoot["items"].ChildNodes[i].Name == "item")
-                    {
-                        sl.Items.Add(xmlRoot["items"].ChildNodes[i].InnerText);
-                    }
-                }
-            }
-            return sl;
+
+            xml.Write(filename);
         }
     }
 }

@@ -43,7 +43,7 @@ using PraiseBase.Presenter.Manager;
 using System.Globalization;
 using PraiseBase.Presenter.UI;
 using PraiseBase.Presenter.Model.Bible;
-using PraiseBase.Presenter.Persistence;
+using PraiseBase.Presenter.Persistence.Setlists;
 
 namespace PraiseBase.Presenter.Forms
 {
