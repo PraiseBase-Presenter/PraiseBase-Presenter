@@ -131,15 +131,21 @@ namespace PraiseBase.Presenter.Forms
         public string GetFileBoxFilter()
         {
             String exts = String.Empty;
-            foreach (var ext in SongFilePluginFactory.SupportedExtensions)
+            String fltr = String.Empty;
+            foreach (var t in SongFilePluginFactory.GetPlugins())
             {
                 if (exts != String.Empty)
                 {
                     exts += ";";
                 }
-                exts += "*" + ext;
+                exts += "*" + t.GetFileExtension();
+                if (fltr != string.Empty)
+                {
+                    fltr += "|";
+                }
+                fltr += t.GetFileTypeDescription() + " (*" + t.GetFileExtension() + ")|*" + t.GetFileExtension();
             }
-            return "Lieddateien (" + exts + ")|" + exts + "|Alle Dateien (*.*)|*.*";
+            return "Alle Lieddateien (" + exts + ")|" + exts + "|" + fltr + "|Alle Dateien (*.*)|*.*";
         }
 
         public void openSong(string fileName)
