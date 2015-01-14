@@ -717,7 +717,7 @@ namespace PraiseBase.Presenter.Forms
             {
                 try
                 {
-                    SongFileWriterFactory.Instance.CreateFactoryByFile(songFilename).Save(songFilename, sng);
+                    SongFilePluginFactory.Create(songFilename).Save(sng, songFilename);
 
                     hashCode = sng.GetHashCode();
                     ((SongEditor)MdiParent).setStatus(String.Format(Properties.StringResources.SongSavedAs, songFilename));
@@ -759,7 +759,7 @@ namespace PraiseBase.Presenter.Forms
             }
             saveFileDialog.CheckPathExists = true;
             saveFileDialog.FileName = sng.Title;
-            saveFileDialog.Filter = SongFileWriterFactory.Instance.GetFileBoxFilter();
+            saveFileDialog.Filter = GetSaveFileBoxFilter();
             saveFileDialog.FilterIndex = ((SongEditor)MdiParent).fileSaveBoxFilterIndex;
             saveFileDialog.AddExtension = true;
             saveFileDialog.Title = Properties.StringResources.SaveSongAs;
@@ -768,7 +768,7 @@ namespace PraiseBase.Presenter.Forms
             {
                 hashCode = sng.GetHashCode();
                 try {
-                    SongFileWriterFactory.Instance.CreateFactoryByTypeIndex(saveFileDialog.FilterIndex-1).Save(saveFileDialog.FileName, sng);
+                    CreateByTypeIndex(saveFileDialog.FilterIndex - 1).Save(sng, saveFileDialog.FileName);
                     ((SongEditor)MdiParent).fileSaveBoxFilterIndex = saveFileDialog.FilterIndex;
                     ((SongEditor)MdiParent).setStatus(string.Format(Properties.StringResources.SongSavedAs, saveFileDialog.FileName));
                 }
@@ -779,6 +779,29 @@ namespace PraiseBase.Presenter.Forms
                 }
             }
             SongManager.Instance.ReloadSongByPath(saveFileDialog.FileName);
+        }
+
+        public string GetSaveFileBoxFilter()
+        {
+            String fltr = String.Empty;
+            foreach (ISongFilePlugin t in SongFilePluginFactory.GetWriterPlugins())
+            {
+                if (fltr != string.Empty)
+                {
+                    fltr += "|";
+                }
+                fltr += t.GetFileTypeDescription() + " (*" + t.GetFileExtension() + ")|*" + t.GetFileExtension();
+            }
+            return fltr;
+        }
+
+        public ISongFilePlugin CreateByTypeIndex(int index)
+        {
+            if (index >= 0 && index < SongFilePluginFactory.GetWriterPlugins().Count)
+            {
+                return SongFilePluginFactory.GetWriterPlugins().ToArray()[index];
+            }
+            throw new NotImplementedException();
         }
 
         private void EditorChild_FormClosing(object sender, FormClosingEventArgs e)

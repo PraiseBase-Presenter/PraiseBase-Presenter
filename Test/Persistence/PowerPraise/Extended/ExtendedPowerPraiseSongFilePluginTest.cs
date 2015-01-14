@@ -288,5 +288,77 @@ namespace PraiseBase.Presenter.Persistence.PowerPraise.Extended
             Assert.IsTrue(actual.SearchText.Contains("geborgen"));
 
         }
+
+        /// <summary>
+        ///A test for Save
+        ///</summary>
+        [TestMethod()]
+        public void SaveTest()
+        {
+            ISongFilePlugin target = new ExtendedPowerPraiseSongFilePlugin();
+            string referenceFilename = "Resources/powerpraise/Näher, mein Gott zu Dir.ppl";
+            string filename = "Resources/powerpraise/Näher, mein Gott zu Dir - neu - extended.ppl";
+
+            Song sng = PowerPraiseTestUtil.GetExpectedSong();
+
+            target.Save(sng, filename);
+
+            try
+            {
+                PraiseBase.Presenter.Util.FileUtils.FileEquals(filename, referenceFilename, true);
+            }
+            catch (Exception e)
+            {
+                Assert.Fail(e.Message);
+            }
+        }
+
+        /// <summary>
+        ///A test for FileTypeDescription
+        ///</summary>
+        [TestMethod()]
+        public void FileTypeDescriptionTest()
+        {
+            ISongFilePlugin target = new ExtendedPowerPraiseSongFilePlugin(); // TODO: Initialize to an appropriate value
+            string actual;
+            actual = target.GetFileTypeDescription();
+            Assert.AreEqual(actual, "PowerPraise Lied");
+        }
+
+        /// <summary>
+        ///A test for FileExtension
+        ///</summary>
+        [TestMethod()]
+        public void FileExtensionTest()
+        {
+            ISongFilePlugin target = new ExtendedPowerPraiseSongFilePlugin(); // TODO: Initialize to an appropriate value
+            string actual;
+            actual = target.GetFileExtension();
+            Assert.AreEqual(actual, ".ppl");
+        }
+
+        [TestMethod()]
+        public void WriteUsingMapperSaveTest()
+        {
+            SongFileMapper<PowerPraiseSong> mapper = new PowerPraiseSongFileMapper();
+            ISongFileWriter<PowerPraiseSong> writer = new PowerPraiseSongFileWriter();
+            string referenceFilename = "Resources/powerpraise/Näher, mein Gott zu Dir.ppl";
+            string filename = "Resources/powerpraise/Näher, mein Gott zu Dir - neu - extended2.ppl";
+
+            Song sng = PowerPraiseTestUtil.GetExpectedSong(); ;
+            PowerPraiseSong ppl = new PowerPraiseSong();
+            mapper.map(sng, ppl);
+            writer.Save(filename, ppl);
+
+            try
+            {
+                PraiseBase.Presenter.Util.FileUtils.FileEquals(filename, referenceFilename, true);
+            }
+            catch (Exception e)
+            {
+                Assert.Fail(e.Message);
+            }
+        }
+
     }
 }

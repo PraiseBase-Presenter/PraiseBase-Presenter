@@ -45,10 +45,17 @@ namespace PraiseBase.Presenter.Forms
             else
                 SongManager.Instance.CurrentSong.Song.RemQA(SongQualityAssuranceIndicator.Segmentation);
 
-            SongManager.Instance.SaveCurrentSong();
+            try
+            {
+                SongManager.Instance.SaveCurrentSong();
 
-            DialogResult = DialogResult.OK;
-            this.Close();
+                DialogResult = DialogResult.OK;
+                this.Close();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Fehler", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
     }
 }

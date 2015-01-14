@@ -70,7 +70,6 @@
     <Compile Include="Persistence\PowerPraise\Extended\ExtendedPowerPraiseTestUtil.cs" />
     <Compile Include="Persistence\PowerPraise\PowerPraiseSongFileMapperTest.cs" />
     <Compile Include="Persistence\PowerPraise\Extended\ExtendedPowerPraiseSongFilePluginTest.cs" />
-    <Compile Include="Persistence\PowerPraise\Extended\ExtendedSongFileWriterTest.cs" />
     <Compile Include="Persistence\OpenLyrics\OpenLyricsSongFileReaderTest.cs" />
     <Compile Include="Persistence\PowerPraise\PowerPraiseSongFileReaderTest.cs" />
     <Compile Include="Persistence\PowerPraise\PowerPraiseSongFileWriterTest.cs" />

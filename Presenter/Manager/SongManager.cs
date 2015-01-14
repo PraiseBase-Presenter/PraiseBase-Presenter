@@ -336,8 +336,15 @@ namespace PraiseBase.Presenter
 
         public void SaveCurrentSong()
         {
-            SongFileWriter sfw = SongFileWriterFactory.Instance.CreateFactoryByFile(CurrentSong.Filename);
-            sfw.Save(CurrentSong.Filename, CurrentSong.Song);
+            ISongFilePlugin sfw = SongFilePluginFactory.Create(CurrentSong.Filename);
+            if (sfw.IsWritingSupported())
+            {
+                sfw.Save(CurrentSong.Song, CurrentSong.Filename);
+            }
+            else
+            {
+                throw new Exception("Das Speichern der Lieddatei " + CurrentSong.Filename + " wird von diesem Dateiformat leider nicht unterstützt!");
+            }
         }
     }
 

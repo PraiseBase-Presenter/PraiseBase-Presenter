@@ -73,5 +73,23 @@ namespace PraiseBase.Presenter.Persistence
             }
             throw new NotImplementedException();
         }
+
+        public static List<ISongFilePlugin> GetPlugins()
+        {
+            return new List<ISongFilePlugin>(plugins.Values);
+        }
+
+        public static List<ISongFilePlugin> GetWriterPlugins()
+        {
+            List<ISongFilePlugin> list = new List<ISongFilePlugin>();
+            foreach(ISongFilePlugin p in plugins.Values) 
+            {
+                if (p.IsWritingSupported())
+                {
+                    list.Add(p);
+                }
+            }
+            return list;
+        }
     }
 }

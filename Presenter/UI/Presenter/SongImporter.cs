@@ -310,9 +310,11 @@ namespace PraiseBase.Presenter.Forms
             {
                 if (listViewSongs.Items[x].Checked)
                 {
+                    // TODO: Allow selection of plugin
+                    ISongFilePlugin filePlugin = SongFilePluginFactory.Create(SongFilePluginFactory.GetWriterPlugins().First().GetType());
                     string fileName = Settings.Default.DataDirectory + Path.DirectorySeparatorChar
                         + Settings.Default.SongDir + Path.DirectorySeparatorChar
-                        + ((Song)listViewSongs.Items[x].Tag).Title + SongFileWriterFactory.Instance.CreateFactory(SongFileWriterFactory.Instance.PreferredType).GetFileExtension();
+                        + ((Song)listViewSongs.Items[x].Tag).Title + filePlugin.GetFileExtension();
                     if ((File.Exists(fileName) && (MessageBox.Show(string.Format(Properties.StringResources.SongExistsAlready, ((Song)listViewSongs.Items[x].Tag).Title) 
                         + Properties.StringResources.Overwrite + "?", Properties.StringResources.SongImporter, 
                         MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)) || !File.Exists(fileName))
@@ -323,7 +325,7 @@ namespace PraiseBase.Presenter.Forms
                             sng.GUID = SongManager.Instance.GenerateGuid();
                         }
                         // TODO Exception handling
-                        SongFileWriterFactory.Instance.CreateFactoryByFile(fileName).Save(fileName, sng);
+                        filePlugin.Save(sng, fileName);
                         filesToOpen.Add(fileName);
                         cnt++;
                     }
