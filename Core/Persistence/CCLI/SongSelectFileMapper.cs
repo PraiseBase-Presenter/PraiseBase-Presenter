@@ -6,7 +6,7 @@ using PraiseBase.Presenter.Model.Song;
 
 namespace PraiseBase.Presenter.Persistence.CCLI
 {
-    public class SongSelectFileMapper : SongFileMapper<SongSelectFile>
+    public class SongSelectFileMapper : ISongFileMapper<SongSelectFile>
     {
         public Song map(SongSelectFile source)
         {

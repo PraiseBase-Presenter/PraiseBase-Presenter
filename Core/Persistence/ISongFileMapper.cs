@@ -6,7 +6,7 @@ using PraiseBase.Presenter.Model.Song;
 
 namespace PraiseBase.Presenter.Persistence
 {
-    public interface SongFileMapper<T> where T : PersistentSong
+    public interface ISongFileMapper<T> where T : PersistentSong
     {
         Song map(T source);
 

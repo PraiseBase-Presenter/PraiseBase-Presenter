@@ -187,7 +187,7 @@ namespace PraiseBase.Presenter.Persistence.PowerPraise.Extended
         public void ReadUsingLoadMapperTest()
         {
             ISongFileReader<PowerPraiseSong> reader = new PowerPraiseSongFileReader();
-            SongFileMapper<PowerPraiseSong> mapper = new PowerPraiseSongFileMapper();
+            ISongFileMapper<PowerPraiseSong> mapper = new PowerPraiseSongFileMapper();
             string filename = "Resources/powerpraise/Näher, mein Gott zu Dir.ppl";
             Song actual = mapper.map(reader.Load(filename));
             Song expected = PowerPraiseTestUtil.GetExpectedSong();
@@ -340,7 +340,7 @@ namespace PraiseBase.Presenter.Persistence.PowerPraise.Extended
         [TestMethod()]
         public void WriteUsingMapperSaveTest()
         {
-            SongFileMapper<PowerPraiseSong> mapper = new PowerPraiseSongFileMapper();
+            ISongFileMapper<PowerPraiseSong> mapper = new PowerPraiseSongFileMapper();
             ISongFileWriter<PowerPraiseSong> writer = new PowerPraiseSongFileWriter();
             string referenceFilename = "Resources/powerpraise/Näher, mein Gott zu Dir.ppl";
             string filename = "Resources/powerpraise/Näher, mein Gott zu Dir - neu - extended2.ppl";

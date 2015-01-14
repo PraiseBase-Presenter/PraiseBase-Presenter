@@ -9,7 +9,7 @@ namespace PraiseBase.Presenter.Persistence
     public abstract class AbstractSongFilePlugin<T> : ISongFilePlugin where T : PersistentSong, new()
     {
         protected ISongFileReader<T> reader;
-        protected SongFileMapper<T> mapper;
+        protected ISongFileMapper<T> mapper;
         protected ISongFileWriter<T> writer;
 
         public AbstractSongFilePlugin()
