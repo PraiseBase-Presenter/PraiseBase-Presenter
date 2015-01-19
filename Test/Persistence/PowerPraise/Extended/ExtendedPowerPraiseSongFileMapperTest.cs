@@ -107,6 +107,7 @@ namespace PraiseBase.Presenter.Persistence.PowerPraise.Extended
                 Assert.AreEqual(expected.Parts[i].Slides.Count, actual.Parts[i].Slides.Count, "Slides incomplete in verse " + i);
                 for (int j = 0; j < expected.Parts[i].Slides.Count; j++)
                 {
+                    Assert.AreEqual(expected.Parts[i].Slides[j].ImageNumber, actual.Parts[i].Slides[j].ImageNumber);
                     CollectionAssert.AreEqual(expected.Parts[i].Slides[j].Lines, actual.Parts[i].Slides[j].Lines, "Slide lines incomplete in verse " + i + " slide " + j);
                     CollectionAssert.AreEqual(expected.Parts[i].Slides[j].Translation, actual.Parts[i].Slides[j].Translation, "Slide translation lines incomplete in verse " + i + " slide " + j);
                 }
