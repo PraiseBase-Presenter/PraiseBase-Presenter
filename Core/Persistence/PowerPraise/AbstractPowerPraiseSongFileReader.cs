@@ -33,7 +33,7 @@ using PraiseBase.Presenter.Model;
 
 namespace PraiseBase.Presenter.Persistence.PowerPraise
 {
-    public abstract class AbstractPowerPraiseSongFileReader<T> : ISongFileReader<T> where T : PersistentSong
+    public abstract class AbstractPowerPraiseSongFileReader<T> : ISongFileReader<T> where T : ISongFile
     {
         public string GetFileExtension() { return ".ppl"; }
 

@@ -32,7 +32,7 @@ using PraiseBase.Presenter.Model;
 
 namespace PraiseBase.Presenter.Persistence.PowerPraise
 {
-    public abstract class AbstractPowerPraiseSongFileWriter<T> : ISongFileWriter<T> where T : PersistentSong
+    public abstract class AbstractPowerPraiseSongFileWriter<T> : ISongFileWriter<T> where T : ISongFile
     {
         public string GetFileExtension() { return ".ppl"; }
 

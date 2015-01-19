@@ -5,7 +5,7 @@ using System.Text;
 
 namespace PraiseBase.Presenter.Persistence
 {
-    public interface PersistentSong
+    public interface ISongFile
     {
     }
 }

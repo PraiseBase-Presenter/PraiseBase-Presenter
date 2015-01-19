@@ -6,7 +6,7 @@ using PraiseBase.Presenter.Model.Song;
 
 namespace PraiseBase.Presenter.Persistence
 {
-    public abstract class AbstractSongFilePlugin<T> : ISongFilePlugin where T : PersistentSong, new()
+    public abstract class AbstractSongFilePlugin<T> : ISongFilePlugin where T : ISongFile, new()
     {
         protected ISongFileReader<T> reader;
         protected ISongFileMapper<T> mapper;
