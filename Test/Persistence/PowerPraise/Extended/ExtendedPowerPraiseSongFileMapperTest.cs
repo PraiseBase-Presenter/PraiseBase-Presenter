@@ -74,7 +74,7 @@ namespace PraiseBase.Presenter.Persistence.PowerPraise.Extended
             ExtendedPowerPraiseSongFileMapper mapper = new ExtendedPowerPraiseSongFileMapper();
 
             ExtendedPowerPraiseSong source = ExtendedPowerPraiseTestUtil.GetExpectedExtendedPowerPraiseSong();
-            Song expected = PowerPraiseTestUtil.GetExpectedSongExtended();
+            Song expected = ExtendedPowerPraiseTestUtil.GetExpectedSongExtended();
             Song actual = mapper.map(source);
 
             Assert.AreEqual(expected.GUID, actual.GUID, "Wrong GUID");
@@ -181,7 +181,7 @@ namespace PraiseBase.Presenter.Persistence.PowerPraise.Extended
         {
             ExtendedPowerPraiseSongFileMapper mapper = new ExtendedPowerPraiseSongFileMapper();
 
-            Song source = PowerPraiseTestUtil.GetExpectedSongExtended();
+            Song source = ExtendedPowerPraiseTestUtil.GetExpectedSongExtended();
             ExtendedPowerPraiseSong expected = ExtendedPowerPraiseTestUtil.GetExpectedExtendedPowerPraiseSong();
             ExtendedPowerPraiseSong actual = new ExtendedPowerPraiseSong();
             
@@ -292,7 +292,7 @@ namespace PraiseBase.Presenter.Persistence.PowerPraise.Extended
             ISongFileReader<ExtendedPowerPraiseSong> reader = new ExtendedPowerPraiseSongFileReader();
             ExtendedPowerPraiseSongFileMapper mapper = new ExtendedPowerPraiseSongFileMapper();
 
-            Song expected = PowerPraiseTestUtil.GetExpectedSongExtended();
+            Song expected = ExtendedPowerPraiseTestUtil.GetExpectedSongExtended();
 
             ExtendedPowerPraiseSong source = reader.Load(filename);
             Song actual = mapper.map(source);
@@ -405,7 +405,7 @@ namespace PraiseBase.Presenter.Persistence.PowerPraise.Extended
             ExtendedPowerPraiseSongFileMapper mapper = new ExtendedPowerPraiseSongFileMapper();
             ISongFileWriter<ExtendedPowerPraiseSong> target = new ExtendedPowerPraiseSongFileWriter();
 
-            Song source = PowerPraiseTestUtil.GetExpectedSongExtended();
+            Song source = ExtendedPowerPraiseTestUtil.GetExpectedSongExtended();
             ExtendedPowerPraiseSong sng = new ExtendedPowerPraiseSong();
             mapper.map(source, sng);
             target.Save(filename, sng);

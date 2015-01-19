@@ -176,5 +176,22 @@ namespace PraiseBase.Presenter.Persistence.PowerPraise.Extended
             return ppl;
         }
 
+        public static Song GetExpectedSongExtended()
+        {
+            Song song = PowerPraiseTestUtil.GetExpectedSong();
+
+            song.Comment = "Test";
+            song.GUID = new Guid("78dd30b2-078b-4eef-9767-dc41a6e6ab27");
+            song.QualityIssues.Add(SongQualityAssuranceIndicator.Translation);
+            song.QualityIssues.Add(SongQualityAssuranceIndicator.Segmentation);
+            song.CcliID = "12123";
+            SongAuthor a = new SongAuthor();
+            a.Name = "asd as d";
+            song.Author.Add(a);
+            song.Publisher = "Sparrow Records";
+            song.RightsManagement = "Verlag ABC";
+
+            return song;
+        }
     }
 }
