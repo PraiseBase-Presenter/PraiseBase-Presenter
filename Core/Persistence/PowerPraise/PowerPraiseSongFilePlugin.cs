@@ -13,5 +13,9 @@ namespace PraiseBase.Presenter.Persistence.PowerPraise
             mapper = new PowerPraiseSongFileMapper();
             writer = new PowerPraiseSongFileWriter();
         }
+
+        public override string GetFileExtension() { return ".ppl"; }
+
+        public override string GetFileTypeDescription() { return "PowerPraise Lied"; }
     }
 }

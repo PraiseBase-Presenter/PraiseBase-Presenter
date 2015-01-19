@@ -151,29 +151,5 @@ namespace PraiseBase.Presenter.Persistence.CCLI
             Assert.AreEqual("Ein Lied für Gott", reader.ReadTitle("Resources/ccli/Ein Lied für Gott.usr"));
             Assert.IsNull(reader.ReadTitle("Resources/ccli/non-existing-file.usr"));
         }
-
-        /// <summary>
-        ///A test for FileExtension
-        ///</summary>
-        [TestMethod()]
-        public void FileExtensionTest()
-        {
-            ISongFileReader<SongSelectFile> target = new SongSelectFileReader(); // TODO: Initialize to an appropriate value
-            string actual  = ".usr";
-            actual = target.GetFileExtension();
-            Assert.AreEqual(target.GetFileExtension(), actual);
-        }
-
-        /// <summary>
-        ///A test for FileTypeDescription
-        ///</summary>
-        [TestMethod()]
-        public void FileTypeDescriptionTest()
-        {
-            SongSelectFileReader target = new SongSelectFileReader(); // TODO: Initialize to an appropriate value
-            string actual = "SongSelect Import File";
-            actual = target.GetFileTypeDescription();
-            Assert.AreEqual(target.GetFileTypeDescription(), actual);
-        }
     }
 }

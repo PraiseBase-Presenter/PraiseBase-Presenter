@@ -14,8 +14,13 @@ namespace PraiseBase.Presenter.Persistence
 
         public AbstractSongFilePlugin()
         {
-            Console.WriteLine("Loaded song file plugin: " + this.GetType().ToString());
+            Console.WriteLine("Loaded song file plugin: " + this.GetType().ToString() + " (" + this.GetFileTypeDescription() + ")");
         }
+
+        public abstract string GetFileExtension();
+
+        public abstract string GetFileTypeDescription();
+
         public String ReadTitle(string filePath)
         {
             return reader.ReadTitle(filePath);
@@ -30,16 +35,6 @@ namespace PraiseBase.Presenter.Persistence
         public Boolean IsFileSupported(String filePath)
         {
             return reader.IsFileSupported(filePath);
-        }
-
-        public string GetFileExtension()
-        {
-            return reader.GetFileExtension();
-        }
-
-        public string GetFileTypeDescription()
-        {
-            return reader.GetFileTypeDescription();
         }
 
         public Boolean IsWritingSupported()

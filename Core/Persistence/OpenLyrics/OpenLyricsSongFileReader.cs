@@ -32,10 +32,6 @@ namespace PraiseBase.Presenter.Persistence.OpenLyrics
 {
     public class OpenLyricsSongFileReader : ISongFileReader<OpenLyricsSong>
     {
-        public string GetFileExtension() { return ".xml"; }
-
-        public string GetFileTypeDescription() { return "OpenLyrics Song"; }
-
         protected const string SupportedFileFormatVersion = "0.8";
 
         protected const string XmlRootNodeName = "song";

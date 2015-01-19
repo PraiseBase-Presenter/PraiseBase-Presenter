@@ -36,8 +36,6 @@ namespace PraiseBase.Presenter.Persistence.PowerPraise.Extended
 {
     public class ExtendedPowerPraiseSongFileReader : AbstractPowerPraiseSongFileReader<ExtendedPowerPraiseSong>
     {
-        public new string GetFileTypeDescription() { return "PowerPraise Lied (erweitert)"; }
-
         public override ExtendedPowerPraiseSong Load(string filename)
         {
             ExtendedPowerPraiseSong sng = new ExtendedPowerPraiseSong();

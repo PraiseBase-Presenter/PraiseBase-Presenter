@@ -34,10 +34,6 @@ namespace PraiseBase.Presenter.Persistence.CCLI
 {
     public class SongSelectFileReader : ISongFileReader<SongSelectFile>
     {
-        public string GetFileExtension() { return ".usr"; }
-
-        public string GetFileTypeDescription() { return "SongSelect Import File"; }
-
         protected const string SupportedFileFormatVersion = "3.0";
 
         protected const string TypeString = "SongSelect Import File";

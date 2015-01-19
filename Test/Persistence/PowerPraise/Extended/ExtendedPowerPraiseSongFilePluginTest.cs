@@ -322,7 +322,7 @@ namespace PraiseBase.Presenter.Persistence.PowerPraise.Extended
             ISongFilePlugin target = new ExtendedPowerPraiseSongFilePlugin(); // TODO: Initialize to an appropriate value
             string actual;
             actual = target.GetFileTypeDescription();
-            Assert.AreEqual(actual, "PowerPraise Lied");
+            Assert.AreEqual(actual, "PowerPraise Lied (erweitert)");
         }
 
         /// <summary>

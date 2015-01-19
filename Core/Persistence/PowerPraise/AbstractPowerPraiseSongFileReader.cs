@@ -35,10 +35,6 @@ namespace PraiseBase.Presenter.Persistence.PowerPraise
 {
     public abstract class AbstractPowerPraiseSongFileReader<T> : ISongFileReader<T> where T : ISongFile
     {
-        public string GetFileExtension() { return ".ppl"; }
-
-        public string GetFileTypeDescription() { return "PowerPraise Lied"; }
-
         protected const string SupportedFileFormatVersion = "3.0";
 
         protected const string XmlRootNodeName = "ppl";

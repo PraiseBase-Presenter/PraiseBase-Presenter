@@ -13,5 +13,9 @@ namespace PraiseBase.Presenter.Persistence.OpenLyrics
             reader = new OpenLyricsSongFileReader();
             mapper = new OpenLyricsSongFileMapper();
         }
+
+        public override string GetFileExtension() { return ".xml"; }
+
+        public override string GetFileTypeDescription() { return "OpenLyrics Song"; }
     }
 }

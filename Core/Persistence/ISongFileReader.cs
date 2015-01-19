@@ -51,15 +51,5 @@ namespace PraiseBase.Presenter.Persistence
         /// <param name="filename"></param>
         /// <returns></returns>
         bool IsFileSupported(string filename);
-
-        /// <summary>
-        /// Defines the extensions this file format uses, e.g. ".xml"
-        /// </summary>
-        string GetFileExtension();
-
-        /// <summary>
-        /// The common name of the file format
-        /// </summary>
-        string GetFileTypeDescription();
     }
 }

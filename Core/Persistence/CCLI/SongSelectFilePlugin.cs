@@ -13,5 +13,9 @@ namespace PraiseBase.Presenter.Persistence.CCLI
             reader = new SongSelectFileReader();
             mapper = new SongSelectFileMapper();
         }
+
+        public override string GetFileExtension() { return ".usr"; }
+
+        public override string GetFileTypeDescription() { return "SongSelect Import File"; }
     }
 }
