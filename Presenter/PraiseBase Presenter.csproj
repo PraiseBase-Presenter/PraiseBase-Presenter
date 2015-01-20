@@ -444,7 +444,6 @@
     <None Include="Properties\Application\Computer.ico" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="PraiseBase Presenter_TemporaryKey.pfx" />
     <None Include="Properties\Application\Blackout on2.png" />
   </ItemGroup>
   <ItemGroup>
