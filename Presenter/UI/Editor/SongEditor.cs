@@ -134,16 +134,19 @@ namespace PraiseBase.Presenter.Forms
             String fltr = String.Empty;
             foreach (var t in SongFilePluginFactory.GetPlugins())
             {
-                if (exts != String.Empty)
+                if (t.IsWritingSupported())
                 {
-                    exts += ";";
+                    if (exts != String.Empty)
+                    {
+                        exts += ";";
+                    }
+                    exts += "*" + t.GetFileExtension();
+                    if (fltr != string.Empty)
+                    {
+                        fltr += "|";
+                    }
+                    fltr += t.GetFileTypeDescription() + " (*" + t.GetFileExtension() + ")|*" + t.GetFileExtension();
                 }
-                exts += "*" + t.GetFileExtension();
-                if (fltr != string.Empty)
-                {
-                    fltr += "|";
-                }
-                fltr += t.GetFileTypeDescription() + " (*" + t.GetFileExtension() + ")|*" + t.GetFileExtension();
             }
             return "Alle Lieddateien (" + exts + ")|" + exts + "|" + fltr + "|Alle Dateien (*.*)|*.*";
         }
