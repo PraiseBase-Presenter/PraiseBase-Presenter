@@ -13,3 +13,4 @@
 /Core/bin
 /Core/obj
 /*.suo
+/Presenter/PraiseBase Presenter.csproj.user
