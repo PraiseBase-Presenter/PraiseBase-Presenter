@@ -36,17 +36,16 @@ using System.Text;
 using System.Threading;
 using System.Windows.Forms;
 using System.Xml;
-using Pbp.Properties;
+using PraiseBase.Presenter.Properties;
 using SongDetails;
 using Timer = System.Windows.Forms.Timer;
-using Pbp.Manager;
+using PraiseBase.Presenter.Manager;
 using System.Globalization;
-using Pbp.UI;
-using Pbp.Data.Bible;
+using PraiseBase.Presenter.UI;
+using PraiseBase.Presenter.Model.Bible;
+using PraiseBase.Presenter.Persistence.Setlists;
 
-//using PowerPoint = Microsoft.Office.Interop.PowerPoint;
-
-namespace Pbp.Forms
+namespace PraiseBase.Presenter.Forms
 {
     /// <summary>
     /// The main window class provides the central
@@ -387,11 +386,11 @@ namespace Pbp.Forms
 
             if (SongManager.Instance.CurrentSong.Song.Comment != String.Empty || SongManager.Instance.CurrentSong.Song.HasQA())
             {
-                toolStripButton3.Image = Pbp.Properties.Resources.highlight_red__36;
+                toolStripButton3.Image = PraiseBase.Presenter.Properties.Resources.highlight_red__36;
             }
             else
             {
-                toolStripButton3.Image = Pbp.Properties.Resources.highlight_36;
+                toolStripButton3.Image = PraiseBase.Presenter.Properties.Resources.highlight_36;
             }
             if (SongManager.Instance.CurrentSong.Song.HasTranslation)
             {
@@ -425,7 +424,7 @@ namespace Pbp.Forms
                 listViewSongHistory.Columns[0].Width = -2;
             }
 
-            Pbp.Data.Song.SongSlide cs = SongManager.Instance.CurrentSong.Song.Parts[e.PartNumber].Slides[e.SlideNumber];
+            PraiseBase.Presenter.Model.Song.SongSlide cs = SongManager.Instance.CurrentSong.Song.Parts[e.PartNumber].Slides[e.SlideNumber];
             var ssl = new SongSlideLayer(cs);
             ssl.SwitchTextAndTranslation = SongManager.Instance.CurrentSong.SwitchTextAndTranlation;
 
@@ -462,7 +461,7 @@ namespace Pbp.Forms
                 ProjectionManager.Instance.DisplayLayer(2, ssl);
 
                 if (SongManager.Instance.CurrentSong.Song.RelativeImagePaths.Count > 0)
-                    imageHistoryAdd(SongManager.Instance.CurrentSong.Song.RelativeImagePaths[cs.ImageNumber - 1]);
+                    imageHistoryAdd(SongManager.Instance.CurrentSong.Song.RelativeImagePaths[cs.ImageNumber]);
             }
         }
 
@@ -750,12 +749,16 @@ namespace Pbp.Forms
                         listViewImageHistory.Items.RemoveAt(i);
                     }
                 }
-                listViewImageHistory.LargeImageList.Images.Add(ImageManager.Instance.GetThumbFromRelPath(relImagePath));
-                var lvi = new ListViewItem("");
-                lvi.Tag = relImagePath;
-                lvi.ImageIndex = listViewImageHistory.LargeImageList.Images.Count - 1;
-                listViewImageHistory.Items.Add(lvi);
-                listViewImageHistory.EnsureVisible(listViewImageHistory.Items.Count - 1);
+                var img = ImageManager.Instance.GetThumbFromRelPath(relImagePath);
+                if (img != null)
+                {
+                    listViewImageHistory.LargeImageList.Images.Add(img);
+                    var lvi = new ListViewItem("");
+                    lvi.Tag = relImagePath;
+                    lvi.ImageIndex = listViewImageHistory.LargeImageList.Images.Count - 1;
+                    listViewImageHistory.Items.Add(lvi);
+                    listViewImageHistory.EnsureVisible(listViewImageHistory.Items.Count - 1);
+                }
             }
         }
 
@@ -1135,12 +1138,12 @@ namespace Pbp.Forms
             dlg.Title = StringResources.SaveSetlistAs;
             if (dlg.ShowDialog() == DialogResult.OK)
             {
-                Pbp.Data.Setlist sl = new Pbp.Data.Setlist();
+                PraiseBase.Presenter.Model.Setlist sl = new PraiseBase.Presenter.Model.Setlist();
                 for (int i = 0; i < listViewSetList.Items.Count; i++)
                 {
-                    sl.Items.Add(SongManager.Instance.SongList[(Guid)listViewSetList.Items[i].Tag].Song);
+                    sl.Items.Add(SongManager.Instance.SongList[(Guid)listViewSetList.Items[i].Tag].Song.Title);
                 }
-                Pbp.IO.SetlistWriter swr = new Pbp.IO.SetlistWriter();
+                SetlistWriter swr = new SetlistWriter();
                 swr.Write(dlg.FileName, sl);
             }
         }
@@ -1162,16 +1165,21 @@ namespace Pbp.Forms
             dlg.Title = StringResources.OpenSetlist;
             if (dlg.ShowDialog() == DialogResult.OK)
             {
-                Pbp.IO.SetlistReader sr = new Pbp.IO.SetlistReader();
+                SetlistReader sr = new SetlistReader();
                 try {
-                    Pbp.Data.Setlist sl = sr.read(dlg.FileName);
+                    PraiseBase.Presenter.Model.Setlist sl = sr.read(dlg.FileName);
                     if (sl.Items.Count > 0)
                     {
                         foreach (var i in sl.Items)                
                         {
-                            var lvi = new ListViewItem(i.Title);
-                            lvi.Tag = i.GUID;
-                            listViewSetList.Items.Add(lvi);
+                            Guid g = SongManager.Instance.GetGuidByTitle(i);
+                            if (g != Guid.Empty)
+                            {
+                                var s = SongManager.Instance.SongList[g].Song;
+                                var lvi = new ListViewItem(s.Title);
+                                lvi.Tag = s.GUID;
+                                listViewSetList.Items.Add(lvi);
+                            }
                         }
                         buttonSetListClear.Enabled = true;
                         buttonSaveSetList.Enabled = true;
@@ -1350,11 +1358,11 @@ namespace Pbp.Forms
                     if (SongManager.Instance.CurrentSong.Song.Comment != String.Empty ||
                         SongManager.Instance.CurrentSong.Song.HasQA())
                     {
-                        toolStripButton3.Image = Pbp.Properties.Resources.highlight_red__36;
+                        toolStripButton3.Image = PraiseBase.Presenter.Properties.Resources.highlight_red__36;
                     }
                     else
                     {
-                        toolStripButton3.Image = Pbp.Properties.Resources.highlight_36;
+                        toolStripButton3.Image = PraiseBase.Presenter.Properties.Resources.highlight_36;
                     }
                 }
             }
@@ -1381,13 +1389,13 @@ namespace Pbp.Forms
         {
             if (linkLayers)
             {
-                buttonToggleLayerMode.Image = Pbp.Properties.Resources.link;
+                buttonToggleLayerMode.Image = PraiseBase.Presenter.Properties.Resources.link;
 
                 //label3.Text = "Text und Bild sind verknüpft";
             }
             else
             {
-                buttonToggleLayerMode.Image = Pbp.Properties.Resources.unlink;
+                buttonToggleLayerMode.Image = PraiseBase.Presenter.Properties.Resources.unlink;
 
                 //label3.Text = "Text und Bild sind unabhängig";
             }
@@ -1568,7 +1576,7 @@ namespace Pbp.Forms
                     BibleManager.Instance.LoadBibleData(bi.Key);
                 }
 
-                foreach (Pbp.Data.Bible.BibleBook bk in  bi.Value.Bible.Books)
+                foreach (PraiseBase.Presenter.Model.Bible.BibleBook bk in  bi.Value.Bible.Books)
                 {
                     listBoxBibleBook.Items.Add(bk);
                 }
@@ -1583,7 +1591,7 @@ namespace Pbp.Forms
 
         private void listBoxBibleBook_SelectedIndexChanged(object sender, EventArgs e)
         {
-            var bk = ((Pbp.Data.Bible.BibleBook)listBoxBibleBook.SelectedItem);
+            var bk = ((PraiseBase.Presenter.Model.Bible.BibleBook)listBoxBibleBook.SelectedItem);
 
             listBoxBibleVerse.Items.Clear();
             listBoxBibleVerseTo.Items.Clear();
@@ -1591,7 +1599,7 @@ namespace Pbp.Forms
             listBoxBibleChapter.Items.Clear();
             listBoxBibleChapter.DisplayMember = "Number";
 
-            foreach (Pbp.Data.Bible.BibleChapter cp in bk.Chapters)
+            foreach (PraiseBase.Presenter.Model.Bible.BibleChapter cp in bk.Chapters)
             {
                 listBoxBibleChapter.Items.Add(cp);
             }
@@ -1606,14 +1614,14 @@ namespace Pbp.Forms
 
         private void listBoxBibleChapter_SelectedIndexChanged(object sender, EventArgs e)
         {
-            var cp = ((Pbp.Data.Bible.BibleChapter)listBoxBibleChapter.SelectedItem);
+            var cp = ((PraiseBase.Presenter.Model.Bible.BibleChapter)listBoxBibleChapter.SelectedItem);
 
             listBoxBibleVerse.Items.Clear();
             listBoxBibleVerseTo.Items.Clear();
             listBoxBibleVerse.DisplayMember = "Number";
             listBoxBibleVerseTo.DisplayMember = "Number";
 
-            foreach (Pbp.Data.Bible.BibleVerse v in cp.Verses)
+            foreach (PraiseBase.Presenter.Model.Bible.BibleVerse v in cp.Verses)
             {
                 listBoxBibleVerse.Items.Add(v);
                 listBoxBibleVerseTo.Items.Add(v);
@@ -1630,10 +1638,10 @@ namespace Pbp.Forms
 
         private void listBoxBibleVerse_SelectedIndexChanged(object sender, EventArgs e)
         {
-            var v = ((Pbp.Data.Bible.BibleVerse)listBoxBibleVerse.SelectedItem);
+            var v = ((PraiseBase.Presenter.Model.Bible.BibleVerse)listBoxBibleVerse.SelectedItem);
 
             listBoxBibleVerseTo.Items.Clear();
-            foreach (Pbp.Data.Bible.BibleVerse tv in v.Chapter.Verses)
+            foreach (PraiseBase.Presenter.Model.Bible.BibleVerse tv in v.Chapter.Verses)
             {
                 if (tv.Number >= v.Number)
                 {
@@ -1655,8 +1663,8 @@ namespace Pbp.Forms
         {
             if (listBoxBibleVerse.SelectedItem != null && listBoxBibleVerseTo.SelectedItem != null)
             {
-                var vs = new Pbp.Data.Bible.BibleVerseSelection(((Pbp.Data.Bible.BibleVerse)listBoxBibleVerse.SelectedItem),
-                                                     ((Pbp.Data.Bible.BibleVerse)listBoxBibleVerseTo.SelectedItem));
+                var vs = new PraiseBase.Presenter.Model.Bible.BibleVerseSelection(((PraiseBase.Presenter.Model.Bible.BibleVerse)listBoxBibleVerse.SelectedItem),
+                                                     ((PraiseBase.Presenter.Model.Bible.BibleVerse)listBoxBibleVerseTo.SelectedItem));
 
                 labelBibleTextName.Text = vs.ToString();
                 textBoxBibleText.Text = vs.Text;
@@ -1670,8 +1678,8 @@ namespace Pbp.Forms
         private void buttonBibleTextShow_Click(object sender, EventArgs e)
         {
             var bl =
-                new BibleLayer(new Pbp.Data.Bible.BibleVerseSelection(((Pbp.Data.Bible.BibleVerse)listBoxBibleVerse.SelectedItem),
-                                                           ((Pbp.Data.Bible.BibleVerse)listBoxBibleVerseTo.SelectedItem)));
+                new BibleLayer(new PraiseBase.Presenter.Model.Bible.BibleVerseSelection(((PraiseBase.Presenter.Model.Bible.BibleVerse)listBoxBibleVerse.SelectedItem),
+                                                           ((PraiseBase.Presenter.Model.Bible.BibleVerse)listBoxBibleVerseTo.SelectedItem)));
             bl.FontSize = (float)numericUpDown2.Value;
             ProjectionManager.Instance.DisplayLayer(2, bl);
         }
@@ -1683,8 +1691,8 @@ namespace Pbp.Forms
 
         private void buttonAddToBibleVerseList_Click(object sender, EventArgs e)
         {
-            var vs = new Pbp.Data.Bible.BibleVerseSelection(((Pbp.Data.Bible.BibleVerse)listBoxBibleVerse.SelectedItem),
-                                                 ((Pbp.Data.Bible.BibleVerse)listBoxBibleVerseTo.SelectedItem));
+            var vs = new PraiseBase.Presenter.Model.Bible.BibleVerseSelection(((PraiseBase.Presenter.Model.Bible.BibleVerse)listBoxBibleVerse.SelectedItem),
+                                                 ((PraiseBase.Presenter.Model.Bible.BibleVerse)listBoxBibleVerseTo.SelectedItem));
             var lvi = new ListViewItem(vs.ToString());
             lvi.Tag = vs;
             listViewBibleVerseList.Items.Add(lvi);
@@ -1708,7 +1716,7 @@ namespace Pbp.Forms
         {
             if (listViewBibleVerseList.SelectedItems.Count > 0)
             {
-                var vs = (Pbp.Data.Bible.BibleVerseSelection)listViewBibleVerseList.SelectedItems[0].Tag;
+                var vs = (PraiseBase.Presenter.Model.Bible.BibleVerseSelection)listViewBibleVerseList.SelectedItems[0].Tag;
                 listBoxBibleBook.SelectedIndex = vs.Chapter.Book.Number - 1;
                 listBoxBibleChapter.SelectedIndex = vs.Chapter.Number - 1;
                 listBoxBibleVerse.SelectedIndex = vs.StartVerse.Number - 1;
@@ -1737,7 +1745,7 @@ namespace Pbp.Forms
                 }
                 else
                 {
-                    Pbp.BibleManager.BibleItem bibleItem = ((KeyValuePair<String,Pbp.BibleManager.BibleItem>)comboBoxBible.SelectedItem).Value;
+                    PraiseBase.Presenter.BibleManager.BibleItem bibleItem = ((KeyValuePair<String,PraiseBase.Presenter.BibleManager.BibleItem>)comboBoxBible.SelectedItem).Value;
 
                     biblePassageSearchResult = BibleManager.Instance.SearchPassage(bibleItem.Bible, needle);
                     if (biblePassageSearchResult.Status == BibleManager.BiblePassageSearchStatus.Found)

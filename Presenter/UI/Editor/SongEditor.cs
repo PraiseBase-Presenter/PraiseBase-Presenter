@@ -29,14 +29,14 @@ using System;
 using System.IO;
 using System.Linq;
 using System.Windows.Forms;
-using Pbp.Properties;
-using Pbp.IO;
+using PraiseBase.Presenter.Properties;
+using PraiseBase.Presenter.Persistence;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Globalization;
-using Pbp.UI;
+using PraiseBase.Presenter.UI;
 
-namespace Pbp.Forms
+namespace PraiseBase.Presenter.Forms
 {
     public partial class SongEditor : LocalizableForm
     {
@@ -113,7 +113,7 @@ namespace Pbp.Forms
             openFileDialog.Multiselect = false;
             openFileDialog.Title = Properties.StringResources.OpenSong;
 
-            openFileDialog.Filter = SongFileReaderFactory.Instance.GetFileBoxFilter();
+            openFileDialog.Filter = GetFileBoxFilter();
             openFileDialog.FilterIndex = fileOpenBoxFilterIndex;
             if (openFileDialog.ShowDialog(this) == DialogResult.OK)
             {
@@ -122,6 +122,33 @@ namespace Pbp.Forms
                 fileOpenBoxFilterIndex = openFileDialog.FilterIndex;
                 openSong(FileName);
             }
+        }
+
+        /// <summary>
+        /// Returns the filter string used in open file dialogs
+        /// </summary>
+        /// <returns></returns>
+        public string GetFileBoxFilter()
+        {
+            String exts = String.Empty;
+            String fltr = String.Empty;
+            foreach (var t in SongFilePluginFactory.GetPlugins())
+            {
+                if (t.IsWritingSupported())
+                {
+                    if (exts != String.Empty)
+                    {
+                        exts += ";";
+                    }
+                    exts += "*" + t.GetFileExtension();
+                    if (fltr != string.Empty)
+                    {
+                        fltr += "|";
+                    }
+                    fltr += t.GetFileTypeDescription() + " (*" + t.GetFileExtension() + ")|*" + t.GetFileExtension();
+                }
+            }
+            return "Alle Lieddateien (" + exts + ")|" + exts + "|" + fltr + "|Alle Dateien (*.*)|*.*";
         }
 
         public void openSong(string fileName)

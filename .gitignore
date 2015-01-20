@@ -10,4 +10,6 @@
 /TestResults
 /Presenter/Resources/Dist/Thumbs
 /Installer/obj
+/Core/bin
+/Core/obj
 /*.suo

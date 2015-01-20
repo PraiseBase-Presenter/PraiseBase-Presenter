@@ -27,10 +27,11 @@
 
 using System;
 using System.Drawing;
-using Pbp.Properties;
-using Pbp.Data.Bible;
+using PraiseBase.Presenter.Properties;
+using PraiseBase.Presenter.Model.Bible;
+using PraiseBase.Presenter.Util;
 
-namespace Pbp
+namespace PraiseBase.Presenter
 {
     public class BibleLayer : TextLayer
     {
@@ -42,7 +43,7 @@ namespace Pbp
 
         private BibleVerseSelection verseSelection;
 
-        public BibleLayer(Pbp.Data.Bible.BibleVerseSelection verseSelection)
+        public BibleLayer(PraiseBase.Presenter.Model.Bible.BibleVerseSelection verseSelection)
         {
             this.verseSelection = verseSelection;
         }

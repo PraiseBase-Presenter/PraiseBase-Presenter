@@ -27,10 +27,10 @@
 
 using System;
 using System.Windows.Forms;
-using Pbp.Forms;
-using Pbp.Properties;
+using PraiseBase.Presenter.Forms;
+using PraiseBase.Presenter.Properties;
 
-namespace Pbp
+namespace PraiseBase.Presenter
 {
     internal static class Editor
     {

@@ -29,12 +29,12 @@ using System;
 using System.Drawing;
 using System.IO;
 using System.Windows.Forms;
-using Pbp.Properties;
-using Pbp.Data.Song;
-using Pbp.IO;
-using Pbp.Data;
+using PraiseBase.Presenter.Properties;
+using PraiseBase.Presenter.Model.Song;
+using PraiseBase.Presenter.Persistence;
+using PraiseBase.Presenter.Model;
 
-namespace Pbp.Forms
+namespace PraiseBase.Presenter.Forms
 {
     public partial class SongEditorChild : Form
     {
@@ -59,7 +59,7 @@ namespace Pbp.Forms
                 Console.WriteLine("Loading song from file " + fileName);
                 try
                 {
-                    sng = SongFileReaderFactory.Instance.CreateFactoryByFile(fileName).Load(fileName);
+                    sng = SongFilePluginFactory.Create(fileName).Load(fileName);
                     if (sng.GUID == Guid.Empty)
                     {
                         var smGuid = SongManager.Instance.GetGUIDByPath(fileName);
@@ -94,10 +94,10 @@ namespace Pbp.Forms
             {
                 sng = new Song();
                 sng.GUID = SongManager.Instance.GenerateGuid();
-                sng.Title = Pbp.Properties.Settings.Default.SongDefaultName;
-                sng.Language = Pbp.Properties.Settings.Default.SongDefaultLanguage;
+                sng.Title = PraiseBase.Presenter.Properties.Settings.Default.SongDefaultName;
+                sng.Language = PraiseBase.Presenter.Properties.Settings.Default.SongDefaultLanguage;
                 SongPart tmpPart = new SongPart();
-                tmpPart.Caption = Pbp.Properties.Settings.Default.SongPartDefaultName;
+                tmpPart.Caption = PraiseBase.Presenter.Properties.Settings.Default.SongPartDefaultName;
                 tmpPart.Slides.Add(new SongSlide(sng));
                 sng.Parts.Add(tmpPart);
 
@@ -130,8 +130,7 @@ namespace Pbp.Forms
                    Settings.Default.ProjectionMasterLineSpacing);
 
                 // TODO: Define a default in the configuration
-                sng.HorizontalTextOrientation = TextOrientationHorizontal.Center;
-                sng.VerticalTextOrientation = TextOrientationVertical.Middle;
+                sng.TextOrientation = new TextOrientation(VerticalOrientation.Middle, HorizontalOrientation.Center);
 
                 sng.TextOutlineEnabled = true;
                 sng.TextShadowEnabled = true;
@@ -185,12 +184,12 @@ namespace Pbp.Forms
 
             buttonChooseProjectionForeColor.BackColor = sng.MainText.Color;
             buttonTranslationColor.BackColor = sng.TranslationText.Color;
-            
-            comboBoxSlideHorizOrientation.DataSource = Enum.GetValues(typeof(TextOrientationHorizontal));
-            comboBoxSlideHorizOrientation.DataBindings.Add("SelectedItem", sng, "HorizontalTextOrientation", false, DataSourceUpdateMode.OnPropertyChanged);
-          
-            comboBoxSlideVertOrientation.DataSource = Enum.GetValues(typeof(TextOrientationVertical));
-            comboBoxSlideVertOrientation.DataBindings.Add("SelectedItem", sng, "VerticalTextOrientation", false, DataSourceUpdateMode.OnPropertyChanged);
+
+            comboBoxSlideHorizOrientation.DataSource = Enum.GetValues(typeof(HorizontalOrientation));
+            comboBoxSlideHorizOrientation.DataBindings.Add("SelectedItem", sng.TextOrientation, "Horizontal", false, DataSourceUpdateMode.OnPropertyChanged);
+
+            comboBoxSlideVertOrientation.DataSource = Enum.GetValues(typeof(VerticalOrientation));
+            comboBoxSlideVertOrientation.DataBindings.Add("SelectedItem", sng.TextOrientation, "Vertical", false, DataSourceUpdateMode.OnPropertyChanged);
 
             comboBoxLanguage.Items.Clear();
             comboBoxLanguage.Text = sng.Language;
@@ -718,7 +717,7 @@ namespace Pbp.Forms
             {
                 try
                 {
-                    SongFileWriterFactory.Instance.CreateFactoryByFile(songFilename).Save(songFilename, sng);
+                    SongFilePluginFactory.Create(songFilename).Save(sng, songFilename);
 
                     hashCode = sng.GetHashCode();
                     ((SongEditor)MdiParent).setStatus(String.Format(Properties.StringResources.SongSavedAs, songFilename));
@@ -738,7 +737,7 @@ namespace Pbp.Forms
         {
             sng.Title = textBoxSongTitle.Text;
 
-            if (sng.Title == Pbp.Properties.Settings.Default.SongDefaultName)
+            if (sng.Title == PraiseBase.Presenter.Properties.Settings.Default.SongDefaultName)
             {
                 if (MessageBox.Show(string.Format(Properties.StringResources.DoesTheSongReallyHaveTheDefaultTitle, sng.Title), Properties.StringResources.Attention, 
                     MessageBoxButtons.YesNo) == System.Windows.Forms.DialogResult.No)
@@ -760,7 +759,7 @@ namespace Pbp.Forms
             }
             saveFileDialog.CheckPathExists = true;
             saveFileDialog.FileName = sng.Title;
-            saveFileDialog.Filter = SongFileWriterFactory.Instance.GetFileBoxFilter();
+            saveFileDialog.Filter = GetSaveFileBoxFilter();
             saveFileDialog.FilterIndex = ((SongEditor)MdiParent).fileSaveBoxFilterIndex;
             saveFileDialog.AddExtension = true;
             saveFileDialog.Title = Properties.StringResources.SaveSongAs;
@@ -769,7 +768,7 @@ namespace Pbp.Forms
             {
                 hashCode = sng.GetHashCode();
                 try {
-                    SongFileWriterFactory.Instance.CreateFactoryByTypeIndex(saveFileDialog.FilterIndex-1).Save(saveFileDialog.FileName, sng);
+                    CreateByTypeIndex(saveFileDialog.FilterIndex - 1).Save(sng, saveFileDialog.FileName);
                     ((SongEditor)MdiParent).fileSaveBoxFilterIndex = saveFileDialog.FilterIndex;
                     ((SongEditor)MdiParent).setStatus(string.Format(Properties.StringResources.SongSavedAs, saveFileDialog.FileName));
                 }
@@ -780,6 +779,29 @@ namespace Pbp.Forms
                 }
             }
             SongManager.Instance.ReloadSongByPath(saveFileDialog.FileName);
+        }
+
+        public string GetSaveFileBoxFilter()
+        {
+            String fltr = String.Empty;
+            foreach (ISongFilePlugin t in SongFilePluginFactory.GetWriterPlugins())
+            {
+                if (fltr != string.Empty)
+                {
+                    fltr += "|";
+                }
+                fltr += t.GetFileTypeDescription() + " (*" + t.GetFileExtension() + ")|*" + t.GetFileExtension();
+            }
+            return fltr;
+        }
+
+        public ISongFilePlugin CreateByTypeIndex(int index)
+        {
+            if (index >= 0 && index < SongFilePluginFactory.GetWriterPlugins().Count)
+            {
+                return SongFilePluginFactory.GetWriterPlugins().ToArray()[index];
+            }
+            throw new NotImplementedException();
         }
 
         private void EditorChild_FormClosing(object sender, FormClosingEventArgs e)
@@ -1024,7 +1046,7 @@ namespace Pbp.Forms
 
         private void EditorChild_Shown(object sender, EventArgs e)
         {
-            if (textBoxSongTitle.Text == Pbp.Properties.Settings.Default.SongDefaultName)
+            if (textBoxSongTitle.Text == PraiseBase.Presenter.Properties.Settings.Default.SongDefaultName)
             {
                 textBoxSongTitle.SelectAll();
                 textBoxSongTitle.Focus();
@@ -1033,7 +1055,7 @@ namespace Pbp.Forms
 
         private void textBoxSongTitle_Enter(object sender, EventArgs e)
         {
-            if (textBoxSongTitle.Text == Pbp.Properties.Settings.Default.SongDefaultName)
+            if (textBoxSongTitle.Text == PraiseBase.Presenter.Properties.Settings.Default.SongDefaultName)
             {
                 textBoxSongTitle.SelectAll();
             }

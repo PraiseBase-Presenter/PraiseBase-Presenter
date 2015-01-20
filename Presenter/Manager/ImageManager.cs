@@ -31,11 +31,11 @@ using System.Drawing;
 using System.Drawing.Imaging;
 using System.IO;
 using System.Windows.Forms;
-using Pbp.Forms;
-using Pbp.Properties;
-using Pbp.Utils;
+using PraiseBase.Presenter.Forms;
+using PraiseBase.Presenter.Properties;
+using PraiseBase.Presenter.Util;
 
-namespace Pbp
+namespace PraiseBase.Presenter
 {
     internal class ImageManager
     {
@@ -172,11 +172,6 @@ namespace Pbp
             }
         }
 
-        public bool ImageExists(string relativePath)
-        {
-            return File.Exists(ImageDirPath + Path.DirectorySeparatorChar + relativePath);
-        }
-
         public Image GetThumbFromRelPath(string relativePath)
         {
             if (File.Exists(ThumbDirPath + Path.DirectorySeparatorChar + relativePath))
@@ -195,19 +190,22 @@ namespace Pbp
             return null;
         }
 
-        public ImageList GetThumbsFromList(List<string> imageList)
+        public Dictionary<int, Image> GetThumbsFromList(List<string> imageList)
         {
-            var thumbList = new ImageList();
-            thumbList.ImageSize = Settings.Default.ThumbSize;
-            thumbList.ColorDepth = ColorDepth.Depth32Bit;
+            var thumbList = new Dictionary<int, Image>();
+            //thumbList.ImageSize = Settings.Default.ThumbSize;
+            //thumbList.ColorDepth = ColorDepth.Depth32Bit;
 
+            int i = 0;
             Image th = ImageUtils.getEmptyImage(Settings.Default.ThumbSize, Settings.Default.ProjectionBackColor);
-            thumbList.Images.Add(th);
+            thumbList.Add(i++, th);
             foreach (String relPath in imageList)
             {
                 Image img = GetThumbFromRelPath(relPath);
                 if (img != null)
-                    thumbList.Images.Add(img);
+                {
+                    thumbList.Add(i++, img);
+                }
             }
             return thumbList;
         }

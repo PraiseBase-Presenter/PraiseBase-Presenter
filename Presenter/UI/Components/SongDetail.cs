@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing;
 using System.Windows.Forms;
-using Pbp.Data.Song;
+using PraiseBase.Presenter.Model.Song;
 
 namespace SongDetails
 {
@@ -51,7 +51,7 @@ namespace SongDetails
             slideTexts = new List<Label>();
             slideImages = new List<PictureBox>();
 
-            thumbWidth = Pbp.Properties.Settings.Default.ThumbSize.Width;
+            thumbWidth = PraiseBase.Presenter.Properties.Settings.Default.ThumbSize.Width;
         }
 
         public void setSong(Song sng)
@@ -85,7 +85,7 @@ namespace SongDetails
             Font pfnt = new Font("Arial", 16);
             Font txfnt = new Font("Arial", 11);
             int ypos = startPoint.Y;
-            ImageList thumbs = Pbp.ImageManager.Instance.GetThumbsFromList(sng.RelativeImagePaths);
+            var thumbs = PraiseBase.Presenter.ImageManager.Instance.GetThumbsFromList(sng.RelativeImagePaths);
 
             Size labelSize = new Size(0, 0);
             for (int i = 0; i < sng.Parts.Count; i++)
@@ -146,8 +146,8 @@ namespace SongDetails
                     PictureBox previewPictureBox = new PictureBox();
                     previewPictureBox.Location = new Point(2, 2);
                     previewPictureBox.Size = new Size(panelPreviewPictureBoxContainer.Width - 4, panelPreviewPictureBoxContainer.Height - 5);
-                    int imgNr = sng.Parts[numParts].Slides[j].ImageNumber;
-                    previewPictureBox.Image = thumbs.Images[imgNr];
+                    int imgNr = sng.Parts[numParts].Slides[j].ImageNumber + 1;
+                    previewPictureBox.Image = thumbs.ContainsKey(imgNr) ? thumbs[imgNr] : thumbs[0];
                     previewPictureBox.Tag = sng.RelativeImagePaths.Count >= imgNr && imgNr > 0 ? sng.RelativeImagePaths[imgNr - 1] : String.Empty;
                     previewPictureBox.Enabled = true;
                     previewPictureBox.Cursor = Cursors.Hand;

@@ -27,9 +27,10 @@
 
 using System;
 using System.Drawing;
-using Pbp.Properties;
+using PraiseBase.Presenter.Properties;
+using PraiseBase.Presenter.Util;
 
-namespace Pbp
+namespace PraiseBase.Presenter
 {
     internal class LiveText : TextLayer
     {

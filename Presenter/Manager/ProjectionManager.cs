@@ -32,7 +32,7 @@ using System.Text;
 using System.Windows.Forms;
 using System.Drawing;
 
-namespace Pbp.Manager
+namespace PraiseBase.Presenter.Manager
 {
     class ProjectionManager
     {
@@ -49,7 +49,7 @@ namespace Pbp.Manager
             get { return _instance ?? (_instance = new ProjectionManager()); }
         }
 
-        protected List<Pbp.Forms.ProjectionWindow> projectionWindows;
+        protected List<PraiseBase.Presenter.Forms.ProjectionWindow> projectionWindows;
 
         protected ProjectionState currentState = ProjectionState.Disabled;
 

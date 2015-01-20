@@ -27,7 +27,7 @@
 
 using System;
 
-namespace Pbp
+namespace PraiseBase.Presenter
 {
     public class UpdateCheck
     {

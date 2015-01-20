@@ -28,11 +28,11 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
-using Pbp.Properties;
-using Pbp.IO;
-using Pbp.Data.Song;
+using PraiseBase.Presenter.Properties;
+using PraiseBase.Presenter.Persistence;
+using PraiseBase.Presenter.Model.Song;
 
-namespace Pbp
+namespace PraiseBase.Presenter
 {
     /// <summary>
     /// Holds a list of all songs and provides
@@ -140,7 +140,7 @@ namespace Pbp
         {
             // Find song files
             var songPaths = new List<string>();
-            foreach (string ext in SongFileReaderFactory.Instance.SupportedExtensions)
+            foreach (string ext in SongFilePluginFactory.SupportedExtensions)
             {
                 string[] songFilePaths = Directory.GetFiles(SongDirPath, "*" + ext, SearchOption.AllDirectories);
                 songPaths.AddRange(songFilePaths);
@@ -155,7 +155,7 @@ namespace Pbp
                 try
                 {
                     SongItem si = new SongItem();
-                    SongFileReader sfr = SongFileReaderFactory.Instance.CreateFactoryByFile(path);
+                    ISongFilePlugin sfr = SongFilePluginFactory.Create(path);
                     si.Song = sfr.Load(path);
                     si.Filename = path;
                     if (si.Song.GUID == Guid.Empty)
@@ -218,7 +218,7 @@ namespace Pbp
             try
             {
                 SongItem si = new SongItem();
-                SongFileReader sfr = SongFileReaderFactory.Instance.CreateFactoryByFile(path);
+                ISongFilePlugin sfr = SongFilePluginFactory.Create(path);
                 si.Song = sfr.Load(path);
                 si.Filename = path;
 
@@ -336,8 +336,15 @@ namespace Pbp
 
         public void SaveCurrentSong()
         {
-            SongFileWriter sfw = SongFileWriterFactory.Instance.CreateFactoryByFile(CurrentSong.Filename);
-            sfw.Save(CurrentSong.Filename, CurrentSong.Song);
+            ISongFilePlugin sfw = SongFilePluginFactory.Create(CurrentSong.Filename);
+            if (sfw.IsWritingSupported())
+            {
+                sfw.Save(CurrentSong.Song, CurrentSong.Filename);
+            }
+            else
+            {
+                throw new Exception("Das Speichern der Lieddatei " + CurrentSong.Filename + " wird von diesem Dateiformat leider nicht unterstützt!");
+            }
         }
     }
 

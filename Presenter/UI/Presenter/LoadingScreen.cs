@@ -27,7 +27,7 @@
 
 using System.Windows.Forms;
 
-namespace Pbp.Forms
+namespace PraiseBase.Presenter.Forms
 {
     public partial class LoadingScreen : Form
     {

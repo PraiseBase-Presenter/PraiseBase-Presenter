@@ -1,4 +1,4 @@
-﻿namespace Pbp.Forms
+﻿namespace PraiseBase.Presenter.Forms
 {
     partial class MainWindow
     {
@@ -86,11 +86,11 @@
             this.listViewSongHistory = new System.Windows.Forms.ListView();
             this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
-            this.customGroupBox3 = new Pbp.Components.CustomGroupBox();
+            this.customGroupBox3 = new PraiseBase.Presenter.Components.CustomGroupBox();
             this.label13 = new System.Windows.Forms.Label();
             this.tabControl2 = new System.Windows.Forms.TabControl();
             this.tabPageImageBrowser = new System.Windows.Forms.TabPage();
-            this.searchTextBoxImages = new Pbp.Components.SearchTextBox();
+            this.searchTextBoxImages = new PraiseBase.Presenter.Components.SearchTextBox();
             this.treeViewImageDirectories = new System.Windows.Forms.TreeView();
             this.listViewDirectoryImages = new System.Windows.Forms.ListView();
             this.labelImgDirName = new System.Windows.Forms.Label();
@@ -113,11 +113,11 @@
             this.listViewImageQueue = new System.Windows.Forms.ListView();
             this.columnHeader6 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.buttonResetImageQueue = new System.Windows.Forms.Button();
-            this.customGroupBox2 = new Pbp.Components.CustomGroupBox();
+            this.customGroupBox2 = new PraiseBase.Presenter.Components.CustomGroupBox();
             this.tabControlTextLayer = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.buttonSwitchTextAndTranslation = new System.Windows.Forms.Button();
-            this.songSearchTextBox = new Pbp.Components.SearchTextBox();
+            this.songSearchTextBox = new PraiseBase.Presenter.Components.SearchTextBox();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.titelToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.titelUndTextToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -139,7 +139,7 @@
             this.buttonAddToBibleVerseList = new System.Windows.Forms.Button();
             this.buttonRemoveFromBibleVerseList = new System.Windows.Forms.Button();
             this.label12 = new System.Windows.Forms.Label();
-            this.searchTextBoxBible = new Pbp.Components.SearchTextBox();
+            this.searchTextBoxBible = new PraiseBase.Presenter.Components.SearchTextBox();
             this.listViewBibleVerseList = new Bol.WinControls.ListViewEx();
             this.columnHeader3 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.label11 = new System.Windows.Forms.Label();
@@ -171,7 +171,7 @@
             this.toolStripButton4 = new System.Windows.Forms.ToolStripButton();
             this.toolStripButtonDisplaySettings = new System.Windows.Forms.ToolStripButton();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
-            this.customGroupBox1 = new Pbp.Components.CustomGroupBox();
+            this.customGroupBox1 = new PraiseBase.Presenter.Components.CustomGroupBox();
             this.pictureBoxbeamerPreview = new System.Windows.Forms.PictureBox();
             this.labelFadeTimeLayer1 = new System.Windows.Forms.Label();
             this.labelFadeTime = new System.Windows.Forms.Label();
@@ -514,7 +514,7 @@
             // buttonOpenSetList
             // 
             resources.ApplyResources(this.buttonOpenSetList, "buttonOpenSetList");
-            this.buttonOpenSetList.Image = global::Pbp.Properties.Resources.fileopen;
+            this.buttonOpenSetList.Image = global::PraiseBase.Presenter.Properties.Resources.fileopen;
             this.buttonOpenSetList.Name = "buttonOpenSetList";
             this.buttonOpenSetList.UseVisualStyleBackColor = true;
             this.buttonOpenSetList.Click += new System.EventHandler(this.buttonOpenSetList_Click);
@@ -538,7 +538,7 @@
             // buttonSaveSetList
             // 
             resources.ApplyResources(this.buttonSaveSetList, "buttonSaveSetList");
-            this.buttonSaveSetList.Image = global::Pbp.Properties.Resources.filesave;
+            this.buttonSaveSetList.Image = global::PraiseBase.Presenter.Properties.Resources.filesave;
             this.buttonSaveSetList.Name = "buttonSaveSetList";
             this.buttonSaveSetList.UseVisualStyleBackColor = true;
             this.buttonSaveSetList.Click += new System.EventHandler(this.buttonSaveSetList_Click);
@@ -546,7 +546,7 @@
             // buttonSetListAdd
             // 
             resources.ApplyResources(this.buttonSetListAdd, "buttonSetListAdd");
-            this.buttonSetListAdd.Image = global::Pbp.Properties.Resources.edit_add;
+            this.buttonSetListAdd.Image = global::PraiseBase.Presenter.Properties.Resources.edit_add;
             this.buttonSetListAdd.Name = "buttonSetListAdd";
             this.buttonSetListAdd.UseVisualStyleBackColor = true;
             this.buttonSetListAdd.Click += new System.EventHandler(this.buttonSetListAdd_Click);
@@ -554,7 +554,7 @@
             // buttonSetListUp
             // 
             resources.ApplyResources(this.buttonSetListUp, "buttonSetListUp");
-            this.buttonSetListUp.Image = global::Pbp.Properties.Resources.arrowup;
+            this.buttonSetListUp.Image = global::PraiseBase.Presenter.Properties.Resources.arrowup;
             this.buttonSetListUp.Name = "buttonSetListUp";
             this.buttonSetListUp.UseVisualStyleBackColor = true;
             this.buttonSetListUp.Click += new System.EventHandler(this.buttonSetListUp_Click);
@@ -562,7 +562,7 @@
             // buttonSetListClear
             // 
             resources.ApplyResources(this.buttonSetListClear, "buttonSetListClear");
-            this.buttonSetListClear.Image = global::Pbp.Properties.Resources.trash;
+            this.buttonSetListClear.Image = global::PraiseBase.Presenter.Properties.Resources.trash;
             this.buttonSetListClear.Name = "buttonSetListClear";
             this.buttonSetListClear.UseVisualStyleBackColor = true;
             this.buttonSetListClear.Click += new System.EventHandler(this.buttonSetListClear_Click);
@@ -570,7 +570,7 @@
             // buttonSetListDown
             // 
             resources.ApplyResources(this.buttonSetListDown, "buttonSetListDown");
-            this.buttonSetListDown.Image = global::Pbp.Properties.Resources.arrowdown;
+            this.buttonSetListDown.Image = global::PraiseBase.Presenter.Properties.Resources.arrowdown;
             this.buttonSetListDown.Name = "buttonSetListDown";
             this.buttonSetListDown.UseVisualStyleBackColor = true;
             this.buttonSetListDown.Click += new System.EventHandler(this.buttonSetListDown_Click);
@@ -578,7 +578,7 @@
             // buttonSetListRem
             // 
             resources.ApplyResources(this.buttonSetListRem, "buttonSetListRem");
-            this.buttonSetListRem.Image = global::Pbp.Properties.Resources.edit_remove;
+            this.buttonSetListRem.Image = global::PraiseBase.Presenter.Properties.Resources.edit_remove;
             this.buttonSetListRem.Name = "buttonSetListRem";
             this.buttonSetListRem.UseVisualStyleBackColor = true;
             this.buttonSetListRem.Click += new System.EventHandler(this.buttonSetListRem_Click);
@@ -654,7 +654,7 @@
             resources.ApplyResources(this.searchTextBoxImages, "searchTextBoxImages");
             this.searchTextBoxImages.Name = "searchTextBoxImages";
             this.searchTextBoxImages.OptionsMenu = null;
-            this.searchTextBoxImages.TextChanged += new Pbp.Components.SearchTextBox.TextChange(this.searchTextBoxImages_TextChanged);
+            this.searchTextBoxImages.TextChanged += new PraiseBase.Presenter.Components.SearchTextBox.TextChange(this.searchTextBoxImages_TextChanged);
             // 
             // treeViewImageDirectories
             // 
@@ -821,7 +821,7 @@
             // buttonResetImageQueue
             // 
             resources.ApplyResources(this.buttonResetImageQueue, "buttonResetImageQueue");
-            this.buttonResetImageQueue.Image = global::Pbp.Properties.Resources.trash;
+            this.buttonResetImageQueue.Image = global::PraiseBase.Presenter.Properties.Resources.trash;
             this.buttonResetImageQueue.Name = "buttonResetImageQueue";
             this.buttonResetImageQueue.UseVisualStyleBackColor = true;
             this.buttonResetImageQueue.Click += new System.EventHandler(this.button1_Click_1);
@@ -858,7 +858,7 @@
             // buttonSwitchTextAndTranslation
             // 
             resources.ApplyResources(this.buttonSwitchTextAndTranslation, "buttonSwitchTextAndTranslation");
-            this.buttonSwitchTextAndTranslation.Image = global::Pbp.Properties.Resources.translate_small;
+            this.buttonSwitchTextAndTranslation.Image = global::PraiseBase.Presenter.Properties.Resources.translate_small;
             this.buttonSwitchTextAndTranslation.Name = "buttonSwitchTextAndTranslation";
             this.toolTipMyTooltip.SetToolTip(this.buttonSwitchTextAndTranslation, resources.GetString("buttonSwitchTextAndTranslation.ToolTip"));
             this.buttonSwitchTextAndTranslation.UseVisualStyleBackColor = true;
@@ -869,7 +869,7 @@
             resources.ApplyResources(this.songSearchTextBox, "songSearchTextBox");
             this.songSearchTextBox.Name = "songSearchTextBox";
             this.songSearchTextBox.OptionsMenu = this.contextMenuStrip1;
-            this.songSearchTextBox.TextChanged += new Pbp.Components.SearchTextBox.TextChange(this.songSearchBox_TextChanged);
+            this.songSearchTextBox.TextChanged += new PraiseBase.Presenter.Components.SearchTextBox.TextChange(this.songSearchBox_TextChanged);
             // 
             // contextMenuStrip1
             // 
@@ -991,7 +991,7 @@
             // buttonShowLiveText
             // 
             resources.ApplyResources(this.buttonShowLiveText, "buttonShowLiveText");
-            this.buttonShowLiveText.Image = global::Pbp.Properties.Resources.leinwand16;
+            this.buttonShowLiveText.Image = global::PraiseBase.Presenter.Properties.Resources.leinwand16;
             this.buttonShowLiveText.Name = "buttonShowLiveText";
             this.buttonShowLiveText.UseVisualStyleBackColor = true;
             this.buttonShowLiveText.Click += new System.EventHandler(this.buttonShowLiveText_Click);
@@ -1043,7 +1043,7 @@
             // buttonAddToBibleVerseList
             // 
             resources.ApplyResources(this.buttonAddToBibleVerseList, "buttonAddToBibleVerseList");
-            this.buttonAddToBibleVerseList.Image = global::Pbp.Properties.Resources.edit_add;
+            this.buttonAddToBibleVerseList.Image = global::PraiseBase.Presenter.Properties.Resources.edit_add;
             this.buttonAddToBibleVerseList.Name = "buttonAddToBibleVerseList";
             this.buttonAddToBibleVerseList.UseVisualStyleBackColor = true;
             this.buttonAddToBibleVerseList.Click += new System.EventHandler(this.buttonAddToBibleVerseList_Click);
@@ -1051,7 +1051,7 @@
             // buttonRemoveFromBibleVerseList
             // 
             resources.ApplyResources(this.buttonRemoveFromBibleVerseList, "buttonRemoveFromBibleVerseList");
-            this.buttonRemoveFromBibleVerseList.Image = global::Pbp.Properties.Resources.edit_remove;
+            this.buttonRemoveFromBibleVerseList.Image = global::PraiseBase.Presenter.Properties.Resources.edit_remove;
             this.buttonRemoveFromBibleVerseList.Name = "buttonRemoveFromBibleVerseList";
             this.buttonRemoveFromBibleVerseList.UseVisualStyleBackColor = true;
             this.buttonRemoveFromBibleVerseList.Click += new System.EventHandler(this.buttonRemoveFromBibleVerseList_Click);
@@ -1066,7 +1066,7 @@
             resources.ApplyResources(this.searchTextBoxBible, "searchTextBoxBible");
             this.searchTextBoxBible.Name = "searchTextBoxBible";
             this.searchTextBoxBible.OptionsMenu = null;
-            this.searchTextBoxBible.TextChanged += new Pbp.Components.SearchTextBox.TextChange(this.searchTextBoxBible_TextChanged);
+            this.searchTextBoxBible.TextChanged += new PraiseBase.Presenter.Components.SearchTextBox.TextChange(this.searchTextBoxBible_TextChanged);
             // 
             // listViewBibleVerseList
             // 
@@ -1129,7 +1129,7 @@
             // buttonBibleTextShow
             // 
             resources.ApplyResources(this.buttonBibleTextShow, "buttonBibleTextShow");
-            this.buttonBibleTextShow.Image = global::Pbp.Properties.Resources.leinwand16;
+            this.buttonBibleTextShow.Image = global::PraiseBase.Presenter.Properties.Resources.leinwand16;
             this.buttonBibleTextShow.Name = "buttonBibleTextShow";
             this.buttonBibleTextShow.UseVisualStyleBackColor = true;
             this.buttonBibleTextShow.Click += new System.EventHandler(this.buttonBibleTextShow_Click);
@@ -1200,14 +1200,14 @@
             this.toolStripButtonProjectionOff.CheckState = System.Windows.Forms.CheckState.Checked;
             this.toolStripButtonProjectionOff.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
             resources.ApplyResources(this.toolStripButtonProjectionOff, "toolStripButtonProjectionOff");
-            this.toolStripButtonProjectionOff.Image = global::Pbp.Properties.Resources.Projection_off_36;
+            this.toolStripButtonProjectionOff.Image = global::PraiseBase.Presenter.Properties.Resources.Projection_off_36;
             this.toolStripButtonProjectionOff.Name = "toolStripButtonProjectionOff";
             this.toolStripButtonProjectionOff.Click += new System.EventHandler(this.toggleProjection);
             // 
             // toolStripButtonBlackout
             // 
             this.toolStripButtonBlackout.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolStripButtonBlackout.Image = global::Pbp.Properties.Resources.Blackout_on_36;
+            this.toolStripButtonBlackout.Image = global::PraiseBase.Presenter.Properties.Resources.Blackout_on_36;
             resources.ApplyResources(this.toolStripButtonBlackout, "toolStripButtonBlackout");
             this.toolStripButtonBlackout.Name = "toolStripButtonBlackout";
             this.toolStripButtonBlackout.Click += new System.EventHandler(this.toggleProjection);
@@ -1215,7 +1215,7 @@
             // toolStripButtonProjectionOn
             // 
             this.toolStripButtonProjectionOn.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolStripButtonProjectionOn.Image = global::Pbp.Properties.Resources.Projection_on_36;
+            this.toolStripButtonProjectionOn.Image = global::PraiseBase.Presenter.Properties.Resources.Projection_on_36;
             resources.ApplyResources(this.toolStripButtonProjectionOn, "toolStripButtonProjectionOn");
             this.toolStripButtonProjectionOn.Name = "toolStripButtonProjectionOn";
             this.toolStripButtonProjectionOn.Click += new System.EventHandler(this.toggleProjection);
@@ -1228,7 +1228,7 @@
             // toolStripButton5
             // 
             this.toolStripButton5.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolStripButton5.Image = global::Pbp.Properties.Resources.kate_36;
+            this.toolStripButton5.Image = global::PraiseBase.Presenter.Properties.Resources.kate_36;
             resources.ApplyResources(this.toolStripButton5, "toolStripButton5");
             this.toolStripButton5.Name = "toolStripButton5";
             this.toolStripButton5.Click += new System.EventHandler(this.toolStripButton5_Click);
@@ -1236,7 +1236,7 @@
             // toolStripButtonOpenCurrentSong
             // 
             this.toolStripButtonOpenCurrentSong.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolStripButtonOpenCurrentSong.Image = global::Pbp.Properties.Resources.editsong_36;
+            this.toolStripButtonOpenCurrentSong.Image = global::PraiseBase.Presenter.Properties.Resources.editsong_36;
             resources.ApplyResources(this.toolStripButtonOpenCurrentSong, "toolStripButtonOpenCurrentSong");
             this.toolStripButtonOpenCurrentSong.Name = "toolStripButtonOpenCurrentSong";
             this.toolStripButtonOpenCurrentSong.Click += new System.EventHandler(this.toolStripButtonOpenCurrentSong_Click);
@@ -1244,7 +1244,7 @@
             // toolStripButton1
             // 
             this.toolStripButton1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolStripButton1.Image = global::Pbp.Properties.Resources.search_36;
+            this.toolStripButton1.Image = global::PraiseBase.Presenter.Properties.Resources.search_36;
             resources.ApplyResources(this.toolStripButton1, "toolStripButton1");
             this.toolStripButton1.Name = "toolStripButton1";
             this.toolStripButton1.Click += new System.EventHandler(this.toolStripMenuItem3_Click);
@@ -1252,7 +1252,7 @@
             // toolStripButton3
             // 
             this.toolStripButton3.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolStripButton3.Image = global::Pbp.Properties.Resources.highlight_36;
+            this.toolStripButton3.Image = global::PraiseBase.Presenter.Properties.Resources.highlight_36;
             resources.ApplyResources(this.toolStripButton3, "toolStripButton3");
             this.toolStripButton3.Name = "toolStripButton3";
             this.toolStripButton3.Click += new System.EventHandler(this.toolStripButton3_Click);
@@ -1265,7 +1265,7 @@
             // toolStripButtonDataFolder
             // 
             this.toolStripButtonDataFolder.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolStripButtonDataFolder.Image = global::Pbp.Properties.Resources.folder_favorites_36;
+            this.toolStripButtonDataFolder.Image = global::PraiseBase.Presenter.Properties.Resources.folder_favorites_36;
             resources.ApplyResources(this.toolStripButtonDataFolder, "toolStripButtonDataFolder");
             this.toolStripButtonDataFolder.Name = "toolStripButtonDataFolder";
             this.toolStripButtonDataFolder.Click += new System.EventHandler(this.toolStripButtonDataFolder_Click);
@@ -1273,7 +1273,7 @@
             // toolStripButton4
             // 
             this.toolStripButton4.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolStripButton4.Image = global::Pbp.Properties.Resources.advancedsettings_36;
+            this.toolStripButton4.Image = global::PraiseBase.Presenter.Properties.Resources.advancedsettings_36;
             resources.ApplyResources(this.toolStripButton4, "toolStripButton4");
             this.toolStripButton4.Name = "toolStripButton4";
             this.toolStripButton4.Click += new System.EventHandler(this.toolStripButton4_Click);
@@ -1281,7 +1281,7 @@
             // toolStripButtonDisplaySettings
             // 
             this.toolStripButtonDisplaySettings.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolStripButtonDisplaySettings.Image = global::Pbp.Properties.Resources.background_36;
+            this.toolStripButtonDisplaySettings.Image = global::PraiseBase.Presenter.Properties.Resources.background_36;
             resources.ApplyResources(this.toolStripButtonDisplaySettings, "toolStripButtonDisplaySettings");
             this.toolStripButtonDisplaySettings.Name = "toolStripButtonDisplaySettings";
             this.toolStripButtonDisplaySettings.Click += new System.EventHandler(this.toolStripButtonDisplaySettings_Click);
@@ -1345,7 +1345,7 @@
             this.buttonToggleLayerMode.FlatAppearance.MouseDownBackColor = System.Drawing.SystemColors.Control;
             this.buttonToggleLayerMode.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control;
             resources.ApplyResources(this.buttonToggleLayerMode, "buttonToggleLayerMode");
-            this.buttonToggleLayerMode.Image = global::Pbp.Properties.Resources.unlink;
+            this.buttonToggleLayerMode.Image = global::PraiseBase.Presenter.Properties.Resources.unlink;
             this.buttonToggleLayerMode.Name = "buttonToggleLayerMode";
             this.buttonToggleLayerMode.UseVisualStyleBackColor = true;
             this.buttonToggleLayerMode.Click += new System.EventHandler(this.button2_Click_1);
@@ -1357,7 +1357,7 @@
             // 
             // buttonToggleLayer2
             // 
-            this.buttonToggleLayer2.Image = global::Pbp.Properties.Resources.leinwand16_no;
+            this.buttonToggleLayer2.Image = global::PraiseBase.Presenter.Properties.Resources.leinwand16_no;
             resources.ApplyResources(this.buttonToggleLayer2, "buttonToggleLayer2");
             this.buttonToggleLayer2.Name = "buttonToggleLayer2";
             this.buttonToggleLayer2.UseVisualStyleBackColor = true;
@@ -1365,7 +1365,7 @@
             // 
             // buttonToggleLayer1
             // 
-            this.buttonToggleLayer1.Image = global::Pbp.Properties.Resources.leinwand16_no;
+            this.buttonToggleLayer1.Image = global::PraiseBase.Presenter.Properties.Resources.leinwand16_no;
             resources.ApplyResources(this.buttonToggleLayer1, "buttonToggleLayer1");
             this.buttonToggleLayer1.Name = "buttonToggleLayer1";
             this.buttonToggleLayer1.UseVisualStyleBackColor = true;

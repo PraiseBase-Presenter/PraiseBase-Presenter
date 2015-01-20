@@ -27,13 +27,13 @@
 
 using System;
 using System.Windows.Forms;
-using Pbp.Forms;
-using Pbp.Properties;
-using Pbp.Manager;
+using PraiseBase.Presenter.Forms;
+using PraiseBase.Presenter.Properties;
+using PraiseBase.Presenter.Manager;
 using System.Globalization;
 using System.Collections.Generic;
 
-namespace Pbp
+namespace PraiseBase.Presenter
 {
     internal static class Program
     {

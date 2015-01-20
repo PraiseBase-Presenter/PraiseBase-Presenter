@@ -1,4 +1,4 @@
-﻿namespace Pbp.Forms
+﻿namespace PraiseBase.Presenter.Forms
 {
     partial class SongEditor
     {
@@ -397,7 +397,7 @@
             // newToolStripButton
             // 
             this.newToolStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.newToolStripButton.Image = global::Pbp.Properties.Resources.newsong_36;
+            this.newToolStripButton.Image = global::PraiseBase.Presenter.Properties.Resources.newsong_36;
             resources.ApplyResources(this.newToolStripButton, "newToolStripButton");
             this.newToolStripButton.Name = "newToolStripButton";
             this.newToolStripButton.Click += new System.EventHandler(this.ShowNewForm);
@@ -405,7 +405,7 @@
             // openToolStripButton
             // 
             this.openToolStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.openToolStripButton.Image = global::Pbp.Properties.Resources.editsong_36;
+            this.openToolStripButton.Image = global::PraiseBase.Presenter.Properties.Resources.editsong_36;
             resources.ApplyResources(this.openToolStripButton, "openToolStripButton");
             this.openToolStripButton.Name = "openToolStripButton";
             this.openToolStripButton.Click += new System.EventHandler(this.OpenFile);
@@ -413,7 +413,7 @@
             // saveToolStripButton
             // 
             this.saveToolStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.saveToolStripButton.Image = global::Pbp.Properties.Resources.save_36;
+            this.saveToolStripButton.Image = global::PraiseBase.Presenter.Properties.Resources.save_36;
             resources.ApplyResources(this.saveToolStripButton, "saveToolStripButton");
             this.saveToolStripButton.Name = "saveToolStripButton";
             this.saveToolStripButton.Click += new System.EventHandler(this.saveChild);
@@ -427,7 +427,7 @@
             // toolStripButton1
             // 
             this.toolStripButton1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolStripButton1.Image = global::Pbp.Properties.Resources.advancedsettings_36;
+            this.toolStripButton1.Image = global::PraiseBase.Presenter.Properties.Resources.advancedsettings_36;
             resources.ApplyResources(this.toolStripButton1, "toolStripButton1");
             this.toolStripButton1.Name = "toolStripButton1";
             this.toolStripButton1.Click += new System.EventHandler(this.optionsToolStripMenuItem_Click);
@@ -435,7 +435,7 @@
             // toolStripButton2
             // 
             this.toolStripButton2.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolStripButton2.Image = global::Pbp.Properties.Resources.folder_favorites_36;
+            this.toolStripButton2.Image = global::PraiseBase.Presenter.Properties.Resources.folder_favorites_36;
             resources.ApplyResources(this.toolStripButton2, "toolStripButton2");
             this.toolStripButton2.Name = "toolStripButton2";
             this.toolStripButton2.Click += new System.EventHandler(this.toolStripButton2_Click);

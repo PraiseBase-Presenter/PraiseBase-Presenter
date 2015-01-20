@@ -33,7 +33,7 @@ using System.Windows.Interop;
 using System.Windows.Media.Animation;
 using System.Windows.Media.Imaging;
 
-namespace Pbp.Forms
+namespace PraiseBase.Presenter.Forms
 {
     /// <summary>
     /// Interaction logic for UserControl1.xaml

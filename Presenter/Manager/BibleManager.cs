@@ -28,11 +28,12 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
-using Pbp.Properties;
-using Pbp.Data.Bible;
+using PraiseBase.Presenter.Properties;
+using PraiseBase.Presenter.Model.Bible;
 using System.Text.RegularExpressions;
+using PraiseBase.Presenter.Persistence.ZefaniaXML;
 
-namespace Pbp
+namespace PraiseBase.Presenter
 {
     /// <summary>
     /// Holds a list of all songs and provides
@@ -108,7 +109,7 @@ namespace Pbp
         public List<string> GetBibleFiles()
         {
             List<string> res = new List<string>();
-            DirectoryInfo di = new DirectoryInfo(Pbp.Properties.Settings.Default.DataDirectory + Path.DirectorySeparatorChar + "Bibles");
+            DirectoryInfo di = new DirectoryInfo(PraiseBase.Presenter.Properties.Settings.Default.DataDirectory + Path.DirectorySeparatorChar + "Bibles");
             if (!di.Exists)
             {
                 di.Create();
@@ -126,7 +127,7 @@ namespace Pbp
             BibleList = new Dictionary<string, BibleItem>();
             foreach (string file in GetBibleFiles())
             {
-                Pbp.IO.XMLBibleReblader rdr = new Pbp.IO.XMLBibleReblader();
+                XMLBibleReader rdr = new XMLBibleReader();
                 try
                 {
                     BibleItem bi = new BibleItem();
@@ -143,7 +144,7 @@ namespace Pbp
 
         public void LoadBibleData(string key)
         {
-            Pbp.IO.XMLBibleReblader rdr = new Pbp.IO.XMLBibleReblader();
+            XMLBibleReader rdr = new XMLBibleReader();
             try
             {
                 rdr.LoadContent(BibleList[key].Filename, BibleList[key].Bible);
@@ -156,8 +157,8 @@ namespace Pbp
 
         private List<BibleBook> SearchBookCandiates(Bible bible, string needle)
         {
-            var bkCandidates = new List<Pbp.Data.Bible.BibleBook>();
-            foreach (Pbp.Data.Bible.BibleBook bk in bible.Books)
+            var bkCandidates = new List<PraiseBase.Presenter.Model.Bible.BibleBook>();
+            foreach (PraiseBase.Presenter.Model.Bible.BibleBook bk in bible.Books)
             {
                 if (needle.Length <= bk.Name.Length && needle == bk.Name.ToLower().Substring(0, needle.Length))
                 {

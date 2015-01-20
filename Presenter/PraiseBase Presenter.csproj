@@ -8,12 +8,12 @@
     <ProjectGuid>{33D2BC6A-0AD1-4E2E-AF35-FFFB744F22C6}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Pbp</RootNamespace>
+    <RootNamespace>PraiseBase.Presenter</RootNamespace>
     <AssemblyName>PraiseBase Presenter</AssemblyName>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ApplicationIcon>Properties\Application\Computer.ico</ApplicationIcon>
-    <StartupObject>Pbp.Program</StartupObject>
+    <StartupObject>PraiseBase.Presenter.Program</StartupObject>
     <ManifestCertificateThumbprint>D45E90FD57F45BDB54368ACE3A1D7A9016546503</ManifestCertificateThumbprint>
     <ManifestKeyFile>PraiseBase Presenter_TemporaryKey.pfx</ManifestKeyFile>
     <GenerateManifests>true</GenerateManifests>
@@ -96,48 +96,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DataObjects\Bible\Bible.cs" />
-    <Compile Include="DataObjects\Bible\BibleBook.cs" />
-    <Compile Include="DataObjects\Bible\BibleChapter.cs" />
-    <Compile Include="DataObjects\Bible\BibleVerse.cs" />
-    <Compile Include="DataObjects\Bible\BibleVerseSelection.cs" />
-    <Compile Include="DataObjects\EnumHelper.cs" />
-    <Compile Include="DataObjects\Song\SongTextBorders.cs" />
-    <Compile Include="DataObjects\TextShadow.cs" />
-    <Compile Include="DataObjects\TextOutline.cs" />
-    <Compile Include="DataObjects\TextOrientation.cs" />
-    <Compile Include="DataObjects\TextFormatting.cs" />
-    <Compile Include="DataObjects\Statistics\StatisticsItem.cs" />
-    <Compile Include="DataObjects\Statistics\StatisticsDate.cs" />
-    <Compile Include="DataObjects\Statistics\Statistics.cs" />
-    <Compile Include="DataObjects\Setlist.cs" />
-    <Compile Include="DataObjects\Song\SongQualityAssuranceIndicator.cs" />
-    <Compile Include="DataObjects\Song\Song.cs" />
-    <Compile Include="DataObjects\Song\SongAuthor.cs" />
-    <Compile Include="DataObjects\Song\SongBook.cs" />
-    <Compile Include="DataObjects\Song\SongFileType.cs" />
-    <Compile Include="DataObjects\Song\SongPart.cs" />
-    <Compile Include="DataObjects\Song\SongPartList.cs" />
-    <Compile Include="DataObjects\Song\SongSlide.cs" />
-    <Compile Include="DataObjects\Song\SongSlideList.cs" />
-    <Compile Include="DataObjects\Song\SongTempo.cs" />
-    <Compile Include="DataObjects\TagList.cs" />
     <Compile Include="Editor.cs" />
-    <Compile Include="IO\PowerPraiseConstants.cs" />
-    <Compile Include="IO\Reader\CcliUsrSongFileReader.cs" />
-    <Compile Include="IO\Reader\StatisticsReader.cs" />
-    <Compile Include="IO\Reader\SongFileReaderFactory.cs" />
-    <Compile Include="IO\Reader\OpenLyricsSongFileReader.cs" />
-    <Compile Include="IO\Reader\PowerPraiseSongFileReader.cs" />
-    <Compile Include="IO\Writer\XmlWriterHelper.cs" />
-    <Compile Include="IO\Writer\StatisticsWriter.cs" />
-    <Compile Include="IO\Writer\PowerPraiseSongFileWriter.cs" />
-    <Compile Include="IO\Reader\SetlistReader.cs" />
-    <Compile Include="IO\Writer\SetlistWriter.cs" />
-    <Compile Include="IO\Reader\SongFileReader.cs" />
-    <Compile Include="IO\Writer\SongFileWriterFactory.cs" />
-    <Compile Include="IO\Writer\SongFileWriter.cs" />
-    <Compile Include="IO\Reader\XMLBibleReader.cs" />
     <Compile Include="Manager\BibleManager.cs" />
     <Compile Include="Manager\ProjectionManager.cs" />
     <Compile Include="Manager\ScreenManager.cs" />
@@ -271,9 +230,7 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Utils\FileUtils.cs" />
-    <Compile Include="Utils\ImageUtils.cs" />
-    <Compile Include="Utils\StringUtils.cs" />
+    <None Include="ClassDiagram1.cd" />
     <None Include="Properties\Application\translate_disabled_small.png" />
     <None Include="Properties\Application\translate_small.png" />
     <None Include="Properties\Application\translate_cross_small.png" />
@@ -607,6 +564,12 @@
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Service References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Core\PraiseBase Core Libraries.csproj">
+      <Project>{67651B76-5ABD-4040-9A8F-3833130FC77D}</Project>
+      <Name>PraiseBase Core Libraries</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

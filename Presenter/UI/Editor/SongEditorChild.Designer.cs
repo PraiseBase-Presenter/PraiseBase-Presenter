@@ -1,4 +1,4 @@
-﻿namespace Pbp.Forms
+﻿namespace PraiseBase.Presenter.Forms
 {
     partial class SongEditorChild
     {
@@ -495,7 +495,7 @@
             // buttonDuplicateSlide
             // 
             resources.ApplyResources(this.buttonDuplicateSlide, "buttonDuplicateSlide");
-            this.buttonDuplicateSlide.Image = global::Pbp.Properties.Resources.editcopy;
+            this.buttonDuplicateSlide.Image = global::PraiseBase.Presenter.Properties.Resources.editcopy;
             this.buttonDuplicateSlide.Name = "buttonDuplicateSlide";
             this.buttonDuplicateSlide.UseVisualStyleBackColor = true;
             this.buttonDuplicateSlide.Click += new System.EventHandler(this.buttonSlideDuplicate_Click);
@@ -535,7 +535,7 @@
             // buttonAddSlide
             // 
             resources.ApplyResources(this.buttonAddSlide, "buttonAddSlide");
-            this.buttonAddSlide.Image = global::Pbp.Properties.Resources.edit_add;
+            this.buttonAddSlide.Image = global::PraiseBase.Presenter.Properties.Resources.edit_add;
             this.buttonAddSlide.Name = "buttonAddSlide";
             this.buttonAddSlide.UseVisualStyleBackColor = true;
             this.buttonAddSlide.Click += new System.EventHandler(this.buttonAddSlide_Click);
@@ -548,7 +548,7 @@
             // buttonAddItem
             // 
             resources.ApplyResources(this.buttonAddItem, "buttonAddItem");
-            this.buttonAddItem.Image = global::Pbp.Properties.Resources.edit_add;
+            this.buttonAddItem.Image = global::PraiseBase.Presenter.Properties.Resources.edit_add;
             this.buttonAddItem.Name = "buttonAddItem";
             this.buttonAddItem.UseVisualStyleBackColor = true;
             this.buttonAddItem.MouseDown += new System.Windows.Forms.MouseEventHandler(this.buttonAddItem_MouseDown);
@@ -556,7 +556,7 @@
             // buttonMoveUp
             // 
             resources.ApplyResources(this.buttonMoveUp, "buttonMoveUp");
-            this.buttonMoveUp.Image = global::Pbp.Properties.Resources.arrowup;
+            this.buttonMoveUp.Image = global::PraiseBase.Presenter.Properties.Resources.arrowup;
             this.buttonMoveUp.Name = "buttonMoveUp";
             this.buttonMoveUp.UseVisualStyleBackColor = true;
             this.buttonMoveUp.Click += new System.EventHandler(this.buttonMoveUp_Click);
@@ -564,7 +564,7 @@
             // buttonDelItem
             // 
             resources.ApplyResources(this.buttonDelItem, "buttonDelItem");
-            this.buttonDelItem.Image = global::Pbp.Properties.Resources.edit_remove;
+            this.buttonDelItem.Image = global::PraiseBase.Presenter.Properties.Resources.edit_remove;
             this.buttonDelItem.Name = "buttonDelItem";
             this.buttonDelItem.UseVisualStyleBackColor = true;
             this.buttonDelItem.Click += new System.EventHandler(this.buttonDelItem_Click);
@@ -572,7 +572,7 @@
             // buttonMoveDown
             // 
             resources.ApplyResources(this.buttonMoveDown, "buttonMoveDown");
-            this.buttonMoveDown.Image = global::Pbp.Properties.Resources.arrowdown;
+            this.buttonMoveDown.Image = global::PraiseBase.Presenter.Properties.Resources.arrowdown;
             this.buttonMoveDown.Name = "buttonMoveDown";
             this.buttonMoveDown.UseVisualStyleBackColor = true;
             this.buttonMoveDown.Click += new System.EventHandler(this.buttonMoveDown_Click);

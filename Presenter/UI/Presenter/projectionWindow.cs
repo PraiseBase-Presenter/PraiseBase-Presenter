@@ -28,10 +28,10 @@
 using System;
 using System.Drawing;
 using System.Windows.Forms;
-using Pbp.Properties;
+using PraiseBase.Presenter.Properties;
 using System.Collections.Generic;
 
-namespace Pbp.Forms
+namespace PraiseBase.Presenter.Forms
 {
     public partial class ProjectionWindow : Form
     {

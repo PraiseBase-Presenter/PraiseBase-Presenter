@@ -1,0 +1,151 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ppl version="3.0">
+  <general>
+    <title>Näher, mein Gott, zu Dir</title>
+    <category>Anbetung</category>
+    <language>Deutsch</language>
+    <guid>78dd30b2-078b-4eef-9767-dc41a6e6ab27</guid>
+    <comment>Test</comment>
+    <qualityissues>
+      <issue>Translation</issue>
+      <issue>Segmentation</issue>
+    </qualityissues>
+    <ccliNo>12123</ccliNo>
+    <author>asd as d</author>
+    <publisher>Sparrow Records</publisher>
+    <admin>Verlag ABC</admin>
+  </general>
+  <songtext>
+    <part caption="Teil 1">
+      <slide mainsize="42" backgroundnr="0">
+        <line>Näher, mein Gott, zu Dir,</line>
+        <line>sei meine Bitt'!</line>
+        <line>Näher, o Herr, zu Dir</line>
+        <line>mit jedem Schritt.</line>
+      </slide>
+      <slide mainsize="44" backgroundnr="0">
+        <line>Nur an dem Herzen Dein</line>
+        <line>kann ich geborgen sein;</line>
+        <line>deshalb die Bitte mein:</line>
+        <line>Näher zu Dir!</line>
+      </slide>
+    </part>
+    <part caption="Teil 2">
+      <slide mainsize="42" backgroundnr="0">
+        <line>Näher, mein Gott, zu Dir!</line>
+        <line>Ein jeder Tag</line>
+        <line>soll es neu zeigen mir,</line>
+        <line>was er vermag:</line>
+      </slide>
+      <slide mainsize="42" backgroundnr="0">
+        <line>Wie seiner Gnade Macht,</line>
+        <line>Erlösung hat gebracht,</line>
+        <line>in uns're Sündennacht.</line>
+        <line>Näher zu Dir!</line>
+      </slide>
+    </part>
+    <part caption="Teil 3">
+      <slide mainsize="42" backgroundnr="0">
+        <line>Näher, mein Gott, zu Dir!</line>
+        <line>Dich bet' ich an.</line>
+        <line>Wie vieles hast an mir,</line>
+        <line>Du doch getan!</line>
+      </slide>
+      <slide mainsize="42" backgroundnr="0">
+        <line>Von Banden frei und los,</line>
+        <line>ruh' ich in Deinem Schoss.</line>
+        <line>Ja, Deine Gnad' ist gross!</line>
+        <line>Näher zu Dir!</line>
+      </slide>
+    </part>
+  </songtext>
+  <order>
+    <item>Teil 1</item>
+    <item>Teil 2</item>
+    <item>Teil 3</item>
+  </order>
+  <information>
+    <copyright>
+      <position>lastslide</position>
+      <text>
+        <line>Text und Musik: Lowell Mason, 1792-1872</line>
+      </text>
+    </copyright>
+    <source>
+      <position>firstslide</position>
+      <text>
+        <line>grünes Buch 339</line>
+      </text>
+    </source>
+  </information>
+  <formatting>
+    <font>
+      <maintext>
+        <name>Times New Roman</name>
+        <size>44</size>
+        <bold>true</bold>
+        <italic>true</italic>
+        <color>16777215</color>
+        <outline>30</outline>
+        <shadow>15</shadow>
+      </maintext>
+      <translationtext>
+        <name>Times New Roman</name>
+        <size>20</size>
+        <bold>false</bold>
+        <italic>false</italic>
+        <color>16777215</color>
+        <outline>30</outline>
+        <shadow>20</shadow>
+      </translationtext>
+      <copyrighttext>
+        <name>Times New Roman</name>
+        <size>14</size>
+        <bold>false</bold>
+        <italic>false</italic>
+        <color>16777215</color>
+        <outline>30</outline>
+        <shadow>20</shadow>
+      </copyrighttext>
+      <sourcetext>
+        <name>Times New Roman</name>
+        <size>30</size>
+        <bold>false</bold>
+        <italic>false</italic>
+        <color>16777215</color>
+        <outline>30</outline>
+        <shadow>20</shadow>
+      </sourcetext>
+      <outline>
+        <enabled>false</enabled>
+        <color>0</color>
+      </outline>
+      <shadow>
+        <enabled>true</enabled>
+        <color>0</color>
+        <direction>125</direction>
+      </shadow>
+    </font>
+    <background>
+      <file>Blumen\Blume 3.jpg</file>
+    </background>
+    <linespacing>
+      <main>30</main>
+      <translation>20</translation>
+    </linespacing>
+    <textorientation>
+      <horizontal>left</horizontal>
+      <vertical>center</vertical>
+      <transpos>inline</transpos>
+    </textorientation>
+    <borders>
+      <mainleft>50</mainleft>
+      <maintop>40</maintop>
+      <mainright>60</mainright>
+      <mainbottom>70</mainbottom>
+      <copyrightbottom>30</copyrightbottom>
+      <sourcetop>20</sourcetop>
+      <sourceright>40</sourceright>
+    </borders>
+  </formatting>
+</ppl>

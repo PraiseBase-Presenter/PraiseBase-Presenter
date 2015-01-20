@@ -27,9 +27,9 @@
 
 using System;
 using System.Drawing;
-using Pbp.Properties;
+using PraiseBase.Presenter.Properties;
 
-namespace Pbp
+namespace PraiseBase.Presenter
 {
     public abstract class TextLayer : BaseLayer
     {

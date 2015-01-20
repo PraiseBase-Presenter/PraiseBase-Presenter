@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Windows.Forms;
-using Pbp.Data.Song;
+using PraiseBase.Presenter.Model.Song;
 
-namespace Pbp.Forms
+namespace PraiseBase.Presenter.Forms
 {
     public partial class QADialog : Form
     {
@@ -45,10 +45,17 @@ namespace Pbp.Forms
             else
                 SongManager.Instance.CurrentSong.Song.RemQA(SongQualityAssuranceIndicator.Segmentation);
 
-            SongManager.Instance.SaveCurrentSong();
+            try
+            {
+                SongManager.Instance.SaveCurrentSong();
 
-            DialogResult = DialogResult.OK;
-            this.Close();
+                DialogResult = DialogResult.OK;
+                this.Close();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Fehler", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
     }
 }
