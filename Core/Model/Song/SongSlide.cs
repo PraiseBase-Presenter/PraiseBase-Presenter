@@ -54,7 +54,7 @@ namespace PraiseBase.Presenter.Model.Song
         public List<string> Translation { get; set; }
 
         /// <summary>
-        /// Number of the slide image. If set to -1, no image is used
+        /// Number of the slide background image
         /// </summary>
         public int ImageNumber { get; set; }
 

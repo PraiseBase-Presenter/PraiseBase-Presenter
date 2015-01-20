@@ -146,7 +146,7 @@ namespace SongDetails
                     PictureBox previewPictureBox = new PictureBox();
                     previewPictureBox.Location = new Point(2, 2);
                     previewPictureBox.Size = new Size(panelPreviewPictureBoxContainer.Width - 4, panelPreviewPictureBoxContainer.Height - 5);
-                    int imgNr = sng.Parts[numParts].Slides[j].ImageNumber;
+                    int imgNr = sng.Parts[numParts].Slides[j].ImageNumber + 1;
                     previewPictureBox.Image = thumbs.ContainsKey(imgNr) ? thumbs[imgNr] : thumbs[0];
                     previewPictureBox.Tag = sng.RelativeImagePaths.Count >= imgNr && imgNr > 0 ? sng.RelativeImagePaths[imgNr - 1] : String.Empty;
                     previewPictureBox.Enabled = true;

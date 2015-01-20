@@ -461,7 +461,7 @@ namespace PraiseBase.Presenter.Forms
                 ProjectionManager.Instance.DisplayLayer(2, ssl);
 
                 if (SongManager.Instance.CurrentSong.Song.RelativeImagePaths.Count > 0)
-                    imageHistoryAdd(SongManager.Instance.CurrentSong.Song.RelativeImagePaths[cs.ImageNumber - 1]);
+                    imageHistoryAdd(SongManager.Instance.CurrentSong.Song.RelativeImagePaths[cs.ImageNumber]);
             }
         }
 

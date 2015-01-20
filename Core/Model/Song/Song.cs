@@ -364,15 +364,15 @@ namespace PraiseBase.Presenter.Model.Song
         {
             try
             {
-                if (nr < 1)
+                if (nr < 0)
                 {
                     return null;
                 }
-                if (RelativeImagePaths[nr - 1] == null)
+                if (RelativeImagePaths[nr] == null)
                 {
                     throw new Exception("Das Bild mit der Nummer " + nr + " existiert nicht!");
                 }
-                return RelativeImagePaths[nr - 1];
+                return RelativeImagePaths[nr];
             }
             catch (Exception e)
             {
