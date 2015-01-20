@@ -47,6 +47,7 @@ namespace PraiseBase.Presenter
         {
             public Song Song { get; set; }
             public string Filename { get; set; }
+            public ISongFilePlugin Plugin { get; set; }
             public bool SwitchTextAndTranlation { get; set; }
         }
 
@@ -155,8 +156,8 @@ namespace PraiseBase.Presenter
                 try
                 {
                     SongItem si = new SongItem();
-                    ISongFilePlugin sfr = SongFilePluginFactory.Create(path);
-                    si.Song = sfr.Load(path);
+                    si.Plugin = SongFilePluginFactory.Create(path);
+                    si.Song = si.Plugin.Load(path);
                     si.Filename = path;
                     if (si.Song.GUID == Guid.Empty)
                     {
@@ -209,57 +210,23 @@ namespace PraiseBase.Presenter
         }
 
         /// <summary>
-        /// Reloads the song at the specified position
-        /// </summary>
-        public void ReloadSong(Guid g)
-        {
-            // TODO Check for inexistent items
-            string path = SongList[g].Filename;
-            try
-            {
-                SongItem si = new SongItem();
-                ISongFilePlugin sfr = SongFilePluginFactory.Create(path);
-                si.Song = sfr.Load(path);
-                si.Filename = path;
-
-                // TODO
-                if (g == si.Song.GUID)
-                {
-                    SongList[g] = si;
-                }
-                else
-                {
-                    SongList.Remove(g);
-                    SongList[si.Song.GUID] = si;
-
-                    // TODO Inform others that guid has changed
-                }
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine("Unable to load song file " + path + " (" + e.Message + ")");
-            }
-        }
-
-        /// <summary>
         /// Reloads the song with the specified path
         /// </summary>
         /// <param name="path">Path to the song file</param>
         public void ReloadSongByPath(string path)
         {
-            if (!string.IsNullOrEmpty(path))
+            SongItem si = this.GetSongItemByPath(path);
+            if (si != null)
             {
-                foreach (var kvp in SongList)
+                try
                 {
-                    if (String.Compare(
-                        Path.GetFullPath(kvp.Value.Filename).TrimEnd('\\'),
-                        Path.GetFullPath(path).TrimEnd('\\'),
-                        StringComparison.InvariantCultureIgnoreCase) == 0)
-                    {
-                        ReloadSong(kvp.Key);
-                        return;
-                    }
+                    si.Song = si.Plugin.Load(si.Filename);
                 }
+                catch (Exception e)
+                {
+                    Console.WriteLine("Unable to load song file " + path + " (" + e.Message + ")");
+                }
+                return;
             }
         }
 
@@ -267,7 +234,7 @@ namespace PraiseBase.Presenter
         /// Gets the song with the specified path
         /// </summary>
         /// <param name="path">Path to the song file</param>
-        public Song GetSongByPath(string path)
+        public SongItem GetSongItemByPath(string path)
         {
             if (!string.IsNullOrEmpty(path))
             {
@@ -278,7 +245,7 @@ namespace PraiseBase.Presenter
                         Path.GetFullPath(path).TrimEnd('\\'),
                         StringComparison.InvariantCultureIgnoreCase) == 0)
                     {
-                        return kvp.Value.Song;
+                        return kvp.Value;
                     }
                 }
             }
