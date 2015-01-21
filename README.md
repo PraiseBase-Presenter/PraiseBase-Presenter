@@ -1,5 +1,5 @@
 # PraiseBase-Presenter
-Open-Source Worship Presentation Software
+Open-Source Worship Song Presentation Software
 
 ![Teaser](http://praisebase.org/wp-content/uploads/2012/09/presentation.jpg)
 
