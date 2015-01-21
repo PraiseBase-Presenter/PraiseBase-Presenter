@@ -2,7 +2,7 @@
  *   PraiseBase Presenter
  *   The open source lyrics and image projection software for churches
  *
- *   http://code.google.com/p/praisebasepresenter
+ *   http://praisebase.org
  *
  *   This program is free software; you can redistribute it and/or
  *   modify it under the terms of the GNU General Public License

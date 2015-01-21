@@ -17,7 +17,7 @@
     <ManifestCertificateThumbprint>D45E90FD57F45BDB54368ACE3A1D7A9016546503</ManifestCertificateThumbprint>
     <ManifestKeyFile>PraiseBase Presenter_TemporaryKey.pfx</ManifestKeyFile>
     <GenerateManifests>true</GenerateManifests>
-    <SignManifests>true</SignManifests>
+    <SignManifests>false</SignManifests>
     <IsWebBootstrapper>false</IsWebBootstrapper>
     <FileUpgradeFlags>
     </FileUpgradeFlags>
@@ -230,7 +230,6 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <None Include="ClassDiagram1.cd" />
     <None Include="Properties\Application\translate_disabled_small.png" />
     <None Include="Properties\Application\translate_small.png" />
     <None Include="Properties\Application\translate_cross_small.png" />
@@ -445,7 +444,6 @@
     <None Include="Properties\Application\Computer.ico" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="PraiseBase Presenter_TemporaryKey.pfx" />
     <None Include="Properties\Application\Blackout on2.png" />
   </ItemGroup>
   <ItemGroup>
