@@ -27,8 +27,6 @@ namespace PraiseBase.Presenter.Model.Bible
     /// <summary>
     /// XML bible reader based on Zefania XML format
     ///
-    /// Author: Nicolas Perrenoud<nicu@lavine.ch>
-    ///
     /// Zefania XML Project Website: http://sourceforge.net/projects/zefania-sharp/
     /// Wikipedia: http://de.wikipedia.org/wiki/Zefania_XML
     /// Docs: http://bgfdb.de/zefaniaxml/bml/

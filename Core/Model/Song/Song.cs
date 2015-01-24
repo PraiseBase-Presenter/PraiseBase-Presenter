@@ -28,8 +28,6 @@ namespace PraiseBase.Presenter.Model.Song
 {
     /// <summary>
     /// Keeps and manages all song related data loaded form an xml file
-    ///
-    /// Author: Nicolas Perrenoud, nicu_at_lavine.ch
     /// </summary>
     [Serializable()]
     public class Song : ISerializable
