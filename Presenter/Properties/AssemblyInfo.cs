@@ -8,7 +8,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyTitle("PraiseBase Presenter")]
 [assembly: AssemblyDescription("Projects song lyrics and images using multiple screens")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("PraiseBase Langenthal")]
+[assembly: AssemblyCompany("PraiseBase.org")]
 [assembly: AssemblyProduct("PraiseBase Presenter")]
 [assembly: AssemblyCopyright("Copyright © PraiseBase.org 2008")]
 [assembly: AssemblyTrademark("PraiseBase")]
