@@ -289,16 +289,17 @@ namespace PraiseBase.Presenter.Model.Song
         {
             get
             {
-                bool translated = false;
-                foreach (SongSlide s in Slides)
+                foreach (var p in Parts)
                 {
-                    if (s.Translated)
+                    foreach (var s in p.Slides)
                     {
-                        translated = true;
-                        break;
+                        if (s.Translated)
+                        {
+                            return true;
+                        }
                     }
                 }
-                return translated;
+                return false;
             }
         }
 
