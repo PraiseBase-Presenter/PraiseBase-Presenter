@@ -411,16 +411,18 @@ namespace PraiseBase.Presenter.Forms
         {
             Application.DoEvents();
 
+            var s = SongManager.Instance.CurrentSong.Song;
+
             if (listViewSongHistory.Items.Count == 0 ||
-                (Guid)listViewSongHistory.Items[0].Tag != SongManager.Instance.CurrentSong.Song.GUID)
+                (Guid)listViewSongHistory.Items[0].Tag != s.GUID)
             {
-                var lvi = new ListViewItem(SongManager.Instance.CurrentSong.Song.Title);
-                lvi.Tag = SongManager.Instance.CurrentSong.Song.GUID;
+                var lvi = new ListViewItem(s.Title);
+                lvi.Tag = s.GUID;
                 listViewSongHistory.Items.Insert(0, lvi);
                 listViewSongHistory.Columns[0].Width = -2;
             }
 
-            PraiseBase.Presenter.Model.Song.SongSlide cs = SongManager.Instance.CurrentSong.Song.Parts[e.PartNumber].Slides[e.SlideNumber];
+            PraiseBase.Presenter.Model.Song.SongSlide cs = s.Parts[e.PartNumber].Slides[e.SlideNumber];
 
             SongSlideLayerFormatting slideFormatting = new SongSlideLayerFormatting();
             if (Settings.Default.ProjectionUseMaster)
@@ -433,13 +435,14 @@ namespace PraiseBase.Presenter.Forms
             }
             else
             {
-                slideFormatting.TextFont = SongManager.Instance.CurrentSong.Song.MainText.Font;
-                slideFormatting.TranslationFont = SongManager.Instance.CurrentSong.Song.TranslationText.Font;
-                slideFormatting.LineSpacing = SongManager.Instance.CurrentSong.Song.MainText.LineSpacing;
-                slideFormatting.TextBrush = new SolidBrush(SongManager.Instance.CurrentSong.Song.MainText.Color);
-                slideFormatting.TranslationBrush = new SolidBrush(SongManager.Instance.CurrentSong.Song.TranslationText.Color);
+                slideFormatting.TextFont = s.MainText.Font;
+                slideFormatting.TranslationFont = s.TranslationText.Font;
+                slideFormatting.LineSpacing = s.MainText.LineSpacing;
+                slideFormatting.TextBrush = new SolidBrush(s.MainText.Color);
+                slideFormatting.TranslationBrush = new SolidBrush(s.TranslationText.Color);
             }
-            slideFormatting.TextOrientation = SongManager.Instance.CurrentSong.Song.TextOrientation;
+
+            slideFormatting.TextOrientation = s.TextOrientation;
             var ssl = new SongSlideLayer(cs, slideFormatting);
             ssl.SwitchTextAndTranslation = SongManager.Instance.CurrentSong.SwitchTextAndTranlation;
 
@@ -471,12 +474,12 @@ namespace PraiseBase.Presenter.Forms
             else
             {
                 ImageLayer iml = new ImageLayer();
-                iml.Image = ImageManager.Instance.GetImage(SongManager.Instance.CurrentSong.Song.GetImage(cs.ImageNumber));
+                iml.Image = ImageManager.Instance.GetImage(s.GetImage(cs.ImageNumber));
                 ProjectionManager.Instance.DisplayLayer(1, iml, Settings.Default.ProjectionFadeTimeLayer1);
                 ProjectionManager.Instance.DisplayLayer(2, ssl);
 
-                if (SongManager.Instance.CurrentSong.Song.RelativeImagePaths.Count > 0)
-                    imageHistoryAdd(SongManager.Instance.CurrentSong.Song.RelativeImagePaths[cs.ImageNumber]);
+                if (s.RelativeImagePaths.Count > 0)
+                    imageHistoryAdd(s.RelativeImagePaths[cs.ImageNumber]);
             }
         }
 
