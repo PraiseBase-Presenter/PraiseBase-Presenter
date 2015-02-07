@@ -33,6 +33,16 @@ namespace PraiseBase.Presenter.Projection
 
         public SongTextBorders TextBorders;
 
+        /// <summary>
+        /// True of the text should be outlined
+        /// </summary>
+        public bool TextOutlineEnabled { get; set; }
+
+        /// <summary>
+        /// True if the text should have a shadow
+        /// </summary>
+        public bool TextShadowEnabled { get; set; }
+
         public Boolean ScaleFontSize;
     }
 }

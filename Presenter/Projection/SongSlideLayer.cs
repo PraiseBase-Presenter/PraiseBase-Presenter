@@ -54,8 +54,6 @@ namespace PraiseBase.Presenter
                 StringFormat strFormat = new StringFormat();
 
                 int padding = formatting.TextBorders.TextLeft;
-                int shadowThickness = formatting.MainText.Shadow.Distance;
-                int outLineThickness = formatting.MainText.Outline.Width;
                 String str = String.Empty;
 
                 int usableWidth = w - (2 * padding);
@@ -123,46 +121,57 @@ namespace PraiseBase.Presenter
                 int textX = textStartX;
                 int textY = textStartY;
 
-                if (shadowThickness > 0)
+                // Shadow
+                if (formatting.TextShadowEnabled)
                 {
-                    shadodBrush = new SolidBrush(Color.FromArgb(15, formatting.MainText.Shadow.Color));
-                    gr.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.HighQuality;
-                    gr.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.HighQualityBilinear;
-                    gr.TextRenderingHint = TextRenderingHint.AntiAliasGridFit;
-
-                    foreach (string s in MainText)
+                    int shadowThickness = formatting.MainText.Shadow.Distance;
+                    if (shadowThickness > 0)
                     {
-                        for (int x = textX; x <= textX + shadowThickness; x++)
+                        shadodBrush = new SolidBrush(Color.FromArgb(15, formatting.MainText.Shadow.Color));
+                        gr.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.HighQuality;
+                        gr.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.HighQualityBilinear;
+                        gr.TextRenderingHint = TextRenderingHint.AntiAliasGridFit;
+
+                        foreach (string s in MainText)
                         {
-                            for (int y = textY; y <= textY + shadowThickness; y++)
+                            for (int x = textX; x <= textX + shadowThickness; x++)
                             {
-                                gr.DrawString(s, formatting.MainText.Font, shadodBrush, new Point(x, y), strFormat);
+                                for (int y = textY; y <= textY + shadowThickness; y++)
+                                {
+                                    gr.DrawString(s, formatting.MainText.Font, shadodBrush, new Point(x, y), strFormat);
+                                }
                             }
+                            textY += lineHeight + formatting.MainText.LineSpacing;
                         }
-                        textY += lineHeight + formatting.MainText.LineSpacing;
+                        textY = textStartY;
                     }
-                    textY = textStartY;
                 }
-                if (outLineThickness > 0)
+
+                // Outline
+                if (formatting.TextOutlineEnabled)
                 {
-                    gr.SmoothingMode = SmoothingMode.None;
-                    gr.InterpolationMode = InterpolationMode.Low;
-                    gr.TextRenderingHint = TextRenderingHint.ClearTypeGridFit;
-
-                    Brush br = new SolidBrush(formatting.MainText.Outline.Color);
-
-                    foreach (string s in MainText)
+                    int outLineThickness = formatting.MainText.Outline.Width;
+                    if (outLineThickness > 0)
                     {
-                        for (int x = textX - outLineThickness * 2; x <= textX + outLineThickness * 2; x += 2)
+                        gr.SmoothingMode = SmoothingMode.None;
+                        gr.InterpolationMode = InterpolationMode.Low;
+                        gr.TextRenderingHint = TextRenderingHint.ClearTypeGridFit;
+
+                        Brush br = new SolidBrush(formatting.MainText.Outline.Color);
+
+                        foreach (string s in MainText)
                         {
-                            for (int y = textY - outLineThickness * 2; y <= textY + outLineThickness * 2; y += 2)
+                            for (int x = textX - outLineThickness * 2; x <= textX + outLineThickness * 2; x += 2)
                             {
-                                gr.DrawString(s, formatting.MainText.Font, br, new Point(x, y), strFormat);
+                                for (int y = textY - outLineThickness * 2; y <= textY + outLineThickness * 2; y += 2)
+                                {
+                                    gr.DrawString(s, formatting.MainText.Font, br, new Point(x, y), strFormat);
+                                }
                             }
+                            textY += lineHeight + formatting.MainText.LineSpacing;
                         }
-                        textY += lineHeight + formatting.MainText.LineSpacing;
+                        textY = textStartY;
                     }
-                    textY = textStartY;
                 }
 
                 foreach (string s in MainText)
@@ -171,6 +180,7 @@ namespace PraiseBase.Presenter
                     textY += lineHeight + formatting.MainText.LineSpacing;
                 }
 
+                // Sub-text (translation)
                 if (SubText != null && SubText.Count > 0)
                 {
                     int transStartX = textStartX + 10;
@@ -178,46 +188,57 @@ namespace PraiseBase.Presenter
                     textX = transStartX;
                     textY = transStartY;
 
-                    if (shadowThickness > 0)
+                    // Shadow
+                    if (formatting.TextShadowEnabled)
                     {
-                        shadodBrush = new SolidBrush(Color.FromArgb(15, formatting.TranslationText.Shadow.Color));
-                        gr.SmoothingMode = SmoothingMode.HighQuality;
-                        gr.InterpolationMode = InterpolationMode.HighQualityBilinear;
-                        gr.TextRenderingHint = TextRenderingHint.AntiAliasGridFit;
-
-                        foreach (string s in SubText)
+                        int shadowThickness = formatting.TranslationText.Shadow.Distance;
+                        if (shadowThickness > 0)
                         {
-                            for (int x = textX; x <= textX + shadowThickness; x++)
+                            shadodBrush = new SolidBrush(Color.FromArgb(15, formatting.TranslationText.Shadow.Color));
+                            gr.SmoothingMode = SmoothingMode.HighQuality;
+                            gr.InterpolationMode = InterpolationMode.HighQualityBilinear;
+                            gr.TextRenderingHint = TextRenderingHint.AntiAliasGridFit;
+
+                            foreach (string s in SubText)
                             {
-                                for (int y = textY; y <= textY + shadowThickness; y++)
+                                for (int x = textX; x <= textX + shadowThickness; x++)
                                 {
-                                    gr.DrawString(s, formatting.TranslationText.Font, shadodBrush, new Point(x, y), strFormat);
+                                    for (int y = textY; y <= textY + shadowThickness; y++)
+                                    {
+                                        gr.DrawString(s, formatting.TranslationText.Font, shadodBrush, new Point(x, y), strFormat);
+                                    }
                                 }
+                                textY += lineHeight + formatting.TranslationText.LineSpacing;
                             }
-                            textY += lineHeight + formatting.TranslationText.LineSpacing;
+                            textY = transStartY;
                         }
-                        textY = transStartY;
                     }
-                    if (outLineThickness > 0)
+
+                    // Outline
+                    if (formatting.TextOutlineEnabled)
                     {
-                        gr.SmoothingMode = SmoothingMode.None;
-                        gr.InterpolationMode = InterpolationMode.Low;
-                        gr.TextRenderingHint = TextRenderingHint.ClearTypeGridFit;
-
-                        Brush br = new SolidBrush(formatting.TranslationText.Outline.Color);
-
-                        foreach (string s in SubText)
+                        int outLineThickness = formatting.MainText.Outline.Width;
+                        if (outLineThickness > 0)
                         {
-                            for (int x = textX - outLineThickness * 2; x <= textX + outLineThickness * 2; x += 2)
+                            gr.SmoothingMode = SmoothingMode.None;
+                            gr.InterpolationMode = InterpolationMode.Low;
+                            gr.TextRenderingHint = TextRenderingHint.ClearTypeGridFit;
+
+                            Brush br = new SolidBrush(formatting.TranslationText.Outline.Color);
+
+                            foreach (string s in SubText)
                             {
-                                for (int y = textY - outLineThickness * 2; y <= textY + outLineThickness * 2; y += 2)
+                                for (int x = textX - outLineThickness * 2; x <= textX + outLineThickness * 2; x += 2)
                                 {
-                                    gr.DrawString(s, formatting.TranslationText.Font, br, new Point(x, y), strFormat);
+                                    for (int y = textY - outLineThickness * 2; y <= textY + outLineThickness * 2; y += 2)
+                                    {
+                                        gr.DrawString(s, formatting.TranslationText.Font, br, new Point(x, y), strFormat);
+                                    }
                                 }
+                                textY += lineHeight + formatting.TranslationText.LineSpacing;
                             }
-                            textY += lineHeight + formatting.TranslationText.LineSpacing;
+                            textY = transStartY;
                         }
-                        textY = transStartY;
                     }
 
                     foreach (string s in SubText)
