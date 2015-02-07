@@ -20,11 +20,12 @@
  *
  */
 
+using System;
 using System.Drawing;
 
 namespace PraiseBase.Presenter.Model
 {
-    public class TextOutline
+    public class TextOutline : ICloneable
     {
         public int Width { get; set; }
 
@@ -45,6 +46,11 @@ namespace PraiseBase.Presenter.Model
         {
             return Width.GetHashCode()
                    ^ Color.GetHashCode();
+        }
+
+        public object Clone()
+        {
+            return new TextOutline(Width, Color);
         }
     }
 }

@@ -905,13 +905,13 @@ namespace PraiseBase.Presenter.Forms
             slide.Text = textBoxSongText.Text;
             slide.TranslationText = textBoxSongTranslation.Text;
             SongSlideLayerFormatting slideFormatting = new SongSlideLayerFormatting();
-            slideFormatting.TextFont = sng.MainText.Font;
-            slideFormatting.TranslationFont = sng.TranslationText.Font;
-            slideFormatting.LineSpacing = sng.MainText.LineSpacing;
-            slideFormatting.TextBrush = new SolidBrush(sng.MainText.Color);
-            slideFormatting.TranslationBrush = new SolidBrush(sng.TranslationText.Color);
-            slideFormatting.TextOrientation = sng.TextOrientation;
-            slideFormatting.TextBorders = sng.TextBorders;
+            slideFormatting.MainText = (TextFormatting)sng.MainText.Clone();
+            slideFormatting.TranslationText = (TextFormatting)sng.TranslationText.Clone();
+            slideFormatting.CopyrightText = (TextFormatting)sng.CopyrightText.Clone();
+            slideFormatting.SourceText = (TextFormatting)sng.SourceText.Clone();
+            slideFormatting.TextOrientation = (TextOrientation)sng.TextOrientation.Clone();
+            slideFormatting.TextBorders = (SongTextBorders)sng.TextBorders.Clone();
+            slideFormatting.ScaleFontSize = Settings.Default.ProjectionFontScaling;
             SongSlideLayer sl = new SongSlideLayer(slide, slideFormatting);
 
             ImageLayer il = new ImageLayer();

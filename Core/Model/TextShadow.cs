@@ -20,11 +20,12 @@
  *
  */
 
+using System;
 using System.Drawing;
 
 namespace PraiseBase.Presenter.Model
 {
-    public class TextShadow
+    public class TextShadow : ICloneable
     {
         public int Size { get; set; }
 
@@ -53,6 +54,11 @@ namespace PraiseBase.Presenter.Model
                  ^ Distance.GetHashCode()
                  ^ Direction.GetHashCode()
                  ^ Color.GetHashCode();
+        }
+
+        public object Clone()
+        {
+            return new TextShadow(Size, Distance, Direction, Color);
         }
     }
 }

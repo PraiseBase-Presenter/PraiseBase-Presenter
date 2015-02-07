@@ -24,7 +24,6 @@ using System;
 using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Drawing.Text;
-using PraiseBase.Presenter.Properties;
 using PraiseBase.Presenter.Model.Song;
 using PraiseBase.Presenter.Model;
 using System.Collections.Generic;
@@ -70,9 +69,9 @@ namespace PraiseBase.Presenter
             {
                 StringFormat strFormat = new StringFormat();
 
-                int padding = Settings.Default.ProjectionPadding;
-                int shadowThickness = Settings.Default.ProjectionShadowSize;
-                int outLineThickness = Settings.Default.ProjectionOutlineSize;
+                int padding = formatting.TextBorders.TextLeft;
+                int shadowThickness = formatting.MainText.Shadow.Distance;
+                int outLineThickness = formatting.MainText.Outline.Width;
                 String str = String.Empty;
 
                 int usableWidth = w - (2 * padding);
@@ -86,24 +85,24 @@ namespace PraiseBase.Presenter
                 int endSpacing = 0;
                 if (slide.Translated)
                 {
-                    strMeasureTrans = gr.MeasureString(slide.TranslationText, formatting.TranslationFont);
-                    formatting.LineSpacing += (int)(strMeasureTrans.Height / subText.Count) + formatting.LineSpacing;
-                    endSpacing = (int)(strMeasureTrans.Height / subText.Count) + formatting.LineSpacing;
+                    strMeasureTrans = gr.MeasureString(slide.TranslationText, formatting.TranslationText.Font);
+                    formatting.MainText.LineSpacing += (int)(strMeasureTrans.Height / subText.Count) + formatting.TranslationText.LineSpacing;
+                    endSpacing = (int)(strMeasureTrans.Height / subText.Count) + formatting.TranslationText.LineSpacing;
                 }
 
-                SizeF strMeasure = gr.MeasureString(slide.Text, formatting.TextFont);
+                SizeF strMeasure = gr.MeasureString(slide.Text, formatting.MainText.Font);
                 Brush shadodBrush = Brushes.Transparent;
                 int usedWidth = (int)strMeasure.Width;
-                int usedHeight = (int)strMeasure.Height + (formatting.LineSpacing * (mainText.Count - 1)) + endSpacing;
+                int usedHeight = (int)strMeasure.Height + (formatting.MainText.LineSpacing * (mainText.Count - 1)) + endSpacing;
 
                 float scalingFactor = 1.0f;
-                if (Settings.Default.ProjectionFontScaling && (usedWidth > usableWidth || usedHeight > usableHeight))
+                if (formatting.ScaleFontSize && (usedWidth > usableWidth || usedHeight > usableHeight))
                 {
                     scalingFactor = Math.Min((float)usableWidth / (float)usedWidth, (float)usableHeight / (float)usedHeight);
-                    formatting.TextFont = new Font(formatting.TextFont.FontFamily, formatting.TextFont.Size * scalingFactor, formatting.TextFont.Style);
-                    strMeasure = gr.MeasureString(slide.Text, formatting.TextFont);
+                    formatting.MainText.Font = new Font(formatting.MainText.Font.FontFamily, formatting.MainText.Font.Size * scalingFactor, formatting.MainText.Font.Style);
+                    strMeasure = gr.MeasureString(slide.Text, formatting.MainText.Font);
                     usedWidth = (int)strMeasure.Width;
-                    usedHeight = (int)strMeasure.Height + (formatting.LineSpacing * (mainText.Count - 1));
+                    usedHeight = (int)strMeasure.Height + (formatting.MainText.LineSpacing * (mainText.Count - 1));
                 }
                 int lineHeight = (int)(strMeasure.Height / mainText.Count);
 
@@ -144,7 +143,7 @@ namespace PraiseBase.Presenter
                 /*
                 if (pr != ProjectionMode.Simulate && shadowThickness > 0)
                 {
-                    shadodBrush = new SolidBrush(Color.FromArgb(15, Settings.Default.ProjectionShadowColor));
+                    shadodBrush = new SolidBrush(Color.FromArgb(15, formatting.MainText.Shadow.Color));
                     gr.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.HighQuality;
                     gr.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.HighQualityBilinear;
                     gr.TextRenderingHint = TextRenderingHint.AntiAliasGridFit;
@@ -168,7 +167,7 @@ namespace PraiseBase.Presenter
                     gr.InterpolationMode = InterpolationMode.Low;
                     gr.TextRenderingHint = TextRenderingHint.ClearTypeGridFit;
 
-                    Brush br = new SolidBrush(Settings.Default.ProjectionOutlineColor);
+                    Brush br = new SolidBrush(formatting.MainText.Outline.Color);
 
                     foreach (string s in mainText)
                     {
@@ -176,18 +175,18 @@ namespace PraiseBase.Presenter
                         {
                             for (int y = textY - outLineThickness * 2; y <= textY + outLineThickness * 2; y += 2)
                             {
-                                gr.DrawString(s, formatting.TextFont, br, new Point(x, y), strFormat);
+                                gr.DrawString(s, formatting.MainText.Font, br, new Point(x, y), strFormat);
                             }
                         }
-                        textY += lineHeight + formatting.LineSpacing;
+                        textY += lineHeight + formatting.MainText.LineSpacing;
                     }
                     textY = textStartY;
                 }
 
                 foreach (string s in mainText)
                 {
-                    gr.DrawString(s, formatting.TextFont, formatting.TextBrush, new Point(textX, textY), strFormat);
-                    textY += lineHeight + formatting.LineSpacing;
+                    gr.DrawString(s, formatting.MainText.Font, new SolidBrush(formatting.MainText.Color), new Point(textX, textY), strFormat);
+                    textY += lineHeight + formatting.MainText.LineSpacing;
                 }
 
                 if (slide.Translated)
@@ -200,7 +199,7 @@ namespace PraiseBase.Presenter
                     /*
                     if (pr != ProjectionMode.Simulate && shadowThickness > 0)
                     {
-                        shadodBrush = new SolidBrush(Color.FromArgb(15, Settings.Default.ProjectionShadowColor));
+                        shadodBrush = new SolidBrush(Color.FromArgb(15, formatting.TranslationText.Shadow.Color));
                         gr.SmoothingMode = SmoothingMode.HighQuality;
                         gr.InterpolationMode = InterpolationMode.HighQualityBilinear;
                         gr.TextRenderingHint = TextRenderingHint.AntiAliasGridFit;
@@ -224,7 +223,7 @@ namespace PraiseBase.Presenter
                         gr.InterpolationMode = InterpolationMode.Low;
                         gr.TextRenderingHint = TextRenderingHint.ClearTypeGridFit;
 
-                        Brush br = new SolidBrush(Settings.Default.ProjectionOutlineColor);
+                        Brush br = new SolidBrush(formatting.TranslationText.Outline.Color);
 
                         foreach (string s in subText)
                         {
@@ -232,18 +231,18 @@ namespace PraiseBase.Presenter
                             {
                                 for (int y = textY - outLineThickness * 2; y <= textY + outLineThickness * 2; y += 2)
                                 {
-                                    gr.DrawString(s, formatting.TranslationFont, br, new Point(x, y), strFormat);
+                                    gr.DrawString(s, formatting.TranslationText.Font, br, new Point(x, y), strFormat);
                                 }
                             }
-                            textY += lineHeight + formatting.LineSpacing;
+                            textY += lineHeight + formatting.TranslationText.LineSpacing;
                         }
                         textY = transStartY;
                     }
 
                     foreach (string s in subText)
                     {
-                        gr.DrawString(s, formatting.TranslationFont, formatting.TranslationBrush, new Point(textX, textY), strFormat);
-                        textY += lineHeight + formatting.LineSpacing;
+                        gr.DrawString(s, formatting.TranslationText.Font, new SolidBrush(formatting.TranslationText.Color), new Point(textX, textY), strFormat);
+                        textY += lineHeight + formatting.TranslationText.LineSpacing;
                     }
                 }
             }
@@ -257,7 +256,7 @@ namespace PraiseBase.Presenter
                 int headerPoxY = formatting.TextBorders.SourceTop;
                 StringFormat headerStrFormat = new StringFormat();
                 headerStrFormat.Alignment = StringAlignment.Far;
-                gr.DrawString(HeaderText, formatting.TextFont, formatting.TextBrush, new Point(headerPosX, headerPoxY), headerStrFormat);
+                gr.DrawString(HeaderText, formatting.SourceText.Font, new SolidBrush(formatting.SourceText.Color), new Point(headerPosX, headerPoxY), headerStrFormat);
             }
 
             //
@@ -265,12 +264,12 @@ namespace PraiseBase.Presenter
             //
             if (FooterText != null && FooterText != String.Empty)
             {
-                SizeF footerMeasure = gr.MeasureString(FooterText, formatting.TextFont);
+                SizeF footerMeasure = gr.MeasureString(FooterText, formatting.SourceText.Font);
                 int footerPosX = w / 2;
                 int footerPosY = h - formatting.TextBorders.CopyrightBottom - (int)footerMeasure.Height;
                 StringFormat footerStrFormat = new StringFormat();
                 footerStrFormat.Alignment = StringAlignment.Center;
-                gr.DrawString(FooterText, formatting.TextFont, formatting.TextBrush, new Point(footerPosX, footerPosY), footerStrFormat);
+                gr.DrawString(FooterText, formatting.SourceText.Font, new SolidBrush(formatting.SourceText.Color), new Point(footerPosX, footerPosY), footerStrFormat);
             }
         }
     }

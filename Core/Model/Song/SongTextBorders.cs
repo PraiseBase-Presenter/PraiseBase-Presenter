@@ -20,9 +20,10 @@
  *
  */
 
+using System;
 namespace PraiseBase.Presenter.Model
 {
-    public class SongTextBorders
+    public class SongTextBorders : ICloneable
     {
         public int TextLeft { get; set; }
 
@@ -63,6 +64,11 @@ namespace PraiseBase.Presenter.Model
                  ^ CopyrightBottom.GetHashCode()
                  ^ SourceTop.GetHashCode()
                  ^ SourceRight.GetHashCode();
+        }
+
+        public object Clone()
+        {
+            return new SongTextBorders(TextLeft, TextTop, TextRight, TextBottom, CopyrightBottom, SourceTop, SourceRight);
         }
     }
 }

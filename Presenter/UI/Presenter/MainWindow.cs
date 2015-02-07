@@ -40,6 +40,7 @@ using PraiseBase.Presenter.UI;
 using PraiseBase.Presenter.Model.Bible;
 using PraiseBase.Presenter.Persistence.Setlists;
 using PraiseBase.Presenter.Projection;
+using PraiseBase.Presenter.Model;
 
 namespace PraiseBase.Presenter.Forms
 {
@@ -425,24 +426,55 @@ namespace PraiseBase.Presenter.Forms
             PraiseBase.Presenter.Model.Song.SongSlide cs = s.Parts[e.PartNumber].Slides[e.SlideNumber];
 
             SongSlideLayerFormatting slideFormatting = new SongSlideLayerFormatting();
+            // TODO: Move static numbers to settings
             if (Settings.Default.ProjectionUseMaster)
             {
-                slideFormatting.TextFont = Settings.Default.ProjectionMasterFont;
-                slideFormatting.TranslationFont = Settings.Default.ProjectionMasterFontTranslation;
-                slideFormatting.LineSpacing = Settings.Default.ProjectionMasterLineSpacing;
-                slideFormatting.TextBrush = new SolidBrush(Settings.Default.ProjectionMasterFontColor);
-                slideFormatting.TranslationBrush = new SolidBrush(Settings.Default.ProjectionMasterTranslationColor);
+                slideFormatting.MainText = new TextFormatting(
+                    Settings.Default.ProjectionMasterFont, 
+                    Settings.Default.ProjectionMasterFontColor, 
+                    new TextOutline(Settings.Default.ProjectionOutlineSize, Settings.Default.ProjectionOutlineColor), 
+                    new TextShadow(10, Settings.Default.ProjectionShadowSize, 125, Settings.Default.ProjectionShadowColor), 
+                    Settings.Default.ProjectionMasterLineSpacing
+                );
+                slideFormatting.TranslationText = new TextFormatting(
+                    Settings.Default.ProjectionMasterFontTranslation, 
+                    Settings.Default.ProjectionMasterTranslationColor,
+                    new TextOutline(Settings.Default.ProjectionOutlineSize, Settings.Default.ProjectionOutlineColor), 
+                    new TextShadow(10, Settings.Default.ProjectionShadowSize, 125, Settings.Default.ProjectionShadowColor), 
+                    Settings.Default.ProjectionMasterLineSpacing
+                );
+                slideFormatting.CopyrightText = new TextFormatting(
+                    Settings.Default.ProjectionMasterFont, 
+                    Settings.Default.ProjectionMasterFontColor, 
+                    new TextOutline(Settings.Default.ProjectionOutlineSize, Settings.Default.ProjectionOutlineColor), 
+                    new TextShadow(10, Settings.Default.ProjectionShadowSize, 125, Settings.Default.ProjectionShadowColor), 
+                    Settings.Default.ProjectionMasterLineSpacing
+                );
+                slideFormatting.SourceText = new TextFormatting(
+                    Settings.Default.ProjectionMasterFont,
+                    Settings.Default.ProjectionMasterFontColor,
+                    new TextOutline(Settings.Default.ProjectionOutlineSize, Settings.Default.ProjectionOutlineColor),
+                    new TextShadow(10, Settings.Default.ProjectionShadowSize, 125, Settings.Default.ProjectionShadowColor),
+                    Settings.Default.ProjectionMasterLineSpacing
+                );
+                slideFormatting.TextBorders = new SongTextBorders(
+                    Settings.Default.ProjectionPadding, 
+                    Settings.Default.ProjectionPadding, 
+                    Settings.Default.ProjectionPadding, 
+                    Settings.Default.ProjectionPadding, 
+                    30, 20, 40
+                );
             }
             else
             {
-                slideFormatting.TextFont = s.MainText.Font;
-                slideFormatting.TranslationFont = s.TranslationText.Font;
-                slideFormatting.LineSpacing = s.MainText.LineSpacing;
-                slideFormatting.TextBrush = new SolidBrush(s.MainText.Color);
-                slideFormatting.TranslationBrush = new SolidBrush(s.TranslationText.Color);
+                slideFormatting.MainText = (TextFormatting)s.MainText.Clone();
+                slideFormatting.TranslationText = (TextFormatting)s.TranslationText.Clone();
+                slideFormatting.CopyrightText = (TextFormatting)s.CopyrightText.Clone();
+                slideFormatting.SourceText = (TextFormatting)s.SourceText.Clone();
+                slideFormatting.TextBorders = (SongTextBorders)s.TextBorders.Clone();
             }
-            slideFormatting.TextOrientation = s.TextOrientation;
-            slideFormatting.TextBorders = s.TextBorders;
+            slideFormatting.TextOrientation = (TextOrientation)s.TextOrientation.Clone();
+            slideFormatting.ScaleFontSize = Settings.Default.ProjectionFontScaling;
             var ssl = new SongSlideLayer(cs, slideFormatting);
             if (s.SourcePosition == "firstslide" && e.PartNumber == 0 && e.SlideNumber == 0)
             {
