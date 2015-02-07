@@ -101,28 +101,28 @@ namespace PraiseBase.Presenter.Forms
                     Settings.Default.ProjectionMasterFont,
                     Settings.Default.ProjectionMasterFontColor,
                     new TextOutline(30, Color.Black),
-                    new TextShadow(10, 20, 125, Color.Black),
+                    new TextShadow(20, 125, Color.Black),
                     Settings.Default.ProjectionMasterLineSpacing);
 
                 sng.TranslationText = new TextFormatting(
                     Settings.Default.ProjectionMasterFontTranslation,
                     Settings.Default.ProjectionMasterTranslationColor,
                     new TextOutline(30, Color.Black),
-                    new TextShadow(10, 20, 125, Color.Black),
+                    new TextShadow(20, 125, Color.Black),
                     Settings.Default.ProjectionMasterLineSpacing);
 
                 sng.CopyrightText = new TextFormatting(
                     Settings.Default.ProjectionMasterFontTranslation,
                     Settings.Default.ProjectionMasterTranslationColor,
                     new TextOutline(30, Color.Black),
-                    new TextShadow(10, 20, 125, Color.Black),
+                    new TextShadow(20, 125, Color.Black),
                     Settings.Default.ProjectionMasterLineSpacing);
 
                 sng.SourceText = new TextFormatting(
                    Settings.Default.ProjectionMasterFontTranslation,
                    Settings.Default.ProjectionMasterTranslationColor,
                    new TextOutline(30, Color.Black),
-                   new TextShadow(10, 20, 125, Color.Black),
+                   new TextShadow(20, 125, Color.Black),
                    Settings.Default.ProjectionMasterLineSpacing);
 
                 // TODO: Define a default in the configuration

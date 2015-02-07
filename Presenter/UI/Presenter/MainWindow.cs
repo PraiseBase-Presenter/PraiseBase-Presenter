@@ -433,28 +433,28 @@ namespace PraiseBase.Presenter.Forms
                     Settings.Default.ProjectionMasterFont, 
                     Settings.Default.ProjectionMasterFontColor, 
                     new TextOutline(Settings.Default.ProjectionOutlineSize, Settings.Default.ProjectionOutlineColor), 
-                    new TextShadow(10, Settings.Default.ProjectionShadowSize, 125, Settings.Default.ProjectionShadowColor), 
+                    new TextShadow(Settings.Default.ProjectionShadowSize, 125, Settings.Default.ProjectionShadowColor), 
                     Settings.Default.ProjectionMasterLineSpacing
                 );
                 slideFormatting.TranslationText = new TextFormatting(
                     Settings.Default.ProjectionMasterFontTranslation, 
                     Settings.Default.ProjectionMasterTranslationColor,
                     new TextOutline(Settings.Default.ProjectionOutlineSize, Settings.Default.ProjectionOutlineColor), 
-                    new TextShadow(10, Settings.Default.ProjectionShadowSize, 125, Settings.Default.ProjectionShadowColor), 
+                    new TextShadow(Settings.Default.ProjectionShadowSize, 125, Settings.Default.ProjectionShadowColor), 
                     Settings.Default.ProjectionMasterLineSpacing
                 );
                 slideFormatting.CopyrightText = new TextFormatting(
                     Settings.Default.ProjectionMasterCopyrightFont, 
                     Settings.Default.ProjectionMasterCopyrightColor, 
                     new TextOutline(Settings.Default.ProjectionOutlineSize, Settings.Default.ProjectionOutlineColor), 
-                    new TextShadow(10, Settings.Default.ProjectionShadowSize, 125, Settings.Default.ProjectionShadowColor), 
+                    new TextShadow(Settings.Default.ProjectionShadowSize, 125, Settings.Default.ProjectionShadowColor), 
                     Settings.Default.ProjectionMasterLineSpacing
                 );
                 slideFormatting.SourceText = new TextFormatting(
                     Settings.Default.ProjectionMasterSourceFont,
                     Settings.Default.ProjectionMasterSourceColor,
                     new TextOutline(Settings.Default.ProjectionOutlineSize, Settings.Default.ProjectionOutlineColor),
-                    new TextShadow(10, Settings.Default.ProjectionShadowSize, 125, Settings.Default.ProjectionShadowColor),
+                    new TextShadow(Settings.Default.ProjectionShadowSize, 125, Settings.Default.ProjectionShadowColor),
                     Settings.Default.ProjectionMasterLineSpacing
                 );
                 slideFormatting.TextBorders = new SongTextBorders(
