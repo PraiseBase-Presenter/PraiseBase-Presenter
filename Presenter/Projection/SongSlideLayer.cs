@@ -43,6 +43,7 @@ namespace PraiseBase.Presenter
         {
             this.slide = slide;
             this.formatting = formatting;
+            // TODO respect slide text size
         }
 
         public override void writeOut(System.Drawing.Graphics gr, object[] args, ProjectionMode pr)
