@@ -483,7 +483,7 @@ namespace PraiseBase.Presenter.Persistence.PowerPraise
         /// <returns></returns>
         private TextOrientation parseOrientation(XmlElement elem, TextOrientation defaultValue)
         {
-            TextOrientation orientation = PowerPraiseConstants.TextOrientation;
+            TextOrientation orientation = defaultValue;
             if (elem != null)
             {
                 if (elem["horizontal"] != null)

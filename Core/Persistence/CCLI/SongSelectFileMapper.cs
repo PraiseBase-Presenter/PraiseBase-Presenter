@@ -41,7 +41,7 @@ namespace PraiseBase.Presenter.Persistence.CCLI
             foreach (var v in source.Verses) {
                 SongPart p = new SongPart();
                 p.Caption = v.Caption;
-                SongSlide s = new SongSlide(sng);
+                SongSlide s = new SongSlide();
                 s.Lines.AddRange(v.Lines);
                 p.Slides.Add(s);
                 sng.Parts.Add(p);

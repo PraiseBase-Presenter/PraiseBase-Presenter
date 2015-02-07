@@ -226,11 +226,6 @@ namespace PraiseBase.Presenter.Model.Song
         public List<int> PartSequence { get; set; }
 
         /// <summary>
-        /// Gets a list of all slides. Used in the presenter song detail overview.
-        /// </summary>
-        public SongSlideList Slides { get; protected set; }
-
-        /// <summary>
         /// Gets or sets the current slide index
         /// </summary>
         public int CurrentSlide { get; set; }
@@ -311,7 +306,6 @@ namespace PraiseBase.Presenter.Model.Song
         public Song()
         {
             Themes = new TagList();
-            Slides = new SongSlideList();
             Parts = new SongPartList();
             PartSequence = new List<int>();
             RelativeImagePaths = new List<string>();

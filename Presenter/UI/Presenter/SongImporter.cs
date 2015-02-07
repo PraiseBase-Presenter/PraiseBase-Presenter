@@ -119,7 +119,7 @@ namespace PraiseBase.Presenter.Forms
                                 if (p > 0)
                                 {
                                     sng.Parts.Add(new SongPart());
-                                    sng.Parts[p].Slides.Add(new SongSlide(sng));
+                                    sng.Parts[p].Slides.Add(new SongSlide());
                                 }
                                 Match mat = rex.Match(pri);
                                 sng.Parts[p].Caption = mat.Value.Substring(0, mat.Value.Length - 1);
@@ -224,7 +224,7 @@ namespace PraiseBase.Presenter.Forms
                                 if (p > 0)
                                 {
                                     sng.Parts.Add(new SongPart());
-                                    sng.Parts[p].Slides.Add(new SongSlide(sng));
+                                    sng.Parts[p].Slides.Add(new SongSlide());
                                 }
 
                                 //Match mat = rex.Match(pri);

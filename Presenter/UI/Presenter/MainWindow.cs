@@ -39,6 +39,7 @@ using System.Globalization;
 using PraiseBase.Presenter.UI;
 using PraiseBase.Presenter.Model.Bible;
 using PraiseBase.Presenter.Persistence.Setlists;
+using PraiseBase.Presenter.Projection;
 
 namespace PraiseBase.Presenter.Forms
 {
@@ -420,7 +421,26 @@ namespace PraiseBase.Presenter.Forms
             }
 
             PraiseBase.Presenter.Model.Song.SongSlide cs = SongManager.Instance.CurrentSong.Song.Parts[e.PartNumber].Slides[e.SlideNumber];
-            var ssl = new SongSlideLayer(cs);
+
+            SongSlideLayerFormatting slideFormatting = new SongSlideLayerFormatting();
+            if (Settings.Default.ProjectionUseMaster)
+            {
+                slideFormatting.TextFont = Settings.Default.ProjectionMasterFont;
+                slideFormatting.TranslationFont = Settings.Default.ProjectionMasterFontTranslation;
+                slideFormatting.LineSpacing = Settings.Default.ProjectionMasterLineSpacing;
+                slideFormatting.TextBrush = new SolidBrush(Settings.Default.ProjectionMasterFontColor);
+                slideFormatting.TranslationBrush = new SolidBrush(Settings.Default.ProjectionMasterTranslationColor);
+            }
+            else
+            {
+                slideFormatting.TextFont = SongManager.Instance.CurrentSong.Song.MainText.Font;
+                slideFormatting.TranslationFont = SongManager.Instance.CurrentSong.Song.TranslationText.Font;
+                slideFormatting.LineSpacing = SongManager.Instance.CurrentSong.Song.MainText.LineSpacing;
+                slideFormatting.TextBrush = new SolidBrush(SongManager.Instance.CurrentSong.Song.MainText.Color);
+                slideFormatting.TranslationBrush = new SolidBrush(SongManager.Instance.CurrentSong.Song.TranslationText.Color);
+            }
+            slideFormatting.TextOrientation = SongManager.Instance.CurrentSong.Song.TextOrientation;
+            var ssl = new SongSlideLayer(cs, slideFormatting);
             ssl.SwitchTextAndTranslation = SongManager.Instance.CurrentSong.SwitchTextAndTranlation;
 
             // CTRL pressed, use image stack

@@ -28,6 +28,7 @@ using PraiseBase.Presenter.Properties;
 using PraiseBase.Presenter.Model.Song;
 using PraiseBase.Presenter.Persistence;
 using PraiseBase.Presenter.Model;
+using PraiseBase.Presenter.Projection;
 
 namespace PraiseBase.Presenter.Forms
 {
@@ -93,7 +94,7 @@ namespace PraiseBase.Presenter.Forms
                 sng.Language = PraiseBase.Presenter.Properties.Settings.Default.SongDefaultLanguage;
                 SongPart tmpPart = new SongPart();
                 tmpPart.Caption = PraiseBase.Presenter.Properties.Settings.Default.SongPartDefaultName;
-                tmpPart.Slides.Add(new SongSlide(sng));
+                tmpPart.Slides.Add(new SongSlide());
                 sng.Parts.Add(tmpPart);
 
                 sng.MainText = new TextFormatting(
@@ -386,7 +387,7 @@ namespace PraiseBase.Presenter.Forms
         {
             SongPart prt = new SongPart();
             prt.Caption = caption;
-            SongSlide sld = new SongSlide(sng);
+            SongSlide sld = new SongSlide();
             sld.ImageNumber = 0;
 
             prt.Slides.Add(sld);
@@ -415,7 +416,7 @@ namespace PraiseBase.Presenter.Forms
 
         private void buttonAddNewSlide_Click(object sender, EventArgs e)
         {
-            SongSlide sld = new SongSlide(sng);
+            SongSlide sld = new SongSlide();
             sng.Parts[currentPartId].Slides.Add(sld);
             populateTree();
             treeViewContents.SelectedNode = treeViewContents.Nodes[currentPartId].LastNode;
@@ -903,7 +904,14 @@ namespace PraiseBase.Presenter.Forms
             SongSlide slide = (SongSlide)sng.Parts[currentPartId].Slides[currentSlideId].Clone();
             slide.Text = textBoxSongText.Text;
             slide.TranslationText = textBoxSongTranslation.Text;
-            SongSlideLayer sl = new SongSlideLayer(slide);
+            SongSlideLayerFormatting slideFormatting = new SongSlideLayerFormatting();
+            slideFormatting.TextFont = sng.MainText.Font;
+            slideFormatting.TranslationFont = sng.TranslationText.Font;
+            slideFormatting.LineSpacing = sng.MainText.LineSpacing;
+            slideFormatting.TextBrush = new SolidBrush(sng.MainText.Color);
+            slideFormatting.TranslationBrush = new SolidBrush(sng.TranslationText.Color);
+            slideFormatting.TextOrientation = sng.TextOrientation;
+            SongSlideLayer sl = new SongSlideLayer(slide, slideFormatting);
 
             ImageLayer il = new ImageLayer();
             il.Image = ImageManager.Instance.GetImage(sng.GetImage(sng.Parts[currentPartId].Slides[currentSlideId].ImageNumber));

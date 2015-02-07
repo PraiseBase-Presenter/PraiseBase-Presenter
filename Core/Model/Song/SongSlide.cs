@@ -34,11 +34,6 @@ namespace PraiseBase.Presenter.Model.Song
     public class SongSlide : ICloneable, ISerializable
     {
         /// <summary>
-        /// Pointer to the song object who owns this slide
-        /// </summary>
-        private readonly Song _ownerSong;
-
-        /// <summary>
         /// All text lines of this slide
         /// </summary>
         public List<string> Lines { get; set; }
@@ -69,30 +64,6 @@ namespace PraiseBase.Presenter.Model.Song
         public bool Translated
         {
             get { return Translation.Count > 0 ? true : false; }
-        }
-
-        /// <summary>
-        /// The font object of this slide
-        /// </summary>
-        public TextFormatting MainTextFormatting
-        {
-            get { return _ownerSong.MainText; }
-        }
-
-        /// <summary>
-        /// The font object of the translation
-        /// </summary>
-        public TextFormatting TranslationTextFormatting
-        {
-            get { return _ownerSong.TranslationText; }
-        }
-
-        /// <summary>
-        /// The text orientation
-        /// </summary>
-        public TextOrientation TextOrientation
-        {
-            get { return _ownerSong.TextOrientation; }
         }
 
         /// <summary>
@@ -158,12 +129,11 @@ namespace PraiseBase.Presenter.Model.Song
         /// <summary>
         /// The slide constructor
         /// </summary>
-        public SongSlide(Song ownerSong)
+        public SongSlide()
         {
             Lines = new List<string>();
             Translation = new List<string>();
             ImageNumber = 0;
-            _ownerSong = ownerSong;
         }
 
         #region ICloneable Members
@@ -174,7 +144,7 @@ namespace PraiseBase.Presenter.Model.Song
         /// <returns>A duplicate of this slide</returns>
         public object Clone()
         {
-            var res = new SongSlide(_ownerSong);
+            var res = new SongSlide();
             res.Text = Text;
             res.TranslationText = TranslationText;
             res.PartName = PartName;

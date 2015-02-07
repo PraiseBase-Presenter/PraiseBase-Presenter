@@ -74,7 +74,7 @@ namespace PraiseBase.Presenter.Persistence.OpenLyrics
 
                 foreach (var line in verse.Lines)
                 {
-                    var slide = new SongSlide(sng);
+                    var slide = new SongSlide();
                     slide.PartName = line.Part;
                     slide.Lines.AddRange(line.Text);
                     part.Slides.Add(slide);
