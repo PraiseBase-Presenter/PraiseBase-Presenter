@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PraiseBase.Presenter.Model;
+using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
@@ -13,5 +14,6 @@ namespace PraiseBase.Presenter.Projection
         public int LineSpacing;
         public Brush TextBrush;
         public Brush TranslationBrush;
+        public TextOrientation TextOrientation;
     }
 }

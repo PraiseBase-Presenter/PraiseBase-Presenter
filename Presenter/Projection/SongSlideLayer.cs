@@ -105,7 +105,7 @@ namespace PraiseBase.Presenter
                 int lineHeight = (int)(strMeasure.Height / mainText.Count);
 
                 // Horizontal stuff
-                switch (slide.TextOrientation.Horizontal)
+                switch (formatting.TextOrientation.Horizontal)
                 {
                     case HorizontalOrientation.Left:
                         strFormat.Alignment = StringAlignment.Near;
@@ -121,7 +121,7 @@ namespace PraiseBase.Presenter
                 }
 
                 // Vertical stuff
-                switch (slide.TextOrientation.Vertical)
+                switch (formatting.TextOrientation.Vertical)
                 {
                     case VerticalOrientation.Top:
                         // Nothing to do

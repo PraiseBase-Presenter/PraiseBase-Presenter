@@ -70,7 +70,7 @@ namespace PraiseBase.Presenter.Persistence.PowerPraise
                 part.Caption = prt.Caption;
                 foreach (PowerPraiseSongSlide sld in prt.Slides)
                 {
-                    SongSlide slide = new SongSlide(song);
+                    SongSlide slide = new SongSlide();
                     slide.ImageNumber = sld.BackgroundNr;
                     slide.TextSize = sld.MainSize > 0 ? sld.MainSize : (song.MainText.Font != null ? song.MainText.Font.Size : 0);
                     slide.Lines.AddRange(sld.Lines);

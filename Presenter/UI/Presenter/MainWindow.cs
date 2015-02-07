@@ -433,12 +433,13 @@ namespace PraiseBase.Presenter.Forms
             }
             else
             {
-                slideFormatting.TextFont = cs.MainTextFormatting.Font;
-                slideFormatting.TranslationFont = cs.TranslationTextFormatting.Font;
-                slideFormatting.LineSpacing = cs.MainTextFormatting.LineSpacing;
-                slideFormatting.TextBrush = new SolidBrush(cs.MainTextFormatting.Color);
-                slideFormatting.TranslationBrush = new SolidBrush(cs.TranslationTextFormatting.Color);
+                slideFormatting.TextFont = SongManager.Instance.CurrentSong.Song.MainText.Font;
+                slideFormatting.TranslationFont = SongManager.Instance.CurrentSong.Song.TranslationText.Font;
+                slideFormatting.LineSpacing = SongManager.Instance.CurrentSong.Song.MainText.LineSpacing;
+                slideFormatting.TextBrush = new SolidBrush(SongManager.Instance.CurrentSong.Song.MainText.Color);
+                slideFormatting.TranslationBrush = new SolidBrush(SongManager.Instance.CurrentSong.Song.TranslationText.Color);
             }
+            slideFormatting.TextOrientation = SongManager.Instance.CurrentSong.Song.TextOrientation;
             var ssl = new SongSlideLayer(cs, slideFormatting);
             ssl.SwitchTextAndTranslation = SongManager.Instance.CurrentSong.SwitchTextAndTranlation;
 
