@@ -1,5 +1,5 @@
 ﻿<?xml version='1.0' encoding='utf-8'?>
-<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="Pbp.Properties" GeneratedClassName="Settings">
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="PraiseBase.Presenter.Properties" GeneratedClassName="Settings">
   <Profiles />
   <Settings>
     <Setting Name="DataDirectory" Type="System.String" Scope="User">
@@ -175,6 +175,18 @@
     </Setting>
     <Setting Name="EditorWindowSize" Type="System.Drawing.Size" Scope="User">
       <Value Profile="(Default)">1024, 768</Value>
+    </Setting>
+    <Setting Name="ProjectionMasterCopyrightFont" Type="System.Drawing.Font" Scope="User">
+      <Value Profile="(Default)">Calibri, 24pt</Value>
+    </Setting>
+    <Setting Name="ProjectionMasterSourceFont" Type="System.Drawing.Font" Scope="User">
+      <Value Profile="(Default)">Calibri, 36pt</Value>
+    </Setting>
+    <Setting Name="ProjectionMasterCopyrightColor" Type="System.Drawing.Color" Scope="User">
+      <Value Profile="(Default)">White</Value>
+    </Setting>
+    <Setting Name="ProjectionMasterSourceColor" Type="System.Drawing.Color" Scope="User">
+      <Value Profile="(Default)">White</Value>
     </Setting>
   </Settings>
 </SettingsFile>

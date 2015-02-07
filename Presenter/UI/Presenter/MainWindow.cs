@@ -444,15 +444,15 @@ namespace PraiseBase.Presenter.Forms
                     Settings.Default.ProjectionMasterLineSpacing
                 );
                 slideFormatting.CopyrightText = new TextFormatting(
-                    Settings.Default.ProjectionMasterFont, 
-                    Settings.Default.ProjectionMasterFontColor, 
+                    Settings.Default.ProjectionMasterCopyrightFont, 
+                    Settings.Default.ProjectionMasterCopyrightColor, 
                     new TextOutline(Settings.Default.ProjectionOutlineSize, Settings.Default.ProjectionOutlineColor), 
                     new TextShadow(10, Settings.Default.ProjectionShadowSize, 125, Settings.Default.ProjectionShadowColor), 
                     Settings.Default.ProjectionMasterLineSpacing
                 );
                 slideFormatting.SourceText = new TextFormatting(
-                    Settings.Default.ProjectionMasterFont,
-                    Settings.Default.ProjectionMasterFontColor,
+                    Settings.Default.ProjectionMasterSourceFont,
+                    Settings.Default.ProjectionMasterSourceColor,
                     new TextOutline(Settings.Default.ProjectionOutlineSize, Settings.Default.ProjectionOutlineColor),
                     new TextShadow(10, Settings.Default.ProjectionShadowSize, 125, Settings.Default.ProjectionShadowColor),
                     Settings.Default.ProjectionMasterLineSpacing

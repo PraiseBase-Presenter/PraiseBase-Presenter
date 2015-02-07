@@ -139,8 +139,6 @@ namespace PraiseBase.Presenter
                 int textX = textStartX;
                 int textY = textStartY;
 
-                // TODO
-                /*
                 if (pr != ProjectionMode.Simulate && shadowThickness > 0)
                 {
                     shadodBrush = new SolidBrush(Color.FromArgb(15, formatting.MainText.Shadow.Color));
@@ -154,13 +152,13 @@ namespace PraiseBase.Presenter
                         {
                             for (int y = textY; y <= textY + shadowThickness; y++)
                             {
-                                gr.DrawString(s, font, shadodBrush, new Point(x, y), strFormat);
+                                gr.DrawString(s, formatting.MainText.Font, shadodBrush, new Point(x, y), strFormat);
                             }
                         }
-                        textY += lineHeight + lineSpacing;
+                        textY += lineHeight + formatting.MainText.LineSpacing;
                     }
                     textY = textStartY;
-                }*/
+                }
                 if (pr != ProjectionMode.Simulate && outLineThickness > 0)
                 {
                     gr.SmoothingMode = SmoothingMode.None;
@@ -196,7 +194,6 @@ namespace PraiseBase.Presenter
                     textX = transStartX;
                     textY = transStartY;
 
-                    /*
                     if (pr != ProjectionMode.Simulate && shadowThickness > 0)
                     {
                         shadodBrush = new SolidBrush(Color.FromArgb(15, formatting.TranslationText.Shadow.Color));
@@ -210,13 +207,13 @@ namespace PraiseBase.Presenter
                             {
                                 for (int y = textY; y <= textY + shadowThickness; y++)
                                 {
-                                    gr.DrawString(s, fontTr, shadodBrush, new Point(x, y), strFormat);
+                                    gr.DrawString(s, formatting.TranslationText.Font, shadodBrush, new Point(x, y), strFormat);
                                 }
                             }
-                            textY += lineHeight + lineSpacing;
+                            textY += lineHeight + formatting.TranslationText.LineSpacing;
                         }
                         textY = transStartY;
-                    }*/
+                    }
                     if (pr != ProjectionMode.Simulate && outLineThickness > 0)
                     {
                         gr.SmoothingMode = SmoothingMode.None;
@@ -264,12 +261,12 @@ namespace PraiseBase.Presenter
             //
             if (FooterText != null && FooterText != String.Empty)
             {
-                SizeF footerMeasure = gr.MeasureString(FooterText, formatting.SourceText.Font);
+                SizeF footerMeasure = gr.MeasureString(FooterText, formatting.CopyrightText.Font);
                 int footerPosX = w / 2;
                 int footerPosY = h - formatting.TextBorders.CopyrightBottom - (int)footerMeasure.Height;
                 StringFormat footerStrFormat = new StringFormat();
                 footerStrFormat.Alignment = StringAlignment.Center;
-                gr.DrawString(FooterText, formatting.SourceText.Font, new SolidBrush(formatting.SourceText.Color), new Point(footerPosX, footerPosY), footerStrFormat);
+                gr.DrawString(FooterText, formatting.CopyrightText.Font, new SolidBrush(formatting.CopyrightText.Color), new Point(footerPosX, footerPosY), footerStrFormat);
             }
         }
     }
