@@ -475,7 +475,18 @@ namespace PraiseBase.Presenter.Forms
             }
             slideFormatting.TextOrientation = (TextOrientation)s.TextOrientation.Clone();
             slideFormatting.ScaleFontSize = Settings.Default.ProjectionFontScaling;
-            var ssl = new SongSlideLayer(cs, slideFormatting);
+            // TODO respect slide text size
+            var ssl = new SongSlideLayer(slideFormatting);
+            if (cs.Translated && SongManager.Instance.CurrentSong.SwitchTextAndTranlation)
+            {
+                ssl.MainText = cs.Translation;
+                ssl.SubText = cs.Lines;
+            }
+            else
+            {
+                ssl.MainText = cs.Lines;
+                ssl.SubText = cs.Translation;
+            }
             if (s.SourcePosition == "firstslide" && e.PartNumber == 0 && e.SlideNumber == 0)
             {
                 ssl.HeaderText = s.SongBooksString;
@@ -485,7 +496,6 @@ namespace PraiseBase.Presenter.Forms
             {
                 ssl.FooterText = s.Copyright;
             }
-            ssl.SwitchTextAndTranslation = SongManager.Instance.CurrentSong.SwitchTextAndTranlation;
 
             // CTRL pressed, use image stack
             if ((ModifierKeys & Keys.Control) == Keys.Control)

@@ -24,7 +24,6 @@ using System;
 using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Drawing.Text;
-using PraiseBase.Presenter.Model.Song;
 using PraiseBase.Presenter.Model;
 using System.Collections.Generic;
 using PraiseBase.Presenter.Projection;
@@ -33,18 +32,16 @@ namespace PraiseBase.Presenter
 {
     internal class SongSlideLayer : TextLayer
     {
-        private SongSlide slide;
         private SongSlideLayerFormatting formatting;
 
-        public bool SwitchTextAndTranslation { get; set; }
+        public List<String> MainText { get; set; }
+        public List<String> SubText { get; set; }
         public String HeaderText { get; set; }
         public String FooterText { get; set; }
 
-        public SongSlideLayer(SongSlide slide, SongSlideLayerFormatting formatting)
+        public SongSlideLayer(SongSlideLayerFormatting formatting)
         {
-            this.slide = slide;
             this.formatting = formatting;
-            // TODO respect slide text size
         }
 
         public override void writeOut(System.Drawing.Graphics gr, object[] args)
@@ -52,20 +49,7 @@ namespace PraiseBase.Presenter
             int w = (int)gr.VisibleClipBounds.Width;
             int h = (int)gr.VisibleClipBounds.Height;
 
-            List<String> mainText;
-            List<String> subText;
-            if (slide.Translated && SwitchTextAndTranslation)
-            {
-                mainText = slide.Translation;
-                subText = slide.Lines;
-            }
-            else
-            {
-                mainText = slide.Lines;
-                subText = slide.Translation;
-            }
-
-            if (mainText.Count > 0)
+            if (MainText.Count > 0)
             {
                 StringFormat strFormat = new StringFormat();
 
@@ -83,28 +67,28 @@ namespace PraiseBase.Presenter
                 SizeF strMeasureTrans;
 
                 int endSpacing = 0;
-                if (slide.Translated)
+                if (SubText != null && SubText.Count > 0)
                 {
-                    strMeasureTrans = gr.MeasureString(slide.TranslationText, formatting.TranslationText.Font);
-                    formatting.MainText.LineSpacing += (int)(strMeasureTrans.Height / subText.Count) + formatting.TranslationText.LineSpacing;
-                    endSpacing = (int)(strMeasureTrans.Height / subText.Count) + formatting.TranslationText.LineSpacing;
+                    strMeasureTrans = gr.MeasureString(ListToString(SubText), formatting.TranslationText.Font);
+                    formatting.MainText.LineSpacing += (int)(strMeasureTrans.Height / SubText.Count) + formatting.TranslationText.LineSpacing;
+                    endSpacing = (int)(strMeasureTrans.Height / SubText.Count) + formatting.TranslationText.LineSpacing;
                 }
 
-                SizeF strMeasure = gr.MeasureString(slide.Text, formatting.MainText.Font);
+                SizeF strMeasure = gr.MeasureString(ListToString(MainText), formatting.MainText.Font);
                 Brush shadodBrush = Brushes.Transparent;
                 int usedWidth = (int)strMeasure.Width;
-                int usedHeight = (int)strMeasure.Height + (formatting.MainText.LineSpacing * (mainText.Count - 1)) + endSpacing;
+                int usedHeight = (int)strMeasure.Height + (formatting.MainText.LineSpacing * (MainText.Count - 1)) + endSpacing;
 
                 float scalingFactor = 1.0f;
                 if (formatting.ScaleFontSize && (usedWidth > usableWidth || usedHeight > usableHeight))
                 {
                     scalingFactor = Math.Min((float)usableWidth / (float)usedWidth, (float)usableHeight / (float)usedHeight);
                     formatting.MainText.Font = new Font(formatting.MainText.Font.FontFamily, formatting.MainText.Font.Size * scalingFactor, formatting.MainText.Font.Style);
-                    strMeasure = gr.MeasureString(slide.Text, formatting.MainText.Font);
+                    strMeasure = gr.MeasureString(ListToString(MainText), formatting.MainText.Font);
                     usedWidth = (int)strMeasure.Width;
-                    usedHeight = (int)strMeasure.Height + (formatting.MainText.LineSpacing * (mainText.Count - 1));
+                    usedHeight = (int)strMeasure.Height + (formatting.MainText.LineSpacing * (MainText.Count - 1));
                 }
-                int lineHeight = (int)(strMeasure.Height / mainText.Count);
+                int lineHeight = (int)(strMeasure.Height / MainText.Count);
 
                 // Horizontal stuff
                 switch (formatting.TextOrientation.Horizontal)
@@ -146,7 +130,7 @@ namespace PraiseBase.Presenter
                     gr.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.HighQualityBilinear;
                     gr.TextRenderingHint = TextRenderingHint.AntiAliasGridFit;
 
-                    foreach (string s in mainText)
+                    foreach (string s in MainText)
                     {
                         for (int x = textX; x <= textX + shadowThickness; x++)
                         {
@@ -167,7 +151,7 @@ namespace PraiseBase.Presenter
 
                     Brush br = new SolidBrush(formatting.MainText.Outline.Color);
 
-                    foreach (string s in mainText)
+                    foreach (string s in MainText)
                     {
                         for (int x = textX - outLineThickness * 2; x <= textX + outLineThickness * 2; x += 2)
                         {
@@ -181,13 +165,13 @@ namespace PraiseBase.Presenter
                     textY = textStartY;
                 }
 
-                foreach (string s in mainText)
+                foreach (string s in MainText)
                 {
                     gr.DrawString(s, formatting.MainText.Font, new SolidBrush(formatting.MainText.Color), new Point(textX, textY), strFormat);
                     textY += lineHeight + formatting.MainText.LineSpacing;
                 }
 
-                if (slide.Translated)
+                if (SubText != null && SubText.Count > 0)
                 {
                     int transStartX = textStartX + 10;
                     int transStartY = textStartY + lineHeight;
@@ -201,7 +185,7 @@ namespace PraiseBase.Presenter
                         gr.InterpolationMode = InterpolationMode.HighQualityBilinear;
                         gr.TextRenderingHint = TextRenderingHint.AntiAliasGridFit;
 
-                        foreach (string s in subText)
+                        foreach (string s in SubText)
                         {
                             for (int x = textX; x <= textX + shadowThickness; x++)
                             {
@@ -222,7 +206,7 @@ namespace PraiseBase.Presenter
 
                         Brush br = new SolidBrush(formatting.TranslationText.Outline.Color);
 
-                        foreach (string s in subText)
+                        foreach (string s in SubText)
                         {
                             for (int x = textX - outLineThickness * 2; x <= textX + outLineThickness * 2; x += 2)
                             {
@@ -236,7 +220,7 @@ namespace PraiseBase.Presenter
                         textY = transStartY;
                     }
 
-                    foreach (string s in subText)
+                    foreach (string s in SubText)
                     {
                         gr.DrawString(s, formatting.TranslationText.Font, new SolidBrush(formatting.TranslationText.Color), new Point(textX, textY), strFormat);
                         textY += lineHeight + formatting.TranslationText.LineSpacing;
@@ -268,6 +252,19 @@ namespace PraiseBase.Presenter
                 footerStrFormat.Alignment = StringAlignment.Center;
                 gr.DrawString(FooterText, formatting.CopyrightText.Font, new SolidBrush(formatting.CopyrightText.Color), new Point(footerPosX, footerPosY), footerStrFormat);
             }
+        }
+
+        private static String ListToString(List<String> lines) {
+            string txt = "";
+            int i = 1;
+            foreach (string str in lines)
+            {
+                txt += str;
+                if (i < lines.Count)
+                    txt += Environment.NewLine;
+                i++;
+            }
+            return txt;
         }
     }
 }
