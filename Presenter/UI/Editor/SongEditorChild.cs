@@ -28,6 +28,7 @@ using PraiseBase.Presenter.Properties;
 using PraiseBase.Presenter.Model.Song;
 using PraiseBase.Presenter.Persistence;
 using PraiseBase.Presenter.Model;
+using PraiseBase.Presenter.Projection;
 
 namespace PraiseBase.Presenter.Forms
 {
@@ -903,7 +904,13 @@ namespace PraiseBase.Presenter.Forms
             SongSlide slide = (SongSlide)sng.Parts[currentPartId].Slides[currentSlideId].Clone();
             slide.Text = textBoxSongText.Text;
             slide.TranslationText = textBoxSongTranslation.Text;
-            SongSlideLayer sl = new SongSlideLayer(slide);
+            SongSlideLayerFormatting slideFormatting = new SongSlideLayerFormatting();
+            slideFormatting.TextFont = slide.MainTextFormatting.Font;
+            slideFormatting.TranslationFont = slide.TranslationTextFormatting.Font;
+            slideFormatting.LineSpacing = slide.MainTextFormatting.LineSpacing;
+            slideFormatting.TextBrush = new SolidBrush(slide.MainTextFormatting.Color);
+            slideFormatting.TranslationBrush = new SolidBrush(slide.TranslationTextFormatting.Color);
+            SongSlideLayer sl = new SongSlideLayer(slide, slideFormatting);
 
             ImageLayer il = new ImageLayer();
             il.Image = ImageManager.Instance.GetImage(sng.GetImage(sng.Parts[currentPartId].Slides[currentSlideId].ImageNumber));
