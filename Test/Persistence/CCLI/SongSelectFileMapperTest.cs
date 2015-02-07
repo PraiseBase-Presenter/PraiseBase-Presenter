@@ -140,7 +140,7 @@ namespace PraiseBase.Presenter.Persistence.CCLI
 
             var part = new SongPart();
             part.Caption = "Vers 1";
-            var slide = new SongSlide(expected);
+            var slide = new SongSlide();
             slide.Lines.Add("Lorem ipsum dolor sit amet,");
             slide.Lines.Add("consectetur adipiscing elit.");
             slide.Lines.Add("Vivamus odio massa,");
@@ -151,7 +151,7 @@ namespace PraiseBase.Presenter.Persistence.CCLI
 
             part = new SongPart();
             part.Caption = "Vers 2";
-            slide = new SongSlide(expected);
+            slide = new SongSlide();
             slide.Lines.Add("Nunc cursus libero non quam lobortis");
             slide.Lines.Add("ac pharetra leo facilisis.");
             slide.Lines.Add("Proin tortor tellus,");
@@ -162,8 +162,8 @@ namespace PraiseBase.Presenter.Persistence.CCLI
 
             part = new SongPart();
             part.Caption = "Vers 3";
-            slide = new SongSlide(expected);
-            slide = new SongSlide(expected);
+            slide = new SongSlide();
+            slide = new SongSlide();
             slide.Lines.Add("Fusce pellentesque rhoncus felis,");
             slide.Lines.Add("eu convallis ante tempus a.");
             slide.Lines.Add("Cum sociis natoque penatibus");

@@ -97,7 +97,7 @@ namespace PraiseBase.Presenter.Persistence.OpenLyrics
             var part = new SongPart();
             part.Caption = "v1";
 
-            var slide = new SongSlide(expected);
+            var slide = new SongSlide();
             slide.Text = "Amazing grace how sweet the sound<br/>that saved a wretch like me;";
             part.Slides.Add(slide);
             expected.Parts.Add(part);
@@ -234,10 +234,10 @@ namespace PraiseBase.Presenter.Persistence.OpenLyrics
             var part = new SongPart();
             part.Caption = "v1";
             part.Language = "en";
-            var slide = new SongSlide(expected);
+            var slide = new SongSlide();
             slide.Lines.Add("Amazing grace how sweet the sound that saved a wretch like me;");
             part.Slides.Add(slide);
-            slide = new SongSlide(expected);
+            slide = new SongSlide();
             slide.PartName = "women";
             slide.Lines.Add("A b c");
             slide.Lines.Add("D e f");
@@ -247,14 +247,14 @@ namespace PraiseBase.Presenter.Persistence.OpenLyrics
             part = new SongPart();
             part.Caption = "v1";
             part.Language = "de";
-            slide = new SongSlide(expected);
+            slide = new SongSlide();
             slide.Text = "Erstaunliche Ahmut, wie";
             part.Slides.Add(slide);
             expected.Parts.Add(part);
 
             part = new SongPart();
             part.Caption = "c";
-            slide = new SongSlide(expected);
+            slide = new SongSlide();
             slide.Lines.Add("");
             slide.Lines.Add("Line content.");
             part.Slides.Add(slide);
@@ -263,7 +263,7 @@ namespace PraiseBase.Presenter.Persistence.OpenLyrics
             part = new SongPart();
             part.Caption = "v2";
             part.Language = "en-US";
-            slide = new SongSlide(expected);
+            slide = new SongSlide();
             slide.PartName = "men";
             slide.Lines.Add("");
             slide.Lines.Add("Amazing grace how sweet the sound that saved a wretch like me;");
@@ -271,7 +271,7 @@ namespace PraiseBase.Presenter.Persistence.OpenLyrics
             slide.Lines.Add("Amazing grace how sweet the sound that saved a wretch like me;");
             slide.Lines.Add("Amazing grace how sweet the sound that saved a wretch like me;");
             part.Slides.Add(slide);
-            slide = new SongSlide(expected);
+            slide = new SongSlide();
             slide.PartName = "women";
             slide.Lines.Add("A b c");
             slide.Lines.Add("");
@@ -282,11 +282,11 @@ namespace PraiseBase.Presenter.Persistence.OpenLyrics
             part = new SongPart();
             part.Caption = "emptyline";
             part.Language = "de";
-            slide = new SongSlide(expected);
+            slide = new SongSlide();
             slide.Lines.Add("");
             slide.Lines.Add("");
             part.Slides.Add(slide);
-            slide = new SongSlide(expected);
+            slide = new SongSlide();
             slide.Lines.Add("");
             slide.Lines.Add("");
             slide.Lines.Add("");
@@ -298,7 +298,7 @@ namespace PraiseBase.Presenter.Persistence.OpenLyrics
             part = new SongPart();
             part.Caption = "e";
             part.Language = "de";
-            slide = new SongSlide(expected);
+            slide = new SongSlide();
             slide.Text = "This is text of ending.";
             part.Slides.Add(slide);
             expected.Parts.Add(part);

@@ -28,7 +28,7 @@ namespace PraiseBase.Presenter.Persistence.PowerPraise
             SongPart part = new SongPart();
             part.Caption = "Teil 1";
 
-            SongSlide slide = new SongSlide(song);
+            SongSlide slide = new SongSlide();
             slide.ImageNumber = 0;
             slide.TextSize = 42;
             slide.Lines.Add("Näher, mein Gott, zu Dir,");
@@ -37,7 +37,7 @@ namespace PraiseBase.Presenter.Persistence.PowerPraise
             slide.Lines.Add("mit jedem Schritt.");
             part.Slides.Add(slide);
 
-            slide = new SongSlide(song);
+            slide = new SongSlide();
             slide.ImageNumber = 0;
             slide.TextSize = 44;
             slide.Lines.Add("Nur an dem Herzen Dein");
@@ -50,7 +50,7 @@ namespace PraiseBase.Presenter.Persistence.PowerPraise
             part = new SongPart();
             part.Caption = "Teil 2";
 
-            slide = new SongSlide(song);
+            slide = new SongSlide();
             slide.ImageNumber = 0;
             slide.TextSize = 42;
             slide.Lines.Add("Näher, mein Gott, zu Dir!");
@@ -59,7 +59,7 @@ namespace PraiseBase.Presenter.Persistence.PowerPraise
             slide.Lines.Add("was er vermag:");
             part.Slides.Add(slide);
 
-            slide = new SongSlide(song);
+            slide = new SongSlide();
             slide.ImageNumber = 0;
             slide.TextSize = 42;
             slide.Lines.Add("Wie seiner Gnade Macht,");
@@ -72,7 +72,7 @@ namespace PraiseBase.Presenter.Persistence.PowerPraise
             part = new SongPart();
             part.Caption = "Teil 3";
 
-            slide = new SongSlide(song);
+            slide = new SongSlide();
             slide.ImageNumber = 0;
             slide.TextSize = 42;
             slide.Lines.Add("Näher, mein Gott, zu Dir!");
@@ -81,7 +81,7 @@ namespace PraiseBase.Presenter.Persistence.PowerPraise
             slide.Lines.Add("Du doch getan!");
             part.Slides.Add(slide);
 
-            slide = new SongSlide(song);
+            slide = new SongSlide();
             slide.ImageNumber = 0;
             slide.TextSize = 42;
             slide.Lines.Add("Von Banden frei und los,");
