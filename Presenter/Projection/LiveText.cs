@@ -48,7 +48,7 @@ namespace PraiseBase.Presenter
             FontSize = Settings.Default.ProjectionMasterFont.Size;
         }
 
-        public override void writeOut(System.Drawing.Graphics gr, object[] args, ProjectionMode pr)
+        public override void writeOut(System.Drawing.Graphics gr, object[] args)
         {
             Font font = new Font(Settings.Default.ProjectionMasterFont.FontFamily, FontSize, Settings.Default.ProjectionMasterFont.Style);
             Brush fontBrush = new SolidBrush(Settings.Default.ProjectionMasterFontColor);

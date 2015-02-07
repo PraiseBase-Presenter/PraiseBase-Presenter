@@ -47,7 +47,7 @@ namespace PraiseBase.Presenter
             // TODO respect slide text size
         }
 
-        public override void writeOut(System.Drawing.Graphics gr, object[] args, ProjectionMode pr)
+        public override void writeOut(System.Drawing.Graphics gr, object[] args)
         {
             int w = (int)gr.VisibleClipBounds.Width;
             int h = (int)gr.VisibleClipBounds.Height;
@@ -139,7 +139,7 @@ namespace PraiseBase.Presenter
                 int textX = textStartX;
                 int textY = textStartY;
 
-                if (pr != ProjectionMode.Simulate && shadowThickness > 0)
+                if (shadowThickness > 0)
                 {
                     shadodBrush = new SolidBrush(Color.FromArgb(15, formatting.MainText.Shadow.Color));
                     gr.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.HighQuality;
@@ -159,7 +159,7 @@ namespace PraiseBase.Presenter
                     }
                     textY = textStartY;
                 }
-                if (pr != ProjectionMode.Simulate && outLineThickness > 0)
+                if (outLineThickness > 0)
                 {
                     gr.SmoothingMode = SmoothingMode.None;
                     gr.InterpolationMode = InterpolationMode.Low;
@@ -194,7 +194,7 @@ namespace PraiseBase.Presenter
                     textX = transStartX;
                     textY = transStartY;
 
-                    if (pr != ProjectionMode.Simulate && shadowThickness > 0)
+                    if (shadowThickness > 0)
                     {
                         shadodBrush = new SolidBrush(Color.FromArgb(15, formatting.TranslationText.Shadow.Color));
                         gr.SmoothingMode = SmoothingMode.HighQuality;
@@ -214,7 +214,7 @@ namespace PraiseBase.Presenter
                         }
                         textY = transStartY;
                     }
-                    if (pr != ProjectionMode.Simulate && outLineThickness > 0)
+                    if (outLineThickness > 0)
                     {
                         gr.SmoothingMode = SmoothingMode.None;
                         gr.InterpolationMode = InterpolationMode.Low;

@@ -914,6 +914,16 @@ namespace PraiseBase.Presenter.Forms
             slideFormatting.ScaleFontSize = Settings.Default.ProjectionFontScaling;
             SongSlideLayer sl = new SongSlideLayer(slide, slideFormatting);
 
+            slideFormatting.MainText.Outline.Width = 0;
+            slideFormatting.TranslationText.Outline.Width = 0;
+            slideFormatting.CopyrightText.Outline.Width = 0;
+            slideFormatting.SourceText.Outline.Width = 0;
+
+            slideFormatting.MainText.Shadow.Distance = 0;
+            slideFormatting.TranslationText.Shadow.Distance = 0;
+            slideFormatting.CopyrightText.Shadow.Distance = 0;
+            slideFormatting.SourceText.Shadow.Distance = 0;
+
             ImageLayer il = new ImageLayer();
             il.Image = ImageManager.Instance.GetImage(sng.GetImage(sng.Parts[currentPartId].Slides[currentSlideId].ImageNumber));
 
@@ -922,8 +932,8 @@ namespace PraiseBase.Presenter.Forms
             gr.CompositingQuality = System.Drawing.Drawing2D.CompositingQuality.HighSpeed;
             gr.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.HighSpeed;
 
-            il.writeOut(gr, null, ProjectionMode.Simulate);
-            sl.writeOut(gr, null, ProjectionMode.Simulate);
+            il.writeOut(gr, null);
+            sl.writeOut(gr, null);
 
             pictureBoxPreview.Image = bmp;
         }

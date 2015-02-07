@@ -30,7 +30,7 @@ namespace PraiseBase.Presenter
     {
         public Image Image { get; set; }
 
-        public override void writeOut(System.Drawing.Graphics gr, Object[] args, ProjectionMode pm)
+        public override void writeOut(System.Drawing.Graphics gr, Object[] args)
         {
             int w = (int)gr.VisibleClipBounds.Width;
             int h = (int)gr.VisibleClipBounds.Height;
