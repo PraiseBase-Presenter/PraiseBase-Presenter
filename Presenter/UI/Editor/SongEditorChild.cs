@@ -911,6 +911,7 @@ namespace PraiseBase.Presenter.Forms
             slideFormatting.TextBrush = new SolidBrush(sng.MainText.Color);
             slideFormatting.TranslationBrush = new SolidBrush(sng.TranslationText.Color);
             slideFormatting.TextOrientation = sng.TextOrientation;
+            slideFormatting.TextBorders = sng.TextBorders;
             SongSlideLayer sl = new SongSlideLayer(slide, slideFormatting);
 
             ImageLayer il = new ImageLayer();

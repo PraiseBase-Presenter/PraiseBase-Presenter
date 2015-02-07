@@ -15,5 +15,6 @@ namespace PraiseBase.Presenter.Projection
         public Brush TextBrush;
         public Brush TranslationBrush;
         public TextOrientation TextOrientation;
+        public SongTextBorders TextBorders;
     }
 }

@@ -38,6 +38,8 @@ namespace PraiseBase.Presenter
         private SongSlideLayerFormatting formatting;
 
         public bool SwitchTextAndTranslation { get; set; }
+        public String HeaderText { get; set; }
+        public String FooterText { get; set; }
 
         public SongSlideLayer(SongSlide slide, SongSlideLayerFormatting formatting)
         {
@@ -244,6 +246,31 @@ namespace PraiseBase.Presenter
                         textY += lineHeight + formatting.LineSpacing;
                     }
                 }
+            }
+
+            //
+            // Header text (source)
+            //
+            if (HeaderText != null && HeaderText != String.Empty)
+            {
+                int headerPosX = w - formatting.TextBorders.SourceRight;
+                int headerPoxY = formatting.TextBorders.SourceTop;
+                StringFormat headerStrFormat = new StringFormat();
+                headerStrFormat.Alignment = StringAlignment.Far;
+                gr.DrawString(HeaderText, formatting.TextFont, formatting.TextBrush, new Point(headerPosX, headerPoxY), headerStrFormat);
+            }
+
+            //
+            // Footer text (copyright)
+            //
+            if (FooterText != null && FooterText != String.Empty)
+            {
+                SizeF footerMeasure = gr.MeasureString(FooterText, formatting.TextFont);
+                int footerPosX = w / 2;
+                int footerPosY = h - formatting.TextBorders.CopyrightBottom - (int)footerMeasure.Height;
+                StringFormat footerStrFormat = new StringFormat();
+                footerStrFormat.Alignment = StringAlignment.Center;
+                gr.DrawString(FooterText, formatting.TextFont, formatting.TextBrush, new Point(footerPosX, footerPosY), footerStrFormat);
             }
         }
     }

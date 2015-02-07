@@ -441,9 +441,18 @@ namespace PraiseBase.Presenter.Forms
                 slideFormatting.TextBrush = new SolidBrush(s.MainText.Color);
                 slideFormatting.TranslationBrush = new SolidBrush(s.TranslationText.Color);
             }
-
             slideFormatting.TextOrientation = s.TextOrientation;
+            slideFormatting.TextBorders = s.TextBorders;
             var ssl = new SongSlideLayer(cs, slideFormatting);
+            if (s.SourcePosition == "firstslide" && e.PartNumber == 0 && e.SlideNumber == 0)
+            {
+                ssl.HeaderText = s.SongBooksString;
+            }
+            if (s.CopyrightPosition == "firstslide" && e.PartNumber == 0 && e.SlideNumber == 0  ||
+                s.CopyrightPosition == "lastslide" && e.PartNumber == s.Parts.Count - 1 && e.SlideNumber == s.Parts[e.PartNumber].Slides.Count -1 )
+            {
+                ssl.FooterText = s.Copyright;
+            }
             ssl.SwitchTextAndTranslation = SongManager.Instance.CurrentSong.SwitchTextAndTranlation;
 
             // CTRL pressed, use image stack
