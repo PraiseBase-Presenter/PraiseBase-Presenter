@@ -623,5 +623,17 @@ namespace PraiseBase.Presenter.Properties {
                 this["ProjectionMasterSourceColor"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public int ProjectionMasterTranslationLineSpacing {
+            get {
+                return ((int)(this["ProjectionMasterTranslationLineSpacing"]));
+            }
+            set {
+                this["ProjectionMasterTranslationLineSpacing"] = value;
+            }
+        }
     }
 }

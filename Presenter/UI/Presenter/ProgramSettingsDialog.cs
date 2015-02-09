@@ -25,6 +25,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Windows.Forms;
 using PraiseBase.Presenter.Properties;
+using System.Drawing;
 
 namespace PraiseBase.Presenter.Forms
 {
@@ -40,24 +41,32 @@ namespace PraiseBase.Presenter.Forms
             textBox1.Text = Settings.Default.DataDirectory;
 
             checkBoxUseMasterFormat.Checked = Settings.Default.ProjectionUseMaster;
-            groupBoxUseMaster.Enabled = Settings.Default.ProjectionUseMaster;
+            groupBoxFonts.Enabled = Settings.Default.ProjectionUseMaster;
 
             trackBarProjectionShadowSize.Value = Settings.Default.ProjectionShadowSize;
             trackBarProjectionOutlineSize.Value = Settings.Default.ProjectionOutlineSize;
 
-            label3.Text = Settings.Default.ProjectionMasterFont.FontFamily.Name + ", " + Settings.Default.ProjectionMasterFont.Size.ToString() + ", " + Settings.Default.ProjectionMasterFont.Style.ToString();
-            label3.ForeColor = Settings.Default.ProjectionMasterFontColor;
+            labelMainTextString.Text = getFontString(Settings.Default.ProjectionMasterFont);
+            buttonChooseProjectionForeColor.BackColor = Settings.Default.ProjectionMasterFontColor;
 
-            label9.Text = Settings.Default.ProjectionMasterFontTranslation.FontFamily.Name + ", " + Settings.Default.ProjectionMasterFontTranslation.Size.ToString() + ", " + Settings.Default.ProjectionMasterFontTranslation.Style.ToString();
-            label9.ForeColor = Settings.Default.ProjectionMasterTranslationColor;
+            labelTranslationTextString.Text = getFontString(Settings.Default.ProjectionMasterFontTranslation);
+            buttonTranslationColor.BackColor = Settings.Default.ProjectionMasterTranslationColor;
+
+            labelCopyrightTextString.Text = getFontString(Settings.Default.ProjectionMasterCopyrightFont);
+            buttonCopyrightColor.BackColor = Settings.Default.ProjectionMasterCopyrightColor;
+
+            labelSourceTextString.Text = getFontString(Settings.Default.ProjectionMasterSourceFont);
+            buttonSourceColor.BackColor = Settings.Default.ProjectionMasterSourceColor;
 
             pictureBoxProjectionBackColor.BackColor = Settings.Default.ProjectionBackColor;
             pictureBoxProjectionOutlineColor.BackColor = Settings.Default.ProjectionOutlineColor;
             pictureBoxProjectionShadowColor.BackColor = Settings.Default.ProjectionShadowColor;
 
             trackBarProjectionPadding.Value = Settings.Default.ProjectionPadding;
-            trackBarLineSpacing.Value = Settings.Default.ProjectionMasterLineSpacing;
-            labelLineSpacing.Text = Settings.Default.ProjectionMasterLineSpacing.ToString();
+
+            numericUpDownLineSpacing.Value = Settings.Default.ProjectionMasterLineSpacing;
+            numericUpDownTranslationLineSpacing.Value = Settings.Default.ProjectionMasterTranslationLineSpacing;
+            
             labelProjectionPadding.Text = Settings.Default.ProjectionPadding.ToString();
 
             checkBoxShowLoadingScreen.Checked = Settings.Default.ShowLoadingScreen;
@@ -101,6 +110,11 @@ namespace PraiseBase.Presenter.Forms
             {
                 listBoxSongParts.Items.Add(str);
             }
+        }
+
+        private String getFontString(Font font)
+        {
+            return font.FontFamily.Name + ", " + font.Size.ToString() + ", " + font.Style.ToString();
         }
 
         private void cancelButton_Click(object sender, EventArgs e)
@@ -314,14 +328,48 @@ namespace PraiseBase.Presenter.Forms
             }
         }
 
-        private void label11_Click(object sender, EventArgs e)
+        private void buttonCopyrightFont_Click(object sender, EventArgs e)
         {
+            FontDialog fontDlg = new FontDialog();
+            fontDlg.Font = Settings.Default.ProjectionMasterCopyrightFont;
+            if (fontDlg.ShowDialog() == DialogResult.OK)
+            {
+                Settings.Default.ProjectionMasterCopyrightFont = fontDlg.Font;
+                updateLabels();
+            }
         }
 
-        private void trackBarLineSpacing_Scroll(object sender, EventArgs e)
+        private void buttonCopyrightColor_Click(object sender, EventArgs e)
         {
-            Settings.Default.ProjectionMasterLineSpacing = trackBarLineSpacing.Value;
-            updateLabels();
+            ColorDialog colDlg = new ColorDialog();
+            colDlg.Color = Settings.Default.ProjectionMasterCopyrightColor;
+            if (colDlg.ShowDialog() == DialogResult.OK)
+            {
+                Settings.Default.ProjectionMasterCopyrightColor = colDlg.Color;
+                updateLabels();
+            }
+        }
+        
+        private void buttonSourceFont_Click(object sender, EventArgs e)
+        {
+            FontDialog fontDlg = new FontDialog();
+            fontDlg.Font = Settings.Default.ProjectionMasterSourceFont;
+            if (fontDlg.ShowDialog() == DialogResult.OK)
+            {
+                Settings.Default.ProjectionMasterSourceFont = fontDlg.Font;
+                updateLabels();
+            }
+        }
+
+        private void buttonSourceColor_Click(object sender, EventArgs e)
+        {
+            ColorDialog colDlg = new ColorDialog();
+            colDlg.Color = Settings.Default.ProjectionMasterSourceColor;
+            if (colDlg.ShowDialog() == DialogResult.OK)
+            {
+                Settings.Default.ProjectionMasterSourceColor = colDlg.Color;
+                updateLabels();
+            }
         }
 
         private void trackBarPadding_Scroll(object sender, EventArgs e)
@@ -370,15 +418,31 @@ namespace PraiseBase.Presenter.Forms
         private void checkBoxUseMasterFormat_CheckedChanged(object sender, EventArgs e)
         {
             if (checkBoxUseMasterFormat.Checked)
-                groupBoxUseMaster.Enabled = true;
+            {
+                groupBoxFonts.Enabled = true;
+                groupBoxLineSpacings.Enabled = true;
+            }
             else
-                groupBoxUseMaster.Enabled = false;
+            {
+                groupBoxFonts.Enabled = false;
+                groupBoxLineSpacings.Enabled = false;
+            }
             Settings.Default.ProjectionUseMaster = checkBoxUseMasterFormat.Checked;
         }
 
         private void checkBoxShowLoadingScreen_CheckedChanged(object sender, EventArgs e)
         {
             Settings.Default.ShowLoadingScreen = checkBoxShowLoadingScreen.Checked;
+        }
+
+        private void numericUpDown1_ValueChanged(object sender, EventArgs e)
+        {
+            Settings.Default.ProjectionMasterTranslationLineSpacing = (int)numericUpDownTranslationLineSpacing.Value;
+        }
+
+        private void numericUpDownLineSpacing_ValueChanged(object sender, EventArgs e)
+        {
+            Settings.Default.ProjectionMasterLineSpacing = (int)numericUpDownLineSpacing.Value;
         }
     }
 }

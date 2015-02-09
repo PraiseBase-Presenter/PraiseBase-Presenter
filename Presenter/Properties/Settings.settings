@@ -188,5 +188,8 @@
     <Setting Name="ProjectionMasterSourceColor" Type="System.Drawing.Color" Scope="User">
       <Value Profile="(Default)">White</Value>
     </Setting>
+    <Setting Name="ProjectionMasterTranslationLineSpacing" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">0</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

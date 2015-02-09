@@ -145,53 +145,23 @@
   <data name="checkBoxProjectionFontScaling.Text" xml:space="preserve">
     <value>Downscale fonts</value>
   </data>
-  <data name="tabPage1.Text" xml:space="preserve">
-    <value>Common</value>
-  </data>
-  <data name="tabPage3.Text" xml:space="preserve">
-    <value>Song defaults</value>
-  </data>
-  <data name="label13.Size" type="System.Drawing.Size, System.Drawing">
-    <value>51, 13</value>
-  </data>
-  <data name="label13.Text" xml:space="preserve">
-    <value>Outline:</value>
-  </data>
-  <data name="label12.Size" type="System.Drawing.Size, System.Drawing">
-    <value>56, 13</value>
-  </data>
-  <data name="label12.Text" xml:space="preserve">
-    <value>Shadow:</value>
-  </data>
-  <data name="buttonProjectionShadowColor.Text" xml:space="preserve">
-    <value>Shadow color...</value>
-  </data>
-  <data name="label11.Size" type="System.Drawing.Size, System.Drawing">
-    <value>89, 13</value>
-  </data>
-  <data name="label11.Text" xml:space="preserve">
-    <value>Border margin:</value>
-  </data>
-  <data name="tabPage2.Text" xml:space="preserve">
-    <value>Projection</value>
-  </data>
-  <data name="tabPage5.Text" xml:space="preserve">
-    <value>Master formatting</value>
-  </data>
-  <data name="groupBox2.Text" xml:space="preserve">
-    <value>Miscellaneous</value>
-  </data>
   <data name="checkBoxShowLoadingScreen.Size" type="System.Drawing.Size, System.Drawing">
     <value>125, 17</value>
   </data>
   <data name="checkBoxShowLoadingScreen.Text" xml:space="preserve">
     <value>Show loading screen</value>
   </data>
-  <data name="groupBox1.Text" xml:space="preserve">
-    <value>Data directory</value>
+  <data name="groupBox2.Text" xml:space="preserve">
+    <value>Miscellaneous</value>
   </data>
   <data name="textBox2.Text" xml:space="preserve">
     <value>If you change the user data directory, you have to reload the songs and the images (see the 'Tools' menu) or restart the program.</value>
+  </data>
+  <data name="groupBox1.Text" xml:space="preserve">
+    <value>Data directory</value>
+  </data>
+  <data name="tabPage1.Text" xml:space="preserve">
+    <value>Common</value>
   </data>
   <data name="label6.Size" type="System.Drawing.Size, System.Drawing">
     <value>72, 13</value>
@@ -223,8 +193,32 @@
   <data name="buttonDelTags.Text" xml:space="preserve">
     <value>Delete selected</value>
   </data>
-  <data name="groupBoxUseMaster.Text" xml:space="preserve">
-    <value>Master formatting</value>
+  <data name="tabPage3.Text" xml:space="preserve">
+    <value>Song defaults</value>
+  </data>
+  <data name="label13.Size" type="System.Drawing.Size, System.Drawing">
+    <value>51, 13</value>
+  </data>
+  <data name="label13.Text" xml:space="preserve">
+    <value>Outline:</value>
+  </data>
+  <data name="label12.Size" type="System.Drawing.Size, System.Drawing">
+    <value>56, 13</value>
+  </data>
+  <data name="label12.Text" xml:space="preserve">
+    <value>Shadow:</value>
+  </data>
+  <data name="buttonProjectionShadowColor.Text" xml:space="preserve">
+    <value>Shadow color...</value>
+  </data>
+  <data name="label11.Size" type="System.Drawing.Size, System.Drawing">
+    <value>89, 13</value>
+  </data>
+  <data name="label11.Text" xml:space="preserve">
+    <value>Border margin:</value>
+  </data>
+  <data name="tabPage2.Text" xml:space="preserve">
+    <value>Projection</value>
   </data>
   <data name="label2.Size" type="System.Drawing.Size, System.Drawing">
     <value>70, 13</value>
@@ -256,11 +250,17 @@
   <data name="label8.Text" xml:space="preserve">
     <value>Translation font:</value>
   </data>
+  <data name="groupBoxUseMaster.Text" xml:space="preserve">
+    <value>Master formatting</value>
+  </data>
   <data name="checkBoxUseMasterFormat.Size" type="System.Drawing.Size, System.Drawing">
     <value>128, 17</value>
   </data>
   <data name="checkBoxUseMasterFormat.Text" xml:space="preserve">
     <value>Use master formatting</value>
+  </data>
+  <data name="tabPage5.Text" xml:space="preserve">
+    <value>Master formatting</value>
   </data>
   <data name="$this.Text" xml:space="preserve">
     <value>Settings</value>
