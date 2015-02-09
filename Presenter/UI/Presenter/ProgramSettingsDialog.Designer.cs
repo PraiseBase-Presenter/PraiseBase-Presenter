@@ -73,12 +73,20 @@
             this.trackBarProjectionPadding = new System.Windows.Forms.TrackBar();
             this.label11 = new System.Windows.Forms.Label();
             this.tabPage5 = new System.Windows.Forms.TabPage();
-            this.groupBoxFonts = new System.Windows.Forms.GroupBox();
             this.groupBoxLineSpacings = new System.Windows.Forms.GroupBox();
             this.numericUpDownLineSpacing = new System.Windows.Forms.NumericUpDown();
             this.numericUpDownTranslationLineSpacing = new System.Windows.Forms.NumericUpDown();
             this.label7 = new System.Windows.Forms.Label();
             this.label14 = new System.Windows.Forms.Label();
+            this.groupBoxFonts = new System.Windows.Forms.GroupBox();
+            this.labelSourceTextString = new System.Windows.Forms.Label();
+            this.labelCopyrightTextString = new System.Windows.Forms.Label();
+            this.labelSourceText = new System.Windows.Forms.Label();
+            this.buttonSourceFont = new System.Windows.Forms.Button();
+            this.buttonSourceColor = new System.Windows.Forms.Button();
+            this.labelCopyrightText = new System.Windows.Forms.Label();
+            this.buttonCopyrightFont = new System.Windows.Forms.Button();
+            this.buttonCopyrightColor = new System.Windows.Forms.Button();
             this.labelMainText = new System.Windows.Forms.Label();
             this.buttonProjectionMasterFont = new System.Windows.Forms.Button();
             this.buttonChooseProjectionForeColor = new System.Windows.Forms.Button();
@@ -88,14 +96,6 @@
             this.labelMainTextString = new System.Windows.Forms.Label();
             this.labelTranslationText = new System.Windows.Forms.Label();
             this.checkBoxUseMasterFormat = new System.Windows.Forms.CheckBox();
-            this.labelCopyrightText = new System.Windows.Forms.Label();
-            this.labelSourceText = new System.Windows.Forms.Label();
-            this.buttonCopyrightFont = new System.Windows.Forms.Button();
-            this.buttonCopyrightColor = new System.Windows.Forms.Button();
-            this.buttonSourceFont = new System.Windows.Forms.Button();
-            this.buttonSourceColor = new System.Windows.Forms.Button();
-            this.labelCopyrightTextString = new System.Windows.Forms.Label();
-            this.labelSourceTextString = new System.Windows.Forms.Label();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -109,10 +109,10 @@
             ((System.ComponentModel.ISupportInitialize)(this.trackBarProjectionShadowSize)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackBarProjectionPadding)).BeginInit();
             this.tabPage5.SuspendLayout();
-            this.groupBoxFonts.SuspendLayout();
             this.groupBoxLineSpacings.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownLineSpacing)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownTranslationLineSpacing)).BeginInit();
+            this.groupBoxFonts.SuspendLayout();
             this.SuspendLayout();
             // 
             // exitButton
@@ -446,28 +446,6 @@
             this.tabPage5.Name = "tabPage5";
             this.tabPage5.UseVisualStyleBackColor = true;
             // 
-            // groupBoxFonts
-            // 
-            resources.ApplyResources(this.groupBoxFonts, "groupBoxFonts");
-            this.groupBoxFonts.Controls.Add(this.labelSourceTextString);
-            this.groupBoxFonts.Controls.Add(this.labelCopyrightTextString);
-            this.groupBoxFonts.Controls.Add(this.labelSourceText);
-            this.groupBoxFonts.Controls.Add(this.buttonSourceFont);
-            this.groupBoxFonts.Controls.Add(this.buttonSourceColor);
-            this.groupBoxFonts.Controls.Add(this.labelCopyrightText);
-            this.groupBoxFonts.Controls.Add(this.buttonCopyrightFont);
-            this.groupBoxFonts.Controls.Add(this.buttonCopyrightColor);
-            this.groupBoxFonts.Controls.Add(this.labelMainText);
-            this.groupBoxFonts.Controls.Add(this.buttonProjectionMasterFont);
-            this.groupBoxFonts.Controls.Add(this.buttonChooseProjectionForeColor);
-            this.groupBoxFonts.Controls.Add(this.buttonTranslationFont);
-            this.groupBoxFonts.Controls.Add(this.buttonTranslationColor);
-            this.groupBoxFonts.Controls.Add(this.labelTranslationTextString);
-            this.groupBoxFonts.Controls.Add(this.labelMainTextString);
-            this.groupBoxFonts.Controls.Add(this.labelTranslationText);
-            this.groupBoxFonts.Name = "groupBoxFonts";
-            this.groupBoxFonts.TabStop = false;
-            // 
             // groupBoxLineSpacings
             // 
             this.groupBoxLineSpacings.Controls.Add(this.numericUpDownLineSpacing);
@@ -509,6 +487,76 @@
             // 
             resources.ApplyResources(this.label14, "label14");
             this.label14.Name = "label14";
+            // 
+            // groupBoxFonts
+            // 
+            resources.ApplyResources(this.groupBoxFonts, "groupBoxFonts");
+            this.groupBoxFonts.Controls.Add(this.labelSourceTextString);
+            this.groupBoxFonts.Controls.Add(this.labelCopyrightTextString);
+            this.groupBoxFonts.Controls.Add(this.labelSourceText);
+            this.groupBoxFonts.Controls.Add(this.buttonSourceFont);
+            this.groupBoxFonts.Controls.Add(this.buttonSourceColor);
+            this.groupBoxFonts.Controls.Add(this.labelCopyrightText);
+            this.groupBoxFonts.Controls.Add(this.buttonCopyrightFont);
+            this.groupBoxFonts.Controls.Add(this.buttonCopyrightColor);
+            this.groupBoxFonts.Controls.Add(this.labelMainText);
+            this.groupBoxFonts.Controls.Add(this.buttonProjectionMasterFont);
+            this.groupBoxFonts.Controls.Add(this.buttonChooseProjectionForeColor);
+            this.groupBoxFonts.Controls.Add(this.buttonTranslationFont);
+            this.groupBoxFonts.Controls.Add(this.buttonTranslationColor);
+            this.groupBoxFonts.Controls.Add(this.labelTranslationTextString);
+            this.groupBoxFonts.Controls.Add(this.labelMainTextString);
+            this.groupBoxFonts.Controls.Add(this.labelTranslationText);
+            this.groupBoxFonts.Name = "groupBoxFonts";
+            this.groupBoxFonts.TabStop = false;
+            // 
+            // labelSourceTextString
+            // 
+            resources.ApplyResources(this.labelSourceTextString, "labelSourceTextString");
+            this.labelSourceTextString.Name = "labelSourceTextString";
+            // 
+            // labelCopyrightTextString
+            // 
+            resources.ApplyResources(this.labelCopyrightTextString, "labelCopyrightTextString");
+            this.labelCopyrightTextString.Name = "labelCopyrightTextString";
+            // 
+            // labelSourceText
+            // 
+            resources.ApplyResources(this.labelSourceText, "labelSourceText");
+            this.labelSourceText.Name = "labelSourceText";
+            // 
+            // buttonSourceFont
+            // 
+            resources.ApplyResources(this.buttonSourceFont, "buttonSourceFont");
+            this.buttonSourceFont.Name = "buttonSourceFont";
+            this.buttonSourceFont.UseVisualStyleBackColor = true;
+            this.buttonSourceFont.Click += new System.EventHandler(this.buttonSourceFont_Click);
+            // 
+            // buttonSourceColor
+            // 
+            resources.ApplyResources(this.buttonSourceColor, "buttonSourceColor");
+            this.buttonSourceColor.Name = "buttonSourceColor";
+            this.buttonSourceColor.UseVisualStyleBackColor = true;
+            this.buttonSourceColor.Click += new System.EventHandler(this.buttonSourceColor_Click);
+            // 
+            // labelCopyrightText
+            // 
+            resources.ApplyResources(this.labelCopyrightText, "labelCopyrightText");
+            this.labelCopyrightText.Name = "labelCopyrightText";
+            // 
+            // buttonCopyrightFont
+            // 
+            resources.ApplyResources(this.buttonCopyrightFont, "buttonCopyrightFont");
+            this.buttonCopyrightFont.Name = "buttonCopyrightFont";
+            this.buttonCopyrightFont.UseVisualStyleBackColor = true;
+            this.buttonCopyrightFont.Click += new System.EventHandler(this.buttonCopyrightFont_Click);
+            // 
+            // buttonCopyrightColor
+            // 
+            resources.ApplyResources(this.buttonCopyrightColor, "buttonCopyrightColor");
+            this.buttonCopyrightColor.Name = "buttonCopyrightColor";
+            this.buttonCopyrightColor.UseVisualStyleBackColor = true;
+            this.buttonCopyrightColor.Click += new System.EventHandler(this.buttonCopyrightColor_Click);
             // 
             // labelMainText
             // 
@@ -565,54 +613,6 @@
             this.checkBoxUseMasterFormat.UseVisualStyleBackColor = true;
             this.checkBoxUseMasterFormat.CheckedChanged += new System.EventHandler(this.checkBoxUseMasterFormat_CheckedChanged);
             // 
-            // labelCopyrightText
-            // 
-            resources.ApplyResources(this.labelCopyrightText, "labelCopyrightText");
-            this.labelCopyrightText.Name = "labelCopyrightText";
-            // 
-            // labelSourceText
-            // 
-            resources.ApplyResources(this.labelSourceText, "labelSourceText");
-            this.labelSourceText.Name = "labelSourceText";
-            // 
-            // buttonCopyrightFont
-            // 
-            resources.ApplyResources(this.buttonCopyrightFont, "buttonCopyrightFont");
-            this.buttonCopyrightFont.Name = "buttonCopyrightFont";
-            this.buttonCopyrightFont.UseVisualStyleBackColor = true;
-            this.buttonCopyrightFont.Click += new System.EventHandler(this.buttonCopyrightFont_Click);
-            // 
-            // buttonCopyrightColor
-            // 
-            resources.ApplyResources(this.buttonCopyrightColor, "buttonCopyrightColor");
-            this.buttonCopyrightColor.Name = "buttonCopyrightColor";
-            this.buttonCopyrightColor.UseVisualStyleBackColor = true;
-            this.buttonCopyrightColor.Click += new System.EventHandler(this.buttonCopyrightColor_Click);
-            // 
-            // buttonSourceFont
-            // 
-            resources.ApplyResources(this.buttonSourceFont, "buttonSourceFont");
-            this.buttonSourceFont.Name = "buttonSourceFont";
-            this.buttonSourceFont.UseVisualStyleBackColor = true;
-            this.buttonSourceFont.Click += new System.EventHandler(this.buttonSourceFont_Click);
-            // 
-            // buttonSourceColor
-            // 
-            resources.ApplyResources(this.buttonSourceColor, "buttonSourceColor");
-            this.buttonSourceColor.Name = "buttonSourceColor";
-            this.buttonSourceColor.UseVisualStyleBackColor = true;
-            this.buttonSourceColor.Click += new System.EventHandler(this.buttonSourceColor_Click);
-            // 
-            // labelCopyrightTextString
-            // 
-            resources.ApplyResources(this.labelCopyrightTextString, "labelCopyrightTextString");
-            this.labelCopyrightTextString.Name = "labelCopyrightTextString";
-            // 
-            // labelSourceTextString
-            // 
-            resources.ApplyResources(this.labelSourceTextString, "labelSourceTextString");
-            this.labelSourceTextString.Name = "labelSourceTextString";
-            // 
             // ProgramSettingsDialog
             // 
             this.AcceptButton = this.exitButton;
@@ -646,12 +646,12 @@
             ((System.ComponentModel.ISupportInitialize)(this.trackBarProjectionPadding)).EndInit();
             this.tabPage5.ResumeLayout(false);
             this.tabPage5.PerformLayout();
-            this.groupBoxFonts.ResumeLayout(false);
-            this.groupBoxFonts.PerformLayout();
             this.groupBoxLineSpacings.ResumeLayout(false);
             this.groupBoxLineSpacings.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownLineSpacing)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownTranslationLineSpacing)).EndInit();
+            this.groupBoxFonts.ResumeLayout(false);
+            this.groupBoxFonts.PerformLayout();
             this.ResumeLayout(false);
 
         }

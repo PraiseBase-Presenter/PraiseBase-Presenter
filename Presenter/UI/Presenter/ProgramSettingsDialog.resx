@@ -1111,7 +1111,7 @@
     <value>124, 23</value>
   </data>
   <data name="buttonProjectionMasterFont.TabIndex" type="System.Int32, mscorlib">
-    <value>44</value>
+    <value>43</value>
   </data>
   <data name="buttonProjectionMasterFont.Text" xml:space="preserve">
     <value>Schrift wählen...</value>
@@ -1141,7 +1141,7 @@
     <value>30, 23</value>
   </data>
   <data name="buttonChooseProjectionForeColor.TabIndex" type="System.Int32, mscorlib">
-    <value>43</value>
+    <value>44</value>
   </data>
   <data name="&gt;&gt;buttonChooseProjectionForeColor.Name" xml:space="preserve">
     <value>buttonChooseProjectionForeColor</value>
@@ -2182,7 +2182,7 @@
     <value>63, 20</value>
   </data>
   <data name="numericUpDownTranslationLineSpacing.TabIndex" type="System.Int32, mscorlib">
-    <value>59</value>
+    <value>61</value>
   </data>
   <data name="&gt;&gt;numericUpDownTranslationLineSpacing.Name" xml:space="preserve">
     <value>numericUpDownTranslationLineSpacing</value>
