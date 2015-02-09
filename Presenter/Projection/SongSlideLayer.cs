@@ -51,10 +51,7 @@ namespace PraiseBase.Presenter
 
             if (MainText.Count > 0)
             {
-                StringFormat strFormat = new StringFormat();
-
                 int padding = formatting.TextBorders.TextLeft;
-                String str = String.Empty;
 
                 int usableWidth = w - (2 * padding);
                 int usableHeight = h - (2 * padding);
@@ -88,105 +85,43 @@ namespace PraiseBase.Presenter
                 }
                 int lineHeight = (int)(strMeasure.Height / MainText.Count);
 
-                // Horizontal stuff
-                switch (formatting.TextOrientation.Horizontal)
+                // Adapt horizontal starting position
+                if (formatting.TextOrientation.Horizontal == HorizontalOrientation.Center)
                 {
-                    case HorizontalOrientation.Left:
-                        strFormat.Alignment = StringAlignment.Near;
-                        break;
-                    case HorizontalOrientation.Center:
-                        textStartX = w / 2;
-                        strFormat.Alignment = StringAlignment.Center;
-                        break;
-                    case HorizontalOrientation.Right:
-                        textStartX = textStartX + usableWidth;
-                        strFormat.Alignment = StringAlignment.Far;
-                        break;
+                    textStartX = w / 2;
+                }
+                else if (formatting.TextOrientation.Horizontal == HorizontalOrientation.Right)
+                {
+                    textStartX = textStartX + usableWidth;
                 }
 
-                // Vertical stuff
-                switch (formatting.TextOrientation.Vertical)
+                // Adapt vertical starting position
+                if (formatting.TextOrientation.Vertical == VerticalOrientation.Middle)
                 {
-                    case VerticalOrientation.Top:
-                        // Nothing to do
-                        break;
-                    case VerticalOrientation.Middle:
-                        textStartY = textStartY + (usableHeight / 2) - (usedHeight / 2);
-                        break;
-                    case VerticalOrientation.Bottom:
-                        textStartY = textStartY + usableHeight - usedHeight;
-                        break;
+                    textStartY = textStartY + (usableHeight / 2) - (usedHeight / 2);
                 }
-
-                int textX = textStartX;
-                int textY = textStartY;
-
-                // Shadow
-                if (formatting.TextShadowEnabled)
+                else if (formatting.TextOrientation.Vertical == VerticalOrientation.Bottom)
                 {
-                    int shadowThickness = formatting.MainText.Shadow.Distance;
-                    if (shadowThickness > 0)
-                    {
-                        shadodBrush = new SolidBrush(Color.FromArgb(15, formatting.MainText.Shadow.Color));
-                        gr.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.HighQuality;
-                        gr.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.HighQualityBilinear;
-                        gr.TextRenderingHint = TextRenderingHint.AntiAliasGridFit;
-
-                        foreach (string s in MainText)
-                        {
-                            for (int x = textX; x <= textX + shadowThickness; x++)
-                            {
-                                for (int y = textY; y <= textY + shadowThickness; y++)
-                                {
-                                    gr.DrawString(s, formatting.MainText.Font, shadodBrush, new Point(x, y), strFormat);
-                                }
-                            }
-                            textY += lineHeight + formatting.MainText.LineSpacing;
-                        }
-                        textY = textStartY;
-                    }
+                    textStartY = textStartY + usableHeight - usedHeight;
                 }
+                
+                //int textX = textStartX;
+                //int textY = textStartY;
 
-                // Outline
-                if (formatting.TextOutlineEnabled)
-                {
-                    int outLineThickness = formatting.MainText.Outline.Width;
-                    if (outLineThickness > 0)
-                    {
-                        gr.SmoothingMode = SmoothingMode.None;
-                        gr.InterpolationMode = InterpolationMode.Low;
-                        gr.TextRenderingHint = TextRenderingHint.ClearTypeGridFit;
+                // Define string format
+                StringFormat strFormat = new StringFormat();
+                MapStringFormatAlignment(formatting.TextOrientation, strFormat);
 
-                        Brush br = new SolidBrush(formatting.MainText.Outline.Color);
-
-                        foreach (string s in MainText)
-                        {
-                            for (int x = textX - outLineThickness * 2; x <= textX + outLineThickness * 2; x += 2)
-                            {
-                                for (int y = textY - outLineThickness * 2; y <= textY + outLineThickness * 2; y += 2)
-                                {
-                                    gr.DrawString(s, formatting.MainText.Font, br, new Point(x, y), strFormat);
-                                }
-                            }
-                            textY += lineHeight + formatting.MainText.LineSpacing;
-                        }
-                        textY = textStartY;
-                    }
-                }
-
-                foreach (string s in MainText)
-                {
-                    gr.DrawString(s, formatting.MainText.Font, new SolidBrush(formatting.MainText.Color), new Point(textX, textY), strFormat);
-                    textY += lineHeight + formatting.MainText.LineSpacing;
-                }
+                // Draw main text
+                DrawLines(gr, MainText, textStartX, textStartY, strFormat, formatting.MainText, formatting.TextOutlineEnabled, formatting.TextShadowEnabled, lineHeight);
 
                 // Sub-text (translation)
                 if (SubText != null && SubText.Count > 0)
                 {
                     int transStartX = textStartX + 10;
                     int transStartY = textStartY + lineHeight;
-                    textX = transStartX;
-                    textY = transStartY;
+                    int textX = transStartX;
+                    int textY = transStartY;
 
                     // Shadow
                     if (formatting.TextShadowEnabled)
@@ -286,6 +221,91 @@ namespace PraiseBase.Presenter
                 i++;
             }
             return txt;
+        }
+
+        private static void MapStringFormatAlignment(TextOrientation to, StringFormat strFormat) 
+        {
+            switch (to.Horizontal)
+            {
+                case HorizontalOrientation.Left:
+                    strFormat.Alignment = StringAlignment.Near;
+                    break;
+                case HorizontalOrientation.Center:
+                    strFormat.Alignment = StringAlignment.Center;
+                    break;
+                case HorizontalOrientation.Right:
+                    strFormat.Alignment = StringAlignment.Far;
+                    break;
+            }
+        }
+
+        private static void DrawLines(Graphics gr, List<String> lines, int textStartX, int textStartY,
+            StringFormat strFormat, TextFormatting textFormatting, bool outline, bool shadow, int lineHeight)
+        {
+            int textX = textStartX;
+            int textY = textStartY;
+
+            // Shadow
+            if (shadow)
+            {
+                Brush shadodBrush = Brushes.Transparent;
+
+                int shadowThickness = textFormatting.Shadow.Distance;
+                if (shadowThickness > 0)
+                {
+                    shadodBrush = new SolidBrush(Color.FromArgb(15, textFormatting.Shadow.Color));
+                    gr.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.HighQuality;
+                    gr.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.HighQualityBilinear;
+                    gr.TextRenderingHint = TextRenderingHint.AntiAliasGridFit;
+
+                    foreach (string s in lines)
+                    {
+                        for (int x = textX; x <= textX + shadowThickness; x++)
+                        {
+                            for (int y = textY; y <= textY + shadowThickness; y++)
+                            {
+                                gr.DrawString(s, textFormatting.Font, shadodBrush, new Point(x, y), strFormat);
+                            }
+                        }
+                        textY += lineHeight + textFormatting.LineSpacing;
+                    }
+                    textY = textStartY;
+                }
+            }
+
+            // Outline
+            if (outline)
+            {
+                int outLineThickness = textFormatting.Outline.Width;
+                if (outLineThickness > 0)
+                {
+                    gr.SmoothingMode = SmoothingMode.None;
+                    gr.InterpolationMode = InterpolationMode.Low;
+                    gr.TextRenderingHint = TextRenderingHint.ClearTypeGridFit;
+
+                    Brush br = new SolidBrush(textFormatting.Outline.Color);
+
+                    foreach (string s in lines)
+                    {
+                        for (int x = textX - outLineThickness * 2; x <= textX + outLineThickness * 2; x += 2)
+                        {
+                            for (int y = textY - outLineThickness * 2; y <= textY + outLineThickness * 2; y += 2)
+                            {
+                                gr.DrawString(s, textFormatting.Font, br, new Point(x, y), strFormat);
+                            }
+                        }
+                        textY += lineHeight + textFormatting.LineSpacing;
+                    }
+                    textY = textStartY;
+                }
+            }
+
+            // Text
+            foreach (string s in lines)
+            {
+                gr.DrawString(s, textFormatting.Font, new SolidBrush(textFormatting.Color), new Point(textX, textY), strFormat);
+                textY += lineHeight + textFormatting.LineSpacing;
+            }
         }
     }
 }
