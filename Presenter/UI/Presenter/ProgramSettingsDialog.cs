@@ -119,6 +119,7 @@ namespace PraiseBase.Presenter.Forms
 
         private void cancelButton_Click(object sender, EventArgs e)
         {
+            Settings.Default.Reload();
             DialogResult = DialogResult.Cancel;
             this.Close();
         }
