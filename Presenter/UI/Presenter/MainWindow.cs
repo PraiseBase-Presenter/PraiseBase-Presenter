@@ -441,7 +441,7 @@ namespace PraiseBase.Presenter.Forms
                     Settings.Default.ProjectionMasterTranslationColor,
                     new TextOutline(Settings.Default.ProjectionOutlineSize, Settings.Default.ProjectionOutlineColor), 
                     new TextShadow(Settings.Default.ProjectionShadowSize, 125, Settings.Default.ProjectionShadowColor), 
-                    Settings.Default.ProjectionMasterLineSpacing
+                    Settings.Default.ProjectionMasterTranslationLineSpacing
                 );
                 slideFormatting.CopyrightText = new TextFormatting(
                     Settings.Default.ProjectionMasterCopyrightFont, 
