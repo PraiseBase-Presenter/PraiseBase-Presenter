@@ -483,22 +483,22 @@ namespace PraiseBase.Presenter.Forms
             var ssl = new SongSlideLayer(slideFormatting);
             if (cs.Translated && SongManager.Instance.CurrentSong.SwitchTextAndTranlation)
             {
-                ssl.MainText = cs.Translation;
-                ssl.SubText = cs.Lines;
+                ssl.MainText = cs.Translation.ToArray();
+                ssl.SubText = cs.Lines.ToArray();
             }
             else
             {
-                ssl.MainText = cs.Lines;
-                ssl.SubText = cs.Translation;
+                ssl.MainText = cs.Lines.ToArray();
+                ssl.SubText = cs.Translation.ToArray();
             }
             if (s.SourcePosition == "firstslide" && e.PartNumber == 0 && e.SlideNumber == 0)
             {
-                ssl.HeaderText = s.SongBooksString;
+                ssl.HeaderText = new String[] { s.SongBooksString };
             }
             if (s.CopyrightPosition == "firstslide" && e.PartNumber == 0 && e.SlideNumber == 0  ||
                 s.CopyrightPosition == "lastslide" && e.PartNumber == s.Parts.Count - 1 && e.SlideNumber == s.Parts[e.PartNumber].Slides.Count -1 )
             {
-                ssl.FooterText = s.Copyright;
+                ssl.FooterText = s.Copyright.Split(new String[] { Environment.NewLine }, StringSplitOptions.None);
             }
 
             // CTRL pressed, use image stack

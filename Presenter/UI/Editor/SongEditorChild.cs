@@ -913,8 +913,8 @@ namespace PraiseBase.Presenter.Forms
             slideFormatting.TextBorders = (SongTextBorders)sng.TextBorders.Clone();
             slideFormatting.ScaleFontSize = Settings.Default.ProjectionFontScaling;
             SongSlideLayer sl = new SongSlideLayer(slideFormatting);
-            sl.MainText = slide.Lines;
-            sl.SubText = slide.Translation;
+            sl.MainText = slide.Lines.ToArray();
+            sl.SubText = slide.Translation.ToArray();
 
             slideFormatting.MainText.Outline.Width = 0;
             slideFormatting.TranslationText.Outline.Width = 0;

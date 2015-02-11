@@ -34,10 +34,10 @@ namespace PraiseBase.Presenter
     {
         private SongSlideLayerFormatting formatting;
 
-        public List<String> MainText { get; set; }
-        public List<String> SubText { get; set; }
-        public String HeaderText { get; set; }
-        public String FooterText { get; set; }
+        public String[] MainText { get; set; }
+        public String[] SubText { get; set; }
+        public String[] HeaderText { get; set; }
+        public String[] FooterText { get; set; }
 
         public SongSlideLayer(SongSlideLayerFormatting formatting)
         {
@@ -49,7 +49,7 @@ namespace PraiseBase.Presenter
             int w = (int)gr.VisibleClipBounds.Width;
             int h = (int)gr.VisibleClipBounds.Height;
 
-            if (MainText.Count > 0)
+            if (MainText.Length > 0)
             {
                 int padding = formatting.TextBorders.TextLeft;
 
@@ -62,28 +62,28 @@ namespace PraiseBase.Presenter
                 SizeF strMeasureTrans;
 
                 int endSpacing = 0;
-                if (SubText != null && SubText.Count > 0)
+                if (SubText != null && SubText.Length > 0)
                 {
-                    strMeasureTrans = gr.MeasureString(ListToString(SubText), formatting.TranslationText.Font);
-                    formatting.MainText.LineSpacing += (int)(strMeasureTrans.Height / SubText.Count) + formatting.TranslationText.LineSpacing;
-                    endSpacing = (int)(strMeasureTrans.Height / SubText.Count) + formatting.TranslationText.LineSpacing;
+                    strMeasureTrans = gr.MeasureString(String.Join(Environment.NewLine, SubText), formatting.TranslationText.Font);
+                    formatting.MainText.LineSpacing += (int)(strMeasureTrans.Height / SubText.Length) + formatting.TranslationText.LineSpacing;
+                    endSpacing = (int)(strMeasureTrans.Height / SubText.Length) + formatting.TranslationText.LineSpacing;
                 }
 
-                SizeF strMeasure = gr.MeasureString(ListToString(MainText), formatting.MainText.Font);
+                SizeF strMeasure = gr.MeasureString(String.Join(Environment.NewLine, MainText), formatting.MainText.Font);
                 Brush shadodBrush = Brushes.Transparent;
                 int usedWidth = (int)strMeasure.Width;
-                int usedHeight = (int)strMeasure.Height + (formatting.MainText.LineSpacing * (MainText.Count - 1)) + endSpacing;
+                int usedHeight = (int)strMeasure.Height + (formatting.MainText.LineSpacing * (MainText.Length - 1)) + endSpacing;
 
                 float scalingFactor = 1.0f;
                 if (formatting.ScaleFontSize && (usedWidth > usableWidth || usedHeight > usableHeight))
                 {
                     scalingFactor = Math.Min((float)usableWidth / (float)usedWidth, (float)usableHeight / (float)usedHeight);
                     formatting.MainText.Font = new Font(formatting.MainText.Font.FontFamily, formatting.MainText.Font.Size * scalingFactor, formatting.MainText.Font.Style);
-                    strMeasure = gr.MeasureString(ListToString(MainText), formatting.MainText.Font);
+                    strMeasure = gr.MeasureString(String.Join(Environment.NewLine, MainText), formatting.MainText.Font);
                     usedWidth = (int)strMeasure.Width;
-                    usedHeight = (int)strMeasure.Height + (formatting.MainText.LineSpacing * (MainText.Count - 1));
+                    usedHeight = (int)strMeasure.Height + (formatting.MainText.LineSpacing * (MainText.Length - 1));
                 }
-                int lineHeight = (int)(strMeasure.Height / MainText.Count);
+                int lineHeight = (int)(strMeasure.Height / MainText.Length);
 
                 // Adapt horizontal starting position
                 if (formatting.TextOrientation.Horizontal == HorizontalOrientation.Center)
@@ -116,111 +116,39 @@ namespace PraiseBase.Presenter
                 DrawLines(gr, MainText, textStartX, textStartY, strFormat, formatting.MainText, formatting.TextOutlineEnabled, formatting.TextShadowEnabled, lineHeight);
 
                 // Sub-text (translation)
-                if (SubText != null && SubText.Count > 0)
+                if (SubText != null && SubText.Length > 0)
                 {
-                    int transStartX = textStartX + 10;
-                    int transStartY = textStartY + lineHeight;
-                    int textX = transStartX;
-                    int textY = transStartY;
-
-                    // Shadow
-                    if (formatting.TextShadowEnabled)
-                    {
-                        int shadowThickness = formatting.TranslationText.Shadow.Distance;
-                        if (shadowThickness > 0)
-                        {
-                            shadodBrush = new SolidBrush(Color.FromArgb(15, formatting.TranslationText.Shadow.Color));
-                            gr.SmoothingMode = SmoothingMode.HighQuality;
-                            gr.InterpolationMode = InterpolationMode.HighQualityBilinear;
-                            gr.TextRenderingHint = TextRenderingHint.AntiAliasGridFit;
-
-                            foreach (string s in SubText)
-                            {
-                                for (int x = textX; x <= textX + shadowThickness; x++)
-                                {
-                                    for (int y = textY; y <= textY + shadowThickness; y++)
-                                    {
-                                        gr.DrawString(s, formatting.TranslationText.Font, shadodBrush, new Point(x, y), strFormat);
-                                    }
-                                }
-                                textY += lineHeight + formatting.TranslationText.LineSpacing;
-                            }
-                            textY = transStartY;
-                        }
-                    }
-
-                    // Outline
-                    if (formatting.TextOutlineEnabled)
-                    {
-                        int outLineThickness = formatting.MainText.Outline.Width;
-                        if (outLineThickness > 0)
-                        {
-                            gr.SmoothingMode = SmoothingMode.None;
-                            gr.InterpolationMode = InterpolationMode.Low;
-                            gr.TextRenderingHint = TextRenderingHint.ClearTypeGridFit;
-
-                            Brush br = new SolidBrush(formatting.TranslationText.Outline.Color);
-
-                            foreach (string s in SubText)
-                            {
-                                for (int x = textX - outLineThickness * 2; x <= textX + outLineThickness * 2; x += 2)
-                                {
-                                    for (int y = textY - outLineThickness * 2; y <= textY + outLineThickness * 2; y += 2)
-                                    {
-                                        gr.DrawString(s, formatting.TranslationText.Font, br, new Point(x, y), strFormat);
-                                    }
-                                }
-                                textY += lineHeight + formatting.TranslationText.LineSpacing;
-                            }
-                            textY = transStartY;
-                        }
-                    }
-
-                    foreach (string s in SubText)
-                    {
-                        gr.DrawString(s, formatting.TranslationText.Font, new SolidBrush(formatting.TranslationText.Color), new Point(textX, textY), strFormat);
-                        textY += lineHeight + formatting.TranslationText.LineSpacing;
-                    }
+                    DrawLines(gr, SubText, textStartX + 10, textStartY + lineHeight, strFormat, formatting.TranslationText, formatting.TextOutlineEnabled, formatting.TextShadowEnabled, lineHeight);
                 }
             }
 
             //
             // Header text (source)
             //
-            if (HeaderText != null && HeaderText != String.Empty)
+            if (HeaderText != null && HeaderText.Length > 0)
             {
+                SizeF headerMeasure = gr.MeasureString(String.Join(Environment.NewLine, HeaderText), formatting.SourceText.Font);
                 int headerPosX = w - formatting.TextBorders.SourceRight;
                 int headerPoxY = formatting.TextBorders.SourceTop;
+                int lineHeight = (int)(headerMeasure.Height / HeaderText.Length);
                 StringFormat headerStrFormat = new StringFormat();
                 headerStrFormat.Alignment = StringAlignment.Far;
-                gr.DrawString(HeaderText, formatting.SourceText.Font, new SolidBrush(formatting.SourceText.Color), new Point(headerPosX, headerPoxY), headerStrFormat);
+                DrawLines(gr, HeaderText, headerPosX, headerPoxY, headerStrFormat, formatting.SourceText, formatting.TextOutlineEnabled, formatting.TextShadowEnabled, lineHeight);
             }
 
             //
             // Footer text (copyright)
             //
-            if (FooterText != null && FooterText != String.Empty)
+            if (FooterText != null && FooterText.Length > 0)
             {
-                SizeF footerMeasure = gr.MeasureString(FooterText, formatting.CopyrightText.Font);
+                SizeF footerMeasure = gr.MeasureString(String.Join(Environment.NewLine, FooterText), formatting.CopyrightText.Font);
                 int footerPosX = w / 2;
                 int footerPosY = h - formatting.TextBorders.CopyrightBottom - (int)footerMeasure.Height;
+                int lineHeight = (int)(footerMeasure.Height / FooterText.Length);
                 StringFormat footerStrFormat = new StringFormat();
                 footerStrFormat.Alignment = StringAlignment.Center;
-                gr.DrawString(FooterText, formatting.CopyrightText.Font, new SolidBrush(formatting.CopyrightText.Color), new Point(footerPosX, footerPosY), footerStrFormat);
+                DrawLines(gr, FooterText, footerPosX, footerPosY, footerStrFormat, formatting.CopyrightText, formatting.TextOutlineEnabled, formatting.TextShadowEnabled, lineHeight);
             }
-        }
-
-        private static String ListToString(List<String> lines) {
-            string txt = "";
-            int i = 1;
-            foreach (string str in lines)
-            {
-                txt += str;
-                if (i < lines.Count)
-                    txt += Environment.NewLine;
-                i++;
-            }
-            return txt;
         }
 
         private static void MapStringFormatAlignment(TextOrientation to, StringFormat strFormat) 
@@ -239,7 +167,7 @@ namespace PraiseBase.Presenter
             }
         }
 
-        private static void DrawLines(Graphics gr, List<String> lines, int textStartX, int textStartY,
+        private static void DrawLines(Graphics gr, String[] lines, int textStartX, int textStartY,
             StringFormat strFormat, TextFormatting textFormatting, bool outline, bool shadow, int lineHeight)
         {
             int textX = textStartX;
