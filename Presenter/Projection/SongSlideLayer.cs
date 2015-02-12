@@ -111,12 +111,12 @@ namespace PraiseBase.Presenter
                 mapStringFormatAlignment(formatting.TextOrientation, strFormat);
 
                 // Draw main text
-                drawLines(gr, MainText, textStartX, textStartY, strFormat, formatting.MainText, formatting.TextOutlineEnabled, formatting.TextShadowEnabled, lineHeight);
+                drawLines(gr, MainText, textStartX, textStartY, strFormat, formatting.MainText, formatting.OutlineEnabled, formatting.ShadowEnabled, lineHeight);
 
                 // Sub-text (translation)
                 if (SubText != null && SubText.Length > 0)
                 {
-                    drawLines(gr, SubText, textStartX + 10, textStartY + lineHeight, strFormat, formatting.SubText, formatting.TextOutlineEnabled, formatting.TextShadowEnabled, lineHeight);
+                    drawLines(gr, SubText, textStartX + 10, textStartY + lineHeight, strFormat, formatting.SubText, formatting.OutlineEnabled, formatting.ShadowEnabled, lineHeight);
                 }
             }
 
@@ -131,7 +131,7 @@ namespace PraiseBase.Presenter
                 int lineHeight = (int)(headerMeasure.Height / HeaderText.Length);
                 StringFormat headerStrFormat = new StringFormat();
                 headerStrFormat.Alignment = StringAlignment.Far;
-                drawLines(gr, HeaderText, headerPosX, headerPoxY, headerStrFormat, formatting.HeaderText, formatting.TextOutlineEnabled, formatting.TextShadowEnabled, lineHeight);
+                drawLines(gr, HeaderText, headerPosX, headerPoxY, headerStrFormat, formatting.HeaderText, formatting.OutlineEnabled, formatting.ShadowEnabled, lineHeight);
             }
 
             //
@@ -145,7 +145,7 @@ namespace PraiseBase.Presenter
                 int lineHeight = (int)(footerMeasure.Height / FooterText.Length);
                 StringFormat footerStrFormat = new StringFormat();
                 footerStrFormat.Alignment = StringAlignment.Center;
-                drawLines(gr, FooterText, footerPosX, footerPosY, footerStrFormat, formatting.FooterText, formatting.TextOutlineEnabled, formatting.TextShadowEnabled, lineHeight);
+                drawLines(gr, FooterText, footerPosX, footerPosY, footerStrFormat, formatting.FooterText, formatting.OutlineEnabled, formatting.ShadowEnabled, lineHeight);
             }
         }
 

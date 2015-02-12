@@ -465,8 +465,8 @@ namespace PraiseBase.Presenter.Forms
                 slideFormatting.HorizontalHeaderPadding = 20;
                 slideFormatting.VerticalHeaderPadding = 40;
                 
-                slideFormatting.TextOutlineEnabled = true;
-                slideFormatting.TextShadowEnabled = true;
+                slideFormatting.OutlineEnabled = true;
+                slideFormatting.ShadowEnabled = true;
             }
             else
             {
@@ -482,8 +482,8 @@ namespace PraiseBase.Presenter.Forms
                 slideFormatting.HorizontalHeaderPadding = s.TextBorders.SourceRight;
                 slideFormatting.VerticalHeaderPadding = s.TextBorders.SourceTop;
                 
-                slideFormatting.TextOutlineEnabled = s.TextOutlineEnabled;
-                slideFormatting.TextShadowEnabled = s.TextShadowEnabled;
+                slideFormatting.OutlineEnabled = s.TextOutlineEnabled;
+                slideFormatting.ShadowEnabled = s.TextShadowEnabled;
             }
             slideFormatting.TextOrientation = (TextOrientation)s.TextOrientation.Clone();
             slideFormatting.ScaleFontSize = Settings.Default.ProjectionFontScaling;

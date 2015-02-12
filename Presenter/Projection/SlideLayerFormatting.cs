@@ -10,6 +10,21 @@ namespace PraiseBase.Presenter.Projection
     public struct SlideLayerFormatting
     {
         /// <summary>
+        /// True of the text should be outlined
+        /// </summary>
+        public bool OutlineEnabled { get; set; }
+
+        /// <summary>
+        /// True if the text should have a shadow
+        /// </summary>
+        public bool ShadowEnabled { get; set; }
+
+        /// <summary>
+        /// If true, font size will be scaled down if the text does not fit on the slide
+        /// </summary>
+        public Boolean ScaleFontSize;
+
+        /// <summary>
         /// Gets or sets the text font and color for the main text
         /// </summary>
         public TextFormatting MainText { get; set; }
@@ -20,34 +35,9 @@ namespace PraiseBase.Presenter.Projection
         public TextFormatting SubText { get; set; }
 
         /// <summary>
-        /// Gets or sets the font for the copyright text
-        /// </summary>
-        public TextFormatting FooterText { get; set; }
-
-        /// <summary>
-        /// Gets or sets the font for the source text
-        /// </summary>
-        public TextFormatting HeaderText { get; set; }
-
-        /// <summary>
         /// Text orientation
         /// </summary>
         public TextOrientation TextOrientation;
-
-        /// <summary>
-        /// True of the text should be outlined
-        /// </summary>
-        public bool TextOutlineEnabled { get; set; }
-
-        /// <summary>
-        /// True if the text should have a shadow
-        /// </summary>
-        public bool TextShadowEnabled { get; set; }
-
-        /// <summary>
-        /// If true, font size will be scaled down if the text does not fit on the slide
-        /// </summary>
-        public Boolean ScaleFontSize;
 
         /// <summary>
         /// Vertical text padding
@@ -58,7 +48,12 @@ namespace PraiseBase.Presenter.Projection
         /// Horizontal text padding
         /// </summary>
         public int HorizontalTextPadding { get; set; }
-        
+
+        /// <summary>
+        /// Gets or sets the font for the source text
+        /// </summary>
+        public TextFormatting HeaderText { get; set; }
+
         /// <summary>
         /// Vertical header padding
         /// </summary>
@@ -68,7 +63,12 @@ namespace PraiseBase.Presenter.Projection
         /// Horizontal header padding
         /// </summary>
         public int HorizontalHeaderPadding { get; set; }
-        
+
+        /// <summary>
+        /// Gets or sets the font for the copyright text
+        /// </summary>
+        public TextFormatting FooterText { get; set; }
+       
         /// <summary>
         /// Vertical footer padding
         /// </summary>
