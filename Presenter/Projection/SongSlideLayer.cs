@@ -32,14 +32,14 @@ namespace PraiseBase.Presenter
 {
     internal class SongSlideLayer : TextLayer
     {
-        private SongSlideLayerFormatting formatting;
+        private SlideLayerFormatting formatting;
 
         public String[] MainText { get; set; }
         public String[] SubText { get; set; }
         public String[] HeaderText { get; set; }
         public String[] FooterText { get; set; }
 
-        public SongSlideLayer(SongSlideLayerFormatting formatting)
+        public SongSlideLayer(SlideLayerFormatting formatting)
         {
             this.formatting = formatting;
         }
@@ -51,13 +51,11 @@ namespace PraiseBase.Presenter
 
             if (MainText.Length > 0)
             {
-                int padding = formatting.TextBorders.TextLeft;
+                int usableWidth = w - (2 * formatting.HorizontalTextPadding);
+                int usableHeight = h - (2 * formatting.VerticalTextPadding);
 
-                int usableWidth = w - (2 * padding);
-                int usableHeight = h - (2 * padding);
-
-                int textStartX = padding;
-                int textStartY = padding;
+                int textStartX = formatting.HorizontalTextPadding;
+                int textStartY = formatting.VerticalTextPadding;
 
                 SizeF strMeasureTrans;
 
@@ -128,8 +126,8 @@ namespace PraiseBase.Presenter
             if (HeaderText != null && HeaderText.Length > 0)
             {
                 SizeF headerMeasure = gr.MeasureString(String.Join(Environment.NewLine, HeaderText), formatting.HeaderText.Font);
-                int headerPosX = w - formatting.TextBorders.SourceRight;
-                int headerPoxY = formatting.TextBorders.SourceTop;
+                int headerPosX = w - formatting.HorizontalHeaderPadding;
+                int headerPoxY = formatting.VerticalHeaderPadding;
                 int lineHeight = (int)(headerMeasure.Height / HeaderText.Length);
                 StringFormat headerStrFormat = new StringFormat();
                 headerStrFormat.Alignment = StringAlignment.Far;
@@ -143,7 +141,7 @@ namespace PraiseBase.Presenter
             {
                 SizeF footerMeasure = gr.MeasureString(String.Join(Environment.NewLine, FooterText), formatting.FooterText.Font);
                 int footerPosX = w / 2;
-                int footerPosY = h - formatting.TextBorders.CopyrightBottom - (int)footerMeasure.Height;
+                int footerPosY = h - formatting.VerticalFooterPadding - (int)footerMeasure.Height;
                 int lineHeight = (int)(footerMeasure.Height / FooterText.Length);
                 StringFormat footerStrFormat = new StringFormat();
                 footerStrFormat.Alignment = StringAlignment.Center;

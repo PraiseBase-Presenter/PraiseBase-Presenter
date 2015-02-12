@@ -425,7 +425,7 @@ namespace PraiseBase.Presenter.Forms
 
             PraiseBase.Presenter.Model.Song.SongSlide cs = s.Parts[e.PartNumber].Slides[e.SlideNumber];
 
-            SongSlideLayerFormatting slideFormatting = new SongSlideLayerFormatting();
+            SlideLayerFormatting slideFormatting = new SlideLayerFormatting();
             // TODO: Move static numbers to settings
             if (Settings.Default.ProjectionUseMaster)
             {
@@ -457,13 +457,14 @@ namespace PraiseBase.Presenter.Forms
                     new TextShadow(Settings.Default.ProjectionShadowSize, 125, Settings.Default.ProjectionShadowColor),
                     Settings.Default.ProjectionMasterLineSpacing
                 );
-                slideFormatting.TextBorders = new SongTextBorders(
-                    Settings.Default.ProjectionPadding, 
-                    Settings.Default.ProjectionPadding, 
-                    Settings.Default.ProjectionPadding, 
-                    Settings.Default.ProjectionPadding, 
-                    30, 20, 40
-                );
+                
+                slideFormatting.HorizontalTextPadding = Settings.Default.ProjectionPadding;
+                slideFormatting.VerticalTextPadding = Settings.Default.ProjectionPadding;
+                slideFormatting.HorizontalFooterPadding = 30;
+                slideFormatting.VerticalFooterPadding = 40;
+                slideFormatting.HorizontalHeaderPadding = 20;
+                slideFormatting.VerticalHeaderPadding = 40;
+                
                 slideFormatting.TextOutlineEnabled = true;
                 slideFormatting.TextShadowEnabled = true;
             }
@@ -473,7 +474,14 @@ namespace PraiseBase.Presenter.Forms
                 slideFormatting.SubText = (TextFormatting)s.TranslationText.Clone();
                 slideFormatting.FooterText = (TextFormatting)s.CopyrightText.Clone();
                 slideFormatting.HeaderText = (TextFormatting)s.SourceText.Clone();
-                slideFormatting.TextBorders = (SongTextBorders)s.TextBorders.Clone();
+                
+                slideFormatting.HorizontalTextPadding = s.TextBorders.TextLeft;
+                slideFormatting.VerticalTextPadding = s.TextBorders.TextTop;
+                slideFormatting.HorizontalFooterPadding = s.TextBorders.CopyrightBottom;
+                slideFormatting.VerticalFooterPadding = s.TextBorders.CopyrightBottom;
+                slideFormatting.HorizontalHeaderPadding = s.TextBorders.SourceRight;
+                slideFormatting.VerticalHeaderPadding = s.TextBorders.SourceTop;
+                
                 slideFormatting.TextOutlineEnabled = s.TextOutlineEnabled;
                 slideFormatting.TextShadowEnabled = s.TextShadowEnabled;
             }

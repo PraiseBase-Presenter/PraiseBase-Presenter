@@ -104,7 +104,7 @@
     <Compile Include="Projection\BibleLayer.cs" />
     <Compile Include="Projection\ImageLayer.cs" />
     <Compile Include="Projection\SongSlideLayer.cs" />
-    <Compile Include="Projection\SongSlideLayerFormatting.cs" />
+    <Compile Include="Projection\SlideLayerFormatting.cs" />
     <Compile Include="Properties\StringResources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>

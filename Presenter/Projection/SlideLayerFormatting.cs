@@ -7,7 +7,7 @@ using System.Text;
 
 namespace PraiseBase.Presenter.Projection
 {
-    public struct SongSlideLayerFormatting
+    public struct SlideLayerFormatting
     {
         /// <summary>
         /// Gets or sets the text font and color for the main text
@@ -31,8 +31,6 @@ namespace PraiseBase.Presenter.Projection
 
         public TextOrientation TextOrientation;
 
-        public SongTextBorders TextBorders;
-
         /// <summary>
         /// True of the text should be outlined
         /// </summary>
@@ -44,5 +42,17 @@ namespace PraiseBase.Presenter.Projection
         public bool TextShadowEnabled { get; set; }
 
         public Boolean ScaleFontSize;
+
+        public int VerticalTextPadding { get; set; }
+
+        public int HorizontalTextPadding { get; set; }
+        
+        public int VerticalHeaderPadding { get; set; }
+
+        public int HorizontalHeaderPadding { get; set; }
+        
+        public int VerticalFooterPadding { get; set; }
+
+        public int HorizontalFooterPadding { get; set; }
     }
 }

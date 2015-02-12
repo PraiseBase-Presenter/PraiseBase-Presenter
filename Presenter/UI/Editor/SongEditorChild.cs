@@ -904,13 +904,20 @@ namespace PraiseBase.Presenter.Forms
             SongSlide slide = (SongSlide)sng.Parts[currentPartId].Slides[currentSlideId].Clone();
             slide.Text = textBoxSongText.Text;
             slide.TranslationText = textBoxSongTranslation.Text;
-            SongSlideLayerFormatting slideFormatting = new SongSlideLayerFormatting();
+            SlideLayerFormatting slideFormatting = new SlideLayerFormatting();
             slideFormatting.MainText = (TextFormatting)sng.MainText.Clone();
             slideFormatting.SubText = (TextFormatting)sng.TranslationText.Clone();
             slideFormatting.FooterText = (TextFormatting)sng.CopyrightText.Clone();
             slideFormatting.HeaderText = (TextFormatting)sng.SourceText.Clone();
             slideFormatting.TextOrientation = (TextOrientation)sng.TextOrientation.Clone();
-            slideFormatting.TextBorders = (SongTextBorders)sng.TextBorders.Clone();
+
+            slideFormatting.HorizontalTextPadding = sng.TextBorders.TextLeft;
+            slideFormatting.VerticalTextPadding = sng.TextBorders.TextTop;
+            slideFormatting.HorizontalFooterPadding = sng.TextBorders.CopyrightBottom;
+            slideFormatting.VerticalFooterPadding = sng.TextBorders.CopyrightBottom;
+            slideFormatting.HorizontalHeaderPadding = sng.TextBorders.SourceRight;
+            slideFormatting.VerticalHeaderPadding = sng.TextBorders.SourceTop;
+
             slideFormatting.ScaleFontSize = Settings.Default.ProjectionFontScaling;
             SongSlideLayer sl = new SongSlideLayer(slideFormatting);
             sl.MainText = slide.Lines.ToArray();
