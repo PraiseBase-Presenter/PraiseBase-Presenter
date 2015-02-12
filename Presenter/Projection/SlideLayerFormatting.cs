@@ -29,6 +29,9 @@ namespace PraiseBase.Presenter.Projection
         /// </summary>
         public TextFormatting HeaderText { get; set; }
 
+        /// <summary>
+        /// Text orientation
+        /// </summary>
         public TextOrientation TextOrientation;
 
         /// <summary>
@@ -41,18 +44,39 @@ namespace PraiseBase.Presenter.Projection
         /// </summary>
         public bool TextShadowEnabled { get; set; }
 
+        /// <summary>
+        /// If true, font size will be scaled down if the text does not fit on the slide
+        /// </summary>
         public Boolean ScaleFontSize;
 
+        /// <summary>
+        /// Vertical text padding
+        /// </summary>
         public int VerticalTextPadding { get; set; }
 
+        /// <summary>
+        /// Horizontal text padding
+        /// </summary>
         public int HorizontalTextPadding { get; set; }
         
+        /// <summary>
+        /// Vertical header padding
+        /// </summary>
         public int VerticalHeaderPadding { get; set; }
 
+        /// <summary>
+        /// Horizontal header padding
+        /// </summary>
         public int HorizontalHeaderPadding { get; set; }
         
+        /// <summary>
+        /// Vertical footer padding
+        /// </summary>
         public int VerticalFooterPadding { get; set; }
 
+        /// <summary>
+        /// Horizontal footer padding 
+        /// </summary>
         public int HorizontalFooterPadding { get; set; }
     }
 }
