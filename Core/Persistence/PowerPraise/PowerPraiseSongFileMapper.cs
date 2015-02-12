@@ -45,7 +45,7 @@ namespace PraiseBase.Presenter.Persistence.PowerPraise
             song.Themes.Add(ppl.Category);
 
             // Copyright text
-            song.Copyright = String.Join(" ", ppl.CopyrightText.ToArray());
+            song.Copyright = String.Join(Environment.NewLine, ppl.CopyrightText.ToArray());
             switch (ppl.CopyrightTextPosition)
             {
                 case PowerPraiseSong.CopyrightPosition.FirstSlide:
