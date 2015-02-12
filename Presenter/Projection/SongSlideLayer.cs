@@ -102,13 +102,10 @@ namespace PraiseBase.Presenter
                 {
                     textStartY = textStartY + usableHeight - usedHeight;
                 }
-                
-                //int textX = textStartX;
-                //int textY = textStartY;
 
                 // Define string format
                 StringFormat strFormat = new StringFormat();
-                mapStringFormatAlignment(formatting.TextOrientation, strFormat);
+                mapStringFormatAlignment(formatting.TextOrientation.Horizontal, strFormat);
 
                 // Draw main text
                 drawLines(gr, MainText, textStartX, textStartY, strFormat, formatting.MainText, formatting.OutlineEnabled, formatting.ShadowEnabled, lineHeight);
@@ -126,11 +123,19 @@ namespace PraiseBase.Presenter
             if (HeaderText != null && HeaderText.Length > 0)
             {
                 SizeF headerMeasure = gr.MeasureString(String.Join(Environment.NewLine, HeaderText), formatting.HeaderText.Font);
-                int headerPosX = w - formatting.HorizontalHeaderPadding;
+                int headerPosX = formatting.HorizontalHeaderPadding;
+                if (formatting.HeaderTextOrientation == HorizontalOrientation.Center)
+                {
+                    headerPosX = w / 2;
+                }
+                else if (formatting.HeaderTextOrientation == HorizontalOrientation.Right)
+                {
+                    headerPosX = w - formatting.HorizontalHeaderPadding;
+                }
                 int headerPoxY = formatting.VerticalHeaderPadding;
                 int lineHeight = (int)(headerMeasure.Height / HeaderText.Length);
                 StringFormat headerStrFormat = new StringFormat();
-                headerStrFormat.Alignment = StringAlignment.Far;
+                mapStringFormatAlignment(formatting.HeaderTextOrientation, headerStrFormat);
                 drawLines(gr, HeaderText, headerPosX, headerPoxY, headerStrFormat, formatting.HeaderText, formatting.OutlineEnabled, formatting.ShadowEnabled, lineHeight);
             }
 
@@ -140,18 +145,26 @@ namespace PraiseBase.Presenter
             if (FooterText != null && FooterText.Length > 0)
             {
                 SizeF footerMeasure = gr.MeasureString(String.Join(Environment.NewLine, FooterText), formatting.FooterText.Font);
-                int footerPosX = w / 2;
+                int footerPosX = formatting.HorizontalFooterPadding;
+                if (formatting.FooterTextOrientation == HorizontalOrientation.Center)
+                {
+                    footerPosX = w / 2;
+                }
+                else if (formatting.FooterTextOrientation == HorizontalOrientation.Right)
+                {
+                    footerPosX = w - formatting.HorizontalFooterPadding;
+                }
                 int footerPosY = h - formatting.VerticalFooterPadding - (int)footerMeasure.Height;
                 int lineHeight = (int)(footerMeasure.Height / FooterText.Length);
                 StringFormat footerStrFormat = new StringFormat();
-                footerStrFormat.Alignment = StringAlignment.Center;
+                mapStringFormatAlignment(formatting.FooterTextOrientation, footerStrFormat);
                 drawLines(gr, FooterText, footerPosX, footerPosY, footerStrFormat, formatting.FooterText, formatting.OutlineEnabled, formatting.ShadowEnabled, lineHeight);
             }
         }
 
-        private static void mapStringFormatAlignment(TextOrientation to, StringFormat strFormat) 
+        private static void mapStringFormatAlignment(HorizontalOrientation to, StringFormat strFormat) 
         {
-            switch (to.Horizontal)
+            switch (to)
             {
                 case HorizontalOrientation.Left:
                     strFormat.Alignment = StringAlignment.Near;

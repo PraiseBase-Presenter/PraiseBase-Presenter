@@ -911,6 +911,9 @@ namespace PraiseBase.Presenter.Forms
             slideFormatting.HeaderText = (TextFormatting)sng.SourceText.Clone();
             slideFormatting.TextOrientation = (TextOrientation)sng.TextOrientation.Clone();
 
+            slideFormatting.HeaderTextOrientation = HorizontalOrientation.Right;
+            slideFormatting.FooterTextOrientation = HorizontalOrientation.Center;
+
             slideFormatting.HorizontalTextPadding = sng.TextBorders.TextLeft;
             slideFormatting.VerticalTextPadding = sng.TextBorders.TextTop;
             slideFormatting.HorizontalFooterPadding = sng.TextBorders.CopyrightBottom;

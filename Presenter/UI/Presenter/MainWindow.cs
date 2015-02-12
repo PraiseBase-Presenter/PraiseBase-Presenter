@@ -486,6 +486,8 @@ namespace PraiseBase.Presenter.Forms
                 slideFormatting.ShadowEnabled = s.TextShadowEnabled;
             }
             slideFormatting.TextOrientation = (TextOrientation)s.TextOrientation.Clone();
+            slideFormatting.HeaderTextOrientation = HorizontalOrientation.Right;
+            slideFormatting.FooterTextOrientation = HorizontalOrientation.Left;
             slideFormatting.ScaleFontSize = Settings.Default.ProjectionFontScaling;
             // TODO respect slide text size
             var ssl = new SongSlideLayer(slideFormatting);
