@@ -110,15 +110,15 @@ namespace PraiseBase.Presenter
 
                 // Define string format
                 StringFormat strFormat = new StringFormat();
-                MapStringFormatAlignment(formatting.TextOrientation, strFormat);
+                mapStringFormatAlignment(formatting.TextOrientation, strFormat);
 
                 // Draw main text
-                DrawLines(gr, MainText, textStartX, textStartY, strFormat, formatting.MainText, formatting.TextOutlineEnabled, formatting.TextShadowEnabled, lineHeight);
+                drawLines(gr, MainText, textStartX, textStartY, strFormat, formatting.MainText, formatting.TextOutlineEnabled, formatting.TextShadowEnabled, lineHeight);
 
                 // Sub-text (translation)
                 if (SubText != null && SubText.Length > 0)
                 {
-                    DrawLines(gr, SubText, textStartX + 10, textStartY + lineHeight, strFormat, formatting.SubText, formatting.TextOutlineEnabled, formatting.TextShadowEnabled, lineHeight);
+                    drawLines(gr, SubText, textStartX + 10, textStartY + lineHeight, strFormat, formatting.SubText, formatting.TextOutlineEnabled, formatting.TextShadowEnabled, lineHeight);
                 }
             }
 
@@ -133,7 +133,7 @@ namespace PraiseBase.Presenter
                 int lineHeight = (int)(headerMeasure.Height / HeaderText.Length);
                 StringFormat headerStrFormat = new StringFormat();
                 headerStrFormat.Alignment = StringAlignment.Far;
-                DrawLines(gr, HeaderText, headerPosX, headerPoxY, headerStrFormat, formatting.HeaderText, formatting.TextOutlineEnabled, formatting.TextShadowEnabled, lineHeight);
+                drawLines(gr, HeaderText, headerPosX, headerPoxY, headerStrFormat, formatting.HeaderText, formatting.TextOutlineEnabled, formatting.TextShadowEnabled, lineHeight);
             }
 
             //
@@ -147,11 +147,11 @@ namespace PraiseBase.Presenter
                 int lineHeight = (int)(footerMeasure.Height / FooterText.Length);
                 StringFormat footerStrFormat = new StringFormat();
                 footerStrFormat.Alignment = StringAlignment.Center;
-                DrawLines(gr, FooterText, footerPosX, footerPosY, footerStrFormat, formatting.FooterText, formatting.TextOutlineEnabled, formatting.TextShadowEnabled, lineHeight);
+                drawLines(gr, FooterText, footerPosX, footerPosY, footerStrFormat, formatting.FooterText, formatting.TextOutlineEnabled, formatting.TextShadowEnabled, lineHeight);
             }
         }
 
-        private static void MapStringFormatAlignment(TextOrientation to, StringFormat strFormat) 
+        private static void mapStringFormatAlignment(TextOrientation to, StringFormat strFormat) 
         {
             switch (to.Horizontal)
             {
@@ -167,7 +167,7 @@ namespace PraiseBase.Presenter
             }
         }
 
-        private static void DrawLines(Graphics gr, String[] lines, int textStartX, int textStartY,
+        private static void drawLines(Graphics gr, String[] lines, int textStartX, int textStartY,
             StringFormat strFormat, TextFormatting textFormatting, bool outline, bool shadow, int lineHeight)
         {
             int textX = textStartX;
