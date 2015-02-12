@@ -17,17 +17,17 @@ namespace PraiseBase.Presenter.Projection
         /// <summary>
         /// Gets or sets the font of tanslation text
         /// </summary>
-        public TextFormatting TranslationText { get; set; }
+        public TextFormatting SubText { get; set; }
 
         /// <summary>
         /// Gets or sets the font for the copyright text
         /// </summary>
-        public TextFormatting CopyrightText { get; set; }
+        public TextFormatting FooterText { get; set; }
 
         /// <summary>
         /// Gets or sets the font for the source text
         /// </summary>
-        public TextFormatting SourceText { get; set; }
+        public TextFormatting HeaderText { get; set; }
 
         public TextOrientation TextOrientation;
 

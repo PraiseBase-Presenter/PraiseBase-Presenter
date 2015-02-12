@@ -906,9 +906,9 @@ namespace PraiseBase.Presenter.Forms
             slide.TranslationText = textBoxSongTranslation.Text;
             SongSlideLayerFormatting slideFormatting = new SongSlideLayerFormatting();
             slideFormatting.MainText = (TextFormatting)sng.MainText.Clone();
-            slideFormatting.TranslationText = (TextFormatting)sng.TranslationText.Clone();
-            slideFormatting.CopyrightText = (TextFormatting)sng.CopyrightText.Clone();
-            slideFormatting.SourceText = (TextFormatting)sng.SourceText.Clone();
+            slideFormatting.SubText = (TextFormatting)sng.TranslationText.Clone();
+            slideFormatting.FooterText = (TextFormatting)sng.CopyrightText.Clone();
+            slideFormatting.HeaderText = (TextFormatting)sng.SourceText.Clone();
             slideFormatting.TextOrientation = (TextOrientation)sng.TextOrientation.Clone();
             slideFormatting.TextBorders = (SongTextBorders)sng.TextBorders.Clone();
             slideFormatting.ScaleFontSize = Settings.Default.ProjectionFontScaling;
@@ -917,14 +917,14 @@ namespace PraiseBase.Presenter.Forms
             sl.SubText = slide.Translation.ToArray();
 
             slideFormatting.MainText.Outline.Width = 0;
-            slideFormatting.TranslationText.Outline.Width = 0;
-            slideFormatting.CopyrightText.Outline.Width = 0;
-            slideFormatting.SourceText.Outline.Width = 0;
+            slideFormatting.SubText.Outline.Width = 0;
+            slideFormatting.FooterText.Outline.Width = 0;
+            slideFormatting.HeaderText.Outline.Width = 0;
 
             slideFormatting.MainText.Shadow.Distance = 0;
-            slideFormatting.TranslationText.Shadow.Distance = 0;
-            slideFormatting.CopyrightText.Shadow.Distance = 0;
-            slideFormatting.SourceText.Shadow.Distance = 0;
+            slideFormatting.SubText.Shadow.Distance = 0;
+            slideFormatting.FooterText.Shadow.Distance = 0;
+            slideFormatting.HeaderText.Shadow.Distance = 0;
 
             ImageLayer il = new ImageLayer();
             il.Image = ImageManager.Instance.GetImage(sng.GetImage(sng.Parts[currentPartId].Slides[currentSlideId].ImageNumber));

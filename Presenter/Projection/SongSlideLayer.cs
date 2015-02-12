@@ -64,9 +64,9 @@ namespace PraiseBase.Presenter
                 int endSpacing = 0;
                 if (SubText != null && SubText.Length > 0)
                 {
-                    strMeasureTrans = gr.MeasureString(String.Join(Environment.NewLine, SubText), formatting.TranslationText.Font);
-                    formatting.MainText.LineSpacing += (int)(strMeasureTrans.Height / SubText.Length) + formatting.TranslationText.LineSpacing;
-                    endSpacing = (int)(strMeasureTrans.Height / SubText.Length) + formatting.TranslationText.LineSpacing;
+                    strMeasureTrans = gr.MeasureString(String.Join(Environment.NewLine, SubText), formatting.SubText.Font);
+                    formatting.MainText.LineSpacing += (int)(strMeasureTrans.Height / SubText.Length) + formatting.SubText.LineSpacing;
+                    endSpacing = (int)(strMeasureTrans.Height / SubText.Length) + formatting.SubText.LineSpacing;
                 }
 
                 SizeF strMeasure = gr.MeasureString(String.Join(Environment.NewLine, MainText), formatting.MainText.Font);
@@ -118,7 +118,7 @@ namespace PraiseBase.Presenter
                 // Sub-text (translation)
                 if (SubText != null && SubText.Length > 0)
                 {
-                    DrawLines(gr, SubText, textStartX + 10, textStartY + lineHeight, strFormat, formatting.TranslationText, formatting.TextOutlineEnabled, formatting.TextShadowEnabled, lineHeight);
+                    DrawLines(gr, SubText, textStartX + 10, textStartY + lineHeight, strFormat, formatting.SubText, formatting.TextOutlineEnabled, formatting.TextShadowEnabled, lineHeight);
                 }
             }
 
@@ -127,13 +127,13 @@ namespace PraiseBase.Presenter
             //
             if (HeaderText != null && HeaderText.Length > 0)
             {
-                SizeF headerMeasure = gr.MeasureString(String.Join(Environment.NewLine, HeaderText), formatting.SourceText.Font);
+                SizeF headerMeasure = gr.MeasureString(String.Join(Environment.NewLine, HeaderText), formatting.HeaderText.Font);
                 int headerPosX = w - formatting.TextBorders.SourceRight;
                 int headerPoxY = formatting.TextBorders.SourceTop;
                 int lineHeight = (int)(headerMeasure.Height / HeaderText.Length);
                 StringFormat headerStrFormat = new StringFormat();
                 headerStrFormat.Alignment = StringAlignment.Far;
-                DrawLines(gr, HeaderText, headerPosX, headerPoxY, headerStrFormat, formatting.SourceText, formatting.TextOutlineEnabled, formatting.TextShadowEnabled, lineHeight);
+                DrawLines(gr, HeaderText, headerPosX, headerPoxY, headerStrFormat, formatting.HeaderText, formatting.TextOutlineEnabled, formatting.TextShadowEnabled, lineHeight);
             }
 
             //
@@ -141,13 +141,13 @@ namespace PraiseBase.Presenter
             //
             if (FooterText != null && FooterText.Length > 0)
             {
-                SizeF footerMeasure = gr.MeasureString(String.Join(Environment.NewLine, FooterText), formatting.CopyrightText.Font);
+                SizeF footerMeasure = gr.MeasureString(String.Join(Environment.NewLine, FooterText), formatting.FooterText.Font);
                 int footerPosX = w / 2;
                 int footerPosY = h - formatting.TextBorders.CopyrightBottom - (int)footerMeasure.Height;
                 int lineHeight = (int)(footerMeasure.Height / FooterText.Length);
                 StringFormat footerStrFormat = new StringFormat();
                 footerStrFormat.Alignment = StringAlignment.Center;
-                DrawLines(gr, FooterText, footerPosX, footerPosY, footerStrFormat, formatting.CopyrightText, formatting.TextOutlineEnabled, formatting.TextShadowEnabled, lineHeight);
+                DrawLines(gr, FooterText, footerPosX, footerPosY, footerStrFormat, formatting.FooterText, formatting.TextOutlineEnabled, formatting.TextShadowEnabled, lineHeight);
             }
         }
 

@@ -436,21 +436,21 @@ namespace PraiseBase.Presenter.Forms
                     new TextShadow(Settings.Default.ProjectionShadowSize, 125, Settings.Default.ProjectionShadowColor), 
                     Settings.Default.ProjectionMasterLineSpacing
                 );
-                slideFormatting.TranslationText = new TextFormatting(
+                slideFormatting.SubText = new TextFormatting(
                     Settings.Default.ProjectionMasterFontTranslation, 
                     Settings.Default.ProjectionMasterTranslationColor,
                     new TextOutline(Settings.Default.ProjectionOutlineSize, Settings.Default.ProjectionOutlineColor), 
                     new TextShadow(Settings.Default.ProjectionShadowSize, 125, Settings.Default.ProjectionShadowColor), 
                     Settings.Default.ProjectionMasterTranslationLineSpacing
                 );
-                slideFormatting.CopyrightText = new TextFormatting(
+                slideFormatting.FooterText = new TextFormatting(
                     Settings.Default.ProjectionMasterCopyrightFont, 
                     Settings.Default.ProjectionMasterCopyrightColor, 
                     new TextOutline(Settings.Default.ProjectionOutlineSize, Settings.Default.ProjectionOutlineColor), 
                     new TextShadow(Settings.Default.ProjectionShadowSize, 125, Settings.Default.ProjectionShadowColor), 
                     Settings.Default.ProjectionMasterLineSpacing
                 );
-                slideFormatting.SourceText = new TextFormatting(
+                slideFormatting.HeaderText = new TextFormatting(
                     Settings.Default.ProjectionMasterSourceFont,
                     Settings.Default.ProjectionMasterSourceColor,
                     new TextOutline(Settings.Default.ProjectionOutlineSize, Settings.Default.ProjectionOutlineColor),
@@ -470,9 +470,9 @@ namespace PraiseBase.Presenter.Forms
             else
             {
                 slideFormatting.MainText = (TextFormatting)s.MainText.Clone();
-                slideFormatting.TranslationText = (TextFormatting)s.TranslationText.Clone();
-                slideFormatting.CopyrightText = (TextFormatting)s.CopyrightText.Clone();
-                slideFormatting.SourceText = (TextFormatting)s.SourceText.Clone();
+                slideFormatting.SubText = (TextFormatting)s.TranslationText.Clone();
+                slideFormatting.FooterText = (TextFormatting)s.CopyrightText.Clone();
+                slideFormatting.HeaderText = (TextFormatting)s.SourceText.Clone();
                 slideFormatting.TextBorders = (SongTextBorders)s.TextBorders.Clone();
                 slideFormatting.TextOutlineEnabled = s.TextOutlineEnabled;
                 slideFormatting.TextShadowEnabled = s.TextShadowEnabled;
