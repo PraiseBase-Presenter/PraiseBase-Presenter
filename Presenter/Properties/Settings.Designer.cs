@@ -827,5 +827,17 @@ namespace PraiseBase.Presenter.Properties {
                 this["ProjectionMasteTranslationPosition"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool ProjectionSmoothShadow {
+            get {
+                return ((bool)(this["ProjectionSmoothShadow"]));
+            }
+            set {
+                this["ProjectionSmoothShadow"] = value;
+            }
+        }
     }
 }

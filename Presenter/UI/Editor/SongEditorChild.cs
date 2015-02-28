@@ -907,8 +907,6 @@ namespace PraiseBase.Presenter.Forms
 
         private void previewSlide()
         {
-            Boolean scaleFontSize = Settings.Default.ProjectionFontScaling;
-
             SongSlide slide = (SongSlide)sng.Parts[currentPartId].Slides[currentSlideId].Clone();
             slide.Text = textBoxSongText.Text;
             slide.TranslationText = textBoxSongTranslation.Text;
@@ -916,7 +914,9 @@ namespace PraiseBase.Presenter.Forms
 
             SongSlideTextFormattingMapper.Map(sng, ref slideFormatting);
 
-            slideFormatting.ScaleFontSize = scaleFontSize;
+            slideFormatting.ScaleFontSize = Settings.Default.ProjectionFontScaling;
+            slideFormatting.SmoothShadow = false;
+
             SongSlideLayer sl = new SongSlideLayer(slideFormatting);
             sl.MainText = slide.Lines.ToArray();
             sl.SubText = slide.Translation.ToArray();

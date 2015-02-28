@@ -38,6 +38,7 @@
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.groupBoxProjection = new System.Windows.Forms.GroupBox();
+            this.checkBoxSmoothShadow = new System.Windows.Forms.CheckBox();
             this.labelBackgroundColor = new System.Windows.Forms.Label();
             this.buttonProjectionBackgroundColor = new System.Windows.Forms.Button();
             this.checkBoxProjectionFontScaling = new System.Windows.Forms.CheckBox();
@@ -68,6 +69,8 @@
             this.comboBoxSourcePosition = new System.Windows.Forms.ComboBox();
             this.labelShowSource = new System.Windows.Forms.Label();
             this.groupBoxTextOrientation = new System.Windows.Forms.GroupBox();
+            this.label16 = new System.Windows.Forms.Label();
+            this.comboBoxTranslationPosition = new System.Windows.Forms.ComboBox();
             this.comboBoxVerticalTextOrientation = new System.Windows.Forms.ComboBox();
             this.comboBoxFooterOrientation = new System.Windows.Forms.ComboBox();
             this.comboBoxHeaderOrientation = new System.Windows.Forms.ComboBox();
@@ -130,8 +133,6 @@
             this.labelMainTextString = new System.Windows.Forms.Label();
             this.labelTranslationText = new System.Windows.Forms.Label();
             this.checkBoxUseMasterFormat = new System.Windows.Forms.CheckBox();
-            this.comboBoxTranslationPosition = new System.Windows.Forms.ComboBox();
-            this.label16 = new System.Windows.Forms.Label();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.groupBoxProjection.SuspendLayout();
@@ -221,12 +222,20 @@
             // 
             // groupBoxProjection
             // 
+            this.groupBoxProjection.Controls.Add(this.checkBoxSmoothShadow);
             this.groupBoxProjection.Controls.Add(this.labelBackgroundColor);
             this.groupBoxProjection.Controls.Add(this.buttonProjectionBackgroundColor);
             this.groupBoxProjection.Controls.Add(this.checkBoxProjectionFontScaling);
             resources.ApplyResources(this.groupBoxProjection, "groupBoxProjection");
             this.groupBoxProjection.Name = "groupBoxProjection";
             this.groupBoxProjection.TabStop = false;
+            // 
+            // checkBoxSmoothShadow
+            // 
+            resources.ApplyResources(this.checkBoxSmoothShadow, "checkBoxSmoothShadow");
+            this.checkBoxSmoothShadow.Name = "checkBoxSmoothShadow";
+            this.checkBoxSmoothShadow.UseVisualStyleBackColor = true;
+            this.checkBoxSmoothShadow.CheckedChanged += new System.EventHandler(this.checkBoxSmoothShadow_CheckedChanged);
             // 
             // labelBackgroundColor
             // 
@@ -465,6 +474,22 @@
             this.groupBoxTextOrientation.Controls.Add(this.label10);
             this.groupBoxTextOrientation.Name = "groupBoxTextOrientation";
             this.groupBoxTextOrientation.TabStop = false;
+            // 
+            // label16
+            // 
+            resources.ApplyResources(this.label16, "label16");
+            this.label16.Name = "label16";
+            // 
+            // comboBoxTranslationPosition
+            // 
+            this.comboBoxTranslationPosition.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBoxTranslationPosition.FormattingEnabled = true;
+            this.comboBoxTranslationPosition.Items.AddRange(new object[] {
+            resources.GetString("comboBoxTranslationPosition.Items"),
+            resources.GetString("comboBoxTranslationPosition.Items1")});
+            resources.ApplyResources(this.comboBoxTranslationPosition, "comboBoxTranslationPosition");
+            this.comboBoxTranslationPosition.Name = "comboBoxTranslationPosition";
+            this.comboBoxTranslationPosition.SelectedIndexChanged += new System.EventHandler(this.comboBoxTranslationPosition_SelectedIndexChanged);
             // 
             // comboBoxVerticalTextOrientation
             // 
@@ -957,22 +982,6 @@
             this.checkBoxUseMasterFormat.UseVisualStyleBackColor = true;
             this.checkBoxUseMasterFormat.CheckedChanged += new System.EventHandler(this.checkBoxUseMasterFormat_CheckedChanged);
             // 
-            // comboBoxTranslationPosition
-            // 
-            this.comboBoxTranslationPosition.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboBoxTranslationPosition.FormattingEnabled = true;
-            this.comboBoxTranslationPosition.Items.AddRange(new object[] {
-            resources.GetString("comboBoxTranslationPosition.Items"),
-            resources.GetString("comboBoxTranslationPosition.Items1")});
-            resources.ApplyResources(this.comboBoxTranslationPosition, "comboBoxTranslationPosition");
-            this.comboBoxTranslationPosition.Name = "comboBoxTranslationPosition";
-            this.comboBoxTranslationPosition.SelectedIndexChanged += new System.EventHandler(this.comboBoxTranslationPosition_SelectedIndexChanged);
-            // 
-            // label16
-            // 
-            resources.ApplyResources(this.label16, "label16");
-            this.label16.Name = "label16";
-            // 
             // ProgramSettingsDialog
             // 
             this.AcceptButton = this.exitButton;
@@ -1135,5 +1144,6 @@
         private System.Windows.Forms.ComboBox comboBoxVerticalTextOrientation;
         private System.Windows.Forms.Label label16;
         private System.Windows.Forms.ComboBox comboBoxTranslationPosition;
+        private System.Windows.Forms.CheckBox checkBoxSmoothShadow;
     }
 }

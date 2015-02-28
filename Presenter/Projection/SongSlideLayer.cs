@@ -111,12 +111,12 @@ namespace PraiseBase.Presenter
                 MapStringFormatAlignment(formatting.Text.Orientation.Horizontal, strFormat);
 
                 // Draw main text
-                DrawLines(gr, MainText, textStartX, textStartY, strFormat, formatting.Text.MainText, formatting.Text.OutlineEnabled, formatting.Text.ShadowEnabled, lineHeight);
+                DrawLines(gr, MainText, textStartX, textStartY, strFormat, formatting.Text.MainText, lineHeight);
 
                 // Sub-text (translation)
                 if (SubText != null && SubText.Length > 0)
                 {
-                    DrawLines(gr, SubText, textStartX + 10, textStartY + lineHeight, strFormat, formatting.Text.SubText, formatting.Text.OutlineEnabled, formatting.Text.ShadowEnabled, lineHeight);
+                    DrawLines(gr, SubText, textStartX + 10, textStartY + lineHeight, strFormat, formatting.Text.SubText, lineHeight);
                 }
             }
 
@@ -152,7 +152,7 @@ namespace PraiseBase.Presenter
             }
         }
 
-        private static void DrawTextBox(Graphics gr, String[] text, int x, int y, SlideTextFormatting.TextBoxFormatting formatting)
+        private void DrawTextBox(Graphics gr, String[] text, int x, int y, SlideTextFormatting.TextBoxFormatting formatting)
         {
             // Set string format
             StringFormat strFormat = new StringFormat();
@@ -163,7 +163,7 @@ namespace PraiseBase.Presenter
             int lineHeight = (int)(sizeMeasure.Height / text.Length);
 
             // Draw lines
-            DrawLines(gr, text, x, y, strFormat, formatting.Text, formatting.OutlineEnabled, formatting.ShadowEnabled, lineHeight);
+            DrawLines(gr, text, x, y, strFormat, formatting.Text, lineHeight);
         }
 
         // Get X position on canvas based on padding and horizontal orientation
@@ -197,14 +197,14 @@ namespace PraiseBase.Presenter
             }
         }
 
-        private static void DrawLines(Graphics gr, String[] lines, int textStartX, int textStartY,
-            StringFormat strFormat, TextFormatting textFormatting, bool outline, bool shadow, int lineHeight)
+        private void DrawLines(Graphics gr, String[] lines, int textStartX, int textStartY,
+            StringFormat strFormat, TextFormatting textFormatting, int lineHeight)
         {
             int textX = textStartX;
             int textY = textStartY;
 
             // Shadow
-            if (shadow)
+            if (formatting.ShadowEnabled)
             {
                 Brush shadodBrush = Brushes.Transparent;
 
@@ -212,9 +212,12 @@ namespace PraiseBase.Presenter
                 if (shadowThickness > 0)
                 {
                     shadodBrush = new SolidBrush(Color.FromArgb(15, textFormatting.Shadow.Color));
-                    gr.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.HighQuality;
-                    gr.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.HighQualityBilinear;
-                    gr.TextRenderingHint = TextRenderingHint.AntiAliasGridFit;
+                    if (formatting.SmoothShadow)
+                    {
+                        gr.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.HighQuality;
+                        gr.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.HighQualityBilinear;
+                        gr.TextRenderingHint = TextRenderingHint.AntiAliasGridFit;
+                    }
 
                     foreach (string s in lines)
                     {
@@ -232,7 +235,7 @@ namespace PraiseBase.Presenter
             }
 
             // Outline
-            if (outline)
+            if (formatting.OutlineEnabled)
             {
                 int outLineThickness = textFormatting.Outline.Width;
                 if (outLineThickness > 0)

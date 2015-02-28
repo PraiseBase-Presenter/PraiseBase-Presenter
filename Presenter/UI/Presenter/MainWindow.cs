@@ -446,6 +446,7 @@ namespace PraiseBase.Presenter.Forms
                 copyrightPosition = s.CopyrightPosition;
             }
             slideFormatting.ScaleFontSize = Settings.Default.ProjectionFontScaling;
+            slideFormatting.SmoothShadow = Settings.Default.ProjectionSmoothShadow;
 
             var ssl = new SongSlideLayer(slideFormatting);
 

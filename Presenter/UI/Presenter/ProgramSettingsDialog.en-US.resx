@@ -139,6 +139,12 @@
   <data name="groupBoxProjection.Text" xml:space="preserve">
     <value>Projection</value>
   </data>
+  <data name="checkBoxSmoothShadow.Size" type="System.Drawing.Size, System.Drawing">
+    <value>102, 17</value>
+  </data>
+  <data name="checkBoxSmoothShadow.Text" xml:space="preserve">
+    <value>Smooth shadow</value>
+  </data>
   <data name="labelBackgroundColor.Size" type="System.Drawing.Size, System.Drawing">
     <value>94, 13</value>
   </data>
@@ -202,8 +208,29 @@
   <data name="tabPage5.Text" xml:space="preserve">
     <value>Master formatting</value>
   </data>
+  <data name="groupBoxAdditionalInfo.Text" xml:space="preserve">
+    <value>Additional information</value>
+  </data>
+  <data name="label13.Size" type="System.Drawing.Size, System.Drawing">
+    <value>90, 13</value>
+  </data>
+  <data name="label13.Text" xml:space="preserve">
+    <value>Display copyright:</value>
+  </data>
+  <data name="labelShowSource.Size" type="System.Drawing.Size, System.Drawing">
+    <value>79, 13</value>
+  </data>
+  <data name="labelShowSource.Text" xml:space="preserve">
+    <value>Display source:</value>
+  </data>
   <data name="groupBoxTextOrientation.Text" xml:space="preserve">
     <value>Text orientation</value>
+  </data>
+  <data name="label16.Size" type="System.Drawing.Size, System.Drawing">
+    <value>62, 13</value>
+  </data>
+  <data name="label16.Text" xml:space="preserve">
+    <value>Translation:</value>
   </data>
   <data name="label12.Size" type="System.Drawing.Size, System.Drawing">
     <value>40, 13</value>

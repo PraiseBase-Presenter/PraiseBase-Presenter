@@ -29,6 +29,21 @@ namespace PraiseBase.Presenter.Projection
         /// </summary>
         public TextBoxFormatting Footer { get; set; }
 
+        /// <summary>
+        /// True of the text should be outlined
+        /// </summary>
+        public bool OutlineEnabled { get; set; }
+
+        /// <summary>
+        /// True if the text should have a shadow
+        /// </summary>
+        public bool ShadowEnabled { get; set; }
+
+        /// <summary>
+        /// True if the shadow should be smooth
+        /// </summary>
+        public bool SmoothShadow { get; set; }
+
         public struct MainTextFormatting
         {
             /// <summary>
@@ -55,16 +70,6 @@ namespace PraiseBase.Presenter.Projection
             /// Horizontal padding
             /// </summary>
             public int HorizontalPadding { get; set; }
-
-            /// <summary>
-            /// True of the text should be outlined
-            /// </summary>
-            public bool OutlineEnabled { get; set; }
-
-            /// <summary>
-            /// True if the text should have a shadow
-            /// </summary>
-            public bool ShadowEnabled { get; set; }
         }
 
         public struct TextBoxFormatting
@@ -88,16 +93,6 @@ namespace PraiseBase.Presenter.Projection
             /// Horizontal padding
             /// </summary>
             public int HorizontalPadding { get; set; }
-
-            /// <summary>
-            /// True of the text should be outlined
-            /// </summary>
-            public bool OutlineEnabled { get; set; }
-
-            /// <summary>
-            /// True if the text should have a shadow
-            /// </summary>
-            public bool ShadowEnabled { get; set; }
         }
     }
 }

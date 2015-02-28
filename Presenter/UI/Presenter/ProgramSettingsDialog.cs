@@ -99,6 +99,7 @@ namespace PraiseBase.Presenter.Forms
             checkBoxShowLoadingScreen.Checked = Settings.Default.ShowLoadingScreen;
 
             checkBoxProjectionFontScaling.Checked = Settings.Default.ProjectionFontScaling;
+            checkBoxSmoothShadow.Checked = Settings.Default.ProjectionSmoothShadow;
 
             List<string> strList;
 
@@ -662,6 +663,11 @@ namespace PraiseBase.Presenter.Forms
         private void comboBoxTranslationPosition_SelectedIndexChanged(object sender, EventArgs e)
         {
             Settings.Default.ProjectionMasteTranslationPosition = comboBoxTranslationPosition.SelectedIndex == 1 ? TranslationPosition.Block : TranslationPosition.Inline;
+        }
+
+        private void checkBoxSmoothShadow_CheckedChanged(object sender, EventArgs e)
+        {
+            Settings.Default.ProjectionSmoothShadow = checkBoxSmoothShadow.Checked;
         }
 
     }
