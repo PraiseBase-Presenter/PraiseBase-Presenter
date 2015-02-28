@@ -102,28 +102,28 @@ namespace PraiseBase.Presenter.Persistence.PowerPraise
                 new Font("Times New Roman", 44, FontStyle.Bold | FontStyle.Italic),
                 Color.White,
                 new Model.TextOutline(30, Color.Black),
-                new Model.TextShadow(15, 125, Color.Black),
+                new Model.TextShadow(15, 0, 125, Color.Black),
                 30
             );
             song.TranslationText = new Model.TextFormatting(
                 new Font("Times New Roman", 20, FontStyle.Regular),
                 Color.White,
                 new Model.TextOutline(30, Color.Black),
-                new Model.TextShadow(20, 125, Color.Black),
+                new Model.TextShadow(20, 0, 125, Color.Black),
                 20
             );
             song.CopyrightText = new Model.TextFormatting(
                 new Font("Times New Roman", 14, FontStyle.Regular),
                 Color.White,
                 new Model.TextOutline(30, Color.Black),
-                new Model.TextShadow(20, 125, Color.Black),
+                new Model.TextShadow(20, 0, 125, Color.Black),
                 30
             );
             song.SourceText = new Model.TextFormatting(
                 new Font("Times New Roman", 30, FontStyle.Regular),
                 Color.White,
                 new Model.TextOutline(30, Color.Black),
-                new Model.TextShadow(20, 125, Color.Black),
+                new Model.TextShadow(20, 0, 125, Color.Black),
                 30
             );
 

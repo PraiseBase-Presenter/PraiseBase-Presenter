@@ -88,48 +88,54 @@ namespace PraiseBase.Presenter.Forms
             }
             else
             {
+                Settings settings = Settings.Default;
+
                 sng = new Song();
                 sng.GUID = SongManager.Instance.GenerateGuid();
-                sng.Title = PraiseBase.Presenter.Properties.Settings.Default.SongDefaultName;
-                sng.Language = PraiseBase.Presenter.Properties.Settings.Default.SongDefaultLanguage;
+                sng.Title = settings.SongDefaultName;
+                sng.Language = settings.SongDefaultLanguage;
                 SongPart tmpPart = new SongPart();
-                tmpPart.Caption = PraiseBase.Presenter.Properties.Settings.Default.SongPartDefaultName;
+                tmpPart.Caption = settings.SongPartDefaultName;
                 tmpPart.Slides.Add(new SongSlide());
                 sng.Parts.Add(tmpPart);
 
                 sng.MainText = new TextFormatting(
-                    Settings.Default.ProjectionMasterFont,
-                    Settings.Default.ProjectionMasterFontColor,
-                    new TextOutline(30, Color.Black),
-                    new TextShadow(20, 125, Color.Black),
-                    Settings.Default.ProjectionMasterLineSpacing);
+                    settings.ProjectionMasterFont,
+                    settings.ProjectionMasterFontColor,
+                    new TextOutline(settings.ProjectionMasterOutlineSize, settings.ProjectionMasterOutlineColor),
+                    new TextShadow(settings.ProjectionMasterShadowDistance, settings.ProjectionMasterShadowSize, 
+                        settings.ProjectionMasterShadowDirection, settings.ProjectionMasterShadowColor),
+                    settings.ProjectionMasterLineSpacing);
 
                 sng.TranslationText = new TextFormatting(
-                    Settings.Default.ProjectionMasterFontTranslation,
-                    Settings.Default.ProjectionMasterTranslationColor,
-                    new TextOutline(30, Color.Black),
-                    new TextShadow(20, 125, Color.Black),
-                    Settings.Default.ProjectionMasterLineSpacing);
+                    settings.ProjectionMasterFontTranslation,
+                    settings.ProjectionMasterTranslationColor,
+                    new TextOutline(settings.ProjectionMasterOutlineSize, settings.ProjectionMasterOutlineColor),
+                    new TextShadow(settings.ProjectionMasterShadowDistance, settings.ProjectionMasterShadowSize,
+                        settings.ProjectionMasterShadowDirection, settings.ProjectionMasterShadowColor),
+                    settings.ProjectionMasterLineSpacing);
 
                 sng.CopyrightText = new TextFormatting(
-                    Settings.Default.ProjectionMasterFontTranslation,
-                    Settings.Default.ProjectionMasterTranslationColor,
-                    new TextOutline(30, Color.Black),
-                    new TextShadow(20, 125, Color.Black),
-                    Settings.Default.ProjectionMasterLineSpacing);
+                    settings.ProjectionMasterFontTranslation,
+                    settings.ProjectionMasterTranslationColor,
+                    new TextOutline(settings.ProjectionMasterOutlineSize, settings.ProjectionMasterOutlineColor),
+                    new TextShadow(settings.ProjectionMasterShadowDistance, settings.ProjectionMasterShadowSize,
+                        settings.ProjectionMasterShadowDirection, settings.ProjectionMasterShadowColor),
+                    settings.ProjectionMasterLineSpacing);
 
                 sng.SourceText = new TextFormatting(
-                   Settings.Default.ProjectionMasterFontTranslation,
-                   Settings.Default.ProjectionMasterTranslationColor,
-                   new TextOutline(30, Color.Black),
-                   new TextShadow(20, 125, Color.Black),
-                   Settings.Default.ProjectionMasterLineSpacing);
+                   settings.ProjectionMasterFontTranslation,
+                   settings.ProjectionMasterTranslationColor,
+                    new TextOutline(settings.ProjectionMasterOutlineSize, settings.ProjectionMasterOutlineColor),
+                    new TextShadow(settings.ProjectionMasterShadowDistance, settings.ProjectionMasterShadowSize,
+                        settings.ProjectionMasterShadowDirection, settings.ProjectionMasterShadowColor),
+                   settings.ProjectionMasterLineSpacing);
 
-                // TODO: Define a default in the configuration
-                sng.TextOrientation = new TextOrientation(VerticalOrientation.Middle, HorizontalOrientation.Center);
+                sng.TextOrientation = new TextOrientation(settings.ProjectionMasterVerticalTextOrientation, settings.ProjectionMasterHorizontalTextOrientation);
+                sng.TranslationPosition = settings.ProjectionMasteTranslationPosition;
 
-                sng.TextOutlineEnabled = true;
-                sng.TextShadowEnabled = true;
+                sng.TextOutlineEnabled = settings.ProjectionMasterOutlineEnabled;
+                sng.TextShadowEnabled = settings.ProjectionMasterShadowEnabled;
 
             }
 

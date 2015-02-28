@@ -102,28 +102,28 @@ namespace PraiseBase.Presenter.Persistence.PowerPraise
                 ppl.MainTextFontFormatting.Font,
                 ppl.MainTextFontFormatting.Color,
                 new TextOutline(ppl.MainTextFontFormatting.OutlineWidth, ppl.TextOutlineFormatting.Color),
-                new TextShadow(ppl.MainTextFontFormatting.ShadowDistance, ppl.TextShadowFormatting.Direction, ppl.TextShadowFormatting.Color),
+                new TextShadow(ppl.MainTextFontFormatting.ShadowDistance, 0, ppl.TextShadowFormatting.Direction, ppl.TextShadowFormatting.Color),
                 ppl.MainLineSpacing
             );
             song.TranslationText = new TextFormatting(
                 ppl.TranslationTextFontFormatting.Font,
                 ppl.TranslationTextFontFormatting.Color,
                 new TextOutline(ppl.TranslationTextFontFormatting.OutlineWidth, ppl.TextOutlineFormatting.Color),
-                new TextShadow(ppl.TranslationTextFontFormatting.ShadowDistance, ppl.TextShadowFormatting.Direction, ppl.TextShadowFormatting.Color),
+                new TextShadow(ppl.TranslationTextFontFormatting.ShadowDistance, 0, ppl.TextShadowFormatting.Direction, ppl.TextShadowFormatting.Color),
                 ppl.TranslationLineSpacing
             );
             song.CopyrightText = new TextFormatting(
                 ppl.CopyrightTextFontFormatting.Font,
                 ppl.CopyrightTextFontFormatting.Color,
                 new TextOutline(ppl.CopyrightTextFontFormatting.OutlineWidth, ppl.TextOutlineFormatting.Color),
-                new TextShadow(ppl.CopyrightTextFontFormatting.ShadowDistance, ppl.TextShadowFormatting.Direction, ppl.TextShadowFormatting.Color),
+                new TextShadow(ppl.CopyrightTextFontFormatting.ShadowDistance, 0, ppl.TextShadowFormatting.Direction, ppl.TextShadowFormatting.Color),
                 ppl.MainLineSpacing
             );
             song.SourceText = new TextFormatting(
                 ppl.SourceTextFontFormatting.Font,
                 ppl.SourceTextFontFormatting.Color,
                 new TextOutline(ppl.SourceTextFontFormatting.OutlineWidth, ppl.TextOutlineFormatting.Color),
-                new TextShadow(ppl.SourceTextFontFormatting.ShadowDistance, ppl.TextShadowFormatting.Direction, ppl.TextShadowFormatting.Color),
+                new TextShadow(ppl.SourceTextFontFormatting.ShadowDistance, 0, ppl.TextShadowFormatting.Direction, ppl.TextShadowFormatting.Color),
                 ppl.MainLineSpacing
             );
 
