@@ -55,7 +55,7 @@ namespace PraiseBase.Presenter.Forms
             labelSourceTextString.Text = getFontString(Settings.Default.ProjectionMasterSourceFont);
             buttonSourceColor.BackColor = Settings.Default.ProjectionMasterSourceColor;
 
-            pictureBoxProjectionBackColor.BackColor = Settings.Default.ProjectionBackColor;
+            buttonProjectionBackgroundColor.BackColor = Settings.Default.ProjectionBackColor;
 
             // Outline
             checkBoxOutlineEnabled.Checked = Settings.Default.ProjectionMasterOutlineEnabled;
@@ -161,17 +161,6 @@ namespace PraiseBase.Presenter.Forms
             if (dlg.ShowDialog(this) == DialogResult.OK)
             {
                 textBox1.Text = Settings.Default.DataDirectory = dlg.SelectedPath;
-            }
-        }
-
-        private void buttonChosseBackgroundColor_Click(object sender, EventArgs e)
-        {
-            ColorDialog colDlg = new ColorDialog();
-            colDlg.Color = Settings.Default.ProjectionBackColor;
-            if (colDlg.ShowDialog() == DialogResult.OK)
-            {
-                Settings.Default.ProjectionBackColor = colDlg.Color;
-                updateLabels();
             }
         }
 
@@ -519,6 +508,17 @@ namespace PraiseBase.Presenter.Forms
         private void numericUpDownShadowDirection_ValueChanged(object sender, EventArgs e)
         {
             Settings.Default.ProjectionMasterShadowDirection = (int)((NumericUpDown)sender).Value;
+        }
+
+        private void buttonProjectionBackgroundColor_Click(object sender, EventArgs e)
+        {
+            ColorDialog colDlg = new ColorDialog();
+            colDlg.Color = Settings.Default.ProjectionBackColor;
+            if (colDlg.ShowDialog() == DialogResult.OK)
+            {
+                Settings.Default.ProjectionBackColor = colDlg.Color;
+                updateLabels();
+            }
         }
     }
 }

@@ -37,9 +37,11 @@
             this.button2 = new System.Windows.Forms.Button();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
-            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.groupBoxProjection = new System.Windows.Forms.GroupBox();
+            this.checkBoxProjectionFontScaling = new System.Windows.Forms.CheckBox();
+            this.groupBoxMisc = new System.Windows.Forms.GroupBox();
             this.checkBoxShowLoadingScreen = new System.Windows.Forms.CheckBox();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.groupBoxDataDirectory = new System.Windows.Forms.GroupBox();
             this.textBox2 = new System.Windows.Forms.TextBox();
             this.tabPage3 = new System.Windows.Forms.TabPage();
             this.label6 = new System.Windows.Forms.Label();
@@ -57,12 +59,9 @@
             this.textBoxNewTag = new System.Windows.Forms.TextBox();
             this.buttonDelTags = new System.Windows.Forms.Button();
             this.listBoxTags = new System.Windows.Forms.ListBox();
-            this.tabPage2 = new System.Windows.Forms.TabPage();
-            this.pictureBoxProjectionBackColor = new System.Windows.Forms.PictureBox();
-            this.buttonProjectionBackColor = new System.Windows.Forms.Button();
-            this.checkBoxProjectionFontScaling = new System.Windows.Forms.CheckBox();
             this.tabPage5 = new System.Windows.Forms.TabPage();
             this.groupBoxShadow = new System.Windows.Forms.GroupBox();
+            this.checkBoxShadowEnabled = new System.Windows.Forms.CheckBox();
             this.labelShadowColor = new System.Windows.Forms.Label();
             this.labelShadowDirection = new System.Windows.Forms.Label();
             this.numericUpDownShadowDirection = new System.Windows.Forms.NumericUpDown();
@@ -82,6 +81,7 @@
             this.numericUpDownVerticalTextPadding = new System.Windows.Forms.NumericUpDown();
             this.numericUpDownHorizontalTextPadding = new System.Windows.Forms.NumericUpDown();
             this.groupBoxOutline = new System.Windows.Forms.GroupBox();
+            this.checkBoxOutlineEnabled = new System.Windows.Forms.CheckBox();
             this.label1OutlineColor = new System.Windows.Forms.Label();
             this.labelOutlineSize = new System.Windows.Forms.Label();
             this.buttonOutlineColor = new System.Windows.Forms.Button();
@@ -113,15 +113,14 @@
             this.labelMainTextString = new System.Windows.Forms.Label();
             this.labelTranslationText = new System.Windows.Forms.Label();
             this.checkBoxUseMasterFormat = new System.Windows.Forms.CheckBox();
-            this.checkBoxOutlineEnabled = new System.Windows.Forms.CheckBox();
-            this.checkBoxShadowEnabled = new System.Windows.Forms.CheckBox();
+            this.labelBackgroundColor = new System.Windows.Forms.Label();
+            this.buttonProjectionBackgroundColor = new System.Windows.Forms.Button();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
-            this.groupBox2.SuspendLayout();
-            this.groupBox1.SuspendLayout();
+            this.groupBoxProjection.SuspendLayout();
+            this.groupBoxMisc.SuspendLayout();
+            this.groupBoxDataDirectory.SuspendLayout();
             this.tabPage3.SuspendLayout();
-            this.tabPage2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxProjectionBackColor)).BeginInit();
             this.tabPage5.SuspendLayout();
             this.groupBoxShadow.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownShadowDirection)).BeginInit();
@@ -186,7 +185,6 @@
             resources.ApplyResources(this.tabControl1, "tabControl1");
             this.tabControl1.Controls.Add(this.tabPage1);
             this.tabControl1.Controls.Add(this.tabPage3);
-            this.tabControl1.Controls.Add(this.tabPage2);
             this.tabControl1.Controls.Add(this.tabPage5);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
@@ -194,18 +192,35 @@
             // 
             // tabPage1
             // 
-            this.tabPage1.Controls.Add(this.groupBox2);
-            this.tabPage1.Controls.Add(this.groupBox1);
+            this.tabPage1.Controls.Add(this.groupBoxProjection);
+            this.tabPage1.Controls.Add(this.groupBoxMisc);
+            this.tabPage1.Controls.Add(this.groupBoxDataDirectory);
             resources.ApplyResources(this.tabPage1, "tabPage1");
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.UseVisualStyleBackColor = true;
             // 
-            // groupBox2
+            // groupBoxProjection
             // 
-            this.groupBox2.Controls.Add(this.checkBoxShowLoadingScreen);
-            resources.ApplyResources(this.groupBox2, "groupBox2");
-            this.groupBox2.Name = "groupBox2";
-            this.groupBox2.TabStop = false;
+            this.groupBoxProjection.Controls.Add(this.labelBackgroundColor);
+            this.groupBoxProjection.Controls.Add(this.buttonProjectionBackgroundColor);
+            this.groupBoxProjection.Controls.Add(this.checkBoxProjectionFontScaling);
+            resources.ApplyResources(this.groupBoxProjection, "groupBoxProjection");
+            this.groupBoxProjection.Name = "groupBoxProjection";
+            this.groupBoxProjection.TabStop = false;
+            // 
+            // checkBoxProjectionFontScaling
+            // 
+            resources.ApplyResources(this.checkBoxProjectionFontScaling, "checkBoxProjectionFontScaling");
+            this.checkBoxProjectionFontScaling.Name = "checkBoxProjectionFontScaling";
+            this.checkBoxProjectionFontScaling.UseVisualStyleBackColor = true;
+            this.checkBoxProjectionFontScaling.CheckedChanged += new System.EventHandler(this.checkBoxFontScaling_CheckedChanged);
+            // 
+            // groupBoxMisc
+            // 
+            this.groupBoxMisc.Controls.Add(this.checkBoxShowLoadingScreen);
+            resources.ApplyResources(this.groupBoxMisc, "groupBoxMisc");
+            this.groupBoxMisc.Name = "groupBoxMisc";
+            this.groupBoxMisc.TabStop = false;
             // 
             // checkBoxShowLoadingScreen
             // 
@@ -214,15 +229,15 @@
             this.checkBoxShowLoadingScreen.UseVisualStyleBackColor = true;
             this.checkBoxShowLoadingScreen.CheckedChanged += new System.EventHandler(this.checkBoxShowLoadingScreen_CheckedChanged);
             // 
-            // groupBox1
+            // groupBoxDataDirectory
             // 
-            this.groupBox1.Controls.Add(this.textBox2);
-            this.groupBox1.Controls.Add(this.textBox1);
-            this.groupBox1.Controls.Add(this.button1);
-            this.groupBox1.Controls.Add(this.label1);
-            resources.ApplyResources(this.groupBox1, "groupBox1");
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.TabStop = false;
+            this.groupBoxDataDirectory.Controls.Add(this.textBox2);
+            this.groupBoxDataDirectory.Controls.Add(this.textBox1);
+            this.groupBoxDataDirectory.Controls.Add(this.button1);
+            this.groupBoxDataDirectory.Controls.Add(this.label1);
+            resources.ApplyResources(this.groupBoxDataDirectory, "groupBoxDataDirectory");
+            this.groupBoxDataDirectory.Name = "groupBoxDataDirectory";
+            this.groupBoxDataDirectory.TabStop = false;
             // 
             // textBox2
             // 
@@ -279,8 +294,8 @@
             // 
             // listBoxSongParts
             // 
-            this.listBoxSongParts.FormattingEnabled = true;
             resources.ApplyResources(this.listBoxSongParts, "listBoxSongParts");
+            this.listBoxSongParts.FormattingEnabled = true;
             this.listBoxSongParts.Name = "listBoxSongParts";
             this.listBoxSongParts.SelectionMode = System.Windows.Forms.SelectionMode.MultiExtended;
             // 
@@ -310,8 +325,8 @@
             // 
             // listBoxLanguages
             // 
-            this.listBoxLanguages.FormattingEnabled = true;
             resources.ApplyResources(this.listBoxLanguages, "listBoxLanguages");
+            this.listBoxLanguages.FormattingEnabled = true;
             this.listBoxLanguages.Name = "listBoxLanguages";
             this.listBoxLanguages.SelectionMode = System.Windows.Forms.SelectionMode.MultiExtended;
             // 
@@ -341,40 +356,10 @@
             // 
             // listBoxTags
             // 
-            this.listBoxTags.FormattingEnabled = true;
             resources.ApplyResources(this.listBoxTags, "listBoxTags");
+            this.listBoxTags.FormattingEnabled = true;
             this.listBoxTags.Name = "listBoxTags";
             this.listBoxTags.SelectionMode = System.Windows.Forms.SelectionMode.MultiExtended;
-            // 
-            // tabPage2
-            // 
-            this.tabPage2.Controls.Add(this.pictureBoxProjectionBackColor);
-            this.tabPage2.Controls.Add(this.buttonProjectionBackColor);
-            this.tabPage2.Controls.Add(this.checkBoxProjectionFontScaling);
-            resources.ApplyResources(this.tabPage2, "tabPage2");
-            this.tabPage2.Name = "tabPage2";
-            this.tabPage2.UseVisualStyleBackColor = true;
-            // 
-            // pictureBoxProjectionBackColor
-            // 
-            this.pictureBoxProjectionBackColor.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            resources.ApplyResources(this.pictureBoxProjectionBackColor, "pictureBoxProjectionBackColor");
-            this.pictureBoxProjectionBackColor.Name = "pictureBoxProjectionBackColor";
-            this.pictureBoxProjectionBackColor.TabStop = false;
-            // 
-            // buttonProjectionBackColor
-            // 
-            resources.ApplyResources(this.buttonProjectionBackColor, "buttonProjectionBackColor");
-            this.buttonProjectionBackColor.Name = "buttonProjectionBackColor";
-            this.buttonProjectionBackColor.UseVisualStyleBackColor = true;
-            this.buttonProjectionBackColor.Click += new System.EventHandler(this.buttonChosseBackgroundColor_Click);
-            // 
-            // checkBoxProjectionFontScaling
-            // 
-            resources.ApplyResources(this.checkBoxProjectionFontScaling, "checkBoxProjectionFontScaling");
-            this.checkBoxProjectionFontScaling.Name = "checkBoxProjectionFontScaling";
-            this.checkBoxProjectionFontScaling.UseVisualStyleBackColor = true;
-            this.checkBoxProjectionFontScaling.CheckedChanged += new System.EventHandler(this.checkBoxFontScaling_CheckedChanged);
             // 
             // tabPage5
             // 
@@ -400,6 +385,13 @@
             this.groupBoxShadow.Controls.Add(this.numericUpDownShadowDistance);
             this.groupBoxShadow.Name = "groupBoxShadow";
             this.groupBoxShadow.TabStop = false;
+            // 
+            // checkBoxShadowEnabled
+            // 
+            resources.ApplyResources(this.checkBoxShadowEnabled, "checkBoxShadowEnabled");
+            this.checkBoxShadowEnabled.Name = "checkBoxShadowEnabled";
+            this.checkBoxShadowEnabled.UseVisualStyleBackColor = true;
+            this.checkBoxShadowEnabled.CheckedChanged += new System.EventHandler(this.checkBoxShadowEnabled_CheckedChanged);
             // 
             // labelShadowColor
             // 
@@ -557,6 +549,13 @@
             this.groupBoxOutline.Controls.Add(this.numericUpDownOutlineSize);
             this.groupBoxOutline.Name = "groupBoxOutline";
             this.groupBoxOutline.TabStop = false;
+            // 
+            // checkBoxOutlineEnabled
+            // 
+            resources.ApplyResources(this.checkBoxOutlineEnabled, "checkBoxOutlineEnabled");
+            this.checkBoxOutlineEnabled.Name = "checkBoxOutlineEnabled";
+            this.checkBoxOutlineEnabled.UseVisualStyleBackColor = true;
+            this.checkBoxOutlineEnabled.CheckedChanged += new System.EventHandler(this.checkBoxOutlineEnabled_CheckedChanged);
             // 
             // label1OutlineColor
             // 
@@ -778,19 +777,17 @@
             this.checkBoxUseMasterFormat.UseVisualStyleBackColor = true;
             this.checkBoxUseMasterFormat.CheckedChanged += new System.EventHandler(this.checkBoxUseMasterFormat_CheckedChanged);
             // 
-            // checkBoxOutlineEnabled
+            // labelBackgroundColor
             // 
-            resources.ApplyResources(this.checkBoxOutlineEnabled, "checkBoxOutlineEnabled");
-            this.checkBoxOutlineEnabled.Name = "checkBoxOutlineEnabled";
-            this.checkBoxOutlineEnabled.UseVisualStyleBackColor = true;
-            this.checkBoxOutlineEnabled.CheckedChanged += new System.EventHandler(this.checkBoxOutlineEnabled_CheckedChanged);
+            resources.ApplyResources(this.labelBackgroundColor, "labelBackgroundColor");
+            this.labelBackgroundColor.Name = "labelBackgroundColor";
             // 
-            // checkBoxShadowEnabled
+            // buttonProjectionBackgroundColor
             // 
-            resources.ApplyResources(this.checkBoxShadowEnabled, "checkBoxShadowEnabled");
-            this.checkBoxShadowEnabled.Name = "checkBoxShadowEnabled";
-            this.checkBoxShadowEnabled.UseVisualStyleBackColor = true;
-            this.checkBoxShadowEnabled.CheckedChanged += new System.EventHandler(this.checkBoxShadowEnabled_CheckedChanged);
+            resources.ApplyResources(this.buttonProjectionBackgroundColor, "buttonProjectionBackgroundColor");
+            this.buttonProjectionBackgroundColor.Name = "buttonProjectionBackgroundColor";
+            this.buttonProjectionBackgroundColor.UseVisualStyleBackColor = true;
+            this.buttonProjectionBackgroundColor.Click += new System.EventHandler(this.buttonProjectionBackgroundColor_Click);
             // 
             // ProgramSettingsDialog
             // 
@@ -809,15 +806,14 @@
             this.Load += new System.EventHandler(this.settingsWindow_Load);
             this.tabControl1.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
-            this.groupBox2.ResumeLayout(false);
-            this.groupBox2.PerformLayout();
-            this.groupBox1.ResumeLayout(false);
-            this.groupBox1.PerformLayout();
+            this.groupBoxProjection.ResumeLayout(false);
+            this.groupBoxProjection.PerformLayout();
+            this.groupBoxMisc.ResumeLayout(false);
+            this.groupBoxMisc.PerformLayout();
+            this.groupBoxDataDirectory.ResumeLayout(false);
+            this.groupBoxDataDirectory.PerformLayout();
             this.tabPage3.ResumeLayout(false);
             this.tabPage3.PerformLayout();
-            this.tabPage2.ResumeLayout(false);
-            this.tabPage2.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxProjectionBackColor)).EndInit();
             this.tabPage5.ResumeLayout(false);
             this.tabPage5.PerformLayout();
             this.groupBoxShadow.ResumeLayout(false);
@@ -884,8 +880,8 @@
 		private System.Windows.Forms.GroupBox groupBoxFonts;
 		private System.Windows.Forms.TextBox textBox2;
 		private System.Windows.Forms.CheckBox checkBoxShowLoadingScreen;
-		private System.Windows.Forms.GroupBox groupBox2;
-		private System.Windows.Forms.GroupBox groupBox1;
+		private System.Windows.Forms.GroupBox groupBoxMisc;
+		private System.Windows.Forms.GroupBox groupBoxDataDirectory;
         private System.Windows.Forms.Label label14;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.GroupBox groupBoxLineSpacings;
@@ -901,10 +897,6 @@
         private System.Windows.Forms.Label labelCopyrightTextString;
         private System.Windows.Forms.GroupBox groupBoxBorders;
         private System.Windows.Forms.GroupBox groupBoxOutline;
-        private System.Windows.Forms.TabPage tabPage2;
-        private System.Windows.Forms.PictureBox pictureBoxProjectionBackColor;
-        private System.Windows.Forms.Button buttonProjectionBackColor;
-        private System.Windows.Forms.CheckBox checkBoxProjectionFontScaling;
         private System.Windows.Forms.NumericUpDown numericUpDownHorizontalTextPadding;
         private System.Windows.Forms.NumericUpDown numericUpDownVerticalTextPadding;
         private System.Windows.Forms.Label label3;
@@ -933,5 +925,9 @@
         private System.Windows.Forms.Label label17;
         private System.Windows.Forms.CheckBox checkBoxOutlineEnabled;
         private System.Windows.Forms.CheckBox checkBoxShadowEnabled;
+        private System.Windows.Forms.GroupBox groupBoxProjection;
+        private System.Windows.Forms.CheckBox checkBoxProjectionFontScaling;
+        private System.Windows.Forms.Label labelBackgroundColor;
+        private System.Windows.Forms.Button buttonProjectionBackgroundColor;
     }
 }
