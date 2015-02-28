@@ -137,7 +137,7 @@
     <Setting Name="UpdateCheckUrl" Type="System.String" Scope="Application">
       <Value Profile="(Default)">http://praisebase.org/ws/version.xml</Value>
     </Setting>
-    <Setting Name="SongSearchMode" Type="Pbp.SongSearchMode" Scope="User">
+    <Setting Name="SongSearchMode" Type="PraiseBase.Presenter.Manager.SongSearchMode" Scope="User">
       <Value Profile="(Default)">TitleAndText</Value>
     </Setting>
     <Setting Name="ProjectionFadeTimeLayer1" Type="System.Int32" Scope="User">

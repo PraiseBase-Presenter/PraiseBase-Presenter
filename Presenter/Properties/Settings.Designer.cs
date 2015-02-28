@@ -442,9 +442,9 @@ namespace PraiseBase.Presenter.Properties {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("TitleAndText")]
-        public global::PraiseBase.Presenter.SongSearchMode SongSearchMode {
+        public global::PraiseBase.Presenter.Manager.SongSearchMode SongSearchMode {
             get {
-                return ((global::PraiseBase.Presenter.SongSearchMode)(this["SongSearchMode"]));
+                return ((global::PraiseBase.Presenter.Manager.SongSearchMode)(this["SongSearchMode"]));
             }
             set {
                 this["SongSearchMode"] = value;

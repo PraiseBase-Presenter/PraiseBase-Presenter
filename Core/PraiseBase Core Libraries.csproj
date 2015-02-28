@@ -46,6 +46,7 @@
     <Compile Include="Model\Bible\BibleVerse.cs" />
     <Compile Include="Model\Bible\BibleVerseSelection.cs" />
     <Compile Include="Model\Setlist.cs" />
+    <Compile Include="Manager\SongSearchMode.cs" />
     <Compile Include="Persistence\AbstractSongFilePlugin.cs" />
     <Compile Include="Persistence\CCLI\SongSelectFilePlugin.cs" />
     <Compile Include="Persistence\CCLI\SongSelectVerse.cs" />
