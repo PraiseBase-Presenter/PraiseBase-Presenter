@@ -206,31 +206,30 @@ namespace PraiseBase.Presenter
             // Shadow
             if (formatting.ShadowEnabled)
             {
-                Brush shadodBrush = Brushes.Transparent;
+                int size = textFormatting.Shadow.Size;
+                int distance = textFormatting.Shadow.Distance;
 
-                int shadowThickness = textFormatting.Shadow.Distance;
-                if (shadowThickness > 0)
+                int shadowX = textX + distance;
+                int shadowY = textY + distance;
+
+                Brush shadodBrush = new SolidBrush(Color.FromArgb(15, textFormatting.Shadow.Color));
+                if (formatting.SmoothShadow)
                 {
-                    shadodBrush = new SolidBrush(Color.FromArgb(15, textFormatting.Shadow.Color));
-                    if (formatting.SmoothShadow)
-                    {
-                        gr.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.HighQuality;
-                        gr.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.HighQualityBilinear;
-                        gr.TextRenderingHint = TextRenderingHint.AntiAliasGridFit;
-                    }
+                    gr.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.HighQuality;
+                    gr.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.HighQualityBilinear;
+                    gr.TextRenderingHint = TextRenderingHint.AntiAliasGridFit;
+                }
 
-                    foreach (string s in lines)
+                foreach (string s in lines)
+                {
+                    for (int x = shadowX - size; x <= shadowX + size; x++)
                     {
-                        for (int x = textX; x <= textX + shadowThickness; x++)
+                        for (int y = shadowY - size; y <= shadowY + size; y++)
                         {
-                            for (int y = textY; y <= textY + shadowThickness; y++)
-                            {
-                                gr.DrawString(s, textFormatting.Font, shadodBrush, new Point(x, y), strFormat);
-                            }
+                            gr.DrawString(s, textFormatting.Font, shadodBrush, new Point(x, y), strFormat);
                         }
-                        textY += lineHeight + textFormatting.LineSpacing;
                     }
-                    textY = textStartY;
+                    shadowY += lineHeight + textFormatting.LineSpacing;
                 }
             }
 

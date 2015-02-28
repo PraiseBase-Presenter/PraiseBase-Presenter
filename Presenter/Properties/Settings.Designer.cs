@@ -782,7 +782,7 @@ namespace PraiseBase.Presenter.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("1")]
+        [global::System.Configuration.DefaultSettingValueAttribute("3")]
         public int ProjectionMasterShadowSize {
             get {
                 return ((int)(this["ProjectionMasterShadowSize"]));
@@ -830,7 +830,7 @@ namespace PraiseBase.Presenter.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
         public bool ProjectionSmoothShadow {
             get {
                 return ((bool)(this["ProjectionSmoothShadow"]));
