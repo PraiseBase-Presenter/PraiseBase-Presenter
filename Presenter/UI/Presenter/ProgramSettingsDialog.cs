@@ -41,7 +41,7 @@ namespace PraiseBase.Presenter.Forms
             textBox1.Text = Settings.Default.DataDirectory;
 
             checkBoxUseMasterFormat.Checked = Settings.Default.ProjectionUseMaster;
-            groupBoxFonts.Enabled = Settings.Default.ProjectionUseMaster;
+            enableMasterFormattingGroupBoxes(Settings.Default.ProjectionUseMaster);
 
             labelMainTextString.Text = getFontString(Settings.Default.ProjectionMasterFont);
             buttonChooseProjectionForeColor.BackColor = Settings.Default.ProjectionMasterFontColor;
@@ -57,13 +57,20 @@ namespace PraiseBase.Presenter.Forms
 
             pictureBoxProjectionBackColor.BackColor = Settings.Default.ProjectionBackColor;
 
+            // Outline
+            checkBoxOutlineEnabled.Checked = Settings.Default.ProjectionMasterOutlineEnabled;
             numericUpDownOutlineSize.Value = Settings.Default.ProjectionMasterOutlineSize;
             buttonOutlineColor.BackColor = Settings.Default.ProjectionMasterOutlineColor;
+            enableOutlineFormElements(Settings.Default.ProjectionMasterOutlineEnabled);
 
-            numericUpDownShadowSize.Value = Settings.Default.ProjectionMasterShadowSize;
+            // Shadow
+            checkBoxShadowEnabled.Checked = Settings.Default.ProjectionMasterShadowEnabled;
+            numericUpDownShadowDistance.Value = Settings.Default.ProjectionMasterShadowSize;
             numericUpDownShadowDirection.Value = Settings.Default.ProjectionMasterShadowDirection;
             buttonShadowColor.BackColor = Settings.Default.ProjectionMasterShadowColor;
+            enableShadowFormElements(Settings.Default.ProjectionMasterShadowEnabled);
 
+            // Padding / Borders
             numericUpDownHorizontalTextPadding.Value = Settings.Default.ProjectionMasterPadding;
             numericUpDownVerticalTextPadding.Value = Settings.Default.ProjectionMasterPadding;
             numericUpDownHorizontalHeaderPadding.Value = Settings.Default.ProjectionMasterPadding;
@@ -71,6 +78,7 @@ namespace PraiseBase.Presenter.Forms
             numericUpDownHorizontalFooterPadding.Value = Settings.Default.ProjectionMasterPadding;
             numericUpDownVerticalFooterPadding.Value = Settings.Default.ProjectionMasterPadding;
 
+            // Line spacing
             numericUpDownLineSpacing.Value = Settings.Default.ProjectionMasterLineSpacing;
             numericUpDownTranslationLineSpacing.Value = Settings.Default.ProjectionMasterTranslationLineSpacing;
             
@@ -407,21 +415,28 @@ namespace PraiseBase.Presenter.Forms
 
         private void checkBoxUseMasterFormat_CheckedChanged(object sender, EventArgs e)
         {
-            if (checkBoxUseMasterFormat.Checked)
+            enableMasterFormattingGroupBoxes(checkBoxUseMasterFormat.Checked);
+            Settings.Default.ProjectionUseMaster = checkBoxUseMasterFormat.Checked;
+        }
+
+        private void enableMasterFormattingGroupBoxes(bool enable)
+        {
+            if (enable)
             {
                 groupBoxFonts.Enabled = true;
                 groupBoxLineSpacings.Enabled = true;
                 groupBoxBorders.Enabled = true;
-                groupBoxEffects.Enabled = true;
+                groupBoxOutline.Enabled = true;
+                groupBoxShadow.Enabled = true;
             }
             else
             {
                 groupBoxFonts.Enabled = false;
                 groupBoxLineSpacings.Enabled = false;
                 groupBoxBorders.Enabled = false;
-                groupBoxEffects.Enabled = false;
+                groupBoxOutline.Enabled = false;
+                groupBoxShadow.Enabled = false;
             }
-            Settings.Default.ProjectionUseMaster = checkBoxUseMasterFormat.Checked;
         }
 
         private void checkBoxShowLoadingScreen_CheckedChanged(object sender, EventArgs e)
@@ -438,6 +453,20 @@ namespace PraiseBase.Presenter.Forms
         {
             Settings.Default.ProjectionMasterLineSpacing = (int)numericUpDownLineSpacing.Value;
         }
+        
+        private void checkBoxOutlineEnabled_CheckedChanged(object sender, EventArgs e)
+        {
+            Settings.Default.ProjectionMasterOutlineEnabled = ((CheckBox)sender).Checked;
+            enableOutlineFormElements(Settings.Default.ProjectionMasterOutlineEnabled);
+        }
+
+        private void enableOutlineFormElements(bool enable)
+        {
+            labelOutlineSize.Enabled = enable;
+            numericUpDownOutlineSize.Enabled = enable;
+            label1OutlineColor.Enabled = enable;
+            buttonOutlineColor.Enabled = enable;
+        }
 
         private void buttonOutlineColor_Click(object sender, EventArgs e)
         {
@@ -453,6 +482,22 @@ namespace PraiseBase.Presenter.Forms
         private void numericUpDownOutlineSize_ValueChanged(object sender, EventArgs e)
         {
             Settings.Default.ProjectionMasterOutlineSize = (int)((NumericUpDown)sender).Value;
+        }
+        
+        private void checkBoxShadowEnabled_CheckedChanged(object sender, EventArgs e)
+        {
+            Settings.Default.ProjectionMasterShadowEnabled = ((CheckBox)sender).Checked;
+            enableShadowFormElements(Settings.Default.ProjectionMasterShadowEnabled);
+        }
+
+        private void enableShadowFormElements(bool enable)
+        {
+            labelShadowDistance.Enabled = enable;
+            numericUpDownShadowDistance.Enabled = enable;
+            labelShadowColor.Enabled = enable;
+            buttonShadowColor.Enabled = enable;
+            labelShadowDirection.Enabled = enable;
+            numericUpDownShadowDirection.Enabled = enable;
         }
 
         private void buttonShadowColor_Click(object sender, EventArgs e)

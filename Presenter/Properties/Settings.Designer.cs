@@ -647,5 +647,29 @@ namespace PraiseBase.Presenter.Properties {
                 this["ProjectionMasterShadowDirection"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool ProjectionMasterOutlineEnabled {
+            get {
+                return ((bool)(this["ProjectionMasterOutlineEnabled"]));
+            }
+            set {
+                this["ProjectionMasterOutlineEnabled"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool ProjectionMasterShadowEnabled {
+            get {
+                return ((bool)(this["ProjectionMasterShadowEnabled"]));
+            }
+            set {
+                this["ProjectionMasterShadowEnabled"] = value;
+            }
+        }
     }
 }

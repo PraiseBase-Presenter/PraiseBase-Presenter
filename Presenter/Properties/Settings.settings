@@ -194,5 +194,11 @@
     <Setting Name="ProjectionMasterShadowDirection" Type="System.Int32" Scope="User">
       <Value Profile="(Default)">125</Value>
     </Setting>
+    <Setting Name="ProjectionMasterOutlineEnabled" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
+    <Setting Name="ProjectionMasterShadowEnabled" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
   </Settings>
 </SettingsFile>
