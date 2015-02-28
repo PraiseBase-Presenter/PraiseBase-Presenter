@@ -53,7 +53,7 @@ namespace PraiseBase.Presenter.Projection
                     settings.ProjectionMasterFont,
                     settings.ProjectionMasterFontColor,
                     new TextOutline(settings.ProjectionMasterOutlineSize, settings.ProjectionMasterOutlineColor),
-                    new TextShadow(settings.ProjectionMasterShadowSize, 125, settings.ProjectionMasterShadowColor),
+                    new TextShadow(settings.ProjectionMasterShadowDistance, 125, settings.ProjectionMasterShadowColor),
                     settings.ProjectionMasterLineSpacing
                 ),
                 SubText = new TextFormatting(
@@ -61,7 +61,7 @@ namespace PraiseBase.Presenter.Projection
                     settings.ProjectionMasterTranslationColor,
                     new TextOutline(settings.ProjectionMasterOutlineSize, settings.ProjectionMasterOutlineColor),
                     // TODO Parametrize hard-coded value
-                    new TextShadow(settings.ProjectionMasterShadowSize, 125, settings.ProjectionMasterShadowColor),
+                    new TextShadow(settings.ProjectionMasterShadowDistance, 125, settings.ProjectionMasterShadowColor),
                     settings.ProjectionMasterTranslationLineSpacing
                 ),
                 // TODO Parametrize hard-coded value
@@ -77,7 +77,7 @@ namespace PraiseBase.Presenter.Projection
                     settings.ProjectionMasterSourceFont,
                     settings.ProjectionMasterSourceColor,
                     new TextOutline(settings.ProjectionMasterOutlineSize, settings.ProjectionMasterOutlineColor),
-                    new TextShadow(settings.ProjectionMasterShadowSize, 125, settings.ProjectionMasterShadowColor),
+                    new TextShadow(settings.ProjectionMasterShadowDistance, 125, settings.ProjectionMasterShadowColor),
                     settings.ProjectionMasterLineSpacing
                 ),
                 // TODO Parametrize hard-coded values
@@ -93,7 +93,7 @@ namespace PraiseBase.Presenter.Projection
                     settings.ProjectionMasterCopyrightFont,
                     settings.ProjectionMasterCopyrightColor,
                     new TextOutline(settings.ProjectionMasterOutlineSize, settings.ProjectionMasterOutlineColor),
-                    new TextShadow(settings.ProjectionMasterShadowSize, 125, settings.ProjectionMasterShadowColor),
+                    new TextShadow(settings.ProjectionMasterShadowDistance, 125, settings.ProjectionMasterShadowColor),
                     settings.ProjectionMasterLineSpacing
                 ),
                 // TODO Parametrize hard-coded values

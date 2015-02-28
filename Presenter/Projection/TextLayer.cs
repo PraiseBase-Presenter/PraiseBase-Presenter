@@ -30,7 +30,7 @@ namespace PraiseBase.Presenter
     {
         protected void drawString(Graphics gr, string str, int x, int y, Font font, Brush fontBrush, StringFormat strFormat)
         {
-            int shadowThickness = Settings.Default.ProjectionMasterShadowSize;
+            int shadowThickness = Settings.Default.ProjectionMasterShadowDistance;
             int outLineThickness = Settings.Default.ProjectionMasterOutlineSize;
 
             Brush outlineBrush = new SolidBrush(Settings.Default.ProjectionMasterOutlineColor);

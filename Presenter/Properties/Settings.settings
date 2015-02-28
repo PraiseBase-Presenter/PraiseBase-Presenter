@@ -92,7 +92,7 @@
     <Setting Name="ProjectionMasterOutlineSize" Type="System.Int32" Scope="User">
       <Value Profile="(Default)">1</Value>
     </Setting>
-    <Setting Name="ProjectionMasterShadowSize" Type="System.Int32" Scope="User">
+    <Setting Name="ProjectionMasterShadowDistance" Type="System.Int32" Scope="User">
       <Value Profile="(Default)">6</Value>
     </Setting>
     <Setting Name="ProjectionUseMaster" Type="System.Boolean" Scope="User">

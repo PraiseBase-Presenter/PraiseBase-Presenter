@@ -65,7 +65,7 @@ namespace PraiseBase.Presenter.Forms
 
             // Shadow
             checkBoxShadowEnabled.Checked = Settings.Default.ProjectionMasterShadowEnabled;
-            numericUpDownShadowDistance.Value = Settings.Default.ProjectionMasterShadowSize;
+            numericUpDownShadowDistance.Value = Settings.Default.ProjectionMasterShadowDistance;
             numericUpDownShadowDirection.Value = Settings.Default.ProjectionMasterShadowDirection;
             buttonShadowColor.BackColor = Settings.Default.ProjectionMasterShadowColor;
             enableShadowFormElements(Settings.Default.ProjectionMasterShadowEnabled);
@@ -513,7 +513,7 @@ namespace PraiseBase.Presenter.Forms
 
         private void numericUpDownShadowSize_ValueChanged(object sender, EventArgs e)
         {
-            Settings.Default.ProjectionMasterShadowSize = (int)((NumericUpDown)sender).Value;
+            Settings.Default.ProjectionMasterShadowDistance = (int)((NumericUpDown)sender).Value;
         }
 
         private void numericUpDownShadowDirection_ValueChanged(object sender, EventArgs e)

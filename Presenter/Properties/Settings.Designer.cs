@@ -278,12 +278,12 @@ namespace PraiseBase.Presenter.Properties {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("6")]
-        public int ProjectionMasterShadowSize {
+        public int ProjectionMasterShadowDistance {
             get {
-                return ((int)(this["ProjectionMasterShadowSize"]));
+                return ((int)(this["ProjectionMasterShadowDistance"]));
             }
             set {
-                this["ProjectionMasterShadowSize"] = value;
+                this["ProjectionMasterShadowDistance"] = value;
             }
         }
         
