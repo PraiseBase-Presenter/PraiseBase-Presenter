@@ -109,6 +109,10 @@
             this.labelMainTextString = new System.Windows.Forms.Label();
             this.labelTranslationText = new System.Windows.Forms.Label();
             this.checkBoxUseMasterFormat = new System.Windows.Forms.CheckBox();
+            this.label17 = new System.Windows.Forms.Label();
+            this.label18 = new System.Windows.Forms.Label();
+            this.label19 = new System.Windows.Forms.Label();
+            this.label20 = new System.Windows.Forms.Label();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -622,6 +626,10 @@
             // groupBoxFonts
             // 
             resources.ApplyResources(this.groupBoxFonts, "groupBoxFonts");
+            this.groupBoxFonts.Controls.Add(this.label20);
+            this.groupBoxFonts.Controls.Add(this.label19);
+            this.groupBoxFonts.Controls.Add(this.label18);
+            this.groupBoxFonts.Controls.Add(this.label17);
             this.groupBoxFonts.Controls.Add(this.labelSourceTextString);
             this.groupBoxFonts.Controls.Add(this.labelCopyrightTextString);
             this.groupBoxFonts.Controls.Add(this.labelSourceText);
@@ -730,6 +738,7 @@
             // labelMainTextString
             // 
             resources.ApplyResources(this.labelMainTextString, "labelMainTextString");
+            this.labelMainTextString.Cursor = System.Windows.Forms.Cursors.Default;
             this.labelMainTextString.Name = "labelMainTextString";
             // 
             // labelTranslationText
@@ -743,6 +752,26 @@
             this.checkBoxUseMasterFormat.Name = "checkBoxUseMasterFormat";
             this.checkBoxUseMasterFormat.UseVisualStyleBackColor = true;
             this.checkBoxUseMasterFormat.CheckedChanged += new System.EventHandler(this.checkBoxUseMasterFormat_CheckedChanged);
+            // 
+            // label17
+            // 
+            resources.ApplyResources(this.label17, "label17");
+            this.label17.Name = "label17";
+            // 
+            // label18
+            // 
+            resources.ApplyResources(this.label18, "label18");
+            this.label18.Name = "label18";
+            // 
+            // label19
+            // 
+            resources.ApplyResources(this.label19, "label19");
+            this.label19.Name = "label19";
+            // 
+            // label20
+            // 
+            resources.ApplyResources(this.label20, "label20");
+            this.label20.Name = "label20";
             // 
             // ProgramSettingsDialog
             // 
@@ -879,5 +908,9 @@
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.Label label16;
         private System.Windows.Forms.Label label13;
+        private System.Windows.Forms.Label label20;
+        private System.Windows.Forms.Label label19;
+        private System.Windows.Forms.Label label18;
+        private System.Windows.Forms.Label label17;
     }
 }
