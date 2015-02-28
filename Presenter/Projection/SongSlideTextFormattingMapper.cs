@@ -60,16 +60,14 @@ namespace PraiseBase.Presenter.Projection
                     settings.ProjectionMasterFontTranslation,
                     settings.ProjectionMasterTranslationColor,
                     new TextOutline(settings.ProjectionMasterOutlineSize, settings.ProjectionMasterOutlineColor),
-                    // TODO Parametrize hard-coded value
-                    new TextShadow(settings.ProjectionMasterShadowDistance, 125, settings.ProjectionMasterShadowColor),
+                    new TextShadow(settings.ProjectionMasterShadowDistance, settings.ProjectionMasterShadowDirection, settings.ProjectionMasterShadowColor),
                     settings.ProjectionMasterTranslationLineSpacing
                 ),
-                // TODO Parametrize hard-coded value
-                Orientation = new TextOrientation(VerticalOrientation.Middle, HorizontalOrientation.Center),
+                Orientation = new TextOrientation(settings.ProjectionMasterVerticalTextOrientation, settings.ProjectionMasterHorizontalTextOrientation),
                 HorizontalPadding = settings.ProjectionMasterHorizontalTextPadding,
                 VerticalPadding = settings.ProjectionMasterHorizontalTextPadding,
-                OutlineEnabled = true,
-                ShadowEnabled = true
+                OutlineEnabled = settings.ProjectionMasterOutlineEnabled,
+                ShadowEnabled = settings.ProjectionMasterShadowEnabled
             };
             slideFormatting.Header = new SlideTextFormatting.TextBoxFormatting()
             {
@@ -80,12 +78,11 @@ namespace PraiseBase.Presenter.Projection
                     new TextShadow(settings.ProjectionMasterShadowDistance, 125, settings.ProjectionMasterShadowColor),
                     settings.ProjectionMasterLineSpacing
                 ),
-                // TODO Parametrize hard-coded values
-                HorizontalOrientation = HorizontalOrientation.Right,
-                HorizontalPadding = 20,
-                VerticalPadding = 40,
-                OutlineEnabled = true,
-                ShadowEnabled = true
+                HorizontalOrientation = settings.ProjectionMasterHorizontalHeaderOrientation,
+                HorizontalPadding = settings.ProjectionMasterHorizontalHeaderPadding,
+                VerticalPadding = settings.ProjectionMasterVerticalHeaderPadding,
+                OutlineEnabled = settings.ProjectionMasterOutlineEnabled,
+                ShadowEnabled = settings.ProjectionMasterShadowEnabled
             };
             slideFormatting.Footer = new SlideTextFormatting.TextBoxFormatting()
             {
@@ -93,15 +90,14 @@ namespace PraiseBase.Presenter.Projection
                     settings.ProjectionMasterCopyrightFont,
                     settings.ProjectionMasterCopyrightColor,
                     new TextOutline(settings.ProjectionMasterOutlineSize, settings.ProjectionMasterOutlineColor),
-                    new TextShadow(settings.ProjectionMasterShadowDistance, 125, settings.ProjectionMasterShadowColor),
+                    new TextShadow(settings.ProjectionMasterShadowDistance, settings.ProjectionMasterShadowDirection, settings.ProjectionMasterShadowColor),
                     settings.ProjectionMasterLineSpacing
                 ),
-                // TODO Parametrize hard-coded values
-                HorizontalOrientation = HorizontalOrientation.Left,
-                HorizontalPadding = 30,
-                VerticalPadding = 40,
-                OutlineEnabled = true,
-                ShadowEnabled = true
+                HorizontalOrientation = settings.ProjectionMasterHorizontalFooterOrientation,
+                HorizontalPadding = settings.ProjectionMasterHorizontalFooterPadding,
+                VerticalPadding = settings.ProjectionMasterVerticalFooterPadding,
+                OutlineEnabled = settings.ProjectionMasterOutlineEnabled,
+                ShadowEnabled = settings.ProjectionMasterShadowEnabled
             };
         }
     }
