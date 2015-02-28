@@ -815,5 +815,17 @@ namespace PraiseBase.Presenter.Properties {
                 this["ProjectionMasterSourcePosition"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("Inline")]
+        public global::PraiseBase.Presenter.Model.TranslationPosition ProjectionMasteTranslationPosition {
+            get {
+                return ((global::PraiseBase.Presenter.Model.TranslationPosition)(this["ProjectionMasteTranslationPosition"]));
+            }
+            set {
+                this["ProjectionMasteTranslationPosition"] = value;
+            }
+        }
     }
 }

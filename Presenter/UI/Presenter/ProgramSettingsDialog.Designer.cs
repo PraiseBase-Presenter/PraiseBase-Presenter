@@ -68,6 +68,7 @@
             this.comboBoxSourcePosition = new System.Windows.Forms.ComboBox();
             this.labelShowSource = new System.Windows.Forms.Label();
             this.groupBoxTextOrientation = new System.Windows.Forms.GroupBox();
+            this.comboBoxVerticalTextOrientation = new System.Windows.Forms.ComboBox();
             this.comboBoxFooterOrientation = new System.Windows.Forms.ComboBox();
             this.comboBoxHeaderOrientation = new System.Windows.Forms.ComboBox();
             this.label12 = new System.Windows.Forms.Label();
@@ -129,7 +130,8 @@
             this.labelMainTextString = new System.Windows.Forms.Label();
             this.labelTranslationText = new System.Windows.Forms.Label();
             this.checkBoxUseMasterFormat = new System.Windows.Forms.CheckBox();
-            this.comboBoxVerticalTextOrientation = new System.Windows.Forms.ComboBox();
+            this.comboBoxTranslationPosition = new System.Windows.Forms.ComboBox();
+            this.label16 = new System.Windows.Forms.Label();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.groupBoxProjection.SuspendLayout();
@@ -452,6 +454,8 @@
             // groupBoxTextOrientation
             // 
             resources.ApplyResources(this.groupBoxTextOrientation, "groupBoxTextOrientation");
+            this.groupBoxTextOrientation.Controls.Add(this.label16);
+            this.groupBoxTextOrientation.Controls.Add(this.comboBoxTranslationPosition);
             this.groupBoxTextOrientation.Controls.Add(this.comboBoxVerticalTextOrientation);
             this.groupBoxTextOrientation.Controls.Add(this.comboBoxFooterOrientation);
             this.groupBoxTextOrientation.Controls.Add(this.comboBoxHeaderOrientation);
@@ -461,6 +465,18 @@
             this.groupBoxTextOrientation.Controls.Add(this.label10);
             this.groupBoxTextOrientation.Name = "groupBoxTextOrientation";
             this.groupBoxTextOrientation.TabStop = false;
+            // 
+            // comboBoxVerticalTextOrientation
+            // 
+            this.comboBoxVerticalTextOrientation.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBoxVerticalTextOrientation.FormattingEnabled = true;
+            this.comboBoxVerticalTextOrientation.Items.AddRange(new object[] {
+            resources.GetString("comboBoxVerticalTextOrientation.Items"),
+            resources.GetString("comboBoxVerticalTextOrientation.Items1"),
+            resources.GetString("comboBoxVerticalTextOrientation.Items2")});
+            resources.ApplyResources(this.comboBoxVerticalTextOrientation, "comboBoxVerticalTextOrientation");
+            this.comboBoxVerticalTextOrientation.Name = "comboBoxVerticalTextOrientation";
+            this.comboBoxVerticalTextOrientation.SelectedIndexChanged += new System.EventHandler(this.comboBoxVerticalTextOrientation_SelectedIndexChanged);
             // 
             // comboBoxFooterOrientation
             // 
@@ -941,17 +957,21 @@
             this.checkBoxUseMasterFormat.UseVisualStyleBackColor = true;
             this.checkBoxUseMasterFormat.CheckedChanged += new System.EventHandler(this.checkBoxUseMasterFormat_CheckedChanged);
             // 
-            // comboBoxVerticalTextOrientation
+            // comboBoxTranslationPosition
             // 
-            this.comboBoxVerticalTextOrientation.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboBoxVerticalTextOrientation.FormattingEnabled = true;
-            this.comboBoxVerticalTextOrientation.Items.AddRange(new object[] {
-            resources.GetString("comboBoxVerticalTextOrientation.Items"),
-            resources.GetString("comboBoxVerticalTextOrientation.Items1"),
-            resources.GetString("comboBoxVerticalTextOrientation.Items2")});
-            resources.ApplyResources(this.comboBoxVerticalTextOrientation, "comboBoxVerticalTextOrientation");
-            this.comboBoxVerticalTextOrientation.Name = "comboBoxVerticalTextOrientation";
-            this.comboBoxVerticalTextOrientation.SelectedIndexChanged += new System.EventHandler(this.comboBoxVerticalTextOrientation_SelectedIndexChanged);
+            this.comboBoxTranslationPosition.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBoxTranslationPosition.FormattingEnabled = true;
+            this.comboBoxTranslationPosition.Items.AddRange(new object[] {
+            resources.GetString("comboBoxTranslationPosition.Items"),
+            resources.GetString("comboBoxTranslationPosition.Items1")});
+            resources.ApplyResources(this.comboBoxTranslationPosition, "comboBoxTranslationPosition");
+            this.comboBoxTranslationPosition.Name = "comboBoxTranslationPosition";
+            this.comboBoxTranslationPosition.SelectedIndexChanged += new System.EventHandler(this.comboBoxTranslationPosition_SelectedIndexChanged);
+            // 
+            // label16
+            // 
+            resources.ApplyResources(this.label16, "label16");
+            this.label16.Name = "label16";
             // 
             // ProgramSettingsDialog
             // 
@@ -1113,5 +1133,7 @@
         private System.Windows.Forms.ComboBox comboBoxSourcePosition;
         private System.Windows.Forms.Label labelShowSource;
         private System.Windows.Forms.ComboBox comboBoxVerticalTextOrientation;
+        private System.Windows.Forms.Label label16;
+        private System.Windows.Forms.ComboBox comboBoxTranslationPosition;
     }
 }

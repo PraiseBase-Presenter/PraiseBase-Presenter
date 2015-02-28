@@ -129,7 +129,7 @@ namespace PraiseBase.Presenter.Persistence.PowerPraise
 
             // Text orientation
             song.TextOrientation = ppl.TextOrientation;
-            // TODO Translation position
+            song.TranslationPosition = ppl.TranslationTextPosition;
 
             // Enable or disable outline/shadow
             song.TextOutlineEnabled = ppl.TextOutlineFormatting.Enabled;
@@ -277,8 +277,7 @@ namespace PraiseBase.Presenter.Persistence.PowerPraise
 
             // Text orientation
             ppl.TextOrientation = song.TextOrientation;
-            // TODO Translation position
-            ppl.TranslationTextPosition = PowerPraiseSong.TranslationPosition.Inline;
+            ppl.TranslationTextPosition = song.TranslationPosition;
 
             // Borders
             if (song.TextBorders != null)

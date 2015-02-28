@@ -530,18 +530,18 @@ namespace PraiseBase.Presenter.Persistence.PowerPraise
         /// <param name="elem"></param>
         /// <param name="defaultValue"></param>
         /// <returns></returns>
-        private PowerPraiseSong.TranslationPosition parseTranslationPosition(XmlElement elem, PowerPraiseSong.TranslationPosition defaultValue)
+        private TranslationPosition parseTranslationPosition(XmlElement elem, TranslationPosition defaultValue)
         {
-            PowerPraiseSong.TranslationPosition position = PowerPraiseConstants.TranslationPosition;
+            TranslationPosition position = PowerPraiseConstants.TranslationPosition;
             if (elem != null && elem["transpos"] != null)
             {
                 if (elem["transpos"].InnerText == "inline")
                 {
-                    position = PowerPraiseSong.TranslationPosition.Inline;
+                    position = TranslationPosition.Inline;
                 }
                 else if (elem["transpos"].InnerText == "block")
                 {
-                    position = PowerPraiseSong.TranslationPosition.Block;
+                    position = TranslationPosition.Block;
                 }
             }
             return position;

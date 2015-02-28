@@ -90,6 +90,8 @@ namespace PraiseBase.Presenter.Forms
             comboBoxHeaderOrientation.SelectedIndex = getIndexByHorizontalOrientation(Settings.Default.ProjectionMasterHorizontalHeaderOrientation);
             comboBoxFooterOrientation.SelectedIndex = getIndexByHorizontalOrientation(Settings.Default.ProjectionMasterHorizontalFooterOrientation);
 
+            comboBoxTranslationPosition.SelectedIndex = Settings.Default.ProjectionMasteTranslationPosition == TranslationPosition.Block ? 1 : 0;
+
             // Additional information
             comboBoxSourcePosition.SelectedIndex = (int)Settings.Default.ProjectionMasterSourcePosition;
             comboBoxCopyrightPosition.SelectedIndex = (int)Settings.Default.ProjectionMasterCopyrightPosition;
@@ -655,6 +657,11 @@ namespace PraiseBase.Presenter.Forms
         private void comboBoxCopyrightPosition_SelectedIndexChanged(object sender, EventArgs e)
         {
             Settings.Default.ProjectionMasterCopyrightPosition = (AdditionalInformationPosition)comboBoxCopyrightPosition.SelectedIndex;
+        }
+
+        private void comboBoxTranslationPosition_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            Settings.Default.ProjectionMasteTranslationPosition = comboBoxTranslationPosition.SelectedIndex == 1 ? TranslationPosition.Block : TranslationPosition.Inline;
         }
 
     }

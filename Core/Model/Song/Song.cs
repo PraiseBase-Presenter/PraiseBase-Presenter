@@ -266,6 +266,11 @@ namespace PraiseBase.Presenter.Model.Song
         public TextOrientation TextOrientation { get; set; }
 
         /// <summary>
+        /// Position of the translation text
+        /// </summary>
+        public TranslationPosition TranslationPosition { get; set; }
+
+        /// <summary>
         /// True of the text should be outlined
         /// </summary>
         public bool TextOutlineEnabled { get; set; }

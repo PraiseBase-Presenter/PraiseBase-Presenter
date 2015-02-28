@@ -66,7 +66,7 @@ namespace PraiseBase.Presenter.Persistence.PowerPraise
 
         public static readonly TextOrientation TextOrientation = new TextOrientation(VerticalOrientation.Middle, HorizontalOrientation.Center);
 
-        public static readonly PowerPraiseSong.TranslationPosition TranslationPosition = PowerPraiseSong.TranslationPosition.Inline;
+        public static readonly TranslationPosition TranslationPosition = TranslationPosition.Inline;
 
         public static readonly PowerPraiseSong.TextBorders TextBorders = new PowerPraiseSong.TextBorders { 
             TextLeft = 40,

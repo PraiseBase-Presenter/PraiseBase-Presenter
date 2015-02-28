@@ -236,5 +236,8 @@
     <Setting Name="ProjectionMasterSourcePosition" Type="PraiseBase.Presenter.Model.AdditionalInformationPosition" Scope="User">
       <Value Profile="(Default)">FirstSlide</Value>
     </Setting>
+    <Setting Name="ProjectionMasteTranslationPosition" Type="PraiseBase.Presenter.Model.TranslationPosition" Scope="User">
+      <Value Profile="(Default)">Inline</Value>
+    </Setting>
   </Settings>
 </SettingsFile>
