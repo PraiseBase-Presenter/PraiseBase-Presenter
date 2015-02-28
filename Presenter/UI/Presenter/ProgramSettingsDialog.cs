@@ -43,9 +43,6 @@ namespace PraiseBase.Presenter.Forms
             checkBoxUseMasterFormat.Checked = Settings.Default.ProjectionUseMaster;
             groupBoxFonts.Enabled = Settings.Default.ProjectionUseMaster;
 
-            trackBarProjectionShadowSize.Value = Settings.Default.ProjectionShadowSize;
-            trackBarProjectionOutlineSize.Value = Settings.Default.ProjectionOutlineSize;
-
             labelMainTextString.Text = getFontString(Settings.Default.ProjectionMasterFont);
             buttonChooseProjectionForeColor.BackColor = Settings.Default.ProjectionMasterFontColor;
 
@@ -59,16 +56,23 @@ namespace PraiseBase.Presenter.Forms
             buttonSourceColor.BackColor = Settings.Default.ProjectionMasterSourceColor;
 
             pictureBoxProjectionBackColor.BackColor = Settings.Default.ProjectionBackColor;
-            pictureBoxProjectionOutlineColor.BackColor = Settings.Default.ProjectionOutlineColor;
-            pictureBoxProjectionShadowColor.BackColor = Settings.Default.ProjectionShadowColor;
 
-            trackBarProjectionPadding.Value = Settings.Default.ProjectionPadding;
+            numericUpDownOutlineSize.Value = Settings.Default.ProjectionOutlineSize;
+            buttonOutlineColor.BackColor = Settings.Default.ProjectionOutlineColor;
+
+            numericUpDownShadowSize.Value = Settings.Default.ProjectionShadowSize;
+            buttonShadowColor.BackColor = Settings.Default.ProjectionShadowColor;
+
+            numericUpDownHorizontalTextPadding.Value = Settings.Default.ProjectionPadding;
+            numericUpDownVerticalTextPadding.Value = Settings.Default.ProjectionPadding;
+            numericUpDownHorizontalHeaderPadding.Value = Settings.Default.ProjectionPadding;
+            numericUpDownVerticalHeaderPadding.Value = Settings.Default.ProjectionPadding;
+            numericUpDownHorizontalFooterPadding.Value = Settings.Default.ProjectionPadding;
+            numericUpDownVerticalFooterPadding.Value = Settings.Default.ProjectionPadding;
 
             numericUpDownLineSpacing.Value = Settings.Default.ProjectionMasterLineSpacing;
             numericUpDownTranslationLineSpacing.Value = Settings.Default.ProjectionMasterTranslationLineSpacing;
             
-            labelProjectionPadding.Text = Settings.Default.ProjectionPadding.ToString();
-
             checkBoxShowLoadingScreen.Checked = Settings.Default.ShowLoadingScreen;
 
             checkBoxProjectionFontScaling.Checked = Settings.Default.ProjectionFontScaling;
@@ -373,12 +377,6 @@ namespace PraiseBase.Presenter.Forms
             }
         }
 
-        private void trackBarPadding_Scroll(object sender, EventArgs e)
-        {
-            Settings.Default.ProjectionPadding = trackBarProjectionPadding.Value;
-            updateLabels();
-        }
-
         private void tabControl1_SelectedIndexChanged(object sender, EventArgs e)
         {
             Settings.Default.SettingsLastTabIndex = tabControl1.SelectedIndex;
@@ -406,27 +404,21 @@ namespace PraiseBase.Presenter.Forms
             }
         }
 
-        private void trackBarProjectionShadowSize_Scroll(object sender, EventArgs e)
-        {
-            Settings.Default.ProjectionShadowSize = trackBarProjectionShadowSize.Value;
-        }
-
-        private void trackBarProjectionOutlineSize_Scroll(object sender, EventArgs e)
-        {
-            Settings.Default.ProjectionOutlineSize = trackBarProjectionOutlineSize.Value;
-        }
-
         private void checkBoxUseMasterFormat_CheckedChanged(object sender, EventArgs e)
         {
             if (checkBoxUseMasterFormat.Checked)
             {
                 groupBoxFonts.Enabled = true;
                 groupBoxLineSpacings.Enabled = true;
+                groupBoxBorders.Enabled = true;
+                groupBoxEffects.Enabled = true;
             }
             else
             {
                 groupBoxFonts.Enabled = false;
                 groupBoxLineSpacings.Enabled = false;
+                groupBoxBorders.Enabled = false;
+                groupBoxEffects.Enabled = false;
             }
             Settings.Default.ProjectionUseMaster = checkBoxUseMasterFormat.Checked;
         }
@@ -436,7 +428,7 @@ namespace PraiseBase.Presenter.Forms
             Settings.Default.ShowLoadingScreen = checkBoxShowLoadingScreen.Checked;
         }
 
-        private void numericUpDown1_ValueChanged(object sender, EventArgs e)
+        private void numericUpDownTranslationLineSpacing_ValueChanged(object sender, EventArgs e)
         {
             Settings.Default.ProjectionMasterTranslationLineSpacing = (int)numericUpDownTranslationLineSpacing.Value;
         }
@@ -444,6 +436,38 @@ namespace PraiseBase.Presenter.Forms
         private void numericUpDownLineSpacing_ValueChanged(object sender, EventArgs e)
         {
             Settings.Default.ProjectionMasterLineSpacing = (int)numericUpDownLineSpacing.Value;
+        }
+
+        private void buttonOutlineColor_Click(object sender, EventArgs e)
+        {
+            ColorDialog colDlg = new ColorDialog();
+            colDlg.Color = Settings.Default.ProjectionOutlineColor;
+            if (colDlg.ShowDialog() == DialogResult.OK)
+            {
+                Settings.Default.ProjectionOutlineColor = colDlg.Color;
+                updateLabels();
+            }
+        }
+
+        private void numericUpDownOutlineSize_ValueChanged(object sender, EventArgs e)
+        {
+            Settings.Default.ProjectionOutlineSize = (int)((NumericUpDown)sender).Value;
+        }
+
+        private void buttonShadowColor_Click(object sender, EventArgs e)
+        {
+            ColorDialog colDlg = new ColorDialog();
+            colDlg.Color = Settings.Default.ProjectionShadowColor;
+            if (colDlg.ShowDialog() == DialogResult.OK)
+            {
+                Settings.Default.ProjectionShadowColor = colDlg.Color;
+                updateLabels();
+            }
+        }
+
+        private void numericUpDownShadowSize_ValueChanged(object sender, EventArgs e)
+        {
+            Settings.Default.ProjectionShadowSize = (int)((NumericUpDown)sender).Value;
         }
     }
 }
