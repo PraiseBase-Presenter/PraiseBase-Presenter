@@ -71,17 +71,22 @@ namespace PraiseBase.Presenter.Forms
             enableShadowFormElements(Settings.Default.ProjectionMasterShadowEnabled);
 
             // Padding / Borders
-            numericUpDownHorizontalTextPadding.Value = Settings.Default.ProjectionMasterPadding;
-            numericUpDownVerticalTextPadding.Value = Settings.Default.ProjectionMasterPadding;
-            numericUpDownHorizontalHeaderPadding.Value = Settings.Default.ProjectionMasterPadding;
-            numericUpDownVerticalHeaderPadding.Value = Settings.Default.ProjectionMasterPadding;
-            numericUpDownHorizontalFooterPadding.Value = Settings.Default.ProjectionMasterPadding;
-            numericUpDownVerticalFooterPadding.Value = Settings.Default.ProjectionMasterPadding;
+            numericUpDownHorizontalTextPadding.Value = Settings.Default.ProjectionMasterHorizontalTextPadding;
+            numericUpDownVerticalTextPadding.Value = Settings.Default.ProjectionMasterVerticalTextPadding;
+            numericUpDownHorizontalHeaderPadding.Value = Settings.Default.ProjectionMasterHorizontalHeaderPadding;
+            numericUpDownVerticalHeaderPadding.Value = Settings.Default.ProjectionMasterVerticalHeaderPadding;
+            numericUpDownHorizontalFooterPadding.Value = Settings.Default.ProjectionMasterHorizontalFooterPadding;
+            numericUpDownVerticalFooterPadding.Value = Settings.Default.ProjectionMasterVerticalFooterPadding;
 
             // Line spacing
             numericUpDownLineSpacing.Value = Settings.Default.ProjectionMasterLineSpacing;
             numericUpDownTranslationLineSpacing.Value = Settings.Default.ProjectionMasterTranslationLineSpacing;
             
+            // Text orientation
+            comboBoxTextOrientation.SelectedIndex = getIndexByTextOrientation(Settings.Default.ProjectionMasterVerticalTextOrientation, Settings.Default.ProjectionMasterHorizontalTextOrientation);
+            comboBoxHeaderOrientation.SelectedIndex = getIndexByHorizontalOrientation(Settings.Default.ProjectionMasterHorizontalHeaderOrientation);
+            comboBoxFooterOrientation.SelectedIndex = getIndexByHorizontalOrientation(Settings.Default.ProjectionMasterHorizontalFooterOrientation);
+
             checkBoxShowLoadingScreen.Checked = Settings.Default.ShowLoadingScreen;
 
             checkBoxProjectionFontScaling.Checked = Settings.Default.ProjectionFontScaling;
@@ -410,22 +415,12 @@ namespace PraiseBase.Presenter.Forms
 
         private void enableMasterFormattingGroupBoxes(bool enable)
         {
-            if (enable)
-            {
-                groupBoxFonts.Enabled = true;
-                groupBoxLineSpacings.Enabled = true;
-                groupBoxBorders.Enabled = true;
-                groupBoxOutline.Enabled = true;
-                groupBoxShadow.Enabled = true;
-            }
-            else
-            {
-                groupBoxFonts.Enabled = false;
-                groupBoxLineSpacings.Enabled = false;
-                groupBoxBorders.Enabled = false;
-                groupBoxOutline.Enabled = false;
-                groupBoxShadow.Enabled = false;
-            }
+            groupBoxFonts.Enabled = enable;
+            groupBoxLineSpacings.Enabled = enable;
+            groupBoxBorders.Enabled = enable;
+            groupBoxOutline.Enabled = enable;
+            groupBoxShadow.Enabled = enable;
+            groupBoxTextOrientation.Enabled = enable;
         }
 
         private void checkBoxShowLoadingScreen_CheckedChanged(object sender, EventArgs e)
@@ -519,6 +514,161 @@ namespace PraiseBase.Presenter.Forms
                 Settings.Default.ProjectionBackColor = colDlg.Color;
                 updateLabels();
             }
+        }
+
+        private void numericUpDownHorizontalTextPadding_ValueChanged(object sender, EventArgs e)
+        {
+            Settings.Default.ProjectionMasterHorizontalTextPadding = (int)((NumericUpDown)sender).Value;
+        }
+
+        private void numericUpDownVerticalTextPadding_ValueChanged(object sender, EventArgs e)
+        {
+            Settings.Default.ProjectionMasterVerticalTextPadding = (int)((NumericUpDown)sender).Value;
+        }
+
+        private void numericUpDownHorizontalHeaderPadding_ValueChanged(object sender, EventArgs e)
+        {
+            Settings.Default.ProjectionMasterHorizontalHeaderPadding = (int)((NumericUpDown)sender).Value;
+        }
+
+        private void numericUpDownVerticalHeaderPadding_ValueChanged(object sender, EventArgs e)
+        {
+            Settings.Default.ProjectionMasterVerticalHeaderPadding = (int)((NumericUpDown)sender).Value;
+        }
+
+        private void numericUpDownHorizontalFooterPadding_ValueChanged(object sender, EventArgs e)
+        {
+            Settings.Default.ProjectionMasterHorizontalFooterPadding = (int)((NumericUpDown)sender).Value;
+        }
+
+        private void numericUpDownVerticalFooterPadding_ValueChanged(object sender, EventArgs e)
+        {
+            Settings.Default.ProjectionMasterVerticalFooterPadding = (int)((NumericUpDown)sender).Value;
+        }
+
+        private void comboBoxTextOrientation_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            int index = ((ComboBox)sender).SelectedIndex;
+            Settings.Default.ProjectionMasterVerticalTextOrientation = getVerticalTextOrientationByIndex(index);
+            Settings.Default.ProjectionMasterHorizontalTextOrientation = getHorizontalTextOrientationByIndex(index);
+        }
+
+        private int getIndexByTextOrientation(Model.VerticalOrientation vertical, Model.HorizontalOrientation horizontal)
+        {
+            switch (vertical)
+            {
+                case Model.VerticalOrientation.Top:
+                    switch (horizontal)
+                    {
+                        case Model.HorizontalOrientation.Left:
+                            return 0;
+                        case Model.HorizontalOrientation.Center:
+                            return 1;
+                        case Model.HorizontalOrientation.Right:
+                            return 2;
+                    }
+                    break;
+                case Model.VerticalOrientation.Middle:
+                    switch (horizontal)
+                    {
+                        case Model.HorizontalOrientation.Left:
+                            return 3;
+                        case Model.HorizontalOrientation.Center:
+                            return 4;
+                        case Model.HorizontalOrientation.Right:
+                            return 5;
+                    }
+                    break;
+                case Model.VerticalOrientation.Bottom:
+                    switch (horizontal)
+                    {
+                        case Model.HorizontalOrientation.Left:
+                            return 6;
+                        case Model.HorizontalOrientation.Center:
+                            return 7;
+                        case Model.HorizontalOrientation.Right:
+                            return 8;
+                    }
+                    break;
+            }
+            return 0;
+        }
+
+        private Model.VerticalOrientation getVerticalTextOrientationByIndex(int index)
+        {
+            if (index >= 0 && index <= 2)
+            {
+                return Model.VerticalOrientation.Top;
+            }
+            if (index >= 3 && index <= 5)
+            {
+                return Model.VerticalOrientation.Middle;
+            }
+            if (index >= 6 && index <= 8)
+            {
+                return Model.VerticalOrientation.Bottom;
+            }
+            return Model.VerticalOrientation.Top;
+        }
+
+        private Model.HorizontalOrientation getHorizontalTextOrientationByIndex(int index)
+        {
+            if (index % 3 == 0)
+            {
+                return Model.HorizontalOrientation.Left;
+            }
+            if (index % 3 == 1)
+            {
+                return Model.HorizontalOrientation.Center;
+            }
+            if (index % 3 == 2)
+            {
+                return Model.HorizontalOrientation.Right;
+            }
+            return Model.HorizontalOrientation.Left;
+        }
+        
+        private void comboBoxHeaderOrientation_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            int index = ((ComboBox)sender).SelectedIndex;
+            Settings.Default.ProjectionMasterHorizontalHeaderOrientation = getHorizontalOrientationByIndex(index);
+        }
+
+        private void comboBoxFooterOrientation_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            int index = ((ComboBox)sender).SelectedIndex;
+            Settings.Default.ProjectionMasterHorizontalFooterOrientation = getHorizontalOrientationByIndex(index);
+        }
+
+        private int getIndexByHorizontalOrientation(Model.HorizontalOrientation horizontal)
+        {
+            switch (horizontal)
+            {
+                case Model.HorizontalOrientation.Left:
+                    return 0;
+                case Model.HorizontalOrientation.Center:
+                    return 1;
+                case Model.HorizontalOrientation.Right:
+                    return 2;
+            }
+            return 0;
+        }
+
+        private Model.HorizontalOrientation getHorizontalOrientationByIndex(int index)
+        {
+            if (index == 0)
+            {
+                return Model.HorizontalOrientation.Left;
+            }
+            if (index == 1)
+            {
+                return Model.HorizontalOrientation.Center;
+            }
+            if (index == 2)
+            {
+                return Model.HorizontalOrientation.Right;
+            }
+            return Model.HorizontalOrientation.Left;
         }
     }
 }

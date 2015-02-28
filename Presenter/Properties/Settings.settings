@@ -20,7 +20,7 @@
     <Setting Name="ProjectionFontScaling" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">True</Value>
     </Setting>
-    <Setting Name="ProjectionMasterPadding" Type="System.Int32" Scope="User">
+    <Setting Name="ProjectionMasterHorizontalTextPadding" Type="System.Int32" Scope="User">
       <Value Profile="(Default)">80</Value>
     </Setting>
     <Setting Name="Languages" Type="System.Collections.Specialized.StringCollection" Scope="User">
@@ -199,6 +199,33 @@
     </Setting>
     <Setting Name="ProjectionMasterShadowEnabled" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="ProjectionMasterVerticalTextPadding" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">80</Value>
+    </Setting>
+    <Setting Name="ProjectionMasterHorizontalHeaderPadding" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">20</Value>
+    </Setting>
+    <Setting Name="ProjectionMasterVerticalHeaderPadding" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">40</Value>
+    </Setting>
+    <Setting Name="ProjectionMasterHorizontalFooterPadding" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">30</Value>
+    </Setting>
+    <Setting Name="ProjectionMasterVerticalFooterPadding" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">40</Value>
+    </Setting>
+    <Setting Name="ProjectionMasterHorizontalTextOrientation" Type="PraiseBase.Presenter.Model.HorizontalOrientation" Scope="User">
+      <Value Profile="(Default)">Center</Value>
+    </Setting>
+    <Setting Name="ProjectionMasterVerticalTextOrientation" Type="PraiseBase.Presenter.Model.VerticalOrientation" Scope="User">
+      <Value Profile="(Default)">Middle</Value>
+    </Setting>
+    <Setting Name="ProjectionMasterHorizontalHeaderOrientation" Type="PraiseBase.Presenter.Model.HorizontalOrientation" Scope="User">
+      <Value Profile="(Default)">Right</Value>
+    </Setting>
+    <Setting Name="ProjectionMasterHorizontalFooterOrientation" Type="PraiseBase.Presenter.Model.HorizontalOrientation" Scope="User">
+      <Value Profile="(Default)">Left</Value>
     </Setting>
   </Settings>
 </SettingsFile>

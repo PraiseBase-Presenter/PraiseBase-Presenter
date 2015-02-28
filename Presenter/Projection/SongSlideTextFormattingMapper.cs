@@ -66,8 +66,8 @@ namespace PraiseBase.Presenter.Projection
                 ),
                 // TODO Parametrize hard-coded value
                 Orientation = new TextOrientation(VerticalOrientation.Middle, HorizontalOrientation.Center),
-                HorizontalPadding = settings.ProjectionMasterPadding,
-                VerticalPadding = settings.ProjectionMasterPadding,
+                HorizontalPadding = settings.ProjectionMasterHorizontalTextPadding,
+                VerticalPadding = settings.ProjectionMasterHorizontalTextPadding,
                 OutlineEnabled = true,
                 ShadowEnabled = true
             };

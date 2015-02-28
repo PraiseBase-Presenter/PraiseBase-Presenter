@@ -98,12 +98,12 @@ namespace PraiseBase.Presenter.Properties {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("80")]
-        public int ProjectionMasterPadding {
+        public int ProjectionMasterHorizontalTextPadding {
             get {
-                return ((int)(this["ProjectionMasterPadding"]));
+                return ((int)(this["ProjectionMasterHorizontalTextPadding"]));
             }
             set {
-                this["ProjectionMasterPadding"] = value;
+                this["ProjectionMasterHorizontalTextPadding"] = value;
             }
         }
         
@@ -669,6 +669,114 @@ namespace PraiseBase.Presenter.Properties {
             }
             set {
                 this["ProjectionMasterShadowEnabled"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("80")]
+        public int ProjectionMasterVerticalTextPadding {
+            get {
+                return ((int)(this["ProjectionMasterVerticalTextPadding"]));
+            }
+            set {
+                this["ProjectionMasterVerticalTextPadding"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("20")]
+        public int ProjectionMasterHorizontalHeaderPadding {
+            get {
+                return ((int)(this["ProjectionMasterHorizontalHeaderPadding"]));
+            }
+            set {
+                this["ProjectionMasterHorizontalHeaderPadding"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("40")]
+        public int ProjectionMasterVerticalHeaderPadding {
+            get {
+                return ((int)(this["ProjectionMasterVerticalHeaderPadding"]));
+            }
+            set {
+                this["ProjectionMasterVerticalHeaderPadding"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("30")]
+        public int ProjectionMasterHorizontalFooterPadding {
+            get {
+                return ((int)(this["ProjectionMasterHorizontalFooterPadding"]));
+            }
+            set {
+                this["ProjectionMasterHorizontalFooterPadding"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("40")]
+        public int ProjectionMasterVerticalFooterPadding {
+            get {
+                return ((int)(this["ProjectionMasterVerticalFooterPadding"]));
+            }
+            set {
+                this["ProjectionMasterVerticalFooterPadding"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("Center")]
+        public global::PraiseBase.Presenter.Model.HorizontalOrientation ProjectionMasterHorizontalTextOrientation {
+            get {
+                return ((global::PraiseBase.Presenter.Model.HorizontalOrientation)(this["ProjectionMasterHorizontalTextOrientation"]));
+            }
+            set {
+                this["ProjectionMasterHorizontalTextOrientation"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("Middle")]
+        public global::PraiseBase.Presenter.Model.VerticalOrientation ProjectionMasterVerticalTextOrientation {
+            get {
+                return ((global::PraiseBase.Presenter.Model.VerticalOrientation)(this["ProjectionMasterVerticalTextOrientation"]));
+            }
+            set {
+                this["ProjectionMasterVerticalTextOrientation"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("Right")]
+        public global::PraiseBase.Presenter.Model.HorizontalOrientation ProjectionMasterHorizontalHeaderOrientation {
+            get {
+                return ((global::PraiseBase.Presenter.Model.HorizontalOrientation)(this["ProjectionMasterHorizontalHeaderOrientation"]));
+            }
+            set {
+                this["ProjectionMasterHorizontalHeaderOrientation"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("Left")]
+        public global::PraiseBase.Presenter.Model.HorizontalOrientation ProjectionMasterHorizontalFooterOrientation {
+            get {
+                return ((global::PraiseBase.Presenter.Model.HorizontalOrientation)(this["ProjectionMasterHorizontalFooterOrientation"]));
+            }
+            set {
+                this["ProjectionMasterHorizontalFooterOrientation"] = value;
             }
         }
     }
