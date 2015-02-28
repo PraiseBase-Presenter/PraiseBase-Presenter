@@ -41,6 +41,7 @@ using PraiseBase.Presenter.Model.Bible;
 using PraiseBase.Presenter.Persistence.Setlists;
 using PraiseBase.Presenter.Projection;
 using PraiseBase.Presenter.Model;
+using PraiseBase.Presenter.Model.Song;
 
 namespace PraiseBase.Presenter.Forms
 {
@@ -427,15 +428,22 @@ namespace PraiseBase.Presenter.Forms
 
             SlideTextFormatting slideFormatting = new SlideTextFormatting();
 
+            AdditionalInformationPosition sourcePosition;
+            AdditionalInformationPosition copyrightPosition;
+
             // Formatting based on master styling
             if (Settings.Default.ProjectionUseMaster)
             {
                 SongSlideTextFormattingMapper.Map(Settings.Default, ref slideFormatting);
+                sourcePosition = Settings.Default.ProjectionMasterSourcePosition;
+                copyrightPosition = Settings.Default.ProjectionMasterCopyrightPosition;
             }
             // Formatting based on song settings
             else
             {
                 SongSlideTextFormattingMapper.Map(s, ref slideFormatting);
+                sourcePosition = s.SourcePosition;
+                copyrightPosition = s.CopyrightPosition;
             }
             slideFormatting.ScaleFontSize = Settings.Default.ProjectionFontScaling;
 
@@ -454,14 +462,15 @@ namespace PraiseBase.Presenter.Forms
             }
 
             // Set header text (song source)
-            if (s.SourcePosition == "firstslide" && e.PartNumber == 0 && e.SlideNumber == 0)
+            if (sourcePosition == AdditionalInformationPosition.FirstSlide && isFirstSlide(e.PartNumber, e.SlideNumber) ||
+                sourcePosition == AdditionalInformationPosition.LastSlide && isLastSlide(s, e.PartNumber, e.SlideNumber))
             {
                 ssl.HeaderText = new String[] { s.SongBooksString };
             }
 
             // Set footer text (copyright)
-            if (s.CopyrightPosition == "firstslide" && e.PartNumber == 0 && e.SlideNumber == 0  ||
-                s.CopyrightPosition == "lastslide" && e.PartNumber == s.Parts.Count - 1 && e.SlideNumber == s.Parts[e.PartNumber].Slides.Count -1 )
+            if (copyrightPosition == AdditionalInformationPosition.FirstSlide && isFirstSlide(e.PartNumber, e.SlideNumber) ||
+                copyrightPosition == AdditionalInformationPosition.LastSlide && isLastSlide(s, e.PartNumber, e.SlideNumber))
             {
                 ssl.FooterText = s.Copyright.Split(new String[] { Environment.NewLine }, StringSplitOptions.None);
             }
@@ -501,6 +510,16 @@ namespace PraiseBase.Presenter.Forms
                 if (s.RelativeImagePaths.Count > 0)
                     imageHistoryAdd(s.RelativeImagePaths[cs.ImageNumber]);
             }
+        }
+
+        private bool isFirstSlide(int partNumber, int slideNumber)
+        {
+            return partNumber == 0 && slideNumber == 0;
+        }
+
+        private bool isLastSlide(Song s, int partNumber, int slideNumber)
+        {
+            return partNumber == s.Parts.Count - 1 && slideNumber == s.Parts[partNumber].Slides.Count - 1;
         }
 
         private void songDetailElement_ImageClicked(object sender, SlideImageClickEventArgs e)

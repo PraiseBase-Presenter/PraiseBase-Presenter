@@ -18,12 +18,12 @@ namespace PraiseBase.Presenter.Persistence.PowerPraise
             song.Themes.Add("Anbetung");
 
             song.Copyright = "Text und Musik: Lowell Mason, 1792-1872";
-            song.CopyrightPosition = "lastslide";
+            song.CopyrightPosition = Model.AdditionalInformationPosition.LastSlide;
 
             SongBook sb = new SongBook();
             sb.Name = "grünes Buch 339";
             song.SongBooks.Add(sb);
-            song.SourcePosition = "firstslide";
+            song.SourcePosition = Model.AdditionalInformationPosition.FirstSlide;
 
             SongPart part = new SongPart();
             part.Caption = "Teil 1";

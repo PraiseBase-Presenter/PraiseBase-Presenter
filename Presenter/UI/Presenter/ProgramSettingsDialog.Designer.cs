@@ -62,6 +62,11 @@
             this.buttonDelTags = new System.Windows.Forms.Button();
             this.listBoxTags = new System.Windows.Forms.ListBox();
             this.tabPage5 = new System.Windows.Forms.TabPage();
+            this.groupBoxAdditionalInfo = new System.Windows.Forms.GroupBox();
+            this.comboBoxCopyrightPosition = new System.Windows.Forms.ComboBox();
+            this.label13 = new System.Windows.Forms.Label();
+            this.comboBoxSourcePosition = new System.Windows.Forms.ComboBox();
+            this.labelShowSource = new System.Windows.Forms.Label();
             this.groupBoxTextOrientation = new System.Windows.Forms.GroupBox();
             this.comboBoxFooterOrientation = new System.Windows.Forms.ComboBox();
             this.comboBoxHeaderOrientation = new System.Windows.Forms.ComboBox();
@@ -131,6 +136,7 @@
             this.groupBoxDataDirectory.SuspendLayout();
             this.tabPage3.SuspendLayout();
             this.tabPage5.SuspendLayout();
+            this.groupBoxAdditionalInfo.SuspendLayout();
             this.groupBoxTextOrientation.SuspendLayout();
             this.groupBoxShadow.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownShadowSize)).BeginInit();
@@ -386,6 +392,7 @@
             // 
             // tabPage5
             // 
+            this.tabPage5.Controls.Add(this.groupBoxAdditionalInfo);
             this.tabPage5.Controls.Add(this.groupBoxTextOrientation);
             this.tabPage5.Controls.Add(this.groupBoxShadow);
             this.tabPage5.Controls.Add(this.groupBoxBorders);
@@ -397,15 +404,59 @@
             this.tabPage5.Name = "tabPage5";
             this.tabPage5.UseVisualStyleBackColor = true;
             // 
+            // groupBoxAdditionalInfo
+            // 
+            resources.ApplyResources(this.groupBoxAdditionalInfo, "groupBoxAdditionalInfo");
+            this.groupBoxAdditionalInfo.Controls.Add(this.comboBoxCopyrightPosition);
+            this.groupBoxAdditionalInfo.Controls.Add(this.label13);
+            this.groupBoxAdditionalInfo.Controls.Add(this.comboBoxSourcePosition);
+            this.groupBoxAdditionalInfo.Controls.Add(this.labelShowSource);
+            this.groupBoxAdditionalInfo.Name = "groupBoxAdditionalInfo";
+            this.groupBoxAdditionalInfo.TabStop = false;
+            // 
+            // comboBoxCopyrightPosition
+            // 
+            this.comboBoxCopyrightPosition.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBoxCopyrightPosition.FormattingEnabled = true;
+            this.comboBoxCopyrightPosition.Items.AddRange(new object[] {
+            resources.GetString("comboBoxCopyrightPosition.Items"),
+            resources.GetString("comboBoxCopyrightPosition.Items1"),
+            resources.GetString("comboBoxCopyrightPosition.Items2")});
+            resources.ApplyResources(this.comboBoxCopyrightPosition, "comboBoxCopyrightPosition");
+            this.comboBoxCopyrightPosition.Name = "comboBoxCopyrightPosition";
+            this.comboBoxCopyrightPosition.SelectedIndexChanged += new System.EventHandler(this.comboBoxCopyrightPosition_SelectedIndexChanged);
+            // 
+            // label13
+            // 
+            resources.ApplyResources(this.label13, "label13");
+            this.label13.Name = "label13";
+            // 
+            // comboBoxSourcePosition
+            // 
+            this.comboBoxSourcePosition.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBoxSourcePosition.FormattingEnabled = true;
+            this.comboBoxSourcePosition.Items.AddRange(new object[] {
+            resources.GetString("comboBoxSourcePosition.Items"),
+            resources.GetString("comboBoxSourcePosition.Items1"),
+            resources.GetString("comboBoxSourcePosition.Items2")});
+            resources.ApplyResources(this.comboBoxSourcePosition, "comboBoxSourcePosition");
+            this.comboBoxSourcePosition.Name = "comboBoxSourcePosition";
+            this.comboBoxSourcePosition.SelectedIndexChanged += new System.EventHandler(this.comboBoxSourcePosition_SelectedIndexChanged);
+            // 
+            // labelShowSource
+            // 
+            resources.ApplyResources(this.labelShowSource, "labelShowSource");
+            this.labelShowSource.Name = "labelShowSource";
+            // 
             // groupBoxTextOrientation
             // 
+            resources.ApplyResources(this.groupBoxTextOrientation, "groupBoxTextOrientation");
             this.groupBoxTextOrientation.Controls.Add(this.comboBoxFooterOrientation);
             this.groupBoxTextOrientation.Controls.Add(this.comboBoxHeaderOrientation);
             this.groupBoxTextOrientation.Controls.Add(this.label12);
             this.groupBoxTextOrientation.Controls.Add(this.label11);
             this.groupBoxTextOrientation.Controls.Add(this.comboBoxTextOrientation);
             this.groupBoxTextOrientation.Controls.Add(this.label10);
-            resources.ApplyResources(this.groupBoxTextOrientation, "groupBoxTextOrientation");
             this.groupBoxTextOrientation.Name = "groupBoxTextOrientation";
             this.groupBoxTextOrientation.TabStop = false;
             // 
@@ -550,7 +601,6 @@
             // 
             // groupBoxBorders
             // 
-            resources.ApplyResources(this.groupBoxBorders, "groupBoxBorders");
             this.groupBoxBorders.Controls.Add(this.label15);
             this.groupBoxBorders.Controls.Add(this.numericUpDownVerticalFooterPadding);
             this.groupBoxBorders.Controls.Add(this.numericUpDownHorizontalFooterPadding);
@@ -562,6 +612,7 @@
             this.groupBoxBorders.Controls.Add(this.label2);
             this.groupBoxBorders.Controls.Add(this.numericUpDownVerticalTextPadding);
             this.groupBoxBorders.Controls.Add(this.numericUpDownHorizontalTextPadding);
+            resources.ApplyResources(this.groupBoxBorders, "groupBoxBorders");
             this.groupBoxBorders.Name = "groupBoxBorders";
             this.groupBoxBorders.TabStop = false;
             // 
@@ -921,6 +972,8 @@
             this.tabPage3.PerformLayout();
             this.tabPage5.ResumeLayout(false);
             this.tabPage5.PerformLayout();
+            this.groupBoxAdditionalInfo.ResumeLayout(false);
+            this.groupBoxAdditionalInfo.PerformLayout();
             this.groupBoxTextOrientation.ResumeLayout(false);
             this.groupBoxTextOrientation.PerformLayout();
             this.groupBoxShadow.ResumeLayout(false);
@@ -1046,5 +1099,10 @@
         private System.Windows.Forms.ComboBox comboBoxFooterOrientation;
         private System.Windows.Forms.NumericUpDown numericUpDownShadowSize;
         private System.Windows.Forms.Label labelShadowSize;
+        private System.Windows.Forms.GroupBox groupBoxAdditionalInfo;
+        private System.Windows.Forms.ComboBox comboBoxCopyrightPosition;
+        private System.Windows.Forms.Label label13;
+        private System.Windows.Forms.ComboBox comboBoxSourcePosition;
+        private System.Windows.Forms.Label labelShowSource;
     }
 }

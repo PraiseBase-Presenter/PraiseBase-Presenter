@@ -230,5 +230,11 @@
     <Setting Name="ProjectionMasterShadowSize" Type="System.Int32" Scope="User">
       <Value Profile="(Default)">1</Value>
     </Setting>
+    <Setting Name="ProjectionMasterCopyrightPosition" Type="PraiseBase.Presenter.Model.AdditionalInformationPosition" Scope="User">
+      <Value Profile="(Default)">LastSlide</Value>
+    </Setting>
+    <Setting Name="ProjectionMasterSourcePosition" Type="PraiseBase.Presenter.Model.AdditionalInformationPosition" Scope="User">
+      <Value Profile="(Default)">FirstSlide</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

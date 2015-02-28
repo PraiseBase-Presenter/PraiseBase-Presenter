@@ -82,12 +82,12 @@ namespace PraiseBase.Presenter.Model.Song
         /// <summary>
         /// Copyright position (PowerPraise)
         /// </summary>
-        public string CopyrightPosition { get; set; }
+        public AdditionalInformationPosition CopyrightPosition { get; set; }
 
         /// <summary>
         /// Source position (PowerPraise)
         /// </summary>
-        public string SourcePosition { get; set; }
+        public AdditionalInformationPosition SourcePosition { get; set; }
 
         /// <summary>
         /// Release year

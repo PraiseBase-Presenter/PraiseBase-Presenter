@@ -49,19 +49,19 @@ namespace PraiseBase.Presenter.Persistence.PowerPraise
             switch (ppl.CopyrightTextPosition)
             {
                 case PowerPraiseSong.CopyrightPosition.FirstSlide:
-                    song.CopyrightPosition = "firstslide";
+                    song.CopyrightPosition = AdditionalInformationPosition.FirstSlide;
                     break;
                 case PowerPraiseSong.CopyrightPosition.LastSlide:
-                    song.CopyrightPosition = "lastslide";
+                    song.CopyrightPosition = AdditionalInformationPosition.LastSlide;
                     break;
                 case PowerPraiseSong.CopyrightPosition.None:
-                    song.CopyrightPosition = "none";
+                    song.CopyrightPosition = AdditionalInformationPosition.None;
                     break;
             }
 
             // Source / songbook
             song.SongBooksString = ppl.SourceText;
-            song.SourcePosition = ppl.SourceTextEnabled ? "firstslide" : "none";
+            song.SourcePosition = ppl.SourceTextEnabled ? AdditionalInformationPosition.FirstSlide : AdditionalInformationPosition.None;
 
             // Song parts
             foreach (PowerPraiseSongPart prt in ppl.Parts)
@@ -191,22 +191,22 @@ namespace PraiseBase.Presenter.Persistence.PowerPraise
 
             // Copyright text
             ppl.CopyrightText.Add(song.Copyright);
-            if (song.CopyrightPosition == "firstslide")
+            if (song.CopyrightPosition ==  AdditionalInformationPosition.FirstSlide)
             {
                 ppl.CopyrightTextPosition = PowerPraiseSong.CopyrightPosition.FirstSlide;
             }
-            else if (song.CopyrightPosition == "lastslide")
+            else if (song.CopyrightPosition == AdditionalInformationPosition.LastSlide)
             {
                 ppl.CopyrightTextPosition = PowerPraiseSong.CopyrightPosition.LastSlide;
             }
-            else if (song.CopyrightPosition == "none")
+            else if (song.CopyrightPosition == AdditionalInformationPosition.None)
             {
                 ppl.CopyrightTextPosition = PowerPraiseSong.CopyrightPosition.None;
             }
 
             // Source / songbook
             ppl.SourceText = song.SongBooksString;
-            ppl.SourceTextEnabled = (song.SourcePosition == "firstslide");
+            ppl.SourceTextEnabled = (song.SourcePosition == AdditionalInformationPosition.FirstSlide);
 
             // Formatting definitions
             if (song.MainText != null)

@@ -791,5 +791,29 @@ namespace PraiseBase.Presenter.Properties {
                 this["ProjectionMasterShadowSize"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("LastSlide")]
+        public global::PraiseBase.Presenter.Model.AdditionalInformationPosition ProjectionMasterCopyrightPosition {
+            get {
+                return ((global::PraiseBase.Presenter.Model.AdditionalInformationPosition)(this["ProjectionMasterCopyrightPosition"]));
+            }
+            set {
+                this["ProjectionMasterCopyrightPosition"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("FirstSlide")]
+        public global::PraiseBase.Presenter.Model.AdditionalInformationPosition ProjectionMasterSourcePosition {
+            get {
+                return ((global::PraiseBase.Presenter.Model.AdditionalInformationPosition)(this["ProjectionMasterSourcePosition"]));
+            }
+            set {
+                this["ProjectionMasterSourcePosition"] = value;
+            }
+        }
     }
 }

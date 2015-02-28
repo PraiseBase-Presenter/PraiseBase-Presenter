@@ -26,6 +26,7 @@ using System.IO;
 using System.Windows.Forms;
 using PraiseBase.Presenter.Properties;
 using System.Drawing;
+using PraiseBase.Presenter.Model;
 
 namespace PraiseBase.Presenter.Forms
 {
@@ -87,6 +88,10 @@ namespace PraiseBase.Presenter.Forms
             comboBoxTextOrientation.SelectedIndex = getIndexByTextOrientation(Settings.Default.ProjectionMasterVerticalTextOrientation, Settings.Default.ProjectionMasterHorizontalTextOrientation);
             comboBoxHeaderOrientation.SelectedIndex = getIndexByHorizontalOrientation(Settings.Default.ProjectionMasterHorizontalHeaderOrientation);
             comboBoxFooterOrientation.SelectedIndex = getIndexByHorizontalOrientation(Settings.Default.ProjectionMasterHorizontalFooterOrientation);
+
+            // Additional information
+            comboBoxSourcePosition.SelectedIndex = (int)Settings.Default.ProjectionMasterSourcePosition;
+            comboBoxCopyrightPosition.SelectedIndex = (int)Settings.Default.ProjectionMasterCopyrightPosition;
 
             checkBoxShowLoadingScreen.Checked = Settings.Default.ShowLoadingScreen;
 
@@ -422,6 +427,7 @@ namespace PraiseBase.Presenter.Forms
             groupBoxOutline.Enabled = enable;
             groupBoxShadow.Enabled = enable;
             groupBoxTextOrientation.Enabled = enable;
+            groupBoxAdditionalInfo.Enabled = enable;
         }
 
         private void checkBoxShowLoadingScreen_CheckedChanged(object sender, EventArgs e)
@@ -677,6 +683,16 @@ namespace PraiseBase.Presenter.Forms
                 return Model.HorizontalOrientation.Right;
             }
             return Model.HorizontalOrientation.Left;
+        }
+
+        private void comboBoxSourcePosition_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            Settings.Default.ProjectionMasterSourcePosition = (AdditionalInformationPosition)comboBoxSourcePosition.SelectedIndex;
+        }
+
+        private void comboBoxCopyrightPosition_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            Settings.Default.ProjectionMasterCopyrightPosition = (AdditionalInformationPosition)comboBoxCopyrightPosition.SelectedIndex;
         }
 
     }
