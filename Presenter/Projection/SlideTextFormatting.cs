@@ -10,16 +10,6 @@ namespace PraiseBase.Presenter.Projection
     public struct SlideTextFormatting
     {
         /// <summary>
-        /// True of the text should be outlined
-        /// </summary>
-        public bool OutlineEnabled { get; set; }
-
-        /// <summary>
-        /// True if the text should have a shadow
-        /// </summary>
-        public bool ShadowEnabled { get; set; }
-
-        /// <summary>
         /// If true, font size will be scaled down if the text does not fit on the slide
         /// </summary>
         public Boolean ScaleFontSize { get; set; }
@@ -65,6 +55,16 @@ namespace PraiseBase.Presenter.Projection
             /// Horizontal padding
             /// </summary>
             public int HorizontalPadding { get; set; }
+
+            /// <summary>
+            /// True of the text should be outlined
+            /// </summary>
+            public bool OutlineEnabled { get; set; }
+
+            /// <summary>
+            /// True if the text should have a shadow
+            /// </summary>
+            public bool ShadowEnabled { get; set; }
         }
 
         public struct TextBoxFormatting
@@ -88,6 +88,16 @@ namespace PraiseBase.Presenter.Projection
             /// Horizontal padding
             /// </summary>
             public int HorizontalPadding { get; set; }
+
+            /// <summary>
+            /// True of the text should be outlined
+            /// </summary>
+            public bool OutlineEnabled { get; set; }
+
+            /// <summary>
+            /// True if the text should have a shadow
+            /// </summary>
+            public bool ShadowEnabled { get; set; }
         }
     }
 }

@@ -19,7 +19,9 @@ namespace PraiseBase.Presenter.Projection
                 SubText = (TextFormatting)s.TranslationText.Clone(),
                 Orientation = (TextOrientation)s.TextOrientation.Clone(),
                 HorizontalPadding = s.TextBorders.TextLeft,
-                VerticalPadding = s.TextBorders.TextTop
+                VerticalPadding = s.TextBorders.TextTop,
+                OutlineEnabled = s.TextOutlineEnabled,
+                ShadowEnabled = s.TextShadowEnabled
             };
             slideFormatting.Header = new SlideTextFormatting.TextBoxFormatting()
             {
@@ -27,7 +29,9 @@ namespace PraiseBase.Presenter.Projection
                 // TODO Parametrize hard-coded value
                 HorizontalOrientation = HorizontalOrientation.Right,
                 HorizontalPadding = s.TextBorders.SourceRight,
-                VerticalPadding = s.TextBorders.SourceTop
+                VerticalPadding = s.TextBorders.SourceTop,
+                OutlineEnabled = s.TextOutlineEnabled,
+                ShadowEnabled = s.TextShadowEnabled
             };
             slideFormatting.Footer = new SlideTextFormatting.TextBoxFormatting()
             {
@@ -35,10 +39,10 @@ namespace PraiseBase.Presenter.Projection
                 // TODO Parametrize hard-coded value
                 HorizontalOrientation = HorizontalOrientation.Left,
                 HorizontalPadding = s.TextBorders.CopyrightBottom,
-                VerticalPadding = s.TextBorders.CopyrightBottom
+                VerticalPadding = s.TextBorders.CopyrightBottom,
+                OutlineEnabled = s.TextOutlineEnabled,
+                ShadowEnabled = s.TextShadowEnabled
             };
-            slideFormatting.OutlineEnabled = s.TextOutlineEnabled;
-            slideFormatting.ShadowEnabled = s.TextShadowEnabled;
         }
 
         public static void Map(Settings settings, ref SlideTextFormatting slideFormatting)
@@ -63,7 +67,9 @@ namespace PraiseBase.Presenter.Projection
                 // TODO Parametrize hard-coded value
                 Orientation = new TextOrientation(VerticalOrientation.Middle, HorizontalOrientation.Center),
                 HorizontalPadding = settings.ProjectionPadding,
-                VerticalPadding = settings.ProjectionPadding
+                VerticalPadding = settings.ProjectionPadding,
+                OutlineEnabled = true,
+                ShadowEnabled = true
             };
             slideFormatting.Header = new SlideTextFormatting.TextBoxFormatting()
             {
@@ -77,7 +83,9 @@ namespace PraiseBase.Presenter.Projection
                 // TODO Parametrize hard-coded values
                 HorizontalOrientation = HorizontalOrientation.Right,
                 HorizontalPadding = 20,
-                VerticalPadding = 40
+                VerticalPadding = 40,
+                OutlineEnabled = true,
+                ShadowEnabled = true
             };
             slideFormatting.Footer = new SlideTextFormatting.TextBoxFormatting()
             {
@@ -91,11 +99,10 @@ namespace PraiseBase.Presenter.Projection
                 // TODO Parametrize hard-coded values
                 HorizontalOrientation = HorizontalOrientation.Left,
                 HorizontalPadding = 30,
-                VerticalPadding = 40
+                VerticalPadding = 40,
+                OutlineEnabled = true,
+                ShadowEnabled = true
             };
-            // TODO Parametrize hard-coded values
-            slideFormatting.OutlineEnabled = true;
-            slideFormatting.ShadowEnabled = true;
         }
     }
 }

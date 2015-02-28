@@ -108,12 +108,12 @@ namespace PraiseBase.Presenter
                 mapStringFormatAlignment(formatting.Text.Orientation.Horizontal, strFormat);
 
                 // Draw main text
-                drawLines(gr, MainText, textStartX, textStartY, strFormat, formatting.Text.MainText, formatting.OutlineEnabled, formatting.ShadowEnabled, lineHeight);
+                drawLines(gr, MainText, textStartX, textStartY, strFormat, formatting.Text.MainText, formatting.Text.OutlineEnabled, formatting.Text.ShadowEnabled, lineHeight);
 
                 // Sub-text (translation)
                 if (SubText != null && SubText.Length > 0)
                 {
-                    drawLines(gr, SubText, textStartX + 10, textStartY + lineHeight, strFormat, formatting.Text.SubText, formatting.OutlineEnabled, formatting.ShadowEnabled, lineHeight);
+                    drawLines(gr, SubText, textStartX + 10, textStartY + lineHeight, strFormat, formatting.Text.SubText, formatting.Text.OutlineEnabled, formatting.Text.ShadowEnabled, lineHeight);
                 }
             }
 
@@ -122,21 +122,14 @@ namespace PraiseBase.Presenter
             //
             if (HeaderText != null && HeaderText.Length > 0)
             {
-                SizeF headerMeasure = gr.MeasureString(String.Join(Environment.NewLine, HeaderText), formatting.Header.Text.Font);
-                int headerPosX = formatting.Header.HorizontalPadding;
-                if (formatting.Header.HorizontalOrientation == HorizontalOrientation.Center)
-                {
-                    headerPosX = w / 2;
-                }
-                else if (formatting.Header.HorizontalOrientation == HorizontalOrientation.Right)
-                {
-                    headerPosX = w - formatting.Header.HorizontalPadding;
-                }
-                int headerPoxY = formatting.Header.VerticalPadding;
-                int lineHeight = (int)(headerMeasure.Height / HeaderText.Length);
-                StringFormat headerStrFormat = new StringFormat();
-                mapStringFormatAlignment(formatting.Header.HorizontalOrientation, headerStrFormat);
-                drawLines(gr, HeaderText, headerPosX, headerPoxY, headerStrFormat, formatting.Header.Text, formatting.OutlineEnabled, formatting.ShadowEnabled, lineHeight);
+                // Get X
+                int x = GetXPosition(formatting.Header, w);
+
+                // Get Y
+                int y = formatting.Header.VerticalPadding;
+
+                // Draw
+                DrawTextBox(gr, HeaderText, x, y, formatting.Header);
             }
 
             //
@@ -144,22 +137,45 @@ namespace PraiseBase.Presenter
             //
             if (FooterText != null && FooterText.Length > 0)
             {
+                // Get X
+                int x = GetXPosition(formatting.Footer, w);
                 SizeF footerMeasure = gr.MeasureString(String.Join(Environment.NewLine, FooterText), formatting.Footer.Text.Font);
-                int footerPosX = formatting.Footer.HorizontalPadding;
-                if (formatting.Footer.HorizontalOrientation == HorizontalOrientation.Center)
-                {
-                    footerPosX = w / 2;
-                }
-                else if (formatting.Footer.HorizontalOrientation == HorizontalOrientation.Right)
-                {
-                    footerPosX = w - formatting.Footer.HorizontalPadding;
-                }
-                int footerPosY = h - formatting.Footer.VerticalPadding - (int)footerMeasure.Height;
-                int lineHeight = (int)(footerMeasure.Height / FooterText.Length);
-                StringFormat footerStrFormat = new StringFormat();
-                mapStringFormatAlignment(formatting.Footer.HorizontalOrientation, footerStrFormat);
-                drawLines(gr, FooterText, footerPosX, footerPosY, footerStrFormat, formatting.Footer.Text, formatting.OutlineEnabled, formatting.ShadowEnabled, lineHeight);
+
+                // Get Y
+                int y = h - formatting.Footer.VerticalPadding - (int)footerMeasure.Height;
+
+                // Draw
+                DrawTextBox(gr, FooterText, x, y, formatting.Footer);
             }
+        }
+
+        private static void DrawTextBox(Graphics gr, String[] text, int x, int y, SlideTextFormatting.TextBoxFormatting formatting)
+        {
+            // Set string format
+            StringFormat strFormat = new StringFormat();
+            mapStringFormatAlignment(formatting.HorizontalOrientation, strFormat);
+            
+            // Measure line height
+            SizeF sizeMeasure = gr.MeasureString(String.Join(Environment.NewLine, text), formatting.Text.Font);
+            int lineHeight = (int)(sizeMeasure.Height / text.Length);
+
+            // Draw lines
+            drawLines(gr, text, x, y, strFormat, formatting.Text, formatting.OutlineEnabled, formatting.ShadowEnabled, lineHeight);
+        }
+
+        // Get X position on canvas based on padding and horizontal orientation
+        private static int GetXPosition(SlideTextFormatting.TextBoxFormatting formatting, int canvasWidth)
+        {
+            int x = formatting.HorizontalPadding;
+            if (formatting.HorizontalOrientation == HorizontalOrientation.Center)
+            {
+                x = canvasWidth / 2;
+            }
+            else if (formatting.HorizontalOrientation == HorizontalOrientation.Right)
+            {
+                x = canvasWidth - formatting.HorizontalPadding;
+            }
+            return x;
         }
 
         private static void mapStringFormatAlignment(HorizontalOrientation to, StringFormat strFormat) 
