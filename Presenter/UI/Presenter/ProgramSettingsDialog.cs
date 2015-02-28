@@ -85,7 +85,8 @@ namespace PraiseBase.Presenter.Forms
             numericUpDownTranslationLineSpacing.Value = Settings.Default.ProjectionMasterTranslationLineSpacing;
             
             // Text orientation
-            comboBoxTextOrientation.SelectedIndex = getIndexByTextOrientation(Settings.Default.ProjectionMasterVerticalTextOrientation, Settings.Default.ProjectionMasterHorizontalTextOrientation);
+            comboBoxHorizontalTextOrientation.SelectedIndex = getIndexByHorizontalOrientation(Settings.Default.ProjectionMasterHorizontalTextOrientation);
+            comboBoxVerticalTextOrientation.SelectedIndex = getIndexByVerticalOrientation(Settings.Default.ProjectionMasterVerticalTextOrientation);
             comboBoxHeaderOrientation.SelectedIndex = getIndexByHorizontalOrientation(Settings.Default.ProjectionMasterHorizontalHeaderOrientation);
             comboBoxFooterOrientation.SelectedIndex = getIndexByHorizontalOrientation(Settings.Default.ProjectionMasterHorizontalFooterOrientation);
 
@@ -563,83 +564,13 @@ namespace PraiseBase.Presenter.Forms
         private void comboBoxTextOrientation_SelectedIndexChanged(object sender, EventArgs e)
         {
             int index = ((ComboBox)sender).SelectedIndex;
+            Settings.Default.ProjectionMasterHorizontalTextOrientation = getHorizontalOrientationByIndex(index);
+        }
+
+        private void comboBoxVerticalTextOrientation_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            int index = ((ComboBox)sender).SelectedIndex;
             Settings.Default.ProjectionMasterVerticalTextOrientation = getVerticalTextOrientationByIndex(index);
-            Settings.Default.ProjectionMasterHorizontalTextOrientation = getHorizontalTextOrientationByIndex(index);
-        }
-
-        private int getIndexByTextOrientation(Model.VerticalOrientation vertical, Model.HorizontalOrientation horizontal)
-        {
-            switch (vertical)
-            {
-                case Model.VerticalOrientation.Top:
-                    switch (horizontal)
-                    {
-                        case Model.HorizontalOrientation.Left:
-                            return 0;
-                        case Model.HorizontalOrientation.Center:
-                            return 1;
-                        case Model.HorizontalOrientation.Right:
-                            return 2;
-                    }
-                    break;
-                case Model.VerticalOrientation.Middle:
-                    switch (horizontal)
-                    {
-                        case Model.HorizontalOrientation.Left:
-                            return 3;
-                        case Model.HorizontalOrientation.Center:
-                            return 4;
-                        case Model.HorizontalOrientation.Right:
-                            return 5;
-                    }
-                    break;
-                case Model.VerticalOrientation.Bottom:
-                    switch (horizontal)
-                    {
-                        case Model.HorizontalOrientation.Left:
-                            return 6;
-                        case Model.HorizontalOrientation.Center:
-                            return 7;
-                        case Model.HorizontalOrientation.Right:
-                            return 8;
-                    }
-                    break;
-            }
-            return 0;
-        }
-
-        private Model.VerticalOrientation getVerticalTextOrientationByIndex(int index)
-        {
-            if (index >= 0 && index <= 2)
-            {
-                return Model.VerticalOrientation.Top;
-            }
-            if (index >= 3 && index <= 5)
-            {
-                return Model.VerticalOrientation.Middle;
-            }
-            if (index >= 6 && index <= 8)
-            {
-                return Model.VerticalOrientation.Bottom;
-            }
-            return Model.VerticalOrientation.Top;
-        }
-
-        private Model.HorizontalOrientation getHorizontalTextOrientationByIndex(int index)
-        {
-            if (index % 3 == 0)
-            {
-                return Model.HorizontalOrientation.Left;
-            }
-            if (index % 3 == 1)
-            {
-                return Model.HorizontalOrientation.Center;
-            }
-            if (index % 3 == 2)
-            {
-                return Model.HorizontalOrientation.Right;
-            }
-            return Model.HorizontalOrientation.Left;
         }
         
         private void comboBoxHeaderOrientation_SelectedIndexChanged(object sender, EventArgs e)
@@ -668,6 +599,20 @@ namespace PraiseBase.Presenter.Forms
             return 0;
         }
 
+        private int getIndexByVerticalOrientation(Model.VerticalOrientation vertical)
+        {
+            switch (vertical)
+            {
+                case Model.VerticalOrientation.Top:
+                    return 0;
+                case Model.VerticalOrientation.Middle:
+                    return 1;
+                case Model.VerticalOrientation.Bottom:
+                    return 2;
+            }
+            return 0;
+        }
+
         private Model.HorizontalOrientation getHorizontalOrientationByIndex(int index)
         {
             if (index == 0)
@@ -683,6 +628,23 @@ namespace PraiseBase.Presenter.Forms
                 return Model.HorizontalOrientation.Right;
             }
             return Model.HorizontalOrientation.Left;
+        }
+
+        private Model.VerticalOrientation getVerticalTextOrientationByIndex(int index)
+        {
+            if (index == 0)
+            {
+                return Model.VerticalOrientation.Top;
+            }
+            if (index == 1)
+            {
+                return Model.VerticalOrientation.Middle;
+            }
+            if (index == 2)
+            {
+                return Model.VerticalOrientation.Bottom;
+            }
+            return Model.VerticalOrientation.Top;
         }
 
         private void comboBoxSourcePosition_SelectedIndexChanged(object sender, EventArgs e)

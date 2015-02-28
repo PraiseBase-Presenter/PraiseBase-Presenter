@@ -72,7 +72,7 @@
             this.comboBoxHeaderOrientation = new System.Windows.Forms.ComboBox();
             this.label12 = new System.Windows.Forms.Label();
             this.label11 = new System.Windows.Forms.Label();
-            this.comboBoxTextOrientation = new System.Windows.Forms.ComboBox();
+            this.comboBoxHorizontalTextOrientation = new System.Windows.Forms.ComboBox();
             this.label10 = new System.Windows.Forms.Label();
             this.groupBoxShadow = new System.Windows.Forms.GroupBox();
             this.numericUpDownShadowSize = new System.Windows.Forms.NumericUpDown();
@@ -129,6 +129,7 @@
             this.labelMainTextString = new System.Windows.Forms.Label();
             this.labelTranslationText = new System.Windows.Forms.Label();
             this.checkBoxUseMasterFormat = new System.Windows.Forms.CheckBox();
+            this.comboBoxVerticalTextOrientation = new System.Windows.Forms.ComboBox();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.groupBoxProjection.SuspendLayout();
@@ -451,11 +452,12 @@
             // groupBoxTextOrientation
             // 
             resources.ApplyResources(this.groupBoxTextOrientation, "groupBoxTextOrientation");
+            this.groupBoxTextOrientation.Controls.Add(this.comboBoxVerticalTextOrientation);
             this.groupBoxTextOrientation.Controls.Add(this.comboBoxFooterOrientation);
             this.groupBoxTextOrientation.Controls.Add(this.comboBoxHeaderOrientation);
             this.groupBoxTextOrientation.Controls.Add(this.label12);
             this.groupBoxTextOrientation.Controls.Add(this.label11);
-            this.groupBoxTextOrientation.Controls.Add(this.comboBoxTextOrientation);
+            this.groupBoxTextOrientation.Controls.Add(this.comboBoxHorizontalTextOrientation);
             this.groupBoxTextOrientation.Controls.Add(this.label10);
             this.groupBoxTextOrientation.Name = "groupBoxTextOrientation";
             this.groupBoxTextOrientation.TabStop = false;
@@ -494,23 +496,17 @@
             resources.ApplyResources(this.label11, "label11");
             this.label11.Name = "label11";
             // 
-            // comboBoxTextOrientation
+            // comboBoxHorizontalTextOrientation
             // 
-            this.comboBoxTextOrientation.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboBoxTextOrientation.FormattingEnabled = true;
-            this.comboBoxTextOrientation.Items.AddRange(new object[] {
-            resources.GetString("comboBoxTextOrientation.Items"),
-            resources.GetString("comboBoxTextOrientation.Items1"),
-            resources.GetString("comboBoxTextOrientation.Items2"),
-            resources.GetString("comboBoxTextOrientation.Items3"),
-            resources.GetString("comboBoxTextOrientation.Items4"),
-            resources.GetString("comboBoxTextOrientation.Items5"),
-            resources.GetString("comboBoxTextOrientation.Items6"),
-            resources.GetString("comboBoxTextOrientation.Items7"),
-            resources.GetString("comboBoxTextOrientation.Items8")});
-            resources.ApplyResources(this.comboBoxTextOrientation, "comboBoxTextOrientation");
-            this.comboBoxTextOrientation.Name = "comboBoxTextOrientation";
-            this.comboBoxTextOrientation.SelectedIndexChanged += new System.EventHandler(this.comboBoxTextOrientation_SelectedIndexChanged);
+            this.comboBoxHorizontalTextOrientation.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBoxHorizontalTextOrientation.FormattingEnabled = true;
+            this.comboBoxHorizontalTextOrientation.Items.AddRange(new object[] {
+            resources.GetString("comboBoxHorizontalTextOrientation.Items"),
+            resources.GetString("comboBoxHorizontalTextOrientation.Items1"),
+            resources.GetString("comboBoxHorizontalTextOrientation.Items2")});
+            resources.ApplyResources(this.comboBoxHorizontalTextOrientation, "comboBoxHorizontalTextOrientation");
+            this.comboBoxHorizontalTextOrientation.Name = "comboBoxHorizontalTextOrientation";
+            this.comboBoxHorizontalTextOrientation.SelectedIndexChanged += new System.EventHandler(this.comboBoxTextOrientation_SelectedIndexChanged);
             // 
             // label10
             // 
@@ -945,6 +941,18 @@
             this.checkBoxUseMasterFormat.UseVisualStyleBackColor = true;
             this.checkBoxUseMasterFormat.CheckedChanged += new System.EventHandler(this.checkBoxUseMasterFormat_CheckedChanged);
             // 
+            // comboBoxVerticalTextOrientation
+            // 
+            this.comboBoxVerticalTextOrientation.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBoxVerticalTextOrientation.FormattingEnabled = true;
+            this.comboBoxVerticalTextOrientation.Items.AddRange(new object[] {
+            resources.GetString("comboBoxVerticalTextOrientation.Items"),
+            resources.GetString("comboBoxVerticalTextOrientation.Items1"),
+            resources.GetString("comboBoxVerticalTextOrientation.Items2")});
+            resources.ApplyResources(this.comboBoxVerticalTextOrientation, "comboBoxVerticalTextOrientation");
+            this.comboBoxVerticalTextOrientation.Name = "comboBoxVerticalTextOrientation";
+            this.comboBoxVerticalTextOrientation.SelectedIndexChanged += new System.EventHandler(this.comboBoxVerticalTextOrientation_SelectedIndexChanged);
+            // 
             // ProgramSettingsDialog
             // 
             this.AcceptButton = this.exitButton;
@@ -1092,7 +1100,7 @@
         private System.Windows.Forms.Button buttonProjectionBackgroundColor;
         private System.Windows.Forms.GroupBox groupBoxTextOrientation;
         private System.Windows.Forms.Label label10;
-        private System.Windows.Forms.ComboBox comboBoxTextOrientation;
+        private System.Windows.Forms.ComboBox comboBoxHorizontalTextOrientation;
         private System.Windows.Forms.Label label12;
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.ComboBox comboBoxHeaderOrientation;
@@ -1104,5 +1112,6 @@
         private System.Windows.Forms.Label label13;
         private System.Windows.Forms.ComboBox comboBoxSourcePosition;
         private System.Windows.Forms.Label labelShowSource;
+        private System.Windows.Forms.ComboBox comboBoxVerticalTextOrientation;
     }
 }

@@ -552,24 +552,6 @@
   <data name="groupBoxAdditionalInfo.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Bottom, Right</value>
   </data>
-  <data name="comboBoxCopyrightPosition.Items" xml:space="preserve">
-    <value>Nicht anzeigen</value>
-  </data>
-  <data name="comboBoxCopyrightPosition.Items1" xml:space="preserve">
-    <value>Auf erster Folie</value>
-  </data>
-  <data name="comboBoxCopyrightPosition.Items2" xml:space="preserve">
-    <value>Auf letzter Folie</value>
-  </data>
-  <data name="comboBoxCopyrightPosition.Location" type="System.Drawing.Point, System.Drawing">
-    <value>123, 52</value>
-  </data>
-  <data name="comboBoxCopyrightPosition.Size" type="System.Drawing.Size, System.Drawing">
-    <value>121, 21</value>
-  </data>
-  <data name="comboBoxCopyrightPosition.TabIndex" type="System.Int32, mscorlib">
-    <value>74</value>
-  </data>
   <data name="&gt;&gt;comboBoxCopyrightPosition.Name" xml:space="preserve">
     <value>comboBoxCopyrightPosition</value>
   </data>
@@ -581,27 +563,6 @@
   </data>
   <data name="&gt;&gt;comboBoxCopyrightPosition.ZOrder" xml:space="preserve">
     <value>0</value>
-  </data>
-  <data name="label13.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="label13.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Microsoft Sans Serif, 8.25pt</value>
-  </data>
-  <data name="label13.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="label13.Location" type="System.Drawing.Point, System.Drawing">
-    <value>12, 55</value>
-  </data>
-  <data name="label13.Size" type="System.Drawing.Size, System.Drawing">
-    <value>100, 13</value>
-  </data>
-  <data name="label13.TabIndex" type="System.Int32, mscorlib">
-    <value>73</value>
-  </data>
-  <data name="label13.Text" xml:space="preserve">
-    <value>Copyright anzeigen:</value>
   </data>
   <data name="&gt;&gt;label13.Name" xml:space="preserve">
     <value>label13</value>
@@ -615,24 +576,6 @@
   <data name="&gt;&gt;label13.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
-  <data name="comboBoxSourcePosition.Items" xml:space="preserve">
-    <value>Nicht anzeigen</value>
-  </data>
-  <data name="comboBoxSourcePosition.Items1" xml:space="preserve">
-    <value>Auf erster Folie</value>
-  </data>
-  <data name="comboBoxSourcePosition.Items2" xml:space="preserve">
-    <value>Auf letzter Folie</value>
-  </data>
-  <data name="comboBoxSourcePosition.Location" type="System.Drawing.Point, System.Drawing">
-    <value>123, 25</value>
-  </data>
-  <data name="comboBoxSourcePosition.Size" type="System.Drawing.Size, System.Drawing">
-    <value>121, 21</value>
-  </data>
-  <data name="comboBoxSourcePosition.TabIndex" type="System.Int32, mscorlib">
-    <value>72</value>
-  </data>
   <data name="&gt;&gt;comboBoxSourcePosition.Name" xml:space="preserve">
     <value>comboBoxSourcePosition</value>
   </data>
@@ -644,27 +587,6 @@
   </data>
   <data name="&gt;&gt;comboBoxSourcePosition.ZOrder" xml:space="preserve">
     <value>2</value>
-  </data>
-  <data name="labelShowSource.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="labelShowSource.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Microsoft Sans Serif, 8.25pt</value>
-  </data>
-  <data name="labelShowSource.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="labelShowSource.Location" type="System.Drawing.Point, System.Drawing">
-    <value>12, 28</value>
-  </data>
-  <data name="labelShowSource.Size" type="System.Drawing.Size, System.Drawing">
-    <value>86, 13</value>
-  </data>
-  <data name="labelShowSource.TabIndex" type="System.Int32, mscorlib">
-    <value>67</value>
-  </data>
-  <data name="labelShowSource.Text" xml:space="preserve">
-    <value>Quelle anzeigen:</value>
   </data>
   <data name="&gt;&gt;labelShowSource.Name" xml:space="preserve">
     <value>labelShowSource</value>
@@ -705,6 +627,54 @@
   <data name="groupBoxTextOrientation.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Bottom, Left</value>
   </data>
+  <data name="comboBoxVerticalTextOrientation.Items" xml:space="preserve">
+    <value>Oben</value>
+  </data>
+  <data name="comboBoxVerticalTextOrientation.Items1" xml:space="preserve">
+    <value>Mitte</value>
+  </data>
+  <data name="comboBoxVerticalTextOrientation.Items2" xml:space="preserve">
+    <value>Unten</value>
+  </data>
+  <data name="comboBoxVerticalTextOrientation.Location" type="System.Drawing.Point, System.Drawing">
+    <value>173, 26</value>
+  </data>
+  <data name="comboBoxVerticalTextOrientation.Size" type="System.Drawing.Size, System.Drawing">
+    <value>82, 21</value>
+  </data>
+  <data name="comboBoxVerticalTextOrientation.TabIndex" type="System.Int32, mscorlib">
+    <value>72</value>
+  </data>
+  <data name="&gt;&gt;comboBoxVerticalTextOrientation.Name" xml:space="preserve">
+    <value>comboBoxVerticalTextOrientation</value>
+  </data>
+  <data name="&gt;&gt;comboBoxVerticalTextOrientation.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;comboBoxVerticalTextOrientation.Parent" xml:space="preserve">
+    <value>groupBoxTextOrientation</value>
+  </data>
+  <data name="&gt;&gt;comboBoxVerticalTextOrientation.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="comboBoxFooterOrientation.Items" xml:space="preserve">
+    <value>Links</value>
+  </data>
+  <data name="comboBoxFooterOrientation.Items1" xml:space="preserve">
+    <value>Zentriert</value>
+  </data>
+  <data name="comboBoxFooterOrientation.Items2" xml:space="preserve">
+    <value>Rechts</value>
+  </data>
+  <data name="comboBoxFooterOrientation.Location" type="System.Drawing.Point, System.Drawing">
+    <value>83, 80</value>
+  </data>
+  <data name="comboBoxFooterOrientation.Size" type="System.Drawing.Size, System.Drawing">
+    <value>82, 21</value>
+  </data>
+  <data name="comboBoxFooterOrientation.TabIndex" type="System.Int32, mscorlib">
+    <value>71</value>
+  </data>
   <data name="&gt;&gt;comboBoxFooterOrientation.Name" xml:space="preserve">
     <value>comboBoxFooterOrientation</value>
   </data>
@@ -715,7 +685,25 @@
     <value>groupBoxTextOrientation</value>
   </data>
   <data name="&gt;&gt;comboBoxFooterOrientation.ZOrder" xml:space="preserve">
-    <value>0</value>
+    <value>1</value>
+  </data>
+  <data name="comboBoxHeaderOrientation.Items" xml:space="preserve">
+    <value>Links</value>
+  </data>
+  <data name="comboBoxHeaderOrientation.Items1" xml:space="preserve">
+    <value>Zentriert</value>
+  </data>
+  <data name="comboBoxHeaderOrientation.Items2" xml:space="preserve">
+    <value>Rechts</value>
+  </data>
+  <data name="comboBoxHeaderOrientation.Location" type="System.Drawing.Point, System.Drawing">
+    <value>83, 53</value>
+  </data>
+  <data name="comboBoxHeaderOrientation.Size" type="System.Drawing.Size, System.Drawing">
+    <value>82, 21</value>
+  </data>
+  <data name="comboBoxHeaderOrientation.TabIndex" type="System.Int32, mscorlib">
+    <value>70</value>
   </data>
   <data name="&gt;&gt;comboBoxHeaderOrientation.Name" xml:space="preserve">
     <value>comboBoxHeaderOrientation</value>
@@ -727,7 +715,28 @@
     <value>groupBoxTextOrientation</value>
   </data>
   <data name="&gt;&gt;comboBoxHeaderOrientation.ZOrder" xml:space="preserve">
-    <value>1</value>
+    <value>2</value>
+  </data>
+  <data name="label12.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="label12.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 8.25pt</value>
+  </data>
+  <data name="label12.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="label12.Location" type="System.Drawing.Point, System.Drawing">
+    <value>20, 83</value>
+  </data>
+  <data name="label12.Size" type="System.Drawing.Size, System.Drawing">
+    <value>53, 13</value>
+  </data>
+  <data name="label12.TabIndex" type="System.Int32, mscorlib">
+    <value>69</value>
+  </data>
+  <data name="label12.Text" xml:space="preserve">
+    <value>Fusszeile:</value>
   </data>
   <data name="&gt;&gt;label12.Name" xml:space="preserve">
     <value>label12</value>
@@ -739,7 +748,28 @@
     <value>groupBoxTextOrientation</value>
   </data>
   <data name="&gt;&gt;label12.ZOrder" xml:space="preserve">
-    <value>2</value>
+    <value>3</value>
+  </data>
+  <data name="label11.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="label11.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 8.25pt</value>
+  </data>
+  <data name="label11.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="label11.Location" type="System.Drawing.Point, System.Drawing">
+    <value>20, 56</value>
+  </data>
+  <data name="label11.Size" type="System.Drawing.Size, System.Drawing">
+    <value>53, 13</value>
+  </data>
+  <data name="label11.TabIndex" type="System.Int32, mscorlib">
+    <value>68</value>
+  </data>
+  <data name="label11.Text" xml:space="preserve">
+    <value>Kopfzeile:</value>
   </data>
   <data name="&gt;&gt;label11.Name" xml:space="preserve">
     <value>label11</value>
@@ -751,19 +781,58 @@
     <value>groupBoxTextOrientation</value>
   </data>
   <data name="&gt;&gt;label11.ZOrder" xml:space="preserve">
-    <value>3</value>
+    <value>4</value>
   </data>
-  <data name="&gt;&gt;comboBoxTextOrientation.Name" xml:space="preserve">
-    <value>comboBoxTextOrientation</value>
+  <data name="comboBoxHorizontalTextOrientation.Items" xml:space="preserve">
+    <value>Links</value>
   </data>
-  <data name="&gt;&gt;comboBoxTextOrientation.Type" xml:space="preserve">
+  <data name="comboBoxHorizontalTextOrientation.Items1" xml:space="preserve">
+    <value>Zentriert</value>
+  </data>
+  <data name="comboBoxHorizontalTextOrientation.Items2" xml:space="preserve">
+    <value>Rechts</value>
+  </data>
+  <data name="comboBoxHorizontalTextOrientation.Location" type="System.Drawing.Point, System.Drawing">
+    <value>83, 26</value>
+  </data>
+  <data name="comboBoxHorizontalTextOrientation.Size" type="System.Drawing.Size, System.Drawing">
+    <value>82, 21</value>
+  </data>
+  <data name="comboBoxHorizontalTextOrientation.TabIndex" type="System.Int32, mscorlib">
+    <value>67</value>
+  </data>
+  <data name="&gt;&gt;comboBoxHorizontalTextOrientation.Name" xml:space="preserve">
+    <value>comboBoxHorizontalTextOrientation</value>
+  </data>
+  <data name="&gt;&gt;comboBoxHorizontalTextOrientation.Type" xml:space="preserve">
     <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;comboBoxTextOrientation.Parent" xml:space="preserve">
+  <data name="&gt;&gt;comboBoxHorizontalTextOrientation.Parent" xml:space="preserve">
     <value>groupBoxTextOrientation</value>
   </data>
-  <data name="&gt;&gt;comboBoxTextOrientation.ZOrder" xml:space="preserve">
-    <value>4</value>
+  <data name="&gt;&gt;comboBoxHorizontalTextOrientation.ZOrder" xml:space="preserve">
+    <value>5</value>
+  </data>
+  <data name="label10.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="label10.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 8.25pt</value>
+  </data>
+  <data name="label10.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="label10.Location" type="System.Drawing.Point, System.Drawing">
+    <value>20, 29</value>
+  </data>
+  <data name="label10.Size" type="System.Drawing.Size, System.Drawing">
+    <value>31, 13</value>
+  </data>
+  <data name="label10.TabIndex" type="System.Int32, mscorlib">
+    <value>66</value>
+  </data>
+  <data name="label10.Text" xml:space="preserve">
+    <value>Text:</value>
   </data>
   <data name="&gt;&gt;label10.Name" xml:space="preserve">
     <value>label10</value>
@@ -775,7 +844,7 @@
     <value>groupBoxTextOrientation</value>
   </data>
   <data name="&gt;&gt;label10.ZOrder" xml:space="preserve">
-    <value>5</value>
+    <value>6</value>
   </data>
   <data name="groupBoxTextOrientation.Location" type="System.Drawing.Point, System.Drawing">
     <value>6, 414</value>
@@ -2265,212 +2334,131 @@
   <data name="&gt;&gt;listBoxTags.ZOrder" xml:space="preserve">
     <value>14</value>
   </data>
-  <data name="comboBoxFooterOrientation.Items" xml:space="preserve">
-    <value>Links</value>
+  <data name="comboBoxCopyrightPosition.Items" xml:space="preserve">
+    <value>Nicht anzeigen</value>
   </data>
-  <data name="comboBoxFooterOrientation.Items1" xml:space="preserve">
-    <value>Zentriert</value>
+  <data name="comboBoxCopyrightPosition.Items1" xml:space="preserve">
+    <value>Auf erster Folie</value>
   </data>
-  <data name="comboBoxFooterOrientation.Items2" xml:space="preserve">
-    <value>Rechts</value>
+  <data name="comboBoxCopyrightPosition.Items2" xml:space="preserve">
+    <value>Auf letzter Folie</value>
   </data>
-  <data name="comboBoxFooterOrientation.Location" type="System.Drawing.Point, System.Drawing">
-    <value>83, 80</value>
+  <data name="comboBoxCopyrightPosition.Location" type="System.Drawing.Point, System.Drawing">
+    <value>123, 52</value>
   </data>
-  <data name="comboBoxFooterOrientation.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="comboBoxCopyrightPosition.Size" type="System.Drawing.Size, System.Drawing">
     <value>121, 21</value>
   </data>
-  <data name="comboBoxFooterOrientation.TabIndex" type="System.Int32, mscorlib">
-    <value>71</value>
+  <data name="comboBoxCopyrightPosition.TabIndex" type="System.Int32, mscorlib">
+    <value>74</value>
   </data>
-  <data name="&gt;&gt;comboBoxFooterOrientation.Name" xml:space="preserve">
-    <value>comboBoxFooterOrientation</value>
+  <data name="&gt;&gt;comboBoxCopyrightPosition.Name" xml:space="preserve">
+    <value>comboBoxCopyrightPosition</value>
   </data>
-  <data name="&gt;&gt;comboBoxFooterOrientation.Type" xml:space="preserve">
+  <data name="&gt;&gt;comboBoxCopyrightPosition.Type" xml:space="preserve">
     <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;comboBoxFooterOrientation.Parent" xml:space="preserve">
-    <value>groupBoxTextOrientation</value>
+  <data name="&gt;&gt;comboBoxCopyrightPosition.Parent" xml:space="preserve">
+    <value>groupBoxAdditionalInfo</value>
   </data>
-  <data name="&gt;&gt;comboBoxFooterOrientation.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;comboBoxCopyrightPosition.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
-  <data name="comboBoxHeaderOrientation.Items" xml:space="preserve">
-    <value>Links</value>
+  <data name="label13.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
   </data>
-  <data name="comboBoxHeaderOrientation.Items1" xml:space="preserve">
-    <value>Zentriert</value>
+  <data name="label13.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 8.25pt</value>
   </data>
-  <data name="comboBoxHeaderOrientation.Items2" xml:space="preserve">
-    <value>Rechts</value>
+  <data name="label13.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
-  <data name="comboBoxHeaderOrientation.Location" type="System.Drawing.Point, System.Drawing">
-    <value>83, 53</value>
+  <data name="label13.Location" type="System.Drawing.Point, System.Drawing">
+    <value>12, 55</value>
   </data>
-  <data name="comboBoxHeaderOrientation.Size" type="System.Drawing.Size, System.Drawing">
-    <value>121, 21</value>
+  <data name="label13.Size" type="System.Drawing.Size, System.Drawing">
+    <value>100, 13</value>
   </data>
-  <data name="comboBoxHeaderOrientation.TabIndex" type="System.Int32, mscorlib">
-    <value>70</value>
+  <data name="label13.TabIndex" type="System.Int32, mscorlib">
+    <value>73</value>
   </data>
-  <data name="&gt;&gt;comboBoxHeaderOrientation.Name" xml:space="preserve">
-    <value>comboBoxHeaderOrientation</value>
+  <data name="label13.Text" xml:space="preserve">
+    <value>Copyright anzeigen:</value>
   </data>
-  <data name="&gt;&gt;comboBoxHeaderOrientation.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="&gt;&gt;label13.Name" xml:space="preserve">
+    <value>label13</value>
   </data>
-  <data name="&gt;&gt;comboBoxHeaderOrientation.Parent" xml:space="preserve">
-    <value>groupBoxTextOrientation</value>
+  <data name="&gt;&gt;label13.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;comboBoxHeaderOrientation.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;label13.Parent" xml:space="preserve">
+    <value>groupBoxAdditionalInfo</value>
+  </data>
+  <data name="&gt;&gt;label13.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
-  <data name="label12.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
+  <data name="comboBoxSourcePosition.Items" xml:space="preserve">
+    <value>Nicht anzeigen</value>
   </data>
-  <data name="label12.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Microsoft Sans Serif, 8.25pt</value>
+  <data name="comboBoxSourcePosition.Items1" xml:space="preserve">
+    <value>Auf erster Folie</value>
   </data>
-  <data name="label12.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
+  <data name="comboBoxSourcePosition.Items2" xml:space="preserve">
+    <value>Auf letzter Folie</value>
   </data>
-  <data name="label12.Location" type="System.Drawing.Point, System.Drawing">
-    <value>20, 83</value>
+  <data name="comboBoxSourcePosition.Location" type="System.Drawing.Point, System.Drawing">
+    <value>123, 25</value>
   </data>
-  <data name="label12.Size" type="System.Drawing.Size, System.Drawing">
-    <value>53, 13</value>
-  </data>
-  <data name="label12.TabIndex" type="System.Int32, mscorlib">
-    <value>69</value>
-  </data>
-  <data name="label12.Text" xml:space="preserve">
-    <value>Fusszeile:</value>
-  </data>
-  <data name="&gt;&gt;label12.Name" xml:space="preserve">
-    <value>label12</value>
-  </data>
-  <data name="&gt;&gt;label12.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;label12.Parent" xml:space="preserve">
-    <value>groupBoxTextOrientation</value>
-  </data>
-  <data name="&gt;&gt;label12.ZOrder" xml:space="preserve">
-    <value>2</value>
-  </data>
-  <data name="label11.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="label11.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Microsoft Sans Serif, 8.25pt</value>
-  </data>
-  <data name="label11.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="label11.Location" type="System.Drawing.Point, System.Drawing">
-    <value>20, 56</value>
-  </data>
-  <data name="label11.Size" type="System.Drawing.Size, System.Drawing">
-    <value>53, 13</value>
-  </data>
-  <data name="label11.TabIndex" type="System.Int32, mscorlib">
-    <value>68</value>
-  </data>
-  <data name="label11.Text" xml:space="preserve">
-    <value>Kopfzeile:</value>
-  </data>
-  <data name="&gt;&gt;label11.Name" xml:space="preserve">
-    <value>label11</value>
-  </data>
-  <data name="&gt;&gt;label11.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;label11.Parent" xml:space="preserve">
-    <value>groupBoxTextOrientation</value>
-  </data>
-  <data name="&gt;&gt;label11.ZOrder" xml:space="preserve">
-    <value>3</value>
-  </data>
-  <data name="comboBoxTextOrientation.Items" xml:space="preserve">
-    <value>Oben links</value>
-  </data>
-  <data name="comboBoxTextOrientation.Items1" xml:space="preserve">
-    <value>Oben zentriert</value>
-  </data>
-  <data name="comboBoxTextOrientation.Items2" xml:space="preserve">
-    <value>Oben rechts</value>
-  </data>
-  <data name="comboBoxTextOrientation.Items3" xml:space="preserve">
-    <value>Mitte links</value>
-  </data>
-  <data name="comboBoxTextOrientation.Items4" xml:space="preserve">
-    <value>Mitte zentriert</value>
-  </data>
-  <data name="comboBoxTextOrientation.Items5" xml:space="preserve">
-    <value>Mitte rechts</value>
-  </data>
-  <data name="comboBoxTextOrientation.Items6" xml:space="preserve">
-    <value>Unten links</value>
-  </data>
-  <data name="comboBoxTextOrientation.Items7" xml:space="preserve">
-    <value>Unten mitte</value>
-  </data>
-  <data name="comboBoxTextOrientation.Items8" xml:space="preserve">
-    <value>Unten rechts</value>
-  </data>
-  <data name="comboBoxTextOrientation.Location" type="System.Drawing.Point, System.Drawing">
-    <value>83, 26</value>
-  </data>
-  <data name="comboBoxTextOrientation.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="comboBoxSourcePosition.Size" type="System.Drawing.Size, System.Drawing">
     <value>121, 21</value>
   </data>
-  <data name="comboBoxTextOrientation.TabIndex" type="System.Int32, mscorlib">
-    <value>67</value>
+  <data name="comboBoxSourcePosition.TabIndex" type="System.Int32, mscorlib">
+    <value>72</value>
   </data>
-  <data name="&gt;&gt;comboBoxTextOrientation.Name" xml:space="preserve">
-    <value>comboBoxTextOrientation</value>
+  <data name="&gt;&gt;comboBoxSourcePosition.Name" xml:space="preserve">
+    <value>comboBoxSourcePosition</value>
   </data>
-  <data name="&gt;&gt;comboBoxTextOrientation.Type" xml:space="preserve">
+  <data name="&gt;&gt;comboBoxSourcePosition.Type" xml:space="preserve">
     <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;comboBoxTextOrientation.Parent" xml:space="preserve">
-    <value>groupBoxTextOrientation</value>
+  <data name="&gt;&gt;comboBoxSourcePosition.Parent" xml:space="preserve">
+    <value>groupBoxAdditionalInfo</value>
   </data>
-  <data name="&gt;&gt;comboBoxTextOrientation.ZOrder" xml:space="preserve">
-    <value>4</value>
+  <data name="&gt;&gt;comboBoxSourcePosition.ZOrder" xml:space="preserve">
+    <value>2</value>
   </data>
-  <data name="label10.AutoSize" type="System.Boolean, mscorlib">
+  <data name="labelShowSource.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
-  <data name="label10.Font" type="System.Drawing.Font, System.Drawing">
+  <data name="labelShowSource.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 8.25pt</value>
   </data>
-  <data name="label10.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+  <data name="labelShowSource.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
-  <data name="label10.Location" type="System.Drawing.Point, System.Drawing">
-    <value>20, 29</value>
+  <data name="labelShowSource.Location" type="System.Drawing.Point, System.Drawing">
+    <value>12, 28</value>
   </data>
-  <data name="label10.Size" type="System.Drawing.Size, System.Drawing">
-    <value>31, 13</value>
+  <data name="labelShowSource.Size" type="System.Drawing.Size, System.Drawing">
+    <value>86, 13</value>
   </data>
-  <data name="label10.TabIndex" type="System.Int32, mscorlib">
-    <value>66</value>
+  <data name="labelShowSource.TabIndex" type="System.Int32, mscorlib">
+    <value>67</value>
   </data>
-  <data name="label10.Text" xml:space="preserve">
-    <value>Text:</value>
+  <data name="labelShowSource.Text" xml:space="preserve">
+    <value>Quelle anzeigen:</value>
   </data>
-  <data name="&gt;&gt;label10.Name" xml:space="preserve">
-    <value>label10</value>
+  <data name="&gt;&gt;labelShowSource.Name" xml:space="preserve">
+    <value>labelShowSource</value>
   </data>
-  <data name="&gt;&gt;label10.Type" xml:space="preserve">
+  <data name="&gt;&gt;labelShowSource.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;label10.Parent" xml:space="preserve">
-    <value>groupBoxTextOrientation</value>
+  <data name="&gt;&gt;labelShowSource.Parent" xml:space="preserve">
+    <value>groupBoxAdditionalInfo</value>
   </data>
-  <data name="&gt;&gt;label10.ZOrder" xml:space="preserve">
-    <value>5</value>
+  <data name="&gt;&gt;labelShowSource.ZOrder" xml:space="preserve">
+    <value>3</value>
   </data>
   <data name="numericUpDownShadowSize.Location" type="System.Drawing.Point, System.Drawing">
     <value>72, 75</value>
@@ -3848,6 +3836,9 @@
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
     <value>626, 617</value>
+  </data>
+  <data name="$this.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
   <data name="$this.StartPosition" type="System.Windows.Forms.FormStartPosition, System.Windows.Forms">
     <value>CenterScreen</value>
