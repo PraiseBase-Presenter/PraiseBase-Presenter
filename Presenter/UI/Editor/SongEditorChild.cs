@@ -901,40 +901,19 @@ namespace PraiseBase.Presenter.Forms
 
         private void previewSlide()
         {
+            Boolean scaleFontSize = Settings.Default.ProjectionFontScaling;
+
             SongSlide slide = (SongSlide)sng.Parts[currentPartId].Slides[currentSlideId].Clone();
             slide.Text = textBoxSongText.Text;
             slide.TranslationText = textBoxSongTranslation.Text;
-            SlideLayerFormatting slideFormatting = new SlideLayerFormatting();
-            slideFormatting.MainText = (TextFormatting)sng.MainText.Clone();
-            slideFormatting.SubText = (TextFormatting)sng.TranslationText.Clone();
-            slideFormatting.FooterText = (TextFormatting)sng.CopyrightText.Clone();
-            slideFormatting.HeaderText = (TextFormatting)sng.SourceText.Clone();
-            slideFormatting.TextOrientation = (TextOrientation)sng.TextOrientation.Clone();
+            SlideTextFormatting slideFormatting = new SlideTextFormatting();
 
-            slideFormatting.HeaderTextOrientation = HorizontalOrientation.Right;
-            slideFormatting.FooterTextOrientation = HorizontalOrientation.Center;
+            SongSlideTextFormattingMapper.Map(sng, ref slideFormatting);
 
-            slideFormatting.HorizontalTextPadding = sng.TextBorders.TextLeft;
-            slideFormatting.VerticalTextPadding = sng.TextBorders.TextTop;
-            slideFormatting.HorizontalFooterPadding = sng.TextBorders.CopyrightBottom;
-            slideFormatting.VerticalFooterPadding = sng.TextBorders.CopyrightBottom;
-            slideFormatting.HorizontalHeaderPadding = sng.TextBorders.SourceRight;
-            slideFormatting.VerticalHeaderPadding = sng.TextBorders.SourceTop;
-
-            slideFormatting.ScaleFontSize = Settings.Default.ProjectionFontScaling;
+            slideFormatting.ScaleFontSize = scaleFontSize;
             SongSlideLayer sl = new SongSlideLayer(slideFormatting);
             sl.MainText = slide.Lines.ToArray();
             sl.SubText = slide.Translation.ToArray();
-
-            slideFormatting.MainText.Outline.Width = 0;
-            slideFormatting.SubText.Outline.Width = 0;
-            slideFormatting.FooterText.Outline.Width = 0;
-            slideFormatting.HeaderText.Outline.Width = 0;
-
-            slideFormatting.MainText.Shadow.Distance = 0;
-            slideFormatting.SubText.Shadow.Distance = 0;
-            slideFormatting.FooterText.Shadow.Distance = 0;
-            slideFormatting.HeaderText.Shadow.Distance = 0;
 
             ImageLayer il = new ImageLayer();
             il.Image = ImageManager.Instance.GetImage(sng.GetImage(sng.Parts[currentPartId].Slides[currentSlideId].ImageNumber));

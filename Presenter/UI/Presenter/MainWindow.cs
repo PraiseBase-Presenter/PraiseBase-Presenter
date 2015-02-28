@@ -425,72 +425,23 @@ namespace PraiseBase.Presenter.Forms
 
             PraiseBase.Presenter.Model.Song.SongSlide cs = s.Parts[e.PartNumber].Slides[e.SlideNumber];
 
-            SlideLayerFormatting slideFormatting = new SlideLayerFormatting();
-            // TODO: Move static numbers to settings
+            SlideTextFormatting slideFormatting = new SlideTextFormatting();
+
+            // Formatting based on master styling
             if (Settings.Default.ProjectionUseMaster)
             {
-                slideFormatting.MainText = new TextFormatting(
-                    Settings.Default.ProjectionMasterFont, 
-                    Settings.Default.ProjectionMasterFontColor, 
-                    new TextOutline(Settings.Default.ProjectionOutlineSize, Settings.Default.ProjectionOutlineColor), 
-                    new TextShadow(Settings.Default.ProjectionShadowSize, 125, Settings.Default.ProjectionShadowColor), 
-                    Settings.Default.ProjectionMasterLineSpacing
-                );
-                slideFormatting.SubText = new TextFormatting(
-                    Settings.Default.ProjectionMasterFontTranslation, 
-                    Settings.Default.ProjectionMasterTranslationColor,
-                    new TextOutline(Settings.Default.ProjectionOutlineSize, Settings.Default.ProjectionOutlineColor), 
-                    new TextShadow(Settings.Default.ProjectionShadowSize, 125, Settings.Default.ProjectionShadowColor), 
-                    Settings.Default.ProjectionMasterTranslationLineSpacing
-                );
-                slideFormatting.FooterText = new TextFormatting(
-                    Settings.Default.ProjectionMasterCopyrightFont, 
-                    Settings.Default.ProjectionMasterCopyrightColor, 
-                    new TextOutline(Settings.Default.ProjectionOutlineSize, Settings.Default.ProjectionOutlineColor), 
-                    new TextShadow(Settings.Default.ProjectionShadowSize, 125, Settings.Default.ProjectionShadowColor), 
-                    Settings.Default.ProjectionMasterLineSpacing
-                );
-                slideFormatting.HeaderText = new TextFormatting(
-                    Settings.Default.ProjectionMasterSourceFont,
-                    Settings.Default.ProjectionMasterSourceColor,
-                    new TextOutline(Settings.Default.ProjectionOutlineSize, Settings.Default.ProjectionOutlineColor),
-                    new TextShadow(Settings.Default.ProjectionShadowSize, 125, Settings.Default.ProjectionShadowColor),
-                    Settings.Default.ProjectionMasterLineSpacing
-                );
-                
-                slideFormatting.HorizontalTextPadding = Settings.Default.ProjectionPadding;
-                slideFormatting.VerticalTextPadding = Settings.Default.ProjectionPadding;
-                slideFormatting.HorizontalFooterPadding = 30;
-                slideFormatting.VerticalFooterPadding = 40;
-                slideFormatting.HorizontalHeaderPadding = 20;
-                slideFormatting.VerticalHeaderPadding = 40;
-                
-                slideFormatting.OutlineEnabled = true;
-                slideFormatting.ShadowEnabled = true;
+                SongSlideTextFormattingMapper.Map(Settings.Default, ref slideFormatting);
             }
+            // Formatting based on song settings
             else
             {
-                slideFormatting.MainText = (TextFormatting)s.MainText.Clone();
-                slideFormatting.SubText = (TextFormatting)s.TranslationText.Clone();
-                slideFormatting.FooterText = (TextFormatting)s.CopyrightText.Clone();
-                slideFormatting.HeaderText = (TextFormatting)s.SourceText.Clone();
-                
-                slideFormatting.HorizontalTextPadding = s.TextBorders.TextLeft;
-                slideFormatting.VerticalTextPadding = s.TextBorders.TextTop;
-                slideFormatting.HorizontalFooterPadding = s.TextBorders.CopyrightBottom;
-                slideFormatting.VerticalFooterPadding = s.TextBorders.CopyrightBottom;
-                slideFormatting.HorizontalHeaderPadding = s.TextBorders.SourceRight;
-                slideFormatting.VerticalHeaderPadding = s.TextBorders.SourceTop;
-                
-                slideFormatting.OutlineEnabled = s.TextOutlineEnabled;
-                slideFormatting.ShadowEnabled = s.TextShadowEnabled;
+                SongSlideTextFormattingMapper.Map(s, ref slideFormatting);
             }
-            slideFormatting.TextOrientation = (TextOrientation)s.TextOrientation.Clone();
-            slideFormatting.HeaderTextOrientation = HorizontalOrientation.Right;
-            slideFormatting.FooterTextOrientation = HorizontalOrientation.Left;
             slideFormatting.ScaleFontSize = Settings.Default.ProjectionFontScaling;
-            // TODO respect slide text size
+
             var ssl = new SongSlideLayer(slideFormatting);
+
+            // Set text and translation (based on translation switch state)
             if (cs.Translated && SongManager.Instance.CurrentSong.SwitchTextAndTranlation)
             {
                 ssl.MainText = cs.Translation.ToArray();
@@ -501,10 +452,14 @@ namespace PraiseBase.Presenter.Forms
                 ssl.MainText = cs.Lines.ToArray();
                 ssl.SubText = cs.Translation.ToArray();
             }
+
+            // Set header text (song source)
             if (s.SourcePosition == "firstslide" && e.PartNumber == 0 && e.SlideNumber == 0)
             {
                 ssl.HeaderText = new String[] { s.SongBooksString };
             }
+
+            // Set footer text (copyright)
             if (s.CopyrightPosition == "firstslide" && e.PartNumber == 0 && e.SlideNumber == 0  ||
                 s.CopyrightPosition == "lastslide" && e.PartNumber == s.Parts.Count - 1 && e.SlideNumber == s.Parts[e.PartNumber].Slides.Count -1 )
             {

@@ -32,14 +32,14 @@ namespace PraiseBase.Presenter
 {
     internal class SongSlideLayer : TextLayer
     {
-        private SlideLayerFormatting formatting;
+        private SlideTextFormatting formatting;
 
         public String[] MainText { get; set; }
         public String[] SubText { get; set; }
         public String[] HeaderText { get; set; }
         public String[] FooterText { get; set; }
 
-        public SongSlideLayer(SlideLayerFormatting formatting)
+        public SongSlideLayer(SlideTextFormatting formatting)
         {
             this.formatting = formatting;
         }
@@ -51,69 +51,69 @@ namespace PraiseBase.Presenter
 
             if (MainText.Length > 0)
             {
-                int usableWidth = w - (2 * formatting.HorizontalTextPadding);
-                int usableHeight = h - (2 * formatting.VerticalTextPadding);
+                int usableWidth = w - (2 * formatting.Text.HorizontalPadding);
+                int usableHeight = h - (2 * formatting.Text.VerticalPadding);
 
-                int textStartX = formatting.HorizontalTextPadding;
-                int textStartY = formatting.VerticalTextPadding;
+                int textStartX = formatting.Text.HorizontalPadding;
+                int textStartY = formatting.Text.VerticalPadding;
 
                 SizeF strMeasureTrans;
 
                 int endSpacing = 0;
                 if (SubText != null && SubText.Length > 0)
                 {
-                    strMeasureTrans = gr.MeasureString(String.Join(Environment.NewLine, SubText), formatting.SubText.Font);
-                    formatting.MainText.LineSpacing += (int)(strMeasureTrans.Height / SubText.Length) + formatting.SubText.LineSpacing;
-                    endSpacing = (int)(strMeasureTrans.Height / SubText.Length) + formatting.SubText.LineSpacing;
+                    strMeasureTrans = gr.MeasureString(String.Join(Environment.NewLine, SubText), formatting.Text.SubText.Font);
+                    formatting.Text.MainText.LineSpacing += (int)(strMeasureTrans.Height / SubText.Length) + formatting.Text.SubText.LineSpacing;
+                    endSpacing = (int)(strMeasureTrans.Height / SubText.Length) + formatting.Text.SubText.LineSpacing;
                 }
 
-                SizeF strMeasure = gr.MeasureString(String.Join(Environment.NewLine, MainText), formatting.MainText.Font);
+                SizeF strMeasure = gr.MeasureString(String.Join(Environment.NewLine, MainText), formatting.Text.MainText.Font);
                 Brush shadodBrush = Brushes.Transparent;
                 int usedWidth = (int)strMeasure.Width;
-                int usedHeight = (int)strMeasure.Height + (formatting.MainText.LineSpacing * (MainText.Length - 1)) + endSpacing;
+                int usedHeight = (int)strMeasure.Height + (formatting.Text.MainText.LineSpacing * (MainText.Length - 1)) + endSpacing;
 
                 float scalingFactor = 1.0f;
                 if (formatting.ScaleFontSize && (usedWidth > usableWidth || usedHeight > usableHeight))
                 {
                     scalingFactor = Math.Min((float)usableWidth / (float)usedWidth, (float)usableHeight / (float)usedHeight);
-                    formatting.MainText.Font = new Font(formatting.MainText.Font.FontFamily, formatting.MainText.Font.Size * scalingFactor, formatting.MainText.Font.Style);
-                    strMeasure = gr.MeasureString(String.Join(Environment.NewLine, MainText), formatting.MainText.Font);
+                    formatting.Text.MainText.Font = new Font(formatting.Text.MainText.Font.FontFamily, formatting.Text.MainText.Font.Size * scalingFactor, formatting.Text.MainText.Font.Style);
+                    strMeasure = gr.MeasureString(String.Join(Environment.NewLine, MainText), formatting.Text.MainText.Font);
                     usedWidth = (int)strMeasure.Width;
-                    usedHeight = (int)strMeasure.Height + (formatting.MainText.LineSpacing * (MainText.Length - 1));
+                    usedHeight = (int)strMeasure.Height + (formatting.Text.MainText.LineSpacing * (MainText.Length - 1));
                 }
                 int lineHeight = (int)(strMeasure.Height / MainText.Length);
 
                 // Adapt horizontal starting position
-                if (formatting.TextOrientation.Horizontal == HorizontalOrientation.Center)
+                if (formatting.Text.Orientation.Horizontal == HorizontalOrientation.Center)
                 {
                     textStartX = w / 2;
                 }
-                else if (formatting.TextOrientation.Horizontal == HorizontalOrientation.Right)
+                else if (formatting.Text.Orientation.Horizontal == HorizontalOrientation.Right)
                 {
                     textStartX = textStartX + usableWidth;
                 }
 
                 // Adapt vertical starting position
-                if (formatting.TextOrientation.Vertical == VerticalOrientation.Middle)
+                if (formatting.Text.Orientation.Vertical == VerticalOrientation.Middle)
                 {
                     textStartY = textStartY + (usableHeight / 2) - (usedHeight / 2);
                 }
-                else if (formatting.TextOrientation.Vertical == VerticalOrientation.Bottom)
+                else if (formatting.Text.Orientation.Vertical == VerticalOrientation.Bottom)
                 {
                     textStartY = textStartY + usableHeight - usedHeight;
                 }
 
                 // Define string format
                 StringFormat strFormat = new StringFormat();
-                mapStringFormatAlignment(formatting.TextOrientation.Horizontal, strFormat);
+                mapStringFormatAlignment(formatting.Text.Orientation.Horizontal, strFormat);
 
                 // Draw main text
-                drawLines(gr, MainText, textStartX, textStartY, strFormat, formatting.MainText, formatting.OutlineEnabled, formatting.ShadowEnabled, lineHeight);
+                drawLines(gr, MainText, textStartX, textStartY, strFormat, formatting.Text.MainText, formatting.OutlineEnabled, formatting.ShadowEnabled, lineHeight);
 
                 // Sub-text (translation)
                 if (SubText != null && SubText.Length > 0)
                 {
-                    drawLines(gr, SubText, textStartX + 10, textStartY + lineHeight, strFormat, formatting.SubText, formatting.OutlineEnabled, formatting.ShadowEnabled, lineHeight);
+                    drawLines(gr, SubText, textStartX + 10, textStartY + lineHeight, strFormat, formatting.Text.SubText, formatting.OutlineEnabled, formatting.ShadowEnabled, lineHeight);
                 }
             }
 
@@ -122,21 +122,21 @@ namespace PraiseBase.Presenter
             //
             if (HeaderText != null && HeaderText.Length > 0)
             {
-                SizeF headerMeasure = gr.MeasureString(String.Join(Environment.NewLine, HeaderText), formatting.HeaderText.Font);
-                int headerPosX = formatting.HorizontalHeaderPadding;
-                if (formatting.HeaderTextOrientation == HorizontalOrientation.Center)
+                SizeF headerMeasure = gr.MeasureString(String.Join(Environment.NewLine, HeaderText), formatting.Header.Text.Font);
+                int headerPosX = formatting.Header.HorizontalPadding;
+                if (formatting.Header.HorizontalOrientation == HorizontalOrientation.Center)
                 {
                     headerPosX = w / 2;
                 }
-                else if (formatting.HeaderTextOrientation == HorizontalOrientation.Right)
+                else if (formatting.Header.HorizontalOrientation == HorizontalOrientation.Right)
                 {
-                    headerPosX = w - formatting.HorizontalHeaderPadding;
+                    headerPosX = w - formatting.Header.HorizontalPadding;
                 }
-                int headerPoxY = formatting.VerticalHeaderPadding;
+                int headerPoxY = formatting.Header.VerticalPadding;
                 int lineHeight = (int)(headerMeasure.Height / HeaderText.Length);
                 StringFormat headerStrFormat = new StringFormat();
-                mapStringFormatAlignment(formatting.HeaderTextOrientation, headerStrFormat);
-                drawLines(gr, HeaderText, headerPosX, headerPoxY, headerStrFormat, formatting.HeaderText, formatting.OutlineEnabled, formatting.ShadowEnabled, lineHeight);
+                mapStringFormatAlignment(formatting.Header.HorizontalOrientation, headerStrFormat);
+                drawLines(gr, HeaderText, headerPosX, headerPoxY, headerStrFormat, formatting.Header.Text, formatting.OutlineEnabled, formatting.ShadowEnabled, lineHeight);
             }
 
             //
@@ -144,21 +144,21 @@ namespace PraiseBase.Presenter
             //
             if (FooterText != null && FooterText.Length > 0)
             {
-                SizeF footerMeasure = gr.MeasureString(String.Join(Environment.NewLine, FooterText), formatting.FooterText.Font);
-                int footerPosX = formatting.HorizontalFooterPadding;
-                if (formatting.FooterTextOrientation == HorizontalOrientation.Center)
+                SizeF footerMeasure = gr.MeasureString(String.Join(Environment.NewLine, FooterText), formatting.Footer.Text.Font);
+                int footerPosX = formatting.Footer.HorizontalPadding;
+                if (formatting.Footer.HorizontalOrientation == HorizontalOrientation.Center)
                 {
                     footerPosX = w / 2;
                 }
-                else if (formatting.FooterTextOrientation == HorizontalOrientation.Right)
+                else if (formatting.Footer.HorizontalOrientation == HorizontalOrientation.Right)
                 {
-                    footerPosX = w - formatting.HorizontalFooterPadding;
+                    footerPosX = w - formatting.Footer.HorizontalPadding;
                 }
-                int footerPosY = h - formatting.VerticalFooterPadding - (int)footerMeasure.Height;
+                int footerPosY = h - formatting.Footer.VerticalPadding - (int)footerMeasure.Height;
                 int lineHeight = (int)(footerMeasure.Height / FooterText.Length);
                 StringFormat footerStrFormat = new StringFormat();
-                mapStringFormatAlignment(formatting.FooterTextOrientation, footerStrFormat);
-                drawLines(gr, FooterText, footerPosX, footerPosY, footerStrFormat, formatting.FooterText, formatting.OutlineEnabled, formatting.ShadowEnabled, lineHeight);
+                mapStringFormatAlignment(formatting.Footer.HorizontalOrientation, footerStrFormat);
+                drawLines(gr, FooterText, footerPosX, footerPosY, footerStrFormat, formatting.Footer.Text, formatting.OutlineEnabled, formatting.ShadowEnabled, lineHeight);
             }
         }
 
