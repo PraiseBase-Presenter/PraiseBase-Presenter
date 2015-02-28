@@ -130,14 +130,20 @@
   <data name="button1.Text" xml:space="preserve">
     <value>Select directory...</value>
   </data>
-  <data name="buttonProjectionBackColor.Text" xml:space="preserve">
-    <value>Background color...</value>
-  </data>
   <data name="button2.Text" xml:space="preserve">
     <value>Restore factory defaults</value>
   </data>
-  <data name="buttonProjectionOutlineColor.Text" xml:space="preserve">
-    <value>Outline color...</value>
+  <data name="tabPage1.Text" xml:space="preserve">
+    <value>Common</value>
+  </data>
+  <data name="groupBoxProjection.Text" xml:space="preserve">
+    <value>Projection</value>
+  </data>
+  <data name="labelBackgroundColor.Size" type="System.Drawing.Size, System.Drawing">
+    <value>94, 13</value>
+  </data>
+  <data name="labelBackgroundColor.Text" xml:space="preserve">
+    <value>Background color:</value>
   </data>
   <data name="checkBoxProjectionFontScaling.Size" type="System.Drawing.Size, System.Drawing">
     <value>105, 17</value>
@@ -145,23 +151,23 @@
   <data name="checkBoxProjectionFontScaling.Text" xml:space="preserve">
     <value>Downscale fonts</value>
   </data>
+  <data name="groupBoxMisc.Text" xml:space="preserve">
+    <value>Miscellaneous</value>
+  </data>
   <data name="checkBoxShowLoadingScreen.Size" type="System.Drawing.Size, System.Drawing">
     <value>125, 17</value>
   </data>
   <data name="checkBoxShowLoadingScreen.Text" xml:space="preserve">
     <value>Show loading screen</value>
   </data>
-  <data name="groupBox2.Text" xml:space="preserve">
-    <value>Miscellaneous</value>
+  <data name="groupBoxDataDirectory.Text" xml:space="preserve">
+    <value>Data directory</value>
   </data>
   <data name="textBox2.Text" xml:space="preserve">
     <value>If you change the user data directory, you have to reload the songs and the images (see the 'Tools' menu) or restart the program.</value>
   </data>
-  <data name="groupBox1.Text" xml:space="preserve">
-    <value>Data directory</value>
-  </data>
-  <data name="tabPage1.Text" xml:space="preserve">
-    <value>Common</value>
+  <data name="tabPage3.Text" xml:space="preserve">
+    <value>Song defaults</value>
   </data>
   <data name="label6.Size" type="System.Drawing.Size, System.Drawing">
     <value>72, 13</value>
@@ -193,74 +199,203 @@
   <data name="buttonDelTags.Text" xml:space="preserve">
     <value>Delete selected</value>
   </data>
-  <data name="tabPage3.Text" xml:space="preserve">
-    <value>Song defaults</value>
+  <data name="tabPage5.Text" xml:space="preserve">
+    <value>Master formatting</value>
   </data>
-  <data name="label13.Size" type="System.Drawing.Size, System.Drawing">
-    <value>51, 13</value>
-  </data>
-  <data name="label13.Text" xml:space="preserve">
-    <value>Outline:</value>
+  <data name="groupBoxTextOrientation.Text" xml:space="preserve">
+    <value>Text orientation</value>
   </data>
   <data name="label12.Size" type="System.Drawing.Size, System.Drawing">
-    <value>56, 13</value>
+    <value>40, 13</value>
   </data>
   <data name="label12.Text" xml:space="preserve">
-    <value>Shadow:</value>
-  </data>
-  <data name="buttonProjectionShadowColor.Text" xml:space="preserve">
-    <value>Shadow color...</value>
+    <value>Footer:</value>
   </data>
   <data name="label11.Size" type="System.Drawing.Size, System.Drawing">
-    <value>89, 13</value>
+    <value>45, 13</value>
   </data>
   <data name="label11.Text" xml:space="preserve">
-    <value>Border margin:</value>
+    <value>Header:</value>
   </data>
-  <data name="tabPage2.Text" xml:space="preserve">
-    <value>Projection</value>
+  <data name="groupBoxShadow.Text" xml:space="preserve">
+    <value>Shadow</value>
   </data>
-  <data name="label2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>70, 13</value>
+  <data name="labelShadowSize.Size" type="System.Drawing.Size, System.Drawing">
+    <value>30, 13</value>
   </data>
-  <data name="label2.Text" xml:space="preserve">
-    <value>Lyrics font:</value>
+  <data name="labelShadowSize.Text" xml:space="preserve">
+    <value>Size:</value>
+  </data>
+  <data name="checkBoxShadowEnabled.Size" type="System.Drawing.Size, System.Drawing">
+    <value>100, 17</value>
+  </data>
+  <data name="checkBoxShadowEnabled.Text" xml:space="preserve">
+    <value>Display shadow</value>
+  </data>
+  <data name="labelShadowColor.Size" type="System.Drawing.Size, System.Drawing">
+    <value>34, 13</value>
+  </data>
+  <data name="labelShadowColor.Text" xml:space="preserve">
+    <value>Color:</value>
+  </data>
+  <data name="labelShadowDirection.Size" type="System.Drawing.Size, System.Drawing">
+    <value>52, 13</value>
+  </data>
+  <data name="labelShadowDirection.Text" xml:space="preserve">
+    <value>Direction:</value>
+  </data>
+  <data name="labelShadowDistance.Size" type="System.Drawing.Size, System.Drawing">
+    <value>52, 13</value>
+  </data>
+  <data name="labelShadowDistance.Text" xml:space="preserve">
+    <value>Distance:</value>
+  </data>
+  <data name="groupBoxBorders.Text" xml:space="preserve">
+    <value>Padding</value>
+  </data>
+  <data name="label15.Size" type="System.Drawing.Size, System.Drawing">
+    <value>45, 13</value>
+  </data>
+  <data name="label15.Text" xml:space="preserve">
+    <value>Header:</value>
+  </data>
+  <data name="label9.Size" type="System.Drawing.Size, System.Drawing">
+    <value>40, 13</value>
+  </data>
+  <data name="label9.Text" xml:space="preserve">
+    <value>Footer:</value>
+  </data>
+  <data name="label3.Text" xml:space="preserve">
+    <value>Vertical:</value>
+  </data>
+  <data name="groupBoxOutline.Text" xml:space="preserve">
+    <value>Outline</value>
+  </data>
+  <data name="checkBoxOutlineEnabled.Size" type="System.Drawing.Size, System.Drawing">
+    <value>94, 17</value>
+  </data>
+  <data name="checkBoxOutlineEnabled.Text" xml:space="preserve">
+    <value>Display outline</value>
+  </data>
+  <data name="label1OutlineColor.Size" type="System.Drawing.Size, System.Drawing">
+    <value>34, 13</value>
+  </data>
+  <data name="label1OutlineColor.Text" xml:space="preserve">
+    <value>Color:</value>
+  </data>
+  <data name="labelOutlineSize.Size" type="System.Drawing.Size, System.Drawing">
+    <value>50, 13</value>
+  </data>
+  <data name="labelOutlineSize.Text" xml:space="preserve">
+    <value>Strength:</value>
+  </data>
+  <data name="groupBoxLineSpacings.Text" xml:space="preserve">
+    <value>Line spacing</value>
+  </data>
+  <data name="label7.Size" type="System.Drawing.Size, System.Drawing">
+    <value>78, 13</value>
+  </data>
+  <data name="label7.Text" xml:space="preserve">
+    <value>Between lyrics:</value>
+  </data>
+  <data name="label14.Size" type="System.Drawing.Size, System.Drawing">
+    <value>150, 13</value>
+  </data>
+  <data name="label14.Text" xml:space="preserve">
+    <value>Between lyrics and translation:</value>
+  </data>
+  <data name="groupBoxFonts.Text" xml:space="preserve">
+    <value>Fonts</value>
+  </data>
+  <data name="label20.Size" type="System.Drawing.Size, System.Drawing">
+    <value>34, 13</value>
+  </data>
+  <data name="label20.Text" xml:space="preserve">
+    <value>Color:</value>
+  </data>
+  <data name="label19.Size" type="System.Drawing.Size, System.Drawing">
+    <value>34, 13</value>
+  </data>
+  <data name="label19.Text" xml:space="preserve">
+    <value>Color:</value>
+  </data>
+  <data name="label18.Size" type="System.Drawing.Size, System.Drawing">
+    <value>34, 13</value>
+  </data>
+  <data name="label18.Text" xml:space="preserve">
+    <value>Color:</value>
+  </data>
+  <data name="label17.Size" type="System.Drawing.Size, System.Drawing">
+    <value>34, 13</value>
+  </data>
+  <data name="label17.Text" xml:space="preserve">
+    <value>Color:</value>
+  </data>
+  <data name="labelSourceTextString.Size" type="System.Drawing.Size, System.Drawing">
+    <value>50, 13</value>
+  </data>
+  <data name="labelSourceTextString.Text" xml:space="preserve">
+    <value>loading...</value>
+  </data>
+  <data name="labelCopyrightTextString.Size" type="System.Drawing.Size, System.Drawing">
+    <value>50, 13</value>
+  </data>
+  <data name="labelCopyrightTextString.Text" xml:space="preserve">
+    <value>loading...</value>
+  </data>
+  <data name="labelSourceText.Size" type="System.Drawing.Size, System.Drawing">
+    <value>45, 13</value>
+  </data>
+  <data name="labelSourceText.Text" xml:space="preserve">
+    <value>Header:</value>
+  </data>
+  <data name="buttonSourceFont.Text" xml:space="preserve">
+    <value>Choose font...</value>
+  </data>
+  <data name="labelCopyrightText.Size" type="System.Drawing.Size, System.Drawing">
+    <value>40, 13</value>
+  </data>
+  <data name="labelCopyrightText.Text" xml:space="preserve">
+    <value>Footer:</value>
+  </data>
+  <data name="buttonCopyrightFont.Text" xml:space="preserve">
+    <value>Choose font...</value>
+  </data>
+  <data name="labelMainText.Size" type="System.Drawing.Size, System.Drawing">
+    <value>37, 13</value>
+  </data>
+  <data name="labelMainText.Text" xml:space="preserve">
+    <value>Lyrics:</value>
   </data>
   <data name="buttonProjectionMasterFont.Text" xml:space="preserve">
     <value>Choose font...</value>
   </data>
-  <data name="buttonChooseProjectionForeColor.Text" xml:space="preserve">
-    <value>Font color...</value>
-  </data>
   <data name="buttonTranslationFont.Text" xml:space="preserve">
     <value>Choose font...</value>
   </data>
-  <data name="label10.Size" type="System.Drawing.Size, System.Drawing">
-    <value>83, 13</value>
+  <data name="labelTranslationTextString.Size" type="System.Drawing.Size, System.Drawing">
+    <value>50, 13</value>
   </data>
-  <data name="label10.Text" xml:space="preserve">
-    <value>Line spacing:</value>
+  <data name="labelTranslationTextString.Text" xml:space="preserve">
+    <value>loading...</value>
   </data>
-  <data name="buttonTranslationColor.Text" xml:space="preserve">
-    <value>Font color...</value>
+  <data name="labelMainTextString.Size" type="System.Drawing.Size, System.Drawing">
+    <value>50, 13</value>
   </data>
-  <data name="label8.Size" type="System.Drawing.Size, System.Drawing">
-    <value>100, 13</value>
+  <data name="labelMainTextString.Text" xml:space="preserve">
+    <value>loading...</value>
   </data>
-  <data name="label8.Text" xml:space="preserve">
-    <value>Translation font:</value>
+  <data name="labelTranslationText.Size" type="System.Drawing.Size, System.Drawing">
+    <value>62, 13</value>
   </data>
-  <data name="groupBoxUseMaster.Text" xml:space="preserve">
-    <value>Master formatting</value>
+  <data name="labelTranslationText.Text" xml:space="preserve">
+    <value>Translation:</value>
   </data>
   <data name="checkBoxUseMasterFormat.Size" type="System.Drawing.Size, System.Drawing">
     <value>128, 17</value>
   </data>
   <data name="checkBoxUseMasterFormat.Text" xml:space="preserve">
     <value>Use master formatting</value>
-  </data>
-  <data name="tabPage5.Text" xml:space="preserve">
-    <value>Master formatting</value>
   </data>
   <data name="$this.Text" xml:space="preserve">
     <value>Settings</value>
