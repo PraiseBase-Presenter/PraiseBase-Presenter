@@ -57,18 +57,19 @@ namespace PraiseBase.Presenter.Forms
 
             pictureBoxProjectionBackColor.BackColor = Settings.Default.ProjectionBackColor;
 
-            numericUpDownOutlineSize.Value = Settings.Default.ProjectionOutlineSize;
-            buttonOutlineColor.BackColor = Settings.Default.ProjectionOutlineColor;
+            numericUpDownOutlineSize.Value = Settings.Default.ProjectionMasterOutlineSize;
+            buttonOutlineColor.BackColor = Settings.Default.ProjectionMasterOutlineColor;
 
-            numericUpDownShadowSize.Value = Settings.Default.ProjectionShadowSize;
-            buttonShadowColor.BackColor = Settings.Default.ProjectionShadowColor;
+            numericUpDownShadowSize.Value = Settings.Default.ProjectionMasterShadowSize;
+            numericUpDownShadowDirection.Value = Settings.Default.ProjectionMasterShadowDirection;
+            buttonShadowColor.BackColor = Settings.Default.ProjectionMasterShadowColor;
 
-            numericUpDownHorizontalTextPadding.Value = Settings.Default.ProjectionPadding;
-            numericUpDownVerticalTextPadding.Value = Settings.Default.ProjectionPadding;
-            numericUpDownHorizontalHeaderPadding.Value = Settings.Default.ProjectionPadding;
-            numericUpDownVerticalHeaderPadding.Value = Settings.Default.ProjectionPadding;
-            numericUpDownHorizontalFooterPadding.Value = Settings.Default.ProjectionPadding;
-            numericUpDownVerticalFooterPadding.Value = Settings.Default.ProjectionPadding;
+            numericUpDownHorizontalTextPadding.Value = Settings.Default.ProjectionMasterPadding;
+            numericUpDownVerticalTextPadding.Value = Settings.Default.ProjectionMasterPadding;
+            numericUpDownHorizontalHeaderPadding.Value = Settings.Default.ProjectionMasterPadding;
+            numericUpDownVerticalHeaderPadding.Value = Settings.Default.ProjectionMasterPadding;
+            numericUpDownHorizontalFooterPadding.Value = Settings.Default.ProjectionMasterPadding;
+            numericUpDownVerticalFooterPadding.Value = Settings.Default.ProjectionMasterPadding;
 
             numericUpDownLineSpacing.Value = Settings.Default.ProjectionMasterLineSpacing;
             numericUpDownTranslationLineSpacing.Value = Settings.Default.ProjectionMasterTranslationLineSpacing;
@@ -385,10 +386,10 @@ namespace PraiseBase.Presenter.Forms
         private void buttonProjectionShadowColor_Click(object sender, EventArgs e)
         {
             ColorDialog colDlg = new ColorDialog();
-            colDlg.Color = Settings.Default.ProjectionShadowColor;
+            colDlg.Color = Settings.Default.ProjectionMasterShadowColor;
             if (colDlg.ShowDialog() == DialogResult.OK)
             {
-                Settings.Default.ProjectionShadowColor = colDlg.Color;
+                Settings.Default.ProjectionMasterShadowColor = colDlg.Color;
                 updateLabels();
             }
         }
@@ -396,10 +397,10 @@ namespace PraiseBase.Presenter.Forms
         private void buttonProjectionOutlineColor_Click(object sender, EventArgs e)
         {
             ColorDialog colDlg = new ColorDialog();
-            colDlg.Color = Settings.Default.ProjectionOutlineColor;
+            colDlg.Color = Settings.Default.ProjectionMasterOutlineColor;
             if (colDlg.ShowDialog() == DialogResult.OK)
             {
-                Settings.Default.ProjectionOutlineColor = colDlg.Color;
+                Settings.Default.ProjectionMasterOutlineColor = colDlg.Color;
                 updateLabels();
             }
         }
@@ -441,33 +442,38 @@ namespace PraiseBase.Presenter.Forms
         private void buttonOutlineColor_Click(object sender, EventArgs e)
         {
             ColorDialog colDlg = new ColorDialog();
-            colDlg.Color = Settings.Default.ProjectionOutlineColor;
+            colDlg.Color = Settings.Default.ProjectionMasterOutlineColor;
             if (colDlg.ShowDialog() == DialogResult.OK)
             {
-                Settings.Default.ProjectionOutlineColor = colDlg.Color;
+                Settings.Default.ProjectionMasterOutlineColor = colDlg.Color;
                 updateLabels();
             }
         }
 
         private void numericUpDownOutlineSize_ValueChanged(object sender, EventArgs e)
         {
-            Settings.Default.ProjectionOutlineSize = (int)((NumericUpDown)sender).Value;
+            Settings.Default.ProjectionMasterOutlineSize = (int)((NumericUpDown)sender).Value;
         }
 
         private void buttonShadowColor_Click(object sender, EventArgs e)
         {
             ColorDialog colDlg = new ColorDialog();
-            colDlg.Color = Settings.Default.ProjectionShadowColor;
+            colDlg.Color = Settings.Default.ProjectionMasterShadowColor;
             if (colDlg.ShowDialog() == DialogResult.OK)
             {
-                Settings.Default.ProjectionShadowColor = colDlg.Color;
+                Settings.Default.ProjectionMasterShadowColor = colDlg.Color;
                 updateLabels();
             }
         }
 
         private void numericUpDownShadowSize_ValueChanged(object sender, EventArgs e)
         {
-            Settings.Default.ProjectionShadowSize = (int)((NumericUpDown)sender).Value;
+            Settings.Default.ProjectionMasterShadowSize = (int)((NumericUpDown)sender).Value;
+        }
+
+        private void numericUpDownShadowDirection_ValueChanged(object sender, EventArgs e)
+        {
+            Settings.Default.ProjectionMasterShadowDirection = (int)((NumericUpDown)sender).Value;
         }
     }
 }

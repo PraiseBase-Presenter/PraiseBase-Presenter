@@ -52,22 +52,22 @@ namespace PraiseBase.Presenter.Projection
                 MainText = new TextFormatting(
                     settings.ProjectionMasterFont,
                     settings.ProjectionMasterFontColor,
-                    new TextOutline(settings.ProjectionOutlineSize, settings.ProjectionOutlineColor),
-                    new TextShadow(settings.ProjectionShadowSize, 125, settings.ProjectionShadowColor),
+                    new TextOutline(settings.ProjectionMasterOutlineSize, settings.ProjectionMasterOutlineColor),
+                    new TextShadow(settings.ProjectionMasterShadowSize, 125, settings.ProjectionMasterShadowColor),
                     settings.ProjectionMasterLineSpacing
                 ),
                 SubText = new TextFormatting(
                     settings.ProjectionMasterFontTranslation,
                     settings.ProjectionMasterTranslationColor,
-                    new TextOutline(settings.ProjectionOutlineSize, settings.ProjectionOutlineColor),
+                    new TextOutline(settings.ProjectionMasterOutlineSize, settings.ProjectionMasterOutlineColor),
                     // TODO Parametrize hard-coded value
-                    new TextShadow(settings.ProjectionShadowSize, 125, settings.ProjectionShadowColor),
+                    new TextShadow(settings.ProjectionMasterShadowSize, 125, settings.ProjectionMasterShadowColor),
                     settings.ProjectionMasterTranslationLineSpacing
                 ),
                 // TODO Parametrize hard-coded value
                 Orientation = new TextOrientation(VerticalOrientation.Middle, HorizontalOrientation.Center),
-                HorizontalPadding = settings.ProjectionPadding,
-                VerticalPadding = settings.ProjectionPadding,
+                HorizontalPadding = settings.ProjectionMasterPadding,
+                VerticalPadding = settings.ProjectionMasterPadding,
                 OutlineEnabled = true,
                 ShadowEnabled = true
             };
@@ -76,8 +76,8 @@ namespace PraiseBase.Presenter.Projection
                 Text = new TextFormatting(
                     settings.ProjectionMasterSourceFont,
                     settings.ProjectionMasterSourceColor,
-                    new TextOutline(settings.ProjectionOutlineSize, settings.ProjectionOutlineColor),
-                    new TextShadow(settings.ProjectionShadowSize, 125, settings.ProjectionShadowColor),
+                    new TextOutline(settings.ProjectionMasterOutlineSize, settings.ProjectionMasterOutlineColor),
+                    new TextShadow(settings.ProjectionMasterShadowSize, 125, settings.ProjectionMasterShadowColor),
                     settings.ProjectionMasterLineSpacing
                 ),
                 // TODO Parametrize hard-coded values
@@ -92,8 +92,8 @@ namespace PraiseBase.Presenter.Projection
                 Text = new TextFormatting(
                     settings.ProjectionMasterCopyrightFont,
                     settings.ProjectionMasterCopyrightColor,
-                    new TextOutline(settings.ProjectionOutlineSize, settings.ProjectionOutlineColor),
-                    new TextShadow(settings.ProjectionShadowSize, 125, settings.ProjectionShadowColor),
+                    new TextOutline(settings.ProjectionMasterOutlineSize, settings.ProjectionMasterOutlineColor),
+                    new TextShadow(settings.ProjectionMasterShadowSize, 125, settings.ProjectionMasterShadowColor),
                     settings.ProjectionMasterLineSpacing
                 ),
                 // TODO Parametrize hard-coded values

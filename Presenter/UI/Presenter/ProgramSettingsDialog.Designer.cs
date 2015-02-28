@@ -65,7 +65,7 @@
             this.groupBoxShadow = new System.Windows.Forms.GroupBox();
             this.label16 = new System.Windows.Forms.Label();
             this.label11 = new System.Windows.Forms.Label();
-            this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
+            this.numericUpDownShadowDirection = new System.Windows.Forms.NumericUpDown();
             this.label12 = new System.Windows.Forms.Label();
             this.buttonShadowColor = new System.Windows.Forms.Button();
             this.numericUpDownShadowSize = new System.Windows.Forms.NumericUpDown();
@@ -92,6 +92,10 @@
             this.label7 = new System.Windows.Forms.Label();
             this.label14 = new System.Windows.Forms.Label();
             this.groupBoxFonts = new System.Windows.Forms.GroupBox();
+            this.label20 = new System.Windows.Forms.Label();
+            this.label19 = new System.Windows.Forms.Label();
+            this.label18 = new System.Windows.Forms.Label();
+            this.label17 = new System.Windows.Forms.Label();
             this.labelSourceTextString = new System.Windows.Forms.Label();
             this.labelCopyrightTextString = new System.Windows.Forms.Label();
             this.labelSourceText = new System.Windows.Forms.Label();
@@ -109,10 +113,6 @@
             this.labelMainTextString = new System.Windows.Forms.Label();
             this.labelTranslationText = new System.Windows.Forms.Label();
             this.checkBoxUseMasterFormat = new System.Windows.Forms.CheckBox();
-            this.label17 = new System.Windows.Forms.Label();
-            this.label18 = new System.Windows.Forms.Label();
-            this.label19 = new System.Windows.Forms.Label();
-            this.label20 = new System.Windows.Forms.Label();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -122,7 +122,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxProjectionBackColor)).BeginInit();
             this.tabPage5.SuspendLayout();
             this.groupBoxShadow.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownShadowDirection)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownShadowSize)).BeginInit();
             this.groupBoxBorders.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownVerticalFooterPadding)).BeginInit();
@@ -391,7 +391,7 @@
             resources.ApplyResources(this.groupBoxShadow, "groupBoxShadow");
             this.groupBoxShadow.Controls.Add(this.label16);
             this.groupBoxShadow.Controls.Add(this.label11);
-            this.groupBoxShadow.Controls.Add(this.numericUpDown1);
+            this.groupBoxShadow.Controls.Add(this.numericUpDownShadowDirection);
             this.groupBoxShadow.Controls.Add(this.label12);
             this.groupBoxShadow.Controls.Add(this.buttonShadowColor);
             this.groupBoxShadow.Controls.Add(this.numericUpDownShadowSize);
@@ -408,15 +408,16 @@
             resources.ApplyResources(this.label11, "label11");
             this.label11.Name = "label11";
             // 
-            // numericUpDown1
+            // numericUpDownShadowDirection
             // 
-            resources.ApplyResources(this.numericUpDown1, "numericUpDown1");
-            this.numericUpDown1.Maximum = new decimal(new int[] {
-            1000,
+            resources.ApplyResources(this.numericUpDownShadowDirection, "numericUpDownShadowDirection");
+            this.numericUpDownShadowDirection.Maximum = new decimal(new int[] {
+            359,
             0,
             0,
             0});
-            this.numericUpDown1.Name = "numericUpDown1";
+            this.numericUpDownShadowDirection.Name = "numericUpDownShadowDirection";
+            this.numericUpDownShadowDirection.ValueChanged += new System.EventHandler(this.numericUpDownShadowDirection_ValueChanged);
             // 
             // label12
             // 
@@ -649,6 +650,26 @@
             this.groupBoxFonts.Name = "groupBoxFonts";
             this.groupBoxFonts.TabStop = false;
             // 
+            // label20
+            // 
+            resources.ApplyResources(this.label20, "label20");
+            this.label20.Name = "label20";
+            // 
+            // label19
+            // 
+            resources.ApplyResources(this.label19, "label19");
+            this.label19.Name = "label19";
+            // 
+            // label18
+            // 
+            resources.ApplyResources(this.label18, "label18");
+            this.label18.Name = "label18";
+            // 
+            // label17
+            // 
+            resources.ApplyResources(this.label17, "label17");
+            this.label17.Name = "label17";
+            // 
             // labelSourceTextString
             // 
             resources.ApplyResources(this.labelSourceTextString, "labelSourceTextString");
@@ -753,26 +774,6 @@
             this.checkBoxUseMasterFormat.UseVisualStyleBackColor = true;
             this.checkBoxUseMasterFormat.CheckedChanged += new System.EventHandler(this.checkBoxUseMasterFormat_CheckedChanged);
             // 
-            // label17
-            // 
-            resources.ApplyResources(this.label17, "label17");
-            this.label17.Name = "label17";
-            // 
-            // label18
-            // 
-            resources.ApplyResources(this.label18, "label18");
-            this.label18.Name = "label18";
-            // 
-            // label19
-            // 
-            resources.ApplyResources(this.label19, "label19");
-            this.label19.Name = "label19";
-            // 
-            // label20
-            // 
-            resources.ApplyResources(this.label20, "label20");
-            this.label20.Name = "label20";
-            // 
             // ProgramSettingsDialog
             // 
             this.AcceptButton = this.exitButton;
@@ -803,7 +804,7 @@
             this.tabPage5.PerformLayout();
             this.groupBoxShadow.ResumeLayout(false);
             this.groupBoxShadow.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownShadowDirection)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownShadowSize)).EndInit();
             this.groupBoxBorders.ResumeLayout(false);
             this.groupBoxBorders.PerformLayout();
@@ -903,7 +904,7 @@
         private System.Windows.Forms.Button buttonOutlineColor;
         private System.Windows.Forms.GroupBox groupBoxShadow;
         private System.Windows.Forms.Label label10;
-        private System.Windows.Forms.NumericUpDown numericUpDown1;
+        private System.Windows.Forms.NumericUpDown numericUpDownShadowDirection;
         private System.Windows.Forms.Label label12;
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.Label label16;
