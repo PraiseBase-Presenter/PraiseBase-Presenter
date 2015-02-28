@@ -66,6 +66,7 @@ namespace PraiseBase.Presenter.Forms
             // Shadow
             checkBoxShadowEnabled.Checked = Settings.Default.ProjectionMasterShadowEnabled;
             numericUpDownShadowDistance.Value = Settings.Default.ProjectionMasterShadowDistance;
+            numericUpDownShadowSize.Value = Settings.Default.ProjectionMasterShadowSize;
             numericUpDownShadowDirection.Value = Settings.Default.ProjectionMasterShadowDirection;
             buttonShadowColor.BackColor = Settings.Default.ProjectionMasterShadowColor;
             enableShadowFormElements(Settings.Default.ProjectionMasterShadowEnabled);
@@ -482,6 +483,8 @@ namespace PraiseBase.Presenter.Forms
             buttonShadowColor.Enabled = enable;
             labelShadowDirection.Enabled = enable;
             numericUpDownShadowDirection.Enabled = enable;
+            labelShadowSize.Enabled = enable;
+            numericUpDownShadowSize.Enabled = enable;
         }
 
         private void buttonShadowColor_Click(object sender, EventArgs e)
@@ -495,9 +498,14 @@ namespace PraiseBase.Presenter.Forms
             }
         }
 
-        private void numericUpDownShadowSize_ValueChanged(object sender, EventArgs e)
+        private void numericUpDownShadowDistance_ValueChanged(object sender, EventArgs e)
         {
             Settings.Default.ProjectionMasterShadowDistance = (int)((NumericUpDown)sender).Value;
+        }
+
+        private void numericUpDownShadowSize_ValueChanged(object sender, EventArgs e)
+        {
+            Settings.Default.ProjectionMasterShadowSize = (int)((NumericUpDown)sender).Value;
         }
 
         private void numericUpDownShadowDirection_ValueChanged(object sender, EventArgs e)
@@ -670,5 +678,6 @@ namespace PraiseBase.Presenter.Forms
             }
             return Model.HorizontalOrientation.Left;
         }
+
     }
 }

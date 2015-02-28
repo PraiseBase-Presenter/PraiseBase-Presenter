@@ -322,7 +322,7 @@
     <value>3, 3, 3, 3</value>
   </data>
   <data name="tabPage1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>604, 421</value>
+    <value>604, 484</value>
   </data>
   <data name="tabPage1.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -529,7 +529,7 @@
     <value>3, 3, 3, 3</value>
   </data>
   <data name="tabPage3.Size" type="System.Drawing.Size, System.Drawing">
-    <value>604, 421</value>
+    <value>604, 484</value>
   </data>
   <data name="tabPage3.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
@@ -549,24 +549,6 @@
   <data name="&gt;&gt;tabPage3.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
-  <data name="comboBoxFooterOrientation.Items" xml:space="preserve">
-    <value>Links</value>
-  </data>
-  <data name="comboBoxFooterOrientation.Items1" xml:space="preserve">
-    <value>Zentriert</value>
-  </data>
-  <data name="comboBoxFooterOrientation.Items2" xml:space="preserve">
-    <value>Rechts</value>
-  </data>
-  <data name="comboBoxFooterOrientation.Location" type="System.Drawing.Point, System.Drawing">
-    <value>460, 26</value>
-  </data>
-  <data name="comboBoxFooterOrientation.Size" type="System.Drawing.Size, System.Drawing">
-    <value>121, 21</value>
-  </data>
-  <data name="comboBoxFooterOrientation.TabIndex" type="System.Int32, mscorlib">
-    <value>71</value>
-  </data>
   <data name="&gt;&gt;comboBoxFooterOrientation.Name" xml:space="preserve">
     <value>comboBoxFooterOrientation</value>
   </data>
@@ -578,24 +560,6 @@
   </data>
   <data name="&gt;&gt;comboBoxFooterOrientation.ZOrder" xml:space="preserve">
     <value>0</value>
-  </data>
-  <data name="comboBoxHeaderOrientation.Items" xml:space="preserve">
-    <value>Links</value>
-  </data>
-  <data name="comboBoxHeaderOrientation.Items1" xml:space="preserve">
-    <value>Zentriert</value>
-  </data>
-  <data name="comboBoxHeaderOrientation.Items2" xml:space="preserve">
-    <value>Rechts</value>
-  </data>
-  <data name="comboBoxHeaderOrientation.Location" type="System.Drawing.Point, System.Drawing">
-    <value>264, 26</value>
-  </data>
-  <data name="comboBoxHeaderOrientation.Size" type="System.Drawing.Size, System.Drawing">
-    <value>121, 21</value>
-  </data>
-  <data name="comboBoxHeaderOrientation.TabIndex" type="System.Int32, mscorlib">
-    <value>70</value>
   </data>
   <data name="&gt;&gt;comboBoxHeaderOrientation.Name" xml:space="preserve">
     <value>comboBoxHeaderOrientation</value>
@@ -609,27 +573,6 @@
   <data name="&gt;&gt;comboBoxHeaderOrientation.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
-  <data name="label12.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="label12.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Microsoft Sans Serif, 8.25pt</value>
-  </data>
-  <data name="label12.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="label12.Location" type="System.Drawing.Point, System.Drawing">
-    <value>401, 29</value>
-  </data>
-  <data name="label12.Size" type="System.Drawing.Size, System.Drawing">
-    <value>53, 13</value>
-  </data>
-  <data name="label12.TabIndex" type="System.Int32, mscorlib">
-    <value>69</value>
-  </data>
-  <data name="label12.Text" xml:space="preserve">
-    <value>Fusszeile:</value>
-  </data>
   <data name="&gt;&gt;label12.Name" xml:space="preserve">
     <value>label12</value>
   </data>
@@ -641,27 +584,6 @@
   </data>
   <data name="&gt;&gt;label12.ZOrder" xml:space="preserve">
     <value>2</value>
-  </data>
-  <data name="label11.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="label11.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Microsoft Sans Serif, 8.25pt</value>
-  </data>
-  <data name="label11.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="label11.Location" type="System.Drawing.Point, System.Drawing">
-    <value>205, 29</value>
-  </data>
-  <data name="label11.Size" type="System.Drawing.Size, System.Drawing">
-    <value>53, 13</value>
-  </data>
-  <data name="label11.TabIndex" type="System.Int32, mscorlib">
-    <value>68</value>
-  </data>
-  <data name="label11.Text" xml:space="preserve">
-    <value>Kopfzeile:</value>
   </data>
   <data name="&gt;&gt;label11.Name" xml:space="preserve">
     <value>label11</value>
@@ -675,42 +597,6 @@
   <data name="&gt;&gt;label11.ZOrder" xml:space="preserve">
     <value>3</value>
   </data>
-  <data name="comboBoxTextOrientation.Items" xml:space="preserve">
-    <value>Oben links</value>
-  </data>
-  <data name="comboBoxTextOrientation.Items1" xml:space="preserve">
-    <value>Oben zentriert</value>
-  </data>
-  <data name="comboBoxTextOrientation.Items2" xml:space="preserve">
-    <value>Oben rechts</value>
-  </data>
-  <data name="comboBoxTextOrientation.Items3" xml:space="preserve">
-    <value>Mitte links</value>
-  </data>
-  <data name="comboBoxTextOrientation.Items4" xml:space="preserve">
-    <value>Mitte zentriert</value>
-  </data>
-  <data name="comboBoxTextOrientation.Items5" xml:space="preserve">
-    <value>Mitte rechts</value>
-  </data>
-  <data name="comboBoxTextOrientation.Items6" xml:space="preserve">
-    <value>Unten links</value>
-  </data>
-  <data name="comboBoxTextOrientation.Items7" xml:space="preserve">
-    <value>Unten mitte</value>
-  </data>
-  <data name="comboBoxTextOrientation.Items8" xml:space="preserve">
-    <value>Unten rechts</value>
-  </data>
-  <data name="comboBoxTextOrientation.Location" type="System.Drawing.Point, System.Drawing">
-    <value>63, 26</value>
-  </data>
-  <data name="comboBoxTextOrientation.Size" type="System.Drawing.Size, System.Drawing">
-    <value>121, 21</value>
-  </data>
-  <data name="comboBoxTextOrientation.TabIndex" type="System.Int32, mscorlib">
-    <value>67</value>
-  </data>
   <data name="&gt;&gt;comboBoxTextOrientation.Name" xml:space="preserve">
     <value>comboBoxTextOrientation</value>
   </data>
@@ -722,27 +608,6 @@
   </data>
   <data name="&gt;&gt;comboBoxTextOrientation.ZOrder" xml:space="preserve">
     <value>4</value>
-  </data>
-  <data name="label10.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="label10.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Microsoft Sans Serif, 8.25pt</value>
-  </data>
-  <data name="label10.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="label10.Location" type="System.Drawing.Point, System.Drawing">
-    <value>20, 29</value>
-  </data>
-  <data name="label10.Size" type="System.Drawing.Size, System.Drawing">
-    <value>31, 13</value>
-  </data>
-  <data name="label10.TabIndex" type="System.Int32, mscorlib">
-    <value>66</value>
-  </data>
-  <data name="label10.Text" xml:space="preserve">
-    <value>Text:</value>
   </data>
   <data name="&gt;&gt;label10.Name" xml:space="preserve">
     <value>label10</value>
@@ -783,6 +648,78 @@
   <data name="groupBoxShadow.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Bottom, Right</value>
   </data>
+  <data name="numericUpDownShadowSize.Location" type="System.Drawing.Point, System.Drawing">
+    <value>67, 75</value>
+  </data>
+  <data name="numericUpDownShadowSize.Size" type="System.Drawing.Size, System.Drawing">
+    <value>61, 20</value>
+  </data>
+  <data name="numericUpDownShadowSize.TabIndex" type="System.Int32, mscorlib">
+    <value>83</value>
+  </data>
+  <data name="&gt;&gt;numericUpDownShadowSize.Name" xml:space="preserve">
+    <value>numericUpDownShadowSize</value>
+  </data>
+  <data name="&gt;&gt;numericUpDownShadowSize.Type" xml:space="preserve">
+    <value>System.Windows.Forms.NumericUpDown, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;numericUpDownShadowSize.Parent" xml:space="preserve">
+    <value>groupBoxShadow</value>
+  </data>
+  <data name="&gt;&gt;numericUpDownShadowSize.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="labelShadowSize.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="labelShadowSize.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 8.25pt</value>
+  </data>
+  <data name="labelShadowSize.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="labelShadowSize.Location" type="System.Drawing.Point, System.Drawing">
+    <value>12, 77</value>
+  </data>
+  <data name="labelShadowSize.Size" type="System.Drawing.Size, System.Drawing">
+    <value>43, 13</value>
+  </data>
+  <data name="labelShadowSize.TabIndex" type="System.Int32, mscorlib">
+    <value>82</value>
+  </data>
+  <data name="labelShadowSize.Text" xml:space="preserve">
+    <value>Grösse:</value>
+  </data>
+  <data name="&gt;&gt;labelShadowSize.Name" xml:space="preserve">
+    <value>labelShadowSize</value>
+  </data>
+  <data name="&gt;&gt;labelShadowSize.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;labelShadowSize.Parent" xml:space="preserve">
+    <value>groupBoxShadow</value>
+  </data>
+  <data name="&gt;&gt;labelShadowSize.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="checkBoxShadowEnabled.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="checkBoxShadowEnabled.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="checkBoxShadowEnabled.Location" type="System.Drawing.Point, System.Drawing">
+    <value>15, 24</value>
+  </data>
+  <data name="checkBoxShadowEnabled.Size" type="System.Drawing.Size, System.Drawing">
+    <value>115, 17</value>
+  </data>
+  <data name="checkBoxShadowEnabled.TabIndex" type="System.Int32, mscorlib">
+    <value>79</value>
+  </data>
+  <data name="checkBoxShadowEnabled.Text" xml:space="preserve">
+    <value>Schatten anzeigen</value>
+  </data>
   <data name="&gt;&gt;checkBoxShadowEnabled.Name" xml:space="preserve">
     <value>checkBoxShadowEnabled</value>
   </data>
@@ -793,7 +730,28 @@
     <value>groupBoxShadow</value>
   </data>
   <data name="&gt;&gt;checkBoxShadowEnabled.ZOrder" xml:space="preserve">
-    <value>0</value>
+    <value>2</value>
+  </data>
+  <data name="labelShadowColor.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="labelShadowColor.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 8.25pt</value>
+  </data>
+  <data name="labelShadowColor.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="labelShadowColor.Location" type="System.Drawing.Point, System.Drawing">
+    <value>197, 51</value>
+  </data>
+  <data name="labelShadowColor.Size" type="System.Drawing.Size, System.Drawing">
+    <value>37, 13</value>
+  </data>
+  <data name="labelShadowColor.TabIndex" type="System.Int32, mscorlib">
+    <value>78</value>
+  </data>
+  <data name="labelShadowColor.Text" xml:space="preserve">
+    <value>Farbe:</value>
   </data>
   <data name="&gt;&gt;labelShadowColor.Name" xml:space="preserve">
     <value>labelShadowColor</value>
@@ -805,7 +763,28 @@
     <value>groupBoxShadow</value>
   </data>
   <data name="&gt;&gt;labelShadowColor.ZOrder" xml:space="preserve">
-    <value>1</value>
+    <value>3</value>
+  </data>
+  <data name="labelShadowDirection.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="labelShadowDirection.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 8.25pt</value>
+  </data>
+  <data name="labelShadowDirection.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="labelShadowDirection.Location" type="System.Drawing.Point, System.Drawing">
+    <value>12, 103</value>
+  </data>
+  <data name="labelShadowDirection.Size" type="System.Drawing.Size, System.Drawing">
+    <value>53, 13</value>
+  </data>
+  <data name="labelShadowDirection.TabIndex" type="System.Int32, mscorlib">
+    <value>81</value>
+  </data>
+  <data name="labelShadowDirection.Text" xml:space="preserve">
+    <value>Richtung:</value>
   </data>
   <data name="&gt;&gt;labelShadowDirection.Name" xml:space="preserve">
     <value>labelShadowDirection</value>
@@ -817,7 +796,16 @@
     <value>groupBoxShadow</value>
   </data>
   <data name="&gt;&gt;labelShadowDirection.ZOrder" xml:space="preserve">
-    <value>2</value>
+    <value>4</value>
+  </data>
+  <data name="numericUpDownShadowDirection.Location" type="System.Drawing.Point, System.Drawing">
+    <value>67, 101</value>
+  </data>
+  <data name="numericUpDownShadowDirection.Size" type="System.Drawing.Size, System.Drawing">
+    <value>61, 20</value>
+  </data>
+  <data name="numericUpDownShadowDirection.TabIndex" type="System.Int32, mscorlib">
+    <value>80</value>
   </data>
   <data name="&gt;&gt;numericUpDownShadowDirection.Name" xml:space="preserve">
     <value>numericUpDownShadowDirection</value>
@@ -829,7 +817,28 @@
     <value>groupBoxShadow</value>
   </data>
   <data name="&gt;&gt;numericUpDownShadowDirection.ZOrder" xml:space="preserve">
-    <value>3</value>
+    <value>5</value>
+  </data>
+  <data name="labelShadowDistance.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="labelShadowDistance.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 8.25pt</value>
+  </data>
+  <data name="labelShadowDistance.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="labelShadowDistance.Location" type="System.Drawing.Point, System.Drawing">
+    <value>12, 51</value>
+  </data>
+  <data name="labelShadowDistance.Size" type="System.Drawing.Size, System.Drawing">
+    <value>49, 13</value>
+  </data>
+  <data name="labelShadowDistance.TabIndex" type="System.Int32, mscorlib">
+    <value>79</value>
+  </data>
+  <data name="labelShadowDistance.Text" xml:space="preserve">
+    <value>Abstand:</value>
   </data>
   <data name="&gt;&gt;labelShadowDistance.Name" xml:space="preserve">
     <value>labelShadowDistance</value>
@@ -841,7 +850,25 @@
     <value>groupBoxShadow</value>
   </data>
   <data name="&gt;&gt;labelShadowDistance.ZOrder" xml:space="preserve">
-    <value>4</value>
+    <value>6</value>
+  </data>
+  <data name="buttonShadowColor.FlatStyle" type="System.Windows.Forms.FlatStyle, System.Windows.Forms">
+    <value>Flat</value>
+  </data>
+  <data name="buttonShadowColor.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 8.25pt</value>
+  </data>
+  <data name="buttonShadowColor.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="buttonShadowColor.Location" type="System.Drawing.Point, System.Drawing">
+    <value>244, 46</value>
+  </data>
+  <data name="buttonShadowColor.Size" type="System.Drawing.Size, System.Drawing">
+    <value>30, 23</value>
+  </data>
+  <data name="buttonShadowColor.TabIndex" type="System.Int32, mscorlib">
+    <value>78</value>
   </data>
   <data name="&gt;&gt;buttonShadowColor.Name" xml:space="preserve">
     <value>buttonShadowColor</value>
@@ -853,7 +880,16 @@
     <value>groupBoxShadow</value>
   </data>
   <data name="&gt;&gt;buttonShadowColor.ZOrder" xml:space="preserve">
-    <value>5</value>
+    <value>7</value>
+  </data>
+  <data name="numericUpDownShadowDistance.Location" type="System.Drawing.Point, System.Drawing">
+    <value>67, 49</value>
+  </data>
+  <data name="numericUpDownShadowDistance.Size" type="System.Drawing.Size, System.Drawing">
+    <value>61, 20</value>
+  </data>
+  <data name="numericUpDownShadowDistance.TabIndex" type="System.Int32, mscorlib">
+    <value>77</value>
   </data>
   <data name="&gt;&gt;numericUpDownShadowDistance.Name" xml:space="preserve">
     <value>numericUpDownShadowDistance</value>
@@ -865,7 +901,7 @@
     <value>groupBoxShadow</value>
   </data>
   <data name="&gt;&gt;numericUpDownShadowDistance.ZOrder" xml:space="preserve">
-    <value>6</value>
+    <value>8</value>
   </data>
   <data name="groupBoxShadow.Location" type="System.Drawing.Point, System.Drawing">
     <value>301, 275</value>
@@ -1611,6 +1647,69 @@
   <data name="&gt;&gt;groupBoxProjection.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
+  <data name="labelBackgroundColor.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="labelBackgroundColor.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 8.25pt</value>
+  </data>
+  <data name="labelBackgroundColor.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="labelBackgroundColor.Location" type="System.Drawing.Point, System.Drawing">
+    <value>20, 27</value>
+  </data>
+  <data name="labelBackgroundColor.Size" type="System.Drawing.Size, System.Drawing">
+    <value>89, 13</value>
+  </data>
+  <data name="labelBackgroundColor.TabIndex" type="System.Int32, mscorlib">
+    <value>60</value>
+  </data>
+  <data name="labelBackgroundColor.Text" xml:space="preserve">
+    <value>Hintergrundfarbe:</value>
+  </data>
+  <data name="&gt;&gt;labelBackgroundColor.Name" xml:space="preserve">
+    <value>labelBackgroundColor</value>
+  </data>
+  <data name="&gt;&gt;labelBackgroundColor.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;labelBackgroundColor.Parent" xml:space="preserve">
+    <value>groupBoxProjection</value>
+  </data>
+  <data name="&gt;&gt;labelBackgroundColor.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="buttonProjectionBackgroundColor.FlatStyle" type="System.Windows.Forms.FlatStyle, System.Windows.Forms">
+    <value>Flat</value>
+  </data>
+  <data name="buttonProjectionBackgroundColor.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 8.25pt</value>
+  </data>
+  <data name="buttonProjectionBackgroundColor.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="buttonProjectionBackgroundColor.Location" type="System.Drawing.Point, System.Drawing">
+    <value>115, 22</value>
+  </data>
+  <data name="buttonProjectionBackgroundColor.Size" type="System.Drawing.Size, System.Drawing">
+    <value>30, 23</value>
+  </data>
+  <data name="buttonProjectionBackgroundColor.TabIndex" type="System.Int32, mscorlib">
+    <value>59</value>
+  </data>
+  <data name="&gt;&gt;buttonProjectionBackgroundColor.Name" xml:space="preserve">
+    <value>buttonProjectionBackgroundColor</value>
+  </data>
+  <data name="&gt;&gt;buttonProjectionBackgroundColor.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;buttonProjectionBackgroundColor.Parent" xml:space="preserve">
+    <value>groupBoxProjection</value>
+  </data>
+  <data name="&gt;&gt;buttonProjectionBackgroundColor.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
   <data name="checkBoxProjectionFontScaling.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
@@ -2160,206 +2259,212 @@
   <data name="&gt;&gt;listBoxTags.ZOrder" xml:space="preserve">
     <value>14</value>
   </data>
-  <data name="checkBoxShadowEnabled.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
+  <data name="comboBoxFooterOrientation.Items" xml:space="preserve">
+    <value>Links</value>
   </data>
-  <data name="checkBoxShadowEnabled.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
+  <data name="comboBoxFooterOrientation.Items1" xml:space="preserve">
+    <value>Zentriert</value>
   </data>
-  <data name="checkBoxShadowEnabled.Location" type="System.Drawing.Point, System.Drawing">
-    <value>15, 24</value>
+  <data name="comboBoxFooterOrientation.Items2" xml:space="preserve">
+    <value>Rechts</value>
   </data>
-  <data name="checkBoxShadowEnabled.Size" type="System.Drawing.Size, System.Drawing">
-    <value>115, 17</value>
+  <data name="comboBoxFooterOrientation.Location" type="System.Drawing.Point, System.Drawing">
+    <value>460, 26</value>
   </data>
-  <data name="checkBoxShadowEnabled.TabIndex" type="System.Int32, mscorlib">
-    <value>79</value>
+  <data name="comboBoxFooterOrientation.Size" type="System.Drawing.Size, System.Drawing">
+    <value>121, 21</value>
   </data>
-  <data name="checkBoxShadowEnabled.Text" xml:space="preserve">
-    <value>Schatten anzeigen</value>
+  <data name="comboBoxFooterOrientation.TabIndex" type="System.Int32, mscorlib">
+    <value>71</value>
   </data>
-  <data name="&gt;&gt;checkBoxShadowEnabled.Name" xml:space="preserve">
-    <value>checkBoxShadowEnabled</value>
+  <data name="&gt;&gt;comboBoxFooterOrientation.Name" xml:space="preserve">
+    <value>comboBoxFooterOrientation</value>
   </data>
-  <data name="&gt;&gt;checkBoxShadowEnabled.Type" xml:space="preserve">
-    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="&gt;&gt;comboBoxFooterOrientation.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;checkBoxShadowEnabled.Parent" xml:space="preserve">
-    <value>groupBoxShadow</value>
+  <data name="&gt;&gt;comboBoxFooterOrientation.Parent" xml:space="preserve">
+    <value>groupBoxTextOrientation</value>
   </data>
-  <data name="&gt;&gt;checkBoxShadowEnabled.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;comboBoxFooterOrientation.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
-  <data name="labelShadowColor.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
+  <data name="comboBoxHeaderOrientation.Items" xml:space="preserve">
+    <value>Links</value>
   </data>
-  <data name="labelShadowColor.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Microsoft Sans Serif, 8.25pt</value>
+  <data name="comboBoxHeaderOrientation.Items1" xml:space="preserve">
+    <value>Zentriert</value>
   </data>
-  <data name="labelShadowColor.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
+  <data name="comboBoxHeaderOrientation.Items2" xml:space="preserve">
+    <value>Rechts</value>
   </data>
-  <data name="labelShadowColor.Location" type="System.Drawing.Point, System.Drawing">
-    <value>197, 51</value>
+  <data name="comboBoxHeaderOrientation.Location" type="System.Drawing.Point, System.Drawing">
+    <value>264, 26</value>
   </data>
-  <data name="labelShadowColor.Size" type="System.Drawing.Size, System.Drawing">
-    <value>37, 13</value>
+  <data name="comboBoxHeaderOrientation.Size" type="System.Drawing.Size, System.Drawing">
+    <value>121, 21</value>
   </data>
-  <data name="labelShadowColor.TabIndex" type="System.Int32, mscorlib">
-    <value>78</value>
+  <data name="comboBoxHeaderOrientation.TabIndex" type="System.Int32, mscorlib">
+    <value>70</value>
   </data>
-  <data name="labelShadowColor.Text" xml:space="preserve">
-    <value>Farbe:</value>
+  <data name="&gt;&gt;comboBoxHeaderOrientation.Name" xml:space="preserve">
+    <value>comboBoxHeaderOrientation</value>
   </data>
-  <data name="&gt;&gt;labelShadowColor.Name" xml:space="preserve">
-    <value>labelShadowColor</value>
+  <data name="&gt;&gt;comboBoxHeaderOrientation.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;labelShadowColor.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="&gt;&gt;comboBoxHeaderOrientation.Parent" xml:space="preserve">
+    <value>groupBoxTextOrientation</value>
   </data>
-  <data name="&gt;&gt;labelShadowColor.Parent" xml:space="preserve">
-    <value>groupBoxShadow</value>
-  </data>
-  <data name="&gt;&gt;labelShadowColor.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;comboBoxHeaderOrientation.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
-  <data name="labelShadowDirection.AutoSize" type="System.Boolean, mscorlib">
+  <data name="label12.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
-  <data name="labelShadowDirection.Font" type="System.Drawing.Font, System.Drawing">
+  <data name="label12.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 8.25pt</value>
   </data>
-  <data name="labelShadowDirection.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+  <data name="label12.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
-  <data name="labelShadowDirection.Location" type="System.Drawing.Point, System.Drawing">
-    <value>12, 76</value>
+  <data name="label12.Location" type="System.Drawing.Point, System.Drawing">
+    <value>401, 29</value>
   </data>
-  <data name="labelShadowDirection.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="label12.Size" type="System.Drawing.Size, System.Drawing">
     <value>53, 13</value>
   </data>
-  <data name="labelShadowDirection.TabIndex" type="System.Int32, mscorlib">
-    <value>81</value>
+  <data name="label12.TabIndex" type="System.Int32, mscorlib">
+    <value>69</value>
   </data>
-  <data name="labelShadowDirection.Text" xml:space="preserve">
-    <value>Richtung:</value>
+  <data name="label12.Text" xml:space="preserve">
+    <value>Fusszeile:</value>
   </data>
-  <data name="&gt;&gt;labelShadowDirection.Name" xml:space="preserve">
-    <value>labelShadowDirection</value>
+  <data name="&gt;&gt;label12.Name" xml:space="preserve">
+    <value>label12</value>
   </data>
-  <data name="&gt;&gt;labelShadowDirection.Type" xml:space="preserve">
+  <data name="&gt;&gt;label12.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;labelShadowDirection.Parent" xml:space="preserve">
-    <value>groupBoxShadow</value>
+  <data name="&gt;&gt;label12.Parent" xml:space="preserve">
+    <value>groupBoxTextOrientation</value>
   </data>
-  <data name="&gt;&gt;labelShadowDirection.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;label12.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
-  <data name="numericUpDownShadowDirection.Location" type="System.Drawing.Point, System.Drawing">
-    <value>67, 74</value>
-  </data>
-  <data name="numericUpDownShadowDirection.Size" type="System.Drawing.Size, System.Drawing">
-    <value>61, 20</value>
-  </data>
-  <data name="numericUpDownShadowDirection.TabIndex" type="System.Int32, mscorlib">
-    <value>80</value>
-  </data>
-  <data name="&gt;&gt;numericUpDownShadowDirection.Name" xml:space="preserve">
-    <value>numericUpDownShadowDirection</value>
-  </data>
-  <data name="&gt;&gt;numericUpDownShadowDirection.Type" xml:space="preserve">
-    <value>System.Windows.Forms.NumericUpDown, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;numericUpDownShadowDirection.Parent" xml:space="preserve">
-    <value>groupBoxShadow</value>
-  </data>
-  <data name="&gt;&gt;numericUpDownShadowDirection.ZOrder" xml:space="preserve">
-    <value>3</value>
-  </data>
-  <data name="labelShadowDistance.AutoSize" type="System.Boolean, mscorlib">
+  <data name="label11.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
-  <data name="labelShadowDistance.Font" type="System.Drawing.Font, System.Drawing">
+  <data name="label11.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 8.25pt</value>
   </data>
-  <data name="labelShadowDistance.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+  <data name="label11.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
-  <data name="labelShadowDistance.Location" type="System.Drawing.Point, System.Drawing">
-    <value>12, 51</value>
+  <data name="label11.Location" type="System.Drawing.Point, System.Drawing">
+    <value>205, 29</value>
   </data>
-  <data name="labelShadowDistance.Size" type="System.Drawing.Size, System.Drawing">
-    <value>49, 13</value>
+  <data name="label11.Size" type="System.Drawing.Size, System.Drawing">
+    <value>53, 13</value>
   </data>
-  <data name="labelShadowDistance.TabIndex" type="System.Int32, mscorlib">
-    <value>79</value>
+  <data name="label11.TabIndex" type="System.Int32, mscorlib">
+    <value>68</value>
   </data>
-  <data name="labelShadowDistance.Text" xml:space="preserve">
-    <value>Abstand:</value>
+  <data name="label11.Text" xml:space="preserve">
+    <value>Kopfzeile:</value>
   </data>
-  <data name="&gt;&gt;labelShadowDistance.Name" xml:space="preserve">
-    <value>labelShadowDistance</value>
+  <data name="&gt;&gt;label11.Name" xml:space="preserve">
+    <value>label11</value>
   </data>
-  <data name="&gt;&gt;labelShadowDistance.Type" xml:space="preserve">
+  <data name="&gt;&gt;label11.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;labelShadowDistance.Parent" xml:space="preserve">
-    <value>groupBoxShadow</value>
+  <data name="&gt;&gt;label11.Parent" xml:space="preserve">
+    <value>groupBoxTextOrientation</value>
   </data>
-  <data name="&gt;&gt;labelShadowDistance.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;label11.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="comboBoxTextOrientation.Items" xml:space="preserve">
+    <value>Oben links</value>
+  </data>
+  <data name="comboBoxTextOrientation.Items1" xml:space="preserve">
+    <value>Oben zentriert</value>
+  </data>
+  <data name="comboBoxTextOrientation.Items2" xml:space="preserve">
+    <value>Oben rechts</value>
+  </data>
+  <data name="comboBoxTextOrientation.Items3" xml:space="preserve">
+    <value>Mitte links</value>
+  </data>
+  <data name="comboBoxTextOrientation.Items4" xml:space="preserve">
+    <value>Mitte zentriert</value>
+  </data>
+  <data name="comboBoxTextOrientation.Items5" xml:space="preserve">
+    <value>Mitte rechts</value>
+  </data>
+  <data name="comboBoxTextOrientation.Items6" xml:space="preserve">
+    <value>Unten links</value>
+  </data>
+  <data name="comboBoxTextOrientation.Items7" xml:space="preserve">
+    <value>Unten mitte</value>
+  </data>
+  <data name="comboBoxTextOrientation.Items8" xml:space="preserve">
+    <value>Unten rechts</value>
+  </data>
+  <data name="comboBoxTextOrientation.Location" type="System.Drawing.Point, System.Drawing">
+    <value>63, 26</value>
+  </data>
+  <data name="comboBoxTextOrientation.Size" type="System.Drawing.Size, System.Drawing">
+    <value>121, 21</value>
+  </data>
+  <data name="comboBoxTextOrientation.TabIndex" type="System.Int32, mscorlib">
+    <value>67</value>
+  </data>
+  <data name="&gt;&gt;comboBoxTextOrientation.Name" xml:space="preserve">
+    <value>comboBoxTextOrientation</value>
+  </data>
+  <data name="&gt;&gt;comboBoxTextOrientation.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;comboBoxTextOrientation.Parent" xml:space="preserve">
+    <value>groupBoxTextOrientation</value>
+  </data>
+  <data name="&gt;&gt;comboBoxTextOrientation.ZOrder" xml:space="preserve">
     <value>4</value>
   </data>
-  <data name="buttonShadowColor.FlatStyle" type="System.Windows.Forms.FlatStyle, System.Windows.Forms">
-    <value>Flat</value>
+  <data name="label10.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
   </data>
-  <data name="buttonShadowColor.Font" type="System.Drawing.Font, System.Drawing">
+  <data name="label10.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 8.25pt</value>
   </data>
-  <data name="buttonShadowColor.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+  <data name="label10.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
-  <data name="buttonShadowColor.Location" type="System.Drawing.Point, System.Drawing">
-    <value>244, 46</value>
+  <data name="label10.Location" type="System.Drawing.Point, System.Drawing">
+    <value>20, 29</value>
   </data>
-  <data name="buttonShadowColor.Size" type="System.Drawing.Size, System.Drawing">
-    <value>30, 23</value>
+  <data name="label10.Size" type="System.Drawing.Size, System.Drawing">
+    <value>31, 13</value>
   </data>
-  <data name="buttonShadowColor.TabIndex" type="System.Int32, mscorlib">
-    <value>78</value>
+  <data name="label10.TabIndex" type="System.Int32, mscorlib">
+    <value>66</value>
   </data>
-  <data name="&gt;&gt;buttonShadowColor.Name" xml:space="preserve">
-    <value>buttonShadowColor</value>
+  <data name="label10.Text" xml:space="preserve">
+    <value>Text:</value>
   </data>
-  <data name="&gt;&gt;buttonShadowColor.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="&gt;&gt;label10.Name" xml:space="preserve">
+    <value>label10</value>
   </data>
-  <data name="&gt;&gt;buttonShadowColor.Parent" xml:space="preserve">
-    <value>groupBoxShadow</value>
+  <data name="&gt;&gt;label10.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;buttonShadowColor.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;label10.Parent" xml:space="preserve">
+    <value>groupBoxTextOrientation</value>
+  </data>
+  <data name="&gt;&gt;label10.ZOrder" xml:space="preserve">
     <value>5</value>
-  </data>
-  <data name="numericUpDownShadowDistance.Location" type="System.Drawing.Point, System.Drawing">
-    <value>67, 49</value>
-  </data>
-  <data name="numericUpDownShadowDistance.Size" type="System.Drawing.Size, System.Drawing">
-    <value>61, 20</value>
-  </data>
-  <data name="numericUpDownShadowDistance.TabIndex" type="System.Int32, mscorlib">
-    <value>77</value>
-  </data>
-  <data name="&gt;&gt;numericUpDownShadowDistance.Name" xml:space="preserve">
-    <value>numericUpDownShadowDistance</value>
-  </data>
-  <data name="&gt;&gt;numericUpDownShadowDistance.Type" xml:space="preserve">
-    <value>System.Windows.Forms.NumericUpDown, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;numericUpDownShadowDistance.Parent" xml:space="preserve">
-    <value>groupBoxShadow</value>
-  </data>
-  <data name="&gt;&gt;numericUpDownShadowDistance.ZOrder" xml:space="preserve">
-    <value>6</value>
   </data>
   <data name="label15.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -3474,69 +3579,6 @@
   <data name="&gt;&gt;labelTranslationText.ZOrder" xml:space="preserve">
     <value>19</value>
   </data>
-  <data name="labelBackgroundColor.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="labelBackgroundColor.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Microsoft Sans Serif, 8.25pt</value>
-  </data>
-  <data name="labelBackgroundColor.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="labelBackgroundColor.Location" type="System.Drawing.Point, System.Drawing">
-    <value>20, 27</value>
-  </data>
-  <data name="labelBackgroundColor.Size" type="System.Drawing.Size, System.Drawing">
-    <value>89, 13</value>
-  </data>
-  <data name="labelBackgroundColor.TabIndex" type="System.Int32, mscorlib">
-    <value>60</value>
-  </data>
-  <data name="labelBackgroundColor.Text" xml:space="preserve">
-    <value>Hintergrundfarbe:</value>
-  </data>
-  <data name="&gt;&gt;labelBackgroundColor.Name" xml:space="preserve">
-    <value>labelBackgroundColor</value>
-  </data>
-  <data name="&gt;&gt;labelBackgroundColor.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;labelBackgroundColor.Parent" xml:space="preserve">
-    <value>groupBoxProjection</value>
-  </data>
-  <data name="&gt;&gt;labelBackgroundColor.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="buttonProjectionBackgroundColor.FlatStyle" type="System.Windows.Forms.FlatStyle, System.Windows.Forms">
-    <value>Flat</value>
-  </data>
-  <data name="buttonProjectionBackgroundColor.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Microsoft Sans Serif, 8.25pt</value>
-  </data>
-  <data name="buttonProjectionBackgroundColor.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="buttonProjectionBackgroundColor.Location" type="System.Drawing.Point, System.Drawing">
-    <value>115, 22</value>
-  </data>
-  <data name="buttonProjectionBackgroundColor.Size" type="System.Drawing.Size, System.Drawing">
-    <value>30, 23</value>
-  </data>
-  <data name="buttonProjectionBackgroundColor.TabIndex" type="System.Int32, mscorlib">
-    <value>59</value>
-  </data>
-  <data name="&gt;&gt;buttonProjectionBackgroundColor.Name" xml:space="preserve">
-    <value>buttonProjectionBackgroundColor</value>
-  </data>
-  <data name="&gt;&gt;buttonProjectionBackgroundColor.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;buttonProjectionBackgroundColor.Parent" xml:space="preserve">
-    <value>groupBoxProjection</value>
-  </data>
-  <data name="&gt;&gt;buttonProjectionBackgroundColor.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
@@ -3545,9 +3587,6 @@
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
     <value>626, 562</value>
-  </data>
-  <data name="$this.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
   </data>
   <data name="$this.StartPosition" type="System.Windows.Forms.FormStartPosition, System.Windows.Forms">
     <value>CenterScreen</value>

@@ -227,5 +227,8 @@
     <Setting Name="ProjectionMasterHorizontalFooterOrientation" Type="PraiseBase.Presenter.Model.HorizontalOrientation" Scope="User">
       <Value Profile="(Default)">Left</Value>
     </Setting>
+    <Setting Name="ProjectionMasterShadowSize" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">1</Value>
+    </Setting>
   </Settings>
 </SettingsFile>
