@@ -839,5 +839,17 @@ namespace PraiseBase.Presenter.Properties {
                 this["ProjectionSmoothShadow"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("10")]
+        public int ProjectionMasterHorizontalTranslationTextOffset {
+            get {
+                return ((int)(this["ProjectionMasterHorizontalTranslationTextOffset"]));
+            }
+            set {
+                this["ProjectionMasterHorizontalTranslationTextOffset"] = value;
+            }
+        }
     }
 }

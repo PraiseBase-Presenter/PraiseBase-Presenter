@@ -83,6 +83,7 @@ namespace PraiseBase.Presenter.Forms
             // Line spacing
             numericUpDownLineSpacing.Value = Settings.Default.ProjectionMasterLineSpacing;
             numericUpDownTranslationLineSpacing.Value = Settings.Default.ProjectionMasterTranslationLineSpacing;
+            numericUpDownHorizontalTranslationTextOffset.Value = Settings.Default.ProjectionMasterHorizontalTranslationTextOffset;
             
             // Text orientation
             comboBoxHorizontalTextOrientation.SelectedIndex = getIndexByHorizontalOrientation(Settings.Default.ProjectionMasterHorizontalTextOrientation);
@@ -668,6 +669,11 @@ namespace PraiseBase.Presenter.Forms
         private void checkBoxSmoothShadow_CheckedChanged(object sender, EventArgs e)
         {
             Settings.Default.ProjectionSmoothShadow = checkBoxSmoothShadow.Checked;
+        }
+
+        private void numericUpDownHorizontalTranslationTextOffset_ValueChanged(object sender, EventArgs e)
+        {
+            Settings.Default.ProjectionMasterHorizontalTranslationTextOffset = (int)((NumericUpDown)sender).Value;
         }
 
     }

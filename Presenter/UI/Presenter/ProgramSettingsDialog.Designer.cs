@@ -107,10 +107,12 @@
             this.buttonOutlineColor = new System.Windows.Forms.Button();
             this.numericUpDownOutlineSize = new System.Windows.Forms.NumericUpDown();
             this.groupBoxLineSpacings = new System.Windows.Forms.GroupBox();
+            this.numericUpDownHorizontalTranslationTextOffset = new System.Windows.Forms.NumericUpDown();
+            this.labelHorizontalTranslationTextOffset = new System.Windows.Forms.Label();
             this.numericUpDownLineSpacing = new System.Windows.Forms.NumericUpDown();
             this.numericUpDownTranslationLineSpacing = new System.Windows.Forms.NumericUpDown();
-            this.label7 = new System.Windows.Forms.Label();
-            this.label14 = new System.Windows.Forms.Label();
+            this.labelLineSpacing = new System.Windows.Forms.Label();
+            this.labelTranslationLineSpacing = new System.Windows.Forms.Label();
             this.groupBoxFonts = new System.Windows.Forms.GroupBox();
             this.label20 = new System.Windows.Forms.Label();
             this.label19 = new System.Windows.Forms.Label();
@@ -156,6 +158,7 @@
             this.groupBoxOutline.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownOutlineSize)).BeginInit();
             this.groupBoxLineSpacings.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownHorizontalTranslationTextOffset)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownLineSpacing)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownTranslationLineSpacing)).BeginInit();
             this.groupBoxFonts.SuspendLayout();
@@ -213,20 +216,20 @@
             // 
             // tabPage1
             // 
+            resources.ApplyResources(this.tabPage1, "tabPage1");
             this.tabPage1.Controls.Add(this.groupBoxProjection);
             this.tabPage1.Controls.Add(this.groupBoxMisc);
             this.tabPage1.Controls.Add(this.groupBoxDataDirectory);
-            resources.ApplyResources(this.tabPage1, "tabPage1");
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.UseVisualStyleBackColor = true;
             // 
             // groupBoxProjection
             // 
+            resources.ApplyResources(this.groupBoxProjection, "groupBoxProjection");
             this.groupBoxProjection.Controls.Add(this.checkBoxSmoothShadow);
             this.groupBoxProjection.Controls.Add(this.labelBackgroundColor);
             this.groupBoxProjection.Controls.Add(this.buttonProjectionBackgroundColor);
             this.groupBoxProjection.Controls.Add(this.checkBoxProjectionFontScaling);
-            resources.ApplyResources(this.groupBoxProjection, "groupBoxProjection");
             this.groupBoxProjection.Name = "groupBoxProjection";
             this.groupBoxProjection.TabStop = false;
             // 
@@ -258,8 +261,8 @@
             // 
             // groupBoxMisc
             // 
-            this.groupBoxMisc.Controls.Add(this.checkBoxShowLoadingScreen);
             resources.ApplyResources(this.groupBoxMisc, "groupBoxMisc");
+            this.groupBoxMisc.Controls.Add(this.checkBoxShowLoadingScreen);
             this.groupBoxMisc.Name = "groupBoxMisc";
             this.groupBoxMisc.TabStop = false;
             // 
@@ -272,24 +275,25 @@
             // 
             // groupBoxDataDirectory
             // 
+            resources.ApplyResources(this.groupBoxDataDirectory, "groupBoxDataDirectory");
             this.groupBoxDataDirectory.Controls.Add(this.textBox2);
             this.groupBoxDataDirectory.Controls.Add(this.textBox1);
             this.groupBoxDataDirectory.Controls.Add(this.button1);
             this.groupBoxDataDirectory.Controls.Add(this.label1);
-            resources.ApplyResources(this.groupBoxDataDirectory, "groupBoxDataDirectory");
             this.groupBoxDataDirectory.Name = "groupBoxDataDirectory";
             this.groupBoxDataDirectory.TabStop = false;
             // 
             // textBox2
             // 
+            resources.ApplyResources(this.textBox2, "textBox2");
             this.textBox2.BackColor = System.Drawing.SystemColors.Info;
             this.textBox2.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            resources.ApplyResources(this.textBox2, "textBox2");
             this.textBox2.Name = "textBox2";
             this.textBox2.ReadOnly = true;
             // 
             // tabPage3
             // 
+            resources.ApplyResources(this.tabPage3, "tabPage3");
             this.tabPage3.Controls.Add(this.label6);
             this.tabPage3.Controls.Add(this.buttonAddSongPart);
             this.tabPage3.Controls.Add(this.textBoxNewSongPart);
@@ -305,7 +309,6 @@
             this.tabPage3.Controls.Add(this.textBoxNewTag);
             this.tabPage3.Controls.Add(this.buttonDelTags);
             this.tabPage3.Controls.Add(this.listBoxTags);
-            resources.ApplyResources(this.tabPage3, "tabPage3");
             this.tabPage3.Name = "tabPage3";
             this.tabPage3.UseVisualStyleBackColor = true;
             // 
@@ -404,6 +407,7 @@
             // 
             // tabPage5
             // 
+            resources.ApplyResources(this.tabPage5, "tabPage5");
             this.tabPage5.Controls.Add(this.groupBoxAdditionalInfo);
             this.tabPage5.Controls.Add(this.groupBoxTextOrientation);
             this.tabPage5.Controls.Add(this.groupBoxShadow);
@@ -412,7 +416,6 @@
             this.tabPage5.Controls.Add(this.groupBoxLineSpacings);
             this.tabPage5.Controls.Add(this.groupBoxFonts);
             this.tabPage5.Controls.Add(this.checkBoxUseMasterFormat);
-            resources.ApplyResources(this.tabPage5, "tabPage5");
             this.tabPage5.Name = "tabPage5";
             this.tabPage5.UseVisualStyleBackColor = true;
             // 
@@ -428,13 +431,13 @@
             // 
             // comboBoxCopyrightPosition
             // 
+            resources.ApplyResources(this.comboBoxCopyrightPosition, "comboBoxCopyrightPosition");
             this.comboBoxCopyrightPosition.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBoxCopyrightPosition.FormattingEnabled = true;
             this.comboBoxCopyrightPosition.Items.AddRange(new object[] {
             resources.GetString("comboBoxCopyrightPosition.Items"),
             resources.GetString("comboBoxCopyrightPosition.Items1"),
             resources.GetString("comboBoxCopyrightPosition.Items2")});
-            resources.ApplyResources(this.comboBoxCopyrightPosition, "comboBoxCopyrightPosition");
             this.comboBoxCopyrightPosition.Name = "comboBoxCopyrightPosition";
             this.comboBoxCopyrightPosition.SelectedIndexChanged += new System.EventHandler(this.comboBoxCopyrightPosition_SelectedIndexChanged);
             // 
@@ -445,13 +448,13 @@
             // 
             // comboBoxSourcePosition
             // 
+            resources.ApplyResources(this.comboBoxSourcePosition, "comboBoxSourcePosition");
             this.comboBoxSourcePosition.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBoxSourcePosition.FormattingEnabled = true;
             this.comboBoxSourcePosition.Items.AddRange(new object[] {
             resources.GetString("comboBoxSourcePosition.Items"),
             resources.GetString("comboBoxSourcePosition.Items1"),
             resources.GetString("comboBoxSourcePosition.Items2")});
-            resources.ApplyResources(this.comboBoxSourcePosition, "comboBoxSourcePosition");
             this.comboBoxSourcePosition.Name = "comboBoxSourcePosition";
             this.comboBoxSourcePosition.SelectedIndexChanged += new System.EventHandler(this.comboBoxSourcePosition_SelectedIndexChanged);
             // 
@@ -482,48 +485,48 @@
             // 
             // comboBoxTranslationPosition
             // 
+            resources.ApplyResources(this.comboBoxTranslationPosition, "comboBoxTranslationPosition");
             this.comboBoxTranslationPosition.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBoxTranslationPosition.FormattingEnabled = true;
             this.comboBoxTranslationPosition.Items.AddRange(new object[] {
             resources.GetString("comboBoxTranslationPosition.Items"),
             resources.GetString("comboBoxTranslationPosition.Items1")});
-            resources.ApplyResources(this.comboBoxTranslationPosition, "comboBoxTranslationPosition");
             this.comboBoxTranslationPosition.Name = "comboBoxTranslationPosition";
             this.comboBoxTranslationPosition.SelectedIndexChanged += new System.EventHandler(this.comboBoxTranslationPosition_SelectedIndexChanged);
             // 
             // comboBoxVerticalTextOrientation
             // 
+            resources.ApplyResources(this.comboBoxVerticalTextOrientation, "comboBoxVerticalTextOrientation");
             this.comboBoxVerticalTextOrientation.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBoxVerticalTextOrientation.FormattingEnabled = true;
             this.comboBoxVerticalTextOrientation.Items.AddRange(new object[] {
             resources.GetString("comboBoxVerticalTextOrientation.Items"),
             resources.GetString("comboBoxVerticalTextOrientation.Items1"),
             resources.GetString("comboBoxVerticalTextOrientation.Items2")});
-            resources.ApplyResources(this.comboBoxVerticalTextOrientation, "comboBoxVerticalTextOrientation");
             this.comboBoxVerticalTextOrientation.Name = "comboBoxVerticalTextOrientation";
             this.comboBoxVerticalTextOrientation.SelectedIndexChanged += new System.EventHandler(this.comboBoxVerticalTextOrientation_SelectedIndexChanged);
             // 
             // comboBoxFooterOrientation
             // 
+            resources.ApplyResources(this.comboBoxFooterOrientation, "comboBoxFooterOrientation");
             this.comboBoxFooterOrientation.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBoxFooterOrientation.FormattingEnabled = true;
             this.comboBoxFooterOrientation.Items.AddRange(new object[] {
             resources.GetString("comboBoxFooterOrientation.Items"),
             resources.GetString("comboBoxFooterOrientation.Items1"),
             resources.GetString("comboBoxFooterOrientation.Items2")});
-            resources.ApplyResources(this.comboBoxFooterOrientation, "comboBoxFooterOrientation");
             this.comboBoxFooterOrientation.Name = "comboBoxFooterOrientation";
             this.comboBoxFooterOrientation.SelectedIndexChanged += new System.EventHandler(this.comboBoxFooterOrientation_SelectedIndexChanged);
             // 
             // comboBoxHeaderOrientation
             // 
+            resources.ApplyResources(this.comboBoxHeaderOrientation, "comboBoxHeaderOrientation");
             this.comboBoxHeaderOrientation.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBoxHeaderOrientation.FormattingEnabled = true;
             this.comboBoxHeaderOrientation.Items.AddRange(new object[] {
             resources.GetString("comboBoxHeaderOrientation.Items"),
             resources.GetString("comboBoxHeaderOrientation.Items1"),
             resources.GetString("comboBoxHeaderOrientation.Items2")});
-            resources.ApplyResources(this.comboBoxHeaderOrientation, "comboBoxHeaderOrientation");
             this.comboBoxHeaderOrientation.Name = "comboBoxHeaderOrientation";
             this.comboBoxHeaderOrientation.SelectedIndexChanged += new System.EventHandler(this.comboBoxHeaderOrientation_SelectedIndexChanged);
             // 
@@ -539,13 +542,13 @@
             // 
             // comboBoxHorizontalTextOrientation
             // 
+            resources.ApplyResources(this.comboBoxHorizontalTextOrientation, "comboBoxHorizontalTextOrientation");
             this.comboBoxHorizontalTextOrientation.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBoxHorizontalTextOrientation.FormattingEnabled = true;
             this.comboBoxHorizontalTextOrientation.Items.AddRange(new object[] {
             resources.GetString("comboBoxHorizontalTextOrientation.Items"),
             resources.GetString("comboBoxHorizontalTextOrientation.Items1"),
             resources.GetString("comboBoxHorizontalTextOrientation.Items2")});
-            resources.ApplyResources(this.comboBoxHorizontalTextOrientation, "comboBoxHorizontalTextOrientation");
             this.comboBoxHorizontalTextOrientation.Name = "comboBoxHorizontalTextOrientation";
             this.comboBoxHorizontalTextOrientation.SelectedIndexChanged += new System.EventHandler(this.comboBoxTextOrientation_SelectedIndexChanged);
             // 
@@ -638,6 +641,7 @@
             // 
             // groupBoxBorders
             // 
+            resources.ApplyResources(this.groupBoxBorders, "groupBoxBorders");
             this.groupBoxBorders.Controls.Add(this.label15);
             this.groupBoxBorders.Controls.Add(this.numericUpDownVerticalFooterPadding);
             this.groupBoxBorders.Controls.Add(this.numericUpDownHorizontalFooterPadding);
@@ -649,7 +653,6 @@
             this.groupBoxBorders.Controls.Add(this.label2);
             this.groupBoxBorders.Controls.Add(this.numericUpDownVerticalTextPadding);
             this.groupBoxBorders.Controls.Add(this.numericUpDownHorizontalTextPadding);
-            resources.ApplyResources(this.groupBoxBorders, "groupBoxBorders");
             this.groupBoxBorders.Name = "groupBoxBorders";
             this.groupBoxBorders.TabStop = false;
             // 
@@ -792,13 +795,31 @@
             // 
             // groupBoxLineSpacings
             // 
+            resources.ApplyResources(this.groupBoxLineSpacings, "groupBoxLineSpacings");
+            this.groupBoxLineSpacings.Controls.Add(this.numericUpDownHorizontalTranslationTextOffset);
+            this.groupBoxLineSpacings.Controls.Add(this.labelHorizontalTranslationTextOffset);
             this.groupBoxLineSpacings.Controls.Add(this.numericUpDownLineSpacing);
             this.groupBoxLineSpacings.Controls.Add(this.numericUpDownTranslationLineSpacing);
-            this.groupBoxLineSpacings.Controls.Add(this.label7);
-            this.groupBoxLineSpacings.Controls.Add(this.label14);
-            resources.ApplyResources(this.groupBoxLineSpacings, "groupBoxLineSpacings");
+            this.groupBoxLineSpacings.Controls.Add(this.labelLineSpacing);
+            this.groupBoxLineSpacings.Controls.Add(this.labelTranslationLineSpacing);
             this.groupBoxLineSpacings.Name = "groupBoxLineSpacings";
             this.groupBoxLineSpacings.TabStop = false;
+            // 
+            // numericUpDownHorizontalTranslationTextOffset
+            // 
+            resources.ApplyResources(this.numericUpDownHorizontalTranslationTextOffset, "numericUpDownHorizontalTranslationTextOffset");
+            this.numericUpDownHorizontalTranslationTextOffset.Maximum = new decimal(new int[] {
+            1000,
+            0,
+            0,
+            0});
+            this.numericUpDownHorizontalTranslationTextOffset.Name = "numericUpDownHorizontalTranslationTextOffset";
+            this.numericUpDownHorizontalTranslationTextOffset.ValueChanged += new System.EventHandler(this.numericUpDownHorizontalTranslationTextOffset_ValueChanged);
+            // 
+            // labelHorizontalTranslationTextOffset
+            // 
+            resources.ApplyResources(this.labelHorizontalTranslationTextOffset, "labelHorizontalTranslationTextOffset");
+            this.labelHorizontalTranslationTextOffset.Name = "labelHorizontalTranslationTextOffset";
             // 
             // numericUpDownLineSpacing
             // 
@@ -822,15 +843,15 @@
             this.numericUpDownTranslationLineSpacing.Name = "numericUpDownTranslationLineSpacing";
             this.numericUpDownTranslationLineSpacing.ValueChanged += new System.EventHandler(this.numericUpDownTranslationLineSpacing_ValueChanged);
             // 
-            // label7
+            // labelLineSpacing
             // 
-            resources.ApplyResources(this.label7, "label7");
-            this.label7.Name = "label7";
+            resources.ApplyResources(this.labelLineSpacing, "labelLineSpacing");
+            this.labelLineSpacing.Name = "labelLineSpacing";
             // 
-            // label14
+            // labelTranslationLineSpacing
             // 
-            resources.ApplyResources(this.label14, "label14");
-            this.label14.Name = "label14";
+            resources.ApplyResources(this.labelTranslationLineSpacing, "labelTranslationLineSpacing");
+            this.labelTranslationLineSpacing.Name = "labelTranslationLineSpacing";
             // 
             // groupBoxFonts
             // 
@@ -1031,6 +1052,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownOutlineSize)).EndInit();
             this.groupBoxLineSpacings.ResumeLayout(false);
             this.groupBoxLineSpacings.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownHorizontalTranslationTextOffset)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownLineSpacing)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownTranslationLineSpacing)).EndInit();
             this.groupBoxFonts.ResumeLayout(false);
@@ -1080,8 +1102,8 @@
 		private System.Windows.Forms.CheckBox checkBoxShowLoadingScreen;
 		private System.Windows.Forms.GroupBox groupBoxMisc;
 		private System.Windows.Forms.GroupBox groupBoxDataDirectory;
-        private System.Windows.Forms.Label label14;
-        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.Label labelTranslationLineSpacing;
+        private System.Windows.Forms.Label labelLineSpacing;
         private System.Windows.Forms.GroupBox groupBoxLineSpacings;
         private System.Windows.Forms.NumericUpDown numericUpDownTranslationLineSpacing;
         private System.Windows.Forms.NumericUpDown numericUpDownLineSpacing;
@@ -1145,5 +1167,7 @@
         private System.Windows.Forms.Label label16;
         private System.Windows.Forms.ComboBox comboBoxTranslationPosition;
         private System.Windows.Forms.CheckBox checkBoxSmoothShadow;
+        private System.Windows.Forms.NumericUpDown numericUpDownHorizontalTranslationTextOffset;
+        private System.Windows.Forms.Label labelHorizontalTranslationTextOffset;
     }
 }

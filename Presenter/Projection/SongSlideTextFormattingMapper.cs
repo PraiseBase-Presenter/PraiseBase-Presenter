@@ -20,6 +20,8 @@ namespace PraiseBase.Presenter.Projection
                 Orientation = (TextOrientation)s.TextOrientation.Clone(),
                 HorizontalPadding = s.TextBorders.TextLeft,
                 VerticalPadding = s.TextBorders.TextTop,
+                // TODO Parametrize hard-coded value
+                HorizontalSubTextOffset  = 10
             };
             slideFormatting.Header = new SlideTextFormatting.TextBoxFormatting()
             {
@@ -64,6 +66,7 @@ namespace PraiseBase.Presenter.Projection
                 Orientation = new TextOrientation(settings.ProjectionMasterVerticalTextOrientation, settings.ProjectionMasterHorizontalTextOrientation),
                 HorizontalPadding = settings.ProjectionMasterHorizontalTextPadding,
                 VerticalPadding = settings.ProjectionMasterHorizontalTextPadding,
+                HorizontalSubTextOffset = settings.ProjectionMasterHorizontalTranslationTextOffset
             };
             slideFormatting.Header = new SlideTextFormatting.TextBoxFormatting()
             {

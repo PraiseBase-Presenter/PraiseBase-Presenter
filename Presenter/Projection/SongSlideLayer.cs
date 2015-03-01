@@ -72,37 +72,37 @@ namespace PraiseBase.Presenter
                 int usableWidth = canvasWidth - (2 * formatting.Text.HorizontalPadding);
                 int usableHeight = canvasHeight - (2 * formatting.Text.VerticalPadding);
 
-                int textStartX = formatting.Text.HorizontalPadding;
-                int textStartY = formatting.Text.VerticalPadding;
-
-                SizeF strMeasureTrans;
+                SizeF strMeasureMain;
+                SizeF strMeasureSub;
 
                 int endSpacing = 0;
                 if (SubText != null && SubText.Length > 0)
                 {
-                    strMeasureTrans = gr.MeasureString(String.Join(Environment.NewLine, SubText), formatting.Text.SubText.Font);
-                    formatting.Text.MainText.LineSpacing += (int)(strMeasureTrans.Height / SubText.Length) + formatting.Text.SubText.LineSpacing;
-                    endSpacing = (int)(strMeasureTrans.Height / SubText.Length) + formatting.Text.SubText.LineSpacing;
+                    strMeasureSub = gr.MeasureString(String.Join(Environment.NewLine, SubText), formatting.Text.SubText.Font);
+                    
+                    formatting.Text.MainText.LineSpacing += (int)(strMeasureSub.Height / SubText.Length) + formatting.Text.SubText.LineSpacing;
+                    endSpacing = (int)(strMeasureSub.Height / SubText.Length) + formatting.Text.SubText.LineSpacing;
                 }
 
-                SizeF strMeasure = gr.MeasureString(String.Join(Environment.NewLine, MainText), formatting.Text.MainText.Font);
+                strMeasureMain = gr.MeasureString(String.Join(Environment.NewLine, MainText), formatting.Text.MainText.Font);
 
-                int usedWidth = (int)strMeasure.Width;
-                int usedHeight = (int)strMeasure.Height + (formatting.Text.MainText.LineSpacing * (MainText.Length - 1)) + endSpacing;
+                int usedWidth = (int)strMeasureMain.Width;
+                int usedHeight = (int)strMeasureMain.Height + (formatting.Text.MainText.LineSpacing * (MainText.Length - 1)) + endSpacing;
 
                 float scalingFactor = 1.0f;
                 if (formatting.ScaleFontSize && (usedWidth > usableWidth || usedHeight > usableHeight))
                 {
                     scalingFactor = Math.Min((float)usableWidth / (float)usedWidth, (float)usableHeight / (float)usedHeight);
                     formatting.Text.MainText.Font = new Font(formatting.Text.MainText.Font.FontFamily, formatting.Text.MainText.Font.Size * scalingFactor, formatting.Text.MainText.Font.Style);
-                    strMeasure = gr.MeasureString(String.Join(Environment.NewLine, MainText), formatting.Text.MainText.Font);
-                    usedWidth = (int)strMeasure.Width;
-                    usedHeight = (int)strMeasure.Height + (formatting.Text.MainText.LineSpacing * (MainText.Length - 1));
+                    strMeasureMain = gr.MeasureString(String.Join(Environment.NewLine, MainText), formatting.Text.MainText.Font);
+                    usedWidth = (int)strMeasureMain.Width;
+                    usedHeight = (int)strMeasureMain.Height + (formatting.Text.MainText.LineSpacing * (MainText.Length - 1));
                 }
 
-                int lineHeight = (int)(strMeasure.Height / MainText.Length);
+                int lineHeight = (int)(strMeasureMain.Height / MainText.Length);
 
-                // Adapt horizontal starting position
+                // Set horizontal starting position
+                int textStartX = formatting.Text.HorizontalPadding;
                 if (formatting.Text.Orientation.Horizontal == HorizontalOrientation.Center)
                 {
                     textStartX = canvasWidth / 2;
@@ -112,7 +112,8 @@ namespace PraiseBase.Presenter
                     textStartX = textStartX + usableWidth;
                 }
 
-                // Adapt vertical starting position
+                // Set vertical starting position
+                int textStartY = formatting.Text.VerticalPadding;
                 if (formatting.Text.Orientation.Vertical == VerticalOrientation.Middle)
                 {
                     textStartY = textStartY + (usableHeight / 2) - (usedHeight / 2);
@@ -122,13 +123,25 @@ namespace PraiseBase.Presenter
                     textStartY = textStartY + usableHeight - usedHeight;
                 }
 
+                // Sub text starting position
+                int subTextStartX = textStartX;
+                if (formatting.Text.Orientation.Horizontal == HorizontalOrientation.Left)
+                {
+                    subTextStartX += formatting.Text.HorizontalSubTextOffset;
+                }
+                else if (formatting.Text.Orientation.Horizontal == HorizontalOrientation.Right)
+                {
+                    subTextStartX -= formatting.Text.HorizontalSubTextOffset;
+                }
+                int subTextStartY = textStartY + lineHeight;
+
                 // Draw main text
                 DrawLines(gr, MainText, textStartX, textStartY, formatting.Text.MainText, formatting.Text.Orientation.Horizontal, lineHeight + formatting.Text.MainText.LineSpacing);
 
                 // Sub-text (translation)
                 if (SubText != null && SubText.Length > 0)
                 {
-                    DrawLines(gr, SubText, textStartX + 10, textStartY + lineHeight, formatting.Text.SubText, formatting.Text.Orientation.Horizontal, lineHeight + formatting.Text.MainText.LineSpacing);
+                    DrawLines(gr, SubText, subTextStartX, subTextStartY, formatting.Text.SubText, formatting.Text.Orientation.Horizontal, lineHeight + formatting.Text.MainText.LineSpacing);
                 }
             }
 

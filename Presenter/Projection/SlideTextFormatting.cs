@@ -70,6 +70,11 @@ namespace PraiseBase.Presenter.Projection
             /// Horizontal padding
             /// </summary>
             public int HorizontalPadding { get; set; }
+
+            /// <summary>
+            /// Horizontal sub text offset
+            /// </summary>
+            public int HorizontalSubTextOffset { get; set; }
         }
 
         public struct TextBoxFormatting
