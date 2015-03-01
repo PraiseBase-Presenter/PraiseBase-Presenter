@@ -93,7 +93,7 @@
       <Value Profile="(Default)">1</Value>
     </Setting>
     <Setting Name="ProjectionMasterShadowDistance" Type="System.Int32" Scope="User">
-      <Value Profile="(Default)">8</Value>
+      <Value Profile="(Default)">6</Value>
     </Setting>
     <Setting Name="ProjectionUseMaster" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">True</Value>
@@ -192,7 +192,7 @@
       <Value Profile="(Default)">0</Value>
     </Setting>
     <Setting Name="ProjectionMasterShadowDirection" Type="System.Int32" Scope="User">
-      <Value Profile="(Default)">125</Value>
+      <Value Profile="(Default)">135</Value>
     </Setting>
     <Setting Name="ProjectionMasterOutlineEnabled" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">True</Value>

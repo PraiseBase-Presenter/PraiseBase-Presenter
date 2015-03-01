@@ -277,7 +277,7 @@ namespace PraiseBase.Presenter.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("8")]
+        [global::System.Configuration.DefaultSettingValueAttribute("6")]
         public int ProjectionMasterShadowDistance {
             get {
                 return ((int)(this["ProjectionMasterShadowDistance"]));
@@ -638,7 +638,7 @@ namespace PraiseBase.Presenter.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("125")]
+        [global::System.Configuration.DefaultSettingValueAttribute("135")]
         public int ProjectionMasterShadowDirection {
             get {
                 return ((int)(this["ProjectionMasterShadowDirection"]));
