@@ -82,12 +82,12 @@ namespace PraiseBase.Presenter.Model.Song
         /// <summary>
         /// Copyright position (PowerPraise)
         /// </summary>
-        public string CopyrightPosition { get; set; }
+        public AdditionalInformationPosition CopyrightPosition { get; set; }
 
         /// <summary>
         /// Source position (PowerPraise)
         /// </summary>
-        public string SourcePosition { get; set; }
+        public AdditionalInformationPosition SourcePosition { get; set; }
 
         /// <summary>
         /// Release year
@@ -264,6 +264,11 @@ namespace PraiseBase.Presenter.Model.Song
         /// Text orientation
         /// </summary>
         public TextOrientation TextOrientation { get; set; }
+
+        /// <summary>
+        /// Position of the translation text
+        /// </summary>
+        public TranslationPosition TranslationPosition { get; set; }
 
         /// <summary>
         /// True of the text should be outlined

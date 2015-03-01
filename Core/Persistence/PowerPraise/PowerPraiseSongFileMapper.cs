@@ -45,23 +45,23 @@ namespace PraiseBase.Presenter.Persistence.PowerPraise
             song.Themes.Add(ppl.Category);
 
             // Copyright text
-            song.Copyright = String.Join(" ", ppl.CopyrightText.ToArray());
+            song.Copyright = String.Join(Environment.NewLine, ppl.CopyrightText.ToArray());
             switch (ppl.CopyrightTextPosition)
             {
                 case PowerPraiseSong.CopyrightPosition.FirstSlide:
-                    song.CopyrightPosition = "firstslide";
+                    song.CopyrightPosition = AdditionalInformationPosition.FirstSlide;
                     break;
                 case PowerPraiseSong.CopyrightPosition.LastSlide:
-                    song.CopyrightPosition = "lastslide";
+                    song.CopyrightPosition = AdditionalInformationPosition.LastSlide;
                     break;
                 case PowerPraiseSong.CopyrightPosition.None:
-                    song.CopyrightPosition = "none";
+                    song.CopyrightPosition = AdditionalInformationPosition.None;
                     break;
             }
 
             // Source / songbook
             song.SongBooksString = ppl.SourceText;
-            song.SourcePosition = ppl.SourceTextEnabled ? "firstslide" : "none";
+            song.SourcePosition = ppl.SourceTextEnabled ? AdditionalInformationPosition.FirstSlide : AdditionalInformationPosition.None;
 
             // Song parts
             foreach (PowerPraiseSongPart prt in ppl.Parts)
@@ -102,34 +102,34 @@ namespace PraiseBase.Presenter.Persistence.PowerPraise
                 ppl.MainTextFontFormatting.Font,
                 ppl.MainTextFontFormatting.Color,
                 new TextOutline(ppl.MainTextFontFormatting.OutlineWidth, ppl.TextOutlineFormatting.Color),
-                new TextShadow(10, ppl.MainTextFontFormatting.ShadowDistance, ppl.TextShadowFormatting.Direction, ppl.TextShadowFormatting.Color),
+                new TextShadow(ppl.MainTextFontFormatting.ShadowDistance, 0, ppl.TextShadowFormatting.Direction, ppl.TextShadowFormatting.Color),
                 ppl.MainLineSpacing
             );
             song.TranslationText = new TextFormatting(
                 ppl.TranslationTextFontFormatting.Font,
                 ppl.TranslationTextFontFormatting.Color,
                 new TextOutline(ppl.TranslationTextFontFormatting.OutlineWidth, ppl.TextOutlineFormatting.Color),
-                new TextShadow(10, ppl.TranslationTextFontFormatting.ShadowDistance, ppl.TextShadowFormatting.Direction, ppl.TextShadowFormatting.Color),
+                new TextShadow(ppl.TranslationTextFontFormatting.ShadowDistance, 0, ppl.TextShadowFormatting.Direction, ppl.TextShadowFormatting.Color),
                 ppl.TranslationLineSpacing
             );
             song.CopyrightText = new TextFormatting(
                 ppl.CopyrightTextFontFormatting.Font,
                 ppl.CopyrightTextFontFormatting.Color,
                 new TextOutline(ppl.CopyrightTextFontFormatting.OutlineWidth, ppl.TextOutlineFormatting.Color),
-                new TextShadow(10, ppl.CopyrightTextFontFormatting.ShadowDistance, ppl.TextShadowFormatting.Direction, ppl.TextShadowFormatting.Color),
-                ppl.MainLineSpacing
+                new TextShadow(ppl.CopyrightTextFontFormatting.ShadowDistance, 0, ppl.TextShadowFormatting.Direction, ppl.TextShadowFormatting.Color),
+                0
             );
             song.SourceText = new TextFormatting(
                 ppl.SourceTextFontFormatting.Font,
                 ppl.SourceTextFontFormatting.Color,
                 new TextOutline(ppl.SourceTextFontFormatting.OutlineWidth, ppl.TextOutlineFormatting.Color),
-                new TextShadow(10, ppl.SourceTextFontFormatting.ShadowDistance, ppl.TextShadowFormatting.Direction, ppl.TextShadowFormatting.Color),
-                ppl.MainLineSpacing
+                new TextShadow(ppl.SourceTextFontFormatting.ShadowDistance, 0, ppl.TextShadowFormatting.Direction, ppl.TextShadowFormatting.Color),
+                0
             );
 
             // Text orientation
             song.TextOrientation = ppl.TextOrientation;
-            // TODO Translation position
+            song.TranslationPosition = ppl.TranslationTextPosition;
 
             // Enable or disable outline/shadow
             song.TextOutlineEnabled = ppl.TextOutlineFormatting.Enabled;
@@ -191,22 +191,22 @@ namespace PraiseBase.Presenter.Persistence.PowerPraise
 
             // Copyright text
             ppl.CopyrightText.Add(song.Copyright);
-            if (song.CopyrightPosition == "firstslide")
+            if (song.CopyrightPosition ==  AdditionalInformationPosition.FirstSlide)
             {
                 ppl.CopyrightTextPosition = PowerPraiseSong.CopyrightPosition.FirstSlide;
             }
-            else if (song.CopyrightPosition == "lastslide")
+            else if (song.CopyrightPosition == AdditionalInformationPosition.LastSlide)
             {
                 ppl.CopyrightTextPosition = PowerPraiseSong.CopyrightPosition.LastSlide;
             }
-            else if (song.CopyrightPosition == "none")
+            else if (song.CopyrightPosition == AdditionalInformationPosition.None)
             {
                 ppl.CopyrightTextPosition = PowerPraiseSong.CopyrightPosition.None;
             }
 
             // Source / songbook
             ppl.SourceText = song.SongBooksString;
-            ppl.SourceTextEnabled = (song.SourcePosition == "firstslide");
+            ppl.SourceTextEnabled = (song.SourcePosition == AdditionalInformationPosition.FirstSlide);
 
             // Formatting definitions
             if (song.MainText != null)
@@ -277,8 +277,7 @@ namespace PraiseBase.Presenter.Persistence.PowerPraise
 
             // Text orientation
             ppl.TextOrientation = song.TextOrientation;
-            // TODO Translation position
-            ppl.TranslationTextPosition = PowerPraiseSong.TranslationPosition.Inline;
+            ppl.TranslationTextPosition = song.TranslationPosition;
 
             // Borders
             if (song.TextBorders != null)

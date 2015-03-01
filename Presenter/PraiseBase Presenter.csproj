@@ -104,7 +104,8 @@
     <Compile Include="Projection\BibleLayer.cs" />
     <Compile Include="Projection\ImageLayer.cs" />
     <Compile Include="Projection\SongSlideLayer.cs" />
-    <Compile Include="Projection\SongSlideLayerFormatting.cs" />
+    <Compile Include="Projection\SlideTextFormatting.cs" />
+    <Compile Include="Projection\SongSlideTextFormattingMapper.cs" />
     <Compile Include="Properties\StringResources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -368,7 +369,9 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
-    <None Include="app.config" />
+    <None Include="app.config">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="Properties\Settings.settings">
       <Generator>PublicSettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>

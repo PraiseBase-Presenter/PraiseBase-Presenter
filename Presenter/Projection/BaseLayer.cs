@@ -29,20 +29,9 @@ namespace PraiseBase.Presenter
         public void writeOut(System.Drawing.Graphics gr)
         {
             Object[] args = { };
-            writeOut(gr, args, ProjectionMode.Projection);
+            writeOut(gr, args);
         }
 
-        public void writeOut(System.Drawing.Graphics gr, Object[] args)
-        {
-            writeOut(gr, args, ProjectionMode.Projection);
-        }
-
-        public abstract void writeOut(System.Drawing.Graphics gr, Object[] args, ProjectionMode pm);
-    }
-
-    public enum ProjectionMode
-    {
-        Simulate,
-        Projection
+        public abstract void writeOut(System.Drawing.Graphics gr, Object[] args);
     }
 }

@@ -20,24 +20,25 @@
  *
  */
 
+using System;
 using System.Drawing;
 
 namespace PraiseBase.Presenter.Model
 {
-    public class TextShadow
+    public class TextShadow : ICloneable
     {
-        public int Size { get; set; }
-
         public int Distance { get; set; }
+
+        public int Size { get; set; }
 
         public int Direction { get; set; }
 
         public Color Color { get; set; }
 
-        public TextShadow(int size, int distance, int direction, Color color)
+        public TextShadow(int distance, int size, int direction, Color color)
         {
-            Size = size;
             Distance = distance;
+            Size = size;
             Direction = direction;
             Color = color;
         }
@@ -49,10 +50,15 @@ namespace PraiseBase.Presenter.Model
         /// <returns></returns>
         public override int GetHashCode()
         {
-            return Size.GetHashCode()
-                 ^ Distance.GetHashCode()
+            return Distance.GetHashCode()
+                 ^ Size.GetHashCode()
                  ^ Direction.GetHashCode()
                  ^ Color.GetHashCode();
+        }
+
+        public object Clone()
+        {
+            return new TextShadow(Distance, Size, Direction, Color);
         }
     }
 }

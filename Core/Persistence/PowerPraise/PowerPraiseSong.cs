@@ -120,12 +120,6 @@ namespace PraiseBase.Presenter.Persistence.PowerPraise
             None
         }
 
-        public enum TranslationPosition
-        {
-            Inline,
-            Block
-        }
-
         /// <summary>
         /// Title
         /// </summary>

@@ -1,5 +1,5 @@
 ﻿<?xml version='1.0' encoding='utf-8'?>
-<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="Pbp.Properties" GeneratedClassName="Settings">
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="PraiseBase.Presenter.Properties" GeneratedClassName="Settings">
   <Profiles />
   <Settings>
     <Setting Name="DataDirectory" Type="System.String" Scope="User">
@@ -14,13 +14,13 @@
     <Setting Name="ProjectionMasterFontColor" Type="System.Drawing.Color" Scope="User">
       <Value Profile="(Default)">White</Value>
     </Setting>
-    <Setting Name="ProjectionOutlineColor" Type="System.Drawing.Color" Scope="User">
+    <Setting Name="ProjectionMasterOutlineColor" Type="System.Drawing.Color" Scope="User">
       <Value Profile="(Default)">Black</Value>
     </Setting>
     <Setting Name="ProjectionFontScaling" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">True</Value>
     </Setting>
-    <Setting Name="ProjectionPadding" Type="System.Int32" Scope="User">
+    <Setting Name="ProjectionMasterHorizontalTextPadding" Type="System.Int32" Scope="User">
       <Value Profile="(Default)">80</Value>
     </Setting>
     <Setting Name="Languages" Type="System.Collections.Specialized.StringCollection" Scope="User">
@@ -86,13 +86,13 @@
     <Setting Name="SettingsLastTabIndex" Type="System.Int32" Scope="User">
       <Value Profile="(Default)">0</Value>
     </Setting>
-    <Setting Name="ProjectionShadowColor" Type="System.Drawing.Color" Scope="User">
+    <Setting Name="ProjectionMasterShadowColor" Type="System.Drawing.Color" Scope="User">
       <Value Profile="(Default)">Black</Value>
     </Setting>
-    <Setting Name="ProjectionOutlineSize" Type="System.Int32" Scope="User">
+    <Setting Name="ProjectionMasterOutlineSize" Type="System.Int32" Scope="User">
       <Value Profile="(Default)">1</Value>
     </Setting>
-    <Setting Name="ProjectionShadowSize" Type="System.Int32" Scope="User">
+    <Setting Name="ProjectionMasterShadowDistance" Type="System.Int32" Scope="User">
       <Value Profile="(Default)">6</Value>
     </Setting>
     <Setting Name="ProjectionUseMaster" Type="System.Boolean" Scope="User">
@@ -137,7 +137,7 @@
     <Setting Name="UpdateCheckUrl" Type="System.String" Scope="Application">
       <Value Profile="(Default)">http://praisebase.org/ws/version.xml</Value>
     </Setting>
-    <Setting Name="SongSearchMode" Type="Pbp.SongSearchMode" Scope="User">
+    <Setting Name="SongSearchMode" Type="PraiseBase.Presenter.Manager.SongSearchMode" Scope="User">
       <Value Profile="(Default)">TitleAndText</Value>
     </Setting>
     <Setting Name="ProjectionFadeTimeLayer1" Type="System.Int32" Scope="User">
@@ -175,6 +175,75 @@
     </Setting>
     <Setting Name="EditorWindowSize" Type="System.Drawing.Size" Scope="User">
       <Value Profile="(Default)">1024, 768</Value>
+    </Setting>
+    <Setting Name="ProjectionMasterCopyrightFont" Type="System.Drawing.Font" Scope="User">
+      <Value Profile="(Default)">Calibri, 24pt</Value>
+    </Setting>
+    <Setting Name="ProjectionMasterSourceFont" Type="System.Drawing.Font" Scope="User">
+      <Value Profile="(Default)">Calibri, 36pt</Value>
+    </Setting>
+    <Setting Name="ProjectionMasterCopyrightColor" Type="System.Drawing.Color" Scope="User">
+      <Value Profile="(Default)">White</Value>
+    </Setting>
+    <Setting Name="ProjectionMasterSourceColor" Type="System.Drawing.Color" Scope="User">
+      <Value Profile="(Default)">White</Value>
+    </Setting>
+    <Setting Name="ProjectionMasterTranslationLineSpacing" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">0</Value>
+    </Setting>
+    <Setting Name="ProjectionMasterShadowDirection" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">135</Value>
+    </Setting>
+    <Setting Name="ProjectionMasterOutlineEnabled" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
+    <Setting Name="ProjectionMasterShadowEnabled" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="ProjectionMasterVerticalTextPadding" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">80</Value>
+    </Setting>
+    <Setting Name="ProjectionMasterHorizontalHeaderPadding" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">20</Value>
+    </Setting>
+    <Setting Name="ProjectionMasterVerticalHeaderPadding" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">40</Value>
+    </Setting>
+    <Setting Name="ProjectionMasterHorizontalFooterPadding" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">30</Value>
+    </Setting>
+    <Setting Name="ProjectionMasterVerticalFooterPadding" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">40</Value>
+    </Setting>
+    <Setting Name="ProjectionMasterHorizontalTextOrientation" Type="PraiseBase.Presenter.Model.HorizontalOrientation" Scope="User">
+      <Value Profile="(Default)">Center</Value>
+    </Setting>
+    <Setting Name="ProjectionMasterVerticalTextOrientation" Type="PraiseBase.Presenter.Model.VerticalOrientation" Scope="User">
+      <Value Profile="(Default)">Middle</Value>
+    </Setting>
+    <Setting Name="ProjectionMasterHorizontalHeaderOrientation" Type="PraiseBase.Presenter.Model.HorizontalOrientation" Scope="User">
+      <Value Profile="(Default)">Right</Value>
+    </Setting>
+    <Setting Name="ProjectionMasterHorizontalFooterOrientation" Type="PraiseBase.Presenter.Model.HorizontalOrientation" Scope="User">
+      <Value Profile="(Default)">Left</Value>
+    </Setting>
+    <Setting Name="ProjectionMasterShadowSize" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">0</Value>
+    </Setting>
+    <Setting Name="ProjectionMasterCopyrightPosition" Type="PraiseBase.Presenter.Model.AdditionalInformationPosition" Scope="User">
+      <Value Profile="(Default)">LastSlide</Value>
+    </Setting>
+    <Setting Name="ProjectionMasterSourcePosition" Type="PraiseBase.Presenter.Model.AdditionalInformationPosition" Scope="User">
+      <Value Profile="(Default)">FirstSlide</Value>
+    </Setting>
+    <Setting Name="ProjectionMasteTranslationPosition" Type="PraiseBase.Presenter.Model.TranslationPosition" Scope="User">
+      <Value Profile="(Default)">Inline</Value>
+    </Setting>
+    <Setting Name="ProjectionSmoothShadow" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="ProjectionMasterHorizontalTranslationTextOffset" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">10</Value>
     </Setting>
   </Settings>
 </SettingsFile>

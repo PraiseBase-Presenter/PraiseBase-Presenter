@@ -20,9 +20,10 @@
  *
  */
 
+using System;
 namespace PraiseBase.Presenter.Model
 {
-    public sealed class TextOrientation
+    public sealed class TextOrientation : ICloneable
     {
         public VerticalOrientation Vertical { get; set; }
         public HorizontalOrientation Horizontal { get; set; }
@@ -64,6 +65,11 @@ namespace PraiseBase.Presenter.Model
         public override int GetHashCode()
         {
             return this.Horizontal.GetHashCode() ^ (17 * this.Vertical.GetHashCode());
+        }
+
+        public object Clone()
+        {
+            return new TextOrientation(Vertical, Horizontal);
         }
     }
 

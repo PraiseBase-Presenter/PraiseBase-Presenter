@@ -43,7 +43,7 @@ namespace PraiseBase.Presenter
             this.verseSelection = verseSelection;
         }
 
-        public override void writeOut(System.Drawing.Graphics gr, object[] args, ProjectionMode pr)
+        public override void writeOut(System.Drawing.Graphics gr, object[] args)
         {
             BibleVerseSelection v = verseSelection;
 

@@ -20,11 +20,12 @@
  *
  */
 
+using System;
 using System.Drawing;
 
 namespace PraiseBase.Presenter.Model
 {
-    public class TextFormatting
+    public class TextFormatting : ICloneable
     {
         public Font Font { get; set; }
 
@@ -58,6 +59,11 @@ namespace PraiseBase.Presenter.Model
                        ^ Shadow.GetHashCode()
                        ^ LineSpacing.GetHashCode();
             return code;
+        }
+
+        public object Clone()
+        {
+            return new TextFormatting(Font, Color, (TextOutline)Outline.Clone(), (TextShadow)Shadow.Clone(), LineSpacing);
         }
     }
 }

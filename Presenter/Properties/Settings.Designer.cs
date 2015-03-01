@@ -74,12 +74,12 @@ namespace PraiseBase.Presenter.Properties {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("Black")]
-        public global::System.Drawing.Color ProjectionOutlineColor {
+        public global::System.Drawing.Color ProjectionMasterOutlineColor {
             get {
-                return ((global::System.Drawing.Color)(this["ProjectionOutlineColor"]));
+                return ((global::System.Drawing.Color)(this["ProjectionMasterOutlineColor"]));
             }
             set {
-                this["ProjectionOutlineColor"] = value;
+                this["ProjectionMasterOutlineColor"] = value;
             }
         }
         
@@ -98,12 +98,12 @@ namespace PraiseBase.Presenter.Properties {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("80")]
-        public int ProjectionPadding {
+        public int ProjectionMasterHorizontalTextPadding {
             get {
-                return ((int)(this["ProjectionPadding"]));
+                return ((int)(this["ProjectionMasterHorizontalTextPadding"]));
             }
             set {
-                this["ProjectionPadding"] = value;
+                this["ProjectionMasterHorizontalTextPadding"] = value;
             }
         }
         
@@ -254,36 +254,36 @@ namespace PraiseBase.Presenter.Properties {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("Black")]
-        public global::System.Drawing.Color ProjectionShadowColor {
+        public global::System.Drawing.Color ProjectionMasterShadowColor {
             get {
-                return ((global::System.Drawing.Color)(this["ProjectionShadowColor"]));
+                return ((global::System.Drawing.Color)(this["ProjectionMasterShadowColor"]));
             }
             set {
-                this["ProjectionShadowColor"] = value;
+                this["ProjectionMasterShadowColor"] = value;
             }
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("1")]
-        public int ProjectionOutlineSize {
+        public int ProjectionMasterOutlineSize {
             get {
-                return ((int)(this["ProjectionOutlineSize"]));
+                return ((int)(this["ProjectionMasterOutlineSize"]));
             }
             set {
-                this["ProjectionOutlineSize"] = value;
+                this["ProjectionMasterOutlineSize"] = value;
             }
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("6")]
-        public int ProjectionShadowSize {
+        public int ProjectionMasterShadowDistance {
             get {
-                return ((int)(this["ProjectionShadowSize"]));
+                return ((int)(this["ProjectionMasterShadowDistance"]));
             }
             set {
-                this["ProjectionShadowSize"] = value;
+                this["ProjectionMasterShadowDistance"] = value;
             }
         }
         
@@ -442,9 +442,9 @@ namespace PraiseBase.Presenter.Properties {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("TitleAndText")]
-        public PraiseBase.Presenter.SongSearchMode SongSearchMode {
+        public global::PraiseBase.Presenter.Manager.SongSearchMode SongSearchMode {
             get {
-                return ((global::PraiseBase.Presenter.SongSearchMode)(this["SongSearchMode"]));
+                return ((global::PraiseBase.Presenter.Manager.SongSearchMode)(this["SongSearchMode"]));
             }
             set {
                 this["SongSearchMode"] = value;
@@ -573,6 +573,282 @@ namespace PraiseBase.Presenter.Properties {
             }
             set {
                 this["EditorWindowSize"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("Calibri, 24pt")]
+        public global::System.Drawing.Font ProjectionMasterCopyrightFont {
+            get {
+                return ((global::System.Drawing.Font)(this["ProjectionMasterCopyrightFont"]));
+            }
+            set {
+                this["ProjectionMasterCopyrightFont"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("Calibri, 36pt")]
+        public global::System.Drawing.Font ProjectionMasterSourceFont {
+            get {
+                return ((global::System.Drawing.Font)(this["ProjectionMasterSourceFont"]));
+            }
+            set {
+                this["ProjectionMasterSourceFont"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("White")]
+        public global::System.Drawing.Color ProjectionMasterCopyrightColor {
+            get {
+                return ((global::System.Drawing.Color)(this["ProjectionMasterCopyrightColor"]));
+            }
+            set {
+                this["ProjectionMasterCopyrightColor"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("White")]
+        public global::System.Drawing.Color ProjectionMasterSourceColor {
+            get {
+                return ((global::System.Drawing.Color)(this["ProjectionMasterSourceColor"]));
+            }
+            set {
+                this["ProjectionMasterSourceColor"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public int ProjectionMasterTranslationLineSpacing {
+            get {
+                return ((int)(this["ProjectionMasterTranslationLineSpacing"]));
+            }
+            set {
+                this["ProjectionMasterTranslationLineSpacing"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("135")]
+        public int ProjectionMasterShadowDirection {
+            get {
+                return ((int)(this["ProjectionMasterShadowDirection"]));
+            }
+            set {
+                this["ProjectionMasterShadowDirection"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool ProjectionMasterOutlineEnabled {
+            get {
+                return ((bool)(this["ProjectionMasterOutlineEnabled"]));
+            }
+            set {
+                this["ProjectionMasterOutlineEnabled"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool ProjectionMasterShadowEnabled {
+            get {
+                return ((bool)(this["ProjectionMasterShadowEnabled"]));
+            }
+            set {
+                this["ProjectionMasterShadowEnabled"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("80")]
+        public int ProjectionMasterVerticalTextPadding {
+            get {
+                return ((int)(this["ProjectionMasterVerticalTextPadding"]));
+            }
+            set {
+                this["ProjectionMasterVerticalTextPadding"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("20")]
+        public int ProjectionMasterHorizontalHeaderPadding {
+            get {
+                return ((int)(this["ProjectionMasterHorizontalHeaderPadding"]));
+            }
+            set {
+                this["ProjectionMasterHorizontalHeaderPadding"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("40")]
+        public int ProjectionMasterVerticalHeaderPadding {
+            get {
+                return ((int)(this["ProjectionMasterVerticalHeaderPadding"]));
+            }
+            set {
+                this["ProjectionMasterVerticalHeaderPadding"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("30")]
+        public int ProjectionMasterHorizontalFooterPadding {
+            get {
+                return ((int)(this["ProjectionMasterHorizontalFooterPadding"]));
+            }
+            set {
+                this["ProjectionMasterHorizontalFooterPadding"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("40")]
+        public int ProjectionMasterVerticalFooterPadding {
+            get {
+                return ((int)(this["ProjectionMasterVerticalFooterPadding"]));
+            }
+            set {
+                this["ProjectionMasterVerticalFooterPadding"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("Center")]
+        public global::PraiseBase.Presenter.Model.HorizontalOrientation ProjectionMasterHorizontalTextOrientation {
+            get {
+                return ((global::PraiseBase.Presenter.Model.HorizontalOrientation)(this["ProjectionMasterHorizontalTextOrientation"]));
+            }
+            set {
+                this["ProjectionMasterHorizontalTextOrientation"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("Middle")]
+        public global::PraiseBase.Presenter.Model.VerticalOrientation ProjectionMasterVerticalTextOrientation {
+            get {
+                return ((global::PraiseBase.Presenter.Model.VerticalOrientation)(this["ProjectionMasterVerticalTextOrientation"]));
+            }
+            set {
+                this["ProjectionMasterVerticalTextOrientation"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("Right")]
+        public global::PraiseBase.Presenter.Model.HorizontalOrientation ProjectionMasterHorizontalHeaderOrientation {
+            get {
+                return ((global::PraiseBase.Presenter.Model.HorizontalOrientation)(this["ProjectionMasterHorizontalHeaderOrientation"]));
+            }
+            set {
+                this["ProjectionMasterHorizontalHeaderOrientation"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("Left")]
+        public global::PraiseBase.Presenter.Model.HorizontalOrientation ProjectionMasterHorizontalFooterOrientation {
+            get {
+                return ((global::PraiseBase.Presenter.Model.HorizontalOrientation)(this["ProjectionMasterHorizontalFooterOrientation"]));
+            }
+            set {
+                this["ProjectionMasterHorizontalFooterOrientation"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public int ProjectionMasterShadowSize {
+            get {
+                return ((int)(this["ProjectionMasterShadowSize"]));
+            }
+            set {
+                this["ProjectionMasterShadowSize"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("LastSlide")]
+        public global::PraiseBase.Presenter.Model.AdditionalInformationPosition ProjectionMasterCopyrightPosition {
+            get {
+                return ((global::PraiseBase.Presenter.Model.AdditionalInformationPosition)(this["ProjectionMasterCopyrightPosition"]));
+            }
+            set {
+                this["ProjectionMasterCopyrightPosition"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("FirstSlide")]
+        public global::PraiseBase.Presenter.Model.AdditionalInformationPosition ProjectionMasterSourcePosition {
+            get {
+                return ((global::PraiseBase.Presenter.Model.AdditionalInformationPosition)(this["ProjectionMasterSourcePosition"]));
+            }
+            set {
+                this["ProjectionMasterSourcePosition"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("Inline")]
+        public global::PraiseBase.Presenter.Model.TranslationPosition ProjectionMasteTranslationPosition {
+            get {
+                return ((global::PraiseBase.Presenter.Model.TranslationPosition)(this["ProjectionMasteTranslationPosition"]));
+            }
+            set {
+                this["ProjectionMasteTranslationPosition"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool ProjectionSmoothShadow {
+            get {
+                return ((bool)(this["ProjectionSmoothShadow"]));
+            }
+            set {
+                this["ProjectionSmoothShadow"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("10")]
+        public int ProjectionMasterHorizontalTranslationTextOffset {
+            get {
+                return ((int)(this["ProjectionMasterHorizontalTranslationTextOffset"]));
+            }
+            set {
+                this["ProjectionMasterHorizontalTranslationTextOffset"] = value;
             }
         }
     }

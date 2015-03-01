@@ -26,6 +26,7 @@ using System.IO;
 using PraiseBase.Presenter.Properties;
 using PraiseBase.Presenter.Persistence;
 using PraiseBase.Presenter.Model.Song;
+using PraiseBase.Presenter.Manager;
 
 namespace PraiseBase.Presenter
 {
@@ -308,14 +309,5 @@ namespace PraiseBase.Presenter
                 throw new Exception("Das Speichern der Lieddatei " + CurrentSong.Filename + " wird von diesem Dateiformat leider nicht unterstützt!");
             }
         }
-    }
-
-    /// <summary>
-    /// Search options
-    /// </summary>
-    public enum SongSearchMode
-    {
-        Title,
-        TitleAndText
     }
 }

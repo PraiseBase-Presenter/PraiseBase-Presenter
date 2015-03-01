@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Drawing;
 using PraiseBase.Presenter.Model.Song;
+using PraiseBase.Presenter.Model;
 
 namespace PraiseBase.Presenter.Persistence.PowerPraise
 {
@@ -18,12 +19,12 @@ namespace PraiseBase.Presenter.Persistence.PowerPraise
             song.Themes.Add("Anbetung");
 
             song.Copyright = "Text und Musik: Lowell Mason, 1792-1872";
-            song.CopyrightPosition = "lastslide";
+            song.CopyrightPosition = Model.AdditionalInformationPosition.LastSlide;
 
             SongBook sb = new SongBook();
             sb.Name = "grünes Buch 339";
             song.SongBooks.Add(sb);
-            song.SourcePosition = "firstslide";
+            song.SourcePosition = Model.AdditionalInformationPosition.FirstSlide;
 
             SongPart part = new SongPart();
             part.Caption = "Teil 1";
@@ -101,29 +102,29 @@ namespace PraiseBase.Presenter.Persistence.PowerPraise
                 new Font("Times New Roman", 44, FontStyle.Bold | FontStyle.Italic),
                 Color.White,
                 new Model.TextOutline(30, Color.Black),
-                new Model.TextShadow(10, 15, 125, Color.Black),
+                new Model.TextShadow(15, 0, 125, Color.Black),
                 30
             );
             song.TranslationText = new Model.TextFormatting(
                 new Font("Times New Roman", 20, FontStyle.Regular),
                 Color.White,
                 new Model.TextOutline(30, Color.Black),
-                new Model.TextShadow(10, 20, 125, Color.Black),
+                new Model.TextShadow(20, 0, 125, Color.Black),
                 20
             );
             song.CopyrightText = new Model.TextFormatting(
                 new Font("Times New Roman", 14, FontStyle.Regular),
                 Color.White,
                 new Model.TextOutline(30, Color.Black),
-                new Model.TextShadow(10, 20, 125, Color.Black),
-                30
+                new Model.TextShadow(20, 0, 125, Color.Black),
+                0
             );
             song.SourceText = new Model.TextFormatting(
                 new Font("Times New Roman", 30, FontStyle.Regular),
                 Color.White,
                 new Model.TextOutline(30, Color.Black),
-                new Model.TextShadow(10, 20, 125, Color.Black),
-                30
+                new Model.TextShadow(20, 0, 125, Color.Black),
+                0
             );
 
             song.TextOrientation = new Model.TextOrientation(Model.VerticalOrientation.Middle, Model.HorizontalOrientation.Left);
@@ -276,7 +277,7 @@ namespace PraiseBase.Presenter.Persistence.PowerPraise
 
             // Text orientation
             ppl.TextOrientation = new Model.TextOrientation(Model.VerticalOrientation.Middle, Model.HorizontalOrientation.Left);
-            ppl.TranslationTextPosition = PowerPraiseSong.TranslationPosition.Inline;
+            ppl.TranslationTextPosition = TranslationPosition.Inline;
 
             // Borders
             ppl.Borders = new PowerPraiseSong.TextBorders

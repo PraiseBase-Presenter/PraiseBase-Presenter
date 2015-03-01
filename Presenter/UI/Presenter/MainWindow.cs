@@ -40,6 +40,8 @@ using PraiseBase.Presenter.UI;
 using PraiseBase.Presenter.Model.Bible;
 using PraiseBase.Presenter.Persistence.Setlists;
 using PraiseBase.Presenter.Projection;
+using PraiseBase.Presenter.Model;
+using PraiseBase.Presenter.Model.Song;
 
 namespace PraiseBase.Presenter.Forms
 {
@@ -411,37 +413,68 @@ namespace PraiseBase.Presenter.Forms
         {
             Application.DoEvents();
 
+            var s = SongManager.Instance.CurrentSong.Song;
+
             if (listViewSongHistory.Items.Count == 0 ||
-                (Guid)listViewSongHistory.Items[0].Tag != SongManager.Instance.CurrentSong.Song.GUID)
+                (Guid)listViewSongHistory.Items[0].Tag != s.GUID)
             {
-                var lvi = new ListViewItem(SongManager.Instance.CurrentSong.Song.Title);
-                lvi.Tag = SongManager.Instance.CurrentSong.Song.GUID;
+                var lvi = new ListViewItem(s.Title);
+                lvi.Tag = s.GUID;
                 listViewSongHistory.Items.Insert(0, lvi);
                 listViewSongHistory.Columns[0].Width = -2;
             }
 
-            PraiseBase.Presenter.Model.Song.SongSlide cs = SongManager.Instance.CurrentSong.Song.Parts[e.PartNumber].Slides[e.SlideNumber];
+            PraiseBase.Presenter.Model.Song.SongSlide cs = s.Parts[e.PartNumber].Slides[e.SlideNumber];
 
-            SongSlideLayerFormatting slideFormatting = new SongSlideLayerFormatting();
+            SlideTextFormatting slideFormatting = new SlideTextFormatting();
+
+            AdditionalInformationPosition sourcePosition;
+            AdditionalInformationPosition copyrightPosition;
+
+            // Formatting based on master styling
             if (Settings.Default.ProjectionUseMaster)
             {
-                slideFormatting.TextFont = Settings.Default.ProjectionMasterFont;
-                slideFormatting.TranslationFont = Settings.Default.ProjectionMasterFontTranslation;
-                slideFormatting.LineSpacing = Settings.Default.ProjectionMasterLineSpacing;
-                slideFormatting.TextBrush = new SolidBrush(Settings.Default.ProjectionMasterFontColor);
-                slideFormatting.TranslationBrush = new SolidBrush(Settings.Default.ProjectionMasterTranslationColor);
+                SongSlideTextFormattingMapper.Map(Settings.Default, ref slideFormatting);
+                sourcePosition = Settings.Default.ProjectionMasterSourcePosition;
+                copyrightPosition = Settings.Default.ProjectionMasterCopyrightPosition;
+            }
+            // Formatting based on song settings
+            else
+            {
+                SongSlideTextFormattingMapper.Map(s, ref slideFormatting);
+                sourcePosition = s.SourcePosition;
+                copyrightPosition = s.CopyrightPosition;
+            }
+            slideFormatting.ScaleFontSize = Settings.Default.ProjectionFontScaling;
+            slideFormatting.SmoothShadow = Settings.Default.ProjectionSmoothShadow;
+
+            var ssl = new SongSlideLayer(slideFormatting);
+
+            // Set text and translation (based on translation switch state)
+            if (cs.Translated && SongManager.Instance.CurrentSong.SwitchTextAndTranlation)
+            {
+                ssl.MainText = cs.Translation.ToArray();
+                ssl.SubText = cs.Lines.ToArray();
             }
             else
             {
-                slideFormatting.TextFont = SongManager.Instance.CurrentSong.Song.MainText.Font;
-                slideFormatting.TranslationFont = SongManager.Instance.CurrentSong.Song.TranslationText.Font;
-                slideFormatting.LineSpacing = SongManager.Instance.CurrentSong.Song.MainText.LineSpacing;
-                slideFormatting.TextBrush = new SolidBrush(SongManager.Instance.CurrentSong.Song.MainText.Color);
-                slideFormatting.TranslationBrush = new SolidBrush(SongManager.Instance.CurrentSong.Song.TranslationText.Color);
+                ssl.MainText = cs.Lines.ToArray();
+                ssl.SubText = cs.Translation.ToArray();
             }
-            slideFormatting.TextOrientation = SongManager.Instance.CurrentSong.Song.TextOrientation;
-            var ssl = new SongSlideLayer(cs, slideFormatting);
-            ssl.SwitchTextAndTranslation = SongManager.Instance.CurrentSong.SwitchTextAndTranlation;
+
+            // Set header text (song source)
+            if (sourcePosition == AdditionalInformationPosition.FirstSlide && isFirstSlide(e.PartNumber, e.SlideNumber) ||
+                sourcePosition == AdditionalInformationPosition.LastSlide && isLastSlide(s, e.PartNumber, e.SlideNumber))
+            {
+                ssl.HeaderText = new String[] { s.SongBooksString };
+            }
+
+            // Set footer text (copyright)
+            if (copyrightPosition == AdditionalInformationPosition.FirstSlide && isFirstSlide(e.PartNumber, e.SlideNumber) ||
+                copyrightPosition == AdditionalInformationPosition.LastSlide && isLastSlide(s, e.PartNumber, e.SlideNumber))
+            {
+                ssl.FooterText = s.Copyright.Split(new String[] { Environment.NewLine }, StringSplitOptions.None);
+            }
 
             // CTRL pressed, use image stack
             if ((ModifierKeys & Keys.Control) == Keys.Control)
@@ -471,13 +504,23 @@ namespace PraiseBase.Presenter.Forms
             else
             {
                 ImageLayer iml = new ImageLayer();
-                iml.Image = ImageManager.Instance.GetImage(SongManager.Instance.CurrentSong.Song.GetImage(cs.ImageNumber));
+                iml.Image = ImageManager.Instance.GetImage(s.GetImage(cs.ImageNumber));
                 ProjectionManager.Instance.DisplayLayer(1, iml, Settings.Default.ProjectionFadeTimeLayer1);
                 ProjectionManager.Instance.DisplayLayer(2, ssl);
 
-                if (SongManager.Instance.CurrentSong.Song.RelativeImagePaths.Count > 0)
-                    imageHistoryAdd(SongManager.Instance.CurrentSong.Song.RelativeImagePaths[cs.ImageNumber]);
+                if (s.RelativeImagePaths.Count > 0)
+                    imageHistoryAdd(s.RelativeImagePaths[cs.ImageNumber]);
             }
+        }
+
+        private bool isFirstSlide(int partNumber, int slideNumber)
+        {
+            return partNumber == 0 && slideNumber == 0;
+        }
+
+        private bool isLastSlide(Song s, int partNumber, int slideNumber)
+        {
+            return partNumber == s.Parts.Count - 1 && slideNumber == s.Parts[partNumber].Slides.Count - 1;
         }
 
         private void songDetailElement_ImageClicked(object sender, SlideImageClickEventArgs e)

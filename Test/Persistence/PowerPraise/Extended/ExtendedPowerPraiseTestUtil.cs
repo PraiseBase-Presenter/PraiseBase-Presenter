@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Drawing;
 using PraiseBase.Presenter.Model.Song;
+using PraiseBase.Presenter.Model;
 
 namespace PraiseBase.Presenter.Persistence.PowerPraise.Extended
 {
@@ -159,7 +160,7 @@ namespace PraiseBase.Presenter.Persistence.PowerPraise.Extended
 
             // Text orientation
             ppl.TextOrientation = new Model.TextOrientation(Model.VerticalOrientation.Middle, Model.HorizontalOrientation.Left);
-            ppl.TranslationTextPosition = PowerPraiseSong.TranslationPosition.Inline;
+            ppl.TranslationTextPosition = TranslationPosition.Inline;
 
             // Borders
             ppl.Borders = new PowerPraiseSong.TextBorders
