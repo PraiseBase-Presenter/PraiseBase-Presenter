@@ -164,7 +164,7 @@ namespace PraiseBase.Presenter
             // Calculate y starting position if measuring upwards
             if (upwards)
             {
-                y -= (int)sizeMeasure.Height;
+                y -= (int)sizeMeasure.Height + ((text.Length -1) * formatting.Text.LineSpacing);
             }
 
             // Line height
