@@ -34,9 +34,24 @@ namespace PraiseBase.Presenter
     {
         private SlideTextFormatting formatting;
 
+        /// <summary>
+        /// Main text
+        /// </summary>
         public String[] MainText { get; set; }
+
+        /// <summary>
+        /// Sub text (below main text)
+        /// </summary>
         public String[] SubText { get; set; }
+
+        /// <summary>
+        /// Header text
+        /// </summary>
         public String[] HeaderText { get; set; }
+
+        /// <summary>
+        /// Footer text
+        /// </summary>
         public String[] FooterText { get; set; }
 
         public SongSlideLayer(SlideTextFormatting formatting)
@@ -175,7 +190,7 @@ namespace PraiseBase.Presenter
         }
 
         /// <summary>
-        /// Get X position on canvas based on padding and horizontal orientation
+        /// Get X position on canvas based on canvas width, padding and horizontal orientation
         /// </summary>
         /// <param name="formatting"></param>
         /// <param name="canvasWidth"></param>
@@ -215,6 +230,16 @@ namespace PraiseBase.Presenter
             }
         }
 
+        /// <summary>
+        /// Draws lines onto the graphics area
+        /// </summary>
+        /// <param name="gr">Graphics area</param>
+        /// <param name="lines">Lines</param>
+        /// <param name="textStartX">Horizontal starting position</param>
+        /// <param name="textStartY">Vertical starting position</param>
+        /// <param name="textFormatting">Formatting</param>
+        /// <param name="orientation">Horizontal orientation</param>
+        /// <param name="lineHeight">Line height (text + spacing)</param>
         private void DrawLines(Graphics gr, String[] lines, int textStartX, int textStartY,
             TextFormatting textFormatting, HorizontalOrientation orientation, int lineHeight)
         {
