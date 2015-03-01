@@ -392,20 +392,20 @@ namespace PraiseBase.Presenter.Forms
             }
             if (SongManager.Instance.CurrentSong.Song.HasTranslation)
             {
-                buttonSwitchTextAndTranslation.Enabled = true;
+                toolStripButtonToggleTranslationText.Enabled = true;
                 if (SongManager.Instance.CurrentSong.SwitchTextAndTranlation)
                 {
-                    buttonSwitchTextAndTranslation.Image = Properties.Resources.translate_cross_small;
+                    toolStripButtonToggleTranslationText.Image = Properties.Resources.translate_active;
                 }
                 else
                 {
-                    buttonSwitchTextAndTranslation.Image = Properties.Resources.translate_small;
+                    toolStripButtonToggleTranslationText.Image = Properties.Resources.translate;
                 }
             }
             else
             {
-                buttonSwitchTextAndTranslation.Enabled = false;
-                buttonSwitchTextAndTranslation.Image = Properties.Resources.translate_small;
+                toolStripButtonToggleTranslationText.Enabled = false;
+                toolStripButtonToggleTranslationText.Image = Properties.Resources.translate;
             }
         }
 
@@ -1882,26 +1882,26 @@ namespace PraiseBase.Presenter.Forms
             UpdateCheck.DoCheck(true);
         }
 
-        private void buttonSwitchTextAndTranslation_Click(object sender, EventArgs e)
+        private void toolStripButtonDataFolder_Click(object sender, EventArgs e)
+        {
+            Process.Start(Settings.Default.DataDirectory);
+        }
+
+        private void toolStripButtonToggleTranslationText_Click(object sender, EventArgs e)
         {
             if (SongManager.Instance.CurrentSong != null)
             {
                 if (SongManager.Instance.CurrentSong.SwitchTextAndTranlation)
                 {
-                    buttonSwitchTextAndTranslation.Image = Properties.Resources.translate_small;
+                    toolStripButtonToggleTranslationText.Image = Properties.Resources.translate;
                     SongManager.Instance.CurrentSong.SwitchTextAndTranlation = false;
                 }
                 else
                 {
-                    buttonSwitchTextAndTranslation.Image = Properties.Resources.translate_cross_small;
+                    toolStripButtonToggleTranslationText.Image = Properties.Resources.translate_active;
                     SongManager.Instance.CurrentSong.SwitchTextAndTranlation = true;
                 }
             }
-        }
-
-        private void toolStripButtonDataFolder_Click(object sender, EventArgs e)
-        {
-            Process.Start(Settings.Default.DataDirectory);
         }
 
     }

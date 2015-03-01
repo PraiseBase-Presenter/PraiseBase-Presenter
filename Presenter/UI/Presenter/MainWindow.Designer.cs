@@ -116,7 +116,6 @@
             this.customGroupBox2 = new PraiseBase.Presenter.Components.CustomGroupBox();
             this.tabControlTextLayer = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
-            this.buttonSwitchTextAndTranslation = new System.Windows.Forms.Button();
             this.songSearchTextBox = new PraiseBase.Presenter.Components.SearchTextBox();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.titelToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -171,6 +170,8 @@
             this.toolStripButtonDisplaySettings = new System.Windows.Forms.ToolStripButton();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
+            this.toolStripSeparator8 = new System.Windows.Forms.ToolStripSeparator();
+            this.toolStripButtonToggleTranslationText = new System.Windows.Forms.ToolStripButton();
             this.toolStripButton3 = new System.Windows.Forms.ToolStripButton();
             this.customGroupBox1 = new PraiseBase.Presenter.Components.CustomGroupBox();
             this.pictureBoxbeamerPreview = new System.Windows.Forms.PictureBox();
@@ -847,7 +848,6 @@
             // 
             // tabPage1
             // 
-            this.tabPage1.Controls.Add(this.buttonSwitchTextAndTranslation);
             this.tabPage1.Controls.Add(this.songSearchTextBox);
             this.tabPage1.Controls.Add(this.listViewSongs);
             this.tabPage1.Controls.Add(this.label3);
@@ -855,15 +855,6 @@
             resources.ApplyResources(this.tabPage1, "tabPage1");
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.UseVisualStyleBackColor = true;
-            // 
-            // buttonSwitchTextAndTranslation
-            // 
-            resources.ApplyResources(this.buttonSwitchTextAndTranslation, "buttonSwitchTextAndTranslation");
-            this.buttonSwitchTextAndTranslation.Image = global::PraiseBase.Presenter.Properties.Resources.translate_small;
-            this.buttonSwitchTextAndTranslation.Name = "buttonSwitchTextAndTranslation";
-            this.toolTipMyTooltip.SetToolTip(this.buttonSwitchTextAndTranslation, resources.GetString("buttonSwitchTextAndTranslation.ToolTip"));
-            this.buttonSwitchTextAndTranslation.UseVisualStyleBackColor = true;
-            this.buttonSwitchTextAndTranslation.Click += new System.EventHandler(this.buttonSwitchTextAndTranslation_Click);
             // 
             // songSearchTextBox
             // 
@@ -1290,12 +1281,14 @@
             this.toolStripButton5,
             this.toolStripButton1,
             this.toolStripSeparator4,
-            this.toolStripButton3,
-            this.toolStripButtonOpenCurrentSong,
             this.toolStripSeparator7,
             this.toolStripButton4,
             this.toolStripButtonDisplaySettings,
-            this.toolStripButtonDataFolder});
+            this.toolStripButtonDataFolder,
+            this.toolStripSeparator8,
+            this.toolStripButtonToggleTranslationText,
+            this.toolStripButton3,
+            this.toolStripButtonOpenCurrentSong});
             resources.ApplyResources(this.toolStrip1, "toolStrip1");
             this.toolStrip1.Name = "toolStrip1";
             // 
@@ -1303,6 +1296,19 @@
             // 
             this.toolStripSeparator4.Name = "toolStripSeparator4";
             resources.ApplyResources(this.toolStripSeparator4, "toolStripSeparator4");
+            // 
+            // toolStripSeparator8
+            // 
+            this.toolStripSeparator8.Name = "toolStripSeparator8";
+            resources.ApplyResources(this.toolStripSeparator8, "toolStripSeparator8");
+            // 
+            // toolStripButtonToggleTranslationText
+            // 
+            this.toolStripButtonToggleTranslationText.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            resources.ApplyResources(this.toolStripButtonToggleTranslationText, "toolStripButtonToggleTranslationText");
+            this.toolStripButtonToggleTranslationText.Image = global::PraiseBase.Presenter.Properties.Resources.translate;
+            this.toolStripButtonToggleTranslationText.Name = "toolStripButtonToggleTranslationText";
+            this.toolStripButtonToggleTranslationText.Click += new System.EventHandler(this.toolStripButtonToggleTranslationText_Click);
             // 
             // toolStripButton3
             // 
@@ -1602,10 +1608,11 @@
         private System.Windows.Forms.ToolStripMenuItem optionenToolStripMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
         private System.Windows.Forms.ToolStripMenuItem spracheToolStripMenuItem;
-        private System.Windows.Forms.Button buttonSwitchTextAndTranslation;
         private System.Windows.Forms.ToolTip toolTipMyTooltip;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator4;
         private System.Windows.Forms.ToolStripButton toolStripButton3;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator8;
+        private System.Windows.Forms.ToolStripButton toolStripButtonToggleTranslationText;
         
     }
 }

@@ -1488,42 +1488,6 @@
   <data name="tabControlTextLayer.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Bottom, Left, Right</value>
   </data>
-  <data name="buttonSwitchTextAndTranslation.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Right</value>
-  </data>
-  <data name="buttonSwitchTextAndTranslation.Enabled" type="System.Boolean, mscorlib">
-    <value>False</value>
-  </data>
-  <data name="buttonSwitchTextAndTranslation.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="buttonSwitchTextAndTranslation.Location" type="System.Drawing.Point, System.Drawing">
-    <value>697, 6</value>
-  </data>
-  <data name="buttonSwitchTextAndTranslation.Size" type="System.Drawing.Size, System.Drawing">
-    <value>24, 24</value>
-  </data>
-  <data name="buttonSwitchTextAndTranslation.TabIndex" type="System.Int32, mscorlib">
-    <value>34</value>
-  </data>
-  <metadata name="toolTipMyTooltip.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>683, 17</value>
-  </metadata>
-  <data name="buttonSwitchTextAndTranslation.ToolTip" xml:space="preserve">
-    <value>Text und Übersetzung vertauschen</value>
-  </data>
-  <data name="&gt;&gt;buttonSwitchTextAndTranslation.Name" xml:space="preserve">
-    <value>buttonSwitchTextAndTranslation</value>
-  </data>
-  <data name="&gt;&gt;buttonSwitchTextAndTranslation.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;buttonSwitchTextAndTranslation.Parent" xml:space="preserve">
-    <value>tabPage1</value>
-  </data>
-  <data name="&gt;&gt;buttonSwitchTextAndTranslation.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
   <data name="songSearchTextBox.Location" type="System.Drawing.Point, System.Drawing">
     <value>0, 6</value>
   </data>
@@ -1570,7 +1534,7 @@
     <value>tabPage1</value>
   </data>
   <data name="&gt;&gt;songSearchTextBox.ZOrder" xml:space="preserve">
-    <value>1</value>
+    <value>0</value>
   </data>
   <data name="listViewSongs.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Bottom, Left</value>
@@ -1597,7 +1561,7 @@
     <value>tabPage1</value>
   </data>
   <data name="&gt;&gt;listViewSongs.ZOrder" xml:space="preserve">
-    <value>2</value>
+    <value>1</value>
   </data>
   <data name="label3.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -1630,7 +1594,7 @@
     <value>tabPage1</value>
   </data>
   <data name="&gt;&gt;label3.ZOrder" xml:space="preserve">
-    <value>3</value>
+    <value>2</value>
   </data>
   <data name="songDetailElement.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Bottom, Left, Right</value>
@@ -1657,7 +1621,7 @@
     <value>tabPage1</value>
   </data>
   <data name="&gt;&gt;songDetailElement.ZOrder" xml:space="preserve">
-    <value>4</value>
+    <value>3</value>
   </data>
   <data name="tabPage1.Location" type="System.Drawing.Point, System.Drawing">
     <value>4, 29</value>
@@ -2799,6 +2763,21 @@
   <data name="toolStripSeparator4.Size" type="System.Drawing.Size, System.Drawing">
     <value>6, 43</value>
   </data>
+  <data name="toolStripSeparator8.Size" type="System.Drawing.Size, System.Drawing">
+    <value>6, 43</value>
+  </data>
+  <data name="toolStripButtonToggleTranslationText.Enabled" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="toolStripButtonToggleTranslationText.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
+    <value>Magenta</value>
+  </data>
+  <data name="toolStripButtonToggleTranslationText.Size" type="System.Drawing.Size, System.Drawing">
+    <value>40, 40</value>
+  </data>
+  <data name="toolStripButtonToggleTranslationText.Text" xml:space="preserve">
+    <value>Liedtext und Übersetzung vertauschen</value>
+  </data>
   <data name="toolStripButton3.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
     <value>Magenta</value>
   </data>
@@ -3141,6 +3120,9 @@
   <data name="&gt;&gt;customGroupBox1.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
+  <metadata name="toolTipMyTooltip.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>683, 17</value>
+  </metadata>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
@@ -5721,6 +5703,18 @@
   </data>
   <data name="&gt;&gt;toolStripSeparator4.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;toolStripSeparator8.Name" xml:space="preserve">
+    <value>toolStripSeparator8</value>
+  </data>
+  <data name="&gt;&gt;toolStripSeparator8.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;toolStripButtonToggleTranslationText.Name" xml:space="preserve">
+    <value>toolStripButtonToggleTranslationText</value>
+  </data>
+  <data name="&gt;&gt;toolStripButtonToggleTranslationText.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;toolStripButton3.Name" xml:space="preserve">
     <value>toolStripButton3</value>
