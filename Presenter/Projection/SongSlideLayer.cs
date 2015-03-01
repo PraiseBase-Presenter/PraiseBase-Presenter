@@ -128,7 +128,7 @@ namespace PraiseBase.Presenter
                 int y = formatting.Header.VerticalPadding;
 
                 // Draw
-                DrawTextBox(gr, HeaderText, x, y, formatting.Header);
+                DrawTextBox(gr, HeaderText, x, y, formatting.Header, false);
             }
 
             //
@@ -140,11 +140,10 @@ namespace PraiseBase.Presenter
                 int x = GetXPosition(formatting.Footer, canvasWidth);
 
                 // Get Y
-                SizeF footerMeasure = gr.MeasureString(String.Join(Environment.NewLine, FooterText), formatting.Footer.Text.Font);
-                int y = canvasHeight - formatting.Footer.VerticalPadding - (int)footerMeasure.Height;
+                int y = canvasHeight - formatting.Footer.VerticalPadding;
 
                 // Draw
-                DrawTextBox(gr, FooterText, x, y, formatting.Footer);
+                DrawTextBox(gr, FooterText, x, y, formatting.Footer, true);
             }
         }
 
@@ -156,10 +155,19 @@ namespace PraiseBase.Presenter
         /// <param name="x">Horizontal starting position</param>
         /// <param name="y">Vertical starting position</param>
         /// <param name="formatting">Formatting</param>
-        private void DrawTextBox(Graphics gr, String[] text, int x, int y, SlideTextFormatting.TextBoxFormatting formatting)
+        /// <param name="upwards">Calculate upwards from vertical starting position</param>
+        private void DrawTextBox(Graphics gr, String[] text, int x, int y, SlideTextFormatting.TextBoxFormatting formatting, bool upwards)
         {
-            // Measure line height
+            // Measure text height
             SizeF sizeMeasure = gr.MeasureString(String.Join(Environment.NewLine, text), formatting.Text.Font);
+
+            // Calculate y starting position if measuring upwards
+            if (upwards)
+            {
+                y -= (int)sizeMeasure.Height;
+            }
+
+            // Line height
             int lineHeight = (int)(sizeMeasure.Height / text.Length);
 
             // Draw lines
