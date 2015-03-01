@@ -69,6 +69,9 @@ namespace PraiseBase.Presenter
             //
             if (MainText.Length > 0)
             {
+                TextFormatting mainTextFormat = (TextFormatting)formatting.Text.MainText.Clone();
+                TextFormatting subTextFormat = (TextFormatting)formatting.Text.SubText.Clone();
+
                 // Width and height of text box
                 float usableWidth = canvasWidth - (formatting.Text.HorizontalPadding + formatting.Text.HorizontalPadding);
                 float usableHeight = canvasHeight - (formatting.Text.VerticalPadding + formatting.Text.VerticalPadding);
@@ -77,8 +80,8 @@ namespace PraiseBase.Presenter
                 gr.DrawRectangle(Pens.Red, new Rectangle(formatting.Text.HorizontalPadding, formatting.Text.VerticalPadding, (int)usableWidth, (int)usableHeight));
 
                 // Line spacing
-                int mainTextLineSpacing = formatting.Text.MainText.LineSpacing;
-                int subTextLineSpacing = formatting.Text.SubText.LineSpacing;
+                int mainTextLineSpacing = mainTextFormat.LineSpacing;
+                int subTextLineSpacing = subTextFormat.LineSpacing;
 
                 // Numer of lines (always use greater value)
                 int numberOfLines = MainText.Length;
@@ -89,7 +92,7 @@ namespace PraiseBase.Presenter
                 bool hasSubText = (SubText != null && numberOfSubTextLines > 0);
 
                 // Measure main text
-                SizeF strMeasureMain = gr.MeasureString(String.Join(Environment.NewLine, MainText), formatting.Text.MainText.Font);
+                SizeF strMeasureMain = gr.MeasureString(String.Join(Environment.NewLine, MainText), mainTextFormat.Font);
                 float mainTextBlockWidth = strMeasureMain.Width;
                 float mainTextBlockHeight = strMeasureMain.Height;
                 float mainTextLineHeight = mainTextBlockHeight / numberOfLines;
@@ -100,7 +103,7 @@ namespace PraiseBase.Presenter
                 float subTextLineHeight = 0f;
                 if (hasSubText)
                 {
-                    SizeF strMeasureSub = gr.MeasureString(String.Join(Environment.NewLine, SubText), formatting.Text.SubText.Font);
+                    SizeF strMeasureSub = gr.MeasureString(String.Join(Environment.NewLine, SubText), subTextFormat.Font);
                     subTextBlockWidth = strMeasureSub.Width;
                     subTextBlockHeight = strMeasureSub.Height;
                     subTextLineHeight = subTextBlockHeight / numberOfLines;
@@ -122,6 +125,8 @@ namespace PraiseBase.Presenter
                 if (formatting.ScaleFontSize && (usedWidth > usableWidth || usedHeight > usableHeight))
                 {
                     scalingFactor = Math.Min(usableWidth / usedWidth, usableHeight / usedHeight);
+                    //usedWidth *= scalingFactor;
+                    //usedHeight *= scalingFactor;
                     //formatting.Text.MainText.Font = new Font(formatting.Text.MainText.Font.FontFamily, formatting.Text.MainText.Font.Size * scalingFactor, formatting.Text.MainText.Font.Style);
                     //strMeasureMain = gr.MeasureString(String.Join(Environment.NewLine, MainText), formatting.Text.MainText.Font);
                     //usedWidth = (int)strMeasureMain.Width;
@@ -173,12 +178,12 @@ namespace PraiseBase.Presenter
                 gr.DrawRectangle(Pens.Pink, new Rectangle((int)textStartX, (int)textStartY, (int)usedWidth, (int)usedHeight));
 
                 // Draw main text
-                DrawLines(gr, MainText, textStartX, textStartY, formatting.Text.MainText, formatting.Text.Orientation.Horizontal, lineHeight);
+                DrawLines(gr, MainText, textStartX, textStartY, mainTextFormat, formatting.Text.Orientation.Horizontal, lineHeight);
 
                 // Sub-text (translation)
                 if (hasSubText)
                 {
-                    DrawLines(gr, SubText, subTextStartX, subTextStartY, formatting.Text.SubText, formatting.Text.Orientation.Horizontal, lineHeight);
+                    DrawLines(gr, SubText, subTextStartX, subTextStartY, subTextFormat, formatting.Text.Orientation.Horizontal, lineHeight);
                 }
             }
 
