@@ -111,12 +111,12 @@ namespace PraiseBase.Presenter
                 MapStringFormatAlignment(formatting.Text.Orientation.Horizontal, strFormat);
 
                 // Draw main text
-                DrawLines(gr, MainText, textStartX, textStartY, strFormat, formatting.Text.MainText, lineHeight);
+                DrawLines(gr, MainText, textStartX, textStartY, strFormat, formatting.Text.MainText, lineHeight + formatting.Text.MainText.LineSpacing);
 
                 // Sub-text (translation)
                 if (SubText != null && SubText.Length > 0)
                 {
-                    DrawLines(gr, SubText, textStartX + 10, textStartY + lineHeight, strFormat, formatting.Text.SubText, lineHeight);
+                    DrawLines(gr, SubText, textStartX + 10, textStartY + lineHeight, strFormat, formatting.Text.SubText, lineHeight + formatting.Text.MainText.LineSpacing);
                 }
             }
 
@@ -163,7 +163,7 @@ namespace PraiseBase.Presenter
             int lineHeight = (int)(sizeMeasure.Height / text.Length);
 
             // Draw lines
-            DrawLines(gr, text, x, y, strFormat, formatting.Text, lineHeight);
+            DrawLines(gr, text, x, y, strFormat, formatting.Text, lineHeight + formatting.Text.LineSpacing);
         }
 
         // Get X position on canvas based on padding and horizontal orientation
@@ -229,7 +229,7 @@ namespace PraiseBase.Presenter
                             gr.DrawString(s, textFormatting.Font, shadodBrush, new Point(x, y), strFormat);
                         }
                     }
-                    shadowY += lineHeight + textFormatting.LineSpacing;
+                    shadowY += lineHeight;
                 }
             }
 
@@ -239,6 +239,9 @@ namespace PraiseBase.Presenter
                 int outLineThickness = textFormatting.Outline.Width;
                 if (outLineThickness > 0)
                 {
+                    int outlineX = textX;
+                    int outlineY = textY;
+
                     gr.SmoothingMode = SmoothingMode.None;
                     gr.InterpolationMode = InterpolationMode.Low;
                     gr.TextRenderingHint = TextRenderingHint.ClearTypeGridFit;
@@ -247,16 +250,15 @@ namespace PraiseBase.Presenter
 
                     foreach (string s in lines)
                     {
-                        for (int x = textX - outLineThickness * 2; x <= textX + outLineThickness * 2; x += 2)
+                        for (int x = outlineX - outLineThickness * 2; x <= outlineX + outLineThickness * 2; x += 2)
                         {
-                            for (int y = textY - outLineThickness * 2; y <= textY + outLineThickness * 2; y += 2)
+                            for (int y = outlineY - outLineThickness * 2; y <= outlineY + outLineThickness * 2; y += 2)
                             {
                                 gr.DrawString(s, textFormatting.Font, br, new Point(x, y), strFormat);
                             }
                         }
-                        textY += lineHeight + textFormatting.LineSpacing;
+                        outlineY += lineHeight;
                     }
-                    textY = textStartY;
                 }
             }
 
@@ -264,7 +266,7 @@ namespace PraiseBase.Presenter
             foreach (string s in lines)
             {
                 gr.DrawString(s, textFormatting.Font, new SolidBrush(textFormatting.Color), new Point(textX, textY), strFormat);
-                textY += lineHeight + textFormatting.LineSpacing;
+                textY += lineHeight;
             }
         }
     }
