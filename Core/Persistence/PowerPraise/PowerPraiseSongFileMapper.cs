@@ -117,14 +117,14 @@ namespace PraiseBase.Presenter.Persistence.PowerPraise
                 ppl.CopyrightTextFontFormatting.Color,
                 new TextOutline(ppl.CopyrightTextFontFormatting.OutlineWidth, ppl.TextOutlineFormatting.Color),
                 new TextShadow(ppl.CopyrightTextFontFormatting.ShadowDistance, 0, ppl.TextShadowFormatting.Direction, ppl.TextShadowFormatting.Color),
-                ppl.MainLineSpacing
+                0
             );
             song.SourceText = new TextFormatting(
                 ppl.SourceTextFontFormatting.Font,
                 ppl.SourceTextFontFormatting.Color,
                 new TextOutline(ppl.SourceTextFontFormatting.OutlineWidth, ppl.TextOutlineFormatting.Color),
                 new TextShadow(ppl.SourceTextFontFormatting.ShadowDistance, 0, ppl.TextShadowFormatting.Direction, ppl.TextShadowFormatting.Color),
-                ppl.MainLineSpacing
+                0
             );
 
             // Text orientation

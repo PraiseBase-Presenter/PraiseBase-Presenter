@@ -117,14 +117,14 @@ namespace PraiseBase.Presenter.Persistence.PowerPraise
                 Color.White,
                 new Model.TextOutline(30, Color.Black),
                 new Model.TextShadow(20, 0, 125, Color.Black),
-                30
+                0
             );
             song.SourceText = new Model.TextFormatting(
                 new Font("Times New Roman", 30, FontStyle.Regular),
                 Color.White,
                 new Model.TextOutline(30, Color.Black),
                 new Model.TextShadow(20, 0, 125, Color.Black),
-                30
+                0
             );
 
             song.TextOrientation = new Model.TextOrientation(Model.VerticalOrientation.Middle, Model.HorizontalOrientation.Left);
