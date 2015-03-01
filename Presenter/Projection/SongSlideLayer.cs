@@ -54,6 +54,11 @@ namespace PraiseBase.Presenter
         /// </summary>
         public String[] FooterText { get; set; }
 
+        /// <summary>
+        /// If set to true, will draw text box borders for debugging purposes
+        /// </summary>
+        public bool DrawBordersForDebugging { get; set; }
+
         public SongSlideLayer(SlideTextFormatting formatting)
         {
             this.formatting = formatting;
@@ -76,8 +81,11 @@ namespace PraiseBase.Presenter
                 float usableWidth = canvasWidth - (formatting.Text.HorizontalPadding + formatting.Text.HorizontalPadding);
                 float usableHeight = canvasHeight - (formatting.Text.VerticalPadding + formatting.Text.VerticalPadding);
 
-                // TODO remove
-                gr.DrawRectangle(Pens.Red, new Rectangle(formatting.Text.HorizontalPadding, formatting.Text.VerticalPadding, (int)usableWidth, (int)usableHeight));
+                // Draw borders of usable area
+                if (DrawBordersForDebugging)
+                {
+                    gr.DrawRectangle(Pens.Red, new Rectangle(formatting.Text.HorizontalPadding, formatting.Text.VerticalPadding, (int)usableWidth, (int)usableHeight));
+                }
 
                 // Line spacing
                 int mainTextLineSpacing = mainTextFormat.LineSpacing;
@@ -187,8 +195,11 @@ namespace PraiseBase.Presenter
                     lineHeight += subTextLineSpacing + subTextLineHeight;
                 }
 
-                // TODO remove
-                gr.DrawRectangle(Pens.Pink, new Rectangle((int)textStartX, (int)textStartY, (int)usedWidth, (int)usedHeight));
+                // Draw borders of used area
+                if (DrawBordersForDebugging)
+                {
+                    gr.DrawRectangle(Pens.Pink, new Rectangle((int)textStartX, (int)textStartY, (int)usedWidth, (int)usedHeight));
+                }
 
                 // Draw main text
                 DrawLines(gr, MainText, textStartX, textStartY, mainTextFormat, formatting.Text.Orientation.Horizontal, lineHeight);
