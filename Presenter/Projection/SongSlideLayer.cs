@@ -86,7 +86,7 @@ namespace PraiseBase.Presenter
                 }
 
                 SizeF strMeasure = gr.MeasureString(String.Join(Environment.NewLine, MainText), formatting.Text.MainText.Font);
-                Brush shadodBrush = Brushes.Transparent;
+
                 int usedWidth = (int)strMeasure.Width;
                 int usedHeight = (int)strMeasure.Height + (formatting.Text.MainText.LineSpacing * (MainText.Length - 1)) + endSpacing;
 
@@ -99,6 +99,7 @@ namespace PraiseBase.Presenter
                     usedWidth = (int)strMeasure.Width;
                     usedHeight = (int)strMeasure.Height + (formatting.Text.MainText.LineSpacing * (MainText.Length - 1));
                 }
+
                 int lineHeight = (int)(strMeasure.Height / MainText.Length);
 
                 // Adapt horizontal starting position
