@@ -163,7 +163,6 @@
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripButton5 = new System.Windows.Forms.ToolStripButton();
             this.toolStripButton1 = new System.Windows.Forms.ToolStripButton();
-            this.toolStripSeparator7 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripButtonDataFolder = new System.Windows.Forms.ToolStripButton();
             this.toolStripButton4 = new System.Windows.Forms.ToolStripButton();
             this.toolStripButtonDisplaySettings = new System.Windows.Forms.ToolStripButton();
@@ -171,6 +170,13 @@
             this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripSeparator8 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripButtonToggleTranslationText = new System.Windows.Forms.ToolStripButton();
+            this.toolStripButtonQA = new System.Windows.Forms.ToolStripDropDownButton();
+            this.openSongEditorToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator12 = new System.Windows.Forms.ToolStripSeparator();
+            this.qaSpellingToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.qaTranslationToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.qaImagesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.qaSegmentationToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.customGroupBox1 = new PraiseBase.Presenter.Components.CustomGroupBox();
             this.pictureBoxbeamerPreview = new System.Windows.Forms.PictureBox();
             this.labelFadeTimeLayer1 = new System.Windows.Forms.Label();
@@ -183,13 +189,8 @@
             this.trackBarFadeTimeLayer1 = new System.Windows.Forms.TrackBar();
             this.trackBarFadeTime = new System.Windows.Forms.TrackBar();
             this.toolTipMyTooltip = new System.Windows.Forms.ToolTip(this.components);
-            this.toolStripButtonQA = new System.Windows.Forms.ToolStripDropDownButton();
-            this.openSongEditorToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparator12 = new System.Windows.Forms.ToolStripSeparator();
-            this.qaSpellingToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.qaTranslationToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.qaImagesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.qaSegmentationToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.qAcommentsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator13 = new System.Windows.Forms.ToolStripSeparator();
             buttonChooseDiaDir = new System.Windows.Forms.Button();
             this.menuStrip1.SuspendLayout();
             this.tabControl1.SuspendLayout();
@@ -1238,11 +1239,6 @@
             this.toolStripButton1.Name = "toolStripButton1";
             this.toolStripButton1.Click += new System.EventHandler(this.toolStripMenuItem3_Click);
             // 
-            // toolStripSeparator7
-            // 
-            this.toolStripSeparator7.Name = "toolStripSeparator7";
-            resources.ApplyResources(this.toolStripSeparator7, "toolStripSeparator7");
-            // 
             // toolStripButtonDataFolder
             // 
             this.toolStripButtonDataFolder.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
@@ -1278,7 +1274,6 @@
             this.toolStripButton5,
             this.toolStripButton1,
             this.toolStripSeparator4,
-            this.toolStripSeparator7,
             this.toolStripButton4,
             this.toolStripButtonDisplaySettings,
             this.toolStripButtonDataFolder,
@@ -1305,6 +1300,61 @@
             this.toolStripButtonToggleTranslationText.Image = global::PraiseBase.Presenter.Properties.Resources.translate;
             this.toolStripButtonToggleTranslationText.Name = "toolStripButtonToggleTranslationText";
             this.toolStripButtonToggleTranslationText.Click += new System.EventHandler(this.toolStripButtonToggleTranslationText_Click);
+            // 
+            // toolStripButtonQA
+            // 
+            this.toolStripButtonQA.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.toolStripButtonQA.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.openSongEditorToolStripMenuItem,
+            this.toolStripSeparator12,
+            this.qaSpellingToolStripMenuItem,
+            this.qaTranslationToolStripMenuItem,
+            this.qaImagesToolStripMenuItem,
+            this.qaSegmentationToolStripMenuItem,
+            this.toolStripSeparator13,
+            this.qAcommentsToolStripMenuItem});
+            resources.ApplyResources(this.toolStripButtonQA, "toolStripButtonQA");
+            this.toolStripButtonQA.Image = global::PraiseBase.Presenter.Properties.Resources.highlight_36;
+            this.toolStripButtonQA.Name = "toolStripButtonQA";
+            // 
+            // openSongEditorToolStripMenuItem
+            // 
+            this.openSongEditorToolStripMenuItem.Name = "openSongEditorToolStripMenuItem";
+            resources.ApplyResources(this.openSongEditorToolStripMenuItem, "openSongEditorToolStripMenuItem");
+            this.openSongEditorToolStripMenuItem.Click += new System.EventHandler(this.openSongEditorToolStripMenuItem_Click);
+            // 
+            // toolStripSeparator12
+            // 
+            this.toolStripSeparator12.Name = "toolStripSeparator12";
+            resources.ApplyResources(this.toolStripSeparator12, "toolStripSeparator12");
+            // 
+            // qaSpellingToolStripMenuItem
+            // 
+            this.qaSpellingToolStripMenuItem.CheckOnClick = true;
+            this.qaSpellingToolStripMenuItem.Name = "qaSpellingToolStripMenuItem";
+            resources.ApplyResources(this.qaSpellingToolStripMenuItem, "qaSpellingToolStripMenuItem");
+            this.qaSpellingToolStripMenuItem.Click += new System.EventHandler(this.qaSpellingToolStripMenuItem_Click);
+            // 
+            // qaTranslationToolStripMenuItem
+            // 
+            this.qaTranslationToolStripMenuItem.CheckOnClick = true;
+            this.qaTranslationToolStripMenuItem.Name = "qaTranslationToolStripMenuItem";
+            resources.ApplyResources(this.qaTranslationToolStripMenuItem, "qaTranslationToolStripMenuItem");
+            this.qaTranslationToolStripMenuItem.Click += new System.EventHandler(this.qaTranslationToolStripMenuItem_Click);
+            // 
+            // qaImagesToolStripMenuItem
+            // 
+            this.qaImagesToolStripMenuItem.CheckOnClick = true;
+            this.qaImagesToolStripMenuItem.Name = "qaImagesToolStripMenuItem";
+            resources.ApplyResources(this.qaImagesToolStripMenuItem, "qaImagesToolStripMenuItem");
+            this.qaImagesToolStripMenuItem.Click += new System.EventHandler(this.qaImagesToolStripMenuItem_Click);
+            // 
+            // qaSegmentationToolStripMenuItem
+            // 
+            this.qaSegmentationToolStripMenuItem.CheckOnClick = true;
+            this.qaSegmentationToolStripMenuItem.Name = "qaSegmentationToolStripMenuItem";
+            resources.ApplyResources(this.qaSegmentationToolStripMenuItem, "qaSegmentationToolStripMenuItem");
+            this.qaSegmentationToolStripMenuItem.Click += new System.EventHandler(this.qaSegmentationToolStripMenuItem_Click);
             // 
             // customGroupBox1
             // 
@@ -1393,58 +1443,16 @@
             this.trackBarFadeTime.Value = 1;
             this.trackBarFadeTime.Scroll += new System.EventHandler(this.trackBarFadeTime_Scroll);
             // 
-            // toolStripButtonQA
+            // qAcommentsToolStripMenuItem
             // 
-            this.toolStripButtonQA.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolStripButtonQA.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.openSongEditorToolStripMenuItem,
-            this.toolStripSeparator12,
-            this.qaSpellingToolStripMenuItem,
-            this.qaTranslationToolStripMenuItem,
-            this.qaImagesToolStripMenuItem,
-            this.qaSegmentationToolStripMenuItem});
-            resources.ApplyResources(this.toolStripButtonQA, "toolStripButtonQA");
-            this.toolStripButtonQA.Image = global::PraiseBase.Presenter.Properties.Resources.highlight_36;
-            this.toolStripButtonQA.Name = "toolStripButtonQA";
+            this.qAcommentsToolStripMenuItem.Name = "qAcommentsToolStripMenuItem";
+            resources.ApplyResources(this.qAcommentsToolStripMenuItem, "qAcommentsToolStripMenuItem");
+            this.qAcommentsToolStripMenuItem.Click += new System.EventHandler(this.qAcommentsToolStripMenuItem_Click);
             // 
-            // openSongEditorToolStripMenuItem
+            // toolStripSeparator13
             // 
-            this.openSongEditorToolStripMenuItem.Name = "openSongEditorToolStripMenuItem";
-            resources.ApplyResources(this.openSongEditorToolStripMenuItem, "openSongEditorToolStripMenuItem");
-            this.openSongEditorToolStripMenuItem.Click += new System.EventHandler(this.openSongEditorToolStripMenuItem_Click);
-            // 
-            // toolStripSeparator12
-            // 
-            this.toolStripSeparator12.Name = "toolStripSeparator12";
-            resources.ApplyResources(this.toolStripSeparator12, "toolStripSeparator12");
-            // 
-            // qaSpellingToolStripMenuItem
-            // 
-            this.qaSpellingToolStripMenuItem.CheckOnClick = true;
-            this.qaSpellingToolStripMenuItem.Name = "qaSpellingToolStripMenuItem";
-            resources.ApplyResources(this.qaSpellingToolStripMenuItem, "qaSpellingToolStripMenuItem");
-            this.qaSpellingToolStripMenuItem.Click += new System.EventHandler(this.qaSpellingToolStripMenuItem_Click);
-            // 
-            // qaTranslationToolStripMenuItem
-            // 
-            this.qaTranslationToolStripMenuItem.CheckOnClick = true;
-            this.qaTranslationToolStripMenuItem.Name = "qaTranslationToolStripMenuItem";
-            resources.ApplyResources(this.qaTranslationToolStripMenuItem, "qaTranslationToolStripMenuItem");
-            this.qaTranslationToolStripMenuItem.Click += new System.EventHandler(this.qaTranslationToolStripMenuItem_Click);
-            // 
-            // qaImagesToolStripMenuItem
-            // 
-            this.qaImagesToolStripMenuItem.CheckOnClick = true;
-            this.qaImagesToolStripMenuItem.Name = "qaImagesToolStripMenuItem";
-            resources.ApplyResources(this.qaImagesToolStripMenuItem, "qaImagesToolStripMenuItem");
-            this.qaImagesToolStripMenuItem.Click += new System.EventHandler(this.qaImagesToolStripMenuItem_Click);
-            // 
-            // qaSegmentationToolStripMenuItem
-            // 
-            this.qaSegmentationToolStripMenuItem.CheckOnClick = true;
-            this.qaSegmentationToolStripMenuItem.Name = "qaSegmentationToolStripMenuItem";
-            resources.ApplyResources(this.qaSegmentationToolStripMenuItem, "qaSegmentationToolStripMenuItem");
-            this.qaSegmentationToolStripMenuItem.Click += new System.EventHandler(this.qaSegmentationToolStripMenuItem_Click);
+            this.toolStripSeparator13.Name = "toolStripSeparator13";
+            resources.ApplyResources(this.toolStripSeparator13, "toolStripSeparator13");
             // 
             // MainWindow
             // 
@@ -1620,7 +1628,6 @@
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         private System.Windows.Forms.ToolStripButton toolStripButton5;
         private System.Windows.Forms.ToolStripButton toolStripButton1;
-        private System.Windows.Forms.ToolStripSeparator toolStripSeparator7;
         private System.Windows.Forms.ToolStripButton toolStripButtonDataFolder;
         private System.Windows.Forms.ToolStripButton toolStripButton4;
         private System.Windows.Forms.ToolStripButton toolStripButtonDisplaySettings;
@@ -1659,6 +1666,8 @@
         private System.Windows.Forms.ToolStripMenuItem qaTranslationToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem qaImagesToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem qaSegmentationToolStripMenuItem;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator13;
+        private System.Windows.Forms.ToolStripMenuItem qAcommentsToolStripMenuItem;
         
     }
 }

@@ -1922,5 +1922,22 @@ namespace PraiseBase.Presenter.Forms
                 toolStripButtonQA.Image = PraiseBase.Presenter.Properties.Resources.highlight_36;
             }
         }
+
+        private void qAcommentsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (SongManager.Instance.CurrentSong != null)
+            {
+                var qd = new QADialog();
+                qd.ShowDialog(this);
+                if (qd.DialogResult == DialogResult.OK)
+                {
+                    updateQAButtonStage();
+                }
+            }
+            else
+            {
+                MessageBox.Show(StringResources.NoActiveSong);
+            }
+        }
     }
 }

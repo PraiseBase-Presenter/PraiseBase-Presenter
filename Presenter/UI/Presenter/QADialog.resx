@@ -117,73 +117,28 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="buttonAccept.Text" xml:space="preserve">
-    <value>Speichern</value>
+  <assembly alias="mscorlib" name="mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="label1.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="label1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>12, 9</value>
+  </data>
+  <data name="label1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>140, 13</value>
+  </data>
+  <data name="label1.TabIndex" type="System.Int32, mscorlib">
+    <value>34</value>
   </data>
   <data name="label1.Text" xml:space="preserve">
     <value>Kommentar / Bemerkungen:</value>
   </data>
-  <data name="&gt;&gt;checkBoxQASpelling.Name" xml:space="preserve">
-    <value>checkBoxQASpelling</value>
-  </data>
-  <data name="&gt;&gt;checkBoxQATranslation.Type" xml:space="preserve">
-    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <assembly alias="System.Drawing" name="System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-  <data name="checkBoxQASpelling.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Microsoft Sans Serif, 8.25pt</value>
-  </data>
-  <assembly alias="mscorlib" name="mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="buttonAccept.TabIndex" type="System.Int32, mscorlib">
-    <value>36</value>
-  </data>
-  <data name="checkBoxQASegmentation.TabIndex" type="System.Int32, mscorlib">
-    <value>32</value>
-  </data>
-  <data name="checkBoxQASegmentation.Location" type="System.Drawing.Point, System.Drawing">
-    <value>257, 168</value>
-  </data>
-  <data name="textBoxComment.Multiline" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="buttonCancl.Size" type="System.Drawing.Size, System.Drawing">
-    <value>75, 23</value>
-  </data>
-  <data name="&gt;&gt;$this.Name" xml:space="preserve">
-    <value>QADialog</value>
-  </data>
   <data name="&gt;&gt;label1.Name" xml:space="preserve">
     <value>label1</value>
   </data>
-  <data name="&gt;&gt;checkBoxQASegmentation.Type" xml:space="preserve">
-    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;checkBoxQAImages.Name" xml:space="preserve">
-    <value>checkBoxQAImages</value>
-  </data>
-  <data name="checkBoxQATranslation.TabIndex" type="System.Int32, mscorlib">
-    <value>30</value>
-  </data>
-  <data name="checkBoxQAImages.TabIndex" type="System.Int32, mscorlib">
-    <value>31</value>
-  </data>
-  <data name="&gt;&gt;checkBoxQATranslation.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;checkBoxQASpelling.ZOrder" xml:space="preserve">
-    <value>4</value>
-  </data>
-  <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
-    <value>6, 13</value>
-  </data>
-  <data name="buttonAccept.Size" type="System.Drawing.Size, System.Drawing">
-    <value>75, 23</value>
-  </data>
-  <data name="textBoxComment.TabIndex" type="System.Int32, mscorlib">
-    <value>35</value>
-  </data>
-  <data name="checkBoxQAImages.Text" xml:space="preserve">
-    <value>Bild(er) fehlen oder müssen geändert werden</value>
+  <data name="&gt;&gt;label1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;label1.Parent" xml:space="preserve">
     <value>$this</value>
@@ -191,35 +146,71 @@
   <data name="&gt;&gt;label1.ZOrder" xml:space="preserve">
     <value>3</value>
   </data>
-  <data name="checkBoxQATranslation.Text" xml:space="preserve">
-    <value>Übersetzung fehlt/ist unvollständig</value>
+  <data name="textBoxComment.Location" type="System.Drawing.Point, System.Drawing">
+    <value>12, 34</value>
   </data>
-  <data name="label1.TabIndex" type="System.Int32, mscorlib">
-    <value>34</value>
+  <data name="textBoxComment.Multiline" type="System.Boolean, mscorlib">
+    <value>True</value>
   </data>
-  <data name="buttonCancl.Location" type="System.Drawing.Point, System.Drawing">
-    <value>371, 199</value>
+  <data name="textBoxComment.Size" type="System.Drawing.Size, System.Drawing">
+    <value>439, 159</value>
   </data>
-  <data name="&gt;&gt;textBoxComment.Parent" xml:space="preserve">
-    <value>$this</value>
+  <data name="textBoxComment.TabIndex" type="System.Int32, mscorlib">
+    <value>35</value>
+  </data>
+  <data name="&gt;&gt;textBoxComment.Name" xml:space="preserve">
+    <value>textBoxComment</value>
   </data>
   <data name="&gt;&gt;textBoxComment.Type" xml:space="preserve">
     <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="checkBoxQATranslation.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
+  <data name="&gt;&gt;textBoxComment.Parent" xml:space="preserve">
+    <value>$this</value>
   </data>
-  <data name="textBoxComment.Size" type="System.Drawing.Size, System.Drawing">
-    <value>439, 94</value>
+  <data name="&gt;&gt;textBoxComment.ZOrder" xml:space="preserve">
+    <value>2</value>
   </data>
-  <data name="checkBoxQAImages.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Microsoft Sans Serif, 8.25pt</value>
+  <data name="buttonAccept.Location" type="System.Drawing.Point, System.Drawing">
+    <value>288, 199</value>
   </data>
-  <data name="&gt;&gt;checkBoxQASegmentation.ZOrder" xml:space="preserve">
-    <value>6</value>
+  <data name="buttonAccept.Size" type="System.Drawing.Size, System.Drawing">
+    <value>75, 23</value>
   </data>
-  <data name="checkBoxQASpelling.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
+  <data name="buttonAccept.TabIndex" type="System.Int32, mscorlib">
+    <value>36</value>
+  </data>
+  <data name="buttonAccept.Text" xml:space="preserve">
+    <value>Speichern</value>
+  </data>
+  <data name="&gt;&gt;buttonAccept.Name" xml:space="preserve">
+    <value>buttonAccept</value>
+  </data>
+  <data name="&gt;&gt;buttonAccept.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;buttonAccept.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;buttonAccept.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="buttonCancl.Location" type="System.Drawing.Point, System.Drawing">
+    <value>371, 199</value>
+  </data>
+  <data name="buttonCancl.Size" type="System.Drawing.Size, System.Drawing">
+    <value>75, 23</value>
+  </data>
+  <data name="buttonCancl.TabIndex" type="System.Int32, mscorlib">
+    <value>37</value>
+  </data>
+  <data name="buttonCancl.Text" xml:space="preserve">
+    <value>Abbrechen</value>
+  </data>
+  <data name="&gt;&gt;buttonCancl.Name" xml:space="preserve">
+    <value>buttonCancl</value>
+  </data>
+  <data name="&gt;&gt;buttonCancl.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;buttonCancl.Parent" xml:space="preserve">
     <value>$this</value>
@@ -227,133 +218,26 @@
   <data name="&gt;&gt;buttonCancl.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
-  <data name="checkBoxQATranslation.Location" type="System.Drawing.Point, System.Drawing">
-    <value>257, 144</value>
-  </data>
-  <data name="&gt;&gt;checkBoxQASpelling.Type" xml:space="preserve">
-    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="checkBoxQASpelling.Text" xml:space="preserve">
-    <value>Text enthält Fehler</value>
-  </data>
-  <data name="checkBoxQASegmentation.Size" type="System.Drawing.Size, System.Drawing">
-    <value>155, 17</value>
-  </data>
-  <data name="checkBoxQASegmentation.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Microsoft Sans Serif, 8.25pt</value>
-  </data>
-  <data name="checkBoxQASpelling.TabIndex" type="System.Int32, mscorlib">
-    <value>29</value>
-  </data>
-  <data name="&gt;&gt;checkBoxQAImages.ZOrder" xml:space="preserve">
-    <value>7</value>
-  </data>
-  <data name="buttonCancl.Text" xml:space="preserve">
-    <value>Abbrechen</value>
-  </data>
-  <data name="checkBoxQAImages.Location" type="System.Drawing.Point, System.Drawing">
-    <value>15, 168</value>
-  </data>
-  <data name="&gt;&gt;textBoxComment.ZOrder" xml:space="preserve">
-    <value>2</value>
-  </data>
-  <data name="checkBoxQASegmentation.Text" xml:space="preserve">
-    <value>Textaufteilung nicht optimal</value>
-  </data>
-  <data name="&gt;&gt;checkBoxQASpelling.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="buttonCancl.TabIndex" type="System.Int32, mscorlib">
-    <value>37</value>
-  </data>
-  <data name="&gt;&gt;checkBoxQATranslation.Name" xml:space="preserve">
-    <value>checkBoxQATranslation</value>
-  </data>
-  <data name="&gt;&gt;checkBoxQATranslation.ZOrder" xml:space="preserve">
-    <value>5</value>
-  </data>
-  <data name="&gt;&gt;buttonAccept.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;textBoxComment.Name" xml:space="preserve">
-    <value>textBoxComment</value>
-  </data>
-  <data name="textBoxComment.Location" type="System.Drawing.Point, System.Drawing">
-    <value>12, 34</value>
-  </data>
-  <data name="label1.AutoSize" type="System.Boolean, mscorlib">
+  <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
-  </data>
-  <data name="checkBoxQATranslation.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Microsoft Sans Serif, 8.25pt</value>
-  </data>
-  <data name="&gt;&gt;buttonCancl.Name" xml:space="preserve">
-    <value>buttonCancl</value>
-  </data>
-  <data name="label1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>140, 13</value>
-  </data>
-  <data name="&gt;&gt;checkBoxQAImages.Type" xml:space="preserve">
-    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="checkBoxQASegmentation.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="checkBoxQASpelling.Location" type="System.Drawing.Point, System.Drawing">
-    <value>15, 145</value>
-  </data>
-  <data name="label1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>12, 9</value>
-  </data>
-  <data name="&gt;&gt;buttonAccept.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="checkBoxQASpelling.Size" type="System.Drawing.Size, System.Drawing">
-    <value>114, 17</value>
-  </data>
-  <data name="&gt;&gt;buttonAccept.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="&gt;&gt;checkBoxQASegmentation.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;buttonCancl.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;checkBoxQASegmentation.Name" xml:space="preserve">
-    <value>checkBoxQASegmentation</value>
-  </data>
-  <data name="&gt;&gt;checkBoxQAImages.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="checkBoxQATranslation.Size" type="System.Drawing.Size, System.Drawing">
-    <value>189, 17</value>
-  </data>
-  <data name="$this.Text" xml:space="preserve">
-    <value>Qualitätssicherung &amp; Bemerkungen</value>
-  </data>
-  <data name="buttonAccept.Location" type="System.Drawing.Point, System.Drawing">
-    <value>288, 199</value>
+  </metadata>
+  <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
+    <value>6, 13</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
     <value>463, 234</value>
   </data>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="$this.StartPosition" type="System.Windows.Forms.FormStartPosition, System.Windows.Forms">
+    <value>CenterScreen</value>
+  </data>
+  <data name="$this.Text" xml:space="preserve">
+    <value>Bemerkungen</value>
+  </data>
+  <data name="&gt;&gt;$this.Name" xml:space="preserve">
+    <value>QADialog</value>
+  </data>
   <data name="&gt;&gt;$this.Type" xml:space="preserve">
     <value>System.Windows.Forms.Form, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="checkBoxQAImages.Size" type="System.Drawing.Size, System.Drawing">
-    <value>236, 17</value>
-  </data>
-  <data name="&gt;&gt;label1.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;buttonAccept.Name" xml:space="preserve">
-    <value>buttonAccept</value>
-  </data>
-  <data name="checkBoxQAImages.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
 </root>
