@@ -61,8 +61,8 @@ namespace PraiseBase.Presenter
 
         public override void writeOut(System.Drawing.Graphics gr, object[] args)
         {
-            int canvasWidth = (int)gr.VisibleClipBounds.Width;
-            int canvasHeight = (int)gr.VisibleClipBounds.Height;
+            float canvasWidth = gr.VisibleClipBounds.Width;
+            float canvasHeight = gr.VisibleClipBounds.Height;
 
             //
             // Main text
@@ -70,11 +70,11 @@ namespace PraiseBase.Presenter
             if (MainText.Length > 0)
             {
                 // Width and height of text box
-                int usableWidth = canvasWidth - (formatting.Text.HorizontalPadding + formatting.Text.HorizontalPadding);
-                int usableHeight = canvasHeight - (formatting.Text.VerticalPadding + formatting.Text.VerticalPadding);
+                float usableWidth = canvasWidth - (formatting.Text.HorizontalPadding + formatting.Text.HorizontalPadding);
+                float usableHeight = canvasHeight - (formatting.Text.VerticalPadding + formatting.Text.VerticalPadding);
 
                 // TODO remove
-                gr.DrawRectangle(Pens.Red, new Rectangle(formatting.Text.HorizontalPadding, formatting.Text.VerticalPadding, usableWidth, usableHeight));
+                gr.DrawRectangle(Pens.Red, new Rectangle(formatting.Text.HorizontalPadding, formatting.Text.VerticalPadding, (int)usableWidth, (int)usableHeight));
 
                 // Line spacing
                 int mainTextLineSpacing = formatting.Text.MainText.LineSpacing;
@@ -107,21 +107,21 @@ namespace PraiseBase.Presenter
                 }
 
                 // Calculate used width
-                int usedWidth = (int)Math.Max(mainTextBlockWidth, subTextBlockWidth);
+                float usedWidth = Math.Max(mainTextBlockWidth, subTextBlockWidth);
 
                 // Calculate used height (text block + spacing beween lines)
-                int usedHeight = (int)mainTextBlockHeight + ((numberOfLines - 1) * mainTextLineSpacing);
+                float usedHeight = mainTextBlockHeight + ((numberOfLines - 1) * mainTextLineSpacing);
                 if (hasSubText)
                 {
                     // Add one sub text line height with spacing)
-                    usedHeight += (int)subTextBlockHeight + (numberOfLines  * subTextLineSpacing);
+                    usedHeight += subTextBlockHeight + (numberOfLines  * subTextLineSpacing);
                 }
 
                 // Scale text
                 float scalingFactor = 1.0f;
                 if (formatting.ScaleFontSize && (usedWidth > usableWidth || usedHeight > usableHeight))
                 {
-                    scalingFactor = Math.Min((float)usableWidth / (float)usedWidth, (float)usableHeight / (float)usedHeight);
+                    scalingFactor = Math.Min(usableWidth / usedWidth, usableHeight / usedHeight);
                     //formatting.Text.MainText.Font = new Font(formatting.Text.MainText.Font.FontFamily, formatting.Text.MainText.Font.Size * scalingFactor, formatting.Text.MainText.Font.Style);
                     //strMeasureMain = gr.MeasureString(String.Join(Environment.NewLine, MainText), formatting.Text.MainText.Font);
                     //usedWidth = (int)strMeasureMain.Width;
@@ -129,7 +129,7 @@ namespace PraiseBase.Presenter
                 }
 
                 // Set horizontal starting position
-                int textStartX = formatting.Text.HorizontalPadding;
+                float textStartX = formatting.Text.HorizontalPadding;
                 if (formatting.Text.Orientation.Horizontal == HorizontalOrientation.Center)
                 {
                     textStartX = canvasWidth / 2;
@@ -140,7 +140,7 @@ namespace PraiseBase.Presenter
                 }
 
                 // Set vertical starting position
-                int textStartY = formatting.Text.VerticalPadding;
+                float textStartY = formatting.Text.VerticalPadding;
                 if (formatting.Text.Orientation.Vertical == VerticalOrientation.Middle)
                 {
                     textStartY = textStartY + (usableHeight / 2) - (usedHeight / 2);
@@ -151,7 +151,7 @@ namespace PraiseBase.Presenter
                 }
 
                 // Sub text starting position
-                int subTextStartX = textStartX;
+                float subTextStartX = textStartX;
                 if (formatting.Text.Orientation.Horizontal == HorizontalOrientation.Left)
                 {
                     subTextStartX += formatting.Text.HorizontalSubTextOffset;
@@ -160,17 +160,17 @@ namespace PraiseBase.Presenter
                 {
                     subTextStartX -= formatting.Text.HorizontalSubTextOffset;
                 }
-                int subTextStartY = textStartY + ((int)mainTextLineHeight + subTextLineSpacing);
+                float subTextStartY = textStartY + (mainTextLineHeight + subTextLineSpacing);
 
                 // Total line heights
-                int lineHeight = (int)mainTextLineHeight + mainTextLineSpacing;
+                float lineHeight = mainTextLineHeight + mainTextLineSpacing;
                 if (hasSubText)
                 {
-                    lineHeight += subTextLineSpacing + (int)subTextLineHeight;
+                    lineHeight += subTextLineSpacing + subTextLineHeight;
                 }
 
                 // TODO remove
-                gr.DrawRectangle(Pens.Pink, new Rectangle(textStartX, textStartY, usedWidth, usedHeight));
+                gr.DrawRectangle(Pens.Pink, new Rectangle((int)textStartX, (int)textStartY, (int)usedWidth, (int)usedHeight));
 
                 // Draw main text
                 DrawLines(gr, MainText, textStartX, textStartY, formatting.Text.MainText, formatting.Text.Orientation.Horizontal, lineHeight);
@@ -188,10 +188,10 @@ namespace PraiseBase.Presenter
             if (HeaderText != null && HeaderText.Length > 0)
             {
                 // Get X
-                int x = GetXPosition(formatting.Header, canvasWidth);
+                float x = GetXPosition(formatting.Header, canvasWidth);
 
                 // Get Y
-                int y = formatting.Header.VerticalPadding;
+                float y = formatting.Header.VerticalPadding;
 
                 // Draw
                 DrawTextBox(gr, HeaderText, x, y, formatting.Header, false);
@@ -203,10 +203,10 @@ namespace PraiseBase.Presenter
             if (FooterText != null && FooterText.Length > 0)
             {
                 // Get X
-                int x = GetXPosition(formatting.Footer, canvasWidth);
+                float x = GetXPosition(formatting.Footer, canvasWidth);
 
                 // Get Y
-                int y = canvasHeight - formatting.Footer.VerticalPadding;
+                float y = canvasHeight - formatting.Footer.VerticalPadding;
 
                 // Draw
                 DrawTextBox(gr, FooterText, x, y, formatting.Footer, true);
@@ -222,7 +222,7 @@ namespace PraiseBase.Presenter
         /// <param name="y">Vertical starting position</param>
         /// <param name="formatting">Formatting</param>
         /// <param name="upwards">Calculate upwards from vertical starting position</param>
-        private void DrawTextBox(Graphics gr, String[] text, int x, int y, SlideTextFormatting.TextBoxFormatting formatting, bool upwards)
+        private void DrawTextBox(Graphics gr, String[] text, float x, float y, SlideTextFormatting.TextBoxFormatting formatting, bool upwards)
         {
             int numberOfLines = text.Length;
             int lineSpacing = formatting.Text.LineSpacing;
@@ -234,12 +234,12 @@ namespace PraiseBase.Presenter
             if (upwards)
             {
                 int lineSpacingHeight = ((numberOfLines - 1) * lineSpacing);
-                y -= (int)textBlockHeight + lineSpacingHeight;
+                y -= textBlockHeight + lineSpacingHeight;
             }
 
             // Text height
-            int textLineHeight = (int)(textBlockHeight / numberOfLines);
-            int lineHeight = textLineHeight + lineSpacing;
+            float textLineHeight = (textBlockHeight / numberOfLines);
+            float lineHeight = textLineHeight + lineSpacing;
 
             // Draw lines
             DrawLines(gr, text, x, y, formatting.Text, formatting.HorizontalOrientation, lineHeight);
@@ -251,12 +251,12 @@ namespace PraiseBase.Presenter
         /// <param name="formatting"></param>
         /// <param name="canvasWidth"></param>
         /// <returns></returns>
-        private static int GetXPosition(SlideTextFormatting.TextBoxFormatting formatting, int canvasWidth)
+        private static float GetXPosition(SlideTextFormatting.TextBoxFormatting formatting, float canvasWidth)
         {
-            int x = formatting.HorizontalPadding;
+            float x = formatting.HorizontalPadding;
             if (formatting.HorizontalOrientation == HorizontalOrientation.Center)
             {
-                x = canvasWidth / 2;
+                x = canvasWidth / 2f;
             }
             else if (formatting.HorizontalOrientation == HorizontalOrientation.Right)
             {
@@ -296,11 +296,11 @@ namespace PraiseBase.Presenter
         /// <param name="textFormatting">Formatting</param>
         /// <param name="orientation">Horizontal orientation</param>
         /// <param name="lineHeight">Line height (text + spacing)</param>
-        private void DrawLines(Graphics gr, String[] lines, int textStartX, int textStartY,
-            TextFormatting textFormatting, HorizontalOrientation orientation, int lineHeight)
+        private void DrawLines(Graphics gr, String[] lines, float textStartX, float textStartY,
+            TextFormatting textFormatting, HorizontalOrientation orientation, float lineHeight)
         {
-            int textX = textStartX;
-            int textY = textStartY;
+            float textX = textStartX;
+            float textY = textStartY;
 
             // Set string format
             StringFormat strFormat = new StringFormat();
@@ -312,8 +312,8 @@ namespace PraiseBase.Presenter
                 int size = textFormatting.Shadow.Size;
                 int distance = textFormatting.Shadow.Distance;
 
-                int shadowX = textX - (int)(distance * Math.Cos(Math.PI * (90 + textFormatting.Shadow.Direction) / 180));
-                int shadowY = textY - (int)(distance * Math.Sin(Math.PI * (90 + textFormatting.Shadow.Direction) / 180));
+                float shadowX = textX - (distance * (float)Math.Cos(Math.PI * (90 + textFormatting.Shadow.Direction) / 180));
+                float shadowY = textY - (distance * (float)Math.Sin(Math.PI * (90 + textFormatting.Shadow.Direction) / 180));
 
                 Brush shadodBrush = new SolidBrush(Color.FromArgb(15, textFormatting.Shadow.Color));
                 if (formatting.SmoothShadow)
@@ -325,11 +325,11 @@ namespace PraiseBase.Presenter
 
                 foreach (string s in lines)
                 {
-                    for (int x = shadowX - size; x <= shadowX + size; x++)
+                    for (float x = shadowX - size; x <= shadowX + size; x++)
                     {
-                        for (int y = shadowY - size; y <= shadowY + size; y++)
+                        for (float y = shadowY - size; y <= shadowY + size; y++)
                         {
-                            gr.DrawString(s, textFormatting.Font, shadodBrush, new Point(x, y), strFormat);
+                            gr.DrawString(s, textFormatting.Font, shadodBrush, x, y, strFormat);
                         }
                     }
                     shadowY += lineHeight;
@@ -342,8 +342,8 @@ namespace PraiseBase.Presenter
                 int outLineThickness = textFormatting.Outline.Width;
                 if (outLineThickness > 0)
                 {
-                    int outlineX = textX;
-                    int outlineY = textY;
+                    float outlineX = textX;
+                    float outlineY = textY;
 
                     gr.SmoothingMode = SmoothingMode.None;
                     gr.InterpolationMode = InterpolationMode.Low;
@@ -353,11 +353,11 @@ namespace PraiseBase.Presenter
 
                     foreach (string s in lines)
                     {
-                        for (int x = outlineX - outLineThickness * 2; x <= outlineX + outLineThickness * 2; x += 2)
+                        for (float x = outlineX - outLineThickness * 2; x <= outlineX + outLineThickness * 2; x += 2)
                         {
-                            for (int y = outlineY - outLineThickness * 2; y <= outlineY + outLineThickness * 2; y += 2)
+                            for (float y = outlineY - outLineThickness * 2; y <= outlineY + outLineThickness * 2; y += 2)
                             {
-                                gr.DrawString(s, textFormatting.Font, br, new Point(x, y), strFormat);
+                                gr.DrawString(s, textFormatting.Font, br, x, y, strFormat);
                             }
                         }
                         outlineY += lineHeight;
@@ -368,7 +368,7 @@ namespace PraiseBase.Presenter
             // Text
             foreach (string s in lines)
             {
-                gr.DrawString(s, textFormatting.Font, new SolidBrush(textFormatting.Color), new Point(textX, textY), strFormat);
+                gr.DrawString(s, textFormatting.Font, new SolidBrush(textFormatting.Color), textX, textY, strFormat);
                 textY += lineHeight;
             }
         }
