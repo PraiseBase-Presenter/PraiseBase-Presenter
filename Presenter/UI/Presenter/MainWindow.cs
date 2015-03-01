@@ -382,30 +382,29 @@ namespace PraiseBase.Presenter.Forms
             label3.Text = SongManager.Instance.CurrentSong.Song.Title;
             songDetailElement.setSong(SongManager.Instance.CurrentSong.Song);
 
-            if (SongManager.Instance.CurrentSong.Song.Comment != String.Empty || SongManager.Instance.CurrentSong.Song.HasQA())
-            {
-                toolStripButton3.Image = PraiseBase.Presenter.Properties.Resources.highlight_red__36;
-            }
-            else
-            {
-                toolStripButton3.Image = PraiseBase.Presenter.Properties.Resources.highlight_36;
-            }
+            toolStripButtonQA.Enabled = true;
+            updateQAButtonStage();
+            qaSpellingToolStripMenuItem.Checked = SongManager.Instance.CurrentSong.Song.GetQA(SongQualityAssuranceIndicator.Spelling);
+            qaTranslationToolStripMenuItem.Checked = SongManager.Instance.CurrentSong.Song.GetQA(SongQualityAssuranceIndicator.Translation);
+            qaImagesToolStripMenuItem.Checked = SongManager.Instance.CurrentSong.Song.GetQA(SongQualityAssuranceIndicator.Images);
+            qaSegmentationToolStripMenuItem.Checked = SongManager.Instance.CurrentSong.Song.GetQA(SongQualityAssuranceIndicator.Segmentation);
+
             if (SongManager.Instance.CurrentSong.Song.HasTranslation)
             {
-                buttonSwitchTextAndTranslation.Enabled = true;
+                toolStripButtonToggleTranslationText.Enabled = true;
                 if (SongManager.Instance.CurrentSong.SwitchTextAndTranlation)
                 {
-                    buttonSwitchTextAndTranslation.Image = Properties.Resources.translate_cross_small;
+                    toolStripButtonToggleTranslationText.Image = Properties.Resources.translate_active;
                 }
                 else
                 {
-                    buttonSwitchTextAndTranslation.Image = Properties.Resources.translate_small;
+                    toolStripButtonToggleTranslationText.Image = Properties.Resources.translate;
                 }
             }
             else
             {
-                buttonSwitchTextAndTranslation.Enabled = false;
-                buttonSwitchTextAndTranslation.Image = Properties.Resources.translate_small;
+                toolStripButtonToggleTranslationText.Enabled = false;
+                toolStripButtonToggleTranslationText.Image = Properties.Resources.translate;
             }
         }
 
@@ -1288,23 +1287,6 @@ namespace PraiseBase.Presenter.Forms
             Process.Start(Settings.Default.DataDirectory);
         }
 
-        private void toolStripButtonOpenCurrentSong_Click(object sender, EventArgs e)
-        {
-            if (listViewSongs.SelectedItems.Count > 0)
-            {
-                SongEditor wnd = SongEditor.getInstance();
-                wnd.openSong(SongManager.Instance.CurrentSong.Filename);
-                wnd.Show();
-                wnd.Focus();
-            }
-            else
-            {
-                SongEditor wnd = SongEditor.getInstance();
-                wnd.Show();
-                wnd.Focus();
-            }
-        }
-
         private void toolStripMenuItem3_Click(object sender, EventArgs e)
         {
             var dlg = new SongBrowserDialog();
@@ -1401,38 +1383,6 @@ namespace PraiseBase.Presenter.Forms
                 iml.Image = ImageManager.Instance.GetImageFromRelPath((string)listViewImageQueue.Items[idx].Tag);
                 ProjectionManager.Instance.DisplayLayer(1, iml, Settings.Default.ProjectionFadeTimeLayer1);
             }
-        }
-
-        private void toolStripButton3_Click(object sender, EventArgs e)
-        {
-            if (SongManager.Instance.CurrentSong != null)
-            {
-                var qd = new QADialog();
-                qd.ShowDialog(this);
-                if (qd.DialogResult == DialogResult.OK)
-                {
-                    //labelComment.Text = SongManager.Instance.CurrentSong.Comment;
-                    //alignCommentLabel(;
-                    if (SongManager.Instance.CurrentSong.Song.Comment != String.Empty ||
-                        SongManager.Instance.CurrentSong.Song.HasQA())
-                    {
-                        toolStripButton3.Image = PraiseBase.Presenter.Properties.Resources.highlight_red__36;
-                    }
-                    else
-                    {
-                        toolStripButton3.Image = PraiseBase.Presenter.Properties.Resources.highlight_36;
-                    }
-                }
-            }
-            else
-            {
-                MessageBox.Show(StringResources.NoActiveSong);
-            }
-        }
-
-        private void labelComment_Click(object sender, EventArgs e)
-        {
-            toolStripButton3_Click(sender, e);
         }
 
         private void button2_Click_1(object sender, EventArgs e)
@@ -1882,27 +1832,112 @@ namespace PraiseBase.Presenter.Forms
             UpdateCheck.DoCheck(true);
         }
 
-        private void buttonSwitchTextAndTranslation_Click(object sender, EventArgs e)
-        {
-            if (SongManager.Instance.CurrentSong != null)
-            {
-                if (SongManager.Instance.CurrentSong.SwitchTextAndTranlation)
-                {
-                    buttonSwitchTextAndTranslation.Image = Properties.Resources.translate_small;
-                    SongManager.Instance.CurrentSong.SwitchTextAndTranlation = false;
-                }
-                else
-                {
-                    buttonSwitchTextAndTranslation.Image = Properties.Resources.translate_cross_small;
-                    SongManager.Instance.CurrentSong.SwitchTextAndTranlation = true;
-                }
-            }
-        }
-
         private void toolStripButtonDataFolder_Click(object sender, EventArgs e)
         {
             Process.Start(Settings.Default.DataDirectory);
         }
 
+        private void toolStripButtonToggleTranslationText_Click(object sender, EventArgs e)
+        {
+            if (SongManager.Instance.CurrentSong != null)
+            {
+                if (SongManager.Instance.CurrentSong.SwitchTextAndTranlation)
+                {
+                    toolStripButtonToggleTranslationText.Image = Properties.Resources.translate;
+                    SongManager.Instance.CurrentSong.SwitchTextAndTranlation = false;
+                }
+                else
+                {
+                    toolStripButtonToggleTranslationText.Image = Properties.Resources.translate_active;
+                    SongManager.Instance.CurrentSong.SwitchTextAndTranlation = true;
+                }
+            }
+        }
+
+        private void openSongEditorToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (listViewSongs.SelectedItems.Count > 0)
+            {
+                SongEditor wnd = SongEditor.getInstance();
+                wnd.openSong(SongManager.Instance.CurrentSong.Filename);
+                wnd.Show();
+                wnd.Focus();
+            }
+            else
+            {
+                SongEditor wnd = SongEditor.getInstance();
+                wnd.Show();
+                wnd.Focus();
+            }
+        }
+
+        private void qaSpellingToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            SongManager.Instance.CurrentSong.Song.SetQA(SongQualityAssuranceIndicator.Spelling, qaSpellingToolStripMenuItem.Checked);
+            saveCurrentSong();
+            updateQAButtonStage();
+        }
+
+        private void qaTranslationToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            SongManager.Instance.CurrentSong.Song.SetQA(SongQualityAssuranceIndicator.Translation, qaTranslationToolStripMenuItem.Checked);
+            saveCurrentSong();
+            updateQAButtonStage();
+        }
+
+        private void qaImagesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            SongManager.Instance.CurrentSong.Song.SetQA(SongQualityAssuranceIndicator.Images, qaImagesToolStripMenuItem.Checked);
+            saveCurrentSong();
+            updateQAButtonStage();
+        }
+
+        private void qaSegmentationToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            SongManager.Instance.CurrentSong.Song.SetQA(SongQualityAssuranceIndicator.Segmentation, qaSegmentationToolStripMenuItem.Checked);
+            saveCurrentSong();
+            updateQAButtonStage();
+        }
+
+        private void saveCurrentSong()
+        {
+            try
+            {
+                SongManager.Instance.SaveCurrentSong();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Fehler", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void updateQAButtonStage()
+        {
+            if (SongManager.Instance.CurrentSong.Song.Comment != String.Empty || SongManager.Instance.CurrentSong.Song.HasQA())
+            {
+                toolStripButtonQA.Image = PraiseBase.Presenter.Properties.Resources.highlight_red__36;
+            }
+            else
+            {
+                toolStripButtonQA.Image = PraiseBase.Presenter.Properties.Resources.highlight_36;
+            }
+        }
+
+        private void qAcommentsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (SongManager.Instance.CurrentSong != null)
+            {
+                var qd = new QADialog();
+                qd.ShowDialog(this);
+                if (qd.DialogResult == DialogResult.OK)
+                {
+                    updateQAButtonStage();
+                }
+            }
+            else
+            {
+                MessageBox.Show(StringResources.NoActiveSong);
+            }
+        }
     }
 }

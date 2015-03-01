@@ -29,39 +29,11 @@
 		private void InitializeComponent()
 		{
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(QADialog));
-            this.checkBoxQASegmentation = new System.Windows.Forms.CheckBox();
-            this.checkBoxQAImages = new System.Windows.Forms.CheckBox();
-            this.checkBoxQATranslation = new System.Windows.Forms.CheckBox();
-            this.checkBoxQASpelling = new System.Windows.Forms.CheckBox();
             this.label1 = new System.Windows.Forms.Label();
             this.textBoxComment = new System.Windows.Forms.TextBox();
             this.buttonAccept = new System.Windows.Forms.Button();
             this.buttonCancl = new System.Windows.Forms.Button();
             this.SuspendLayout();
-            // 
-            // checkBoxQASegmentation
-            // 
-            resources.ApplyResources(this.checkBoxQASegmentation, "checkBoxQASegmentation");
-            this.checkBoxQASegmentation.Name = "checkBoxQASegmentation";
-            this.checkBoxQASegmentation.UseVisualStyleBackColor = true;
-            // 
-            // checkBoxQAImages
-            // 
-            resources.ApplyResources(this.checkBoxQAImages, "checkBoxQAImages");
-            this.checkBoxQAImages.Name = "checkBoxQAImages";
-            this.checkBoxQAImages.UseVisualStyleBackColor = true;
-            // 
-            // checkBoxQATranslation
-            // 
-            resources.ApplyResources(this.checkBoxQATranslation, "checkBoxQATranslation");
-            this.checkBoxQATranslation.Name = "checkBoxQATranslation";
-            this.checkBoxQATranslation.UseVisualStyleBackColor = true;
-            // 
-            // checkBoxQASpelling
-            // 
-            resources.ApplyResources(this.checkBoxQASpelling, "checkBoxQASpelling");
-            this.checkBoxQASpelling.Name = "checkBoxQASpelling";
-            this.checkBoxQASpelling.UseVisualStyleBackColor = true;
             // 
             // label1
             // 
@@ -82,8 +54,8 @@
             // 
             // buttonCancl
             // 
-            resources.ApplyResources(this.buttonCancl, "buttonCancl");
             this.buttonCancl.DialogResult = System.Windows.Forms.DialogResult.Cancel;
+            resources.ApplyResources(this.buttonCancl, "buttonCancl");
             this.buttonCancl.Name = "buttonCancl";
             this.buttonCancl.UseVisualStyleBackColor = true;
             // 
@@ -98,10 +70,6 @@
             this.Controls.Add(this.buttonAccept);
             this.Controls.Add(this.textBoxComment);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.checkBoxQASpelling);
-            this.Controls.Add(this.checkBoxQATranslation);
-            this.Controls.Add(this.checkBoxQASegmentation);
-            this.Controls.Add(this.checkBoxQAImages);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.Name = "QADialog";
             this.Load += new System.EventHandler(this.QADialog_Load);
@@ -112,11 +80,7 @@
 
 		#endregion
 
-		private System.Windows.Forms.CheckBox checkBoxQASegmentation;
-		private System.Windows.Forms.CheckBox checkBoxQAImages;
-		private System.Windows.Forms.CheckBox checkBoxQATranslation;
-		private System.Windows.Forms.CheckBox checkBoxQASpelling;
-		private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label label1;
 		private System.Windows.Forms.TextBox textBoxComment;
 		private System.Windows.Forms.Button buttonAccept;
 		private System.Windows.Forms.Button buttonCancl;

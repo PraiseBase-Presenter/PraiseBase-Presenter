@@ -249,6 +249,7 @@
     <None Include="Properties\Application\editsong_36.png" />
     <None Include="Properties\Application\newsong_36.png" />
     <None Include="Properties\Application\save_36.png" />
+    <Content Include="Properties\Application\translate_active.png" />
     <Content Include="Resources\Doc\License.txt" />
     <None Include="Properties\Application\translate_disabled.png" />
     <None Include="Properties\Application\translate.png" />
