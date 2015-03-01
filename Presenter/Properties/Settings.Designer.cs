@@ -376,7 +376,7 @@ namespace PraiseBase.Presenter.Properties {
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("Thumbs")]
+        [global::System.Configuration.DefaultSettingValueAttribute("Backgrounds\\[Thumbnails]")]
         public string ThumbDir {
             get {
                 return ((string)(this["ThumbDir"]));
