@@ -137,6 +137,15 @@ namespace PraiseBase.Presenter.Forms
                 sng.TextOutlineEnabled = settings.ProjectionMasterOutlineEnabled;
                 sng.TextShadowEnabled = settings.ProjectionMasterShadowEnabled;
 
+                sng.TextBorders = new SongTextBorders(
+                    settings.ProjectionMasterHorizontalTextPadding,
+                    settings.ProjectionMasterVerticalTextPadding,
+                    settings.ProjectionMasterHorizontalTextPadding,
+                    settings.ProjectionMasterVerticalTextPadding,
+                    settings.ProjectionMasterVerticalFooterPadding,
+                    settings.ProjectionMasterVerticalHeaderPadding,
+                    settings.ProjectionMasterHorizontalHeaderPadding
+                );
             }
 
             // Set window title
