@@ -69,37 +69,64 @@ namespace PraiseBase.Presenter
             //
             if (MainText.Length > 0)
             {
-                int usableWidth = canvasWidth - (2 * formatting.Text.HorizontalPadding);
-                int usableHeight = canvasHeight - (2 * formatting.Text.VerticalPadding);
+                // Width and height of text box
+                int usableWidth = canvasWidth - (formatting.Text.HorizontalPadding + formatting.Text.HorizontalPadding);
+                int usableHeight = canvasHeight - (formatting.Text.VerticalPadding + formatting.Text.VerticalPadding);
 
-                SizeF strMeasureMain;
-                SizeF strMeasureSub;
+                // TODO remove
+                gr.DrawRectangle(Pens.Red, new Rectangle(formatting.Text.HorizontalPadding, formatting.Text.VerticalPadding, usableWidth, usableHeight));
 
-                int endSpacing = 0;
-                if (SubText != null && SubText.Length > 0)
+                // Line spacing
+                int mainTextLineSpacing = formatting.Text.MainText.LineSpacing;
+                int subTextLineSpacing = formatting.Text.SubText.LineSpacing;
+
+                // Numer of lines (always use greater value)
+                int numberOfLines = MainText.Length;
+                int numberOfSubTextLines = SubText.Length;
+                numberOfLines = Math.Max(numberOfLines, numberOfSubTextLines);
+
+                // True if sub text is set
+                bool hasSubText = (SubText != null && numberOfSubTextLines > 0);
+
+                // Measure main text
+                SizeF strMeasureMain = gr.MeasureString(String.Join(Environment.NewLine, MainText), formatting.Text.MainText.Font);
+                float mainTextBlockWidth = strMeasureMain.Width;
+                float mainTextBlockHeight = strMeasureMain.Height;
+                float mainTextLineHeight = mainTextBlockHeight / numberOfLines;
+
+                // Measure sub text
+                float subTextBlockWidth = 0f;
+                float subTextBlockHeight = 0f;
+                float subTextLineHeight = 0f;
+                if (hasSubText)
                 {
-                    strMeasureSub = gr.MeasureString(String.Join(Environment.NewLine, SubText), formatting.Text.SubText.Font);
-                    
-                    formatting.Text.MainText.LineSpacing += (int)(strMeasureSub.Height / SubText.Length) + formatting.Text.SubText.LineSpacing;
-                    endSpacing = (int)(strMeasureSub.Height / SubText.Length) + formatting.Text.SubText.LineSpacing;
+                    SizeF strMeasureSub = gr.MeasureString(String.Join(Environment.NewLine, SubText), formatting.Text.SubText.Font);
+                    subTextBlockWidth = strMeasureSub.Width;
+                    subTextBlockHeight = strMeasureSub.Height;
+                    subTextLineHeight = subTextBlockHeight / numberOfLines;
                 }
 
-                strMeasureMain = gr.MeasureString(String.Join(Environment.NewLine, MainText), formatting.Text.MainText.Font);
+                // Calculate used width
+                int usedWidth = (int)Math.Max(mainTextBlockWidth, subTextBlockWidth);
 
-                int usedWidth = (int)strMeasureMain.Width;
-                int usedHeight = (int)strMeasureMain.Height + (formatting.Text.MainText.LineSpacing * (MainText.Length - 1)) + endSpacing;
+                // Calculate used height (text block + spacing beween lines)
+                int usedHeight = (int)mainTextBlockHeight + ((numberOfLines - 1) * mainTextLineSpacing);
+                if (hasSubText)
+                {
+                    // Add one sub text line height with spacing)
+                    usedHeight += (int)subTextBlockHeight + (numberOfLines  * subTextLineSpacing);
+                }
 
+                // Scale text
                 float scalingFactor = 1.0f;
                 if (formatting.ScaleFontSize && (usedWidth > usableWidth || usedHeight > usableHeight))
                 {
                     scalingFactor = Math.Min((float)usableWidth / (float)usedWidth, (float)usableHeight / (float)usedHeight);
-                    formatting.Text.MainText.Font = new Font(formatting.Text.MainText.Font.FontFamily, formatting.Text.MainText.Font.Size * scalingFactor, formatting.Text.MainText.Font.Style);
-                    strMeasureMain = gr.MeasureString(String.Join(Environment.NewLine, MainText), formatting.Text.MainText.Font);
-                    usedWidth = (int)strMeasureMain.Width;
-                    usedHeight = (int)strMeasureMain.Height + (formatting.Text.MainText.LineSpacing * (MainText.Length - 1));
+                    //formatting.Text.MainText.Font = new Font(formatting.Text.MainText.Font.FontFamily, formatting.Text.MainText.Font.Size * scalingFactor, formatting.Text.MainText.Font.Style);
+                    //strMeasureMain = gr.MeasureString(String.Join(Environment.NewLine, MainText), formatting.Text.MainText.Font);
+                    //usedWidth = (int)strMeasureMain.Width;
+                    //usedHeight = (int)strMeasureMain.Height + (formatting.Text.MainText.LineSpacing * (MainText.Length - 1));
                 }
-
-                int lineHeight = (int)(strMeasureMain.Height / MainText.Length);
 
                 // Set horizontal starting position
                 int textStartX = formatting.Text.HorizontalPadding;
@@ -133,15 +160,25 @@ namespace PraiseBase.Presenter
                 {
                     subTextStartX -= formatting.Text.HorizontalSubTextOffset;
                 }
-                int subTextStartY = textStartY + lineHeight;
+                int subTextStartY = textStartY + ((int)mainTextLineHeight + subTextLineSpacing);
+
+                // Total line heights
+                int lineHeight = (int)mainTextLineHeight + mainTextLineSpacing;
+                if (hasSubText)
+                {
+                    lineHeight += subTextLineSpacing + (int)subTextLineHeight;
+                }
+
+                // TODO remove
+                gr.DrawRectangle(Pens.Pink, new Rectangle(textStartX, textStartY, usedWidth, usedHeight));
 
                 // Draw main text
-                DrawLines(gr, MainText, textStartX, textStartY, formatting.Text.MainText, formatting.Text.Orientation.Horizontal, lineHeight + formatting.Text.MainText.LineSpacing);
+                DrawLines(gr, MainText, textStartX, textStartY, formatting.Text.MainText, formatting.Text.Orientation.Horizontal, lineHeight);
 
                 // Sub-text (translation)
-                if (SubText != null && SubText.Length > 0)
+                if (hasSubText)
                 {
-                    DrawLines(gr, SubText, subTextStartX, subTextStartY, formatting.Text.SubText, formatting.Text.Orientation.Horizontal, lineHeight + formatting.Text.MainText.LineSpacing);
+                    DrawLines(gr, SubText, subTextStartX, subTextStartY, formatting.Text.SubText, formatting.Text.Orientation.Horizontal, lineHeight);
                 }
             }
 
@@ -187,20 +224,25 @@ namespace PraiseBase.Presenter
         /// <param name="upwards">Calculate upwards from vertical starting position</param>
         private void DrawTextBox(Graphics gr, String[] text, int x, int y, SlideTextFormatting.TextBoxFormatting formatting, bool upwards)
         {
+            int numberOfLines = text.Length;
+            int lineSpacing = formatting.Text.LineSpacing;
+
             // Measure text height
-            SizeF sizeMeasure = gr.MeasureString(String.Join(Environment.NewLine, text), formatting.Text.Font);
+            float textBlockHeight = gr.MeasureString(String.Join(Environment.NewLine, text), formatting.Text.Font).Height;
 
             // Calculate y starting position if measuring upwards
             if (upwards)
             {
-                y -= (int)sizeMeasure.Height + ((text.Length -1) * formatting.Text.LineSpacing);
+                int lineSpacingHeight = ((numberOfLines - 1) * lineSpacing);
+                y -= (int)textBlockHeight + lineSpacingHeight;
             }
 
-            // Line height
-            int lineHeight = (int)(sizeMeasure.Height / text.Length);
+            // Text height
+            int textLineHeight = (int)(textBlockHeight / numberOfLines);
+            int lineHeight = textLineHeight + lineSpacing;
 
             // Draw lines
-            DrawLines(gr, text, x, y, formatting.Text, formatting.HorizontalOrientation, lineHeight + formatting.Text.LineSpacing);
+            DrawLines(gr, text, x, y, formatting.Text, formatting.HorizontalOrientation, lineHeight);
         }
 
         /// <summary>
