@@ -203,9 +203,6 @@
   <data name="&gt;&gt;textBoxComment.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="buttonAccept.Location" type="System.Drawing.Point, System.Drawing">
-    <value>288, 199</value>
-  </data>
   <data name="&gt;&gt;textBoxComment.Type" xml:space="preserve">
     <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
@@ -229,6 +226,9 @@
   </data>
   <data name="&gt;&gt;buttonCancl.ZOrder" xml:space="preserve">
     <value>0</value>
+  </data>
+  <data name="checkBoxQATranslation.Location" type="System.Drawing.Point, System.Drawing">
+    <value>257, 144</value>
   </data>
   <data name="&gt;&gt;checkBoxQASpelling.Type" xml:space="preserve">
     <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -293,8 +293,8 @@
   <data name="label1.Size" type="System.Drawing.Size, System.Drawing">
     <value>140, 13</value>
   </data>
-  <data name="checkBoxQAImages.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
+  <data name="&gt;&gt;checkBoxQAImages.Type" xml:space="preserve">
+    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="checkBoxQASegmentation.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -332,8 +332,8 @@
   <data name="$this.Text" xml:space="preserve">
     <value>Qualitätssicherung &amp; Bemerkungen</value>
   </data>
-  <data name="checkBoxQATranslation.Location" type="System.Drawing.Point, System.Drawing">
-    <value>257, 144</value>
+  <data name="buttonAccept.Location" type="System.Drawing.Point, System.Drawing">
+    <value>288, 199</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
     <value>463, 234</value>
@@ -350,13 +350,10 @@
   <data name="&gt;&gt;buttonAccept.Name" xml:space="preserve">
     <value>buttonAccept</value>
   </data>
-  <data name="&gt;&gt;checkBoxQAImages.Type" xml:space="preserve">
-    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="checkBoxQAImages.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
   </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
-  </metadata>
-  <metadata name="$this.Language" type="System.Globalization.CultureInfo, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>en-US</value>
   </metadata>
 </root>

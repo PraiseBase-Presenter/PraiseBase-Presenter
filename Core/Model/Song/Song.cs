@@ -384,6 +384,23 @@ namespace PraiseBase.Presenter.Model.Song
         }
 
         /// <summary>
+        /// Sets a specific quality assurance indicator
+        /// </summary>
+        /// <param name="quai">The indicator to be added</param>
+        /// <param name="set">True to set value</param>
+        public void SetQA(SongQualityAssuranceIndicator quai, bool set)
+        {
+            if (GetQA(quai)) 
+            {
+                QualityIssues.Remove(quai);
+            }
+            else
+            {
+                QualityIssues.Add(quai);
+            }
+        }
+
+        /// <summary>
         /// Removes a specific quality assurance indicator
         /// </summary>
         /// <param name="quai">The indicator to be removed</param>
