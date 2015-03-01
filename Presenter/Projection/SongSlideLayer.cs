@@ -124,13 +124,26 @@ namespace PraiseBase.Presenter
                 float scalingFactor = 1.0f;
                 if (formatting.ScaleFontSize && (usedWidth > usableWidth || usedHeight > usableHeight))
                 {
+                    // Calculate scaling factor
                     scalingFactor = Math.Min(usableWidth / usedWidth, usableHeight / usedHeight);
-                    //usedWidth *= scalingFactor;
-                    //usedHeight *= scalingFactor;
-                    //formatting.Text.MainText.Font = new Font(formatting.Text.MainText.Font.FontFamily, formatting.Text.MainText.Font.Size * scalingFactor, formatting.Text.MainText.Font.Style);
-                    //strMeasureMain = gr.MeasureString(String.Join(Environment.NewLine, MainText), formatting.Text.MainText.Font);
-                    //usedWidth = (int)strMeasureMain.Width;
-                    //usedHeight = (int)strMeasureMain.Height + (formatting.Text.MainText.LineSpacing * (MainText.Length - 1));
+                    
+                    // Adapt main text format
+                    mainTextFormat.Font = new Font(mainTextFormat.Font.FontFamily, mainTextFormat.Font.Size * scalingFactor, mainTextFormat.Font.Style);
+                    mainTextFormat.LineSpacing = (int)(mainTextFormat.LineSpacing * scalingFactor);
+                    mainTextLineSpacing = mainTextFormat.LineSpacing;
+                    
+                    // Adapt sub text format
+                    subTextFormat.Font = new Font(subTextFormat.Font.FontFamily, subTextFormat.Font.Size * scalingFactor, subTextFormat.Font.Style);
+                    subTextFormat.LineSpacing = (int)(subTextFormat.LineSpacing * scalingFactor);
+                    subTextLineSpacing = subTextFormat.LineSpacing;
+
+                    // Adapt used width and height
+                    usedWidth *= scalingFactor;
+                    usedHeight *= scalingFactor;
+
+                    // Adapt line height
+                    mainTextLineHeight *= scalingFactor;
+                    subTextLineHeight *= scalingFactor;
                 }
 
                 // Set horizontal starting position
