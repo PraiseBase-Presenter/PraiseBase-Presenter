@@ -93,7 +93,7 @@
       <Value Profile="(Default)">1</Value>
     </Setting>
     <Setting Name="ProjectionMasterShadowDistance" Type="System.Int32" Scope="User">
-      <Value Profile="(Default)">6</Value>
+      <Value Profile="(Default)">8</Value>
     </Setting>
     <Setting Name="ProjectionUseMaster" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">True</Value>
@@ -228,7 +228,7 @@
       <Value Profile="(Default)">Left</Value>
     </Setting>
     <Setting Name="ProjectionMasterShadowSize" Type="System.Int32" Scope="User">
-      <Value Profile="(Default)">3</Value>
+      <Value Profile="(Default)">0</Value>
     </Setting>
     <Setting Name="ProjectionMasterCopyrightPosition" Type="PraiseBase.Presenter.Model.AdditionalInformationPosition" Scope="User">
       <Value Profile="(Default)">LastSlide</Value>
@@ -240,7 +240,7 @@
       <Value Profile="(Default)">Inline</Value>
     </Setting>
     <Setting Name="ProjectionSmoothShadow" Type="System.Boolean" Scope="User">
-      <Value Profile="(Default)">True</Value>
+      <Value Profile="(Default)">False</Value>
     </Setting>
   </Settings>
 </SettingsFile>

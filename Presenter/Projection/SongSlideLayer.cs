@@ -209,8 +209,8 @@ namespace PraiseBase.Presenter
                 int size = textFormatting.Shadow.Size;
                 int distance = textFormatting.Shadow.Distance;
 
-                int shadowX = textX + distance;
-                int shadowY = textY + distance;
+                int shadowX = textX - (int)(distance * Math.Cos(Math.PI * (90 + textFormatting.Shadow.Direction) / 180));
+                int shadowY = textY - (int)(distance * Math.Sin(Math.PI * (90 + textFormatting.Shadow.Direction) / 180));
 
                 Brush shadodBrush = new SolidBrush(Color.FromArgb(15, textFormatting.Shadow.Color));
                 if (formatting.SmoothShadow)
