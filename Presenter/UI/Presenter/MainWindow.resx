@@ -847,7 +847,7 @@
     <value>searchTextBoxImages</value>
   </data>
   <data name="&gt;&gt;searchTextBoxImages.Type" xml:space="preserve">
-    <value>Pbp.Components.SearchTextBox, PraiseBase Presenter, Version=1.1.3.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>PraiseBase.Presenter.Components.SearchTextBox, PraiseBase Presenter, Version=1.1.3.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;searchTextBoxImages.Parent" xml:space="preserve">
     <value>tabPageImageBrowser</value>
@@ -1474,7 +1474,7 @@
     <value>customGroupBox3</value>
   </data>
   <data name="&gt;&gt;customGroupBox3.Type" xml:space="preserve">
-    <value>Pbp.Components.CustomGroupBox, PraiseBase Presenter, Version=1.1.3.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>PraiseBase.Presenter.Components.CustomGroupBox, PraiseBase Presenter, Version=1.1.3.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;customGroupBox3.Parent" xml:space="preserve">
     <value>tableLayoutPanel1</value>
@@ -1564,7 +1564,7 @@
     <value>songSearchTextBox</value>
   </data>
   <data name="&gt;&gt;songSearchTextBox.Type" xml:space="preserve">
-    <value>Pbp.Components.SearchTextBox, PraiseBase Presenter, Version=1.1.3.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>PraiseBase.Presenter.Components.SearchTextBox, PraiseBase Presenter, Version=1.1.3.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;songSearchTextBox.Parent" xml:space="preserve">
     <value>tabPage1</value>
@@ -2122,7 +2122,7 @@
     <value>searchTextBoxBible</value>
   </data>
   <data name="&gt;&gt;searchTextBoxBible.Type" xml:space="preserve">
-    <value>Pbp.Components.SearchTextBox, PraiseBase Presenter, Version=1.1.3.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>PraiseBase.Presenter.Components.SearchTextBox, PraiseBase Presenter, Version=1.1.3.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;searchTextBoxBible.Parent" xml:space="preserve">
     <value>tabPage5</value>
@@ -2662,7 +2662,7 @@
     <value>customGroupBox2</value>
   </data>
   <data name="&gt;&gt;customGroupBox2.Type" xml:space="preserve">
-    <value>Pbp.Components.CustomGroupBox, PraiseBase Presenter, Version=1.1.3.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>PraiseBase.Presenter.Components.CustomGroupBox, PraiseBase Presenter, Version=1.1.3.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;customGroupBox2.Parent" xml:space="preserve">
     <value>tableLayoutPanel1</value>
@@ -2763,15 +2763,6 @@
   <data name="toolStripButton1.Text" xml:space="preserve">
     <value>Liederbrowser</value>
   </data>
-  <data name="toolStripButton3.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
-    <value>Magenta</value>
-  </data>
-  <data name="toolStripButton3.Size" type="System.Drawing.Size, System.Drawing">
-    <value>40, 40</value>
-  </data>
-  <data name="toolStripButton3.Text" xml:space="preserve">
-    <value>Qualitätssicherung &amp; Bemerkungen</value>
-  </data>
   <data name="toolStripSeparator7.Size" type="System.Drawing.Size, System.Drawing">
     <value>6, 43</value>
   </data>
@@ -2805,6 +2796,18 @@
   <metadata name="toolStrip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>287, 17</value>
   </metadata>
+  <data name="toolStripSeparator4.Size" type="System.Drawing.Size, System.Drawing">
+    <value>6, 43</value>
+  </data>
+  <data name="toolStripButton3.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
+    <value>Magenta</value>
+  </data>
+  <data name="toolStripButton3.Size" type="System.Drawing.Size, System.Drawing">
+    <value>40, 40</value>
+  </data>
+  <data name="toolStripButton3.Text" xml:space="preserve">
+    <value>Qualitätssicherung &amp; Bemerkungen</value>
+  </data>
   <data name="toolStrip1.Location" type="System.Drawing.Point, System.Drawing">
     <value>0, 24</value>
   </data>
@@ -3130,7 +3133,7 @@
     <value>customGroupBox1</value>
   </data>
   <data name="&gt;&gt;customGroupBox1.Type" xml:space="preserve">
-    <value>Pbp.Components.CustomGroupBox, PraiseBase Presenter, Version=1.1.3.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>PraiseBase.Presenter.Components.CustomGroupBox, PraiseBase Presenter, Version=1.1.3.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;customGroupBox1.Parent" xml:space="preserve">
     <value>$this</value>
@@ -5689,12 +5692,6 @@
   <data name="&gt;&gt;toolStripButton1.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;toolStripButton3.Name" xml:space="preserve">
-    <value>toolStripButton3</value>
-  </data>
-  <data name="&gt;&gt;toolStripButton3.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
   <data name="&gt;&gt;toolStripSeparator7.Name" xml:space="preserve">
     <value>toolStripSeparator7</value>
   </data>
@@ -5719,6 +5716,18 @@
   <data name="&gt;&gt;toolStripButtonDisplaySettings.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
+  <data name="&gt;&gt;toolStripSeparator4.Name" xml:space="preserve">
+    <value>toolStripSeparator4</value>
+  </data>
+  <data name="&gt;&gt;toolStripSeparator4.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;toolStripButton3.Name" xml:space="preserve">
+    <value>toolStripButton3</value>
+  </data>
+  <data name="&gt;&gt;toolStripButton3.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
   <data name="&gt;&gt;toolTipMyTooltip.Name" xml:space="preserve">
     <value>toolTipMyTooltip</value>
   </data>
@@ -5729,6 +5738,6 @@
     <value>MainWindow</value>
   </data>
   <data name="&gt;&gt;$this.Type" xml:space="preserve">
-    <value>Pbp.UI.LocalizableForm, PraiseBase Presenter, Version=1.1.3.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>PraiseBase.Presenter.UI.LocalizableForm, PraiseBase Presenter, Version=1.1.3.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
 </root>

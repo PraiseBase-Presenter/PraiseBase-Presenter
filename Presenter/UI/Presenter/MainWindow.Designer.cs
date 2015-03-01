@@ -165,12 +165,13 @@
             this.toolStripButton5 = new System.Windows.Forms.ToolStripButton();
             this.toolStripButtonOpenCurrentSong = new System.Windows.Forms.ToolStripButton();
             this.toolStripButton1 = new System.Windows.Forms.ToolStripButton();
-            this.toolStripButton3 = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator7 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripButtonDataFolder = new System.Windows.Forms.ToolStripButton();
             this.toolStripButton4 = new System.Windows.Forms.ToolStripButton();
             this.toolStripButtonDisplaySettings = new System.Windows.Forms.ToolStripButton();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
+            this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
+            this.toolStripButton3 = new System.Windows.Forms.ToolStripButton();
             this.customGroupBox1 = new PraiseBase.Presenter.Components.CustomGroupBox();
             this.pictureBoxbeamerPreview = new System.Windows.Forms.PictureBox();
             this.labelFadeTimeLayer1 = new System.Windows.Forms.Label();
@@ -1249,14 +1250,6 @@
             this.toolStripButton1.Name = "toolStripButton1";
             this.toolStripButton1.Click += new System.EventHandler(this.toolStripMenuItem3_Click);
             // 
-            // toolStripButton3
-            // 
-            this.toolStripButton3.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolStripButton3.Image = global::PraiseBase.Presenter.Properties.Resources.highlight_36;
-            resources.ApplyResources(this.toolStripButton3, "toolStripButton3");
-            this.toolStripButton3.Name = "toolStripButton3";
-            this.toolStripButton3.Click += new System.EventHandler(this.toolStripButton3_Click);
-            // 
             // toolStripSeparator7
             // 
             this.toolStripSeparator7.Name = "toolStripSeparator7";
@@ -1295,15 +1288,29 @@
             this.toolStripButtonProjectionOn,
             this.toolStripSeparator1,
             this.toolStripButton5,
-            this.toolStripButtonOpenCurrentSong,
             this.toolStripButton1,
+            this.toolStripSeparator4,
             this.toolStripButton3,
+            this.toolStripButtonOpenCurrentSong,
             this.toolStripSeparator7,
             this.toolStripButton4,
             this.toolStripButtonDisplaySettings,
             this.toolStripButtonDataFolder});
             resources.ApplyResources(this.toolStrip1, "toolStrip1");
             this.toolStrip1.Name = "toolStrip1";
+            // 
+            // toolStripSeparator4
+            // 
+            this.toolStripSeparator4.Name = "toolStripSeparator4";
+            resources.ApplyResources(this.toolStripSeparator4, "toolStripSeparator4");
+            // 
+            // toolStripButton3
+            // 
+            this.toolStripButton3.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.toolStripButton3.Image = global::PraiseBase.Presenter.Properties.Resources.highlight_36;
+            resources.ApplyResources(this.toolStripButton3, "toolStripButton3");
+            this.toolStripButton3.Name = "toolStripButton3";
+            this.toolStripButton3.Click += new System.EventHandler(this.toolStripButton3_Click);
             // 
             // customGroupBox1
             // 
@@ -1567,7 +1574,6 @@
         private System.Windows.Forms.ToolStripButton toolStripButton5;
         private System.Windows.Forms.ToolStripButton toolStripButtonOpenCurrentSong;
         private System.Windows.Forms.ToolStripButton toolStripButton1;
-        private System.Windows.Forms.ToolStripButton toolStripButton3;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator7;
         private System.Windows.Forms.ToolStripButton toolStripButtonDataFolder;
         private System.Windows.Forms.ToolStripButton toolStripButton4;
@@ -1598,6 +1604,8 @@
         private System.Windows.Forms.ToolStripMenuItem spracheToolStripMenuItem;
         private System.Windows.Forms.Button buttonSwitchTextAndTranslation;
         private System.Windows.Forms.ToolTip toolTipMyTooltip;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator4;
+        private System.Windows.Forms.ToolStripButton toolStripButton3;
         
     }
 }
