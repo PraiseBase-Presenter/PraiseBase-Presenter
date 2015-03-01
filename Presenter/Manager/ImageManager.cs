@@ -241,7 +241,7 @@ namespace PraiseBase.Presenter
             string[] imgFilePaths = Directory.GetFiles(rootDir, "*.jpg", SearchOption.AllDirectories);
             foreach (string ims in imgFilePaths)
             {
-                if (!ims.Contains("[Thumbnails]"))
+                if (!ims.Contains("[Thumbnails]") && !ims.StartsWith(ThumbDirPath))
                 {
                     string haystack = Path.GetFileNameWithoutExtension(ims);
                     if (haystack.ToLower().Contains(needle))
