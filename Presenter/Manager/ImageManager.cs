@@ -95,18 +95,17 @@ namespace PraiseBase.Presenter
         /// </summary>
         protected ImageManager()
         {
-            ImageDirPath = Settings.Default.DataDirectory + Path.DirectorySeparatorChar + 
-                Settings.Default.ImageDir;
+            ImageDirPath = Settings.Default.DataDirectory + Path.DirectorySeparatorChar + Settings.Default.ImageDir;
             if (!Directory.Exists(ImageDirPath))
             {
                 Directory.CreateDirectory(ImageDirPath);
             }
 
-            ThumbDirPath = Settings.Default.DataDirectory + Path.DirectorySeparatorChar +
-                Settings.Default.ThumbDir;
+            ThumbDirPath = Settings.Default.DataDirectory + Path.DirectorySeparatorChar + Settings.Default.ThumbDir;
             if (!Directory.Exists(ThumbDirPath))
             {
-                Directory.CreateDirectory(ThumbDirPath);
+                DirectoryInfo di = Directory.CreateDirectory(ThumbDirPath);
+                di.Attributes = FileAttributes.Directory | FileAttributes.Hidden; 
             }
         }
 
@@ -139,7 +138,7 @@ namespace PraiseBase.Presenter
                 string[] paths = Directory.GetFiles(ImageDirPath, ext, SearchOption.AllDirectories);
                 foreach (string file in paths)
                 {
-                    if (!file.Contains("[Thumbnails]"))
+                    if (!file.Contains("[Thumbnails]") && !file.StartsWith(ThumbDirPath))
                     {
                         string relativePath = file.Substring((ImageDirPath + Path.DirectorySeparatorChar).Length);
                         string thumbPath = ThumbDirPath + Path.DirectorySeparatorChar + relativePath;

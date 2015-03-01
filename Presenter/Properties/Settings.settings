@@ -120,7 +120,7 @@
       <Value Profile="(Default)">80, 60</Value>
     </Setting>
     <Setting Name="ThumbDir" Type="System.String" Scope="Application">
-      <Value Profile="(Default)">Thumbs</Value>
+      <Value Profile="(Default)">Backgrounds\[Thumbnails]</Value>
     </Setting>
     <Setting Name="ShowLoadingScreen" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">True</Value>
