@@ -914,6 +914,10 @@ namespace PraiseBase.Presenter.Forms
 
             SongSlideTextFormattingMapper.Map(sng, ref slideFormatting);
 
+            // Disabled for performance
+            slideFormatting.OutlineEnabled = false;
+            slideFormatting.SmoothShadow = false;
+
             slideFormatting.ScaleFontSize = Settings.Default.ProjectionFontScaling;
             slideFormatting.SmoothShadow = false;
 
