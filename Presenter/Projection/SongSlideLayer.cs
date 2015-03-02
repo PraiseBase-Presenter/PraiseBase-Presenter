@@ -93,7 +93,7 @@ namespace PraiseBase.Presenter
 
                 // Numer of lines (always use greater value)
                 int numberOfLines = MainText.Length;
-                int numberOfSubTextLines = SubText.Length;
+                int numberOfSubTextLines = SubText != null ? SubText.Length : 0;
                 numberOfLines = Math.Max(numberOfLines, numberOfSubTextLines);
 
                 // True if sub text is set
