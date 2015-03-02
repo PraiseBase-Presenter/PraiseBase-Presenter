@@ -117,11 +117,6 @@ namespace PraiseBase.Presenter.Forms
             linkLayers = Settings.Default.LinkLayers;
             setLinkLayerUI();
 
-            comboBox1.SelectedIndex = 0;
-            comboBox2.SelectedIndex = 0;
-
-            numericUpDown1.Value = (int)Settings.Default.ProjectionMasterFont.Size;
-
             if (Settings.Default.SongSearchMode == SongSearchMode.Title)
             {
                 titelToolStripMenuItem.Checked = true;
@@ -1454,24 +1449,17 @@ namespace PraiseBase.Presenter.Forms
 
         private void buttonShowLiveText_Click(object sender, EventArgs e)
         {
-            var lt =
-                new LiveText(textBoxLiveText.SelectedText != String.Empty
+            String text = textBoxLiveText.SelectedText != String.Empty
                                  ? textBoxLiveText.SelectedText
-                                 : textBoxLiveText.Text);
-            if (comboBox1.SelectedIndex == 2)
-                lt.HorizontalAlign = StringAlignment.Far;
-            else if (comboBox1.SelectedIndex == 1)
-                lt.HorizontalAlign = StringAlignment.Center;
-            else
-                lt.HorizontalAlign = StringAlignment.Near;
+                                 : textBoxLiveText.Text;
 
-            if (comboBox2.SelectedIndex == 2)
-                lt.VerticalAlign = StringAlignment.Far;
-            else if (comboBox2.SelectedIndex == 1)
-                lt.VerticalAlign = StringAlignment.Center;
-            else
-                lt.VerticalAlign = StringAlignment.Near;
-            lt.FontSize = (float)numericUpDown1.Value;
+            SlideTextFormatting slideFormatting = new SlideTextFormatting();
+            SongSlideTextFormattingMapper.Map(Settings.Default, ref slideFormatting);
+            slideFormatting.ScaleFontSize = Settings.Default.ProjectionFontScaling;
+            slideFormatting.SmoothShadow = Settings.Default.ProjectionSmoothShadow;
+
+            SongSlideLayer lt = new SongSlideLayer(slideFormatting);
+            lt.MainText = text.Split(new String[] { Environment.NewLine }, StringSplitOptions.None);
 
             ProjectionManager.Instance.DisplayLayer(2, lt);
         }
