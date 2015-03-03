@@ -1676,11 +1676,31 @@ namespace PraiseBase.Presenter.Forms
 
         private void buttonBibleTextShow_Click(object sender, EventArgs e)
         {
-            var bl =
-                new BibleLayer(new PraiseBase.Presenter.Model.Bible.BibleVerseSelection(((PraiseBase.Presenter.Model.Bible.BibleVerse)listBoxBibleVerse.SelectedItem),
-                                                           ((PraiseBase.Presenter.Model.Bible.BibleVerse)listBoxBibleVerseTo.SelectedItem)));
-            bl.FontSize = (float)numericUpDown2.Value;
-            ProjectionManager.Instance.DisplayLayer(2, bl);
+            BibleVerseSelection vs = new BibleVerseSelection(
+                ((BibleVerse)listBoxBibleVerse.SelectedItem),
+                ((BibleVerse)listBoxBibleVerseTo.SelectedItem));
+
+            BibleManager.BibleItem bibleItem = ((KeyValuePair<String, BibleManager.BibleItem>)comboBoxBible.SelectedItem).Value;
+            string[] copyright = new String[] { bibleItem.Bible.Title, bibleItem.Bible.Publisher };
+
+            string title = vs.ToString();
+            string text = vs.Text;
+
+            // TODO Dedicated formatting for bible text
+            SlideTextFormatting slideFormatting = new SlideTextFormatting();
+            SongSlideTextFormattingMapper.Map(Settings.Default, ref slideFormatting);
+            slideFormatting.ScaleFontSize = Settings.Default.ProjectionFontScaling;
+            slideFormatting.SmoothShadow = Settings.Default.ProjectionSmoothShadow;
+
+            slideFormatting.LineWrap = true;
+
+            SongSlideLayer lt = new SongSlideLayer(slideFormatting);
+            
+            lt.MainText = text.Split(new String[] { Environment.NewLine }, StringSplitOptions.None);
+            lt.HeaderText = new String[] { title };
+            lt.FooterText = copyright;
+
+            ProjectionManager.Instance.DisplayLayer(2, lt);
         }
 
         private void button1_Click_3(object sender, EventArgs e)

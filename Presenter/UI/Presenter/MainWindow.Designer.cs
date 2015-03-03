@@ -137,8 +137,6 @@
             this.listViewBibleVerseList = new Bol.WinControls.ListViewEx();
             this.columnHeader3 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.label11 = new System.Windows.Forms.Label();
-            this.label10 = new System.Windows.Forms.Label();
-            this.numericUpDown2 = new System.Windows.Forms.NumericUpDown();
             this.listBoxBibleVerseTo = new System.Windows.Forms.ListBox();
             this.labelBibleTextName = new System.Windows.Forms.Label();
             this.buttonBibleTextShow = new System.Windows.Forms.Button();
@@ -204,7 +202,6 @@
             this.contextMenuStrip1.SuspendLayout();
             this.tabPage2.SuspendLayout();
             this.tabPage5.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown2)).BeginInit();
             this.toolStrip1.SuspendLayout();
             this.customGroupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxbeamerPreview)).BeginInit();
@@ -946,8 +943,6 @@
             this.tabPage5.Controls.Add(this.searchTextBoxBible);
             this.tabPage5.Controls.Add(this.listViewBibleVerseList);
             this.tabPage5.Controls.Add(this.label11);
-            this.tabPage5.Controls.Add(this.label10);
-            this.tabPage5.Controls.Add(this.numericUpDown2);
             this.tabPage5.Controls.Add(this.listBoxBibleVerseTo);
             this.tabPage5.Controls.Add(this.labelBibleTextName);
             this.tabPage5.Controls.Add(this.buttonBibleTextShow);
@@ -1023,31 +1018,6 @@
             // 
             resources.ApplyResources(this.label11, "label11");
             this.label11.Name = "label11";
-            // 
-            // label10
-            // 
-            resources.ApplyResources(this.label10, "label10");
-            this.label10.Name = "label10";
-            // 
-            // numericUpDown2
-            // 
-            resources.ApplyResources(this.numericUpDown2, "numericUpDown2");
-            this.numericUpDown2.Maximum = new decimal(new int[] {
-            150,
-            0,
-            0,
-            0});
-            this.numericUpDown2.Minimum = new decimal(new int[] {
-            10,
-            0,
-            0,
-            0});
-            this.numericUpDown2.Name = "numericUpDown2";
-            this.numericUpDown2.Value = new decimal(new int[] {
-            40,
-            0,
-            0,
-            0});
             // 
             // listBoxBibleVerseTo
             // 
@@ -1429,7 +1399,6 @@
             this.tabPage2.PerformLayout();
             this.tabPage5.ResumeLayout(false);
             this.tabPage5.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown2)).EndInit();
             this.toolStrip1.ResumeLayout(false);
             this.toolStrip1.PerformLayout();
             this.customGroupBox1.ResumeLayout(false);
@@ -1542,8 +1511,6 @@
         private System.Windows.Forms.Button buttonBibleTextShow;
         private System.Windows.Forms.Label labelBibleTextName;
         private System.Windows.Forms.ListBox listBoxBibleVerseTo;
-        private System.Windows.Forms.Label label10;
-        private System.Windows.Forms.NumericUpDown numericUpDown2;
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.Label label12;
         private Bol.WinControls.ListViewEx listViewBibleVerseList;
