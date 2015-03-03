@@ -1681,7 +1681,14 @@ namespace PraiseBase.Presenter.Forms
                 ((BibleVerse)listBoxBibleVerseTo.SelectedItem));
 
             BibleManager.BibleItem bibleItem = ((KeyValuePair<String, BibleManager.BibleItem>)comboBoxBible.SelectedItem).Value;
-            string[] copyright = new String[] { bibleItem.Bible.Title, bibleItem.Bible.Publisher };
+            List<string> copyrightItems = new List<string>();
+            copyrightItems.Add(bibleItem.Bible.Title);
+            if (bibleItem.Bible.Publisher != null
+                && bibleItem.Bible.Publisher != String.Empty
+                && bibleItem.Bible.Publisher != "nobody")
+            {
+                copyrightItems.Add(bibleItem.Bible.Publisher);
+            }
 
             string title = vs.ToString();
             string text = vs.Text;
@@ -1698,7 +1705,7 @@ namespace PraiseBase.Presenter.Forms
             
             lt.MainText = text.Split(new String[] { Environment.NewLine }, StringSplitOptions.None);
             lt.HeaderText = new String[] { title };
-            lt.FooterText = copyright;
+            lt.FooterText = copyrightItems.ToArray();
 
             ProjectionManager.Instance.DisplayLayer(2, lt);
         }
