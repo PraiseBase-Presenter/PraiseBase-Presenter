@@ -46,7 +46,7 @@ namespace PraiseBase.Presenter.Model.Song
         /// <summary>
         /// Number of the slide background image
         /// </summary>
-        public int ImageNumber { get; set; }
+        public IBackground Background { get; set; }
 
         /// <summary>
         /// Size of the main text. This is used to maintain compatibility with PowerPraise
@@ -133,7 +133,6 @@ namespace PraiseBase.Presenter.Model.Song
         {
             Lines = new List<string>();
             Translation = new List<string>();
-            ImageNumber = 0;
         }
 
         #region ICloneable Members
@@ -149,7 +148,7 @@ namespace PraiseBase.Presenter.Model.Song
             res.TranslationText = TranslationText;
             res.PartName = PartName;
             res.TextSize = TextSize;
-            res.ImageNumber = ImageNumber;
+            res.Background = Background;
             return res;
         }
 
@@ -180,7 +179,7 @@ namespace PraiseBase.Presenter.Model.Song
         /// <returns></returns>
         public override int GetHashCode()
         {
-            int res = ImageNumber.GetHashCode() + TextSize.GetHashCode();
+            int res = Background.GetHashCode() + TextSize.GetHashCode();
             for (int i = 0; i < Lines.Count; i++)
             {
                 res = res ^ Lines[i].GetHashCode();
@@ -199,7 +198,7 @@ namespace PraiseBase.Presenter.Model.Song
         /// <param name="context"></param>
         public void GetObjectData(SerializationInfo info, StreamingContext context)
         {
-            info.AddValue("ImageNumber", this.ImageNumber);
+            info.AddValue("Background", this.Background);
             info.AddValue("TextSize", this.TextSize);
             info.AddValue("PartName", this.PartName);
             info.AddValue("Lines", this.Lines);

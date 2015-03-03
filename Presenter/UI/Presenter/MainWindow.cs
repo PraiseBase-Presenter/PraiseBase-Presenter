@@ -476,10 +476,14 @@ namespace PraiseBase.Presenter.Forms
                 if (listViewImageQueue.Items.Count > 0)
                 {
                     ImageLayer iml = new ImageLayer();
-                    iml.Image = ImageManager.Instance.GetImageFromRelPath((string)listViewImageQueue.Items[0].Tag);
+                    IBackground bg = (IBackground)listViewImageQueue.Items[0].Tag;
+                    iml.Image = ImageManager.Instance.GetImage(bg);
                     ProjectionManager.Instance.DisplayLayer(1, iml, Settings.Default.ProjectionFadeTimeLayer1);
                     ProjectionManager.Instance.DisplayLayer(2, ssl);
-                    imageHistoryAdd((string)listViewImageQueue.Items[0].Tag);
+                    if (bg != null && bg.GetType() == typeof(ImageBackground))
+                    {
+                        imageHistoryAdd(((ImageBackground)bg).ImagePath);
+                    }
                     listViewImageQueue.Items[0].Remove();
                 }
                 else
@@ -498,12 +502,14 @@ namespace PraiseBase.Presenter.Forms
             else
             {
                 ImageLayer iml = new ImageLayer();
-                iml.Image = ImageManager.Instance.GetImage(s.GetImage(cs.ImageNumber));
+                iml.Image = ImageManager.Instance.GetImage(cs.Background);
                 ProjectionManager.Instance.DisplayLayer(1, iml, Settings.Default.ProjectionFadeTimeLayer1);
                 ProjectionManager.Instance.DisplayLayer(2, ssl);
 
-                if (s.RelativeImagePaths.Count > 0)
-                    imageHistoryAdd(s.RelativeImagePaths[cs.ImageNumber]);
+                if (cs.Background != null && cs.Background.GetType() == typeof(ImageBackground))
+                {
+                    imageHistoryAdd(((ImageBackground)cs.Background).ImagePath);
+                }
             }
         }
 
@@ -524,9 +530,9 @@ namespace PraiseBase.Presenter.Forms
             // Stack
             if ((ModifierKeys & Keys.Control) == Keys.Control)
             {
-                listViewImageQueue.LargeImageList.Images.Add(ImageManager.Instance.GetThumbFromRelPath(e.relativePath));
+                listViewImageQueue.LargeImageList.Images.Add(ImageManager.Instance.GetThumb(e.Background));
                 var lvi = new ListViewItem("");
-                lvi.Tag = e.relativePath;
+                lvi.Tag = e.Background;
                 lvi.ImageIndex = listViewImageQueue.LargeImageList.Images.Count - 1;
                 listViewImageQueue.Items.Add(lvi);
             }
@@ -534,7 +540,10 @@ namespace PraiseBase.Presenter.Forms
             // Favorite
             else if ((ModifierKeys & Keys.Alt) == Keys.Alt)
             {
-                imageFavoriteAdd(e.relativePath);
+                if (e.Background != null && e.Background.GetType() == typeof(ImageBackground))
+                {
+                    imageFavoriteAdd(((ImageBackground)e.Background).ImagePath);
+                }
             }
             else
             {
@@ -546,11 +555,13 @@ namespace PraiseBase.Presenter.Forms
 
                 // Show image
                 ImageLayer iml = new ImageLayer();
-                iml.Image = ImageManager.Instance.GetImageFromRelPath(e.relativePath);
+                iml.Image = ImageManager.Instance.GetImage(e.Background);
                 ProjectionManager.Instance.DisplayLayer(1, iml, Settings.Default.ProjectionFadeTimeLayer1);
 
-                if (e.relativePath != String.Empty)
-                    imageHistoryAdd(e.relativePath);
+                if (e.Background != null && e.Background.GetType() == typeof(ImageBackground))
+                {
+                    imageHistoryAdd(((ImageBackground)e.Background).ImagePath);
+                }
             }
         }
 

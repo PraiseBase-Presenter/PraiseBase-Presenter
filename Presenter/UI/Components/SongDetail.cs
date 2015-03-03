@@ -85,7 +85,7 @@ namespace SongDetails
             Font pfnt = new Font("Arial", 16);
             Font txfnt = new Font("Arial", 11);
             int ypos = startPoint.Y;
-            var thumbs = PraiseBase.Presenter.ImageManager.Instance.GetThumbsFromList(sng.RelativeImagePaths);
+            //var thumbs = PraiseBase.Presenter.ImageManager.Instance.GetThumbsFromList(sng.RelativeImagePaths);
 
             Size labelSize = new Size(0, 0);
             for (int i = 0; i < sng.Parts.Count; i++)
@@ -146,9 +146,9 @@ namespace SongDetails
                     PictureBox previewPictureBox = new PictureBox();
                     previewPictureBox.Location = new Point(2, 2);
                     previewPictureBox.Size = new Size(panelPreviewPictureBoxContainer.Width - 4, panelPreviewPictureBoxContainer.Height - 5);
-                    int imgNr = sng.Parts[numParts].Slides[j].ImageNumber + 1;
-                    previewPictureBox.Image = thumbs.ContainsKey(imgNr) ? thumbs[imgNr] : thumbs[0];
-                    previewPictureBox.Tag = sng.RelativeImagePaths.Count >= imgNr && imgNr > 0 ? sng.RelativeImagePaths[imgNr - 1] : String.Empty;
+                    var bg = sng.Parts[numParts].Slides[j].Background;
+                    previewPictureBox.Image = PraiseBase.Presenter.ImageManager.Instance.GetThumb(bg);
+                    previewPictureBox.Tag = bg;
                     previewPictureBox.Enabled = true;
                     previewPictureBox.Cursor = Cursors.Hand;
                     previewPictureBox.Click += new EventHandler(pcBox_Click);
@@ -329,7 +329,7 @@ namespace SongDetails
             if (ImageClicked != null)
             {
                 this.Focus();
-                SlideImageClickEventArgs p = new SlideImageClickEventArgs((string)pb.Tag);
+                SlideImageClickEventArgs p = new SlideImageClickEventArgs((IBackground)pb.Tag);
                 ImageClicked(this, p);
             }
         }
@@ -424,12 +424,12 @@ namespace SongDetails
 
     public class SlideImageClickEventArgs : EventArgs
     {
-        public SlideImageClickEventArgs(string relativePath)
+        public SlideImageClickEventArgs(IBackground bg)
         {
-            this.relativePath = relativePath;
+            this.Background = bg;
         }
 
-        public string relativePath { get; set; }
+        public IBackground Background { get; set; }
     }
 
     #endregion Helper classes

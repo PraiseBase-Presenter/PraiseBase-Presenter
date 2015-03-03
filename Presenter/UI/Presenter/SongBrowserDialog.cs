@@ -66,7 +66,7 @@ namespace PraiseBase.Presenter.Forms
                 if (searchText != String.Empty && !sng.SearchText.Contains(searchText))
                     use = false;
 
-                if (checkBoxHasImages.Checked && sng.RelativeImagePaths.Count > 0)
+                if (checkBoxHasImages.Checked && sng.GetNumberOfBackgroundImages() > 0)
                     use = false;
 
                 if (checkBoxHasComments.Checked && sng.Comment == string.Empty)

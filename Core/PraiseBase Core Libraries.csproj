@@ -48,6 +48,9 @@
     <Compile Include="Model\Bible\BibleVerseSelection.cs" />
     <Compile Include="Model\Setlist.cs" />
     <Compile Include="Manager\SongSearchMode.cs" />
+    <Compile Include="Model\Song\ColorBackground.cs" />
+    <Compile Include="Model\Song\ImageBackground.cs" />
+    <Compile Include="Model\Song\IBackground.cs" />
     <Compile Include="Model\TranslationPosition.cs" />
     <Compile Include="Persistence\AbstractSongFilePlugin.cs" />
     <Compile Include="Persistence\CCLI\SongSelectFilePlugin.cs" />

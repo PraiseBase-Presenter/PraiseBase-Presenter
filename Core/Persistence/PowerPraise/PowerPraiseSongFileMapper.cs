@@ -26,6 +26,7 @@ using System.Drawing;
 using System.Xml;
 using PraiseBase.Presenter.Model;
 using PraiseBase.Presenter.Model.Song;
+using System.Text.RegularExpressions;
 
 namespace PraiseBase.Presenter.Persistence.PowerPraise
 {
@@ -71,7 +72,7 @@ namespace PraiseBase.Presenter.Persistence.PowerPraise
                 foreach (PowerPraiseSongSlide sld in prt.Slides)
                 {
                     SongSlide slide = new SongSlide();
-                    slide.ImageNumber = sld.BackgroundNr;
+                    slide.Background = parseBackground(ppl.BackgroundImages[sld.BackgroundNr]);
                     slide.TextSize = sld.MainSize > 0 ? sld.MainSize : (song.MainText.Font != null ? song.MainText.Font.Size : 0);
                     slide.Lines.AddRange(sld.Lines);
                     slide.Translation.AddRange(sld.Translation);
@@ -93,9 +94,6 @@ namespace PraiseBase.Presenter.Persistence.PowerPraise
                     }
                 }
             }
-
-            // Backgrounds
-            song.RelativeImagePaths.AddRange(ppl.BackgroundImages);
 
             // Formatting definitions
             song.MainText = new TextFormatting(
@@ -151,6 +149,45 @@ namespace PraiseBase.Presenter.Persistence.PowerPraise
             return song;
         }
 
+        private static IBackground parseBackground(string bg)
+        {
+            if (Regex.IsMatch(bg, @"^\d+$"))
+            {
+                int trySize;
+                if (int.TryParse(bg, out trySize))
+                {
+                    try
+                    {
+                        return new ColorBackground(Color.FromArgb(255, Color.FromArgb(trySize)));
+                    } 
+                    catch (ArgumentException)
+                    {
+                        return null;
+                    }
+                }
+            }
+            else if (bg.Trim() != String.Empty)
+            {
+                return new ImageBackground(bg);
+            }
+            return null;
+        }
+
+        private static string mapBackground(IBackground bg) {
+            if (bg != null)
+            {
+                if (bg.GetType() == typeof(ImageBackground))
+                {
+                    return ((ImageBackground)bg).ImagePath;
+                }
+                if (bg.GetType() == typeof(ColorBackground))
+                {
+                    return (16777216 + ((ColorBackground)bg).Color.ToArgb()).ToString();
+                }
+            }
+            return (16777216 + (Color.Black.ToArgb()).ToString());
+        }
+
         /// <summary>
         /// Maps a song to a PowerPraise song object
         /// </summary>
@@ -163,6 +200,9 @@ namespace PraiseBase.Presenter.Persistence.PowerPraise
             ppl.Language = song.Language;
             ppl.Category = song.Themes.Count > 0 ? song.Themes[0] : null;
 
+            int bgIndex = 0;
+            Dictionary<string, int> backgrounds = new Dictionary<string, int>();
+            
             // Song parts
             foreach (var songPart in song.Parts)
             {
@@ -171,7 +211,20 @@ namespace PraiseBase.Presenter.Persistence.PowerPraise
                 foreach (var songSlide in songPart.Slides)
                 {
                     PowerPraiseSongSlide pplSlide = new PowerPraiseSongSlide();
-                    pplSlide.BackgroundNr = songSlide.ImageNumber;
+
+                    string bg = mapBackground(songSlide.Background);
+                    int backgroundNr = 0;
+                    if (!backgrounds.ContainsKey(bg))
+                    {
+                        backgroundNr = bgIndex;
+                        backgrounds.Add(bg, bgIndex++);
+                    }
+                    else
+                    {
+                        backgroundNr = backgrounds[bg];
+                    }
+                    pplSlide.BackgroundNr = backgroundNr;
+
                     pplSlide.MainSize = (int)(songSlide.TextSize > 0 ? songSlide.TextSize : (song.MainText != null && song.MainText.Font != null ? song.MainText.Font.Size : 0));
                     pplSlide.Lines.AddRange(songSlide.Lines);
                     pplSlide.Translation.AddRange(songSlide.Translation);
@@ -267,7 +320,7 @@ namespace PraiseBase.Presenter.Persistence.PowerPraise
             }
 
             // Backgrounds
-            ppl.BackgroundImages.AddRange(song.RelativeImagePaths);
+            ppl.BackgroundImages.AddRange(backgrounds.Keys);
 
             if (song.MainText != null)
             {

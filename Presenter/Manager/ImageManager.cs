@@ -29,6 +29,7 @@ using System.Windows.Forms;
 using PraiseBase.Presenter.Forms;
 using PraiseBase.Presenter.Properties;
 using PraiseBase.Presenter.Util;
+using PraiseBase.Presenter.Model.Song;
 
 namespace PraiseBase.Presenter
 {
@@ -184,26 +185,6 @@ namespace PraiseBase.Presenter
             return null;
         }
 
-        public Dictionary<int, Image> GetThumbsFromList(List<string> imageList)
-        {
-            var thumbList = new Dictionary<int, Image>();
-            //thumbList.ImageSize = Settings.Default.ThumbSize;
-            //thumbList.ColorDepth = ColorDepth.Depth32Bit;
-
-            int i = 0;
-            Image th = ImageUtils.getEmptyImage(Settings.Default.ThumbSize, Settings.Default.ProjectionBackColor);
-            thumbList.Add(i++, th);
-            foreach (String relPath in imageList)
-            {
-                Image img = GetThumbFromRelPath(relPath);
-                if (img != null)
-                {
-                    thumbList.Add(i++, img);
-                }
-            }
-            return thumbList;
-        }
-
         public Image GetImage(string path)
         {
             if (path == null)
@@ -227,6 +208,38 @@ namespace PraiseBase.Presenter
                 Console.WriteLine(e.Message);
                 return ImageUtils.getEmptyImage(DefaultImageSize, Settings.Default.ProjectionBackColor);
             }
+        }
+
+        public Image GetImage(IBackground bg)
+        {
+            if (bg != null)
+            {
+                if (bg.GetType() == typeof(ImageBackground))
+                {
+                    return GetImage(((ImageBackground)bg).ImagePath);
+                }
+                else if (bg.GetType() == typeof(ColorBackground))
+                {
+                    return ImageUtils.getEmptyImage(DefaultImageSize, ((ColorBackground)bg).Color);
+                }
+            }
+            return null;
+        }
+
+        public Image GetThumb(IBackground bg)
+        {
+            if (bg != null)
+            {
+                if (bg.GetType() == typeof(ImageBackground))
+                {
+                    return GetThumbFromRelPath(((ImageBackground)bg).ImagePath);
+                }
+                else if (bg.GetType() == typeof(ColorBackground))
+                {
+                    return ImageUtils.getEmptyImage(Settings.Default.ThumbSize, ((ColorBackground)bg).Color);
+                }
+            }
+            return ImageUtils.getEmptyImage(Settings.Default.ThumbSize, Settings.Default.ProjectionBackColor);
         }
 
         /// <summary>

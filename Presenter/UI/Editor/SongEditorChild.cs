@@ -403,13 +403,19 @@ namespace PraiseBase.Presenter.Forms
             SongPart prt = new SongPart();
             prt.Caption = caption;
             SongSlide sld = new SongSlide();
-            sld.ImageNumber = 0;
+            sld.Background = getDefaultBackground();
 
             prt.Slides.Add(sld);
             sng.Parts.Add(prt);
 
             populateTree();
             treeViewContents.SelectedNode = treeViewContents.Nodes[treeViewContents.Nodes.Count - 1].LastNode;
+        }
+
+        private ColorBackground getDefaultBackground()
+        {
+            // TODO: Configurable default color
+            return new ColorBackground(Color.Black);
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -837,13 +843,16 @@ namespace PraiseBase.Presenter.Forms
         {
             ImageDialog imd = new ImageDialog();
 
-            if (sng.Parts[currentPartId].Slides[currentSlideId].ImageNumber > 0)
+            var bg = sng.Parts[currentPartId].Slides[currentSlideId].Background;
+            if (bg != null && bg.GetType() == typeof(ImageBackground))
             {
-                imd.imagePath = sng.RelativeImagePaths[sng.Parts[currentPartId].Slides[currentSlideId].ImageNumber - 1];
+                imd.imagePath = ((ImageBackground)bg).ImagePath;
             }
 
-            if (sng.RelativeImagePaths.Count == 0)
+            if (sng.GetNumberOfBackgroundImages() == 0)
+            {
                 imd.forAll = true;
+            }
 
             if (imd.ShowDialog(this) == DialogResult.OK)
             {
@@ -851,45 +860,34 @@ namespace PraiseBase.Presenter.Forms
                 {
                     if (imd.forAll)
                     {
-                        sng.RelativeImagePaths.Clear();
-                        sng.RelativeImagePaths.Add(imd.imagePath);
                         for (int i = 0; i < sng.Parts.Count; i++)
                         {
                             for (int j = 0; j < sng.Parts[i].Slides.Count; j++)
                             {
-                                sng.Parts[i].Slides[j].ImageNumber = 1;
+                                sng.Parts[i].Slides[j].Background = new ImageBackground(imd.imagePath);
                             }
                         }
                     }
                     else
                     {
-                        if (sng.RelativeImagePaths.Contains(imd.imagePath))
-                        {
-                            sng.Parts[currentPartId].Slides[currentSlideId].ImageNumber = sng.RelativeImagePaths.IndexOf(imd.imagePath) + 1;
-                        }
-                        else
-                        {
-                            sng.RelativeImagePaths.Add(imd.imagePath);
-                            sng.Parts[currentPartId].Slides[currentSlideId].ImageNumber = sng.RelativeImagePaths.Count;
-                        }
+                        sng.Parts[currentPartId].Slides[currentSlideId].Background = new ImageBackground(imd.imagePath);
                     }
                 }
                 else
                 {
                     if (imd.forAll)
                     {
-                        sng.RelativeImagePaths.Clear();
                         for (int i = 0; i < sng.Parts.Count; i++)
                         {
                             for (int j = 0; j < sng.Parts[i].Slides.Count; j++)
                             {
-                                sng.Parts[i].Slides[j].ImageNumber = 0;
+                                sng.Parts[i].Slides[j].Background = getDefaultBackground();
                             }
                         }
                     }
                     else
                     {
-                        sng.Parts[currentPartId].Slides[currentSlideId].ImageNumber = 0;
+                        sng.Parts[currentPartId].Slides[currentSlideId].Background = getDefaultBackground(); 
                     }
                 }
                 previewSlide();
@@ -935,7 +933,9 @@ namespace PraiseBase.Presenter.Forms
             sl.SubText = slide.Translation.ToArray();
 
             ImageLayer il = new ImageLayer();
-            il.Image = ImageManager.Instance.GetImage(sng.GetImage(sng.Parts[currentPartId].Slides[currentSlideId].ImageNumber));
+
+            IBackground bg = sng.Parts[currentPartId].Slides[currentSlideId].Background;
+            il.Image = ImageManager.Instance.GetImage(bg);
 
             var bmp = new Bitmap(1024, 768);
             Graphics gr = Graphics.FromImage(bmp);
