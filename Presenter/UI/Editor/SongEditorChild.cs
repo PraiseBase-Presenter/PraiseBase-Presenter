@@ -930,7 +930,7 @@ namespace PraiseBase.Presenter.Forms
             slideFormatting.ScaleFontSize = Settings.Default.ProjectionFontScaling;
             slideFormatting.SmoothShadow = false;
 
-            SongSlideLayer sl = new SongSlideLayer(slideFormatting);
+            TextLayer sl = new TextLayer(slideFormatting);
             sl.MainText = slide.Lines.ToArray();
             sl.SubText = slide.Translation.ToArray();
 

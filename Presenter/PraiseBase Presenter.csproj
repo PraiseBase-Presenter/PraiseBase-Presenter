@@ -101,9 +101,8 @@
     <Compile Include="Manager\ProjectionManager.cs" />
     <Compile Include="Manager\ScreenManager.cs" />
     <Compile Include="Projection\BaseLayer.cs" />
-    <Compile Include="Projection\BibleLayer.cs" />
     <Compile Include="Projection\ImageLayer.cs" />
-    <Compile Include="Projection\SongSlideLayer.cs" />
+    <Compile Include="Projection\TextLayer.cs" />
     <Compile Include="Projection\SlideTextFormatting.cs" />
     <Compile Include="Projection\SongSlideTextFormattingMapper.cs" />
     <Compile Include="Properties\StringResources.Designer.cs">
@@ -115,8 +114,6 @@
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="UpdateCheck.cs" />
-    <Compile Include="Projection\LiveText.cs" />
-    <Compile Include="Projection\TextLayer.cs" />
     <Compile Include="Manager\ImageManager.cs" />
     <Compile Include="Manager\SongManager.cs" />
     <Compile Include="UI\Components\BackgroundImageBrowser.cs">
