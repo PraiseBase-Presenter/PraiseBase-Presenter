@@ -1453,10 +1453,13 @@ namespace PraiseBase.Presenter.Forms
                                  ? textBoxLiveText.SelectedText
                                  : textBoxLiveText.Text;
 
+            // TODO Dedicated formatting for live text
             SlideTextFormatting slideFormatting = new SlideTextFormatting();
             SongSlideTextFormattingMapper.Map(Settings.Default, ref slideFormatting);
             slideFormatting.ScaleFontSize = Settings.Default.ProjectionFontScaling;
             slideFormatting.SmoothShadow = Settings.Default.ProjectionSmoothShadow;
+            
+            slideFormatting.LineWrap = true;
 
             SongSlideLayer lt = new SongSlideLayer(slideFormatting);
             lt.MainText = text.Split(new String[] { Environment.NewLine }, StringSplitOptions.None);

@@ -43,6 +43,11 @@ namespace PraiseBase.Presenter.Projection
         /// True if the shadow should be smooth
         /// </summary>
         public bool SmoothShadow { get; set; }
+        
+        /// <summary>
+        /// Wrap long lines
+        /// </summary>
+        public bool LineWrap { get; set; }
 
         public struct MainTextFormatting
         {

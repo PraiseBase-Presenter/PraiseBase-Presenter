@@ -27,6 +27,7 @@ using System.Drawing.Text;
 using PraiseBase.Presenter.Model;
 using System.Collections.Generic;
 using PraiseBase.Presenter.Projection;
+using PraiseBase.Presenter.Util;
 
 namespace PraiseBase.Presenter
 {
@@ -90,6 +91,26 @@ namespace PraiseBase.Presenter
                 // Line spacing
                 int mainTextLineSpacing = mainTextFormat.LineSpacing;
                 int subTextLineSpacing = subTextFormat.LineSpacing;
+
+                // Wrap long lines
+                if (formatting.LineWrap)
+                {
+                    List<String> wrappedLines = new List<string>();
+                    foreach (String l in MainText)
+                    {
+                        SizeF lm = gr.MeasureString(l, mainTextFormat.Font);
+                        if (lm.Width > usableWidth)
+                        {
+                            int nc = l.Length / ((int)Math.Ceiling(lm.Width / usableWidth));
+                            wrappedLines.AddRange(StringUtils.Wrap(l, nc));
+                        }
+                        else
+                        {
+                            wrappedLines.Add(l);
+                        }
+                    }
+                    MainText = wrappedLines.ToArray();
+                }
 
                 // Numer of lines (always use greater value)
                 int numberOfLines = MainText.Length;
