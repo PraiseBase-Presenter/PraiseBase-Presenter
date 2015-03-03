@@ -442,7 +442,7 @@ namespace PraiseBase.Presenter.Forms
             slideFormatting.ScaleFontSize = Settings.Default.ProjectionFontScaling;
             slideFormatting.SmoothShadow = Settings.Default.ProjectionSmoothShadow;
 
-            var ssl = new SongSlideLayer(slideFormatting);
+            TextLayer ssl = new TextLayer(slideFormatting);
 
             // Set text and translation (based on translation switch state)
             if (cs.Translated && SongManager.Instance.CurrentSong.SwitchTextAndTranlation)
@@ -1461,7 +1461,7 @@ namespace PraiseBase.Presenter.Forms
             
             slideFormatting.LineWrap = true;
 
-            SongSlideLayer lt = new SongSlideLayer(slideFormatting);
+            TextLayer lt = new TextLayer(slideFormatting);
             lt.MainText = text.Split(new String[] { Environment.NewLine }, StringSplitOptions.None);
 
             ProjectionManager.Instance.DisplayLayer(2, lt);
@@ -1701,7 +1701,7 @@ namespace PraiseBase.Presenter.Forms
 
             slideFormatting.LineWrap = true;
 
-            SongSlideLayer lt = new SongSlideLayer(slideFormatting);
+            TextLayer lt = new TextLayer(slideFormatting);
             
             lt.MainText = text.Split(new String[] { Environment.NewLine }, StringSplitOptions.None);
             lt.HeaderText = new String[] { title };

@@ -102,7 +102,7 @@
     <Compile Include="Manager\ScreenManager.cs" />
     <Compile Include="Projection\BaseLayer.cs" />
     <Compile Include="Projection\ImageLayer.cs" />
-    <Compile Include="Projection\SongSlideLayer.cs" />
+    <Compile Include="Projection\TextLayer.cs" />
     <Compile Include="Projection\SlideTextFormatting.cs" />
     <Compile Include="Projection\SongSlideTextFormattingMapper.cs" />
     <Compile Include="Properties\StringResources.Designer.cs">

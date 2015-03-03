@@ -31,7 +31,7 @@ using PraiseBase.Presenter.Util;
 
 namespace PraiseBase.Presenter
 {
-    internal class SongSlideLayer : BaseLayer
+    internal class TextLayer : BaseLayer
     {
         private SlideTextFormatting formatting;
 
@@ -60,7 +60,7 @@ namespace PraiseBase.Presenter
         /// </summary>
         public bool DrawBordersForDebugging { get; set; }
 
-        public SongSlideLayer(SlideTextFormatting formatting)
+        public TextLayer(SlideTextFormatting formatting)
         {
             this.formatting = formatting;
         }
