@@ -198,7 +198,7 @@
       <Value Profile="(Default)">True</Value>
     </Setting>
     <Setting Name="ProjectionMasterShadowEnabled" Type="System.Boolean" Scope="User">
-      <Value Profile="(Default)">False</Value>
+      <Value Profile="(Default)">True</Value>
     </Setting>
     <Setting Name="ProjectionMasterVerticalTextPadding" Type="System.Int32" Scope="User">
       <Value Profile="(Default)">80</Value>
