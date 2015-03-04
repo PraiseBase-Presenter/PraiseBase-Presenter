@@ -30,7 +30,7 @@ namespace PraiseBase.Presenter.Persistence.PowerPraise
             part.Caption = "Teil 1";
 
             SongSlide slide = new SongSlide();
-            slide.ImageNumber = 0;
+            slide.Background = new ImageBackground("Blumen\\Blume 3.jpg");
             slide.TextSize = 42;
             slide.Lines.Add("Näher, mein Gott, zu Dir,");
             slide.Lines.Add("sei meine Bitt'!");
@@ -39,7 +39,7 @@ namespace PraiseBase.Presenter.Persistence.PowerPraise
             part.Slides.Add(slide);
 
             slide = new SongSlide();
-            slide.ImageNumber = 0;
+            slide.Background = new ImageBackground("Blumen\\Blume 3.jpg");
             slide.TextSize = 44;
             slide.Lines.Add("Nur an dem Herzen Dein");
             slide.Lines.Add("kann ich geborgen sein;");
@@ -52,7 +52,7 @@ namespace PraiseBase.Presenter.Persistence.PowerPraise
             part.Caption = "Teil 2";
 
             slide = new SongSlide();
-            slide.ImageNumber = 0;
+            slide.Background = new ImageBackground("Blumen\\Blume 3.jpg");
             slide.TextSize = 42;
             slide.Lines.Add("Näher, mein Gott, zu Dir!");
             slide.Lines.Add("Ein jeder Tag");
@@ -61,7 +61,7 @@ namespace PraiseBase.Presenter.Persistence.PowerPraise
             part.Slides.Add(slide);
 
             slide = new SongSlide();
-            slide.ImageNumber = 0;
+            slide.Background = new ImageBackground("Blumen\\Blume 3.jpg");
             slide.TextSize = 42;
             slide.Lines.Add("Wie seiner Gnade Macht,");
             slide.Lines.Add("Erlösung hat gebracht,");
@@ -74,7 +74,7 @@ namespace PraiseBase.Presenter.Persistence.PowerPraise
             part.Caption = "Teil 3";
 
             slide = new SongSlide();
-            slide.ImageNumber = 0;
+            slide.Background = new ImageBackground("Blumen\\Blume 3.jpg");
             slide.TextSize = 42;
             slide.Lines.Add("Näher, mein Gott, zu Dir!");
             slide.Lines.Add("Dich bet' ich an.");
@@ -83,7 +83,7 @@ namespace PraiseBase.Presenter.Persistence.PowerPraise
             part.Slides.Add(slide);
 
             slide = new SongSlide();
-            slide.ImageNumber = 0;
+            slide.Background = new ImageBackground("Blumen\\Blume 3.jpg");
             slide.TextSize = 42;
             slide.Lines.Add("Von Banden frei und los,");
             slide.Lines.Add("ruh' ich in Deinem Schoss.");
@@ -95,8 +95,6 @@ namespace PraiseBase.Presenter.Persistence.PowerPraise
             song.PartSequence.Add(0);
             song.PartSequence.Add(1);
             song.PartSequence.Add(2);
-
-            song.RelativeImagePaths.Add("Blumen\\Blume 3.jpg");
 
             song.MainText = new Model.TextFormatting(
                 new Font("Times New Roman", 44, FontStyle.Bold | FontStyle.Italic),

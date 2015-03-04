@@ -231,11 +231,6 @@ namespace PraiseBase.Presenter.Model.Song
         public int CurrentSlide { get; set; }
 
         /// <summary>
-        /// List of the paths to all images
-        /// </summary>
-        public List<string> RelativeImagePaths { get; set; }
-
-        /// <summary>
         /// Quality assurance indicators
         /// </summary>
         public List<SongQualityAssuranceIndicator> QualityIssues { get; set; }
@@ -313,7 +308,6 @@ namespace PraiseBase.Presenter.Model.Song
             Themes = new TagList();
             Parts = new SongPartList();
             PartSequence = new List<int>();
-            RelativeImagePaths = new List<string>();
             SearchText = String.Empty;
             SongBooks = new List<SongBook>();
             Author = new List<SongAuthor>();
@@ -349,29 +343,22 @@ namespace PraiseBase.Presenter.Model.Song
         }
 
         /// <summary>
-        /// Returns the path of the image at the specified index
+        /// Returns the number of background images
         /// </summary>
-        /// <param name="nr"></param>
-        /// <returns></returns>
-        public string GetImage(int nr)
+        public int GetNumberOfBackgroundImages()
         {
-            try
+            int n = 0;
+            for (int i = 0; i < Parts.Count; i++)
             {
-                if (nr < 0)
+                for (int j = 0; j < Parts[i].Slides.Count; j++)
                 {
-                    return null;
+                    if (Parts[i].Slides[j].Background != null && Parts[i].Slides[j].Background.GetType() == typeof(ImageBackground))
+                    {
+                        n++;
+                    }
                 }
-                if (RelativeImagePaths[nr] == null)
-                {
-                    throw new Exception("Das Bild mit der Nummer " + nr + " existiert nicht!");
-                }
-                return RelativeImagePaths[nr];
             }
-            catch (Exception e)
-            {
-                Console.WriteLine(e.Message);
-                return null;
-            }
+            return n;
         }
 
         /// <summary>

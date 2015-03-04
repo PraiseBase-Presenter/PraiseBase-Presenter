@@ -18,7 +18,7 @@ namespace PraiseBase.Presenter.Persistence.PowerPraise
         public static readonly PowerPraiseSong.FontFormatting MainText = new PowerPraiseSong.FontFormatting
         {
             Font = new Font("Tahoma", 30, FontStyle.Bold),
-            Color = Color.FromArgb(255, Color.FromArgb(16777215)),
+            Color = PowerPraiseFileUtil.ConvertColor(16777215),
             OutlineWidth = 30,
             ShadowDistance = 20
         };
@@ -26,7 +26,7 @@ namespace PraiseBase.Presenter.Persistence.PowerPraise
         public static readonly PowerPraiseSong.FontFormatting TranslationText = new PowerPraiseSong.FontFormatting
         {
             Font = new Font("Tahoma", 20, FontStyle.Regular),
-            Color = Color.FromArgb(255, Color.FromArgb(16777215)),
+            Color = PowerPraiseFileUtil.ConvertColor(16777215),
             OutlineWidth = 30,
             ShadowDistance = 20
         };
@@ -34,7 +34,7 @@ namespace PraiseBase.Presenter.Persistence.PowerPraise
         public static readonly PowerPraiseSong.FontFormatting CopyrightText = new PowerPraiseSong.FontFormatting
         {
             Font = new Font("Tahoma", 14, FontStyle.Regular),
-            Color = Color.FromArgb(255, Color.FromArgb(16777215)),
+            Color = PowerPraiseFileUtil.ConvertColor(16777215),
             OutlineWidth = 30,
             ShadowDistance = 20
         };
@@ -42,7 +42,7 @@ namespace PraiseBase.Presenter.Persistence.PowerPraise
         public static readonly PowerPraiseSong.FontFormatting SourceText = new PowerPraiseSong.FontFormatting
         {
             Font = new Font("Tahoma", 30, FontStyle.Regular),
-            Color = Color.FromArgb(255, Color.FromArgb(16777215)),
+            Color = PowerPraiseFileUtil.ConvertColor(16777215),
             OutlineWidth = 30,
             ShadowDistance = 20
         };
@@ -50,13 +50,13 @@ namespace PraiseBase.Presenter.Persistence.PowerPraise
         public static readonly PowerPraiseSong.OutlineFormatting FontOutline = new PowerPraiseSong.OutlineFormatting
         {
             Enabled = false,
-            Color = Color.FromArgb(0, Color.FromArgb(16777215)),
+            Color = PowerPraiseFileUtil.ConvertColor(0),
         };
 
         public static readonly PowerPraiseSong.ShadowFormatting FontShadow = new PowerPraiseSong.ShadowFormatting
         {
             Enabled = true,
-            Color = Color.FromArgb(0, Color.FromArgb(16777215)),
+            Color = PowerPraiseFileUtil.ConvertColor(0),
             Direction = 125
         };
 
@@ -77,5 +77,7 @@ namespace PraiseBase.Presenter.Persistence.PowerPraise
             SourceTop = 20,
             SourceRight = 40
         };
+
+        public static readonly string DefaultBackground = "8075276";
     }
 }
