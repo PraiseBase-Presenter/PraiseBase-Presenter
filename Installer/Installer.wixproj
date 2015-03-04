@@ -46,6 +46,14 @@
     <Content Include="Resources\Banner.bmp" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Core\PraiseBase Core Libraries.csproj">
+      <Name>PraiseBase_Core_Libraries</Name>
+      <Project>{67651b76-5abd-4040-9a8f-3833130fc77d}</Project>
+      <Private>True</Private>
+      <DoNotHarvest>True</DoNotHarvest>
+      <RefProjectOutputGroups>Binaries;Content;Satellites</RefProjectOutputGroups>
+      <RefTargetDir>INSTALLFOLDER</RefTargetDir>
+    </ProjectReference>
     <ProjectReference Include="..\Presenter\PraiseBase Presenter.csproj">
       <Name>PraiseBase_Presenter</Name>
       <Project>{33d2bc6a-0ad1-4e2e-af35-fffb744f22c6}</Project>

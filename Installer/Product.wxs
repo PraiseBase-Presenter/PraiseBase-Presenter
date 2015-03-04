@@ -49,6 +49,12 @@
                   Source="$(var.PraiseBase_Presenter.TargetPath)"
                   KeyPath="yes" />
           </Component>
+          <Component Id="CoreDll" Guid="3b5d1582-c2b3-11e4-9bf5-d2ea1d5d46b0">
+            <File Id="CoreDllFile"
+                Name="$(var.PraiseBase_Core_Libraries.TargetFileName)"
+                Source="$(var.PraiseBase_Core_Libraries.TargetPath)"
+                KeyPath="yes" />
+          </Component>
           <Component Id="LicenseRtf" Guid="96dc79f8-2344-4610-a167-9b09ee501509">
             <File Id="License.rtf" 
                   Source="$(var.PraiseBase_Presenter.ProjectDir)Resources\Doc\License.rtf" 
@@ -432,6 +438,7 @@
     <!-- Features -->
     <Feature Id="ProductFeature" Title="$(var.PraiseBase_Presenter.ProjectName)" Level="1">
       <ComponentRef Id="ProductComponent" />
+      <ComponentRef Id="CoreDll" />
       <ComponentRef Id="LicenseRtf" />
       <ComponentRef Id="LicenseTxt" />
       <ComponentRef Id="ApplicationStartMenuShortcut" />
