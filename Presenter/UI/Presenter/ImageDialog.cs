@@ -103,9 +103,13 @@ namespace PraiseBase.Presenter.Forms
             Application.DoEvents();
             treeViewDirs.Nodes.Clear();
             TreeNode rootTreeNode = new TreeNode("Bilder");
-            rootTreeNode.Tag = rootDir;
+            rootTreeNode.Tag = ".";
             treeViewDirs.Nodes.Add(rootTreeNode);
             PopulateTreeView(rootDir, treeViewDirs.Nodes[0]);
+            if (treeViewDirs.SelectedNode == null)
+            {
+                treeViewDirs.SelectedNode = rootTreeNode;
+            }
             treeViewDirs.Nodes[0].Expand();
             listViewImages.Focus();
         }
