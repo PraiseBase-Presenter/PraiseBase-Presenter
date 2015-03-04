@@ -85,7 +85,6 @@
             this.tabPage4 = new System.Windows.Forms.TabPage();
             this.listViewSongHistory = new System.Windows.Forms.ListView();
             this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.customGroupBox3 = new PraiseBase.Presenter.Components.CustomGroupBox();
             this.label13 = new System.Windows.Forms.Label();
             this.tabControl2 = new System.Windows.Forms.TabControl();
@@ -173,9 +172,9 @@
             this.toolStripSeparator13 = new System.Windows.Forms.ToolStripSeparator();
             this.qAcommentsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.customGroupBox1 = new PraiseBase.Presenter.Components.CustomGroupBox();
+            this.labelFadeTime = new System.Windows.Forms.Label();
             this.pictureBoxbeamerPreview = new System.Windows.Forms.PictureBox();
             this.labelFadeTimeLayer1 = new System.Windows.Forms.Label();
-            this.labelFadeTime = new System.Windows.Forms.Label();
             this.buttonToggleLayerMode = new System.Windows.Forms.Button();
             this.label6 = new System.Windows.Forms.Label();
             this.buttonToggleLayer2 = new System.Windows.Forms.Button();
@@ -184,12 +183,12 @@
             this.trackBarFadeTimeLayer1 = new System.Windows.Forms.TrackBar();
             this.trackBarFadeTime = new System.Windows.Forms.TrackBar();
             this.toolTipMyTooltip = new System.Windows.Forms.ToolTip(this.components);
+            this.splitContainerLayerContent = new System.Windows.Forms.SplitContainer();
             buttonChooseDiaDir = new System.Windows.Forms.Button();
             this.menuStrip1.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPage3.SuspendLayout();
             this.tabPage4.SuspendLayout();
-            this.tableLayoutPanel1.SuspendLayout();
             this.customGroupBox3.SuspendLayout();
             this.tabControl2.SuspendLayout();
             this.tabPageImageBrowser.SuspendLayout();
@@ -207,6 +206,9 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxbeamerPreview)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackBarFadeTimeLayer1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackBarFadeTime)).BeginInit();
+            this.splitContainerLayerContent.Panel1.SuspendLayout();
+            this.splitContainerLayerContent.Panel2.SuspendLayout();
+            this.splitContainerLayerContent.SuspendLayout();
             this.SuspendLayout();
             // 
             // buttonChooseDiaDir
@@ -603,13 +605,6 @@
             this.listViewSongHistory.UseCompatibleStateImageBehavior = false;
             this.listViewSongHistory.View = System.Windows.Forms.View.Details;
             this.listViewSongHistory.SelectedIndexChanged += new System.EventHandler(this.listViewSongHistory_SelectedIndexChanged);
-            // 
-            // tableLayoutPanel1
-            // 
-            resources.ApplyResources(this.tableLayoutPanel1, "tableLayoutPanel1");
-            this.tableLayoutPanel1.Controls.Add(this.customGroupBox3, 0, 1);
-            this.tableLayoutPanel1.Controls.Add(this.customGroupBox2, 0, 0);
-            this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             // 
             // customGroupBox3
             // 
@@ -1279,10 +1274,10 @@
             resources.ApplyResources(this.customGroupBox1, "customGroupBox1");
             this.customGroupBox1.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.customGroupBox1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.customGroupBox1.Controls.Add(this.labelFadeTime);
             this.customGroupBox1.Controls.Add(this.pictureBoxbeamerPreview);
             this.customGroupBox1.Controls.Add(this.labelFadeTimeLayer1);
             this.customGroupBox1.Controls.Add(this.tabControl1);
-            this.customGroupBox1.Controls.Add(this.labelFadeTime);
             this.customGroupBox1.Controls.Add(this.buttonToggleLayerMode);
             this.customGroupBox1.Controls.Add(this.label6);
             this.customGroupBox1.Controls.Add(this.buttonToggleLayer2);
@@ -1291,6 +1286,11 @@
             this.customGroupBox1.Controls.Add(this.trackBarFadeTimeLayer1);
             this.customGroupBox1.Controls.Add(this.trackBarFadeTime);
             this.customGroupBox1.Name = "customGroupBox1";
+            // 
+            // labelFadeTime
+            // 
+            resources.ApplyResources(this.labelFadeTime, "labelFadeTime");
+            this.labelFadeTime.Name = "labelFadeTime";
             // 
             // pictureBoxbeamerPreview
             // 
@@ -1303,11 +1303,6 @@
             // 
             resources.ApplyResources(this.labelFadeTimeLayer1, "labelFadeTimeLayer1");
             this.labelFadeTimeLayer1.Name = "labelFadeTimeLayer1";
-            // 
-            // labelFadeTime
-            // 
-            resources.ApplyResources(this.labelFadeTime, "labelFadeTime");
-            this.labelFadeTime.Name = "labelFadeTime";
             // 
             // buttonToggleLayerMode
             // 
@@ -1362,13 +1357,27 @@
             this.trackBarFadeTime.Value = 1;
             this.trackBarFadeTime.Scroll += new System.EventHandler(this.trackBarFadeTime_Scroll);
             // 
+            // splitContainerLayerContent
+            // 
+            resources.ApplyResources(this.splitContainerLayerContent, "splitContainerLayerContent");
+            this.splitContainerLayerContent.Name = "splitContainerLayerContent";
+            // 
+            // splitContainerLayerContent.Panel1
+            // 
+            this.splitContainerLayerContent.Panel1.Controls.Add(this.customGroupBox2);
+            // 
+            // splitContainerLayerContent.Panel2
+            // 
+            this.splitContainerLayerContent.Panel2.Controls.Add(this.customGroupBox3);
+            this.splitContainerLayerContent.SplitterMoved += new System.Windows.Forms.SplitterEventHandler(this.splitContainerLayerContent_SplitterMoved);
+            // 
             // MainWindow
             // 
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.Controls.Add(this.splitContainerLayerContent);
             this.Controls.Add(this.customGroupBox1);
-            this.Controls.Add(this.tableLayoutPanel1);
             this.Controls.Add(this.toolStrip1);
             this.Controls.Add(this.menuStrip1);
             this.MainMenuStrip = this.menuStrip1;
@@ -1380,7 +1389,6 @@
             this.tabControl1.ResumeLayout(false);
             this.tabPage3.ResumeLayout(false);
             this.tabPage4.ResumeLayout(false);
-            this.tableLayoutPanel1.ResumeLayout(false);
             this.customGroupBox3.ResumeLayout(false);
             this.customGroupBox3.PerformLayout();
             this.tabControl2.ResumeLayout(false);
@@ -1406,6 +1414,9 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxbeamerPreview)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackBarFadeTimeLayer1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackBarFadeTime)).EndInit();
+            this.splitContainerLayerContent.Panel1.ResumeLayout(false);
+            this.splitContainerLayerContent.Panel2.ResumeLayout(false);
+            this.splitContainerLayerContent.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1467,7 +1478,6 @@
         private System.Windows.Forms.Button buttonClearImageHistory;
         private System.Windows.Forms.ListView listViewFavorites;
         private SongDetails.SongDetail songDetailElement;
-        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
         private System.Windows.Forms.Button buttonResetImageQueue;
         private System.Windows.Forms.TabPage tabPage2;
         private System.Windows.Forms.TextBox textBoxLiveText;
@@ -1566,6 +1576,7 @@
         private System.Windows.Forms.ToolStripMenuItem qaSegmentationToolStripMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator13;
         private System.Windows.Forms.ToolStripMenuItem qAcommentsToolStripMenuItem;
+        private System.Windows.Forms.SplitContainer splitContainerLayerContent;
         
     }
 }

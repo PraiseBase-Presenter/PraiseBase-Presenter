@@ -851,5 +851,17 @@ namespace PraiseBase.Presenter.Properties {
                 this["ProjectionMasterHorizontalTranslationTextOffset"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public int LayerContentSplitterPosition {
+            get {
+                return ((int)(this["LayerContentSplitterPosition"]));
+            }
+            set {
+                this["LayerContentSplitterPosition"] = value;
+            }
+        }
     }
 }
