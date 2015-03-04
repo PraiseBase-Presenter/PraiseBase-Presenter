@@ -117,16 +117,13 @@ namespace SongDetails
                 ypos += pnl.Height + 10;
                 this.Controls.Add(pnl);
 
-                if (numParts < sng.Parts.Count - 1)
-                {
-                    Panel lpnl = new Panel();
-                    lpnl.Name = "spacerPanel" + numParts.ToString();
-                    lpnl.Location = new Point(startPoint.X + 5, ypos - 8);
-                    lpnl.BackColor = Color.LightBlue;
-                    lpnl.Height = 2;
-                    lpnl.Paint += new PaintEventHandler(lpnl_Paint);
-                    this.Controls.Add(lpnl);
-                }
+                Panel lpnl = new Panel();
+                lpnl.Name = "spacerPanel" + numParts.ToString();
+                lpnl.Location = new Point(startPoint.X + 5, ypos - 8);
+                lpnl.BackColor = Color.LightGray;
+                lpnl.Height = 1;
+                lpnl.Paint += new PaintEventHandler(lpnl_Paint);
+                this.Controls.Add(lpnl);
 
                 for (int j = 0; j < numSlides; j++)
                 {
