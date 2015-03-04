@@ -104,6 +104,11 @@ namespace PraiseBase.Presenter.Forms
             WindowState = Settings.Default.ViewerWindowState;
             //Text += " " + Assembly.GetExecutingAssembly().GetName().Version;
 
+            if (Settings.Default.LayerContentSplitterPosition > 0)
+            {
+                splitContainerLayerContent.SplitterDistance = Settings.Default.LayerContentSplitterPosition;
+            }
+
             loadSongList();
 
             imageTreeViewInit();
@@ -1967,6 +1972,11 @@ namespace PraiseBase.Presenter.Forms
             {
                 MessageBox.Show(StringResources.NoActiveSong);
             }
+        }
+
+        private void splitContainerLayerContent_SplitterMoved(object sender, SplitterEventArgs e)
+        {
+            Settings.Default.LayerContentSplitterPosition = splitContainerLayerContent.SplitterDistance;
         }
     }
 }
