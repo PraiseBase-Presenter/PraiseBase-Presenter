@@ -2056,7 +2056,7 @@
     <value>NoControl</value>
   </data>
   <data name="buttonBibleTextShow.Location" type="System.Drawing.Point, System.Drawing">
-    <value>649, 293</value>
+    <value>650, 293</value>
   </data>
   <data name="buttonBibleTextShow.Size" type="System.Drawing.Size, System.Drawing">
     <value>78, 23</value>
