@@ -409,7 +409,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;menuStrip1.ZOrder" xml:space="preserve">
-    <value>5</value>
+    <value>4</value>
   </data>
   <data name="tabControl1.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Bottom, Left</value>
@@ -427,7 +427,7 @@
     <value>NoControl</value>
   </data>
   <data name="buttonOpenSetList.Location" type="System.Drawing.Point, System.Drawing">
-    <value>217, 297</value>
+    <value>207, 294</value>
   </data>
   <data name="buttonOpenSetList.Size" type="System.Drawing.Size, System.Drawing">
     <value>26, 23</value>
@@ -454,10 +454,10 @@
     <value>Microsoft Sans Serif, 9.75pt</value>
   </data>
   <data name="listViewSetList.Location" type="System.Drawing.Point, System.Drawing">
-    <value>6, 6</value>
+    <value>1, 6</value>
   </data>
   <data name="listViewSetList.Size" type="System.Drawing.Size, System.Drawing">
-    <value>236, 286</value>
+    <value>236, 283</value>
   </data>
   <data name="listViewSetList.TabIndex" type="System.Int32, mscorlib">
     <value>27</value>
@@ -490,7 +490,7 @@
     <value>NoControl</value>
   </data>
   <data name="buttonSaveSetList.Location" type="System.Drawing.Point, System.Drawing">
-    <value>183, 297</value>
+    <value>173, 294</value>
   </data>
   <data name="buttonSaveSetList.Size" type="System.Drawing.Size, System.Drawing">
     <value>26, 23</value>
@@ -523,7 +523,7 @@
     <value>NoControl</value>
   </data>
   <data name="buttonSetListAdd.Location" type="System.Drawing.Point, System.Drawing">
-    <value>8, 297</value>
+    <value>6, 294</value>
   </data>
   <data name="buttonSetListAdd.Size" type="System.Drawing.Size, System.Drawing">
     <value>24, 23</value>
@@ -556,7 +556,7 @@
     <value>NoControl</value>
   </data>
   <data name="buttonSetListUp.Location" type="System.Drawing.Point, System.Drawing">
-    <value>38, 297</value>
+    <value>36, 294</value>
   </data>
   <data name="buttonSetListUp.Size" type="System.Drawing.Size, System.Drawing">
     <value>24, 23</value>
@@ -592,7 +592,7 @@
     <value>NoControl</value>
   </data>
   <data name="buttonSetListClear.Location" type="System.Drawing.Point, System.Drawing">
-    <value>149, 297</value>
+    <value>139, 294</value>
   </data>
   <data name="buttonSetListClear.Size" type="System.Drawing.Size, System.Drawing">
     <value>26, 23</value>
@@ -625,7 +625,7 @@
     <value>NoControl</value>
   </data>
   <data name="buttonSetListDown.Location" type="System.Drawing.Point, System.Drawing">
-    <value>68, 297</value>
+    <value>66, 294</value>
   </data>
   <data name="buttonSetListDown.Size" type="System.Drawing.Size, System.Drawing">
     <value>24, 23</value>
@@ -661,7 +661,7 @@
     <value>NoControl</value>
   </data>
   <data name="buttonSetListRem.Location" type="System.Drawing.Point, System.Drawing">
-    <value>98, 297</value>
+    <value>96, 294</value>
   </data>
   <data name="buttonSetListRem.Size" type="System.Drawing.Size, System.Drawing">
     <value>26, 23</value>
@@ -688,7 +688,7 @@
     <value>3, 3, 3, 3</value>
   </data>
   <data name="tabPage3.Size" type="System.Drawing.Size, System.Drawing">
-    <value>248, 326</value>
+    <value>238, 323</value>
   </data>
   <data name="tabPage3.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -715,10 +715,10 @@
     <value>Microsoft Sans Serif, 9.75pt</value>
   </data>
   <data name="listViewSongHistory.Location" type="System.Drawing.Point, System.Drawing">
-    <value>6, 6</value>
+    <value>1, 6</value>
   </data>
   <data name="listViewSongHistory.Size" type="System.Drawing.Size, System.Drawing">
-    <value>236, 284</value>
+    <value>236, 311</value>
   </data>
   <data name="listViewSongHistory.TabIndex" type="System.Int32, mscorlib">
     <value>28</value>
@@ -742,7 +742,7 @@
     <value>3, 3, 3, 3</value>
   </data>
   <data name="tabPage4.Size" type="System.Drawing.Size, System.Drawing">
-    <value>248, 326</value>
+    <value>238, 323</value>
   </data>
   <data name="tabPage4.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -763,10 +763,10 @@
     <value>1</value>
   </data>
   <data name="tabControl1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 375</value>
+    <value>3, 32</value>
   </data>
   <data name="tabControl1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>256, 352</value>
+    <value>246, 349</value>
   </data>
   <data name="tabControl1.TabIndex" type="System.Int32, mscorlib">
     <value>21</value>
@@ -778,7 +778,7 @@
     <value>System.Windows.Forms.TabControl, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;tabControl1.Parent" xml:space="preserve">
-    <value>$this</value>
+    <value>customGroupBox1</value>
   </data>
   <data name="&gt;&gt;tabControl1.ZOrder" xml:space="preserve">
     <value>3</value>
@@ -2620,7 +2620,13 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;toolStrip1.ZOrder" xml:space="preserve">
-    <value>4</value>
+    <value>3</value>
+  </data>
+  <data name="customGroupBox1.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Bottom, Left</value>
+  </data>
+  <data name="pictureBoxbeamerPreview.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Bottom, Left</value>
   </data>
   <data name="pictureBoxbeamerPreview.BackgroundImageLayout" type="System.Windows.Forms.ImageLayout, System.Windows.Forms">
     <value>Stretch</value>
@@ -2629,10 +2635,10 @@
     <value>NoControl</value>
   </data>
   <data name="pictureBoxbeamerPreview.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 32</value>
+    <value>3, 390</value>
   </data>
   <data name="pictureBoxbeamerPreview.Size" type="System.Drawing.Size, System.Drawing">
-    <value>246, 181</value>
+    <value>245, 181</value>
   </data>
   <data name="pictureBoxbeamerPreview.SizeMode" type="System.Windows.Forms.PictureBoxSizeMode, System.Windows.Forms">
     <value>StretchImage</value>
@@ -2652,11 +2658,14 @@
   <data name="&gt;&gt;pictureBoxbeamerPreview.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
+  <data name="labelFadeTimeLayer1.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Bottom, Left</value>
+  </data>
   <data name="labelFadeTimeLayer1.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
   <data name="labelFadeTimeLayer1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>182, 262</value>
+    <value>188, 582</value>
   </data>
   <data name="labelFadeTimeLayer1.Size" type="System.Drawing.Size, System.Drawing">
     <value>32, 13</value>
@@ -2704,7 +2713,10 @@
     <value>customGroupBox1</value>
   </data>
   <data name="&gt;&gt;labelFadeTime.ZOrder" xml:space="preserve">
-    <value>3</value>
+    <value>4</value>
+  </data>
+  <data name="buttonToggleLayerMode.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Bottom, Left</value>
   </data>
   <data name="buttonToggleLayerMode.FlatStyle" type="System.Windows.Forms.FlatStyle, System.Windows.Forms">
     <value>Flat</value>
@@ -2716,7 +2728,7 @@
     <value>NoControl</value>
   </data>
   <data name="buttonToggleLayerMode.Location" type="System.Drawing.Point, System.Drawing">
-    <value>20, 237</value>
+    <value>20, 595</value>
   </data>
   <data name="buttonToggleLayerMode.Size" type="System.Drawing.Size, System.Drawing">
     <value>25, 20</value>
@@ -2737,7 +2749,10 @@
     <value>customGroupBox1</value>
   </data>
   <data name="&gt;&gt;buttonToggleLayerMode.ZOrder" xml:space="preserve">
-    <value>4</value>
+    <value>5</value>
+  </data>
+  <data name="label6.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Bottom, Left</value>
   </data>
   <data name="label6.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -2749,7 +2764,7 @@
     <value>NoControl</value>
   </data>
   <data name="label6.Location" type="System.Drawing.Point, System.Drawing">
-    <value>4, 220</value>
+    <value>4, 578</value>
   </data>
   <data name="label6.Size" type="System.Drawing.Size, System.Drawing">
     <value>68, 13</value>
@@ -2770,13 +2785,16 @@
     <value>customGroupBox1</value>
   </data>
   <data name="&gt;&gt;label6.ZOrder" xml:space="preserve">
-    <value>5</value>
+    <value>6</value>
+  </data>
+  <data name="buttonToggleLayer2.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Bottom, Left</value>
   </data>
   <data name="buttonToggleLayer2.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
   <data name="buttonToggleLayer2.Location" type="System.Drawing.Point, System.Drawing">
-    <value>220, 219</value>
+    <value>220, 577</value>
   </data>
   <data name="buttonToggleLayer2.Size" type="System.Drawing.Size, System.Drawing">
     <value>24, 23</value>
@@ -2794,13 +2812,16 @@
     <value>customGroupBox1</value>
   </data>
   <data name="&gt;&gt;buttonToggleLayer2.ZOrder" xml:space="preserve">
-    <value>6</value>
+    <value>7</value>
+  </data>
+  <data name="buttonToggleLayer1.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Bottom, Left</value>
   </data>
   <data name="buttonToggleLayer1.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
   <data name="buttonToggleLayer1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>220, 260</value>
+    <value>220, 618</value>
   </data>
   <data name="buttonToggleLayer1.Size" type="System.Drawing.Size, System.Drawing">
     <value>24, 23</value>
@@ -2818,7 +2839,10 @@
     <value>customGroupBox1</value>
   </data>
   <data name="&gt;&gt;buttonToggleLayer1.ZOrder" xml:space="preserve">
-    <value>7</value>
+    <value>8</value>
+  </data>
+  <data name="label14.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Bottom, Left</value>
   </data>
   <data name="label14.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -2830,7 +2854,7 @@
     <value>NoControl</value>
   </data>
   <data name="label14.Location" type="System.Drawing.Point, System.Drawing">
-    <value>4, 261</value>
+    <value>4, 619</value>
   </data>
   <data name="label14.Size" type="System.Drawing.Size, System.Drawing">
     <value>65, 13</value>
@@ -2851,7 +2875,10 @@
     <value>customGroupBox1</value>
   </data>
   <data name="&gt;&gt;label14.ZOrder" xml:space="preserve">
-    <value>8</value>
+    <value>9</value>
+  </data>
+  <data name="trackBarFadeTimeLayer1.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Bottom, Left</value>
   </data>
   <data name="trackBarFadeTimeLayer1.AutoSize" type="System.Boolean, mscorlib">
     <value>False</value>
@@ -2860,7 +2887,7 @@
     <value>NoControl</value>
   </data>
   <data name="trackBarFadeTimeLayer1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>71, 260</value>
+    <value>71, 618</value>
   </data>
   <data name="trackBarFadeTimeLayer1.Size" type="System.Drawing.Size, System.Drawing">
     <value>111, 31</value>
@@ -2878,7 +2905,10 @@
     <value>customGroupBox1</value>
   </data>
   <data name="&gt;&gt;trackBarFadeTimeLayer1.ZOrder" xml:space="preserve">
-    <value>9</value>
+    <value>10</value>
+  </data>
+  <data name="trackBarFadeTime.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Bottom, Left</value>
   </data>
   <data name="trackBarFadeTime.AutoSize" type="System.Boolean, mscorlib">
     <value>False</value>
@@ -2887,7 +2917,7 @@
     <value>NoControl</value>
   </data>
   <data name="trackBarFadeTime.Location" type="System.Drawing.Point, System.Drawing">
-    <value>71, 219</value>
+    <value>71, 577</value>
   </data>
   <data name="trackBarFadeTime.Size" type="System.Drawing.Size, System.Drawing">
     <value>111, 35</value>
@@ -2905,19 +2935,19 @@
     <value>customGroupBox1</value>
   </data>
   <data name="&gt;&gt;trackBarFadeTime.ZOrder" xml:space="preserve">
-    <value>10</value>
+    <value>11</value>
   </data>
   <data name="customGroupBox1.Location" type="System.Drawing.Point, System.Drawing">
     <value>3, 73</value>
   </data>
   <data name="customGroupBox1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>254, 296</value>
+    <value>254, 656</value>
   </data>
   <data name="customGroupBox1.TabIndex" type="System.Int32, mscorlib">
     <value>21</value>
   </data>
   <data name="customGroupBox1.Title" xml:space="preserve">
-    <value>Projektion</value>
+    <value>Präsentation</value>
   </data>
   <data name="&gt;&gt;customGroupBox1.Name" xml:space="preserve">
     <value>customGroupBox1</value>

@@ -1276,10 +1276,12 @@
             // 
             // customGroupBox1
             // 
+            resources.ApplyResources(this.customGroupBox1, "customGroupBox1");
             this.customGroupBox1.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.customGroupBox1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.customGroupBox1.Controls.Add(this.pictureBoxbeamerPreview);
             this.customGroupBox1.Controls.Add(this.labelFadeTimeLayer1);
+            this.customGroupBox1.Controls.Add(this.tabControl1);
             this.customGroupBox1.Controls.Add(this.labelFadeTime);
             this.customGroupBox1.Controls.Add(this.buttonToggleLayerMode);
             this.customGroupBox1.Controls.Add(this.label6);
@@ -1288,13 +1290,12 @@
             this.customGroupBox1.Controls.Add(this.label14);
             this.customGroupBox1.Controls.Add(this.trackBarFadeTimeLayer1);
             this.customGroupBox1.Controls.Add(this.trackBarFadeTime);
-            resources.ApplyResources(this.customGroupBox1, "customGroupBox1");
             this.customGroupBox1.Name = "customGroupBox1";
             // 
             // pictureBoxbeamerPreview
             // 
-            this.pictureBoxbeamerPreview.BackColor = System.Drawing.Color.Black;
             resources.ApplyResources(this.pictureBoxbeamerPreview, "pictureBoxbeamerPreview");
+            this.pictureBoxbeamerPreview.BackColor = System.Drawing.Color.Black;
             this.pictureBoxbeamerPreview.Name = "pictureBoxbeamerPreview";
             this.pictureBoxbeamerPreview.TabStop = false;
             // 
@@ -1310,10 +1311,10 @@
             // 
             // buttonToggleLayerMode
             // 
+            resources.ApplyResources(this.buttonToggleLayerMode, "buttonToggleLayerMode");
             this.buttonToggleLayerMode.FlatAppearance.BorderSize = 0;
             this.buttonToggleLayerMode.FlatAppearance.MouseDownBackColor = System.Drawing.SystemColors.Control;
             this.buttonToggleLayerMode.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control;
-            resources.ApplyResources(this.buttonToggleLayerMode, "buttonToggleLayerMode");
             this.buttonToggleLayerMode.Image = global::PraiseBase.Presenter.Properties.Resources.unlink;
             this.buttonToggleLayerMode.Name = "buttonToggleLayerMode";
             this.buttonToggleLayerMode.UseVisualStyleBackColor = true;
@@ -1326,16 +1327,16 @@
             // 
             // buttonToggleLayer2
             // 
-            this.buttonToggleLayer2.Image = global::PraiseBase.Presenter.Properties.Resources.leinwand16_no;
             resources.ApplyResources(this.buttonToggleLayer2, "buttonToggleLayer2");
+            this.buttonToggleLayer2.Image = global::PraiseBase.Presenter.Properties.Resources.leinwand16_no;
             this.buttonToggleLayer2.Name = "buttonToggleLayer2";
             this.buttonToggleLayer2.UseVisualStyleBackColor = true;
             this.buttonToggleLayer2.Click += new System.EventHandler(this.buttonToggleLayer2_Click);
             // 
             // buttonToggleLayer1
             // 
-            this.buttonToggleLayer1.Image = global::PraiseBase.Presenter.Properties.Resources.leinwand16_no;
             resources.ApplyResources(this.buttonToggleLayer1, "buttonToggleLayer1");
+            this.buttonToggleLayer1.Image = global::PraiseBase.Presenter.Properties.Resources.leinwand16_no;
             this.buttonToggleLayer1.Name = "buttonToggleLayer1";
             this.buttonToggleLayer1.UseVisualStyleBackColor = true;
             this.buttonToggleLayer1.Click += new System.EventHandler(this.buttonToggleLayer1_Click);
@@ -1368,7 +1369,6 @@
             this.BackColor = System.Drawing.SystemColors.ControlLight;
             this.Controls.Add(this.customGroupBox1);
             this.Controls.Add(this.tableLayoutPanel1);
-            this.Controls.Add(this.tabControl1);
             this.Controls.Add(this.toolStrip1);
             this.Controls.Add(this.menuStrip1);
             this.MainMenuStrip = this.menuStrip1;
