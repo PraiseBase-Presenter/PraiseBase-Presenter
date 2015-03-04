@@ -96,7 +96,9 @@ namespace PraiseBase.Presenter.Forms
                 sng.Language = settings.SongDefaultLanguage;
                 SongPart tmpPart = new SongPart();
                 tmpPart.Caption = settings.SongPartDefaultName;
-                tmpPart.Slides.Add(new SongSlide());
+                SongSlide tmpSlide = new SongSlide();
+                tmpSlide.Background = new ColorBackground(Settings.Default.ProjectionBackColor);
+                tmpPart.Slides.Add(tmpSlide);
                 sng.Parts.Add(tmpPart);
 
                 sng.MainText = new TextFormatting(

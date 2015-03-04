@@ -214,6 +214,10 @@ namespace PraiseBase.Presenter.Persistence.PowerPraise
 
                     string bg = mapBackground(songSlide.Background);
                     int backgroundNr = 0;
+                    if (bg == null)
+                    {
+                        bg = PowerPraiseConstants.DefaultBackground;
+                    }
                     if (!backgrounds.ContainsKey(bg))
                     {
                         backgroundNr = bgIndex;

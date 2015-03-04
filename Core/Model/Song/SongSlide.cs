@@ -179,7 +179,11 @@ namespace PraiseBase.Presenter.Model.Song
         /// <returns></returns>
         public override int GetHashCode()
         {
-            int res = Background.GetHashCode() + TextSize.GetHashCode();
+            int res =  + TextSize.GetHashCode();
+            if (Background != null) 
+            {
+                res = res ^ Background.GetHashCode();
+            }
             for (int i = 0; i < Lines.Count; i++)
             {
                 res = res ^ Lines[i].GetHashCode();
