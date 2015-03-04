@@ -73,6 +73,11 @@ namespace PraiseBase.Presenter.Persistence.PowerPraise
 
             List<string> usedImages = new List<string>();
             int numBackgrounds = sng.BackgroundImages.Count;
+            if (numBackgrounds == 0)
+            {
+                sng.BackgroundImages.Add(PowerPraiseConstants.DefaultBackground);
+                numBackgrounds++;
+            }
 
             // Song parts
             foreach (PowerPraiseSongPart prt in sng.Parts)
@@ -184,14 +189,14 @@ namespace PraiseBase.Presenter.Persistence.PowerPraise
             xmlRoot["formatting"]["font"]["outline"].AppendChild(xmlDoc.CreateElement("enabled"));
             xmlRoot["formatting"]["font"]["outline"]["enabled"].InnerText = sng.TextOutlineFormatting.Enabled ? "true" : "false";
             xmlRoot["formatting"]["font"]["outline"].AppendChild(xmlDoc.CreateElement("color"));
-            xmlRoot["formatting"]["font"]["outline"]["color"].InnerText = (16777216 + sng.TextOutlineFormatting.Color.ToArgb()).ToString();
+            xmlRoot["formatting"]["font"]["outline"]["color"].InnerText = PowerPraiseFileUtil.ConvertColor(sng.TextOutlineFormatting.Color).ToString();
 
             // Shadow
             xmlRoot["formatting"]["font"].AppendChild(xmlDoc.CreateElement("shadow"));
             xmlRoot["formatting"]["font"]["shadow"].AppendChild(xmlDoc.CreateElement("enabled"));
             xmlRoot["formatting"]["font"]["shadow"]["enabled"].InnerText = sng.TextShadowFormatting.Enabled ? "true" : "false";
             xmlRoot["formatting"]["font"]["shadow"].AppendChild(xmlDoc.CreateElement("color"));
-            xmlRoot["formatting"]["font"]["shadow"]["color"].InnerText = (16777216 + sng.TextShadowFormatting.Color.ToArgb()).ToString();
+            xmlRoot["formatting"]["font"]["shadow"]["color"].InnerText = PowerPraiseFileUtil.ConvertColor(sng.TextShadowFormatting.Color).ToString();
             xmlRoot["formatting"]["font"]["shadow"].AppendChild(xmlDoc.CreateElement("direction"));
             xmlRoot["formatting"]["font"]["shadow"]["direction"].InnerText = sng.TextShadowFormatting.Direction.ToString();
 
@@ -280,7 +285,7 @@ namespace PraiseBase.Presenter.Persistence.PowerPraise
             elem[key].AppendChild(xmlDoc.CreateElement("italic"));
             elem[key]["italic"].InnerText = (f.Font.Italic).ToString().ToLower();
             elem[key].AppendChild(xmlDoc.CreateElement("color"));
-            elem[key]["color"].InnerText = (16777216 + f.Color.ToArgb()).ToString();
+            elem[key]["color"].InnerText = PowerPraiseFileUtil.ConvertColor(f.Color).ToString();
             elem[key].AppendChild(xmlDoc.CreateElement("outline"));
             elem[key]["outline"].InnerText = f.OutlineWidth.ToString();
             elem[key].AppendChild(xmlDoc.CreateElement("shadow"));

@@ -158,7 +158,7 @@ namespace PraiseBase.Presenter.Persistence.PowerPraise
                 {
                     try
                     {
-                        return new ColorBackground(Color.FromArgb(255, Color.FromArgb(trySize)));
+                        return new ColorBackground(PowerPraiseFileUtil.ConvertColor(trySize));
                     } 
                     catch (ArgumentException)
                     {
@@ -182,10 +182,10 @@ namespace PraiseBase.Presenter.Persistence.PowerPraise
                 }
                 if (bg.GetType() == typeof(ColorBackground))
                 {
-                    return (16777216 + ((ColorBackground)bg).Color.ToArgb()).ToString();
+                    return PowerPraiseFileUtil.ConvertColor(((ColorBackground)bg).Color).ToString();
                 }
             }
-            return (16777216 + (Color.Black.ToArgb()).ToString());
+            return null;
         }
 
         /// <summary>

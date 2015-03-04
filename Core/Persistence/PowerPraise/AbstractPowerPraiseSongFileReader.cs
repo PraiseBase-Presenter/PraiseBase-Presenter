@@ -360,7 +360,7 @@ namespace PraiseBase.Presenter.Persistence.PowerPraise
 
                 // Parse color
                 int.TryParse(elem["color"].InnerText, out trySize);
-                f.Color = Color.FromArgb(255, Color.FromArgb(trySize));
+                f.Color = PowerPraiseFileUtil.ConvertColor(trySize);
 
                 // Parse outline width
                 if (int.TryParse(elem["outline"].InnerText, out trySize))
@@ -392,7 +392,7 @@ namespace PraiseBase.Presenter.Persistence.PowerPraise
                 int tryColor;
                 if (int.TryParse(elem["color"].InnerText, out tryColor))
                 {
-                    outline.Color = Color.FromArgb(255, Color.FromArgb(tryColor));
+                    outline.Color = PowerPraiseFileUtil.ConvertColor(tryColor);
                 }
             }
             return outline;
@@ -413,7 +413,7 @@ namespace PraiseBase.Presenter.Persistence.PowerPraise
                 int tryColor;
                 if (int.TryParse(elem["color"].InnerText, out tryColor))
                 {
-                    shadow.Color = Color.FromArgb(255, Color.FromArgb(tryColor));
+                    shadow.Color = PowerPraiseFileUtil.ConvertColor(tryColor);
                 }
                 int shadowDirection;
                 int.TryParse(elem["direction"].InnerText, out shadowDirection);
