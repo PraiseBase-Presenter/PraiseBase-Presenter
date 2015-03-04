@@ -842,12 +842,7 @@ namespace PraiseBase.Presenter.Forms
         private void buttonSlideBackground_Click(object sender, EventArgs e)
         {
             ImageDialog imd = new ImageDialog();
-
-            var bg = sng.Parts[currentPartId].Slides[currentSlideId].Background;
-            if (bg != null && bg.GetType() == typeof(ImageBackground))
-            {
-                imd.imagePath = ((ImageBackground)bg).ImagePath;
-            }
+            imd.Background = sng.Parts[currentPartId].Slides[currentSlideId].Background;
 
             if (sng.GetNumberOfBackgroundImages() == 0)
             {
@@ -856,7 +851,7 @@ namespace PraiseBase.Presenter.Forms
 
             if (imd.ShowDialog(this) == DialogResult.OK)
             {
-                if (imd.imagePath != "")
+                if (imd.Background != null)
                 {
                     if (imd.forAll)
                     {
@@ -864,13 +859,13 @@ namespace PraiseBase.Presenter.Forms
                         {
                             for (int j = 0; j < sng.Parts[i].Slides.Count; j++)
                             {
-                                sng.Parts[i].Slides[j].Background = new ImageBackground(imd.imagePath);
+                                sng.Parts[i].Slides[j].Background = imd.Background;
                             }
                         }
                     }
                     else
                     {
-                        sng.Parts[currentPartId].Slides[currentSlideId].Background = new ImageBackground(imd.imagePath);
+                        sng.Parts[currentPartId].Slides[currentSlideId].Background = imd.Background;
                     }
                 }
                 else

@@ -33,8 +33,16 @@
             this.listViewImages = new System.Windows.Forms.ListView();
             this.buttonCancel = new System.Windows.Forms.Button();
             this.buttonOK = new System.Windows.Forms.Button();
-            this.buttonNoImage = new System.Windows.Forms.Button();
             this.checkBoxForAll = new System.Windows.Forms.CheckBox();
+            this.tabControlBackgroundType = new System.Windows.Forms.TabControl();
+            this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.buttonSelectColor = new System.Windows.Forms.Button();
+            this.pictureBoxColor = new System.Windows.Forms.PictureBox();
+            this.tabControlBackgroundType.SuspendLayout();
+            this.tabPage1.SuspendLayout();
+            this.tabPage2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxColor)).BeginInit();
             this.SuspendLayout();
             // 
             // treeViewDirs
@@ -69,18 +77,53 @@
             this.buttonOK.UseVisualStyleBackColor = true;
             this.buttonOK.Click += new System.EventHandler(this.buttonOK_Click);
             // 
-            // buttonNoImage
-            // 
-            resources.ApplyResources(this.buttonNoImage, "buttonNoImage");
-            this.buttonNoImage.Name = "buttonNoImage";
-            this.buttonNoImage.UseVisualStyleBackColor = true;
-            this.buttonNoImage.Click += new System.EventHandler(this.buttonNoImage_Click);
-            // 
             // checkBoxForAll
             // 
             resources.ApplyResources(this.checkBoxForAll, "checkBoxForAll");
             this.checkBoxForAll.Name = "checkBoxForAll";
             this.checkBoxForAll.UseVisualStyleBackColor = true;
+            // 
+            // tabControlBackgroundType
+            // 
+            this.tabControlBackgroundType.Controls.Add(this.tabPage1);
+            this.tabControlBackgroundType.Controls.Add(this.tabPage2);
+            resources.ApplyResources(this.tabControlBackgroundType, "tabControlBackgroundType");
+            this.tabControlBackgroundType.Name = "tabControlBackgroundType";
+            this.tabControlBackgroundType.SelectedIndex = 0;
+            this.tabControlBackgroundType.SelectedIndexChanged += new System.EventHandler(this.tabControlBackgroundType_SelectedIndexChanged);
+            // 
+            // tabPage1
+            // 
+            this.tabPage1.Controls.Add(this.treeViewDirs);
+            this.tabPage1.Controls.Add(this.listViewImages);
+            resources.ApplyResources(this.tabPage1, "tabPage1");
+            this.tabPage1.Name = "tabPage1";
+            this.tabPage1.UseVisualStyleBackColor = true;
+            // 
+            // tabPage2
+            // 
+            this.tabPage2.Controls.Add(this.buttonSelectColor);
+            this.tabPage2.Controls.Add(this.pictureBoxColor);
+            resources.ApplyResources(this.tabPage2, "tabPage2");
+            this.tabPage2.Name = "tabPage2";
+            this.tabPage2.UseVisualStyleBackColor = true;
+            // 
+            // buttonSelectColor
+            // 
+            resources.ApplyResources(this.buttonSelectColor, "buttonSelectColor");
+            this.buttonSelectColor.Name = "buttonSelectColor";
+            this.buttonSelectColor.UseVisualStyleBackColor = true;
+            this.buttonSelectColor.Click += new System.EventHandler(this.buttonSelectColor_Click);
+            // 
+            // pictureBoxColor
+            // 
+            this.pictureBoxColor.BackColor = System.Drawing.Color.Black;
+            this.pictureBoxColor.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pictureBoxColor.Cursor = System.Windows.Forms.Cursors.Hand;
+            resources.ApplyResources(this.pictureBoxColor, "pictureBoxColor");
+            this.pictureBoxColor.Name = "pictureBoxColor";
+            this.pictureBoxColor.TabStop = false;
+            this.pictureBoxColor.Click += new System.EventHandler(this.pictureBoxColor_Click);
             // 
             // ImageDialog
             // 
@@ -88,17 +131,19 @@
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.buttonCancel;
+            this.Controls.Add(this.tabControlBackgroundType);
             this.Controls.Add(this.checkBoxForAll);
-            this.Controls.Add(this.buttonNoImage);
             this.Controls.Add(this.buttonOK);
             this.Controls.Add(this.buttonCancel);
-            this.Controls.Add(this.listViewImages);
-            this.Controls.Add(this.treeViewDirs);
             this.MinimizeBox = false;
             this.Name = "ImageDialog";
             this.ShowIcon = false;
             this.ShowInTaskbar = false;
             this.Load += new System.EventHandler(this.ImageDialog_Load);
+            this.tabControlBackgroundType.ResumeLayout(false);
+            this.tabPage1.ResumeLayout(false);
+            this.tabPage2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxColor)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -109,8 +154,12 @@
 		private System.Windows.Forms.TreeView treeViewDirs;
 		private System.Windows.Forms.ListView listViewImages;
 		private System.Windows.Forms.Button buttonCancel;
-		private System.Windows.Forms.Button buttonOK;
-		private System.Windows.Forms.Button buttonNoImage;
+        private System.Windows.Forms.Button buttonOK;
 		private System.Windows.Forms.CheckBox checkBoxForAll;
+        private System.Windows.Forms.TabControl tabControlBackgroundType;
+        private System.Windows.Forms.TabPage tabPage1;
+        private System.Windows.Forms.TabPage tabPage2;
+        private System.Windows.Forms.Button buttonSelectColor;
+        private System.Windows.Forms.PictureBox pictureBoxColor;
 	}
 }

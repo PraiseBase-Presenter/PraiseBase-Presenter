@@ -24,12 +24,14 @@ using System;
 using System.IO;
 using System.Windows.Forms;
 using PraiseBase.Presenter.Properties;
+using System.Drawing;
+using PraiseBase.Presenter.Model.Song;
 
 namespace PraiseBase.Presenter.Forms
 {
     public partial class ImageDialog : Form
     {
-        public string imagePath { get; set; }
+        public IBackground Background { get; set; }
 
         public bool forAll
         {
@@ -50,14 +52,26 @@ namespace PraiseBase.Presenter.Forms
 
         private void buttonOK_Click(object sender, EventArgs e)
         {
-            if (listViewImages.SelectedItems.Count > 0)
+            if (tabControlBackgroundType.SelectedIndex == 0)
             {
-                imagePath = (string)listViewImages.SelectedItems[0].Tag;
-                DialogResult = DialogResult.OK;
+                if (listViewImages.SelectedItems.Count > 0)
+                {
+                    string image = (string)listViewImages.SelectedItems[0].Tag;
+                    if (image != null && image != string.Empty)
+                    {
+                        Background = new ImageBackground(image);
+                        DialogResult = DialogResult.OK;
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("Kein Bild gewählt!", "Bildmanager", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                }
             }
-            else
+            else if (tabControlBackgroundType.SelectedIndex == 1)
             {
-                MessageBox.Show("Kein Bild gewählt!", "Bildmanager", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                Background = new ColorBackground(pictureBoxColor.BackColor);
+                DialogResult = DialogResult.OK;
             }
         }
 
@@ -70,6 +84,16 @@ namespace PraiseBase.Presenter.Forms
         {
             Application.DoEvents();
             imageTreeViewInit();
+
+            if (Background != null && Background.GetType() == typeof(ImageBackground))
+            {
+                tabControlBackgroundType.SelectedIndex = 0;
+            }
+            else if (Background != null && Background.GetType() == typeof(ColorBackground))
+            {
+                pictureBoxColor.BackColor = ((ColorBackground)Background).Color;
+                tabControlBackgroundType.SelectedIndex = 1;
+            }
         }
 
         public void imageTreeViewInit()
@@ -107,9 +131,13 @@ namespace PraiseBase.Presenter.Forms
                                 myNode.Tag = directory.Substring(subLen);
                                 parentNode.Nodes.Add(myNode);
 
-                                if (imagePath != string.Empty && directory.Substring(subLen) == Path.GetDirectoryName(imagePath))
+                                if (Background != null && Background.GetType() == typeof(ImageBackground))
                                 {
-                                    treeViewDirs.SelectedNode = myNode;
+                                    String imagePath = ((ImageBackground)Background).ImagePath;
+                                    if (imagePath != string.Empty && directory.Substring(subLen) == Path.GetDirectoryName(imagePath))
+                                    {
+                                        treeViewDirs.SelectedNode = myNode;
+                                    }
                                 }
 
                                 PopulateTreeView(directory, myNode);
@@ -152,9 +180,10 @@ namespace PraiseBase.Presenter.Forms
                     lvi.ImageIndex = i;
                     listViewImages.Items.Add(lvi);
                     imList.Images.Add(ImageManager.Instance.GetThumbFromRelPath(relativePath));
-                    if (relativePath == imagePath)
+                    if (Background != null && Background.GetType() == typeof (ImageBackground) && relativePath == ((ImageBackground)Background).ImagePath)
+                    {
                         listViewImages.Items[i].Selected = true;
-
+                    }
                     i++;
                 }
                 listViewImages.LargeImageList = imList;
@@ -175,10 +204,32 @@ namespace PraiseBase.Presenter.Forms
                 buttonOK_Click(sender, e);
         }
 
-        private void buttonNoImage_Click(object sender, EventArgs e)
+        private void buttonSelectColor_Click(object sender, EventArgs e)
         {
-            imagePath = String.Empty;
-            DialogResult = DialogResult.OK;
+            ColorDialog dlg = new ColorDialog();
+            dlg.Color = pictureBoxColor.BackColor;
+            if (dlg.ShowDialog(this) == System.Windows.Forms.DialogResult.OK)
+            {
+                pictureBoxColor.BackColor = dlg.Color;
+            }
+        }
+
+        private void pictureBoxColor_Click(object sender, EventArgs e)
+        {
+            ColorDialog dlg = new ColorDialog();
+            dlg.Color = pictureBoxColor.BackColor;
+            if (dlg.ShowDialog(this) == System.Windows.Forms.DialogResult.OK)
+            {
+                pictureBoxColor.BackColor = dlg.Color;
+            }
+        }
+
+        private void tabControlBackgroundType_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (tabControlBackgroundType.SelectedIndex == 1)
+            {
+                buttonOK.Enabled = true;
+            }
         }
     }
 }
