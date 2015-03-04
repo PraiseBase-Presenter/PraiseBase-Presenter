@@ -72,7 +72,10 @@ namespace PraiseBase.Presenter.Persistence.PowerPraise
                 foreach (PowerPraiseSongSlide sld in prt.Slides)
                 {
                     SongSlide slide = new SongSlide();
-                    slide.Background = parseBackground(ppl.BackgroundImages[sld.BackgroundNr]);
+                    if (sld.BackgroundNr >= 0 && ppl.BackgroundImages.Count > sld.BackgroundNr - 1)
+                    {
+                        slide.Background = parseBackground(ppl.BackgroundImages[sld.BackgroundNr]);
+                    }
                     slide.TextSize = sld.MainSize > 0 ? sld.MainSize : (song.MainText.Font != null ? song.MainText.Font.Size : 0);
                     slide.Lines.AddRange(sld.Lines);
                     slide.Translation.AddRange(sld.Translation);
