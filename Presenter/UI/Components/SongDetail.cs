@@ -27,8 +27,6 @@ namespace SongDetails
         private List<PictureBox> slideImages;
         private int currentSlideTextIdx = -1;
 
-        //private int currentSlideImageIdx = -1;
-
         private int refrainIndex;
         private int prechorusIndex;
         private int bridgeIndex;
@@ -41,9 +39,8 @@ namespace SongDetails
         // Look and feel
         //
 
-        private const int elemHeight = 62;
-
         private Color spacerColor = Color.LightGray;
+        private const int spaceHeight = 1;
 
         private Color borderNormalColor = Color.Transparent;
         private Color borderHoverColor = Color.DarkGray;
@@ -61,6 +58,8 @@ namespace SongDetails
         private Font slideTextFont = new Font("Arial", 11);
 
         private const int thumbnailLabelSpacing = 10;
+
+        private const int itemBorderWidth = 2;
 
         Point startPoint = new Point(0, 5);
 
@@ -142,7 +141,7 @@ namespace SongDetails
                 pnl.Tag = numParts;
                 pnl.Paint += new PaintEventHandler(partPnl_Paint);
                 pnl.Location = new Point(startPoint.X, ypos);
-                pnl.Height = numSlides * (elemHeight) + 4;
+                pnl.Height = numSlides * (thumbSize.Height) + 4;
 
                 // Add part caption label to panel
                 Label plbl = new Label();
@@ -151,18 +150,20 @@ namespace SongDetails
                 plbl.Location = new Point(5, 5);
                 plbl.Size = labelSize;
                 pnl.Controls.Add(plbl);
-
-                ypos += pnl.Height + 10;
                 this.Controls.Add(pnl);
+
+                ypos += pnl.Height + 2;
 
                 // Add spacer panel (gray line)
                 Panel lpnl = new Panel();
                 lpnl.Name = "spacerPanel" + numParts.ToString();
-                lpnl.Location = new Point(startPoint.X + 5, ypos - 8);
+                lpnl.Location = new Point(startPoint.X + 5, ypos);
                 lpnl.BackColor = spacerColor;
-                lpnl.Height = 1;
+                lpnl.Height = spaceHeight;
                 lpnl.Paint += new PaintEventHandler(lpnl_Paint);
                 this.Controls.Add(lpnl);
+
+                ypos += lpnl.Height + 7;
 
                 // Add sub-panels for each slide
                 for (int j = 0; j < numSlides; j++)
@@ -170,22 +171,22 @@ namespace SongDetails
                     // Slide panel
                     Panel slidePanel = new Panel();
                     slidePanel.Tag = j;
-                    slidePanel.Location = new Point(slidePanelOffset, j * elemHeight);
-                    slidePanel.Height = elemHeight;
+                    slidePanel.Location = new Point(slidePanelOffset, j * (thumbSize.Height));
+                    slidePanel.Height = thumbSize.Height;
                     slidePanel.Paint += new PaintEventHandler(spnl_Paint);
                     pnl.Controls.Add(slidePanel);
 
                     // Picture box banel
                     Panel panelPreviewPictureBoxContainer = new Panel();
                     panelPreviewPictureBoxContainer.Location = new Point(1, 1);
-                    panelPreviewPictureBoxContainer.Size = new Size(thumbSize.Width, slidePanel.Height);
+                    panelPreviewPictureBoxContainer.Size = thumbSize;
                     panelPreviewPictureBoxContainer.BackColor = borderNormalColor;
                     slidePanel.Controls.Add(panelPreviewPictureBoxContainer);
 
                     // Picture box
                     PictureBox previewPictureBox = new PictureBox();
-                    previewPictureBox.Location = new Point(2, 2);
-                    previewPictureBox.Size = new Size(panelPreviewPictureBoxContainer.Width - 4, panelPreviewPictureBoxContainer.Height - 5);
+                    previewPictureBox.Location = new Point(itemBorderWidth, itemBorderWidth);
+                    previewPictureBox.Size = new Size(panelPreviewPictureBoxContainer.Width - (2 * itemBorderWidth), panelPreviewPictureBoxContainer.Height - (2 * itemBorderWidth) - 1);
                     var bg = sng.Parts[numParts].Slides[j].Background;
                     previewPictureBox.Image = PraiseBase.Presenter.ImageManager.Instance.GetThumb(bg);
                     previewPictureBox.Tag = bg;
@@ -209,8 +210,8 @@ namespace SongDetails
 
                     // Text label
                     Label textLbl = new Label();
-                    textLbl.Location = new Point(2, 2);
-                    textLbl.Height = panelTextLabelContainer.Height - 4;
+                    textLbl.Location = new Point(itemBorderWidth, itemBorderWidth);
+                    textLbl.Height = panelTextLabelContainer.Height - (2 * itemBorderWidth);
                     textLbl.Text = sng.Parts[numParts].Slides[j].GetOneLineText();
                     textLbl.ForeColor = itemNormalFG;
                     textLbl.BackColor = itemNormalBG;
@@ -438,7 +439,7 @@ namespace SongDetails
         private void textLbl_Paint(object sender, PaintEventArgs e)
         {
             Label lbl = ((Label)sender);
-            lbl.Width = (lbl.Parent.Width) - 4;
+            lbl.Width = (lbl.Parent.Width) - (2 * itemBorderWidth);
         }
 
         private void spnl_Paint(object sender, PaintEventArgs e)
