@@ -50,6 +50,7 @@ namespace SongDetails
         private Color borderActiveColor = Color.Black;
 
         private Color itemNormalFG = Color.Black;
+        private Color itemHoverFG = Color.Black;
         private Color itemActiveFG = Color.White;
 
         private Color itemNormalBG = Color.White;
@@ -400,6 +401,7 @@ namespace SongDetails
             {
                 ((Label)sender).Parent.BackColor = borderHoverColor;
                 ((Label)sender).BackColor = itemHoverBG;
+                ((Label)sender).ForeColor = itemHoverFG;
                 int idx = slideTexts.IndexOf((Label)sender);
                 if (idx >= 0 && idx < slideImages.Count)
                 {
@@ -414,6 +416,7 @@ namespace SongDetails
             {
                 ((Label)sender).Parent.BackColor = borderNormalColor;
                 ((Label)sender).BackColor = itemNormalBG;
+                ((Label)sender).ForeColor = itemNormalFG;
                 int idx = slideTexts.IndexOf((Label)sender);
                 if (idx >= 0 && idx < slideImages.Count)
                 {
