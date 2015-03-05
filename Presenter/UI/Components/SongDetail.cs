@@ -59,7 +59,11 @@ namespace SongDetails
         private Font partCaptionFont = new Font("Arial", 16);
         private Font slideTextFont = new Font("Arial", 11);
 
-        private int thumbWidth;
+        private const int thumbnailLabelSpacing = 10;
+
+        Point startPoint = new Point(0, 5);
+
+        private Size thumbSize;
 
         public SongDetail()
         {
@@ -67,7 +71,7 @@ namespace SongDetails
             slideTexts = new List<Label>();
             slideImages = new List<PictureBox>();
 
-            thumbWidth = PraiseBase.Presenter.Properties.Settings.Default.ThumbSize.Width;
+            thumbSize = PraiseBase.Presenter.Properties.Settings.Default.ThumbSize;
         }
 
         public void setSong(Song sng)
@@ -111,8 +115,6 @@ namespace SongDetails
             //
             // Draw new stuff
             //
-
-            Point startPoint = new Point(0, 5);
 
             int ypos = startPoint.Y;
 
@@ -175,7 +177,7 @@ namespace SongDetails
                     // Picture box banel
                     Panel panelPreviewPictureBoxContainer = new Panel();
                     panelPreviewPictureBoxContainer.Location = new Point(1, 1);
-                    panelPreviewPictureBoxContainer.Size = new Size(thumbWidth, slidePanel.Height);
+                    panelPreviewPictureBoxContainer.Size = new Size(thumbSize.Width, slidePanel.Height);
                     panelPreviewPictureBoxContainer.BackColor = borderNormalColor;
                     slidePanel.Controls.Add(panelPreviewPictureBoxContainer);
 
@@ -197,7 +199,7 @@ namespace SongDetails
 
                     // Text label panel
                     Panel panelTextLabelContainer = new Panel();
-                    panelTextLabelContainer.Location = new Point(thumbWidth + 10, 1);
+                    panelTextLabelContainer.Location = new Point(thumbSize.Width + thumbnailLabelSpacing, 1);
                     panelTextLabelContainer.Height = slidePanel.Height - 1;
                     panelTextLabelContainer.BackColor = borderNormalColor;
                     panelTextLabelContainer.Padding = new System.Windows.Forms.Padding(2, 3, 2, 3);
