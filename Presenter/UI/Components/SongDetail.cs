@@ -214,6 +214,7 @@ namespace SongDetails
                     textLbl.Font = slideTextFont;
                     textLbl.Enabled = true;
                     textLbl.AutoEllipsis = true;
+                    textLbl.UseCompatibleTextRendering = true;
                     textLbl.Cursor = Cursors.Hand;
                     textLbl.Tag = j;
                     textLbl.Paint += new PaintEventHandler(textLbl_Paint);
