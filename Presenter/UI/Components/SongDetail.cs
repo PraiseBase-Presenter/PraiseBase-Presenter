@@ -56,6 +56,11 @@ namespace SongDetails
 
         public void setSong(Song sng)
         {
+            setSong(sng, null, null);
+        }
+
+        public void setSong(Song sng, Song previousSong, Song nextSong)
+        {
             this.VerticalScroll.Value = 0;
             PerformLayout();
 
@@ -94,6 +99,11 @@ namespace SongDetails
                 labelSize = new Size(Math.Max(labelSize.Width, measured.Width), Math.Max(labelSize.Height, measured.Height));
             }
             slidePanelOffset = labelSize.Width + 20;
+
+            if (previousSong != null)
+            {
+                // TODO
+            }
 
             for (numParts = 0; numParts < sng.Parts.Count; numParts++)
             {
@@ -216,6 +226,12 @@ namespace SongDetails
                     panelTextLabelContainer.Controls.Add(textLbl);
                 }
             }
+
+            if (nextSong != null)
+            {
+                // TODO
+            }
+
             currentSong = sng;
 
             this.ResumeLayout();
