@@ -38,8 +38,6 @@
             this.BackColor = System.Drawing.Color.White;
             this.Name = "SongDetail";
             this.Size = new System.Drawing.Size(392, 266);
-            this.Load += new System.EventHandler(this.SongDetail_Load);
-            this.KeyUp += new System.Windows.Forms.KeyEventHandler(this.SongDetail_KeyUp);
             this.ResumeLayout(false);
 
         }

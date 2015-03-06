@@ -356,31 +356,52 @@ namespace PraiseBase.Presenter.Forms
         {
             if (listViewSetList.SelectedIndices.Count > 0)
             {
+                Song previousSong = null;
+                Song nextSong = null;
+
                 if (tabControlTextLayer.SelectedIndex != 0)
                     tabControlTextLayer.SelectedIndex = 0;
 
                 int idx = listViewSetList.SelectedIndices[0];
                 if (idx > 0)
+                {
                     buttonSetListUp.Enabled = true;
+                    Guid prevSongId = (Guid)listViewSetList.Items[idx - 1].Tag;
+                    previousSong = SongManager.Instance.SongList[prevSongId].Song;
+                }
                 else
+                {
                     buttonSetListUp.Enabled = false;
+                }
                 if (idx < listViewSetList.Items.Count - 1)
+                {
                     buttonSetListDown.Enabled = true;
+                    Guid nextSongId = (Guid)listViewSetList.Items[idx + 1].Tag;
+                    nextSong = SongManager.Instance.SongList[nextSongId].Song;
+                }
                 else
+                {
                     buttonSetListDown.Enabled = false;
+                }
                 buttonSetListRem.Enabled = true;
 
-                SongManager.Instance.CurrentSong = SongManager.Instance.SongList[(Guid)listViewSetList.SelectedItems[0].Tag];
-                showCurrentSongDetails();
+                Guid currentSongId = (Guid)listViewSetList.SelectedItems[0].Tag;
+                SongManager.Instance.CurrentSong = SongManager.Instance.SongList[currentSongId];
+                showCurrentSongDetails(previousSong, nextSong);
             }
         }
 
         private void showCurrentSongDetails()
         {
+            showCurrentSongDetails(null, null);
+        }
+
+        private void showCurrentSongDetails(Song previousSong, Song nextSong)
+        {
             Application.DoEvents();
 
             label3.Text = SongManager.Instance.CurrentSong.Song.Title;
-            songDetailElement.setSong(SongManager.Instance.CurrentSong.Song);
+            songDetailElement.setSong(SongManager.Instance.CurrentSong.Song, previousSong, nextSong);
 
             toolStripButtonQA.Enabled = true;
             updateQAButtonStage();
@@ -1977,6 +1998,32 @@ namespace PraiseBase.Presenter.Forms
         private void splitContainerLayerContent_SplitterMoved(object sender, SplitterEventArgs e)
         {
             Settings.Default.LayerContentSplitterPosition = splitContainerLayerContent.SplitterDistance;
+        }
+
+        private void songDetailElement_PreviousSongClicked(object sender, SongSwitchEventArgs e)
+        {
+            if (e.Song != null)
+            {
+                int idx = listViewSetList.SelectedIndices[0];
+                if (idx > 0)
+                {
+                    listViewSetList.Items[idx - 1].Selected = true;
+                    songDetailElement.Focus();
+                }
+            }
+        }
+
+        private void songDetailElement_NextSongClicked(object sender, SongSwitchEventArgs e)
+        {
+            if (e.Song != null)
+            {
+                int idx = listViewSetList.SelectedIndices[0];
+                if (idx < listViewSetList.Items.Count - 1)
+                {
+                    listViewSetList.Items[idx + 1].Selected = true;
+                    songDetailElement.Focus();
+                }
+            }
         }
     }
 }
