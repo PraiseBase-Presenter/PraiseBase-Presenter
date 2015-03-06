@@ -391,6 +391,14 @@ namespace SongDetails
                     plbl_ClickPrev(prevSongButton, e);
                 }
             }
+            else if (e.KeyCode == Keys.PageDown && currentSlideTextIdx >= 0 && currentSlideTextIdx < slideTexts.Count - 1)
+            {
+                textLbl_Click(slideTexts[slideTexts.Count - 1], new EventArgs());
+            }
+            else if (e.KeyCode == Keys.PageUp && currentSlideTextIdx > 0)
+            {
+                textLbl_Click(slideTexts[0], new EventArgs());
+            }
             else if ((e.KeyCode == Keys.R || e.KeyCode == Keys.C) && refrainIndex >= 0)
             {
                 textLbl_Click(slideTexts[refrainIndex], new EventArgs());
