@@ -232,7 +232,11 @@ namespace PraiseBase.Presenter
             {
                 if (bg.GetType() == typeof(ImageBackground))
                 {
-                    return GetThumbFromRelPath(((ImageBackground)bg).ImagePath);
+                    Image img = GetThumbFromRelPath(((ImageBackground)bg).ImagePath);
+                    if (img != null)
+                    {
+                        return img;
+                    }
                 }
                 else if (bg.GetType() == typeof(ColorBackground))
                 {

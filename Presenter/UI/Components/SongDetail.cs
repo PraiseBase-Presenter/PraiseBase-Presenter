@@ -64,7 +64,6 @@ namespace SongDetails
 
         private const int thumbnailLabelSpacing = 5;
 
-        private const int itemBorderWidth = 0;
         private const int slidePanelElementSpacing = 1;
 
         private const int songSwitchPanelPadding = 5;
@@ -336,7 +335,7 @@ namespace SongDetails
 
             Panel lpnl = new Panel();
             lpnl.Name = "endSpace";
-            lpnl.Location = new Point(leftMargin, ypos + spacerMargin);
+            lpnl.Location = new Point(leftMargin, ypos + bottomMargin - 1);
             lpnl.BackColor = Color.White;
             lpnl.Height = 1;
             this.Controls.Add(lpnl);
