@@ -2008,6 +2008,7 @@ namespace PraiseBase.Presenter.Forms
                 if (idx > 0)
                 {
                     listViewSetList.Items[idx - 1].Selected = true;
+                    songDetailElement.Focus();
                 }
             }
         }
@@ -2020,6 +2021,7 @@ namespace PraiseBase.Presenter.Forms
                 if (idx < listViewSetList.Items.Count - 1)
                 {
                     listViewSetList.Items[idx + 1].Selected = true;
+                    songDetailElement.Focus();
                 }
             }
         }
