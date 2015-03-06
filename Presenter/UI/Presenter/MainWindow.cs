@@ -145,6 +145,8 @@ namespace PraiseBase.Presenter.Forms
                 this.spracheToolStripMenuItem.DropDownItems.Add(selectLanguageToolStripMenuItem);
             }
 
+            songDetailElement.ThumbnailSize = PraiseBase.Presenter.Properties.Settings.Default.ThumbSize;
+
             ProjectionManager.Instance.ProjectionChanged += Instance_ProjectionChanged;
         }
 

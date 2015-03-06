@@ -29,6 +29,9 @@ namespace SongDetails
         [Description("Icon shown at link for choosing next song"), Category("SongDetail")]
         public Image NextSongIcon { get; set; }
 
+        [Description("Size of song background thumbnail"), Category("SongDetail"), DefaultValue(typeof(Size), "80, 60")]
+        public Size ThumbnailSize { get; set; }
+
         private List<Button> slideTexts;
         private List<PictureBox> slideImages;
         private int currentSlideTextIdx = -1;
@@ -49,43 +52,33 @@ namespace SongDetails
         private const int spaceHeight = 1;
         private const int spacerMargin = 4;
 
-        private Color borderNormalColor = Color.Transparent;
-        private Color borderHoverColor = Color.DarkGray;
-        private Color borderActiveColor = Color.Black;
-
         private Color itemNormalFG = Color.Black;
-        private Color itemHoverFG = Color.Black;
-        private Color itemActiveFG = Color.White;
-
         private Color itemNormalBG = Color.White;
-        private Color itemHoverBG = Color.LightBlue;
+
+        private Color itemActiveFG = Color.White;
         private Color itemActiveBG = SystemColors.Highlight;
 
         private Font partCaptionFont = new Font("Arial", 16);
         private Font slideTextFont = new Font("Arial", 10);
         private Font prevNextSongFont = new Font("Arial", 12);
 
-        private const int thumbnailLabelSpacing = 6;
+        private const int thumbnailLabelSpacing = 5;
 
         private const int itemBorderWidth = 0;
         private const int slidePanelElementSpacing = 1;
 
-        private const int songSwitchPanelPadding = 6;
+        private const int songSwitchPanelPadding = 5;
 
         private const int leftMargin = 5;
         private const int rightMargin = 24;
         private const int topMargin = 5;
         private const int bottomMargin = 5;
 
-        private Size thumbSize;
-
         public SongDetail()
         {
             InitializeComponent();
             slideTexts = new List<Button>();
             slideImages = new List<PictureBox>();
-
-            thumbSize = PraiseBase.Presenter.Properties.Settings.Default.ThumbSize;
         }
 
         public void setSong(Song sng)
@@ -116,6 +109,7 @@ namespace SongDetails
             this.Controls.RemoveByKey("prevPanel");
             this.Controls.RemoveByKey("nextPanel");
             this.Controls.RemoveByKey("spacerPanelprev");
+            this.Controls.RemoveByKey("endSpace");
 
             for (int j = numParts - 1; j >= 0; j--)
             {
@@ -147,6 +141,7 @@ namespace SongDetails
             if (previousSong != null)
             {
                 Size measured = TextRenderer.MeasureText(previousSong.Title, prevNextSongFont);
+                int buttonHeight = measured.Height + 6 + (2 * songSwitchPanelPadding);
 
                 // Add panel for previous song
                 Panel pnl = new Panel();
@@ -154,29 +149,27 @@ namespace SongDetails
                 pnl.Tag = previousSong;
                 pnl.Paint += new PaintEventHandler(songSwitchPnl_Paint);
                 pnl.Location = new Point(leftMargin, topMargin);
-                pnl.Height = measured.Height + (2 * songSwitchPanelPadding);
-                pnl.Cursor = Cursors.Hand;
-
-                int titleXOffset = 10;
-
-                // Add icon
-                if (PreviousSongIcon != null)
-                {
-                    PictureBox arrowIcon = new PictureBox();
-                    arrowIcon.Location = new Point(titleXOffset, songSwitchPanelPadding);
-                    arrowIcon.Image = PreviousSongIcon;
-                    arrowIcon.Size = new Size(PreviousSongIcon.Width, measured.Height);
-                    pnl.Controls.Add(arrowIcon);
-
-                    titleXOffset += arrowIcon.Size.Width + 8;
-                }
+                pnl.Height = buttonHeight;
 
                 // Add song title to panel
-                Label plbl = new Label();
-                plbl.Location = new Point(titleXOffset, songSwitchPanelPadding);
-                plbl.Size = measured;
+                Button plbl = new Button();
+                plbl.Location = new Point(0, 0);
+                plbl.Height = buttonHeight;
                 plbl.Text = previousSong.Title;
                 plbl.Font = slideTextFont;
+                plbl.TextAlign = ContentAlignment.MiddleLeft;
+                if (PreviousSongIcon != null)
+                {
+                    plbl.Image = PreviousSongIcon;
+                    plbl.ImageAlign = ContentAlignment.MiddleLeft;
+                    plbl.TextImageRelation = TextImageRelation.ImageBeforeText;
+                }
+                plbl.FlatStyle = FlatStyle.Flat;
+                plbl.FlatAppearance.BorderColor = Color.White;
+                plbl.FlatAppearance.BorderSize = 0;
+                plbl.Padding = new System.Windows.Forms.Padding(songSwitchPanelPadding);
+                plbl.Cursor = Cursors.Hand;
+                plbl.Paint += plbl_Paint;
                 pnl.Controls.Add(plbl);
                 
                 this.Controls.Add(pnl);
@@ -190,7 +183,7 @@ namespace SongDetails
             {
                 int numSlides = sng.Parts[numParts].Slides.Count;
 
-                int slidePanelHeight = thumbSize.Height + (2 * itemBorderWidth);
+                int slidePanelHeight = ThumbnailSize.Height;
 
                 // Add panel for this part
                 int panelHeight = (numSlides * slidePanelHeight) + ((numSlides - 1) * slidePanelElementSpacing);
@@ -210,7 +203,6 @@ namespace SongDetails
                 // Add sub-panels for each slide
                 for (int j = 0; j < numSlides; j++)
                 {
-
                      // Slide panel
                     Panel slidePanel = new Panel();
                     slidePanel.Location = new Point(slidePanelOffset, slidePanelY);
@@ -221,53 +213,37 @@ namespace SongDetails
 
                     slidePanelY += slidePanelHeight + slidePanelElementSpacing;
 
-                    int pictureBoxPanelWidth = thumbSize.Width + (2 * itemBorderWidth);
-
-                    // Picture box banel
-                    Panel panelPreviewPictureBoxContainer = new Panel();
-                    panelPreviewPictureBoxContainer.Location = new Point(0, 0);
-                    panelPreviewPictureBoxContainer.Size = new Size(pictureBoxPanelWidth, slidePanelHeight);
-                    panelPreviewPictureBoxContainer.BackColor = borderNormalColor;
-                    slidePanel.Controls.Add(panelPreviewPictureBoxContainer);
+                    int pictureBoxPanelWidth = ThumbnailSize.Width;
 
                     // Picture box
                     PictureBox previewPictureBox = new PictureBox();
-                    previewPictureBox.Location = new Point(itemBorderWidth, itemBorderWidth);
-                    previewPictureBox.Size = thumbSize;
+                    previewPictureBox.Location = new Point(0, 0);
+                    previewPictureBox.Size = ThumbnailSize;
                     IBackground bg = sng.Parts[numParts].Slides[j].Background;
                     previewPictureBox.Image = PraiseBase.Presenter.ImageManager.Instance.GetThumb(bg);
                     previewPictureBox.Tag = bg;
                     previewPictureBox.Enabled = true;
+                    previewPictureBox.SizeMode = PictureBoxSizeMode.Zoom;
                     previewPictureBox.Cursor = Cursors.Hand;
                     previewPictureBox.Click += new EventHandler(pcBox_Click);
-                    previewPictureBox.MouseEnter += new EventHandler(previewPictureBox_MouseEnter);
-                    previewPictureBox.MouseLeave += new EventHandler(previewPictureBox_MouseLeave);
-                    panelPreviewPictureBoxContainer.Controls.Add(previewPictureBox);
+                    slidePanel.Controls.Add(previewPictureBox);
 
                     slideImages.Add(previewPictureBox);
 
-                    // Text label panel
-                    Panel panelTextLabelContainer = new Panel();
-                    panelTextLabelContainer.Location = new Point(pictureBoxPanelWidth + thumbnailLabelSpacing, 0);
-                    panelTextLabelContainer.Height = slidePanelHeight;
-                    panelTextLabelContainer.BackColor = borderNormalColor;
-                    panelTextLabelContainer.Paint += new PaintEventHandler(tpnl_Paint);
-                    slidePanel.Controls.Add(panelTextLabelContainer);
-
                     // Text label
                     Button textLbl = new Button();
-                    textLbl.Location = new Point(itemBorderWidth, itemBorderWidth);
-                    textLbl.Height = panelTextLabelContainer.Height - (2 * itemBorderWidth);
+                    textLbl.Location = new Point(pictureBoxPanelWidth + thumbnailLabelSpacing, 0);
+                    textLbl.Height = slidePanelHeight;
                     textLbl.Text = sng.Parts[numParts].Slides[j].GetOneLineText();
-                    textLbl.Padding = new System.Windows.Forms.Padding(2);
+                    textLbl.Padding = new Padding(2);
                     textLbl.FlatStyle = FlatStyle.Flat;
                     textLbl.FlatAppearance.BorderColor = Color.White;
-                    textLbl.FlatAppearance.BorderSize = itemBorderWidth;
+                    textLbl.FlatAppearance.BorderSize = 0;
                     textLbl.ForeColor = itemNormalFG;
                     textLbl.BackColor = itemNormalBG;
                     textLbl.Font = slideTextFont;
                     textLbl.Enabled = true;
-                    textLbl.AutoEllipsis = true;
+                    textLbl.AutoEllipsis = false;
                     textLbl.UseCompatibleTextRendering = true;
                     textLbl.TextAlign = ContentAlignment.TopLeft;
                     textLbl.Cursor = Cursors.Hand;
@@ -275,8 +251,7 @@ namespace SongDetails
                     textLbl.Paint += new PaintEventHandler(textLbl_Paint);
                     textLbl.Click += new EventHandler(textLbl_Click);
                     textLbl.KeyUp += textLbl_KeyUp;
-                    textLbl.MouseEnter += new EventHandler(textLbl_MouseEnter);
-                    textLbl.MouseLeave += new EventHandler(textLbl_MouseLeave);
+                    slidePanel.Controls.Add(textLbl);
 
                     slideTexts.Add(textLbl);
 
@@ -311,8 +286,6 @@ namespace SongDetails
                             verse4Index = slideTexts.Count - 1;
                         }
                     }
-
-                    panelTextLabelContainer.Controls.Add(textLbl);
                 }
 
 
@@ -325,39 +298,48 @@ namespace SongDetails
             {
                 Size measured = TextRenderer.MeasureText(nextSong.Title, prevNextSongFont);
 
+                int buttonHeight = measured.Height + 6 + (2 * songSwitchPanelPadding);
+
                 // Add panel for next song
                 Panel pnl = new Panel();
                 pnl.Name = "nextPanel";
                 pnl.Tag = nextSong;
                 pnl.Paint += new PaintEventHandler(songSwitchPnl_Paint);
                 pnl.Location = new Point(leftMargin, ypos);
-                pnl.Height = measured.Height + (2 * songSwitchPanelPadding);
-                pnl.Cursor = Cursors.Hand;
-
-                int titleXOffset = 10;
-
-                // Add icon
-                if (NextSongIcon != null)
-                {
-                    PictureBox arrowIcon = new PictureBox();
-                    arrowIcon.Location = new Point(titleXOffset, songSwitchPanelPadding);
-                    arrowIcon.Image = NextSongIcon;
-                    arrowIcon.Size = new Size(NextSongIcon.Width, measured.Height);
-                    pnl.Controls.Add(arrowIcon);
-
-                    titleXOffset += arrowIcon.Size.Width + 8;
-                }
+                pnl.Height = buttonHeight;
 
                 // Add song title to panel
-                Label plbl = new Label();
-                plbl.Location = new Point(titleXOffset, songSwitchPanelPadding);
-                plbl.Size = measured;
+                Button plbl = new Button();
+                plbl.Location = new Point(0, 0);
+                plbl.Height = buttonHeight;
                 plbl.Text = nextSong.Title;
                 plbl.Font = slideTextFont;
+                plbl.TextAlign = ContentAlignment.MiddleLeft;
+                if (NextSongIcon != null)
+                {
+                    plbl.Image = NextSongIcon;
+                    plbl.ImageAlign = ContentAlignment.MiddleLeft;
+                    plbl.TextImageRelation = TextImageRelation.ImageBeforeText;
+                }
+                plbl.FlatStyle = FlatStyle.Flat;
+                plbl.FlatAppearance.BorderColor = Color.White;
+                plbl.FlatAppearance.BorderSize = 0;
+                plbl.Padding = new System.Windows.Forms.Padding(songSwitchPanelPadding);
+                plbl.Cursor = Cursors.Hand;
+                plbl.Paint += plbl_Paint;
                 pnl.Controls.Add(plbl);
 
                 this.Controls.Add(pnl);
+
+                ypos += pnl.Height;
             }
+
+            Panel lpnl = new Panel();
+            lpnl.Name = "endSpace";
+            lpnl.Location = new Point(leftMargin, ypos + spacerMargin);
+            lpnl.BackColor = Color.White;
+            lpnl.Height = 1;
+            this.Controls.Add(lpnl);
 
             currentSong = sng;
 
@@ -444,23 +426,20 @@ namespace SongDetails
             {
                 slideTexts[currentSlideTextIdx].BackColor = itemNormalBG;
                 slideTexts[currentSlideTextIdx].ForeColor = itemNormalFG;
-                slideTexts[currentSlideTextIdx].Parent.BackColor = borderNormalColor;
-
-                slideImages[currentSlideTextIdx].Parent.BackColor = borderNormalColor;
             }
 
             int newSlideIdx = slideTexts.IndexOf(lbl);
 
             if (currentSlideTextIdx < newSlideIdx)
             {
-                int tOffset = ((Panel)lbl.Parent.Parent).Parent.Bottom;
+                int tOffset = ((Panel)lbl.Parent).Parent.Bottom;
                 if (tOffset + VerticalScroll.Value > this.Height)
                     VerticalScroll.Value = tOffset + VerticalScroll.Value - this.Height + 2;
                 PerformLayout();
             }
             else
             {
-                int tOffset = ((Panel)lbl.Parent.Parent).Parent.Top;
+                int tOffset = ((Panel)lbl.Parent).Parent.Top;
                 if (tOffset < 0)
                     VerticalScroll.Value += tOffset - 5;
                 PerformLayout();
@@ -470,14 +449,11 @@ namespace SongDetails
 
             lbl.BackColor = itemActiveBG;
             lbl.ForeColor = itemActiveFG;
-            lbl.Parent.BackColor = borderActiveColor;
-
-            slideImages[currentSlideTextIdx].Parent.BackColor = borderActiveColor;
 
             if (SlideClicked != null)
             {
                 this.Focus();
-                SlideClickEventArgs p = new SlideClickEventArgs((int)lbl.Parent.Parent.Parent.Tag, (int)lbl.Tag);
+                SlideClickEventArgs p = new SlideClickEventArgs((int)lbl.Parent.Parent.Tag, (int)lbl.Tag);
                 SlideClicked(this, p);
             }
         }
@@ -488,13 +464,10 @@ namespace SongDetails
 
             if (currentSlideTextIdx >= 0)
             {
-                slideTexts[currentSlideTextIdx].Parent.BackColor = borderNormalColor;
                 slideTexts[currentSlideTextIdx].BackColor = itemNormalBG;
                 slideTexts[currentSlideTextIdx].ForeColor = itemNormalFG;
                 currentSlideTextIdx = -1;
             }
-
-            pb.Parent.BackColor = borderActiveColor;
 
             if (ImageClicked != null)
             {
@@ -504,64 +477,14 @@ namespace SongDetails
             }
         }
 
-        private void previewPictureBox_MouseEnter(object sender, EventArgs e)
-        {
-            if (slideImages.IndexOf((PictureBox)sender) != currentSlideTextIdx)
-                ((PictureBox)sender).Parent.BackColor = borderHoverColor;
-        }
-
-        private void previewPictureBox_MouseLeave(object sender, EventArgs e)
-        {
-            if (slideImages.IndexOf((PictureBox)sender) != currentSlideTextIdx)
-                ((PictureBox)sender).Parent.BackColor = borderNormalColor;
-        }
-
-        private void textLbl_MouseEnter(object sender, EventArgs e)
-        {
-            Button elem = (Button)sender;
-            if (currentSlideTextIdx < 0 || slideTexts[currentSlideTextIdx] != elem)
-            {
-                elem.Parent.BackColor = borderHoverColor;
-                elem.BackColor = itemHoverBG;
-                elem.ForeColor = itemHoverFG;
-                int idx = slideTexts.IndexOf(elem);
-                if (idx >= 0 && idx < slideImages.Count)
-                {
-                    slideImages[idx].Parent.BackColor = borderHoverColor;
-                }
-            }
-        }
-
-        private void textLbl_MouseLeave(object sender, EventArgs e)
-        {
-            Button elem = (Button)sender;
-            if (currentSlideTextIdx < 0 || slideTexts[currentSlideTextIdx] != elem)
-            {
-                elem.Parent.BackColor = borderNormalColor;
-                elem.BackColor = itemNormalBG;
-                elem.ForeColor = itemNormalFG;
-                int idx = slideTexts.IndexOf(elem);
-                if (idx >= 0 && idx < slideImages.Count)
-                {
-                    slideImages[slideTexts.IndexOf(elem)].Parent.BackColor = borderNormalColor;
-                }
-            }
-        }
-
         #endregion Events caused by user action
 
         #region Paint Events
 
-        private void tpnl_Paint(object sender, PaintEventArgs e)
-        {
-            Panel lbl = ((Panel)sender);
-            lbl.Width = (lbl.Parent.Width - lbl.Location.X);
-        }
-
         private void textLbl_Paint(object sender, PaintEventArgs e)
         {
             Button lbl = ((Button)sender);
-            lbl.Width = (lbl.Parent.Width) - (2 * itemBorderWidth);
+            lbl.Width = (lbl.Parent.Width - lbl.Location.X);
         }
 
         private void spnl_Paint(object sender, PaintEventArgs e)
@@ -586,6 +509,12 @@ namespace SongDetails
         {
             Panel pnl = ((Panel)sender);
             pnl.Width = this.Width - pnl.Left - rightMargin;
+        }
+
+        void plbl_Paint(object sender, PaintEventArgs e)
+        {
+            Button lbl = ((Button)sender);
+            lbl.Width = lbl.Parent.Width;
         }
         
         #endregion Paint Events
