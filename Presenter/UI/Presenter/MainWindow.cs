@@ -145,8 +145,6 @@ namespace PraiseBase.Presenter.Forms
                 this.spracheToolStripMenuItem.DropDownItems.Add(selectLanguageToolStripMenuItem);
             }
 
-            songDetailElement.ThumbnailSize = PraiseBase.Presenter.Properties.Settings.Default.ThumbSize;
-
             ProjectionManager.Instance.ProjectionChanged += Instance_ProjectionChanged;
         }
 
@@ -2000,6 +1998,30 @@ namespace PraiseBase.Presenter.Forms
         private void splitContainerLayerContent_SplitterMoved(object sender, SplitterEventArgs e)
         {
             Settings.Default.LayerContentSplitterPosition = splitContainerLayerContent.SplitterDistance;
+        }
+
+        private void songDetailElement_PreviousSongClicked(object sender, SongSwitchEventArgs e)
+        {
+            if (e.Song != null)
+            {
+                int idx = listViewSetList.SelectedIndices[0];
+                if (idx > 0)
+                {
+                    listViewSetList.Items[idx - 1].Selected = true;
+                }
+            }
+        }
+
+        private void songDetailElement_NextSongClicked(object sender, SongSwitchEventArgs e)
+        {
+            if (e.Song != null)
+            {
+                int idx = listViewSetList.SelectedIndices[0];
+                if (idx < listViewSetList.Items.Count - 1)
+                {
+                    listViewSetList.Items[idx + 1].Selected = true;
+                }
+            }
         }
     }
 }

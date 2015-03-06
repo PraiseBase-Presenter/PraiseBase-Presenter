@@ -10,18 +10,25 @@ namespace SongDetails
     [DefaultEvent("SlideClicked")]
     public partial class SongDetail : UserControl
     {
-        private Song currentSong;
-
-        private int numParts = 0;
-        private int slidePanelOffset = 0;
+        //
+        // Events
+        //
 
         public delegate void slideClick(object sender, SlideClickEventArgs e);
-
         public event slideClick SlideClicked;
 
         public delegate void imageClick(object sender, SlideImageClickEventArgs e);
-
         public event imageClick ImageClicked;
+
+        public delegate void previousSongClick(object sender, SongSwitchEventArgs e);
+        public event previousSongClick PreviousSongClicked;
+
+        public delegate void nextSongClick(object sender, SongSwitchEventArgs e);
+        public event nextSongClick NextSongClicked;
+
+        //
+        // Public settings
+        //
 
         [Description("Icon shown at link for choosing previous song"), Category("SongDetail")]
         public Image PreviousSongIcon { get; set; }
@@ -32,9 +39,17 @@ namespace SongDetails
         [Description("Size of song background thumbnail"), Category("SongDetail"), DefaultValue(typeof(Size), "80, 60")]
         public Size ThumbnailSize { get; set; }
 
+        //
+        // Runtime variables
+        //
+
         private List<Button> slideTexts;
         private List<PictureBox> slideImages;
         private int currentSlideTextIdx = -1;
+
+        private int numParts = 0;
+        private int slidePanelOffset = 0;
+        private Song currentSong;
 
         private int refrainIndex;
         private int prechorusIndex;
@@ -58,15 +73,15 @@ namespace SongDetails
         private Color itemActiveFG = Color.White;
         private Color itemActiveBG = SystemColors.Highlight;
 
-        private Font partCaptionFont = new Font("Arial", 16);
-        private Font slideTextFont = new Font("Arial", 10);
+        private Font partCaptionFont = new Font("Arial", 14);
+        private Font slideTextFont = new Font("Arial", 9);
         private Font prevNextSongFont = new Font("Arial", 12);
 
         private const int thumbnailLabelSpacing = 5;
 
         private const int slidePanelElementSpacing = 1;
 
-        private const int songSwitchPanelPadding = 5;
+        private const int songSwitchPanelPadding = 4;
 
         private const int leftMargin = 5;
         private const int rightMargin = 24;
@@ -145,7 +160,6 @@ namespace SongDetails
                 // Add panel for previous song
                 Panel pnl = new Panel();
                 pnl.Name = "prevPanel";
-                pnl.Tag = previousSong;
                 pnl.Paint += new PaintEventHandler(songSwitchPnl_Paint);
                 pnl.Location = new Point(leftMargin, topMargin);
                 pnl.Height = buttonHeight;
@@ -154,9 +168,10 @@ namespace SongDetails
                 Button plbl = new Button();
                 plbl.Location = new Point(0, 0);
                 plbl.Height = buttonHeight;
-                plbl.Text = previousSong.Title;
+                plbl.Text = " " + previousSong.Title;
                 plbl.Font = slideTextFont;
                 plbl.TextAlign = ContentAlignment.MiddleLeft;
+                plbl.Tag = previousSong;
                 if (PreviousSongIcon != null)
                 {
                     plbl.Image = PreviousSongIcon;
@@ -169,6 +184,8 @@ namespace SongDetails
                 plbl.Padding = new System.Windows.Forms.Padding(songSwitchPanelPadding);
                 plbl.Cursor = Cursors.Hand;
                 plbl.Paint += plbl_Paint;
+                plbl.Click += plbl_ClickPrev;
+                
                 pnl.Controls.Add(plbl);
                 
                 this.Controls.Add(pnl);
@@ -242,7 +259,7 @@ namespace SongDetails
                     textLbl.BackColor = itemNormalBG;
                     textLbl.Font = slideTextFont;
                     textLbl.Enabled = true;
-                    textLbl.AutoEllipsis = false;
+                    textLbl.AutoEllipsis = true;
                     textLbl.UseCompatibleTextRendering = true;
                     textLbl.TextAlign = ContentAlignment.TopLeft;
                     textLbl.Cursor = Cursors.Hand;
@@ -302,7 +319,6 @@ namespace SongDetails
                 // Add panel for next song
                 Panel pnl = new Panel();
                 pnl.Name = "nextPanel";
-                pnl.Tag = nextSong;
                 pnl.Paint += new PaintEventHandler(songSwitchPnl_Paint);
                 pnl.Location = new Point(leftMargin, ypos);
                 pnl.Height = buttonHeight;
@@ -311,9 +327,10 @@ namespace SongDetails
                 Button plbl = new Button();
                 plbl.Location = new Point(0, 0);
                 plbl.Height = buttonHeight;
-                plbl.Text = nextSong.Title;
+                plbl.Text = " " + nextSong.Title;
                 plbl.Font = slideTextFont;
                 plbl.TextAlign = ContentAlignment.MiddleLeft;
+                plbl.Tag = nextSong;
                 if (NextSongIcon != null)
                 {
                     plbl.Image = NextSongIcon;
@@ -326,6 +343,8 @@ namespace SongDetails
                 plbl.Padding = new System.Windows.Forms.Padding(songSwitchPanelPadding);
                 plbl.Cursor = Cursors.Hand;
                 plbl.Paint += plbl_Paint;
+                plbl.Click += plbl_ClickNext;
+
                 pnl.Controls.Add(plbl);
 
                 this.Controls.Add(pnl);
@@ -476,6 +495,25 @@ namespace SongDetails
             }
         }
 
+        
+        void plbl_ClickPrev(object sender, EventArgs e)
+        {
+            if (PreviousSongClicked != null)
+            {
+                SongSwitchEventArgs p = new SongSwitchEventArgs((Song)((Button)sender).Tag);
+                PreviousSongClicked(this, p);
+            }
+        }
+
+        void plbl_ClickNext(object sender, EventArgs e)
+        {
+            if (NextSongClicked != null)
+            {
+                SongSwitchEventArgs p = new SongSwitchEventArgs((Song)((Button)sender).Tag);
+                NextSongClicked(this, p);
+            }
+        }        
+
         #endregion Events caused by user action
 
         #region Paint Events
@@ -542,6 +580,16 @@ namespace SongDetails
         }
 
         public IBackground Background { get; set; }
+    }
+
+    public class SongSwitchEventArgs : EventArgs
+    {
+        public SongSwitchEventArgs(Song song)
+        {
+            this.Song = song;
+        }
+
+        public Song Song { get; set; }
     }
 
     #endregion Helper classes

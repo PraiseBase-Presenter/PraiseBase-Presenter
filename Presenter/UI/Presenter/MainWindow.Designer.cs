@@ -906,8 +906,11 @@
             this.songDetailElement.Name = "songDetailElement";
             this.songDetailElement.NextSongIcon = global::PraiseBase.Presenter.Properties.Resources.agt_forward;
             this.songDetailElement.PreviousSongIcon = global::PraiseBase.Presenter.Properties.Resources.agt_back;
+            this.songDetailElement.ThumbnailSize = new System.Drawing.Size(56, 42);
             this.songDetailElement.SlideClicked += new SongDetails.SongDetail.slideClick(this.songDetailElement_SlideClicked);
             this.songDetailElement.ImageClicked += new SongDetails.SongDetail.imageClick(this.songDetailElement_ImageClicked);
+            this.songDetailElement.PreviousSongClicked += new SongDetails.SongDetail.previousSongClick(this.songDetailElement_PreviousSongClicked);
+            this.songDetailElement.NextSongClicked += new SongDetails.SongDetail.nextSongClick(this.songDetailElement_NextSongClicked);
             // 
             // tabPage2
             // 
