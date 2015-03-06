@@ -59,6 +59,9 @@ namespace SongDetails
         private int verse3Index;
         private int verse4Index;
 
+        private Button prevSongButton;
+        private Button nextSongButton;
+
         //
         // Look and feel
         //
@@ -165,28 +168,28 @@ namespace SongDetails
                 pnl.Height = buttonHeight;
 
                 // Add song title to panel
-                Button plbl = new Button();
-                plbl.Location = new Point(0, 0);
-                plbl.Height = buttonHeight;
-                plbl.Text = " " + previousSong.Title;
-                plbl.Font = slideTextFont;
-                plbl.TextAlign = ContentAlignment.MiddleLeft;
-                plbl.Tag = previousSong;
+                prevSongButton = new Button();
+                prevSongButton.Location = new Point(0, 0);
+                prevSongButton.Height = buttonHeight;
+                prevSongButton.Text = " " + previousSong.Title;
+                prevSongButton.Font = slideTextFont;
+                prevSongButton.TextAlign = ContentAlignment.MiddleLeft;
+                prevSongButton.Tag = previousSong;
                 if (PreviousSongIcon != null)
                 {
-                    plbl.Image = PreviousSongIcon;
-                    plbl.ImageAlign = ContentAlignment.MiddleLeft;
-                    plbl.TextImageRelation = TextImageRelation.ImageBeforeText;
+                    prevSongButton.Image = PreviousSongIcon;
+                    prevSongButton.ImageAlign = ContentAlignment.MiddleLeft;
+                    prevSongButton.TextImageRelation = TextImageRelation.ImageBeforeText;
                 }
-                plbl.FlatStyle = FlatStyle.Flat;
-                plbl.FlatAppearance.BorderColor = Color.White;
-                plbl.FlatAppearance.BorderSize = 0;
-                plbl.Padding = new System.Windows.Forms.Padding(songSwitchPanelPadding);
-                plbl.Cursor = Cursors.Hand;
-                plbl.Paint += plbl_Paint;
-                plbl.Click += plbl_ClickPrev;
-                
-                pnl.Controls.Add(plbl);
+                prevSongButton.FlatStyle = FlatStyle.Flat;
+                prevSongButton.FlatAppearance.BorderColor = Color.White;
+                prevSongButton.FlatAppearance.BorderSize = 0;
+                prevSongButton.Padding = new System.Windows.Forms.Padding(songSwitchPanelPadding);
+                prevSongButton.Cursor = Cursors.Hand;
+                prevSongButton.Paint += plbl_Paint;
+                prevSongButton.Click += plbl_ClickPrev;
+
+                pnl.Controls.Add(prevSongButton);
                 
                 this.Controls.Add(pnl);
 
@@ -324,28 +327,28 @@ namespace SongDetails
                 pnl.Height = buttonHeight;
 
                 // Add song title to panel
-                Button plbl = new Button();
-                plbl.Location = new Point(0, 0);
-                plbl.Height = buttonHeight;
-                plbl.Text = " " + nextSong.Title;
-                plbl.Font = slideTextFont;
-                plbl.TextAlign = ContentAlignment.MiddleLeft;
-                plbl.Tag = nextSong;
+                nextSongButton = new Button();
+                nextSongButton.Location = new Point(0, 0);
+                nextSongButton.Height = buttonHeight;
+                nextSongButton.Text = " " + nextSong.Title;
+                nextSongButton.Font = slideTextFont;
+                nextSongButton.TextAlign = ContentAlignment.MiddleLeft;
+                nextSongButton.Tag = nextSong;
                 if (NextSongIcon != null)
                 {
-                    plbl.Image = NextSongIcon;
-                    plbl.ImageAlign = ContentAlignment.MiddleLeft;
-                    plbl.TextImageRelation = TextImageRelation.ImageBeforeText;
+                    nextSongButton.Image = NextSongIcon;
+                    nextSongButton.ImageAlign = ContentAlignment.MiddleLeft;
+                    nextSongButton.TextImageRelation = TextImageRelation.ImageBeforeText;
                 }
-                plbl.FlatStyle = FlatStyle.Flat;
-                plbl.FlatAppearance.BorderColor = Color.White;
-                plbl.FlatAppearance.BorderSize = 0;
-                plbl.Padding = new System.Windows.Forms.Padding(songSwitchPanelPadding);
-                plbl.Cursor = Cursors.Hand;
-                plbl.Paint += plbl_Paint;
-                plbl.Click += plbl_ClickNext;
+                nextSongButton.FlatStyle = FlatStyle.Flat;
+                nextSongButton.FlatAppearance.BorderColor = Color.White;
+                nextSongButton.FlatAppearance.BorderSize = 0;
+                nextSongButton.Padding = new System.Windows.Forms.Padding(songSwitchPanelPadding);
+                nextSongButton.Cursor = Cursors.Hand;
+                nextSongButton.Paint += plbl_Paint;
+                nextSongButton.Click += plbl_ClickNext;
 
-                pnl.Controls.Add(plbl);
+                pnl.Controls.Add(nextSongButton);
 
                 this.Controls.Add(pnl);
 
@@ -366,13 +369,27 @@ namespace SongDetails
 
         void textLbl_KeyUp(object sender, KeyEventArgs e)
         {
-            if (e.KeyCode == Keys.Down && currentSlideTextIdx >= 0 && currentSlideTextIdx < slideTexts.Count - 1)
+            if (e.KeyCode == Keys.Down)
             {
-                textLbl_Click(slideTexts[currentSlideTextIdx + 1], new EventArgs());
+                if (currentSlideTextIdx >= 0 && currentSlideTextIdx < slideTexts.Count - 1)
+                {
+                    textLbl_Click(slideTexts[currentSlideTextIdx + 1], new EventArgs());
+                }
+                else if (nextSongButton != null) 
+                {
+                    plbl_ClickNext(nextSongButton, e);
+                }
             }
-            else if (e.KeyCode == Keys.Up && currentSlideTextIdx > 0)
+            else if (e.KeyCode == Keys.Up)
             {
-                textLbl_Click(slideTexts[currentSlideTextIdx - 1], new EventArgs());
+                if (currentSlideTextIdx > 0)
+                {
+                    textLbl_Click(slideTexts[currentSlideTextIdx - 1], new EventArgs());
+                }
+                else if (prevSongButton != null)
+                {
+                    plbl_ClickPrev(prevSongButton, e);
+                }
             }
             else if ((e.KeyCode == Keys.R || e.KeyCode == Keys.C) && refrainIndex >= 0)
             {
