@@ -581,10 +581,6 @@ namespace SongDetails
         }
         
         #endregion Paint Events
-
-        private void SongDetail_Load(object sender, EventArgs e)
-        {
-        }
     }
 
     #region Helper classes
