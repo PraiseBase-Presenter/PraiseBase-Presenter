@@ -41,6 +41,7 @@ namespace SongDetails
 
         private Color spacerColor = Color.LightGray;
         private const int spaceHeight = 1;
+        private const int spacerMargin = 4;
 
         private Color borderNormalColor = Color.Transparent;
         private Color borderHoverColor = Color.DarkGray;
@@ -57,11 +58,15 @@ namespace SongDetails
         private Font partCaptionFont = new Font("Arial", 16);
         private Font slideTextFont = new Font("Arial", 11);
 
-        private const int thumbnailLabelSpacing = 10;
+        private const int thumbnailLabelSpacing = 6;
 
         private const int itemBorderWidth = 2;
+        private const int slidePanelElementSpacing = 1;
 
-        Point startPoint = new Point(0, 5);
+        private const int leftMargin = 5;
+        private const int rightMargin = 24;
+        private const int topMargin = 5;
+        private const int bottomMargin = 5;
 
         private Size thumbSize;
 
@@ -99,6 +104,8 @@ namespace SongDetails
             verse4Index = -1;
 
             // Clear controls
+            this.Controls.RemoveByKey("prevPanel");
+            this.Controls.RemoveByKey("spacerPanelprev");
             for (int j = numParts - 1; j >= 0; j--)
             {
                 this.Controls.RemoveByKey("partPanel" + j.ToString());
@@ -116,7 +123,7 @@ namespace SongDetails
             // Draw new stuff
             //
 
-            int ypos = startPoint.Y;
+            int ypos = topMargin;
 
             Size labelSize = new Size(0, 0);
             for (int i = 0; i < sng.Parts.Count; i++)
@@ -128,66 +135,91 @@ namespace SongDetails
 
             if (previousSong != null)
             {
-                // TODO
+                /*
+                Size measured = TextRenderer.MeasureText(previousSong.Title, slideTextFont);
+
+                // Add panel for previous song
+                Panel pnl = new Panel();
+                pnl.Name = "prevPanel";
+                pnl.Tag = previousSong;
+                pnl.Paint += new PaintEventHandler(prevPnl_Paint);
+                pnl.Location = new Point(leftMargin, topMargin);
+                pnl.Height = measured.Height;
+                pnl.BackColor = Color.LightCyan;
+
+                // Add icon
+                PictureBox arrowIcon = new PictureBox();
+                arrowIcon.Location = new Point(10, 0);
+                arrowIcon.Image = PraiseBase.Presenter.Properties.Resources.agt_back;
+                arrowIcon.Size = new Size(arrowIcon.Image.Width, measured.Height);
+                pnl.Controls.Add(arrowIcon);                
+
+                // Add song title to panel
+                Label plbl = new Label();
+                plbl.Text = previousSong.Title;
+                plbl.Font = slideTextFont;
+                plbl.Location = new Point(arrowIcon.Location.X + arrowIcon.Size.Width + 5, 0);
+                plbl.Size = measured;
+                pnl.Controls.Add(plbl);
+                
+                this.Controls.Add(pnl);
+
+                ypos += pnl.Height + pnl.Top;
+
+                int spacerHeight = addSpacer(ypos, "spacerPanelprev");
+                ypos += spacerHeight + 7;
+                */
             }
 
             for (numParts = 0; numParts < sng.Parts.Count; numParts++)
             {
                 int numSlides = sng.Parts[numParts].Slides.Count;
 
+                int slidePanelHeight = thumbSize.Height + (2 * itemBorderWidth);
+
                 // Add panel for this part
-                Panel pnl = new Panel();
-                pnl.Name = "partPanel" + numParts.ToString();
-                pnl.Tag = numParts;
-                pnl.Paint += new PaintEventHandler(partPnl_Paint);
-                pnl.Location = new Point(startPoint.X, ypos);
-                pnl.Height = numSlides * (thumbSize.Height) + 4;
+                int panelHeight = (numSlides * slidePanelHeight) + ((numSlides - 1) * slidePanelElementSpacing);
+                Panel songPartPanel = addPartPanel(ypos, panelHeight, "partPanel" + numParts);
+                ypos += songPartPanel.Height;
 
                 // Add part caption label to panel
                 Label plbl = new Label();
+                plbl.Location = new Point(0, 0);
+                plbl.Size = labelSize;
                 plbl.Text = sng.Parts[numParts].Caption;
                 plbl.Font = partCaptionFont;
-                plbl.Location = new Point(5, 5);
-                plbl.Size = labelSize;
-                pnl.Controls.Add(plbl);
-                this.Controls.Add(pnl);
+                songPartPanel.Controls.Add(plbl);
 
-                ypos += pnl.Height + 2;
-
-                // Add spacer panel (gray line)
-                Panel lpnl = new Panel();
-                lpnl.Name = "spacerPanel" + numParts.ToString();
-                lpnl.Location = new Point(startPoint.X + 5, ypos);
-                lpnl.BackColor = spacerColor;
-                lpnl.Height = spaceHeight;
-                lpnl.Paint += new PaintEventHandler(lpnl_Paint);
-                this.Controls.Add(lpnl);
-
-                ypos += lpnl.Height + 7;
+                int slidePanelY = 0;
 
                 // Add sub-panels for each slide
                 for (int j = 0; j < numSlides; j++)
                 {
-                    // Slide panel
+
+                     // Slide panel
                     Panel slidePanel = new Panel();
+                    slidePanel.Location = new Point(slidePanelOffset, slidePanelY);
+                    slidePanel.Height = slidePanelHeight;
                     slidePanel.Tag = j;
-                    slidePanel.Location = new Point(slidePanelOffset, j * (thumbSize.Height));
-                    slidePanel.Height = thumbSize.Height;
                     slidePanel.Paint += new PaintEventHandler(spnl_Paint);
-                    pnl.Controls.Add(slidePanel);
+                    songPartPanel.Controls.Add(slidePanel);
+
+                    slidePanelY += slidePanelHeight + slidePanelElementSpacing;
+
+                    int pictureBoxPanelWidth = thumbSize.Width + (2 * itemBorderWidth);
 
                     // Picture box banel
                     Panel panelPreviewPictureBoxContainer = new Panel();
-                    panelPreviewPictureBoxContainer.Location = new Point(1, 1);
-                    panelPreviewPictureBoxContainer.Size = thumbSize;
+                    panelPreviewPictureBoxContainer.Location = new Point(0, 0);
+                    panelPreviewPictureBoxContainer.Size = new Size(pictureBoxPanelWidth, slidePanelHeight);
                     panelPreviewPictureBoxContainer.BackColor = borderNormalColor;
                     slidePanel.Controls.Add(panelPreviewPictureBoxContainer);
 
                     // Picture box
                     PictureBox previewPictureBox = new PictureBox();
                     previewPictureBox.Location = new Point(itemBorderWidth, itemBorderWidth);
-                    previewPictureBox.Size = new Size(panelPreviewPictureBoxContainer.Width - (2 * itemBorderWidth), panelPreviewPictureBoxContainer.Height - (2 * itemBorderWidth) - 1);
-                    var bg = sng.Parts[numParts].Slides[j].Background;
+                    previewPictureBox.Size = thumbSize;
+                    IBackground bg = sng.Parts[numParts].Slides[j].Background;
                     previewPictureBox.Image = PraiseBase.Presenter.ImageManager.Instance.GetThumb(bg);
                     previewPictureBox.Tag = bg;
                     previewPictureBox.Enabled = true;
@@ -201,10 +233,9 @@ namespace SongDetails
 
                     // Text label panel
                     Panel panelTextLabelContainer = new Panel();
-                    panelTextLabelContainer.Location = new Point(thumbSize.Width + thumbnailLabelSpacing, 1);
-                    panelTextLabelContainer.Height = slidePanel.Height - 1;
+                    panelTextLabelContainer.Location = new Point(pictureBoxPanelWidth + thumbnailLabelSpacing, 0);
+                    panelTextLabelContainer.Height = slidePanelHeight;
                     panelTextLabelContainer.BackColor = borderNormalColor;
-                    panelTextLabelContainer.Padding = new System.Windows.Forms.Padding(2, 3, 2, 3);
                     panelTextLabelContainer.Paint += new PaintEventHandler(tpnl_Paint);
                     slidePanel.Controls.Add(panelTextLabelContainer);
 
@@ -213,6 +244,7 @@ namespace SongDetails
                     textLbl.Location = new Point(itemBorderWidth, itemBorderWidth);
                     textLbl.Height = panelTextLabelContainer.Height - (2 * itemBorderWidth);
                     textLbl.Text = sng.Parts[numParts].Slides[j].GetOneLineText();
+                    textLbl.Padding = new System.Windows.Forms.Padding(2);
                     textLbl.ForeColor = itemNormalFG;
                     textLbl.BackColor = itemNormalBG;
                     textLbl.Font = slideTextFont;
@@ -262,6 +294,11 @@ namespace SongDetails
 
                     panelTextLabelContainer.Controls.Add(textLbl);
                 }
+
+
+                // Add spacer panel (gray line)
+                ypos += addSpacer(ypos, "spacerPanel" + numParts.ToString());
+
             }
 
             if (nextSong != null)
@@ -272,6 +309,35 @@ namespace SongDetails
             currentSong = sng;
 
             this.ResumeLayout();
+        }
+
+        private Panel addPartPanel(int ypos, int height, string name)
+        {
+            Panel pnl = new Panel();
+            pnl.Location = new Point(leftMargin, ypos);
+            pnl.Height = height;
+            pnl.Name = name;
+            pnl.Tag = numParts;
+            pnl.Paint += new PaintEventHandler(partPnl_Paint);
+            this.Controls.Add(pnl);
+
+            return pnl;
+        }
+
+        /// <summary>
+        /// Add spacer panel (gray line)
+        /// </summary>
+        private int addSpacer(int ypos, string name)
+        {
+            Panel lpnl = new Panel();
+            lpnl.Name = name;
+            lpnl.Location = new Point(leftMargin, ypos + spacerMargin);
+            lpnl.BackColor = spacerColor;
+            lpnl.Height = spaceHeight;
+            lpnl.Paint += new PaintEventHandler(lpnl_Paint);
+            this.Controls.Add(lpnl);
+
+            return spacerMargin + lpnl.Height + spacerMargin;
         }
 
         #region Events caused by user action
@@ -451,15 +517,21 @@ namespace SongDetails
         private void lpnl_Paint(object sender, PaintEventArgs e)
         {
             Panel pnl = ((Panel)sender);
-            pnl.Width = this.Width - pnl.Left - 24;
+            pnl.Width = this.Width - pnl.Left - rightMargin;
         }
 
         private void partPnl_Paint(object sender, PaintEventArgs e)
         {
             Panel pnl = ((Panel)sender);
-            pnl.Width = this.Width - pnl.Left - 24;
+            pnl.Width = this.Width - pnl.Left - rightMargin;
         }
-
+       
+        private void prevPnl_Paint(object sender, PaintEventArgs e)
+        {
+            Panel pnl = ((Panel)sender);
+            pnl.Width = this.Width - pnl.Left - rightMargin;
+        }
+        
         #endregion Paint Events
 
         private void SongDetail_Load(object sender, EventArgs e)
