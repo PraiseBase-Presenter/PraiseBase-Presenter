@@ -904,6 +904,8 @@
             this.songDetailElement.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.songDetailElement.ForeColor = System.Drawing.SystemColors.WindowText;
             this.songDetailElement.Name = "songDetailElement";
+            this.songDetailElement.NextSongIcon = global::PraiseBase.Presenter.Properties.Resources.agt_forward;
+            this.songDetailElement.PreviousSongIcon = global::PraiseBase.Presenter.Properties.Resources.agt_back;
             this.songDetailElement.SlideClicked += new SongDetails.SongDetail.slideClick(this.songDetailElement_SlideClicked);
             this.songDetailElement.ImageClicked += new SongDetails.SongDetail.imageClick(this.songDetailElement_ImageClicked);
             // 

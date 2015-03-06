@@ -23,6 +23,12 @@ namespace SongDetails
 
         public event imageClick ImageClicked;
 
+        [Description("Icon shown at link for choosing previous song"), Category("SongDetail")]
+        public Image PreviousSongIcon { get; set; }
+
+        [Description("Icon shown at link for choosing next song"), Category("SongDetail")]
+        public Image NextSongIcon { get; set; }
+
         private List<Label> slideTexts;
         private List<PictureBox> slideImages;
         private int currentSlideTextIdx = -1;
@@ -57,11 +63,14 @@ namespace SongDetails
 
         private Font partCaptionFont = new Font("Arial", 16);
         private Font slideTextFont = new Font("Arial", 11);
+        private Font prevNextSongFont = new Font("Arial", 12);
 
         private const int thumbnailLabelSpacing = 6;
 
         private const int itemBorderWidth = 2;
         private const int slidePanelElementSpacing = 1;
+
+        private const int songSwitchPanelPadding = 6;
 
         private const int leftMargin = 5;
         private const int rightMargin = 24;
@@ -105,7 +114,9 @@ namespace SongDetails
 
             // Clear controls
             this.Controls.RemoveByKey("prevPanel");
+            this.Controls.RemoveByKey("nextPanel");
             this.Controls.RemoveByKey("spacerPanelprev");
+
             for (int j = numParts - 1; j >= 0; j--)
             {
                 this.Controls.RemoveByKey("partPanel" + j.ToString());
@@ -135,40 +146,44 @@ namespace SongDetails
 
             if (previousSong != null)
             {
-                /*
-                Size measured = TextRenderer.MeasureText(previousSong.Title, slideTextFont);
+                Size measured = TextRenderer.MeasureText(previousSong.Title, prevNextSongFont);
 
                 // Add panel for previous song
                 Panel pnl = new Panel();
                 pnl.Name = "prevPanel";
                 pnl.Tag = previousSong;
-                pnl.Paint += new PaintEventHandler(prevPnl_Paint);
+                pnl.Paint += new PaintEventHandler(songSwitchPnl_Paint);
                 pnl.Location = new Point(leftMargin, topMargin);
-                pnl.Height = measured.Height;
-                pnl.BackColor = Color.LightCyan;
+                pnl.Height = measured.Height + (2 * songSwitchPanelPadding);
+                pnl.Cursor = Cursors.Hand;
+
+                int titleXOffset = 10;
 
                 // Add icon
-                PictureBox arrowIcon = new PictureBox();
-                arrowIcon.Location = new Point(10, 0);
-                arrowIcon.Image = PraiseBase.Presenter.Properties.Resources.agt_back;
-                arrowIcon.Size = new Size(arrowIcon.Image.Width, measured.Height);
-                pnl.Controls.Add(arrowIcon);                
+                if (PreviousSongIcon != null)
+                {
+                    PictureBox arrowIcon = new PictureBox();
+                    arrowIcon.Location = new Point(titleXOffset, songSwitchPanelPadding);
+                    arrowIcon.Image = PreviousSongIcon;
+                    arrowIcon.Size = new Size(PreviousSongIcon.Width, measured.Height);
+                    pnl.Controls.Add(arrowIcon);
+
+                    titleXOffset += arrowIcon.Size.Width + 8;
+                }
 
                 // Add song title to panel
                 Label plbl = new Label();
+                plbl.Location = new Point(titleXOffset, songSwitchPanelPadding);
+                plbl.Size = measured;
                 plbl.Text = previousSong.Title;
                 plbl.Font = slideTextFont;
-                plbl.Location = new Point(arrowIcon.Location.X + arrowIcon.Size.Width + 5, 0);
-                plbl.Size = measured;
                 pnl.Controls.Add(plbl);
                 
                 this.Controls.Add(pnl);
 
-                ypos += pnl.Height + pnl.Top;
+                ypos += pnl.Height;
 
-                int spacerHeight = addSpacer(ypos, "spacerPanelprev");
-                ypos += spacerHeight + 7;
-                */
+                ypos += addSpacer(ypos, "spacerPanelprev");
             }
 
             for (numParts = 0; numParts < sng.Parts.Count; numParts++)
@@ -303,7 +318,40 @@ namespace SongDetails
 
             if (nextSong != null)
             {
-                // TODO
+                Size measured = TextRenderer.MeasureText(nextSong.Title, prevNextSongFont);
+
+                // Add panel for next song
+                Panel pnl = new Panel();
+                pnl.Name = "nextPanel";
+                pnl.Tag = nextSong;
+                pnl.Paint += new PaintEventHandler(songSwitchPnl_Paint);
+                pnl.Location = new Point(leftMargin, ypos);
+                pnl.Height = measured.Height + (2 * songSwitchPanelPadding);
+                pnl.Cursor = Cursors.Hand;
+
+                int titleXOffset = 10;
+
+                // Add icon
+                if (NextSongIcon != null)
+                {
+                    PictureBox arrowIcon = new PictureBox();
+                    arrowIcon.Location = new Point(titleXOffset, songSwitchPanelPadding);
+                    arrowIcon.Image = NextSongIcon;
+                    arrowIcon.Size = new Size(NextSongIcon.Width, measured.Height);
+                    pnl.Controls.Add(arrowIcon);
+
+                    titleXOffset += arrowIcon.Size.Width + 8;
+                }
+
+                // Add song title to panel
+                Label plbl = new Label();
+                plbl.Location = new Point(titleXOffset, songSwitchPanelPadding);
+                plbl.Size = measured;
+                plbl.Text = nextSong.Title;
+                plbl.Font = slideTextFont;
+                pnl.Controls.Add(plbl);
+
+                this.Controls.Add(pnl);
             }
 
             currentSong = sng;
@@ -526,7 +574,7 @@ namespace SongDetails
             pnl.Width = this.Width - pnl.Left - rightMargin;
         }
        
-        private void prevPnl_Paint(object sender, PaintEventArgs e)
+        private void songSwitchPnl_Paint(object sender, PaintEventArgs e)
         {
             Panel pnl = ((Panel)sender);
             pnl.Width = this.Width - pnl.Left - rightMargin;
