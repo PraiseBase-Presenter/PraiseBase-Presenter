@@ -168,7 +168,7 @@ namespace PraiseBase.Presenter.Forms
             for (int i = 0; i < MdiChildren.Count(); i++)
             {
                 EditorChildMetaData md = (EditorChildMetaData)MdiChildren[i].Tag;
-                if (md.Filename != String.Empty && 
+                if (md.Filename != String.Empty && md.Filename != null && 
                     String.Compare(
                     Path.GetFullPath(md.Filename).TrimEnd('\\'),
                     Path.GetFullPath(fileName).TrimEnd('\\'),
