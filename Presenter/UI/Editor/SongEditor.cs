@@ -21,9 +21,11 @@
  */
 
 using System;
+using System.Diagnostics;
 using System.Globalization;
 using System.IO;
 using System.Linq;
+using System.Threading;
 using System.Windows.Forms;
 using PraiseBase.Presenter.Model.Song;
 using PraiseBase.Presenter.Persistence;
@@ -31,6 +33,7 @@ using PraiseBase.Presenter.Properties;
 using PraiseBase.Presenter.UI;
 using PraiseBase.Presenter.UI.Editor;
 using PraiseBase.Presenter.Util;
+using Timer = System.Windows.Forms.Timer;
 
 namespace PraiseBase.Presenter.Forms
 {
@@ -60,7 +63,7 @@ namespace PraiseBase.Presenter.Forms
                 ToolStripMenuItem selectLanguageToolStripMenuItem = new ToolStripMenuItem(l.DisplayName);
                 selectLanguageToolStripMenuItem.Tag = l;
                 selectLanguageToolStripMenuItem.Click += new EventHandler(selectLanguageToolStripMenuItem_Click);
-                if (l.Name == System.Threading.Thread.CurrentThread.CurrentUICulture.Name)
+                if (l.Name == Thread.CurrentThread.CurrentUICulture.Name)
                 {
                     selectLanguageToolStripMenuItem.Checked = true;
                 }
@@ -76,7 +79,7 @@ namespace PraiseBase.Presenter.Forms
 
             foreach (ToolStripMenuItem i in this.spracheToolStripMenuItem.DropDownItems)
             {
-                i.Checked = ((CultureInfo)i.Tag == System.Threading.Thread.CurrentThread.CurrentUICulture);
+                i.Checked = ((CultureInfo)i.Tag == Thread.CurrentThread.CurrentUICulture);
             }
         }
 
@@ -123,7 +126,7 @@ namespace PraiseBase.Presenter.Forms
             openFileDialog.CheckFileExists = true;
             openFileDialog.CheckPathExists = true;
             openFileDialog.Multiselect = false;
-            openFileDialog.Title = Properties.StringResources.OpenSong;
+            openFileDialog.Title = StringResources.OpenSong;
 
             openFileDialog.Filter = GetFileBoxFilter();
             openFileDialog.FilterIndex = fileOpenBoxFilterIndex;
@@ -200,12 +203,12 @@ namespace PraiseBase.Presenter.Forms
             }
             catch (NotImplementedException)
             {
-                MessageBox.Show(Properties.StringResources.SongFormatNotSupported, this.Text, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(StringResources.SongFormatNotSupported, this.Text, MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
             catch (Exception e)
             {
-                MessageBox.Show(Properties.StringResources.SongFileHasErrors + " (" + e.Message + ")!", this.Text, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(StringResources.SongFileHasErrors + " (" + e.Message + ")!", this.Text, MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
 
@@ -214,13 +217,14 @@ namespace PraiseBase.Presenter.Forms
 
         private SongEditorChild createSongEditorChildForm(Song sng, String fileName)
         {
+            int hashCode = sng.GetHashCode();
             SongEditorChild childForm = new SongEditorChild(sng);
-            childForm.Tag = new EditorChildMetaData(fileName, sng.GetHashCode());
+            childForm.Tag = new EditorChildMetaData(fileName, hashCode);
             childForm.MdiParent = this;
             childForm.FormClosing += childForm_FormClosing;
             childForm.Show();
             base.registerChild(childForm);
-            setStatus(string.Format(Properties.StringResources.LoadedSong, sng.Title));
+            setStatus(string.Format(StringResources.LoadedSong, sng.Title));
 
             return childForm;
         }
@@ -231,10 +235,12 @@ namespace PraiseBase.Presenter.Forms
 
             String filename = ((EditorChildMetaData)window.Tag).Filename;
 
-            if (((EditorChildMetaData)window.Tag).HashCode != window.Song.GetHashCode())
+            int storedHashCode = ((EditorChildMetaData) window.Tag).HashCode;
+            int songHashCode = window.Song.GetHashCode();
+            if (storedHashCode != songHashCode)
             {
-                DialogResult dlg = MessageBox.Show(string.Format(Properties.StringResources.SaveChangesMadeToTheSong, window.Song.Title),
-                    Properties.StringResources.SongEditor,
+                DialogResult dlg = MessageBox.Show(string.Format(StringResources.SaveChangesMadeToTheSong, window.Song.Title),
+                    StringResources.SongEditor,
                     MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
                 if (dlg == DialogResult.Yes)
                 {
@@ -366,7 +372,7 @@ namespace PraiseBase.Presenter.Forms
 
         private void webToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            System.Diagnostics.Process.Start(Settings.Default.Weburl);
+            Process.Start(Settings.Default.Weburl);
         }
 
         private void optionsToolStripMenuItem_Click(object sender, EventArgs e)
@@ -388,7 +394,8 @@ namespace PraiseBase.Presenter.Forms
                 SongEditorChild window = ((SongEditorChild)ActiveMdiChild);
                 if (save(window.Song, ((EditorChildMetaData)window.Tag).Filename))
                 {
-                    ((EditorChildMetaData)window.Tag).HashCode = window.Song.GetHashCode();
+                    int hashCode = window.Song.GetHashCode();
+                    ((EditorChildMetaData)window.Tag).HashCode = hashCode;
                 }
             }
         }
@@ -407,7 +414,7 @@ namespace PraiseBase.Presenter.Forms
                 {
                     SongFilePluginFactory.Create(songFilename).Save(sng, songFilename);
 
-                    setStatus(String.Format(Properties.StringResources.SongSavedAs, songFilename));
+                    setStatus(String.Format(StringResources.SongSavedAs, songFilename));
 
                     SongManager.Instance.ReloadSongByPath(songFilename);
 
@@ -415,7 +422,7 @@ namespace PraiseBase.Presenter.Forms
                 }
                 catch (NotImplementedException)
                 {
-                    MessageBox.Show(Properties.StringResources.SongCannotBeSavedInThisFormat, Properties.StringResources.FormatNotSupported,
+                    MessageBox.Show(StringResources.SongCannotBeSavedInThisFormat, StringResources.FormatNotSupported,
                         MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     return saveAs(sng, songFilename);
                 }
@@ -429,17 +436,18 @@ namespace PraiseBase.Presenter.Forms
                 SongEditorChild window = ((SongEditorChild)ActiveMdiChild);
                 if (saveAs(window.Song, null))
                 {
-                    ((EditorChildMetaData)window.Tag).HashCode = window.Song.GetHashCode();
+                    int hashCode = window.Song.GetHashCode();
+                    ((EditorChildMetaData)window.Tag).HashCode = hashCode;
                 }
             }
         }
         
         public bool saveAs(Song sng, String songFilename)
         {
-            if (sng.Title == PraiseBase.Presenter.Properties.Settings.Default.SongDefaultName)
+            if (sng.Title == Settings.Default.SongDefaultName)
             {
-                if (MessageBox.Show(string.Format(Properties.StringResources.DoesTheSongReallyHaveTheDefaultTitle, sng.Title), Properties.StringResources.Attention,
-                    MessageBoxButtons.YesNo) == System.Windows.Forms.DialogResult.No)
+                if (MessageBox.Show(string.Format(StringResources.DoesTheSongReallyHaveTheDefaultTitle, sng.Title), StringResources.Attention,
+                    MessageBoxButtons.YesNo) == DialogResult.No)
                 {
                     // TODO
                     //textBoxSongTitle.SelectAll();
@@ -462,7 +470,7 @@ namespace PraiseBase.Presenter.Forms
             saveFileDialog.Filter = GetSaveFileBoxFilter();
             saveFileDialog.FilterIndex = fileSaveBoxFilterIndex;
             saveFileDialog.AddExtension = true;
-            saveFileDialog.Title = Properties.StringResources.SaveSongAs;
+            saveFileDialog.Title = StringResources.SaveSongAs;
 
             if (saveFileDialog.ShowDialog(this) == DialogResult.OK)
             {
@@ -470,14 +478,14 @@ namespace PraiseBase.Presenter.Forms
                 {
                     CreateByTypeIndex(saveFileDialog.FilterIndex - 1).Save(sng, saveFileDialog.FileName);
                     fileSaveBoxFilterIndex = saveFileDialog.FilterIndex;
-                    setStatus(string.Format(Properties.StringResources.SongSavedAs, saveFileDialog.FileName));
+                    setStatus(string.Format(StringResources.SongSavedAs, saveFileDialog.FileName));
 
                     SongManager.Instance.ReloadSongByPath(saveFileDialog.FileName);
                     return true;
                 }
                 catch (NotImplementedException)
                 {
-                    MessageBox.Show(Properties.StringResources.SongCannotBeSavedInThisFormat, Properties.StringResources.SongEditor,
+                    MessageBox.Show(StringResources.SongCannotBeSavedInThisFormat, StringResources.SongEditor,
                         MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
@@ -581,17 +589,17 @@ namespace PraiseBase.Presenter.Forms
 
         private void datenverzeichnisAnzeigenToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            System.Diagnostics.Process.Start(Settings.Default.DataDirectory);
+            Process.Start(Settings.Default.DataDirectory);
         }
 
         private void toolStripButton2_Click(object sender, EventArgs e)
         {
-            System.Diagnostics.Process.Start(Settings.Default.DataDirectory);
+            Process.Start(Settings.Default.DataDirectory);
         }
 
         private void fehlerMeldenToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            System.Diagnostics.Process.Start(Settings.Default.BugReportUrl);
+            Process.Start(Settings.Default.BugReportUrl);
         }
 
         private void praiseBoxToolStripMenuItem_Click(object sender, EventArgs e)
