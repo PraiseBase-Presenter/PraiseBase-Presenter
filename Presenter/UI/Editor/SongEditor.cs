@@ -379,9 +379,6 @@ namespace PraiseBase.Presenter.Forms
         {
             Settings.Default.EditorWindowSize = this.Size;
             Settings.Default.EditorWindowState = this.WindowState;
-
-            //this.Hide();
-            //e.Cancel = true;
         }
 
         private void saveChild(object sender, EventArgs e)
