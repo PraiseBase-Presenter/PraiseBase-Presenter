@@ -54,7 +54,6 @@ namespace PraiseBase.Presenter.Forms
             fileOpenBoxFilterIndex = 0;
             fileSaveBoxFilterIndex = 0;
             this.WindowState = Settings.Default.EditorWindowState;
-            //this.Text += " " + System.Reflection.Assembly.GetExecutingAssembly().GetName().Version.ToString();
 
             foreach (var l in Program.AvailableLanguages)
             {
@@ -94,18 +93,9 @@ namespace PraiseBase.Presenter.Forms
 
             SongTemplateUtil.ApplyFormattingFromSettings(Settings.Default, sng);
 
-            SongEditorChild childForm = new SongEditorChild(sng);
-            childForm.MdiParent = this;
-            childForm.Tag = new EditorChildMetaData(null, sng.GetHashCode());
+            SongEditorChild childForm = createSongEditorChildForm(sng, null);
 
-            childForm.FormClosing += childForm_FormClosing;
-
-            childForm.Text = childForm.Song.Title + ++childFormNumber;
-            childForm.Show();
-
-            base.registerChild(childForm);
-
-            setStatus(string.Format(Properties.StringResources.LoadedSong, sng.Title));
+            childForm.Text = childForm.Song.Title + " " + ++childFormNumber;
         }
 
         private static Song createNewSong(Settings settings)
@@ -219,16 +209,20 @@ namespace PraiseBase.Presenter.Forms
                 return;
             }
 
+            createSongEditorChildForm(sng, fileName);
+        }
+
+        private SongEditorChild createSongEditorChildForm(Song sng, String fileName)
+        {
             SongEditorChild childForm = new SongEditorChild(sng);
             childForm.Tag = new EditorChildMetaData(fileName, sng.GetHashCode());
             childForm.MdiParent = this;
-
             childForm.FormClosing += childForm_FormClosing;
-
             childForm.Show();
             base.registerChild(childForm);
-
             setStatus(string.Format(Properties.StringResources.LoadedSong, sng.Title));
+
+            return childForm;
         }
 
         void childForm_FormClosing(object sender, FormClosingEventArgs e)
