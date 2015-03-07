@@ -1322,7 +1322,8 @@ namespace PraiseBase.Presenter.Forms
 
         private void toolStripMenuItem3_Click(object sender, EventArgs e)
         {
-            var dlg = new SongBrowserDialog();
+            SongBrowserDialog dlg = new SongBrowserDialog();
+            dlg.Tags = Settings.Default.Tags;
             dlg.ShowDialog(this);
             if (dlg.OpenInEditor)
             {

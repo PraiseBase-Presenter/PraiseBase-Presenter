@@ -1,13 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.Specialized;
 using System.Windows.Forms;
-using PraiseBase.Presenter.Properties;
 using PraiseBase.Presenter.Model.Song;
 
 namespace PraiseBase.Presenter.Forms
 {
     public partial class SongBrowserDialog : Form
     {
+        public StringCollection Tags { get; set; }
+
         public bool OpenInEditor { get; private set; }
 
         public SongBrowserDialog()
@@ -19,7 +21,7 @@ namespace PraiseBase.Presenter.Forms
         private void SongDialog_Load(object sender, EventArgs e)
         {
             checkedListBoxTags.Items.Clear();
-            foreach (String str in Settings.Default.Tags)
+            foreach (String str in Tags)
             {
                 checkedListBoxTags.Items.Add(str);
             }
