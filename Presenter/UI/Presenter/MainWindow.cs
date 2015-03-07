@@ -884,7 +884,7 @@ namespace PraiseBase.Presenter.Forms
 
         private void toolStripButton5_Click(object sender, EventArgs e)
         {
-            SongEditor wnd = SongEditor.getInstance();
+            SongEditor wnd = SongEditor.GetInstance();
             wnd.Show();
             wnd.Focus();
         }
@@ -1324,8 +1324,8 @@ namespace PraiseBase.Presenter.Forms
             dlg.ShowDialog(this);
             if (dlg.OpenInEditor)
             {
-                SongEditor.getInstance().Show();
-                SongEditor.getInstance().BringToFront();
+                SongEditor.GetInstance().Show();
+                SongEditor.GetInstance().BringToFront();
             }
         }
 
@@ -1894,14 +1894,14 @@ namespace PraiseBase.Presenter.Forms
         {
             if (listViewSongs.SelectedItems.Count > 0)
             {
-                SongEditor wnd = SongEditor.getInstance();
-                wnd.openSong(SongManager.Instance.CurrentSong.Filename);
+                SongEditor wnd = SongEditor.GetInstance();
+                wnd.OpenSong(SongManager.Instance.CurrentSong.Filename);
                 wnd.Show();
                 wnd.Focus();
             }
             else
             {
-                SongEditor wnd = SongEditor.getInstance();
+                SongEditor wnd = SongEditor.GetInstance();
                 wnd.Show();
                 wnd.Focus();
             }

@@ -128,10 +128,10 @@ namespace PraiseBase.Presenter.Forms
                     {
                         if (listViewSongs.Items[x].Checked)
                         {
-                            SongEditor.getInstance().openSong(filesToOpen[x]);
+                            SongEditor.GetInstance().OpenSong(filesToOpen[x]);
                         }
                     }
-                    SongEditor.getInstance().Show();
+                    SongEditor.GetInstance().Show();
                 }
 
                 DialogResult = DialogResult.OK;

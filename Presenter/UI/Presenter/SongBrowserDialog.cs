@@ -40,7 +40,7 @@ namespace PraiseBase.Presenter.Forms
             {
                 foreach (ListViewItem lvi in listViewItems.SelectedItems)
                 {
-                    SongEditor.getInstance().openSong(SongManager.Instance.SongList[(Guid)(lvi.Tag)].Filename);
+                    SongEditor.GetInstance().OpenSong(SongManager.Instance.SongList[(Guid)(lvi.Tag)].Filename);
                 }
                 OpenInEditor = true;
                 DialogResult = DialogResult.OK;
