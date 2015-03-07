@@ -107,31 +107,6 @@ namespace PraiseBase.Presenter.Forms
         }
 
         /// <summary>
-        /// Creates a new song with default name and one part with one slide
-        /// </summary>
-        /// <param name="settings"></param>
-        /// <returns></returns>
-        private static Song CreateNewSong(Settings settings)
-        {
-            Song sng = new Song
-            {
-                GUID = SongManager.Instance.GenerateGuid(),
-                Title = settings.SongDefaultName,
-                Language = settings.SongDefaultLanguage
-            };
-
-            SongPart tmpPart = new SongPart();
-            tmpPart.Caption = settings.SongPartDefaultName;
-
-            SongSlide tmpSlide = new SongSlide();
-            tmpSlide.Background = new ColorBackground(Settings.Default.ProjectionBackColor);
-            tmpPart.Slides.Add(tmpSlide);
-            sng.Parts.Add(tmpPart);
-
-            return sng;
-        }
-
-        /// <summary>
         /// Event handler for opening an existing file
         /// </summary>
         /// <param name="sender"></param>
@@ -145,7 +120,7 @@ namespace PraiseBase.Presenter.Forms
             openFileDialog.Multiselect = false;
             openFileDialog.Title = StringResources.OpenSong;
 
-            openFileDialog.Filter = GetFileBoxFilter();
+            openFileDialog.Filter = GetOpenFileBoxFilter();
             openFileDialog.FilterIndex = fileOpenBoxFilterIndex;
             if (openFileDialog.ShowDialog(this) == DialogResult.OK)
             {
@@ -154,33 +129,6 @@ namespace PraiseBase.Presenter.Forms
                 fileOpenBoxFilterIndex = openFileDialog.FilterIndex;
                 OpenSong(fileName);
             }
-        }
-
-        /// <summary>
-        /// Returns the filter string used in open file dialogs
-        /// </summary>
-        /// <returns></returns>
-        private string GetFileBoxFilter()
-        {
-            String exts = String.Empty;
-            String fltr = String.Empty;
-            foreach (var t in SongFilePluginFactory.GetPlugins())
-            {
-                if (t.IsWritingSupported())
-                {
-                    if (exts != String.Empty)
-                    {
-                        exts += ";";
-                    }
-                    exts += "*" + t.GetFileExtension();
-                    if (fltr != string.Empty)
-                    {
-                        fltr += "|";
-                    }
-                    fltr += t.GetFileTypeDescription() + " (*" + t.GetFileExtension() + ")|*" + t.GetFileExtension();
-                }
-            }
-            return "Alle Lieddateien (" + exts + ")|" + exts + "|" + fltr + "|Alle Dateien (*.*)|*.*";
         }
 
         /// <summary>
@@ -251,6 +199,106 @@ namespace PraiseBase.Presenter.Forms
             return childForm;
         }
 
+        private void SaveChild(object sender, EventArgs e)
+        {
+            if (ActiveMdiChild != null)
+            {
+                SongEditorChild window = ((SongEditorChild)ActiveMdiChild);
+                if (Save(window.Song, ((EditorChildMetaData)window.Tag).Filename))
+                {
+                    int hashCode = window.Song.GetHashCode();
+                    ((EditorChildMetaData)window.Tag).HashCode = hashCode;
+                }
+            }
+        }
+
+        private void SaveChildAs(object sender, EventArgs e)
+        {
+            if (ActiveMdiChild != null)
+            {
+                SongEditorChild window = ((SongEditorChild)ActiveMdiChild);
+                if (SaveAs(window.Song, null))
+                {
+                    int hashCode = window.Song.GetHashCode();
+                    ((EditorChildMetaData)window.Tag).HashCode = hashCode;
+                }
+            }
+        }
+
+        private bool Save(Song sng, String songFilename)
+        {
+            ValidateChildren();
+
+            if (string.IsNullOrEmpty(songFilename))
+            {
+                return SaveAs(sng, null);
+            }
+            try
+            {
+                SongFilePluginFactory.Create(songFilename).Save(sng, songFilename);
+
+                SetStatus(String.Format(StringResources.SongSavedAs, songFilename));
+
+                SongManager.Instance.ReloadSongByPath(songFilename);
+
+                return true;
+            }
+            catch (NotImplementedException)
+            {
+                MessageBox.Show(StringResources.SongCannotBeSavedInThisFormat, StringResources.FormatNotSupported,
+                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return SaveAs(sng, songFilename);
+            }
+        }
+
+        private bool SaveAs(Song sng, String songFilename)
+        {
+            if (sng.Title == Settings.Default.SongDefaultName)
+            {
+                if (MessageBox.Show(string.Format(StringResources.DoesTheSongReallyHaveTheDefaultTitle, sng.Title), StringResources.Attention,
+                    MessageBoxButtons.YesNo) == DialogResult.No)
+                {
+                    // TODO
+                    //textBoxSongTitle.SelectAll();
+                    //textBoxSongTitle.Focus();
+                    return false;
+                }
+            }
+
+            SaveFileDialog saveFileDialog = new SaveFileDialog
+            {
+                InitialDirectory = songFilename != null
+                    ? Path.GetDirectoryName(songFilename)
+                    : fileBoxInitialDir,
+                CheckPathExists = true,
+                FileName = sng.Title,
+                Filter = GetSaveFileBoxFilter(),
+                FilterIndex = fileSaveBoxFilterIndex,
+                AddExtension = true,
+                Title = StringResources.SaveSongAs
+            };
+
+            if (saveFileDialog.ShowDialog(this) == DialogResult.OK)
+            {
+                try
+                {
+                    string selectedFileName = saveFileDialog.FileName;
+                    CreateByTypeIndex(saveFileDialog.FilterIndex - 1).Save(sng, selectedFileName);
+                    fileSaveBoxFilterIndex = saveFileDialog.FilterIndex;
+                    SetStatus(string.Format(StringResources.SongSavedAs, selectedFileName));
+
+                    SongManager.Instance.ReloadSongByPath(selectedFileName);
+                    return true;
+                }
+                catch (NotImplementedException)
+                {
+                    MessageBox.Show(StringResources.SongCannotBeSavedInThisFormat, StringResources.SongEditor,
+                        MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+            return false;
+        }
+
         /// <summary>
         /// Handles saving of changed data when closing a song window
         /// </summary>
@@ -262,7 +310,7 @@ namespace PraiseBase.Presenter.Forms
 
             String filename = ((EditorChildMetaData)window.Tag).Filename;
 
-            int storedHashCode = ((EditorChildMetaData) window.Tag).HashCode;
+            int storedHashCode = ((EditorChildMetaData)window.Tag).HashCode;
             int songHashCode = window.Song.GetHashCode();
             if (storedHashCode != songHashCode)
             {
@@ -292,6 +340,94 @@ namespace PraiseBase.Presenter.Forms
                     e.Cancel = true;
                 }
             }
+        }
+        
+        /// <summary>
+        /// Returns the filter string used in open file dialogs
+        /// </summary>
+        /// <returns></returns>
+        private static string GetOpenFileBoxFilter()
+        {
+            String exts = String.Empty;
+            String fltr = String.Empty;
+            foreach (var t in SongFilePluginFactory.GetPlugins())
+            {
+                if (t.IsWritingSupported())
+                {
+                    if (exts != String.Empty)
+                    {
+                        exts += ";";
+                    }
+                    exts += "*" + t.GetFileExtension();
+                    if (fltr != string.Empty)
+                    {
+                        fltr += "|";
+                    }
+                    fltr += t.GetFileTypeDescription() + " (*" + t.GetFileExtension() + ")|*" + t.GetFileExtension();
+                }
+            }
+            return "Alle Lieddateien (" + exts + ")|" + exts + "|" + fltr + "|Alle Dateien (*.*)|*.*";
+        }
+
+        /// <summary>
+        /// Returns the filter string used in save file dialogs
+        /// </summary>
+        /// <returns></returns>
+        private static string GetSaveFileBoxFilter()
+        {
+            String fltr = String.Empty;
+            foreach (ISongFilePlugin t in SongFilePluginFactory.GetWriterPlugins())
+            {
+                if (fltr != string.Empty)
+                {
+                    fltr += "|";
+                }
+                fltr += t.GetFileTypeDescription() + " (*" + t.GetFileExtension() + ")|*" + t.GetFileExtension();
+            }
+            return fltr;
+        }
+
+        /// <summary>
+        /// Gets a song file plugin by index
+        /// </summary>
+        /// <param name="index"></param>
+        /// <returns></returns>
+        private static ISongFilePlugin CreateByTypeIndex(int index)
+        {
+            if (index >= 0 && index < SongFilePluginFactory.GetWriterPlugins().Count)
+            {
+                return SongFilePluginFactory.GetWriterPlugins().ToArray()[index];
+            }
+            throw new NotImplementedException();
+        }
+
+        /// <summary>
+        /// Creates a new song with default name and one part with one slide
+        /// </summary>
+        /// <param name="settings"></param>
+        /// <returns></returns>
+        private static Song CreateNewSong(Settings settings)
+        {
+            Song sng = new Song
+            {
+                GUID = SongManager.Instance.GenerateGuid(),
+                Title = settings.SongDefaultName,
+                Language = settings.SongDefaultLanguage
+            };
+
+            SongPart tmpPart = new SongPart
+            {
+                Caption = settings.SongPartDefaultName
+            };
+
+            SongSlide tmpSlide = new SongSlide
+            {
+                Background = new ColorBackground(Settings.Default.ProjectionBackColor)
+            };
+            tmpPart.Slides.Add(tmpSlide);
+            sng.Parts.Add(tmpPart);
+
+            return sng;
         }
 
         private void ExitToolsStripMenuItem_Click(object sender, EventArgs e)
@@ -397,10 +533,6 @@ namespace PraiseBase.Presenter.Forms
             }
         }
 
-        private void contentsToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-        }
-
         private void aboutToolStripMenuItem_Click(object sender, EventArgs e)
         {
             AboutDialog ab = new AboutDialog();
@@ -425,126 +557,6 @@ namespace PraiseBase.Presenter.Forms
                 Settings.Default.EditorWindowSize = Size;
             }
             Settings.Default.EditorWindowState = WindowState;
-        }
-
-        private void SaveChild(object sender, EventArgs e)
-        {
-            if (ActiveMdiChild != null)
-            {
-                SongEditorChild window = ((SongEditorChild)ActiveMdiChild);
-                if (Save(window.Song, ((EditorChildMetaData)window.Tag).Filename))
-                {
-                    int hashCode = window.Song.GetHashCode();
-                    ((EditorChildMetaData)window.Tag).HashCode = hashCode;
-                }
-            }
-        }
-
-        private bool Save(Song sng, String songFilename)
-        {
-            ValidateChildren();
-
-            if (string.IsNullOrEmpty(songFilename))
-            {
-                return SaveAs(sng, null);
-            }
-            try
-            {
-                SongFilePluginFactory.Create(songFilename).Save(sng, songFilename);
-
-                SetStatus(String.Format(StringResources.SongSavedAs, songFilename));
-
-                SongManager.Instance.ReloadSongByPath(songFilename);
-
-                return true;
-            }
-            catch (NotImplementedException)
-            {
-                MessageBox.Show(StringResources.SongCannotBeSavedInThisFormat, StringResources.FormatNotSupported,
-                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return SaveAs(sng, songFilename);
-            }
-        }
-
-        private void SaveChildAs(object sender, EventArgs e)
-        {
-            if (ActiveMdiChild != null)
-            {
-                SongEditorChild window = ((SongEditorChild)ActiveMdiChild);
-                if (SaveAs(window.Song, null))
-                {
-                    int hashCode = window.Song.GetHashCode();
-                    ((EditorChildMetaData)window.Tag).HashCode = hashCode;
-                }
-            }
-        }
-
-        private bool SaveAs(Song sng, String songFilename)
-        {
-            if (sng.Title == Settings.Default.SongDefaultName)
-            {
-                if (MessageBox.Show(string.Format(StringResources.DoesTheSongReallyHaveTheDefaultTitle, sng.Title), StringResources.Attention,
-                    MessageBoxButtons.YesNo) == DialogResult.No)
-                {
-                    // TODO
-                    //textBoxSongTitle.SelectAll();
-                    //textBoxSongTitle.Focus();
-                    return false;
-                }
-            }
-
-            SaveFileDialog saveFileDialog = new SaveFileDialog();
-            saveFileDialog.InitialDirectory = songFilename != null
-                ? Path.GetDirectoryName(songFilename)
-                : fileBoxInitialDir;
-            saveFileDialog.CheckPathExists = true;
-            saveFileDialog.FileName = sng.Title;
-            saveFileDialog.Filter = GetSaveFileBoxFilter();
-            saveFileDialog.FilterIndex = fileSaveBoxFilterIndex;
-            saveFileDialog.AddExtension = true;
-            saveFileDialog.Title = StringResources.SaveSongAs;
-
-            if (saveFileDialog.ShowDialog(this) == DialogResult.OK)
-            {
-                try
-                {
-                    CreateByTypeIndex(saveFileDialog.FilterIndex - 1).Save(sng, saveFileDialog.FileName);
-                    fileSaveBoxFilterIndex = saveFileDialog.FilterIndex;
-                    SetStatus(string.Format(StringResources.SongSavedAs, saveFileDialog.FileName));
-
-                    SongManager.Instance.ReloadSongByPath(saveFileDialog.FileName);
-                    return true;
-                }
-                catch (NotImplementedException)
-                {
-                    MessageBox.Show(StringResources.SongCannotBeSavedInThisFormat, StringResources.SongEditor,
-                        MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
-            }
-            return false;
-        }
-
-        private string GetSaveFileBoxFilter()
-        {
-            String fltr = String.Empty;
-            foreach (ISongFilePlugin t in SongFilePluginFactory.GetWriterPlugins())
-            {
-                if (fltr != string.Empty)
-                {
-                    fltr += "|";
-                }
-                fltr += t.GetFileTypeDescription() + " (*" + t.GetFileExtension() + ")|*" + t.GetFileExtension();
-            }
-            return fltr;
-        }
-
-        private ISongFilePlugin CreateByTypeIndex(int index)
-        {
-            if (index >= 0 && index < SongFilePluginFactory.GetWriterPlugins().Count)
-            {
-                return SongFilePluginFactory.GetWriterPlugins().ToArray()[index];
-            }
-            throw new NotImplementedException();
         }
 
         private void SetStatus(string text)
@@ -606,11 +618,11 @@ namespace PraiseBase.Presenter.Forms
 
         private void allesSchliessenToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (MdiChildren.Count() > 0)
+            if (MdiChildren.Any())
             {
-                foreach (SongEditorChild c in MdiChildren)
+                foreach (var c in MdiChildren)
                 {
-                    ((SongEditorChild)c).Close();
+                    c.Close();
                 }
             }
         }
@@ -632,12 +644,6 @@ namespace PraiseBase.Presenter.Forms
         private void fehlerMeldenToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Process.Start(Settings.Default.BugReportUrl);
-        }
-
-        private void praiseBoxToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            SongImporter dlg = new SongImporter(Settings.Default, ImportFormat.PraiseBox);
-            dlg.ShowDialog(this);
         }
 
         private void EditorWindow_FormClosed(object sender, FormClosedEventArgs e)
