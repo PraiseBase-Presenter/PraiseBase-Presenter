@@ -68,7 +68,9 @@ namespace PraiseBase.Presenter.Forms
 
                     if (dlg.ShowDialog() == DialogResult.OK)
                     {
-                        string strAccessConn = "Provider=Microsoft.Jet.OLEDB.4.0;Data Source=" + dlg.FileName;
+                        // Requires Microsoft Access 2010 Runtime http://www.microsoft.com/en-us/download/details.aspx?id=10910
+                        string dbProvider = "Microsoft.ACE.OLEDB.12.0";
+                        string strAccessConn = "Provider=" + dbProvider + ";Data Source=" + dlg.FileName;
                         DataSet myDataSet = new DataSet();
                         OleDbConnection myAccessConn = null;
                         try
@@ -110,17 +112,15 @@ namespace PraiseBase.Presenter.Forms
                             string[] prts = text.Split(new string[] { Environment.NewLine + Environment.NewLine }, StringSplitOptions.RemoveEmptyEntries);
 
                             Song sng = new Song();
+                            sng.Parts.Clear();
                             sng.Title = aReader.GetString(1);
 
                             Regex rex = new Regex(".+:");
                             int p = 0;
                             foreach (String pri in prts)
                             {
-                                if (p > 0)
-                                {
-                                    sng.Parts.Add(new SongPart());
-                                    sng.Parts[p].Slides.Add(new SongSlide());
-                                }
+                                sng.Parts.Add(new SongPart());
+                                sng.Parts[p].Slides.Add(new SongSlide());
                                 Match mat = rex.Match(pri);
                                 sng.Parts[p].Caption = mat.Value.Substring(0, mat.Value.Length - 1);
                                 sng.Parts[p].Slides[0].Text = pri.Substring(mat.Value.Length + 1);
@@ -157,7 +157,9 @@ namespace PraiseBase.Presenter.Forms
 
                     if (dlg.ShowDialog() == DialogResult.OK)
                     {
-                        string strAccessConn = "Provider=Microsoft.Jet.OLEDB.4.0;Data Source=" + dlg.FileName;
+                        // Requires Microsoft Access 2010 Runtime http://www.microsoft.com/en-us/download/details.aspx?id=10910
+                        string dbProvider = "Microsoft.ACE.OLEDB.12.0";
+                        string strAccessConn = "Provider=" + dbProvider + ";Data Source=" + dlg.FileName;
                         DataSet myDataSet = new DataSet();
                         OleDbConnection myAccessConn = null;
                         try
@@ -193,6 +195,7 @@ namespace PraiseBase.Presenter.Forms
                         while (aReader.Read())
                         {
                             Song sng = new Song();
+                            sng.Parts.Clear();
                             sng.Title = aReader.GetString(1);
 
                             string text = aReader.GetString(4);
@@ -221,11 +224,8 @@ namespace PraiseBase.Presenter.Forms
                                 else
                                     txt = pri;
 
-                                if (p > 0)
-                                {
-                                    sng.Parts.Add(new SongPart());
-                                    sng.Parts[p].Slides.Add(new SongSlide());
-                                }
+                                sng.Parts.Add(new SongPart());
+                                sng.Parts[p].Slides.Add(new SongSlide());
 
                                 //Match mat = rex.Match(pri);
                                 sng.Parts[p].Caption = "Teil " + (p + 1).ToString();
