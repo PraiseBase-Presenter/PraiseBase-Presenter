@@ -29,6 +29,7 @@ using PraiseBase.Presenter.Model.Song;
 using PraiseBase.Presenter.Persistence;
 using PraiseBase.Presenter.Model;
 using PraiseBase.Presenter.Projection;
+using PraiseBase.Presenter.Util;
 
 namespace PraiseBase.Presenter.Forms
 {
@@ -101,53 +102,7 @@ namespace PraiseBase.Presenter.Forms
                 tmpPart.Slides.Add(tmpSlide);
                 sng.Parts.Add(tmpPart);
 
-                sng.MainText = new TextFormatting(
-                    settings.ProjectionMasterFont,
-                    settings.ProjectionMasterFontColor,
-                    new TextOutline(settings.ProjectionMasterOutlineSize, settings.ProjectionMasterOutlineColor),
-                    new TextShadow(settings.ProjectionMasterShadowDistance, settings.ProjectionMasterShadowSize, 
-                        settings.ProjectionMasterShadowDirection, settings.ProjectionMasterShadowColor),
-                    settings.ProjectionMasterLineSpacing);
-
-                sng.TranslationText = new TextFormatting(
-                    settings.ProjectionMasterFontTranslation,
-                    settings.ProjectionMasterTranslationColor,
-                    new TextOutline(settings.ProjectionMasterOutlineSize, settings.ProjectionMasterOutlineColor),
-                    new TextShadow(settings.ProjectionMasterShadowDistance, settings.ProjectionMasterShadowSize,
-                        settings.ProjectionMasterShadowDirection, settings.ProjectionMasterShadowColor),
-                    settings.ProjectionMasterLineSpacing);
-
-                sng.CopyrightText = new TextFormatting(
-                    settings.ProjectionMasterFontTranslation,
-                    settings.ProjectionMasterTranslationColor,
-                    new TextOutline(settings.ProjectionMasterOutlineSize, settings.ProjectionMasterOutlineColor),
-                    new TextShadow(settings.ProjectionMasterShadowDistance, settings.ProjectionMasterShadowSize,
-                        settings.ProjectionMasterShadowDirection, settings.ProjectionMasterShadowColor),
-                    settings.ProjectionMasterLineSpacing);
-
-                sng.SourceText = new TextFormatting(
-                   settings.ProjectionMasterFontTranslation,
-                   settings.ProjectionMasterTranslationColor,
-                    new TextOutline(settings.ProjectionMasterOutlineSize, settings.ProjectionMasterOutlineColor),
-                    new TextShadow(settings.ProjectionMasterShadowDistance, settings.ProjectionMasterShadowSize,
-                        settings.ProjectionMasterShadowDirection, settings.ProjectionMasterShadowColor),
-                   settings.ProjectionMasterLineSpacing);
-
-                sng.TextOrientation = new TextOrientation(settings.ProjectionMasterVerticalTextOrientation, settings.ProjectionMasterHorizontalTextOrientation);
-                sng.TranslationPosition = settings.ProjectionMasteTranslationPosition;
-
-                sng.TextOutlineEnabled = settings.ProjectionMasterOutlineEnabled;
-                sng.TextShadowEnabled = settings.ProjectionMasterShadowEnabled;
-
-                sng.TextBorders = new SongTextBorders(
-                    settings.ProjectionMasterHorizontalTextPadding,
-                    settings.ProjectionMasterVerticalTextPadding,
-                    settings.ProjectionMasterHorizontalTextPadding,
-                    settings.ProjectionMasterVerticalTextPadding,
-                    settings.ProjectionMasterVerticalFooterPadding,
-                    settings.ProjectionMasterVerticalHeaderPadding,
-                    settings.ProjectionMasterHorizontalHeaderPadding
-                );
+                SongTemplateUtil.ApplyFormattingFromSettings(settings, sng);
             }
 
             // Set window title
