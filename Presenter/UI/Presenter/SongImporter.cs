@@ -55,213 +55,14 @@ namespace PraiseBase.Presenter.Forms
 
         private void PraiseBoxImporter_Load(object sender, EventArgs e)
         {
-            OpenFileDialog dlg;
-
             switch (_format)
             {
                 case ImportFormat.PraiseBox:
-
-                    #region PraiseBox Importer
-
-                    dlg = new OpenFileDialog();
-                    dlg.Title = Properties.StringResources.OpenPraiseBoxDatabase;
-                    dlg.Filter = Properties.StringResources.OpenPraiseBoxDatabase + " (*.pbd)|*.pbd|Alle Dateien (*.*)|*.*";
-
-                    if (dlg.ShowDialog() == DialogResult.OK)
-                    {
-                        // Requires Microsoft Access 2010 Runtime http://www.microsoft.com/en-us/download/details.aspx?id=10910
-                        string dbProvider = "Microsoft.ACE.OLEDB.12.0";
-                        string strAccessConn = "Provider=" + dbProvider + ";Data Source=" + dlg.FileName;
-                        DataSet myDataSet = new DataSet();
-                        OleDbConnection myAccessConn = null;
-                        try
-                        {
-                            myAccessConn = new OleDbConnection(strAccessConn);
-                            myAccessConn.Open();
-                        }
-                        catch (Exception ex)
-                        {
-                            MessageBox.Show(Properties.StringResources.Sorry + "! " + ex.Message, Properties.StringResources.DatabaseError, 
-                                MessageBoxButtons.OK, MessageBoxIcon.Error);
-                            DialogResult = DialogResult.Cancel;
-                            this.Close();
-                            return;
-                        }
-
-                        OleDbDataReader aReader;
-                        try
-                        {
-                            OleDbCommand aCommand = new OleDbCommand("select * from SongText", myAccessConn);
-                            aReader = aCommand.ExecuteReader();
-                        }
-                        catch (Exception ex)
-                        {
-                            MessageBox.Show(Properties.StringResources.Sorry + "! " + ex.Message, Properties.StringResources.DatabaseError, 
-                                MessageBoxButtons.OK, MessageBoxIcon.Error);
-                            DialogResult = DialogResult.Cancel;
-                            this.Close();
-                            return;
-                        }
-
-                        //Iterate throuth the database
-                        while (aReader.Read())
-                        {
-                            RichTextBox rtf = new RichTextBox();
-                            rtf.Rtf = aReader.GetString(2);
-                            string text = rtf.Text.ToString().Trim();
-                            text = text.Replace("\n", Environment.NewLine);
-                            string[] prts = text.Split(new string[] { Environment.NewLine + Environment.NewLine }, StringSplitOptions.RemoveEmptyEntries);
-
-                            Song sng = new Song();
-                            sng.Parts.Clear();
-                            sng.Title = aReader.GetString(1);
-
-                            Regex rex = new Regex(".+:");
-                            int p = 0;
-                            foreach (String pri in prts)
-                            {
-                                sng.Parts.Add(new SongPart());
-                                sng.Parts[p].Slides.Add(new SongSlide());
-                                Match mat = rex.Match(pri);
-                                sng.Parts[p].Caption = mat.Value.Substring(0, mat.Value.Length - 1);
-                                sng.Parts[p].Slides[0].Text = pri.Substring(mat.Value.Length + 1);
-                                p++;
-                            }
-
-                            SongTemplateUtil.ApplyFormattingFromSettings(Settings.Default, sng);
-
-                            ListViewItem lvi = new ListViewItem(sng.Title);
-                            lvi.Checked = true;
-                            lvi.Tag = sng;
-                            listViewSongs.Items.Add(lvi);
-                        }
-
-                        //close the reader
-                        aReader.Close();
-
-                        //close the connection Its important.
-                        myAccessConn.Close();
-                    }
-                    else
-                    {
-                        this.Close();
-                    }
+                    loadPraiseBoxFile();
                     break;
-
-                    #endregion PraiseBox Importer
-
                 case ImportFormat.WorshipSystem:
-
-                    #region WorshipSystem Importer
-
-                    dlg = new OpenFileDialog();
-                    dlg.Title = Properties.StringResources.OpenWorshipSystemDatabase;
-                    dlg.Filter = Properties.StringResources.OpenWorshipSystemDatabase + " (*.mdb)|*.mdb|Alle Dateien (*.*)|*.*";
-
-                    if (dlg.ShowDialog() == DialogResult.OK)
-                    {
-                        // Requires Microsoft Access 2010 Runtime http://www.microsoft.com/en-us/download/details.aspx?id=10910
-                        string dbProvider = "Microsoft.ACE.OLEDB.12.0";
-                        string strAccessConn = "Provider=" + dbProvider + ";Data Source=" + dlg.FileName;
-                        DataSet myDataSet = new DataSet();
-                        OleDbConnection myAccessConn = null;
-                        try
-                        {
-                            myAccessConn = new OleDbConnection(strAccessConn);
-                            myAccessConn.Open();
-                        }
-                        catch (Exception ex)
-                        {
-                            MessageBox.Show(Properties.StringResources.Sorry + "! " + ex.Message, Properties.StringResources.DatabaseError, 
-                                MessageBoxButtons.OK, MessageBoxIcon.Error);
-                            DialogResult = DialogResult.Cancel;
-                            this.Close();
-                            return;
-                        }
-
-                        OleDbDataReader aReader;
-                        try
-                        {
-                            OleDbCommand aCommand = new OleDbCommand("select * from Songs", myAccessConn);
-                            aReader = aCommand.ExecuteReader();
-                        }
-                        catch (Exception ex)
-                        {
-                            MessageBox.Show(Properties.StringResources.Sorry + "! " + ex.Message, Properties.StringResources.DatabaseError, 
-                                MessageBoxButtons.OK, MessageBoxIcon.Error);
-                            DialogResult = DialogResult.Cancel;
-                            this.Close();
-                            return;
-                        }
-
-                        //Iterate throuth the database
-                        while (aReader.Read())
-                        {
-                            Song sng = new Song();
-                            sng.Parts.Clear();
-                            sng.Title = aReader.GetString(1);
-
-                            string text = aReader.GetString(4);
-                            text = text.Replace("\r\n", Environment.NewLine);
-                            string[] prts = text.Split(new string[] { Environment.NewLine + Environment.NewLine }, StringSplitOptions.RemoveEmptyEntries);
-
-                            //Regex rex = new Regex(".+:");
-                            int p = 0;
-                            foreach (String pri in prts)
-                            {
-                                string transl = string.Empty;
-                                string txt = string.Empty;
-                                string[] priPrts = pri.Split(new string[] { "<S>" }, StringSplitOptions.RemoveEmptyEntries);
-                                if (priPrts.Count() < 2)
-                                    priPrts = pri.Split(new string[] { "<s>" }, StringSplitOptions.RemoveEmptyEntries);
-
-                                if (priPrts.Count() == 1)
-                                {
-                                    txt = priPrts[0];
-                                }
-                                else if (priPrts.Count() == 2)
-                                {
-                                    txt = priPrts[0];
-                                    transl = priPrts[1];
-                                }
-                                else
-                                    txt = pri;
-
-                                sng.Parts.Add(new SongPart());
-                                sng.Parts[p].Slides.Add(new SongSlide());
-
-                                //Match mat = rex.Match(pri);
-                                sng.Parts[p].Caption = "Teil " + (p + 1).ToString();
-                                sng.Parts[p].Slides[0].Text = txt;
-                                if (transl != string.Empty)
-                                {
-                                    sng.Parts[p].Slides[0].Text = transl;
-                                }
-                                p++;
-                            }
-
-                            SongTemplateUtil.ApplyFormattingFromSettings(Settings.Default, sng);
-
-                            ListViewItem lvi = new ListViewItem(sng.Title);
-                            lvi.Checked = true;
-                            lvi.Tag = sng;
-                            listViewSongs.Items.Add(lvi);
-                        }
-
-                        //close the reader
-                        aReader.Close();
-
-                        //close the connection Its important.
-                        myAccessConn.Close();
-                    }
-                    else
-                    {
-                        this.Close();
-                    }
+                    loadWorshipSystemFile();
                     break;
-
-                    #endregion WorshipSystem Importer
-
                 default:
                     MessageBox.Show(Properties.StringResources.Sorry + "! " + Properties.StringResources.NoSongImporterAvailable, 
                         Properties.StringResources.SongImporter, MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -321,7 +122,7 @@ namespace PraiseBase.Presenter.Forms
                         + Settings.Default.SongDir + Path.DirectorySeparatorChar
                         + ((Song)listViewSongs.Items[x].Tag).Title + filePlugin.GetFileExtension();
                     if ((File.Exists(fileName) && (MessageBox.Show(string.Format(Properties.StringResources.SongExistsAlready, ((Song)listViewSongs.Items[x].Tag).Title) 
-                        + Properties.StringResources.Overwrite + "?", Properties.StringResources.SongImporter, 
+                        + " " + Properties.StringResources.Overwrite + "?", Properties.StringResources.SongImporter, 
                         MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)) || !File.Exists(fileName))
                     {
                         Song sng = (Song)listViewSongs.Items[x].Tag;
@@ -361,6 +162,202 @@ namespace PraiseBase.Presenter.Forms
         private void buttonCancel_Click(object sender, EventArgs e)
         {
             DialogResult = DialogResult.Cancel;
+        }
+
+        private void loadPraiseBoxFile()
+        {
+            OpenFileDialog dlg = new OpenFileDialog();
+            dlg.Title = Properties.StringResources.OpenPraiseBoxDatabase;
+            dlg.Filter = Properties.StringResources.OpenPraiseBoxDatabase + " (*.pbd)|*.pbd|Alle Dateien (*.*)|*.*";
+
+            if (dlg.ShowDialog() == DialogResult.OK)
+            {
+                // Requires Microsoft Access 2010 Runtime http://www.microsoft.com/en-us/download/details.aspx?id=10910
+                string dbProvider = "Microsoft.ACE.OLEDB.12.0";
+                string strAccessConn = "Provider=" + dbProvider + ";Data Source=" + dlg.FileName;
+                DataSet myDataSet = new DataSet();
+                OleDbConnection myAccessConn = null;
+                try
+                {
+                    myAccessConn = new OleDbConnection(strAccessConn);
+                    myAccessConn.Open();
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(Properties.StringResources.Sorry + "! " + ex.Message, Properties.StringResources.DatabaseError,
+                        MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    DialogResult = DialogResult.Cancel;
+                    this.Close();
+                    return;
+                }
+
+                OleDbDataReader aReader;
+                try
+                {
+                    OleDbCommand aCommand = new OleDbCommand("select * from SongText", myAccessConn);
+                    aReader = aCommand.ExecuteReader();
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(Properties.StringResources.Sorry + "! " + ex.Message, Properties.StringResources.DatabaseError,
+                        MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    DialogResult = DialogResult.Cancel;
+                    this.Close();
+                    return;
+                }
+
+                //Iterate throuth the database
+                while (aReader.Read())
+                {
+                    RichTextBox rtf = new RichTextBox();
+                    rtf.Rtf = aReader.GetString(2);
+                    string text = rtf.Text.ToString().Trim();
+                    text = text.Replace("\n", Environment.NewLine);
+                    string[] prts = text.Split(new string[] { Environment.NewLine + Environment.NewLine }, StringSplitOptions.RemoveEmptyEntries);
+
+                    Song sng = new Song();
+                    sng.Parts.Clear();
+                    sng.Title = aReader.GetString(1);
+
+                    Regex rex = new Regex(".+:");
+                    int p = 0;
+                    foreach (String pri in prts)
+                    {
+                        sng.Parts.Add(new SongPart());
+                        sng.Parts[p].Slides.Add(new SongSlide());
+                        Match mat = rex.Match(pri);
+                        sng.Parts[p].Caption = mat.Value.Substring(0, mat.Value.Length - 1);
+                        sng.Parts[p].Slides[0].Text = pri.Substring(mat.Value.Length + 1);
+                        p++;
+                    }
+
+                    SongTemplateUtil.ApplyFormattingFromSettings(Settings.Default, sng);
+
+                    ListViewItem lvi = new ListViewItem(sng.Title);
+                    lvi.Checked = true;
+                    lvi.Tag = sng;
+                    listViewSongs.Items.Add(lvi);
+                }
+
+                //close the reader
+                aReader.Close();
+
+                //close the connection Its important.
+                myAccessConn.Close();
+            }
+            else
+            {
+                this.Close();
+            }
+        }
+            
+        private void loadWorshipSystemFile()
+        {
+            OpenFileDialog dlg = new OpenFileDialog();
+            dlg.Title = Properties.StringResources.OpenWorshipSystemDatabase;
+            dlg.Filter = Properties.StringResources.OpenWorshipSystemDatabase + " (*.mdb)|*.mdb|Alle Dateien (*.*)|*.*";
+
+            if (dlg.ShowDialog() == DialogResult.OK)
+            {
+                // Requires Microsoft Access 2010 Runtime http://www.microsoft.com/en-us/download/details.aspx?id=10910
+                string dbProvider = "Microsoft.ACE.OLEDB.12.0";
+                string strAccessConn = "Provider=" + dbProvider + ";Data Source=" + dlg.FileName;
+                DataSet myDataSet = new DataSet();
+                OleDbConnection myAccessConn = null;
+                try
+                {
+                    myAccessConn = new OleDbConnection(strAccessConn);
+                    myAccessConn.Open();
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(Properties.StringResources.Sorry + "! " + ex.Message, Properties.StringResources.DatabaseError,
+                        MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    DialogResult = DialogResult.Cancel;
+                    this.Close();
+                    return;
+                }
+
+                OleDbDataReader aReader;
+                try
+                {
+                    OleDbCommand aCommand = new OleDbCommand("select * from Songs", myAccessConn);
+                    aReader = aCommand.ExecuteReader();
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(Properties.StringResources.Sorry + "! " + ex.Message, Properties.StringResources.DatabaseError,
+                        MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    DialogResult = DialogResult.Cancel;
+                    this.Close();
+                    return;
+                }
+
+                //Iterate throuth the database
+                while (aReader.Read())
+                {
+                    Song sng = new Song();
+                    sng.Parts.Clear();
+                    sng.Title = aReader.GetString(1);
+
+                    string text = aReader.GetString(4);
+                    text = text.Replace("\r\n", Environment.NewLine);
+                    string[] prts = text.Split(new string[] { Environment.NewLine + Environment.NewLine }, StringSplitOptions.RemoveEmptyEntries);
+
+                    //Regex rex = new Regex(".+:");
+                    int p = 0;
+                    foreach (String pri in prts)
+                    {
+                        string transl = string.Empty;
+                        string txt = string.Empty;
+                        string[] priPrts = pri.Split(new string[] { "<S>" }, StringSplitOptions.RemoveEmptyEntries);
+                        if (priPrts.Count() < 2)
+                            priPrts = pri.Split(new string[] { "<s>" }, StringSplitOptions.RemoveEmptyEntries);
+
+                        if (priPrts.Count() == 1)
+                        {
+                            txt = priPrts[0];
+                        }
+                        else if (priPrts.Count() == 2)
+                        {
+                            txt = priPrts[0];
+                            transl = priPrts[1];
+                        }
+                        else
+                            txt = pri;
+
+                        sng.Parts.Add(new SongPart());
+                        sng.Parts[p].Slides.Add(new SongSlide());
+
+                        //Match mat = rex.Match(pri);
+                        sng.Parts[p].Caption = "Teil " + (p + 1).ToString();
+                        sng.Parts[p].Slides[0].Text = txt;
+                        if (transl != string.Empty)
+                        {
+                            sng.Parts[p].Slides[0].Text = transl;
+                        }
+                        p++;
+                    }
+
+                    SongTemplateUtil.ApplyFormattingFromSettings(Settings.Default, sng);
+
+                    ListViewItem lvi = new ListViewItem(sng.Title);
+                    lvi.Checked = true;
+                    lvi.Tag = sng;
+                    listViewSongs.Items.Add(lvi);
+                }
+
+                //close the reader
+                aReader.Close();
+
+                //close the connection Its important.
+                myAccessConn.Close();
+            }
+            else
+            {
+                this.Close();
+            }
+
         }
     }
 }
