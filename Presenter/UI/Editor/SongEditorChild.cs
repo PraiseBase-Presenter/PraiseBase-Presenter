@@ -35,75 +35,20 @@ namespace PraiseBase.Presenter.Forms
 {
     public partial class SongEditorChild : Form
     {
-        public Song sng { get; protected set; }
-        protected String songFilename;
+        public Song Song { get; protected set; }
 
-        public bool valid;
-        public bool changed = false;
-        private int hashCode;
+        public int SongHash { get; protected set; }
 
         private int currentPartId = 0;
         private int currentSlideId = 0;
 
-        public SongEditorChild(string fileName)
+        public SongEditorChild(Song sng)
         {
+            this.Song = sng;
+
             InitializeComponent();
 
             this.WindowState = FormWindowState.Maximized;
-
-            if (fileName != null)
-            {
-                Console.WriteLine("Loading song from file " + fileName);
-                try
-                {
-                    sng = SongFilePluginFactory.Create(fileName).Load(fileName);
-                    if (sng.GUID == Guid.Empty)
-                    {
-                        var smGuid = SongManager.Instance.GetGUIDByPath(fileName);
-                        if (smGuid != Guid.Empty)
-                        {
-                            sng.GUID = smGuid;
-                        }
-                        else
-                        {
-                            sng.GUID = SongManager.Instance.GenerateGuid();
-                        }
-                    }
-                }
-                catch (NotImplementedException)
-                {
-                    MessageBox.Show(Properties.StringResources.SongFormatNotSupported, this.Text, MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    valid = false;
-                    this.Close();
-                    return;
-                }
-                catch (Exception e)
-                {
-                    MessageBox.Show(Properties.StringResources.SongFileHasErrors + " (" + e.Message + ")!", this.Text, MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    valid = false;
-                    this.Close();
-                    return;
-                }
-
-                songFilename = fileName;
-            }
-            else
-            {
-                Settings settings = Settings.Default;
-
-                sng = new Song();
-                sng.GUID = SongManager.Instance.GenerateGuid();
-                sng.Title = settings.SongDefaultName;
-                sng.Language = settings.SongDefaultLanguage;
-                SongPart tmpPart = new SongPart();
-                tmpPart.Caption = settings.SongPartDefaultName;
-                SongSlide tmpSlide = new SongSlide();
-                tmpSlide.Background = new ColorBackground(Settings.Default.ProjectionBackColor);
-                tmpPart.Slides.Add(tmpSlide);
-                sng.Parts.Add(tmpPart);
-
-                SongTemplateUtil.ApplyFormattingFromSettings(settings, sng);
-            }
 
             // Set window title
             this.Text = sng.Title;
@@ -139,9 +84,8 @@ namespace PraiseBase.Presenter.Forms
 
             populateTree();
             treeViewContents.SelectedNode = treeViewContents.Nodes[0];
-            valid = true;
 
-            hashCode = sng.GetHashCode();
+            updateHashCode();
 
             populatePartList();
 
@@ -178,6 +122,11 @@ namespace PraiseBase.Presenter.Forms
                     checkedListBoxTags.Items.Add(str);
                 i++;
             }
+        }
+
+        public void updateHashCode() 
+        {
+            SongHash = Song.GetHashCode();
         }
 
         protected String getFontNameString(Font f) 
@@ -259,7 +208,7 @@ namespace PraiseBase.Presenter.Forms
         {
             treeViewContents.Nodes.Clear();
             int j = 0;
-            foreach (SongPart part in sng.Parts)
+            foreach (SongPart part in Song.Parts)
             {
                 TreeNode partNode = new TreeNode(part.Caption);
                 int i = 0;
@@ -287,11 +236,11 @@ namespace PraiseBase.Presenter.Forms
                 partId = treeViewContents.SelectedNode.Parent.Index;
                 slideId = treeViewContents.SelectedNode.Index;
 
-                if (sng.Parts[partId].Slides.Count > 1)
+                if (Song.Parts[partId].Slides.Count > 1)
                     buttonDelItem.Enabled = true;
                 else
                     buttonDelItem.Enabled = false;
-                if (slideId < sng.Parts[partId].Slides.Count - 1)
+                if (slideId < Song.Parts[partId].Slides.Count - 1)
                     buttonMoveDown.Enabled = true;
                 else
                     buttonMoveDown.Enabled = false;
@@ -306,11 +255,11 @@ namespace PraiseBase.Presenter.Forms
             {
                 partId = treeViewContents.SelectedNode.Index;
 
-                if (sng.Parts.Count > 1)
+                if (Song.Parts.Count > 1)
                     buttonDelItem.Enabled = true;
                 else
                     buttonDelItem.Enabled = false;
-                if (partId < sng.Parts.Count - 1)
+                if (partId < Song.Parts.Count - 1)
                     buttonMoveDown.Enabled = true;
                 else
                     buttonMoveDown.Enabled = false;
@@ -334,15 +283,15 @@ namespace PraiseBase.Presenter.Forms
             if (slideId < 0)
                 slideId = currentSlideId;
 
-            if (partId >= sng.Parts.Count)
-                partId = sng.Parts.Count - 1;
-            if (slideId >= sng.Parts[partId].Slides.Count)
-                slideId = sng.Parts[partId].Slides.Count-1;
+            if (partId >= Song.Parts.Count)
+                partId = Song.Parts.Count - 1;
+            if (slideId >= Song.Parts[partId].Slides.Count)
+                slideId = Song.Parts[partId].Slides.Count-1;
 
             textBoxPartCaption.DataBindings.Clear();
-            textBoxPartCaption.DataBindings.Add("Text", sng.Parts[partId], "Caption");
+            textBoxPartCaption.DataBindings.Add("Text", Song.Parts[partId], "Caption");
 
-            SongSlide sld = sng.Parts[partId].Slides[slideId];
+            SongSlide sld = Song.Parts[partId].Slides[slideId];
             textBoxSongText.DataBindings.Clear();
             textBoxSongText.DataBindings.Add("Text", sld, "Text");
 
@@ -363,7 +312,7 @@ namespace PraiseBase.Presenter.Forms
             sld.Background = getDefaultBackground();
 
             prt.Slides.Add(sld);
-            sng.Parts.Add(prt);
+            Song.Parts.Add(prt);
 
             populateTree();
             treeViewContents.SelectedNode = treeViewContents.Nodes[treeViewContents.Nodes.Count - 1].LastNode;
@@ -382,20 +331,18 @@ namespace PraiseBase.Presenter.Forms
 
         private void comboBoxLanguage_SelectedIndexChanged(object sender, EventArgs e)
         {
-            sng.Language = comboBoxLanguage.Text;
+            Song.Language = comboBoxLanguage.Text;
         }
 
         private void EditorChild_Load(object sender, EventArgs e)
         {
-            ((SongEditor)MdiParent).setStatus(string.Format(Properties.StringResources.LoadedSong, sng.Title));
-
             previewSlide();
         }
 
         private void buttonAddNewSlide_Click(object sender, EventArgs e)
         {
             SongSlide sld = new SongSlide();
-            sng.Parts[currentPartId].Slides.Add(sld);
+            Song.Parts[currentPartId].Slides.Add(sld);
             populateTree();
             treeViewContents.SelectedNode = treeViewContents.Nodes[currentPartId].LastNode;
         }
@@ -423,7 +370,7 @@ namespace PraiseBase.Presenter.Forms
                 {
                     int partId = treeViewContents.SelectedNode.Parent.Index;
                     int slideId = treeViewContents.SelectedNode.Index;
-                    if (sng.Parts[partId].Slides.SwapWithUpper(slideId))
+                    if (Song.Parts[partId].Slides.SwapWithUpper(slideId))
                     {
                         populateTree();
                         treeViewContents.SelectedNode = treeViewContents.Nodes[partId].Nodes[slideId - 1];
@@ -432,7 +379,7 @@ namespace PraiseBase.Presenter.Forms
                 else if (treeViewContents.SelectedNode.Level == 0)
                 {
                     int partId = treeViewContents.SelectedNode.Index;
-                    if (sng.Parts.SwapWithUpper(partId))
+                    if (Song.Parts.SwapWithUpper(partId))
                     {
                         populateTree();
                         treeViewContents.SelectedNode = treeViewContents.Nodes[partId - 1];
@@ -449,7 +396,7 @@ namespace PraiseBase.Presenter.Forms
                 {
                     int partId = treeViewContents.SelectedNode.Parent.Index;
                     int slideId = treeViewContents.SelectedNode.Index;
-                    if (sng.Parts[partId].Slides.SwapWithLower(slideId))
+                    if (Song.Parts[partId].Slides.SwapWithLower(slideId))
                     {
                         populateTree();
                         treeViewContents.SelectedNode = treeViewContents.Nodes[partId].Nodes[slideId + 1];
@@ -458,7 +405,7 @@ namespace PraiseBase.Presenter.Forms
                 else if (treeViewContents.SelectedNode.Level == 0)
                 {
                     int partId = treeViewContents.SelectedNode.Index;
-                    if (sng.Parts.SwapWithLower(partId))
+                    if (Song.Parts.SwapWithLower(partId))
                     {
                         populateTree();
                         treeViewContents.SelectedNode = treeViewContents.Nodes[partId + 1];
@@ -472,12 +419,12 @@ namespace PraiseBase.Presenter.Forms
             if (checkBoxQASpelling.Checked)
             {
                 checkBoxQASpelling.ForeColor = Color.Red;
-                sng.SetQA(SongQualityAssuranceIndicator.Spelling);
+                Song.SetQA(SongQualityAssuranceIndicator.Spelling);
             }
             else
             {
                 checkBoxQASpelling.ForeColor = SystemColors.ControlText;
-                sng.RemQA(SongQualityAssuranceIndicator.Spelling);
+                Song.RemQA(SongQualityAssuranceIndicator.Spelling);
             }
         }
 
@@ -486,12 +433,12 @@ namespace PraiseBase.Presenter.Forms
             if (checkBoxQATranslation.Checked)
             {
                 checkBoxQATranslation.ForeColor = Color.Red;
-                sng.SetQA(SongQualityAssuranceIndicator.Translation);
+                Song.SetQA(SongQualityAssuranceIndicator.Translation);
             }
             else
             {
                 checkBoxQATranslation.ForeColor = SystemColors.ControlText;
-                sng.RemQA(SongQualityAssuranceIndicator.Translation);
+                Song.RemQA(SongQualityAssuranceIndicator.Translation);
             }
         }
 
@@ -500,12 +447,12 @@ namespace PraiseBase.Presenter.Forms
             if (checkBoxQAImages.Checked)
             {
                 checkBoxQAImages.ForeColor = Color.Red;
-                sng.SetQA(SongQualityAssuranceIndicator.Images);
+                Song.SetQA(SongQualityAssuranceIndicator.Images);
             }
             else
             {
                 checkBoxQAImages.ForeColor = SystemColors.ControlText;
-                sng.RemQA(SongQualityAssuranceIndicator.Images);
+                Song.RemQA(SongQualityAssuranceIndicator.Images);
             }
         }
 
@@ -514,12 +461,12 @@ namespace PraiseBase.Presenter.Forms
             if (checkBoxQASegmentation.Checked)
             {
                 checkBoxQASegmentation.ForeColor = Color.Red;
-                sng.SetQA(SongQualityAssuranceIndicator.Segmentation);
+                Song.SetQA(SongQualityAssuranceIndicator.Segmentation);
             }
             else
             {
                 checkBoxQASegmentation.ForeColor = SystemColors.ControlText;
-                sng.RemQA(SongQualityAssuranceIndicator.Segmentation);
+                Song.RemQA(SongQualityAssuranceIndicator.Segmentation);
             }
         }
 
@@ -536,10 +483,10 @@ namespace PraiseBase.Presenter.Forms
         private void buttonProjectionMasterFont_Click(object sender, EventArgs e)
         {
             FontDialog dlg = new FontDialog();
-            dlg.Font = sng.MainText.Font;
+            dlg.Font = Song.MainText.Font;
             if (dlg.ShowDialog() == DialogResult.OK)
             {
-                sng.MainText.Font = dlg.Font;
+                Song.MainText.Font = dlg.Font;
                 previewSlide();
             }
         }
@@ -547,10 +494,10 @@ namespace PraiseBase.Presenter.Forms
         private void buttonTranslationFont_Click(object sender, EventArgs e)
         {
             FontDialog dlg = new FontDialog();
-            dlg.Font = sng.TranslationText.Font;
+            dlg.Font = Song.TranslationText.Font;
             if (dlg.ShowDialog() == DialogResult.OK)
             {
-                sng.TranslationText.Font = dlg.Font;
+                Song.TranslationText.Font = dlg.Font;
                 previewSlide();
             }
         }
@@ -558,11 +505,11 @@ namespace PraiseBase.Presenter.Forms
         private void buttonChooseProjectionForeColor_Click(object sender, EventArgs e)
         {
             ColorDialog dlg = new ColorDialog();
-            dlg.Color = sng.MainText.Color;
+            dlg.Color = Song.MainText.Color;
             if (dlg.ShowDialog() == DialogResult.OK)
             {
-                sng.MainText.Color = dlg.Color;
-                buttonChooseProjectionForeColor.BackColor = sng.MainText.Color;
+                Song.MainText.Color = dlg.Color;
+                buttonChooseProjectionForeColor.BackColor = Song.MainText.Color;
                 previewSlide();
             }
         }
@@ -570,24 +517,24 @@ namespace PraiseBase.Presenter.Forms
         private void buttonTranslationColor_Click(object sender, EventArgs e)
         {
             ColorDialog dlg = new ColorDialog();
-            dlg.Color = sng.TranslationText.Color;
+            dlg.Color = Song.TranslationText.Color;
             if (dlg.ShowDialog() == DialogResult.OK)
             {
-                sng.TranslationText.Color = dlg.Color;
-                buttonTranslationColor.BackColor = sng.TranslationText.Color;
+                Song.TranslationText.Color = dlg.Color;
+                buttonTranslationColor.BackColor = Song.TranslationText.Color;
                 previewSlide();
             }
         }
 
         private void buttonDelSlide_Click(object sender, EventArgs e)
         {
-            if (sng.Parts[currentPartId].Slides.Count > 1)
+            if (Song.Parts[currentPartId].Slides.Count > 1)
             {
                 if (MessageBox.Show(Properties.StringResources.ReallyDeleteSlide, Properties.StringResources.SongEditor, 
                     MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                 {
                     int slideId = treeViewContents.SelectedNode.Index;
-                    sng.Parts[currentPartId].Slides.RemoveAt(slideId);
+                    Song.Parts[currentPartId].Slides.RemoveAt(slideId);
                     populateTree();
                     currentSlideId = slideId - 1;
                     treeViewContents.SelectedNode = treeViewContents.Nodes[currentPartId].Nodes[currentSlideId];
@@ -602,13 +549,13 @@ namespace PraiseBase.Presenter.Forms
 
         private void buttonDelSongPart_Click(object sender, EventArgs e)
         {
-            if (sng.Parts.Count > 1)
+            if (Song.Parts.Count > 1)
             {
                 if (MessageBox.Show(Properties.StringResources.ReallyDeleteSongPart, Properties.StringResources.SongEditor, 
                     MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                 {
                     int partId = treeViewContents.SelectedNode.Index;
-                    sng.Parts.RemoveAt(partId);
+                    Song.Parts.RemoveAt(partId);
                     populateTree();
                     treeViewContents.SelectedNode = treeViewContents.Nodes[0];
                 }
@@ -622,14 +569,14 @@ namespace PraiseBase.Presenter.Forms
 
         private void buttonSlideDuplicate_Click(object sender, EventArgs e)
         {
-            sng.Parts[currentPartId].Slides.Duplicate(currentSlideId);
+            Song.Parts[currentPartId].Slides.Duplicate(currentSlideId);
             populateTree();
             treeViewContents.SelectedNode = treeViewContents.Nodes[currentPartId].Nodes[currentSlideId];
         }
 
         private void buttonSlideSeparate_Click(object sender, EventArgs e)
         {
-            sng.Parts[currentPartId].Slides.Split(currentSlideId);
+            Song.Parts[currentPartId].Slides.Split(currentSlideId);
             populateTree();
             treeViewContents.SelectedNode = treeViewContents.Nodes[currentPartId].Nodes[currentSlideId];
         }
@@ -646,7 +593,7 @@ namespace PraiseBase.Presenter.Forms
                 int partIdx = treeViewContents.SelectedNode.Parent.Index;
                 int slideIdx = treeViewContents.SelectedNode.Index;
 
-                sng.Parts[partIdx].Slides[slideIdx].TranslationText = textBoxSongTranslation.Text;
+                Song.Parts[partIdx].Slides[slideIdx].TranslationText = textBoxSongTranslation.Text;
             }
         }
 
@@ -670,138 +617,20 @@ namespace PraiseBase.Presenter.Forms
         {
             if (e.CurrentValue == CheckState.Unchecked)
             {
-                sng.Themes.Add(checkedListBoxTags.Items[e.Index].ToString());
+                Song.Themes.Add(checkedListBoxTags.Items[e.Index].ToString());
             }
             else
             {
-                sng.Themes.Remove(checkedListBoxTags.Items[e.Index].ToString());
-            }
-        }
-
-        public void save()
-        {
-            Console.WriteLine(this.ActiveControl.Name);
-            this.ValidateChildren();
-
-            if (songFilename == null)
-            {
-                saveAs();
-            }
-            else
-            {
-                try
-                {
-                    SongFilePluginFactory.Create(songFilename).Save(sng, songFilename);
-
-                    hashCode = sng.GetHashCode();
-                    ((SongEditor)MdiParent).setStatus(String.Format(Properties.StringResources.SongSavedAs, songFilename));
-
-                    SongManager.Instance.ReloadSongByPath(songFilename);
-                }
-                catch (NotImplementedException)
-                {
-                    MessageBox.Show(Properties.StringResources.SongCannotBeSavedInThisFormat, Properties.StringResources.FormatNotSupported, 
-                        MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    saveAs();
-                }
-            }
-        }
-
-        public void saveAs()
-        {
-            sng.Title = textBoxSongTitle.Text;
-
-            if (sng.Title == PraiseBase.Presenter.Properties.Settings.Default.SongDefaultName)
-            {
-                if (MessageBox.Show(string.Format(Properties.StringResources.DoesTheSongReallyHaveTheDefaultTitle, sng.Title), Properties.StringResources.Attention, 
-                    MessageBoxButtons.YesNo) == System.Windows.Forms.DialogResult.No)
-                {
-                    textBoxSongTitle.SelectAll();
-                    textBoxSongTitle.Focus();
-                    return;
-                }
-            }
-
-            SaveFileDialog saveFileDialog = new SaveFileDialog();
-            if (songFilename != null)
-            {
-                saveFileDialog.InitialDirectory = Path.GetDirectoryName(songFilename);
-            }
-            else
-            {
-                saveFileDialog.InitialDirectory = ((SongEditor)MdiParent).fileBoxInitialDir;
-            }
-            saveFileDialog.CheckPathExists = true;
-            saveFileDialog.FileName = sng.Title;
-            saveFileDialog.Filter = GetSaveFileBoxFilter();
-            saveFileDialog.FilterIndex = ((SongEditor)MdiParent).fileSaveBoxFilterIndex;
-            saveFileDialog.AddExtension = true;
-            saveFileDialog.Title = Properties.StringResources.SaveSongAs;
-
-            if (saveFileDialog.ShowDialog(this) == DialogResult.OK)
-            {
-                hashCode = sng.GetHashCode();
-                try {
-                    CreateByTypeIndex(saveFileDialog.FilterIndex - 1).Save(sng, saveFileDialog.FileName);
-                    ((SongEditor)MdiParent).fileSaveBoxFilterIndex = saveFileDialog.FilterIndex;
-                    ((SongEditor)MdiParent).setStatus(string.Format(Properties.StringResources.SongSavedAs, saveFileDialog.FileName));
-                }
-                catch (NotImplementedException)
-                {
-                    MessageBox.Show(Properties.StringResources.SongCannotBeSavedInThisFormat, Properties.StringResources.SongEditor, 
-                        MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
-            }
-            SongManager.Instance.ReloadSongByPath(saveFileDialog.FileName);
-        }
-
-        public string GetSaveFileBoxFilter()
-        {
-            String fltr = String.Empty;
-            foreach (ISongFilePlugin t in SongFilePluginFactory.GetWriterPlugins())
-            {
-                if (fltr != string.Empty)
-                {
-                    fltr += "|";
-                }
-                fltr += t.GetFileTypeDescription() + " (*" + t.GetFileExtension() + ")|*" + t.GetFileExtension();
-            }
-            return fltr;
-        }
-
-        public ISongFilePlugin CreateByTypeIndex(int index)
-        {
-            if (index >= 0 && index < SongFilePluginFactory.GetWriterPlugins().Count)
-            {
-                return SongFilePluginFactory.GetWriterPlugins().ToArray()[index];
-            }
-            throw new NotImplementedException();
-        }
-
-        private void EditorChild_FormClosing(object sender, FormClosingEventArgs e)
-        {
-            if (hashCode != sng.GetHashCode())
-            {
-                DialogResult dlg = MessageBox.Show(string.Format(Properties.StringResources.SaveChangesMadeToTheSong, sng.Title), 
-                    Properties.StringResources.SongEditor, 
-                    MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
-                if (dlg == DialogResult.Yes)
-                {
-                    save();
-                }
-                else if (dlg == DialogResult.Cancel)
-                {
-                    e.Cancel = true;
-                }
+                Song.Themes.Remove(checkedListBoxTags.Items[e.Index].ToString());
             }
         }
 
         private void buttonSlideBackground_Click(object sender, EventArgs e)
         {
             ImageDialog imd = new ImageDialog();
-            imd.Background = sng.Parts[currentPartId].Slides[currentSlideId].Background;
+            imd.Background = Song.Parts[currentPartId].Slides[currentSlideId].Background;
 
-            if (sng.GetNumberOfBackgroundImages() == 0)
+            if (Song.GetNumberOfBackgroundImages() == 0)
             {
                 imd.forAll = true;
             }
@@ -812,34 +641,34 @@ namespace PraiseBase.Presenter.Forms
                 {
                     if (imd.forAll)
                     {
-                        for (int i = 0; i < sng.Parts.Count; i++)
+                        for (int i = 0; i < Song.Parts.Count; i++)
                         {
-                            for (int j = 0; j < sng.Parts[i].Slides.Count; j++)
+                            for (int j = 0; j < Song.Parts[i].Slides.Count; j++)
                             {
-                                sng.Parts[i].Slides[j].Background = imd.Background;
+                                Song.Parts[i].Slides[j].Background = imd.Background;
                             }
                         }
                     }
                     else
                     {
-                        sng.Parts[currentPartId].Slides[currentSlideId].Background = imd.Background;
+                        Song.Parts[currentPartId].Slides[currentSlideId].Background = imd.Background;
                     }
                 }
                 else
                 {
                     if (imd.forAll)
                     {
-                        for (int i = 0; i < sng.Parts.Count; i++)
+                        for (int i = 0; i < Song.Parts.Count; i++)
                         {
-                            for (int j = 0; j < sng.Parts[i].Slides.Count; j++)
+                            for (int j = 0; j < Song.Parts[i].Slides.Count; j++)
                             {
-                                sng.Parts[i].Slides[j].Background = getDefaultBackground();
+                                Song.Parts[i].Slides[j].Background = getDefaultBackground();
                             }
                         }
                     }
                     else
                     {
-                        sng.Parts[currentPartId].Slides[currentSlideId].Background = getDefaultBackground(); 
+                        Song.Parts[currentPartId].Slides[currentSlideId].Background = getDefaultBackground(); 
                     }
                 }
                 previewSlide();
@@ -866,12 +695,12 @@ namespace PraiseBase.Presenter.Forms
 
         private void previewSlide()
         {
-            SongSlide slide = (SongSlide)sng.Parts[currentPartId].Slides[currentSlideId].Clone();
+            SongSlide slide = (SongSlide)Song.Parts[currentPartId].Slides[currentSlideId].Clone();
             slide.Text = textBoxSongText.Text;
             slide.TranslationText = textBoxSongTranslation.Text;
             SlideTextFormatting slideFormatting = new SlideTextFormatting();
 
-            SongSlideTextFormattingMapper.Map(sng, ref slideFormatting);
+            SongSlideTextFormattingMapper.Map(Song, ref slideFormatting);
 
             // Disabled for performance
             slideFormatting.OutlineEnabled = false;
@@ -886,7 +715,7 @@ namespace PraiseBase.Presenter.Forms
 
             ImageLayer il = new ImageLayer();
 
-            IBackground bg = sng.Parts[currentPartId].Slides[currentSlideId].Background;
+            IBackground bg = Song.Parts[currentPartId].Slides[currentSlideId].Background;
             il.Image = ImageManager.Instance.GetImage(bg);
 
             var bmp = new Bitmap(1024, 768);
@@ -1040,6 +869,7 @@ namespace PraiseBase.Presenter.Forms
         private void textBoxSongTitle_TextChanged(object sender, EventArgs e)
         {
             this.Text = textBoxSongTitle.Text;
+            Song.Title = textBoxSongTitle.Text;
         }
 
         private void textBoxPartCaption_TextChanged(object sender, EventArgs e)

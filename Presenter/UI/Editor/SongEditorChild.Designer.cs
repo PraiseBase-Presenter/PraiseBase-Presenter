@@ -892,7 +892,6 @@
             this.Controls.Add(this.label4);
             this.Name = "SongEditorChild";
             this.ShowInTaskbar = false;
-            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.EditorChild_FormClosing);
             this.Load += new System.EventHandler(this.EditorChild_Load);
             this.Shown += new System.EventHandler(this.EditorChild_Shown);
             this.Resize += new System.EventHandler(this.EditorChild_Resize);
