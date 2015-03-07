@@ -50,10 +50,27 @@ namespace PraiseBase.Presenter.Model
         /// <returns></returns>
         public override int GetHashCode()
         {
-            return Distance.GetHashCode()
-                 ^ Size.GetHashCode()
-                 ^ Direction.GetHashCode()
-                 ^ Color.GetHashCode();
+            unchecked
+            {
+                var hashCode = Distance;
+                hashCode = (hashCode*397) ^ Size;
+                hashCode = (hashCode*397) ^ Direction;
+                hashCode = (hashCode*397) ^ Color.GetHashCode();
+                return hashCode;
+            }
+        }
+
+        protected bool Equals(TextShadow other)
+        {
+            return Distance == other.Distance && Size == other.Size && Direction == other.Direction && Color.Equals(other.Color);
+        }
+
+        public override bool Equals(object obj)
+        {
+            if (ReferenceEquals(null, obj)) return false;
+            if (ReferenceEquals(this, obj)) return true;
+            if (obj.GetType() != this.GetType()) return false;
+            return Equals((TextShadow) obj);
         }
 
         public object Clone()

@@ -37,5 +37,26 @@ namespace PraiseBase.Presenter.Model.Song
         /// The index of the song
         /// </summary>
         public string Entry { get; set; }
+
+        protected bool Equals(SongBook other)
+        {
+            return string.Equals(Name, other.Name) && string.Equals(Entry, other.Entry);
+        }
+
+        public override bool Equals(object obj)
+        {
+            if (ReferenceEquals(null, obj)) return false;
+            if (ReferenceEquals(this, obj)) return true;
+            if (obj.GetType() != this.GetType()) return false;
+            return Equals((SongBook) obj);
+        }
+
+        public override int GetHashCode()
+        {
+            unchecked
+            {
+                return ((Name != null ? Name.GetHashCode() : 0)*397) ^ (Entry != null ? Entry.GetHashCode() : 0);
+            }
+        }
     }
 }

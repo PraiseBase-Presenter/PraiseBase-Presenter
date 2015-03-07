@@ -53,12 +53,28 @@ namespace PraiseBase.Presenter.Model
         /// <returns></returns>
         public override int GetHashCode()
         {
-            int code = Font.GetHashCode()
-                       ^ Color.GetHashCode()
-                       ^ Outline.GetHashCode()
-                       ^ Shadow.GetHashCode()
-                       ^ LineSpacing.GetHashCode();
-            return code;
+            unchecked
+            {
+                var hashCode = (Font != null ? Font.GetHashCode() : 0);
+                hashCode = (hashCode*397) ^ Color.GetHashCode();
+                hashCode = (hashCode*397) ^ (Outline != null ? Outline.GetHashCode() : 0);
+                hashCode = (hashCode*397) ^ (Shadow != null ? Shadow.GetHashCode() : 0);
+                hashCode = (hashCode*397) ^ LineSpacing;
+                return hashCode;
+            }
+        }
+
+        protected bool Equals(TextFormatting other)
+        {
+            return Equals(Font, other.Font) && Color.Equals(other.Color) && Equals(Outline, other.Outline) && Equals(Shadow, other.Shadow) && LineSpacing == other.LineSpacing;
+        }
+
+        public override bool Equals(object obj)
+        {
+            if (ReferenceEquals(null, obj)) return false;
+            if (ReferenceEquals(this, obj)) return true;
+            if (obj.GetType() != this.GetType()) return false;
+            return Equals((TextFormatting) obj);
         }
 
         public object Clone()

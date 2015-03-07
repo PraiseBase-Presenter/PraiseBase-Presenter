@@ -60,7 +60,26 @@ namespace PraiseBase.Presenter.Model.Song
         /// <returns></returns>
         public override int GetHashCode()
         {
-            return Caption.GetHashCode() ^ Slides.GetHashCode();
+            unchecked
+            {
+                var hashCode = (Caption != null ? Caption.GetHashCode() : 0);
+                hashCode = (hashCode*397) ^ (Language != null ? Language.GetHashCode() : 0);
+                hashCode = (hashCode*397) ^ (Slides != null ? Slides.GetHashCode() : 0);
+                return hashCode;
+            }
+        }
+
+        protected bool Equals(SongPart other)
+        {
+            return string.Equals(Caption, other.Caption) && string.Equals(Language, other.Language) && Equals(Slides, other.Slides);
+        }
+
+        public override bool Equals(object obj)
+        {
+            if (ReferenceEquals(null, obj)) return false;
+            if (ReferenceEquals(this, obj)) return true;
+            if (obj.GetType() != this.GetType()) return false;
+            return Equals((SongPart) obj);
         }
 
         /// <summary>

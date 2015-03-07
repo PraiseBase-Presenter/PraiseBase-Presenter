@@ -39,32 +39,24 @@ namespace PraiseBase.Presenter.Model
             return this.Vertical.ToString() + " " + this.Horizontal.ToString();
         }
 
-        public bool Equals(TextOrientation ori)
+        private bool Equals(TextOrientation ori)
         {
-            if ((object)ori == null)
-            {
-                return false;
-            }
-            return this.Horizontal == ori.Horizontal && this.Vertical == ori.Vertical;
+            return Vertical == ori.Vertical && Horizontal == ori.Horizontal;
         }
 
         public override bool Equals(System.Object o)
         {
-            if (o == null)
-            {
-                return false;
-            }
-            TextOrientation ori = o as TextOrientation;
-            if ((System.Object)ori == null)
-            {
-                return false;
-            }
-            return this.Horizontal == ori.Horizontal && this.Vertical == ori.Vertical;
+            if (ReferenceEquals(null, o)) return false;
+            if (ReferenceEquals(this, o)) return true;
+            return o is TextOrientation && Equals((TextOrientation) o);
         }
 
         public override int GetHashCode()
         {
-            return this.Horizontal.GetHashCode() ^ (17 * this.Vertical.GetHashCode());
+            unchecked
+            {
+                return ((int) Vertical*397) ^ (int) Horizontal;
+            }
         }
 
         public object Clone()

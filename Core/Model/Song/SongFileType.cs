@@ -33,5 +33,26 @@ namespace PraiseBase.Presenter.Model.Song
             Name = name;
             Extension = extension;
         }
+
+        protected bool Equals(SongFileType other)
+        {
+            return string.Equals(Name, other.Name) && string.Equals(Extension, other.Extension);
+        }
+
+        public override bool Equals(object obj)
+        {
+            if (ReferenceEquals(null, obj)) return false;
+            if (ReferenceEquals(this, obj)) return true;
+            if (obj.GetType() != this.GetType()) return false;
+            return Equals((SongFileType) obj);
+        }
+
+        public override int GetHashCode()
+        {
+            unchecked
+            {
+                return ((Name != null ? Name.GetHashCode() : 0)*397) ^ (Extension != null ? Extension.GetHashCode() : 0);
+            }
+        }
     }
 }

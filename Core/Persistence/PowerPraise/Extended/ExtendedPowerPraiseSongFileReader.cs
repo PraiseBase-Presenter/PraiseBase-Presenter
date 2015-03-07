@@ -105,7 +105,7 @@ namespace PraiseBase.Presenter.Persistence.PowerPraise.Extended
             {
                 SongAuthor author = new SongAuthor();
                 author.Name = s.Trim();
-                author.Type = (i++ == 0) ? SongAuthorType.words : SongAuthorType.music;
+                author.Type = (i++ == 0) ? SongAuthorType.Words : SongAuthorType.Music;
                 list.Add(author);
             }
             return list;

@@ -65,12 +65,15 @@ namespace PraiseBase.Presenter.Model.Song
 
         public override int GetHashCode()
         {
-            int res = 0;
-            for (int i = 0; i < Count; i++)
+            unchecked
             {
-                res = (res ^ this[i].GetHashCode()) ^ i.GetHashCode();
+                int hash = 19;
+                for (int i = 0; i < Count; i++)
+                {
+                    hash = hash * 31 + this[i].GetHashCode();
+                }
+                return hash;
             }
-            return res;
         }
     }
 }

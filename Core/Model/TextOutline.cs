@@ -44,8 +44,23 @@ namespace PraiseBase.Presenter.Model
         /// <returns></returns>
         public override int GetHashCode()
         {
-            return Width.GetHashCode()
-                   ^ Color.GetHashCode();
+            unchecked
+            {
+                return (Width*397) ^ Color.GetHashCode();
+            }
+        }
+
+        protected bool Equals(TextOutline other)
+        {
+            return Width == other.Width && Color.Equals(other.Color);
+        }
+
+        public override bool Equals(object obj)
+        {
+            if (ReferenceEquals(null, obj)) return false;
+            if (ReferenceEquals(this, obj)) return true;
+            if (obj.GetType() != this.GetType()) return false;
+            return Equals((TextOutline) obj);
         }
 
         public object Clone()

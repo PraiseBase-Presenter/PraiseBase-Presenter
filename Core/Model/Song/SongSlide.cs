@@ -179,20 +179,28 @@ namespace PraiseBase.Presenter.Model.Song
         /// <returns></returns>
         public override int GetHashCode()
         {
-            int res =  + TextSize.GetHashCode();
-            if (Background != null) 
+            unchecked
             {
-                res = res ^ Background.GetHashCode();
+                var hashCode = (Translation != null ? Translation.GetHashCode() : 0);
+                hashCode = (hashCode*397) ^ (Lines != null ? Lines.GetHashCode() : 0);
+                hashCode = (hashCode*397) ^ (Background != null ? Background.GetHashCode() : 0);
+                hashCode = (hashCode*397) ^ TextSize.GetHashCode();
+                hashCode = (hashCode*397) ^ (PartName != null ? PartName.GetHashCode() : 0);
+                return hashCode;
             }
-            for (int i = 0; i < Lines.Count; i++)
-            {
-                res = res ^ Lines[i].GetHashCode();
-            }
-            for (int i = 0; i < Translation.Count; i++)
-            {
-                res = res ^ Translation[i].GetHashCode();
-            }
-            return res;
+        }
+
+        protected bool Equals(SongSlide other)
+        {
+            return Equals(Translation, other.Translation) && Equals(Lines, other.Lines) && Equals(Background, other.Background) && TextSize.Equals(other.TextSize) && string.Equals(PartName, other.PartName);
+        }
+
+        public override bool Equals(object obj)
+        {
+            if (ReferenceEquals(null, obj)) return false;
+            if (ReferenceEquals(this, obj)) return true;
+            if (obj.GetType() != this.GetType()) return false;
+            return Equals((SongSlide) obj);
         }
 
         /// <summary>

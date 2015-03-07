@@ -124,7 +124,7 @@ namespace PraiseBase.Presenter.Model.Song
                 {
                     SongAuthor author = new SongAuthor();
                     author.Name = s.Trim();
-                    author.Type = (i++ == 0) ? SongAuthorType.words : SongAuthorType.music;
+                    author.Type = (i++ == 0) ? SongAuthorType.Words : SongAuthorType.Music;
                     Author.Add(author);
                 }
             }
@@ -421,33 +421,59 @@ namespace PraiseBase.Presenter.Model.Song
         /// <returns></returns>
         public override int GetHashCode()
         {
-            int code = Title.GetHashCode()
-                       ^ Parts.GetHashCode()
-                       ^ QualityIssues.GetHashCode()
-                       ^ MainText.GetHashCode()
-                       ^ TranslationText.GetHashCode()
-                       ^ CopyrightText.GetHashCode()
-                       ^ SourceText.GetHashCode()
-                       ^ Themes.GetHashCode() 
-                       ^ TextOrientation.GetHashCode();
+            unchecked
+            {
+                var hashCode = (ModifiedTimestamp != null ? ModifiedTimestamp.GetHashCode() : 0);
+                hashCode = (hashCode*397) ^ (CreatedIn != null ? CreatedIn.GetHashCode() : 0);
+                hashCode = (hashCode*397) ^ (ModifiedIn != null ? ModifiedIn.GetHashCode() : 0);
+                hashCode = (hashCode*397) ^ (Title != null ? Title.GetHashCode() : 0);
+                hashCode = (hashCode*397) ^ (Language != null ? Language.GetHashCode() : 0);
+                hashCode = (hashCode*397) ^ (CcliID != null ? CcliID.GetHashCode() : 0);
+                hashCode = (hashCode*397) ^ CCliIDReadonly.GetHashCode();
+                hashCode = (hashCode*397) ^ (Copyright != null ? Copyright.GetHashCode() : 0);
+                hashCode = (hashCode*397) ^ (int) CopyrightPosition;
+                hashCode = (hashCode*397) ^ (int) SourcePosition;
+                hashCode = (hashCode*397) ^ (ReleaseYear != null ? ReleaseYear.GetHashCode() : 0);
+                hashCode = (hashCode*397) ^ (Author != null ? Author.GetHashCode() : 0);
+                hashCode = (hashCode*397) ^ (RightsManagement != null ? RightsManagement.GetHashCode() : 0);
+                hashCode = (hashCode*397) ^ (Publisher != null ? Publisher.GetHashCode() : 0);
+                hashCode = (hashCode*397) ^ (Version != null ? Version.GetHashCode() : 0);
+                hashCode = (hashCode*397) ^ (Key != null ? Key.GetHashCode() : 0);
+                hashCode = (hashCode*397) ^ Transposition;
+                hashCode = (hashCode*397) ^ (Tempo != null ? Tempo.GetHashCode() : 0);
+                hashCode = (hashCode*397) ^ (Variant != null ? Variant.GetHashCode() : 0);
+                hashCode = (hashCode*397) ^ (Themes != null ? Themes.GetHashCode() : 0);
+                hashCode = (hashCode*397) ^ (Comment != null ? Comment.GetHashCode() : 0);
+                hashCode = (hashCode*397) ^ (SongBooks != null ? SongBooks.GetHashCode() : 0);
+                hashCode = (hashCode*397) ^ (SearchText != null ? SearchText.GetHashCode() : 0);
+                hashCode = (hashCode*397) ^ (Parts != null ? Parts.GetHashCode() : 0);
+                hashCode = (hashCode*397) ^ (PartSequence != null ? PartSequence.GetHashCode() : 0);
+                hashCode = (hashCode*397) ^ CurrentSlide;
+                hashCode = (hashCode*397) ^ (QualityIssues != null ? QualityIssues.GetHashCode() : 0);
+                hashCode = (hashCode*397) ^ (MainText != null ? MainText.GetHashCode() : 0);
+                hashCode = (hashCode*397) ^ (TranslationText != null ? TranslationText.GetHashCode() : 0);
+                hashCode = (hashCode*397) ^ (CopyrightText != null ? CopyrightText.GetHashCode() : 0);
+                hashCode = (hashCode*397) ^ (SourceText != null ? SourceText.GetHashCode() : 0);
+                hashCode = (hashCode*397) ^ (TextOrientation != null ? TextOrientation.GetHashCode() : 0);
+                hashCode = (hashCode*397) ^ (int) TranslationPosition;
+                hashCode = (hashCode*397) ^ TextOutlineEnabled.GetHashCode();
+                hashCode = (hashCode*397) ^ TextShadowEnabled.GetHashCode();
+                hashCode = (hashCode*397) ^ (TextBorders != null ? TextBorders.GetHashCode() : 0);
+                return hashCode;
+            }
+        }
 
-            if (Language != null)
-            {
-                code ^= Language.GetHashCode();
-            }
-            if (Comment != null)
-            {
-                code ^= Comment.GetHashCode();
-            }
-            if (CcliID != null)
-            {
-                code ^= CcliID.GetHashCode();
-            }
-            if (Copyright != null)
-            {
-                code ^= Copyright.GetHashCode();
-            }
-            return code;
+        protected bool Equals(Song other)
+        {
+            return string.Equals(ModifiedTimestamp, other.ModifiedTimestamp) && string.Equals(CreatedIn, other.CreatedIn) && string.Equals(ModifiedIn, other.ModifiedIn) && string.Equals(Title, other.Title) && string.Equals(Language, other.Language) && string.Equals(CcliID, other.CcliID) && CCliIDReadonly.Equals(other.CCliIDReadonly) && string.Equals(Copyright, other.Copyright) && CopyrightPosition == other.CopyrightPosition && SourcePosition == other.SourcePosition && string.Equals(ReleaseYear, other.ReleaseYear) && Equals(Author, other.Author) && string.Equals(RightsManagement, other.RightsManagement) && string.Equals(Publisher, other.Publisher) && string.Equals(Version, other.Version) && string.Equals(Key, other.Key) && Transposition == other.Transposition && Equals(Tempo, other.Tempo) && string.Equals(Variant, other.Variant) && Equals(Themes, other.Themes) && string.Equals(Comment, other.Comment) && Equals(SongBooks, other.SongBooks) && string.Equals(SearchText, other.SearchText) && Equals(Parts, other.Parts) && Equals(PartSequence, other.PartSequence) && CurrentSlide == other.CurrentSlide && Equals(QualityIssues, other.QualityIssues) && Equals(MainText, other.MainText) && Equals(TranslationText, other.TranslationText) && Equals(CopyrightText, other.CopyrightText) && Equals(SourceText, other.SourceText) && Equals(TextOrientation, other.TextOrientation) && TranslationPosition == other.TranslationPosition && TextOutlineEnabled.Equals(other.TextOutlineEnabled) && TextShadowEnabled.Equals(other.TextShadowEnabled) && Equals(TextBorders, other.TextBorders);
+        }
+
+        public override bool Equals(object obj)
+        {
+            if (ReferenceEquals(null, obj)) return false;
+            if (ReferenceEquals(this, obj)) return true;
+            if (obj.GetType() != this.GetType()) return false;
+            return Equals((Song) obj);
         }
 
         /// <summary>
