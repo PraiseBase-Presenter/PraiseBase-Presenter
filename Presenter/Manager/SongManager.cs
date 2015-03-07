@@ -23,10 +23,10 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
-using PraiseBase.Presenter.Properties;
-using PraiseBase.Presenter.Persistence;
-using PraiseBase.Presenter.Model.Song;
 using PraiseBase.Presenter.Manager;
+using PraiseBase.Presenter.Model.Song;
+using PraiseBase.Presenter.Persistence;
+using PraiseBase.Presenter.Properties;
 
 namespace PraiseBase.Presenter
 {

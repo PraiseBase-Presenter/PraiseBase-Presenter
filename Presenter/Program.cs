@@ -21,12 +21,11 @@
  */
 
 using System;
+using System.Collections.Generic;
+using System.Globalization;
 using System.Windows.Forms;
 using PraiseBase.Presenter.Forms;
 using PraiseBase.Presenter.Properties;
-using PraiseBase.Presenter.Manager;
-using System.Globalization;
-using System.Collections.Generic;
 
 namespace PraiseBase.Presenter
 {

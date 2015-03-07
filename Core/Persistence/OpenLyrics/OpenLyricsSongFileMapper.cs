@@ -21,8 +21,6 @@
  */
 
 using System;
-using System.Drawing;
-using System.Xml;
 using PraiseBase.Presenter.Model.Song;
 
 namespace PraiseBase.Presenter.Persistence.OpenLyrics

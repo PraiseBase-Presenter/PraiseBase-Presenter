@@ -25,24 +25,21 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Drawing;
+using System.Globalization;
 using System.IO;
-using System.Reflection;
-using System.Text;
 using System.Threading;
 using System.Windows.Forms;
-using System.Xml;
-using PraiseBase.Presenter.Properties;
-using SongDetails;
-using Timer = System.Windows.Forms.Timer;
 using PraiseBase.Presenter.Manager;
-using System.Globalization;
-using PraiseBase.Presenter.UI;
-using PraiseBase.Presenter.Model.Bible;
-using PraiseBase.Presenter.Persistence.Setlists;
-using PraiseBase.Presenter.Projection;
 using PraiseBase.Presenter.Model;
+using PraiseBase.Presenter.Model.Bible;
 using PraiseBase.Presenter.Model.Song;
 using PraiseBase.Presenter.Persistence;
+using PraiseBase.Presenter.Persistence.Setlists;
+using PraiseBase.Presenter.Projection;
+using PraiseBase.Presenter.Properties;
+using PraiseBase.Presenter.UI;
+using SongDetails;
+using Timer = System.Windows.Forms.Timer;
 
 namespace PraiseBase.Presenter.Forms
 {

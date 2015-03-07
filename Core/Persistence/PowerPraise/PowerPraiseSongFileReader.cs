@@ -20,11 +20,7 @@
  *
  */
 
-using System;
-using System.Collections.Generic;
-using System.Drawing;
 using System.Xml;
-using PraiseBase.Presenter.Model;
 
 namespace PraiseBase.Presenter.Persistence.PowerPraise
 {

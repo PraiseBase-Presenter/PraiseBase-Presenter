@@ -1,16 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Data;
-using System.Data.OleDb;
 using System.IO;
 using System.Linq;
-using System.Text.RegularExpressions;
 using System.Windows.Forms;
-using PraiseBase.Presenter.Persistence;
 using PraiseBase.Presenter.Model.Song;
-using PraiseBase.Presenter.Util;
+using PraiseBase.Presenter.Persistence;
 using PraiseBase.Presenter.Persistence.PraiseBox;
 using PraiseBase.Presenter.Properties;
+using PraiseBase.Presenter.Util;
 
 namespace PraiseBase.Presenter.Forms
 {

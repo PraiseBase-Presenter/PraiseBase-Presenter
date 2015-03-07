@@ -1,5 +1,5 @@
-﻿using PraiseBase.Presenter.Model;
-using System.Drawing;
+﻿using System.Drawing;
+using PraiseBase.Presenter.Model;
 
 namespace PraiseBase.Presenter.Persistence.PowerPraise
 {

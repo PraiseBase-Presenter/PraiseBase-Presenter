@@ -24,11 +24,11 @@ using System;
 using System.Drawing;
 using System.IO;
 using System.Windows.Forms;
-using PraiseBase.Presenter.Properties;
+using PraiseBase.Presenter.Model;
 using PraiseBase.Presenter.Model.Song;
 using PraiseBase.Presenter.Persistence;
-using PraiseBase.Presenter.Model;
 using PraiseBase.Presenter.Projection;
+using PraiseBase.Presenter.Properties;
 using PraiseBase.Presenter.Util;
 
 namespace PraiseBase.Presenter.Forms

@@ -22,11 +22,9 @@
 
 using System;
 using System.Collections.Generic;
-using System.Drawing;
-using System.Xml;
+using System.Text.RegularExpressions;
 using PraiseBase.Presenter.Model;
 using PraiseBase.Presenter.Model.Song;
-using System.Text.RegularExpressions;
 
 namespace PraiseBase.Presenter.Persistence.PowerPraise
 {

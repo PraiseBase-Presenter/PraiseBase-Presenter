@@ -22,7 +22,6 @@
 
 using System.Xml;
 using PraiseBase.Presenter.Model.Statistics;
-using PraiseBase.Presenter.Persistence;
 
 namespace PraiseBase.Presenter.Persistence
 {

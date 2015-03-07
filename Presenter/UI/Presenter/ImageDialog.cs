@@ -23,9 +23,8 @@
 using System;
 using System.IO;
 using System.Windows.Forms;
-using PraiseBase.Presenter.Properties;
-using System.Drawing;
 using PraiseBase.Presenter.Model.Song;
+using PraiseBase.Presenter.Properties;
 
 namespace PraiseBase.Presenter.Forms
 {

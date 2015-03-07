@@ -21,14 +21,12 @@
  */
 
 using System;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Windows.Forms;
-using PraiseBase.Presenter.Properties;
 using PraiseBase.Presenter.Persistence;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Globalization;
+using PraiseBase.Presenter.Properties;
 using PraiseBase.Presenter.UI;
 
 namespace PraiseBase.Presenter.Forms

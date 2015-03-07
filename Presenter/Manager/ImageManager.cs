@@ -23,13 +23,10 @@
 using System;
 using System.Collections.Generic;
 using System.Drawing;
-using System.Drawing.Imaging;
 using System.IO;
-using System.Windows.Forms;
-using PraiseBase.Presenter.Forms;
+using PraiseBase.Presenter.Model.Song;
 using PraiseBase.Presenter.Properties;
 using PraiseBase.Presenter.Util;
-using PraiseBase.Presenter.Model.Song;
 
 namespace PraiseBase.Presenter
 {
