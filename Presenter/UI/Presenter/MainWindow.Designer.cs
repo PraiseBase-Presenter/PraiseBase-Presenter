@@ -58,8 +58,6 @@
             this.toolStripMenuItem4 = new System.Windows.Forms.ToolStripMenuItem();
             this.praiseBoxDatenbankToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.worToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.powerpraiseLiederToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.songbeamerLiederToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator9 = new System.Windows.Forms.ToolStripSeparator();
             this.liederlisteNeuLadenToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.bilderlisteNeuLadenToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -390,9 +388,7 @@
             // 
             this.toolStripMenuItem4.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.praiseBoxDatenbankToolStripMenuItem,
-            this.worToolStripMenuItem,
-            this.powerpraiseLiederToolStripMenuItem,
-            this.songbeamerLiederToolStripMenuItem});
+            this.worToolStripMenuItem});
             this.toolStripMenuItem4.Name = "toolStripMenuItem4";
             resources.ApplyResources(this.toolStripMenuItem4, "toolStripMenuItem4");
             // 
@@ -407,18 +403,6 @@
             this.worToolStripMenuItem.Name = "worToolStripMenuItem";
             resources.ApplyResources(this.worToolStripMenuItem, "worToolStripMenuItem");
             this.worToolStripMenuItem.Click += new System.EventHandler(this.worToolStripMenuItem_Click);
-            // 
-            // powerpraiseLiederToolStripMenuItem
-            // 
-            this.powerpraiseLiederToolStripMenuItem.Name = "powerpraiseLiederToolStripMenuItem";
-            resources.ApplyResources(this.powerpraiseLiederToolStripMenuItem, "powerpraiseLiederToolStripMenuItem");
-            this.powerpraiseLiederToolStripMenuItem.Click += new System.EventHandler(this.powerpraiseLiederToolStripMenuItem_Click);
-            // 
-            // songbeamerLiederToolStripMenuItem
-            // 
-            this.songbeamerLiederToolStripMenuItem.Name = "songbeamerLiederToolStripMenuItem";
-            resources.ApplyResources(this.songbeamerLiederToolStripMenuItem, "songbeamerLiederToolStripMenuItem");
-            this.songbeamerLiederToolStripMenuItem.Click += new System.EventHandler(this.songbeamerLiederToolStripMenuItem_Click);
             // 
             // toolStripSeparator9
             // 
@@ -1466,8 +1450,6 @@
         private System.Windows.Forms.ToolStripMenuItem liederToolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem bilderToolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem setlistenToolStripMenuItem1;
-        private System.Windows.Forms.ToolStripMenuItem powerpraiseLiederToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem songbeamerLiederToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem worToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem miniaturbilderPrüfenToolStripMenuItem;
         private System.Windows.Forms.TabControl tabControl2;

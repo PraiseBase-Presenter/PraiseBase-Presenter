@@ -1353,24 +1353,6 @@ namespace PraiseBase.Presenter.Forms
             }
         }
 
-        private void powerpraiseLiederToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            var dlg = new SongImporter(SongImporter.ImportFormat.PowerPraise);
-            if (dlg.ShowDialog(this) == DialogResult.OK)
-            {
-                reloadSongList();
-            }
-        }
-
-        private void songbeamerLiederToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            var dlg = new SongImporter(SongImporter.ImportFormat.SongBeamer);
-            if (dlg.ShowDialog(this) == DialogResult.OK)
-            {
-                reloadSongList();
-            }
-        }
-
         private void miniaturbilderPrüfenToolStripMenuItem_Click(object sender, EventArgs e)
         {
             ProgressWindow wnd = new ProgressWindow(StringResources.CreatingThumbnails + "...", 0);
