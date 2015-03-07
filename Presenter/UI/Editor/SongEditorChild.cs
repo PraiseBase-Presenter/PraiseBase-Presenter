@@ -572,11 +572,6 @@ namespace PraiseBase.Presenter.Forms
             treeViewContents.SelectedNode = treeViewContents.Nodes[currentPartId].Nodes[currentSlideId];
         }
 
-        private void EditorChild_Resize(object sender, EventArgs e)
-        {
-            alignTextFields();
-        }
-
         private void textBoxSongTranslation_TextChanged(object sender, EventArgs e)
         {
             if (treeViewContents.SelectedNode.Level == 1)
@@ -586,17 +581,6 @@ namespace PraiseBase.Presenter.Forms
 
                 Song.Parts[partIdx].Slides[slideIdx].TranslationText = textBoxSongTranslation.Text;
             }
-        }
-
-        private void alignTextFields()
-        {
-            //textBoxSongText.Width = (tabPage3.Width - 20) / 2;
-            //textBoxSongTranslation.Left = textBoxSongText.Right + 5;
-            //textBoxSongTranslation.Width = tabPage3.Width - 10 - textBoxSongTranslation.Left;
-        }
-
-        private void groupBoxNewSongPart_Enter(object sender, EventArgs e)
-        {
         }
 
         private void comboBoxLanguage_Enter(object sender, EventArgs e)

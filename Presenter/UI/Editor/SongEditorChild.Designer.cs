@@ -894,7 +894,6 @@
             this.ShowInTaskbar = false;
             this.Load += new System.EventHandler(this.EditorChild_Load);
             this.Shown += new System.EventHandler(this.EditorChild_Shown);
-            this.Resize += new System.EventHandler(this.EditorChild_Resize);
             this.splitContainer1.Panel1.ResumeLayout(false);
             this.splitContainer1.Panel1.PerformLayout();
             this.splitContainer1.Panel2.ResumeLayout(false);
