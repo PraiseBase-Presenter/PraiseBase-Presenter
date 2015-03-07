@@ -42,6 +42,7 @@ using PraiseBase.Presenter.Persistence.Setlists;
 using PraiseBase.Presenter.Projection;
 using PraiseBase.Presenter.Model;
 using PraiseBase.Presenter.Model.Song;
+using PraiseBase.Presenter.Persistence;
 
 namespace PraiseBase.Presenter.Forms
 {
@@ -1337,7 +1338,7 @@ namespace PraiseBase.Presenter.Forms
 
         private void praiseBoxDatenbankToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            var dlg = new SongImporter(SongImporter.ImportFormat.PraiseBox);
+            var dlg = new SongImporter(ImportFormat.PraiseBox);
             if (dlg.ShowDialog(this) == DialogResult.OK)
             {
                 reloadSongList();
@@ -1346,7 +1347,7 @@ namespace PraiseBase.Presenter.Forms
 
         private void worToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            var dlg = new SongImporter(SongImporter.ImportFormat.WorshipSystem);
+            var dlg = new SongImporter(ImportFormat.WorshipSystem);
             if (dlg.ShowDialog(this) == DialogResult.OK)
             {
                 reloadSongList();
