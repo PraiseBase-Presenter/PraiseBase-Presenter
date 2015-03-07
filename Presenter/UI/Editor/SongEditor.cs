@@ -410,7 +410,7 @@ namespace PraiseBase.Presenter.Forms
 
         private void praiseBoxToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            SongImporter dlg = new SongImporter(ImportFormat.PraiseBox);
+            SongImporter dlg = new SongImporter(Settings.Default, ImportFormat.PraiseBox);
             dlg.ShowDialog(this);
         }
 

@@ -6,11 +6,11 @@ using System.IO;
 using System.Linq;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
-using PraiseBase.Presenter.Properties;
 using PraiseBase.Presenter.Persistence;
 using PraiseBase.Presenter.Model.Song;
 using PraiseBase.Presenter.Util;
 using PraiseBase.Presenter.Persistence.PraiseBox;
+using PraiseBase.Presenter.Properties;
 
 namespace PraiseBase.Presenter.Forms
 {
@@ -18,12 +18,15 @@ namespace PraiseBase.Presenter.Forms
     {
         private ImportFormat _format;
 
+        private Settings settings;
+
         /// <summary>
         /// Imports songs from other systems
         /// </summary>
         /// <param name="importFormat">Import type</param>
-        public SongImporter(ImportFormat importFormat)
+        public SongImporter(Settings settings, ImportFormat importFormat)
         {
+            this.settings = settings;
             _format = importFormat;
             InitializeComponent();
         }
@@ -95,12 +98,12 @@ namespace PraiseBase.Presenter.Forms
                     Song sng = ((Song)listViewSongs.Items[x].Tag);
 
                     // Apply formatting
-                    SongTemplateUtil.ApplyFormattingFromSettings(Settings.Default, sng);
+                    SongTemplateUtil.ApplyFormattingFromSettings(settings, sng);
 
                     // TODO: Allow selection of plugin
                     ISongFilePlugin filePlugin = SongFilePluginFactory.Create(SongFilePluginFactory.GetWriterPlugins().First().GetType());
-                    string fileName = Settings.Default.DataDirectory + Path.DirectorySeparatorChar
-                        + Settings.Default.SongDir + Path.DirectorySeparatorChar
+                    string fileName = settings.DataDirectory + Path.DirectorySeparatorChar
+                        + settings.SongDir + Path.DirectorySeparatorChar
                         + sng.Title + filePlugin.GetFileExtension();
                     if ((File.Exists(fileName) && (MessageBox.Show(string.Format(Properties.StringResources.SongExistsAlready, ((Song)listViewSongs.Items[x].Tag).Title) 
                         + " " + Properties.StringResources.Overwrite + "?", Properties.StringResources.SongImporter, 

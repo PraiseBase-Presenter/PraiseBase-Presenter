@@ -1338,7 +1338,7 @@ namespace PraiseBase.Presenter.Forms
 
         private void praiseBoxDatenbankToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            var dlg = new SongImporter(ImportFormat.PraiseBox);
+            var dlg = new SongImporter(Settings.Default, ImportFormat.PraiseBox);
             if (dlg.ShowDialog(this) == DialogResult.OK)
             {
                 reloadSongList();
@@ -1347,7 +1347,7 @@ namespace PraiseBase.Presenter.Forms
 
         private void worToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            var dlg = new SongImporter(ImportFormat.WorshipSystem);
+            var dlg = new SongImporter(Settings.Default, ImportFormat.WorshipSystem);
             if (dlg.ShowDialog(this) == DialogResult.OK)
             {
                 reloadSongList();
