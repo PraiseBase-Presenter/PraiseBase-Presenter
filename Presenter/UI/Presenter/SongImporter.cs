@@ -9,6 +9,7 @@ using System.Windows.Forms;
 using PraiseBase.Presenter.Properties;
 using PraiseBase.Presenter.Persistence;
 using PraiseBase.Presenter.Model.Song;
+using PraiseBase.Presenter.Util;
 
 namespace PraiseBase.Presenter.Forms
 {
@@ -127,6 +128,8 @@ namespace PraiseBase.Presenter.Forms
                                 p++;
                             }
 
+                            SongTemplateUtil.ApplyFormattingFromSettings(Settings.Default, sng);
+
                             ListViewItem lvi = new ListViewItem(sng.Title);
                             lvi.Checked = true;
                             lvi.Tag = sng;
@@ -236,6 +239,8 @@ namespace PraiseBase.Presenter.Forms
                                 }
                                 p++;
                             }
+
+                            SongTemplateUtil.ApplyFormattingFromSettings(Settings.Default, sng);
 
                             ListViewItem lvi = new ListViewItem(sng.Title);
                             lvi.Checked = true;
