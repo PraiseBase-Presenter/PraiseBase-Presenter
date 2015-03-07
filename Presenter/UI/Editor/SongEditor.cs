@@ -398,7 +398,6 @@ namespace PraiseBase.Presenter.Forms
 
         public bool save(Song sng, String songFilename)
         {
-            Console.WriteLine(this.ActiveControl.Name);
             this.ValidateChildren();
 
             if (songFilename == null || songFilename == string.Empty)
