@@ -29,6 +29,7 @@ using PraiseBase.Presenter.Model.Song;
 using PraiseBase.Presenter.Persistence;
 using PraiseBase.Presenter.Properties;
 using PraiseBase.Presenter.UI;
+using PraiseBase.Presenter.UI.Editor;
 using PraiseBase.Presenter.Util;
 
 namespace PraiseBase.Presenter.Forms
@@ -95,7 +96,7 @@ namespace PraiseBase.Presenter.Forms
 
             SongEditorChild childForm = new SongEditorChild(sng);
             childForm.MdiParent = this;
-            childForm.Tag = "";
+            childForm.Tag = new EditorChildMetaData(null, sng.GetHashCode());
 
             childForm.FormClosing += childForm_FormClosing;
 
@@ -176,9 +177,10 @@ namespace PraiseBase.Presenter.Forms
         {
             for (int i = 0; i < MdiChildren.Count(); i++)
             {
-                if (MdiChildren[i].Tag.ToString() != String.Empty && 
+                EditorChildMetaData md = (EditorChildMetaData)MdiChildren[i].Tag;
+                if (md.Filename != String.Empty && 
                     String.Compare(
-                    Path.GetFullPath(MdiChildren[i].Tag.ToString()).TrimEnd('\\'),
+                    Path.GetFullPath(md.Filename).TrimEnd('\\'),
                     Path.GetFullPath(fileName).TrimEnd('\\'),
                     StringComparison.InvariantCultureIgnoreCase) == 0)
                 {
@@ -218,7 +220,7 @@ namespace PraiseBase.Presenter.Forms
             }
 
             SongEditorChild childForm = new SongEditorChild(sng);
-            childForm.Tag = fileName;
+            childForm.Tag = new EditorChildMetaData(fileName, sng.GetHashCode());
             childForm.MdiParent = this;
 
             childForm.FormClosing += childForm_FormClosing;
@@ -233,19 +235,25 @@ namespace PraiseBase.Presenter.Forms
         {
             SongEditorChild window = ((SongEditorChild)sender);
 
-            if (window.SongHash != window.Song.GetHashCode())
+            String filename = ((EditorChildMetaData)window.Tag).Filename;
+
+            if (((EditorChildMetaData)window.Tag).HashCode != window.Song.GetHashCode())
             {
                 DialogResult dlg = MessageBox.Show(string.Format(Properties.StringResources.SaveChangesMadeToTheSong, window.Song.Title),
                     Properties.StringResources.SongEditor,
                     MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
                 if (dlg == DialogResult.Yes)
                 {
-                    save(window.Song, (string)window.Tag);
+                    save(window.Song, ((EditorChildMetaData)window.Tag).Filename);
                 }
                 else if (dlg == DialogResult.Cancel)
                 {
                     e.Cancel = true;
                 }
+            }
+            else if (filename != null && !File.Exists(filename))
+            {
+                saveAs(window.Song, ((EditorChildMetaData)window.Tag).Filename);
             }
         }
 
@@ -387,9 +395,9 @@ namespace PraiseBase.Presenter.Forms
             if (ActiveMdiChild != null)
             {
                 SongEditorChild window = ((SongEditorChild)ActiveMdiChild);
-                if (save(window.Song, (string)window.Tag))
+                if (save(window.Song, ((EditorChildMetaData)window.Tag).Filename))
                 {
-                    window.updateHashCode();
+                    ((EditorChildMetaData)window.Tag).HashCode = window.Song.GetHashCode();
                 }
             }
         }
@@ -431,7 +439,7 @@ namespace PraiseBase.Presenter.Forms
                 SongEditorChild window = ((SongEditorChild)ActiveMdiChild);
                 if (saveAs(window.Song, null))
                 {
-                    window.updateHashCode();
+                    ((EditorChildMetaData)window.Tag).HashCode = window.Song.GetHashCode();
                 }
             }
         }

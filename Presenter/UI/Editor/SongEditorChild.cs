@@ -37,8 +37,6 @@ namespace PraiseBase.Presenter.Forms
     {
         public Song Song { get; protected set; }
 
-        public int SongHash { get; protected set; }
-
         private int currentPartId = 0;
         private int currentSlideId = 0;
 
@@ -85,8 +83,6 @@ namespace PraiseBase.Presenter.Forms
             populateTree();
             treeViewContents.SelectedNode = treeViewContents.Nodes[0];
 
-            updateHashCode();
-
             populatePartList();
 
             checkBoxQAImages.Checked = sng.GetQA(SongQualityAssuranceIndicator.Images);
@@ -122,11 +118,6 @@ namespace PraiseBase.Presenter.Forms
                     checkedListBoxTags.Items.Add(str);
                 i++;
             }
-        }
-
-        public void updateHashCode() 
-        {
-            SongHash = Song.GetHashCode();
         }
 
         protected String getFontNameString(Font f) 

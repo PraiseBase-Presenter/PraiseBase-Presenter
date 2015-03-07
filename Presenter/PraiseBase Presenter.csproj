@@ -110,6 +110,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>StringResources.resx</DependentUpon>
     </Compile>
+    <Compile Include="UI\Editor\EditorChildMetaData.cs" />
     <Compile Include="UI\LocalizedForm.cs">
       <SubType>Form</SubType>
     </Compile>
