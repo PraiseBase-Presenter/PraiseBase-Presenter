@@ -162,7 +162,7 @@ namespace PraiseBase.Presenter.Forms
 
         private SongEditor CreateSongEditorInstance()
         {
-            var se = new SongEditor();
+            var se = new SongEditor(Settings.Default);
             se.SongSaved += SongEditorWndOnSongSaved;
             return se;
         }

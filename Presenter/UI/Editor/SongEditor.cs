@@ -48,16 +48,20 @@ namespace PraiseBase.Presenter.Forms
         public delegate void SongSave(object sender, SongSavedEventArgs e);
         public event SongSave SongSaved;
 
-        public SongEditor()
+        private readonly Settings _settings;
+
+        public SongEditor(Settings settings)
         {
+            _settings = settings;
+
             InitializeComponent();
 
-            this.Size = Settings.Default.EditorWindowSize;
+            WindowState = _settings.EditorWindowState;
+            Size = _settings.EditorWindowSize;
 
-            fileBoxInitialDir = Settings.Default.DataDirectory + Path.DirectorySeparatorChar + Settings.Default.SongDir;
+            fileBoxInitialDir = _settings.DataDirectory + Path.DirectorySeparatorChar + _settings.SongDir;
             fileOpenBoxFilterIndex = 0;
             fileSaveBoxFilterIndex = 0;
-            this.WindowState = Settings.Default.EditorWindowState;
 
             foreach (var l in Program.AvailableLanguages)
             {
@@ -91,9 +95,9 @@ namespace PraiseBase.Presenter.Forms
         /// <param name="e"></param>
         private void ShowNewForm(object sender, EventArgs e)
         {
-            Song sng = CreateNewSong(Settings.Default);
+            Song sng = CreateNewSong();
 
-            SongTemplateUtil.ApplyFormattingFromSettings(Settings.Default, sng);
+            SongTemplateUtil.ApplyFormattingFromSettings(_settings, sng);
 
             SongEditorChild childForm = CreateSongEditorChildForm(sng, null);
 
@@ -265,7 +269,7 @@ namespace PraiseBase.Presenter.Forms
 
         private bool SaveAs(Song sng, String fileName)
         {
-            if (sng.Title == Settings.Default.SongDefaultName)
+            if (sng.Title == _settings.SongDefaultName)
             {
                 if (MessageBox.Show(string.Format(StringResources.DoesTheSongReallyHaveTheDefaultTitle, sng.Title), StringResources.Attention,
                     MessageBoxButtons.YesNo) == DialogResult.No)
@@ -445,25 +449,24 @@ namespace PraiseBase.Presenter.Forms
         /// <summary>
         /// Creates a new song with default name and one part with one slide
         /// </summary>
-        /// <param name="settings"></param>
         /// <returns></returns>
-        private static Song CreateNewSong(Settings settings)
+        private Song CreateNewSong()
         {
             Song sng = new Song
             {
                 GUID = SongManager.Instance.GenerateGuid(),
-                Title = settings.SongDefaultName,
-                Language = settings.SongDefaultLanguage
+                Title = _settings.SongDefaultName,
+                Language = _settings.SongDefaultLanguage
             };
 
             SongPart tmpPart = new SongPart
             {
-                Caption = settings.SongPartDefaultName
+                Caption = _settings.SongPartDefaultName
             };
 
             SongSlide tmpSlide = new SongSlide
             {
-                Background = new ColorBackground(Settings.Default.ProjectionBackColor)
+                Background = new ColorBackground(_settings.ProjectionBackColor)
             };
             tmpPart.Slides.Add(tmpSlide);
             sng.Parts.Add(tmpPart);
@@ -582,7 +585,7 @@ namespace PraiseBase.Presenter.Forms
 
         private void webToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Process.Start(Settings.Default.Weburl);
+            Process.Start(_settings.Weburl);
         }
 
         private void optionsToolStripMenuItem_Click(object sender, EventArgs e)
@@ -595,9 +598,9 @@ namespace PraiseBase.Presenter.Forms
         {
             if (WindowState != FormWindowState.Maximized)
             {
-                Settings.Default.EditorWindowSize = Size;
+                _settings.EditorWindowSize = Size;
             }
-            Settings.Default.EditorWindowState = WindowState;
+            _settings.EditorWindowState = WindowState;
         }
 
         private void SetStatus(string text)
@@ -674,17 +677,17 @@ namespace PraiseBase.Presenter.Forms
 
         private void datenverzeichnisAnzeigenToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Process.Start(Settings.Default.DataDirectory);
+            Process.Start(_settings.DataDirectory);
         }
 
         private void toolStripButton2_Click(object sender, EventArgs e)
         {
-            Process.Start(Settings.Default.DataDirectory);
+            Process.Start(_settings.DataDirectory);
         }
 
         private void fehlerMeldenToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Process.Start(Settings.Default.BugReportUrl);
+            Process.Start(_settings.BugReportUrl);
         }
 
         private void EditorWindow_FormClosed(object sender, FormClosedEventArgs e)
