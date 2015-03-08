@@ -269,7 +269,7 @@ namespace PraiseBase.Presenter.Forms
             }
         }
 
-        private bool SaveAs(Song sng, String songFilename)
+        private bool SaveAs(Song sng, String fileName)
         {
             if (sng.Title == Settings.Default.SongDefaultName)
             {
@@ -283,36 +283,19 @@ namespace PraiseBase.Presenter.Forms
                 }
             }
 
-            SaveFileDialog saveFileDialog = new SaveFileDialog
+            try
             {
-                InitialDirectory = songFilename != null
-                    ? Path.GetDirectoryName(songFilename)
-                    : fileBoxInitialDir,
-                CheckPathExists = true,
-                FileName = sng.Title,
-                Filter = GetSaveFileBoxFilter(),
-                FilterIndex = fileSaveBoxFilterIndex,
-                AddExtension = true,
-                Title = StringResources.SaveSongAs
-            };
-
-            if (saveFileDialog.ShowDialog(this) == DialogResult.OK)
-            {
-                try
+                string selectedFileName = SaveSongAskForName(sng, fileName);
+                if (selectedFileName != null)
                 {
-                    string selectedFileName = saveFileDialog.FileName;
-                    CreateByTypeIndex(saveFileDialog.FilterIndex - 1).Save(sng, selectedFileName);
-                    fileSaveBoxFilterIndex = saveFileDialog.FilterIndex;
-                    SetStatus(string.Format(StringResources.SongSavedAs, selectedFileName));
-
                     SongManager.Instance.ReloadSongByPath(selectedFileName);
                     return true;
                 }
-                catch (NotImplementedException)
-                {
-                    MessageBox.Show(StringResources.SongCannotBeSavedInThisFormat, StringResources.SongEditor,
-                        MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
+            }
+            catch (NotImplementedException)
+            {
+                MessageBox.Show(StringResources.SongCannotBeSavedInThisFormat, StringResources.SongEditor,
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             return false;
         }
@@ -385,6 +368,39 @@ namespace PraiseBase.Presenter.Forms
                 }
             }
             return "Alle Lieddateien (" + exts + ")|" + exts + "|" + fltr + "|Alle Dateien (*.*)|*.*";
+        }
+
+        /// <summary>
+        /// Saves a song by asking for a file name
+        /// </summary>
+        /// <param name="sng"></param>
+        /// <param name="fileName">Existing filename, can be null</param>
+        /// <returns>The choosen name, if the song has been saved, or null if the action has been cancelled</returns>
+        private string SaveSongAskForName(Song sng, String fileName)
+        {
+            SaveFileDialog saveFileDialog = new SaveFileDialog
+            {
+                InitialDirectory = fileName != null
+                    ? Path.GetDirectoryName(fileName)
+                    : fileBoxInitialDir,
+                CheckPathExists = true,
+                FileName = sng.Title,
+                Filter = GetSaveFileBoxFilter(),
+                FilterIndex = fileSaveBoxFilterIndex,
+                AddExtension = true,
+                Title = StringResources.SaveSongAs
+            };
+            if (saveFileDialog.ShowDialog(this) == DialogResult.OK)
+            {
+                ISongFilePlugin plugin = CreateByTypeIndex(saveFileDialog.FilterIndex - 1);
+                plugin.Save(sng, saveFileDialog.FileName);
+
+                fileSaveBoxFilterIndex = saveFileDialog.FilterIndex;
+                SetStatus(string.Format(StringResources.SongSavedAs, saveFileDialog.FileName));
+
+                return saveFileDialog.FileName;
+            }
+            return null;
         }
 
         /// <summary>
