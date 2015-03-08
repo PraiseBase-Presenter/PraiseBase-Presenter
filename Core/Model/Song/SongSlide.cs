@@ -24,7 +24,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.Serialization;
-using PraiseBase.Presenter.Util;
 
 namespace PraiseBase.Presenter.Model.Song
 {
@@ -182,8 +181,8 @@ namespace PraiseBase.Presenter.Model.Song
         {
             unchecked
             {
-                var hashCode = (Translation != null ? ListUtil.GetHashCode(Translation) : 0);
-                hashCode = (hashCode * 397) ^ (Lines != null ? ListUtil.GetHashCode(Lines) : 0);
+                var hashCode = (TranslationText != null ? TranslationText.GetHashCode() : 0);
+                hashCode = (hashCode * 397) ^ (Text != null ? Text.GetHashCode() : 0);
                 hashCode = (hashCode*397) ^ (Background != null ? Background.GetHashCode() : 0);
                 hashCode = (hashCode*397) ^ TextSize.GetHashCode();
                 hashCode = (hashCode*397) ^ (PartName != null ? PartName.GetHashCode() : 0);
