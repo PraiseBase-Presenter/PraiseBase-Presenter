@@ -854,8 +854,7 @@ namespace PraiseBase.Presenter.UI.Presenter
                     // Linked layers
                     if (
                         !(!linkLayers ^
-                           ((ModifierKeys & Keys.Shift) == Keys.Shift && SongManager.Instance.CurrentSong != null &&
-                            SongManager.Instance.CurrentSong.Song.CurrentSlide >= 0)))
+                           ((ModifierKeys & Keys.Shift) == Keys.Shift && SongManager.Instance.CurrentSong != null)))
                     {
                         ProjectionManager.Instance.HideLayer(2, Settings.Default.ProjectionFadeTime);
                     }
@@ -1128,8 +1127,7 @@ namespace PraiseBase.Presenter.UI.Presenter
                 {
                     if (
                         !(!linkLayers ^
-                          ((ModifierKeys & Keys.Shift) == Keys.Shift && SongManager.Instance.CurrentSong != null &&
-                           SongManager.Instance.CurrentSong.Song.CurrentSlide >= 0)))
+                          ((ModifierKeys & Keys.Shift) == Keys.Shift && SongManager.Instance.CurrentSong != null)))
                     {
                         ProjectionManager.Instance.HideLayer(2);
                     }
@@ -1431,8 +1429,7 @@ namespace PraiseBase.Presenter.UI.Presenter
                 Application.DoEvents();
 
                 if (
-                    !((ModifierKeys & Keys.Shift) == Keys.Shift && SongManager.Instance.CurrentSong != null &&
-                       SongManager.Instance.CurrentSong.Song.CurrentSlide >= 0))
+                    !((ModifierKeys & Keys.Shift) == Keys.Shift && SongManager.Instance.CurrentSong != null))
                 {
                     ProjectionManager.Instance.HideLayer(2);
                 }
@@ -1496,8 +1493,7 @@ namespace PraiseBase.Presenter.UI.Presenter
                 {
                     if (
                         !(!linkLayers ^
-                           ((ModifierKeys & Keys.Shift) == Keys.Shift && SongManager.Instance.CurrentSong != null &&
-                            SongManager.Instance.CurrentSong.Song.CurrentSlide >= 0)))
+                           ((ModifierKeys & Keys.Shift) == Keys.Shift && SongManager.Instance.CurrentSong != null)))
                     {
                         ProjectionManager.Instance.HideLayer(2);
                     }

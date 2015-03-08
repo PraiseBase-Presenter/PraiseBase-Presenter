@@ -221,11 +221,6 @@ namespace PraiseBase.Presenter.Model.Song
                 return Parts.SelectMany(p => p.Slides).Any(s => s.Translated);
             }
         }
-        
-        /// <summary>
-        /// Gets or sets the current slide index
-        /// </summary>
-        public int CurrentSlide { get; set; }
 
         /// <summary>
         /// The song constructor
@@ -354,7 +349,6 @@ namespace PraiseBase.Presenter.Model.Song
                 hashCode = (hashCode*397) ^ (SongBooks != null ? SongBooks.GetHashCode() : 0);
                 hashCode = (hashCode*397) ^ (Parts != null ? Parts.GetHashCode() : 0);
                 hashCode = (hashCode*397) ^ (PartSequence != null ? PartSequence.GetHashCode() : 0);
-                hashCode = (hashCode*397) ^ CurrentSlide;
                 hashCode = (hashCode*397) ^ (QualityIssues != null ? QualityIssues.GetHashCode() : 0);
                 hashCode = (hashCode*397) ^ (MainText != null ? MainText.GetHashCode() : 0);
                 hashCode = (hashCode*397) ^ (TranslationText != null ? TranslationText.GetHashCode() : 0);
@@ -371,7 +365,7 @@ namespace PraiseBase.Presenter.Model.Song
 
         protected bool Equals(Song other)
         {
-            return string.Equals(ModifiedTimestamp, other.ModifiedTimestamp) && string.Equals(CreatedIn, other.CreatedIn) && string.Equals(ModifiedIn, other.ModifiedIn) && string.Equals(Title, other.Title) && string.Equals(Language, other.Language) && string.Equals(CcliID, other.CcliID) && CCliIDReadonly.Equals(other.CCliIDReadonly) && string.Equals(Copyright, other.Copyright) && CopyrightPosition == other.CopyrightPosition && SourcePosition == other.SourcePosition && string.Equals(ReleaseYear, other.ReleaseYear) && Equals(Author, other.Author) && string.Equals(RightsManagement, other.RightsManagement) && string.Equals(Publisher, other.Publisher) && string.Equals(Version, other.Version) && string.Equals(Key, other.Key) && Transposition == other.Transposition && Equals(Tempo, other.Tempo) && string.Equals(Variant, other.Variant) && Equals(Themes, other.Themes) && string.Equals(Comment, other.Comment) && Equals(SongBooks, other.SongBooks) && Equals(Parts, other.Parts) && Equals(PartSequence, other.PartSequence) && CurrentSlide == other.CurrentSlide && Equals(QualityIssues, other.QualityIssues) && Equals(MainText, other.MainText) && Equals(TranslationText, other.TranslationText) && Equals(CopyrightText, other.CopyrightText) && Equals(SourceText, other.SourceText) && Equals(TextOrientation, other.TextOrientation) && TranslationPosition == other.TranslationPosition && TextOutlineEnabled.Equals(other.TextOutlineEnabled) && TextShadowEnabled.Equals(other.TextShadowEnabled) && Equals(TextBorders, other.TextBorders);
+            return string.Equals(ModifiedTimestamp, other.ModifiedTimestamp) && string.Equals(CreatedIn, other.CreatedIn) && string.Equals(ModifiedIn, other.ModifiedIn) && string.Equals(Title, other.Title) && string.Equals(Language, other.Language) && string.Equals(CcliID, other.CcliID) && CCliIDReadonly.Equals(other.CCliIDReadonly) && string.Equals(Copyright, other.Copyright) && CopyrightPosition == other.CopyrightPosition && SourcePosition == other.SourcePosition && string.Equals(ReleaseYear, other.ReleaseYear) && Equals(Author, other.Author) && string.Equals(RightsManagement, other.RightsManagement) && string.Equals(Publisher, other.Publisher) && string.Equals(Version, other.Version) && string.Equals(Key, other.Key) && Transposition == other.Transposition && Equals(Tempo, other.Tempo) && string.Equals(Variant, other.Variant) && Equals(Themes, other.Themes) && string.Equals(Comment, other.Comment) && Equals(SongBooks, other.SongBooks) && Equals(Parts, other.Parts) && Equals(PartSequence, other.PartSequence) && Equals(QualityIssues, other.QualityIssues) && Equals(MainText, other.MainText) && Equals(TranslationText, other.TranslationText) && Equals(CopyrightText, other.CopyrightText) && Equals(SourceText, other.SourceText) && Equals(TextOrientation, other.TextOrientation) && TranslationPosition == other.TranslationPosition && TextOutlineEnabled.Equals(other.TextOutlineEnabled) && TextShadowEnabled.Equals(other.TextShadowEnabled) && Equals(TextBorders, other.TextBorders);
         }
 
         public override bool Equals(object obj)
