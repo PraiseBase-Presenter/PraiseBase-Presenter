@@ -451,7 +451,7 @@ namespace PraiseBase.Presenter.UI.Presenter
             qaImagesToolStripMenuItem.Checked = SongManager.Instance.CurrentSong.Song.GetQA(SongQualityAssuranceIndicator.Images);
             qaSegmentationToolStripMenuItem.Checked = SongManager.Instance.CurrentSong.Song.GetQA(SongQualityAssuranceIndicator.Segmentation);
 
-            if (SongManager.Instance.CurrentSong.Song.HasTranslation)
+            if (SongManager.Instance.CurrentSong.Song.HasTranslation())
             {
                 toolStripButtonToggleTranslationText.Enabled = true;
                 if (SongManager.Instance.CurrentSong.SwitchTextAndTranlation)

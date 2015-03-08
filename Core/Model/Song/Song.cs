@@ -214,14 +214,6 @@ namespace PraiseBase.Presenter.Model.Song
 
         #endregion Fields
 
-        public bool HasTranslation
-        {
-            get
-            {
-                return Parts.SelectMany(p => p.Slides).Any(s => s.Translated);
-            }
-        }
-
         /// <summary>
         /// The song constructor
         /// </summary>
@@ -260,6 +252,15 @@ namespace PraiseBase.Presenter.Model.Song
         public int GetNumberOfBackgroundImages()
         {
             return Parts.SelectMany(t => t.Slides).Count(t1 => t1.Background != null && t1.Background.GetType() == typeof (ImageBackground));
+        }
+
+        /// <summary>
+        /// Returns true if any slide has a translation
+        /// </summary>
+        /// <returns></returns>
+        public bool HasTranslation()
+        {
+            return Parts.SelectMany(p => p.Slides).Any(s => s.Translated);
         }
 
         /// <summary>
