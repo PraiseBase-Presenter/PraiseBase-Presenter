@@ -21,8 +21,10 @@
  */
 
 using System;
+using System.Collections;
 using System.Drawing;
 using System.IO;
+using System.Security.Cryptography;
 using System.Text;
 using System.Xml.Serialization;
 
@@ -45,11 +47,11 @@ namespace PraiseBase.Presenter.Util
 
             //MD5 Hash aus dem String berechnen. Dazu muss der string in ein Byte[]
             //zerlegt werden. Danach muss das Resultat wieder zurück in ein string.
-            System.Security.Cryptography.MD5 md5 = new System.Security.Cryptography.MD5CryptoServiceProvider();
+            MD5 md5 = new MD5CryptoServiceProvider();
             byte[] textToHash = Encoding.Default.GetBytes(TextToHash);
             byte[] result = md5.ComputeHash(textToHash);
 
-            return System.BitConverter.ToString(result);
+            return BitConverter.ToString(result);
         }
 
         public static string GetMD5Hash(Bitmap bmp)
@@ -60,13 +62,13 @@ namespace PraiseBase.Presenter.Util
             System.Security.Cryptography.MD5CryptoServiceProvider md5 = new System.Security.Cryptography.MD5CryptoServiceProvider();
             byte[] hash = md5.ComputeHash(rawImageData);*/
 
-            System.Drawing.ImageConverter ic = new System.Drawing.ImageConverter();
+            ImageConverter ic = new ImageConverter();
             byte[] btImage1 = new byte[1];
             btImage1 = (byte[])ic.ConvertTo(bmp, btImage1.GetType());
-            System.Security.Cryptography.SHA256Managed shaM = new System.Security.Cryptography.SHA256Managed();
+            SHA256Managed shaM = new SHA256Managed();
             byte[] hash = shaM.ComputeHash(btImage1);
 
-            return System.BitConverter.ToString(hash);
+            return BitConverter.ToString(hash);
         }
 
         public static string ConvertString(string unicode)
@@ -91,7 +93,7 @@ namespace PraiseBase.Presenter.Util
 
             string[] Words = text.Split(' ');
             int currentLineLength = 0;
-            System.Collections.ArrayList Lines = new System.Collections.ArrayList(text.Length / maxLength);
+            ArrayList Lines = new ArrayList(text.Length / maxLength);
             string currentLine = "";
             bool InTag = false;
 

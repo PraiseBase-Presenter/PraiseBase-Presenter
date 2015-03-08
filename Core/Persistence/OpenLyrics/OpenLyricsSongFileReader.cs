@@ -21,6 +21,7 @@
  */
 
 using System;
+using System.IO;
 using System.Xml;
 
 namespace PraiseBase.Presenter.Persistence.OpenLyrics
@@ -188,7 +189,7 @@ namespace PraiseBase.Presenter.Persistence.OpenLyrics
         {
             try
             {
-                if (!System.IO.File.Exists(filename))
+                if (!File.Exists(filename))
                 {
                     return null;
                 }
@@ -226,7 +227,7 @@ namespace PraiseBase.Presenter.Persistence.OpenLyrics
             }
             catch (Exception e)
             {
-                System.Console.WriteLine(e.Message);
+                Console.WriteLine(e.Message);
             }
             return null;
         }

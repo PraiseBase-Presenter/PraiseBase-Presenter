@@ -55,7 +55,7 @@ namespace PraiseBase.Presenter.Util
             try
             {
                 img = Image.FromFile(inFile);
-                Image imgPhoto = ImageUtils.ResizeBitmap(img, thumbSize);
+                Image imgPhoto = ResizeBitmap(img, thumbSize);
 
                 string dir = Path.GetDirectoryName(outFile);
                 if (!Directory.Exists(dir))

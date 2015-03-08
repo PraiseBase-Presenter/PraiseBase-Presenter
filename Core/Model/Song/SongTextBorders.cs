@@ -21,6 +21,7 @@
  */
 
 using System;
+
 namespace PraiseBase.Presenter.Model
 {
     public class SongTextBorders : ICloneable

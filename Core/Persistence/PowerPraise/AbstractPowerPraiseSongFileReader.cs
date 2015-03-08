@@ -23,6 +23,7 @@
 using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.IO;
 using System.Xml;
 using PraiseBase.Presenter.Model;
 
@@ -600,7 +601,7 @@ namespace PraiseBase.Presenter.Persistence.PowerPraise
         {
             try
             {
-                if (!System.IO.File.Exists(filename))
+                if (!File.Exists(filename))
                 {
                     return null;
                 }
@@ -634,7 +635,7 @@ namespace PraiseBase.Presenter.Persistence.PowerPraise
             }
             catch (Exception e)
             {
-                System.Console.WriteLine(e.Message);
+                Console.WriteLine(e.Message);
             }
             return null;
         }

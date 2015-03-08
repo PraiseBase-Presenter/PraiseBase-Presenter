@@ -21,6 +21,7 @@
  */
 
 using System;
+
 namespace PraiseBase.Presenter.Model
 {
     public sealed class TextOrientation : ICloneable
@@ -44,7 +45,7 @@ namespace PraiseBase.Presenter.Model
             return Vertical == ori.Vertical && Horizontal == ori.Horizontal;
         }
 
-        public override bool Equals(System.Object o)
+        public override bool Equals(Object o)
         {
             if (ReferenceEquals(null, o)) return false;
             if (ReferenceEquals(this, o)) return true;
