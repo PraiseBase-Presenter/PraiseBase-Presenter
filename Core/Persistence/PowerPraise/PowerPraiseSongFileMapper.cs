@@ -59,7 +59,7 @@ namespace PraiseBase.Presenter.Persistence.PowerPraise
             }
 
             // Source / songbook
-            song.SongBooksString = ppl.SourceText;
+            song.SongBooks.FromString(ppl.SourceText);
             song.SourcePosition = ppl.SourceTextEnabled ? AdditionalInformationPosition.FirstSlide : AdditionalInformationPosition.None;
 
             // Song parts
@@ -263,7 +263,7 @@ namespace PraiseBase.Presenter.Persistence.PowerPraise
             }
 
             // Source / songbook
-            ppl.SourceText = song.SongBooksString;
+            ppl.SourceText = song.SongBooks.ToString();
             ppl.SourceTextEnabled = (song.SourcePosition == AdditionalInformationPosition.FirstSlide);
 
             // Formatting definitions

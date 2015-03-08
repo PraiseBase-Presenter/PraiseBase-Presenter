@@ -527,7 +527,10 @@ namespace PraiseBase.Presenter.UI.Presenter
             if (sourcePosition == AdditionalInformationPosition.FirstSlide && isFirstSlide(e.PartNumber, e.SlideNumber) ||
                 sourcePosition == AdditionalInformationPosition.LastSlide && isLastSlide(s, e.PartNumber, e.SlideNumber))
             {
-                ssl.HeaderText = new String[] { s.SongBooksString };
+                ssl.HeaderText = new String[]
+                {
+                    s.SongBooks.ToString()
+                };
             }
 
             // Set footer text (copyright)

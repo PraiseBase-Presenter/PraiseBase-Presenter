@@ -20,6 +20,7 @@
  *
  */
 
+using System;
 using System.Collections.Generic;
 
 namespace PraiseBase.Presenter.Model.Song
@@ -39,6 +40,21 @@ namespace PraiseBase.Presenter.Model.Song
                     hash = hash * 31 + this[i].GetHashCode();
                 }
                 return hash;
+            }
+        }
+
+        public void FromString(string value)
+        {
+            Clear();
+            int i = 0;
+            foreach (string s in value.Split(new[] { ';' }, StringSplitOptions.RemoveEmptyEntries))
+            {
+                SongAuthor author = new SongAuthor
+                {
+                    Name = s.Trim(),
+                    Type = (i++ == 0) ? SongAuthorType.Words : SongAuthorType.Music
+                };
+                Add(author);
             }
         }
 
