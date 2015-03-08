@@ -231,10 +231,12 @@ namespace PraiseBase.Presenter.UI.Editor
                 ValidateChildren();
 
                 SongEditorChild window = ((SongEditorChild)ActiveMdiChild);
-                if (Save(window.Song, ((EditorChildMetaData)window.Tag).Filename))
+                string fileName = Save(window.Song, ((EditorChildMetaData) window.Tag).Filename);
+                if (fileName != null)
                 {
                     int hashCode = window.Song.GetHashCode();
                     ((EditorChildMetaData)window.Tag).HashCode = hashCode;
+                    ((EditorChildMetaData)window.Tag).Filename = fileName;
                 }
             }
         }
@@ -251,10 +253,12 @@ namespace PraiseBase.Presenter.UI.Editor
                 ValidateChildren();
 
                 SongEditorChild window = ((SongEditorChild)ActiveMdiChild);
-                if (SaveAs(window.Song, null))
+                string fileName = SaveAs(window.Song, null);
+                if (fileName != null)
                 {
                     int hashCode = window.Song.GetHashCode();
                     ((EditorChildMetaData)window.Tag).HashCode = hashCode;
+                    ((EditorChildMetaData)window.Tag).Filename = fileName;
                 }
             }
         }
@@ -264,8 +268,8 @@ namespace PraiseBase.Presenter.UI.Editor
         /// </summary>
         /// <param name="sng"></param>
         /// <param name="fileName"></param>
-        /// <returns></returns>
-        private bool Save(Song sng, String fileName)
+        /// <returns>Filename used or null</returns>
+        private string Save(Song sng, String fileName)
         {
             if (string.IsNullOrEmpty(fileName))
             {
@@ -274,7 +278,7 @@ namespace PraiseBase.Presenter.UI.Editor
             try
             {
                 SaveSong(sng, fileName);
-                return true;
+                return fileName;
             }
             catch (NotImplementedException)
             {
@@ -284,34 +288,34 @@ namespace PraiseBase.Presenter.UI.Editor
             }
         }
 
-        private bool SaveAs(Song sng, String fileName)
+        /// <summary>
+        /// Save given song, asking for filename
+        /// </summary>
+        /// <param name="sng"></param>
+        /// <param name="fileName"></param>
+        /// <returns>Filename used or null</returns>
+        private string SaveAs(Song sng, String fileName)
         {
+            // Check is using default name
             if (sng.Title == _settings.SongDefaultName)
             {
                 if (MessageBox.Show(string.Format(StringResources.DoesTheSongReallyHaveTheDefaultTitle, sng.Title), StringResources.Attention,
                     MessageBoxButtons.YesNo) == DialogResult.No)
                 {
-                    // TODO
-                    //textBoxSongTitle.SelectAll();
-                    //textBoxSongTitle.Focus();
-                    return false;
+                    return null;
                 }
             }
 
             try
             {
-                string selectedFileName = SaveSongAskForName(sng, fileName);
-                if (selectedFileName != null)
-                {
-                    return true;
-                }
+                return SaveSongAskForName(sng, fileName);
             }
             catch (NotImplementedException)
             {
                 MessageBox.Show(StringResources.SongCannotBeSavedInThisFormat, StringResources.SongEditor,
                     MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-            return false;
+            return null;
         }
 
         /// <summary>
