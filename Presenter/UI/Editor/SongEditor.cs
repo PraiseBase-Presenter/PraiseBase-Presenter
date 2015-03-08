@@ -91,25 +91,6 @@ namespace PraiseBase.Presenter.UI.Editor
 
             InitializeComponent();
 
-            // Set size and window state
-            WindowState = _settings.EditorWindowState;
-            Size = _settings.EditorWindowSize;
-
-            // Add languages to menu
-            foreach (var l in Program.AvailableLanguages)
-            {
-                ToolStripMenuItem selectLanguageToolStripMenuItem = new ToolStripMenuItem(l.DisplayName)
-                {
-                    Tag = l
-                };
-                selectLanguageToolStripMenuItem.Click += selectLanguageToolStripMenuItem_Click;
-                if (l.Name == Thread.CurrentThread.CurrentUICulture.Name)
-                {
-                    selectLanguageToolStripMenuItem.Checked = true;
-                }
-                spracheToolStripMenuItem.DropDownItems.Add(selectLanguageToolStripMenuItem);
-            }
-
             registerChild(this);
         }
 
@@ -718,6 +699,24 @@ namespace PraiseBase.Presenter.UI.Editor
 
         private void EditorWindow_Load(object sender, EventArgs e)
         {
+            // Set size and window state
+            WindowState = _settings.EditorWindowState;
+            Size = _settings.EditorWindowSize;
+
+            // Add languages to menu
+            foreach (var l in Program.AvailableLanguages)
+            {
+                ToolStripMenuItem selectLanguageToolStripMenuItem = new ToolStripMenuItem(l.DisplayName)
+                {
+                    Tag = l
+                };
+                selectLanguageToolStripMenuItem.Click += selectLanguageToolStripMenuItem_Click;
+                if (l.Name == Thread.CurrentThread.CurrentUICulture.Name)
+                {
+                    selectLanguageToolStripMenuItem.Checked = true;
+                }
+                spracheToolStripMenuItem.DropDownItems.Add(selectLanguageToolStripMenuItem);
+            }
         }
 
         private void datenverzeichnisAnzeigenToolStripMenuItem_Click(object sender, EventArgs e)
