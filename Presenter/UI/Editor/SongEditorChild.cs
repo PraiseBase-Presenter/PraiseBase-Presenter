@@ -518,7 +518,7 @@ namespace PraiseBase.Presenter.UI.Editor
                     int slideId = treeViewContents.SelectedNode.Index;
                     Song.Parts[_currentPartId].Slides.RemoveAt(slideId);
                     PopulateTree();
-                    _currentSlideId = slideId - 1;
+                    _currentSlideId = Math.Max(0, slideId - 1);
                     treeViewContents.SelectedNode = treeViewContents.Nodes[_currentPartId].Nodes[_currentSlideId];
                 }
             }
