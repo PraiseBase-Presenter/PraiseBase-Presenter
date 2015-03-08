@@ -160,12 +160,12 @@ namespace PraiseBase.Presenter.Model.Song
         /// Gets or sets a sequence of part numbers indicating
         /// the real order in which the song is sung
         /// </summary>
-        public List<int> PartSequence { get; set; }
+        public PartSequences PartSequence { get; set; }
 
         /// <summary>
         /// Quality assurance indicators
         /// </summary>
-        public List<SongQualityAssuranceIndicator> QualityIssues { get; set; }
+        public QualityIssues QualityIssues { get; set; }
 
         /// <summary>
         /// Gets or sets the text font and color for the main text
@@ -221,11 +221,11 @@ namespace PraiseBase.Presenter.Model.Song
         {
             Themes = new TagList();
             Parts = new SongPartList();
-            PartSequence = new List<int>();
+            PartSequence = new PartSequences();
             SongBooks = new SongBooks();
             Author = new SongAuthors();
             Comment = String.Empty;
-            QualityIssues = new List<SongQualityAssuranceIndicator>();
+            QualityIssues = new QualityIssues();
         }
 
         /// <summary>
