@@ -4,7 +4,7 @@ using System.Collections.Specialized;
 using System.Windows.Forms;
 using PraiseBase.Presenter.Model.Song;
 
-namespace PraiseBase.Presenter.Forms
+namespace PraiseBase.Presenter.UI.Presenter
 {
     public partial class SongBrowserDialog : Form
     {

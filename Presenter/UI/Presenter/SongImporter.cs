@@ -9,7 +9,7 @@ using PraiseBase.Presenter.Persistence.PraiseBox;
 using PraiseBase.Presenter.Properties;
 using PraiseBase.Presenter.Util;
 
-namespace PraiseBase.Presenter.Forms
+namespace PraiseBase.Presenter.UI.Presenter
 {
     public partial class SongImporter : Form
     {

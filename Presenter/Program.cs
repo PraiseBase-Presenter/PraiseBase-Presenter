@@ -26,6 +26,7 @@ using System.Globalization;
 using System.Windows.Forms;
 using PraiseBase.Presenter.Forms;
 using PraiseBase.Presenter.Properties;
+using PraiseBase.Presenter.UI.Presenter;
 
 namespace PraiseBase.Presenter
 {
@@ -89,13 +90,13 @@ namespace PraiseBase.Presenter
             if (Settings.Default.ShowLoadingScreen)
             {
                 LoadingScreen ldg = new LoadingScreen();
-                ldg.setLabel("PraiseBase Presenter wird gestartet...");
+                ldg.SetLabel("PraiseBase Presenter wird gestartet...");
                 ldg.Show();
 
-                ldg.setLabel("Prüfe Miniaturbilder...");
+                ldg.SetLabel("Prüfe Miniaturbilder...");
                 ImageManager.Instance.CheckThumbs();
 
-                ldg.setLabel("Lade Liederdatenbank...");
+                ldg.SetLabel("Lade Liederdatenbank...");
                 SongManager.Instance.Reload();
 
                 GC.Collect();

@@ -25,7 +25,7 @@ using System.Drawing;
 using System.Reflection;
 using System.Windows.Forms;
 
-namespace PraiseBase.Presenter.Forms
+namespace PraiseBase.Presenter.UI.Presenter
 {
     public partial class AboutDialog : Form
     {

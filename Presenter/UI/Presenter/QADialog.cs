@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Windows.Forms;
 
-namespace PraiseBase.Presenter.Forms
+namespace PraiseBase.Presenter.UI.Presenter
 {
     public partial class QADialog : Form
     {

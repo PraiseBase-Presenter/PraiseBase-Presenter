@@ -30,6 +30,7 @@ using PraiseBase.Presenter.Model;
 using PraiseBase.Presenter.Model.Song;
 using PraiseBase.Presenter.Projection;
 using PraiseBase.Presenter.Properties;
+using PraiseBase.Presenter.UI.Presenter;
 using TreeEx;
 
 namespace PraiseBase.Presenter.UI.Editor

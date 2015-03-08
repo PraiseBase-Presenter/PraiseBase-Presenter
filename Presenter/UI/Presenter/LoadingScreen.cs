@@ -22,28 +22,33 @@
 
 using System.Windows.Forms;
 
-namespace PraiseBase.Presenter.Forms
+namespace PraiseBase.Presenter.UI.Presenter
 {
     public partial class LoadingScreen : Form
     {
+        public bool ShowSongLoading { get; set; }
+
         public LoadingScreen()
         {
             InitializeComponent();
-            //SongManager.Instance.SongLoaded += new SongManager.SongLoad(SongManager_SongLoaded);
-            ImageManager.Instance.ThumbnailCreated += new ImageManager.ThumbnailCreate(ImageManager_ThumbnailCreated);
+            if (ShowSongLoading)
+            {
+                SongManager.Instance.SongLoaded += SongManager_SongLoaded;
+            }
+            ImageManager.Instance.ThumbnailCreated += ImageManager_ThumbnailCreated;
         }
 
         private void SongManager_SongLoaded(SongManager.SongLoadEventArgs e)
         {
-            this.setLabel("Lade Lieder " + e.Number + "/" + e.Total);
+            SetLabel("Lade Lieder " + e.Number + "/" + e.Total);
         }
 
         void  ImageManager_ThumbnailCreated(ImageManager.ThumbnailCreateEventArgs e)
         {
-            this.setLabel("Erstelle Miniaturbilder " + e.Number + "/" + e.Total);
+            SetLabel("Erstelle Miniaturbilder " + e.Number + "/" + e.Total);
         }
 
-        public void setLabel(string message)
+        public void SetLabel(string message)
         {
             label1.Text = message;
             Application.DoEvents();

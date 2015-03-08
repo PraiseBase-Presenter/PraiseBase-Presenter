@@ -30,6 +30,7 @@ using System.IO;
 using System.Linq;
 using System.Threading;
 using System.Windows.Forms;
+using PraiseBase.Presenter.Forms;
 using PraiseBase.Presenter.Manager;
 using PraiseBase.Presenter.Model;
 using PraiseBase.Presenter.Model.Bible;
@@ -38,12 +39,11 @@ using PraiseBase.Presenter.Persistence;
 using PraiseBase.Presenter.Persistence.Setlists;
 using PraiseBase.Presenter.Projection;
 using PraiseBase.Presenter.Properties;
-using PraiseBase.Presenter.UI;
 using PraiseBase.Presenter.UI.Editor;
 using SongDetails;
 using Timer = System.Windows.Forms.Timer;
 
-namespace PraiseBase.Presenter.Forms
+namespace PraiseBase.Presenter.UI.Presenter
 {
     /// <summary>
     /// The main window class provides the central
@@ -116,7 +116,7 @@ namespace PraiseBase.Presenter.Forms
             imageTreeViewInit();
 
             trackBarFadeTime.Value = Settings.Default.ProjectionFadeTime / 500;
-            labelFadeTime.Text = (trackBarFadeTime.Value * 0.5) + " s";
+            labelFadeTime.Text = (trackBarFadeTime.Value * 0.5) + @" s";
 
             trackBarFadeTimeLayer1.Value = Settings.Default.ProjectionFadeTimeLayer1 / 500;
             labelFadeTimeLayer1.Text = (trackBarFadeTimeLayer1.Value * 0.5) + " s";

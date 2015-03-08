@@ -26,7 +26,7 @@ using System.Windows.Forms;
 using PraiseBase.Presenter.Model.Song;
 using PraiseBase.Presenter.Properties;
 
-namespace PraiseBase.Presenter.Forms
+namespace PraiseBase.Presenter.UI.Presenter
 {
     public partial class ImageDialog : Form
     {
