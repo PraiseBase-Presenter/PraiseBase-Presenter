@@ -176,6 +176,7 @@ namespace PraiseBase.Presenter.UI.Editor
                 sng = SongFilePluginFactory.Create(fileName).Load(fileName);
                 if (sng.GUID == Guid.Empty)
                 {
+                    // TODO get rid of GUID
                     var smGuid = SongManager.Instance.GetGUIDByPath(fileName);
                     sng.GUID = smGuid != Guid.Empty ? smGuid : SongManager.Instance.GenerateGuid();
                 }
@@ -262,29 +263,24 @@ namespace PraiseBase.Presenter.UI.Editor
         /// Save given song at the filename specified
         /// </summary>
         /// <param name="sng"></param>
-        /// <param name="songFilename"></param>
+        /// <param name="fileName"></param>
         /// <returns></returns>
-        private bool Save(Song sng, String songFilename)
+        private bool Save(Song sng, String fileName)
         {
-            if (string.IsNullOrEmpty(songFilename))
+            if (string.IsNullOrEmpty(fileName))
             {
                 return SaveAs(sng, null);
             }
             try
             {
-                SongFilePluginFactory.Create(songFilename).Save(sng, songFilename);
-
-                SetStatus(String.Format(StringResources.SongSavedAs, songFilename));
-
-                SongManager.Instance.ReloadSongByPath(songFilename);
-
+                SaveSong(sng, fileName);
                 return true;
             }
             catch (NotImplementedException)
             {
                 MessageBox.Show(StringResources.SongCannotBeSavedInThisFormat, StringResources.FormatNotSupported,
                     MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return SaveAs(sng, songFilename);
+                return SaveAs(sng, fileName);
             }
         }
 
@@ -389,9 +385,33 @@ namespace PraiseBase.Presenter.UI.Editor
         }
 
         /// <summary>
+        /// Saves a song
+        /// </summary>
+        /// <param name="sng">Song to be saved</param>
+        /// <param name="fileName">Target file name</param>
+        private void SaveSong(Song sng, String fileName)
+        {
+            // Load plugin based on the song filename
+            ISongFilePlugin plugin = SongFilePluginFactory.Create(fileName);
+
+            // Save song using plugin
+            plugin.Save(sng, fileName);
+
+            // Set status
+            SetStatus(String.Format(StringResources.SongSavedAs, fileName));
+
+            // Inform others by firing a SongSaved event
+            if (SongSaved != null)
+            {
+                SongSavedEventArgs p = new SongSavedEventArgs(sng, fileName);
+                SongSaved(this, p);
+            }
+        }
+
+        /// <summary>
         /// Saves a song by asking for a file name
         /// </summary>
-        /// <param name="sng"></param>
+        /// <param name="sng">Song to be saved</param>
         /// <param name="fileName">Existing filename, can be null</param>
         /// <returns>The choosen name, if the song has been saved, or null if the action has been cancelled</returns>
         private string SaveSongAskForName(Song sng, String fileName)
@@ -410,7 +430,7 @@ namespace PraiseBase.Presenter.UI.Editor
             };
             if (saveFileDialog.ShowDialog(this) == DialogResult.OK)
             {
-                // Load plugin based in selected filter index
+                // Load plugin based on selected filter index
                 ISongFilePlugin plugin = CreateByTypeIndex(saveFileDialog.FilterIndex - 1);
 
                 // Save song using plugin
@@ -422,7 +442,7 @@ namespace PraiseBase.Presenter.UI.Editor
                 // Set status
                 SetStatus(string.Format(StringResources.SongSavedAs, saveFileDialog.FileName));
 
-                // Fire event
+                // Inform others by firing a SongSaved event
                 if (SongSaved != null)
                 {
                     SongSavedEventArgs p = new SongSavedEventArgs(sng, saveFileDialog.FileName);
