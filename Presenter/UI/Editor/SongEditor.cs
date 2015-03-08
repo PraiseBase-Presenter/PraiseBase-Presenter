@@ -47,6 +47,9 @@ namespace PraiseBase.Presenter.Forms
 
         private int childFormNumber = 0;
 
+        public delegate void SongSave(object sender, SongSavedEventArgs e);
+        public event SongSave SongSaved;
+
         private SongEditor()
         {
             InitializeComponent();
@@ -288,7 +291,6 @@ namespace PraiseBase.Presenter.Forms
                 string selectedFileName = SaveSongAskForName(sng, fileName);
                 if (selectedFileName != null)
                 {
-                    SongManager.Instance.ReloadSongByPath(selectedFileName);
                     return true;
                 }
             }
@@ -392,12 +394,26 @@ namespace PraiseBase.Presenter.Forms
             };
             if (saveFileDialog.ShowDialog(this) == DialogResult.OK)
             {
+                // Load plugin based in selected filter index
                 ISongFilePlugin plugin = CreateByTypeIndex(saveFileDialog.FilterIndex - 1);
+
+                // Save song using plugin
                 plugin.Save(sng, saveFileDialog.FileName);
 
+                // Store selected filter index
                 fileSaveBoxFilterIndex = saveFileDialog.FilterIndex;
+
+                // Set status
                 SetStatus(string.Format(StringResources.SongSavedAs, saveFileDialog.FileName));
 
+                // Fire event
+                if (SongSaved != null)
+                {
+                    SongSavedEventArgs p = new SongSavedEventArgs(sng, saveFileDialog.FileName);
+                    SongSaved(this, p);
+                }
+
+                // Return file name
                 return saveFileDialog.FileName;
             }
             return null;

@@ -885,8 +885,16 @@ namespace PraiseBase.Presenter.Forms
         private void toolStripButton5_Click(object sender, EventArgs e)
         {
             SongEditor wnd = SongEditor.GetInstance();
+
+            wnd.SongSaved += WndOnSongSaved;
+
             wnd.Show();
             wnd.Focus();
+        }
+
+        private void WndOnSongSaved(object sender, SongSavedEventArgs songSavedEventArgs)
+        {
+            SongManager.Instance.ReloadSongByPath(songSavedEventArgs.FileName);
         }
 
         private void button1_Click(object sender, EventArgs e)

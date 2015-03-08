@@ -111,6 +111,7 @@
       <DependentUpon>StringResources.resx</DependentUpon>
     </Compile>
     <Compile Include="UI\Editor\EditorChildMetaData.cs" />
+    <Compile Include="UI\Editor\SongSavedEventArgs.cs" />
     <Compile Include="UI\LocalizedForm.cs">
       <SubType>Form</SubType>
     </Compile>
