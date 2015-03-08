@@ -535,7 +535,7 @@
     <value>NoControl</value>
   </data>
   <data name="checkBoxQASegmentation.Location" type="System.Drawing.Point, System.Drawing">
-    <value>9, 169</value>
+    <value>10, 237</value>
   </data>
   <data name="checkBoxQASegmentation.Size" type="System.Drawing.Size, System.Drawing">
     <value>135, 17</value>
@@ -640,7 +640,7 @@
     <value>NoControl</value>
   </data>
   <data name="checkBoxQATranslation.Location" type="System.Drawing.Point, System.Drawing">
-    <value>9, 238</value>
+    <value>10, 191</value>
   </data>
   <data name="checkBoxQATranslation.Size" type="System.Drawing.Size, System.Drawing">
     <value>180, 17</value>
@@ -736,7 +736,7 @@
     <value>NoControl</value>
   </data>
   <data name="checkBoxQAImages.Location" type="System.Drawing.Point, System.Drawing">
-    <value>10, 192</value>
+    <value>11, 214</value>
   </data>
   <data name="checkBoxQAImages.Size" type="System.Drawing.Size, System.Drawing">
     <value>84, 17</value>
@@ -769,7 +769,7 @@
     <value>NoControl</value>
   </data>
   <data name="checkBoxQASpelling.Location" type="System.Drawing.Point, System.Drawing">
-    <value>9, 215</value>
+    <value>10, 168</value>
   </data>
   <data name="checkBoxQASpelling.Size" type="System.Drawing.Size, System.Drawing">
     <value>141, 17</value>
@@ -2410,7 +2410,7 @@
     <value>60, 25</value>
   </data>
   <data name="tabControlTextLayer.Location" type="System.Drawing.Point, System.Drawing">
-    <value>770, 261</value>
+    <value>770, 259</value>
   </data>
   <data name="tabControlTextLayer.Size" type="System.Drawing.Size, System.Drawing">
     <value>212, 303</value>
@@ -5103,6 +5103,9 @@
         AAAAAP//AAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAQAA
         gAEAAP//AAA=
 </value>
+  </data>
+  <data name="$this.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
   <data name="$this.Location" type="System.Drawing.Point, System.Drawing">
     <value>200, 100</value>
