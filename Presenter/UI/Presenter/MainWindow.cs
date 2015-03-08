@@ -27,6 +27,7 @@ using System.Diagnostics;
 using System.Drawing;
 using System.Globalization;
 using System.IO;
+using System.Linq;
 using System.Threading;
 using System.Windows.Forms;
 using PraiseBase.Presenter.Manager;
@@ -57,6 +58,8 @@ namespace PraiseBase.Presenter.Forms
         private List<String> imageSearchResults;
 
         private bool linkLayers = true;
+
+        private SongEditor _songEditor;
 
         /// <summary>
         /// Private constructor
@@ -145,6 +148,45 @@ namespace PraiseBase.Presenter.Forms
 
             ProjectionManager.Instance.ProjectionChanged += Instance_ProjectionChanged;
         }
+
+        #region SongEditor
+
+        private SongEditor GetSongEditor()
+        {
+            if (_songEditor == null || _songEditor.IsDisposed)
+            {
+                _songEditor = CreateSongEditorInstance();
+            }
+            return _songEditor;
+        }
+
+        private SongEditor CreateSongEditorInstance()
+        {
+            var se = new SongEditor();
+            se.SongSaved += SongEditorWndOnSongSaved;
+            return se;
+        }
+
+        private void SongEditorWndOnSongSaved(object sender, SongSavedEventArgs songSavedEventArgs)
+        {
+            SongManager.Instance.ReloadSongByPath(songSavedEventArgs.FileName);
+        }
+
+        private void ShowAndFocusSongEditor()
+        {
+            var se = GetSongEditor();
+            se.Show();
+            se.Focus();
+        }
+
+        private void ShowAndBringSongEditorToFront()
+        {
+            var se = GetSongEditor();
+            se.Show();
+            se.BringToFront();
+        }
+
+        #endregion
 
         void selectLanguageToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -884,17 +926,7 @@ namespace PraiseBase.Presenter.Forms
 
         private void toolStripButton5_Click(object sender, EventArgs e)
         {
-            SongEditor wnd = SongEditor.GetInstance();
-
-            wnd.SongSaved += WndOnSongSaved;
-
-            wnd.Show();
-            wnd.Focus();
-        }
-
-        private void WndOnSongSaved(object sender, SongSavedEventArgs songSavedEventArgs)
-        {
-            SongManager.Instance.ReloadSongByPath(songSavedEventArgs.FileName);
+            ShowAndFocusSongEditor();
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -1315,25 +1347,18 @@ namespace PraiseBase.Presenter.Forms
             Process.Start(Settings.Default.DataDirectory + Path.DirectorySeparatorChar + Settings.Default.SetListDir);
         }
 
-        private void toolStripButtonDataFolder_ButtonClick(object sender, EventArgs e)
-        {
-            Process.Start(Settings.Default.DataDirectory);
-        }
-
-        private void datenverzeichnisToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            Process.Start(Settings.Default.DataDirectory);
-        }
-
         private void toolStripMenuItem3_Click(object sender, EventArgs e)
         {
             SongBrowserDialog dlg = new SongBrowserDialog();
             dlg.Tags = Settings.Default.Tags;
             dlg.ShowDialog(this);
-            if (dlg.OpenInEditor)
+            if (dlg.OpenInEditor.Any())
             {
-                SongEditor.GetInstance().Show();
-                SongEditor.GetInstance().BringToFront();
+                foreach (var fn in dlg.OpenInEditor)
+                {
+                    GetSongEditor().OpenSong(fn);
+                }
+                ShowAndBringSongEditorToFront();
             }
         }
 
@@ -1344,19 +1369,28 @@ namespace PraiseBase.Presenter.Forms
 
         private void praiseBoxDatenbankToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            var dlg = new SongImporter(Settings.Default, ImportFormat.PraiseBox);
-            if (dlg.ShowDialog(this) == DialogResult.OK)
-            {
-                reloadSongList();
-            }
+            OpenSongImporter(ImportFormat.PraiseBox);
         }
 
         private void worToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            var dlg = new SongImporter(Settings.Default, ImportFormat.WorshipSystem);
+            OpenSongImporter(ImportFormat.WorshipSystem);
+        }
+
+        private void OpenSongImporter(ImportFormat format)
+        {
+            var dlg = new SongImporter(Settings.Default, format);
             if (dlg.ShowDialog(this) == DialogResult.OK)
             {
                 reloadSongList();
+                if (dlg.OpenInEditor.Any())
+                {
+                    foreach (var fn in dlg.OpenInEditor)
+                    {
+                        GetSongEditor().OpenSong(fn);
+                    }
+                    ShowAndBringSongEditorToFront();
+                }
             }
         }
 
@@ -1902,17 +1936,10 @@ namespace PraiseBase.Presenter.Forms
         {
             if (listViewSongs.SelectedItems.Count > 0)
             {
-                SongEditor wnd = SongEditor.GetInstance();
-                wnd.OpenSong(SongManager.Instance.CurrentSong.Filename);
-                wnd.Show();
-                wnd.Focus();
+                String fn = SongManager.Instance.CurrentSong.Filename;
+                GetSongEditor().OpenSong(fn);
             }
-            else
-            {
-                SongEditor wnd = SongEditor.GetInstance();
-                wnd.Show();
-                wnd.Focus();
-            }
+            ShowAndFocusSongEditor();
         }
 
         private void qaSpellingToolStripMenuItem_Click(object sender, EventArgs e)

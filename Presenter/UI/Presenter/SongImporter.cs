@@ -18,6 +18,11 @@ namespace PraiseBase.Presenter.Forms
         private Settings settings;
 
         /// <summary>
+        /// List of songs to be opened in the editor
+        /// </summary>
+        public List<string> OpenInEditor { get; private set; }
+
+        /// <summary>
         /// Imports songs from other systems
         /// </summary>
         /// <param name="importFormat">Import type</param>
@@ -128,10 +133,9 @@ namespace PraiseBase.Presenter.Forms
                     {
                         if (listViewSongs.Items[x].Checked)
                         {
-                            SongEditor.GetInstance().OpenSong(filesToOpen[x]);
+                            OpenInEditor.Add(filesToOpen[x]);
                         }
                     }
-                    SongEditor.GetInstance().Show();
                 }
 
                 DialogResult = DialogResult.OK;

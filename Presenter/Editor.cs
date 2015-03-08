@@ -61,7 +61,7 @@ namespace PraiseBase.Presenter
                 mutex = new System.Threading.Mutex(true, mutexName);
             }
 
-            Application.Run(SongEditor.GetInstance());
+            Application.Run(new SongEditor());
 
             GC.KeepAlive(mutex);
         }

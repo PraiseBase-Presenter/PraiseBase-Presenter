@@ -39,8 +39,6 @@ namespace PraiseBase.Presenter.Forms
 {
     public partial class SongEditor : LocalizableForm
     {
-        static private SongEditor _instance;
-
         public string fileBoxInitialDir;
         public int fileOpenBoxFilterIndex;
         public int fileSaveBoxFilterIndex;
@@ -50,7 +48,7 @@ namespace PraiseBase.Presenter.Forms
         public delegate void SongSave(object sender, SongSavedEventArgs e);
         public event SongSave SongSaved;
 
-        private SongEditor()
+        public SongEditor()
         {
             InitializeComponent();
 
@@ -84,13 +82,6 @@ namespace PraiseBase.Presenter.Forms
             {
                 i.Checked = ((CultureInfo)i.Tag == Thread.CurrentThread.CurrentUICulture);
             }
-        }
-
-        static public SongEditor GetInstance()
-        {
-            if (_instance == null)
-                _instance = new SongEditor();
-            return _instance;
         }
 
         /// <summary>
@@ -698,7 +689,6 @@ namespace PraiseBase.Presenter.Forms
 
         private void EditorWindow_FormClosed(object sender, FormClosedEventArgs e)
         {
-            _instance = null;
             GC.Collect();
         }
     }

@@ -8,13 +8,19 @@ namespace PraiseBase.Presenter.Forms
 {
     public partial class SongBrowserDialog : Form
     {
+        /// <summary>
+        /// List of tags (categories)
+        /// </summary>
         public StringCollection Tags { get; set; }
 
-        public bool OpenInEditor { get; private set; }
+        /// <summary>
+        /// List of songs to be opened in the editor
+        /// </summary>
+        public List<string> OpenInEditor { get; private set; }
 
         public SongBrowserDialog()
         {
-            OpenInEditor = false;
+            OpenInEditor = new List<string>();
             InitializeComponent();
         }
 
@@ -40,11 +46,11 @@ namespace PraiseBase.Presenter.Forms
             {
                 foreach (ListViewItem lvi in listViewItems.SelectedItems)
                 {
-                    SongEditor.GetInstance().OpenSong(SongManager.Instance.SongList[(Guid)(lvi.Tag)].Filename);
+                    string fn = SongManager.Instance.SongList[(Guid) (lvi.Tag)].Filename;
+                    OpenInEditor.Add(fn);
                 }
-                OpenInEditor = true;
                 DialogResult = DialogResult.OK;
-                this.Close();
+                Close();
             }
             else
             {
