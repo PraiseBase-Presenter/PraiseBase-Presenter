@@ -152,11 +152,6 @@ namespace PraiseBase.Presenter.Model.Song
         public SongBooks SongBooks { get; set; }
 
         /// <summary>
-        /// Gets the whole songtext improved for full-text search
-        /// </summary>
-        public string SearchText { get; protected set; }
-
-        /// <summary>
         /// Gets or sets the list of all parts in the song
         /// </summary>
         public SongPartList Parts { get; set; }
@@ -166,11 +161,6 @@ namespace PraiseBase.Presenter.Model.Song
         /// the real order in which the song is sung
         /// </summary>
         public List<int> PartSequence { get; set; }
-
-        /// <summary>
-        /// Gets or sets the current slide index
-        /// </summary>
-        public int CurrentSlide { get; set; }
 
         /// <summary>
         /// Quality assurance indicators
@@ -222,15 +212,25 @@ namespace PraiseBase.Presenter.Model.Song
         /// </summary>
         public SongTextBorders TextBorders { get; set; }
 
+        #endregion Fields
+        
+        /// <summary>
+        /// Gets the whole songtext improved for full-text search
+        /// </summary>
+        public string SearchText { get; protected set; }
+
         public bool HasTranslation
         {
             get
             {
-                return Parts.SelectMany(p => p.Slides).Any(s => s.Translated); 
+                return Parts.SelectMany(p => p.Slides).Any(s => s.Translated);
             }
         }
-
-        #endregion Fields
+        
+        /// <summary>
+        /// Gets or sets the current slide index
+        /// </summary>
+        public int CurrentSlide { get; set; }
 
         /// <summary>
         /// The song constructor
