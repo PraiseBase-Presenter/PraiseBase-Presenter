@@ -22,6 +22,8 @@
 
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
+using System.Linq;
 using System.Runtime.Serialization;
 
 namespace PraiseBase.Presenter.Model.Song
@@ -224,17 +226,7 @@ namespace PraiseBase.Presenter.Model.Song
         {
             get
             {
-                foreach (var p in Parts)
-                {
-                    foreach (var s in p.Slides)
-                    {
-                        if (s.Translated)
-                        {
-                            return true;
-                        }
-                    }
-                }
-                return false;
+                return Parts.SelectMany(p => p.Slides).Any(s => s.Translated); 
             }
         }
 
@@ -260,7 +252,7 @@ namespace PraiseBase.Presenter.Model.Song
         /// </summary>
         public void UpdateSearchText()
         {
-            string _text = this.Title + " ";
+            string _text = Title + " ";
             foreach (SongPart prt in Parts)
             {
                 foreach (SongSlide sld in prt.Slides)
@@ -287,18 +279,7 @@ namespace PraiseBase.Presenter.Model.Song
         /// </summary>
         public int GetNumberOfBackgroundImages()
         {
-            int n = 0;
-            for (int i = 0; i < Parts.Count; i++)
-            {
-                for (int j = 0; j < Parts[i].Slides.Count; j++)
-                {
-                    if (Parts[i].Slides[j].Background != null && Parts[i].Slides[j].Background.GetType() == typeof(ImageBackground))
-                    {
-                        n++;
-                    }
-                }
-            }
-            return n;
+            return Parts.SelectMany(t => t.Slides).Count(t1 => t1.Background != null && t1.Background.GetType() == typeof (ImageBackground));
         }
 
         /// <summary>
@@ -359,6 +340,7 @@ namespace PraiseBase.Presenter.Model.Song
         /// editor to check if the file was changed
         /// </summary>
         /// <returns></returns>
+        [SuppressMessage("ReSharper", "FunctionComplexityOverflow")]
         public override int GetHashCode()
         {
             unchecked
@@ -412,7 +394,7 @@ namespace PraiseBase.Presenter.Model.Song
         {
             if (ReferenceEquals(null, obj)) return false;
             if (ReferenceEquals(this, obj)) return true;
-            if (obj.GetType() != this.GetType()) return false;
+            if (obj.GetType() != GetType()) return false;
             return Equals((Song) obj);
         }
 
@@ -423,18 +405,18 @@ namespace PraiseBase.Presenter.Model.Song
         /// <param name="context"></param>
         public void GetObjectData(SerializationInfo info, StreamingContext context)
         {
-            info.AddValue("Parts", this.Parts);
-            info.AddValue("Title", this.Title);
-            info.AddValue("QualityIssues", this.QualityIssues);
-            info.AddValue("MainText", this.MainText.ToString());
-            info.AddValue("TranslationText", this.TranslationText.ToString());
-            info.AddValue("CopyrightText", this.CopyrightText.ToString());
-            info.AddValue("SourceText", this.SourceText.ToString());
-            info.AddValue("Language", this.Language);
-            info.AddValue("Comment", this.Comment);
-            info.AddValue("Tags", this.Themes);
-            info.AddValue("CcliID", this.CcliID);
-            info.AddValue("Copyright", this.Copyright);
+            info.AddValue("Parts", Parts);
+            info.AddValue("Title", Title);
+            info.AddValue("QualityIssues", QualityIssues);
+            info.AddValue("MainText", MainText.ToString());
+            info.AddValue("TranslationText", TranslationText.ToString());
+            info.AddValue("CopyrightText", CopyrightText.ToString());
+            info.AddValue("SourceText", SourceText.ToString());
+            info.AddValue("Language", Language);
+            info.AddValue("Comment", Comment);
+            info.AddValue("Tags", Themes);
+            info.AddValue("CcliID", CcliID);
+            info.AddValue("Copyright", Copyright);
         }
     }
 }
