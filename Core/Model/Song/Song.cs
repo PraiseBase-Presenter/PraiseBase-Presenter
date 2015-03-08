@@ -100,37 +100,6 @@ namespace PraiseBase.Presenter.Model.Song
         public List<SongAuthor> Author { get; set; }
 
         /// <summary>
-        /// All authors as semicolon-separated string
-        /// </summary>
-        public String AuthorString
-        {
-            get
-            {
-                string autstr = string.Empty;
-                foreach (var aut in Author)
-                {
-                    if (autstr != string.Empty)
-                    {
-                        autstr += ";";
-                    }
-                    autstr += aut.Name;
-                }
-                return autstr;
-            }
-            set
-            {
-                int i = 0;
-                foreach (String s in value.Split(new char[] { ';' }, StringSplitOptions.RemoveEmptyEntries))
-                {
-                    SongAuthor author = new SongAuthor();
-                    author.Name = s.Trim();
-                    author.Type = (i++ == 0) ? SongAuthorType.Words : SongAuthorType.Music;
-                    Author.Add(author);
-                }
-            }
-        }
-
-        /// <summary>
         /// Admin
         /// </summary>
         public string RightsManagement { get; set; }
