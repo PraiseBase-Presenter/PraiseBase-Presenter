@@ -236,7 +236,7 @@ namespace PraiseBase.Presenter.UI.Presenter
             int cnt = 0;
 
             var lviList = new List<ListViewItem>();
-            foreach (SongManager.SongItem si in SongManager.Instance.GetSearchResults(needle, Settings.Default.SongSearchMode))
+            foreach (SongItem si in SongManager.Instance.GetSearchResults(needle, Settings.Default.SongSearchMode))
             {
                 var lvi = new ListViewItem(si.Song.Title);
                 lvi.Tag = si.Song.GUID;

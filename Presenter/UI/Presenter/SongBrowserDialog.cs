@@ -67,7 +67,7 @@ namespace PraiseBase.Presenter.UI.Presenter
         {
             listViewItems.Items.Clear();
             string searchText = textBoxSearch.Text.Trim().ToLower();
-            foreach (KeyValuePair<Guid, SongManager.SongItem> kvp in SongManager.Instance.SongList)
+            foreach (KeyValuePair<Guid, SongItem> kvp in SongManager.Instance.SongList)
             {
                 Song sng = kvp.Value.Song;
                 bool use = true;
