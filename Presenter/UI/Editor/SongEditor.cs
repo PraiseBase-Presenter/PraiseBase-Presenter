@@ -457,6 +457,7 @@ namespace PraiseBase.Presenter.UI.Editor
         /// Gets a song file plugin by index
         /// </summary>
         /// <param name="index"></param>
+        /// <exception cref="NotImplementedException">Thrown if the selected plugin has no implementation</exception>
         /// <returns></returns>
         private static ISongFilePlugin CreateByTypeIndex(int index)
         {
