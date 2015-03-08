@@ -39,52 +39,88 @@ namespace PraiseBase.Presenter.Forms
 {
     public partial class SongEditor : LocalizableForm
     {
-        public string fileBoxInitialDir;
-        public int fileOpenBoxFilterIndex;
-        public int fileSaveBoxFilterIndex;
+        #region internalVariables
 
-        private int childFormNumber = 0;
+        /// <summary>
+        /// Initial directory of file open/save dialog
+        /// </summary>
+        private string _fileBoxInitialDir;
 
-        public delegate void SongSave(object sender, SongSavedEventArgs e);
-        public event SongSave SongSaved;
+        /// <summary>
+        /// Type filter index of file open dialog
+        /// </summary>
+        private int _fileOpenBoxFilterIndex;
 
+        /// <summary>
+        /// Type filter index of file save dialog
+        /// </summary>
+        private int _fileSaveBoxFilterIndex;
+
+        /// <summary>
+        /// Number of open child forms
+        /// </summary>
+        private int _childFormNumber;
+        
+        /// <summary>
+        /// Settings instance holder
+        /// </summary>
         private readonly Settings _settings;
+
+        #endregion
+
+        private const int StatusMessageDuration = 2000;
+
+        /// <summary>
+        /// Delegate to inform subscribers that a song has been saved
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        public delegate void SongSave(object sender, SongSavedEventArgs e);
+
+        /// <summary>
+        /// Song saved event
+        /// </summary>
+        public event SongSave SongSaved;
 
         public SongEditor(Settings settings)
         {
+            // Initialize internal variables
             _settings = settings;
+            _fileBoxInitialDir = _settings.DataDirectory + Path.DirectorySeparatorChar + _settings.SongDir;
+            _fileOpenBoxFilterIndex = 0;
+            _fileSaveBoxFilterIndex = 0;
 
             InitializeComponent();
 
+            // Set size and window state
             WindowState = _settings.EditorWindowState;
             Size = _settings.EditorWindowSize;
 
-            fileBoxInitialDir = _settings.DataDirectory + Path.DirectorySeparatorChar + _settings.SongDir;
-            fileOpenBoxFilterIndex = 0;
-            fileSaveBoxFilterIndex = 0;
-
+            // Add languages to menu
             foreach (var l in Program.AvailableLanguages)
             {
-                ToolStripMenuItem selectLanguageToolStripMenuItem = new ToolStripMenuItem(l.DisplayName);
-                selectLanguageToolStripMenuItem.Tag = l;
-                selectLanguageToolStripMenuItem.Click += new EventHandler(selectLanguageToolStripMenuItem_Click);
+                ToolStripMenuItem selectLanguageToolStripMenuItem = new ToolStripMenuItem(l.DisplayName)
+                {
+                    Tag = l
+                };
+                selectLanguageToolStripMenuItem.Click += selectLanguageToolStripMenuItem_Click;
                 if (l.Name == Thread.CurrentThread.CurrentUICulture.Name)
                 {
                     selectLanguageToolStripMenuItem.Checked = true;
                 }
-                this.spracheToolStripMenuItem.DropDownItems.Add(selectLanguageToolStripMenuItem);
+                spracheToolStripMenuItem.DropDownItems.Add(selectLanguageToolStripMenuItem);
             }
 
-            base.registerChild(this);
+            registerChild(this);
         }
 
         void selectLanguageToolStripMenuItem_Click(object sender, EventArgs e)
         {
             SetLanguage((CultureInfo)((ToolStripMenuItem)sender).Tag);
 
-            foreach (ToolStripMenuItem i in this.spracheToolStripMenuItem.DropDownItems)
+            foreach (ToolStripMenuItem i in spracheToolStripMenuItem.DropDownItems)
             {
-                i.Checked = ((CultureInfo)i.Tag == Thread.CurrentThread.CurrentUICulture);
+                i.Checked = (Equals((CultureInfo)i.Tag, Thread.CurrentThread.CurrentUICulture));
             }
         }
 
@@ -101,7 +137,7 @@ namespace PraiseBase.Presenter.Forms
 
             SongEditorChild childForm = CreateSongEditorChildForm(sng, null);
 
-            childForm.Text = childForm.Song.Title + " " + ++childFormNumber;
+            childForm.Text = childForm.Song.Title + @" " + ++_childFormNumber;
         }
 
         /// <summary>
@@ -111,20 +147,22 @@ namespace PraiseBase.Presenter.Forms
         /// <param name="e"></param>
         private void OpenFile(object sender, EventArgs e)
         {
-            OpenFileDialog openFileDialog = new OpenFileDialog();
-            openFileDialog.InitialDirectory = fileBoxInitialDir;
-            openFileDialog.CheckFileExists = true;
-            openFileDialog.CheckPathExists = true;
-            openFileDialog.Multiselect = false;
-            openFileDialog.Title = StringResources.OpenSong;
+            OpenFileDialog openFileDialog = new OpenFileDialog
+            {
+                InitialDirectory = _fileBoxInitialDir,
+                CheckFileExists = true,
+                CheckPathExists = true,
+                Multiselect = false,
+                Title = StringResources.OpenSong,
+                Filter = GetOpenFileBoxFilter(),
+                FilterIndex = _fileOpenBoxFilterIndex
+            };
 
-            openFileDialog.Filter = GetOpenFileBoxFilter();
-            openFileDialog.FilterIndex = fileOpenBoxFilterIndex;
             if (openFileDialog.ShowDialog(this) == DialogResult.OK)
             {
                 string fileName = openFileDialog.FileName;
-                fileBoxInitialDir = Path.GetDirectoryName(fileName);
-                fileOpenBoxFilterIndex = openFileDialog.FilterIndex;
+                _fileBoxInitialDir = Path.GetDirectoryName(fileName);
+                _fileOpenBoxFilterIndex = openFileDialog.FilterIndex;
                 OpenSong(fileName);
             }
         }
@@ -163,12 +201,12 @@ namespace PraiseBase.Presenter.Forms
             }
             catch (NotImplementedException)
             {
-                MessageBox.Show(StringResources.SongFormatNotSupported, this.Text, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(StringResources.SongFormatNotSupported, Text, MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
             catch (Exception e)
             {
-                MessageBox.Show(StringResources.SongFileHasErrors + " (" + e.Message + ")!", this.Text, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(StringResources.SongFileHasErrors + @" (" + e.Message + @")!", Text, MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
 
@@ -191,7 +229,9 @@ namespace PraiseBase.Presenter.Forms
             };
             childForm.FormClosing += childForm_FormClosing;
             childForm.Show();
-            base.registerChild(childForm);
+            registerChild(childForm);
+            
+            // Se status
             SetStatus(string.Format(StringResources.LoadedSong, sng.Title));
 
             return childForm;
@@ -379,11 +419,11 @@ namespace PraiseBase.Presenter.Forms
             {
                 InitialDirectory = fileName != null
                     ? Path.GetDirectoryName(fileName)
-                    : fileBoxInitialDir,
+                    : _fileBoxInitialDir,
                 CheckPathExists = true,
                 FileName = sng.Title,
                 Filter = GetSaveFileBoxFilter(),
-                FilterIndex = fileSaveBoxFilterIndex,
+                FilterIndex = _fileSaveBoxFilterIndex,
                 AddExtension = true,
                 Title = StringResources.SaveSongAs
             };
@@ -396,7 +436,7 @@ namespace PraiseBase.Presenter.Forms
                 plugin.Save(sng, saveFileDialog.FileName);
 
                 // Store selected filter index
-                fileSaveBoxFilterIndex = saveFileDialog.FilterIndex;
+                _fileSaveBoxFilterIndex = saveFileDialog.FilterIndex;
 
                 // Set status
                 SetStatus(string.Format(StringResources.SongSavedAs, saveFileDialog.FileName));
@@ -603,12 +643,18 @@ namespace PraiseBase.Presenter.Forms
             _settings.EditorWindowState = WindowState;
         }
 
+        /// <summary>
+        /// Displays a message in the status bar for 2 seconds
+        /// </summary>
+        /// <param name="text"></param>
         private void SetStatus(string text)
         {
             toolStripStatusLabel1.Text = text;
-            Timer statusTimer = new Timer();
-            statusTimer.Interval = 2000;
-            statusTimer.Tick += new EventHandler(statusTimer_Tick);
+            Timer statusTimer = new Timer
+            {
+                Interval = StatusMessageDuration
+            };
+            statusTimer.Tick += statusTimer_Tick;
             statusTimer.Start();
         }
 
