@@ -446,10 +446,10 @@ namespace PraiseBase.Presenter.UI.Presenter
 
             toolStripButtonQA.Enabled = true;
             updateQAButtonStage();
-            qaSpellingToolStripMenuItem.Checked = SongManager.Instance.CurrentSong.Song.GetQA(SongQualityAssuranceIndicator.Spelling);
-            qaTranslationToolStripMenuItem.Checked = SongManager.Instance.CurrentSong.Song.GetQA(SongQualityAssuranceIndicator.Translation);
-            qaImagesToolStripMenuItem.Checked = SongManager.Instance.CurrentSong.Song.GetQA(SongQualityAssuranceIndicator.Images);
-            qaSegmentationToolStripMenuItem.Checked = SongManager.Instance.CurrentSong.Song.GetQA(SongQualityAssuranceIndicator.Segmentation);
+            qaSpellingToolStripMenuItem.Checked = SongManager.Instance.CurrentSong.Song.HasQuailityIssue(SongQualityAssuranceIndicator.Spelling);
+            qaTranslationToolStripMenuItem.Checked = SongManager.Instance.CurrentSong.Song.HasQuailityIssue(SongQualityAssuranceIndicator.Translation);
+            qaImagesToolStripMenuItem.Checked = SongManager.Instance.CurrentSong.Song.HasQuailityIssue(SongQualityAssuranceIndicator.Images);
+            qaSegmentationToolStripMenuItem.Checked = SongManager.Instance.CurrentSong.Song.HasQuailityIssue(SongQualityAssuranceIndicator.Segmentation);
 
             if (SongManager.Instance.CurrentSong.Song.HasTranslation())
             {
@@ -1944,28 +1944,28 @@ namespace PraiseBase.Presenter.UI.Presenter
 
         private void qaSpellingToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            SongManager.Instance.CurrentSong.Song.SetQA(SongQualityAssuranceIndicator.Spelling, qaSpellingToolStripMenuItem.Checked);
+            SongManager.Instance.CurrentSong.Song.SetQualityIssue(SongQualityAssuranceIndicator.Spelling, qaSpellingToolStripMenuItem.Checked);
             saveCurrentSong();
             updateQAButtonStage();
         }
 
         private void qaTranslationToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            SongManager.Instance.CurrentSong.Song.SetQA(SongQualityAssuranceIndicator.Translation, qaTranslationToolStripMenuItem.Checked);
+            SongManager.Instance.CurrentSong.Song.SetQualityIssue(SongQualityAssuranceIndicator.Translation, qaTranslationToolStripMenuItem.Checked);
             saveCurrentSong();
             updateQAButtonStage();
         }
 
         private void qaImagesToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            SongManager.Instance.CurrentSong.Song.SetQA(SongQualityAssuranceIndicator.Images, qaImagesToolStripMenuItem.Checked);
+            SongManager.Instance.CurrentSong.Song.SetQualityIssue(SongQualityAssuranceIndicator.Images, qaImagesToolStripMenuItem.Checked);
             saveCurrentSong();
             updateQAButtonStage();
         }
 
         private void qaSegmentationToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            SongManager.Instance.CurrentSong.Song.SetQA(SongQualityAssuranceIndicator.Segmentation, qaSegmentationToolStripMenuItem.Checked);
+            SongManager.Instance.CurrentSong.Song.SetQualityIssue(SongQualityAssuranceIndicator.Segmentation, qaSegmentationToolStripMenuItem.Checked);
             saveCurrentSong();
             updateQAButtonStage();
         }
@@ -1984,7 +1984,7 @@ namespace PraiseBase.Presenter.UI.Presenter
 
         private void updateQAButtonStage()
         {
-            if (SongManager.Instance.CurrentSong.Song.Comment != String.Empty || SongManager.Instance.CurrentSong.Song.HasQA())
+            if (SongManager.Instance.CurrentSong.Song.Comment != String.Empty || SongManager.Instance.CurrentSong.Song.HasAnyQualityIssues())
             {
                 toolStripButtonQA.Image = PraiseBase.Presenter.Properties.Resources.highlight_red__36;
             }

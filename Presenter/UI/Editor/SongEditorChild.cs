@@ -127,10 +127,10 @@ namespace PraiseBase.Presenter.UI.Editor
 
         private void PopulateQa()
         {
-            checkBoxQAImages.Checked = Song.GetQA(SongQualityAssuranceIndicator.Images);
-            checkBoxQASpelling.Checked = Song.GetQA(SongQualityAssuranceIndicator.Spelling);
-            checkBoxQATranslation.Checked = Song.GetQA(SongQualityAssuranceIndicator.Translation);
-            checkBoxQASegmentation.Checked = Song.GetQA(SongQualityAssuranceIndicator.Segmentation);
+            checkBoxQAImages.Checked = Song.HasQuailityIssue(SongQualityAssuranceIndicator.Images);
+            checkBoxQASpelling.Checked = Song.HasQuailityIssue(SongQualityAssuranceIndicator.Spelling);
+            checkBoxQATranslation.Checked = Song.HasQuailityIssue(SongQualityAssuranceIndicator.Translation);
+            checkBoxQASegmentation.Checked = Song.HasQuailityIssue(SongQualityAssuranceIndicator.Segmentation);
         }
 
         private void PopulateOrientation()
@@ -430,58 +430,26 @@ namespace PraiseBase.Presenter.UI.Editor
 
         private void checkBoxQASpelling_CheckedChanged(object sender, EventArgs e)
         {
-            if (checkBoxQASpelling.Checked)
-            {
-                checkBoxQASpelling.ForeColor = Color.Red;
-                Song.SetQA(SongQualityAssuranceIndicator.Spelling);
-            }
-            else
-            {
-                checkBoxQASpelling.ForeColor = SystemColors.ControlText;
-                Song.RemQA(SongQualityAssuranceIndicator.Spelling);
-            }
+            checkBoxQASpelling.ForeColor = checkBoxQASpelling.Checked ? Color.Red : SystemColors.ControlText;
+            Song.SetQualityIssue(SongQualityAssuranceIndicator.Spelling, checkBoxQASpelling.Checked);
         }
 
         private void checkBoxQATranslation_CheckedChanged(object sender, EventArgs e)
         {
-            if (checkBoxQATranslation.Checked)
-            {
-                checkBoxQATranslation.ForeColor = Color.Red;
-                Song.SetQA(SongQualityAssuranceIndicator.Translation);
-            }
-            else
-            {
-                checkBoxQATranslation.ForeColor = SystemColors.ControlText;
-                Song.RemQA(SongQualityAssuranceIndicator.Translation);
-            }
+            checkBoxQATranslation.ForeColor = checkBoxQATranslation.Checked ? Color.Red : SystemColors.ControlText;
+            Song.SetQualityIssue(SongQualityAssuranceIndicator.Translation, checkBoxQATranslation.Checked);
         }
 
         private void checkBoxQAImages_CheckedChanged(object sender, EventArgs e)
         {
-            if (checkBoxQAImages.Checked)
-            {
-                checkBoxQAImages.ForeColor = Color.Red;
-                Song.SetQA(SongQualityAssuranceIndicator.Images);
-            }
-            else
-            {
-                checkBoxQAImages.ForeColor = SystemColors.ControlText;
-                Song.RemQA(SongQualityAssuranceIndicator.Images);
-            }
+            checkBoxQAImages.ForeColor = checkBoxQAImages.Checked ? Color.Red : SystemColors.ControlText;
+            Song.SetQualityIssue(SongQualityAssuranceIndicator.Images, checkBoxQAImages.Checked);
         }
 
         private void checkBoxQASegmentation_CheckedChanged(object sender, EventArgs e)
         {
-            if (checkBoxQASegmentation.Checked)
-            {
-                checkBoxQASegmentation.ForeColor = Color.Red;
-                Song.SetQA(SongQualityAssuranceIndicator.Segmentation);
-            }
-            else
-            {
-                checkBoxQASegmentation.ForeColor = SystemColors.ControlText;
-                Song.RemQA(SongQualityAssuranceIndicator.Segmentation);
-            }
+            checkBoxQASegmentation.ForeColor = checkBoxQASegmentation.Checked ? Color.Red : SystemColors.ControlText;
+            Song.SetQualityIssue(SongQualityAssuranceIndicator.Segmentation, checkBoxQASegmentation.Checked);
         }
 
         private void buttonProjectionMasterFont_Click(object sender, EventArgs e)

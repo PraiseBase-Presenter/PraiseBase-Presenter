@@ -267,19 +267,10 @@ namespace PraiseBase.Presenter.Model.Song
         /// Sets a specific quality assurance indicator
         /// </summary>
         /// <param name="quai">The indicator to be added</param>
-        public void SetQA(SongQualityAssuranceIndicator quai)
-        {
-            QualityIssues.Add(quai);
-        }
-
-        /// <summary>
-        /// Sets a specific quality assurance indicator
-        /// </summary>
-        /// <param name="quai">The indicator to be added</param>
         /// <param name="set">True to set value</param>
-        public void SetQA(SongQualityAssuranceIndicator quai, bool set)
+        public void SetQualityIssue(SongQualityAssuranceIndicator quai, bool set)
         {
-            if (GetQA(quai)) 
+            if (HasQuailityIssue(quai)) 
             {
                 QualityIssues.Remove(quai);
             }
@@ -290,19 +281,10 @@ namespace PraiseBase.Presenter.Model.Song
         }
 
         /// <summary>
-        /// Removes a specific quality assurance indicator
-        /// </summary>
-        /// <param name="quai">The indicator to be removed</param>
-        public void RemQA(SongQualityAssuranceIndicator quai)
-        {
-            QualityIssues.Remove(quai);
-        }
-
-        /// <summary>
         /// Returns if a specific quality assurance indicator is set
         /// </summary>
         /// <param name="quai">The desired indicator</param>
-        public bool GetQA(SongQualityAssuranceIndicator quai)
+        public bool HasQuailityIssue(SongQualityAssuranceIndicator quai)
         {
             return QualityIssues.IndexOf(quai) >= 0;
         }
@@ -311,7 +293,7 @@ namespace PraiseBase.Presenter.Model.Song
         /// Indicates îf the song has quality issues
         /// </summary>
         /// <returns></returns>
-        public bool HasQA()
+        public bool HasAnyQualityIssues()
         {
             return QualityIssues.Count > 0;
         }

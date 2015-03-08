@@ -80,13 +80,13 @@ namespace PraiseBase.Presenter.UI.Presenter
                 if (checkBoxHasComments.Checked && sng.Comment == string.Empty)
                     use = false;
 
-                if (checkBoxQAImages.Checked && !sng.GetQA(SongQualityAssuranceIndicator.Images))
+                if (checkBoxQAImages.Checked && !sng.HasQuailityIssue(SongQualityAssuranceIndicator.Images))
                     use = false;
-                if (checkBoxQASegmentation.Checked && !sng.GetQA(SongQualityAssuranceIndicator.Segmentation))
+                if (checkBoxQASegmentation.Checked && !sng.HasQuailityIssue(SongQualityAssuranceIndicator.Segmentation))
                     use = false;
-                if (checkBoxQASpelling.Checked && !sng.GetQA(SongQualityAssuranceIndicator.Spelling))
+                if (checkBoxQASpelling.Checked && !sng.HasQuailityIssue(SongQualityAssuranceIndicator.Spelling))
                     use = false;
-                if (checkBoxQATranslation.Checked && !sng.GetQA(SongQualityAssuranceIndicator.Translation))
+                if (checkBoxQATranslation.Checked && !sng.HasQuailityIssue(SongQualityAssuranceIndicator.Translation))
                     use = false;
 
                 foreach (int i in checkedListBoxTags.CheckedIndices)
