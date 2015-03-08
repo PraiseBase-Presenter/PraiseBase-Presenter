@@ -471,6 +471,7 @@
             // 
             resources.ApplyResources(this.textBoxSongbooks, "textBoxSongbooks");
             this.textBoxSongbooks.Name = "textBoxSongbooks";
+            this.textBoxSongbooks.TextChanged += new System.EventHandler(this.textBoxSongbooks_TextChanged);
             // 
             // label17
             // 
@@ -491,6 +492,7 @@
             // 
             resources.ApplyResources(this.textBoxAuthors, "textBoxAuthors");
             this.textBoxAuthors.Name = "textBoxAuthors";
+            this.textBoxAuthors.TextChanged += new System.EventHandler(this.textBoxAuthors_TextChanged);
             // 
             // label15
             // 

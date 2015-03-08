@@ -77,13 +77,13 @@ namespace PraiseBase.Presenter.Persistence.PowerPraise.Extended
             Song expected = ExtendedPowerPraiseTestUtil.GetExpectedSongExtended();
             Song actual = mapper.map(source);
 
-            Assert.AreEqual(expected.GUID, actual.GUID, "Wrong GUID");
+            Assert.AreEqual(expected.Guid, actual.Guid, "Wrong GUID");
             Assert.AreEqual(expected.ModifiedTimestamp, actual.ModifiedTimestamp, "Wrong modified timestamp");
             Assert.AreEqual(expected.CreatedIn, actual.CreatedIn, "Wrong created in");
             Assert.AreEqual(expected.ModifiedIn, actual.ModifiedIn, "Wrong modified in");
             Assert.AreEqual(expected.Title, actual.Title, "Wrong song title");
             Assert.AreEqual(expected.Language, actual.Language, "Wrong language");
-            Assert.AreEqual(expected.CcliID, actual.CcliID, "Wrong CcliID");
+            Assert.AreEqual(expected.CcliIdentifier, actual.CcliIdentifier, "Wrong CcliID");
             Assert.AreEqual(expected.Copyright, actual.Copyright, "Wrong copyright");
             Assert.AreEqual(expected.CopyrightPosition, actual.CopyrightPosition, "Wrong copyright position");
             Assert.AreEqual(expected.SourcePosition, actual.SourcePosition, "Wrong source position");
@@ -292,13 +292,13 @@ namespace PraiseBase.Presenter.Persistence.PowerPraise.Extended
             ExtendedPowerPraiseSong source = reader.Load(filename);
             Song actual = mapper.map(source);
 
-            Assert.AreEqual(expected.GUID, actual.GUID, "Wrong GUID");
+            Assert.AreEqual(expected.Guid, actual.Guid, "Wrong GUID");
             Assert.AreEqual(expected.ModifiedTimestamp, actual.ModifiedTimestamp, "Wrong modified timestamp");
             Assert.AreEqual(expected.CreatedIn, actual.CreatedIn, "Wrong created in");
             Assert.AreEqual(expected.ModifiedIn, actual.ModifiedIn, "Wrong modified in");
             Assert.AreEqual(expected.Title, actual.Title, "Wrong song title");
             Assert.AreEqual(expected.Language, actual.Language, "Wrong language");
-            Assert.AreEqual(expected.CcliID, actual.CcliID, "Wrong CcliID");
+            Assert.AreEqual(expected.CcliIdentifier, actual.CcliIdentifier, "Wrong CcliID");
             Assert.AreEqual(expected.Copyright, actual.Copyright, "Wrong copyright");
             Assert.AreEqual(expected.CopyrightPosition, actual.CopyrightPosition, "Wrong copyright position");
             Assert.AreEqual(expected.SourcePosition, actual.SourcePosition, "Wrong source position");

@@ -39,7 +39,7 @@ namespace PraiseBase.Presenter.Model.Song
         /// <summary>
         /// Unique identifier of this song
         /// </summary>
-        public Guid GUID { get; set; }
+        public Guid Guid { get; set; }
 
         /// <summary>
         /// Timestamp when the song has been last modified
@@ -69,12 +69,12 @@ namespace PraiseBase.Presenter.Model.Song
         /// <summary>
         /// CCLI Song ID
         /// </summary>
-        public string CcliID { get; set; }
+        public string CcliIdentifier { get; set; }
 
         /// <summary>
         /// Should the CCLI ID be readonly?
         /// </summary>
-        public bool CCliIDReadonly { get; set; }
+        public bool IsCCliIdentifierReadonly { get; set; }
 
         /// <summary>
         /// Copyright information
@@ -313,8 +313,8 @@ namespace PraiseBase.Presenter.Model.Song
                 hashCode = (hashCode*397) ^ (ModifiedIn != null ? ModifiedIn.GetHashCode() : 0);
                 hashCode = (hashCode*397) ^ (Title != null ? Title.GetHashCode() : 0);
                 hashCode = (hashCode*397) ^ (Language != null ? Language.GetHashCode() : 0);
-                hashCode = (hashCode*397) ^ (CcliID != null ? CcliID.GetHashCode() : 0);
-                hashCode = (hashCode*397) ^ CCliIDReadonly.GetHashCode();
+                hashCode = (hashCode*397) ^ (CcliIdentifier != null ? CcliIdentifier.GetHashCode() : 0);
+                hashCode = (hashCode*397) ^ IsCCliIdentifierReadonly.GetHashCode();
                 hashCode = (hashCode*397) ^ (Copyright != null ? Copyright.GetHashCode() : 0);
                 hashCode = (hashCode*397) ^ (int) CopyrightPosition;
                 hashCode = (hashCode*397) ^ (int) SourcePosition;
@@ -348,7 +348,7 @@ namespace PraiseBase.Presenter.Model.Song
 
         protected bool Equals(Song other)
         {
-            return string.Equals(ModifiedTimestamp, other.ModifiedTimestamp) && string.Equals(CreatedIn, other.CreatedIn) && string.Equals(ModifiedIn, other.ModifiedIn) && string.Equals(Title, other.Title) && string.Equals(Language, other.Language) && string.Equals(CcliID, other.CcliID) && CCliIDReadonly.Equals(other.CCliIDReadonly) && string.Equals(Copyright, other.Copyright) && CopyrightPosition == other.CopyrightPosition && SourcePosition == other.SourcePosition && string.Equals(ReleaseYear, other.ReleaseYear) && Equals(Author, other.Author) && string.Equals(RightsManagement, other.RightsManagement) && string.Equals(Publisher, other.Publisher) && string.Equals(Version, other.Version) && string.Equals(Key, other.Key) && Transposition == other.Transposition && Equals(Tempo, other.Tempo) && string.Equals(Variant, other.Variant) && Equals(Themes, other.Themes) && string.Equals(Comment, other.Comment) && Equals(SongBooks, other.SongBooks) && Equals(Parts, other.Parts) && Equals(PartSequence, other.PartSequence) && Equals(QualityIssues, other.QualityIssues) && Equals(MainText, other.MainText) && Equals(TranslationText, other.TranslationText) && Equals(CopyrightText, other.CopyrightText) && Equals(SourceText, other.SourceText) && Equals(TextOrientation, other.TextOrientation) && TranslationPosition == other.TranslationPosition && TextOutlineEnabled.Equals(other.TextOutlineEnabled) && TextShadowEnabled.Equals(other.TextShadowEnabled) && Equals(TextBorders, other.TextBorders);
+            return string.Equals(ModifiedTimestamp, other.ModifiedTimestamp) && string.Equals(CreatedIn, other.CreatedIn) && string.Equals(ModifiedIn, other.ModifiedIn) && string.Equals(Title, other.Title) && string.Equals(Language, other.Language) && string.Equals(CcliIdentifier, other.CcliIdentifier) && IsCCliIdentifierReadonly.Equals(other.IsCCliIdentifierReadonly) && string.Equals(Copyright, other.Copyright) && CopyrightPosition == other.CopyrightPosition && SourcePosition == other.SourcePosition && string.Equals(ReleaseYear, other.ReleaseYear) && Equals(Author, other.Author) && string.Equals(RightsManagement, other.RightsManagement) && string.Equals(Publisher, other.Publisher) && string.Equals(Version, other.Version) && string.Equals(Key, other.Key) && Transposition == other.Transposition && Equals(Tempo, other.Tempo) && string.Equals(Variant, other.Variant) && Equals(Themes, other.Themes) && string.Equals(Comment, other.Comment) && Equals(SongBooks, other.SongBooks) && Equals(Parts, other.Parts) && Equals(PartSequence, other.PartSequence) && Equals(QualityIssues, other.QualityIssues) && Equals(MainText, other.MainText) && Equals(TranslationText, other.TranslationText) && Equals(CopyrightText, other.CopyrightText) && Equals(SourceText, other.SourceText) && Equals(TextOrientation, other.TextOrientation) && TranslationPosition == other.TranslationPosition && TextOutlineEnabled.Equals(other.TextOutlineEnabled) && TextShadowEnabled.Equals(other.TextShadowEnabled) && Equals(TextBorders, other.TextBorders);
         }
 
         public override bool Equals(object obj)
@@ -376,7 +376,7 @@ namespace PraiseBase.Presenter.Model.Song
             info.AddValue("Language", Language);
             info.AddValue("Comment", Comment);
             info.AddValue("Tags", Themes);
-            info.AddValue("CcliID", CcliID);
+            info.AddValue("CcliID", CcliIdentifier);
             info.AddValue("Copyright", Copyright);
         }
     }

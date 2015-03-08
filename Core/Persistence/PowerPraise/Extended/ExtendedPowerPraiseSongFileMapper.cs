@@ -37,11 +37,11 @@ namespace PraiseBase.Presenter.Persistence.PowerPraise.Extended
 
             song.Comment = ppl.Comment;
             song.QualityIssues.AddRange(ppl.QualityIssues);
-            song.CcliID = ppl.CcliID;
+            song.CcliIdentifier = ppl.CcliID;
             song.Author.AddRange(ppl.Author);
             song.RightsManagement = ppl.RightsManagement;
             song.Publisher = ppl.Publisher;
-            song.GUID = ppl.GUID;
+            song.Guid = ppl.GUID;
 
             return song;
         }
@@ -57,11 +57,11 @@ namespace PraiseBase.Presenter.Persistence.PowerPraise.Extended
             
             ppl.Comment = song.Comment;
             ppl.QualityIssues.AddRange(song.QualityIssues);
-            ppl.CcliID = song.CcliID;
+            ppl.CcliID = song.CcliIdentifier;
             ppl.Author.AddRange(song.Author);
             ppl.RightsManagement = song.RightsManagement;
             ppl.Publisher = song.Publisher;
-            ppl.GUID = song.GUID;
+            ppl.GUID = song.Guid;
         }
     }
 }

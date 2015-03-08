@@ -226,7 +226,7 @@ namespace PraiseBase.Presenter.Persistence.OpenLyrics
             expected.CreatedIn = "OpenLP 1.9.0";
             expected.ModifiedIn = "ChangingSong 0.0.1";
 
-            expected.CcliID = "4639462";
+            expected.CcliIdentifier = "4639462";
             expected.Copyright = "public domain";
             expected.ReleaseYear = "1779";
             expected.Comment = "This is one of the most popular songs in our congregation.";
@@ -309,7 +309,7 @@ namespace PraiseBase.Presenter.Persistence.OpenLyrics
             Assert.AreEqual(expected.CreatedIn, actual.CreatedIn, "Wrong creator app");
             Assert.AreEqual(expected.ModifiedIn, actual.ModifiedIn, "Wrong modifier app");
             Assert.AreEqual(expected.Copyright, actual.Copyright, "Wrong copyright info");
-            Assert.AreEqual(expected.CcliID, actual.CcliID, "Wrong CCLI number");
+            Assert.AreEqual(expected.CcliIdentifier, actual.CcliIdentifier, "Wrong CCLI number");
             Assert.AreEqual(expected.ReleaseYear, actual.ReleaseYear, "Wrong release date");
 
             Assert.AreEqual(expected.Parts.Count, actual.Parts.Count, "Parts incomplete");

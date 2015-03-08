@@ -98,7 +98,7 @@ namespace PraiseBase.Presenter.UI.Presenter
                 if (use)
                 {
                     ListViewItem lvi = new ListViewItem(sng.Title);
-                    lvi.Tag = sng.GUID;
+                    lvi.Tag = sng.Guid;
                     listViewItems.Items.Add(lvi);
                 }
             }

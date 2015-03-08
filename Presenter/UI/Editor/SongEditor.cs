@@ -170,15 +170,14 @@ namespace PraiseBase.Presenter.UI.Editor
             }
 
             Song sng;
-            Console.WriteLine(@"Loading song from file " + fileName);
             try
             {
                 sng = SongFilePluginFactory.Create(fileName).Load(fileName);
-                if (sng.GUID == Guid.Empty)
+                if (sng.Guid == Guid.Empty)
                 {
                     // TODO get rid of GUID
                     var smGuid = SongManager.Instance.GetGUIDByPath(fileName);
-                    sng.GUID = smGuid != Guid.Empty ? smGuid : SongManager.Instance.GenerateGuid();
+                    sng.Guid = smGuid != Guid.Empty ? smGuid : SongManager.Instance.GenerateGuid();
                 }
             }
             catch (NotImplementedException)
@@ -500,7 +499,7 @@ namespace PraiseBase.Presenter.UI.Editor
         {
             Song sng = new Song
             {
-                GUID = SongManager.Instance.GenerateGuid(),
+                Guid = SongManager.Instance.GenerateGuid(),
                 Title = _settings.SongDefaultName,
                 Language = _settings.SongDefaultLanguage
             };

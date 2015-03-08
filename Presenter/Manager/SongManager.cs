@@ -146,11 +146,11 @@ namespace PraiseBase.Presenter
                         Filename = path
                     };
                     si.Song = si.Plugin.Load(path);
-                    if (si.Song.GUID == Guid.Empty)
+                    if (si.Song.Guid == Guid.Empty)
                     {
-                        si.Song.GUID = GenerateGuid();
+                        si.Song.Guid = GenerateGuid();
                     }
-                    SongList.Add(si.Song.GUID, si);
+                    SongList.Add(si.Song.Guid, si);
                     if (i % 25 == 0)
                     {
                         SongLoadEventArgs e = new SongLoadEventArgs(i, cnt);

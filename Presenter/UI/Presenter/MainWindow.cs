@@ -239,7 +239,7 @@ namespace PraiseBase.Presenter.UI.Presenter
             foreach (SongItem si in SongManager.Instance.GetSearchResults(needle, Settings.Default.SongSearchMode))
             {
                 var lvi = new ListViewItem(si.Song.Title);
-                lvi.Tag = si.Song.GUID;
+                lvi.Tag = si.Song.Guid;
                 lviList.Add(lvi);
                 cnt++;
             }
@@ -354,7 +354,7 @@ namespace PraiseBase.Presenter.UI.Presenter
                 }
                 else
                 {
-                    if (SongManager.Instance.CurrentSong == null || SongManager.Instance.CurrentSong.Song == null || SongManager.Instance.CurrentSong.Song.GUID != (Guid)listViewSongs.SelectedItems[0].Tag)
+                    if (SongManager.Instance.CurrentSong == null || SongManager.Instance.CurrentSong.Song == null || SongManager.Instance.CurrentSong.Song.Guid != (Guid)listViewSongs.SelectedItems[0].Tag)
                     {
                         var g = (Guid)listViewSongs.SelectedItems[0].Tag;
                         if (SongManager.Instance.SongList.ContainsKey(g))
@@ -383,7 +383,7 @@ namespace PraiseBase.Presenter.UI.Presenter
             if (listViewSongs.SelectedItems.Count > 0)
             {
                 if (SongManager.Instance.CurrentSong == null ||
-                    SongManager.Instance.CurrentSong.Song.GUID != (Guid)listViewSongs.SelectedItems[0].Tag)
+                    SongManager.Instance.CurrentSong.Song.Guid != (Guid)listViewSongs.SelectedItems[0].Tag)
                 {
                     SongManager.Instance.CurrentSong = SongManager.Instance.SongList[(Guid)listViewSongs.SelectedItems[0].Tag];
                     showCurrentSongDetails();
@@ -477,10 +477,10 @@ namespace PraiseBase.Presenter.UI.Presenter
             var s = SongManager.Instance.CurrentSong.Song;
 
             if (listViewSongHistory.Items.Count == 0 ||
-                (Guid)listViewSongHistory.Items[0].Tag != s.GUID)
+                (Guid)listViewSongHistory.Items[0].Tag != s.Guid)
             {
                 var lvi = new ListViewItem(s.Title);
-                lvi.Tag = s.GUID;
+                lvi.Tag = s.Guid;
                 listViewSongHistory.Items.Insert(0, lvi);
                 listViewSongHistory.Columns[0].Width = -2;
             }
@@ -1306,7 +1306,7 @@ namespace PraiseBase.Presenter.UI.Presenter
                             {
                                 var s = SongManager.Instance.SongList[g].Song;
                                 var lvi = new ListViewItem(s.Title);
-                                lvi.Tag = s.GUID;
+                                lvi.Tag = s.Guid;
                                 listViewSetList.Items.Add(lvi);
                             }
                         }

@@ -70,8 +70,8 @@ namespace PraiseBase.Presenter.UI.Editor
 
             // Data bindings
             textBoxSongTitle.DataBindings.Add("Text", Song, "Title");
-            textBoxCCLISongID.DataBindings.Add("Text", Song, "CcliID");
-            if (Song.CCliIDReadonly)
+            textBoxCCLISongID.DataBindings.Add("Text", Song, "CcliIdentifier");
+            if (Song.IsCCliIdentifierReadonly)
             {
                 textBoxCCLISongID.ReadOnly = true;
             }
@@ -81,8 +81,9 @@ namespace PraiseBase.Presenter.UI.Editor
             textBoxPublisher.DataBindings.Add("Text", Song, "Publisher");
 
             labelGUID.DataBindings.Add("Text", Song, "GUID");
-            textBoxAuthors.DataBindings.Add("Text", Song, "AuthorString");
-            textBoxSongbooks.DataBindings.Add("Text", Song, "SongBooksString");
+
+            textBoxAuthors.Text = Song.Author.ToString();
+            textBoxSongbooks.Text = Song.SongBooks.ToString();
 
             PopulateEffects();
 
@@ -912,6 +913,16 @@ namespace PraiseBase.Presenter.UI.Editor
                 comboBoxSlideVertOrientation.DataBindings[0].WriteValue();
             }
             PreviewSlide();
+        }
+
+        private void textBoxAuthors_TextChanged(object sender, EventArgs e)
+        {
+            Song.Author.FromString(((TextBox)sender).Text);
+        }
+
+        private void textBoxSongbooks_TextChanged(object sender, EventArgs e)
+        {
+            Song.SongBooks.FromString(((TextBox)sender).Text);
         }
 
     }

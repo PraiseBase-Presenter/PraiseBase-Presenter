@@ -111,9 +111,9 @@ namespace PraiseBase.Presenter.UI.Presenter
                         + " " + Properties.StringResources.Overwrite + "?", Properties.StringResources.SongImporter, 
                         MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)) || !File.Exists(fileName))
                     {
-                        if (sng.GUID == Guid.Empty)
+                        if (sng.Guid == Guid.Empty)
                         {
-                            sng.GUID = SongManager.Instance.GenerateGuid();
+                            sng.Guid = SongManager.Instance.GenerateGuid();
                         }
                         // TODO Exception handling
                         filePlugin.Save(sng, fileName);

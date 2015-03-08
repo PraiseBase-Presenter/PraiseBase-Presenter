@@ -52,7 +52,7 @@ namespace PraiseBase.Presenter.Persistence.OpenLyrics
             sng.Title = source.Title;
 
             // CCLI
-            sng.CcliID = source.CcliID;
+            sng.CcliIdentifier = source.CcliID;
 
             // Copyright
             sng.Copyright = source.Copyright;
