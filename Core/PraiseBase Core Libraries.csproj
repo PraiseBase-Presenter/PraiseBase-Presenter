@@ -50,7 +50,9 @@
     <Compile Include="Model\Song\ColorBackground.cs" />
     <Compile Include="Model\Song\ImageBackground.cs" />
     <Compile Include="Model\Song\IBackground.cs" />
+    <Compile Include="Model\Song\SongBooks.cs" />
     <Compile Include="Model\Song\SongAuthorType.cs" />
+    <Compile Include="Model\Song\SongAuthors.cs" />
     <Compile Include="Model\TranslationPosition.cs" />
     <Compile Include="Persistence\AbstractSongFilePlugin.cs" />
     <Compile Include="Persistence\CCLI\SongSelectFilePlugin.cs" />

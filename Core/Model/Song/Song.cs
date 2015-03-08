@@ -97,7 +97,7 @@ namespace PraiseBase.Presenter.Model.Song
         /// <summary>
         /// Authors of the song
         /// </summary>
-        public List<SongAuthor> Author { get; set; }
+        public SongAuthors Author { get; set; }
 
         /// <summary>
         /// Admin
@@ -147,36 +147,7 @@ namespace PraiseBase.Presenter.Model.Song
         /// <summary>
         /// Songbooks the song appears in
         /// </summary>
-        public List<SongBook> SongBooks { get; set; }
-
-        /// <summary>
-        /// All songbooks as semicolon-separated string
-        /// </summary>
-        public String SongBooksString
-        {
-            get
-            {
-                string autstr = string.Empty;
-                foreach (var aut in SongBooks)
-                {
-                    if (autstr != string.Empty)
-                    {
-                        autstr += ";";
-                    }
-                    autstr += aut.Name;
-                }
-                return autstr;
-            }
-            set
-            {
-                foreach (String s in value.Split(new char[] { ';' }, StringSplitOptions.RemoveEmptyEntries))
-                {
-                    SongBook sb = new SongBook();
-                    sb.Name = s.Trim();
-                    SongBooks.Add(sb);
-                }
-            }
-        }
+        public SongBooks SongBooks { get; set; }
 
         /// <summary>
         /// Gets the whole songtext improved for full-text search
@@ -278,8 +249,8 @@ namespace PraiseBase.Presenter.Model.Song
             Parts = new SongPartList();
             PartSequence = new List<int>();
             SearchText = String.Empty;
-            SongBooks = new List<SongBook>();
-            Author = new List<SongAuthor>();
+            SongBooks = new SongBooks();
+            Author = new SongAuthors();
             Comment = String.Empty;
             QualityIssues = new List<SongQualityAssuranceIndicator>();
         }
