@@ -199,10 +199,17 @@ namespace PraiseBase.Presenter.Forms
             return childForm;
         }
 
+        /// <summary>
+        /// Save event handler
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void SaveChild(object sender, EventArgs e)
         {
             if (ActiveMdiChild != null)
             {
+                ValidateChildren();
+
                 SongEditorChild window = ((SongEditorChild)ActiveMdiChild);
                 if (Save(window.Song, ((EditorChildMetaData)window.Tag).Filename))
                 {
@@ -212,10 +219,17 @@ namespace PraiseBase.Presenter.Forms
             }
         }
 
+        /// <summary>
+        /// Save as event handler
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void SaveChildAs(object sender, EventArgs e)
         {
             if (ActiveMdiChild != null)
             {
+                ValidateChildren();
+
                 SongEditorChild window = ((SongEditorChild)ActiveMdiChild);
                 if (SaveAs(window.Song, null))
                 {
@@ -225,10 +239,14 @@ namespace PraiseBase.Presenter.Forms
             }
         }
 
+        /// <summary>
+        /// Save given song at the filename specified
+        /// </summary>
+        /// <param name="sng"></param>
+        /// <param name="songFilename"></param>
+        /// <returns></returns>
         private bool Save(Song sng, String songFilename)
         {
-            ValidateChildren();
-
             if (string.IsNullOrEmpty(songFilename))
             {
                 return SaveAs(sng, null);
