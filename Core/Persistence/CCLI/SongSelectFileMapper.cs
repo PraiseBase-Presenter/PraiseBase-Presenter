@@ -49,8 +49,6 @@ namespace PraiseBase.Presenter.Persistence.CCLI
                 sng.Parts.Add(p);
             }
 
-            sng.UpdateSearchText();
-
             return sng;
         }
 

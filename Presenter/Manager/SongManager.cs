@@ -41,10 +41,25 @@ namespace PraiseBase.Presenter
         /// </summary>
         public class SongItem
         {
-            public Song Song { get; set; }
+            private Song _song;
+            public Song Song
+            {
+                get { return _song; }
+                set
+                {
+                    _song = value;
+                    SearchText = value.GetSearchableText();
+                }
+            }
+
             public string Filename { get; set; }
             public ISongFilePlugin Plugin { get; set; }
             public bool SwitchTextAndTranlation { get; set; }
+            
+            /// <summary>
+            /// Gets the whole songtext improved for full-text search
+            /// </summary>
+            public string SearchText { get; private set; }
         }
 
         /// <summary>
@@ -151,10 +166,12 @@ namespace PraiseBase.Presenter
             {
                 try
                 {
-                    SongItem si = new SongItem();
-                    si.Plugin = SongFilePluginFactory.Create(path);
+                    SongItem si = new SongItem
+                    {
+                        Plugin = SongFilePluginFactory.Create(path),
+                        Filename = path
+                    };
                     si.Song = si.Plugin.Load(path);
-                    si.Filename = path;
                     if (si.Song.GUID == Guid.Empty)
                     {
                         si.Song.GUID = GenerateGuid();
@@ -289,7 +306,7 @@ namespace PraiseBase.Presenter
             foreach (var kvp in SongList)
             {
                 if (SongList[kvp.Key].Song.Title.ToLower().Contains(needle) ||
-                    (searchMode == SongSearchMode.TitleAndText && SongList[kvp.Key].Song.SearchText.Contains(needle)))
+                    (searchMode == SongSearchMode.TitleAndText && SongList[kvp.Key].SearchText.Contains(needle)))
                 {
                     tmpList.Add(SongList[kvp.Key]);
                 }

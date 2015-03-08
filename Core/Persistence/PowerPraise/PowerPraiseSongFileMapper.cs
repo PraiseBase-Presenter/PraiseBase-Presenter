@@ -145,8 +145,6 @@ namespace PraiseBase.Presenter.Persistence.PowerPraise
                 ppl.Borders.SourceRight
             );            
 
-            song.UpdateSearchText();
-
             return song;
         }
 

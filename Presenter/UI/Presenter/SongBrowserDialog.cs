@@ -69,9 +69,9 @@ namespace PraiseBase.Presenter.UI.Presenter
             string searchText = textBoxSearch.Text.Trim().ToLower();
             foreach (KeyValuePair<Guid, SongManager.SongItem> kvp in SongManager.Instance.SongList)
             {
-                Song sng = (Song)kvp.Value.Song;
+                Song sng = kvp.Value.Song;
                 bool use = true;
-                if (searchText != String.Empty && !sng.SearchText.Contains(searchText))
+                if (searchText != String.Empty && !kvp.Value.SearchText.Contains(searchText))
                     use = false;
 
                 if (checkBoxHasImages.Checked && sng.GetNumberOfBackgroundImages() > 0)

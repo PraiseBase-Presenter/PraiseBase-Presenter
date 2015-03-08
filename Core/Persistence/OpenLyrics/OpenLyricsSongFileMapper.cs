@@ -80,8 +80,6 @@ namespace PraiseBase.Presenter.Persistence.OpenLyrics
                 sng.Parts.Add(part);
             }
 
-            sng.UpdateSearchText();
-
             return sng;
         }
 

@@ -124,8 +124,8 @@ namespace PraiseBase.Presenter.Persistence.OpenLyrics
                 }
             }
 
-            Assert.IsTrue(actual.SearchText.Contains(expected.Title.ToLower()));
-            Assert.IsTrue(actual.SearchText.Contains("sweet"));
+            Assert.IsTrue(actual.GetSearchableText().Contains(expected.Title.ToLower()));
+            Assert.IsTrue(actual.GetSearchableText().Contains("sweet"));
         }
 
         /// <summary>

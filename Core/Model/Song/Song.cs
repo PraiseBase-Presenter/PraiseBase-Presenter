@@ -213,11 +213,6 @@ namespace PraiseBase.Presenter.Model.Song
         public SongTextBorders TextBorders { get; set; }
 
         #endregion Fields
-        
-        /// <summary>
-        /// Gets the whole songtext improved for full-text search
-        /// </summary>
-        public string SearchText { get; protected set; }
 
         public bool HasTranslation
         {
@@ -240,7 +235,6 @@ namespace PraiseBase.Presenter.Model.Song
             Themes = new TagList();
             Parts = new SongPartList();
             PartSequence = new List<int>();
-            SearchText = String.Empty;
             SongBooks = new SongBooks();
             Author = new SongAuthors();
             Comment = String.Empty;
@@ -248,30 +242,21 @@ namespace PraiseBase.Presenter.Model.Song
         }
 
         /// <summary>
-        /// Updates the search text
+        /// Gets all text for searching
         /// </summary>
-        public void UpdateSearchText()
+        public string GetSearchableText()
         {
-            string _text = Title + " ";
-            foreach (SongPart prt in Parts)
-            {
-                foreach (SongSlide sld in prt.Slides)
-                {
-                    foreach (string ln in sld.Lines)
-                    {
-                        _text += ln + " ";
-                    }
-                }
-            }
+            string text = Title + " ";
+            text = (from prt in Parts from sld in prt.Slides from ln in sld.Lines select ln).Aggregate(text, (current, ln) => current + (ln + " "));
 
-            _text = _text.Trim().ToLower();
-            _text = _text.Replace(",", String.Empty);
-            _text = _text.Replace(".", String.Empty);
-            _text = _text.Replace(";", String.Empty);
-            _text = _text.Replace(Environment.NewLine, String.Empty);
-            _text = _text.Replace("  ", " ");
+            text = text.Trim().ToLower();
+            text = text.Replace(",", String.Empty);
+            text = text.Replace(".", String.Empty);
+            text = text.Replace(";", String.Empty);
+            text = text.Replace(Environment.NewLine, String.Empty);
+            text = text.Replace("  ", " ");
 
-            SearchText = _text;
+            return text;
         }
 
         /// <summary>
@@ -367,7 +352,6 @@ namespace PraiseBase.Presenter.Model.Song
                 hashCode = (hashCode*397) ^ (Themes != null ? Themes.GetHashCode() : 0);
                 hashCode = (hashCode*397) ^ (Comment != null ? Comment.GetHashCode() : 0);
                 hashCode = (hashCode*397) ^ (SongBooks != null ? SongBooks.GetHashCode() : 0);
-                hashCode = (hashCode*397) ^ (SearchText != null ? SearchText.GetHashCode() : 0);
                 hashCode = (hashCode*397) ^ (Parts != null ? Parts.GetHashCode() : 0);
                 hashCode = (hashCode*397) ^ (PartSequence != null ? PartSequence.GetHashCode() : 0);
                 hashCode = (hashCode*397) ^ CurrentSlide;
@@ -387,7 +371,7 @@ namespace PraiseBase.Presenter.Model.Song
 
         protected bool Equals(Song other)
         {
-            return string.Equals(ModifiedTimestamp, other.ModifiedTimestamp) && string.Equals(CreatedIn, other.CreatedIn) && string.Equals(ModifiedIn, other.ModifiedIn) && string.Equals(Title, other.Title) && string.Equals(Language, other.Language) && string.Equals(CcliID, other.CcliID) && CCliIDReadonly.Equals(other.CCliIDReadonly) && string.Equals(Copyright, other.Copyright) && CopyrightPosition == other.CopyrightPosition && SourcePosition == other.SourcePosition && string.Equals(ReleaseYear, other.ReleaseYear) && Equals(Author, other.Author) && string.Equals(RightsManagement, other.RightsManagement) && string.Equals(Publisher, other.Publisher) && string.Equals(Version, other.Version) && string.Equals(Key, other.Key) && Transposition == other.Transposition && Equals(Tempo, other.Tempo) && string.Equals(Variant, other.Variant) && Equals(Themes, other.Themes) && string.Equals(Comment, other.Comment) && Equals(SongBooks, other.SongBooks) && string.Equals(SearchText, other.SearchText) && Equals(Parts, other.Parts) && Equals(PartSequence, other.PartSequence) && CurrentSlide == other.CurrentSlide && Equals(QualityIssues, other.QualityIssues) && Equals(MainText, other.MainText) && Equals(TranslationText, other.TranslationText) && Equals(CopyrightText, other.CopyrightText) && Equals(SourceText, other.SourceText) && Equals(TextOrientation, other.TextOrientation) && TranslationPosition == other.TranslationPosition && TextOutlineEnabled.Equals(other.TextOutlineEnabled) && TextShadowEnabled.Equals(other.TextShadowEnabled) && Equals(TextBorders, other.TextBorders);
+            return string.Equals(ModifiedTimestamp, other.ModifiedTimestamp) && string.Equals(CreatedIn, other.CreatedIn) && string.Equals(ModifiedIn, other.ModifiedIn) && string.Equals(Title, other.Title) && string.Equals(Language, other.Language) && string.Equals(CcliID, other.CcliID) && CCliIDReadonly.Equals(other.CCliIDReadonly) && string.Equals(Copyright, other.Copyright) && CopyrightPosition == other.CopyrightPosition && SourcePosition == other.SourcePosition && string.Equals(ReleaseYear, other.ReleaseYear) && Equals(Author, other.Author) && string.Equals(RightsManagement, other.RightsManagement) && string.Equals(Publisher, other.Publisher) && string.Equals(Version, other.Version) && string.Equals(Key, other.Key) && Transposition == other.Transposition && Equals(Tempo, other.Tempo) && string.Equals(Variant, other.Variant) && Equals(Themes, other.Themes) && string.Equals(Comment, other.Comment) && Equals(SongBooks, other.SongBooks) && Equals(Parts, other.Parts) && Equals(PartSequence, other.PartSequence) && CurrentSlide == other.CurrentSlide && Equals(QualityIssues, other.QualityIssues) && Equals(MainText, other.MainText) && Equals(TranslationText, other.TranslationText) && Equals(CopyrightText, other.CopyrightText) && Equals(SourceText, other.SourceText) && Equals(TextOrientation, other.TextOrientation) && TranslationPosition == other.TranslationPosition && TextOutlineEnabled.Equals(other.TextOutlineEnabled) && TextShadowEnabled.Equals(other.TextShadowEnabled) && Equals(TextBorders, other.TextBorders);
         }
 
         public override bool Equals(object obj)

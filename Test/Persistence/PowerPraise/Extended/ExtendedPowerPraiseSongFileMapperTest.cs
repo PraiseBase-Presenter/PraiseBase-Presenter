@@ -164,8 +164,8 @@ namespace PraiseBase.Presenter.Persistence.PowerPraise.Extended
             Assert.AreEqual(expected.TextBorders.SourceRight, actual.TextBorders.SourceRight);
             Assert.AreEqual(expected.TextBorders.SourceTop, actual.TextBorders.SourceTop);
 
-            Assert.IsTrue(actual.SearchText.Contains("näher mein gott zu dir"));
-            Assert.IsTrue(actual.SearchText.Contains("geborgen"));
+            Assert.IsTrue(actual.GetSearchableText().Contains("näher mein gott zu dir"));
+            Assert.IsTrue(actual.GetSearchableText().Contains("geborgen"));
         }
 
         /// <summary>
@@ -379,8 +379,8 @@ namespace PraiseBase.Presenter.Persistence.PowerPraise.Extended
             Assert.AreEqual(expected.TextBorders.SourceRight, actual.TextBorders.SourceRight);
             Assert.AreEqual(expected.TextBorders.SourceTop, actual.TextBorders.SourceTop);
 
-            Assert.IsTrue(actual.SearchText.Contains("näher mein gott zu dir"));
-            Assert.IsTrue(actual.SearchText.Contains("geborgen"));
+            Assert.IsTrue(actual.GetSearchableText().Contains("näher mein gott zu dir"));
+            Assert.IsTrue(actual.GetSearchableText().Contains("geborgen"));
         }
 
         /// <summary>
