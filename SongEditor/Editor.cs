@@ -24,6 +24,7 @@ using System;
 using System.Windows.Forms;
 using PraiseBase.Presenter.Forms;
 using PraiseBase.Presenter.Properties;
+using PraiseBase.Presenter.UI.Editor;
 
 namespace PraiseBase.Presenter
 {

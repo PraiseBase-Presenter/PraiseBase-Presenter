@@ -27,15 +27,14 @@ using System.IO;
 using System.Linq;
 using System.Threading;
 using System.Windows.Forms;
+using PraiseBase.Presenter.Forms;
 using PraiseBase.Presenter.Model.Song;
 using PraiseBase.Presenter.Persistence;
 using PraiseBase.Presenter.Properties;
-using PraiseBase.Presenter.UI;
-using PraiseBase.Presenter.UI.Editor;
 using PraiseBase.Presenter.Util;
 using Timer = System.Windows.Forms.Timer;
 
-namespace PraiseBase.Presenter.Forms
+namespace PraiseBase.Presenter.UI.Editor
 {
     public partial class SongEditor : LocalizableForm
     {

@@ -22,16 +22,14 @@
 
 using System;
 using System.Drawing;
-using System.IO;
 using System.Windows.Forms;
+using PraiseBase.Presenter.Forms;
 using PraiseBase.Presenter.Model;
 using PraiseBase.Presenter.Model.Song;
-using PraiseBase.Presenter.Persistence;
 using PraiseBase.Presenter.Projection;
 using PraiseBase.Presenter.Properties;
-using PraiseBase.Presenter.Util;
 
-namespace PraiseBase.Presenter.Forms
+namespace PraiseBase.Presenter.UI.Editor
 {
     public partial class SongEditorChild : Form
     {

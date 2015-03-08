@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-namespace PraiseBase.Presenter.UI.Editor
+﻿namespace PraiseBase.Presenter.UI.Editor
 {
     public class EditorChildMetaData
     {

@@ -1,4 +1,4 @@
-﻿namespace PraiseBase.Presenter.Forms
+﻿namespace PraiseBase.Presenter.UI.Editor
 {
     partial class SongEditorChild
     {

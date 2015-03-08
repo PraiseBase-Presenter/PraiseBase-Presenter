@@ -39,6 +39,7 @@ using PraiseBase.Presenter.Persistence.Setlists;
 using PraiseBase.Presenter.Projection;
 using PraiseBase.Presenter.Properties;
 using PraiseBase.Presenter.UI;
+using PraiseBase.Presenter.UI.Editor;
 using SongDetails;
 using Timer = System.Windows.Forms.Timer;
 
