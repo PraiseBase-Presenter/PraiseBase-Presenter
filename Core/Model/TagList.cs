@@ -42,6 +42,19 @@ namespace PraiseBase.Presenter.Model
             }
         }
 
+        public override int GetHashCode()
+        {
+            unchecked
+            {
+                int hash = 19;
+                for (int i = 0; i < Count; i++)
+                {
+                    hash = hash * 31 + this[i].GetHashCode();
+                }
+                return hash;
+            }
+        }
+
         /// <summary>
         /// Returns a comma separated string of all tags
         /// </summary>
