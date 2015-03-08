@@ -202,7 +202,7 @@ namespace PraiseBase.Presenter.UI.Editor
         private SongEditorChild CreateSongEditorChildForm(Song sng, String fileName)
         {
             int hashCode = sng.GetHashCode();
-            SongEditorChild childForm = new SongEditorChild(sng)
+            SongEditorChild childForm = new SongEditorChild(_settings, sng)
             {
                 Tag = new EditorChildMetaData(fileName, hashCode),
                 MdiParent = this

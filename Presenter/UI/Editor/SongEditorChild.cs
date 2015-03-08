@@ -48,8 +48,14 @@ namespace PraiseBase.Presenter.UI.Editor
         /// </summary>
         private int _currentSlideId;
 
-        public SongEditorChild(Song sng)
+        /// <summary>
+        /// Settings instance holder
+        /// </summary>
+        private readonly Settings _settings;
+
+        public SongEditorChild(Settings settings, Song sng)
         {
+            _settings = settings;
             Song = sng;
 
             InitializeComponent();
@@ -142,7 +148,7 @@ namespace PraiseBase.Presenter.UI.Editor
             comboBoxLanguage.Text = Song.Language;
             comboBoxLanguage.AutoCompleteMode = AutoCompleteMode.Suggest;
             comboBoxLanguage.AutoCompleteSource = AutoCompleteSource.ListItems;
-            foreach (string str in Settings.Default.Languages)
+            foreach (string str in _settings.Languages)
             {
                 comboBoxLanguage.Items.Add(str);
             }
@@ -151,7 +157,7 @@ namespace PraiseBase.Presenter.UI.Editor
         private void PopulateTags()
         {
             checkedListBoxTags.Items.Clear();
-            foreach (string str in Settings.Default.Tags)
+            foreach (string str in _settings.Tags)
             {
                 if (Song.Themes.Contains(str))
                     checkedListBoxTags.Items.Add(str, true);
@@ -162,7 +168,7 @@ namespace PraiseBase.Presenter.UI.Editor
 
         private void PopulatePartList()
         {
-            foreach (string str in Settings.Default.SongParts)
+            foreach (string str in _settings.SongParts)
             {
                 ToolStripMenuItem tItem = new ToolStripMenuItem(str);
                 tItem.Click += partAddMenu_click;
@@ -690,7 +696,7 @@ namespace PraiseBase.Presenter.UI.Editor
             slideFormatting.OutlineEnabled = false;
             slideFormatting.SmoothShadow = false;
 
-            slideFormatting.ScaleFontSize = Settings.Default.ProjectionFontScaling;
+            slideFormatting.ScaleFontSize = _settings.ProjectionFontScaling;
             slideFormatting.SmoothShadow = false;
 
             TextLayer sl = new TextLayer(slideFormatting)
@@ -830,7 +836,7 @@ namespace PraiseBase.Presenter.UI.Editor
 
         private void EditorChild_Shown(object sender, EventArgs e)
         {
-            if (textBoxSongTitle.Text == Settings.Default.SongDefaultName)
+            if (textBoxSongTitle.Text == _settings.SongDefaultName)
             {
                 textBoxSongTitle.SelectAll();
                 textBoxSongTitle.Focus();
@@ -839,7 +845,7 @@ namespace PraiseBase.Presenter.UI.Editor
 
         private void textBoxSongTitle_Enter(object sender, EventArgs e)
         {
-            if (textBoxSongTitle.Text == Settings.Default.SongDefaultName)
+            if (textBoxSongTitle.Text == _settings.SongDefaultName)
             {
                 textBoxSongTitle.SelectAll();
             }
