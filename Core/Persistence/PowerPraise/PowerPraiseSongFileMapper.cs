@@ -22,6 +22,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text.RegularExpressions;
 using PraiseBase.Presenter.Model;
 using PraiseBase.Presenter.Model.Song;
@@ -65,14 +66,16 @@ namespace PraiseBase.Presenter.Persistence.PowerPraise
             // Song parts
             foreach (PowerPraiseSongPart prt in ppl.Parts)
             {
-                SongPart part = new SongPart();
-                part.Caption = prt.Caption;
+                SongPart part = new SongPart
+                {
+                    Caption = prt.Caption
+                };
                 foreach (PowerPraiseSongSlide sld in prt.Slides)
                 {
                     SongSlide slide = new SongSlide();
                     if (sld.BackgroundNr >= 0 && ppl.BackgroundImages.Count > sld.BackgroundNr - 1)
                     {
-                        slide.Background = parseBackground(ppl.BackgroundImages[sld.BackgroundNr]);
+                        slide.Background = ParseBackground(ppl.BackgroundImages[sld.BackgroundNr]);
                     }
                     slide.TextSize = sld.MainSize > 0 ? sld.MainSize : (song.MainText.Font != null ? song.MainText.Font.Size : 0);
                     slide.Lines.AddRange(sld.Lines);
@@ -148,7 +151,7 @@ namespace PraiseBase.Presenter.Persistence.PowerPraise
             return song;
         }
 
-        private static IBackground parseBackground(string bg)
+        private static IBackground ParseBackground(string bg)
         {
             if (Regex.IsMatch(bg, @"^\d+$"))
             {
@@ -172,7 +175,7 @@ namespace PraiseBase.Presenter.Persistence.PowerPraise
             return null;
         }
 
-        private static string mapBackground(IBackground bg) {
+        private static string MapBackground(IBackground bg) {
             if (bg != null)
             {
                 if (bg.GetType() == typeof(ImageBackground))
@@ -205,14 +208,16 @@ namespace PraiseBase.Presenter.Persistence.PowerPraise
             // Song parts
             foreach (var songPart in song.Parts)
             {
-                PowerPraiseSongPart pplPart = new PowerPraiseSongPart();
-                pplPart.Caption = songPart.Caption;
+                PowerPraiseSongPart pplPart = new PowerPraiseSongPart
+                {
+                    Caption = songPart.Caption
+                };
                 foreach (var songSlide in songPart.Slides)
                 {
                     PowerPraiseSongSlide pplSlide = new PowerPraiseSongSlide();
 
-                    string bg = mapBackground(songSlide.Background);
-                    int backgroundNr = 0;
+                    string bg = MapBackground(songSlide.Background);
+                    int backgroundNr;
                     if (bg == null)
                     {
                         bg = PowerPraiseConstants.DefaultBackground;
@@ -237,11 +242,21 @@ namespace PraiseBase.Presenter.Persistence.PowerPraise
             }
 
             // Part order
-            foreach (int i in song.PartSequence)
+            if (song.PartSequence.Any())
             {
-                if (ppl.Parts[i] != null)
+                foreach (int i in song.PartSequence)
                 {
-                    ppl.Order.Add(ppl.Parts[i]);
+                    if (ppl.Parts[i] != null)
+                    {
+                        ppl.Order.Add(ppl.Parts[i]);
+                    }
+                }
+            }
+            else
+            {
+                foreach (PowerPraiseSongPart t in ppl.Parts)
+                {
+                    ppl.Order.Add(t);
                 }
             }
 
