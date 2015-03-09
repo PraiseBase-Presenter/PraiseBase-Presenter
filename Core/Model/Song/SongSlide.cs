@@ -30,7 +30,7 @@ namespace PraiseBase.Presenter.Model.Song
     /// <summary>
     /// A single slide with songtext and/or a background image
     /// </summary>
-    [Serializable()]
+    [Serializable]
     public class SongSlide : ICloneable, ISerializable
     {
         /// <summary>
@@ -63,13 +63,12 @@ namespace PraiseBase.Presenter.Model.Song
         /// </summary>
         public bool Translated
         {
-            get { return Translation.Count > 0 ? true : false; }
+            get { return Translation.Count > 0; }
         }
 
         /// <summary>
         /// Gets or sets the text of this slide
         /// </summary>
-        /// <param name="text"></param>
         public String Text
         {
             get
@@ -99,7 +98,6 @@ namespace PraiseBase.Presenter.Model.Song
         /// <summary>
         /// Gets or sets the translation of this slide
         /// </summary>
-        /// <param name="text"></param>
         public String TranslationText
         {
             get
@@ -143,12 +141,14 @@ namespace PraiseBase.Presenter.Model.Song
         /// <returns>A duplicate of this slide</returns>
         public object Clone()
         {
-            var res = new SongSlide();
-            res.Text = Text;
-            res.TranslationText = TranslationText;
-            res.PartName = PartName;
-            res.TextSize = TextSize;
-            res.Background = Background;
+            var res = new SongSlide
+            {
+                Text = Text,
+                TranslationText = TranslationText,
+                PartName = PartName,
+                TextSize = TextSize,
+                Background = Background
+            };
             return res;
         }
 
@@ -199,7 +199,7 @@ namespace PraiseBase.Presenter.Model.Song
         {
             if (ReferenceEquals(null, obj)) return false;
             if (ReferenceEquals(this, obj)) return true;
-            if (obj.GetType() != this.GetType()) return false;
+            if (obj.GetType() != GetType()) return false;
             return Equals((SongSlide) obj);
         }
 
@@ -210,11 +210,11 @@ namespace PraiseBase.Presenter.Model.Song
         /// <param name="context"></param>
         public void GetObjectData(SerializationInfo info, StreamingContext context)
         {
-            info.AddValue("Background", this.Background);
-            info.AddValue("TextSize", this.TextSize);
-            info.AddValue("PartName", this.PartName);
-            info.AddValue("Lines", this.Lines);
-            info.AddValue("Translation", this.Translation);
+            info.AddValue("Background", Background);
+            info.AddValue("TextSize", TextSize);
+            info.AddValue("PartName", PartName);
+            info.AddValue("Lines", Lines);
+            info.AddValue("Translation", Translation);
         }
     } ;
 }
