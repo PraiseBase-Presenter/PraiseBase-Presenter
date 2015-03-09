@@ -88,12 +88,11 @@ namespace PraiseBase.Presenter.Persistence.PowerPraise
             // Order
             foreach (PowerPraiseSongPart o in ppl.Order)
             {
-                int i;
-                for (i = 0; i < ppl.Parts.Count; i++)
+                foreach (SongPart p in song.Parts)
                 {
-                    if (ppl.Parts[i].Caption == o.Caption)
+                    if (p.Caption == o.Caption)
                     {
-                        song.PartSequence.Add(i);
+                        song.PartSequence.Add(p);
                         break;
                     }
                 }
@@ -244,11 +243,15 @@ namespace PraiseBase.Presenter.Persistence.PowerPraise
             // Part order
             if (song.PartSequence.Any())
             {
-                foreach (int i in song.PartSequence)
+                foreach (SongPart p in song.PartSequence)
                 {
-                    if (ppl.Parts[i] != null)
+                    foreach (PowerPraiseSongPart t in ppl.Parts)
                     {
-                        ppl.Order.Add(ppl.Parts[i]);
+                        if (p.Caption == t.Caption)
+                        {
+                            ppl.Order.Add(t);
+                            break;
+                        }
                     }
                 }
             }

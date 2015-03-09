@@ -75,5 +75,23 @@ namespace PraiseBase.Presenter.Model.Song
                 return hash;
             }
         }
+
+        protected bool Equals(PartSequences other)
+        {
+            if (Count != other.Count) return false;
+            for (int i = 0; i < Count; i++)
+            {
+                if (!Equals(this[i], other[i])) return false;
+            }
+            return true;
+        }
+
+        public override bool Equals(object obj)
+        {
+            if (ReferenceEquals(null, obj)) return false;
+            if (ReferenceEquals(this, obj)) return true;
+            if (obj.GetType() != GetType()) return false;
+            return Equals((PartSequences)obj);
+        }
     }
 }

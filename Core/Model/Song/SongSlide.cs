@@ -192,7 +192,7 @@ namespace PraiseBase.Presenter.Model.Song
 
         protected bool Equals(SongSlide other)
         {
-            return Equals(Translation, other.Translation) && Equals(Lines, other.Lines) && Equals(Background, other.Background) && TextSize.Equals(other.TextSize) && string.Equals(PartName, other.PartName);
+            return Equals(TranslationText, other.TranslationText) && Equals(Text, other.Text) && Equals(Background, other.Background) && TextSize.Equals(other.TextSize) && string.Equals(PartName, other.PartName);
         }
 
         public override bool Equals(object obj)
