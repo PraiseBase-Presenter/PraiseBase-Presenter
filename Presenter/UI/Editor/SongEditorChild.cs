@@ -229,7 +229,7 @@ namespace PraiseBase.Presenter.UI.Editor
                 Control[] textField = iForm.Controls.Find("songPartText", true);
                 string res = ((TextBox)textField[0]).Text.Trim();
                 if (res != "")
-                    AddSongPart(res);
+                    AddSongPartUpdateTree(res);
             }
         }
 
@@ -241,7 +241,7 @@ namespace PraiseBase.Presenter.UI.Editor
 
         public void partAddMenu_click(object sender, EventArgs e)
         {
-            AddSongPart(((ToolStripMenuItem)sender).Text);
+            AddSongPartUpdateTree(((ToolStripMenuItem)sender).Text);
         }
 
         public void PopulateTree()
@@ -324,22 +324,30 @@ namespace PraiseBase.Presenter.UI.Editor
             PreviewSlide();
         }
 
+        private void AddSongPartUpdateTree(string caption)
+        {
+            AddSongPart(caption);
+            PopulateTree();
+            treeViewContents.SelectedNode = treeViewContents.Nodes[treeViewContents.Nodes.Count - 1].LastNode;
+        }
+
         private void AddSongPart(string caption)
         {
             SongPart prt = new SongPart
             {
                 Caption = caption
             };
+            AddSongSlide(prt);
+            Song.Parts.Add(prt);
+        }
+
+        private void AddSongSlide(SongPart part)
+        {
             SongSlide sld = new SongSlide
             {
                 Background = GetDefaultBackground()
             };
-
-            prt.Slides.Add(sld);
-            Song.Parts.Add(prt);
-
-            PopulateTree();
-            treeViewContents.SelectedNode = treeViewContents.Nodes[treeViewContents.Nodes.Count - 1].LastNode;
+            part.Slides.Add(sld);
         }
 
         private ColorBackground GetDefaultBackground()
@@ -355,11 +363,7 @@ namespace PraiseBase.Presenter.UI.Editor
         [SuppressMessage("ReSharper", "UnusedParameter.Local")]
         private void buttonAddNewSlide_Click(object sender, EventArgs e)
         {
-            SongSlide sld = new SongSlide
-            {
-                Background = GetDefaultBackground()
-            };
-            Song.Parts[_currentPartId].Slides.Add(sld);
+            AddSongSlide(Song.Parts[_currentPartId]);
             PopulateTree();
             treeViewContents.SelectedNode = treeViewContents.Nodes[_currentPartId].LastNode;
         }
