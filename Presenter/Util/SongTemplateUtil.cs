@@ -41,6 +41,8 @@ namespace PraiseBase.Presenter.Util
                settings.ProjectionMasterLineSpacing);
 
             sng.TextOrientation = new TextOrientation(settings.ProjectionMasterVerticalTextOrientation, settings.ProjectionMasterHorizontalTextOrientation);
+            sng.CopyrightPosition = settings.ProjectionMasterCopyrightPosition;
+            sng.SourcePosition = settings.ProjectionMasterSourcePosition;
             sng.TranslationPosition = settings.ProjectionMasteTranslationPosition;
 
             sng.TextOutlineEnabled = settings.ProjectionMasterOutlineEnabled;
