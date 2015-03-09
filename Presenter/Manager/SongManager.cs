@@ -148,7 +148,7 @@ namespace PraiseBase.Presenter
                     si.Song = si.Plugin.Load(path);
                     if (si.Song.Guid == Guid.Empty)
                     {
-                        si.Song.Guid = GenerateGuid();
+                        si.Song.Guid = Guid.NewGuid();
                     }
                     SongList.Add(si.Song.Guid, si);
                     if (i % 25 == 0)
@@ -164,11 +164,6 @@ namespace PraiseBase.Presenter
                     Console.WriteLine(e.StackTrace);
                 }
             }
-        }
-
-        public Guid GenerateGuid()
-        {
-            return Guid.NewGuid();
         }
 
         protected virtual void OnSongLoaded(SongLoadEventArgs e)

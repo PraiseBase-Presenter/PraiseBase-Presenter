@@ -177,7 +177,7 @@ namespace PraiseBase.Presenter.UI.Editor
                 {
                     // TODO get rid of GUID
                     var smGuid = SongManager.Instance.GetGUIDByPath(fileName);
-                    sng.Guid = smGuid != Guid.Empty ? smGuid : SongManager.Instance.GenerateGuid();
+                    sng.Guid = smGuid != Guid.Empty ? smGuid : Guid.NewGuid();
                 }
             }
             catch (NotImplementedException)
@@ -505,7 +505,7 @@ namespace PraiseBase.Presenter.UI.Editor
         {
             Song sng = new Song
             {
-                Guid = SongManager.Instance.GenerateGuid(),
+                Guid = Guid.NewGuid(),
                 Title = _settings.SongDefaultName,
                 Language = _settings.SongDefaultLanguage
             };

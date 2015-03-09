@@ -113,7 +113,7 @@ namespace PraiseBase.Presenter.UI.Presenter
                     {
                         if (sng.Guid == Guid.Empty)
                         {
-                            sng.Guid = SongManager.Instance.GenerateGuid();
+                            sng.Guid = Guid.NewGuid();
                         }
                         // TODO Exception handling
                         filePlugin.Save(sng, fileName);
