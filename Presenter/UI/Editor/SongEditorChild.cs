@@ -31,6 +31,7 @@ using PraiseBase.Presenter.Projection;
 using PraiseBase.Presenter.Properties;
 using PraiseBase.Presenter.UI.Presenter;
 using TreeEx;
+using PraiseBase.Presenter.Util;
 
 namespace PraiseBase.Presenter.UI.Editor
 {
@@ -53,9 +54,15 @@ namespace PraiseBase.Presenter.UI.Editor
         /// </summary>
         private readonly Settings _settings;
 
+        /// <summary>
+        /// Song template mapper instance
+        /// </summary>
+        SongTemplateUtil _templateMapper;
+
         public SongEditorChild(Settings settings, Song sng)
         {
             _settings = settings;
+            _templateMapper = new SongTemplateUtil(_settings);
             Song = sng;
 
             InitializeComponent();
@@ -326,33 +333,9 @@ namespace PraiseBase.Presenter.UI.Editor
 
         private void AddSongPartUpdateTree(string caption)
         {
-            AddSongPart(caption);
+            _templateMapper.AddSongPart(Song, caption);
             PopulateTree();
             treeViewContents.SelectedNode = treeViewContents.Nodes[treeViewContents.Nodes.Count - 1].LastNode;
-        }
-
-        private void AddSongPart(string caption)
-        {
-            SongPart prt = new SongPart
-            {
-                Caption = caption
-            };
-            AddSongSlide(prt);
-            Song.Parts.Add(prt);
-        }
-
-        private void AddSongSlide(SongPart part)
-        {
-            SongSlide sld = new SongSlide
-            {
-                Background = GetDefaultBackground()
-            };
-            part.Slides.Add(sld);
-        }
-
-        private ColorBackground GetDefaultBackground()
-        {
-            return new ColorBackground(_settings.ProjectionBackColor);
         }
 
         private void comboBoxLanguage_SelectedIndexChanged(object sender, EventArgs e)
@@ -363,7 +346,7 @@ namespace PraiseBase.Presenter.UI.Editor
         [SuppressMessage("ReSharper", "UnusedParameter.Local")]
         private void buttonAddNewSlide_Click(object sender, EventArgs e)
         {
-            AddSongSlide(Song.Parts[_currentPartId]);
+            _templateMapper.AddSongSlide(Song.Parts[_currentPartId]);
             PopulateTree();
             treeViewContents.SelectedNode = treeViewContents.Nodes[_currentPartId].LastNode;
         }
@@ -627,13 +610,13 @@ namespace PraiseBase.Presenter.UI.Editor
                         {
                             foreach (SongSlide t1 in t.Slides)
                             {
-                                t1.Background = GetDefaultBackground();
+                                t1.Background = _templateMapper.GetDefaultBackground();
                             }
                         }
                     }
                     else
                     {
-                        Song.Parts[_currentPartId].Slides[_currentSlideId].Background = GetDefaultBackground(); 
+                        Song.Parts[_currentPartId].Slides[_currentSlideId].Background = _templateMapper.GetDefaultBackground(); 
                     }
                 }
                 PreviewSlide();

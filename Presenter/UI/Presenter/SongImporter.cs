@@ -90,6 +90,8 @@ namespace PraiseBase.Presenter.UI.Presenter
 
         private void buttonImport_Click(object sender, EventArgs e)
         {
+            SongTemplateUtil stm = new SongTemplateUtil(settings);
+
             List<String> filesToOpen = new List<string>();
             int cnt = 0;
             for (int x = 0; x < listViewSongs.Items.Count; x++)
@@ -100,7 +102,7 @@ namespace PraiseBase.Presenter.UI.Presenter
                     Song sng = ((Song)listViewSongs.Items[x].Tag);
 
                     // Apply formatting
-                    SongTemplateUtil.ApplyFormattingFromSettings(settings, sng);
+                    stm.ApplyFormattingFromSettings(sng);
 
                     // TODO: Allow selection of plugin
                     ISongFilePlugin filePlugin = SongFilePluginFactory.Create(SongFilePluginFactory.GetWriterPlugins().First().GetType());

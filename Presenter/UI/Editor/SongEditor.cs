@@ -112,9 +112,9 @@ namespace PraiseBase.Presenter.UI.Editor
         /// <param name="e"></param>
         private void ShowNewForm(object sender, EventArgs e)
         {
-            Song sng = CreateNewSong();
-
-            SongTemplateUtil.ApplyFormattingFromSettings(_settings, sng);
+            SongTemplateUtil stm = new SongTemplateUtil(_settings);
+            Song sng = stm.CreateNewSong();
+            stm.ApplyFormattingFromSettings(sng);
 
             SongEditorChild childForm = CreateSongEditorChildForm(sng, null);
 
@@ -495,34 +495,6 @@ namespace PraiseBase.Presenter.UI.Editor
                 return SongFilePluginFactory.GetWriterPlugins().ToArray()[index];
             }
             throw new NotImplementedException();
-        }
-
-        /// <summary>
-        /// Creates a new song with default name and one part with one slide
-        /// </summary>
-        /// <returns></returns>
-        private Song CreateNewSong()
-        {
-            Song sng = new Song
-            {
-                Guid = Guid.NewGuid(),
-                Title = _settings.SongDefaultName,
-                Language = _settings.SongDefaultLanguage
-            };
-
-            SongPart tmpPart = new SongPart
-            {
-                Caption = _settings.SongPartDefaultName
-            };
-
-            SongSlide tmpSlide = new SongSlide
-            {
-                Background = new ColorBackground(_settings.ProjectionBackColor)
-            };
-            tmpPart.Slides.Add(tmpSlide);
-            sng.Parts.Add(tmpPart);
-
-            return sng;
         }
 
         private void ExitToolsStripMenuItem_Click(object sender, EventArgs e)
