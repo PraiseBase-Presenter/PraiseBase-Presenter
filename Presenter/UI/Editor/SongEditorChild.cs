@@ -344,8 +344,7 @@ namespace PraiseBase.Presenter.UI.Editor
 
         private ColorBackground GetDefaultBackground()
         {
-            // TODO: Configurable default color
-            return new ColorBackground(Color.Black);
+            return new ColorBackground(_settings.ProjectionBackColor);
         }
 
         private void comboBoxLanguage_SelectedIndexChanged(object sender, EventArgs e)
