@@ -25,7 +25,6 @@ using System.Diagnostics.CodeAnalysis;
 using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Windows.Forms;
-using PraiseBase.Presenter.Model;
 using PraiseBase.Presenter.Model.Song;
 using PraiseBase.Presenter.Projection;
 using PraiseBase.Presenter.Properties;
@@ -57,7 +56,7 @@ namespace PraiseBase.Presenter.UI.Editor
         /// <summary>
         /// Song template mapper instance
         /// </summary>
-        SongTemplateMapper _templateMapper;
+        readonly SongTemplateMapper _templateMapper;
 
         public SongEditorChild(Settings settings, Song sng)
         {
@@ -77,13 +76,13 @@ namespace PraiseBase.Presenter.UI.Editor
 
             // Data bindings
             textBoxSongTitle.DataBindings.Add("Text", Song, "Title");
+
             textBoxCCLISongID.DataBindings.Add("Text", Song, "CcliIdentifier");
             if (Song.IsCCliIdentifierReadonly)
             {
                 textBoxCCLISongID.ReadOnly = true;
             }
             textBoxCopyright.DataBindings.Add("Text", Song, "Copyright");
-            textBoxComment.DataBindings.Add("Text", Song, "Comment");
             textBoxRightsManagement.DataBindings.Add("Text", Song, "RightsManagement");
             textBoxPublisher.DataBindings.Add("Text", Song, "Publisher");
 
@@ -92,10 +91,6 @@ namespace PraiseBase.Presenter.UI.Editor
             textBoxAuthors.Text = Song.Author.ToString();
             textBoxSongbooks.Text = Song.SongBooks.ToString();
 
-            PopulateEffects();
-
-            PopulateSpacing();
-
             PopulateTree();
             treeViewContents.SelectedNode = treeViewContents.Nodes[0];
 
@@ -103,10 +98,6 @@ namespace PraiseBase.Presenter.UI.Editor
 
             PopulateQa();
 
-            buttonChooseProjectionForeColor.BackColor = Song.MainText.Color;
-            buttonTranslationColor.BackColor = Song.TranslationText.Color;
-
-            PopulateOrientation();
             PopulateLanguageBox();
             PopulateTags();
 
@@ -114,40 +105,13 @@ namespace PraiseBase.Presenter.UI.Editor
             PreviewSlide();
         }
 
-        private void PopulateEffects()
-        {
-            checkBoxOutlineEnabled.DataBindings.Add("Checked", Song, "TextOutlineEnabled", false, DataSourceUpdateMode.OnPropertyChanged);
-            checkBoxShadowEnabled.DataBindings.Add("Checked", Song, "TextShadowEnabled", false, DataSourceUpdateMode.OnPropertyChanged);
-
-            numericUpDownShadowDirection.DataBindings.Add("Value", Song.MainText.Shadow, "Direction", false, DataSourceUpdateMode.OnPropertyChanged);
-        }
-
-        private void PopulateSpacing()
-        {
-            numericUpDownMainTextLineSpacing.DataBindings.Add("Value", Song.MainText, "LineSpacing", false, DataSourceUpdateMode.OnPropertyChanged);
-            numericUpDownMainTextOutline.DataBindings.Add("Value", Song.MainText.Outline, "Width", false, DataSourceUpdateMode.OnPropertyChanged);
-            numericUpDownMainTextShadow.DataBindings.Add("Value", Song.MainText.Shadow, "Distance", false, DataSourceUpdateMode.OnPropertyChanged);
-
-            numericUpDownTranslationTextLineSpacing.DataBindings.Add("Value", Song.TranslationText, "LineSpacing", false, DataSourceUpdateMode.OnPropertyChanged);
-            numericUpDownTranslationTextOutline.DataBindings.Add("Value", Song.TranslationText.Outline, "Width", false, DataSourceUpdateMode.OnPropertyChanged);
-            numericUpDownTranslationTextShadow.DataBindings.Add("Value", Song.TranslationText.Shadow, "Distance", false, DataSourceUpdateMode.OnPropertyChanged);
-        }
-
         private void PopulateQa()
         {
+            textBoxComment.DataBindings.Add("Text", Song, "Comment");
             checkBoxQAImages.Checked = Song.HasQuailityIssue(SongQualityAssuranceIndicator.Images);
             checkBoxQASpelling.Checked = Song.HasQuailityIssue(SongQualityAssuranceIndicator.Spelling);
             checkBoxQATranslation.Checked = Song.HasQuailityIssue(SongQualityAssuranceIndicator.Translation);
             checkBoxQASegmentation.Checked = Song.HasQuailityIssue(SongQualityAssuranceIndicator.Segmentation);
-        }
-
-        private void PopulateOrientation()
-        {
-            comboBoxSlideHorizOrientation.DataSource = Enum.GetValues(typeof(HorizontalOrientation));
-            comboBoxSlideHorizOrientation.DataBindings.Add("SelectedItem", Song.TextOrientation, "Horizontal", false, DataSourceUpdateMode.OnPropertyChanged);
-
-            comboBoxSlideVertOrientation.DataSource = Enum.GetValues(typeof(VerticalOrientation));
-            comboBoxSlideVertOrientation.DataBindings.Add("SelectedItem", Song.TextOrientation, "Vertical", false, DataSourceUpdateMode.OnPropertyChanged);
         }
 
         private void PopulateLanguageBox()
@@ -440,60 +404,6 @@ namespace PraiseBase.Presenter.UI.Editor
         {
             checkBoxQASegmentation.ForeColor = checkBoxQASegmentation.Checked ? Color.Red : SystemColors.ControlText;
             Song.SetQualityIssue(SongQualityAssuranceIndicator.Segmentation, checkBoxQASegmentation.Checked);
-        }
-
-        private void buttonProjectionMasterFont_Click(object sender, EventArgs e)
-        {
-            FontDialog dlg = new FontDialog
-            {
-                Font = Song.MainText.Font
-            };
-            if (dlg.ShowDialog() == DialogResult.OK)
-            {
-                Song.MainText.Font = dlg.Font;
-                PreviewSlide();
-            }
-        }
-
-        private void buttonTranslationFont_Click(object sender, EventArgs e)
-        {
-            FontDialog dlg = new FontDialog
-            {
-                Font = Song.TranslationText.Font
-            };
-            if (dlg.ShowDialog() == DialogResult.OK)
-            {
-                Song.TranslationText.Font = dlg.Font;
-                PreviewSlide();
-            }
-        }
-
-        private void buttonChooseProjectionForeColor_Click(object sender, EventArgs e)
-        {
-            ColorDialog dlg = new ColorDialog
-            {
-                Color = Song.MainText.Color
-            };
-            if (dlg.ShowDialog() == DialogResult.OK)
-            {
-                Song.MainText.Color = dlg.Color;
-                buttonChooseProjectionForeColor.BackColor = Song.MainText.Color;
-                PreviewSlide();
-            }
-        }
-
-        private void buttonTranslationColor_Click(object sender, EventArgs e)
-        {
-            ColorDialog dlg = new ColorDialog
-            {
-                Color = Song.TranslationText.Color
-            };
-            if (dlg.ShowDialog() == DialogResult.OK)
-            {
-                Song.TranslationText.Color = dlg.Color;
-                buttonTranslationColor.BackColor = Song.TranslationText.Color;
-                PreviewSlide();
-            }
         }
 
         [SuppressMessage("ReSharper", "UnusedParameter.Local")]
@@ -847,60 +757,6 @@ namespace PraiseBase.Presenter.UI.Editor
 
         private void textBoxSongTranslation_KeyUp(object sender, KeyEventArgs e)
         {
-            PreviewSlide();
-        }
-
-        private void numericUpDownMainTextLineSpacing_ValueChanged(object sender, EventArgs e)
-        {
-            if (numericUpDownMainTextLineSpacing.DataBindings.Count > 0)
-            {
-                numericUpDownMainTextLineSpacing.DataBindings[0].WriteValue();
-            }
-            PreviewSlide();
-        }
-
-        private void numericUpDownTranslationTextLineSpacing_ValueChanged(object sender, EventArgs e)
-        {
-            if (numericUpDownTranslationTextLineSpacing.DataBindings.Count > 0)
-            {
-                numericUpDownTranslationTextLineSpacing.DataBindings[0].WriteValue();
-            }
-            PreviewSlide();
-        }
-
-        private void checkBoxOutlineEnabled_CheckedChanged(object sender, EventArgs e)
-        {
-            numericUpDownMainTextOutline.Enabled = checkBoxOutlineEnabled.Checked;
-            numericUpDownTranslationTextOutline.Enabled = checkBoxOutlineEnabled.Checked;
-            label20.Enabled = checkBoxOutlineEnabled.Checked;
-            label23.Enabled = checkBoxOutlineEnabled.Checked;
-        }
-
-        private void checkBoxShadowEnabled_CheckedChanged(object sender, EventArgs e)
-        {
-            numericUpDownMainTextShadow.Enabled = checkBoxShadowEnabled.Checked;
-            numericUpDownTranslationTextShadow.Enabled = checkBoxShadowEnabled.Checked;
-            numericUpDownShadowDirection.Enabled = checkBoxShadowEnabled.Checked;
-            label21.Enabled = checkBoxShadowEnabled.Checked;
-            label22.Enabled = checkBoxShadowEnabled.Checked;
-            label24.Enabled = checkBoxShadowEnabled.Checked;
-        }
-
-        private void comboBoxSlideHorizOrientation_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            if (comboBoxSlideHorizOrientation.DataBindings.Count > 0) 
-            {
-                comboBoxSlideHorizOrientation.DataBindings[0].WriteValue();
-            }
-            PreviewSlide();
-        }
-
-        private void comboBoxSlideVertOrientation_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            if (comboBoxSlideVertOrientation.DataBindings.Count > 0)
-            {
-                comboBoxSlideVertOrientation.DataBindings[0].WriteValue();
-            }
             PreviewSlide();
         }
 
