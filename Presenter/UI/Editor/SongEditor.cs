@@ -112,7 +112,7 @@ namespace PraiseBase.Presenter.UI.Editor
         /// <param name="e"></param>
         private void ShowNewForm(object sender, EventArgs e)
         {
-            SongTemplateUtil stm = new SongTemplateUtil(_settings);
+            SongTemplateMapper stm = new SongTemplateMapper(_settings);
             Song sng = stm.CreateNewSong();
             stm.ApplyFormattingFromSettings(sng);
 

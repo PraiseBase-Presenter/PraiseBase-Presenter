@@ -57,12 +57,12 @@ namespace PraiseBase.Presenter.UI.Editor
         /// <summary>
         /// Song template mapper instance
         /// </summary>
-        SongTemplateUtil _templateMapper;
+        SongTemplateMapper _templateMapper;
 
         public SongEditorChild(Settings settings, Song sng)
         {
             _settings = settings;
-            _templateMapper = new SongTemplateUtil(_settings);
+            _templateMapper = new SongTemplateMapper(_settings);
             Song = sng;
 
             InitializeComponent();

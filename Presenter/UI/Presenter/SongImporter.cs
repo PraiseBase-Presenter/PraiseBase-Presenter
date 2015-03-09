@@ -90,7 +90,7 @@ namespace PraiseBase.Presenter.UI.Presenter
 
         private void buttonImport_Click(object sender, EventArgs e)
         {
-            SongTemplateUtil stm = new SongTemplateUtil(settings);
+            SongTemplateMapper stm = new SongTemplateMapper(settings);
 
             List<String> filesToOpen = new List<string>();
             int cnt = 0;

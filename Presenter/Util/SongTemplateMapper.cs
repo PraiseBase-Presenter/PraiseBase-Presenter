@@ -5,11 +5,11 @@ using System;
 
 namespace PraiseBase.Presenter.Util
 {
-    public class SongTemplateUtil
+    public class SongTemplateMapper
     {
         private Settings _settings;
 
-        public SongTemplateUtil(Settings settings)
+        public SongTemplateMapper(Settings settings)
         {
             _settings = settings;
         }
