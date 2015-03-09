@@ -228,9 +228,8 @@ namespace PraiseBase.Presenter.UI.Editor
         {
             if (ActiveMdiChild != null)
             {
-                ValidateChildren();
-
                 SongEditorChild window = ((SongEditorChild)ActiveMdiChild);
+                window.ValidateChildren();
                 Console.WriteLine(@"prepare save, set hashcode " + window.Song.GetHashCode());
                 string fileName = Save(window.Song, ((EditorChildMetaData) window.Tag).Filename);
                 if (fileName != null)
@@ -252,9 +251,8 @@ namespace PraiseBase.Presenter.UI.Editor
         {
             if (ActiveMdiChild != null)
             {
-                ValidateChildren();
-
                 SongEditorChild window = ((SongEditorChild)ActiveMdiChild);
+                window.ValidateChildren();
                 Console.WriteLine(@"prepare save, set hashcode " + window.Song.GetHashCode());
                 string fileName = SaveAs(window.Song, null);
                 if (fileName != null)
