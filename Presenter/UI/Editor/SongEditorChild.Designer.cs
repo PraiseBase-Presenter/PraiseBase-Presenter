@@ -96,10 +96,6 @@
             this.buttonMoveDown = new System.Windows.Forms.Button();
             this.tabControlTextLayer = new System.Windows.Forms.TabControl();
             this.tabPageEffects = new System.Windows.Forms.TabPage();
-            this.label29 = new System.Windows.Forms.Label();
-            this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
-            this.label30 = new System.Windows.Forms.Label();
-            this.numericUpDown2 = new System.Windows.Forms.NumericUpDown();
             this.numericUpDownShadowDirection = new System.Windows.Forms.NumericUpDown();
             this.label25 = new System.Windows.Forms.Label();
             this.label24 = new System.Windows.Forms.Label();
@@ -140,8 +136,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxPreview)).BeginInit();
             this.tabControlTextLayer.SuspendLayout();
             this.tabPageEffects.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownShadowDirection)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownMainTextOutline)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownTranslationTextShadow)).BeginInit();
@@ -595,10 +589,6 @@
             // 
             // tabPageEffects
             // 
-            this.tabPageEffects.Controls.Add(this.label29);
-            this.tabPageEffects.Controls.Add(this.numericUpDown1);
-            this.tabPageEffects.Controls.Add(this.label30);
-            this.tabPageEffects.Controls.Add(this.numericUpDown2);
             this.tabPageEffects.Controls.Add(this.numericUpDownShadowDirection);
             this.tabPageEffects.Controls.Add(this.label25);
             this.tabPageEffects.Controls.Add(this.label24);
@@ -615,36 +605,6 @@
             resources.ApplyResources(this.tabPageEffects, "tabPageEffects");
             this.tabPageEffects.Name = "tabPageEffects";
             this.tabPageEffects.UseVisualStyleBackColor = true;
-            // 
-            // label29
-            // 
-            resources.ApplyResources(this.label29, "label29");
-            this.label29.Name = "label29";
-            // 
-            // numericUpDown1
-            // 
-            resources.ApplyResources(this.numericUpDown1, "numericUpDown1");
-            this.numericUpDown1.Maximum = new decimal(new int[] {
-            1000,
-            0,
-            0,
-            0});
-            this.numericUpDown1.Name = "numericUpDown1";
-            // 
-            // label30
-            // 
-            resources.ApplyResources(this.label30, "label30");
-            this.label30.Name = "label30";
-            // 
-            // numericUpDown2
-            // 
-            resources.ApplyResources(this.numericUpDown2, "numericUpDown2");
-            this.numericUpDown2.Maximum = new decimal(new int[] {
-            1000,
-            0,
-            0,
-            0});
-            this.numericUpDown2.Name = "numericUpDown2";
             // 
             // numericUpDownShadowDirection
             // 
@@ -917,8 +877,6 @@
             this.tabControlTextLayer.ResumeLayout(false);
             this.tabPageEffects.ResumeLayout(false);
             this.tabPageEffects.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownShadowDirection)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownMainTextOutline)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownTranslationTextShadow)).EndInit();
@@ -1027,9 +985,5 @@
         private System.Windows.Forms.ComboBox comboBoxSlideHorizOrientation;
         private System.Windows.Forms.ComboBox comboBoxSlideVertOrientation;
         private System.Windows.Forms.Label label28;
-        private System.Windows.Forms.Label label29;
-        private System.Windows.Forms.NumericUpDown numericUpDown1;
-        private System.Windows.Forms.Label label30;
-        private System.Windows.Forms.NumericUpDown numericUpDown2;
     }
 }

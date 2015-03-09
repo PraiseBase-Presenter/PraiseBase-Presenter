@@ -438,15 +438,6 @@
   <metadata name="slideContextMenu.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>156, 16</value>
   </metadata>
-  <data name="slideContextMenu.Size" type="System.Drawing.Size, System.Drawing">
-    <value>134, 136</value>
-  </data>
-  <data name="&gt;&gt;slideContextMenu.Name" xml:space="preserve">
-    <value>slideContextMenu</value>
-  </data>
-  <data name="&gt;&gt;slideContextMenu.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ContextMenuStrip, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
   <data name="neueFolieToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>133, 22</value>
   </data>
@@ -483,18 +474,18 @@
   <data name="löschenToolStripMenuItem1.Text" xml:space="preserve">
     <value>Löschen</value>
   </data>
+  <data name="slideContextMenu.Size" type="System.Drawing.Size, System.Drawing">
+    <value>134, 136</value>
+  </data>
+  <data name="&gt;&gt;slideContextMenu.Name" xml:space="preserve">
+    <value>slideContextMenu</value>
+  </data>
+  <data name="&gt;&gt;slideContextMenu.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ContextMenuStrip, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
   <metadata name="partContextMenu.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>295, 16</value>
   </metadata>
-  <data name="partContextMenu.Size" type="System.Drawing.Size, System.Drawing">
-    <value>147, 48</value>
-  </data>
-  <data name="&gt;&gt;partContextMenu.Name" xml:space="preserve">
-    <value>partContextMenu</value>
-  </data>
-  <data name="&gt;&gt;partContextMenu.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ContextMenuStrip, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
   <data name="umbenennenToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>146, 22</value>
   </data>
@@ -507,9 +498,24 @@
   <data name="löschenToolStripMenuItem2.Text" xml:space="preserve">
     <value>Löschen</value>
   </data>
+  <data name="partContextMenu.Size" type="System.Drawing.Size, System.Drawing">
+    <value>147, 48</value>
+  </data>
+  <data name="&gt;&gt;partContextMenu.Name" xml:space="preserve">
+    <value>partContextMenu</value>
+  </data>
+  <data name="&gt;&gt;partContextMenu.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ContextMenuStrip, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
   <metadata name="songContextMenu.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>432, 16</value>
   </metadata>
+  <data name="umbenennenToolStripMenuItem1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>146, 22</value>
+  </data>
+  <data name="umbenennenToolStripMenuItem1.Text" xml:space="preserve">
+    <value>Umbenennen</value>
+  </data>
   <data name="songContextMenu.Size" type="System.Drawing.Size, System.Drawing">
     <value>147, 26</value>
   </data>
@@ -518,135 +524,6 @@
   </data>
   <data name="&gt;&gt;songContextMenu.Type" xml:space="preserve">
     <value>System.Windows.Forms.ContextMenuStrip, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="umbenennenToolStripMenuItem1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>146, 22</value>
-  </data>
-  <data name="umbenennenToolStripMenuItem1.Text" xml:space="preserve">
-    <value>Umbenennen</value>
-  </data>
-  <data name="&gt;&gt;checkBoxQASegmentation.Name" xml:space="preserve">
-    <value>checkBoxQASegmentation</value>
-  </data>
-  <data name="&gt;&gt;checkBoxQASegmentation.Type" xml:space="preserve">
-    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;checkBoxQASegmentation.Parent" xml:space="preserve">
-    <value>tabPageFormatting</value>
-  </data>
-  <data name="&gt;&gt;checkBoxQASegmentation.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="&gt;&gt;label14.Name" xml:space="preserve">
-    <value>label14</value>
-  </data>
-  <data name="&gt;&gt;label14.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;label14.Parent" xml:space="preserve">
-    <value>tabPageFormatting</value>
-  </data>
-  <data name="&gt;&gt;label14.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="&gt;&gt;label2.Name" xml:space="preserve">
-    <value>label2</value>
-  </data>
-  <data name="&gt;&gt;label2.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;label2.Parent" xml:space="preserve">
-    <value>tabPageFormatting</value>
-  </data>
-  <data name="&gt;&gt;label2.ZOrder" xml:space="preserve">
-    <value>2</value>
-  </data>
-  <data name="&gt;&gt;checkBoxQATranslation.Name" xml:space="preserve">
-    <value>checkBoxQATranslation</value>
-  </data>
-  <data name="&gt;&gt;checkBoxQATranslation.Type" xml:space="preserve">
-    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;checkBoxQATranslation.Parent" xml:space="preserve">
-    <value>tabPageFormatting</value>
-  </data>
-  <data name="&gt;&gt;checkBoxQATranslation.ZOrder" xml:space="preserve">
-    <value>3</value>
-  </data>
-  <data name="&gt;&gt;textBoxComment.Name" xml:space="preserve">
-    <value>textBoxComment</value>
-  </data>
-  <data name="&gt;&gt;textBoxComment.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;textBoxComment.Parent" xml:space="preserve">
-    <value>tabPageFormatting</value>
-  </data>
-  <data name="&gt;&gt;textBoxComment.ZOrder" xml:space="preserve">
-    <value>4</value>
-  </data>
-  <data name="&gt;&gt;label13.Name" xml:space="preserve">
-    <value>label13</value>
-  </data>
-  <data name="&gt;&gt;label13.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;label13.Parent" xml:space="preserve">
-    <value>tabPageFormatting</value>
-  </data>
-  <data name="&gt;&gt;label13.ZOrder" xml:space="preserve">
-    <value>5</value>
-  </data>
-  <data name="&gt;&gt;checkBoxQAImages.Name" xml:space="preserve">
-    <value>checkBoxQAImages</value>
-  </data>
-  <data name="&gt;&gt;checkBoxQAImages.Type" xml:space="preserve">
-    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;checkBoxQAImages.Parent" xml:space="preserve">
-    <value>tabPageFormatting</value>
-  </data>
-  <data name="&gt;&gt;checkBoxQAImages.ZOrder" xml:space="preserve">
-    <value>6</value>
-  </data>
-  <data name="&gt;&gt;checkBoxQASpelling.Name" xml:space="preserve">
-    <value>checkBoxQASpelling</value>
-  </data>
-  <data name="&gt;&gt;checkBoxQASpelling.Type" xml:space="preserve">
-    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;checkBoxQASpelling.Parent" xml:space="preserve">
-    <value>tabPageFormatting</value>
-  </data>
-  <data name="&gt;&gt;checkBoxQASpelling.ZOrder" xml:space="preserve">
-    <value>7</value>
-  </data>
-  <data name="tabPageFormatting.Location" type="System.Drawing.Point, System.Drawing">
-    <value>4, 29</value>
-  </data>
-  <data name="tabPageFormatting.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>3, 3, 3, 3</value>
-  </data>
-  <data name="tabPageFormatting.Size" type="System.Drawing.Size, System.Drawing">
-    <value>204, 270</value>
-  </data>
-  <data name="tabPageFormatting.TabIndex" type="System.Int32, mscorlib">
-    <value>3</value>
-  </data>
-  <data name="tabPageFormatting.Text" xml:space="preserve">
-    <value>QA</value>
-  </data>
-  <data name="&gt;&gt;tabPageFormatting.Name" xml:space="preserve">
-    <value>tabPageFormatting</value>
-  </data>
-  <data name="&gt;&gt;tabPageFormatting.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;tabPageFormatting.Parent" xml:space="preserve">
-    <value>tabControlTextLayer</value>
-  </data>
-  <data name="&gt;&gt;tabPageFormatting.ZOrder" xml:space="preserve">
-    <value>1</value>
   </data>
   <data name="checkBoxQASegmentation.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Bottom, Left</value>
@@ -914,6 +791,33 @@
   </data>
   <data name="&gt;&gt;checkBoxQASpelling.ZOrder" xml:space="preserve">
     <value>7</value>
+  </data>
+  <data name="tabPageFormatting.Location" type="System.Drawing.Point, System.Drawing">
+    <value>4, 29</value>
+  </data>
+  <data name="tabPageFormatting.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>3, 3, 3, 3</value>
+  </data>
+  <data name="tabPageFormatting.Size" type="System.Drawing.Size, System.Drawing">
+    <value>204, 270</value>
+  </data>
+  <data name="tabPageFormatting.TabIndex" type="System.Int32, mscorlib">
+    <value>3</value>
+  </data>
+  <data name="tabPageFormatting.Text" xml:space="preserve">
+    <value>QA</value>
+  </data>
+  <data name="&gt;&gt;tabPageFormatting.Name" xml:space="preserve">
+    <value>tabPageFormatting</value>
+  </data>
+  <data name="&gt;&gt;tabPageFormatting.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;tabPageFormatting.Parent" xml:space="preserve">
+    <value>tabControlTextLayer</value>
+  </data>
+  <data name="&gt;&gt;tabPageFormatting.ZOrder" xml:space="preserve">
+    <value>1</value>
   </data>
   <data name="checkedListBoxTags.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Bottom, Left, Right</value>
@@ -1203,6 +1107,24 @@
   <data name="panelPreview.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Bottom, Left, Right</value>
   </data>
+  <data name="pictureBoxPreview.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>None</value>
+  </data>
+  <data name="pictureBoxPreview.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="pictureBoxPreview.Location" type="System.Drawing.Point, System.Drawing">
+    <value>55, 18</value>
+  </data>
+  <data name="pictureBoxPreview.Size" type="System.Drawing.Size, System.Drawing">
+    <value>377, 267</value>
+  </data>
+  <data name="pictureBoxPreview.SizeMode" type="System.Windows.Forms.PictureBoxSizeMode, System.Windows.Forms">
+    <value>StretchImage</value>
+  </data>
+  <data name="pictureBoxPreview.TabIndex" type="System.Int32, mscorlib">
+    <value>95</value>
+  </data>
   <data name="&gt;&gt;pictureBoxPreview.Name" xml:space="preserve">
     <value>pictureBoxPreview</value>
   </data>
@@ -1235,36 +1157,6 @@
   </data>
   <data name="&gt;&gt;panelPreview.ZOrder" xml:space="preserve">
     <value>27</value>
-  </data>
-  <data name="pictureBoxPreview.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>None</value>
-  </data>
-  <data name="pictureBoxPreview.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="pictureBoxPreview.Location" type="System.Drawing.Point, System.Drawing">
-    <value>55, 18</value>
-  </data>
-  <data name="pictureBoxPreview.Size" type="System.Drawing.Size, System.Drawing">
-    <value>377, 267</value>
-  </data>
-  <data name="pictureBoxPreview.SizeMode" type="System.Windows.Forms.PictureBoxSizeMode, System.Windows.Forms">
-    <value>StretchImage</value>
-  </data>
-  <data name="pictureBoxPreview.TabIndex" type="System.Int32, mscorlib">
-    <value>95</value>
-  </data>
-  <data name="&gt;&gt;pictureBoxPreview.Name" xml:space="preserve">
-    <value>pictureBoxPreview</value>
-  </data>
-  <data name="&gt;&gt;pictureBoxPreview.Type" xml:space="preserve">
-    <value>System.Windows.Forms.PictureBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;pictureBoxPreview.Parent" xml:space="preserve">
-    <value>panelPreview</value>
-  </data>
-  <data name="&gt;&gt;pictureBoxPreview.ZOrder" xml:space="preserve">
-    <value>0</value>
   </data>
   <data name="labelGUID.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Bottom, Left</value>
@@ -1965,393 +1857,6 @@
   <data name="tabControlTextLayer.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Bottom, Right</value>
   </data>
-  <data name="&gt;&gt;tabPageEffects.Name" xml:space="preserve">
-    <value>tabPageEffects</value>
-  </data>
-  <data name="&gt;&gt;tabPageEffects.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;tabPageEffects.Parent" xml:space="preserve">
-    <value>tabControlTextLayer</value>
-  </data>
-  <data name="&gt;&gt;tabPageEffects.ZOrder" xml:space="preserve">
-    <value>2</value>
-  </data>
-  <data name="tabControlTextLayer.ItemSize" type="System.Drawing.Size, System.Drawing">
-    <value>60, 25</value>
-  </data>
-  <data name="tabControlTextLayer.Location" type="System.Drawing.Point, System.Drawing">
-    <value>770, 259</value>
-  </data>
-  <data name="tabControlTextLayer.Size" type="System.Drawing.Size, System.Drawing">
-    <value>212, 303</value>
-  </data>
-  <data name="tabControlTextLayer.TabIndex" type="System.Int32, mscorlib">
-    <value>88</value>
-  </data>
-  <data name="&gt;&gt;tabControlTextLayer.Name" xml:space="preserve">
-    <value>tabControlTextLayer</value>
-  </data>
-  <data name="&gt;&gt;tabControlTextLayer.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TabControl, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;tabControlTextLayer.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;tabControlTextLayer.ZOrder" xml:space="preserve">
-    <value>23</value>
-  </data>
-  <data name="&gt;&gt;label29.Name" xml:space="preserve">
-    <value>label29</value>
-  </data>
-  <data name="&gt;&gt;label29.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;label29.Parent" xml:space="preserve">
-    <value>tabPageEffects</value>
-  </data>
-  <data name="&gt;&gt;label29.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="&gt;&gt;numericUpDown1.Name" xml:space="preserve">
-    <value>numericUpDown1</value>
-  </data>
-  <data name="&gt;&gt;numericUpDown1.Type" xml:space="preserve">
-    <value>System.Windows.Forms.NumericUpDown, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;numericUpDown1.Parent" xml:space="preserve">
-    <value>tabPageEffects</value>
-  </data>
-  <data name="&gt;&gt;numericUpDown1.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="&gt;&gt;label30.Name" xml:space="preserve">
-    <value>label30</value>
-  </data>
-  <data name="&gt;&gt;label30.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;label30.Parent" xml:space="preserve">
-    <value>tabPageEffects</value>
-  </data>
-  <data name="&gt;&gt;label30.ZOrder" xml:space="preserve">
-    <value>2</value>
-  </data>
-  <data name="&gt;&gt;numericUpDown2.Name" xml:space="preserve">
-    <value>numericUpDown2</value>
-  </data>
-  <data name="&gt;&gt;numericUpDown2.Type" xml:space="preserve">
-    <value>System.Windows.Forms.NumericUpDown, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;numericUpDown2.Parent" xml:space="preserve">
-    <value>tabPageEffects</value>
-  </data>
-  <data name="&gt;&gt;numericUpDown2.ZOrder" xml:space="preserve">
-    <value>3</value>
-  </data>
-  <data name="&gt;&gt;numericUpDownShadowDirection.Name" xml:space="preserve">
-    <value>numericUpDownShadowDirection</value>
-  </data>
-  <data name="&gt;&gt;numericUpDownShadowDirection.Type" xml:space="preserve">
-    <value>System.Windows.Forms.NumericUpDown, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;numericUpDownShadowDirection.Parent" xml:space="preserve">
-    <value>tabPageEffects</value>
-  </data>
-  <data name="&gt;&gt;numericUpDownShadowDirection.ZOrder" xml:space="preserve">
-    <value>4</value>
-  </data>
-  <data name="&gt;&gt;label25.Name" xml:space="preserve">
-    <value>label25</value>
-  </data>
-  <data name="&gt;&gt;label25.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;label25.Parent" xml:space="preserve">
-    <value>tabPageEffects</value>
-  </data>
-  <data name="&gt;&gt;label25.ZOrder" xml:space="preserve">
-    <value>5</value>
-  </data>
-  <data name="&gt;&gt;label24.Name" xml:space="preserve">
-    <value>label24</value>
-  </data>
-  <data name="&gt;&gt;label24.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;label24.Parent" xml:space="preserve">
-    <value>tabPageEffects</value>
-  </data>
-  <data name="&gt;&gt;label24.ZOrder" xml:space="preserve">
-    <value>6</value>
-  </data>
-  <data name="&gt;&gt;checkBoxShadowEnabled.Name" xml:space="preserve">
-    <value>checkBoxShadowEnabled</value>
-  </data>
-  <data name="&gt;&gt;checkBoxShadowEnabled.Type" xml:space="preserve">
-    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;checkBoxShadowEnabled.Parent" xml:space="preserve">
-    <value>tabPageEffects</value>
-  </data>
-  <data name="&gt;&gt;checkBoxShadowEnabled.ZOrder" xml:space="preserve">
-    <value>7</value>
-  </data>
-  <data name="&gt;&gt;checkBoxOutlineEnabled.Name" xml:space="preserve">
-    <value>checkBoxOutlineEnabled</value>
-  </data>
-  <data name="&gt;&gt;checkBoxOutlineEnabled.Type" xml:space="preserve">
-    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;checkBoxOutlineEnabled.Parent" xml:space="preserve">
-    <value>tabPageEffects</value>
-  </data>
-  <data name="&gt;&gt;checkBoxOutlineEnabled.ZOrder" xml:space="preserve">
-    <value>8</value>
-  </data>
-  <data name="&gt;&gt;label20.Name" xml:space="preserve">
-    <value>label20</value>
-  </data>
-  <data name="&gt;&gt;label20.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;label20.Parent" xml:space="preserve">
-    <value>tabPageEffects</value>
-  </data>
-  <data name="&gt;&gt;label20.ZOrder" xml:space="preserve">
-    <value>9</value>
-  </data>
-  <data name="&gt;&gt;numericUpDownMainTextOutline.Name" xml:space="preserve">
-    <value>numericUpDownMainTextOutline</value>
-  </data>
-  <data name="&gt;&gt;numericUpDownMainTextOutline.Type" xml:space="preserve">
-    <value>System.Windows.Forms.NumericUpDown, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;numericUpDownMainTextOutline.Parent" xml:space="preserve">
-    <value>tabPageEffects</value>
-  </data>
-  <data name="&gt;&gt;numericUpDownMainTextOutline.ZOrder" xml:space="preserve">
-    <value>10</value>
-  </data>
-  <data name="&gt;&gt;numericUpDownTranslationTextShadow.Name" xml:space="preserve">
-    <value>numericUpDownTranslationTextShadow</value>
-  </data>
-  <data name="&gt;&gt;numericUpDownTranslationTextShadow.Type" xml:space="preserve">
-    <value>System.Windows.Forms.NumericUpDown, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;numericUpDownTranslationTextShadow.Parent" xml:space="preserve">
-    <value>tabPageEffects</value>
-  </data>
-  <data name="&gt;&gt;numericUpDownTranslationTextShadow.ZOrder" xml:space="preserve">
-    <value>11</value>
-  </data>
-  <data name="&gt;&gt;label23.Name" xml:space="preserve">
-    <value>label23</value>
-  </data>
-  <data name="&gt;&gt;label23.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;label23.Parent" xml:space="preserve">
-    <value>tabPageEffects</value>
-  </data>
-  <data name="&gt;&gt;label23.ZOrder" xml:space="preserve">
-    <value>12</value>
-  </data>
-  <data name="&gt;&gt;label22.Name" xml:space="preserve">
-    <value>label22</value>
-  </data>
-  <data name="&gt;&gt;label22.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;label22.Parent" xml:space="preserve">
-    <value>tabPageEffects</value>
-  </data>
-  <data name="&gt;&gt;label22.ZOrder" xml:space="preserve">
-    <value>13</value>
-  </data>
-  <data name="&gt;&gt;numericUpDownTranslationTextOutline.Name" xml:space="preserve">
-    <value>numericUpDownTranslationTextOutline</value>
-  </data>
-  <data name="&gt;&gt;numericUpDownTranslationTextOutline.Type" xml:space="preserve">
-    <value>System.Windows.Forms.NumericUpDown, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;numericUpDownTranslationTextOutline.Parent" xml:space="preserve">
-    <value>tabPageEffects</value>
-  </data>
-  <data name="&gt;&gt;numericUpDownTranslationTextOutline.ZOrder" xml:space="preserve">
-    <value>14</value>
-  </data>
-  <data name="&gt;&gt;numericUpDownMainTextShadow.Name" xml:space="preserve">
-    <value>numericUpDownMainTextShadow</value>
-  </data>
-  <data name="&gt;&gt;numericUpDownMainTextShadow.Type" xml:space="preserve">
-    <value>System.Windows.Forms.NumericUpDown, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;numericUpDownMainTextShadow.Parent" xml:space="preserve">
-    <value>tabPageEffects</value>
-  </data>
-  <data name="&gt;&gt;numericUpDownMainTextShadow.ZOrder" xml:space="preserve">
-    <value>15</value>
-  </data>
-  <data name="&gt;&gt;label21.Name" xml:space="preserve">
-    <value>label21</value>
-  </data>
-  <data name="&gt;&gt;label21.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;label21.Parent" xml:space="preserve">
-    <value>tabPageEffects</value>
-  </data>
-  <data name="&gt;&gt;label21.ZOrder" xml:space="preserve">
-    <value>16</value>
-  </data>
-  <data name="tabPageEffects.Location" type="System.Drawing.Point, System.Drawing">
-    <value>4, 29</value>
-  </data>
-  <data name="tabPageEffects.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>3, 3, 3, 3</value>
-  </data>
-  <data name="tabPageEffects.Size" type="System.Drawing.Size, System.Drawing">
-    <value>204, 270</value>
-  </data>
-  <data name="tabPageEffects.TabIndex" type="System.Int32, mscorlib">
-    <value>4</value>
-  </data>
-  <data name="tabPageEffects.Text" xml:space="preserve">
-    <value>Effekte</value>
-  </data>
-  <data name="&gt;&gt;tabPageEffects.Name" xml:space="preserve">
-    <value>tabPageEffects</value>
-  </data>
-  <data name="&gt;&gt;tabPageEffects.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;tabPageEffects.Parent" xml:space="preserve">
-    <value>tabControlTextLayer</value>
-  </data>
-  <data name="&gt;&gt;tabPageEffects.ZOrder" xml:space="preserve">
-    <value>2</value>
-  </data>
-  <data name="label29.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="label29.Enabled" type="System.Boolean, mscorlib">
-    <value>False</value>
-  </data>
-  <data name="label29.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Microsoft Sans Serif, 8.25pt</value>
-  </data>
-  <data name="label29.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="label29.Location" type="System.Drawing.Point, System.Drawing">
-    <value>28, 83</value>
-  </data>
-  <data name="label29.Size" type="System.Drawing.Size, System.Drawing">
-    <value>54, 13</value>
-  </data>
-  <data name="label29.TabIndex" type="System.Int32, mscorlib">
-    <value>137</value>
-  </data>
-  <data name="label29.Text" xml:space="preserve">
-    <value>Copyright:</value>
-  </data>
-  <data name="&gt;&gt;label29.Name" xml:space="preserve">
-    <value>label29</value>
-  </data>
-  <data name="&gt;&gt;label29.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;label29.Parent" xml:space="preserve">
-    <value>tabPageEffects</value>
-  </data>
-  <data name="&gt;&gt;label29.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="numericUpDown1.Enabled" type="System.Boolean, mscorlib">
-    <value>False</value>
-  </data>
-  <data name="numericUpDown1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>111, 81</value>
-  </data>
-  <data name="numericUpDown1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>46, 20</value>
-  </data>
-  <data name="numericUpDown1.TabIndex" type="System.Int32, mscorlib">
-    <value>138</value>
-  </data>
-  <data name="&gt;&gt;numericUpDown1.Name" xml:space="preserve">
-    <value>numericUpDown1</value>
-  </data>
-  <data name="&gt;&gt;numericUpDown1.Type" xml:space="preserve">
-    <value>System.Windows.Forms.NumericUpDown, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;numericUpDown1.Parent" xml:space="preserve">
-    <value>tabPageEffects</value>
-  </data>
-  <data name="&gt;&gt;numericUpDown1.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="label30.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="label30.Enabled" type="System.Boolean, mscorlib">
-    <value>False</value>
-  </data>
-  <data name="label30.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Microsoft Sans Serif, 8.25pt</value>
-  </data>
-  <data name="label30.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="label30.Location" type="System.Drawing.Point, System.Drawing">
-    <value>28, 107</value>
-  </data>
-  <data name="label30.Size" type="System.Drawing.Size, System.Drawing">
-    <value>40, 13</value>
-  </data>
-  <data name="label30.TabIndex" type="System.Int32, mscorlib">
-    <value>139</value>
-  </data>
-  <data name="label30.Text" xml:space="preserve">
-    <value>Quelle:</value>
-  </data>
-  <data name="&gt;&gt;label30.Name" xml:space="preserve">
-    <value>label30</value>
-  </data>
-  <data name="&gt;&gt;label30.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;label30.Parent" xml:space="preserve">
-    <value>tabPageEffects</value>
-  </data>
-  <data name="&gt;&gt;label30.ZOrder" xml:space="preserve">
-    <value>2</value>
-  </data>
-  <data name="numericUpDown2.Enabled" type="System.Boolean, mscorlib">
-    <value>False</value>
-  </data>
-  <data name="numericUpDown2.Location" type="System.Drawing.Point, System.Drawing">
-    <value>111, 105</value>
-  </data>
-  <data name="numericUpDown2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>46, 20</value>
-  </data>
-  <data name="numericUpDown2.TabIndex" type="System.Int32, mscorlib">
-    <value>140</value>
-  </data>
-  <data name="&gt;&gt;numericUpDown2.Name" xml:space="preserve">
-    <value>numericUpDown2</value>
-  </data>
-  <data name="&gt;&gt;numericUpDown2.Type" xml:space="preserve">
-    <value>System.Windows.Forms.NumericUpDown, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;numericUpDown2.Parent" xml:space="preserve">
-    <value>tabPageEffects</value>
-  </data>
-  <data name="&gt;&gt;numericUpDown2.ZOrder" xml:space="preserve">
-    <value>3</value>
-  </data>
   <data name="numericUpDownShadowDirection.Enabled" type="System.Boolean, mscorlib">
     <value>False</value>
   </data>
@@ -2374,7 +1879,7 @@
     <value>tabPageEffects</value>
   </data>
   <data name="&gt;&gt;numericUpDownShadowDirection.ZOrder" xml:space="preserve">
-    <value>4</value>
+    <value>0</value>
   </data>
   <data name="label25.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -2410,7 +1915,7 @@
     <value>tabPageEffects</value>
   </data>
   <data name="&gt;&gt;label25.ZOrder" xml:space="preserve">
-    <value>5</value>
+    <value>1</value>
   </data>
   <data name="label24.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -2446,7 +1951,7 @@
     <value>tabPageEffects</value>
   </data>
   <data name="&gt;&gt;label24.ZOrder" xml:space="preserve">
-    <value>6</value>
+    <value>2</value>
   </data>
   <data name="checkBoxShadowEnabled.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -2479,7 +1984,7 @@
     <value>tabPageEffects</value>
   </data>
   <data name="&gt;&gt;checkBoxShadowEnabled.ZOrder" xml:space="preserve">
-    <value>7</value>
+    <value>3</value>
   </data>
   <data name="checkBoxOutlineEnabled.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -2512,7 +2017,7 @@
     <value>tabPageEffects</value>
   </data>
   <data name="&gt;&gt;checkBoxOutlineEnabled.ZOrder" xml:space="preserve">
-    <value>8</value>
+    <value>4</value>
   </data>
   <data name="label20.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -2548,7 +2053,7 @@
     <value>tabPageEffects</value>
   </data>
   <data name="&gt;&gt;label20.ZOrder" xml:space="preserve">
-    <value>9</value>
+    <value>5</value>
   </data>
   <data name="numericUpDownMainTextOutline.Enabled" type="System.Boolean, mscorlib">
     <value>False</value>
@@ -2572,7 +2077,7 @@
     <value>tabPageEffects</value>
   </data>
   <data name="&gt;&gt;numericUpDownMainTextOutline.ZOrder" xml:space="preserve">
-    <value>10</value>
+    <value>6</value>
   </data>
   <data name="numericUpDownTranslationTextShadow.Enabled" type="System.Boolean, mscorlib">
     <value>False</value>
@@ -2596,7 +2101,7 @@
     <value>tabPageEffects</value>
   </data>
   <data name="&gt;&gt;numericUpDownTranslationTextShadow.ZOrder" xml:space="preserve">
-    <value>11</value>
+    <value>7</value>
   </data>
   <data name="label23.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -2632,7 +2137,7 @@
     <value>tabPageEffects</value>
   </data>
   <data name="&gt;&gt;label23.ZOrder" xml:space="preserve">
-    <value>12</value>
+    <value>8</value>
   </data>
   <data name="label22.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -2668,7 +2173,7 @@
     <value>tabPageEffects</value>
   </data>
   <data name="&gt;&gt;label22.ZOrder" xml:space="preserve">
-    <value>13</value>
+    <value>9</value>
   </data>
   <data name="numericUpDownTranslationTextOutline.Enabled" type="System.Boolean, mscorlib">
     <value>False</value>
@@ -2692,7 +2197,7 @@
     <value>tabPageEffects</value>
   </data>
   <data name="&gt;&gt;numericUpDownTranslationTextOutline.ZOrder" xml:space="preserve">
-    <value>14</value>
+    <value>10</value>
   </data>
   <data name="numericUpDownMainTextShadow.Enabled" type="System.Boolean, mscorlib">
     <value>False</value>
@@ -2716,7 +2221,7 @@
     <value>tabPageEffects</value>
   </data>
   <data name="&gt;&gt;numericUpDownMainTextShadow.ZOrder" xml:space="preserve">
-    <value>15</value>
+    <value>11</value>
   </data>
   <data name="label21.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -2752,7 +2257,58 @@
     <value>tabPageEffects</value>
   </data>
   <data name="&gt;&gt;label21.ZOrder" xml:space="preserve">
-    <value>16</value>
+    <value>12</value>
+  </data>
+  <data name="tabPageEffects.Location" type="System.Drawing.Point, System.Drawing">
+    <value>4, 29</value>
+  </data>
+  <data name="tabPageEffects.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>3, 3, 3, 3</value>
+  </data>
+  <data name="tabPageEffects.Size" type="System.Drawing.Size, System.Drawing">
+    <value>204, 270</value>
+  </data>
+  <data name="tabPageEffects.TabIndex" type="System.Int32, mscorlib">
+    <value>4</value>
+  </data>
+  <data name="tabPageEffects.Text" xml:space="preserve">
+    <value>Effekte</value>
+  </data>
+  <data name="&gt;&gt;tabPageEffects.Name" xml:space="preserve">
+    <value>tabPageEffects</value>
+  </data>
+  <data name="&gt;&gt;tabPageEffects.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;tabPageEffects.Parent" xml:space="preserve">
+    <value>tabControlTextLayer</value>
+  </data>
+  <data name="&gt;&gt;tabPageEffects.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="tabControlTextLayer.ItemSize" type="System.Drawing.Size, System.Drawing">
+    <value>60, 25</value>
+  </data>
+  <data name="tabControlTextLayer.Location" type="System.Drawing.Point, System.Drawing">
+    <value>770, 259</value>
+  </data>
+  <data name="tabControlTextLayer.Size" type="System.Drawing.Size, System.Drawing">
+    <value>212, 303</value>
+  </data>
+  <data name="tabControlTextLayer.TabIndex" type="System.Int32, mscorlib">
+    <value>88</value>
+  </data>
+  <data name="&gt;&gt;tabControlTextLayer.Name" xml:space="preserve">
+    <value>tabControlTextLayer</value>
+  </data>
+  <data name="&gt;&gt;tabControlTextLayer.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TabControl, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;tabControlTextLayer.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;tabControlTextLayer.ZOrder" xml:space="preserve">
+    <value>23</value>
   </data>
   <data name="label1.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Right</value>
