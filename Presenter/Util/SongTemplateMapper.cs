@@ -7,7 +7,7 @@ namespace PraiseBase.Presenter.Util
 {
     public class SongTemplateMapper
     {
-        private Settings _settings;
+        private readonly Settings _settings;
 
         public SongTemplateMapper(Settings settings)
         {
