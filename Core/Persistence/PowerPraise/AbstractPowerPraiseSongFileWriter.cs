@@ -92,7 +92,8 @@ namespace PraiseBase.Presenter.Persistence.PowerPraise
                     XmlElement tn2 = xmlDoc.CreateElement("slide");
 
                     // Slide-specific text size
-                    tn2.SetAttribute("mainsize", sld.MainSize > 0 ? sld.MainSize.ToString() : sng.MainTextFontFormatting.Font.Size.ToString());
+                    int mainsize = sld.MainSize > 0 ? sld.MainSize : (int)sng.MainTextFontFormatting.Font.Size;
+                    tn2.SetAttribute("mainsize", mainsize.ToString());
 
                     // Image number
                     sld.BackgroundNr = Math.Min(numBackgrounds - 1, Math.Max(0, sld.BackgroundNr));
@@ -279,7 +280,7 @@ namespace PraiseBase.Presenter.Persistence.PowerPraise
             elem[key].AppendChild(xmlDoc.CreateElement("name"));
             elem[key]["name"].InnerText = f.Font.Name;
             elem[key].AppendChild(xmlDoc.CreateElement("size"));
-            elem[key]["size"].InnerText = f.Font.Size.ToString();
+            elem[key]["size"].InnerText = ((int)f.Font.Size).ToString();
             elem[key].AppendChild(xmlDoc.CreateElement("bold"));
             elem[key]["bold"].InnerText = (f.Font.Bold).ToString().ToLower();
             elem[key].AppendChild(xmlDoc.CreateElement("italic"));
