@@ -15,7 +15,7 @@ namespace PraiseBase.Presenter.UI.Presenter
     {
         private ImportFormat _format;
 
-        private Settings settings;
+        private Settings _settings;
 
         /// <summary>
         /// List of songs to be opened in the editor
@@ -28,7 +28,7 @@ namespace PraiseBase.Presenter.UI.Presenter
         /// <param name="importFormat">Import type</param>
         public SongImporter(Settings settings, ImportFormat importFormat)
         {
-            this.settings = settings;
+            _settings = settings;
             _format = importFormat;
             InitializeComponent();
         }
@@ -90,7 +90,7 @@ namespace PraiseBase.Presenter.UI.Presenter
 
         private void buttonImport_Click(object sender, EventArgs e)
         {
-            SongTemplateMapper stm = new SongTemplateMapper(settings);
+            SongTemplateMapper stm = new SongTemplateMapper(_settings);
 
             List<String> filesToOpen = new List<string>();
             int cnt = 0;
@@ -106,8 +106,8 @@ namespace PraiseBase.Presenter.UI.Presenter
 
                     // TODO: Allow selection of plugin
                     ISongFilePlugin filePlugin = SongFilePluginFactory.Create(SongFilePluginFactory.GetWriterPlugins().First().GetType());
-                    string fileName = settings.DataDirectory + Path.DirectorySeparatorChar
-                        + settings.SongDir + Path.DirectorySeparatorChar
+                    string fileName = _settings.DataDirectory + Path.DirectorySeparatorChar
+                        + _settings.SongDir + Path.DirectorySeparatorChar
                         + sng.Title + filePlugin.GetFileExtension();
                     if ((File.Exists(fileName) && (MessageBox.Show(string.Format(Properties.StringResources.SongExistsAlready, ((Song)listViewSongs.Items[x].Tag).Title) 
                         + " " + Properties.StringResources.Overwrite + "?", Properties.StringResources.SongImporter, 
