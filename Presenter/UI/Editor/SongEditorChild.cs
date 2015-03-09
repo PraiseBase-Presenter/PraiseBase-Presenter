@@ -356,7 +356,10 @@ namespace PraiseBase.Presenter.UI.Editor
         [SuppressMessage("ReSharper", "UnusedParameter.Local")]
         private void buttonAddNewSlide_Click(object sender, EventArgs e)
         {
-            SongSlide sld = new SongSlide();
+            SongSlide sld = new SongSlide
+            {
+                Background = GetDefaultBackground()
+            };
             Song.Parts[_currentPartId].Slides.Add(sld);
             PopulateTree();
             treeViewContents.SelectedNode = treeViewContents.Nodes[_currentPartId].LastNode;
