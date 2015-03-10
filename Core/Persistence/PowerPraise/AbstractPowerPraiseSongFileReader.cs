@@ -417,7 +417,10 @@ namespace PraiseBase.Presenter.Persistence.PowerPraise
                     shadow.Color = PowerPraiseFileUtil.ConvertColor(tryColor);
                 }
                 int shadowDirection;
-                int.TryParse(elem["direction"].InnerText, out shadowDirection);
+                if (int.TryParse(elem["direction"].InnerText, out shadowDirection))
+                {
+                    shadow.Direction = shadowDirection;
+                }
             }
             return shadow;
         }
