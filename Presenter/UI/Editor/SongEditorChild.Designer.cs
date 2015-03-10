@@ -55,7 +55,6 @@
             this.tabPageFormatting = new System.Windows.Forms.TabPage();
             this.checkBoxQASegmentation = new System.Windows.Forms.CheckBox();
             this.label14 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
             this.checkBoxQATranslation = new System.Windows.Forms.CheckBox();
             this.textBoxComment = new System.Windows.Forms.TextBox();
             this.label13 = new System.Windows.Forms.Label();
@@ -265,7 +264,6 @@
             // 
             this.tabPageFormatting.Controls.Add(this.checkBoxQASegmentation);
             this.tabPageFormatting.Controls.Add(this.label14);
-            this.tabPageFormatting.Controls.Add(this.label2);
             this.tabPageFormatting.Controls.Add(this.checkBoxQATranslation);
             this.tabPageFormatting.Controls.Add(this.textBoxComment);
             this.tabPageFormatting.Controls.Add(this.label13);
@@ -286,11 +284,6 @@
             // 
             resources.ApplyResources(this.label14, "label14");
             this.label14.Name = "label14";
-            // 
-            // label2
-            // 
-            resources.ApplyResources(this.label2, "label2");
-            this.label2.Name = "label2";
             // 
             // checkBoxQATranslation
             // 
@@ -586,7 +579,6 @@
 		private System.Windows.Forms.ContextMenuStrip songContextMenu;
         private System.Windows.Forms.ToolStripMenuItem umbenennenToolStripMenuItem1;
         private System.Windows.Forms.TabPage tabPageFormatting;
-        private System.Windows.Forms.Label label2;
         private System.Windows.Forms.TabPage tabPageContent;
         private System.Windows.Forms.Button buttonDuplicateSlide;
         private System.Windows.Forms.TextBox textBoxCCLISongID;
