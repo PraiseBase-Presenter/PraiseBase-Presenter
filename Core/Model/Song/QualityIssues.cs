@@ -21,6 +21,7 @@
  */
 
 using System.Collections.Generic;
+using System.Linq;
 
 namespace PraiseBase.Presenter.Model.Song
 {
@@ -33,27 +34,18 @@ namespace PraiseBase.Presenter.Model.Song
         {
             unchecked
             {
-                int hash = 19;
-                foreach (var e in this)
-                {
-                    hash = hash * 31 + e.GetHashCode();
-                }
-                return hash;
+                return this.Aggregate(19, (current, e) => current*31 + e.GetHashCode());
             }
         }
 
         protected bool Equals(QualityIssues other)
         {
             if (Count != other.Count) return false;
-            foreach (var e in this)
+            if (this.Any(e => !other.Contains(e)))
             {
-                if (!other.Contains(e)) return false;
+                return false;
             }
-            foreach (var e in other)
-            {
-                if (!Contains(e)) return false;
-            }
-            return true;
+            return other.All(Contains);
         }
 
         public override bool Equals(object obj)
