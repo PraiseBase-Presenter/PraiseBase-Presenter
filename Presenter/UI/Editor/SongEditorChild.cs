@@ -108,10 +108,10 @@ namespace PraiseBase.Presenter.UI.Editor
         private void PopulateQa()
         {
             textBoxComment.DataBindings.Add("Text", Song, "Comment");
-            checkBoxQAImages.Checked = Song.HasQuailityIssue(SongQualityAssuranceIndicator.Images);
-            checkBoxQASpelling.Checked = Song.HasQuailityIssue(SongQualityAssuranceIndicator.Spelling);
-            checkBoxQATranslation.Checked = Song.HasQuailityIssue(SongQualityAssuranceIndicator.Translation);
-            checkBoxQASegmentation.Checked = Song.HasQuailityIssue(SongQualityAssuranceIndicator.Segmentation);
+            checkBoxQASpelling.Checked = Song.QualityIssues.Contains(SongQualityAssuranceIndicator.Spelling);
+            checkBoxQATranslation.Checked = Song.QualityIssues.Contains(SongQualityAssuranceIndicator.Translation);
+            checkBoxQAImages.Checked = Song.QualityIssues.Contains(SongQualityAssuranceIndicator.Images);
+            checkBoxQASegmentation.Checked = Song.QualityIssues.Contains(SongQualityAssuranceIndicator.Segmentation);
         }
 
         private void PopulateLanguageBox()
@@ -386,25 +386,25 @@ namespace PraiseBase.Presenter.UI.Editor
         private void checkBoxQASpelling_CheckedChanged(object sender, EventArgs e)
         {
             checkBoxQASpelling.ForeColor = checkBoxQASpelling.Checked ? Color.Red : SystemColors.ControlText;
-            Song.SetQualityIssue(SongQualityAssuranceIndicator.Spelling, checkBoxQASpelling.Checked);
+            Song.QualityIssues.Set(SongQualityAssuranceIndicator.Spelling, checkBoxQASpelling.Checked);
         }
 
         private void checkBoxQATranslation_CheckedChanged(object sender, EventArgs e)
         {
             checkBoxQATranslation.ForeColor = checkBoxQATranslation.Checked ? Color.Red : SystemColors.ControlText;
-            Song.SetQualityIssue(SongQualityAssuranceIndicator.Translation, checkBoxQATranslation.Checked);
+            Song.QualityIssues.Set(SongQualityAssuranceIndicator.Translation, checkBoxQATranslation.Checked);
         }
 
         private void checkBoxQAImages_CheckedChanged(object sender, EventArgs e)
         {
             checkBoxQAImages.ForeColor = checkBoxQAImages.Checked ? Color.Red : SystemColors.ControlText;
-            Song.SetQualityIssue(SongQualityAssuranceIndicator.Images, checkBoxQAImages.Checked);
+            Song.QualityIssues.Set(SongQualityAssuranceIndicator.Images, checkBoxQAImages.Checked);
         }
 
         private void checkBoxQASegmentation_CheckedChanged(object sender, EventArgs e)
         {
             checkBoxQASegmentation.ForeColor = checkBoxQASegmentation.Checked ? Color.Red : SystemColors.ControlText;
-            Song.SetQualityIssue(SongQualityAssuranceIndicator.Segmentation, checkBoxQASegmentation.Checked);
+            Song.QualityIssues.Set(SongQualityAssuranceIndicator.Segmentation, checkBoxQASegmentation.Checked);
         }
 
         [SuppressMessage("ReSharper", "UnusedParameter.Local")]

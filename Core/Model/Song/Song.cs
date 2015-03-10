@@ -263,41 +263,6 @@ namespace PraiseBase.Presenter.Model.Song
         }
 
         /// <summary>
-        /// Sets a specific quality assurance indicator
-        /// </summary>
-        /// <param name="quai">The indicator to be added</param>
-        /// <param name="set">True to set value</param>
-        public void SetQualityIssue(SongQualityAssuranceIndicator quai, bool set)
-        {
-            if (HasQuailityIssue(quai)) 
-            {
-                QualityIssues.Remove(quai);
-            }
-            else
-            {
-                QualityIssues.Add(quai);
-            }
-        }
-
-        /// <summary>
-        /// Returns if a specific quality assurance indicator is set
-        /// </summary>
-        /// <param name="quai">The desired indicator</param>
-        public bool HasQuailityIssue(SongQualityAssuranceIndicator quai)
-        {
-            return QualityIssues.IndexOf(quai) >= 0;
-        }
-
-        /// <summary>
-        /// Indicates îf the song has quality issues
-        /// </summary>
-        /// <returns></returns>
-        public bool HasAnyQualityIssues()
-        {
-            return QualityIssues.Count > 0;
-        }
-
-        /// <summary>
         /// Returns a hashcode of the song, used for example in the
         /// editor to check if the file was changed
         /// </summary>

@@ -33,10 +33,13 @@ namespace PraiseBase.Presenter.Persistence.PowerPraise.Extended
         /// <returns></returns>
         public Song Map(ExtendedPowerPraiseSong ppl)
         {
-            Song song = this.Map((PowerPraiseSong)ppl);
+            Song song = Map((PowerPraiseSong)ppl);
 
             song.Comment = ppl.Comment;
-            song.QualityIssues.AddRange(ppl.QualityIssues);
+            foreach (var e in ppl.QualityIssues)
+            {
+                song.QualityIssues.Add(e);
+            }
             song.CcliIdentifier = ppl.CcliID;
             song.Author.AddRange(ppl.Author);
             song.RightsManagement = ppl.RightsManagement;
@@ -53,10 +56,13 @@ namespace PraiseBase.Presenter.Persistence.PowerPraise.Extended
         /// <param name="ppl"></param>
         public void Map(Song song, ExtendedPowerPraiseSong ppl)
         {
-            this.Map(song, (PowerPraiseSong)ppl);
+            Map(song, (PowerPraiseSong)ppl);
             
             ppl.Comment = song.Comment;
-            ppl.QualityIssues.AddRange(song.QualityIssues);
+            foreach (var e in song.QualityIssues)
+            {
+                ppl.QualityIssues.Add(e);
+            }
             ppl.CcliID = song.CcliIdentifier;
             ppl.Author.AddRange(song.Author);
             ppl.RightsManagement = song.RightsManagement;

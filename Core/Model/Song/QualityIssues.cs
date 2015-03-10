@@ -27,19 +27,50 @@ namespace PraiseBase.Presenter.Model.Song
     /// <summary>
     /// Provides a list of all authors in the song
     /// </summary>
-    public class QualityIssues : List<SongQualityAssuranceIndicator>
+    public class QualityIssues : HashSet<SongQualityAssuranceIndicator>
     {
         public override int GetHashCode()
         {
             unchecked
             {
                 int hash = 19;
-                for (int i = 0; i < Count; i++)
+                foreach (var e in this)
                 {
-                    hash = hash * 31 + this[i].GetHashCode();
+                    hash = hash * 31 + e.GetHashCode();
                 }
                 return hash;
             }
+        }
+
+        protected bool Equals(QualityIssues other)
+        {
+            if (Count != other.Count) return false;
+            foreach (var e in this)
+            {
+                if (!other.Contains(e)) return false;
+            }
+            foreach (var e in other)
+            {
+                if (!Contains(e)) return false;
+            }
+            return true;
+        }
+
+        public override bool Equals(object obj)
+        {
+            if (ReferenceEquals(null, obj)) return false;
+            if (ReferenceEquals(this, obj)) return true;
+            if (obj.GetType() != GetType()) return false;
+            return Equals((QualityIssues)obj);
+        }
+
+        public bool Set(SongQualityAssuranceIndicator qa, bool set)
+        {
+            if (set)
+            {
+                return Add(qa);
+            }
+            return Remove(qa);
         }
     }
 }

@@ -113,7 +113,7 @@ namespace PraiseBase.Presenter.Persistence.PowerPraise.Extended
             }
             CollectionAssert.AreEqual(expected.PartSequence, actual.PartSequence, "Wrong part sequence");
 
-            CollectionAssert.AreEqual(expected.QualityIssues, actual.QualityIssues, "Wrong QA issues");
+            Assert.AreEqual(expected.QualityIssues, actual.QualityIssues, "Wrong QA issues");
 
             Assert.AreEqual(expected.MainText.Font, actual.MainText.Font);
             Assert.AreEqual(expected.MainText.Color.ToArgb(), actual.MainText.Color.ToArgb());
@@ -224,7 +224,7 @@ namespace PraiseBase.Presenter.Persistence.PowerPraise.Extended
             }
             CollectionAssert.AreEqual(expected.PartSequence, actual.PartSequence, "Wrong part sequence");
 
-            CollectionAssert.AreEqual(expected.QualityIssues, actual.QualityIssues, "Wrong QA issues");
+            Assert.AreEqual(expected.QualityIssues, actual.QualityIssues, "Wrong QA issues");
 
             Assert.AreEqual(expected.MainText.Font, actual.MainText.Font);
             Assert.AreEqual(expected.MainText.Color.ToArgb(), actual.MainText.Color.ToArgb());
