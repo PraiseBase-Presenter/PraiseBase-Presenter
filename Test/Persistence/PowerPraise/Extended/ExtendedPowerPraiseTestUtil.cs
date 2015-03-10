@@ -182,10 +182,10 @@ namespace PraiseBase.Presenter.Persistence.PowerPraise.Extended
             Song song = PowerPraiseTestUtil.GetExpectedSong();
 
             song.Comment = "Test";
-            song.GUID = new Guid("78dd30b2-078b-4eef-9767-dc41a6e6ab27");
+            song.Guid = new Guid("78dd30b2-078b-4eef-9767-dc41a6e6ab27");
             song.QualityIssues.Add(SongQualityAssuranceIndicator.Translation);
             song.QualityIssues.Add(SongQualityAssuranceIndicator.Segmentation);
-            song.CcliID = "12123";
+            song.CcliIdentifier = "12123";
             SongAuthor a = new SongAuthor();
             a.Name = "asd as d";
             song.Author.Add(a);

@@ -23,9 +23,8 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
-using PraiseBase.Presenter.Properties;
-using PraiseBase.Presenter.Model.Bible;
 using System.Text.RegularExpressions;
+using PraiseBase.Presenter.Model.Bible;
 using PraiseBase.Presenter.Persistence.ZefaniaXML;
 
 namespace PraiseBase.Presenter

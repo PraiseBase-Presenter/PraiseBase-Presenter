@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
-using System.Text;
 
 namespace PraiseBase.Presenter.Persistence
 {
@@ -58,7 +58,7 @@ namespace PraiseBase.Presenter.Persistence
         /// <returns></returns>
         public static ISongFilePlugin Create(string filename)
         {
-            string ext = System.IO.Path.GetExtension(filename);
+            string ext = Path.GetExtension(filename);
 
             if (SupportedExtensionMapping[ext] != null)
             {

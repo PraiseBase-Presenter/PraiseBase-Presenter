@@ -21,109 +21,354 @@
  */
 
 using System;
+using System.Diagnostics;
+using System.Globalization;
 using System.IO;
 using System.Linq;
+using System.Threading;
 using System.Windows.Forms;
-using PraiseBase.Presenter.Properties;
+using PraiseBase.Presenter.Forms;
+using PraiseBase.Presenter.Model.Song;
 using PraiseBase.Presenter.Persistence;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Globalization;
-using PraiseBase.Presenter.UI;
+using PraiseBase.Presenter.Properties;
+using PraiseBase.Presenter.UI.Presenter;
+using PraiseBase.Presenter.Util;
+using Timer = System.Windows.Forms.Timer;
 
-namespace PraiseBase.Presenter.Forms
+namespace PraiseBase.Presenter.UI.Editor
 {
     public partial class SongEditor : LocalizableForm
     {
-        static private SongEditor _instance;
+        #region internalVariables
 
-        public string fileBoxInitialDir;
-        public int fileOpenBoxFilterIndex;
-        public int fileSaveBoxFilterIndex;
+        /// <summary>
+        /// Initial directory of file open/save dialog
+        /// </summary>
+        private string _fileBoxInitialDir;
 
-        private int childFormNumber = 0;
+        /// <summary>
+        /// Type filter index of file open dialog
+        /// </summary>
+        private int _fileOpenBoxFilterIndex;
 
-        private SongEditor()
+        /// <summary>
+        /// Type filter index of file save dialog
+        /// </summary>
+        private int _fileSaveBoxFilterIndex;
+
+        /// <summary>
+        /// Number of open child forms
+        /// </summary>
+        private int _childFormNumber;
+        
+        /// <summary>
+        /// Settings instance holder
+        /// </summary>
+        private readonly Settings _settings;
+
+        #endregion
+
+        private const int StatusMessageDuration = 2000;
+
+        /// <summary>
+        /// Delegate to inform subscribers that a song has been saved
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        public delegate void SongSave(object sender, SongSavedEventArgs e);
+
+        /// <summary>
+        /// Song saved event
+        /// </summary>
+        public event SongSave SongSaved;
+
+        public SongEditor(Settings settings)
         {
+            // Initialize internal variables
+            _settings = settings;
+            _fileBoxInitialDir = _settings.DataDirectory + Path.DirectorySeparatorChar + _settings.SongDir;
+            _fileOpenBoxFilterIndex = 0;
+            _fileSaveBoxFilterIndex = 0;
+
             InitializeComponent();
 
-            this.Size = Settings.Default.EditorWindowSize;
-
-            fileBoxInitialDir = Settings.Default.DataDirectory + Path.DirectorySeparatorChar + Settings.Default.SongDir;
-            fileOpenBoxFilterIndex = 0;
-            fileSaveBoxFilterIndex = 0;
-            this.WindowState = Settings.Default.EditorWindowState;
-            //this.Text += " " + System.Reflection.Assembly.GetExecutingAssembly().GetName().Version.ToString();
-
-            foreach (var l in Program.AvailableLanguages)
-            {
-                ToolStripMenuItem selectLanguageToolStripMenuItem = new ToolStripMenuItem(l.DisplayName);
-                selectLanguageToolStripMenuItem.Tag = l;
-                selectLanguageToolStripMenuItem.Click += new EventHandler(selectLanguageToolStripMenuItem_Click);
-                if (l.Name == System.Threading.Thread.CurrentThread.CurrentUICulture.Name)
-                {
-                    selectLanguageToolStripMenuItem.Checked = true;
-                }
-                this.spracheToolStripMenuItem.DropDownItems.Add(selectLanguageToolStripMenuItem);
-            }
-
-            base.registerChild(this);
+            registerChild(this);
         }
 
         void selectLanguageToolStripMenuItem_Click(object sender, EventArgs e)
         {
             SetLanguage((CultureInfo)((ToolStripMenuItem)sender).Tag);
 
-            foreach (ToolStripMenuItem i in this.spracheToolStripMenuItem.DropDownItems)
+            foreach (ToolStripMenuItem i in spracheToolStripMenuItem.DropDownItems)
             {
-                i.Checked = ((CultureInfo)i.Tag == System.Threading.Thread.CurrentThread.CurrentUICulture);
-            }
-        }
-
-        static public SongEditor getInstance()
-        {
-            if (_instance == null)
-                _instance = new SongEditor();
-            return _instance;
-        }
-
-        private void ShowNewForm(object sender, EventArgs e)
-        {
-            SongEditorChild childForm = new SongEditorChild(null);
-            childForm.MdiParent = this;
-            childForm.Tag = "";
-
-            childForm.Text = childForm.sng.Title + ++childFormNumber;
-            childForm.Show();
-
-            base.registerChild(childForm);
-        }
-
-        private void OpenFile(object sender, EventArgs e)
-        {
-            OpenFileDialog openFileDialog = new OpenFileDialog();
-            openFileDialog.InitialDirectory = fileBoxInitialDir;
-            openFileDialog.CheckFileExists = true;
-            openFileDialog.CheckPathExists = true;
-            openFileDialog.Multiselect = false;
-            openFileDialog.Title = Properties.StringResources.OpenSong;
-
-            openFileDialog.Filter = GetFileBoxFilter();
-            openFileDialog.FilterIndex = fileOpenBoxFilterIndex;
-            if (openFileDialog.ShowDialog(this) == DialogResult.OK)
-            {
-                string FileName = openFileDialog.FileName;
-                fileBoxInitialDir = Path.GetDirectoryName(FileName);
-                fileOpenBoxFilterIndex = openFileDialog.FilterIndex;
-                openSong(FileName);
+                i.Checked = (Equals((CultureInfo)i.Tag, Thread.CurrentThread.CurrentUICulture));
             }
         }
 
         /// <summary>
+        /// Event handler for creating a new file
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void ShowNewForm(object sender, EventArgs e)
+        {
+            SongTemplateMapper stm = new SongTemplateMapper(_settings);
+            Song sng = stm.CreateNewSong();
+            stm.ApplyFormattingFromSettings(sng);
+
+            SongEditorChild childForm = CreateSongEditorChildForm(sng, null);
+
+            childForm.Text = childForm.Song.Title + @" " + ++_childFormNumber;
+        }
+
+        /// <summary>
+        /// Event handler for opening an existing file
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void OpenFile(object sender, EventArgs e)
+        {
+            OpenFileDialog openFileDialog = new OpenFileDialog
+            {
+                InitialDirectory = _fileBoxInitialDir,
+                CheckFileExists = true,
+                CheckPathExists = true,
+                Multiselect = false,
+                Title = StringResources.OpenSong,
+                Filter = GetOpenFileBoxFilter(),
+                FilterIndex = _fileOpenBoxFilterIndex
+            };
+
+            if (openFileDialog.ShowDialog(this) == DialogResult.OK)
+            {
+                string fileName = openFileDialog.FileName;
+                _fileBoxInitialDir = Path.GetDirectoryName(fileName);
+                _fileOpenBoxFilterIndex = openFileDialog.FilterIndex;
+                OpenSong(fileName);
+            }
+        }
+
+        /// <summary>
+        /// Opens a new song in a song editor child window
+        /// </summary>
+        /// <param name="fileName"></param>
+        public void OpenSong(string fileName)
+        {
+            for (int i = 0; i < MdiChildren.Count(); i++)
+            {
+                EditorChildMetaData md = (EditorChildMetaData)MdiChildren[i].Tag;
+                if (!string.IsNullOrEmpty(md.Filename) && 
+                    String.Compare(
+                    Path.GetFullPath(md.Filename).TrimEnd('\\'),
+                    Path.GetFullPath(fileName).TrimEnd('\\'),
+                    StringComparison.InvariantCultureIgnoreCase) == 0)
+                {
+                    MdiChildren[i].Show();
+                    MdiChildren[i].Focus();
+                    return;
+                }
+            }
+
+            Song sng;
+            try
+            {
+                sng = SongFilePluginFactory.Create(fileName).Load(fileName);
+                if (sng.Guid == Guid.Empty)
+                {
+                    // TODO get rid of GUID
+                    var smGuid = SongManager.Instance.GetGUIDByPath(fileName);
+                    sng.Guid = smGuid != Guid.Empty ? smGuid : Guid.NewGuid();
+                }
+            }
+            catch (NotImplementedException)
+            {
+                MessageBox.Show(StringResources.SongFormatNotSupported, Text, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(StringResources.SongFileHasErrors + @" (" + e.Message + @")!", Text, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            CreateSongEditorChildForm(sng, fileName);
+        }
+
+        /// <summary>
+        /// Creates a song editor child form with the given song and file name
+        /// </summary>
+        /// <param name="sng">Song</param>
+        /// <param name="fileName">File name, may be null</param>
+        /// <returns></returns>
+        private SongEditorChild CreateSongEditorChildForm(Song sng, String fileName)
+        {
+            int hashCode = sng.GetHashCode();
+            SongEditorChild childForm = new SongEditorChild(_settings, sng)
+            {
+                Tag = new EditorChildMetaData(fileName, hashCode),
+                MdiParent = this
+            };
+            Console.WriteLine(@"Init with " + hashCode + " '" + sng.Title + "'");
+            childForm.FormClosing += childForm_FormClosing;
+            childForm.Show();
+            registerChild(childForm);
+            
+            // Se status
+            SetStatus(string.Format(StringResources.LoadedSong, sng.Title));
+
+            return childForm;
+        }
+
+        /// <summary>
+        /// Save event handler
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void SaveChild(object sender, EventArgs e)
+        {
+            if (ActiveMdiChild != null)
+            {
+                SongEditorChild window = ((SongEditorChild)ActiveMdiChild);
+                window.ValidateChildren();
+                Console.WriteLine(@"prepare save, set hashcode " + window.Song.GetHashCode());
+                string fileName = Save(window.Song, ((EditorChildMetaData) window.Tag).Filename);
+                if (fileName != null)
+                {
+                    int hashCode = window.Song.GetHashCode();
+                    Console.WriteLine(@"save, set hashcode " + hashCode);
+                    ((EditorChildMetaData)window.Tag).HashCode = hashCode;
+                    ((EditorChildMetaData)window.Tag).Filename = fileName;
+                }
+            }
+        }
+
+        /// <summary>
+        /// Save as event handler
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void SaveChildAs(object sender, EventArgs e)
+        {
+            if (ActiveMdiChild != null)
+            {
+                SongEditorChild window = ((SongEditorChild)ActiveMdiChild);
+                window.ValidateChildren();
+                Console.WriteLine(@"prepare save, set hashcode " + window.Song.GetHashCode());
+                string fileName = SaveAs(window.Song, null);
+                if (fileName != null)
+                {
+                    int hashCode = window.Song.GetHashCode();
+                    Console.WriteLine(@"save, set hashcode " + hashCode);
+                    ((EditorChildMetaData)window.Tag).HashCode = hashCode;
+                    ((EditorChildMetaData)window.Tag).Filename = fileName;
+                }
+            }
+        }
+
+        /// <summary>
+        /// Save given song at the filename specified
+        /// </summary>
+        /// <param name="sng"></param>
+        /// <param name="fileName"></param>
+        /// <returns>Filename used or null</returns>
+        private string Save(Song sng, String fileName)
+        {
+            if (string.IsNullOrEmpty(fileName))
+            {
+                return SaveAs(sng, null);
+            }
+            try
+            {
+                SaveSong(sng, fileName);
+                return fileName;
+            }
+            catch (NotImplementedException)
+            {
+                MessageBox.Show(StringResources.SongCannotBeSavedInThisFormat, StringResources.FormatNotSupported,
+                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return SaveAs(sng, fileName);
+            }
+        }
+
+        /// <summary>
+        /// Save given song, asking for filename
+        /// </summary>
+        /// <param name="sng"></param>
+        /// <param name="fileName"></param>
+        /// <returns>Filename used or null</returns>
+        private string SaveAs(Song sng, String fileName)
+        {
+            // Check is using default name
+            if (sng.Title == _settings.SongDefaultName)
+            {
+                if (MessageBox.Show(string.Format(StringResources.DoesTheSongReallyHaveTheDefaultTitle, sng.Title), StringResources.Attention,
+                    MessageBoxButtons.YesNo) == DialogResult.No)
+                {
+                    return null;
+                }
+            }
+
+            try
+            {
+                return SaveSongAskForName(sng, fileName);
+            }
+            catch (NotImplementedException)
+            {
+                MessageBox.Show(StringResources.SongCannotBeSavedInThisFormat, StringResources.SongEditor,
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            return null;
+        }
+
+        /// <summary>
+        /// Handles saving of changed data when closing a song window
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        void childForm_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            SongEditorChild window = ((SongEditorChild)sender);
+
+            String filename = ((EditorChildMetaData)window.Tag).Filename;
+
+            int storedHashCode = ((EditorChildMetaData)window.Tag).HashCode;
+            int songHashCode = window.Song.GetHashCode();
+            Console.WriteLine(@"Close, compare stored " + storedHashCode + @" with current " + songHashCode);
+            if (storedHashCode != songHashCode)
+            {
+                DialogResult dlg = MessageBox.Show(string.Format(StringResources.SaveChangesMadeToTheSong, window.Song.Title),
+                    StringResources.SongEditor,
+                    MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
+                if (dlg == DialogResult.Yes)
+                {
+                    Save(window.Song, ((EditorChildMetaData)window.Tag).Filename);
+                }
+                else if (dlg == DialogResult.Cancel)
+                {
+                    e.Cancel = true;
+                }
+            }
+            else if (filename != null && !File.Exists(filename))
+            {
+                DialogResult dlg = MessageBox.Show(string.Format(StringResources.SaveChangesMadeToTheSong, window.Song.Title),
+                    StringResources.SongEditor,
+                    MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
+                if (dlg == DialogResult.Yes)
+                {
+                    SaveAs(window.Song, ((EditorChildMetaData)window.Tag).Filename);
+                }
+                else if (dlg == DialogResult.Cancel)
+                {
+                    e.Cancel = true;
+                }
+            }
+        }
+        
+        /// <summary>
         /// Returns the filter string used in open file dialogs
         /// </summary>
         /// <returns></returns>
-        public string GetFileBoxFilter()
+        private static string GetOpenFileBoxFilter()
         {
             String exts = String.Empty;
             String fltr = String.Empty;
@@ -146,35 +391,113 @@ namespace PraiseBase.Presenter.Forms
             return "Alle Lieddateien (" + exts + ")|" + exts + "|" + fltr + "|Alle Dateien (*.*)|*.*";
         }
 
-        public void openSong(string fileName)
+        /// <summary>
+        /// Saves a song
+        /// </summary>
+        /// <param name="sng">Song to be saved</param>
+        /// <param name="fileName">Target file name</param>
+        private void SaveSong(Song sng, String fileName)
         {
-            for (int i = 0; i < MdiChildren.Count(); i++)
-            {
-                if (MdiChildren[i].Tag.ToString() != String.Empty && 
-                    String.Compare(
-                    Path.GetFullPath(MdiChildren[i].Tag.ToString()).TrimEnd('\\'),
-                    Path.GetFullPath(fileName).TrimEnd('\\'),
-                    StringComparison.InvariantCultureIgnoreCase) == 0)
-                {
-                    MdiChildren[i].Show();
-                    MdiChildren[i].Focus();
-                    return;
-                }
-            }
+            // Load plugin based on the song filename
+            ISongFilePlugin plugin = SongFilePluginFactory.Create(fileName);
 
-            SongEditorChild childForm = new SongEditorChild(fileName);
-            childForm.Tag = fileName;
-            childForm.MdiParent = this;
-            if (childForm.valid)
+            // Save song using plugin
+            plugin.Save(sng, fileName);
+
+            // Set status
+            SetStatus(String.Format(StringResources.SongSavedAs, fileName));
+
+            // Inform others by firing a SongSaved event
+            if (SongSaved != null)
             {
-                childForm.Show();
-                base.registerChild(childForm);
+                SongSavedEventArgs p = new SongSavedEventArgs(sng, fileName);
+                SongSaved(this, p);
             }
+        }
+
+        /// <summary>
+        /// Saves a song by asking for a file name
+        /// </summary>
+        /// <param name="sng">Song to be saved</param>
+        /// <param name="fileName">Existing filename, can be null</param>
+        /// <returns>The choosen name, if the song has been saved, or null if the action has been cancelled</returns>
+        private string SaveSongAskForName(Song sng, String fileName)
+        {
+            SaveFileDialog saveFileDialog = new SaveFileDialog
+            {
+                InitialDirectory = fileName != null
+                    ? Path.GetDirectoryName(fileName)
+                    : _fileBoxInitialDir,
+                CheckPathExists = true,
+                FileName = sng.Title,
+                Filter = GetSaveFileBoxFilter(),
+                FilterIndex = _fileSaveBoxFilterIndex,
+                AddExtension = true,
+                Title = StringResources.SaveSongAs
+            };
+            if (saveFileDialog.ShowDialog(this) == DialogResult.OK)
+            {
+                // Load plugin based on selected filter index
+                ISongFilePlugin plugin = CreateByTypeIndex(saveFileDialog.FilterIndex - 1);
+
+                // Save song using plugin
+                plugin.Save(sng, saveFileDialog.FileName);
+
+                // Store selected filter index
+                _fileSaveBoxFilterIndex = saveFileDialog.FilterIndex;
+
+                // Set status
+                SetStatus(string.Format(StringResources.SongSavedAs, saveFileDialog.FileName));
+
+                // Inform others by firing a SongSaved event
+                if (SongSaved != null)
+                {
+                    SongSavedEventArgs p = new SongSavedEventArgs(sng, saveFileDialog.FileName);
+                    SongSaved(this, p);
+                }
+
+                // Return file name
+                return saveFileDialog.FileName;
+            }
+            return null;
+        }
+
+        /// <summary>
+        /// Returns the filter string used in save file dialogs
+        /// </summary>
+        /// <returns></returns>
+        private static string GetSaveFileBoxFilter()
+        {
+            String fltr = String.Empty;
+            foreach (ISongFilePlugin t in SongFilePluginFactory.GetWriterPlugins())
+            {
+                if (fltr != string.Empty)
+                {
+                    fltr += "|";
+                }
+                fltr += t.GetFileTypeDescription() + " (*" + t.GetFileExtension() + ")|*" + t.GetFileExtension();
+            }
+            return fltr;
+        }
+
+        /// <summary>
+        /// Gets a song file plugin by index
+        /// </summary>
+        /// <param name="index"></param>
+        /// <exception cref="NotImplementedException">Thrown if the selected plugin has no implementation</exception>
+        /// <returns></returns>
+        private static ISongFilePlugin CreateByTypeIndex(int index)
+        {
+            if (index >= 0 && index < SongFilePluginFactory.GetWriterPlugins().Count)
+            {
+                return SongFilePluginFactory.GetWriterPlugins().ToArray()[index];
+            }
+            throw new NotImplementedException();
         }
 
         private void ExitToolsStripMenuItem_Click(object sender, EventArgs e)
         {
-            this.Close();
+            Close();
         }
 
         private void DoCopy(Control control)
@@ -275,10 +598,6 @@ namespace PraiseBase.Presenter.Forms
             }
         }
 
-        private void contentsToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-        }
-
         private void aboutToolStripMenuItem_Click(object sender, EventArgs e)
         {
             AboutDialog ab = new AboutDialog();
@@ -287,7 +606,7 @@ namespace PraiseBase.Presenter.Forms
 
         private void webToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            System.Diagnostics.Process.Start(Settings.Default.Weburl);
+            Process.Start(_settings.Weburl);
         }
 
         private void optionsToolStripMenuItem_Click(object sender, EventArgs e)
@@ -298,35 +617,25 @@ namespace PraiseBase.Presenter.Forms
 
         private void EditorWindow_FormClosing(object sender, FormClosingEventArgs e)
         {
-            Settings.Default.EditorWindowSize = this.Size;
-            Settings.Default.EditorWindowState = this.WindowState;
-
-            //this.Hide();
-            //e.Cancel = true;
-        }
-
-        private void saveChild(object sender, EventArgs e)
-        {
-            if (ActiveMdiChild != null)
+            if (WindowState != FormWindowState.Maximized)
             {
-                ((SongEditorChild)ActiveMdiChild).save();
+                _settings.EditorWindowSize = Size;
             }
+            _settings.EditorWindowState = WindowState;
         }
 
-        private void saveChildAs(object sender, EventArgs e)
-        {
-            if (ActiveMdiChild != null)
-            {
-                ((SongEditorChild)ActiveMdiChild).saveAs();
-            }
-        }
-
-        public void setStatus(string text)
+        /// <summary>
+        /// Displays a message in the status bar for 2 seconds
+        /// </summary>
+        /// <param name="text"></param>
+        private void SetStatus(string text)
         {
             toolStripStatusLabel1.Text = text;
-            Timer statusTimer = new Timer();
-            statusTimer.Interval = 2000;
-            statusTimer.Tick += new EventHandler(statusTimer_Tick);
+            Timer statusTimer = new Timer
+            {
+                Interval = StatusMessageDuration
+            };
+            statusTimer.Tick += statusTimer_Tick;
             statusTimer.Start();
         }
 
@@ -380,43 +689,54 @@ namespace PraiseBase.Presenter.Forms
 
         private void allesSchliessenToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (MdiChildren.Count() > 0)
+            if (MdiChildren.Any())
             {
-                foreach (SongEditorChild c in MdiChildren)
+                foreach (var c in MdiChildren)
                 {
-                    ((SongEditorChild)c).Close();
+                    c.Close();
                 }
             }
         }
 
         private void EditorWindow_Load(object sender, EventArgs e)
         {
+            // Set size and window state
+            WindowState = _settings.EditorWindowState;
+            Size = _settings.EditorWindowSize;
+
+            // Add languages to menu
+            foreach (var l in Program.AvailableLanguages)
+            {
+                ToolStripMenuItem selectLanguageToolStripMenuItem = new ToolStripMenuItem(l.DisplayName)
+                {
+                    Tag = l
+                };
+                selectLanguageToolStripMenuItem.Click += selectLanguageToolStripMenuItem_Click;
+                if (l.Name == Thread.CurrentThread.CurrentUICulture.Name)
+                {
+                    selectLanguageToolStripMenuItem.Checked = true;
+                }
+                spracheToolStripMenuItem.DropDownItems.Add(selectLanguageToolStripMenuItem);
+            }
         }
 
         private void datenverzeichnisAnzeigenToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            System.Diagnostics.Process.Start(Settings.Default.DataDirectory);
+            Process.Start(_settings.DataDirectory);
         }
 
         private void toolStripButton2_Click(object sender, EventArgs e)
         {
-            System.Diagnostics.Process.Start(Settings.Default.DataDirectory);
+            Process.Start(_settings.DataDirectory);
         }
 
         private void fehlerMeldenToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            System.Diagnostics.Process.Start(Settings.Default.BugReportUrl);
-        }
-
-        private void praiseBoxToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            SongImporter dlg = new SongImporter(ImportFormat.PraiseBox);
-            dlg.ShowDialog(this);
+            Process.Start(_settings.BugReportUrl);
         }
 
         private void EditorWindow_FormClosed(object sender, FormClosedEventArgs e)
         {
-            _instance = null;
             GC.Collect();
         }
     }

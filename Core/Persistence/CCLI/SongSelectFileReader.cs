@@ -48,7 +48,7 @@ namespace PraiseBase.Presenter.Persistence.CCLI
 
             CcliSongFileSection section = CcliSongFileSection.NONE;
 
-            string[] lines = System.IO.File.ReadAllLines(@filename);
+            string[] lines = File.ReadAllLines(@filename);
             foreach (string l in lines)
             {
                 string li = l.Trim();
@@ -152,7 +152,7 @@ namespace PraiseBase.Presenter.Persistence.CCLI
         {
             try
             {
-                if (!System.IO.File.Exists(filename))
+                if (!File.Exists(filename))
                 {
                     return null;
                 }
@@ -196,7 +196,7 @@ namespace PraiseBase.Presenter.Persistence.CCLI
             }
             catch (Exception e)
             {
-                System.Console.WriteLine(e.Message);
+                Console.WriteLine(e.Message);
             }
             return null;
         }

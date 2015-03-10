@@ -1,4 +1,4 @@
-﻿namespace PraiseBase.Presenter.Forms
+﻿namespace PraiseBase.Presenter.UI.Editor
 {
     partial class SongEditorChild
     {
@@ -55,20 +55,12 @@
             this.tabPageFormatting = new System.Windows.Forms.TabPage();
             this.checkBoxQASegmentation = new System.Windows.Forms.CheckBox();
             this.label14 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
             this.checkBoxQATranslation = new System.Windows.Forms.CheckBox();
             this.textBoxComment = new System.Windows.Forms.TextBox();
             this.label13 = new System.Windows.Forms.Label();
             this.checkBoxQAImages = new System.Windows.Forms.CheckBox();
             this.checkBoxQASpelling = new System.Windows.Forms.CheckBox();
             this.checkedListBoxTags = new System.Windows.Forms.CheckedListBox();
-            this.label10 = new System.Windows.Forms.Label();
-            this.label9 = new System.Windows.Forms.Label();
-            this.label8 = new System.Windows.Forms.Label();
-            this.buttonTranslationFont = new System.Windows.Forms.Button();
-            this.buttonProjectionMasterFont = new System.Windows.Forms.Button();
-            this.buttonChooseProjectionForeColor = new System.Windows.Forms.Button();
-            this.buttonTranslationColor = new System.Windows.Forms.Button();
             this.tabPageContent = new System.Windows.Forms.TabPage();
             this.panelPreview = new System.Windows.Forms.Panel();
             this.pictureBoxPreview = new System.Windows.Forms.PictureBox();
@@ -95,39 +87,8 @@
             this.buttonDelItem = new System.Windows.Forms.Button();
             this.buttonMoveDown = new System.Windows.Forms.Button();
             this.tabControlTextLayer = new System.Windows.Forms.TabControl();
-            this.label1 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
             this.label19 = new System.Windows.Forms.Label();
-            this.numericUpDownTranslationTextLineSpacing = new System.Windows.Forms.NumericUpDown();
-            this.numericUpDownMainTextLineSpacing = new System.Windows.Forms.NumericUpDown();
-            this.numericUpDownMainTextOutline = new System.Windows.Forms.NumericUpDown();
-            this.label20 = new System.Windows.Forms.Label();
-            this.numericUpDownMainTextShadow = new System.Windows.Forms.NumericUpDown();
-            this.label21 = new System.Windows.Forms.Label();
-            this.numericUpDownTranslationTextShadow = new System.Windows.Forms.NumericUpDown();
-            this.label22 = new System.Windows.Forms.Label();
-            this.numericUpDownTranslationTextOutline = new System.Windows.Forms.NumericUpDown();
-            this.label23 = new System.Windows.Forms.Label();
-            this.tabPageEffects = new System.Windows.Forms.TabPage();
-            this.checkBoxOutlineEnabled = new System.Windows.Forms.CheckBox();
-            this.checkBoxShadowEnabled = new System.Windows.Forms.CheckBox();
-            this.numericUpDownShadowDirection = new System.Windows.Forms.NumericUpDown();
-            this.label24 = new System.Windows.Forms.Label();
-            this.label25 = new System.Windows.Forms.Label();
-            this.label26 = new System.Windows.Forms.Label();
-            this.button1 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
-            this.label27 = new System.Windows.Forms.Label();
-            this.button3 = new System.Windows.Forms.Button();
-            this.button4 = new System.Windows.Forms.Button();
-            this.comboBoxSlideHorizOrientation = new System.Windows.Forms.ComboBox();
-            this.comboBoxSlideVertOrientation = new System.Windows.Forms.ComboBox();
-            this.label28 = new System.Windows.Forms.Label();
             this.treeViewContents = new TreeEx.TreeLE();
-            this.label29 = new System.Windows.Forms.Label();
-            this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
-            this.label30 = new System.Windows.Forms.Label();
-            this.numericUpDown2 = new System.Windows.Forms.NumericUpDown();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
             this.splitContainer1.SuspendLayout();
@@ -139,16 +100,6 @@
             this.panelPreview.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxPreview)).BeginInit();
             this.tabControlTextLayer.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownTranslationTextLineSpacing)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownMainTextLineSpacing)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownMainTextOutline)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownMainTextShadow)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownTranslationTextShadow)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownTranslationTextOutline)).BeginInit();
-            this.tabPageEffects.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownShadowDirection)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown2)).BeginInit();
             this.SuspendLayout();
             // 
             // splitContainer1
@@ -313,7 +264,6 @@
             // 
             this.tabPageFormatting.Controls.Add(this.checkBoxQASegmentation);
             this.tabPageFormatting.Controls.Add(this.label14);
-            this.tabPageFormatting.Controls.Add(this.label2);
             this.tabPageFormatting.Controls.Add(this.checkBoxQATranslation);
             this.tabPageFormatting.Controls.Add(this.textBoxComment);
             this.tabPageFormatting.Controls.Add(this.label13);
@@ -328,22 +278,19 @@
             resources.ApplyResources(this.checkBoxQASegmentation, "checkBoxQASegmentation");
             this.checkBoxQASegmentation.Name = "checkBoxQASegmentation";
             this.checkBoxQASegmentation.UseVisualStyleBackColor = true;
+            this.checkBoxQASegmentation.CheckedChanged += new System.EventHandler(this.checkBoxQASegmentation_CheckedChanged);
             // 
             // label14
             // 
             resources.ApplyResources(this.label14, "label14");
             this.label14.Name = "label14";
             // 
-            // label2
-            // 
-            resources.ApplyResources(this.label2, "label2");
-            this.label2.Name = "label2";
-            // 
             // checkBoxQATranslation
             // 
             resources.ApplyResources(this.checkBoxQATranslation, "checkBoxQATranslation");
             this.checkBoxQATranslation.Name = "checkBoxQATranslation";
             this.checkBoxQATranslation.UseVisualStyleBackColor = true;
+            this.checkBoxQATranslation.CheckedChanged += new System.EventHandler(this.checkBoxQATranslation_CheckedChanged);
             // 
             // textBoxComment
             // 
@@ -360,12 +307,14 @@
             resources.ApplyResources(this.checkBoxQAImages, "checkBoxQAImages");
             this.checkBoxQAImages.Name = "checkBoxQAImages";
             this.checkBoxQAImages.UseVisualStyleBackColor = true;
+            this.checkBoxQAImages.CheckedChanged += new System.EventHandler(this.checkBoxQAImages_CheckedChanged);
             // 
             // checkBoxQASpelling
             // 
             resources.ApplyResources(this.checkBoxQASpelling, "checkBoxQASpelling");
             this.checkBoxQASpelling.Name = "checkBoxQASpelling";
             this.checkBoxQASpelling.UseVisualStyleBackColor = true;
+            this.checkBoxQASpelling.CheckedChanged += new System.EventHandler(this.checkBoxQASpelling_CheckedChanged);
             // 
             // checkedListBoxTags
             // 
@@ -374,51 +323,7 @@
             this.checkedListBoxTags.CheckOnClick = true;
             this.checkedListBoxTags.FormattingEnabled = true;
             this.checkedListBoxTags.Name = "checkedListBoxTags";
-            // 
-            // label10
-            // 
-            resources.ApplyResources(this.label10, "label10");
-            this.label10.Name = "label10";
-            // 
-            // label9
-            // 
-            resources.ApplyResources(this.label9, "label9");
-            this.label9.Name = "label9";
-            // 
-            // label8
-            // 
-            resources.ApplyResources(this.label8, "label8");
-            this.label8.Name = "label8";
-            // 
-            // buttonTranslationFont
-            // 
-            resources.ApplyResources(this.buttonTranslationFont, "buttonTranslationFont");
-            this.buttonTranslationFont.Name = "buttonTranslationFont";
-            this.buttonTranslationFont.UseVisualStyleBackColor = true;
-            this.buttonTranslationFont.Click += new System.EventHandler(this.buttonTranslationFont_Click);
-            // 
-            // buttonProjectionMasterFont
-            // 
-            resources.ApplyResources(this.buttonProjectionMasterFont, "buttonProjectionMasterFont");
-            this.buttonProjectionMasterFont.Name = "buttonProjectionMasterFont";
-            this.buttonProjectionMasterFont.UseVisualStyleBackColor = true;
-            this.buttonProjectionMasterFont.Click += new System.EventHandler(this.buttonProjectionMasterFont_Click);
-            // 
-            // buttonChooseProjectionForeColor
-            // 
-            resources.ApplyResources(this.buttonChooseProjectionForeColor, "buttonChooseProjectionForeColor");
-            this.buttonChooseProjectionForeColor.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.buttonChooseProjectionForeColor.Name = "buttonChooseProjectionForeColor";
-            this.buttonChooseProjectionForeColor.UseVisualStyleBackColor = true;
-            this.buttonChooseProjectionForeColor.Click += new System.EventHandler(this.buttonChooseProjectionForeColor_Click);
-            // 
-            // buttonTranslationColor
-            // 
-            resources.ApplyResources(this.buttonTranslationColor, "buttonTranslationColor");
-            this.buttonTranslationColor.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.buttonTranslationColor.Name = "buttonTranslationColor";
-            this.buttonTranslationColor.UseVisualStyleBackColor = true;
-            this.buttonTranslationColor.Click += new System.EventHandler(this.buttonTranslationColor_Click);
+            this.checkedListBoxTags.ItemCheck += new System.Windows.Forms.ItemCheckEventHandler(this.checkedListBoxTags_ItemCheck);
             // 
             // tabPageContent
             // 
@@ -466,6 +371,7 @@
             // 
             resources.ApplyResources(this.textBoxSongbooks, "textBoxSongbooks");
             this.textBoxSongbooks.Name = "textBoxSongbooks";
+            this.textBoxSongbooks.TextChanged += new System.EventHandler(this.textBoxSongbooks_TextChanged);
             // 
             // label17
             // 
@@ -486,6 +392,7 @@
             // 
             resources.ApplyResources(this.textBoxAuthors, "textBoxAuthors");
             this.textBoxAuthors.Name = "textBoxAuthors";
+            this.textBoxAuthors.TextChanged += new System.EventHandler(this.textBoxAuthors_TextChanged);
             // 
             // label15
             // 
@@ -582,220 +489,13 @@
             resources.ApplyResources(this.tabControlTextLayer, "tabControlTextLayer");
             this.tabControlTextLayer.Controls.Add(this.tabPageContent);
             this.tabControlTextLayer.Controls.Add(this.tabPageFormatting);
-            this.tabControlTextLayer.Controls.Add(this.tabPageEffects);
             this.tabControlTextLayer.Name = "tabControlTextLayer";
             this.tabControlTextLayer.SelectedIndex = 0;
-            // 
-            // label1
-            // 
-            resources.ApplyResources(this.label1, "label1");
-            this.label1.Name = "label1";
-            // 
-            // label3
-            // 
-            resources.ApplyResources(this.label3, "label3");
-            this.label3.Name = "label3";
             // 
             // label19
             // 
             resources.ApplyResources(this.label19, "label19");
             this.label19.Name = "label19";
-            // 
-            // numericUpDownTranslationTextLineSpacing
-            // 
-            resources.ApplyResources(this.numericUpDownTranslationTextLineSpacing, "numericUpDownTranslationTextLineSpacing");
-            this.numericUpDownTranslationTextLineSpacing.Maximum = new decimal(new int[] {
-            1000,
-            0,
-            0,
-            0});
-            this.numericUpDownTranslationTextLineSpacing.Name = "numericUpDownTranslationTextLineSpacing";
-            this.numericUpDownTranslationTextLineSpacing.ValueChanged += new System.EventHandler(this.numericUpDownTranslationTextLineSpacing_ValueChanged);
-            // 
-            // numericUpDownMainTextLineSpacing
-            // 
-            resources.ApplyResources(this.numericUpDownMainTextLineSpacing, "numericUpDownMainTextLineSpacing");
-            this.numericUpDownMainTextLineSpacing.Maximum = new decimal(new int[] {
-            1000,
-            0,
-            0,
-            0});
-            this.numericUpDownMainTextLineSpacing.Name = "numericUpDownMainTextLineSpacing";
-            this.numericUpDownMainTextLineSpacing.ValueChanged += new System.EventHandler(this.numericUpDownMainTextLineSpacing_ValueChanged);
-            // 
-            // numericUpDownMainTextOutline
-            // 
-            resources.ApplyResources(this.numericUpDownMainTextOutline, "numericUpDownMainTextOutline");
-            this.numericUpDownMainTextOutline.Maximum = new decimal(new int[] {
-            1000,
-            0,
-            0,
-            0});
-            this.numericUpDownMainTextOutline.Name = "numericUpDownMainTextOutline";
-            // 
-            // label20
-            // 
-            resources.ApplyResources(this.label20, "label20");
-            this.label20.Name = "label20";
-            // 
-            // numericUpDownMainTextShadow
-            // 
-            resources.ApplyResources(this.numericUpDownMainTextShadow, "numericUpDownMainTextShadow");
-            this.numericUpDownMainTextShadow.Maximum = new decimal(new int[] {
-            1000,
-            0,
-            0,
-            0});
-            this.numericUpDownMainTextShadow.Name = "numericUpDownMainTextShadow";
-            // 
-            // label21
-            // 
-            resources.ApplyResources(this.label21, "label21");
-            this.label21.Name = "label21";
-            // 
-            // numericUpDownTranslationTextShadow
-            // 
-            resources.ApplyResources(this.numericUpDownTranslationTextShadow, "numericUpDownTranslationTextShadow");
-            this.numericUpDownTranslationTextShadow.Maximum = new decimal(new int[] {
-            1000,
-            0,
-            0,
-            0});
-            this.numericUpDownTranslationTextShadow.Name = "numericUpDownTranslationTextShadow";
-            // 
-            // label22
-            // 
-            resources.ApplyResources(this.label22, "label22");
-            this.label22.Name = "label22";
-            // 
-            // numericUpDownTranslationTextOutline
-            // 
-            resources.ApplyResources(this.numericUpDownTranslationTextOutline, "numericUpDownTranslationTextOutline");
-            this.numericUpDownTranslationTextOutline.Maximum = new decimal(new int[] {
-            1000,
-            0,
-            0,
-            0});
-            this.numericUpDownTranslationTextOutline.Name = "numericUpDownTranslationTextOutline";
-            // 
-            // label23
-            // 
-            resources.ApplyResources(this.label23, "label23");
-            this.label23.Name = "label23";
-            // 
-            // tabPageEffects
-            // 
-            this.tabPageEffects.Controls.Add(this.label29);
-            this.tabPageEffects.Controls.Add(this.numericUpDown1);
-            this.tabPageEffects.Controls.Add(this.label30);
-            this.tabPageEffects.Controls.Add(this.numericUpDown2);
-            this.tabPageEffects.Controls.Add(this.numericUpDownShadowDirection);
-            this.tabPageEffects.Controls.Add(this.label25);
-            this.tabPageEffects.Controls.Add(this.label24);
-            this.tabPageEffects.Controls.Add(this.checkBoxShadowEnabled);
-            this.tabPageEffects.Controls.Add(this.checkBoxOutlineEnabled);
-            this.tabPageEffects.Controls.Add(this.label20);
-            this.tabPageEffects.Controls.Add(this.numericUpDownMainTextOutline);
-            this.tabPageEffects.Controls.Add(this.numericUpDownTranslationTextShadow);
-            this.tabPageEffects.Controls.Add(this.label23);
-            this.tabPageEffects.Controls.Add(this.label22);
-            this.tabPageEffects.Controls.Add(this.numericUpDownTranslationTextOutline);
-            this.tabPageEffects.Controls.Add(this.numericUpDownMainTextShadow);
-            this.tabPageEffects.Controls.Add(this.label21);
-            resources.ApplyResources(this.tabPageEffects, "tabPageEffects");
-            this.tabPageEffects.Name = "tabPageEffects";
-            this.tabPageEffects.UseVisualStyleBackColor = true;
-            // 
-            // checkBoxOutlineEnabled
-            // 
-            resources.ApplyResources(this.checkBoxOutlineEnabled, "checkBoxOutlineEnabled");
-            this.checkBoxOutlineEnabled.Name = "checkBoxOutlineEnabled";
-            this.checkBoxOutlineEnabled.UseVisualStyleBackColor = true;
-            this.checkBoxOutlineEnabled.CheckedChanged += new System.EventHandler(this.checkBoxOutlineEnabled_CheckedChanged);
-            // 
-            // checkBoxShadowEnabled
-            // 
-            resources.ApplyResources(this.checkBoxShadowEnabled, "checkBoxShadowEnabled");
-            this.checkBoxShadowEnabled.Name = "checkBoxShadowEnabled";
-            this.checkBoxShadowEnabled.UseVisualStyleBackColor = true;
-            this.checkBoxShadowEnabled.CheckedChanged += new System.EventHandler(this.checkBoxShadowEnabled_CheckedChanged);
-            // 
-            // numericUpDownShadowDirection
-            // 
-            resources.ApplyResources(this.numericUpDownShadowDirection, "numericUpDownShadowDirection");
-            this.numericUpDownShadowDirection.Maximum = new decimal(new int[] {
-            1000,
-            0,
-            0,
-            0});
-            this.numericUpDownShadowDirection.Name = "numericUpDownShadowDirection";
-            // 
-            // label24
-            // 
-            resources.ApplyResources(this.label24, "label24");
-            this.label24.Name = "label24";
-            // 
-            // label25
-            // 
-            resources.ApplyResources(this.label25, "label25");
-            this.label25.Name = "label25";
-            // 
-            // label26
-            // 
-            resources.ApplyResources(this.label26, "label26");
-            this.label26.Name = "label26";
-            // 
-            // button1
-            // 
-            resources.ApplyResources(this.button1, "button1");
-            this.button1.Name = "button1";
-            this.button1.UseVisualStyleBackColor = true;
-            // 
-            // button2
-            // 
-            resources.ApplyResources(this.button2, "button2");
-            this.button2.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.button2.Name = "button2";
-            this.button2.UseVisualStyleBackColor = true;
-            // 
-            // label27
-            // 
-            resources.ApplyResources(this.label27, "label27");
-            this.label27.Name = "label27";
-            // 
-            // button3
-            // 
-            resources.ApplyResources(this.button3, "button3");
-            this.button3.Name = "button3";
-            this.button3.UseVisualStyleBackColor = true;
-            // 
-            // button4
-            // 
-            resources.ApplyResources(this.button4, "button4");
-            this.button4.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.button4.Name = "button4";
-            this.button4.UseVisualStyleBackColor = true;
-            // 
-            // comboBoxSlideHorizOrientation
-            // 
-            resources.ApplyResources(this.comboBoxSlideHorizOrientation, "comboBoxSlideHorizOrientation");
-            this.comboBoxSlideHorizOrientation.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboBoxSlideHorizOrientation.FormattingEnabled = true;
-            this.comboBoxSlideHorizOrientation.Name = "comboBoxSlideHorizOrientation";
-            this.comboBoxSlideHorizOrientation.SelectedIndexChanged += new System.EventHandler(this.comboBoxSlideHorizOrientation_SelectedIndexChanged_1);
-            // 
-            // comboBoxSlideVertOrientation
-            // 
-            resources.ApplyResources(this.comboBoxSlideVertOrientation, "comboBoxSlideVertOrientation");
-            this.comboBoxSlideVertOrientation.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboBoxSlideVertOrientation.FormattingEnabled = true;
-            this.comboBoxSlideVertOrientation.Name = "comboBoxSlideVertOrientation";
-            this.comboBoxSlideVertOrientation.SelectedIndexChanged += new System.EventHandler(this.comboBoxSlideVertOrientation_SelectedIndexChanged_1);
-            // 
-            // label28
-            // 
-            resources.ApplyResources(this.label28, "label28");
-            this.label28.Name = "label28";
             // 
             // treeViewContents
             // 
@@ -808,65 +508,15 @@
             this.treeViewContents.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.treeViewContents_AfterSelect);
             this.treeViewContents.KeyDown += new System.Windows.Forms.KeyEventHandler(this.treeViewContents_KeyDown);
             // 
-            // label29
-            // 
-            resources.ApplyResources(this.label29, "label29");
-            this.label29.Name = "label29";
-            // 
-            // numericUpDown1
-            // 
-            resources.ApplyResources(this.numericUpDown1, "numericUpDown1");
-            this.numericUpDown1.Maximum = new decimal(new int[] {
-            1000,
-            0,
-            0,
-            0});
-            this.numericUpDown1.Name = "numericUpDown1";
-            // 
-            // label30
-            // 
-            resources.ApplyResources(this.label30, "label30");
-            this.label30.Name = "label30";
-            // 
-            // numericUpDown2
-            // 
-            resources.ApplyResources(this.numericUpDown2, "numericUpDown2");
-            this.numericUpDown2.Maximum = new decimal(new int[] {
-            1000,
-            0,
-            0,
-            0});
-            this.numericUpDown2.Name = "numericUpDown2";
-            // 
             // SongEditorChild
             // 
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this.label28);
-            this.Controls.Add(this.comboBoxSlideVertOrientation);
-            this.Controls.Add(this.comboBoxSlideHorizOrientation);
-            this.Controls.Add(this.label27);
-            this.Controls.Add(this.button3);
-            this.Controls.Add(this.button4);
-            this.Controls.Add(this.label26);
-            this.Controls.Add(this.button1);
-            this.Controls.Add(this.button2);
-            this.Controls.Add(this.numericUpDownMainTextLineSpacing);
-            this.Controls.Add(this.numericUpDownTranslationTextLineSpacing);
             this.Controls.Add(this.label19);
             this.Controls.Add(this.comboBoxLanguage);
-            this.Controls.Add(this.label3);
-            this.Controls.Add(this.label1);
-            this.Controls.Add(this.label10);
-            this.Controls.Add(this.label9);
-            this.Controls.Add(this.buttonTranslationColor);
-            this.Controls.Add(this.buttonTranslationFont);
             this.Controls.Add(this.tabControlTextLayer);
-            this.Controls.Add(this.label8);
             this.Controls.Add(this.splitContainer1);
-            this.Controls.Add(this.buttonProjectionMasterFont);
             this.Controls.Add(this.panelPreview);
-            this.Controls.Add(this.buttonChooseProjectionForeColor);
             this.Controls.Add(this.labelGUID);
             this.Controls.Add(this.textBoxSongbooks);
             this.Controls.Add(this.label18);
@@ -892,10 +542,8 @@
             this.Controls.Add(this.label4);
             this.Name = "SongEditorChild";
             this.ShowInTaskbar = false;
-            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.EditorChild_FormClosing);
             this.Load += new System.EventHandler(this.EditorChild_Load);
             this.Shown += new System.EventHandler(this.EditorChild_Shown);
-            this.Resize += new System.EventHandler(this.EditorChild_Resize);
             this.splitContainer1.Panel1.ResumeLayout(false);
             this.splitContainer1.Panel1.PerformLayout();
             this.splitContainer1.Panel2.ResumeLayout(false);
@@ -910,17 +558,6 @@
             this.panelPreview.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxPreview)).EndInit();
             this.tabControlTextLayer.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownTranslationTextLineSpacing)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownMainTextLineSpacing)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownMainTextOutline)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownMainTextShadow)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownTranslationTextShadow)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownTranslationTextOutline)).EndInit();
-            this.tabPageEffects.ResumeLayout(false);
-            this.tabPageEffects.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownShadowDirection)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown2)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -942,14 +579,6 @@
 		private System.Windows.Forms.ContextMenuStrip songContextMenu;
         private System.Windows.Forms.ToolStripMenuItem umbenennenToolStripMenuItem1;
         private System.Windows.Forms.TabPage tabPageFormatting;
-        private System.Windows.Forms.Label label10;
-        private System.Windows.Forms.Label label9;
-        private System.Windows.Forms.Label label8;
-        private System.Windows.Forms.Button buttonTranslationFont;
-        private System.Windows.Forms.Button buttonProjectionMasterFont;
-        private System.Windows.Forms.Button buttonChooseProjectionForeColor;
-        private System.Windows.Forms.Button buttonTranslationColor;
-        private System.Windows.Forms.Label label2;
         private System.Windows.Forms.TabPage tabPageContent;
         private System.Windows.Forms.Button buttonDuplicateSlide;
         private System.Windows.Forms.TextBox textBoxCCLISongID;
@@ -994,37 +623,6 @@
         private System.Windows.Forms.Label label18;
         private System.Windows.Forms.Label labelGUID;
         private System.Windows.Forms.Panel panelPreview;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label19;
-        private System.Windows.Forms.NumericUpDown numericUpDownTranslationTextLineSpacing;
-        private System.Windows.Forms.NumericUpDown numericUpDownMainTextLineSpacing;
-        private System.Windows.Forms.NumericUpDown numericUpDownMainTextOutline;
-        private System.Windows.Forms.Label label20;
-        private System.Windows.Forms.NumericUpDown numericUpDownMainTextShadow;
-        private System.Windows.Forms.Label label21;
-        private System.Windows.Forms.NumericUpDown numericUpDownTranslationTextShadow;
-        private System.Windows.Forms.Label label22;
-        private System.Windows.Forms.NumericUpDown numericUpDownTranslationTextOutline;
-        private System.Windows.Forms.Label label23;
-        private System.Windows.Forms.TabPage tabPageEffects;
-        private System.Windows.Forms.CheckBox checkBoxOutlineEnabled;
-        private System.Windows.Forms.CheckBox checkBoxShadowEnabled;
-        private System.Windows.Forms.NumericUpDown numericUpDownShadowDirection;
-        private System.Windows.Forms.Label label24;
-        private System.Windows.Forms.Label label25;
-        private System.Windows.Forms.Label label26;
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.Label label27;
-        private System.Windows.Forms.Button button3;
-        private System.Windows.Forms.Button button4;
-        private System.Windows.Forms.ComboBox comboBoxSlideHorizOrientation;
-        private System.Windows.Forms.ComboBox comboBoxSlideVertOrientation;
-        private System.Windows.Forms.Label label28;
-        private System.Windows.Forms.Label label29;
-        private System.Windows.Forms.NumericUpDown numericUpDown1;
-        private System.Windows.Forms.Label label30;
-        private System.Windows.Forms.NumericUpDown numericUpDown2;
     }
 }

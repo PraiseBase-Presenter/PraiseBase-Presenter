@@ -21,14 +21,14 @@
  */
 
 using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Windows.Forms;
-using PraiseBase.Presenter.Properties;
 using System.Drawing;
+using System.IO;
+using System.Linq;
+using System.Windows.Forms;
 using PraiseBase.Presenter.Model;
+using PraiseBase.Presenter.Properties;
 
-namespace PraiseBase.Presenter.Forms
+namespace PraiseBase.Presenter.UI.Presenter
 {
     public partial class ProgramSettingsDialog : Form
     {
@@ -37,12 +37,12 @@ namespace PraiseBase.Presenter.Forms
             InitializeComponent();
         }
 
-        public void updateLabels()
+        private void UpdateLabels()
         {
             textBox1.Text = Settings.Default.DataDirectory;
 
             checkBoxUseMasterFormat.Checked = Settings.Default.ProjectionUseMaster;
-            enableMasterFormattingGroupBoxes(Settings.Default.ProjectionUseMaster);
+            EnableMasterFormattingGroupBoxes(Settings.Default.ProjectionUseMaster);
 
             labelMainTextString.Text = getFontString(Settings.Default.ProjectionMasterFont);
             buttonChooseProjectionForeColor.BackColor = Settings.Default.ProjectionMasterFontColor;
@@ -59,39 +59,19 @@ namespace PraiseBase.Presenter.Forms
             buttonProjectionBackgroundColor.BackColor = Settings.Default.ProjectionBackColor;
 
             // Outline
-            checkBoxOutlineEnabled.Checked = Settings.Default.ProjectionMasterOutlineEnabled;
-            numericUpDownOutlineSize.Value = Settings.Default.ProjectionMasterOutlineSize;
-            buttonOutlineColor.BackColor = Settings.Default.ProjectionMasterOutlineColor;
-            enableOutlineFormElements(Settings.Default.ProjectionMasterOutlineEnabled);
+            UpdateOutlineLabels();
 
             // Shadow
-            checkBoxShadowEnabled.Checked = Settings.Default.ProjectionMasterShadowEnabled;
-            numericUpDownShadowDistance.Value = Settings.Default.ProjectionMasterShadowDistance;
-            numericUpDownShadowSize.Value = Settings.Default.ProjectionMasterShadowSize;
-            numericUpDownShadowDirection.Value = Settings.Default.ProjectionMasterShadowDirection;
-            buttonShadowColor.BackColor = Settings.Default.ProjectionMasterShadowColor;
-            enableShadowFormElements(Settings.Default.ProjectionMasterShadowEnabled);
+            UpdateShadowLabels();
 
             // Padding / Borders
-            numericUpDownHorizontalTextPadding.Value = Settings.Default.ProjectionMasterHorizontalTextPadding;
-            numericUpDownVerticalTextPadding.Value = Settings.Default.ProjectionMasterVerticalTextPadding;
-            numericUpDownHorizontalHeaderPadding.Value = Settings.Default.ProjectionMasterHorizontalHeaderPadding;
-            numericUpDownVerticalHeaderPadding.Value = Settings.Default.ProjectionMasterVerticalHeaderPadding;
-            numericUpDownHorizontalFooterPadding.Value = Settings.Default.ProjectionMasterHorizontalFooterPadding;
-            numericUpDownVerticalFooterPadding.Value = Settings.Default.ProjectionMasterVerticalFooterPadding;
+            UpdatePaddingBorders();
 
             // Line spacing
-            numericUpDownLineSpacing.Value = Settings.Default.ProjectionMasterLineSpacing;
-            numericUpDownTranslationLineSpacing.Value = Settings.Default.ProjectionMasterTranslationLineSpacing;
-            numericUpDownHorizontalTranslationTextOffset.Value = Settings.Default.ProjectionMasterHorizontalTranslationTextOffset;
+            UpdateLineSpacing();
             
             // Text orientation
-            comboBoxHorizontalTextOrientation.SelectedIndex = getIndexByHorizontalOrientation(Settings.Default.ProjectionMasterHorizontalTextOrientation);
-            comboBoxVerticalTextOrientation.SelectedIndex = getIndexByVerticalOrientation(Settings.Default.ProjectionMasterVerticalTextOrientation);
-            comboBoxHeaderOrientation.SelectedIndex = getIndexByHorizontalOrientation(Settings.Default.ProjectionMasterHorizontalHeaderOrientation);
-            comboBoxFooterOrientation.SelectedIndex = getIndexByHorizontalOrientation(Settings.Default.ProjectionMasterHorizontalFooterOrientation);
-
-            comboBoxTranslationPosition.SelectedIndex = Settings.Default.ProjectionMasteTranslationPosition == TranslationPosition.Block ? 1 : 0;
+            UpdateOrientation();
 
             // Additional information
             comboBoxSourcePosition.SelectedIndex = (int)Settings.Default.ProjectionMasterSourcePosition;
@@ -102,14 +82,8 @@ namespace PraiseBase.Presenter.Forms
             checkBoxProjectionFontScaling.Checked = Settings.Default.ProjectionFontScaling;
             checkBoxSmoothShadow.Checked = Settings.Default.ProjectionSmoothShadow;
 
-            List<string> strList;
-
             listBoxTags.Items.Clear();
-            strList = new List<string>();
-            foreach (string str in Settings.Default.Tags)
-            {
-                strList.Add(str);
-            }
+            var strList = Settings.Default.Tags.Cast<string>().ToList();
             strList.Sort();
             foreach (string str in strList)
             {
@@ -117,11 +91,7 @@ namespace PraiseBase.Presenter.Forms
             }
 
             listBoxLanguages.Items.Clear();
-            strList = new List<string>();
-            foreach (string str in Settings.Default.Languages)
-            {
-                strList.Add(str);
-            }
+            strList = Settings.Default.Languages.Cast<string>().ToList();
             strList.Sort();
             foreach (string str in strList)
             {
@@ -129,11 +99,7 @@ namespace PraiseBase.Presenter.Forms
             }
 
             listBoxSongParts.Items.Clear();
-            strList = new List<string>();
-            foreach (string str in Settings.Default.SongParts)
-            {
-                strList.Add(str);
-            }
+            strList = Settings.Default.SongParts.Cast<string>().ToList();
             strList.Sort();
             foreach (string str in strList)
             {
@@ -141,35 +107,81 @@ namespace PraiseBase.Presenter.Forms
             }
         }
 
+        private void UpdateOutlineLabels()
+        {
+            checkBoxOutlineEnabled.Checked = Settings.Default.ProjectionMasterOutlineEnabled;
+            numericUpDownOutlineSize.Value = Settings.Default.ProjectionMasterOutlineSize;
+            buttonOutlineColor.BackColor = Settings.Default.ProjectionMasterOutlineColor;
+            EnableOutlineFormElements(Settings.Default.ProjectionMasterOutlineEnabled);
+        }
+
+        private void UpdateShadowLabels()
+        {
+            checkBoxShadowEnabled.Checked = Settings.Default.ProjectionMasterShadowEnabled;
+            numericUpDownShadowDistance.Value = Settings.Default.ProjectionMasterShadowDistance;
+            numericUpDownShadowSize.Value = Settings.Default.ProjectionMasterShadowSize;
+            numericUpDownShadowDirection.Value = Settings.Default.ProjectionMasterShadowDirection;
+            buttonShadowColor.BackColor = Settings.Default.ProjectionMasterShadowColor;
+            EnableShadowFormElements(Settings.Default.ProjectionMasterShadowEnabled);
+        }
+
+        private void UpdatePaddingBorders()
+        {
+            numericUpDownHorizontalTextPadding.Value = Settings.Default.ProjectionMasterHorizontalTextPadding;
+            numericUpDownVerticalTextPadding.Value = Settings.Default.ProjectionMasterVerticalTextPadding;
+            numericUpDownHorizontalHeaderPadding.Value = Settings.Default.ProjectionMasterHorizontalHeaderPadding;
+            numericUpDownVerticalHeaderPadding.Value = Settings.Default.ProjectionMasterVerticalHeaderPadding;
+            numericUpDownHorizontalFooterPadding.Value = Settings.Default.ProjectionMasterHorizontalFooterPadding;
+            numericUpDownVerticalFooterPadding.Value = Settings.Default.ProjectionMasterVerticalFooterPadding;
+        }
+
+        private void UpdateLineSpacing()
+        {
+            numericUpDownLineSpacing.Value = Settings.Default.ProjectionMasterLineSpacing;
+            numericUpDownTranslationLineSpacing.Value = Settings.Default.ProjectionMasterTranslationLineSpacing;
+            numericUpDownHorizontalTranslationTextOffset.Value = Settings.Default.ProjectionMasterHorizontalTranslationTextOffset;
+        }
+
+        private void UpdateOrientation()
+        {
+            comboBoxHorizontalTextOrientation.SelectedIndex = getIndexByHorizontalOrientation(Settings.Default.ProjectionMasterHorizontalTextOrientation);
+            comboBoxVerticalTextOrientation.SelectedIndex = getIndexByVerticalOrientation(Settings.Default.ProjectionMasterVerticalTextOrientation);
+            comboBoxHeaderOrientation.SelectedIndex = getIndexByHorizontalOrientation(Settings.Default.ProjectionMasterHorizontalHeaderOrientation);
+            comboBoxFooterOrientation.SelectedIndex = getIndexByHorizontalOrientation(Settings.Default.ProjectionMasterHorizontalFooterOrientation);
+            comboBoxTranslationPosition.SelectedIndex = Settings.Default.ProjectionMasteTranslationPosition == TranslationPosition.Block ? 1 : 0;
+        }
+
         private String getFontString(Font font)
         {
-            return font.FontFamily.Name + ", " + font.Size.ToString() + ", " + font.Style.ToString();
+            return font.FontFamily.Name + ", " + font.Size + ", " + font.Style;
         }
 
         private void cancelButton_Click(object sender, EventArgs e)
         {
             Settings.Default.Reload();
             DialogResult = DialogResult.Cancel;
-            this.Close();
+            Close();
         }
 
         private void exitButton_Click(object sender, EventArgs e)
         {
             Settings.Default.Save();
             DialogResult = DialogResult.OK;
-            this.Close();
+            Close();
         }
 
         private void settingsWindow_Load(object sender, EventArgs e)
         {
             tabControl1.SelectedIndex = Settings.Default.SettingsLastTabIndex;
-            updateLabels();
+            UpdateLabels();
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
-            FolderBrowserDialog dlg = new FolderBrowserDialog();
-            dlg.ShowNewFolderButton = true;
+            FolderBrowserDialog dlg = new FolderBrowserDialog
+            {
+                ShowNewFolderButton = true
+            };
 
             if (Directory.Exists(Settings.Default.DataDirectory))
                 dlg.SelectedPath = Settings.Default.DataDirectory;
@@ -182,36 +194,36 @@ namespace PraiseBase.Presenter.Forms
 
         private void buttonFontSelector_Click(object sender, EventArgs e)
         {
-            FontDialog fontDlg = new FontDialog();
-            fontDlg.Font = Settings.Default.ProjectionMasterFont;
+            FontDialog fontDlg = new FontDialog
+            {
+                Font = Settings.Default.ProjectionMasterFont
+            };
             if (fontDlg.ShowDialog() == DialogResult.OK)
             {
                 Settings.Default.ProjectionMasterFont = fontDlg.Font;
-                updateLabels();
+                UpdateLabels();
             }
         }
 
-        private void label2_Click(object sender, EventArgs e)
+        private void buttonResetFactoryDefaults_Click(object sender, EventArgs e)
         {
-        }
-
-        private void button2_Click(object sender, EventArgs e)
-        {
-            if (MessageBox.Show(Properties.StringResources.ReallyResetFactoryDefaults, Properties.StringResources.Reset, MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+            if (MessageBox.Show(StringResources.ReallyResetFactoryDefaults, StringResources.Reset, MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
             {
                 Settings.Default.Reset();
-                updateLabels();
+                UpdateLabels();
             }
         }
 
         private void buttonChooseProjectionForeColor_Click(object sender, EventArgs e)
         {
-            ColorDialog colDlg = new ColorDialog();
-            colDlg.Color = Settings.Default.ProjectionMasterFontColor;
+            ColorDialog colDlg = new ColorDialog
+            {
+                Color = Settings.Default.ProjectionMasterFontColor
+            };
             if (colDlg.ShowDialog() == DialogResult.OK)
             {
                 Settings.Default.ProjectionMasterFontColor = colDlg.Color;
-                updateLabels();
+                UpdateLabels();
             }
         }
 
@@ -229,16 +241,16 @@ namespace PraiseBase.Presenter.Forms
                 {
                     Settings.Default.Tags.Add(str);
                     textBoxNewTag.Text = "";
-                    updateLabels();
+                    UpdateLabels();
                 }
                 else
                 {
-                    MessageBox.Show(Properties.StringResources.TagExistsAlready, Properties.StringResources.Settings, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                    MessageBox.Show(StringResources.TagExistsAlready, StringResources.Settings, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 }
             }
             else
             {
-                MessageBox.Show(Properties.StringResources.EmptyEntriesAreNotAllowed, Properties.StringResources.Settings, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                MessageBox.Show(StringResources.EmptyEntriesAreNotAllowed, StringResources.Settings, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
             }
             textBoxNewTag.Focus();
         }
@@ -252,7 +264,7 @@ namespace PraiseBase.Presenter.Forms
                     Settings.Default.Tags.Remove(listBoxTags.Items[i].ToString());
                 }
             }
-            updateLabels();
+            UpdateLabels();
         }
 
         private void buttonAddLang_Click(object sender, EventArgs e)
@@ -264,16 +276,16 @@ namespace PraiseBase.Presenter.Forms
                 {
                     Settings.Default.Languages.Add(str);
                     textBoxNewLang.Text = "";
-                    updateLabels();
+                    UpdateLabels();
                 }
                 else
                 {
-                    MessageBox.Show(Properties.StringResources.LanguageExistsAlready, Properties.StringResources.Settings, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                    MessageBox.Show(StringResources.LanguageExistsAlready, StringResources.Settings, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 }
             }
             else
             {
-                MessageBox.Show(Properties.StringResources.EmptyEntriesAreNotAllowed, Properties.StringResources.Settings, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                MessageBox.Show(StringResources.EmptyEntriesAreNotAllowed, StringResources.Settings, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
             }
             textBoxNewLang.Focus();
         }
@@ -287,7 +299,7 @@ namespace PraiseBase.Presenter.Forms
                     Settings.Default.Languages.Remove(listBoxLanguages.Items[i].ToString());
                 }
             }
-            updateLabels();
+            UpdateLabels();
         }
 
         private void buttonAddSongPart_Click(object sender, EventArgs e)
@@ -299,16 +311,16 @@ namespace PraiseBase.Presenter.Forms
                 {
                     Settings.Default.SongParts.Add(str);
                     textBoxNewSongPart.Text = "";
-                    updateLabels();
+                    UpdateLabels();
                 }
                 else
                 {
-                    MessageBox.Show(Properties.StringResources.NameExistsAlready, Properties.StringResources.Settings, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                    MessageBox.Show(StringResources.NameExistsAlready, StringResources.Settings, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 }
             }
             else
             {
-                MessageBox.Show(Properties.StringResources.EmptyEntriesAreNotAllowed, Properties.StringResources.Settings, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                MessageBox.Show(StringResources.EmptyEntriesAreNotAllowed, StringResources.Settings, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
             }
             textBoxNewSongPart.Focus();
         }
@@ -322,72 +334,84 @@ namespace PraiseBase.Presenter.Forms
                     Settings.Default.SongParts.Remove(listBoxSongParts.Items[i].ToString());
                 }
             }
-            updateLabels();
+            UpdateLabels();
         }
 
         private void buttonTranslationColor_Click(object sender, EventArgs e)
         {
-            ColorDialog colDlg = new ColorDialog();
-            colDlg.Color = Settings.Default.ProjectionMasterTranslationColor;
+            ColorDialog colDlg = new ColorDialog
+            {
+                Color = Settings.Default.ProjectionMasterTranslationColor
+            };
             if (colDlg.ShowDialog() == DialogResult.OK)
             {
                 Settings.Default.ProjectionMasterTranslationColor = colDlg.Color;
-                updateLabels();
+                UpdateLabels();
             }
         }
 
         private void buttonTranslationFont_Click(object sender, EventArgs e)
         {
-            FontDialog fontDlg = new FontDialog();
-            fontDlg.Font = Settings.Default.ProjectionMasterFontTranslation;
+            FontDialog fontDlg = new FontDialog
+            {
+                Font = Settings.Default.ProjectionMasterFontTranslation
+            };
             if (fontDlg.ShowDialog() == DialogResult.OK)
             {
                 Settings.Default.ProjectionMasterFontTranslation = fontDlg.Font;
-                updateLabels();
+                UpdateLabels();
             }
         }
 
         private void buttonCopyrightFont_Click(object sender, EventArgs e)
         {
-            FontDialog fontDlg = new FontDialog();
-            fontDlg.Font = Settings.Default.ProjectionMasterCopyrightFont;
+            FontDialog fontDlg = new FontDialog
+            {
+                Font = Settings.Default.ProjectionMasterCopyrightFont
+            };
             if (fontDlg.ShowDialog() == DialogResult.OK)
             {
                 Settings.Default.ProjectionMasterCopyrightFont = fontDlg.Font;
-                updateLabels();
+                UpdateLabels();
             }
         }
 
         private void buttonCopyrightColor_Click(object sender, EventArgs e)
         {
-            ColorDialog colDlg = new ColorDialog();
-            colDlg.Color = Settings.Default.ProjectionMasterCopyrightColor;
+            ColorDialog colDlg = new ColorDialog
+            {
+                Color = Settings.Default.ProjectionMasterCopyrightColor
+            };
             if (colDlg.ShowDialog() == DialogResult.OK)
             {
                 Settings.Default.ProjectionMasterCopyrightColor = colDlg.Color;
-                updateLabels();
+                UpdateLabels();
             }
         }
         
         private void buttonSourceFont_Click(object sender, EventArgs e)
         {
-            FontDialog fontDlg = new FontDialog();
-            fontDlg.Font = Settings.Default.ProjectionMasterSourceFont;
+            FontDialog fontDlg = new FontDialog
+            {
+                Font = Settings.Default.ProjectionMasterSourceFont
+            };
             if (fontDlg.ShowDialog() == DialogResult.OK)
             {
                 Settings.Default.ProjectionMasterSourceFont = fontDlg.Font;
-                updateLabels();
+                UpdateLabels();
             }
         }
 
         private void buttonSourceColor_Click(object sender, EventArgs e)
         {
-            ColorDialog colDlg = new ColorDialog();
-            colDlg.Color = Settings.Default.ProjectionMasterSourceColor;
+            ColorDialog colDlg = new ColorDialog
+            {
+                Color = Settings.Default.ProjectionMasterSourceColor
+            };
             if (colDlg.ShowDialog() == DialogResult.OK)
             {
                 Settings.Default.ProjectionMasterSourceColor = colDlg.Color;
-                updateLabels();
+                UpdateLabels();
             }
         }
 
@@ -396,35 +420,13 @@ namespace PraiseBase.Presenter.Forms
             Settings.Default.SettingsLastTabIndex = tabControl1.SelectedIndex;
         }
 
-        private void buttonProjectionShadowColor_Click(object sender, EventArgs e)
-        {
-            ColorDialog colDlg = new ColorDialog();
-            colDlg.Color = Settings.Default.ProjectionMasterShadowColor;
-            if (colDlg.ShowDialog() == DialogResult.OK)
-            {
-                Settings.Default.ProjectionMasterShadowColor = colDlg.Color;
-                updateLabels();
-            }
-        }
-
-        private void buttonProjectionOutlineColor_Click(object sender, EventArgs e)
-        {
-            ColorDialog colDlg = new ColorDialog();
-            colDlg.Color = Settings.Default.ProjectionMasterOutlineColor;
-            if (colDlg.ShowDialog() == DialogResult.OK)
-            {
-                Settings.Default.ProjectionMasterOutlineColor = colDlg.Color;
-                updateLabels();
-            }
-        }
-
         private void checkBoxUseMasterFormat_CheckedChanged(object sender, EventArgs e)
         {
-            enableMasterFormattingGroupBoxes(checkBoxUseMasterFormat.Checked);
+            EnableMasterFormattingGroupBoxes(checkBoxUseMasterFormat.Checked);
             Settings.Default.ProjectionUseMaster = checkBoxUseMasterFormat.Checked;
         }
 
-        private void enableMasterFormattingGroupBoxes(bool enable)
+        private void EnableMasterFormattingGroupBoxes(bool enable)
         {
             groupBoxFonts.Enabled = enable;
             groupBoxLineSpacings.Enabled = enable;
@@ -453,10 +455,10 @@ namespace PraiseBase.Presenter.Forms
         private void checkBoxOutlineEnabled_CheckedChanged(object sender, EventArgs e)
         {
             Settings.Default.ProjectionMasterOutlineEnabled = ((CheckBox)sender).Checked;
-            enableOutlineFormElements(Settings.Default.ProjectionMasterOutlineEnabled);
+            EnableOutlineFormElements(Settings.Default.ProjectionMasterOutlineEnabled);
         }
 
-        private void enableOutlineFormElements(bool enable)
+        private void EnableOutlineFormElements(bool enable)
         {
             labelOutlineSize.Enabled = enable;
             numericUpDownOutlineSize.Enabled = enable;
@@ -466,12 +468,14 @@ namespace PraiseBase.Presenter.Forms
 
         private void buttonOutlineColor_Click(object sender, EventArgs e)
         {
-            ColorDialog colDlg = new ColorDialog();
-            colDlg.Color = Settings.Default.ProjectionMasterOutlineColor;
+            ColorDialog colDlg = new ColorDialog
+            {
+                Color = Settings.Default.ProjectionMasterOutlineColor
+            };
             if (colDlg.ShowDialog() == DialogResult.OK)
             {
                 Settings.Default.ProjectionMasterOutlineColor = colDlg.Color;
-                updateLabels();
+                UpdateLabels();
             }
         }
 
@@ -483,10 +487,10 @@ namespace PraiseBase.Presenter.Forms
         private void checkBoxShadowEnabled_CheckedChanged(object sender, EventArgs e)
         {
             Settings.Default.ProjectionMasterShadowEnabled = ((CheckBox)sender).Checked;
-            enableShadowFormElements(Settings.Default.ProjectionMasterShadowEnabled);
+            EnableShadowFormElements(Settings.Default.ProjectionMasterShadowEnabled);
         }
 
-        private void enableShadowFormElements(bool enable)
+        private void EnableShadowFormElements(bool enable)
         {
             labelShadowDistance.Enabled = enable;
             numericUpDownShadowDistance.Enabled = enable;
@@ -500,12 +504,14 @@ namespace PraiseBase.Presenter.Forms
 
         private void buttonShadowColor_Click(object sender, EventArgs e)
         {
-            ColorDialog colDlg = new ColorDialog();
-            colDlg.Color = Settings.Default.ProjectionMasterShadowColor;
+            ColorDialog colDlg = new ColorDialog
+            {
+                Color = Settings.Default.ProjectionMasterShadowColor
+            };
             if (colDlg.ShowDialog() == DialogResult.OK)
             {
                 Settings.Default.ProjectionMasterShadowColor = colDlg.Color;
-                updateLabels();
+                UpdateLabels();
             }
         }
 
@@ -526,12 +532,14 @@ namespace PraiseBase.Presenter.Forms
 
         private void buttonProjectionBackgroundColor_Click(object sender, EventArgs e)
         {
-            ColorDialog colDlg = new ColorDialog();
-            colDlg.Color = Settings.Default.ProjectionBackColor;
+            ColorDialog colDlg = new ColorDialog
+            {
+                Color = Settings.Default.ProjectionBackColor
+            };
             if (colDlg.ShowDialog() == DialogResult.OK)
             {
                 Settings.Default.ProjectionBackColor = colDlg.Color;
-                updateLabels();
+                UpdateLabels();
             }
         }
 
@@ -589,66 +597,66 @@ namespace PraiseBase.Presenter.Forms
             Settings.Default.ProjectionMasterHorizontalFooterOrientation = getHorizontalOrientationByIndex(index);
         }
 
-        private int getIndexByHorizontalOrientation(Model.HorizontalOrientation horizontal)
+        private int getIndexByHorizontalOrientation(HorizontalOrientation horizontal)
         {
             switch (horizontal)
             {
-                case Model.HorizontalOrientation.Left:
+                case HorizontalOrientation.Left:
                     return 0;
-                case Model.HorizontalOrientation.Center:
+                case HorizontalOrientation.Center:
                     return 1;
-                case Model.HorizontalOrientation.Right:
+                case HorizontalOrientation.Right:
                     return 2;
             }
             return 0;
         }
 
-        private int getIndexByVerticalOrientation(Model.VerticalOrientation vertical)
+        private int getIndexByVerticalOrientation(VerticalOrientation vertical)
         {
             switch (vertical)
             {
-                case Model.VerticalOrientation.Top:
+                case VerticalOrientation.Top:
                     return 0;
-                case Model.VerticalOrientation.Middle:
+                case VerticalOrientation.Middle:
                     return 1;
-                case Model.VerticalOrientation.Bottom:
+                case VerticalOrientation.Bottom:
                     return 2;
             }
             return 0;
         }
 
-        private Model.HorizontalOrientation getHorizontalOrientationByIndex(int index)
+        private HorizontalOrientation getHorizontalOrientationByIndex(int index)
         {
             if (index == 0)
             {
-                return Model.HorizontalOrientation.Left;
+                return HorizontalOrientation.Left;
             }
             if (index == 1)
             {
-                return Model.HorizontalOrientation.Center;
+                return HorizontalOrientation.Center;
             }
             if (index == 2)
             {
-                return Model.HorizontalOrientation.Right;
+                return HorizontalOrientation.Right;
             }
-            return Model.HorizontalOrientation.Left;
+            return HorizontalOrientation.Left;
         }
 
-        private Model.VerticalOrientation getVerticalTextOrientationByIndex(int index)
+        private VerticalOrientation getVerticalTextOrientationByIndex(int index)
         {
             if (index == 0)
             {
-                return Model.VerticalOrientation.Top;
+                return VerticalOrientation.Top;
             }
             if (index == 1)
             {
-                return Model.VerticalOrientation.Middle;
+                return VerticalOrientation.Middle;
             }
             if (index == 2)
             {
-                return Model.VerticalOrientation.Bottom;
+                return VerticalOrientation.Bottom;
             }
-            return Model.VerticalOrientation.Top;
+            return VerticalOrientation.Top;
         }
 
         private void comboBoxSourcePosition_SelectedIndexChanged(object sender, EventArgs e)

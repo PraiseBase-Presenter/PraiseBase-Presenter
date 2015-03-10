@@ -101,12 +101,33 @@ namespace PraiseBase.Presenter.Model.Song
         /// <returns></returns>
         public override int GetHashCode()
         {
-            int res = 0;
+            unchecked
+            {
+                int hash = 19;
+                for (int i = 0; i < Count; i++)
+                {
+                    hash = hash * 31 + this[i].GetHashCode();
+                }
+                return hash;
+            }
+        }
+
+        protected bool Equals(SongSlideList other)
+        {
+            if (Count != other.Count) return false;
             for (int i = 0; i < Count; i++)
             {
-                res = (res ^ this[i].GetHashCode()) ^ i.GetHashCode();
+                if (!Equals(this[i], other[i])) return false;
             }
-            return res;
+            return true;
+        }
+
+        public override bool Equals(object obj)
+        {
+            if (ReferenceEquals(null, obj)) return false;
+            if (ReferenceEquals(this, obj)) return true;
+            if (obj.GetType() != GetType()) return false;
+            return Equals((SongSlideList)obj);
         }
     }
 }

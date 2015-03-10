@@ -1,4 +1,4 @@
-﻿namespace PraiseBase.Presenter.Forms
+﻿namespace PraiseBase.Presenter.UI.Editor
 {
     partial class SongEditor
     {
@@ -137,13 +137,13 @@
             // 
             resources.ApplyResources(this.saveToolStripMenuItem, "saveToolStripMenuItem");
             this.saveToolStripMenuItem.Name = "saveToolStripMenuItem";
-            this.saveToolStripMenuItem.Click += new System.EventHandler(this.saveChild);
+            this.saveToolStripMenuItem.Click += new System.EventHandler(this.SaveChild);
             // 
             // saveAsToolStripMenuItem
             // 
             this.saveAsToolStripMenuItem.Name = "saveAsToolStripMenuItem";
             resources.ApplyResources(this.saveAsToolStripMenuItem, "saveAsToolStripMenuItem");
-            this.saveAsToolStripMenuItem.Click += new System.EventHandler(this.saveChildAs);
+            this.saveAsToolStripMenuItem.Click += new System.EventHandler(this.SaveChildAs);
             // 
             // toolStripSeparator4
             // 
@@ -354,7 +354,6 @@
             // 
             resources.ApplyResources(this.contentsToolStripMenuItem, "contentsToolStripMenuItem");
             this.contentsToolStripMenuItem.Name = "contentsToolStripMenuItem";
-            this.contentsToolStripMenuItem.Click += new System.EventHandler(this.contentsToolStripMenuItem_Click);
             // 
             // fehlerMeldenToolStripMenuItem
             // 
@@ -416,7 +415,7 @@
             this.saveToolStripButton.Image = global::PraiseBase.Presenter.Properties.Resources.save_36;
             resources.ApplyResources(this.saveToolStripButton, "saveToolStripButton");
             this.saveToolStripButton.Name = "saveToolStripButton";
-            this.saveToolStripButton.Click += new System.EventHandler(this.saveChild);
+            this.saveToolStripButton.Click += new System.EventHandler(this.SaveChild);
             // 
             // toolStripSeparator1
             // 

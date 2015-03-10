@@ -20,13 +20,13 @@
  *
  */
 
-using System;
+using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
+using PraiseBase.Presenter.Forms;
 using PraiseBase.Presenter.Properties;
-using System.Collections.Generic;
 
-namespace PraiseBase.Presenter.Forms
+namespace PraiseBase.Presenter.UI.Presenter
 {
     public partial class ProjectionWindow : Form
     {

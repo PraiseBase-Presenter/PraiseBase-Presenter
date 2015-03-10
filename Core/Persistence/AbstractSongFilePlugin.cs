@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using PraiseBase.Presenter.Model.Song;
 
 namespace PraiseBase.Presenter.Persistence
@@ -29,7 +26,7 @@ namespace PraiseBase.Presenter.Persistence
         public Song Load(String filePath)
         {
             T song = reader.Load(filePath);
-            return mapper.map(song);
+            return mapper.Map(song);
         }
 
         public Boolean IsFileSupported(String filePath)
@@ -50,7 +47,7 @@ namespace PraiseBase.Presenter.Persistence
             }
             
             T song = new T();
-            mapper.map(sng, song);
+            mapper.Map(sng, song);
             writer.Save(filePath, song);
         }
     }

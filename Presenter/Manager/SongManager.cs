@@ -23,10 +23,10 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
-using PraiseBase.Presenter.Properties;
-using PraiseBase.Presenter.Persistence;
-using PraiseBase.Presenter.Model.Song;
 using PraiseBase.Presenter.Manager;
+using PraiseBase.Presenter.Model.Song;
+using PraiseBase.Presenter.Persistence;
+using PraiseBase.Presenter.Properties;
 
 namespace PraiseBase.Presenter
 {
@@ -36,17 +36,6 @@ namespace PraiseBase.Presenter
     /// </summary>
     internal class SongManager
     {
-        /// <summary>
-        /// Song item structure
-        /// </summary>
-        public class SongItem
-        {
-            public Song Song { get; set; }
-            public string Filename { get; set; }
-            public ISongFilePlugin Plugin { get; set; }
-            public bool SwitchTextAndTranlation { get; set; }
-        }
-
         /// <summary>
         /// Singleton variable
         /// </summary>
@@ -151,15 +140,17 @@ namespace PraiseBase.Presenter
             {
                 try
                 {
-                    SongItem si = new SongItem();
-                    si.Plugin = SongFilePluginFactory.Create(path);
-                    si.Song = si.Plugin.Load(path);
-                    si.Filename = path;
-                    if (si.Song.GUID == Guid.Empty)
+                    SongItem si = new SongItem
                     {
-                        si.Song.GUID = GenerateGuid();
+                        Plugin = SongFilePluginFactory.Create(path),
+                        Filename = path
+                    };
+                    si.Song = si.Plugin.Load(path);
+                    if (si.Song.Guid == Guid.Empty)
+                    {
+                        si.Song.Guid = Guid.NewGuid();
                     }
-                    SongList.Add(si.Song.GUID, si);
+                    SongList.Add(si.Song.Guid, si);
                     if (i % 25 == 0)
                     {
                         SongLoadEventArgs e = new SongLoadEventArgs(i, cnt);
@@ -173,11 +164,6 @@ namespace PraiseBase.Presenter
                     Console.WriteLine(e.StackTrace);
                 }
             }
-        }
-
-        public Guid GenerateGuid()
-        {
-            return Guid.NewGuid();
         }
 
         protected virtual void OnSongLoaded(SongLoadEventArgs e)
@@ -289,7 +275,7 @@ namespace PraiseBase.Presenter
             foreach (var kvp in SongList)
             {
                 if (SongList[kvp.Key].Song.Title.ToLower().Contains(needle) ||
-                    (searchMode == SongSearchMode.TitleAndText && SongList[kvp.Key].Song.SearchText.Contains(needle)))
+                    (searchMode == SongSearchMode.TitleAndText && SongList[kvp.Key].SearchText.Contains(needle)))
                 {
                     tmpList.Add(SongList[kvp.Key]);
                 }

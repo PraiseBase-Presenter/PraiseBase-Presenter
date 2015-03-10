@@ -22,6 +22,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Reflection;
 using System.Xml;
 using PraiseBase.Presenter.Model.Bible;
 
@@ -37,7 +38,7 @@ namespace PraiseBase.Presenter.Persistence.ZefaniaXML
                 if (textReader.NodeType == XmlNodeType.Text)
                 {
                     Type myType = typeof(Bible);
-                    System.Reflection.PropertyInfo myFields = myType.GetProperty(fieldName);
+                    PropertyInfo myFields = myType.GetProperty(fieldName);
                     myFields.SetValue(target, textReader.Value, null);
                 }
             }

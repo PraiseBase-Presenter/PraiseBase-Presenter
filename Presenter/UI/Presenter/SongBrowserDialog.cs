@@ -1,25 +1,33 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.Specialized;
 using System.Windows.Forms;
-using PraiseBase.Presenter.Properties;
 using PraiseBase.Presenter.Model.Song;
 
-namespace PraiseBase.Presenter.Forms
+namespace PraiseBase.Presenter.UI.Presenter
 {
     public partial class SongBrowserDialog : Form
     {
-        public bool OpenInEditor { get; private set; }
+        /// <summary>
+        /// List of tags (categories)
+        /// </summary>
+        public StringCollection Tags { get; set; }
+
+        /// <summary>
+        /// List of songs to be opened in the editor
+        /// </summary>
+        public List<string> OpenInEditor { get; private set; }
 
         public SongBrowserDialog()
         {
-            OpenInEditor = false;
+            OpenInEditor = new List<string>();
             InitializeComponent();
         }
 
         private void SongDialog_Load(object sender, EventArgs e)
         {
             checkedListBoxTags.Items.Clear();
-            foreach (String str in Settings.Default.Tags)
+            foreach (String str in Tags)
             {
                 checkedListBoxTags.Items.Add(str);
             }
@@ -38,11 +46,11 @@ namespace PraiseBase.Presenter.Forms
             {
                 foreach (ListViewItem lvi in listViewItems.SelectedItems)
                 {
-                    SongEditor.getInstance().openSong(SongManager.Instance.SongList[(Guid)(lvi.Tag)].Filename);
+                    string fn = SongManager.Instance.SongList[(Guid) (lvi.Tag)].Filename;
+                    OpenInEditor.Add(fn);
                 }
-                OpenInEditor = true;
                 DialogResult = DialogResult.OK;
-                this.Close();
+                Close();
             }
             else
             {
@@ -59,11 +67,11 @@ namespace PraiseBase.Presenter.Forms
         {
             listViewItems.Items.Clear();
             string searchText = textBoxSearch.Text.Trim().ToLower();
-            foreach (KeyValuePair<Guid, SongManager.SongItem> kvp in SongManager.Instance.SongList)
+            foreach (KeyValuePair<Guid, SongItem> kvp in SongManager.Instance.SongList)
             {
-                Song sng = (Song)kvp.Value.Song;
+                Song sng = kvp.Value.Song;
                 bool use = true;
-                if (searchText != String.Empty && !sng.SearchText.Contains(searchText))
+                if (searchText != String.Empty && !kvp.Value.SearchText.Contains(searchText))
                     use = false;
 
                 if (checkBoxHasImages.Checked && sng.GetNumberOfBackgroundImages() > 0)
@@ -72,13 +80,13 @@ namespace PraiseBase.Presenter.Forms
                 if (checkBoxHasComments.Checked && sng.Comment == string.Empty)
                     use = false;
 
-                if (checkBoxQAImages.Checked && !sng.GetQA(SongQualityAssuranceIndicator.Images))
+                if (checkBoxQAImages.Checked && !sng.QualityIssues.Contains(SongQualityAssuranceIndicator.Images))
                     use = false;
-                if (checkBoxQASegmentation.Checked && !sng.GetQA(SongQualityAssuranceIndicator.Segmentation))
+                if (checkBoxQASegmentation.Checked && !sng.QualityIssues.Contains(SongQualityAssuranceIndicator.Segmentation))
                     use = false;
-                if (checkBoxQASpelling.Checked && !sng.GetQA(SongQualityAssuranceIndicator.Spelling))
+                if (checkBoxQASpelling.Checked && !sng.QualityIssues.Contains(SongQualityAssuranceIndicator.Spelling))
                     use = false;
-                if (checkBoxQATranslation.Checked && !sng.GetQA(SongQualityAssuranceIndicator.Translation))
+                if (checkBoxQATranslation.Checked && !sng.QualityIssues.Contains(SongQualityAssuranceIndicator.Translation))
                     use = false;
 
                 foreach (int i in checkedListBoxTags.CheckedIndices)
@@ -90,7 +98,7 @@ namespace PraiseBase.Presenter.Forms
                 if (use)
                 {
                     ListViewItem lvi = new ListViewItem(sng.Title);
-                    lvi.Tag = sng.GUID;
+                    lvi.Tag = sng.Guid;
                     listViewItems.Items.Add(lvi);
                 }
             }

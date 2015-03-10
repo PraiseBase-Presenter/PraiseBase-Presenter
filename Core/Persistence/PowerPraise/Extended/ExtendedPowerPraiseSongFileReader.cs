@@ -22,9 +22,7 @@
 
 using System;
 using System.Collections.Generic;
-using System.Drawing;
 using System.Xml;
-using PraiseBase.Presenter.Model;
 using PraiseBase.Presenter.Model.Song;
 
 namespace PraiseBase.Presenter.Persistence.PowerPraise.Extended
@@ -107,7 +105,7 @@ namespace PraiseBase.Presenter.Persistence.PowerPraise.Extended
             {
                 SongAuthor author = new SongAuthor();
                 author.Name = s.Trim();
-                author.Type = (i++ == 0) ? SongAuthorType.words : SongAuthorType.music;
+                author.Type = (i++ == 0) ? SongAuthorType.Words : SongAuthorType.Music;
                 list.Add(author);
             }
             return list;

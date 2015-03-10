@@ -23,6 +23,7 @@
 using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.IO;
 using System.Xml;
 using PraiseBase.Presenter.Model;
 
@@ -59,7 +60,7 @@ namespace PraiseBase.Presenter.Persistence.PowerPraise
             sng.Title = xmlRoot["general"]["title"].InnerText;
 
             // Category
-            sng.Category = parseString(xmlRoot["general"]["category"], PowerPraiseConstants.Category);
+            sng.Category = parseString(xmlRoot["general"]["category"], PowerPraiseConstants.NoCategory);
 
             // Language
             sng.Language = parseString(xmlRoot["general"]["language"], PowerPraiseConstants.Language);
@@ -416,7 +417,10 @@ namespace PraiseBase.Presenter.Persistence.PowerPraise
                     shadow.Color = PowerPraiseFileUtil.ConvertColor(tryColor);
                 }
                 int shadowDirection;
-                int.TryParse(elem["direction"].InnerText, out shadowDirection);
+                if (int.TryParse(elem["direction"].InnerText, out shadowDirection))
+                {
+                    shadow.Direction = shadowDirection;
+                }
             }
             return shadow;
         }
@@ -600,7 +604,7 @@ namespace PraiseBase.Presenter.Persistence.PowerPraise
         {
             try
             {
-                if (!System.IO.File.Exists(filename))
+                if (!File.Exists(filename))
                 {
                     return null;
                 }
@@ -634,7 +638,7 @@ namespace PraiseBase.Presenter.Persistence.PowerPraise
             }
             catch (Exception e)
             {
-                System.Console.WriteLine(e.Message);
+                Console.WriteLine(e.Message);
             }
             return null;
         }

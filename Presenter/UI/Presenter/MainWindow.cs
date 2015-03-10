@@ -25,26 +25,25 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Drawing;
+using System.Globalization;
 using System.IO;
-using System.Reflection;
-using System.Text;
+using System.Linq;
 using System.Threading;
 using System.Windows.Forms;
-using System.Xml;
-using PraiseBase.Presenter.Properties;
-using SongDetails;
-using Timer = System.Windows.Forms.Timer;
+using PraiseBase.Presenter.Forms;
 using PraiseBase.Presenter.Manager;
-using System.Globalization;
-using PraiseBase.Presenter.UI;
-using PraiseBase.Presenter.Model.Bible;
-using PraiseBase.Presenter.Persistence.Setlists;
-using PraiseBase.Presenter.Projection;
 using PraiseBase.Presenter.Model;
+using PraiseBase.Presenter.Model.Bible;
 using PraiseBase.Presenter.Model.Song;
 using PraiseBase.Presenter.Persistence;
+using PraiseBase.Presenter.Persistence.Setlists;
+using PraiseBase.Presenter.Projection;
+using PraiseBase.Presenter.Properties;
+using PraiseBase.Presenter.UI.Editor;
+using SongDetails;
+using Timer = System.Windows.Forms.Timer;
 
-namespace PraiseBase.Presenter.Forms
+namespace PraiseBase.Presenter.UI.Presenter
 {
     /// <summary>
     /// The main window class provides the central
@@ -60,6 +59,8 @@ namespace PraiseBase.Presenter.Forms
         private List<String> imageSearchResults;
 
         private bool linkLayers = true;
+
+        private SongEditor _songEditor;
 
         /// <summary>
         /// Private constructor
@@ -115,7 +116,7 @@ namespace PraiseBase.Presenter.Forms
             imageTreeViewInit();
 
             trackBarFadeTime.Value = Settings.Default.ProjectionFadeTime / 500;
-            labelFadeTime.Text = (trackBarFadeTime.Value * 0.5) + " s";
+            labelFadeTime.Text = (trackBarFadeTime.Value * 0.5) + @" s";
 
             trackBarFadeTimeLayer1.Value = Settings.Default.ProjectionFadeTimeLayer1 / 500;
             labelFadeTimeLayer1.Text = (trackBarFadeTimeLayer1.Value * 0.5) + " s";
@@ -148,6 +149,45 @@ namespace PraiseBase.Presenter.Forms
 
             ProjectionManager.Instance.ProjectionChanged += Instance_ProjectionChanged;
         }
+
+        #region SongEditor
+
+        private SongEditor GetSongEditor()
+        {
+            if (_songEditor == null || _songEditor.IsDisposed)
+            {
+                _songEditor = CreateSongEditorInstance();
+            }
+            return _songEditor;
+        }
+
+        private SongEditor CreateSongEditorInstance()
+        {
+            var se = new SongEditor(Settings.Default);
+            se.SongSaved += SongEditorWndOnSongSaved;
+            return se;
+        }
+
+        private void SongEditorWndOnSongSaved(object sender, SongSavedEventArgs songSavedEventArgs)
+        {
+            SongManager.Instance.ReloadSongByPath(songSavedEventArgs.FileName);
+        }
+
+        private void ShowAndFocusSongEditor()
+        {
+            var se = GetSongEditor();
+            se.Show();
+            se.Focus();
+        }
+
+        private void ShowAndBringSongEditorToFront()
+        {
+            var se = GetSongEditor();
+            se.Show();
+            se.BringToFront();
+        }
+
+        #endregion
 
         void selectLanguageToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -196,10 +236,10 @@ namespace PraiseBase.Presenter.Forms
             int cnt = 0;
 
             var lviList = new List<ListViewItem>();
-            foreach (SongManager.SongItem si in SongManager.Instance.GetSearchResults(needle, Settings.Default.SongSearchMode))
+            foreach (SongItem si in SongManager.Instance.GetSearchResults(needle, Settings.Default.SongSearchMode))
             {
                 var lvi = new ListViewItem(si.Song.Title);
-                lvi.Tag = si.Song.GUID;
+                lvi.Tag = si.Song.Guid;
                 lviList.Add(lvi);
                 cnt++;
             }
@@ -314,7 +354,7 @@ namespace PraiseBase.Presenter.Forms
                 }
                 else
                 {
-                    if (SongManager.Instance.CurrentSong == null || SongManager.Instance.CurrentSong.Song == null || SongManager.Instance.CurrentSong.Song.GUID != (Guid)listViewSongs.SelectedItems[0].Tag)
+                    if (SongManager.Instance.CurrentSong == null || SongManager.Instance.CurrentSong.Song == null || SongManager.Instance.CurrentSong.Song.Guid != (Guid)listViewSongs.SelectedItems[0].Tag)
                     {
                         var g = (Guid)listViewSongs.SelectedItems[0].Tag;
                         if (SongManager.Instance.SongList.ContainsKey(g))
@@ -343,7 +383,7 @@ namespace PraiseBase.Presenter.Forms
             if (listViewSongs.SelectedItems.Count > 0)
             {
                 if (SongManager.Instance.CurrentSong == null ||
-                    SongManager.Instance.CurrentSong.Song.GUID != (Guid)listViewSongs.SelectedItems[0].Tag)
+                    SongManager.Instance.CurrentSong.Song.Guid != (Guid)listViewSongs.SelectedItems[0].Tag)
                 {
                     SongManager.Instance.CurrentSong = SongManager.Instance.SongList[(Guid)listViewSongs.SelectedItems[0].Tag];
                     showCurrentSongDetails();
@@ -406,12 +446,12 @@ namespace PraiseBase.Presenter.Forms
 
             toolStripButtonQA.Enabled = true;
             updateQAButtonStage();
-            qaSpellingToolStripMenuItem.Checked = SongManager.Instance.CurrentSong.Song.GetQA(SongQualityAssuranceIndicator.Spelling);
-            qaTranslationToolStripMenuItem.Checked = SongManager.Instance.CurrentSong.Song.GetQA(SongQualityAssuranceIndicator.Translation);
-            qaImagesToolStripMenuItem.Checked = SongManager.Instance.CurrentSong.Song.GetQA(SongQualityAssuranceIndicator.Images);
-            qaSegmentationToolStripMenuItem.Checked = SongManager.Instance.CurrentSong.Song.GetQA(SongQualityAssuranceIndicator.Segmentation);
+            qaSpellingToolStripMenuItem.Checked = SongManager.Instance.CurrentSong.Song.QualityIssues.Contains(SongQualityAssuranceIndicator.Spelling);
+            qaTranslationToolStripMenuItem.Checked = SongManager.Instance.CurrentSong.Song.QualityIssues.Contains(SongQualityAssuranceIndicator.Translation);
+            qaImagesToolStripMenuItem.Checked = SongManager.Instance.CurrentSong.Song.QualityIssues.Contains(SongQualityAssuranceIndicator.Images);
+            qaSegmentationToolStripMenuItem.Checked = SongManager.Instance.CurrentSong.Song.QualityIssues.Contains(SongQualityAssuranceIndicator.Segmentation);
 
-            if (SongManager.Instance.CurrentSong.Song.HasTranslation)
+            if (SongManager.Instance.CurrentSong.Song.HasTranslation())
             {
                 toolStripButtonToggleTranslationText.Enabled = true;
                 if (SongManager.Instance.CurrentSong.SwitchTextAndTranlation)
@@ -437,10 +477,10 @@ namespace PraiseBase.Presenter.Forms
             var s = SongManager.Instance.CurrentSong.Song;
 
             if (listViewSongHistory.Items.Count == 0 ||
-                (Guid)listViewSongHistory.Items[0].Tag != s.GUID)
+                (Guid)listViewSongHistory.Items[0].Tag != s.Guid)
             {
                 var lvi = new ListViewItem(s.Title);
-                lvi.Tag = s.GUID;
+                lvi.Tag = s.Guid;
                 listViewSongHistory.Items.Insert(0, lvi);
                 listViewSongHistory.Columns[0].Width = -2;
             }
@@ -487,7 +527,10 @@ namespace PraiseBase.Presenter.Forms
             if (sourcePosition == AdditionalInformationPosition.FirstSlide && isFirstSlide(e.PartNumber, e.SlideNumber) ||
                 sourcePosition == AdditionalInformationPosition.LastSlide && isLastSlide(s, e.PartNumber, e.SlideNumber))
             {
-                ssl.HeaderText = new String[] { s.SongBooksString };
+                ssl.HeaderText = new String[]
+                {
+                    s.SongBooks.ToString()
+                };
             }
 
             // Set footer text (copyright)
@@ -811,8 +854,7 @@ namespace PraiseBase.Presenter.Forms
                     // Linked layers
                     if (
                         !(!linkLayers ^
-                           ((ModifierKeys & Keys.Shift) == Keys.Shift && SongManager.Instance.CurrentSong != null &&
-                            SongManager.Instance.CurrentSong.Song.CurrentSlide >= 0)))
+                           ((ModifierKeys & Keys.Shift) == Keys.Shift && SongManager.Instance.CurrentSong != null)))
                     {
                         ProjectionManager.Instance.HideLayer(2, Settings.Default.ProjectionFadeTime);
                     }
@@ -887,9 +929,7 @@ namespace PraiseBase.Presenter.Forms
 
         private void toolStripButton5_Click(object sender, EventArgs e)
         {
-            SongEditor wnd = SongEditor.getInstance();
-            wnd.Show();
-            wnd.Focus();
+            ShowAndFocusSongEditor();
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -1087,8 +1127,7 @@ namespace PraiseBase.Presenter.Forms
                 {
                     if (
                         !(!linkLayers ^
-                          ((ModifierKeys & Keys.Shift) == Keys.Shift && SongManager.Instance.CurrentSong != null &&
-                           SongManager.Instance.CurrentSong.Song.CurrentSlide >= 0)))
+                          ((ModifierKeys & Keys.Shift) == Keys.Shift && SongManager.Instance.CurrentSong != null)))
                     {
                         ProjectionManager.Instance.HideLayer(2);
                     }
@@ -1267,7 +1306,7 @@ namespace PraiseBase.Presenter.Forms
                             {
                                 var s = SongManager.Instance.SongList[g].Song;
                                 var lvi = new ListViewItem(s.Title);
-                                lvi.Tag = s.GUID;
+                                lvi.Tag = s.Guid;
                                 listViewSetList.Items.Add(lvi);
                             }
                         }
@@ -1310,24 +1349,18 @@ namespace PraiseBase.Presenter.Forms
             Process.Start(Settings.Default.DataDirectory + Path.DirectorySeparatorChar + Settings.Default.SetListDir);
         }
 
-        private void toolStripButtonDataFolder_ButtonClick(object sender, EventArgs e)
-        {
-            Process.Start(Settings.Default.DataDirectory);
-        }
-
-        private void datenverzeichnisToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            Process.Start(Settings.Default.DataDirectory);
-        }
-
         private void toolStripMenuItem3_Click(object sender, EventArgs e)
         {
-            var dlg = new SongBrowserDialog();
+            SongBrowserDialog dlg = new SongBrowserDialog();
+            dlg.Tags = Settings.Default.Tags;
             dlg.ShowDialog(this);
-            if (dlg.OpenInEditor)
+            if (dlg.OpenInEditor.Any())
             {
-                SongEditor.getInstance().Show();
-                SongEditor.getInstance().BringToFront();
+                foreach (var fn in dlg.OpenInEditor)
+                {
+                    GetSongEditor().OpenSong(fn);
+                }
+                ShowAndBringSongEditorToFront();
             }
         }
 
@@ -1338,19 +1371,28 @@ namespace PraiseBase.Presenter.Forms
 
         private void praiseBoxDatenbankToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            var dlg = new SongImporter(ImportFormat.PraiseBox);
-            if (dlg.ShowDialog(this) == DialogResult.OK)
-            {
-                reloadSongList();
-            }
+            OpenSongImporter(ImportFormat.PraiseBox);
         }
 
         private void worToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            var dlg = new SongImporter(ImportFormat.WorshipSystem);
+            OpenSongImporter(ImportFormat.WorshipSystem);
+        }
+
+        private void OpenSongImporter(ImportFormat format)
+        {
+            var dlg = new SongImporter(Settings.Default, format);
             if (dlg.ShowDialog(this) == DialogResult.OK)
             {
                 reloadSongList();
+                if (dlg.OpenInEditor.Any())
+                {
+                    foreach (var fn in dlg.OpenInEditor)
+                    {
+                        GetSongEditor().OpenSong(fn);
+                    }
+                    ShowAndBringSongEditorToFront();
+                }
             }
         }
 
@@ -1387,8 +1429,7 @@ namespace PraiseBase.Presenter.Forms
                 Application.DoEvents();
 
                 if (
-                    !((ModifierKeys & Keys.Shift) == Keys.Shift && SongManager.Instance.CurrentSong != null &&
-                       SongManager.Instance.CurrentSong.Song.CurrentSlide >= 0))
+                    !((ModifierKeys & Keys.Shift) == Keys.Shift && SongManager.Instance.CurrentSong != null))
                 {
                     ProjectionManager.Instance.HideLayer(2);
                 }
@@ -1452,8 +1493,7 @@ namespace PraiseBase.Presenter.Forms
                 {
                     if (
                         !(!linkLayers ^
-                           ((ModifierKeys & Keys.Shift) == Keys.Shift && SongManager.Instance.CurrentSong != null &&
-                            SongManager.Instance.CurrentSong.Song.CurrentSlide >= 0)))
+                           ((ModifierKeys & Keys.Shift) == Keys.Shift && SongManager.Instance.CurrentSong != null)))
                     {
                         ProjectionManager.Instance.HideLayer(2);
                     }
@@ -1896,43 +1936,36 @@ namespace PraiseBase.Presenter.Forms
         {
             if (listViewSongs.SelectedItems.Count > 0)
             {
-                SongEditor wnd = SongEditor.getInstance();
-                wnd.openSong(SongManager.Instance.CurrentSong.Filename);
-                wnd.Show();
-                wnd.Focus();
+                String fn = SongManager.Instance.CurrentSong.Filename;
+                GetSongEditor().OpenSong(fn);
             }
-            else
-            {
-                SongEditor wnd = SongEditor.getInstance();
-                wnd.Show();
-                wnd.Focus();
-            }
+            ShowAndFocusSongEditor();
         }
 
         private void qaSpellingToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            SongManager.Instance.CurrentSong.Song.SetQA(SongQualityAssuranceIndicator.Spelling, qaSpellingToolStripMenuItem.Checked);
+            SongManager.Instance.CurrentSong.Song.QualityIssues.Set(SongQualityAssuranceIndicator.Spelling, qaSpellingToolStripMenuItem.Checked);
             saveCurrentSong();
             updateQAButtonStage();
         }
 
         private void qaTranslationToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            SongManager.Instance.CurrentSong.Song.SetQA(SongQualityAssuranceIndicator.Translation, qaTranslationToolStripMenuItem.Checked);
+            SongManager.Instance.CurrentSong.Song.QualityIssues.Set(SongQualityAssuranceIndicator.Translation, qaTranslationToolStripMenuItem.Checked);
             saveCurrentSong();
             updateQAButtonStage();
         }
 
         private void qaImagesToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            SongManager.Instance.CurrentSong.Song.SetQA(SongQualityAssuranceIndicator.Images, qaImagesToolStripMenuItem.Checked);
+            SongManager.Instance.CurrentSong.Song.QualityIssues.Set(SongQualityAssuranceIndicator.Images, qaImagesToolStripMenuItem.Checked);
             saveCurrentSong();
             updateQAButtonStage();
         }
 
         private void qaSegmentationToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            SongManager.Instance.CurrentSong.Song.SetQA(SongQualityAssuranceIndicator.Segmentation, qaSegmentationToolStripMenuItem.Checked);
+            SongManager.Instance.CurrentSong.Song.QualityIssues.Set(SongQualityAssuranceIndicator.Segmentation, qaSegmentationToolStripMenuItem.Checked);
             saveCurrentSong();
             updateQAButtonStage();
         }
@@ -1951,7 +1984,7 @@ namespace PraiseBase.Presenter.Forms
 
         private void updateQAButtonStage()
         {
-            if (SongManager.Instance.CurrentSong.Song.Comment != String.Empty || SongManager.Instance.CurrentSong.Song.HasQA())
+            if (SongManager.Instance.CurrentSong.Song.Comment != String.Empty || SongManager.Instance.CurrentSong.Song.QualityIssues.Any())
             {
                 toolStripButtonQA.Image = PraiseBase.Presenter.Properties.Resources.highlight_red__36;
             }

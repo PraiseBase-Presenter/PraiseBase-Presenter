@@ -20,11 +20,6 @@
  *
  */
 
-using System;
-using System.Collections.Generic;
-using System.Drawing;
-using System.Xml;
-using PraiseBase.Presenter.Model;
 using PraiseBase.Presenter.Model.Song;
 
 namespace PraiseBase.Presenter.Persistence.PowerPraise.Extended
@@ -36,17 +31,20 @@ namespace PraiseBase.Presenter.Persistence.PowerPraise.Extended
         /// </summary>
         /// <param name="ppl"></param>
         /// <returns></returns>
-        public Song map(ExtendedPowerPraiseSong ppl)
+        public Song Map(ExtendedPowerPraiseSong ppl)
         {
-            Song song = this.map((PowerPraiseSong)ppl);
+            Song song = Map((PowerPraiseSong)ppl);
 
             song.Comment = ppl.Comment;
-            song.QualityIssues.AddRange(ppl.QualityIssues);
-            song.CcliID = ppl.CcliID;
+            foreach (var e in ppl.QualityIssues)
+            {
+                song.QualityIssues.Add(e);
+            }
+            song.CcliIdentifier = ppl.CcliID;
             song.Author.AddRange(ppl.Author);
             song.RightsManagement = ppl.RightsManagement;
             song.Publisher = ppl.Publisher;
-            song.GUID = ppl.GUID;
+            song.Guid = ppl.GUID;
 
             return song;
         }
@@ -56,17 +54,20 @@ namespace PraiseBase.Presenter.Persistence.PowerPraise.Extended
         /// </summary>
         /// <param name="song"></param>
         /// <param name="ppl"></param>
-        public void map(Song song, ExtendedPowerPraiseSong ppl)
+        public void Map(Song song, ExtendedPowerPraiseSong ppl)
         {
-            this.map(song, (PowerPraiseSong)ppl);
+            Map(song, (PowerPraiseSong)ppl);
             
             ppl.Comment = song.Comment;
-            ppl.QualityIssues.AddRange(song.QualityIssues);
-            ppl.CcliID = song.CcliID;
+            foreach (var e in song.QualityIssues)
+            {
+                ppl.QualityIssues.Add(e);
+            }
+            ppl.CcliID = song.CcliIdentifier;
             ppl.Author.AddRange(song.Author);
             ppl.RightsManagement = song.RightsManagement;
             ppl.Publisher = song.Publisher;
-            ppl.GUID = song.GUID;
+            ppl.GUID = song.Guid;
         }
     }
 }

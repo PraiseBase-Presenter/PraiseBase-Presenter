@@ -35,12 +35,11 @@
     <Reference Include="System.Core" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Forms" />
-    <Reference Include="System.Xml.Linq" />
-    <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Manager\SongItem.cs" />
     <Compile Include="Model\AdditionalInformationPosition.cs" />
     <Compile Include="Model\Bible\Bible.cs" />
     <Compile Include="Model\Bible\BibleBook.cs" />
@@ -52,6 +51,11 @@
     <Compile Include="Model\Song\ColorBackground.cs" />
     <Compile Include="Model\Song\ImageBackground.cs" />
     <Compile Include="Model\Song\IBackground.cs" />
+    <Compile Include="Model\Song\QualityIssues.cs" />
+    <Compile Include="Model\Song\PartSequences.cs" />
+    <Compile Include="Model\Song\SongBooks.cs" />
+    <Compile Include="Model\Song\SongAuthorType.cs" />
+    <Compile Include="Model\Song\SongAuthors.cs" />
     <Compile Include="Model\TranslationPosition.cs" />
     <Compile Include="Persistence\AbstractSongFilePlugin.cs" />
     <Compile Include="Persistence\CCLI\SongSelectFilePlugin.cs" />
@@ -122,6 +126,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Util\FileUtils.cs" />
     <Compile Include="Util\ImageUtils.cs" />
+    <Compile Include="Util\ListUtil.cs" />
     <Compile Include="Util\StringUtils.cs" />
   </ItemGroup>
   <ItemGroup>

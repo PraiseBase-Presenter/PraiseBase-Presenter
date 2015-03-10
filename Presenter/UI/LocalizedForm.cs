@@ -1,10 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Windows.Forms;
+﻿using System.Collections.Generic;
 using System.ComponentModel;
 using System.Globalization;
+using System.Windows.Forms;
 using PraiseBase.Presenter.Properties;
 
 namespace PraiseBase.Presenter.UI

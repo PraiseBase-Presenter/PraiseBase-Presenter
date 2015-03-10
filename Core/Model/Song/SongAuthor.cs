@@ -22,31 +22,40 @@
 
 namespace PraiseBase.Presenter.Model.Song
 {
-    public enum SongAuthorType
-    {
-        words,
-        music,
-        translation
-    }
-
+    /// <summary>
+    /// Describes the author of a song
+    /// </summary>
     public class SongAuthor
     {
+        /// <summary>
+        /// Author name
+        /// </summary>
         public string Name { get; set; }
 
+        /// <summary>
+        /// Author type
+        /// </summary>
         public SongAuthorType Type { get; set; }
+
+        protected bool Equals(SongAuthor other)
+        {
+            return Type == other.Type && string.Equals(Name, other.Name);
+        }
 
         public override bool Equals(object obj)
         {
-            if (obj == null || GetType() != obj.GetType()) {
-                return false;
-            }
-            SongAuthor a = (SongAuthor)obj;
-            return this.Name == a.Name && this.Type == a.Type;
+            if (ReferenceEquals(null, obj)) return false;
+            if (ReferenceEquals(this, obj)) return true;
+            if (obj.GetType() != this.GetType()) return false;
+            return Equals((SongAuthor) obj);
         }
 
         public override int GetHashCode()
         {
-            return Name.GetHashCode() ^ Type.GetHashCode();
+            unchecked
+            {
+                return ((int) Type*397) ^ (Name != null ? Name.GetHashCode() : 0);
+            }
         }
     }
 }

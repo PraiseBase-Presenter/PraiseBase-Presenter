@@ -24,6 +24,7 @@ using System;
 using System.Windows.Forms;
 using PraiseBase.Presenter.Forms;
 using PraiseBase.Presenter.Properties;
+using PraiseBase.Presenter.UI.Editor;
 
 namespace PraiseBase.Presenter
 {
@@ -62,7 +63,7 @@ namespace PraiseBase.Presenter
                 mutex = new System.Threading.Mutex(true, mutexName);
             }
 
-            Application.Run(SongEditor.getInstance());
+            Application.Run(SongEditor.GetInstance());
 
             GC.KeepAlive(mutex);
         }

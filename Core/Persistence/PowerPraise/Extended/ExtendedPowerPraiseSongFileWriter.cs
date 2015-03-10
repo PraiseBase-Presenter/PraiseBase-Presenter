@@ -21,9 +21,7 @@
  */
 
 using System;
-using System.Collections.Generic;
 using System.Xml;
-using PraiseBase.Presenter.Model;
 using PraiseBase.Presenter.Model.Song;
 
 namespace PraiseBase.Presenter.Persistence.PowerPraise.Extended

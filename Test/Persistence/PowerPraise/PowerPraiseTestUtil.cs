@@ -92,9 +92,9 @@ namespace PraiseBase.Presenter.Persistence.PowerPraise
             part.Slides.Add(slide);
             song.Parts.Add(part);
 
-            song.PartSequence.Add(0);
-            song.PartSequence.Add(1);
-            song.PartSequence.Add(2);
+            song.PartSequence.Add(song.Parts[0]);
+            song.PartSequence.Add(song.Parts[1]);
+            song.PartSequence.Add(song.Parts[2]);
 
             song.MainText = new Model.TextFormatting(
                 new Font("Times New Roman", 44, FontStyle.Bold | FontStyle.Italic),

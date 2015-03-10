@@ -76,13 +76,13 @@ namespace PraiseBase.Presenter.Persistence.PowerPraise.Extended
             Song expected = PowerPraiseTestUtil.GetExpectedSong();
             Song actual = target.Load(filename);
 
-            Assert.AreEqual(expected.GUID, actual.GUID, "Wrong GUID");
+            Assert.AreEqual(expected.Guid, actual.Guid, "Wrong GUID");
             Assert.AreEqual(expected.ModifiedTimestamp, actual.ModifiedTimestamp, "Wrong modified timestamp");
             Assert.AreEqual(expected.CreatedIn, actual.CreatedIn, "Wrong created in");
             Assert.AreEqual(expected.ModifiedIn, actual.ModifiedIn, "Wrong modified in");
             Assert.AreEqual(expected.Title, actual.Title, "Wrong song title");
             Assert.AreEqual(expected.Language, actual.Language, "Wrong language");
-            Assert.AreEqual(expected.CcliID, actual.CcliID, "Wrong CcliID");
+            Assert.AreEqual(expected.CcliIdentifier, actual.CcliIdentifier, "Wrong CcliID");
             Assert.AreEqual(expected.Copyright, actual.Copyright, "Wrong copyright");
             Assert.AreEqual(expected.CopyrightPosition, actual.CopyrightPosition, "Wrong copyright position");
             Assert.AreEqual(expected.SourcePosition, actual.SourcePosition, "Wrong source position");
@@ -113,7 +113,7 @@ namespace PraiseBase.Presenter.Persistence.PowerPraise.Extended
             }
             CollectionAssert.AreEqual(expected.PartSequence, actual.PartSequence, "Wrong part sequence");
 
-            CollectionAssert.AreEqual(expected.QualityIssues, actual.QualityIssues, "Wrong QA issues");
+            Assert.AreEqual(expected.QualityIssues, actual.QualityIssues, "Wrong QA issues");
 
             Assert.AreEqual(expected.MainText.Font, actual.MainText.Font);
             Assert.AreEqual(expected.MainText.Color.ToArgb(), actual.MainText.Color.ToArgb());
@@ -163,8 +163,8 @@ namespace PraiseBase.Presenter.Persistence.PowerPraise.Extended
             Assert.AreEqual(expected.TextBorders.SourceRight, actual.TextBorders.SourceRight);
             Assert.AreEqual(expected.TextBorders.SourceTop, actual.TextBorders.SourceTop);
 
-            Assert.IsTrue(actual.SearchText.Contains("näher mein gott zu dir"));
-            Assert.IsTrue(actual.SearchText.Contains("geborgen"));
+            Assert.IsTrue(actual.GetSearchableText().Contains("näher mein gott zu dir"));
+            Assert.IsTrue(actual.GetSearchableText().Contains("geborgen"));
         }
 
         /// <summary>
@@ -184,16 +184,16 @@ namespace PraiseBase.Presenter.Persistence.PowerPraise.Extended
             ISongFileReader<PowerPraiseSong> reader = new PowerPraiseSongFileReader();
             ISongFileMapper<PowerPraiseSong> mapper = new PowerPraiseSongFileMapper();
             string filename = "Resources/powerpraise/Näher, mein Gott zu Dir.ppl";
-            Song actual = mapper.map(reader.Load(filename));
+            Song actual = mapper.Map(reader.Load(filename));
             Song expected = PowerPraiseTestUtil.GetExpectedSong();
 
-            Assert.AreEqual(expected.GUID, actual.GUID, "Wrong GUID");
+            Assert.AreEqual(expected.Guid, actual.Guid, "Wrong GUID");
             Assert.AreEqual(expected.ModifiedTimestamp, actual.ModifiedTimestamp, "Wrong modified timestamp");
             Assert.AreEqual(expected.CreatedIn, actual.CreatedIn, "Wrong created in");
             Assert.AreEqual(expected.ModifiedIn, actual.ModifiedIn, "Wrong modified in");
             Assert.AreEqual(expected.Title, actual.Title, "Wrong song title");
             Assert.AreEqual(expected.Language, actual.Language, "Wrong language");
-            Assert.AreEqual(expected.CcliID, actual.CcliID, "Wrong CcliID");
+            Assert.AreEqual(expected.CcliIdentifier, actual.CcliIdentifier, "Wrong CcliID");
             Assert.AreEqual(expected.Copyright, actual.Copyright, "Wrong copyright");
             Assert.AreEqual(expected.CopyrightPosition, actual.CopyrightPosition, "Wrong copyright position");
             Assert.AreEqual(expected.SourcePosition, actual.SourcePosition, "Wrong source position");
@@ -224,7 +224,7 @@ namespace PraiseBase.Presenter.Persistence.PowerPraise.Extended
             }
             CollectionAssert.AreEqual(expected.PartSequence, actual.PartSequence, "Wrong part sequence");
 
-            CollectionAssert.AreEqual(expected.QualityIssues, actual.QualityIssues, "Wrong QA issues");
+            Assert.AreEqual(expected.QualityIssues, actual.QualityIssues, "Wrong QA issues");
 
             Assert.AreEqual(expected.MainText.Font, actual.MainText.Font);
             Assert.AreEqual(expected.MainText.Color.ToArgb(), actual.MainText.Color.ToArgb());
@@ -274,8 +274,8 @@ namespace PraiseBase.Presenter.Persistence.PowerPraise.Extended
             Assert.AreEqual(expected.TextBorders.SourceRight, actual.TextBorders.SourceRight);
             Assert.AreEqual(expected.TextBorders.SourceTop, actual.TextBorders.SourceTop);
 
-            Assert.IsTrue(actual.SearchText.Contains("näher mein gott zu dir"));
-            Assert.IsTrue(actual.SearchText.Contains("geborgen"));
+            Assert.IsTrue(actual.GetSearchableText().Contains("näher mein gott zu dir"));
+            Assert.IsTrue(actual.GetSearchableText().Contains("geborgen"));
 
         }
 
@@ -337,7 +337,7 @@ namespace PraiseBase.Presenter.Persistence.PowerPraise.Extended
 
             Song sng = PowerPraiseTestUtil.GetExpectedSong(); ;
             PowerPraiseSong ppl = new PowerPraiseSong();
-            mapper.map(sng, ppl);
+            mapper.Map(sng, ppl);
             writer.Save(filename, ppl);
 
             try

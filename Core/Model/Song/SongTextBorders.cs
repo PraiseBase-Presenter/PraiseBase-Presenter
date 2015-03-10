@@ -21,6 +21,7 @@
  */
 
 using System;
+
 namespace PraiseBase.Presenter.Model
 {
     public class SongTextBorders : ICloneable
@@ -57,13 +58,30 @@ namespace PraiseBase.Presenter.Model
         /// <returns></returns>
         public override int GetHashCode()
         {
-            return TextLeft.GetHashCode()
-                 ^ TextTop.GetHashCode()
-                 ^ TextRight.GetHashCode()
-                 ^ TextBottom.GetHashCode()
-                 ^ CopyrightBottom.GetHashCode()
-                 ^ SourceTop.GetHashCode()
-                 ^ SourceRight.GetHashCode();
+            unchecked
+            {
+                var hashCode = TextLeft;
+                hashCode = (hashCode*397) ^ TextTop;
+                hashCode = (hashCode*397) ^ TextRight;
+                hashCode = (hashCode*397) ^ TextBottom;
+                hashCode = (hashCode*397) ^ CopyrightBottom;
+                hashCode = (hashCode*397) ^ SourceRight;
+                hashCode = (hashCode*397) ^ SourceTop;
+                return hashCode;
+            }
+        }
+
+        protected bool Equals(SongTextBorders other)
+        {
+            return TextLeft == other.TextLeft && TextTop == other.TextTop && TextRight == other.TextRight && TextBottom == other.TextBottom && CopyrightBottom == other.CopyrightBottom && SourceRight == other.SourceRight && SourceTop == other.SourceTop;
+        }
+
+        public override bool Equals(object obj)
+        {
+            if (ReferenceEquals(null, obj)) return false;
+            if (ReferenceEquals(this, obj)) return true;
+            if (obj.GetType() != this.GetType()) return false;
+            return Equals((SongTextBorders) obj);
         }
 
         public object Clone()

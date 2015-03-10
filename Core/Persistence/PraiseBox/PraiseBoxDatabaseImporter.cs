@@ -1,10 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Data;
 using System.Data.OleDb;
-using System.Linq;
-using System.Text;
 using System.Text.RegularExpressions;
+using System.Windows.Forms;
 using PraiseBase.Presenter.Model.Song;
 
 namespace PraiseBase.Presenter.Persistence.PraiseBox
@@ -22,7 +19,7 @@ namespace PraiseBase.Presenter.Persistence.PraiseBox
 
             sng.Title = aReader.GetString(1);
 
-            System.Windows.Forms.RichTextBox rtf = new System.Windows.Forms.RichTextBox();
+            RichTextBox rtf = new RichTextBox();
             rtf.Rtf = aReader.GetString(2);
             string text = rtf.Text.ToString().Trim();
             text = text.Replace("\n", Environment.NewLine);

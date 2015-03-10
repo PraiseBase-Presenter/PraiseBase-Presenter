@@ -1,9 +1,5 @@
-﻿using PraiseBase.Presenter.Model;
-using System;
-using System.Collections.Generic;
-using System.Drawing;
-using System.Linq;
-using System.Text;
+﻿using System;
+using PraiseBase.Presenter.Model;
 
 namespace PraiseBase.Presenter.Projection
 {

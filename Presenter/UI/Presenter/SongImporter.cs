@@ -1,29 +1,34 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Data;
-using System.Data.OleDb;
 using System.IO;
 using System.Linq;
-using System.Text.RegularExpressions;
 using System.Windows.Forms;
-using PraiseBase.Presenter.Properties;
-using PraiseBase.Presenter.Persistence;
 using PraiseBase.Presenter.Model.Song;
-using PraiseBase.Presenter.Util;
+using PraiseBase.Presenter.Persistence;
 using PraiseBase.Presenter.Persistence.PraiseBox;
+using PraiseBase.Presenter.Properties;
+using PraiseBase.Presenter.Util;
 
-namespace PraiseBase.Presenter.Forms
+namespace PraiseBase.Presenter.UI.Presenter
 {
     public partial class SongImporter : Form
     {
         private ImportFormat _format;
 
+        private Settings _settings;
+
+        /// <summary>
+        /// List of songs to be opened in the editor
+        /// </summary>
+        public List<string> OpenInEditor { get; private set; }
+
         /// <summary>
         /// Imports songs from other systems
         /// </summary>
         /// <param name="importFormat">Import type</param>
-        public SongImporter(ImportFormat importFormat)
+        public SongImporter(Settings settings, ImportFormat importFormat)
         {
+            _settings = settings;
             _format = importFormat;
             InitializeComponent();
         }
@@ -85,6 +90,8 @@ namespace PraiseBase.Presenter.Forms
 
         private void buttonImport_Click(object sender, EventArgs e)
         {
+            SongTemplateMapper stm = new SongTemplateMapper(_settings);
+
             List<String> filesToOpen = new List<string>();
             int cnt = 0;
             for (int x = 0; x < listViewSongs.Items.Count; x++)
@@ -95,20 +102,20 @@ namespace PraiseBase.Presenter.Forms
                     Song sng = ((Song)listViewSongs.Items[x].Tag);
 
                     // Apply formatting
-                    SongTemplateUtil.ApplyFormattingFromSettings(Settings.Default, sng);
+                    stm.ApplyFormattingFromSettings(sng);
 
                     // TODO: Allow selection of plugin
                     ISongFilePlugin filePlugin = SongFilePluginFactory.Create(SongFilePluginFactory.GetWriterPlugins().First().GetType());
-                    string fileName = Settings.Default.DataDirectory + Path.DirectorySeparatorChar
-                        + Settings.Default.SongDir + Path.DirectorySeparatorChar
+                    string fileName = _settings.DataDirectory + Path.DirectorySeparatorChar
+                        + _settings.SongDir + Path.DirectorySeparatorChar
                         + sng.Title + filePlugin.GetFileExtension();
                     if ((File.Exists(fileName) && (MessageBox.Show(string.Format(Properties.StringResources.SongExistsAlready, ((Song)listViewSongs.Items[x].Tag).Title) 
                         + " " + Properties.StringResources.Overwrite + "?", Properties.StringResources.SongImporter, 
                         MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)) || !File.Exists(fileName))
                     {
-                        if (sng.GUID == Guid.Empty)
+                        if (sng.Guid == Guid.Empty)
                         {
-                            sng.GUID = SongManager.Instance.GenerateGuid();
+                            sng.Guid = Guid.NewGuid();
                         }
                         // TODO Exception handling
                         filePlugin.Save(sng, fileName);
@@ -128,10 +135,9 @@ namespace PraiseBase.Presenter.Forms
                     {
                         if (listViewSongs.Items[x].Checked)
                         {
-                            SongEditor.getInstance().openSong(filesToOpen[x]);
+                            OpenInEditor.Add(filesToOpen[x]);
                         }
                     }
-                    SongEditor.getInstance().Show();
                 }
 
                 DialogResult = DialogResult.OK;

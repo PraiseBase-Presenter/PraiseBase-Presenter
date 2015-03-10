@@ -22,11 +22,10 @@
 
 using System;
 using System.Collections.Generic;
-using System.Drawing;
-using System.Xml;
+using System.Linq;
+using System.Text.RegularExpressions;
 using PraiseBase.Presenter.Model;
 using PraiseBase.Presenter.Model.Song;
-using System.Text.RegularExpressions;
 
 namespace PraiseBase.Presenter.Persistence.PowerPraise
 {
@@ -37,13 +36,18 @@ namespace PraiseBase.Presenter.Persistence.PowerPraise
         /// </summary>
         /// <param name="ppl"></param>
         /// <returns></returns>
-        public Song map(PowerPraiseSong ppl)
+        public Song Map(PowerPraiseSong ppl)
         {
-            Song song = new Song();
+            Song song = new Song
+            {
+                Title = ppl.Title, 
+                Language = ppl.Language
+            };
 
-            song.Title = ppl.Title;
-            song.Language = ppl.Language;
-            song.Themes.Add(ppl.Category);
+            if (ppl.Category != PowerPraiseConstants.NoCategory)
+            {
+                song.Themes.Add(ppl.Category);
+            }
 
             // Copyright text
             song.Copyright = String.Join(Environment.NewLine, ppl.CopyrightText.ToArray());
@@ -61,20 +65,22 @@ namespace PraiseBase.Presenter.Persistence.PowerPraise
             }
 
             // Source / songbook
-            song.SongBooksString = ppl.SourceText;
+            song.SongBooks.FromString(ppl.SourceText);
             song.SourcePosition = ppl.SourceTextEnabled ? AdditionalInformationPosition.FirstSlide : AdditionalInformationPosition.None;
 
             // Song parts
             foreach (PowerPraiseSongPart prt in ppl.Parts)
             {
-                SongPart part = new SongPart();
-                part.Caption = prt.Caption;
+                SongPart part = new SongPart
+                {
+                    Caption = prt.Caption
+                };
                 foreach (PowerPraiseSongSlide sld in prt.Slides)
                 {
                     SongSlide slide = new SongSlide();
                     if (sld.BackgroundNr >= 0 && ppl.BackgroundImages.Count > sld.BackgroundNr - 1)
                     {
-                        slide.Background = parseBackground(ppl.BackgroundImages[sld.BackgroundNr]);
+                        slide.Background = ParseBackground(ppl.BackgroundImages[sld.BackgroundNr]);
                     }
                     slide.TextSize = sld.MainSize > 0 ? sld.MainSize : (song.MainText.Font != null ? song.MainText.Font.Size : 0);
                     slide.Lines.AddRange(sld.Lines);
@@ -87,17 +93,177 @@ namespace PraiseBase.Presenter.Persistence.PowerPraise
             // Order
             foreach (PowerPraiseSongPart o in ppl.Order)
             {
-                int i;
-                for (i = 0; i < ppl.Parts.Count; i++)
+                foreach (SongPart p in song.Parts)
                 {
-                    if (ppl.Parts[i].Caption == o.Caption)
+                    if (p.Caption == o.Caption)
                     {
-                        song.PartSequence.Add(i);
+                        song.PartSequence.Add(p);
                         break;
                     }
                 }
             }
 
+            MapFormatting(ppl, song);
+
+            return song;
+        }
+
+        private static IBackground ParseBackground(string bg)
+        {
+            if (Regex.IsMatch(bg, @"^\d+$"))
+            {
+                int trySize;
+                if (int.TryParse(bg, out trySize))
+                {
+                    try
+                    {
+                        return new ColorBackground(PowerPraiseFileUtil.ConvertColor(trySize));
+                    } 
+                    catch (ArgumentException)
+                    {
+                        return null;
+                    }
+                }
+            }
+            else if (bg.Trim() != String.Empty)
+            {
+                return new ImageBackground(bg);
+            }
+            return null;
+        }
+
+        private static string MapBackground(IBackground bg) {
+            if (bg != null)
+            {
+                if (bg.GetType() == typeof(ImageBackground))
+                {
+                    return ((ImageBackground)bg).ImagePath;
+                }
+                if (bg.GetType() == typeof(ColorBackground))
+                {
+                    return PowerPraiseFileUtil.ConvertColor(((ColorBackground)bg).Color).ToString();
+                }
+            }
+            return null;
+        }
+
+        /// <summary>
+        /// Maps a song to a PowerPraise song object
+        /// </summary>
+        /// <param name="song"></param>
+        /// <param name="ppl"></param>
+        public void Map(Song song, PowerPraiseSong ppl)
+        {
+            // General
+            ppl.Title = song.Title;
+            ppl.Language = song.Language;
+            ppl.Category = null;
+            foreach (var th in song.Themes)
+            {
+                if (th != PowerPraiseConstants.NoCategory)
+                {
+                    ppl.Category = th;
+                    break;
+                }
+            }
+
+            int bgIndex = 0;
+            Dictionary<string, int> backgrounds = new Dictionary<string, int>();
+            
+            // Song parts
+            foreach (var songPart in song.Parts)
+            {
+                PowerPraiseSongPart pplPart = new PowerPraiseSongPart
+                {
+                    Caption = songPart.Caption
+                };
+                foreach (var songSlide in songPart.Slides)
+                {
+                    PowerPraiseSongSlide pplSlide = new PowerPraiseSongSlide();
+
+                    string bg = MapBackground(songSlide.Background);
+                    int backgroundNr;
+                    if (bg == null)
+                    {
+                        bg = PowerPraiseConstants.DefaultBackground;
+                    }
+                    if (!backgrounds.ContainsKey(bg))
+                    {
+                        backgroundNr = bgIndex;
+                        backgrounds.Add(bg, bgIndex++);
+                    }
+                    else
+                    {
+                        backgroundNr = backgrounds[bg];
+                    }
+                    pplSlide.BackgroundNr = backgroundNr;
+
+                    pplSlide.MainSize = (int)(songSlide.TextSize > 0 ? songSlide.TextSize : (song.MainText != null && song.MainText.Font != null ? song.MainText.Font.Size : 0));
+                    pplSlide.Lines.AddRange(songSlide.Lines);
+                    pplSlide.Translation.AddRange(songSlide.Translation);
+                    pplPart.Slides.Add(pplSlide);
+                }
+                ppl.Parts.Add(pplPart);
+            }
+
+            // Part order
+            if (song.PartSequence.Any())
+            {
+                foreach (SongPart p in song.PartSequence)
+                {
+                    foreach (PowerPraiseSongPart t in ppl.Parts)
+                    {
+                        if (p.Caption == t.Caption)
+                        {
+                            ppl.Order.Add(t);
+                            break;
+                        }
+                    }
+                }
+            }
+            else
+            {
+                foreach (PowerPraiseSongPart t in ppl.Parts)
+                {
+                    ppl.Order.Add(t);
+                }
+            }
+
+            // Copyright text
+            ppl.CopyrightText.Add(song.Copyright);
+            if (song.CopyrightPosition ==  AdditionalInformationPosition.FirstSlide)
+            {
+                ppl.CopyrightTextPosition = PowerPraiseSong.CopyrightPosition.FirstSlide;
+            }
+            else if (song.CopyrightPosition == AdditionalInformationPosition.LastSlide)
+            {
+                ppl.CopyrightTextPosition = PowerPraiseSong.CopyrightPosition.LastSlide;
+            }
+            else if (song.CopyrightPosition == AdditionalInformationPosition.None)
+            {
+                ppl.CopyrightTextPosition = PowerPraiseSong.CopyrightPosition.None;
+            }
+
+            // Source / songbook
+            ppl.SourceText = song.SongBooks.ToString();
+            ppl.SourceTextEnabled = (song.SourcePosition == AdditionalInformationPosition.FirstSlide);
+
+
+            // Backgrounds
+            ppl.BackgroundImages.AddRange(backgrounds.Keys);
+
+            if (song.MainText != null)
+            {
+                ppl.MainLineSpacing = song.MainText.LineSpacing;
+                ppl.TranslationLineSpacing = song.TranslationText.LineSpacing;
+            }
+
+            MapFormatting(song, ppl);
+        }
+
+
+        private void MapFormatting(PowerPraiseSong ppl, Song song)
+        {
             // Formatting definitions
             song.MainText = new TextFormatting(
                 ppl.MainTextFontFormatting.Font,
@@ -145,129 +311,11 @@ namespace PraiseBase.Presenter.Persistence.PowerPraise
                 ppl.Borders.CopyrightBottom,
                 ppl.Borders.SourceTop,
                 ppl.Borders.SourceRight
-            );            
-
-            song.UpdateSearchText();
-
-            return song;
+            );
         }
 
-        private static IBackground parseBackground(string bg)
+        private void MapFormatting(Song song, PowerPraiseSong ppl)
         {
-            if (Regex.IsMatch(bg, @"^\d+$"))
-            {
-                int trySize;
-                if (int.TryParse(bg, out trySize))
-                {
-                    try
-                    {
-                        return new ColorBackground(PowerPraiseFileUtil.ConvertColor(trySize));
-                    } 
-                    catch (ArgumentException)
-                    {
-                        return null;
-                    }
-                }
-            }
-            else if (bg.Trim() != String.Empty)
-            {
-                return new ImageBackground(bg);
-            }
-            return null;
-        }
-
-        private static string mapBackground(IBackground bg) {
-            if (bg != null)
-            {
-                if (bg.GetType() == typeof(ImageBackground))
-                {
-                    return ((ImageBackground)bg).ImagePath;
-                }
-                if (bg.GetType() == typeof(ColorBackground))
-                {
-                    return PowerPraiseFileUtil.ConvertColor(((ColorBackground)bg).Color).ToString();
-                }
-            }
-            return null;
-        }
-
-        /// <summary>
-        /// Maps a song to a PowerPraise song object
-        /// </summary>
-        /// <param name="song"></param>
-        /// <param name="ppl"></param>
-        public void map(Song song, PowerPraiseSong ppl)
-        {
-            // General
-            ppl.Title = song.Title;
-            ppl.Language = song.Language;
-            ppl.Category = song.Themes.Count > 0 ? song.Themes[0] : null;
-
-            int bgIndex = 0;
-            Dictionary<string, int> backgrounds = new Dictionary<string, int>();
-            
-            // Song parts
-            foreach (var songPart in song.Parts)
-            {
-                PowerPraiseSongPart pplPart = new PowerPraiseSongPart();
-                pplPart.Caption = songPart.Caption;
-                foreach (var songSlide in songPart.Slides)
-                {
-                    PowerPraiseSongSlide pplSlide = new PowerPraiseSongSlide();
-
-                    string bg = mapBackground(songSlide.Background);
-                    int backgroundNr = 0;
-                    if (bg == null)
-                    {
-                        bg = PowerPraiseConstants.DefaultBackground;
-                    }
-                    if (!backgrounds.ContainsKey(bg))
-                    {
-                        backgroundNr = bgIndex;
-                        backgrounds.Add(bg, bgIndex++);
-                    }
-                    else
-                    {
-                        backgroundNr = backgrounds[bg];
-                    }
-                    pplSlide.BackgroundNr = backgroundNr;
-
-                    pplSlide.MainSize = (int)(songSlide.TextSize > 0 ? songSlide.TextSize : (song.MainText != null && song.MainText.Font != null ? song.MainText.Font.Size : 0));
-                    pplSlide.Lines.AddRange(songSlide.Lines);
-                    pplSlide.Translation.AddRange(songSlide.Translation);
-                    pplPart.Slides.Add(pplSlide);
-                }
-                ppl.Parts.Add(pplPart);
-            }
-
-            // Part order
-            foreach (int i in song.PartSequence)
-            {
-                if (ppl.Parts[i] != null)
-                {
-                    ppl.Order.Add(ppl.Parts[i]);
-                }
-            }
-
-            // Copyright text
-            ppl.CopyrightText.Add(song.Copyright);
-            if (song.CopyrightPosition ==  AdditionalInformationPosition.FirstSlide)
-            {
-                ppl.CopyrightTextPosition = PowerPraiseSong.CopyrightPosition.FirstSlide;
-            }
-            else if (song.CopyrightPosition == AdditionalInformationPosition.LastSlide)
-            {
-                ppl.CopyrightTextPosition = PowerPraiseSong.CopyrightPosition.LastSlide;
-            }
-            else if (song.CopyrightPosition == AdditionalInformationPosition.None)
-            {
-                ppl.CopyrightTextPosition = PowerPraiseSong.CopyrightPosition.None;
-            }
-
-            // Source / songbook
-            ppl.SourceText = song.SongBooksString;
-            ppl.SourceTextEnabled = (song.SourcePosition == AdditionalInformationPosition.FirstSlide);
-
             // Formatting definitions
             if (song.MainText != null)
             {
@@ -326,15 +374,6 @@ namespace PraiseBase.Presenter.Persistence.PowerPraise
                 };
             }
 
-            // Backgrounds
-            ppl.BackgroundImages.AddRange(backgrounds.Keys);
-
-            if (song.MainText != null)
-            {
-                ppl.MainLineSpacing = song.MainText.LineSpacing;
-                ppl.TranslationLineSpacing = song.TranslationText.LineSpacing;
-            }
-
             // Text orientation
             ppl.TextOrientation = song.TextOrientation;
             ppl.TranslationTextPosition = song.TranslationPosition;
@@ -353,7 +392,6 @@ namespace PraiseBase.Presenter.Persistence.PowerPraise
                     SourceRight = song.TextBorders.SourceRight
                 };
             }
-
         }
     }
 }

@@ -1,34 +1,33 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using PraiseBase.Presenter.Model.Song;
 
 namespace PraiseBase.Presenter.Persistence.CCLI
 {
     public class SongSelectFileMapper : ISongFileMapper<SongSelectFile>
     {
-        public Song map(SongSelectFile source)
+        public Song Map(SongSelectFile source)
         {
-            Song sng = new Song();
-
-            // CCLI ID
-            sng.CcliID = source.ID;
-            sng.CCliIDReadonly = true;
-
-            // Title
-            sng.Title = source.Title;
-
-            // Copyright
-            sng.Copyright = source.Copyright;
-
-            // Administration / Rights management
-            sng.RightsManagement = source.Admin;
+            Song sng = new Song
+            {
+                // CCLI ID
+                CcliIdentifier = source.ID,
+                IsCCliIdentifierReadonly = true,
+                
+                // Title
+                Title = source.Title,
+                
+                // Copyright
+                Copyright = source.Copyright,
+                
+                // Administration / Rights management
+                RightsManagement = source.Admin
+            };
 
             // Author
-            sng.Author = new List<SongAuthor>();
-            var a = new SongAuthor();
-            a.Name = source.Author;
+            var a = new SongAuthor
+            {
+                Name = source.Author
+            };
             sng.Author.Add(a);
 
             // Themes
@@ -39,20 +38,20 @@ namespace PraiseBase.Presenter.Persistence.CCLI
 
             // Verses
             foreach (var v in source.Verses) {
-                SongPart p = new SongPart();
-                p.Caption = v.Caption;
+                SongPart p = new SongPart
+                {
+                    Caption = v.Caption
+                };
                 SongSlide s = new SongSlide();
                 s.Lines.AddRange(v.Lines);
                 p.Slides.Add(s);
                 sng.Parts.Add(p);
             }
 
-            sng.UpdateSearchText();
-
             return sng;
         }
 
-        public void map(Song source, SongSelectFile target)
+        public void Map(Song source, SongSelectFile target)
         {
             throw new NotImplementedException("Not implemented yet");
         }

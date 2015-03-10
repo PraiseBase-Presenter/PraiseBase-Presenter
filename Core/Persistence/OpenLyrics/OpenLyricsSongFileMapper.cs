@@ -21,15 +21,13 @@
  */
 
 using System;
-using System.Drawing;
-using System.Xml;
 using PraiseBase.Presenter.Model.Song;
 
 namespace PraiseBase.Presenter.Persistence.OpenLyrics
 {
     public class OpenLyricsSongFileMapper : ISongFileMapper<OpenLyricsSong>
     {
-        public Song map(OpenLyricsSong source)
+        public Song Map(OpenLyricsSong source)
         {
             Song sng = new Song();
 
@@ -54,7 +52,7 @@ namespace PraiseBase.Presenter.Persistence.OpenLyrics
             sng.Title = source.Title;
 
             // CCLI
-            sng.CcliID = source.CcliID;
+            sng.CcliIdentifier = source.CcliID;
 
             // Copyright
             sng.Copyright = source.Copyright;
@@ -82,12 +80,10 @@ namespace PraiseBase.Presenter.Persistence.OpenLyrics
                 sng.Parts.Add(part);
             }
 
-            sng.UpdateSearchText();
-
             return sng;
         }
 
-        public void map(Song source, OpenLyricsSong target)
+        public void Map(Song source, OpenLyricsSong target)
         {
             throw new NotImplementedException("Not implemented yet");
         }

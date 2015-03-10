@@ -21,7 +21,8 @@
  */
 
 using System;
-using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
+using System.Linq;
 using System.Runtime.Serialization;
 
 namespace PraiseBase.Presenter.Model.Song
@@ -37,7 +38,7 @@ namespace PraiseBase.Presenter.Model.Song
         /// <summary>
         /// Unique identifier of this song
         /// </summary>
-        public Guid GUID { get; set; }
+        public Guid Guid { get; set; }
 
         /// <summary>
         /// Timestamp when the song has been last modified
@@ -67,12 +68,12 @@ namespace PraiseBase.Presenter.Model.Song
         /// <summary>
         /// CCLI Song ID
         /// </summary>
-        public string CcliID { get; set; }
+        public string CcliIdentifier { get; set; }
 
         /// <summary>
         /// Should the CCLI ID be readonly?
         /// </summary>
-        public bool CCliIDReadonly { get; set; }
+        public bool IsCCliIdentifierReadonly { get; set; }
 
         /// <summary>
         /// Copyright information
@@ -97,38 +98,7 @@ namespace PraiseBase.Presenter.Model.Song
         /// <summary>
         /// Authors of the song
         /// </summary>
-        public List<SongAuthor> Author { get; set; }
-
-        /// <summary>
-        /// All authors as semicolon-separated string
-        /// </summary>
-        public String AuthorString
-        {
-            get
-            {
-                string autstr = string.Empty;
-                foreach (var aut in Author)
-                {
-                    if (autstr != string.Empty)
-                    {
-                        autstr += ";";
-                    }
-                    autstr += aut.Name;
-                }
-                return autstr;
-            }
-            set
-            {
-                int i = 0;
-                foreach (String s in value.Split(new char[] { ';' }, StringSplitOptions.RemoveEmptyEntries))
-                {
-                    SongAuthor author = new SongAuthor();
-                    author.Name = s.Trim();
-                    author.Type = (i++ == 0) ? SongAuthorType.words : SongAuthorType.music;
-                    Author.Add(author);
-                }
-            }
-        }
+        public SongAuthors Author { get; set; }
 
         /// <summary>
         /// Admin
@@ -178,41 +148,7 @@ namespace PraiseBase.Presenter.Model.Song
         /// <summary>
         /// Songbooks the song appears in
         /// </summary>
-        public List<SongBook> SongBooks { get; set; }
-
-        /// <summary>
-        /// All songbooks as semicolon-separated string
-        /// </summary>
-        public String SongBooksString
-        {
-            get
-            {
-                string autstr = string.Empty;
-                foreach (var aut in SongBooks)
-                {
-                    if (autstr != string.Empty)
-                    {
-                        autstr += ";";
-                    }
-                    autstr += aut.Name;
-                }
-                return autstr;
-            }
-            set
-            {
-                foreach (String s in value.Split(new char[] { ';' }, StringSplitOptions.RemoveEmptyEntries))
-                {
-                    SongBook sb = new SongBook();
-                    sb.Name = s.Trim();
-                    SongBooks.Add(sb);
-                }
-            }
-        }
-
-        /// <summary>
-        /// Gets the whole songtext improved for full-text search
-        /// </summary>
-        public string SearchText { get; protected set; }
+        public SongBooks SongBooks { get; set; }
 
         /// <summary>
         /// Gets or sets the list of all parts in the song
@@ -223,17 +159,12 @@ namespace PraiseBase.Presenter.Model.Song
         /// Gets or sets a sequence of part numbers indicating
         /// the real order in which the song is sung
         /// </summary>
-        public List<int> PartSequence { get; set; }
-
-        /// <summary>
-        /// Gets or sets the current slide index
-        /// </summary>
-        public int CurrentSlide { get; set; }
+        public PartSequences PartSequence { get; set; }
 
         /// <summary>
         /// Quality assurance indicators
         /// </summary>
-        public List<SongQualityAssuranceIndicator> QualityIssues { get; set; }
+        public QualityIssues QualityIssues { get; set; }
 
         /// <summary>
         /// Gets or sets the text font and color for the main text
@@ -280,24 +211,6 @@ namespace PraiseBase.Presenter.Model.Song
         /// </summary>
         public SongTextBorders TextBorders { get; set; }
 
-        public bool HasTranslation
-        {
-            get
-            {
-                foreach (var p in Parts)
-                {
-                    foreach (var s in p.Slides)
-                    {
-                        if (s.Translated)
-                        {
-                            return true;
-                        }
-                    }
-                }
-                return false;
-            }
-        }
-
         #endregion Fields
 
         /// <summary>
@@ -307,39 +220,29 @@ namespace PraiseBase.Presenter.Model.Song
         {
             Themes = new TagList();
             Parts = new SongPartList();
-            PartSequence = new List<int>();
-            SearchText = String.Empty;
-            SongBooks = new List<SongBook>();
-            Author = new List<SongAuthor>();
+            PartSequence = new PartSequences();
+            SongBooks = new SongBooks();
+            Author = new SongAuthors();
             Comment = String.Empty;
-            QualityIssues = new List<SongQualityAssuranceIndicator>();
+            QualityIssues = new QualityIssues();
         }
 
         /// <summary>
-        /// Updates the search text
+        /// Gets all text for searching
         /// </summary>
-        public void UpdateSearchText()
+        public string GetSearchableText()
         {
-            string _text = this.Title + " ";
-            foreach (SongPart prt in Parts)
-            {
-                foreach (SongSlide sld in prt.Slides)
-                {
-                    foreach (string ln in sld.Lines)
-                    {
-                        _text += ln + " ";
-                    }
-                }
-            }
+            string text = Title + " ";
+            text = (from prt in Parts from sld in prt.Slides from ln in sld.Lines select ln).Aggregate(text, (current, ln) => current + (ln + " "));
 
-            _text = _text.Trim().ToLower();
-            _text = _text.Replace(",", String.Empty);
-            _text = _text.Replace(".", String.Empty);
-            _text = _text.Replace(";", String.Empty);
-            _text = _text.Replace(Environment.NewLine, String.Empty);
-            _text = _text.Replace("  ", " ");
+            text = text.Trim().ToLower();
+            text = text.Replace(",", String.Empty);
+            text = text.Replace(".", String.Empty);
+            text = text.Replace(";", String.Empty);
+            text = text.Replace(Environment.NewLine, String.Empty);
+            text = text.Replace("  ", " ");
 
-            SearchText = _text;
+            return text;
         }
 
         /// <summary>
@@ -347,71 +250,16 @@ namespace PraiseBase.Presenter.Model.Song
         /// </summary>
         public int GetNumberOfBackgroundImages()
         {
-            int n = 0;
-            for (int i = 0; i < Parts.Count; i++)
-            {
-                for (int j = 0; j < Parts[i].Slides.Count; j++)
-                {
-                    if (Parts[i].Slides[j].Background != null && Parts[i].Slides[j].Background.GetType() == typeof(ImageBackground))
-                    {
-                        n++;
-                    }
-                }
-            }
-            return n;
+            return Parts.SelectMany(t => t.Slides).Count(t1 => t1.Background != null && t1.Background.GetType() == typeof (ImageBackground));
         }
 
         /// <summary>
-        /// Sets a specific quality assurance indicator
-        /// </summary>
-        /// <param name="quai">The indicator to be added</param>
-        public void SetQA(SongQualityAssuranceIndicator quai)
-        {
-            QualityIssues.Add(quai);
-        }
-
-        /// <summary>
-        /// Sets a specific quality assurance indicator
-        /// </summary>
-        /// <param name="quai">The indicator to be added</param>
-        /// <param name="set">True to set value</param>
-        public void SetQA(SongQualityAssuranceIndicator quai, bool set)
-        {
-            if (GetQA(quai)) 
-            {
-                QualityIssues.Remove(quai);
-            }
-            else
-            {
-                QualityIssues.Add(quai);
-            }
-        }
-
-        /// <summary>
-        /// Removes a specific quality assurance indicator
-        /// </summary>
-        /// <param name="quai">The indicator to be removed</param>
-        public void RemQA(SongQualityAssuranceIndicator quai)
-        {
-            QualityIssues.Remove(quai);
-        }
-
-        /// <summary>
-        /// Returns if a specific quality assurance indicator is set
-        /// </summary>
-        /// <param name="quai">The desired indicator</param>
-        public bool GetQA(SongQualityAssuranceIndicator quai)
-        {
-            return QualityIssues.IndexOf(quai) >= 0;
-        }
-
-        /// <summary>
-        /// Indicates îf the song has quality issues
+        /// Returns true if any slide has a translation
         /// </summary>
         /// <returns></returns>
-        public bool HasQA()
+        public bool HasTranslation()
         {
-            return QualityIssues.Count > 0;
+            return Parts.SelectMany(p => p.Slides).Any(s => s.Translated);
         }
 
         /// <summary>
@@ -419,35 +267,60 @@ namespace PraiseBase.Presenter.Model.Song
         /// editor to check if the file was changed
         /// </summary>
         /// <returns></returns>
+        [SuppressMessage("ReSharper", "FunctionComplexityOverflow")]
         public override int GetHashCode()
         {
-            int code = Title.GetHashCode()
-                       ^ Parts.GetHashCode()
-                       ^ QualityIssues.GetHashCode()
-                       ^ MainText.GetHashCode()
-                       ^ TranslationText.GetHashCode()
-                       ^ CopyrightText.GetHashCode()
-                       ^ SourceText.GetHashCode()
-                       ^ Themes.GetHashCode() 
-                       ^ TextOrientation.GetHashCode();
+            unchecked
+            {
+                var hashCode = (ModifiedTimestamp != null ? ModifiedTimestamp.GetHashCode() : 0);
+                hashCode = (hashCode*397) ^ (CreatedIn != null ? CreatedIn.GetHashCode() : 0);
+                hashCode = (hashCode*397) ^ (ModifiedIn != null ? ModifiedIn.GetHashCode() : 0);
+                hashCode = (hashCode*397) ^ (Title != null ? Title.GetHashCode() : 0);
+                hashCode = (hashCode*397) ^ (Language != null ? Language.GetHashCode() : 0);
+                hashCode = (hashCode*397) ^ (CcliIdentifier != null ? CcliIdentifier.GetHashCode() : 0);
+                hashCode = (hashCode*397) ^ IsCCliIdentifierReadonly.GetHashCode();
+                hashCode = (hashCode*397) ^ (Copyright != null ? Copyright.GetHashCode() : 0);
+                hashCode = (hashCode*397) ^ (int) CopyrightPosition;
+                hashCode = (hashCode*397) ^ (int) SourcePosition;
+                hashCode = (hashCode*397) ^ (ReleaseYear != null ? ReleaseYear.GetHashCode() : 0);
+                hashCode = (hashCode*397) ^ (Author != null ? Author.GetHashCode() : 0);
+                hashCode = (hashCode*397) ^ (RightsManagement != null ? RightsManagement.GetHashCode() : 0);
+                hashCode = (hashCode*397) ^ (Publisher != null ? Publisher.GetHashCode() : 0);
+                hashCode = (hashCode*397) ^ (Version != null ? Version.GetHashCode() : 0);
+                hashCode = (hashCode*397) ^ (Key != null ? Key.GetHashCode() : 0);
+                hashCode = (hashCode*397) ^ Transposition;
+                hashCode = (hashCode*397) ^ (Tempo != null ? Tempo.GetHashCode() : 0);
+                hashCode = (hashCode*397) ^ (Variant != null ? Variant.GetHashCode() : 0);
+                hashCode = (hashCode*397) ^ (Themes != null ? Themes.GetHashCode() : 0);
+                hashCode = (hashCode*397) ^ (Comment != null ? Comment.GetHashCode() : 0);
+                hashCode = (hashCode*397) ^ (SongBooks != null ? SongBooks.GetHashCode() : 0);
+                hashCode = (hashCode*397) ^ (Parts != null ? Parts.GetHashCode() : 0);
+                hashCode = (hashCode*397) ^ (PartSequence != null ? PartSequence.GetHashCode() : 0);
+                hashCode = (hashCode*397) ^ (QualityIssues != null ? QualityIssues.GetHashCode() : 0);
+                hashCode = (hashCode*397) ^ (MainText != null ? MainText.GetHashCode() : 0);
+                hashCode = (hashCode*397) ^ (TranslationText != null ? TranslationText.GetHashCode() : 0);
+                hashCode = (hashCode*397) ^ (CopyrightText != null ? CopyrightText.GetHashCode() : 0);
+                hashCode = (hashCode*397) ^ (SourceText != null ? SourceText.GetHashCode() : 0);
+                hashCode = (hashCode*397) ^ (TextOrientation != null ? TextOrientation.GetHashCode() : 0);
+                hashCode = (hashCode*397) ^ (int) TranslationPosition;
+                hashCode = (hashCode*397) ^ TextOutlineEnabled.GetHashCode();
+                hashCode = (hashCode*397) ^ TextShadowEnabled.GetHashCode();
+                hashCode = (hashCode*397) ^ (TextBorders != null ? TextBorders.GetHashCode() : 0);
+                return hashCode;
+            }
+        }
 
-            if (Language != null)
-            {
-                code ^= Language.GetHashCode();
-            }
-            if (Comment != null)
-            {
-                code ^= Comment.GetHashCode();
-            }
-            if (CcliID != null)
-            {
-                code ^= CcliID.GetHashCode();
-            }
-            if (Copyright != null)
-            {
-                code ^= Copyright.GetHashCode();
-            }
-            return code;
+        protected bool Equals(Song other)
+        {
+            return string.Equals(ModifiedTimestamp, other.ModifiedTimestamp) && string.Equals(CreatedIn, other.CreatedIn) && string.Equals(ModifiedIn, other.ModifiedIn) && string.Equals(Title, other.Title) && string.Equals(Language, other.Language) && string.Equals(CcliIdentifier, other.CcliIdentifier) && IsCCliIdentifierReadonly.Equals(other.IsCCliIdentifierReadonly) && string.Equals(Copyright, other.Copyright) && CopyrightPosition == other.CopyrightPosition && SourcePosition == other.SourcePosition && string.Equals(ReleaseYear, other.ReleaseYear) && Equals(Author, other.Author) && string.Equals(RightsManagement, other.RightsManagement) && string.Equals(Publisher, other.Publisher) && string.Equals(Version, other.Version) && string.Equals(Key, other.Key) && Transposition == other.Transposition && Equals(Tempo, other.Tempo) && string.Equals(Variant, other.Variant) && Equals(Themes, other.Themes) && string.Equals(Comment, other.Comment) && Equals(SongBooks, other.SongBooks) && Equals(Parts, other.Parts) && Equals(PartSequence, other.PartSequence) && Equals(QualityIssues, other.QualityIssues) && Equals(MainText, other.MainText) && Equals(TranslationText, other.TranslationText) && Equals(CopyrightText, other.CopyrightText) && Equals(SourceText, other.SourceText) && Equals(TextOrientation, other.TextOrientation) && TranslationPosition == other.TranslationPosition && TextOutlineEnabled.Equals(other.TextOutlineEnabled) && TextShadowEnabled.Equals(other.TextShadowEnabled) && Equals(TextBorders, other.TextBorders);
+        }
+
+        public override bool Equals(object obj)
+        {
+            if (ReferenceEquals(null, obj)) return false;
+            if (ReferenceEquals(this, obj)) return true;
+            if (obj.GetType() != GetType()) return false;
+            return Equals((Song) obj);
         }
 
         /// <summary>
@@ -457,18 +330,18 @@ namespace PraiseBase.Presenter.Model.Song
         /// <param name="context"></param>
         public void GetObjectData(SerializationInfo info, StreamingContext context)
         {
-            info.AddValue("Parts", this.Parts);
-            info.AddValue("Title", this.Title);
-            info.AddValue("QualityIssues", this.QualityIssues);
-            info.AddValue("MainText", this.MainText.ToString());
-            info.AddValue("TranslationText", this.TranslationText.ToString());
-            info.AddValue("CopyrightText", this.CopyrightText.ToString());
-            info.AddValue("SourceText", this.SourceText.ToString());
-            info.AddValue("Language", this.Language);
-            info.AddValue("Comment", this.Comment);
-            info.AddValue("Tags", this.Themes);
-            info.AddValue("CcliID", this.CcliID);
-            info.AddValue("Copyright", this.Copyright);
+            info.AddValue("Parts", Parts);
+            info.AddValue("Title", Title);
+            info.AddValue("QualityIssues", QualityIssues);
+            info.AddValue("MainText", MainText.ToString());
+            info.AddValue("TranslationText", TranslationText.ToString());
+            info.AddValue("CopyrightText", CopyrightText.ToString());
+            info.AddValue("SourceText", SourceText.ToString());
+            info.AddValue("Language", Language);
+            info.AddValue("Comment", Comment);
+            info.AddValue("Tags", Themes);
+            info.AddValue("CcliID", CcliIdentifier);
+            info.AddValue("Copyright", Copyright);
         }
     }
 }

@@ -172,7 +172,7 @@ namespace PraiseBase.Presenter.Persistence.CCLI
             part.Slides.Add(slide);
             expected.Parts.Add(part);
 
-            Song actual = mapper.map(source);
+            Song actual = mapper.Map(source);
             Assert.AreEqual(expected.Title, actual.Title, "Wrong song title");
             Assert.AreEqual(expected.Language, actual.Language, "Wrong language");
             Assert.AreEqual(expected.Copyright, actual.Copyright, "Wrong copyright");
