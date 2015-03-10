@@ -27,12 +27,14 @@ namespace PraiseBase.Presenter.Util
                 Language = _settings.SongDefaultLanguage
             };
 
-            AddSongPart(sng, _settings.SongPartDefaultName);
+            var part = AddSongPart(sng, _settings.SongPartDefaultName);
+
+            sng.PartSequence.Add(part);
 
             return sng;
         }
 
-        public void AddSongPart(Song sng, string caption)
+        public SongPart AddSongPart(Song sng, string caption)
         {
             SongPart prt = new SongPart
             {
@@ -40,15 +42,17 @@ namespace PraiseBase.Presenter.Util
             };
             AddSongSlide(prt);
             sng.Parts.Add(prt);
+            return prt;
         }
 
-        public void AddSongSlide(SongPart part)
+        public SongSlide AddSongSlide(SongPart part)
         {
             SongSlide sld = new SongSlide
             {
                 Background = GetDefaultBackground()
             };
             part.Slides.Add(sld);
+            return sld;
         }
 
         public ColorBackground GetDefaultBackground()

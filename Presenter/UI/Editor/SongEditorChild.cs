@@ -297,7 +297,8 @@ namespace PraiseBase.Presenter.UI.Editor
 
         private void AddSongPartUpdateTree(string caption)
         {
-            _templateMapper.AddSongPart(Song, caption);
+            var newPart = _templateMapper.AddSongPart(Song, caption);
+            Song.PartSequence.Add(newPart);
             PopulateTree();
             treeViewContents.SelectedNode = treeViewContents.Nodes[treeViewContents.Nodes.Count - 1].LastNode;
         }
@@ -437,6 +438,14 @@ namespace PraiseBase.Presenter.UI.Editor
                     MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                 {
                     int partId = treeViewContents.SelectedNode.Index;
+                    SongPart p = Song.Parts[partId];
+                    for (var i = Song.PartSequence.Count - 1; i >= 0; i--)
+                    {
+                        if (Equals(p, Song.PartSequence[i]))
+                        {
+                            Song.PartSequence.RemoveAt(i);
+                        }
+                    }
                     Song.Parts.RemoveAt(partId);
                     PopulateTree();
                     treeViewContents.SelectedNode = treeViewContents.Nodes[0];
