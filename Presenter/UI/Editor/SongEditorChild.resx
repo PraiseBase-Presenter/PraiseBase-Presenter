@@ -316,7 +316,7 @@
     <value>241, 213</value>
   </data>
   <data name="textBoxSongTranslation.TabIndex" type="System.Int32, mscorlib">
-    <value>80</value>
+    <value>3</value>
   </data>
   <data name="textBoxSongTranslation.WordWrap" type="System.Boolean, mscorlib">
     <value>False</value>
@@ -409,7 +409,7 @@
     <value>120, 24</value>
   </data>
   <data name="comboBoxLanguage.TabIndex" type="System.Int32, mscorlib">
-    <value>10</value>
+    <value>11</value>
   </data>
   <data name="&gt;&gt;comboBoxLanguage.Name" xml:space="preserve">
     <value>comboBoxLanguage</value>
@@ -799,7 +799,7 @@
     <value>3, 3, 3, 3</value>
   </data>
   <data name="tabPageFormatting.Size" type="System.Drawing.Size, System.Drawing">
-    <value>204, 270</value>
+    <value>204, 520</value>
   </data>
   <data name="tabPageFormatting.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
@@ -970,7 +970,7 @@
     <value>176, 22</value>
   </data>
   <data name="textBoxRightsManagement.TabIndex" type="System.Int32, mscorlib">
-    <value>115</value>
+    <value>16</value>
   </data>
   <data name="&gt;&gt;textBoxRightsManagement.Name" xml:space="preserve">
     <value>textBoxRightsManagement</value>
@@ -1033,7 +1033,7 @@
     <value>176, 22</value>
   </data>
   <data name="textBoxSongbooks.TabIndex" type="System.Int32, mscorlib">
-    <value>113</value>
+    <value>17</value>
   </data>
   <data name="&gt;&gt;textBoxSongbooks.Name" xml:space="preserve">
     <value>textBoxSongbooks</value>
@@ -1096,7 +1096,7 @@
     <value>176, 22</value>
   </data>
   <data name="textBoxPublisher.TabIndex" type="System.Int32, mscorlib">
-    <value>111</value>
+    <value>15</value>
   </data>
   <data name="&gt;&gt;textBoxPublisher.Name" xml:space="preserve">
     <value>textBoxPublisher</value>
@@ -1159,7 +1159,7 @@
     <value>176, 22</value>
   </data>
   <data name="textBoxAuthors.TabIndex" type="System.Int32, mscorlib">
-    <value>109</value>
+    <value>14</value>
   </data>
   <data name="&gt;&gt;textBoxAuthors.Name" xml:space="preserve">
     <value>textBoxAuthors</value>
@@ -1225,7 +1225,7 @@
     <value>26, 23</value>
   </data>
   <data name="buttonDuplicateSlide.TabIndex" type="System.Int32, mscorlib">
-    <value>104</value>
+    <value>9</value>
   </data>
   <data name="&gt;&gt;buttonDuplicateSlide.Name" xml:space="preserve">
     <value>buttonDuplicateSlide</value>
@@ -1252,7 +1252,7 @@
     <value>110, 22</value>
   </data>
   <data name="textBoxCCLISongID.TabIndex" type="System.Int32, mscorlib">
-    <value>88</value>
+    <value>12</value>
   </data>
   <data name="&gt;&gt;textBoxCCLISongID.Name" xml:space="preserve">
     <value>textBoxCCLISongID</value>
@@ -1279,7 +1279,7 @@
     <value>176, 22</value>
   </data>
   <data name="textBoxCopyright.TabIndex" type="System.Int32, mscorlib">
-    <value>90</value>
+    <value>13</value>
   </data>
   <data name="&gt;&gt;textBoxCopyright.Name" xml:space="preserve">
     <value>textBoxCopyright</value>
@@ -1441,7 +1441,7 @@
     <value>54, 23</value>
   </data>
   <data name="buttonAddSlide.TabIndex" type="System.Int32, mscorlib">
-    <value>97</value>
+    <value>6</value>
   </data>
   <data name="buttonAddSlide.Text" xml:space="preserve">
     <value>Folie</value>
@@ -1510,7 +1510,7 @@
     <value>65, 23</value>
   </data>
   <data name="buttonAddItem.TabIndex" type="System.Int32, mscorlib">
-    <value>13</value>
+    <value>5</value>
   </data>
   <data name="buttonAddItem.Text" xml:space="preserve">
     <value>Liedteil</value>
@@ -1546,7 +1546,7 @@
     <value>26, 23</value>
   </data>
   <data name="buttonMoveUp.TabIndex" type="System.Int32, mscorlib">
-    <value>16</value>
+    <value>7</value>
   </data>
   <data name="&gt;&gt;buttonMoveUp.Name" xml:space="preserve">
     <value>buttonMoveUp</value>
@@ -1576,7 +1576,7 @@
     <value>26, 23</value>
   </data>
   <data name="buttonDelItem.TabIndex" type="System.Int32, mscorlib">
-    <value>14</value>
+    <value>10</value>
   </data>
   <data name="&gt;&gt;buttonDelItem.Name" xml:space="preserve">
     <value>buttonDelItem</value>
@@ -1606,7 +1606,7 @@
     <value>26, 23</value>
   </data>
   <data name="buttonMoveDown.TabIndex" type="System.Int32, mscorlib">
-    <value>17</value>
+    <value>8</value>
   </data>
   <data name="&gt;&gt;buttonMoveDown.Name" xml:space="preserve">
     <value>buttonMoveDown</value>
@@ -1696,7 +1696,7 @@
     <value>247, 248</value>
   </data>
   <data name="treeViewContents.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
+    <value>4</value>
   </data>
   <data name="&gt;&gt;treeViewContents.Name" xml:space="preserve">
     <value>treeViewContents</value>
