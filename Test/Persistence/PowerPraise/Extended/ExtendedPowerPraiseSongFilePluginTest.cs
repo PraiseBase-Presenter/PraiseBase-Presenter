@@ -184,7 +184,7 @@ namespace PraiseBase.Presenter.Persistence.PowerPraise.Extended
             ISongFileReader<PowerPraiseSong> reader = new PowerPraiseSongFileReader();
             ISongFileMapper<PowerPraiseSong> mapper = new PowerPraiseSongFileMapper();
             string filename = "Resources/powerpraise/Näher, mein Gott zu Dir.ppl";
-            Song actual = mapper.map(reader.Load(filename));
+            Song actual = mapper.Map(reader.Load(filename));
             Song expected = PowerPraiseTestUtil.GetExpectedSong();
 
             Assert.AreEqual(expected.Guid, actual.Guid, "Wrong GUID");
@@ -337,7 +337,7 @@ namespace PraiseBase.Presenter.Persistence.PowerPraise.Extended
 
             Song sng = PowerPraiseTestUtil.GetExpectedSong(); ;
             PowerPraiseSong ppl = new PowerPraiseSong();
-            mapper.map(sng, ppl);
+            mapper.Map(sng, ppl);
             writer.Save(filename, ppl);
 
             try

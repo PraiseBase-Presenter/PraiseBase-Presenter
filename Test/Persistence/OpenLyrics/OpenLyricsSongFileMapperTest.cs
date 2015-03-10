@@ -103,7 +103,7 @@ namespace PraiseBase.Presenter.Persistence.OpenLyrics
             expected.Parts.Add(part);
 
             Song actual;
-            actual = mapper.map(source);
+            actual = mapper.Map(source);
             Assert.AreEqual(expected.Title, actual.Title, "Wrong song title");
             Assert.AreEqual(expected.ModifiedTimestamp, actual.ModifiedTimestamp, "Wrong song modified date");
             Assert.AreEqual(expected.CreatedIn, actual.CreatedIn, "Wrong creator app");
@@ -303,7 +303,7 @@ namespace PraiseBase.Presenter.Persistence.OpenLyrics
             part.Slides.Add(slide);
             expected.Parts.Add(part);
 
-            Song actual = mapper.map(source);
+            Song actual = mapper.Map(source);
             Assert.AreEqual(expected.Title, actual.Title, "Wrong song title");
             Assert.AreEqual(expected.ModifiedTimestamp, actual.ModifiedTimestamp, "Wrong song modified date");
             Assert.AreEqual(expected.CreatedIn, actual.CreatedIn, "Wrong creator app");

@@ -5,7 +5,7 @@ namespace PraiseBase.Presenter.Persistence.CCLI
 {
     public class SongSelectFileMapper : ISongFileMapper<SongSelectFile>
     {
-        public Song map(SongSelectFile source)
+        public Song Map(SongSelectFile source)
         {
             Song sng = new Song
             {
@@ -51,7 +51,7 @@ namespace PraiseBase.Presenter.Persistence.CCLI
             return sng;
         }
 
-        public void map(Song source, SongSelectFile target)
+        public void Map(Song source, SongSelectFile target)
         {
             throw new NotImplementedException("Not implemented yet");
         }

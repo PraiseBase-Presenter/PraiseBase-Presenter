@@ -27,7 +27,7 @@ namespace PraiseBase.Presenter.Persistence.OpenLyrics
 {
     public class OpenLyricsSongFileMapper : ISongFileMapper<OpenLyricsSong>
     {
-        public Song map(OpenLyricsSong source)
+        public Song Map(OpenLyricsSong source)
         {
             Song sng = new Song();
 
@@ -83,7 +83,7 @@ namespace PraiseBase.Presenter.Persistence.OpenLyrics
             return sng;
         }
 
-        public void map(Song source, OpenLyricsSong target)
+        public void Map(Song source, OpenLyricsSong target)
         {
             throw new NotImplementedException("Not implemented yet");
         }

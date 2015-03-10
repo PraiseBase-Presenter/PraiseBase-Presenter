@@ -75,7 +75,7 @@ namespace PraiseBase.Presenter.Persistence.PowerPraise
 
             PowerPraiseSong source = PowerPraiseTestUtil.GetExpectedPowerPraiseSong();
             Song expected = PowerPraiseTestUtil.GetExpectedSong();
-            Song actual = mapper.map(source);
+            Song actual = mapper.Map(source);
 
             Assert.AreEqual(expected.Guid, actual.Guid, "Wrong GUID");
             Assert.AreEqual(expected.ModifiedTimestamp, actual.ModifiedTimestamp, "Wrong modified timestamp");
@@ -180,7 +180,7 @@ namespace PraiseBase.Presenter.Persistence.PowerPraise
             PowerPraiseSong expected = PowerPraiseTestUtil.GetExpectedPowerPraiseSong();
             PowerPraiseSong actual = new PowerPraiseSong();
             
-            mapper.map(source, actual);
+            mapper.Map(source, actual);
 
             // General
             Assert.AreEqual(expected.Title, actual.Title, "Wrong song title");

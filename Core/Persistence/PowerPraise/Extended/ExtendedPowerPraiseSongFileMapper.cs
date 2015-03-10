@@ -31,9 +31,9 @@ namespace PraiseBase.Presenter.Persistence.PowerPraise.Extended
         /// </summary>
         /// <param name="ppl"></param>
         /// <returns></returns>
-        public Song map(ExtendedPowerPraiseSong ppl)
+        public Song Map(ExtendedPowerPraiseSong ppl)
         {
-            Song song = this.map((PowerPraiseSong)ppl);
+            Song song = this.Map((PowerPraiseSong)ppl);
 
             song.Comment = ppl.Comment;
             song.QualityIssues.AddRange(ppl.QualityIssues);
@@ -51,9 +51,9 @@ namespace PraiseBase.Presenter.Persistence.PowerPraise.Extended
         /// </summary>
         /// <param name="song"></param>
         /// <param name="ppl"></param>
-        public void map(Song song, ExtendedPowerPraiseSong ppl)
+        public void Map(Song song, ExtendedPowerPraiseSong ppl)
         {
-            this.map(song, (PowerPraiseSong)ppl);
+            this.Map(song, (PowerPraiseSong)ppl);
             
             ppl.Comment = song.Comment;
             ppl.QualityIssues.AddRange(song.QualityIssues);

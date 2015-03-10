@@ -75,7 +75,7 @@ namespace PraiseBase.Presenter.Persistence.PowerPraise.Extended
 
             ExtendedPowerPraiseSong source = ExtendedPowerPraiseTestUtil.GetExpectedExtendedPowerPraiseSong();
             Song expected = ExtendedPowerPraiseTestUtil.GetExpectedSongExtended();
-            Song actual = mapper.map(source);
+            Song actual = mapper.Map(source);
 
             Assert.AreEqual(expected.Guid, actual.Guid, "Wrong GUID");
             Assert.AreEqual(expected.ModifiedTimestamp, actual.ModifiedTimestamp, "Wrong modified timestamp");
@@ -180,7 +180,7 @@ namespace PraiseBase.Presenter.Persistence.PowerPraise.Extended
             ExtendedPowerPraiseSong expected = ExtendedPowerPraiseTestUtil.GetExpectedExtendedPowerPraiseSong();
             ExtendedPowerPraiseSong actual = new ExtendedPowerPraiseSong();
             
-            mapper.map(source, actual);
+            mapper.Map(source, actual);
 
             // General
             Assert.AreEqual(expected.Title, actual.Title, "Wrong song title");
@@ -277,7 +277,7 @@ namespace PraiseBase.Presenter.Persistence.PowerPraise.Extended
         }
 
         /// <summary>
-        /// Combined read and map
+        /// Combined read and Map
         /// </summary>
         [TestMethod()]
         public void ReadAndMapTest()
@@ -290,7 +290,7 @@ namespace PraiseBase.Presenter.Persistence.PowerPraise.Extended
             Song expected = ExtendedPowerPraiseTestUtil.GetExpectedSongExtended();
 
             ExtendedPowerPraiseSong source = reader.Load(filename);
-            Song actual = mapper.map(source);
+            Song actual = mapper.Map(source);
 
             Assert.AreEqual(expected.Guid, actual.Guid, "Wrong GUID");
             Assert.AreEqual(expected.ModifiedTimestamp, actual.ModifiedTimestamp, "Wrong modified timestamp");
@@ -384,7 +384,7 @@ namespace PraiseBase.Presenter.Persistence.PowerPraise.Extended
         }
 
         /// <summary>
-        /// Combined map and write
+        /// Combined Map and write
         /// </summary>
         [TestMethod()]
         public void MapAndWriteTest()
@@ -397,7 +397,7 @@ namespace PraiseBase.Presenter.Persistence.PowerPraise.Extended
 
             Song source = ExtendedPowerPraiseTestUtil.GetExpectedSongExtended();
             ExtendedPowerPraiseSong sng = new ExtendedPowerPraiseSong();
-            mapper.map(source, sng);
+            mapper.Map(source, sng);
             target.Save(filename, sng);
 
             try
