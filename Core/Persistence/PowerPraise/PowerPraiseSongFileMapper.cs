@@ -44,7 +44,10 @@ namespace PraiseBase.Presenter.Persistence.PowerPraise
                 Language = ppl.Language
             };
 
-            song.Themes.Add(ppl.Category);
+            if (ppl.Category != PowerPraiseConstants.NoCategory)
+            {
+                song.Themes.Add(ppl.Category);
+            }
 
             // Copyright text
             song.Copyright = String.Join(Environment.NewLine, ppl.CopyrightText.ToArray());
@@ -154,7 +157,15 @@ namespace PraiseBase.Presenter.Persistence.PowerPraise
             // General
             ppl.Title = song.Title;
             ppl.Language = song.Language;
-            ppl.Category = song.Themes.Count > 0 ? song.Themes[0] : null;
+            ppl.Category = null;
+            foreach (var th in song.Themes)
+            {
+                if (th != PowerPraiseConstants.NoCategory)
+                {
+                    ppl.Category = th;
+                    break;
+                }
+            }
 
             int bgIndex = 0;
             Dictionary<string, int> backgrounds = new Dictionary<string, int>();

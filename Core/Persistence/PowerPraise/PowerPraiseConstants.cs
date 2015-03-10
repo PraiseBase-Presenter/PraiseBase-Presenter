@@ -5,7 +5,7 @@ namespace PraiseBase.Presenter.Persistence.PowerPraise
 {
     public static class PowerPraiseConstants
     {
-        public static readonly string Category = "Keine Kategorie";
+        public static readonly string NoCategory = "Keine Kategorie";
 
         public static readonly string Language = null;
 

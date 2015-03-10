@@ -60,7 +60,7 @@ namespace PraiseBase.Presenter.Persistence.PowerPraise
 
             // Category
             xmlRoot["general"].AppendChild(xmlDoc.CreateElement("category"));
-            xmlRoot["general"]["category"].InnerText = !String.IsNullOrEmpty(sng.Category) ? sng.Category : PowerPraiseConstants.Category;
+            xmlRoot["general"]["category"].InnerText = !String.IsNullOrEmpty(sng.Category) ? sng.Category : PowerPraiseConstants.NoCategory;
 
             // Language
             xmlRoot["general"].AppendChild(xmlDoc.CreateElement("language"));

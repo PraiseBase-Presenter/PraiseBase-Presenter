@@ -60,7 +60,7 @@ namespace PraiseBase.Presenter.Persistence.PowerPraise
             sng.Title = xmlRoot["general"]["title"].InnerText;
 
             // Category
-            sng.Category = parseString(xmlRoot["general"]["category"], PowerPraiseConstants.Category);
+            sng.Category = parseString(xmlRoot["general"]["category"], PowerPraiseConstants.NoCategory);
 
             // Language
             sng.Language = parseString(xmlRoot["general"]["language"], PowerPraiseConstants.Language);
