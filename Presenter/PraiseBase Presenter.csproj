@@ -361,15 +361,6 @@
     <None Include="app.config">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Properties\Settings.settings">
-      <Generator>PublicSettingsSingleFileGenerator</Generator>
-      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
-    </None>
-    <Compile Include="Properties\Settings.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DependentUpon>Settings.settings</DependentUpon>
-      <DesignTimeSharedInput>True</DesignTimeSharedInput>
-    </Compile>
     <None Include="Properties\Application\update16.png" />
     <None Include="Properties\Application\ok16.png" />
     <None Include="Properties\Application\wheel16.png" />
@@ -546,6 +537,10 @@
     <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Configuration\PraiseBase Configuration.csproj">
+      <Project>{bab0f572-6a29-49a0-bb23-36e088a64225}</Project>
+      <Name>PraiseBase Configuration</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Core\PraiseBase Core Libraries.csproj">
       <Project>{67651B76-5ABD-4040-9A8F-3833130FC77D}</Project>
       <Name>PraiseBase Core Libraries</Name>
