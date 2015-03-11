@@ -93,11 +93,6 @@
     <Compile Include="Projection\TextLayer.cs" />
     <Compile Include="Projection\SlideTextFormatting.cs" />
     <Compile Include="Projection\SongSlideTextFormattingMapper.cs" />
-    <Compile Include="Properties\StringResources.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>StringResources.resx</DependentUpon>
-    </Compile>
     <Compile Include="UI\Editor\EditorChildMetaData.cs" />
     <Compile Include="UI\Editor\SongSavedEventArgs.cs" />
     <Compile Include="UI\LocalizedForm.cs">
@@ -242,11 +237,6 @@
     <None Include="Properties\Application\translate_disabled.png" />
     <None Include="Properties\Application\translate.png" />
     <None Include="Properties\Application\editcopy.png" />
-    <EmbeddedResource Include="Properties\StringResources.en-US.resx" />
-    <EmbeddedResource Include="Properties\StringResources.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>StringResources.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
     <EmbeddedResource Include="UI\Components\BackgroundImageBrowser.resx">
       <DependentUpon>BackgroundImageBrowser.cs</DependentUpon>
     </EmbeddedResource>
