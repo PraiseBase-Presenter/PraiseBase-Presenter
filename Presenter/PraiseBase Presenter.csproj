@@ -12,8 +12,7 @@
     <AssemblyName>PraiseBase Presenter</AssemblyName>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
-    <ApplicationIcon>
-    </ApplicationIcon>
+    <ApplicationIcon>Computer.ico</ApplicationIcon>
     <StartupObject>PraiseBase.Presenter.Program</StartupObject>
     <ManifestCertificateThumbprint>D45E90FD57F45BDB54368ACE3A1D7A9016546503</ManifestCertificateThumbprint>
     <ManifestKeyFile>PraiseBase Presenter_TemporaryKey.pfx</ManifestKeyFile>
@@ -320,6 +319,7 @@
     <None Include="app.config">
       <SubType>Designer</SubType>
     </None>
+    <None Include="Computer.ico" />
     <Content Include="Resources\Dist\Songs\A Mighty Fortress Is Our God.ppl" />
     <None Include="Resources\Dist\Songs\Allein Gott in der Hoeh.ppl" />
     <None Include="Resources\Dist\Songs\Näher, mein Gott zu Dir.ppl" />
