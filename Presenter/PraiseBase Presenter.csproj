@@ -84,7 +84,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Editor.cs" />
     <Compile Include="Manager\BibleManager.cs" />
     <Compile Include="Manager\ProjectionManager.cs" />
     <Compile Include="Manager\ScreenManager.cs" />
