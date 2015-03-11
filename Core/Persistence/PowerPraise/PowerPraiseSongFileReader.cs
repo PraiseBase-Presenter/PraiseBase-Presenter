@@ -29,7 +29,7 @@ namespace PraiseBase.Presenter.Persistence.PowerPraise
         public override PowerPraiseSong Load(string filename)
         {
             PowerPraiseSong sng = new PowerPraiseSong();
-            parse(filename, sng);
+            Parse(filename, sng);
             return sng;
         }
         
@@ -38,7 +38,7 @@ namespace PraiseBase.Presenter.Persistence.PowerPraise
         /// </summary>
         /// <param name="xmlRoot"></param>
         /// <param name="sng"></param>
-        protected override void parseAdditionalFields(XmlElement xmlRoot, PowerPraiseSong sng)
+        protected override void ParseAdditionalFields(XmlElement xmlRoot, PowerPraiseSong sng)
         {
             // Noop
         }

@@ -32,11 +32,11 @@ namespace PraiseBase.Presenter.Persistence.PowerPraise.Extended
         public override ExtendedPowerPraiseSong Load(string filename)
         {
             ExtendedPowerPraiseSong sng = new ExtendedPowerPraiseSong();
-            parse(filename, sng);
+            Parse(filename, sng);
             return sng;
         }
 
-        protected override void parseAdditionalFields(XmlElement xmlRoot, PowerPraiseSong sng)
+        protected override void ParseAdditionalFields(XmlElement xmlRoot, PowerPraiseSong sng)
         {
             ExtendedPowerPraiseSong song = (ExtendedPowerPraiseSong)sng;
 
