@@ -10,7 +10,7 @@ namespace PraiseBase.Presenter.Persistence.PraiseBox
         protected abstract Song readRecord(OleDbDataReader aReader);
         protected abstract string getSelectQuery();
 
-        public List<Song> importFromFile(String path)
+        public List<Song> ImportFromFile(String path)
         {
             List<Song> list = new List<Song>();
 

@@ -162,7 +162,7 @@ namespace PraiseBase.Presenter.UI.Presenter
                 ISongImporter importer = new PraiseBoxDatabaseImporter();
                 try
                 {
-                    foreach (Song sng in importer.importFromFile(filename))
+                    foreach (Song sng in importer.ImportFromFile(filename))
                     {
                         ListViewItem lvi = new ListViewItem(sng.Title);
                         lvi.Checked = true;
@@ -197,7 +197,7 @@ namespace PraiseBase.Presenter.UI.Presenter
                 ISongImporter importer = new WorshipSystemDatabaseImporter();
                 try
                 {
-                    foreach (Song sng in importer.importFromFile(filename))
+                    foreach (Song sng in importer.ImportFromFile(filename))
                     {
                         ListViewItem lvi = new ListViewItem(sng.Title);
                         lvi.Checked = true;

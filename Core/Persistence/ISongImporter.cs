@@ -6,6 +6,6 @@ namespace PraiseBase.Presenter.Persistence
 {
     public interface ISongImporter
     {
-        List<Song> importFromFile(String path);
+        List<Song> ImportFromFile(String path);
     }
 }

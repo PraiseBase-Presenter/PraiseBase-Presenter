@@ -7,32 +7,38 @@ namespace PraiseBase.Presenter.Persistence
 {
     public static class SongFilePluginFactory
     {
-        private static Dictionary<Type, ISongFilePlugin> plugins = new Dictionary<Type, ISongFilePlugin>();
+        private static Dictionary<Type, ISongFilePlugin> _plugins = new Dictionary<Type, ISongFilePlugin>();
 
-        private static Dictionary<String, HashSet<Type>> SupportedExtensionMapping = new Dictionary<string, HashSet<Type>>();
+        private static Dictionary<String, HashSet<Type>> _supportedExtensionMapping = new Dictionary<string, HashSet<Type>>();
 
         /// <summary>
         /// A list of supported file name extensions
         /// </summary>
-        public static List<String> SupportedExtensions { get { return SupportedExtensionMapping.Keys.ToList(); } }
+        public static List<String> SupportedExtensions 
+        {
+            get
+            {
+                return _supportedExtensionMapping.Keys.ToList();
+            } 
+        }
 
         static SongFilePluginFactory()
         {
             var interfaceType = typeof(ISongFilePlugin);
-            var AllTypes = AppDomain.CurrentDomain.GetAssemblies()
+            var allTypes = AppDomain.CurrentDomain.GetAssemblies()
               .SelectMany(x => x.GetTypes())
               .Where(x => interfaceType.IsAssignableFrom(x) && !x.IsInterface && !x.IsAbstract);
-            foreach (var atype in AllTypes)
+            foreach (var atype in allTypes)
             {
                 ISongFilePlugin inst = (ISongFilePlugin)Activator.CreateInstance(atype);
-                plugins.Add(atype, inst);
-                if (!SupportedExtensionMapping.Keys.Contains(inst.GetFileExtension()))
+                _plugins.Add(atype, inst);
+                if (!_supportedExtensionMapping.Keys.Contains(inst.GetFileExtension()))
                 {
-                    SupportedExtensionMapping.Add(inst.GetFileExtension(), new HashSet<Type>(new[] { atype }));
+                    _supportedExtensionMapping.Add(inst.GetFileExtension(), new HashSet<Type>(new[] { atype }));
                 }
                 else
                 {
-                    SupportedExtensionMapping[inst.GetFileExtension()].Add(atype);
+                    _supportedExtensionMapping[inst.GetFileExtension()].Add(atype);
                 }
             }
         }
@@ -44,9 +50,9 @@ namespace PraiseBase.Presenter.Persistence
         /// <returns></returns>
         public static ISongFilePlugin Create(Type type)
         {
-            if (plugins[type] != null)
+            if (_plugins[type] != null)
             {
-                return plugins[type];
+                return _plugins[type];
             }
             throw new NotImplementedException();
         }
@@ -60,9 +66,9 @@ namespace PraiseBase.Presenter.Persistence
         {
             string ext = Path.GetExtension(filename);
 
-            if (SupportedExtensionMapping[ext] != null)
+            if (ext != null && _supportedExtensionMapping[ext] != null)
             {
-                foreach (Type t in SupportedExtensionMapping[ext])
+                foreach (Type t in _supportedExtensionMapping[ext])
                 {
                     var reader = Create(t);
                     if (reader.IsFileSupported(filename))
@@ -76,20 +82,12 @@ namespace PraiseBase.Presenter.Persistence
 
         public static List<ISongFilePlugin> GetPlugins()
         {
-            return new List<ISongFilePlugin>(plugins.Values);
+            return new List<ISongFilePlugin>(_plugins.Values);
         }
 
         public static List<ISongFilePlugin> GetWriterPlugins()
         {
-            List<ISongFilePlugin> list = new List<ISongFilePlugin>();
-            foreach(ISongFilePlugin p in plugins.Values) 
-            {
-                if (p.IsWritingSupported())
-                {
-                    list.Add(p);
-                }
-            }
-            return list;
+            return _plugins.Values.Where(p => p.IsWritingSupported()).ToList();
         }
     }
 }

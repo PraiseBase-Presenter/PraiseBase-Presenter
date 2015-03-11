@@ -8,14 +8,14 @@ namespace PraiseBase.Presenter.Persistence
         /// <summary>
         /// Loads and instantiates a song from a file
         /// </summary>
-        /// <param name="filename">Absolute path to the song file</param>
+        /// <param name="filePath">Absolute path to the song file</param>
         /// <returns>Song object instance</returns>
         Song Load(String filePath);
 
         /// <summary>
         /// Reads the title of a song from a file
         /// </summary>
-        /// <param name="filename">Absolute path to the song file</param>
+        /// <param name="filePath">Absolute path to the song file</param>
         /// <returns></returns>
         String ReadTitle(string filePath);
 
