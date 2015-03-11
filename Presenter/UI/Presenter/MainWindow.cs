@@ -1164,7 +1164,10 @@ namespace PraiseBase.Presenter.UI.Presenter
                 var res = MessageBox.Show(StringResources.ShouldCurrentSetlistBeSaved, StringResources.SetlistFile, MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
                 if (res == DialogResult.Yes)
                 {
-                    buttonSaveSetList_Click(sender, e);
+                    if (SaveSetlistDialog() == DialogResult.Cancel)
+                    {
+                        e.Cancel = true;
+                    }
                 }
                 else if (res == DialogResult.Cancel)
                 {
@@ -1262,6 +1265,11 @@ namespace PraiseBase.Presenter.UI.Presenter
 
         private void buttonSaveSetList_Click(object sender, EventArgs e)
         {
+            SaveSetlistDialog();
+        }
+
+        private DialogResult SaveSetlistDialog()
+        {
             string setlistDir = Settings.Default.DataDirectory + Path.DirectorySeparatorChar + Settings.Default.SetListDir;
             if (!Directory.Exists(setlistDir))
             {
@@ -1287,10 +1295,12 @@ namespace PraiseBase.Presenter.UI.Presenter
                 Title = StringResources.SaveSetlistAs,
                 FileName = proposedFileName
             };
-            if (dlg.ShowDialog() == DialogResult.OK)
+            var dlgRes = dlg.ShowDialog();
+            if (dlgRes  == DialogResult.OK)
             {
                 SaveSetList(dlg.FileName);
             }
+            return dlgRes;
         }
 
         private void SaveSetList(string filename)
