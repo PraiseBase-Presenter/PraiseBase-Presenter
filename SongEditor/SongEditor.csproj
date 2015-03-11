@@ -37,6 +37,9 @@
   <PropertyGroup>
     <StartupObject>PraiseBase.Presenter.Editor</StartupObject>
   </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>Computer.ico</ApplicationIcon>
+  </PropertyGroup>
   <ItemGroup>
     <Compile Include="Editor.cs" />
   </ItemGroup>
@@ -60,6 +63,9 @@
       <Project>{33d2bc6a-0ad1-4e2e-af35-fffb744f22c6}</Project>
       <Name>PraiseBase Presenter</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Computer.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
