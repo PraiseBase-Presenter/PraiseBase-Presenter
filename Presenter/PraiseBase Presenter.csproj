@@ -85,11 +85,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Editor.cs" />
-    <Compile Include="Properties\FileResources.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>FileResources.resx</DependentUpon>
-    </Compile>
     <Compile Include="Manager\BibleManager.cs" />
     <Compile Include="Manager\ProjectionManager.cs" />
     <Compile Include="Manager\ScreenManager.cs" />
@@ -241,10 +236,6 @@
     <None Include="Properties\Application\translate_disabled.png" />
     <None Include="Properties\Application\translate.png" />
     <None Include="Properties\Application\editcopy.png" />
-    <EmbeddedResource Include="Properties\FileResources.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>FileResources.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
     <EmbeddedResource Include="UI\Components\BackgroundImageBrowser.resx">
       <DependentUpon>BackgroundImageBrowser.cs</DependentUpon>
     </EmbeddedResource>
