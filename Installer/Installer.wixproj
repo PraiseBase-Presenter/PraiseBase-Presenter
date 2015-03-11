@@ -37,10 +37,35 @@
     </WixExtension>
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Distribution" />
+    <Folder Include="Distribution\Backgrounds" />
+    <Folder Include="Distribution\Backgrounds\Sample" />
+    <Folder Include="Distribution\Bibles" />
+    <Folder Include="Distribution\Songs" />
     <Folder Include="Extensions" />
     <Folder Include="Resources" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Distribution\Backgrounds\Sample\Berge.jpg" />
+    <Content Include="Distribution\Backgrounds\Sample\Blume.jpg" />
+    <Content Include="Distribution\Backgrounds\Sample\Feuer.jpg" />
+    <Content Include="Distribution\Backgrounds\Sample\Landschaft.jpg" />
+    <Content Include="Distribution\Backgrounds\Sample\Meer.jpg" />
+    <Content Include="Distribution\Backgrounds\Sample\Menschen.jpg" />
+    <Content Include="Distribution\Backgrounds\Sample\night_sky_1024.jpg" />
+    <Content Include="Distribution\Backgrounds\Sample\Sonne.jpg" />
+    <Content Include="Distribution\Backgrounds\Sample\Wald.jpg" />
+    <Content Include="Distribution\Backgrounds\Sample\Wasser.JPG" />
+    <Content Include="Distribution\Backgrounds\Sample\Wolken.jpg" />
+    <Content Include="Distribution\Backgrounds\Sample\Wüste.jpg" />
+    <Content Include="Distribution\Bibles\Elberfelder_1905.xml" />
+    <Content Include="Distribution\Bibles\kjv.xml" />
+    <Content Include="Distribution\Bibles\luther1912.xml" />
+    <Content Include="Distribution\Bibles\sf_luther_1545_letzte_hand_rev1.xml" />
+    <Content Include="Distribution\Songs\A Mighty Fortress Is Our God.ppl" />
+    <Content Include="Distribution\Songs\Allein Gott in der Hoeh.ppl" />
+    <Content Include="Distribution\Songs\Näher, mein Gott zu Dir.ppl" />
+    <Content Include="Distribution\Songs\You are so faithful.ppl" />
     <Content Include="Extensions\WixFileVersionExtension.dll" />
     <Content Include="Resources\Background.bmp" />
     <Content Include="Resources\Banner.bmp" />

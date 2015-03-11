@@ -320,10 +320,6 @@
       <SubType>Designer</SubType>
     </None>
     <None Include="Computer.ico" />
-    <Content Include="Resources\Dist\Songs\A Mighty Fortress Is Our God.ppl" />
-    <None Include="Resources\Dist\Songs\Allein Gott in der Hoeh.ppl" />
-    <None Include="Resources\Dist\Songs\Näher, mein Gott zu Dir.ppl" />
-    <None Include="Resources\Dist\Songs\You are so faithful.ppl" />
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
@@ -366,24 +362,6 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Resources\Dist\Backgrounds\Sample\Berge.jpg" />
-    <Content Include="Resources\Dist\Backgrounds\Sample\Blume.jpg" />
-    <Content Include="Resources\Dist\Backgrounds\Sample\Feuer.jpg" />
-    <Content Include="Resources\Dist\Backgrounds\Sample\Landschaft.jpg" />
-    <Content Include="Resources\Dist\Backgrounds\Sample\Meer.jpg" />
-    <Content Include="Resources\Dist\Backgrounds\Sample\Menschen.jpg" />
-    <Content Include="Resources\Dist\Backgrounds\Sample\night_sky_1024.jpg" />
-    <Content Include="Resources\Dist\Backgrounds\Sample\Sonne.jpg" />
-    <Content Include="Resources\Dist\Backgrounds\Sample\Wald.jpg" />
-    <Content Include="Resources\Dist\Backgrounds\Sample\Wasser.JPG" />
-    <Content Include="Resources\Dist\Backgrounds\Sample\Wolken.jpg" />
-    <Content Include="Resources\Dist\Backgrounds\Sample\Wüste.jpg" />
-    <Content Include="Resources\Dist\Bibles\Elberfelder_1905.xml" />
-    <Content Include="Resources\Dist\Bibles\kjv.xml" />
-    <Content Include="Resources\Dist\Bibles\luther1912.xml" />
-    <Content Include="Resources\Dist\Bibles\sf_luther_1545_letzte_hand_rev1.xml" />
-  </ItemGroup>
-  <ItemGroup>
     <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <ItemGroup>
@@ -395,6 +373,9 @@
       <Project>{67651B76-5ABD-4040-9A8F-3833130FC77D}</Project>
       <Name>PraiseBase Core Libraries</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Resources\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
