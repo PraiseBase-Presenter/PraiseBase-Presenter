@@ -27,12 +27,12 @@
     </InstallExecuteSequence>
 
     <!-- Set icon -->
-    <Icon Id="icon.ico" SourceFile="$(var.PraiseBase_Presenter.ProjectDir)Properties\Application\Computer.ico"/>
+    <Icon Id="icon.ico" SourceFile="$(var.PraiseBase_Presenter.ProjectDir)Computer.ico"/>
     <Property Id="ARPPRODUCTICON" Value="icon.ico" />
 
     <!-- GUI (requires WixUIExtension) -->
     <UIRef Id="WixUI_Minimal"/>
-    <WixVariable Id="WixUILicenseRtf" Value="$(var.PraiseBase_Presenter.ProjectDir)Resources\Doc\License.rtf" />
+    <WixVariable Id="WixUILicenseRtf" Value="$(var.PraiseBase_Presenter.ProjectDir)..\License.rtf" />
     <!-- Source: http://www.flickr.com/photos/malcorp/3703556108/ -->
     <WixVariable Id="WixUIDialogBmp" Value="Resources\Background.bmp" />
     <WixVariable Id="WixUIBannerBmp" Value="Resources\Banner.bmp" />
@@ -55,14 +55,20 @@
                 Source="$(var.PraiseBase_Core_Libraries.TargetPath)"
                 KeyPath="yes" />
           </Component>
+          <Component Id="ConfigDll" Guid="c05831ba-c824-11e4-9428-ba741d5d46b0">
+            <File Id="ConfigDllFile"
+                Name="$(var.PraiseBase_Configuration.TargetFileName)"
+                Source="$(var.PraiseBase_Configuration.TargetPath)"
+                KeyPath="yes" />
+          </Component>
           <Component Id="LicenseRtf" Guid="96dc79f8-2344-4610-a167-9b09ee501509">
             <File Id="License.rtf" 
-                  Source="$(var.PraiseBase_Presenter.ProjectDir)Resources\Doc\License.rtf" 
+                  Source="$(var.PraiseBase_Presenter.ProjectDir)..\License.rtf" 
                   KeyPath="yes"/>
           </Component>
           <Component Id="LicenseTxt" Guid="626b9fa0-0c14-4d4d-804a-911a454e76d7">
             <File Id="License.txt"
-                  Source="$(var.PraiseBase_Presenter.ProjectDir)Resources\Doc\License.txt"
+                  Source="$(var.PraiseBase_Presenter.ProjectDir)..\License.txt"
                   KeyPath="yes"/>
           </Component>
         </Directory>
@@ -121,16 +127,16 @@
           <RegistryValue Root='HKCU' Key='Software\[Manufacturer]\[ProductName]' Type='string' Value='' KeyPath='yes' />
           <File Id="A_Mighty_Fortress_Is_Our_God.ppl"
                 Name="A Mighty Fortress Is Our God.ppl"
-                Source="$(var.PraiseBase_Presenter.ProjectDir)Resources\Dist\Songs\A Mighty Fortress Is Our God.ppl" />
+                Source="Distribution\Songs\A Mighty Fortress Is Our God.ppl" />
           <File Id="Allein_Gott_in_der_Hoeh_ppl"
                 Name="Allein Gott in der Hoeh.ppl"
-                Source="$(var.PraiseBase_Presenter.ProjectDir)Resources\Dist\Songs\Allein Gott in der Hoeh.ppl" />
+                Source="Distribution\Songs\Allein Gott in der Hoeh.ppl" />
           <File Id="You_are_so_faithful_ppl"
                 Name="You are so faithful.ppl"
-                Source="$(var.PraiseBase_Presenter.ProjectDir)Resources\Dist\Songs\You are so faithful.ppl" />
+                Source="Distribution\Songs\You are so faithful.ppl" />
           <File Id="Naeher_mein_Gott_zu_Dir_ppl"
                 Name="Näher, mein Gott zu Dir.ppl"
-                Source="$(var.PraiseBase_Presenter.ProjectDir)Resources\Dist\Songs\Näher, mein Gott zu Dir.ppl" />
+                Source="Distribution\Songs\Näher, mein Gott zu Dir.ppl" />
         </Component>
       </Directory>
       <Directory Id="BiblesFolder" Name="Bibles">
@@ -140,16 +146,16 @@
           <RegistryValue Root='HKCU' Key='Software\[Manufacturer]\[ProductName]' Type='string' Value='' KeyPath='yes' />
           <File Id="Elberfelder_1905.xml"
                 Name="Elberfelder_1905.xml"
-                Source="$(var.PraiseBase_Presenter.ProjectDir)Resources\Dist\Bibles\Elberfelder_1905.xml" />
+                Source="Distribution\Bibles\Elberfelder_1905.xml" />
           <File Id="kjv.xml"
                 Name="kjv.xml"
-                Source="$(var.PraiseBase_Presenter.ProjectDir)Resources\Dist\Bibles\kjv.xml" />
+                Source="Distribution\Bibles\kjv.xml" />
           <File Id="sf_luther_1545_letzte_hand_rev1.xml"
                 Name="sf_luther_1545_letzte_hand_rev1.xml"
-                Source="$(var.PraiseBase_Presenter.ProjectDir)Resources\Dist\Bibles\sf_luther_1545_letzte_hand_rev1.xml" />
+                Source="Distribution\Bibles\sf_luther_1545_letzte_hand_rev1.xml" />
           <File Id="luther1912.xml"
                 Name="luther1912.xml"
-                Source="$(var.PraiseBase_Presenter.ProjectDir)Resources\Dist\Bibles\luther1912.xml" />
+                Source="Distribution\Bibles\luther1912.xml" />
         </Component>
       </Directory>
       <Directory Id="SetlistsFolder" Name="Setlists">
@@ -170,40 +176,40 @@
           <RegistryValue Root='HKCU' Key='Software\[Manufacturer]\[ProductName]' Type='string' Value='' KeyPath='yes' />
           <File Id="Berge.jpg"
                 Name="Berge.jpg"
-                Source="$(var.PraiseBase_Presenter.ProjectDir)Resources\Dist\Backgrounds\Sample\Berge.jpg" />
+                Source="Distribution\Backgrounds\Sample\Berge.jpg" />
           <File Id="Blume.jpg"
                 Name="Blume.jpg"
-                Source="$(var.PraiseBase_Presenter.ProjectDir)Resources\Dist\Backgrounds\Sample\Blume.jpg" />
+                Source="Distribution\Backgrounds\Sample\Blume.jpg" />
           <File Id="Feuer.jpg"
                 Name="Feuer.jpg"
-                Source="$(var.PraiseBase_Presenter.ProjectDir)Resources\Dist\Backgrounds\Sample\Feuer.jpg" />
+                Source="Distribution\Backgrounds\Sample\Feuer.jpg" />
           <File Id="Landschaft.jpg"
                 Name="Landschaft.jpg"
-                Source="$(var.PraiseBase_Presenter.ProjectDir)Resources\Dist\Backgrounds\Sample\Landschaft.jpg" />
+                Source="Distribution\Backgrounds\Sample\Landschaft.jpg" />
           <File Id="Meer.jpg"
                 Name="Meer.jpg"
-                Source="$(var.PraiseBase_Presenter.ProjectDir)Resources\Dist\Backgrounds\Sample\Meer.jpg" />
+                Source="Distribution\Backgrounds\Sample\Meer.jpg" />
           <File Id="Menschen.jpg"
                 Name="Menschen.jpg"
-                Source="$(var.PraiseBase_Presenter.ProjectDir)Resources\Dist\Backgrounds\Sample\Menschen.jpg" />
+                Source="Distribution\Backgrounds\Sample\Menschen.jpg" />
           <File Id="night_sky_1024.jpg"
                 Name="night_sky_1024.jpg"
-                Source="$(var.PraiseBase_Presenter.ProjectDir)Resources\Dist\Backgrounds\Sample\night_sky_1024.jpg" />
+                Source="Distribution\Backgrounds\Sample\night_sky_1024.jpg" />
           <File Id="Sonne.jpg"
                 Name="Sonne.jpg"
-                Source="$(var.PraiseBase_Presenter.ProjectDir)Resources\Dist\Backgrounds\Sample\Sonne.jpg" />
+                Source="Distribution\Backgrounds\Sample\Sonne.jpg" />
           <File Id="Wald.jpg"
                 Name="Wald.jpg"
-                Source="$(var.PraiseBase_Presenter.ProjectDir)Resources\Dist\Backgrounds\Sample\Wald.jpg" />
+                Source="Distribution\Backgrounds\Sample\Wald.jpg" />
           <File Id="Wasser.jpg"
                 Name="Wasser.jpg"
-                Source="$(var.PraiseBase_Presenter.ProjectDir)Resources\Dist\Backgrounds\Sample\Wasser.jpg" />
+                Source="Distribution\Backgrounds\Sample\Wasser.jpg" />
           <File Id="Wolken.jpg"
                 Name="Wolken.jpg"
-                Source="$(var.PraiseBase_Presenter.ProjectDir)Resources\Dist\Backgrounds\Sample\Wolken.jpg" />
+                Source="Distribution\Backgrounds\Sample\Wolken.jpg" />
           <File Id="Wueste.jpg"
                 Name="Wüste.jpg"
-                Source="$(var.PraiseBase_Presenter.ProjectDir)Resources\Dist\Backgrounds\Sample\Wüste.jpg" />
+                Source="Distribution\Backgrounds\Sample\Wüste.jpg" />
         </Component>
       </Directory>
     </DirectoryRef>
@@ -212,6 +218,7 @@
     <Feature Id="ProductFeature" Title="$(var.PraiseBase_Presenter.ProjectName)" Level="1">
       <ComponentRef Id="ProductComponent" />
       <ComponentRef Id="CoreDll" />
+      <ComponentRef Id="ConfigDll" />
       <ComponentRef Id="LicenseRtf" />
       <ComponentRef Id="LicenseTxt" />
       <ComponentRef Id="ApplicationStartMenuShortcut" />

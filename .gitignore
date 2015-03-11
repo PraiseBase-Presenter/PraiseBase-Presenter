@@ -15,3 +15,5 @@
 /*.suo
 /Presenter/PraiseBase Presenter.csproj.user
 /Presenter/Resources/Dist/Backgrounds/\[Thumbnails\]
+/Configuration/bin
+/Configuration/obj

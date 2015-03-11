@@ -12,7 +12,7 @@
     <AssemblyName>PraiseBase Presenter</AssemblyName>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
-    <ApplicationIcon>Properties\Application\Computer.ico</ApplicationIcon>
+    <ApplicationIcon>Computer.ico</ApplicationIcon>
     <StartupObject>PraiseBase.Presenter.Program</StartupObject>
     <ManifestCertificateThumbprint>D45E90FD57F45BDB54368ACE3A1D7A9016546503</ManifestCertificateThumbprint>
     <ManifestKeyFile>PraiseBase Presenter_TemporaryKey.pfx</ManifestKeyFile>
@@ -84,7 +84,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Editor.cs" />
     <Compile Include="Manager\BibleManager.cs" />
     <Compile Include="Manager\ProjectionManager.cs" />
     <Compile Include="Manager\ScreenManager.cs" />
@@ -93,17 +92,11 @@
     <Compile Include="Projection\TextLayer.cs" />
     <Compile Include="Projection\SlideTextFormatting.cs" />
     <Compile Include="Projection\SongSlideTextFormattingMapper.cs" />
-    <Compile Include="Properties\StringResources.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>StringResources.resx</DependentUpon>
-    </Compile>
     <Compile Include="UI\Editor\EditorChildMetaData.cs" />
     <Compile Include="UI\Editor\SongSavedEventArgs.cs" />
     <Compile Include="UI\LocalizedForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="UpdateCheck.cs" />
     <Compile Include="Manager\ImageManager.cs" />
     <Compile Include="Manager\SongManager.cs" />
     <Compile Include="UI\Components\BackgroundImageBrowser.cs">
@@ -220,33 +213,7 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Util\SongTemplateMapper.cs" />
-    <None Include="Properties\Application\translate_disabled_small.png" />
-    <None Include="Properties\Application\translate_small.png" />
-    <None Include="Properties\Application\translate_cross_small.png" />
-    <None Include="Properties\Application\Blackout on 36.png" />
-    <None Include="Properties\Application\Projection off 36.png" />
-    <None Include="Properties\Application\Projection on 36.png" />
-    <None Include="Properties\Application\kate_36.png" />
-    <None Include="Properties\Application\advancedsettings_36.png" />
-    <None Include="Properties\Application\background_36.png" />
-    <None Include="Properties\Application\folder_favorites_36.png" />
-    <None Include="Properties\Application\highlight_36.png" />
-    <None Include="Properties\Application\highlight_red _36.png" />
-    <None Include="Properties\Application\search_36.png" />
-    <None Include="Properties\Application\editsong.png" />
-    <None Include="Properties\Application\editsong_36.png" />
-    <None Include="Properties\Application\newsong_36.png" />
-    <None Include="Properties\Application\save_36.png" />
-    <Content Include="Properties\Application\translate_active.png" />
-    <Content Include="Resources\Doc\License.txt" />
-    <None Include="Properties\Application\translate_disabled.png" />
-    <None Include="Properties\Application\translate.png" />
-    <None Include="Properties\Application\editcopy.png" />
-    <EmbeddedResource Include="Properties\StringResources.en-US.resx" />
-    <EmbeddedResource Include="Properties\StringResources.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>StringResources.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
+    <Compile Include="Util\UpdateCheck.cs" />
     <EmbeddedResource Include="UI\Components\BackgroundImageBrowser.resx">
       <DependentUpon>BackgroundImageBrowser.cs</DependentUpon>
     </EmbeddedResource>
@@ -348,100 +315,10 @@
       <DependentUpon>SongBrowserDialog.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="Properties\Resources.resx">
-      <Generator>PublicResXFileCodeGenerator</Generator>
-      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <Compile Include="Properties\Resources.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DependentUpon>Resources.resx</DependentUpon>
-      <DesignTime>True</DesignTime>
-    </Compile>
     <None Include="app.config">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Properties\Settings.settings">
-      <Generator>PublicSettingsSingleFileGenerator</Generator>
-      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
-    </None>
-    <Compile Include="Properties\Settings.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DependentUpon>Settings.settings</DependentUpon>
-      <DesignTimeSharedInput>True</DesignTimeSharedInput>
-    </Compile>
-    <Compile Include="Settings.cs" />
-    <None Include="Properties\Application\update16.png" />
-    <None Include="Properties\Application\ok16.png" />
-    <None Include="Properties\Application\wheel16.png" />
-    <None Include="Properties\Application\fade1blue.png" />
-    <None Include="Properties\Application\monitor_256.png" />
-    <None Include="Properties\Application\AJ_Portable_Projection_Screen.png" />
-    <None Include="Properties\Application\leinwand16.png" />
-    <None Include="Properties\Application\leinwand16_no.png" />
-    <Content Include="Resources\Dist\Songs\A Mighty Fortress Is Our God.ppl" />
-    <None Include="Resources\Dist\Songs\Allein Gott in der Hoeh.ppl" />
-    <None Include="Resources\Dist\Songs\Näher, mein Gott zu Dir.ppl" />
-    <None Include="Resources\Dist\Songs\You are so faithful.ppl" />
-    <None Include="Resources\Doc\License.rtf" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Properties\Application\pb web.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Properties\Application\pb mit schwarz.jpg" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Properties\Application\Blackout on.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Properties\Application\Projection off.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Properties\Application\Projection on.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Properties\Application\search.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Properties\Application\advancedsettings.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Properties\Application\clean.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Properties\Application\clock.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Properties\Application\colors.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Properties\Application\error.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Properties\Application\exit.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Properties\Application\gpg.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Properties\Application\keditbookmarks.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Properties\Application\ktip.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Properties\Application\package_favorite.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Properties\Application\Computer.ico" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Properties\Application\Blackout on2.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Properties\Application\kate.png" />
-    <None Include="Properties\Application\gplv3-127x51.png" />
+    <None Include="Computer.ico" />
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
@@ -476,48 +353,6 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Properties\Application\logo.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Properties\Application\folder_favorites.png" />
-    <None Include="Properties\Application\agt_action_success.png" />
-    <None Include="Properties\Application\agt_back.png" />
-    <None Include="Properties\Application\agt_forward.png" />
-    <None Include="Properties\Application\1downarrow1.png" />
-    <None Include="Properties\Application\1downarrow.png" />
-    <None Include="Properties\Application\1leftarrow.png" />
-    <None Include="Properties\Application\1rightarrow.png" />
-    <None Include="Properties\Application\2leftarrow.png" />
-    <None Include="Properties\Application\2rightarrow.png" />
-    <None Include="Properties\Application\2uparrow.png" />
-    <None Include="Properties\Application\3dowarrow.png" />
-    <None Include="Properties\Application\14_layer_deletelayer.png" />
-    <None Include="Properties\Application\14_layer_newlayer.png" />
-    <None Include="Properties\Application\agt_action_fail1.png" />
-    <None Include="Properties\Application\edit_add.png" />
-    <None Include="Properties\Application\edit_remove.png" />
-    <None Include="Properties\Application\filesave.png" />
-    <None Include="Properties\Application\fileopen.png" />
-    <None Include="Properties\Application\background.png" />
-    <None Include="Properties\Application\edit.png" />
-    <None Include="Properties\Application\3floppy_unmount.png" />
-    <None Include="Properties\Application\easymoblog.png" />
-    <None Include="Properties\Application\xmag.png" />
-    <None Include="Properties\Application\highlight.png" />
-    <None Include="Properties\Application\link.png" />
-    <None Include="Properties\Application\unlink.png" />
-    <None Include="Properties\Application\text_align_center.png" />
-    <None Include="Properties\Application\text_align_right.png" />
-    <None Include="Properties\Application\text_align_left.png" />
-    <None Include="Properties\Application\highlight_red.png" />
-    <None Include="Properties\Application\1downarrow2.png" />
-    <None Include="Properties\Application\1downarrow11.png" />
-    <None Include="Properties\Application\1leftarrow1.png" />
-    <None Include="Properties\Application\1rightarrow1.png" />
-    <None Include="Properties\Application\searchx.png" />
-    <None Include="Properties\Application\searchg.png" />
-  </ItemGroup>
-  <ItemGroup>
     <Page Include="UI\Presenter\ProjectionControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -526,31 +361,20 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Resources\Dist\Backgrounds\Sample\Berge.jpg" />
-    <Content Include="Resources\Dist\Backgrounds\Sample\Blume.jpg" />
-    <Content Include="Resources\Dist\Backgrounds\Sample\Feuer.jpg" />
-    <Content Include="Resources\Dist\Backgrounds\Sample\Landschaft.jpg" />
-    <Content Include="Resources\Dist\Backgrounds\Sample\Meer.jpg" />
-    <Content Include="Resources\Dist\Backgrounds\Sample\Menschen.jpg" />
-    <Content Include="Resources\Dist\Backgrounds\Sample\night_sky_1024.jpg" />
-    <Content Include="Resources\Dist\Backgrounds\Sample\Sonne.jpg" />
-    <Content Include="Resources\Dist\Backgrounds\Sample\Wald.jpg" />
-    <Content Include="Resources\Dist\Backgrounds\Sample\Wasser.JPG" />
-    <Content Include="Resources\Dist\Backgrounds\Sample\Wolken.jpg" />
-    <Content Include="Resources\Dist\Backgrounds\Sample\Wüste.jpg" />
-    <Content Include="Resources\Dist\Bibles\Elberfelder_1905.xml" />
-    <Content Include="Resources\Dist\Bibles\kjv.xml" />
-    <Content Include="Resources\Dist\Bibles\luther1912.xml" />
-    <Content Include="Resources\Dist\Bibles\sf_luther_1545_letzte_hand_rev1.xml" />
-  </ItemGroup>
-  <ItemGroup>
     <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Configuration\PraiseBase Configuration.csproj">
+      <Project>{bab0f572-6a29-49a0-bb23-36e088a64225}</Project>
+      <Name>PraiseBase Configuration</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Core\PraiseBase Core Libraries.csproj">
       <Project>{67651B76-5ABD-4040-9A8F-3833130FC77D}</Project>
       <Name>PraiseBase Core Libraries</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Resources\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

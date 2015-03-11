@@ -22,7 +22,7 @@
 
 using System;
 
-namespace PraiseBase.Presenter
+namespace PraiseBase.Presenter.Util
 {
     public class UpdateCheck
     {
@@ -50,7 +50,7 @@ namespace PraiseBase.Presenter
 
         public static void DoCheck(bool force)
         {
-            UpdateInformation ui = getNewVersion();
+            UpdateInformation ui = GetNewVersion();
 
             if (ui.UpdateAvailable)
             {
@@ -99,7 +99,7 @@ namespace PraiseBase.Presenter
             }
         }
 
-        public static UpdateInformation getNewVersion()
+        public static UpdateInformation GetNewVersion()
         {
             UpdateInformation rtn = new UpdateInformation();
 

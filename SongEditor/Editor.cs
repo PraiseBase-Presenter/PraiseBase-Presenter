@@ -21,8 +21,10 @@
  */
 
 using System;
+using System.IO;
+using System.Reflection;
+using System.Threading;
 using System.Windows.Forms;
-using PraiseBase.Presenter.Forms;
 using PraiseBase.Presenter.Properties;
 using PraiseBase.Presenter.UI.Editor;
 
@@ -40,30 +42,30 @@ namespace PraiseBase.Presenter
             Application.SetCompatibleTextRenderingDefault(false);
 
             // code to ensure that only one copy of the software is running.
-            System.Threading.Mutex mutex;
-            string strLoc = System.Reflection.Assembly.GetExecutingAssembly().Location;
-            System.IO.FileSystemInfo fileInfo = new System.IO.FileInfo(strLoc);
+            Mutex mutex;
+            string strLoc = Assembly.GetExecutingAssembly().Location;
+            FileSystemInfo fileInfo = new FileInfo(strLoc);
             string sExeName = fileInfo.Name;
             string mutexName = "Global\\" + sExeName;
             try
             {
-                mutex = System.Threading.Mutex.OpenExisting(mutexName);
+                mutex = Mutex.OpenExisting(mutexName);
 
                 //since it hasn’t thrown an exception, then we already have one copy of the app open.
 
-                object[] attributes = System.Reflection.Assembly.GetExecutingAssembly().GetCustomAttributes(typeof(System.Reflection.AssemblyProductAttribute), false);
-                String appTitle = ((System.Reflection.AssemblyProductAttribute)attributes[0]).Product;
+                object[] attributes = Assembly.GetExecutingAssembly().GetCustomAttributes(typeof(AssemblyProductAttribute), false);
+                String appTitle = ((AssemblyProductAttribute)attributes[0]).Product;
 
-                MessageBox.Show(Resources.Eine_Instanz_dieser_Software_läuft_bereits_, appTitle, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show(StringResources.ProgramInstanceAlreadyRunning, appTitle, MessageBoxButtons.OK, MessageBoxIcon.Information);
                 Environment.Exit(0);
             }
             catch
             {
                 //since we didn’t find a mutex with that name, create one
-                mutex = new System.Threading.Mutex(true, mutexName);
+                mutex = new Mutex(true, mutexName);
             }
 
-            Application.Run(SongEditor.GetInstance());
+            Application.Run(new SongEditor(Settings.Default));
 
             GC.KeepAlive(mutex);
         }
