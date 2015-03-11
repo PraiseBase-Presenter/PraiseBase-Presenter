@@ -27,7 +27,7 @@
     </InstallExecuteSequence>
 
     <!-- Set icon -->
-    <Icon Id="icon.ico" SourceFile="$(var.PraiseBase_Presenter.ProjectDir)Properties\Application\Computer.ico"/>
+    <Icon Id="icon.ico" SourceFile="$(var.PraiseBase_Presenter.ProjectDir)Computer.ico"/>
     <Property Id="ARPPRODUCTICON" Value="icon.ico" />
 
     <!-- GUI (requires WixUIExtension) -->
@@ -53,6 +53,12 @@
             <File Id="CoreDllFile"
                 Name="$(var.PraiseBase_Core_Libraries.TargetFileName)"
                 Source="$(var.PraiseBase_Core_Libraries.TargetPath)"
+                KeyPath="yes" />
+          </Component>
+          <Component Id="ConfigDll" Guid="c05831ba-c824-11e4-9428-ba741d5d46b0">
+            <File Id="ConfigDllFile"
+                Name="$(var.PraiseBase_Configuration.TargetFileName)"
+                Source="$(var.PraiseBase_Configuration.TargetPath)"
                 KeyPath="yes" />
           </Component>
           <Component Id="LicenseRtf" Guid="96dc79f8-2344-4610-a167-9b09ee501509">
@@ -212,6 +218,7 @@
     <Feature Id="ProductFeature" Title="$(var.PraiseBase_Presenter.ProjectName)" Level="1">
       <ComponentRef Id="ProductComponent" />
       <ComponentRef Id="CoreDll" />
+      <ComponentRef Id="ConfigDll" />
       <ComponentRef Id="LicenseRtf" />
       <ComponentRef Id="LicenseTxt" />
       <ComponentRef Id="ApplicationStartMenuShortcut" />
