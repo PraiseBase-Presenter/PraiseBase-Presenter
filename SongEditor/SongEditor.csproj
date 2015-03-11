@@ -8,8 +8,8 @@
     <ProjectGuid>{62A96DBA-FEC1-470E-8EBE-3ECC2464D322}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>PraiseBase.Presenter.SongEditor</RootNamespace>
-    <AssemblyName>PraiseBase Presenter SongEditor</AssemblyName>
+    <RootNamespace>PraiseBase.Presenter</RootNamespace>
+    <AssemblyName>PraiseBase Presenter Song Editor</AssemblyName>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <TargetFrameworkProfile>
     </TargetFrameworkProfile>
@@ -35,16 +35,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup>
-    <StartupObject>Pbp.Editor</StartupObject>
+    <StartupObject>PraiseBase.Presenter.Editor</StartupObject>
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Editor.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\Presenter\PraiseBase Presenter.csproj">
-      <Project>{33D2BC6A-0AD1-4E2E-AF35-FFFB744F22C6}</Project>
-      <Name>PraiseBase Presenter</Name>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -52,6 +46,20 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Configuration\PraiseBase Configuration.csproj">
+      <Project>{bab0f572-6a29-49a0-bb23-36e088a64225}</Project>
+      <Name>PraiseBase Configuration</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Core\PraiseBase Core Libraries.csproj">
+      <Project>{67651b76-5abd-4040-9a8f-3833130fc77d}</Project>
+      <Name>PraiseBase Core Libraries</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Presenter\PraiseBase Presenter.csproj">
+      <Project>{33d2bc6a-0ad1-4e2e-af35-fffb744f22c6}</Project>
+      <Name>PraiseBase Presenter</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
