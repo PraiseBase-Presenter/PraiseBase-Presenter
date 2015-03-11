@@ -22,13 +22,13 @@
       </slide>
     </part>
     <part caption="Teil 2">
-      <slide mainsize="42" backgroundnr="0">
+      <slide mainsize="42" backgroundnr="1">
         <line>Näher, mein Gott, zu Dir!</line>
         <line>Ein jeder Tag</line>
         <line>soll es neu zeigen mir,</line>
         <line>was er vermag:</line>
       </slide>
-      <slide mainsize="42" backgroundnr="0">
+      <slide mainsize="42" backgroundnr="1">
         <line>Wie seiner Gnade Macht,</line>
         <line>Erlösung hat gebracht,</line>
         <line>in uns're Sündennacht.</line>
@@ -36,13 +36,13 @@
       </slide>
     </part>
     <part caption="Teil 3">
-      <slide mainsize="42" backgroundnr="0">
+      <slide mainsize="42" backgroundnr="2">
         <line>Näher, mein Gott, zu Dir!</line>
         <line>Dich bet' ich an.</line>
         <line>Wie vieles hast an mir,</line>
         <line>Du doch getan!</line>
       </slide>
-      <slide mainsize="42" backgroundnr="0">
+      <slide mainsize="42" backgroundnr="2">
         <line>Von Banden frei und los,</line>
         <line>ruh' ich in Deinem Schoss.</line>
         <line>Ja, Deine Gnad' ist gross!</line>
@@ -118,7 +118,9 @@
       </shadow>
     </font>
     <background>
-      <file>Blumen\Blume 3.jpg</file>
+      <file>Sample\Feuer.jpg</file>
+      <file>Sample\Sonne.jpg</file>
+      <file>Sample\Menschen.jpg</file>
     </background>
     <linespacing>
       <main>30</main>
