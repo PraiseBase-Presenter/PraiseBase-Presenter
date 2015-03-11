@@ -1346,6 +1346,8 @@ namespace PraiseBase.Presenter.UI.Presenter
             SetlistReader sr = new SetlistReader();
             try
             {
+                listViewSetList.Items.Clear();
+
                 Setlist sl = sr.read(fileName);
                 if (sl.Items.Count > 0)
                 {
