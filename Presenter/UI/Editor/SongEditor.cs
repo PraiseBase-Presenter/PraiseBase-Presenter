@@ -208,7 +208,6 @@ namespace PraiseBase.Presenter.UI.Editor
                 Tag = new EditorChildMetaData(fileName, hashCode),
                 MdiParent = this
             };
-            Console.WriteLine(@"Init with " + hashCode + " '" + sng.Title + "'");
             childForm.FormClosing += childForm_FormClosing;
             childForm.Show();
             registerChild(childForm);
@@ -230,12 +229,10 @@ namespace PraiseBase.Presenter.UI.Editor
             {
                 SongEditorChild window = ((SongEditorChild)ActiveMdiChild);
                 window.ValidateChildren();
-                Console.WriteLine(@"prepare save, set hashcode " + window.Song.GetHashCode());
                 string fileName = Save(window.Song, ((EditorChildMetaData) window.Tag).Filename);
                 if (fileName != null)
                 {
                     int hashCode = window.Song.GetHashCode();
-                    Console.WriteLine(@"save, set hashcode " + hashCode);
                     ((EditorChildMetaData)window.Tag).HashCode = hashCode;
                     ((EditorChildMetaData)window.Tag).Filename = fileName;
                 }
@@ -253,12 +250,10 @@ namespace PraiseBase.Presenter.UI.Editor
             {
                 SongEditorChild window = ((SongEditorChild)ActiveMdiChild);
                 window.ValidateChildren();
-                Console.WriteLine(@"prepare save, set hashcode " + window.Song.GetHashCode());
                 string fileName = SaveAs(window.Song, null);
                 if (fileName != null)
                 {
                     int hashCode = window.Song.GetHashCode();
-                    Console.WriteLine(@"save, set hashcode " + hashCode);
                     ((EditorChildMetaData)window.Tag).HashCode = hashCode;
                     ((EditorChildMetaData)window.Tag).Filename = fileName;
                 }
@@ -333,7 +328,6 @@ namespace PraiseBase.Presenter.UI.Editor
 
             int storedHashCode = ((EditorChildMetaData)window.Tag).HashCode;
             int songHashCode = window.Song.GetHashCode();
-            Console.WriteLine(@"Close, compare stored " + storedHashCode + @" with current " + songHashCode);
             if (storedHashCode != songHashCode)
             {
                 DialogResult dlg = MessageBox.Show(string.Format(StringResources.SaveChangesMadeToTheSong, window.Song.Title),
