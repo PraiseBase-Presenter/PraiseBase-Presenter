@@ -238,7 +238,6 @@
     <None Include="Properties\Application\newsong_36.png" />
     <None Include="Properties\Application\save_36.png" />
     <Content Include="Properties\Application\translate_active.png" />
-    <Content Include="Resources\Doc\License.txt" />
     <None Include="Properties\Application\translate_disabled.png" />
     <None Include="Properties\Application\translate.png" />
     <None Include="Properties\Application\editcopy.png" />
@@ -372,7 +371,6 @@
     <None Include="Resources\Dist\Songs\Allein Gott in der Hoeh.ppl" />
     <None Include="Resources\Dist\Songs\Näher, mein Gott zu Dir.ppl" />
     <None Include="Resources\Dist\Songs\You are so faithful.ppl" />
-    <None Include="Resources\Doc\License.rtf" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Properties\Application\pb web.png" />

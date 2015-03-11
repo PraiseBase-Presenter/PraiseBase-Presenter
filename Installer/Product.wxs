@@ -32,7 +32,7 @@
 
     <!-- GUI (requires WixUIExtension) -->
     <UIRef Id="WixUI_Minimal"/>
-    <WixVariable Id="WixUILicenseRtf" Value="$(var.PraiseBase_Presenter.ProjectDir)Resources\Doc\License.rtf" />
+    <WixVariable Id="WixUILicenseRtf" Value="$(var.PraiseBase_Presenter.ProjectDir)..\License.rtf" />
     <!-- Source: http://www.flickr.com/photos/malcorp/3703556108/ -->
     <WixVariable Id="WixUIDialogBmp" Value="Resources\Background.bmp" />
     <WixVariable Id="WixUIBannerBmp" Value="Resources\Banner.bmp" />
@@ -57,12 +57,12 @@
           </Component>
           <Component Id="LicenseRtf" Guid="96dc79f8-2344-4610-a167-9b09ee501509">
             <File Id="License.rtf" 
-                  Source="$(var.PraiseBase_Presenter.ProjectDir)Resources\Doc\License.rtf" 
+                  Source="$(var.PraiseBase_Presenter.ProjectDir)..\License.rtf" 
                   KeyPath="yes"/>
           </Component>
           <Component Id="LicenseTxt" Guid="626b9fa0-0c14-4d4d-804a-911a454e76d7">
             <File Id="License.txt"
-                  Source="$(var.PraiseBase_Presenter.ProjectDir)Resources\Doc\License.txt"
+                  Source="$(var.PraiseBase_Presenter.ProjectDir)..\License.txt"
                   KeyPath="yes"/>
           </Component>
         </Directory>
