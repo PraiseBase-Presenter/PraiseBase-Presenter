@@ -24,6 +24,7 @@ using System;
 using System.Drawing;
 using System.Reflection;
 using System.Windows.Forms;
+using PraiseBase.Presenter.Util;
 
 namespace PraiseBase.Presenter.UI.Presenter
 {
@@ -137,7 +138,7 @@ namespace PraiseBase.Presenter.UI.Presenter
 
         private void timer1_Tick(object sender, EventArgs e)
         {
-            PraiseBase.Presenter.UpdateCheck.UpdateInformation ui = PraiseBase.Presenter.UpdateCheck.getNewVersion();
+            UpdateCheck.UpdateInformation ui = UpdateCheck.GetNewVersion();
             if (ui.UpdateAvailable)
             {
                 linkLabel1.Text = String.Format(PraiseBase.Presenter.Properties.StringResources.UpdateAvailable, ui.OnlineVersion);
