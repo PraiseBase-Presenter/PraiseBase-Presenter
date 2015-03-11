@@ -487,7 +487,7 @@ namespace PraiseBase.Presenter.Persistence.PowerPraise
         /// <returns></returns>
         private TextOrientation parseOrientation(XmlElement elem, TextOrientation defaultValue)
         {
-            TextOrientation orientation = defaultValue;
+            TextOrientation orientation = new TextOrientation(defaultValue.Vertical, defaultValue.Horizontal);
             if (elem != null)
             {
                 if (elem["horizontal"] != null)
