@@ -1159,6 +1159,19 @@ namespace PraiseBase.Presenter.UI.Presenter
 
         private void mainWindow_FormClosing(object sender, FormClosingEventArgs e)
         {
+            if (listViewSetList.Items.Count > 0)
+            {
+                var res = MessageBox.Show(StringResources.ShouldCurrentSetlistBeSaved, StringResources.SetlistFile, MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
+                if (res == DialogResult.Yes)
+                {
+                    buttonSaveSetList_Click(sender, e);
+                }
+                else if (res == DialogResult.Cancel)
+                {
+                    e.Cancel = true;
+                }
+            }
+
             Settings.Default.ViewerWindowState = WindowState;
             Settings.Default.MainWindowSize = this.Size;
             Settings.Default.Save();
