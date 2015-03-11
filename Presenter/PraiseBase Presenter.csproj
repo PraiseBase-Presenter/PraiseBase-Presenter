@@ -370,7 +370,6 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
-    <Compile Include="Settings.cs" />
     <None Include="Properties\Application\update16.png" />
     <None Include="Properties\Application\ok16.png" />
     <None Include="Properties\Application\wheel16.png" />
