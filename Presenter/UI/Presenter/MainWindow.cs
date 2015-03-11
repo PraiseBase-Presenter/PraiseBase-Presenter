@@ -63,31 +63,22 @@ namespace PraiseBase.Presenter.UI.Presenter
 
         private SongEditor _songEditor;
 
-        /// <summary>
-        /// Private constructor
-        /// </summary>
-        private MainWindow()
+        public MainWindow() : this(null)
+        {
+        }
+
+        public MainWindow(string setlistFile)
         {
             InitializeComponent();
 
             this.Size = Settings.Default.MainWindowSize;
             
             base.registerChild(this);
-        }
 
-        /// <summary>
-        /// Returns a singleton of mainWindow
-        /// </summary>
-        /// <returns>Returns the mainWindow instance</returns>
-        public static MainWindow Instance
-        {
-            get
+            // Load setlist file if specified
+            if (setlistFile != null && File.Exists(setlistFile))
             {
-                // Thread safety
-                lock (singletonPadlock)
-                {
-                    return _instance ?? (_instance = new MainWindow());
-                }
+                LoadSetList(setlistFile);
             }
         }
 
@@ -1295,31 +1286,37 @@ namespace PraiseBase.Presenter.UI.Presenter
             dlg.Title = StringResources.OpenSetlist;
             if (dlg.ShowDialog() == DialogResult.OK)
             {
-                SetlistReader sr = new SetlistReader();
-                try {
-                    PraiseBase.Presenter.Model.Setlist sl = sr.read(dlg.FileName);
-                    if (sl.Items.Count > 0)
-                    {
-                        foreach (var i in sl.Items)                
-                        {
-                            Guid g = SongManager.Instance.GetGuidByTitle(i);
-                            if (g != Guid.Empty)
-                            {
-                                var s = SongManager.Instance.SongList[g].Song;
-                                var lvi = new ListViewItem(s.Title);
-                                lvi.Tag = s.Guid;
-                                listViewSetList.Items.Add(lvi);
-                            }
-                        }
-                        buttonSetListClear.Enabled = true;
-                        buttonSaveSetList.Enabled = true;
-                        listViewSetList.Columns[0].Width = -2;
-                    }
-                }
-                catch (Exception err)
+                LoadSetList(dlg.FileName);
+            }
+        }
+
+        private void LoadSetList(string fileName)
+        {
+            SetlistReader sr = new SetlistReader();
+            try
+            {
+                PraiseBase.Presenter.Model.Setlist sl = sr.read(fileName);
+                if (sl.Items.Count > 0)
                 {
-                    MessageBox.Show(err.ToString(), this.Text, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    foreach (var i in sl.Items)
+                    {
+                        Guid g = SongManager.Instance.GetGuidByTitle(i);
+                        if (g != Guid.Empty)
+                        {
+                            var s = SongManager.Instance.SongList[g].Song;
+                            var lvi = new ListViewItem(s.Title);
+                            lvi.Tag = s.Guid;
+                            listViewSetList.Items.Add(lvi);
+                        }
+                    }
+                    buttonSetListClear.Enabled = true;
+                    buttonSaveSetList.Enabled = true;
+                    listViewSetList.Columns[0].Width = -2;
                 }
+            }
+            catch (Exception err)
+            {
+                MessageBox.Show(err.ToString(), this.Text, MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
