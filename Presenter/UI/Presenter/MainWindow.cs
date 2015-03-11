@@ -1251,15 +1251,20 @@ namespace PraiseBase.Presenter.UI.Presenter
                 Directory.CreateDirectory(setlistDir);
             }
 
-            var dlg = new SaveFileDialog();
-            dlg.AddExtension = true;
-            dlg.CheckPathExists = true;
-            dlg.Filter = StringResources.SetlistFile + " (*.pbpl)|*.pbpl";
-            dlg.InitialDirectory = setlistDir;
-            dlg.Title = StringResources.SaveSetlistAs;
+            string proposedFileName = DateTime.Now.ToString("yyyy-MM-dd"); ;
+
+            var dlg = new SaveFileDialog
+            {
+                AddExtension = true,
+                CheckPathExists = true,
+                Filter = StringResources.SetlistFile + " (*.pbpl)|*.pbpl",
+                InitialDirectory = setlistDir,
+                Title = StringResources.SaveSetlistAs,
+                FileName = proposedFileName
+            };
             if (dlg.ShowDialog() == DialogResult.OK)
             {
-                PraiseBase.Presenter.Model.Setlist sl = new PraiseBase.Presenter.Model.Setlist();
+                Setlist sl = new Setlist();
                 for (int i = 0; i < listViewSetList.Items.Count; i++)
                 {
                     sl.Items.Add(SongManager.Instance.SongList[(Guid)listViewSetList.Items[i].Tag].Song.Title);
