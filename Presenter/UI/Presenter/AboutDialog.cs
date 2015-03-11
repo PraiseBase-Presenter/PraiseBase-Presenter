@@ -48,7 +48,7 @@ namespace PraiseBase.Presenter.UI.Presenter
             this.labelCopyright.Text = AssemblyCopyright;
             this.labelCompanyName.Text = AssemblyCompany;
 
-            this.textBox1.Text = global::PraiseBase.Presenter.Properties.Resources.License;
+            this.textBox1.Text = global::PraiseBase.Presenter.Properties.FileResources.License;
 
             timer1.Interval = 1;
             timer1.Start();
