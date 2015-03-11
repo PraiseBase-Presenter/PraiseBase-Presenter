@@ -4,6 +4,7 @@
     <title>You are so faithful</title>
     <category>Lobpreis</category>
     <language>Englisch</language>
+    <guid>566e5a47-6b7e-4b76-9625-ef39163e7bcb</guid>
   </general>
   <songtext>
     <part caption="Strophe 1">
@@ -103,7 +104,9 @@
     </copyright>
     <source>
       <position>firstslide</position>
-      <text/>
+      <text>
+        <line></line>
+      </text>
     </source>
   </information>
   <formatting>

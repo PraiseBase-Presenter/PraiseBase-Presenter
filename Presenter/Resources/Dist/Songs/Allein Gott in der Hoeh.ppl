@@ -4,6 +4,7 @@
     <title>Allein Gott in der Höh</title>
     <category>Anbetung</category>
     <language>Deutsch</language>
+    <guid>9baf5000-5e31-4a8d-9f1f-812780a319c9</guid>
   </general>
   <songtext>
     <part caption="Strophe 1">
@@ -49,7 +50,7 @@
       </slide>
     </part>
     <part caption="Instrumentalteil">
-      <slide mainsize="30" backgroundnr="0"/>
+      <slide mainsize="30" backgroundnr="0" />
     </part>
   </songtext>
   <order>

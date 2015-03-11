@@ -3,7 +3,7 @@
   <general>
     <title>A mighty fortress is our God</title>
     <category>Keine Kategorie</category>
-    <language />
+    <language></language>
     <guid>b532c18d-a042-4978-80f4-5bfc8785614a</guid>
     <ccliNo>42964</ccliNo>
   </general>
@@ -76,7 +76,9 @@
     </copyright>
     <source>
       <position>firstslide</position>
-      <text />
+      <text>
+        <line></line>
+      </text>
     </source>
   </information>
   <formatting>
