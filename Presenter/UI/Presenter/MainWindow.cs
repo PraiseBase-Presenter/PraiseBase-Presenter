@@ -63,6 +63,8 @@ namespace PraiseBase.Presenter.UI.Presenter
 
         private SongEditor _songEditor;
 
+        private string _currentSetlistFile;
+
         public MainWindow() : this(null)
         {
         }
@@ -1195,6 +1197,8 @@ namespace PraiseBase.Presenter.UI.Presenter
                 buttonSaveSetList.Enabled = false;
                 buttonSetListDown.Enabled = false;
                 buttonSetListUp.Enabled = false;
+
+                _currentSetlistFile = null;
             }
         }
 
@@ -1250,28 +1254,43 @@ namespace PraiseBase.Presenter.UI.Presenter
             {
                 Directory.CreateDirectory(setlistDir);
             }
+            if (_currentSetlistFile != null && File.Exists(_currentSetlistFile))
+            {
+                setlistDir = Path.GetDirectoryName(_currentSetlistFile);
+            }
 
-            string proposedFileName = DateTime.Now.ToString("yyyy-MM-dd"); ;
+            string proposedFileName = DateTime.Now.ToString("yyyy-MM-dd");
+            if (_currentSetlistFile != null)
+            {
+                proposedFileName = Path.GetFileName(_currentSetlistFile);
+            }
 
             var dlg = new SaveFileDialog
             {
                 AddExtension = true,
                 CheckPathExists = true,
-                Filter = StringResources.SetlistFile + " (*.pbpl)|*.pbpl",
+                Filter = StringResources.SetlistFile + @" (*.pbpl)|*.pbpl",
                 InitialDirectory = setlistDir,
                 Title = StringResources.SaveSetlistAs,
                 FileName = proposedFileName
             };
             if (dlg.ShowDialog() == DialogResult.OK)
             {
-                Setlist sl = new Setlist();
-                for (int i = 0; i < listViewSetList.Items.Count; i++)
-                {
-                    sl.Items.Add(SongManager.Instance.SongList[(Guid)listViewSetList.Items[i].Tag].Song.Title);
-                }
-                SetlistWriter swr = new SetlistWriter();
-                swr.Write(dlg.FileName, sl);
+                SaveSetList(dlg.FileName);
             }
+        }
+
+        private void SaveSetList(string filename)
+        {
+            Setlist sl = new Setlist();
+            for (int i = 0; i < listViewSetList.Items.Count; i++)
+            {
+                sl.Items.Add(SongManager.Instance.SongList[(Guid)listViewSetList.Items[i].Tag].Song.Title);
+            }
+            SetlistWriter swr = new SetlistWriter();
+            swr.Write(filename, sl);
+
+            _currentSetlistFile = filename;
         }
 
         private void buttonOpenSetList_Click(object sender, EventArgs e)
@@ -1281,12 +1300,16 @@ namespace PraiseBase.Presenter.UI.Presenter
             {
                 Directory.CreateDirectory(setlistDir);
             }
+            if (_currentSetlistFile != null && File.Exists(_currentSetlistFile))
+            {
+                setlistDir = Path.GetDirectoryName(_currentSetlistFile);
+            }
 
             var dlg = new OpenFileDialog();
             dlg.AddExtension = true;
             dlg.CheckPathExists = true;
             dlg.CheckFileExists = true;
-            dlg.Filter = StringResources.SetlistFile + " (*.pbpl)|*.pbpl";
+            dlg.Filter = StringResources.SetlistFile + @" (*.pbpl)|*.pbpl";
             dlg.InitialDirectory = setlistDir;
             dlg.Title = StringResources.OpenSetlist;
             if (dlg.ShowDialog() == DialogResult.OK)
@@ -1300,7 +1323,7 @@ namespace PraiseBase.Presenter.UI.Presenter
             SetlistReader sr = new SetlistReader();
             try
             {
-                PraiseBase.Presenter.Model.Setlist sl = sr.read(fileName);
+                Setlist sl = sr.read(fileName);
                 if (sl.Items.Count > 0)
                 {
                     foreach (var i in sl.Items)
@@ -1318,6 +1341,8 @@ namespace PraiseBase.Presenter.UI.Presenter
                     buttonSaveSetList.Enabled = true;
                     listViewSetList.Columns[0].Width = -2;
                 }
+
+                _currentSetlistFile = fileName;
             }
             catch (Exception err)
             {
