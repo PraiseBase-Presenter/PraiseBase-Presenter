@@ -62,6 +62,8 @@ namespace PraiseBase.Presenter.UI.Presenter
 
         private string _currentSetlistFile;
 
+        private string _originalFormTitle;
+
         public MainWindow() : this(null)
         {
         }
@@ -73,6 +75,8 @@ namespace PraiseBase.Presenter.UI.Presenter
             this.Size = Settings.Default.MainWindowSize;
             
             base.registerChild(this);
+
+            _originalFormTitle = Text;
 
             // Load setlist file if specified
             LoadSetListIfExists(setlistFile);
@@ -2028,7 +2032,7 @@ namespace PraiseBase.Presenter.UI.Presenter
                 }
 
                 // Save name of current setlist file
-                _currentSetlistFile = fileName;
+                SetCurrentSetListFile(fileName);
             }
             catch (Exception err)
             {
@@ -2097,7 +2101,7 @@ namespace PraiseBase.Presenter.UI.Presenter
             swr.Write(filename, sl);
 
             // Save name of current setlist file
-            _currentSetlistFile = filename;
+            SetCurrentSetListFile(filename);
         }
 
         private void buttonSetListClear_Click(object sender, EventArgs e)
@@ -2123,7 +2127,7 @@ namespace PraiseBase.Presenter.UI.Presenter
             buttonSetListUp.Enabled = false;
 
             // Reset name of current setlist file
-            _currentSetlistFile = null;
+            SetCurrentSetListFile(null);
         }
 
         /// <summary>
@@ -2147,6 +2151,19 @@ namespace PraiseBase.Presenter.UI.Presenter
                     e.Cancel = true;
                 }
             }
+        }
+
+        private void SetCurrentSetListFile(string setListFile)
+        {
+            if (!String.IsNullOrEmpty(setListFile))
+            {
+                Text = _originalFormTitle + @" - [" + Path.GetFileNameWithoutExtension(setListFile) + @"]";
+            }
+            else
+            {
+                Text = _originalFormTitle;
+            }
+            _currentSetlistFile = setListFile;
         }
 
         #endregion
