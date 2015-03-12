@@ -355,6 +355,10 @@
     <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Common Controls\PraiseBase Common Controls.csproj">
+      <Project>{20f2017a-032c-462f-840f-a4ccf7b4609e}</Project>
+      <Name>PraiseBase Common Controls</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Configuration\PraiseBase Configuration.csproj">
       <Project>{bab0f572-6a29-49a0-bb23-36e088a64225}</Project>
       <Name>PraiseBase Configuration</Name>
