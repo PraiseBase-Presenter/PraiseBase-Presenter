@@ -64,6 +64,8 @@ namespace PraiseBase.Presenter.UI.Presenter
 
         private int _currentSetListHashCode;
 
+        private const string SetListFileExtension = "pbpl";
+
         private readonly string _originalFormTitle;
 
         public MainWindow() : this(null)
@@ -1986,7 +1988,7 @@ namespace PraiseBase.Presenter.UI.Presenter
                 AddExtension = true,
                 CheckPathExists = true,
                 CheckFileExists = true,
-                Filter = StringResources.SetlistFile + @" (*.pbpl)|*.pbpl",
+                Filter = GetSetListFileFilter(),
                 InitialDirectory = setlistDir,
                 Title = StringResources.OpenSetlist
             };
@@ -2097,17 +2099,13 @@ namespace PraiseBase.Presenter.UI.Presenter
             }
 
             // Define proposed filename, use current setlist file if available
-            string proposedFileName = DateTime.Now.ToString("yyyy-MM-dd");
-            if (_currentSetlistFile != null)
-            {
-                proposedFileName = Path.GetFileName(_currentSetlistFile);
-            }
+            var proposedFileName = _currentSetlistFile != null ? Path.GetFileName(_currentSetlistFile) : GetSetListDefaultName();
 
             var dlg = new SaveFileDialog
             {
                 AddExtension = true,
                 CheckPathExists = true,
-                Filter = StringResources.SetlistFile + @" (*.pbpl)|*.pbpl",
+                Filter = GetSetListFileFilter(),
                 InitialDirectory = setlistDir,
                 Title = StringResources.SaveSetlistAs,
                 FileName = proposedFileName
@@ -2118,6 +2116,16 @@ namespace PraiseBase.Presenter.UI.Presenter
                 SaveSetList(dlg.FileName);
             }
             return dlgRes;
+        }
+
+        private string GetSetListDefaultName()
+        {
+            return DateTime.Now.ToString("yyyy-MM-dd");
+        }
+
+        private string GetSetListFileFilter()
+        {
+            return String.Format("{0} (*.{1})|*.{1}", StringResources.SetlistFile, SetListFileExtension);
         }
 
         /// <summary>
