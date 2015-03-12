@@ -105,12 +105,6 @@
     <Compile Include="UI\Components\BackgroundImageBrowser.Designer.cs">
       <DependentUpon>BackgroundImageBrowser.cs</DependentUpon>
     </Compile>
-    <Compile Include="UI\Components\ColorPicker.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="UI\Components\ColorPicker.Designer.cs">
-      <DependentUpon>ColorPicker.cs</DependentUpon>
-    </Compile>
     <Compile Include="UI\Components\CustomGroupBox.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -216,9 +210,6 @@
     <Compile Include="Util\UpdateCheck.cs" />
     <EmbeddedResource Include="UI\Components\BackgroundImageBrowser.resx">
       <DependentUpon>BackgroundImageBrowser.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="UI\Components\ColorPicker.resx">
-      <DependentUpon>ColorPicker.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UI\Components\CustomGroupBox.resx">
       <DependentUpon>CustomGroupBox.cs</DependentUpon>
