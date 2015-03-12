@@ -1201,13 +1201,20 @@ namespace PraiseBase.Presenter.UI.Presenter
             SongBrowserDialog dlg = new SongBrowserDialog();
             dlg.Tags = Settings.Default.Tags;
             dlg.ShowDialog(this);
-            if (dlg.OpenInEditor.Any())
+            if (dlg.SelectedAction == SongBrowserDialog.SongBrowseDialogAction.OpenInEditor && dlg.SelectedItems.Any())
             {
-                foreach (var fn in dlg.OpenInEditor)
+                foreach (var fn in dlg.SelectedItems)
                 {
                     GetSongEditor().OpenSong(fn);
                 }
                 ShowAndBringSongEditorToFront();
+            }
+            else if (dlg.SelectedAction == SongBrowserDialog.SongBrowseDialogAction.LoadInSetList && dlg.SelectedItems.Any())
+            {
+                foreach (var fn in dlg.SelectedItems)
+                {
+                    AddSongToSetList(fn);
+                }
             }
         }
 
@@ -2037,6 +2044,28 @@ namespace PraiseBase.Presenter.UI.Presenter
             catch (Exception err)
             {
                 MessageBox.Show(err.ToString(), Text, MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        /// <summary>
+        /// Adds a song to the setlist
+        /// </summary>
+        /// <param name="path"></param>
+        private void AddSongToSetList(string path)
+        {
+            Guid g = SongManager.Instance.GetGUIDByPath(path);
+            if (g != Guid.Empty)
+            {
+                var s = SongManager.Instance.SongList[g].Song;
+                var lvi = new ListViewItem(s.Title)
+                {
+                    Tag = s.Guid
+                };
+                listViewSetList.Items.Add(lvi);
+
+                buttonSetListClear.Enabled = true;
+                buttonSaveSetList.Enabled = true;
+                listViewSetList.Columns[0].Width = -2;
             }
         }
 
