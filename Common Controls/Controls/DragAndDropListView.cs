@@ -3,7 +3,7 @@ using System.Collections;
 using System.Drawing;
 using System.Windows.Forms;
 
-namespace Bol.WinControls
+namespace PraiseBase.Presenter.Controls
 {
     public class ListViewEx : ListView
     {

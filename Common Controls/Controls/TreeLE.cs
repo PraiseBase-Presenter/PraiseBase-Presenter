@@ -2,7 +2,7 @@ using System;
 using System.ComponentModel;
 using System.Windows.Forms;
 
-namespace TreeEx
+namespace PraiseBase.Presenter.Controls
 {
     public class TreeLE : TreeView
     {

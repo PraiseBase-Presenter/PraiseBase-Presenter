@@ -3,7 +3,7 @@ using System.ComponentModel;
 using System.Drawing;
 using System.Windows.Forms;
 
-namespace PraiseBase.Presenter.Components
+namespace PraiseBase.Presenter.Controls
 {
     [DefaultEvent("TextChanged")]
     public partial class SearchTextBox : UserControl

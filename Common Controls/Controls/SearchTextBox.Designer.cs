@@ -1,4 +1,4 @@
-﻿namespace PraiseBase.Presenter.Components
+﻿namespace PraiseBase.Presenter.Controls
 {
     partial class SearchTextBox
     {

@@ -2,6 +2,7 @@
 using System.ComponentModel;
 using System.Globalization;
 using System.Windows.Forms;
+using PraiseBase.Presenter.Controls;
 using PraiseBase.Presenter.Properties;
 
 namespace PraiseBase.Presenter.UI
@@ -130,20 +131,20 @@ namespace PraiseBase.Presenter.UI
                     c.Text = text;
                 }
 
-                if (c.GetType() == typeof(PraiseBase.Presenter.Components.CustomGroupBox))
+                if (c.GetType() == typeof(CustomGroupBox))
                 {
                     string title = resources.GetString(c.Name + ".Title", lang);
                     if (title != null)
                     {
-                        ((PraiseBase.Presenter.Components.CustomGroupBox)c).Title = title;
+                        ((CustomGroupBox)c).Title = title;
                     }
                 }
-                else if (c.GetType() == typeof(PraiseBase.Presenter.Components.SearchTextBox))
+                else if (c.GetType() == typeof(SearchTextBox))
                 {
                     string title = resources.GetString(c.Name + ".PlaceHolderText", lang);
                     if (title != null)
                     {
-                        ((PraiseBase.Presenter.Components.SearchTextBox)c).PlaceHolderText = title;
+                        ((SearchTextBox)c).PlaceHolderText = title;
                     }
                 }
             }

@@ -1,4 +1,6 @@
-﻿namespace PraiseBase.Presenter.UI.Presenter
+﻿using PraiseBase.Presenter.Controls;
+
+namespace PraiseBase.Presenter.UI.Presenter
 {
     partial class MainWindow
     {
@@ -32,10 +34,10 @@
             System.Windows.Forms.Button buttonChooseDiaDir;
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainWindow));
             this.splitContainerLayerContent = new System.Windows.Forms.SplitContainer();
-            this.customGroupBox2 = new PraiseBase.Presenter.Components.CustomGroupBox();
+            this.customGroupBox2 = new CustomGroupBox();
             this.tabControlTextLayer = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
-            this.songSearchTextBox = new PraiseBase.Presenter.Components.SearchTextBox();
+            this.songSearchTextBox = new SearchTextBox();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.titelToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.titelUndTextToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -52,8 +54,8 @@
             this.buttonAddToBibleVerseList = new System.Windows.Forms.Button();
             this.buttonRemoveFromBibleVerseList = new System.Windows.Forms.Button();
             this.label12 = new System.Windows.Forms.Label();
-            this.searchTextBoxBible = new PraiseBase.Presenter.Components.SearchTextBox();
-            this.listViewBibleVerseList = new Bol.WinControls.ListViewEx();
+            this.searchTextBoxBible = new SearchTextBox();
+            this.listViewBibleVerseList = new ListViewEx();
             this.columnHeader3 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.label11 = new System.Windows.Forms.Label();
             this.listBoxBibleVerseTo = new System.Windows.Forms.ListBox();
@@ -68,11 +70,11 @@
             this.listBoxBibleChapter = new System.Windows.Forms.ListBox();
             this.listBoxBibleBook = new System.Windows.Forms.ListBox();
             this.comboBoxBible = new System.Windows.Forms.ComboBox();
-            this.customGroupBox3 = new PraiseBase.Presenter.Components.CustomGroupBox();
+            this.customGroupBox3 = new CustomGroupBox();
             this.label13 = new System.Windows.Forms.Label();
             this.tabControl2 = new System.Windows.Forms.TabControl();
             this.tabPageImageBrowser = new System.Windows.Forms.TabPage();
-            this.searchTextBoxImages = new PraiseBase.Presenter.Components.SearchTextBox();
+            this.searchTextBoxImages = new SearchTextBox();
             this.treeViewImageDirectories = new System.Windows.Forms.TreeView();
             this.listViewDirectoryImages = new System.Windows.Forms.ListView();
             this.labelImgDirName = new System.Windows.Forms.Label();
@@ -136,7 +138,7 @@
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage3 = new System.Windows.Forms.TabPage();
             this.buttonOpenSetList = new System.Windows.Forms.Button();
-            this.listViewSetList = new Bol.WinControls.ListViewEx();
+            this.listViewSetList = new ListViewEx();
             this.columnHeader4 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.buttonSaveSetList = new System.Windows.Forms.Button();
             this.buttonSetListAdd = new System.Windows.Forms.Button();
@@ -170,7 +172,7 @@
             this.qaSegmentationToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator13 = new System.Windows.Forms.ToolStripSeparator();
             this.qAcommentsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.customGroupBox1 = new PraiseBase.Presenter.Components.CustomGroupBox();
+            this.customGroupBox1 = new CustomGroupBox();
             this.labelFadeTime = new System.Windows.Forms.Label();
             this.pictureBoxbeamerPreview = new System.Windows.Forms.PictureBox();
             this.labelFadeTimeLayer1 = new System.Windows.Forms.Label();
@@ -263,7 +265,7 @@
             resources.ApplyResources(this.songSearchTextBox, "songSearchTextBox");
             this.songSearchTextBox.Name = "songSearchTextBox";
             this.songSearchTextBox.OptionsMenu = this.contextMenuStrip1;
-            this.songSearchTextBox.TextChanged += new PraiseBase.Presenter.Components.SearchTextBox.TextChange(this.songSearchBox_TextChanged);
+            this.songSearchTextBox.TextChanged += new SearchTextBox.TextChange(this.songSearchBox_TextChanged);
             // 
             // contextMenuStrip1
             // 
@@ -403,7 +405,7 @@
             resources.ApplyResources(this.searchTextBoxBible, "searchTextBoxBible");
             this.searchTextBoxBible.Name = "searchTextBoxBible";
             this.searchTextBoxBible.OptionsMenu = null;
-            this.searchTextBoxBible.TextChanged += new PraiseBase.Presenter.Components.SearchTextBox.TextChange(this.searchTextBoxBible_TextChanged);
+            this.searchTextBoxBible.TextChanged += new SearchTextBox.TextChange(this.searchTextBoxBible_TextChanged);
             // 
             // listViewBibleVerseList
             // 
@@ -542,7 +544,7 @@
             resources.ApplyResources(this.searchTextBoxImages, "searchTextBoxImages");
             this.searchTextBoxImages.Name = "searchTextBoxImages";
             this.searchTextBoxImages.OptionsMenu = null;
-            this.searchTextBoxImages.TextChanged += new PraiseBase.Presenter.Components.SearchTextBox.TextChange(this.searchTextBoxImages_TextChanged);
+            this.searchTextBoxImages.TextChanged += new SearchTextBox.TextChange(this.searchTextBoxImages_TextChanged);
             // 
             // treeViewImageDirectories
             // 
@@ -1468,13 +1470,13 @@
         private System.Windows.Forms.Button buttonSaveSetList;
         private System.Windows.Forms.Button buttonSetListAdd;
         private System.Windows.Forms.Button buttonSetListClear;
-        private Bol.WinControls.ListViewEx listViewSetList;
+        private ListViewEx listViewSetList;
         private System.Windows.Forms.ColumnHeader columnHeader4;
         private System.Windows.Forms.Button buttonSetListRem;
         private System.Windows.Forms.Button buttonSetListDown;
         private System.Windows.Forms.Button buttonSetListUp;
-        private Components.SearchTextBox songSearchTextBox;
-        private Components.SearchTextBox searchTextBoxImages;
+        private SearchTextBox songSearchTextBox;
+        private SearchTextBox searchTextBoxImages;
         private System.Windows.Forms.TabControl tabControl1;
         private System.Windows.Forms.TabPage tabPage3;
         private System.Windows.Forms.TabPage tabPage4;
@@ -1495,12 +1497,12 @@
         private System.Windows.Forms.ListBox listBoxBibleVerseTo;
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.Label label12;
-        private Bol.WinControls.ListViewEx listViewBibleVerseList;
+        private ListViewEx listViewBibleVerseList;
         private System.Windows.Forms.ColumnHeader columnHeader3;
         private System.Windows.Forms.Button buttonAddToBibleVerseList;
         private System.Windows.Forms.Button buttonRemoveFromBibleVerseList;
         private System.Windows.Forms.CheckBox checkBoxBibleShowVerseFromListDirectly;
-        private Components.SearchTextBox searchTextBoxBible;
+        private SearchTextBox searchTextBoxBible;
         private System.Windows.Forms.Label labelBibleSearchMsg;
         private System.Windows.Forms.ToolStripButton toolStripButtonProjectionOff;
         private System.Windows.Forms.ToolStripButton toolStripButtonBlackout;
@@ -1521,9 +1523,9 @@
         private System.Windows.Forms.Label labelFadeTime;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.TrackBar trackBarFadeTime;
-        private Components.CustomGroupBox customGroupBox1;
-        private Components.CustomGroupBox customGroupBox2;
-        private Components.CustomGroupBox customGroupBox3;
+        private CustomGroupBox customGroupBox1;
+        private CustomGroupBox customGroupBox2;
+        private CustomGroupBox customGroupBox3;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
         private System.Windows.Forms.ToolStripMenuItem titelToolStripMenuItem;

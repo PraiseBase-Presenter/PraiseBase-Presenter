@@ -25,11 +25,11 @@ using System.Diagnostics.CodeAnalysis;
 using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Windows.Forms;
+using PraiseBase.Presenter.Controls;
 using PraiseBase.Presenter.Model.Song;
 using PraiseBase.Presenter.Projection;
 using PraiseBase.Presenter.Properties;
 using PraiseBase.Presenter.UI.Presenter;
-using TreeEx;
 using PraiseBase.Presenter.Util;
 
 namespace PraiseBase.Presenter.UI.Editor
