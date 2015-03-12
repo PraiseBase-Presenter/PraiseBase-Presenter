@@ -53,9 +53,6 @@ namespace PraiseBase.Presenter.UI.Presenter
     /// </summary>
     public partial class MainWindow : LocalizableForm
     {
-        private static MainWindow _instance;
-        private static readonly object singletonPadlock = new object();
-
         private Timer diaTimer;
         private List<String> imageSearchResults;
 
