@@ -41,6 +41,30 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controls\BackgroundImageBrowser.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\BackgroundImageBrowser.Designer.cs">
+      <DependentUpon>BackgroundImageBrowser.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\CustomGroupBox.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Controls\CustomGroupBox.Designer.cs">
+      <DependentUpon>CustomGroupBox.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\DragAndDropListView.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Controls\SearchTextBox.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\SearchTextBox.Designer.cs">
+      <DependentUpon>SearchTextBox.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\TreeLE.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -52,6 +76,21 @@
       <Project>{67651b76-5abd-4040-9a8f-3833130fc77d}</Project>
       <Name>PraiseBase Core Libraries</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Controls\BackgroundImageBrowser.resx">
+      <DependentUpon>BackgroundImageBrowser.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\CustomGroupBox.resx">
+      <DependentUpon>CustomGroupBox.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\SearchTextBox.resx">
+      <DependentUpon>SearchTextBox.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\TreeLE.resx">
+      <DependentUpon>TreeLE.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

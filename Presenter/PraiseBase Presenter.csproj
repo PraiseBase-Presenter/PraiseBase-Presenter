@@ -99,35 +99,11 @@
     </Compile>
     <Compile Include="Manager\ImageManager.cs" />
     <Compile Include="Manager\SongManager.cs" />
-    <Compile Include="UI\Components\BackgroundImageBrowser.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="UI\Components\BackgroundImageBrowser.Designer.cs">
-      <DependentUpon>BackgroundImageBrowser.cs</DependentUpon>
-    </Compile>
-    <Compile Include="UI\Components\CustomGroupBox.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="UI\Components\CustomGroupBox.Designer.cs">
-      <DependentUpon>CustomGroupBox.cs</DependentUpon>
-    </Compile>
-    <Compile Include="UI\Components\SearchTextBox.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="UI\Components\SearchTextBox.Designer.cs">
-      <DependentUpon>SearchTextBox.cs</DependentUpon>
-    </Compile>
-    <Compile Include="UI\Components\DragAndDropListView.cs">
-      <SubType>Component</SubType>
-    </Compile>
     <Compile Include="UI\Components\SongDetail.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="UI\Components\SongDetail.Designer.cs">
       <DependentUpon>SongDetail.cs</DependentUpon>
-    </Compile>
-    <Compile Include="UI\Components\TreeLE.cs">
-      <SubType>Component</SubType>
     </Compile>
     <Compile Include="UI\Presenter\AboutDialog.cs">
       <SubType>Form</SubType>
@@ -208,21 +184,8 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Util\SongTemplateMapper.cs" />
     <Compile Include="Util\UpdateCheck.cs" />
-    <EmbeddedResource Include="UI\Components\BackgroundImageBrowser.resx">
-      <DependentUpon>BackgroundImageBrowser.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="UI\Components\CustomGroupBox.resx">
-      <DependentUpon>CustomGroupBox.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="UI\Components\SearchTextBox.resx">
-      <DependentUpon>SearchTextBox.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="UI\Components\SongDetail.resx">
       <DependentUpon>SongDetail.cs</DependentUpon>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="UI\Components\TreeLE.resx">
-      <DependentUpon>TreeLE.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="UI\Editor\SongEditor.en-US.resx">
