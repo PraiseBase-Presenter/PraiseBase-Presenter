@@ -75,10 +75,7 @@ namespace PraiseBase.Presenter.UI.Presenter
             base.registerChild(this);
 
             // Load setlist file if specified
-            if (setlistFile != null && File.Exists(setlistFile))
-            {
-                LoadSetList(setlistFile);
-            }
+            LoadSetListIfExists(setlistFile);
         }
 
         /// <summary>
@@ -1156,21 +1153,7 @@ namespace PraiseBase.Presenter.UI.Presenter
 
         private void mainWindow_FormClosing(object sender, FormClosingEventArgs e)
         {
-            if (listViewSetList.Items.Count > 0)
-            {
-                var res = MessageBox.Show(StringResources.ShouldCurrentSetlistBeSaved, StringResources.SetlistFile, MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
-                if (res == DialogResult.Yes)
-                {
-                    if (ShowSaveSetlistDialog() == DialogResult.Cancel)
-                    {
-                        e.Cancel = true;
-                    }
-                }
-                else if (res == DialogResult.Cancel)
-                {
-                    e.Cancel = true;
-                }
-            }
+            AskIfSetlistShouldBeSaved(e);
 
             Settings.Default.ViewerWindowState = WindowState;
             Settings.Default.MainWindowSize = this.Size;
@@ -1180,67 +1163,6 @@ namespace PraiseBase.Presenter.UI.Presenter
         private void datenverzeichnisOeffnenToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Process.Start(Settings.Default.DataDirectory);
-        }
-
-        private void buttonSetListRem_Click(object sender, EventArgs e)
-        {
-            if (listViewSetList.SelectedItems.Count > 0)
-            {
-                listViewSetList.Items.RemoveAt(listViewSetList.SelectedIndices[0]);
-                buttonSetListRem.Enabled = false;
-                buttonSetListDown.Enabled = false;
-                buttonSetListUp.Enabled = false;
-                if (listViewSetList.Items.Count == 0)
-                {
-                    buttonSaveSetList.Enabled = false;
-                    buttonSetListClear.Enabled = false;
-                }
-            }
-        }
-
-        private void buttonSetListUp_Click(object sender, EventArgs e)
-        {
-            if (listViewSetList.SelectedIndices.Count > 0)
-            {
-                int idx = listViewSetList.SelectedIndices[0];
-                if (idx > 0)
-                {
-                    ListViewItem lvi = listViewSetList.Items[idx];
-                    listViewSetList.Items.RemoveAt(idx);
-                    listViewSetList.Items.Insert(idx - 1, lvi);
-                    listViewSetList.Items[idx - 1].Selected = true;
-                }
-            }
-        }
-
-        private void buttonSetListDown_Click(object sender, EventArgs e)
-        {
-            if (listViewSetList.SelectedIndices.Count > 0)
-            {
-                int idx = listViewSetList.SelectedIndices[0];
-                if (idx < listViewSetList.Items.Count - 1)
-                {
-                    ListViewItem lvi = listViewSetList.Items[idx];
-                    listViewSetList.Items.RemoveAt(idx);
-                    listViewSetList.Items.Insert(idx + 1, lvi);
-                    listViewSetList.Items[idx + 1].Selected = true;
-                }
-            }
-        }
-
-        private void buttonSetListAdd_Click(object sender, EventArgs e)
-        {
-            if (listViewSongs.SelectedItems.Count > 0)
-            {
-                listViewSetList.Items.Add((ListViewItem)listViewSongs.SelectedItems[0].Clone());
-                listViewSetList.Columns[0].Width = -2;
-                buttonSetListClear.Enabled = true;
-                buttonSaveSetList.Enabled = true;
-            }
-            else
-            {
-                buttonSetListAdd.Enabled = false;
-            }
         }
 
         private void toolStripButtonDisplaySettings_Click(object sender, EventArgs e)
@@ -1963,7 +1885,68 @@ namespace PraiseBase.Presenter.UI.Presenter
             }
         }
 
-        #region Setlists
+        #region Setlist
+
+        private void buttonSetListAdd_Click(object sender, EventArgs e)
+        {
+            if (listViewSongs.SelectedItems.Count > 0)
+            {
+                listViewSetList.Items.Add((ListViewItem)listViewSongs.SelectedItems[0].Clone());
+                listViewSetList.Columns[0].Width = -2;
+                buttonSetListClear.Enabled = true;
+                buttonSaveSetList.Enabled = true;
+            }
+            else
+            {
+                buttonSetListAdd.Enabled = false;
+            }
+        }
+
+        private void buttonSetListUp_Click(object sender, EventArgs e)
+        {
+            if (listViewSetList.SelectedIndices.Count > 0)
+            {
+                int idx = listViewSetList.SelectedIndices[0];
+                if (idx > 0)
+                {
+                    ListViewItem lvi = listViewSetList.Items[idx];
+                    listViewSetList.Items.RemoveAt(idx);
+                    listViewSetList.Items.Insert(idx - 1, lvi);
+                    listViewSetList.Items[idx - 1].Selected = true;
+                }
+            }
+        }
+
+        private void buttonSetListDown_Click(object sender, EventArgs e)
+        {
+            if (listViewSetList.SelectedIndices.Count > 0)
+            {
+                int idx = listViewSetList.SelectedIndices[0];
+                if (idx < listViewSetList.Items.Count - 1)
+                {
+                    ListViewItem lvi = listViewSetList.Items[idx];
+                    listViewSetList.Items.RemoveAt(idx);
+                    listViewSetList.Items.Insert(idx + 1, lvi);
+                    listViewSetList.Items[idx + 1].Selected = true;
+                }
+            }
+        }
+
+        private void buttonSetListRem_Click(object sender, EventArgs e)
+        {
+            if (listViewSetList.SelectedItems.Count > 0)
+            {
+                listViewSetList.Items.RemoveAt(listViewSetList.SelectedIndices[0]);
+                buttonSetListRem.Enabled = false;
+                buttonSetListDown.Enabled = false;
+                buttonSetListUp.Enabled = false;
+                if (listViewSetList.Items.Count == 0)
+                {
+                    buttonSaveSetList.Enabled = false;
+                    buttonSetListClear.Enabled = false;
+                }
+            }
+        }
 
         private void buttonOpenSetList_Click(object sender, EventArgs e)
         {
@@ -1985,16 +1968,30 @@ namespace PraiseBase.Presenter.UI.Presenter
                 setlistDir = Path.GetDirectoryName(_currentSetlistFile);
             }
 
-            var dlg = new OpenFileDialog();
-            dlg.AddExtension = true;
-            dlg.CheckPathExists = true;
-            dlg.CheckFileExists = true;
-            dlg.Filter = StringResources.SetlistFile + @" (*.pbpl)|*.pbpl";
-            dlg.InitialDirectory = setlistDir;
-            dlg.Title = StringResources.OpenSetlist;
+            var dlg = new OpenFileDialog
+            {
+                AddExtension = true,
+                CheckPathExists = true,
+                CheckFileExists = true,
+                Filter = StringResources.SetlistFile + @" (*.pbpl)|*.pbpl",
+                InitialDirectory = setlistDir,
+                Title = StringResources.OpenSetlist
+            };
             if (dlg.ShowDialog() == DialogResult.OK)
             {
                 LoadSetList(dlg.FileName);
+            }
+        }
+
+        /// <summary>
+        /// Loads a setlist file if it exits
+        /// </summary>
+        /// <param name="setlistFile"></param>
+        private void LoadSetListIfExists(string setlistFile)
+        {
+            if (!string.IsNullOrEmpty(setlistFile) && File.Exists(setlistFile))
+            {
+                LoadSetList(setlistFile);
             }
         }
 
@@ -2018,8 +2015,10 @@ namespace PraiseBase.Presenter.UI.Presenter
                         if (g != Guid.Empty)
                         {
                             var s = SongManager.Instance.SongList[g].Song;
-                            var lvi = new ListViewItem(s.Title);
-                            lvi.Tag = s.Guid;
+                            var lvi = new ListViewItem(s.Title)
+                            {
+                                Tag = s.Guid
+                            };
                             listViewSetList.Items.Add(lvi);
                         }
                     }
@@ -2033,7 +2032,7 @@ namespace PraiseBase.Presenter.UI.Presenter
             }
             catch (Exception err)
             {
-                MessageBox.Show(err.ToString(), this.Text, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(err.ToString(), Text, MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -2104,7 +2103,7 @@ namespace PraiseBase.Presenter.UI.Presenter
         private void buttonSetListClear_Click(object sender, EventArgs e)
         {
             if (
-                MessageBox.Show(StringResources.ReallyEmptySetlist, this.Text, MessageBoxButtons.YesNo, MessageBoxIcon.Question) ==
+                MessageBox.Show(StringResources.ReallyEmptySetlist, Text, MessageBoxButtons.YesNo, MessageBoxIcon.Question) ==
                 DialogResult.Yes)
             {
                 ClearSetList();
@@ -2125,6 +2124,29 @@ namespace PraiseBase.Presenter.UI.Presenter
 
             // Reset name of current setlist file
             _currentSetlistFile = null;
+        }
+
+        /// <summary>
+        /// If setlist contains items, ask if the list should be saved
+        /// </summary>
+        /// <param name="e"></param>
+        private void AskIfSetlistShouldBeSaved(FormClosingEventArgs e)
+        {
+            if (listViewSetList.Items.Count > 0)
+            {
+                var res = MessageBox.Show(StringResources.ShouldCurrentSetlistBeSaved, Text, MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
+                if (res == DialogResult.Yes)
+                {
+                    if (ShowSaveSetlistDialog() == DialogResult.Cancel)
+                    {
+                        e.Cancel = true;
+                    }
+                }
+                else if (res == DialogResult.Cancel)
+                {
+                    e.Cancel = true;
+                }
+            }
         }
 
         #endregion
