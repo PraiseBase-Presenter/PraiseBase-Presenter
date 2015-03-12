@@ -62,7 +62,9 @@ namespace PraiseBase.Presenter.UI.Presenter
 
         private string _currentSetlistFile;
 
-        private string _originalFormTitle;
+        private int _currentSetListHashCode;
+
+        private readonly string _originalFormTitle;
 
         public MainWindow() : this(null)
         {
@@ -2038,6 +2040,9 @@ namespace PraiseBase.Presenter.UI.Presenter
                     listViewSetList.Columns[0].Width = -2;
                 }
 
+                // Save hashcode
+                _currentSetListHashCode = GeCurrentSetListtHashCode();
+
                 // Save name of current setlist file
                 SetCurrentSetListFile(fileName);
             }
@@ -2124,13 +2129,34 @@ namespace PraiseBase.Presenter.UI.Presenter
             Setlist sl = new Setlist();
             for (int i = 0; i < listViewSetList.Items.Count; i++)
             {
-                sl.Items.Add(SongManager.Instance.SongList[(Guid)listViewSetList.Items[i].Tag].Song.Title);
+                var tag = (Guid) listViewSetList.Items[i].Tag;
+                var song = SongManager.Instance.SongList[tag].Song;
+                sl.Items.Add(song.Title);
             }
             SetlistWriter swr = new SetlistWriter();
             swr.Write(filename, sl);
 
+            // Save hashcode
+            _currentSetListHashCode = GeCurrentSetListtHashCode();
+
             // Save name of current setlist file
             SetCurrentSetListFile(filename);
+        }
+
+        /// <summary>
+        /// Gets a hash code of the currently loaded setlist
+        /// </summary>
+        /// <returns></returns>
+        private int GeCurrentSetListtHashCode()
+        {
+            int hash = 19;
+            for (int i = 0; i < listViewSetList.Items.Count; i++)
+            {
+                var tag = (Guid)listViewSetList.Items[i].Tag;
+                var song = SongManager.Instance.SongList[tag].Song;
+                hash = hash * 31 + song.GetHashCode();
+            }
+            return hash;
         }
 
         private void buttonSetListClear_Click(object sender, EventArgs e)
@@ -2155,6 +2181,9 @@ namespace PraiseBase.Presenter.UI.Presenter
             buttonSetListDown.Enabled = false;
             buttonSetListUp.Enabled = false;
 
+            // Reset setlist hash code
+            _currentSetListHashCode = 0;
+
             // Reset name of current setlist file
             SetCurrentSetListFile(null);
         }
@@ -2165,7 +2194,7 @@ namespace PraiseBase.Presenter.UI.Presenter
         /// <param name="e"></param>
         private void AskIfSetlistShouldBeSaved(FormClosingEventArgs e)
         {
-            if (listViewSetList.Items.Count > 0)
+            if (listViewSetList.Items.Count > 0 && _currentSetListHashCode != GeCurrentSetListtHashCode())
             {
                 var res = MessageBox.Show(StringResources.ShouldCurrentSetlistBeSaved, Text, MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
                 if (res == DialogResult.Yes)
