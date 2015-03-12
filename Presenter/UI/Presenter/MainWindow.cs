@@ -53,9 +53,6 @@ namespace PraiseBase.Presenter.UI.Presenter
     /// </summary>
     public partial class MainWindow : LocalizableForm
     {
-        private static MainWindow _instance;
-        private static readonly object singletonPadlock = new object();
-
         private Timer diaTimer;
         private List<String> imageSearchResults;
 
@@ -63,32 +60,30 @@ namespace PraiseBase.Presenter.UI.Presenter
 
         private SongEditor _songEditor;
 
-        /// <summary>
-        /// Private constructor
-        /// </summary>
-        private MainWindow()
+        private string _currentSetlistFile;
+
+        private int _currentSetListHashCode;
+
+        private const string SetListFileExtension = "pbpl";
+
+        private readonly string _originalFormTitle;
+
+        public MainWindow() : this(null)
+        {
+        }
+
+        public MainWindow(string setlistFile)
         {
             InitializeComponent();
 
             this.Size = Settings.Default.MainWindowSize;
             
             base.registerChild(this);
-        }
 
-        /// <summary>
-        /// Returns a singleton of mainWindow
-        /// </summary>
-        /// <returns>Returns the mainWindow instance</returns>
-        public static MainWindow Instance
-        {
-            get
-            {
-                // Thread safety
-                lock (singletonPadlock)
-                {
-                    return _instance ?? (_instance = new MainWindow());
-                }
-            }
+            _originalFormTitle = Text;
+
+            // Load setlist file if specified
+            LoadSetListIfExists(setlistFile);
         }
 
         /// <summary>
@@ -1166,6 +1161,8 @@ namespace PraiseBase.Presenter.UI.Presenter
 
         private void mainWindow_FormClosing(object sender, FormClosingEventArgs e)
         {
+            AskIfSetlistShouldBeSaved(e);
+
             Settings.Default.ViewerWindowState = WindowState;
             Settings.Default.MainWindowSize = this.Size;
             Settings.Default.Save();
@@ -1174,153 +1171,6 @@ namespace PraiseBase.Presenter.UI.Presenter
         private void datenverzeichnisOeffnenToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Process.Start(Settings.Default.DataDirectory);
-        }
-
-        private void buttonSetListRem_Click(object sender, EventArgs e)
-        {
-            if (listViewSetList.SelectedItems.Count > 0)
-            {
-                listViewSetList.Items.RemoveAt(listViewSetList.SelectedIndices[0]);
-                buttonSetListRem.Enabled = false;
-                buttonSetListDown.Enabled = false;
-                buttonSetListUp.Enabled = false;
-                if (listViewSetList.Items.Count == 0)
-                {
-                    buttonSaveSetList.Enabled = false;
-                    buttonSetListClear.Enabled = false;
-                }
-            }
-        }
-
-        private void buttonSetListClear_Click(object sender, EventArgs e)
-        {
-            if (
-                MessageBox.Show(StringResources.ReallyEmptySetlist, this.Text, MessageBoxButtons.YesNo, MessageBoxIcon.Question) ==
-                DialogResult.Yes)
-            {
-                listViewSetList.Items.Clear();
-                buttonSetListRem.Enabled = false;
-                buttonSetListClear.Enabled = false;
-                buttonSaveSetList.Enabled = false;
-                buttonSetListDown.Enabled = false;
-                buttonSetListUp.Enabled = false;
-            }
-        }
-
-        private void buttonSetListUp_Click(object sender, EventArgs e)
-        {
-            if (listViewSetList.SelectedIndices.Count > 0)
-            {
-                int idx = listViewSetList.SelectedIndices[0];
-                if (idx > 0)
-                {
-                    ListViewItem lvi = listViewSetList.Items[idx];
-                    listViewSetList.Items.RemoveAt(idx);
-                    listViewSetList.Items.Insert(idx - 1, lvi);
-                    listViewSetList.Items[idx - 1].Selected = true;
-                }
-            }
-        }
-
-        private void buttonSetListDown_Click(object sender, EventArgs e)
-        {
-            if (listViewSetList.SelectedIndices.Count > 0)
-            {
-                int idx = listViewSetList.SelectedIndices[0];
-                if (idx < listViewSetList.Items.Count - 1)
-                {
-                    ListViewItem lvi = listViewSetList.Items[idx];
-                    listViewSetList.Items.RemoveAt(idx);
-                    listViewSetList.Items.Insert(idx + 1, lvi);
-                    listViewSetList.Items[idx + 1].Selected = true;
-                }
-            }
-        }
-
-        private void buttonSetListAdd_Click(object sender, EventArgs e)
-        {
-            if (listViewSongs.SelectedItems.Count > 0)
-            {
-                listViewSetList.Items.Add((ListViewItem)listViewSongs.SelectedItems[0].Clone());
-                listViewSetList.Columns[0].Width = -2;
-                buttonSetListClear.Enabled = true;
-                buttonSaveSetList.Enabled = true;
-            }
-            else
-            {
-                buttonSetListAdd.Enabled = false;
-            }
-        }
-
-        private void buttonSaveSetList_Click(object sender, EventArgs e)
-        {
-            string setlistDir = Settings.Default.DataDirectory + Path.DirectorySeparatorChar + Settings.Default.SetListDir;
-            if (!Directory.Exists(setlistDir))
-            {
-                Directory.CreateDirectory(setlistDir);
-            }
-
-            var dlg = new SaveFileDialog();
-            dlg.AddExtension = true;
-            dlg.CheckPathExists = true;
-            dlg.Filter = StringResources.SetlistFile + " (*.pbpl)|*.pbpl";
-            dlg.InitialDirectory = setlistDir;
-            dlg.Title = StringResources.SaveSetlistAs;
-            if (dlg.ShowDialog() == DialogResult.OK)
-            {
-                PraiseBase.Presenter.Model.Setlist sl = new PraiseBase.Presenter.Model.Setlist();
-                for (int i = 0; i < listViewSetList.Items.Count; i++)
-                {
-                    sl.Items.Add(SongManager.Instance.SongList[(Guid)listViewSetList.Items[i].Tag].Song.Title);
-                }
-                SetlistWriter swr = new SetlistWriter();
-                swr.Write(dlg.FileName, sl);
-            }
-        }
-
-        private void buttonOpenSetList_Click(object sender, EventArgs e)
-        {
-            string setlistDir = Settings.Default.DataDirectory + Path.DirectorySeparatorChar + Settings.Default.SetListDir;
-            if (!Directory.Exists(setlistDir))
-            {
-                Directory.CreateDirectory(setlistDir);
-            }
-
-            var dlg = new OpenFileDialog();
-            dlg.AddExtension = true;
-            dlg.CheckPathExists = true;
-            dlg.CheckFileExists = true;
-            dlg.Filter = StringResources.SetlistFile + " (*.pbpl)|*.pbpl";
-            dlg.InitialDirectory = setlistDir;
-            dlg.Title = StringResources.OpenSetlist;
-            if (dlg.ShowDialog() == DialogResult.OK)
-            {
-                SetlistReader sr = new SetlistReader();
-                try {
-                    PraiseBase.Presenter.Model.Setlist sl = sr.read(dlg.FileName);
-                    if (sl.Items.Count > 0)
-                    {
-                        foreach (var i in sl.Items)                
-                        {
-                            Guid g = SongManager.Instance.GetGuidByTitle(i);
-                            if (g != Guid.Empty)
-                            {
-                                var s = SongManager.Instance.SongList[g].Song;
-                                var lvi = new ListViewItem(s.Title);
-                                lvi.Tag = s.Guid;
-                                listViewSetList.Items.Add(lvi);
-                            }
-                        }
-                        buttonSetListClear.Enabled = true;
-                        buttonSaveSetList.Enabled = true;
-                        listViewSetList.Columns[0].Width = -2;
-                    }
-                }
-                catch (Exception err)
-                {
-                    MessageBox.Show(err.ToString(), this.Text, MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
-            }
         }
 
         private void toolStripButtonDisplaySettings_Click(object sender, EventArgs e)
@@ -1355,13 +1205,20 @@ namespace PraiseBase.Presenter.UI.Presenter
             SongBrowserDialog dlg = new SongBrowserDialog();
             dlg.Tags = Settings.Default.Tags;
             dlg.ShowDialog(this);
-            if (dlg.OpenInEditor.Any())
+            if (dlg.SelectedAction == SongBrowserDialog.SongBrowseDialogAction.OpenInEditor && dlg.SelectedItems.Any())
             {
-                foreach (var fn in dlg.OpenInEditor)
+                foreach (var fn in dlg.SelectedItems)
                 {
                     GetSongEditor().OpenSong(fn);
                 }
                 ShowAndBringSongEditorToFront();
+            }
+            else if (dlg.SelectedAction == SongBrowserDialog.SongBrowseDialogAction.LoadInSetList && dlg.SelectedItems.Any())
+            {
+                foreach (var fn in dlg.SelectedItems)
+                {
+                    AddSongToSetList(fn);
+                }
             }
         }
 
@@ -2042,5 +1899,339 @@ namespace PraiseBase.Presenter.UI.Presenter
                 }
             }
         }
+
+        #region Setlist
+
+        private void buttonSetListAdd_Click(object sender, EventArgs e)
+        {
+            if (listViewSongs.SelectedItems.Count > 0)
+            {
+                listViewSetList.Items.Add((ListViewItem)listViewSongs.SelectedItems[0].Clone());
+                listViewSetList.Columns[0].Width = -2;
+                buttonSetListClear.Enabled = true;
+                buttonSaveSetList.Enabled = true;
+            }
+            else
+            {
+                buttonSetListAdd.Enabled = false;
+            }
+        }
+
+        private void buttonSetListUp_Click(object sender, EventArgs e)
+        {
+            if (listViewSetList.SelectedIndices.Count > 0)
+            {
+                int idx = listViewSetList.SelectedIndices[0];
+                if (idx > 0)
+                {
+                    ListViewItem lvi = listViewSetList.Items[idx];
+                    listViewSetList.Items.RemoveAt(idx);
+                    listViewSetList.Items.Insert(idx - 1, lvi);
+                    listViewSetList.Items[idx - 1].Selected = true;
+                }
+            }
+        }
+
+        private void buttonSetListDown_Click(object sender, EventArgs e)
+        {
+            if (listViewSetList.SelectedIndices.Count > 0)
+            {
+                int idx = listViewSetList.SelectedIndices[0];
+                if (idx < listViewSetList.Items.Count - 1)
+                {
+                    ListViewItem lvi = listViewSetList.Items[idx];
+                    listViewSetList.Items.RemoveAt(idx);
+                    listViewSetList.Items.Insert(idx + 1, lvi);
+                    listViewSetList.Items[idx + 1].Selected = true;
+                }
+            }
+        }
+
+        private void buttonSetListRem_Click(object sender, EventArgs e)
+        {
+            if (listViewSetList.SelectedItems.Count > 0)
+            {
+                listViewSetList.Items.RemoveAt(listViewSetList.SelectedIndices[0]);
+                buttonSetListRem.Enabled = false;
+                buttonSetListDown.Enabled = false;
+                buttonSetListUp.Enabled = false;
+                if (listViewSetList.Items.Count == 0)
+                {
+                    buttonSaveSetList.Enabled = false;
+                    buttonSetListClear.Enabled = false;
+                }
+            }
+        }
+
+        private void buttonOpenSetList_Click(object sender, EventArgs e)
+        {
+            ShowLoadSetListDialog();
+        }
+
+        /// <summary>
+        /// Shows a dialog for loading a setlist
+        /// </summary>
+        private void ShowLoadSetListDialog()
+        {
+            string setlistDir = Settings.Default.DataDirectory + Path.DirectorySeparatorChar + Settings.Default.SetListDir;
+            if (!Directory.Exists(setlistDir))
+            {
+                Directory.CreateDirectory(setlistDir);
+            }
+            if (_currentSetlistFile != null && File.Exists(_currentSetlistFile))
+            {
+                setlistDir = Path.GetDirectoryName(_currentSetlistFile);
+            }
+
+            var dlg = new OpenFileDialog
+            {
+                AddExtension = true,
+                CheckPathExists = true,
+                CheckFileExists = true,
+                Filter = GetSetListFileFilter(),
+                InitialDirectory = setlistDir,
+                Title = StringResources.OpenSetlist
+            };
+            if (dlg.ShowDialog() == DialogResult.OK)
+            {
+                LoadSetList(dlg.FileName);
+            }
+        }
+
+        /// <summary>
+        /// Loads a setlist file if it exits
+        /// </summary>
+        /// <param name="setlistFile"></param>
+        private void LoadSetListIfExists(string setlistFile)
+        {
+            if (!string.IsNullOrEmpty(setlistFile) && File.Exists(setlistFile))
+            {
+                LoadSetList(setlistFile);
+            }
+        }
+
+        /// <summary>
+        /// Loads a setlist from file
+        /// </summary>
+        /// <param name="fileName"></param>
+        private void LoadSetList(string fileName)
+        {
+            SetlistReader sr = new SetlistReader();
+            try
+            {
+                listViewSetList.Items.Clear();
+
+                Setlist sl = sr.read(fileName);
+                if (sl.Items.Count > 0)
+                {
+                    foreach (var i in sl.Items)
+                    {
+                        Guid g = SongManager.Instance.GetGuidByTitle(i);
+                        if (g != Guid.Empty)
+                        {
+                            var s = SongManager.Instance.SongList[g].Song;
+                            var lvi = new ListViewItem(s.Title)
+                            {
+                                Tag = s.Guid
+                            };
+                            listViewSetList.Items.Add(lvi);
+                        }
+                    }
+                    buttonSetListClear.Enabled = true;
+                    buttonSaveSetList.Enabled = true;
+                    listViewSetList.Columns[0].Width = -2;
+                }
+
+                // Save hashcode
+                _currentSetListHashCode = GeCurrentSetListtHashCode();
+
+                // Save name of current setlist file
+                SetCurrentSetListFile(fileName);
+            }
+            catch (Exception err)
+            {
+                MessageBox.Show(err.ToString(), Text, MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        /// <summary>
+        /// Adds a song to the setlist
+        /// </summary>
+        /// <param name="path"></param>
+        private void AddSongToSetList(string path)
+        {
+            Guid g = SongManager.Instance.GetGUIDByPath(path);
+            if (g != Guid.Empty)
+            {
+                var s = SongManager.Instance.SongList[g].Song;
+                var lvi = new ListViewItem(s.Title)
+                {
+                    Tag = s.Guid
+                };
+                listViewSetList.Items.Add(lvi);
+
+                buttonSetListClear.Enabled = true;
+                buttonSaveSetList.Enabled = true;
+                listViewSetList.Columns[0].Width = -2;
+            }
+        }
+
+        private void buttonSaveSetList_Click(object sender, EventArgs e)
+        {
+            ShowSaveSetlistDialog();
+        }
+
+        /// <summary>
+        /// Shows a dialog for saving the current setlist
+        /// </summary>
+        /// <returns></returns>
+        private DialogResult ShowSaveSetlistDialog()
+        {
+            // Define directory, use directory of current setlist file if available
+            string setlistDir = Settings.Default.DataDirectory + Path.DirectorySeparatorChar + Settings.Default.SetListDir;
+            if (!Directory.Exists(setlistDir))
+            {
+                Directory.CreateDirectory(setlistDir);
+            }
+            if (_currentSetlistFile != null && File.Exists(_currentSetlistFile))
+            {
+                setlistDir = Path.GetDirectoryName(_currentSetlistFile);
+            }
+
+            // Define proposed filename, use current setlist file if available
+            var proposedFileName = _currentSetlistFile != null ? Path.GetFileName(_currentSetlistFile) : GetSetListDefaultName();
+
+            var dlg = new SaveFileDialog
+            {
+                AddExtension = true,
+                CheckPathExists = true,
+                Filter = GetSetListFileFilter(),
+                InitialDirectory = setlistDir,
+                Title = StringResources.SaveSetlistAs,
+                FileName = proposedFileName
+            };
+            var dlgRes = dlg.ShowDialog();
+            if (dlgRes == DialogResult.OK)
+            {
+                SaveSetList(dlg.FileName);
+            }
+            return dlgRes;
+        }
+
+        private string GetSetListDefaultName()
+        {
+            return DateTime.Now.ToString("yyyy-MM-dd");
+        }
+
+        private string GetSetListFileFilter()
+        {
+            return String.Format("{0} (*.{1})|*.{1}", StringResources.SetlistFile, SetListFileExtension);
+        }
+
+        /// <summary>
+        /// Saves the current setlist
+        /// </summary>
+        /// <param name="filename">Target file name</param>
+        private void SaveSetList(string filename)
+        {
+            Setlist sl = new Setlist();
+            for (int i = 0; i < listViewSetList.Items.Count; i++)
+            {
+                var tag = (Guid) listViewSetList.Items[i].Tag;
+                var song = SongManager.Instance.SongList[tag].Song;
+                sl.Items.Add(song.Title);
+            }
+            SetlistWriter swr = new SetlistWriter();
+            swr.Write(filename, sl);
+
+            // Save hashcode
+            _currentSetListHashCode = GeCurrentSetListtHashCode();
+
+            // Save name of current setlist file
+            SetCurrentSetListFile(filename);
+        }
+
+        /// <summary>
+        /// Gets a hash code of the currently loaded setlist
+        /// </summary>
+        /// <returns></returns>
+        private int GeCurrentSetListtHashCode()
+        {
+            int hash = 19;
+            for (int i = 0; i < listViewSetList.Items.Count; i++)
+            {
+                var tag = (Guid)listViewSetList.Items[i].Tag;
+                var song = SongManager.Instance.SongList[tag].Song;
+                hash = hash * 31 + song.GetHashCode();
+            }
+            return hash;
+        }
+
+        private void buttonSetListClear_Click(object sender, EventArgs e)
+        {
+            if (
+                MessageBox.Show(StringResources.ReallyEmptySetlist, Text, MessageBoxButtons.YesNo, MessageBoxIcon.Question) ==
+                DialogResult.Yes)
+            {
+                ClearSetList();
+            }
+        }
+
+        /// <summary>
+        /// Clears the setlist, removes all items and resets button states
+        /// </summary>
+        private void ClearSetList()
+        {
+            listViewSetList.Items.Clear();
+            buttonSetListRem.Enabled = false;
+            buttonSetListClear.Enabled = false;
+            buttonSaveSetList.Enabled = false;
+            buttonSetListDown.Enabled = false;
+            buttonSetListUp.Enabled = false;
+
+            // Reset setlist hash code
+            _currentSetListHashCode = 0;
+
+            // Reset name of current setlist file
+            SetCurrentSetListFile(null);
+        }
+
+        /// <summary>
+        /// If setlist contains items, ask if the list should be saved
+        /// </summary>
+        /// <param name="e"></param>
+        private void AskIfSetlistShouldBeSaved(FormClosingEventArgs e)
+        {
+            if (listViewSetList.Items.Count > 0 && _currentSetListHashCode != GeCurrentSetListtHashCode())
+            {
+                var res = MessageBox.Show(StringResources.ShouldCurrentSetlistBeSaved, Text, MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
+                if (res == DialogResult.Yes)
+                {
+                    if (ShowSaveSetlistDialog() == DialogResult.Cancel)
+                    {
+                        e.Cancel = true;
+                    }
+                }
+                else if (res == DialogResult.Cancel)
+                {
+                    e.Cancel = true;
+                }
+            }
+        }
+
+        private void SetCurrentSetListFile(string setListFile)
+        {
+            if (!String.IsNullOrEmpty(setListFile))
+            {
+                Text = _originalFormTitle + @" - [" + Path.GetFileNameWithoutExtension(setListFile) + @"]";
+            }
+            else
+            {
+                Text = _originalFormTitle;
+            }
+            _currentSetlistFile = setListFile;
+        }
+
+        #endregion
     }
 }

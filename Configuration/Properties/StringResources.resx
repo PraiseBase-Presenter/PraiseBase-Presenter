@@ -246,6 +246,9 @@
   <data name="Settings" xml:space="preserve">
     <value>Einstellungen</value>
   </data>
+  <data name="ShouldCurrentSetlistBeSaved" xml:space="preserve">
+    <value>Soll die aktuelle Setliste gespeichert werden?</value>
+  </data>
   <data name="Slide" xml:space="preserve">
     <value>Slide</value>
   </data>

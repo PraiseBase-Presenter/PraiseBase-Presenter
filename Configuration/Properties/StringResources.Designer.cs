@@ -448,6 +448,15 @@ namespace PraiseBase.Presenter.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Soll die aktuelle Setliste gespeichert werden?.
+        /// </summary>
+        public static string ShouldCurrentSetlistBeSaved {
+            get {
+                return ResourceManager.GetString("ShouldCurrentSetlistBeSaved", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Slide.
         /// </summary>
         public static string Slide {

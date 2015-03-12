@@ -164,6 +164,7 @@
             resources.ApplyResources(this.buttonUseInSetlist, "buttonUseInSetlist");
             this.buttonUseInSetlist.Name = "buttonUseInSetlist";
             this.buttonUseInSetlist.UseVisualStyleBackColor = true;
+            this.buttonUseInSetlist.Click += new System.EventHandler(this.buttonUseInSetlist_Click);
             // 
             // buttonCancel
             // 
