@@ -94,9 +94,6 @@
     <Compile Include="Projection\SongSlideTextFormattingMapper.cs" />
     <Compile Include="UI\Editor\EditorChildMetaData.cs" />
     <Compile Include="UI\Editor\SongSavedEventArgs.cs" />
-    <Compile Include="UI\LocalizedForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
     <Compile Include="Manager\ImageManager.cs" />
     <Compile Include="Manager\SongManager.cs" />
     <Compile Include="UI\Components\SongDetail.cs">
@@ -196,9 +193,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UI\Editor\SongEditorChild.en-US.resx">
       <DependentUpon>SongEditorChild.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="UI\LocalizedForm.resx">
-      <DependentUpon>LocalizedForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UI\Presenter\AboutDialog.en-US.resx">
       <DependentUpon>AboutDialog.cs</DependentUpon>
