@@ -129,6 +129,9 @@
   <data name="Category" xml:space="preserve">
     <value>Category</value>
   </data>
+  <data name="CheckForUpdate" xml:space="preserve">
+    <value>Check for update</value>
+  </data>
   <data name="ConnectionToUpdateServerFailed" xml:space="preserve">
     <value>The connection to the update server failed!</value>
   </data>
@@ -307,6 +310,6 @@
     <value>Root directory</value>
   </data>
   <data name="UpdateAvailable" xml:space="preserve">
-    <value>A software update to version {0} is available.</value>
+    <value>A software update to version {0} is available (you have version {1}).</value>
   </data>
 </root>

@@ -21,16 +21,19 @@
  */
 
 using System;
+using System.Diagnostics;
 using System.Drawing;
+using System.IO;
 using System.Reflection;
 using System.Windows.Forms;
+using PraiseBase.Presenter.Properties;
 using PraiseBase.Presenter.Util;
 
 namespace PraiseBase.Presenter.UI.Presenter
 {
     public partial class AboutDialog : Form
     {
-        private String updateDownloadUrl = string.Empty;
+        private String _updateDownloadUrl = string.Empty;
 
         public AboutDialog()
         {
@@ -39,17 +42,17 @@ namespace PraiseBase.Presenter.UI.Presenter
 
         private void closeButton_Click(object sender, EventArgs e)
         {
-            this.Close();
+            Close();
         }
 
         private void AboutWindow_Load(object sender, EventArgs e)
         {
-            this.labelProductName.Text = AssemblyProduct;
-            this.labelVersion.Text = AssemblyVersion;
-            this.labelCopyright.Text = AssemblyCopyright;
-            this.labelCompanyName.Text = AssemblyCompany;
+            labelProductName.Text = AssemblyProduct;
+            labelVersion.Text = AssemblyVersion;
+            labelCopyright.Text = AssemblyCopyright;
+            labelCompanyName.Text = AssemblyCompany;
 
-            this.textBox1.Text = global::PraiseBase.Presenter.Properties.FileResources.License;
+            textBox1.Text = FileResources.License;
 
             timer1.Interval = 1;
             timer1.Start();
@@ -70,7 +73,7 @@ namespace PraiseBase.Presenter.UI.Presenter
                         return titleAttribute.Title;
                     }
                 }
-                return System.IO.Path.GetFileNameWithoutExtension(Assembly.GetExecutingAssembly().CodeBase);
+                return Path.GetFileNameWithoutExtension(Assembly.GetExecutingAssembly().CodeBase);
             }
         }
 
@@ -138,25 +141,26 @@ namespace PraiseBase.Presenter.UI.Presenter
 
         private void timer1_Tick(object sender, EventArgs e)
         {
-            UpdateCheck.UpdateInformation ui = UpdateCheck.GetNewVersion();
+            UpdateCheck uc = new UpdateCheck();
+            UpdateCheck.UpdateInformation ui = uc.GetNewVersion(Settings.Default.UpdateCheckUrl);
             if (ui.UpdateAvailable)
             {
-                linkLabel1.Text = String.Format(PraiseBase.Presenter.Properties.StringResources.UpdateAvailable, ui.OnlineVersion);
-                linkLabel1.Image = PraiseBase.Presenter.Properties.Resources.update16;
+                linkLabel1.Text = String.Format(StringResources.UpdateAvailable, ui.OnlineVersion, ui.CurrentVersion);
+                linkLabel1.Image = Resources.update16;
                 linkLabel1.ForeColor = Color.DarkGreen;
-                updateDownloadUrl = ui.DownloadUrl;
+                _updateDownloadUrl = ui.DownloadUrl;
                 buttonDownloadUpdate.Visible = true;
             }
             else
             {
                 if (ui.OnlineVersion != null)
                 {
-                    linkLabel1.Text = PraiseBase.Presenter.Properties.StringResources.ProgramVersionUptodate;
-                    linkLabel1.Image = PraiseBase.Presenter.Properties.Resources.ok16;
+                    linkLabel1.Text = StringResources.ProgramVersionUptodate;
+                    linkLabel1.Image = Resources.ok16;
                 }
                 else
                 {
-                    linkLabel1.Text = PraiseBase.Presenter.Properties.StringResources.ConnectionToUpdateServerFailed;
+                    linkLabel1.Text = StringResources.ConnectionToUpdateServerFailed;
                 }
                 buttonDownloadUpdate.Visible = false;
             }
@@ -165,9 +169,9 @@ namespace PraiseBase.Presenter.UI.Presenter
 
         private void buttonDownloadUpdate_Click(object sender, EventArgs e)
         {
-            if (updateDownloadUrl != string.Empty)
+            if (_updateDownloadUrl != string.Empty)
             {
-                System.Diagnostics.Process.Start(updateDownloadUrl);
+                Process.Start(_updateDownloadUrl);
             }
         }
     }

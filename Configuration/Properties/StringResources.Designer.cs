@@ -97,6 +97,15 @@ namespace PraiseBase.Presenter.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Auf Update prüfen.
+        /// </summary>
+        public static string CheckForUpdate {
+            get {
+                return ResourceManager.GetString("CheckForUpdate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Verbindung zum Update-Server nicht möglich!.
         /// </summary>
         public static string ConnectionToUpdateServerFailed {
@@ -120,6 +129,15 @@ namespace PraiseBase.Presenter.Properties {
         public static string DatabaseError {
             get {
                 return ResourceManager.GetString("DatabaseError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Möchten Sie weitere Meldungen zu diesem Update deaktivieren?.
+        /// </summary>
+        public static string DisableFurtherInformationAboutThisUpdate {
+            get {
+                return ResourceManager.GetString("DisableFurtherInformationAboutThisUpdate", resourceCulture);
             }
         }
         
@@ -628,7 +646,7 @@ namespace PraiseBase.Presenter.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Ein Update auf Version {0} ist verfügbar!.
+        ///   Looks up a localized string similar to Ein Update auf Version {0} ist verfügbar (Sie haben Version {1})..
         /// </summary>
         public static string UpdateAvailable {
             get {

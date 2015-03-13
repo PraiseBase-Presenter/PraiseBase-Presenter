@@ -76,9 +76,9 @@ namespace PraiseBase.Presenter.UI.Presenter
         {
             InitializeComponent();
 
-            this.Size = Settings.Default.MainWindowSize;
+            Size = Settings.Default.MainWindowSize;
             
-            base.RegisterChild(this);
+            RegisterChild(this);
 
             _originalFormTitle = Text;
 
@@ -93,7 +93,7 @@ namespace PraiseBase.Presenter.UI.Presenter
         /// <param name="e"></param>
         private void Form1_Load(object sender, EventArgs e)
         {
-            var newThread = new Thread(UpdateCheck.DoCheck) { Name = "UpdateChecker" };
+            var newThread = new Thread(DoUpdateCheck) { Name = "UpdateChecker" };
             newThread.Start();
 
             var bThread = new Thread(loadBibles) { Name = "BibleLoader" };
@@ -135,12 +135,12 @@ namespace PraiseBase.Presenter.UI.Presenter
             {
                 ToolStripMenuItem selectLanguageToolStripMenuItem = new ToolStripMenuItem(l.DisplayName);
                 selectLanguageToolStripMenuItem.Tag = l;
-                selectLanguageToolStripMenuItem.Click += new EventHandler(selectLanguageToolStripMenuItem_Click);
-                if (l.Name == System.Threading.Thread.CurrentThread.CurrentUICulture.Name)
+                selectLanguageToolStripMenuItem.Click += selectLanguageToolStripMenuItem_Click;
+                if (l.Name == Thread.CurrentThread.CurrentUICulture.Name)
                 {
                     selectLanguageToolStripMenuItem.Checked = true;
                 }
-                this.spracheToolStripMenuItem.DropDownItems.Add(selectLanguageToolStripMenuItem);
+                spracheToolStripMenuItem.DropDownItems.Add(selectLanguageToolStripMenuItem);
             }
 
             ProjectionManager.Instance.ProjectionChanged += Instance_ProjectionChanged;
@@ -185,12 +185,97 @@ namespace PraiseBase.Presenter.UI.Presenter
 
         #endregion
 
+        #region UpdateCheck
+
+        void DoUpdateCheck()
+        {
+            UpdateCheck uc = new UpdateCheck();
+            UpdateCheck.UpdateInformation ui = uc.GetNewVersion(Settings.Default.UpdateCheckUrl);
+            if (ui.UpdateAvailable)
+            {
+                // Return if user already has hidden notifications about this update
+                if (Settings.Default.HideUpdateVersion != String.Empty)
+                {
+                    Version hideVer = new Version(Settings.Default.HideUpdateVersion);
+                    if (hideVer == ui.OnlineVersion)
+                    {
+                        return;
+                    }
+                }
+
+                // ask the user if he would like to download the new version
+                DialogResult result = MessageBox.Show(
+                    String.Format(StringResources.UpdateAvailable, ui.OnlineVersion, ui.CurrentVersion),
+                    StringResources.CheckForUpdate,
+                    MessageBoxButtons.YesNo,
+                    MessageBoxIcon.Question);
+                if (result == DialogResult.Yes)
+                {
+                    // navigate the default web browser to our app
+                    // homepage (the url comes from the xml content)
+                    Process.Start(ui.DownloadUrl);
+                }
+                else
+                {
+                    if (DialogResult.Yes == MessageBox.Show(
+                        StringResources.DisableFurtherInformationAboutThisUpdate,
+                        StringResources.CheckForUpdate,
+                        MessageBoxButtons.YesNo,
+                        MessageBoxIcon.Question))
+                    {
+                        Settings.Default.HideUpdateVersion = ui.OnlineVersion.ToString();
+                        Settings.Default.Save();
+                    }
+                }
+            }
+        }
+
+        private void aufUpdatePrüfenToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            UpdateCheck uc = new UpdateCheck();
+            UpdateCheck.UpdateInformation ui = uc.GetNewVersion(Settings.Default.UpdateCheckUrl);
+            if (ui.UpdateAvailable)
+            {
+                // ask the user if he would like to download the new version
+                DialogResult result = MessageBox.Show(
+                    String.Format(StringResources.UpdateAvailable, ui.OnlineVersion, ui.CurrentVersion),
+                    StringResources.CheckForUpdate,
+                    MessageBoxButtons.YesNo,
+                    MessageBoxIcon.Question);
+                if (result == DialogResult.Yes)
+                {
+                    // navigate the default web browser to our app
+                    // homepage (the url comes from the xml content)
+                    Process.Start(ui.DownloadUrl);
+                }
+            }
+            else
+            {
+                if (ui.OnlineVersion != null)
+                {
+                    MessageBox.Show(StringResources.ProgramVersionUptodate,
+                        StringResources.CheckForUpdate,
+                        MessageBoxButtons.OK,
+                        MessageBoxIcon.Information);
+                }
+                else
+                {
+                    MessageBox.Show(StringResources.ConnectionToUpdateServerFailed,
+                        StringResources.CheckForUpdate,
+                        MessageBoxButtons.OK,
+                        MessageBoxIcon.Warning);
+                }
+            }
+        }
+
+        #endregion
+
         void selectLanguageToolStripMenuItem_Click(object sender, EventArgs e)
         {
             SetLanguage((CultureInfo)((ToolStripMenuItem)sender).Tag);
-            foreach (ToolStripMenuItem i in this.spracheToolStripMenuItem.DropDownItems)
+            foreach (ToolStripMenuItem i in spracheToolStripMenuItem.DropDownItems)
             {
-                i.Checked = ((CultureInfo)i.Tag == System.Threading.Thread.CurrentThread.CurrentUICulture);
+                i.Checked = ((CultureInfo)i.Tag == Thread.CurrentThread.CurrentUICulture);
             }
         }
 
@@ -251,7 +336,7 @@ namespace PraiseBase.Presenter.UI.Presenter
                 }
                 catch (Exception e)
                 {
-                    Console.WriteLine("Song search exception: " + e.ToString());
+                    Console.WriteLine("Song search exception: " + e);
                 }
             }
             listViewSongs.Columns[0].Width = -2;
@@ -452,17 +537,17 @@ namespace PraiseBase.Presenter.UI.Presenter
                 toolStripButtonToggleTranslationText.Enabled = true;
                 if (SongManager.Instance.CurrentSong.SwitchTextAndTranlation)
                 {
-                    toolStripButtonToggleTranslationText.Image = Properties.Resources.translate_active;
+                    toolStripButtonToggleTranslationText.Image = Resources.translate_active;
                 }
                 else
                 {
-                    toolStripButtonToggleTranslationText.Image = Properties.Resources.translate;
+                    toolStripButtonToggleTranslationText.Image = Resources.translate;
                 }
             }
             else
             {
                 toolStripButtonToggleTranslationText.Enabled = false;
-                toolStripButtonToggleTranslationText.Image = Properties.Resources.translate;
+                toolStripButtonToggleTranslationText.Image = Resources.translate;
             }
         }
 
@@ -523,7 +608,7 @@ namespace PraiseBase.Presenter.UI.Presenter
             if (sourcePosition == AdditionalInformationPosition.FirstSlide && isFirstSlide(e.PartNumber, e.SlideNumber) ||
                 sourcePosition == AdditionalInformationPosition.LastSlide && isLastSlide(s, e.PartNumber, e.SlideNumber))
             {
-                ssl.HeaderText = new String[]
+                ssl.HeaderText = new[]
                 {
                     s.SongBooks.ToString()
                 };
@@ -533,7 +618,7 @@ namespace PraiseBase.Presenter.UI.Presenter
             if (copyrightPosition == AdditionalInformationPosition.FirstSlide && isFirstSlide(e.PartNumber, e.SlideNumber) ||
                 copyrightPosition == AdditionalInformationPosition.LastSlide && isLastSlide(s, e.PartNumber, e.SlideNumber))
             {
-                ssl.FooterText = s.Copyright.Split(new String[] { Environment.NewLine }, StringSplitOptions.None);
+                ssl.FooterText = s.Copyright.Split(new[] { Environment.NewLine }, StringSplitOptions.None);
             }
 
             // CTRL pressed, use image stack
@@ -703,7 +788,7 @@ namespace PraiseBase.Presenter.UI.Presenter
                 {
                     if (parentNode == null)
                     {
-                        var myNode = new TreeNode(Properties.StringResources.TopDirectory);
+                        var myNode = new TreeNode(StringResources.TopDirectory);
                         myNode.Tag = "";
                         treeViewImageDirectories.Nodes.Add(myNode);
                         parentNode = myNode;
@@ -1164,7 +1249,7 @@ namespace PraiseBase.Presenter.UI.Presenter
             AskIfSetlistShouldBeSaved(e);
 
             Settings.Default.ViewerWindowState = WindowState;
-            Settings.Default.MainWindowSize = this.Size;
+            Settings.Default.MainWindowSize = Size;
             Settings.Default.Save();
         }
 
@@ -1258,7 +1343,7 @@ namespace PraiseBase.Presenter.UI.Presenter
         {
             ProgressWindow wnd = new ProgressWindow(StringResources.CreatingThumbnails + "...", 0);
             wnd.Show();
-            ImageManager.Instance.ThumbnailCreated += new ImageManager.ThumbnailCreate(Instance_ThumbnailCreated);
+            ImageManager.Instance.ThumbnailCreated += Instance_ThumbnailCreated;
             ImageManager.Instance.CheckThumbs();
             wnd.Close();
         }
@@ -1311,13 +1396,13 @@ namespace PraiseBase.Presenter.UI.Presenter
         {
             if (linkLayers)
             {
-                buttonToggleLayerMode.Image = PraiseBase.Presenter.Properties.Resources.link;
+                buttonToggleLayerMode.Image = Resources.link;
 
                 //label3.Text = "Text und Bild sind verknüpft";
             }
             else
             {
-                buttonToggleLayerMode.Image = PraiseBase.Presenter.Properties.Resources.unlink;
+                buttonToggleLayerMode.Image = Resources.unlink;
 
                 //label3.Text = "Text und Bild sind unabhängig";
             }
@@ -1380,7 +1465,7 @@ namespace PraiseBase.Presenter.UI.Presenter
             slideFormatting.LineWrap = true;
 
             TextLayer lt = new TextLayer(slideFormatting);
-            lt.MainText = text.Split(new String[] { Environment.NewLine }, StringSplitOptions.None);
+            lt.MainText = text.Split(new[] { Environment.NewLine }, StringSplitOptions.None);
 
             ProjectionManager.Instance.DisplayLayer(2, lt);
         }
@@ -1493,7 +1578,7 @@ namespace PraiseBase.Presenter.UI.Presenter
                     BibleManager.Instance.LoadBibleData(bi.Key);
                 }
 
-                foreach (PraiseBase.Presenter.Model.Bible.BibleBook bk in  bi.Value.Bible.Books)
+                foreach (BibleBook bk in  bi.Value.Bible.Books)
                 {
                     listBoxBibleBook.Items.Add(bk);
                 }
@@ -1508,7 +1593,7 @@ namespace PraiseBase.Presenter.UI.Presenter
 
         private void listBoxBibleBook_SelectedIndexChanged(object sender, EventArgs e)
         {
-            var bk = ((PraiseBase.Presenter.Model.Bible.BibleBook)listBoxBibleBook.SelectedItem);
+            var bk = ((BibleBook)listBoxBibleBook.SelectedItem);
 
             listBoxBibleVerse.Items.Clear();
             listBoxBibleVerseTo.Items.Clear();
@@ -1516,7 +1601,7 @@ namespace PraiseBase.Presenter.UI.Presenter
             listBoxBibleChapter.Items.Clear();
             listBoxBibleChapter.DisplayMember = "Number";
 
-            foreach (PraiseBase.Presenter.Model.Bible.BibleChapter cp in bk.Chapters)
+            foreach (BibleChapter cp in bk.Chapters)
             {
                 listBoxBibleChapter.Items.Add(cp);
             }
@@ -1531,14 +1616,14 @@ namespace PraiseBase.Presenter.UI.Presenter
 
         private void listBoxBibleChapter_SelectedIndexChanged(object sender, EventArgs e)
         {
-            var cp = ((PraiseBase.Presenter.Model.Bible.BibleChapter)listBoxBibleChapter.SelectedItem);
+            var cp = ((BibleChapter)listBoxBibleChapter.SelectedItem);
 
             listBoxBibleVerse.Items.Clear();
             listBoxBibleVerseTo.Items.Clear();
             listBoxBibleVerse.DisplayMember = "Number";
             listBoxBibleVerseTo.DisplayMember = "Number";
 
-            foreach (PraiseBase.Presenter.Model.Bible.BibleVerse v in cp.Verses)
+            foreach (BibleVerse v in cp.Verses)
             {
                 listBoxBibleVerse.Items.Add(v);
                 listBoxBibleVerseTo.Items.Add(v);
@@ -1555,10 +1640,10 @@ namespace PraiseBase.Presenter.UI.Presenter
 
         private void listBoxBibleVerse_SelectedIndexChanged(object sender, EventArgs e)
         {
-            var v = ((PraiseBase.Presenter.Model.Bible.BibleVerse)listBoxBibleVerse.SelectedItem);
+            var v = ((BibleVerse)listBoxBibleVerse.SelectedItem);
 
             listBoxBibleVerseTo.Items.Clear();
-            foreach (PraiseBase.Presenter.Model.Bible.BibleVerse tv in v.Chapter.Verses)
+            foreach (BibleVerse tv in v.Chapter.Verses)
             {
                 if (tv.Number >= v.Number)
                 {
@@ -1580,8 +1665,8 @@ namespace PraiseBase.Presenter.UI.Presenter
         {
             if (listBoxBibleVerse.SelectedItem != null && listBoxBibleVerseTo.SelectedItem != null)
             {
-                var vs = new PraiseBase.Presenter.Model.Bible.BibleVerseSelection(((PraiseBase.Presenter.Model.Bible.BibleVerse)listBoxBibleVerse.SelectedItem),
-                                                     ((PraiseBase.Presenter.Model.Bible.BibleVerse)listBoxBibleVerseTo.SelectedItem));
+                var vs = new BibleVerseSelection(((BibleVerse)listBoxBibleVerse.SelectedItem),
+                                                     ((BibleVerse)listBoxBibleVerseTo.SelectedItem));
 
                 labelBibleTextName.Text = vs.ToString();
                 textBoxBibleText.Text = vs.Text;
@@ -1621,8 +1706,8 @@ namespace PraiseBase.Presenter.UI.Presenter
 
             TextLayer lt = new TextLayer(slideFormatting);
             
-            lt.MainText = text.Split(new String[] { Environment.NewLine }, StringSplitOptions.None);
-            lt.HeaderText = new String[] { title };
+            lt.MainText = text.Split(new[] { Environment.NewLine }, StringSplitOptions.None);
+            lt.HeaderText = new[] { title };
             lt.FooterText = copyrightItems.ToArray();
 
             ProjectionManager.Instance.DisplayLayer(2, lt);
@@ -1635,8 +1720,8 @@ namespace PraiseBase.Presenter.UI.Presenter
 
         private void buttonAddToBibleVerseList_Click(object sender, EventArgs e)
         {
-            var vs = new PraiseBase.Presenter.Model.Bible.BibleVerseSelection(((PraiseBase.Presenter.Model.Bible.BibleVerse)listBoxBibleVerse.SelectedItem),
-                                                 ((PraiseBase.Presenter.Model.Bible.BibleVerse)listBoxBibleVerseTo.SelectedItem));
+            var vs = new BibleVerseSelection(((BibleVerse)listBoxBibleVerse.SelectedItem),
+                                                 ((BibleVerse)listBoxBibleVerseTo.SelectedItem));
             var lvi = new ListViewItem(vs.ToString());
             lvi.Tag = vs;
             listViewBibleVerseList.Items.Add(lvi);
@@ -1660,7 +1745,7 @@ namespace PraiseBase.Presenter.UI.Presenter
         {
             if (listViewBibleVerseList.SelectedItems.Count > 0)
             {
-                var vs = (PraiseBase.Presenter.Model.Bible.BibleVerseSelection)listViewBibleVerseList.SelectedItems[0].Tag;
+                var vs = (BibleVerseSelection)listViewBibleVerseList.SelectedItems[0].Tag;
                 listBoxBibleBook.SelectedIndex = vs.Chapter.Book.Number - 1;
                 listBoxBibleChapter.SelectedIndex = vs.Chapter.Number - 1;
                 listBoxBibleVerse.SelectedIndex = vs.StartVerse.Number - 1;
@@ -1689,7 +1774,7 @@ namespace PraiseBase.Presenter.UI.Presenter
                 }
                 else
                 {
-                    PraiseBase.Presenter.BibleManager.BibleItem bibleItem = ((KeyValuePair<String,PraiseBase.Presenter.BibleManager.BibleItem>)comboBoxBible.SelectedItem).Value;
+                    BibleManager.BibleItem bibleItem = ((KeyValuePair<String,BibleManager.BibleItem>)comboBoxBible.SelectedItem).Value;
 
                     biblePassageSearchResult = BibleManager.Instance.SearchPassage(bibleItem.Bible, needle);
                     if (biblePassageSearchResult.Status == BibleManager.BiblePassageSearchStatus.Found)
@@ -1763,11 +1848,6 @@ namespace PraiseBase.Presenter.UI.Presenter
             searchSongs(songSearchTextBox.Text);
         }
 
-        private void aufUpdatePrüfenToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            UpdateCheck.DoCheck(true);
-        }
-
         private void toolStripButtonDataFolder_Click(object sender, EventArgs e)
         {
             Process.Start(Settings.Default.DataDirectory);
@@ -1779,12 +1859,12 @@ namespace PraiseBase.Presenter.UI.Presenter
             {
                 if (SongManager.Instance.CurrentSong.SwitchTextAndTranlation)
                 {
-                    toolStripButtonToggleTranslationText.Image = Properties.Resources.translate;
+                    toolStripButtonToggleTranslationText.Image = Resources.translate;
                     SongManager.Instance.CurrentSong.SwitchTextAndTranlation = false;
                 }
                 else
                 {
-                    toolStripButtonToggleTranslationText.Image = Properties.Resources.translate_active;
+                    toolStripButtonToggleTranslationText.Image = Resources.translate_active;
                     SongManager.Instance.CurrentSong.SwitchTextAndTranlation = true;
                 }
             }
@@ -1844,11 +1924,11 @@ namespace PraiseBase.Presenter.UI.Presenter
         {
             if (SongManager.Instance.CurrentSong.Song.Comment != String.Empty || SongManager.Instance.CurrentSong.Song.QualityIssues.Any())
             {
-                toolStripButtonQA.Image = PraiseBase.Presenter.Properties.Resources.highlight_red__36;
+                toolStripButtonQA.Image = Resources.highlight_red__36;
             }
             else
             {
-                toolStripButtonQA.Image = PraiseBase.Presenter.Properties.Resources.highlight_36;
+                toolStripButtonQA.Image = Resources.highlight_36;
             }
         }
 

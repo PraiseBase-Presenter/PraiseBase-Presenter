@@ -89,6 +89,7 @@
     <EmbeddedResource Include="Properties\StringResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>StringResources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

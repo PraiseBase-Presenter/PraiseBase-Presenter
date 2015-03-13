@@ -43,73 +43,17 @@ namespace PraiseBase.Presenter.Util
             }
         }
 
-        public static void DoCheck()
-        {
-            DoCheck(false);
-        }
-
-        public static void DoCheck(bool force)
-        {
-            UpdateInformation ui = GetNewVersion();
-
-            if (ui.UpdateAvailable)
-            {
-                if (!force && Properties.Settings.Default.HideUpdateVersion != String.Empty)
-                {
-                    Version hideVer = new Version(Properties.Settings.Default.HideUpdateVersion);
-                    if (hideVer == ui.OnlineVersion)
-                    {
-                        return;
-                    }
-                }
-
-                // ask the user if he would like
-                // to download the new version
-                string title = "Update verfügbar";
-                string question = "Es ist ein Update auf Version " + ui.OnlineVersion + " verfügbar (Sie haben " + ui.CurrentVersion + "). \nSoll das Update heruntergeladen werden?";
-                if (System.Windows.Forms.DialogResult.Yes == System.Windows.Forms.MessageBox.Show(question, title,
-                                 System.Windows.Forms.MessageBoxButtons.YesNo,
-                                 System.Windows.Forms.MessageBoxIcon.Question))
-                {
-                    // navigate the default web
-                    // browser to our app
-                    // homepage (the url
-                    // comes from the xml content)
-                    System.Diagnostics.Process.Start(ui.DownloadUrl);
-                }
-                else if (!force)
-                {   
-                    question = "Möchten Sie weitere Meldungen zu diesem Update deaktivieren?";
-                    if (System.Windows.Forms.DialogResult.Yes == System.Windows.Forms.MessageBox.Show(question, title,
-                                     System.Windows.Forms.MessageBoxButtons.YesNo,
-                                     System.Windows.Forms.MessageBoxIcon.Question))
-                    {
-                        Properties.Settings.Default.HideUpdateVersion = ui.OnlineVersion.ToString();
-                        Properties.Settings.Default.Save();
-                    }
-                }
-            }
-            else if (force)
-            {
-                string title = "Update-Check";
-                string question = "Sie haben bereits die aktuellste Version!";
-                System.Windows.Forms.MessageBox.Show(question, title,
-                                 System.Windows.Forms.MessageBoxButtons.OK,
-                                 System.Windows.Forms.MessageBoxIcon.Information);
-            }
-        }
-
-        public static UpdateInformation GetNewVersion()
+        public UpdateInformation GetNewVersion(string updateCheckUrl)
         {
             UpdateInformation rtn = new UpdateInformation();
 
-            System.Xml.XmlTextReader reader;
+            System.Xml.XmlTextReader reader = null;
             try
             {
                 // provide the XmlTextReader with the URL of
                 // our xml document
-                string xmlURL = Properties.Settings.Default.UpdateCheckUrl;
-                reader = new System.Xml.XmlTextReader(xmlURL);
+                string xmlUrl = updateCheckUrl;
+                reader = new System.Xml.XmlTextReader(xmlUrl);
                 // simply (and easily) skip the junk at the beginning
                 reader.MoveToContent();
                 // internal - as the XmlTextReader moves only
@@ -156,11 +100,14 @@ namespace PraiseBase.Presenter.Util
                         }
                     }
                 }
-                if (reader != null) reader.Close();
             }
             catch (Exception e)
             {
-                Console.WriteLine("Update check failed! " + e.Message);
+                Console.WriteLine(@"Update check failed! " + e.Message);
+            }
+            finally
+            {
+                if (reader != null) reader.Close();
             }
 
             // get the running version

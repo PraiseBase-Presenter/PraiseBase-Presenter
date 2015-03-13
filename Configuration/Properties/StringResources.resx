@@ -129,6 +129,9 @@
   <data name="Category" xml:space="preserve">
     <value>Kategorie</value>
   </data>
+  <data name="CheckForUpdate" xml:space="preserve">
+    <value>Auf Update prüfen</value>
+  </data>
   <data name="ConnectionToUpdateServerFailed" xml:space="preserve">
     <value>Verbindung zum Update-Server nicht möglich!</value>
   </data>
@@ -137,6 +140,9 @@
   </data>
   <data name="DatabaseError" xml:space="preserve">
     <value>Datenbankfehler</value>
+  </data>
+  <data name="DisableFurtherInformationAboutThisUpdate" xml:space="preserve">
+    <value>Möchten Sie weitere Meldungen zu diesem Update deaktivieren?</value>
   </data>
   <data name="DoesTheSongReallyHaveTheDefaultTitle" xml:space="preserve">
     <value>Hat das Lied wirklich den Standardnamen '{0}'?</value>
@@ -307,6 +313,6 @@
     <value>Hauptverzeichnis</value>
   </data>
   <data name="UpdateAvailable" xml:space="preserve">
-    <value>Ein Update auf Version {0} ist verfügbar!</value>
+    <value>Ein Update auf Version {0} ist verfügbar (Sie haben Version {1}).</value>
   </data>
 </root>
