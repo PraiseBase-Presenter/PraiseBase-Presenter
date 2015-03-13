@@ -55,7 +55,7 @@ namespace PraiseBase.Presenter.UI.Presenter
             this.buttonRemoveFromBibleVerseList = new System.Windows.Forms.Button();
             this.label12 = new System.Windows.Forms.Label();
             this.searchTextBoxBible = new PraiseBase.Presenter.Controls.SearchTextBox();
-            this.listViewBibleVerseList = new PraiseBase.Presenter.Controls.ListViewEx();
+            this.listViewBibleVerseList = new PraiseBase.Presenter.Controls.DragAndDropListView();
             this.columnHeader3 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.label11 = new System.Windows.Forms.Label();
             this.listBoxBibleVerseTo = new System.Windows.Forms.ListBox();
@@ -138,7 +138,7 @@ namespace PraiseBase.Presenter.UI.Presenter
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage3 = new System.Windows.Forms.TabPage();
             this.buttonOpenSetList = new System.Windows.Forms.Button();
-            this.listViewSetList = new PraiseBase.Presenter.Controls.ListViewEx();
+            this.listViewSetList = new PraiseBase.Presenter.Controls.DragAndDropListView();
             this.columnHeader4 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.buttonSaveSetList = new System.Windows.Forms.Button();
             this.buttonSetListAdd = new System.Windows.Forms.Button();
@@ -1470,7 +1470,7 @@ namespace PraiseBase.Presenter.UI.Presenter
         private System.Windows.Forms.Button buttonSaveSetList;
         private System.Windows.Forms.Button buttonSetListAdd;
         private System.Windows.Forms.Button buttonSetListClear;
-        private ListViewEx listViewSetList;
+        private DragAndDropListView listViewSetList;
         private System.Windows.Forms.ColumnHeader columnHeader4;
         private System.Windows.Forms.Button buttonSetListRem;
         private System.Windows.Forms.Button buttonSetListDown;
@@ -1549,7 +1549,7 @@ namespace PraiseBase.Presenter.UI.Presenter
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator13;
         private System.Windows.Forms.ToolStripMenuItem qAcommentsToolStripMenuItem;
         private System.Windows.Forms.SplitContainer splitContainerLayerContent;
-        private ListViewEx listViewBibleVerseList;
+        private DragAndDropListView listViewBibleVerseList;
         private System.Windows.Forms.ColumnHeader columnHeader3;
         
     }

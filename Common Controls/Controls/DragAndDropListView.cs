@@ -6,7 +6,7 @@ using System.Windows.Forms;
 
 namespace PraiseBase.Presenter.Controls
 {
-    public class ListViewEx : ListView
+    public class DragAndDropListView : ListView
     {
         private const string Reorder = "Reorder";
 
@@ -37,7 +37,7 @@ namespace PraiseBase.Presenter.Controls
             }
         }
 
-        public ListViewEx()
+        public DragAndDropListView()
         {
             AllowRowReorder = true;
         }
