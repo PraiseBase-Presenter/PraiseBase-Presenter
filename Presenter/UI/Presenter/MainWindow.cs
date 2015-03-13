@@ -233,12 +233,15 @@ namespace PraiseBase.Presenter.UI.Presenter
             }
         }
 
+        private void aufUpdatePrüfenToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            DoManualUpdateCheck();
+        }
+
         /// <summary>
         /// Manually checks if there is an update available
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void aufUpdatePrüfenToolStripMenuItem_Click(object sender, EventArgs e)
+        private void DoManualUpdateCheck()
         {
             UpdateChecker uc = new UpdateChecker();
             UpdateInformation ui = uc.GetNewVersion(Settings.Default.UpdateCheckUrl);
