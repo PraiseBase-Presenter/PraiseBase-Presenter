@@ -56,7 +56,9 @@
     <Compile Include="Controls\SearchTextBox.Designer.cs">
       <DependentUpon>SearchTextBox.cs</DependentUpon>
     </Compile>
-    <Compile Include="Controls\TreeViewLabelEdit.cs" />
+    <Compile Include="Controls\TreeViewLabelEdit.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Forms\LocalizedForm.cs">
       <SubType>Form</SubType>
     </Compile>

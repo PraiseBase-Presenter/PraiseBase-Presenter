@@ -78,7 +78,7 @@ namespace PraiseBase.Presenter.UI.Presenter
 
             this.Size = Settings.Default.MainWindowSize;
             
-            base.registerChild(this);
+            base.RegisterChild(this);
 
             _originalFormTitle = Text;
 

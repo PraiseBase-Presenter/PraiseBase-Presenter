@@ -5,15 +5,15 @@ using System.Windows.Forms;
 using PraiseBase.Presenter.Controls;
 using PraiseBase.Presenter.Properties;
 
-namespace PraiseBase.Presenter.UI
+namespace PraiseBase.Presenter.Forms
 {
     public class LocalizableForm : Form
     {
-        static List<Form> allForms = new List<Form>();
+        static readonly List<Form> AllForms = new List<Form>();
 
-        protected void registerChild(Form child)
+        protected void RegisterChild(Form child)
         {
-            allForms.Add(child);
+            AllForms.Add(child);
         }
 
         /// <summary>
@@ -24,7 +24,7 @@ namespace PraiseBase.Presenter.UI
             //Set the language in the application
             System.Threading.Thread.CurrentThread.CurrentUICulture = lang;
 
-            foreach (Form form in allForms) 
+            foreach (Form form in AllForms) 
             {
                 if (form != null)
                 {
@@ -106,7 +106,7 @@ namespace PraiseBase.Presenter.UI
             {
                 menu.Text = text;
             }
-            foreach (var d in ((ToolStripMenuItem)menu).DropDownItems)
+            foreach (var d in menu.DropDownItems)
             {
                 if (d.GetType() == typeof(ToolStripMenuItem))
                 {

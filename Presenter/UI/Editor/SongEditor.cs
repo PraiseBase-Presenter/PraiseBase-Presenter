@@ -92,7 +92,7 @@ namespace PraiseBase.Presenter.UI.Editor
 
             InitializeComponent();
 
-            registerChild(this);
+            RegisterChild(this);
         }
 
         void selectLanguageToolStripMenuItem_Click(object sender, EventArgs e)
@@ -210,7 +210,7 @@ namespace PraiseBase.Presenter.UI.Editor
             };
             childForm.FormClosing += childForm_FormClosing;
             childForm.Show();
-            registerChild(childForm);
+            RegisterChild(childForm);
             
             // Se status
             SetStatus(string.Format(StringResources.LoadedSong, sng.Title));
