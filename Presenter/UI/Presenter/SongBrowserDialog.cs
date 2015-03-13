@@ -8,6 +8,13 @@ namespace PraiseBase.Presenter.UI.Presenter
 {
     public partial class SongBrowserDialog : Form
     {
+        public enum SongBrowseDialogAction
+        {
+            None,
+            LoadInSetList,
+            OpenInEditor
+        }
+
         /// <summary>
         /// List of tags (categories)
         /// </summary>
@@ -16,11 +23,13 @@ namespace PraiseBase.Presenter.UI.Presenter
         /// <summary>
         /// List of songs to be opened in the editor
         /// </summary>
-        public List<string> OpenInEditor { get; private set; }
+        public List<string> SelectedItems { get; private set; }
+
+        public SongBrowseDialogAction SelectedAction { get; private set; }
 
         public SongBrowserDialog()
         {
-            OpenInEditor = new List<string>();
+            SelectedItems = new List<string>();
             InitializeComponent();
         }
 
@@ -31,7 +40,7 @@ namespace PraiseBase.Presenter.UI.Presenter
             {
                 checkedListBoxTags.Items.Add(str);
             }
-            fillList();
+            FillList();
             textBoxSearch.Focus();
         }
 
@@ -42,28 +51,45 @@ namespace PraiseBase.Presenter.UI.Presenter
 
         private void buttonUseInEditor_Click(object sender, EventArgs e)
         {
+            if (CollectSelectedItems())
+            {
+                SelectedAction = SongBrowseDialogAction.OpenInEditor;
+                DialogResult = DialogResult.OK;
+                Close();
+            }
+        }
+
+        private void buttonUseInSetlist_Click(object sender, EventArgs e)
+        {
+            if (CollectSelectedItems())
+            {
+                SelectedAction = SongBrowseDialogAction.LoadInSetList;
+                DialogResult = DialogResult.OK;
+                Close();
+            }
+        }
+
+        private bool CollectSelectedItems()
+        {
             if (listViewItems.SelectedItems.Count > 0)
             {
                 foreach (ListViewItem lvi in listViewItems.SelectedItems)
                 {
-                    string fn = SongManager.Instance.SongList[(Guid) (lvi.Tag)].Filename;
-                    OpenInEditor.Add(fn);
+                    string fn = SongManager.Instance.SongList[(Guid)(lvi.Tag)].Filename;
+                    SelectedItems.Add(fn);
                 }
-                DialogResult = DialogResult.OK;
-                Close();
+                return true;
             }
-            else
-            {
-                MessageBox.Show(Properties.StringResources.NoSongsSelected, Properties.StringResources.SongBrowser);
-            }
+            MessageBox.Show(Properties.StringResources.NoSongsSelected, Properties.StringResources.SongBrowser);
+            return false;
         }
 
         private void buttonSearch_Click(object sender, EventArgs e)
         {
-            fillList();
+            FillList();
         }
 
-        private void fillList()
+        private void FillList()
         {
             listViewItems.Items.Clear();
             string searchText = textBoxSearch.Text.Trim().ToLower();
@@ -120,7 +146,7 @@ namespace PraiseBase.Presenter.UI.Presenter
             {
                 checkedListBoxTags.SetItemCheckState(i, CheckState.Unchecked);
             }
-            fillList();
+            FillList();
             textBoxSearch.Focus();
         }
 
@@ -134,5 +160,6 @@ namespace PraiseBase.Presenter.UI.Presenter
             if (e.KeyCode == Keys.Enter)
                 buttonSearch_Click(sender, e);
         }
+
     }
 }

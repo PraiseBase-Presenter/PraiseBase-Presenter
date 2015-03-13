@@ -23,8 +23,10 @@
 using System;
 using System.Collections.Generic;
 using System.Globalization;
+using System.IO;
+using System.Reflection;
+using System.Threading;
 using System.Windows.Forms;
-using PraiseBase.Presenter.Forms;
 using PraiseBase.Presenter.Properties;
 using PraiseBase.Presenter.UI.Presenter;
 
@@ -44,45 +46,45 @@ namespace PraiseBase.Presenter
         /// The main entry point for the application.
         /// </summary>
         [STAThread]
-        private static void Main()
+        private static void Main(string[] args)
         {
             DateTime startTime = DateTime.Now;
 
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
 
-            System.Threading.Thread.CurrentThread.CurrentUICulture = CultureInfo.CreateSpecificCulture(Settings.Default.SelectedCulture);
+            Thread.CurrentThread.CurrentUICulture = CultureInfo.CreateSpecificCulture(Settings.Default.SelectedCulture);
 
             // code to ensure that only one copy of the software is running.
-            System.Threading.Mutex mutex;
-            string strLoc = System.Reflection.Assembly.GetExecutingAssembly().Location;
-            System.IO.FileSystemInfo fileInfo = new System.IO.FileInfo(strLoc);
+            Mutex mutex;
+            string strLoc = Assembly.GetExecutingAssembly().Location;
+            FileSystemInfo fileInfo = new FileInfo(strLoc);
             string sExeName = fileInfo.Name;
             string mutexName = "Global\\" + sExeName;
             try
             {
-                mutex = System.Threading.Mutex.OpenExisting(mutexName);
+                mutex = Mutex.OpenExisting(mutexName);
 
                 //since it hasn’t thrown an exception, then we already have one copy of the app open.
-                object[] attributes = System.Reflection.Assembly.GetExecutingAssembly().GetCustomAttributes(typeof(System.Reflection.AssemblyProductAttribute), false);
-                String appTitle = ((System.Reflection.AssemblyProductAttribute)attributes[0]).Product;
+                object[] attributes = Assembly.GetExecutingAssembly().GetCustomAttributes(typeof(AssemblyProductAttribute), false);
+                String appTitle = ((AssemblyProductAttribute)attributes[0]).Product;
 
-                MessageBox.Show(Properties.StringResources.ProgramInstanceAlreadyRunning, appTitle, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show(StringResources.ProgramInstanceAlreadyRunning, appTitle, MessageBoxButtons.OK, MessageBoxIcon.Information);
                 Environment.Exit(0);
             }
             catch
             {
                 //since we didn’t find a mutex with that name, create one
-                mutex = new System.Threading.Mutex(true, mutexName);
+                mutex = new Mutex(true, mutexName);
             }
 
             // Check Data directory
             if (Settings.Default.DataDirectory == "")
             {
-                Settings.Default.DataDirectory = Environment.GetFolderPath(Environment.SpecialFolder.Personal) + System.IO.Path.DirectorySeparatorChar + Settings.Default.DataDirDefaultName;
-                if (System.IO.Directory.Exists(Settings.Default.DataDirectory))
+                Settings.Default.DataDirectory = Environment.GetFolderPath(Environment.SpecialFolder.Personal) + Path.DirectorySeparatorChar + Settings.Default.DataDirDefaultName;
+                if (Directory.Exists(Settings.Default.DataDirectory))
                 {
-                    System.IO.Directory.CreateDirectory(Settings.Default.DataDirectory);
+                    Directory.CreateDirectory(Settings.Default.DataDirectory);
                 }
                 Settings.Default.Save();
             }
@@ -110,8 +112,17 @@ namespace PraiseBase.Presenter
                 GC.Collect();
             }
 
-            Console.WriteLine("Loading took " + (DateTime.Now - startTime).TotalSeconds + " seconds!");
-            Application.Run(MainWindow.Instance);
+            Console.WriteLine(@"Loading took " + (DateTime.Now - startTime).TotalSeconds + @" seconds!");
+            
+            // Detect if program is called with a setlist file as argument
+            string setlistFile = null;
+            if (args.Length == 1)
+            {
+                setlistFile = args[0];
+            }
+
+            MainWindow mw = new MainWindow(setlistFile);
+            Application.Run(mw);
             GC.KeepAlive(mutex);
         }
     }
