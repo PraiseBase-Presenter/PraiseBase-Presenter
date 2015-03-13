@@ -733,5 +733,10 @@ namespace PraiseBase.Presenter.UI.Editor
         {
             GC.Collect();
         }
+
+        private void contentsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Process.Start(Settings.Default.HelpUrl);
+        }
     }
 }
