@@ -4,7 +4,7 @@ using System.Windows.Forms;
 
 namespace PraiseBase.Presenter.Controls
 {
-    public class TreeLE : TreeView
+    public class TreeViewLabelEdit : TreeView
     {
         #region Component Designer generated code
 
@@ -30,53 +30,53 @@ namespace PraiseBase.Presenter.Controls
 
         #endregion Component Designer generated code
 
-        public TreeLE()
+        private const int WmTimer = 0x0113;
+        private bool _triggerLabelEdit;
+        private string _viewedLabel;
+        private string _editedLabel;
+        private bool _wasDoubleClick;
+
+        public TreeViewLabelEdit()
         {
             InitializeComponent();
-            this.SetStyle(ControlStyles.EnableNotifyMessage, true);
+            SetStyle(ControlStyles.EnableNotifyMessage, true);
         }
 
         protected override void OnMouseDown(MouseEventArgs e)
         {
             if (e.Button == MouseButtons.Right)
             {
-                TreeNode tn = this.GetNodeAt(e.X, e.Y);
+                TreeNode tn = GetNodeAt(e.X, e.Y);
                 if (tn != null)
-                    this.SelectedNode = tn;
+                    SelectedNode = tn;
             }
             base.OnMouseDown(e);
         }
 
         protected override void OnMouseUp(MouseEventArgs e)
         {
-            TreeNode tn;
             if (e.Button == MouseButtons.Left)
             {
-                tn = this.SelectedNode;
-                if (tn == this.GetNodeAt(e.X, e.Y))
+                var tn = SelectedNode;
+                if (tn == GetNodeAt(e.X, e.Y))
                 {
-                    if (wasDoubleClick)
-                        wasDoubleClick = false;
+                    if (_wasDoubleClick)
+                        _wasDoubleClick = false;
                     else
                     {
-                        TriggerLabelEdit = true;
+                        _triggerLabelEdit = true;
                     }
                 }
             }
             base.OnMouseUp(e);
         }
 
-        private const int WM_TIMER = 0x0113;
-        private bool TriggerLabelEdit = false;
-        private string viewedLabel;
-        private string editedLabel;
-
         protected override void OnBeforeLabelEdit(NodeLabelEditEventArgs e)
         {
             // put node label to initial state
             // to ensure that in case of label editing cancelled
             // the initial state of label is preserved
-            this.SelectedNode.Text = viewedLabel;
+            SelectedNode.Text = _viewedLabel;
 
             // base.OnBeforeLabelEdit is not called here
             // it is called only from StartLabelEdit
@@ -84,7 +84,7 @@ namespace PraiseBase.Presenter.Controls
 
         protected override void OnAfterLabelEdit(NodeLabelEditEventArgs e)
         {
-            this.LabelEdit = false;
+            LabelEdit = false;
             e.CancelEdit = true;
             if (e.Label == null)
             {
@@ -92,10 +92,10 @@ namespace PraiseBase.Presenter.Controls
             }
             ValidateLabelEditEventArgs ea = new ValidateLabelEditEventArgs(e.Label);
             OnValidateLabelEdit(ea);
-            if (ea.Cancel == true)
+            if (ea.Cancel)
             {
-                e.Node.Text = editedLabel;
-                this.LabelEdit = true;
+                e.Node.Text = _editedLabel;
+                LabelEdit = true;
                 e.Node.BeginEdit();
             }
             else
@@ -109,10 +109,10 @@ namespace PraiseBase.Presenter.Controls
 
         protected override void OnNotifyMessage(Message m)
         {
-            if (TriggerLabelEdit)
-                if (m.Msg == WM_TIMER)
+            if (_triggerLabelEdit)
+                if (m.Msg == WmTimer)
                 {
-                    TriggerLabelEdit = false;
+                    _triggerLabelEdit = false;
                     StartLabelEdit();
                 }
             base.OnNotifyMessage(m);
@@ -120,29 +120,27 @@ namespace PraiseBase.Presenter.Controls
 
         public void StartLabelEdit()
         {
-            TreeNode tn = this.SelectedNode;
-            viewedLabel = tn.Text;
+            TreeNode tn = SelectedNode;
+            _viewedLabel = tn.Text;
 
             NodeLabelEditEventArgs e = new NodeLabelEditEventArgs(tn);
             base.OnBeforeLabelEdit(e);
 
-            editedLabel = tn.Text;
+            _editedLabel = tn.Text;
 
-            this.LabelEdit = true;
+            LabelEdit = true;
             tn.BeginEdit();
         }
 
         protected override void OnClick(EventArgs e)
         {
-            TriggerLabelEdit = false;
+            _triggerLabelEdit = false;
             base.OnClick(e);
         }
 
-        private bool wasDoubleClick = false;
-
         protected override void OnDoubleClick(EventArgs e)
         {
-            wasDoubleClick = true;
+            _wasDoubleClick = true;
             base.OnDoubleClick(e);
         }
 
@@ -150,7 +148,10 @@ namespace PraiseBase.Presenter.Controls
 
         protected virtual void OnValidateLabelEdit(ValidateLabelEditEventArgs e)
         {
-            ValidateLabelEdit(this, e);
+            if (ValidateLabelEdit != null)
+            {
+                ValidateLabelEdit(this, e);
+            }
         }
 
         public delegate void ValidateLabelEditEventHandler(object sender, ValidateLabelEditEventArgs e);
@@ -160,16 +161,10 @@ namespace PraiseBase.Presenter.Controls
     {
         public ValidateLabelEditEventArgs(string label)
         {
-            this.label = label;
-            this.Cancel = false;
+            Label = label;
+            Cancel = false;
         }
 
-        private string label;
-
-        public string Label
-        {
-            get { return label; }
-            set { label = value; }
-        }
+        public string Label { get; set; }
     }
 }
