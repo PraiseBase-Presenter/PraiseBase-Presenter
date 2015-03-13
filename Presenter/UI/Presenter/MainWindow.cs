@@ -438,7 +438,7 @@ namespace PraiseBase.Presenter.UI.Presenter
             Application.DoEvents();
 
             label3.Text = SongManager.Instance.CurrentSong.Song.Title;
-            songDetailElement.setSong(SongManager.Instance.CurrentSong.Song, previousSong, nextSong);
+            songDetailElement.SetSong(SongManager.Instance.CurrentSong.Song, previousSong, nextSong);
 
             toolStripButtonQA.Enabled = true;
             updateQAButtonStage();
@@ -481,7 +481,7 @@ namespace PraiseBase.Presenter.UI.Presenter
                 listViewSongHistory.Columns[0].Width = -2;
             }
 
-            PraiseBase.Presenter.Model.Song.SongSlide cs = s.Parts[e.PartNumber].Slides[e.SlideNumber];
+            SongSlide cs = s.Parts[e.PartNumber].Slides[e.SlideNumber];
 
             SlideTextFormatting slideFormatting = new SlideTextFormatting();
 

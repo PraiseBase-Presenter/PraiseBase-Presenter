@@ -320,10 +320,10 @@ namespace PraiseBase.Presenter.UI.Presenter
             this.songDetailElement.NextSongIcon = ((System.Drawing.Image)(resources.GetObject("songDetailElement.NextSongIcon")));
             this.songDetailElement.PreviousSongIcon = ((System.Drawing.Image)(resources.GetObject("songDetailElement.PreviousSongIcon")));
             this.songDetailElement.ThumbnailSize = new System.Drawing.Size(56, 42);
-            this.songDetailElement.SlideClicked += new SongDetail.slideClick(this.songDetailElement_SlideClicked);
-            this.songDetailElement.ImageClicked += new SongDetail.imageClick(this.songDetailElement_ImageClicked);
-            this.songDetailElement.PreviousSongClicked += new SongDetail.previousSongClick(this.songDetailElement_PreviousSongClicked);
-            this.songDetailElement.NextSongClicked += new SongDetail.nextSongClick(this.songDetailElement_NextSongClicked);
+            this.songDetailElement.SlideClicked += new SongDetail.SlideClick(this.songDetailElement_SlideClicked);
+            this.songDetailElement.ImageClicked += new SongDetail.ImageClick(this.songDetailElement_ImageClicked);
+            this.songDetailElement.PreviousSongClicked += new SongDetail.PreviousSongClick(this.songDetailElement_PreviousSongClicked);
+            this.songDetailElement.NextSongClicked += new SongDetail.NextSongClick(this.songDetailElement_NextSongClicked);
             // 
             // tabPage2
             // 
