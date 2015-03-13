@@ -2,6 +2,7 @@
 using System.ComponentModel;
 using System.Drawing;
 using System.Windows.Forms;
+using PraiseBase.Presenter.Properties;
 
 namespace PraiseBase.Presenter.Controls
 {
@@ -41,7 +42,7 @@ namespace PraiseBase.Presenter.Controls
 
             EnabledChanged += SearchTextBox_EnabledChanged;
 
-            xPictureBox.Image = PraiseBase.Presenter.Properties.Resources.searchx;
+            xPictureBox.Image = Resources.searchx;
             xPictureBox.Click += xPictureBox_Click;
             xPictureBox.Visible = false;
 
@@ -49,7 +50,7 @@ namespace PraiseBase.Presenter.Controls
             keyStrokeTimer.Tick += keyStrokeTimer_Tick;
 
             _cmPictureBox.SizeMode = PictureBoxSizeMode.StretchImage;
-            _cmPictureBox.Image = PraiseBase.Presenter.Properties.Resources.arrowdown;
+            _cmPictureBox.Image = Resources.arrowdown;
             _cmPictureBox.Size = new Size(8, 8);
             _cmPictureBox.Location = new Point(19, 7);
             _cmPictureBox.MouseClick += cmPictureBox_MouseClick;
@@ -233,11 +234,11 @@ namespace PraiseBase.Presenter.Controls
 
         private void UserControl1_Paint(object sender, PaintEventArgs e)
         {
-            e.Graphics.DrawImage(PraiseBase.Presenter.Properties.Resources.searchg, 3, (Height - 18) / 2, 18, 18);
+            e.Graphics.DrawImage(Resources.searchg, 3, (Height - 18) / 2, 18, 18);
             ControlPaint.DrawBorder(e.Graphics, ClientRectangle, Color.Gray, ButtonBorderStyle.Solid);
         }
 
-        public void select(int start, int length)
+        public void Select(int start, int length)
         {
             textBox.Select(start, length);
         }

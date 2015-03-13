@@ -1699,7 +1699,7 @@ namespace PraiseBase.Presenter.UI.Presenter
                             if (needle.Length < biblePassageSearchResult.Passage.Book.Name.Length)
                             {
                                 searchTextBoxBible.Text = biblePassageSearchResult.Passage.Book.Name + " ";
-                                searchTextBoxBible.select(searchTextBoxBible.Text.Length, 0);
+                                searchTextBoxBible.Select(searchTextBoxBible.Text.Length, 0);
                             }
 
                             /*
