@@ -187,6 +187,9 @@ namespace PraiseBase.Presenter.UI.Presenter
 
         #region UpdateCheck
 
+        /// <summary>
+        /// Checks if there is an update available. If yes, shows an info message
+        /// </summary>
         void DoUpdateCheck()
         {
             UpdateChecker uc = new UpdateChecker();
@@ -230,6 +233,11 @@ namespace PraiseBase.Presenter.UI.Presenter
             }
         }
 
+        /// <summary>
+        /// Manually checks if there is an update available
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void aufUpdatePrüfenToolStripMenuItem_Click(object sender, EventArgs e)
         {
             UpdateChecker uc = new UpdateChecker();
