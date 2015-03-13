@@ -28,7 +28,7 @@ using PraiseBase.Presenter.Model.Song;
 using PraiseBase.Presenter.Properties;
 using PraiseBase.Presenter.Util;
 
-namespace PraiseBase.Presenter
+namespace PraiseBase.Presenter.Manager
 {
     internal class ImageManager
     {
@@ -41,13 +41,6 @@ namespace PraiseBase.Presenter
         /// The singleton holder
         /// </summary>
         static private ImageManager _instance;
-
-        /// <summary>
-        /// Current image
-        /// </summary>
-        public Image currentImage { get; set; }
-
-
 
         /// <summary>
         /// Base path to the image directory
@@ -73,8 +66,8 @@ namespace PraiseBase.Presenter
 
             public ThumbnailCreateEventArgs(int number, int total)
             {
-                this.Number = number;
-                this.Total = total;
+                Number = number;
+                Total = total;
             }
         }
 

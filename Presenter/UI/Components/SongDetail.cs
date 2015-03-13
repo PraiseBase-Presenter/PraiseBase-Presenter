@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing;
 using System.Windows.Forms;
+using PraiseBase.Presenter.Manager;
 using PraiseBase.Presenter.Model.Song;
 
 namespace PraiseBase.Presenter.UI.Components

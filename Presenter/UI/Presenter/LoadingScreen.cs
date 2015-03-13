@@ -21,6 +21,7 @@
  */
 
 using System.Windows.Forms;
+using PraiseBase.Presenter.Manager;
 
 namespace PraiseBase.Presenter.UI.Presenter
 {

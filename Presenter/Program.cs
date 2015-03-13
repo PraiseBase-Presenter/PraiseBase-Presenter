@@ -27,6 +27,7 @@ using System.IO;
 using System.Reflection;
 using System.Threading;
 using System.Windows.Forms;
+using PraiseBase.Presenter.Manager;
 using PraiseBase.Presenter.Properties;
 using PraiseBase.Presenter.UI.Presenter;
 
