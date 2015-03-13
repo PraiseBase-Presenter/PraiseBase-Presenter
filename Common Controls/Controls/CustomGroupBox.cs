@@ -24,9 +24,9 @@ namespace PraiseBase.Presenter.Controls
             InitializeComponent();
         }
 
-        private void CustomGroupBox_Paint(object sender, System.Windows.Forms.PaintEventArgs e)
+        private void CustomGroupBox_Paint(object sender, PaintEventArgs e)
         {
-            this.panelTitleBG.Size = new System.Drawing.Size(this.Width, 28);
+            panelTitleBG.Size = new System.Drawing.Size(Width, 28);
         }
     }
 }

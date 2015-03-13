@@ -1,26 +1,27 @@
 using System;
 using System.Collections;
 using System.Drawing;
+using System.Linq;
 using System.Windows.Forms;
 
 namespace PraiseBase.Presenter.Controls
 {
     public class ListViewEx : ListView
     {
-        private const string REORDER = "Reorder";
+        private const string Reorder = "Reorder";
 
-        private bool allowRowReorder = true;
+        private bool _allowRowReorder = true;
 
         public bool AllowRowReorder
         {
             get
             {
-                return this.allowRowReorder;
+                return _allowRowReorder;
             }
             set
             {
-                this.allowRowReorder = value;
-                base.AllowDrop = value;
+                _allowRowReorder = value;
+                AllowDrop = value;
             }
         }
 
@@ -37,36 +38,35 @@ namespace PraiseBase.Presenter.Controls
         }
 
         public ListViewEx()
-            : base()
         {
-            this.AllowRowReorder = true;
+            AllowRowReorder = true;
         }
 
         protected override void OnDragDrop(DragEventArgs e)
         {
             base.OnDragDrop(e);
-            if (!this.AllowRowReorder)
+            if (!AllowRowReorder)
             {
                 return;
             }
-            if (base.SelectedItems.Count == 0)
+            if (SelectedItems.Count == 0)
             {
                 return;
             }
-            Point cp = base.PointToClient(new Point(e.X, e.Y));
-            ListViewItem dragToItem = base.GetItemAt(cp.X, cp.Y);
+            Point cp = PointToClient(new Point(e.X, e.Y));
+            ListViewItem dragToItem = GetItemAt(cp.X, cp.Y);
             if (dragToItem == null)
             {
                 return;
             }
             int dropIndex = dragToItem.Index;
-            if (dropIndex > base.SelectedItems[0].Index)
+            if (dropIndex > SelectedItems[0].Index)
             {
                 dropIndex++;
             }
-            ArrayList insertItems = new ArrayList(base.SelectedItems.Count);
+            ArrayList insertItems = new ArrayList(SelectedItems.Count);
 
-            foreach (ListViewItem item in base.SelectedItems)
+            foreach (ListViewItem item in SelectedItems)
             {
                 insertItems.Add(item.Clone());
             }
@@ -74,23 +74,23 @@ namespace PraiseBase.Presenter.Controls
             for (int i = insertItems.Count - 1; i >= 0; i--)
             {
                 ListViewItem insertItem = (ListViewItem)insertItems[i];
-                base.Items.Insert(dropIndex, insertItem);
+                Items.Insert(dropIndex, insertItem);
             }
             int removeIdx = 0;
-            foreach (ListViewItem removeItem in base.SelectedItems)
+            foreach (ListViewItem removeItem in SelectedItems)
             {
                 removeIdx = removeItem.Index;
-                base.Items.Remove(removeItem);
+                Items.Remove(removeItem);
             }
             if (dropIndex > removeIdx)
-                base.Items[dropIndex - 1].Selected = true;
+                Items[dropIndex - 1].Selected = true;
             else
-                base.Items[dropIndex].Selected = true;
+                Items[dropIndex].Selected = true;
         }
 
         protected override void OnDragOver(DragEventArgs e)
         {
-            if (!this.AllowRowReorder)
+            if (!AllowRowReorder)
             {
                 e.Effect = DragDropEffects.None;
                 return;
@@ -100,26 +100,23 @@ namespace PraiseBase.Presenter.Controls
                 e.Effect = DragDropEffects.None;
                 return;
             }
-            Point cp = base.PointToClient(new Point(e.X, e.Y));
-            ListViewItem hoverItem = base.GetItemAt(cp.X, cp.Y);
+            Point cp = PointToClient(new Point(e.X, e.Y));
+            ListViewItem hoverItem = GetItemAt(cp.X, cp.Y);
 
             if (hoverItem == null)
             {
                 e.Effect = DragDropEffects.None;
                 return;
             }
-            foreach (ListViewItem moveItem in base.SelectedItems)
+            if (SelectedItems.Cast<ListViewItem>().Any(moveItem => moveItem.Index == hoverItem.Index))
             {
-                if (moveItem.Index == hoverItem.Index)
-                {
-                    e.Effect = DragDropEffects.None;
-                    hoverItem.EnsureVisible();
-                    return;
-                }
+                e.Effect = DragDropEffects.None;
+                hoverItem.EnsureVisible();
+                return;
             }
             base.OnDragOver(e);
-            String text = (String)e.Data.GetData(REORDER.GetType());
-            if (text.CompareTo(REORDER) == 0)
+            String text = (String)e.Data.GetData(Reorder.GetType());
+            if (String.Compare(text, Reorder, StringComparison.Ordinal) == 0)
             {
                 e.Effect = DragDropEffects.Move;
                 hoverItem.EnsureVisible();
@@ -133,7 +130,7 @@ namespace PraiseBase.Presenter.Controls
         protected override void OnDragEnter(DragEventArgs e)
         {
             base.OnDragEnter(e);
-            if (!this.AllowRowReorder)
+            if (!AllowRowReorder)
             {
                 e.Effect = DragDropEffects.None;
                 return;
@@ -144,25 +141,18 @@ namespace PraiseBase.Presenter.Controls
                 return;
             }
             base.OnDragEnter(e);
-            String text = (String)e.Data.GetData(REORDER.GetType());
-            if (text.CompareTo(REORDER) == 0)
-            {
-                e.Effect = DragDropEffects.Move;
-            }
-            else
-            {
-                e.Effect = DragDropEffects.None;
-            }
+            String text = (String)e.Data.GetData(Reorder.GetType());
+            e.Effect = String.Compare(text, Reorder, StringComparison.Ordinal) == 0 ? DragDropEffects.Move : DragDropEffects.None;
         }
 
         protected override void OnItemDrag(ItemDragEventArgs e)
         {
             base.OnItemDrag(e);
-            if (!this.AllowRowReorder)
+            if (!AllowRowReorder)
             {
                 return;
             }
-            base.DoDragDrop(REORDER, DragDropEffects.Move);
+            DoDragDrop(Reorder, DragDropEffects.Move);
         }
     }
 }
