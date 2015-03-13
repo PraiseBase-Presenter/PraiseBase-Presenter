@@ -24,25 +24,8 @@ using System;
 
 namespace PraiseBase.Presenter.Util
 {
-    public class UpdateCheck
+    public class UpdateChecker
     {
-        public class UpdateInformation
-        {
-            public Version CurrentVersion { get; set; }
-
-            public Version OnlineVersion { get; set; }
-
-            public string DownloadUrl { get; set; }
-
-            public bool UpdateAvailable { get; set; }
-
-            public UpdateInformation()
-            {
-                UpdateAvailable = false;
-                DownloadUrl = string.Empty;
-            }
-        }
-
         public UpdateInformation GetNewVersion(string updateCheckUrl)
         {
             UpdateInformation rtn = new UpdateInformation();

@@ -141,8 +141,8 @@ namespace PraiseBase.Presenter.UI.Presenter
 
         private void timer1_Tick(object sender, EventArgs e)
         {
-            UpdateCheck uc = new UpdateCheck();
-            UpdateCheck.UpdateInformation ui = uc.GetNewVersion(Settings.Default.UpdateCheckUrl);
+            UpdateChecker uc = new UpdateChecker();
+            UpdateInformation ui = uc.GetNewVersion(Settings.Default.UpdateCheckUrl);
             if (ui.UpdateAvailable)
             {
                 linkLabel1.Text = String.Format(StringResources.UpdateAvailable, ui.OnlineVersion, ui.CurrentVersion);

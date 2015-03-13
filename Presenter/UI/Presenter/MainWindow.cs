@@ -189,8 +189,8 @@ namespace PraiseBase.Presenter.UI.Presenter
 
         void DoUpdateCheck()
         {
-            UpdateCheck uc = new UpdateCheck();
-            UpdateCheck.UpdateInformation ui = uc.GetNewVersion(Settings.Default.UpdateCheckUrl);
+            UpdateChecker uc = new UpdateChecker();
+            UpdateInformation ui = uc.GetNewVersion(Settings.Default.UpdateCheckUrl);
             if (ui.UpdateAvailable)
             {
                 // Return if user already has hidden notifications about this update
@@ -232,8 +232,8 @@ namespace PraiseBase.Presenter.UI.Presenter
 
         private void aufUpdatePrüfenToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            UpdateCheck uc = new UpdateCheck();
-            UpdateCheck.UpdateInformation ui = uc.GetNewVersion(Settings.Default.UpdateCheckUrl);
+            UpdateChecker uc = new UpdateChecker();
+            UpdateInformation ui = uc.GetNewVersion(Settings.Default.UpdateCheckUrl);
             if (ui.UpdateAvailable)
             {
                 // ask the user if he would like to download the new version
