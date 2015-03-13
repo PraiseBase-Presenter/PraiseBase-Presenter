@@ -1478,11 +1478,6 @@ namespace PraiseBase.Presenter.UI.Presenter
             ProjectionManager.Instance.DisplayLayer(2, lt);
         }
 
-        private void buttonClearText_Click(object sender, EventArgs e)
-        {
-            ProjectionManager.Instance.HideLayer(2);
-        }
-
         private void liedSuchenToolStripMenuItem_Click(object sender, EventArgs e)
         {
             timerElementHighlight.Tag = songSearchTextBox;
@@ -1719,11 +1714,6 @@ namespace PraiseBase.Presenter.UI.Presenter
             lt.FooterText = copyrightItems.ToArray();
 
             ProjectionManager.Instance.DisplayLayer(2, lt);
-        }
-
-        private void button1_Click_3(object sender, EventArgs e)
-        {
-            ProjectionManager.Instance.HideLayer(2);
         }
 
         private void buttonAddToBibleVerseList_Click(object sender, EventArgs e)
