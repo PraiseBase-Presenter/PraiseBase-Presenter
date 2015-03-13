@@ -134,7 +134,6 @@ namespace PraiseBase.Presenter.UI.Presenter
             this.fehlerMeldenToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.webToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
-            this.aufUpdatePrüfenToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.infoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage3 = new System.Windows.Forms.TabPage();
@@ -935,7 +934,6 @@ namespace PraiseBase.Presenter.UI.Presenter
             this.fehlerMeldenToolStripMenuItem,
             this.webToolStripMenuItem,
             this.toolStripSeparator3,
-            this.aufUpdatePrüfenToolStripMenuItem,
             this.infoToolStripMenuItem});
             this.toolStripMenuItem1.Name = "toolStripMenuItem1";
             resources.ApplyResources(this.toolStripMenuItem1, "toolStripMenuItem1");
@@ -962,12 +960,6 @@ namespace PraiseBase.Presenter.UI.Presenter
             // 
             this.toolStripSeparator3.Name = "toolStripSeparator3";
             resources.ApplyResources(this.toolStripSeparator3, "toolStripSeparator3");
-            // 
-            // aufUpdatePrüfenToolStripMenuItem
-            // 
-            this.aufUpdatePrüfenToolStripMenuItem.Name = "aufUpdatePrüfenToolStripMenuItem";
-            resources.ApplyResources(this.aufUpdatePrüfenToolStripMenuItem, "aufUpdatePrüfenToolStripMenuItem");
-            this.aufUpdatePrüfenToolStripMenuItem.Click += new System.EventHandler(this.aufUpdatePrüfenToolStripMenuItem_Click);
             // 
             // infoToolStripMenuItem
             // 
@@ -1532,7 +1524,6 @@ namespace PraiseBase.Presenter.UI.Presenter
         private System.Windows.Forms.ToolStripMenuItem titelUndTextToolStripMenuItem;
         private System.Windows.Forms.Label label13;
         private System.Windows.Forms.PictureBox pictureBoxbeamerPreview;
-        private System.Windows.Forms.ToolStripMenuItem aufUpdatePrüfenToolStripMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator5;
         private System.Windows.Forms.ToolStripMenuItem optionenToolStripMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;

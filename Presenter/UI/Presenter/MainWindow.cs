@@ -233,52 +233,6 @@ namespace PraiseBase.Presenter.UI.Presenter
             }
         }
 
-        private void aufUpdatePrüfenToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            DoManualUpdateCheck();
-        }
-
-        /// <summary>
-        /// Manually checks if there is an update available
-        /// </summary>
-        private void DoManualUpdateCheck()
-        {
-            UpdateChecker uc = new UpdateChecker();
-            UpdateInformation ui = uc.GetNewVersion(Settings.Default.UpdateCheckUrl);
-            if (ui.UpdateAvailable)
-            {
-                // ask the user if he would like to download the new version
-                DialogResult result = MessageBox.Show(
-                    String.Format(StringResources.UpdateAvailable, ui.OnlineVersion, ui.CurrentVersion),
-                    StringResources.CheckForUpdate,
-                    MessageBoxButtons.YesNo,
-                    MessageBoxIcon.Question);
-                if (result == DialogResult.Yes)
-                {
-                    // navigate the default web browser to our app
-                    // homepage (the url comes from the xml content)
-                    Process.Start(ui.DownloadUrl);
-                }
-            }
-            else
-            {
-                if (ui.OnlineVersion != null)
-                {
-                    MessageBox.Show(StringResources.ProgramVersionUptodate,
-                        StringResources.CheckForUpdate,
-                        MessageBoxButtons.OK,
-                        MessageBoxIcon.Information);
-                }
-                else
-                {
-                    MessageBox.Show(StringResources.ConnectionToUpdateServerFailed,
-                        StringResources.CheckForUpdate,
-                        MessageBoxButtons.OK,
-                        MessageBoxIcon.Warning);
-                }
-            }
-        }
-
         #endregion
 
         void selectLanguageToolStripMenuItem_Click(object sender, EventArgs e)
