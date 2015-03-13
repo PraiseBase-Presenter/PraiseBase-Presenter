@@ -41,12 +41,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Controls\BackgroundImageBrowser.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="Controls\BackgroundImageBrowser.Designer.cs">
-      <DependentUpon>BackgroundImageBrowser.cs</DependentUpon>
-    </Compile>
     <Compile Include="Controls\CustomGroupBox.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -78,9 +72,6 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Controls\BackgroundImageBrowser.resx">
-      <DependentUpon>BackgroundImageBrowser.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Controls\CustomGroupBox.resx">
       <DependentUpon>CustomGroupBox.cs</DependentUpon>
     </EmbeddedResource>
