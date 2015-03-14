@@ -599,7 +599,7 @@ namespace PraiseBase.Presenter.UI.Editor
 
         private void optionsToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            ProgramSettingsDialog stWnd = new ProgramSettingsDialog();
+            ProgramSettingsDialog stWnd = new ProgramSettingsDialog(_settings);
             stWnd.ShowDialog(this);
         }
 

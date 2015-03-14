@@ -32,31 +32,35 @@ namespace PraiseBase.Presenter.UI.Presenter
 {
     public partial class ProgramSettingsDialog : Form
     {
-        public ProgramSettingsDialog()
+        private readonly Settings _settings;
+
+        public ProgramSettingsDialog(Settings settings)
         {
+            _settings = settings;
+
             InitializeComponent();
         }
 
         private void UpdateLabels()
         {
-            textBox1.Text = Settings.Default.DataDirectory;
+            textBox1.Text = _settings.DataDirectory;
 
-            checkBoxUseMasterFormat.Checked = Settings.Default.ProjectionUseMaster;
-            EnableMasterFormattingGroupBoxes(Settings.Default.ProjectionUseMaster);
+            checkBoxUseMasterFormat.Checked = _settings.ProjectionUseMaster;
+            EnableMasterFormattingGroupBoxes(_settings.ProjectionUseMaster);
 
-            labelMainTextString.Text = getFontString(Settings.Default.ProjectionMasterFont);
-            buttonChooseProjectionForeColor.BackColor = Settings.Default.ProjectionMasterFontColor;
+            labelMainTextString.Text = getFontString(_settings.ProjectionMasterFont);
+            buttonChooseProjectionForeColor.BackColor = _settings.ProjectionMasterFontColor;
 
-            labelTranslationTextString.Text = getFontString(Settings.Default.ProjectionMasterFontTranslation);
-            buttonTranslationColor.BackColor = Settings.Default.ProjectionMasterTranslationColor;
+            labelTranslationTextString.Text = getFontString(_settings.ProjectionMasterFontTranslation);
+            buttonTranslationColor.BackColor = _settings.ProjectionMasterTranslationColor;
 
-            labelCopyrightTextString.Text = getFontString(Settings.Default.ProjectionMasterCopyrightFont);
-            buttonCopyrightColor.BackColor = Settings.Default.ProjectionMasterCopyrightColor;
+            labelCopyrightTextString.Text = getFontString(_settings.ProjectionMasterCopyrightFont);
+            buttonCopyrightColor.BackColor = _settings.ProjectionMasterCopyrightColor;
 
-            labelSourceTextString.Text = getFontString(Settings.Default.ProjectionMasterSourceFont);
-            buttonSourceColor.BackColor = Settings.Default.ProjectionMasterSourceColor;
+            labelSourceTextString.Text = getFontString(_settings.ProjectionMasterSourceFont);
+            buttonSourceColor.BackColor = _settings.ProjectionMasterSourceColor;
 
-            buttonProjectionBackgroundColor.BackColor = Settings.Default.ProjectionBackColor;
+            buttonProjectionBackgroundColor.BackColor = _settings.ProjectionBackColor;
 
             // Outline
             UpdateOutlineLabels();
@@ -74,16 +78,16 @@ namespace PraiseBase.Presenter.UI.Presenter
             UpdateOrientation();
 
             // Additional information
-            comboBoxSourcePosition.SelectedIndex = (int)Settings.Default.ProjectionMasterSourcePosition;
-            comboBoxCopyrightPosition.SelectedIndex = (int)Settings.Default.ProjectionMasterCopyrightPosition;
+            comboBoxSourcePosition.SelectedIndex = (int)_settings.ProjectionMasterSourcePosition;
+            comboBoxCopyrightPosition.SelectedIndex = (int)_settings.ProjectionMasterCopyrightPosition;
 
-            checkBoxShowLoadingScreen.Checked = Settings.Default.ShowLoadingScreen;
+            checkBoxShowLoadingScreen.Checked = _settings.ShowLoadingScreen;
 
-            checkBoxProjectionFontScaling.Checked = Settings.Default.ProjectionFontScaling;
-            checkBoxSmoothShadow.Checked = Settings.Default.ProjectionSmoothShadow;
+            checkBoxProjectionFontScaling.Checked = _settings.ProjectionFontScaling;
+            checkBoxSmoothShadow.Checked = _settings.ProjectionSmoothShadow;
 
             listBoxTags.Items.Clear();
-            var strList = Settings.Default.Tags.Cast<string>().ToList();
+            var strList = _settings.Tags.Cast<string>().ToList();
             strList.Sort();
             foreach (string str in strList)
             {
@@ -91,7 +95,7 @@ namespace PraiseBase.Presenter.UI.Presenter
             }
 
             listBoxLanguages.Items.Clear();
-            strList = Settings.Default.Languages.Cast<string>().ToList();
+            strList = _settings.Languages.Cast<string>().ToList();
             strList.Sort();
             foreach (string str in strList)
             {
@@ -99,7 +103,7 @@ namespace PraiseBase.Presenter.UI.Presenter
             }
 
             listBoxSongParts.Items.Clear();
-            strList = Settings.Default.SongParts.Cast<string>().ToList();
+            strList = _settings.SongParts.Cast<string>().ToList();
             strList.Sort();
             foreach (string str in strList)
             {
@@ -109,46 +113,46 @@ namespace PraiseBase.Presenter.UI.Presenter
 
         private void UpdateOutlineLabels()
         {
-            checkBoxOutlineEnabled.Checked = Settings.Default.ProjectionMasterOutlineEnabled;
-            numericUpDownOutlineSize.Value = Settings.Default.ProjectionMasterOutlineSize;
-            buttonOutlineColor.BackColor = Settings.Default.ProjectionMasterOutlineColor;
-            EnableOutlineFormElements(Settings.Default.ProjectionMasterOutlineEnabled);
+            checkBoxOutlineEnabled.Checked = _settings.ProjectionMasterOutlineEnabled;
+            numericUpDownOutlineSize.Value = _settings.ProjectionMasterOutlineSize;
+            buttonOutlineColor.BackColor = _settings.ProjectionMasterOutlineColor;
+            EnableOutlineFormElements(_settings.ProjectionMasterOutlineEnabled);
         }
 
         private void UpdateShadowLabels()
         {
-            checkBoxShadowEnabled.Checked = Settings.Default.ProjectionMasterShadowEnabled;
-            numericUpDownShadowDistance.Value = Settings.Default.ProjectionMasterShadowDistance;
-            numericUpDownShadowSize.Value = Settings.Default.ProjectionMasterShadowSize;
-            numericUpDownShadowDirection.Value = Settings.Default.ProjectionMasterShadowDirection;
-            buttonShadowColor.BackColor = Settings.Default.ProjectionMasterShadowColor;
-            EnableShadowFormElements(Settings.Default.ProjectionMasterShadowEnabled);
+            checkBoxShadowEnabled.Checked = _settings.ProjectionMasterShadowEnabled;
+            numericUpDownShadowDistance.Value = _settings.ProjectionMasterShadowDistance;
+            numericUpDownShadowSize.Value = _settings.ProjectionMasterShadowSize;
+            numericUpDownShadowDirection.Value = _settings.ProjectionMasterShadowDirection;
+            buttonShadowColor.BackColor = _settings.ProjectionMasterShadowColor;
+            EnableShadowFormElements(_settings.ProjectionMasterShadowEnabled);
         }
 
         private void UpdatePaddingBorders()
         {
-            numericUpDownHorizontalTextPadding.Value = Settings.Default.ProjectionMasterHorizontalTextPadding;
-            numericUpDownVerticalTextPadding.Value = Settings.Default.ProjectionMasterVerticalTextPadding;
-            numericUpDownHorizontalHeaderPadding.Value = Settings.Default.ProjectionMasterHorizontalHeaderPadding;
-            numericUpDownVerticalHeaderPadding.Value = Settings.Default.ProjectionMasterVerticalHeaderPadding;
-            numericUpDownHorizontalFooterPadding.Value = Settings.Default.ProjectionMasterHorizontalFooterPadding;
-            numericUpDownVerticalFooterPadding.Value = Settings.Default.ProjectionMasterVerticalFooterPadding;
+            numericUpDownHorizontalTextPadding.Value = _settings.ProjectionMasterHorizontalTextPadding;
+            numericUpDownVerticalTextPadding.Value = _settings.ProjectionMasterVerticalTextPadding;
+            numericUpDownHorizontalHeaderPadding.Value = _settings.ProjectionMasterHorizontalHeaderPadding;
+            numericUpDownVerticalHeaderPadding.Value = _settings.ProjectionMasterVerticalHeaderPadding;
+            numericUpDownHorizontalFooterPadding.Value = _settings.ProjectionMasterHorizontalFooterPadding;
+            numericUpDownVerticalFooterPadding.Value = _settings.ProjectionMasterVerticalFooterPadding;
         }
 
         private void UpdateLineSpacing()
         {
-            numericUpDownLineSpacing.Value = Settings.Default.ProjectionMasterLineSpacing;
-            numericUpDownTranslationLineSpacing.Value = Settings.Default.ProjectionMasterTranslationLineSpacing;
-            numericUpDownHorizontalTranslationTextOffset.Value = Settings.Default.ProjectionMasterHorizontalTranslationTextOffset;
+            numericUpDownLineSpacing.Value = _settings.ProjectionMasterLineSpacing;
+            numericUpDownTranslationLineSpacing.Value = _settings.ProjectionMasterTranslationLineSpacing;
+            numericUpDownHorizontalTranslationTextOffset.Value = _settings.ProjectionMasterHorizontalTranslationTextOffset;
         }
 
         private void UpdateOrientation()
         {
-            comboBoxHorizontalTextOrientation.SelectedIndex = getIndexByHorizontalOrientation(Settings.Default.ProjectionMasterHorizontalTextOrientation);
-            comboBoxVerticalTextOrientation.SelectedIndex = getIndexByVerticalOrientation(Settings.Default.ProjectionMasterVerticalTextOrientation);
-            comboBoxHeaderOrientation.SelectedIndex = getIndexByHorizontalOrientation(Settings.Default.ProjectionMasterHorizontalHeaderOrientation);
-            comboBoxFooterOrientation.SelectedIndex = getIndexByHorizontalOrientation(Settings.Default.ProjectionMasterHorizontalFooterOrientation);
-            comboBoxTranslationPosition.SelectedIndex = Settings.Default.ProjectionMasteTranslationPosition == TranslationPosition.Block ? 1 : 0;
+            comboBoxHorizontalTextOrientation.SelectedIndex = getIndexByHorizontalOrientation(_settings.ProjectionMasterHorizontalTextOrientation);
+            comboBoxVerticalTextOrientation.SelectedIndex = getIndexByVerticalOrientation(_settings.ProjectionMasterVerticalTextOrientation);
+            comboBoxHeaderOrientation.SelectedIndex = getIndexByHorizontalOrientation(_settings.ProjectionMasterHorizontalHeaderOrientation);
+            comboBoxFooterOrientation.SelectedIndex = getIndexByHorizontalOrientation(_settings.ProjectionMasterHorizontalFooterOrientation);
+            comboBoxTranslationPosition.SelectedIndex = _settings.ProjectionMasteTranslationPosition == TranslationPosition.Block ? 1 : 0;
         }
 
         private String getFontString(Font font)
@@ -158,21 +162,21 @@ namespace PraiseBase.Presenter.UI.Presenter
 
         private void cancelButton_Click(object sender, EventArgs e)
         {
-            Settings.Default.Reload();
+            _settings.Reload();
             DialogResult = DialogResult.Cancel;
             Close();
         }
 
         private void exitButton_Click(object sender, EventArgs e)
         {
-            Settings.Default.Save();
+            _settings.Save();
             DialogResult = DialogResult.OK;
             Close();
         }
 
         private void settingsWindow_Load(object sender, EventArgs e)
         {
-            tabControl1.SelectedIndex = Settings.Default.SettingsLastTabIndex;
+            tabControl1.SelectedIndex = _settings.SettingsLastTabIndex;
             UpdateLabels();
         }
 
@@ -183,12 +187,12 @@ namespace PraiseBase.Presenter.UI.Presenter
                 ShowNewFolderButton = true
             };
 
-            if (Directory.Exists(Settings.Default.DataDirectory))
-                dlg.SelectedPath = Settings.Default.DataDirectory;
+            if (Directory.Exists(_settings.DataDirectory))
+                dlg.SelectedPath = _settings.DataDirectory;
 
             if (dlg.ShowDialog(this) == DialogResult.OK)
             {
-                textBox1.Text = Settings.Default.DataDirectory = dlg.SelectedPath;
+                textBox1.Text = _settings.DataDirectory = dlg.SelectedPath;
             }
         }
 
@@ -196,11 +200,11 @@ namespace PraiseBase.Presenter.UI.Presenter
         {
             FontDialog fontDlg = new FontDialog
             {
-                Font = Settings.Default.ProjectionMasterFont
+                Font = _settings.ProjectionMasterFont
             };
             if (fontDlg.ShowDialog() == DialogResult.OK)
             {
-                Settings.Default.ProjectionMasterFont = fontDlg.Font;
+                _settings.ProjectionMasterFont = fontDlg.Font;
                 UpdateLabels();
             }
         }
@@ -209,7 +213,7 @@ namespace PraiseBase.Presenter.UI.Presenter
         {
             if (MessageBox.Show(StringResources.ReallyResetFactoryDefaults, StringResources.Reset, MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
             {
-                Settings.Default.Reset();
+                _settings.Reset();
                 UpdateLabels();
             }
         }
@@ -218,18 +222,18 @@ namespace PraiseBase.Presenter.UI.Presenter
         {
             ColorDialog colDlg = new ColorDialog
             {
-                Color = Settings.Default.ProjectionMasterFontColor
+                Color = _settings.ProjectionMasterFontColor
             };
             if (colDlg.ShowDialog() == DialogResult.OK)
             {
-                Settings.Default.ProjectionMasterFontColor = colDlg.Color;
+                _settings.ProjectionMasterFontColor = colDlg.Color;
                 UpdateLabels();
             }
         }
 
         private void checkBoxFontScaling_CheckedChanged(object sender, EventArgs e)
         {
-            Settings.Default.ProjectionFontScaling = checkBoxProjectionFontScaling.Checked;
+            _settings.ProjectionFontScaling = checkBoxProjectionFontScaling.Checked;
         }
 
         private void buttonAddTag_Click(object sender, EventArgs e)
@@ -237,9 +241,9 @@ namespace PraiseBase.Presenter.UI.Presenter
             string str = textBoxNewTag.Text.Trim();
             if (str != "")
             {
-                if (!Settings.Default.Tags.Contains(str))
+                if (!_settings.Tags.Contains(str))
                 {
-                    Settings.Default.Tags.Add(str);
+                    _settings.Tags.Add(str);
                     textBoxNewTag.Text = "";
                     UpdateLabels();
                 }
@@ -261,7 +265,7 @@ namespace PraiseBase.Presenter.UI.Presenter
             {
                 if (listBoxTags.GetSelected(i))
                 {
-                    Settings.Default.Tags.Remove(listBoxTags.Items[i].ToString());
+                    _settings.Tags.Remove(listBoxTags.Items[i].ToString());
                 }
             }
             UpdateLabels();
@@ -272,9 +276,9 @@ namespace PraiseBase.Presenter.UI.Presenter
             string str = textBoxNewLang.Text.Trim();
             if (str != "")
             {
-                if (!Settings.Default.Languages.Contains(str))
+                if (!_settings.Languages.Contains(str))
                 {
-                    Settings.Default.Languages.Add(str);
+                    _settings.Languages.Add(str);
                     textBoxNewLang.Text = "";
                     UpdateLabels();
                 }
@@ -296,7 +300,7 @@ namespace PraiseBase.Presenter.UI.Presenter
             {
                 if (listBoxLanguages.GetSelected(i))
                 {
-                    Settings.Default.Languages.Remove(listBoxLanguages.Items[i].ToString());
+                    _settings.Languages.Remove(listBoxLanguages.Items[i].ToString());
                 }
             }
             UpdateLabels();
@@ -307,9 +311,9 @@ namespace PraiseBase.Presenter.UI.Presenter
             string str = textBoxNewSongPart.Text.Trim();
             if (str != "")
             {
-                if (!Settings.Default.SongParts.Contains(str))
+                if (!_settings.SongParts.Contains(str))
                 {
-                    Settings.Default.SongParts.Add(str);
+                    _settings.SongParts.Add(str);
                     textBoxNewSongPart.Text = "";
                     UpdateLabels();
                 }
@@ -331,7 +335,7 @@ namespace PraiseBase.Presenter.UI.Presenter
             {
                 if (listBoxSongParts.GetSelected(i))
                 {
-                    Settings.Default.SongParts.Remove(listBoxSongParts.Items[i].ToString());
+                    _settings.SongParts.Remove(listBoxSongParts.Items[i].ToString());
                 }
             }
             UpdateLabels();
@@ -341,11 +345,11 @@ namespace PraiseBase.Presenter.UI.Presenter
         {
             ColorDialog colDlg = new ColorDialog
             {
-                Color = Settings.Default.ProjectionMasterTranslationColor
+                Color = _settings.ProjectionMasterTranslationColor
             };
             if (colDlg.ShowDialog() == DialogResult.OK)
             {
-                Settings.Default.ProjectionMasterTranslationColor = colDlg.Color;
+                _settings.ProjectionMasterTranslationColor = colDlg.Color;
                 UpdateLabels();
             }
         }
@@ -354,11 +358,11 @@ namespace PraiseBase.Presenter.UI.Presenter
         {
             FontDialog fontDlg = new FontDialog
             {
-                Font = Settings.Default.ProjectionMasterFontTranslation
+                Font = _settings.ProjectionMasterFontTranslation
             };
             if (fontDlg.ShowDialog() == DialogResult.OK)
             {
-                Settings.Default.ProjectionMasterFontTranslation = fontDlg.Font;
+                _settings.ProjectionMasterFontTranslation = fontDlg.Font;
                 UpdateLabels();
             }
         }
@@ -367,11 +371,11 @@ namespace PraiseBase.Presenter.UI.Presenter
         {
             FontDialog fontDlg = new FontDialog
             {
-                Font = Settings.Default.ProjectionMasterCopyrightFont
+                Font = _settings.ProjectionMasterCopyrightFont
             };
             if (fontDlg.ShowDialog() == DialogResult.OK)
             {
-                Settings.Default.ProjectionMasterCopyrightFont = fontDlg.Font;
+                _settings.ProjectionMasterCopyrightFont = fontDlg.Font;
                 UpdateLabels();
             }
         }
@@ -380,11 +384,11 @@ namespace PraiseBase.Presenter.UI.Presenter
         {
             ColorDialog colDlg = new ColorDialog
             {
-                Color = Settings.Default.ProjectionMasterCopyrightColor
+                Color = _settings.ProjectionMasterCopyrightColor
             };
             if (colDlg.ShowDialog() == DialogResult.OK)
             {
-                Settings.Default.ProjectionMasterCopyrightColor = colDlg.Color;
+                _settings.ProjectionMasterCopyrightColor = colDlg.Color;
                 UpdateLabels();
             }
         }
@@ -393,11 +397,11 @@ namespace PraiseBase.Presenter.UI.Presenter
         {
             FontDialog fontDlg = new FontDialog
             {
-                Font = Settings.Default.ProjectionMasterSourceFont
+                Font = _settings.ProjectionMasterSourceFont
             };
             if (fontDlg.ShowDialog() == DialogResult.OK)
             {
-                Settings.Default.ProjectionMasterSourceFont = fontDlg.Font;
+                _settings.ProjectionMasterSourceFont = fontDlg.Font;
                 UpdateLabels();
             }
         }
@@ -406,24 +410,24 @@ namespace PraiseBase.Presenter.UI.Presenter
         {
             ColorDialog colDlg = new ColorDialog
             {
-                Color = Settings.Default.ProjectionMasterSourceColor
+                Color = _settings.ProjectionMasterSourceColor
             };
             if (colDlg.ShowDialog() == DialogResult.OK)
             {
-                Settings.Default.ProjectionMasterSourceColor = colDlg.Color;
+                _settings.ProjectionMasterSourceColor = colDlg.Color;
                 UpdateLabels();
             }
         }
 
         private void tabControl1_SelectedIndexChanged(object sender, EventArgs e)
         {
-            Settings.Default.SettingsLastTabIndex = tabControl1.SelectedIndex;
+            _settings.SettingsLastTabIndex = tabControl1.SelectedIndex;
         }
 
         private void checkBoxUseMasterFormat_CheckedChanged(object sender, EventArgs e)
         {
             EnableMasterFormattingGroupBoxes(checkBoxUseMasterFormat.Checked);
-            Settings.Default.ProjectionUseMaster = checkBoxUseMasterFormat.Checked;
+            _settings.ProjectionUseMaster = checkBoxUseMasterFormat.Checked;
         }
 
         private void EnableMasterFormattingGroupBoxes(bool enable)
@@ -439,23 +443,23 @@ namespace PraiseBase.Presenter.UI.Presenter
 
         private void checkBoxShowLoadingScreen_CheckedChanged(object sender, EventArgs e)
         {
-            Settings.Default.ShowLoadingScreen = checkBoxShowLoadingScreen.Checked;
+            _settings.ShowLoadingScreen = checkBoxShowLoadingScreen.Checked;
         }
 
         private void numericUpDownTranslationLineSpacing_ValueChanged(object sender, EventArgs e)
         {
-            Settings.Default.ProjectionMasterTranslationLineSpacing = (int)numericUpDownTranslationLineSpacing.Value;
+            _settings.ProjectionMasterTranslationLineSpacing = (int)numericUpDownTranslationLineSpacing.Value;
         }
 
         private void numericUpDownLineSpacing_ValueChanged(object sender, EventArgs e)
         {
-            Settings.Default.ProjectionMasterLineSpacing = (int)numericUpDownLineSpacing.Value;
+            _settings.ProjectionMasterLineSpacing = (int)numericUpDownLineSpacing.Value;
         }
         
         private void checkBoxOutlineEnabled_CheckedChanged(object sender, EventArgs e)
         {
-            Settings.Default.ProjectionMasterOutlineEnabled = ((CheckBox)sender).Checked;
-            EnableOutlineFormElements(Settings.Default.ProjectionMasterOutlineEnabled);
+            _settings.ProjectionMasterOutlineEnabled = ((CheckBox)sender).Checked;
+            EnableOutlineFormElements(_settings.ProjectionMasterOutlineEnabled);
         }
 
         private void EnableOutlineFormElements(bool enable)
@@ -470,24 +474,24 @@ namespace PraiseBase.Presenter.UI.Presenter
         {
             ColorDialog colDlg = new ColorDialog
             {
-                Color = Settings.Default.ProjectionMasterOutlineColor
+                Color = _settings.ProjectionMasterOutlineColor
             };
             if (colDlg.ShowDialog() == DialogResult.OK)
             {
-                Settings.Default.ProjectionMasterOutlineColor = colDlg.Color;
+                _settings.ProjectionMasterOutlineColor = colDlg.Color;
                 UpdateLabels();
             }
         }
 
         private void numericUpDownOutlineSize_ValueChanged(object sender, EventArgs e)
         {
-            Settings.Default.ProjectionMasterOutlineSize = (int)((NumericUpDown)sender).Value;
+            _settings.ProjectionMasterOutlineSize = (int)((NumericUpDown)sender).Value;
         }
         
         private void checkBoxShadowEnabled_CheckedChanged(object sender, EventArgs e)
         {
-            Settings.Default.ProjectionMasterShadowEnabled = ((CheckBox)sender).Checked;
-            EnableShadowFormElements(Settings.Default.ProjectionMasterShadowEnabled);
+            _settings.ProjectionMasterShadowEnabled = ((CheckBox)sender).Checked;
+            EnableShadowFormElements(_settings.ProjectionMasterShadowEnabled);
         }
 
         private void EnableShadowFormElements(bool enable)
@@ -506,95 +510,95 @@ namespace PraiseBase.Presenter.UI.Presenter
         {
             ColorDialog colDlg = new ColorDialog
             {
-                Color = Settings.Default.ProjectionMasterShadowColor
+                Color = _settings.ProjectionMasterShadowColor
             };
             if (colDlg.ShowDialog() == DialogResult.OK)
             {
-                Settings.Default.ProjectionMasterShadowColor = colDlg.Color;
+                _settings.ProjectionMasterShadowColor = colDlg.Color;
                 UpdateLabels();
             }
         }
 
         private void numericUpDownShadowDistance_ValueChanged(object sender, EventArgs e)
         {
-            Settings.Default.ProjectionMasterShadowDistance = (int)((NumericUpDown)sender).Value;
+            _settings.ProjectionMasterShadowDistance = (int)((NumericUpDown)sender).Value;
         }
 
         private void numericUpDownShadowSize_ValueChanged(object sender, EventArgs e)
         {
-            Settings.Default.ProjectionMasterShadowSize = (int)((NumericUpDown)sender).Value;
+            _settings.ProjectionMasterShadowSize = (int)((NumericUpDown)sender).Value;
         }
 
         private void numericUpDownShadowDirection_ValueChanged(object sender, EventArgs e)
         {
-            Settings.Default.ProjectionMasterShadowDirection = (int)((NumericUpDown)sender).Value;
+            _settings.ProjectionMasterShadowDirection = (int)((NumericUpDown)sender).Value;
         }
 
         private void buttonProjectionBackgroundColor_Click(object sender, EventArgs e)
         {
             ColorDialog colDlg = new ColorDialog
             {
-                Color = Settings.Default.ProjectionBackColor
+                Color = _settings.ProjectionBackColor
             };
             if (colDlg.ShowDialog() == DialogResult.OK)
             {
-                Settings.Default.ProjectionBackColor = colDlg.Color;
+                _settings.ProjectionBackColor = colDlg.Color;
                 UpdateLabels();
             }
         }
 
         private void numericUpDownHorizontalTextPadding_ValueChanged(object sender, EventArgs e)
         {
-            Settings.Default.ProjectionMasterHorizontalTextPadding = (int)((NumericUpDown)sender).Value;
+            _settings.ProjectionMasterHorizontalTextPadding = (int)((NumericUpDown)sender).Value;
         }
 
         private void numericUpDownVerticalTextPadding_ValueChanged(object sender, EventArgs e)
         {
-            Settings.Default.ProjectionMasterVerticalTextPadding = (int)((NumericUpDown)sender).Value;
+            _settings.ProjectionMasterVerticalTextPadding = (int)((NumericUpDown)sender).Value;
         }
 
         private void numericUpDownHorizontalHeaderPadding_ValueChanged(object sender, EventArgs e)
         {
-            Settings.Default.ProjectionMasterHorizontalHeaderPadding = (int)((NumericUpDown)sender).Value;
+            _settings.ProjectionMasterHorizontalHeaderPadding = (int)((NumericUpDown)sender).Value;
         }
 
         private void numericUpDownVerticalHeaderPadding_ValueChanged(object sender, EventArgs e)
         {
-            Settings.Default.ProjectionMasterVerticalHeaderPadding = (int)((NumericUpDown)sender).Value;
+            _settings.ProjectionMasterVerticalHeaderPadding = (int)((NumericUpDown)sender).Value;
         }
 
         private void numericUpDownHorizontalFooterPadding_ValueChanged(object sender, EventArgs e)
         {
-            Settings.Default.ProjectionMasterHorizontalFooterPadding = (int)((NumericUpDown)sender).Value;
+            _settings.ProjectionMasterHorizontalFooterPadding = (int)((NumericUpDown)sender).Value;
         }
 
         private void numericUpDownVerticalFooterPadding_ValueChanged(object sender, EventArgs e)
         {
-            Settings.Default.ProjectionMasterVerticalFooterPadding = (int)((NumericUpDown)sender).Value;
+            _settings.ProjectionMasterVerticalFooterPadding = (int)((NumericUpDown)sender).Value;
         }
 
         private void comboBoxTextOrientation_SelectedIndexChanged(object sender, EventArgs e)
         {
             int index = ((ComboBox)sender).SelectedIndex;
-            Settings.Default.ProjectionMasterHorizontalTextOrientation = getHorizontalOrientationByIndex(index);
+            _settings.ProjectionMasterHorizontalTextOrientation = getHorizontalOrientationByIndex(index);
         }
 
         private void comboBoxVerticalTextOrientation_SelectedIndexChanged(object sender, EventArgs e)
         {
             int index = ((ComboBox)sender).SelectedIndex;
-            Settings.Default.ProjectionMasterVerticalTextOrientation = getVerticalTextOrientationByIndex(index);
+            _settings.ProjectionMasterVerticalTextOrientation = getVerticalTextOrientationByIndex(index);
         }
         
         private void comboBoxHeaderOrientation_SelectedIndexChanged(object sender, EventArgs e)
         {
             int index = ((ComboBox)sender).SelectedIndex;
-            Settings.Default.ProjectionMasterHorizontalHeaderOrientation = getHorizontalOrientationByIndex(index);
+            _settings.ProjectionMasterHorizontalHeaderOrientation = getHorizontalOrientationByIndex(index);
         }
 
         private void comboBoxFooterOrientation_SelectedIndexChanged(object sender, EventArgs e)
         {
             int index = ((ComboBox)sender).SelectedIndex;
-            Settings.Default.ProjectionMasterHorizontalFooterOrientation = getHorizontalOrientationByIndex(index);
+            _settings.ProjectionMasterHorizontalFooterOrientation = getHorizontalOrientationByIndex(index);
         }
 
         private int getIndexByHorizontalOrientation(HorizontalOrientation horizontal)
@@ -661,27 +665,27 @@ namespace PraiseBase.Presenter.UI.Presenter
 
         private void comboBoxSourcePosition_SelectedIndexChanged(object sender, EventArgs e)
         {
-            Settings.Default.ProjectionMasterSourcePosition = (AdditionalInformationPosition)comboBoxSourcePosition.SelectedIndex;
+            _settings.ProjectionMasterSourcePosition = (AdditionalInformationPosition)comboBoxSourcePosition.SelectedIndex;
         }
 
         private void comboBoxCopyrightPosition_SelectedIndexChanged(object sender, EventArgs e)
         {
-            Settings.Default.ProjectionMasterCopyrightPosition = (AdditionalInformationPosition)comboBoxCopyrightPosition.SelectedIndex;
+            _settings.ProjectionMasterCopyrightPosition = (AdditionalInformationPosition)comboBoxCopyrightPosition.SelectedIndex;
         }
 
         private void comboBoxTranslationPosition_SelectedIndexChanged(object sender, EventArgs e)
         {
-            Settings.Default.ProjectionMasteTranslationPosition = comboBoxTranslationPosition.SelectedIndex == 1 ? TranslationPosition.Block : TranslationPosition.Inline;
+            _settings.ProjectionMasteTranslationPosition = comboBoxTranslationPosition.SelectedIndex == 1 ? TranslationPosition.Block : TranslationPosition.Inline;
         }
 
         private void checkBoxSmoothShadow_CheckedChanged(object sender, EventArgs e)
         {
-            Settings.Default.ProjectionSmoothShadow = checkBoxSmoothShadow.Checked;
+            _settings.ProjectionSmoothShadow = checkBoxSmoothShadow.Checked;
         }
 
         private void numericUpDownHorizontalTranslationTextOffset_ValueChanged(object sender, EventArgs e)
         {
-            Settings.Default.ProjectionMasterHorizontalTranslationTextOffset = (int)((NumericUpDown)sender).Value;
+            _settings.ProjectionMasterHorizontalTranslationTextOffset = (int)((NumericUpDown)sender).Value;
         }
 
     }

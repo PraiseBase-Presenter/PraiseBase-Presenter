@@ -375,12 +375,17 @@ namespace PraiseBase.Presenter.UI.Presenter
 
         private void optionenToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            new ProgramSettingsDialog().ShowDialog(this);
+            OpenSettingsDialog();
         }
 
         private void toolStripButton4_Click(object sender, EventArgs e)
         {
-            new ProgramSettingsDialog().ShowDialog(this);
+            OpenSettingsDialog();
+        }
+
+        private void OpenSettingsDialog()
+        {
+            new ProgramSettingsDialog(Settings.Default).ShowDialog(this);
         }
 
         private void liederlisteNeuLadenToolStripMenuItem_Click(object sender, EventArgs e)
