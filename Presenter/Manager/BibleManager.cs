@@ -27,7 +27,7 @@ using System.Text.RegularExpressions;
 using PraiseBase.Presenter.Model.Bible;
 using PraiseBase.Presenter.Persistence.ZefaniaXML;
 
-namespace PraiseBase.Presenter
+namespace PraiseBase.Presenter.Manager
 {
     /// <summary>
     /// Holds a list of all songs and provides
