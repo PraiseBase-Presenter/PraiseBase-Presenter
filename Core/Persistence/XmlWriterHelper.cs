@@ -27,32 +27,29 @@ namespace PraiseBase.Presenter.Persistence
 {
     internal class XmlWriterHelper
     {
+        public XmlWriterHelper(string rootNodeName, string fileFormatVersion)
+        {
+            Doc = new XmlDocument();
+            var xmlDeclaration = Doc.CreateXmlDeclaration("1.0", "UTF-8", null);
+            Doc.AppendChild(xmlDeclaration);
+            Doc.AppendChild(Doc.CreateElement(rootNodeName));
+            var xmlRoot = Doc.DocumentElement;
+            xmlRoot.SetAttribute("version", fileFormatVersion);
+        }
+
         public XmlDocument Doc { get; protected set; }
 
         public XmlElement Root
         {
-            get
-            {
-                return Doc.DocumentElement;
-            }
-        }
-
-        public XmlWriterHelper(string rootNodeName, string fileFormatVersion)
-        {
-            Doc = new XmlDocument();
-            XmlDeclaration xmlDeclaration = Doc.CreateXmlDeclaration("1.0", "UTF-8", null);
-            Doc.AppendChild(xmlDeclaration);
-            Doc.AppendChild(Doc.CreateElement(rootNodeName));
-            XmlElement xmlRoot = Doc.DocumentElement;
-            xmlRoot.SetAttribute("version", fileFormatVersion);
+            get { return Doc.DocumentElement; }
         }
 
         public void Write(string filename)
         {
-            XmlWriterSettings wrtStn = new XmlWriterSettings();
+            var wrtStn = new XmlWriterSettings();
             wrtStn.Encoding = Encoding.UTF8;
             wrtStn.Indent = true;
-            XmlWriter wrt = XmlTextWriter.Create(filename, wrtStn);
+            var wrt = XmlWriter.Create(filename, wrtStn);
             Doc.WriteTo(wrt);
             wrt.Flush();
             wrt.Close();

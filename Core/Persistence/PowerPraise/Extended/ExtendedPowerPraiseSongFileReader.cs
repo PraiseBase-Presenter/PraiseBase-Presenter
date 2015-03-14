@@ -31,14 +31,14 @@ namespace PraiseBase.Presenter.Persistence.PowerPraise.Extended
     {
         public override ExtendedPowerPraiseSong Load(string filename)
         {
-            ExtendedPowerPraiseSong sng = new ExtendedPowerPraiseSong();
+            var sng = new ExtendedPowerPraiseSong();
             Parse(filename, sng);
             return sng;
         }
 
         protected override void ParseAdditionalFields(XmlElement xmlRoot, PowerPraiseSong sng)
         {
-            ExtendedPowerPraiseSong song = (ExtendedPowerPraiseSong)sng;
+            var song = (ExtendedPowerPraiseSong) sng;
 
             // Comment
             if (xmlRoot["general"]["comment"] != null)
@@ -57,9 +57,10 @@ namespace PraiseBase.Presenter.Persistence.PowerPraise.Extended
                 {
                     if (elem.Name == "issue")
                     {
-                        foreach (SongQualityAssuranceIndicator i in Enum.GetValues(typeof(SongQualityAssuranceIndicator)))
+                        foreach (
+                            SongQualityAssuranceIndicator i in Enum.GetValues(typeof (SongQualityAssuranceIndicator)))
                         {
-                            if (elem.InnerText == Enum.GetName(typeof(SongQualityAssuranceIndicator), i))
+                            if (elem.InnerText == Enum.GetName(typeof (SongQualityAssuranceIndicator), i))
                             {
                                 song.QualityIssues.Add(i);
                             }
@@ -99,11 +100,11 @@ namespace PraiseBase.Presenter.Persistence.PowerPraise.Extended
 
         private List<SongAuthor> parseAuthors(String value)
         {
-            List<SongAuthor> list = new List<SongAuthor>();
-            int i = 0;
-            foreach (String s in value.Split(new char[] { ';' }, StringSplitOptions.RemoveEmptyEntries))
+            var list = new List<SongAuthor>();
+            var i = 0;
+            foreach (var s in value.Split(new[] {';'}, StringSplitOptions.RemoveEmptyEntries))
             {
-                SongAuthor author = new SongAuthor();
+                var author = new SongAuthor();
                 author.Name = s.Trim();
                 author.Type = (i++ == 0) ? SongAuthorType.Words : SongAuthorType.Music;
                 list.Add(author);

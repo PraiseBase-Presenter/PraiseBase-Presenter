@@ -21,27 +21,20 @@
  */
 
 using System;
-using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
 using System.Reflection;
 using System.Threading;
 using System.Windows.Forms;
+using PraiseBase.Presenter.Forms;
+using PraiseBase.Presenter.Manager;
+using PraiseBase.Presenter.Presenter;
 using PraiseBase.Presenter.Properties;
-using PraiseBase.Presenter.UI.Presenter;
 
 namespace PraiseBase.Presenter
 {
     internal static class Program
     {
-        static public List<CultureInfo> AvailableLanguages = new List<CultureInfo>();
-
-        static Program()
-        {
-            AvailableLanguages.Add(CultureInfo.CreateSpecificCulture("de-CH"));
-            AvailableLanguages.Add(CultureInfo.CreateSpecificCulture("en-US"));
-        }
-        
         /// <summary>
         /// The main entry point for the application.
         /// </summary>
@@ -89,17 +82,33 @@ namespace PraiseBase.Presenter
                 Settings.Default.Save();
             }
 
+            string dataDir = Settings.Default.DataDirectory + Path.DirectorySeparatorChar;
+
+            string songDir = dataDir + Settings.Default.SongDir;
+            SongManager songManager = new SongManager(songDir);
+
+            string imageDirPath = dataDir + Settings.Default.ImageDir;
+            string thumbDirPath = dataDir + Settings.Default.ThumbDir;
+            ImageManager imgManager = new ImageManager(imageDirPath, thumbDirPath)
+            {
+                DefaultThumbSize = Settings.Default.ThumbSize,
+                DefaultEmptyColor = Settings.Default.ProjectionBackColor
+            };
+
+            string bibleDir = dataDir + "Bibles";
+            BibleManager bibleManager = new BibleManager(bibleDir);
+
             if (Settings.Default.ShowLoadingScreen)
             {
-                LoadingScreen ldg = new LoadingScreen();
+                LoadingScreen ldg = new LoadingScreen(songManager, imgManager);
                 ldg.SetLabel("PraiseBase Presenter wird gestartet...");
                 ldg.Show();
 
                 ldg.SetLabel("Prüfe Miniaturbilder...");
-                ImageManager.Instance.CheckThumbs();
+                imgManager.CheckThumbs();
 
                 ldg.SetLabel("Lade Liederdatenbank...");
-                SongManager.Instance.Reload();
+                songManager.Reload();
 
                 GC.Collect();
                 ldg.Close();
@@ -107,8 +116,8 @@ namespace PraiseBase.Presenter
             }
             else
             {
-                ImageManager.Instance.CheckThumbs();
-                SongManager.Instance.Reload();
+                imgManager.CheckThumbs();
+                songManager.Reload();
                 GC.Collect();
             }
 
@@ -121,7 +130,7 @@ namespace PraiseBase.Presenter
                 setlistFile = args[0];
             }
 
-            MainWindow mw = new MainWindow(setlistFile);
+            MainWindow mw = new MainWindow(songManager, imgManager, bibleManager, setlistFile);
             Application.Run(mw);
             GC.KeepAlive(mutex);
         }

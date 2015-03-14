@@ -1,8 +1,7 @@
-﻿
-namespace PraiseBase.Presenter.Manager
+﻿namespace PraiseBase.Presenter.Manager
 {
     /// <summary>
-    /// Search options
+    ///     Search options
     /// </summary>
     public enum SongSearchMode
     {

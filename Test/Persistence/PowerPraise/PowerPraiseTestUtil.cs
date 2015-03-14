@@ -130,7 +130,7 @@ namespace PraiseBase.Presenter.Persistence.PowerPraise
             song.TextOutlineEnabled = false;
             song.TextShadowEnabled = true;
 
-            song.TextBorders = new Model.SongTextBorders(50, 40, 60, 70, 30, 20, 40);
+            song.TextBorders = new SongTextBorders(50, 40, 60, 70, 30, 20, 40);
 
             return song;
         }

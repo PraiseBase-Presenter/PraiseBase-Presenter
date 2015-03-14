@@ -27,16 +27,6 @@ namespace PraiseBase.Presenter.Model
 {
     public class TextFormatting : ICloneable
     {
-        public Font Font { get; set; }
-
-        public Color Color { get; set; }
-
-        public TextOutline Outline { get; set; }
-
-        public TextShadow Shadow { get; set; }
-
-        public int LineSpacing { get; set; }
-
         public TextFormatting(Font font, Color color, TextOutline outline, TextShadow shadow, int lineSpacing)
         {
             Font = font;
@@ -46,9 +36,21 @@ namespace PraiseBase.Presenter.Model
             LineSpacing = lineSpacing;
         }
 
+        public Font Font { get; set; }
+        public Color Color { get; set; }
+        public TextOutline Outline { get; set; }
+        public TextShadow Shadow { get; set; }
+        public int LineSpacing { get; set; }
+
+        public object Clone()
+        {
+            return new TextFormatting(Font, Color, (TextOutline) Outline.Clone(), (TextShadow) Shadow.Clone(),
+                LineSpacing);
+        }
+
         /// <summary>
-        /// Returns a hashcode of the text formatting object, used for example in the
-        /// editor to check if the file was changed
+        ///     Returns a hashcode of the text formatting object, used for example in the
+        ///     editor to check if the file was changed
         /// </summary>
         /// <returns></returns>
         public override int GetHashCode()
@@ -66,20 +68,16 @@ namespace PraiseBase.Presenter.Model
 
         protected bool Equals(TextFormatting other)
         {
-            return Equals(Font, other.Font) && Color.Equals(other.Color) && Equals(Outline, other.Outline) && Equals(Shadow, other.Shadow) && LineSpacing == other.LineSpacing;
+            return Equals(Font, other.Font) && Color.Equals(other.Color) && Equals(Outline, other.Outline) &&
+                   Equals(Shadow, other.Shadow) && LineSpacing == other.LineSpacing;
         }
 
         public override bool Equals(object obj)
         {
             if (ReferenceEquals(null, obj)) return false;
             if (ReferenceEquals(this, obj)) return true;
-            if (obj.GetType() != this.GetType()) return false;
+            if (obj.GetType() != GetType()) return false;
             return Equals((TextFormatting) obj);
-        }
-
-        public object Clone()
-        {
-            return new TextFormatting(Font, Color, (TextOutline)Outline.Clone(), (TextShadow)Shadow.Clone(), LineSpacing);
         }
     }
 }

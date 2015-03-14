@@ -33,7 +33,7 @@ namespace PraiseBase.Presenter.Util
     public static class StringUtils
     {
         /// <summary>
-        /// Gibt einen MD5 Hash als String zurück
+        ///     Gibt einen MD5 Hash als String zurück
         /// </summary>
         /// <param name="TextToHash">string der Gehasht werden soll.</param>
         /// <returns>Hash als string.</returns>
@@ -48,8 +48,8 @@ namespace PraiseBase.Presenter.Util
             //MD5 Hash aus dem String berechnen. Dazu muss der string in ein Byte[]
             //zerlegt werden. Danach muss das Resultat wieder zurück in ein string.
             MD5 md5 = new MD5CryptoServiceProvider();
-            byte[] textToHash = Encoding.Default.GetBytes(TextToHash);
-            byte[] result = md5.ComputeHash(textToHash);
+            var textToHash = Encoding.Default.GetBytes(TextToHash);
+            var result = md5.ComputeHash(textToHash);
 
             return BitConverter.ToString(result);
         }
@@ -62,19 +62,19 @@ namespace PraiseBase.Presenter.Util
             System.Security.Cryptography.MD5CryptoServiceProvider md5 = new System.Security.Cryptography.MD5CryptoServiceProvider();
             byte[] hash = md5.ComputeHash(rawImageData);*/
 
-            ImageConverter ic = new ImageConverter();
-            byte[] btImage1 = new byte[1];
-            btImage1 = (byte[])ic.ConvertTo(bmp, btImage1.GetType());
-            SHA256Managed shaM = new SHA256Managed();
-            byte[] hash = shaM.ComputeHash(btImage1);
+            var ic = new ImageConverter();
+            var btImage1 = new byte[1];
+            btImage1 = (byte[]) ic.ConvertTo(bmp, btImage1.GetType());
+            var shaM = new SHA256Managed();
+            var hash = shaM.ComputeHash(btImage1);
 
             return BitConverter.ToString(hash);
         }
 
         public static string ConvertString(string unicode)
         {
-            StringBuilder sb = new StringBuilder();
-            foreach (char c in unicode)
+            var sb = new StringBuilder();
+            foreach (var c in unicode)
                 if (c >= 32 && c <= 255)
                     sb.Append(c);
             return sb.ToString();
@@ -91,13 +91,13 @@ namespace PraiseBase.Presenter.Util
             text = text.Replace("<br>", " ");
             text = text.Replace(" ", " ");
 
-            string[] Words = text.Split(' ');
-            int currentLineLength = 0;
-            ArrayList Lines = new ArrayList(text.Length / maxLength);
-            string currentLine = "";
-            bool InTag = false;
+            var Words = text.Split(' ');
+            var currentLineLength = 0;
+            var Lines = new ArrayList(text.Length/maxLength);
+            var currentLine = "";
+            var InTag = false;
 
-            foreach (string currentWord in Words)
+            foreach (var currentWord in Words)
             {
                 //ignore html
                 if (currentWord.Length > 0)
@@ -137,21 +137,21 @@ namespace PraiseBase.Presenter.Util
             if (currentLine != "")
                 Lines.Add(currentLine);
 
-            string[] textLinesStr = new string[Lines.Count];
+            var textLinesStr = new string[Lines.Count];
             Lines.CopyTo(textLinesStr, 0);
             return textLinesStr;
         }
 
         /// <summary>
-        /// Serialize object to string
+        ///     Serialize object to string
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <param name="toSerialize"></param>
         /// <returns></returns>
         public static string SerializeObject<T>(this T toSerialize, bool returnHash)
         {
-            XmlSerializer xmlSerializer = new XmlSerializer(toSerialize.GetType());
-            StringWriter textWriter = new StringWriter();
+            var xmlSerializer = new XmlSerializer(toSerialize.GetType());
+            var textWriter = new StringWriter();
 
             xmlSerializer.Serialize(textWriter, toSerialize);
             if (returnHash)

@@ -1,0 +1,156 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{67651B76-5ABD-4040-9A8F-3833130FC77D}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>PraiseBase.Presenter</RootNamespace>
+    <AssemblyName>PraiseBase Core Libraries</AssemblyName>
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Manager\BibleManager.cs" />
+    <Compile Include="Manager\ImageManager.cs" />
+    <Compile Include="Manager\SongItem.cs" />
+    <Compile Include="Manager\SongManager.cs" />
+    <Compile Include="Model\AdditionalInformationPosition.cs" />
+    <Compile Include="Model\Bible\Bible.cs" />
+    <Compile Include="Model\Bible\BibleBook.cs" />
+    <Compile Include="Model\Bible\BibleChapter.cs" />
+    <Compile Include="Model\Bible\BibleVerse.cs" />
+    <Compile Include="Model\Bible\BibleVerseSelection.cs" />
+    <Compile Include="Model\Setlist.cs" />
+    <Compile Include="Manager\SongSearchMode.cs" />
+    <Compile Include="Model\Song\ColorBackground.cs" />
+    <Compile Include="Model\Song\ImageBackground.cs" />
+    <Compile Include="Model\Song\IBackground.cs" />
+    <Compile Include="Model\Song\QualityIssues.cs" />
+    <Compile Include="Model\Song\PartSequences.cs" />
+    <Compile Include="Model\Song\SongBooks.cs" />
+    <Compile Include="Model\Song\SongAuthorType.cs" />
+    <Compile Include="Model\Song\SongAuthors.cs" />
+    <Compile Include="Model\TranslationPosition.cs" />
+    <Compile Include="Persistence\AbstractSongFilePlugin.cs" />
+    <Compile Include="Persistence\CCLI\SongSelectFilePlugin.cs" />
+    <Compile Include="Persistence\CCLI\SongSelectVerse.cs" />
+    <Compile Include="Persistence\CCLI\SongSelectFile.cs" />
+    <Compile Include="Persistence\CCLI\SongSelectFileMapper.cs" />
+    <Compile Include="Persistence\ImportFormat.cs" />
+    <Compile Include="Persistence\ISongFilePlugin.cs" />
+    <Compile Include="Persistence\ISongFileWriter.cs" />
+    <Compile Include="Persistence\IncompleteSongSourceFileException.cs" />
+    <Compile Include="Persistence\InvalidSongSourceFileException.cs" />
+    <Compile Include="Persistence\ISongFileReader.cs" />
+    <Compile Include="Persistence\ISongImporter.cs" />
+    <Compile Include="Persistence\OpenLyrics\OpenLyricsSongFilePlugin.cs" />
+    <Compile Include="Persistence\OpenLyrics\OpenLyricsSongLines.cs" />
+    <Compile Include="Persistence\OpenLyrics\OpenLyricsSongFileMapper.cs" />
+    <Compile Include="Persistence\OpenLyrics\OpenLyricsSong.cs" />
+    <Compile Include="Persistence\OpenLyrics\OpenLyricsSongVerse.cs" />
+    <Compile Include="Persistence\ISongFile.cs" />
+    <Compile Include="Persistence\PowerPraise\AbstractPowerPraiseSongFileReader.cs" />
+    <Compile Include="Persistence\PowerPraise\AbstractPowerPraiseSongFileWriter.cs" />
+    <Compile Include="Persistence\PowerPraise\Extended\ExtendedPowerPraiseSongFilePlugin.cs" />
+    <Compile Include="Persistence\PowerPraise\Extended\ExtendedPowerPraiseSongFileMapper.cs" />
+    <Compile Include="Persistence\PowerPraise\Extended\ExtendedPowerPraiseSongFileWriter.cs" />
+    <Compile Include="Persistence\PowerPraise\Extended\ExtendedPowerPraiseSongFileReader.cs" />
+    <Compile Include="Persistence\PowerPraise\Extended\ExtendedPowerPraiseSong.cs" />
+    <Compile Include="Persistence\PowerPraise\PowerPraiseFileUtil.cs" />
+    <Compile Include="Persistence\PowerPraise\PowerPraiseSongFileMapper.cs" />
+    <Compile Include="Persistence\PowerPraise\PowerPraiseSong.cs" />
+    <Compile Include="Persistence\PowerPraise\PowerPraiseSongFilePlugin.cs" />
+    <Compile Include="Persistence\PowerPraise\PowerPraiseSongPart.cs" />
+    <Compile Include="Persistence\PowerPraise\PowerPraiseSongSlide.cs" />
+    <Compile Include="Model\Song\Song.cs" />
+    <Compile Include="Model\Song\SongAuthor.cs" />
+    <Compile Include="Model\Song\SongBook.cs" />
+    <Compile Include="Model\Song\SongFileType.cs" />
+    <Compile Include="Model\Song\SongPart.cs" />
+    <Compile Include="Model\Song\SongPartList.cs" />
+    <Compile Include="Model\Song\SongQualityAssuranceIndicator.cs" />
+    <Compile Include="Model\Song\SongSlide.cs" />
+    <Compile Include="Model\Song\SongSlideList.cs" />
+    <Compile Include="Model\Song\SongTempo.cs" />
+    <Compile Include="Model\Song\SongTextBorders.cs" />
+    <Compile Include="Model\Statistics\Statistics.cs" />
+    <Compile Include="Model\Statistics\StatisticsDate.cs" />
+    <Compile Include="Model\Statistics\StatisticsItem.cs" />
+    <Compile Include="Model\TagList.cs" />
+    <Compile Include="Model\TextFormatting.cs" />
+    <Compile Include="Model\TextOrientation.cs" />
+    <Compile Include="Model\TextOutline.cs" />
+    <Compile Include="Model\TextShadow.cs" />
+    <Compile Include="Persistence\PowerPraise\PowerPraiseConstants.cs" />
+    <Compile Include="Persistence\CCLI\SongSelectFileReader.cs" />
+    <Compile Include="Persistence\OpenLyrics\OpenLyricsSongFileReader.cs" />
+    <Compile Include="Persistence\PowerPraise\PowerPraiseSongFileReader.cs" />
+    <Compile Include="Persistence\AbstractDatabaseImporter.cs" />
+    <Compile Include="Persistence\PraiseBox\PraiseBoxDatabaseImporter.cs" />
+    <Compile Include="Persistence\Setlists\SetlistReader.cs" />
+    <Compile Include="Persistence\ISongFileMapper.cs" />
+    <Compile Include="Persistence\SongFilePluginFactory.cs" />
+    <Compile Include="Persistence\StatisticsReader.cs" />
+    <Compile Include="Persistence\WorshipSystem\WorshipSystemDatabaseImporter.cs" />
+    <Compile Include="Persistence\ZefaniaXML\XMLBibleReader.cs" />
+    <Compile Include="Persistence\PowerPraise\PowerPraiseSongFileWriter.cs" />
+    <Compile Include="Persistence\Setlists\SetlistWriter.cs" />
+    <Compile Include="Persistence\StatisticsWriter.cs" />
+    <Compile Include="Persistence\XmlWriterHelper.cs" />
+    <Compile Include="Projection\BaseLayer.cs" />
+    <Compile Include="Projection\ImageLayer.cs" />
+    <Compile Include="Projection\ISlideTextFormattingMapper.cs" />
+    <Compile Include="Projection\SlideTextFormatting.cs" />
+    <Compile Include="Projection\SongSlideTextFormattingMapper.cs" />
+    <Compile Include="Projection\TextLayer.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Util\FileUtils.cs" />
+    <Compile Include="Util\ImageUtils.cs" />
+    <Compile Include="Util\ListUtil.cs" />
+    <Compile Include="Util\SongSearchUtil.cs" />
+    <Compile Include="Util\StringUtils.cs" />
+    <Compile Include="Util\UpdateChecker.cs" />
+    <Compile Include="Util\UpdateInformation.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

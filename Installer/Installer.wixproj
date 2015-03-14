@@ -71,16 +71,8 @@
     <Content Include="Resources\Banner.bmp" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Configuration\PraiseBase Configuration.csproj">
-      <Name>PraiseBase_Configuration</Name>
-      <Project>{bab0f572-6a29-49a0-bb23-36e088a64225}</Project>
-      <Private>True</Private>
-      <DoNotHarvest>True</DoNotHarvest>
-      <RefProjectOutputGroups>Binaries;Content;Satellites</RefProjectOutputGroups>
-      <RefTargetDir>INSTALLFOLDER</RefTargetDir>
-    </ProjectReference>
-    <ProjectReference Include="..\Core\PraiseBase Core Libraries.csproj">
-      <Name>PraiseBase_Core_Libraries</Name>
+    <ProjectReference Include="..\Core\Core Libraries.csproj">
+      <Name>Core_Libraries</Name>
       <Project>{67651b76-5abd-4040-9a8f-3833130fc77d}</Project>
       <Private>True</Private>
       <DoNotHarvest>True</DoNotHarvest>
@@ -93,7 +85,7 @@
       <Private>True</Private>
       <DoNotHarvest>True</DoNotHarvest>
       <RefProjectOutputGroups>Binaries;Content;Satellites</RefProjectOutputGroups>
-      <RefTargetDir>INSTALLLOCATION</RefTargetDir>
+      <RefTargetDir>INSTALLFOLDER</RefTargetDir>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(WixTargetsPath)" />

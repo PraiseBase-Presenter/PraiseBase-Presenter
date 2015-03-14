@@ -27,12 +27,12 @@
     </InstallExecuteSequence>
 
     <!-- Set icon -->
-    <Icon Id="icon.ico" SourceFile="$(var.PraiseBase_Presenter.ProjectDir)Computer.ico"/>
+    <Icon Id="icon.ico" SourceFile="$(var.PraiseBase_Presenter.ProjectDir)Resources\Computer.ico"/>
     <Property Id="ARPPRODUCTICON" Value="icon.ico" />
 
     <!-- GUI (requires WixUIExtension) -->
     <UIRef Id="WixUI_Minimal"/>
-    <WixVariable Id="WixUILicenseRtf" Value="$(var.PraiseBase_Presenter.ProjectDir)..\License.rtf" />
+    <WixVariable Id="WixUILicenseRtf" Value="$(var.SolutionDir)License.rtf" />
     <!-- Source: http://www.flickr.com/photos/malcorp/3703556108/ -->
     <WixVariable Id="WixUIDialogBmp" Value="Resources\Background.bmp" />
     <WixVariable Id="WixUIBannerBmp" Value="Resources\Banner.bmp" />
@@ -51,24 +51,18 @@
           </Component>
           <Component Id="CoreDll" Guid="3b5d1582-c2b3-11e4-9bf5-d2ea1d5d46b0">
             <File Id="CoreDllFile"
-                Name="$(var.PraiseBase_Core_Libraries.TargetFileName)"
-                Source="$(var.PraiseBase_Core_Libraries.TargetPath)"
-                KeyPath="yes" />
-          </Component>
-          <Component Id="ConfigDll" Guid="c05831ba-c824-11e4-9428-ba741d5d46b0">
-            <File Id="ConfigDllFile"
-                Name="$(var.PraiseBase_Configuration.TargetFileName)"
-                Source="$(var.PraiseBase_Configuration.TargetPath)"
+                Name="$(var.Core_Libraries.TargetFileName)"
+                Source="$(var.Core_Libraries.TargetPath)"
                 KeyPath="yes" />
           </Component>
           <Component Id="LicenseRtf" Guid="96dc79f8-2344-4610-a167-9b09ee501509">
             <File Id="License.rtf" 
-                  Source="$(var.PraiseBase_Presenter.ProjectDir)..\License.rtf" 
+                  Source="$(var.SolutionDir)License.rtf" 
                   KeyPath="yes"/>
           </Component>
           <Component Id="LicenseTxt" Guid="626b9fa0-0c14-4d4d-804a-911a454e76d7">
             <File Id="License.txt"
-                  Source="$(var.PraiseBase_Presenter.ProjectDir)..\License.txt"
+                  Source="$(var.SolutionDir)License.txt"
                   KeyPath="yes"/>
           </Component>
         </Directory>
@@ -218,7 +212,6 @@
     <Feature Id="ProductFeature" Title="$(var.PraiseBase_Presenter.ProjectName)" Level="1">
       <ComponentRef Id="ProductComponent" />
       <ComponentRef Id="CoreDll" />
-      <ComponentRef Id="ConfigDll" />
       <ComponentRef Id="LicenseRtf" />
       <ComponentRef Id="LicenseTxt" />
       <ComponentRef Id="ApplicationStartMenuShortcut" />

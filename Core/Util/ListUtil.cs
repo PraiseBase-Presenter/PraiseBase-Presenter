@@ -6,7 +6,7 @@ namespace PraiseBase.Presenter.Util
     public static class ListUtil
     {
         /// <summary>
-        /// Gets the hashcode of the given list
+        ///     Gets the hashcode of the given list
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <param name="list"></param>

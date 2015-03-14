@@ -32,17 +32,17 @@ namespace PraiseBase.Presenter.Persistence.Setlists
         {
             var xmlDoc = new XmlDocument();
             xmlDoc.Load(filename);
-            XmlElement xmlRoot = xmlDoc.DocumentElement;
+            var xmlRoot = xmlDoc.DocumentElement;
 
             if (xmlRoot.Name != "setlist")
             {
                 throw new Exception("Ungültige Setlist!");
             }
-            Setlist sl = new Setlist();
+            var sl = new Setlist();
             if (xmlRoot["items"] != null)
             {
                 sl.Items.Clear();
-                for (int i = 0; i < xmlRoot["items"].ChildNodes.Count; i++)
+                for (var i = 0; i < xmlRoot["items"].ChildNodes.Count; i++)
                 {
                     if (xmlRoot["items"].ChildNodes[i].Name == "item")
                     {

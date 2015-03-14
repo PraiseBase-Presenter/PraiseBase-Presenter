@@ -20,9 +20,7 @@
  *
  */
 
-using System;
 using System.Collections.Generic;
-using System.Reflection;
 using System.Xml;
 using PraiseBase.Presenter.Model.Bible;
 
@@ -32,13 +30,13 @@ namespace PraiseBase.Presenter.Persistence.ZefaniaXML
     {
         private bool GetNodeText(XmlTextReader textReader, string name, ref Bible target, string fieldName)
         {
-            if (textReader.NodeType == XmlNodeType.Element && textReader.Name.ToString().ToLower() == name)
+            if (textReader.NodeType == XmlNodeType.Element && textReader.Name.ToLower() == name)
             {
                 textReader.Read();
                 if (textReader.NodeType == XmlNodeType.Text)
                 {
-                    Type myType = typeof(Bible);
-                    PropertyInfo myFields = myType.GetProperty(fieldName);
+                    var myType = typeof (Bible);
+                    var myFields = myType.GetProperty(fieldName);
                     myFields.SetValue(target, textReader.Value, null);
                 }
             }
@@ -47,15 +45,15 @@ namespace PraiseBase.Presenter.Persistence.ZefaniaXML
 
         public Bible LoadMeta(string fileName)
         {
-            Bible b = new Bible();
+            var b = new Bible();
 
             // Read a document
-            XmlTextReader textReader = new XmlTextReader(fileName);
+            var textReader = new XmlTextReader(fileName);
 
             // Read until end of file
             while (textReader.Read())
             {
-                if (textReader.NodeType == XmlNodeType.Element && textReader.Name.ToString().ToLower() == "xmlbible")
+                if (textReader.NodeType == XmlNodeType.Element && textReader.Name.ToLower() == "xmlbible")
                 {
                     while (textReader.Read())
                     {
@@ -79,9 +77,9 @@ namespace PraiseBase.Presenter.Persistence.ZefaniaXML
 
         public Bible LoadContent(string fileName, Bible b)
         {
-            XmlDocument xmlDoc = new XmlDocument();
+            var xmlDoc = new XmlDocument();
             xmlDoc.Load(fileName);
-            XmlElement xmlRoot = xmlDoc.DocumentElement;
+            var xmlRoot = xmlDoc.DocumentElement;
             if (xmlRoot.Name == "XMLBIBLE")
             {
                 b.Books = new List<BibleBook>();
@@ -89,17 +87,21 @@ namespace PraiseBase.Presenter.Persistence.ZefaniaXML
                 {
                     if (bookNode.Name.ToLower() == "biblebook")
                     {
-                        BibleBook bo = new BibleBook();
+                        var bo = new BibleBook();
                         bo.Bible = b;
                         bo.Number = int.Parse(bookNode.Attributes["bnumber"].InnerText);
-                        bo.Name = bookNode.Attributes["bname"] != null ? bookNode.Attributes["bname"].InnerText : Bible.bookMap[bo.Number - 1];
-                        bo.ShortName = bookNode.Attributes["bsname"] != null ? bookNode.Attributes["bsname"].InnerText : bo.Name;
+                        bo.Name = bookNode.Attributes["bname"] != null
+                            ? bookNode.Attributes["bname"].InnerText
+                            : Bible.bookMap[bo.Number - 1];
+                        bo.ShortName = bookNode.Attributes["bsname"] != null
+                            ? bookNode.Attributes["bsname"].InnerText
+                            : bo.Name;
                         bo.Chapters = new List<BibleChapter>();
                         foreach (XmlNode chapNode in bookNode.ChildNodes)
                         {
                             if (chapNode.Name.ToLower() == "chapter")
                             {
-                                BibleChapter ch = new BibleChapter();
+                                var ch = new BibleChapter();
                                 ch.Book = bo;
                                 ch.Number = int.Parse(chapNode.Attributes["cnumber"].InnerText);
                                 ch.Verses = new List<BibleVerse>();
@@ -107,7 +109,7 @@ namespace PraiseBase.Presenter.Persistence.ZefaniaXML
                                 {
                                     if (verseNode.Name.ToLower() == "vers")
                                     {
-                                        BibleVerse v = new BibleVerse();
+                                        var v = new BibleVerse();
                                         v.Chapter = ch;
                                         v.Number = int.Parse(verseNode.Attributes["vnumber"].InnerText);
                                         v.Text = verseNode.InnerText;

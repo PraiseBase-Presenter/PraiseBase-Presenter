@@ -25,18 +25,12 @@ namespace PraiseBase.Presenter.Model.Bible
     public class BibleVerse
     {
         public int Number { get; set; }
-
         public string Text { get; set; }
-
         public BibleChapter Chapter { get; set; }
-
-        public BibleVerse()
-        {
-        }
 
         public override string ToString()
         {
-            return Number.ToString() + ": " + Text;
+            return Number + ": " + Text;
         }
     }
 }

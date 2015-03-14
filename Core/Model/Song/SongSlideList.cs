@@ -25,12 +25,12 @@ using System.Collections.Generic;
 namespace PraiseBase.Presenter.Model.Song
 {
     /// <summary>
-    /// Provides a list of all slides
+    ///     Provides a list of all slides
     /// </summary>
     public class SongSlideList : List<SongSlide>
     {
         /// <summary>
-        /// Swaps the given slide with it's predecessor
+        ///     Swaps the given slide with it's predecessor
         /// </summary>
         /// <param name="slideId">The slide index</param>
         /// <returns>Returns true is swapping was successfull</returns>
@@ -38,7 +38,7 @@ namespace PraiseBase.Presenter.Model.Song
         {
             if (slideId > 0 && slideId < Count)
             {
-                SongSlide tmpPrt = this[slideId - 1];
+                var tmpPrt = this[slideId - 1];
                 RemoveAt(slideId - 1);
                 Insert(slideId, tmpPrt);
                 return true;
@@ -47,7 +47,7 @@ namespace PraiseBase.Presenter.Model.Song
         }
 
         /// <summary>
-        /// Swaps the given slide with it's successor
+        ///     Swaps the given slide with it's successor
         /// </summary>
         /// <param name="slideId">The slide index</param>
         /// <returns>Returns true is swapping was successfull</returns>
@@ -55,7 +55,7 @@ namespace PraiseBase.Presenter.Model.Song
         {
             if (slideId >= 0 && slideId < Count - 1)
             {
-                SongSlide tmpPrt = this[slideId + 1];
+                var tmpPrt = this[slideId + 1];
                 RemoveAt(slideId + 1);
                 Insert(slideId, tmpPrt);
                 return true;
@@ -64,31 +64,31 @@ namespace PraiseBase.Presenter.Model.Song
         }
 
         /// <summary>
-        /// Duplicates a given slide
+        ///     Duplicates a given slide
         /// </summary>
         /// <param name="slideId">The slide index</param>
         public void Duplicate(int slideId)
         {
-            Insert(slideId, (SongSlide)this[slideId].Clone());
+            Insert(slideId, (SongSlide) this[slideId].Clone());
         }
 
         /// <summary>
-        /// Duplicates a slide and cuts it's text in half,
-        /// assigning the first part to the original slide
-        /// and the second part to the copy
+        ///     Duplicates a slide and cuts it's text in half,
+        ///     assigning the first part to the original slide
+        ///     and the second part to the copy
         /// </summary>
         /// <param name="slideId">The slide index</param>
         public void Split(int slideId)
         {
-            var sld = (SongSlide)this[slideId].Clone();
+            var sld = (SongSlide) this[slideId].Clone();
 
-            int totl = sld.Lines.Count;
-            int rem = totl / 2;
+            var totl = sld.Lines.Count;
+            var rem = totl/2;
             this[slideId].Lines.RemoveRange(0, rem);
             sld.Lines.RemoveRange(rem, totl - rem);
 
             totl = sld.Translation.Count;
-            rem = totl / 2;
+            rem = totl/2;
             this[slideId].Translation.RemoveRange(0, rem);
             sld.Translation.RemoveRange(rem, totl - rem);
 
@@ -96,17 +96,17 @@ namespace PraiseBase.Presenter.Model.Song
         }
 
         /// <summary>
-        /// Returns the slidelist's hashcode
+        ///     Returns the slidelist's hashcode
         /// </summary>
         /// <returns></returns>
         public override int GetHashCode()
         {
             unchecked
             {
-                int hash = 19;
-                for (int i = 0; i < Count; i++)
+                var hash = 19;
+                for (var i = 0; i < Count; i++)
                 {
-                    hash = hash * 31 + this[i].GetHashCode();
+                    hash = hash*31 + this[i].GetHashCode();
                 }
                 return hash;
             }
@@ -115,7 +115,7 @@ namespace PraiseBase.Presenter.Model.Song
         protected bool Equals(SongSlideList other)
         {
             if (Count != other.Count) return false;
-            for (int i = 0; i < Count; i++)
+            for (var i = 0; i < Count; i++)
             {
                 if (!Equals(this[i], other[i])) return false;
             }
@@ -127,7 +127,7 @@ namespace PraiseBase.Presenter.Model.Song
             if (ReferenceEquals(null, obj)) return false;
             if (ReferenceEquals(this, obj)) return true;
             if (obj.GetType() != GetType()) return false;
-            return Equals((SongSlideList)obj);
+            return Equals((SongSlideList) obj);
         }
     }
 }

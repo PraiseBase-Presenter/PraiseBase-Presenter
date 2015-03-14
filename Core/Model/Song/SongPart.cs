@@ -26,13 +26,13 @@ using System.Runtime.Serialization;
 namespace PraiseBase.Presenter.Model.Song
 {
     /// <summary>
-    /// A song part with a given name and one or more slides
+    ///     A song part with a given name and one or more slides
     /// </summary>
-    [Serializable()]
+    [Serializable]
     public class SongPart : ISerializable
     {
         /// <summary>
-        /// Part constructor
+        ///     Part constructor
         /// </summary>
         public SongPart()
         {
@@ -40,22 +40,34 @@ namespace PraiseBase.Presenter.Model.Song
         }
 
         /// <summary>
-        /// Song part name like chorus, bridge, part 1 ...
+        ///     Song part name like chorus, bridge, part 1 ...
         /// </summary>
         public string Caption { get; set; }
 
         /// <summary>
-        /// Language
+        ///     Language
         /// </summary>
         public string Language { get; set; }
 
         /// <summary>
-        /// A list of containing slides. Each part has one slide at minimum
+        ///     A list of containing slides. Each part has one slide at minimum
         /// </summary>
         public SongSlideList Slides { get; set; }
 
         /// <summary>
-        /// Gets the hash code
+        ///     Gets the object data for serialization
+        /// </summary>
+        /// <param name="info"></param>
+        /// <param name="context"></param>
+        public void GetObjectData(SerializationInfo info, StreamingContext context)
+        {
+            info.AddValue("Caption", Caption);
+            info.AddValue("Language", Language);
+            info.AddValue("Slides", Slides);
+        }
+
+        /// <summary>
+        ///     Gets the hash code
         /// </summary>
         /// <returns></returns>
         public override int GetHashCode()
@@ -71,27 +83,16 @@ namespace PraiseBase.Presenter.Model.Song
 
         protected bool Equals(SongPart other)
         {
-            return string.Equals(Caption, other.Caption) && string.Equals(Language, other.Language) && Equals(Slides, other.Slides);
+            return string.Equals(Caption, other.Caption) && string.Equals(Language, other.Language) &&
+                   Equals(Slides, other.Slides);
         }
 
         public override bool Equals(object obj)
         {
             if (ReferenceEquals(null, obj)) return false;
             if (ReferenceEquals(this, obj)) return true;
-            if (obj.GetType() != this.GetType()) return false;
+            if (obj.GetType() != GetType()) return false;
             return Equals((SongPart) obj);
-        }
-
-        /// <summary>
-        /// Gets the object data for serialization
-        /// </summary>
-        /// <param name="info"></param>
-        /// <param name="context"></param>
-        public void GetObjectData(SerializationInfo info, StreamingContext context)
-        {
-            info.AddValue("Caption", this.Caption);
-            info.AddValue("Language", this.Language);
-            info.AddValue("Slides", this.Slides);
         }
     }
 }

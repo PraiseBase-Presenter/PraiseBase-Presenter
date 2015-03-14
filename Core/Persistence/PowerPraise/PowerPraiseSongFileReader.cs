@@ -28,13 +28,13 @@ namespace PraiseBase.Presenter.Persistence.PowerPraise
     {
         public override PowerPraiseSong Load(string filename)
         {
-            PowerPraiseSong sng = new PowerPraiseSong();
+            var sng = new PowerPraiseSong();
             Parse(filename, sng);
             return sng;
         }
-        
+
         /// <summary>
-        /// Parses additional fields (hook)
+        ///     Parses additional fields (hook)
         /// </summary>
         /// <param name="xmlRoot"></param>
         /// <param name="sng"></param>

@@ -12,7 +12,7 @@
     <AssemblyName>PraiseBase Presenter</AssemblyName>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
-    <ApplicationIcon>Computer.ico</ApplicationIcon>
+    <ApplicationIcon>Resources\Computer.ico</ApplicationIcon>
     <StartupObject>PraiseBase.Presenter.Program</StartupObject>
     <ManifestCertificateThumbprint>D45E90FD57F45BDB54368ACE3A1D7A9016546503</ManifestCertificateThumbprint>
     <ManifestKeyFile>PraiseBase Presenter_TemporaryKey.pfx</ManifestKeyFile>
@@ -84,241 +84,265 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Manager\BibleManager.cs" />
-    <Compile Include="Manager\ProjectionManager.cs" />
-    <Compile Include="Manager\ScreenManager.cs" />
-    <Compile Include="Projection\BaseLayer.cs" />
-    <Compile Include="Projection\ImageLayer.cs" />
-    <Compile Include="Projection\TextLayer.cs" />
-    <Compile Include="Projection\SlideTextFormatting.cs" />
-    <Compile Include="Projection\SongSlideTextFormattingMapper.cs" />
-    <Compile Include="UI\Editor\EditorChildMetaData.cs" />
-    <Compile Include="UI\Editor\SongSavedEventArgs.cs" />
-    <Compile Include="UI\LocalizedForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Manager\ImageManager.cs" />
-    <Compile Include="Manager\SongManager.cs" />
-    <Compile Include="UI\Components\BackgroundImageBrowser.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="UI\Components\BackgroundImageBrowser.Designer.cs">
-      <DependentUpon>BackgroundImageBrowser.cs</DependentUpon>
-    </Compile>
-    <Compile Include="UI\Components\ColorPicker.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="UI\Components\ColorPicker.Designer.cs">
-      <DependentUpon>ColorPicker.cs</DependentUpon>
-    </Compile>
-    <Compile Include="UI\Components\CustomGroupBox.cs">
+    <Compile Include="Constants.cs" />
+    <Compile Include="Controls\CustomGroupBox.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="UI\Components\CustomGroupBox.Designer.cs">
+    <Compile Include="Controls\CustomGroupBox.Designer.cs">
       <DependentUpon>CustomGroupBox.cs</DependentUpon>
     </Compile>
-    <Compile Include="UI\Components\SearchTextBox.cs">
+    <Compile Include="Controls\DragAndDropListView.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Controls\SearchTextBox.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="UI\Components\SearchTextBox.Designer.cs">
+    <Compile Include="Controls\SearchTextBox.Designer.cs">
       <DependentUpon>SearchTextBox.cs</DependentUpon>
     </Compile>
-    <Compile Include="UI\Components\DragAndDropListView.cs">
+    <Compile Include="Controls\TreeViewLabelEdit.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="UI\Components\SongDetail.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="UI\Components\SongDetail.Designer.cs">
-      <DependentUpon>SongDetail.cs</DependentUpon>
-    </Compile>
-    <Compile Include="UI\Components\TreeLE.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="UI\Presenter\AboutDialog.cs">
+    <Compile Include="Editor\EditorChildMetaData.cs" />
+    <Compile Include="Editor\SongEditor.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="UI\Presenter\AboutDialog.Designer.cs">
-      <DependentUpon>AboutDialog.cs</DependentUpon>
-    </Compile>
-    <Compile Include="UI\Editor\SongEditorChild.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="UI\Editor\SongEditorChild.Designer.cs">
-      <DependentUpon>SongEditorChild.cs</DependentUpon>
-    </Compile>
-    <Compile Include="UI\Editor\SongEditor.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="UI\Editor\SongEditor.Designer.cs">
+    <Compile Include="Editor\SongEditor.Designer.cs">
       <DependentUpon>SongEditor.cs</DependentUpon>
     </Compile>
-    <Compile Include="UI\Presenter\ImageDialog.cs">
+    <Compile Include="Editor\SongEditorChild.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="UI\Presenter\ImageDialog.Designer.cs">
+    <Compile Include="Editor\SongEditorChild.Designer.cs">
+      <DependentUpon>SongEditorChild.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Editor\SongSavedEventArgs.cs" />
+    <Compile Include="Forms\AboutDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\AboutDialog.Designer.cs">
+      <DependentUpon>AboutDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\CommentDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\CommentDialog.Designer.cs">
+      <DependentUpon>CommentDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\ImageDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\ImageDialog.Designer.cs">
       <DependentUpon>ImageDialog.cs</DependentUpon>
     </Compile>
-    <Compile Include="UI\Presenter\LoadingScreen.cs">
+    <Compile Include="Forms\LocalizableForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="UI\Presenter\LoadingScreen.Designer.cs">
-      <DependentUpon>LoadingScreen.cs</DependentUpon>
-    </Compile>
-    <Compile Include="UI\Presenter\MainWindow.cs">
+    <Compile Include="Forms\ProgramSettingsDialog.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="UI\Presenter\MainWindow.Designer.cs">
-      <DependentUpon>MainWindow.cs</DependentUpon>
-    </Compile>
-    <Compile Include="UI\Presenter\ProgressWindow.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="UI\Presenter\ProgressWindow.Designer.cs">
-      <DependentUpon>ProgressWindow.cs</DependentUpon>
-    </Compile>
-    <Compile Include="UI\Presenter\QADialog.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="UI\Presenter\QADialog.Designer.cs">
-      <DependentUpon>QADialog.cs</DependentUpon>
-    </Compile>
-    <Compile Include="UI\Presenter\SongImporter.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="UI\Presenter\SongImporter.Designer.cs">
-      <DependentUpon>SongImporter.cs</DependentUpon>
-    </Compile>
-    <Compile Include="UI\Presenter\ProjectionWindow.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="UI\Presenter\ProjectionWindow.Designer.cs">
-      <DependentUpon>ProjectionWindow.cs</DependentUpon>
-    </Compile>
-    <Compile Include="UI\Presenter\ProgramSettingsDialog.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="UI\Presenter\ProgramSettingsDialog.Designer.cs">
+    <Compile Include="Forms\ProgramSettingsDialog.Designer.cs">
       <DependentUpon>ProgramSettingsDialog.cs</DependentUpon>
     </Compile>
-    <Compile Include="UI\Presenter\ProjectionControl.xaml.cs">
-      <DependentUpon>ProjectionControl.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="UI\Presenter\SongBrowserDialog.cs">
+    <Compile Include="Forms\UpdateCheckDialog.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="UI\Presenter\SongBrowserDialog.Designer.cs">
+    <Compile Include="Forms\UpdateCheckDialog.Designer.cs">
+      <DependentUpon>UpdateCheckDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Projection\ProjectionManager.cs" />
+    <Compile Include="Projection\ScreenManager.cs" />
+    <Compile Include="Projection\SettingsSlideTextFormattingMapper.cs" />
+    <Compile Include="Properties\FileResources.Designer.cs">
+      <DependentUpon>FileResources.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <DependentUpon>Settings.settings</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="Properties\StringResources.Designer.cs">
+      <DependentUpon>StringResources.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Template\SongTemplateMapper.cs" />
+    <Compile Include="Controls\SongDetail.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\SongDetail.Designer.cs">
+      <DependentUpon>SongDetail.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\LoadingScreen.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\LoadingScreen.Designer.cs">
+      <DependentUpon>LoadingScreen.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Presenter\MainWindow.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Presenter\MainWindow.Designer.cs">
+      <DependentUpon>MainWindow.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\ProgressWindow.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\ProgressWindow.Designer.cs">
+      <DependentUpon>ProgressWindow.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Importer\SongImporter.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Importer\SongImporter.Designer.cs">
+      <DependentUpon>SongImporter.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Projection\ProjectionWindow.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Projection\ProjectionWindow.Designer.cs">
+      <DependentUpon>ProjectionWindow.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Projection\ProjectionControl.xaml.cs">
+      <DependentUpon>ProjectionControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Presenter\SongBrowserDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Presenter\SongBrowserDialog.Designer.cs">
       <DependentUpon>SongBrowserDialog.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Util\SongTemplateMapper.cs" />
-    <Compile Include="Util\UpdateCheck.cs" />
-    <EmbeddedResource Include="UI\Components\BackgroundImageBrowser.resx">
-      <DependentUpon>BackgroundImageBrowser.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="UI\Components\ColorPicker.resx">
-      <DependentUpon>ColorPicker.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="UI\Components\CustomGroupBox.resx">
+    <EmbeddedResource Include="Controls\CustomGroupBox.resx">
       <DependentUpon>CustomGroupBox.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="UI\Components\SearchTextBox.resx">
+    <EmbeddedResource Include="Controls\SearchTextBox.resx">
       <DependentUpon>SearchTextBox.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="UI\Components\SongDetail.resx">
+    <EmbeddedResource Include="Controls\TreeViewLabelEdit.resx">
+      <DependentUpon>TreeViewLabelEdit.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Editor\SongEditor.en-US.resx">
+      <DependentUpon>SongEditor.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Editor\SongEditor.fr-FR.resx">
+      <DependentUpon>SongEditor.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Editor\SongEditor.resx">
+      <DependentUpon>SongEditor.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Editor\SongEditorChild.en-US.resx">
+      <DependentUpon>SongEditorChild.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Editor\SongEditorChild.resx">
+      <DependentUpon>SongEditorChild.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\AboutDialog.en-US.resx">
+      <DependentUpon>AboutDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\AboutDialog.resx">
+      <DependentUpon>AboutDialog.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\CommentDialog.en-US.resx">
+      <DependentUpon>CommentDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\CommentDialog.resx">
+      <DependentUpon>CommentDialog.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\ImageDialog.en-US.resx">
+      <DependentUpon>ImageDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\ImageDialog.resx">
+      <DependentUpon>ImageDialog.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\LocalizableForm.resx">
+      <DependentUpon>LocalizableForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\ProgramSettingsDialog.en-US.resx">
+      <DependentUpon>ProgramSettingsDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\ProgramSettingsDialog.resx">
+      <DependentUpon>ProgramSettingsDialog.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\UpdateCheckDialog.en-US.resx">
+      <DependentUpon>UpdateCheckDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\UpdateCheckDialog.resx">
+      <DependentUpon>UpdateCheckDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\FileResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>FileResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <SubType>Designer</SubType>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\StringResources.en-US.resx" />
+    <EmbeddedResource Include="Properties\StringResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>StringResources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\SongDetail.resx">
       <DependentUpon>SongDetail.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="UI\Components\TreeLE.resx">
-      <DependentUpon>TreeLE.cs</DependentUpon>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="UI\Editor\SongEditor.en-US.resx">
-      <DependentUpon>SongEditor.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="UI\Editor\SongEditor.fr-FR.resx">
-      <DependentUpon>SongEditor.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="UI\Editor\SongEditorChild.en-US.resx">
-      <DependentUpon>SongEditorChild.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="UI\LocalizedForm.resx">
-      <DependentUpon>LocalizedForm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="UI\Presenter\AboutDialog.en-US.resx">
-      <DependentUpon>AboutDialog.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="UI\Presenter\AboutDialog.resx">
-      <DependentUpon>AboutDialog.cs</DependentUpon>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="UI\Editor\SongEditorChild.resx">
-      <DependentUpon>SongEditorChild.cs</DependentUpon>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="UI\Editor\SongEditor.resx">
-      <DependentUpon>SongEditor.cs</DependentUpon>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="UI\Presenter\ImageDialog.en-US.resx">
-      <DependentUpon>ImageDialog.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="UI\Presenter\ImageDialog.resx">
-      <DependentUpon>ImageDialog.cs</DependentUpon>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="UI\Presenter\LoadingScreen.resx">
+    <EmbeddedResource Include="Forms\LoadingScreen.resx">
       <DependentUpon>LoadingScreen.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="UI\Presenter\MainWindow.en-US.resx">
+    <EmbeddedResource Include="Presenter\MainWindow.en-US.resx">
       <DependentUpon>MainWindow.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="UI\Presenter\MainWindow.resx">
+    <EmbeddedResource Include="Presenter\MainWindow.resx">
       <DependentUpon>MainWindow.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="UI\Presenter\ProgramSettingsDialog.en-US.resx">
-      <DependentUpon>ProgramSettingsDialog.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="UI\Presenter\ProgressWindow.resx">
+    <EmbeddedResource Include="Forms\ProgressWindow.resx">
       <DependentUpon>ProgressWindow.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="UI\Presenter\QADialog.en-US.resx">
-      <DependentUpon>QADialog.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="UI\Presenter\QADialog.resx">
-      <DependentUpon>QADialog.cs</DependentUpon>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="UI\Presenter\SongBrowserDialog.en-US.resx">
+    <EmbeddedResource Include="Presenter\SongBrowserDialog.en-US.resx">
       <DependentUpon>SongBrowserDialog.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="UI\Presenter\SongImporter.en-US.resx">
+    <EmbeddedResource Include="Importer\SongImporter.en-US.resx">
       <DependentUpon>SongImporter.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="UI\Presenter\SongImporter.resx">
+    <EmbeddedResource Include="Importer\SongImporter.resx">
       <DependentUpon>SongImporter.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="UI\Presenter\ProjectionWindow.resx">
+    <EmbeddedResource Include="Projection\ProjectionWindow.resx">
       <DependentUpon>ProjectionWindow.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="UI\Presenter\ProgramSettingsDialog.resx">
-      <DependentUpon>ProgramSettingsDialog.cs</DependentUpon>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="UI\Presenter\SongBrowserDialog.resx">
+    <EmbeddedResource Include="Presenter\SongBrowserDialog.resx">
       <DependentUpon>SongBrowserDialog.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <None Include="app.config">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Computer.ico" />
+    <None Include="Properties\Settings.settings">
+      <Generator>PublicSettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
@@ -353,7 +377,7 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
-    <Page Include="UI\Presenter\ProjectionControl.xaml">
+    <Page Include="Projection\ProjectionControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
       <Generator>MSBuild:Compile</Generator>
@@ -364,18 +388,257 @@
     <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Configuration\PraiseBase Configuration.csproj">
-      <Project>{bab0f572-6a29-49a0-bb23-36e088a64225}</Project>
-      <Name>PraiseBase Configuration</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Core\PraiseBase Core Libraries.csproj">
+    <ProjectReference Include="..\Core\Core Libraries.csproj">
       <Project>{67651B76-5ABD-4040-9A8F-3833130FC77D}</Project>
-      <Name>PraiseBase Core Libraries</Name>
+      <Name>Core Libraries</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Resources\" />
+    <None Include="Resources\14_layer_deletelayer.png" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\14_layer_newlayer.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\1downarrow.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\1downarrow1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\1downarrow11.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\1downarrow2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\1leftarrow.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\1leftarrow1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\1rightarrow.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\1rightarrow1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\2leftarrow.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\2rightarrow.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\2uparrow.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\3dowarrow.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\3floppy_unmount.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\advancedsettings.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\advancedsettings_36.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\agt_action_fail1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\agt_action_success.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\agt_back.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\agt_forward.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\AJ_Portable_Projection_Screen.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\background.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\background_36.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Blackout on 36.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Blackout on.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Blackout on2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\clean.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\clock.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\colors.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Computer.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\easymoblog.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\edit.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\edit_add.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\edit_remove.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\editcopy.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\editsong.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\editsong_36.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\error.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\exit.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\fade1blue.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\fileopen.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\filesave.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\folder_favorites.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\folder_favorites_36.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\gpg.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\gplv3-127x51.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\highlight.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\highlight_36.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\highlight_red _36.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\highlight_red.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\kate.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\kate_36.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\keditbookmarks.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ktip.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\leinwand16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\leinwand16_no.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\link.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\logo.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\monitor_256.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\newsong_36.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ok16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\package_favorite.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\pb mit schwarz.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\pb web.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Projection off 36.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Projection off.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Projection on 36.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Projection on.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\save_36.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\search.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\search_36.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\searchg.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\searchx.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\text_align_center.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\text_align_left.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\text_align_right.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\translate.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Resources\translate_active.png" />
+    <None Include="Resources\xmag.png" />
+    <None Include="Resources\wheel16.png" />
+    <None Include="Resources\update16.png" />
+    <None Include="Resources\unlink.png" />
+    <None Include="Resources\translate_small.png" />
+    <None Include="Resources\translate_disabled_small.png" />
+    <None Include="Resources\translate_disabled.png" />
+    <None Include="Resources\translate_cross_small.png" />
+  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

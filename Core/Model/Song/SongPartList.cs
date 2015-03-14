@@ -25,12 +25,12 @@ using System.Collections.Generic;
 namespace PraiseBase.Presenter.Model.Song
 {
     /// <summary>
-    /// Provides a list of all parts in the song
+    ///     Provides a list of all parts in the song
     /// </summary>
     public class SongPartList : List<SongPart>
     {
         /// <summary>
-        /// Swaps the part with the previous one
+        ///     Swaps the part with the previous one
         /// </summary>
         /// <param name="partId">Index of the part</param>
         /// <returns></returns>
@@ -38,7 +38,7 @@ namespace PraiseBase.Presenter.Model.Song
         {
             if (partId > 0 && partId < Count)
             {
-                SongPart tmpPrt = this[partId - 1];
+                var tmpPrt = this[partId - 1];
                 RemoveAt(partId - 1);
                 Insert(partId, tmpPrt);
                 return true;
@@ -47,7 +47,7 @@ namespace PraiseBase.Presenter.Model.Song
         }
 
         /// <summary>
-        /// Swaps the part with the next one
+        ///     Swaps the part with the next one
         /// </summary>
         /// <param name="partId">Index of the part</param>
         /// <returns></returns>
@@ -55,7 +55,7 @@ namespace PraiseBase.Presenter.Model.Song
         {
             if (partId >= 0 && partId < Count - 1)
             {
-                SongPart tmpPrt = this[partId + 1];
+                var tmpPrt = this[partId + 1];
                 RemoveAt(partId + 1);
                 Insert(partId, tmpPrt);
                 return true;
@@ -67,10 +67,10 @@ namespace PraiseBase.Presenter.Model.Song
         {
             unchecked
             {
-                int hash = 19;
-                for (int i = 0; i < Count; i++)
+                var hash = 19;
+                for (var i = 0; i < Count; i++)
                 {
-                    hash = hash * 31 + this[i].GetHashCode();
+                    hash = hash*31 + this[i].GetHashCode();
                 }
                 return hash;
             }
@@ -79,7 +79,7 @@ namespace PraiseBase.Presenter.Model.Song
         protected bool Equals(PartSequences other)
         {
             if (Count != other.Count) return false;
-            for (int i = 0; i < Count; i++)
+            for (var i = 0; i < Count; i++)
             {
                 if (!Equals(this[i], other[i])) return false;
             }
@@ -91,7 +91,7 @@ namespace PraiseBase.Presenter.Model.Song
             if (ReferenceEquals(null, obj)) return false;
             if (ReferenceEquals(this, obj)) return true;
             if (obj.GetType() != GetType()) return false;
-            return Equals((PartSequences)obj);
+            return Equals((PartSequences) obj);
         }
     }
 }

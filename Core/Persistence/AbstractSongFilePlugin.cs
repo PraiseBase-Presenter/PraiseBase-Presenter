@@ -5,17 +5,16 @@ namespace PraiseBase.Presenter.Persistence
 {
     public abstract class AbstractSongFilePlugin<T> : ISongFilePlugin where T : ISongFile, new()
     {
-        protected ISongFileReader<T> reader;
         protected ISongFileMapper<T> mapper;
+        protected ISongFileReader<T> reader;
         protected ISongFileWriter<T> writer;
 
         public AbstractSongFilePlugin()
         {
-            Console.WriteLine("Loaded song file plugin: " + this.GetType().ToString() + " (" + this.GetFileTypeDescription() + ")");
+            Console.WriteLine("Loaded song file plugin: " + GetType() + " (" + GetFileTypeDescription() + ")");
         }
 
         public abstract string GetFileExtension();
-
         public abstract string GetFileTypeDescription();
 
         public String ReadTitle(string filePath)
@@ -25,7 +24,7 @@ namespace PraiseBase.Presenter.Persistence
 
         public Song Load(String filePath)
         {
-            T song = reader.Load(filePath);
+            var song = reader.Load(filePath);
             return mapper.Map(song);
         }
 
@@ -43,10 +42,10 @@ namespace PraiseBase.Presenter.Persistence
         {
             if (!IsWritingSupported())
             {
-                throw new NotImplementedException("Writing not supported by " + this.GetType());
+                throw new NotImplementedException("Writing not supported by " + GetType());
             }
-            
-            T song = new T();
+
+            var song = new T();
             mapper.Map(sng, song);
             writer.Save(filePath, song);
         }

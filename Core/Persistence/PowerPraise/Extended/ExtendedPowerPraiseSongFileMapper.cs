@@ -27,13 +27,13 @@ namespace PraiseBase.Presenter.Persistence.PowerPraise.Extended
     public class ExtendedPowerPraiseSongFileMapper : PowerPraiseSongFileMapper, ISongFileMapper<ExtendedPowerPraiseSong>
     {
         /// <summary>
-        /// Maps a PowerPraise song to a Song object
+        ///     Maps a PowerPraise song to a Song object
         /// </summary>
         /// <param name="ppl"></param>
         /// <returns></returns>
         public Song Map(ExtendedPowerPraiseSong ppl)
         {
-            Song song = Map((PowerPraiseSong)ppl);
+            var song = Map((PowerPraiseSong) ppl);
 
             song.Comment = ppl.Comment;
             foreach (var e in ppl.QualityIssues)
@@ -50,14 +50,14 @@ namespace PraiseBase.Presenter.Persistence.PowerPraise.Extended
         }
 
         /// <summary>
-        /// Maps a song to a PowerPraise song object
+        ///     Maps a song to a PowerPraise song object
         /// </summary>
         /// <param name="song"></param>
         /// <param name="ppl"></param>
         public void Map(Song song, ExtendedPowerPraiseSong ppl)
         {
-            Map(song, (PowerPraiseSong)ppl);
-            
+            Map(song, (PowerPraiseSong) ppl);
+
             ppl.Comment = song.Comment;
             foreach (var e in song.QualityIssues)
             {

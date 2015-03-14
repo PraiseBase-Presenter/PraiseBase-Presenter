@@ -27,11 +27,11 @@ namespace PraiseBase.Presenter.Model.Statistics
 {
     public class Statistics
     {
-        public SortedList<String, StatisticsDate> Dates { get; set; }
-
         public Statistics()
         {
             Dates = new SortedList<String, StatisticsDate>();
         }
+
+        public SortedList<String, StatisticsDate> Dates { get; set; }
     }
 }

@@ -7,18 +7,18 @@ namespace PraiseBase.Presenter.Persistence.CCLI
     {
         public Song Map(SongSelectFile source)
         {
-            Song sng = new Song
+            var sng = new Song
             {
                 // CCLI ID
                 CcliIdentifier = source.ID,
                 IsCCliIdentifierReadonly = true,
-                
+
                 // Title
                 Title = source.Title,
-                
+
                 // Copyright
                 Copyright = source.Copyright,
-                
+
                 // Administration / Rights management
                 RightsManagement = source.Admin
             };
@@ -37,12 +37,13 @@ namespace PraiseBase.Presenter.Persistence.CCLI
             sng.Key = source.Key;
 
             // Verses
-            foreach (var v in source.Verses) {
-                SongPart p = new SongPart
+            foreach (var v in source.Verses)
+            {
+                var p = new SongPart
                 {
                     Caption = v.Caption
                 };
-                SongSlide s = new SongSlide();
+                var s = new SongSlide();
                 s.Lines.AddRange(v.Lines);
                 p.Slides.Add(s);
                 sng.Parts.Add(p);

@@ -29,17 +29,16 @@ namespace PraiseBase.Presenter.Persistence.OpenLyrics
     public class OpenLyricsSongFileReader : ISongFileReader<OpenLyricsSong>
     {
         protected const string SupportedFileFormatVersion = "0.8";
-
         protected const string XmlRootNodeName = "song";
 
         public OpenLyricsSong Load(string filename)
         {
-            OpenLyricsSong sng = new OpenLyricsSong();
+            var sng = new OpenLyricsSong();
 
             // Init xml
-            XmlDocument xmlDoc = new XmlDocument();
+            var xmlDoc = new XmlDocument();
             xmlDoc.Load(filename);
-            XmlElement xmlRoot = xmlDoc.DocumentElement;
+            var xmlRoot = xmlDoc.DocumentElement;
 
             // Check for correct root node and version
             if (xmlRoot.Name != XmlRootNodeName || xmlRoot.GetAttribute("version") != SupportedFileFormatVersion)
@@ -128,7 +127,7 @@ namespace PraiseBase.Presenter.Persistence.OpenLyrics
             {
                 if (verseNode.Name == "verse")
                 {
-                    OpenLyricsSongVerse verse = new OpenLyricsSongVerse();
+                    var verse = new OpenLyricsSongVerse();
                     if (verseNode.Attributes["name"] != null)
                     {
                         verse.Name = verseNode.Attributes["name"].InnerText;
@@ -142,12 +141,12 @@ namespace PraiseBase.Presenter.Persistence.OpenLyrics
                     {
                         if (linesNode.Name == "lines")
                         {
-                            OpenLyricsSongLines line = new OpenLyricsSongLines();
+                            var line = new OpenLyricsSongLines();
                             if (linesNode.Attributes["part"] != null)
                             {
                                 line.Part = linesNode.Attributes["part"].InnerText;
                             }
-                            string lineText = string.Empty;
+                            var lineText = string.Empty;
                             foreach (XmlNode l in linesNode)
                             {
                                 if (l.NodeType == XmlNodeType.Text)
@@ -181,7 +180,7 @@ namespace PraiseBase.Presenter.Persistence.OpenLyrics
         }
 
         /// <summary>
-        /// Reads the title of a song from a file
+        ///     Reads the title of a song from a file
         /// </summary>
         /// <param name="filename">Absolute path to the song file</param>
         /// <returns></returns>
@@ -193,8 +192,8 @@ namespace PraiseBase.Presenter.Persistence.OpenLyrics
                 {
                     return null;
                 }
-                string parentNode = String.Empty;
-                XmlTextReader t = new XmlTextReader(filename);
+                var parentNode = String.Empty;
+                var t = new XmlTextReader(filename);
                 while (t.Read())
                 {
                     if (t.NodeType == XmlNodeType.Element)
@@ -218,7 +217,7 @@ namespace PraiseBase.Presenter.Persistence.OpenLyrics
                     }
                     else if (t.NodeType == XmlNodeType.Text && parentNode == "title")
                     {
-                        string title = t.ReadContentAsString();
+                        var title = t.ReadContentAsString();
                         t.Close();
                         return title;
                     }
@@ -233,7 +232,7 @@ namespace PraiseBase.Presenter.Persistence.OpenLyrics
         }
 
         /// <summary>
-        /// Tests if a given file is supported by this reader
+        ///     Tests if a given file is supported by this reader
         /// </summary>
         /// <param name="filename"></param>
         /// <returns></returns>
@@ -241,29 +240,23 @@ namespace PraiseBase.Presenter.Persistence.OpenLyrics
         {
             try
             {
-                XmlTextReader t = new XmlTextReader(filename);
+                var t = new XmlTextReader(filename);
                 while (t.Read())
                 {
                     if (t.NodeType == XmlNodeType.Element)
                     {
                         if (t.Name == XmlRootNodeName)
                         {
-                            if (t.GetAttribute("version").ToString() == SupportedFileFormatVersion)
+                            if (t.GetAttribute("version") == SupportedFileFormatVersion)
                             {
                                 t.Close();
                                 return true;
                             }
-                            else
-                            {
-                                t.Close();
-                                return false;
-                            }
-                        }
-                        else
-                        {
                             t.Close();
                             return false;
                         }
+                        t.Close();
+                        return false;
                     }
                 }
                 t.Close();

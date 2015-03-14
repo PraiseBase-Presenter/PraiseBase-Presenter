@@ -27,18 +27,10 @@ namespace PraiseBase.Presenter.Model.Bible
     public class BibleBook
     {
         public int Number { get; set; }
-
         public string Name { get; set; }
-
         public string ShortName { get; set; }
-
         public Bible Bible { get; set; }
-
         public List<BibleChapter> Chapters { get; set; }
-
-        public BibleBook()
-        {
-        }
 
         public override string ToString()
         {

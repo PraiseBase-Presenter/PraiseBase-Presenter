@@ -26,38 +26,7 @@ namespace PraiseBase.Presenter.Model.Bible
 {
     public class BibleVerseSelection
     {
-        public BibleVerse StartVerse { get; private set; }
-
-        public BibleVerse EndVerse
-        {
-            get
-            {
-                return StartVerse.Chapter.Verses[endVerseNumber - 1];
-            }
-        }
-
-        public BibleChapter Chapter
-        {
-            get
-            {
-                return StartVerse.Chapter;
-            }
-        }
-
-        public string Text
-        {
-            get
-            {
-                string str = "";
-                for (int i = StartVerse.Number; i <= endVerseNumber; i++)
-                {
-                    str += StartVerse.Chapter.Verses[i - 1] + Environment.NewLine;
-                }
-                return str;
-            }
-        }
-
-        private int endVerseNumber = 0;
+        private readonly int endVerseNumber;
 
         public BibleVerseSelection(BibleVerse start)
         {
@@ -77,9 +46,37 @@ namespace PraiseBase.Presenter.Model.Bible
             endVerseNumber = end;
         }
 
+        public BibleVerse StartVerse { get; private set; }
+
+        public BibleVerse EndVerse
+        {
+            get { return StartVerse.Chapter.Verses[endVerseNumber - 1]; }
+        }
+
+        public BibleChapter Chapter
+        {
+            get { return StartVerse.Chapter; }
+        }
+
+        public string Text
+        {
+            get
+            {
+                var str = "";
+                for (var i = StartVerse.Number; i <= endVerseNumber; i++)
+                {
+                    str += StartVerse.Chapter.Verses[i - 1] + Environment.NewLine;
+                }
+                return str;
+            }
+        }
+
         public override string ToString()
         {
-            return StartVerse.Chapter.Book + " " + StartVerse.Chapter + "." + (endVerseNumber != 0 && StartVerse.Number != endVerseNumber ? StartVerse.Number.ToString() + "-" + endVerseNumber : StartVerse.Number.ToString());
+            return StartVerse.Chapter.Book + " " + StartVerse.Chapter + "." +
+                   (endVerseNumber != 0 && StartVerse.Number != endVerseNumber
+                       ? StartVerse.Number + "-" + endVerseNumber
+                       : StartVerse.Number.ToString());
         }
     }
 }

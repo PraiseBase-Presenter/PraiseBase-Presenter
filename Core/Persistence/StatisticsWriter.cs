@@ -29,7 +29,7 @@ namespace PraiseBase.Presenter.Persistence
     {
         public void Write(string filename, Statistics stat)
         {
-            XmlWriterHelper xml = new XmlWriterHelper("statistics", "1.0");
+            var xml = new XmlWriterHelper("statistics", "1.0");
 
             XmlElement node;
             foreach (var date in stat.Dates)
@@ -38,7 +38,7 @@ namespace PraiseBase.Presenter.Persistence
                 node.SetAttribute("year", date.Value.Year.ToString());
                 node.SetAttribute("month", date.Value.Month.ToString());
                 node.SetAttribute("day", date.Value.Day.ToString());
-                XmlNode dateNode = xml.Root.AppendChild(node);
+                var dateNode = xml.Root.AppendChild(node);
                 foreach (var item in date.Value.Items)
                 {
                     if (item.Value.Type == StatisticsItemType.Song)

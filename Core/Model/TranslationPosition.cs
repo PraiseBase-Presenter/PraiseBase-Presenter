@@ -1,5 +1,4 @@
-﻿
-namespace PraiseBase.Presenter.Model
+﻿namespace PraiseBase.Presenter.Model
 {
     public enum TranslationPosition
     {

@@ -28,38 +28,47 @@ using System.Runtime.Serialization;
 namespace PraiseBase.Presenter.Model.Song
 {
     /// <summary>
-    /// A single slide with songtext and/or a background image
+    ///     A single slide with songtext and/or a background image
     /// </summary>
     [Serializable]
     public class SongSlide : ICloneable, ISerializable
     {
         /// <summary>
-        /// All text lines of this slide
+        ///     The slide constructor
+        /// </summary>
+        public SongSlide()
+        {
+            Lines = new List<string>();
+            Translation = new List<string>();
+        }
+
+        /// <summary>
+        ///     All text lines of this slide
         /// </summary>
         public List<string> Lines { get; set; }
 
         /// <summary>
-        /// All translation lines of this slide
+        ///     All translation lines of this slide
         /// </summary>
         public List<string> Translation { get; set; }
 
         /// <summary>
-        /// Number of the slide background image
+        ///     Number of the slide background image
         /// </summary>
         public IBackground Background { get; set; }
 
         /// <summary>
-        /// Size of the main text. This is used to maintain compatibility with PowerPraise
+        ///     Size of the main text. This is used to maintain compatibility with PowerPraise
         /// </summary>
         public float TextSize { get; set; }
 
         /// <summary>
-        /// Part name
+        ///     Part name
         /// </summary>
         public string PartName { get; set; }
 
         /// <summary>
-        /// Indicates wether this slide has a translation
+        ///     Indicates wether this slide has a translation
         /// </summary>
         public bool Translated
         {
@@ -67,15 +76,15 @@ namespace PraiseBase.Presenter.Model.Song
         }
 
         /// <summary>
-        /// Gets or sets the text of this slide
+        ///     Gets or sets the text of this slide
         /// </summary>
         public String Text
         {
             get
             {
-                string txt = "";
-                int i = 1;
-                foreach (string str in Lines)
+                var txt = "";
+                var i = 1;
+                foreach (var str in Lines)
                 {
                     txt += str;
                     if (i < Lines.Count)
@@ -87,8 +96,8 @@ namespace PraiseBase.Presenter.Model.Song
             set
             {
                 Lines = new List<string>();
-                string[] ln = value.Trim().Split(new[] { Environment.NewLine, "<br/>" }, StringSplitOptions.None);
-                foreach (string sl in ln)
+                var ln = value.Trim().Split(new[] {Environment.NewLine, "<br/>"}, StringSplitOptions.None);
+                foreach (var sl in ln)
                 {
                     Lines.Add(sl.Trim());
                 }
@@ -96,15 +105,15 @@ namespace PraiseBase.Presenter.Model.Song
         }
 
         /// <summary>
-        /// Gets or sets the translation of this slide
+        ///     Gets or sets the translation of this slide
         /// </summary>
         public String TranslationText
         {
             get
             {
-                string txt = "";
-                int i = 1;
-                foreach (string str in Translation)
+                var txt = "";
+                var i = 1;
+                foreach (var str in Translation)
                 {
                     txt += str;
                     if (i < Translation.Count)
@@ -116,27 +125,18 @@ namespace PraiseBase.Presenter.Model.Song
             set
             {
                 Translation = new List<string>();
-                string[] tr = value.Split(new[] { Environment.NewLine }, StringSplitOptions.None);
-                foreach (string sl in tr)
+                var tr = value.Split(new[] {Environment.NewLine}, StringSplitOptions.None);
+                foreach (var sl in tr)
                 {
                     Translation.Add(sl.Trim());
                 }
             }
         }
 
-        /// <summary>
-        /// The slide constructor
-        /// </summary>
-        public SongSlide()
-        {
-            Lines = new List<string>();
-            Translation = new List<string>();
-        }
-
         #region ICloneable Members
 
         /// <summary>
-        /// Clones this slide
+        ///     Clones this slide
         /// </summary>
         /// <returns>A duplicate of this slide</returns>
         public object Clone()
@@ -155,56 +155,7 @@ namespace PraiseBase.Presenter.Model.Song
         #endregion ICloneable Members
 
         /// <summary>
-        /// Returns the text on one line. This is mainly used
-        /// in the song detail overview in the presenter.
-        /// </summary>
-        /// <returns>Text on one line</returns>
-        public string GetOneLineText()
-        {
-            return Lines.Aggregate("", (current, str) => current + (str + " "));
-        }
-
-        /// <summary>
-        /// Gets the translation on one line
-        /// </summary>
-        /// <returns></returns>
-        public string GetOneLineTranslation()
-        {
-            return Translation.Aggregate("", (current, str) => current + (str + " "));
-        }
-
-        /// <summary>
-        /// Gets the hash code
-        /// </summary>
-        /// <returns></returns>
-        public override int GetHashCode()
-        {
-            unchecked
-            {
-                var hashCode = (TranslationText != null ? TranslationText.GetHashCode() : 0);
-                hashCode = (hashCode * 397) ^ (Text != null ? Text.GetHashCode() : 0);
-                hashCode = (hashCode*397) ^ (Background != null ? Background.GetHashCode() : 0);
-                hashCode = (hashCode*397) ^ TextSize.GetHashCode();
-                hashCode = (hashCode*397) ^ (PartName != null ? PartName.GetHashCode() : 0);
-                return hashCode;
-            }
-        }
-
-        protected bool Equals(SongSlide other)
-        {
-            return Equals(TranslationText, other.TranslationText) && Equals(Text, other.Text) && Equals(Background, other.Background) && TextSize.Equals(other.TextSize) && string.Equals(PartName, other.PartName);
-        }
-
-        public override bool Equals(object obj)
-        {
-            if (ReferenceEquals(null, obj)) return false;
-            if (ReferenceEquals(this, obj)) return true;
-            if (obj.GetType() != GetType()) return false;
-            return Equals((SongSlide) obj);
-        }
-
-        /// <summary>
-        /// Gets the object data for serialization
+        ///     Gets the object data for serialization
         /// </summary>
         /// <param name="info"></param>
         /// <param name="context"></param>
@@ -216,5 +167,56 @@ namespace PraiseBase.Presenter.Model.Song
             info.AddValue("Lines", Lines);
             info.AddValue("Translation", Translation);
         }
-    } ;
+
+        /// <summary>
+        ///     Returns the text on one line. This is mainly used
+        ///     in the song detail overview in the presenter.
+        /// </summary>
+        /// <returns>Text on one line</returns>
+        public string GetOneLineText()
+        {
+            return Lines.Aggregate("", (current, str) => current + (str + " "));
+        }
+
+        /// <summary>
+        ///     Gets the translation on one line
+        /// </summary>
+        /// <returns></returns>
+        public string GetOneLineTranslation()
+        {
+            return Translation.Aggregate("", (current, str) => current + (str + " "));
+        }
+
+        /// <summary>
+        ///     Gets the hash code
+        /// </summary>
+        /// <returns></returns>
+        public override int GetHashCode()
+        {
+            unchecked
+            {
+                var hashCode = (TranslationText != null ? TranslationText.GetHashCode() : 0);
+                hashCode = (hashCode*397) ^ (Text != null ? Text.GetHashCode() : 0);
+                hashCode = (hashCode*397) ^ (Background != null ? Background.GetHashCode() : 0);
+                hashCode = (hashCode*397) ^ TextSize.GetHashCode();
+                hashCode = (hashCode*397) ^ (PartName != null ? PartName.GetHashCode() : 0);
+                return hashCode;
+            }
+        }
+
+        protected bool Equals(SongSlide other)
+        {
+            return Equals(TranslationText, other.TranslationText) && Equals(Text, other.Text) &&
+                   Equals(Background, other.Background) && TextSize.Equals(other.TextSize) &&
+                   string.Equals(PartName, other.PartName);
+        }
+
+        public override bool Equals(object obj)
+        {
+            if (ReferenceEquals(null, obj)) return false;
+            if (ReferenceEquals(this, obj)) return true;
+            if (obj.GetType() != GetType()) return false;
+            return Equals((SongSlide) obj);
+        }
+    };
 }

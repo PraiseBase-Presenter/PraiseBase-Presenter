@@ -26,7 +26,7 @@ using System.Linq;
 namespace PraiseBase.Presenter.Model.Song
 {
     /// <summary>
-    /// Provides a list of all authors in the song
+    ///     Provides a list of all authors in the song
     /// </summary>
     public class QualityIssues : HashSet<SongQualityAssuranceIndicator>
     {
@@ -53,7 +53,7 @@ namespace PraiseBase.Presenter.Model.Song
             if (ReferenceEquals(null, obj)) return false;
             if (ReferenceEquals(this, obj)) return true;
             if (obj.GetType() != GetType()) return false;
-            return Equals((QualityIssues)obj);
+            return Equals((QualityIssues) obj);
         }
 
         public bool Set(SongQualityAssuranceIndicator qa, bool set)

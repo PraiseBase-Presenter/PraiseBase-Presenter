@@ -1,16 +1,21 @@
-﻿
-namespace PraiseBase.Presenter.Persistence.OpenLyrics
+﻿namespace PraiseBase.Presenter.Persistence.OpenLyrics
 {
     public class OpenLyricsSongFilePlugin : AbstractSongFilePlugin<OpenLyricsSong>
     {
-        public OpenLyricsSongFilePlugin() : base()
+        public OpenLyricsSongFilePlugin()
         {
             reader = new OpenLyricsSongFileReader();
             mapper = new OpenLyricsSongFileMapper();
         }
 
-        public override string GetFileExtension() { return ".xml"; }
+        public override string GetFileExtension()
+        {
+            return ".xml";
+        }
 
-        public override string GetFileTypeDescription() { return "OpenLyrics Song"; }
+        public override string GetFileTypeDescription()
+        {
+            return "OpenLyrics Song";
+        }
     }
 }

@@ -23,28 +23,28 @@
 namespace PraiseBase.Presenter.Model.Song
 {
     /// <summary>
-    /// Different flags for indicating problems with the song
-    /// whichs needs to be revised
+    ///     Different flags for indicating problems with the song
+    ///     whichs needs to be revised
     /// </summary>
     public enum SongQualityAssuranceIndicator
     {
         /// <summary>
-        /// Indicates wether spelling of the songtext is incorrect
+        ///     Indicates wether spelling of the songtext is incorrect
         /// </summary>
         Spelling = 1,
 
         /// <summary>
-        /// Indicates wether images are broken or incomplete
+        ///     Indicates wether images are broken or incomplete
         /// </summary>
         Images = 2,
 
         /// <summary>
-        /// Indicates wether the translation is missing or incomplete
+        ///     Indicates wether the translation is missing or incomplete
         /// </summary>
         Translation = 4,
 
         /// <summary>
-        /// Indicates wether the layout of the slides needs optimization
+        ///     Indicates wether the layout of the slides needs optimization
         /// </summary>
         Segmentation = 8
     }

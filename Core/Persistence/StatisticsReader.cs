@@ -32,25 +32,26 @@ namespace PraiseBase.Presenter.Persistence
         {
             var xmlDoc = new XmlDocument();
             xmlDoc.Load(filename);
-            XmlElement xmlRoot = xmlDoc.DocumentElement;
+            var xmlRoot = xmlDoc.DocumentElement;
 
-            if (xmlRoot.Name != "statistics" || (xmlRoot.Attributes["version"] == null || xmlRoot.Attributes["version"].Value != "1.0"))
+            if (xmlRoot.Name != "statistics" ||
+                (xmlRoot.Attributes["version"] == null || xmlRoot.Attributes["version"].Value != "1.0"))
             {
                 throw new Exception("Ungültige Statistikdatei!");
             }
-            Statistics sl = new Statistics();
-            for (int i = 0; i < xmlRoot.ChildNodes.Count; i++)
+            var sl = new Statistics();
+            for (var i = 0; i < xmlRoot.ChildNodes.Count; i++)
             {
                 var node = xmlRoot.ChildNodes[i];
                 if (node.Name == "date")
                 {
-                    int year = Int32.Parse(node.Attributes["year"].Value);
-                    int month = Int32.Parse(node.Attributes["month"].Value);
-                    int day = Int32.Parse(node.Attributes["day"].Value);
+                    var year = Int32.Parse(node.Attributes["year"].Value);
+                    var month = Int32.Parse(node.Attributes["month"].Value);
+                    var day = Int32.Parse(node.Attributes["day"].Value);
                     var date = new StatisticsDate(year, month, day);
                     sl.Dates.Add(date.ID, date);
 
-                    for (int j = 0; j < node.ChildNodes.Count; j++)
+                    for (var j = 0; j < node.ChildNodes.Count; j++)
                     {
                         var cnode = node.ChildNodes[j];
                         if (cnode.Name == "song")

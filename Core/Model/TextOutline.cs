@@ -27,19 +27,23 @@ namespace PraiseBase.Presenter.Model
 {
     public class TextOutline : ICloneable
     {
-        public int Width { get; set; }
-
-        public Color Color { get; set; }
-
         public TextOutline(int width, Color color)
         {
             Width = width;
             Color = color;
         }
 
+        public int Width { get; set; }
+        public Color Color { get; set; }
+
+        public object Clone()
+        {
+            return new TextOutline(Width, Color);
+        }
+
         /// <summary>
-        /// Returns a hashcode of the text formatting object, used for example in the
-        /// editor to check if the file was changed
+        ///     Returns a hashcode of the text formatting object, used for example in the
+        ///     editor to check if the file was changed
         /// </summary>
         /// <returns></returns>
         public override int GetHashCode()
@@ -59,13 +63,8 @@ namespace PraiseBase.Presenter.Model
         {
             if (ReferenceEquals(null, obj)) return false;
             if (ReferenceEquals(this, obj)) return true;
-            if (obj.GetType() != this.GetType()) return false;
+            if (obj.GetType() != GetType()) return false;
             return Equals((TextOutline) obj);
-        }
-
-        public object Clone()
-        {
-            return new TextOutline(Width, Color);
         }
     }
 }
