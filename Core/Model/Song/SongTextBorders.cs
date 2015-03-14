@@ -22,7 +22,7 @@
 
 using System;
 
-namespace PraiseBase.Presenter.Model
+namespace PraiseBase.Presenter.Model.Song
 {
     public class SongTextBorders : ICloneable
     {

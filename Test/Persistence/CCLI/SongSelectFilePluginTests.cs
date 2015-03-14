@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using PraiseBase.Presenter.Persistence.CCLI;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-namespace PraiseBase.Presenter.Persistence.CCLI.Tests
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+
+namespace PraiseBase.Presenter.Persistence.CCLI
 {
     [TestClass()]
     public class SongSelectFilePluginTests

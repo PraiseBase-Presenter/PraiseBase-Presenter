@@ -1,11 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using PraiseBase.Presenter.Persistence.PowerPraise;
+﻿using System.Drawing;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System.Drawing;
-namespace PraiseBase.Presenter.Persistence.PowerPraise.Tests
+
+namespace PraiseBase.Presenter.Persistence.PowerPraise
 {
     [TestClass()]
     public class PowerPraiseFileUtilTest

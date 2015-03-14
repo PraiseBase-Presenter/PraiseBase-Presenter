@@ -3,7 +3,7 @@ using System.Data.OleDb;
 using System.Linq;
 using PraiseBase.Presenter.Model.Song;
 
-namespace PraiseBase.Presenter.Persistence.PraiseBox
+namespace PraiseBase.Presenter.Persistence.WorshipSystem
 {
     public class WorshipSystemDatabaseImporter : AbstractDatabaseImporter
     {
