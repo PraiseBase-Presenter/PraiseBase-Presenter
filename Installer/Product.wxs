@@ -67,12 +67,6 @@
                 Source="$(var.PraiseBase_Common_Controls.TargetPath)"
                 KeyPath="yes" />
           </Component>
-          <Component Id="EditorDll" Guid="65e56295-fba4-4d19-8943-5eb138f6f0e3">
-            <File Id="EditorDllFile"
-                Name="$(var.Song_Editor.TargetFileName)"
-                Source="$(var.Song_Editor.TargetPath)"
-                KeyPath="yes" />
-          </Component>
           <Component Id="LicenseRtf" Guid="96dc79f8-2344-4610-a167-9b09ee501509">
             <File Id="License.rtf" 
                   Source="$(var.PraiseBase_Presenter.ProjectDir)..\License.rtf" 
@@ -232,7 +226,6 @@
       <ComponentRef Id="CoreDll" />
       <ComponentRef Id="ConfigDll" />
       <ComponentRef Id="ControlsDll" />
-      <ComponentRef Id="EditorDll" />
       <ComponentRef Id="LicenseRtf" />
       <ComponentRef Id="LicenseTxt" />
       <ComponentRef Id="ApplicationStartMenuShortcut" />

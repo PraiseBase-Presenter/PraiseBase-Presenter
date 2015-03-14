@@ -84,6 +84,20 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Editor\EditorChildMetaData.cs" />
+    <Compile Include="Editor\SongEditor.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Editor\SongEditor.Designer.cs">
+      <DependentUpon>SongEditor.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Editor\SongEditorChild.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Editor\SongEditorChild.Designer.cs">
+      <DependentUpon>SongEditorChild.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Editor\SongSavedEventArgs.cs" />
     <Compile Include="Manager\BibleManager.cs" />
     <Compile Include="Manager\ProjectionManager.cs" />
     <Compile Include="Manager\ScreenManager.cs" />
@@ -135,6 +149,23 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="Editor\SongEditor.en-US.resx">
+      <DependentUpon>SongEditor.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Editor\SongEditor.fr-FR.resx">
+      <DependentUpon>SongEditor.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Editor\SongEditor.resx">
+      <DependentUpon>SongEditor.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Editor\SongEditorChild.en-US.resx">
+      <DependentUpon>SongEditorChild.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Editor\SongEditorChild.resx">
+      <DependentUpon>SongEditorChild.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
     <EmbeddedResource Include="UI\Components\SongDetail.resx">
       <DependentUpon>SongDetail.cs</DependentUpon>
       <SubType>Designer</SubType>
@@ -232,10 +263,6 @@
     <ProjectReference Include="..\Core\PraiseBase Core Libraries.csproj">
       <Project>{67651B76-5ABD-4040-9A8F-3833130FC77D}</Project>
       <Name>PraiseBase Core Libraries</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\SongEditor\Song Editor.csproj">
-      <Project>{62a96dba-fec1-470e-8ebe-3ecc2464d322}</Project>
-      <Name>Song Editor</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup />
