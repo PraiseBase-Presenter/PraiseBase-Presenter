@@ -1,5 +1,4 @@
 ﻿using PraiseBase.Presenter.Controls;
-using PraiseBase.Presenter.UI.Components;
 
 namespace PraiseBase.Presenter.UI.Presenter
 {
@@ -45,7 +44,7 @@ namespace PraiseBase.Presenter.UI.Presenter
             this.listViewSongs = new System.Windows.Forms.ListView();
             this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.label3 = new System.Windows.Forms.Label();
-            this.songDetailElement = new PraiseBase.Presenter.UI.Components.SongDetail();
+            this.songDetailElement = new SongDetail();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.buttonShowLiveText = new System.Windows.Forms.Button();
             this.textBoxLiveText = new System.Windows.Forms.TextBox();
@@ -320,10 +319,10 @@ namespace PraiseBase.Presenter.UI.Presenter
             this.songDetailElement.NextSongIcon = ((System.Drawing.Image)(resources.GetObject("songDetailElement.NextSongIcon")));
             this.songDetailElement.PreviousSongIcon = ((System.Drawing.Image)(resources.GetObject("songDetailElement.PreviousSongIcon")));
             this.songDetailElement.ThumbnailSize = new System.Drawing.Size(56, 42);
-            this.songDetailElement.SlideClicked += new PraiseBase.Presenter.UI.Components.SongDetail.SlideClick(this.songDetailElement_SlideClicked);
-            this.songDetailElement.ImageClicked += new PraiseBase.Presenter.UI.Components.SongDetail.ImageClick(this.songDetailElement_ImageClicked);
-            this.songDetailElement.PreviousSongClicked += new PraiseBase.Presenter.UI.Components.SongDetail.PreviousSongClick(this.songDetailElement_PreviousSongClicked);
-            this.songDetailElement.NextSongClicked += new PraiseBase.Presenter.UI.Components.SongDetail.NextSongClick(this.songDetailElement_NextSongClicked);
+            this.songDetailElement.SlideClicked += new SongDetail.SlideClick(this.songDetailElement_SlideClicked);
+            this.songDetailElement.ImageClicked += new SongDetail.ImageClick(this.songDetailElement_ImageClicked);
+            this.songDetailElement.PreviousSongClicked += new SongDetail.PreviousSongClick(this.songDetailElement_PreviousSongClicked);
+            this.songDetailElement.NextSongClicked += new SongDetail.NextSongClick(this.songDetailElement_NextSongClicked);
             // 
             // tabPage2
             // 

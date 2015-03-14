@@ -7,7 +7,7 @@ using System.Windows.Forms;
 using PraiseBase.Presenter.Manager;
 using PraiseBase.Presenter.Model.Song;
 
-namespace PraiseBase.Presenter.UI.Components
+namespace PraiseBase.Presenter.Controls
 {
     [DefaultEvent("SlideClicked")]
     public partial class SongDetail : UserControl

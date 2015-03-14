@@ -1,4 +1,4 @@
-﻿namespace PraiseBase.Presenter.UI.Components
+﻿namespace PraiseBase.Presenter.Controls
 {
     partial class SongDetail
     {

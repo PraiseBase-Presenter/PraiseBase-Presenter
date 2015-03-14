@@ -30,6 +30,7 @@ using System.IO;
 using System.Linq;
 using System.Threading;
 using System.Windows.Forms;
+using PraiseBase.Presenter.Controls;
 using PraiseBase.Presenter.Editor;
 using PraiseBase.Presenter.Forms;
 using PraiseBase.Presenter.Importer;
@@ -41,7 +42,6 @@ using PraiseBase.Presenter.Persistence;
 using PraiseBase.Presenter.Persistence.Setlists;
 using PraiseBase.Presenter.Projection;
 using PraiseBase.Presenter.Properties;
-using PraiseBase.Presenter.UI.Components;
 using PraiseBase.Presenter.Util;
 using Timer = System.Windows.Forms.Timer;
 

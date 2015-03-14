@@ -175,10 +175,10 @@
       <DesignTime>True</DesignTime>
     </Compile>
     <Compile Include="Template\SongTemplateMapper.cs" />
-    <Compile Include="UI\Components\SongDetail.cs">
+    <Compile Include="Controls\SongDetail.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="UI\Components\SongDetail.Designer.cs">
+    <Compile Include="Controls\SongDetail.Designer.cs">
       <DependentUpon>SongDetail.cs</DependentUpon>
     </Compile>
     <Compile Include="UI\Presenter\LoadingScreen.cs">
@@ -300,7 +300,7 @@
       <LastGenOutput>StringResources.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="UI\Components\SongDetail.resx">
+    <EmbeddedResource Include="Controls\SongDetail.resx">
       <DependentUpon>SongDetail.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
@@ -639,7 +639,9 @@
     <None Include="Resources\translate_disabled.png" />
     <None Include="Resources\translate_cross_small.png" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="UI\Components\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
