@@ -3,6 +3,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using PraiseBase.Presenter.Model.Song;
 using System.Drawing;
+using PraiseBase.Presenter.Util;
 
 namespace PraiseBase.Presenter.Persistence.PowerPraise.Extended
 {
@@ -164,8 +165,8 @@ namespace PraiseBase.Presenter.Persistence.PowerPraise.Extended
             Assert.AreEqual(expected.TextBorders.SourceRight, actual.TextBorders.SourceRight);
             Assert.AreEqual(expected.TextBorders.SourceTop, actual.TextBorders.SourceTop);
 
-            Assert.IsTrue(actual.GetSearchableText().Contains("näher mein gott zu dir"));
-            Assert.IsTrue(actual.GetSearchableText().Contains("geborgen"));
+            Assert.IsTrue(SongSearchUtil.GetSearchableSongText(actual).Contains("näher mein gott zu dir"));
+            Assert.IsTrue(SongSearchUtil.GetSearchableSongText(actual).Contains("geborgen"));
         }
 
         /// <summary>
@@ -379,8 +380,8 @@ namespace PraiseBase.Presenter.Persistence.PowerPraise.Extended
             Assert.AreEqual(expected.TextBorders.SourceRight, actual.TextBorders.SourceRight);
             Assert.AreEqual(expected.TextBorders.SourceTop, actual.TextBorders.SourceTop);
 
-            Assert.IsTrue(actual.GetSearchableText().Contains("näher mein gott zu dir"));
-            Assert.IsTrue(actual.GetSearchableText().Contains("geborgen"));
+            Assert.IsTrue(SongSearchUtil.GetSearchableSongText(actual).Contains("näher mein gott zu dir"));
+            Assert.IsTrue(SongSearchUtil.GetSearchableSongText(actual).Contains("geborgen"));
         }
 
         /// <summary>

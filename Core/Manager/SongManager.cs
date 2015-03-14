@@ -25,6 +25,7 @@ using System.Collections.Generic;
 using System.IO;
 using PraiseBase.Presenter.Model.Song;
 using PraiseBase.Presenter.Persistence;
+using PraiseBase.Presenter.Util;
 
 namespace PraiseBase.Presenter.Manager
 {
@@ -128,11 +129,13 @@ namespace PraiseBase.Presenter.Manager
                 try
                 {
                     var plugin = SongFilePluginFactory.Create(path);
+                    var song = plugin.Load(path);
                     SongItem si = new SongItem
                     {
                         Plugin = plugin,
                         Filename = path,
-                        Song = plugin.Load(path)
+                        Song = song,
+                        SearchText = SongSearchUtil.GetSearchableSongText(song)
                     };
                     SongList.Add(path, si);
                     if (i % 25 == 0)
@@ -203,7 +206,9 @@ namespace PraiseBase.Presenter.Manager
             {
                 try
                 {
-                    si.Song = si.Plugin.Load(si.Filename);
+                    var song = si.Plugin.Load(si.Filename);
+                    si.Song = song;
+                    si.SearchText = SongSearchUtil.GetSearchableSongText(song);
                 }
                 catch (Exception e)
                 {
@@ -218,22 +223,17 @@ namespace PraiseBase.Presenter.Manager
         /// <param name="needle">The search pattern</param>
         /// <param name="searchMode">If set to 1, the sogtext is also searched for the pattern. If set to 0, only the song title will be used</param>
         /// <returns>Returns a list of matches songs</returns>
-        public List<SongItem> GetSearchResults(string needle, SongSearchMode searchMode)
+        public Dictionary<string, SongItem> GetSearchResults(string needle, SongSearchMode searchMode)
         {
-            needle = needle.Trim().ToLower();
-            needle = needle.Replace(",", "");
-            needle = needle.Replace(".", "");
-            needle = needle.Replace(";", "");
-            needle = needle.Replace(Environment.NewLine, "");
-            needle = needle.Replace("  ", " ");
+            needle = SongSearchUtil.PrepareSearchText(needle);
 
-            var tmpList = new List<SongItem>();
+            var tmpList = new Dictionary<string, SongItem>();
             foreach (var kvp in SongList)
             {
-                if (SongList[kvp.Key].Song.Title.ToLower().Contains(needle) ||
-                    (searchMode == SongSearchMode.TitleAndText && SongList[kvp.Key].SearchText.Contains(needle)))
+                if (kvp.Value.Song.Title.ToLower().Contains(needle) ||
+                    (searchMode == SongSearchMode.TitleAndText && kvp.Value.SearchText.Contains(needle)))
                 {
-                    tmpList.Add(SongList[kvp.Key]);
+                    tmpList.Add(kvp.Key, kvp.Value);
                 }
             }
             return tmpList;

@@ -274,11 +274,11 @@ namespace PraiseBase.Presenter.UI.Presenter
             int cnt = 0;
 
             var lviList = new List<ListViewItem>();
-            foreach (SongItem si in _songManager.GetSearchResults(needle, Settings.Default.SongSearchMode))
+            foreach (var elem in _songManager.GetSearchResults(needle, Settings.Default.SongSearchMode))
             {
-                var lvi = new ListViewItem(si.Song.Title)
+                var lvi = new ListViewItem(elem.Value.Song.Title)
                 {
-                    Tag = si.Filename
+                    Tag = elem.Key
                 };
                 lviList.Add(lvi);
                 cnt++;

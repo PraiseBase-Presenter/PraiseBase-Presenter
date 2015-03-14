@@ -2,6 +2,7 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using PraiseBase.Presenter.Model.Song;
+using PraiseBase.Presenter.Util;
 
 namespace PraiseBase.Presenter.Persistence.OpenLyrics
 {
@@ -124,8 +125,8 @@ namespace PraiseBase.Presenter.Persistence.OpenLyrics
                 }
             }
 
-            Assert.IsTrue(actual.GetSearchableText().Contains(expected.Title.ToLower()));
-            Assert.IsTrue(actual.GetSearchableText().Contains("sweet"));
+            Assert.IsTrue(SongSearchUtil.GetSearchableSongText(actual).Contains(expected.Title.ToLower()));
+            Assert.IsTrue(SongSearchUtil.GetSearchableSongText(actual).Contains("sweet"));
         }
 
         /// <summary>

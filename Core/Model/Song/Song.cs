@@ -228,24 +228,6 @@ namespace PraiseBase.Presenter.Model.Song
         }
 
         /// <summary>
-        /// Gets all text for searching
-        /// </summary>
-        public string GetSearchableText()
-        {
-            string text = Title + " ";
-            text = (from prt in Parts from sld in prt.Slides from ln in sld.Lines select ln).Aggregate(text, (current, ln) => current + (ln + " "));
-
-            text = text.Trim().ToLower();
-            text = text.Replace(",", String.Empty);
-            text = text.Replace(".", String.Empty);
-            text = text.Replace(";", String.Empty);
-            text = text.Replace(Environment.NewLine, String.Empty);
-            text = text.Replace("  ", " ");
-
-            return text;
-        }
-
-        /// <summary>
         /// Returns the number of background images
         /// </summary>
         public int GetNumberOfBackgroundImages()
