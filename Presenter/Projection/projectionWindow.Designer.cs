@@ -1,4 +1,4 @@
-﻿namespace PraiseBase.Presenter.UI.Presenter
+﻿namespace PraiseBase.Presenter.Projection
 {
     partial class ProjectionWindow
     {

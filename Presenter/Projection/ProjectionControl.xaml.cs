@@ -28,7 +28,7 @@ using System.Windows.Interop;
 using System.Windows.Media.Animation;
 using System.Windows.Media.Imaging;
 
-namespace PraiseBase.Presenter.Forms
+namespace PraiseBase.Presenter.Projection
 {
     /// <summary>
     /// Interaction logic for UserControl1.xaml

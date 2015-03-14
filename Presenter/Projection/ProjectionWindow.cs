@@ -24,21 +24,20 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
 using PraiseBase.Presenter.Forms;
-using PraiseBase.Presenter.Projection;
 using PraiseBase.Presenter.Properties;
 
-namespace PraiseBase.Presenter.UI.Presenter
+namespace PraiseBase.Presenter.Projection
 {
     public partial class ProjectionWindow : Form
     {
-        protected Dictionary<int, BaseLayer> currentLayers;
-        protected Dictionary<int, Image> currentLayerImages;
+        protected Dictionary<int, BaseLayer> CurrentLayers;
+        protected Dictionary<int, Image> CurrentLayerImages;
 
         public ProjectionWindow(Screen projScreen)
         {
             InitializeComponent();
-            currentLayers = new Dictionary<int, BaseLayer>();
-            currentLayerImages = new Dictionary<int, Image>();
+            CurrentLayers = new Dictionary<int, BaseLayer>();
+            CurrentLayerImages = new Dictionary<int, Image>();
 
             AssignToScreen(projScreen);
 
@@ -58,7 +57,7 @@ namespace PraiseBase.Presenter.UI.Presenter
             Location = projScreen.WorkingArea.Location;
             Size = new Size(projScreen.WorkingArea.Width, projScreen.WorkingArea.Height);
 
-            if (currentLayers.Count > 0)
+            if (CurrentLayers.Count > 0)
             {
                 RedrawLayers();
             }
@@ -104,8 +103,8 @@ namespace PraiseBase.Presenter.UI.Presenter
             {
                 ((WpfProjectionControl)(projectionControlHost.Child)).SetProjectionImage(bmp, fadetime);
             }
-            currentLayers[layerNum] = layerContents;
-            currentLayerImages[layerNum] = bmp;
+            CurrentLayers[layerNum] = layerContents;
+            CurrentLayerImages[layerNum] = bmp;
         }
 
 
@@ -136,7 +135,7 @@ namespace PraiseBase.Presenter.UI.Presenter
                 ((WpfProjectionControl)(projectionControlHost.Child)).SetProjectionImage(bmp, fadetime);
             }
 
-            currentLayerImages[layerNum] = bmp;            
+            CurrentLayerImages[layerNum] = bmp;            
         }
 
         /// <summary>
@@ -145,7 +144,7 @@ namespace PraiseBase.Presenter.UI.Presenter
         public void RedrawLayers()
         {
             Dictionary<int, BaseLayer> tempDict = new Dictionary<int, BaseLayer>();
-            foreach (var kvp in currentLayers)
+            foreach (var kvp in CurrentLayers)
             {
                 tempDict.Add(kvp.Key, kvp.Value);
             }
@@ -168,12 +167,12 @@ namespace PraiseBase.Presenter.UI.Presenter
             int i = 0;
             while (true)
             {
-                if (currentLayerImages.ContainsKey(i))
+                if (CurrentLayerImages.ContainsKey(i))
                 {
-                    gr.DrawImage(currentLayerImages[i], new Rectangle(0, 0, frame.Width, frame.Height), new Rectangle(0, 0, frame.Width, frame.Height), GraphicsUnit.Pixel);
+                    gr.DrawImage(CurrentLayerImages[i], new Rectangle(0, 0, frame.Width, frame.Height), new Rectangle(0, 0, frame.Width, frame.Height), GraphicsUnit.Pixel);
                     usedLayers++;
                 }
-                if (usedLayers >= currentLayerImages.Count)
+                if (usedLayers >= CurrentLayerImages.Count)
                 {
                     break;
                 }
