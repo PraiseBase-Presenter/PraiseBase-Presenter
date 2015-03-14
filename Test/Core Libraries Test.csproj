@@ -77,9 +77,9 @@
     <Compile Include="Persistence\StatisticsWriterTest.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Core\PraiseBase Core Libraries.csproj">
+    <ProjectReference Include="..\Core\Core Libraries.csproj">
       <Project>{67651B76-5ABD-4040-9A8F-3833130FC77D}</Project>
-      <Name>PraiseBase Core Libraries</Name>
+      <Name>Core Libraries</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
