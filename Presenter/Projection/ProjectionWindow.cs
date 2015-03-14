@@ -41,7 +41,7 @@ namespace PraiseBase.Presenter.Projection
 
             AssignToScreen(projScreen);
 
-            var wpc = new WpfProjectionControl
+            var wpc = new ProjectionControl
             {
                 ProjectionBackgroundColor = Settings.Default.ProjectionBackColor
             };
@@ -70,7 +70,7 @@ namespace PraiseBase.Presenter.Projection
         /// <param name="animate"></param>
         public void SetBlackout(bool enable, bool animate)
         {
-            ((WpfProjectionControl)(projectionControlHost.Child)).BlackOut(enable, (animate ? Settings.Default.ProjectionFadeTime : 0));
+            ((ProjectionControl)(projectionControlHost.Child)).BlackOut(enable, (animate ? Settings.Default.ProjectionFadeTime : 0));
         }
 
         /// <summary>
@@ -97,11 +97,11 @@ namespace PraiseBase.Presenter.Projection
 
             if (layerNum == 2)
             {
-                ((WpfProjectionControl)(projectionControlHost.Child)).SetProjectionText(bmp, fadetime);
+                ((ProjectionControl)(projectionControlHost.Child)).SetProjectionText(bmp, fadetime);
             }
             else
             {
-                ((WpfProjectionControl)(projectionControlHost.Child)).SetProjectionImage(bmp, fadetime);
+                ((ProjectionControl)(projectionControlHost.Child)).SetProjectionImage(bmp, fadetime);
             }
             CurrentLayers[layerNum] = layerContents;
             CurrentLayerImages[layerNum] = bmp;
@@ -128,11 +128,11 @@ namespace PraiseBase.Presenter.Projection
 
             if (layerNum == 2)
             {
-                ((WpfProjectionControl)(projectionControlHost.Child)).SetProjectionText(bmp, fadetime);
+                ((ProjectionControl)(projectionControlHost.Child)).SetProjectionText(bmp, fadetime);
             }
             else if (layerNum == 1)
             {
-                ((WpfProjectionControl)(projectionControlHost.Child)).SetProjectionImage(bmp, fadetime);
+                ((ProjectionControl)(projectionControlHost.Child)).SetProjectionImage(bmp, fadetime);
             }
 
             CurrentLayerImages[layerNum] = bmp;            

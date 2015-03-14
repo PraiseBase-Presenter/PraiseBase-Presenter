@@ -34,7 +34,7 @@ namespace PraiseBase.Presenter.Projection
     /// Interaction logic for UserControl1.xaml
     /// </summary>
     ///
-    public partial class WpfProjectionControl : UserControl
+    public partial class ProjectionControl : UserControl
     {
         #region Delegates
 
@@ -42,7 +42,7 @@ namespace PraiseBase.Presenter.Projection
 
         #endregion Delegates
 
-        public WpfProjectionControl()
+        public ProjectionControl()
         {
             InitializeComponent();
             ProjectionBackgroundColor = Color.Black;
