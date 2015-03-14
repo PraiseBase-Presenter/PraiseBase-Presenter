@@ -207,12 +207,8 @@ namespace PraiseBase.Presenter.UI.Presenter
                 }
 
                 // ask the user if he would like to download the new version
-                DialogResult result = MessageBox.Show(
-                    String.Format(StringResources.UpdateAvailable, ui.OnlineVersion, ui.CurrentVersion),
-                    StringResources.CheckForUpdate,
-                    MessageBoxButtons.YesNo,
-                    MessageBoxIcon.Question);
-                if (result == DialogResult.Yes)
+                UpdateCheckDialog ucdlg = new UpdateCheckDialog(ui);
+                if (ucdlg.ShowDialog() == DialogResult.Yes)
                 {
                     // navigate the default web browser to our app
                     // homepage (the url comes from the xml content)
@@ -220,11 +216,7 @@ namespace PraiseBase.Presenter.UI.Presenter
                 }
                 else
                 {
-                    if (DialogResult.Yes == MessageBox.Show(
-                        StringResources.DisableFurtherInformationAboutThisUpdate,
-                        StringResources.CheckForUpdate,
-                        MessageBoxButtons.YesNo,
-                        MessageBoxIcon.Question))
+                    if (ucdlg.HideNotification)
                     {
                         Settings.Default.HideUpdateVersion = ui.OnlineVersion.ToString();
                         Settings.Default.Save();

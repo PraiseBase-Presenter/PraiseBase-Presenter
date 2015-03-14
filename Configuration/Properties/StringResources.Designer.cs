@@ -133,15 +133,6 @@ namespace PraiseBase.Presenter.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Möchten Sie weitere Meldungen zu diesem Update deaktivieren?.
-        /// </summary>
-        public static string DisableFurtherInformationAboutThisUpdate {
-            get {
-                return ResourceManager.GetString("DisableFurtherInformationAboutThisUpdate", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Hat das Lied wirklich den Standardnamen &apos;{0}&apos;?.
         /// </summary>
         public static string DoesTheSongReallyHaveTheDefaultTitle {

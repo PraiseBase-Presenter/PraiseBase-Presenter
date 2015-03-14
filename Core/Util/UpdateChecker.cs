@@ -94,13 +94,18 @@ namespace PraiseBase.Presenter.Util
             }
 
             // get the running version
-            rtn.CurrentVersion = System.Reflection.Assembly.GetExecutingAssembly().GetName().Version;
+            rtn.CurrentVersion = GetCurrentVersion();
             // compare the versions
             if (rtn.OnlineVersion != null && rtn.CurrentVersion.CompareTo(rtn.OnlineVersion) < 0)
             {
                 rtn.UpdateAvailable = true;
             }
             return rtn;
+        }
+
+        public Version GetCurrentVersion()
+        {
+            return System.Reflection.Assembly.GetExecutingAssembly().GetName().Version;
         }
     }
 }

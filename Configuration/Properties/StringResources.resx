@@ -141,9 +141,6 @@
   <data name="DatabaseError" xml:space="preserve">
     <value>Datenbankfehler</value>
   </data>
-  <data name="DisableFurtherInformationAboutThisUpdate" xml:space="preserve">
-    <value>Möchten Sie weitere Meldungen zu diesem Update deaktivieren?</value>
-  </data>
   <data name="DoesTheSongReallyHaveTheDefaultTitle" xml:space="preserve">
     <value>Hat das Lied wirklich den Standardnamen '{0}'?</value>
   </data>

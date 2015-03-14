@@ -62,6 +62,12 @@
     <Compile Include="Forms\LocalizedForm.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Forms\UpdateCheckDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\UpdateCheckDialog.Designer.cs">
+      <DependentUpon>UpdateCheckDialog.cs</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -86,6 +92,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\LocalizedForm.resx">
       <DependentUpon>LocalizedForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\UpdateCheckDialog.resx">
+      <DependentUpon>UpdateCheckDialog.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup />
