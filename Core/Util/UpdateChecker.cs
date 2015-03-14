@@ -78,6 +78,10 @@ namespace PraiseBase.Presenter.Util
                                     case "url":
                                         rtn.DownloadUrl = reader.Value;
                                         break;
+
+                                    case "announcement":
+                                        rtn.AnnouncementUrl = reader.Value;
+                                        break;
                                 }
                             }
                         }

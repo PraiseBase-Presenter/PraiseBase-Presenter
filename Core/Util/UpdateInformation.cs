@@ -10,6 +10,8 @@ namespace PraiseBase.Presenter.Util
 
         public string DownloadUrl { get; set; }
 
+        public string AnnouncementUrl { get; set; }
+
         public bool UpdateAvailable { get; set; }
 
         public UpdateInformation()
