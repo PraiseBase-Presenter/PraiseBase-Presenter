@@ -31,6 +31,7 @@ using PraiseBase.Presenter.Forms;
 using PraiseBase.Presenter.Model.Song;
 using PraiseBase.Presenter.Persistence;
 using PraiseBase.Presenter.Properties;
+using PraiseBase.Presenter.Template;
 using PraiseBase.Presenter.UI.Presenter;
 using PraiseBase.Presenter.Util;
 using Timer = System.Windows.Forms.Timer;

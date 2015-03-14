@@ -30,6 +30,7 @@ using PraiseBase.Presenter.Manager;
 using PraiseBase.Presenter.Model.Song;
 using PraiseBase.Presenter.Projection;
 using PraiseBase.Presenter.Properties;
+using PraiseBase.Presenter.Template;
 using PraiseBase.Presenter.UI.Presenter;
 using PraiseBase.Presenter.Util;
 

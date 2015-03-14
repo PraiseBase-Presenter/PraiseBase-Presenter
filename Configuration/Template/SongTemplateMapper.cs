@@ -1,9 +1,8 @@
 ﻿using PraiseBase.Presenter.Model;
 using PraiseBase.Presenter.Model.Song;
 using PraiseBase.Presenter.Properties;
-using System;
 
-namespace PraiseBase.Presenter.Util
+namespace PraiseBase.Presenter.Template
 {
     public class SongTemplateMapper
     {

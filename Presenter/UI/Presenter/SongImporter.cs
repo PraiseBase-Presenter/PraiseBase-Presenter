@@ -7,6 +7,7 @@ using PraiseBase.Presenter.Model.Song;
 using PraiseBase.Presenter.Persistence;
 using PraiseBase.Presenter.Persistence.PraiseBox;
 using PraiseBase.Presenter.Properties;
+using PraiseBase.Presenter.Template;
 using PraiseBase.Presenter.Util;
 
 namespace PraiseBase.Presenter.UI.Presenter
