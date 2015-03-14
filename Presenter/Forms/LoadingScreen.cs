@@ -23,7 +23,7 @@
 using System.Windows.Forms;
 using PraiseBase.Presenter.Manager;
 
-namespace PraiseBase.Presenter.UI.Presenter
+namespace PraiseBase.Presenter.Forms
 {
     public partial class LoadingScreen : Form
     {

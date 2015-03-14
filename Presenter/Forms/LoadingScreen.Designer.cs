@@ -20,7 +20,7 @@
  *
  */
 
-namespace PraiseBase.Presenter.UI.Presenter
+namespace PraiseBase.Presenter.Forms
 {
 	partial class LoadingScreen
 	{
