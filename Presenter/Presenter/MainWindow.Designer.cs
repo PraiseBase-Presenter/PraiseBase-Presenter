@@ -44,7 +44,7 @@ namespace PraiseBase.Presenter.Presenter
             this.listViewSongs = new System.Windows.Forms.ListView();
             this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.label3 = new System.Windows.Forms.Label();
-            this.songDetailElement = new SongDetail();
+            this.songDetailElement = new PraiseBase.Presenter.Controls.SongDetail();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.buttonShowLiveText = new System.Windows.Forms.Button();
             this.textBoxLiveText = new System.Windows.Forms.TextBox();
@@ -311,6 +311,7 @@ namespace PraiseBase.Presenter.Presenter
             // songDetailElement
             // 
             resources.ApplyResources(this.songDetailElement, "songDetailElement");
+            this.songDetailElement.AvailableSongCaption = null;
             this.songDetailElement.BackColor = System.Drawing.Color.White;
             this.songDetailElement.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.songDetailElement.ForeColor = System.Drawing.SystemColors.WindowText;
@@ -319,10 +320,10 @@ namespace PraiseBase.Presenter.Presenter
             this.songDetailElement.NextSongIcon = ((System.Drawing.Image)(resources.GetObject("songDetailElement.NextSongIcon")));
             this.songDetailElement.PreviousSongIcon = ((System.Drawing.Image)(resources.GetObject("songDetailElement.PreviousSongIcon")));
             this.songDetailElement.ThumbnailSize = new System.Drawing.Size(56, 42);
-            this.songDetailElement.SlideClicked += new SongDetail.SlideClick(this.songDetailElement_SlideClicked);
-            this.songDetailElement.ImageClicked += new SongDetail.ImageClick(this.songDetailElement_ImageClicked);
-            this.songDetailElement.PreviousSongClicked += new SongDetail.PreviousSongClick(this.songDetailElement_PreviousSongClicked);
-            this.songDetailElement.NextSongClicked += new SongDetail.NextSongClick(this.songDetailElement_NextSongClicked);
+            this.songDetailElement.SlideClicked += new PraiseBase.Presenter.Controls.SongDetail.SlideClick(this.songDetailElement_SlideClicked);
+            this.songDetailElement.ImageClicked += new PraiseBase.Presenter.Controls.SongDetail.ImageClick(this.songDetailElement_ImageClicked);
+            this.songDetailElement.PreviousSongClicked += new PraiseBase.Presenter.Controls.SongDetail.PreviousSongClick(this.songDetailElement_PreviousSongClicked);
+            this.songDetailElement.NextSongClicked += new PraiseBase.Presenter.Controls.SongDetail.NextSongClick(this.songDetailElement_NextSongClicked);
             // 
             // tabPage2
             // 

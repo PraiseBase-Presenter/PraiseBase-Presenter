@@ -41,6 +41,9 @@ namespace PraiseBase.Presenter.Controls
         [Description("Size of song background thumbnail"), Category("SongDetail"), DefaultValue(typeof(Size), "80, 60")]
         public Size ThumbnailSize { get; set; }
 
+        [Description("Show first and last background image as selectable item"), Category("SongDetail"), DefaultValue(false)]
+        public Boolean ShowFirstAndLastBackground { get; set; }
+
         //
         // Runtime variables
         //
@@ -137,6 +140,8 @@ namespace PraiseBase.Presenter.Controls
             // Draw new stuff
             //
 
+            bool showFirstLastBackgrounds = ShowFirstAndLastBackground || (sng.Parts.Count > 0 && (previousSong != null || nextSong != null));
+
             int ypos = TopMargin;
 
             Size labelSize = new Size(0, 0);
@@ -202,6 +207,18 @@ namespace PraiseBase.Presenter.Controls
                 ypos += AddSpacer(ypos);
             }
 
+            if (showFirstLastBackgrounds)
+            {
+                List<PartPanelElement> fe = new List<PartPanelElement>
+                {
+                    new PartPanelElement
+                    {
+                        Background = sng.Parts[0].Slides[0].Background
+                    }
+                };
+                ypos += AddPartCopmponent(ypos, fe, ThumbnailSize.Height, labelSize, -1, null);
+            }
+
             for (int i = 0; i < sng.Parts.Count; i++)
             {
                 List<PartPanelElement> elements = new List<PartPanelElement>();
@@ -214,6 +231,18 @@ namespace PraiseBase.Presenter.Controls
                     });
                 }
                 ypos += AddPartCopmponent(ypos, elements, ThumbnailSize.Height, labelSize, i, sng.Parts[i].Caption);
+            }
+
+            if (showFirstLastBackgrounds)
+            {
+                List<PartPanelElement> fe2 = new List<PartPanelElement>
+                {
+                    new PartPanelElement
+                    {
+                        Background = sng.Parts[sng.Parts.Count-1].Slides[sng.Parts[sng.Parts.Count-1].Slides.Count-1].Background
+                    }
+                };
+                ypos += AddPartCopmponent(ypos, fe2, ThumbnailSize.Height, labelSize, -1, null);
             }
 
             if (nextSong != null)
@@ -344,7 +373,7 @@ namespace PraiseBase.Presenter.Controls
                 {
                     Location = new Point(pictureBoxPanelWidth + ThumbnailLabelSpacing, 0),
                     Height = slidePanelHeight,
-                    Text = elements[j].Text,
+                    Text = elements[j].Text ?? "(Nur Hintergrund)",
                     Padding = new Padding(2),
                     FlatStyle = FlatStyle.Flat,
                     ForeColor = _itemNormalFg,
@@ -355,7 +384,7 @@ namespace PraiseBase.Presenter.Controls
                     UseCompatibleTextRendering = true,
                     TextAlign = ContentAlignment.TopLeft,
                     Cursor = Cursors.Hand,
-                    Tag = j
+                    Tag = (elements[j].Text != null ? (object)j : (object)elements[j].Background)
                 };
                 textLbl.FlatAppearance.BorderColor = Color.White;
                 textLbl.FlatAppearance.BorderSize = 0;
@@ -510,7 +539,7 @@ namespace PraiseBase.Presenter.Controls
 
         private void textLbl_Click(object sender, EventArgs e)
         {
-            Button lbl = ((Button)sender);
+            Button lbl = ((Button) sender);
 
             if (_currentSlideTextIdx >= 0)
             {
@@ -522,14 +551,14 @@ namespace PraiseBase.Presenter.Controls
 
             if (_currentSlideTextIdx < newSlideIdx)
             {
-                int tOffset = ((Panel)lbl.Parent).Parent.Bottom;
+                int tOffset = ((Panel) lbl.Parent).Parent.Bottom;
                 if (tOffset + VerticalScroll.Value > Height)
                     VerticalScroll.Value = tOffset + VerticalScroll.Value - Height + 2;
                 PerformLayout();
             }
             else
             {
-                int tOffset = ((Panel)lbl.Parent).Parent.Top;
+                int tOffset = ((Panel) lbl.Parent).Parent.Top;
                 if (tOffset < 0)
                     VerticalScroll.Value += tOffset - 5;
                 PerformLayout();
@@ -540,16 +569,29 @@ namespace PraiseBase.Presenter.Controls
             lbl.BackColor = _itemActiveBg;
             lbl.ForeColor = _itemActiveFg;
 
-            if (SlideClicked != null)
+            var bg = lbl.Tag as IBackground;
+            if (bg != null)
             {
-                Focus();
-                var partNumber = (int) lbl.Parent.Parent.Tag;
-                var slideNumber = (int) lbl.Tag;
-                SlideClickEventArgs p = new SlideClickEventArgs(_currentSong, partNumber, slideNumber);
-                SlideClicked(this, p);
+                if (ImageClicked != null)
+                {
+                    Focus();
+                    SlideImageClickEventArgs p = new SlideImageClickEventArgs(bg);
+                    ImageClicked(this, p);
+                }
+            }
+            else
+            {
+                if (SlideClicked != null)
+                {
+                    Focus();
+                    var partNumber = (int) lbl.Parent.Parent.Tag;
+                    var slideNumber = (int) lbl.Tag;
+                    SlideClickEventArgs p = new SlideClickEventArgs(_currentSong, partNumber, slideNumber);
+                    SlideClicked(this, p);
+                }
             }
         }
-
+    
         private void pcBox_Click(object sender, EventArgs e)
         {
             PictureBox pb = ((PictureBox)sender);
