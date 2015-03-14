@@ -109,14 +109,11 @@ namespace PraiseBase.Presenter.UI.Presenter
                     string fileName = _settings.DataDirectory + Path.DirectorySeparatorChar
                         + _settings.SongDir + Path.DirectorySeparatorChar
                         + sng.Title + filePlugin.GetFileExtension();
-                    if ((File.Exists(fileName) && (MessageBox.Show(string.Format(Properties.StringResources.SongExistsAlready, ((Song)listViewSongs.Items[x].Tag).Title) 
-                        + " " + Properties.StringResources.Overwrite + "?", Properties.StringResources.SongImporter, 
+                    if ((File.Exists(fileName) && (MessageBox.Show(
+                        string.Format(StringResources.SongExistsAlready, 
+                        ((Song)listViewSongs.Items[x].Tag).Title) + @" " + StringResources.Overwrite + @"?", StringResources.SongImporter, 
                         MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)) || !File.Exists(fileName))
                     {
-                        if (sng.Guid == Guid.Empty)
-                        {
-                            sng.Guid = Guid.NewGuid();
-                        }
                         // TODO Exception handling
                         filePlugin.Save(sng, fileName);
                         filesToOpen.Add(fileName);
@@ -126,7 +123,7 @@ namespace PraiseBase.Presenter.UI.Presenter
             }
             if (cnt > 0)
             {
-                MessageBox.Show(string.Format(Properties.StringResources.SongsImported, cnt.ToString()), Properties.StringResources.SongImporter, 
+                MessageBox.Show(string.Format(StringResources.SongsImported, cnt), StringResources.SongImporter, 
                     MessageBoxButtons.OK, MessageBoxIcon.Information);
 
                 if (checkBoxUseEditor.Checked)

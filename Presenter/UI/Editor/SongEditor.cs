@@ -173,12 +173,6 @@ namespace PraiseBase.Presenter.UI.Editor
             try
             {
                 sng = SongFilePluginFactory.Create(fileName).Load(fileName);
-                if (sng.Guid == Guid.Empty)
-                {
-                    // TODO get rid of GUID
-                    var smGuid = SongManager.Instance.GetGUIDByPath(fileName);
-                    sng.Guid = smGuid != Guid.Empty ? smGuid : Guid.NewGuid();
-                }
             }
             catch (NotImplementedException)
             {

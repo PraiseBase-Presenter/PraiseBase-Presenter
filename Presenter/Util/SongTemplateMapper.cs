@@ -22,7 +22,6 @@ namespace PraiseBase.Presenter.Util
         {
             Song sng = new Song
             {
-                Guid = Guid.NewGuid(),
                 Title = _settings.SongDefaultName,
                 Language = _settings.SongDefaultLanguage
             };

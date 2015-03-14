@@ -87,7 +87,7 @@ namespace PraiseBase.Presenter.UI.Editor
             textBoxRightsManagement.DataBindings.Add("Text", Song, "RightsManagement");
             textBoxPublisher.DataBindings.Add("Text", Song, "Publisher");
 
-            labelGUID.DataBindings.Add("Text", Song, "GUID");
+            labelGUID.Text = Song.Guid != Guid.Empty ? Song.Guid.ToString() : "";
 
             textBoxAuthors.Text = Song.Author.ToString();
             textBoxSongbooks.Text = Song.SongBooks.ToString();

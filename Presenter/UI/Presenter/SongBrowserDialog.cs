@@ -75,7 +75,8 @@ namespace PraiseBase.Presenter.UI.Presenter
             {
                 foreach (ListViewItem lvi in listViewItems.SelectedItems)
                 {
-                    string fn = SongManager.Instance.SongList[(Guid)(lvi.Tag)].Filename;
+                    string key = (string) (lvi.Tag);
+                    string fn = SongManager.Instance.SongList[key].Filename;
                     SelectedItems.Add(fn);
                 }
                 return true;
@@ -93,7 +94,7 @@ namespace PraiseBase.Presenter.UI.Presenter
         {
             listViewItems.Items.Clear();
             string searchText = textBoxSearch.Text.Trim().ToLower();
-            foreach (KeyValuePair<Guid, SongItem> kvp in SongManager.Instance.SongList)
+            foreach (KeyValuePair<string, SongItem> kvp in SongManager.Instance.SongList)
             {
                 Song sng = kvp.Value.Song;
                 bool use = true;
@@ -123,12 +124,14 @@ namespace PraiseBase.Presenter.UI.Presenter
 
                 if (use)
                 {
-                    ListViewItem lvi = new ListViewItem(sng.Title);
-                    lvi.Tag = sng.Guid;
+                    ListViewItem lvi = new ListViewItem(sng.Title)
+                    {
+                        Tag = kvp.Key
+                    };
                     listViewItems.Items.Add(lvi);
                 }
             }
-            labelResults.Text = listViewItems.Items.Count.ToString() + " Treffer";
+            labelResults.Text = listViewItems.Items.Count + " Treffer";
             textBoxSearch.Focus();
         }
 

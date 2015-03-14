@@ -276,8 +276,10 @@ namespace PraiseBase.Presenter.UI.Presenter
             var lviList = new List<ListViewItem>();
             foreach (SongItem si in SongManager.Instance.GetSearchResults(needle, Settings.Default.SongSearchMode))
             {
-                var lvi = new ListViewItem(si.Song.Title);
-                lvi.Tag = si.Song.Guid;
+                var lvi = new ListViewItem(si.Song.Title)
+                {
+                    Tag = si.Filename
+                };
                 lviList.Add(lvi);
                 cnt++;
             }
@@ -288,12 +290,13 @@ namespace PraiseBase.Presenter.UI.Presenter
                 try
                 {
                     listViewSongs.Items[0].Selected = true;
-                    SongManager.Instance.CurrentSong = SongManager.Instance.SongList[(Guid)listViewSongs.SelectedItems[0].Tag];
+                    var key = (String) listViewSongs.SelectedItems[0].Tag;
+                    SongManager.Instance.CurrentSong = SongManager.Instance.SongList[key];
                     showCurrentSongDetails();
                 }
                 catch (Exception e)
                 {
-                    Console.WriteLine("Song search exception: " + e);
+                    Console.WriteLine(@"Song search exception: " + e);
                 }
             }
             listViewSongs.Columns[0].Width = -2;
@@ -364,14 +367,15 @@ namespace PraiseBase.Presenter.UI.Presenter
 
             for (int i = 0; i < listViewSetList.Items.Count; i++)
             {
-                Guid g = SongManager.Instance.GetGuidByTitle(listViewSetList.Items[i].Text);
-                if (g != Guid.Empty)
+                var setListItemTitle = listViewSetList.Items[i].Text;
+                var key = SongManager.Instance.GetKeyByTitle(setListItemTitle);
+                if (key != null)
                 {
-                    listViewSetList.Items[i].Tag = g;
+                    listViewSetList.Items[i].Tag = key;
                 }
                 else
                 {
-                    MessageBox.Show(String.Format(StringResources.SongDoesNotExist, listViewSetList.Items[i].Text));
+                    MessageBox.Show(String.Format(StringResources.SongDoesNotExist, setListItemTitle));
                 }
             }
 
@@ -392,12 +396,12 @@ namespace PraiseBase.Presenter.UI.Presenter
                 }
                 else
                 {
-                    if (SongManager.Instance.CurrentSong == null || SongManager.Instance.CurrentSong.Song == null || SongManager.Instance.CurrentSong.Song.Guid != (Guid)listViewSongs.SelectedItems[0].Tag)
+                    string key = (string) listViewSongs.SelectedItems[0].Tag;
+                    if (SongManager.Instance.CurrentSong == null || SongManager.Instance.CurrentSong.Song == null || SongManager.Instance.CurrentSong.Filename != key)
                     {
-                        var g = (Guid)listViewSongs.SelectedItems[0].Tag;
-                        if (SongManager.Instance.SongList.ContainsKey(g))
+                        if (SongManager.Instance.SongList.ContainsKey(key))
                         {
-                            SongManager.Instance.CurrentSong = SongManager.Instance.SongList[g];
+                            SongManager.Instance.CurrentSong = SongManager.Instance.SongList[key];
                             showCurrentSongDetails();
                             buttonSetListAdd.Enabled = true;
                         }
@@ -420,10 +424,10 @@ namespace PraiseBase.Presenter.UI.Presenter
         {
             if (listViewSongs.SelectedItems.Count > 0)
             {
-                if (SongManager.Instance.CurrentSong == null ||
-                    SongManager.Instance.CurrentSong.Song.Guid != (Guid)listViewSongs.SelectedItems[0].Tag)
+                var key = (string) listViewSongs.SelectedItems[0].Tag;
+                if (SongManager.Instance.SongList.ContainsKey(key) && (SongManager.Instance.CurrentSong == null || SongManager.Instance.CurrentSong.Filename != key))
                 {
-                    SongManager.Instance.CurrentSong = SongManager.Instance.SongList[(Guid)listViewSongs.SelectedItems[0].Tag];
+                    SongManager.Instance.CurrentSong = SongManager.Instance.SongList[key];
                     showCurrentSongDetails();
 
                     buttonSetListAdd.Enabled = true;
@@ -445,7 +449,7 @@ namespace PraiseBase.Presenter.UI.Presenter
                 if (idx > 0)
                 {
                     buttonSetListUp.Enabled = true;
-                    Guid prevSongId = (Guid)listViewSetList.Items[idx - 1].Tag;
+                    string prevSongId = (string)listViewSetList.Items[idx - 1].Tag;
                     previousSong = SongManager.Instance.SongList[prevSongId].Song;
                 }
                 else
@@ -455,7 +459,7 @@ namespace PraiseBase.Presenter.UI.Presenter
                 if (idx < listViewSetList.Items.Count - 1)
                 {
                     buttonSetListDown.Enabled = true;
-                    Guid nextSongId = (Guid)listViewSetList.Items[idx + 1].Tag;
+                    string nextSongId = (string)listViewSetList.Items[idx + 1].Tag;
                     nextSong = SongManager.Instance.SongList[nextSongId].Song;
                 }
                 else
@@ -464,7 +468,7 @@ namespace PraiseBase.Presenter.UI.Presenter
                 }
                 buttonSetListRem.Enabled = true;
 
-                Guid currentSongId = (Guid)listViewSetList.SelectedItems[0].Tag;
+                string currentSongId = (string)listViewSetList.SelectedItems[0].Tag;
                 SongManager.Instance.CurrentSong = SongManager.Instance.SongList[currentSongId];
                 showCurrentSongDetails(previousSong, nextSong);
             }
@@ -514,11 +518,12 @@ namespace PraiseBase.Presenter.UI.Presenter
 
             var s = SongManager.Instance.CurrentSong.Song;
 
-            if (listViewSongHistory.Items.Count == 0 ||
-                (Guid)listViewSongHistory.Items[0].Tag != s.Guid)
+            if (listViewSongHistory.Items.Count == 0 || (string)listViewSongHistory.Items[0].Tag != SongManager.Instance.CurrentSong.Filename)
             {
-                var lvi = new ListViewItem(s.Title);
-                lvi.Tag = s.Guid;
+                var lvi = new ListViewItem(s.Title)
+                {
+                    Tag = SongManager.Instance.CurrentSong.Filename
+                };
                 listViewSongHistory.Items.Insert(0, lvi);
                 listViewSongHistory.Columns[0].Width = -2;
             }
@@ -1486,8 +1491,8 @@ namespace PraiseBase.Presenter.UI.Presenter
         {
             if (listViewSongHistory.SelectedIndices.Count > 0)
             {
-                SongManager.Instance.CurrentSong =
-                    SongManager.Instance.SongList[(Guid)listViewSongHistory.SelectedItems[0].Tag];
+                var key = (string) listViewSongHistory.SelectedItems[0].Tag;
+                SongManager.Instance.CurrentSong = SongManager.Instance.SongList[key];
                 showCurrentSongDetails();
             }
         }
@@ -2053,13 +2058,13 @@ namespace PraiseBase.Presenter.UI.Presenter
                 {
                     foreach (var i in sl.Items)
                     {
-                        Guid g = SongManager.Instance.GetGuidByTitle(i);
-                        if (g != Guid.Empty)
+                        var key = SongManager.Instance.GetKeyByTitle(i);
+                        if (key != null)
                         {
-                            var s = SongManager.Instance.SongList[g].Song;
+                            var s = SongManager.Instance.SongList[key].Song;
                             var lvi = new ListViewItem(s.Title)
                             {
-                                Tag = s.Guid
+                                Tag = key
                             };
                             listViewSetList.Items.Add(lvi);
                         }
@@ -2084,16 +2089,15 @@ namespace PraiseBase.Presenter.UI.Presenter
         /// <summary>
         /// Adds a song to the setlist
         /// </summary>
-        /// <param name="path"></param>
-        private void AddSongToSetList(string path)
+        /// <param name="key"></param>
+        private void AddSongToSetList(string key)
         {
-            Guid g = SongManager.Instance.GetGUIDByPath(path);
-            if (g != Guid.Empty)
+            if (SongManager.Instance.SongList.ContainsKey(key))
             {
-                var s = SongManager.Instance.SongList[g].Song;
+                var s = SongManager.Instance.SongList[key].Song;
                 var lvi = new ListViewItem(s.Title)
                 {
-                    Tag = s.Guid
+                    Tag = key
                 };
                 listViewSetList.Items.Add(lvi);
 
@@ -2164,7 +2168,7 @@ namespace PraiseBase.Presenter.UI.Presenter
             Setlist sl = new Setlist();
             for (int i = 0; i < listViewSetList.Items.Count; i++)
             {
-                var tag = (Guid) listViewSetList.Items[i].Tag;
+                var tag = (string) listViewSetList.Items[i].Tag;
                 var song = SongManager.Instance.SongList[tag].Song;
                 sl.Items.Add(song.Title);
             }
@@ -2187,7 +2191,7 @@ namespace PraiseBase.Presenter.UI.Presenter
             int hash = 19;
             for (int i = 0; i < listViewSetList.Items.Count; i++)
             {
-                var tag = (Guid)listViewSetList.Items[i].Tag;
+                var tag = (string)listViewSetList.Items[i].Tag;
                 var song = SongManager.Instance.SongList[tag].Song;
                 hash = hash * 31 + song.GetHashCode();
             }

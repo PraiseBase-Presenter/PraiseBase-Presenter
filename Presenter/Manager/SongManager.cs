@@ -44,7 +44,7 @@ namespace PraiseBase.Presenter
         /// <summary>
         /// List of all availabe songs
         /// </summary>
-        public Dictionary<Guid, SongItem> SongList { get; protected set; }
+        public Dictionary<string, SongItem> SongList { get; protected set; }
 
         /// <summary>
         /// Gets or sets the current song object
@@ -88,8 +88,8 @@ namespace PraiseBase.Presenter
 
             public SongLoadEventArgs(int number, int total)
             {
-                this.Number = number;
-                this.Total = total;
+                Number = number;
+                Total = total;
             }
         }
 
@@ -135,42 +135,34 @@ namespace PraiseBase.Presenter
 
             // Load songs into list
             int i = 0;
-            SongList = new Dictionary<Guid, SongItem>();
+            SongList = new Dictionary<string, SongItem>();
             foreach (string path in songPaths)
             {
                 try
                 {
+                    var plugin = SongFilePluginFactory.Create(path);
                     SongItem si = new SongItem
                     {
-                        Plugin = SongFilePluginFactory.Create(path),
-                        Filename = path
+                        Plugin = plugin,
+                        Filename = path,
+                        Song = plugin.Load(path)
                     };
-                    si.Song = si.Plugin.Load(path);
-                    if (si.Song.Guid == Guid.Empty)
-                    {
-                        si.Song.Guid = Guid.NewGuid();
-                    }
-                    SongList.Add(si.Song.Guid, si);
+                    SongList.Add(path, si);
                     if (i % 25 == 0)
                     {
                         SongLoadEventArgs e = new SongLoadEventArgs(i, cnt);
-                        OnSongLoaded(e);
+                        if (SongLoaded != null)
+                        {
+                            SongLoaded(e);
+                        }
                     }
                     i++;
                 }
                 catch (Exception e)
                 {
-                    Console.WriteLine("Unable to load song file " + path + " (" + e.Message + ")");
+                    Console.WriteLine(@"Unable to load song file " + path + @" (" + e.Message + @")");
                     Console.WriteLine(e.StackTrace);
                 }
-            }
-        }
-
-        protected virtual void OnSongLoaded(SongLoadEventArgs e)
-        {
-            if (SongLoaded != null)
-            {
-                SongLoaded(e);
             }
         }
 
@@ -179,7 +171,7 @@ namespace PraiseBase.Presenter
         /// </summary>
         /// <param name="title">The title of the song</param>
         /// <returns>Returns the position in the songlist</returns>
-        public Guid GetGuidByTitle(string title)
+        public string GetKeyByTitle(string title)
         {
             foreach (var kvp in SongList)
             {
@@ -188,28 +180,7 @@ namespace PraiseBase.Presenter
                     return kvp.Key;
                 }
             }
-            return Guid.Empty;
-        }
-
-        /// <summary>
-        /// Reloads the song with the specified path
-        /// </summary>
-        /// <param name="path">Path to the song file</param>
-        public void ReloadSongByPath(string path)
-        {
-            SongItem si = this.GetSongItemByPath(path);
-            if (si != null)
-            {
-                try
-                {
-                    si.Song = si.Plugin.Load(si.Filename);
-                }
-                catch (Exception e)
-                {
-                    Console.WriteLine("Unable to load song file " + path + " (" + e.Message + ")");
-                }
-                return;
-            }
+            return null;
         }
 
         /// <summary>
@@ -235,32 +206,30 @@ namespace PraiseBase.Presenter
         }
 
         /// <summary>
-        /// Gets the song with the specified path
+        /// Reloads the song with the specified path
         /// </summary>
         /// <param name="path">Path to the song file</param>
-        public Guid GetGUIDByPath(string path)
+        public void ReloadSongByPath(string path)
         {
-            if (!string.IsNullOrEmpty(path))
+            SongItem si = GetSongItemByPath(path);
+            if (si != null)
             {
-                foreach (var kvp in SongList)
+                try
                 {
-                    if (String.Compare(
-                        Path.GetFullPath(kvp.Value.Filename).TrimEnd('\\'),
-                        Path.GetFullPath(path).TrimEnd('\\'),
-                        StringComparison.InvariantCultureIgnoreCase) == 0)
-                    {
-                        return kvp.Key;
-                    }
+                    si.Song = si.Plugin.Load(si.Filename);
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(@"Unable to load song file " + path + @" (" + e.Message + @")");
                 }
             }
-            return Guid.Empty;
         }
 
         /// <summary>
         /// Search the songlist for a given pattern and returns the matching songs
         /// </summary>
         /// <param name="needle">The search pattern</param>
-        /// <param name="mode">If set to 1, the sogtext is also searched for the pattern. If set to 0, only the song title will be used</param>
+        /// <param name="searchMode">If set to 1, the sogtext is also searched for the pattern. If set to 0, only the song title will be used</param>
         /// <returns>Returns a list of matches songs</returns>
         public List<SongItem> GetSearchResults(string needle, SongSearchMode searchMode)
         {
