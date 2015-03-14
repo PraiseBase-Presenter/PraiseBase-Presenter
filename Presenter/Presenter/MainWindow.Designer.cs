@@ -1,6 +1,6 @@
 ﻿using PraiseBase.Presenter.Controls;
 
-namespace PraiseBase.Presenter.UI.Presenter
+namespace PraiseBase.Presenter.Presenter
 {
     partial class MainWindow
     {

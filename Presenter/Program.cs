@@ -28,8 +28,8 @@ using System.Threading;
 using System.Windows.Forms;
 using PraiseBase.Presenter.Forms;
 using PraiseBase.Presenter.Manager;
+using PraiseBase.Presenter.Presenter;
 using PraiseBase.Presenter.Properties;
-using PraiseBase.Presenter.UI.Presenter;
 
 namespace PraiseBase.Presenter
 {

@@ -187,10 +187,10 @@
     <Compile Include="Forms\LoadingScreen.Designer.cs">
       <DependentUpon>LoadingScreen.cs</DependentUpon>
     </Compile>
-    <Compile Include="UI\Presenter\MainWindow.cs">
+    <Compile Include="Presenter\MainWindow.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="UI\Presenter\MainWindow.Designer.cs">
+    <Compile Include="Presenter\MainWindow.Designer.cs">
       <DependentUpon>MainWindow.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\ProgressWindow.cs">
@@ -214,10 +214,10 @@
     <Compile Include="Projection\ProjectionControl.xaml.cs">
       <DependentUpon>ProjectionControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="UI\Presenter\SongBrowserDialog.cs">
+    <Compile Include="Presenter\SongBrowserDialog.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="UI\Presenter\SongBrowserDialog.Designer.cs">
+    <Compile Include="Presenter\SongBrowserDialog.Designer.cs">
       <DependentUpon>SongBrowserDialog.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
@@ -308,10 +308,10 @@
       <DependentUpon>LoadingScreen.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="UI\Presenter\MainWindow.en-US.resx">
+    <EmbeddedResource Include="Presenter\MainWindow.en-US.resx">
       <DependentUpon>MainWindow.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="UI\Presenter\MainWindow.resx">
+    <EmbeddedResource Include="Presenter\MainWindow.resx">
       <DependentUpon>MainWindow.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
@@ -319,7 +319,7 @@
       <DependentUpon>ProgressWindow.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="UI\Presenter\SongBrowserDialog.en-US.resx">
+    <EmbeddedResource Include="Presenter\SongBrowserDialog.en-US.resx">
       <DependentUpon>SongBrowserDialog.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Importer\SongImporter.en-US.resx">
@@ -333,7 +333,7 @@
       <DependentUpon>ProjectionWindow.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="UI\Presenter\SongBrowserDialog.resx">
+    <EmbeddedResource Include="Presenter\SongBrowserDialog.resx">
       <DependentUpon>SongBrowserDialog.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>

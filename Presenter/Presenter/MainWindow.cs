@@ -45,7 +45,7 @@ using PraiseBase.Presenter.Properties;
 using PraiseBase.Presenter.Util;
 using Timer = System.Windows.Forms.Timer;
 
-namespace PraiseBase.Presenter.UI.Presenter
+namespace PraiseBase.Presenter.Presenter
 {
     /// <summary>
     /// The main window class provides the central

@@ -24,7 +24,6 @@ using System;
 using System.Collections.Generic;
 using System.Drawing;
 using PraiseBase.Presenter.Projection;
-using PraiseBase.Presenter.UI.Presenter;
 
 namespace PraiseBase.Presenter.Manager
 {
