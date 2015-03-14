@@ -150,7 +150,7 @@ namespace PraiseBase.Presenter.UI.Components
             Size labelSize = new Size(0, 0);
             foreach (SongPart part in sng.Parts)
             {
-                labelSize = MeasureSize(part.Caption);
+                labelSize = MeasureSize(part.Caption, labelSize);
             }
             _slidePanelOffset = labelSize.Width + 20;
 
@@ -382,9 +382,8 @@ namespace PraiseBase.Presenter.UI.Components
             ResumeLayout();
         }
 
-        private Size MeasureSize(string s)
+        private Size MeasureSize(string s, Size labelSize)
         {
-            Size labelSize = new Size(0, 0);
             Size measured = TextRenderer.MeasureText(s, _partCaptionFont);
             return new Size(Math.Max(labelSize.Width, measured.Width), Math.Max(labelSize.Height, measured.Height));
         }
