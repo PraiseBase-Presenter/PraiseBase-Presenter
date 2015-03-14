@@ -65,6 +65,8 @@ namespace PraiseBase.Presenter.Controls
         private Button _prevSongButton;
         private Button _nextSongButton;
 
+        private SelectAfterLoad _selectAfterLoad = SelectAfterLoad.None;
+
         //
         // Look and feel
         //
@@ -301,6 +303,19 @@ namespace PraiseBase.Presenter.Controls
             _currentSong = sng;
 
             ResumeLayout();
+
+            if (_selectAfterLoad == SelectAfterLoad.First && _slideTexts.Count > 0)
+            {
+                _selectAfterLoad = SelectAfterLoad.None;
+                _slideTexts[0].Focus();
+                textLbl_Click(_slideTexts[0], new EventArgs());
+            }
+            else if (_selectAfterLoad == SelectAfterLoad.Last && _slideTexts.Count > 0)
+            {
+                _selectAfterLoad = SelectAfterLoad.None;
+                _slideTexts[_slideTexts.Count - 1].Focus();
+                textLbl_Click(_slideTexts[_slideTexts.Count - 1], new EventArgs());
+            }
         }
 
         private void RemoveControls(ControlCollection ctls)
@@ -616,6 +631,7 @@ namespace PraiseBase.Presenter.Controls
         {
             if (PreviousSongClicked != null)
             {
+                _selectAfterLoad = SelectAfterLoad.Last;
                 SongSwitchEventArgs p = new SongSwitchEventArgs((Song)((Button)sender).Tag);
                 PreviousSongClicked(this, p);
             }
@@ -625,6 +641,7 @@ namespace PraiseBase.Presenter.Controls
         {
             if (NextSongClicked != null)
             {
+                _selectAfterLoad = SelectAfterLoad.First;
                 SongSwitchEventArgs p = new SongSwitchEventArgs((Song)((Button)sender).Tag);
                 NextSongClicked(this, p);
             }
@@ -715,6 +732,13 @@ namespace PraiseBase.Presenter.Controls
     {
         public string Text { get; set; }
         public IBackground Background { get; set; }
+    }
+
+    internal enum SelectAfterLoad
+    {
+        None,
+        First,
+        Last
     }
 
     #endregion Helper classes
