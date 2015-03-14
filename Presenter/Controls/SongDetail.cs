@@ -45,10 +45,9 @@ namespace PraiseBase.Presenter.Controls
         // Runtime variables
         //
 
-        private readonly List<Button> _slideTexts;
+        private readonly List<Button> _slideTexts = new List<Button>();
         private int _currentSlideTextIdx = -1;
 
-        private int _numParts;
         private int _slidePanelOffset;
         private Song _currentSong;
 
@@ -99,7 +98,6 @@ namespace PraiseBase.Presenter.Controls
         public SongDetail()
         {
             InitializeComponent();
-            _slideTexts = new List<Button>();
         }
 
         public void SetSong(Song sng)
@@ -126,17 +124,8 @@ namespace PraiseBase.Presenter.Controls
             _verse3Index = -1;
             _verse4Index = -1;
 
-            // Clear controls
-            Controls.RemoveByKey("prevPanel");
-            Controls.RemoveByKey("nextPanel");
-            Controls.RemoveByKey("spacerPanelprev");
-            Controls.RemoveByKey("endSpace");
-
-            for (int j = _numParts - 1; j >= 0; j--)
-            {
-                Controls.RemoveByKey("partPanel" + j);
-                Controls.RemoveByKey("spacerPanel" + j);
-            }
+            // Clear existing controls
+            RemoveControls(Controls);
 
             // Set scroll value
             VerticalScroll.Value = 0;
@@ -175,7 +164,6 @@ namespace PraiseBase.Presenter.Controls
                 // Add panel for previous song
                 Panel pnl = new Panel
                 {
-                    Name = "prevPanel", 
                     Height = buttonHeight
                 };
                 pnl.Paint += songSwitchPnl_Paint;
@@ -211,13 +199,13 @@ namespace PraiseBase.Presenter.Controls
 
                 ypos += pnl.Height;
 
-                ypos += AddSpacer(ypos, "spacerPanelprev");
+                ypos += AddSpacer(ypos);
             }
 
-            for (_numParts = 0; _numParts < sng.Parts.Count; _numParts++)
+            for (int i = 0; i < sng.Parts.Count; i++)
             {
                 List<PartPanelElement> elements = new List<PartPanelElement>();
-                foreach (var e in  sng.Parts[_numParts].Slides)
+                foreach (var e in  sng.Parts[i].Slides)
                 {
                     elements.Add(new PartPanelElement
                     {
@@ -225,7 +213,7 @@ namespace PraiseBase.Presenter.Controls
                         Background = e.Background
                     });
                 }
-                ypos += AddPartCopmponent(ypos, elements, ThumbnailSize.Height, labelSize, _numParts, sng.Parts[_numParts].Caption);
+                ypos += AddPartCopmponent(ypos, elements, ThumbnailSize.Height, labelSize, i, sng.Parts[i].Caption);
             }
 
             if (nextSong != null)
@@ -237,7 +225,6 @@ namespace PraiseBase.Presenter.Controls
                 // Add panel for next song
                 Panel pnl = new Panel
                 {
-                    Name = "nextPanel",
                     Location = new Point(LeftMargin, ypos),
                     Height = buttonHeight
                 };
@@ -276,16 +263,26 @@ namespace PraiseBase.Presenter.Controls
 
             Panel lpnl = new Panel
             {
-                Name = "endSpace",
                 Location = new Point(LeftMargin, ypos + BottomMargin - 1),
                 BackColor = Color.White,
                 Height = 1
             };
-            Controls.Add(lpnl);
+            Controls.Add(lpnl); 
 
             _currentSong = sng;
 
             ResumeLayout();
+        }
+
+        private void RemoveControls(ControlCollection ctls)
+        {
+            if (ctls.Count > 0)
+            {
+                for (int i = Controls.Count - 1; i >= 0; i--)
+                {
+                    Controls.RemoveAt(i);
+                }
+            }
         }
 
         private int AddPartCopmponent(int startPos, List<PartPanelElement> elements, int slidePanelHeight, Size labelSize, int partNumber, string caption)
@@ -295,7 +292,7 @@ namespace PraiseBase.Presenter.Controls
 
             // Add panel for this part
             int panelHeight = (numSlides * slidePanelHeight) + ((numSlides - 1) * SlidePanelElementSpacing);
-            Panel songPartPanel = AddPartPanel(startPos, panelHeight, "partPanel" + partNumber, partNumber);
+            Panel songPartPanel = AddPartPanel(startPos, panelHeight, partNumber);
             ypos += songPartPanel.Height;
 
             // Add part caption label to panel
@@ -404,7 +401,7 @@ namespace PraiseBase.Presenter.Controls
 
 
             // Add spacer panel (gray line)
-            ypos += AddSpacer(startPos + ypos, "spacerPanel" + partNumber);
+            ypos += AddSpacer(startPos + ypos);
 
             return ypos;
         }
@@ -477,13 +474,12 @@ namespace PraiseBase.Presenter.Controls
             }
         }
 
-        private Panel AddPartPanel(int ypos, int height, string name, int partNumber)
+        private Panel AddPartPanel(int ypos, int height, int partNumber)
         {
             Panel pnl = new Panel
             {
                 Location = new Point(LeftMargin, ypos),
                 Height = height,
-                Name = name,
                 Tag = partNumber
             };
             pnl.Paint += partPnl_Paint;
@@ -495,11 +491,10 @@ namespace PraiseBase.Presenter.Controls
         /// <summary>
         /// Add spacer panel (gray line)
         /// </summary>
-        private int AddSpacer(int ypos, string name)
+        private int AddSpacer(int ypos)
         {
             Panel lpnl = new Panel
             {
-                Name = name,
                 Location = new Point(LeftMargin, ypos + SpacerMargin),
                 BackColor = _spacerColor,
                 Height = SpaceHeight
