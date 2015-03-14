@@ -25,7 +25,7 @@ using System.Collections.Generic;
 using System.Windows.Forms;
 using Microsoft.Win32;
 
-namespace PraiseBase.Presenter.Manager
+namespace PraiseBase.Presenter.Projection
 {
     class ScreenManager
     {
@@ -77,7 +77,7 @@ namespace PraiseBase.Presenter.Manager
             } 
         }
 
-        protected int scannedScreensHash = 0;
+        protected int ScannedScreensHash;
         public bool ScreensChangedSinceLastScan { get; protected set; }
 
         // Screen change detection event
@@ -139,8 +139,8 @@ namespace PraiseBase.Presenter.Manager
                 }
                 hash += t.GetHashCode();
             }
-            ScreensChangedSinceLastScan = (scannedScreensHash != hash);
-            scannedScreensHash = hash;
+            ScreensChangedSinceLastScan = (ScannedScreensHash != hash);
+            ScannedScreensHash = hash;
 
             if (AvailableProjectionScreens.Count > 0) 
             {

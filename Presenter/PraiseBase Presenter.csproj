@@ -150,8 +150,8 @@
     <Compile Include="Forms\UpdateCheckDialog.Designer.cs">
       <DependentUpon>UpdateCheckDialog.cs</DependentUpon>
     </Compile>
-    <Compile Include="Manager\ProjectionManager.cs" />
-    <Compile Include="Manager\ScreenManager.cs" />
+    <Compile Include="Projection\ProjectionManager.cs" />
+    <Compile Include="Projection\ScreenManager.cs" />
     <Compile Include="Projection\SettingsSlideTextFormattingMapper.cs" />
     <Compile Include="Properties\FileResources.Designer.cs">
       <DependentUpon>FileResources.resx</DependentUpon>

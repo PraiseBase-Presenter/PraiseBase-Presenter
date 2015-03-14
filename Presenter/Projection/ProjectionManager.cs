@@ -23,9 +23,9 @@
 using System;
 using System.Collections.Generic;
 using System.Drawing;
-using PraiseBase.Presenter.Projection;
+using PraiseBase.Presenter.Manager;
 
-namespace PraiseBase.Presenter.Manager
+namespace PraiseBase.Presenter.Projection
 {
     class ProjectionManager
     {
@@ -42,9 +42,9 @@ namespace PraiseBase.Presenter.Manager
             get { return _instance ?? (_instance = new ProjectionManager()); }
         }
 
-        protected List<ProjectionWindow> projectionWindows;
+        protected List<ProjectionWindow> ProjectionWindows;
 
-        protected ProjectionState currentState = ProjectionState.Disabled;
+        protected ProjectionState CurrentState = ProjectionState.Disabled;
 
         protected enum ProjectionState
         {
@@ -92,25 +92,25 @@ namespace PraiseBase.Presenter.Manager
             ScreenManager.Instance.detectScreens();
 
             // Check if projection windows have not been initialized or screens have changed
-            if (projectionWindows == null || ScreenManager.Instance.ScreensChangedSinceLastScan)
+            if (ProjectionWindows == null || ScreenManager.Instance.ScreensChangedSinceLastScan)
             {
                 // First use
-                if (projectionWindows == null)
+                if (ProjectionWindows == null)
                 {
-                    projectionWindows = new List<ProjectionWindow>();
+                    ProjectionWindows = new List<ProjectionWindow>();
                     if (ScreenManager.Instance.AvailableProjectionScreens.Count > 0)
                     {
                         foreach (var s in ScreenManager.Instance.AvailableProjectionScreens)
                         {
                             ProjectionWindow pw = new ProjectionWindow(s);
-                            projectionWindows.Add(pw);
+                            ProjectionWindows.Add(pw);
                         }
                         return true;
                     }
                     else
                     {
                         ProjectionWindow pw = new ProjectionWindow(ScreenManager.Instance.MainScreen);
-                        projectionWindows.Add(pw);
+                        ProjectionWindows.Add(pw);
                         return false;
                     }
                 }
@@ -120,24 +120,24 @@ namespace PraiseBase.Presenter.Manager
                     // If any projection screens available
                     if (ScreenManager.Instance.AvailableProjectionScreens.Count > 0)
                     {
-                        for (int i = 0; i < Math.Max(ScreenManager.Instance.AvailableProjectionScreens.Count, projectionWindows.Count); i++)
+                        for (int i = 0; i < Math.Max(ScreenManager.Instance.AvailableProjectionScreens.Count, ProjectionWindows.Count); i++)
                         {
                             // Move existing window to screen and update it
-                            if (i < projectionWindows.Count && i < ScreenManager.Instance.AvailableProjectionScreens.Count)
+                            if (i < ProjectionWindows.Count && i < ScreenManager.Instance.AvailableProjectionScreens.Count)
                             {
-                                projectionWindows[i].AssignToScreen(ScreenManager.Instance.AvailableProjectionScreens[i]);
+                                ProjectionWindows[i].AssignToScreen(ScreenManager.Instance.AvailableProjectionScreens[i]);
                             }
                             // Create new window if a screen has been added
                             else if (i < ScreenManager.Instance.AvailableProjectionScreens.Count)
                             {
                                 ProjectionWindow pw = new ProjectionWindow(ScreenManager.Instance.AvailableProjectionScreens[i]);
-                                projectionWindows.Add(pw);
+                                ProjectionWindows.Add(pw);
                             }
                             // Destroy window if a screen has been removed
                             else
                             {
-                                projectionWindows[i].Close();
-                                projectionWindows.RemoveAt(i);
+                                ProjectionWindows[i].Close();
+                                ProjectionWindows.RemoveAt(i);
                             }
                         }
                         return true;
@@ -145,18 +145,18 @@ namespace PraiseBase.Presenter.Manager
                     // Only use main screen
                     else
                     {
-                        for (int i = 0; i < projectionWindows.Count; i++)
+                        for (int i = 0; i < ProjectionWindows.Count; i++)
                         {
                             // Projection window on main screen
                             if (i == 0)
                             {
-                                projectionWindows[0].AssignToScreen(ScreenManager.Instance.MainScreen);
+                                ProjectionWindows[0].AssignToScreen(ScreenManager.Instance.MainScreen);
                             }
                             // Destroy the rest
                             else
                             {
-                                projectionWindows[i].Close();
-                                projectionWindows.RemoveAt(i);
+                                ProjectionWindows[i].Close();
+                                ProjectionWindows.RemoveAt(i);
                             }
                         }
                         return false;
@@ -171,14 +171,14 @@ namespace PraiseBase.Presenter.Manager
         /// </summary>
         public void HideProjectionWindow() 
         {
-            foreach (var pw in projectionWindows)
+            foreach (var pw in ProjectionWindows)
             {
-                if (currentState != ProjectionState.Disabled)
+                if (CurrentState != ProjectionState.Disabled)
                 {
                     pw.Hide();
                 }
             }
-            currentState = ProjectionState.Disabled;
+            CurrentState = ProjectionState.Disabled;
         }
 
         /// <summary>
@@ -186,19 +186,19 @@ namespace PraiseBase.Presenter.Manager
         /// </summary>
         public void ShowBlackout()
         {
-            foreach (var pw in projectionWindows)
+            foreach (var pw in ProjectionWindows)
             {
-                if (currentState == ProjectionState.Active)
+                if (CurrentState == ProjectionState.Active)
                 {
                     pw.SetBlackout(true, true);
                 }
-                else if (currentState == ProjectionState.Disabled)
+                else if (CurrentState == ProjectionState.Disabled)
                 {
                     pw.SetBlackout(true, false);
                     pw.Show();
                 }
             }
-            currentState = ProjectionState.Blackout;
+            CurrentState = ProjectionState.Blackout;
         }
 
         /// <summary>
@@ -206,19 +206,19 @@ namespace PraiseBase.Presenter.Manager
         /// </summary>
         public void ShowProjectionWindow()
         {
-            foreach (var pw in projectionWindows)
+            foreach (var pw in ProjectionWindows)
             {
-                if (currentState == ProjectionState.Disabled)
+                if (CurrentState == ProjectionState.Disabled)
                 {
                     pw.SetBlackout(false, false);
                     pw.Show();
                 }
-                else if (currentState == ProjectionState.Blackout)
+                else if (CurrentState == ProjectionState.Blackout)
                 {
                     pw.SetBlackout(false, true);
                 }
             }
-            currentState = ProjectionState.Active;
+            CurrentState = ProjectionState.Active;
         }
 
         /// <summary>
@@ -228,15 +228,15 @@ namespace PraiseBase.Presenter.Manager
         /// <param name="layerContent"></param>
         public void DisplayLayer(int layerNum, BaseLayer layerContent)
         {
-            if (projectionWindows.Count > 0)
+            if (ProjectionWindows.Count > 0)
             {
-                foreach (var pw in projectionWindows)
+                foreach (var pw in ProjectionWindows)
                 {
                     pw.DisplayLayer(layerNum, layerContent);
                 }
                 if (ProjectionChanged != null)
                 {
-                    ProjectionChanged(this, new ProjectionChangedEventArgs { Image = projectionWindows[0].GetPreviewImage() });
+                    ProjectionChanged(this, new ProjectionChangedEventArgs { Image = ProjectionWindows[0].GetPreviewImage() });
                 }
             }
         }
@@ -249,15 +249,15 @@ namespace PraiseBase.Presenter.Manager
         /// <param name="fadetime"></param>
         public void DisplayLayer(int layerNum, BaseLayer layerContent, int fadetime)
         {
-            if (projectionWindows.Count > 0)
+            if (ProjectionWindows.Count > 0)
             {
-                foreach (var pw in projectionWindows)
+                foreach (var pw in ProjectionWindows)
                 {
                     pw.DisplayLayer(layerNum, layerContent, fadetime);
                 }
                 if (ProjectionChanged != null)
                 {
-                    ProjectionChanged(this, new ProjectionChangedEventArgs { Image = projectionWindows[0].GetPreviewImage() });
+                    ProjectionChanged(this, new ProjectionChangedEventArgs { Image = ProjectionWindows[0].GetPreviewImage() });
                 }
             }
         }
@@ -268,15 +268,15 @@ namespace PraiseBase.Presenter.Manager
         /// <param name="layerNum"></param>
         public void HideLayer(int layerNum)
         {
-            if (projectionWindows.Count > 0)
+            if (ProjectionWindows.Count > 0)
             {
-                foreach (var pw in projectionWindows)
+                foreach (var pw in ProjectionWindows)
                 {
                     pw.HideLayer(layerNum);
                 }
                 if (ProjectionChanged != null)
                 {
-                    ProjectionChanged(this, new ProjectionChangedEventArgs { Image = projectionWindows[0].GetPreviewImage() });
+                    ProjectionChanged(this, new ProjectionChangedEventArgs { Image = ProjectionWindows[0].GetPreviewImage() });
                 }
             }
         }
@@ -288,15 +288,15 @@ namespace PraiseBase.Presenter.Manager
         /// <param name="fadetime"></param>
         public void HideLayer(int layerNum, int fadetime)
         {
-            if (projectionWindows.Count > 0)
+            if (ProjectionWindows.Count > 0)
             {
-                foreach (var pw in projectionWindows)
+                foreach (var pw in ProjectionWindows)
                 {
                     pw.HideLayer(layerNum, fadetime);
                 }
                 if (ProjectionChanged != null)
                 {
-                    ProjectionChanged(this, new ProjectionChangedEventArgs { Image = projectionWindows[0].GetPreviewImage() });
+                    ProjectionChanged(this, new ProjectionChangedEventArgs { Image = ProjectionWindows[0].GetPreviewImage() });
                 }
             }
         }
