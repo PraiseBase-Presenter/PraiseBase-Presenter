@@ -149,12 +149,6 @@
     <Compile Include="UI\Presenter\ProjectionWindow.Designer.cs">
       <DependentUpon>ProjectionWindow.cs</DependentUpon>
     </Compile>
-    <Compile Include="UI\Presenter\ProgramSettingsDialog.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="UI\Presenter\ProgramSettingsDialog.Designer.cs">
-      <DependentUpon>ProgramSettingsDialog.cs</DependentUpon>
-    </Compile>
     <Compile Include="UI\Presenter\ProjectionControl.xaml.cs">
       <DependentUpon>ProjectionControl.xaml</DependentUpon>
     </Compile>
@@ -206,9 +200,6 @@
       <DependentUpon>MainWindow.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="UI\Presenter\ProgramSettingsDialog.en-US.resx">
-      <DependentUpon>ProgramSettingsDialog.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="UI\Presenter\ProgressWindow.resx">
       <DependentUpon>ProgressWindow.cs</DependentUpon>
       <SubType>Designer</SubType>
@@ -225,10 +216,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UI\Presenter\ProjectionWindow.resx">
       <DependentUpon>ProjectionWindow.cs</DependentUpon>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="UI\Presenter\ProgramSettingsDialog.resx">
-      <DependentUpon>ProgramSettingsDialog.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="UI\Presenter\SongBrowserDialog.resx">
