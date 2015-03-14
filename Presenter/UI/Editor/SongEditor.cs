@@ -28,12 +28,12 @@ using System.Linq;
 using System.Threading;
 using System.Windows.Forms;
 using PraiseBase.Presenter.Forms;
+using PraiseBase.Presenter.Manager;
 using PraiseBase.Presenter.Model.Song;
 using PraiseBase.Presenter.Persistence;
 using PraiseBase.Presenter.Properties;
 using PraiseBase.Presenter.Template;
 using PraiseBase.Presenter.UI.Presenter;
-using PraiseBase.Presenter.Util;
 using Timer = System.Windows.Forms.Timer;
 
 namespace PraiseBase.Presenter.UI.Editor
@@ -83,10 +83,13 @@ namespace PraiseBase.Presenter.UI.Editor
         /// </summary>
         public event SongSave SongSaved;
 
-        public SongEditor(Settings settings)
+        private readonly ImageManager _imgManager;
+
+        public SongEditor(Settings settings, ImageManager imgManager)
         {
             // Initialize internal variables
             _settings = settings;
+            _imgManager = imgManager;
             _fileBoxInitialDir = _settings.DataDirectory + Path.DirectorySeparatorChar + _settings.SongDir;
             _fileOpenBoxFilterIndex = 0;
             _fileSaveBoxFilterIndex = 0;
@@ -198,7 +201,7 @@ namespace PraiseBase.Presenter.UI.Editor
         private SongEditorChild CreateSongEditorChildForm(Song sng, String fileName)
         {
             int hashCode = sng.GetHashCode();
-            SongEditorChild childForm = new SongEditorChild(_settings, sng)
+            SongEditorChild childForm = new SongEditorChild(_settings, _imgManager, sng)
             {
                 Tag = new EditorChildMetaData(fileName, hashCode),
                 MdiParent = this

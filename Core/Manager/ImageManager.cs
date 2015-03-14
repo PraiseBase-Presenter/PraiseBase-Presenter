@@ -25,22 +25,26 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
 using PraiseBase.Presenter.Model.Song;
-using PraiseBase.Presenter.Properties;
 using PraiseBase.Presenter.Util;
 
 namespace PraiseBase.Presenter.Manager
 {
-    internal class ImageManager
+    public class ImageManager
     {
         /// <summary>
         /// Default size for new images
         /// </summary>
-        protected readonly static Size DefaultImageSize = new Size(1024, 768);
+        public Size DefaultImageSize { get; set; }
 
         /// <summary>
-        /// The singleton holder
+        /// Default thumbnail size
         /// </summary>
-        static private ImageManager _instance;
+        public Size DefaultThumbSize { get; set; }
+
+        /// <summary>
+        /// Default image color for empty images
+        /// </summary>
+        public Color DefaultEmptyColor { get; set; }
 
         /// <summary>
         /// Base path to the image directory
@@ -51,6 +55,10 @@ namespace PraiseBase.Presenter.Manager
         /// Base path to the thumbnails directory
         /// </summary>
         public string ThumbDirPath { get; protected set; }
+
+        private const string ExcludeThumbDirName = "[Thumbnails]";
+        
+        private readonly string[] _imgExtensions = { "*.jpg" };
 
         #region Events
 
@@ -84,52 +92,38 @@ namespace PraiseBase.Presenter.Manager
         /// <summary>
         /// Private constructor
         /// </summary>
-        protected ImageManager()
+        public ImageManager(String imageDirPath, String thumbDirPath)
         {
-            ImageDirPath = Settings.Default.DataDirectory + Path.DirectorySeparatorChar + Settings.Default.ImageDir;
+            ImageDirPath = imageDirPath;
             if (!Directory.Exists(ImageDirPath))
             {
                 Directory.CreateDirectory(ImageDirPath);
             }
 
-            ThumbDirPath = Settings.Default.DataDirectory + Path.DirectorySeparatorChar + Settings.Default.ThumbDir;
+            ThumbDirPath = thumbDirPath;
             if (!Directory.Exists(ThumbDirPath))
             {
                 DirectoryInfo di = Directory.CreateDirectory(ThumbDirPath);
                 di.Attributes = FileAttributes.Directory | FileAttributes.Hidden; 
             }
-        }
 
-        /// <summary>
-        /// Returns the singleton instance of this class
-        /// </summary>
-        /// <returns></returns>
-        static public ImageManager Instance
-        {
-            get
-            {
-                if (_instance == null)
-                    _instance = new ImageManager();
-                return _instance;
-            }
+            DefaultThumbSize = new Size(80, 60);
+            DefaultImageSize = new Size(1024, 768);
         }
 
         /// <summary>
         /// Check and create thumbnails if necessary
         /// </summary>
-        /// <param name="ldg"></param>
         public void CheckThumbs()
         {
-            string[] imgExtensions = { "*.jpg" };
-
             List<string> missingThumbsSrc = new List<string>();
             List<string> missingThumbsTrg = new List<string>();
-            foreach (string ext in imgExtensions)
+            foreach (string ext in _imgExtensions)
             {
                 string[] paths = Directory.GetFiles(ImageDirPath, ext, SearchOption.AllDirectories);
                 foreach (string file in paths)
                 {
-                    if (!file.Contains("[Thumbnails]") && !file.StartsWith(ThumbDirPath))
+                    if (!file.Contains(ExcludeThumbDirName) && !file.StartsWith(ThumbDirPath))
                     {
                         string relativePath = file.Substring((ImageDirPath + Path.DirectorySeparatorChar).Length);
                         string thumbPath = ThumbDirPath + Path.DirectorySeparatorChar + relativePath;
@@ -147,7 +141,7 @@ namespace PraiseBase.Presenter.Manager
             {
                 for (int i = 0; i < cnt; i++)
                 {
-                    ImageUtils.createThumb(missingThumbsSrc[i], missingThumbsTrg[i], Settings.Default.ThumbSize);
+                    ImageUtils.createThumb(missingThumbsSrc[i], missingThumbsTrg[i], DefaultThumbSize);
                     if (i % 10 == 0)
                     {
                         ThumbnailCreateEventArgs e = new ThumbnailCreateEventArgs(i, cnt);
@@ -179,7 +173,7 @@ namespace PraiseBase.Presenter.Manager
         {
             if (path == null)
             {
-                return ImageUtils.getEmptyImage(DefaultImageSize, Settings.Default.ProjectionBackColor);
+                return ImageUtils.getEmptyImage(DefaultImageSize, DefaultEmptyColor);
             }
             try
             {
@@ -196,7 +190,7 @@ namespace PraiseBase.Presenter.Manager
             catch (Exception e)
             {
                 Console.WriteLine(e.Message);
-                return ImageUtils.getEmptyImage(DefaultImageSize, Settings.Default.ProjectionBackColor);
+                return ImageUtils.getEmptyImage(DefaultImageSize, DefaultEmptyColor);
             }
         }
 
@@ -230,10 +224,10 @@ namespace PraiseBase.Presenter.Manager
                 }
                 else if (bg.GetType() == typeof(ColorBackground))
                 {
-                    return ImageUtils.getEmptyImage(Settings.Default.ThumbSize, ((ColorBackground)bg).Color);
+                    return ImageUtils.getEmptyImage(DefaultThumbSize, ((ColorBackground)bg).Color);
                 }
             }
-            return ImageUtils.getEmptyImage(Settings.Default.ThumbSize, Settings.Default.ProjectionBackColor);
+            return ImageUtils.getEmptyImage(DefaultThumbSize, DefaultEmptyColor);
         }
 
         /// <summary>
@@ -243,17 +237,20 @@ namespace PraiseBase.Presenter.Manager
         /// <returns></returns>
         public List<string> SearchImages(string needle) {
             List<string> results = new List<string>();
-            string rootDir = ImageManager.Instance.ThumbDirPath + Path.DirectorySeparatorChar;
+            string rootDir = ThumbDirPath + Path.DirectorySeparatorChar;
             int rootDirStrLen = rootDir.Length;
-            string[] imgFilePaths = Directory.GetFiles(rootDir, "*.jpg", SearchOption.AllDirectories);
-            foreach (string ims in imgFilePaths)
+            foreach (var ext in _imgExtensions)
             {
-                if (!ims.Contains("[Thumbnails]") && !ims.StartsWith(ThumbDirPath))
+                string[] imgFilePaths = Directory.GetFiles(rootDir, ext, SearchOption.AllDirectories);
+                foreach (string ims in imgFilePaths)
                 {
-                    string haystack = Path.GetFileNameWithoutExtension(ims);
-                    if (haystack.ToLower().Contains(needle))
+                    if (!ims.Contains(ExcludeThumbDirName) && !ims.StartsWith(ThumbDirPath))
                     {
-                        results.Add(ims.Substring(rootDirStrLen));
+                        string haystack = Path.GetFileNameWithoutExtension(ims);
+                        if (haystack.ToLower().Contains(needle))
+                        {
+                            results.Add(ims.Substring(rootDirStrLen));
+                        }
                     }
                 }
             }

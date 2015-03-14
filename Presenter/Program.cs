@@ -90,17 +90,27 @@ namespace PraiseBase.Presenter
                 Settings.Default.Save();
             }
 
-            string songDir = Settings.Default.DataDirectory + Path.DirectorySeparatorChar + Settings.Default.SongDir;
+            string dataDir = Settings.Default.DataDirectory + Path.DirectorySeparatorChar;
+
+            string songDir = dataDir + Settings.Default.SongDir;
             SongManager songManager = new SongManager(songDir);
+
+            string imageDirPath = dataDir + Settings.Default.ImageDir;
+            string thumbDirPath = dataDir + Settings.Default.ThumbDir;
+            ImageManager imgManager = new ImageManager(imageDirPath, thumbDirPath)
+            {
+                DefaultThumbSize = Settings.Default.ThumbSize,
+                DefaultEmptyColor = Settings.Default.ProjectionBackColor
+            };
 
             if (Settings.Default.ShowLoadingScreen)
             {
-                LoadingScreen ldg = new LoadingScreen(songManager);
+                LoadingScreen ldg = new LoadingScreen(songManager, imgManager);
                 ldg.SetLabel("PraiseBase Presenter wird gestartet...");
                 ldg.Show();
 
                 ldg.SetLabel("Prüfe Miniaturbilder...");
-                ImageManager.Instance.CheckThumbs();
+                imgManager.CheckThumbs();
 
                 ldg.SetLabel("Lade Liederdatenbank...");
                 songManager.Reload();
@@ -111,7 +121,7 @@ namespace PraiseBase.Presenter
             }
             else
             {
-                ImageManager.Instance.CheckThumbs();
+                imgManager.CheckThumbs();
                 songManager.Reload();
                 GC.Collect();
             }
@@ -125,7 +135,7 @@ namespace PraiseBase.Presenter
                 setlistFile = args[0];
             }
 
-            MainWindow mw = new MainWindow(songManager, setlistFile);
+            MainWindow mw = new MainWindow(songManager, imgManager, setlistFile);
             Application.Run(mw);
             GC.KeepAlive(mutex);
         }

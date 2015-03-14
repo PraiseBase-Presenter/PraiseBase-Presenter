@@ -45,8 +45,11 @@ namespace PraiseBase.Presenter.UI.Presenter
             }
         }
 
-        public ImageDialog()
+        private readonly ImageManager _imgManager;
+
+        public ImageDialog(ImageManager imgManager)
         {
+            _imgManager = imgManager;
             InitializeComponent();
         }
 
@@ -57,7 +60,7 @@ namespace PraiseBase.Presenter.UI.Presenter
                 if (listViewImages.SelectedItems.Count > 0)
                 {
                     string image = (string)listViewImages.SelectedItems[0].Tag;
-                    if (image != null && image != string.Empty)
+                    if (!string.IsNullOrEmpty(image))
                     {
                         Background = new ImageBackground(image);
                         DialogResult = DialogResult.OK;
@@ -183,7 +186,7 @@ namespace PraiseBase.Presenter.UI.Presenter
                     lvi.Tag = relativePath;
                     lvi.ImageIndex = i;
                     listViewImages.Items.Add(lvi);
-                    imList.Images.Add(ImageManager.Instance.GetThumbFromRelPath(relativePath));
+                    imList.Images.Add(_imgManager.GetThumbFromRelPath(relativePath));
                     if (Background != null && Background.GetType() == typeof (ImageBackground) && relativePath == ((ImageBackground)Background).ImagePath)
                     {
                         listViewImages.Items[i].Selected = true;

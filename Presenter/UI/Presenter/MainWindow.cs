@@ -70,9 +70,12 @@ namespace PraiseBase.Presenter.UI.Presenter
 
         private readonly SongManager _songManager;
 
-        public MainWindow(SongManager songManager, string setlistFile)
+        private readonly ImageManager _imgManager;
+
+        public MainWindow(SongManager songManager, ImageManager imgManager, string setlistFile)
         {
             _songManager = songManager;
+            _imgManager = imgManager;
 
             InitializeComponent();
 
@@ -84,6 +87,8 @@ namespace PraiseBase.Presenter.UI.Presenter
 
             // Load setlist file if specified
             LoadSetListIfExists(setlistFile);
+
+            songDetailElement.ImageManager = imgManager;
         }
 
         /// <summary>
@@ -159,7 +164,7 @@ namespace PraiseBase.Presenter.UI.Presenter
 
         private SongEditor CreateSongEditorInstance()
         {
-            var se = new SongEditor(Settings.Default);
+            var se = new SongEditor(Settings.Default, _imgManager);
             se.SongSaved += SongEditorWndOnSongSaved;
             return se;
         }
@@ -626,7 +631,7 @@ namespace PraiseBase.Presenter.UI.Presenter
                 {
                     ImageLayer iml = new ImageLayer(Settings.Default.ProjectionBackColor);
                     IBackground bg = (IBackground)listViewImageQueue.Items[0].Tag;
-                    iml.Image = ImageManager.Instance.GetImage(bg);
+                    iml.Image = _imgManager.GetImage(bg);
                     ProjectionManager.Instance.DisplayLayer(1, iml, Settings.Default.ProjectionFadeTimeLayer1);
                     ProjectionManager.Instance.DisplayLayer(2, ssl);
                     if (bg != null && bg.GetType() == typeof(ImageBackground))
@@ -651,7 +656,7 @@ namespace PraiseBase.Presenter.UI.Presenter
             else
             {
                 ImageLayer iml = new ImageLayer(Settings.Default.ProjectionBackColor);
-                iml.Image = ImageManager.Instance.GetImage(cs.Background);
+                iml.Image = _imgManager.GetImage(cs.Background);
                 ProjectionManager.Instance.DisplayLayer(1, iml, Settings.Default.ProjectionFadeTimeLayer1);
                 ProjectionManager.Instance.DisplayLayer(2, ssl);
 
@@ -679,7 +684,7 @@ namespace PraiseBase.Presenter.UI.Presenter
             // Stack
             if ((ModifierKeys & Keys.Control) == Keys.Control)
             {
-                listViewImageQueue.LargeImageList.Images.Add(ImageManager.Instance.GetThumb(e.Background));
+                listViewImageQueue.LargeImageList.Images.Add(_imgManager.GetThumb(e.Background));
                 var lvi = new ListViewItem("");
                 lvi.Tag = e.Background;
                 lvi.ImageIndex = listViewImageQueue.LargeImageList.Images.Count - 1;
@@ -704,7 +709,7 @@ namespace PraiseBase.Presenter.UI.Presenter
 
                 // Show image
                 ImageLayer iml = new ImageLayer(Settings.Default.ProjectionBackColor);
-                iml.Image = ImageManager.Instance.GetImage(e.Background);
+                iml.Image = _imgManager.GetImage(e.Background);
                 ProjectionManager.Instance.DisplayLayer(1, iml, Settings.Default.ProjectionFadeTimeLayer1);
 
                 if (e.Background != null && e.Background.GetType() == typeof(ImageBackground))
@@ -733,7 +738,7 @@ namespace PraiseBase.Presenter.UI.Presenter
 
         public void imageTreeViewInit()
         {
-            string rootDir = ImageManager.Instance.ImageDirPath;
+            string rootDir = _imgManager.ImageDirPath;
             treeViewImageDirectories.Nodes.Clear();
             PopulateTreeView(rootDir, null);
             treeViewImageDirectories.ExpandAll();
@@ -768,7 +773,7 @@ namespace PraiseBase.Presenter.UI.Presenter
 
             foreach (string relImagePath in Settings.Default.ImageFavorites)
             {
-                listViewFavorites.LargeImageList.Images.Add(ImageManager.Instance.GetThumbFromRelPath(relImagePath));
+                listViewFavorites.LargeImageList.Images.Add(_imgManager.GetThumbFromRelPath(relImagePath));
                 var lvi = new ListViewItem("");
                 lvi.Tag = relImagePath;
                 lvi.ImageIndex = listViewFavorites.LargeImageList.Images.Count - 1;
@@ -797,7 +802,7 @@ namespace PraiseBase.Presenter.UI.Presenter
 
                     if (directoryArray.Length != 0)
                     {
-                        int subLen = (ImageManager.Instance.ImageDirPath + Path.DirectorySeparatorChar).Length;
+                        int subLen = (_imgManager.ImageDirPath + Path.DirectorySeparatorChar).Length;
                         foreach (string directory in directoryArray)
                         {
                             string dName = Path.GetFileName(directory);
@@ -843,7 +848,7 @@ namespace PraiseBase.Presenter.UI.Presenter
 
                     var lviList = new List<ListViewItem>();
 
-                    string pathPrefix = ImageManager.Instance.ThumbDirPath + Path.DirectorySeparatorChar;
+                    string pathPrefix = _imgManager.ThumbDirPath + Path.DirectorySeparatorChar;
                     int i = 0;
 
                     foreach (string file in imageSearchResults)
@@ -863,7 +868,7 @@ namespace PraiseBase.Presenter.UI.Presenter
                 else
                 {
                     string relativeImageDir = ((string)treeViewImageDirectories.SelectedNode.Tag) + Path.DirectorySeparatorChar;
-                    string imDir = ImageManager.Instance.ThumbDirPath + Path.DirectorySeparatorChar + relativeImageDir;
+                    string imDir = _imgManager.ThumbDirPath + Path.DirectorySeparatorChar + relativeImageDir;
 
                     if (Directory.Exists(imDir))
                     {
@@ -914,7 +919,7 @@ namespace PraiseBase.Presenter.UI.Presenter
                 if ((ModifierKeys & Keys.Control) == Keys.Control)
                 {
                     listViewImageQueue.LargeImageList.Images.Add(
-                        ImageManager.Instance.GetThumbFromRelPath((string)listViewDirectoryImages.Items[idx].Tag));
+                        _imgManager.GetThumbFromRelPath((string)listViewDirectoryImages.Items[idx].Tag));
                     var lvi = new ListViewItem("");
                     lvi.Tag = listViewDirectoryImages.Items[idx].Tag;
                     lvi.ImageIndex = listViewImageQueue.LargeImageList.Images.Count - 1;
@@ -939,7 +944,7 @@ namespace PraiseBase.Presenter.UI.Presenter
                     }
 
                     ImageLayer iml = new ImageLayer(Settings.Default.ProjectionBackColor);
-                    iml.Image = ImageManager.Instance.GetImageFromRelPath((string)listViewDirectoryImages.Items[idx].Tag);
+                    iml.Image = _imgManager.GetImageFromRelPath((string)listViewDirectoryImages.Items[idx].Tag);
                     ProjectionManager.Instance.DisplayLayer(1, iml, Settings.Default.ProjectionFadeTimeLayer1);
 
                     // Add image to history
@@ -960,7 +965,7 @@ namespace PraiseBase.Presenter.UI.Presenter
                         listViewImageHistory.Items.RemoveAt(i);
                     }
                 }
-                var img = ImageManager.Instance.GetThumbFromRelPath(relImagePath);
+                var img = _imgManager.GetThumbFromRelPath(relImagePath);
                 if (img != null)
                 {
                     listViewImageHistory.LargeImageList.Images.Add(img);
@@ -977,7 +982,7 @@ namespace PraiseBase.Presenter.UI.Presenter
         {
             if (!Settings.Default.ImageFavorites.Contains(relImagePath))
             {
-                listViewFavorites.LargeImageList.Images.Add(ImageManager.Instance.GetThumbFromRelPath(relImagePath));
+                listViewFavorites.LargeImageList.Images.Add(_imgManager.GetThumbFromRelPath(relImagePath));
                 var lvi = new ListViewItem("");
                 lvi.Tag = relImagePath;
                 lvi.ImageIndex = listViewFavorites.LargeImageList.Images.Count - 1;
@@ -1192,7 +1197,7 @@ namespace PraiseBase.Presenter.UI.Presenter
                 if ((ModifierKeys & Keys.Control) == Keys.Control)
                 {
                     listViewImageQueue.LargeImageList.Images.Add(
-                        ImageManager.Instance.GetThumbFromRelPath((string)listViewImageHistory.Items[idx].Tag));
+                        _imgManager.GetThumbFromRelPath((string)listViewImageHistory.Items[idx].Tag));
                     var lvi = new ListViewItem("");
                     lvi.Tag = listViewImageHistory.Items[idx].Tag;
                     lvi.ImageIndex = listViewImageQueue.LargeImageList.Images.Count - 1;
@@ -1212,7 +1217,7 @@ namespace PraiseBase.Presenter.UI.Presenter
                     }
 
                     ImageLayer iml = new ImageLayer(Settings.Default.ProjectionBackColor);
-                    iml.Image = ImageManager.Instance.GetImageFromRelPath((string)listViewImageHistory.Items[idx].Tag);
+                    iml.Image = _imgManager.GetImageFromRelPath((string)listViewImageHistory.Items[idx].Tag);
                     ProjectionManager.Instance.DisplayLayer(1, iml, Settings.Default.ProjectionFadeTimeLayer1);
                 }
             }
@@ -1233,7 +1238,7 @@ namespace PraiseBase.Presenter.UI.Presenter
                 treeViewImageDirectories.SelectedNode = null;
                 imageSearchResults.Clear();
                 Console.WriteLine("Search: "+ needle);
-                foreach (string ims in ImageManager.Instance.SearchImages(needle))
+                foreach (string ims in _imgManager.SearchImages(needle))
                 {
                     Console.WriteLine("Found: " + ims);
                     imageSearchResults.Add(ims);
@@ -1275,7 +1280,7 @@ namespace PraiseBase.Presenter.UI.Presenter
 
         private void bilderToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Process.Start(ImageManager.Instance.ImageDirPath);
+            Process.Start(_imgManager.ImageDirPath);
         }
 
         private void setlistenToolStripMenuItem_Click(object sender, EventArgs e)
@@ -1343,8 +1348,8 @@ namespace PraiseBase.Presenter.UI.Presenter
         {
             ProgressWindow wnd = new ProgressWindow(StringResources.CreatingThumbnails + "...", 0);
             wnd.Show();
-            ImageManager.Instance.ThumbnailCreated += Instance_ThumbnailCreated;
-            ImageManager.Instance.CheckThumbs();
+            _imgManager.ThumbnailCreated += Instance_ThumbnailCreated;
+            _imgManager.CheckThumbs();
             wnd.Close();
         }
 
@@ -1379,7 +1384,7 @@ namespace PraiseBase.Presenter.UI.Presenter
 
                 int idx = listViewImageQueue.SelectedIndices[0];
                 ImageLayer iml = new ImageLayer(Settings.Default.ProjectionBackColor);
-                iml.Image = ImageManager.Instance.GetImageFromRelPath((string)listViewImageQueue.Items[idx].Tag);
+                iml.Image = _imgManager.GetImageFromRelPath((string)listViewImageQueue.Items[idx].Tag);
                 ProjectionManager.Instance.DisplayLayer(1, iml, Settings.Default.ProjectionFadeTimeLayer1);
             }
         }
@@ -1419,7 +1424,7 @@ namespace PraiseBase.Presenter.UI.Presenter
                 if ((ModifierKeys & Keys.Control) == Keys.Control)
                 {
                     listViewImageQueue.LargeImageList.Images.Add(
-                        ImageManager.Instance.GetThumbFromRelPath((string)listViewFavorites.Items[idx].Tag));
+                        _imgManager.GetThumbFromRelPath((string)listViewFavorites.Items[idx].Tag));
                     var lvi = new ListViewItem("");
                     lvi.Tag = listViewFavorites.Items[idx].Tag;
                     lvi.ImageIndex = listViewImageQueue.LargeImageList.Images.Count - 1;
@@ -1441,7 +1446,7 @@ namespace PraiseBase.Presenter.UI.Presenter
                         ProjectionManager.Instance.HideLayer(2);
                     }
                     ImageLayer iml = new ImageLayer(Settings.Default.ProjectionBackColor);
-                    iml.Image = ImageManager.Instance.GetImageFromRelPath((string)listViewFavorites.Items[idx].Tag);
+                    iml.Image = _imgManager.GetImageFromRelPath((string)listViewFavorites.Items[idx].Tag);
                     ProjectionManager.Instance.DisplayLayer(2, iml);
 
                     // Add image to history

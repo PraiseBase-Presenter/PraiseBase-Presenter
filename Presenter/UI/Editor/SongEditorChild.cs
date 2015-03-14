@@ -60,11 +60,14 @@ namespace PraiseBase.Presenter.UI.Editor
         /// </summary>
         readonly SongTemplateMapper _templateMapper;
 
+        private readonly ImageManager _imgManager;
+
         private readonly ISlideTextFormattingMapper<Song> _previewFormattingMapper = new SongSlideTextFormattingMapper();
 
-        public SongEditorChild(Settings settings, Song sng)
+        public SongEditorChild(Settings settings, ImageManager imgManager, Song sng)
         {
             _settings = settings;
+            _imgManager = imgManager;
             _templateMapper = new SongTemplateMapper(_settings);
             Song = sng;
 
@@ -496,7 +499,7 @@ namespace PraiseBase.Presenter.UI.Editor
 
         private void buttonSlideBackground_Click(object sender, EventArgs e)
         {
-            ImageDialog imd = new ImageDialog
+            ImageDialog imd = new ImageDialog(_imgManager)
             {
                 Background = Song.Parts[_currentPartId].Slides[_currentSlideId].Background
             };
@@ -589,7 +592,7 @@ namespace PraiseBase.Presenter.UI.Editor
             ImageLayer il = new ImageLayer(_settings.ProjectionBackColor);
 
             IBackground bg = Song.Parts[_currentPartId].Slides[_currentSlideId].Background;
-            il.Image = ImageManager.Instance.GetImage(bg);
+            il.Image = _imgManager.GetImage(bg);
 
             var bmp = new Bitmap(1024, 768);
             Graphics gr = Graphics.FromImage(bmp);

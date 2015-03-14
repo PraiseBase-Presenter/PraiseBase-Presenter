@@ -91,6 +91,8 @@ namespace PraiseBase.Presenter.UI.Components
         private const int TopMargin = 5;
         private const int BottomMargin = 5;
 
+        public ImageManager ImageManager { get; set; }
+
         public SongDetail()
         {
             InitializeComponent();
@@ -245,7 +247,7 @@ namespace PraiseBase.Presenter.UI.Components
                     {
                         Location = new Point(0, 0),
                         Size = ThumbnailSize,
-                        Image = ImageManager.Instance.GetThumb(bg),
+                        Image = ImageManager.GetThumb(bg),
                         Tag = bg,
                         Enabled = true,
                         SizeMode = PictureBoxSizeMode.Zoom,
