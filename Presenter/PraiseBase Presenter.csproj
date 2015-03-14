@@ -193,10 +193,10 @@
     <Compile Include="UI\Presenter\MainWindow.Designer.cs">
       <DependentUpon>MainWindow.cs</DependentUpon>
     </Compile>
-    <Compile Include="UI\Presenter\ProgressWindow.cs">
+    <Compile Include="Forms\ProgressWindow.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="UI\Presenter\ProgressWindow.Designer.cs">
+    <Compile Include="Forms\ProgressWindow.Designer.cs">
       <DependentUpon>ProgressWindow.cs</DependentUpon>
     </Compile>
     <Compile Include="Importer\SongImporter.cs">
@@ -315,7 +315,7 @@
       <DependentUpon>MainWindow.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="UI\Presenter\ProgressWindow.resx">
+    <EmbeddedResource Include="Forms\ProgressWindow.resx">
       <DependentUpon>ProgressWindow.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>

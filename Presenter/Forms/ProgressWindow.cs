@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Windows.Forms;
 
-namespace PraiseBase.Presenter.UI.Presenter
+namespace PraiseBase.Presenter.Forms
 {
     public partial class ProgressWindow : Form
     {
@@ -11,7 +11,7 @@ namespace PraiseBase.Presenter.UI.Presenter
         {
             InitializeComponent();
             Cancelled = false;
-            this.Text = title;
+            Text = title;
             progressBarStatus.Maximum = maximum;
         }
 
