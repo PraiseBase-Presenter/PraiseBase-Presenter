@@ -75,6 +75,7 @@
       <DependentUpon>SongEditorChild.cs</DependentUpon>
     </Compile>
     <Compile Include="Editor\SongSavedEventArgs.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Editor\SongEditor.en-US.resx">
