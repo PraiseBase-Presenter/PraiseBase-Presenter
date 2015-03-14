@@ -8,15 +8,14 @@ using PraiseBase.Presenter.Persistence;
 using PraiseBase.Presenter.Persistence.PraiseBox;
 using PraiseBase.Presenter.Properties;
 using PraiseBase.Presenter.Template;
-using PraiseBase.Presenter.Util;
 
 namespace PraiseBase.Presenter.UI.Presenter
 {
     public partial class SongImporter : Form
     {
-        private ImportFormat _format;
+        private readonly ImportFormat _format;
 
-        private Settings _settings;
+        private readonly Settings _settings;
 
         /// <summary>
         /// List of songs to be opened in the editor
@@ -26,11 +25,13 @@ namespace PraiseBase.Presenter.UI.Presenter
         /// <summary>
         /// Imports songs from other systems
         /// </summary>
+        /// <param name="settings"></param>
         /// <param name="importFormat">Import type</param>
         public SongImporter(Settings settings, ImportFormat importFormat)
         {
             _settings = settings;
             _format = importFormat;
+            OpenInEditor = new List<string>();
             InitializeComponent();
         }
 
@@ -39,16 +40,16 @@ namespace PraiseBase.Presenter.UI.Presenter
             switch (_format)
             {
                 case ImportFormat.PraiseBox:
-                    loadPraiseBoxFile();
+                    LoadPraiseBoxFile();
                     break;
                 case ImportFormat.WorshipSystem:
-                    loadWorshipSystemFile();
+                    LoadWorshipSystemFile();
                     break;
                 default:
-                    MessageBox.Show(Properties.StringResources.Sorry + "! " + Properties.StringResources.NoSongImporterAvailable, 
-                        Properties.StringResources.SongImporter, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show(StringResources.Sorry + "! " + StringResources.NoSongImporterAvailable, 
+                        StringResources.SongImporter, MessageBoxButtons.OK, MessageBoxIcon.Error);
                     DialogResult = DialogResult.Cancel;
-                    this.Close();
+                    Close();
                     return;
             }
         }
@@ -64,7 +65,7 @@ namespace PraiseBase.Presenter.UI.Presenter
                 {
                     foreach (SongSlide sld in prt.Slides)
                     {
-                        ListViewItem lvi = new ListViewItem(new string[] { prt.Caption, sld.GetOneLineText() });
+                        ListViewItem lvi = new ListViewItem(new[] { prt.Caption, sld.GetOneLineText() });
                         listViewDetails.Items.Add(lvi);
                     }
                 }
@@ -140,7 +141,7 @@ namespace PraiseBase.Presenter.UI.Presenter
 
                 DialogResult = DialogResult.OK;
             }
-            this.Close();
+            Close();
         }
 
         private void buttonCancel_Click(object sender, EventArgs e)
@@ -148,11 +149,11 @@ namespace PraiseBase.Presenter.UI.Presenter
             DialogResult = DialogResult.Cancel;
         }
 
-        private void loadPraiseBoxFile()
+        private void LoadPraiseBoxFile()
         {
             OpenFileDialog dlg = new OpenFileDialog();
-            dlg.Title = Properties.StringResources.OpenPraiseBoxDatabase;
-            dlg.Filter = Properties.StringResources.OpenPraiseBoxDatabase + " (*.pbd)|*.pbd|Alle Dateien (*.*)|*.*";
+            dlg.Title = StringResources.OpenPraiseBoxDatabase;
+            dlg.Filter = StringResources.OpenPraiseBoxDatabase + " (*.pbd)|*.pbd|Alle Dateien (*.*)|*.*";
 
             if (dlg.ShowDialog() == DialogResult.OK)
             {
@@ -170,24 +171,23 @@ namespace PraiseBase.Presenter.UI.Presenter
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show(Properties.StringResources.Sorry + "! " + ex.Message, Properties.StringResources.DatabaseError,
+                    MessageBox.Show(StringResources.Sorry + "! " + ex.Message, StringResources.DatabaseError,
                         MessageBoxButtons.OK, MessageBoxIcon.Error);
                     DialogResult = DialogResult.Cancel;
-                    this.Close();
-                    return;
+                    Close();
                 }
             }
             else
             {
-                this.Close();
+                Close();
             }
         }
             
-        private void loadWorshipSystemFile()
+        private void LoadWorshipSystemFile()
         {
             OpenFileDialog dlg = new OpenFileDialog();
-            dlg.Title = Properties.StringResources.OpenWorshipSystemDatabase;
-            dlg.Filter = Properties.StringResources.OpenWorshipSystemDatabase + " (*.mdb)|*.mdb|Alle Dateien (*.*)|*.*";
+            dlg.Title = StringResources.OpenWorshipSystemDatabase;
+            dlg.Filter = StringResources.OpenWorshipSystemDatabase + " (*.mdb)|*.mdb|Alle Dateien (*.*)|*.*";
 
             if (dlg.ShowDialog() == DialogResult.OK)
             {
@@ -205,16 +205,15 @@ namespace PraiseBase.Presenter.UI.Presenter
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show(Properties.StringResources.Sorry + "! " + ex.Message, Properties.StringResources.DatabaseError,
+                    MessageBox.Show(StringResources.Sorry + "! " + ex.Message, StringResources.DatabaseError,
                         MessageBoxButtons.OK, MessageBoxIcon.Error);
                     DialogResult = DialogResult.Cancel;
-                    this.Close();
-                    return;
+                    Close();
                 }
             }
             else
             {
-                this.Close();
+                Close();
             }
 
         }
