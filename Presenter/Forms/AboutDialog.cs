@@ -180,5 +180,10 @@ namespace PraiseBase.Presenter.Forms
                 Process.Start(_updateDownloadUrl);
             }
         }
+
+        private void pictureBox2_Click(object sender, EventArgs e)
+        {
+            Process.Start("http://www.techniknetz.ch");
+        }
     }
 }

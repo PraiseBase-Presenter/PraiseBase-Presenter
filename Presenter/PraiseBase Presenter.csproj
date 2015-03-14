@@ -628,6 +628,7 @@
     <None Include="Resources\translate.png" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Resources\Techniknetz_Logo-300x122.png" />
     <Content Include="Resources\translate_active.png" />
     <None Include="Resources\xmag.png" />
     <None Include="Resources\wheel16.png" />
