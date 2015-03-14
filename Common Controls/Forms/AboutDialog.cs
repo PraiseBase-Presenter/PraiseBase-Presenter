@@ -34,9 +34,11 @@ namespace PraiseBase.Presenter.UI.Presenter
     public partial class AboutDialog : Form
     {
         private String _updateDownloadUrl = string.Empty;
+        private readonly String _updateCheckUrl;
 
-        public AboutDialog()
+        public AboutDialog(string updateCheckUrl)
         {
+           _updateCheckUrl = updateCheckUrl;
             InitializeComponent();
         }
 
@@ -142,7 +144,7 @@ namespace PraiseBase.Presenter.UI.Presenter
         private void timer1_Tick(object sender, EventArgs e)
         {
             UpdateChecker uc = new UpdateChecker();
-            UpdateInformation ui = uc.GetNewVersion(Settings.Default.UpdateCheckUrl);
+            UpdateInformation ui = uc.GetNewVersion(_updateCheckUrl);
             if (ui.UpdateAvailable)
             {
                 linkLabel1.Text = String.Format(StringResources.UpdateAvailable, ui.OnlineVersion, ui.CurrentVersion);

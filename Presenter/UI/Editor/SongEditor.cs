@@ -588,7 +588,7 @@ namespace PraiseBase.Presenter.UI.Editor
 
         private void aboutToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            AboutDialog ab = new AboutDialog();
+            AboutDialog ab = new AboutDialog(_settings.UpdateCheckUrl);
             ab.ShowDialog(this);
         }
 
@@ -730,7 +730,7 @@ namespace PraiseBase.Presenter.UI.Editor
 
         private void contentsToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Process.Start(Settings.Default.HelpUrl);
+            Process.Start(_settings.HelpUrl);
         }
     }
 }
