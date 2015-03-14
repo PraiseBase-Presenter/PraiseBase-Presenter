@@ -572,14 +572,16 @@ namespace PraiseBase.Presenter.UI.Presenter
             // Formatting based on master styling
             if (Settings.Default.ProjectionUseMaster)
             {
-                SongSlideTextFormattingMapper.Map(Settings.Default, ref slideFormatting);
+                ISlideTextFormattingMapper<Settings> mapper = new SettingsSlideTextFormattingMapper();
+                mapper.Map(Settings.Default, ref slideFormatting);
                 sourcePosition = Settings.Default.ProjectionMasterSourcePosition;
                 copyrightPosition = Settings.Default.ProjectionMasterCopyrightPosition;
             }
             // Formatting based on song settings
             else
             {
-                SongSlideTextFormattingMapper.Map(s, ref slideFormatting);
+                ISlideTextFormattingMapper<Song> mapper = new SongSlideTextFormattingMapper();
+                mapper.Map(s, ref slideFormatting);
                 sourcePosition = s.SourcePosition;
                 copyrightPosition = s.CopyrightPosition;
             }
@@ -1456,7 +1458,8 @@ namespace PraiseBase.Presenter.UI.Presenter
 
             // TODO Dedicated formatting for live text
             SlideTextFormatting slideFormatting = new SlideTextFormatting();
-            SongSlideTextFormattingMapper.Map(Settings.Default, ref slideFormatting);
+            ISlideTextFormattingMapper<Settings> mapper = new SettingsSlideTextFormattingMapper();
+            mapper.Map(Settings.Default, ref slideFormatting);
             slideFormatting.ScaleFontSize = Settings.Default.ProjectionFontScaling;
             slideFormatting.SmoothShadow = Settings.Default.ProjectionSmoothShadow;
             
@@ -1691,7 +1694,8 @@ namespace PraiseBase.Presenter.UI.Presenter
 
             // TODO Dedicated formatting for bible text
             SlideTextFormatting slideFormatting = new SlideTextFormatting();
-            SongSlideTextFormattingMapper.Map(Settings.Default, ref slideFormatting);
+            ISlideTextFormattingMapper<Settings> mapper = new SettingsSlideTextFormattingMapper();
+            mapper.Map(Settings.Default, ref slideFormatting);
             slideFormatting.ScaleFontSize = Settings.Default.ProjectionFontScaling;
             slideFormatting.SmoothShadow = Settings.Default.ProjectionSmoothShadow;
 

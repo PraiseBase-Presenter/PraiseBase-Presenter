@@ -87,7 +87,7 @@
     <Compile Include="Manager\BibleManager.cs" />
     <Compile Include="Manager\ProjectionManager.cs" />
     <Compile Include="Manager\ScreenManager.cs" />
-    <Compile Include="Projection\SongSlideTextFormattingMapper.cs" />
+    <Compile Include="Projection\SettingsSlideTextFormattingMapper.cs" />
     <Compile Include="UI\Editor\EditorChildMetaData.cs" />
     <Compile Include="UI\Editor\SongSavedEventArgs.cs" />
     <Compile Include="Manager\ImageManager.cs" />

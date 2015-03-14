@@ -59,6 +59,8 @@ namespace PraiseBase.Presenter.UI.Editor
         /// </summary>
         readonly SongTemplateMapper _templateMapper;
 
+        private readonly ISlideTextFormattingMapper<Song> _previewFormattingMapper = new SongSlideTextFormattingMapper();
+
         public SongEditorChild(Settings settings, Song sng)
         {
             _settings = settings;
@@ -568,7 +570,7 @@ namespace PraiseBase.Presenter.UI.Editor
             slide.TranslationText = textBoxSongTranslation.Text;
             SlideTextFormatting slideFormatting = new SlideTextFormatting();
 
-            SongSlideTextFormattingMapper.Map(Song, ref slideFormatting);
+            _previewFormattingMapper.Map(Song, ref slideFormatting);
 
             // Disabled for performance
             slideFormatting.OutlineEnabled = false;

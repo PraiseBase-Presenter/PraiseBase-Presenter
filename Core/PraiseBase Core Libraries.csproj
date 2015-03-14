@@ -126,7 +126,9 @@
     <Compile Include="Persistence\XmlWriterHelper.cs" />
     <Compile Include="Projection\BaseLayer.cs" />
     <Compile Include="Projection\ImageLayer.cs" />
+    <Compile Include="Projection\ISlideTextFormattingMapper.cs" />
     <Compile Include="Projection\SlideTextFormatting.cs" />
+    <Compile Include="Projection\SongSlideTextFormattingMapper.cs" />
     <Compile Include="Projection\TextLayer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Util\FileUtils.cs" />
