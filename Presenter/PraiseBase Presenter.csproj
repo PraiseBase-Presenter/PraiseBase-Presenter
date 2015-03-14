@@ -95,7 +95,6 @@
     <Compile Include="UI\Editor\EditorChildMetaData.cs" />
     <Compile Include="UI\Editor\SongSavedEventArgs.cs" />
     <Compile Include="Manager\ImageManager.cs" />
-    <Compile Include="Manager\SongManager.cs" />
     <Compile Include="UI\Components\SongDetail.cs">
       <SubType>UserControl</SubType>
     </Compile>

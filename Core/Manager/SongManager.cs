@@ -23,11 +23,10 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
-using PraiseBase.Presenter.Manager;
 using PraiseBase.Presenter.Model.Song;
 using PraiseBase.Presenter.Persistence;
 
-namespace PraiseBase.Presenter
+namespace PraiseBase.Presenter.Manager
 {
     /// <summary>
     /// Holds a list of all songs and provides

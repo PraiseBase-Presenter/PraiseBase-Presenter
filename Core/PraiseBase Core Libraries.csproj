@@ -40,6 +40,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Manager\SongItem.cs" />
+    <Compile Include="Manager\SongManager.cs" />
     <Compile Include="Model\AdditionalInformationPosition.cs" />
     <Compile Include="Model\Bible\Bible.cs" />
     <Compile Include="Model\Bible\BibleBook.cs" />
