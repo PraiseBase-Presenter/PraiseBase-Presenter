@@ -28,6 +28,7 @@ using System.Threading;
 using System.Windows.Forms;
 using PraiseBase.Presenter.Forms;
 using PraiseBase.Presenter.Manager;
+using PraiseBase.Presenter.Persistence.Setlists;
 using PraiseBase.Presenter.Presenter;
 using PraiseBase.Presenter.Properties;
 
@@ -122,12 +123,17 @@ namespace PraiseBase.Presenter
             }
 
             Console.WriteLine(@"Loading took " + (DateTime.Now - startTime).TotalSeconds + @" seconds!");
-            
-            // Detect if program is called with a setlist file as argument
+
             string setlistFile = null;
+
+            // Detect if program is called with a setlist file as argument
             if (args.Length == 1)
             {
-                setlistFile = args[0];
+                string ext = Path.GetExtension(args[0]);
+                if (ext == "." + SetlistWriter.FileExtension)
+                {
+                    setlistFile = args[0];
+                }
             }
 
             MainWindow mw = new MainWindow(songManager, imgManager, bibleManager, setlistFile);
