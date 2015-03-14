@@ -27,5 +27,10 @@ namespace PraiseBase.Presenter.Forms
             DialogResult = DialogResult.OK;
             Close();
         }
+
+        private void CommentDialog_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }

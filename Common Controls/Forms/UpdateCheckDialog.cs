@@ -1,14 +1,8 @@
-﻿using PraiseBase.Presenter.Properties;
-using PraiseBase.Presenter.Util;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
+﻿using System;
 using System.Diagnostics;
-using System.Drawing;
-using System.Linq;
-using System.Text;
 using System.Windows.Forms;
+using PraiseBase.Presenter.Properties;
+using PraiseBase.Presenter.Util;
 
 namespace PraiseBase.Presenter.Forms
 {

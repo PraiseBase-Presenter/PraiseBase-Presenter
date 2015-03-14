@@ -28,7 +28,7 @@ using System.Windows.Forms;
 using PraiseBase.Presenter.Model;
 using PraiseBase.Presenter.Properties;
 
-namespace PraiseBase.Presenter.UI.Presenter
+namespace PraiseBase.Presenter.Forms
 {
     public partial class ProgramSettingsDialog : Form
     {

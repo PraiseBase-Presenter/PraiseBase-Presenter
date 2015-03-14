@@ -33,7 +33,6 @@ using PraiseBase.Presenter.Model.Song;
 using PraiseBase.Presenter.Persistence;
 using PraiseBase.Presenter.Properties;
 using PraiseBase.Presenter.Template;
-using PraiseBase.Presenter.UI.Presenter;
 using Timer = System.Windows.Forms.Timer;
 
 namespace PraiseBase.Presenter.Editor

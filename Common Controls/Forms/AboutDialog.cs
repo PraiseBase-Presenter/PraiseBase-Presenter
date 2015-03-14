@@ -29,7 +29,7 @@ using System.Windows.Forms;
 using PraiseBase.Presenter.Properties;
 using PraiseBase.Presenter.Util;
 
-namespace PraiseBase.Presenter.UI.Presenter
+namespace PraiseBase.Presenter.Forms
 {
     public partial class AboutDialog : Form
     {

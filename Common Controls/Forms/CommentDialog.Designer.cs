@@ -71,6 +71,7 @@
             this.Controls.Add(this.label1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.Name = "CommentDialog";
+            this.Load += new System.EventHandler(this.CommentDialog_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 
