@@ -26,6 +26,7 @@ using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Windows.Forms;
 using PraiseBase.Presenter.Controls;
+using PraiseBase.Presenter.Forms;
 using PraiseBase.Presenter.Manager;
 using PraiseBase.Presenter.Model.Song;
 using PraiseBase.Presenter.Projection;
@@ -506,14 +507,14 @@ namespace PraiseBase.Presenter.UI.Editor
 
             if (Song.GetNumberOfBackgroundImages() == 0)
             {
-                imd.forAll = true;
+                imd.UseForAll = true;
             }
 
             if (imd.ShowDialog(this) == DialogResult.OK)
             {
                 if (imd.Background != null)
                 {
-                    if (imd.forAll)
+                    if (imd.UseForAll)
                     {
                         foreach (SongPart t in Song.Parts)
                         {
@@ -530,7 +531,7 @@ namespace PraiseBase.Presenter.UI.Editor
                 }
                 else
                 {
-                    if (imd.forAll)
+                    if (imd.UseForAll)
                     {
                         foreach (SongPart t in Song.Parts)
                         {

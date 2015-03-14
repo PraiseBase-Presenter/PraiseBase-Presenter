@@ -27,13 +27,13 @@ using PraiseBase.Presenter.Manager;
 using PraiseBase.Presenter.Model.Song;
 using PraiseBase.Presenter.Properties;
 
-namespace PraiseBase.Presenter.UI.Presenter
+namespace PraiseBase.Presenter.Forms
 {
     public partial class ImageDialog : Form
     {
         public IBackground Background { get; set; }
 
-        public bool forAll
+        public bool UseForAll
         {
             get
             {
@@ -86,7 +86,7 @@ namespace PraiseBase.Presenter.UI.Presenter
         private void ImageDialog_Load(object sender, EventArgs e)
         {
             Application.DoEvents();
-            imageTreeViewInit();
+            ImageTreeViewInit();
 
             if (Background != null && Background.GetType() == typeof(ImageBackground))
             {
@@ -99,7 +99,7 @@ namespace PraiseBase.Presenter.UI.Presenter
             }
         }
 
-        public void imageTreeViewInit()
+        public void ImageTreeViewInit()
         {
             string rootDir = Settings.Default.DataDirectory + Path.DirectorySeparatorChar + Settings.Default.ImageDir;
 
@@ -132,10 +132,12 @@ namespace PraiseBase.Presenter.UI.Presenter
                         foreach (string directory in directoryArray)
                         {
                             string dName = Path.GetFileName(directory);
-                            if (dName.Substring(0, 1) != "[" && dName.Substring(0, 1) != ".")
+                            if (dName != null && dName.Substring(0, 1) != "[" && dName.Substring(0, 1) != ".")
                             {
-                                TreeNode myNode = new TreeNode(dName);
-                                myNode.Tag = directory.Substring(subLen);
+                                TreeNode myNode = new TreeNode(dName)
+                                {
+                                    Tag = directory.Substring(subLen)
+                                };
                                 parentNode.Nodes.Add(myNode);
 
                                 if (Background != null && Background.GetType() == typeof(ImageBackground))
@@ -213,9 +215,11 @@ namespace PraiseBase.Presenter.UI.Presenter
 
         private void buttonSelectColor_Click(object sender, EventArgs e)
         {
-            ColorDialog dlg = new ColorDialog();
-            dlg.Color = pictureBoxColor.BackColor;
-            if (dlg.ShowDialog(this) == System.Windows.Forms.DialogResult.OK)
+            ColorDialog dlg = new ColorDialog
+            {
+                Color = pictureBoxColor.BackColor
+            };
+            if (dlg.ShowDialog(this) == DialogResult.OK)
             {
                 pictureBoxColor.BackColor = dlg.Color;
             }
@@ -223,9 +227,11 @@ namespace PraiseBase.Presenter.UI.Presenter
 
         private void pictureBoxColor_Click(object sender, EventArgs e)
         {
-            ColorDialog dlg = new ColorDialog();
-            dlg.Color = pictureBoxColor.BackColor;
-            if (dlg.ShowDialog(this) == System.Windows.Forms.DialogResult.OK)
+            ColorDialog dlg = new ColorDialog
+            {
+                Color = pictureBoxColor.BackColor
+            };
+            if (dlg.ShowDialog(this) == DialogResult.OK)
             {
                 pictureBoxColor.BackColor = dlg.Color;
             }
