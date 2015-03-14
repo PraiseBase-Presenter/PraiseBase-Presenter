@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.Specialized;
 using System.ComponentModel;
 using System.Drawing;
 using System.Windows.Forms;
@@ -76,7 +77,7 @@ namespace PraiseBase.Presenter.UI.Components
         private readonly Color _itemActiveFg = Color.White;
         private readonly Color _itemActiveBg = SystemColors.Highlight;
 
-        private readonly Font _partCaptionFont = new Font("Arial", 14);
+        private readonly Font _partCaptionFont = new Font("Arial", 13);
         private readonly Font _slideTextFont = new Font("Arial", 9);
         private readonly Font _prevNextSongFont = new Font("Arial", 12);
 
@@ -92,6 +93,8 @@ namespace PraiseBase.Presenter.UI.Components
         private const int BottomMargin = 5;
 
         public ImageManager ImageManager { get; set; }
+
+        public StringCollection AvailableSongCaption { get; set; }
 
         public SongDetail()
         {
@@ -148,9 +151,19 @@ namespace PraiseBase.Presenter.UI.Components
             int ypos = TopMargin;
 
             Size labelSize = new Size(0, 0);
-            foreach (SongPart part in sng.Parts)
+            if (AvailableSongCaption != null)
             {
-                labelSize = MeasureSize(part.Caption, labelSize);
+                foreach (var caption in AvailableSongCaption)
+                {
+                    labelSize = MeasureSize(caption, labelSize);
+                }
+            }
+            else
+            {
+                foreach (SongPart part in sng.Parts)
+                {
+                    labelSize = MeasureSize(part.Caption, labelSize);
+                }
             }
             _slidePanelOffset = labelSize.Width + 20;
 

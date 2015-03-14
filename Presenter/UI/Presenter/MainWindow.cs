@@ -88,6 +88,8 @@ namespace PraiseBase.Presenter.UI.Presenter
             LoadSetListIfExists(setlistFile);
 
             songDetailElement.ImageManager = imgManager;
+
+            songDetailElement.AvailableSongCaption = Settings.Default.SongParts;
         }
 
         /// <summary>
