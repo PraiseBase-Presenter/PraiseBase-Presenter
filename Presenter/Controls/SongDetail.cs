@@ -216,123 +216,16 @@ namespace PraiseBase.Presenter.Controls
 
             for (_numParts = 0; _numParts < sng.Parts.Count; _numParts++)
             {
-                int numSlides = sng.Parts[_numParts].Slides.Count;
-
-                int slidePanelHeight = ThumbnailSize.Height;
-
-                // Add panel for this part
-                int panelHeight = (numSlides * slidePanelHeight) + ((numSlides - 1) * SlidePanelElementSpacing);
-                Panel songPartPanel = AddPartPanel(ypos, panelHeight, "partPanel" + _numParts);
-                ypos += songPartPanel.Height;
-
-                // Add part caption label to panel
-                Label plbl = new Label
+                List<PartPanelElement> elements = new List<PartPanelElement>();
+                foreach (var e in  sng.Parts[_numParts].Slides)
                 {
-                    Location = new Point(0, 0),
-                    Size = labelSize,
-                    Text = sng.Parts[_numParts].Caption,
-                    Font = _partCaptionFont
-                };
-                songPartPanel.Controls.Add(plbl);
-
-                int slidePanelY = 0;
-
-                // Add sub-panels for each slide
-                for (int j = 0; j < numSlides; j++)
-                {
-                     // Slide panel
-                    Panel slidePanel = new Panel
+                    elements.Add(new PartPanelElement
                     {
-                        Location = new Point(_slidePanelOffset, slidePanelY),
-                        Height = slidePanelHeight,
-                        Tag = j
-                    };
-                    slidePanel.Paint += spnl_Paint;
-                    songPartPanel.Controls.Add(slidePanel);
-
-                    slidePanelY += slidePanelHeight + SlidePanelElementSpacing;
-
-                    int pictureBoxPanelWidth = ThumbnailSize.Width;
-
-                    // Picture box
-                    IBackground bg = sng.Parts[_numParts].Slides[j].Background;
-                    PictureBox previewPictureBox = new PictureBox
-                    {
-                        Location = new Point(0, 0),
-                        Size = ThumbnailSize,
-                        Image = ImageManager.GetThumb(bg),
-                        Tag = bg,
-                        Enabled = true,
-                        SizeMode = PictureBoxSizeMode.Zoom,
-                        Cursor = Cursors.Hand
-                    };
-                    previewPictureBox.Click += pcBox_Click;
-                    slidePanel.Controls.Add(previewPictureBox);
-
-                    // Text label
-                    Button textLbl = new Button
-                    {
-                        Location = new Point(pictureBoxPanelWidth + ThumbnailLabelSpacing, 0),
-                        Height = slidePanelHeight,
-                        Text = sng.Parts[_numParts].Slides[j].GetOneLineText(),
-                        Padding = new Padding(2),
-                        FlatStyle = FlatStyle.Flat,
-                        ForeColor = _itemNormalFg,
-                        BackColor = _itemNormalBg,
-                        Font = _slideTextFont,
-                        Enabled = true,
-                        AutoEllipsis = true,
-                        UseCompatibleTextRendering = true,
-                        TextAlign = ContentAlignment.TopLeft,
-                        Cursor = Cursors.Hand,
-                        Tag = j
-                    };
-                    textLbl.FlatAppearance.BorderColor = Color.White;
-                    textLbl.FlatAppearance.BorderSize = 0;
-                    textLbl.Paint += textLbl_Paint;
-                    textLbl.Click += textLbl_Click;
-                    textLbl.KeyUp += textLbl_KeyUp;
-                    slidePanel.Controls.Add(textLbl);
-
-                    _slideTexts.Add(textLbl);
-
-                    if (j == 0)
-                    {
-                        if (_refrainIndex < 0 && (sng.Parts[_numParts].Caption == "Refrain" || sng.Parts[_numParts].Caption == "Chorus"))
-                        {
-                            _refrainIndex = _slideTexts.Count - 1;
-                        }
-                        else if (_prechorusIndex < 0 && (sng.Parts[_numParts].Caption == "Pre-Chorus" || sng.Parts[_numParts].Caption == "Prechorus"))
-                        {
-                            _prechorusIndex = _slideTexts.Count - 1;
-                        }
-                        else if (_bridgeIndex < 0 && (sng.Parts[_numParts].Caption == "Bridge"))
-                        {
-                            _bridgeIndex = _slideTexts.Count - 1;
-                        }
-                        else if (_verse1Index < 0 && (sng.Parts[_numParts].Caption == "Strophe 1" || sng.Parts[_numParts].Caption == "Teil 1" || sng.Parts[_numParts].Caption == "Verse 1"))
-                        {
-                            _verse1Index = _slideTexts.Count - 1;
-                        }
-                        else if (_verse2Index < 0 && (sng.Parts[_numParts].Caption == "Strophe 2" || sng.Parts[_numParts].Caption == "Teil 2" || sng.Parts[_numParts].Caption == "Verse 2"))
-                        {
-                            _verse2Index = _slideTexts.Count - 1;
-                        }
-                        else if (_verse3Index < 0 && (sng.Parts[_numParts].Caption == "Strophe 3" || sng.Parts[_numParts].Caption == "Teil 3" || sng.Parts[_numParts].Caption == "Verse 3"))
-                        {
-                            _verse3Index = _slideTexts.Count - 1;
-                        }
-                        else if (_verse4Index < 0 && (sng.Parts[_numParts].Caption == "Strophe 4" || sng.Parts[_numParts].Caption == "Teil 4" || sng.Parts[_numParts].Caption == "Verse 4"))
-                        {
-                            _verse4Index = _slideTexts.Count - 1;
-                        }
-                    }
+                        Text = e.GetOneLineText(),
+                        Background = e.Background
+                    });
                 }
-
-
-                // Add spacer panel (gray line)
-                ypos += AddSpacer(ypos, "spacerPanel" + _numParts);
-
+                ypos += AddPartCopmponent(ypos, elements, ThumbnailSize.Height, labelSize, _numParts, sng.Parts[_numParts].Caption);
             }
 
             if (nextSong != null)
@@ -393,6 +286,127 @@ namespace PraiseBase.Presenter.Controls
             _currentSong = sng;
 
             ResumeLayout();
+        }
+
+        private int AddPartCopmponent(int startPos, List<PartPanelElement> elements, int slidePanelHeight, Size labelSize, int partNumber, string caption)
+        {
+            int numSlides = elements.Count;
+            int ypos = 0;
+
+            // Add panel for this part
+            int panelHeight = (numSlides * slidePanelHeight) + ((numSlides - 1) * SlidePanelElementSpacing);
+            Panel songPartPanel = AddPartPanel(startPos, panelHeight, "partPanel" + partNumber, partNumber);
+            ypos += songPartPanel.Height;
+
+            // Add part caption label to panel
+            Label plbl = new Label
+            {
+                Location = new Point(0, 0),
+                Size = labelSize,
+                Text = caption,
+                Font = _partCaptionFont
+            };
+            songPartPanel.Controls.Add(plbl);
+
+            int slidePanelY = 0;
+
+            // Add sub-panels for each slide
+            for (int j = 0; j < numSlides; j++)
+            {
+                    // Slide panel
+                Panel slidePanel = new Panel
+                {
+                    Location = new Point(_slidePanelOffset, slidePanelY),
+                    Height = slidePanelHeight,
+                    Tag = j
+                };
+                slidePanel.Paint += spnl_Paint;
+                songPartPanel.Controls.Add(slidePanel);
+
+                slidePanelY += slidePanelHeight + SlidePanelElementSpacing;
+
+                int pictureBoxPanelWidth = ThumbnailSize.Width;
+
+                // Picture box
+                IBackground bg = elements[j].Background;
+                PictureBox previewPictureBox = new PictureBox
+                {
+                    Location = new Point(0, 0),
+                    Size = ThumbnailSize,
+                    Image = ImageManager.GetThumb(bg),
+                    Tag = bg,
+                    Enabled = true,
+                    SizeMode = PictureBoxSizeMode.Zoom,
+                    Cursor = Cursors.Hand
+                };
+                previewPictureBox.Click += pcBox_Click;
+                slidePanel.Controls.Add(previewPictureBox);
+
+                // Text label
+                Button textLbl = new Button
+                {
+                    Location = new Point(pictureBoxPanelWidth + ThumbnailLabelSpacing, 0),
+                    Height = slidePanelHeight,
+                    Text = elements[j].Text,
+                    Padding = new Padding(2),
+                    FlatStyle = FlatStyle.Flat,
+                    ForeColor = _itemNormalFg,
+                    BackColor = _itemNormalBg,
+                    Font = _slideTextFont,
+                    Enabled = true,
+                    AutoEllipsis = true,
+                    UseCompatibleTextRendering = true,
+                    TextAlign = ContentAlignment.TopLeft,
+                    Cursor = Cursors.Hand,
+                    Tag = j
+                };
+                textLbl.FlatAppearance.BorderColor = Color.White;
+                textLbl.FlatAppearance.BorderSize = 0;
+                textLbl.Paint += textLbl_Paint;
+                textLbl.Click += textLbl_Click;
+                textLbl.KeyUp += textLbl_KeyUp;
+                slidePanel.Controls.Add(textLbl);
+
+                _slideTexts.Add(textLbl);
+
+                if (j == 0)
+                {
+                    if (_refrainIndex < 0 && (caption == "Refrain" || caption == "Chorus"))
+                    {
+                        _refrainIndex = _slideTexts.Count - 1;
+                    }
+                    else if (_prechorusIndex < 0 && (caption == "Pre-Chorus" || caption == "Prechorus"))
+                    {
+                        _prechorusIndex = _slideTexts.Count - 1;
+                    }
+                    else if (_bridgeIndex < 0 && (caption == "Bridge"))
+                    {
+                        _bridgeIndex = _slideTexts.Count - 1;
+                    }
+                    else if (_verse1Index < 0 && (caption == "Strophe 1" || caption == "Teil 1" || caption == "Verse 1"))
+                    {
+                        _verse1Index = _slideTexts.Count - 1;
+                    }
+                    else if (_verse2Index < 0 && (caption == "Strophe 2" || caption == "Teil 2" || caption == "Verse 2"))
+                    {
+                        _verse2Index = _slideTexts.Count - 1;
+                    }
+                    else if (_verse3Index < 0 && (caption == "Strophe 3" || caption == "Teil 3" || caption == "Verse 3"))
+                    {
+                        _verse3Index = _slideTexts.Count - 1;
+                    }
+                    else if (_verse4Index < 0 && (caption == "Strophe 4" || caption == "Teil 4" || caption == "Verse 4"))
+                    {
+                        _verse4Index = _slideTexts.Count - 1;
+                    }
+                }
+            }
+
+
+            // Add spacer panel (gray line)
+            ypos += AddSpacer(startPos + ypos, "spacerPanel" + partNumber);
+
+            return ypos;
         }
 
         private Size MeasureSize(string s, Size labelSize)
@@ -463,14 +477,14 @@ namespace PraiseBase.Presenter.Controls
             }
         }
 
-        private Panel AddPartPanel(int ypos, int height, string name)
+        private Panel AddPartPanel(int ypos, int height, string name, int partNumber)
         {
             Panel pnl = new Panel
             {
                 Location = new Point(LeftMargin, ypos),
                 Height = height,
                 Name = name,
-                Tag = _numParts
+                Tag = partNumber
             };
             pnl.Paint += partPnl_Paint;
             Controls.Add(pnl);
@@ -658,6 +672,12 @@ namespace PraiseBase.Presenter.Controls
         }
 
         public Song Song { get; set; }
+    }
+
+    internal class PartPanelElement
+    {
+        public string Text { get; set; }
+        public IBackground Background { get; set; }
     }
 
     #endregion Helper classes
