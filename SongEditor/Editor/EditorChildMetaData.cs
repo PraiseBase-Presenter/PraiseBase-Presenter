@@ -1,4 +1,4 @@
-﻿namespace PraiseBase.Presenter.UI.Editor
+﻿namespace PraiseBase.Presenter.Editor
 {
     public class EditorChildMetaData
     {

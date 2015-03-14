@@ -1,6 +1,8 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2012
+# Visual Studio 2013
+VisualStudioVersion = 12.0.31101.0
+MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PraiseBase Presenter", "Presenter\PraiseBase Presenter.csproj", "{33D2BC6A-0AD1-4E2E-AF35-FFFB744F22C6}"
 	ProjectSection(ProjectDependencies) = postProject
 		{20F2017A-032C-462F-840F-A4CCF7B4609E} = {20F2017A-032C-462F-840F-A4CCF7B4609E}
@@ -8,7 +10,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PraiseBase Presenter", "Pre
 EndProject
 Project("{930C7802-8A8C-48F9-8165-68863BCCD9DD}") = "Installer", "Installer\Installer.wixproj", "{16AF6A73-F74B-4934-8864-A27635F6022F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SongEditor", "SongEditor\SongEditor.csproj", "{62A96DBA-FEC1-470E-8EBE-3ECC2464D322}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Song Editor", "SongEditor\Song Editor.csproj", "{62A96DBA-FEC1-470E-8EBE-3ECC2464D322}"
 	ProjectSection(ProjectDependencies) = postProject
 		{20F2017A-032C-462F-840F-A4CCF7B4609E} = {20F2017A-032C-462F-840F-A4CCF7B4609E}
 	EndProjectSection
@@ -32,9 +34,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PraiseBase Common Controls"
 	EndProjectSection
 EndProject
 Global
-	GlobalSection(TestCaseManagementSettings) = postSolution
-		CategoryFile = PraiseBase Presenter.vsmdi
-	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Debug|Mixed Platforms = Debug|Mixed Platforms
@@ -117,5 +116,8 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(TestCaseManagementSettings) = postSolution
+		CategoryFile = PraiseBase Presenter.vsmdi
 	EndGlobalSection
 EndGlobal

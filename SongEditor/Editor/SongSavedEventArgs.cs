@@ -1,7 +1,7 @@
 using System;
 using PraiseBase.Presenter.Model.Song;
 
-namespace PraiseBase.Presenter.Forms
+namespace PraiseBase.Presenter.Editor
 {
     public class SongSavedEventArgs : EventArgs
     {

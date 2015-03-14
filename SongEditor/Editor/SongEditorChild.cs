@@ -32,10 +32,8 @@ using PraiseBase.Presenter.Model.Song;
 using PraiseBase.Presenter.Projection;
 using PraiseBase.Presenter.Properties;
 using PraiseBase.Presenter.Template;
-using PraiseBase.Presenter.UI.Presenter;
-using PraiseBase.Presenter.Util;
 
-namespace PraiseBase.Presenter.UI.Editor
+namespace PraiseBase.Presenter.Editor
 {
     public partial class SongEditorChild : Form
     {

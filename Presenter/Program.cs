@@ -21,7 +21,6 @@
  */
 
 using System;
-using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
 using System.Reflection;
@@ -35,14 +34,6 @@ namespace PraiseBase.Presenter
 {
     internal static class Program
     {
-        static public List<CultureInfo> AvailableLanguages = new List<CultureInfo>();
-
-        static Program()
-        {
-            AvailableLanguages.Add(CultureInfo.CreateSpecificCulture("de-CH"));
-            AvailableLanguages.Add(CultureInfo.CreateSpecificCulture("en-US"));
-        }
-        
         /// <summary>
         /// The main entry point for the application.
         /// </summary>

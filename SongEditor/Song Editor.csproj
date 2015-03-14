@@ -42,6 +42,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
+    <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Forms" />
   </ItemGroup>
   <ItemGroup>
@@ -60,13 +61,44 @@
       <Project>{67651b76-5abd-4040-9a8f-3833130fc77d}</Project>
       <Name>PraiseBase Core Libraries</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Presenter\PraiseBase Presenter.csproj">
-      <Project>{33d2bc6a-0ad1-4e2e-af35-fffb744f22c6}</Project>
-      <Name>PraiseBase Presenter</Name>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <None Include="Computer.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Editor\EditorChildMetaData.cs" />
+    <Compile Include="Editor\SongEditor.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Editor\SongEditor.Designer.cs">
+      <DependentUpon>SongEditor.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Editor\SongEditorChild.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Editor\SongEditorChild.Designer.cs">
+      <DependentUpon>SongEditorChild.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Editor\SongSavedEventArgs.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Editor\SongEditor.en-US.resx">
+      <DependentUpon>SongEditor.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Editor\SongEditor.fr-FR.resx">
+      <DependentUpon>SongEditor.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Editor\SongEditor.resx">
+      <DependentUpon>SongEditor.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Editor\SongEditorChild.en-US.resx">
+      <DependentUpon>SongEditorChild.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Editor\SongEditorChild.resx">
+      <DependentUpon>SongEditorChild.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

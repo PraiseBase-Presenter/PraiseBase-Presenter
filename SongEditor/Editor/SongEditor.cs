@@ -36,7 +36,7 @@ using PraiseBase.Presenter.Template;
 using PraiseBase.Presenter.UI.Presenter;
 using Timer = System.Windows.Forms.Timer;
 
-namespace PraiseBase.Presenter.UI.Editor
+namespace PraiseBase.Presenter.Editor
 {
     public partial class SongEditor : LocalizableForm
     {
@@ -697,7 +697,7 @@ namespace PraiseBase.Presenter.UI.Editor
             Size = _settings.EditorWindowSize;
 
             // Add languages to menu
-            foreach (var l in Program.AvailableLanguages)
+            foreach (var l in Constants.AvailableLanguages)
             {
                 ToolStripMenuItem selectLanguageToolStripMenuItem = new ToolStripMenuItem(l.DisplayName)
                 {
