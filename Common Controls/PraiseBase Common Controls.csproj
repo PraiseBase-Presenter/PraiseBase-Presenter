@@ -93,6 +93,9 @@
     <EmbeddedResource Include="Forms\LocalizedForm.resx">
       <DependentUpon>LocalizedForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Forms\UpdateCheckDialog.en-US.resx">
+      <DependentUpon>UpdateCheckDialog.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\UpdateCheckDialog.resx">
       <DependentUpon>UpdateCheckDialog.cs</DependentUpon>
     </EmbeddedResource>
