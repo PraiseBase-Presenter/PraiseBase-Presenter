@@ -84,7 +84,7 @@ namespace PraiseBase.Presenter.Editor
 
         private readonly ImageManager _imgManager;
 
-        public SongEditor(Settings settings, ImageManager imgManager)
+        public SongEditor(Settings settings, ImageManager imgManager, String filename)
         {
             // Initialize internal variables
             _settings = settings;
@@ -96,6 +96,11 @@ namespace PraiseBase.Presenter.Editor
             InitializeComponent();
 
             RegisterChild(this);
+
+            if (!String.IsNullOrEmpty(filename) && File.Exists(filename))
+            {
+                OpenSong(filename);
+            }
         }
 
         void selectLanguageToolStripMenuItem_Click(object sender, EventArgs e)

@@ -168,7 +168,7 @@ namespace PraiseBase.Presenter.Presenter
 
         private SongEditor CreateSongEditorInstance()
         {
-            var se = new SongEditor(Settings.Default, _imgManager);
+            var se = new SongEditor(Settings.Default, _imgManager, null);
             se.SongSaved += SongEditorWndOnSongSaved;
             return se;
         }
