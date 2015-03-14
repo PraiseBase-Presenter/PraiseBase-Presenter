@@ -596,7 +596,7 @@ namespace PraiseBase.Presenter.Editor
 
         private void aboutToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            AboutDialog ab = new AboutDialog(_settings.UpdateCheckUrl);
+            AboutDialog ab = new AboutDialog(_settings.UpdateCheckUrl, _settings.AuthorInfo);
             ab.ShowDialog(this);
         }
 

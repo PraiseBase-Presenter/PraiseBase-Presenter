@@ -248,5 +248,8 @@
     <Setting Name="LayerContentSplitterPosition" Type="System.Int32" Scope="User">
       <Value Profile="(Default)">0</Value>
     </Setting>
+    <Setting Name="AuthorInfo" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">Nicolas Perrenoud &lt;info@praisebase.org&gt;</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

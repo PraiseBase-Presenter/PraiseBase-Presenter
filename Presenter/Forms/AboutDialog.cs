@@ -35,10 +35,12 @@ namespace PraiseBase.Presenter.Forms
     {
         private String _updateDownloadUrl = string.Empty;
         private readonly String _updateCheckUrl;
+        private readonly String _authorInfo;
 
-        public AboutDialog(string updateCheckUrl)
+        public AboutDialog(string updateCheckUrl, String authorInfo)
         {
-           _updateCheckUrl = updateCheckUrl;
+            _updateCheckUrl = updateCheckUrl;
+            _authorInfo = authorInfo;
             InitializeComponent();
         }
 
@@ -55,6 +57,8 @@ namespace PraiseBase.Presenter.Forms
             labelCompanyName.Text = AssemblyCompany;
 
             textBox1.Text = FileResources.License;
+
+            label6.Text = _authorInfo;
 
             timer1.Interval = 1;
             timer1.Start();

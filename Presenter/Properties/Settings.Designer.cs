@@ -863,5 +863,14 @@ namespace PraiseBase.Presenter.Properties {
                 this["LayerContentSplitterPosition"] = value;
             }
         }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("Nicolas Perrenoud <info@praisebase.org>")]
+        public string AuthorInfo {
+            get {
+                return ((string)(this["AuthorInfo"]));
+            }
+        }
     }
 }

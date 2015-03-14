@@ -265,7 +265,7 @@ namespace PraiseBase.Presenter.Presenter
 
         private void infoToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            var ab = new AboutDialog(Settings.Default.UpdateCheckUrl);
+            var ab = new AboutDialog(Settings.Default.UpdateCheckUrl, Settings.Default.AuthorInfo);
             ab.ShowDialog(this);
         }
 
