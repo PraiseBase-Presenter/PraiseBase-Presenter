@@ -1595,6 +1595,8 @@ namespace PraiseBase.Presenter.UI.Presenter
 
         private void listBoxBibleBook_SelectedIndexChanged(object sender, EventArgs e)
         {
+            buttonBibleTextShow.Enabled = false;
+            
             var bk = ((BibleBook)listBoxBibleBook.SelectedItem);
 
             listBoxBibleVerse.Items.Clear();
@@ -1618,6 +1620,8 @@ namespace PraiseBase.Presenter.UI.Presenter
 
         private void listBoxBibleChapter_SelectedIndexChanged(object sender, EventArgs e)
         {
+            buttonBibleTextShow.Enabled = false;
+
             var cp = ((BibleChapter)listBoxBibleChapter.SelectedItem);
 
             listBoxBibleVerse.Items.Clear();
@@ -1631,10 +1635,10 @@ namespace PraiseBase.Presenter.UI.Presenter
                 listBoxBibleVerseTo.Items.Add(v);
             }
 
-
             if (chapterIdx == listBoxBibleChapter.SelectedIndex && verseIdx >= 0)
             {
                 listBoxBibleVerse.SelectedIndex = verseIdx;
+                buttonBibleTextShow.Enabled = true;
             }
 
             chapterIdx = listBoxBibleChapter.SelectedIndex;
@@ -1661,6 +1665,8 @@ namespace PraiseBase.Presenter.UI.Presenter
                 listBoxBibleVerseTo.SelectedIndex = 0;
 
             verseIdx = listBoxBibleVerse.SelectedIndex;
+
+            buttonBibleTextShow.Enabled = true;
         }
 
         private void listBoxBibleVerseTo_SelectedIndexChanged(object sender, EventArgs e)
@@ -1677,10 +1683,14 @@ namespace PraiseBase.Presenter.UI.Presenter
 
                 buttonAddToBibleVerseList.Enabled = true;
             }
+
+            buttonBibleTextShow.Enabled = true;
         }
 
         private void buttonBibleTextShow_Click(object sender, EventArgs e)
         {
+            if (listBoxBibleVerse.SelectedItem == null || listBoxBibleVerseTo.SelectedItem == null) return; 
+
             BibleVerseSelection vs = new BibleVerseSelection(
                 ((BibleVerse)listBoxBibleVerse.SelectedItem),
                 ((BibleVerse)listBoxBibleVerseTo.SelectedItem));

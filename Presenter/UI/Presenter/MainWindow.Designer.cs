@@ -315,6 +315,7 @@ namespace PraiseBase.Presenter.UI.Presenter
             this.songDetailElement.BackColor = System.Drawing.Color.White;
             this.songDetailElement.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.songDetailElement.ForeColor = System.Drawing.SystemColors.WindowText;
+            this.songDetailElement.ImageManager = null;
             this.songDetailElement.Name = "songDetailElement";
             this.songDetailElement.NextSongIcon = ((System.Drawing.Image)(resources.GetObject("songDetailElement.NextSongIcon")));
             this.songDetailElement.PreviousSongIcon = ((System.Drawing.Image)(resources.GetObject("songDetailElement.PreviousSongIcon")));
