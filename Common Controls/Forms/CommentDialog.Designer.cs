@@ -1,6 +1,6 @@
-﻿namespace PraiseBase.Presenter.UI.Presenter
+﻿namespace PraiseBase.Presenter.Forms
 {
-	partial class QADialog
+	partial class CommentDialog
 	{
 		/// <summary>
 		/// Required designer variable.
@@ -28,7 +28,7 @@
 		/// </summary>
 		private void InitializeComponent()
 		{
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(QADialog));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(CommentDialog));
             this.label1 = new System.Windows.Forms.Label();
             this.textBoxComment = new System.Windows.Forms.TextBox();
             this.buttonAccept = new System.Windows.Forms.Button();
@@ -54,14 +54,13 @@
             // 
             // buttonCancl
             // 
-            this.buttonCancl.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             resources.ApplyResources(this.buttonCancl, "buttonCancl");
+            this.buttonCancl.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.buttonCancl.Name = "buttonCancl";
             this.buttonCancl.UseVisualStyleBackColor = true;
             // 
-            // QADialog
+            // CommentDialog
             // 
-            this.AcceptButton = this.buttonAccept;
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.buttonCancl;
@@ -71,8 +70,7 @@
             this.Controls.Add(this.textBoxComment);
             this.Controls.Add(this.label1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
-            this.Name = "QADialog";
-            this.Load += new System.EventHandler(this.QADialog_Load);
+            this.Name = "CommentDialog";
             this.ResumeLayout(false);
             this.PerformLayout();
 

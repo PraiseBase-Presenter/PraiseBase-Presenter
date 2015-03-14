@@ -68,12 +68,12 @@ namespace PraiseBase.Presenter.UI.Presenter
 
         private readonly string _originalFormTitle;
 
-        public MainWindow() : this(null)
-        {
-        }
+        private readonly SongManager _songManager;
 
-        public MainWindow(string setlistFile)
+        public MainWindow(SongManager songManager, string setlistFile)
         {
+            _songManager = songManager;
+
             InitializeComponent();
 
             Size = Settings.Default.MainWindowSize;
@@ -166,7 +166,7 @@ namespace PraiseBase.Presenter.UI.Presenter
 
         private void SongEditorWndOnSongSaved(object sender, SongSavedEventArgs songSavedEventArgs)
         {
-            SongManager.Instance.ReloadSongByPath(songSavedEventArgs.FileName);
+            _songManager.ReloadSongByPath(songSavedEventArgs.FileName);
         }
 
         private void ShowAndFocusSongEditor()
@@ -274,7 +274,7 @@ namespace PraiseBase.Presenter.UI.Presenter
             int cnt = 0;
 
             var lviList = new List<ListViewItem>();
-            foreach (SongItem si in SongManager.Instance.GetSearchResults(needle, Settings.Default.SongSearchMode))
+            foreach (SongItem si in _songManager.GetSearchResults(needle, Settings.Default.SongSearchMode))
             {
                 var lvi = new ListViewItem(si.Song.Title)
                 {
@@ -291,7 +291,7 @@ namespace PraiseBase.Presenter.UI.Presenter
                 {
                     listViewSongs.Items[0].Selected = true;
                     var key = (String) listViewSongs.SelectedItems[0].Tag;
-                    SongManager.Instance.CurrentSong = SongManager.Instance.SongList[key];
+                    _songManager.CurrentSong = _songManager.SongList[key];
                     showCurrentSongDetails();
                 }
                 catch (Exception e)
@@ -362,13 +362,13 @@ namespace PraiseBase.Presenter.UI.Presenter
         private void reloadSongList()
         {
             songSearchTextBox.Text = "";
-            SongManager.Instance.Reload();
+            _songManager.Reload();
             loadSongList();
 
             for (int i = 0; i < listViewSetList.Items.Count; i++)
             {
                 var setListItemTitle = listViewSetList.Items[i].Text;
-                var key = SongManager.Instance.GetKeyByTitle(setListItemTitle);
+                var key = _songManager.GetKeyByTitle(setListItemTitle);
                 if (key != null)
                 {
                     listViewSetList.Items[i].Tag = key;
@@ -397,11 +397,11 @@ namespace PraiseBase.Presenter.UI.Presenter
                 else
                 {
                     string key = (string) listViewSongs.SelectedItems[0].Tag;
-                    if (SongManager.Instance.CurrentSong == null || SongManager.Instance.CurrentSong.Song == null || SongManager.Instance.CurrentSong.Filename != key)
+                    if (_songManager.CurrentSong == null || _songManager.CurrentSong.Song == null || _songManager.CurrentSong.Filename != key)
                     {
-                        if (SongManager.Instance.SongList.ContainsKey(key))
+                        if (_songManager.SongList.ContainsKey(key))
                         {
-                            SongManager.Instance.CurrentSong = SongManager.Instance.SongList[key];
+                            _songManager.CurrentSong = _songManager.SongList[key];
                             showCurrentSongDetails();
                             buttonSetListAdd.Enabled = true;
                         }
@@ -425,9 +425,9 @@ namespace PraiseBase.Presenter.UI.Presenter
             if (listViewSongs.SelectedItems.Count > 0)
             {
                 var key = (string) listViewSongs.SelectedItems[0].Tag;
-                if (SongManager.Instance.SongList.ContainsKey(key) && (SongManager.Instance.CurrentSong == null || SongManager.Instance.CurrentSong.Filename != key))
+                if (_songManager.SongList.ContainsKey(key) && (_songManager.CurrentSong == null || _songManager.CurrentSong.Filename != key))
                 {
-                    SongManager.Instance.CurrentSong = SongManager.Instance.SongList[key];
+                    _songManager.CurrentSong = _songManager.SongList[key];
                     showCurrentSongDetails();
 
                     buttonSetListAdd.Enabled = true;
@@ -450,7 +450,7 @@ namespace PraiseBase.Presenter.UI.Presenter
                 {
                     buttonSetListUp.Enabled = true;
                     string prevSongId = (string)listViewSetList.Items[idx - 1].Tag;
-                    previousSong = SongManager.Instance.SongList[prevSongId].Song;
+                    previousSong = _songManager.SongList[prevSongId].Song;
                 }
                 else
                 {
@@ -460,7 +460,7 @@ namespace PraiseBase.Presenter.UI.Presenter
                 {
                     buttonSetListDown.Enabled = true;
                     string nextSongId = (string)listViewSetList.Items[idx + 1].Tag;
-                    nextSong = SongManager.Instance.SongList[nextSongId].Song;
+                    nextSong = _songManager.SongList[nextSongId].Song;
                 }
                 else
                 {
@@ -469,7 +469,7 @@ namespace PraiseBase.Presenter.UI.Presenter
                 buttonSetListRem.Enabled = true;
 
                 string currentSongId = (string)listViewSetList.SelectedItems[0].Tag;
-                SongManager.Instance.CurrentSong = SongManager.Instance.SongList[currentSongId];
+                _songManager.CurrentSong = _songManager.SongList[currentSongId];
                 showCurrentSongDetails(previousSong, nextSong);
             }
         }
@@ -483,20 +483,20 @@ namespace PraiseBase.Presenter.UI.Presenter
         {
             Application.DoEvents();
 
-            label3.Text = SongManager.Instance.CurrentSong.Song.Title;
-            songDetailElement.SetSong(SongManager.Instance.CurrentSong.Song, previousSong, nextSong);
+            label3.Text = _songManager.CurrentSong.Song.Title;
+            songDetailElement.SetSong(_songManager.CurrentSong.Song, previousSong, nextSong);
 
             toolStripButtonQA.Enabled = true;
             updateQAButtonStage();
-            qaSpellingToolStripMenuItem.Checked = SongManager.Instance.CurrentSong.Song.QualityIssues.Contains(SongQualityAssuranceIndicator.Spelling);
-            qaTranslationToolStripMenuItem.Checked = SongManager.Instance.CurrentSong.Song.QualityIssues.Contains(SongQualityAssuranceIndicator.Translation);
-            qaImagesToolStripMenuItem.Checked = SongManager.Instance.CurrentSong.Song.QualityIssues.Contains(SongQualityAssuranceIndicator.Images);
-            qaSegmentationToolStripMenuItem.Checked = SongManager.Instance.CurrentSong.Song.QualityIssues.Contains(SongQualityAssuranceIndicator.Segmentation);
+            qaSpellingToolStripMenuItem.Checked = _songManager.CurrentSong.Song.QualityIssues.Contains(SongQualityAssuranceIndicator.Spelling);
+            qaTranslationToolStripMenuItem.Checked = _songManager.CurrentSong.Song.QualityIssues.Contains(SongQualityAssuranceIndicator.Translation);
+            qaImagesToolStripMenuItem.Checked = _songManager.CurrentSong.Song.QualityIssues.Contains(SongQualityAssuranceIndicator.Images);
+            qaSegmentationToolStripMenuItem.Checked = _songManager.CurrentSong.Song.QualityIssues.Contains(SongQualityAssuranceIndicator.Segmentation);
 
-            if (SongManager.Instance.CurrentSong.Song.HasTranslation())
+            if (_songManager.CurrentSong.Song.HasTranslation())
             {
                 toolStripButtonToggleTranslationText.Enabled = true;
-                if (SongManager.Instance.CurrentSong.SwitchTextAndTranlation)
+                if (_songManager.CurrentSong.SwitchTextAndTranlation)
                 {
                     toolStripButtonToggleTranslationText.Image = Resources.translate_active;
                 }
@@ -516,13 +516,13 @@ namespace PraiseBase.Presenter.UI.Presenter
         {
             Application.DoEvents();
 
-            var s = SongManager.Instance.CurrentSong.Song;
+            var s = _songManager.CurrentSong.Song;
 
-            if (listViewSongHistory.Items.Count == 0 || (string)listViewSongHistory.Items[0].Tag != SongManager.Instance.CurrentSong.Filename)
+            if (listViewSongHistory.Items.Count == 0 || (string)listViewSongHistory.Items[0].Tag != _songManager.CurrentSong.Filename)
             {
                 var lvi = new ListViewItem(s.Title)
                 {
-                    Tag = SongManager.Instance.CurrentSong.Filename
+                    Tag = _songManager.CurrentSong.Filename
                 };
                 listViewSongHistory.Items.Insert(0, lvi);
                 listViewSongHistory.Columns[0].Width = -2;
@@ -555,7 +555,7 @@ namespace PraiseBase.Presenter.UI.Presenter
             TextLayer ssl = new TextLayer(slideFormatting);
 
             // Set text and translation (based on translation switch state)
-            if (cs.Translated && SongManager.Instance.CurrentSong.SwitchTextAndTranlation)
+            if (cs.Translated && _songManager.CurrentSong.SwitchTextAndTranlation)
             {
                 ssl.MainText = cs.Translation.ToArray();
                 ssl.SubText = cs.Lines.ToArray();
@@ -897,7 +897,7 @@ namespace PraiseBase.Presenter.UI.Presenter
                     // Linked layers
                     if (
                         !(!linkLayers ^
-                           ((ModifierKeys & Keys.Shift) == Keys.Shift && SongManager.Instance.CurrentSong != null)))
+                           ((ModifierKeys & Keys.Shift) == Keys.Shift && _songManager.CurrentSong != null)))
                     {
                         ProjectionManager.Instance.HideLayer(2, Settings.Default.ProjectionFadeTime);
                     }
@@ -1170,7 +1170,7 @@ namespace PraiseBase.Presenter.UI.Presenter
                 {
                     if (
                         !(!linkLayers ^
-                          ((ModifierKeys & Keys.Shift) == Keys.Shift && SongManager.Instance.CurrentSong != null)))
+                          ((ModifierKeys & Keys.Shift) == Keys.Shift && _songManager.CurrentSong != null)))
                     {
                         ProjectionManager.Instance.HideLayer(2);
                     }
@@ -1249,8 +1249,10 @@ namespace PraiseBase.Presenter.UI.Presenter
 
         private void toolStripMenuItem3_Click(object sender, EventArgs e)
         {
-            SongBrowserDialog dlg = new SongBrowserDialog();
-            dlg.Tags = Settings.Default.Tags;
+            SongBrowserDialog dlg = new SongBrowserDialog(_songManager)
+            {
+                Tags = Settings.Default.Tags
+            };
             dlg.ShowDialog(this);
             if (dlg.SelectedAction == SongBrowserDialog.SongBrowseDialogAction.OpenInEditor && dlg.SelectedItems.Any())
             {
@@ -1334,7 +1336,7 @@ namespace PraiseBase.Presenter.UI.Presenter
                 Application.DoEvents();
 
                 if (
-                    !((ModifierKeys & Keys.Shift) == Keys.Shift && SongManager.Instance.CurrentSong != null))
+                    !((ModifierKeys & Keys.Shift) == Keys.Shift && _songManager.CurrentSong != null))
                 {
                     ProjectionManager.Instance.HideLayer(2);
                 }
@@ -1398,7 +1400,7 @@ namespace PraiseBase.Presenter.UI.Presenter
                 {
                     if (
                         !(!linkLayers ^
-                           ((ModifierKeys & Keys.Shift) == Keys.Shift && SongManager.Instance.CurrentSong != null)))
+                           ((ModifierKeys & Keys.Shift) == Keys.Shift && _songManager.CurrentSong != null)))
                     {
                         ProjectionManager.Instance.HideLayer(2);
                     }
@@ -1492,7 +1494,7 @@ namespace PraiseBase.Presenter.UI.Presenter
             if (listViewSongHistory.SelectedIndices.Count > 0)
             {
                 var key = (string) listViewSongHistory.SelectedItems[0].Tag;
-                SongManager.Instance.CurrentSong = SongManager.Instance.SongList[key];
+                _songManager.CurrentSong = _songManager.SongList[key];
                 showCurrentSongDetails();
             }
         }
@@ -1807,17 +1809,17 @@ namespace PraiseBase.Presenter.UI.Presenter
 
         private void toolStripButtonToggleTranslationText_Click(object sender, EventArgs e)
         {
-            if (SongManager.Instance.CurrentSong != null)
+            if (_songManager.CurrentSong != null)
             {
-                if (SongManager.Instance.CurrentSong.SwitchTextAndTranlation)
+                if (_songManager.CurrentSong.SwitchTextAndTranlation)
                 {
                     toolStripButtonToggleTranslationText.Image = Resources.translate;
-                    SongManager.Instance.CurrentSong.SwitchTextAndTranlation = false;
+                    _songManager.CurrentSong.SwitchTextAndTranlation = false;
                 }
                 else
                 {
                     toolStripButtonToggleTranslationText.Image = Resources.translate_active;
-                    SongManager.Instance.CurrentSong.SwitchTextAndTranlation = true;
+                    _songManager.CurrentSong.SwitchTextAndTranlation = true;
                 }
             }
         }
@@ -1826,7 +1828,7 @@ namespace PraiseBase.Presenter.UI.Presenter
         {
             if (listViewSongs.SelectedItems.Count > 0)
             {
-                String fn = SongManager.Instance.CurrentSong.Filename;
+                String fn = _songManager.CurrentSong.Filename;
                 GetSongEditor().OpenSong(fn);
             }
             ShowAndFocusSongEditor();
@@ -1834,28 +1836,28 @@ namespace PraiseBase.Presenter.UI.Presenter
 
         private void qaSpellingToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            SongManager.Instance.CurrentSong.Song.QualityIssues.Set(SongQualityAssuranceIndicator.Spelling, qaSpellingToolStripMenuItem.Checked);
+            _songManager.CurrentSong.Song.QualityIssues.Set(SongQualityAssuranceIndicator.Spelling, qaSpellingToolStripMenuItem.Checked);
             saveCurrentSong();
             updateQAButtonStage();
         }
 
         private void qaTranslationToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            SongManager.Instance.CurrentSong.Song.QualityIssues.Set(SongQualityAssuranceIndicator.Translation, qaTranslationToolStripMenuItem.Checked);
+            _songManager.CurrentSong.Song.QualityIssues.Set(SongQualityAssuranceIndicator.Translation, qaTranslationToolStripMenuItem.Checked);
             saveCurrentSong();
             updateQAButtonStage();
         }
 
         private void qaImagesToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            SongManager.Instance.CurrentSong.Song.QualityIssues.Set(SongQualityAssuranceIndicator.Images, qaImagesToolStripMenuItem.Checked);
+            _songManager.CurrentSong.Song.QualityIssues.Set(SongQualityAssuranceIndicator.Images, qaImagesToolStripMenuItem.Checked);
             saveCurrentSong();
             updateQAButtonStage();
         }
 
         private void qaSegmentationToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            SongManager.Instance.CurrentSong.Song.QualityIssues.Set(SongQualityAssuranceIndicator.Segmentation, qaSegmentationToolStripMenuItem.Checked);
+            _songManager.CurrentSong.Song.QualityIssues.Set(SongQualityAssuranceIndicator.Segmentation, qaSegmentationToolStripMenuItem.Checked);
             saveCurrentSong();
             updateQAButtonStage();
         }
@@ -1864,7 +1866,7 @@ namespace PraiseBase.Presenter.UI.Presenter
         {
             try
             {
-                SongManager.Instance.SaveCurrentSong();
+                _songManager.SaveCurrentSong();
             }
             catch (Exception ex)
             {
@@ -1874,7 +1876,7 @@ namespace PraiseBase.Presenter.UI.Presenter
 
         private void updateQAButtonStage()
         {
-            if (SongManager.Instance.CurrentSong.Song.Comment != String.Empty || SongManager.Instance.CurrentSong.Song.QualityIssues.Any())
+            if (_songManager.CurrentSong.Song.Comment != String.Empty || _songManager.CurrentSong.Song.QualityIssues.Any())
             {
                 toolStripButtonQA.Image = Resources.highlight_red__36;
             }
@@ -1886,12 +1888,24 @@ namespace PraiseBase.Presenter.UI.Presenter
 
         private void qAcommentsToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (SongManager.Instance.CurrentSong != null)
+            if (_songManager.CurrentSong != null)
             {
-                var qd = new QADialog();
+                CommentDialog qd = new CommentDialog
+                {
+                    Comment = _songManager.CurrentSong.Song.Comment
+                };
                 qd.ShowDialog(this);
                 if (qd.DialogResult == DialogResult.OK)
                 {
+                    _songManager.CurrentSong.Song.Comment = qd.Comment;
+                    try
+                    {
+                        _songManager.SaveCurrentSong();
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show(ex.Message, StringResources.Error, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
                     updateQAButtonStage();
                 }
             }
@@ -2058,10 +2072,10 @@ namespace PraiseBase.Presenter.UI.Presenter
                 {
                     foreach (var i in sl.Items)
                     {
-                        var key = SongManager.Instance.GetKeyByTitle(i);
+                        var key = _songManager.GetKeyByTitle(i);
                         if (key != null)
                         {
-                            var s = SongManager.Instance.SongList[key].Song;
+                            var s = _songManager.SongList[key].Song;
                             var lvi = new ListViewItem(s.Title)
                             {
                                 Tag = key
@@ -2092,9 +2106,9 @@ namespace PraiseBase.Presenter.UI.Presenter
         /// <param name="key"></param>
         private void AddSongToSetList(string key)
         {
-            if (SongManager.Instance.SongList.ContainsKey(key))
+            if (_songManager.SongList.ContainsKey(key))
             {
-                var s = SongManager.Instance.SongList[key].Song;
+                var s = _songManager.SongList[key].Song;
                 var lvi = new ListViewItem(s.Title)
                 {
                     Tag = key
@@ -2169,7 +2183,7 @@ namespace PraiseBase.Presenter.UI.Presenter
             for (int i = 0; i < listViewSetList.Items.Count; i++)
             {
                 var tag = (string) listViewSetList.Items[i].Tag;
-                var song = SongManager.Instance.SongList[tag].Song;
+                var song = _songManager.SongList[tag].Song;
                 sl.Items.Add(song.Title);
             }
             SetlistWriter swr = new SetlistWriter();
@@ -2192,7 +2206,7 @@ namespace PraiseBase.Presenter.UI.Presenter
             for (int i = 0; i < listViewSetList.Items.Count; i++)
             {
                 var tag = (string)listViewSetList.Items[i].Tag;
-                var song = SongManager.Instance.SongList[tag].Song;
+                var song = _songManager.SongList[tag].Song;
                 hash = hash * 31 + song.GetHashCode();
             }
             return hash;

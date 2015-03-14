@@ -27,8 +27,11 @@ namespace PraiseBase.Presenter.UI.Presenter
 
         public SongBrowseDialogAction SelectedAction { get; private set; }
 
-        public SongBrowserDialog()
+        private readonly SongManager _songManager;
+
+        public SongBrowserDialog(SongManager songManager)
         {
+            _songManager = songManager;
             SelectedItems = new List<string>();
             InitializeComponent();
         }
@@ -76,7 +79,7 @@ namespace PraiseBase.Presenter.UI.Presenter
                 foreach (ListViewItem lvi in listViewItems.SelectedItems)
                 {
                     string key = (string) (lvi.Tag);
-                    string fn = SongManager.Instance.SongList[key].Filename;
+                    string fn = _songManager.SongList[key].Filename;
                     SelectedItems.Add(fn);
                 }
                 return true;
@@ -94,7 +97,7 @@ namespace PraiseBase.Presenter.UI.Presenter
         {
             listViewItems.Items.Clear();
             string searchText = textBoxSearch.Text.Trim().ToLower();
-            foreach (KeyValuePair<string, SongItem> kvp in SongManager.Instance.SongList)
+            foreach (KeyValuePair<string, SongItem> kvp in _songManager.SongList)
             {
                 Song sng = kvp.Value.Song;
                 bool use = true;

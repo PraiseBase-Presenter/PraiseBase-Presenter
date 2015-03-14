@@ -26,7 +26,6 @@ using System.IO;
 using PraiseBase.Presenter.Manager;
 using PraiseBase.Presenter.Model.Song;
 using PraiseBase.Presenter.Persistence;
-using PraiseBase.Presenter.Properties;
 
 namespace PraiseBase.Presenter
 {
@@ -34,13 +33,8 @@ namespace PraiseBase.Presenter
     /// Holds a list of all songs and provides
     /// searching in the songlist
     /// </summary>
-    internal class SongManager
+    public class SongManager
     {
-        /// <summary>
-        /// Singleton variable
-        /// </summary>
-        private static SongManager _instance;
-
         /// <summary>
         /// List of all availabe songs
         /// </summary>
@@ -60,14 +54,6 @@ namespace PraiseBase.Presenter
         /// Gets or sets the current slide number
         /// </summary>
         public int CurrentSlideNr { get; set; }
-
-        /// <summary>
-        /// Gets the current slide
-        /// </summary>
-        public SongSlide CurrentSlide
-        {
-            get { return CurrentSong.Song.Parts[CurrentPartNr].Slides[CurrentSlideNr]; }
-        }
 
         /// <summary>
         /// Path to the song root directory
@@ -96,26 +82,28 @@ namespace PraiseBase.Presenter
         #endregion Events
 
         /// <summary>
-        /// Gets the singleton of this class (field alternative)
-        /// </summary>
-        public static SongManager Instance
-        {
-            get { return _instance ?? (_instance = new SongManager()); }
-        }
-
-        /// <summary>
         /// The constructor
         /// </summary>
-        private SongManager()
+        public SongManager(string songDirPath)
         {
-            CurrentPartNr = 0;
-            CurrentSlideNr = 0;
+            CurrentPartNr = -1;
+            CurrentSlideNr = -1;
+            SongDirPath = songDirPath;
+            SongList = new Dictionary<string, SongItem>();
 
-            SongDirPath = Settings.Default.DataDirectory + Path.DirectorySeparatorChar + Settings.Default.SongDir;
+            // Ensure song directory exists
             if (!Directory.Exists(SongDirPath))
             {
                 Directory.CreateDirectory(SongDirPath);
             }
+        }
+        
+        /// <summary>
+        /// Gets the current slide
+        /// </summary>
+        public SongSlide GetCurrentSlide()
+        {
+            return CurrentSong.Song.Parts[CurrentPartNr].Slides[CurrentSlideNr];
         }
 
         /// <summary>

@@ -90,9 +90,12 @@ namespace PraiseBase.Presenter
                 Settings.Default.Save();
             }
 
+            string songDir = Settings.Default.DataDirectory + Path.DirectorySeparatorChar + Settings.Default.SongDir;
+            SongManager songManager = new SongManager(songDir);
+
             if (Settings.Default.ShowLoadingScreen)
             {
-                LoadingScreen ldg = new LoadingScreen();
+                LoadingScreen ldg = new LoadingScreen(songManager);
                 ldg.SetLabel("PraiseBase Presenter wird gestartet...");
                 ldg.Show();
 
@@ -100,7 +103,7 @@ namespace PraiseBase.Presenter
                 ImageManager.Instance.CheckThumbs();
 
                 ldg.SetLabel("Lade Liederdatenbank...");
-                SongManager.Instance.Reload();
+                songManager.Reload();
 
                 GC.Collect();
                 ldg.Close();
@@ -109,7 +112,7 @@ namespace PraiseBase.Presenter
             else
             {
                 ImageManager.Instance.CheckThumbs();
-                SongManager.Instance.Reload();
+                songManager.Reload();
                 GC.Collect();
             }
 
@@ -122,7 +125,7 @@ namespace PraiseBase.Presenter
                 setlistFile = args[0];
             }
 
-            MainWindow mw = new MainWindow(setlistFile);
+            MainWindow mw = new MainWindow(songManager, setlistFile);
             Application.Run(mw);
             GC.KeepAlive(mutex);
         }

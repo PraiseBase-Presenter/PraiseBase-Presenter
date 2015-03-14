@@ -29,12 +29,12 @@ namespace PraiseBase.Presenter.UI.Presenter
     {
         public bool ShowSongLoading { get; set; }
 
-        public LoadingScreen()
+        public LoadingScreen(SongManager songManager)
         {
             InitializeComponent();
             if (ShowSongLoading)
             {
-                SongManager.Instance.SongLoaded += SongManager_SongLoaded;
+                songManager.SongLoaded += SongManager_SongLoaded;
             }
             ImageManager.Instance.ThumbnailCreated += ImageManager_ThumbnailCreated;
         }
