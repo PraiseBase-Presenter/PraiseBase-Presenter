@@ -12,7 +12,7 @@
     <AssemblyName>PraiseBase Presenter</AssemblyName>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
-    <ApplicationIcon>Properties\Application\Computer.ico</ApplicationIcon>
+    <ApplicationIcon>Resources\Computer.ico</ApplicationIcon>
     <StartupObject>PraiseBase.Presenter.Program</StartupObject>
     <ManifestCertificateThumbprint>D45E90FD57F45BDB54368ACE3A1D7A9016546503</ManifestCertificateThumbprint>
     <ManifestKeyFile>PraiseBase Presenter_TemporaryKey.pfx</ManifestKeyFile>
@@ -160,9 +160,9 @@
       <DesignTime>True</DesignTime>
     </Compile>
     <Compile Include="Properties\Resources.Designer.cs">
-      <DependentUpon>Resources.resx</DependentUpon>
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
     <Compile Include="Properties\Settings.Designer.cs">
       <DependentUpon>Settings.settings</DependentUpon>
@@ -291,8 +291,8 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
-      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\StringResources.en-US.resx" />
     <EmbeddedResource Include="Properties\StringResources.resx">
@@ -395,253 +395,251 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Properties\Application\14_layer_deletelayer.png" />
+    <None Include="Resources\14_layer_deletelayer.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Properties\Application\14_layer_newlayer.png" />
+    <None Include="Resources\14_layer_newlayer.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Properties\Application\1downarrow.png" />
+    <None Include="Resources\1downarrow.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Properties\Application\1downarrow1.png" />
+    <None Include="Resources\1downarrow1.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Properties\Application\1downarrow11.png" />
+    <None Include="Resources\1downarrow11.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Properties\Application\1downarrow2.png" />
+    <None Include="Resources\1downarrow2.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Properties\Application\1leftarrow.png" />
+    <None Include="Resources\1leftarrow.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Properties\Application\1leftarrow1.png" />
+    <None Include="Resources\1leftarrow1.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Properties\Application\1rightarrow.png" />
+    <None Include="Resources\1rightarrow.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Properties\Application\1rightarrow1.png" />
+    <None Include="Resources\1rightarrow1.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Properties\Application\2leftarrow.png" />
+    <None Include="Resources\2leftarrow.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Properties\Application\2rightarrow.png" />
+    <None Include="Resources\2rightarrow.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Properties\Application\2uparrow.png" />
+    <None Include="Resources\2uparrow.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Properties\Application\3dowarrow.png" />
+    <None Include="Resources\3dowarrow.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Properties\Application\3floppy_unmount.png" />
+    <None Include="Resources\3floppy_unmount.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Properties\Application\advancedsettings.png" />
+    <None Include="Resources\advancedsettings.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Properties\Application\advancedsettings_36.png" />
+    <None Include="Resources\advancedsettings_36.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Properties\Application\agt_action_fail1.png" />
+    <None Include="Resources\agt_action_fail1.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Properties\Application\agt_action_success.png" />
+    <None Include="Resources\agt_action_success.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Properties\Application\agt_back.png" />
+    <None Include="Resources\agt_back.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Properties\Application\agt_forward.png" />
+    <None Include="Resources\agt_forward.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Properties\Application\AJ_Portable_Projection_Screen.png" />
+    <None Include="Resources\AJ_Portable_Projection_Screen.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Properties\Application\background.png" />
+    <None Include="Resources\background.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Properties\Application\background_36.png" />
+    <None Include="Resources\background_36.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Properties\Application\Blackout on 36.png" />
+    <None Include="Resources\Blackout on 36.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Properties\Application\Blackout on.png" />
+    <None Include="Resources\Blackout on.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Properties\Application\Blackout on2.png" />
+    <None Include="Resources\Blackout on2.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Properties\Application\clean.png" />
+    <None Include="Resources\clean.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Properties\Application\clock.png" />
+    <None Include="Resources\clock.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Properties\Application\colors.png" />
+    <None Include="Resources\colors.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Properties\Application\Computer.ico" />
+    <None Include="Resources\Computer.ico" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Properties\Application\easymoblog.png" />
+    <None Include="Resources\easymoblog.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Properties\Application\edit.png" />
+    <None Include="Resources\edit.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Properties\Application\edit_add.png" />
+    <None Include="Resources\edit_add.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Properties\Application\edit_remove.png" />
+    <None Include="Resources\edit_remove.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Properties\Application\editcopy.png" />
+    <None Include="Resources\editcopy.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Properties\Application\editsong.png" />
+    <None Include="Resources\editsong.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Properties\Application\editsong_36.png" />
+    <None Include="Resources\editsong_36.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Properties\Application\error.png" />
+    <None Include="Resources\error.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Properties\Application\exit.png" />
+    <None Include="Resources\exit.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Properties\Application\fade1blue.png" />
+    <None Include="Resources\fade1blue.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Properties\Application\fileopen.png" />
+    <None Include="Resources\fileopen.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Properties\Application\filesave.png" />
+    <None Include="Resources\filesave.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Properties\Application\folder_favorites.png" />
+    <None Include="Resources\folder_favorites.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Properties\Application\folder_favorites_36.png" />
+    <None Include="Resources\folder_favorites_36.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Properties\Application\gpg.png" />
+    <None Include="Resources\gpg.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Properties\Application\gplv3-127x51.png" />
+    <None Include="Resources\gplv3-127x51.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Properties\Application\highlight.png" />
+    <None Include="Resources\highlight.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Properties\Application\highlight_36.png" />
+    <None Include="Resources\highlight_36.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Properties\Application\highlight_red _36.png" />
+    <None Include="Resources\highlight_red _36.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Properties\Application\highlight_red.png" />
+    <None Include="Resources\highlight_red.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Properties\Application\kate.png" />
+    <None Include="Resources\kate.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Properties\Application\kate_36.png" />
+    <None Include="Resources\kate_36.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Properties\Application\keditbookmarks.png" />
+    <None Include="Resources\keditbookmarks.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Properties\Application\ktip.png" />
+    <None Include="Resources\ktip.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Properties\Application\leinwand16.png" />
+    <None Include="Resources\leinwand16.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Properties\Application\leinwand16_no.png" />
+    <None Include="Resources\leinwand16_no.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Properties\Application\link.png" />
+    <None Include="Resources\link.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Properties\Application\logo.png" />
+    <None Include="Resources\logo.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Properties\Application\monitor_256.png" />
+    <None Include="Resources\monitor_256.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Properties\Application\newsong_36.png" />
+    <None Include="Resources\newsong_36.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Properties\Application\ok16.png" />
+    <None Include="Resources\ok16.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Properties\Application\package_favorite.png" />
+    <None Include="Resources\package_favorite.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Properties\Application\pb mit schwarz.jpg" />
+    <None Include="Resources\pb mit schwarz.jpg" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Properties\Application\pb web.png" />
+    <None Include="Resources\pb web.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Properties\Application\Projection off 36.png" />
+    <None Include="Resources\Projection off 36.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Properties\Application\Projection off.png" />
+    <None Include="Resources\Projection off.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Properties\Application\Projection on 36.png" />
+    <None Include="Resources\Projection on 36.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Properties\Application\Projection on.png" />
+    <None Include="Resources\Projection on.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Properties\Application\save_36.png" />
+    <None Include="Resources\save_36.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Properties\Application\search.png" />
+    <None Include="Resources\search.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Properties\Application\search_36.png" />
+    <None Include="Resources\search_36.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Properties\Application\searchg.png" />
+    <None Include="Resources\searchg.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Properties\Application\searchx.png" />
+    <None Include="Resources\searchx.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Properties\Application\text_align_center.png" />
+    <None Include="Resources\text_align_center.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Properties\Application\text_align_left.png" />
+    <None Include="Resources\text_align_left.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Properties\Application\text_align_right.png" />
+    <None Include="Resources\text_align_right.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Properties\Application\translate.png" />
+    <None Include="Resources\translate.png" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Properties\Application\translate_active.png" />
-    <None Include="Properties\Application\xmag.png" />
-    <None Include="Properties\Application\wheel16.png" />
-    <None Include="Properties\Application\update16.png" />
-    <None Include="Properties\Application\unlink.png" />
-    <None Include="Properties\Application\translate_small.png" />
-    <None Include="Properties\Application\translate_disabled_small.png" />
-    <None Include="Properties\Application\translate_disabled.png" />
-    <None Include="Properties\Application\translate_cross_small.png" />
+    <Content Include="Resources\translate_active.png" />
+    <None Include="Resources\xmag.png" />
+    <None Include="Resources\wheel16.png" />
+    <None Include="Resources\update16.png" />
+    <None Include="Resources\unlink.png" />
+    <None Include="Resources\translate_small.png" />
+    <None Include="Resources\translate_disabled_small.png" />
+    <None Include="Resources\translate_disabled.png" />
+    <None Include="Resources\translate_cross_small.png" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Resources\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
