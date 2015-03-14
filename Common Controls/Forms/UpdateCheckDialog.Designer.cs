@@ -33,6 +33,7 @@
             this.buttonDownload = new System.Windows.Forms.Button();
             this.labelMessage = new System.Windows.Forms.Label();
             this.checkBoxHideNotification = new System.Windows.Forms.CheckBox();
+            this.linkLabelAnnouncement = new System.Windows.Forms.LinkLabel();
             this.SuspendLayout();
             // 
             // buttonCancel
@@ -62,12 +63,20 @@
             this.checkBoxHideNotification.UseVisualStyleBackColor = true;
             this.checkBoxHideNotification.CheckedChanged += new System.EventHandler(this.checkBoxHideNotification_CheckedChanged);
             // 
+            // linkLabelAnnouncement
+            // 
+            resources.ApplyResources(this.linkLabelAnnouncement, "linkLabelAnnouncement");
+            this.linkLabelAnnouncement.Name = "linkLabelAnnouncement";
+            this.linkLabelAnnouncement.TabStop = true;
+            this.linkLabelAnnouncement.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabelAnnouncement_LinkClicked);
+            // 
             // UpdateCheckDialog
             // 
             this.AcceptButton = this.buttonDownload;
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.buttonCancel;
+            this.Controls.Add(this.linkLabelAnnouncement);
             this.Controls.Add(this.checkBoxHideNotification);
             this.Controls.Add(this.labelMessage);
             this.Controls.Add(this.buttonDownload);
@@ -89,5 +98,6 @@
         private System.Windows.Forms.Button buttonDownload;
         private System.Windows.Forms.Label labelMessage;
         private System.Windows.Forms.CheckBox checkBoxHideNotification;
+        private System.Windows.Forms.LinkLabel linkLabelAnnouncement;
     }
 }

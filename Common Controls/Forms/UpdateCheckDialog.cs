@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -26,6 +27,11 @@ namespace PraiseBase.Presenter.Forms
             if (_updateInformation.UpdateAvailable)
             {
                 buttonDownload.Enabled = true;
+             
+                if (!String.IsNullOrEmpty(_updateInformation.AnnouncementUrl))
+                {
+                    linkLabelAnnouncement.Visible = true;
+                }
             }
         }
 
@@ -49,6 +55,11 @@ namespace PraiseBase.Presenter.Forms
         private void checkBoxHideNotification_CheckedChanged(object sender, EventArgs e)
         {
             HideNotification = ((CheckBox) sender).Checked;
+        }
+
+        private void linkLabelAnnouncement_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            Process.Start(_updateInformation.AnnouncementUrl);
         }
     }
 }

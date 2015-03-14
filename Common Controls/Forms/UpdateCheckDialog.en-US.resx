@@ -136,6 +136,12 @@
   <data name="checkBoxHideNotification.Text" xml:space="preserve">
     <value>Hide future notifications about this update</value>
   </data>
+  <data name="linkLabelAnnouncement.Size" type="System.Drawing.Size, System.Drawing">
+    <value>170, 13</value>
+  </data>
+  <data name="linkLabelAnnouncement.Text" xml:space="preserve">
+    <value>View information about this version</value>
+  </data>
   <data name="$this.Text" xml:space="preserve">
     <value>Update available</value>
   </data>
