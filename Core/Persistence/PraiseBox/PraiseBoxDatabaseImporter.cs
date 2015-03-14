@@ -15,23 +15,24 @@ namespace PraiseBase.Presenter.Persistence.PraiseBox
 
         protected override Song readRecord(OleDbDataReader aReader)
         {
-            Song sng = new Song();
+            var sng = new Song();
 
             sng.Title = aReader.GetString(1);
 
-            RichTextBox rtf = new RichTextBox();
+            var rtf = new RichTextBox();
             rtf.Rtf = aReader.GetString(2);
-            string text = rtf.Text.ToString().Trim();
+            var text = rtf.Text.Trim();
             text = text.Replace("\n", Environment.NewLine);
-            string[] prts = text.Split(new string[] { Environment.NewLine + Environment.NewLine }, StringSplitOptions.RemoveEmptyEntries);
+            var prts = text.Split(new[] {Environment.NewLine + Environment.NewLine},
+                StringSplitOptions.RemoveEmptyEntries);
 
-            Regex rex = new Regex(".+:");
-            int p = 0;
-            foreach (String pri in prts)
+            var rex = new Regex(".+:");
+            var p = 0;
+            foreach (var pri in prts)
             {
                 sng.Parts.Add(new SongPart());
                 sng.Parts[p].Slides.Add(new SongSlide());
-                Match mat = rex.Match(pri);
+                var mat = rex.Match(pri);
                 sng.Parts[p].Caption = mat.Value.Substring(0, mat.Value.Length - 1);
                 sng.Parts[p].Slides[0].Text = pri.Substring(mat.Value.Length + 1);
                 p++;

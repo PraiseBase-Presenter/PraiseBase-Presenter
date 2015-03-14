@@ -21,6 +21,8 @@
  */
 
 using System;
+using System.Reflection;
+using System.Xml;
 
 namespace PraiseBase.Presenter.Util
 {
@@ -28,15 +30,15 @@ namespace PraiseBase.Presenter.Util
     {
         public UpdateInformation GetNewVersion(string updateCheckUrl)
         {
-            UpdateInformation rtn = new UpdateInformation();
+            var rtn = new UpdateInformation();
 
-            System.Xml.XmlTextReader reader = null;
+            XmlTextReader reader = null;
             try
             {
                 // provide the XmlTextReader with the URL of
                 // our xml document
-                string xmlUrl = updateCheckUrl;
-                reader = new System.Xml.XmlTextReader(xmlUrl);
+                var xmlUrl = updateCheckUrl;
+                reader = new XmlTextReader(xmlUrl);
                 // simply (and easily) skip the junk at the beginning
                 reader.MoveToContent();
                 // internal - as the XmlTextReader moves only
@@ -44,23 +46,23 @@ namespace PraiseBase.Presenter.Util
                 // in elementName variable. When we parse a
                 // text node, we refer to elementName to check
                 // what was the node name
-                string elementName = "";
+                var elementName = "";
 
                 // we check if the xml starts with a proper
                 // "ourfancyapp" element node
-                if ((reader.NodeType == System.Xml.XmlNodeType.Element) &&
+                if ((reader.NodeType == XmlNodeType.Element) &&
                     (reader.Name == "praisebasepresenter"))
                 {
                     while (reader.Read())
                     {
                         // when we find an element node,
                         // we remember its name
-                        if (reader.NodeType == System.Xml.XmlNodeType.Element)
+                        if (reader.NodeType == XmlNodeType.Element)
                             elementName = reader.Name;
                         else
                         {
                             // for text nodes...
-                            if ((reader.NodeType == System.Xml.XmlNodeType.Text) &&
+                            if ((reader.NodeType == XmlNodeType.Text) &&
                                 (reader.HasValue))
                             {
                                 // we check what the name of the node was
@@ -109,7 +111,7 @@ namespace PraiseBase.Presenter.Util
 
         public Version GetCurrentVersion()
         {
-            return System.Reflection.Assembly.GetExecutingAssembly().GetName().Version;
+            return Assembly.GetExecutingAssembly().GetName().Version;
         }
     }
 }

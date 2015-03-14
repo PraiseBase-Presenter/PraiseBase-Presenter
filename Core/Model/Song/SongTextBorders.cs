@@ -26,21 +26,8 @@ namespace PraiseBase.Presenter.Model.Song
 {
     public class SongTextBorders : ICloneable
     {
-        public int TextLeft { get; set; }
-
-        public int TextTop { get; set; }
-
-        public int TextRight { get; set; }
-
-        public int TextBottom { get; set; }
-
-        public int CopyrightBottom { get; set; }
-
-        public int SourceTop { get; set; }
-
-        public int SourceRight { get; set; }
-
-        public SongTextBorders(int textLeft, int textTop, int textRight, int textBottom, int copyrightBottom, int sourceTop, int sourceRight)
+        public SongTextBorders(int textLeft, int textTop, int textRight, int textBottom, int copyrightBottom,
+            int sourceTop, int sourceRight)
         {
             TextLeft = textLeft;
             TextTop = textTop;
@@ -51,9 +38,22 @@ namespace PraiseBase.Presenter.Model.Song
             SourceRight = sourceRight;
         }
 
+        public int TextLeft { get; set; }
+        public int TextTop { get; set; }
+        public int TextRight { get; set; }
+        public int TextBottom { get; set; }
+        public int CopyrightBottom { get; set; }
+        public int SourceTop { get; set; }
+        public int SourceRight { get; set; }
+
+        public object Clone()
+        {
+            return new SongTextBorders(TextLeft, TextTop, TextRight, TextBottom, CopyrightBottom, SourceTop, SourceRight);
+        }
+
         /// <summary>
-        /// Returns a hashcode of the text formatting object, used for example in the
-        /// editor to check if the file was changed
+        ///     Returns a hashcode of the text formatting object, used for example in the
+        ///     editor to check if the file was changed
         /// </summary>
         /// <returns></returns>
         public override int GetHashCode()
@@ -73,20 +73,17 @@ namespace PraiseBase.Presenter.Model.Song
 
         protected bool Equals(SongTextBorders other)
         {
-            return TextLeft == other.TextLeft && TextTop == other.TextTop && TextRight == other.TextRight && TextBottom == other.TextBottom && CopyrightBottom == other.CopyrightBottom && SourceRight == other.SourceRight && SourceTop == other.SourceTop;
+            return TextLeft == other.TextLeft && TextTop == other.TextTop && TextRight == other.TextRight &&
+                   TextBottom == other.TextBottom && CopyrightBottom == other.CopyrightBottom &&
+                   SourceRight == other.SourceRight && SourceTop == other.SourceTop;
         }
 
         public override bool Equals(object obj)
         {
             if (ReferenceEquals(null, obj)) return false;
             if (ReferenceEquals(this, obj)) return true;
-            if (obj.GetType() != this.GetType()) return false;
+            if (obj.GetType() != GetType()) return false;
             return Equals((SongTextBorders) obj);
-        }
-
-        public object Clone()
-        {
-            return new SongTextBorders(TextLeft, TextTop, TextRight, TextBottom, CopyrightBottom, SourceTop, SourceRight);
         }
     }
 }

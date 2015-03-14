@@ -1,13 +1,12 @@
 ﻿namespace PraiseBase.Presenter.Model.Song
 {
     /// <summary>
-    /// Song tempo in bpm (beats per minute, maybe 30-250) or some words like
-    /// Very Fast, Fast, Moderate, Slow, Very Slow -->
+    ///     Song tempo in bpm (beats per minute, maybe 30-250) or some words like
+    ///     Very Fast, Fast, Moderate, Slow, Very Slow -->
     /// </summary>
     public class SongTempo
     {
         public string Type { get; set; }
-
         public string Value { get; set; }
 
         protected bool Equals(SongTempo other)
@@ -19,7 +18,7 @@
         {
             if (ReferenceEquals(null, obj)) return false;
             if (ReferenceEquals(this, obj)) return true;
-            if (obj.GetType() != this.GetType()) return false;
+            if (obj.GetType() != GetType()) return false;
             return Equals((SongTempo) obj);
         }
 

@@ -26,18 +26,23 @@ namespace PraiseBase.Presenter.Model
 {
     public sealed class TextOrientation : ICloneable
     {
+        public TextOrientation(VerticalOrientation vertical, HorizontalOrientation horizontal)
+        {
+            Vertical = vertical;
+            Horizontal = horizontal;
+        }
+
         public VerticalOrientation Vertical { get; set; }
         public HorizontalOrientation Horizontal { get; set; }
 
-        public TextOrientation(VerticalOrientation vertical, HorizontalOrientation horizontal) 
+        public object Clone()
         {
-            this.Vertical = vertical;
-            this.Horizontal = horizontal;
+            return new TextOrientation(Vertical, Horizontal);
         }
 
         public override string ToString()
         {
-            return this.Vertical.ToString() + " " + this.Horizontal.ToString();
+            return Vertical + " " + Horizontal;
         }
 
         private bool Equals(TextOrientation ori)
@@ -58,11 +63,6 @@ namespace PraiseBase.Presenter.Model
             {
                 return ((int) Vertical*397) ^ (int) Horizontal;
             }
-        }
-
-        public object Clone()
-        {
-            return new TextOrientation(Vertical, Horizontal);
         }
     }
 

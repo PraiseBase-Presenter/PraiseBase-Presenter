@@ -23,18 +23,18 @@
 namespace PraiseBase.Presenter.Model.Song
 {
     /// <summary>
-    /// Most songs come from some sort of collection of songs, be it a book or a
-    /// folder of some sort. It may be useful to track where the song comes from
+    ///     Most songs come from some sort of collection of songs, be it a book or a
+    ///     folder of some sort. It may be useful to track where the song comes from
     /// </summary>
     public class SongBook
     {
         /// <summary>
-        /// The name of a song book
+        ///     The name of a song book
         /// </summary>
         public string Name { get; set; }
 
         /// <summary>
-        /// The index of the song
+        ///     The index of the song
         /// </summary>
         public string Entry { get; set; }
 
@@ -47,7 +47,7 @@ namespace PraiseBase.Presenter.Model.Song
         {
             if (ReferenceEquals(null, obj)) return false;
             if (ReferenceEquals(this, obj)) return true;
-            if (obj.GetType() != this.GetType()) return false;
+            if (obj.GetType() != GetType()) return false;
             return Equals((SongBook) obj);
         }
 

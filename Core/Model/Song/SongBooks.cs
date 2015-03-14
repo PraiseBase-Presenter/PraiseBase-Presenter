@@ -26,7 +26,7 @@ using System.Collections.Generic;
 namespace PraiseBase.Presenter.Model.Song
 {
     /// <summary>
-    /// Provides a list of all authors in the song
+    ///     Provides a list of all authors in the song
     /// </summary>
     public class SongBooks : List<SongBook>
     {
@@ -34,10 +34,10 @@ namespace PraiseBase.Presenter.Model.Song
         {
             unchecked
             {
-                int hash = 19;
-                for (int i = 0; i < Count; i++)
+                var hash = 19;
+                for (var i = 0; i < Count; i++)
                 {
-                    hash = hash * 31 + this[i].GetHashCode();
+                    hash = hash*31 + this[i].GetHashCode();
                 }
                 return hash;
             }
@@ -46,7 +46,7 @@ namespace PraiseBase.Presenter.Model.Song
         public void FromString(String value)
         {
             Clear();
-            foreach (String s in value.Split(new[] { ';' }, StringSplitOptions.RemoveEmptyEntries))
+            foreach (var s in value.Split(new[] {';'}, StringSplitOptions.RemoveEmptyEntries))
             {
                 var sb = new SongBook
                 {
@@ -57,12 +57,12 @@ namespace PraiseBase.Presenter.Model.Song
         }
 
         /// <summary>
-        /// All authors as semicolon-separated string
+        ///     All authors as semicolon-separated string
         /// </summary>
         public override string ToString()
         {
-            string autstr = string.Empty;
-            for (int i = 0; i < Count; i++)
+            var autstr = string.Empty;
+            for (var i = 0; i < Count; i++)
             {
                 if (autstr != string.Empty)
                 {

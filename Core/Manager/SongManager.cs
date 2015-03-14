@@ -30,59 +30,13 @@ using PraiseBase.Presenter.Util;
 namespace PraiseBase.Presenter.Manager
 {
     /// <summary>
-    /// Holds a list of all songs and provides
-    /// searching in the songlist
+    ///     Holds a list of all songs and provides
+    ///     searching in the songlist
     /// </summary>
     public class SongManager
     {
         /// <summary>
-        /// List of all availabe songs
-        /// </summary>
-        public Dictionary<string, SongItem> SongList { get; protected set; }
-
-        /// <summary>
-        /// Gets or sets the current song object
-        /// </summary>
-        public SongItem CurrentSong { get; set; }
-
-        /// <summary>
-        /// Gets or sets the current part number
-        /// </summary>
-        public int CurrentPartNr { get; set; }
-
-        /// <summary>
-        /// Gets or sets the current slide number
-        /// </summary>
-        public int CurrentSlideNr { get; set; }
-
-        /// <summary>
-        /// Path to the song root directory
-        /// </summary>
-        public string SongDirPath { get; protected set; }
-
-        #region Events
-
-        public delegate void SongLoad(SongLoadEventArgs e);
-
-        public event SongLoad SongLoaded;
-
-        public class SongLoadEventArgs : EventArgs
-        {
-            public int Number { get; set; }
-
-            public int Total { get; set; }
-
-            public SongLoadEventArgs(int number, int total)
-            {
-                Number = number;
-                Total = total;
-            }
-        }
-
-        #endregion Events
-
-        /// <summary>
-        /// The constructor
+        ///     The constructor
         /// </summary>
         public SongManager(string songDirPath)
         {
@@ -97,9 +51,34 @@ namespace PraiseBase.Presenter.Manager
                 Directory.CreateDirectory(SongDirPath);
             }
         }
-        
+
         /// <summary>
-        /// Gets the current slide
+        ///     List of all availabe songs
+        /// </summary>
+        public Dictionary<string, SongItem> SongList { get; protected set; }
+
+        /// <summary>
+        ///     Gets or sets the current song object
+        /// </summary>
+        public SongItem CurrentSong { get; set; }
+
+        /// <summary>
+        ///     Gets or sets the current part number
+        /// </summary>
+        public int CurrentPartNr { get; set; }
+
+        /// <summary>
+        ///     Gets or sets the current slide number
+        /// </summary>
+        public int CurrentSlideNr { get; set; }
+
+        /// <summary>
+        ///     Path to the song root directory
+        /// </summary>
+        public string SongDirPath { get; protected set; }
+
+        /// <summary>
+        ///     Gets the current slide
         /// </summary>
         public SongSlide GetCurrentSlide()
         {
@@ -107,30 +86,30 @@ namespace PraiseBase.Presenter.Manager
         }
 
         /// <summary>
-        /// Reloads all songs from the song direcory
-        /// specified in the application settings
+        ///     Reloads all songs from the song direcory
+        ///     specified in the application settings
         /// </summary>
         public void Reload()
         {
             // Find song files
             var songPaths = new List<string>();
-            foreach (string ext in SongFilePluginFactory.SupportedExtensions)
+            foreach (var ext in SongFilePluginFactory.SupportedExtensions)
             {
-                string[] songFilePaths = Directory.GetFiles(SongDirPath, "*" + ext, SearchOption.AllDirectories);
+                var songFilePaths = Directory.GetFiles(SongDirPath, "*" + ext, SearchOption.AllDirectories);
                 songPaths.AddRange(songFilePaths);
             }
-            int cnt = songPaths.Count;
+            var cnt = songPaths.Count;
 
             // Load songs into list
-            int i = 0;
+            var i = 0;
             SongList = new Dictionary<string, SongItem>();
-            foreach (string path in songPaths)
+            foreach (var path in songPaths)
             {
                 try
                 {
                     var plugin = SongFilePluginFactory.Create(path);
                     var song = plugin.Load(path);
-                    SongItem si = new SongItem
+                    var si = new SongItem
                     {
                         Plugin = plugin,
                         Filename = path,
@@ -138,9 +117,9 @@ namespace PraiseBase.Presenter.Manager
                         SearchText = SongSearchUtil.GetSearchableSongText(song)
                     };
                     SongList.Add(path, si);
-                    if (i % 25 == 0)
+                    if (i%25 == 0)
                     {
-                        SongLoadEventArgs e = new SongLoadEventArgs(i, cnt);
+                        var e = new SongLoadEventArgs(i, cnt);
                         if (SongLoaded != null)
                         {
                             SongLoaded(e);
@@ -157,7 +136,7 @@ namespace PraiseBase.Presenter.Manager
         }
 
         /// <summary>
-        /// Returns the list id of the song with specified title
+        ///     Returns the list id of the song with specified title
         /// </summary>
         /// <param name="title">The title of the song</param>
         /// <returns>Returns the position in the songlist</returns>
@@ -174,7 +153,7 @@ namespace PraiseBase.Presenter.Manager
         }
 
         /// <summary>
-        /// Reloads the given song 
+        ///     Reloads the given song
         /// </summary>
         /// <param name="si">Path to the song file</param>
         public void ReloadSongItem(SongItem si)
@@ -195,7 +174,7 @@ namespace PraiseBase.Presenter.Manager
         }
 
         /// <summary>
-        /// Gets the song with the specified path
+        ///     Gets the song with the specified path
         /// </summary>
         /// <param name="path">Path to the song file</param>
         public SongItem GetSongItemByPath(string path)
@@ -217,10 +196,13 @@ namespace PraiseBase.Presenter.Manager
         }
 
         /// <summary>
-        /// Search the songlist for a given pattern and returns the matching songs
+        ///     Search the songlist for a given pattern and returns the matching songs
         /// </summary>
         /// <param name="needle">The search pattern</param>
-        /// <param name="searchMode">If set to 1, the sogtext is also searched for the pattern. If set to 0, only the song title will be used</param>
+        /// <param name="searchMode">
+        ///     If set to 1, the sogtext is also searched for the pattern. If set to 0, only the song title
+        ///     will be used
+        /// </param>
         /// <returns>Returns a list of matches songs</returns>
         public Dictionary<string, SongItem> GetSearchResults(string needle, SongSearchMode searchMode)
         {
@@ -239,7 +221,7 @@ namespace PraiseBase.Presenter.Manager
         }
 
         /// <summary>
-        /// Saves the currently active song
+        ///     Saves the currently active song
         /// </summary>
         public void SaveCurrentSong()
         {
@@ -251,8 +233,29 @@ namespace PraiseBase.Presenter.Manager
             }
             else
             {
-                throw new Exception("Das Speichern der Lieddatei " + CurrentSong.Filename + " wird von diesem Dateiformat leider nicht unterstützt!");
+                throw new Exception("Das Speichern der Lieddatei " + CurrentSong.Filename +
+                                    " wird von diesem Dateiformat leider nicht unterstützt!");
             }
         }
+
+        #region Events
+
+        public delegate void SongLoad(SongLoadEventArgs e);
+
+        public event SongLoad SongLoaded;
+
+        public class SongLoadEventArgs : EventArgs
+        {
+            public SongLoadEventArgs(int number, int total)
+            {
+                Number = number;
+                Total = total;
+            }
+
+            public int Number { get; set; }
+            public int Total { get; set; }
+        }
+
+        #endregion Events
     }
 }

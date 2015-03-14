@@ -7,7 +7,7 @@ namespace PraiseBase.Presenter.Util
     public static class SongSearchUtil
     {
         /// <summary>
-        /// Gets all text for searching, including the song title
+        ///     Gets all text for searching, including the song title
         /// </summary>
         public static string GetSearchableSongText(Song song)
         {
@@ -15,8 +15,8 @@ namespace PraiseBase.Presenter.Util
         }
 
         /// <summary>
-        /// Prepares a text so it can be searched easily
-        /// Converts to lower case, removes additional space, newlines and punctuation marks
+        ///     Prepares a text so it can be searched easily
+        ///     Converts to lower case, removes additional space, newlines and punctuation marks
         /// </summary>
         /// <param name="text"></param>
         /// <returns></returns>
@@ -32,13 +32,15 @@ namespace PraiseBase.Presenter.Util
         }
 
         /// <summary>
-        /// Gets the complete song text as one string
+        ///     Gets the complete song text as one string
         /// </summary>
         /// <param name="song"></param>
         /// <returns></returns>
         public static string GetCompleteSongText(Song song)
         {
-            return (from prt in song.Parts from sld in prt.Slides from line in sld.Lines select line).Aggregate(String.Empty, (current, line) => current + (line + " "));
+            return
+                (from prt in song.Parts from sld in prt.Slides from line in sld.Lines select line).Aggregate(
+                    String.Empty, (current, line) => current + (line + " "));
         }
     }
 }

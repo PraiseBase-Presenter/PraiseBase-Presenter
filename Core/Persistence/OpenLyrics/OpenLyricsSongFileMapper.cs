@@ -29,7 +29,7 @@ namespace PraiseBase.Presenter.Persistence.OpenLyrics
     {
         public Song Map(OpenLyricsSong source)
         {
-            Song sng = new Song();
+            var sng = new Song();
 
             //
             // File attributes

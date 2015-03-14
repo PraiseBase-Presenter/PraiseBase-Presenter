@@ -26,12 +26,12 @@ using System.Linq;
 namespace PraiseBase.Presenter.Model
 {
     /// <summary>
-    /// Tag class. It allows only unique items
+    ///     Tag class. It allows only unique items
     /// </summary>
     public class TagList : List<string>
     {
         /// <summary>
-        /// Adds an unique tag to the taglist
+        ///     Adds an unique tag to the taglist
         /// </summary>
         /// <param name="tagName"></param>
         public new void Add(string tagName)
@@ -46,23 +46,23 @@ namespace PraiseBase.Presenter.Model
         {
             unchecked
             {
-                int hash = 19;
-                for (int i = 0; i < Count; i++)
+                var hash = 19;
+                for (var i = 0; i < Count; i++)
                 {
-                    hash = hash * 31 + this[i].GetHashCode();
+                    hash = hash*31 + this[i].GetHashCode();
                 }
                 return hash;
             }
         }
 
         /// <summary>
-        /// Returns a comma separated string of all tags
+        ///     Returns a comma separated string of all tags
         /// </summary>
         /// <returns></returns>
         public override string ToString()
         {
-            string res = string.Empty;
-            for (int i = 0; i < Count; i++)
+            var res = string.Empty;
+            for (var i = 0; i < Count; i++)
             {
                 res += this.ElementAt(i);
                 if (i < Count - 1)

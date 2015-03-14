@@ -21,17 +21,18 @@
  */
 
 using System;
+using System.Drawing;
 
 namespace PraiseBase.Presenter.Projection
 {
     public abstract class BaseLayer
     {
-        public void WriteOut(System.Drawing.Graphics gr)
+        public void WriteOut(Graphics gr)
         {
-            Object[] args = { };
+            Object[] args = {};
             WriteOut(gr, args);
         }
 
-        public abstract void WriteOut(System.Drawing.Graphics gr, Object[] args);
+        public abstract void WriteOut(Graphics gr, Object[] args);
     }
 }

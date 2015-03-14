@@ -6,44 +6,44 @@ namespace PraiseBase.Presenter.Persistence
     public interface ISongFilePlugin
     {
         /// <summary>
-        /// Loads and instantiates a song from a file
+        ///     Loads and instantiates a song from a file
         /// </summary>
         /// <param name="filePath">Absolute path to the song file</param>
         /// <returns>Song object instance</returns>
         Song Load(String filePath);
 
         /// <summary>
-        /// Reads the title of a song from a file
+        ///     Reads the title of a song from a file
         /// </summary>
         /// <param name="filePath">Absolute path to the song file</param>
         /// <returns></returns>
         String ReadTitle(string filePath);
 
         /// <summary>
-        /// Tests if a given file is supported by this reader
+        ///     Tests if a given file is supported by this reader
         /// </summary>
         /// <param name="filePath"></param>
         /// <returns></returns>
         Boolean IsFileSupported(String filePath);
 
         /// <summary>
-        /// Defines the extensions this file format uses, e.g. ".xml"
+        ///     Defines the extensions this file format uses, e.g. ".xml"
         /// </summary>
         string GetFileExtension();
 
         /// <summary>
-        /// The common name of the file format
+        ///     The common name of the file format
         /// </summary>
         string GetFileTypeDescription();
 
         /// <summary>
-        /// Returns true if writing files is supported
+        ///     Returns true if writing files is supported
         /// </summary>
         /// <returns></returns>
         Boolean IsWritingSupported();
 
         /// <summary>
-        /// Writes a song to the specified path
+        ///     Writes a song to the specified path
         /// </summary>
         /// <param name="sng">Absolute path to the song file</param>
         /// <param name="filePath"></param>

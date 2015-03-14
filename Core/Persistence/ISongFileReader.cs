@@ -27,21 +27,21 @@ namespace PraiseBase.Presenter.Persistence
     public interface ISongFileReader<T> where T : ISongFile
     {
         /// <summary>
-        /// Loads and instantiates a song from a file
+        ///     Loads and instantiates a song from a file
         /// </summary>
         /// <param name="filename">Absolute path to the song file</param>
         /// <returns>Song object instance</returns>
         T Load(string filename);
 
         /// <summary>
-        /// Reads the title of a song from a file
+        ///     Reads the title of a song from a file
         /// </summary>
         /// <param name="filename">Absolute path to the song file</param>
         /// <returns></returns>
         String ReadTitle(string filename);
 
         /// <summary>
-        /// Tests if a given file is supported by this reader
+        ///     Tests if a given file is supported by this reader
         /// </summary>
         /// <param name="filename"></param>
         /// <returns></returns>

@@ -24,15 +24,14 @@ namespace PraiseBase.Presenter.Model.Song
 {
     public class SongFileType
     {
-        public string Name { get; set; }
-
-        public string Extension { get; set; }
-
         public SongFileType(string name, string extension)
         {
             Name = name;
             Extension = extension;
         }
+
+        public string Name { get; set; }
+        public string Extension { get; set; }
 
         protected bool Equals(SongFileType other)
         {
@@ -43,7 +42,7 @@ namespace PraiseBase.Presenter.Model.Song
         {
             if (ReferenceEquals(null, obj)) return false;
             if (ReferenceEquals(this, obj)) return true;
-            if (obj.GetType() != this.GetType()) return false;
+            if (obj.GetType() != GetType()) return false;
             return Equals((SongFileType) obj);
         }
 

@@ -31,88 +31,60 @@ using PraiseBase.Presenter.Persistence.ZefaniaXML;
 namespace PraiseBase.Presenter.Manager
 {
     /// <summary>
-    /// Holds a list of all songs and provides
-    /// searching in the songlist
+    ///     Holds a list of all songs and provides
+    ///     searching in the songlist
     /// </summary>
     public class BibleManager
     {
-        /// <summary>
-        /// Song item structure
-        /// </summary>
-        public struct BibleItem
-        {
-            public Bible Bible { get; set; }
-
-            public string Filename { get; set; }
-
-            public override string ToString()
-            {
-                return Bible.Title;
-            }
-        }
-
         public enum BiblePassageSearchStatus
         {
             Ongoing,
             Found,
             NotFound
-        } 
-
-        public struct BiblePassageSearchResult
-        {
-            public BiblePassage Passage { get; set; }
-            public BiblePassageSearchStatus Status { get; set; }
         }
-
-        public class BiblePassage
-        {
-            public BibleBook Book { get; set; }
-            public BibleChapter Chapter { get; set; }
-            public BibleVerse Verse { get; set; }
-        }
-
-        /// <summary>
-        /// List of all availabe songs
-        /// </summary>
-        public Dictionary<string, BibleItem> BibleList { get; protected set; }
-
-        /// <summary>
-        /// Gets or sets the current song object
-        /// </summary>
-        public BibleItem CurrentBible { get; set; }
 
         private readonly string _bibleDirectory;
 
         /// <summary>
-        /// The constructor
+        ///     The constructor
         /// </summary>
         public BibleManager(String bibleDirectory)
         {
             _bibleDirectory = bibleDirectory;
         }
 
+        /// <summary>
+        ///     List of all availabe songs
+        /// </summary>
+        public Dictionary<string, BibleItem> BibleList { get; protected set; }
+
+        /// <summary>
+        ///     Gets or sets the current song object
+        /// </summary>
+        public BibleItem CurrentBible { get; set; }
+
         public List<string> GetBibleFiles()
         {
-            DirectoryInfo di = new DirectoryInfo(_bibleDirectory);
+            var di = new DirectoryInfo(_bibleDirectory);
             if (!di.Exists)
             {
                 di.Create();
             }
-            FileInfo[] rgFiles = di.GetFiles("*.xml");
+            var rgFiles = di.GetFiles("*.xml");
             return rgFiles.Select(fi => fi.FullName).ToList();
         }
 
         public void LoadBibleInfo()
         {
             BibleList = new Dictionary<string, BibleItem>();
-            foreach (string file in GetBibleFiles())
+            foreach (var file in GetBibleFiles())
             {
-                XMLBibleReader rdr = new XMLBibleReader();
+                var rdr = new XMLBibleReader();
                 try
                 {
-                    BibleItem bi = new BibleItem
+                    var bi = new BibleItem
                     {
-                        Bible = rdr.LoadMeta(file), 
+                        Bible = rdr.LoadMeta(file),
                         Filename = file
                     };
                     BibleList.Add(bi.Bible.Identifier ?? bi.Filename, bi);
@@ -126,7 +98,7 @@ namespace PraiseBase.Presenter.Manager
 
         public void LoadBibleData(string key)
         {
-            XMLBibleReader rdr = new XMLBibleReader();
+            var rdr = new XMLBibleReader();
             try
             {
                 rdr.LoadContent(BibleList[key].Filename, BibleList[key].Bible);
@@ -140,7 +112,7 @@ namespace PraiseBase.Presenter.Manager
         private List<BibleBook> SearchBookCandiates(Bible bible, string needle)
         {
             var bkCandidates = new List<BibleBook>();
-            foreach (BibleBook bk in bible.Books)
+            foreach (var bk in bible.Books)
             {
                 if (needle.Length <= bk.Name.Length && needle == bk.Name.ToLower().Substring(0, needle.Length))
                 {
@@ -152,7 +124,7 @@ namespace PraiseBase.Presenter.Manager
 
         public BiblePassageSearchResult SearchPassage(Bible bible, string needle)
         {
-            BiblePassageSearchResult result = new BiblePassageSearchResult
+            var result = new BiblePassageSearchResult
             {
                 Status = BiblePassageSearchStatus.Ongoing,
                 Passage = new BiblePassage()
@@ -162,7 +134,7 @@ namespace PraiseBase.Presenter.Manager
             var match = Regex.Match(needle, @"^(.*[a-z])$", RegexOptions.IgnoreCase);
             if (match.Success)
             {
-                List<BibleBook> bkCandidates = SearchBookCandiates(bible, match.Groups[1].Value);
+                var bkCandidates = SearchBookCandiates(bible, match.Groups[1].Value);
                 if (bkCandidates.Count == 1)
                 {
                     result.Passage.Book = bkCandidates[0];
@@ -179,12 +151,12 @@ namespace PraiseBase.Presenter.Manager
             match = Regex.Match(needle, @"^(.*[a-z]) ([0-9]+)$", RegexOptions.IgnoreCase);
             if (match.Success)
             {
-                List<BibleBook> bkCandidates = SearchBookCandiates(bible, match.Groups[1].Value);
+                var bkCandidates = SearchBookCandiates(bible, match.Groups[1].Value);
                 if (bkCandidates.Count == 1)
                 {
                     result.Passage.Book = bkCandidates[0];
 
-                    int chapterNumber = int.Parse(match.Groups[2].Value);
+                    var chapterNumber = int.Parse(match.Groups[2].Value);
                     if (chapterNumber > 0 && chapterNumber <= result.Passage.Book.Chapters.Count)
                     {
                         result.Passage.Chapter = result.Passage.Book.Chapters[chapterNumber - 1];
@@ -206,17 +178,17 @@ namespace PraiseBase.Presenter.Manager
             match = Regex.Match(needle, @"^(.*[a-z]) ([0-9]+),([0-9]+)$", RegexOptions.IgnoreCase);
             if (match.Success)
             {
-                List<BibleBook> bkCandidates = SearchBookCandiates(bible, match.Groups[1].Value);
+                var bkCandidates = SearchBookCandiates(bible, match.Groups[1].Value);
                 if (bkCandidates.Count == 1)
                 {
                     result.Passage.Book = bkCandidates[0];
 
-                    int chapterNumber = int.Parse(match.Groups[2].Value);
+                    var chapterNumber = int.Parse(match.Groups[2].Value);
                     if (chapterNumber > 0 && chapterNumber <= result.Passage.Book.Chapters.Count)
                     {
                         result.Passage.Chapter = result.Passage.Book.Chapters[chapterNumber - 1];
 
-                        int verseNumber = int.Parse(match.Groups[3].Value);
+                        var verseNumber = int.Parse(match.Groups[3].Value);
                         if (verseNumber > 0 && verseNumber <= result.Passage.Chapter.Verses.Count)
                         {
                             result.Passage.Verse = result.Passage.Chapter.Verses[verseNumber - 1];
@@ -240,6 +212,33 @@ namespace PraiseBase.Presenter.Manager
             }
 
             return result;
+        }
+
+        /// <summary>
+        ///     Song item structure
+        /// </summary>
+        public struct BibleItem
+        {
+            public Bible Bible { get; set; }
+            public string Filename { get; set; }
+
+            public override string ToString()
+            {
+                return Bible.Title;
+            }
+        }
+
+        public struct BiblePassageSearchResult
+        {
+            public BiblePassage Passage { get; set; }
+            public BiblePassageSearchStatus Status { get; set; }
+        }
+
+        public class BiblePassage
+        {
+            public BibleBook Book { get; set; }
+            public BibleChapter Chapter { get; set; }
+            public BibleVerse Verse { get; set; }
         }
     }
 }

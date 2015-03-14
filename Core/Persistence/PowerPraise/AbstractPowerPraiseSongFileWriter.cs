@@ -29,28 +29,33 @@ namespace PraiseBase.Presenter.Persistence.PowerPraise
 {
     public abstract class AbstractPowerPraiseSongFileWriter<T> : ISongFileWriter<T> where T : ISongFile
     {
-        public string GetFileExtension() { return ".ppl"; }
-
-        public string GetFileTypeDescription() { return "PowerPraise Lied"; }
-
         protected const string SupportedFileFormatVersion = "3.0";
-
         protected const string XmlRootNodeName = "ppl";
 
+        public string GetFileExtension()
+        {
+            return ".ppl";
+        }
+
+        public string GetFileTypeDescription()
+        {
+            return "PowerPraise Lied";
+        }
+
+        public abstract void Save(string filename, T sng);
+
         /// <summary>
-        /// Parses additional fields (hook)
+        ///     Parses additional fields (hook)
         /// </summary>
         /// <param name="xmlRoot"></param>
         /// <param name="sng"></param>
         protected abstract void writeAdditionalFields(XmlDocument xmlDoc, XmlElement xmlRoot, PowerPraiseSong sng);
 
-        public abstract void Save(string filename, T sng);
-        
         public void Write(string filename, PowerPraiseSong sng)
         {
-            XmlWriterHelper xml = new XmlWriterHelper(XmlRootNodeName, SupportedFileFormatVersion);
-            XmlElement xmlRoot = xml.Root;
-            XmlDocument xmlDoc = xml.Doc;
+            var xml = new XmlWriterHelper(XmlRootNodeName, SupportedFileFormatVersion);
+            var xmlRoot = xml.Root;
+            var xmlDoc = xml.Doc;
 
             xmlRoot.AppendChild(xmlDoc.CreateElement("general"));
 
@@ -60,19 +65,23 @@ namespace PraiseBase.Presenter.Persistence.PowerPraise
 
             // Category
             xmlRoot["general"].AppendChild(xmlDoc.CreateElement("category"));
-            xmlRoot["general"]["category"].InnerText = !String.IsNullOrEmpty(sng.Category) ? sng.Category : PowerPraiseConstants.NoCategory;
+            xmlRoot["general"]["category"].InnerText = !String.IsNullOrEmpty(sng.Category)
+                ? sng.Category
+                : PowerPraiseConstants.NoCategory;
 
             // Language
             xmlRoot["general"].AppendChild(xmlDoc.CreateElement("language"));
-            xmlRoot["general"]["language"].InnerText = !String.IsNullOrEmpty(sng.Language) ? sng.Language : PowerPraiseConstants.Language;
+            xmlRoot["general"]["language"].InnerText = !String.IsNullOrEmpty(sng.Language)
+                ? sng.Language
+                : PowerPraiseConstants.Language;
 
             // Write additional fields
             writeAdditionalFields(xmlDoc, xmlRoot, sng);
 
             xmlRoot.AppendChild(xmlDoc.CreateElement("songtext"));
 
-            List<string> usedImages = new List<string>();
-            int numBackgrounds = sng.BackgroundImages.Count;
+            var usedImages = new List<string>();
+            var numBackgrounds = sng.BackgroundImages.Count;
             if (numBackgrounds == 0)
             {
                 sng.BackgroundImages.Add(PowerPraiseConstants.DefaultBackground);
@@ -80,40 +89,40 @@ namespace PraiseBase.Presenter.Persistence.PowerPraise
             }
 
             // Song parts
-            foreach (PowerPraiseSongPart prt in sng.Parts)
+            foreach (var prt in sng.Parts)
             {
-                XmlElement tn = xmlDoc.CreateElement("part");
+                var tn = xmlDoc.CreateElement("part");
 
                 // Caption
                 tn.SetAttribute("caption", prt.Caption);
 
-                foreach (PowerPraiseSongSlide sld in prt.Slides)
+                foreach (var sld in prt.Slides)
                 {
-                    XmlElement tn2 = xmlDoc.CreateElement("slide");
+                    var tn2 = xmlDoc.CreateElement("slide");
 
                     // Slide-specific text size
-                    int mainsize = sld.MainSize > 0 ? sld.MainSize : (int)sng.MainTextFontFormatting.Font.Size;
+                    var mainsize = sld.MainSize > 0 ? sld.MainSize : (int) sng.MainTextFontFormatting.Font.Size;
                     tn2.SetAttribute("mainsize", mainsize.ToString());
 
                     // Image number
                     sld.BackgroundNr = Math.Min(numBackgrounds - 1, Math.Max(0, sld.BackgroundNr));
                     tn2.SetAttribute("backgroundnr", (sld.BackgroundNr).ToString());
-                    String img = sng.BackgroundImages[sld.BackgroundNr];
+                    var img = sng.BackgroundImages[sld.BackgroundNr];
                     if (!usedImages.Contains(img))
                     {
                         usedImages.Add(img);
                     }
 
                     // Lyrics
-                    foreach (string ln in sld.Lines)
+                    foreach (var ln in sld.Lines)
                     {
-                        XmlElement tn3 = xmlDoc.CreateElement("line");
+                        var tn3 = xmlDoc.CreateElement("line");
                         tn3.InnerText = ln;
                         tn2.AppendChild(tn3);
                     }
-                    foreach (string ln in sld.Translation)
+                    foreach (var ln in sld.Translation)
                     {
-                        XmlElement tn3 = xmlDoc.CreateElement("translation");
+                        var tn3 = xmlDoc.CreateElement("translation");
                         tn3.InnerText = ln;
                         tn2.AppendChild(tn3);
                     }
@@ -124,9 +133,9 @@ namespace PraiseBase.Presenter.Persistence.PowerPraise
 
             // Order
             xmlRoot.AppendChild(xmlDoc.CreateElement("order"));
-            foreach (PowerPraiseSongPart prt in sng.Order)
+            foreach (var prt in sng.Order)
             {
-                XmlElement tn = xmlDoc.CreateElement("item");
+                var tn = xmlDoc.CreateElement("item");
                 tn.InnerText = prt.Caption;
                 xmlRoot["order"].AppendChild(tn);
             }
@@ -138,7 +147,7 @@ namespace PraiseBase.Presenter.Persistence.PowerPraise
 
             // Copyright position
             xmlRoot["information"]["copyright"].AppendChild(xmlDoc.CreateElement("position"));
-            String pos = "firstslide";
+            var pos = "firstslide";
             switch (sng.CopyrightTextPosition)
             {
                 case PowerPraiseSong.CopyrightPosition.FirstSlide:
@@ -157,9 +166,9 @@ namespace PraiseBase.Presenter.Persistence.PowerPraise
             xmlRoot["information"]["copyright"].AppendChild(xmlDoc.CreateElement("text"));
             if (sng.CopyrightText != null)
             {
-                foreach (String l in sng.CopyrightText)
+                foreach (var l in sng.CopyrightText)
                 {
-                    XmlNode n = xmlRoot["information"]["copyright"]["text"].AppendChild(xmlDoc.CreateElement("line"));
+                    var n = xmlRoot["information"]["copyright"]["text"].AppendChild(xmlDoc.CreateElement("line"));
                     n.InnerText = l;
                 }
             }
@@ -174,7 +183,9 @@ namespace PraiseBase.Presenter.Persistence.PowerPraise
             // Source text
             xmlRoot["information"]["source"].AppendChild(xmlDoc.CreateElement("text"));
             xmlRoot["information"]["source"]["text"].AppendChild(xmlDoc.CreateElement("line"));
-            xmlRoot["information"]["source"]["text"]["line"].InnerText = !String.IsNullOrEmpty(sng.SourceText) ? sng.SourceText : null;
+            xmlRoot["information"]["source"]["text"]["line"].InnerText = !String.IsNullOrEmpty(sng.SourceText)
+                ? sng.SourceText
+                : null;
 
             xmlRoot.AppendChild(xmlDoc.CreateElement("formatting"));
             xmlRoot["formatting"].AppendChild(xmlDoc.CreateElement("font"));
@@ -188,24 +199,31 @@ namespace PraiseBase.Presenter.Persistence.PowerPraise
             // Outline
             xmlRoot["formatting"]["font"].AppendChild(xmlDoc.CreateElement("outline"));
             xmlRoot["formatting"]["font"]["outline"].AppendChild(xmlDoc.CreateElement("enabled"));
-            xmlRoot["formatting"]["font"]["outline"]["enabled"].InnerText = sng.TextOutlineFormatting.Enabled ? "true" : "false";
+            xmlRoot["formatting"]["font"]["outline"]["enabled"].InnerText = sng.TextOutlineFormatting.Enabled
+                ? "true"
+                : "false";
             xmlRoot["formatting"]["font"]["outline"].AppendChild(xmlDoc.CreateElement("color"));
-            xmlRoot["formatting"]["font"]["outline"]["color"].InnerText = PowerPraiseFileUtil.ConvertColor(sng.TextOutlineFormatting.Color).ToString();
+            xmlRoot["formatting"]["font"]["outline"]["color"].InnerText =
+                PowerPraiseFileUtil.ConvertColor(sng.TextOutlineFormatting.Color).ToString();
 
             // Shadow
             xmlRoot["formatting"]["font"].AppendChild(xmlDoc.CreateElement("shadow"));
             xmlRoot["formatting"]["font"]["shadow"].AppendChild(xmlDoc.CreateElement("enabled"));
-            xmlRoot["formatting"]["font"]["shadow"]["enabled"].InnerText = sng.TextShadowFormatting.Enabled ? "true" : "false";
+            xmlRoot["formatting"]["font"]["shadow"]["enabled"].InnerText = sng.TextShadowFormatting.Enabled
+                ? "true"
+                : "false";
             xmlRoot["formatting"]["font"]["shadow"].AppendChild(xmlDoc.CreateElement("color"));
-            xmlRoot["formatting"]["font"]["shadow"]["color"].InnerText = PowerPraiseFileUtil.ConvertColor(sng.TextShadowFormatting.Color).ToString();
+            xmlRoot["formatting"]["font"]["shadow"]["color"].InnerText =
+                PowerPraiseFileUtil.ConvertColor(sng.TextShadowFormatting.Color).ToString();
             xmlRoot["formatting"]["font"]["shadow"].AppendChild(xmlDoc.CreateElement("direction"));
-            xmlRoot["formatting"]["font"]["shadow"]["direction"].InnerText = sng.TextShadowFormatting.Direction.ToString();
+            xmlRoot["formatting"]["font"]["shadow"]["direction"].InnerText =
+                sng.TextShadowFormatting.Direction.ToString();
 
             // Backgrounds
             xmlRoot["formatting"].AppendChild(xmlDoc.CreateElement("background"));
-            foreach (string imp in usedImages)
+            foreach (var imp in usedImages)
             {
-                XmlElement tn = xmlDoc.CreateElement("file");
+                var tn = xmlDoc.CreateElement("file");
                 tn.InnerText = imp;
                 xmlRoot["formatting"]["background"].AppendChild(tn);
             }
@@ -214,8 +232,11 @@ namespace PraiseBase.Presenter.Persistence.PowerPraise
             xmlRoot["formatting"].AppendChild(xmlDoc.CreateElement("linespacing"));
             xmlRoot["formatting"]["linespacing"].AppendChild(xmlDoc.CreateElement("main"));
             xmlRoot["formatting"]["linespacing"].AppendChild(xmlDoc.CreateElement("translation"));
-            xmlRoot["formatting"]["linespacing"]["main"].InnerText = (sng.MainLineSpacing > 0 ? sng.MainLineSpacing : PowerPraiseConstants.MainLineSpacing).ToString();
-            xmlRoot["formatting"]["linespacing"]["translation"].InnerText = (sng.MainLineSpacing > 0 ? sng.TranslationLineSpacing : PowerPraiseConstants.TranslationLineSpacing).ToString();
+            xmlRoot["formatting"]["linespacing"]["main"].InnerText =
+                (sng.MainLineSpacing > 0 ? sng.MainLineSpacing : PowerPraiseConstants.MainLineSpacing).ToString();
+            xmlRoot["formatting"]["linespacing"]["translation"].InnerText =
+                (sng.MainLineSpacing > 0 ? sng.TranslationLineSpacing : PowerPraiseConstants.TranslationLineSpacing)
+                    .ToString();
 
             // Orientation
             xmlRoot["formatting"].AppendChild(xmlDoc.CreateElement("textorientation"));
@@ -280,7 +301,7 @@ namespace PraiseBase.Presenter.Persistence.PowerPraise
             elem[key].AppendChild(xmlDoc.CreateElement("name"));
             elem[key]["name"].InnerText = f.Font.Name;
             elem[key].AppendChild(xmlDoc.CreateElement("size"));
-            elem[key]["size"].InnerText = ((int)f.Font.Size).ToString();
+            elem[key]["size"].InnerText = ((int) f.Font.Size).ToString();
             elem[key].AppendChild(xmlDoc.CreateElement("bold"));
             elem[key]["bold"].InnerText = (f.Font.Bold).ToString().ToLower();
             elem[key].AppendChild(xmlDoc.CreateElement("italic"));
@@ -292,6 +313,5 @@ namespace PraiseBase.Presenter.Persistence.PowerPraise
             elem[key].AppendChild(xmlDoc.CreateElement("shadow"));
             elem[key]["shadow"].InnerText = f.ShadowDistance.ToString();
         }
-
     }
 }

@@ -4,30 +4,40 @@ using System.Runtime.Serialization;
 
 namespace PraiseBase.Presenter.Model.Song
 {
-    [Serializable()]
+    [Serializable]
     public class ColorBackground : IBackground
     {
         /// <summary>
-        /// The color
-        /// </summary>
-        public Color Color { get; set; }
-
-        /// <summary>
-        /// Constructor
+        ///     Constructor
         /// </summary>
         /// <param name="color">Color</param>
         public ColorBackground(Color color)
         {
-            this.Color = color;
+            Color = color;
         }
 
         /// <summary>
-        /// Clone method
+        ///     The color
+        /// </summary>
+        public Color Color { get; set; }
+
+        /// <summary>
+        ///     Clone method
         /// </summary>
         /// <returns></returns>
         public object Clone()
         {
             return new ColorBackground(Color);
+        }
+
+        /// <summary>
+        ///     Gets the object data for serialization
+        /// </summary>
+        /// <param name="info"></param>
+        /// <param name="context"></param>
+        public void GetObjectData(SerializationInfo info, StreamingContext context)
+        {
+            info.AddValue("Color", Color);
         }
 
         public override int GetHashCode()
@@ -37,17 +47,7 @@ namespace PraiseBase.Presenter.Model.Song
 
         public override bool Equals(object obj)
         {
-            return GetType() == obj.GetType() && Color.Equals(((ColorBackground)obj).Color);
-        }
-
-        /// <summary>
-        /// Gets the object data for serialization
-        /// </summary>
-        /// <param name="info"></param>
-        /// <param name="context"></param>
-        public void GetObjectData(SerializationInfo info, StreamingContext context)
-        {
-            info.AddValue("Color", this.Color);
+            return GetType() == obj.GetType() && Color.Equals(((ColorBackground) obj).Color);
         }
     }
 }

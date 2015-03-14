@@ -3,30 +3,40 @@ using System.Runtime.Serialization;
 
 namespace PraiseBase.Presenter.Model.Song
 {
-    [Serializable()]
+    [Serializable]
     public class ImageBackground : IBackground
     {
         /// <summary>
-        /// The image path relative to the backgrounds directory
-        /// </summary>
-        public string ImagePath { get; set; }
-
-        /// <summary>
-        /// Constructor
+        ///     Constructor
         /// </summary>
         /// <param name="imagePath">Image path</param>
         public ImageBackground(string imagePath)
         {
-            this.ImagePath = imagePath;
+            ImagePath = imagePath;
         }
 
         /// <summary>
-        /// Clone method
+        ///     The image path relative to the backgrounds directory
+        /// </summary>
+        public string ImagePath { get; set; }
+
+        /// <summary>
+        ///     Clone method
         /// </summary>
         /// <returns></returns>
         public object Clone()
         {
             return new ImageBackground(ImagePath);
+        }
+
+        /// <summary>
+        ///     Gets the object data for serialization
+        /// </summary>
+        /// <param name="info"></param>
+        /// <param name="context"></param>
+        public void GetObjectData(SerializationInfo info, StreamingContext context)
+        {
+            info.AddValue("ImagePath", ImagePath);
         }
 
         public override int GetHashCode()
@@ -36,17 +46,7 @@ namespace PraiseBase.Presenter.Model.Song
 
         public override bool Equals(object obj)
         {
-            return GetType() == obj.GetType() && ImagePath.Equals(((ImageBackground)obj).ImagePath);
-        }
-
-        /// <summary>
-        /// Gets the object data for serialization
-        /// </summary>
-        /// <param name="info"></param>
-        /// <param name="context"></param>
-        public void GetObjectData(SerializationInfo info, StreamingContext context)
-        {
-            info.AddValue("ImagePath", this.ImagePath);
+            return GetType() == obj.GetType() && ImagePath.Equals(((ImageBackground) obj).ImagePath);
         }
     }
 }

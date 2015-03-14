@@ -31,66 +31,11 @@ namespace PraiseBase.Presenter.Manager
 {
     public class ImageManager
     {
-        /// <summary>
-        /// Default size for new images
-        /// </summary>
-        public Size DefaultImageSize { get; set; }
-
-        /// <summary>
-        /// Default thumbnail size
-        /// </summary>
-        public Size DefaultThumbSize { get; set; }
-
-        /// <summary>
-        /// Default image color for empty images
-        /// </summary>
-        public Color DefaultEmptyColor { get; set; }
-
-        /// <summary>
-        /// Base path to the image directory
-        /// </summary>
-        public string ImageDirPath { get; protected set; }
-
-        /// <summary>
-        /// Base path to the thumbnails directory
-        /// </summary>
-        public string ThumbDirPath { get; protected set; }
-
         private const string ExcludeThumbDirName = "[Thumbnails]";
-        
-        private readonly string[] _imgExtensions = { "*.jpg" };
-
-        #region Events
-
-        public delegate void ThumbnailCreate(ThumbnailCreateEventArgs e);
-
-        public event ThumbnailCreate ThumbnailCreated;
-
-        public class ThumbnailCreateEventArgs : EventArgs
-        {
-            public int Number { get; set; }
-
-            public int Total { get; set; }
-
-            public ThumbnailCreateEventArgs(int number, int total)
-            {
-                Number = number;
-                Total = total;
-            }
-        }
-
-        protected virtual void OnThumbnailCreated(ThumbnailCreateEventArgs e)
-        {
-            if (ThumbnailCreated != null)
-            {
-                ThumbnailCreated(e);
-            }
-        }
-
-        #endregion Events
+        private readonly string[] _imgExtensions = {"*.jpg"};
 
         /// <summary>
-        /// Private constructor
+        ///     Private constructor
         /// </summary>
         public ImageManager(String imageDirPath, String thumbDirPath)
         {
@@ -103,8 +48,8 @@ namespace PraiseBase.Presenter.Manager
             ThumbDirPath = thumbDirPath;
             if (!Directory.Exists(ThumbDirPath))
             {
-                DirectoryInfo di = Directory.CreateDirectory(ThumbDirPath);
-                di.Attributes = FileAttributes.Directory | FileAttributes.Hidden; 
+                var di = Directory.CreateDirectory(ThumbDirPath);
+                di.Attributes = FileAttributes.Directory | FileAttributes.Hidden;
             }
 
             DefaultThumbSize = new Size(80, 60);
@@ -112,21 +57,46 @@ namespace PraiseBase.Presenter.Manager
         }
 
         /// <summary>
-        /// Check and create thumbnails if necessary
+        ///     Default size for new images
+        /// </summary>
+        public Size DefaultImageSize { get; set; }
+
+        /// <summary>
+        ///     Default thumbnail size
+        /// </summary>
+        public Size DefaultThumbSize { get; set; }
+
+        /// <summary>
+        ///     Default image color for empty images
+        /// </summary>
+        public Color DefaultEmptyColor { get; set; }
+
+        /// <summary>
+        ///     Base path to the image directory
+        /// </summary>
+        public string ImageDirPath { get; protected set; }
+
+        /// <summary>
+        ///     Base path to the thumbnails directory
+        /// </summary>
+        public string ThumbDirPath { get; protected set; }
+
+        /// <summary>
+        ///     Check and create thumbnails if necessary
         /// </summary>
         public void CheckThumbs()
         {
-            List<string> missingThumbsSrc = new List<string>();
-            List<string> missingThumbsTrg = new List<string>();
-            foreach (string ext in _imgExtensions)
+            var missingThumbsSrc = new List<string>();
+            var missingThumbsTrg = new List<string>();
+            foreach (var ext in _imgExtensions)
             {
-                string[] paths = Directory.GetFiles(ImageDirPath, ext, SearchOption.AllDirectories);
-                foreach (string file in paths)
+                var paths = Directory.GetFiles(ImageDirPath, ext, SearchOption.AllDirectories);
+                foreach (var file in paths)
                 {
                     if (!file.Contains(ExcludeThumbDirName) && !file.StartsWith(ThumbDirPath))
                     {
-                        string relativePath = file.Substring((ImageDirPath + Path.DirectorySeparatorChar).Length);
-                        string thumbPath = ThumbDirPath + Path.DirectorySeparatorChar + relativePath;
+                        var relativePath = file.Substring((ImageDirPath + Path.DirectorySeparatorChar).Length);
+                        var thumbPath = ThumbDirPath + Path.DirectorySeparatorChar + relativePath;
                         if (!File.Exists(thumbPath))
                         {
                             missingThumbsSrc.Add(file);
@@ -136,15 +106,15 @@ namespace PraiseBase.Presenter.Manager
                 }
             }
 
-            int cnt = missingThumbsSrc.Count;
+            var cnt = missingThumbsSrc.Count;
             if (cnt > 0)
             {
-                for (int i = 0; i < cnt; i++)
+                for (var i = 0; i < cnt; i++)
                 {
                     ImageUtils.createThumb(missingThumbsSrc[i], missingThumbsTrg[i], DefaultThumbSize);
-                    if (i % 10 == 0)
+                    if (i%10 == 0)
                     {
-                        ThumbnailCreateEventArgs e = new ThumbnailCreateEventArgs(i, cnt);
+                        var e = new ThumbnailCreateEventArgs(i, cnt);
                         OnThumbnailCreated(e);
                     }
                 }
@@ -177,15 +147,12 @@ namespace PraiseBase.Presenter.Manager
             }
             try
             {
-                Image img = GetImageFromRelPath(path);
+                var img = GetImageFromRelPath(path);
                 if (img != null)
                 {
                     return img;
                 }
-                else
-                {
-                    throw new Exception("Das Bild " + path + " existiert nicht!");
-                }
+                throw new Exception("Das Bild " + path + " existiert nicht!");
             }
             catch (Exception e)
             {
@@ -198,13 +165,13 @@ namespace PraiseBase.Presenter.Manager
         {
             if (bg != null)
             {
-                if (bg.GetType() == typeof(ImageBackground))
+                if (bg.GetType() == typeof (ImageBackground))
                 {
-                    return GetImage(((ImageBackground)bg).ImagePath);
+                    return GetImage(((ImageBackground) bg).ImagePath);
                 }
-                else if (bg.GetType() == typeof(ColorBackground))
+                if (bg.GetType() == typeof (ColorBackground))
                 {
-                    return ImageUtils.getEmptyImage(DefaultImageSize, ((ColorBackground)bg).Color);
+                    return ImageUtils.getEmptyImage(DefaultImageSize, ((ColorBackground) bg).Color);
                 }
             }
             return null;
@@ -214,39 +181,40 @@ namespace PraiseBase.Presenter.Manager
         {
             if (bg != null)
             {
-                if (bg.GetType() == typeof(ImageBackground))
+                if (bg.GetType() == typeof (ImageBackground))
                 {
-                    Image img = GetThumbFromRelPath(((ImageBackground)bg).ImagePath);
+                    var img = GetThumbFromRelPath(((ImageBackground) bg).ImagePath);
                     if (img != null)
                     {
                         return img;
                     }
                 }
-                else if (bg.GetType() == typeof(ColorBackground))
+                else if (bg.GetType() == typeof (ColorBackground))
                 {
-                    return ImageUtils.getEmptyImage(DefaultThumbSize, ((ColorBackground)bg).Color);
+                    return ImageUtils.getEmptyImage(DefaultThumbSize, ((ColorBackground) bg).Color);
                 }
             }
             return ImageUtils.getEmptyImage(DefaultThumbSize, DefaultEmptyColor);
         }
 
         /// <summary>
-        /// Searches images and returns their relative paths
+        ///     Searches images and returns their relative paths
         /// </summary>
         /// <param name="needle"></param>
         /// <returns></returns>
-        public List<string> SearchImages(string needle) {
-            List<string> results = new List<string>();
-            string rootDir = ThumbDirPath + Path.DirectorySeparatorChar;
-            int rootDirStrLen = rootDir.Length;
+        public List<string> SearchImages(string needle)
+        {
+            var results = new List<string>();
+            var rootDir = ThumbDirPath + Path.DirectorySeparatorChar;
+            var rootDirStrLen = rootDir.Length;
             foreach (var ext in _imgExtensions)
             {
-                string[] imgFilePaths = Directory.GetFiles(rootDir, ext, SearchOption.AllDirectories);
-                foreach (string ims in imgFilePaths)
+                var imgFilePaths = Directory.GetFiles(rootDir, ext, SearchOption.AllDirectories);
+                foreach (var ims in imgFilePaths)
                 {
                     if (!ims.Contains(ExcludeThumbDirName) && !ims.StartsWith(ThumbDirPath))
                     {
-                        string haystack = Path.GetFileNameWithoutExtension(ims);
+                        var haystack = Path.GetFileNameWithoutExtension(ims);
                         if (haystack.ToLower().Contains(needle))
                         {
                             results.Add(ims.Substring(rootDirStrLen));
@@ -256,5 +224,33 @@ namespace PraiseBase.Presenter.Manager
             }
             return results;
         }
+
+        #region Events
+
+        public delegate void ThumbnailCreate(ThumbnailCreateEventArgs e);
+
+        public event ThumbnailCreate ThumbnailCreated;
+
+        public class ThumbnailCreateEventArgs : EventArgs
+        {
+            public ThumbnailCreateEventArgs(int number, int total)
+            {
+                Number = number;
+                Total = total;
+            }
+
+            public int Number { get; set; }
+            public int Total { get; set; }
+        }
+
+        protected virtual void OnThumbnailCreated(ThumbnailCreateEventArgs e)
+        {
+            if (ThumbnailCreated != null)
+            {
+                ThumbnailCreated(e);
+            }
+        }
+
+        #endregion Events
     }
 }

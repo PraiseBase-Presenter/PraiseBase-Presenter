@@ -27,14 +27,6 @@ namespace PraiseBase.Presenter.Model
 {
     public class TextShadow : ICloneable
     {
-        public int Distance { get; set; }
-
-        public int Size { get; set; }
-
-        public int Direction { get; set; }
-
-        public Color Color { get; set; }
-
         public TextShadow(int distance, int size, int direction, Color color)
         {
             Distance = distance;
@@ -43,9 +35,19 @@ namespace PraiseBase.Presenter.Model
             Color = color;
         }
 
+        public int Distance { get; set; }
+        public int Size { get; set; }
+        public int Direction { get; set; }
+        public Color Color { get; set; }
+
+        public object Clone()
+        {
+            return new TextShadow(Distance, Size, Direction, Color);
+        }
+
         /// <summary>
-        /// Returns a hashcode of the text formatting object, used for example in the
-        /// editor to check if the file was changed
+        ///     Returns a hashcode of the text formatting object, used for example in the
+        ///     editor to check if the file was changed
         /// </summary>
         /// <returns></returns>
         public override int GetHashCode()
@@ -62,20 +64,16 @@ namespace PraiseBase.Presenter.Model
 
         protected bool Equals(TextShadow other)
         {
-            return Distance == other.Distance && Size == other.Size && Direction == other.Direction && Color.Equals(other.Color);
+            return Distance == other.Distance && Size == other.Size && Direction == other.Direction &&
+                   Color.Equals(other.Color);
         }
 
         public override bool Equals(object obj)
         {
             if (ReferenceEquals(null, obj)) return false;
             if (ReferenceEquals(this, obj)) return true;
-            if (obj.GetType() != this.GetType()) return false;
+            if (obj.GetType() != GetType()) return false;
             return Equals((TextShadow) obj);
-        }
-
-        public object Clone()
-        {
-            return new TextShadow(Distance, Size, Direction, Color);
         }
     }
 }

@@ -5,6 +5,5 @@ namespace PraiseBase.Presenter.Model.Song
 {
     public interface IBackground : ICloneable, ISerializable
     {
-
     }
 }

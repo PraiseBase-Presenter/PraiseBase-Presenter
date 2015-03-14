@@ -28,193 +28,13 @@ using System.Runtime.Serialization;
 namespace PraiseBase.Presenter.Model.Song
 {
     /// <summary>
-    /// Keeps and manages all song related data loaded form an xml file
+    ///     Keeps and manages all song related data loaded form an xml file
     /// </summary>
-    [Serializable()]
+    [Serializable]
     public class Song : ISerializable
     {
-        #region Fields
-
         /// <summary>
-        /// Unique identifier of this song
-        /// </summary>
-        public Guid Guid { get; set; }
-
-        /// <summary>
-        /// Timestamp when the song has been last modified
-        /// </summary>
-        public string ModifiedTimestamp { get; set; }
-
-        /// <summary>
-        /// Application the song was created in
-        /// </summary>
-        public string CreatedIn { get; set; }
-
-        /// <summary>
-        /// Application the song was modified in
-        /// </summary>
-        public string ModifiedIn { get; set; }
-
-        /// <summary>
-        /// Gets or sets the song title. Usually the same as the file name
-        /// </summary>
-        public string Title { get; set; }
-
-        /// <summary>
-        /// Gets or sets the main language of the song
-        /// </summary>
-        public string Language { get; set; }
-
-        /// <summary>
-        /// CCLI Song ID
-        /// </summary>
-        public string CcliIdentifier { get; set; }
-
-        /// <summary>
-        /// Should the CCLI ID be readonly?
-        /// </summary>
-        public bool IsCCliIdentifierReadonly { get; set; }
-
-        /// <summary>
-        /// Copyright information
-        /// </summary>
-        public string Copyright { get; set; }
-
-        /// <summary>
-        /// Copyright position (PowerPraise)
-        /// </summary>
-        public AdditionalInformationPosition CopyrightPosition { get; set; }
-
-        /// <summary>
-        /// Source position (PowerPraise)
-        /// </summary>
-        public AdditionalInformationPosition SourcePosition { get; set; }
-
-        /// <summary>
-        /// Release year
-        /// </summary>
-        public string ReleaseYear { get; set; }
-
-        /// <summary>
-        /// Authors of the song
-        /// </summary>
-        public SongAuthors Author { get; set; }
-
-        /// <summary>
-        /// Admin
-        /// </summary>
-        public string RightsManagement { get; set; }
-
-        /// <summary>
-        /// Publisher
-        /// </summary>
-        public string Publisher { get; set; }
-
-        /// <summary>
-        /// Version
-        /// </summary>
-        public string Version { get; set; }
-
-        /// <summary>
-        /// Key
-        /// </summary>
-        public string Key { get; set; }
-
-        /// <summary>
-        /// Transposition
-        /// </summary>
-        public int Transposition { get; set; }
-
-        /// <summary>
-        /// Tempo
-        /// </summary>
-        public SongTempo Tempo { get; set; }
-
-        /// <summary>
-        /// Variant
-        /// </summary>
-        public string Variant { get; set; }
-
-        /// <summary>
-        /// Gets or sets a list of tags (like categories) which describe the type of the song
-        /// </summary>
-        public TagList Themes { get; set; }
-
-        /// <summary>
-        /// Gets or sets a user defined comment for quality assurance information or presentation issues
-        /// </summary>
-        public string Comment { get; set; }
-
-        /// <summary>
-        /// Songbooks the song appears in
-        /// </summary>
-        public SongBooks SongBooks { get; set; }
-
-        /// <summary>
-        /// Gets or sets the list of all parts in the song
-        /// </summary>
-        public SongPartList Parts { get; set; }
-
-        /// <summary>
-        /// Gets or sets a sequence of part numbers indicating
-        /// the real order in which the song is sung
-        /// </summary>
-        public PartSequences PartSequence { get; set; }
-
-        /// <summary>
-        /// Quality assurance indicators
-        /// </summary>
-        public QualityIssues QualityIssues { get; set; }
-
-        /// <summary>
-        /// Gets or sets the text font and color for the main text
-        /// </summary>
-        public TextFormatting MainText { get; set; }
-
-        /// <summary>
-        /// Gets or sets the font of tanslation text
-        /// </summary>
-        public TextFormatting TranslationText { get; set; }
-
-        /// <summary>
-        /// Gets or sets the font for the copyright text
-        /// </summary>
-        public TextFormatting CopyrightText { get; set; }
-
-        /// <summary>
-        /// Gets or sets the font for the source text
-        /// </summary>
-        public TextFormatting SourceText { get; set; }
-
-        /// <summary>
-        /// Text orientation
-        /// </summary>
-        public TextOrientation TextOrientation { get; set; }
-
-        /// <summary>
-        /// Position of the translation text
-        /// </summary>
-        public TranslationPosition TranslationPosition { get; set; }
-
-        /// <summary>
-        /// True of the text should be outlined
-        /// </summary>
-        public bool TextOutlineEnabled { get; set; }
-
-        /// <summary>
-        /// True if the text should have a shadow
-        /// </summary>
-        public bool TextShadowEnabled { get; set; }
-
-        /// <summary>
-        /// Text borders (used by PowerPraise)
-        /// </summary>
-        public SongTextBorders TextBorders { get; set; }
-
-        #endregion Fields
-
-        /// <summary>
-        /// The song constructor
+        ///     The song constructor
         /// </summary>
         public Song()
         {
@@ -228,15 +48,38 @@ namespace PraiseBase.Presenter.Model.Song
         }
 
         /// <summary>
-        /// Returns the number of background images
+        ///     Serialize song object
         /// </summary>
-        public int GetNumberOfBackgroundImages()
+        /// <param name="info"></param>
+        /// <param name="context"></param>
+        public void GetObjectData(SerializationInfo info, StreamingContext context)
         {
-            return Parts.SelectMany(t => t.Slides).Count(t1 => t1.Background != null && t1.Background.GetType() == typeof (ImageBackground));
+            info.AddValue("Parts", Parts);
+            info.AddValue("Title", Title);
+            info.AddValue("QualityIssues", QualityIssues);
+            info.AddValue("MainText", MainText.ToString());
+            info.AddValue("TranslationText", TranslationText.ToString());
+            info.AddValue("CopyrightText", CopyrightText.ToString());
+            info.AddValue("SourceText", SourceText.ToString());
+            info.AddValue("Language", Language);
+            info.AddValue("Comment", Comment);
+            info.AddValue("Tags", Themes);
+            info.AddValue("CcliID", CcliIdentifier);
+            info.AddValue("Copyright", Copyright);
         }
 
         /// <summary>
-        /// Returns true if any slide has a translation
+        ///     Returns the number of background images
+        /// </summary>
+        public int GetNumberOfBackgroundImages()
+        {
+            return
+                Parts.SelectMany(t => t.Slides)
+                    .Count(t1 => t1.Background != null && t1.Background.GetType() == typeof (ImageBackground));
+        }
+
+        /// <summary>
+        ///     Returns true if any slide has a translation
         /// </summary>
         /// <returns></returns>
         public bool HasTranslation()
@@ -245,8 +88,8 @@ namespace PraiseBase.Presenter.Model.Song
         }
 
         /// <summary>
-        /// Returns a hashcode of the song, used for example in the
-        /// editor to check if the file was changed
+        ///     Returns a hashcode of the song, used for example in the
+        ///     editor to check if the file was changed
         /// </summary>
         /// <returns></returns>
         [SuppressMessage("ReSharper", "FunctionComplexityOverflow")]
@@ -294,7 +137,25 @@ namespace PraiseBase.Presenter.Model.Song
 
         protected bool Equals(Song other)
         {
-            return string.Equals(ModifiedTimestamp, other.ModifiedTimestamp) && string.Equals(CreatedIn, other.CreatedIn) && string.Equals(ModifiedIn, other.ModifiedIn) && string.Equals(Title, other.Title) && string.Equals(Language, other.Language) && string.Equals(CcliIdentifier, other.CcliIdentifier) && IsCCliIdentifierReadonly.Equals(other.IsCCliIdentifierReadonly) && string.Equals(Copyright, other.Copyright) && CopyrightPosition == other.CopyrightPosition && SourcePosition == other.SourcePosition && string.Equals(ReleaseYear, other.ReleaseYear) && Equals(Author, other.Author) && string.Equals(RightsManagement, other.RightsManagement) && string.Equals(Publisher, other.Publisher) && string.Equals(Version, other.Version) && string.Equals(Key, other.Key) && Transposition == other.Transposition && Equals(Tempo, other.Tempo) && string.Equals(Variant, other.Variant) && Equals(Themes, other.Themes) && string.Equals(Comment, other.Comment) && Equals(SongBooks, other.SongBooks) && Equals(Parts, other.Parts) && Equals(PartSequence, other.PartSequence) && Equals(QualityIssues, other.QualityIssues) && Equals(MainText, other.MainText) && Equals(TranslationText, other.TranslationText) && Equals(CopyrightText, other.CopyrightText) && Equals(SourceText, other.SourceText) && Equals(TextOrientation, other.TextOrientation) && TranslationPosition == other.TranslationPosition && TextOutlineEnabled.Equals(other.TextOutlineEnabled) && TextShadowEnabled.Equals(other.TextShadowEnabled) && Equals(TextBorders, other.TextBorders);
+            return string.Equals(ModifiedTimestamp, other.ModifiedTimestamp) &&
+                   string.Equals(CreatedIn, other.CreatedIn) && string.Equals(ModifiedIn, other.ModifiedIn) &&
+                   string.Equals(Title, other.Title) && string.Equals(Language, other.Language) &&
+                   string.Equals(CcliIdentifier, other.CcliIdentifier) &&
+                   IsCCliIdentifierReadonly.Equals(other.IsCCliIdentifierReadonly) &&
+                   string.Equals(Copyright, other.Copyright) && CopyrightPosition == other.CopyrightPosition &&
+                   SourcePosition == other.SourcePosition && string.Equals(ReleaseYear, other.ReleaseYear) &&
+                   Equals(Author, other.Author) && string.Equals(RightsManagement, other.RightsManagement) &&
+                   string.Equals(Publisher, other.Publisher) && string.Equals(Version, other.Version) &&
+                   string.Equals(Key, other.Key) && Transposition == other.Transposition && Equals(Tempo, other.Tempo) &&
+                   string.Equals(Variant, other.Variant) && Equals(Themes, other.Themes) &&
+                   string.Equals(Comment, other.Comment) && Equals(SongBooks, other.SongBooks) &&
+                   Equals(Parts, other.Parts) && Equals(PartSequence, other.PartSequence) &&
+                   Equals(QualityIssues, other.QualityIssues) && Equals(MainText, other.MainText) &&
+                   Equals(TranslationText, other.TranslationText) && Equals(CopyrightText, other.CopyrightText) &&
+                   Equals(SourceText, other.SourceText) && Equals(TextOrientation, other.TextOrientation) &&
+                   TranslationPosition == other.TranslationPosition &&
+                   TextOutlineEnabled.Equals(other.TextOutlineEnabled) &&
+                   TextShadowEnabled.Equals(other.TextShadowEnabled) && Equals(TextBorders, other.TextBorders);
         }
 
         public override bool Equals(object obj)
@@ -305,25 +166,184 @@ namespace PraiseBase.Presenter.Model.Song
             return Equals((Song) obj);
         }
 
+        #region Fields
+
         /// <summary>
-        /// Serialize song object
+        ///     Unique identifier of this song
         /// </summary>
-        /// <param name="info"></param>
-        /// <param name="context"></param>
-        public void GetObjectData(SerializationInfo info, StreamingContext context)
-        {
-            info.AddValue("Parts", Parts);
-            info.AddValue("Title", Title);
-            info.AddValue("QualityIssues", QualityIssues);
-            info.AddValue("MainText", MainText.ToString());
-            info.AddValue("TranslationText", TranslationText.ToString());
-            info.AddValue("CopyrightText", CopyrightText.ToString());
-            info.AddValue("SourceText", SourceText.ToString());
-            info.AddValue("Language", Language);
-            info.AddValue("Comment", Comment);
-            info.AddValue("Tags", Themes);
-            info.AddValue("CcliID", CcliIdentifier);
-            info.AddValue("Copyright", Copyright);
-        }
+        public Guid Guid { get; set; }
+
+        /// <summary>
+        ///     Timestamp when the song has been last modified
+        /// </summary>
+        public string ModifiedTimestamp { get; set; }
+
+        /// <summary>
+        ///     Application the song was created in
+        /// </summary>
+        public string CreatedIn { get; set; }
+
+        /// <summary>
+        ///     Application the song was modified in
+        /// </summary>
+        public string ModifiedIn { get; set; }
+
+        /// <summary>
+        ///     Gets or sets the song title. Usually the same as the file name
+        /// </summary>
+        public string Title { get; set; }
+
+        /// <summary>
+        ///     Gets or sets the main language of the song
+        /// </summary>
+        public string Language { get; set; }
+
+        /// <summary>
+        ///     CCLI Song ID
+        /// </summary>
+        public string CcliIdentifier { get; set; }
+
+        /// <summary>
+        ///     Should the CCLI ID be readonly?
+        /// </summary>
+        public bool IsCCliIdentifierReadonly { get; set; }
+
+        /// <summary>
+        ///     Copyright information
+        /// </summary>
+        public string Copyright { get; set; }
+
+        /// <summary>
+        ///     Copyright position (PowerPraise)
+        /// </summary>
+        public AdditionalInformationPosition CopyrightPosition { get; set; }
+
+        /// <summary>
+        ///     Source position (PowerPraise)
+        /// </summary>
+        public AdditionalInformationPosition SourcePosition { get; set; }
+
+        /// <summary>
+        ///     Release year
+        /// </summary>
+        public string ReleaseYear { get; set; }
+
+        /// <summary>
+        ///     Authors of the song
+        /// </summary>
+        public SongAuthors Author { get; set; }
+
+        /// <summary>
+        ///     Admin
+        /// </summary>
+        public string RightsManagement { get; set; }
+
+        /// <summary>
+        ///     Publisher
+        /// </summary>
+        public string Publisher { get; set; }
+
+        /// <summary>
+        ///     Version
+        /// </summary>
+        public string Version { get; set; }
+
+        /// <summary>
+        ///     Key
+        /// </summary>
+        public string Key { get; set; }
+
+        /// <summary>
+        ///     Transposition
+        /// </summary>
+        public int Transposition { get; set; }
+
+        /// <summary>
+        ///     Tempo
+        /// </summary>
+        public SongTempo Tempo { get; set; }
+
+        /// <summary>
+        ///     Variant
+        /// </summary>
+        public string Variant { get; set; }
+
+        /// <summary>
+        ///     Gets or sets a list of tags (like categories) which describe the type of the song
+        /// </summary>
+        public TagList Themes { get; set; }
+
+        /// <summary>
+        ///     Gets or sets a user defined comment for quality assurance information or presentation issues
+        /// </summary>
+        public string Comment { get; set; }
+
+        /// <summary>
+        ///     Songbooks the song appears in
+        /// </summary>
+        public SongBooks SongBooks { get; set; }
+
+        /// <summary>
+        ///     Gets or sets the list of all parts in the song
+        /// </summary>
+        public SongPartList Parts { get; set; }
+
+        /// <summary>
+        ///     Gets or sets a sequence of part numbers indicating
+        ///     the real order in which the song is sung
+        /// </summary>
+        public PartSequences PartSequence { get; set; }
+
+        /// <summary>
+        ///     Quality assurance indicators
+        /// </summary>
+        public QualityIssues QualityIssues { get; set; }
+
+        /// <summary>
+        ///     Gets or sets the text font and color for the main text
+        /// </summary>
+        public TextFormatting MainText { get; set; }
+
+        /// <summary>
+        ///     Gets or sets the font of tanslation text
+        /// </summary>
+        public TextFormatting TranslationText { get; set; }
+
+        /// <summary>
+        ///     Gets or sets the font for the copyright text
+        /// </summary>
+        public TextFormatting CopyrightText { get; set; }
+
+        /// <summary>
+        ///     Gets or sets the font for the source text
+        /// </summary>
+        public TextFormatting SourceText { get; set; }
+
+        /// <summary>
+        ///     Text orientation
+        /// </summary>
+        public TextOrientation TextOrientation { get; set; }
+
+        /// <summary>
+        ///     Position of the translation text
+        /// </summary>
+        public TranslationPosition TranslationPosition { get; set; }
+
+        /// <summary>
+        ///     True of the text should be outlined
+        /// </summary>
+        public bool TextOutlineEnabled { get; set; }
+
+        /// <summary>
+        ///     True if the text should have a shadow
+        /// </summary>
+        public bool TextShadowEnabled { get; set; }
+
+        /// <summary>
+        ///     Text borders (used by PowerPraise)
+        /// </summary>
+        public SongTextBorders TextBorders { get; set; }
+
+        #endregion Fields
     }
 }

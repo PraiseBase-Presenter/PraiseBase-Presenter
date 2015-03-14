@@ -30,33 +30,26 @@ namespace PraiseBase.Presenter.Persistence.CCLI
     public class SongSelectFileReader : ISongFileReader<SongSelectFile>
     {
         protected const string SupportedFileFormatVersion = "3.0";
-
         protected const string TypeString = "SongSelect Import File";
-
-        private enum CcliSongFileSection {
-            NONE,
-            FILE,
-            CONTENT
-        }
 
         public SongSelectFile Load(string filename)
         {
-            SongSelectFile sng = new SongSelectFile();
-            
-            List<String> fields = new List<string>();
-            List<String> words = new List<string>();
+            var sng = new SongSelectFile();
 
-            CcliSongFileSection section = CcliSongFileSection.NONE;
+            var fields = new List<string>();
+            var words = new List<string>();
 
-            string[] lines = File.ReadAllLines(@filename);
-            foreach (string l in lines)
+            var section = CcliSongFileSection.NONE;
+
+            var lines = File.ReadAllLines(@filename);
+            foreach (var l in lines)
             {
-                string li = l.Trim();
-                string[] s = li.Split(new[] { "=" }, StringSplitOptions.None);
+                var li = l.Trim();
+                var s = li.Split(new[] {"="}, StringSplitOptions.None);
                 if (s.Length > 1)
                 {
-                    string k = s[0];
-                    string v = s[1];
+                    var k = s[0];
+                    var v = s[1];
 
                     if (section == CcliSongFileSection.CONTENT)
                     {
@@ -79,7 +72,7 @@ namespace PraiseBase.Presenter.Persistence.CCLI
                                 break;
 
                             case "Themes":
-                                foreach (var t in v.Split(new[] { "/t" }, StringSplitOptions.RemoveEmptyEntries))
+                                foreach (var t in v.Split(new[] {"/t"}, StringSplitOptions.RemoveEmptyEntries))
                                 {
                                     sng.Themes.Add(t.Trim());
                                 }
@@ -90,14 +83,14 @@ namespace PraiseBase.Presenter.Persistence.CCLI
                                 break;
 
                             case "Fields":
-                                foreach (var t in v.Split(new[] { "/t" }, StringSplitOptions.RemoveEmptyEntries))
+                                foreach (var t in v.Split(new[] {"/t"}, StringSplitOptions.RemoveEmptyEntries))
                                 {
                                     fields.Add(t);
                                 }
                                 break;
 
                             case "Words":
-                                foreach (var t in v.Split(new[] { "/t" }, StringSplitOptions.RemoveEmptyEntries))
+                                foreach (var t in v.Split(new[] {"/t"}, StringSplitOptions.RemoveEmptyEntries))
                                 {
                                     words.Add(t);
                                 }
@@ -113,7 +106,7 @@ namespace PraiseBase.Presenter.Persistence.CCLI
                     }
                     else
                     {
-                        Match m = Regex.Match(li, "^\\[S A([0-9]+)\\]$");
+                        var m = Regex.Match(li, "^\\[S A([0-9]+)\\]$");
                         if (m.Success)
                         {
                             sng.ID = m.Groups[1].Value;
@@ -128,11 +121,11 @@ namespace PraiseBase.Presenter.Persistence.CCLI
                 throw new IncompleteSongSourceFileException();
             }
 
-            for (int fx = 0; fx < fields.Count; fx++)
+            for (var fx = 0; fx < fields.Count; fx++)
             {
-                SongSelectVerse p = new SongSelectVerse();
+                var p = new SongSelectVerse();
                 p.Caption = fields[fx];
-                foreach (var l in words[fx].Split(new[] { "/n" }, StringSplitOptions.RemoveEmptyEntries))
+                foreach (var l in words[fx].Split(new[] {"/n"}, StringSplitOptions.RemoveEmptyEntries))
                 {
                     p.Lines.Add(l);
                 }
@@ -144,7 +137,7 @@ namespace PraiseBase.Presenter.Persistence.CCLI
         }
 
         /// <summary>
-        /// Reads the title of a song from a file
+        ///     Reads the title of a song from a file
         /// </summary>
         /// <param name="filename">Absolute path to the song file</param>
         /// <returns></returns>
@@ -157,18 +150,18 @@ namespace PraiseBase.Presenter.Persistence.CCLI
                     return null;
                 }
 
-                CcliSongFileSection section = CcliSongFileSection.NONE;
-                using (StreamReader sr = new StreamReader(filename))
+                var section = CcliSongFileSection.NONE;
+                using (var sr = new StreamReader(filename))
                 {
                     while (!sr.EndOfStream)
                     {
-                        string l = sr.ReadLine();
-                        string li = l.Trim();
-                        string[] s = li.Split(new[] { "=" }, StringSplitOptions.None);
+                        var l = sr.ReadLine();
+                        var li = l.Trim();
+                        var s = li.Split(new[] {"="}, StringSplitOptions.None);
                         if (s.Length > 1)
                         {
-                            string k = s[0];
-                            string v = s[1];
+                            var k = s[0];
+                            var v = s[1];
 
                             if (section == CcliSongFileSection.CONTENT && k == "Title")
                             {
@@ -184,7 +177,7 @@ namespace PraiseBase.Presenter.Persistence.CCLI
                             }
                             else
                             {
-                                Match m = Regex.Match(li, "^\\[S A([0-9]+)\\]$");
+                                var m = Regex.Match(li, "^\\[S A([0-9]+)\\]$");
                                 if (m.Success)
                                 {
                                     section = CcliSongFileSection.CONTENT;
@@ -202,7 +195,7 @@ namespace PraiseBase.Presenter.Persistence.CCLI
         }
 
         /// <summary>
-        /// Tests if a given file is supported by this reader
+        ///     Tests if a given file is supported by this reader
         /// </summary>
         /// <param name="filename"></param>
         /// <returns></returns>
@@ -210,19 +203,19 @@ namespace PraiseBase.Presenter.Persistence.CCLI
         {
             try
             {
-                bool versionOk = false;
-                bool typeOk = false;
+                var versionOk = false;
+                var typeOk = false;
 
-                using (StreamReader sr = new StreamReader(filename))
+                using (var sr = new StreamReader(filename))
                 {
                     while (!sr.EndOfStream)
                     {
-                        String l = sr.ReadLine();
-                        string[] s = l.Split(new[] { "=" }, StringSplitOptions.None);
+                        var l = sr.ReadLine();
+                        var s = l.Split(new[] {"="}, StringSplitOptions.None);
                         if (s.Length > 1)
                         {
-                            string k = s[0];
-                            string v = s[1].Trim();
+                            var k = s[0];
+                            var v = s[1].Trim();
                             switch (k)
                             {
                                 case "Version":
@@ -260,6 +253,13 @@ namespace PraiseBase.Presenter.Persistence.CCLI
                 return false;
             }
             return true;
+        }
+
+        private enum CcliSongFileSection
+        {
+            NONE,
+            FILE,
+            CONTENT
         }
     }
 }

@@ -33,13 +33,97 @@ namespace PraiseBase.Presenter.Persistence.PowerPraise
     public abstract class AbstractPowerPraiseSongFileReader<T> : ISongFileReader<T> where T : ISongFile
     {
         protected const string SupportedFileFormatVersion = "3.0";
-
         protected const string XmlRootNodeName = "ppl";
-
         public abstract T Load(string filename);
 
         /// <summary>
-        /// Parses additional fields (hook)
+        ///     Reads the title of a song from a file
+        /// </summary>
+        /// <param name="filename">Absolute path to the song file</param>
+        /// <returns></returns>
+        public String ReadTitle(string filename)
+        {
+            try
+            {
+                if (!File.Exists(filename))
+                {
+                    return null;
+                }
+                var parentNode = String.Empty;
+                var t = new XmlTextReader(filename);
+                while (t.Read())
+                {
+                    if (t.NodeType == XmlNodeType.Element)
+                    {
+                        if (t.Name == XmlRootNodeName)
+                        {
+                            parentNode = t.Name;
+                        }
+                        else if (parentNode == XmlRootNodeName && t.Name == "general")
+                        {
+                            parentNode = t.Name;
+                        }
+                        else if (parentNode == "general" && t.Name == "title")
+                        {
+                            parentNode = t.Name;
+                        }
+                    }
+                    else if (t.NodeType == XmlNodeType.Text && parentNode == "title")
+                    {
+                        var title = t.ReadContentAsString();
+                        t.Close();
+                        return title;
+                    }
+                }
+                t.Close();
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+            }
+            return null;
+        }
+
+        /// <summary>
+        ///     Tests if a given file is supported by this reader
+        /// </summary>
+        /// <param name="filename"></param>
+        /// <returns></returns>
+        public bool IsFileSupported(string filename)
+        {
+            try
+            {
+                var t = new XmlTextReader(filename);
+                while (t.Read())
+                {
+                    if (t.NodeType == XmlNodeType.Element)
+                    {
+                        if (t.Name == XmlRootNodeName)
+                        {
+                            var attribute = t.GetAttribute("version");
+                            if (attribute != null && attribute == SupportedFileFormatVersion)
+                            {
+                                t.Close();
+                                return true;
+                            }
+                            t.Close();
+                            return false;
+                        }
+                        t.Close();
+                        return false;
+                    }
+                }
+                t.Close();
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+            return true;
+        }
+
+        /// <summary>
+        ///     Parses additional fields (hook)
         /// </summary>
         /// <param name="xmlRoot"></param>
         /// <param name="sng"></param>
@@ -48,11 +132,13 @@ namespace PraiseBase.Presenter.Persistence.PowerPraise
         protected void Parse(string filename, PowerPraiseSong sng)
         {
             // Init xml
-            XmlDocument xmlDoc = new XmlDocument();
+            var xmlDoc = new XmlDocument();
             xmlDoc.Load(filename);
-            XmlElement xmlRoot = xmlDoc.DocumentElement;
+            var xmlRoot = xmlDoc.DocumentElement;
 
-            if (xmlRoot == null || xmlRoot.Name != XmlRootNodeName || xmlRoot.GetAttribute("version") != SupportedFileFormatVersion || xmlRoot["general"] == null || xmlRoot["general"]["title"] == null)
+            if (xmlRoot == null || xmlRoot.Name != XmlRootNodeName ||
+                xmlRoot.GetAttribute("version") != SupportedFileFormatVersion || xmlRoot["general"] == null ||
+                xmlRoot["general"]["title"] == null)
             {
                 throw new InvalidSongSourceFileException();
             }
@@ -84,12 +170,13 @@ namespace PraiseBase.Presenter.Persistence.PowerPraise
             // Copyright text
             if (xmlRoot["information"] != null)
             {
-                XmlElement copyrightElem = xmlRoot["information"]["copyright"];
+                var copyrightElem = xmlRoot["information"]["copyright"];
 
                 if (copyrightElem != null)
                 {
                     // Position
-                    sng.CopyrightTextPosition = ParseCopyRightPosition(copyrightElem["position"], PowerPraiseConstants.CopyrightTextPosition);
+                    sng.CopyrightTextPosition = ParseCopyRightPosition(copyrightElem["position"],
+                        PowerPraiseConstants.CopyrightTextPosition);
 
                     // Text
                     sng.CopyrightText.AddRange(ParseCopyRightText(copyrightElem["text"]));
@@ -99,24 +186,27 @@ namespace PraiseBase.Presenter.Persistence.PowerPraise
             // Source text
             if (xmlRoot["information"] != null)
             {
-                XmlElement sourceElem = xmlRoot["information"]["source"];
+                var sourceElem = xmlRoot["information"]["source"];
 
                 if (sourceElem != null)
                 {
                     // Enabled
-                    sng.SourceTextEnabled = ParseSourceEnabled(sourceElem["position"], PowerPraiseConstants.SourceTextEnabled);
+                    sng.SourceTextEnabled = ParseSourceEnabled(sourceElem["position"],
+                        PowerPraiseConstants.SourceTextEnabled);
 
                     // Text
                     sng.SourceText = ParseSourceText(sourceElem["text"]);
                 }
             }
 
-            XmlElement fontElem = xmlRoot["formatting"]["font"];
+            var fontElem = xmlRoot["formatting"]["font"];
 
             // Font formatting
             sng.MainTextFontFormatting = ParseTextFormatting(fontElem["maintext"], PowerPraiseConstants.MainText);
-            sng.TranslationTextFontFormatting = ParseTextFormatting(fontElem["translationtext"], PowerPraiseConstants.TranslationText);
-            sng.CopyrightTextFontFormatting = ParseTextFormatting(fontElem["copyrighttext"], PowerPraiseConstants.CopyrightText);
+            sng.TranslationTextFontFormatting = ParseTextFormatting(fontElem["translationtext"],
+                PowerPraiseConstants.TranslationText);
+            sng.CopyrightTextFontFormatting = ParseTextFormatting(fontElem["copyrighttext"],
+                PowerPraiseConstants.CopyrightText);
             sng.SourceTextFontFormatting = ParseTextFormatting(fontElem["sourcetext"], PowerPraiseConstants.SourceText);
 
             // Font outline
@@ -131,39 +221,40 @@ namespace PraiseBase.Presenter.Persistence.PowerPraise
             EnsureValidBackgroundIDs(sng, sng.BackgroundImages.Count);
 
             // Line spacing
-            XmlElement lineSpacingElem = xmlRoot["formatting"]["linespacing"];
+            var lineSpacingElem = xmlRoot["formatting"]["linespacing"];
             if (lineSpacingElem != null)
             {
                 sng.MainLineSpacing = ParseNaturalNumber(lineSpacingElem["main"], PowerPraiseConstants.MainLineSpacing);
-                sng.TranslationLineSpacing = ParseNaturalNumber(lineSpacingElem["translation"], PowerPraiseConstants.TranslationLineSpacing);
+                sng.TranslationLineSpacing = ParseNaturalNumber(lineSpacingElem["translation"],
+                    PowerPraiseConstants.TranslationLineSpacing);
             }
 
-            XmlElement textOrientationElem = xmlRoot["formatting"]["textorientation"];
+            var textOrientationElem = xmlRoot["formatting"]["textorientation"];
 
             // Text orientation
             sng.TextOrientation = ParseOrientation(textOrientationElem, PowerPraiseConstants.TextOrientation);
 
             // Translation position
-            sng.TranslationTextPosition = ParseTranslationPosition(textOrientationElem, PowerPraiseConstants.TranslationPosition);
+            sng.TranslationTextPosition = ParseTranslationPosition(textOrientationElem,
+                PowerPraiseConstants.TranslationPosition);
 
             // Borders
             sng.Borders = ParseBorders(xmlRoot["formatting"]["borders"], PowerPraiseConstants.TextBorders);
         }
 
         /// <summary>
-        /// Parses string. 
-        /// 
-        /// Value is only read if string is not emty.
+        ///     Parses string.
+        ///     Value is only read if string is not emty.
         /// </summary>
         /// <param name="elem"></param>
         /// <param name="defaultValue"></param>
         /// <returns></returns>
         private String ParseString(XmlElement elem, String defaultValue)
         {
-            String val = defaultValue;
+            var val = defaultValue;
             if (elem != null)
             {
-                String str = elem.InnerText;
+                var str = elem.InnerText;
                 if (!String.IsNullOrEmpty(str))
                 {
                     val = str;
@@ -173,21 +264,21 @@ namespace PraiseBase.Presenter.Persistence.PowerPraise
         }
 
         /// <summary>
-        /// Parses song part.
+        ///     Parses song part.
         /// </summary>
         /// <param name="elem"></param>
         /// <param name="defaultMainSize"></param>
         /// <returns></returns>
         private PowerPraiseSongPart ParseSongPart(XmlElement elem, int defaultMainSize)
         {
-            PowerPraiseSongPart part = new PowerPraiseSongPart
+            var part = new PowerPraiseSongPart
             {
                 // Caption
                 Caption = elem.GetAttribute("caption")
             };
 
             // Slides
-            foreach (XmlElement slideElem in elem.Cast<XmlElement>().Where(slideElem => slideElem.Name == "slide"))
+            foreach (var slideElem in elem.Cast<XmlElement>().Where(slideElem => slideElem.Name == "slide"))
             {
                 part.Slides.Add(ParseSongSlide(slideElem, defaultMainSize));
             }
@@ -196,14 +287,14 @@ namespace PraiseBase.Presenter.Persistence.PowerPraise
         }
 
         /// <summary>
-        /// Parses slide.
+        ///     Parses slide.
         /// </summary>
         /// <param name="elem"></param>
         /// <param name="defaultMainSize"></param>
         /// <returns></returns>
         private PowerPraiseSongSlide ParseSongSlide(XmlElement elem, int defaultMainSize)
         {
-            PowerPraiseSongSlide slide = new PowerPraiseSongSlide
+            var slide = new PowerPraiseSongSlide
             {
                 MainSize = defaultMainSize
             };
@@ -238,21 +329,21 @@ namespace PraiseBase.Presenter.Persistence.PowerPraise
         }
 
         /// <summary>
-        /// Parses song part oder
+        ///     Parses song part oder
         /// </summary>
         /// <param name="xelem"></param>
         /// <param name="sng"></param>
         /// <returns></returns>
         private List<PowerPraiseSongPart> ParseOrder(XmlElement xelem, PowerPraiseSong sng)
         {
-            List<PowerPraiseSongPart> list = new List<PowerPraiseSongPart>();
+            var list = new List<PowerPraiseSongPart>();
             foreach (XmlElement elem in xelem)
             {
                 if (elem.Name == "item")
                 {
                     if (!String.IsNullOrEmpty(elem.InnerText))
                     {
-                        string val = elem.InnerText.Trim();
+                        var val = elem.InnerText.Trim();
                         foreach (var part in sng.Parts)
                         {
                             if (part.Caption == val)
@@ -268,14 +359,15 @@ namespace PraiseBase.Presenter.Persistence.PowerPraise
         }
 
         /// <summary>
-        /// Parses copyright position.
+        ///     Parses copyright position.
         /// </summary>
         /// <param name="elem"></param>
         /// <param name="defaultValue"></param>
         /// <returns></returns>
-        private PowerPraiseSong.CopyrightPosition ParseCopyRightPosition(XmlElement elem, PowerPraiseSong.CopyrightPosition defaultValue)
+        private PowerPraiseSong.CopyrightPosition ParseCopyRightPosition(XmlElement elem,
+            PowerPraiseSong.CopyrightPosition defaultValue)
         {
-            PowerPraiseSong.CopyrightPosition position = defaultValue;
+            var position = defaultValue;
             if (elem != null)
             {
                 if (elem.InnerText == "firstslide")
@@ -295,13 +387,13 @@ namespace PraiseBase.Presenter.Persistence.PowerPraise
         }
 
         /// <summary>
-        /// Parses copyright text.
+        ///     Parses copyright text.
         /// </summary>
         /// <param name="elem"></param>
         /// <returns></returns>
         private List<string> ParseCopyRightText(XmlElement elem)
         {
-            List<string> list = new List<string>();
+            var list = new List<string>();
             if (elem != null && elem.ChildNodes.Count > 0)
             {
                 list.AddRange(from XmlNode xn in elem select xn.InnerText);
@@ -310,14 +402,14 @@ namespace PraiseBase.Presenter.Persistence.PowerPraise
         }
 
         /// <summary>
-        /// Parses if source text is enabled
+        ///     Parses if source text is enabled
         /// </summary>
         /// <param name="elem"></param>
         /// <param name="defaultValue"></param>
         /// <returns></returns>
         private bool ParseSourceEnabled(XmlElement elem, bool defaultValue)
         {
-            bool enabled = defaultValue;
+            var enabled = defaultValue;
             if (elem != null)
             {
                 if (elem.InnerText == "firstslide")
@@ -333,7 +425,7 @@ namespace PraiseBase.Presenter.Persistence.PowerPraise
         }
 
         /// <summary>
-        /// Parses source text.
+        ///     Parses source text.
         /// </summary>
         /// <param name="elem"></param>
         /// <returns></returns>
@@ -347,14 +439,15 @@ namespace PraiseBase.Presenter.Persistence.PowerPraise
         }
 
         /// <summary>
-        /// Parses text formatting.
+        ///     Parses text formatting.
         /// </summary>
         /// <param name="elem"></param>
         /// <param name="defaultValue"></param>
         /// <returns></returns>
-        private PowerPraiseSong.FontFormatting ParseTextFormatting(XmlElement elem, PowerPraiseSong.FontFormatting defaultValue)
+        private PowerPraiseSong.FontFormatting ParseTextFormatting(XmlElement elem,
+            PowerPraiseSong.FontFormatting defaultValue)
         {
-            PowerPraiseSong.FontFormatting f = defaultValue;
+            var f = defaultValue;
             if (elem != null)
             {
                 // Parse font
@@ -370,9 +463,9 @@ namespace PraiseBase.Presenter.Persistence.PowerPraise
                         nameElement.InnerText,
                         fontSize > 0 ? fontSize : f.Font.Size,
                         (FontStyle)
-                        ((int)(boldElement.InnerText == "true" ? FontStyle.Bold : FontStyle.Regular) +
-                         (int)(italicElement.InnerText == "true" ? FontStyle.Italic : FontStyle.Regular))
-                    );
+                            ((int) (boldElement.InnerText == "true" ? FontStyle.Bold : FontStyle.Regular) +
+                             (int) (italicElement.InnerText == "true" ? FontStyle.Italic : FontStyle.Regular))
+                        );
                 }
 
                 // Parse color
@@ -403,14 +496,15 @@ namespace PraiseBase.Presenter.Persistence.PowerPraise
         }
 
         /// <summary>
-        /// Parses font outline.
+        ///     Parses font outline.
         /// </summary>
         /// <param name="elem"></param>
         /// <param name="defaultValue"></param>
         /// <returns></returns>
-        private PowerPraiseSong.OutlineFormatting ParseFontOutline(XmlElement elem, PowerPraiseSong.OutlineFormatting defaultValue)
+        private PowerPraiseSong.OutlineFormatting ParseFontOutline(XmlElement elem,
+            PowerPraiseSong.OutlineFormatting defaultValue)
         {
-            PowerPraiseSong.OutlineFormatting outline = defaultValue;
+            var outline = defaultValue;
             if (elem != null)
             {
                 outline.Enabled = (elem["enabled"] != null && elem["enabled"].InnerText == "true");
@@ -425,25 +519,26 @@ namespace PraiseBase.Presenter.Persistence.PowerPraise
         }
 
         /// <summary>
-        /// Parses font shadow.
+        ///     Parses font shadow.
         /// </summary>
         /// <param name="elem"></param>
         /// <param name="defaultValue"></param>
         /// <returns></returns>
-        private PowerPraiseSong.ShadowFormatting ParseFontShadow(XmlElement elem, PowerPraiseSong.ShadowFormatting defaultValue)
+        private PowerPraiseSong.ShadowFormatting ParseFontShadow(XmlElement elem,
+            PowerPraiseSong.ShadowFormatting defaultValue)
         {
-            PowerPraiseSong.ShadowFormatting shadow = defaultValue;
+            var shadow = defaultValue;
             if (elem != null)
             {
                 shadow.Enabled = (elem["enabled"] != null && elem["enabled"].InnerText == "true");
-                
+
                 int tryColor;
                 var xmlElement = elem["color"];
                 if (xmlElement != null && int.TryParse(xmlElement.InnerText, out tryColor))
                 {
                     shadow.Color = PowerPraiseFileUtil.ConvertColor(tryColor);
                 }
-                
+
                 int shadowDirection;
                 var element = elem["direction"];
                 if (element != null && int.TryParse(element.InnerText, out shadowDirection))
@@ -455,7 +550,7 @@ namespace PraiseBase.Presenter.Persistence.PowerPraise
         }
 
         /// <summary>
-        /// Parses background images and colors.
+        ///     Parses background images and colors.
         /// </summary>
         /// <param name="elem"></param>
         /// <returns></returns>
@@ -465,7 +560,7 @@ namespace PraiseBase.Presenter.Persistence.PowerPraise
         }
 
         /// <summary>
-        /// Ensures valid background IDs are used.
+        ///     Ensures valid background IDs are used.
         /// </summary>
         /// <param name="sng"></param>
         /// <param name="numBackgrounds"></param>
@@ -481,14 +576,14 @@ namespace PraiseBase.Presenter.Persistence.PowerPraise
         }
 
         /// <summary>
-        /// Parses a natural number (integer, greater than 0).
+        ///     Parses a natural number (integer, greater than 0).
         /// </summary>
         /// <param name="elem"></param>
         /// <param name="defaultValue"></param>
         /// <returns></returns>
         private int ParseNaturalNumber(XmlElement elem, int defaultValue)
         {
-            int val = defaultValue;
+            var val = defaultValue;
             if (elem != null)
             {
                 int trySize;
@@ -501,14 +596,14 @@ namespace PraiseBase.Presenter.Persistence.PowerPraise
         }
 
         /// <summary>
-        /// Parses text orientation.
+        ///     Parses text orientation.
         /// </summary>
         /// <param name="elem"></param>
         /// <param name="defaultValue"></param>
         /// <returns></returns>
         private TextOrientation ParseOrientation(XmlElement elem, TextOrientation defaultValue)
         {
-            TextOrientation orientation = new TextOrientation(defaultValue.Vertical, defaultValue.Horizontal);
+            var orientation = new TextOrientation(defaultValue.Vertical, defaultValue.Horizontal);
             if (elem != null)
             {
                 if (elem["horizontal"] != null)
@@ -550,14 +645,14 @@ namespace PraiseBase.Presenter.Persistence.PowerPraise
         }
 
         /// <summary>
-        /// Parses translation position
+        ///     Parses translation position
         /// </summary>
         /// <param name="elem"></param>
         /// <param name="defaultValue"></param>
         /// <returns></returns>
         private static TranslationPosition ParseTranslationPosition(XmlNode elem, TranslationPosition defaultValue)
         {
-            TranslationPosition position = defaultValue;
+            var position = defaultValue;
             if (elem != null && elem["transpos"] != null)
             {
                 if (elem["transpos"].InnerText == "inline")
@@ -573,14 +668,15 @@ namespace PraiseBase.Presenter.Persistence.PowerPraise
         }
 
         /// <summary>
-        /// Parses border sizes.
+        ///     Parses border sizes.
         /// </summary>
         /// <param name="elem"></param>
         /// <param name="defaultValue"></param>
         /// <returns></returns>
-        private static PowerPraiseSong.TextBorders ParseBorders(XmlElement elem, PowerPraiseSong.TextBorders defaultValue)
+        private static PowerPraiseSong.TextBorders ParseBorders(XmlElement elem,
+            PowerPraiseSong.TextBorders defaultValue)
         {
-            PowerPraiseSong.TextBorders borders = defaultValue;
+            var borders = defaultValue;
             if (elem != null)
             {
                 int trySize;
@@ -614,92 +710,6 @@ namespace PraiseBase.Presenter.Persistence.PowerPraise
                 }
             }
             return borders;
-        }
-
-        /// <summary>
-        /// Reads the title of a song from a file
-        /// </summary>
-        /// <param name="filename">Absolute path to the song file</param>
-        /// <returns></returns>
-        public String ReadTitle(string filename)
-        {
-            try
-            {
-                if (!File.Exists(filename))
-                {
-                    return null;
-                }
-                string parentNode = String.Empty;
-                XmlTextReader t = new XmlTextReader(filename);
-                while (t.Read())
-                {
-                    if (t.NodeType == XmlNodeType.Element)
-                    {
-                        if (t.Name == XmlRootNodeName)
-                        {
-                            parentNode = t.Name;
-                        }
-                        else if (parentNode == XmlRootNodeName && t.Name == "general")
-                        {
-                            parentNode = t.Name;
-                        }
-                        else if (parentNode == "general" && t.Name == "title")
-                        {
-                            parentNode = t.Name;
-                        }
-                    }
-                    else if (t.NodeType == XmlNodeType.Text && parentNode == "title")
-                    {
-                        string title = t.ReadContentAsString();
-                        t.Close();
-                        return title;
-                    }
-                }
-                t.Close();
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e.Message);
-            }
-            return null;
-        }
-
-        /// <summary>
-        /// Tests if a given file is supported by this reader
-        /// </summary>
-        /// <param name="filename"></param>
-        /// <returns></returns>
-        public bool IsFileSupported(string filename)
-        {
-            try
-            {
-                XmlTextReader t = new XmlTextReader(filename);
-                while (t.Read())
-                {
-                    if (t.NodeType == XmlNodeType.Element)
-                    {
-                        if (t.Name == XmlRootNodeName)
-                        {
-                            var attribute = t.GetAttribute("version");
-                            if (attribute != null && attribute == SupportedFileFormatVersion)
-                            {
-                                t.Close();
-                                return true;
-                            }
-                            t.Close();
-                            return false;
-                        }
-                        t.Close();
-                        return false;
-                    }
-                }
-                t.Close();
-            }
-            catch (Exception)
-            {
-                return false;
-            }
-            return true;
         }
     }
 }

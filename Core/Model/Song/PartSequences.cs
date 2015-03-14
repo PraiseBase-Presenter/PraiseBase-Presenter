@@ -25,7 +25,7 @@ using System.Collections.Generic;
 namespace PraiseBase.Presenter.Model.Song
 {
     /// <summary>
-    /// Provides a list of all authors in the song
+    ///     Provides a list of all authors in the song
     /// </summary>
     public class PartSequences : List<SongPart>
     {
@@ -33,10 +33,10 @@ namespace PraiseBase.Presenter.Model.Song
         {
             unchecked
             {
-                int hash = 19;
-                for (int i = 0; i < Count; i++)
+                var hash = 19;
+                for (var i = 0; i < Count; i++)
                 {
-                    hash = hash * 31 + this[i].GetHashCode();
+                    hash = hash*31 + this[i].GetHashCode();
                 }
                 return hash;
             }
@@ -45,7 +45,7 @@ namespace PraiseBase.Presenter.Model.Song
         protected bool Equals(PartSequences other)
         {
             if (Count != other.Count) return false;
-            for (int i = 0; i < Count; i++)
+            for (var i = 0; i < Count; i++)
             {
                 if (!Equals(this[i], other[i])) return false;
             }
@@ -57,7 +57,7 @@ namespace PraiseBase.Presenter.Model.Song
             if (ReferenceEquals(null, obj)) return false;
             if (ReferenceEquals(this, obj)) return true;
             if (obj.GetType() != GetType()) return false;
-            return Equals((PartSequences)obj);
+            return Equals((PartSequences) obj);
         }
     }
 }

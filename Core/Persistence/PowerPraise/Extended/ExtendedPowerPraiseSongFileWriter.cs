@@ -35,7 +35,7 @@ namespace PraiseBase.Presenter.Persistence.PowerPraise.Extended
 
         protected override void writeAdditionalFields(XmlDocument xmlDoc, XmlElement xmlRoot, PowerPraiseSong ppl)
         {
-            ExtendedPowerPraiseSong sng = (ExtendedPowerPraiseSong)ppl;
+            var sng = (ExtendedPowerPraiseSong) ppl;
 
             //
             // Non-standard meta-info
@@ -57,10 +57,10 @@ namespace PraiseBase.Presenter.Persistence.PowerPraise.Extended
             if (sng.QualityIssues.Count > 0)
             {
                 xmlRoot["general"].AppendChild(xmlDoc.CreateElement("qualityissues"));
-                foreach (SongQualityAssuranceIndicator i in sng.QualityIssues)
+                foreach (var i in sng.QualityIssues)
                 {
-                    XmlNode qaChld = xmlRoot["general"]["qualityissues"].AppendChild(xmlDoc.CreateElement("issue"));
-                    qaChld.InnerText = Enum.GetName(typeof(SongQualityAssuranceIndicator), i);
+                    var qaChld = xmlRoot["general"]["qualityissues"].AppendChild(xmlDoc.CreateElement("issue"));
+                    qaChld.InnerText = Enum.GetName(typeof (SongQualityAssuranceIndicator), i);
                 }
             }
 
@@ -93,7 +93,7 @@ namespace PraiseBase.Presenter.Persistence.PowerPraise.Extended
 
         private String writeAuthors(ExtendedPowerPraiseSong sng)
         {
-            string autstr = string.Empty;
+            var autstr = string.Empty;
             foreach (var aut in sng.Author)
             {
                 if (autstr != string.Empty)

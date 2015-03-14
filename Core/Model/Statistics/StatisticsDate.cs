@@ -27,28 +27,22 @@ namespace PraiseBase.Presenter.Model.Statistics
 {
     public class StatisticsDate
     {
-        public SortedList<String, StatisticsItem> Items { get; set; }
-
-        public int Year { get; set; }
-
-        public int Month { get; set; }
-
-        public int Day { get; set; }
-
-        public string ID
-        {
-            get
-            {
-                return Year + "-" + Month + "-" + Day;
-            }
-        }
-
         public StatisticsDate(int year, int month, int day)
         {
             Year = year;
             Month = month;
             Day = day;
             Items = new SortedList<String, StatisticsItem>();
+        }
+
+        public SortedList<String, StatisticsItem> Items { get; set; }
+        public int Year { get; set; }
+        public int Month { get; set; }
+        public int Day { get; set; }
+
+        public string ID
+        {
+            get { return Year + "-" + Month + "-" + Day; }
         }
     }
 }

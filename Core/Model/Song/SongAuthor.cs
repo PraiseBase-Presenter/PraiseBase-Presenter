@@ -23,17 +23,17 @@
 namespace PraiseBase.Presenter.Model.Song
 {
     /// <summary>
-    /// Describes the author of a song
+    ///     Describes the author of a song
     /// </summary>
     public class SongAuthor
     {
         /// <summary>
-        /// Author name
+        ///     Author name
         /// </summary>
         public string Name { get; set; }
 
         /// <summary>
-        /// Author type
+        ///     Author type
         /// </summary>
         public SongAuthorType Type { get; set; }
 
@@ -46,7 +46,7 @@ namespace PraiseBase.Presenter.Model.Song
         {
             if (ReferenceEquals(null, obj)) return false;
             if (ReferenceEquals(this, obj)) return true;
-            if (obj.GetType() != this.GetType()) return false;
+            if (obj.GetType() != GetType()) return false;
             return Equals((SongAuthor) obj);
         }
 

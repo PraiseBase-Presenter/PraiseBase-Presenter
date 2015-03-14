@@ -26,18 +26,17 @@ using System.Collections.Generic;
 namespace PraiseBase.Presenter.Model
 {
     /// <summary>
-    /// The setlist containts a list of songs ready for projection.
-    /// It can be saved to and loaded from setlist files.
+    ///     The setlist containts a list of songs ready for projection.
+    ///     It can be saved to and loaded from setlist files.
     /// </summary>
     public class Setlist
     {
-        public String Name { get; set; }
-
-        public List<String> Items { get; set; }
-
         public Setlist()
         {
             Items = new List<String>();
         }
+
+        public String Name { get; set; }
+        public List<String> Items { get; set; }
     }
 }

@@ -1,8 +1,7 @@
-﻿
-namespace PraiseBase.Presenter.Model
+﻿namespace PraiseBase.Presenter.Model
 {
     /// <summary>
-    /// Position of additional information blocks
+    ///     Position of additional information blocks
     /// </summary>
     public enum AdditionalInformationPosition
     {

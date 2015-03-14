@@ -30,21 +30,21 @@ namespace PraiseBase.Presenter.Util
     public class ImageUtils
     {
         /// <summary>
-        /// Resizes a given image to new dimensions
+        ///     Resizes a given image to new dimensions
         /// </summary>
         /// <param name="sourceImage"></param>
         /// <param name="newSize"></param>
         /// <returns></returns>
         public static Bitmap ResizeBitmap(Image sourceImage, Size newSize)
         {
-            Bitmap result = new Bitmap(newSize.Width, newSize.Height);
-            using (Graphics g = Graphics.FromImage((Image)result))
+            var result = new Bitmap(newSize.Width, newSize.Height);
+            using (var g = Graphics.FromImage(result))
                 g.DrawImage(sourceImage, 0, 0, newSize.Width, newSize.Height);
             return result;
         }
 
         /// <summary>
-        /// Creates a resized version of the given file and stores it
+        ///     Creates a resized version of the given file and stores it
         /// </summary>
         /// <param name="inFile"></param>
         /// <param name="outFile"></param>
@@ -57,7 +57,7 @@ namespace PraiseBase.Presenter.Util
                 img = Image.FromFile(inFile);
                 Image imgPhoto = ResizeBitmap(img, thumbSize);
 
-                string dir = Path.GetDirectoryName(outFile);
+                var dir = Path.GetDirectoryName(outFile);
                 if (!Directory.Exists(dir))
                 {
                     Directory.CreateDirectory(dir);
@@ -73,13 +73,13 @@ namespace PraiseBase.Presenter.Util
         }
 
         /// <summary>
-        /// Creates an empty image with the specified size and background color
+        ///     Creates an empty image with the specified size and background color
         /// </summary>
         /// <returns></returns>
         public static Image getEmptyImage(Size size, Color backColor)
         {
             Image img = new Bitmap(size.Width, size.Height);
-            Graphics graph = Graphics.FromImage(img);
+            var graph = Graphics.FromImage(img);
             graph.FillRectangle(new SolidBrush(backColor), 0, 0, img.Width, img.Height);
             graph.Dispose();
             return img;

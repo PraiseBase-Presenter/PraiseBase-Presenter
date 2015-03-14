@@ -27,8 +27,6 @@ namespace PraiseBase.Presenter.Projection
 {
     public class ImageLayer : BaseLayer
     {
-        public Image Image { get; set; }
-
         private readonly Color _backgroundColor;
 
         public ImageLayer(Color backgroundColor)
@@ -36,10 +34,12 @@ namespace PraiseBase.Presenter.Projection
             _backgroundColor = backgroundColor;
         }
 
+        public Image Image { get; set; }
+
         public override void WriteOut(Graphics gr, Object[] args)
         {
-            int w = (int)gr.VisibleClipBounds.Width;
-            int h = (int)gr.VisibleClipBounds.Height;
+            var w = (int) gr.VisibleClipBounds.Width;
+            var h = (int) gr.VisibleClipBounds.Height;
 
             gr.FillRectangle(new SolidBrush(_backgroundColor), 0, 0, w, h);
             if (Image != null)
@@ -47,6 +47,5 @@ namespace PraiseBase.Presenter.Projection
                 gr.DrawImage(Image, new Rectangle(0, 0, w, h), 0, 0, Image.Width, Image.Height, GraphicsUnit.Pixel);
             }
         }
-
     }
 }

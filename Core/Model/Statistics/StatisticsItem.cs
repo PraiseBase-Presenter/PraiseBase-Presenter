@@ -33,20 +33,13 @@ namespace PraiseBase.Presenter.Model.Statistics
     {
         public String ID
         {
-            get
-            {
-                return Type.ToString() + "-" + Title;
-            }
+            get { return Type + "-" + Title; }
         }
 
         public StatisticsItemType Type { get; set; }
-
         public string Title { get; set; }
-
         public string Copyright { get; set; }
-
         public string CcliID { get; set; }
-
         public int Count { get; set; }
     }
 }
