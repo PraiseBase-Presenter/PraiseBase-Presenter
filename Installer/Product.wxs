@@ -27,7 +27,7 @@
     </InstallExecuteSequence>
 
     <!-- Set icon -->
-    <Icon Id="icon.ico" SourceFile="$(var.PraiseBase_Presenter.ProjectDir)Computer.ico"/>
+    <Icon Id="icon.ico" SourceFile="$(var.PraiseBase_Presenter.ProjectDir)Resources\Computer.ico"/>
     <Property Id="ARPPRODUCTICON" Value="icon.ico" />
 
     <!-- GUI (requires WixUIExtension) -->
