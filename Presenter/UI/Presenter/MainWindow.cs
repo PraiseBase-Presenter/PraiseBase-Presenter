@@ -107,7 +107,7 @@ namespace PraiseBase.Presenter.UI.Presenter
                 splitContainerLayerContent.SplitterDistance = Settings.Default.LayerContentSplitterPosition;
             }
 
-            loadSongList();
+            LoadSongList();
 
             imageTreeViewInit();
 
@@ -254,38 +254,58 @@ namespace PraiseBase.Presenter.UI.Presenter
 
         private void songSearchBox_TextChanged(object sender, EventArgs e)
         {
-            searchSongs(songSearchTextBox.Text);
+            SearchSongs(songSearchTextBox.Text);
         }
 
         /**
          * Load Songs
          */
 
-        private void loadSongList()
+        private void LoadSongList()
         {
-            searchSongs("");
+            SearchSongs(null);
         }
 
-        private void searchSongs(string needle)
+        private void SearchSongs(string needle)
         {
             listViewSongs.BeginUpdate();
             listViewSongs.SuspendLayout();
             listViewSongs.Items.Clear();
-            int cnt = 0;
 
             var lviList = new List<ListViewItem>();
-            foreach (var elem in _songManager.GetSearchResults(needle, Settings.Default.SongSearchMode))
+
+            // Fill list of songs
+            int cnt = 0;
+            if (!String.IsNullOrEmpty(needle))
             {
-                var lvi = new ListViewItem(elem.Value.Song.Title)
+                // Search matching songs
+                foreach (var elem in _songManager.GetSearchResults(needle, Settings.Default.SongSearchMode))
                 {
-                    Tag = elem.Key
-                };
-                lviList.Add(lvi);
-                cnt++;
+                    var lvi = new ListViewItem(elem.Value.Song.Title)
+                    {
+                        Tag = elem.Key
+                    };
+                    lviList.Add(lvi);
+                    cnt++;
+                }
+            }
+            else
+            {
+                // Load all songs
+                foreach (var elem in _songManager.SongList)
+                {
+                    var lvi = new ListViewItem(elem.Value.Song.Title)
+                    {
+                        Tag = elem.Key
+                    };
+                    lviList.Add(lvi);
+                    cnt++;
+                }
             }
             listViewSongs.Items.AddRange(lviList.ToArray());
 
-            if (cnt == 1 && listViewSongs.Items.Count > 0)
+            // If only one song remains, set this as current song
+            if (cnt == 1)
             {
                 try
                 {
@@ -299,6 +319,7 @@ namespace PraiseBase.Presenter.UI.Presenter
                     Console.WriteLine(@"Song search exception: " + e);
                 }
             }
+
             listViewSongs.Columns[0].Width = -2;
             listViewSongs.ResumeLayout();
             listViewSongs.EndUpdate();
@@ -306,7 +327,7 @@ namespace PraiseBase.Presenter.UI.Presenter
 
         private void radioSongSearchAll_CheckedChanged(object sender, EventArgs e)
         {
-            searchSongs(songSearchTextBox.Text);
+            SearchSongs(songSearchTextBox.Text);
         }
 
         private void toggleProjection(object sender, EventArgs e)
@@ -363,7 +384,7 @@ namespace PraiseBase.Presenter.UI.Presenter
         {
             songSearchTextBox.Text = "";
             _songManager.Reload();
-            loadSongList();
+            LoadSongList();
 
             for (int i = 0; i < listViewSetList.Items.Count; i++)
             {
@@ -1791,7 +1812,7 @@ namespace PraiseBase.Presenter.UI.Presenter
             Settings.Default.SongSearchMode = SongSearchMode.Title;
             titelToolStripMenuItem.Checked = true;
             titelUndTextToolStripMenuItem.Checked = false;
-            searchSongs(songSearchTextBox.Text);
+            SearchSongs(songSearchTextBox.Text);
         }
 
         private void titelUndTextToolStripMenuItem_Click(object sender, EventArgs e)
@@ -1799,7 +1820,7 @@ namespace PraiseBase.Presenter.UI.Presenter
             Settings.Default.SongSearchMode = SongSearchMode.TitleAndText;
             titelToolStripMenuItem.Checked = false;
             titelUndTextToolStripMenuItem.Checked = true;
-            searchSongs(songSearchTextBox.Text);
+            SearchSongs(songSearchTextBox.Text);
         }
 
         private void toolStripButtonDataFolder_Click(object sender, EventArgs e)
