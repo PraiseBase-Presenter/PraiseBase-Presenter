@@ -39,6 +39,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Manager\BibleManager.cs" />
     <Compile Include="Manager\ImageManager.cs" />
     <Compile Include="Manager\SongItem.cs" />
     <Compile Include="Manager\SongManager.cs" />

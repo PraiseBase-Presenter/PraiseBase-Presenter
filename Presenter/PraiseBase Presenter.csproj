@@ -150,7 +150,6 @@
     <Compile Include="Forms\UpdateCheckDialog.Designer.cs">
       <DependentUpon>UpdateCheckDialog.cs</DependentUpon>
     </Compile>
-    <Compile Include="Manager\BibleManager.cs" />
     <Compile Include="Manager\ProjectionManager.cs" />
     <Compile Include="Manager\ScreenManager.cs" />
     <Compile Include="Projection\SettingsSlideTextFormattingMapper.cs" />

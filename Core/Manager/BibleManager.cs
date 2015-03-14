@@ -23,6 +23,7 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Text.RegularExpressions;
 using PraiseBase.Presenter.Model.Bible;
 using PraiseBase.Presenter.Persistence.ZefaniaXML;
@@ -33,7 +34,7 @@ namespace PraiseBase.Presenter.Manager
     /// Holds a list of all songs and provides
     /// searching in the songlist
     /// </summary>
-    internal class BibleManager
+    public class BibleManager
     {
         /// <summary>
         /// Song item structure
@@ -71,11 +72,6 @@ namespace PraiseBase.Presenter.Manager
         }
 
         /// <summary>
-        /// Singleton variable
-        /// </summary>
-        private static BibleManager _instance;
-
-        /// <summary>
         /// List of all availabe songs
         /// </summary>
         public Dictionary<string, BibleItem> BibleList { get; protected set; }
@@ -85,35 +81,25 @@ namespace PraiseBase.Presenter.Manager
         /// </summary>
         public BibleItem CurrentBible { get; set; }
 
-        /// <summary>
-        /// Gets the singleton of this class (field alternative)
-        /// </summary>
-        public static BibleManager Instance
-        {
-            get { return _instance ?? (_instance = new BibleManager()); }
-        }
+        private readonly string _bibleDirectory;
 
         /// <summary>
         /// The constructor
         /// </summary>
-        private BibleManager()
+        public BibleManager(String bibleDirectory)
         {
+            _bibleDirectory = bibleDirectory;
         }
 
         public List<string> GetBibleFiles()
         {
-            List<string> res = new List<string>();
-            DirectoryInfo di = new DirectoryInfo(PraiseBase.Presenter.Properties.Settings.Default.DataDirectory + Path.DirectorySeparatorChar + "Bibles");
+            DirectoryInfo di = new DirectoryInfo(_bibleDirectory);
             if (!di.Exists)
             {
                 di.Create();
             }
             FileInfo[] rgFiles = di.GetFiles("*.xml");
-            foreach (FileInfo fi in rgFiles)
-            {
-                res.Add(fi.FullName);
-            }
-            return res;
+            return rgFiles.Select(fi => fi.FullName).ToList();
         }
 
         public void LoadBibleInfo()
@@ -124,10 +110,12 @@ namespace PraiseBase.Presenter.Manager
                 XMLBibleReader rdr = new XMLBibleReader();
                 try
                 {
-                    BibleItem bi = new BibleItem();
-                    bi.Bible = rdr.LoadMeta(file);
-                    bi.Filename = file;
-                    BibleList.Add(bi.Bible.Identifier != null ? bi.Bible.Identifier : bi.Filename, bi);
+                    BibleItem bi = new BibleItem
+                    {
+                        Bible = rdr.LoadMeta(file), 
+                        Filename = file
+                    };
+                    BibleList.Add(bi.Bible.Identifier ?? bi.Filename, bi);
                 }
                 catch (Exception e)
                 {
@@ -151,8 +139,8 @@ namespace PraiseBase.Presenter.Manager
 
         private List<BibleBook> SearchBookCandiates(Bible bible, string needle)
         {
-            var bkCandidates = new List<PraiseBase.Presenter.Model.Bible.BibleBook>();
-            foreach (PraiseBase.Presenter.Model.Bible.BibleBook bk in bible.Books)
+            var bkCandidates = new List<BibleBook>();
+            foreach (BibleBook bk in bible.Books)
             {
                 if (needle.Length <= bk.Name.Length && needle == bk.Name.ToLower().Substring(0, needle.Length))
                 {
@@ -164,14 +152,14 @@ namespace PraiseBase.Presenter.Manager
 
         public BiblePassageSearchResult SearchPassage(Bible bible, string needle)
         {
-            BiblePassageSearchResult result = new BiblePassageSearchResult();
-            result.Status = BiblePassageSearchStatus.Ongoing;
-            result.Passage = new BiblePassage();
-
-            Match match;
+            BiblePassageSearchResult result = new BiblePassageSearchResult
+            {
+                Status = BiblePassageSearchStatus.Ongoing,
+                Passage = new BiblePassage()
+            };
 
             // Book only
-            match = Regex.Match(needle, @"^(.*[a-z])$", RegexOptions.IgnoreCase);
+            var match = Regex.Match(needle, @"^(.*[a-z])$", RegexOptions.IgnoreCase);
             if (match.Success)
             {
                 List<BibleBook> bkCandidates = SearchBookCandiates(bible, match.Groups[1].Value);

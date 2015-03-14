@@ -71,10 +71,13 @@ namespace PraiseBase.Presenter.Presenter
 
         private readonly ImageManager _imgManager;
 
-        public MainWindow(SongManager songManager, ImageManager imgManager, string setlistFile)
+        private readonly BibleManager _bibleManager;
+
+        public MainWindow(SongManager songManager, ImageManager imgManager, BibleManager bibleManager, string setlistFile)
         {
             _songManager = songManager;
             _imgManager = imgManager;
+            _bibleManager = bibleManager;
 
             InitializeComponent();
 
@@ -1554,10 +1557,10 @@ namespace PraiseBase.Presenter.Presenter
             if (comboBoxBible.Items.Count == 0 || reload)
             {
                 comboBoxBible.Items.Clear();
-                BibleManager.Instance.LoadBibleInfo();
-                if (BibleManager.Instance.BibleList.Count > 0)
+                _bibleManager.LoadBibleInfo();
+                if (_bibleManager.BibleList.Count > 0)
                 {
-                    comboBoxBible.DataSource = new BindingSource(BibleManager.Instance.BibleList, null);
+                    comboBoxBible.DataSource = new BindingSource(_bibleManager.BibleList, null);
                     comboBoxBible.DisplayMember = "Value";
                     comboBoxBible.ValueMember = "Key";
                     comboBoxBible.SelectedIndex = 0;
@@ -1577,7 +1580,7 @@ namespace PraiseBase.Presenter.Presenter
                 var bi = ((KeyValuePair<string, BibleManager.BibleItem>)comboBoxBible.SelectedItem);
                 if (bi.Value.Bible.Books == null)
                 {
-                    BibleManager.Instance.LoadBibleData(bi.Key);
+                    _bibleManager.LoadBibleData(bi.Key);
                 }
 
                 foreach (BibleBook bk in  bi.Value.Bible.Books)
@@ -1784,7 +1787,7 @@ namespace PraiseBase.Presenter.Presenter
                 {
                     BibleManager.BibleItem bibleItem = ((KeyValuePair<String,BibleManager.BibleItem>)comboBoxBible.SelectedItem).Value;
 
-                    biblePassageSearchResult = BibleManager.Instance.SearchPassage(bibleItem.Bible, needle);
+                    biblePassageSearchResult = _bibleManager.SearchPassage(bibleItem.Bible, needle);
                     if (biblePassageSearchResult.Status == BibleManager.BiblePassageSearchStatus.Found)
                     {
                         if (biblePassageSearchResult.Passage.Book != null)

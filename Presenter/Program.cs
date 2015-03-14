@@ -95,6 +95,9 @@ namespace PraiseBase.Presenter
                 DefaultEmptyColor = Settings.Default.ProjectionBackColor
             };
 
+            string bibleDir = dataDir + "Bibles";
+            BibleManager bibleManager = new BibleManager(bibleDir);
+
             if (Settings.Default.ShowLoadingScreen)
             {
                 LoadingScreen ldg = new LoadingScreen(songManager, imgManager);
@@ -127,7 +130,7 @@ namespace PraiseBase.Presenter
                 setlistFile = args[0];
             }
 
-            MainWindow mw = new MainWindow(songManager, imgManager, setlistFile);
+            MainWindow mw = new MainWindow(songManager, imgManager, bibleManager, setlistFile);
             Application.Run(mw);
             GC.KeepAlive(mutex);
         }
