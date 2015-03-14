@@ -41,116 +41,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Controls\CustomGroupBox.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="Controls\CustomGroupBox.Designer.cs">
-      <DependentUpon>CustomGroupBox.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Controls\DragAndDropListView.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="Controls\SearchTextBox.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="Controls\SearchTextBox.Designer.cs">
-      <DependentUpon>SearchTextBox.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Controls\TreeViewLabelEdit.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="Forms\AboutDialog.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\AboutDialog.Designer.cs">
-      <DependentUpon>AboutDialog.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Forms\CommentDialog.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\CommentDialog.Designer.cs">
-      <DependentUpon>CommentDialog.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Forms\ImageDialog.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\ImageDialog.Designer.cs">
-      <DependentUpon>ImageDialog.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Forms\LocalizedForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\ProgramSettingsDialog.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\ProgramSettingsDialog.Designer.cs">
-      <DependentUpon>ProgramSettingsDialog.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Forms\UpdateCheckDialog.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\UpdateCheckDialog.Designer.cs">
-      <DependentUpon>UpdateCheckDialog.cs</DependentUpon>
-    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Configuration\PraiseBase Configuration.csproj">
-      <Project>{bab0f572-6a29-49a0-bb23-36e088a64225}</Project>
-      <Name>PraiseBase Configuration</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Core\PraiseBase Core Libraries.csproj">
       <Project>{67651b76-5abd-4040-9a8f-3833130fc77d}</Project>
       <Name>PraiseBase Core Libraries</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Controls\CustomGroupBox.resx">
-      <DependentUpon>CustomGroupBox.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Controls\SearchTextBox.resx">
-      <DependentUpon>SearchTextBox.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Controls\TreeViewLabelEdit.resx">
-      <DependentUpon>TreeViewLabelEdit.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\AboutDialog.en-US.resx">
-      <DependentUpon>AboutDialog.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\AboutDialog.resx">
-      <DependentUpon>AboutDialog.cs</DependentUpon>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\CommentDialog.en-US.resx">
-      <DependentUpon>CommentDialog.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\CommentDialog.resx">
-      <DependentUpon>CommentDialog.cs</DependentUpon>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\ImageDialog.en-US.resx">
-      <DependentUpon>ImageDialog.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\ImageDialog.resx">
-      <DependentUpon>ImageDialog.cs</DependentUpon>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\LocalizedForm.resx">
-      <DependentUpon>LocalizedForm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\ProgramSettingsDialog.en-US.resx">
-      <DependentUpon>ProgramSettingsDialog.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\ProgramSettingsDialog.resx">
-      <DependentUpon>ProgramSettingsDialog.cs</DependentUpon>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\UpdateCheckDialog.en-US.resx">
-      <DependentUpon>UpdateCheckDialog.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\UpdateCheckDialog.resx">
-      <DependentUpon>UpdateCheckDialog.cs</DependentUpon>
-    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -84,6 +84,25 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Constants.cs" />
+    <Compile Include="Controls\CustomGroupBox.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Controls\CustomGroupBox.Designer.cs">
+      <DependentUpon>CustomGroupBox.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\DragAndDropListView.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Controls\SearchTextBox.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\SearchTextBox.Designer.cs">
+      <DependentUpon>SearchTextBox.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\TreeViewLabelEdit.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Editor\EditorChildMetaData.cs" />
     <Compile Include="Editor\SongEditor.cs">
       <SubType>Form</SubType>
@@ -98,10 +117,64 @@
       <DependentUpon>SongEditorChild.cs</DependentUpon>
     </Compile>
     <Compile Include="Editor\SongSavedEventArgs.cs" />
+    <Compile Include="Forms\AboutDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\AboutDialog.Designer.cs">
+      <DependentUpon>AboutDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\CommentDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\CommentDialog.Designer.cs">
+      <DependentUpon>CommentDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\ImageDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\ImageDialog.Designer.cs">
+      <DependentUpon>ImageDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\LocalizedForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\ProgramSettingsDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\ProgramSettingsDialog.Designer.cs">
+      <DependentUpon>ProgramSettingsDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\UpdateCheckDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\UpdateCheckDialog.Designer.cs">
+      <DependentUpon>UpdateCheckDialog.cs</DependentUpon>
+    </Compile>
     <Compile Include="Manager\BibleManager.cs" />
     <Compile Include="Manager\ProjectionManager.cs" />
     <Compile Include="Manager\ScreenManager.cs" />
     <Compile Include="Projection\SettingsSlideTextFormattingMapper.cs" />
+    <Compile Include="Properties\FileResources.Designer.cs">
+      <DependentUpon>FileResources.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <DependentUpon>Resources.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <DependentUpon>Settings.settings</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="Properties\StringResources.Designer.cs">
+      <DependentUpon>StringResources.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Template\SongTemplateMapper.cs" />
     <Compile Include="UI\Components\SongDetail.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -149,6 +222,15 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="Controls\CustomGroupBox.resx">
+      <DependentUpon>CustomGroupBox.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\SearchTextBox.resx">
+      <DependentUpon>SearchTextBox.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\TreeViewLabelEdit.resx">
+      <DependentUpon>TreeViewLabelEdit.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Editor\SongEditor.en-US.resx">
       <DependentUpon>SongEditor.cs</DependentUpon>
     </EmbeddedResource>
@@ -164,6 +246,58 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Editor\SongEditorChild.resx">
       <DependentUpon>SongEditorChild.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\AboutDialog.en-US.resx">
+      <DependentUpon>AboutDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\AboutDialog.resx">
+      <DependentUpon>AboutDialog.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\CommentDialog.en-US.resx">
+      <DependentUpon>CommentDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\CommentDialog.resx">
+      <DependentUpon>CommentDialog.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\ImageDialog.en-US.resx">
+      <DependentUpon>ImageDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\ImageDialog.resx">
+      <DependentUpon>ImageDialog.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\LocalizedForm.resx">
+      <DependentUpon>LocalizedForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\ProgramSettingsDialog.en-US.resx">
+      <DependentUpon>ProgramSettingsDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\ProgramSettingsDialog.resx">
+      <DependentUpon>ProgramSettingsDialog.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\UpdateCheckDialog.en-US.resx">
+      <DependentUpon>UpdateCheckDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\UpdateCheckDialog.resx">
+      <DependentUpon>UpdateCheckDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\FileResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>FileResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\StringResources.en-US.resx" />
+    <EmbeddedResource Include="Properties\StringResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>StringResources.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="UI\Components\SongDetail.resx">
@@ -207,6 +341,10 @@
       <SubType>Designer</SubType>
     </None>
     <None Include="Computer.ico" />
+    <None Include="Properties\Settings.settings">
+      <Generator>PublicSettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
@@ -252,20 +390,256 @@
     <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Common Controls\PraiseBase Common Controls.csproj">
-      <Project>{20f2017a-032c-462f-840f-a4ccf7b4609e}</Project>
-      <Name>PraiseBase Common Controls</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Configuration\PraiseBase Configuration.csproj">
-      <Project>{bab0f572-6a29-49a0-bb23-36e088a64225}</Project>
-      <Name>PraiseBase Configuration</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Core\PraiseBase Core Libraries.csproj">
       <Project>{67651B76-5ABD-4040-9A8F-3833130FC77D}</Project>
       <Name>PraiseBase Core Libraries</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <None Include="Properties\Application\14_layer_deletelayer.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Properties\Application\14_layer_newlayer.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Properties\Application\1downarrow.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Properties\Application\1downarrow1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Properties\Application\1downarrow11.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Properties\Application\1downarrow2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Properties\Application\1leftarrow.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Properties\Application\1leftarrow1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Properties\Application\1rightarrow.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Properties\Application\1rightarrow1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Properties\Application\2leftarrow.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Properties\Application\2rightarrow.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Properties\Application\2uparrow.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Properties\Application\3dowarrow.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Properties\Application\3floppy_unmount.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Properties\Application\advancedsettings.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Properties\Application\advancedsettings_36.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Properties\Application\agt_action_fail1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Properties\Application\agt_action_success.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Properties\Application\agt_back.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Properties\Application\agt_forward.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Properties\Application\AJ_Portable_Projection_Screen.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Properties\Application\background.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Properties\Application\background_36.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Properties\Application\Blackout on 36.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Properties\Application\Blackout on.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Properties\Application\Blackout on2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Properties\Application\clean.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Properties\Application\clock.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Properties\Application\colors.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Properties\Application\Computer.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Properties\Application\easymoblog.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Properties\Application\edit.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Properties\Application\edit_add.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Properties\Application\edit_remove.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Properties\Application\editcopy.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Properties\Application\editsong.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Properties\Application\editsong_36.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Properties\Application\error.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Properties\Application\exit.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Properties\Application\fade1blue.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Properties\Application\fileopen.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Properties\Application\filesave.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Properties\Application\folder_favorites.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Properties\Application\folder_favorites_36.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Properties\Application\gpg.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Properties\Application\gplv3-127x51.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Properties\Application\highlight.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Properties\Application\highlight_36.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Properties\Application\highlight_red _36.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Properties\Application\highlight_red.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Properties\Application\kate.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Properties\Application\kate_36.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Properties\Application\keditbookmarks.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Properties\Application\ktip.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Properties\Application\leinwand16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Properties\Application\leinwand16_no.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Properties\Application\link.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Properties\Application\logo.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Properties\Application\monitor_256.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Properties\Application\newsong_36.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Properties\Application\ok16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Properties\Application\package_favorite.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Properties\Application\pb mit schwarz.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Properties\Application\pb web.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Properties\Application\Projection off 36.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Properties\Application\Projection off.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Properties\Application\Projection on 36.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Properties\Application\Projection on.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Properties\Application\save_36.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Properties\Application\search.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Properties\Application\search_36.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Properties\Application\searchg.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Properties\Application\searchx.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Properties\Application\text_align_center.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Properties\Application\text_align_left.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Properties\Application\text_align_right.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Properties\Application\translate.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Properties\Application\translate_active.png" />
+    <None Include="Properties\Application\xmag.png" />
+    <None Include="Properties\Application\wheel16.png" />
+    <None Include="Properties\Application\update16.png" />
+    <None Include="Properties\Application\unlink.png" />
+    <None Include="Properties\Application\translate_small.png" />
+    <None Include="Properties\Application\translate_disabled_small.png" />
+    <None Include="Properties\Application\translate_disabled.png" />
+    <None Include="Properties\Application\translate_cross_small.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
