@@ -21,17 +21,32 @@
  */
 
 using System;
+using System.Drawing;
 
-namespace PraiseBase.Presenter
+namespace PraiseBase.Presenter.Projection
 {
-    public abstract class BaseLayer
+    public class ImageLayer : BaseLayer
     {
-        public void writeOut(System.Drawing.Graphics gr)
+        public Image Image { get; set; }
+
+        private readonly Color _backgroundColor;
+
+        public ImageLayer(Color backgroundColor)
         {
-            Object[] args = { };
-            writeOut(gr, args);
+            _backgroundColor = backgroundColor;
         }
 
-        public abstract void writeOut(System.Drawing.Graphics gr, Object[] args);
+        public override void WriteOut(Graphics gr, Object[] args)
+        {
+            int w = (int)gr.VisibleClipBounds.Width;
+            int h = (int)gr.VisibleClipBounds.Height;
+
+            gr.FillRectangle(new SolidBrush(_backgroundColor), 0, 0, w, h);
+            if (Image != null)
+            {
+                gr.DrawImage(Image, new Rectangle(0, 0, w, h), 0, 0, Image.Width, Image.Height, GraphicsUnit.Pixel);
+            }
+        }
+
     }
 }

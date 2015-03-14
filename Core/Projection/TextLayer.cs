@@ -26,14 +26,13 @@ using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Drawing.Text;
 using PraiseBase.Presenter.Model;
-using PraiseBase.Presenter.Projection;
 using PraiseBase.Presenter.Util;
 
-namespace PraiseBase.Presenter
+namespace PraiseBase.Presenter.Projection
 {
-    internal class TextLayer : BaseLayer
+    public class TextLayer : BaseLayer
     {
-        private SlideTextFormatting formatting;
+        private SlideTextFormatting _formatting;
 
         /// <summary>
         /// Main text
@@ -62,10 +61,10 @@ namespace PraiseBase.Presenter
 
         public TextLayer(SlideTextFormatting formatting)
         {
-            this.formatting = formatting;
+            _formatting = formatting;
         }
 
-        public override void writeOut(System.Drawing.Graphics gr, object[] args)
+        public override void WriteOut(Graphics gr, object[] args)
         {
             float canvasWidth = gr.VisibleClipBounds.Width;
             float canvasHeight = gr.VisibleClipBounds.Height;
@@ -75,17 +74,17 @@ namespace PraiseBase.Presenter
             //
             if (MainText.Length > 0)
             {
-                TextFormatting mainTextFormat = (TextFormatting)formatting.Text.MainText.Clone();
-                TextFormatting subTextFormat = (TextFormatting)formatting.Text.SubText.Clone();
+                TextFormatting mainTextFormat = (TextFormatting)_formatting.Text.MainText.Clone();
+                TextFormatting subTextFormat = (TextFormatting)_formatting.Text.SubText.Clone();
 
                 // Width and height of text box
-                float usableWidth = canvasWidth - (formatting.Text.HorizontalPadding + formatting.Text.HorizontalPadding);
-                float usableHeight = canvasHeight - (formatting.Text.VerticalPadding + formatting.Text.VerticalPadding);
+                float usableWidth = canvasWidth - (_formatting.Text.HorizontalPadding + _formatting.Text.HorizontalPadding);
+                float usableHeight = canvasHeight - (_formatting.Text.VerticalPadding + _formatting.Text.VerticalPadding);
 
                 // Draw borders of usable area
                 if (DrawBordersForDebugging)
                 {
-                    gr.DrawRectangle(Pens.Red, new Rectangle(formatting.Text.HorizontalPadding, formatting.Text.VerticalPadding, (int)usableWidth, (int)usableHeight));
+                    gr.DrawRectangle(Pens.Red, new Rectangle(_formatting.Text.HorizontalPadding, _formatting.Text.VerticalPadding, (int)usableWidth, (int)usableHeight));
                 }
 
                 // Line spacing
@@ -93,7 +92,7 @@ namespace PraiseBase.Presenter
                 int subTextLineSpacing = subTextFormat.LineSpacing;
 
                 // Wrap long lines
-                if (formatting.LineWrap)
+                if (_formatting.LineWrap)
                 {
                     List<String> wrappedLines = new List<string>();
                     foreach (String l in MainText)
@@ -150,11 +149,10 @@ namespace PraiseBase.Presenter
                 }
 
                 // Scale text
-                float scalingFactor = 1.0f;
-                if (formatting.ScaleFontSize && (usedWidth > usableWidth || usedHeight > usableHeight))
+                if (_formatting.ScaleFontSize && (usedWidth > usableWidth || usedHeight > usableHeight))
                 {
                     // Calculate scaling factor
-                    scalingFactor = Math.Min(usableWidth / usedWidth, usableHeight / usedHeight);
+                    var scalingFactor = Math.Min(usableWidth / usedWidth, usableHeight / usedHeight);
                     
                     // Adapt main text format
                     mainTextFormat.Font = new Font(mainTextFormat.Font.FontFamily, mainTextFormat.Font.Size * scalingFactor, mainTextFormat.Font.Style);
@@ -176,36 +174,36 @@ namespace PraiseBase.Presenter
                 }
 
                 // Set horizontal starting position
-                float textStartX = formatting.Text.HorizontalPadding;
-                if (formatting.Text.Orientation.Horizontal == HorizontalOrientation.Center)
+                float textStartX = _formatting.Text.HorizontalPadding;
+                if (_formatting.Text.Orientation.Horizontal == HorizontalOrientation.Center)
                 {
                     textStartX = canvasWidth / 2;
                 }
-                else if (formatting.Text.Orientation.Horizontal == HorizontalOrientation.Right)
+                else if (_formatting.Text.Orientation.Horizontal == HorizontalOrientation.Right)
                 {
                     textStartX = textStartX + usableWidth;
                 }
 
                 // Set vertical starting position
-                float textStartY = formatting.Text.VerticalPadding;
-                if (formatting.Text.Orientation.Vertical == VerticalOrientation.Middle)
+                float textStartY = _formatting.Text.VerticalPadding;
+                if (_formatting.Text.Orientation.Vertical == VerticalOrientation.Middle)
                 {
                     textStartY = textStartY + (usableHeight / 2) - (usedHeight / 2);
                 }
-                else if (formatting.Text.Orientation.Vertical == VerticalOrientation.Bottom)
+                else if (_formatting.Text.Orientation.Vertical == VerticalOrientation.Bottom)
                 {
                     textStartY = textStartY + usableHeight - usedHeight;
                 }
 
                 // Sub text starting position
                 float subTextStartX = textStartX;
-                if (formatting.Text.Orientation.Horizontal == HorizontalOrientation.Left)
+                if (_formatting.Text.Orientation.Horizontal == HorizontalOrientation.Left)
                 {
-                    subTextStartX += formatting.Text.HorizontalSubTextOffset;
+                    subTextStartX += _formatting.Text.HorizontalSubTextOffset;
                 }
-                else if (formatting.Text.Orientation.Horizontal == HorizontalOrientation.Right)
+                else if (_formatting.Text.Orientation.Horizontal == HorizontalOrientation.Right)
                 {
-                    subTextStartX -= formatting.Text.HorizontalSubTextOffset;
+                    subTextStartX -= _formatting.Text.HorizontalSubTextOffset;
                 }
                 float subTextStartY = textStartY + (mainTextLineHeight + subTextLineSpacing);
 
@@ -223,12 +221,12 @@ namespace PraiseBase.Presenter
                 }
 
                 // Draw main text
-                DrawLines(gr, MainText, textStartX, textStartY, mainTextFormat, formatting.Text.Orientation.Horizontal, lineHeight);
+                DrawLines(gr, MainText, textStartX, textStartY, mainTextFormat, _formatting.Text.Orientation.Horizontal, lineHeight);
 
                 // Sub-text (translation)
                 if (hasSubText)
                 {
-                    DrawLines(gr, SubText, subTextStartX, subTextStartY, subTextFormat, formatting.Text.Orientation.Horizontal, lineHeight);
+                    DrawLines(gr, SubText, subTextStartX, subTextStartY, subTextFormat, _formatting.Text.Orientation.Horizontal, lineHeight);
                 }
             }
 
@@ -238,13 +236,13 @@ namespace PraiseBase.Presenter
             if (HeaderText != null && HeaderText.Length > 0)
             {
                 // Get X
-                float x = GetXPosition(formatting.Header, canvasWidth);
+                float x = GetXPosition(_formatting.Header, canvasWidth);
 
                 // Get Y
-                float y = formatting.Header.VerticalPadding;
+                float y = _formatting.Header.VerticalPadding;
 
                 // Draw
-                DrawTextBox(gr, HeaderText, x, y, formatting.Header, false);
+                DrawTextBox(gr, HeaderText, x, y, _formatting.Header, false);
             }
 
             //
@@ -253,13 +251,13 @@ namespace PraiseBase.Presenter
             if (FooterText != null && FooterText.Length > 0)
             {
                 // Get X
-                float x = GetXPosition(formatting.Footer, canvasWidth);
+                float x = GetXPosition(_formatting.Footer, canvasWidth);
 
                 // Get Y
-                float y = canvasHeight - formatting.Footer.VerticalPadding;
+                float y = canvasHeight - _formatting.Footer.VerticalPadding;
 
                 // Draw
-                DrawTextBox(gr, FooterText, x, y, formatting.Footer, true);
+                DrawTextBox(gr, FooterText, x, y, _formatting.Footer, true);
             }
         }
 
@@ -357,7 +355,7 @@ namespace PraiseBase.Presenter
             MapStringFormatAlignment(orientation, strFormat);
 
             // Shadow
-            if (formatting.ShadowEnabled)
+            if (_formatting.ShadowEnabled)
             {
                 int size = textFormatting.Shadow.Size;
                 int distance = textFormatting.Shadow.Distance;
@@ -366,10 +364,10 @@ namespace PraiseBase.Presenter
                 float shadowY = textY - (distance * (float)Math.Sin(Math.PI * (90 + textFormatting.Shadow.Direction) / 180));
 
                 Brush shadodBrush = new SolidBrush(Color.FromArgb(15, textFormatting.Shadow.Color));
-                if (formatting.SmoothShadow)
+                if (_formatting.SmoothShadow)
                 {
-                    gr.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.HighQuality;
-                    gr.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.HighQualityBilinear;
+                    gr.SmoothingMode = SmoothingMode.HighQuality;
+                    gr.InterpolationMode = InterpolationMode.HighQualityBilinear;
                     gr.TextRenderingHint = TextRenderingHint.AntiAliasGridFit;
                 }
 
@@ -387,7 +385,7 @@ namespace PraiseBase.Presenter
             }
 
             // Outline
-            if (formatting.OutlineEnabled)
+            if (_formatting.OutlineEnabled)
             {
                 int outLineThickness = textFormatting.Outline.Width;
                 if (outLineThickness > 0)

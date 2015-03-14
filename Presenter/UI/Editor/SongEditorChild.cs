@@ -583,7 +583,7 @@ namespace PraiseBase.Presenter.UI.Editor
                 SubText = slide.Translation.ToArray()
             };
 
-            ImageLayer il = new ImageLayer();
+            ImageLayer il = new ImageLayer(_settings.ProjectionBackColor);
 
             IBackground bg = Song.Parts[_currentPartId].Slides[_currentSlideId].Background;
             il.Image = ImageManager.Instance.GetImage(bg);
@@ -593,8 +593,8 @@ namespace PraiseBase.Presenter.UI.Editor
             gr.CompositingQuality = CompositingQuality.HighSpeed;
             gr.SmoothingMode = SmoothingMode.HighSpeed;
 
-            il.writeOut(gr, null);
-            sl.writeOut(gr, null);
+            il.WriteOut(gr, null);
+            sl.WriteOut(gr, null);
 
             pictureBoxPreview.Image = bmp;
         }

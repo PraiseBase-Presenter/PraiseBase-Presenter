@@ -622,7 +622,7 @@ namespace PraiseBase.Presenter.UI.Presenter
             {
                 if (listViewImageQueue.Items.Count > 0)
                 {
-                    ImageLayer iml = new ImageLayer();
+                    ImageLayer iml = new ImageLayer(Settings.Default.ProjectionBackColor);
                     IBackground bg = (IBackground)listViewImageQueue.Items[0].Tag;
                     iml.Image = ImageManager.Instance.GetImage(bg);
                     ProjectionManager.Instance.DisplayLayer(1, iml, Settings.Default.ProjectionFadeTimeLayer1);
@@ -648,7 +648,7 @@ namespace PraiseBase.Presenter.UI.Presenter
                 // Current slide + attached image
             else
             {
-                ImageLayer iml = new ImageLayer();
+                ImageLayer iml = new ImageLayer(Settings.Default.ProjectionBackColor);
                 iml.Image = ImageManager.Instance.GetImage(cs.Background);
                 ProjectionManager.Instance.DisplayLayer(1, iml, Settings.Default.ProjectionFadeTimeLayer1);
                 ProjectionManager.Instance.DisplayLayer(2, ssl);
@@ -701,7 +701,7 @@ namespace PraiseBase.Presenter.UI.Presenter
                 }
 
                 // Show image
-                ImageLayer iml = new ImageLayer();
+                ImageLayer iml = new ImageLayer(Settings.Default.ProjectionBackColor);
                 iml.Image = ImageManager.Instance.GetImage(e.Background);
                 ProjectionManager.Instance.DisplayLayer(1, iml, Settings.Default.ProjectionFadeTimeLayer1);
 
@@ -936,7 +936,7 @@ namespace PraiseBase.Presenter.UI.Presenter
                         ProjectionManager.Instance.HideLayer(2, Settings.Default.ProjectionFadeTime);
                     }
 
-                    ImageLayer iml = new ImageLayer();
+                    ImageLayer iml = new ImageLayer(Settings.Default.ProjectionBackColor);
                     iml.Image = ImageManager.Instance.GetImageFromRelPath((string)listViewDirectoryImages.Items[idx].Tag);
                     ProjectionManager.Instance.DisplayLayer(1, iml, Settings.Default.ProjectionFadeTimeLayer1);
 
@@ -1134,7 +1134,7 @@ namespace PraiseBase.Presenter.UI.Presenter
                     return;
                 }
                 diaTimer.Tag = diaStack;
-                ImageLayer iml = new ImageLayer();
+                ImageLayer iml = new ImageLayer(Settings.Default.ProjectionBackColor);
                 iml.Image = Image.FromFile(diaStack.Dequeue());
                 ProjectionManager.Instance.DisplayLayer(1, iml, Settings.Default.ProjectionFadeTimeLayer1);
                 diaTimer.Start();
@@ -1150,7 +1150,7 @@ namespace PraiseBase.Presenter.UI.Presenter
                 buttonDiaShow.Text = StringResources.StartSlideshow;
                 return;
             }
-            ImageLayer iml = new ImageLayer();
+            ImageLayer iml = new ImageLayer(Settings.Default.ProjectionBackColor);
             iml.Image = Image.FromFile(((Queue<string>)((Timer)sender).Tag).Dequeue());
             ProjectionManager.Instance.DisplayLayer(1, iml, Settings.Default.ProjectionFadeTimeLayer1);
         }
@@ -1209,7 +1209,7 @@ namespace PraiseBase.Presenter.UI.Presenter
                         ProjectionManager.Instance.HideLayer(2);
                     }
 
-                    ImageLayer iml = new ImageLayer();
+                    ImageLayer iml = new ImageLayer(Settings.Default.ProjectionBackColor);
                     iml.Image = ImageManager.Instance.GetImageFromRelPath((string)listViewImageHistory.Items[idx].Tag);
                     ProjectionManager.Instance.DisplayLayer(1, iml, Settings.Default.ProjectionFadeTimeLayer1);
                 }
@@ -1376,7 +1376,7 @@ namespace PraiseBase.Presenter.UI.Presenter
                 }
 
                 int idx = listViewImageQueue.SelectedIndices[0];
-                ImageLayer iml = new ImageLayer();
+                ImageLayer iml = new ImageLayer(Settings.Default.ProjectionBackColor);
                 iml.Image = ImageManager.Instance.GetImageFromRelPath((string)listViewImageQueue.Items[idx].Tag);
                 ProjectionManager.Instance.DisplayLayer(1, iml, Settings.Default.ProjectionFadeTimeLayer1);
             }
@@ -1438,7 +1438,7 @@ namespace PraiseBase.Presenter.UI.Presenter
                     {
                         ProjectionManager.Instance.HideLayer(2);
                     }
-                    ImageLayer iml = new ImageLayer();
+                    ImageLayer iml = new ImageLayer(Settings.Default.ProjectionBackColor);
                     iml.Image = ImageManager.Instance.GetImageFromRelPath((string)listViewFavorites.Items[idx].Tag);
                     ProjectionManager.Instance.DisplayLayer(2, iml);
 

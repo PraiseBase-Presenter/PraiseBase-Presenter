@@ -24,6 +24,7 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
 using PraiseBase.Presenter.Forms;
+using PraiseBase.Presenter.Projection;
 using PraiseBase.Presenter.Properties;
 
 namespace PraiseBase.Presenter.UI.Presenter
@@ -93,7 +94,7 @@ namespace PraiseBase.Presenter.UI.Presenter
         {
             var bmp = new Bitmap(Width, Height);
             Graphics gr = Graphics.FromImage(bmp);
-            layerContents.writeOut(gr);
+            layerContents.WriteOut(gr);
 
             if (layerNum == 2)
             {
