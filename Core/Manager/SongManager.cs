@@ -239,12 +239,16 @@ namespace PraiseBase.Presenter.Manager
             return tmpList;
         }
 
+        /// <summary>
+        /// Saves the currently active song
+        /// </summary>
         public void SaveCurrentSong()
         {
-            ISongFilePlugin sfw = SongFilePluginFactory.Create(CurrentSong.Filename);
-            if (sfw.IsWritingSupported())
+            if (CurrentSong == null) return;
+
+            if (CurrentSong.Plugin.IsWritingSupported())
             {
-                sfw.Save(CurrentSong.Song, CurrentSong.Filename);
+                CurrentSong.Plugin.Save(CurrentSong.Song, CurrentSong.Filename);
             }
             else
             {

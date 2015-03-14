@@ -487,7 +487,7 @@ namespace PraiseBase.Presenter.UI.Presenter
             songDetailElement.SetSong(_songManager.CurrentSong.Song, previousSong, nextSong);
 
             toolStripButtonQA.Enabled = true;
-            updateQAButtonStage();
+            UpdateQaButtonState();
             qaSpellingToolStripMenuItem.Checked = _songManager.CurrentSong.Song.QualityIssues.Contains(SongQualityAssuranceIndicator.Spelling);
             qaTranslationToolStripMenuItem.Checked = _songManager.CurrentSong.Song.QualityIssues.Contains(SongQualityAssuranceIndicator.Translation);
             qaImagesToolStripMenuItem.Checked = _songManager.CurrentSong.Song.QualityIssues.Contains(SongQualityAssuranceIndicator.Images);
@@ -1837,44 +1837,54 @@ namespace PraiseBase.Presenter.UI.Presenter
         private void qaSpellingToolStripMenuItem_Click(object sender, EventArgs e)
         {
             _songManager.CurrentSong.Song.QualityIssues.Set(SongQualityAssuranceIndicator.Spelling, qaSpellingToolStripMenuItem.Checked);
-            saveCurrentSong();
-            updateQAButtonStage();
+            if (SaveCurrentSong())
+            {
+                UpdateQaButtonState();
+            }
         }
 
         private void qaTranslationToolStripMenuItem_Click(object sender, EventArgs e)
         {
             _songManager.CurrentSong.Song.QualityIssues.Set(SongQualityAssuranceIndicator.Translation, qaTranslationToolStripMenuItem.Checked);
-            saveCurrentSong();
-            updateQAButtonStage();
+            if (SaveCurrentSong())
+            {
+                UpdateQaButtonState();
+            }
         }
 
         private void qaImagesToolStripMenuItem_Click(object sender, EventArgs e)
         {
             _songManager.CurrentSong.Song.QualityIssues.Set(SongQualityAssuranceIndicator.Images, qaImagesToolStripMenuItem.Checked);
-            saveCurrentSong();
-            updateQAButtonStage();
+            if (SaveCurrentSong())
+            {
+                UpdateQaButtonState();
+            }
         }
 
         private void qaSegmentationToolStripMenuItem_Click(object sender, EventArgs e)
         {
             _songManager.CurrentSong.Song.QualityIssues.Set(SongQualityAssuranceIndicator.Segmentation, qaSegmentationToolStripMenuItem.Checked);
-            saveCurrentSong();
-            updateQAButtonStage();
+            if (SaveCurrentSong())
+            {
+                UpdateQaButtonState();
+            }
         }
 
-        private void saveCurrentSong()
+        private bool SaveCurrentSong()
         {
             try
             {
                 _songManager.SaveCurrentSong();
+                return true;
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message, "Fehler", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(ex.Message, StringResources.Error, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return false;
             }
         }
 
-        private void updateQAButtonStage()
+        private void UpdateQaButtonState()
         {
             if (_songManager.CurrentSong.Song.Comment != String.Empty || _songManager.CurrentSong.Song.QualityIssues.Any())
             {
@@ -1886,6 +1896,11 @@ namespace PraiseBase.Presenter.UI.Presenter
             }
         }
 
+        /// <summary>
+        /// Shows a dialog box for editing a song comment
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void qAcommentsToolStripMenuItem_Click(object sender, EventArgs e)
         {
             if (_songManager.CurrentSong != null)
@@ -1898,15 +1913,10 @@ namespace PraiseBase.Presenter.UI.Presenter
                 if (qd.DialogResult == DialogResult.OK)
                 {
                     _songManager.CurrentSong.Song.Comment = qd.Comment;
-                    try
+                    if (SaveCurrentSong())
                     {
-                        _songManager.SaveCurrentSong();
+                        UpdateQaButtonState();
                     }
-                    catch (Exception ex)
-                    {
-                        MessageBox.Show(ex.Message, StringResources.Error, MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    }
-                    updateQAButtonStage();
                 }
             }
             else
