@@ -166,7 +166,15 @@ namespace PraiseBase.Presenter.UI.Presenter
 
         private void SongEditorWndOnSongSaved(object sender, SongSavedEventArgs songSavedEventArgs)
         {
-            _songManager.ReloadSongByPath(songSavedEventArgs.FileName);
+            var item = _songManager.GetSongItemByPath(songSavedEventArgs.FileName);
+            if (item != null)
+            {
+                _songManager.ReloadSongItem(item);
+                if (_songManager.CurrentSong == item)
+                {
+                    showCurrentSongDetails();
+                }
+            }
         }
 
         private void ShowAndFocusSongEditor()

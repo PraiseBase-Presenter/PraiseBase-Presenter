@@ -174,6 +174,27 @@ namespace PraiseBase.Presenter.Manager
         }
 
         /// <summary>
+        /// Reloads the given song 
+        /// </summary>
+        /// <param name="si">Path to the song file</param>
+        public void ReloadSongItem(SongItem si)
+        {
+            if (si != null)
+            {
+                try
+                {
+                    var song = si.Plugin.Load(si.Filename);
+                    si.Song = song;
+                    si.SearchText = SongSearchUtil.GetSearchableSongText(song);
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(@"Unable to load song file " + si.Filename + @" (" + e.Message + @")");
+                }
+            }
+        }
+
+        /// <summary>
         /// Gets the song with the specified path
         /// </summary>
         /// <param name="path">Path to the song file</param>
@@ -193,28 +214,6 @@ namespace PraiseBase.Presenter.Manager
                 }
             }
             return null;
-        }
-
-        /// <summary>
-        /// Reloads the song with the specified path
-        /// </summary>
-        /// <param name="path">Path to the song file</param>
-        public void ReloadSongByPath(string path)
-        {
-            SongItem si = GetSongItemByPath(path);
-            if (si != null)
-            {
-                try
-                {
-                    var song = si.Plugin.Load(si.Filename);
-                    si.Song = song;
-                    si.SearchText = SongSearchUtil.GetSearchableSongText(song);
-                }
-                catch (Exception e)
-                {
-                    Console.WriteLine(@"Unable to load song file " + path + @" (" + e.Message + @")");
-                }
-            }
         }
 
         /// <summary>
