@@ -65,8 +65,6 @@ namespace PraiseBase.Presenter.UI.Presenter
 
         private int _currentSetListHashCode;
 
-        private const string SetListFileExtension = "pbpl";
-
         private readonly string _originalFormTitle;
 
         private readonly SongManager _songManager;
@@ -2234,7 +2232,7 @@ namespace PraiseBase.Presenter.UI.Presenter
 
         private string GetSetListFileFilter()
         {
-            return String.Format("{0} (*.{1})|*.{1}", StringResources.SetlistFile, SetListFileExtension);
+            return String.Format("{0} (*.{1})|*.{1}", StringResources.SetlistFile, SetlistWriter.FileExtension);
         }
 
         /// <summary>

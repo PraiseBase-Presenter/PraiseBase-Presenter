@@ -27,6 +27,8 @@ namespace PraiseBase.Presenter.Persistence.Setlists
 {
     public class SetlistWriter
     {
+        public const string FileExtension = "pbpl";
+
         public void Write(string filename, Setlist list)
         {
             XmlWriterHelper xml = new XmlWriterHelper("setlist", "1.0");
