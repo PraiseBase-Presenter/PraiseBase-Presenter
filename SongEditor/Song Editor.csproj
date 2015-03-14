@@ -20,7 +20,8 @@
     </StartupObject>
   </PropertyGroup>
   <PropertyGroup>
-    <ApplicationIcon>Computer.ico</ApplicationIcon>
+    <ApplicationIcon>
+    </ApplicationIcon>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|AnyCPU'">
     <DebugSymbols>true</DebugSymbols>
@@ -46,9 +47,6 @@
     <Reference Include="System.Windows.Forms" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="app.config" />
-  </ItemGroup>
-  <ItemGroup>
     <ProjectReference Include="..\Common Controls\PraiseBase Common Controls.csproj">
       <Project>{20f2017a-032c-462f-840f-a4ccf7b4609e}</Project>
       <Name>PraiseBase Common Controls</Name>
@@ -61,9 +59,6 @@
       <Project>{67651b76-5abd-4040-9a8f-3833130fc77d}</Project>
       <Name>PraiseBase Core Libraries</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Computer.ico" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Editor\EditorChildMetaData.cs" />
