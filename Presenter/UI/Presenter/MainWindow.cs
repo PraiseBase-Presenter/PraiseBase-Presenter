@@ -32,6 +32,7 @@ using System.Threading;
 using System.Windows.Forms;
 using PraiseBase.Presenter.Editor;
 using PraiseBase.Presenter.Forms;
+using PraiseBase.Presenter.Importer;
 using PraiseBase.Presenter.Manager;
 using PraiseBase.Presenter.Model;
 using PraiseBase.Presenter.Model.Bible;

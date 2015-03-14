@@ -9,7 +9,7 @@ using PraiseBase.Presenter.Persistence.PraiseBox;
 using PraiseBase.Presenter.Properties;
 using PraiseBase.Presenter.Template;
 
-namespace PraiseBase.Presenter.UI.Presenter
+namespace PraiseBase.Presenter.Importer
 {
     public partial class SongImporter : Form
     {
@@ -130,12 +130,9 @@ namespace PraiseBase.Presenter.UI.Presenter
 
                 if (checkBoxUseEditor.Checked)
                 {
-                    for (int x = 0; x < listViewSongs.Items.Count; x++)
+                    foreach (var f in filesToOpen)
                     {
-                        if (listViewSongs.Items[x].Checked)
-                        {
-                            OpenInEditor.Add(filesToOpen[x]);
-                        }
+                        OpenInEditor.Add(f);
                     }
                 }
 

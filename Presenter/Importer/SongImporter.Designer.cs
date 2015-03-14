@@ -1,4 +1,4 @@
-﻿namespace PraiseBase.Presenter.UI.Presenter
+﻿namespace PraiseBase.Presenter.Importer
 {
 	partial class SongImporter
 	{
