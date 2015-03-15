@@ -21,9 +21,7 @@
  */
 
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text.RegularExpressions;
 using PraiseBase.Presenter.Model;
 using PraiseBase.Presenter.Model.Song;
 
@@ -80,9 +78,9 @@ namespace PraiseBase.Presenter.Persistence.PowerPraise
                 foreach (var sld in prt.Slides)
                 {
                     var slide = new SongSlide();
-                    if (sld.BackgroundNr >= 0 && ppl.BackgroundImages.Count > sld.BackgroundNr - 1)
+                    if (sld.Background != null)
                     {
-                        slide.Background = ParseBackground(ppl.BackgroundImages[sld.BackgroundNr]);
+                        slide.Background = (IBackground)sld.Background.Clone();
                     }
                     slide.TextSize = sld.MainSize > 0
                         ? sld.MainSize
@@ -132,9 +130,6 @@ namespace PraiseBase.Presenter.Persistence.PowerPraise
                 }
             }
 
-            var bgIndex = 0;
-            var backgrounds = new Dictionary<string, int>();
-
             // Song parts
             foreach (var songPart in song.Parts)
             {
@@ -144,30 +139,14 @@ namespace PraiseBase.Presenter.Persistence.PowerPraise
                 };
                 foreach (var songSlide in songPart.Slides)
                 {
-                    var pplSlide = new PowerPraiseSong.Slide();
-
-                    var bg = MapBackground(songSlide.Background);
-                    int backgroundNr;
-                    if (bg == null)
+                    var pplSlide = new PowerPraiseSong.Slide
                     {
-                        bg = PowerPraiseConstants.DefaultBackground;
-                    }
-                    if (!backgrounds.ContainsKey(bg))
-                    {
-                        backgroundNr = bgIndex;
-                        backgrounds.Add(bg, bgIndex++);
-                    }
-                    else
-                    {
-                        backgroundNr = backgrounds[bg];
-                    }
-                    pplSlide.BackgroundNr = backgroundNr;
-
-                    pplSlide.MainSize =
-                        (int)
+                        Background = (IBackground) songSlide.Background.Clone(),
+                        MainSize = (int)
                             (songSlide.TextSize > 0
                                 ? songSlide.TextSize
-                                : (song.MainText != null && song.MainText.Font != null ? song.MainText.Font.Size : 0));
+                                : (song.MainText != null && song.MainText.Font != null ? song.MainText.Font.Size : 0))
+                    };
                     pplSlide.Lines.AddRange(songSlide.Lines);
                     pplSlide.Translation.AddRange(songSlide.Translation);
                     pplPart.Slides.Add(pplSlide);
@@ -217,10 +196,7 @@ namespace PraiseBase.Presenter.Persistence.PowerPraise
             ppl.SourceText = song.SongBooks.ToString();
             ppl.SourceTextEnabled = (song.SourcePosition == AdditionalInformationPosition.FirstSlide);
 
-
-            // Backgrounds
-            ppl.BackgroundImages.AddRange(backgrounds.Keys);
-
+            // Linespacing
             if (song.MainText != null)
             {
                 ppl.MainLineSpacing = song.MainText.LineSpacing;
@@ -228,46 +204,6 @@ namespace PraiseBase.Presenter.Persistence.PowerPraise
             }
 
             MapFormatting(song, ppl);
-        }
-
-        private static IBackground ParseBackground(string bg)
-        {
-            if (Regex.IsMatch(bg, @"^\d+$"))
-            {
-                int trySize;
-                if (int.TryParse(bg, out trySize))
-                {
-                    try
-                    {
-                        return new ColorBackground(PowerPraiseFileUtil.ConvertColor(trySize));
-                    }
-                    catch (ArgumentException)
-                    {
-                        return null;
-                    }
-                }
-            }
-            else if (bg.Trim() != String.Empty)
-            {
-                return new ImageBackground(bg);
-            }
-            return null;
-        }
-
-        private static string MapBackground(IBackground bg)
-        {
-            if (bg != null)
-            {
-                if (bg.GetType() == typeof (ImageBackground))
-                {
-                    return ((ImageBackground) bg).ImagePath;
-                }
-                if (bg.GetType() == typeof (ColorBackground))
-                {
-                    return PowerPraiseFileUtil.ConvertColor(((ColorBackground) bg).Color).ToString();
-                }
-            }
-            return null;
         }
 
         private void MapFormatting(PowerPraiseSong ppl, Song song)

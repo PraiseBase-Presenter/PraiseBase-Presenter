@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Drawing;
 using PraiseBase.Presenter.Model;
+using PraiseBase.Presenter.Model.Song;
 
 namespace PraiseBase.Presenter.Persistence.PowerPraise
 {
@@ -94,11 +95,6 @@ namespace PraiseBase.Presenter.Persistence.PowerPraise
         public ShadowFormatting TextShadowFormatting { get; set; }
 
         /// <summary>
-        ///     Background image paths (relative)
-        /// </summary>
-        public ComparableList<string> BackgroundImages { get; private set; }
-
-        /// <summary>
         ///     Main text line spacing
         /// </summary>
         public int MainLineSpacing { get; set; }
@@ -128,14 +124,13 @@ namespace PraiseBase.Presenter.Persistence.PowerPraise
             Parts = new ComparableList<Part>();
             Order = new ComparableList<Part>();
             CopyrightText = new ComparableList<string>();
-            BackgroundImages = new ComparableList<string>();
         }
 
         #region Equality members
 
         protected bool Equals(PowerPraiseSong other)
         {
-            return string.Equals(Title, other.Title) && string.Equals(Category, other.Category) && string.Equals(Language, other.Language) && Equals(Parts, other.Parts) && Equals(Order, other.Order) && Equals(CopyrightText, other.CopyrightText) && CopyrightTextPosition == other.CopyrightTextPosition && string.Equals(SourceText, other.SourceText) && SourceTextEnabled.Equals(other.SourceTextEnabled) && MainTextFontFormatting.Equals(other.MainTextFontFormatting) && TranslationTextFontFormatting.Equals(other.TranslationTextFontFormatting) && CopyrightTextFontFormatting.Equals(other.CopyrightTextFontFormatting) && SourceTextFontFormatting.Equals(other.SourceTextFontFormatting) && TextOutlineFormatting.Equals(other.TextOutlineFormatting) && TextShadowFormatting.Equals(other.TextShadowFormatting) && Equals(BackgroundImages, other.BackgroundImages) && MainLineSpacing == other.MainLineSpacing && TranslationLineSpacing == other.TranslationLineSpacing && Equals(TextOrientation, other.TextOrientation) && TranslationTextPosition == other.TranslationTextPosition && Borders.Equals(other.Borders);
+            return string.Equals(Title, other.Title) && string.Equals(Category, other.Category) && string.Equals(Language, other.Language) && Equals(Parts, other.Parts) && Equals(Order, other.Order) && Equals(CopyrightText, other.CopyrightText) && CopyrightTextPosition == other.CopyrightTextPosition && string.Equals(SourceText, other.SourceText) && SourceTextEnabled.Equals(other.SourceTextEnabled) && MainTextFontFormatting.Equals(other.MainTextFontFormatting) && TranslationTextFontFormatting.Equals(other.TranslationTextFontFormatting) && CopyrightTextFontFormatting.Equals(other.CopyrightTextFontFormatting) && SourceTextFontFormatting.Equals(other.SourceTextFontFormatting) && TextOutlineFormatting.Equals(other.TextOutlineFormatting) && TextShadowFormatting.Equals(other.TextShadowFormatting) && MainLineSpacing == other.MainLineSpacing && TranslationLineSpacing == other.TranslationLineSpacing && Equals(TextOrientation, other.TextOrientation) && TranslationTextPosition == other.TranslationTextPosition && Borders.Equals(other.Borders);
         }
 
         public override bool Equals(object obj)
@@ -165,7 +160,6 @@ namespace PraiseBase.Presenter.Persistence.PowerPraise
                 hashCode = (hashCode*397) ^ SourceTextFontFormatting.GetHashCode();
                 hashCode = (hashCode*397) ^ TextOutlineFormatting.GetHashCode();
                 hashCode = (hashCode*397) ^ TextShadowFormatting.GetHashCode();
-                hashCode = (hashCode*397) ^ (BackgroundImages != null ? BackgroundImages.GetHashCode() : 0);
                 hashCode = (hashCode*397) ^ MainLineSpacing;
                 hashCode = (hashCode*397) ^ TranslationLineSpacing;
                 hashCode = (hashCode*397) ^ (TextOrientation != null ? TextOrientation.GetHashCode() : 0);
@@ -237,7 +231,7 @@ namespace PraiseBase.Presenter.Persistence.PowerPraise
             /// <summary>
             ///     Background number (starting from 0)
             /// </summary>
-            public int BackgroundNr { get; set; }
+            public IBackground Background { get; set; }
 
             /// <summary>
             ///     Song text lines
@@ -259,7 +253,7 @@ namespace PraiseBase.Presenter.Persistence.PowerPraise
 
             protected bool Equals(Slide other)
             {
-                return MainSize == other.MainSize && BackgroundNr == other.BackgroundNr && Equals(Lines, other.Lines) && Equals(Translation, other.Translation);
+                return MainSize == other.MainSize && Equals(Background, other.Background) && Equals(Lines, other.Lines) && Equals(Translation, other.Translation);
             }
 
             public override bool Equals(object obj)
@@ -275,7 +269,7 @@ namespace PraiseBase.Presenter.Persistence.PowerPraise
                 unchecked
                 {
                     var hashCode = MainSize;
-                    hashCode = (hashCode*397) ^ BackgroundNr;
+                    hashCode = (hashCode*397) ^ (Background != null ? Background.GetHashCode() : 0);
                     hashCode = (hashCode*397) ^ (Lines != null ? Lines.GetHashCode() : 0);
                     hashCode = (hashCode*397) ^ (Translation != null ? Translation.GetHashCode() : 0);
                     return hashCode;

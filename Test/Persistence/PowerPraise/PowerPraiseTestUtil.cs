@@ -173,7 +173,8 @@ namespace PraiseBase.Presenter.Persistence.PowerPraise
 
             PowerPraiseSong.Slide slide = new PowerPraiseSong.Slide
             {
-                MainSize = 42, BackgroundNr = 0
+                MainSize = 42,
+                Background = new ImageBackground("Blumen\\Blume 3.jpg")
             };
             slide.Lines.Add("Näher, mein Gott, zu Dir,");
             slide.Lines.Add("sei meine Bitt'!");
@@ -184,7 +185,7 @@ namespace PraiseBase.Presenter.Persistence.PowerPraise
             slide = new PowerPraiseSong.Slide
             {
                 MainSize = 44,
-                BackgroundNr = 0
+                Background = new ImageBackground("Blumen\\Blume 3.jpg")
             };
             slide.Lines.Add("Nur an dem Herzen Dein");
             slide.Lines.Add("kann ich geborgen sein;");
@@ -201,7 +202,7 @@ namespace PraiseBase.Presenter.Persistence.PowerPraise
             slide = new PowerPraiseSong.Slide
             {
                 MainSize = 42,
-                BackgroundNr = 0
+                Background = new ImageBackground("Blumen\\Blume 3.jpg")
             };
             slide.Lines.Add("Näher, mein Gott, zu Dir!");
             slide.Lines.Add("Ein jeder Tag");
@@ -212,7 +213,7 @@ namespace PraiseBase.Presenter.Persistence.PowerPraise
             slide = new PowerPraiseSong.Slide
             {
                 MainSize = 42,
-                BackgroundNr = 0
+                Background = new ImageBackground("Blumen\\Blume 3.jpg")
             };
             slide.Lines.Add("Wie seiner Gnade Macht,");
             slide.Lines.Add("Erlösung hat gebracht,");
@@ -229,7 +230,7 @@ namespace PraiseBase.Presenter.Persistence.PowerPraise
             slide = new PowerPraiseSong.Slide
             {
                 MainSize = 42,
-                BackgroundNr = 0
+                Background = new ImageBackground("Blumen\\Blume 3.jpg")
             };
             slide.Lines.Add("Näher, mein Gott, zu Dir!");
             slide.Lines.Add("Dich bet' ich an.");
@@ -240,7 +241,7 @@ namespace PraiseBase.Presenter.Persistence.PowerPraise
             slide = new PowerPraiseSong.Slide
             {
                 MainSize = 42,
-                BackgroundNr = 0
+                Background = new ImageBackground("Blumen\\Blume 3.jpg")
             };
             slide.Lines.Add("Von Banden frei und los,");
             slide.Lines.Add("ruh' ich in Deinem Schoss.");
@@ -302,9 +303,6 @@ namespace PraiseBase.Presenter.Persistence.PowerPraise
                 Direction = 125,
                 Enabled = true
             };
-
-            // Background
-            ppl.BackgroundImages.Add("Blumen\\Blume 3.jpg");
 
             // Line spacing
             ppl.MainLineSpacing = 30;

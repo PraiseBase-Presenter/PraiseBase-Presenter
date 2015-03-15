@@ -24,6 +24,7 @@ using System;
 using System.Collections.Generic;
 using System.Xml;
 using PraiseBase.Presenter.Model;
+using PraiseBase.Presenter.Model.Song;
 
 namespace PraiseBase.Presenter.Persistence.PowerPraise
 {
@@ -80,13 +81,9 @@ namespace PraiseBase.Presenter.Persistence.PowerPraise
 
             xmlRoot.AppendChild(xmlDoc.CreateElement("songtext"));
 
-            var usedImages = new List<string>();
-            var numBackgrounds = sng.BackgroundImages.Count;
-            if (numBackgrounds == 0)
-            {
-                sng.BackgroundImages.Add(PowerPraiseConstants.DefaultBackground);
-                numBackgrounds++;
-            }
+            // Dictionary of backgrouns
+            var bgIndex = 0;
+            var backgrounds = new Dictionary<string, int>();
 
             // Song parts
             foreach (var prt in sng.Parts)
@@ -104,14 +101,19 @@ namespace PraiseBase.Presenter.Persistence.PowerPraise
                     var mainsize = sld.MainSize > 0 ? sld.MainSize : (int) sng.MainTextFontFormatting.Font.Size;
                     tn2.SetAttribute("mainsize", mainsize.ToString());
 
-                    // Image number
-                    sld.BackgroundNr = Math.Min(numBackgrounds - 1, Math.Max(0, sld.BackgroundNr));
-                    tn2.SetAttribute("backgroundnr", (sld.BackgroundNr).ToString());
-                    var img = sng.BackgroundImages[sld.BackgroundNr];
-                    if (!usedImages.Contains(img))
+                    // Backgound number
+                    var bg = MapBackground(sld.Background) ?? PowerPraiseConstants.DefaultBackground;
+                    int backgroundNr;
+                    if (!backgrounds.ContainsKey(bg))
                     {
-                        usedImages.Add(img);
+                        backgroundNr = bgIndex;
+                        backgrounds.Add(bg, bgIndex++);
                     }
+                    else
+                    {
+                        backgroundNr = backgrounds[bg];
+                    }
+                    tn2.SetAttribute("backgroundnr", backgroundNr.ToString());
 
                     // Lyrics
                     foreach (var ln in sld.Lines)
@@ -221,10 +223,14 @@ namespace PraiseBase.Presenter.Persistence.PowerPraise
 
             // Backgrounds
             xmlRoot["formatting"].AppendChild(xmlDoc.CreateElement("background"));
-            foreach (var imp in usedImages)
+            if (backgrounds.Count == 0)
+            {
+                backgrounds.Add(PowerPraiseConstants.DefaultBackground, 0);
+            }
+            foreach (string bg in backgrounds.Keys)
             {
                 var tn = xmlDoc.CreateElement("file");
-                tn.InnerText = imp;
+                tn.InnerText = bg;
                 xmlRoot["formatting"]["background"].AppendChild(tn);
             }
 
@@ -312,6 +318,22 @@ namespace PraiseBase.Presenter.Persistence.PowerPraise
             elem[key]["outline"].InnerText = f.OutlineWidth.ToString();
             elem[key].AppendChild(xmlDoc.CreateElement("shadow"));
             elem[key]["shadow"].InnerText = f.ShadowDistance.ToString();
+        }
+
+        private static string MapBackground(IBackground bg)
+        {
+            if (bg != null)
+            {
+                if (bg.GetType() == typeof(ImageBackground))
+                {
+                    return ((ImageBackground)bg).ImagePath;
+                }
+                if (bg.GetType() == typeof(ColorBackground))
+                {
+                    return PowerPraiseFileUtil.ConvertColor(((ColorBackground)bg).Color).ToString();
+                }
+            }
+            return null;
         }
     }
 }

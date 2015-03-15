@@ -25,8 +25,10 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
 using System.Linq;
+using System.Text.RegularExpressions;
 using System.Xml;
 using PraiseBase.Presenter.Model;
+using PraiseBase.Presenter.Model.Song;
 
 namespace PraiseBase.Presenter.Persistence.PowerPraise
 {
@@ -35,6 +37,8 @@ namespace PraiseBase.Presenter.Persistence.PowerPraise
         protected const string SupportedFileFormatVersion = "3.0";
         protected const string XmlRootNodeName = "ppl";
         public abstract T Load(string filename);
+
+        private List<IBackground> _backgrounds;
 
         /// <summary>
         ///     Reads the title of a song from a file
@@ -155,17 +159,31 @@ namespace PraiseBase.Presenter.Persistence.PowerPraise
             // Parse additional fields (hook)
             ParseAdditionalFields(xmlRoot, sng);
 
-            // Song text
-            foreach (XmlElement elem in xmlRoot["songtext"])
+            // Background images
+            if (xmlRoot["formatting"] != null && xmlRoot["formatting"]["background"] != null)
             {
-                if (elem.Name == "part")
-                {
-                    sng.Parts.Add(ParseSongPart(elem, PowerPraiseConstants.SlideMainTextSize));
-                }
+                _backgrounds = ParseBackgroundImages(xmlRoot["formatting"]["background"]);
+            }
+            else
+            {
+                _backgrounds = new List<IBackground>();
             }
 
-            // Order
-            sng.Order.AddRange(ParseOrder(xmlRoot["order"], sng));
+            // Song text and part order
+            if (xmlRoot["songtext"] != null)
+            {
+                // Song text
+                foreach (XmlElement elem in xmlRoot["songtext"])
+                {
+                    if (elem.Name == "part")
+                    {
+                        sng.Parts.Add(ParseSongPart(elem, PowerPraiseConstants.SlideMainTextSize));
+                    }
+                }
+
+                // Order
+                sng.Order.AddRange(ParseOrder(xmlRoot["order"], sng));
+            }
 
             // Copyright text
             if (xmlRoot["information"] != null)
@@ -214,11 +232,6 @@ namespace PraiseBase.Presenter.Persistence.PowerPraise
 
             // Font shadow
             sng.TextShadowFormatting = ParseFontShadow(fontElem["shadow"], PowerPraiseConstants.FontShadow);
-
-            // Background images
-            sng.BackgroundImages.AddRange(ParseBackgroundImages(xmlRoot["formatting"]["background"]));
-            // Ensure valid background IDs are used
-            EnsureValidBackgroundIDs(sng, sng.BackgroundImages.Count);
 
             // Line spacing
             var lineSpacingElem = xmlRoot["formatting"]["linespacing"];
@@ -310,7 +323,11 @@ namespace PraiseBase.Presenter.Persistence.PowerPraise
             }
 
             // Image number
-            slide.BackgroundNr = Convert.ToInt32(elem.GetAttribute("backgroundnr"));
+            int num = Convert.ToInt32(elem.GetAttribute("backgroundnr"));
+            if (num >= 0 && num < _backgrounds.Count)
+            {
+                slide.Background = _backgrounds[num];
+            }
 
             // Lyrics
             foreach (XmlElement lineElem in elem)
@@ -554,25 +571,35 @@ namespace PraiseBase.Presenter.Persistence.PowerPraise
         /// </summary>
         /// <param name="elem"></param>
         /// <returns></returns>
-        private static List<string> ParseBackgroundImages(XmlElement elem)
+        private static List<IBackground> ParseBackgroundImages(XmlElement elem)
         {
-            return (from XmlElement e in elem where e.Name == "file" select e.InnerText).ToList();
+            List<IBackground> list = new ComparableList<IBackground>();
+            list.AddRange(from XmlElement e in elem where e.Name == "file" select ParseBackground(e.InnerText));
+            return list;
         }
 
-        /// <summary>
-        ///     Ensures valid background IDs are used.
-        /// </summary>
-        /// <param name="sng"></param>
-        /// <param name="numBackgrounds"></param>
-        private void EnsureValidBackgroundIDs(PowerPraiseSong sng, int numBackgrounds)
+        private static IBackground ParseBackground(string bg)
         {
-            foreach (var part in sng.Parts)
+            if (Regex.IsMatch(bg, @"^\d+$"))
             {
-                foreach (var slide in part.Slides)
+                int trySize;
+                if (int.TryParse(bg, out trySize))
                 {
-                    slide.BackgroundNr = Math.Min(numBackgrounds - 1, Math.Max(0, slide.BackgroundNr));
+                    try
+                    {
+                        return new ColorBackground(PowerPraiseFileUtil.ConvertColor(trySize));
+                    }
+                    catch (ArgumentException)
+                    {
+                        return null;
+                    }
                 }
             }
+            else if (bg.Trim() != String.Empty)
+            {
+                return new ImageBackground(bg);
+            }
+            return null;
         }
 
         /// <summary>

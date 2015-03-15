@@ -1,6 +1,4 @@
-﻿using PraiseBase.Presenter.Persistence;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace PraiseBase.Presenter.Persistence.PowerPraise
 {
@@ -13,25 +11,11 @@ namespace PraiseBase.Presenter.Persistence.PowerPraise
     [TestClass()]
     public class PowerPraiseSongFileReaderTest
     {
-
-
-        private TestContext testContextInstance;
-
         /// <summary>
         ///Gets or sets the test context which provides
         ///information about and functionality for the current test run.
         ///</summary>
-        public TestContext TestContext
-        {
-            get
-            {
-                return testContextInstance;
-            }
-            set
-            {
-                testContextInstance = value;
-            }
-        }
+        public TestContext TestContext { get; set; }
 
         #region Additional test attributes
         // 
@@ -70,7 +54,7 @@ namespace PraiseBase.Presenter.Persistence.PowerPraise
         public void LoadTest()
         {
             ISongFileReader<PowerPraiseSong> target = new PowerPraiseSongFileReader();
-            string filename = "Resources/powerpraise/Näher, mein Gott zu Dir.ppl";
+            const string filename = "Resources/powerpraise/Näher, mein Gott zu Dir.ppl";
 
             PowerPraiseSong expected = PowerPraiseTestUtil.GetExpectedPowerPraiseSong();
  
@@ -89,7 +73,7 @@ namespace PraiseBase.Presenter.Persistence.PowerPraise
                 Assert.AreEqual(expected.Parts[i].Slides.Count, actual.Parts[i].Slides.Count, "Slides incomplete in verse " + i);
                 for (int j = 0; j < expected.Parts[i].Slides.Count; j++)
                 {
-                    Assert.AreEqual(expected.Parts[i].Slides[j].BackgroundNr, actual.Parts[i].Slides[j].BackgroundNr);
+                    Assert.AreEqual(expected.Parts[i].Slides[j].Background, actual.Parts[i].Slides[j].Background);
                     Assert.AreEqual(expected.Parts[i].Slides[j].MainSize, actual.Parts[i].Slides[j].MainSize);
                     CollectionAssert.AreEqual(expected.Parts[i].Slides[j].Lines, actual.Parts[i].Slides[j].Lines, "Slide lines incomplete in verse " + i + " slide " + j);
                     CollectionAssert.AreEqual(expected.Parts[i].Slides[j].Translation, actual.Parts[i].Slides[j].Translation, "Slide translation incomplete in verse " + i + " slide " + j);
@@ -138,9 +122,6 @@ namespace PraiseBase.Presenter.Persistence.PowerPraise
             Assert.AreEqual(expected.TextShadowFormatting.Color.ToArgb(), actual.TextShadowFormatting.Color.ToArgb());
             Assert.AreEqual(expected.TextShadowFormatting.Direction, actual.TextShadowFormatting.Direction);
             Assert.AreEqual(expected.TextShadowFormatting.Enabled, actual.TextShadowFormatting.Enabled);
-
-            // Background
-            CollectionAssert.AreEqual(expected.BackgroundImages, actual.BackgroundImages);
 
             // Linespacing
             Assert.AreEqual(expected.MainLineSpacing, actual.MainLineSpacing);

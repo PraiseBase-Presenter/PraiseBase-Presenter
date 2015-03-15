@@ -205,7 +205,7 @@ namespace PraiseBase.Presenter.Persistence.PowerPraise.Extended
                 Assert.AreEqual(expected.Parts[i].Slides.Count, actual.Parts[i].Slides.Count, "Slides incomplete in verse " + i);
                 for (int j = 0; j < expected.Parts[i].Slides.Count; j++)
                 {
-                    Assert.AreEqual(expected.Parts[i].Slides[j].BackgroundNr, actual.Parts[i].Slides[j].BackgroundNr);
+                    Assert.AreEqual(expected.Parts[i].Slides[j].Background, actual.Parts[i].Slides[j].Background);
                     Assert.AreEqual(expected.Parts[i].Slides[j].MainSize, actual.Parts[i].Slides[j].MainSize);
                     CollectionAssert.AreEqual(expected.Parts[i].Slides[j].Lines, actual.Parts[i].Slides[j].Lines, "Slide lines incomplete in verse " + i + " slide " + j);
                     CollectionAssert.AreEqual(expected.Parts[i].Slides[j].Translation, actual.Parts[i].Slides[j].Translation, "Slide translation incomplete in verse " + i + " slide " + j);
@@ -255,9 +255,6 @@ namespace PraiseBase.Presenter.Persistence.PowerPraise.Extended
             Assert.AreEqual(expected.TextShadowFormatting.Direction, actual.TextShadowFormatting.Direction);
             Assert.AreEqual(expected.TextShadowFormatting.Enabled, actual.TextShadowFormatting.Enabled);
 
-            // Background
-            CollectionAssert.AreEqual(expected.BackgroundImages, actual.BackgroundImages);
-
             // Linespacing
             Assert.AreEqual(expected.MainLineSpacing, actual.MainLineSpacing);
             Assert.AreEqual(expected.TranslationLineSpacing, actual.TranslationLineSpacing);
@@ -283,7 +280,7 @@ namespace PraiseBase.Presenter.Persistence.PowerPraise.Extended
         [TestMethod()]
         public void ReadAndMapTest()
         {
-            string filename = "Resources/powerpraise/Näher, mein Gott zu Dir - extended.ppl";
+            const string filename = "Resources/powerpraise/Näher, mein Gott zu Dir - extended.ppl";
 
             ISongFileReader<ExtendedPowerPraiseSong> reader = new ExtendedPowerPraiseSongFileReader();
             ExtendedPowerPraiseSongFileMapper mapper = new ExtendedPowerPraiseSongFileMapper();
@@ -390,8 +387,8 @@ namespace PraiseBase.Presenter.Persistence.PowerPraise.Extended
         [TestMethod()]
         public void MapAndWriteTest()
         {
-            string referenceFilename = "Resources/powerpraise/Näher, mein Gott zu Dir - extended.ppl";
-            string filename = "Resources/powerpraise/Näher, mein Gott zu Dir - extended - out.ppl";
+            const string referenceFilename = "Resources/powerpraise/Näher, mein Gott zu Dir - extended.ppl";
+            const string filename = "Resources/powerpraise/Näher, mein Gott zu Dir - extended - out.ppl";
 
             ExtendedPowerPraiseSongFileMapper mapper = new ExtendedPowerPraiseSongFileMapper();
             ISongFileWriter<ExtendedPowerPraiseSong> target = new ExtendedPowerPraiseSongFileWriter();
@@ -403,7 +400,7 @@ namespace PraiseBase.Presenter.Persistence.PowerPraise.Extended
 
             try
             {
-                PraiseBase.Presenter.Util.FileUtils.FileEquals(filename, referenceFilename, true);
+                FileUtils.FileEquals(filename, referenceFilename, true);
             }
             catch (Exception e)
             {
