@@ -66,9 +66,23 @@ namespace PraiseBase.Presenter.Editor
         /// </summary>
         private readonly Settings _settings;
 
+        /// <summary>
+        /// Image manager instance
+        /// </summary>
+        private readonly ImageManager _imgManager;
+
         #endregion
 
+        #region Constants
+
+        /// <summary>
+        /// Specifies how long the status message is shown
+        /// </summary>
         private const int StatusMessageDuration = 2000;
+
+        #endregion
+
+        #region Delegates
 
         /// <summary>
         /// Delegate to inform subscribers that a song has been saved
@@ -82,7 +96,7 @@ namespace PraiseBase.Presenter.Editor
         /// </summary>
         public event SongSave SongSaved;
 
-        private readonly ImageManager _imgManager;
+        #endregion
 
         public SongEditor(Settings settings, ImageManager imgManager, String filename)
         {
@@ -97,6 +111,7 @@ namespace PraiseBase.Presenter.Editor
 
             RegisterChild(this);
 
+            // Open song if given as startup argument
             if (!String.IsNullOrEmpty(filename) && File.Exists(filename))
             {
                 OpenSong(filename);
@@ -126,7 +141,7 @@ namespace PraiseBase.Presenter.Editor
 
             SongEditorChild childForm = CreateSongEditorChildForm(sng, null);
 
-            childForm.Text = childForm.Song.Title + @" " + ++_childFormNumber;
+            childForm.Text = sng.Title + @" " + ++_childFormNumber;
         }
 
         /// <summary>
@@ -230,11 +245,12 @@ namespace PraiseBase.Presenter.Editor
             if (ActiveMdiChild != null)
             {
                 SongEditorChild window = ((SongEditorChild)ActiveMdiChild);
+                Song sng = window.Song;
                 window.ValidateChildren();
-                string fileName = Save(window.Song, ((EditorChildMetaData) window.Tag).Filename);
+                string fileName = Save(sng, ((EditorChildMetaData)window.Tag).Filename);
                 if (fileName != null)
                 {
-                    int hashCode = window.Song.GetHashCode();
+                    int hashCode = sng.GetHashCode();
                     ((EditorChildMetaData)window.Tag).HashCode = hashCode;
                     ((EditorChildMetaData)window.Tag).Filename = fileName;
                 }
@@ -251,11 +267,12 @@ namespace PraiseBase.Presenter.Editor
             if (ActiveMdiChild != null)
             {
                 SongEditorChild window = ((SongEditorChild)ActiveMdiChild);
+                Song sng = window.Song;
                 window.ValidateChildren();
-                string fileName = SaveAs(window.Song, null);
+                string fileName = SaveAs(sng, null);
                 if (fileName != null)
                 {
-                    int hashCode = window.Song.GetHashCode();
+                    int hashCode = sng.GetHashCode();
                     ((EditorChildMetaData)window.Tag).HashCode = hashCode;
                     ((EditorChildMetaData)window.Tag).Filename = fileName;
                 }
@@ -327,17 +344,19 @@ namespace PraiseBase.Presenter.Editor
             SongEditorChild window = ((SongEditorChild)sender);
 
             String filename = ((EditorChildMetaData)window.Tag).Filename;
+            Song sng = window.Song;
 
             int storedHashCode = ((EditorChildMetaData)window.Tag).HashCode;
-            int songHashCode = window.Song.GetHashCode();
+            int songHashCode = sng.GetHashCode();
             if (storedHashCode != songHashCode)
             {
-                DialogResult dlg = MessageBox.Show(string.Format(StringResources.SaveChangesMadeToTheSong, window.Song.Title),
+                DialogResult dlg = MessageBox.Show(
+                    string.Format(StringResources.SaveChangesMadeToTheSong, sng.Title),
                     StringResources.SongEditor,
                     MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
                 if (dlg == DialogResult.Yes)
                 {
-                    Save(window.Song, ((EditorChildMetaData)window.Tag).Filename);
+                    Save(sng, ((EditorChildMetaData)window.Tag).Filename);
                 }
                 else if (dlg == DialogResult.Cancel)
                 {
@@ -346,12 +365,12 @@ namespace PraiseBase.Presenter.Editor
             }
             else if (filename != null && !File.Exists(filename))
             {
-                DialogResult dlg = MessageBox.Show(string.Format(StringResources.SaveChangesMadeToTheSong, window.Song.Title),
+                DialogResult dlg = MessageBox.Show(string.Format(StringResources.SaveChangesMadeToTheSong, sng.Title),
                     StringResources.SongEditor,
                     MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
                 if (dlg == DialogResult.Yes)
                 {
-                    SaveAs(window.Song, ((EditorChildMetaData)window.Tag).Filename);
+                    SaveAs(sng, ((EditorChildMetaData)window.Tag).Filename);
                 }
                 else if (dlg == DialogResult.Cancel)
                 {

@@ -37,7 +37,12 @@ namespace PraiseBase.Presenter.Editor
 {
     public partial class SongEditorChild : Form
     {
+        /// <summary>
+        /// Instance of the song being edited
+        /// </summary>
         public Song Song { get; protected set; }
+
+        #region internalVariables
 
         /// <summary>
         /// Index of currently selected part
@@ -59,9 +64,17 @@ namespace PraiseBase.Presenter.Editor
         /// </summary>
         readonly SongTemplateMapper _templateMapper;
 
+        /// <summary>
+        /// Image manager instance
+        /// </summary>
         private readonly ImageManager _imgManager;
 
+        /// <summary>
+        /// Slide text formatting mapper
+        /// </summary>
         private readonly ISlideTextFormattingMapper<Song> _previewFormattingMapper = new SongSlideTextFormattingMapper();
+
+        #endregion
 
         public SongEditorChild(Settings settings, ImageManager imgManager, Song sng)
         {
