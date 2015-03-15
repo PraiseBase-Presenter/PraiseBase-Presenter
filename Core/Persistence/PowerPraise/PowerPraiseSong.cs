@@ -7,13 +7,6 @@ namespace PraiseBase.Presenter.Persistence.PowerPraise
 {
     public class PowerPraiseSong : ISongFile
     {
-        public enum CopyrightPosition
-        {
-            FirstSlide,
-            LastSlide,
-            None
-        }
-
         public PowerPraiseSong()
         {
             Parts = new List<Part>();
@@ -127,6 +120,13 @@ namespace PraiseBase.Presenter.Persistence.PowerPraise
         /// </summary>
         public TextBorders Borders { get; set; }
 
+        public enum CopyrightPosition
+        {
+            FirstSlide,
+            LastSlide,
+            None
+        }
+
         public class Part
         {
             public Part()
@@ -198,6 +198,33 @@ namespace PraiseBase.Presenter.Persistence.PowerPraise
             ///     Shadow distance (percent)
             /// </summary>
             public int ShadowDistance { get; set; }
+
+            #region Equality members
+
+            public bool Equals(FontFormatting other)
+            {
+                return Equals(Font, other.Font) && Color.Equals(other.Color) && OutlineWidth == other.OutlineWidth && ShadowDistance == other.ShadowDistance;
+            }
+
+            public override bool Equals(object obj)
+            {
+                if (ReferenceEquals(null, obj)) return false;
+                return obj is FontFormatting && Equals((FontFormatting) obj);
+            }
+
+            public override int GetHashCode()
+            {
+                unchecked
+                {
+                    var hashCode = (Font != null ? Font.GetHashCode() : 0);
+                    hashCode = (hashCode*397) ^ Color.GetHashCode();
+                    hashCode = (hashCode*397) ^ OutlineWidth;
+                    hashCode = (hashCode*397) ^ ShadowDistance;
+                    return hashCode;
+                }
+            }
+
+            #endregion
         }
 
         /// <summary>
@@ -214,6 +241,29 @@ namespace PraiseBase.Presenter.Persistence.PowerPraise
             ///     Color
             /// </summary>
             public Color Color { get; set; }
+
+            #region Equality members
+
+            public bool Equals(OutlineFormatting other)
+            {
+                return Enabled.Equals(other.Enabled) && Color.Equals(other.Color);
+            }
+
+            public override bool Equals(object obj)
+            {
+                if (ReferenceEquals(null, obj)) return false;
+                return obj is OutlineFormatting && Equals((OutlineFormatting) obj);
+            }
+
+            public override int GetHashCode()
+            {
+                unchecked
+                {
+                    return (Enabled.GetHashCode()*397) ^ Color.GetHashCode();
+                }
+            }
+
+            #endregion
         }
 
         /// <summary>
@@ -235,6 +285,32 @@ namespace PraiseBase.Presenter.Persistence.PowerPraise
             ///     Direction (0-359)
             /// </summary>
             public int Direction { get; set; }
+
+            #region Equality members
+
+            public bool Equals(ShadowFormatting other)
+            {
+                return Enabled.Equals(other.Enabled) && Direction == other.Direction && Color.Equals(other.Color);
+            }
+
+            public override bool Equals(object obj)
+            {
+                if (ReferenceEquals(null, obj)) return false;
+                return obj is ShadowFormatting && Equals((ShadowFormatting) obj);
+            }
+
+            public override int GetHashCode()
+            {
+                unchecked
+                {
+                    var hashCode = Enabled.GetHashCode();
+                    hashCode = (hashCode*397) ^ Direction;
+                    hashCode = (hashCode*397) ^ Color.GetHashCode();
+                    return hashCode;
+                }
+            }
+
+            #endregion
         }
 
         /// <summary>
@@ -276,6 +352,36 @@ namespace PraiseBase.Presenter.Persistence.PowerPraise
             ///     Distance of source text to right
             /// </summary>
             public int SourceRight { get; set; }
+
+            #region Equality members
+
+            public bool Equals(TextBorders other)
+            {
+                return TextLeft == other.TextLeft && TextTop == other.TextTop && TextBottom == other.TextBottom && CopyrightBottom == other.CopyrightBottom && SourceTop == other.SourceTop && SourceRight == other.SourceRight && TextRight == other.TextRight;
+            }
+
+            public override bool Equals(object obj)
+            {
+                if (ReferenceEquals(null, obj)) return false;
+                return obj is TextBorders && Equals((TextBorders) obj);
+            }
+
+            public override int GetHashCode()
+            {
+                unchecked
+                {
+                    var hashCode = TextLeft;
+                    hashCode = (hashCode*397) ^ TextTop;
+                    hashCode = (hashCode*397) ^ TextBottom;
+                    hashCode = (hashCode*397) ^ CopyrightBottom;
+                    hashCode = (hashCode*397) ^ SourceTop;
+                    hashCode = (hashCode*397) ^ SourceRight;
+                    hashCode = (hashCode*397) ^ TextRight;
+                    return hashCode;
+                }
+            }
+
+            #endregion
         }
     }
 }
