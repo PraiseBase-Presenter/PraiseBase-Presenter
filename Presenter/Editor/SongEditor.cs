@@ -190,23 +190,21 @@ namespace PraiseBase.Presenter.Editor
                 }
             }
 
-            Song sng;
             try
             {
-                sng = SongFilePluginFactory.Create(fileName).Load(fileName);
+                var plugin = SongFilePluginFactory.Create(fileName);
+                var sng = plugin.Load(fileName);
+
+                CreateSongEditorChildForm(sng, fileName);
             }
             catch (NotImplementedException)
             {
                 MessageBox.Show(StringResources.SongFormatNotSupported, Text, MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
             }
             catch (Exception e)
             {
                 MessageBox.Show(StringResources.SongFileHasErrors + @" (" + e.Message + @")!", Text, MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
             }
-
-            CreateSongEditorChildForm(sng, fileName);
         }
 
         /// <summary>
