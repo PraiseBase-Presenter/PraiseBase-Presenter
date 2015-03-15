@@ -95,7 +95,7 @@ namespace PraiseBase.Presenter.Editor
             WindowState = FormWindowState.Maximized;
 
             // Set window title
-            Text = Song.Title;
+            SetWindowTitle(Song.Title);
 
             // Data bindings
             textBoxSongTitle.DataBindings.Add("Text", Song, "Title");
@@ -126,6 +126,11 @@ namespace PraiseBase.Presenter.Editor
 
             // Preview
             PreviewSlide();
+        }
+
+        public void SetWindowTitle(string title)
+        {
+            Text = title;
         }
 
         private void PopulateQa()

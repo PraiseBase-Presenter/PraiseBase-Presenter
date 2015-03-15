@@ -139,9 +139,7 @@ namespace PraiseBase.Presenter.Editor
             Song sng = stm.CreateNewSong();
             stm.ApplyFormattingFromSettings(sng);
 
-            SongEditorChild childForm = CreateSongEditorChildForm(sng, null);
-
-            childForm.Text = sng.Title + @" " + ++_childFormNumber;
+            CreateSongEditorChildForm(sng, null);
         }
 
         /// <summary>
@@ -217,7 +215,7 @@ namespace PraiseBase.Presenter.Editor
         /// <param name="sng">Song</param>
         /// <param name="fileName">File name, may be null</param>
         /// <returns></returns>
-        private SongEditorChild CreateSongEditorChildForm(Song sng, String fileName)
+        private void CreateSongEditorChildForm(Song sng, String fileName)
         {
             int hashCode = sng.GetHashCode();
             SongEditorChild childForm = new SongEditorChild(_settings, _imgManager, sng)
@@ -232,7 +230,11 @@ namespace PraiseBase.Presenter.Editor
             // Se status
             SetStatus(string.Format(StringResources.LoadedSong, sng.Title));
 
-            return childForm;
+            // Set window title if new song
+            if (fileName == null)
+            {
+                childForm.SetWindowTitle(sng.Title + @" " + ++_childFormNumber);
+            }
         }
 
         /// <summary>
