@@ -23,19 +23,16 @@
 using System;
 using System.Diagnostics.CodeAnalysis;
 using System.Drawing;
-using System.Drawing.Drawing2D;
 using System.Windows.Forms;
 using PraiseBase.Presenter.Controls;
 using PraiseBase.Presenter.Forms;
 using PraiseBase.Presenter.Manager;
 using PraiseBase.Presenter.Model.Song;
-using PraiseBase.Presenter.Projection;
 using PraiseBase.Presenter.Properties;
-using PraiseBase.Presenter.Template;
 
 namespace PraiseBase.Presenter.Editor
 {
-    public partial class SongEditorChild : Form
+    public partial class SongEditorChild : AbstractSongEditorChild
     {
         #region Public fields
 
@@ -46,45 +43,8 @@ namespace PraiseBase.Presenter.Editor
 
         #endregion
 
-        #region Internal variables
-
-        /// <summary>
-        /// Index of currently selected part
-        /// </summary>
-        private int _currentPartId;
-
-        /// <summary>
-        /// Index of currently selected slide
-        /// </summary>
-        private int _currentSlideId;
-
-        /// <summary>
-        /// Settings instance holder
-        /// </summary>
-        private readonly Settings _settings;
-
-        /// <summary>
-        /// Song template mapper instance
-        /// </summary>
-        readonly SongTemplateMapper _templateMapper;
-
-        /// <summary>
-        /// Image manager instance
-        /// </summary>
-        private readonly ImageManager _imgManager;
-
-        /// <summary>
-        /// Slide text formatting mapper
-        /// </summary>
-        private readonly ISlideTextFormattingMapper<Song> _previewFormattingMapper = new SongSlideTextFormattingMapper();
-
-        #endregion
-
-        public SongEditorChild(Settings settings, ImageManager imgManager, Song sng)
+        public SongEditorChild(Settings settings, ImageManager imgManager, Song sng) : base(settings, imgManager)
         {
-            _settings = settings;
-            _imgManager = imgManager;
-            _templateMapper = new SongTemplateMapper(_settings);
             Song = sng;
 
             InitializeComponent();
@@ -590,40 +550,7 @@ namespace PraiseBase.Presenter.Editor
 
         private void PreviewSlide()
         {
-            SongSlide slide = (SongSlide)Song.Parts[_currentPartId].Slides[_currentSlideId].Clone();
-            slide.Text = textBoxSongText.Text;
-            slide.TranslationText = textBoxSongTranslation.Text;
-            SlideTextFormatting slideFormatting = new SlideTextFormatting();
-
-            _previewFormattingMapper.Map(Song, ref slideFormatting);
-
-            // Disabled for performance
-            slideFormatting.OutlineEnabled = false;
-            slideFormatting.SmoothShadow = false;
-
-            slideFormatting.ScaleFontSize = _settings.ProjectionFontScaling;
-            slideFormatting.SmoothShadow = false;
-
-            TextLayer sl = new TextLayer(slideFormatting)
-            {
-                MainText = slide.Lines.ToArray(),
-                SubText = slide.Translation.ToArray()
-            };
-
-            ImageLayer il = new ImageLayer(_settings.ProjectionBackColor);
-
-            IBackground bg = Song.Parts[_currentPartId].Slides[_currentSlideId].Background;
-            il.Image = _imgManager.GetImage(bg);
-
-            var bmp = new Bitmap(1024, 768);
-            Graphics gr = Graphics.FromImage(bmp);
-            gr.CompositingQuality = CompositingQuality.HighSpeed;
-            gr.SmoothingMode = SmoothingMode.HighSpeed;
-
-            il.WriteOut(gr, null);
-            sl.WriteOut(gr, null);
-
-            pictureBoxPreview.Image = bmp;
+            pictureBoxPreview.Image = PreviewSlide(Song, textBoxSongText.Text, textBoxSongTranslation.Text);
         }
 
         private void neueFolieToolStripMenuItem_Click(object sender, EventArgs e)
