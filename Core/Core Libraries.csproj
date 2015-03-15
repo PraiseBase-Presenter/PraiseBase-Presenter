@@ -89,8 +89,6 @@
     <Compile Include="Persistence\PowerPraise\PowerPraiseSongFileMapper.cs" />
     <Compile Include="Persistence\PowerPraise\PowerPraiseSong.cs" />
     <Compile Include="Persistence\PowerPraise\PowerPraiseSongFilePlugin.cs" />
-    <Compile Include="Persistence\PowerPraise\PowerPraiseSongPart.cs" />
-    <Compile Include="Persistence\PowerPraise\PowerPraiseSongSlide.cs" />
     <Compile Include="Model\Song\Song.cs" />
     <Compile Include="Model\Song\SongAuthor.cs" />
     <Compile Include="Model\Song\SongBook.cs" />

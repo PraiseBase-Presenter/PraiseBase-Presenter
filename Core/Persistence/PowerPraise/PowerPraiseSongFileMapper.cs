@@ -138,13 +138,13 @@ namespace PraiseBase.Presenter.Persistence.PowerPraise
             // Song parts
             foreach (var songPart in song.Parts)
             {
-                var pplPart = new PowerPraiseSongPart
+                var pplPart = new PowerPraiseSong.Part
                 {
                     Caption = songPart.Caption
                 };
                 foreach (var songSlide in songPart.Slides)
                 {
-                    var pplSlide = new PowerPraiseSongSlide();
+                    var pplSlide = new PowerPraiseSong.Slide();
 
                     var bg = MapBackground(songSlide.Background);
                     int backgroundNr;

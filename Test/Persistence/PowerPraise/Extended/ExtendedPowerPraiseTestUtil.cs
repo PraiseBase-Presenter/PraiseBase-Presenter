@@ -31,10 +31,10 @@ namespace PraiseBase.Presenter.Persistence.PowerPraise.Extended
             ppl.RightsManagement = "Verlag ABC";
 
             // Songtext
-            PowerPraiseSongPart part = new PowerPraiseSongPart();
+            PowerPraiseSong.Part part = new PowerPraiseSong.Part();
             part.Caption = "Teil 1";
 
-            PowerPraiseSongSlide slide = new PowerPraiseSongSlide();
+            PowerPraiseSong.Slide slide = new PowerPraiseSong.Slide();
             slide.MainSize = 42;
             slide.BackgroundNr = 0;
             slide.Lines.Add("Näher, mein Gott, zu Dir,");
@@ -43,7 +43,7 @@ namespace PraiseBase.Presenter.Persistence.PowerPraise.Extended
             slide.Lines.Add("mit jedem Schritt.");
             part.Slides.Add(slide);
 
-            slide = new PowerPraiseSongSlide();
+            slide = new PowerPraiseSong.Slide();
             slide.MainSize = 44;
             slide.BackgroundNr = 0;
             slide.Lines.Add("Nur an dem Herzen Dein");
@@ -53,10 +53,10 @@ namespace PraiseBase.Presenter.Persistence.PowerPraise.Extended
             part.Slides.Add(slide);
             ppl.Parts.Add(part);
 
-            part = new PowerPraiseSongPart();
+            part = new PowerPraiseSong.Part();
             part.Caption = "Teil 2";
 
-            slide = new PowerPraiseSongSlide();
+            slide = new PowerPraiseSong.Slide();
             slide.MainSize = 42;
             slide.BackgroundNr = 0;
             slide.Lines.Add("Näher, mein Gott, zu Dir!");
@@ -65,7 +65,7 @@ namespace PraiseBase.Presenter.Persistence.PowerPraise.Extended
             slide.Lines.Add("was er vermag:");
             part.Slides.Add(slide);
 
-            slide = new PowerPraiseSongSlide();
+            slide = new PowerPraiseSong.Slide();
             slide.MainSize = 42;
             slide.BackgroundNr = 0;
             slide.Lines.Add("Wie seiner Gnade Macht,");
@@ -75,10 +75,10 @@ namespace PraiseBase.Presenter.Persistence.PowerPraise.Extended
             part.Slides.Add(slide);
             ppl.Parts.Add(part);
 
-            part = new PowerPraiseSongPart();
+            part = new PowerPraiseSong.Part();
             part.Caption = "Teil 3";
 
-            slide = new PowerPraiseSongSlide();
+            slide = new PowerPraiseSong.Slide();
             slide.MainSize = 42;
             slide.BackgroundNr = 0;
             slide.Lines.Add("Näher, mein Gott, zu Dir!");
@@ -87,7 +87,7 @@ namespace PraiseBase.Presenter.Persistence.PowerPraise.Extended
             slide.Lines.Add("Du doch getan!");
             part.Slides.Add(slide);
 
-            slide = new PowerPraiseSongSlide();
+            slide = new PowerPraiseSong.Slide();
             slide.MainSize = 42;
             slide.BackgroundNr = 0;
             slide.Lines.Add("Von Banden frei und los,");

@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Drawing;
-using PraiseBase.Presenter.Model.Song;
+﻿using System.Drawing;
 using PraiseBase.Presenter.Model;
+using PraiseBase.Presenter.Model.Song;
 
 namespace PraiseBase.Presenter.Persistence.PowerPraise
 {
@@ -12,35 +8,45 @@ namespace PraiseBase.Presenter.Persistence.PowerPraise
     {
         public static Song GetExpectedSong()
         {
-            Song song = new Song();
+            Song song = new Song
+            {
+                Title = "Näher, mein Gott, zu Dir",
+                Language = "Deutsch"
+            };
 
-            song.Title = "Näher, mein Gott, zu Dir";
-            song.Language = "Deutsch";
             song.Themes.Add("Anbetung");
 
             song.Copyright = "Text und Musik: Lowell Mason, 1792-1872";
-            song.CopyrightPosition = Model.AdditionalInformationPosition.LastSlide;
+            song.CopyrightPosition = AdditionalInformationPosition.LastSlide;
 
-            SongBook sb = new SongBook();
-            sb.Name = "grünes Buch 339";
+            SongBook sb = new SongBook
+            {
+                Name = "grünes Buch 339"
+            };
             song.SongBooks.Add(sb);
-            song.SourcePosition = Model.AdditionalInformationPosition.FirstSlide;
+            song.SourcePosition = AdditionalInformationPosition.FirstSlide;
 
-            SongPart part = new SongPart();
-            part.Caption = "Teil 1";
+            SongPart part = new SongPart
+            {
+                Caption = "Teil 1"
+            };
 
-            SongSlide slide = new SongSlide();
-            slide.Background = new ImageBackground("Blumen\\Blume 3.jpg");
-            slide.TextSize = 42;
+            SongSlide slide = new SongSlide
+            {
+                Background = new ImageBackground("Blumen\\Blume 3.jpg"),
+                TextSize = 42
+            };
             slide.Lines.Add("Näher, mein Gott, zu Dir,");
             slide.Lines.Add("sei meine Bitt'!");
             slide.Lines.Add("Näher, o Herr, zu Dir");
             slide.Lines.Add("mit jedem Schritt.");
             part.Slides.Add(slide);
 
-            slide = new SongSlide();
-            slide.Background = new ImageBackground("Blumen\\Blume 3.jpg");
-            slide.TextSize = 44;
+            slide = new SongSlide
+            {
+                Background = new ImageBackground("Blumen\\Blume 3.jpg"),
+                TextSize = 44
+            };
             slide.Lines.Add("Nur an dem Herzen Dein");
             slide.Lines.Add("kann ich geborgen sein;");
             slide.Lines.Add("deshalb die Bitte mein:");
@@ -48,21 +54,27 @@ namespace PraiseBase.Presenter.Persistence.PowerPraise
             part.Slides.Add(slide);
             song.Parts.Add(part);
 
-            part = new SongPart();
-            part.Caption = "Teil 2";
+            part = new SongPart
+            {
+                Caption = "Teil 2"
+            };
 
-            slide = new SongSlide();
-            slide.Background = new ImageBackground("Blumen\\Blume 3.jpg");
-            slide.TextSize = 42;
+            slide = new SongSlide
+            {
+                Background = new ImageBackground("Blumen\\Blume 3.jpg"),
+                TextSize = 42
+            };
             slide.Lines.Add("Näher, mein Gott, zu Dir!");
             slide.Lines.Add("Ein jeder Tag");
             slide.Lines.Add("soll es neu zeigen mir,");
             slide.Lines.Add("was er vermag:");
             part.Slides.Add(slide);
 
-            slide = new SongSlide();
-            slide.Background = new ImageBackground("Blumen\\Blume 3.jpg");
-            slide.TextSize = 42;
+            slide = new SongSlide
+            {
+                Background = new ImageBackground("Blumen\\Blume 3.jpg"),
+                TextSize = 42
+            };
             slide.Lines.Add("Wie seiner Gnade Macht,");
             slide.Lines.Add("Erlösung hat gebracht,");
             slide.Lines.Add("in uns're Sündennacht.");
@@ -70,21 +82,27 @@ namespace PraiseBase.Presenter.Persistence.PowerPraise
             part.Slides.Add(slide);
             song.Parts.Add(part);
 
-            part = new SongPart();
-            part.Caption = "Teil 3";
+            part = new SongPart
+            {
+                Caption = "Teil 3"
+            };
 
-            slide = new SongSlide();
-            slide.Background = new ImageBackground("Blumen\\Blume 3.jpg");
-            slide.TextSize = 42;
+            slide = new SongSlide
+            {
+                Background = new ImageBackground("Blumen\\Blume 3.jpg"),
+                TextSize = 42
+            };
             slide.Lines.Add("Näher, mein Gott, zu Dir!");
             slide.Lines.Add("Dich bet' ich an.");
             slide.Lines.Add("Wie vieles hast an mir,");
             slide.Lines.Add("Du doch getan!");
             part.Slides.Add(slide);
 
-            slide = new SongSlide();
-            slide.Background = new ImageBackground("Blumen\\Blume 3.jpg");
-            slide.TextSize = 42;
+            slide = new SongSlide
+            {
+                Background = new ImageBackground("Blumen\\Blume 3.jpg"),
+                TextSize = 42
+            };
             slide.Lines.Add("Von Banden frei und los,");
             slide.Lines.Add("ruh' ich in Deinem Schoss.");
             slide.Lines.Add("Ja, Deine Gnad' ist gross!");
@@ -96,36 +114,36 @@ namespace PraiseBase.Presenter.Persistence.PowerPraise
             song.PartSequence.Add(song.Parts[1]);
             song.PartSequence.Add(song.Parts[2]);
 
-            song.MainText = new Model.TextFormatting(
+            song.MainText = new TextFormatting(
                 new Font("Times New Roman", 44, FontStyle.Bold | FontStyle.Italic),
                 Color.White,
-                new Model.TextOutline(30, Color.Black),
-                new Model.TextShadow(15, 0, 125, Color.Black),
+                new TextOutline(30, Color.Black),
+                new TextShadow(15, 0, 125, Color.Black),
                 30
             );
-            song.TranslationText = new Model.TextFormatting(
+            song.TranslationText = new TextFormatting(
                 new Font("Times New Roman", 20, FontStyle.Regular),
                 Color.White,
-                new Model.TextOutline(30, Color.Black),
-                new Model.TextShadow(20, 0, 125, Color.Black),
+                new TextOutline(30, Color.Black),
+                new TextShadow(20, 0, 125, Color.Black),
                 20
             );
-            song.CopyrightText = new Model.TextFormatting(
+            song.CopyrightText = new TextFormatting(
                 new Font("Times New Roman", 14, FontStyle.Regular),
                 Color.White,
-                new Model.TextOutline(30, Color.Black),
-                new Model.TextShadow(20, 0, 125, Color.Black),
+                new TextOutline(30, Color.Black),
+                new TextShadow(20, 0, 125, Color.Black),
                 0
             );
-            song.SourceText = new Model.TextFormatting(
+            song.SourceText = new TextFormatting(
                 new Font("Times New Roman", 30, FontStyle.Regular),
                 Color.White,
-                new Model.TextOutline(30, Color.Black),
-                new Model.TextShadow(20, 0, 125, Color.Black),
+                new TextOutline(30, Color.Black),
+                new TextShadow(20, 0, 125, Color.Black),
                 0
             );
 
-            song.TextOrientation = new Model.TextOrientation(Model.VerticalOrientation.Middle, Model.HorizontalOrientation.Left);
+            song.TextOrientation = new TextOrientation(VerticalOrientation.Middle, HorizontalOrientation.Left);
 
             song.TextOutlineEnabled = false;
             song.TextShadowEnabled = true;
@@ -138,29 +156,36 @@ namespace PraiseBase.Presenter.Persistence.PowerPraise
         public static PowerPraiseSong GetExpectedPowerPraiseSong()
         {
 
-            PowerPraiseSong ppl = new PowerPraiseSong();
+            PowerPraiseSong ppl = new PowerPraiseSong
+            {
+                Title = "Näher, mein Gott, zu Dir",
+                Language = "Deutsch",
+                Category = "Anbetung"
+            };
 
             // General
-            ppl.Title = "Näher, mein Gott, zu Dir";
-            ppl.Language = "Deutsch";
-            ppl.Category = "Anbetung";
 
             // Songtext
-            PowerPraiseSongPart part = new PowerPraiseSongPart();
-            part.Caption = "Teil 1";
+            PowerPraiseSong.Part part = new PowerPraiseSong.Part
+            {
+                Caption = "Teil 1"
+            };
 
-            PowerPraiseSongSlide slide = new PowerPraiseSongSlide();
-            slide.MainSize = 42;
-            slide.BackgroundNr = 0;
+            PowerPraiseSong.Slide slide = new PowerPraiseSong.Slide
+            {
+                MainSize = 42, BackgroundNr = 0
+            };
             slide.Lines.Add("Näher, mein Gott, zu Dir,");
             slide.Lines.Add("sei meine Bitt'!");
             slide.Lines.Add("Näher, o Herr, zu Dir");
             slide.Lines.Add("mit jedem Schritt.");
             part.Slides.Add(slide);
 
-            slide = new PowerPraiseSongSlide();
-            slide.MainSize = 44;
-            slide.BackgroundNr = 0;
+            slide = new PowerPraiseSong.Slide
+            {
+                MainSize = 44,
+                BackgroundNr = 0
+            };
             slide.Lines.Add("Nur an dem Herzen Dein");
             slide.Lines.Add("kann ich geborgen sein;");
             slide.Lines.Add("deshalb die Bitte mein:");
@@ -168,21 +193,27 @@ namespace PraiseBase.Presenter.Persistence.PowerPraise
             part.Slides.Add(slide);
             ppl.Parts.Add(part);
 
-            part = new PowerPraiseSongPart();
-            part.Caption = "Teil 2";
+            part = new PowerPraiseSong.Part
+            {
+                Caption = "Teil 2"
+            };
 
-            slide = new PowerPraiseSongSlide();
-            slide.MainSize = 42;
-            slide.BackgroundNr = 0;
+            slide = new PowerPraiseSong.Slide
+            {
+                MainSize = 42,
+                BackgroundNr = 0
+            };
             slide.Lines.Add("Näher, mein Gott, zu Dir!");
             slide.Lines.Add("Ein jeder Tag");
             slide.Lines.Add("soll es neu zeigen mir,");
             slide.Lines.Add("was er vermag:");
             part.Slides.Add(slide);
 
-            slide = new PowerPraiseSongSlide();
-            slide.MainSize = 42;
-            slide.BackgroundNr = 0;
+            slide = new PowerPraiseSong.Slide
+            {
+                MainSize = 42,
+                BackgroundNr = 0
+            };
             slide.Lines.Add("Wie seiner Gnade Macht,");
             slide.Lines.Add("Erlösung hat gebracht,");
             slide.Lines.Add("in uns're Sündennacht.");
@@ -190,21 +221,27 @@ namespace PraiseBase.Presenter.Persistence.PowerPraise
             part.Slides.Add(slide);
             ppl.Parts.Add(part);
 
-            part = new PowerPraiseSongPart();
-            part.Caption = "Teil 3";
+            part = new PowerPraiseSong.Part
+            {
+                Caption = "Teil 3"
+            };
 
-            slide = new PowerPraiseSongSlide();
-            slide.MainSize = 42;
-            slide.BackgroundNr = 0;
+            slide = new PowerPraiseSong.Slide
+            {
+                MainSize = 42,
+                BackgroundNr = 0
+            };
             slide.Lines.Add("Näher, mein Gott, zu Dir!");
             slide.Lines.Add("Dich bet' ich an.");
             slide.Lines.Add("Wie vieles hast an mir,");
             slide.Lines.Add("Du doch getan!");
             part.Slides.Add(slide);
 
-            slide = new PowerPraiseSongSlide();
-            slide.MainSize = 42;
-            slide.BackgroundNr = 0;
+            slide = new PowerPraiseSong.Slide
+            {
+                MainSize = 42,
+                BackgroundNr = 0
+            };
             slide.Lines.Add("Von Banden frei und los,");
             slide.Lines.Add("ruh' ich in Deinem Schoss.");
             slide.Lines.Add("Ja, Deine Gnad' ist gross!");
@@ -274,7 +311,7 @@ namespace PraiseBase.Presenter.Persistence.PowerPraise
             ppl.TranslationLineSpacing = 20;
 
             // Text orientation
-            ppl.TextOrientation = new Model.TextOrientation(Model.VerticalOrientation.Middle, Model.HorizontalOrientation.Left);
+            ppl.TextOrientation = new TextOrientation(VerticalOrientation.Middle, HorizontalOrientation.Left);
             ppl.TranslationTextPosition = TranslationPosition.Inline;
 
             // Borders

@@ -16,8 +16,8 @@ namespace PraiseBase.Presenter.Persistence.PowerPraise
 
         public PowerPraiseSong()
         {
-            Parts = new List<PowerPraiseSongPart>();
-            Order = new List<PowerPraiseSongPart>();
+            Parts = new List<Part>();
+            Order = new List<Part>();
             CopyrightText = new List<string>();
             BackgroundImages = new List<string>();
         }
@@ -40,12 +40,12 @@ namespace PraiseBase.Presenter.Persistence.PowerPraise
         /// <summary>
         ///     Song text parts
         /// </summary>
-        public List<PowerPraiseSongPart> Parts { get; private set; }
+        public List<Part> Parts { get; private set; }
 
         /// <summary>
         ///     Song text order
         /// </summary>
-        public List<PowerPraiseSongPart> Order { get; private set; }
+        public List<Part> Order { get; private set; }
 
         /// <summary>
         ///     Copyright text
@@ -126,6 +126,53 @@ namespace PraiseBase.Presenter.Persistence.PowerPraise
         ///     Borders
         /// </summary>
         public TextBorders Borders { get; set; }
+
+        public class Part
+        {
+            public Part()
+            {
+                Slides = new List<Slide>();
+            }
+
+            /// <summary>
+            ///     Caption
+            /// </summary>
+            public string Caption { get; set; }
+
+            /// <summary>
+            ///     Slides
+            /// </summary>
+            public List<Slide> Slides { get; private set; }
+        }
+
+        public class Slide
+        {
+            public Slide()
+            {
+                Lines = new List<string>();
+                Translation = new List<string>();
+            }
+
+            /// <summary>
+            ///     Font size of the main text
+            /// </summary>
+            public int MainSize { get; set; }
+
+            /// <summary>
+            ///     Background number (starting from 0)
+            /// </summary>
+            public int BackgroundNr { get; set; }
+
+            /// <summary>
+            ///     Song text lines
+            /// </summary>
+            public List<string> Lines { get; private set; }
+
+            /// <summary>
+            ///     Translation text lines
+            /// </summary>
+            public List<string> Translation { get; private set; }
+        }
 
         /// <summary>
         ///     Font formatting (Font, Color, Outline, Shadow)

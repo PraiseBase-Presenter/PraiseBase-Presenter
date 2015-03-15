@@ -269,9 +269,9 @@ namespace PraiseBase.Presenter.Persistence.PowerPraise
         /// <param name="elem"></param>
         /// <param name="defaultMainSize"></param>
         /// <returns></returns>
-        private PowerPraiseSongPart ParseSongPart(XmlElement elem, int defaultMainSize)
+        private PowerPraiseSong.Part ParseSongPart(XmlElement elem, int defaultMainSize)
         {
-            var part = new PowerPraiseSongPart
+            var part = new PowerPraiseSong.Part
             {
                 // Caption
                 Caption = elem.GetAttribute("caption")
@@ -292,9 +292,9 @@ namespace PraiseBase.Presenter.Persistence.PowerPraise
         /// <param name="elem"></param>
         /// <param name="defaultMainSize"></param>
         /// <returns></returns>
-        private PowerPraiseSongSlide ParseSongSlide(XmlElement elem, int defaultMainSize)
+        private PowerPraiseSong.Slide ParseSongSlide(XmlElement elem, int defaultMainSize)
         {
-            var slide = new PowerPraiseSongSlide
+            var slide = new PowerPraiseSong.Slide
             {
                 MainSize = defaultMainSize
             };
@@ -334,9 +334,9 @@ namespace PraiseBase.Presenter.Persistence.PowerPraise
         /// <param name="xelem"></param>
         /// <param name="sng"></param>
         /// <returns></returns>
-        private List<PowerPraiseSongPart> ParseOrder(XmlElement xelem, PowerPraiseSong sng)
+        private List<PowerPraiseSong.Part> ParseOrder(XmlElement xelem, PowerPraiseSong sng)
         {
-            var list = new List<PowerPraiseSongPart>();
+            var list = new List<PowerPraiseSong.Part>();
             foreach (XmlElement elem in xelem)
             {
                 if (elem.Name == "item")
