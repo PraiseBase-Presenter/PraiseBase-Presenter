@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Drawing;
 using PraiseBase.Presenter.Model;
 
@@ -7,14 +6,6 @@ namespace PraiseBase.Presenter.Persistence.PowerPraise
 {
     public class PowerPraiseSong : ISongFile
     {
-        public PowerPraiseSong()
-        {
-            Parts = new List<Part>();
-            Order = new List<Part>();
-            CopyrightText = new List<string>();
-            BackgroundImages = new List<string>();
-        }
-
         /// <summary>
         ///     Title
         /// </summary>
@@ -33,17 +24,17 @@ namespace PraiseBase.Presenter.Persistence.PowerPraise
         /// <summary>
         ///     Song text parts
         /// </summary>
-        public List<Part> Parts { get; private set; }
+        public ComparableList<Part> Parts { get; private set; }
 
         /// <summary>
         ///     Song text order
         /// </summary>
-        public List<Part> Order { get; private set; }
+        public ComparableList<Part> Order { get; private set; }
 
         /// <summary>
         ///     Copyright text
         /// </summary>
-        public List<string> CopyrightText { get; private set; }
+        public ComparableList<string> CopyrightText { get; private set; }
 
         /// <summary>
         ///     Position of the copyright text
@@ -93,7 +84,7 @@ namespace PraiseBase.Presenter.Persistence.PowerPraise
         /// <summary>
         ///     Background image paths (relative)
         /// </summary>
-        public List<string> BackgroundImages { get; private set; }
+        public ComparableList<string> BackgroundImages { get; private set; }
 
         /// <summary>
         ///     Main text line spacing
@@ -120,6 +111,60 @@ namespace PraiseBase.Presenter.Persistence.PowerPraise
         /// </summary>
         public TextBorders Borders { get; set; }
 
+        public PowerPraiseSong()
+        {
+            Parts = new ComparableList<Part>();
+            Order = new ComparableList<Part>();
+            CopyrightText = new ComparableList<string>();
+            BackgroundImages = new ComparableList<string>();
+        }
+
+        #region Equality members
+
+        protected bool Equals(PowerPraiseSong other)
+        {
+            return string.Equals(Title, other.Title) && string.Equals(Category, other.Category) && string.Equals(Language, other.Language) && Equals(Parts, other.Parts) && Equals(Order, other.Order) && Equals(CopyrightText, other.CopyrightText) && CopyrightTextPosition == other.CopyrightTextPosition && string.Equals(SourceText, other.SourceText) && SourceTextEnabled.Equals(other.SourceTextEnabled) && MainTextFontFormatting.Equals(other.MainTextFontFormatting) && TranslationTextFontFormatting.Equals(other.TranslationTextFontFormatting) && CopyrightTextFontFormatting.Equals(other.CopyrightTextFontFormatting) && SourceTextFontFormatting.Equals(other.SourceTextFontFormatting) && TextOutlineFormatting.Equals(other.TextOutlineFormatting) && TextShadowFormatting.Equals(other.TextShadowFormatting) && Equals(BackgroundImages, other.BackgroundImages) && MainLineSpacing == other.MainLineSpacing && TranslationLineSpacing == other.TranslationLineSpacing && Equals(TextOrientation, other.TextOrientation) && TranslationTextPosition == other.TranslationTextPosition && Borders.Equals(other.Borders);
+        }
+
+        public override bool Equals(object obj)
+        {
+            if (ReferenceEquals(null, obj)) return false;
+            if (ReferenceEquals(this, obj)) return true;
+            if (obj.GetType() != GetType()) return false;
+            return Equals((PowerPraiseSong) obj);
+        }
+
+        public override int GetHashCode()
+        {
+            unchecked
+            {
+                var hashCode = (Title != null ? Title.GetHashCode() : 0);
+                hashCode = (hashCode*397) ^ (Category != null ? Category.GetHashCode() : 0);
+                hashCode = (hashCode*397) ^ (Language != null ? Language.GetHashCode() : 0);
+                hashCode = (hashCode*397) ^ (Parts != null ? Parts.GetHashCode() : 0);
+                hashCode = (hashCode*397) ^ (Order != null ? Order.GetHashCode() : 0);
+                hashCode = (hashCode*397) ^ (CopyrightText != null ? CopyrightText.GetHashCode() : 0);
+                hashCode = (hashCode*397) ^ (int) CopyrightTextPosition;
+                hashCode = (hashCode*397) ^ (SourceText != null ? SourceText.GetHashCode() : 0);
+                hashCode = (hashCode*397) ^ SourceTextEnabled.GetHashCode();
+                hashCode = (hashCode*397) ^ MainTextFontFormatting.GetHashCode();
+                hashCode = (hashCode*397) ^ TranslationTextFontFormatting.GetHashCode();
+                hashCode = (hashCode*397) ^ CopyrightTextFontFormatting.GetHashCode();
+                hashCode = (hashCode*397) ^ SourceTextFontFormatting.GetHashCode();
+                hashCode = (hashCode*397) ^ TextOutlineFormatting.GetHashCode();
+                hashCode = (hashCode*397) ^ TextShadowFormatting.GetHashCode();
+                hashCode = (hashCode*397) ^ (BackgroundImages != null ? BackgroundImages.GetHashCode() : 0);
+                hashCode = (hashCode*397) ^ MainLineSpacing;
+                hashCode = (hashCode*397) ^ TranslationLineSpacing;
+                hashCode = (hashCode*397) ^ (TextOrientation != null ? TextOrientation.GetHashCode() : 0);
+                hashCode = (hashCode*397) ^ (int) TranslationTextPosition;
+                hashCode = (hashCode*397) ^ Borders.GetHashCode();
+                return hashCode;
+            }
+        }
+
+        #endregion
+
         public enum CopyrightPosition
         {
             FirstSlide,
@@ -129,11 +174,6 @@ namespace PraiseBase.Presenter.Persistence.PowerPraise
 
         public class Part
         {
-            public Part()
-            {
-                Slides = new List<Slide>();
-            }
-
             /// <summary>
             ///     Caption
             /// </summary>
@@ -142,17 +182,41 @@ namespace PraiseBase.Presenter.Persistence.PowerPraise
             /// <summary>
             ///     Slides
             /// </summary>
-            public List<Slide> Slides { get; private set; }
+            public ComparableList<Slide> Slides { get; private set; }
+
+            public Part()
+            {
+                Slides = new ComparableList<Slide>();
+            }
+
+            #region Equality members
+
+            protected bool Equals(Part other)
+            {
+                return string.Equals(Caption, other.Caption) && Equals(Slides, other.Slides);
+            }
+
+            public override bool Equals(object obj)
+            {
+                if (ReferenceEquals(null, obj)) return false;
+                if (ReferenceEquals(this, obj)) return true;
+                if (obj.GetType() != GetType()) return false;
+                return Equals((Part) obj);
+            }
+
+            public override int GetHashCode()
+            {
+                unchecked
+                {
+                    return ((Caption != null ? Caption.GetHashCode() : 0)*397) ^ (Slides != null ? Slides.GetHashCode() : 0);
+                }
+            }
+
+            #endregion
         }
 
         public class Slide
         {
-            public Slide()
-            {
-                Lines = new List<string>();
-                Translation = new List<string>();
-            }
-
             /// <summary>
             ///     Font size of the main text
             /// </summary>
@@ -166,12 +230,47 @@ namespace PraiseBase.Presenter.Persistence.PowerPraise
             /// <summary>
             ///     Song text lines
             /// </summary>
-            public List<string> Lines { get; private set; }
+            public ComparableList<string> Lines { get; private set; }
 
             /// <summary>
             ///     Translation text lines
             /// </summary>
-            public List<string> Translation { get; private set; }
+            public ComparableList<string> Translation { get; private set; }
+
+            public Slide()
+            {
+                Lines = new ComparableList<string>();
+                Translation = new ComparableList<string>();
+            }
+
+            #region Equality members
+
+            protected bool Equals(Slide other)
+            {
+                return MainSize == other.MainSize && BackgroundNr == other.BackgroundNr && Equals(Lines, other.Lines) && Equals(Translation, other.Translation);
+            }
+
+            public override bool Equals(object obj)
+            {
+                if (ReferenceEquals(null, obj)) return false;
+                if (ReferenceEquals(this, obj)) return true;
+                if (obj.GetType() != GetType()) return false;
+                return Equals((Slide) obj);
+            }
+
+            public override int GetHashCode()
+            {
+                unchecked
+                {
+                    var hashCode = MainSize;
+                    hashCode = (hashCode*397) ^ BackgroundNr;
+                    hashCode = (hashCode*397) ^ (Lines != null ? Lines.GetHashCode() : 0);
+                    hashCode = (hashCode*397) ^ (Translation != null ? Translation.GetHashCode() : 0);
+                    return hashCode;
+                }
+            }
+
+            #endregion
         }
 
         /// <summary>
