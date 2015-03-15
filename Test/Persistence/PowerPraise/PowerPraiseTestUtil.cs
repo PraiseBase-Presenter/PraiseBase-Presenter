@@ -264,40 +264,40 @@ namespace PraiseBase.Presenter.Persistence.PowerPraise
             ppl.SourceTextEnabled = true;
 
             // Formatting
-            ppl.MainTextFontFormatting = new PowerPraiseSong.FontFormatting
+            ppl.Formatting.MainText = new PowerPraiseSongFormatting.FontFormatting
             {
                 Font = new Font("Times New Roman", 44, FontStyle.Bold | FontStyle.Italic),
                 Color = Color.White,
                 OutlineWidth = 30,
                 ShadowDistance = 15
             };
-            ppl.TranslationTextFontFormatting = new PowerPraiseSong.FontFormatting
+            ppl.Formatting.TranslationText = new PowerPraiseSongFormatting.FontFormatting
             {
                 Font = new Font("Times New Roman", 20, FontStyle.Regular),
                 Color = Color.White,
                 OutlineWidth = 30,
                 ShadowDistance = 20
             };
-            ppl.CopyrightTextFontFormatting = new PowerPraiseSong.FontFormatting
+            ppl.Formatting.CopyrightText = new PowerPraiseSongFormatting.FontFormatting
             {
                 Font = new Font("Times New Roman", 14, FontStyle.Regular),
                 Color = Color.White,
                 OutlineWidth = 30,
                 ShadowDistance = 20
             };
-            ppl.SourceTextFontFormatting = new PowerPraiseSong.FontFormatting
+            ppl.Formatting.SourceText = new PowerPraiseSongFormatting.FontFormatting
             {
                 Font = new Font("Times New Roman", 30, FontStyle.Regular),
                 Color = Color.White,
                 OutlineWidth = 30,
                 ShadowDistance = 20
             };
-            ppl.TextOutlineFormatting = new PowerPraiseSong.OutlineFormatting
+            ppl.Formatting.Outline = new PowerPraiseSongFormatting.OutlineFormatting
             {
                 Color = Color.Black,
                 Enabled = false
             };
-            ppl.TextShadowFormatting = new PowerPraiseSong.ShadowFormatting
+            ppl.Formatting.Shadow = new PowerPraiseSongFormatting.ShadowFormatting
             {
                 Color = Color.Black,
                 Direction = 125,
@@ -305,15 +305,15 @@ namespace PraiseBase.Presenter.Persistence.PowerPraise
             };
 
             // Line spacing
-            ppl.MainLineSpacing = 30;
-            ppl.TranslationLineSpacing = 20;
+            ppl.Formatting.MainLineSpacing = 30;
+            ppl.Formatting.TranslationLineSpacing = 20;
 
             // Text orientation
-            ppl.TextOrientation = new TextOrientation(VerticalOrientation.Middle, HorizontalOrientation.Left);
-            ppl.TranslationTextPosition = TranslationPosition.Inline;
+            ppl.Formatting.TextOrientation = new TextOrientation(VerticalOrientation.Middle, HorizontalOrientation.Left);
+            ppl.Formatting.TranslationPosition = TranslationPosition.Inline;
 
             // Borders
-            ppl.Borders = new PowerPraiseSong.TextBorders
+            ppl.Formatting.Borders = new PowerPraiseSongFormatting.TextBorders
             {
                 TextLeft = 50,
                 TextTop = 40,

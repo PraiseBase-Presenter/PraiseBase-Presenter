@@ -218,41 +218,36 @@ namespace PraiseBase.Presenter.Persistence.PowerPraise
             }
 
             var fontElem = xmlRoot["formatting"]["font"];
-
-            // Font formatting
-            sng.MainTextFontFormatting = ParseTextFormatting(fontElem["maintext"], PowerPraiseConstants.MainText);
-            sng.TranslationTextFontFormatting = ParseTextFormatting(fontElem["translationtext"],
-                PowerPraiseConstants.TranslationText);
-            sng.CopyrightTextFontFormatting = ParseTextFormatting(fontElem["copyrighttext"],
-                PowerPraiseConstants.CopyrightText);
-            sng.SourceTextFontFormatting = ParseTextFormatting(fontElem["sourcetext"], PowerPraiseConstants.SourceText);
-
-            // Font outline
-            sng.TextOutlineFormatting = ParseFontOutline(fontElem["outline"], PowerPraiseConstants.FontOutline);
-
-            // Font shadow
-            sng.TextShadowFormatting = ParseFontShadow(fontElem["shadow"], PowerPraiseConstants.FontShadow);
-
-            // Line spacing
             var lineSpacingElem = xmlRoot["formatting"]["linespacing"];
-            if (lineSpacingElem != null)
-            {
-                sng.MainLineSpacing = ParseNaturalNumber(lineSpacingElem["main"], PowerPraiseConstants.MainLineSpacing);
-                sng.TranslationLineSpacing = ParseNaturalNumber(lineSpacingElem["translation"],
-                    PowerPraiseConstants.TranslationLineSpacing);
-            }
-
             var textOrientationElem = xmlRoot["formatting"]["textorientation"];
 
-            // Text orientation
-            sng.TextOrientation = ParseOrientation(textOrientationElem, PowerPraiseConstants.TextOrientation);
+            sng.Formatting = new PowerPraiseSongFormatting
+            {
+                // Font formatting
+                MainText = ParseTextFormatting(fontElem["maintext"], PowerPraiseConstants.Format.MainText),
+                TranslationText = ParseTextFormatting(fontElem["translationtext"], PowerPraiseConstants.Format.TranslationText),
+                CopyrightText = ParseTextFormatting(fontElem["copyrighttext"], PowerPraiseConstants.Format.CopyrightText),
+                SourceText = ParseTextFormatting(fontElem["sourcetext"], PowerPraiseConstants.Format.SourceText),
 
-            // Translation position
-            sng.TranslationTextPosition = ParseTranslationPosition(textOrientationElem,
-                PowerPraiseConstants.TranslationPosition);
+                // Font outline
+                Outline = ParseFontOutline(fontElem["outline"], PowerPraiseConstants.Format.Outline),
 
-            // Borders
-            sng.Borders = ParseBorders(xmlRoot["formatting"]["borders"], PowerPraiseConstants.TextBorders);
+                // Font shadow
+                Shadow = ParseFontShadow(fontElem["shadow"], PowerPraiseConstants.Format.Shadow),
+
+                // Line spacing
+                MainLineSpacing = ParseNaturalNumber(lineSpacingElem["main"], PowerPraiseConstants.Format.MainLineSpacing),
+                TranslationLineSpacing = ParseNaturalNumber(lineSpacingElem["translation"], PowerPraiseConstants.Format.TranslationLineSpacing),
+
+                // Text orientation
+                TextOrientation = ParseOrientation(textOrientationElem, PowerPraiseConstants.Format.TextOrientation),
+
+                // Translation position
+                TranslationPosition = ParseTranslationPosition(textOrientationElem, PowerPraiseConstants.Format.TranslationPosition),
+
+                // Borders
+                Borders = ParseBorders(xmlRoot["formatting"]["borders"], PowerPraiseConstants.Format.Borders)
+            };
         }
 
         /// <summary>
@@ -461,8 +456,8 @@ namespace PraiseBase.Presenter.Persistence.PowerPraise
         /// <param name="elem"></param>
         /// <param name="defaultValue"></param>
         /// <returns></returns>
-        private PowerPraiseSong.FontFormatting ParseTextFormatting(XmlElement elem,
-            PowerPraiseSong.FontFormatting defaultValue)
+        private PowerPraiseSongFormatting.FontFormatting ParseTextFormatting(XmlElement elem,
+            PowerPraiseSongFormatting.FontFormatting defaultValue)
         {
             var f = defaultValue;
             if (elem != null)
@@ -518,8 +513,8 @@ namespace PraiseBase.Presenter.Persistence.PowerPraise
         /// <param name="elem"></param>
         /// <param name="defaultValue"></param>
         /// <returns></returns>
-        private PowerPraiseSong.OutlineFormatting ParseFontOutline(XmlElement elem,
-            PowerPraiseSong.OutlineFormatting defaultValue)
+        private PowerPraiseSongFormatting.OutlineFormatting ParseFontOutline(XmlElement elem,
+            PowerPraiseSongFormatting.OutlineFormatting defaultValue)
         {
             var outline = defaultValue;
             if (elem != null)
@@ -541,8 +536,8 @@ namespace PraiseBase.Presenter.Persistence.PowerPraise
         /// <param name="elem"></param>
         /// <param name="defaultValue"></param>
         /// <returns></returns>
-        private PowerPraiseSong.ShadowFormatting ParseFontShadow(XmlElement elem,
-            PowerPraiseSong.ShadowFormatting defaultValue)
+        private PowerPraiseSongFormatting.ShadowFormatting ParseFontShadow(XmlElement elem,
+            PowerPraiseSongFormatting.ShadowFormatting defaultValue)
         {
             var shadow = defaultValue;
             if (elem != null)
@@ -700,8 +695,8 @@ namespace PraiseBase.Presenter.Persistence.PowerPraise
         /// <param name="elem"></param>
         /// <param name="defaultValue"></param>
         /// <returns></returns>
-        private static PowerPraiseSong.TextBorders ParseBorders(XmlElement elem,
-            PowerPraiseSong.TextBorders defaultValue)
+        private static PowerPraiseSongFormatting.TextBorders ParseBorders(XmlElement elem,
+            PowerPraiseSongFormatting.TextBorders defaultValue)
         {
             var borders = defaultValue;
             if (elem != null)

@@ -1,7 +1,6 @@
-﻿using PraiseBase.Presenter.Persistence;
+﻿using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System;
-using PraiseBase.Presenter.Model;
+using PraiseBase.Presenter.Util;
 
 namespace PraiseBase.Presenter.Persistence.PowerPraise.Extended
 {
@@ -11,28 +10,14 @@ namespace PraiseBase.Presenter.Persistence.PowerPraise.Extended
     ///This is a test class for PowerPraiseSongFileWriterTest and is intended
     ///to contain all PowerPraiseSongFileWriterTest Unit Tests
     ///</summary>
-    [TestClass()]
+    [TestClass]
     public class ExtendedPowerPraiseSongFileWriterTest
     {
-
-
-        private TestContext testContextInstance;
-
         /// <summary>
         ///Gets or sets the test context which provides
         ///information about and functionality for the current test run.
         ///</summary>
-        public TestContext TestContext
-        {
-            get
-            {
-                return testContextInstance;
-            }
-            set
-            {
-                testContextInstance = value;
-            }
-        }
+        public TestContext TestContext { get; set; }
 
         #region Additional test attributes
         // 
@@ -68,19 +53,19 @@ namespace PraiseBase.Presenter.Persistence.PowerPraise.Extended
         /// <summary>
         ///A test for Save
         ///</summary>
-        [TestMethod()]
+        [TestMethod]
         public void SaveTest()
         {
             ISongFileWriter<ExtendedPowerPraiseSong> target = new ExtendedPowerPraiseSongFileWriter();
-            string referenceFilename = "Resources/powerpraise/Näher, mein Gott zu Dir - extended.ppl";
-            string filename = "Resources/powerpraise/Näher, mein Gott zu Dir - extended - out.ppl";
+            const string referenceFilename = "Resources/powerpraise/Näher, mein Gott zu Dir - extended.ppl";
+            const string filename = "Resources/powerpraise/Näher, mein Gott zu Dir - extended - out.ppl";
 
             ExtendedPowerPraiseSong sng = ExtendedPowerPraiseTestUtil.GetExpectedExtendedPowerPraiseSong();
 
             target.Save(filename, sng);
 
             try {
-                PraiseBase.Presenter.Util.FileUtils.FileEquals(filename, referenceFilename, true);
+                FileUtils.FileEquals(filename, referenceFilename, true);
             }
             catch (Exception e)
             {
@@ -91,24 +76,22 @@ namespace PraiseBase.Presenter.Persistence.PowerPraise.Extended
         /// <summary>
         ///A test for FileTypeDescription
         ///</summary>
-        [TestMethod()]
+        [TestMethod]
         public void FileTypeDescriptionTest()
         {
             ISongFileWriter<ExtendedPowerPraiseSong> target = new ExtendedPowerPraiseSongFileWriter();
-            string actual;
-            actual = target.GetFileTypeDescription();
+            var actual = target.GetFileTypeDescription();
             Assert.AreEqual(actual, "PowerPraise Lied");
         }
 
         /// <summary>
         ///A test for FileExtension
         ///</summary>
-        [TestMethod()]
+        [TestMethod]
         public void FileExtensionTest()
         {
             ISongFileWriter<ExtendedPowerPraiseSong> target = new ExtendedPowerPraiseSongFileWriter();
-            string actual;
-            actual = target.GetFileExtension();
+            var actual = target.GetFileExtension();
             Assert.AreEqual(actual, ".ppl");
         }
     }

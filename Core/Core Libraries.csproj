@@ -114,6 +114,7 @@
     <Compile Include="Persistence\OpenLyrics\OpenLyricsSongFileReader.cs" />
     <Compile Include="Persistence\PowerPraise\PowerPraiseSongFileReader.cs" />
     <Compile Include="Persistence\AbstractDatabaseImporter.cs" />
+    <Compile Include="Persistence\PowerPraise\PowerPraiseSongFormatting.cs" />
     <Compile Include="Persistence\PraiseBox\PraiseBoxDatabaseImporter.cs" />
     <Compile Include="Persistence\Setlists\SetlistReader.cs" />
     <Compile Include="Persistence\ISongFileMapper.cs" />

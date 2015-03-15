@@ -1,7 +1,4 @@
-﻿using PraiseBase.Presenter.Persistence;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System;
-using PraiseBase.Presenter.Model.Song;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace PraiseBase.Presenter.Persistence.CCLI
 {
@@ -11,7 +8,7 @@ namespace PraiseBase.Presenter.Persistence.CCLI
     ///This is a test class for CcliUsrSongFileReaderTest and is intended
     ///to contain all CcliUsrSongFileReaderTest Unit Tests
     ///</summary>
-    [TestClass()]
+    [TestClass]
     public class SongSelectFileReaderTest
     {
 
@@ -67,7 +64,7 @@ namespace PraiseBase.Presenter.Persistence.CCLI
         /// <summary>
         ///A test for IsFileSupported
         ///</summary>
-        [TestMethod()]
+        [TestMethod]
         public void IsFileSupportedTest()
         {
             ISongFileReader<SongSelectFile> reader = new SongSelectFileReader(); // TODO: Initialize to an appropriate value
@@ -80,7 +77,7 @@ namespace PraiseBase.Presenter.Persistence.CCLI
         /// <summary>
         ///A test for Load
         ///</summary>
-        [TestMethod()]
+        [TestMethod]
         public void LoadTest()
         {
             ISongFileReader<SongSelectFile> reader = new SongSelectFileReader();
@@ -144,7 +141,7 @@ namespace PraiseBase.Presenter.Persistence.CCLI
         /// <summary>
         ///A test for ReadTitle
         ///</summary>
-        [TestMethod()]
+        [TestMethod]
         public void ReadTitleTest()
         {
             ISongFileReader<SongSelectFile> reader = new SongSelectFileReader();

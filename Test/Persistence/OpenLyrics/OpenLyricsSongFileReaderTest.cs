@@ -1,7 +1,4 @@
-﻿using PraiseBase.Presenter.Persistence;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System;
-using PraiseBase.Presenter.Model.Song;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace PraiseBase.Presenter.Persistence.OpenLyrics
 {
@@ -11,7 +8,7 @@ namespace PraiseBase.Presenter.Persistence.OpenLyrics
     ///This is a test class for OpenLyricsSongFileReaderTest and is intended
     ///to contain all OpenLyricsSongFileReaderTest Unit Tests
     ///</summary>
-    [TestClass()]
+    [TestClass]
     public class OpenLyricsSongFileReaderTest
     {
 
@@ -67,7 +64,7 @@ namespace PraiseBase.Presenter.Persistence.OpenLyrics
         /// <summary>
         ///A test for Load
         ///</summary>
-        [TestMethod()]
+        [TestMethod]
         public void LoadSimpleTest()
         {
             ISongFileReader<OpenLyricsSong> target = new OpenLyricsSongFileReader();
@@ -115,7 +112,7 @@ namespace PraiseBase.Presenter.Persistence.OpenLyrics
         /// <summary>
         ///A test for Load
         ///</summary>
-        [TestMethod()]
+        [TestMethod]
         public void LoadComplexTest()
         {
             ISongFileReader<OpenLyricsSong> target = new OpenLyricsSongFileReader();
@@ -235,7 +232,7 @@ namespace PraiseBase.Presenter.Persistence.OpenLyrics
         /// <summary>
         ///A test for ReadTitle
         ///</summary>
-        [TestMethod()]
+        [TestMethod]
         public void ReadTitleTestSimple()
         {
             ISongFileReader<OpenLyricsSong> reader = new OpenLyricsSongFileReader();
@@ -246,7 +243,7 @@ namespace PraiseBase.Presenter.Persistence.OpenLyrics
         /// <summary>
         ///A test for ReadTitle
         ///</summary>
-        [TestMethod()]
+        [TestMethod]
         public void ReadTitleTestComplex()
         {
             ISongFileReader<OpenLyricsSong> reader = new OpenLyricsSongFileReader();

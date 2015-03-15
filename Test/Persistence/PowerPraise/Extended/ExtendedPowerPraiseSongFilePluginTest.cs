@@ -1,6 +1,5 @@
-﻿using PraiseBase.Presenter.Persistence;
+﻿using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System;
 using PraiseBase.Presenter.Model.Song;
 using PraiseBase.Presenter.Util;
 
@@ -12,28 +11,14 @@ namespace PraiseBase.Presenter.Persistence.PowerPraise.Extended
     ///This is a test class for PowerPraiseSongFileReaderTest and is intended
     ///to contain all PowerPraiseSongFileReaderTest Unit Tests
     ///</summary>
-    [TestClass()]
+    [TestClass]
     public class ExtendedPowerPraiseSongFilePluginTest
     {
-
-
-        private TestContext testContextInstance;
-
         /// <summary>
         ///Gets or sets the test context which provides
         ///information about and functionality for the current test run.
         ///</summary>
-        public TestContext TestContext
-        {
-            get
-            {
-                return testContextInstance;
-            }
-            set
-            {
-                testContextInstance = value;
-            }
-        }
+        public TestContext TestContext { get; set; }
 
         #region Additional test attributes
         // 
@@ -68,11 +53,11 @@ namespace PraiseBase.Presenter.Persistence.PowerPraise.Extended
         /// <summary>
         ///A test for Load
         ///</summary>
-        [TestMethod()]
+        [TestMethod]
         public void LoadTest()
         {
             ISongFilePlugin target = new ExtendedPowerPraiseSongFilePlugin();
-            string filename = "Resources/powerpraise/Näher, mein Gott zu Dir.ppl";
+            const string filename = "Resources/powerpraise/Näher, mein Gott zu Dir.ppl";
 
             Song expected = PowerPraiseTestUtil.GetExpectedSong();
             Song actual = target.Load(filename);
@@ -171,7 +156,7 @@ namespace PraiseBase.Presenter.Persistence.PowerPraise.Extended
         /// <summary>
         ///A test for ReadTitle
         ///</summary>
-        [TestMethod()]
+        [TestMethod]
         public void ReadTitleTest()
         {
             ISongFilePlugin reader = new ExtendedPowerPraiseSongFilePlugin();
@@ -179,12 +164,12 @@ namespace PraiseBase.Presenter.Persistence.PowerPraise.Extended
             Assert.IsNull(reader.ReadTitle("Resources/powerpraise/non-existing-file.ppl"));
         }
 
-        [TestMethod()]
+        [TestMethod]
         public void ReadUsingLoadMapperTest()
         {
             ISongFileReader<PowerPraiseSong> reader = new PowerPraiseSongFileReader();
             ISongFileMapper<PowerPraiseSong> mapper = new PowerPraiseSongFileMapper();
-            string filename = "Resources/powerpraise/Näher, mein Gott zu Dir.ppl";
+            const string filename = "Resources/powerpraise/Näher, mein Gott zu Dir.ppl";
             Song actual = mapper.Map(reader.Load(filename));
             Song expected = PowerPraiseTestUtil.GetExpectedSong();
 
@@ -283,12 +268,12 @@ namespace PraiseBase.Presenter.Persistence.PowerPraise.Extended
         /// <summary>
         ///A test for Save
         ///</summary>
-        [TestMethod()]
+        [TestMethod]
         public void SaveTest()
         {
             ISongFilePlugin target = new ExtendedPowerPraiseSongFilePlugin();
-            string referenceFilename = "Resources/powerpraise/Näher, mein Gott zu Dir.ppl";
-            string filename = "Resources/powerpraise/Näher, mein Gott zu Dir - neu - extended.ppl";
+            const string referenceFilename = "Resources/powerpraise/Näher, mein Gott zu Dir.ppl";
+            const string filename = "Resources/powerpraise/Näher, mein Gott zu Dir - neu - extended.ppl";
 
             Song sng = PowerPraiseTestUtil.GetExpectedSong();
 
@@ -296,7 +281,7 @@ namespace PraiseBase.Presenter.Persistence.PowerPraise.Extended
 
             try
             {
-                PraiseBase.Presenter.Util.FileUtils.FileEquals(filename, referenceFilename, true);
+                FileUtils.FileEquals(filename, referenceFilename, true);
             }
             catch (Exception e)
             {
@@ -307,43 +292,41 @@ namespace PraiseBase.Presenter.Persistence.PowerPraise.Extended
         /// <summary>
         ///A test for FileTypeDescription
         ///</summary>
-        [TestMethod()]
+        [TestMethod]
         public void FileTypeDescriptionTest()
         {
             ISongFilePlugin target = new ExtendedPowerPraiseSongFilePlugin(); // TODO: Initialize to an appropriate value
-            string actual;
-            actual = target.GetFileTypeDescription();
+            var actual = target.GetFileTypeDescription();
             Assert.AreEqual(actual, "PowerPraise Lied (erweitert)");
         }
 
         /// <summary>
         ///A test for FileExtension
         ///</summary>
-        [TestMethod()]
+        [TestMethod]
         public void FileExtensionTest()
         {
             ISongFilePlugin target = new ExtendedPowerPraiseSongFilePlugin(); // TODO: Initialize to an appropriate value
-            string actual;
-            actual = target.GetFileExtension();
+            var actual = target.GetFileExtension();
             Assert.AreEqual(actual, ".ppl");
         }
 
-        [TestMethod()]
+        [TestMethod]
         public void WriteUsingMapperSaveTest()
         {
             ISongFileMapper<PowerPraiseSong> mapper = new PowerPraiseSongFileMapper();
             ISongFileWriter<PowerPraiseSong> writer = new PowerPraiseSongFileWriter();
-            string referenceFilename = "Resources/powerpraise/Näher, mein Gott zu Dir.ppl";
-            string filename = "Resources/powerpraise/Näher, mein Gott zu Dir - neu - extended2.ppl";
+            const string referenceFilename = "Resources/powerpraise/Näher, mein Gott zu Dir.ppl";
+            const string filename = "Resources/powerpraise/Näher, mein Gott zu Dir - neu - extended2.ppl";
 
-            Song sng = PowerPraiseTestUtil.GetExpectedSong(); ;
+            Song sng = PowerPraiseTestUtil.GetExpectedSong();
             PowerPraiseSong ppl = new PowerPraiseSong();
             mapper.Map(sng, ppl);
             writer.Save(filename, ppl);
 
             try
             {
-                PraiseBase.Presenter.Util.FileUtils.FileEquals(filename, referenceFilename, true);
+                FileUtils.FileEquals(filename, referenceFilename, true);
             }
             catch (Exception e)
             {

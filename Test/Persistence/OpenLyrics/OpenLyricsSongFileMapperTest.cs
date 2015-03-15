@@ -1,6 +1,4 @@
-﻿using PraiseBase.Presenter.Persistence;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using PraiseBase.Presenter.Model.Song;
 using PraiseBase.Presenter.Util;
 
@@ -12,7 +10,7 @@ namespace PraiseBase.Presenter.Persistence.OpenLyrics
     ///This is a test class for OpenLyricsSongFileReaderTest and is intended
     ///to contain all OpenLyricsSongFileReaderTest Unit Tests
     ///</summary>
-    [TestClass()]
+    [TestClass]
     public class OpenLyricsSongFileMapperTest
     {
 
@@ -68,7 +66,7 @@ namespace PraiseBase.Presenter.Persistence.OpenLyrics
         /// <summary>
         ///A test for Load
         ///</summary>
-        [TestMethod()]
+        [TestMethod]
         public void LoadSimpleTest()
         {
             OpenLyricsSongFileMapper mapper = new OpenLyricsSongFileMapper();
@@ -132,7 +130,7 @@ namespace PraiseBase.Presenter.Persistence.OpenLyrics
         /// <summary>
         ///A test for Load
         ///</summary>
-        [TestMethod()]
+        [TestMethod]
         public void LoadComplexTest()
         {
             OpenLyricsSongFileMapper mapper = new OpenLyricsSongFileMapper();
