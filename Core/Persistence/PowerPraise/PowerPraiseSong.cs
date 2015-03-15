@@ -1,4 +1,6 @@
-﻿using PraiseBase.Presenter.Model;
+﻿using System;
+using System.Linq;
+using PraiseBase.Presenter.Model;
 using PraiseBase.Presenter.Model.Song;
 
 namespace PraiseBase.Presenter.Persistence.PowerPraise
@@ -25,12 +27,12 @@ namespace PraiseBase.Presenter.Persistence.PowerPraise
         /// <summary>
         ///     Song text parts
         /// </summary>
-        public ComparableList<Part> Parts { get; private set; }
+        public ComparableOrderedList<Part> Parts { get; private set; }
 
         /// <summary>
         ///     Song text order
         /// </summary>
-        public ComparableList<Part> Order { get; private set; }
+        public ComparableOrderedList<Part> Order { get; private set; }
 
         /// <summary>
         ///     Copyright text
@@ -61,10 +63,20 @@ namespace PraiseBase.Presenter.Persistence.PowerPraise
 
         public PowerPraiseSong()
         {
-            Parts = new ComparableList<Part>();
-            Order = new ComparableList<Part>();
+            Parts = new ComparableOrderedList<Part>();
+            Order = new ComparableOrderedList<Part>();
             CopyrightText = new ComparableList<string>();
             Formatting = new PowerPraiseSongFormatting();
+        }
+
+        /// <summary>
+        ///     Returns the number of background images
+        /// </summary>
+        public int GetNumberOfBackgroundImages()
+        {
+            return 
+                Parts.SelectMany(t => t.Slides)
+                    .Count(t1 => t1.Background != null && t1.Background.GetType() == typeof(ImageBackground));
         }
 
         #region Equality members
@@ -111,7 +123,7 @@ namespace PraiseBase.Presenter.Persistence.PowerPraise
             None
         }
 
-        public class Part
+        public class Part : ICloneable
         {
             /// <summary>
             ///     Caption
@@ -121,11 +133,47 @@ namespace PraiseBase.Presenter.Persistence.PowerPraise
             /// <summary>
             ///     Slides
             /// </summary>
-            public ComparableList<Slide> Slides { get; private set; }
+            public ComparableOrderedList<Slide> Slides { get; private set; }
 
             public Part()
             {
-                Slides = new ComparableList<Slide>();
+                Slides = new ComparableOrderedList<Slide>();
+            }
+
+            /// <summary>
+            ///     Duplicates a slide and cuts it's text in half,
+            ///     assigning the first part to the original slide
+            ///     and the second part to the copy
+            /// </summary>
+            /// <param name="slideId">The slide index</param>
+            public void SplitSlide(int slideId)
+            {
+                var sld = (Slide)Slides[slideId].Clone();
+
+                var totl = sld.Lines.Count;
+                var rem = totl / 2;
+                Slides[slideId].Lines.RemoveRange(0, rem);
+                sld.Lines.RemoveRange(rem, totl - rem);
+
+                totl = sld.Translation.Count;
+                rem = totl / 2;
+                Slides[slideId].Translation.RemoveRange(0, rem);
+                sld.Translation.RemoveRange(rem, totl - rem);
+
+                Slides.Insert(slideId, sld);
+            }
+
+            public object Clone()
+            {
+                var p = new Part
+                {
+                    Caption = Caption,
+                };
+                foreach (var s in Slides)
+                {
+                    p.Slides.Add((Slide) s.Clone());
+                }
+                return p;
             }
 
             #region Equality members
@@ -154,7 +202,7 @@ namespace PraiseBase.Presenter.Persistence.PowerPraise
             #endregion
         }
 
-        public class Slide
+        public class Slide : ICloneable
         {
             /// <summary>
             ///     Font size of the main text
@@ -180,6 +228,18 @@ namespace PraiseBase.Presenter.Persistence.PowerPraise
             {
                 Lines = new ComparableList<string>();
                 Translation = new ComparableList<string>();
+            }
+
+            public object Clone()
+            {
+                var s = new Slide
+                {
+                    MainSize = MainSize,
+                    Background = Background
+                };
+                s.Lines.AddRange(Lines);
+                s.Translation.AddRange(Translation);
+                return s;
             }
 
             #region Equality members

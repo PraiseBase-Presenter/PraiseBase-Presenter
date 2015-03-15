@@ -569,32 +569,8 @@ namespace PraiseBase.Presenter.Persistence.PowerPraise
         private static List<IBackground> ParseBackgroundImages(XmlElement elem)
         {
             List<IBackground> list = new ComparableList<IBackground>();
-            list.AddRange(from XmlElement e in elem where e.Name == "file" select ParseBackground(e.InnerText));
+            list.AddRange(from XmlElement e in elem where e.Name == "file" select PowerPraiseFileUtil.ParseBackground(e.InnerText));
             return list;
-        }
-
-        private static IBackground ParseBackground(string bg)
-        {
-            if (Regex.IsMatch(bg, @"^\d+$"))
-            {
-                int trySize;
-                if (int.TryParse(bg, out trySize))
-                {
-                    try
-                    {
-                        return new ColorBackground(PowerPraiseFileUtil.ConvertColor(trySize));
-                    }
-                    catch (ArgumentException)
-                    {
-                        return null;
-                    }
-                }
-            }
-            else if (bg.Trim() != String.Empty)
-            {
-                return new ImageBackground(bg);
-            }
-            return null;
         }
 
         /// <summary>

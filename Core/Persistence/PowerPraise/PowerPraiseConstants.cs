@@ -1,5 +1,6 @@
 ﻿using System.Drawing;
 using PraiseBase.Presenter.Model;
+using PraiseBase.Presenter.Model.Song;
 
 namespace PraiseBase.Presenter.Persistence.PowerPraise
 {
@@ -7,7 +8,7 @@ namespace PraiseBase.Presenter.Persistence.PowerPraise
     {
         public static readonly string NoCategory = "Keine Kategorie";
         public static readonly string Language = null;
-        public static readonly string DefaultBackground = "8075276";
+        public static readonly IBackground DefaultBackground = new ColorBackground(PowerPraiseFileUtil.ConvertColor(8075276));
         
         public static readonly int SlideMainTextSize = 30;
 

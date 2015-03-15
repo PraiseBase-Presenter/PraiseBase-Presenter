@@ -102,7 +102,7 @@ namespace PraiseBase.Presenter.Persistence.PowerPraise
                     tn2.SetAttribute("mainsize", mainsize.ToString());
 
                     // Backgound number
-                    var bg = MapBackground(sld.Background) ?? PowerPraiseConstants.DefaultBackground;
+                    var bg = PowerPraiseFileUtil.MapBackground(sld.Background) ?? PowerPraiseFileUtil.MapBackground(PowerPraiseConstants.DefaultBackground);
                     int backgroundNr;
                     if (!backgrounds.ContainsKey(bg))
                     {
@@ -225,7 +225,7 @@ namespace PraiseBase.Presenter.Persistence.PowerPraise
             xmlRoot["formatting"].AppendChild(xmlDoc.CreateElement("background"));
             if (backgrounds.Count == 0)
             {
-                backgrounds.Add(PowerPraiseConstants.DefaultBackground, 0);
+                backgrounds.Add(PowerPraiseFileUtil.MapBackground(PowerPraiseConstants.DefaultBackground), 0);
             }
             foreach (string bg in backgrounds.Keys)
             {
@@ -318,22 +318,6 @@ namespace PraiseBase.Presenter.Persistence.PowerPraise
             elem[key]["outline"].InnerText = f.OutlineWidth.ToString();
             elem[key].AppendChild(xmlDoc.CreateElement("shadow"));
             elem[key]["shadow"].InnerText = f.ShadowDistance.ToString();
-        }
-
-        private static string MapBackground(IBackground bg)
-        {
-            if (bg != null)
-            {
-                if (bg.GetType() == typeof(ImageBackground))
-                {
-                    return ((ImageBackground)bg).ImagePath;
-                }
-                if (bg.GetType() == typeof(ColorBackground))
-                {
-                    return PowerPraiseFileUtil.ConvertColor(((ColorBackground)bg).Color).ToString();
-                }
-            }
-            return null;
         }
     }
 }
