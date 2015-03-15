@@ -108,7 +108,7 @@ namespace PraiseBase.Presenter.Editor
             comboBoxLanguage.Text = Song.Language;
             comboBoxLanguage.AutoCompleteMode = AutoCompleteMode.Suggest;
             comboBoxLanguage.AutoCompleteSource = AutoCompleteSource.ListItems;
-            foreach (string str in _settings.Languages)
+            foreach (string str in Settings.Languages)
             {
                 comboBoxLanguage.Items.Add(str);
             }
@@ -117,7 +117,7 @@ namespace PraiseBase.Presenter.Editor
         private void PopulateTags()
         {
             checkedListBoxTags.Items.Clear();
-            foreach (string str in _settings.Tags)
+            foreach (string str in Settings.Tags)
             {
                 if (Song.Themes.Contains(str))
                     checkedListBoxTags.Items.Add(str, true);
@@ -128,7 +128,7 @@ namespace PraiseBase.Presenter.Editor
 
         private void PopulatePartList()
         {
-            foreach (string str in _settings.SongParts)
+            foreach (string str in Settings.SongParts)
             {
                 ToolStripMenuItem tItem = new ToolStripMenuItem(str);
                 tItem.Click += partAddMenu_click;
@@ -258,9 +258,9 @@ namespace PraiseBase.Presenter.Editor
             }
 
             if (partId < 0)
-                partId = _currentPartId;
+                partId = CurrentPartId;
             if (slideId < 0)
-                slideId = _currentSlideId;
+                slideId = CurrentSlideId;
 
             if (partId >= Song.Parts.Count)
                 partId = Song.Parts.Count - 1;
@@ -277,15 +277,15 @@ namespace PraiseBase.Presenter.Editor
             textBoxSongTranslation.DataBindings.Clear();
             textBoxSongTranslation.DataBindings.Add("Text", sld, "TranslationText");
 
-            _currentPartId = partId;
-            _currentSlideId = slideId;
+            CurrentPartId = partId;
+            CurrentSlideId = slideId;
 
             PreviewSlide();
         }
 
         private void AddSongPartUpdateTree(string caption)
         {
-            var newPart = _templateMapper.AddSongPart(Song, caption);
+            var newPart = TemplateMapper.AddSongPart(Song, caption);
             Song.PartSequence.Add(newPart);
             PopulateTree();
             treeViewContents.SelectedNode = treeViewContents.Nodes[treeViewContents.Nodes.Count - 1].LastNode;
@@ -299,9 +299,9 @@ namespace PraiseBase.Presenter.Editor
         [SuppressMessage("ReSharper", "UnusedParameter.Local")]
         private void buttonAddNewSlide_Click(object sender, EventArgs e)
         {
-            _templateMapper.AddSongSlide(Song.Parts[_currentPartId]);
+            TemplateMapper.AddSongSlide(Song.Parts[CurrentPartId]);
             PopulateTree();
-            treeViewContents.SelectedNode = treeViewContents.Nodes[_currentPartId].LastNode;
+            treeViewContents.SelectedNode = treeViewContents.Nodes[CurrentPartId].LastNode;
         }
 
         private void buttonDelItem_Click(object sender, EventArgs e)
@@ -398,16 +398,16 @@ namespace PraiseBase.Presenter.Editor
         [SuppressMessage("ReSharper", "UnusedParameter.Local")]
         private void buttonDelSlide_Click(object sender, EventArgs e)
         {
-            if (Song.Parts[_currentPartId].Slides.Count > 1)
+            if (Song.Parts[CurrentPartId].Slides.Count > 1)
             {
                 if (MessageBox.Show(StringResources.ReallyDeleteSlide, StringResources.SongEditor, 
                     MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                 {
                     int slideId = treeViewContents.SelectedNode.Index;
-                    Song.Parts[_currentPartId].Slides.RemoveAt(slideId);
+                    Song.Parts[CurrentPartId].Slides.RemoveAt(slideId);
                     PopulateTree();
-                    _currentSlideId = Math.Max(0, slideId - 1);
-                    treeViewContents.SelectedNode = treeViewContents.Nodes[_currentPartId].Nodes[_currentSlideId];
+                    CurrentSlideId = Math.Max(0, slideId - 1);
+                    treeViewContents.SelectedNode = treeViewContents.Nodes[CurrentPartId].Nodes[CurrentSlideId];
                 }
             }
             else
@@ -448,17 +448,17 @@ namespace PraiseBase.Presenter.Editor
 
         private void buttonSlideDuplicate_Click(object sender, EventArgs e)
         {
-            Song.Parts[_currentPartId].Slides.Duplicate(_currentSlideId);
+            Song.Parts[CurrentPartId].Slides.Duplicate(CurrentSlideId);
             PopulateTree();
-            treeViewContents.SelectedNode = treeViewContents.Nodes[_currentPartId].Nodes[_currentSlideId];
+            treeViewContents.SelectedNode = treeViewContents.Nodes[CurrentPartId].Nodes[CurrentSlideId];
         }
 
         [SuppressMessage("ReSharper", "UnusedParameter.Local")]
         private void buttonSlideSeparate_Click(object sender, EventArgs e)
         {
-            Song.Parts[_currentPartId].Slides.Split(_currentSlideId);
+            Song.Parts[CurrentPartId].Slides.Split(CurrentSlideId);
             PopulateTree();
-            treeViewContents.SelectedNode = treeViewContents.Nodes[_currentPartId].Nodes[_currentSlideId];
+            treeViewContents.SelectedNode = treeViewContents.Nodes[CurrentPartId].Nodes[CurrentSlideId];
         }
 
         private void comboBoxLanguage_Enter(object sender, EventArgs e)
@@ -480,9 +480,9 @@ namespace PraiseBase.Presenter.Editor
 
         private void buttonSlideBackground_Click(object sender, EventArgs e)
         {
-            ImageDialog imd = new ImageDialog(_imgManager)
+            ImageDialog imd = new ImageDialog(ImgManager)
             {
-                Background = Song.Parts[_currentPartId].Slides[_currentSlideId].Background
+                Background = Song.Parts[CurrentPartId].Slides[CurrentSlideId].Background
             };
 
             if (Song.GetNumberOfBackgroundImages() == 0)
@@ -506,7 +506,7 @@ namespace PraiseBase.Presenter.Editor
                     }
                     else
                     {
-                        Song.Parts[_currentPartId].Slides[_currentSlideId].Background = imd.Background;
+                        Song.Parts[CurrentPartId].Slides[CurrentSlideId].Background = imd.Background;
                     }
                 }
                 else
@@ -517,13 +517,13 @@ namespace PraiseBase.Presenter.Editor
                         {
                             foreach (SongSlide t1 in t.Slides)
                             {
-                                t1.Background = _templateMapper.GetDefaultBackground();
+                                t1.Background = TemplateMapper.GetDefaultBackground();
                             }
                         }
                     }
                     else
                     {
-                        Song.Parts[_currentPartId].Slides[_currentSlideId].Background = _templateMapper.GetDefaultBackground(); 
+                        Song.Parts[CurrentPartId].Slides[CurrentSlideId].Background = TemplateMapper.GetDefaultBackground(); 
                     }
                 }
                 PreviewSlide();
@@ -668,7 +668,7 @@ namespace PraiseBase.Presenter.Editor
 
         private void EditorChild_Shown(object sender, EventArgs e)
         {
-            if (textBoxSongTitle.Text == _settings.SongDefaultName)
+            if (textBoxSongTitle.Text == Settings.SongDefaultName)
             {
                 textBoxSongTitle.SelectAll();
                 textBoxSongTitle.Focus();
@@ -677,7 +677,7 @@ namespace PraiseBase.Presenter.Editor
 
         private void textBoxSongTitle_Enter(object sender, EventArgs e)
         {
-            if (textBoxSongTitle.Text == _settings.SongDefaultName)
+            if (textBoxSongTitle.Text == Settings.SongDefaultName)
             {
                 textBoxSongTitle.SelectAll();
             }

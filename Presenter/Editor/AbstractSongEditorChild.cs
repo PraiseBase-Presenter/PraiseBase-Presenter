@@ -1,5 +1,4 @@
-﻿using System;
-using System.Drawing;
+﻿using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Windows.Forms;
 using PraiseBase.Presenter.Manager;
@@ -17,32 +16,32 @@ namespace PraiseBase.Presenter.Editor
         /// <summary>
         /// Index of currently selected part
         /// </summary>
-        protected int _currentPartId;
+        protected int CurrentPartId;
 
         /// <summary>
         /// Index of currently selected slide
         /// </summary>
-        protected int _currentSlideId;
+        protected int CurrentSlideId;
 
         /// <summary>
         /// Settings instance holder
         /// </summary>
-        protected readonly Settings _settings;
+        protected readonly Settings Settings;
 
         /// <summary>
         /// Song template mapper instance
         /// </summary>
-        protected SongTemplateMapper _templateMapper;
+        protected SongTemplateMapper TemplateMapper;
 
         /// <summary>
         /// Image manager instance
         /// </summary>
-        protected readonly ImageManager _imgManager;
+        protected readonly ImageManager ImgManager;
 
         /// <summary>
         /// Slide text formatting mapper
         /// </summary>
-        protected readonly ISlideTextFormattingMapper<Song> _previewFormattingMapper = new SongSlideTextFormattingMapper();
+        protected readonly ISlideTextFormattingMapper<Song> PreviewFormattingMapper = new SongSlideTextFormattingMapper();
 
         #endregion
 
@@ -52,27 +51,27 @@ namespace PraiseBase.Presenter.Editor
 
         public AbstractSongEditorChild(Settings settings, ImageManager imgManager)
         {
-            _settings = settings;
-            _imgManager = imgManager;
-            _templateMapper = new SongTemplateMapper(_settings);
+            Settings = settings;
+            ImgManager = imgManager;
+            TemplateMapper = new SongTemplateMapper(Settings);
 
             InitializeComponent();
         }
 
         protected Image PreviewSlide(Song sng, string currentText, string currentTranslationText)
         {
-            SongSlide slide = (SongSlide)sng.Parts[_currentPartId].Slides[_currentSlideId].Clone();
+            SongSlide slide = (SongSlide)sng.Parts[CurrentPartId].Slides[CurrentSlideId].Clone();
             slide.Text = currentText;
             slide.TranslationText = currentTranslationText;
             SlideTextFormatting slideFormatting = new SlideTextFormatting();
 
-            _previewFormattingMapper.Map(sng, ref slideFormatting);
+            PreviewFormattingMapper.Map(sng, ref slideFormatting);
 
             // Disabled for performance
             slideFormatting.OutlineEnabled = false;
             slideFormatting.SmoothShadow = false;
 
-            slideFormatting.ScaleFontSize = _settings.ProjectionFontScaling;
+            slideFormatting.ScaleFontSize = Settings.ProjectionFontScaling;
             slideFormatting.SmoothShadow = false;
 
             TextLayer sl = new TextLayer(slideFormatting)
@@ -81,10 +80,10 @@ namespace PraiseBase.Presenter.Editor
                 SubText = slide.Translation.ToArray()
             };
 
-            ImageLayer il = new ImageLayer(_settings.ProjectionBackColor);
+            ImageLayer il = new ImageLayer(Settings.ProjectionBackColor);
 
-            IBackground bg = sng.Parts[_currentPartId].Slides[_currentSlideId].Background;
-            il.Image = _imgManager.GetImage(bg);
+            IBackground bg = sng.Parts[CurrentPartId].Slides[CurrentSlideId].Background;
+            il.Image = ImgManager.GetImage(bg);
 
             var bmp = new Bitmap(1024, 768);
             Graphics gr = Graphics.FromImage(bmp);
