@@ -88,11 +88,6 @@ namespace PraiseBase.Presenter.Editor
             PreviewSlide();
         }
 
-        public void SetWindowTitle(string title)
-        {
-            Text = title;
-        }
-
         private void PopulateQa()
         {
             textBoxComment.DataBindings.Add("Text", Song, "Comment");

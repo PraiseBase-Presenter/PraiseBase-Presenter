@@ -57,6 +57,11 @@ namespace PraiseBase.Presenter.Editor
 
             InitializeComponent();
         }
+        
+        public void SetWindowTitle(string title)
+        {
+            Text = title;
+        }
 
         protected Image PreviewSlide(Song sng, string currentText, string currentTranslationText)
         {
