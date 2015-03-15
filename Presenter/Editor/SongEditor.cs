@@ -39,7 +39,7 @@ namespace PraiseBase.Presenter.Editor
 {
     public partial class SongEditor : LocalizableForm
     {
-        #region internalVariables
+        #region Internal variables
 
         /// <summary>
         /// Initial directory of file open/save dialog

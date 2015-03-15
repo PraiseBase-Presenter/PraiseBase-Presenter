@@ -37,12 +37,16 @@ namespace PraiseBase.Presenter.Editor
 {
     public partial class SongEditorChild : Form
     {
+        #region Public fields
+
         /// <summary>
-        /// Instance of the song being edited
+        /// Gets the song being edited
         /// </summary>
         public Song Song { get; protected set; }
 
-        #region internalVariables
+        #endregion
+
+        #region Internal variables
 
         /// <summary>
         /// Index of currently selected part
