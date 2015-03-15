@@ -6,6 +6,8 @@ namespace PraiseBase.Presenter.Persistence.PowerPraise
 {
     public class PowerPraiseSong : ISongFile
     {
+        #region General
+
         /// <summary>
         ///     Title
         /// </summary>
@@ -21,6 +23,10 @@ namespace PraiseBase.Presenter.Persistence.PowerPraise
         /// </summary>
         public string Language { get; set; }
 
+        #endregion
+
+        #region Song text and order
+
         /// <summary>
         ///     Song text parts
         /// </summary>
@@ -30,6 +36,10 @@ namespace PraiseBase.Presenter.Persistence.PowerPraise
         ///     Song text order
         /// </summary>
         public ComparableList<Part> Order { get; private set; }
+
+        #endregion
+
+        #region Information
 
         /// <summary>
         ///     Copyright text
@@ -50,6 +60,8 @@ namespace PraiseBase.Presenter.Persistence.PowerPraise
         ///     Set to true if the source text should be displayed
         /// </summary>
         public bool SourceTextEnabled { get; set; }
+
+        #endregion
 
         /// <summary>
         ///     Font, color, outline and shadow of the main text
