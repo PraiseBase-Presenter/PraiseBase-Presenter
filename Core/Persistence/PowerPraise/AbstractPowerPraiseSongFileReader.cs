@@ -25,7 +25,6 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
 using System.Linq;
-using System.Text.RegularExpressions;
 using System.Xml;
 using PraiseBase.Presenter.Model;
 using PraiseBase.Presenter.Model.Song;
@@ -144,7 +143,7 @@ namespace PraiseBase.Presenter.Persistence.PowerPraise
                 xmlRoot.GetAttribute("version") != SupportedFileFormatVersion || xmlRoot["general"] == null ||
                 xmlRoot["general"]["title"] == null)
             {
-                throw new InvalidSongSourceFileException();
+                throw new InvalidSongSourceFileException("Song header missing");
             }
 
             // Title
@@ -169,27 +168,35 @@ namespace PraiseBase.Presenter.Persistence.PowerPraise
                 _backgrounds = new List<IBackground>();
             }
 
+            //
             // Song text and part order
-            if (xmlRoot["songtext"] != null)
-            {
-                // Song text
-                foreach (XmlElement elem in xmlRoot["songtext"])
-                {
-                    if (elem.Name == "part")
-                    {
-                        sng.Parts.Add(ParseSongPart(elem, PowerPraiseConstants.SlideMainTextSize));
-                    }
-                }
+            //
 
-                // Order
-                sng.Order.AddRange(ParseOrder(xmlRoot["order"], sng));
+            if (xmlRoot["songtext"] == null)
+            {
+                throw new InvalidSongSourceFileException("Song parts missing");
             }
 
-            // Copyright text
+            // Song text
+            foreach (XmlElement elem in xmlRoot["songtext"])
+            {
+                if (elem.Name == "part")
+                {
+                    sng.Parts.Add(ParseSongPart(elem, PowerPraiseConstants.SlideMainTextSize));
+                }
+            }
+
+            // Order
+            sng.Order.AddRange(ParseOrder(xmlRoot["order"], sng));
+
+            //
+            // Information
+            //
+
             if (xmlRoot["information"] != null)
             {
+                // Copyright text
                 var copyrightElem = xmlRoot["information"]["copyright"];
-
                 if (copyrightElem != null)
                 {
                     // Position
@@ -199,13 +206,9 @@ namespace PraiseBase.Presenter.Persistence.PowerPraise
                     // Text
                     sng.CopyrightText.AddRange(ParseCopyRightText(copyrightElem["text"]));
                 }
-            }
 
-            // Source text
-            if (xmlRoot["information"] != null)
-            {
+                // Source text
                 var sourceElem = xmlRoot["information"]["source"];
-
                 if (sourceElem != null)
                 {
                     // Enabled
@@ -217,9 +220,24 @@ namespace PraiseBase.Presenter.Persistence.PowerPraise
                 }
             }
 
-            var fontElem = xmlRoot["formatting"]["font"];
-            var lineSpacingElem = xmlRoot["formatting"]["linespacing"];
-            var textOrientationElem = xmlRoot["formatting"]["textorientation"];
+            //
+            // Formatting
+            //
+
+            var formatting = xmlRoot["formatting"];
+            if (formatting == null)
+            {
+                throw new InvalidSongSourceFileException("Formatting definition missing");
+            }
+            
+            var fontElem = formatting["font"];
+            var lineSpacingElem = formatting["linespacing"];
+            var textOrientationElem = formatting["textorientation"];
+            var borderElem = formatting["borders"];
+            if (fontElem == null || lineSpacingElem == null || textOrientationElem == null || borderElem == null)
+            {
+                throw new InvalidSongSourceFileException("Formatting definition incomplete");
+            }
 
             sng.Formatting = new PowerPraiseSongFormatting
             {
@@ -246,7 +264,7 @@ namespace PraiseBase.Presenter.Persistence.PowerPraise
                 TranslationPosition = ParseTranslationPosition(textOrientationElem, PowerPraiseConstants.Format.TranslationPosition),
 
                 // Borders
-                Borders = ParseBorders(xmlRoot["formatting"]["borders"], PowerPraiseConstants.Format.Borders)
+                Borders = ParseBorders(borderElem)
             };
         }
 
@@ -349,23 +367,30 @@ namespace PraiseBase.Presenter.Persistence.PowerPraise
         private List<PowerPraiseSong.Part> ParseOrder(XmlElement xelem, PowerPraiseSong sng)
         {
             var list = new List<PowerPraiseSong.Part>();
-            foreach (XmlElement elem in xelem)
+            if (xelem != null && xelem.ChildNodes.Count > 0)
             {
-                if (elem.Name == "item")
+                foreach (XmlElement elem in xelem)
                 {
-                    if (!String.IsNullOrEmpty(elem.InnerText))
+                    if (elem.Name == "item")
                     {
-                        var val = elem.InnerText.Trim();
-                        foreach (var part in sng.Parts)
+                        if (!String.IsNullOrEmpty(elem.InnerText))
                         {
-                            if (part.Caption == val)
+                            var val = elem.InnerText.Trim();
+                            foreach (var part in sng.Parts)
                             {
-                                list.Add(part);
-                                break;
+                                if (part.Caption == val)
+                                {
+                                    list.Add(part);
+                                    break;
+                                }
                             }
                         }
                     }
                 }
+            }
+            else
+            {
+                list.AddRange(sng.Parts);
             }
             return list;
         }
@@ -669,45 +694,29 @@ namespace PraiseBase.Presenter.Persistence.PowerPraise
         ///     Parses border sizes.
         /// </summary>
         /// <param name="elem"></param>
-        /// <param name="defaultValue"></param>
         /// <returns></returns>
-        private static PowerPraiseSongFormatting.TextBorders ParseBorders(XmlElement elem,
-            PowerPraiseSongFormatting.TextBorders defaultValue)
+        private static PowerPraiseSongFormatting.TextBorders ParseBorders(XmlElement elem)
         {
-            var borders = defaultValue;
-            if (elem != null)
+            return new PowerPraiseSongFormatting.TextBorders
             {
-                int trySize;
-                if (elem["mainleft"] != null && int.TryParse(elem["mainleft"].InnerText, out trySize))
-                {
-                    borders.TextLeft = trySize;
-                }
-                if (elem["maintop"] != null && int.TryParse(elem["maintop"].InnerText, out trySize))
-                {
-                    borders.TextTop = trySize;
-                }
-                if (elem["mainright"] != null && int.TryParse(elem["mainright"].InnerText, out trySize))
-                {
-                    borders.TextRight = trySize;
-                }
-                if (elem["mainbottom"] != null && int.TryParse(elem["mainbottom"].InnerText, out trySize))
-                {
-                    borders.TextBottom = trySize;
-                }
-                if (elem["copyrightbottom"] != null && int.TryParse(elem["copyrightbottom"].InnerText, out trySize))
-                {
-                    borders.CopyrightBottom = trySize;
-                }
-                if (elem["sourcetop"] != null && int.TryParse(elem["sourcetop"].InnerText, out trySize))
-                {
-                    borders.SourceTop = trySize;
-                }
-                if (elem["sourceright"] != null && int.TryParse(elem["sourceright"].InnerText, out trySize))
-                {
-                    borders.SourceRight = trySize;
-                }
+                TextLeft = elem["mainleft"] != null ? ParseIntValue(elem["mainleft"]) : 0,
+                TextTop = elem["maintop"] != null ? ParseIntValue(elem["maintop"]) : 0,
+                TextRight = elem["mainright"] != null ? ParseIntValue(elem["mainright"]) : 0,
+                TextBottom = elem["mainbottom"] != null ? ParseIntValue(elem["mainbottom"]) : 0,
+                CopyrightBottom = elem["copyrightbottom"] != null ? ParseIntValue(elem["copyrightbottom"]) : 0,
+                SourceTop = elem["sourcetop"] != null ? ParseIntValue(elem["sourcetop"]) : 0,
+                SourceRight = elem["sourceright"] != null ? ParseIntValue(elem["sourceright"]) : 0
+            };
+        }
+
+        private static int ParseIntValue(XmlElement elem, int defaultValue = 0)
+        {
+            int trySize;
+            if (int.TryParse(elem.InnerText, out trySize))
+            {
+                return trySize;
             }
-            return borders;
+            return defaultValue;
         }
     }
 }
