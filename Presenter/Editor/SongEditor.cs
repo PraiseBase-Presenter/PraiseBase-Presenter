@@ -21,6 +21,7 @@
  */
 
 using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.Globalization;
 using System.IO;
@@ -165,7 +166,15 @@ namespace PraiseBase.Presenter.Editor
                 string fileName = openFileDialog.FileName;
                 _fileBoxInitialDir = Path.GetDirectoryName(fileName);
                 _fileOpenBoxFilterIndex = openFileDialog.FilterIndex;
-                OpenSong(fileName);
+
+                ISongFilePlugin plugin = null;
+                var  plugins = GetOpenFilePlugins();
+                if (_fileOpenBoxFilterIndex > 1 && _fileOpenBoxFilterIndex  <= plugins.Count + 1)
+                {
+                    plugin = plugins[_fileOpenBoxFilterIndex - 2];
+                }
+
+                OpenSong(fileName, plugin);
             }
         }
 
@@ -173,7 +182,8 @@ namespace PraiseBase.Presenter.Editor
         /// Opens a new song in a song editor child window
         /// </summary>
         /// <param name="fileName"></param>
-        public void OpenSong(string fileName)
+        /// <param name="plugin"></param>
+        public void OpenSong(string fileName, ISongFilePlugin plugin = null)
         {
             for (int i = 0; i < MdiChildren.Count(); i++)
             {
@@ -192,7 +202,10 @@ namespace PraiseBase.Presenter.Editor
 
             try
             {
-                var plugin = SongFilePluginFactory.Create(fileName);
+                if (plugin == null)
+                {
+                    plugin = SongFilePluginFactory.Create(fileName);
+                }
                 var sng = plugin.Load(fileName);
 
                 CreateSongEditorChildForm(sng, fileName);
@@ -387,23 +400,29 @@ namespace PraiseBase.Presenter.Editor
         {
             String exts = String.Empty;
             String fltr = String.Empty;
-            foreach (var t in SongFilePluginFactory.GetPlugins())
+            foreach (var t in GetOpenFilePlugins())
             {
-                if (t.IsWritingSupported())
+                if (exts != String.Empty)
                 {
-                    if (exts != String.Empty)
-                    {
-                        exts += ";";
-                    }
-                    exts += "*" + t.GetFileExtension();
-                    if (fltr != string.Empty)
-                    {
-                        fltr += "|";
-                    }
-                    fltr += t.GetFileTypeDescription() + " (*" + t.GetFileExtension() + ")|*" + t.GetFileExtension();
+                    exts += ";";
                 }
+                exts += "*" + t.GetFileExtension();
+                if (fltr != string.Empty)
+                {
+                    fltr += "|";
+                }
+                fltr += t.GetFileTypeDescription() + " (*" + t.GetFileExtension() + ")|*" + t.GetFileExtension();
             }
             return "Alle Lieddateien (" + exts + ")|" + exts + "|" + fltr + "|Alle Dateien (*.*)|*.*";
+        }
+
+        /// <summary>
+        /// Get song file plugins which can open files
+        /// </summary>
+        /// <returns></returns>
+        private static List<ISongFilePlugin> GetOpenFilePlugins()
+        {
+            return SongFilePluginFactory.GetPlugins().Where(t => t.IsWritingSupported()).ToList();
         }
 
         /// <summary>
