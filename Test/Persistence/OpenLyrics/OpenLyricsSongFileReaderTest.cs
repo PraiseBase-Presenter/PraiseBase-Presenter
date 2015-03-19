@@ -2,8 +2,6 @@
 
 namespace PraiseBase.Presenter.Persistence.OpenLyrics
 {
-    
-    
     /// <summary>
     ///This is a test class for OpenLyricsSongFileReaderTest and is intended
     ///to contain all OpenLyricsSongFileReaderTest Unit Tests
@@ -11,25 +9,11 @@ namespace PraiseBase.Presenter.Persistence.OpenLyrics
     [TestClass]
     public class OpenLyricsSongFileReaderTest
     {
-
-
-        private TestContext testContextInstance;
-
         /// <summary>
         ///Gets or sets the test context which provides
         ///information about and functionality for the current test run.
         ///</summary>
-        public TestContext TestContext
-        {
-            get
-            {
-                return testContextInstance;
-            }
-            set
-            {
-                testContextInstance = value;
-            }
-        }
+        public TestContext TestContext { get; set; }
 
         #region Additional test attributes
         // 
@@ -68,25 +52,28 @@ namespace PraiseBase.Presenter.Persistence.OpenLyrics
         public void LoadSimpleTest()
         {
             ISongFileReader<OpenLyricsSong> target = new OpenLyricsSongFileReader();
-            string filename = "Resources/openlyrics/simple.xml";
+            const string filename = "Resources/openlyrics/simple.xml";
 
-            OpenLyricsSong expected = new OpenLyricsSong();
-            expected.Title = "Amazing Grace";
-            expected.ModifiedTimestamp = "2012-04-10T22:00:00+10:00";
-            expected.CreatedIn = "OpenLP 1.9.0";
-            expected.ModifiedIn = "MyApp 0.0.1";
+            OpenLyricsSong expected = new OpenLyricsSong
+            {
+                Title = "Amazing Grace",
+                ModifiedTimestamp = "2012-04-10T22:00:00+10:00",
+                CreatedIn = "OpenLP 1.9.0",
+                ModifiedIn = "MyApp 0.0.1"
+            };
 
-            OpenLyricsSongVerse verse = new OpenLyricsSongVerse();
-            verse.Name = "v1";
+            OpenLyricsSong.Verse verse = new OpenLyricsSong.Verse
+            {
+                Name = "v1"
+            };
 
-            OpenLyricsSongLines lines = new OpenLyricsSongLines();
+            OpenLyricsSong.TextLines lines = new OpenLyricsSong.TextLines();
             lines.Text.Add("Amazing grace how sweet the sound");
             lines.Text.Add("that saved a wretch like me;");
             verse.Lines.Add(lines);
             expected.Verses.Add(verse);
 
-            OpenLyricsSong actual;
-            actual = target.Load(filename);
+            var actual = target.Load(filename);
             Assert.AreEqual(expected.Title, actual.Title, "Wrong song title");
             Assert.AreEqual(expected.ModifiedTimestamp, actual.ModifiedTimestamp, "Wrong song modified date");
             Assert.AreEqual(expected.CreatedIn, actual.CreatedIn, "Wrong creator app");
@@ -116,75 +103,93 @@ namespace PraiseBase.Presenter.Persistence.OpenLyrics
         public void LoadComplexTest()
         {
             ISongFileReader<OpenLyricsSong> target = new OpenLyricsSongFileReader();
-            string filename = "Resources/openlyrics/complex.xml";
+            const string filename = "Resources/openlyrics/complex.xml";
 
-            OpenLyricsSong expected = new OpenLyricsSong();
-            expected.Title = "Amazing Grace";
-            expected.ModifiedTimestamp = "2012-04-10T22:00:00+10:00";
-            expected.CreatedIn = "OpenLP 1.9.0";
-            expected.ModifiedIn = "ChangingSong 0.0.1";
+            OpenLyricsSong expected = new OpenLyricsSong
+            {
+                Title = "Amazing Grace",
+                ModifiedTimestamp = "2012-04-10T22:00:00+10:00",
+                CreatedIn = "OpenLP 1.9.0",
+                ModifiedIn = "ChangingSong 0.0.1",
+                CcliIdentifier = "4639462",
+                Copyright = "public domain",
+                ReleaseYear = "1779"
+            };
 
-            expected.CcliID = "4639462";
-            expected.Copyright = "public domain";
-            expected.ReleaseYear = "1779";
             expected.Comments.Add("This is one of the most popular songs in our congregation.");
 
-            OpenLyricsSongVerse verse = new OpenLyricsSongVerse();
-            verse.Name = "v1";
-            verse.Language = "en";
-            var lines = new OpenLyricsSongLines();
+            OpenLyricsSong.Verse verse = new OpenLyricsSong.Verse
+            {
+                Name = "v1",
+                Language = "en"
+            };
+            var lines = new OpenLyricsSong.TextLines();
             lines.Text.Add("Amazing grace how sweet the sound that saved a wretch like me;");
             verse.Lines.Add(lines);
-            lines = new OpenLyricsSongLines();
-            lines.Part = "women";
+            lines = new OpenLyricsSong.TextLines
+            {
+                Part = "women"
+            };
             lines.Text.Add("A b c");
             lines.Text.Add("D e f");
             verse.Lines.Add(lines);
             expected.Verses.Add(verse);
 
-            verse = new OpenLyricsSongVerse();
-            verse.Name = "v1";
-            verse.Language = "de";
-            lines = new OpenLyricsSongLines();
+            verse = new OpenLyricsSong.Verse
+            {
+                Name = "v1",
+                Language = "de"
+            };
+            lines = new OpenLyricsSong.TextLines();
             lines.Text.Add("Erstaunliche Ahmut, wie");
             verse.Lines.Add(lines);
             expected.Verses.Add(verse);
 
-            verse = new OpenLyricsSongVerse();
-            verse.Name = "c";
-            lines = new OpenLyricsSongLines();
+            verse = new OpenLyricsSong.Verse
+            {
+                Name = "c"
+            };
+            lines = new OpenLyricsSong.TextLines();
             lines.Text.Add("");
             lines.Text.Add("Line content.");
             verse.Lines.Add(lines);
             expected.Verses.Add(verse);
 
-            verse = new OpenLyricsSongVerse();
-            verse.Name = "v2";
-            verse.Language = "en-US";
-            lines = new OpenLyricsSongLines();
-            lines.Part = "men";
+            verse = new OpenLyricsSong.Verse
+            {
+                Name = "v2",
+                Language = "en-US"
+            };
+            lines = new OpenLyricsSong.TextLines
+            {
+                Part = "men"
+            };
             lines.Text.Add("");
             lines.Text.Add("Amazing grace how sweet the sound that saved a wretch like me;");
             lines.Text.Add("");
             lines.Text.Add("Amazing grace how sweet the sound that saved a wretch like me;");
             lines.Text.Add("Amazing grace how sweet the sound that saved a wretch like me;");
             verse.Lines.Add(lines);
-            lines = new OpenLyricsSongLines();
-            lines.Part = "women";
+            lines = new OpenLyricsSong.TextLines
+            {
+                Part = "women"
+            };
             lines.Text.Add("A b c");
             lines.Text.Add("");
             lines.Text.Add("D e f");
             verse.Lines.Add(lines);
             expected.Verses.Add(verse);
 
-            verse = new OpenLyricsSongVerse();
-            verse.Name = "emptyline";
-            verse.Language = "de";
-            lines = new OpenLyricsSongLines();
+            verse = new OpenLyricsSong.Verse
+            {
+                Name = "emptyline",
+                Language = "de"
+            };
+            lines = new OpenLyricsSong.TextLines();
             lines.Text.Add("");
             lines.Text.Add("");
             verse.Lines.Add(lines);
-            lines = new OpenLyricsSongLines();
+            lines = new OpenLyricsSong.TextLines();
             lines.Text.Add("");
             lines.Text.Add("");
             lines.Text.Add("");
@@ -193,10 +198,12 @@ namespace PraiseBase.Presenter.Persistence.OpenLyrics
             verse.Lines.Add(lines);
             expected.Verses.Add(verse);
 
-            verse = new OpenLyricsSongVerse();
-            verse.Name = "e";
-            verse.Language = "de";
-            lines = new OpenLyricsSongLines();
+            verse = new OpenLyricsSong.Verse
+            {
+                Name = "e",
+                Language = "de"
+            };
+            lines = new OpenLyricsSong.TextLines();
             lines.Text.Add("This is text of ending.");
             verse.Lines.Add(lines);
             expected.Verses.Add(verse);
@@ -207,7 +214,7 @@ namespace PraiseBase.Presenter.Persistence.OpenLyrics
             Assert.AreEqual(expected.CreatedIn, actual.CreatedIn, "Wrong creator app");
             Assert.AreEqual(expected.ModifiedIn, actual.ModifiedIn, "Wrong modifier app");
             Assert.AreEqual(expected.Copyright, actual.Copyright, "Wrong copyright info");
-            Assert.AreEqual(expected.CcliID, actual.CcliID, "Wrong CCLI number");
+            Assert.AreEqual(expected.CcliIdentifier, actual.CcliIdentifier, "Wrong CCLI number");
             Assert.AreEqual(expected.ReleaseYear, actual.ReleaseYear, "Wrong release date");
             CollectionAssert.AreEqual(expected.Comments, actual.Comments, "Wrong comments");
 

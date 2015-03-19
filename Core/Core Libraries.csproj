@@ -74,10 +74,8 @@
     <Compile Include="Persistence\ISongFileReader.cs" />
     <Compile Include="Persistence\ISongImporter.cs" />
     <Compile Include="Persistence\OpenLyrics\OpenLyricsSongFilePlugin.cs" />
-    <Compile Include="Persistence\OpenLyrics\OpenLyricsSongLines.cs" />
     <Compile Include="Persistence\OpenLyrics\OpenLyricsSongFileMapper.cs" />
     <Compile Include="Persistence\OpenLyrics\OpenLyricsSong.cs" />
-    <Compile Include="Persistence\OpenLyrics\OpenLyricsSongVerse.cs" />
     <Compile Include="Persistence\ISongFile.cs" />
     <Compile Include="Persistence\PowerPraise\AbstractPowerPraiseSongFileReader.cs" />
     <Compile Include="Persistence\PowerPraise\AbstractPowerPraiseSongFileWriter.cs" />
