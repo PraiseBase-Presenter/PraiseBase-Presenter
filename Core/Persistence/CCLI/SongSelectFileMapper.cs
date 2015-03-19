@@ -10,7 +10,7 @@ namespace PraiseBase.Presenter.Persistence.CCLI
             var sng = new Song
             {
                 // CCLI ID
-                CcliIdentifier = source.ID,
+                CcliIdentifier = source.CcliIdentifier,
                 IsCCliIdentifierReadonly = true,
 
                 // Title

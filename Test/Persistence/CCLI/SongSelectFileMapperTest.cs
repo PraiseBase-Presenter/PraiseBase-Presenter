@@ -12,25 +12,11 @@ namespace PraiseBase.Presenter.Persistence.CCLI
     [TestClass]
     public class SongSelectFileMapperTest
     {
-
-
-        private TestContext testContextInstance;
-
         /// <summary>
         ///Gets or sets the test context which provides
         ///information about and functionality for the current test run.
         ///</summary>
-        public TestContext TestContext
-        {
-            get
-            {
-                return testContextInstance;
-            }
-            set
-            {
-                testContextInstance = value;
-            }
-        }
+        public TestContext TestContext { get; set; }
 
         #region Additional test attributes
         // 
@@ -68,9 +54,9 @@ namespace PraiseBase.Presenter.Persistence.CCLI
         [TestMethod]
         public void IsFileSupportedTest()
         {
-            SongSelectFileReader target = new SongSelectFileReader(); // TODO: Initialize to an appropriate value
-            string filename = "Resources/ccli/Ein Lied für Gott.usr";
-            bool expected = true;
+            SongSelectFileReader target = new SongSelectFileReader();
+            const string filename = "Resources/ccli/Ein Lied für Gott.usr";
+            const bool expected = true;
             bool actual = target.IsFileSupported(filename);
             Assert.AreEqual(expected, actual);
         }
@@ -83,20 +69,24 @@ namespace PraiseBase.Presenter.Persistence.CCLI
         {
             SongSelectFileMapper mapper = new SongSelectFileMapper();
 
-            SongSelectFile source = new SongSelectFile();
+            SongSelectFile source = new SongSelectFile
+            {
+                Title = "Ein Lied für Gott",
+                Author = "Muster, Hans",
+                Copyright = "Gemeinfrei (Public Domain)",
+                Admin = "Verlag ABC",
+                Key = "E"
+            };
 
-            source.Title = "Ein Lied für Gott";
             source.Themes.Add("Celebration");
             source.Themes.Add("God's Attributes");
             source.Themes.Add("Love");
             source.Themes.Add("Joy");
-            source.Author = "Muster, Hans";
-            source.Copyright = "Gemeinfrei (Public Domain)";
-            source.Admin = "Verlag ABC";
-            source.Key = "E";
 
-            var verse = new SongSelectVerse();
-            verse.Caption = "Vers 1";
+            var verse = new SongSelectFile.Verse
+            {
+                Caption = "Vers 1"
+            };
             verse.Lines.Add("Lorem ipsum dolor sit amet,");
             verse.Lines.Add("consectetur adipiscing elit.");
             verse.Lines.Add("Vivamus odio massa,");
@@ -104,8 +94,10 @@ namespace PraiseBase.Presenter.Persistence.CCLI
             verse.Lines.Add("vehicula sed justo");
             source.Verses.Add(verse);
 
-            verse = new SongSelectVerse();
-            verse.Caption = "Vers 2";
+            verse = new SongSelectFile.Verse
+            {
+                Caption = "Vers 2"
+            };
             verse.Lines.Add("Nunc cursus libero non quam lobortis");
             verse.Lines.Add("ac pharetra leo facilisis.");
             verse.Lines.Add("Proin tortor tellus,");
@@ -113,8 +105,10 @@ namespace PraiseBase.Presenter.Persistence.CCLI
             verse.Lines.Add("faucibus vel justo.");
             source.Verses.Add(verse);
 
-            verse = new SongSelectVerse();
-            verse.Caption = "Vers 3";
+            verse = new SongSelectFile.Verse
+            {
+                Caption = "Vers 3"
+            };
             verse.Lines.Add("Fusce pellentesque rhoncus felis,");
             verse.Lines.Add("eu convallis ante tempus a.");
             verse.Lines.Add("Cum sociis natoque penatibus");
@@ -122,22 +116,28 @@ namespace PraiseBase.Presenter.Persistence.CCLI
             verse.Lines.Add("nascetur ridiculus mus.");
             source.Verses.Add(verse);
 
-            Song expected = new Song();
+            Song expected = new Song
+            {
+                Title = "Ein Lied für Gott"
+            };
 
-            expected.Title = "Ein Lied für Gott";
             expected.Themes.Add("Celebration");
             expected.Themes.Add("God's Attributes");
             expected.Themes.Add("Love");
             expected.Themes.Add("Joy");
-            var aut = new SongAuthor();
-            aut.Name = "Muster, Hans";
+            var aut = new SongAuthor
+            {
+                Name = "Muster, Hans"
+            };
             expected.Author.Add(aut);
             expected.Copyright = "Gemeinfrei (Public Domain)";
             expected.RightsManagement = "Verlag ABC";
             expected.Key = "E";
 
-            var part = new SongPart();
-            part.Caption = "Vers 1";
+            var part = new SongPart
+            {
+                Caption = "Vers 1"
+            };
             var slide = new SongSlide();
             slide.Lines.Add("Lorem ipsum dolor sit amet,");
             slide.Lines.Add("consectetur adipiscing elit.");
@@ -147,8 +147,10 @@ namespace PraiseBase.Presenter.Persistence.CCLI
             part.Slides.Add(slide);
             expected.Parts.Add(part);
 
-            part = new SongPart();
-            part.Caption = "Vers 2";
+            part = new SongPart
+            {
+                Caption = "Vers 2"
+            };
             slide = new SongSlide();
             slide.Lines.Add("Nunc cursus libero non quam lobortis");
             slide.Lines.Add("ac pharetra leo facilisis.");
@@ -158,9 +160,10 @@ namespace PraiseBase.Presenter.Persistence.CCLI
             part.Slides.Add(slide);
             expected.Parts.Add(part);
 
-            part = new SongPart();
-            part.Caption = "Vers 3";
-            slide = new SongSlide();
+            part = new SongPart
+            {
+                Caption = "Vers 3"
+            };
             slide = new SongSlide();
             slide.Lines.Add("Fusce pellentesque rhoncus felis,");
             slide.Lines.Add("eu convallis ante tempus a.");

@@ -64,7 +64,6 @@
     <Compile Include="Model\TranslationPosition.cs" />
     <Compile Include="Persistence\AbstractSongFilePlugin.cs" />
     <Compile Include="Persistence\CCLI\SongSelectFilePlugin.cs" />
-    <Compile Include="Persistence\CCLI\SongSelectVerse.cs" />
     <Compile Include="Persistence\CCLI\SongSelectFile.cs" />
     <Compile Include="Persistence\CCLI\SongSelectFileMapper.cs" />
     <Compile Include="Persistence\ImportFormat.cs" />

@@ -11,25 +11,11 @@ namespace PraiseBase.Presenter.Persistence.CCLI
     [TestClass]
     public class SongSelectFileReaderTest
     {
-
-
-        private TestContext testContextInstance;
-
         /// <summary>
         ///Gets or sets the test context which provides
         ///information about and functionality for the current test run.
         ///</summary>
-        public TestContext TestContext
-        {
-            get
-            {
-                return testContextInstance;
-            }
-            set
-            {
-                testContextInstance = value;
-            }
-        }
+        public TestContext TestContext { get; set; }
 
         #region Additional test attributes
         // 
@@ -67,9 +53,9 @@ namespace PraiseBase.Presenter.Persistence.CCLI
         [TestMethod]
         public void IsFileSupportedTest()
         {
-            ISongFileReader<SongSelectFile> reader = new SongSelectFileReader(); // TODO: Initialize to an appropriate value
-            string filename = "Resources/ccli/Ein Lied für Gott.usr";
-            bool expected = true;
+            ISongFileReader<SongSelectFile> reader = new SongSelectFileReader();
+            const string filename = "Resources/ccli/Ein Lied für Gott.usr";
+            const bool expected = true;
             bool actual = reader.IsFileSupported(filename);
             Assert.AreEqual(expected, actual);
         }
@@ -81,11 +67,13 @@ namespace PraiseBase.Presenter.Persistence.CCLI
         public void LoadTest()
         {
             ISongFileReader<SongSelectFile> reader = new SongSelectFileReader();
-            string filename = "Resources/ccli/Ein Lied für Gott.usr";
+            const string filename = "Resources/ccli/Ein Lied für Gott.usr";
 
-            SongSelectFile expected = new SongSelectFile();
+            SongSelectFile expected = new SongSelectFile
+            {
+                Title = "Ein Lied für Gott"
+            };
 
-            expected.Title = "Ein Lied für Gott";
             expected.Themes.Add("Celebration");
             expected.Themes.Add("God's Attributes");
             expected.Themes.Add("Love");
@@ -95,8 +83,10 @@ namespace PraiseBase.Presenter.Persistence.CCLI
             expected.Admin = "Verlag ABC";
             expected.Key = "E";
 
-            var part = new SongSelectVerse();
-            part.Caption = "Vers 1";
+            var part = new SongSelectFile.Verse
+            {
+                Caption = "Vers 1"
+            };
             part.Lines.Add("Lorem ipsum dolor sit amet,");
             part.Lines.Add("consectetur adipiscing elit.");
             part.Lines.Add("Vivamus odio massa,");
@@ -104,8 +94,10 @@ namespace PraiseBase.Presenter.Persistence.CCLI
             part.Lines.Add("vehicula sed justo");
             expected.Verses.Add(part);
 
-            part = new SongSelectVerse();
-            part.Caption = "Vers 2";
+            part = new SongSelectFile.Verse
+            {
+                Caption = "Vers 2"
+            };
             part.Lines.Add("Nunc cursus libero non quam lobortis");
             part.Lines.Add("ac pharetra leo facilisis.");
             part.Lines.Add("Proin tortor tellus,");
@@ -113,8 +105,10 @@ namespace PraiseBase.Presenter.Persistence.CCLI
             part.Lines.Add("faucibus vel justo.");
             expected.Verses.Add(part);
 
-            part = new SongSelectVerse();
-            part.Caption = "Vers 3";
+            part = new SongSelectFile.Verse
+            {
+                Caption = "Vers 3"
+            };
             part.Lines.Add("Fusce pellentesque rhoncus felis,");
             part.Lines.Add("eu convallis ante tempus a.");
             part.Lines.Add("Cum sociis natoque penatibus");
