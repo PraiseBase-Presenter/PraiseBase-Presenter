@@ -174,12 +174,12 @@ namespace PraiseBase.Presenter.Persistence.PowerPraise.Extended
 
             // Additional fields
             Assert.AreEqual(expected.Comment, actual.Comment, "Wrong comment");
-            CollectionAssert.AreEqual(expected.QualityIssues, actual.QualityIssues, "Wrong Quality Issues");
-            Assert.AreEqual(expected.CcliID, actual.CcliID, "Wrong CCLI id");
+            Assert.AreEqual(expected.QualityIssues, actual.QualityIssues, "Wrong Quality Issues");
+            Assert.AreEqual(expected.CcliIdentifier, actual.CcliIdentifier, "Wrong CCLI id");
             CollectionAssert.AreEqual(expected.Author, actual.Author, "Wrong author");
             Assert.AreEqual(expected.RightsManagement, actual.RightsManagement, "Wrong Rights Management");
             Assert.AreEqual(expected.Publisher, actual.Publisher, "Wrong Publisher");
-            Assert.AreEqual(expected.GUID, actual.GUID, "Wrong GUID");
+            Assert.AreEqual(expected.Guid, actual.Guid, "Wrong GUID");
 
             // Parts
             Assert.AreEqual(expected.Parts.Count, actual.Parts.Count, "Parts incomplete");

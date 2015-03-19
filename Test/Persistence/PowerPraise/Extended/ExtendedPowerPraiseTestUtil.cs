@@ -15,14 +15,14 @@ namespace PraiseBase.Presenter.Persistence.PowerPraise.Extended
                 Language = "Deutsch",
                 Category = "Anbetung",
                 Comment = "Test",
-                GUID = new Guid("78dd30b2-078b-4eef-9767-dc41a6e6ab27")
+                Guid = new Guid("78dd30b2-078b-4eef-9767-dc41a6e6ab27")
             };
 
             // General
 
             ppl.QualityIssues.Add(SongQualityAssuranceIndicator.Translation);
             ppl.QualityIssues.Add(SongQualityAssuranceIndicator.Segmentation);
-            ppl.CcliID = "12123";
+            ppl.CcliIdentifier = "12123";
             SongAuthor a = new SongAuthor
             {
                 Name = "asd as d"

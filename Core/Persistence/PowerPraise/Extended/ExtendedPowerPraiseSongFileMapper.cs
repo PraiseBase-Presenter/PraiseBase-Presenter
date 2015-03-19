@@ -40,11 +40,11 @@ namespace PraiseBase.Presenter.Persistence.PowerPraise.Extended
             {
                 song.QualityIssues.Add(e);
             }
-            song.CcliIdentifier = ppl.CcliID;
+            song.CcliIdentifier = ppl.CcliIdentifier;
             song.Author.AddRange(ppl.Author);
             song.RightsManagement = ppl.RightsManagement;
             song.Publisher = ppl.Publisher;
-            song.Guid = ppl.GUID;
+            song.Guid = ppl.Guid;
 
             return song;
         }
@@ -63,11 +63,11 @@ namespace PraiseBase.Presenter.Persistence.PowerPraise.Extended
             {
                 ppl.QualityIssues.Add(e);
             }
-            ppl.CcliID = song.CcliIdentifier;
+            ppl.CcliIdentifier = song.CcliIdentifier;
             ppl.Author.AddRange(song.Author);
             ppl.RightsManagement = song.RightsManagement;
             ppl.Publisher = song.Publisher;
-            ppl.GUID = song.Guid;
+            ppl.Guid = song.Guid;
         }
     }
 }

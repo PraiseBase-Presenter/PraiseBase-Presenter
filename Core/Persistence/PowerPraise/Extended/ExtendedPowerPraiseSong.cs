@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using PraiseBase.Presenter.Model.Song;
 
 namespace PraiseBase.Presenter.Persistence.PowerPraise.Extended
@@ -8,8 +7,8 @@ namespace PraiseBase.Presenter.Persistence.PowerPraise.Extended
     {
         public ExtendedPowerPraiseSong()
         {
-            QualityIssues = new List<SongQualityAssuranceIndicator>();
-            Author = new List<SongAuthor>();
+            QualityIssues = new QualityIssues();
+            Author = new SongAuthors();
         }
 
         /// <summary>
@@ -20,17 +19,17 @@ namespace PraiseBase.Presenter.Persistence.PowerPraise.Extended
         /// <summary>
         ///     Quality assurance indicators
         /// </summary>
-        public List<SongQualityAssuranceIndicator> QualityIssues { get; set; }
+        public QualityIssues QualityIssues { get; set; }
 
         /// <summary>
         ///     CCLI Song ID
         /// </summary>
-        public string CcliID { get; set; }
+        public string CcliIdentifier { get; set; }
 
         /// <summary>
         ///     Authors of the song
         /// </summary>
-        public List<SongAuthor> Author { get; set; }
+        public SongAuthors Author { get; set; }
 
         /// <summary>
         ///     Admin
@@ -45,6 +44,6 @@ namespace PraiseBase.Presenter.Persistence.PowerPraise.Extended
         /// <summary>
         ///     Unique identifier of this song
         /// </summary>
-        public Guid GUID { get; set; }
+        public Guid Guid { get; set; }
     }
 }
