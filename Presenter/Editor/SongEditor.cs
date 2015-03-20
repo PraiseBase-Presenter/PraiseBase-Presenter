@@ -574,7 +574,7 @@ namespace PraiseBase.Presenter.Editor
         {
             if (ActiveMdiChild != null)
             {
-                DoCut(((SongEditorChild)ActiveMdiChild).ActiveControl);
+                DoCut(ActiveMdiChild.ActiveControl);
             }
         }
 
@@ -582,7 +582,7 @@ namespace PraiseBase.Presenter.Editor
         {
             if (ActiveMdiChild != null)
             {
-                DoCopy(((SongEditorChild)ActiveMdiChild).ActiveControl);
+                DoCopy(ActiveMdiChild.ActiveControl);
             }
         }
 
@@ -590,7 +590,7 @@ namespace PraiseBase.Presenter.Editor
         {
             if (ActiveMdiChild != null)
             {
-                DoPaste(((SongEditorChild)ActiveMdiChild).ActiveControl);
+                DoPaste(ActiveMdiChild.ActiveControl);
             }
         }
 
@@ -684,9 +684,9 @@ namespace PraiseBase.Presenter.Editor
         {
             if (ActiveMdiChild != null)
             {
-                if (((SongEditorChild)ActiveMdiChild).ActiveControl.GetType() == typeof(TextBox))
+                if (ActiveMdiChild.ActiveControl.GetType() == typeof(TextBox))
                 {
-                    ((TextBox)((SongEditorChild)ActiveMdiChild).ActiveControl).SelectAll();
+                    ((TextBox)ActiveMdiChild.ActiveControl).SelectAll();
                 }
             }
         }
@@ -695,9 +695,9 @@ namespace PraiseBase.Presenter.Editor
         {
             if (ActiveMdiChild != null)
             {
-                if (((SongEditorChild)ActiveMdiChild).ActiveControl.GetType() == typeof(TextBox))
+                if (ActiveMdiChild.ActiveControl.GetType() == typeof(TextBox))
                 {
-                    ((TextBox)((SongEditorChild)ActiveMdiChild).ActiveControl).Undo();
+                    ((TextBox)ActiveMdiChild.ActiveControl).Undo();
                 }
             }
         }
@@ -706,9 +706,9 @@ namespace PraiseBase.Presenter.Editor
         {
             if (ActiveMdiChild != null)
             {
-                if (((SongEditorChild)ActiveMdiChild).ActiveControl.GetType() == typeof(TextBox))
+                if (ActiveMdiChild.ActiveControl.GetType() == typeof(TextBox))
                 {
-                    ((TextBox)((SongEditorChild)ActiveMdiChild).ActiveControl).ClearUndo();
+                    ((TextBox)ActiveMdiChild.ActiveControl).ClearUndo();
                 }
             }
         }
@@ -717,7 +717,7 @@ namespace PraiseBase.Presenter.Editor
         {
             if (ActiveMdiChild != null)
             {
-                ((SongEditorChild)ActiveMdiChild).Close();
+                ActiveMdiChild.Close();
             }
         }
 
