@@ -542,8 +542,6 @@ namespace PraiseBase.Presenter.Editor
                 ((TextBox)control).Copy();
             else if (control is RichTextBox)
                 ((RichTextBox)control).Copy();
-            else
-                throw new NotSupportedException("The selected control can't copy!");
         }
 
         private void DoCut(Control control)
@@ -554,8 +552,6 @@ namespace PraiseBase.Presenter.Editor
                 ((TextBox)control).Cut();
             else if (control is RichTextBox)
                 ((RichTextBox)control).Cut();
-            else
-                throw new NotSupportedException("The selected control can't cut!");
         }
 
         private void DoPaste(Control control)
@@ -566,8 +562,6 @@ namespace PraiseBase.Presenter.Editor
                 ((TextBox)control).Paste();
             else if (control is RichTextBox)
                 ((RichTextBox)control).Paste();
-            else
-                throw new NotSupportedException("The selected control can't paste!");
         }
 
         private void CutToolStripMenuItem_Click(object sender, EventArgs e)
@@ -682,34 +676,73 @@ namespace PraiseBase.Presenter.Editor
 
         private void selectAllToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (ActiveMdiChild != null)
+            if (ActiveMdiChild != null && ActiveMdiChild.ActiveControl != null)
             {
-                if (ActiveMdiChild.ActiveControl.GetType() == typeof(TextBox))
-                {
-                    ((TextBox)ActiveMdiChild.ActiveControl).SelectAll();
-                }
+                DoSelectAll(ActiveMdiChild.ActiveControl);
+            }
+        }
+
+        private void DoSelectAll(Control control)
+        {
+            if (control is ContainerControl)
+            {
+                DoSelectAll(((ContainerControl)control).ActiveControl);
+            }
+            else if (control.GetType() == typeof(TextBox))
+            {
+                ((TextBox)control).SelectAll();
+            }
+            else if (control.GetType() == typeof(RichTextBox))
+            {
+                ((RichTextBox)control).SelectAll();
             }
         }
 
         private void undoToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (ActiveMdiChild != null)
+            if (ActiveMdiChild != null && ActiveMdiChild.ActiveControl != null)
             {
-                if (ActiveMdiChild.ActiveControl.GetType() == typeof(TextBox))
-                {
-                    ((TextBox)ActiveMdiChild.ActiveControl).Undo();
-                }
+                DoUndo(ActiveMdiChild.ActiveControl);
+            }
+        }
+
+        private void DoUndo(Control control)
+        {
+            if (control is ContainerControl)
+            {
+                DoUndo(((ContainerControl)control).ActiveControl);
+            }
+            else if (control.GetType() == typeof(TextBox))
+            {
+                ((TextBox)control).Undo();
+            }
+            else if (control.GetType() == typeof(RichTextBox))
+            {
+                ((RichTextBox)control).Undo();
             }
         }
 
         private void redoToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (ActiveMdiChild != null)
+            if (ActiveMdiChild != null && ActiveMdiChild.ActiveControl != null)
             {
-                if (ActiveMdiChild.ActiveControl.GetType() == typeof(TextBox))
-                {
-                    ((TextBox)ActiveMdiChild.ActiveControl).ClearUndo();
-                }
+                DoRedo(ActiveMdiChild.ActiveControl);
+            }
+        }
+
+        private void DoRedo(Control control)
+        {
+            if (control is ContainerControl)
+            {
+                DoRedo(((ContainerControl)control).ActiveControl);
+            }
+            else if (control.GetType() == typeof(TextBox))
+            {
+                ((TextBox)control).ClearUndo();
+            }
+            else if (control.GetType() == typeof(RichTextBox))
+            {
+                ((RichTextBox)control).ClearUndo();
             }
         }
 
