@@ -66,7 +66,6 @@ namespace PraiseBase.Presenter.Editor
             this.tabPageContent = new System.Windows.Forms.TabPage();
             this.panelPreview = new System.Windows.Forms.Panel();
             this.pictureBoxPreview = new System.Windows.Forms.PictureBox();
-            this.labelGUID = new System.Windows.Forms.Label();
             this.textBoxRightsManagement = new System.Windows.Forms.TextBox();
             this.label18 = new System.Windows.Forms.Label();
             this.textBoxSongbooks = new System.Windows.Forms.TextBox();
@@ -354,12 +353,6 @@ namespace PraiseBase.Presenter.Editor
             this.pictureBoxPreview.TabStop = false;
             this.pictureBoxPreview.Click += new System.EventHandler(this.buttonSlideBackground_Click);
             // 
-            // labelGUID
-            // 
-            resources.ApplyResources(this.labelGUID, "labelGUID");
-            this.labelGUID.ForeColor = System.Drawing.Color.DarkGray;
-            this.labelGUID.Name = "labelGUID";
-            // 
             // textBoxRightsManagement
             // 
             resources.ApplyResources(this.textBoxRightsManagement, "textBoxRightsManagement");
@@ -520,7 +513,6 @@ namespace PraiseBase.Presenter.Editor
             this.Controls.Add(this.tabControlTextLayer);
             this.Controls.Add(this.splitContainer1);
             this.Controls.Add(this.panelPreview);
-            this.Controls.Add(this.labelGUID);
             this.Controls.Add(this.textBoxSongbooks);
             this.Controls.Add(this.label18);
             this.Controls.Add(this.textBoxRightsManagement);
@@ -624,7 +616,6 @@ namespace PraiseBase.Presenter.Editor
         private System.Windows.Forms.Label label17;
         private System.Windows.Forms.TextBox textBoxRightsManagement;
         private System.Windows.Forms.Label label18;
-        private System.Windows.Forms.Label labelGUID;
         private System.Windows.Forms.Panel panelPreview;
         private System.Windows.Forms.Label label19;
         private System.Windows.Forms.ToolTip toolTip1;
