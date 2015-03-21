@@ -3,6 +3,7 @@ using System.Drawing.Drawing2D;
 using System.Windows.Forms;
 using PraiseBase.Presenter.Manager;
 using PraiseBase.Presenter.Model.Song;
+using PraiseBase.Presenter.Persistence;
 using PraiseBase.Presenter.Projection;
 using PraiseBase.Presenter.Properties;
 using PraiseBase.Presenter.Template;
@@ -47,6 +48,11 @@ namespace PraiseBase.Presenter.Editor
 
         public AbstractSongEditorChild() : this(null, null)
         {
+        }
+
+        public virtual ISongFile GetSong()
+        {
+            throw new System.NotImplementedException();
         }
 
         public AbstractSongEditorChild(Settings settings, ImageManager imgManager)
