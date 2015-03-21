@@ -193,8 +193,8 @@ namespace PraiseBase.Presenter.Persistence.PowerPraise
             // Information
             //
 
-            PowerPraiseSongFormatting.CopyrightPosition copyrightTextPosition = PowerPraiseConstants.Format.CopyrightTextPosition;
-            bool sourceTextEnabled = PowerPraiseConstants.Format.SourceTextEnabled;
+            AdditionalInformationPosition copyrightTextPosition = PowerPraiseConstants.Format.CopyrightTextPosition;
+            AdditionalInformationPosition sourceTextEnabled = PowerPraiseConstants.Format.SourceTextPosition;
 
             if (xmlRoot["information"] != null)
             {
@@ -203,7 +203,7 @@ namespace PraiseBase.Presenter.Persistence.PowerPraise
                 if (copyrightElem != null)
                 {
                     // Position
-                    copyrightTextPosition = ParseCopyRightPosition(copyrightElem["position"], PowerPraiseConstants.Format.CopyrightTextPosition);
+                    copyrightTextPosition = ParseAdditionalInformationPosition(copyrightElem["position"], PowerPraiseConstants.Format.CopyrightTextPosition);
 
                     // Text
                     sng.CopyrightText.AddRange(ParseCopyRightText(copyrightElem["text"]));
@@ -214,7 +214,7 @@ namespace PraiseBase.Presenter.Persistence.PowerPraise
                 if (sourceElem != null)
                 {
                     // Enabled
-                    sourceTextEnabled = ParseSourceEnabled(sourceElem["position"], PowerPraiseConstants.Format.SourceTextEnabled);
+                    sourceTextEnabled = ParseAdditionalInformationPosition(sourceElem["position"], PowerPraiseConstants.Format.SourceTextPosition);
 
                     // Text
                     sng.SourceText = ParseSourceText(sourceElem["text"]);
@@ -266,7 +266,7 @@ namespace PraiseBase.Presenter.Persistence.PowerPraise
 
                 // Copyright and source
                 CopyrightTextPosition = copyrightTextPosition,
-                SourceTextEnabled = sourceTextEnabled,
+                SourceTextPosition = sourceTextEnabled,
 
                 // Borders
                 Borders = ParseBorders(borderElem)
@@ -406,23 +406,23 @@ namespace PraiseBase.Presenter.Persistence.PowerPraise
         /// <param name="elem"></param>
         /// <param name="defaultValue"></param>
         /// <returns></returns>
-        private PowerPraiseSongFormatting.CopyrightPosition ParseCopyRightPosition(XmlElement elem,
-            PowerPraiseSongFormatting.CopyrightPosition defaultValue)
+        private AdditionalInformationPosition ParseAdditionalInformationPosition(XmlElement elem,
+            AdditionalInformationPosition defaultValue)
         {
             var position = defaultValue;
             if (elem != null)
             {
                 if (elem.InnerText == "firstslide")
                 {
-                    position = PowerPraiseSongFormatting.CopyrightPosition.FirstSlide;
+                    position = AdditionalInformationPosition.FirstSlide;
                 }
                 else if (elem.InnerText == "lastslide")
                 {
-                    position = PowerPraiseSongFormatting.CopyrightPosition.LastSlide;
+                    position = AdditionalInformationPosition.LastSlide;
                 }
                 else if (elem.InnerText == "none")
                 {
-                    position = PowerPraiseSongFormatting.CopyrightPosition.None;
+                    position = AdditionalInformationPosition.None;
                 }
             }
             return position;
@@ -441,29 +441,6 @@ namespace PraiseBase.Presenter.Persistence.PowerPraise
                 list.AddRange(from XmlNode xn in elem select xn.InnerText);
             }
             return list;
-        }
-
-        /// <summary>
-        ///     Parses if source text is enabled
-        /// </summary>
-        /// <param name="elem"></param>
-        /// <param name="defaultValue"></param>
-        /// <returns></returns>
-        private bool ParseSourceEnabled(XmlElement elem, bool defaultValue)
-        {
-            var enabled = defaultValue;
-            if (elem != null)
-            {
-                if (elem.InnerText == "firstslide")
-                {
-                    enabled = true;
-                }
-                else if (elem.InnerText == "none")
-                {
-                    enabled = false;
-                }
-            }
-            return enabled;
         }
 
         /// <summary>

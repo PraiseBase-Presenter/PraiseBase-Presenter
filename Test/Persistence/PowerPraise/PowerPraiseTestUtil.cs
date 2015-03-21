@@ -257,11 +257,11 @@ namespace PraiseBase.Presenter.Persistence.PowerPraise
 
             // Copyright
             ppl.CopyrightText.Add("Text und Musik: Lowell Mason, 1792-1872");
-            ppl.Formatting.CopyrightTextPosition = PowerPraiseSongFormatting.CopyrightPosition.LastSlide;
+            ppl.Formatting.CopyrightTextPosition = AdditionalInformationPosition.LastSlide;
 
             // Source
             ppl.SourceText = "grünes Buch 339";
-            ppl.Formatting.SourceTextEnabled = true;
+            ppl.Formatting.SourceTextPosition = AdditionalInformationPosition.FirstSlide;
 
             // Formatting
             ppl.Formatting.MainText = new PowerPraiseSongFormatting.FontFormatting

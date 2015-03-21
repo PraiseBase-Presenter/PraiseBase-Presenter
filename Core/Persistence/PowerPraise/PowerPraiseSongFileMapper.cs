@@ -49,24 +49,11 @@ namespace PraiseBase.Presenter.Persistence.PowerPraise
 
             // Copyright text
             song.Copyright = String.Join(Environment.NewLine, ppl.CopyrightText.ToArray());
-            switch (ppl.Formatting.CopyrightTextPosition)
-            {
-                case PowerPraiseSongFormatting.CopyrightPosition.FirstSlide:
-                    song.CopyrightPosition = AdditionalInformationPosition.FirstSlide;
-                    break;
-                case PowerPraiseSongFormatting.CopyrightPosition.LastSlide:
-                    song.CopyrightPosition = AdditionalInformationPosition.LastSlide;
-                    break;
-                case PowerPraiseSongFormatting.CopyrightPosition.None:
-                    song.CopyrightPosition = AdditionalInformationPosition.None;
-                    break;
-            }
+            song.CopyrightPosition = ppl.Formatting.CopyrightTextPosition;
 
             // Source / songbook
             song.SongBooks.FromString(ppl.SourceText);
-            song.SourcePosition = ppl.Formatting.SourceTextEnabled
-                ? AdditionalInformationPosition.FirstSlide
-                : AdditionalInformationPosition.None;
+            song.SourcePosition = ppl.Formatting.SourceTextPosition;
 
             // Song parts
             foreach (var prt in ppl.Parts)
@@ -179,22 +166,11 @@ namespace PraiseBase.Presenter.Persistence.PowerPraise
 
             // Copyright text
             ppl.CopyrightText.Add(song.Copyright);
-            if (song.CopyrightPosition == AdditionalInformationPosition.FirstSlide)
-            {
-                ppl.Formatting.CopyrightTextPosition = PowerPraiseSongFormatting.CopyrightPosition.FirstSlide;
-            }
-            else if (song.CopyrightPosition == AdditionalInformationPosition.LastSlide)
-            {
-                ppl.Formatting.CopyrightTextPosition = PowerPraiseSongFormatting.CopyrightPosition.LastSlide;
-            }
-            else if (song.CopyrightPosition == AdditionalInformationPosition.None)
-            {
-                ppl.Formatting.CopyrightTextPosition = PowerPraiseSongFormatting.CopyrightPosition.None;
-            }
+            ppl.Formatting.CopyrightTextPosition = song.CopyrightPosition;
 
             // Source / songbook
             ppl.SourceText = song.SongBooks.ToString();
-            ppl.Formatting.SourceTextEnabled = (song.SourcePosition == AdditionalInformationPosition.FirstSlide);
+            ppl.Formatting.SourceTextPosition = song.SourcePosition;
 
             // Linespacing
             if (song.MainText != null)

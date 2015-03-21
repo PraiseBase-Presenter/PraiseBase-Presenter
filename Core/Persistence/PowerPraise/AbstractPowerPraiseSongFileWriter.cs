@@ -149,20 +149,7 @@ namespace PraiseBase.Presenter.Persistence.PowerPraise
 
             // Copyright position
             xmlRoot["information"]["copyright"].AppendChild(xmlDoc.CreateElement("position"));
-            var pos = "firstslide";
-            switch (sng.Formatting.CopyrightTextPosition)
-            {
-                case PowerPraiseSongFormatting.CopyrightPosition.FirstSlide:
-                    pos = "firstslide";
-                    break;
-                case PowerPraiseSongFormatting.CopyrightPosition.LastSlide:
-                    pos = "lastslide";
-                    break;
-                case PowerPraiseSongFormatting.CopyrightPosition.None:
-                    pos = "none";
-                    break;
-            }
-            xmlRoot["information"]["copyright"]["position"].InnerText = pos;
+            xmlRoot["information"]["copyright"]["position"].InnerText = MapAdditionalInformationPosition(sng.Formatting.CopyrightTextPosition);
 
             // Copyright text
             xmlRoot["information"]["copyright"].AppendChild(xmlDoc.CreateElement("text"));
@@ -180,7 +167,7 @@ namespace PraiseBase.Presenter.Persistence.PowerPraise
 
             // Source enabled
             xmlRoot["information"]["source"].AppendChild(xmlDoc.CreateElement("position"));
-            xmlRoot["information"]["source"]["position"].InnerText = (sng.Formatting.SourceTextEnabled ? "firstslide" : "none");
+            xmlRoot["information"]["source"]["position"].InnerText = MapAdditionalInformationPosition(sng.Formatting.SourceTextPosition);
 
             // Source text
             xmlRoot["information"]["source"].AppendChild(xmlDoc.CreateElement("text"));
@@ -299,6 +286,24 @@ namespace PraiseBase.Presenter.Persistence.PowerPraise
             xmlRoot["formatting"]["borders"]["sourceright"].InnerText = sng.Formatting.Borders.SourceRight.ToString();
 
             xml.Write(filename);
+        }
+
+        private string MapAdditionalInformationPosition(AdditionalInformationPosition value)
+        {
+            var pos = "firstslide";
+            switch (value)
+            {
+                case AdditionalInformationPosition.FirstSlide:
+                    pos = "firstslide";
+                    break;
+                case AdditionalInformationPosition.LastSlide:
+                    pos = "lastslide";
+                    break;
+                case AdditionalInformationPosition.None:
+                    pos = "none";
+                    break;
+            }
+            return pos;
         }
 
         private void applyFormatting(XmlDocument xmlDoc, XmlElement elem, String key, PowerPraiseSongFormatting.FontFormatting f)

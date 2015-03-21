@@ -57,8 +57,8 @@ namespace PraiseBase.Presenter.Persistence.PowerPraise
             TranslationLineSpacing = 20,
             TextOrientation = new TextOrientation(VerticalOrientation.Middle, HorizontalOrientation.Center),
             TranslationPosition = TranslationPosition.Inline,
-            CopyrightTextPosition = PowerPraiseSongFormatting.CopyrightPosition.LastSlide,
-            SourceTextEnabled = true,
+            CopyrightTextPosition = AdditionalInformationPosition.LastSlide,
+            SourceTextPosition = AdditionalInformationPosition.FirstSlide,
             Borders = new PowerPraiseSongFormatting.TextBorders
             {
                 TextLeft = 40,

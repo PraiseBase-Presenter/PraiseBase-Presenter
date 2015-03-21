@@ -209,7 +209,7 @@ namespace PraiseBase.Presenter.Persistence.PowerPraise.Extended
 
             // Source
             Assert.AreEqual(expected.SourceText, actual.SourceText, "Wrong source text");
-            Assert.AreEqual(expected.Formatting.SourceTextEnabled, actual.Formatting.SourceTextEnabled, "Wrong source text position");
+            Assert.AreEqual(expected.Formatting.SourceTextPosition, actual.Formatting.SourceTextPosition, "Wrong source text position");
 
             // Formatting
             Assert.AreEqual(expected.Formatting.MainText.Font, actual.Formatting.MainText.Font);
