@@ -165,7 +165,13 @@ namespace PraiseBase.Presenter.Persistence.PowerPraise
             }
 
             // Copyright text
-            ppl.CopyrightText.Add(song.Copyright);
+            if (song.Copyright != null)
+            {
+                foreach (var s in song.Copyright.Split(new[] { Environment.NewLine }, StringSplitOptions.None))
+                {
+                    ppl.CopyrightText.Add(s);
+                }
+            }
             ppl.Formatting.CopyrightTextPosition = song.CopyrightPosition;
 
             // Source / songbook
