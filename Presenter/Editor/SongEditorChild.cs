@@ -61,10 +61,6 @@ namespace PraiseBase.Presenter.Editor
             textBoxSongTitle.DataBindings.Add("Text", Song, "Title");
 
             textBoxCCLISongID.DataBindings.Add("Text", Song, "CcliIdentifier");
-            if (Song.IsCCliIdentifierReadonly)
-            {
-                textBoxCCLISongID.ReadOnly = true;
-            }
             textBoxCopyright.DataBindings.Add("Text", Song, "Copyright");
             textBoxRightsManagement.DataBindings.Add("Text", Song, "RightsManagement");
             textBoxPublisher.DataBindings.Add("Text", Song, "Publisher");

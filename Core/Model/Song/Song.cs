@@ -63,8 +63,8 @@ namespace PraiseBase.Presenter.Model.Song
             info.AddValue("SourceText", SourceText.ToString());
             info.AddValue("Language", Language);
             info.AddValue("Comment", Comment);
-            info.AddValue("Tags", Themes);
-            info.AddValue("CcliID", CcliIdentifier);
+            info.AddValue("Themes", Themes);
+            info.AddValue("CcliIdentifier", CcliIdentifier);
             info.AddValue("Copyright", Copyright);
         }
 
@@ -103,7 +103,6 @@ namespace PraiseBase.Presenter.Model.Song
                 hashCode = (hashCode*397) ^ (Title != null ? Title.GetHashCode() : 0);
                 hashCode = (hashCode*397) ^ (Language != null ? Language.GetHashCode() : 0);
                 hashCode = (hashCode*397) ^ (CcliIdentifier != null ? CcliIdentifier.GetHashCode() : 0);
-                hashCode = (hashCode*397) ^ IsCCliIdentifierReadonly.GetHashCode();
                 hashCode = (hashCode*397) ^ (Copyright != null ? Copyright.GetHashCode() : 0);
                 hashCode = (hashCode*397) ^ (int) CopyrightPosition;
                 hashCode = (hashCode*397) ^ (int) SourcePosition;
@@ -141,7 +140,6 @@ namespace PraiseBase.Presenter.Model.Song
                    string.Equals(CreatedIn, other.CreatedIn) && string.Equals(ModifiedIn, other.ModifiedIn) &&
                    string.Equals(Title, other.Title) && string.Equals(Language, other.Language) &&
                    string.Equals(CcliIdentifier, other.CcliIdentifier) &&
-                   IsCCliIdentifierReadonly.Equals(other.IsCCliIdentifierReadonly) &&
                    string.Equals(Copyright, other.Copyright) && CopyrightPosition == other.CopyrightPosition &&
                    SourcePosition == other.SourcePosition && string.Equals(ReleaseYear, other.ReleaseYear) &&
                    Equals(Author, other.Author) && string.Equals(RightsManagement, other.RightsManagement) &&
@@ -202,11 +200,6 @@ namespace PraiseBase.Presenter.Model.Song
         ///     CCLI Song ID
         /// </summary>
         public string CcliIdentifier { get; set; }
-
-        /// <summary>
-        ///     Should the CCLI ID be readonly?
-        /// </summary>
-        public bool IsCCliIdentifierReadonly { get; set; }
 
         /// <summary>
         ///     Copyright information

@@ -11,7 +11,6 @@ namespace PraiseBase.Presenter.Persistence.CCLI
             {
                 // CCLI ID
                 CcliIdentifier = source.CcliIdentifier,
-                IsCCliIdentifierReadonly = true,
 
                 // Title
                 Title = source.Title,
