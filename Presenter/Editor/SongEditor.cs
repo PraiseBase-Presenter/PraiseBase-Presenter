@@ -538,9 +538,9 @@ namespace PraiseBase.Presenter.Editor
         {
             if (control is ContainerControl)
                 DoCopy(((ContainerControl)control).ActiveControl);
-            else if (control is TextBox)
+            else if (control.GetType() == typeof(TextBox))
                 ((TextBox)control).Copy();
-            else if (control is RichTextBox)
+            else if (control.GetType() == typeof(RichTextBox))
                 ((RichTextBox)control).Copy();
         }
 
@@ -548,9 +548,9 @@ namespace PraiseBase.Presenter.Editor
         {
             if (control is ContainerControl)
                 DoCut(((ContainerControl)control).ActiveControl);
-            else if (control is TextBox)
+            else if (control.GetType() == typeof(TextBox))
                 ((TextBox)control).Cut();
-            else if (control is RichTextBox)
+            else if (control.GetType() == typeof(RichTextBox))
                 ((RichTextBox)control).Cut();
         }
 
@@ -558,9 +558,9 @@ namespace PraiseBase.Presenter.Editor
         {
             if (control is ContainerControl)
                 DoPaste(((ContainerControl)control).ActiveControl);
-            else if (control is TextBox)
+            else if (control.GetType() == typeof(TextBox))
                 ((TextBox)control).Paste();
-            else if (control is RichTextBox)
+            else if (control.GetType() == typeof(RichTextBox))
                 ((RichTextBox)control).Paste();
         }
 
