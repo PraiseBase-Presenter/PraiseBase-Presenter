@@ -403,7 +403,7 @@
     <value>Microsoft Sans Serif, 9.75pt</value>
   </data>
   <data name="comboBoxLanguage.Location" type="System.Drawing.Point, System.Drawing">
-    <value>77, 349</value>
+    <value>75, 320</value>
   </data>
   <data name="comboBoxLanguage.Size" type="System.Drawing.Size, System.Drawing">
     <value>120, 24</value>
@@ -844,7 +844,7 @@
     <value>NoControl</value>
   </data>
   <data name="pictureBoxPreview.Location" type="System.Drawing.Point, System.Drawing">
-    <value>51, 14</value>
+    <value>63, 13</value>
   </data>
   <data name="pictureBoxPreview.Size" type="System.Drawing.Size, System.Drawing">
     <value>377, 267</value>
@@ -895,13 +895,13 @@
     <value>Microsoft Sans Serif, 9.75pt</value>
   </data>
   <data name="textBoxRightsManagement.Location" type="System.Drawing.Point, System.Drawing">
-    <value>77, 510</value>
+    <value>75, 535</value>
   </data>
   <data name="textBoxRightsManagement.Size" type="System.Drawing.Size, System.Drawing">
     <value>176, 22</value>
   </data>
   <data name="textBoxRightsManagement.TabIndex" type="System.Int32, mscorlib">
-    <value>16</value>
+    <value>17</value>
   </data>
   <data name="&gt;&gt;textBoxRightsManagement.Name" xml:space="preserve">
     <value>textBoxRightsManagement</value>
@@ -928,7 +928,7 @@
     <value>NoControl</value>
   </data>
   <data name="label18.Location" type="System.Drawing.Point, System.Drawing">
-    <value>7, 515</value>
+    <value>5, 540</value>
   </data>
   <data name="label18.Size" type="System.Drawing.Size, System.Drawing">
     <value>54, 13</value>
@@ -958,13 +958,13 @@
     <value>Microsoft Sans Serif, 9.75pt</value>
   </data>
   <data name="textBoxSongbooks.Location" type="System.Drawing.Point, System.Drawing">
-    <value>77, 538</value>
+    <value>74, 450</value>
   </data>
   <data name="textBoxSongbooks.Size" type="System.Drawing.Size, System.Drawing">
     <value>176, 22</value>
   </data>
   <data name="textBoxSongbooks.TabIndex" type="System.Int32, mscorlib">
-    <value>17</value>
+    <value>14</value>
   </data>
   <data name="&gt;&gt;textBoxSongbooks.Name" xml:space="preserve">
     <value>textBoxSongbooks</value>
@@ -991,7 +991,7 @@
     <value>NoControl</value>
   </data>
   <data name="label17.Location" type="System.Drawing.Point, System.Drawing">
-    <value>7, 543</value>
+    <value>5, 455</value>
   </data>
   <data name="label17.Size" type="System.Drawing.Size, System.Drawing">
     <value>63, 13</value>
@@ -1021,13 +1021,13 @@
     <value>Microsoft Sans Serif, 9.75pt</value>
   </data>
   <data name="textBoxPublisher.Location" type="System.Drawing.Point, System.Drawing">
-    <value>77, 482</value>
+    <value>75, 507</value>
   </data>
   <data name="textBoxPublisher.Size" type="System.Drawing.Size, System.Drawing">
     <value>176, 22</value>
   </data>
   <data name="textBoxPublisher.TabIndex" type="System.Int32, mscorlib">
-    <value>15</value>
+    <value>16</value>
   </data>
   <data name="&gt;&gt;textBoxPublisher.Name" xml:space="preserve">
     <value>textBoxPublisher</value>
@@ -1054,7 +1054,7 @@
     <value>NoControl</value>
   </data>
   <data name="label16.Location" type="System.Drawing.Point, System.Drawing">
-    <value>7, 487</value>
+    <value>5, 512</value>
   </data>
   <data name="label16.Size" type="System.Drawing.Size, System.Drawing">
     <value>53, 13</value>
@@ -1084,13 +1084,13 @@
     <value>Microsoft Sans Serif, 9.75pt</value>
   </data>
   <data name="textBoxAuthors.Location" type="System.Drawing.Point, System.Drawing">
-    <value>77, 454</value>
+    <value>75, 479</value>
   </data>
   <data name="textBoxAuthors.Size" type="System.Drawing.Size, System.Drawing">
     <value>176, 22</value>
   </data>
   <data name="textBoxAuthors.TabIndex" type="System.Int32, mscorlib">
-    <value>14</value>
+    <value>15</value>
   </data>
   <data name="&gt;&gt;textBoxAuthors.Name" xml:space="preserve">
     <value>textBoxAuthors</value>
@@ -1117,7 +1117,7 @@
     <value>NoControl</value>
   </data>
   <data name="label15.Location" type="System.Drawing.Point, System.Drawing">
-    <value>7, 459</value>
+    <value>5, 484</value>
   </data>
   <data name="label15.Size" type="System.Drawing.Size, System.Drawing">
     <value>35, 13</value>
@@ -1212,7 +1212,7 @@
     <value>NoControl</value>
   </data>
   <data name="buttonDuplicateSlide.Location" type="System.Drawing.Point, System.Drawing">
-    <value>196, 294</value>
+    <value>196, 286</value>
   </data>
   <data name="buttonDuplicateSlide.Size" type="System.Drawing.Size, System.Drawing">
     <value>26, 23</value>
@@ -1245,7 +1245,7 @@
     <value>Microsoft Sans Serif, 9.75pt</value>
   </data>
   <data name="textBoxCCLISongID.Location" type="System.Drawing.Point, System.Drawing">
-    <value>77, 379</value>
+    <value>75, 350</value>
   </data>
   <data name="textBoxCCLISongID.Size" type="System.Drawing.Size, System.Drawing">
     <value>110, 22</value>
@@ -1272,13 +1272,13 @@
     <value>Microsoft Sans Serif, 9.75pt</value>
   </data>
   <data name="textBoxCopyright.Location" type="System.Drawing.Point, System.Drawing">
-    <value>77, 407</value>
+    <value>75, 378</value>
   </data>
   <data name="textBoxCopyright.Multiline" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
   <data name="textBoxCopyright.Size" type="System.Drawing.Size, System.Drawing">
-    <value>176, 41</value>
+    <value>176, 66</value>
   </data>
   <data name="textBoxCopyright.TabIndex" type="System.Int32, mscorlib">
     <value>13</value>
@@ -1332,7 +1332,7 @@
     <value>NoControl</value>
   </data>
   <data name="label4.Location" type="System.Drawing.Point, System.Drawing">
-    <value>7, 412</value>
+    <value>5, 383</value>
   </data>
   <data name="label4.Size" type="System.Drawing.Size, System.Drawing">
     <value>54, 13</value>
@@ -1353,42 +1353,6 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;label4.ZOrder" xml:space="preserve">
-    <value>30</value>
-  </data>
-  <data name="label7.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Bottom, Left</value>
-  </data>
-  <data name="label7.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="label7.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Microsoft Sans Serif, 8.25pt, style=Bold</value>
-  </data>
-  <data name="label7.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="label7.Location" type="System.Drawing.Point, System.Drawing">
-    <value>7, 325</value>
-  </data>
-  <data name="label7.Size" type="System.Drawing.Size, System.Drawing">
-    <value>88, 13</value>
-  </data>
-  <data name="label7.TabIndex" type="System.Int32, mscorlib">
-    <value>103</value>
-  </data>
-  <data name="label7.Text" xml:space="preserve">
-    <value>Informationen:</value>
-  </data>
-  <data name="&gt;&gt;label7.Name" xml:space="preserve">
-    <value>label7</value>
-  </data>
-  <data name="&gt;&gt;label7.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;label7.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;label7.ZOrder" xml:space="preserve">
     <value>29</value>
   </data>
   <data name="label12.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
@@ -1404,7 +1368,7 @@
     <value>NoControl</value>
   </data>
   <data name="label12.Location" type="System.Drawing.Point, System.Drawing">
-    <value>7, 384</value>
+    <value>5, 355</value>
   </data>
   <data name="label12.Size" type="System.Drawing.Size, System.Drawing">
     <value>47, 13</value>
@@ -1498,7 +1462,7 @@
     <value>NoControl</value>
   </data>
   <data name="buttonAddSlide.Location" type="System.Drawing.Point, System.Drawing">
-    <value>79, 294</value>
+    <value>79, 286</value>
   </data>
   <data name="buttonAddSlide.Size" type="System.Drawing.Size, System.Drawing">
     <value>54, 23</value>
@@ -1631,7 +1595,7 @@
     <value>NoControl</value>
   </data>
   <data name="buttonAddItem.Location" type="System.Drawing.Point, System.Drawing">
-    <value>8, 294</value>
+    <value>8, 286</value>
   </data>
   <data name="buttonAddItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>65, 23</value>
@@ -1685,7 +1649,7 @@
     <value>NoControl</value>
   </data>
   <data name="buttonMoveUp.Location" type="System.Drawing.Point, System.Drawing">
-    <value>137, 294</value>
+    <value>137, 286</value>
   </data>
   <data name="buttonMoveUp.Size" type="System.Drawing.Size, System.Drawing">
     <value>26, 23</value>
@@ -1776,7 +1740,7 @@
     <value>NoControl</value>
   </data>
   <data name="buttonDelItem.Location" type="System.Drawing.Point, System.Drawing">
-    <value>225, 294</value>
+    <value>225, 286</value>
   </data>
   <data name="buttonDelItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>26, 23</value>
@@ -1824,7 +1788,7 @@
     <value>NoControl</value>
   </data>
   <data name="buttonMoveDown.Location" type="System.Drawing.Point, System.Drawing">
-    <value>167, 294</value>
+    <value>167, 286</value>
   </data>
   <data name="buttonMoveDown.Size" type="System.Drawing.Size, System.Drawing">
     <value>26, 23</value>
@@ -1887,7 +1851,7 @@
     <value>NoControl</value>
   </data>
   <data name="label19.Location" type="System.Drawing.Point, System.Drawing">
-    <value>7, 354</value>
+    <value>5, 325</value>
   </data>
   <data name="label19.Size" type="System.Drawing.Size, System.Drawing">
     <value>50, 13</value>
@@ -1920,7 +1884,7 @@
     <value>8, 37</value>
   </data>
   <data name="treeViewContents.Size" type="System.Drawing.Size, System.Drawing">
-    <value>247, 248</value>
+    <value>247, 241</value>
   </data>
   <data name="treeViewContents.TabIndex" type="System.Int32, mscorlib">
     <value>4</value>

@@ -723,5 +723,15 @@ namespace PraiseBase.Presenter.Editor
             Song.SongBooks.FromString(((TextBox)sender).Text);
         }
 
+        private void textBoxPublisher_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void textBoxRightsManagement_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
     }
 }

@@ -79,7 +79,6 @@ namespace PraiseBase.Presenter.Editor
             this.textBoxCopyright = new System.Windows.Forms.TextBox();
             this.textBoxSongTitle = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
-            this.label7 = new System.Windows.Forms.Label();
             this.label12 = new System.Windows.Forms.Label();
             this.buttonAddSlide = new System.Windows.Forms.Button();
             this.label11 = new System.Windows.Forms.Label();
@@ -357,6 +356,7 @@ namespace PraiseBase.Presenter.Editor
             // 
             resources.ApplyResources(this.textBoxRightsManagement, "textBoxRightsManagement");
             this.textBoxRightsManagement.Name = "textBoxRightsManagement";
+            this.textBoxRightsManagement.TextChanged += new System.EventHandler(this.textBoxRightsManagement_TextChanged);
             // 
             // label18
             // 
@@ -378,6 +378,7 @@ namespace PraiseBase.Presenter.Editor
             // 
             resources.ApplyResources(this.textBoxPublisher, "textBoxPublisher");
             this.textBoxPublisher.Name = "textBoxPublisher";
+            this.textBoxPublisher.TextChanged += new System.EventHandler(this.textBoxPublisher_TextChanged);
             // 
             // label16
             // 
@@ -424,11 +425,6 @@ namespace PraiseBase.Presenter.Editor
             // 
             resources.ApplyResources(this.label4, "label4");
             this.label4.Name = "label4";
-            // 
-            // label7
-            // 
-            resources.ApplyResources(this.label7, "label7");
-            this.label7.Name = "label7";
             // 
             // label12
             // 
@@ -533,7 +529,6 @@ namespace PraiseBase.Presenter.Editor
             this.Controls.Add(this.textBoxCopyright);
             this.Controls.Add(this.label12);
             this.Controls.Add(this.textBoxSongTitle);
-            this.Controls.Add(this.label7);
             this.Controls.Add(this.label4);
             this.Name = "SongEditorChild";
             this.ShowInTaskbar = false;
@@ -580,7 +575,6 @@ namespace PraiseBase.Presenter.Editor
         private System.Windows.Forms.TextBox textBoxCopyright;
         private System.Windows.Forms.TextBox textBoxSongTitle;
         private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Label label12;
         private System.Windows.Forms.Button buttonAddSlide;
         private System.Windows.Forms.SplitContainer splitContainer1;
