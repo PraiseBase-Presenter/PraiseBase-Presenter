@@ -5,6 +5,8 @@ namespace PraiseBase.Presenter.Persistence.OpenLyrics
 {
     public class OpenLyricsSong : ISongFile
     {
+        #region Fields
+
         /// <summary>
         ///     Timestamp when the song has been last modified
         /// </summary>
@@ -50,6 +52,8 @@ namespace PraiseBase.Presenter.Persistence.OpenLyrics
         /// </summary>
         public ComparableOrderedList<Verse> Verses { get; private set; }
 
+        #endregion
+
         /// <summary>
         ///     Constructor
         /// </summary>
@@ -57,6 +61,11 @@ namespace PraiseBase.Presenter.Persistence.OpenLyrics
         {
             Comments = new ComparableList<string>();
             Verses = new ComparableOrderedList<Verse>();
+        }
+
+        public string GetTitle()
+        {
+            return Title;
         }
 
         protected bool Equals(OpenLyricsSong other)

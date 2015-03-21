@@ -5,6 +5,8 @@ namespace PraiseBase.Presenter.Persistence.CCLI
 {
     public class SongSelectFile : ISongFile
     {
+        #region Fields
+
         /// <summary>
         ///     CCLI ID
         /// </summary>
@@ -45,6 +47,8 @@ namespace PraiseBase.Presenter.Persistence.CCLI
         /// </summary>
         public ComparableOrderedList<Verse> Verses { get; private set; }
 
+        #endregion
+
         /// <summary>
         ///    Constructor
         /// </summary>
@@ -52,6 +56,11 @@ namespace PraiseBase.Presenter.Persistence.CCLI
         {
             Themes = new ComparableList<string>();
             Verses = new ComparableOrderedList<Verse>();
+        }
+
+        public string GetTitle()
+        {
+            return Title;
         }
 
         #region Equality members

@@ -75,6 +75,7 @@ namespace PraiseBase.Presenter.Persistence.OpenLyrics
 
             var actual = target.Load(filename);
             Assert.AreEqual(expected.Title, actual.Title, "Wrong song title");
+            Assert.AreEqual(expected.Title, actual.GetTitle(), "Wrong song title");
             Assert.AreEqual(expected.ModifiedTimestamp, actual.ModifiedTimestamp, "Wrong song modified date");
             Assert.AreEqual(expected.CreatedIn, actual.CreatedIn, "Wrong creator app");
             Assert.AreEqual(expected.ModifiedIn, actual.ModifiedIn, "Wrong modifier app");

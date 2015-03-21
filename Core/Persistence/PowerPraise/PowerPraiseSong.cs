@@ -69,6 +69,11 @@ namespace PraiseBase.Presenter.Persistence.PowerPraise
             Formatting = new PowerPraiseSongFormatting();
         }
 
+        public string GetTitle()
+        {
+            return Title;
+        }
+
         /// <summary>
         ///     Returns the number of background images
         /// </summary>

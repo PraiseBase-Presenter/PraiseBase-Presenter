@@ -60,6 +60,7 @@ namespace PraiseBase.Presenter.Persistence.PowerPraise
 
             // General
             Assert.AreEqual(expected.Title, actual.Title, "Wrong song title");
+            Assert.AreEqual(expected.Title, actual.GetTitle(), "Wrong song title");
             Assert.AreEqual(expected.Language, actual.Language, "Wrong language");
             Assert.AreEqual(expected.Category, actual.Category, "Wrong category");
 

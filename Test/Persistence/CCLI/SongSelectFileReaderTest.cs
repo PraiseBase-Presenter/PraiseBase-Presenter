@@ -118,6 +118,7 @@ namespace PraiseBase.Presenter.Persistence.CCLI
 
             SongSelectFile actual = reader.Load(filename);
             Assert.AreEqual(expected.Title, actual.Title, "Wrong song title");
+            Assert.AreEqual(expected.Title, actual.GetTitle(), "Wrong song title");
             Assert.AreEqual(expected.Author, actual.Author, "Wrong song title");
             Assert.AreEqual(expected.Copyright, actual.Copyright, "Wrong copyright");
             Assert.AreEqual(expected.Admin, actual.Admin, "Wrong RightsManagement");
