@@ -193,6 +193,9 @@ namespace PraiseBase.Presenter.Persistence.PowerPraise
             // Information
             //
 
+            PowerPraiseSongFormatting.CopyrightPosition copyrightTextPosition = PowerPraiseConstants.Format.CopyrightTextPosition;
+            bool sourceTextEnabled = PowerPraiseConstants.Format.SourceTextEnabled;
+
             if (xmlRoot["information"] != null)
             {
                 // Copyright text
@@ -200,8 +203,7 @@ namespace PraiseBase.Presenter.Persistence.PowerPraise
                 if (copyrightElem != null)
                 {
                     // Position
-                    sng.CopyrightTextPosition = ParseCopyRightPosition(copyrightElem["position"],
-                        PowerPraiseConstants.CopyrightTextPosition);
+                    copyrightTextPosition = ParseCopyRightPosition(copyrightElem["position"], PowerPraiseConstants.Format.CopyrightTextPosition);
 
                     // Text
                     sng.CopyrightText.AddRange(ParseCopyRightText(copyrightElem["text"]));
@@ -212,8 +214,7 @@ namespace PraiseBase.Presenter.Persistence.PowerPraise
                 if (sourceElem != null)
                 {
                     // Enabled
-                    sng.SourceTextEnabled = ParseSourceEnabled(sourceElem["position"],
-                        PowerPraiseConstants.SourceTextEnabled);
+                    sourceTextEnabled = ParseSourceEnabled(sourceElem["position"], PowerPraiseConstants.Format.SourceTextEnabled);
 
                     // Text
                     sng.SourceText = ParseSourceText(sourceElem["text"]);
@@ -262,6 +263,10 @@ namespace PraiseBase.Presenter.Persistence.PowerPraise
 
                 // Translation position
                 TranslationPosition = ParseTranslationPosition(textOrientationElem, PowerPraiseConstants.Format.TranslationPosition),
+
+                // Copyright and source
+                CopyrightTextPosition = copyrightTextPosition,
+                SourceTextEnabled = sourceTextEnabled,
 
                 // Borders
                 Borders = ParseBorders(borderElem)
@@ -401,23 +406,23 @@ namespace PraiseBase.Presenter.Persistence.PowerPraise
         /// <param name="elem"></param>
         /// <param name="defaultValue"></param>
         /// <returns></returns>
-        private PowerPraiseSong.CopyrightPosition ParseCopyRightPosition(XmlElement elem,
-            PowerPraiseSong.CopyrightPosition defaultValue)
+        private PowerPraiseSongFormatting.CopyrightPosition ParseCopyRightPosition(XmlElement elem,
+            PowerPraiseSongFormatting.CopyrightPosition defaultValue)
         {
             var position = defaultValue;
             if (elem != null)
             {
                 if (elem.InnerText == "firstslide")
                 {
-                    position = PowerPraiseSong.CopyrightPosition.FirstSlide;
+                    position = PowerPraiseSongFormatting.CopyrightPosition.FirstSlide;
                 }
                 else if (elem.InnerText == "lastslide")
                 {
-                    position = PowerPraiseSong.CopyrightPosition.LastSlide;
+                    position = PowerPraiseSongFormatting.CopyrightPosition.LastSlide;
                 }
                 else if (elem.InnerText == "none")
                 {
-                    position = PowerPraiseSong.CopyrightPosition.None;
+                    position = PowerPraiseSongFormatting.CopyrightPosition.None;
                 }
             }
             return position;

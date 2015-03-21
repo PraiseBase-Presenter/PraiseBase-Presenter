@@ -49,22 +49,22 @@ namespace PraiseBase.Presenter.Persistence.PowerPraise
 
             // Copyright text
             song.Copyright = String.Join(Environment.NewLine, ppl.CopyrightText.ToArray());
-            switch (ppl.CopyrightTextPosition)
+            switch (ppl.Formatting.CopyrightTextPosition)
             {
-                case PowerPraiseSong.CopyrightPosition.FirstSlide:
+                case PowerPraiseSongFormatting.CopyrightPosition.FirstSlide:
                     song.CopyrightPosition = AdditionalInformationPosition.FirstSlide;
                     break;
-                case PowerPraiseSong.CopyrightPosition.LastSlide:
+                case PowerPraiseSongFormatting.CopyrightPosition.LastSlide:
                     song.CopyrightPosition = AdditionalInformationPosition.LastSlide;
                     break;
-                case PowerPraiseSong.CopyrightPosition.None:
+                case PowerPraiseSongFormatting.CopyrightPosition.None:
                     song.CopyrightPosition = AdditionalInformationPosition.None;
                     break;
             }
 
             // Source / songbook
             song.SongBooks.FromString(ppl.SourceText);
-            song.SourcePosition = ppl.SourceTextEnabled
+            song.SourcePosition = ppl.Formatting.SourceTextEnabled
                 ? AdditionalInformationPosition.FirstSlide
                 : AdditionalInformationPosition.None;
 
@@ -181,20 +181,20 @@ namespace PraiseBase.Presenter.Persistence.PowerPraise
             ppl.CopyrightText.Add(song.Copyright);
             if (song.CopyrightPosition == AdditionalInformationPosition.FirstSlide)
             {
-                ppl.CopyrightTextPosition = PowerPraiseSong.CopyrightPosition.FirstSlide;
+                ppl.Formatting.CopyrightTextPosition = PowerPraiseSongFormatting.CopyrightPosition.FirstSlide;
             }
             else if (song.CopyrightPosition == AdditionalInformationPosition.LastSlide)
             {
-                ppl.CopyrightTextPosition = PowerPraiseSong.CopyrightPosition.LastSlide;
+                ppl.Formatting.CopyrightTextPosition = PowerPraiseSongFormatting.CopyrightPosition.LastSlide;
             }
             else if (song.CopyrightPosition == AdditionalInformationPosition.None)
             {
-                ppl.CopyrightTextPosition = PowerPraiseSong.CopyrightPosition.None;
+                ppl.Formatting.CopyrightTextPosition = PowerPraiseSongFormatting.CopyrightPosition.None;
             }
 
             // Source / songbook
             ppl.SourceText = song.SongBooks.ToString();
-            ppl.SourceTextEnabled = (song.SourcePosition == AdditionalInformationPosition.FirstSlide);
+            ppl.Formatting.SourceTextEnabled = (song.SourcePosition == AdditionalInformationPosition.FirstSlide);
 
             // Linespacing
             if (song.MainText != null)

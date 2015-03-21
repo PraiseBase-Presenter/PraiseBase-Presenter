@@ -123,11 +123,11 @@ namespace PraiseBase.Presenter.Persistence.PowerPraise.Extended
 
             // Copyright
             ppl.CopyrightText.Add("Text und Musik: Lowell Mason, 1792-1872");
-            ppl.CopyrightTextPosition = PowerPraiseSong.CopyrightPosition.LastSlide;
+            ppl.Formatting.CopyrightTextPosition = PowerPraiseSongFormatting.CopyrightPosition.LastSlide;
 
             // Source
             ppl.SourceText = "grünes Buch 339";
-            ppl.SourceTextEnabled = true;
+            ppl.Formatting.SourceTextEnabled = true;
 
             // Formatting
             ppl.Formatting.MainText = new PowerPraiseSongFormatting.FontFormatting
@@ -202,8 +202,10 @@ namespace PraiseBase.Presenter.Persistence.PowerPraise.Extended
             song.QualityIssues.Add(SongQualityAssuranceIndicator.Translation);
             song.QualityIssues.Add(SongQualityAssuranceIndicator.Segmentation);
             song.CcliIdentifier = "12123";
-            SongAuthor a = new SongAuthor();
-            a.Name = "asd as d";
+            SongAuthor a = new SongAuthor
+            {
+                Name = "asd as d"
+            };
             song.Author.Add(a);
             song.Publisher = "Sparrow Records";
             song.RightsManagement = "Verlag ABC";

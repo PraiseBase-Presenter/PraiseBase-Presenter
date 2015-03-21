@@ -205,11 +205,11 @@ namespace PraiseBase.Presenter.Persistence.PowerPraise.Extended
 
             // Copyright
             CollectionAssert.AreEqual(expected.CopyrightText, actual.CopyrightText, "Wrong copyright");
-            Assert.AreEqual(expected.CopyrightTextPosition, actual.CopyrightTextPosition, "Wrong copyright text position");
+            Assert.AreEqual(expected.Formatting.CopyrightTextPosition, actual.Formatting.CopyrightTextPosition, "Wrong copyright text position");
 
             // Source
             Assert.AreEqual(expected.SourceText, actual.SourceText, "Wrong source text");
-            Assert.AreEqual(expected.SourceTextEnabled, actual.SourceTextEnabled, "Wrong source text position");
+            Assert.AreEqual(expected.Formatting.SourceTextEnabled, actual.Formatting.SourceTextEnabled, "Wrong source text position");
 
             // Formatting
             Assert.AreEqual(expected.Formatting.MainText.Font, actual.Formatting.MainText.Font);

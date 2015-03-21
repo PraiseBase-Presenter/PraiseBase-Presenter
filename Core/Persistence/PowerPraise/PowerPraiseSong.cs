@@ -40,19 +40,9 @@ namespace PraiseBase.Presenter.Persistence.PowerPraise
         public ComparableList<string> CopyrightText { get; private set; }
 
         /// <summary>
-        ///     Position of the copyright text
-        /// </summary>
-        public CopyrightPosition CopyrightTextPosition { get; set; }
-
-        /// <summary>
         ///     Source text
         /// </summary>
         public string SourceText { get; set; }
-
-        /// <summary>
-        ///     Set to true if the source text should be displayed
-        /// </summary>
-        public bool SourceTextEnabled { get; set; }
 
         /// <summary>
         ///     Formatting (Fonts, Colors, Margins, Effects, ...)
@@ -88,7 +78,7 @@ namespace PraiseBase.Presenter.Persistence.PowerPraise
 
         protected bool Equals(PowerPraiseSong other)
         {
-            return string.Equals(Title, other.Title) && string.Equals(Category, other.Category) && string.Equals(Language, other.Language) && Equals(Parts, other.Parts) && Equals(Order, other.Order) && Equals(CopyrightText, other.CopyrightText) && CopyrightTextPosition == other.CopyrightTextPosition && string.Equals(SourceText, other.SourceText) && SourceTextEnabled.Equals(other.SourceTextEnabled) && Formatting.Equals(other.Formatting);
+            return string.Equals(Title, other.Title) && string.Equals(Category, other.Category) && string.Equals(Language, other.Language) && Equals(Parts, other.Parts) && Equals(Order, other.Order) && Equals(CopyrightText, other.CopyrightText) && string.Equals(SourceText, other.SourceText) && Formatting.Equals(other.Formatting);
         }
 
         public override bool Equals(object obj)
@@ -109,9 +99,7 @@ namespace PraiseBase.Presenter.Persistence.PowerPraise
                 hashCode = (hashCode*397) ^ (Parts != null ? Parts.GetHashCode() : 0);
                 hashCode = (hashCode*397) ^ (Order != null ? Order.GetHashCode() : 0);
                 hashCode = (hashCode*397) ^ (CopyrightText != null ? CopyrightText.GetHashCode() : 0);
-                hashCode = (hashCode*397) ^ (int) CopyrightTextPosition;
-                hashCode = (hashCode*397) ^ (SourceText != null ? SourceText.GetHashCode() : 0);
-                hashCode = (hashCode*397) ^ SourceTextEnabled.GetHashCode();
+                hashCode = (hashCode * 397) ^ (SourceText != null ? SourceText.GetHashCode() : 0);
                 hashCode = (hashCode*397) ^ Formatting.GetHashCode();
                 return hashCode;
             }
@@ -120,13 +108,6 @@ namespace PraiseBase.Presenter.Persistence.PowerPraise
         #endregion
 
         #region Object definitions
-
-        public enum CopyrightPosition
-        {
-            FirstSlide,
-            LastSlide,
-            None
-        }
 
         public class Part : ICloneable
         {

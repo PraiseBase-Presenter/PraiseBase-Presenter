@@ -12,9 +12,6 @@ namespace PraiseBase.Presenter.Persistence.PowerPraise
         
         public static readonly int SlideMainTextSize = 30;
 
-        public static readonly PowerPraiseSong.CopyrightPosition CopyrightTextPosition = PowerPraiseSong.CopyrightPosition.LastSlide;
-        public static readonly bool SourceTextEnabled = true;
-
         public static readonly PowerPraiseSongFormatting Format = new PowerPraiseSongFormatting
         {
             MainText = new PowerPraiseSongFormatting.FontFormatting
@@ -60,6 +57,8 @@ namespace PraiseBase.Presenter.Persistence.PowerPraise
             TranslationLineSpacing = 20,
             TextOrientation = new TextOrientation(VerticalOrientation.Middle, HorizontalOrientation.Center),
             TranslationPosition = TranslationPosition.Inline,
+            CopyrightTextPosition = PowerPraiseSongFormatting.CopyrightPosition.LastSlide,
+            SourceTextEnabled = true,
             Borders = new PowerPraiseSongFormatting.TextBorders
             {
                 TextLeft = 40,

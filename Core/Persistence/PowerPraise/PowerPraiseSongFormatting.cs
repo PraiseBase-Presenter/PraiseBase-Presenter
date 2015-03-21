@@ -57,6 +57,16 @@ namespace PraiseBase.Presenter.Persistence.PowerPraise
         public TranslationPosition TranslationPosition { get; set; }
 
         /// <summary>
+        ///     Position of the copyright text
+        /// </summary>
+        public CopyrightPosition CopyrightTextPosition { get; set; }
+
+        /// <summary>
+        ///     Set to true if the source text should be displayed
+        /// </summary>
+        public bool SourceTextEnabled { get; set; }
+
+        /// <summary>
         ///     Borders
         /// </summary>
         public TextBorders Borders { get; set; }
@@ -83,7 +93,7 @@ namespace PraiseBase.Presenter.Persistence.PowerPraise
 
         protected bool Equals(PowerPraiseSongFormatting other)
         {
-            return MainText.Equals(other.MainText) && TranslationText.Equals(other.TranslationText) && CopyrightText.Equals(other.CopyrightText) && SourceText.Equals(other.SourceText) && Outline.Equals(other.Outline) && Shadow.Equals(other.Shadow) && MainLineSpacing == other.MainLineSpacing && TranslationLineSpacing == other.TranslationLineSpacing && Equals(TextOrientation, other.TextOrientation) && TranslationPosition == other.TranslationPosition && Borders.Equals(other.Borders);
+            return MainText.Equals(other.MainText) && TranslationText.Equals(other.TranslationText) && CopyrightText.Equals(other.CopyrightText) && SourceText.Equals(other.SourceText) && Outline.Equals(other.Outline) && Shadow.Equals(other.Shadow) && MainLineSpacing == other.MainLineSpacing && TranslationLineSpacing == other.TranslationLineSpacing && Equals(TextOrientation, other.TextOrientation) && TranslationPosition == other.TranslationPosition && CopyrightTextPosition == other.CopyrightTextPosition && SourceTextEnabled.Equals(other.SourceTextEnabled) && Borders.Equals(other.Borders);
         }
 
         public override bool Equals(object obj)
@@ -108,6 +118,8 @@ namespace PraiseBase.Presenter.Persistence.PowerPraise
                 hashCode = (hashCode * 397) ^ TranslationLineSpacing;
                 hashCode = (hashCode * 397) ^ (TextOrientation != null ? TextOrientation.GetHashCode() : 0);
                 hashCode = (hashCode * 397) ^ (int)TranslationPosition;
+                hashCode = (hashCode * 397) ^ (int)CopyrightTextPosition;
+                hashCode = (hashCode * 397) ^ SourceTextEnabled.GetHashCode();
                 hashCode = (hashCode * 397) ^ Borders.GetHashCode();
                 return hashCode;
             }
@@ -254,6 +266,13 @@ namespace PraiseBase.Presenter.Persistence.PowerPraise
             }
 
             #endregion
+        }
+
+        public enum CopyrightPosition
+        {
+            FirstSlide,
+            LastSlide,
+            None
         }
 
         /// <summary>

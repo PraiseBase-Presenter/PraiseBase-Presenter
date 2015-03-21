@@ -150,15 +150,15 @@ namespace PraiseBase.Presenter.Persistence.PowerPraise
             // Copyright position
             xmlRoot["information"]["copyright"].AppendChild(xmlDoc.CreateElement("position"));
             var pos = "firstslide";
-            switch (sng.CopyrightTextPosition)
+            switch (sng.Formatting.CopyrightTextPosition)
             {
-                case PowerPraiseSong.CopyrightPosition.FirstSlide:
+                case PowerPraiseSongFormatting.CopyrightPosition.FirstSlide:
                     pos = "firstslide";
                     break;
-                case PowerPraiseSong.CopyrightPosition.LastSlide:
+                case PowerPraiseSongFormatting.CopyrightPosition.LastSlide:
                     pos = "lastslide";
                     break;
-                case PowerPraiseSong.CopyrightPosition.None:
+                case PowerPraiseSongFormatting.CopyrightPosition.None:
                     pos = "none";
                     break;
             }
@@ -180,7 +180,7 @@ namespace PraiseBase.Presenter.Persistence.PowerPraise
 
             // Source enabled
             xmlRoot["information"]["source"].AppendChild(xmlDoc.CreateElement("position"));
-            xmlRoot["information"]["source"]["position"].InnerText = (sng.SourceTextEnabled ? "firstslide" : "none");
+            xmlRoot["information"]["source"]["position"].InnerText = (sng.Formatting.SourceTextEnabled ? "firstslide" : "none");
 
             // Source text
             xmlRoot["information"]["source"].AppendChild(xmlDoc.CreateElement("text"));
