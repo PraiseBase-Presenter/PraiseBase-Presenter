@@ -41,7 +41,7 @@ namespace PraiseBase.Presenter.Persistence.PowerPraise.Extended
                 song.QualityIssues.Add(e);
             }
             song.CcliIdentifier = ppl.CcliIdentifier;
-            song.Author.AddRange(ppl.Author);
+            song.Authors.AddRange(ppl.Author);
             song.RightsManagement = ppl.RightsManagement;
             song.Publisher = ppl.Publisher;
             song.Guid = ppl.Guid;
@@ -64,7 +64,7 @@ namespace PraiseBase.Presenter.Persistence.PowerPraise.Extended
                 ppl.QualityIssues.Add(e);
             }
             ppl.CcliIdentifier = song.CcliIdentifier;
-            ppl.Author.AddRange(song.Author);
+            ppl.Author.AddRange(song.Authors);
             ppl.RightsManagement = song.RightsManagement;
             ppl.Publisher = song.Publisher;
             ppl.Guid = song.Guid;

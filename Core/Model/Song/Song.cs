@@ -42,7 +42,7 @@ namespace PraiseBase.Presenter.Model.Song
             Parts = new SongPartList();
             PartSequence = new PartSequences();
             SongBooks = new SongBooks();
-            Author = new SongAuthors();
+            Authors = new SongAuthors();
             Comment = String.Empty;
             QualityIssues = new QualityIssues();
         }
@@ -107,7 +107,7 @@ namespace PraiseBase.Presenter.Model.Song
                 hashCode = (hashCode*397) ^ (int) CopyrightPosition;
                 hashCode = (hashCode*397) ^ (int) SourcePosition;
                 hashCode = (hashCode*397) ^ (ReleaseYear != null ? ReleaseYear.GetHashCode() : 0);
-                hashCode = (hashCode*397) ^ (Author != null ? Author.GetHashCode() : 0);
+                hashCode = (hashCode*397) ^ (Authors != null ? Authors.GetHashCode() : 0);
                 hashCode = (hashCode*397) ^ (RightsManagement != null ? RightsManagement.GetHashCode() : 0);
                 hashCode = (hashCode*397) ^ (Publisher != null ? Publisher.GetHashCode() : 0);
                 hashCode = (hashCode*397) ^ (Version != null ? Version.GetHashCode() : 0);
@@ -142,7 +142,7 @@ namespace PraiseBase.Presenter.Model.Song
                    string.Equals(CcliIdentifier, other.CcliIdentifier) &&
                    string.Equals(Copyright, other.Copyright) && CopyrightPosition == other.CopyrightPosition &&
                    SourcePosition == other.SourcePosition && string.Equals(ReleaseYear, other.ReleaseYear) &&
-                   Equals(Author, other.Author) && string.Equals(RightsManagement, other.RightsManagement) &&
+                   Equals(Authors, other.Authors) && string.Equals(RightsManagement, other.RightsManagement) &&
                    string.Equals(Publisher, other.Publisher) && string.Equals(Version, other.Version) &&
                    string.Equals(Key, other.Key) && Transposition == other.Transposition && Equals(Tempo, other.Tempo) &&
                    string.Equals(Variant, other.Variant) && Equals(Themes, other.Themes) &&
@@ -224,7 +224,7 @@ namespace PraiseBase.Presenter.Model.Song
         /// <summary>
         ///     Authors of the song
         /// </summary>
-        public SongAuthors Author { get; set; }
+        public SongAuthors Authors { get; set; }
 
         /// <summary>
         ///     Admin

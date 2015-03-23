@@ -73,7 +73,7 @@ namespace PraiseBase.Presenter.Persistence.PowerPraise.Extended
             Assert.AreEqual(expected.CopyrightPosition, actual.CopyrightPosition, "Wrong copyright position");
             Assert.AreEqual(expected.SourcePosition, actual.SourcePosition, "Wrong source position");
             Assert.AreEqual(expected.ReleaseYear, actual.ReleaseYear, "Wrong release year");
-            CollectionAssert.AreEqual(expected.Author, actual.Author, "Wrong author");
+            CollectionAssert.AreEqual(expected.Authors, actual.Authors, "Wrong author");
             Assert.AreEqual(expected.RightsManagement, actual.RightsManagement, "Wrong rights Management");
             Assert.AreEqual(expected.Publisher, actual.Publisher, "Wrong publisher");
             Assert.AreEqual(expected.Version, actual.Version, "Wrong version");
@@ -184,7 +184,7 @@ namespace PraiseBase.Presenter.Persistence.PowerPraise.Extended
             Assert.AreEqual(expected.CopyrightPosition, actual.CopyrightPosition, "Wrong copyright position");
             Assert.AreEqual(expected.SourcePosition, actual.SourcePosition, "Wrong source position");
             Assert.AreEqual(expected.ReleaseYear, actual.ReleaseYear, "Wrong release year");
-            CollectionAssert.AreEqual(expected.Author, actual.Author, "Wrong author");
+            CollectionAssert.AreEqual(expected.Authors, actual.Authors, "Wrong author");
             Assert.AreEqual(expected.RightsManagement, actual.RightsManagement, "Wrong rights Management");
             Assert.AreEqual(expected.Publisher, actual.Publisher, "Wrong publisher");
             Assert.AreEqual(expected.Version, actual.Version, "Wrong version");

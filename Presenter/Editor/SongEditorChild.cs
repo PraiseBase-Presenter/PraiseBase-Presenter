@@ -65,7 +65,7 @@ namespace PraiseBase.Presenter.Editor
             textBoxRightsManagement.DataBindings.Add("Text", Song, "RightsManagement");
             textBoxPublisher.DataBindings.Add("Text", Song, "Publisher");
 
-            textBoxAuthors.Text = Song.Author.ToString();
+            textBoxAuthors.Text = Song.Authors.ToString();
             textBoxSongbooks.Text = Song.SongBooks.ToString();
 
             PopulateTree();
@@ -715,7 +715,7 @@ namespace PraiseBase.Presenter.Editor
 
         private void textBoxAuthors_TextChanged(object sender, EventArgs e)
         {
-            Song.Author.FromString(((TextBox)sender).Text);
+            Song.Authors.FromString(((TextBox)sender).Text);
         }
 
         private void textBoxSongbooks_TextChanged(object sender, EventArgs e)

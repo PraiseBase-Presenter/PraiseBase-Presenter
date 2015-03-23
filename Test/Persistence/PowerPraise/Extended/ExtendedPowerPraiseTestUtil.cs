@@ -206,7 +206,7 @@ namespace PraiseBase.Presenter.Persistence.PowerPraise.Extended
             {
                 Name = "asd as d"
             };
-            song.Author.Add(a);
+            song.Authors.Add(a);
             song.Publisher = "Sparrow Records";
             song.RightsManagement = "Verlag ABC";
 

@@ -27,7 +27,7 @@ namespace PraiseBase.Presenter.Persistence.CCLI
             {
                 Name = source.Author
             };
-            sng.Author.Add(a);
+            sng.Authors.Add(a);
 
             // Themes
             sng.Themes.AddRange(source.Themes);

@@ -129,7 +129,7 @@ namespace PraiseBase.Presenter.Persistence.CCLI
             {
                 Name = "Muster, Hans"
             };
-            expected.Author.Add(aut);
+            expected.Authors.Add(aut);
             expected.Copyright = "Gemeinfrei (Public Domain)";
             expected.RightsManagement = "Verlag ABC";
             expected.Key = "E";
@@ -183,9 +183,9 @@ namespace PraiseBase.Presenter.Persistence.CCLI
             {
                 Assert.AreEqual(expected.Themes[i], actual.Themes[i], "Wrong theme");
             }
-            for (int i = 0; i < expected.Author.Count; i++)
+            for (int i = 0; i < expected.Authors.Count; i++)
             {
-                Assert.AreEqual(expected.Author[i].Name, actual.Author[i].Name, "Wrong Author");
+                Assert.AreEqual(expected.Authors[i].Name, actual.Authors[i].Name, "Wrong Author");
             }
 
             Assert.AreEqual(expected.Parts.Count, actual.Parts.Count, "Parts incomplete");
