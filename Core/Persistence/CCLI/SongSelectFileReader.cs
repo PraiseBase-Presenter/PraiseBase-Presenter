@@ -39,7 +39,7 @@ namespace PraiseBase.Presenter.Persistence.CCLI
             var fields = new List<string>();
             var words = new List<string>();
 
-            var section = CcliSongFileSection.NONE;
+            var section = CcliSongFileSection.None;
 
             var lines = File.ReadAllLines(@filename);
             foreach (var l in lines)
@@ -51,7 +51,7 @@ namespace PraiseBase.Presenter.Persistence.CCLI
                     var k = s[0];
                     var v = s[1];
 
-                    if (section == CcliSongFileSection.CONTENT)
+                    if (section == CcliSongFileSection.Content)
                     {
                         switch (k)
                         {
@@ -83,17 +83,11 @@ namespace PraiseBase.Presenter.Persistence.CCLI
                                 break;
 
                             case "Fields":
-                                foreach (var t in v.Split(new[] {"/t"}, StringSplitOptions.RemoveEmptyEntries))
-                                {
-                                    fields.Add(t);
-                                }
+                                fields.AddRange(v.Split(new[] {"/t"}, StringSplitOptions.RemoveEmptyEntries));
                                 break;
 
                             case "Words":
-                                foreach (var t in v.Split(new[] {"/t"}, StringSplitOptions.RemoveEmptyEntries))
-                                {
-                                    words.Add(t);
-                                }
+                                words.AddRange(v.Split(new[] {"/t"}, StringSplitOptions.RemoveEmptyEntries));
                                 break;
                         }
                     }
@@ -102,15 +96,15 @@ namespace PraiseBase.Presenter.Persistence.CCLI
                 {
                     if (li == "[File]")
                     {
-                        section = CcliSongFileSection.FILE;
+                        section = CcliSongFileSection.File;
                     }
                     else
                     {
                         var m = Regex.Match(li, "^\\[S A([0-9]+)\\]$");
                         if (m.Success)
                         {
-                            sng.ID = m.Groups[1].Value;
-                            section = CcliSongFileSection.CONTENT;
+                            sng.CcliIdentifier = m.Groups[1].Value;
+                            section = CcliSongFileSection.Content;
                         }
                     }
                 }
@@ -123,8 +117,10 @@ namespace PraiseBase.Presenter.Persistence.CCLI
 
             for (var fx = 0; fx < fields.Count; fx++)
             {
-                var p = new SongSelectVerse();
-                p.Caption = fields[fx];
+                var p = new SongSelectFile.Verse
+                {
+                    Caption = fields[fx]
+                };
                 foreach (var l in words[fx].Split(new[] {"/n"}, StringSplitOptions.RemoveEmptyEntries))
                 {
                     p.Lines.Add(l);
@@ -150,37 +146,40 @@ namespace PraiseBase.Presenter.Persistence.CCLI
                     return null;
                 }
 
-                var section = CcliSongFileSection.NONE;
+                var section = CcliSongFileSection.None;
                 using (var sr = new StreamReader(filename))
                 {
                     while (!sr.EndOfStream)
                     {
                         var l = sr.ReadLine();
-                        var li = l.Trim();
-                        var s = li.Split(new[] {"="}, StringSplitOptions.None);
-                        if (s.Length > 1)
+                        if (l != null)
                         {
-                            var k = s[0];
-                            var v = s[1];
+                            var li = l.Trim();
+                            var s = li.Split(new[] {"="}, StringSplitOptions.None);
+                            if (s.Length > 1)
+                            {
+                                var k = s[0];
+                                var v = s[1];
 
-                            if (section == CcliSongFileSection.CONTENT && k == "Title")
-                            {
-                                sr.Close();
-                                return v;
-                            }
-                        }
-                        else
-                        {
-                            if (li == "[File]")
-                            {
-                                section = CcliSongFileSection.FILE;
+                                if (section == CcliSongFileSection.Content && k == "Title")
+                                {
+                                    sr.Close();
+                                    return v;
+                                }
                             }
                             else
                             {
-                                var m = Regex.Match(li, "^\\[S A([0-9]+)\\]$");
-                                if (m.Success)
+                                if (li == "[File]")
                                 {
-                                    section = CcliSongFileSection.CONTENT;
+                                    section = CcliSongFileSection.File;
+                                }
+                                else
+                                {
+                                    var m = Regex.Match(li, "^\\[S A([0-9]+)\\]$");
+                                    if (m.Success)
+                                    {
+                                        section = CcliSongFileSection.Content;
+                                    }
                                 }
                             }
                         }
@@ -211,38 +210,41 @@ namespace PraiseBase.Presenter.Persistence.CCLI
                     while (!sr.EndOfStream)
                     {
                         var l = sr.ReadLine();
-                        var s = l.Split(new[] {"="}, StringSplitOptions.None);
-                        if (s.Length > 1)
+                        if (l != null)
                         {
-                            var k = s[0];
-                            var v = s[1].Trim();
-                            switch (k)
+                            var s = l.Split(new[] {"="}, StringSplitOptions.None);
+                            if (s.Length > 1)
                             {
-                                case "Version":
-                                    if (v != SupportedFileFormatVersion)
-                                    {
-                                        sr.Close();
-                                        return false;
-                                    }
-                                    versionOk = true;
-                                    break;
+                                var k = s[0];
+                                var v = s[1].Trim();
+                                switch (k)
+                                {
+                                    case "Version":
+                                        if (v != SupportedFileFormatVersion)
+                                        {
+                                            sr.Close();
+                                            return false;
+                                        }
+                                        versionOk = true;
+                                        break;
 
-                                case "Type":
-                                    if (v != TypeString)
-                                    {
-                                        sr.Close();
-                                        return false;
-                                    }
-                                    typeOk = true;
-                                    break;
+                                    case "Type":
+                                        if (v != TypeString)
+                                        {
+                                            sr.Close();
+                                            return false;
+                                        }
+                                        typeOk = true;
+                                        break;
 
-                                default:
-                                    if (versionOk && typeOk)
-                                    {
-                                        sr.Close();
-                                        return true;
-                                    }
-                                    break;
+                                    default:
+                                        if (versionOk && typeOk)
+                                        {
+                                            sr.Close();
+                                            return true;
+                                        }
+                                        break;
+                                }
                             }
                         }
                     }
@@ -257,9 +259,9 @@ namespace PraiseBase.Presenter.Persistence.CCLI
 
         private enum CcliSongFileSection
         {
-            NONE,
-            FILE,
-            CONTENT
+            None,
+            File,
+            Content
         }
     }
 }

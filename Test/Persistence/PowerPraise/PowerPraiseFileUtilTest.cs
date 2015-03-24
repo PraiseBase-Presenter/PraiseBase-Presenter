@@ -3,10 +3,10 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace PraiseBase.Presenter.Persistence.PowerPraise
 {
-    [TestClass()]
+    [TestClass]
     public class PowerPraiseFileUtilTest
     {
-        [TestMethod()]
+        [TestMethod]
         public void ConvertColorTest()
         {
             // PowerPraise Colors
@@ -27,7 +27,7 @@ namespace PraiseBase.Presenter.Persistence.PowerPraise
             Assert.AreEqual(Color.FromArgb(255, 255, 255, 255), PowerPraiseFileUtil.ConvertColor(16777215));
         }
 
-        [TestMethod()]
+        [TestMethod]
         public void ConvertColorTest1()
         {
             // Black

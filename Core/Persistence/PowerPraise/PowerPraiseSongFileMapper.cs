@@ -21,9 +21,7 @@
  */
 
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text.RegularExpressions;
 using PraiseBase.Presenter.Model;
 using PraiseBase.Presenter.Model.Song;
 
@@ -51,24 +49,11 @@ namespace PraiseBase.Presenter.Persistence.PowerPraise
 
             // Copyright text
             song.Copyright = String.Join(Environment.NewLine, ppl.CopyrightText.ToArray());
-            switch (ppl.CopyrightTextPosition)
-            {
-                case PowerPraiseSong.CopyrightPosition.FirstSlide:
-                    song.CopyrightPosition = AdditionalInformationPosition.FirstSlide;
-                    break;
-                case PowerPraiseSong.CopyrightPosition.LastSlide:
-                    song.CopyrightPosition = AdditionalInformationPosition.LastSlide;
-                    break;
-                case PowerPraiseSong.CopyrightPosition.None:
-                    song.CopyrightPosition = AdditionalInformationPosition.None;
-                    break;
-            }
+            song.CopyrightPosition = ppl.Formatting.CopyrightTextPosition;
 
             // Source / songbook
             song.SongBooks.FromString(ppl.SourceText);
-            song.SourcePosition = ppl.SourceTextEnabled
-                ? AdditionalInformationPosition.FirstSlide
-                : AdditionalInformationPosition.None;
+            song.SourcePosition = ppl.Formatting.SourceTextPosition;
 
             // Song parts
             foreach (var prt in ppl.Parts)
@@ -80,9 +65,9 @@ namespace PraiseBase.Presenter.Persistence.PowerPraise
                 foreach (var sld in prt.Slides)
                 {
                     var slide = new SongSlide();
-                    if (sld.BackgroundNr >= 0 && ppl.BackgroundImages.Count > sld.BackgroundNr - 1)
+                    if (sld.Background != null)
                     {
-                        slide.Background = ParseBackground(ppl.BackgroundImages[sld.BackgroundNr]);
+                        slide.Background = (IBackground)sld.Background.Clone();
                     }
                     slide.TextSize = sld.MainSize > 0
                         ? sld.MainSize
@@ -132,42 +117,23 @@ namespace PraiseBase.Presenter.Persistence.PowerPraise
                 }
             }
 
-            var bgIndex = 0;
-            var backgrounds = new Dictionary<string, int>();
-
             // Song parts
             foreach (var songPart in song.Parts)
             {
-                var pplPart = new PowerPraiseSongPart
+                var pplPart = new PowerPraiseSong.Part
                 {
                     Caption = songPart.Caption
                 };
                 foreach (var songSlide in songPart.Slides)
                 {
-                    var pplSlide = new PowerPraiseSongSlide();
-
-                    var bg = MapBackground(songSlide.Background);
-                    int backgroundNr;
-                    if (bg == null)
+                    var pplSlide = new PowerPraiseSong.Slide
                     {
-                        bg = PowerPraiseConstants.DefaultBackground;
-                    }
-                    if (!backgrounds.ContainsKey(bg))
-                    {
-                        backgroundNr = bgIndex;
-                        backgrounds.Add(bg, bgIndex++);
-                    }
-                    else
-                    {
-                        backgroundNr = backgrounds[bg];
-                    }
-                    pplSlide.BackgroundNr = backgroundNr;
-
-                    pplSlide.MainSize =
-                        (int)
+                        Background = (IBackground) songSlide.Background.Clone(),
+                        MainSize = (int)
                             (songSlide.TextSize > 0
                                 ? songSlide.TextSize
-                                : (song.MainText != null && song.MainText.Font != null ? song.MainText.Font.Size : 0));
+                                : (song.MainText != null && song.MainText.Font != null ? song.MainText.Font.Size : 0))
+                    };
                     pplSlide.Lines.AddRange(songSlide.Lines);
                     pplSlide.Translation.AddRange(songSlide.Translation);
                     pplPart.Slides.Add(pplSlide);
@@ -199,130 +165,82 @@ namespace PraiseBase.Presenter.Persistence.PowerPraise
             }
 
             // Copyright text
-            ppl.CopyrightText.Add(song.Copyright);
-            if (song.CopyrightPosition == AdditionalInformationPosition.FirstSlide)
+            if (song.Copyright != null)
             {
-                ppl.CopyrightTextPosition = PowerPraiseSong.CopyrightPosition.FirstSlide;
+                foreach (var s in song.Copyright.Split(new[] { Environment.NewLine }, StringSplitOptions.None))
+                {
+                    ppl.CopyrightText.Add(s);
+                }
             }
-            else if (song.CopyrightPosition == AdditionalInformationPosition.LastSlide)
-            {
-                ppl.CopyrightTextPosition = PowerPraiseSong.CopyrightPosition.LastSlide;
-            }
-            else if (song.CopyrightPosition == AdditionalInformationPosition.None)
-            {
-                ppl.CopyrightTextPosition = PowerPraiseSong.CopyrightPosition.None;
-            }
+            ppl.Formatting.CopyrightTextPosition = song.CopyrightPosition;
 
             // Source / songbook
             ppl.SourceText = song.SongBooks.ToString();
-            ppl.SourceTextEnabled = (song.SourcePosition == AdditionalInformationPosition.FirstSlide);
+            ppl.Formatting.SourceTextPosition = song.SourcePosition;
 
-
-            // Backgrounds
-            ppl.BackgroundImages.AddRange(backgrounds.Keys);
-
+            // Linespacing
             if (song.MainText != null)
             {
-                ppl.MainLineSpacing = song.MainText.LineSpacing;
-                ppl.TranslationLineSpacing = song.TranslationText.LineSpacing;
+                ppl.Formatting.MainLineSpacing = song.MainText.LineSpacing;
+                ppl.Formatting.TranslationLineSpacing = song.TranslationText.LineSpacing;
             }
 
             MapFormatting(song, ppl);
-        }
-
-        private static IBackground ParseBackground(string bg)
-        {
-            if (Regex.IsMatch(bg, @"^\d+$"))
-            {
-                int trySize;
-                if (int.TryParse(bg, out trySize))
-                {
-                    try
-                    {
-                        return new ColorBackground(PowerPraiseFileUtil.ConvertColor(trySize));
-                    }
-                    catch (ArgumentException)
-                    {
-                        return null;
-                    }
-                }
-            }
-            else if (bg.Trim() != String.Empty)
-            {
-                return new ImageBackground(bg);
-            }
-            return null;
-        }
-
-        private static string MapBackground(IBackground bg)
-        {
-            if (bg != null)
-            {
-                if (bg.GetType() == typeof (ImageBackground))
-                {
-                    return ((ImageBackground) bg).ImagePath;
-                }
-                if (bg.GetType() == typeof (ColorBackground))
-                {
-                    return PowerPraiseFileUtil.ConvertColor(((ColorBackground) bg).Color).ToString();
-                }
-            }
-            return null;
         }
 
         private void MapFormatting(PowerPraiseSong ppl, Song song)
         {
             // Formatting definitions
             song.MainText = new TextFormatting(
-                ppl.MainTextFontFormatting.Font,
-                ppl.MainTextFontFormatting.Color,
-                new TextOutline(ppl.MainTextFontFormatting.OutlineWidth, ppl.TextOutlineFormatting.Color),
-                new TextShadow(ppl.MainTextFontFormatting.ShadowDistance, 0, ppl.TextShadowFormatting.Direction,
-                    ppl.TextShadowFormatting.Color),
-                ppl.MainLineSpacing
+                ppl.Formatting.MainText.Font,
+                ppl.Formatting.MainText.Color,
+                new TextOutline(ppl.Formatting.MainText.OutlineWidth, ppl.Formatting.Outline.Color),
+                new TextShadow(ppl.Formatting.MainText.ShadowDistance, 0, ppl.Formatting.Shadow.Direction,
+                    ppl.Formatting.Shadow.Color),
+                ppl.Formatting.MainLineSpacing
                 );
             song.TranslationText = new TextFormatting(
-                ppl.TranslationTextFontFormatting.Font,
-                ppl.TranslationTextFontFormatting.Color,
-                new TextOutline(ppl.TranslationTextFontFormatting.OutlineWidth, ppl.TextOutlineFormatting.Color),
-                new TextShadow(ppl.TranslationTextFontFormatting.ShadowDistance, 0, ppl.TextShadowFormatting.Direction,
-                    ppl.TextShadowFormatting.Color),
-                ppl.TranslationLineSpacing
+                ppl.Formatting.TranslationText.Font,
+                ppl.Formatting.TranslationText.Color,
+                new TextOutline(ppl.Formatting.TranslationText.OutlineWidth, ppl.Formatting.Outline.Color),
+                new TextShadow(ppl.Formatting.TranslationText.ShadowDistance, 0, ppl.Formatting.Shadow.Direction,
+                    ppl.Formatting.Shadow.Color),
+                ppl.Formatting.TranslationLineSpacing
                 );
             song.CopyrightText = new TextFormatting(
-                ppl.CopyrightTextFontFormatting.Font,
-                ppl.CopyrightTextFontFormatting.Color,
-                new TextOutline(ppl.CopyrightTextFontFormatting.OutlineWidth, ppl.TextOutlineFormatting.Color),
-                new TextShadow(ppl.CopyrightTextFontFormatting.ShadowDistance, 0, ppl.TextShadowFormatting.Direction,
-                    ppl.TextShadowFormatting.Color),
+                ppl.Formatting.CopyrightText.Font,
+                ppl.Formatting.CopyrightText.Color,
+                new TextOutline(ppl.Formatting.CopyrightText.OutlineWidth, ppl.Formatting.Outline.Color),
+                new TextShadow(ppl.Formatting.CopyrightText.ShadowDistance, 0, ppl.Formatting.Shadow.Direction,
+                    ppl.Formatting.Shadow.Color),
                 0
                 );
             song.SourceText = new TextFormatting(
-                ppl.SourceTextFontFormatting.Font,
-                ppl.SourceTextFontFormatting.Color,
-                new TextOutline(ppl.SourceTextFontFormatting.OutlineWidth, ppl.TextOutlineFormatting.Color),
-                new TextShadow(ppl.SourceTextFontFormatting.ShadowDistance, 0, ppl.TextShadowFormatting.Direction,
-                    ppl.TextShadowFormatting.Color),
+                ppl.Formatting.SourceText.Font,
+                ppl.Formatting.SourceText.Color,
+                new TextOutline(ppl.Formatting.SourceText.OutlineWidth, ppl.Formatting.Outline.Color),
+                new TextShadow(ppl.Formatting.SourceText.ShadowDistance, 0, ppl.Formatting.Shadow.Direction,
+                    ppl.Formatting.Shadow.Color),
                 0
                 );
 
             // Text orientation
-            song.TextOrientation = ppl.TextOrientation;
-            song.TranslationPosition = ppl.TranslationTextPosition;
+            song.TextOrientation = ppl.Formatting.TextOrientation;
+            song.TranslationPosition = ppl.Formatting.TranslationPosition;
 
             // Enable or disable outline/shadow
-            song.TextOutlineEnabled = ppl.TextOutlineFormatting.Enabled;
-            song.TextShadowEnabled = ppl.TextShadowFormatting.Enabled;
+            song.TextOutlineEnabled = ppl.Formatting.Outline.Enabled;
+            song.TextShadowEnabled = ppl.Formatting.Shadow.Enabled;
 
             // Borders
             song.TextBorders = new SongTextBorders(
-                ppl.Borders.TextLeft,
-                ppl.Borders.TextTop,
-                ppl.Borders.TextRight,
-                ppl.Borders.TextBottom,
-                ppl.Borders.CopyrightBottom,
-                ppl.Borders.SourceTop,
-                ppl.Borders.SourceRight
+                ppl.Formatting.Borders.TextLeft,
+                ppl.Formatting.Borders.TextTop,
+                ppl.Formatting.Borders.TextRight,
+                ppl.Formatting.Borders.TextBottom,
+                ppl.Formatting.Borders.CopyrightBottom,
+                ppl.Formatting.Borders.SourceTop,
+                ppl.Formatting.Borders.SourceRight
                 );
         }
 
@@ -331,7 +249,7 @@ namespace PraiseBase.Presenter.Persistence.PowerPraise
             // Formatting definitions
             if (song.MainText != null)
             {
-                ppl.MainTextFontFormatting = new PowerPraiseSong.FontFormatting
+                ppl.Formatting.MainText = new PowerPraiseSongFormatting.FontFormatting
                 {
                     Font = song.MainText.Font,
                     Color = song.MainText.Color,
@@ -341,7 +259,7 @@ namespace PraiseBase.Presenter.Persistence.PowerPraise
             }
             if (song.TranslationText != null)
             {
-                ppl.TranslationTextFontFormatting = new PowerPraiseSong.FontFormatting
+                ppl.Formatting.TranslationText = new PowerPraiseSongFormatting.FontFormatting
                 {
                     Font = song.TranslationText.Font,
                     Color = song.TranslationText.Color,
@@ -351,7 +269,7 @@ namespace PraiseBase.Presenter.Persistence.PowerPraise
             }
             if (song.CopyrightText != null)
             {
-                ppl.CopyrightTextFontFormatting = new PowerPraiseSong.FontFormatting
+                ppl.Formatting.CopyrightText = new PowerPraiseSongFormatting.FontFormatting
                 {
                     Font = song.CopyrightText.Font,
                     Color = song.CopyrightText.Color,
@@ -361,7 +279,7 @@ namespace PraiseBase.Presenter.Persistence.PowerPraise
             }
             if (song.SourceText != null)
             {
-                ppl.SourceTextFontFormatting = new PowerPraiseSong.FontFormatting
+                ppl.Formatting.SourceText = new PowerPraiseSongFormatting.FontFormatting
                 {
                     Font = song.SourceText.Font,
                     Color = song.SourceText.Color,
@@ -373,12 +291,12 @@ namespace PraiseBase.Presenter.Persistence.PowerPraise
             // Enable or disable outline/shadow
             if (song.MainText != null)
             {
-                ppl.TextOutlineFormatting = new PowerPraiseSong.OutlineFormatting
+                ppl.Formatting.Outline = new PowerPraiseSongFormatting.OutlineFormatting
                 {
                     Color = song.MainText.Outline.Color,
                     Enabled = song.TextOutlineEnabled
                 };
-                ppl.TextShadowFormatting = new PowerPraiseSong.ShadowFormatting
+                ppl.Formatting.Shadow = new PowerPraiseSongFormatting.ShadowFormatting
                 {
                     Color = song.MainText.Shadow.Color,
                     Direction = song.MainText.Shadow.Direction,
@@ -387,13 +305,13 @@ namespace PraiseBase.Presenter.Persistence.PowerPraise
             }
 
             // Text orientation
-            ppl.TextOrientation = song.TextOrientation;
-            ppl.TranslationTextPosition = song.TranslationPosition;
+            ppl.Formatting.TextOrientation = song.TextOrientation;
+            ppl.Formatting.TranslationPosition = song.TranslationPosition;
 
             // Borders
             if (song.TextBorders != null)
             {
-                ppl.Borders = new PowerPraiseSong.TextBorders
+                ppl.Formatting.Borders = new PowerPraiseSongFormatting.TextBorders
                 {
                     TextLeft = song.TextBorders.TextLeft,
                     TextTop = song.TextBorders.TextTop,

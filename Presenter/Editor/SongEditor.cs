@@ -21,6 +21,7 @@
  */
 
 using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.Globalization;
 using System.IO;
@@ -39,7 +40,7 @@ namespace PraiseBase.Presenter.Editor
 {
     public partial class SongEditor : LocalizableForm
     {
-        #region internalVariables
+        #region Internal variables
 
         /// <summary>
         /// Initial directory of file open/save dialog
@@ -66,9 +67,23 @@ namespace PraiseBase.Presenter.Editor
         /// </summary>
         private readonly Settings _settings;
 
+        /// <summary>
+        /// Image manager instance
+        /// </summary>
+        private readonly ImageManager _imgManager;
+
         #endregion
 
+        #region Constants
+
+        /// <summary>
+        /// Specifies how long the status message is shown
+        /// </summary>
         private const int StatusMessageDuration = 2000;
+
+        #endregion
+
+        #region Delegates
 
         /// <summary>
         /// Delegate to inform subscribers that a song has been saved
@@ -82,7 +97,7 @@ namespace PraiseBase.Presenter.Editor
         /// </summary>
         public event SongSave SongSaved;
 
-        private readonly ImageManager _imgManager;
+        #endregion
 
         public SongEditor(Settings settings, ImageManager imgManager, String filename)
         {
@@ -97,6 +112,7 @@ namespace PraiseBase.Presenter.Editor
 
             RegisterChild(this);
 
+            // Open song if given as startup argument
             if (!String.IsNullOrEmpty(filename) && File.Exists(filename))
             {
                 OpenSong(filename);
@@ -124,9 +140,7 @@ namespace PraiseBase.Presenter.Editor
             Song sng = stm.CreateNewSong();
             stm.ApplyFormattingFromSettings(sng);
 
-            SongEditorChild childForm = CreateSongEditorChildForm(sng, null);
-
-            childForm.Text = childForm.Song.Title + @" " + ++_childFormNumber;
+            CreateSongEditorChildForm(sng, null);
         }
 
         /// <summary>
@@ -152,7 +166,15 @@ namespace PraiseBase.Presenter.Editor
                 string fileName = openFileDialog.FileName;
                 _fileBoxInitialDir = Path.GetDirectoryName(fileName);
                 _fileOpenBoxFilterIndex = openFileDialog.FilterIndex;
-                OpenSong(fileName);
+
+                ISongFilePlugin plugin = null;
+                var  plugins = GetOpenFilePlugins();
+                if (_fileOpenBoxFilterIndex > 1 && _fileOpenBoxFilterIndex  <= plugins.Count + 1)
+                {
+                    plugin = plugins[_fileOpenBoxFilterIndex - 2];
+                }
+
+                OpenSong(fileName, plugin);
             }
         }
 
@@ -160,7 +182,8 @@ namespace PraiseBase.Presenter.Editor
         /// Opens a new song in a song editor child window
         /// </summary>
         /// <param name="fileName"></param>
-        public void OpenSong(string fileName)
+        /// <param name="plugin"></param>
+        public void OpenSong(string fileName, ISongFilePlugin plugin = null)
         {
             for (int i = 0; i < MdiChildren.Count(); i++)
             {
@@ -177,23 +200,24 @@ namespace PraiseBase.Presenter.Editor
                 }
             }
 
-            Song sng;
             try
             {
-                sng = SongFilePluginFactory.Create(fileName).Load(fileName);
+                if (plugin == null)
+                {
+                    plugin = SongFilePluginFactory.Create(fileName);
+                }
+                var sng = plugin.Load(fileName);
+
+                CreateSongEditorChildForm(sng, fileName);
             }
             catch (NotImplementedException)
             {
                 MessageBox.Show(StringResources.SongFormatNotSupported, Text, MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
             }
             catch (Exception e)
             {
                 MessageBox.Show(StringResources.SongFileHasErrors + @" (" + e.Message + @")!", Text, MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
             }
-
-            CreateSongEditorChildForm(sng, fileName);
         }
 
         /// <summary>
@@ -202,7 +226,7 @@ namespace PraiseBase.Presenter.Editor
         /// <param name="sng">Song</param>
         /// <param name="fileName">File name, may be null</param>
         /// <returns></returns>
-        private SongEditorChild CreateSongEditorChildForm(Song sng, String fileName)
+        private void CreateSongEditorChildForm(Song sng, String fileName)
         {
             int hashCode = sng.GetHashCode();
             SongEditorChild childForm = new SongEditorChild(_settings, _imgManager, sng)
@@ -217,7 +241,11 @@ namespace PraiseBase.Presenter.Editor
             // Se status
             SetStatus(string.Format(StringResources.LoadedSong, sng.Title));
 
-            return childForm;
+            // Set window title if new song
+            if (fileName == null)
+            {
+                childForm.SetWindowTitle(sng.Title + @" " + ++_childFormNumber);
+            }
         }
 
         /// <summary>
@@ -230,11 +258,12 @@ namespace PraiseBase.Presenter.Editor
             if (ActiveMdiChild != null)
             {
                 SongEditorChild window = ((SongEditorChild)ActiveMdiChild);
+                Song sng = window.Song;
                 window.ValidateChildren();
-                string fileName = Save(window.Song, ((EditorChildMetaData) window.Tag).Filename);
+                string fileName = Save(sng, ((EditorChildMetaData)window.Tag).Filename);
                 if (fileName != null)
                 {
-                    int hashCode = window.Song.GetHashCode();
+                    int hashCode = sng.GetHashCode();
                     ((EditorChildMetaData)window.Tag).HashCode = hashCode;
                     ((EditorChildMetaData)window.Tag).Filename = fileName;
                 }
@@ -251,11 +280,12 @@ namespace PraiseBase.Presenter.Editor
             if (ActiveMdiChild != null)
             {
                 SongEditorChild window = ((SongEditorChild)ActiveMdiChild);
+                Song sng = window.Song;
                 window.ValidateChildren();
-                string fileName = SaveAs(window.Song, null);
+                string fileName = SaveAs(sng, null);
                 if (fileName != null)
                 {
-                    int hashCode = window.Song.GetHashCode();
+                    int hashCode = sng.GetHashCode();
                     ((EditorChildMetaData)window.Tag).HashCode = hashCode;
                     ((EditorChildMetaData)window.Tag).Filename = fileName;
                 }
@@ -327,17 +357,19 @@ namespace PraiseBase.Presenter.Editor
             SongEditorChild window = ((SongEditorChild)sender);
 
             String filename = ((EditorChildMetaData)window.Tag).Filename;
+            Song sng = window.Song;
 
             int storedHashCode = ((EditorChildMetaData)window.Tag).HashCode;
-            int songHashCode = window.Song.GetHashCode();
+            int songHashCode = sng.GetHashCode();
             if (storedHashCode != songHashCode)
             {
-                DialogResult dlg = MessageBox.Show(string.Format(StringResources.SaveChangesMadeToTheSong, window.Song.Title),
+                DialogResult dlg = MessageBox.Show(
+                    string.Format(StringResources.SaveChangesMadeToTheSong, sng.Title),
                     StringResources.SongEditor,
                     MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
                 if (dlg == DialogResult.Yes)
                 {
-                    Save(window.Song, ((EditorChildMetaData)window.Tag).Filename);
+                    Save(sng, ((EditorChildMetaData)window.Tag).Filename);
                 }
                 else if (dlg == DialogResult.Cancel)
                 {
@@ -346,12 +378,12 @@ namespace PraiseBase.Presenter.Editor
             }
             else if (filename != null && !File.Exists(filename))
             {
-                DialogResult dlg = MessageBox.Show(string.Format(StringResources.SaveChangesMadeToTheSong, window.Song.Title),
+                DialogResult dlg = MessageBox.Show(string.Format(StringResources.SaveChangesMadeToTheSong, sng.Title),
                     StringResources.SongEditor,
                     MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
                 if (dlg == DialogResult.Yes)
                 {
-                    SaveAs(window.Song, ((EditorChildMetaData)window.Tag).Filename);
+                    SaveAs(sng, ((EditorChildMetaData)window.Tag).Filename);
                 }
                 else if (dlg == DialogResult.Cancel)
                 {
@@ -368,23 +400,29 @@ namespace PraiseBase.Presenter.Editor
         {
             String exts = String.Empty;
             String fltr = String.Empty;
-            foreach (var t in SongFilePluginFactory.GetPlugins())
+            foreach (var t in GetOpenFilePlugins())
             {
-                if (t.IsWritingSupported())
+                if (exts != String.Empty)
                 {
-                    if (exts != String.Empty)
-                    {
-                        exts += ";";
-                    }
-                    exts += "*" + t.GetFileExtension();
-                    if (fltr != string.Empty)
-                    {
-                        fltr += "|";
-                    }
-                    fltr += t.GetFileTypeDescription() + " (*" + t.GetFileExtension() + ")|*" + t.GetFileExtension();
+                    exts += ";";
                 }
+                exts += "*" + t.GetFileExtension();
+                if (fltr != string.Empty)
+                {
+                    fltr += "|";
+                }
+                fltr += t.GetFileTypeDescription() + " (*" + t.GetFileExtension() + ")|*" + t.GetFileExtension();
             }
             return "Alle Lieddateien (" + exts + ")|" + exts + "|" + fltr + "|Alle Dateien (*.*)|*.*";
+        }
+
+        /// <summary>
+        /// Get song file plugins which can open files
+        /// </summary>
+        /// <returns></returns>
+        private static List<ISongFilePlugin> GetOpenFilePlugins()
+        {
+            return SongFilePluginFactory.GetPlugins().Where(t => t.IsWritingSupported()).ToList();
         }
 
         /// <summary>
@@ -500,43 +538,37 @@ namespace PraiseBase.Presenter.Editor
         {
             if (control is ContainerControl)
                 DoCopy(((ContainerControl)control).ActiveControl);
-            else if (control is TextBox)
+            else if (control.GetType() == typeof(TextBox))
                 ((TextBox)control).Copy();
-            else if (control is RichTextBox)
+            else if (control.GetType() == typeof(RichTextBox))
                 ((RichTextBox)control).Copy();
-            else
-                throw new NotSupportedException("The selected control can't copy!");
         }
 
         private void DoCut(Control control)
         {
             if (control is ContainerControl)
                 DoCut(((ContainerControl)control).ActiveControl);
-            else if (control is TextBox)
+            else if (control.GetType() == typeof(TextBox))
                 ((TextBox)control).Cut();
-            else if (control is RichTextBox)
+            else if (control.GetType() == typeof(RichTextBox))
                 ((RichTextBox)control).Cut();
-            else
-                throw new NotSupportedException("The selected control can't cut!");
         }
 
         private void DoPaste(Control control)
         {
             if (control is ContainerControl)
                 DoPaste(((ContainerControl)control).ActiveControl);
-            else if (control is TextBox)
+            else if (control.GetType() == typeof(TextBox))
                 ((TextBox)control).Paste();
-            else if (control is RichTextBox)
+            else if (control.GetType() == typeof(RichTextBox))
                 ((RichTextBox)control).Paste();
-            else
-                throw new NotSupportedException("The selected control can't paste!");
         }
 
         private void CutToolStripMenuItem_Click(object sender, EventArgs e)
         {
             if (ActiveMdiChild != null)
             {
-                DoCut(((SongEditorChild)ActiveMdiChild).ActiveControl);
+                DoCut(ActiveMdiChild.ActiveControl);
             }
         }
 
@@ -544,7 +576,7 @@ namespace PraiseBase.Presenter.Editor
         {
             if (ActiveMdiChild != null)
             {
-                DoCopy(((SongEditorChild)ActiveMdiChild).ActiveControl);
+                DoCopy(ActiveMdiChild.ActiveControl);
             }
         }
 
@@ -552,7 +584,7 @@ namespace PraiseBase.Presenter.Editor
         {
             if (ActiveMdiChild != null)
             {
-                DoPaste(((SongEditorChild)ActiveMdiChild).ActiveControl);
+                DoPaste(ActiveMdiChild.ActiveControl);
             }
         }
 
@@ -644,34 +676,73 @@ namespace PraiseBase.Presenter.Editor
 
         private void selectAllToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (ActiveMdiChild != null)
+            if (ActiveMdiChild != null && ActiveMdiChild.ActiveControl != null)
             {
-                if (((SongEditorChild)ActiveMdiChild).ActiveControl.GetType() == typeof(TextBox))
-                {
-                    ((TextBox)((SongEditorChild)ActiveMdiChild).ActiveControl).SelectAll();
-                }
+                DoSelectAll(ActiveMdiChild.ActiveControl);
+            }
+        }
+
+        private void DoSelectAll(Control control)
+        {
+            if (control is ContainerControl)
+            {
+                DoSelectAll(((ContainerControl)control).ActiveControl);
+            }
+            else if (control.GetType() == typeof(TextBox))
+            {
+                ((TextBox)control).SelectAll();
+            }
+            else if (control.GetType() == typeof(RichTextBox))
+            {
+                ((RichTextBox)control).SelectAll();
             }
         }
 
         private void undoToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (ActiveMdiChild != null)
+            if (ActiveMdiChild != null && ActiveMdiChild.ActiveControl != null)
             {
-                if (((SongEditorChild)ActiveMdiChild).ActiveControl.GetType() == typeof(TextBox))
-                {
-                    ((TextBox)((SongEditorChild)ActiveMdiChild).ActiveControl).Undo();
-                }
+                DoUndo(ActiveMdiChild.ActiveControl);
+            }
+        }
+
+        private void DoUndo(Control control)
+        {
+            if (control is ContainerControl)
+            {
+                DoUndo(((ContainerControl)control).ActiveControl);
+            }
+            else if (control.GetType() == typeof(TextBox))
+            {
+                ((TextBox)control).Undo();
+            }
+            else if (control.GetType() == typeof(RichTextBox))
+            {
+                ((RichTextBox)control).Undo();
             }
         }
 
         private void redoToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (ActiveMdiChild != null)
+            if (ActiveMdiChild != null && ActiveMdiChild.ActiveControl != null)
             {
-                if (((SongEditorChild)ActiveMdiChild).ActiveControl.GetType() == typeof(TextBox))
-                {
-                    ((TextBox)((SongEditorChild)ActiveMdiChild).ActiveControl).ClearUndo();
-                }
+                DoRedo(ActiveMdiChild.ActiveControl);
+            }
+        }
+
+        private void DoRedo(Control control)
+        {
+            if (control is ContainerControl)
+            {
+                DoRedo(((ContainerControl)control).ActiveControl);
+            }
+            else if (control.GetType() == typeof(TextBox))
+            {
+                ((TextBox)control).ClearUndo();
+            }
+            else if (control.GetType() == typeof(RichTextBox))
+            {
+                ((RichTextBox)control).ClearUndo();
             }
         }
 
@@ -679,7 +750,7 @@ namespace PraiseBase.Presenter.Editor
         {
             if (ActiveMdiChild != null)
             {
-                ((SongEditorChild)ActiveMdiChild).Close();
+                ActiveMdiChild.Close();
             }
         }
 

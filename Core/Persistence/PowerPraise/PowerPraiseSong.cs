@@ -1,26 +1,13 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Drawing;
+using System.Linq;
 using PraiseBase.Presenter.Model;
+using PraiseBase.Presenter.Model.Song;
 
 namespace PraiseBase.Presenter.Persistence.PowerPraise
 {
     public class PowerPraiseSong : ISongFile
     {
-        public enum CopyrightPosition
-        {
-            FirstSlide,
-            LastSlide,
-            None
-        }
-
-        public PowerPraiseSong()
-        {
-            Parts = new List<PowerPraiseSongPart>();
-            Order = new List<PowerPraiseSongPart>();
-            CopyrightText = new List<string>();
-            BackgroundImages = new List<string>();
-        }
+        #region Fields
 
         /// <summary>
         ///     Title
@@ -40,22 +27,17 @@ namespace PraiseBase.Presenter.Persistence.PowerPraise
         /// <summary>
         ///     Song text parts
         /// </summary>
-        public List<PowerPraiseSongPart> Parts { get; private set; }
+        public ComparableOrderedList<Part> Parts { get; private set; }
 
         /// <summary>
         ///     Song text order
         /// </summary>
-        public List<PowerPraiseSongPart> Order { get; private set; }
+        public ComparableOrderedList<Part> Order { get; private set; }
 
         /// <summary>
         ///     Copyright text
         /// </summary>
-        public List<string> CopyrightText { get; private set; }
-
-        /// <summary>
-        ///     Position of the copyright text
-        /// </summary>
-        public CopyrightPosition CopyrightTextPosition { get; set; }
+        public ComparableList<string> CopyrightText { get; private set; }
 
         /// <summary>
         ///     Source text
@@ -63,172 +45,219 @@ namespace PraiseBase.Presenter.Persistence.PowerPraise
         public string SourceText { get; set; }
 
         /// <summary>
-        ///     Set to true if the source text should be displayed
+        ///     Formatting (Fonts, Colors, Margins, Effects, ...)
         /// </summary>
-        public bool SourceTextEnabled { get; set; }
+        public PowerPraiseSongFormatting Formatting { get; set; }
 
-        /// <summary>
-        ///     Font, color, outline and shadow of the main text
-        /// </summary>
-        public FontFormatting MainTextFontFormatting { get; set; }
+        #endregion
 
-        /// <summary>
-        ///     Font, color, outline and shadow of the tanslation text
-        /// </summary>
-        public FontFormatting TranslationTextFontFormatting { get; set; }
-
-        /// <summary>
-        ///     Font, color, outline and shadow of the copyright text
-        /// </summary>
-        public FontFormatting CopyrightTextFontFormatting { get; set; }
-
-        /// <summary>
-        ///     Font, color, outline and shadow of the source text
-        /// </summary>
-        public FontFormatting SourceTextFontFormatting { get; set; }
-
-        /// <summary>
-        ///     True of the text should be outlined
-        /// </summary>
-        public OutlineFormatting TextOutlineFormatting { get; set; }
-
-        /// <summary>
-        ///     True if the text should have a shadow
-        /// </summary>
-        public ShadowFormatting TextShadowFormatting { get; set; }
-
-        /// <summary>
-        ///     Background image paths (relative)
-        /// </summary>
-        public List<string> BackgroundImages { get; private set; }
-
-        /// <summary>
-        ///     Main text line spacing
-        /// </summary>
-        public int MainLineSpacing { get; set; }
-
-        /// <summary>
-        ///     Translation text line spacing
-        /// </summary>
-        public int TranslationLineSpacing { get; set; }
-
-        /// <summary>
-        ///     Text orientation
-        /// </summary>
-        public TextOrientation TextOrientation { get; set; }
-
-        /// <summary>
-        ///     Position of the translation
-        /// </summary>
-        public TranslationPosition TranslationTextPosition { get; set; }
-
-        /// <summary>
-        ///     Borders
-        /// </summary>
-        public TextBorders Borders { get; set; }
-
-        /// <summary>
-        ///     Font formatting (Font, Color, Outline, Shadow)
-        /// </summary>
-        public struct FontFormatting
+        public PowerPraiseSong()
         {
-            /// <summary>
-            ///     Text font
-            /// </summary>
-            public Font Font { get; set; }
+            Parts = new ComparableOrderedList<Part>();
+            Order = new ComparableOrderedList<Part>();
+            CopyrightText = new ComparableList<string>();
+            Formatting = new PowerPraiseSongFormatting();
+        }
 
-            /// <summary>
-            ///     Text color
-            /// </summary>
-            public Color Color { get; set; }
-
-            /// <summary>
-            ///     Outline width (percent)
-            /// </summary>
-            public int OutlineWidth { get; set; }
-
-            /// <summary>
-            ///     Shadow distance (percent)
-            /// </summary>
-            public int ShadowDistance { get; set; }
+        public string GetTitle()
+        {
+            return Title;
         }
 
         /// <summary>
-        ///     Outline formatting
+        ///     Returns the number of background images
         /// </summary>
-        public struct OutlineFormatting
+        public int GetNumberOfBackgroundImages()
         {
-            /// <summary>
-            ///     Enabled
-            /// </summary>
-            public Boolean Enabled { get; set; }
-
-            /// <summary>
-            ///     Color
-            /// </summary>
-            public Color Color { get; set; }
+            return 
+                Parts.SelectMany(t => t.Slides)
+                    .Count(t1 => t1.Background != null && t1.Background.GetType() == typeof(ImageBackground));
         }
 
-        /// <summary>
-        ///     Shadow formatting
-        /// </summary>
-        public struct ShadowFormatting
+        #region Equality members
+
+        protected bool Equals(PowerPraiseSong other)
         {
-            /// <summary>
-            ///     Enabled
-            /// </summary>
-            public Boolean Enabled { get; set; }
-
-            /// <summary>
-            ///     Color
-            /// </summary>
-            public Color Color { get; set; }
-
-            /// <summary>
-            ///     Direction (0-359)
-            /// </summary>
-            public int Direction { get; set; }
+            return string.Equals(Title, other.Title) && string.Equals(Category, other.Category) && string.Equals(Language, other.Language) && Equals(Parts, other.Parts) && Equals(Order, other.Order) && Equals(CopyrightText, other.CopyrightText) && string.Equals(SourceText, other.SourceText) && Formatting.Equals(other.Formatting);
         }
 
-        /// <summary>
-        ///     Borders
-        /// </summary>
-        public struct TextBorders
+        public override bool Equals(object obj)
+        {
+            if (ReferenceEquals(null, obj)) return false;
+            if (ReferenceEquals(this, obj)) return true;
+            if (obj.GetType() != GetType()) return false;
+            return Equals((PowerPraiseSong) obj);
+        }
+
+        public override int GetHashCode()
+        {
+            unchecked
+            {
+                var hashCode = (Title != null ? Title.GetHashCode() : 0);
+                hashCode = (hashCode*397) ^ (Category != null ? Category.GetHashCode() : 0);
+                hashCode = (hashCode*397) ^ (Language != null ? Language.GetHashCode() : 0);
+                hashCode = (hashCode*397) ^ (Parts != null ? Parts.GetHashCode() : 0);
+                hashCode = (hashCode*397) ^ (Order != null ? Order.GetHashCode() : 0);
+                hashCode = (hashCode*397) ^ (CopyrightText != null ? CopyrightText.GetHashCode() : 0);
+                hashCode = (hashCode * 397) ^ (SourceText != null ? SourceText.GetHashCode() : 0);
+                hashCode = (hashCode*397) ^ Formatting.GetHashCode();
+                return hashCode;
+            }
+        }
+
+        #endregion
+
+        #region Object definitions
+
+        public class Part : ICloneable
         {
             /// <summary>
-            ///     Distance of text to left
+            ///     Caption
             /// </summary>
-            public int TextLeft { get; set; }
+            public string Caption { get; set; }
 
             /// <summary>
-            ///     Distance of text to top
+            ///     Slides
             /// </summary>
-            public int TextTop { get; set; }
+            public ComparableOrderedList<Slide> Slides { get; private set; }
+
+            public Part()
+            {
+                Slides = new ComparableOrderedList<Slide>();
+            }
 
             /// <summary>
-            ///     Distance of text to right
+            ///     Duplicates a slide and cuts it's text in half,
+            ///     assigning the first part to the original slide
+            ///     and the second part to the copy
             /// </summary>
-            public int TextRight { get; set; }
+            /// <param name="slideId">The slide index</param>
+            public void SplitSlide(int slideId)
+            {
+                var sld = (Slide)Slides[slideId].Clone();
 
-            /// <summary>
-            ///     Distance of text to bottom
-            /// </summary>
-            public int TextBottom { get; set; }
+                var totl = sld.Lines.Count;
+                var rem = totl / 2;
+                Slides[slideId].Lines.RemoveRange(0, rem);
+                sld.Lines.RemoveRange(rem, totl - rem);
 
-            /// <summary>
-            ///     Distance of copyright text to bottom
-            /// </summary>
-            public int CopyrightBottom { get; set; }
+                totl = sld.Translation.Count;
+                rem = totl / 2;
+                Slides[slideId].Translation.RemoveRange(0, rem);
+                sld.Translation.RemoveRange(rem, totl - rem);
 
-            /// <summary>
-            ///     Distance of source text to top
-            /// </summary>
-            public int SourceTop { get; set; }
+                Slides.Insert(slideId, sld);
+            }
 
-            /// <summary>
-            ///     Distance of source text to right
-            /// </summary>
-            public int SourceRight { get; set; }
+            public object Clone()
+            {
+                var p = new Part
+                {
+                    Caption = Caption,
+                };
+                foreach (var s in Slides)
+                {
+                    p.Slides.Add((Slide) s.Clone());
+                }
+                return p;
+            }
+
+            #region Equality members
+
+            protected bool Equals(Part other)
+            {
+                return string.Equals(Caption, other.Caption) && Equals(Slides, other.Slides);
+            }
+
+            public override bool Equals(object obj)
+            {
+                if (ReferenceEquals(null, obj)) return false;
+                if (ReferenceEquals(this, obj)) return true;
+                if (obj.GetType() != GetType()) return false;
+                return Equals((Part) obj);
+            }
+
+            public override int GetHashCode()
+            {
+                unchecked
+                {
+                    return ((Caption != null ? Caption.GetHashCode() : 0)*397) ^ (Slides != null ? Slides.GetHashCode() : 0);
+                }
+            }
+
+            #endregion
         }
+
+        public class Slide : ICloneable
+        {
+            /// <summary>
+            ///     Font size of the main text
+            /// </summary>
+            public int MainSize { get; set; }
+
+            /// <summary>
+            ///     Background number (starting from 0)
+            /// </summary>
+            public IBackground Background { get; set; }
+
+            /// <summary>
+            ///     Song text lines
+            /// </summary>
+            public ComparableList<string> Lines { get; private set; }
+
+            /// <summary>
+            ///     Translation text lines
+            /// </summary>
+            public ComparableList<string> Translation { get; private set; }
+
+            public Slide()
+            {
+                Lines = new ComparableList<string>();
+                Translation = new ComparableList<string>();
+            }
+
+            public object Clone()
+            {
+                var s = new Slide
+                {
+                    MainSize = MainSize,
+                    Background = Background
+                };
+                s.Lines.AddRange(Lines);
+                s.Translation.AddRange(Translation);
+                return s;
+            }
+
+            #region Equality members
+
+            protected bool Equals(Slide other)
+            {
+                return MainSize == other.MainSize && Equals(Background, other.Background) && Equals(Lines, other.Lines) && Equals(Translation, other.Translation);
+            }
+
+            public override bool Equals(object obj)
+            {
+                if (ReferenceEquals(null, obj)) return false;
+                if (ReferenceEquals(this, obj)) return true;
+                if (obj.GetType() != GetType()) return false;
+                return Equals((Slide) obj);
+            }
+
+            public override int GetHashCode()
+            {
+                unchecked
+                {
+                    var hashCode = MainSize;
+                    hashCode = (hashCode*397) ^ (Background != null ? Background.GetHashCode() : 0);
+                    hashCode = (hashCode*397) ^ (Lines != null ? Lines.GetHashCode() : 0);
+                    hashCode = (hashCode*397) ^ (Translation != null ? Translation.GetHashCode() : 0);
+                    return hashCode;
+                }
+            }
+
+            #endregion
+        }
+
+        #endregion
     }
 }

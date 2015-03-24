@@ -1,6 +1,4 @@
-﻿using PraiseBase.Presenter.Persistence;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using PraiseBase.Presenter.Model.Statistics;
 
 namespace PraiseBase.Presenter.Persistence
@@ -11,7 +9,7 @@ namespace PraiseBase.Presenter.Persistence
     ///This is a test class for StatisticsReaderTest and is intended
     ///to contain all StatisticsReaderTest Unit Tests
     ///</summary>
-    [TestClass()]
+    [TestClass]
     public class StatisticsReaderTest
     {
 
@@ -67,7 +65,7 @@ namespace PraiseBase.Presenter.Persistence
         /// <summary>
         ///A test for Read
         ///</summary>
-        [TestMethod()]
+        [TestMethod]
         public void ReadTest()
         {
             StatisticsReader target = new StatisticsReader();

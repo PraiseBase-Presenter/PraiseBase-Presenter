@@ -10,8 +10,7 @@ namespace PraiseBase.Presenter.Persistence.CCLI
             var sng = new Song
             {
                 // CCLI ID
-                CcliIdentifier = source.ID,
-                IsCCliIdentifierReadonly = true,
+                CcliIdentifier = source.CcliIdentifier,
 
                 // Title
                 Title = source.Title,
@@ -28,7 +27,7 @@ namespace PraiseBase.Presenter.Persistence.CCLI
             {
                 Name = source.Author
             };
-            sng.Author.Add(a);
+            sng.Authors.Add(a);
 
             // Themes
             sng.Themes.AddRange(source.Themes);

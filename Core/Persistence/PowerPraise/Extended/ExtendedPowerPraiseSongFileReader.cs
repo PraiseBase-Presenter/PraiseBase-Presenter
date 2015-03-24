@@ -21,7 +21,7 @@
  */
 
 using System;
-using System.Collections.Generic;
+using System.Linq;
 using System.Xml;
 using PraiseBase.Presenter.Model.Song;
 
@@ -41,7 +41,7 @@ namespace PraiseBase.Presenter.Persistence.PowerPraise.Extended
             var song = (ExtendedPowerPraiseSong) sng;
 
             // Comment
-            if (xmlRoot["general"]["comment"] != null)
+            if (xmlRoot["general"] != null && xmlRoot["general"]["comment"] != null)
             {
                 song.Comment = xmlRoot["general"]["comment"].InnerText;
             }
@@ -51,65 +51,75 @@ namespace PraiseBase.Presenter.Persistence.PowerPraise.Extended
             }
 
             // Quality issues
-            if (xmlRoot["general"]["qualityissues"] != null)
+            if (xmlRoot["general"] != null && xmlRoot["general"]["qualityissues"] != null)
             {
-                foreach (XmlElement elem in xmlRoot["general"]["qualityissues"])
-                {
-                    if (elem.Name == "issue")
-                    {
-                        foreach (
-                            SongQualityAssuranceIndicator i in Enum.GetValues(typeof (SongQualityAssuranceIndicator)))
-                        {
-                            if (elem.InnerText == Enum.GetName(typeof (SongQualityAssuranceIndicator), i))
-                            {
-                                song.QualityIssues.Add(i);
-                            }
-                        }
-                    }
-                }
+                ParseQualityIssues(song, xmlRoot["general"]["qualityissues"]);
             }
 
             // CCLI Song ID
-            if (xmlRoot["general"]["ccliNo"] != null)
+            if (xmlRoot["general"] != null && xmlRoot["general"]["ccliNo"] != null)
             {
-                song.CcliID = xmlRoot["general"]["ccliNo"].InnerText;
+                song.CcliIdentifier = xmlRoot["general"]["ccliNo"].InnerText;
             }
 
             // Author(s)
-            if (xmlRoot["general"]["author"] != null)
+            if (xmlRoot["general"] != null && xmlRoot["general"]["author"] != null)
             {
-                song.Author = parseAuthors(xmlRoot["general"]["author"].InnerText);
+                song.Author = ParseAuthors(xmlRoot["general"]["author"].InnerText);
             }
+
             // Publisher
-            if (xmlRoot["general"]["publisher"] != null)
+            if (xmlRoot["general"] != null && xmlRoot["general"]["publisher"] != null)
             {
                 song.Publisher = xmlRoot["general"]["publisher"].InnerText;
             }
+            
             // Rights management
-            if (xmlRoot["general"]["admin"] != null)
+            if (xmlRoot["general"] != null && xmlRoot["general"]["admin"] != null)
             {
                 song.RightsManagement = xmlRoot["general"]["admin"].InnerText;
             }
 
             // Guid
-            if (xmlRoot["general"]["guid"] != null)
+            if (xmlRoot["general"] != null && xmlRoot["general"]["guid"] != null)
             {
-                song.GUID = new Guid(xmlRoot["general"]["guid"].InnerText);
+                song.Guid = new Guid(xmlRoot["general"]["guid"].InnerText);
             }
         }
 
-        private List<SongAuthor> parseAuthors(String value)
+        private void ParseQualityIssues(ExtendedPowerPraiseSong song, XmlElement xmlElement)
         {
-            var list = new List<SongAuthor>();
-            var i = 0;
-            foreach (var s in value.Split(new[] {';'}, StringSplitOptions.RemoveEmptyEntries))
+            foreach (XmlElement elem in xmlElement)
             {
-                var author = new SongAuthor();
-                author.Name = s.Trim();
-                author.Type = (i++ == 0) ? SongAuthorType.Words : SongAuthorType.Music;
-                list.Add(author);
+                if (elem.Name == "issue")
+                {
+                    foreach (
+                        SongQualityAssuranceIndicator i in Enum.GetValues(typeof(SongQualityAssuranceIndicator)))
+                    {
+                        if (elem.InnerText == Enum.GetName(typeof(SongQualityAssuranceIndicator), i))
+                        {
+                            song.QualityIssues.Add(i);
+                        }
+                    }
+                }
             }
+        }
+
+        private SongAuthors ParseAuthors(String value)
+        {
+            var list = new SongAuthors();
+            var i = 0;
+            list.AddRange(value.Split(new[] {';'}, StringSplitOptions.RemoveEmptyEntries).Select(s => ParseAuthorFromString(i++, s)));
             return list;
+        }
+
+        private static SongAuthor ParseAuthorFromString(int i, string s)
+        {
+            return new SongAuthor
+            {
+                Name = s.Trim(),
+                Type = (i == 0) ? SongAuthorType.Words : SongAuthorType.Music
+            };
         }
     }
 }

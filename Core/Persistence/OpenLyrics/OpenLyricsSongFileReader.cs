@@ -41,7 +41,7 @@ namespace PraiseBase.Presenter.Persistence.OpenLyrics
             var xmlRoot = xmlDoc.DocumentElement;
 
             // Check for correct root node and version
-            if (xmlRoot.Name != XmlRootNodeName || xmlRoot.GetAttribute("version") != SupportedFileFormatVersion)
+            if (xmlRoot == null || xmlRoot.Name != XmlRootNodeName || xmlRoot.GetAttribute("version") != SupportedFileFormatVersion)
             {
                 throw new InvalidSongSourceFileException();
             }
@@ -86,7 +86,7 @@ namespace PraiseBase.Presenter.Persistence.OpenLyrics
             // Application the song was modified in
             if (xmlRoot["properties"]["ccliNo"] != null)
             {
-                sng.CcliID = xmlRoot["properties"]["ccliNo"].InnerText;
+                sng.CcliIdentifier = xmlRoot["properties"]["ccliNo"].InnerText;
             }
 
             // Application the song was modified in
@@ -125,49 +125,7 @@ namespace PraiseBase.Presenter.Persistence.OpenLyrics
 
             foreach (XmlNode verseNode in xmlRoot["lyrics"])
             {
-                if (verseNode.Name == "verse")
-                {
-                    var verse = new OpenLyricsSongVerse();
-                    if (verseNode.Attributes["name"] != null)
-                    {
-                        verse.Name = verseNode.Attributes["name"].InnerText;
-                    }
-                    if (verseNode.Attributes["lang"] != null)
-                    {
-                        verse.Language = verseNode.Attributes["lang"].InnerText;
-                    }
-
-                    foreach (XmlNode linesNode in verseNode.ChildNodes)
-                    {
-                        if (linesNode.Name == "lines")
-                        {
-                            var line = new OpenLyricsSongLines();
-                            if (linesNode.Attributes["part"] != null)
-                            {
-                                line.Part = linesNode.Attributes["part"].InnerText;
-                            }
-                            var lineText = string.Empty;
-                            foreach (XmlNode l in linesNode)
-                            {
-                                if (l.NodeType == XmlNodeType.Text)
-                                {
-                                    lineText += l.InnerText;
-                                }
-                                else if (l.NodeType == XmlNodeType.Element && l.Name == "br")
-                                {
-                                    line.Text.Add(lineText);
-                                    lineText = string.Empty;
-                                }
-                            }
-                            line.Text.Add(lineText);
-                            verse.Lines.Add(line);
-                        }
-                    }
-                    if (verse.Lines.Count > 0)
-                    {
-                        sng.Verses.Add(verse);
-                    }
-                }
+                ParseLyrics(verseNode, sng);
             }
 
             // Check if at leas one part exists
@@ -177,6 +135,53 @@ namespace PraiseBase.Presenter.Persistence.OpenLyrics
             }
 
             return sng;
+        }
+
+        private void ParseLyrics(XmlNode verseNode, OpenLyricsSong sng)
+        {
+            if (verseNode.Name == "verse")
+            {
+                var verse = new OpenLyricsSong.Verse();
+                if (verseNode.Attributes != null && verseNode.Attributes["name"] != null)
+                {
+                    verse.Name = verseNode.Attributes["name"].InnerText;
+                }
+                if (verseNode.Attributes != null && verseNode.Attributes["lang"] != null)
+                {
+                    verse.Language = verseNode.Attributes["lang"].InnerText;
+                }
+
+                foreach (XmlNode linesNode in verseNode.ChildNodes)
+                {
+                    if (linesNode.Name == "lines")
+                    {
+                        var line = new OpenLyricsSong.TextLines();
+                        if (linesNode.Attributes != null && linesNode.Attributes["part"] != null)
+                        {
+                            line.Part = linesNode.Attributes["part"].InnerText;
+                        }
+                        var lineText = string.Empty;
+                        foreach (XmlNode l in linesNode)
+                        {
+                            if (l.NodeType == XmlNodeType.Text)
+                            {
+                                lineText += l.InnerText;
+                            }
+                            else if (l.NodeType == XmlNodeType.Element && l.Name == "br")
+                            {
+                                line.Text.Add(lineText);
+                                lineText = string.Empty;
+                            }
+                        }
+                        line.Text.Add(lineText);
+                        verse.Lines.Add(line);
+                    }
+                }
+                if (verse.Lines.Count > 0)
+                {
+                    sng.Verses.Add(verse);
+                }
+            }
         }
 
         /// <summary>

@@ -37,37 +37,55 @@ namespace PraiseBase.Presenter.Editor
 {
     public partial class SongEditorChild : Form
     {
+        #region Public fields
+
+        /// <summary>
+        /// Gets the song being edited
+        /// </summary>
         public Song Song { get; protected set; }
+
+        #endregion
+
+        #region Internal variables
 
         /// <summary>
         /// Index of currently selected part
         /// </summary>
-        private int _currentPartId;
+        protected int CurrentPartId;
 
         /// <summary>
         /// Index of currently selected slide
         /// </summary>
-        private int _currentSlideId;
+        protected int CurrentSlideId;
 
         /// <summary>
         /// Settings instance holder
         /// </summary>
-        private readonly Settings _settings;
+        protected readonly Settings Settings;
 
         /// <summary>
         /// Song template mapper instance
         /// </summary>
-        readonly SongTemplateMapper _templateMapper;
+        protected SongTemplateMapper TemplateMapper;
 
-        private readonly ImageManager _imgManager;
+        /// <summary>
+        /// Image manager instance
+        /// </summary>
+        protected readonly ImageManager ImgManager;
 
-        private readonly ISlideTextFormattingMapper<Song> _previewFormattingMapper = new SongSlideTextFormattingMapper();
+        /// <summary>
+        /// Slide text formatting mapper
+        /// </summary>
+        protected readonly ISlideTextFormattingMapper<Song> PreviewFormattingMapper = new SongSlideTextFormattingMapper();
+
+        #endregion
 
         public SongEditorChild(Settings settings, ImageManager imgManager, Song sng)
         {
-            _settings = settings;
-            _imgManager = imgManager;
-            _templateMapper = new SongTemplateMapper(_settings);
+            Settings = settings;
+            ImgManager = imgManager;
+            TemplateMapper = new SongTemplateMapper(Settings);
+
             Song = sng;
 
             InitializeComponent();
@@ -78,23 +96,17 @@ namespace PraiseBase.Presenter.Editor
             WindowState = FormWindowState.Maximized;
 
             // Set window title
-            Text = Song.Title;
+            SetWindowTitle(Song.Title);
 
             // Data bindings
             textBoxSongTitle.DataBindings.Add("Text", Song, "Title");
 
             textBoxCCLISongID.DataBindings.Add("Text", Song, "CcliIdentifier");
-            if (Song.IsCCliIdentifierReadonly)
-            {
-                textBoxCCLISongID.ReadOnly = true;
-            }
             textBoxCopyright.DataBindings.Add("Text", Song, "Copyright");
             textBoxRightsManagement.DataBindings.Add("Text", Song, "RightsManagement");
             textBoxPublisher.DataBindings.Add("Text", Song, "Publisher");
 
-            labelGUID.Text = Song.Guid != Guid.Empty ? Song.Guid.ToString() : "";
-
-            textBoxAuthors.Text = Song.Author.ToString();
+            textBoxAuthors.Text = Song.Authors.ToString();
             textBoxSongbooks.Text = Song.SongBooks.ToString();
 
             PopulateTree();
@@ -109,6 +121,11 @@ namespace PraiseBase.Presenter.Editor
 
             // Preview
             PreviewSlide();
+        }
+
+        public void SetWindowTitle(string title)
+        {
+            Text = title;
         }
 
         private void PopulateQa()
@@ -126,7 +143,7 @@ namespace PraiseBase.Presenter.Editor
             comboBoxLanguage.Text = Song.Language;
             comboBoxLanguage.AutoCompleteMode = AutoCompleteMode.Suggest;
             comboBoxLanguage.AutoCompleteSource = AutoCompleteSource.ListItems;
-            foreach (string str in _settings.Languages)
+            foreach (string str in Settings.Languages)
             {
                 comboBoxLanguage.Items.Add(str);
             }
@@ -135,7 +152,7 @@ namespace PraiseBase.Presenter.Editor
         private void PopulateTags()
         {
             checkedListBoxTags.Items.Clear();
-            foreach (string str in _settings.Tags)
+            foreach (string str in Settings.Tags)
             {
                 if (Song.Themes.Contains(str))
                     checkedListBoxTags.Items.Add(str, true);
@@ -146,7 +163,7 @@ namespace PraiseBase.Presenter.Editor
 
         private void PopulatePartList()
         {
-            foreach (string str in _settings.SongParts)
+            foreach (string str in Settings.SongParts)
             {
                 ToolStripMenuItem tItem = new ToolStripMenuItem(str);
                 tItem.Click += partAddMenu_click;
@@ -276,9 +293,9 @@ namespace PraiseBase.Presenter.Editor
             }
 
             if (partId < 0)
-                partId = _currentPartId;
+                partId = CurrentPartId;
             if (slideId < 0)
-                slideId = _currentSlideId;
+                slideId = CurrentSlideId;
 
             if (partId >= Song.Parts.Count)
                 partId = Song.Parts.Count - 1;
@@ -295,15 +312,15 @@ namespace PraiseBase.Presenter.Editor
             textBoxSongTranslation.DataBindings.Clear();
             textBoxSongTranslation.DataBindings.Add("Text", sld, "TranslationText");
 
-            _currentPartId = partId;
-            _currentSlideId = slideId;
+            CurrentPartId = partId;
+            CurrentSlideId = slideId;
 
             PreviewSlide();
         }
 
         private void AddSongPartUpdateTree(string caption)
         {
-            var newPart = _templateMapper.AddSongPart(Song, caption);
+            var newPart = TemplateMapper.AddSongPart(Song, caption);
             Song.PartSequence.Add(newPart);
             PopulateTree();
             treeViewContents.SelectedNode = treeViewContents.Nodes[treeViewContents.Nodes.Count - 1].LastNode;
@@ -317,9 +334,9 @@ namespace PraiseBase.Presenter.Editor
         [SuppressMessage("ReSharper", "UnusedParameter.Local")]
         private void buttonAddNewSlide_Click(object sender, EventArgs e)
         {
-            _templateMapper.AddSongSlide(Song.Parts[_currentPartId]);
+            TemplateMapper.AddSongSlide(Song.Parts[CurrentPartId]);
             PopulateTree();
-            treeViewContents.SelectedNode = treeViewContents.Nodes[_currentPartId].LastNode;
+            treeViewContents.SelectedNode = treeViewContents.Nodes[CurrentPartId].LastNode;
         }
 
         private void buttonDelItem_Click(object sender, EventArgs e)
@@ -416,16 +433,16 @@ namespace PraiseBase.Presenter.Editor
         [SuppressMessage("ReSharper", "UnusedParameter.Local")]
         private void buttonDelSlide_Click(object sender, EventArgs e)
         {
-            if (Song.Parts[_currentPartId].Slides.Count > 1)
+            if (Song.Parts[CurrentPartId].Slides.Count > 1)
             {
                 if (MessageBox.Show(StringResources.ReallyDeleteSlide, StringResources.SongEditor, 
                     MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                 {
                     int slideId = treeViewContents.SelectedNode.Index;
-                    Song.Parts[_currentPartId].Slides.RemoveAt(slideId);
+                    Song.Parts[CurrentPartId].Slides.RemoveAt(slideId);
                     PopulateTree();
-                    _currentSlideId = Math.Max(0, slideId - 1);
-                    treeViewContents.SelectedNode = treeViewContents.Nodes[_currentPartId].Nodes[_currentSlideId];
+                    CurrentSlideId = Math.Max(0, slideId - 1);
+                    treeViewContents.SelectedNode = treeViewContents.Nodes[CurrentPartId].Nodes[CurrentSlideId];
                 }
             }
             else
@@ -466,17 +483,17 @@ namespace PraiseBase.Presenter.Editor
 
         private void buttonSlideDuplicate_Click(object sender, EventArgs e)
         {
-            Song.Parts[_currentPartId].Slides.Duplicate(_currentSlideId);
+            Song.Parts[CurrentPartId].Slides.Duplicate(CurrentSlideId);
             PopulateTree();
-            treeViewContents.SelectedNode = treeViewContents.Nodes[_currentPartId].Nodes[_currentSlideId];
+            treeViewContents.SelectedNode = treeViewContents.Nodes[CurrentPartId].Nodes[CurrentSlideId];
         }
 
         [SuppressMessage("ReSharper", "UnusedParameter.Local")]
         private void buttonSlideSeparate_Click(object sender, EventArgs e)
         {
-            Song.Parts[_currentPartId].Slides.Split(_currentSlideId);
+            Song.Parts[CurrentPartId].Slides.Split(CurrentSlideId);
             PopulateTree();
-            treeViewContents.SelectedNode = treeViewContents.Nodes[_currentPartId].Nodes[_currentSlideId];
+            treeViewContents.SelectedNode = treeViewContents.Nodes[CurrentPartId].Nodes[CurrentSlideId];
         }
 
         private void comboBoxLanguage_Enter(object sender, EventArgs e)
@@ -498,9 +515,9 @@ namespace PraiseBase.Presenter.Editor
 
         private void buttonSlideBackground_Click(object sender, EventArgs e)
         {
-            ImageDialog imd = new ImageDialog(_imgManager)
+            ImageDialog imd = new ImageDialog(ImgManager)
             {
-                Background = Song.Parts[_currentPartId].Slides[_currentSlideId].Background
+                Background = Song.Parts[CurrentPartId].Slides[CurrentSlideId].Background
             };
 
             if (Song.GetNumberOfBackgroundImages() == 0)
@@ -524,7 +541,7 @@ namespace PraiseBase.Presenter.Editor
                     }
                     else
                     {
-                        Song.Parts[_currentPartId].Slides[_currentSlideId].Background = imd.Background;
+                        Song.Parts[CurrentPartId].Slides[CurrentSlideId].Background = imd.Background;
                     }
                 }
                 else
@@ -535,13 +552,13 @@ namespace PraiseBase.Presenter.Editor
                         {
                             foreach (SongSlide t1 in t.Slides)
                             {
-                                t1.Background = _templateMapper.GetDefaultBackground();
+                                t1.Background = TemplateMapper.GetDefaultBackground();
                             }
                         }
                     }
                     else
                     {
-                        Song.Parts[_currentPartId].Slides[_currentSlideId].Background = _templateMapper.GetDefaultBackground(); 
+                        Song.Parts[CurrentPartId].Slides[CurrentSlideId].Background = TemplateMapper.GetDefaultBackground(); 
                     }
                 }
                 PreviewSlide();
@@ -568,18 +585,23 @@ namespace PraiseBase.Presenter.Editor
 
         private void PreviewSlide()
         {
-            SongSlide slide = (SongSlide)Song.Parts[_currentPartId].Slides[_currentSlideId].Clone();
-            slide.Text = textBoxSongText.Text;
-            slide.TranslationText = textBoxSongTranslation.Text;
+            pictureBoxPreview.Image = PreviewSlide(Song, textBoxSongText.Text, textBoxSongTranslation.Text);
+        }
+
+        protected Image PreviewSlide(Song sng, string currentText, string currentTranslationText)
+        {
+            SongSlide slide = (SongSlide) sng.Parts[CurrentPartId].Slides[CurrentSlideId].Clone();
+            slide.Text = currentText;
+            slide.TranslationText = currentTranslationText;
             SlideTextFormatting slideFormatting = new SlideTextFormatting();
 
-            _previewFormattingMapper.Map(Song, ref slideFormatting);
+            PreviewFormattingMapper.Map(sng, ref slideFormatting);
 
             // Disabled for performance
             slideFormatting.OutlineEnabled = false;
             slideFormatting.SmoothShadow = false;
 
-            slideFormatting.ScaleFontSize = _settings.ProjectionFontScaling;
+            slideFormatting.ScaleFontSize = Settings.ProjectionFontScaling;
             slideFormatting.SmoothShadow = false;
 
             TextLayer sl = new TextLayer(slideFormatting)
@@ -588,10 +610,10 @@ namespace PraiseBase.Presenter.Editor
                 SubText = slide.Translation.ToArray()
             };
 
-            ImageLayer il = new ImageLayer(_settings.ProjectionBackColor);
+            ImageLayer il = new ImageLayer(Settings.ProjectionBackColor);
 
-            IBackground bg = Song.Parts[_currentPartId].Slides[_currentSlideId].Background;
-            il.Image = _imgManager.GetImage(bg);
+            IBackground bg = sng.Parts[CurrentPartId].Slides[CurrentSlideId].Background;
+            il.Image = ImgManager.GetImage(bg);
 
             var bmp = new Bitmap(1024, 768);
             Graphics gr = Graphics.FromImage(bmp);
@@ -601,7 +623,7 @@ namespace PraiseBase.Presenter.Editor
             il.WriteOut(gr, null);
             sl.WriteOut(gr, null);
 
-            pictureBoxPreview.Image = bmp;
+            return bmp;
         }
 
         private void neueFolieToolStripMenuItem_Click(object sender, EventArgs e)
@@ -719,7 +741,7 @@ namespace PraiseBase.Presenter.Editor
 
         private void EditorChild_Shown(object sender, EventArgs e)
         {
-            if (textBoxSongTitle.Text == _settings.SongDefaultName)
+            if (textBoxSongTitle.Text == Settings.SongDefaultName)
             {
                 textBoxSongTitle.SelectAll();
                 textBoxSongTitle.Focus();
@@ -728,7 +750,7 @@ namespace PraiseBase.Presenter.Editor
 
         private void textBoxSongTitle_Enter(object sender, EventArgs e)
         {
-            if (textBoxSongTitle.Text == _settings.SongDefaultName)
+            if (textBoxSongTitle.Text == Settings.SongDefaultName)
             {
                 textBoxSongTitle.SelectAll();
             }
@@ -777,12 +799,22 @@ namespace PraiseBase.Presenter.Editor
 
         private void textBoxAuthors_TextChanged(object sender, EventArgs e)
         {
-            Song.Author.FromString(((TextBox)sender).Text);
+            Song.Authors.FromString(((TextBox)sender).Text);
         }
 
         private void textBoxSongbooks_TextChanged(object sender, EventArgs e)
         {
             Song.SongBooks.FromString(((TextBox)sender).Text);
+        }
+
+        private void textBoxPublisher_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void textBoxRightsManagement_TextChanged(object sender, EventArgs e)
+        {
+
         }
 
     }
