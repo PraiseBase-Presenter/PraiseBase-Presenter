@@ -153,7 +153,7 @@ namespace PraiseBase.Presenter.Persistence.PowerPraise
 
             // Copyright text
             xmlRoot["information"]["copyright"].AppendChild(xmlDoc.CreateElement("text"));
-            if (sng.CopyrightText != null)
+            if (sng.CopyrightText != null && !String.IsNullOrEmpty(String.Join("", sng.CopyrightText.ToArray())))
             {
                 foreach (var l in sng.CopyrightText)
                 {
@@ -171,10 +171,11 @@ namespace PraiseBase.Presenter.Persistence.PowerPraise
 
             // Source text
             xmlRoot["information"]["source"].AppendChild(xmlDoc.CreateElement("text"));
-            xmlRoot["information"]["source"]["text"].AppendChild(xmlDoc.CreateElement("line"));
-            xmlRoot["information"]["source"]["text"]["line"].InnerText = !String.IsNullOrEmpty(sng.SourceText)
-                ? sng.SourceText
-                : null;
+            if (!String.IsNullOrEmpty(sng.SourceText))
+            {
+                xmlRoot["information"]["source"]["text"].AppendChild(xmlDoc.CreateElement("line"));
+                xmlRoot["information"]["source"]["text"]["line"].InnerText = sng.SourceText;
+            }
 
             xmlRoot.AppendChild(xmlDoc.CreateElement("formatting"));
             xmlRoot["formatting"].AppendChild(xmlDoc.CreateElement("font"));
