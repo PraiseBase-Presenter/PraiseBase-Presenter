@@ -5,6 +5,9 @@ using System.Text.RegularExpressions;
 
 namespace PraiseBase.Presenter.Model.Song
 {
+    /// <summary>
+    /// Creates a textual representation of a song text (and vice-versa)
+    /// </summary>
     public class TextualSongRepresentationMapper
     {
         public string Map(Song s)
