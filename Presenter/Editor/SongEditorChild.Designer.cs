@@ -356,7 +356,6 @@ namespace PraiseBase.Presenter.Editor
             // 
             resources.ApplyResources(this.textBoxRightsManagement, "textBoxRightsManagement");
             this.textBoxRightsManagement.Name = "textBoxRightsManagement";
-            this.textBoxRightsManagement.TextChanged += new System.EventHandler(this.textBoxRightsManagement_TextChanged);
             // 
             // label18
             // 
@@ -378,7 +377,6 @@ namespace PraiseBase.Presenter.Editor
             // 
             resources.ApplyResources(this.textBoxPublisher, "textBoxPublisher");
             this.textBoxPublisher.Name = "textBoxPublisher";
-            this.textBoxPublisher.TextChanged += new System.EventHandler(this.textBoxPublisher_TextChanged);
             // 
             // label16
             // 
