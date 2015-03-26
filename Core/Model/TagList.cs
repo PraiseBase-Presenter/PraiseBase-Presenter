@@ -28,7 +28,7 @@ namespace PraiseBase.Presenter.Model
     /// <summary>
     ///     Tag class. It allows only unique items
     /// </summary>
-    public class TagList : List<string>
+    public class TagList : ComparableList<string>
     {
         /// <summary>
         ///     Adds an unique tag to the taglist
