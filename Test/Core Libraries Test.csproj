@@ -52,6 +52,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Model\Song\SongTest.cs" />
+    <Compile Include="Model\Song\TextualSongRepresentationMapperTests.cs" />
     <Compile Include="Persistence\CCLI\SongSelectFileMapperTest.cs" />
     <Compile Include="Persistence\CCLI\SongSelectFilePluginTests.cs" />
     <Compile Include="Persistence\CCLI\SongSelectFileReaderTest.cs" />
