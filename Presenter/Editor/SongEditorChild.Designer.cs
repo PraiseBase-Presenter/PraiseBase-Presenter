@@ -52,8 +52,6 @@ namespace PraiseBase.Presenter.Editor
             this.partContextMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.umbenennenToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.löschenToolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
-            this.songContextMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.umbenennenToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.checkBoxQASegmentation = new System.Windows.Forms.CheckBox();
             this.checkBoxQATranslation = new System.Windows.Forms.CheckBox();
             this.textBoxComment = new System.Windows.Forms.TextBox();
@@ -92,7 +90,6 @@ namespace PraiseBase.Presenter.Editor
             this.splitContainer1.SuspendLayout();
             this.slideContextMenu.SuspendLayout();
             this.partContextMenu.SuspendLayout();
-            this.songContextMenu.SuspendLayout();
             this.panelPreview.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxPreview)).BeginInit();
             this.groupBox1.SuspendLayout();
@@ -243,19 +240,6 @@ namespace PraiseBase.Presenter.Editor
             this.löschenToolStripMenuItem2.Name = "löschenToolStripMenuItem2";
             resources.ApplyResources(this.löschenToolStripMenuItem2, "löschenToolStripMenuItem2");
             this.löschenToolStripMenuItem2.Click += new System.EventHandler(this.löschenToolStripMenuItem2_Click);
-            // 
-            // songContextMenu
-            // 
-            this.songContextMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.umbenennenToolStripMenuItem1});
-            this.songContextMenu.Name = "songContextMenu";
-            resources.ApplyResources(this.songContextMenu, "songContextMenu");
-            // 
-            // umbenennenToolStripMenuItem1
-            // 
-            this.umbenennenToolStripMenuItem1.Name = "umbenennenToolStripMenuItem1";
-            resources.ApplyResources(this.umbenennenToolStripMenuItem1, "umbenennenToolStripMenuItem1");
-            this.umbenennenToolStripMenuItem1.Click += new System.EventHandler(this.umbenennenToolStripMenuItem1_Click);
             // 
             // checkBoxQASegmentation
             // 
@@ -516,7 +500,6 @@ namespace PraiseBase.Presenter.Editor
             this.splitContainer1.ResumeLayout(false);
             this.slideContextMenu.ResumeLayout(false);
             this.partContextMenu.ResumeLayout(false);
-            this.songContextMenu.ResumeLayout(false);
             this.panelPreview.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxPreview)).EndInit();
             this.groupBox1.ResumeLayout(false);
@@ -539,9 +522,7 @@ namespace PraiseBase.Presenter.Editor
 		private System.Windows.Forms.ToolStripMenuItem neueFolieToolStripMenuItem;
 		private System.Windows.Forms.ContextMenuStrip partContextMenu;
 		private System.Windows.Forms.ToolStripMenuItem umbenennenToolStripMenuItem;
-		private System.Windows.Forms.ToolStripMenuItem löschenToolStripMenuItem2;
-		private System.Windows.Forms.ContextMenuStrip songContextMenu;
-        private System.Windows.Forms.ToolStripMenuItem umbenennenToolStripMenuItem1;
+        private System.Windows.Forms.ToolStripMenuItem löschenToolStripMenuItem2;
         private System.Windows.Forms.Button buttonDuplicateSlide;
         private System.Windows.Forms.TextBox textBoxCCLISongID;
         private System.Windows.Forms.TextBox textBoxCopyright;

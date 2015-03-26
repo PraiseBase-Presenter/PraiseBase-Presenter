@@ -294,7 +294,6 @@ namespace PraiseBase.Presenter.Editor
                 partNode.ContextMenuStrip = partContextMenu;
                 treeViewContents.Nodes.Add(partNode);
             }
-            treeViewContents.ContextMenuStrip = songContextMenu;
             treeViewContents.ExpandAll();
         }
 
@@ -761,11 +760,6 @@ namespace PraiseBase.Presenter.Editor
         private void umbenennenToolStripMenuItem_Click(object sender, EventArgs e)
         {
             //treeViewContents.BeginEdit();
-        }
-
-        private void umbenennenToolStripMenuItem1_Click(object sender, EventArgs e)
-        {
-           // treeViewContents.BeginEdit();
         }
 
         private void löschenToolStripMenuItem2_Click(object sender, EventArgs e)
