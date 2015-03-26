@@ -130,32 +130,17 @@
   <data name="label6.Text" xml:space="preserve">
     <value>Translation</value>
   </data>
-  <data name="tabPageFormatting.Text" xml:space="preserve">
-    <value>Miscellaneous</value>
-  </data>
   <data name="checkBoxQASegmentation.Size" type="System.Drawing.Size, System.Drawing">
     <value>151, 17</value>
   </data>
   <data name="checkBoxQASegmentation.Text" xml:space="preserve">
     <value>Suboptimal text distribution</value>
   </data>
-  <data name="label14.Size" type="System.Drawing.Size, System.Drawing">
-    <value>41, 13</value>
-  </data>
-  <data name="label14.Text" xml:space="preserve">
-    <value>Flags:</value>
-  </data>
   <data name="checkBoxQATranslation.Size" type="System.Drawing.Size, System.Drawing">
     <value>146, 17</value>
   </data>
   <data name="checkBoxQATranslation.Text" xml:space="preserve">
     <value>Missing/wrong translation</value>
-  </data>
-  <data name="label13.Size" type="System.Drawing.Size, System.Drawing">
-    <value>62, 13</value>
-  </data>
-  <data name="label13.Text" xml:space="preserve">
-    <value>Comment:</value>
   </data>
   <data name="checkBoxQAImages.Size" type="System.Drawing.Size, System.Drawing">
     <value>97, 17</value>
@@ -168,9 +153,6 @@
   </data>
   <data name="checkBoxQASpelling.Text" xml:space="preserve">
     <value>Missing/wrong text</value>
-  </data>
-  <data name="tabPageContent.Text" xml:space="preserve">
-    <value>Content</value>
   </data>
   <data name="label18.Size" type="System.Drawing.Size, System.Drawing">
     <value>39, 13</value>
@@ -237,7 +219,7 @@
         5DB0/qbrzUu3vG5du73i9uBw6PCdkeiR0TvsO1N3U+6+uJd5b+H+xgfoB0UPpR5WPFJ81PCz7s9to5aj
         p8dcx/ofBz++P84af/ZLxi/vJwqekJ9UTKpMNk+ZTZ2adp++8XTl04ln6c8WZgp/lf619rnO8x9+c/yt
         fzZiduIF/8Wn30teyr889GrZq565gLlHr1NfL8wXvZF/c/gt423fu/B3kwtZ77HvKz/ofuj+6PPxwafU
-        T5/+BQOY8/xvJtwPAAAACXBIWXMAAAsPAAALDwGS+QOlAAAAIXRFWHRDcmVhdGlvbiBUaW1lADIwMDY6
+        T5/+BQOY8/xvJtwPAAAACXBIWXMAAAsOAAALDgFAvuFBAAAAIXRFWHRDcmVhdGlvbiBUaW1lADIwMDY6
         MTA6MDYgMjI6NDE6MjYxcFLRAAACnklEQVQ4T32S3UtTYRjAD0FIdZHtouGaGIGCu7KUhAmpYHizDRGP
         f8BAu3AXFTYVIpLldxd+sIiE1E0T2yZ5MR1659A50NmNXZgWqSvnvs52dnY8w+3pec8qFQ898OP94Hl+
         7/s+51AAcI6KCrWsra2ta2Dgtbm/f2CY0NfXN9zT0yPS29tL1iNGo7FbLpcrzxWbzebLJtMrNc/zJ7j+
@@ -254,12 +236,6 @@
   </data>
   <data name="buttonDuplicateSlide.ToolTip" xml:space="preserve">
     <value>Duplicate</value>
-  </data>
-  <data name="label7.Size" type="System.Drawing.Size, System.Drawing">
-    <value>70, 13</value>
-  </data>
-  <data name="label7.Text" xml:space="preserve">
-    <value>Information</value>
   </data>
   <data name="buttonAddSlide.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
@@ -308,7 +284,7 @@
         XTesb3QPLh88M+QwdP6m681Lt7xuXbu94vbgcOjwnZHokdE77DtTd1PuvriXeW/h/sYH6AdFD6UeVjxS
         fNTws+7PbaOWo6fHXMf6Hwc/vj/OGn/2S8Yv7ycKnpCfVEyqTDZPmU2dmnafvvF05dOJZ+nPFmYKf5X+
         tfa5zvMffnP8rX82YnbiBf/Fp99LXsq/PPRq2aueuYC5R69TXy/MF72Rf3P4LeNt37vwd5MLWe+x7ys/
-        6H7o/ujz8cGn1E+f/gUDmPP8usTo0wAAAAlwSFlzAAALDwAACw8BkvkDpQAAAoNJREFUOE+Vk11Ik1Ec
+        6H7o/ujz8cGn1E+f/gUDmPP8usTo0wAAAAlwSFlzAAALDgAACw4BQL7hQQAAAoNJREFUOE+Vk11Ik1Ec
         xg90Y1TkNIWipLaL9DTNOee7ve/2vluuFJlrTl3azPmxzbkPUwlxGSVWRhdBBhYFmYSb3WQaWmBiBIF1
         E8Q+uoluikiCukqIOZ7e2eUWrIsfHJ7z8HB4/v9DuEE+DXZAJxOCx2InLtdEasbqIvpgdSylZfKmCSnU
         AU5ef7MerqVO+OY8sN6wgulj5Zm8aUKKSreaOp614dLGIK5+vABX2AllL0MzedOEFKmA9uUzCG4G0P+p
@@ -381,7 +357,7 @@
         XTesb3QPLh88M+QwdP6m681Lt7xuXbu94vbgcOjwnZHokdE77DtTd1PuvriXeW/h/sYH6AdFD6UeVjxS
         fNTws+7PbaOWo6fHXMf6Hwc/vj/OGn/2S8Yv7ycKnpCfVEyqTDZPmU2dmnafvvF05dOJZ+nPFmYKf5X+
         tfa5zvMffnP8rX82YnbiBf/Fp99LXsq/PPRq2aueuYC5R69TXy/MF72Rf3P4LeNt37vwd5MLWe+x7ys/
-        6H7o/ujz8cGn1E+f/gUDmPP8usTo0wAAAAlwSFlzAAALDwAACw8BkvkDpQAAAoNJREFUOE+Vk11Ik1Ec
+        6H7o/ujz8cGn1E+f/gUDmPP8usTo0wAAAAlwSFlzAAALDgAACw4BQL7hQQAAAoNJREFUOE+Vk11Ik1Ec
         xg90Y1TkNIWipLaL9DTNOee7ve/2vluuFJlrTl3azPmxzbkPUwlxGSVWRhdBBhYFmYSb3WQaWmBiBIF1
         E8Q+uoluikiCukqIOZ7e2eUWrIsfHJ7z8HB4/v9DuEE+DXZAJxOCx2InLtdEasbqIvpgdSylZfKmCSnU
         AU5ef7MerqVO+OY8sN6wgulj5Zm8aUKKSreaOp614dLGIK5+vABX2AllL0MzedOEFKmA9uUzCG4G0P+p
@@ -466,7 +442,7 @@
         XTesb3QPLh88M+QwdP6m681Lt7xuXbu94vbgcOjwnZHokdE77DtTd1PuvriXeW/h/sYH6AdFD6UeVjxS
         fNTws+7PbaOWo6fHXMf6Hwc/vj/OGn/2S8Yv7ycKnpCfVEyqTDZPmU2dmnafvvF05dOJZ+nPFmYKf5X+
         tfa5zvMffnP8rX82YnbiBf/Fp99LXsq/PPRq2aueuYC5R69TXy/MF72Rf3P4LeNt37vwd5MLWe+x7ys/
-        6H7o/ujz8cGn1E+f/gUDmPP8usTo0wAAAAlwSFlzAAALDwAACw8BkvkDpQAAAaRJREFUOE+l0c9LVFEY
+        6H7o/ujz8cGn1E+f/gUDmPP8usTo0wAAAAlwSFlzAAALDgAACw4BQL7hQQAAAaRJREFUOE+l0c9LVFEY
         h/G7Cueee+f+msm0clGaZROjUhNk1oyVWUEpRUGCtYqhGHXGEU0madGujdE6iKJCaFEQMgwIEQRREQpF
         U4tApH/icODptD+LLi0+fOGBd/VawH8xxjiMMQ5jjMMY47Bmk+7GXGso77SlZU1baI3kfDqQtSiQc4En
         S35S3gySsqSVfU/OBL6saFWt6IgN614qZHkgQ+NKgcb4KVZGj1EfOUwjf4iX/RkeZvZyP9vDUt9+Hvcf
@@ -503,6 +479,12 @@
   </data>
   <data name="label19.Text" xml:space="preserve">
     <value>Language:</value>
+  </data>
+  <data name="groupBox1.Text" xml:space="preserve">
+    <value>Quality assurance</value>
+  </data>
+  <data name="groupBox2.Text" xml:space="preserve">
+    <value>Topics</value>
   </data>
   <data name="$this.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
@@ -2703,6 +2685,10 @@
         AAAAAP//AAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAQAA
         gAEAAP//AAA=
 </value>
+  </data>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="$this.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>Inherit</value>
   </data>
   <data name="$this.Text" xml:space="preserve">
     <value>Song Editor</value>
