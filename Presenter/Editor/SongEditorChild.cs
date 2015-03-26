@@ -820,8 +820,7 @@ namespace PraiseBase.Presenter.Editor
 
         private void panelPreview_Resize(object sender, EventArgs e)
         {
-            pictureBoxPreview.Height = panelPreview.Height;
-            pictureBoxPreview.Width = (int)Math.Floor(pictureBoxPreview.Height / 0.75);
+            pictureBoxPreview.Size = panelPreview.Size;
             pictureBoxPreview.Top = 0;
             pictureBoxPreview.Left = panelPreview.Width / 2 - (pictureBoxPreview.Width/2);
         }
