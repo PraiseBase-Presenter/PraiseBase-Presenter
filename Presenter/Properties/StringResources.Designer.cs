@@ -520,6 +520,24 @@ namespace PraiseBase.Presenter.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Übersetzung deaktivieren.
+        /// </summary>
+        public static string SongEditorChild_EnableTranslation_Disable_translation {
+            get {
+                return ResourceManager.GetString("SongEditorChild_EnableTranslation_Disable_translation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Soll die Übersetzung entfernt werden?.
+        /// </summary>
+        public static string SongEditorChild_EnableTranslation_Should_Translation_be_removed {
+            get {
+                return ResourceManager.GetString("SongEditorChild_EnableTranslation_Should_Translation_be_removed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Das Lied {0}&apos; existiert bereits!.
         /// </summary>
         public static string SongExistsAlready {

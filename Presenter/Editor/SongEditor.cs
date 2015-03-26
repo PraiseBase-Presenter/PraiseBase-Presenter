@@ -811,5 +811,19 @@ namespace PraiseBase.Presenter.Editor
         {
             Process.Start(_settings.HelpUrl);
         }
+
+        private void toolStripButtonEnableTranslation_Click(object sender, EventArgs e)
+        {
+            toolStripMenuItem1_Click(sender, e);
+        }
+
+        private void toolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            if (ActiveMdiChild != null)
+            {
+                var wnd = ((SongEditorChild)ActiveMdiChild);
+                wnd.EnableTranslation(!wnd.Song.HasTranslation());
+            }
+        }
     }
 }

@@ -95,6 +95,8 @@ namespace PraiseBase.Presenter.Editor
         {
             WindowState = FormWindowState.Maximized;
 
+            UpdateTranslationUi();
+
             // Set window title
             SetWindowTitle(Song.Title);
 
@@ -126,6 +128,43 @@ namespace PraiseBase.Presenter.Editor
         public void SetWindowTitle(string title)
         {
             Text = title;
+        }
+
+        public void EnableTranslation(bool enable)
+        {
+            if (enable)
+            {
+                if (!Song.HasTranslation())
+                {
+                    Song.Parts[0].Slides[0].Translation.Add(String.Empty);
+                }
+            }
+            else
+            {
+                if (Song.HasTranslation())
+                {
+                    if (MessageBox.Show(StringResources.SongEditorChild_EnableTranslation_Should_Translation_be_removed, 
+                        StringResources.SongEditorChild_EnableTranslation_Disable_translation, 
+                        MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.No)
+                    {
+                        return;
+                    }
+                }
+                textBoxSongTranslation.Text = String.Empty;
+                foreach (var p in Song.Parts)
+                {
+                    foreach (var s in p.Slides)
+                    {
+                        s.Translation.Clear();
+                    }
+                }
+            }
+            UpdateTranslationUi();
+        }
+
+        private void UpdateTranslationUi()
+        {
+            splitContainer1.Panel2Collapsed = !Song.HasTranslation();
         }
 
         private void PopulateQa()
