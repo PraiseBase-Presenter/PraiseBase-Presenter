@@ -25,7 +25,6 @@ using System.Diagnostics.CodeAnalysis;
 using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Windows.Forms;
-using PraiseBase.Presenter.Controls;
 using PraiseBase.Presenter.Forms;
 using PraiseBase.Presenter.Manager;
 using PraiseBase.Presenter.Model.Song;
@@ -699,67 +698,20 @@ namespace PraiseBase.Presenter.Editor
             if (treeViewContents.SelectedNode != null)
                 switch (e.KeyCode)
                 {
-                    case Keys.F2:
-                        treeViewContents.BeginEdit();
-                        break;
-
                     case Keys.Space:
                         treeViewContents.SelectedNode.Toggle();
+                        break;
+                    case Keys.F2:
+                        textBoxPartCaption.Focus();
+                        textBoxPartCaption.SelectAll();
                         break;
                 }
         }
 
-        private void treeViewContents_BeforeLabelEdit(object sender, NodeLabelEditEventArgs e)
-        {
-            // --- Here we can customize label for editing ---
-            //TreeNode tn = treeViewContents.SelectedNode;
-            //if (tn.Level > 1)
-            e.CancelEdit = true;
-        }
-
-        private void treeViewContents_AfterLabelEdit(object sender, NodeLabelEditEventArgs e)
-        {
-            // --- Here we can transform edited label back to its original format ---
-            /*
-            TreeNode tn = treeViewContents.SelectedNode;
-            if (tn.Level == 0)
-            {
-                tn.Text = e.Label;
-                this.Text = e.Label;
-            }
-            else if (tn.Level == 1)
-            {
-                tn.Text = e.Label;
-                sng.Parts[tn.Index].Caption = e.Label;
-            }
-            */
-        }
-
-        private void treeViewContents_ValidateLabelEdit(object sender, ValidateLabelEditEventArgs e)
-        {
-            /*
-            if (e.Label.Trim() == "")
-            {
-                MessageBox.Show("The tree node label cannot be empty",
-                    "Label Edit Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                e.Cancel = true;
-                return;
-            }
-            if (e.Label.IndexOfAny(new char[] { '\\', '/', ':', '*', '?', '"', '<', '>', '|' }) != -1)
-            {
-                MessageBox.Show("Invalid tree node label.\n" +
-                    "The tree node label must not contain following characters:\n \\ / : * ? \" < > |",
-                    "Label Edit Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                e.Cancel = true;
-                return;
-            }
-            */
-            e.Cancel = true;
-        }
-
         private void umbenennenToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            //treeViewContents.BeginEdit();
+            textBoxPartCaption.Focus();
+            textBoxPartCaption.SelectAll();
         }
 
         private void löschenToolStripMenuItem2_Click(object sender, EventArgs e)

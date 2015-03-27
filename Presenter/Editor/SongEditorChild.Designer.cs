@@ -84,7 +84,7 @@ namespace PraiseBase.Presenter.Editor
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.treeViewContents = new PraiseBase.Presenter.Controls.TreeViewLabelEdit();
+            this.treeViewContents = new System.Windows.Forms.TreeView();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
             this.splitContainer1.SuspendLayout();
@@ -452,9 +452,6 @@ namespace PraiseBase.Presenter.Editor
             resources.ApplyResources(this.treeViewContents, "treeViewContents");
             this.treeViewContents.HideSelection = false;
             this.treeViewContents.Name = "treeViewContents";
-            this.treeViewContents.ValidateLabelEdit += new PraiseBase.Presenter.Controls.TreeViewLabelEdit.ValidateLabelEditEventHandler(this.treeViewContents_ValidateLabelEdit);
-            this.treeViewContents.BeforeLabelEdit += new System.Windows.Forms.NodeLabelEditEventHandler(this.treeViewContents_BeforeLabelEdit);
-            this.treeViewContents.AfterLabelEdit += new System.Windows.Forms.NodeLabelEditEventHandler(this.treeViewContents_AfterLabelEdit);
             this.treeViewContents.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.treeViewContents_AfterSelect);
             this.treeViewContents.KeyDown += new System.Windows.Forms.KeyEventHandler(this.treeViewContents_KeyDown);
             // 
@@ -541,7 +538,7 @@ namespace PraiseBase.Presenter.Editor
         private System.Windows.Forms.ComboBox comboBoxLanguageTranslated;
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.PictureBox pictureBoxPreview;
-        private TreeViewLabelEdit treeViewContents;
+        private System.Windows.Forms.TreeView treeViewContents;
         private System.Windows.Forms.Button buttonAddItem;
         private System.Windows.Forms.Button buttonMoveUp;
         private System.Windows.Forms.Button buttonDelItem;
