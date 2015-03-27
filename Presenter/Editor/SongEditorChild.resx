@@ -438,15 +438,6 @@
   <metadata name="slideContextMenu.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>156, 16</value>
   </metadata>
-  <data name="slideContextMenu.Size" type="System.Drawing.Size, System.Drawing">
-    <value>134, 136</value>
-  </data>
-  <data name="&gt;&gt;slideContextMenu.Name" xml:space="preserve">
-    <value>slideContextMenu</value>
-  </data>
-  <data name="&gt;&gt;slideContextMenu.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ContextMenuStrip, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
   <data name="neueFolieToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>133, 22</value>
   </data>
@@ -483,18 +474,18 @@
   <data name="löschenToolStripMenuItem1.Text" xml:space="preserve">
     <value>Löschen</value>
   </data>
+  <data name="slideContextMenu.Size" type="System.Drawing.Size, System.Drawing">
+    <value>134, 136</value>
+  </data>
+  <data name="&gt;&gt;slideContextMenu.Name" xml:space="preserve">
+    <value>slideContextMenu</value>
+  </data>
+  <data name="&gt;&gt;slideContextMenu.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ContextMenuStrip, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
   <metadata name="partContextMenu.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>295, 16</value>
   </metadata>
-  <data name="partContextMenu.Size" type="System.Drawing.Size, System.Drawing">
-    <value>147, 48</value>
-  </data>
-  <data name="&gt;&gt;partContextMenu.Name" xml:space="preserve">
-    <value>partContextMenu</value>
-  </data>
-  <data name="&gt;&gt;partContextMenu.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ContextMenuStrip, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
   <data name="umbenennenToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>146, 22</value>
   </data>
@@ -506,6 +497,15 @@
   </data>
   <data name="löschenToolStripMenuItem2.Text" xml:space="preserve">
     <value>Löschen</value>
+  </data>
+  <data name="partContextMenu.Size" type="System.Drawing.Size, System.Drawing">
+    <value>147, 48</value>
+  </data>
+  <data name="&gt;&gt;partContextMenu.Name" xml:space="preserve">
+    <value>partContextMenu</value>
+  </data>
+  <data name="&gt;&gt;partContextMenu.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ContextMenuStrip, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="checkBoxQASegmentation.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -681,6 +681,24 @@
   <data name="panelPreview.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Bottom, Left, Right</value>
   </data>
+  <data name="pictureBoxPreview.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>None</value>
+  </data>
+  <data name="pictureBoxPreview.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="pictureBoxPreview.Location" type="System.Drawing.Point, System.Drawing">
+    <value>63, 13</value>
+  </data>
+  <data name="pictureBoxPreview.Size" type="System.Drawing.Size, System.Drawing">
+    <value>377, 267</value>
+  </data>
+  <data name="pictureBoxPreview.SizeMode" type="System.Windows.Forms.PictureBoxSizeMode, System.Windows.Forms">
+    <value>Zoom</value>
+  </data>
+  <data name="pictureBoxPreview.TabIndex" type="System.Int32, mscorlib">
+    <value>95</value>
+  </data>
   <data name="&gt;&gt;pictureBoxPreview.Name" xml:space="preserve">
     <value>pictureBoxPreview</value>
   </data>
@@ -713,36 +731,6 @@
   </data>
   <data name="&gt;&gt;panelPreview.ZOrder" xml:space="preserve">
     <value>8</value>
-  </data>
-  <data name="pictureBoxPreview.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>None</value>
-  </data>
-  <data name="pictureBoxPreview.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="pictureBoxPreview.Location" type="System.Drawing.Point, System.Drawing">
-    <value>63, 13</value>
-  </data>
-  <data name="pictureBoxPreview.Size" type="System.Drawing.Size, System.Drawing">
-    <value>377, 267</value>
-  </data>
-  <data name="pictureBoxPreview.SizeMode" type="System.Windows.Forms.PictureBoxSizeMode, System.Windows.Forms">
-    <value>Zoom</value>
-  </data>
-  <data name="pictureBoxPreview.TabIndex" type="System.Int32, mscorlib">
-    <value>95</value>
-  </data>
-  <data name="&gt;&gt;pictureBoxPreview.Name" xml:space="preserve">
-    <value>pictureBoxPreview</value>
-  </data>
-  <data name="&gt;&gt;pictureBoxPreview.Type" xml:space="preserve">
-    <value>System.Windows.Forms.PictureBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;pictureBoxPreview.Parent" xml:space="preserve">
-    <value>panelPreview</value>
-  </data>
-  <data name="&gt;&gt;pictureBoxPreview.ZOrder" xml:space="preserve">
-    <value>0</value>
   </data>
   <data name="textBoxRightsManagement.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Bottom, Left</value>
@@ -996,9 +984,6 @@
   <data name="&gt;&gt;label15.ZOrder" xml:space="preserve">
     <value>20</value>
   </data>
-  <metadata name="toolTip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>584, 16</value>
-  </metadata>
   <data name="buttonDuplicateSlide.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Bottom, Left</value>
   </data>
@@ -1079,6 +1064,9 @@
   <data name="buttonDuplicateSlide.TabIndex" type="System.Int32, mscorlib">
     <value>9</value>
   </data>
+  <metadata name="toolTip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>584, 16</value>
+  </metadata>
   <data name="buttonDuplicateSlide.ToolTip" xml:space="preserve">
     <value>Duplizieren</value>
   </data>
@@ -1703,9 +1691,6 @@
   <data name="&gt;&gt;label19.ZOrder" xml:space="preserve">
     <value>5</value>
   </data>
-  <metadata name="toolTip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>584, 16</value>
-  </metadata>
   <data name="groupBox1.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Bottom, Right</value>
   </data>
