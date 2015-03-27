@@ -215,60 +215,19 @@ namespace PraiseBase.Presenter.Editor
 
         public void partAddMenuOther_click(object sender, EventArgs e)
         {
-            TextBox iTBox = new TextBox
+            InputDialog dlg = new InputDialog(StringResources.NameOfTheSongPart, StringResources.NameOfTheSongPart)
             {
-                Location = new Point(5, 5), 
-                Width = 300, 
-                Name = "songPartText"
+                InputValue = String.Empty
             };
-            iTBox.Font = new Font(iTBox.Font.FontFamily, 12);
-
-            Button okButton = new Button
+            dlg.ShowDialog(this);
+            if (dlg.DialogResult == DialogResult.OK)
             {
-                Text = StringResources.Add, 
-                Location = new Point(310, 5), 
-                Name = "okButton"
-            };
-            okButton.Click += addSongPartFormokButton_Click;
-
-            Button cancelButton = new Button
-            {
-                Text = StringResources.Cancel,
-                Location = new Point(310 + okButton.Width + 5, 5),
-                Name = "cancelButton"
-            };
-
-            Form iForm = new Form
-            {
-                Width = cancelButton.Right + 15,
-                Height = 60,
-                Text = StringResources.NameOfTheSongPart,
-                ShowInTaskbar = false,
-                ControlBox = false,
-                AcceptButton = okButton,
-                CancelButton = cancelButton,
-                FormBorderStyle = FormBorderStyle.FixedDialog,
-                StartPosition = FormStartPosition.CenterParent
-            };
-
-            iForm.Controls.Add(iTBox);
-            iForm.Controls.Add(okButton);
-            iForm.Controls.Add(cancelButton);
-
-            iForm.ShowDialog(this);
-            if (iForm.DialogResult == DialogResult.OK)
-            {
-                Control[] textField = iForm.Controls.Find("songPartText", true);
-                string res = ((TextBox)textField[0]).Text.Trim();
-                if (res != "")
-                    AddSongPartUpdateTree(res);
+                var v = dlg.InputValue.Trim();
+                if (!String.IsNullOrEmpty(v))
+                {
+                    AddSongPartUpdateTree(v);
+                }
             }
-        }
-
-        private void addSongPartFormokButton_Click(object sender, EventArgs e)
-        {
-            ((Form)((Button)sender).Parent).DialogResult = DialogResult.OK;
-            ((Form)((Button)sender).Parent).Close();
         }
 
         public void partAddMenu_click(object sender, EventArgs e)
