@@ -313,6 +313,14 @@ namespace PraiseBase.Presenter.Editor
 
             PreviewSlide();
         }
+        
+        private void treeViewContents_NodeMouseClick(object sender, TreeNodeMouseClickEventArgs e)
+        {
+            if (e.Button == MouseButtons.Right)
+            {
+                treeViewContents.SelectedNode = e.Node;
+            }
+        }
 
         private void AddSongPartUpdateTree(string caption)
         {

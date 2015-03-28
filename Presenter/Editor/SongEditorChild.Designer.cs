@@ -453,6 +453,7 @@ namespace PraiseBase.Presenter.Editor
             this.treeViewContents.HideSelection = false;
             this.treeViewContents.Name = "treeViewContents";
             this.treeViewContents.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.treeViewContents_AfterSelect);
+            this.treeViewContents.NodeMouseClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.treeViewContents_NodeMouseClick);
             this.treeViewContents.KeyDown += new System.Windows.Forms.KeyEventHandler(this.treeViewContents_KeyDown);
             // 
             // SongEditorChild
