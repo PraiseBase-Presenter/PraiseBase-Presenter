@@ -739,13 +739,6 @@ namespace PraiseBase.Presenter.Editor
             Song.Title = textBoxSongTitle.Text;
         }
 
-        private void panelPreview_Resize(object sender, EventArgs e)
-        {
-            pictureBoxPreview.Size = panelPreview.Size;
-            pictureBoxPreview.Top = 0;
-            pictureBoxPreview.Left = panelPreview.Width / 2 - (pictureBoxPreview.Width/2);
-        }
-
         private void textBoxSongText_KeyUp(object sender, KeyEventArgs e)
         {
             PreviewSlide();

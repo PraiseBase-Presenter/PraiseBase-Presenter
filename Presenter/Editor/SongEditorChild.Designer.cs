@@ -55,7 +55,6 @@ namespace PraiseBase.Presenter.Editor
             this.checkBoxQAImages = new System.Windows.Forms.CheckBox();
             this.checkBoxQASpelling = new System.Windows.Forms.CheckBox();
             this.checkedListBoxTags = new System.Windows.Forms.CheckedListBox();
-            this.panelPreview = new System.Windows.Forms.Panel();
             this.pictureBoxPreview = new System.Windows.Forms.PictureBox();
             this.textBoxRightsManagement = new System.Windows.Forms.TextBox();
             this.label18 = new System.Windows.Forms.Label();
@@ -79,17 +78,21 @@ namespace PraiseBase.Presenter.Editor
             this.buttonMoveDown = new System.Windows.Forms.Button();
             this.label19 = new System.Windows.Forms.Label();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.treeViewContents = new System.Windows.Forms.TreeView();
             this.label1 = new System.Windows.Forms.Label();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.labelInformation = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
+            this.panel2 = new System.Windows.Forms.Panel();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
             this.splitContainer1.SuspendLayout();
             this.slideContextMenu.SuspendLayout();
             this.partContextMenu.SuspendLayout();
-            this.panelPreview.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxPreview)).BeginInit();
-            this.groupBox1.SuspendLayout();
+            this.panel1.SuspendLayout();
+            this.panel2.SuspendLayout();
             this.SuspendLayout();
             // 
             // splitContainer1
@@ -252,21 +255,12 @@ namespace PraiseBase.Presenter.Editor
             // 
             // checkedListBoxTags
             // 
-            resources.ApplyResources(this.checkedListBoxTags, "checkedListBoxTags");
             this.checkedListBoxTags.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.checkedListBoxTags.CheckOnClick = true;
             this.checkedListBoxTags.FormattingEnabled = true;
+            resources.ApplyResources(this.checkedListBoxTags, "checkedListBoxTags");
             this.checkedListBoxTags.Name = "checkedListBoxTags";
             this.checkedListBoxTags.ItemCheck += new System.Windows.Forms.ItemCheckEventHandler(this.checkedListBoxTags_ItemCheck);
-            // 
-            // panelPreview
-            // 
-            resources.ApplyResources(this.panelPreview, "panelPreview");
-            this.panelPreview.BackColor = System.Drawing.Color.LightGray;
-            this.panelPreview.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.panelPreview.Controls.Add(this.pictureBoxPreview);
-            this.panelPreview.Name = "panelPreview";
-            this.panelPreview.Resize += new System.EventHandler(this.panelPreview_Resize);
             // 
             // pictureBoxPreview
             // 
@@ -405,17 +399,6 @@ namespace PraiseBase.Presenter.Editor
             resources.ApplyResources(this.label19, "label19");
             this.label19.Name = "label19";
             // 
-            // groupBox1
-            // 
-            resources.ApplyResources(this.groupBox1, "groupBox1");
-            this.groupBox1.Controls.Add(this.checkBoxQASegmentation);
-            this.groupBox1.Controls.Add(this.checkBoxQASpelling);
-            this.groupBox1.Controls.Add(this.checkBoxQATranslation);
-            this.groupBox1.Controls.Add(this.checkBoxQAImages);
-            this.groupBox1.Controls.Add(this.textBoxComment);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.TabStop = false;
-            // 
             // treeViewContents
             // 
             resources.ApplyResources(this.treeViewContents, "treeViewContents");
@@ -430,38 +413,72 @@ namespace PraiseBase.Presenter.Editor
             resources.ApplyResources(this.label1, "label1");
             this.label1.Name = "label1";
             // 
+            // panel1
+            // 
+            resources.ApplyResources(this.panel1, "panel1");
+            this.panel1.Controls.Add(this.label3);
+            this.panel1.Controls.Add(this.checkBoxQASegmentation);
+            this.panel1.Controls.Add(this.label2);
+            this.panel1.Controls.Add(this.checkBoxQASpelling);
+            this.panel1.Controls.Add(this.checkBoxQATranslation);
+            this.panel1.Controls.Add(this.labelInformation);
+            this.panel1.Controls.Add(this.checkBoxQAImages);
+            this.panel1.Controls.Add(this.label19);
+            this.panel1.Controls.Add(this.label4);
+            this.panel1.Controls.Add(this.label12);
+            this.panel1.Controls.Add(this.textBoxComment);
+            this.panel1.Controls.Add(this.textBoxCopyright);
+            this.panel1.Controls.Add(this.checkedListBoxTags);
+            this.panel1.Controls.Add(this.textBoxCCLISongID);
+            this.panel1.Controls.Add(this.label1);
+            this.panel1.Controls.Add(this.label15);
+            this.panel1.Controls.Add(this.textBoxAuthors);
+            this.panel1.Controls.Add(this.label16);
+            this.panel1.Controls.Add(this.comboBoxLanguage);
+            this.panel1.Controls.Add(this.textBoxPublisher);
+            this.panel1.Controls.Add(this.label17);
+            this.panel1.Controls.Add(this.textBoxRightsManagement);
+            this.panel1.Controls.Add(this.textBoxSongbooks);
+            this.panel1.Controls.Add(this.label18);
+            this.panel1.Name = "panel1";
+            // 
+            // labelInformation
+            // 
+            resources.ApplyResources(this.labelInformation, "labelInformation");
+            this.labelInformation.Name = "labelInformation";
+            // 
+            // label2
+            // 
+            resources.ApplyResources(this.label2, "label2");
+            this.label2.Name = "label2";
+            // 
+            // label3
+            // 
+            resources.ApplyResources(this.label3, "label3");
+            this.label3.Name = "label3";
+            // 
+            // panel2
+            // 
+            resources.ApplyResources(this.panel2, "panel2");
+            this.panel2.Controls.Add(this.buttonAddItem);
+            this.panel2.Controls.Add(this.buttonAddSlide);
+            this.panel2.Controls.Add(this.buttonDuplicateSlide);
+            this.panel2.Controls.Add(this.buttonMoveUp);
+            this.panel2.Controls.Add(this.buttonDelItem);
+            this.panel2.Controls.Add(this.buttonMoveDown);
+            this.panel2.Controls.Add(this.treeViewContents);
+            this.panel2.Name = "panel2";
+            // 
             // SongEditorChild
             // 
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this.checkedListBoxTags);
-            this.Controls.Add(this.label1);
-            this.Controls.Add(this.groupBox1);
-            this.Controls.Add(this.label19);
-            this.Controls.Add(this.comboBoxLanguage);
+            this.Controls.Add(this.panel2);
+            this.Controls.Add(this.pictureBoxPreview);
+            this.Controls.Add(this.panel1);
             this.Controls.Add(this.splitContainer1);
-            this.Controls.Add(this.panelPreview);
-            this.Controls.Add(this.textBoxSongbooks);
-            this.Controls.Add(this.label18);
-            this.Controls.Add(this.textBoxRightsManagement);
-            this.Controls.Add(this.label17);
-            this.Controls.Add(this.treeViewContents);
-            this.Controls.Add(this.textBoxPublisher);
-            this.Controls.Add(this.buttonMoveDown);
-            this.Controls.Add(this.label16);
-            this.Controls.Add(this.buttonDelItem);
-            this.Controls.Add(this.textBoxAuthors);
-            this.Controls.Add(this.buttonMoveUp);
-            this.Controls.Add(this.label15);
-            this.Controls.Add(this.buttonAddItem);
-            this.Controls.Add(this.buttonDuplicateSlide);
             this.Controls.Add(this.label11);
-            this.Controls.Add(this.textBoxCCLISongID);
-            this.Controls.Add(this.buttonAddSlide);
-            this.Controls.Add(this.textBoxCopyright);
-            this.Controls.Add(this.label12);
             this.Controls.Add(this.textBoxSongTitle);
-            this.Controls.Add(this.label4);
             this.Name = "SongEditorChild";
             this.ShowInTaskbar = false;
             this.Load += new System.EventHandler(this.EditorChild_Load);
@@ -473,10 +490,10 @@ namespace PraiseBase.Presenter.Editor
             this.splitContainer1.ResumeLayout(false);
             this.slideContextMenu.ResumeLayout(false);
             this.partContextMenu.ResumeLayout(false);
-            this.panelPreview.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxPreview)).EndInit();
-            this.groupBox1.ResumeLayout(false);
-            this.groupBox1.PerformLayout();
+            this.panel1.ResumeLayout(false);
+            this.panel1.PerformLayout();
+            this.panel2.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -529,10 +546,13 @@ namespace PraiseBase.Presenter.Editor
         private System.Windows.Forms.Label label17;
         private System.Windows.Forms.TextBox textBoxRightsManagement;
         private System.Windows.Forms.Label label18;
-        private System.Windows.Forms.Panel panelPreview;
         private System.Windows.Forms.Label label19;
         private System.Windows.Forms.ToolTip toolTip1;
-        private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.Label labelInformation;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Panel panel2;
     }
 }
