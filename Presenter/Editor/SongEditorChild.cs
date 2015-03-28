@@ -298,9 +298,6 @@ namespace PraiseBase.Presenter.Editor
             if (slideId >= Song.Parts[partId].Slides.Count)
                 slideId = Song.Parts[partId].Slides.Count-1;
 
-            textBoxPartCaption.DataBindings.Clear();
-            textBoxPartCaption.DataBindings.Add("Text", Song.Parts[partId], "Caption");
-
             SongSlide sld = Song.Parts[partId].Slides[slideId];
             textBoxSongText.DataBindings.Clear();
             textBoxSongText.DataBindings.Add("Text", sld, "Text");
@@ -669,16 +666,44 @@ namespace PraiseBase.Presenter.Editor
                         treeViewContents.SelectedNode.Toggle();
                         break;
                     case Keys.F2:
-                        textBoxPartCaption.Focus();
-                        textBoxPartCaption.SelectAll();
+                        RenameActiveNode();
                         break;
                 }
         }
 
         private void umbenennenToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            textBoxPartCaption.Focus();
-            textBoxPartCaption.SelectAll();
+            RenameActiveNode();
+        }
+
+        private void RenameActiveNode()
+        {
+            int partId = -1;
+            if (treeViewContents.SelectedNode.Level == 1)
+            {
+                partId = treeViewContents.SelectedNode.Parent.Index;
+            }
+            else if (treeViewContents.SelectedNode.Level == 0)
+            {
+                partId = treeViewContents.SelectedNode.Index;
+            }
+            if (partId >= 0)
+            {
+                InputDialog dlg = new InputDialog(StringResources.NameOfTheSongPart, StringResources.NameOfTheSongPart)
+                {
+                    InputValue = Song.Parts[partId].Caption
+                };
+                dlg.ShowDialog(this);
+                if (dlg.DialogResult == DialogResult.OK)
+                {
+                    var value = dlg.InputValue.Trim();
+                    if (!String.IsNullOrEmpty(value))
+                    {
+                        treeViewContents.Nodes[partId].Text = value;
+                        Song.Parts[partId].Caption = value;
+                    }
+                }
+            }
         }
 
         private void löschenToolStripMenuItem2_Click(object sender, EventArgs e)
@@ -712,23 +737,6 @@ namespace PraiseBase.Presenter.Editor
         {
             Text = textBoxSongTitle.Text;
             Song.Title = textBoxSongTitle.Text;
-        }
-
-        private void textBoxPartCaption_TextChanged(object sender, EventArgs e)
-        {
-            int partId = -1;
-            if (treeViewContents.SelectedNode.Level == 1)
-            {
-                partId = treeViewContents.SelectedNode.Parent.Index;
-            }
-            else if (treeViewContents.SelectedNode.Level == 0)
-            {
-                partId = treeViewContents.SelectedNode.Index;
-            }
-            if (partId >= 0)
-            {
-                treeViewContents.Nodes[partId].Text = textBoxPartCaption.Text;
-            }
         }
 
         private void panelPreview_Resize(object sender, EventArgs e)

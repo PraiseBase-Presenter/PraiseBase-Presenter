@@ -33,7 +33,6 @@ namespace PraiseBase.Presenter.Editor
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(SongEditorChild));
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
-            this.textBoxPartCaption = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
             this.textBoxSongText = new System.Windows.Forms.TextBox();
             this.textBoxPartCaptionTranslated = new System.Windows.Forms.TextBox();
@@ -103,7 +102,6 @@ namespace PraiseBase.Presenter.Editor
             // 
             // splitContainer1.Panel1
             // 
-            this.splitContainer1.Panel1.Controls.Add(this.textBoxPartCaption);
             this.splitContainer1.Panel1.Controls.Add(this.label5);
             this.splitContainer1.Panel1.Controls.Add(this.textBoxSongText);
             // 
@@ -113,12 +111,6 @@ namespace PraiseBase.Presenter.Editor
             this.splitContainer1.Panel2.Controls.Add(this.label6);
             this.splitContainer1.Panel2.Controls.Add(this.textBoxSongTranslation);
             this.splitContainer1.Panel2.Controls.Add(this.comboBoxLanguageTranslated);
-            // 
-            // textBoxPartCaption
-            // 
-            resources.ApplyResources(this.textBoxPartCaption, "textBoxPartCaption");
-            this.textBoxPartCaption.Name = "textBoxPartCaption";
-            this.textBoxPartCaption.TextChanged += new System.EventHandler(this.textBoxPartCaption_TextChanged);
             // 
             // label5
             // 
@@ -529,7 +521,6 @@ namespace PraiseBase.Presenter.Editor
         private System.Windows.Forms.Label label12;
         private System.Windows.Forms.Button buttonAddSlide;
         private System.Windows.Forms.SplitContainer splitContainer1;
-        private System.Windows.Forms.TextBox textBoxPartCaption;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.ComboBox comboBoxLanguage;
         private System.Windows.Forms.TextBox textBoxSongText;
