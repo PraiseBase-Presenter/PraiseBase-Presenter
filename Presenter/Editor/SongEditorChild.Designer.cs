@@ -35,10 +35,8 @@ namespace PraiseBase.Presenter.Editor
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.label5 = new System.Windows.Forms.Label();
             this.textBoxSongText = new System.Windows.Forms.TextBox();
-            this.textBoxPartCaptionTranslated = new System.Windows.Forms.TextBox();
             this.label6 = new System.Windows.Forms.Label();
             this.textBoxSongTranslation = new System.Windows.Forms.TextBox();
-            this.comboBoxLanguageTranslated = new System.Windows.Forms.ComboBox();
             this.comboBoxLanguage = new System.Windows.Forms.ComboBox();
             this.addContextMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.slideContextMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
@@ -82,8 +80,8 @@ namespace PraiseBase.Presenter.Editor
             this.label19 = new System.Windows.Forms.Label();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.treeViewContents = new System.Windows.Forms.TreeView();
+            this.label1 = new System.Windows.Forms.Label();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
             this.splitContainer1.SuspendLayout();
@@ -92,7 +90,6 @@ namespace PraiseBase.Presenter.Editor
             this.panelPreview.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxPreview)).BeginInit();
             this.groupBox1.SuspendLayout();
-            this.groupBox2.SuspendLayout();
             this.SuspendLayout();
             // 
             // splitContainer1
@@ -107,10 +104,8 @@ namespace PraiseBase.Presenter.Editor
             // 
             // splitContainer1.Panel2
             // 
-            this.splitContainer1.Panel2.Controls.Add(this.textBoxPartCaptionTranslated);
             this.splitContainer1.Panel2.Controls.Add(this.label6);
             this.splitContainer1.Panel2.Controls.Add(this.textBoxSongTranslation);
-            this.splitContainer1.Panel2.Controls.Add(this.comboBoxLanguageTranslated);
             // 
             // label5
             // 
@@ -126,11 +121,6 @@ namespace PraiseBase.Presenter.Editor
             this.textBoxSongText.Name = "textBoxSongText";
             this.textBoxSongText.KeyUp += new System.Windows.Forms.KeyEventHandler(this.textBoxSongText_KeyUp);
             // 
-            // textBoxPartCaptionTranslated
-            // 
-            resources.ApplyResources(this.textBoxPartCaptionTranslated, "textBoxPartCaptionTranslated");
-            this.textBoxPartCaptionTranslated.Name = "textBoxPartCaptionTranslated";
-            // 
             // label6
             // 
             resources.ApplyResources(this.label6, "label6");
@@ -144,12 +134,6 @@ namespace PraiseBase.Presenter.Editor
             resources.ApplyResources(this.textBoxSongTranslation, "textBoxSongTranslation");
             this.textBoxSongTranslation.Name = "textBoxSongTranslation";
             this.textBoxSongTranslation.KeyUp += new System.Windows.Forms.KeyEventHandler(this.textBoxSongTranslation_KeyUp);
-            // 
-            // comboBoxLanguageTranslated
-            // 
-            resources.ApplyResources(this.comboBoxLanguageTranslated, "comboBoxLanguageTranslated");
-            this.comboBoxLanguageTranslated.FormattingEnabled = true;
-            this.comboBoxLanguageTranslated.Name = "comboBoxLanguageTranslated";
             // 
             // comboBoxLanguage
             // 
@@ -432,13 +416,6 @@ namespace PraiseBase.Presenter.Editor
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.TabStop = false;
             // 
-            // groupBox2
-            // 
-            resources.ApplyResources(this.groupBox2, "groupBox2");
-            this.groupBox2.Controls.Add(this.checkedListBoxTags);
-            this.groupBox2.Name = "groupBox2";
-            this.groupBox2.TabStop = false;
-            // 
             // treeViewContents
             // 
             resources.ApplyResources(this.treeViewContents, "treeViewContents");
@@ -448,11 +425,17 @@ namespace PraiseBase.Presenter.Editor
             this.treeViewContents.NodeMouseClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.treeViewContents_NodeMouseClick);
             this.treeViewContents.KeyDown += new System.Windows.Forms.KeyEventHandler(this.treeViewContents_KeyDown);
             // 
+            // label1
+            // 
+            resources.ApplyResources(this.label1, "label1");
+            this.label1.Name = "label1";
+            // 
             // SongEditorChild
             // 
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this.groupBox2);
+            this.Controls.Add(this.checkedListBoxTags);
+            this.Controls.Add(this.label1);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.label19);
             this.Controls.Add(this.comboBoxLanguage);
@@ -494,7 +477,6 @@ namespace PraiseBase.Presenter.Editor
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxPreview)).EndInit();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
-            this.groupBox2.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -524,10 +506,8 @@ namespace PraiseBase.Presenter.Editor
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.ComboBox comboBoxLanguage;
         private System.Windows.Forms.TextBox textBoxSongText;
-        private System.Windows.Forms.TextBox textBoxPartCaptionTranslated;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.TextBox textBoxSongTranslation;
-        private System.Windows.Forms.ComboBox comboBoxLanguageTranslated;
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.PictureBox pictureBoxPreview;
         private System.Windows.Forms.TreeView treeViewContents;
@@ -553,6 +533,6 @@ namespace PraiseBase.Presenter.Editor
         private System.Windows.Forms.Label label19;
         private System.Windows.Forms.ToolTip toolTip1;
         private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.GroupBox groupBox2;
+        private System.Windows.Forms.Label label1;
     }
 }
