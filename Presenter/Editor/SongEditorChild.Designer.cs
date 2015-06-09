@@ -229,6 +229,7 @@ namespace PraiseBase.Presenter.Editor
             // buttonDuplicateSlide
             // 
             resources.ApplyResources(this.buttonDuplicateSlide, "buttonDuplicateSlide");
+            this.buttonDuplicateSlide.Image = global::PraiseBase.Presenter.Properties.Resources.editcopy;
             this.buttonDuplicateSlide.Name = "buttonDuplicateSlide";
             this.toolTip1.SetToolTip(this.buttonDuplicateSlide, resources.GetString("buttonDuplicateSlide.ToolTip"));
             this.buttonDuplicateSlide.UseVisualStyleBackColor = true;
@@ -244,6 +245,7 @@ namespace PraiseBase.Presenter.Editor
             // buttonAddSlide
             // 
             resources.ApplyResources(this.buttonAddSlide, "buttonAddSlide");
+            this.buttonAddSlide.Image = global::PraiseBase.Presenter.Properties.Resources.edit_add;
             this.buttonAddSlide.Name = "buttonAddSlide";
             this.toolTip1.SetToolTip(this.buttonAddSlide, resources.GetString("buttonAddSlide.ToolTip"));
             this.buttonAddSlide.UseVisualStyleBackColor = true;
@@ -252,6 +254,7 @@ namespace PraiseBase.Presenter.Editor
             // buttonAddItem
             // 
             resources.ApplyResources(this.buttonAddItem, "buttonAddItem");
+            this.buttonAddItem.Image = global::PraiseBase.Presenter.Properties.Resources.edit_add;
             this.buttonAddItem.Name = "buttonAddItem";
             this.toolTip1.SetToolTip(this.buttonAddItem, resources.GetString("buttonAddItem.ToolTip"));
             this.buttonAddItem.UseVisualStyleBackColor = true;
@@ -268,6 +271,7 @@ namespace PraiseBase.Presenter.Editor
             // buttonDelItem
             // 
             resources.ApplyResources(this.buttonDelItem, "buttonDelItem");
+            this.buttonDelItem.Image = global::PraiseBase.Presenter.Properties.Resources.edit_remove;
             this.buttonDelItem.Name = "buttonDelItem";
             this.toolTip1.SetToolTip(this.buttonDelItem, resources.GetString("buttonDelItem.ToolTip"));
             this.buttonDelItem.UseVisualStyleBackColor = true;
