@@ -593,7 +593,7 @@ namespace PraiseBase.Presenter.Editor
 
         private void addContextMenu_VisibleChanged(object sender, EventArgs e)
         {
-            addContextMenu.Show(buttonAddItem.PointToScreen(new Point(0, buttonAddItem.Height - 1)));
+            addContextMenu.Show(buttonAddItem.PointToScreen(new Point(0, -addContextMenu.Height)));
         }
 
         private void PreviewSlide()

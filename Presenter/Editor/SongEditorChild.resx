@@ -423,9 +423,6 @@
   <data name="&gt;&gt;pictureBoxPreview.ZOrder" xml:space="preserve">
     <value>5</value>
   </data>
-  <metadata name="toolTip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>584, 16</value>
-  </metadata>
   <data name="buttonDuplicateSlide.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Bottom, Left</value>
   </data>
@@ -498,7 +495,7 @@
     <value>NoControl</value>
   </data>
   <data name="buttonDuplicateSlide.Location" type="System.Drawing.Point, System.Drawing">
-    <value>133, 529</value>
+    <value>134, 529</value>
   </data>
   <data name="buttonDuplicateSlide.Size" type="System.Drawing.Size, System.Drawing">
     <value>26, 23</value>
@@ -506,6 +503,9 @@
   <data name="buttonDuplicateSlide.TabIndex" type="System.Int32, mscorlib">
     <value>9</value>
   </data>
+  <metadata name="toolTip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>584, 16</value>
+  </metadata>
   <data name="buttonDuplicateSlide.ToolTip" xml:space="preserve">
     <value>Duplizieren</value>
   </data>
@@ -622,7 +622,7 @@
     <value>41, 529</value>
   </data>
   <data name="buttonAddSlide.Size" type="System.Drawing.Size, System.Drawing">
-    <value>27, 23</value>
+    <value>26, 23</value>
   </data>
   <data name="buttonAddSlide.TabIndex" type="System.Int32, mscorlib">
     <value>6</value>
@@ -716,10 +716,10 @@
     <value>NoControl</value>
   </data>
   <data name="buttonAddItem.Location" type="System.Drawing.Point, System.Drawing">
-    <value>10, 528</value>
+    <value>10, 529</value>
   </data>
   <data name="buttonAddItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>25, 23</value>
+    <value>26, 23</value>
   </data>
   <data name="buttonAddItem.TabIndex" type="System.Int32, mscorlib">
     <value>5</value>
@@ -767,7 +767,7 @@
     <value>NoControl</value>
   </data>
   <data name="buttonMoveUp.Location" type="System.Drawing.Point, System.Drawing">
-    <value>74, 529</value>
+    <value>72, 529</value>
   </data>
   <data name="buttonMoveUp.Size" type="System.Drawing.Size, System.Drawing">
     <value>26, 23</value>
@@ -858,7 +858,7 @@
     <value>NoControl</value>
   </data>
   <data name="buttonDelItem.Location" type="System.Drawing.Point, System.Drawing">
-    <value>162, 529</value>
+    <value>165, 529</value>
   </data>
   <data name="buttonDelItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>26, 23</value>
@@ -906,7 +906,7 @@
     <value>NoControl</value>
   </data>
   <data name="buttonMoveDown.Location" type="System.Drawing.Point, System.Drawing">
-    <value>104, 529</value>
+    <value>103, 529</value>
   </data>
   <data name="buttonMoveDown.Size" type="System.Drawing.Size, System.Drawing">
     <value>26, 23</value>
@@ -929,9 +929,6 @@
   <data name="&gt;&gt;buttonMoveDown.ZOrder" xml:space="preserve">
     <value>6</value>
   </data>
-  <metadata name="toolTip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>584, 16</value>
-  </metadata>
   <data name="treeViewContents.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Bottom, Left, Right</value>
   </data>
@@ -961,39 +958,6 @@
   </data>
   <data name="panelSongStructure.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Bottom, Left</value>
-  </data>
-  <data name="&gt;&gt;labelStructure.Name" xml:space="preserve">
-    <value>labelStructure</value>
-  </data>
-  <data name="&gt;&gt;labelStructure.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;labelStructure.Parent" xml:space="preserve">
-    <value>panelSongStructure</value>
-  </data>
-  <data name="&gt;&gt;labelStructure.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="panelSongStructure.Location" type="System.Drawing.Point, System.Drawing">
-    <value>-2, 6</value>
-  </data>
-  <data name="panelSongStructure.Size" type="System.Drawing.Size, System.Drawing">
-    <value>193, 555</value>
-  </data>
-  <data name="panelSongStructure.TabIndex" type="System.Int32, mscorlib">
-    <value>128</value>
-  </data>
-  <data name="&gt;&gt;panelSongStructure.Name" xml:space="preserve">
-    <value>panelSongStructure</value>
-  </data>
-  <data name="&gt;&gt;panelSongStructure.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;panelSongStructure.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;panelSongStructure.ZOrder" xml:space="preserve">
-    <value>4</value>
   </data>
   <data name="labelStructure.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -1028,8 +992,311 @@
   <data name="&gt;&gt;labelStructure.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
+  <data name="panelSongStructure.Location" type="System.Drawing.Point, System.Drawing">
+    <value>-2, 6</value>
+  </data>
+  <data name="panelSongStructure.Size" type="System.Drawing.Size, System.Drawing">
+    <value>193, 555</value>
+  </data>
+  <data name="panelSongStructure.TabIndex" type="System.Int32, mscorlib">
+    <value>128</value>
+  </data>
+  <data name="&gt;&gt;panelSongStructure.Name" xml:space="preserve">
+    <value>panelSongStructure</value>
+  </data>
+  <data name="&gt;&gt;panelSongStructure.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;panelSongStructure.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;panelSongStructure.ZOrder" xml:space="preserve">
+    <value>4</value>
+  </data>
   <data name="tabControlMeta.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Bottom, Right</value>
+  </data>
+  <data name="&gt;&gt;tabPageInformation.Name" xml:space="preserve">
+    <value>tabPageInformation</value>
+  </data>
+  <data name="&gt;&gt;tabPageInformation.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;tabPageInformation.Parent" xml:space="preserve">
+    <value>tabControlMeta</value>
+  </data>
+  <data name="&gt;&gt;tabPageInformation.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;tabPageQA.Name" xml:space="preserve">
+    <value>tabPageQA</value>
+  </data>
+  <data name="&gt;&gt;tabPageQA.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;tabPageQA.Parent" xml:space="preserve">
+    <value>tabControlMeta</value>
+  </data>
+  <data name="&gt;&gt;tabPageQA.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="tabControlMeta.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 8.25pt</value>
+  </data>
+  <data name="tabControlMeta.ItemSize" type="System.Drawing.Size, System.Drawing">
+    <value>89, 20</value>
+  </data>
+  <data name="tabControlMeta.Location" type="System.Drawing.Point, System.Drawing">
+    <value>723, 6</value>
+  </data>
+  <data name="tabControlMeta.Size" type="System.Drawing.Size, System.Drawing">
+    <value>283, 339</value>
+  </data>
+  <data name="tabControlMeta.TabIndex" type="System.Int32, mscorlib">
+    <value>130</value>
+  </data>
+  <data name="&gt;&gt;tabControlMeta.Name" xml:space="preserve">
+    <value>tabControlMeta</value>
+  </data>
+  <data name="&gt;&gt;tabControlMeta.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TabControl, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;tabControlMeta.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;tabControlMeta.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="&gt;&gt;labelTitle.Name" xml:space="preserve">
+    <value>labelTitle</value>
+  </data>
+  <data name="&gt;&gt;labelTitle.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;labelTitle.Parent" xml:space="preserve">
+    <value>tabPageInformation</value>
+  </data>
+  <data name="&gt;&gt;labelTitle.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;labelLanguage.Name" xml:space="preserve">
+    <value>labelLanguage</value>
+  </data>
+  <data name="&gt;&gt;labelLanguage.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;labelLanguage.Parent" xml:space="preserve">
+    <value>tabPageInformation</value>
+  </data>
+  <data name="&gt;&gt;labelLanguage.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="&gt;&gt;labelRightsManagement.Name" xml:space="preserve">
+    <value>labelRightsManagement</value>
+  </data>
+  <data name="&gt;&gt;labelRightsManagement.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;labelRightsManagement.Parent" xml:space="preserve">
+    <value>tabPageInformation</value>
+  </data>
+  <data name="&gt;&gt;labelRightsManagement.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="&gt;&gt;textBoxSongbooks.Name" xml:space="preserve">
+    <value>textBoxSongbooks</value>
+  </data>
+  <data name="&gt;&gt;textBoxSongbooks.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;textBoxSongbooks.Parent" xml:space="preserve">
+    <value>tabPageInformation</value>
+  </data>
+  <data name="&gt;&gt;textBoxSongbooks.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="&gt;&gt;textBoxRightsManagement.Name" xml:space="preserve">
+    <value>textBoxRightsManagement</value>
+  </data>
+  <data name="&gt;&gt;textBoxRightsManagement.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;textBoxRightsManagement.Parent" xml:space="preserve">
+    <value>tabPageInformation</value>
+  </data>
+  <data name="&gt;&gt;textBoxRightsManagement.ZOrder" xml:space="preserve">
+    <value>4</value>
+  </data>
+  <data name="&gt;&gt;labelSongbook.Name" xml:space="preserve">
+    <value>labelSongbook</value>
+  </data>
+  <data name="&gt;&gt;labelSongbook.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;labelSongbook.Parent" xml:space="preserve">
+    <value>tabPageInformation</value>
+  </data>
+  <data name="&gt;&gt;labelSongbook.ZOrder" xml:space="preserve">
+    <value>5</value>
+  </data>
+  <data name="&gt;&gt;textBoxPublisher.Name" xml:space="preserve">
+    <value>textBoxPublisher</value>
+  </data>
+  <data name="&gt;&gt;textBoxPublisher.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;textBoxPublisher.Parent" xml:space="preserve">
+    <value>tabPageInformation</value>
+  </data>
+  <data name="&gt;&gt;textBoxPublisher.ZOrder" xml:space="preserve">
+    <value>6</value>
+  </data>
+  <data name="&gt;&gt;comboBoxLanguage.Name" xml:space="preserve">
+    <value>comboBoxLanguage</value>
+  </data>
+  <data name="&gt;&gt;comboBoxLanguage.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;comboBoxLanguage.Parent" xml:space="preserve">
+    <value>tabPageInformation</value>
+  </data>
+  <data name="&gt;&gt;comboBoxLanguage.ZOrder" xml:space="preserve">
+    <value>7</value>
+  </data>
+  <data name="&gt;&gt;labelPublisher.Name" xml:space="preserve">
+    <value>labelPublisher</value>
+  </data>
+  <data name="&gt;&gt;labelPublisher.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;labelPublisher.Parent" xml:space="preserve">
+    <value>tabPageInformation</value>
+  </data>
+  <data name="&gt;&gt;labelPublisher.ZOrder" xml:space="preserve">
+    <value>8</value>
+  </data>
+  <data name="&gt;&gt;labelCopyright.Name" xml:space="preserve">
+    <value>labelCopyright</value>
+  </data>
+  <data name="&gt;&gt;labelCopyright.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;labelCopyright.Parent" xml:space="preserve">
+    <value>tabPageInformation</value>
+  </data>
+  <data name="&gt;&gt;labelCopyright.ZOrder" xml:space="preserve">
+    <value>10</value>
+  </data>
+  <data name="&gt;&gt;textBoxAuthors.Name" xml:space="preserve">
+    <value>textBoxAuthors</value>
+  </data>
+  <data name="&gt;&gt;textBoxAuthors.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;textBoxAuthors.Parent" xml:space="preserve">
+    <value>tabPageInformation</value>
+  </data>
+  <data name="&gt;&gt;textBoxAuthors.ZOrder" xml:space="preserve">
+    <value>11</value>
+  </data>
+  <data name="&gt;&gt;labelCcliIdentifier.Name" xml:space="preserve">
+    <value>labelCcliIdentifier</value>
+  </data>
+  <data name="&gt;&gt;labelCcliIdentifier.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;labelCcliIdentifier.Parent" xml:space="preserve">
+    <value>tabPageInformation</value>
+  </data>
+  <data name="&gt;&gt;labelCcliIdentifier.ZOrder" xml:space="preserve">
+    <value>12</value>
+  </data>
+  <data name="&gt;&gt;labelAuthor.Name" xml:space="preserve">
+    <value>labelAuthor</value>
+  </data>
+  <data name="&gt;&gt;labelAuthor.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;labelAuthor.Parent" xml:space="preserve">
+    <value>tabPageInformation</value>
+  </data>
+  <data name="&gt;&gt;labelAuthor.ZOrder" xml:space="preserve">
+    <value>13</value>
+  </data>
+  <data name="&gt;&gt;labelThemes.Name" xml:space="preserve">
+    <value>labelThemes</value>
+  </data>
+  <data name="&gt;&gt;labelThemes.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;labelThemes.Parent" xml:space="preserve">
+    <value>tabPageInformation</value>
+  </data>
+  <data name="&gt;&gt;labelThemes.ZOrder" xml:space="preserve">
+    <value>14</value>
+  </data>
+  <data name="&gt;&gt;textBoxCopyright.Name" xml:space="preserve">
+    <value>textBoxCopyright</value>
+  </data>
+  <data name="&gt;&gt;textBoxCopyright.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;textBoxCopyright.Parent" xml:space="preserve">
+    <value>tabPageInformation</value>
+  </data>
+  <data name="&gt;&gt;textBoxCopyright.ZOrder" xml:space="preserve">
+    <value>15</value>
+  </data>
+  <data name="&gt;&gt;textBoxCCLISongID.Name" xml:space="preserve">
+    <value>textBoxCCLISongID</value>
+  </data>
+  <data name="&gt;&gt;textBoxCCLISongID.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;textBoxCCLISongID.Parent" xml:space="preserve">
+    <value>tabPageInformation</value>
+  </data>
+  <data name="&gt;&gt;textBoxCCLISongID.ZOrder" xml:space="preserve">
+    <value>16</value>
+  </data>
+  <data name="&gt;&gt;checkedListBoxThemes.Name" xml:space="preserve">
+    <value>checkedListBoxThemes</value>
+  </data>
+  <data name="&gt;&gt;checkedListBoxThemes.Type" xml:space="preserve">
+    <value>System.Windows.Forms.CheckedListBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;checkedListBoxThemes.Parent" xml:space="preserve">
+    <value>tabPageInformation</value>
+  </data>
+  <data name="&gt;&gt;checkedListBoxThemes.ZOrder" xml:space="preserve">
+    <value>17</value>
+  </data>
+  <data name="tabPageInformation.Location" type="System.Drawing.Point, System.Drawing">
+    <value>4, 24</value>
+  </data>
+  <data name="tabPageInformation.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>3, 3, 3, 3</value>
+  </data>
+  <data name="tabPageInformation.Size" type="System.Drawing.Size, System.Drawing">
+    <value>275, 311</value>
+  </data>
+  <data name="tabPageInformation.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="tabPageInformation.Text" xml:space="preserve">
+    <value>Informationen</value>
+  </data>
+  <data name="&gt;&gt;tabPageInformation.Name" xml:space="preserve">
+    <value>tabPageInformation</value>
+  </data>
+  <data name="&gt;&gt;tabPageInformation.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;tabPageInformation.Parent" xml:space="preserve">
+    <value>tabControlMeta</value>
+  </data>
+  <data name="&gt;&gt;tabPageInformation.ZOrder" xml:space="preserve">
+    <value>0</value>
   </data>
   <data name="labelTitle.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -1544,32 +1811,116 @@
   <data name="&gt;&gt;checkedListBoxThemes.ZOrder" xml:space="preserve">
     <value>17</value>
   </data>
-  <data name="tabPageInformation.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="&gt;&gt;textBoxComment.Name" xml:space="preserve">
+    <value>textBoxComment</value>
+  </data>
+  <data name="&gt;&gt;textBoxComment.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;textBoxComment.Parent" xml:space="preserve">
+    <value>tabPageQA</value>
+  </data>
+  <data name="&gt;&gt;textBoxComment.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;labelMarkers.Name" xml:space="preserve">
+    <value>labelMarkers</value>
+  </data>
+  <data name="&gt;&gt;labelMarkers.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;labelMarkers.Parent" xml:space="preserve">
+    <value>tabPageQA</value>
+  </data>
+  <data name="&gt;&gt;labelMarkers.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="&gt;&gt;checkBoxQAImages.Name" xml:space="preserve">
+    <value>checkBoxQAImages</value>
+  </data>
+  <data name="&gt;&gt;checkBoxQAImages.Type" xml:space="preserve">
+    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;checkBoxQAImages.Parent" xml:space="preserve">
+    <value>tabPageQA</value>
+  </data>
+  <data name="&gt;&gt;checkBoxQAImages.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="&gt;&gt;checkBoxQASegmentation.Name" xml:space="preserve">
+    <value>checkBoxQASegmentation</value>
+  </data>
+  <data name="&gt;&gt;checkBoxQASegmentation.Type" xml:space="preserve">
+    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;checkBoxQASegmentation.Parent" xml:space="preserve">
+    <value>tabPageQA</value>
+  </data>
+  <data name="&gt;&gt;checkBoxQASegmentation.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="&gt;&gt;checkBoxQATranslation.Name" xml:space="preserve">
+    <value>checkBoxQATranslation</value>
+  </data>
+  <data name="&gt;&gt;checkBoxQATranslation.Type" xml:space="preserve">
+    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;checkBoxQATranslation.Parent" xml:space="preserve">
+    <value>tabPageQA</value>
+  </data>
+  <data name="&gt;&gt;checkBoxQATranslation.ZOrder" xml:space="preserve">
+    <value>4</value>
+  </data>
+  <data name="&gt;&gt;labelComment.Name" xml:space="preserve">
+    <value>labelComment</value>
+  </data>
+  <data name="&gt;&gt;labelComment.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;labelComment.Parent" xml:space="preserve">
+    <value>tabPageQA</value>
+  </data>
+  <data name="&gt;&gt;labelComment.ZOrder" xml:space="preserve">
+    <value>5</value>
+  </data>
+  <data name="&gt;&gt;checkBoxQASpelling.Name" xml:space="preserve">
+    <value>checkBoxQASpelling</value>
+  </data>
+  <data name="&gt;&gt;checkBoxQASpelling.Type" xml:space="preserve">
+    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;checkBoxQASpelling.Parent" xml:space="preserve">
+    <value>tabPageQA</value>
+  </data>
+  <data name="&gt;&gt;checkBoxQASpelling.ZOrder" xml:space="preserve">
+    <value>6</value>
+  </data>
+  <data name="tabPageQA.Location" type="System.Drawing.Point, System.Drawing">
     <value>4, 24</value>
   </data>
-  <data name="tabPageInformation.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+  <data name="tabPageQA.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>3, 3, 3, 3</value>
   </data>
-  <data name="tabPageInformation.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="tabPageQA.Size" type="System.Drawing.Size, System.Drawing">
     <value>275, 311</value>
   </data>
-  <data name="tabPageInformation.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
+  <data name="tabPageQA.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
   </data>
-  <data name="tabPageInformation.Text" xml:space="preserve">
-    <value>Informationen</value>
+  <data name="tabPageQA.Text" xml:space="preserve">
+    <value>Qualitätssicherung</value>
   </data>
-  <data name="&gt;&gt;tabPageInformation.Name" xml:space="preserve">
-    <value>tabPageInformation</value>
+  <data name="&gt;&gt;tabPageQA.Name" xml:space="preserve">
+    <value>tabPageQA</value>
   </data>
-  <data name="&gt;&gt;tabPageInformation.Type" xml:space="preserve">
+  <data name="&gt;&gt;tabPageQA.Type" xml:space="preserve">
     <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;tabPageInformation.Parent" xml:space="preserve">
+  <data name="&gt;&gt;tabPageQA.Parent" xml:space="preserve">
     <value>tabControlMeta</value>
   </data>
-  <data name="&gt;&gt;tabPageInformation.ZOrder" xml:space="preserve">
-    <value>0</value>
+  <data name="&gt;&gt;tabPageQA.ZOrder" xml:space="preserve">
+    <value>1</value>
   </data>
   <data name="textBoxComment.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Bottom, Left, Right</value>
@@ -1801,60 +2152,6 @@
   </data>
   <data name="&gt;&gt;checkBoxQASpelling.ZOrder" xml:space="preserve">
     <value>6</value>
-  </data>
-  <data name="tabPageQA.Location" type="System.Drawing.Point, System.Drawing">
-    <value>4, 24</value>
-  </data>
-  <data name="tabPageQA.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>3, 3, 3, 3</value>
-  </data>
-  <data name="tabPageQA.Size" type="System.Drawing.Size, System.Drawing">
-    <value>275, 311</value>
-  </data>
-  <data name="tabPageQA.TabIndex" type="System.Int32, mscorlib">
-    <value>1</value>
-  </data>
-  <data name="tabPageQA.Text" xml:space="preserve">
-    <value>Qualitätssicherung</value>
-  </data>
-  <data name="&gt;&gt;tabPageQA.Name" xml:space="preserve">
-    <value>tabPageQA</value>
-  </data>
-  <data name="&gt;&gt;tabPageQA.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;tabPageQA.Parent" xml:space="preserve">
-    <value>tabControlMeta</value>
-  </data>
-  <data name="&gt;&gt;tabPageQA.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="tabControlMeta.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Microsoft Sans Serif, 8.25pt</value>
-  </data>
-  <data name="tabControlMeta.ItemSize" type="System.Drawing.Size, System.Drawing">
-    <value>89, 20</value>
-  </data>
-  <data name="tabControlMeta.Location" type="System.Drawing.Point, System.Drawing">
-    <value>723, 6</value>
-  </data>
-  <data name="tabControlMeta.Size" type="System.Drawing.Size, System.Drawing">
-    <value>283, 339</value>
-  </data>
-  <data name="tabControlMeta.TabIndex" type="System.Int32, mscorlib">
-    <value>130</value>
-  </data>
-  <data name="&gt;&gt;tabControlMeta.Name" xml:space="preserve">
-    <value>tabControlMeta</value>
-  </data>
-  <data name="&gt;&gt;tabControlMeta.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TabControl, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;tabControlMeta.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;tabControlMeta.ZOrder" xml:space="preserve">
-    <value>3</value>
   </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
