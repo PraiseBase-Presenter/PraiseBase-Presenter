@@ -825,5 +825,16 @@ namespace PraiseBase.Presenter.Editor
                 wnd.EnableTranslation(!wnd.Song.HasTranslation());
             }
         }
+
+        private void toolStripButtonSwitchInputMode_Click(object sender, EventArgs e)
+        {
+            if (ActiveMdiChild != null)
+            {
+                var wnd = ((SongEditorChild)ActiveMdiChild);
+                wnd.InputMode = wnd.InputMode == SongEditorChild.SongStructureDisplayMode.Structured 
+                    ? SongEditorChild.SongStructureDisplayMode.Textual 
+                    : SongEditorChild.SongStructureDisplayMode.Structured;
+            }
+        }
     }
 }

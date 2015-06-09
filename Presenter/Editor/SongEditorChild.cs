@@ -77,6 +77,16 @@ namespace PraiseBase.Presenter.Editor
         /// </summary>
         protected readonly ISlideTextFormattingMapper<Song> PreviewFormattingMapper = new SongSlideTextFormattingMapper();
 
+        /// <summary>
+        /// Display mode
+        /// </summary>
+        private SongStructureDisplayMode _inputMode = SongStructureDisplayMode.Structured;
+
+        /// <summary>
+        /// Textual song representation mappper
+        /// </summary>
+        private readonly TextualSongRepresentationMapper _textualSongReprMapper = new TextualSongRepresentationMapper();
+
         #endregion
 
         public SongEditorChild(Settings settings, ImageManager imgManager, Song sng)
@@ -88,6 +98,8 @@ namespace PraiseBase.Presenter.Editor
             Song = sng;
 
             InitializeComponent();
+
+            InputMode = SongStructureDisplayMode.Structured;
         }
 
         private void EditorChild_Load(object sender, EventArgs e)
@@ -189,13 +201,13 @@ namespace PraiseBase.Presenter.Editor
 
         private void PopulateTags()
         {
-            checkedListBoxTags.Items.Clear();
+            checkedListBoxThemes.Items.Clear();
             foreach (string str in Settings.Tags)
             {
                 if (Song.Themes.Contains(str))
-                    checkedListBoxTags.Items.Add(str, true);
+                    checkedListBoxThemes.Items.Add(str, true);
                 else
-                    checkedListBoxTags.Items.Add(str);
+                    checkedListBoxThemes.Items.Add(str);
             }
         }
 
@@ -506,11 +518,11 @@ namespace PraiseBase.Presenter.Editor
         {
             if (e.CurrentValue == CheckState.Unchecked)
             {
-                Song.Themes.Add(checkedListBoxTags.Items[e.Index].ToString());
+                Song.Themes.Add(checkedListBoxThemes.Items[e.Index].ToString());
             }
             else
             {
-                Song.Themes.Remove(checkedListBoxTags.Items[e.Index].ToString());
+                Song.Themes.Remove(checkedListBoxThemes.Items[e.Index].ToString());
             }
         }
 
@@ -741,12 +753,16 @@ namespace PraiseBase.Presenter.Editor
 
         private void textBoxSongText_KeyUp(object sender, KeyEventArgs e)
         {
+            // TODO: Implement preview respecting slide background and current text section
+            // _textualSongReprMapper.Map(textBoxSongText.Text, Song);
             PreviewSlide();
         }
 
         private void textBoxSongTranslation_KeyUp(object sender, KeyEventArgs e)
         {
-            PreviewSlide();
+            // TODO: Translation mapping textBoxSongTranslation.Text
+            // _textualSongReprMapper.Map(textBoxSongText.Text, Song);
+            //PreviewSlide();
         }
 
         private void textBoxAuthors_TextChanged(object sender, EventArgs e)
@@ -757,6 +773,48 @@ namespace PraiseBase.Presenter.Editor
         private void textBoxSongbooks_TextChanged(object sender, EventArgs e)
         {
             Song.SongBooks.FromString(((TextBox)sender).Text);
+        }
+
+        public enum SongStructureDisplayMode
+        {
+            Structured,
+            Textual
+        }
+
+        public SongStructureDisplayMode InputMode
+        {
+            get
+            {
+                return _inputMode;
+            }
+            set
+            {
+                if (_inputMode != value)
+                {
+                    if (value == SongStructureDisplayMode.Structured)
+                    {
+                        panelSongStructure.Show();
+                        PopulateTree();
+                        if (CurrentPartId >= 0 && CurrentSlideId >= 0)
+                        {
+                            treeViewContents.SelectedNode = treeViewContents.Nodes[CurrentPartId].Nodes[CurrentSlideId];
+                        }
+                        else if (CurrentPartId >= 0)
+                        {
+                            treeViewContents.SelectedNode = treeViewContents.Nodes[CurrentPartId];
+                        }
+                    }
+                    else if (value == SongStructureDisplayMode.Textual)
+                    {
+                        panelSongStructure.Hide();
+                        textBoxSongText.DataBindings.Clear();
+                        textBoxSongTranslation.DataBindings.Clear();
+
+                        textBoxSongText.Text = _textualSongReprMapper.Map(Song);
+                    }
+                    _inputMode = value;
+                }
+            }
         }
     }
 }

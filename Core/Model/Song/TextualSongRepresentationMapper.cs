@@ -85,6 +85,7 @@ namespace PraiseBase.Presenter.Model.Song
         private void RemoveEmptyLineAtEnd(List<string> lines)
         {
             int cnt = lines.Count;
+            if (cnt == 0) return;
             if (lines[cnt - 1].Trim() == String.Empty)
             {
                 lines.RemoveAt(cnt - 1);
