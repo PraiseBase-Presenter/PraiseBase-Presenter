@@ -2368,7 +2368,10 @@ namespace PraiseBase.Presenter.Presenter
             }
             Settings.Default.Save();
             songDetailElement.SongViewMode = Settings.Default.PresenterSongViewMode;
-            showCurrentSongDetails();
+            if (_songManager.CurrentSong != null)
+            {
+                showCurrentSongDetails();
+            }
         }
     }
 }

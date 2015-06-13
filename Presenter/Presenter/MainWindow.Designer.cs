@@ -328,6 +328,7 @@ namespace PraiseBase.Presenter.Presenter
             this.songDetailElement.Name = "songDetailElement";
             this.songDetailElement.NextSongIcon = ((System.Drawing.Image)(resources.GetObject("songDetailElement.NextSongIcon")));
             this.songDetailElement.PreviousSongIcon = ((System.Drawing.Image)(resources.GetObject("songDetailElement.PreviousSongIcon")));
+            this.songDetailElement.SongViewMode = PraiseBase.Presenter.Manager.SongViewMode.Structure;
             this.songDetailElement.ThumbnailSize = new System.Drawing.Size(56, 42);
             this.songDetailElement.SlideClicked += new PraiseBase.Presenter.Controls.SongDetail.SlideClick(this.songDetailElement_SlideClicked);
             this.songDetailElement.ImageClicked += new PraiseBase.Presenter.Controls.SongDetail.ImageClick(this.songDetailElement_ImageClicked);

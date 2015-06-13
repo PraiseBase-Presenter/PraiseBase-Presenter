@@ -319,9 +319,9 @@
     <value>Übersetzung deaktivieren</value>
   </data>
   <data name="ShowSongSequence" xml:space="preserve">
-    <value>Ablauf anzeigen</value>
+    <value>Ablauf</value>
   </data>
   <data name="ShowSongStructure" xml:space="preserve">
-    <value>Struktur anzeigen</value>
+    <value>Struktur</value>
   </data>
 </root>

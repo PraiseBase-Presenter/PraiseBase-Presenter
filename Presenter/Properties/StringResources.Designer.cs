@@ -466,7 +466,7 @@ namespace PraiseBase.Presenter.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Ablauf anzeigen.
+        ///   Looks up a localized string similar to Ablauf.
         /// </summary>
         public static string ShowSongSequence {
             get {
@@ -475,7 +475,7 @@ namespace PraiseBase.Presenter.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Struktur anzeigen.
+        ///   Looks up a localized string similar to Struktur.
         /// </summary>
         public static string ShowSongStructure {
             get {

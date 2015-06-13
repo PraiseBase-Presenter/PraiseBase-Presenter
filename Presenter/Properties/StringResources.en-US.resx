@@ -253,10 +253,10 @@
     <value>Should the current setlist be saved?</value>
   </data>
   <data name="ShowSongSequence" xml:space="preserve">
-    <value>Display sequence</value>
+    <value>Sequence</value>
   </data>
   <data name="ShowSongStructure" xml:space="preserve">
-    <value>Display structure</value>
+    <value>Structure</value>
   </data>
   <data name="Slide" xml:space="preserve">
     <value>Slide</value>
