@@ -852,12 +852,70 @@ namespace PraiseBase.Presenter.Editor
         void tItem_Click(object sender, EventArgs e)
         {
             String caption = ((ToolStripMenuItem)sender).Text;
-            listBoxSequence.Items.Add(caption);
+            foreach (var p in Song.Parts)
+            {
+                if (p.Caption == caption)
+                {
+                    Song.PartSequence.Add(p);
+                    break;
+                }
+            }
+            int idx = listBoxSequence.SelectedIndex;
+            PopulateSequence();
+            buttonSequencePartRemove.Enabled = listBoxSequence.SelectedIndex >= 0;
+            listBoxSequence.SelectedIndex = listBoxSequence.Items.Count - 1;
         }
 
         private void addSequencePartContextMenu_VisibleChanged(object sender, EventArgs e)
         {
             addSequencePartContextMenu.Show(buttonSequencePartAdd.PointToScreen(new Point(0, -addSequencePartContextMenu.Height)));
+        }
+
+        private void buttonSequencePartUp_Click(object sender, EventArgs e)
+        {
+            int idx = listBoxSequence.SelectedIndex;
+            if (idx >= 1 && idx < Song.PartSequence.Count)
+            {
+                Song.PartSequence.SwapWithUpper(idx);
+                PopulateSequence();
+                listBoxSequence.SelectedIndex = idx - 1;
+            }
+        }
+
+        private void buttonSequencePartDown_Click(object sender, EventArgs e)
+        {
+            int idx = listBoxSequence.SelectedIndex;
+            if (idx >= 0 && idx < Song.PartSequence.Count -1)
+            {
+                Song.PartSequence.SwapWithLower(idx);
+                PopulateSequence();
+                listBoxSequence.SelectedIndex = idx + 1;
+            }
+        }
+
+        private void buttonSequencePartRemove_Click(object sender, EventArgs e)
+        {
+            if (listBoxSequence.Items.Count <= 1)
+            {
+                MessageBox.Show("Das letzte Element kann nicht entfernt werden!", "Fehler", MessageBoxButtons.OK, MessageBoxIcon.Stop);
+                return;
+            }
+            int idx = listBoxSequence.SelectedIndex;
+            if (idx >= 0 && idx < Song.PartSequence.Count)
+            {
+                Song.PartSequence.RemoveAt(idx);
+            }
+            PopulateSequence();
+            buttonSequencePartRemove.Enabled = listBoxSequence.Items.Count > 1 && listBoxSequence.SelectedIndex >= 0;
+            listBoxSequence.SelectedIndex = idx - 1;
+        }
+
+        private void listBoxSequence_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            int idx = listBoxSequence.SelectedIndex;
+            buttonSequencePartRemove.Enabled = listBoxSequence.Items.Count > 1;
+            buttonSequencePartUp.Enabled = idx > 0;
+            buttonSequencePartDown.Enabled = idx < listBoxSequence.Items.Count - 1;
         }
     }
 }

@@ -309,6 +309,7 @@ namespace PraiseBase.Presenter.Editor
             this.buttonSequencePartUp.Name = "buttonSequencePartUp";
             this.toolTip1.SetToolTip(this.buttonSequencePartUp, resources.GetString("buttonSequencePartUp.ToolTip"));
             this.buttonSequencePartUp.UseVisualStyleBackColor = true;
+            this.buttonSequencePartUp.Click += new System.EventHandler(this.buttonSequencePartUp_Click);
             // 
             // buttonSequencePartDown
             // 
@@ -316,6 +317,7 @@ namespace PraiseBase.Presenter.Editor
             this.buttonSequencePartDown.Name = "buttonSequencePartDown";
             this.toolTip1.SetToolTip(this.buttonSequencePartDown, resources.GetString("buttonSequencePartDown.ToolTip"));
             this.buttonSequencePartDown.UseVisualStyleBackColor = true;
+            this.buttonSequencePartDown.Click += new System.EventHandler(this.buttonSequencePartDown_Click);
             // 
             // buttonSequencePartRemove
             // 
@@ -324,6 +326,7 @@ namespace PraiseBase.Presenter.Editor
             this.buttonSequencePartRemove.Name = "buttonSequencePartRemove";
             this.toolTip1.SetToolTip(this.buttonSequencePartRemove, resources.GetString("buttonSequencePartRemove.ToolTip"));
             this.buttonSequencePartRemove.UseVisualStyleBackColor = true;
+            this.buttonSequencePartRemove.Click += new System.EventHandler(this.buttonSequencePartRemove_Click);
             // 
             // treeViewContents
             // 
@@ -551,6 +554,7 @@ namespace PraiseBase.Presenter.Editor
             resources.ApplyResources(this.listBoxSequence, "listBoxSequence");
             this.listBoxSequence.FormattingEnabled = true;
             this.listBoxSequence.Name = "listBoxSequence";
+            this.listBoxSequence.SelectedIndexChanged += new System.EventHandler(this.listBoxSequence_SelectedIndexChanged);
             // 
             // labelSequence
             // 
