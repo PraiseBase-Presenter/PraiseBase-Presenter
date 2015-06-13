@@ -115,50 +115,61 @@ namespace PraiseBase.Presenter.Editor
             // 
             // splitContainer1.Panel1
             // 
+            resources.ApplyResources(this.splitContainer1.Panel1, "splitContainer1.Panel1");
             this.splitContainer1.Panel1.Controls.Add(this.labelSongText);
             this.splitContainer1.Panel1.Controls.Add(this.textBoxSongText);
+            this.toolTip1.SetToolTip(this.splitContainer1.Panel1, resources.GetString("splitContainer1.Panel1.ToolTip"));
             // 
             // splitContainer1.Panel2
             // 
+            resources.ApplyResources(this.splitContainer1.Panel2, "splitContainer1.Panel2");
             this.splitContainer1.Panel2.Controls.Add(this.labelTranslation);
             this.splitContainer1.Panel2.Controls.Add(this.textBoxSongTranslation);
+            this.toolTip1.SetToolTip(this.splitContainer1.Panel2, resources.GetString("splitContainer1.Panel2.ToolTip"));
+            this.toolTip1.SetToolTip(this.splitContainer1, resources.GetString("splitContainer1.ToolTip"));
             // 
             // labelSongText
             // 
             resources.ApplyResources(this.labelSongText, "labelSongText");
             this.labelSongText.Name = "labelSongText";
+            this.toolTip1.SetToolTip(this.labelSongText, resources.GetString("labelSongText.ToolTip"));
             // 
             // textBoxSongText
             // 
             this.textBoxSongText.AcceptsReturn = true;
             this.textBoxSongText.AcceptsTab = true;
-            this.textBoxSongText.AllowDrop = true;
             resources.ApplyResources(this.textBoxSongText, "textBoxSongText");
+            this.textBoxSongText.AllowDrop = true;
             this.textBoxSongText.Name = "textBoxSongText";
+            this.toolTip1.SetToolTip(this.textBoxSongText, resources.GetString("textBoxSongText.ToolTip"));
             this.textBoxSongText.KeyUp += new System.Windows.Forms.KeyEventHandler(this.textBoxSongText_KeyUp);
             // 
             // labelTranslation
             // 
             resources.ApplyResources(this.labelTranslation, "labelTranslation");
             this.labelTranslation.Name = "labelTranslation";
+            this.toolTip1.SetToolTip(this.labelTranslation, resources.GetString("labelTranslation.ToolTip"));
             // 
             // textBoxSongTranslation
             // 
             this.textBoxSongTranslation.AcceptsReturn = true;
             this.textBoxSongTranslation.AcceptsTab = true;
-            this.textBoxSongTranslation.AllowDrop = true;
             resources.ApplyResources(this.textBoxSongTranslation, "textBoxSongTranslation");
+            this.textBoxSongTranslation.AllowDrop = true;
             this.textBoxSongTranslation.Name = "textBoxSongTranslation";
+            this.toolTip1.SetToolTip(this.textBoxSongTranslation, resources.GetString("textBoxSongTranslation.ToolTip"));
             this.textBoxSongTranslation.KeyUp += new System.Windows.Forms.KeyEventHandler(this.textBoxSongTranslation_KeyUp);
             // 
             // addContextMenu
             // 
-            this.addContextMenu.Name = "addContextMenu";
             resources.ApplyResources(this.addContextMenu, "addContextMenu");
+            this.addContextMenu.Name = "addContextMenu";
+            this.toolTip1.SetToolTip(this.addContextMenu, resources.GetString("addContextMenu.ToolTip"));
             this.addContextMenu.VisibleChanged += new System.EventHandler(this.addContextMenu_VisibleChanged);
             // 
             // slideContextMenu
             // 
+            resources.ApplyResources(this.slideContextMenu, "slideContextMenu");
             this.slideContextMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.neueFolieToolStripMenuItem,
             this.aufToolStripMenuItem,
@@ -167,62 +178,63 @@ namespace PraiseBase.Presenter.Editor
             this.teilenToolStripMenuItem,
             this.löschenToolStripMenuItem1});
             this.slideContextMenu.Name = "slideContextMenu";
-            resources.ApplyResources(this.slideContextMenu, "slideContextMenu");
+            this.toolTip1.SetToolTip(this.slideContextMenu, resources.GetString("slideContextMenu.ToolTip"));
             // 
             // neueFolieToolStripMenuItem
             // 
-            this.neueFolieToolStripMenuItem.Name = "neueFolieToolStripMenuItem";
             resources.ApplyResources(this.neueFolieToolStripMenuItem, "neueFolieToolStripMenuItem");
+            this.neueFolieToolStripMenuItem.Name = "neueFolieToolStripMenuItem";
             this.neueFolieToolStripMenuItem.Click += new System.EventHandler(this.neueFolieToolStripMenuItem_Click);
             // 
             // aufToolStripMenuItem
             // 
-            this.aufToolStripMenuItem.Name = "aufToolStripMenuItem";
             resources.ApplyResources(this.aufToolStripMenuItem, "aufToolStripMenuItem");
+            this.aufToolStripMenuItem.Name = "aufToolStripMenuItem";
             this.aufToolStripMenuItem.Click += new System.EventHandler(this.aufToolStripMenuItem_Click);
             // 
             // abToolStripMenuItem
             // 
-            this.abToolStripMenuItem.Name = "abToolStripMenuItem";
             resources.ApplyResources(this.abToolStripMenuItem, "abToolStripMenuItem");
+            this.abToolStripMenuItem.Name = "abToolStripMenuItem";
             this.abToolStripMenuItem.Click += new System.EventHandler(this.abToolStripMenuItem_Click);
             // 
             // löschenToolStripMenuItem
             // 
-            this.löschenToolStripMenuItem.Name = "löschenToolStripMenuItem";
             resources.ApplyResources(this.löschenToolStripMenuItem, "löschenToolStripMenuItem");
+            this.löschenToolStripMenuItem.Name = "löschenToolStripMenuItem";
             this.löschenToolStripMenuItem.Click += new System.EventHandler(this.löschenToolStripMenuItem_Click);
             // 
             // teilenToolStripMenuItem
             // 
-            this.teilenToolStripMenuItem.Name = "teilenToolStripMenuItem";
             resources.ApplyResources(this.teilenToolStripMenuItem, "teilenToolStripMenuItem");
+            this.teilenToolStripMenuItem.Name = "teilenToolStripMenuItem";
             this.teilenToolStripMenuItem.Click += new System.EventHandler(this.teilenToolStripMenuItem_Click);
             // 
             // löschenToolStripMenuItem1
             // 
-            this.löschenToolStripMenuItem1.Name = "löschenToolStripMenuItem1";
             resources.ApplyResources(this.löschenToolStripMenuItem1, "löschenToolStripMenuItem1");
+            this.löschenToolStripMenuItem1.Name = "löschenToolStripMenuItem1";
             this.löschenToolStripMenuItem1.Click += new System.EventHandler(this.löschenToolStripMenuItem1_Click);
             // 
             // partContextMenu
             // 
+            resources.ApplyResources(this.partContextMenu, "partContextMenu");
             this.partContextMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.umbenennenToolStripMenuItem,
             this.löschenToolStripMenuItem2});
             this.partContextMenu.Name = "partContextMenu";
-            resources.ApplyResources(this.partContextMenu, "partContextMenu");
+            this.toolTip1.SetToolTip(this.partContextMenu, resources.GetString("partContextMenu.ToolTip"));
             // 
             // umbenennenToolStripMenuItem
             // 
-            this.umbenennenToolStripMenuItem.Name = "umbenennenToolStripMenuItem";
             resources.ApplyResources(this.umbenennenToolStripMenuItem, "umbenennenToolStripMenuItem");
+            this.umbenennenToolStripMenuItem.Name = "umbenennenToolStripMenuItem";
             this.umbenennenToolStripMenuItem.Click += new System.EventHandler(this.umbenennenToolStripMenuItem_Click);
             // 
             // löschenToolStripMenuItem2
             // 
-            this.löschenToolStripMenuItem2.Name = "löschenToolStripMenuItem2";
             resources.ApplyResources(this.löschenToolStripMenuItem2, "löschenToolStripMenuItem2");
+            this.löschenToolStripMenuItem2.Name = "löschenToolStripMenuItem2";
             this.löschenToolStripMenuItem2.Click += new System.EventHandler(this.löschenToolStripMenuItem2_Click);
             // 
             // pictureBoxPreview
@@ -233,6 +245,7 @@ namespace PraiseBase.Presenter.Editor
             this.pictureBoxPreview.Cursor = System.Windows.Forms.Cursors.Hand;
             this.pictureBoxPreview.Name = "pictureBoxPreview";
             this.pictureBoxPreview.TabStop = false;
+            this.toolTip1.SetToolTip(this.pictureBoxPreview, resources.GetString("pictureBoxPreview.ToolTip"));
             this.pictureBoxPreview.Click += new System.EventHandler(this.buttonSlideBackground_Click);
             // 
             // buttonDuplicateSlide
@@ -248,13 +261,14 @@ namespace PraiseBase.Presenter.Editor
             // 
             resources.ApplyResources(this.textBoxSongTitle, "textBoxSongTitle");
             this.textBoxSongTitle.Name = "textBoxSongTitle";
+            this.toolTip1.SetToolTip(this.textBoxSongTitle, resources.GetString("textBoxSongTitle.ToolTip"));
             this.textBoxSongTitle.TextChanged += new System.EventHandler(this.textBoxSongTitle_TextChanged);
             this.textBoxSongTitle.Enter += new System.EventHandler(this.textBoxSongTitle_Enter);
             // 
             // buttonAddSlide
             // 
             resources.ApplyResources(this.buttonAddSlide, "buttonAddSlide");
-            this.buttonAddSlide.Image = global::PraiseBase.Presenter.Properties.Resources.edit_add;
+            this.buttonAddSlide.Image = global::PraiseBase.Presenter.Properties.Resources.edit_add_slide;
             this.buttonAddSlide.Name = "buttonAddSlide";
             this.toolTip1.SetToolTip(this.buttonAddSlide, resources.GetString("buttonAddSlide.ToolTip"));
             this.buttonAddSlide.UseVisualStyleBackColor = true;
@@ -333,6 +347,7 @@ namespace PraiseBase.Presenter.Editor
             resources.ApplyResources(this.treeViewContents, "treeViewContents");
             this.treeViewContents.HideSelection = false;
             this.treeViewContents.Name = "treeViewContents";
+            this.toolTip1.SetToolTip(this.treeViewContents, resources.GetString("treeViewContents.ToolTip"));
             this.treeViewContents.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.treeViewContents_AfterSelect);
             this.treeViewContents.NodeMouseClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.treeViewContents_NodeMouseClick);
             this.treeViewContents.KeyDown += new System.Windows.Forms.KeyEventHandler(this.treeViewContents_KeyDown);
@@ -341,6 +356,7 @@ namespace PraiseBase.Presenter.Editor
             // 
             resources.ApplyResources(this.labelStructure, "labelStructure");
             this.labelStructure.Name = "labelStructure";
+            this.toolTip1.SetToolTip(this.labelStructure, resources.GetString("labelStructure.ToolTip"));
             // 
             // tabControlMeta
             // 
@@ -349,9 +365,11 @@ namespace PraiseBase.Presenter.Editor
             this.tabControlMeta.Controls.Add(this.tabPageQA);
             this.tabControlMeta.Name = "tabControlMeta";
             this.tabControlMeta.SelectedIndex = 0;
+            this.toolTip1.SetToolTip(this.tabControlMeta, resources.GetString("tabControlMeta.ToolTip"));
             // 
             // tabPageInformation
             // 
+            resources.ApplyResources(this.tabPageInformation, "tabPageInformation");
             this.tabPageInformation.Controls.Add(this.labelTitle);
             this.tabPageInformation.Controls.Add(this.labelLanguage);
             this.tabPageInformation.Controls.Add(this.labelRightsManagement);
@@ -370,51 +388,59 @@ namespace PraiseBase.Presenter.Editor
             this.tabPageInformation.Controls.Add(this.textBoxCopyright);
             this.tabPageInformation.Controls.Add(this.textBoxCCLISongID);
             this.tabPageInformation.Controls.Add(this.checkedListBoxThemes);
-            resources.ApplyResources(this.tabPageInformation, "tabPageInformation");
             this.tabPageInformation.Name = "tabPageInformation";
+            this.toolTip1.SetToolTip(this.tabPageInformation, resources.GetString("tabPageInformation.ToolTip"));
             this.tabPageInformation.UseVisualStyleBackColor = true;
             // 
             // labelTitle
             // 
             resources.ApplyResources(this.labelTitle, "labelTitle");
             this.labelTitle.Name = "labelTitle";
+            this.toolTip1.SetToolTip(this.labelTitle, resources.GetString("labelTitle.ToolTip"));
             // 
             // labelLanguage
             // 
             resources.ApplyResources(this.labelLanguage, "labelLanguage");
             this.labelLanguage.Name = "labelLanguage";
+            this.toolTip1.SetToolTip(this.labelLanguage, resources.GetString("labelLanguage.ToolTip"));
             // 
             // labelRightsManagement
             // 
             resources.ApplyResources(this.labelRightsManagement, "labelRightsManagement");
             this.labelRightsManagement.Name = "labelRightsManagement";
+            this.toolTip1.SetToolTip(this.labelRightsManagement, resources.GetString("labelRightsManagement.ToolTip"));
             // 
             // textBoxSongbooks
             // 
             resources.ApplyResources(this.textBoxSongbooks, "textBoxSongbooks");
             this.textBoxSongbooks.Name = "textBoxSongbooks";
+            this.toolTip1.SetToolTip(this.textBoxSongbooks, resources.GetString("textBoxSongbooks.ToolTip"));
             this.textBoxSongbooks.TextChanged += new System.EventHandler(this.textBoxSongbooks_TextChanged);
             // 
             // textBoxRightsManagement
             // 
             resources.ApplyResources(this.textBoxRightsManagement, "textBoxRightsManagement");
             this.textBoxRightsManagement.Name = "textBoxRightsManagement";
+            this.toolTip1.SetToolTip(this.textBoxRightsManagement, resources.GetString("textBoxRightsManagement.ToolTip"));
             // 
             // labelSongbook
             // 
             resources.ApplyResources(this.labelSongbook, "labelSongbook");
             this.labelSongbook.Name = "labelSongbook";
+            this.toolTip1.SetToolTip(this.labelSongbook, resources.GetString("labelSongbook.ToolTip"));
             // 
             // textBoxPublisher
             // 
             resources.ApplyResources(this.textBoxPublisher, "textBoxPublisher");
             this.textBoxPublisher.Name = "textBoxPublisher";
+            this.toolTip1.SetToolTip(this.textBoxPublisher, resources.GetString("textBoxPublisher.ToolTip"));
             // 
             // comboBoxLanguage
             // 
             resources.ApplyResources(this.comboBoxLanguage, "comboBoxLanguage");
             this.comboBoxLanguage.FormattingEnabled = true;
             this.comboBoxLanguage.Name = "comboBoxLanguage";
+            this.toolTip1.SetToolTip(this.comboBoxLanguage, resources.GetString("comboBoxLanguage.ToolTip"));
             this.comboBoxLanguage.SelectedIndexChanged += new System.EventHandler(this.comboBoxLanguage_SelectedIndexChanged);
             this.comboBoxLanguage.Enter += new System.EventHandler(this.comboBoxLanguage_Enter);
             // 
@@ -422,42 +448,50 @@ namespace PraiseBase.Presenter.Editor
             // 
             resources.ApplyResources(this.labelPublisher, "labelPublisher");
             this.labelPublisher.Name = "labelPublisher";
+            this.toolTip1.SetToolTip(this.labelPublisher, resources.GetString("labelPublisher.ToolTip"));
             // 
             // labelCopyright
             // 
             resources.ApplyResources(this.labelCopyright, "labelCopyright");
             this.labelCopyright.Name = "labelCopyright";
+            this.toolTip1.SetToolTip(this.labelCopyright, resources.GetString("labelCopyright.ToolTip"));
             // 
             // textBoxAuthors
             // 
             resources.ApplyResources(this.textBoxAuthors, "textBoxAuthors");
             this.textBoxAuthors.Name = "textBoxAuthors";
+            this.toolTip1.SetToolTip(this.textBoxAuthors, resources.GetString("textBoxAuthors.ToolTip"));
             this.textBoxAuthors.TextChanged += new System.EventHandler(this.textBoxAuthors_TextChanged);
             // 
             // labelCcliIdentifier
             // 
             resources.ApplyResources(this.labelCcliIdentifier, "labelCcliIdentifier");
             this.labelCcliIdentifier.Name = "labelCcliIdentifier";
+            this.toolTip1.SetToolTip(this.labelCcliIdentifier, resources.GetString("labelCcliIdentifier.ToolTip"));
             // 
             // labelAuthor
             // 
             resources.ApplyResources(this.labelAuthor, "labelAuthor");
             this.labelAuthor.Name = "labelAuthor";
+            this.toolTip1.SetToolTip(this.labelAuthor, resources.GetString("labelAuthor.ToolTip"));
             // 
             // labelThemes
             // 
             resources.ApplyResources(this.labelThemes, "labelThemes");
             this.labelThemes.Name = "labelThemes";
+            this.toolTip1.SetToolTip(this.labelThemes, resources.GetString("labelThemes.ToolTip"));
             // 
             // textBoxCopyright
             // 
             resources.ApplyResources(this.textBoxCopyright, "textBoxCopyright");
             this.textBoxCopyright.Name = "textBoxCopyright";
+            this.toolTip1.SetToolTip(this.textBoxCopyright, resources.GetString("textBoxCopyright.ToolTip"));
             // 
             // textBoxCCLISongID
             // 
             resources.ApplyResources(this.textBoxCCLISongID, "textBoxCCLISongID");
             this.textBoxCCLISongID.Name = "textBoxCCLISongID";
+            this.toolTip1.SetToolTip(this.textBoxCCLISongID, resources.GetString("textBoxCCLISongID.ToolTip"));
             // 
             // checkedListBoxThemes
             // 
@@ -466,10 +500,12 @@ namespace PraiseBase.Presenter.Editor
             this.checkedListBoxThemes.CheckOnClick = true;
             this.checkedListBoxThemes.FormattingEnabled = true;
             this.checkedListBoxThemes.Name = "checkedListBoxThemes";
+            this.toolTip1.SetToolTip(this.checkedListBoxThemes, resources.GetString("checkedListBoxThemes.ToolTip"));
             this.checkedListBoxThemes.ItemCheck += new System.Windows.Forms.ItemCheckEventHandler(this.checkedListBoxTags_ItemCheck);
             // 
             // tabPageQA
             // 
+            resources.ApplyResources(this.tabPageQA, "tabPageQA");
             this.tabPageQA.Controls.Add(this.textBoxComment);
             this.tabPageQA.Controls.Add(this.labelMarkers);
             this.tabPageQA.Controls.Add(this.checkBoxQAImages);
@@ -477,24 +513,27 @@ namespace PraiseBase.Presenter.Editor
             this.tabPageQA.Controls.Add(this.checkBoxQATranslation);
             this.tabPageQA.Controls.Add(this.labelComment);
             this.tabPageQA.Controls.Add(this.checkBoxQASpelling);
-            resources.ApplyResources(this.tabPageQA, "tabPageQA");
             this.tabPageQA.Name = "tabPageQA";
+            this.toolTip1.SetToolTip(this.tabPageQA, resources.GetString("tabPageQA.ToolTip"));
             this.tabPageQA.UseVisualStyleBackColor = true;
             // 
             // textBoxComment
             // 
             resources.ApplyResources(this.textBoxComment, "textBoxComment");
             this.textBoxComment.Name = "textBoxComment";
+            this.toolTip1.SetToolTip(this.textBoxComment, resources.GetString("textBoxComment.ToolTip"));
             // 
             // labelMarkers
             // 
             resources.ApplyResources(this.labelMarkers, "labelMarkers");
             this.labelMarkers.Name = "labelMarkers";
+            this.toolTip1.SetToolTip(this.labelMarkers, resources.GetString("labelMarkers.ToolTip"));
             // 
             // checkBoxQAImages
             // 
             resources.ApplyResources(this.checkBoxQAImages, "checkBoxQAImages");
             this.checkBoxQAImages.Name = "checkBoxQAImages";
+            this.toolTip1.SetToolTip(this.checkBoxQAImages, resources.GetString("checkBoxQAImages.ToolTip"));
             this.checkBoxQAImages.UseVisualStyleBackColor = true;
             this.checkBoxQAImages.CheckedChanged += new System.EventHandler(this.checkBoxQAImages_CheckedChanged);
             // 
@@ -502,6 +541,7 @@ namespace PraiseBase.Presenter.Editor
             // 
             resources.ApplyResources(this.checkBoxQASegmentation, "checkBoxQASegmentation");
             this.checkBoxQASegmentation.Name = "checkBoxQASegmentation";
+            this.toolTip1.SetToolTip(this.checkBoxQASegmentation, resources.GetString("checkBoxQASegmentation.ToolTip"));
             this.checkBoxQASegmentation.UseVisualStyleBackColor = true;
             this.checkBoxQASegmentation.CheckedChanged += new System.EventHandler(this.checkBoxQASegmentation_CheckedChanged);
             // 
@@ -509,6 +549,7 @@ namespace PraiseBase.Presenter.Editor
             // 
             resources.ApplyResources(this.checkBoxQATranslation, "checkBoxQATranslation");
             this.checkBoxQATranslation.Name = "checkBoxQATranslation";
+            this.toolTip1.SetToolTip(this.checkBoxQATranslation, resources.GetString("checkBoxQATranslation.ToolTip"));
             this.checkBoxQATranslation.UseVisualStyleBackColor = true;
             this.checkBoxQATranslation.CheckedChanged += new System.EventHandler(this.checkBoxQATranslation_CheckedChanged);
             // 
@@ -516,11 +557,13 @@ namespace PraiseBase.Presenter.Editor
             // 
             resources.ApplyResources(this.labelComment, "labelComment");
             this.labelComment.Name = "labelComment";
+            this.toolTip1.SetToolTip(this.labelComment, resources.GetString("labelComment.ToolTip"));
             // 
             // checkBoxQASpelling
             // 
             resources.ApplyResources(this.checkBoxQASpelling, "checkBoxQASpelling");
             this.checkBoxQASpelling.Name = "checkBoxQASpelling";
+            this.toolTip1.SetToolTip(this.checkBoxQASpelling, resources.GetString("checkBoxQASpelling.ToolTip"));
             this.checkBoxQASpelling.UseVisualStyleBackColor = true;
             this.checkBoxQASpelling.CheckedChanged += new System.EventHandler(this.checkBoxQASpelling_CheckedChanged);
             // 
@@ -531,6 +574,7 @@ namespace PraiseBase.Presenter.Editor
             // 
             // splitContainerStrctureSequence.Panel1
             // 
+            resources.ApplyResources(this.splitContainerStrctureSequence.Panel1, "splitContainerStrctureSequence.Panel1");
             this.splitContainerStrctureSequence.Panel1.Controls.Add(this.buttonAddItem);
             this.splitContainerStrctureSequence.Panel1.Controls.Add(this.buttonAddSlide);
             this.splitContainerStrctureSequence.Panel1.Controls.Add(this.labelStructure);
@@ -539,32 +583,39 @@ namespace PraiseBase.Presenter.Editor
             this.splitContainerStrctureSequence.Panel1.Controls.Add(this.buttonMoveUp);
             this.splitContainerStrctureSequence.Panel1.Controls.Add(this.buttonMoveDown);
             this.splitContainerStrctureSequence.Panel1.Controls.Add(this.buttonDelItem);
+            this.toolTip1.SetToolTip(this.splitContainerStrctureSequence.Panel1, resources.GetString("splitContainerStrctureSequence.Panel1.ToolTip"));
             // 
             // splitContainerStrctureSequence.Panel2
             // 
+            resources.ApplyResources(this.splitContainerStrctureSequence.Panel2, "splitContainerStrctureSequence.Panel2");
             this.splitContainerStrctureSequence.Panel2.Controls.Add(this.buttonSequencePartRemove);
             this.splitContainerStrctureSequence.Panel2.Controls.Add(this.buttonSequencePartDown);
             this.splitContainerStrctureSequence.Panel2.Controls.Add(this.buttonSequencePartUp);
             this.splitContainerStrctureSequence.Panel2.Controls.Add(this.buttonSequencePartAdd);
             this.splitContainerStrctureSequence.Panel2.Controls.Add(this.listBoxSequence);
             this.splitContainerStrctureSequence.Panel2.Controls.Add(this.labelSequence);
+            this.toolTip1.SetToolTip(this.splitContainerStrctureSequence.Panel2, resources.GetString("splitContainerStrctureSequence.Panel2.ToolTip"));
+            this.toolTip1.SetToolTip(this.splitContainerStrctureSequence, resources.GetString("splitContainerStrctureSequence.ToolTip"));
             // 
             // listBoxSequence
             // 
             resources.ApplyResources(this.listBoxSequence, "listBoxSequence");
             this.listBoxSequence.FormattingEnabled = true;
             this.listBoxSequence.Name = "listBoxSequence";
+            this.toolTip1.SetToolTip(this.listBoxSequence, resources.GetString("listBoxSequence.ToolTip"));
             this.listBoxSequence.SelectedIndexChanged += new System.EventHandler(this.listBoxSequence_SelectedIndexChanged);
             // 
             // labelSequence
             // 
             resources.ApplyResources(this.labelSequence, "labelSequence");
             this.labelSequence.Name = "labelSequence";
+            this.toolTip1.SetToolTip(this.labelSequence, resources.GetString("labelSequence.ToolTip"));
             // 
             // addSequencePartContextMenu
             // 
-            this.addSequencePartContextMenu.Name = "addContextMenu";
             resources.ApplyResources(this.addSequencePartContextMenu, "addSequencePartContextMenu");
+            this.addSequencePartContextMenu.Name = "addContextMenu";
+            this.toolTip1.SetToolTip(this.addSequencePartContextMenu, resources.GetString("addSequencePartContextMenu.ToolTip"));
             this.addSequencePartContextMenu.VisibleChanged += new System.EventHandler(this.addSequencePartContextMenu_VisibleChanged);
             // 
             // SongEditorChild
@@ -577,6 +628,7 @@ namespace PraiseBase.Presenter.Editor
             this.Controls.Add(this.splitContainer1);
             this.Name = "SongEditorChild";
             this.ShowInTaskbar = false;
+            this.toolTip1.SetToolTip(this, resources.GetString("$this.ToolTip"));
             this.Load += new System.EventHandler(this.EditorChild_Load);
             this.Shown += new System.EventHandler(this.EditorChild_Shown);
             this.splitContainer1.Panel1.ResumeLayout(false);

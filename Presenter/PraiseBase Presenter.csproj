@@ -633,6 +633,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\Techniknetz_Logo-300x122.png" />
+    <None Include="Resources\edit_add_slide.png" />
     <Content Include="Resources\translate_active.png" />
     <None Include="Resources\xmag.png" />
     <None Include="Resources\wheel16.png" />
