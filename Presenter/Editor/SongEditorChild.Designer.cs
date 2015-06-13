@@ -57,8 +57,11 @@ namespace PraiseBase.Presenter.Editor
             this.buttonDelItem = new System.Windows.Forms.Button();
             this.buttonMoveDown = new System.Windows.Forms.Button();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
+            this.buttonSequencePartAdd = new System.Windows.Forms.Button();
+            this.buttonSequencePartUp = new System.Windows.Forms.Button();
+            this.buttonSequencePartDown = new System.Windows.Forms.Button();
+            this.buttonSequencePartRemove = new System.Windows.Forms.Button();
             this.treeViewContents = new System.Windows.Forms.TreeView();
-            this.panelSongStructure = new System.Windows.Forms.Panel();
             this.labelStructure = new System.Windows.Forms.Label();
             this.tabControlMeta = new System.Windows.Forms.TabControl();
             this.tabPageInformation = new System.Windows.Forms.TabPage();
@@ -87,16 +90,22 @@ namespace PraiseBase.Presenter.Editor
             this.checkBoxQATranslation = new System.Windows.Forms.CheckBox();
             this.labelComment = new System.Windows.Forms.Label();
             this.checkBoxQASpelling = new System.Windows.Forms.CheckBox();
+            this.splitContainerStrctureSequence = new System.Windows.Forms.SplitContainer();
+            this.listBoxSequence = new System.Windows.Forms.ListBox();
+            this.labelSequence = new System.Windows.Forms.Label();
+            this.addSequencePartContextMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
             this.splitContainer1.SuspendLayout();
             this.slideContextMenu.SuspendLayout();
             this.partContextMenu.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxPreview)).BeginInit();
-            this.panelSongStructure.SuspendLayout();
             this.tabControlMeta.SuspendLayout();
             this.tabPageInformation.SuspendLayout();
             this.tabPageQA.SuspendLayout();
+            this.splitContainerStrctureSequence.Panel1.SuspendLayout();
+            this.splitContainerStrctureSequence.Panel2.SuspendLayout();
+            this.splitContainerStrctureSequence.SuspendLayout();
             this.SuspendLayout();
             // 
             // splitContainer1
@@ -285,6 +294,37 @@ namespace PraiseBase.Presenter.Editor
             this.buttonMoveDown.UseVisualStyleBackColor = true;
             this.buttonMoveDown.Click += new System.EventHandler(this.buttonMoveDown_Click);
             // 
+            // buttonSequencePartAdd
+            // 
+            resources.ApplyResources(this.buttonSequencePartAdd, "buttonSequencePartAdd");
+            this.buttonSequencePartAdd.Image = global::PraiseBase.Presenter.Properties.Resources.edit_add;
+            this.buttonSequencePartAdd.Name = "buttonSequencePartAdd";
+            this.toolTip1.SetToolTip(this.buttonSequencePartAdd, resources.GetString("buttonSequencePartAdd.ToolTip"));
+            this.buttonSequencePartAdd.UseVisualStyleBackColor = true;
+            this.buttonSequencePartAdd.MouseDown += new System.Windows.Forms.MouseEventHandler(this.buttonSequencePartAdd_MouseDown);
+            // 
+            // buttonSequencePartUp
+            // 
+            resources.ApplyResources(this.buttonSequencePartUp, "buttonSequencePartUp");
+            this.buttonSequencePartUp.Name = "buttonSequencePartUp";
+            this.toolTip1.SetToolTip(this.buttonSequencePartUp, resources.GetString("buttonSequencePartUp.ToolTip"));
+            this.buttonSequencePartUp.UseVisualStyleBackColor = true;
+            // 
+            // buttonSequencePartDown
+            // 
+            resources.ApplyResources(this.buttonSequencePartDown, "buttonSequencePartDown");
+            this.buttonSequencePartDown.Name = "buttonSequencePartDown";
+            this.toolTip1.SetToolTip(this.buttonSequencePartDown, resources.GetString("buttonSequencePartDown.ToolTip"));
+            this.buttonSequencePartDown.UseVisualStyleBackColor = true;
+            // 
+            // buttonSequencePartRemove
+            // 
+            resources.ApplyResources(this.buttonSequencePartRemove, "buttonSequencePartRemove");
+            this.buttonSequencePartRemove.Image = global::PraiseBase.Presenter.Properties.Resources.edit_remove;
+            this.buttonSequencePartRemove.Name = "buttonSequencePartRemove";
+            this.toolTip1.SetToolTip(this.buttonSequencePartRemove, resources.GetString("buttonSequencePartRemove.ToolTip"));
+            this.buttonSequencePartRemove.UseVisualStyleBackColor = true;
+            // 
             // treeViewContents
             // 
             resources.ApplyResources(this.treeViewContents, "treeViewContents");
@@ -293,19 +333,6 @@ namespace PraiseBase.Presenter.Editor
             this.treeViewContents.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.treeViewContents_AfterSelect);
             this.treeViewContents.NodeMouseClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.treeViewContents_NodeMouseClick);
             this.treeViewContents.KeyDown += new System.Windows.Forms.KeyEventHandler(this.treeViewContents_KeyDown);
-            // 
-            // panelSongStructure
-            // 
-            resources.ApplyResources(this.panelSongStructure, "panelSongStructure");
-            this.panelSongStructure.Controls.Add(this.labelStructure);
-            this.panelSongStructure.Controls.Add(this.buttonAddItem);
-            this.panelSongStructure.Controls.Add(this.buttonAddSlide);
-            this.panelSongStructure.Controls.Add(this.buttonDuplicateSlide);
-            this.panelSongStructure.Controls.Add(this.buttonMoveUp);
-            this.panelSongStructure.Controls.Add(this.buttonDelItem);
-            this.panelSongStructure.Controls.Add(this.buttonMoveDown);
-            this.panelSongStructure.Controls.Add(this.treeViewContents);
-            this.panelSongStructure.Name = "panelSongStructure";
             // 
             // labelStructure
             // 
@@ -494,12 +521,54 @@ namespace PraiseBase.Presenter.Editor
             this.checkBoxQASpelling.UseVisualStyleBackColor = true;
             this.checkBoxQASpelling.CheckedChanged += new System.EventHandler(this.checkBoxQASpelling_CheckedChanged);
             // 
+            // splitContainerStrctureSequence
+            // 
+            resources.ApplyResources(this.splitContainerStrctureSequence, "splitContainerStrctureSequence");
+            this.splitContainerStrctureSequence.Name = "splitContainerStrctureSequence";
+            // 
+            // splitContainerStrctureSequence.Panel1
+            // 
+            this.splitContainerStrctureSequence.Panel1.Controls.Add(this.buttonAddItem);
+            this.splitContainerStrctureSequence.Panel1.Controls.Add(this.buttonAddSlide);
+            this.splitContainerStrctureSequence.Panel1.Controls.Add(this.labelStructure);
+            this.splitContainerStrctureSequence.Panel1.Controls.Add(this.buttonDuplicateSlide);
+            this.splitContainerStrctureSequence.Panel1.Controls.Add(this.treeViewContents);
+            this.splitContainerStrctureSequence.Panel1.Controls.Add(this.buttonMoveUp);
+            this.splitContainerStrctureSequence.Panel1.Controls.Add(this.buttonMoveDown);
+            this.splitContainerStrctureSequence.Panel1.Controls.Add(this.buttonDelItem);
+            // 
+            // splitContainerStrctureSequence.Panel2
+            // 
+            this.splitContainerStrctureSequence.Panel2.Controls.Add(this.buttonSequencePartRemove);
+            this.splitContainerStrctureSequence.Panel2.Controls.Add(this.buttonSequencePartDown);
+            this.splitContainerStrctureSequence.Panel2.Controls.Add(this.buttonSequencePartUp);
+            this.splitContainerStrctureSequence.Panel2.Controls.Add(this.buttonSequencePartAdd);
+            this.splitContainerStrctureSequence.Panel2.Controls.Add(this.listBoxSequence);
+            this.splitContainerStrctureSequence.Panel2.Controls.Add(this.labelSequence);
+            // 
+            // listBoxSequence
+            // 
+            resources.ApplyResources(this.listBoxSequence, "listBoxSequence");
+            this.listBoxSequence.FormattingEnabled = true;
+            this.listBoxSequence.Name = "listBoxSequence";
+            // 
+            // labelSequence
+            // 
+            resources.ApplyResources(this.labelSequence, "labelSequence");
+            this.labelSequence.Name = "labelSequence";
+            // 
+            // addSequencePartContextMenu
+            // 
+            this.addSequencePartContextMenu.Name = "addContextMenu";
+            resources.ApplyResources(this.addSequencePartContextMenu, "addSequencePartContextMenu");
+            this.addSequencePartContextMenu.VisibleChanged += new System.EventHandler(this.addSequencePartContextMenu_VisibleChanged);
+            // 
             // SongEditorChild
             // 
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.splitContainerStrctureSequence);
             this.Controls.Add(this.tabControlMeta);
-            this.Controls.Add(this.panelSongStructure);
             this.Controls.Add(this.pictureBoxPreview);
             this.Controls.Add(this.splitContainer1);
             this.Name = "SongEditorChild";
@@ -514,13 +583,16 @@ namespace PraiseBase.Presenter.Editor
             this.slideContextMenu.ResumeLayout(false);
             this.partContextMenu.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxPreview)).EndInit();
-            this.panelSongStructure.ResumeLayout(false);
-            this.panelSongStructure.PerformLayout();
             this.tabControlMeta.ResumeLayout(false);
             this.tabPageInformation.ResumeLayout(false);
             this.tabPageInformation.PerformLayout();
             this.tabPageQA.ResumeLayout(false);
             this.tabPageQA.PerformLayout();
+            this.splitContainerStrctureSequence.Panel1.ResumeLayout(false);
+            this.splitContainerStrctureSequence.Panel1.PerformLayout();
+            this.splitContainerStrctureSequence.Panel2.ResumeLayout(false);
+            this.splitContainerStrctureSequence.Panel2.PerformLayout();
+            this.splitContainerStrctureSequence.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -553,7 +625,6 @@ namespace PraiseBase.Presenter.Editor
         private System.Windows.Forms.Button buttonDelItem;
         private System.Windows.Forms.Button buttonMoveDown;
         private System.Windows.Forms.ToolTip toolTip1;
-        private System.Windows.Forms.Panel panelSongStructure;
         private System.Windows.Forms.TabControl tabControlMeta;
         private System.Windows.Forms.TabPage tabPageInformation;
         private System.Windows.Forms.Label labelLanguage;
@@ -582,5 +653,13 @@ namespace PraiseBase.Presenter.Editor
         private System.Windows.Forms.CheckBox checkBoxQASpelling;
         private System.Windows.Forms.Label labelTitle;
         private System.Windows.Forms.Label labelStructure;
+        private System.Windows.Forms.SplitContainer splitContainerStrctureSequence;
+        private System.Windows.Forms.Label labelSequence;
+        private System.Windows.Forms.ListBox listBoxSequence;
+        private System.Windows.Forms.Button buttonSequencePartRemove;
+        private System.Windows.Forms.Button buttonSequencePartDown;
+        private System.Windows.Forms.Button buttonSequencePartUp;
+        private System.Windows.Forms.Button buttonSequencePartAdd;
+        private System.Windows.Forms.ContextMenuStrip addSequencePartContextMenu;
     }
 }

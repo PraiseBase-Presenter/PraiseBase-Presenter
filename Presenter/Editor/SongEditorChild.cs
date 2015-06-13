@@ -265,6 +265,17 @@ namespace PraiseBase.Presenter.Editor
                 treeViewContents.Nodes.Add(partNode);
             }
             treeViewContents.ExpandAll();
+
+            PopulateSequence();
+        }
+
+        public void PopulateSequence()
+        {
+            listBoxSequence.Items.Clear();
+            foreach (SongPart part in Song.PartSequence)
+            {
+                listBoxSequence.Items.Add(part.Caption);
+            }
         }
 
         private void treeViewContents_AfterSelect(object sender, TreeViewEventArgs e)
@@ -793,7 +804,7 @@ namespace PraiseBase.Presenter.Editor
                 {
                     if (value == SongStructureDisplayMode.Structured)
                     {
-                        panelSongStructure.Show();
+                        splitContainerStrctureSequence.Panel1.Show();
                         PopulateTree();
                         if (CurrentPartId >= 0 && CurrentSlideId >= 0)
                         {
@@ -806,7 +817,7 @@ namespace PraiseBase.Presenter.Editor
                     }
                     else if (value == SongStructureDisplayMode.Textual)
                     {
-                        panelSongStructure.Hide();
+                        splitContainerStrctureSequence.Panel1.Hide();
                         textBoxSongText.DataBindings.Clear();
                         textBoxSongTranslation.DataBindings.Clear();
 
@@ -815,6 +826,38 @@ namespace PraiseBase.Presenter.Editor
                     _inputMode = value;
                 }
             }
+        }
+
+        private void buttonSequencePartAdd_MouseDown(object sender, MouseEventArgs e)
+        {
+            if (addSequencePartContextMenu.Visible)
+            {
+                addSequencePartContextMenu.Hide();
+                return;
+            }
+            if (e.Button == MouseButtons.Left)
+            {
+                addSequencePartContextMenu.Items.Clear();
+                foreach (var p in Song.Parts)
+                {
+                    ToolStripMenuItem tItem = new ToolStripMenuItem(p.Caption);
+                    tItem.Click += tItem_Click;
+                    addSequencePartContextMenu.Items.Add(tItem);
+                }
+
+                addSequencePartContextMenu.Show();
+            }
+        }
+
+        void tItem_Click(object sender, EventArgs e)
+        {
+            String caption = ((ToolStripMenuItem)sender).Text;
+            listBoxSequence.Items.Add(caption);
+        }
+
+        private void addSequencePartContextMenu_VisibleChanged(object sender, EventArgs e)
+        {
+            addSequencePartContextMenu.Show(buttonSequencePartAdd.PointToScreen(new Point(0, -addSequencePartContextMenu.Height)));
         }
     }
 }

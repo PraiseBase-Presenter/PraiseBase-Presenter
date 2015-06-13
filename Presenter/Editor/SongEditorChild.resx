@@ -307,7 +307,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;splitContainer1.ZOrder" xml:space="preserve">
-    <value>6</value>
+    <value>7</value>
   </data>
   <metadata name="addContextMenu.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>17, 17</value>
@@ -324,15 +324,6 @@
   <metadata name="slideContextMenu.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>156, 16</value>
   </metadata>
-  <data name="slideContextMenu.Size" type="System.Drawing.Size, System.Drawing">
-    <value>134, 136</value>
-  </data>
-  <data name="&gt;&gt;slideContextMenu.Name" xml:space="preserve">
-    <value>slideContextMenu</value>
-  </data>
-  <data name="&gt;&gt;slideContextMenu.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ContextMenuStrip, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
   <data name="neueFolieToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>133, 22</value>
   </data>
@@ -369,18 +360,18 @@
   <data name="löschenToolStripMenuItem1.Text" xml:space="preserve">
     <value>Löschen</value>
   </data>
+  <data name="slideContextMenu.Size" type="System.Drawing.Size, System.Drawing">
+    <value>134, 136</value>
+  </data>
+  <data name="&gt;&gt;slideContextMenu.Name" xml:space="preserve">
+    <value>slideContextMenu</value>
+  </data>
+  <data name="&gt;&gt;slideContextMenu.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ContextMenuStrip, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
   <metadata name="partContextMenu.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>295, 16</value>
   </metadata>
-  <data name="partContextMenu.Size" type="System.Drawing.Size, System.Drawing">
-    <value>147, 48</value>
-  </data>
-  <data name="&gt;&gt;partContextMenu.Name" xml:space="preserve">
-    <value>partContextMenu</value>
-  </data>
-  <data name="&gt;&gt;partContextMenu.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ContextMenuStrip, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
   <data name="umbenennenToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>146, 22</value>
   </data>
@@ -392,6 +383,15 @@
   </data>
   <data name="löschenToolStripMenuItem2.Text" xml:space="preserve">
     <value>Löschen</value>
+  </data>
+  <data name="partContextMenu.Size" type="System.Drawing.Size, System.Drawing">
+    <value>147, 48</value>
+  </data>
+  <data name="&gt;&gt;partContextMenu.Name" xml:space="preserve">
+    <value>partContextMenu</value>
+  </data>
+  <data name="&gt;&gt;partContextMenu.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ContextMenuStrip, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="pictureBoxPreview.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Bottom, Right</value>
@@ -421,7 +421,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;pictureBoxPreview.ZOrder" xml:space="preserve">
-    <value>5</value>
+    <value>6</value>
   </data>
   <data name="buttonDuplicateSlide.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Bottom, Left</value>
@@ -433,7 +433,7 @@
     <value>NoControl</value>
   </data>
   <data name="buttonDuplicateSlide.Location" type="System.Drawing.Point, System.Drawing">
-    <value>134, 529</value>
+    <value>130, 276</value>
   </data>
   <data name="buttonDuplicateSlide.Size" type="System.Drawing.Size, System.Drawing">
     <value>26, 23</value>
@@ -454,7 +454,7 @@
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;buttonDuplicateSlide.Parent" xml:space="preserve">
-    <value>panelSongStructure</value>
+    <value>splitContainerStrctureSequence.Panel1</value>
   </data>
   <data name="&gt;&gt;buttonDuplicateSlide.ZOrder" xml:space="preserve">
     <value>3</value>
@@ -493,7 +493,7 @@
     <value>NoControl</value>
   </data>
   <data name="buttonAddSlide.Location" type="System.Drawing.Point, System.Drawing">
-    <value>41, 529</value>
+    <value>37, 276</value>
   </data>
   <data name="buttonAddSlide.Size" type="System.Drawing.Size, System.Drawing">
     <value>26, 23</value>
@@ -514,10 +514,10 @@
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;buttonAddSlide.Parent" xml:space="preserve">
-    <value>panelSongStructure</value>
+    <value>splitContainerStrctureSequence.Panel1</value>
   </data>
   <data name="&gt;&gt;buttonAddSlide.ZOrder" xml:space="preserve">
-    <value>2</value>
+    <value>1</value>
   </data>
   <data name="buttonAddItem.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Bottom, Left</value>
@@ -526,7 +526,7 @@
     <value>NoControl</value>
   </data>
   <data name="buttonAddItem.Location" type="System.Drawing.Point, System.Drawing">
-    <value>10, 529</value>
+    <value>6, 276</value>
   </data>
   <data name="buttonAddItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>26, 23</value>
@@ -547,10 +547,10 @@
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;buttonAddItem.Parent" xml:space="preserve">
-    <value>panelSongStructure</value>
+    <value>splitContainerStrctureSequence.Panel1</value>
   </data>
   <data name="&gt;&gt;buttonAddItem.ZOrder" xml:space="preserve">
-    <value>1</value>
+    <value>0</value>
   </data>
   <data name="buttonMoveUp.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Bottom, Left</value>
@@ -577,7 +577,7 @@
     <value>NoControl</value>
   </data>
   <data name="buttonMoveUp.Location" type="System.Drawing.Point, System.Drawing">
-    <value>72, 529</value>
+    <value>68, 276</value>
   </data>
   <data name="buttonMoveUp.Size" type="System.Drawing.Size, System.Drawing">
     <value>26, 23</value>
@@ -595,10 +595,10 @@
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;buttonMoveUp.Parent" xml:space="preserve">
-    <value>panelSongStructure</value>
+    <value>splitContainerStrctureSequence.Panel1</value>
   </data>
   <data name="&gt;&gt;buttonMoveUp.ZOrder" xml:space="preserve">
-    <value>4</value>
+    <value>5</value>
   </data>
   <data name="buttonDelItem.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Bottom, Left</value>
@@ -610,7 +610,7 @@
     <value>NoControl</value>
   </data>
   <data name="buttonDelItem.Location" type="System.Drawing.Point, System.Drawing">
-    <value>165, 529</value>
+    <value>161, 276</value>
   </data>
   <data name="buttonDelItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>26, 23</value>
@@ -628,10 +628,10 @@
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;buttonDelItem.Parent" xml:space="preserve">
-    <value>panelSongStructure</value>
+    <value>splitContainerStrctureSequence.Panel1</value>
   </data>
   <data name="&gt;&gt;buttonDelItem.ZOrder" xml:space="preserve">
-    <value>5</value>
+    <value>7</value>
   </data>
   <data name="buttonMoveDown.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Bottom, Left</value>
@@ -658,7 +658,7 @@
     <value>NoControl</value>
   </data>
   <data name="buttonMoveDown.Location" type="System.Drawing.Point, System.Drawing">
-    <value>103, 529</value>
+    <value>99, 276</value>
   </data>
   <data name="buttonMoveDown.Size" type="System.Drawing.Size, System.Drawing">
     <value>26, 23</value>
@@ -676,10 +676,172 @@
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;buttonMoveDown.Parent" xml:space="preserve">
-    <value>panelSongStructure</value>
+    <value>splitContainerStrctureSequence.Panel1</value>
   </data>
   <data name="&gt;&gt;buttonMoveDown.ZOrder" xml:space="preserve">
     <value>6</value>
+  </data>
+  <data name="buttonSequencePartAdd.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Bottom, Left</value>
+  </data>
+  <data name="buttonSequencePartAdd.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="buttonSequencePartAdd.Location" type="System.Drawing.Point, System.Drawing">
+    <value>6, 219</value>
+  </data>
+  <data name="buttonSequencePartAdd.Size" type="System.Drawing.Size, System.Drawing">
+    <value>26, 23</value>
+  </data>
+  <data name="buttonSequencePartAdd.TabIndex" type="System.Int32, mscorlib">
+    <value>100</value>
+  </data>
+  <data name="buttonSequencePartAdd.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleRight</value>
+  </data>
+  <data name="buttonSequencePartAdd.ToolTip" xml:space="preserve">
+    <value>Liedteil hinzufügen</value>
+  </data>
+  <data name="&gt;&gt;buttonSequencePartAdd.Name" xml:space="preserve">
+    <value>buttonSequencePartAdd</value>
+  </data>
+  <data name="&gt;&gt;buttonSequencePartAdd.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;buttonSequencePartAdd.Parent" xml:space="preserve">
+    <value>splitContainerStrctureSequence.Panel2</value>
+  </data>
+  <data name="&gt;&gt;buttonSequencePartAdd.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="buttonSequencePartUp.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Bottom, Left</value>
+  </data>
+  <data name="buttonSequencePartUp.Enabled" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="buttonSequencePartUp.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
+        YQUAAAItSURBVDhPpZFdaJJRGMeloItyvjo/ls1ES3JfFN0FFaug2G4GFeFVEETRghk5zVptFmvrO1nN
+        i2otjuXoQxoxkNHAVrDmWk3FmTaX9abmHGrhKhqr/r0ObK3eiz4ufhfnf57nx3mewwHwX7CGfwNrmGN+
+        ta+Cq/WvY7vLwRpm4Ro88hV1wUxJQyjBMwXEbDVZWENK557L07l7NfYIahxjEBx70cVWl4U15NUMNi23
+        hFHdl0HnyAS23YyBagwZ2Wp/C7h7XJWKxgCU1jTKrOPYZKWx1fYSZa2vpvgnwmt/rZ91WLCrv1CqH4qr
+        b2Ww8FoaEvMbUAd9WNr8HFU2GnIzHRaepYU/98w07+ybI9j9uKe04x1knZ8hbU9OC/gHvOAbfVh5IYQK
+        WxRic+Quu2B779EiSwRLnEDhnY8zAr0HlMELkSmA8quvsdr6Fvktsf2zBPM0zo2KhuGv6gfA4u5vkOUE
+        55kRdG7waz0QHPZjUfMIKjuiKGmPTwos8VXTAs7mHmmxcTBW5ZqCihHI7zMvsH9idpCCiBHkaZ8hb98Q
+        KGYMqj6AIuZ3ap3vseZ2clTcNi7gaM54H14fSMOR+IItjz6g1J5B8Y0U1G1xLGuhoTzCLNE0DFVTEKrT
+        oyi3xdE/NolT9yagPJRycHZc9Fsk2idk/eUQkRkGCH+viwi0T0m+3k1EdT4iNgWJ5HiIFJwMk4JzNFFc
+        ipINXWkiu5Igwvpk648l/ius4Z8Dzneu67c+oPx81QAAAABJRU5ErkJggg==
+</value>
+  </data>
+  <data name="buttonSequencePartUp.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="buttonSequencePartUp.Location" type="System.Drawing.Point, System.Drawing">
+    <value>37, 219</value>
+  </data>
+  <data name="buttonSequencePartUp.Size" type="System.Drawing.Size, System.Drawing">
+    <value>26, 23</value>
+  </data>
+  <data name="buttonSequencePartUp.TabIndex" type="System.Int32, mscorlib">
+    <value>101</value>
+  </data>
+  <data name="buttonSequencePartUp.ToolTip" xml:space="preserve">
+    <value>Nach oben schieben</value>
+  </data>
+  <data name="&gt;&gt;buttonSequencePartUp.Name" xml:space="preserve">
+    <value>buttonSequencePartUp</value>
+  </data>
+  <data name="&gt;&gt;buttonSequencePartUp.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;buttonSequencePartUp.Parent" xml:space="preserve">
+    <value>splitContainerStrctureSequence.Panel2</value>
+  </data>
+  <data name="&gt;&gt;buttonSequencePartUp.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="buttonSequencePartDown.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Bottom, Left</value>
+  </data>
+  <data name="buttonSequencePartDown.Enabled" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="buttonSequencePartDown.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
+        YQUAAAI1SURBVDhPpZFfSJNRGIdHRZvbvrbR1NyWZRO1BkFXBUWFEcz1j0qiRUbU5gpEIXO7sFpdZCCx
+        SBIMnaOxjdSxVhfOlqzogCllOdZasFqtaWviDBIjsPr1bfFJ5neRdPFcnN9534fzvocD4L9gDRcCa7gQ
+        OJRhoIuv9xKh4Q6h9B5CnXQT6ngPER7rIoKjtwlf6yT8Q3aSc/AW4e23Ed4eK+Hu6iBcTTvZYfR1c1ab
+        0r27L0WgvZtCkeUdipvfoPjyayjNL1F0LoSS63GUdSSxzpGGyj2FtTQb703hSl8S5cb7w5zc9nHJKmN/
+        qtLziRbEIDofgcgUAlX3HFTtMKSWD1hhS0Pu/opCP6B4CKz3z0Ch841zDjwoyM4haU1ukpn6Zypco5A1
+        RSFpDENcPwLRmRfIowUFnRNQ9ExjZd9PlNICWd2jH0sPB3Zmd8Asg1flcGy2f8Q263tIzfQrGoIQnx1B
+        3rXfAjktWBMAyloT4O5z3WT6ZgUZBNXep2rnKDa0RCGmxxAbg7MChfcbVK7PoLTeIYFuYBGrYIm6uTy/
+        cXBsrzMOZdOr7C4ygnzbJEq7v0Ba7Z8Q6p/I/+yZI8jAq3LplBeHvms630JmDmO5JYEi+yRk9QTCU4MV
+        f9fPOTDwDb0tW9pi2NoWhfzGGJRXY8g54rGy1c4LGKiawONKVxwaRwL8E75n9I8sZqubFzAsM0dyVRei
+        qZIaMi1sCBay1WRgDRmEteHtgtMhNdsdA2v474DzCwyUqKZsqC+aAAAAAElFTkSuQmCC
+</value>
+  </data>
+  <data name="buttonSequencePartDown.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="buttonSequencePartDown.Location" type="System.Drawing.Point, System.Drawing">
+    <value>69, 219</value>
+  </data>
+  <data name="buttonSequencePartDown.Size" type="System.Drawing.Size, System.Drawing">
+    <value>26, 23</value>
+  </data>
+  <data name="buttonSequencePartDown.TabIndex" type="System.Int32, mscorlib">
+    <value>102</value>
+  </data>
+  <data name="buttonSequencePartDown.ToolTip" xml:space="preserve">
+    <value>Nach unten schieben</value>
+  </data>
+  <data name="&gt;&gt;buttonSequencePartDown.Name" xml:space="preserve">
+    <value>buttonSequencePartDown</value>
+  </data>
+  <data name="&gt;&gt;buttonSequencePartDown.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;buttonSequencePartDown.Parent" xml:space="preserve">
+    <value>splitContainerStrctureSequence.Panel2</value>
+  </data>
+  <data name="&gt;&gt;buttonSequencePartDown.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="buttonSequencePartRemove.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Bottom, Left</value>
+  </data>
+  <data name="buttonSequencePartRemove.Enabled" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="buttonSequencePartRemove.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="buttonSequencePartRemove.Location" type="System.Drawing.Point, System.Drawing">
+    <value>99, 219</value>
+  </data>
+  <data name="buttonSequencePartRemove.Size" type="System.Drawing.Size, System.Drawing">
+    <value>26, 23</value>
+  </data>
+  <data name="buttonSequencePartRemove.TabIndex" type="System.Int32, mscorlib">
+    <value>103</value>
+  </data>
+  <data name="buttonSequencePartRemove.ToolTip" xml:space="preserve">
+    <value>Entfernen</value>
+  </data>
+  <data name="&gt;&gt;buttonSequencePartRemove.Name" xml:space="preserve">
+    <value>buttonSequencePartRemove</value>
+  </data>
+  <data name="&gt;&gt;buttonSequencePartRemove.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;buttonSequencePartRemove.Parent" xml:space="preserve">
+    <value>splitContainerStrctureSequence.Panel2</value>
+  </data>
+  <data name="&gt;&gt;buttonSequencePartRemove.ZOrder" xml:space="preserve">
+    <value>0</value>
   </data>
   <data name="treeViewContents.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Bottom, Left, Right</value>
@@ -688,10 +850,10 @@
     <value>Microsoft Sans Serif, 11.25pt</value>
   </data>
   <data name="treeViewContents.Location" type="System.Drawing.Point, System.Drawing">
-    <value>9, 22</value>
+    <value>6, 22</value>
   </data>
   <data name="treeViewContents.Size" type="System.Drawing.Size, System.Drawing">
-    <value>184, 500</value>
+    <value>184, 248</value>
   </data>
   <data name="treeViewContents.TabIndex" type="System.Int32, mscorlib">
     <value>4</value>
@@ -703,13 +865,10 @@
     <value>System.Windows.Forms.TreeView, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;treeViewContents.Parent" xml:space="preserve">
-    <value>panelSongStructure</value>
+    <value>splitContainerStrctureSequence.Panel1</value>
   </data>
   <data name="&gt;&gt;treeViewContents.ZOrder" xml:space="preserve">
-    <value>7</value>
-  </data>
-  <data name="panelSongStructure.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Bottom, Left</value>
+    <value>4</value>
   </data>
   <data name="labelStructure.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -721,7 +880,7 @@
     <value>NoControl</value>
   </data>
   <data name="labelStructure.Location" type="System.Drawing.Point, System.Drawing">
-    <value>7, 3</value>
+    <value>3, 3</value>
   </data>
   <data name="labelStructure.Size" type="System.Drawing.Size, System.Drawing">
     <value>47, 13</value>
@@ -739,316 +898,13 @@
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;labelStructure.Parent" xml:space="preserve">
-    <value>panelSongStructure</value>
+    <value>splitContainerStrctureSequence.Panel1</value>
   </data>
   <data name="&gt;&gt;labelStructure.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="panelSongStructure.Location" type="System.Drawing.Point, System.Drawing">
-    <value>-2, 6</value>
-  </data>
-  <data name="panelSongStructure.Size" type="System.Drawing.Size, System.Drawing">
-    <value>193, 555</value>
-  </data>
-  <data name="panelSongStructure.TabIndex" type="System.Int32, mscorlib">
-    <value>128</value>
-  </data>
-  <data name="&gt;&gt;panelSongStructure.Name" xml:space="preserve">
-    <value>panelSongStructure</value>
-  </data>
-  <data name="&gt;&gt;panelSongStructure.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;panelSongStructure.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;panelSongStructure.ZOrder" xml:space="preserve">
-    <value>4</value>
+    <value>2</value>
   </data>
   <data name="tabControlMeta.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Bottom, Right</value>
-  </data>
-  <data name="&gt;&gt;tabPageInformation.Name" xml:space="preserve">
-    <value>tabPageInformation</value>
-  </data>
-  <data name="&gt;&gt;tabPageInformation.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;tabPageInformation.Parent" xml:space="preserve">
-    <value>tabControlMeta</value>
-  </data>
-  <data name="&gt;&gt;tabPageInformation.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="&gt;&gt;tabPageQA.Name" xml:space="preserve">
-    <value>tabPageQA</value>
-  </data>
-  <data name="&gt;&gt;tabPageQA.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;tabPageQA.Parent" xml:space="preserve">
-    <value>tabControlMeta</value>
-  </data>
-  <data name="&gt;&gt;tabPageQA.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="tabControlMeta.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Microsoft Sans Serif, 8.25pt</value>
-  </data>
-  <data name="tabControlMeta.ItemSize" type="System.Drawing.Size, System.Drawing">
-    <value>89, 20</value>
-  </data>
-  <data name="tabControlMeta.Location" type="System.Drawing.Point, System.Drawing">
-    <value>723, 6</value>
-  </data>
-  <data name="tabControlMeta.Size" type="System.Drawing.Size, System.Drawing">
-    <value>283, 339</value>
-  </data>
-  <data name="tabControlMeta.TabIndex" type="System.Int32, mscorlib">
-    <value>130</value>
-  </data>
-  <data name="&gt;&gt;tabControlMeta.Name" xml:space="preserve">
-    <value>tabControlMeta</value>
-  </data>
-  <data name="&gt;&gt;tabControlMeta.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TabControl, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;tabControlMeta.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;tabControlMeta.ZOrder" xml:space="preserve">
-    <value>3</value>
-  </data>
-  <data name="&gt;&gt;labelTitle.Name" xml:space="preserve">
-    <value>labelTitle</value>
-  </data>
-  <data name="&gt;&gt;labelTitle.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;labelTitle.Parent" xml:space="preserve">
-    <value>tabPageInformation</value>
-  </data>
-  <data name="&gt;&gt;labelTitle.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="&gt;&gt;labelLanguage.Name" xml:space="preserve">
-    <value>labelLanguage</value>
-  </data>
-  <data name="&gt;&gt;labelLanguage.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;labelLanguage.Parent" xml:space="preserve">
-    <value>tabPageInformation</value>
-  </data>
-  <data name="&gt;&gt;labelLanguage.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="&gt;&gt;labelRightsManagement.Name" xml:space="preserve">
-    <value>labelRightsManagement</value>
-  </data>
-  <data name="&gt;&gt;labelRightsManagement.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;labelRightsManagement.Parent" xml:space="preserve">
-    <value>tabPageInformation</value>
-  </data>
-  <data name="&gt;&gt;labelRightsManagement.ZOrder" xml:space="preserve">
-    <value>2</value>
-  </data>
-  <data name="&gt;&gt;textBoxSongbooks.Name" xml:space="preserve">
-    <value>textBoxSongbooks</value>
-  </data>
-  <data name="&gt;&gt;textBoxSongbooks.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;textBoxSongbooks.Parent" xml:space="preserve">
-    <value>tabPageInformation</value>
-  </data>
-  <data name="&gt;&gt;textBoxSongbooks.ZOrder" xml:space="preserve">
-    <value>3</value>
-  </data>
-  <data name="&gt;&gt;textBoxRightsManagement.Name" xml:space="preserve">
-    <value>textBoxRightsManagement</value>
-  </data>
-  <data name="&gt;&gt;textBoxRightsManagement.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;textBoxRightsManagement.Parent" xml:space="preserve">
-    <value>tabPageInformation</value>
-  </data>
-  <data name="&gt;&gt;textBoxRightsManagement.ZOrder" xml:space="preserve">
-    <value>4</value>
-  </data>
-  <data name="&gt;&gt;labelSongbook.Name" xml:space="preserve">
-    <value>labelSongbook</value>
-  </data>
-  <data name="&gt;&gt;labelSongbook.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;labelSongbook.Parent" xml:space="preserve">
-    <value>tabPageInformation</value>
-  </data>
-  <data name="&gt;&gt;labelSongbook.ZOrder" xml:space="preserve">
-    <value>5</value>
-  </data>
-  <data name="&gt;&gt;textBoxPublisher.Name" xml:space="preserve">
-    <value>textBoxPublisher</value>
-  </data>
-  <data name="&gt;&gt;textBoxPublisher.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;textBoxPublisher.Parent" xml:space="preserve">
-    <value>tabPageInformation</value>
-  </data>
-  <data name="&gt;&gt;textBoxPublisher.ZOrder" xml:space="preserve">
-    <value>6</value>
-  </data>
-  <data name="&gt;&gt;comboBoxLanguage.Name" xml:space="preserve">
-    <value>comboBoxLanguage</value>
-  </data>
-  <data name="&gt;&gt;comboBoxLanguage.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;comboBoxLanguage.Parent" xml:space="preserve">
-    <value>tabPageInformation</value>
-  </data>
-  <data name="&gt;&gt;comboBoxLanguage.ZOrder" xml:space="preserve">
-    <value>7</value>
-  </data>
-  <data name="&gt;&gt;labelPublisher.Name" xml:space="preserve">
-    <value>labelPublisher</value>
-  </data>
-  <data name="&gt;&gt;labelPublisher.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;labelPublisher.Parent" xml:space="preserve">
-    <value>tabPageInformation</value>
-  </data>
-  <data name="&gt;&gt;labelPublisher.ZOrder" xml:space="preserve">
-    <value>8</value>
-  </data>
-  <data name="&gt;&gt;labelCopyright.Name" xml:space="preserve">
-    <value>labelCopyright</value>
-  </data>
-  <data name="&gt;&gt;labelCopyright.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;labelCopyright.Parent" xml:space="preserve">
-    <value>tabPageInformation</value>
-  </data>
-  <data name="&gt;&gt;labelCopyright.ZOrder" xml:space="preserve">
-    <value>10</value>
-  </data>
-  <data name="&gt;&gt;textBoxAuthors.Name" xml:space="preserve">
-    <value>textBoxAuthors</value>
-  </data>
-  <data name="&gt;&gt;textBoxAuthors.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;textBoxAuthors.Parent" xml:space="preserve">
-    <value>tabPageInformation</value>
-  </data>
-  <data name="&gt;&gt;textBoxAuthors.ZOrder" xml:space="preserve">
-    <value>11</value>
-  </data>
-  <data name="&gt;&gt;labelCcliIdentifier.Name" xml:space="preserve">
-    <value>labelCcliIdentifier</value>
-  </data>
-  <data name="&gt;&gt;labelCcliIdentifier.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;labelCcliIdentifier.Parent" xml:space="preserve">
-    <value>tabPageInformation</value>
-  </data>
-  <data name="&gt;&gt;labelCcliIdentifier.ZOrder" xml:space="preserve">
-    <value>12</value>
-  </data>
-  <data name="&gt;&gt;labelAuthor.Name" xml:space="preserve">
-    <value>labelAuthor</value>
-  </data>
-  <data name="&gt;&gt;labelAuthor.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;labelAuthor.Parent" xml:space="preserve">
-    <value>tabPageInformation</value>
-  </data>
-  <data name="&gt;&gt;labelAuthor.ZOrder" xml:space="preserve">
-    <value>13</value>
-  </data>
-  <data name="&gt;&gt;labelThemes.Name" xml:space="preserve">
-    <value>labelThemes</value>
-  </data>
-  <data name="&gt;&gt;labelThemes.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;labelThemes.Parent" xml:space="preserve">
-    <value>tabPageInformation</value>
-  </data>
-  <data name="&gt;&gt;labelThemes.ZOrder" xml:space="preserve">
-    <value>14</value>
-  </data>
-  <data name="&gt;&gt;textBoxCopyright.Name" xml:space="preserve">
-    <value>textBoxCopyright</value>
-  </data>
-  <data name="&gt;&gt;textBoxCopyright.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;textBoxCopyright.Parent" xml:space="preserve">
-    <value>tabPageInformation</value>
-  </data>
-  <data name="&gt;&gt;textBoxCopyright.ZOrder" xml:space="preserve">
-    <value>15</value>
-  </data>
-  <data name="&gt;&gt;textBoxCCLISongID.Name" xml:space="preserve">
-    <value>textBoxCCLISongID</value>
-  </data>
-  <data name="&gt;&gt;textBoxCCLISongID.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;textBoxCCLISongID.Parent" xml:space="preserve">
-    <value>tabPageInformation</value>
-  </data>
-  <data name="&gt;&gt;textBoxCCLISongID.ZOrder" xml:space="preserve">
-    <value>16</value>
-  </data>
-  <data name="&gt;&gt;checkedListBoxThemes.Name" xml:space="preserve">
-    <value>checkedListBoxThemes</value>
-  </data>
-  <data name="&gt;&gt;checkedListBoxThemes.Type" xml:space="preserve">
-    <value>System.Windows.Forms.CheckedListBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;checkedListBoxThemes.Parent" xml:space="preserve">
-    <value>tabPageInformation</value>
-  </data>
-  <data name="&gt;&gt;checkedListBoxThemes.ZOrder" xml:space="preserve">
-    <value>17</value>
-  </data>
-  <data name="tabPageInformation.Location" type="System.Drawing.Point, System.Drawing">
-    <value>4, 24</value>
-  </data>
-  <data name="tabPageInformation.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>3, 3, 3, 3</value>
-  </data>
-  <data name="tabPageInformation.Size" type="System.Drawing.Size, System.Drawing">
-    <value>275, 311</value>
-  </data>
-  <data name="tabPageInformation.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
-  <data name="tabPageInformation.Text" xml:space="preserve">
-    <value>Informationen</value>
-  </data>
-  <data name="&gt;&gt;tabPageInformation.Name" xml:space="preserve">
-    <value>tabPageInformation</value>
-  </data>
-  <data name="&gt;&gt;tabPageInformation.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;tabPageInformation.Parent" xml:space="preserve">
-    <value>tabControlMeta</value>
-  </data>
-  <data name="&gt;&gt;tabPageInformation.ZOrder" xml:space="preserve">
-    <value>0</value>
   </data>
   <data name="labelTitle.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -1563,116 +1419,32 @@
   <data name="&gt;&gt;checkedListBoxThemes.ZOrder" xml:space="preserve">
     <value>17</value>
   </data>
-  <data name="&gt;&gt;textBoxComment.Name" xml:space="preserve">
-    <value>textBoxComment</value>
-  </data>
-  <data name="&gt;&gt;textBoxComment.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;textBoxComment.Parent" xml:space="preserve">
-    <value>tabPageQA</value>
-  </data>
-  <data name="&gt;&gt;textBoxComment.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="&gt;&gt;labelMarkers.Name" xml:space="preserve">
-    <value>labelMarkers</value>
-  </data>
-  <data name="&gt;&gt;labelMarkers.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;labelMarkers.Parent" xml:space="preserve">
-    <value>tabPageQA</value>
-  </data>
-  <data name="&gt;&gt;labelMarkers.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="&gt;&gt;checkBoxQAImages.Name" xml:space="preserve">
-    <value>checkBoxQAImages</value>
-  </data>
-  <data name="&gt;&gt;checkBoxQAImages.Type" xml:space="preserve">
-    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;checkBoxQAImages.Parent" xml:space="preserve">
-    <value>tabPageQA</value>
-  </data>
-  <data name="&gt;&gt;checkBoxQAImages.ZOrder" xml:space="preserve">
-    <value>2</value>
-  </data>
-  <data name="&gt;&gt;checkBoxQASegmentation.Name" xml:space="preserve">
-    <value>checkBoxQASegmentation</value>
-  </data>
-  <data name="&gt;&gt;checkBoxQASegmentation.Type" xml:space="preserve">
-    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;checkBoxQASegmentation.Parent" xml:space="preserve">
-    <value>tabPageQA</value>
-  </data>
-  <data name="&gt;&gt;checkBoxQASegmentation.ZOrder" xml:space="preserve">
-    <value>3</value>
-  </data>
-  <data name="&gt;&gt;checkBoxQATranslation.Name" xml:space="preserve">
-    <value>checkBoxQATranslation</value>
-  </data>
-  <data name="&gt;&gt;checkBoxQATranslation.Type" xml:space="preserve">
-    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;checkBoxQATranslation.Parent" xml:space="preserve">
-    <value>tabPageQA</value>
-  </data>
-  <data name="&gt;&gt;checkBoxQATranslation.ZOrder" xml:space="preserve">
-    <value>4</value>
-  </data>
-  <data name="&gt;&gt;labelComment.Name" xml:space="preserve">
-    <value>labelComment</value>
-  </data>
-  <data name="&gt;&gt;labelComment.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;labelComment.Parent" xml:space="preserve">
-    <value>tabPageQA</value>
-  </data>
-  <data name="&gt;&gt;labelComment.ZOrder" xml:space="preserve">
-    <value>5</value>
-  </data>
-  <data name="&gt;&gt;checkBoxQASpelling.Name" xml:space="preserve">
-    <value>checkBoxQASpelling</value>
-  </data>
-  <data name="&gt;&gt;checkBoxQASpelling.Type" xml:space="preserve">
-    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;checkBoxQASpelling.Parent" xml:space="preserve">
-    <value>tabPageQA</value>
-  </data>
-  <data name="&gt;&gt;checkBoxQASpelling.ZOrder" xml:space="preserve">
-    <value>6</value>
-  </data>
-  <data name="tabPageQA.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="tabPageInformation.Location" type="System.Drawing.Point, System.Drawing">
     <value>4, 24</value>
   </data>
-  <data name="tabPageQA.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+  <data name="tabPageInformation.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>3, 3, 3, 3</value>
   </data>
-  <data name="tabPageQA.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="tabPageInformation.Size" type="System.Drawing.Size, System.Drawing">
     <value>275, 311</value>
   </data>
-  <data name="tabPageQA.TabIndex" type="System.Int32, mscorlib">
-    <value>1</value>
+  <data name="tabPageInformation.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
   </data>
-  <data name="tabPageQA.Text" xml:space="preserve">
-    <value>Qualitätssicherung</value>
+  <data name="tabPageInformation.Text" xml:space="preserve">
+    <value>Informationen</value>
   </data>
-  <data name="&gt;&gt;tabPageQA.Name" xml:space="preserve">
-    <value>tabPageQA</value>
+  <data name="&gt;&gt;tabPageInformation.Name" xml:space="preserve">
+    <value>tabPageInformation</value>
   </data>
-  <data name="&gt;&gt;tabPageQA.Type" xml:space="preserve">
+  <data name="&gt;&gt;tabPageInformation.Type" xml:space="preserve">
     <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;tabPageQA.Parent" xml:space="preserve">
+  <data name="&gt;&gt;tabPageInformation.Parent" xml:space="preserve">
     <value>tabControlMeta</value>
   </data>
-  <data name="&gt;&gt;tabPageQA.ZOrder" xml:space="preserve">
-    <value>1</value>
+  <data name="&gt;&gt;tabPageInformation.ZOrder" xml:space="preserve">
+    <value>0</value>
   </data>
   <data name="textBoxComment.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Bottom, Left, Right</value>
@@ -1904,6 +1676,192 @@
   </data>
   <data name="&gt;&gt;checkBoxQASpelling.ZOrder" xml:space="preserve">
     <value>6</value>
+  </data>
+  <data name="tabPageQA.Location" type="System.Drawing.Point, System.Drawing">
+    <value>4, 24</value>
+  </data>
+  <data name="tabPageQA.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>3, 3, 3, 3</value>
+  </data>
+  <data name="tabPageQA.Size" type="System.Drawing.Size, System.Drawing">
+    <value>275, 311</value>
+  </data>
+  <data name="tabPageQA.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="tabPageQA.Text" xml:space="preserve">
+    <value>Qualitätssicherung</value>
+  </data>
+  <data name="&gt;&gt;tabPageQA.Name" xml:space="preserve">
+    <value>tabPageQA</value>
+  </data>
+  <data name="&gt;&gt;tabPageQA.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;tabPageQA.Parent" xml:space="preserve">
+    <value>tabControlMeta</value>
+  </data>
+  <data name="&gt;&gt;tabPageQA.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="tabControlMeta.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 8.25pt</value>
+  </data>
+  <data name="tabControlMeta.ItemSize" type="System.Drawing.Size, System.Drawing">
+    <value>89, 20</value>
+  </data>
+  <data name="tabControlMeta.Location" type="System.Drawing.Point, System.Drawing">
+    <value>723, 6</value>
+  </data>
+  <data name="tabControlMeta.Size" type="System.Drawing.Size, System.Drawing">
+    <value>283, 339</value>
+  </data>
+  <data name="tabControlMeta.TabIndex" type="System.Int32, mscorlib">
+    <value>130</value>
+  </data>
+  <data name="&gt;&gt;tabControlMeta.Name" xml:space="preserve">
+    <value>tabControlMeta</value>
+  </data>
+  <data name="&gt;&gt;tabControlMeta.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TabControl, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;tabControlMeta.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;tabControlMeta.ZOrder" xml:space="preserve">
+    <value>5</value>
+  </data>
+  <data name="splitContainerStrctureSequence.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Bottom, Left</value>
+  </data>
+  <data name="splitContainerStrctureSequence.Location" type="System.Drawing.Point, System.Drawing">
+    <value>1, 6</value>
+  </data>
+  <data name="splitContainerStrctureSequence.Orientation" type="System.Windows.Forms.Orientation, System.Windows.Forms">
+    <value>Horizontal</value>
+  </data>
+  <data name="&gt;&gt;splitContainerStrctureSequence.Panel1.Name" xml:space="preserve">
+    <value>splitContainerStrctureSequence.Panel1</value>
+  </data>
+  <data name="&gt;&gt;splitContainerStrctureSequence.Panel1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.SplitterPanel, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;splitContainerStrctureSequence.Panel1.Parent" xml:space="preserve">
+    <value>splitContainerStrctureSequence</value>
+  </data>
+  <data name="&gt;&gt;splitContainerStrctureSequence.Panel1.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="splitContainerStrctureSequence.Panel1MinSize" type="System.Int32, mscorlib">
+    <value>150</value>
+  </data>
+  <data name="listBoxSequence.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Bottom, Left, Right</value>
+  </data>
+  <data name="listBoxSequence.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 11.25pt</value>
+  </data>
+  <data name="listBoxSequence.ItemHeight" type="System.Int32, mscorlib">
+    <value>18</value>
+  </data>
+  <data name="listBoxSequence.Location" type="System.Drawing.Point, System.Drawing">
+    <value>6, 28</value>
+  </data>
+  <data name="listBoxSequence.Size" type="System.Drawing.Size, System.Drawing">
+    <value>184, 184</value>
+  </data>
+  <data name="listBoxSequence.TabIndex" type="System.Int32, mscorlib">
+    <value>99</value>
+  </data>
+  <data name="&gt;&gt;listBoxSequence.Name" xml:space="preserve">
+    <value>listBoxSequence</value>
+  </data>
+  <data name="&gt;&gt;listBoxSequence.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ListBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;listBoxSequence.Parent" xml:space="preserve">
+    <value>splitContainerStrctureSequence.Panel2</value>
+  </data>
+  <data name="&gt;&gt;listBoxSequence.ZOrder" xml:space="preserve">
+    <value>4</value>
+  </data>
+  <data name="labelSequence.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="labelSequence.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 8.25pt</value>
+  </data>
+  <data name="labelSequence.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="labelSequence.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 8</value>
+  </data>
+  <data name="labelSequence.Size" type="System.Drawing.Size, System.Drawing">
+    <value>40, 13</value>
+  </data>
+  <data name="labelSequence.TabIndex" type="System.Int32, mscorlib">
+    <value>98</value>
+  </data>
+  <data name="labelSequence.Text" xml:space="preserve">
+    <value>Ablauf:</value>
+  </data>
+  <data name="&gt;&gt;labelSequence.Name" xml:space="preserve">
+    <value>labelSequence</value>
+  </data>
+  <data name="&gt;&gt;labelSequence.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;labelSequence.Parent" xml:space="preserve">
+    <value>splitContainerStrctureSequence.Panel2</value>
+  </data>
+  <data name="&gt;&gt;labelSequence.ZOrder" xml:space="preserve">
+    <value>5</value>
+  </data>
+  <data name="&gt;&gt;splitContainerStrctureSequence.Panel2.Name" xml:space="preserve">
+    <value>splitContainerStrctureSequence.Panel2</value>
+  </data>
+  <data name="&gt;&gt;splitContainerStrctureSequence.Panel2.Type" xml:space="preserve">
+    <value>System.Windows.Forms.SplitterPanel, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;splitContainerStrctureSequence.Panel2.Parent" xml:space="preserve">
+    <value>splitContainerStrctureSequence</value>
+  </data>
+  <data name="&gt;&gt;splitContainerStrctureSequence.Panel2.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="splitContainerStrctureSequence.Size" type="System.Drawing.Size, System.Drawing">
+    <value>193, 555</value>
+  </data>
+  <data name="splitContainerStrctureSequence.SplitterDistance" type="System.Int32, mscorlib">
+    <value>302</value>
+  </data>
+  <data name="splitContainerStrctureSequence.TabIndex" type="System.Int32, mscorlib">
+    <value>131</value>
+  </data>
+  <data name="&gt;&gt;splitContainerStrctureSequence.Name" xml:space="preserve">
+    <value>splitContainerStrctureSequence</value>
+  </data>
+  <data name="&gt;&gt;splitContainerStrctureSequence.Type" xml:space="preserve">
+    <value>System.Windows.Forms.SplitContainer, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;splitContainerStrctureSequence.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;splitContainerStrctureSequence.ZOrder" xml:space="preserve">
+    <value>4</value>
+  </data>
+  <metadata name="addSequencePartContextMenu.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>681, 16</value>
+  </metadata>
+  <data name="addSequencePartContextMenu.Size" type="System.Drawing.Size, System.Drawing">
+    <value>153, 26</value>
+  </data>
+  <data name="&gt;&gt;addSequencePartContextMenu.Name" xml:space="preserve">
+    <value>addSequencePartContextMenu</value>
+  </data>
+  <data name="&gt;&gt;addSequencePartContextMenu.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ContextMenuStrip, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
