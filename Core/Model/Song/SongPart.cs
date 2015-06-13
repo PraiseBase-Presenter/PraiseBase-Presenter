@@ -29,7 +29,7 @@ namespace PraiseBase.Presenter.Model.Song
     ///     A song part with a given name and one or more slides
     /// </summary>
     [Serializable]
-    public class SongPart : ISerializable
+    public class SongPart : ISerializable, ICloneable
     {
         /// <summary>
         ///     Part constructor
@@ -93,6 +93,20 @@ namespace PraiseBase.Presenter.Model.Song
             if (ReferenceEquals(this, obj)) return true;
             if (obj.GetType() != GetType()) return false;
             return Equals((SongPart) obj);
+        }
+
+        public object Clone()
+        {
+            SongPart n = new SongPart
+            {
+                Caption = Caption,
+                Language = Language
+            };
+            foreach (var slide in Slides)
+            {
+                n.Slides.Add(slide);
+            }
+            return n;
         }
     }
 }

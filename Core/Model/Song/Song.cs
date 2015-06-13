@@ -39,8 +39,8 @@ namespace PraiseBase.Presenter.Model.Song
         public Song()
         {
             Themes = new TagList();
-            Parts = new SongPartList();
-            PartSequence = new PartSequences();
+            Parts = new ComparableOrderedList<SongPart>();
+            PartSequence = new ComparableOrderedList<SongPart>();
             SongBooks = new SongBooks();
             Authors = new SongAuthors();
             Comment = String.Empty;
@@ -279,13 +279,13 @@ namespace PraiseBase.Presenter.Model.Song
         /// <summary>
         ///     Gets or sets the list of all parts in the song
         /// </summary>
-        public SongPartList Parts { get; set; }
+        public new ComparableOrderedList<SongPart> Parts { get; set; }
 
         /// <summary>
         ///     Gets or sets a sequence of part numbers indicating
         ///     the real order in which the song is sung
         /// </summary>
-        public PartSequences PartSequence { get; set; }
+        public new ComparableOrderedList<SongPart> PartSequence { get; set; }
 
         /// <summary>
         ///     Quality assurance indicators
