@@ -318,4 +318,10 @@
   <data name="SongEditorChild_EnableTranslation_Disable_translation" xml:space="preserve">
     <value>Übersetzung deaktivieren</value>
   </data>
+  <data name="ShowSongSequence" xml:space="preserve">
+    <value>Ablauf anzeigen</value>
+  </data>
+  <data name="ShowSongStructure" xml:space="preserve">
+    <value>Struktur anzeigen</value>
+  </data>
 </root>

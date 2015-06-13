@@ -466,6 +466,24 @@ namespace PraiseBase.Presenter.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Ablauf anzeigen.
+        /// </summary>
+        public static string ShowSongSequence {
+            get {
+                return ResourceManager.GetString("ShowSongSequence", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Struktur anzeigen.
+        /// </summary>
+        public static string ShowSongStructure {
+            get {
+                return ResourceManager.GetString("ShowSongStructure", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Slide.
         /// </summary>
         public static string Slide {

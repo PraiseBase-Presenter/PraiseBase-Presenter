@@ -872,5 +872,17 @@ namespace PraiseBase.Presenter.Properties {
                 return ((string)(this["AuthorInfo"]));
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("Structure")]
+        public global::PraiseBase.Presenter.Manager.SongViewMode PresenterSongViewMode {
+            get {
+                return ((global::PraiseBase.Presenter.Manager.SongViewMode)(this["PresenterSongViewMode"]));
+            }
+            set {
+                this["PresenterSongViewMode"] = value;
+            }
+        }
     }
 }

@@ -43,6 +43,7 @@
     <Compile Include="Manager\ImageManager.cs" />
     <Compile Include="Manager\SongItem.cs" />
     <Compile Include="Manager\SongManager.cs" />
+    <Compile Include="Manager\SongViewMode.cs" />
     <Compile Include="Model\AdditionalInformationPosition.cs" />
     <Compile Include="Model\Bible\Bible.cs" />
     <Compile Include="Model\Bible\BibleBook.cs" />
