@@ -1,8 +1,6 @@
-﻿using PraiseBase.Presenter.Persistence;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using PraiseBase.Presenter.Model.Statistics;
-using System.IO;
+using PraiseBase.Presenter.Util;
 
 namespace PraiseBase.Presenter.Persistence
 {
@@ -12,7 +10,7 @@ namespace PraiseBase.Presenter.Persistence
     ///This is a test class for StatisticsWriterTest and is intended
     ///to contain all StatisticsWriterTest Unit Tests
     ///</summary>
-    [TestClass()]
+    [TestClass]
     public class StatisticsWriterTest
     {
 
@@ -68,7 +66,7 @@ namespace PraiseBase.Presenter.Persistence
         /// <summary>
         ///A test for Write
         ///</summary>
-        [TestMethod()]
+        [TestMethod]
         public void WriteTest()
         {
             StatisticsWriter target = new StatisticsWriter();
@@ -112,7 +110,7 @@ namespace PraiseBase.Presenter.Persistence
 
             target.Write(filename, expected);
 
-            Assert.IsTrue(PraiseBase.Presenter.Util.FileUtils.FileEquals(filename, referenceFilename));
+            Assert.IsTrue(FileUtils.FileEquals(filename, referenceFilename));
 
         }
     }

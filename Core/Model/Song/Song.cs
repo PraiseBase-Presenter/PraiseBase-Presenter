@@ -39,10 +39,10 @@ namespace PraiseBase.Presenter.Model.Song
         public Song()
         {
             Themes = new TagList();
-            Parts = new SongPartList();
-            PartSequence = new PartSequences();
+            Parts = new ComparableOrderedList<SongPart>();
+            PartSequence = new ComparableOrderedList<SongPart>();
             SongBooks = new SongBooks();
-            Author = new SongAuthors();
+            Authors = new SongAuthors();
             Comment = String.Empty;
             QualityIssues = new QualityIssues();
         }
@@ -63,8 +63,8 @@ namespace PraiseBase.Presenter.Model.Song
             info.AddValue("SourceText", SourceText.ToString());
             info.AddValue("Language", Language);
             info.AddValue("Comment", Comment);
-            info.AddValue("Tags", Themes);
-            info.AddValue("CcliID", CcliIdentifier);
+            info.AddValue("Themes", Themes);
+            info.AddValue("CcliIdentifier", CcliIdentifier);
             info.AddValue("Copyright", Copyright);
         }
 
@@ -103,12 +103,11 @@ namespace PraiseBase.Presenter.Model.Song
                 hashCode = (hashCode*397) ^ (Title != null ? Title.GetHashCode() : 0);
                 hashCode = (hashCode*397) ^ (Language != null ? Language.GetHashCode() : 0);
                 hashCode = (hashCode*397) ^ (CcliIdentifier != null ? CcliIdentifier.GetHashCode() : 0);
-                hashCode = (hashCode*397) ^ IsCCliIdentifierReadonly.GetHashCode();
                 hashCode = (hashCode*397) ^ (Copyright != null ? Copyright.GetHashCode() : 0);
                 hashCode = (hashCode*397) ^ (int) CopyrightPosition;
                 hashCode = (hashCode*397) ^ (int) SourcePosition;
                 hashCode = (hashCode*397) ^ (ReleaseYear != null ? ReleaseYear.GetHashCode() : 0);
-                hashCode = (hashCode*397) ^ (Author != null ? Author.GetHashCode() : 0);
+                hashCode = (hashCode*397) ^ (Authors != null ? Authors.GetHashCode() : 0);
                 hashCode = (hashCode*397) ^ (RightsManagement != null ? RightsManagement.GetHashCode() : 0);
                 hashCode = (hashCode*397) ^ (Publisher != null ? Publisher.GetHashCode() : 0);
                 hashCode = (hashCode*397) ^ (Version != null ? Version.GetHashCode() : 0);
@@ -141,10 +140,9 @@ namespace PraiseBase.Presenter.Model.Song
                    string.Equals(CreatedIn, other.CreatedIn) && string.Equals(ModifiedIn, other.ModifiedIn) &&
                    string.Equals(Title, other.Title) && string.Equals(Language, other.Language) &&
                    string.Equals(CcliIdentifier, other.CcliIdentifier) &&
-                   IsCCliIdentifierReadonly.Equals(other.IsCCliIdentifierReadonly) &&
                    string.Equals(Copyright, other.Copyright) && CopyrightPosition == other.CopyrightPosition &&
                    SourcePosition == other.SourcePosition && string.Equals(ReleaseYear, other.ReleaseYear) &&
-                   Equals(Author, other.Author) && string.Equals(RightsManagement, other.RightsManagement) &&
+                   Equals(Authors, other.Authors) && string.Equals(RightsManagement, other.RightsManagement) &&
                    string.Equals(Publisher, other.Publisher) && string.Equals(Version, other.Version) &&
                    string.Equals(Key, other.Key) && Transposition == other.Transposition && Equals(Tempo, other.Tempo) &&
                    string.Equals(Variant, other.Variant) && Equals(Themes, other.Themes) &&
@@ -204,11 +202,6 @@ namespace PraiseBase.Presenter.Model.Song
         public string CcliIdentifier { get; set; }
 
         /// <summary>
-        ///     Should the CCLI ID be readonly?
-        /// </summary>
-        public bool IsCCliIdentifierReadonly { get; set; }
-
-        /// <summary>
         ///     Copyright information
         /// </summary>
         public string Copyright { get; set; }
@@ -231,7 +224,7 @@ namespace PraiseBase.Presenter.Model.Song
         /// <summary>
         ///     Authors of the song
         /// </summary>
-        public SongAuthors Author { get; set; }
+        public SongAuthors Authors { get; set; }
 
         /// <summary>
         ///     Admin
@@ -286,13 +279,13 @@ namespace PraiseBase.Presenter.Model.Song
         /// <summary>
         ///     Gets or sets the list of all parts in the song
         /// </summary>
-        public SongPartList Parts { get; set; }
+        public ComparableOrderedList<SongPart> Parts { get; set; }
 
         /// <summary>
         ///     Gets or sets a sequence of part numbers indicating
         ///     the real order in which the song is sung
         /// </summary>
-        public PartSequences PartSequence { get; set; }
+        public ComparableOrderedList<SongPart> PartSequence { get; set; }
 
         /// <summary>
         ///     Quality assurance indicators

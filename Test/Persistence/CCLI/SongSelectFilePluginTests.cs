@@ -2,25 +2,25 @@
 
 namespace PraiseBase.Presenter.Persistence.CCLI
 {
-    [TestClass()]
+    [TestClass]
     public class SongSelectFilePluginTests
     {
-        [TestMethod()]
+        [TestMethod]
         public void GetFileExtensionTest()
         {
             SongSelectFilePlugin target = new SongSelectFilePlugin();
-            string actual = ".usr";
-            actual = target.GetFileExtension();
-            Assert.AreEqual(target.GetFileExtension(), actual);
+            const string expected = ".usr";
+            string actual = target.GetFileExtension();
+            Assert.AreEqual(expected, actual);
         }
 
-        [TestMethod()]
+        [TestMethod]
         public void GetFileTypeDescriptionTest()
         {
             SongSelectFilePlugin target = new SongSelectFilePlugin();
-            string actual = "SongSelect Import File";
-            actual = target.GetFileTypeDescription();
-            Assert.AreEqual(target.GetFileTypeDescription(), actual);
+            const string expected = "SongSelect Import File";
+            string actual = target.GetFileTypeDescription();
+            Assert.AreEqual(expected, actual);
         }
     }
 }

@@ -41,10 +41,10 @@ namespace PraiseBase.Presenter.Persistence.PowerPraise.Extended
             // Non-standard meta-info
             //
             // GUID
-            if (sng.GUID != null && sng.GUID != Guid.Empty)
+            if (sng.Guid != null && sng.Guid != Guid.Empty)
             {
                 xmlRoot["general"].AppendChild(xmlDoc.CreateElement("guid"));
-                xmlRoot["general"]["guid"].InnerText = sng.GUID.ToString();
+                xmlRoot["general"]["guid"].InnerText = sng.Guid.ToString();
             }
 
             // Comment
@@ -65,10 +65,10 @@ namespace PraiseBase.Presenter.Persistence.PowerPraise.Extended
             }
 
             // CCLI-ID
-            if (sng.CcliID != null && sng.CcliID != String.Empty)
+            if (sng.CcliIdentifier != null && sng.CcliIdentifier != String.Empty)
             {
                 xmlRoot["general"].AppendChild(xmlDoc.CreateElement("ccliNo"));
-                xmlRoot["general"]["ccliNo"].InnerText = sng.CcliID;
+                xmlRoot["general"]["ccliNo"].InnerText = sng.CcliIdentifier;
             }
 
             // Author(s)

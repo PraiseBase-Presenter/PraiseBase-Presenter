@@ -28,7 +28,7 @@ namespace PraiseBase.Presenter.Model.Song
     /// <summary>
     ///     Provides a list of all authors in the song
     /// </summary>
-    public class SongAuthors : List<SongAuthor>
+    public class SongAuthors : ComparableList<SongAuthor>
     {
         public override int GetHashCode()
         {

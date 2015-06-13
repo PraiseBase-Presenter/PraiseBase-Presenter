@@ -76,7 +76,7 @@ namespace PraiseBase.Presenter.Model.Song
             }
         }
 
-        protected bool Equals(PartSequences other)
+        protected bool Equals(SongPartList other)
         {
             if (Count != other.Count) return false;
             for (var i = 0; i < Count; i++)
@@ -91,7 +91,7 @@ namespace PraiseBase.Presenter.Model.Song
             if (ReferenceEquals(null, obj)) return false;
             if (ReferenceEquals(this, obj)) return true;
             if (obj.GetType() != GetType()) return false;
-            return Equals((PartSequences) obj);
+            return Equals((SongPartList)obj);
         }
     }
 }

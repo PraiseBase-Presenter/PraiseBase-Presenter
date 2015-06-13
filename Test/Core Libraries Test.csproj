@@ -52,6 +52,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Model\Song\SongTest.cs" />
+    <Compile Include="Model\Song\TextualSongRepresentationMapperTests.cs" />
     <Compile Include="Persistence\CCLI\SongSelectFileMapperTest.cs" />
     <Compile Include="Persistence\CCLI\SongSelectFilePluginTests.cs" />
     <Compile Include="Persistence\CCLI\SongSelectFileReaderTest.cs" />
@@ -68,11 +69,6 @@
     <Compile Include="Persistence\PowerPraise\PowerPraiseSongFileWriterTest.cs" />
     <Compile Include="Persistence\PowerPraise\PowerPraiseTestUtil.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Properties\Resources.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Resources.resx</DependentUpon>
-    </Compile>
     <Compile Include="Persistence\StatisticsReaderTest.cs" />
     <Compile Include="Persistence\StatisticsWriterTest.cs" />
   </ItemGroup>
@@ -81,12 +77,6 @@
       <Project>{67651B76-5ABD-4040-9A8F-3833130FC77D}</Project>
       <Name>Core Libraries</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Properties\Resources.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\ccli\Ein Lied für Gott.usr">

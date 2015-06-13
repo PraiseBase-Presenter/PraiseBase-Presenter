@@ -1,6 +1,4 @@
-﻿using PraiseBase.Presenter.Persistence;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace PraiseBase.Presenter.Persistence.PowerPraise.Extended
 {
@@ -10,28 +8,14 @@ namespace PraiseBase.Presenter.Persistence.PowerPraise.Extended
     ///This is a test class for PowerPraiseSongFileReaderTest and is intended
     ///to contain all PowerPraiseSongFileReaderTest Unit Tests
     ///</summary>
-    [TestClass()]
+    [TestClass]
     public class ExtendedPowerPraiseSongFileReaderTest
     {
-
-
-        private TestContext testContextInstance;
-
         /// <summary>
         ///Gets or sets the test context which provides
         ///information about and functionality for the current test run.
         ///</summary>
-        public TestContext TestContext
-        {
-            get
-            {
-                return testContextInstance;
-            }
-            set
-            {
-                testContextInstance = value;
-            }
-        }
+        public TestContext TestContext { get; set; }
 
         #region Additional test attributes
         // 
@@ -66,11 +50,11 @@ namespace PraiseBase.Presenter.Persistence.PowerPraise.Extended
         /// <summary>
         ///A test for Load
         ///</summary>
-        [TestMethod()]
+        [TestMethod]
         public void LoadTest()
         {
             ISongFileReader<ExtendedPowerPraiseSong> reader = new ExtendedPowerPraiseSongFileReader();
-            string filename = "Resources/powerpraise/Näher, mein Gott zu Dir.ppl";
+            const string filename = "Resources/powerpraise/Näher, mein Gott zu Dir.ppl";
 
             PowerPraiseSong expected = PowerPraiseTestUtil.GetExpectedPowerPraiseSong();
 
@@ -89,7 +73,7 @@ namespace PraiseBase.Presenter.Persistence.PowerPraise.Extended
                 Assert.AreEqual(expected.Parts[i].Slides.Count, actual.Parts[i].Slides.Count, "Slides incomplete in verse " + i);
                 for (int j = 0; j < expected.Parts[i].Slides.Count; j++)
                 {
-                    Assert.AreEqual(expected.Parts[i].Slides[j].BackgroundNr, actual.Parts[i].Slides[j].BackgroundNr);
+                    Assert.AreEqual(expected.Parts[i].Slides[j].Background, actual.Parts[i].Slides[j].Background);
                     Assert.AreEqual(expected.Parts[i].Slides[j].MainSize, actual.Parts[i].Slides[j].MainSize);
                     CollectionAssert.AreEqual(expected.Parts[i].Slides[j].Lines, actual.Parts[i].Slides[j].Lines, "Slide lines incomplete in verse " + i + " slide " + j);
                     CollectionAssert.AreEqual(expected.Parts[i].Slides[j].Translation, actual.Parts[i].Slides[j].Translation, "Slide translation incomplete in verse " + i + " slide " + j);
@@ -105,70 +89,67 @@ namespace PraiseBase.Presenter.Persistence.PowerPraise.Extended
 
             // Copyright
             CollectionAssert.AreEqual(expected.CopyrightText, actual.CopyrightText, "Wrong copyright");
-            Assert.AreEqual(expected.CopyrightTextPosition, actual.CopyrightTextPosition, "Wrong copyright text position");
+            Assert.AreEqual(expected.Formatting.CopyrightTextPosition, actual.Formatting.CopyrightTextPosition, "Wrong copyright text position");
 
             // Source
             Assert.AreEqual(expected.SourceText, actual.SourceText, "Wrong source text");
-            Assert.AreEqual(expected.SourceTextEnabled, actual.SourceTextEnabled, "Wrong source text position");
+            Assert.AreEqual(expected.Formatting.SourceTextPosition, actual.Formatting.SourceTextPosition, "Wrong source text position");
 
             // Formatting
-            Assert.AreEqual(expected.MainTextFontFormatting.Font, actual.MainTextFontFormatting.Font);
-            Assert.AreEqual(expected.MainTextFontFormatting.Color.ToArgb(), actual.MainTextFontFormatting.Color.ToArgb());
-            Assert.AreEqual(expected.MainTextFontFormatting.OutlineWidth, actual.MainTextFontFormatting.OutlineWidth);
-            Assert.AreEqual(expected.MainTextFontFormatting.ShadowDistance, actual.MainTextFontFormatting.ShadowDistance);
+            Assert.AreEqual(expected.Formatting.MainText.Font, actual.Formatting.MainText.Font);
+            Assert.AreEqual(expected.Formatting.MainText.Color.ToArgb(), actual.Formatting.MainText.Color.ToArgb());
+            Assert.AreEqual(expected.Formatting.MainText.OutlineWidth, actual.Formatting.MainText.OutlineWidth);
+            Assert.AreEqual(expected.Formatting.MainText.ShadowDistance, actual.Formatting.MainText.ShadowDistance);
 
-            Assert.AreEqual(expected.TranslationTextFontFormatting.Font, actual.TranslationTextFontFormatting.Font);
-            Assert.AreEqual(expected.TranslationTextFontFormatting.Color.ToArgb(), actual.TranslationTextFontFormatting.Color.ToArgb());
-            Assert.AreEqual(expected.TranslationTextFontFormatting.OutlineWidth, actual.TranslationTextFontFormatting.OutlineWidth);
-            Assert.AreEqual(expected.TranslationTextFontFormatting.ShadowDistance, actual.TranslationTextFontFormatting.ShadowDistance);
+            Assert.AreEqual(expected.Formatting.TranslationText.Font, actual.Formatting.TranslationText.Font);
+            Assert.AreEqual(expected.Formatting.TranslationText.Color.ToArgb(), actual.Formatting.TranslationText.Color.ToArgb());
+            Assert.AreEqual(expected.Formatting.TranslationText.OutlineWidth, actual.Formatting.TranslationText.OutlineWidth);
+            Assert.AreEqual(expected.Formatting.TranslationText.ShadowDistance, actual.Formatting.TranslationText.ShadowDistance);
 
-            Assert.AreEqual(expected.CopyrightTextFontFormatting.Font, actual.CopyrightTextFontFormatting.Font);
-            Assert.AreEqual(expected.CopyrightTextFontFormatting.Color.ToArgb(), actual.CopyrightTextFontFormatting.Color.ToArgb());
-            Assert.AreEqual(expected.CopyrightTextFontFormatting.OutlineWidth, actual.CopyrightTextFontFormatting.OutlineWidth);
-            Assert.AreEqual(expected.CopyrightTextFontFormatting.ShadowDistance, actual.CopyrightTextFontFormatting.ShadowDistance);
+            Assert.AreEqual(expected.Formatting.CopyrightText.Font, actual.Formatting.CopyrightText.Font);
+            Assert.AreEqual(expected.Formatting.CopyrightText.Color.ToArgb(), actual.Formatting.CopyrightText.Color.ToArgb());
+            Assert.AreEqual(expected.Formatting.CopyrightText.OutlineWidth, actual.Formatting.CopyrightText.OutlineWidth);
+            Assert.AreEqual(expected.Formatting.CopyrightText.ShadowDistance, actual.Formatting.CopyrightText.ShadowDistance);
 
-            Assert.AreEqual(expected.SourceTextFontFormatting.Font, actual.SourceTextFontFormatting.Font);
-            Assert.AreEqual(expected.SourceTextFontFormatting.Color.ToArgb(), actual.SourceTextFontFormatting.Color.ToArgb());
-            Assert.AreEqual(expected.SourceTextFontFormatting.OutlineWidth, actual.SourceTextFontFormatting.OutlineWidth);
-            Assert.AreEqual(expected.SourceTextFontFormatting.ShadowDistance, actual.SourceTextFontFormatting.ShadowDistance);
+            Assert.AreEqual(expected.Formatting.SourceText.Font, actual.Formatting.SourceText.Font);
+            Assert.AreEqual(expected.Formatting.SourceText.Color.ToArgb(), actual.Formatting.SourceText.Color.ToArgb());
+            Assert.AreEqual(expected.Formatting.SourceText.OutlineWidth, actual.Formatting.SourceText.OutlineWidth);
+            Assert.AreEqual(expected.Formatting.SourceText.ShadowDistance, actual.Formatting.SourceText.ShadowDistance);
 
-            Assert.AreEqual(expected.TextOutlineFormatting.Color.ToArgb(), actual.TextOutlineFormatting.Color.ToArgb());
-            Assert.AreEqual(expected.TextOutlineFormatting.Enabled, actual.TextOutlineFormatting.Enabled);
+            Assert.AreEqual(expected.Formatting.Outline.Color.ToArgb(), actual.Formatting.Outline.Color.ToArgb());
+            Assert.AreEqual(expected.Formatting.Outline.Enabled, actual.Formatting.Outline.Enabled);
 
-            Assert.AreEqual(expected.TextShadowFormatting.Color.ToArgb(), actual.TextShadowFormatting.Color.ToArgb());
-            Assert.AreEqual(expected.TextShadowFormatting.Direction, actual.TextShadowFormatting.Direction);
-            Assert.AreEqual(expected.TextShadowFormatting.Enabled, actual.TextShadowFormatting.Enabled);
-
-            // Background
-            CollectionAssert.AreEqual(expected.BackgroundImages, actual.BackgroundImages);
+            Assert.AreEqual(expected.Formatting.Shadow.Color.ToArgb(), actual.Formatting.Shadow.Color.ToArgb());
+            Assert.AreEqual(expected.Formatting.Shadow.Direction, actual.Formatting.Shadow.Direction);
+            Assert.AreEqual(expected.Formatting.Shadow.Enabled, actual.Formatting.Shadow.Enabled);
 
             // Linespacing
-            Assert.AreEqual(expected.MainLineSpacing, actual.MainLineSpacing);
-            Assert.AreEqual(expected.TranslationLineSpacing, actual.TranslationLineSpacing);
+            Assert.AreEqual(expected.Formatting.MainLineSpacing, actual.Formatting.MainLineSpacing);
+            Assert.AreEqual(expected.Formatting.TranslationLineSpacing, actual.Formatting.TranslationLineSpacing);
 
             // Text orientation
-            Assert.AreEqual(expected.TextOrientation, actual.TextOrientation);
-            Assert.AreEqual(expected.TranslationTextPosition, actual.TranslationTextPosition);
+            Assert.AreEqual(expected.Formatting.TextOrientation, actual.Formatting.TextOrientation);
+            Assert.AreEqual(expected.Formatting.TranslationPosition, actual.Formatting.TranslationPosition);
 
             // Borders
-            Assert.AreEqual(expected.Borders.TextLeft, actual.Borders.TextLeft);
-            Assert.AreEqual(expected.Borders.TextTop, actual.Borders.TextTop);
-            Assert.AreEqual(expected.Borders.TextRight, actual.Borders.TextRight);
-            Assert.AreEqual(expected.Borders.TextBottom, actual.Borders.TextBottom);
-            Assert.AreEqual(expected.Borders.CopyrightBottom, actual.Borders.CopyrightBottom);
-            Assert.AreEqual(expected.Borders.SourceTop, actual.Borders.SourceTop);
-            Assert.AreEqual(expected.Borders.SourceRight, actual.Borders.SourceRight);
+            Assert.AreEqual(expected.Formatting.Borders.TextLeft, actual.Formatting.Borders.TextLeft);
+            Assert.AreEqual(expected.Formatting.Borders.TextTop, actual.Formatting.Borders.TextTop);
+            Assert.AreEqual(expected.Formatting.Borders.TextRight, actual.Formatting.Borders.TextRight);
+            Assert.AreEqual(expected.Formatting.Borders.TextBottom, actual.Formatting.Borders.TextBottom);
+            Assert.AreEqual(expected.Formatting.Borders.CopyrightBottom, actual.Formatting.Borders.CopyrightBottom);
+            Assert.AreEqual(expected.Formatting.Borders.SourceTop, actual.Formatting.Borders.SourceTop);
+            Assert.AreEqual(expected.Formatting.Borders.SourceRight, actual.Formatting.Borders.SourceRight);
 
         }
 
         /// <summary>
         ///A test for Load
         ///</summary>
-        [TestMethod()]
+        [TestMethod]
         public void LoadTest2()
         {
             ISongFileReader<ExtendedPowerPraiseSong> reader = new ExtendedPowerPraiseSongFileReader();
-            string filename = "Resources/powerpraise/Näher, mein Gott zu Dir - extended.ppl";
+            const string filename = "Resources/powerpraise/Näher, mein Gott zu Dir - extended.ppl";
 
             ExtendedPowerPraiseSong expected = ExtendedPowerPraiseTestUtil.GetExpectedExtendedPowerPraiseSong();
 
@@ -181,12 +162,12 @@ namespace PraiseBase.Presenter.Persistence.PowerPraise.Extended
 
             // Additional fields
             Assert.AreEqual(expected.Comment, actual.Comment, "Wrong comment");
-            CollectionAssert.AreEqual(expected.QualityIssues, actual.QualityIssues, "Wrong Quality Issues");
-            Assert.AreEqual(expected.CcliID, actual.CcliID, "Wrong CCLI id");
+            Assert.AreEqual(expected.QualityIssues, actual.QualityIssues, "Wrong Quality Issues");
+            Assert.AreEqual(expected.CcliIdentifier, actual.CcliIdentifier, "Wrong CCLI id");
             CollectionAssert.AreEqual(expected.Author, actual.Author, "Wrong author");
             Assert.AreEqual(expected.RightsManagement, actual.RightsManagement, "Wrong Rights Management");
             Assert.AreEqual(expected.Publisher, actual.Publisher, "Wrong Publisher");
-            Assert.AreEqual(expected.GUID, actual.GUID, "Wrong GUID");
+            Assert.AreEqual(expected.Guid, actual.Guid, "Wrong GUID");
 
             // Parts
             Assert.AreEqual(expected.Parts.Count, actual.Parts.Count, "Parts incomplete");
@@ -196,7 +177,7 @@ namespace PraiseBase.Presenter.Persistence.PowerPraise.Extended
                 Assert.AreEqual(expected.Parts[i].Slides.Count, actual.Parts[i].Slides.Count, "Slides incomplete in verse " + i);
                 for (int j = 0; j < expected.Parts[i].Slides.Count; j++)
                 {
-                    Assert.AreEqual(expected.Parts[i].Slides[j].BackgroundNr, actual.Parts[i].Slides[j].BackgroundNr);
+                    Assert.AreEqual(expected.Parts[i].Slides[j].Background, actual.Parts[i].Slides[j].Background);
                     Assert.AreEqual(expected.Parts[i].Slides[j].MainSize, actual.Parts[i].Slides[j].MainSize);
                     CollectionAssert.AreEqual(expected.Parts[i].Slides[j].Lines, actual.Parts[i].Slides[j].Lines, "Slide lines incomplete in verse " + i + " slide " + j);
                     CollectionAssert.AreEqual(expected.Parts[i].Slides[j].Translation, actual.Parts[i].Slides[j].Translation, "Slide translation incomplete in verse " + i + " slide " + j);
@@ -212,59 +193,56 @@ namespace PraiseBase.Presenter.Persistence.PowerPraise.Extended
 
             // Copyright
             CollectionAssert.AreEqual(expected.CopyrightText, actual.CopyrightText, "Wrong copyright");
-            Assert.AreEqual(expected.CopyrightTextPosition, actual.CopyrightTextPosition, "Wrong copyright text position");
+            Assert.AreEqual(expected.Formatting.CopyrightTextPosition, actual.Formatting.CopyrightTextPosition, "Wrong copyright text position");
 
             // Source
             Assert.AreEqual(expected.SourceText, actual.SourceText, "Wrong source text");
-            Assert.AreEqual(expected.SourceTextEnabled, actual.SourceTextEnabled, "Wrong source text position");
+            Assert.AreEqual(expected.Formatting.SourceTextPosition, actual.Formatting.SourceTextPosition, "Wrong source text position");
 
             // Formatting
-            Assert.AreEqual(expected.MainTextFontFormatting.Font, actual.MainTextFontFormatting.Font);
-            Assert.AreEqual(expected.MainTextFontFormatting.Color.ToArgb(), actual.MainTextFontFormatting.Color.ToArgb());
-            Assert.AreEqual(expected.MainTextFontFormatting.OutlineWidth, actual.MainTextFontFormatting.OutlineWidth);
-            Assert.AreEqual(expected.MainTextFontFormatting.ShadowDistance, actual.MainTextFontFormatting.ShadowDistance);
+            Assert.AreEqual(expected.Formatting.MainText.Font, actual.Formatting.MainText.Font);
+            Assert.AreEqual(expected.Formatting.MainText.Color.ToArgb(), actual.Formatting.MainText.Color.ToArgb());
+            Assert.AreEqual(expected.Formatting.MainText.OutlineWidth, actual.Formatting.MainText.OutlineWidth);
+            Assert.AreEqual(expected.Formatting.MainText.ShadowDistance, actual.Formatting.MainText.ShadowDistance);
 
-            Assert.AreEqual(expected.TranslationTextFontFormatting.Font, actual.TranslationTextFontFormatting.Font);
-            Assert.AreEqual(expected.TranslationTextFontFormatting.Color.ToArgb(), actual.TranslationTextFontFormatting.Color.ToArgb());
-            Assert.AreEqual(expected.TranslationTextFontFormatting.OutlineWidth, actual.TranslationTextFontFormatting.OutlineWidth);
-            Assert.AreEqual(expected.TranslationTextFontFormatting.ShadowDistance, actual.TranslationTextFontFormatting.ShadowDistance);
+            Assert.AreEqual(expected.Formatting.TranslationText.Font, actual.Formatting.TranslationText.Font);
+            Assert.AreEqual(expected.Formatting.TranslationText.Color.ToArgb(), actual.Formatting.TranslationText.Color.ToArgb());
+            Assert.AreEqual(expected.Formatting.TranslationText.OutlineWidth, actual.Formatting.TranslationText.OutlineWidth);
+            Assert.AreEqual(expected.Formatting.TranslationText.ShadowDistance, actual.Formatting.TranslationText.ShadowDistance);
 
-            Assert.AreEqual(expected.CopyrightTextFontFormatting.Font, actual.CopyrightTextFontFormatting.Font);
-            Assert.AreEqual(expected.CopyrightTextFontFormatting.Color.ToArgb(), actual.CopyrightTextFontFormatting.Color.ToArgb());
-            Assert.AreEqual(expected.CopyrightTextFontFormatting.OutlineWidth, actual.CopyrightTextFontFormatting.OutlineWidth);
-            Assert.AreEqual(expected.CopyrightTextFontFormatting.ShadowDistance, actual.CopyrightTextFontFormatting.ShadowDistance);
+            Assert.AreEqual(expected.Formatting.CopyrightText.Font, actual.Formatting.CopyrightText.Font);
+            Assert.AreEqual(expected.Formatting.CopyrightText.Color.ToArgb(), actual.Formatting.CopyrightText.Color.ToArgb());
+            Assert.AreEqual(expected.Formatting.CopyrightText.OutlineWidth, actual.Formatting.CopyrightText.OutlineWidth);
+            Assert.AreEqual(expected.Formatting.CopyrightText.ShadowDistance, actual.Formatting.CopyrightText.ShadowDistance);
 
-            Assert.AreEqual(expected.SourceTextFontFormatting.Font, actual.SourceTextFontFormatting.Font);
-            Assert.AreEqual(expected.SourceTextFontFormatting.Color.ToArgb(), actual.SourceTextFontFormatting.Color.ToArgb());
-            Assert.AreEqual(expected.SourceTextFontFormatting.OutlineWidth, actual.SourceTextFontFormatting.OutlineWidth);
-            Assert.AreEqual(expected.SourceTextFontFormatting.ShadowDistance, actual.SourceTextFontFormatting.ShadowDistance);
+            Assert.AreEqual(expected.Formatting.SourceText.Font, actual.Formatting.SourceText.Font);
+            Assert.AreEqual(expected.Formatting.SourceText.Color.ToArgb(), actual.Formatting.SourceText.Color.ToArgb());
+            Assert.AreEqual(expected.Formatting.SourceText.OutlineWidth, actual.Formatting.SourceText.OutlineWidth);
+            Assert.AreEqual(expected.Formatting.SourceText.ShadowDistance, actual.Formatting.SourceText.ShadowDistance);
 
-            Assert.AreEqual(expected.TextOutlineFormatting.Color.ToArgb(), actual.TextOutlineFormatting.Color.ToArgb());
-            Assert.AreEqual(expected.TextOutlineFormatting.Enabled, actual.TextOutlineFormatting.Enabled);
+            Assert.AreEqual(expected.Formatting.Outline.Color.ToArgb(), actual.Formatting.Outline.Color.ToArgb());
+            Assert.AreEqual(expected.Formatting.Outline.Enabled, actual.Formatting.Outline.Enabled);
 
-            Assert.AreEqual(expected.TextShadowFormatting.Color.ToArgb(), actual.TextShadowFormatting.Color.ToArgb());
-            Assert.AreEqual(expected.TextShadowFormatting.Direction, actual.TextShadowFormatting.Direction);
-            Assert.AreEqual(expected.TextShadowFormatting.Enabled, actual.TextShadowFormatting.Enabled);
-
-            // Background
-            CollectionAssert.AreEqual(expected.BackgroundImages, actual.BackgroundImages);
+            Assert.AreEqual(expected.Formatting.Shadow.Color.ToArgb(), actual.Formatting.Shadow.Color.ToArgb());
+            Assert.AreEqual(expected.Formatting.Shadow.Direction, actual.Formatting.Shadow.Direction);
+            Assert.AreEqual(expected.Formatting.Shadow.Enabled, actual.Formatting.Shadow.Enabled);
 
             // Linespacing
-            Assert.AreEqual(expected.MainLineSpacing, actual.MainLineSpacing);
-            Assert.AreEqual(expected.TranslationLineSpacing, actual.TranslationLineSpacing);
+            Assert.AreEqual(expected.Formatting.MainLineSpacing, actual.Formatting.MainLineSpacing);
+            Assert.AreEqual(expected.Formatting.TranslationLineSpacing, actual.Formatting.TranslationLineSpacing);
 
             // Text orientation
-            Assert.AreEqual(expected.TextOrientation, actual.TextOrientation);
-            Assert.AreEqual(expected.TranslationTextPosition, actual.TranslationTextPosition);
+            Assert.AreEqual(expected.Formatting.TextOrientation, actual.Formatting.TextOrientation);
+            Assert.AreEqual(expected.Formatting.TranslationPosition, actual.Formatting.TranslationPosition);
 
             // Borders
-            Assert.AreEqual(expected.Borders.TextLeft, actual.Borders.TextLeft);
-            Assert.AreEqual(expected.Borders.TextTop, actual.Borders.TextTop);
-            Assert.AreEqual(expected.Borders.TextRight, actual.Borders.TextRight);
-            Assert.AreEqual(expected.Borders.TextBottom, actual.Borders.TextBottom);
-            Assert.AreEqual(expected.Borders.CopyrightBottom, actual.Borders.CopyrightBottom);
-            Assert.AreEqual(expected.Borders.SourceTop, actual.Borders.SourceTop);
-            Assert.AreEqual(expected.Borders.SourceRight, actual.Borders.SourceRight);
+            Assert.AreEqual(expected.Formatting.Borders.TextLeft, actual.Formatting.Borders.TextLeft);
+            Assert.AreEqual(expected.Formatting.Borders.TextTop, actual.Formatting.Borders.TextTop);
+            Assert.AreEqual(expected.Formatting.Borders.TextRight, actual.Formatting.Borders.TextRight);
+            Assert.AreEqual(expected.Formatting.Borders.TextBottom, actual.Formatting.Borders.TextBottom);
+            Assert.AreEqual(expected.Formatting.Borders.CopyrightBottom, actual.Formatting.Borders.CopyrightBottom);
+            Assert.AreEqual(expected.Formatting.Borders.SourceTop, actual.Formatting.Borders.SourceTop);
+            Assert.AreEqual(expected.Formatting.Borders.SourceRight, actual.Formatting.Borders.SourceRight);
 
         }
 

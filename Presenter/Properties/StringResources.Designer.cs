@@ -466,6 +466,24 @@ namespace PraiseBase.Presenter.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Ablauf.
+        /// </summary>
+        public static string ShowSongSequence {
+            get {
+                return ResourceManager.GetString("ShowSongSequence", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Struktur.
+        /// </summary>
+        public static string ShowSongStructure {
+            get {
+                return ResourceManager.GetString("ShowSongStructure", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Slide.
         /// </summary>
         public static string Slide {
@@ -516,6 +534,24 @@ namespace PraiseBase.Presenter.Properties {
         public static string SongEditor {
             get {
                 return ResourceManager.GetString("SongEditor", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Übersetzung deaktivieren.
+        /// </summary>
+        public static string SongEditorChild_EnableTranslation_Disable_translation {
+            get {
+                return ResourceManager.GetString("SongEditorChild_EnableTranslation_Disable_translation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Soll die Übersetzung entfernt werden?.
+        /// </summary>
+        public static string SongEditorChild_EnableTranslation_Should_Translation_be_removed {
+            get {
+                return ResourceManager.GetString("SongEditorChild_EnableTranslation_Should_Translation_be_removed", resourceCulture);
             }
         }
         

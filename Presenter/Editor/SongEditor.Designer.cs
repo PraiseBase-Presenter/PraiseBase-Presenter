@@ -37,6 +37,8 @@
             this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
             this.saveToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.saveAsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator10 = new System.Windows.Forms.ToolStripSeparator();
+            this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
             this.liedSchliessenToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.allesSchliessenToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -76,7 +78,11 @@
             this.newToolStripButton = new System.Windows.Forms.ToolStripButton();
             this.openToolStripButton = new System.Windows.Forms.ToolStripButton();
             this.saveToolStripButton = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSeparator11 = new System.Windows.Forms.ToolStripSeparator();
+            this.toolStripButtonSwitchInputMode = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            this.toolStripButtonEnableTranslation = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSeparator9 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripButton1 = new System.Windows.Forms.ToolStripButton();
             this.toolStripButton2 = new System.Windows.Forms.ToolStripButton();
             this.toolTip = new System.Windows.Forms.ToolTip(this.components);
@@ -108,6 +114,8 @@
             this.toolStripSeparator3,
             this.saveToolStripMenuItem,
             this.saveAsToolStripMenuItem,
+            this.toolStripSeparator10,
+            this.toolStripMenuItem1,
             this.toolStripSeparator4,
             this.liedSchliessenToolStripMenuItem,
             this.allesSchliessenToolStripMenuItem,
@@ -144,6 +152,17 @@
             this.saveAsToolStripMenuItem.Name = "saveAsToolStripMenuItem";
             resources.ApplyResources(this.saveAsToolStripMenuItem, "saveAsToolStripMenuItem");
             this.saveAsToolStripMenuItem.Click += new System.EventHandler(this.SaveChildAs);
+            // 
+            // toolStripSeparator10
+            // 
+            this.toolStripSeparator10.Name = "toolStripSeparator10";
+            resources.ApplyResources(this.toolStripSeparator10, "toolStripSeparator10");
+            // 
+            // toolStripMenuItem1
+            // 
+            this.toolStripMenuItem1.Name = "toolStripMenuItem1";
+            resources.ApplyResources(this.toolStripMenuItem1, "toolStripMenuItem1");
+            this.toolStripMenuItem1.Click += new System.EventHandler(this.toolStripMenuItem1_Click);
             // 
             // toolStripSeparator4
             // 
@@ -388,7 +407,11 @@
             this.newToolStripButton,
             this.openToolStripButton,
             this.saveToolStripButton,
+            this.toolStripSeparator11,
+            this.toolStripButtonSwitchInputMode,
             this.toolStripSeparator1,
+            this.toolStripButtonEnableTranslation,
+            this.toolStripSeparator9,
             this.toolStripButton1,
             this.toolStripButton2});
             this.toolStrip.Name = "toolStrip";
@@ -415,11 +438,38 @@
             this.saveToolStripButton.Name = "saveToolStripButton";
             this.saveToolStripButton.Click += new System.EventHandler(this.SaveChild);
             // 
+            // toolStripSeparator11
+            // 
+            this.toolStripSeparator11.Name = "toolStripSeparator11";
+            resources.ApplyResources(this.toolStripSeparator11, "toolStripSeparator11");
+            this.toolStripSeparator11.TextDirection = System.Windows.Forms.ToolStripTextDirection.Vertical90;
+            // 
+            // toolStripButtonSwitchInputMode
+            // 
+            this.toolStripButtonSwitchInputMode.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            resources.ApplyResources(this.toolStripButtonSwitchInputMode, "toolStripButtonSwitchInputMode");
+            this.toolStripButtonSwitchInputMode.Name = "toolStripButtonSwitchInputMode";
+            this.toolStripButtonSwitchInputMode.Click += new System.EventHandler(this.toolStripButtonSwitchInputMode_Click);
+            // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
             resources.ApplyResources(this.toolStripSeparator1, "toolStripSeparator1");
             this.toolStripSeparator1.TextDirection = System.Windows.Forms.ToolStripTextDirection.Vertical90;
+            // 
+            // toolStripButtonEnableTranslation
+            // 
+            this.toolStripButtonEnableTranslation.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.toolStripButtonEnableTranslation.Image = global::PraiseBase.Presenter.Properties.Resources.translate;
+            resources.ApplyResources(this.toolStripButtonEnableTranslation, "toolStripButtonEnableTranslation");
+            this.toolStripButtonEnableTranslation.Name = "toolStripButtonEnableTranslation";
+            this.toolStripButtonEnableTranslation.Click += new System.EventHandler(this.toolStripButtonEnableTranslation_Click);
+            // 
+            // toolStripSeparator9
+            // 
+            this.toolStripSeparator9.Name = "toolStripSeparator9";
+            resources.ApplyResources(this.toolStripSeparator9, "toolStripSeparator9");
+            this.toolStripSeparator9.TextDirection = System.Windows.Forms.ToolStripTextDirection.Vertical90;
             // 
             // toolStripButton1
             // 
@@ -525,6 +575,12 @@
         private System.Windows.Forms.ToolStripButton toolStripButton2;
         private System.Windows.Forms.ToolStripMenuItem fehlerMeldenToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem spracheToolStripMenuItem;
+        private System.Windows.Forms.ToolStripButton toolStripButtonEnableTranslation;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator9;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator10;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem1;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator11;
+        private System.Windows.Forms.ToolStripButton toolStripButtonSwitchInputMode;
     }
 }
 

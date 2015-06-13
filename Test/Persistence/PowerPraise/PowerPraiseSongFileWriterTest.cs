@@ -1,7 +1,6 @@
-﻿using PraiseBase.Presenter.Persistence;
+﻿using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System;
-using PraiseBase.Presenter.Model;
+using PraiseBase.Presenter.Util;
 
 namespace PraiseBase.Presenter.Persistence.PowerPraise
 {
@@ -11,7 +10,7 @@ namespace PraiseBase.Presenter.Persistence.PowerPraise
     ///This is a test class for PowerPraiseSongFileWriterTest and is intended
     ///to contain all PowerPraiseSongFileWriterTest Unit Tests
     ///</summary>
-    [TestClass()]
+    [TestClass]
     public class PowerPraiseSongFileWriterTest
     {
 
@@ -68,7 +67,7 @@ namespace PraiseBase.Presenter.Persistence.PowerPraise
         /// <summary>
         ///A test for Save
         ///</summary>
-        [TestMethod()]
+        [TestMethod]
         public void SaveTest()
         {
             ISongFileWriter<PowerPraiseSong> target = new PowerPraiseSongFileWriter();
@@ -80,7 +79,7 @@ namespace PraiseBase.Presenter.Persistence.PowerPraise
             target.Save(filename, sng);
 
             try {
-                PraiseBase.Presenter.Util.FileUtils.FileEquals(filename, referenceFilename, true);
+                FileUtils.FileEquals(filename, referenceFilename, true);
             }
             catch (Exception e)
             {
@@ -91,7 +90,7 @@ namespace PraiseBase.Presenter.Persistence.PowerPraise
         /// <summary>
         ///A test for FileTypeDescription
         ///</summary>
-        [TestMethod()]
+        [TestMethod]
         public void FileTypeDescriptionTest()
         {
             ISongFileWriter<PowerPraiseSong> target = new PowerPraiseSongFileWriter();
@@ -103,7 +102,7 @@ namespace PraiseBase.Presenter.Persistence.PowerPraise
         /// <summary>
         ///A test for FileExtension
         ///</summary>
-        [TestMethod()]
+        [TestMethod]
         public void FileExtensionTest()
         {
             ISongFileWriter<PowerPraiseSong> target = new PowerPraiseSongFileWriter();

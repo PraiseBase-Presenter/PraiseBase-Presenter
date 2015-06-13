@@ -2,5 +2,6 @@
 {
     public interface ISongFile
     {
+        string GetTitle();
     }
 }

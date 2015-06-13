@@ -312,4 +312,16 @@
   <data name="UpdateAvailable" xml:space="preserve">
     <value>Ein Update auf Version {0} ist verfügbar (Sie haben Version {1}).</value>
   </data>
+  <data name="SongEditorChild_EnableTranslation_Should_Translation_be_removed" xml:space="preserve">
+    <value>Soll die Übersetzung entfernt werden?</value>
+  </data>
+  <data name="SongEditorChild_EnableTranslation_Disable_translation" xml:space="preserve">
+    <value>Übersetzung deaktivieren</value>
+  </data>
+  <data name="ShowSongSequence" xml:space="preserve">
+    <value>Ablauf</value>
+  </data>
+  <data name="ShowSongStructure" xml:space="preserve">
+    <value>Struktur</value>
+  </data>
 </root>

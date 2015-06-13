@@ -152,6 +152,9 @@ namespace PraiseBase.Presenter.Presenter
                 spracheToolStripMenuItem.DropDownItems.Add(selectLanguageToolStripMenuItem);
             }
 
+            buttonToggleSongViewMode.Text = Settings.Default.PresenterSongViewMode == SongViewMode.Structure ? StringResources.ShowSongSequence : StringResources.ShowSongStructure;
+            songDetailElement.SongViewMode = Settings.Default.PresenterSongViewMode;
+
             ProjectionManager.Instance.ProjectionChanged += Instance_ProjectionChanged;
         }
 
@@ -2345,5 +2348,30 @@ namespace PraiseBase.Presenter.Presenter
         }
 
         #endregion
+
+        private void buttonToggleSongViewMode_Click(object sender, EventArgs e)
+        {
+            TogglePresenterSongViewMode();
+        }
+
+        private void TogglePresenterSongViewMode()
+        {
+            if (Settings.Default.PresenterSongViewMode == SongViewMode.Structure)
+            {
+                Settings.Default.PresenterSongViewMode = SongViewMode.Sequence;
+                buttonToggleSongViewMode.Text = StringResources.ShowSongStructure;
+            }
+            else
+            {
+                Settings.Default.PresenterSongViewMode = SongViewMode.Structure;
+                buttonToggleSongViewMode.Text = StringResources.ShowSongSequence;
+            }
+            Settings.Default.Save();
+            songDetailElement.SongViewMode = Settings.Default.PresenterSongViewMode;
+            if (_songManager.CurrentSong != null)
+            {
+                showCurrentSongDetails();
+            }
+        }
     }
 }

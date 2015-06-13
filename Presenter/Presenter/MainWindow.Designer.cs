@@ -37,6 +37,7 @@ namespace PraiseBase.Presenter.Presenter
             this.customGroupBox2 = new PraiseBase.Presenter.Controls.CustomGroupBox();
             this.tabControlTextLayer = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.buttonToggleSongViewMode = new System.Windows.Forms.Button();
             this.songSearchTextBox = new PraiseBase.Presenter.Controls.SearchTextBox();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.titelToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -251,6 +252,7 @@ namespace PraiseBase.Presenter.Presenter
             // 
             // tabPage1
             // 
+            this.tabPage1.Controls.Add(this.buttonToggleSongViewMode);
             this.tabPage1.Controls.Add(this.songSearchTextBox);
             this.tabPage1.Controls.Add(this.listViewSongs);
             this.tabPage1.Controls.Add(this.label3);
@@ -258,6 +260,13 @@ namespace PraiseBase.Presenter.Presenter
             resources.ApplyResources(this.tabPage1, "tabPage1");
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.UseVisualStyleBackColor = true;
+            // 
+            // buttonToggleSongViewMode
+            // 
+            resources.ApplyResources(this.buttonToggleSongViewMode, "buttonToggleSongViewMode");
+            this.buttonToggleSongViewMode.Name = "buttonToggleSongViewMode";
+            this.buttonToggleSongViewMode.UseVisualStyleBackColor = true;
+            this.buttonToggleSongViewMode.Click += new System.EventHandler(this.buttonToggleSongViewMode_Click);
             // 
             // songSearchTextBox
             // 
@@ -319,6 +328,7 @@ namespace PraiseBase.Presenter.Presenter
             this.songDetailElement.Name = "songDetailElement";
             this.songDetailElement.NextSongIcon = ((System.Drawing.Image)(resources.GetObject("songDetailElement.NextSongIcon")));
             this.songDetailElement.PreviousSongIcon = ((System.Drawing.Image)(resources.GetObject("songDetailElement.PreviousSongIcon")));
+            this.songDetailElement.SongViewMode = PraiseBase.Presenter.Manager.SongViewMode.Structure;
             this.songDetailElement.ThumbnailSize = new System.Drawing.Size(56, 42);
             this.songDetailElement.SlideClicked += new PraiseBase.Presenter.Controls.SongDetail.SlideClick(this.songDetailElement_SlideClicked);
             this.songDetailElement.ImageClicked += new PraiseBase.Presenter.Controls.SongDetail.ImageClick(this.songDetailElement_ImageClicked);
@@ -1545,6 +1555,7 @@ namespace PraiseBase.Presenter.Presenter
         private System.Windows.Forms.SplitContainer splitContainerLayerContent;
         private DragAndDropListView listViewBibleVerseList;
         private System.Windows.Forms.ColumnHeader columnHeader3;
+        private System.Windows.Forms.Button buttonToggleSongViewMode;
         
     }
 }

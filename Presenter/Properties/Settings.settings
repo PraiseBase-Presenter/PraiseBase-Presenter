@@ -251,5 +251,8 @@
     <Setting Name="AuthorInfo" Type="System.String" Scope="Application">
       <Value Profile="(Default)">Nicolas Perrenoud &lt;info@praisebase.org&gt;</Value>
     </Setting>
+    <Setting Name="PresenterSongViewMode" Type="PraiseBase.Presenter.Manager.SongViewMode" Scope="User">
+      <Value Profile="(Default)">Structure</Value>
+    </Setting>
   </Settings>
 </SettingsFile>
