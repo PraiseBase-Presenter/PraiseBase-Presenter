@@ -279,13 +279,13 @@ namespace PraiseBase.Presenter.Model.Song
         /// <summary>
         ///     Gets or sets the list of all parts in the song
         /// </summary>
-        public new ComparableOrderedList<SongPart> Parts { get; set; }
+        public ComparableOrderedList<SongPart> Parts { get; set; }
 
         /// <summary>
         ///     Gets or sets a sequence of part numbers indicating
         ///     the real order in which the song is sung
         /// </summary>
-        public new ComparableOrderedList<SongPart> PartSequence { get; set; }
+        public ComparableOrderedList<SongPart> PartSequence { get; set; }
 
         /// <summary>
         ///     Quality assurance indicators

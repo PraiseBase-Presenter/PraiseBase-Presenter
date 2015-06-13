@@ -153,6 +153,7 @@ namespace PraiseBase.Presenter.Presenter
             }
 
             buttonToggleSongViewMode.Text = Settings.Default.PresenterSongViewMode == SongViewMode.Structure ? StringResources.ShowSongSequence : StringResources.ShowSongStructure;
+            songDetailElement.SongViewMode = Settings.Default.PresenterSongViewMode;
 
             ProjectionManager.Instance.ProjectionChanged += Instance_ProjectionChanged;
         }
@@ -2366,6 +2367,8 @@ namespace PraiseBase.Presenter.Presenter
                 buttonToggleSongViewMode.Text = StringResources.ShowSongSequence;
             }
             Settings.Default.Save();
+            songDetailElement.SongViewMode = Settings.Default.PresenterSongViewMode;
+            showCurrentSongDetails();
         }
     }
 }

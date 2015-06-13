@@ -44,6 +44,8 @@ namespace PraiseBase.Presenter.Controls
         [Description("Show first and last background image as selectable item"), Category("SongDetail"), DefaultValue(false)]
         public Boolean ShowFirstAndLastBackground { get; set; }
 
+        public SongViewMode SongViewMode { get; set; }
+
         //
         // Runtime variables
         //
@@ -115,6 +117,8 @@ namespace PraiseBase.Presenter.Controls
             PerformLayout();
             SuspendLayout();
 
+            List<SongPart> parts = SongViewMode == SongViewMode.Sequence ? sng.PartSequence : sng.Parts;
+
             //
             // Cleanup
             //
@@ -142,7 +146,7 @@ namespace PraiseBase.Presenter.Controls
             // Draw new stuff
             //
 
-            bool showFirstLastBackgrounds = ShowFirstAndLastBackground || (sng.Parts.Count > 0 && (previousSong != null || nextSong != null));
+            bool showFirstLastBackgrounds = ShowFirstAndLastBackground || (parts.Count > 0 && (previousSong != null || nextSong != null));
 
             int ypos = TopMargin;
 
@@ -156,7 +160,7 @@ namespace PraiseBase.Presenter.Controls
             }
             else
             {
-                foreach (SongPart part in sng.Parts)
+                foreach (SongPart part in parts)
                 {
                     labelSize = MeasureSize(part.Caption, labelSize);
                 }
@@ -215,16 +219,16 @@ namespace PraiseBase.Presenter.Controls
                 {
                     new PartPanelElement
                     {
-                        Background = sng.Parts[0].Slides[0].Background
+                        Background = parts[0].Slides[0].Background
                     }
                 };
                 ypos += AddPartCopmponent(ypos, fe, ThumbnailSize.Height, labelSize, -1, null);
             }
 
-            for (int i = 0; i < sng.Parts.Count; i++)
+            for (int i = 0; i < parts.Count; i++)
             {
                 List<PartPanelElement> elements = new List<PartPanelElement>();
-                foreach (var e in  sng.Parts[i].Slides)
+                foreach (var e in parts[i].Slides)
                 {
                     elements.Add(new PartPanelElement
                     {
@@ -232,7 +236,19 @@ namespace PraiseBase.Presenter.Controls
                         Background = e.Background
                     });
                 }
-                ypos += AddPartCopmponent(ypos, elements, ThumbnailSize.Height, labelSize, i, sng.Parts[i].Caption);
+                int partIdx = i;
+                if (SongViewMode == SongViewMode.Sequence)
+                {
+                    for (int j = 0; j < sng.Parts.Count; j++)
+                    {
+                        if (parts[i].Equals(sng.Parts[j]))
+                        {
+                            partIdx = j;
+                            break;
+                        }
+                    }
+                }
+                ypos += AddPartCopmponent(ypos, elements, ThumbnailSize.Height, labelSize, partIdx, parts[i].Caption);
             }
 
             if (showFirstLastBackgrounds)
@@ -241,7 +257,7 @@ namespace PraiseBase.Presenter.Controls
                 {
                     new PartPanelElement
                     {
-                        Background = sng.Parts[sng.Parts.Count-1].Slides[sng.Parts[sng.Parts.Count-1].Slides.Count-1].Background
+                        Background = parts[parts.Count-1].Slides[parts[parts.Count-1].Slides.Count-1].Background
                     }
                 };
                 ypos += AddPartCopmponent(ypos, fe2, ThumbnailSize.Height, labelSize, -1, null);
