@@ -105,8 +105,7 @@ namespace PraiseBase.Presenter.Presenter
             var newThread = new Thread(DoUpdateCheck) { Name = "UpdateChecker" };
             newThread.Start();
 
-            var bThread = new Thread(loadBibles) { Name = "BibleLoader" };
-            bThread.Start();
+            LoadBiblesInBackground();
 
             WindowState = Settings.Default.ViewerWindowState;
             //Text += " " + Assembly.GetExecutingAssembly().GetName().Version;
@@ -403,9 +402,13 @@ namespace PraiseBase.Presenter.Presenter
             if (dataDirectory != Settings.Default.DataDirectory)
             {
                 _songManager.SongDirPath = SettingsUtil.GetSongDirPath(Settings.Default);
+                _imgManager.ImageDirPath = SettingsUtil.GetImageDirPath(Settings.Default);
+                _imgManager.ThumbDirPath = SettingsUtil.GetThumbDirPath(Settings.Default);
+                _bibleManager.BibleDirectory = SettingsUtil.GetBibleDirPath(Settings.Default);
                 ReloadSongList();
                 ReloadImageList();
                 CheckThumbnails();
+                loadBibles(true);
             }
         }
 
@@ -1573,9 +1576,23 @@ namespace PraiseBase.Presenter.Presenter
         private int verseIdx = -1, verseToIdx = -1;
         BibleManager.BiblePassageSearchResult biblePassageSearchResult;
 
+        private void LoadBiblesInBackground()
+        {
+            var bThread = new Thread(loadBibles) { Name = "BibleLoader" };
+            bThread.Start();
+        }
+
         private void loadBibles()
         {
-            bool reload = false;
+            loadBibles(false);
+        }
+
+        private void loadBibles(bool reload)
+        {
+            if (reload)
+            {
+                comboBoxBible.DataSource = null;
+            }
             if (comboBoxBible.Items.Count == 0 || reload)
             {
                 comboBoxBible.Items.Clear();
@@ -1592,20 +1609,22 @@ namespace PraiseBase.Presenter.Presenter
 
         private void comboBoxBible_SelectedIndexChanged(object sender, EventArgs e)
         {
-                listBoxBibleVerse.Items.Clear();
-                listBoxBibleVerseTo.Items.Clear();
-                listBoxBibleChapter.Items.Clear();
+            listBoxBibleVerse.Items.Clear();
+            listBoxBibleVerseTo.Items.Clear();
+            listBoxBibleChapter.Items.Clear();
 
-                listBoxBibleBook.Items.Clear();
-                listBoxBibleBook.DisplayMember = "Name";
+            listBoxBibleBook.Items.Clear();
+            listBoxBibleBook.DisplayMember = "Name";
 
+            if (comboBoxBible.SelectedIndex >= 0)
+            {
                 var bi = ((KeyValuePair<string, BibleManager.BibleItem>)comboBoxBible.SelectedItem);
                 if (bi.Value.Bible.Books == null)
                 {
                     _bibleManager.LoadBibleData(bi.Key);
                 }
 
-                foreach (BibleBook bk in  bi.Value.Bible.Books)
+                foreach (BibleBook bk in bi.Value.Bible.Books)
                 {
                     listBoxBibleBook.Items.Add(bk);
                 }
@@ -1614,8 +1633,9 @@ namespace PraiseBase.Presenter.Presenter
                 {
                     listBoxBibleBook.SelectedIndex = bookIdx;
                 }
+            }
 
-                searchTextBoxBible.Enabled = true;
+            searchTextBoxBible.Enabled = true;
         }
 
         private void listBoxBibleBook_SelectedIndexChanged(object sender, EventArgs e)

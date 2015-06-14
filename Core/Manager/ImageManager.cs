@@ -64,12 +64,12 @@ namespace PraiseBase.Presenter.Manager
         /// <summary>
         ///     Base path to the image directory
         /// </summary>
-        public string ImageDirPath { get; protected set; }
+        public string ImageDirPath { get; set; }
 
         /// <summary>
         ///     Base path to the thumbnails directory
         /// </summary>
-        public string ThumbDirPath { get; protected set; }
+        public string ThumbDirPath { get; set; }
 
         /// <summary>
         ///     Check and create thumbnails if necessary
