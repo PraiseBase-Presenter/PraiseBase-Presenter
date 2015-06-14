@@ -31,17 +31,33 @@ namespace PraiseBase.Presenter
 
         public static string GetImageDirPath(Settings settings)
         {
-            return settings.DataDirectory + Path.DirectorySeparatorChar + settings.ImageDir;
+            String path = settings.DataDirectory + Path.DirectorySeparatorChar + settings.ImageDir;
+            if (!Directory.Exists(path))
+            {
+                Directory.CreateDirectory(path);
+            }
+            return path;
         }
 
         public static string GetThumbDirPath(Settings settings)
         {
-            return settings.DataDirectory + Path.DirectorySeparatorChar + settings.ThumbDir;
+            String path = settings.DataDirectory + Path.DirectorySeparatorChar + settings.ThumbDir;
+            if (!Directory.Exists(path))
+            {
+                var di = Directory.CreateDirectory(path);
+                di.Attributes = FileAttributes.Directory | FileAttributes.Hidden;
+            }
+            return path;
         }
 
         public static string GetBibleDirPath(Settings settings)
         {
-            return settings.DataDirectory + Path.DirectorySeparatorChar + "Bibles";
+            String path = settings.DataDirectory + Path.DirectorySeparatorChar + "Bibles";
+            if (!Directory.Exists(path))
+            {
+                Directory.CreateDirectory(path);
+            }
+            return path;
         }
     }
 }

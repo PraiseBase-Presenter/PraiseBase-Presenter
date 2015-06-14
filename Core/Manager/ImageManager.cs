@@ -40,17 +40,7 @@ namespace PraiseBase.Presenter.Manager
         public ImageManager(String imageDirPath, String thumbDirPath)
         {
             ImageDirPath = imageDirPath;
-            if (!Directory.Exists(ImageDirPath))
-            {
-                Directory.CreateDirectory(ImageDirPath);
-            }
-
             ThumbDirPath = thumbDirPath;
-            if (!Directory.Exists(ThumbDirPath))
-            {
-                var di = Directory.CreateDirectory(ThumbDirPath);
-                di.Attributes = FileAttributes.Directory | FileAttributes.Hidden;
-            }
 
             DefaultThumbSize = new Size(80, 60);
             DefaultImageSize = new Size(1024, 768);
