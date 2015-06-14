@@ -791,7 +791,7 @@ namespace PraiseBase.Presenter.Editor
         {
             // TODO: Translation mapping textBoxSongTranslation.Text
             // _textualSongReprMapper.Map(textBoxSongText.Text, Song);
-            //PreviewSlide();
+            PreviewSlide();
         }
 
         private void textBoxAuthors_TextChanged(object sender, EventArgs e)
