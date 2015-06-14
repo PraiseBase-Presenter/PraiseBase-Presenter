@@ -21,7 +21,12 @@ namespace PraiseBase.Presenter
 
         public static string GetSongDirPath(Settings settings)
         {
-            return settings.DataDirectory + Path.DirectorySeparatorChar + settings.SongDir;            
+            String path = settings.DataDirectory + Path.DirectorySeparatorChar + settings.SongDir;
+            if (!Directory.Exists(path))
+            {
+                Directory.CreateDirectory(path);
+            }
+            return path;
         }
 
         public static string GetImageDirPath(Settings settings)
