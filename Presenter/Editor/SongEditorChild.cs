@@ -126,8 +126,6 @@ namespace PraiseBase.Presenter.Editor
             PopulateTree();
             treeViewContents.SelectedNode = treeViewContents.Nodes[0];
 
-            PopulatePartList();
-
             PopulateQa();
 
             PopulateLanguageBox();
@@ -214,8 +212,15 @@ namespace PraiseBase.Presenter.Editor
 
         private void PopulatePartList()
         {
+            addContextMenu.Items.Clear();
             foreach (string str in Settings.SongParts)
             {
+                bool skipThis = Song.Parts.Any(p => p.Caption == str);
+                if (skipThis)
+                {
+                    continue;
+                }
+
                 ToolStripMenuItem tItem = new ToolStripMenuItem(str);
                 tItem.Click += partAddMenu_click;
                 addContextMenu.Items.Add(tItem);
@@ -604,6 +609,7 @@ namespace PraiseBase.Presenter.Editor
             }
             if (e.Button == MouseButtons.Left)
             {
+                PopulatePartList();
                 addContextMenu.Show();
             }
         }
