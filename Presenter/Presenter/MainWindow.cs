@@ -396,15 +396,24 @@ namespace PraiseBase.Presenter.Presenter
 
         private void OpenSettingsDialog()
         {
+            String dataDirectory = Settings.Default.DataDirectory;
             new ProgramSettingsDialog(Settings.Default).ShowDialog(this);
+
+            // Reload songs and images if data directory changed
+            if (dataDirectory != Settings.Default.DataDirectory)
+            {
+                ReloadSongList();
+                ReloadImageList();
+                CheckThumbnails();
+            }
         }
 
         private void liederlisteNeuLadenToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            reloadSongList();
+            ReloadSongList();
         }
 
-        private void reloadSongList()
+        private void ReloadSongList()
         {
             songSearchTextBox.Text = "";
             _songManager.Reload();
@@ -1012,6 +1021,11 @@ namespace PraiseBase.Presenter.Presenter
 
         private void bilderlisteNeuLadenToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            ReloadImageList();
+        }
+
+        private void ReloadImageList()
+        {
             imageTreeViewInit();
             listViewDirectoryImages.Items.Clear();
             GC.Collect();
@@ -1338,7 +1352,7 @@ namespace PraiseBase.Presenter.Presenter
             var dlg = new SongImporter(Settings.Default, format);
             if (dlg.ShowDialog(this) == DialogResult.OK)
             {
-                reloadSongList();
+                ReloadSongList();
                 if (dlg.OpenInEditor.Any())
                 {
                     foreach (var fn in dlg.OpenInEditor)
@@ -1351,6 +1365,11 @@ namespace PraiseBase.Presenter.Presenter
         }
 
         private void miniaturbilderPrüfenToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            CheckThumbnails();
+        }
+
+        private void CheckThumbnails()
         {
             ProgressWindow wnd = new ProgressWindow(StringResources.CreatingThumbnails + "...", 0);
             wnd.Show();
