@@ -202,10 +202,17 @@ namespace PraiseBase.Presenter.Forms
             {
                 Font = _settings.ProjectionMasterFont
             };
-            if (fontDlg.ShowDialog() == DialogResult.OK)
+            try
             {
-                _settings.ProjectionMasterFont = fontDlg.Font;
-                UpdateLabels();
+                if (fontDlg.ShowDialog() == DialogResult.OK)
+                {
+                    _settings.ProjectionMasterFont = fontDlg.Font;
+                    UpdateLabels();
+                }
+            }
+            catch (ArgumentException ex)
+            {
+                MessageBox.Show(ex.Message, StringResources.Error, MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -360,10 +367,17 @@ namespace PraiseBase.Presenter.Forms
             {
                 Font = _settings.ProjectionMasterFontTranslation
             };
-            if (fontDlg.ShowDialog() == DialogResult.OK)
+            try
             {
-                _settings.ProjectionMasterFontTranslation = fontDlg.Font;
-                UpdateLabels();
+                if (fontDlg.ShowDialog() == DialogResult.OK)
+                {
+                    _settings.ProjectionMasterFontTranslation = fontDlg.Font;
+                    UpdateLabels();
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, StringResources.Error, MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -373,10 +387,17 @@ namespace PraiseBase.Presenter.Forms
             {
                 Font = _settings.ProjectionMasterCopyrightFont
             };
-            if (fontDlg.ShowDialog() == DialogResult.OK)
+            try
             {
-                _settings.ProjectionMasterCopyrightFont = fontDlg.Font;
-                UpdateLabels();
+                if (fontDlg.ShowDialog() == DialogResult.OK)
+                {
+                    _settings.ProjectionMasterCopyrightFont = fontDlg.Font;
+                    UpdateLabels();
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, StringResources.Error, MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -399,10 +420,17 @@ namespace PraiseBase.Presenter.Forms
             {
                 Font = _settings.ProjectionMasterSourceFont
             };
-            if (fontDlg.ShowDialog() == DialogResult.OK)
+            try
             {
-                _settings.ProjectionMasterSourceFont = fontDlg.Font;
-                UpdateLabels();
+                if (fontDlg.ShowDialog() == DialogResult.OK)
+                {
+                    _settings.ProjectionMasterSourceFont = fontDlg.Font;
+                    UpdateLabels();
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, StringResources.Error, MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
