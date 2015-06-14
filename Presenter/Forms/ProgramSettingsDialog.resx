@@ -202,7 +202,7 @@
     <value>groupBoxDataDirectory</value>
   </data>
   <data name="&gt;&gt;label1.ZOrder" xml:space="preserve">
-    <value>3</value>
+    <value>2</value>
   </data>
   <data name="button1.Location" type="System.Drawing.Point, System.Drawing">
     <value>445, 20</value>
@@ -226,7 +226,7 @@
     <value>groupBoxDataDirectory</value>
   </data>
   <data name="&gt;&gt;button1.ZOrder" xml:space="preserve">
-    <value>2</value>
+    <value>1</value>
   </data>
   <data name="textBox1.Location" type="System.Drawing.Point, System.Drawing">
     <value>206, 22</value>
@@ -247,7 +247,7 @@
     <value>groupBoxDataDirectory</value>
   </data>
   <data name="&gt;&gt;textBox1.ZOrder" xml:space="preserve">
-    <value>1</value>
+    <value>0</value>
   </data>
   <data name="buttonResetFactoryDefaults.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Bottom, Left</value>
@@ -403,7 +403,7 @@
     <value>3</value>
   </data>
   <data name="groupBoxProjection.Location" type="System.Drawing.Point, System.Drawing">
-    <value>6, 121</value>
+    <value>6, 71</value>
   </data>
   <data name="groupBoxProjection.Size" type="System.Drawing.Size, System.Drawing">
     <value>592, 115</value>
@@ -460,7 +460,7 @@
     <value>Microsoft Sans Serif, 8.25pt</value>
   </data>
   <data name="groupBoxMisc.Location" type="System.Drawing.Point, System.Drawing">
-    <value>6, 242</value>
+    <value>6, 192</value>
   </data>
   <data name="groupBoxMisc.Size" type="System.Drawing.Size, System.Drawing">
     <value>592, 68</value>
@@ -483,39 +483,6 @@
   <data name="&gt;&gt;groupBoxMisc.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
-  <data name="textBox2.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Microsoft Sans Serif, 9.75pt</value>
-  </data>
-  <data name="textBox2.Location" type="System.Drawing.Point, System.Drawing">
-    <value>42, 58</value>
-  </data>
-  <data name="textBox2.Multiline" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="textBox2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>497, 35</value>
-  </data>
-  <data name="textBox2.TabIndex" type="System.Int32, mscorlib">
-    <value>7</value>
-  </data>
-  <data name="textBox2.Text" xml:space="preserve">
-    <value>Falls du den Datenordner neu setzt, musst du anschliessend die Liederliste und die Bilderliste neu laden (über das Optionen-Menü) oder das Programm neu starten.</value>
-  </data>
-  <data name="textBox2.TextAlign" type="System.Windows.Forms.HorizontalAlignment, System.Windows.Forms">
-    <value>Center</value>
-  </data>
-  <data name="&gt;&gt;textBox2.Name" xml:space="preserve">
-    <value>textBox2</value>
-  </data>
-  <data name="&gt;&gt;textBox2.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;textBox2.Parent" xml:space="preserve">
-    <value>groupBoxDataDirectory</value>
-  </data>
-  <data name="&gt;&gt;textBox2.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
   <data name="groupBoxDataDirectory.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 8.25pt</value>
   </data>
@@ -523,7 +490,7 @@
     <value>6, 6</value>
   </data>
   <data name="groupBoxDataDirectory.Size" type="System.Drawing.Size, System.Drawing">
-    <value>592, 109</value>
+    <value>592, 59</value>
   </data>
   <data name="groupBoxDataDirectory.TabIndex" type="System.Int32, mscorlib">
     <value>9</value>

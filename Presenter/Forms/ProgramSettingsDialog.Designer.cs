@@ -45,7 +45,6 @@
             this.groupBoxMisc = new System.Windows.Forms.GroupBox();
             this.checkBoxShowLoadingScreen = new System.Windows.Forms.CheckBox();
             this.groupBoxDataDirectory = new System.Windows.Forms.GroupBox();
-            this.textBox2 = new System.Windows.Forms.TextBox();
             this.tabPage3 = new System.Windows.Forms.TabPage();
             this.label6 = new System.Windows.Forms.Label();
             this.buttonAddSongPart = new System.Windows.Forms.Button();
@@ -275,21 +274,12 @@
             // 
             // groupBoxDataDirectory
             // 
-            this.groupBoxDataDirectory.Controls.Add(this.textBox2);
             this.groupBoxDataDirectory.Controls.Add(this.textBox1);
             this.groupBoxDataDirectory.Controls.Add(this.button1);
             this.groupBoxDataDirectory.Controls.Add(this.label1);
             resources.ApplyResources(this.groupBoxDataDirectory, "groupBoxDataDirectory");
             this.groupBoxDataDirectory.Name = "groupBoxDataDirectory";
             this.groupBoxDataDirectory.TabStop = false;
-            // 
-            // textBox2
-            // 
-            this.textBox2.BackColor = System.Drawing.SystemColors.Info;
-            this.textBox2.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            resources.ApplyResources(this.textBox2, "textBox2");
-            this.textBox2.Name = "textBox2";
-            this.textBox2.ReadOnly = true;
             // 
             // tabPage3
             // 
@@ -1097,8 +1087,7 @@
         private System.Windows.Forms.Button buttonChooseProjectionForeColor;
         private System.Windows.Forms.Button buttonProjectionMasterFont;
         private System.Windows.Forms.CheckBox checkBoxUseMasterFormat;
-		private System.Windows.Forms.GroupBox groupBoxFonts;
-		private System.Windows.Forms.TextBox textBox2;
+        private System.Windows.Forms.GroupBox groupBoxFonts;
 		private System.Windows.Forms.CheckBox checkBoxShowLoadingScreen;
 		private System.Windows.Forms.GroupBox groupBoxMisc;
 		private System.Windows.Forms.GroupBox groupBoxDataDirectory;
