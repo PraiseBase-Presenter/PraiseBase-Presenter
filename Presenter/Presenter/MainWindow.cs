@@ -152,8 +152,7 @@ namespace PraiseBase.Presenter.Presenter
                 spracheToolStripMenuItem.DropDownItems.Add(selectLanguageToolStripMenuItem);
             }
 
-            buttonToggleSongViewMode.Text = Settings.Default.PresenterSongViewMode == SongViewMode.Structure ? StringResources.ShowSongSequence : StringResources.ShowSongStructure;
-            songDetailElement.SongViewMode = Settings.Default.PresenterSongViewMode;
+            UpdatePresenterSongViewModeButtons(Settings.Default.PresenterSongViewMode);
 
             ProjectionManager.Instance.ProjectionChanged += Instance_ProjectionChanged;
         }
@@ -2351,27 +2350,41 @@ namespace PraiseBase.Presenter.Presenter
 
         private void buttonToggleSongViewMode_Click(object sender, EventArgs e)
         {
-            TogglePresenterSongViewMode();
+            UpdatePresenterSongViewModeButtons(SongViewMode.Structure);
+            UpdatePresenterSongViewMode(SongViewMode.Structure);
         }
 
-        private void TogglePresenterSongViewMode()
+        private void buttonSongViewModeSequence_Click(object sender, EventArgs e)
         {
-            if (Settings.Default.PresenterSongViewMode == SongViewMode.Structure)
+            UpdatePresenterSongViewModeButtons(SongViewMode.Sequence);
+            UpdatePresenterSongViewMode(SongViewMode.Sequence);
+        }
+
+        private void UpdatePresenterSongViewModeButtons(SongViewMode mode)
+        {
+            if (mode == SongViewMode.Sequence)
             {
-                Settings.Default.PresenterSongViewMode = SongViewMode.Sequence;
-                buttonToggleSongViewMode.Text = StringResources.ShowSongStructure;
+                buttonSongViewModeStructure.BackColor = Color.White;
+                buttonSongViewModeSequence.BackColor = Color.LightGray;
             }
-            else
+            else if (mode == SongViewMode.Structure)
             {
-                Settings.Default.PresenterSongViewMode = SongViewMode.Structure;
-                buttonToggleSongViewMode.Text = StringResources.ShowSongSequence;
+                buttonSongViewModeStructure.BackColor = Color.LightGray;
+                buttonSongViewModeSequence.BackColor = Color.White;
             }
-            Settings.Default.Save();
-            songDetailElement.SongViewMode = Settings.Default.PresenterSongViewMode;
+            songDetailElement.SongViewMode = mode;
+
             if (_songManager.CurrentSong != null)
             {
                 showCurrentSongDetails();
             }
         }
+
+        private void UpdatePresenterSongViewMode(SongViewMode mode)
+        {
+            Settings.Default.PresenterSongViewMode = mode;
+            Settings.Default.Save();
+        }
+
     }
 }

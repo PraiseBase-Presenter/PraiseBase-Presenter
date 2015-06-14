@@ -37,7 +37,8 @@ namespace PraiseBase.Presenter.Presenter
             this.customGroupBox2 = new PraiseBase.Presenter.Controls.CustomGroupBox();
             this.tabControlTextLayer = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
-            this.buttonToggleSongViewMode = new System.Windows.Forms.Button();
+            this.buttonSongViewModeSequence = new System.Windows.Forms.Button();
+            this.buttonSongViewModeStructure = new System.Windows.Forms.Button();
             this.songSearchTextBox = new PraiseBase.Presenter.Controls.SearchTextBox();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.titelToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -252,7 +253,8 @@ namespace PraiseBase.Presenter.Presenter
             // 
             // tabPage1
             // 
-            this.tabPage1.Controls.Add(this.buttonToggleSongViewMode);
+            this.tabPage1.Controls.Add(this.buttonSongViewModeSequence);
+            this.tabPage1.Controls.Add(this.buttonSongViewModeStructure);
             this.tabPage1.Controls.Add(this.songSearchTextBox);
             this.tabPage1.Controls.Add(this.listViewSongs);
             this.tabPage1.Controls.Add(this.label3);
@@ -261,12 +263,20 @@ namespace PraiseBase.Presenter.Presenter
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.UseVisualStyleBackColor = true;
             // 
-            // buttonToggleSongViewMode
+            // buttonSongViewModeSequence
             // 
-            resources.ApplyResources(this.buttonToggleSongViewMode, "buttonToggleSongViewMode");
-            this.buttonToggleSongViewMode.Name = "buttonToggleSongViewMode";
-            this.buttonToggleSongViewMode.UseVisualStyleBackColor = true;
-            this.buttonToggleSongViewMode.Click += new System.EventHandler(this.buttonToggleSongViewMode_Click);
+            resources.ApplyResources(this.buttonSongViewModeSequence, "buttonSongViewModeSequence");
+            this.buttonSongViewModeSequence.Name = "buttonSongViewModeSequence";
+            this.buttonSongViewModeSequence.UseVisualStyleBackColor = true;
+            this.buttonSongViewModeSequence.Click += new System.EventHandler(this.buttonSongViewModeSequence_Click);
+            // 
+            // buttonSongViewModeStructure
+            // 
+            resources.ApplyResources(this.buttonSongViewModeStructure, "buttonSongViewModeStructure");
+            this.buttonSongViewModeStructure.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.buttonSongViewModeStructure.Name = "buttonSongViewModeStructure";
+            this.buttonSongViewModeStructure.UseVisualStyleBackColor = true;
+            this.buttonSongViewModeStructure.Click += new System.EventHandler(this.buttonToggleSongViewMode_Click);
             // 
             // songSearchTextBox
             // 
@@ -1555,7 +1565,8 @@ namespace PraiseBase.Presenter.Presenter
         private System.Windows.Forms.SplitContainer splitContainerLayerContent;
         private DragAndDropListView listViewBibleVerseList;
         private System.Windows.Forms.ColumnHeader columnHeader3;
-        private System.Windows.Forms.Button buttonToggleSongViewMode;
+        private System.Windows.Forms.Button buttonSongViewModeStructure;
+        private System.Windows.Forms.Button buttonSongViewModeSequence;
         
     }
 }
