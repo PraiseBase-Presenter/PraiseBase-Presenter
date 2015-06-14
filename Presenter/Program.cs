@@ -82,13 +82,8 @@ namespace PraiseBase.Presenter
             }
 
             // Check Data directory
-            if (Settings.Default.DataDirectory == "")
+            if (SettingsUtil.SetDefaultDataDirIfEmpty(Settings.Default))
             {
-                Settings.Default.DataDirectory = Environment.GetFolderPath(Environment.SpecialFolder.Personal) + Path.DirectorySeparatorChar + Settings.Default.DataDirDefaultName;
-                if (Directory.Exists(Settings.Default.DataDirectory))
-                {
-                    Directory.CreateDirectory(Settings.Default.DataDirectory);
-                }
                 Settings.Default.Save();
             }
 
