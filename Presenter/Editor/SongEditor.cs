@@ -328,8 +328,8 @@ namespace PraiseBase.Presenter.Editor
             // Check is using default name
             if (sng.Title == _settings.SongDefaultName)
             {
-                if (MessageBox.Show(string.Format(StringResources.DoesTheSongReallyHaveTheDefaultTitle, sng.Title), StringResources.Attention,
-                    MessageBoxButtons.YesNo) == DialogResult.No)
+                if (MessageBox.Show(string.Format(StringResources.DoesTheSongReallyHaveTheDefaultTitle, sng.Title), StringResources.SaveSongAs,
+                    MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.No)
                 {
                     return null;
                 }
