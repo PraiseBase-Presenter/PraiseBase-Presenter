@@ -724,6 +724,7 @@ namespace PraiseBase.Presenter.Editor
                     {
                         treeViewContents.Nodes[partId].Text = value;
                         Song.Parts[partId].Caption = value;
+                        PopulateSequence();
                     }
                 }
             }
