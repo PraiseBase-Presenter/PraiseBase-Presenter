@@ -925,7 +925,7 @@ namespace PraiseBase.Presenter.Editor
         {
             if (listBoxSequence.Items.Count <= 1)
             {
-                MessageBox.Show("Das letzte Element kann nicht entfernt werden!", "Fehler", MessageBoxButtons.OK, MessageBoxIcon.Stop);
+                MessageBox.Show(StringResources.UnableToRemoveLastElement, StringResources.Error, MessageBoxButtons.OK, MessageBoxIcon.Stop);
                 return;
             }
             int idx = listBoxSequence.SelectedIndex;

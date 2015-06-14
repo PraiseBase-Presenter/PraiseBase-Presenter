@@ -682,6 +682,15 @@ namespace PraiseBase.Presenter.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Das letzte Element kann nicht entfernt werden!.
+        /// </summary>
+        public static string UnableToRemoveLastElement {
+            get {
+                return ResourceManager.GetString("UnableToRemoveLastElement", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Ein Update auf Version {0} ist verfügbar (Sie haben Version {1})..
         /// </summary>
         public static string UpdateAvailable {

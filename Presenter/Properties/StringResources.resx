@@ -327,4 +327,7 @@
   <data name="SongPartExistsAlready" xml:space="preserve">
     <value>Dieser Liedteil existiert bereits!</value>
   </data>
+  <data name="UnableToRemoveLastElement" xml:space="preserve">
+    <value>Das letzte Element kann nicht entfernt werden!</value>
+  </data>
 </root>
