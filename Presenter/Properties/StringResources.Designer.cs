@@ -601,6 +601,15 @@ namespace PraiseBase.Presenter.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Dieser Liedteil existiert bereits!.
+        /// </summary>
+        public static string SongPartExistsAlready {
+            get {
+                return ResourceManager.GetString("SongPartExistsAlready", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Der Liedteil muss mindestens eine Folie haben!.
         /// </summary>
         public static string SongPartsNeedsAtLeastOneSlide {

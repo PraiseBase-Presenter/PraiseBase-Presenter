@@ -324,4 +324,7 @@
   <data name="ShowSongStructure" xml:space="preserve">
     <value>Struktur</value>
   </data>
+  <data name="SongPartExistsAlready" xml:space="preserve">
+    <value>Dieser Liedteil existiert bereits!</value>
+  </data>
 </root>

@@ -24,6 +24,7 @@ using System;
 using System.Diagnostics.CodeAnalysis;
 using System.Drawing;
 using System.Drawing.Drawing2D;
+using System.Linq;
 using System.Windows.Forms;
 using PraiseBase.Presenter.Forms;
 using PraiseBase.Presenter.Manager;
@@ -344,6 +345,11 @@ namespace PraiseBase.Presenter.Editor
 
         private void AddSongPartUpdateTree(string caption)
         {
+            if (Song.Parts.Any(p => p.Caption == caption))
+            {
+                MessageBox.Show(StringResources.SongPartExistsAlready, StringResources.Error, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
             var newPart = TemplateMapper.AddSongPart(Song, caption);
             Song.PartSequence.Add(newPart);
             PopulateTree();
@@ -722,6 +728,11 @@ namespace PraiseBase.Presenter.Editor
                     var value = dlg.InputValue.Trim();
                     if (!String.IsNullOrEmpty(value))
                     {
+                        if (Song.Parts.Any(p => p.Caption == value))
+                        {
+                            MessageBox.Show(StringResources.SongPartExistsAlready, StringResources.Error, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            return;
+                        }
                         treeViewContents.Nodes[partId].Text = value;
                         Song.Parts[partId].Caption = value;
                         PopulateSequence();

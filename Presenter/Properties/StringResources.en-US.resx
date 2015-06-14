@@ -291,6 +291,9 @@
   <data name="SongNeedsAtLeastOneSongPart" xml:space="preserve">
     <value>The song needs at leas one song part!</value>
   </data>
+  <data name="SongPartExistsAlready" xml:space="preserve">
+    <value>This song part exists already!</value>
+  </data>
   <data name="SongPartsNeedsAtLeastOneSlide" xml:space="preserve">
     <value>The song part needs at least one slide!</value>
   </data>
