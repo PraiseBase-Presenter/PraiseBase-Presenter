@@ -944,6 +944,19 @@ namespace PraiseBase.Presenter.Editor
             buttonSequencePartRemove.Enabled = listBoxSequence.Items.Count > 1;
             buttonSequencePartUp.Enabled = idx > 0;
             buttonSequencePartDown.Enabled = idx < listBoxSequence.Items.Count - 1;
+
+            if (idx >= 0 && idx < Song.PartSequence.Count)
+            {
+                String cap = Song.PartSequence[idx].Caption;
+                for (int i = 0; i < Song.Parts.Count; i++)
+                {
+                    if (Song.Parts[i].Caption == cap)
+                    {
+                        treeViewContents.SelectedNode = treeViewContents.Nodes[i];
+                        break;
+                    }
+                }
+            }
         }
     }
 }
