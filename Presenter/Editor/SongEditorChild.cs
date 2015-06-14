@@ -841,7 +841,7 @@ namespace PraiseBase.Presenter.Editor
                 foreach (var p in Song.Parts)
                 {
                     ToolStripMenuItem tItem = new ToolStripMenuItem(p.Caption);
-                    tItem.Click += tItem_Click;
+                    tItem.Click += sequenceAddItem_Click;
                     addSequencePartContextMenu.Items.Add(tItem);
                 }
 
@@ -849,21 +849,31 @@ namespace PraiseBase.Presenter.Editor
             }
         }
 
-        void tItem_Click(object sender, EventArgs e)
+        void sequenceAddItem_Click(object sender, EventArgs e)
         {
+            int idx = listBoxSequence.SelectedIndex;
+            int si = -1;
             String caption = ((ToolStripMenuItem)sender).Text;
             foreach (var p in Song.Parts)
             {
                 if (p.Caption == caption)
                 {
-                    Song.PartSequence.Add(p);
+                    if (idx >= 0)
+                    {
+                        Song.PartSequence.Insert(idx + 1, p);
+                        si = idx + 1;
+                    }
+                    else
+                    {
+                        Song.PartSequence.Add(p);
+                        si = listBoxSequence.Items.Count;
+                    }
                     break;
                 }
             }
-            int idx = listBoxSequence.SelectedIndex;
             PopulateSequence();
             buttonSequencePartRemove.Enabled = listBoxSequence.SelectedIndex >= 0;
-            listBoxSequence.SelectedIndex = listBoxSequence.Items.Count - 1;
+            listBoxSequence.SelectedIndex = si;
         }
 
         private void addSequencePartContextMenu_VisibleChanged(object sender, EventArgs e)
