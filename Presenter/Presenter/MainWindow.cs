@@ -185,6 +185,11 @@ namespace PraiseBase.Presenter.Presenter
                     showCurrentSongDetails();
                 }
             }
+            else
+            {
+                _songManager.Reload();
+                LoadSongList();
+            }
         }
 
         private void ShowAndFocusSongEditor()
