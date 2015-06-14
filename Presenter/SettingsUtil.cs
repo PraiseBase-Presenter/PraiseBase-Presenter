@@ -23,5 +23,20 @@ namespace PraiseBase.Presenter
         {
             return settings.DataDirectory + Path.DirectorySeparatorChar + settings.SongDir;            
         }
+
+        public static string GetImageDirPath(Settings settings)
+        {
+            return settings.DataDirectory + Path.DirectorySeparatorChar + settings.ImageDir;
+        }
+
+        public static string GetThumbDirPath(Settings settings)
+        {
+            return settings.DataDirectory + Path.DirectorySeparatorChar + settings.ThumbDir;
+        }
+
+        public static string GetBibleDirPath(Settings settings)
+        {
+            return settings.DataDirectory + Path.DirectorySeparatorChar + "Bibles";
+        }
     }
 }
