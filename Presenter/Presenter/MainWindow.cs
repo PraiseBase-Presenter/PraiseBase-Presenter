@@ -402,6 +402,7 @@ namespace PraiseBase.Presenter.Presenter
             // Reload songs and images if data directory changed
             if (dataDirectory != Settings.Default.DataDirectory)
             {
+                _songManager.SongDirPath = SettingsUtil.GetSongDirPath(Settings.Default);
                 ReloadSongList();
                 ReloadImageList();
                 CheckThumbnails();

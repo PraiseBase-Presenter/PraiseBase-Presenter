@@ -89,8 +89,7 @@ namespace PraiseBase.Presenter
 
             string dataDir = Settings.Default.DataDirectory + Path.DirectorySeparatorChar;
 
-            string songDir = dataDir + Settings.Default.SongDir;
-            SongManager songManager = new SongManager(songDir);
+            SongManager songManager = new SongManager(SettingsUtil.GetSongDirPath(Settings.Default));
 
             string imageDirPath = dataDir + Settings.Default.ImageDir;
             string thumbDirPath = dataDir + Settings.Default.ThumbDir;

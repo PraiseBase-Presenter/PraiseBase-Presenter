@@ -18,5 +18,10 @@ namespace PraiseBase.Presenter
             }
             return false;
         }
+
+        public static string GetSongDirPath(Settings settings)
+        {
+            return settings.DataDirectory + Path.DirectorySeparatorChar + settings.SongDir;            
+        }
     }
 }
