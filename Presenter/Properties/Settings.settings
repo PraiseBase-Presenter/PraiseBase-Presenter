@@ -254,5 +254,8 @@
     <Setting Name="PresenterSongViewMode" Type="PraiseBase.Presenter.Manager.SongViewMode" Scope="User">
       <Value Profile="(Default)">Structure</Value>
     </Setting>
+    <Setting Name="UpgradeRequired" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
   </Settings>
 </SettingsFile>
