@@ -640,7 +640,12 @@ namespace PraiseBase.Presenter.Presenter
             if (copyrightPosition == AdditionalInformationPosition.FirstSlide && isFirstSlide(e.PartNumber, e.SlideNumber) ||
                 copyrightPosition == AdditionalInformationPosition.LastSlide && isLastSlide(s, e.PartNumber, e.SlideNumber))
             {
-                ssl.FooterText = s.Copyright.Split(new[] { Environment.NewLine }, StringSplitOptions.None);
+                String[] copyRightLines = s.Copyright.Split(new[] {Environment.NewLine}, StringSplitOptions.None);
+                if (!String.IsNullOrEmpty(s.CcliIdentifier))
+                {
+                    copyRightLines = copyRightLines.Concat(new [] { "CCLI #" + s.CcliIdentifier }).ToArray();
+                }
+                ssl.FooterText = copyRightLines;
             }
 
             // CTRL pressed, use image stack
