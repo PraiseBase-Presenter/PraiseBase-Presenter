@@ -1946,7 +1946,7 @@ namespace PraiseBase.Presenter.Presenter
 
         private void openSongEditorToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (listViewSongs.SelectedItems.Count > 0)
+            if ((listViewSongs.SelectedItems.Count > 0 || listViewSetList.SelectedItems.Count > 0) && _songManager.CurrentSong != null)
             {
                 String fn = _songManager.CurrentSong.Filename;
                 GetSongEditor().OpenSong(fn);
