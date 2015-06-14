@@ -82,31 +82,20 @@ namespace PraiseBase.Presenter
             }
 
             // Check Data directory
-            if (Settings.Default.DataDirectory == "")
+            if (SettingsUtil.SetDefaultDataDirIfEmpty(Settings.Default))
             {
-                Settings.Default.DataDirectory = Environment.GetFolderPath(Environment.SpecialFolder.Personal) + Path.DirectorySeparatorChar + Settings.Default.DataDirDefaultName;
-                if (Directory.Exists(Settings.Default.DataDirectory))
-                {
-                    Directory.CreateDirectory(Settings.Default.DataDirectory);
-                }
                 Settings.Default.Save();
             }
 
-            string dataDir = Settings.Default.DataDirectory + Path.DirectorySeparatorChar;
+            SongManager songManager = new SongManager(SettingsUtil.GetSongDirPath(Settings.Default));
 
-            string songDir = dataDir + Settings.Default.SongDir;
-            SongManager songManager = new SongManager(songDir);
-
-            string imageDirPath = dataDir + Settings.Default.ImageDir;
-            string thumbDirPath = dataDir + Settings.Default.ThumbDir;
-            ImageManager imgManager = new ImageManager(imageDirPath, thumbDirPath)
+            ImageManager imgManager = new ImageManager(SettingsUtil.GetImageDirPath(Settings.Default), SettingsUtil.GetThumbDirPath(Settings.Default))
             {
                 DefaultThumbSize = Settings.Default.ThumbSize,
                 DefaultEmptyColor = Settings.Default.ProjectionBackColor
             };
 
-            string bibleDir = dataDir + "Bibles";
-            BibleManager bibleManager = new BibleManager(bibleDir);
+            BibleManager bibleManager = new BibleManager(SettingsUtil.GetBibleDirPath(Settings.Default));
 
             if (Settings.Default.ShowLoadingScreen)
             {

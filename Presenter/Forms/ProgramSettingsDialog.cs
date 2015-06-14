@@ -221,6 +221,7 @@ namespace PraiseBase.Presenter.Forms
             if (MessageBox.Show(StringResources.ReallyResetFactoryDefaults, StringResources.Reset, MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
             {
                 _settings.Reset();
+                SettingsUtil.SetDefaultDataDirIfEmpty(_settings);
                 UpdateLabels();
             }
         }

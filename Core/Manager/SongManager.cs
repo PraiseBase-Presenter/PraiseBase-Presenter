@@ -45,11 +45,7 @@ namespace PraiseBase.Presenter.Manager
             SongDirPath = songDirPath;
             SongList = new Dictionary<string, SongItem>();
 
-            // Ensure song directory exists
-            if (!Directory.Exists(SongDirPath))
-            {
-                Directory.CreateDirectory(SongDirPath);
-            }
+
         }
 
         /// <summary>
@@ -75,7 +71,7 @@ namespace PraiseBase.Presenter.Manager
         /// <summary>
         ///     Path to the song root directory
         /// </summary>
-        public string SongDirPath { get; protected set; }
+        public string SongDirPath { get; set; }
 
         /// <summary>
         ///     Gets the current slide

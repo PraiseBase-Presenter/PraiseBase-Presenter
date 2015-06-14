@@ -43,14 +43,14 @@ namespace PraiseBase.Presenter.Manager
             NotFound
         }
 
-        private readonly string _bibleDirectory;
+        public string BibleDirectory { get; set; }
 
         /// <summary>
         ///     The constructor
         /// </summary>
         public BibleManager(String bibleDirectory)
         {
-            _bibleDirectory = bibleDirectory;
+            BibleDirectory = bibleDirectory;
         }
 
         /// <summary>
@@ -65,7 +65,7 @@ namespace PraiseBase.Presenter.Manager
 
         public List<string> GetBibleFiles()
         {
-            var di = new DirectoryInfo(_bibleDirectory);
+            var di = new DirectoryInfo(BibleDirectory);
             if (!di.Exists)
             {
                 di.Create();

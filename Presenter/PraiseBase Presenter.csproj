@@ -177,6 +177,7 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
     </Compile>
+    <Compile Include="SettingsUtil.cs" />
     <Compile Include="Template\SongTemplateMapper.cs" />
     <Compile Include="Controls\SongDetail.cs">
       <SubType>UserControl</SubType>
