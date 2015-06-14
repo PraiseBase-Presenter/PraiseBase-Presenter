@@ -171,6 +171,7 @@ namespace PraiseBase.Presenter.Presenter
         {
             var se = new SongEditor(Settings.Default, _imgManager, null);
             se.SongSaved += SongEditorWndOnSongSaved;
+            se.DataDirChanged += se_DataDirChanged;
             return se;
         }
 
@@ -190,6 +191,11 @@ namespace PraiseBase.Presenter.Presenter
                 _songManager.Reload();
                 LoadSongList();
             }
+        }
+
+        void se_DataDirChanged(object sender, EventArgs e)
+        {
+            UpdateDataDir();
         }
 
         private void ShowAndFocusSongEditor()
@@ -406,15 +412,20 @@ namespace PraiseBase.Presenter.Presenter
             // Reload songs and images if data directory changed
             if (dataDirectory != Settings.Default.DataDirectory)
             {
-                _songManager.SongDirPath = SettingsUtil.GetSongDirPath(Settings.Default);
-                _imgManager.ImageDirPath = SettingsUtil.GetImageDirPath(Settings.Default);
-                _imgManager.ThumbDirPath = SettingsUtil.GetThumbDirPath(Settings.Default);
-                _bibleManager.BibleDirectory = SettingsUtil.GetBibleDirPath(Settings.Default);
-                ReloadSongList();
-                ReloadImageList();
-                CheckThumbnails();
-                loadBibles(true);
+                UpdateDataDir();
             }
+        }
+
+        private void UpdateDataDir()
+        {
+            _songManager.SongDirPath = SettingsUtil.GetSongDirPath(Settings.Default);
+            _imgManager.ImageDirPath = SettingsUtil.GetImageDirPath(Settings.Default);
+            _imgManager.ThumbDirPath = SettingsUtil.GetThumbDirPath(Settings.Default);
+            _bibleManager.BibleDirectory = SettingsUtil.GetBibleDirPath(Settings.Default);
+            ReloadSongList();
+            ReloadImageList();
+            CheckThumbnails();
+            loadBibles(true);
         }
 
         private void liederlisteNeuLadenToolStripMenuItem_Click(object sender, EventArgs e)

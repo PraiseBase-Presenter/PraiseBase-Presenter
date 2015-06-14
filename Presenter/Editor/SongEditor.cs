@@ -97,6 +97,18 @@ namespace PraiseBase.Presenter.Editor
         /// </summary>
         public event SongSave SongSaved;
 
+        /// <summary>
+        /// Delegate to inform subscribers that the data directory has been changed in the settings
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        public delegate void DataDirChange(object sender, EventArgs e);
+
+        /// <summary>
+        /// Data directory changed event
+        /// </summary>
+        public event DataDirChange DataDirChanged;
+
         #endregion
 
         public SongEditor(Settings settings, ImageManager imgManager, String filename)
@@ -640,7 +652,18 @@ namespace PraiseBase.Presenter.Editor
         private void optionsToolStripMenuItem_Click(object sender, EventArgs e)
         {
             ProgramSettingsDialog stWnd = new ProgramSettingsDialog(_settings);
+            String dataDirectory = Settings.Default.DataDirectory;
             stWnd.ShowDialog(this);
+            if (dataDirectory != Settings.Default.DataDirectory)
+            {
+                _fileBoxInitialDir = _settings.DataDirectory + Path.DirectorySeparatorChar + _settings.SongDir;
+
+                // Fire event
+                if (DataDirChanged != null)
+                {
+                    DataDirChanged(this, new EventArgs());
+                }
+            }
         }
 
         private void EditorWindow_FormClosing(object sender, FormClosingEventArgs e)
