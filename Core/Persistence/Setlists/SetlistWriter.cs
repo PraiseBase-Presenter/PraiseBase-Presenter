@@ -34,11 +34,11 @@ namespace PraiseBase.Presenter.Persistence.Setlists
             var xml = new XmlWriterHelper("setlist", "1.0");
 
             xml.Root.AppendChild(xml.Doc.CreateElement("items"));
-            for (var i = 0; i < list.Items.Count; i++)
+            foreach (string t in list.Items)
             {
                 XmlNode nd = xml.Doc.CreateElement("item");
-                nd.InnerText = list.Items[i];
-                var ni = xml.Root["items"].AppendChild(nd);
+                nd.InnerText = t;
+                xml.Root["items"].AppendChild(nd);
             }
 
             xml.Write(filename);

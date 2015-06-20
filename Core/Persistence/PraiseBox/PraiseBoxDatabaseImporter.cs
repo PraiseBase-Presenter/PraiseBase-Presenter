@@ -8,19 +8,22 @@ namespace PraiseBase.Presenter.Persistence.PraiseBox
 {
     public class PraiseBoxDatabaseImporter : AbstractDatabaseImporter
     {
-        protected override string getSelectQuery()
+        protected override string GetSelectQuery()
         {
             return "select * from SongText";
         }
 
-        protected override Song readRecord(OleDbDataReader aReader)
+        protected override Song ReadRecord(OleDbDataReader aReader)
         {
-            var sng = new Song();
+            var sng = new Song
+            {
+                Title = aReader.GetString(1)
+            };
 
-            sng.Title = aReader.GetString(1);
-
-            var rtf = new RichTextBox();
-            rtf.Rtf = aReader.GetString(2);
+            var rtf = new RichTextBox
+            {
+                Rtf = aReader.GetString(2)
+            };
             var text = rtf.Text.Trim();
             text = text.Replace("\n", Environment.NewLine);
             var prts = text.Split(new[] {Environment.NewLine + Environment.NewLine},

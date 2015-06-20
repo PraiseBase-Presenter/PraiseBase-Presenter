@@ -90,7 +90,7 @@ namespace PraiseBase.Presenter.Projection
         /// </summary>
         private ScreenManager()
         {
-            SystemEvents.DisplaySettingsChanged += new EventHandler(SystemEvents_DisplaySettingsChanged);
+            SystemEvents.DisplaySettingsChanged += SystemEvents_DisplaySettingsChanged;
         }
 
         /// <summary>
@@ -101,9 +101,11 @@ namespace PraiseBase.Presenter.Projection
         private void SystemEvents_DisplaySettingsChanged(object sender, EventArgs e)
         {
             // Use a delay of one second to give the screen api enough time to detect new resolution
-            Timer tmr = new Timer();
-            tmr.Interval = 1000;
-            tmr.Tick += new EventHandler(tmr_Tick);
+            Timer tmr = new Timer
+            {
+                Interval = 1000
+            };
+            tmr.Tick += tmr_Tick;
             tmr.Start();
         }
 
@@ -111,7 +113,7 @@ namespace PraiseBase.Presenter.Projection
         {
             if (ScreensChanged != null)
             {
-                ScreensChanged(new ScreensChangedEventArgs { });
+                ScreensChanged(new ScreensChangedEventArgs());
             }
         }
 
@@ -119,7 +121,7 @@ namespace PraiseBase.Presenter.Projection
         /// Detect screen configuration
         /// </summary>
         /// <returns></returns>
-        public bool detectScreens() 
+        public bool DetectScreens() 
         {
             AvailableProjectionScreens = new List<Screen>();
 

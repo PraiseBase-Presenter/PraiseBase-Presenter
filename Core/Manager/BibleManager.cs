@@ -103,7 +103,7 @@ namespace PraiseBase.Presenter.Manager
             BibleList = new Dictionary<string, BibleItem>();
             foreach (var file in GetBibleFiles())
             {
-                var rdr = new XMLBibleReader();
+                var rdr = new XmlBibleReader();
                 try
                 {
                     var bi = new BibleItem
@@ -126,7 +126,7 @@ namespace PraiseBase.Presenter.Manager
         /// <param name="key">Bible key</param>
         public void LoadBibleData(string key)
         {
-            var rdr = new XMLBibleReader();
+            var rdr = new XmlBibleReader();
             try
             {
                 rdr.LoadContent(BibleList[key].Filename, BibleList[key].Bible);
@@ -145,15 +145,7 @@ namespace PraiseBase.Presenter.Manager
         /// <returns></returns>
         private List<BibleBook> SearchBookCandiates(Bible bible, string needle)
         {
-            var bkCandidates = new List<BibleBook>();
-            foreach (var bk in bible.Books)
-            {
-                if (needle.Length <= bk.Name.Length && needle == bk.Name.ToLower().Substring(0, needle.Length))
-                {
-                    bkCandidates.Add(bk);
-                }
-            }
-            return bkCandidates;
+            return bible.Books.Where(bk => needle.Length <= bk.Name.Length && needle == bk.Name.ToLower().Substring(0, needle.Length)).ToList();
         }
 
         /// <summary>

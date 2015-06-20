@@ -29,36 +29,23 @@ namespace PraiseBase.Presenter.Persistence.OpenLyrics
     {
         public Song Map(OpenLyricsSong source)
         {
-            var sng = new Song();
-
-            //
-            // File attributes
-            //
-
-            // Modified date
-            sng.ModifiedTimestamp = source.ModifiedTimestamp;
-
-            // Application the song was created in
-            sng.CreatedIn = source.CreatedIn;
-
-            // Application the song was modified in
-            sng.ModifiedIn = source.ModifiedIn;
-
-            //
-            // Properties
-            //
-
-            // Title
-            sng.Title = source.Title;
-
-            // CCLI
-            sng.CcliIdentifier = source.CcliIdentifier;
-
-            // Copyright
-            sng.Copyright = source.Copyright;
-
-            // Application the song was modified in
-            sng.ReleaseYear = source.ReleaseYear;
+            var sng = new Song
+            {
+                // Modified date
+                ModifiedTimestamp = source.ModifiedTimestamp,
+                // Application the song was created in
+                CreatedIn = source.CreatedIn,
+                // Application the song was modified in
+                ModifiedIn = source.ModifiedIn,
+                // Title
+                Title = source.Title,
+                // CCLI
+                CcliIdentifier = source.CcliIdentifier,
+                // Copyright
+                Copyright = source.Copyright,
+                // Application the song was modified in
+                ReleaseYear = source.ReleaseYear
+            };
 
             //
             // Lyrics
@@ -66,14 +53,18 @@ namespace PraiseBase.Presenter.Persistence.OpenLyrics
 
             foreach (var verse in source.Verses)
             {
-                var part = new SongPart();
-                part.Caption = verse.Name;
-                part.Language = verse.Language;
+                var part = new SongPart
+                {
+                    Caption = verse.Name,
+                    Language = verse.Language
+                };
 
                 foreach (var line in verse.Lines)
                 {
-                    var slide = new SongSlide();
-                    slide.PartName = line.Part;
+                    var slide = new SongSlide
+                    {
+                        PartName = line.Part
+                    };
                     slide.Lines.AddRange(line.Text);
                     part.Slides.Add(slide);
                 }

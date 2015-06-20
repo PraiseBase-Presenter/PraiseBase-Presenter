@@ -4,8 +4,8 @@
     {
         public OpenLyricsSongFilePlugin()
         {
-            reader = new OpenLyricsSongFileReader();
-            mapper = new OpenLyricsSongFileMapper();
+            Reader = new OpenLyricsSongFileReader();
+            Mapper = new OpenLyricsSongFileMapper();
         }
 
         public override string GetFileExtension()

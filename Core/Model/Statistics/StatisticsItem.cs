@@ -29,7 +29,7 @@ namespace PraiseBase.Presenter.Model.Statistics
 
     public class StatisticsItem
     {
-        public string ID
+        public string Identifier
         {
             get { return Type + "-" + Title; }
         }
@@ -37,7 +37,7 @@ namespace PraiseBase.Presenter.Model.Statistics
         public StatisticsItemType Type { get; set; }
         public string Title { get; set; }
         public string Copyright { get; set; }
-        public string CcliID { get; set; }
+        public string CcliId { get; set; }
         public int Count { get; set; }
     }
 }

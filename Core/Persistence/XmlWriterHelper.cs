@@ -46,9 +46,11 @@ namespace PraiseBase.Presenter.Persistence
 
         public void Write(string filename)
         {
-            var wrtStn = new XmlWriterSettings();
-            wrtStn.Encoding = Encoding.UTF8;
-            wrtStn.Indent = true;
+            var wrtStn = new XmlWriterSettings
+            {
+                Encoding = Encoding.UTF8,
+                Indent = true
+            };
             var wrt = XmlWriter.Create(filename, wrtStn);
             Doc.WriteTo(wrt);
             wrt.Flush();

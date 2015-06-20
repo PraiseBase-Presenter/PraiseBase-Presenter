@@ -48,13 +48,12 @@ namespace PraiseBase.Presenter.Util
         /// </summary>
         /// <param name="inFile"></param>
         /// <param name="outFile"></param>
-        /// <param name="size"></param>
-        public static void createThumb(string inFile, string outFile, Size thumbSize)
+        /// <param name="thumbSize"></param>
+        public static void CreateThumb(string inFile, string outFile, Size thumbSize)
         {
-            Image img;
             try
             {
-                img = Image.FromFile(inFile);
+                var img = Image.FromFile(inFile);
                 Image imgPhoto = ResizeBitmap(img, thumbSize);
 
                 var dir = Path.GetDirectoryName(outFile);
@@ -76,7 +75,7 @@ namespace PraiseBase.Presenter.Util
         ///     Creates an empty image with the specified size and background color
         /// </summary>
         /// <returns></returns>
-        public static Image getEmptyImage(Size size, Color backColor)
+        public static Image GetEmptyImage(Size size, Color backColor)
         {
             Image img = new Bitmap(size.Width, size.Height);
             var graph = Graphics.FromImage(img);

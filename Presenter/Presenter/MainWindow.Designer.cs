@@ -802,19 +802,19 @@ namespace PraiseBase.Presenter.Presenter
             // 
             this.präsentationausToolStripMenuItem.Name = "präsentationausToolStripMenuItem";
             resources.ApplyResources(this.präsentationausToolStripMenuItem, "präsentationausToolStripMenuItem");
-            this.präsentationausToolStripMenuItem.Click += new System.EventHandler(this.toggleProjection);
+            this.präsentationausToolStripMenuItem.Click += new System.EventHandler(this.ToggleProjection);
             // 
             // blackoutToolStripMenuItem
             // 
             this.blackoutToolStripMenuItem.Name = "blackoutToolStripMenuItem";
             resources.ApplyResources(this.blackoutToolStripMenuItem, "blackoutToolStripMenuItem");
-            this.blackoutToolStripMenuItem.Click += new System.EventHandler(this.toggleProjection);
+            this.blackoutToolStripMenuItem.Click += new System.EventHandler(this.ToggleProjection);
             // 
             // präsentationeinToolStripMenuItem
             // 
             this.präsentationeinToolStripMenuItem.Name = "präsentationeinToolStripMenuItem";
             resources.ApplyResources(this.präsentationeinToolStripMenuItem, "präsentationeinToolStripMenuItem");
-            this.präsentationeinToolStripMenuItem.Click += new System.EventHandler(this.toggleProjection);
+            this.präsentationeinToolStripMenuItem.Click += new System.EventHandler(this.ToggleProjection);
             // 
             // toolStripSeparator11
             // 
@@ -1116,21 +1116,21 @@ namespace PraiseBase.Presenter.Presenter
             this.toolStripButtonProjectionOff.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
             resources.ApplyResources(this.toolStripButtonProjectionOff, "toolStripButtonProjectionOff");
             this.toolStripButtonProjectionOff.Name = "toolStripButtonProjectionOff";
-            this.toolStripButtonProjectionOff.Click += new System.EventHandler(this.toggleProjection);
+            this.toolStripButtonProjectionOff.Click += new System.EventHandler(this.ToggleProjection);
             // 
             // toolStripButtonBlackout
             // 
             this.toolStripButtonBlackout.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
             resources.ApplyResources(this.toolStripButtonBlackout, "toolStripButtonBlackout");
             this.toolStripButtonBlackout.Name = "toolStripButtonBlackout";
-            this.toolStripButtonBlackout.Click += new System.EventHandler(this.toggleProjection);
+            this.toolStripButtonBlackout.Click += new System.EventHandler(this.ToggleProjection);
             // 
             // toolStripButtonProjectionOn
             // 
             this.toolStripButtonProjectionOn.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
             resources.ApplyResources(this.toolStripButtonProjectionOn, "toolStripButtonProjectionOn");
             this.toolStripButtonProjectionOn.Name = "toolStripButtonProjectionOn";
-            this.toolStripButtonProjectionOn.Click += new System.EventHandler(this.toggleProjection);
+            this.toolStripButtonProjectionOn.Click += new System.EventHandler(this.ToggleProjection);
             // 
             // toolStripSeparator1
             // 

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.ComponentModel;
 using System.Drawing;
+using System.Linq;
 using System.Windows.Forms;
 using PraiseBase.Presenter.Manager;
 using PraiseBase.Presenter.Model.Song;
@@ -151,20 +152,7 @@ namespace PraiseBase.Presenter.Controls
             int ypos = TopMargin;
 
             Size labelSize = new Size(0, 0);
-            if (AvailableSongCaption != null)
-            {
-                foreach (var caption in AvailableSongCaption)
-                {
-                    labelSize = MeasureSize(caption, labelSize);
-                }
-            }
-            else
-            {
-                foreach (SongPart part in parts)
-                {
-                    labelSize = MeasureSize(part.Caption, labelSize);
-                }
-            }
+            labelSize = AvailableSongCaption != null ? AvailableSongCaption.Cast<string>().Aggregate(labelSize, (current, caption) => MeasureSize(caption, current)) : parts.Aggregate(labelSize, (current, part) => MeasureSize(part.Caption, current));
             _slidePanelOffset = labelSize.Width + 20;
 
             if (previousSong != null)
@@ -227,15 +215,11 @@ namespace PraiseBase.Presenter.Controls
 
             for (int i = 0; i < parts.Count; i++)
             {
-                List<PartPanelElement> elements = new List<PartPanelElement>();
-                foreach (var e in parts[i].Slides)
+                List<PartPanelElement> elements = parts[i].Slides.Select(e => new PartPanelElement
                 {
-                    elements.Add(new PartPanelElement
-                    {
-                        Text = e.GetOneLineText(),
-                        Background = e.Background
-                    });
-                }
+                    Text = e.GetOneLineText(),
+                    Background = e.Background
+                }).ToList();
                 int partIdx = i;
                 if (SongViewMode == SongViewMode.Sequence)
                 {
@@ -415,7 +399,7 @@ namespace PraiseBase.Presenter.Controls
                     UseCompatibleTextRendering = true,
                     TextAlign = ContentAlignment.TopLeft,
                     Cursor = Cursors.Hand,
-                    Tag = (elements[j].Text != null ? (object)j : (object)elements[j].Background)
+                    Tag = (elements[j].Text != null ? j : (object)elements[j].Background)
                 };
                 textLbl.FlatAppearance.BorderColor = Color.White;
                 textLbl.FlatAppearance.BorderSize = 0;

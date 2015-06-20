@@ -70,6 +70,15 @@ namespace PraiseBase.Presenter.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Alle Dateien.
+        /// </summary>
+        public static string AllFiles {
+            get {
+                return ResourceManager.GetString("AllFiles", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Achtung.
         /// </summary>
         public static string Attention {
@@ -201,6 +210,15 @@ namespace PraiseBase.Presenter.Properties {
         public static string LoadedSong {
             get {
                 return ResourceManager.GetString("LoadedSong", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Treffer.
+        /// </summary>
+        public static string Matches {
+            get {
+                return ResourceManager.GetString("Matches", resourceCulture);
             }
         }
         

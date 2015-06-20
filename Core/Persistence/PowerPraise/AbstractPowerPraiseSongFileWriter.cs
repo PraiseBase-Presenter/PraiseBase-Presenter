@@ -46,9 +46,10 @@ namespace PraiseBase.Presenter.Persistence.PowerPraise
         /// <summary>
         ///     Parses additional fields (hook)
         /// </summary>
+        /// <param name="xmlDoc"></param>
         /// <param name="xmlRoot"></param>
         /// <param name="sng"></param>
-        protected abstract void writeAdditionalFields(XmlDocument xmlDoc, XmlElement xmlRoot, PowerPraiseSong sng);
+        protected abstract void WriteAdditionalFields(XmlDocument xmlDoc, XmlElement xmlRoot, PowerPraiseSong sng);
 
         public void Write(string filename, PowerPraiseSong sng)
         {
@@ -75,7 +76,7 @@ namespace PraiseBase.Presenter.Persistence.PowerPraise
                 : PowerPraiseConstants.Language;
 
             // Write additional fields
-            writeAdditionalFields(xmlDoc, xmlRoot, sng);
+            WriteAdditionalFields(xmlDoc, xmlRoot, sng);
 
             xmlRoot.AppendChild(xmlDoc.CreateElement("songtext"));
 
@@ -182,10 +183,10 @@ namespace PraiseBase.Presenter.Persistence.PowerPraise
             xmlRoot["formatting"].AppendChild(xmlDoc.CreateElement("font"));
 
             // Font formatting
-            applyFormatting(xmlDoc, xmlRoot["formatting"]["font"], "maintext", sng.Formatting.MainText);
-            applyFormatting(xmlDoc, xmlRoot["formatting"]["font"], "translationtext", sng.Formatting.TranslationText);
-            applyFormatting(xmlDoc, xmlRoot["formatting"]["font"], "copyrighttext", sng.Formatting.CopyrightText);
-            applyFormatting(xmlDoc, xmlRoot["formatting"]["font"], "sourcetext", sng.Formatting.SourceText);
+            ApplyFormatting(xmlDoc, xmlRoot["formatting"]["font"], "maintext", sng.Formatting.MainText);
+            ApplyFormatting(xmlDoc, xmlRoot["formatting"]["font"], "translationtext", sng.Formatting.TranslationText);
+            ApplyFormatting(xmlDoc, xmlRoot["formatting"]["font"], "copyrighttext", sng.Formatting.CopyrightText);
+            ApplyFormatting(xmlDoc, xmlRoot["formatting"]["font"], "sourcetext", sng.Formatting.SourceText);
 
             // Outline
             xmlRoot["formatting"]["font"].AppendChild(xmlDoc.CreateElement("outline"));
@@ -319,7 +320,7 @@ namespace PraiseBase.Presenter.Persistence.PowerPraise
             return pos;
         }
 
-        private void applyFormatting(XmlDocument xmlDoc, XmlElement elem, string key,
+        private void ApplyFormatting(XmlDocument xmlDoc, XmlElement elem, string key,
             PowerPraiseSongFormatting.FontFormatting f)
         {
             elem.AppendChild(xmlDoc.CreateElement(key));

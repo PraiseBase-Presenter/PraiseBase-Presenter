@@ -121,7 +121,7 @@
     <Compile Include="Persistence\SongFilePluginFactory.cs" />
     <Compile Include="Persistence\StatisticsReader.cs" />
     <Compile Include="Persistence\WorshipSystem\WorshipSystemDatabaseImporter.cs" />
-    <Compile Include="Persistence\ZefaniaXML\XMLBibleReader.cs" />
+    <Compile Include="Persistence\ZefaniaXML\XmlBibleReader.cs" />
     <Compile Include="Persistence\PowerPraise\PowerPraiseSongFileWriter.cs" />
     <Compile Include="Persistence\Setlists\SetlistWriter.cs" />
     <Compile Include="Persistence\StatisticsWriter.cs" />

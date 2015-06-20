@@ -4,6 +4,7 @@ using System.Collections.Specialized;
 using System.Windows.Forms;
 using PraiseBase.Presenter.Manager;
 using PraiseBase.Presenter.Model.Song;
+using PraiseBase.Presenter.Properties;
 
 namespace PraiseBase.Presenter.Presenter
 {
@@ -85,7 +86,7 @@ namespace PraiseBase.Presenter.Presenter
                 }
                 return true;
             }
-            MessageBox.Show(Properties.StringResources.NoSongsSelected, Properties.StringResources.SongBrowser);
+            MessageBox.Show(StringResources.NoSongsSelected, StringResources.SongBrowser);
             return false;
         }
 
@@ -101,9 +102,7 @@ namespace PraiseBase.Presenter.Presenter
             foreach (KeyValuePair<string, SongItem> kvp in _songManager.SongList)
             {
                 Song sng = kvp.Value.Song;
-                bool use = true;
-                if (searchText != String.Empty && !kvp.Value.SearchText.Contains(searchText))
-                    use = false;
+                bool use = !(searchText != String.Empty && !kvp.Value.SearchText.Contains(searchText));
 
                 if (checkBoxHasImages.Checked && sng.GetNumberOfBackgroundImages() > 0)
                     use = false;
@@ -135,7 +134,7 @@ namespace PraiseBase.Presenter.Presenter
                     listViewItems.Items.Add(lvi);
                 }
             }
-            labelResults.Text = listViewItems.Items.Count + " Treffer";
+            labelResults.Text = listViewItems.Items.Count + @" " + StringResources.Matches;
             textBoxSearch.Focus();
         }
 

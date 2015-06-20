@@ -105,8 +105,10 @@ namespace PraiseBase.Presenter.Forms
 
             Application.DoEvents();
             treeViewDirs.Nodes.Clear();
-            TreeNode rootTreeNode = new TreeNode("Bilder");
-            rootTreeNode.Tag = ".";
+            TreeNode rootTreeNode = new TreeNode("Bilder")
+            {
+                Tag = "."
+            };
             treeViewDirs.Nodes.Add(rootTreeNode);
             PopulateTreeView(rootDir, treeViewDirs.Nodes[0]);
             if (treeViewDirs.SelectedNode == null)
@@ -174,9 +176,11 @@ namespace PraiseBase.Presenter.Forms
 
             if (Directory.Exists(absoluteDir))
             {
-                ImageList imList = new ImageList();
-                imList.ImageSize = Settings.Default.ThumbSize;
-                imList.ColorDepth = ColorDepth.Depth32Bit;
+                ImageList imList = new ImageList
+                {
+                    ImageSize = Settings.Default.ThumbSize,
+                    ColorDepth = ColorDepth.Depth32Bit
+                };
 
                 string[] songFilePaths = Directory.GetFiles(absoluteDir, "*.jpg", SearchOption.TopDirectoryOnly);
                 int i = 0;
@@ -184,9 +188,11 @@ namespace PraiseBase.Presenter.Forms
                 {
                     string relativePath = relativeDir + Path.DirectorySeparatorChar + Path.GetFileName(file);
                     Application.DoEvents();
-                    ListViewItem lvi = new ListViewItem(Path.GetFileNameWithoutExtension(file));
-                    lvi.Tag = relativePath;
-                    lvi.ImageIndex = i;
+                    ListViewItem lvi = new ListViewItem(Path.GetFileNameWithoutExtension(file))
+                    {
+                        Tag = relativePath,
+                        ImageIndex = i
+                    };
                     listViewImages.Items.Add(lvi);
                     imList.Images.Add(_imgManager.GetThumbFromRelPath(relativePath));
                     if (Background != null && Background.GetType() == typeof (ImageBackground) && relativePath == ((ImageBackground)Background).ImagePath)
@@ -201,10 +207,7 @@ namespace PraiseBase.Presenter.Forms
 
         private void listViewImages_ItemSelectionChanged(object sender, ListViewItemSelectionChangedEventArgs e)
         {
-            if (listViewImages.SelectedItems.Count > 0)
-                buttonOK.Enabled = true;
-            else
-                buttonOK.Enabled = false;
+            buttonOK.Enabled = listViewImages.SelectedItems.Count > 0;
         }
 
         private void listViewImages_DoubleClick(object sender, EventArgs e)

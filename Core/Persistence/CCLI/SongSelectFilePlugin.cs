@@ -4,8 +4,8 @@
     {
         public SongSelectFilePlugin()
         {
-            reader = new SongSelectFileReader();
-            mapper = new SongSelectFileMapper();
+            Reader = new SongSelectFileReader();
+            Mapper = new SongSelectFileMapper();
         }
 
         public override string GetFileExtension()

@@ -26,7 +26,7 @@ using PraiseBase.Presenter.Model.Bible;
 
 namespace PraiseBase.Presenter.Persistence.ZefaniaXML
 {
-    public class XMLBibleReader
+    public class XmlBibleReader
     {
         private bool GetNodeText(XmlTextReader textReader, string name, ref Bible target, string fieldName)
         {
@@ -57,17 +57,15 @@ namespace PraiseBase.Presenter.Persistence.ZefaniaXML
                 {
                     while (textReader.Read())
                     {
-                        if (textReader.NodeType == XmlNodeType.Element)
-                        {
-                            if (GetNodeText(textReader, "title", ref b, "Title")) continue;
-                            if (GetNodeText(textReader, "description", ref b, "Description")) continue;
-                            if (GetNodeText(textReader, "contributors", ref b, "Contributors")) continue;
-                            if (GetNodeText(textReader, "language", ref b, "Language")) continue;
-                            if (GetNodeText(textReader, "publisher", ref b, "Publisher")) continue;
-                            if (GetNodeText(textReader, "date", ref b, "Source")) continue;
-                            if (GetNodeText(textReader, "source", ref b, "Date")) continue;
-                            if (GetNodeText(textReader, "identifier", ref b, "Identifier")) continue;
-                        }
+                        if (textReader.NodeType != XmlNodeType.Element) continue;
+                        if (GetNodeText(textReader, "title", ref b, "Title")) continue;
+                        if (GetNodeText(textReader, "description", ref b, "Description")) continue;
+                        if (GetNodeText(textReader, "contributors", ref b, "Contributors")) continue;
+                        if (GetNodeText(textReader, "language", ref b, "Language")) continue;
+                        if (GetNodeText(textReader, "publisher", ref b, "Publisher")) continue;
+                        if (GetNodeText(textReader, "date", ref b, "Source")) continue;
+                        if (GetNodeText(textReader, "source", ref b, "Date")) continue;
+                        if (GetNodeText(textReader, "identifier", ref b, "Identifier")) { }
                     }
                     break;
                 }
@@ -87,12 +85,14 @@ namespace PraiseBase.Presenter.Persistence.ZefaniaXML
                 {
                     if (bookNode.Name.ToLower() == "biblebook")
                     {
-                        var bo = new BibleBook();
-                        bo.Bible = b;
-                        bo.Number = int.Parse(bookNode.Attributes["bnumber"].InnerText);
+                        var bo = new BibleBook
+                        {
+                            Bible = b,
+                            Number = int.Parse(bookNode.Attributes["bnumber"].InnerText)
+                        };
                         bo.Name = bookNode.Attributes["bname"] != null
                             ? bookNode.Attributes["bname"].InnerText
-                            : Bible.bookMap[bo.Number - 1];
+                            : Bible.BookMap[bo.Number - 1];
                         bo.ShortName = bookNode.Attributes["bsname"] != null
                             ? bookNode.Attributes["bsname"].InnerText
                             : bo.Name;
@@ -101,18 +101,22 @@ namespace PraiseBase.Presenter.Persistence.ZefaniaXML
                         {
                             if (chapNode.Name.ToLower() == "chapter")
                             {
-                                var ch = new BibleChapter();
-                                ch.Book = bo;
-                                ch.Number = int.Parse(chapNode.Attributes["cnumber"].InnerText);
-                                ch.Verses = new List<BibleVerse>();
+                                var ch = new BibleChapter
+                                {
+                                    Book = bo,
+                                    Number = int.Parse(chapNode.Attributes["cnumber"].InnerText),
+                                    Verses = new List<BibleVerse>()
+                                };
                                 foreach (XmlNode verseNode in chapNode.ChildNodes)
                                 {
                                     if (verseNode.Name.ToLower() == "vers")
                                     {
-                                        var v = new BibleVerse();
-                                        v.Chapter = ch;
-                                        v.Number = int.Parse(verseNode.Attributes["vnumber"].InnerText);
-                                        v.Text = verseNode.InnerText;
+                                        var v = new BibleVerse
+                                        {
+                                            Chapter = ch,
+                                            Number = int.Parse(verseNode.Attributes["vnumber"].InnerText),
+                                            Text = verseNode.InnerText
+                                        };
                                         ch.Verses.Add(v);
                                     }
                                 }

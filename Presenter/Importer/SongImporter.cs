@@ -149,9 +149,11 @@ namespace PraiseBase.Presenter.Importer
 
         private void LoadPraiseBoxFile()
         {
-            OpenFileDialog dlg = new OpenFileDialog();
-            dlg.Title = StringResources.OpenPraiseBoxDatabase;
-            dlg.Filter = StringResources.OpenPraiseBoxDatabase + " (*.pbd)|*.pbd|Alle Dateien (*.*)|*.*";
+            OpenFileDialog dlg = new OpenFileDialog
+            {
+                Title = StringResources.OpenPraiseBoxDatabase,
+                Filter = StringResources.OpenPraiseBoxDatabase + @" (*.pbd)|*.pbd|" + StringResources.AllFiles + @" (*.*)|*.*"
+            };
 
             if (dlg.ShowDialog() == DialogResult.OK)
             {
@@ -161,9 +163,11 @@ namespace PraiseBase.Presenter.Importer
                 {
                     foreach (Song sng in importer.ImportFromFile(filename))
                     {
-                        ListViewItem lvi = new ListViewItem(sng.Title);
-                        lvi.Checked = true;
-                        lvi.Tag = sng;
+                        ListViewItem lvi = new ListViewItem(sng.Title)
+                        {
+                            Checked = true,
+                            Tag = sng
+                        };
                         listViewSongs.Items.Add(lvi);
                     }
                 }
@@ -183,9 +187,11 @@ namespace PraiseBase.Presenter.Importer
             
         private void LoadWorshipSystemFile()
         {
-            OpenFileDialog dlg = new OpenFileDialog();
-            dlg.Title = StringResources.OpenWorshipSystemDatabase;
-            dlg.Filter = StringResources.OpenWorshipSystemDatabase + " (*.mdb)|*.mdb|Alle Dateien (*.*)|*.*";
+            OpenFileDialog dlg = new OpenFileDialog
+            {
+                Title = StringResources.OpenWorshipSystemDatabase,
+                Filter = StringResources.OpenWorshipSystemDatabase + @" (*.mdb)|*.mdb|" + StringResources.AllFiles + @" (*.*)|*.*"
+            };
 
             if (dlg.ShowDialog() == DialogResult.OK)
             {
@@ -195,9 +201,11 @@ namespace PraiseBase.Presenter.Importer
                 {
                     foreach (Song sng in importer.ImportFromFile(filename))
                     {
-                        ListViewItem lvi = new ListViewItem(sng.Title);
-                        lvi.Checked = true;
-                        lvi.Tag = sng;
+                        ListViewItem lvi = new ListViewItem(sng.Title)
+                        {
+                            Checked = true,
+                            Tag = sng
+                        };
                         listViewSongs.Items.Add(lvi);
                     }
                 }

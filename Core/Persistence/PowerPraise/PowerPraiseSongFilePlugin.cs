@@ -4,9 +4,9 @@
     {
         public PowerPraiseSongFilePlugin()
         {
-            reader = new PowerPraiseSongFileReader();
-            mapper = new PowerPraiseSongFileMapper();
-            writer = new PowerPraiseSongFileWriter();
+            Reader = new PowerPraiseSongFileReader();
+            Mapper = new PowerPraiseSongFileMapper();
+            Writer = new PowerPraiseSongFileWriter();
         }
 
         public override string GetFileExtension()

@@ -39,7 +39,7 @@ namespace PraiseBase.Presenter.Model.Statistics
         public int Month { get; set; }
         public int Day { get; set; }
 
-        public string ID
+        public string Identifier
         {
             get { return Year + "-" + Month + "-" + Day; }
         }

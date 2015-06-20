@@ -33,7 +33,7 @@ namespace PraiseBase.Presenter.Persistence.PowerPraise.Extended
             Write(filename, sng);
         }
 
-        protected override void writeAdditionalFields(XmlDocument xmlDoc, XmlElement xmlRoot, PowerPraiseSong ppl)
+        protected override void WriteAdditionalFields(XmlDocument xmlDoc, XmlElement xmlRoot, PowerPraiseSong ppl)
         {
             var sng = (ExtendedPowerPraiseSong) ppl;
 
@@ -41,7 +41,7 @@ namespace PraiseBase.Presenter.Persistence.PowerPraise.Extended
             // Non-standard meta-info
             //
             // GUID
-            if (sng.Guid != null && sng.Guid != Guid.Empty)
+            if (sng.Guid != Guid.Empty)
             {
                 xmlRoot["general"].AppendChild(xmlDoc.CreateElement("guid"));
                 xmlRoot["general"]["guid"].InnerText = sng.Guid.ToString();
@@ -65,7 +65,7 @@ namespace PraiseBase.Presenter.Persistence.PowerPraise.Extended
             }
 
             // CCLI-ID
-            if (sng.CcliIdentifier != null && sng.CcliIdentifier != string.Empty)
+            if (!string.IsNullOrEmpty(sng.CcliIdentifier))
             {
                 xmlRoot["general"].AppendChild(xmlDoc.CreateElement("ccliNo"));
                 xmlRoot["general"]["ccliNo"].InnerText = sng.CcliIdentifier;
@@ -78,13 +78,13 @@ namespace PraiseBase.Presenter.Persistence.PowerPraise.Extended
                 xmlRoot["general"]["author"].InnerText = writeAuthors(sng);
             }
             // Publisher
-            if (sng.Publisher != null && sng.Publisher != string.Empty)
+            if (!string.IsNullOrEmpty(sng.Publisher))
             {
                 xmlRoot["general"].AppendChild(xmlDoc.CreateElement("publisher"));
                 xmlRoot["general"]["publisher"].InnerText = sng.Publisher;
             }
             // Rights management
-            if (sng.RightsManagement != null && sng.RightsManagement != string.Empty)
+            if (!string.IsNullOrEmpty(sng.RightsManagement))
             {
                 xmlRoot["general"].AppendChild(xmlDoc.CreateElement("admin"));
                 xmlRoot["general"]["admin"].InnerText = sng.RightsManagement;

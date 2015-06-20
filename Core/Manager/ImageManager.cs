@@ -24,6 +24,7 @@ using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
+using System.Linq;
 using PraiseBase.Presenter.Model.Song;
 using PraiseBase.Presenter.Util;
 
@@ -101,7 +102,7 @@ namespace PraiseBase.Presenter.Manager
             {
                 for (var i = 0; i < cnt; i++)
                 {
-                    ImageUtils.createThumb(missingThumbsSrc[i], missingThumbsTrg[i], DefaultThumbSize);
+                    ImageUtils.CreateThumb(missingThumbsSrc[i], missingThumbsTrg[i], DefaultThumbSize);
                     if (i%10 == 0)
                     {
                         var e = new ThumbnailCreateEventArgs(i, cnt);
@@ -133,7 +134,7 @@ namespace PraiseBase.Presenter.Manager
         {
             if (path == null)
             {
-                return ImageUtils.getEmptyImage(DefaultImageSize, DefaultEmptyColor);
+                return ImageUtils.GetEmptyImage(DefaultImageSize, DefaultEmptyColor);
             }
             try
             {
@@ -147,7 +148,7 @@ namespace PraiseBase.Presenter.Manager
             catch (Exception e)
             {
                 Console.WriteLine(e.Message);
-                return ImageUtils.getEmptyImage(DefaultImageSize, DefaultEmptyColor);
+                return ImageUtils.GetEmptyImage(DefaultImageSize, DefaultEmptyColor);
             }
         }
 
@@ -161,7 +162,7 @@ namespace PraiseBase.Presenter.Manager
                 }
                 if (bg.GetType() == typeof (ColorBackground))
                 {
-                    return ImageUtils.getEmptyImage(DefaultImageSize, ((ColorBackground) bg).Color);
+                    return ImageUtils.GetEmptyImage(DefaultImageSize, ((ColorBackground) bg).Color);
                 }
             }
             return null;
@@ -181,10 +182,10 @@ namespace PraiseBase.Presenter.Manager
                 }
                 else if (bg.GetType() == typeof (ColorBackground))
                 {
-                    return ImageUtils.getEmptyImage(DefaultThumbSize, ((ColorBackground) bg).Color);
+                    return ImageUtils.GetEmptyImage(DefaultThumbSize, ((ColorBackground) bg).Color);
                 }
             }
-            return ImageUtils.getEmptyImage(DefaultThumbSize, DefaultEmptyColor);
+            return ImageUtils.GetEmptyImage(DefaultThumbSize, DefaultEmptyColor);
         }
 
         /// <summary>
@@ -194,25 +195,9 @@ namespace PraiseBase.Presenter.Manager
         /// <returns></returns>
         public List<string> SearchImages(string needle)
         {
-            var results = new List<string>();
             var rootDir = ThumbDirPath + Path.DirectorySeparatorChar;
             var rootDirStrLen = rootDir.Length;
-            foreach (var ext in _imgExtensions)
-            {
-                var imgFilePaths = Directory.GetFiles(rootDir, ext, SearchOption.AllDirectories);
-                foreach (var ims in imgFilePaths)
-                {
-                    if (!ims.Contains(ExcludeThumbDirName) && !ims.StartsWith(ThumbDirPath))
-                    {
-                        var haystack = Path.GetFileNameWithoutExtension(ims);
-                        if (haystack.ToLower().Contains(needle))
-                        {
-                            results.Add(ims.Substring(rootDirStrLen));
-                        }
-                    }
-                }
-            }
-            return results;
+            return (from ext in _imgExtensions from ims in Directory.GetFiles(rootDir, ext, SearchOption.AllDirectories) where !ims.Contains(ExcludeThumbDirName) && !ims.StartsWith(ThumbDirPath) let haystack = Path.GetFileNameWithoutExtension(ims) where haystack.ToLower().Contains(needle) select ims.Substring(rootDirStrLen)).ToList();
         }
 
         #region Events

@@ -7,16 +7,17 @@ namespace PraiseBase.Presenter.Persistence.WorshipSystem
 {
     public class WorshipSystemDatabaseImporter : AbstractDatabaseImporter
     {
-        protected override string getSelectQuery()
+        protected override string GetSelectQuery()
         {
             return "select * from Songs";
         }
 
-        protected override Song readRecord(OleDbDataReader aReader)
+        protected override Song ReadRecord(OleDbDataReader aReader)
         {
-            var sng = new Song();
-
-            sng.Title = aReader.GetString(1);
+            var sng = new Song
+            {
+                Title = aReader.GetString(1)
+            };
 
             var text = aReader.GetString(4);
             text = text.Replace("\r\n", Environment.NewLine);
@@ -27,7 +28,7 @@ namespace PraiseBase.Presenter.Persistence.WorshipSystem
             foreach (var pri in prts)
             {
                 var transl = string.Empty;
-                var txt = string.Empty;
+                string txt;
                 var priPrts = pri.Split(new[] {"<S>"}, StringSplitOptions.RemoveEmptyEntries);
                 if (priPrts.Count() < 2)
                     priPrts = pri.Split(new[] {"<s>"}, StringSplitOptions.RemoveEmptyEntries);

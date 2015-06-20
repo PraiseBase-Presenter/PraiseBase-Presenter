@@ -13,25 +13,11 @@ namespace PraiseBase.Presenter.Persistence.PowerPraise
     [TestClass]
     public class PowerPraiseSongFileWriterTest
     {
-
-
-        private TestContext testContextInstance;
-
         /// <summary>
         ///Gets or sets the test context which provides
         ///information about and functionality for the current test run.
         ///</summary>
-        public TestContext TestContext
-        {
-            get
-            {
-                return testContextInstance;
-            }
-            set
-            {
-                testContextInstance = value;
-            }
-        }
+        public TestContext TestContext { get; set; }
 
         #region Additional test attributes
         // 
@@ -94,8 +80,7 @@ namespace PraiseBase.Presenter.Persistence.PowerPraise
         public void FileTypeDescriptionTest()
         {
             ISongFileWriter<PowerPraiseSong> target = new PowerPraiseSongFileWriter();
-            string actual;
-            actual = target.GetFileTypeDescription();
+            var actual = target.GetFileTypeDescription();
             Assert.AreEqual(actual, "PowerPraise Lied");
         }
 
@@ -106,8 +91,7 @@ namespace PraiseBase.Presenter.Persistence.PowerPraise
         public void FileExtensionTest()
         {
             ISongFileWriter<PowerPraiseSong> target = new PowerPraiseSongFileWriter();
-            string actual;
-            actual = target.GetFileExtension();
+            var actual = target.GetFileExtension();
             Assert.AreEqual(actual, ".ppl");
         }
     }

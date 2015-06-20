@@ -70,18 +70,18 @@ namespace PraiseBase.Presenter.Model.Song
 
             Assert.AreEqual(s1.GetHashCode(), s2.GetHashCode());
 
-            SongSlide sl1b = new SongSlide
+            SongSlide sl1B = new SongSlide
             {
                 Text = "abc def\nghij"
             };
-            p1.Slides.Add(sl1b);
+            p1.Slides.Add(sl1B);
 
             Assert.AreNotEqual(s1.GetHashCode(), s2.GetHashCode());
 
             p1.Slides.RemoveAt(0);
             Assert.AreNotEqual(s1.GetHashCode(), s2.GetHashCode());
 
-            sl1b.Text = "abc def\nghi";
+            sl1B.Text = "abc def\nghi";
 
             Assert.AreEqual(s1.GetHashCode(), s2.GetHashCode());
         }

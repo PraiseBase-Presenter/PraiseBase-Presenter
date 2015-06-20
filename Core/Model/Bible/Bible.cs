@@ -32,7 +32,7 @@ namespace PraiseBase.Presenter.Model.Bible
     /// </summary>
     public class Bible
     {
-        public static readonly string[] bookMap =
+        public static readonly string[] BookMap =
         {
             "1. Mose", "2. Mose", "3. Mose", "4. Mose", "5. Mose", "Josua",
             "Richter", "Rut", "1. Samuel", "2. Samuel", "1. Könige", "2. Könige", "1. Chronik", "2. Chronik", "Esra",
