@@ -144,11 +144,11 @@ namespace PraiseBase.Presenter.Projection
                 var usedWidth = Math.Max(mainTextBlockWidth, subTextBlockWidth);
 
                 // Calculate used height (text block + spacing beween lines)
-                var usedHeight = mainTextBlockHeight + ((numberOfLines - 1)*mainTextLineSpacing);
+                var usedHeight = mainTextBlockHeight + ((numberOfLines - 1) * mainTextLineSpacing);
                 if (hasSubText)
                 {
                     // Add one sub text line height with spacing)
-                    usedHeight += subTextBlockHeight + (numberOfLines*subTextLineSpacing);
+                    usedHeight += subTextBlockHeight + (numberOfLines * subTextLineSpacing);
                 }
 
                 // Scale text
@@ -160,14 +160,12 @@ namespace PraiseBase.Presenter.Projection
                     // Adapt main text format
                     mainTextFormat.Font = new Font(mainTextFormat.Font.FontFamily,
                         mainTextFormat.Font.Size*scalingFactor, mainTextFormat.Font.Style);
-                    mainTextFormat.LineSpacing = (int) (mainTextFormat.LineSpacing*scalingFactor);
-                    mainTextLineSpacing = mainTextFormat.LineSpacing;
+                    mainTextLineSpacing = (int)(mainTextLineSpacing * scalingFactor);
 
                     // Adapt sub text format
                     subTextFormat.Font = new Font(subTextFormat.Font.FontFamily, subTextFormat.Font.Size*scalingFactor,
                         subTextFormat.Font.Style);
-                    subTextFormat.LineSpacing = (int) (subTextFormat.LineSpacing*scalingFactor);
-                    subTextLineSpacing = subTextFormat.LineSpacing;
+                    subTextLineSpacing = (int)(subTextLineSpacing * scalingFactor);
 
                     // Adapt used width and height
                     usedWidth *= scalingFactor;
