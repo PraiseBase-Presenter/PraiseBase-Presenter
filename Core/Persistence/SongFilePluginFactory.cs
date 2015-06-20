@@ -9,7 +9,7 @@ namespace PraiseBase.Presenter.Persistence
     {
         private static readonly Dictionary<Type, ISongFilePlugin> _plugins = new Dictionary<Type, ISongFilePlugin>();
 
-        private static readonly Dictionary<String, HashSet<Type>> _supportedExtensionMapping =
+        private static readonly Dictionary<string, HashSet<Type>> _supportedExtensionMapping =
             new Dictionary<string, HashSet<Type>>();
 
         static SongFilePluginFactory()
@@ -36,7 +36,7 @@ namespace PraiseBase.Presenter.Persistence
         /// <summary>
         ///     A list of supported file name extensions
         /// </summary>
-        public static List<String> SupportedExtensions
+        public static List<string> SupportedExtensions
         {
             get { return _supportedExtensionMapping.Keys.ToList(); }
         }

@@ -20,7 +20,6 @@
  *
  */
 
-using System;
 using System.Drawing;
 
 namespace PraiseBase.Presenter.Projection
@@ -29,10 +28,10 @@ namespace PraiseBase.Presenter.Projection
     {
         public void WriteOut(Graphics gr)
         {
-            Object[] args = {};
+            object[] args = {};
             WriteOut(gr, args);
         }
 
-        public abstract void WriteOut(Graphics gr, Object[] args);
+        public abstract void WriteOut(Graphics gr, object[] args);
     }
 }

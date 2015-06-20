@@ -23,13 +23,13 @@ namespace PraiseBase.Presenter.Persistence.PowerPraise
         {
             if (bg != null)
             {
-                if (bg.GetType() == typeof(ImageBackground))
+                if (bg.GetType() == typeof (ImageBackground))
                 {
-                    return ((ImageBackground)bg).ImagePath;
+                    return ((ImageBackground) bg).ImagePath;
                 }
-                if (bg.GetType() == typeof(ColorBackground))
+                if (bg.GetType() == typeof (ColorBackground))
                 {
-                    return ConvertColor(((ColorBackground)bg).Color).ToString();
+                    return ConvertColor(((ColorBackground) bg).Color).ToString();
                 }
             }
             return null;
@@ -44,7 +44,7 @@ namespace PraiseBase.Presenter.Persistence.PowerPraise
                 {
                     try
                     {
-                        return new ColorBackground(PowerPraiseFileUtil.ConvertColor(trySize));
+                        return new ColorBackground(ConvertColor(trySize));
                     }
                     catch (ArgumentException)
                     {
@@ -52,7 +52,7 @@ namespace PraiseBase.Presenter.Persistence.PowerPraise
                     }
                 }
             }
-            else if (bg.Trim() != String.Empty)
+            else if (bg.Trim() != string.Empty)
             {
                 return new ImageBackground(bg);
             }

@@ -78,7 +78,7 @@ namespace PraiseBase.Presenter.Model.Song
         /// <summary>
         ///     Gets or sets the text of this slide
         /// </summary>
-        public String Text
+        public string Text
         {
             get
             {
@@ -107,7 +107,7 @@ namespace PraiseBase.Presenter.Model.Song
         /// <summary>
         ///     Gets or sets the translation of this slide
         /// </summary>
-        public String TranslationText
+        public string TranslationText
         {
             get
             {

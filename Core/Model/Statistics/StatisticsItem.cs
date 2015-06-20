@@ -20,8 +20,6 @@
  *
  */
 
-using System;
-
 namespace PraiseBase.Presenter.Model.Statistics
 {
     public enum StatisticsItemType
@@ -31,7 +29,7 @@ namespace PraiseBase.Presenter.Model.Statistics
 
     public class StatisticsItem
     {
-        public String ID
+        public string ID
         {
             get { return Type + "-" + Title; }
         }

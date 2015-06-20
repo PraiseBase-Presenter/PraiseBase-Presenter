@@ -43,7 +43,7 @@ namespace PraiseBase.Presenter.Model.Song
             PartSequence = new ComparableOrderedList<SongPart>();
             SongBooks = new SongBooks();
             Authors = new SongAuthors();
-            Comment = String.Empty;
+            Comment = string.Empty;
             QualityIssues = new QualityIssues();
             Formatting = new SongFormatting();
         }

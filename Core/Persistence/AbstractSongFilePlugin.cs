@@ -17,23 +17,23 @@ namespace PraiseBase.Presenter.Persistence
         public abstract string GetFileExtension();
         public abstract string GetFileTypeDescription();
 
-        public String ReadTitle(string filePath)
+        public string ReadTitle(string filePath)
         {
             return reader.ReadTitle(filePath);
         }
 
-        public Song Load(String filePath)
+        public Song Load(string filePath)
         {
             var song = reader.Load(filePath);
             return mapper.Map(song);
         }
 
-        public Boolean IsFileSupported(String filePath)
+        public bool IsFileSupported(string filePath)
         {
             return reader.IsFileSupported(filePath);
         }
 
-        public Boolean IsWritingSupported()
+        public bool IsWritingSupported()
         {
             return writer != null;
         }

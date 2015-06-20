@@ -20,7 +20,6 @@
  *
  */
 
-using System;
 using System.Collections.Generic;
 
 namespace PraiseBase.Presenter.Model.Statistics
@@ -29,9 +28,9 @@ namespace PraiseBase.Presenter.Model.Statistics
     {
         public Statistics()
         {
-            Dates = new SortedList<String, StatisticsDate>();
+            Dates = new SortedList<string, StatisticsDate>();
         }
 
-        public SortedList<String, StatisticsDate> Dates { get; set; }
+        public SortedList<string, StatisticsDate> Dates { get; set; }
     }
 }

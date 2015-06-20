@@ -36,22 +36,39 @@ namespace PraiseBase.Presenter.Manager
     /// </summary>
     public class BibleManager
     {
+        /// <summary>
+        ///     Status of bible passage search
+        /// </summary>
         public enum BiblePassageSearchStatus
         {
+            /// <summary>
+            ///     Search ongoing
+            /// </summary>
             Ongoing,
+
+            /// <summary>
+            ///     Result found
+            /// </summary>
             Found,
+
+            /// <summary>
+            ///     No result found
+            /// </summary>
             NotFound
         }
-
-        public string BibleDirectory { get; set; }
 
         /// <summary>
         ///     The constructor
         /// </summary>
-        public BibleManager(String bibleDirectory)
+        public BibleManager(string bibleDirectory)
         {
             BibleDirectory = bibleDirectory;
         }
+
+        /// <summary>
+        ///     Directory where bible files are stored
+        /// </summary>
+        public string BibleDirectory { get; set; }
 
         /// <summary>
         ///     List of all availabe songs
@@ -63,6 +80,10 @@ namespace PraiseBase.Presenter.Manager
         /// </summary>
         public BibleItem CurrentBible { get; set; }
 
+        /// <summary>
+        ///     Returns a list of bible files
+        /// </summary>
+        /// <returns></returns>
         public List<string> GetBibleFiles()
         {
             var di = new DirectoryInfo(BibleDirectory);
@@ -74,6 +95,9 @@ namespace PraiseBase.Presenter.Manager
             return rgFiles.Select(fi => fi.FullName).ToList();
         }
 
+        /// <summary>
+        ///     Loads information of all bibles
+        /// </summary>
         public void LoadBibleInfo()
         {
             BibleList = new Dictionary<string, BibleItem>();
@@ -96,6 +120,10 @@ namespace PraiseBase.Presenter.Manager
             }
         }
 
+        /// <summary>
+        ///     Loads the content of a bible
+        /// </summary>
+        /// <param name="key">Bible key</param>
         public void LoadBibleData(string key)
         {
             var rdr = new XMLBibleReader();
@@ -109,6 +137,12 @@ namespace PraiseBase.Presenter.Manager
             }
         }
 
+        /// <summary>
+        ///     Search book candidates
+        /// </summary>
+        /// <param name="bible">Bible</param>
+        /// <param name="needle">Search criteria</param>
+        /// <returns></returns>
         private List<BibleBook> SearchBookCandiates(Bible bible, string needle)
         {
             var bkCandidates = new List<BibleBook>();
@@ -122,6 +156,12 @@ namespace PraiseBase.Presenter.Manager
             return bkCandidates;
         }
 
+        /// <summary>
+        ///     Searches a bible passages
+        /// </summary>
+        /// <param name="bible">Bible</param>
+        /// <param name="needle">Search criteria</param>
+        /// <returns></returns>
         public BiblePassageSearchResult SearchPassage(Bible bible, string needle)
         {
             var result = new BiblePassageSearchResult
@@ -219,7 +259,14 @@ namespace PraiseBase.Presenter.Manager
         /// </summary>
         public struct BibleItem
         {
+            /// <summary>
+            ///     Bible
+            /// </summary>
             public Bible Bible { get; set; }
+
+            /// <summary>
+            ///     File name
+            /// </summary>
             public string Filename { get; set; }
 
             public override string ToString()
@@ -228,16 +275,40 @@ namespace PraiseBase.Presenter.Manager
             }
         }
 
+        /// <summary>
+        ///     Bible search result
+        /// </summary>
         public struct BiblePassageSearchResult
         {
+            /// <summary>
+            ///     Bible passage
+            /// </summary>
             public BiblePassage Passage { get; set; }
+
+            /// <summary>
+            ///     Search status
+            /// </summary>
             public BiblePassageSearchStatus Status { get; set; }
         }
 
+        /// <summary>
+        ///     Bible passage
+        /// </summary>
         public class BiblePassage
         {
+            /// <summary>
+            ///     Book
+            /// </summary>
             public BibleBook Book { get; set; }
+
+            /// <summary>
+            ///     Chapter
+            /// </summary>
             public BibleChapter Chapter { get; set; }
+
+            /// <summary>
+            ///     Verse
+            /// </summary>
             public BibleVerse Verse { get; set; }
         }
     }

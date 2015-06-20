@@ -35,16 +35,15 @@ namespace PraiseBase.Presenter.Persistence.PowerPraise
     {
         protected const string SupportedFileFormatVersion = "3.0";
         protected const string XmlRootNodeName = "ppl";
-        public abstract T Load(string filename);
-
         private List<IBackground> _backgrounds;
+        public abstract T Load(string filename);
 
         /// <summary>
         ///     Reads the title of a song from a file
         /// </summary>
         /// <param name="filename">Absolute path to the song file</param>
         /// <returns></returns>
-        public String ReadTitle(string filename)
+        public string ReadTitle(string filename)
         {
             try
             {
@@ -52,7 +51,7 @@ namespace PraiseBase.Presenter.Persistence.PowerPraise
                 {
                     return null;
                 }
-                var parentNode = String.Empty;
+                var parentNode = string.Empty;
                 var t = new XmlTextReader(filename);
                 while (t.Read())
                 {
@@ -193,8 +192,8 @@ namespace PraiseBase.Presenter.Persistence.PowerPraise
             // Information
             //
 
-            AdditionalInformationPosition copyrightTextPosition = PowerPraiseConstants.Format.CopyrightTextPosition;
-            AdditionalInformationPosition sourceTextEnabled = PowerPraiseConstants.Format.SourceTextPosition;
+            var copyrightTextPosition = PowerPraiseConstants.Format.CopyrightTextPosition;
+            var sourceTextEnabled = PowerPraiseConstants.Format.SourceTextPosition;
 
             if (xmlRoot["information"] != null)
             {
@@ -203,7 +202,8 @@ namespace PraiseBase.Presenter.Persistence.PowerPraise
                 if (copyrightElem != null)
                 {
                     // Position
-                    copyrightTextPosition = ParseAdditionalInformationPosition(copyrightElem["position"], PowerPraiseConstants.Format.CopyrightTextPosition);
+                    copyrightTextPosition = ParseAdditionalInformationPosition(copyrightElem["position"],
+                        PowerPraiseConstants.Format.CopyrightTextPosition);
 
                     // Text
                     sng.CopyrightText.AddRange(ParseCopyRightText(copyrightElem["text"]));
@@ -214,7 +214,8 @@ namespace PraiseBase.Presenter.Persistence.PowerPraise
                 if (sourceElem != null)
                 {
                     // Enabled
-                    sourceTextEnabled = ParseAdditionalInformationPosition(sourceElem["position"], PowerPraiseConstants.Format.SourceTextPosition);
+                    sourceTextEnabled = ParseAdditionalInformationPosition(sourceElem["position"],
+                        PowerPraiseConstants.Format.SourceTextPosition);
 
                     // Text
                     sng.SourceText = ParseSourceText(sourceElem["text"]);
@@ -230,7 +231,7 @@ namespace PraiseBase.Presenter.Persistence.PowerPraise
             {
                 throw new InvalidSongSourceFileException("Formatting definition missing");
             }
-            
+
             var fontElem = formatting["font"];
             var lineSpacingElem = formatting["linespacing"];
             var textOrientationElem = formatting["textorientation"];
@@ -244,8 +245,10 @@ namespace PraiseBase.Presenter.Persistence.PowerPraise
             {
                 // Font formatting
                 MainText = ParseTextFormatting(fontElem["maintext"], PowerPraiseConstants.Format.MainText),
-                TranslationText = ParseTextFormatting(fontElem["translationtext"], PowerPraiseConstants.Format.TranslationText),
-                CopyrightText = ParseTextFormatting(fontElem["copyrighttext"], PowerPraiseConstants.Format.CopyrightText),
+                TranslationText =
+                    ParseTextFormatting(fontElem["translationtext"], PowerPraiseConstants.Format.TranslationText),
+                CopyrightText =
+                    ParseTextFormatting(fontElem["copyrighttext"], PowerPraiseConstants.Format.CopyrightText),
                 SourceText = ParseTextFormatting(fontElem["sourcetext"], PowerPraiseConstants.Format.SourceText),
 
                 // Font outline
@@ -255,14 +258,18 @@ namespace PraiseBase.Presenter.Persistence.PowerPraise
                 Shadow = ParseFontShadow(fontElem["shadow"], PowerPraiseConstants.Format.Shadow),
 
                 // Line spacing
-                MainLineSpacing = ParseNaturalNumber(lineSpacingElem["main"], PowerPraiseConstants.Format.MainLineSpacing),
-                TranslationLineSpacing = ParseNaturalNumber(lineSpacingElem["translation"], PowerPraiseConstants.Format.TranslationLineSpacing),
+                MainLineSpacing =
+                    ParseNaturalNumber(lineSpacingElem["main"], PowerPraiseConstants.Format.MainLineSpacing),
+                TranslationLineSpacing =
+                    ParseNaturalNumber(lineSpacingElem["translation"],
+                        PowerPraiseConstants.Format.TranslationLineSpacing),
 
                 // Text orientation
                 TextOrientation = ParseOrientation(textOrientationElem, PowerPraiseConstants.Format.TextOrientation),
 
                 // Translation position
-                TranslationPosition = ParseTranslationPosition(textOrientationElem, PowerPraiseConstants.Format.TranslationPosition),
+                TranslationPosition =
+                    ParseTranslationPosition(textOrientationElem, PowerPraiseConstants.Format.TranslationPosition),
 
                 // Copyright and source
                 CopyrightTextPosition = copyrightTextPosition,
@@ -280,13 +287,13 @@ namespace PraiseBase.Presenter.Persistence.PowerPraise
         /// <param name="elem"></param>
         /// <param name="defaultValue"></param>
         /// <returns></returns>
-        private String ParseString(XmlElement elem, String defaultValue)
+        private string ParseString(XmlElement elem, string defaultValue)
         {
             var val = defaultValue;
             if (elem != null)
             {
                 var str = elem.InnerText;
-                if (!String.IsNullOrEmpty(str))
+                if (!string.IsNullOrEmpty(str))
                 {
                     val = str;
                 }
@@ -341,7 +348,7 @@ namespace PraiseBase.Presenter.Persistence.PowerPraise
             }
 
             // Image number
-            int num = Convert.ToInt32(elem.GetAttribute("backgroundnr"));
+            var num = Convert.ToInt32(elem.GetAttribute("backgroundnr"));
             if (num >= 0 && num < _backgrounds.Count)
             {
                 slide.Background = _backgrounds[num];
@@ -378,7 +385,7 @@ namespace PraiseBase.Presenter.Persistence.PowerPraise
                 {
                     if (elem.Name == "item")
                     {
-                        if (!String.IsNullOrEmpty(elem.InnerText))
+                        if (!string.IsNullOrEmpty(elem.InnerText))
                         {
                             var val = elem.InnerText.Trim();
                             foreach (var part in sng.Parts)
@@ -448,13 +455,13 @@ namespace PraiseBase.Presenter.Persistence.PowerPraise
         /// </summary>
         /// <param name="elem"></param>
         /// <returns></returns>
-        private String ParseSourceText(XmlElement elem)
+        private string ParseSourceText(XmlElement elem)
         {
             if (elem != null && elem.ChildNodes.Count > 0)
             {
                 return elem.InnerText;
             }
-            return String.Empty;
+            return string.Empty;
         }
 
         /// <summary>
@@ -576,7 +583,9 @@ namespace PraiseBase.Presenter.Persistence.PowerPraise
         private static List<IBackground> ParseBackgroundImages(XmlElement elem)
         {
             List<IBackground> list = new ComparableList<IBackground>();
-            list.AddRange(from XmlElement e in elem where e.Name == "file" select PowerPraiseFileUtil.ParseBackground(e.InnerText));
+            list.AddRange(from XmlElement e in elem
+                where e.Name == "file"
+                select PowerPraiseFileUtil.ParseBackground(e.InnerText));
             return list;
         }
 

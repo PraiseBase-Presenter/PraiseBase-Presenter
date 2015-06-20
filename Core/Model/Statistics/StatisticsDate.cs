@@ -20,7 +20,6 @@
  *
  */
 
-using System;
 using System.Collections.Generic;
 
 namespace PraiseBase.Presenter.Model.Statistics
@@ -32,10 +31,10 @@ namespace PraiseBase.Presenter.Model.Statistics
             Year = year;
             Month = month;
             Day = day;
-            Items = new SortedList<String, StatisticsItem>();
+            Items = new SortedList<string, StatisticsItem>();
         }
 
-        public SortedList<String, StatisticsItem> Items { get; set; }
+        public SortedList<string, StatisticsItem> Items { get; set; }
         public int Year { get; set; }
         public int Month { get; set; }
         public int Day { get; set; }

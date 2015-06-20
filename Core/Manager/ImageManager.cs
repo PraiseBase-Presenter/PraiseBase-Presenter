@@ -37,7 +37,7 @@ namespace PraiseBase.Presenter.Manager
         /// <summary>
         ///     Private constructor
         /// </summary>
-        public ImageManager(String imageDirPath, String thumbDirPath)
+        public ImageManager(string imageDirPath, string thumbDirPath)
         {
             ImageDirPath = imageDirPath;
             ThumbDirPath = thumbDirPath;

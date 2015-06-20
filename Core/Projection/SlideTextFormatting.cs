@@ -1,5 +1,4 @@
-﻿using System;
-using PraiseBase.Presenter.Model;
+﻿using PraiseBase.Presenter.Model;
 
 namespace PraiseBase.Presenter.Projection
 {
@@ -8,7 +7,7 @@ namespace PraiseBase.Presenter.Projection
         /// <summary>
         ///     If true, font size will be scaled down if the text does not fit on the slide
         /// </summary>
-        public Boolean ScaleFontSize { get; set; }
+        public bool ScaleFontSize { get; set; }
 
         /// <summary>
         ///     Formatting of the main text

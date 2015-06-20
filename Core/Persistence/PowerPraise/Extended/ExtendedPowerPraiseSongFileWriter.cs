@@ -65,7 +65,7 @@ namespace PraiseBase.Presenter.Persistence.PowerPraise.Extended
             }
 
             // CCLI-ID
-            if (sng.CcliIdentifier != null && sng.CcliIdentifier != String.Empty)
+            if (sng.CcliIdentifier != null && sng.CcliIdentifier != string.Empty)
             {
                 xmlRoot["general"].AppendChild(xmlDoc.CreateElement("ccliNo"));
                 xmlRoot["general"]["ccliNo"].InnerText = sng.CcliIdentifier;
@@ -78,20 +78,20 @@ namespace PraiseBase.Presenter.Persistence.PowerPraise.Extended
                 xmlRoot["general"]["author"].InnerText = writeAuthors(sng);
             }
             // Publisher
-            if (sng.Publisher != null && sng.Publisher != String.Empty)
+            if (sng.Publisher != null && sng.Publisher != string.Empty)
             {
                 xmlRoot["general"].AppendChild(xmlDoc.CreateElement("publisher"));
                 xmlRoot["general"]["publisher"].InnerText = sng.Publisher;
             }
             // Rights management
-            if (sng.RightsManagement != null && sng.RightsManagement != String.Empty)
+            if (sng.RightsManagement != null && sng.RightsManagement != string.Empty)
             {
                 xmlRoot["general"].AppendChild(xmlDoc.CreateElement("admin"));
                 xmlRoot["general"]["admin"].InnerText = sng.RightsManagement;
             }
         }
 
-        private String writeAuthors(ExtendedPowerPraiseSong sng)
+        private string writeAuthors(ExtendedPowerPraiseSong sng)
         {
             var autstr = string.Empty;
             foreach (var aut in sng.Author)

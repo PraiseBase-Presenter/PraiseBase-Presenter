@@ -23,10 +23,10 @@ namespace PraiseBase.Presenter.Util
         public static string PrepareSearchText(string text)
         {
             text = text.Trim().ToLower();
-            text = text.Replace(",", String.Empty);
-            text = text.Replace(".", String.Empty);
-            text = text.Replace(";", String.Empty);
-            text = text.Replace(Environment.NewLine, String.Empty);
+            text = text.Replace(",", string.Empty);
+            text = text.Replace(".", string.Empty);
+            text = text.Replace(";", string.Empty);
+            text = text.Replace(Environment.NewLine, string.Empty);
             text = text.Replace("  ", " ");
             return text;
         }
@@ -40,7 +40,7 @@ namespace PraiseBase.Presenter.Util
         {
             return
                 (from prt in song.Parts from sld in prt.Slides from line in sld.Lines select line).Aggregate(
-                    String.Empty, (current, line) => current + (line + " "));
+                    string.Empty, (current, line) => current + (line + " "));
         }
     }
 }

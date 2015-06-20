@@ -54,6 +54,20 @@ namespace PraiseBase.Presenter.Model.Song
         /// </summary>
         public SongSlideList Slides { get; set; }
 
+        public object Clone()
+        {
+            var n = new SongPart
+            {
+                Caption = Caption,
+                Language = Language
+            };
+            foreach (var slide in Slides)
+            {
+                n.Slides.Add(slide);
+            }
+            return n;
+        }
+
         /// <summary>
         ///     Gets the object data for serialization
         /// </summary>
@@ -93,20 +107,6 @@ namespace PraiseBase.Presenter.Model.Song
             if (ReferenceEquals(this, obj)) return true;
             if (obj.GetType() != GetType()) return false;
             return Equals((SongPart) obj);
-        }
-
-        public object Clone()
-        {
-            SongPart n = new SongPart
-            {
-                Caption = Caption,
-                Language = Language
-            };
-            foreach (var slide in Slides)
-            {
-                n.Slides.Add(slide);
-            }
-            return n;
         }
     }
 }

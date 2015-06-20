@@ -21,7 +21,6 @@
  */
 
 using System;
-using System.Collections.Generic;
 
 namespace PraiseBase.Presenter.Model.Song
 {
@@ -43,7 +42,7 @@ namespace PraiseBase.Presenter.Model.Song
             }
         }
 
-        public void FromString(String value)
+        public void FromString(string value)
         {
             Clear();
             foreach (var s in value.Split(new[] {';'}, StringSplitOptions.RemoveEmptyEntries))

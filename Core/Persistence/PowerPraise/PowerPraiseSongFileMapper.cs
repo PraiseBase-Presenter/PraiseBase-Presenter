@@ -48,7 +48,7 @@ namespace PraiseBase.Presenter.Persistence.PowerPraise
             }
 
             // Copyright text
-            song.Copyright = String.Join(Environment.NewLine, ppl.CopyrightText.ToArray());
+            song.Copyright = string.Join(Environment.NewLine, ppl.CopyrightText.ToArray());
             song.Formatting.CopyrightPosition = ppl.Formatting.CopyrightTextPosition;
 
             // Source / songbook
@@ -67,7 +67,7 @@ namespace PraiseBase.Presenter.Persistence.PowerPraise
                     var slide = new SongSlide();
                     if (sld.Background != null)
                     {
-                        slide.Background = (IBackground)sld.Background.Clone();
+                        slide.Background = (IBackground) sld.Background.Clone();
                     }
                     slide.TextSize = sld.MainSize > 0
                         ? sld.MainSize
@@ -132,7 +132,9 @@ namespace PraiseBase.Presenter.Persistence.PowerPraise
                         MainSize = (int)
                             (songSlide.TextSize > 0
                                 ? songSlide.TextSize
-                                : (song.Formatting.MainText != null && song.Formatting.MainText.Font != null ? song.Formatting.MainText.Font.Size : 0))
+                                : (song.Formatting.MainText != null && song.Formatting.MainText.Font != null
+                                    ? song.Formatting.MainText.Font.Size
+                                    : 0))
                     };
                     pplSlide.Lines.AddRange(songSlide.Lines);
                     pplSlide.Translation.AddRange(songSlide.Translation);
@@ -167,7 +169,7 @@ namespace PraiseBase.Presenter.Persistence.PowerPraise
             // Copyright text
             if (song.Copyright != null)
             {
-                foreach (var s in song.Copyright.Split(new[] { Environment.NewLine }, StringSplitOptions.None))
+                foreach (var s in song.Copyright.Split(new[] {Environment.NewLine}, StringSplitOptions.None))
                 {
                     ppl.CopyrightText.Add(s);
                 }

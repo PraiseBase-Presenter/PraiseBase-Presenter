@@ -20,8 +20,6 @@
  *
  */
 
-using System;
-
 namespace PraiseBase.Presenter.Persistence
 {
     public interface ISongFileReader<T> where T : ISongFile
@@ -38,7 +36,7 @@ namespace PraiseBase.Presenter.Persistence
         /// </summary>
         /// <param name="filename">Absolute path to the song file</param>
         /// <returns></returns>
-        String ReadTitle(string filename);
+        string ReadTitle(string filename);
 
         /// <summary>
         ///     Tests if a given file is supported by this reader

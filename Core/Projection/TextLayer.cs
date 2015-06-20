@@ -42,22 +42,22 @@ namespace PraiseBase.Presenter.Projection
         /// <summary>
         ///     Main text
         /// </summary>
-        public String[] MainText { get; set; }
+        public string[] MainText { get; set; }
 
         /// <summary>
         ///     Sub text (below main text)
         /// </summary>
-        public String[] SubText { get; set; }
+        public string[] SubText { get; set; }
 
         /// <summary>
         ///     Header text
         /// </summary>
-        public String[] HeaderText { get; set; }
+        public string[] HeaderText { get; set; }
 
         /// <summary>
         ///     Footer text
         /// </summary>
-        public String[] FooterText { get; set; }
+        public string[] FooterText { get; set; }
 
         /// <summary>
         ///     If set to true, will draw text box borders for debugging purposes
@@ -123,7 +123,7 @@ namespace PraiseBase.Presenter.Projection
                 var hasSubText = (SubText != null && numberOfSubTextLines > 0);
 
                 // Measure main text
-                var strMeasureMain = gr.MeasureString(String.Join(Environment.NewLine, MainText), mainTextFormat.Font);
+                var strMeasureMain = gr.MeasureString(string.Join(Environment.NewLine, MainText), mainTextFormat.Font);
                 var mainTextBlockWidth = strMeasureMain.Width;
                 var mainTextBlockHeight = strMeasureMain.Height;
                 var mainTextLineHeight = mainTextBlockHeight/numberOfLines;
@@ -134,7 +134,7 @@ namespace PraiseBase.Presenter.Projection
                 var subTextLineHeight = 0f;
                 if (hasSubText)
                 {
-                    var strMeasureSub = gr.MeasureString(String.Join(Environment.NewLine, SubText), subTextFormat.Font);
+                    var strMeasureSub = gr.MeasureString(string.Join(Environment.NewLine, SubText), subTextFormat.Font);
                     subTextBlockWidth = strMeasureSub.Width;
                     subTextBlockHeight = strMeasureSub.Height;
                     subTextLineHeight = subTextBlockHeight/numberOfLines;
@@ -144,11 +144,11 @@ namespace PraiseBase.Presenter.Projection
                 var usedWidth = Math.Max(mainTextBlockWidth, subTextBlockWidth);
 
                 // Calculate used height (text block + spacing beween lines)
-                var usedHeight = mainTextBlockHeight + ((numberOfLines - 1) * mainTextLineSpacing);
+                var usedHeight = mainTextBlockHeight + ((numberOfLines - 1)*mainTextLineSpacing);
                 if (hasSubText)
                 {
                     // Add one sub text line height with spacing)
-                    usedHeight += subTextBlockHeight + (numberOfLines * subTextLineSpacing);
+                    usedHeight += subTextBlockHeight + (numberOfLines*subTextLineSpacing);
                 }
 
                 // Scale text
@@ -160,12 +160,12 @@ namespace PraiseBase.Presenter.Projection
                     // Adapt main text format
                     mainTextFormat.Font = new Font(mainTextFormat.Font.FontFamily,
                         mainTextFormat.Font.Size*scalingFactor, mainTextFormat.Font.Style);
-                    mainTextLineSpacing = (int)(mainTextLineSpacing * scalingFactor);
+                    mainTextLineSpacing = (int) (mainTextLineSpacing*scalingFactor);
 
                     // Adapt sub text format
                     subTextFormat.Font = new Font(subTextFormat.Font.FontFamily, subTextFormat.Font.Size*scalingFactor,
                         subTextFormat.Font.Style);
-                    subTextLineSpacing = (int)(subTextLineSpacing * scalingFactor);
+                    subTextLineSpacing = (int) (subTextLineSpacing*scalingFactor);
 
                     // Adapt used width and height
                     usedWidth *= scalingFactor;
@@ -277,13 +277,13 @@ namespace PraiseBase.Presenter.Projection
         /// <param name="formatting">Formatting</param>
         /// <param name="upwards">Calculate upwards from vertical starting position</param>
         /// <param name="lineSpacing">Line spacing</param>
-        private void DrawTextBox(Graphics gr, String[] text, float x, float y,
+        private void DrawTextBox(Graphics gr, string[] text, float x, float y,
             SlideTextFormatting.TextBoxFormatting formatting, bool upwards, int lineSpacing)
         {
             var numberOfLines = text.Length;
 
             // Measure text height
-            var textBlockHeight = gr.MeasureString(String.Join(Environment.NewLine, text), formatting.Text.Font).Height;
+            var textBlockHeight = gr.MeasureString(string.Join(Environment.NewLine, text), formatting.Text.Font).Height;
 
             // Calculate y starting position if measuring upwards
             if (upwards)
@@ -351,7 +351,7 @@ namespace PraiseBase.Presenter.Projection
         /// <param name="textFormatting">Formatting</param>
         /// <param name="orientation">Horizontal orientation</param>
         /// <param name="lineHeight">Line height (text + spacing)</param>
-        private void DrawLines(Graphics gr, String[] lines, float textStartX, float textStartY,
+        private void DrawLines(Graphics gr, string[] lines, float textStartX, float textStartY,
             TextFormatting textFormatting, HorizontalOrientation orientation, float lineHeight)
         {
             var textX = textStartX;

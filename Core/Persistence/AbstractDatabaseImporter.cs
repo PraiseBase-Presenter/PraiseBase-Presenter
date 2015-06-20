@@ -7,7 +7,7 @@ namespace PraiseBase.Presenter.Persistence
 {
     public abstract class AbstractDatabaseImporter : ISongImporter
     {
-        public List<Song> ImportFromFile(String path)
+        public List<Song> ImportFromFile(string path)
         {
             var list = new List<Song>();
 

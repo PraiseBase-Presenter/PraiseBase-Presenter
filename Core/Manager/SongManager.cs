@@ -44,8 +44,6 @@ namespace PraiseBase.Presenter.Manager
             CurrentSlideNr = -1;
             SongDirPath = songDirPath;
             SongList = new Dictionary<string, SongItem>();
-
-
         }
 
         /// <summary>
@@ -179,7 +177,7 @@ namespace PraiseBase.Presenter.Manager
             {
                 foreach (var kvp in SongList)
                 {
-                    if (String.Compare(
+                    if (string.Compare(
                         Path.GetFullPath(kvp.Value.Filename).TrimEnd('\\'),
                         Path.GetFullPath(path).TrimEnd('\\'),
                         StringComparison.InvariantCultureIgnoreCase) == 0)
