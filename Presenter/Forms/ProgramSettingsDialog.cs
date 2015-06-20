@@ -49,7 +49,7 @@ namespace PraiseBase.Presenter.Forms
             EnableMasterFormattingGroupBoxes(_settings.ProjectionUseMaster);
 
             labelMainTextString.Text = getFontString(_settings.ProjectionMasterFont);
-            buttonChooseProjectionForeColor.BackColor = _settings.ProjectionMasterFontColor;
+            buttonTextColor.BackColor = _settings.ProjectionMasterFontColor;
 
             labelTranslationTextString.Text = getFontString(_settings.ProjectionMasterFontTranslation);
             buttonTranslationColor.BackColor = _settings.ProjectionMasterTranslationColor;

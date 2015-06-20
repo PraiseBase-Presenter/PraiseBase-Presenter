@@ -126,8 +126,8 @@
             this.buttonCopyrightFont = new System.Windows.Forms.Button();
             this.buttonCopyrightColor = new System.Windows.Forms.Button();
             this.labelMainText = new System.Windows.Forms.Label();
-            this.buttonProjectionMasterFont = new System.Windows.Forms.Button();
-            this.buttonChooseProjectionForeColor = new System.Windows.Forms.Button();
+            this.buttonTextFont = new System.Windows.Forms.Button();
+            this.buttonTextColor = new System.Windows.Forms.Button();
             this.buttonTranslationFont = new System.Windows.Forms.Button();
             this.buttonTranslationColor = new System.Windows.Forms.Button();
             this.labelTranslationTextString = new System.Windows.Forms.Label();
@@ -859,8 +859,8 @@
             this.groupBoxFonts.Controls.Add(this.buttonCopyrightFont);
             this.groupBoxFonts.Controls.Add(this.buttonCopyrightColor);
             this.groupBoxFonts.Controls.Add(this.labelMainText);
-            this.groupBoxFonts.Controls.Add(this.buttonProjectionMasterFont);
-            this.groupBoxFonts.Controls.Add(this.buttonChooseProjectionForeColor);
+            this.groupBoxFonts.Controls.Add(this.buttonTextFont);
+            this.groupBoxFonts.Controls.Add(this.buttonTextColor);
             this.groupBoxFonts.Controls.Add(this.buttonTranslationFont);
             this.groupBoxFonts.Controls.Add(this.buttonTranslationColor);
             this.groupBoxFonts.Controls.Add(this.labelTranslationTextString);
@@ -942,19 +942,19 @@
             resources.ApplyResources(this.labelMainText, "labelMainText");
             this.labelMainText.Name = "labelMainText";
             // 
-            // buttonProjectionMasterFont
+            // buttonTextFont
             // 
-            resources.ApplyResources(this.buttonProjectionMasterFont, "buttonProjectionMasterFont");
-            this.buttonProjectionMasterFont.Name = "buttonProjectionMasterFont";
-            this.buttonProjectionMasterFont.UseVisualStyleBackColor = true;
-            this.buttonProjectionMasterFont.Click += new System.EventHandler(this.buttonFontSelector_Click);
+            resources.ApplyResources(this.buttonTextFont, "buttonTextFont");
+            this.buttonTextFont.Name = "buttonTextFont";
+            this.buttonTextFont.UseVisualStyleBackColor = true;
+            this.buttonTextFont.Click += new System.EventHandler(this.buttonFontSelector_Click);
             // 
-            // buttonChooseProjectionForeColor
+            // buttonTextColor
             // 
-            resources.ApplyResources(this.buttonChooseProjectionForeColor, "buttonChooseProjectionForeColor");
-            this.buttonChooseProjectionForeColor.Name = "buttonChooseProjectionForeColor";
-            this.buttonChooseProjectionForeColor.UseVisualStyleBackColor = true;
-            this.buttonChooseProjectionForeColor.Click += new System.EventHandler(this.buttonChooseProjectionForeColor_Click);
+            resources.ApplyResources(this.buttonTextColor, "buttonTextColor");
+            this.buttonTextColor.Name = "buttonTextColor";
+            this.buttonTextColor.UseVisualStyleBackColor = true;
+            this.buttonTextColor.Click += new System.EventHandler(this.buttonChooseProjectionForeColor_Click);
             // 
             // buttonTranslationFont
             // 
@@ -1084,8 +1084,8 @@
         private System.Windows.Forms.Label labelMainTextString;
         private System.Windows.Forms.Button buttonTranslationColor;
         private System.Windows.Forms.Button buttonTranslationFont;
-        private System.Windows.Forms.Button buttonChooseProjectionForeColor;
-        private System.Windows.Forms.Button buttonProjectionMasterFont;
+        private System.Windows.Forms.Button buttonTextColor;
+        private System.Windows.Forms.Button buttonTextFont;
         private System.Windows.Forms.CheckBox checkBoxUseMasterFormat;
         private System.Windows.Forms.GroupBox groupBoxFonts;
 		private System.Windows.Forms.CheckBox checkBoxShowLoadingScreen;
