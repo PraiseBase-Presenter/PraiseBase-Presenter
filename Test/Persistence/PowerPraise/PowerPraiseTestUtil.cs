@@ -17,14 +17,14 @@ namespace PraiseBase.Presenter.Persistence.PowerPraise
             song.Themes.Add("Anbetung");
 
             song.Copyright = "Text und Musik: Lowell Mason, 1792-1872";
-            song.CopyrightPosition = AdditionalInformationPosition.LastSlide;
+            song.Formatting.CopyrightPosition = AdditionalInformationPosition.LastSlide;
 
             SongBook sb = new SongBook
             {
                 Name = "grünes Buch 339"
             };
             song.SongBooks.Add(sb);
-            song.SourcePosition = AdditionalInformationPosition.FirstSlide;
+            song.Formatting.SourcePosition = AdditionalInformationPosition.FirstSlide;
 
             SongPart part = new SongPart
             {
@@ -114,28 +114,28 @@ namespace PraiseBase.Presenter.Persistence.PowerPraise
             song.PartSequence.Add(song.Parts[1]);
             song.PartSequence.Add(song.Parts[2]);
 
-            song.MainText = new TextFormatting(
+            song.Formatting.MainText = new TextFormatting(
                 new Font("Times New Roman", 44, FontStyle.Bold | FontStyle.Italic),
                 Color.White,
                 new TextOutline(30, Color.Black),
                 new TextShadow(15, 0, 125, Color.Black),
                 30
             );
-            song.TranslationText = new TextFormatting(
+            song.Formatting.TranslationText = new TextFormatting(
                 new Font("Times New Roman", 20, FontStyle.Regular),
                 Color.White,
                 new TextOutline(30, Color.Black),
                 new TextShadow(20, 0, 125, Color.Black),
                 20
             );
-            song.CopyrightText = new TextFormatting(
+            song.Formatting.CopyrightText = new TextFormatting(
                 new Font("Times New Roman", 14, FontStyle.Regular),
                 Color.White,
                 new TextOutline(30, Color.Black),
                 new TextShadow(20, 0, 125, Color.Black),
                 0
             );
-            song.SourceText = new TextFormatting(
+            song.Formatting.SourceText = new TextFormatting(
                 new Font("Times New Roman", 30, FontStyle.Regular),
                 Color.White,
                 new TextOutline(30, Color.Black),
@@ -143,12 +143,12 @@ namespace PraiseBase.Presenter.Persistence.PowerPraise
                 0
             );
 
-            song.TextOrientation = new TextOrientation(VerticalOrientation.Middle, HorizontalOrientation.Left);
+            song.Formatting.TextOrientation = new TextOrientation(VerticalOrientation.Middle, HorizontalOrientation.Left);
 
-            song.TextOutlineEnabled = false;
-            song.TextShadowEnabled = true;
+            song.Formatting.TextOutlineEnabled = false;
+            song.Formatting.TextShadowEnabled = true;
 
-            song.TextBorders = new SongTextBorders(50, 40, 60, 70, 30, 20, 40);
+            song.Formatting.TextBorders = new SongTextBorders(50, 40, 60, 70, 30, 20, 40);
 
             return song;
         }

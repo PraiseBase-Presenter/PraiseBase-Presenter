@@ -622,8 +622,8 @@ namespace PraiseBase.Presenter.Presenter
             {
                 ISlideTextFormattingMapper<Song> mapper = new SongSlideTextFormattingMapper();
                 mapper.Map(s, ref slideFormatting);
-                sourcePosition = s.SourcePosition;
-                copyrightPosition = s.CopyrightPosition;
+                sourcePosition = s.Formatting.SourcePosition;
+                copyrightPosition = s.Formatting.CopyrightPosition;
             }
             slideFormatting.ScaleFontSize = Settings.Default.ProjectionFontScaling;
             slideFormatting.SmoothShadow = Settings.Default.ProjectionSmoothShadow;

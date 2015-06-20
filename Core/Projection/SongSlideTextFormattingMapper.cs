@@ -10,32 +10,32 @@ namespace PraiseBase.Presenter.Projection
             slideFormatting.Text = new SlideTextFormatting.MainTextFormatting
             {
                 // TODO respect specific slide text size
-                MainText = (TextFormatting) s.MainText.Clone(),
-                SubText = (TextFormatting) s.TranslationText.Clone(),
-                Orientation = (TextOrientation) s.TextOrientation.Clone(),
-                HorizontalPadding = s.TextBorders.TextLeft,
-                VerticalPadding = s.TextBorders.TextTop,
+                MainText = (TextFormatting) s.Formatting.MainText.Clone(),
+                SubText = (TextFormatting) s.Formatting.TranslationText.Clone(),
+                Orientation = (TextOrientation) s.Formatting.TextOrientation.Clone(),
+                HorizontalPadding = s.Formatting.TextBorders.TextLeft,
+                VerticalPadding = s.Formatting.TextBorders.TextTop,
                 // TODO Parametrize hard-coded value
                 HorizontalSubTextOffset = 10
             };
             slideFormatting.Header = new SlideTextFormatting.TextBoxFormatting
             {
-                Text = (TextFormatting) s.SourceText.Clone(),
+                Text = (TextFormatting) s.Formatting.SourceText.Clone(),
                 // TODO Parametrize hard-coded value
                 HorizontalOrientation = HorizontalOrientation.Right,
-                HorizontalPadding = s.TextBorders.SourceRight,
-                VerticalPadding = s.TextBorders.SourceTop
+                HorizontalPadding = s.Formatting.TextBorders.SourceRight,
+                VerticalPadding = s.Formatting.TextBorders.SourceTop
             };
             slideFormatting.Footer = new SlideTextFormatting.TextBoxFormatting
             {
-                Text = (TextFormatting) s.CopyrightText.Clone(),
+                Text = (TextFormatting) s.Formatting.CopyrightText.Clone(),
                 // TODO Parametrize hard-coded value
                 HorizontalOrientation = HorizontalOrientation.Left,
-                HorizontalPadding = s.TextBorders.CopyrightBottom,
-                VerticalPadding = s.TextBorders.CopyrightBottom
+                HorizontalPadding = s.Formatting.TextBorders.CopyrightBottom,
+                VerticalPadding = s.Formatting.TextBorders.CopyrightBottom
             };
-            slideFormatting.OutlineEnabled = s.TextOutlineEnabled;
-            slideFormatting.ShadowEnabled = s.TextShadowEnabled;
+            slideFormatting.OutlineEnabled = s.Formatting.TextOutlineEnabled;
+            slideFormatting.ShadowEnabled = s.Formatting.TextShadowEnabled;
         }
     }
 }

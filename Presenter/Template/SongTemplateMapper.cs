@@ -60,7 +60,7 @@ namespace PraiseBase.Presenter.Template
 
         public void ApplyFormattingFromSettings(Song sng)
         {
-            sng.MainText = new TextFormatting(
+            sng.Formatting.MainText = new TextFormatting(
                 _settings.ProjectionMasterFont,
                 _settings.ProjectionMasterFontColor,
                 new TextOutline(_settings.ProjectionMasterOutlineSize, _settings.ProjectionMasterOutlineColor),
@@ -68,7 +68,7 @@ namespace PraiseBase.Presenter.Template
                     _settings.ProjectionMasterShadowDirection, _settings.ProjectionMasterShadowColor),
                 _settings.ProjectionMasterLineSpacing);
 
-            sng.TranslationText = new TextFormatting(
+            sng.Formatting.TranslationText = new TextFormatting(
                 _settings.ProjectionMasterFontTranslation,
                 _settings.ProjectionMasterTranslationColor,
                 new TextOutline(_settings.ProjectionMasterOutlineSize, _settings.ProjectionMasterOutlineColor),
@@ -76,7 +76,7 @@ namespace PraiseBase.Presenter.Template
                     _settings.ProjectionMasterShadowDirection, _settings.ProjectionMasterShadowColor),
                 _settings.ProjectionMasterLineSpacing);
 
-            sng.CopyrightText = new TextFormatting(
+            sng.Formatting.CopyrightText = new TextFormatting(
                 _settings.ProjectionMasterFontTranslation,
                 _settings.ProjectionMasterTranslationColor,
                 new TextOutline(_settings.ProjectionMasterOutlineSize, _settings.ProjectionMasterOutlineColor),
@@ -84,7 +84,7 @@ namespace PraiseBase.Presenter.Template
                     _settings.ProjectionMasterShadowDirection, _settings.ProjectionMasterShadowColor),
                 _settings.ProjectionMasterLineSpacing);
 
-            sng.SourceText = new TextFormatting(
+            sng.Formatting.SourceText = new TextFormatting(
                _settings.ProjectionMasterFontTranslation,
                _settings.ProjectionMasterTranslationColor,
                 new TextOutline(_settings.ProjectionMasterOutlineSize, _settings.ProjectionMasterOutlineColor),
@@ -92,15 +92,15 @@ namespace PraiseBase.Presenter.Template
                     _settings.ProjectionMasterShadowDirection, _settings.ProjectionMasterShadowColor),
                _settings.ProjectionMasterLineSpacing);
 
-            sng.TextOrientation = new TextOrientation(_settings.ProjectionMasterVerticalTextOrientation, _settings.ProjectionMasterHorizontalTextOrientation);
-            sng.CopyrightPosition = _settings.ProjectionMasterCopyrightPosition;
-            sng.SourcePosition = _settings.ProjectionMasterSourcePosition;
-            sng.TranslationPosition = _settings.ProjectionMasteTranslationPosition;
+            sng.Formatting.TextOrientation = new TextOrientation(_settings.ProjectionMasterVerticalTextOrientation, _settings.ProjectionMasterHorizontalTextOrientation);
+            sng.Formatting.CopyrightPosition = _settings.ProjectionMasterCopyrightPosition;
+            sng.Formatting.SourcePosition = _settings.ProjectionMasterSourcePosition;
+            sng.Formatting.TranslationPosition = _settings.ProjectionMasteTranslationPosition;
 
-            sng.TextOutlineEnabled = _settings.ProjectionMasterOutlineEnabled;
-            sng.TextShadowEnabled = _settings.ProjectionMasterShadowEnabled;
+            sng.Formatting.TextOutlineEnabled = _settings.ProjectionMasterOutlineEnabled;
+            sng.Formatting.TextShadowEnabled = _settings.ProjectionMasterShadowEnabled;
 
-            sng.TextBorders = new SongTextBorders(
+            sng.Formatting.TextBorders = new SongTextBorders(
                 _settings.ProjectionMasterHorizontalTextPadding,
                 _settings.ProjectionMasterVerticalTextPadding,
                 _settings.ProjectionMasterHorizontalTextPadding,
