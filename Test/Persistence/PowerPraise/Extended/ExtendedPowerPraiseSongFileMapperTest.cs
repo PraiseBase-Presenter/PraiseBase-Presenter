@@ -108,7 +108,7 @@ namespace PraiseBase.Presenter.Persistence.PowerPraise.Extended
             Assert.AreEqual(expected.Formatting.MainText.Shadow.Color, actual.Formatting.MainText.Shadow.Color);
             Assert.AreEqual(expected.Formatting.MainText.Shadow.Direction, actual.Formatting.MainText.Shadow.Direction);
             Assert.AreEqual(expected.Formatting.MainText.Shadow.Distance, actual.Formatting.MainText.Shadow.Distance);
-            Assert.AreEqual(expected.Formatting.MainText.LineSpacing, actual.Formatting.MainText.LineSpacing);
+            Assert.AreEqual(expected.Formatting.MainLineSpacing, actual.Formatting.MainLineSpacing);
 
             Assert.AreEqual(expected.Formatting.TranslationText.Font, actual.Formatting.TranslationText.Font);
             Assert.AreEqual(expected.Formatting.TranslationText.Color, actual.Formatting.TranslationText.Color);
@@ -117,7 +117,7 @@ namespace PraiseBase.Presenter.Persistence.PowerPraise.Extended
             Assert.AreEqual(expected.Formatting.TranslationText.Shadow.Color, actual.Formatting.TranslationText.Shadow.Color);
             Assert.AreEqual(expected.Formatting.TranslationText.Shadow.Direction, actual.Formatting.TranslationText.Shadow.Direction);
             Assert.AreEqual(expected.Formatting.TranslationText.Shadow.Distance, actual.Formatting.TranslationText.Shadow.Distance);
-            Assert.AreEqual(expected.Formatting.TranslationText.LineSpacing, actual.Formatting.TranslationText.LineSpacing);
+            Assert.AreEqual(expected.Formatting.TranslationLineSpacing, actual.Formatting.TranslationLineSpacing);
 
             Assert.AreEqual(expected.Formatting.CopyrightText.Font, actual.Formatting.CopyrightText.Font);
             Assert.AreEqual(expected.Formatting.CopyrightText.Color, actual.Formatting.CopyrightText.Color);
@@ -126,7 +126,6 @@ namespace PraiseBase.Presenter.Persistence.PowerPraise.Extended
             Assert.AreEqual(expected.Formatting.CopyrightText.Shadow.Color, actual.Formatting.CopyrightText.Shadow.Color);
             Assert.AreEqual(expected.Formatting.CopyrightText.Shadow.Direction, actual.Formatting.CopyrightText.Shadow.Direction);
             Assert.AreEqual(expected.Formatting.CopyrightText.Shadow.Distance, actual.Formatting.CopyrightText.Shadow.Distance);
-            Assert.AreEqual(expected.Formatting.CopyrightText.LineSpacing, actual.Formatting.CopyrightText.LineSpacing);
 
             Assert.AreEqual(expected.Formatting.SourceText.Font, actual.Formatting.SourceText.Font);
             Assert.AreEqual(expected.Formatting.SourceText.Color, actual.Formatting.SourceText.Color);
@@ -135,7 +134,6 @@ namespace PraiseBase.Presenter.Persistence.PowerPraise.Extended
             Assert.AreEqual(expected.Formatting.SourceText.Shadow.Color, actual.Formatting.SourceText.Shadow.Color);
             Assert.AreEqual(expected.Formatting.SourceText.Shadow.Direction, actual.Formatting.SourceText.Shadow.Direction);
             Assert.AreEqual(expected.Formatting.SourceText.Shadow.Distance, actual.Formatting.SourceText.Shadow.Distance);
-            Assert.AreEqual(expected.Formatting.SourceText.LineSpacing, actual.Formatting.SourceText.LineSpacing);
 
             Assert.AreEqual(expected.Formatting.TextOrientation, actual.Formatting.TextOrientation);
             Assert.AreEqual(expected.Formatting.TextOutlineEnabled, actual.Formatting.TextOutlineEnabled);
@@ -320,7 +318,7 @@ namespace PraiseBase.Presenter.Persistence.PowerPraise.Extended
             Assert.AreEqual(expected.Formatting.MainText.Shadow.Color.ToArgb(), actual.Formatting.MainText.Shadow.Color.ToArgb());
             Assert.AreEqual(expected.Formatting.MainText.Shadow.Direction, actual.Formatting.MainText.Shadow.Direction);
             Assert.AreEqual(expected.Formatting.MainText.Shadow.Distance, actual.Formatting.MainText.Shadow.Distance);
-            Assert.AreEqual(expected.Formatting.MainText.LineSpacing, actual.Formatting.MainText.LineSpacing);
+            Assert.AreEqual(expected.Formatting.MainLineSpacing, actual.Formatting.MainLineSpacing);
 
             Assert.AreEqual(expected.Formatting.TranslationText.Font, actual.Formatting.TranslationText.Font);
             Assert.AreEqual(expected.Formatting.TranslationText.Color.ToArgb(), actual.Formatting.TranslationText.Color.ToArgb());
@@ -329,7 +327,7 @@ namespace PraiseBase.Presenter.Persistence.PowerPraise.Extended
             Assert.AreEqual(expected.Formatting.TranslationText.Shadow.Color.ToArgb(), actual.Formatting.TranslationText.Shadow.Color.ToArgb());
             Assert.AreEqual(expected.Formatting.TranslationText.Shadow.Direction, actual.Formatting.TranslationText.Shadow.Direction);
             Assert.AreEqual(expected.Formatting.TranslationText.Shadow.Distance, actual.Formatting.TranslationText.Shadow.Distance);
-            Assert.AreEqual(expected.Formatting.TranslationText.LineSpacing, actual.Formatting.TranslationText.LineSpacing);
+            Assert.AreEqual(expected.Formatting.TranslationLineSpacing, actual.Formatting.TranslationLineSpacing);
 
             Assert.AreEqual(expected.Formatting.CopyrightText.Font, actual.Formatting.CopyrightText.Font);
             Assert.AreEqual(expected.Formatting.CopyrightText.Color.ToArgb(), actual.Formatting.CopyrightText.Color.ToArgb());
@@ -338,7 +336,6 @@ namespace PraiseBase.Presenter.Persistence.PowerPraise.Extended
             Assert.AreEqual(expected.Formatting.CopyrightText.Shadow.Color.ToArgb(), actual.Formatting.CopyrightText.Shadow.Color.ToArgb());
             Assert.AreEqual(expected.Formatting.CopyrightText.Shadow.Direction, actual.Formatting.CopyrightText.Shadow.Direction);
             Assert.AreEqual(expected.Formatting.CopyrightText.Shadow.Distance, actual.Formatting.CopyrightText.Shadow.Distance);
-            Assert.AreEqual(expected.Formatting.CopyrightText.LineSpacing, actual.Formatting.CopyrightText.LineSpacing);
 
             Assert.AreEqual(expected.Formatting.SourceText.Font, actual.Formatting.SourceText.Font);
             Assert.AreEqual(expected.Formatting.SourceText.Color.ToArgb(), actual.Formatting.SourceText.Color.ToArgb());
@@ -347,7 +344,6 @@ namespace PraiseBase.Presenter.Persistence.PowerPraise.Extended
             Assert.AreEqual(expected.Formatting.SourceText.Shadow.Color.ToArgb(), actual.Formatting.SourceText.Shadow.Color.ToArgb());
             Assert.AreEqual(expected.Formatting.SourceText.Shadow.Direction, actual.Formatting.SourceText.Shadow.Direction);
             Assert.AreEqual(expected.Formatting.SourceText.Shadow.Distance, actual.Formatting.SourceText.Shadow.Distance);
-            Assert.AreEqual(expected.Formatting.SourceText.LineSpacing, actual.Formatting.SourceText.LineSpacing);
 
             Assert.AreEqual(expected.Formatting.TextOrientation, actual.Formatting.TextOrientation);
             Assert.AreEqual(expected.Formatting.TextOutlineEnabled, actual.Formatting.TextOutlineEnabled);

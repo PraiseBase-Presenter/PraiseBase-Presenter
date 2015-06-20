@@ -181,8 +181,8 @@ namespace PraiseBase.Presenter.Persistence.PowerPraise
             // Linespacing
             if (song.Formatting.MainText != null)
             {
-                ppl.Formatting.MainLineSpacing = song.Formatting.MainText.LineSpacing;
-                ppl.Formatting.TranslationLineSpacing = song.Formatting.TranslationText.LineSpacing;
+                ppl.Formatting.MainLineSpacing = song.Formatting.MainLineSpacing;
+                ppl.Formatting.TranslationLineSpacing = song.Formatting.TranslationLineSpacing;
             }
 
             MapFormatting(song, ppl);
@@ -196,33 +196,33 @@ namespace PraiseBase.Presenter.Persistence.PowerPraise
                 ppl.Formatting.MainText.Color,
                 new TextOutline(ppl.Formatting.MainText.OutlineWidth, ppl.Formatting.Outline.Color),
                 new TextShadow(ppl.Formatting.MainText.ShadowDistance, 0, ppl.Formatting.Shadow.Direction,
-                    ppl.Formatting.Shadow.Color),
-                ppl.Formatting.MainLineSpacing
+                    ppl.Formatting.Shadow.Color)
                 );
             song.Formatting.TranslationText = new TextFormatting(
                 ppl.Formatting.TranslationText.Font,
                 ppl.Formatting.TranslationText.Color,
                 new TextOutline(ppl.Formatting.TranslationText.OutlineWidth, ppl.Formatting.Outline.Color),
                 new TextShadow(ppl.Formatting.TranslationText.ShadowDistance, 0, ppl.Formatting.Shadow.Direction,
-                    ppl.Formatting.Shadow.Color),
-                ppl.Formatting.TranslationLineSpacing
+                    ppl.Formatting.Shadow.Color)
                 );
             song.Formatting.CopyrightText = new TextFormatting(
                 ppl.Formatting.CopyrightText.Font,
                 ppl.Formatting.CopyrightText.Color,
                 new TextOutline(ppl.Formatting.CopyrightText.OutlineWidth, ppl.Formatting.Outline.Color),
                 new TextShadow(ppl.Formatting.CopyrightText.ShadowDistance, 0, ppl.Formatting.Shadow.Direction,
-                    ppl.Formatting.Shadow.Color),
-                0
+                    ppl.Formatting.Shadow.Color)
                 );
             song.Formatting.SourceText = new TextFormatting(
                 ppl.Formatting.SourceText.Font,
                 ppl.Formatting.SourceText.Color,
                 new TextOutline(ppl.Formatting.SourceText.OutlineWidth, ppl.Formatting.Outline.Color),
                 new TextShadow(ppl.Formatting.SourceText.ShadowDistance, 0, ppl.Formatting.Shadow.Direction,
-                    ppl.Formatting.Shadow.Color),
-                0
+                    ppl.Formatting.Shadow.Color)
                 );
+
+            // Line spacing
+            song.Formatting.MainLineSpacing = ppl.Formatting.MainLineSpacing;
+            song.Formatting.TranslationLineSpacing = ppl.Formatting.TranslationLineSpacing;
 
             // Text orientation
             song.Formatting.TextOrientation = ppl.Formatting.TextOrientation;

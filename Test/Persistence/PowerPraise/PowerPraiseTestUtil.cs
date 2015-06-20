@@ -118,30 +118,28 @@ namespace PraiseBase.Presenter.Persistence.PowerPraise
                 new Font("Times New Roman", 44, FontStyle.Bold | FontStyle.Italic),
                 Color.White,
                 new TextOutline(30, Color.Black),
-                new TextShadow(15, 0, 125, Color.Black),
-                30
+                new TextShadow(15, 0, 125, Color.Black)
             );
             song.Formatting.TranslationText = new TextFormatting(
                 new Font("Times New Roman", 20, FontStyle.Regular),
                 Color.White,
                 new TextOutline(30, Color.Black),
-                new TextShadow(20, 0, 125, Color.Black),
-                20
+                new TextShadow(20, 0, 125, Color.Black)
             );
             song.Formatting.CopyrightText = new TextFormatting(
                 new Font("Times New Roman", 14, FontStyle.Regular),
                 Color.White,
                 new TextOutline(30, Color.Black),
-                new TextShadow(20, 0, 125, Color.Black),
-                0
+                new TextShadow(20, 0, 125, Color.Black)
             );
             song.Formatting.SourceText = new TextFormatting(
                 new Font("Times New Roman", 30, FontStyle.Regular),
                 Color.White,
                 new TextOutline(30, Color.Black),
-                new TextShadow(20, 0, 125, Color.Black),
-                0
+                new TextShadow(20, 0, 125, Color.Black)
             );
+            song.Formatting.MainLineSpacing = 30;
+            song.Formatting.TranslationLineSpacing = 20;
 
             song.Formatting.TextOrientation = new TextOrientation(VerticalOrientation.Middle, HorizontalOrientation.Left);
 

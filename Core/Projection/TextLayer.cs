@@ -91,8 +91,8 @@ namespace PraiseBase.Presenter.Projection
                 }
 
                 // Line spacing
-                var mainTextLineSpacing = mainTextFormat.LineSpacing;
-                var subTextLineSpacing = subTextFormat.LineSpacing;
+                var mainTextLineSpacing = _formatting.Text.MainTextLineSpacing;
+                var subTextLineSpacing = _formatting.Text.SubTextLineSpacing;
 
                 // Wrap long lines
                 if (_formatting.LineWrap)
@@ -248,7 +248,7 @@ namespace PraiseBase.Presenter.Projection
                 float y = _formatting.Header.VerticalPadding;
 
                 // Draw
-                DrawTextBox(gr, HeaderText, x, y, _formatting.Header, false);
+                DrawTextBox(gr, HeaderText, x, y, _formatting.Header, false, 0);
             }
 
             //
@@ -263,7 +263,7 @@ namespace PraiseBase.Presenter.Projection
                 var y = canvasHeight - _formatting.Footer.VerticalPadding;
 
                 // Draw
-                DrawTextBox(gr, FooterText, x, y, _formatting.Footer, true);
+                DrawTextBox(gr, FooterText, x, y, _formatting.Footer, true, 0);
             }
         }
 
@@ -277,10 +277,9 @@ namespace PraiseBase.Presenter.Projection
         /// <param name="formatting">Formatting</param>
         /// <param name="upwards">Calculate upwards from vertical starting position</param>
         private void DrawTextBox(Graphics gr, String[] text, float x, float y,
-            SlideTextFormatting.TextBoxFormatting formatting, bool upwards)
+            SlideTextFormatting.TextBoxFormatting formatting, bool upwards, int lineSpacing)
         {
             var numberOfLines = text.Length;
-            var lineSpacing = formatting.Text.LineSpacing;
 
             // Measure text height
             var textBlockHeight = gr.MeasureString(String.Join(Environment.NewLine, text), formatting.Text.Font).Height;

@@ -14,17 +14,17 @@ namespace PraiseBase.Presenter.Projection
                     settings.ProjectionMasterFontColor,
                     new TextOutline(settings.ProjectionMasterOutlineSize, settings.ProjectionMasterOutlineColor),
                     new TextShadow(settings.ProjectionMasterShadowDistance, settings.ProjectionMasterShadowSize,
-                        settings.ProjectionMasterShadowDirection, settings.ProjectionMasterShadowColor),
-                    settings.ProjectionMasterLineSpacing
+                        settings.ProjectionMasterShadowDirection, settings.ProjectionMasterShadowColor)                    
                 ),
                 SubText = new TextFormatting(
                     settings.ProjectionMasterFontTranslation,
                     settings.ProjectionMasterTranslationColor,
                     new TextOutline(settings.ProjectionMasterOutlineSize, settings.ProjectionMasterOutlineColor),
                     new TextShadow(settings.ProjectionMasterShadowDistance, settings.ProjectionMasterShadowSize, 
-                        settings.ProjectionMasterShadowDirection, settings.ProjectionMasterShadowColor),
-                    settings.ProjectionMasterTranslationLineSpacing
+                        settings.ProjectionMasterShadowDirection, settings.ProjectionMasterShadowColor)                    
                 ),
+                MainTextLineSpacing = settings.ProjectionMasterLineSpacing,
+                SubTextLineSpacing = settings.ProjectionMasterTranslationLineSpacing,
                 Orientation = new TextOrientation(settings.ProjectionMasterVerticalTextOrientation, settings.ProjectionMasterHorizontalTextOrientation),
                 HorizontalPadding = settings.ProjectionMasterHorizontalTextPadding,
                 VerticalPadding = settings.ProjectionMasterHorizontalTextPadding,
@@ -37,8 +37,7 @@ namespace PraiseBase.Presenter.Projection
                     settings.ProjectionMasterSourceColor,
                     new TextOutline(settings.ProjectionMasterOutlineSize, settings.ProjectionMasterOutlineColor),
                     new TextShadow(settings.ProjectionMasterShadowDistance, settings.ProjectionMasterShadowSize, 
-                        settings.ProjectionMasterShadowDirection, settings.ProjectionMasterShadowColor),
-                    0
+                        settings.ProjectionMasterShadowDirection, settings.ProjectionMasterShadowColor)
                 ),
                 HorizontalOrientation = settings.ProjectionMasterHorizontalHeaderOrientation,
                 HorizontalPadding = settings.ProjectionMasterHorizontalHeaderPadding,
@@ -51,8 +50,7 @@ namespace PraiseBase.Presenter.Projection
                     settings.ProjectionMasterCopyrightColor,
                     new TextOutline(settings.ProjectionMasterOutlineSize, settings.ProjectionMasterOutlineColor),
                     new TextShadow(settings.ProjectionMasterShadowDistance, settings.ProjectionMasterShadowSize, 
-                        settings.ProjectionMasterShadowDirection, settings.ProjectionMasterShadowColor),
-                    0
+                        settings.ProjectionMasterShadowDirection, settings.ProjectionMasterShadowColor)
                 ),
                 HorizontalOrientation = settings.ProjectionMasterHorizontalFooterOrientation,
                 HorizontalPadding = settings.ProjectionMasterHorizontalFooterPadding,

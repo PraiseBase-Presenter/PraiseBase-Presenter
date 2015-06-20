@@ -58,6 +58,16 @@ namespace PraiseBase.Presenter.Projection
             public TextFormatting SubText { get; set; }
 
             /// <summary>
+            ///     Main text line spacing
+            /// </summary>
+            public int MainTextLineSpacing { get; set; }
+
+            /// <summary>
+            ///     Translation text line spacing
+            /// </summary>
+            public int SubTextLineSpacing { get; set; }
+
+            /// <summary>
             ///     Horizontal and vertical text orientation
             /// </summary>
             public TextOrientation Orientation { get; set; }

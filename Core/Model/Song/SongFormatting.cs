@@ -38,6 +38,16 @@ namespace PraiseBase.Presenter.Model.Song
         public TextFormatting SourceText { get; set; }
 
         /// <summary>
+        ///     Main text line spacing
+        /// </summary>
+        public int MainLineSpacing { get; set; }
+
+        /// <summary>
+        ///     Translation text line spacing
+        /// </summary>
+        public int TranslationLineSpacing { get; set; }
+
+        /// <summary>
         ///     Text orientation
         /// </summary>
         public TextOrientation TextOrientation { get; set; }
@@ -77,6 +87,8 @@ namespace PraiseBase.Presenter.Model.Song
                 hashCode = (hashCode * 397) ^ (TranslationText != null ? TranslationText.GetHashCode() : 0);
                 hashCode = (hashCode * 397) ^ (CopyrightText != null ? CopyrightText.GetHashCode() : 0);
                 hashCode = (hashCode * 397) ^ (SourceText != null ? SourceText.GetHashCode() : 0);
+                hashCode = (hashCode * 397) ^ MainLineSpacing;
+                hashCode = (hashCode * 397) ^ TranslationLineSpacing;
                 hashCode = (hashCode * 397) ^ (TextOrientation != null ? TextOrientation.GetHashCode() : 0);
                 hashCode = (hashCode * 397) ^ (int)TranslationPosition;
                 hashCode = (hashCode * 397) ^ TextOutlineEnabled.GetHashCode();
@@ -90,8 +102,9 @@ namespace PraiseBase.Presenter.Model.Song
         {
             return CopyrightPosition == other.CopyrightPosition && SourcePosition == other.SourcePosition && 
                    Equals(MainText, other.MainText) && Equals(TranslationText, other.TranslationText) && 
-                   Equals(CopyrightText, other.CopyrightText) &&
-                   Equals(SourceText, other.SourceText) && Equals(TextOrientation, other.TextOrientation) &&
+                   Equals(CopyrightText, other.CopyrightText) && Equals(SourceText, other.SourceText) && 
+                   MainLineSpacing == other.MainLineSpacing && TranslationLineSpacing == other.TranslationLineSpacing &&
+                   Equals(TextOrientation, other.TextOrientation) &&
                    TranslationPosition == other.TranslationPosition &&
                    TextOutlineEnabled.Equals(other.TextOutlineEnabled) &&
                    TextShadowEnabled.Equals(other.TextShadowEnabled) && Equals(TextBorders, other.TextBorders);

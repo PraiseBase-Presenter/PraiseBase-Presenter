@@ -65,32 +65,35 @@ namespace PraiseBase.Presenter.Template
                 _settings.ProjectionMasterFontColor,
                 new TextOutline(_settings.ProjectionMasterOutlineSize, _settings.ProjectionMasterOutlineColor),
                 new TextShadow(_settings.ProjectionMasterShadowDistance, _settings.ProjectionMasterShadowSize,
-                    _settings.ProjectionMasterShadowDirection, _settings.ProjectionMasterShadowColor),
-                _settings.ProjectionMasterLineSpacing);
+                    _settings.ProjectionMasterShadowDirection, _settings.ProjectionMasterShadowColor)
+                );
 
             sng.Formatting.TranslationText = new TextFormatting(
                 _settings.ProjectionMasterFontTranslation,
                 _settings.ProjectionMasterTranslationColor,
                 new TextOutline(_settings.ProjectionMasterOutlineSize, _settings.ProjectionMasterOutlineColor),
                 new TextShadow(_settings.ProjectionMasterShadowDistance, _settings.ProjectionMasterShadowSize,
-                    _settings.ProjectionMasterShadowDirection, _settings.ProjectionMasterShadowColor),
-                _settings.ProjectionMasterLineSpacing);
+                    _settings.ProjectionMasterShadowDirection, _settings.ProjectionMasterShadowColor)
+                );
 
             sng.Formatting.CopyrightText = new TextFormatting(
                 _settings.ProjectionMasterFontTranslation,
                 _settings.ProjectionMasterTranslationColor,
                 new TextOutline(_settings.ProjectionMasterOutlineSize, _settings.ProjectionMasterOutlineColor),
                 new TextShadow(_settings.ProjectionMasterShadowDistance, _settings.ProjectionMasterShadowSize,
-                    _settings.ProjectionMasterShadowDirection, _settings.ProjectionMasterShadowColor),
-                _settings.ProjectionMasterLineSpacing);
+                    _settings.ProjectionMasterShadowDirection, _settings.ProjectionMasterShadowColor)
+                );
 
             sng.Formatting.SourceText = new TextFormatting(
                _settings.ProjectionMasterFontTranslation,
                _settings.ProjectionMasterTranslationColor,
                 new TextOutline(_settings.ProjectionMasterOutlineSize, _settings.ProjectionMasterOutlineColor),
                 new TextShadow(_settings.ProjectionMasterShadowDistance, _settings.ProjectionMasterShadowSize,
-                    _settings.ProjectionMasterShadowDirection, _settings.ProjectionMasterShadowColor),
-               _settings.ProjectionMasterLineSpacing);
+                    _settings.ProjectionMasterShadowDirection, _settings.ProjectionMasterShadowColor)
+                );
+
+            sng.Formatting.MainLineSpacing = _settings.ProjectionMasterLineSpacing;
+            sng.Formatting.TranslationLineSpacing = _settings.ProjectionMasterTranslationLineSpacing;
 
             sng.Formatting.TextOrientation = new TextOrientation(_settings.ProjectionMasterVerticalTextOrientation, _settings.ProjectionMasterHorizontalTextOrientation);
             sng.Formatting.CopyrightPosition = _settings.ProjectionMasterCopyrightPosition;
