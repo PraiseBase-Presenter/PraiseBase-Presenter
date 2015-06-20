@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-namespace PraiseBase.Presenter.Model.Song
+﻿namespace PraiseBase.Presenter.Model.Song
 {
     public class SongFormatting
     {
@@ -81,33 +76,32 @@ namespace PraiseBase.Presenter.Model.Song
         {
             unchecked
             {
-                var hashCode = (int)CopyrightPosition;
-                hashCode = (hashCode * 397) ^ (int)SourcePosition;
-                hashCode = (hashCode * 397) ^ (MainText != null ? MainText.GetHashCode() : 0);
-                hashCode = (hashCode * 397) ^ (TranslationText != null ? TranslationText.GetHashCode() : 0);
-                hashCode = (hashCode * 397) ^ (CopyrightText != null ? CopyrightText.GetHashCode() : 0);
-                hashCode = (hashCode * 397) ^ (SourceText != null ? SourceText.GetHashCode() : 0);
-                hashCode = (hashCode * 397) ^ MainLineSpacing;
-                hashCode = (hashCode * 397) ^ TranslationLineSpacing;
-                hashCode = (hashCode * 397) ^ (TextOrientation != null ? TextOrientation.GetHashCode() : 0);
-                hashCode = (hashCode * 397) ^ (int)TranslationPosition;
-                hashCode = (hashCode * 397) ^ TextOutlineEnabled.GetHashCode();
-                hashCode = (hashCode * 397) ^ TextShadowEnabled.GetHashCode();
-                hashCode = (hashCode * 397) ^ (TextBorders != null ? TextBorders.GetHashCode() : 0);
+                var hashCode = (int) CopyrightPosition;
+                hashCode = (hashCode*397) ^ (int) SourcePosition;
+                hashCode = (hashCode*397) ^ (MainText != null ? MainText.GetHashCode() : 0);
+                hashCode = (hashCode*397) ^ (TranslationText != null ? TranslationText.GetHashCode() : 0);
+                hashCode = (hashCode*397) ^ (CopyrightText != null ? CopyrightText.GetHashCode() : 0);
+                hashCode = (hashCode*397) ^ (SourceText != null ? SourceText.GetHashCode() : 0);
+                hashCode = (hashCode*397) ^ MainLineSpacing;
+                hashCode = (hashCode*397) ^ TranslationLineSpacing;
+                hashCode = (hashCode*397) ^ (TextOrientation != null ? TextOrientation.GetHashCode() : 0);
+                hashCode = (hashCode*397) ^ (int) TranslationPosition;
+                hashCode = (hashCode*397) ^ TextOutlineEnabled.GetHashCode();
+                hashCode = (hashCode*397) ^ TextShadowEnabled.GetHashCode();
+                hashCode = (hashCode*397) ^ (TextBorders != null ? TextBorders.GetHashCode() : 0);
                 return hashCode;
             }
         }
 
         protected bool Equals(SongFormatting other)
         {
-            return CopyrightPosition == other.CopyrightPosition && SourcePosition == other.SourcePosition && 
-                   Equals(MainText, other.MainText) && Equals(TranslationText, other.TranslationText) && 
-                   Equals(CopyrightText, other.CopyrightText) && Equals(SourceText, other.SourceText) && 
+            return CopyrightPosition == other.CopyrightPosition && SourcePosition == other.SourcePosition &&
+                   Equals(MainText, other.MainText) && Equals(TranslationText, other.TranslationText) &&
+                   Equals(CopyrightText, other.CopyrightText) && Equals(SourceText, other.SourceText) &&
                    MainLineSpacing == other.MainLineSpacing && TranslationLineSpacing == other.TranslationLineSpacing &&
-                   Equals(TextOrientation, other.TextOrientation) &&
-                   TranslationPosition == other.TranslationPosition &&
-                   TextOutlineEnabled.Equals(other.TextOutlineEnabled) &&
-                   TextShadowEnabled.Equals(other.TextShadowEnabled) && Equals(TextBorders, other.TextBorders);
+                   Equals(TextOrientation, other.TextOrientation) && TranslationPosition == other.TranslationPosition &&
+                   TextOutlineEnabled == other.TextOutlineEnabled && TextShadowEnabled == other.TextShadowEnabled &&
+                   Equals(TextBorders, other.TextBorders);
         }
 
         public override bool Equals(object obj)
@@ -115,8 +109,7 @@ namespace PraiseBase.Presenter.Model.Song
             if (ReferenceEquals(null, obj)) return false;
             if (ReferenceEquals(this, obj)) return true;
             if (obj.GetType() != GetType()) return false;
-            return Equals((SongFormatting)obj);
+            return Equals((SongFormatting) obj);
         }
-
     }
 }

@@ -276,6 +276,7 @@ namespace PraiseBase.Presenter.Projection
         /// <param name="y">Vertical starting position</param>
         /// <param name="formatting">Formatting</param>
         /// <param name="upwards">Calculate upwards from vertical starting position</param>
+        /// <param name="lineSpacing">Line spacing</param>
         private void DrawTextBox(Graphics gr, String[] text, float x, float y,
             SlideTextFormatting.TextBoxFormatting formatting, bool upwards, int lineSpacing)
         {
