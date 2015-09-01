@@ -20,7 +20,6 @@
  *
  */
 
-using System;
 using System.Drawing;
 
 namespace PraiseBase.Presenter.Projection
@@ -36,7 +35,7 @@ namespace PraiseBase.Presenter.Projection
 
         public Image Image { get; set; }
 
-        public override void WriteOut(Graphics gr, Object[] args)
+        public override void WriteOut(Graphics gr, object[] args)
         {
             var w = (int) gr.VisibleClipBounds.Width;
             var h = (int) gr.VisibleClipBounds.Height;

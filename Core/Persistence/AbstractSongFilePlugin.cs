@@ -5,37 +5,56 @@ namespace PraiseBase.Presenter.Persistence
 {
     public abstract class AbstractSongFilePlugin<T> : ISongFilePlugin where T : ISongFile, new()
     {
-        protected ISongFileMapper<T> mapper;
-        protected ISongFileReader<T> reader;
-        protected ISongFileWriter<T> writer;
+        protected ISongFileMapper<T> Mapper;
+        protected ISongFileReader<T> Reader;
+        protected ISongFileWriter<T> Writer;
 
-        public AbstractSongFilePlugin()
+        protected AbstractSongFilePlugin()
         {
             Console.WriteLine("Loaded song file plugin: " + GetType() + " (" + GetFileTypeDescription() + ")");
         }
 
+        /// <summary>
+        ///     Gets the file extension
+        /// </summary>
+        /// <returns></returns>
         public abstract string GetFileExtension();
+
+        /// <summary>
+        ///     Gets the file type descriptions
+        /// </summary>
+        /// <returns></returns>
         public abstract string GetFileTypeDescription();
 
-        public String ReadTitle(string filePath)
+        /// <summary>
+        ///     Reads the title from the file
+        /// </summary>
+        /// <param name="filePath"></param>
+        /// <returns></returns>
+        public string ReadTitle(string filePath)
         {
-            return reader.ReadTitle(filePath);
+            return Reader.ReadTitle(filePath);
         }
 
-        public Song Load(String filePath)
+        /// <summary>
+        ///     Loads the file
+        /// </summary>
+        /// <param name="filePath"></param>
+        /// <returns></returns>
+        public Song Load(string filePath)
         {
-            var song = reader.Load(filePath);
-            return mapper.Map(song);
+            var song = Reader.Load(filePath);
+            return Mapper.Map(song);
         }
 
-        public Boolean IsFileSupported(String filePath)
+        public bool IsFileSupported(string filePath)
         {
-            return reader.IsFileSupported(filePath);
+            return Reader.IsFileSupported(filePath);
         }
 
-        public Boolean IsWritingSupported()
+        public bool IsWritingSupported()
         {
-            return writer != null;
+            return Writer != null;
         }
 
         public void Save(Song sng, string filePath)
@@ -46,8 +65,8 @@ namespace PraiseBase.Presenter.Persistence
             }
 
             var song = new T();
-            mapper.Map(sng, song);
-            writer.Save(filePath, song);
+            Mapper.Map(sng, song);
+            Writer.Save(filePath, song);
         }
     }
 }

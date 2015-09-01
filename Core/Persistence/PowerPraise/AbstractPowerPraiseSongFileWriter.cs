@@ -20,11 +20,9 @@
  *
  */
 
-using System;
 using System.Collections.Generic;
 using System.Xml;
 using PraiseBase.Presenter.Model;
-using PraiseBase.Presenter.Model.Song;
 
 namespace PraiseBase.Presenter.Persistence.PowerPraise
 {
@@ -48,9 +46,10 @@ namespace PraiseBase.Presenter.Persistence.PowerPraise
         /// <summary>
         ///     Parses additional fields (hook)
         /// </summary>
+        /// <param name="xmlDoc"></param>
         /// <param name="xmlRoot"></param>
         /// <param name="sng"></param>
-        protected abstract void writeAdditionalFields(XmlDocument xmlDoc, XmlElement xmlRoot, PowerPraiseSong sng);
+        protected abstract void WriteAdditionalFields(XmlDocument xmlDoc, XmlElement xmlRoot, PowerPraiseSong sng);
 
         public void Write(string filename, PowerPraiseSong sng)
         {
@@ -66,18 +65,18 @@ namespace PraiseBase.Presenter.Persistence.PowerPraise
 
             // Category
             xmlRoot["general"].AppendChild(xmlDoc.CreateElement("category"));
-            xmlRoot["general"]["category"].InnerText = !String.IsNullOrEmpty(sng.Category)
+            xmlRoot["general"]["category"].InnerText = !string.IsNullOrEmpty(sng.Category)
                 ? sng.Category
                 : PowerPraiseConstants.NoCategory;
 
             // Language
             xmlRoot["general"].AppendChild(xmlDoc.CreateElement("language"));
-            xmlRoot["general"]["language"].InnerText = !String.IsNullOrEmpty(sng.Language)
+            xmlRoot["general"]["language"].InnerText = !string.IsNullOrEmpty(sng.Language)
                 ? sng.Language
                 : PowerPraiseConstants.Language;
 
             // Write additional fields
-            writeAdditionalFields(xmlDoc, xmlRoot, sng);
+            WriteAdditionalFields(xmlDoc, xmlRoot, sng);
 
             xmlRoot.AppendChild(xmlDoc.CreateElement("songtext"));
 
@@ -98,11 +97,12 @@ namespace PraiseBase.Presenter.Persistence.PowerPraise
                     var tn2 = xmlDoc.CreateElement("slide");
 
                     // Slide-specific text size
-                    var mainsize = sld.MainSize > 0 ? sld.MainSize : (int)sng.Formatting.MainText.Font.Size;
+                    var mainsize = sld.MainSize > 0 ? sld.MainSize : (int) sng.Formatting.MainText.Font.Size;
                     tn2.SetAttribute("mainsize", mainsize.ToString());
 
                     // Backgound number
-                    var bg = PowerPraiseFileUtil.MapBackground(sld.Background) ?? PowerPraiseFileUtil.MapBackground(PowerPraiseConstants.DefaultBackground);
+                    var bg = PowerPraiseFileUtil.MapBackground(sld.Background) ??
+                             PowerPraiseFileUtil.MapBackground(PowerPraiseConstants.DefaultBackground);
                     int backgroundNr;
                     if (!backgrounds.ContainsKey(bg))
                     {
@@ -149,11 +149,12 @@ namespace PraiseBase.Presenter.Persistence.PowerPraise
 
             // Copyright position
             xmlRoot["information"]["copyright"].AppendChild(xmlDoc.CreateElement("position"));
-            xmlRoot["information"]["copyright"]["position"].InnerText = MapAdditionalInformationPosition(sng.Formatting.CopyrightTextPosition);
+            xmlRoot["information"]["copyright"]["position"].InnerText =
+                MapAdditionalInformationPosition(sng.Formatting.CopyrightTextPosition);
 
             // Copyright text
             xmlRoot["information"]["copyright"].AppendChild(xmlDoc.CreateElement("text"));
-            if (sng.CopyrightText != null && !String.IsNullOrEmpty(String.Join("", sng.CopyrightText.ToArray())))
+            if (sng.CopyrightText != null && !string.IsNullOrEmpty(string.Join("", sng.CopyrightText.ToArray())))
             {
                 foreach (var l in sng.CopyrightText)
                 {
@@ -167,11 +168,12 @@ namespace PraiseBase.Presenter.Persistence.PowerPraise
 
             // Source enabled
             xmlRoot["information"]["source"].AppendChild(xmlDoc.CreateElement("position"));
-            xmlRoot["information"]["source"]["position"].InnerText = MapAdditionalInformationPosition(sng.Formatting.SourceTextPosition);
+            xmlRoot["information"]["source"]["position"].InnerText =
+                MapAdditionalInformationPosition(sng.Formatting.SourceTextPosition);
 
             // Source text
             xmlRoot["information"]["source"].AppendChild(xmlDoc.CreateElement("text"));
-            if (!String.IsNullOrEmpty(sng.SourceText))
+            if (!string.IsNullOrEmpty(sng.SourceText))
             {
                 xmlRoot["information"]["source"]["text"].AppendChild(xmlDoc.CreateElement("line"));
                 xmlRoot["information"]["source"]["text"]["line"].InnerText = sng.SourceText;
@@ -181,10 +183,10 @@ namespace PraiseBase.Presenter.Persistence.PowerPraise
             xmlRoot["formatting"].AppendChild(xmlDoc.CreateElement("font"));
 
             // Font formatting
-            applyFormatting(xmlDoc, xmlRoot["formatting"]["font"], "maintext", sng.Formatting.MainText);
-            applyFormatting(xmlDoc, xmlRoot["formatting"]["font"], "translationtext", sng.Formatting.TranslationText);
-            applyFormatting(xmlDoc, xmlRoot["formatting"]["font"], "copyrighttext", sng.Formatting.CopyrightText);
-            applyFormatting(xmlDoc, xmlRoot["formatting"]["font"], "sourcetext", sng.Formatting.SourceText);
+            ApplyFormatting(xmlDoc, xmlRoot["formatting"]["font"], "maintext", sng.Formatting.MainText);
+            ApplyFormatting(xmlDoc, xmlRoot["formatting"]["font"], "translationtext", sng.Formatting.TranslationText);
+            ApplyFormatting(xmlDoc, xmlRoot["formatting"]["font"], "copyrighttext", sng.Formatting.CopyrightText);
+            ApplyFormatting(xmlDoc, xmlRoot["formatting"]["font"], "sourcetext", sng.Formatting.SourceText);
 
             // Outline
             xmlRoot["formatting"]["font"].AppendChild(xmlDoc.CreateElement("outline"));
@@ -215,7 +217,7 @@ namespace PraiseBase.Presenter.Persistence.PowerPraise
             {
                 backgrounds.Add(PowerPraiseFileUtil.MapBackground(PowerPraiseConstants.DefaultBackground), 0);
             }
-            foreach (string bg in backgrounds.Keys)
+            foreach (var bg in backgrounds.Keys)
             {
                 var tn = xmlDoc.CreateElement("file");
                 tn.InnerText = bg;
@@ -227,16 +229,23 @@ namespace PraiseBase.Presenter.Persistence.PowerPraise
             xmlRoot["formatting"]["linespacing"].AppendChild(xmlDoc.CreateElement("main"));
             xmlRoot["formatting"]["linespacing"].AppendChild(xmlDoc.CreateElement("translation"));
             xmlRoot["formatting"]["linespacing"]["main"].InnerText =
-                (sng.Formatting.MainLineSpacing > 0 ? sng.Formatting.MainLineSpacing : PowerPraiseConstants.Format.MainLineSpacing).ToString();
+                (sng.Formatting.MainLineSpacing > 0
+                    ? sng.Formatting.MainLineSpacing
+                    : PowerPraiseConstants.Format.MainLineSpacing).ToString();
             xmlRoot["formatting"]["linespacing"]["translation"].InnerText =
-                (sng.Formatting.MainLineSpacing > 0 ? sng.Formatting.TranslationLineSpacing : PowerPraiseConstants.Format.TranslationLineSpacing)
+                (sng.Formatting.MainLineSpacing > 0
+                    ? sng.Formatting.TranslationLineSpacing
+                    : PowerPraiseConstants.Format.TranslationLineSpacing)
                     .ToString();
 
             // Orientation
             xmlRoot["formatting"].AppendChild(xmlDoc.CreateElement("textorientation"));
 
             xmlRoot["formatting"]["textorientation"].AppendChild(xmlDoc.CreateElement("horizontal"));
-            switch (sng.Formatting.TextOrientation != null ? sng.Formatting.TextOrientation.Horizontal : HorizontalOrientation.Center)
+            switch (
+                sng.Formatting.TextOrientation != null
+                    ? sng.Formatting.TextOrientation.Horizontal
+                    : HorizontalOrientation.Center)
             {
                 case HorizontalOrientation.Left:
                     xmlRoot["formatting"]["textorientation"]["horizontal"].InnerText = "left";
@@ -252,7 +261,10 @@ namespace PraiseBase.Presenter.Persistence.PowerPraise
             }
 
             xmlRoot["formatting"]["textorientation"].AppendChild(xmlDoc.CreateElement("vertical"));
-            switch (sng.Formatting.TextOrientation != null ? sng.Formatting.TextOrientation.Vertical : VerticalOrientation.Middle)
+            switch (
+                sng.Formatting.TextOrientation != null
+                    ? sng.Formatting.TextOrientation.Vertical
+                    : VerticalOrientation.Middle)
             {
                 case VerticalOrientation.Top:
                     xmlRoot["formatting"]["textorientation"]["vertical"].InnerText = "top";
@@ -280,7 +292,8 @@ namespace PraiseBase.Presenter.Persistence.PowerPraise
             xmlRoot["formatting"]["borders"].AppendChild(xmlDoc.CreateElement("mainbottom"));
             xmlRoot["formatting"]["borders"]["mainbottom"].InnerText = sng.Formatting.Borders.TextBottom.ToString();
             xmlRoot["formatting"]["borders"].AppendChild(xmlDoc.CreateElement("copyrightbottom"));
-            xmlRoot["formatting"]["borders"]["copyrightbottom"].InnerText = sng.Formatting.Borders.CopyrightBottom.ToString();
+            xmlRoot["formatting"]["borders"]["copyrightbottom"].InnerText =
+                sng.Formatting.Borders.CopyrightBottom.ToString();
             xmlRoot["formatting"]["borders"].AppendChild(xmlDoc.CreateElement("sourcetop"));
             xmlRoot["formatting"]["borders"]["sourcetop"].InnerText = sng.Formatting.Borders.SourceTop.ToString();
             xmlRoot["formatting"]["borders"].AppendChild(xmlDoc.CreateElement("sourceright"));
@@ -307,7 +320,8 @@ namespace PraiseBase.Presenter.Persistence.PowerPraise
             return pos;
         }
 
-        private void applyFormatting(XmlDocument xmlDoc, XmlElement elem, String key, PowerPraiseSongFormatting.FontFormatting f)
+        private void ApplyFormatting(XmlDocument xmlDoc, XmlElement elem, string key,
+            PowerPraiseSongFormatting.FontFormatting f)
         {
             elem.AppendChild(xmlDoc.CreateElement(key));
             elem[key].AppendChild(xmlDoc.CreateElement("name"));

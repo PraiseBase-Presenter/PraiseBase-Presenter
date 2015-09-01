@@ -22,7 +22,7 @@
 
 namespace PraiseBase.Presenter.Persistence
 {
-    public interface ISongFileWriter<T> where T : ISongFile
+    public interface ISongFileWriter<in T> where T : ISongFile
     {
         void Save(string filename, T sng);
         string GetFileExtension();

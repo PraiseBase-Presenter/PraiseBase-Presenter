@@ -44,7 +44,7 @@ namespace PraiseBase.Presenter.Model
         /// <param name="idx">The slide index</param>
         public void Duplicate(int idx)
         {
-            Insert(idx, (T)this[idx].Clone());
+            Insert(idx, (T) this[idx].Clone());
         }
     }
 }

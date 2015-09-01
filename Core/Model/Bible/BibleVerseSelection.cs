@@ -26,31 +26,31 @@ namespace PraiseBase.Presenter.Model.Bible
 {
     public class BibleVerseSelection
     {
-        private readonly int endVerseNumber;
+        private readonly int _endVerseNumber;
 
         public BibleVerseSelection(BibleVerse start)
         {
             StartVerse = start;
-            endVerseNumber = start.Number;
+            _endVerseNumber = start.Number;
         }
 
         public BibleVerseSelection(BibleVerse start, BibleVerse end)
         {
             StartVerse = start;
-            endVerseNumber = end.Number;
+            _endVerseNumber = end.Number;
         }
 
         public BibleVerseSelection(BibleVerse start, int end)
         {
             StartVerse = start;
-            endVerseNumber = end;
+            _endVerseNumber = end;
         }
 
         public BibleVerse StartVerse { get; private set; }
 
         public BibleVerse EndVerse
         {
-            get { return StartVerse.Chapter.Verses[endVerseNumber - 1]; }
+            get { return StartVerse.Chapter.Verses[_endVerseNumber - 1]; }
         }
 
         public BibleChapter Chapter
@@ -63,7 +63,7 @@ namespace PraiseBase.Presenter.Model.Bible
             get
             {
                 var str = "";
-                for (var i = StartVerse.Number; i <= endVerseNumber; i++)
+                for (var i = StartVerse.Number; i <= _endVerseNumber; i++)
                 {
                     str += StartVerse.Chapter.Verses[i - 1] + Environment.NewLine;
                 }
@@ -74,8 +74,8 @@ namespace PraiseBase.Presenter.Model.Bible
         public override string ToString()
         {
             return StartVerse.Chapter.Book + " " + StartVerse.Chapter + "." +
-                   (endVerseNumber != 0 && StartVerse.Number != endVerseNumber
-                       ? StartVerse.Number + "-" + endVerseNumber
+                   (_endVerseNumber != 0 && StartVerse.Number != _endVerseNumber
+                       ? StartVerse.Number + "-" + _endVerseNumber
                        : StartVerse.Number.ToString());
         }
     }

@@ -20,7 +20,6 @@
  *
  */
 
-using System;
 using System.Collections.Generic;
 
 namespace PraiseBase.Presenter.Model
@@ -33,10 +32,10 @@ namespace PraiseBase.Presenter.Model
     {
         public Setlist()
         {
-            Items = new List<String>();
+            Items = new List<string>();
         }
 
-        public String Name { get; set; }
-        public List<String> Items { get; set; }
+        public string Name { get; set; }
+        public List<string> Items { get; set; }
     }
 }

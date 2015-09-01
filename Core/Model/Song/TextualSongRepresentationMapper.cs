@@ -6,19 +6,19 @@ using System.Text.RegularExpressions;
 namespace PraiseBase.Presenter.Model.Song
 {
     /// <summary>
-    /// Creates a textual representation of a song text (and vice-versa)
+    ///     Creates a textual representation of a song text (and vice-versa)
     /// </summary>
     public class TextualSongRepresentationMapper
     {
         public string Map(Song s)
         {
-            List<string> list = new List<string>();
+            var list = new List<string>();
             foreach (var p in s.Parts)
             {
-                for (int i = 0; i < p.Slides.Count; i++)
+                for (var i = 0; i < p.Slides.Count; i++)
                 {
                     var sl = p.Slides[i];
-                    var str = String.Empty;
+                    var str = string.Empty;
                     if (i == 0)
                     {
                         str += p.Caption + ": ";
@@ -27,19 +27,19 @@ namespace PraiseBase.Presenter.Model.Song
                     list.Add(str);
                 }
             }
-            return String.Join("--" + Environment.NewLine, list.ToArray());
-       }
+            return string.Join("--" + Environment.NewLine, list.ToArray());
+        }
 
         public void Map(string text, Song s)
         {
             s.Parts.Clear();
             s.PartSequence.Clear();
-            var lines = text.Split(new[] { Environment.NewLine }, StringSplitOptions.None);
+            var lines = text.Split(new[] {Environment.NewLine}, StringSplitOptions.None);
             SongPart p = null;
             SongSlide sl = null;
-            foreach (string l in lines)
+            foreach (var l in lines)
             {
-                string line = l;
+                var line = l;
                 string caption = null;
                 if (sl == null)
                 {
@@ -84,9 +84,9 @@ namespace PraiseBase.Presenter.Model.Song
 
         private void RemoveEmptyLineAtEnd(List<string> lines)
         {
-            int cnt = lines.Count;
+            var cnt = lines.Count;
             if (cnt == 0) return;
-            if (lines[cnt - 1].Trim() == String.Empty)
+            if (lines[cnt - 1].Trim() == string.Empty)
             {
                 lines.RemoveAt(cnt - 1);
                 RemoveEmptyLineAtEnd(lines);

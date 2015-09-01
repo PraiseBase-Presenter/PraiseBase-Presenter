@@ -54,10 +54,10 @@ namespace PraiseBase.Presenter.Presenter
     /// </summary>
     public partial class MainWindow : LocalizableForm
     {
-        private Timer diaTimer;
-        private List<String> imageSearchResults;
+        private Timer _diaTimer;
+        private List<String> _imageSearchResults;
 
-        private bool linkLayers = true;
+        private bool _linkLayers = true;
 
         private SongEditor _songEditor;
 
@@ -117,16 +117,16 @@ namespace PraiseBase.Presenter.Presenter
 
             LoadSongList();
 
-            imageTreeViewInit();
+            ImageTreeViewInit();
 
             trackBarFadeTime.Value = Settings.Default.ProjectionFadeTime / 500;
             labelFadeTime.Text = (trackBarFadeTime.Value * 0.5) + @" s";
 
             trackBarFadeTimeLayer1.Value = Settings.Default.ProjectionFadeTimeLayer1 / 500;
-            labelFadeTimeLayer1.Text = (trackBarFadeTimeLayer1.Value * 0.5) + " s";
+            labelFadeTimeLayer1.Text = (trackBarFadeTimeLayer1.Value * 0.5) + @" s";
 
-            linkLayers = Settings.Default.LinkLayers;
-            setLinkLayerUI();
+            _linkLayers = Settings.Default.LinkLayers;
+            SetLinkLayerUi();
 
             if (Settings.Default.SongSearchMode == SongSearchMode.Title)
             {
@@ -141,8 +141,10 @@ namespace PraiseBase.Presenter.Presenter
 
             foreach (var l in Constants.AvailableLanguages)
             {
-                ToolStripMenuItem selectLanguageToolStripMenuItem = new ToolStripMenuItem(l.DisplayName);
-                selectLanguageToolStripMenuItem.Tag = l;
+                ToolStripMenuItem selectLanguageToolStripMenuItem = new ToolStripMenuItem(l.DisplayName)
+                {
+                    Tag = l
+                };
                 selectLanguageToolStripMenuItem.Click += selectLanguageToolStripMenuItem_Click;
                 if (l.Name == Thread.CurrentThread.CurrentUICulture.Name)
                 {
@@ -183,7 +185,7 @@ namespace PraiseBase.Presenter.Presenter
                 _songManager.ReloadSongItem(item);
                 if (_songManager.CurrentSong == item)
                 {
-                    showCurrentSongDetails();
+                    ShowCurrentSongDetails();
                 }
             }
             else
@@ -341,7 +343,7 @@ namespace PraiseBase.Presenter.Presenter
                     listViewSongs.Items[0].Selected = true;
                     var key = (String) listViewSongs.SelectedItems[0].Tag;
                     _songManager.CurrentSong = _songManager.SongList[key];
-                    showCurrentSongDetails();
+                    ShowCurrentSongDetails();
                 }
                 catch (Exception e)
                 {
@@ -354,12 +356,7 @@ namespace PraiseBase.Presenter.Presenter
             listViewSongs.EndUpdate();
         }
 
-        private void radioSongSearchAll_CheckedChanged(object sender, EventArgs e)
-        {
-            SearchSongs(songSearchTextBox.Text);
-        }
-
-        private void toggleProjection(object sender, EventArgs e)
+        private void ToggleProjection(object sender, EventArgs e)
         {
             // Disable projection
             if (((ToolStripItem)sender).Name == "toolStripButtonProjectionOff"
@@ -476,7 +473,7 @@ namespace PraiseBase.Presenter.Presenter
                         if (_songManager.SongList.ContainsKey(key))
                         {
                             _songManager.CurrentSong = _songManager.SongList[key];
-                            showCurrentSongDetails();
+                            ShowCurrentSongDetails();
                             buttonSetListAdd.Enabled = true;
                         }
                         else
@@ -502,7 +499,7 @@ namespace PraiseBase.Presenter.Presenter
                 if (_songManager.SongList.ContainsKey(key) && (_songManager.CurrentSong == null || _songManager.CurrentSong.Filename != key))
                 {
                     _songManager.CurrentSong = _songManager.SongList[key];
-                    showCurrentSongDetails();
+                    ShowCurrentSongDetails();
 
                     buttonSetListAdd.Enabled = true;
                 }
@@ -544,16 +541,11 @@ namespace PraiseBase.Presenter.Presenter
 
                 string currentSongId = (string)listViewSetList.SelectedItems[0].Tag;
                 _songManager.CurrentSong = _songManager.SongList[currentSongId];
-                showCurrentSongDetails(previousSong, nextSong);
+                ShowCurrentSongDetails(previousSong, nextSong);
             }
         }
 
-        private void showCurrentSongDetails()
-        {
-            showCurrentSongDetails(null, null);
-        }
-
-        private void showCurrentSongDetails(Song previousSong, Song nextSong)
+        private void ShowCurrentSongDetails(Song previousSong = null, Song nextSong = null)
         {
             Application.DoEvents();
 
@@ -570,14 +562,7 @@ namespace PraiseBase.Presenter.Presenter
             if (_songManager.CurrentSong.Song.HasTranslation())
             {
                 toolStripButtonToggleTranslationText.Enabled = true;
-                if (_songManager.CurrentSong.SwitchTextAndTranlation)
-                {
-                    toolStripButtonToggleTranslationText.Image = Resources.translate_active;
-                }
-                else
-                {
-                    toolStripButtonToggleTranslationText.Image = Resources.translate;
-                }
+                toolStripButtonToggleTranslationText.Image = _songManager.CurrentSong.SwitchTextAndTranlation ? Resources.translate_active : Resources.translate;
             }
             else
             {
@@ -622,8 +607,8 @@ namespace PraiseBase.Presenter.Presenter
             {
                 ISlideTextFormattingMapper<Song> mapper = new SongSlideTextFormattingMapper();
                 mapper.Map(s, ref slideFormatting);
-                sourcePosition = s.SourcePosition;
-                copyrightPosition = s.CopyrightPosition;
+                sourcePosition = s.Formatting.SourcePosition;
+                copyrightPosition = s.Formatting.CopyrightPosition;
             }
             slideFormatting.ScaleFontSize = Settings.Default.ProjectionFontScaling;
             slideFormatting.SmoothShadow = Settings.Default.ProjectionSmoothShadow;
@@ -676,7 +661,7 @@ namespace PraiseBase.Presenter.Presenter
                     ProjectionManager.Instance.DisplayLayer(2, ssl);
                     if (bg != null && bg.GetType() == typeof(ImageBackground))
                     {
-                        imageHistoryAdd(((ImageBackground)bg).ImagePath);
+                        ImageHistoryAdd(((ImageBackground)bg).ImagePath);
                     }
                     listViewImageQueue.Items[0].Remove();
                 }
@@ -687,7 +672,7 @@ namespace PraiseBase.Presenter.Presenter
             }
 
                 // SHIFT pressed, use current slide
-            else if (!linkLayers ^ ((ModifierKeys & Keys.Shift) == Keys.Shift))
+            else if (!_linkLayers ^ ((ModifierKeys & Keys.Shift) == Keys.Shift))
             {
                 ProjectionManager.Instance.DisplayLayer(2, ssl);
             }
@@ -695,14 +680,16 @@ namespace PraiseBase.Presenter.Presenter
                 // Current slide + attached image
             else
             {
-                ImageLayer iml = new ImageLayer(Settings.Default.ProjectionBackColor);
-                iml.Image = _imgManager.GetImage(cs.Background);
+                ImageLayer iml = new ImageLayer(Settings.Default.ProjectionBackColor)
+                {
+                    Image = _imgManager.GetImage(cs.Background)
+                };
                 ProjectionManager.Instance.DisplayLayer(1, iml, Settings.Default.ProjectionFadeTimeLayer1);
                 ProjectionManager.Instance.DisplayLayer(2, ssl);
 
                 if (cs.Background != null && cs.Background.GetType() == typeof(ImageBackground))
                 {
-                    imageHistoryAdd(((ImageBackground)cs.Background).ImagePath);
+                    ImageHistoryAdd(((ImageBackground)cs.Background).ImagePath);
                 }
             }
         }
@@ -725,9 +712,11 @@ namespace PraiseBase.Presenter.Presenter
             if ((ModifierKeys & Keys.Control) == Keys.Control)
             {
                 listViewImageQueue.LargeImageList.Images.Add(_imgManager.GetThumb(e.Background));
-                var lvi = new ListViewItem("");
-                lvi.Tag = e.Background;
-                lvi.ImageIndex = listViewImageQueue.LargeImageList.Images.Count - 1;
+                var lvi = new ListViewItem("")
+                {
+                    Tag = e.Background,
+                    ImageIndex = listViewImageQueue.LargeImageList.Images.Count - 1
+                };
                 listViewImageQueue.Items.Add(lvi);
             }
 
@@ -736,25 +725,27 @@ namespace PraiseBase.Presenter.Presenter
             {
                 if (e.Background != null && e.Background.GetType() == typeof(ImageBackground))
                 {
-                    imageFavoriteAdd(((ImageBackground)e.Background).ImagePath);
+                    ImageFavoriteAdd(((ImageBackground)e.Background).ImagePath);
                 }
             }
             else
             {
                 // Hide text if layers are linked OR shift is pressed and the layers are not linked
-                if (!(!linkLayers ^ ((ModifierKeys & Keys.Shift) == Keys.Shift)))
+                if (!(!_linkLayers ^ ((ModifierKeys & Keys.Shift) == Keys.Shift)))
                 {
                     ProjectionManager.Instance.HideLayer(2);
                 }
 
                 // Show image
-                ImageLayer iml = new ImageLayer(Settings.Default.ProjectionBackColor);
-                iml.Image = _imgManager.GetImage(e.Background);
+                ImageLayer iml = new ImageLayer(Settings.Default.ProjectionBackColor)
+                {
+                    Image = _imgManager.GetImage(e.Background)
+                };
                 ProjectionManager.Instance.DisplayLayer(1, iml, Settings.Default.ProjectionFadeTimeLayer1);
 
                 if (e.Background != null && e.Background.GetType() == typeof(ImageBackground))
                 {
-                    imageHistoryAdd(((ImageBackground)e.Background).ImagePath);
+                    ImageHistoryAdd(((ImageBackground)e.Background).ImagePath);
                 }
             }
         }
@@ -776,7 +767,7 @@ namespace PraiseBase.Presenter.Presenter
             Process.Start(Settings.Default.Weburl);
         }
 
-        public void imageTreeViewInit()
+        public void ImageTreeViewInit()
         {
             string rootDir = _imgManager.ImageDirPath;
             treeViewImageDirectories.Nodes.Clear();
@@ -785,18 +776,22 @@ namespace PraiseBase.Presenter.Presenter
             treeViewImageDirectories.Nodes.Add(StringResources.SearchResults);
             treeViewImageDirectories.SelectedNode = treeViewImageDirectories.Nodes[0];
 
-            imageSearchResults = new List<String>();
+            _imageSearchResults = new List<String>();
 
-            var iml = new ImageList();
-            iml.ImageSize = Settings.Default.ThumbSize;
-            iml.ColorDepth = ColorDepth.Depth32Bit;
+            var iml = new ImageList
+            {
+                ImageSize = Settings.Default.ThumbSize,
+                ColorDepth = ColorDepth.Depth32Bit
+            };
             listViewImageHistory.LargeImageList = iml;
             listViewImageHistory.TileSize = new Size(Settings.Default.ThumbSize.Width + 8,
                                                      Settings.Default.ThumbSize.Height + 5);
 
-            var iml2 = new ImageList();
-            iml2.ImageSize = Settings.Default.ThumbSize;
-            iml2.ColorDepth = ColorDepth.Depth32Bit;
+            var iml2 = new ImageList
+            {
+                ImageSize = Settings.Default.ThumbSize,
+                ColorDepth = ColorDepth.Depth32Bit
+            };
             listViewImageQueue.LargeImageList = iml2;
             listViewImageQueue.TileSize = new Size(Settings.Default.ThumbSize.Width + 8,
                                                    Settings.Default.ThumbSize.Height + 5);
@@ -804,9 +799,11 @@ namespace PraiseBase.Presenter.Presenter
             if (Settings.Default.ImageFavorites == null)
                 Settings.Default.ImageFavorites = new ArrayList();
 
-            var iml3 = new ImageList();
-            iml3.ImageSize = Settings.Default.ThumbSize;
-            iml3.ColorDepth = ColorDepth.Depth32Bit;
+            var iml3 = new ImageList
+            {
+                ImageSize = Settings.Default.ThumbSize,
+                ColorDepth = ColorDepth.Depth32Bit
+            };
             listViewFavorites.LargeImageList = iml3;
             listViewFavorites.TileSize = new Size(Settings.Default.ThumbSize.Width + 8,
                                                   Settings.Default.ThumbSize.Height + 5);
@@ -814,13 +811,15 @@ namespace PraiseBase.Presenter.Presenter
             foreach (string relImagePath in Settings.Default.ImageFavorites)
             {
                 listViewFavorites.LargeImageList.Images.Add(_imgManager.GetThumbFromRelPath(relImagePath));
-                var lvi = new ListViewItem("");
-                lvi.Tag = relImagePath;
-                lvi.ImageIndex = listViewFavorites.LargeImageList.Images.Count - 1;
+                var lvi = new ListViewItem("")
+                {
+                    Tag = relImagePath,
+                    ImageIndex = listViewFavorites.LargeImageList.Images.Count - 1
+                };
                 listViewFavorites.Items.Add(lvi);
                 listViewFavorites.EnsureVisible(listViewFavorites.Items.Count - 1);
             }
-            tabPageImageFavorites.Text = StringResources.Favorites + " (" + Settings.Default.ImageFavorites.Count + ")";
+            tabPageImageFavorites.Text = StringResources.Favorites + @" (" + Settings.Default.ImageFavorites.Count + @")";
         }
 
         public void PopulateTreeView(string directoryValue, TreeNode parentNode)
@@ -831,8 +830,10 @@ namespace PraiseBase.Presenter.Presenter
                 {
                     if (parentNode == null)
                     {
-                        var myNode = new TreeNode(StringResources.TopDirectory);
-                        myNode.Tag = "";
+                        var myNode = new TreeNode(StringResources.TopDirectory)
+                        {
+                            Tag = ""
+                        };
                         treeViewImageDirectories.Nodes.Add(myNode);
                         parentNode = myNode;
                     }
@@ -848,9 +849,11 @@ namespace PraiseBase.Presenter.Presenter
                             string dName = Path.GetFileName(directory);
                             if (dName.Substring(0, 1) != "[" && dName.Substring(0, 1) != ".")
                             {
-                                var myNode = new TreeNode(dName);
+                                var myNode = new TreeNode(dName)
+                                {
+                                    Tag = directory.Substring(subLen)
+                                };
 
-                                myNode.Tag = directory.Substring(subLen);
                                 if (parentNode == null)
                                     treeViewImageDirectories.Nodes.Add(myNode);
                                 else
@@ -882,20 +885,24 @@ namespace PraiseBase.Presenter.Presenter
                 // Search
                 if (treeViewImageDirectories.SelectedNode.Level == 0 && treeViewImageDirectories.SelectedNode.Index == treeViewImageDirectories.Nodes.Count - 1)
                 {
-                    var imList = new ImageList();
-                    imList.ImageSize = Settings.Default.ThumbSize;
-                    imList.ColorDepth = ColorDepth.Depth32Bit;
+                    var imList = new ImageList
+                    {
+                        ImageSize = Settings.Default.ThumbSize,
+                        ColorDepth = ColorDepth.Depth32Bit
+                    };
 
                     var lviList = new List<ListViewItem>();
 
                     string pathPrefix = _imgManager.ThumbDirPath + Path.DirectorySeparatorChar;
                     int i = 0;
 
-                    foreach (string file in imageSearchResults)
+                    foreach (string file in _imageSearchResults)
                     {
-                        var lvi = new ListViewItem(Path.GetFileNameWithoutExtension(file));
-                        lvi.Tag = file;
-                        lvi.ImageIndex = i;
+                        var lvi = new ListViewItem(Path.GetFileNameWithoutExtension(file))
+                        {
+                            Tag = file,
+                            ImageIndex = i
+                        };
                         imList.Images.Add(Image.FromFile(pathPrefix + file));
                         lviList.Add(lvi);
                         i++;
@@ -903,7 +910,7 @@ namespace PraiseBase.Presenter.Presenter
                     listViewDirectoryImages.Items.AddRange(lviList.ToArray());
                     listViewDirectoryImages.LargeImageList = imList;
 
-                    labelImgDirName.Text = StringResources.SearchResults + " (" + i + " " + StringResources.Images + ")";
+                    labelImgDirName.Text = StringResources.SearchResults + @" (" + i + @" " + StringResources.Images + @")";
                 }
                 else
                 {
@@ -912,17 +919,21 @@ namespace PraiseBase.Presenter.Presenter
 
                     if (Directory.Exists(imDir))
                     {
-                        var imList = new ImageList();
-                        imList.ImageSize = Settings.Default.ThumbSize;
-                        imList.ColorDepth = ColorDepth.Depth32Bit;
+                        var imList = new ImageList
+                        {
+                            ImageSize = Settings.Default.ThumbSize,
+                            ColorDepth = ColorDepth.Depth32Bit
+                        };
 
                         string[] songFilePaths = Directory.GetFiles(imDir, "*.jpg", SearchOption.TopDirectoryOnly);
                         int i = 0;
                         foreach (string file in songFilePaths)
                         {
-                            var lvi = new ListViewItem(Path.GetFileNameWithoutExtension(file));
-                            lvi.Tag = relativeImageDir + Path.GetFileName(file);
-                            lvi.ImageIndex = i;
+                            var lvi = new ListViewItem(Path.GetFileNameWithoutExtension(file))
+                            {
+                                Tag = relativeImageDir + Path.GetFileName(file),
+                                ImageIndex = i
+                            };
                             listViewDirectoryImages.Items.Add(lvi);
                             imList.Images.Add(Image.FromFile(file));
                             i++;
@@ -939,7 +950,7 @@ namespace PraiseBase.Presenter.Presenter
                             categoryName = StringResources.Category + " '" + Path.GetFileName(((string)treeViewImageDirectories.SelectedNode.Tag));
                         }
 
-                        labelImgDirName.Text = categoryName + "' (" + i + " " + StringResources.Images + "):";
+                        labelImgDirName.Text = categoryName + @"' (" + i + @" " + StringResources.Images + @"):";
                     }
                 }
 
@@ -960,9 +971,11 @@ namespace PraiseBase.Presenter.Presenter
                 {
                     listViewImageQueue.LargeImageList.Images.Add(
                         _imgManager.GetThumbFromRelPath((string)listViewDirectoryImages.Items[idx].Tag));
-                    var lvi = new ListViewItem("");
-                    lvi.Tag = listViewDirectoryImages.Items[idx].Tag;
-                    lvi.ImageIndex = listViewImageQueue.LargeImageList.Images.Count - 1;
+                    var lvi = new ListViewItem("")
+                    {
+                        Tag = listViewDirectoryImages.Items[idx].Tag,
+                        ImageIndex = listViewImageQueue.LargeImageList.Images.Count - 1
+                    };
                     listViewImageQueue.Items.Add(lvi);
 
                     //listViewImageQueue.EnsureVisible(listViewImageHistory.Items.Count - 1);
@@ -971,29 +984,31 @@ namespace PraiseBase.Presenter.Presenter
                 // Favorite
                 else if ((ModifierKeys & Keys.Alt) == Keys.Alt)
                 {
-                    imageFavoriteAdd((string)listViewDirectoryImages.Items[idx].Tag);
+                    ImageFavoriteAdd((string)listViewDirectoryImages.Items[idx].Tag);
                 }
                 else
                 {
                     // Linked layers
                     if (
-                        !(!linkLayers ^
+                        !(!_linkLayers ^
                            ((ModifierKeys & Keys.Shift) == Keys.Shift && _songManager.CurrentSong != null)))
                     {
                         ProjectionManager.Instance.HideLayer(2, Settings.Default.ProjectionFadeTime);
                     }
 
-                    ImageLayer iml = new ImageLayer(Settings.Default.ProjectionBackColor);
-                    iml.Image = _imgManager.GetImageFromRelPath((string)listViewDirectoryImages.Items[idx].Tag);
+                    ImageLayer iml = new ImageLayer(Settings.Default.ProjectionBackColor)
+                    {
+                        Image = _imgManager.GetImageFromRelPath((string) listViewDirectoryImages.Items[idx].Tag)
+                    };
                     ProjectionManager.Instance.DisplayLayer(1, iml, Settings.Default.ProjectionFadeTimeLayer1);
 
                     // Add image to history
-                    imageHistoryAdd((string)listViewDirectoryImages.Items[idx].Tag);
+                    ImageHistoryAdd((string)listViewDirectoryImages.Items[idx].Tag);
                 }
             }
         }
 
-        private void imageHistoryAdd(string relImagePath)
+        private void ImageHistoryAdd(string relImagePath)
         {
             if (listViewImageHistory.Items.Count == 0 ||
                 (string)listViewImageHistory.Items[listViewImageHistory.Items.Count - 1].Tag != relImagePath)
@@ -1009,38 +1024,42 @@ namespace PraiseBase.Presenter.Presenter
                 if (img != null)
                 {
                     listViewImageHistory.LargeImageList.Images.Add(img);
-                    var lvi = new ListViewItem("");
-                    lvi.Tag = relImagePath;
-                    lvi.ImageIndex = listViewImageHistory.LargeImageList.Images.Count - 1;
+                    var lvi = new ListViewItem("")
+                    {
+                        Tag = relImagePath,
+                        ImageIndex = listViewImageHistory.LargeImageList.Images.Count - 1
+                    };
                     listViewImageHistory.Items.Add(lvi);
                     listViewImageHistory.EnsureVisible(listViewImageHistory.Items.Count - 1);
                 }
             }
         }
 
-        private void imageFavoriteAdd(string relImagePath)
+        private void ImageFavoriteAdd(string relImagePath)
         {
             if (!Settings.Default.ImageFavorites.Contains(relImagePath))
             {
                 listViewFavorites.LargeImageList.Images.Add(_imgManager.GetThumbFromRelPath(relImagePath));
-                var lvi = new ListViewItem("");
-                lvi.Tag = relImagePath;
-                lvi.ImageIndex = listViewFavorites.LargeImageList.Images.Count - 1;
+                var lvi = new ListViewItem("")
+                {
+                    Tag = relImagePath,
+                    ImageIndex = listViewFavorites.LargeImageList.Images.Count - 1
+                };
                 listViewFavorites.Items.Add(lvi);
                 listViewFavorites.EnsureVisible(listViewFavorites.Items.Count - 1);
                 Settings.Default.ImageFavorites.Add(relImagePath);
                 Settings.Default.Save();
-                tabPageImageFavorites.Text = StringResources.Favorites +  " (" + Settings.Default.ImageFavorites.Count + ")";
+                tabPageImageFavorites.Text = StringResources.Favorites +  @" (" + Settings.Default.ImageFavorites.Count + @")";
             }
         }
 
-        private void imageFavoriterRemove(string relImagePath)
+        private void ImageFavoriterRemove(string relImagePath)
         {
             if (Settings.Default.ImageFavorites.Contains(relImagePath))
             {
                 Settings.Default.ImageFavorites.Remove(relImagePath);
                 Settings.Default.Save();
-                tabPageImageFavorites.Text = StringResources.Favorites + " (" + Settings.Default.ImageFavorites.Count + ")";
+                tabPageImageFavorites.Text = StringResources.Favorites + @" (" + Settings.Default.ImageFavorites.Count + @")";
             }
         }
 
@@ -1051,7 +1070,7 @@ namespace PraiseBase.Presenter.Presenter
 
         private void ReloadImageList()
         {
-            imageTreeViewInit();
+            ImageTreeViewInit();
             listViewDirectoryImages.Items.Clear();
             GC.Collect();
         }
@@ -1071,13 +1090,13 @@ namespace PraiseBase.Presenter.Presenter
 
             if (dlg.ShowDialog() == DialogResult.OK)
             {
-                loadDias(dlg.SelectedPath);
+                LoadDias(dlg.SelectedPath);
                 labelDiaDirectory.Text = dlg.SelectedPath;
                 listViewDias.Tag = dlg.SelectedPath;
             }
         }
 
-        private void loadDias(string searchDir)
+        private void LoadDias(string searchDir)
         {
             if (Directory.Exists(searchDir))
             {
@@ -1087,9 +1106,11 @@ namespace PraiseBase.Presenter.Presenter
                     listViewDias.LargeImageList.Dispose();
                 }
 
-                var imList = new ImageList();
-                imList.ImageSize = Settings.Default.ThumbSize;
-                imList.ColorDepth = ColorDepth.Depth32Bit;
+                var imList = new ImageList
+                {
+                    ImageSize = Settings.Default.ThumbSize,
+                    ColorDepth = ColorDepth.Depth32Bit
+                };
 
                 string[] extensions = { "*.jpg", "*.png", "*.bmp", "*.gif" };
                 int i = 0;
@@ -1098,10 +1119,12 @@ namespace PraiseBase.Presenter.Presenter
                     string[] filePaths = Directory.GetFiles(searchDir, ext, SearchOption.TopDirectoryOnly);
                     foreach (string file in filePaths)
                     {
-                        var lvi = new ListViewItem(Path.GetFileNameWithoutExtension(file));
-                        lvi.Tag = file;
-                        lvi.ImageIndex = i;
-                        lvi.Checked = true;
+                        var lvi = new ListViewItem(Path.GetFileNameWithoutExtension(file))
+                        {
+                            Tag = file,
+                            ImageIndex = i,
+                            Checked = true
+                        };
                         listViewDias.Items.Add(lvi);
                         i++;
                     }
@@ -1139,9 +1162,9 @@ namespace PraiseBase.Presenter.Presenter
 
         private void button2_Click(object sender, EventArgs e)
         {
-            if (diaTimer != null && diaTimer.Enabled)
+            if (_diaTimer != null && _diaTimer.Enabled)
             {
-                diaTimer.Stop();
+                _diaTimer.Stop();
                 ProjectionManager.Instance.HideLayer(1);
                 buttonDiaShow.Text = StringResources.StartSlideshow;
                 return;
@@ -1168,9 +1191,11 @@ namespace PraiseBase.Presenter.Presenter
                 duration = duration > 0 ? duration : 3;
                 textBoxDiaDuration.Text = duration.ToString();
 
-                diaTimer = new Timer();
-                diaTimer.Interval = duration * 1000;
-                diaTimer.Tick += diaTimer_Tick;
+                _diaTimer = new Timer
+                {
+                    Interval = duration*1000
+                };
+                _diaTimer.Tick += diaTimer_Tick;
 
                 var diaStack = new Queue<string>();
                 foreach (ListViewItem lvi in listViewDias.Items)
@@ -1185,11 +1210,13 @@ namespace PraiseBase.Presenter.Presenter
                     MessageBox.Show(StringResources.NoImagesSelected, StringResources.Error);
                     return;
                 }
-                diaTimer.Tag = diaStack;
-                ImageLayer iml = new ImageLayer(Settings.Default.ProjectionBackColor);
-                iml.Image = Image.FromFile(diaStack.Dequeue());
+                _diaTimer.Tag = diaStack;
+                ImageLayer iml = new ImageLayer(Settings.Default.ProjectionBackColor)
+                {
+                    Image = Image.FromFile(diaStack.Dequeue())
+                };
                 ProjectionManager.Instance.DisplayLayer(1, iml, Settings.Default.ProjectionFadeTimeLayer1);
-                diaTimer.Start();
+                _diaTimer.Start();
             }
         }
 
@@ -1202,8 +1229,10 @@ namespace PraiseBase.Presenter.Presenter
                 buttonDiaShow.Text = StringResources.StartSlideshow;
                 return;
             }
-            ImageLayer iml = new ImageLayer(Settings.Default.ProjectionBackColor);
-            iml.Image = Image.FromFile(((Queue<string>)((Timer)sender).Tag).Dequeue());
+            ImageLayer iml = new ImageLayer(Settings.Default.ProjectionBackColor)
+            {
+                Image = Image.FromFile(((Queue<string>) ((Timer) sender).Tag).Dequeue())
+            };
             ProjectionManager.Instance.DisplayLayer(1, iml, Settings.Default.ProjectionFadeTimeLayer1);
         }
 
@@ -1243,26 +1272,30 @@ namespace PraiseBase.Presenter.Presenter
                 {
                     listViewImageQueue.LargeImageList.Images.Add(
                         _imgManager.GetThumbFromRelPath((string)listViewImageHistory.Items[idx].Tag));
-                    var lvi = new ListViewItem("");
-                    lvi.Tag = listViewImageHistory.Items[idx].Tag;
-                    lvi.ImageIndex = listViewImageQueue.LargeImageList.Images.Count - 1;
+                    var lvi = new ListViewItem("")
+                    {
+                        Tag = listViewImageHistory.Items[idx].Tag,
+                        ImageIndex = listViewImageQueue.LargeImageList.Images.Count - 1
+                    };
                     listViewImageQueue.Items.Add(lvi);
                 }
                 else if ((ModifierKeys & Keys.Alt) == Keys.Alt)
                 {
-                    imageFavoriteAdd((string)listViewImageHistory.Items[idx].Tag);
+                    ImageFavoriteAdd((string)listViewImageHistory.Items[idx].Tag);
                 }
                 else
                 {
                     if (
-                        !(!linkLayers ^
+                        !(!_linkLayers ^
                           ((ModifierKeys & Keys.Shift) == Keys.Shift && _songManager.CurrentSong != null)))
                     {
                         ProjectionManager.Instance.HideLayer(2);
                     }
 
-                    ImageLayer iml = new ImageLayer(Settings.Default.ProjectionBackColor);
-                    iml.Image = _imgManager.GetImageFromRelPath((string)listViewImageHistory.Items[idx].Tag);
+                    ImageLayer iml = new ImageLayer(Settings.Default.ProjectionBackColor)
+                    {
+                        Image = _imgManager.GetImageFromRelPath((string) listViewImageHistory.Items[idx].Tag)
+                    };
                     ProjectionManager.Instance.DisplayLayer(1, iml, Settings.Default.ProjectionFadeTimeLayer1);
                 }
             }
@@ -1281,12 +1314,12 @@ namespace PraiseBase.Presenter.Presenter
             if (needle != String.Empty && needle.Length > 2)
             {
                 treeViewImageDirectories.SelectedNode = null;
-                imageSearchResults.Clear();
+                _imageSearchResults.Clear();
                 Console.WriteLine("Search: "+ needle);
                 foreach (string ims in _imgManager.SearchImages(needle))
                 {
                     Console.WriteLine("Found: " + ims);
-                    imageSearchResults.Add(ims);
+                    _imageSearchResults.Add(ims);
                 }
                 treeViewImageDirectories.SelectedNode = treeViewImageDirectories.Nodes[treeViewImageDirectories.Nodes.Count - 1];
             }
@@ -1433,34 +1466,25 @@ namespace PraiseBase.Presenter.Presenter
                 }
 
                 int idx = listViewImageQueue.SelectedIndices[0];
-                ImageLayer iml = new ImageLayer(Settings.Default.ProjectionBackColor);
-                iml.Image = _imgManager.GetImageFromRelPath((string)listViewImageQueue.Items[idx].Tag);
+                ImageLayer iml = new ImageLayer(Settings.Default.ProjectionBackColor)
+                {
+                    Image = _imgManager.GetImageFromRelPath((string) listViewImageQueue.Items[idx].Tag)
+                };
                 ProjectionManager.Instance.DisplayLayer(1, iml, Settings.Default.ProjectionFadeTimeLayer1);
             }
         }
 
         private void button2_Click_1(object sender, EventArgs e)
         {
-            linkLayers = !linkLayers;
-            Settings.Default.LinkLayers = linkLayers;
+            _linkLayers = !_linkLayers;
+            Settings.Default.LinkLayers = _linkLayers;
             Settings.Default.Save();
-            setLinkLayerUI();
+            SetLinkLayerUi();
         }
 
-        private void setLinkLayerUI()
+        private void SetLinkLayerUi()
         {
-            if (linkLayers)
-            {
-                buttonToggleLayerMode.Image = Resources.link;
-
-                //label3.Text = "Text und Bild sind verknüpft";
-            }
-            else
-            {
-                buttonToggleLayerMode.Image = Resources.unlink;
-
-                //label3.Text = "Text und Bild sind unabhängig";
-            }
+            buttonToggleLayerMode.Image = _linkLayers ? Resources.link : Resources.unlink;
         }
 
         private void listViewFavorites_SelectedIndexChanged(object sender, EventArgs e)
@@ -1475,32 +1499,36 @@ namespace PraiseBase.Presenter.Presenter
                 {
                     listViewImageQueue.LargeImageList.Images.Add(
                         _imgManager.GetThumbFromRelPath((string)listViewFavorites.Items[idx].Tag));
-                    var lvi = new ListViewItem("");
-                    lvi.Tag = listViewFavorites.Items[idx].Tag;
-                    lvi.ImageIndex = listViewImageQueue.LargeImageList.Images.Count - 1;
+                    var lvi = new ListViewItem("")
+                    {
+                        Tag = listViewFavorites.Items[idx].Tag,
+                        ImageIndex = listViewImageQueue.LargeImageList.Images.Count - 1
+                    };
                     listViewImageQueue.Items.Add(lvi);
                 }
 
                 // ALT remove from favorites
                 else if ((ModifierKeys & Keys.Alt) == Keys.Alt)
                 {
-                    imageFavoriterRemove((string)listViewFavorites.Items[idx].Tag);
+                    ImageFavoriterRemove((string)listViewFavorites.Items[idx].Tag);
                     listViewFavorites.Items.RemoveAt(idx);
                 }
                 else
                 {
                     if (
-                        !(!linkLayers ^
+                        !(!_linkLayers ^
                            ((ModifierKeys & Keys.Shift) == Keys.Shift && _songManager.CurrentSong != null)))
                     {
                         ProjectionManager.Instance.HideLayer(2);
                     }
-                    ImageLayer iml = new ImageLayer(Settings.Default.ProjectionBackColor);
-                    iml.Image = _imgManager.GetImageFromRelPath((string)listViewFavorites.Items[idx].Tag);
+                    ImageLayer iml = new ImageLayer(Settings.Default.ProjectionBackColor)
+                    {
+                        Image = _imgManager.GetImageFromRelPath((string) listViewFavorites.Items[idx].Tag)
+                    };
                     ProjectionManager.Instance.DisplayLayer(2, iml);
 
                     // Add image to history
-                    imageHistoryAdd((string)listViewFavorites.Items[idx].Tag);
+                    ImageHistoryAdd((string)listViewFavorites.Items[idx].Tag);
                 }
             }
         }
@@ -1520,8 +1548,10 @@ namespace PraiseBase.Presenter.Presenter
             
             slideFormatting.LineWrap = true;
 
-            TextLayer lt = new TextLayer(slideFormatting);
-            lt.MainText = text.Split(new[] { Environment.NewLine }, StringSplitOptions.None);
+            TextLayer lt = new TextLayer(slideFormatting)
+            {
+                MainText = text.Split(new[] {Environment.NewLine}, StringSplitOptions.None)
+            };
 
             ProjectionManager.Instance.DisplayLayer(2, lt);
         }
@@ -1571,13 +1601,13 @@ namespace PraiseBase.Presenter.Presenter
 
         private void trackBarFadeTime_Scroll(object sender, EventArgs e)
         {
-            labelFadeTime.Text = (trackBarFadeTime.Value * 0.5) + " s";
+            labelFadeTime.Text = (trackBarFadeTime.Value * 0.5) + @" s";
             Settings.Default.ProjectionFadeTime = trackBarFadeTime.Value * 500;
         }
 
         private void trackBarFadeTimeLayer1_Scroll(object sender, EventArgs e)
         {
-            labelFadeTimeLayer1.Text = (trackBarFadeTimeLayer1.Value * 0.5) + " s";
+            labelFadeTimeLayer1.Text = (trackBarFadeTimeLayer1.Value * 0.5) + @" s";
             Settings.Default.ProjectionFadeTimeLayer1 = trackBarFadeTimeLayer1.Value * 500;
         }
 
@@ -1587,15 +1617,15 @@ namespace PraiseBase.Presenter.Presenter
             {
                 var key = (string) listViewSongHistory.SelectedItems[0].Tag;
                 _songManager.CurrentSong = _songManager.SongList[key];
-                showCurrentSongDetails();
+                ShowCurrentSongDetails();
             }
         }
 
         #region Bible
 
-        private int bookIdx = -1, chapterIdx = -1;
-        private int verseIdx = -1, verseToIdx = -1;
-        BibleManager.BiblePassageSearchResult biblePassageSearchResult;
+        private int _bookIdx = -1, _chapterIdx = -1;
+        private int _verseIdx = -1, _verseToIdx = -1;
+        BibleManager.BiblePassageSearchResult _biblePassageSearchResult;
 
         private void LoadBiblesInBackground()
         {
@@ -1650,9 +1680,9 @@ namespace PraiseBase.Presenter.Presenter
                     listBoxBibleBook.Items.Add(bk);
                 }
 
-                if (bookIdx >= 0 && bookIdx < listBoxBibleBook.Items.Count)
+                if (_bookIdx >= 0 && _bookIdx < listBoxBibleBook.Items.Count)
                 {
-                    listBoxBibleBook.SelectedIndex = bookIdx;
+                    listBoxBibleBook.SelectedIndex = _bookIdx;
                 }
             }
 
@@ -1676,12 +1706,12 @@ namespace PraiseBase.Presenter.Presenter
                 listBoxBibleChapter.Items.Add(cp);
             }
 
-            if (bookIdx == listBoxBibleBook.SelectedIndex && chapterIdx >= 0)
+            if (_bookIdx == listBoxBibleBook.SelectedIndex && _chapterIdx >= 0)
             {
-                listBoxBibleChapter.SelectedIndex = chapterIdx;
+                listBoxBibleChapter.SelectedIndex = _chapterIdx;
             }
 
-            bookIdx = listBoxBibleBook.SelectedIndex;
+            _bookIdx = listBoxBibleBook.SelectedIndex;
         }
 
         private void listBoxBibleChapter_SelectedIndexChanged(object sender, EventArgs e)
@@ -1701,13 +1731,13 @@ namespace PraiseBase.Presenter.Presenter
                 listBoxBibleVerseTo.Items.Add(v);
             }
 
-            if (chapterIdx == listBoxBibleChapter.SelectedIndex && verseIdx >= 0)
+            if (_chapterIdx == listBoxBibleChapter.SelectedIndex && _verseIdx >= 0)
             {
-                listBoxBibleVerse.SelectedIndex = verseIdx;
+                listBoxBibleVerse.SelectedIndex = _verseIdx;
                 buttonBibleTextShow.Enabled = true;
             }
 
-            chapterIdx = listBoxBibleChapter.SelectedIndex;
+            _chapterIdx = listBoxBibleChapter.SelectedIndex;
         }
 
         private void listBoxBibleVerse_SelectedIndexChanged(object sender, EventArgs e)
@@ -1723,14 +1753,14 @@ namespace PraiseBase.Presenter.Presenter
                 }
             }
 
-            if (verseIdx == listBoxBibleVerse.SelectedIndex && verseToIdx >= 0)
+            if (_verseIdx == listBoxBibleVerse.SelectedIndex && _verseToIdx >= 0)
             {
-                listBoxBibleVerseTo.SelectedIndex = verseToIdx;
+                listBoxBibleVerseTo.SelectedIndex = _verseToIdx;
             }
             else
                 listBoxBibleVerseTo.SelectedIndex = 0;
 
-            verseIdx = listBoxBibleVerse.SelectedIndex;
+            _verseIdx = listBoxBibleVerse.SelectedIndex;
 
             buttonBibleTextShow.Enabled = true;
         }
@@ -1745,7 +1775,7 @@ namespace PraiseBase.Presenter.Presenter
                 labelBibleTextName.Text = vs.ToString();
                 textBoxBibleText.Text = vs.Text;
 
-                verseToIdx = listBoxBibleVerseTo.SelectedIndex;
+                _verseToIdx = listBoxBibleVerseTo.SelectedIndex;
 
                 buttonAddToBibleVerseList.Enabled = true;
             }
@@ -1762,10 +1792,11 @@ namespace PraiseBase.Presenter.Presenter
                 ((BibleVerse)listBoxBibleVerseTo.SelectedItem));
 
             BibleManager.BibleItem bibleItem = ((KeyValuePair<String, BibleManager.BibleItem>)comboBoxBible.SelectedItem).Value;
-            List<string> copyrightItems = new List<string>();
-            copyrightItems.Add(bibleItem.Bible.Title);
-            if (bibleItem.Bible.Publisher != null
-                && bibleItem.Bible.Publisher != String.Empty
+            List<string> copyrightItems = new List<string>
+            {
+                bibleItem.Bible.Title
+            };
+            if (!string.IsNullOrEmpty(bibleItem.Bible.Publisher)
                 && bibleItem.Bible.Publisher != "nobody")
             {
                 copyrightItems.Add(bibleItem.Bible.Publisher);
@@ -1783,11 +1814,12 @@ namespace PraiseBase.Presenter.Presenter
 
             slideFormatting.LineWrap = true;
 
-            TextLayer lt = new TextLayer(slideFormatting);
-            
-            lt.MainText = text.Split(new[] { Environment.NewLine }, StringSplitOptions.None);
-            lt.HeaderText = new[] { title };
-            lt.FooterText = copyrightItems.ToArray();
+            TextLayer lt = new TextLayer(slideFormatting)
+            {
+                MainText = text.Split(new[] {Environment.NewLine}, StringSplitOptions.None),
+                HeaderText = new[] {title},
+                FooterText = copyrightItems.ToArray()
+            };
 
             ProjectionManager.Instance.DisplayLayer(2, lt);
         }
@@ -1796,8 +1828,10 @@ namespace PraiseBase.Presenter.Presenter
         {
             var vs = new BibleVerseSelection(((BibleVerse)listBoxBibleVerse.SelectedItem),
                                                  ((BibleVerse)listBoxBibleVerseTo.SelectedItem));
-            var lvi = new ListViewItem(vs.ToString());
-            lvi.Tag = vs;
+            var lvi = new ListViewItem(vs.ToString())
+            {
+                Tag = vs
+            };
             listViewBibleVerseList.Items.Add(lvi);
             listViewBibleVerseList.Columns[0].Width = -2;
         }
@@ -1850,14 +1884,14 @@ namespace PraiseBase.Presenter.Presenter
                 {
                     BibleManager.BibleItem bibleItem = ((KeyValuePair<String,BibleManager.BibleItem>)comboBoxBible.SelectedItem).Value;
 
-                    biblePassageSearchResult = _bibleManager.SearchPassage(bibleItem.Bible, needle);
-                    if (biblePassageSearchResult.Status == BibleManager.BiblePassageSearchStatus.Found)
+                    _biblePassageSearchResult = _bibleManager.SearchPassage(bibleItem.Bible, needle);
+                    if (_biblePassageSearchResult.Status == BibleManager.BiblePassageSearchStatus.Found)
                     {
-                        if (biblePassageSearchResult.Passage.Book != null)
+                        if (_biblePassageSearchResult.Passage.Book != null)
                         {
-                            if (needle.Length < biblePassageSearchResult.Passage.Book.Name.Length)
+                            if (needle.Length < _biblePassageSearchResult.Passage.Book.Name.Length)
                             {
-                                searchTextBoxBible.Text = biblePassageSearchResult.Passage.Book.Name + " ";
+                                searchTextBoxBible.Text = _biblePassageSearchResult.Passage.Book.Name + " ";
                                 searchTextBoxBible.Select(searchTextBoxBible.Text.Length, 0);
                             }
 
@@ -1871,7 +1905,7 @@ namespace PraiseBase.Presenter.Presenter
                                 verseIdx = biblePassageSearchResult.Passage.Verse.Number - 1;
                             }*/
 
-                            listBoxBibleBook.SelectedIndex = biblePassageSearchResult.Passage.Book.Number - 1;
+                            listBoxBibleBook.SelectedIndex = _biblePassageSearchResult.Passage.Book.Number - 1;
                             
 
                         }
@@ -1879,7 +1913,7 @@ namespace PraiseBase.Presenter.Presenter
                         labelBibleSearchMsg.ForeColor = Color.Black;
                         labelBibleSearchMsg.Text = "";
                     }
-                    else if (biblePassageSearchResult.Status == BibleManager.BiblePassageSearchStatus.NotFound)
+                    else if (_biblePassageSearchResult.Status == BibleManager.BiblePassageSearchStatus.NotFound)
                     {
                         labelBibleSearchMsg.ForeColor = Color.Red;
                         labelBibleSearchMsg.Text = StringResources.NothingFound;
@@ -2437,7 +2471,7 @@ namespace PraiseBase.Presenter.Presenter
 
             if (_songManager.CurrentSong != null)
             {
-                showCurrentSongDetails();
+                ShowCurrentSongDetails();
             }
         }
 

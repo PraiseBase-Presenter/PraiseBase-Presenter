@@ -137,7 +137,7 @@ namespace PraiseBase.Presenter.Persistence.CCLI
         /// </summary>
         /// <param name="filename">Absolute path to the song file</param>
         /// <returns></returns>
-        public String ReadTitle(string filename)
+        public string ReadTitle(string filename)
         {
             try
             {

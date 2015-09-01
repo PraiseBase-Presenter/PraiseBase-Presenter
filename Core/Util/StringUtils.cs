@@ -91,21 +91,21 @@ namespace PraiseBase.Presenter.Util
             text = text.Replace("<br>", " ");
             text = text.Replace(" ", " ");
 
-            var Words = text.Split(' ');
+            var words = text.Split(' ');
             var currentLineLength = 0;
-            var Lines = new ArrayList(text.Length/maxLength);
+            var lines = new ArrayList(text.Length/maxLength);
             var currentLine = "";
-            var InTag = false;
+            var inTag = false;
 
-            foreach (var currentWord in Words)
+            foreach (var currentWord in words)
             {
                 //ignore html
                 if (currentWord.Length > 0)
                 {
                     if (currentWord.Substring(0, 1) == "<")
-                        InTag = true;
+                        inTag = true;
 
-                    if (InTag)
+                    if (inTag)
                     {
                         //handle filenames inside html tags
                         if (currentLine.EndsWith("."))
@@ -115,8 +115,8 @@ namespace PraiseBase.Presenter.Util
                         else
                             currentLine += " " + currentWord;
 
-                        if (currentWord.IndexOf(">") > -1)
-                            InTag = false;
+                        if (currentWord.Contains(">"))
+                            inTag = false;
                     }
                     else
                     {
@@ -127,7 +127,7 @@ namespace PraiseBase.Presenter.Util
                         }
                         else
                         {
-                            Lines.Add(currentLine);
+                            lines.Add(currentLine);
                             currentLine = currentWord;
                             currentLineLength = currentWord.Length;
                         }
@@ -135,10 +135,10 @@ namespace PraiseBase.Presenter.Util
                 }
             }
             if (currentLine != "")
-                Lines.Add(currentLine);
+                lines.Add(currentLine);
 
-            var textLinesStr = new string[Lines.Count];
-            Lines.CopyTo(textLinesStr, 0);
+            var textLinesStr = new string[lines.Count];
+            lines.CopyTo(textLinesStr, 0);
             return textLinesStr;
         }
 
@@ -147,6 +147,7 @@ namespace PraiseBase.Presenter.Util
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <param name="toSerialize"></param>
+        /// <param name="returnHash"></param>
         /// <returns></returns>
         public static string SerializeObject<T>(this T toSerialize, bool returnHash)
         {

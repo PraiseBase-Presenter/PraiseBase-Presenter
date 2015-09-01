@@ -60,47 +60,50 @@ namespace PraiseBase.Presenter.Template
 
         public void ApplyFormattingFromSettings(Song sng)
         {
-            sng.MainText = new TextFormatting(
+            sng.Formatting.MainText = new TextFormatting(
                 _settings.ProjectionMasterFont,
                 _settings.ProjectionMasterFontColor,
                 new TextOutline(_settings.ProjectionMasterOutlineSize, _settings.ProjectionMasterOutlineColor),
                 new TextShadow(_settings.ProjectionMasterShadowDistance, _settings.ProjectionMasterShadowSize,
-                    _settings.ProjectionMasterShadowDirection, _settings.ProjectionMasterShadowColor),
-                _settings.ProjectionMasterLineSpacing);
+                    _settings.ProjectionMasterShadowDirection, _settings.ProjectionMasterShadowColor)
+                );
 
-            sng.TranslationText = new TextFormatting(
+            sng.Formatting.TranslationText = new TextFormatting(
                 _settings.ProjectionMasterFontTranslation,
                 _settings.ProjectionMasterTranslationColor,
                 new TextOutline(_settings.ProjectionMasterOutlineSize, _settings.ProjectionMasterOutlineColor),
                 new TextShadow(_settings.ProjectionMasterShadowDistance, _settings.ProjectionMasterShadowSize,
-                    _settings.ProjectionMasterShadowDirection, _settings.ProjectionMasterShadowColor),
-                _settings.ProjectionMasterLineSpacing);
+                    _settings.ProjectionMasterShadowDirection, _settings.ProjectionMasterShadowColor)
+                );
 
-            sng.CopyrightText = new TextFormatting(
+            sng.Formatting.CopyrightText = new TextFormatting(
                 _settings.ProjectionMasterFontTranslation,
                 _settings.ProjectionMasterTranslationColor,
                 new TextOutline(_settings.ProjectionMasterOutlineSize, _settings.ProjectionMasterOutlineColor),
                 new TextShadow(_settings.ProjectionMasterShadowDistance, _settings.ProjectionMasterShadowSize,
-                    _settings.ProjectionMasterShadowDirection, _settings.ProjectionMasterShadowColor),
-                _settings.ProjectionMasterLineSpacing);
+                    _settings.ProjectionMasterShadowDirection, _settings.ProjectionMasterShadowColor)
+                );
 
-            sng.SourceText = new TextFormatting(
+            sng.Formatting.SourceText = new TextFormatting(
                _settings.ProjectionMasterFontTranslation,
                _settings.ProjectionMasterTranslationColor,
                 new TextOutline(_settings.ProjectionMasterOutlineSize, _settings.ProjectionMasterOutlineColor),
                 new TextShadow(_settings.ProjectionMasterShadowDistance, _settings.ProjectionMasterShadowSize,
-                    _settings.ProjectionMasterShadowDirection, _settings.ProjectionMasterShadowColor),
-               _settings.ProjectionMasterLineSpacing);
+                    _settings.ProjectionMasterShadowDirection, _settings.ProjectionMasterShadowColor)
+                );
 
-            sng.TextOrientation = new TextOrientation(_settings.ProjectionMasterVerticalTextOrientation, _settings.ProjectionMasterHorizontalTextOrientation);
-            sng.CopyrightPosition = _settings.ProjectionMasterCopyrightPosition;
-            sng.SourcePosition = _settings.ProjectionMasterSourcePosition;
-            sng.TranslationPosition = _settings.ProjectionMasteTranslationPosition;
+            sng.Formatting.MainLineSpacing = _settings.ProjectionMasterLineSpacing;
+            sng.Formatting.TranslationLineSpacing = _settings.ProjectionMasterTranslationLineSpacing;
 
-            sng.TextOutlineEnabled = _settings.ProjectionMasterOutlineEnabled;
-            sng.TextShadowEnabled = _settings.ProjectionMasterShadowEnabled;
+            sng.Formatting.TextOrientation = new TextOrientation(_settings.ProjectionMasterVerticalTextOrientation, _settings.ProjectionMasterHorizontalTextOrientation);
+            sng.Formatting.CopyrightPosition = _settings.ProjectionMasterCopyrightPosition;
+            sng.Formatting.SourcePosition = _settings.ProjectionMasterSourcePosition;
+            sng.Formatting.TranslationPosition = _settings.ProjectionMasteTranslationPosition;
 
-            sng.TextBorders = new SongTextBorders(
+            sng.Formatting.TextOutlineEnabled = _settings.ProjectionMasterOutlineEnabled;
+            sng.Formatting.TextShadowEnabled = _settings.ProjectionMasterShadowEnabled;
+
+            sng.Formatting.TextBorders = new SongTextBorders(
                 _settings.ProjectionMasterHorizontalTextPadding,
                 _settings.ProjectionMasterVerticalTextPadding,
                 _settings.ProjectionMasterHorizontalTextPadding,

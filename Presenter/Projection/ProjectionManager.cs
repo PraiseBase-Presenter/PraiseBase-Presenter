@@ -23,7 +23,6 @@
 using System;
 using System.Collections.Generic;
 using System.Drawing;
-using PraiseBase.Presenter.Manager;
 
 namespace PraiseBase.Presenter.Projection
 {
@@ -71,7 +70,7 @@ namespace PraiseBase.Presenter.Projection
         private ProjectionManager()
         {
             InitializeWindows();
-            ScreenManager.Instance.ScreensChanged += new ScreenManager.ScreensChange(Instance_ScreensChanged);
+            ScreenManager.Instance.ScreensChanged += Instance_ScreensChanged;
         }
 
         /// <summary>
@@ -89,7 +88,7 @@ namespace PraiseBase.Presenter.Projection
         /// <returns>True if any projection windows have been found and initialized, false if main screen is used for projection</returns>
         public bool InitializeWindows()
         {
-            ScreenManager.Instance.detectScreens();
+            ScreenManager.Instance.DetectScreens();
 
             // Check if projection windows have not been initialized or screens have changed
             if (ProjectionWindows == null || ScreenManager.Instance.ScreensChangedSinceLastScan)

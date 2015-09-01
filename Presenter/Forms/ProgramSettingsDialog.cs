@@ -48,16 +48,16 @@ namespace PraiseBase.Presenter.Forms
             checkBoxUseMasterFormat.Checked = _settings.ProjectionUseMaster;
             EnableMasterFormattingGroupBoxes(_settings.ProjectionUseMaster);
 
-            labelMainTextString.Text = getFontString(_settings.ProjectionMasterFont);
+            labelMainTextString.Text = GetFontString(_settings.ProjectionMasterFont);
             buttonTextColor.BackColor = _settings.ProjectionMasterFontColor;
 
-            labelTranslationTextString.Text = getFontString(_settings.ProjectionMasterFontTranslation);
+            labelTranslationTextString.Text = GetFontString(_settings.ProjectionMasterFontTranslation);
             buttonTranslationColor.BackColor = _settings.ProjectionMasterTranslationColor;
 
-            labelCopyrightTextString.Text = getFontString(_settings.ProjectionMasterCopyrightFont);
+            labelCopyrightTextString.Text = GetFontString(_settings.ProjectionMasterCopyrightFont);
             buttonCopyrightColor.BackColor = _settings.ProjectionMasterCopyrightColor;
 
-            labelSourceTextString.Text = getFontString(_settings.ProjectionMasterSourceFont);
+            labelSourceTextString.Text = GetFontString(_settings.ProjectionMasterSourceFont);
             buttonSourceColor.BackColor = _settings.ProjectionMasterSourceColor;
 
             buttonProjectionBackgroundColor.BackColor = _settings.ProjectionBackColor;
@@ -148,14 +148,14 @@ namespace PraiseBase.Presenter.Forms
 
         private void UpdateOrientation()
         {
-            comboBoxHorizontalTextOrientation.SelectedIndex = getIndexByHorizontalOrientation(_settings.ProjectionMasterHorizontalTextOrientation);
-            comboBoxVerticalTextOrientation.SelectedIndex = getIndexByVerticalOrientation(_settings.ProjectionMasterVerticalTextOrientation);
-            comboBoxHeaderOrientation.SelectedIndex = getIndexByHorizontalOrientation(_settings.ProjectionMasterHorizontalHeaderOrientation);
-            comboBoxFooterOrientation.SelectedIndex = getIndexByHorizontalOrientation(_settings.ProjectionMasterHorizontalFooterOrientation);
+            comboBoxHorizontalTextOrientation.SelectedIndex = GetIndexByHorizontalOrientation(_settings.ProjectionMasterHorizontalTextOrientation);
+            comboBoxVerticalTextOrientation.SelectedIndex = GetIndexByVerticalOrientation(_settings.ProjectionMasterVerticalTextOrientation);
+            comboBoxHeaderOrientation.SelectedIndex = GetIndexByHorizontalOrientation(_settings.ProjectionMasterHorizontalHeaderOrientation);
+            comboBoxFooterOrientation.SelectedIndex = GetIndexByHorizontalOrientation(_settings.ProjectionMasterHorizontalFooterOrientation);
             comboBoxTranslationPosition.SelectedIndex = _settings.ProjectionMasteTranslationPosition == TranslationPosition.Block ? 1 : 0;
         }
 
-        private String getFontString(Font font)
+        private String GetFontString(Font font)
         {
             return font.FontFamily.Name + ", " + font.Size + ", " + font.Style;
         }
@@ -630,7 +630,7 @@ namespace PraiseBase.Presenter.Forms
             _settings.ProjectionMasterHorizontalFooterOrientation = getHorizontalOrientationByIndex(index);
         }
 
-        private int getIndexByHorizontalOrientation(HorizontalOrientation horizontal)
+        private int GetIndexByHorizontalOrientation(HorizontalOrientation horizontal)
         {
             switch (horizontal)
             {
@@ -644,7 +644,7 @@ namespace PraiseBase.Presenter.Forms
             return 0;
         }
 
-        private int getIndexByVerticalOrientation(VerticalOrientation vertical)
+        private int GetIndexByVerticalOrientation(VerticalOrientation vertical)
         {
             switch (vertical)
             {

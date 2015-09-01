@@ -1,5 +1,4 @@
-﻿using System;
-using PraiseBase.Presenter.Model.Song;
+﻿using PraiseBase.Presenter.Model.Song;
 
 namespace PraiseBase.Presenter.Persistence
 {
@@ -10,21 +9,21 @@ namespace PraiseBase.Presenter.Persistence
         /// </summary>
         /// <param name="filePath">Absolute path to the song file</param>
         /// <returns>Song object instance</returns>
-        Song Load(String filePath);
+        Song Load(string filePath);
 
         /// <summary>
         ///     Reads the title of a song from a file
         /// </summary>
         /// <param name="filePath">Absolute path to the song file</param>
         /// <returns></returns>
-        String ReadTitle(string filePath);
+        string ReadTitle(string filePath);
 
         /// <summary>
         ///     Tests if a given file is supported by this reader
         /// </summary>
         /// <param name="filePath"></param>
         /// <returns></returns>
-        Boolean IsFileSupported(String filePath);
+        bool IsFileSupported(string filePath);
 
         /// <summary>
         ///     Defines the extensions this file format uses, e.g. ".xml"
@@ -40,7 +39,7 @@ namespace PraiseBase.Presenter.Persistence
         ///     Returns true if writing files is supported
         /// </summary>
         /// <returns></returns>
-        Boolean IsWritingSupported();
+        bool IsWritingSupported();
 
         /// <summary>
         ///     Writes a song to the specified path

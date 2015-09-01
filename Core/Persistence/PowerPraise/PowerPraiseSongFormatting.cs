@@ -93,7 +93,13 @@ namespace PraiseBase.Presenter.Persistence.PowerPraise
 
         protected bool Equals(PowerPraiseSongFormatting other)
         {
-            return MainText.Equals(other.MainText) && TranslationText.Equals(other.TranslationText) && CopyrightText.Equals(other.CopyrightText) && SourceText.Equals(other.SourceText) && Outline.Equals(other.Outline) && Shadow.Equals(other.Shadow) && MainLineSpacing == other.MainLineSpacing && TranslationLineSpacing == other.TranslationLineSpacing && Equals(TextOrientation, other.TextOrientation) && TranslationPosition == other.TranslationPosition && CopyrightTextPosition == other.CopyrightTextPosition && SourceTextPosition == other.SourceTextPosition && Borders.Equals(other.Borders);
+            return MainText.Equals(other.MainText) && TranslationText.Equals(other.TranslationText) &&
+                   CopyrightText.Equals(other.CopyrightText) && SourceText.Equals(other.SourceText) &&
+                   Outline.Equals(other.Outline) && Shadow.Equals(other.Shadow) &&
+                   MainLineSpacing == other.MainLineSpacing && TranslationLineSpacing == other.TranslationLineSpacing &&
+                   Equals(TextOrientation, other.TextOrientation) && TranslationPosition == other.TranslationPosition &&
+                   CopyrightTextPosition == other.CopyrightTextPosition &&
+                   SourceTextPosition == other.SourceTextPosition && Borders.Equals(other.Borders);
         }
 
         public override bool Equals(object obj)
@@ -101,7 +107,7 @@ namespace PraiseBase.Presenter.Persistence.PowerPraise
             if (ReferenceEquals(null, obj)) return false;
             if (ReferenceEquals(this, obj)) return true;
             if (obj.GetType() != GetType()) return false;
-            return Equals((PowerPraiseSongFormatting)obj);
+            return Equals((PowerPraiseSongFormatting) obj);
         }
 
         public override int GetHashCode()
@@ -109,18 +115,18 @@ namespace PraiseBase.Presenter.Persistence.PowerPraise
             unchecked
             {
                 var hashCode = MainText.GetHashCode();
-                hashCode = (hashCode * 397) ^ TranslationText.GetHashCode();
-                hashCode = (hashCode * 397) ^ CopyrightText.GetHashCode();
-                hashCode = (hashCode * 397) ^ SourceText.GetHashCode();
-                hashCode = (hashCode * 397) ^ Outline.GetHashCode();
-                hashCode = (hashCode * 397) ^ Shadow.GetHashCode();
-                hashCode = (hashCode * 397) ^ MainLineSpacing;
-                hashCode = (hashCode * 397) ^ TranslationLineSpacing;
-                hashCode = (hashCode * 397) ^ (TextOrientation != null ? TextOrientation.GetHashCode() : 0);
-                hashCode = (hashCode * 397) ^ (int)TranslationPosition;
-                hashCode = (hashCode * 397) ^ (int)CopyrightTextPosition;
-                hashCode = (hashCode * 397) ^ (int)SourceTextPosition;
-                hashCode = (hashCode * 397) ^ Borders.GetHashCode();
+                hashCode = (hashCode*397) ^ TranslationText.GetHashCode();
+                hashCode = (hashCode*397) ^ CopyrightText.GetHashCode();
+                hashCode = (hashCode*397) ^ SourceText.GetHashCode();
+                hashCode = (hashCode*397) ^ Outline.GetHashCode();
+                hashCode = (hashCode*397) ^ Shadow.GetHashCode();
+                hashCode = (hashCode*397) ^ MainLineSpacing;
+                hashCode = (hashCode*397) ^ TranslationLineSpacing;
+                hashCode = (hashCode*397) ^ (TextOrientation != null ? TextOrientation.GetHashCode() : 0);
+                hashCode = (hashCode*397) ^ (int) TranslationPosition;
+                hashCode = (hashCode*397) ^ (int) CopyrightTextPosition;
+                hashCode = (hashCode*397) ^ (int) SourceTextPosition;
+                hashCode = (hashCode*397) ^ Borders.GetHashCode();
                 return hashCode;
             }
         }
@@ -158,13 +164,14 @@ namespace PraiseBase.Presenter.Persistence.PowerPraise
 
             public bool Equals(FontFormatting other)
             {
-                return Equals(Font, other.Font) && Color.Equals(other.Color) && OutlineWidth == other.OutlineWidth && ShadowDistance == other.ShadowDistance;
+                return Equals(Font, other.Font) && Color.Equals(other.Color) && OutlineWidth == other.OutlineWidth &&
+                       ShadowDistance == other.ShadowDistance;
             }
 
             public override bool Equals(object obj)
             {
                 if (ReferenceEquals(null, obj)) return false;
-                return obj is FontFormatting && Equals((FontFormatting)obj);
+                return obj is FontFormatting && Equals((FontFormatting) obj);
             }
 
             public override int GetHashCode()
@@ -172,9 +179,9 @@ namespace PraiseBase.Presenter.Persistence.PowerPraise
                 unchecked
                 {
                     var hashCode = (Font != null ? Font.GetHashCode() : 0);
-                    hashCode = (hashCode * 397) ^ Color.GetHashCode();
-                    hashCode = (hashCode * 397) ^ OutlineWidth;
-                    hashCode = (hashCode * 397) ^ ShadowDistance;
+                    hashCode = (hashCode*397) ^ Color.GetHashCode();
+                    hashCode = (hashCode*397) ^ OutlineWidth;
+                    hashCode = (hashCode*397) ^ ShadowDistance;
                     return hashCode;
                 }
             }
@@ -190,7 +197,7 @@ namespace PraiseBase.Presenter.Persistence.PowerPraise
             /// <summary>
             ///     Enabled
             /// </summary>
-            public Boolean Enabled { get; set; }
+            public bool Enabled { get; set; }
 
             /// <summary>
             ///     Color
@@ -207,14 +214,14 @@ namespace PraiseBase.Presenter.Persistence.PowerPraise
             public override bool Equals(object obj)
             {
                 if (ReferenceEquals(null, obj)) return false;
-                return obj is OutlineFormatting && Equals((OutlineFormatting)obj);
+                return obj is OutlineFormatting && Equals((OutlineFormatting) obj);
             }
 
             public override int GetHashCode()
             {
                 unchecked
                 {
-                    return (Enabled.GetHashCode() * 397) ^ Color.GetHashCode();
+                    return (Enabled.GetHashCode()*397) ^ Color.GetHashCode();
                 }
             }
 
@@ -229,7 +236,7 @@ namespace PraiseBase.Presenter.Persistence.PowerPraise
             /// <summary>
             ///     Enabled
             /// </summary>
-            public Boolean Enabled { get; set; }
+            public bool Enabled { get; set; }
 
             /// <summary>
             ///     Color
@@ -251,7 +258,7 @@ namespace PraiseBase.Presenter.Persistence.PowerPraise
             public override bool Equals(object obj)
             {
                 if (ReferenceEquals(null, obj)) return false;
-                return obj is ShadowFormatting && Equals((ShadowFormatting)obj);
+                return obj is ShadowFormatting && Equals((ShadowFormatting) obj);
             }
 
             public override int GetHashCode()
@@ -259,8 +266,8 @@ namespace PraiseBase.Presenter.Persistence.PowerPraise
                 unchecked
                 {
                     var hashCode = Enabled.GetHashCode();
-                    hashCode = (hashCode * 397) ^ Direction;
-                    hashCode = (hashCode * 397) ^ Color.GetHashCode();
+                    hashCode = (hashCode*397) ^ Direction;
+                    hashCode = (hashCode*397) ^ Color.GetHashCode();
                     return hashCode;
                 }
             }
@@ -312,13 +319,15 @@ namespace PraiseBase.Presenter.Persistence.PowerPraise
 
             public bool Equals(TextBorders other)
             {
-                return TextLeft == other.TextLeft && TextTop == other.TextTop && TextBottom == other.TextBottom && CopyrightBottom == other.CopyrightBottom && SourceTop == other.SourceTop && SourceRight == other.SourceRight && TextRight == other.TextRight;
+                return TextLeft == other.TextLeft && TextTop == other.TextTop && TextBottom == other.TextBottom &&
+                       CopyrightBottom == other.CopyrightBottom && SourceTop == other.SourceTop &&
+                       SourceRight == other.SourceRight && TextRight == other.TextRight;
             }
 
             public override bool Equals(object obj)
             {
                 if (ReferenceEquals(null, obj)) return false;
-                return obj is TextBorders && Equals((TextBorders)obj);
+                return obj is TextBorders && Equals((TextBorders) obj);
             }
 
             public override int GetHashCode()
@@ -326,12 +335,12 @@ namespace PraiseBase.Presenter.Persistence.PowerPraise
                 unchecked
                 {
                     var hashCode = TextLeft;
-                    hashCode = (hashCode * 397) ^ TextTop;
-                    hashCode = (hashCode * 397) ^ TextBottom;
-                    hashCode = (hashCode * 397) ^ CopyrightBottom;
-                    hashCode = (hashCode * 397) ^ SourceTop;
-                    hashCode = (hashCode * 397) ^ SourceRight;
-                    hashCode = (hashCode * 397) ^ TextRight;
+                    hashCode = (hashCode*397) ^ TextTop;
+                    hashCode = (hashCode*397) ^ TextBottom;
+                    hashCode = (hashCode*397) ^ CopyrightBottom;
+                    hashCode = (hashCode*397) ^ SourceTop;
+                    hashCode = (hashCode*397) ^ SourceRight;
+                    hashCode = (hashCode*397) ^ TextRight;
                     return hashCode;
                 }
             }

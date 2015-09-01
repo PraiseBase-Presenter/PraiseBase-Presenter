@@ -31,7 +31,7 @@ namespace PraiseBase.Presenter.Persistence.PowerPraise
             Write(filename, sng);
         }
 
-        protected override void writeAdditionalFields(XmlDocument xmlDoc, XmlElement xmlRoot, PowerPraiseSong sng)
+        protected override void WriteAdditionalFields(XmlDocument xmlDoc, XmlElement xmlRoot, PowerPraiseSong sng)
         {
             // Noop
         }

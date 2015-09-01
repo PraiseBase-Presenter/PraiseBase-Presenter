@@ -11,12 +11,12 @@ namespace PraiseBase.Presenter.Persistence
         {
         }
 
-        public InvalidSongSourceFileException(String message) 
+        public InvalidSongSourceFileException(string message)
             : base(message)
         {
         }
 
-        public InvalidSongSourceFileException(String message, Exception innerException)
+        public InvalidSongSourceFileException(string message, Exception innerException)
             : base(message, innerException)
         {
         }

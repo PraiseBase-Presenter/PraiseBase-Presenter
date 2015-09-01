@@ -73,7 +73,7 @@ namespace PraiseBase.Presenter.Persistence.PowerPraise.Extended
             {
                 song.Publisher = xmlRoot["general"]["publisher"].InnerText;
             }
-            
+
             // Rights management
             if (xmlRoot["general"] != null && xmlRoot["general"]["admin"] != null)
             {
@@ -94,9 +94,9 @@ namespace PraiseBase.Presenter.Persistence.PowerPraise.Extended
                 if (elem.Name == "issue")
                 {
                     foreach (
-                        SongQualityAssuranceIndicator i in Enum.GetValues(typeof(SongQualityAssuranceIndicator)))
+                        SongQualityAssuranceIndicator i in Enum.GetValues(typeof (SongQualityAssuranceIndicator)))
                     {
-                        if (elem.InnerText == Enum.GetName(typeof(SongQualityAssuranceIndicator), i))
+                        if (elem.InnerText == Enum.GetName(typeof (SongQualityAssuranceIndicator), i))
                         {
                             song.QualityIssues.Add(i);
                         }
@@ -105,11 +105,13 @@ namespace PraiseBase.Presenter.Persistence.PowerPraise.Extended
             }
         }
 
-        private SongAuthors ParseAuthors(String value)
+        private SongAuthors ParseAuthors(string value)
         {
             var list = new SongAuthors();
             var i = 0;
-            list.AddRange(value.Split(new[] {';'}, StringSplitOptions.RemoveEmptyEntries).Select(s => ParseAuthorFromString(i++, s)));
+            list.AddRange(
+                value.Split(new[] {';'}, StringSplitOptions.RemoveEmptyEntries)
+                    .Select(s => ParseAuthorFromString(i++, s)));
             return list;
         }
 

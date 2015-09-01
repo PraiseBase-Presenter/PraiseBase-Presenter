@@ -7,7 +7,7 @@ namespace PraiseBase.Presenter.Persistence
 {
     public abstract class AbstractDatabaseImporter : ISongImporter
     {
-        public List<Song> ImportFromFile(String path)
+        public List<Song> ImportFromFile(string path)
         {
             var list = new List<Song>();
 
@@ -26,13 +26,13 @@ namespace PraiseBase.Presenter.Persistence
                 myAccessConn = new OleDbConnection(strAccessConn);
                 myAccessConn.Open();
 
-                var aCommand = new OleDbCommand(getSelectQuery(), myAccessConn);
+                var aCommand = new OleDbCommand(GetSelectQuery(), myAccessConn);
                 aReader = aCommand.ExecuteReader();
 
                 // Iterate throuth the database
                 while (aReader.Read())
                 {
-                    list.Add(readRecord(aReader));
+                    list.Add(ReadRecord(aReader));
                 }
             }
             catch (Exception ex)
@@ -57,7 +57,8 @@ namespace PraiseBase.Presenter.Persistence
             return list;
         }
 
-        protected abstract Song readRecord(OleDbDataReader aReader);
-        protected abstract string getSelectQuery();
+        protected abstract Song ReadRecord(OleDbDataReader aReader);
+
+        protected abstract string GetSelectQuery();
     }
 }

@@ -28,7 +28,7 @@ namespace PraiseBase.Presenter.Model
             if (ReferenceEquals(null, obj)) return false;
             if (ReferenceEquals(this, obj)) return true;
             if (obj.GetType() != GetType()) return false;
-            return Equals((ComparableList<T>)obj);
+            return Equals((ComparableList<T>) obj);
         }
     }
 }

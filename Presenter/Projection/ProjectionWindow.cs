@@ -22,8 +22,8 @@
 
 using System.Collections.Generic;
 using System.Drawing;
+using System.Linq;
 using System.Windows.Forms;
-using PraiseBase.Presenter.Forms;
 using PraiseBase.Presenter.Properties;
 
 namespace PraiseBase.Presenter.Projection
@@ -76,8 +76,8 @@ namespace PraiseBase.Presenter.Projection
         /// <summary>
         /// Display text layer
         /// </summary>
-        /// <param name="layer"></param>
-        /// <param name="tl"></param>
+        /// <param name="layerNum"></param>
+        /// <param name="layerContents"></param>
         public void DisplayLayer(int layerNum, BaseLayer layerContents)
         {
             DisplayLayer(layerNum, layerContents, Settings.Default.ProjectionFadeTime);
@@ -86,8 +86,8 @@ namespace PraiseBase.Presenter.Projection
         /// <summary>
         /// Display text layer with transition
         /// </summary>
-        /// <param name="layer"></param>
-        /// <param name="tl"></param>
+        /// <param name="layerNum"></param>
+        /// <param name="layerContents"></param>
         /// <param name="fadetime"></param>
         public void DisplayLayer(int layerNum, BaseLayer layerContents, int fadetime)
         {
@@ -120,7 +120,7 @@ namespace PraiseBase.Presenter.Projection
         /// <summary>
         /// Hide layer with transition
         /// </summary>
-        /// <param name="layer"></param>
+        /// <param name="layerNum"></param>
         /// <param name="fadetime"></param>
         public void HideLayer(int layerNum, int fadetime)
         {
@@ -143,11 +143,7 @@ namespace PraiseBase.Presenter.Projection
         /// </summary>
         public void RedrawLayers()
         {
-            Dictionary<int, BaseLayer> tempDict = new Dictionary<int, BaseLayer>();
-            foreach (var kvp in CurrentLayers)
-            {
-                tempDict.Add(kvp.Key, kvp.Value);
-            }
+            Dictionary<int, BaseLayer> tempDict = CurrentLayers.ToDictionary(kvp => kvp.Key, kvp => kvp.Value);
             foreach (var kvp in tempDict)
             {
                 DisplayLayer(kvp.Key, kvp.Value, 0);

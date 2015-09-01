@@ -8,8 +8,10 @@ namespace PraiseBase.Presenter.Persistence.PowerPraise
     {
         public static readonly string NoCategory = "Keine Kategorie";
         public static readonly string Language = null;
-        public static readonly IBackground DefaultBackground = new ColorBackground(PowerPraiseFileUtil.ConvertColor(8075276));
-        
+
+        public static readonly IBackground DefaultBackground =
+            new ColorBackground(PowerPraiseFileUtil.ConvertColor(8075276));
+
         public static readonly int SlideMainTextSize = 30;
 
         public static readonly PowerPraiseSongFormatting Format = new PowerPraiseSongFormatting

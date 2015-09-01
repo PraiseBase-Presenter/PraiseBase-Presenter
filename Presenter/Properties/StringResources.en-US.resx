@@ -165,6 +165,9 @@
   <data name="LoadedSong" xml:space="preserve">
     <value>Loaded song {0}</value>
   </data>
+  <data name="Matches" xml:space="preserve">
+    <value>Matches</value>
+  </data>
   <data name="NameExistsAlready" xml:space="preserve">
     <value>This name exists already!</value>
   </data>

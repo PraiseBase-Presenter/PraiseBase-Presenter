@@ -27,25 +27,22 @@ namespace PraiseBase.Presenter.Model
 {
     public class TextFormatting : ICloneable
     {
-        public TextFormatting(Font font, Color color, TextOutline outline, TextShadow shadow, int lineSpacing)
+        public TextFormatting(Font font, Color color, TextOutline outline, TextShadow shadow)
         {
             Font = font;
             Color = color;
             Outline = outline;
             Shadow = shadow;
-            LineSpacing = lineSpacing;
         }
 
         public Font Font { get; set; }
         public Color Color { get; set; }
         public TextOutline Outline { get; set; }
         public TextShadow Shadow { get; set; }
-        public int LineSpacing { get; set; }
 
         public object Clone()
         {
-            return new TextFormatting(Font, Color, (TextOutline) Outline.Clone(), (TextShadow) Shadow.Clone(),
-                LineSpacing);
+            return new TextFormatting(Font, Color, (TextOutline) Outline.Clone(), (TextShadow) Shadow.Clone());
         }
 
         /// <summary>
@@ -61,7 +58,6 @@ namespace PraiseBase.Presenter.Model
                 hashCode = (hashCode*397) ^ Color.GetHashCode();
                 hashCode = (hashCode*397) ^ (Outline != null ? Outline.GetHashCode() : 0);
                 hashCode = (hashCode*397) ^ (Shadow != null ? Shadow.GetHashCode() : 0);
-                hashCode = (hashCode*397) ^ LineSpacing;
                 return hashCode;
             }
         }
@@ -69,7 +65,7 @@ namespace PraiseBase.Presenter.Model
         protected bool Equals(TextFormatting other)
         {
             return Equals(Font, other.Font) && Color.Equals(other.Color) && Equals(Outline, other.Outline) &&
-                   Equals(Shadow, other.Shadow) && LineSpacing == other.LineSpacing;
+                   Equals(Shadow, other.Shadow);
         }
 
         public override bool Equals(object obj)

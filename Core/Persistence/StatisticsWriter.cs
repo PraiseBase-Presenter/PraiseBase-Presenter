@@ -20,7 +20,6 @@
  *
  */
 
-using System.Xml;
 using PraiseBase.Presenter.Model.Statistics;
 
 namespace PraiseBase.Presenter.Persistence
@@ -31,10 +30,9 @@ namespace PraiseBase.Presenter.Persistence
         {
             var xml = new XmlWriterHelper("statistics", "1.0");
 
-            XmlElement node;
             foreach (var date in stat.Dates)
             {
-                node = xml.Doc.CreateElement("date");
+                var node = xml.Doc.CreateElement("date");
                 node.SetAttribute("year", date.Value.Year.ToString());
                 node.SetAttribute("month", date.Value.Month.ToString());
                 node.SetAttribute("day", date.Value.Day.ToString());
@@ -46,7 +44,7 @@ namespace PraiseBase.Presenter.Persistence
                         node = xml.Doc.CreateElement("song");
                         node.SetAttribute("title", item.Value.Title);
                         node.SetAttribute("copyright", item.Value.Copyright);
-                        node.SetAttribute("ccli", item.Value.CcliID);
+                        node.SetAttribute("ccli", item.Value.CcliId);
                         node.SetAttribute("count", item.Value.Count.ToString());
                         dateNode.AppendChild(node);
                     }

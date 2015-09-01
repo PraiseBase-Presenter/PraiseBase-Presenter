@@ -330,4 +330,10 @@
   <data name="UnableToRemoveLastElement" xml:space="preserve">
     <value>Das letzte Element kann nicht entfernt werden!</value>
   </data>
+  <data name="Matches" xml:space="preserve">
+    <value>Treffer</value>
+  </data>
+  <data name="AllFiles" xml:space="preserve">
+    <value>Alle Dateien</value>
+  </data>
 </root>

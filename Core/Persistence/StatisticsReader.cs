@@ -45,24 +45,26 @@ namespace PraiseBase.Presenter.Persistence
                 var node = xmlRoot.ChildNodes[i];
                 if (node.Name == "date")
                 {
-                    var year = Int32.Parse(node.Attributes["year"].Value);
-                    var month = Int32.Parse(node.Attributes["month"].Value);
-                    var day = Int32.Parse(node.Attributes["day"].Value);
+                    var year = int.Parse(node.Attributes["year"].Value);
+                    var month = int.Parse(node.Attributes["month"].Value);
+                    var day = int.Parse(node.Attributes["day"].Value);
                     var date = new StatisticsDate(year, month, day);
-                    sl.Dates.Add(date.ID, date);
+                    sl.Dates.Add(date.Identifier, date);
 
                     for (var j = 0; j < node.ChildNodes.Count; j++)
                     {
                         var cnode = node.ChildNodes[j];
                         if (cnode.Name == "song")
                         {
-                            var item = new StatisticsItem();
-                            item.Type = StatisticsItemType.Song;
-                            item.Title = cnode.Attributes["title"].Value;
-                            item.CcliID = cnode.Attributes["ccli"].Value;
-                            item.Copyright = cnode.Attributes["copyright"].Value;
-                            item.Count = Int32.Parse(cnode.Attributes["count"].Value);
-                            date.Items.Add(item.ID, item);
+                            var item = new StatisticsItem
+                            {
+                                Type = StatisticsItemType.Song,
+                                Title = cnode.Attributes["title"].Value,
+                                CcliId = cnode.Attributes["ccli"].Value,
+                                Copyright = cnode.Attributes["copyright"].Value,
+                                Count = int.Parse(cnode.Attributes["count"].Value)
+                            };
+                            date.Items.Add(item.Identifier, item);
                         }
                     }
                 }

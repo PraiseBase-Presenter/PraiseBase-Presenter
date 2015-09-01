@@ -7,6 +7,29 @@ namespace PraiseBase.Presenter.Persistence.PowerPraise
 {
     public class PowerPraiseSong : ISongFile
     {
+        public PowerPraiseSong()
+        {
+            Parts = new ComparableOrderedList<Part>();
+            Order = new ComparableOrderedList<Part>();
+            CopyrightText = new ComparableList<string>();
+            Formatting = new PowerPraiseSongFormatting();
+        }
+
+        public string GetTitle()
+        {
+            return Title;
+        }
+
+        /// <summary>
+        ///     Returns the number of background images
+        /// </summary>
+        public int GetNumberOfBackgroundImages()
+        {
+            return
+                Parts.SelectMany(t => t.Slides)
+                    .Count(t1 => t1.Background != null && t1.Background.GetType() == typeof (ImageBackground));
+        }
+
         #region Fields
 
         /// <summary>
@@ -51,34 +74,14 @@ namespace PraiseBase.Presenter.Persistence.PowerPraise
 
         #endregion
 
-        public PowerPraiseSong()
-        {
-            Parts = new ComparableOrderedList<Part>();
-            Order = new ComparableOrderedList<Part>();
-            CopyrightText = new ComparableList<string>();
-            Formatting = new PowerPraiseSongFormatting();
-        }
-
-        public string GetTitle()
-        {
-            return Title;
-        }
-
-        /// <summary>
-        ///     Returns the number of background images
-        /// </summary>
-        public int GetNumberOfBackgroundImages()
-        {
-            return 
-                Parts.SelectMany(t => t.Slides)
-                    .Count(t1 => t1.Background != null && t1.Background.GetType() == typeof(ImageBackground));
-        }
-
         #region Equality members
 
         protected bool Equals(PowerPraiseSong other)
         {
-            return string.Equals(Title, other.Title) && string.Equals(Category, other.Category) && string.Equals(Language, other.Language) && Equals(Parts, other.Parts) && Equals(Order, other.Order) && Equals(CopyrightText, other.CopyrightText) && string.Equals(SourceText, other.SourceText) && Formatting.Equals(other.Formatting);
+            return string.Equals(Title, other.Title) && string.Equals(Category, other.Category) &&
+                   string.Equals(Language, other.Language) && Equals(Parts, other.Parts) && Equals(Order, other.Order) &&
+                   Equals(CopyrightText, other.CopyrightText) && string.Equals(SourceText, other.SourceText) &&
+                   Formatting.Equals(other.Formatting);
         }
 
         public override bool Equals(object obj)
@@ -99,7 +102,7 @@ namespace PraiseBase.Presenter.Persistence.PowerPraise
                 hashCode = (hashCode*397) ^ (Parts != null ? Parts.GetHashCode() : 0);
                 hashCode = (hashCode*397) ^ (Order != null ? Order.GetHashCode() : 0);
                 hashCode = (hashCode*397) ^ (CopyrightText != null ? CopyrightText.GetHashCode() : 0);
-                hashCode = (hashCode * 397) ^ (SourceText != null ? SourceText.GetHashCode() : 0);
+                hashCode = (hashCode*397) ^ (SourceText != null ? SourceText.GetHashCode() : 0);
                 hashCode = (hashCode*397) ^ Formatting.GetHashCode();
                 return hashCode;
             }
@@ -111,6 +114,11 @@ namespace PraiseBase.Presenter.Persistence.PowerPraise
 
         public class Part : ICloneable
         {
+            public Part()
+            {
+                Slides = new ComparableOrderedList<Slide>();
+            }
+
             /// <summary>
             ///     Caption
             /// </summary>
@@ -121,9 +129,17 @@ namespace PraiseBase.Presenter.Persistence.PowerPraise
             /// </summary>
             public ComparableOrderedList<Slide> Slides { get; private set; }
 
-            public Part()
+            public object Clone()
             {
-                Slides = new ComparableOrderedList<Slide>();
+                var p = new Part
+                {
+                    Caption = Caption
+                };
+                foreach (var s in Slides)
+                {
+                    p.Slides.Add((Slide) s.Clone());
+                }
+                return p;
             }
 
             /// <summary>
@@ -134,32 +150,19 @@ namespace PraiseBase.Presenter.Persistence.PowerPraise
             /// <param name="slideId">The slide index</param>
             public void SplitSlide(int slideId)
             {
-                var sld = (Slide)Slides[slideId].Clone();
+                var sld = (Slide) Slides[slideId].Clone();
 
                 var totl = sld.Lines.Count;
-                var rem = totl / 2;
+                var rem = totl/2;
                 Slides[slideId].Lines.RemoveRange(0, rem);
                 sld.Lines.RemoveRange(rem, totl - rem);
 
                 totl = sld.Translation.Count;
-                rem = totl / 2;
+                rem = totl/2;
                 Slides[slideId].Translation.RemoveRange(0, rem);
                 sld.Translation.RemoveRange(rem, totl - rem);
 
                 Slides.Insert(slideId, sld);
-            }
-
-            public object Clone()
-            {
-                var p = new Part
-                {
-                    Caption = Caption,
-                };
-                foreach (var s in Slides)
-                {
-                    p.Slides.Add((Slide) s.Clone());
-                }
-                return p;
             }
 
             #region Equality members
@@ -181,7 +184,8 @@ namespace PraiseBase.Presenter.Persistence.PowerPraise
             {
                 unchecked
                 {
-                    return ((Caption != null ? Caption.GetHashCode() : 0)*397) ^ (Slides != null ? Slides.GetHashCode() : 0);
+                    return ((Caption != null ? Caption.GetHashCode() : 0)*397) ^
+                           (Slides != null ? Slides.GetHashCode() : 0);
                 }
             }
 
@@ -190,6 +194,12 @@ namespace PraiseBase.Presenter.Persistence.PowerPraise
 
         public class Slide : ICloneable
         {
+            public Slide()
+            {
+                Lines = new ComparableList<string>();
+                Translation = new ComparableList<string>();
+            }
+
             /// <summary>
             ///     Font size of the main text
             /// </summary>
@@ -210,12 +220,6 @@ namespace PraiseBase.Presenter.Persistence.PowerPraise
             /// </summary>
             public ComparableList<string> Translation { get; private set; }
 
-            public Slide()
-            {
-                Lines = new ComparableList<string>();
-                Translation = new ComparableList<string>();
-            }
-
             public object Clone()
             {
                 var s = new Slide
@@ -232,7 +236,8 @@ namespace PraiseBase.Presenter.Persistence.PowerPraise
 
             protected bool Equals(Slide other)
             {
-                return MainSize == other.MainSize && Equals(Background, other.Background) && Equals(Lines, other.Lines) && Equals(Translation, other.Translation);
+                return MainSize == other.MainSize && Equals(Background, other.Background) && Equals(Lines, other.Lines) &&
+                       Equals(Translation, other.Translation);
             }
 
             public override bool Equals(object obj)

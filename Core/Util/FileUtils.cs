@@ -38,7 +38,7 @@ namespace PraiseBase.Presenter.Util
             return false;
         }
 
-        public static String FindDifference(string path1, string path2)
+        public static string FindDifference(string path1, string path2)
         {
             var lines1 = File.ReadAllLines(path1);
             var lines2 = File.ReadAllLines(path2);
@@ -46,14 +46,14 @@ namespace PraiseBase.Presenter.Util
             {
                 if (lines1.Length <= j || lines2.Length <= j)
                 {
-                    return String.Empty;
+                    return string.Empty;
                 }
                 if (!lines1[j].Equals(lines2[j]))
                 {
                     return "Difference at line " + j + ": < " + lines1[j] + " > " + lines2[j];
                 }
             }
-            return String.Empty;
+            return string.Empty;
         }
     }
 }

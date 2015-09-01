@@ -43,8 +43,9 @@ namespace PraiseBase.Presenter.Model.Song
             PartSequence = new ComparableOrderedList<SongPart>();
             SongBooks = new SongBooks();
             Authors = new SongAuthors();
-            Comment = String.Empty;
+            Comment = string.Empty;
             QualityIssues = new QualityIssues();
+            Formatting = new SongFormatting();
         }
 
         /// <summary>
@@ -57,10 +58,6 @@ namespace PraiseBase.Presenter.Model.Song
             info.AddValue("Parts", Parts);
             info.AddValue("Title", Title);
             info.AddValue("QualityIssues", QualityIssues);
-            info.AddValue("MainText", MainText.ToString());
-            info.AddValue("TranslationText", TranslationText.ToString());
-            info.AddValue("CopyrightText", CopyrightText.ToString());
-            info.AddValue("SourceText", SourceText.ToString());
             info.AddValue("Language", Language);
             info.AddValue("Comment", Comment);
             info.AddValue("Themes", Themes);
@@ -104,8 +101,6 @@ namespace PraiseBase.Presenter.Model.Song
                 hashCode = (hashCode*397) ^ (Language != null ? Language.GetHashCode() : 0);
                 hashCode = (hashCode*397) ^ (CcliIdentifier != null ? CcliIdentifier.GetHashCode() : 0);
                 hashCode = (hashCode*397) ^ (Copyright != null ? Copyright.GetHashCode() : 0);
-                hashCode = (hashCode*397) ^ (int) CopyrightPosition;
-                hashCode = (hashCode*397) ^ (int) SourcePosition;
                 hashCode = (hashCode*397) ^ (ReleaseYear != null ? ReleaseYear.GetHashCode() : 0);
                 hashCode = (hashCode*397) ^ (Authors != null ? Authors.GetHashCode() : 0);
                 hashCode = (hashCode*397) ^ (RightsManagement != null ? RightsManagement.GetHashCode() : 0);
@@ -121,15 +116,6 @@ namespace PraiseBase.Presenter.Model.Song
                 hashCode = (hashCode*397) ^ (Parts != null ? Parts.GetHashCode() : 0);
                 hashCode = (hashCode*397) ^ (PartSequence != null ? PartSequence.GetHashCode() : 0);
                 hashCode = (hashCode*397) ^ (QualityIssues != null ? QualityIssues.GetHashCode() : 0);
-                hashCode = (hashCode*397) ^ (MainText != null ? MainText.GetHashCode() : 0);
-                hashCode = (hashCode*397) ^ (TranslationText != null ? TranslationText.GetHashCode() : 0);
-                hashCode = (hashCode*397) ^ (CopyrightText != null ? CopyrightText.GetHashCode() : 0);
-                hashCode = (hashCode*397) ^ (SourceText != null ? SourceText.GetHashCode() : 0);
-                hashCode = (hashCode*397) ^ (TextOrientation != null ? TextOrientation.GetHashCode() : 0);
-                hashCode = (hashCode*397) ^ (int) TranslationPosition;
-                hashCode = (hashCode*397) ^ TextOutlineEnabled.GetHashCode();
-                hashCode = (hashCode*397) ^ TextShadowEnabled.GetHashCode();
-                hashCode = (hashCode*397) ^ (TextBorders != null ? TextBorders.GetHashCode() : 0);
                 return hashCode;
             }
         }
@@ -140,20 +126,14 @@ namespace PraiseBase.Presenter.Model.Song
                    string.Equals(CreatedIn, other.CreatedIn) && string.Equals(ModifiedIn, other.ModifiedIn) &&
                    string.Equals(Title, other.Title) && string.Equals(Language, other.Language) &&
                    string.Equals(CcliIdentifier, other.CcliIdentifier) &&
-                   string.Equals(Copyright, other.Copyright) && CopyrightPosition == other.CopyrightPosition &&
-                   SourcePosition == other.SourcePosition && string.Equals(ReleaseYear, other.ReleaseYear) &&
+                   string.Equals(Copyright, other.Copyright) && string.Equals(ReleaseYear, other.ReleaseYear) &&
                    Equals(Authors, other.Authors) && string.Equals(RightsManagement, other.RightsManagement) &&
                    string.Equals(Publisher, other.Publisher) && string.Equals(Version, other.Version) &&
                    string.Equals(Key, other.Key) && Transposition == other.Transposition && Equals(Tempo, other.Tempo) &&
                    string.Equals(Variant, other.Variant) && Equals(Themes, other.Themes) &&
                    string.Equals(Comment, other.Comment) && Equals(SongBooks, other.SongBooks) &&
                    Equals(Parts, other.Parts) && Equals(PartSequence, other.PartSequence) &&
-                   Equals(QualityIssues, other.QualityIssues) && Equals(MainText, other.MainText) &&
-                   Equals(TranslationText, other.TranslationText) && Equals(CopyrightText, other.CopyrightText) &&
-                   Equals(SourceText, other.SourceText) && Equals(TextOrientation, other.TextOrientation) &&
-                   TranslationPosition == other.TranslationPosition &&
-                   TextOutlineEnabled.Equals(other.TextOutlineEnabled) &&
-                   TextShadowEnabled.Equals(other.TextShadowEnabled) && Equals(TextBorders, other.TextBorders);
+                   Equals(QualityIssues, other.QualityIssues);
         }
 
         public override bool Equals(object obj)
@@ -205,16 +185,6 @@ namespace PraiseBase.Presenter.Model.Song
         ///     Copyright information
         /// </summary>
         public string Copyright { get; set; }
-
-        /// <summary>
-        ///     Copyright position (PowerPraise)
-        /// </summary>
-        public AdditionalInformationPosition CopyrightPosition { get; set; }
-
-        /// <summary>
-        ///     Source position (PowerPraise)
-        /// </summary>
-        public AdditionalInformationPosition SourcePosition { get; set; }
 
         /// <summary>
         ///     Release year
@@ -293,49 +263,9 @@ namespace PraiseBase.Presenter.Model.Song
         public QualityIssues QualityIssues { get; set; }
 
         /// <summary>
-        ///     Gets or sets the text font and color for the main text
+        ///     Formatting
         /// </summary>
-        public TextFormatting MainText { get; set; }
-
-        /// <summary>
-        ///     Gets or sets the font of tanslation text
-        /// </summary>
-        public TextFormatting TranslationText { get; set; }
-
-        /// <summary>
-        ///     Gets or sets the font for the copyright text
-        /// </summary>
-        public TextFormatting CopyrightText { get; set; }
-
-        /// <summary>
-        ///     Gets or sets the font for the source text
-        /// </summary>
-        public TextFormatting SourceText { get; set; }
-
-        /// <summary>
-        ///     Text orientation
-        /// </summary>
-        public TextOrientation TextOrientation { get; set; }
-
-        /// <summary>
-        ///     Position of the translation text
-        /// </summary>
-        public TranslationPosition TranslationPosition { get; set; }
-
-        /// <summary>
-        ///     True of the text should be outlined
-        /// </summary>
-        public bool TextOutlineEnabled { get; set; }
-
-        /// <summary>
-        ///     True if the text should have a shadow
-        /// </summary>
-        public bool TextShadowEnabled { get; set; }
-
-        /// <summary>
-        ///     Text borders (used by PowerPraise)
-        /// </summary>
-        public SongTextBorders TextBorders { get; set; }
+        public SongFormatting Formatting { get; set; }
 
         #endregion Fields
     }

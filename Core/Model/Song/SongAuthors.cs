@@ -21,7 +21,6 @@
  */
 
 using System;
-using System.Collections.Generic;
 
 namespace PraiseBase.Presenter.Model.Song
 {

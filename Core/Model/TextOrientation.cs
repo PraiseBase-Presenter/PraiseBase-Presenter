@@ -50,7 +50,7 @@ namespace PraiseBase.Presenter.Model
             return Vertical == ori.Vertical && Horizontal == ori.Horizontal;
         }
 
-        public override bool Equals(Object o)
+        public override bool Equals(object o)
         {
             if (ReferenceEquals(null, o)) return false;
             if (ReferenceEquals(this, o)) return true;

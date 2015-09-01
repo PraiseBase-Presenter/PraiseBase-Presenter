@@ -23,6 +23,7 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using PraiseBase.Presenter.Model.Song;
 using PraiseBase.Presenter.Persistence;
 using PraiseBase.Presenter.Util;
@@ -44,8 +45,6 @@ namespace PraiseBase.Presenter.Manager
             CurrentSlideNr = -1;
             SongDirPath = songDirPath;
             SongList = new Dictionary<string, SongItem>();
-
-
         }
 
         /// <summary>
@@ -138,14 +137,7 @@ namespace PraiseBase.Presenter.Manager
         /// <returns>Returns the position in the songlist</returns>
         public string GetKeyByTitle(string title)
         {
-            foreach (var kvp in SongList)
-            {
-                if (kvp.Value.Song.Title == title)
-                {
-                    return kvp.Key;
-                }
-            }
-            return null;
+            return (from kvp in SongList where kvp.Value.Song.Title == title select kvp.Key).FirstOrDefault();
         }
 
         /// <summary>
@@ -177,16 +169,7 @@ namespace PraiseBase.Presenter.Manager
         {
             if (!string.IsNullOrEmpty(path))
             {
-                foreach (var kvp in SongList)
-                {
-                    if (String.Compare(
-                        Path.GetFullPath(kvp.Value.Filename).TrimEnd('\\'),
-                        Path.GetFullPath(path).TrimEnd('\\'),
-                        StringComparison.InvariantCultureIgnoreCase) == 0)
-                    {
-                        return kvp.Value;
-                    }
-                }
+                return (from kvp in SongList where string.Compare(Path.GetFullPath(kvp.Value.Filename).TrimEnd('\\'), Path.GetFullPath(path).TrimEnd('\\'), StringComparison.InvariantCultureIgnoreCase) == 0 select kvp.Value).FirstOrDefault();
             }
             return null;
         }
@@ -204,16 +187,7 @@ namespace PraiseBase.Presenter.Manager
         {
             needle = SongSearchUtil.PrepareSearchText(needle);
 
-            var tmpList = new Dictionary<string, SongItem>();
-            foreach (var kvp in SongList)
-            {
-                if (kvp.Value.Song.Title.ToLower().Contains(needle) ||
-                    (searchMode == SongSearchMode.TitleAndText && kvp.Value.SearchText.Contains(needle)))
-                {
-                    tmpList.Add(kvp.Key, kvp.Value);
-                }
-            }
-            return tmpList;
+            return SongList.Where(kvp => kvp.Value.Song.Title.ToLower().Contains(needle) || (searchMode == SongSearchMode.TitleAndText && kvp.Value.SearchText.Contains(needle))).ToDictionary(kvp => kvp.Key, kvp => kvp.Value);
         }
 
         /// <summary>
