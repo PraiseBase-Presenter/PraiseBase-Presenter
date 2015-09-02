@@ -336,4 +336,7 @@
   <data name="AllFiles" xml:space="preserve">
     <value>Alle Dateien</value>
   </data>
+  <data name="Thumbnails" xml:space="preserve">
+    <value>Miniaturbilder</value>
+  </data>
 </root>

@@ -318,6 +318,9 @@
   <data name="TagExistsAlready" xml:space="preserve">
     <value>This tag exists already!</value>
   </data>
+  <data name="Thumbnails" xml:space="preserve">
+    <value>Thumbnails</value>
+  </data>
   <data name="TopDirectory" xml:space="preserve">
     <value>Root directory</value>
   </data>

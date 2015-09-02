@@ -44,6 +44,7 @@ using PraiseBase.Presenter.Projection;
 using PraiseBase.Presenter.Properties;
 using PraiseBase.Presenter.Util;
 using Timer = System.Windows.Forms.Timer;
+using System.ComponentModel;
 
 namespace PraiseBase.Presenter.Presenter
 {
@@ -1430,17 +1431,28 @@ namespace PraiseBase.Presenter.Presenter
 
         private void CheckThumbnails()
         {
-            ProgressWindow wnd = new ProgressWindow(StringResources.CreatingThumbnails + "...", 0);
+            SimpleProgressWindow wnd = new SimpleProgressWindow(StringResources.Thumbnails);
+            wnd.SetLabel(StringResources.CreatingThumbnails + "...");
             wnd.Show();
-            _imgManager.ThumbnailCreated += Instance_ThumbnailCreated;
-            _imgManager.CheckThumbs();
-            wnd.Close();
-        }
 
-        void Instance_ThumbnailCreated(ImageManager.ThumbnailCreateEventArgs e)
-        {
-            //TODO
-            //wnd.UpdateStatus("Erstelle Miniaturbilder " + i.ToString() + "/" + cnt.ToString(), i);
+            BackgroundWorker bw = new BackgroundWorker();
+
+            // what to do in the background thread
+            bw.DoWork += new DoWorkEventHandler(
+            delegate (object o, DoWorkEventArgs args)
+            {
+                BackgroundWorker b = o as BackgroundWorker;
+                _imgManager.CheckThumbs(true);
+            });
+
+            // what to do when worker completes its task (notify the user)
+            bw.RunWorkerCompleted += new RunWorkerCompletedEventHandler(
+            delegate (object o, RunWorkerCompletedEventArgs args)
+            {
+                wnd.Close();
+            });
+
+            bw.RunWorkerAsync();
         }
 
         private void button1_Click_1(object sender, EventArgs e)

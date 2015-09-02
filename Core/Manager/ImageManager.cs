@@ -75,7 +75,7 @@ namespace PraiseBase.Presenter.Manager
         /// <summary>
         ///     Check and create thumbnails if necessary
         /// </summary>
-        public void CheckThumbs()
+        public void CheckThumbs(bool cleanup)
         {
             var missingThumbsSrc = new List<string>();
             var missingThumbsTrg = new List<string>();
@@ -95,8 +95,23 @@ namespace PraiseBase.Presenter.Manager
                         }
                     }
                 }
+                // Cleanup
+                if (cleanup)
+                {
+                    // Cleanup images of which no original file exists
+                    var tumbPaths = Directory.GetFiles(ThumbDirPath, ext, SearchOption.AllDirectories);
+                    foreach (var file in tumbPaths)
+                    {
+                        var realImage = file.Replace(ThumbDirPath, ImageDirPath);
+                        if (!File.Exists(realImage))
+                        {
+                            File.Delete(file);
+                        }
+                    }
+                    // Cleanup empty directories
+                    FileUtils.RemoveEmptySubdirectories(ThumbDirPath);
+                }
             }
-
             var cnt = missingThumbsSrc.Count;
             if (cnt > 0)
             {

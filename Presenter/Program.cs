@@ -104,7 +104,7 @@ namespace PraiseBase.Presenter
                 ldg.Show();
 
                 ldg.SetLabel("Prüfe Miniaturbilder...");
-                imgManager.CheckThumbs();
+                imgManager.CheckThumbs(false);
 
                 ldg.SetLabel("Lade Liederdatenbank...");
                 songManager.Reload();
@@ -115,7 +115,7 @@ namespace PraiseBase.Presenter
             }
             else
             {
-                imgManager.CheckThumbs();
+                imgManager.CheckThumbs(false);
                 songManager.Reload();
                 GC.Collect();
             }
