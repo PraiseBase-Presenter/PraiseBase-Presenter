@@ -55,5 +55,22 @@ namespace PraiseBase.Presenter.Util
             }
             return string.Empty;
         }
+
+        /// <summary>
+        ///     Removes all empty subdirectories
+        /// </summary>
+        /// <param name="startLocation"></param>
+        public static void RemoveEmptySubdirectories(string startLocation)
+        {
+            foreach (var directory in Directory.GetDirectories(startLocation))
+            {
+                RemoveEmptySubdirectories(directory);
+                if (Directory.GetFiles(directory).Length == 0 &&
+                    Directory.GetDirectories(directory).Length == 0)
+                {
+                    Directory.Delete(directory, false);
+                }
+            }
+        }
     }
 }
