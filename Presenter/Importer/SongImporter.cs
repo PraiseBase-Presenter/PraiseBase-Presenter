@@ -106,6 +106,17 @@ namespace PraiseBase.Presenter.Importer
 
                     // Apply formatting
                     stm.ApplyFormattingFromSettings(sng);
+                    // Apply default background
+                    foreach (var p in sng.Parts)
+                    {
+                        foreach (var s in p.Slides)
+                        {
+                            if (s.Background == null)
+                            {
+                                s.Background = stm.GetDefaultBackground();
+                            }
+                        }
+                    }
 
                     // TODO: Allow selection of plugin
                     ISongFilePlugin filePlugin = SongFilePluginFactory.Create(SongFilePluginFactory.GetWriterPlugins().First().GetType());
