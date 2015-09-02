@@ -220,6 +220,11 @@ namespace PraiseBase.Presenter.Editor
                 }
                 var sng = plugin.Load(fileName);
 
+                if (sng.Formatting == null) {
+                    SongTemplateMapper stm = new SongTemplateMapper(_settings);
+                    stm.ApplyFormattingFromSettings(sng);
+                }
+
                 CreateSongEditorChildForm(sng, fileName);
             }
             catch (NotImplementedException)

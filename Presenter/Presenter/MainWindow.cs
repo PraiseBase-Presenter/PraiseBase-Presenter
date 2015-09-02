@@ -595,7 +595,7 @@ namespace PraiseBase.Presenter.Presenter
             AdditionalInformationPosition copyrightPosition;
 
             // Formatting based on master styling
-            if (Settings.Default.ProjectionUseMaster)
+            if (Settings.Default.ProjectionUseMaster|| s.Formatting == null)
             {
                 ISlideTextFormattingMapper<Settings> mapper = new SettingsSlideTextFormattingMapper();
                 mapper.Map(Settings.Default, ref slideFormatting);

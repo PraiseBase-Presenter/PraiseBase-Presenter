@@ -17,6 +17,7 @@ namespace PraiseBase.Presenter.Persistence.PowerPraise
             song.Themes.Add("Anbetung");
 
             song.Copyright = "Text und Musik: Lowell Mason, 1792-1872";
+            song.Formatting = new SongFormatting();
             song.Formatting.CopyrightPosition = AdditionalInformationPosition.LastSlide;
 
             SongBook sb = new SongBook

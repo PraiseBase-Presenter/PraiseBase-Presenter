@@ -45,7 +45,6 @@ namespace PraiseBase.Presenter.Model.Song
             Authors = new SongAuthors();
             Comment = string.Empty;
             QualityIssues = new QualityIssues();
-            Formatting = new SongFormatting();
         }
 
         /// <summary>
