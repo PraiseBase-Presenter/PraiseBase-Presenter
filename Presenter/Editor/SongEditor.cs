@@ -220,9 +220,21 @@ namespace PraiseBase.Presenter.Editor
                 }
                 var sng = plugin.Load(fileName);
 
+                SongTemplateMapper stm = new SongTemplateMapper(_settings);
+                // Set default formattig if none exists
                 if (sng.Formatting == null) {
-                    SongTemplateMapper stm = new SongTemplateMapper(_settings);
                     stm.ApplyFormattingFromSettings(sng);
+                }
+                // Set default background if none is set
+                foreach (var p in sng.Parts)
+                {
+                    foreach (var s in p.Slides)
+                    {
+                        if (s.Background == null)
+                        {
+                            s.Background = stm.GetDefaultBackground();
+                        }
+                    }
                 }
 
                 CreateSongEditorChildForm(sng, fileName);
