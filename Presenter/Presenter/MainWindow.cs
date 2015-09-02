@@ -638,8 +638,9 @@ namespace PraiseBase.Presenter.Presenter
             }
 
             // Set footer text (copyright)
-            if (copyrightPosition == AdditionalInformationPosition.FirstSlide && isFirstSlide(e.PartNumber, e.SlideNumber) ||
-                copyrightPosition == AdditionalInformationPosition.LastSlide && isLastSlide(s, e.PartNumber, e.SlideNumber))
+            if (s.Copyright != null && (
+                copyrightPosition == AdditionalInformationPosition.FirstSlide && isFirstSlide(e.PartNumber, e.SlideNumber) ||
+                copyrightPosition == AdditionalInformationPosition.LastSlide && isLastSlide(s, e.PartNumber, e.SlideNumber)))
             {
                 String[] copyRightLines = s.Copyright.Split(new[] {Environment.NewLine}, StringSplitOptions.None);
                 if (!String.IsNullOrEmpty(s.CcliIdentifier))
