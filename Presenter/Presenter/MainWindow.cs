@@ -1433,7 +1433,7 @@ namespace PraiseBase.Presenter.Presenter
             ProgressWindow wnd = new ProgressWindow(StringResources.CreatingThumbnails + "...", 0);
             wnd.Show();
             _imgManager.ThumbnailCreated += Instance_ThumbnailCreated;
-            _imgManager.CheckThumbs();
+            _imgManager.CheckThumbs(true);
             wnd.Close();
         }
 
