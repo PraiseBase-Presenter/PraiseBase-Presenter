@@ -49,6 +49,7 @@ namespace PraiseBase.Presenter.Persistence.PowerPraise
 
             // Copyright text
             song.Copyright = string.Join(Environment.NewLine, ppl.CopyrightText.ToArray());
+            song.Formatting = new SongFormatting();
             song.Formatting.CopyrightPosition = ppl.Formatting.CopyrightTextPosition;
 
             // Source / songbook
@@ -128,11 +129,11 @@ namespace PraiseBase.Presenter.Persistence.PowerPraise
                 {
                     var pplSlide = new PowerPraiseSong.Slide
                     {
-                        Background = (IBackground) songSlide.Background.Clone(),
+                        Background = songSlide.Background != null ? (IBackground) songSlide.Background.Clone() : null,
                         MainSize = (int)
                             (songSlide.TextSize > 0
                                 ? songSlide.TextSize
-                                : (song.Formatting.MainText != null && song.Formatting.MainText.Font != null
+                                : (song.Formatting != null && song.Formatting.MainText != null && song.Formatting.MainText.Font != null
                                     ? song.Formatting.MainText.Font.Size
                                     : 0))
                     };

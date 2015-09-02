@@ -60,6 +60,7 @@ namespace PraiseBase.Presenter.Template
 
         public void ApplyFormattingFromSettings(Song sng)
         {
+            sng.Formatting = new SongFormatting();
             sng.Formatting.MainText = new TextFormatting(
                 _settings.ProjectionMasterFont,
                 _settings.ProjectionMasterFontColor,
