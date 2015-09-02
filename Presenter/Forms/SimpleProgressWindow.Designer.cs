@@ -50,8 +50,10 @@
             this.Controls.Add(this.label1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.Name = "SimpleProgressWindow";
+            this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "SimpleProgressWindow";
+            this.TopMost = true;
             this.Load += new System.EventHandler(this.SimpleProgressWindow_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
