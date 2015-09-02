@@ -1430,17 +1430,11 @@ namespace PraiseBase.Presenter.Presenter
 
         private void CheckThumbnails()
         {
-            ProgressWindow wnd = new ProgressWindow(StringResources.CreatingThumbnails + "...", 0);
+            SimpleProgressWindow wnd = new SimpleProgressWindow(StringResources.Thumbnails);
+            wnd.SetLabel(StringResources.CreatingThumbnails + "...");
             wnd.Show();
-            _imgManager.ThumbnailCreated += Instance_ThumbnailCreated;
             _imgManager.CheckThumbs(true);
             wnd.Close();
-        }
-
-        void Instance_ThumbnailCreated(ImageManager.ThumbnailCreateEventArgs e)
-        {
-            //TODO
-            //wnd.UpdateStatus("Erstelle Miniaturbilder " + i.ToString() + "/" + cnt.ToString(), i);
         }
 
         private void button1_Click_1(object sender, EventArgs e)
