@@ -18,5 +18,10 @@
         {
             return "PowerPraise Lied";
         }
+
+        public override int LoadingOrder()
+        {
+            return 1;
+        }
     }
 }

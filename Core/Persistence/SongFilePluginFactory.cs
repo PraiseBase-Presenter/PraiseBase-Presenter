@@ -18,13 +18,19 @@ namespace PraiseBase.Presenter.Persistence
             var allTypes = AppDomain.CurrentDomain.GetAssemblies()
                 .SelectMany(x => x.GetTypes())
                 .Where(x => interfaceType.IsAssignableFrom(x) && !x.IsInterface && !x.IsAbstract);
+            List<ISongFilePlugin> instances = new List<ISongFilePlugin>();
             foreach (var atype in allTypes)
             {
-                var inst = (ISongFilePlugin) Activator.CreateInstance(atype);
+                var inst = (ISongFilePlugin)Activator.CreateInstance(atype);
+                instances.Add(inst);
+            }
+            foreach (var inst in instances.OrderBy(i => i.LoadingOrder()))
+            {
+                var atype = inst.GetType();
                 _plugins.Add(atype, inst);
                 if (!_supportedExtensionMapping.Keys.Contains(inst.GetFileExtension()))
                 {
-                    _supportedExtensionMapping.Add(inst.GetFileExtension(), new HashSet<Type>(new[] {atype}));
+                    _supportedExtensionMapping.Add(inst.GetFileExtension(), new HashSet<Type>(new[] { atype }));
                 }
                 else
                 {

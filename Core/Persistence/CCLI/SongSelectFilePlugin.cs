@@ -17,5 +17,10 @@
         {
             return "SongSelect Import File";
         }
+
+        public override int LoadingOrder()
+        {
+            return 2;
+        }
     }
 }

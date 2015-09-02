@@ -1,4 +1,6 @@
-﻿namespace PraiseBase.Presenter.Persistence.PowerPraise.Extended
+﻿using System;
+
+namespace PraiseBase.Presenter.Persistence.PowerPraise.Extended
 {
     public class ExtendedPowerPraiseSongFilePlugin : AbstractSongFilePlugin<ExtendedPowerPraiseSong>
     {
@@ -17,6 +19,11 @@
         public override string GetFileTypeDescription()
         {
             return "PowerPraise Lied (erweitert)";
+        }
+
+        public override int LoadingOrder()
+        {
+            return 0;
         }
     }
 }

@@ -26,6 +26,12 @@ namespace PraiseBase.Presenter.Persistence
         bool IsFileSupported(string filePath);
 
         /// <summary>
+        ///     Gets a number indicating the order in which the plugin should be loaded
+        /// </summary>
+        /// <returns></returns>
+        int LoadingOrder();
+
+        /// <summary>
         ///     Defines the extensions this file format uses, e.g. ".xml"
         /// </summary>
         string GetFileExtension();

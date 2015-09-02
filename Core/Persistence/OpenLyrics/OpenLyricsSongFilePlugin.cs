@@ -17,5 +17,10 @@
         {
             return "OpenLyrics Song";
         }
+
+        public override int LoadingOrder()
+        {
+            return 3;
+        }
     }
 }

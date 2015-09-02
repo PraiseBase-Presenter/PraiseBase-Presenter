@@ -27,6 +27,12 @@ namespace PraiseBase.Presenter.Persistence
         public abstract string GetFileTypeDescription();
 
         /// <summary>
+        ///     Gets a number indicating the order in which the plugin should be loaded
+        /// </summary>
+        /// <returns></returns>
+        public abstract int LoadingOrder();
+
+        /// <summary>
         ///     Reads the title from the file
         /// </summary>
         /// <param name="filePath"></param>
