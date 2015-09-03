@@ -1777,6 +1777,11 @@ namespace PraiseBase.Presenter.Presenter
 
                 BibleVerseSelection vs = new BibleVerseSelection(first, last);
                 labelBibleTextName.Text = vs.ToString();
+
+                if (checkBoxBibleAutoShowVerse.Checked)
+                {
+                    displayBibleVerseSelection(vs);
+                }
             }
             else
             {
@@ -1793,6 +1798,11 @@ namespace PraiseBase.Presenter.Presenter
             BibleVerse last = (BibleVerse)listViewBibleVerses.SelectedItems[selectedVersesCount - 1].Tag;
             BibleVerseSelection vs = new BibleVerseSelection(first, last);
 
+            displayBibleVerseSelection(vs);
+        }
+
+        private void displayBibleVerseSelection(BibleVerseSelection vs)
+        {
             BibleManager.BibleItem bibleItem = ((KeyValuePair<String, BibleManager.BibleItem>)comboBoxBible.SelectedItem).Value;
             List<string> copyrightItems = new List<string>
             {
@@ -1818,8 +1828,8 @@ namespace PraiseBase.Presenter.Presenter
 
             TextLayer lt = new TextLayer(slideFormatting)
             {
-                MainText = text.Split(new[] {Environment.NewLine}, StringSplitOptions.None),
-                HeaderText = new[] {title},
+                MainText = text.Split(new[] { Environment.NewLine }, StringSplitOptions.None),
+                HeaderText = new[] { title },
                 FooterText = copyrightItems.ToArray()
             };
 
