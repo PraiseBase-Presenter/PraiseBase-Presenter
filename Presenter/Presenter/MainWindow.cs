@@ -1720,7 +1720,7 @@ namespace PraiseBase.Presenter.Presenter
                 listBoxBibleChapter.Items.Add(cp);
             }
 
-            if (_bookIdx == listBoxBibleBook.SelectedIndex && _chapterIdx >= 0)
+            if (_bookIdx == listBoxBibleBook.SelectedIndex && _chapterIdx >= 0 && listBoxBibleChapter.Items.Count > _chapterIdx)
             {
                 listBoxBibleChapter.SelectedIndex = _chapterIdx;
             }
