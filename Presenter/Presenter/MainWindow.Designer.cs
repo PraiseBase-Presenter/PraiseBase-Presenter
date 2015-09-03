@@ -51,6 +51,10 @@ namespace PraiseBase.Presenter.Presenter
             this.buttonShowLiveText = new System.Windows.Forms.Button();
             this.textBoxLiveText = new System.Windows.Forms.TextBox();
             this.tabPage5 = new System.Windows.Forms.TabPage();
+            this.labelBibleTextName = new System.Windows.Forms.Label();
+            this.listViewBibleVerses = new System.Windows.Forms.ListView();
+            this.columnHeaderVerseIndex = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeaderVerseText = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.labelBibleSearchMsg = new System.Windows.Forms.Label();
             this.checkBoxBibleShowVerseFromListDirectly = new System.Windows.Forms.CheckBox();
             this.buttonAddToBibleVerseList = new System.Windows.Forms.Button();
@@ -59,13 +63,8 @@ namespace PraiseBase.Presenter.Presenter
             this.searchTextBoxBible = new PraiseBase.Presenter.Controls.SearchTextBox();
             this.listViewBibleVerseList = new PraiseBase.Presenter.Controls.DragAndDropListView();
             this.columnHeader3 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.label11 = new System.Windows.Forms.Label();
-            this.listBoxBibleVerseTo = new System.Windows.Forms.ListBox();
-            this.labelBibleTextName = new System.Windows.Forms.Label();
             this.buttonBibleTextShow = new System.Windows.Forms.Button();
-            this.textBoxBibleText = new System.Windows.Forms.TextBox();
-            this.label9 = new System.Windows.Forms.Label();
-            this.listBoxBibleVerse = new System.Windows.Forms.ListBox();
+            this.labelBibleVerses = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
@@ -367,6 +366,8 @@ namespace PraiseBase.Presenter.Presenter
             // 
             // tabPage5
             // 
+            this.tabPage5.Controls.Add(this.labelBibleTextName);
+            this.tabPage5.Controls.Add(this.listViewBibleVerses);
             this.tabPage5.Controls.Add(this.labelBibleSearchMsg);
             this.tabPage5.Controls.Add(this.checkBoxBibleShowVerseFromListDirectly);
             this.tabPage5.Controls.Add(this.buttonAddToBibleVerseList);
@@ -374,13 +375,8 @@ namespace PraiseBase.Presenter.Presenter
             this.tabPage5.Controls.Add(this.label12);
             this.tabPage5.Controls.Add(this.searchTextBoxBible);
             this.tabPage5.Controls.Add(this.listViewBibleVerseList);
-            this.tabPage5.Controls.Add(this.label11);
-            this.tabPage5.Controls.Add(this.listBoxBibleVerseTo);
-            this.tabPage5.Controls.Add(this.labelBibleTextName);
             this.tabPage5.Controls.Add(this.buttonBibleTextShow);
-            this.tabPage5.Controls.Add(this.textBoxBibleText);
-            this.tabPage5.Controls.Add(this.label9);
-            this.tabPage5.Controls.Add(this.listBoxBibleVerse);
+            this.tabPage5.Controls.Add(this.labelBibleVerses);
             this.tabPage5.Controls.Add(this.label7);
             this.tabPage5.Controls.Add(this.label4);
             this.tabPage5.Controls.Add(this.label2);
@@ -390,6 +386,34 @@ namespace PraiseBase.Presenter.Presenter
             resources.ApplyResources(this.tabPage5, "tabPage5");
             this.tabPage5.Name = "tabPage5";
             this.tabPage5.UseVisualStyleBackColor = true;
+            // 
+            // labelBibleTextName
+            // 
+            resources.ApplyResources(this.labelBibleTextName, "labelBibleTextName");
+            this.labelBibleTextName.Name = "labelBibleTextName";
+            // 
+            // listViewBibleVerses
+            // 
+            resources.ApplyResources(this.listViewBibleVerses, "listViewBibleVerses");
+            this.listViewBibleVerses.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.columnHeaderVerseIndex,
+            this.columnHeaderVerseText});
+            this.listViewBibleVerses.FullRowSelect = true;
+            this.listViewBibleVerses.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable;
+            this.listViewBibleVerses.HideSelection = false;
+            this.listViewBibleVerses.Name = "listViewBibleVerses";
+            this.listViewBibleVerses.UseCompatibleStateImageBehavior = false;
+            this.listViewBibleVerses.View = System.Windows.Forms.View.Details;
+            this.listViewBibleVerses.SelectedIndexChanged += new System.EventHandler(this.listViewBibleVerses_SelectedIndexChanged);
+            this.listViewBibleVerses.Resize += new System.EventHandler(this.listViewBibleVerses_Resize);
+            // 
+            // columnHeaderVerseIndex
+            // 
+            resources.ApplyResources(this.columnHeaderVerseIndex, "columnHeaderVerseIndex");
+            // 
+            // columnHeaderVerseText
+            // 
+            resources.ApplyResources(this.columnHeaderVerseText, "columnHeaderVerseText");
             // 
             // labelBibleSearchMsg
             // 
@@ -444,23 +468,6 @@ namespace PraiseBase.Presenter.Presenter
             this.listViewBibleVerseList.View = System.Windows.Forms.View.Details;
             this.listViewBibleVerseList.SelectedIndexChanged += new System.EventHandler(this.listViewBibleVerseList_SelectedIndexChanged);
             // 
-            // label11
-            // 
-            resources.ApplyResources(this.label11, "label11");
-            this.label11.Name = "label11";
-            // 
-            // listBoxBibleVerseTo
-            // 
-            resources.ApplyResources(this.listBoxBibleVerseTo, "listBoxBibleVerseTo");
-            this.listBoxBibleVerseTo.FormattingEnabled = true;
-            this.listBoxBibleVerseTo.Name = "listBoxBibleVerseTo";
-            this.listBoxBibleVerseTo.SelectedIndexChanged += new System.EventHandler(this.listBoxBibleVerseTo_SelectedIndexChanged);
-            // 
-            // labelBibleTextName
-            // 
-            resources.ApplyResources(this.labelBibleTextName, "labelBibleTextName");
-            this.labelBibleTextName.Name = "labelBibleTextName";
-            // 
             // buttonBibleTextShow
             // 
             resources.ApplyResources(this.buttonBibleTextShow, "buttonBibleTextShow");
@@ -468,23 +475,10 @@ namespace PraiseBase.Presenter.Presenter
             this.buttonBibleTextShow.UseVisualStyleBackColor = true;
             this.buttonBibleTextShow.Click += new System.EventHandler(this.buttonBibleTextShow_Click);
             // 
-            // textBoxBibleText
+            // labelBibleVerses
             // 
-            resources.ApplyResources(this.textBoxBibleText, "textBoxBibleText");
-            this.textBoxBibleText.Name = "textBoxBibleText";
-            this.textBoxBibleText.ReadOnly = true;
-            // 
-            // label9
-            // 
-            resources.ApplyResources(this.label9, "label9");
-            this.label9.Name = "label9";
-            // 
-            // listBoxBibleVerse
-            // 
-            resources.ApplyResources(this.listBoxBibleVerse, "listBoxBibleVerse");
-            this.listBoxBibleVerse.FormattingEnabled = true;
-            this.listBoxBibleVerse.Name = "listBoxBibleVerse";
-            this.listBoxBibleVerse.SelectedIndexChanged += new System.EventHandler(this.listBoxBibleVerse_SelectedIndexChanged);
+            resources.ApplyResources(this.labelBibleVerses, "labelBibleVerses");
+            this.labelBibleVerses.Name = "labelBibleVerses";
             // 
             // label7
             // 
@@ -1504,13 +1498,8 @@ namespace PraiseBase.Presenter.Presenter
         private System.Windows.Forms.ListBox listBoxBibleBook;
         private System.Windows.Forms.ComboBox comboBoxBible;
         private System.Windows.Forms.Label label7;
-        private System.Windows.Forms.Label label9;
-        private System.Windows.Forms.ListBox listBoxBibleVerse;
-        private System.Windows.Forms.TextBox textBoxBibleText;
+        private System.Windows.Forms.Label labelBibleVerses;
         private System.Windows.Forms.Button buttonBibleTextShow;
-        private System.Windows.Forms.Label labelBibleTextName;
-        private System.Windows.Forms.ListBox listBoxBibleVerseTo;
-        private System.Windows.Forms.Label label11;
         private System.Windows.Forms.Label label12;
         private System.Windows.Forms.Button buttonAddToBibleVerseList;
         private System.Windows.Forms.Button buttonRemoveFromBibleVerseList;
@@ -1567,7 +1556,10 @@ namespace PraiseBase.Presenter.Presenter
         private System.Windows.Forms.ColumnHeader columnHeader3;
         private System.Windows.Forms.Button buttonSongViewModeStructure;
         private System.Windows.Forms.Button buttonSongViewModeSequence;
-        
+        private System.Windows.Forms.ListView listViewBibleVerses;
+        private System.Windows.Forms.ColumnHeader columnHeaderVerseIndex;
+        private System.Windows.Forms.ColumnHeader columnHeaderVerseText;
+        private System.Windows.Forms.Label labelBibleTextName;
     }
 }
 

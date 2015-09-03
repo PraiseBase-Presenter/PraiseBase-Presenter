@@ -271,7 +271,7 @@
     <value>songSearchTextBox</value>
   </data>
   <data name="&gt;&gt;songSearchTextBox.Type" xml:space="preserve">
-    <value>PraiseBase.Presenter.Controls.SearchTextBox, PraiseBase Presenter, Version=1.2.1.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>PraiseBase.Presenter.Controls.SearchTextBox, PraiseBase Presenter, Version=1.2.3.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;songSearchTextBox.Parent" xml:space="preserve">
     <value>tabPage1</value>
@@ -396,7 +396,7 @@
     <value>songDetailElement</value>
   </data>
   <data name="&gt;&gt;songDetailElement.Type" xml:space="preserve">
-    <value>PraiseBase.Presenter.Controls.SongDetail, PraiseBase Presenter, Version=1.2.1.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>PraiseBase.Presenter.Controls.SongDetail, PraiseBase Presenter, Version=1.2.3.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;songDetailElement.Parent" xml:space="preserve">
     <value>tabPage1</value>
@@ -586,6 +586,66 @@
   <data name="&gt;&gt;tabPage2.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
+  <data name="labelBibleTextName.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="labelBibleTextName.Location" type="System.Drawing.Point, System.Drawing">
+    <value>391, 9</value>
+  </data>
+  <data name="labelBibleTextName.Size" type="System.Drawing.Size, System.Drawing">
+    <value>0, 13</value>
+  </data>
+  <data name="labelBibleTextName.TabIndex" type="System.Int32, mscorlib">
+    <value>41</value>
+  </data>
+  <data name="&gt;&gt;labelBibleTextName.Name" xml:space="preserve">
+    <value>labelBibleTextName</value>
+  </data>
+  <data name="&gt;&gt;labelBibleTextName.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;labelBibleTextName.Parent" xml:space="preserve">
+    <value>tabPage5</value>
+  </data>
+  <data name="&gt;&gt;labelBibleTextName.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="listViewBibleVerses.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Bottom, Left, Right</value>
+  </data>
+  <data name="columnHeaderVerseIndex.Text" xml:space="preserve">
+    <value>Vers</value>
+  </data>
+  <data name="columnHeaderVerseText.Text" xml:space="preserve">
+    <value>Text</value>
+  </data>
+  <data name="columnHeaderVerseText.Width" type="System.Int32, mscorlib">
+    <value>301</value>
+  </data>
+  <data name="listViewBibleVerses.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 9.75pt</value>
+  </data>
+  <data name="listViewBibleVerses.Location" type="System.Drawing.Point, System.Drawing">
+    <value>345, 33</value>
+  </data>
+  <data name="listViewBibleVerses.Size" type="System.Drawing.Size, System.Drawing">
+    <value>383, 251</value>
+  </data>
+  <data name="listViewBibleVerses.TabIndex" type="System.Int32, mscorlib">
+    <value>40</value>
+  </data>
+  <data name="&gt;&gt;listViewBibleVerses.Name" xml:space="preserve">
+    <value>listViewBibleVerses</value>
+  </data>
+  <data name="&gt;&gt;listViewBibleVerses.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ListView, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;listViewBibleVerses.Parent" xml:space="preserve">
+    <value>tabPage5</value>
+  </data>
+  <data name="&gt;&gt;listViewBibleVerses.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
   <data name="labelBibleSearchMsg.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
@@ -611,7 +671,7 @@
     <value>tabPage5</value>
   </data>
   <data name="&gt;&gt;labelBibleSearchMsg.ZOrder" xml:space="preserve">
-    <value>0</value>
+    <value>2</value>
   </data>
   <data name="checkBoxBibleShowVerseFromListDirectly.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Bottom, Right</value>
@@ -644,7 +704,7 @@
     <value>tabPage5</value>
   </data>
   <data name="&gt;&gt;checkBoxBibleShowVerseFromListDirectly.ZOrder" xml:space="preserve">
-    <value>1</value>
+    <value>3</value>
   </data>
   <data name="buttonAddToBibleVerseList.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Bottom, Left</value>
@@ -741,7 +801,7 @@
     <value>tabPage5</value>
   </data>
   <data name="&gt;&gt;buttonAddToBibleVerseList.ZOrder" xml:space="preserve">
-    <value>2</value>
+    <value>4</value>
   </data>
   <data name="buttonRemoveFromBibleVerseList.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Bottom, Right</value>
@@ -835,7 +895,7 @@
     <value>tabPage5</value>
   </data>
   <data name="&gt;&gt;buttonRemoveFromBibleVerseList.ZOrder" xml:space="preserve">
-    <value>3</value>
+    <value>5</value>
   </data>
   <data name="label12.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -847,7 +907,7 @@
     <value>NoControl</value>
   </data>
   <data name="label12.Location" type="System.Drawing.Point, System.Drawing">
-    <value>855, 9</value>
+    <value>6, 91</value>
   </data>
   <data name="label12.Size" type="System.Drawing.Size, System.Drawing">
     <value>67, 13</value>
@@ -857,6 +917,9 @@
   </data>
   <data name="label12.Text" xml:space="preserve">
     <value>Vers-Liste:</value>
+  </data>
+  <data name="label12.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
   </data>
   <data name="&gt;&gt;label12.Name" xml:space="preserve">
     <value>label12</value>
@@ -868,7 +931,7 @@
     <value>tabPage5</value>
   </data>
   <data name="&gt;&gt;label12.ZOrder" xml:space="preserve">
-    <value>4</value>
+    <value>6</value>
   </data>
   <data name="searchTextBoxBible.Enabled" type="System.Boolean, mscorlib">
     <value>False</value>
@@ -889,13 +952,13 @@
     <value>searchTextBoxBible</value>
   </data>
   <data name="&gt;&gt;searchTextBoxBible.Type" xml:space="preserve">
-    <value>PraiseBase.Presenter.Controls.SearchTextBox, PraiseBase Presenter, Version=1.2.1.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>PraiseBase.Presenter.Controls.SearchTextBox, PraiseBase Presenter, Version=1.2.3.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;searchTextBoxBible.Parent" xml:space="preserve">
     <value>tabPage5</value>
   </data>
   <data name="&gt;&gt;searchTextBoxBible.ZOrder" xml:space="preserve">
-    <value>5</value>
+    <value>7</value>
   </data>
   <data name="listViewBibleVerseList.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Bottom, Left</value>
@@ -916,103 +979,13 @@
     <value>listViewBibleVerseList</value>
   </data>
   <data name="&gt;&gt;listViewBibleVerseList.Type" xml:space="preserve">
-    <value>PraiseBase.Presenter.Controls.DragAndDropListView, PraiseBase Presenter, Version=1.2.1.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>PraiseBase.Presenter.Controls.DragAndDropListView, PraiseBase Presenter, Version=1.2.3.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;listViewBibleVerseList.Parent" xml:space="preserve">
     <value>tabPage5</value>
   </data>
   <data name="&gt;&gt;listViewBibleVerseList.ZOrder" xml:space="preserve">
-    <value>6</value>
-  </data>
-  <data name="label11.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="label11.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Microsoft Sans Serif, 8.25pt, style=Bold</value>
-  </data>
-  <data name="label11.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="label11.Location" type="System.Drawing.Point, System.Drawing">
-    <value>398, 9</value>
-  </data>
-  <data name="label11.Size" type="System.Drawing.Size, System.Drawing">
-    <value>28, 13</value>
-  </data>
-  <data name="label11.TabIndex" type="System.Int32, mscorlib">
-    <value>15</value>
-  </data>
-  <data name="label11.Text" xml:space="preserve">
-    <value>Bis:</value>
-  </data>
-  <data name="&gt;&gt;label11.Name" xml:space="preserve">
-    <value>label11</value>
-  </data>
-  <data name="&gt;&gt;label11.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;label11.Parent" xml:space="preserve">
-    <value>tabPage5</value>
-  </data>
-  <data name="&gt;&gt;label11.ZOrder" xml:space="preserve">
-    <value>7</value>
-  </data>
-  <data name="listBoxBibleVerseTo.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Bottom, Left</value>
-  </data>
-  <data name="listBoxBibleVerseTo.Location" type="System.Drawing.Point, System.Drawing">
-    <value>401, 33</value>
-  </data>
-  <data name="listBoxBibleVerseTo.Size" type="System.Drawing.Size, System.Drawing">
-    <value>50, 251</value>
-  </data>
-  <data name="listBoxBibleVerseTo.TabIndex" type="System.Int32, mscorlib">
-    <value>12</value>
-  </data>
-  <data name="&gt;&gt;listBoxBibleVerseTo.Name" xml:space="preserve">
-    <value>listBoxBibleVerseTo</value>
-  </data>
-  <data name="&gt;&gt;listBoxBibleVerseTo.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ListBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;listBoxBibleVerseTo.Parent" xml:space="preserve">
-    <value>tabPage5</value>
-  </data>
-  <data name="&gt;&gt;listBoxBibleVerseTo.ZOrder" xml:space="preserve">
     <value>8</value>
-  </data>
-  <data name="labelBibleTextName.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="labelBibleTextName.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Microsoft Sans Serif, 8.25pt, style=Bold</value>
-  </data>
-  <data name="labelBibleTextName.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="labelBibleTextName.Location" type="System.Drawing.Point, System.Drawing">
-    <value>454, 9</value>
-  </data>
-  <data name="labelBibleTextName.Size" type="System.Drawing.Size, System.Drawing">
-    <value>36, 13</value>
-  </data>
-  <data name="labelBibleTextName.TabIndex" type="System.Int32, mscorlib">
-    <value>11</value>
-  </data>
-  <data name="labelBibleTextName.Text" xml:space="preserve">
-    <value>Text:</value>
-  </data>
-  <data name="&gt;&gt;labelBibleTextName.Name" xml:space="preserve">
-    <value>labelBibleTextName</value>
-  </data>
-  <data name="&gt;&gt;labelBibleTextName.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;labelBibleTextName.Parent" xml:space="preserve">
-    <value>tabPage5</value>
-  </data>
-  <data name="&gt;&gt;labelBibleTextName.ZOrder" xml:space="preserve">
-    <value>9</value>
   </data>
   <data name="buttonBibleTextShow.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Bottom, Right</value>
@@ -1113,91 +1086,40 @@
     <value>tabPage5</value>
   </data>
   <data name="&gt;&gt;buttonBibleTextShow.ZOrder" xml:space="preserve">
-    <value>10</value>
+    <value>9</value>
   </data>
-  <data name="textBoxBibleText.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Bottom, Left, Right</value>
-  </data>
-  <data name="textBoxBibleText.Location" type="System.Drawing.Point, System.Drawing">
-    <value>457, 33</value>
-  </data>
-  <data name="textBoxBibleText.Multiline" type="System.Boolean, mscorlib">
+  <data name="labelBibleVerses.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
-  <data name="textBoxBibleText.Size" type="System.Drawing.Size, System.Drawing">
-    <value>270, 254</value>
-  </data>
-  <data name="textBoxBibleText.TabIndex" type="System.Int32, mscorlib">
-    <value>8</value>
-  </data>
-  <data name="&gt;&gt;textBoxBibleText.Name" xml:space="preserve">
-    <value>textBoxBibleText</value>
-  </data>
-  <data name="&gt;&gt;textBoxBibleText.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;textBoxBibleText.Parent" xml:space="preserve">
-    <value>tabPage5</value>
-  </data>
-  <data name="&gt;&gt;textBoxBibleText.ZOrder" xml:space="preserve">
-    <value>11</value>
-  </data>
-  <data name="label9.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="label9.Font" type="System.Drawing.Font, System.Drawing">
+  <data name="labelBibleVerses.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 8.25pt, style=Bold</value>
   </data>
-  <data name="label9.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+  <data name="labelBibleVerses.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
-  <data name="label9.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="labelBibleVerses.Location" type="System.Drawing.Point, System.Drawing">
     <value>342, 9</value>
   </data>
-  <data name="label9.Size" type="System.Drawing.Size, System.Drawing">
-    <value>36, 13</value>
+  <data name="labelBibleVerses.Size" type="System.Drawing.Size, System.Drawing">
+    <value>43, 13</value>
   </data>
-  <data name="label9.TabIndex" type="System.Int32, mscorlib">
+  <data name="labelBibleVerses.TabIndex" type="System.Int32, mscorlib">
     <value>7</value>
   </data>
-  <data name="label9.Text" xml:space="preserve">
-    <value>Vers:</value>
+  <data name="labelBibleVerses.Text" xml:space="preserve">
+    <value>Verse:</value>
   </data>
-  <data name="&gt;&gt;label9.Name" xml:space="preserve">
-    <value>label9</value>
+  <data name="&gt;&gt;labelBibleVerses.Name" xml:space="preserve">
+    <value>labelBibleVerses</value>
   </data>
-  <data name="&gt;&gt;label9.Type" xml:space="preserve">
+  <data name="&gt;&gt;labelBibleVerses.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;label9.Parent" xml:space="preserve">
+  <data name="&gt;&gt;labelBibleVerses.Parent" xml:space="preserve">
     <value>tabPage5</value>
   </data>
-  <data name="&gt;&gt;label9.ZOrder" xml:space="preserve">
-    <value>12</value>
-  </data>
-  <data name="listBoxBibleVerse.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Bottom, Left</value>
-  </data>
-  <data name="listBoxBibleVerse.Location" type="System.Drawing.Point, System.Drawing">
-    <value>345, 33</value>
-  </data>
-  <data name="listBoxBibleVerse.Size" type="System.Drawing.Size, System.Drawing">
-    <value>50, 251</value>
-  </data>
-  <data name="listBoxBibleVerse.TabIndex" type="System.Int32, mscorlib">
-    <value>6</value>
-  </data>
-  <data name="&gt;&gt;listBoxBibleVerse.Name" xml:space="preserve">
-    <value>listBoxBibleVerse</value>
-  </data>
-  <data name="&gt;&gt;listBoxBibleVerse.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ListBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;listBoxBibleVerse.Parent" xml:space="preserve">
-    <value>tabPage5</value>
-  </data>
-  <data name="&gt;&gt;listBoxBibleVerse.ZOrder" xml:space="preserve">
-    <value>13</value>
+  <data name="&gt;&gt;labelBibleVerses.ZOrder" xml:space="preserve">
+    <value>10</value>
   </data>
   <data name="label7.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -1230,7 +1152,7 @@
     <value>tabPage5</value>
   </data>
   <data name="&gt;&gt;label7.ZOrder" xml:space="preserve">
-    <value>14</value>
+    <value>11</value>
   </data>
   <data name="label4.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -1263,7 +1185,7 @@
     <value>tabPage5</value>
   </data>
   <data name="&gt;&gt;label4.ZOrder" xml:space="preserve">
-    <value>15</value>
+    <value>12</value>
   </data>
   <data name="label2.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -1296,16 +1218,22 @@
     <value>tabPage5</value>
   </data>
   <data name="&gt;&gt;label2.ZOrder" xml:space="preserve">
-    <value>16</value>
+    <value>13</value>
   </data>
   <data name="listBoxBibleChapter.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Bottom, Left</value>
+  </data>
+  <data name="listBoxBibleChapter.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 9.75pt</value>
+  </data>
+  <data name="listBoxBibleChapter.ItemHeight" type="System.Int32, mscorlib">
+    <value>16</value>
   </data>
   <data name="listBoxBibleChapter.Location" type="System.Drawing.Point, System.Drawing">
     <value>289, 33</value>
   </data>
   <data name="listBoxBibleChapter.Size" type="System.Drawing.Size, System.Drawing">
-    <value>50, 251</value>
+    <value>50, 260</value>
   </data>
   <data name="listBoxBibleChapter.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
@@ -1320,16 +1248,22 @@
     <value>tabPage5</value>
   </data>
   <data name="&gt;&gt;listBoxBibleChapter.ZOrder" xml:space="preserve">
-    <value>17</value>
+    <value>14</value>
   </data>
   <data name="listBoxBibleBook.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Bottom, Left</value>
+  </data>
+  <data name="listBoxBibleBook.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 9.75pt</value>
+  </data>
+  <data name="listBoxBibleBook.ItemHeight" type="System.Int32, mscorlib">
+    <value>16</value>
   </data>
   <data name="listBoxBibleBook.Location" type="System.Drawing.Point, System.Drawing">
     <value>163, 33</value>
   </data>
   <data name="listBoxBibleBook.Size" type="System.Drawing.Size, System.Drawing">
-    <value>120, 251</value>
+    <value>120, 260</value>
   </data>
   <data name="listBoxBibleBook.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -1344,7 +1278,7 @@
     <value>tabPage5</value>
   </data>
   <data name="&gt;&gt;listBoxBibleBook.ZOrder" xml:space="preserve">
-    <value>18</value>
+    <value>15</value>
   </data>
   <data name="comboBoxBible.Location" type="System.Drawing.Point, System.Drawing">
     <value>7, 33</value>
@@ -1365,7 +1299,7 @@
     <value>tabPage5</value>
   </data>
   <data name="&gt;&gt;comboBoxBible.ZOrder" xml:space="preserve">
-    <value>19</value>
+    <value>16</value>
   </data>
   <data name="tabPage5.Location" type="System.Drawing.Point, System.Drawing">
     <value>4, 29</value>
@@ -1434,7 +1368,7 @@
     <value>customGroupBox2</value>
   </data>
   <data name="&gt;&gt;customGroupBox2.Type" xml:space="preserve">
-    <value>PraiseBase.Presenter.Controls.CustomGroupBox, PraiseBase Presenter, Version=1.2.1.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>PraiseBase.Presenter.Controls.CustomGroupBox, PraiseBase Presenter, Version=1.2.3.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;customGroupBox2.Parent" xml:space="preserve">
     <value>splitContainerLayerContent.Panel1</value>
@@ -1512,7 +1446,7 @@
     <value>searchTextBoxImages</value>
   </data>
   <data name="&gt;&gt;searchTextBoxImages.Type" xml:space="preserve">
-    <value>PraiseBase.Presenter.Controls.SearchTextBox, PraiseBase Presenter, Version=1.2.1.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>PraiseBase.Presenter.Controls.SearchTextBox, PraiseBase Presenter, Version=1.2.3.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;searchTextBoxImages.Parent" xml:space="preserve">
     <value>tabPageImageBrowser</value>
@@ -2162,7 +2096,7 @@
     <value>customGroupBox3</value>
   </data>
   <data name="&gt;&gt;customGroupBox3.Type" xml:space="preserve">
-    <value>PraiseBase.Presenter.Controls.CustomGroupBox, PraiseBase Presenter, Version=1.2.1.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>PraiseBase.Presenter.Controls.CustomGroupBox, PraiseBase Presenter, Version=1.2.3.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;customGroupBox3.Parent" xml:space="preserve">
     <value>splitContainerLayerContent.Panel2</value>
@@ -2571,7 +2505,7 @@
     <value>listViewSetList</value>
   </data>
   <data name="&gt;&gt;listViewSetList.Type" xml:space="preserve">
-    <value>PraiseBase.Presenter.Controls.DragAndDropListView, PraiseBase Presenter, Version=1.2.1.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>PraiseBase.Presenter.Controls.DragAndDropListView, PraiseBase Presenter, Version=1.2.3.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;listViewSetList.Parent" xml:space="preserve">
     <value>tabPage3</value>
@@ -3336,48 +3270,48 @@
   <data name="toolStripButton5.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         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
-        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
+        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
 </value>
   </data>
   <data name="toolStripButton5.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
@@ -3438,48 +3372,48 @@
   <data name="toolStripButtonDataFolder.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAACQAAAAkCAYAAADhAJiYAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
-        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
-        gg==
+        YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAlvSURBVFhHvdcNcJP1HQfwYF/S9IW0QBXkRcWKyGCDIRM8
+        cYDjKC9jjlHvdjdAQITpxok69XY7kekOQeS1MGQF+0IpTSldSxNJSS7tUtqYkITEZIlJllxC0qbppWsu
+        ucbE5/G735OkHkLpoJ373X3v/zzNy//T3///PH3K+74LwJja2tpxly5deqyxsX6Z6uo/NtQ1it+77uzZ
+        mHrL91sKhSL9ypUr4y9cuDCTxp9RNiqVyvfMX1w/Y7FYZCab3aLQ2oPXvOELqY+MrkQiUVpFRcV4iUQy
+        q7m5ealcLt+sUqne1Wg0p202m8zlcn3RS+Xz+eJU1KBkBSMMLP4orL0xdIfj0Ae+6kx95b1XXV3dYp1O
+        x/2GV27cuGGm+Xpo4q9vnvBOFQjFYPSEYOqOwEuoAH3EG45B0xW9mvr6ey+9Xn819f13XUGaVO8OweCL
+        wBVm4YsCngFKBHD3x6DyjQJkNpsTIJZlE5NxxR3ffH5zMfRzmTkAWz8DJwEcYcCZiovi6ItB6RkFyGAw
+        tHMTDSKGC8MwCPb1Q2r0w04YSz9gDQG2VOwUazAGhfv/AIpGo6D9BafLDYneBzNhjEHA1IfEMYez9LEw
+        BaJocY4CpNVq/ysoFovB7/fD4/HA4XQlQHrC6HqT4Y4NFH0vCx1dbZL/BWiwhgINROgq8nq/BYkJpCGI
+        yg+oA4CGoqWouxmoaYc3fTkKEN1nEqCYV4YBy4nbMFxFbgE163zoIIzSB7R3Ax2UTu7cG0e7J4p6a2T0
+        IH/1Urj3CMDG3OAYw4O8aCOMwsuildLmo3gZyF0DaHNFUGseFYiWLBYgTDaCDYtJIgHLDBAmiRoK1KT1
+        Qu4BZG4mEYWHRmcUUrr05I4Izl4PjxzUqTW3x4z74d6dgbj7IK2diLqkokuc7jlMsku3ghq1HkhdDC47
+        4zRSnDGIreFEpLYwqvT/HjlI2a5qD9X8CIHyRwnTAgxcBqLUpbgvgeJA4XA4gfG43XA4nGjQuCF2xNFk
+        JwilyRpBgzmERorYEsIpVd/IQbKGQ+3B0rGIdCwBwocIpSVQJ41clyIgE4FYuN0BuFzdsNvduKh2o9EW
+        RQN1pMEchsgQQp2xH/WUBmMf9it6Rw5qPfqMMlReiLjtWTCupTS7iNaKNkhMT12ygRnQYSBYh75AFUJ9
+        Nejvr0aLUU17xQWZ3QSpSYM6nRs1+n6I6IZUrQ3iHXHXyEAm0azMGyfzXeGWuWDtc8FYfgDG/XyyQwxd
+        x1El2O4N9Nf0TVrKUsoxxEN7IddLIbfqIDV3QqxVoJo6VqkJokbbi8OtfrxR77kjaExqvK2AkrS47P7t
+        wYoJiOmeBmN6BIx5JqGeAOv5NWF09HzxBlj3cupaNRA6BbZvH2L+t9GiFUNibEOTWoLKDhtOdwZRTndJ
+        Ln9s9OC1evewoO+gvun/aRHjmP8WY5l1La6fTc1YBEb/BBjdQ2AM0wlWRKiZYF1rwdgXgg3uBxuqIswB
+        Ot6NmG8nJOpGNGlaUdGqwQllAJ/Q3fEM3Sn3Sr3YKXLitVrn8EtWVMQb++aOib/q1s2/GHEtCDOWhYR4
+        EoxmNlgNdUY9BYyWQDo61lOMBDNOA+NYArb/NEEOgw3sBut/g+7oWyDurENFmw5H5N0oVfhwku6Sh2Re
+        gjjw+xoHdp51DA1a/1zWor+fmHg0bJ75L3QvoL+APwbTQcvSSgDF/WDaHgDTPglMJ52rphKQEN/CHibU
+        49SpEoL8CaxvF1jvS/QEthYa9WEC9OJAixdHZB4cbPHgdcK8Wm3H7yivVn05NOj5hfe98FXr+F4YHgOk
+        D4JpHgdGkg+mZQIYOYFaCdQ2kVD0WsdkQhFMfRNMS6OeltCxlvbSVnoCW4eocR1s+hZUKmzYJ3Hh/SYn
+        dlbbsKPCilcqrfhthQXby813XrJJubwJH2/OOGoW57CQFxCIUJfHJ1GyQupUCqWkTg3CBjvG4RLLWQTW
+        +hzi5l/Arq2B2exA5WU1Xj9nxY5yM16mcOOOM3TMpcx0R1AaJbGpF87ILm77gK9DWz7QkkJJUyiuW9+B
+        3YLrnEx77SFEDGthMFhgMRlRTqBtp014qcyUGLeVGek4mS1l14cGFRQUCHNzcwtzcnIe4PGEBWP5/KLt
+        xfwDwVpBCDICJbpFqMFuDcJaCTaI+xZI553TYdU3wGyyoVxCoFMGbDlpwNZPktnC5aQem/+qHxokFArz
+        KQ/n5eU9TqjZORk5c3h8/vSnizJ3hU/So4aYllDMoSjSm5ZRzi3lIG4wE4HWcfBo3qYlc+G0WEWT6/Di
+        cR02n6BxMMe12Hjs2p2XLDs7eyJlXlZW1iLK4vR0wcJZE9J3OTfwEK3OIxRt8uYUbHB/cUvJ4VoIxgFT
+        3YMsH33KpTBRh06LOxOTbzimwcZSCjdSNtHxpqOfq1Lz31bc/uFTPUKYZwhWnMbnL3t2atpH3q08xKpz
+        wTYKwXBp4mAU6horoXBd43CJEI6QrLQAUdk0WA2tKBMnAb85rMamY2psLlXjRRrX7G6KF+9Rfpac/s5V
+        IBAInqKsS8vMXrP20bRP/a/wEK/JAVOfRxkL5iKlQUjAHERqxiJ0Lh9sQw4gplweS0leoaxYCK/uCKrk
+        VgKo8MJHHV8v39PWveD1Fu30reLGCSUXK/Ker1uZmnfo4vZSNp9fTF3aeF9G1gsvzktv7vvDGMTPZSNe
+        m4O4KBdMXR5Qy8eAaBIUovdxseoYJKc2oePkT2A79SBidQW0ZELaR9nokRUHX/6w/sqM7Z9Jx60Tncpd
+        ff4jwcpzewWrzn+cs7J2eWraYWsMdWeKIDPzlxkZWZveXpZ5NfJBOuLVgmTOCcBUpGOg6Un4XQZ4/PQv
+        srsbZls3FAoFq1Kp//n+O9s+XTY76923VqWdr96aVjb5qeJVBeslpfxllXv5K6oPZq2qO5y1vOzZ1Hx3
+        XVPS0tKKD6zj66MHM8FUZoGt4gMVfITkG+l/r34o2j5nu7q6bD09PWcDgcBLwaB/Dj2jZaY+z1WGUMjL
+        nzh/dcn4ksa/8ZdUHuKvuHBQMGPNgtTr91xTq17OMsVK+WDKMxAq5Yfssj9bunrZ8109fa8QZK7NZuOn
+        3jtUcTfbjMK5q9cXrGuuyFh67sOcR1bOSb40shIo38myRY/zwZ4YI1sxJ/PxWSUlN3fgrmr8D4t/XrD2
+        7FH+lHlFqR+NvAb+wlsc2zfm0DdHeMN1YtgqLCzMFQqnFaRO76J4vP8APjmDo6m+S28AAAAASUVORK5C
+        YII=
 </value>
   </data>
   <data name="toolStripButtonDataFolder.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
@@ -3494,46 +3428,46 @@
   <data name="toolStripButton4.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         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
-        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
+        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
 </value>
   </data>
   <data name="toolStripButton4.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
@@ -4272,7 +4206,7 @@
     <value>customGroupBox1</value>
   </data>
   <data name="&gt;&gt;customGroupBox1.Type" xml:space="preserve">
-    <value>PraiseBase.Presenter.Controls.CustomGroupBox, PraiseBase Presenter, Version=1.2.1.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>PraiseBase.Presenter.Controls.CustomGroupBox, PraiseBase Presenter, Version=1.2.3.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;customGroupBox1.Parent" xml:space="preserve">
     <value>$this</value>
@@ -6519,6 +6453,18 @@
   <data name="&gt;&gt;columnHeader2.Type" xml:space="preserve">
     <value>System.Windows.Forms.ColumnHeader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
+  <data name="&gt;&gt;columnHeaderVerseIndex.Name" xml:space="preserve">
+    <value>columnHeaderVerseIndex</value>
+  </data>
+  <data name="&gt;&gt;columnHeaderVerseIndex.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ColumnHeader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;columnHeaderVerseText.Name" xml:space="preserve">
+    <value>columnHeaderVerseText</value>
+  </data>
+  <data name="&gt;&gt;columnHeaderVerseText.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ColumnHeader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
   <data name="&gt;&gt;columnHeader3.Name" xml:space="preserve">
     <value>columnHeader3</value>
   </data>
@@ -6907,6 +6853,6 @@
     <value>MainWindow</value>
   </data>
   <data name="&gt;&gt;$this.Type" xml:space="preserve">
-    <value>PraiseBase.Presenter.Forms.LocalizableForm, PraiseBase Presenter, Version=1.2.1.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>PraiseBase.Presenter.Forms.LocalizableForm, PraiseBase Presenter, Version=1.2.3.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
 </root>
