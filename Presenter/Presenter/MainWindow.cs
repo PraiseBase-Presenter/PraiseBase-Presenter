@@ -1668,7 +1668,22 @@ namespace PraiseBase.Presenter.Presenter
                     comboBoxBible.DataSource = new BindingSource(_bibleManager.BibleList, null);
                     comboBoxBible.DisplayMember = "Value";
                     comboBoxBible.ValueMember = "Key";
-                    comboBoxBible.SelectedIndex = 0;
+
+                    int idx = 0;
+                    if (!string.IsNullOrEmpty(Settings.Default.LastActiveBible))
+                    {
+                        int i = 0;
+                        foreach (var e in _bibleManager.BibleList)
+                        {
+                            if (e.Key == Settings.Default.LastActiveBible)
+                            {
+                                idx = i;
+                                break;
+                            }
+                            i++;
+                        }
+                    }
+                    comboBoxBible.SelectedIndex = idx;
                 }
             }
         }
@@ -1834,6 +1849,8 @@ namespace PraiseBase.Presenter.Presenter
             };
 
             ProjectionManager.Instance.DisplayLayer(2, lt);
+
+            Settings.Default.LastActiveBible = bibleItem.Bible.Identifier;
         }
 
         private void buttonAddToBibleVerseList_Click(object sender, EventArgs e)
