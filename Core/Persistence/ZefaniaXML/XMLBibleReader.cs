@@ -111,11 +111,19 @@ namespace PraiseBase.Presenter.Persistence.ZefaniaXML
                                 {
                                     if (verseNode.Name.ToLower() == "vers")
                                     {
+                                        string text = string.Empty;
+                                        foreach (XmlNode textNode in verseNode.ChildNodes)
+                                        {
+                                            if (textNode.NodeType == XmlNodeType.Text)
+                                            {
+                                                text += textNode.InnerText;
+                                            }
+                                        }
                                         var v = new BibleVerse
                                         {
                                             Chapter = ch,
                                             Number = int.Parse(verseNode.Attributes["vnumber"].InnerText),
-                                            Text = verseNode.InnerText
+                                            Text = text
                                         };
                                         ch.Verses.Add(v);
                                     }
