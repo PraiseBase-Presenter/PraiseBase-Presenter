@@ -425,7 +425,7 @@ namespace PraiseBase.Presenter.Presenter
             ReloadSongList();
             ReloadImageList();
             CheckThumbnails();
-            loadBibles(true);
+            reloadBibles();
         }
 
         private void liederlisteNeuLadenToolStripMenuItem_Click(object sender, EventArgs e)
@@ -1650,22 +1650,35 @@ namespace PraiseBase.Presenter.Presenter
 
         private void loadBibles()
         {
-            loadBibles(false);
+            if (comboBoxBible.Items.Count == 0)
+            {
+                _bibleManager.LoadBibleInfo();
+                PopulateBibleList(_bibleManager);
+            }
         }
 
-        private void loadBibles(bool reload)
+        private void reloadBibles()
         {
-            if (reload)
+            comboBoxBible.DataSource = null;
+            _bibleManager.LoadBibleInfo();
+            PopulateBibleList(_bibleManager);
+        }
+
+        delegate void SetTextCallback(BibleManager bibleManager);
+
+        private void PopulateBibleList(BibleManager bibleManager)
+        {
+            if (comboBoxBible.InvokeRequired)
             {
-                comboBoxBible.DataSource = null;
+                SetTextCallback d = new SetTextCallback(PopulateBibleList);
+                Invoke(d, new object[] { bibleManager });
             }
-            if (comboBoxBible.Items.Count == 0 || reload)
+            else
             {
                 comboBoxBible.Items.Clear();
-                _bibleManager.LoadBibleInfo();
-                if (_bibleManager.BibleList.Count > 0)
+                if (bibleManager.BibleList.Count > 0)
                 {
-                    comboBoxBible.DataSource = new BindingSource(_bibleManager.BibleList, null);
+                    comboBoxBible.DataSource = new BindingSource(bibleManager.BibleList, null);
                     comboBoxBible.DisplayMember = "Value";
                     comboBoxBible.ValueMember = "Key";
 
@@ -1673,7 +1686,7 @@ namespace PraiseBase.Presenter.Presenter
                     if (!string.IsNullOrEmpty(Settings.Default.LastActiveBible))
                     {
                         int i = 0;
-                        foreach (var e in _bibleManager.BibleList)
+                        foreach (var e in bibleManager.BibleList)
                         {
                             if (e.Key == Settings.Default.LastActiveBible)
                             {
