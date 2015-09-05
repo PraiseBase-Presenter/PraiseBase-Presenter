@@ -1744,6 +1744,10 @@ namespace PraiseBase.Presenter.Presenter
             labelBibleTextName.Text = string.Empty;
 
             var bk = ((BibleBook)listBoxBibleBook.SelectedItem);
+            if (bk == null)
+            {
+                return;
+            }
 
             listViewBibleVerses.Items.Clear();
 
@@ -1770,6 +1774,10 @@ namespace PraiseBase.Presenter.Presenter
 
             // Get number of selected chapter
             var cp = ((BibleChapter)listBoxBibleChapter.SelectedItem);
+            if (cp == null)
+            {
+                return;
+            }
 
             // Populate listview with verses from selected chapter
             listViewBibleVerses.Items.Clear();
