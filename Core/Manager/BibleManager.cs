@@ -207,7 +207,7 @@ namespace PraiseBase.Presenter.Manager
             }
 
             // Book and chapter and verse
-            match = Regex.Match(needle, @"^(.*[a-z]) ([0-9]+),([0-9]+)$", RegexOptions.IgnoreCase);
+            match = Regex.Match(needle, @"^(.*[a-z]) ([0-9]+)(?:,|.)([0-9]+)$", RegexOptions.IgnoreCase);
             if (match.Success)
             {
                 var bkCandidates = SearchBookCandiates(bible, match.Groups[1].Value);
