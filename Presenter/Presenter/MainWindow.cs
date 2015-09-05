@@ -1333,6 +1333,13 @@ namespace PraiseBase.Presenter.Presenter
         {
             AskIfSetlistShouldBeSaved(e);
 
+            // Remember last active bible
+            if (comboBoxBible.SelectedItem != null)
+            {
+                var bi = ((KeyValuePair<string, BibleManager.BibleItem>)comboBoxBible.SelectedItem);
+                Settings.Default.LastActiveBible = bi.Value.Bible.Identifier;
+            }
+
             Settings.Default.ViewerWindowState = WindowState;
             Settings.Default.MainWindowSize = Size;
             Settings.Default.Save();
@@ -1862,8 +1869,6 @@ namespace PraiseBase.Presenter.Presenter
             };
 
             ProjectionManager.Instance.DisplayLayer(2, lt);
-
-            Settings.Default.LastActiveBible = bibleItem.Bible.Identifier;
         }
 
         private void buttonAddToBibleVerseList_Click(object sender, EventArgs e)
