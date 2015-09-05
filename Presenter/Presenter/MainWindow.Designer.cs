@@ -1240,29 +1240,29 @@ namespace PraiseBase.Presenter.Presenter
             // qaSpellingToolStripMenuItem
             // 
             this.qaSpellingToolStripMenuItem.CheckOnClick = true;
-            this.qaSpellingToolStripMenuItem.Name = "qaSpellingToolStripMenuItem";
             resources.ApplyResources(this.qaSpellingToolStripMenuItem, "qaSpellingToolStripMenuItem");
+            this.qaSpellingToolStripMenuItem.Name = "qaSpellingToolStripMenuItem";
             this.qaSpellingToolStripMenuItem.Click += new System.EventHandler(this.qaSpellingToolStripMenuItem_Click);
             // 
             // qaTranslationToolStripMenuItem
             // 
             this.qaTranslationToolStripMenuItem.CheckOnClick = true;
-            this.qaTranslationToolStripMenuItem.Name = "qaTranslationToolStripMenuItem";
             resources.ApplyResources(this.qaTranslationToolStripMenuItem, "qaTranslationToolStripMenuItem");
+            this.qaTranslationToolStripMenuItem.Name = "qaTranslationToolStripMenuItem";
             this.qaTranslationToolStripMenuItem.Click += new System.EventHandler(this.qaTranslationToolStripMenuItem_Click);
             // 
             // qaImagesToolStripMenuItem
             // 
             this.qaImagesToolStripMenuItem.CheckOnClick = true;
-            this.qaImagesToolStripMenuItem.Name = "qaImagesToolStripMenuItem";
             resources.ApplyResources(this.qaImagesToolStripMenuItem, "qaImagesToolStripMenuItem");
+            this.qaImagesToolStripMenuItem.Name = "qaImagesToolStripMenuItem";
             this.qaImagesToolStripMenuItem.Click += new System.EventHandler(this.qaImagesToolStripMenuItem_Click);
             // 
             // qaSegmentationToolStripMenuItem
             // 
             this.qaSegmentationToolStripMenuItem.CheckOnClick = true;
-            this.qaSegmentationToolStripMenuItem.Name = "qaSegmentationToolStripMenuItem";
             resources.ApplyResources(this.qaSegmentationToolStripMenuItem, "qaSegmentationToolStripMenuItem");
+            this.qaSegmentationToolStripMenuItem.Name = "qaSegmentationToolStripMenuItem";
             this.qaSegmentationToolStripMenuItem.Click += new System.EventHandler(this.qaSegmentationToolStripMenuItem_Click);
             // 
             // toolStripSeparator13
