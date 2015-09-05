@@ -1788,7 +1788,7 @@ namespace PraiseBase.Presenter.Presenter
                 listViewBibleVerses.Items.Add(lvi);
             }
 
-            if (_chapterIdx == listBoxBibleChapter.SelectedIndex && _verseIdx >= 0)
+            if (_chapterIdx == listBoxBibleChapter.SelectedIndex && _verseIdx >= 0 && listViewBibleVerses.Items.Count > _verseIdx)
             {
                 listViewBibleVerses.SelectedIndices.Clear();
                 listViewBibleVerses.SelectedIndices.Add(_verseIdx);
@@ -1815,8 +1815,8 @@ namespace PraiseBase.Presenter.Presenter
                 BibleVerse first = (BibleVerse)listViewBibleVerses.SelectedItems[0].Tag;
                 BibleVerse last = (BibleVerse)listViewBibleVerses.SelectedItems[selectedVersesCount - 1].Tag;
 
-                _verseIdx = first.Number;
-                _verseToIdx = last.Number;
+                _verseIdx = first.Number - 1;
+                _verseToIdx = last.Number - 1;
 
                 BibleVerseSelection vs = new BibleVerseSelection(first, last);
                 labelBibleTextName.Text = vs.ToString();
