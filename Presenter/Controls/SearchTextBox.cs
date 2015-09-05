@@ -30,7 +30,7 @@ namespace PraiseBase.Presenter.Controls
             Paint += UserControl1_Paint;
             Resize += UserControl1_Resize;
 
-            textBox.Multiline = true;
+            textBox.Multiline = false;
             textBox.BorderStyle = BorderStyle.None;
             textBox.BackColor = Color.White;
             textBox.Font = new Font(textBox.Font.FontFamily, 10, FontStyle.Regular);
