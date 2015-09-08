@@ -555,10 +555,8 @@ namespace PraiseBase.Presenter.Editor
                 Background = Song.Parts[CurrentPartId].Slides[CurrentSlideId].Background
             };
 
-            if (Song.GetNumberOfBackgroundImages() == 0)
-            {
-                imd.UseForAll = true;
-            }
+            // Set "use background for all slides" checkbox to true if no or only one image used
+            imd.UseForAll = Song.GetNumberOfBackgroundImages() <= 1;
 
             if (imd.ShowDialog(this) == DialogResult.OK)
             {
