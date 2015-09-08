@@ -21,6 +21,7 @@
  */
 
 using System;
+using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Runtime.Serialization;
@@ -69,9 +70,18 @@ namespace PraiseBase.Presenter.Model.Song
         /// </summary>
         public int GetNumberOfBackgroundImages()
         {
-            return
-                Parts.SelectMany(t => t.Slides)
-                    .Count(t1 => t1.Background != null && t1.Background.GetType() == typeof (ImageBackground));
+            HashSet<int> set = new HashSet<int>();
+            foreach (var p in Parts)
+            {
+                foreach (var s in p.Slides)
+                {
+                    if (s.Background != null && s.Background.GetType() == typeof(ImageBackground))
+                    {
+                        set.Add(s.Background.GetHashCode());
+                    }
+                }
+            }
+            return set.Count;
         }
 
         /// <summary>
