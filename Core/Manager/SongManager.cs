@@ -36,6 +36,9 @@ namespace PraiseBase.Presenter.Manager
     /// </summary>
     public class SongManager
     {
+        // Here is the once-per-class call to initialize the log object
+        private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
+
         /// <summary>
         ///     The constructor
         /// </summary>
@@ -124,8 +127,8 @@ namespace PraiseBase.Presenter.Manager
                 }
                 catch (Exception e)
                 {
-                    Console.WriteLine(@"Unable to load song file " + path + @" (" + e.Message + @")");
-                    Console.WriteLine(e.StackTrace);
+                    log.Error(@"Unable to load song file " + path + @" (" + e.Message + @")");
+                    log.Error(e.StackTrace);
                 }
             }
         }
@@ -156,7 +159,7 @@ namespace PraiseBase.Presenter.Manager
                 }
                 catch (Exception e)
                 {
-                    Console.WriteLine(@"Unable to load song file " + si.Filename + @" (" + e.Message + @")");
+                    log.Error(@"Unable to load song file " + si.Filename + @" (" + e.Message + @")");
                 }
             }
         }

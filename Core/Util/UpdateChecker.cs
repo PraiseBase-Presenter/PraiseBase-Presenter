@@ -28,6 +28,9 @@ namespace PraiseBase.Presenter.Util
 {
     public class UpdateChecker
     {
+        // Here is the once-per-class call to initialize the log object
+        private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
+
         public UpdateInformation GetNewVersion(string updateCheckUrl)
         {
             var rtn = new UpdateInformation();
@@ -92,7 +95,7 @@ namespace PraiseBase.Presenter.Util
             }
             catch (Exception e)
             {
-                Console.WriteLine(@"Update check failed! " + e.Message);
+                log.Warn(@"Update check failed! " + e.Message);
             }
             finally
             {

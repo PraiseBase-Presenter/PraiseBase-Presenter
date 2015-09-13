@@ -55,6 +55,9 @@ namespace PraiseBase.Presenter.Presenter
     /// </summary>
     public partial class MainWindow : LocalizableForm
     {
+        // Here is the once-per-class call to initialize the log object
+        private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
+
         private Timer _diaTimer;
         private List<String> _imageSearchResults;
 
@@ -350,7 +353,7 @@ namespace PraiseBase.Presenter.Presenter
                 }
                 catch (Exception e)
                 {
-                    Console.WriteLine(@"Song search exception: " + e);
+                    log.Error(@"Song search exception: " + e);
                 }
             }
 
@@ -1319,10 +1322,10 @@ namespace PraiseBase.Presenter.Presenter
             {
                 treeViewImageDirectories.SelectedNode = null;
                 _imageSearchResults.Clear();
-                Console.WriteLine("Search: "+ needle);
+                log.Debug("Search: "+ needle);
                 foreach (string ims in _imgManager.SearchImages(needle))
                 {
-                    Console.WriteLine("Found: " + ims);
+                    log.Debug("Found: " + ims);
                     _imageSearchResults.Add(ims);
                 }
                 treeViewImageDirectories.SelectedNode = treeViewImageDirectories.Nodes[treeViewImageDirectories.Nodes.Count - 1];

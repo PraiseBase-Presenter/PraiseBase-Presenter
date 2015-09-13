@@ -29,6 +29,9 @@ namespace PraiseBase.Presenter.Projection
 {
     class ScreenManager
     {
+        // Here is the once-per-class call to initialize the log object
+        private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
+
         /// <summary>
         /// Singleton variable
         /// </summary>
@@ -132,12 +135,12 @@ namespace PraiseBase.Presenter.Projection
                 if (!t.Primary)
                 {
                     AvailableProjectionScreens.Add(t);
-                    Console.WriteLine("Detected projection screen " + t.DeviceName + ", " + t.WorkingArea);
+                    log.Debug("Detected projection screen " + t.DeviceName + ", " + t.WorkingArea);
                 }
                 else
                 {
                     MainScreen = t;
-                    Console.WriteLine("Detected main screen " + t.DeviceName + ", " + t.WorkingArea);
+                    log.Debug("Detected main screen " + t.DeviceName + ", " + t.WorkingArea);
                 }
                 hash += t.GetHashCode();
             }

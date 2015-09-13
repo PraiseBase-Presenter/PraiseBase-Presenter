@@ -5,13 +5,16 @@ namespace PraiseBase.Presenter.Persistence
 {
     public abstract class AbstractSongFilePlugin<T> : ISongFilePlugin where T : ISongFile, new()
     {
+        // Here is the once-per-class call to initialize the log object
+        private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
+
         protected ISongFileMapper<T> Mapper;
         protected ISongFileReader<T> Reader;
         protected ISongFileWriter<T> Writer;
 
         protected AbstractSongFilePlugin()
         {
-            Console.WriteLine("Loaded song file plugin: " + GetType() + " (" + GetFileTypeDescription() + ")");
+            log.Debug("Loaded song file plugin: " + GetType() + " (" + GetFileTypeDescription() + ")");
         }
 
         /// <summary>
