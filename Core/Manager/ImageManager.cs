@@ -32,6 +32,9 @@ namespace PraiseBase.Presenter.Manager
 {
     public class ImageManager
     {
+        // Here is the once-per-class call to initialize the log object
+        private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
+
         private const string ExcludeThumbDirName = "[Thumbnails]";
         private readonly string[] _imgExtensions = {"*.jpg"};
 
@@ -162,7 +165,7 @@ namespace PraiseBase.Presenter.Manager
             }
             catch (Exception e)
             {
-                Console.WriteLine(e.Message);
+                log.Error(e.Message);
                 return ImageUtils.GetEmptyImage(DefaultImageSize, DefaultEmptyColor);
             }
         }

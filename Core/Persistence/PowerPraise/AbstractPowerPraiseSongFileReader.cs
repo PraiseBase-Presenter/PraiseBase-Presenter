@@ -33,6 +33,9 @@ namespace PraiseBase.Presenter.Persistence.PowerPraise
 {
     public abstract class AbstractPowerPraiseSongFileReader<T> : ISongFileReader<T> where T : ISongFile
     {
+        // Here is the once-per-class call to initialize the log object
+        private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
+
         protected const string SupportedFileFormatVersion = "3.0";
         protected const string XmlRootNodeName = "ppl";
         private List<IBackground> _backgrounds;
@@ -81,7 +84,7 @@ namespace PraiseBase.Presenter.Persistence.PowerPraise
             }
             catch (Exception e)
             {
-                Console.WriteLine(e.Message);
+                log.Error(e.Message);
             }
             return null;
         }

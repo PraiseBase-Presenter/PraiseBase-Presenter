@@ -32,11 +32,15 @@ using PraiseBase.Presenter.Manager;
 using PraiseBase.Presenter.Persistence.Setlists;
 using PraiseBase.Presenter.Presenter;
 using PraiseBase.Presenter.Properties;
+using log4net.Config;
 
 namespace PraiseBase.Presenter
 {
     internal static class Program
     {
+        // Here is the once-per-class call to initialize the log object
+        private static readonly log4net.ILog log = log4net.LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
+
         /// <summary>
         /// The main entry point for the application.
         /// </summary>
@@ -120,7 +124,7 @@ namespace PraiseBase.Presenter
                 GC.Collect();
             }
 
-            Console.WriteLine(@"Loading took " + (DateTime.Now - startTime).TotalSeconds + @" seconds!");
+            log.Debug(@"Loading took " + (DateTime.Now - startTime).TotalSeconds + @" seconds!");
 
             string setlistFile = null;
             string songFile = null;
