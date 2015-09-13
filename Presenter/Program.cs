@@ -47,8 +47,6 @@ namespace PraiseBase.Presenter
         [STAThread]
         private static void Main(string[] args)
         {
-            XmlConfigurator.Configure(new FileInfo("log4net.xml"));
-
             DateTime startTime = DateTime.Now;
 
             Application.EnableVisualStyles();

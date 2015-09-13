@@ -36,3 +36,4 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyFileVersion("1.2.3")]
 [assembly: NeutralResourcesLanguageAttribute("de-CH")]
 [assembly: System.Runtime.CompilerServices.InternalsVisibleTo("Test")]
+[assembly: log4net.Config.XmlConfigurator(ConfigFile = "log.config", Watch = true)]
