@@ -405,12 +405,6 @@
     <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Core\Core Libraries.csproj">
-      <Project>{67651B76-5ABD-4040-9A8F-3833130FC77D}</Project>
-      <Name>Core Libraries</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
     <None Include="Resources\14_layer_deletelayer.png" />
   </ItemGroup>
   <ItemGroup>
@@ -660,7 +654,12 @@
     <None Include="Resources\translate_disabled.png" />
     <None Include="Resources\translate_cross_small.png" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\Core\Core Libraries.csproj">
+      <Project>{67651b76-5abd-4040-9a8f-3833130fc77d}</Project>
+      <Name>Core Libraries</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

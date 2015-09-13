@@ -55,6 +55,12 @@
                 Source="$(var.Core_Libraries.TargetPath)"
                 KeyPath="yes" />
           </Component>
+          <Component Id="Log4netDll" Guid="197749fc-7429-4279-824d-44f917270e89">
+            <File Id="Log4netDllFile"
+                Name="log4net.dll"
+                Source="$(var.SolutionDir)lib\log4net.dll"
+                KeyPath="yes" />
+          </Component>
           <Component Id="LicenseRtf" Guid="96dc79f8-2344-4610-a167-9b09ee501509">
             <File Id="License.rtf" 
                   Source="$(var.SolutionDir)License.rtf" 
@@ -212,6 +218,7 @@
     <Feature Id="ProductFeature" Title="$(var.PraiseBase_Presenter.ProjectName)" Level="1">
       <ComponentRef Id="ProductComponent" />
       <ComponentRef Id="CoreDll" />
+      <ComponentRef Id="Log4netDll"/>
       <ComponentRef Id="LicenseRtf" />
       <ComponentRef Id="LicenseTxt" />
       <ComponentRef Id="ApplicationStartMenuShortcut" />
