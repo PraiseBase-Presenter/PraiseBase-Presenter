@@ -339,4 +339,16 @@
   <data name="Thumbnails" xml:space="preserve">
     <value>Miniaturbilder</value>
   </data>
+  <data name="AdditionalDetailsCanBeFoundInLogfile" xml:space="preserve">
+    <value>Weitere Informationen können im Logfile gefunden werden.</value>
+  </data>
+  <data name="FatalError" xml:space="preserve">
+    <value>Schwerer Fehler</value>
+  </data>
+  <data name="FatalErrorOccuredProgramTerminated" xml:space="preserve">
+    <value>Es ist ein schwerwiegender Fehler vom Typ '{0}' aufgetreten und das Programm muss beendet werden.</value>
+  </data>
+  <data name="PleaseReportBugToDeveloperByClickingOnHelpButton" xml:space="preserve">
+    <value>Bitte melde diesen Fehler dem Entwickler, indem du auf den 'Hilfe'-Button klickst.</value>
+  </data>
 </root>

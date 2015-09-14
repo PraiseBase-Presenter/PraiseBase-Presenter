@@ -120,6 +120,9 @@
   <data name="Add" xml:space="preserve">
     <value>Add</value>
   </data>
+  <data name="AdditionalDetailsCanBeFoundInLogfile" xml:space="preserve">
+    <value>Additional details can be found in the logfile.</value>
+  </data>
   <data name="Attention" xml:space="preserve">
     <value>Attention</value>
   </data>
@@ -149,6 +152,12 @@
   </data>
   <data name="Error" xml:space="preserve">
     <value>Error</value>
+  </data>
+  <data name="FatalError" xml:space="preserve">
+    <value>Fatal error</value>
+  </data>
+  <data name="FatalErrorOccuredProgramTerminated" xml:space="preserve">
+    <value>A fatal error of type '{0}' has ocurred, and the program has to be terminated!</value>
   </data>
   <data name="Favorites" xml:space="preserve">
     <value>Favorites</value>
@@ -209,6 +218,9 @@
   </data>
   <data name="Overwrite" xml:space="preserve">
     <value>Overwrite</value>
+  </data>
+  <data name="PleaseReportBugToDeveloperByClickingOnHelpButton" xml:space="preserve">
+    <value>Please report this bug to the developer by clicking on the 'Help' button.</value>
   </data>
   <data name="ProgramInstanceAlreadyRunning" xml:space="preserve">
     <value>Another instance of this software is already running!</value>
