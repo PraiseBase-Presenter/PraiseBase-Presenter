@@ -33,6 +33,7 @@ using PraiseBase.Presenter.Persistence.Setlists;
 using PraiseBase.Presenter.Presenter;
 using PraiseBase.Presenter.Properties;
 using log4net.Config;
+using System.Diagnostics;
 
 namespace PraiseBase.Presenter
 {
@@ -47,6 +48,8 @@ namespace PraiseBase.Presenter
         [STAThread]
         private static void Main(string[] args)
         {
+            AppDomain.CurrentDomain.UnhandledException += CurrentDomain_UnhandledException;
+
             DateTime startTime = DateTime.Now;
 
             Application.EnableVisualStyles();
@@ -158,6 +161,25 @@ namespace PraiseBase.Presenter
             }
             Application.Run(mw);
             GC.KeepAlive(mutex);
+        }
+
+        private static void CurrentDomain_UnhandledException(object sender, UnhandledExceptionEventArgs e)
+        {
+            log.Error("An unhandled exception occurred: " + e.ExceptionObject);
+
+            string message = "A fatal error of type '" + e.ExceptionObject.GetType() + "' has ocurred, and the program has to be terminated!" + Environment.NewLine + Environment.NewLine;
+            if (e.ExceptionObject != null && typeof(Exception).IsAssignableFrom(e.ExceptionObject.GetType()))
+            {
+                var ex = ((Exception)e.ExceptionObject);
+                message += ex.Message + Environment.NewLine + Environment.NewLine;
+            }
+            message += "Additional details can be found in the logfile." + Environment.NewLine + Environment.NewLine;
+
+            message += "Please report this bug to the developer by clicking on the 'Help' button.";
+            var url = Settings.Default.BugReportUrl;
+
+            MessageBox.Show(message, "Fatal error", MessageBoxButtons.OK, MessageBoxIcon.Error, MessageBoxDefaultButton.Button1, 0, url);
+            Process.GetCurrentProcess().Kill();
         }
     }
 }
