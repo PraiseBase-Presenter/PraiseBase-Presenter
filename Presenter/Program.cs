@@ -33,6 +33,7 @@ using PraiseBase.Presenter.Persistence.Setlists;
 using PraiseBase.Presenter.Presenter;
 using PraiseBase.Presenter.Properties;
 using log4net.Config;
+using System.Diagnostics;
 
 namespace PraiseBase.Presenter
 {
@@ -47,6 +48,8 @@ namespace PraiseBase.Presenter
         [STAThread]
         private static void Main(string[] args)
         {
+            AppDomain.CurrentDomain.UnhandledException += CurrentDomain_UnhandledException;
+
             DateTime startTime = DateTime.Now;
 
             Application.EnableVisualStyles();
@@ -158,6 +161,42 @@ namespace PraiseBase.Presenter
             }
             Application.Run(mw);
             GC.KeepAlive(mutex);
+        }
+
+        private static void CurrentDomain_UnhandledException(object sender, UnhandledExceptionEventArgs e)
+        {
+            log.Error("An unhandled exception occurred: " + e.ExceptionObject);
+
+            try {
+
+                string caption = StringResources.FatalError;
+                string message = string.Format(StringResources.FatalErrorOccuredProgramTerminated, e.ExceptionObject.GetType()) + Environment.NewLine + Environment.NewLine;
+
+                // Show exception message
+                if (e.ExceptionObject != null && typeof(Exception).IsAssignableFrom(e.ExceptionObject.GetType()))
+                {
+                    var ex = ((Exception)e.ExceptionObject);
+                    message += ex.Message + Environment.NewLine + Environment.NewLine;
+                }
+                message += StringResources.AdditionalDetailsCanBeFoundInLogfile + Environment.NewLine + Environment.NewLine;
+
+                var url = Settings.Default.BugReportUrl;
+                if (!string.IsNullOrEmpty(url))
+                {
+                    message += StringResources.PleaseReportBugToDeveloperByClickingOnHelpButton;
+                    MessageBox.Show(message, caption, MessageBoxButtons.OK, MessageBoxIcon.Error, MessageBoxDefaultButton.Button1, 0, url);
+                }
+                else
+                {
+                    MessageBox.Show(message, caption, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+            catch (Exception ex)
+            {
+                log.Error("An exception ocurred while trying to display the unhandled exception message box: " + ex);
+            }
+
+            Process.GetCurrentProcess().Kill();
         }
     }
 }

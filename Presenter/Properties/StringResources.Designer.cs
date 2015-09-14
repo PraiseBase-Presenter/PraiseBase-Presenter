@@ -70,6 +70,15 @@ namespace PraiseBase.Presenter.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Weitere Informationen können im Logfile gefunden werden..
+        /// </summary>
+        public static string AdditionalDetailsCanBeFoundInLogfile {
+            get {
+                return ResourceManager.GetString("AdditionalDetailsCanBeFoundInLogfile", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Alle Dateien.
         /// </summary>
         public static string AllFiles {
@@ -165,6 +174,24 @@ namespace PraiseBase.Presenter.Properties {
         public static string Error {
             get {
                 return ResourceManager.GetString("Error", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Schwerer Fehler.
+        /// </summary>
+        public static string FatalError {
+            get {
+                return ResourceManager.GetString("FatalError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Es ist ein schwerwiegender Fehler vom Typ &apos;{0}&apos; aufgetreten und das Programm muss beendet werden..
+        /// </summary>
+        public static string FatalErrorOccuredProgramTerminated {
+            get {
+                return ResourceManager.GetString("FatalErrorOccuredProgramTerminated", resourceCulture);
             }
         }
         
@@ -345,6 +372,15 @@ namespace PraiseBase.Presenter.Properties {
         public static string Overwrite {
             get {
                 return ResourceManager.GetString("Overwrite", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Bitte melde diesen Fehler dem Entwickler, indem du auf den &apos;Hilfe&apos;-Button klickst..
+        /// </summary>
+        public static string PleaseReportBugToDeveloperByClickingOnHelpButton {
+            get {
+                return ResourceManager.GetString("PleaseReportBugToDeveloperByClickingOnHelpButton", resourceCulture);
             }
         }
         
