@@ -71,6 +71,13 @@
                   Source="$(var.SolutionDir)License.txt"
                   KeyPath="yes"/>
           </Component>
+          <Directory Id="LanguagePackFolderEnUS" Name="en-US">
+            <Component Id="LanguagePackEnUS" Guid="a8e5ffcb-0080-487d-91b4-dae27925f475">
+              <File Id="PraiseBasePresenter.resources.dll"
+                    Source="$(var.PraiseBase_Presenter.TargetDir)en-US\PraiseBase Presenter.resources.dll"
+                    KeyPath="yes"/>
+            </Component>
+          </Directory>
         </Directory>
       </Directory>
 
@@ -229,6 +236,7 @@
       <ComponentRef Id="SongsFolder" />
       <ComponentRef Id="SetlistsFolder" />
       <ComponentRef Id="BiblesFolder" />
+      <ComponentRef Id="LanguagePackEnUS"/>
     </Feature>
   </Product>
 </Wix>

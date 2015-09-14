@@ -61,6 +61,7 @@ namespace PraiseBase.Presenter
             }
 
             Thread.CurrentThread.CurrentUICulture = CultureInfo.CreateSpecificCulture(Settings.Default.SelectedCulture);
+            log.Debug("Set culture to " + Thread.CurrentThread.CurrentUICulture);
 
             // code to ensure that only one copy of the software is running.
             Mutex mutex;
