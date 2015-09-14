@@ -166,27 +166,34 @@ namespace PraiseBase.Presenter
         private static void CurrentDomain_UnhandledException(object sender, UnhandledExceptionEventArgs e)
         {
             log.Error("An unhandled exception occurred: " + e.ExceptionObject);
-            
-            string caption = StringResources.FatalError;
-            string message = string.Format(StringResources.FatalErrorOccuredProgramTerminated, e.ExceptionObject.GetType()) + Environment.NewLine + Environment.NewLine;
 
-            // Show exception message
-            if (e.ExceptionObject != null && typeof(Exception).IsAssignableFrom(e.ExceptionObject.GetType()))
-            {
-                var ex = ((Exception)e.ExceptionObject);
-                message += ex.Message + Environment.NewLine + Environment.NewLine;
-            }
-            message += StringResources.AdditionalDetailsCanBeFoundInLogfile + Environment.NewLine + Environment.NewLine;
+            try {
 
-            var url = Settings.Default.BugReportUrl;
-            if (!string.IsNullOrEmpty(url))
-            {
-                message += StringResources.PleaseReportBugToDeveloperByClickingOnHelpButton;
-                MessageBox.Show(message, caption, MessageBoxButtons.OK, MessageBoxIcon.Error, MessageBoxDefaultButton.Button1, 0, url);
+                string caption = StringResources.FatalError;
+                string message = string.Format(StringResources.FatalErrorOccuredProgramTerminated, e.ExceptionObject.GetType()) + Environment.NewLine + Environment.NewLine;
+
+                // Show exception message
+                if (e.ExceptionObject != null && typeof(Exception).IsAssignableFrom(e.ExceptionObject.GetType()))
+                {
+                    var ex = ((Exception)e.ExceptionObject);
+                    message += ex.Message + Environment.NewLine + Environment.NewLine;
+                }
+                message += StringResources.AdditionalDetailsCanBeFoundInLogfile + Environment.NewLine + Environment.NewLine;
+
+                var url = Settings.Default.BugReportUrl;
+                if (!string.IsNullOrEmpty(url))
+                {
+                    message += StringResources.PleaseReportBugToDeveloperByClickingOnHelpButton;
+                    MessageBox.Show(message, caption, MessageBoxButtons.OK, MessageBoxIcon.Error, MessageBoxDefaultButton.Button1, 0, url);
+                }
+                else
+                {
+                    MessageBox.Show(message, caption, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
             }
-            else
+            catch (Exception ex)
             {
-                MessageBox.Show(message, caption, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                log.Error("An exception ocurred while trying to display the unhandled exception message box: " + ex);
             }
 
             Process.GetCurrentProcess().Kill();
