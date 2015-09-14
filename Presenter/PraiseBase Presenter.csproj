@@ -157,6 +157,12 @@
     <Compile Include="Forms\SimpleProgressWindow.Designer.cs">
       <DependentUpon>SimpleProgressWindow.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\TextFileViewer.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\TextFileViewer.Designer.cs">
+      <DependentUpon>TextFileViewer.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\UpdateCheckDialog.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -294,6 +300,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\SimpleProgressWindow.resx">
       <DependentUpon>SimpleProgressWindow.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\TextFileViewer.en-US.resx">
+      <DependentUpon>TextFileViewer.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\TextFileViewer.resx">
+      <DependentUpon>TextFileViewer.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\UpdateCheckDialog.en-US.resx">
       <DependentUpon>UpdateCheckDialog.cs</DependentUpon>

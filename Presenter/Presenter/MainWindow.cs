@@ -2553,6 +2553,14 @@ namespace PraiseBase.Presenter.Presenter
             UpdatePresenterSongViewMode(SongViewMode.Structure);
         }
 
+        private void toolStripMenuItemLogFile_Click(object sender, EventArgs e)
+        {
+            string logfile = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData) + @"\praisebase.log";
+            TextFileViewer viewer = new TextFileViewer();
+            viewer.FilePath = logfile;
+            viewer.ShowDialog(this);
+        }
+
         private void buttonSongViewModeSequence_Click(object sender, EventArgs e)
         {
             UpdatePresenterSongViewModeButtons(SongViewMode.Sequence);
