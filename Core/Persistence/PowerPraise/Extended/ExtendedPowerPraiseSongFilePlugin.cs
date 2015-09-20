@@ -21,6 +21,11 @@ namespace PraiseBase.Presenter.Persistence.PowerPraise.Extended
             return "PowerPraise Lied (erweitert)";
         }
 
+        public override bool IsImportSupported()
+        {
+            return false;
+        }
+
         public override int LoadingOrder()
         {
             return 0;

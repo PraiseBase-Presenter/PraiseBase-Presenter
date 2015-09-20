@@ -77,5 +77,7 @@ namespace PraiseBase.Presenter.Persistence
             Mapper.Map(sng, song);
             Writer.Save(filePath, song);
         }
+
+        public abstract bool IsImportSupported();
     }
 }

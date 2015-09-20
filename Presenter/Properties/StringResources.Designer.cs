@@ -322,6 +322,15 @@ namespace PraiseBase.Presenter.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to {0} Lieder wurden importiert!.
+        /// </summary>
+        public static string nSongsHaveBeenImported {
+            get {
+                return ResourceManager.GetString("nSongsHaveBeenImported", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to PraiseBox Datenbank öffnen.
         /// </summary>
         public static string OpenPraiseBoxDatabase {

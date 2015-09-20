@@ -48,6 +48,12 @@ namespace PraiseBase.Presenter.Persistence
         bool IsWritingSupported();
 
         /// <summary>
+        ///     Returns true if it can be used in importer
+        /// </summary>
+        /// <returns></returns>
+        bool IsImportSupported();
+
+        /// <summary>
         ///     Writes a song to the specified path
         /// </summary>
         /// <param name="sng">Absolute path to the song file</param>

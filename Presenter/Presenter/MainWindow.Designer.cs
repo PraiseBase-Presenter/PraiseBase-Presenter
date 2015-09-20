@@ -123,7 +123,9 @@ namespace PraiseBase.Presenter.Presenter
             this.bilderToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.setlistenToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator6 = new System.Windows.Forms.ToolStripSeparator();
-            this.toolStripMenuItem4 = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItemImportCCLISongSelect = new System.Windows.Forms.ToolStripMenuItem();
+            this.cCLISongSelectDateiToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator14 = new System.Windows.Forms.ToolStripSeparator();
             this.praiseBoxDatenbankToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.worToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator9 = new System.Windows.Forms.ToolStripSeparator();
@@ -175,6 +177,8 @@ namespace PraiseBase.Presenter.Presenter
             this.qaSegmentationToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator13 = new System.Windows.Forms.ToolStripSeparator();
             this.qAcommentsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator15 = new System.Windows.Forms.ToolStripSeparator();
+            this.toolStripButtonImportFile = new System.Windows.Forms.ToolStripButton();
             this.customGroupBox1 = new PraiseBase.Presenter.Controls.CustomGroupBox();
             this.labelFadeTime = new System.Windows.Forms.Label();
             this.pictureBoxbeamerPreview = new System.Windows.Forms.PictureBox();
@@ -912,7 +916,7 @@ namespace PraiseBase.Presenter.Presenter
             this.toolStripSeparator2,
             this.datenverzeichnisÖffnenToolStripMenuItem,
             this.toolStripSeparator6,
-            this.toolStripMenuItem4,
+            this.toolStripMenuItemImportCCLISongSelect,
             this.toolStripSeparator9,
             this.liederlisteNeuLadenToolStripMenuItem,
             this.bilderlisteNeuLadenToolStripMenuItem,
@@ -981,13 +985,26 @@ namespace PraiseBase.Presenter.Presenter
             resources.ApplyResources(this.toolStripSeparator6, "toolStripSeparator6");
             this.toolStripSeparator6.Name = "toolStripSeparator6";
             // 
-            // toolStripMenuItem4
+            // toolStripMenuItemImportCCLISongSelect
             // 
-            resources.ApplyResources(this.toolStripMenuItem4, "toolStripMenuItem4");
-            this.toolStripMenuItem4.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            resources.ApplyResources(this.toolStripMenuItemImportCCLISongSelect, "toolStripMenuItemImportCCLISongSelect");
+            this.toolStripMenuItemImportCCLISongSelect.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.cCLISongSelectDateiToolStripMenuItem,
+            this.toolStripSeparator14,
             this.praiseBoxDatenbankToolStripMenuItem,
             this.worToolStripMenuItem});
-            this.toolStripMenuItem4.Name = "toolStripMenuItem4";
+            this.toolStripMenuItemImportCCLISongSelect.Name = "toolStripMenuItemImportCCLISongSelect";
+            // 
+            // cCLISongSelectDateiToolStripMenuItem
+            // 
+            resources.ApplyResources(this.cCLISongSelectDateiToolStripMenuItem, "cCLISongSelectDateiToolStripMenuItem");
+            this.cCLISongSelectDateiToolStripMenuItem.Name = "cCLISongSelectDateiToolStripMenuItem";
+            this.cCLISongSelectDateiToolStripMenuItem.Click += new System.EventHandler(this.cCLISongSelectDateiToolStripMenuItem_Click);
+            // 
+            // toolStripSeparator14
+            // 
+            resources.ApplyResources(this.toolStripSeparator14, "toolStripSeparator14");
+            this.toolStripSeparator14.Name = "toolStripSeparator14";
             // 
             // praiseBoxDatenbankToolStripMenuItem
             // 
@@ -1291,7 +1308,9 @@ namespace PraiseBase.Presenter.Presenter
             this.toolStripButtonDataFolder,
             this.toolStripSeparator8,
             this.toolStripButtonToggleTranslationText,
-            this.toolStripButtonQA});
+            this.toolStripButtonQA,
+            this.toolStripSeparator15,
+            this.toolStripButtonImportFile});
             this.toolStrip1.Name = "toolStrip1";
             this.toolTipMyTooltip.SetToolTip(this.toolStrip1, resources.GetString("toolStrip1.ToolTip"));
             // 
@@ -1376,6 +1395,19 @@ namespace PraiseBase.Presenter.Presenter
             resources.ApplyResources(this.qAcommentsToolStripMenuItem, "qAcommentsToolStripMenuItem");
             this.qAcommentsToolStripMenuItem.Name = "qAcommentsToolStripMenuItem";
             this.qAcommentsToolStripMenuItem.Click += new System.EventHandler(this.qAcommentsToolStripMenuItem_Click);
+            // 
+            // toolStripSeparator15
+            // 
+            resources.ApplyResources(this.toolStripSeparator15, "toolStripSeparator15");
+            this.toolStripSeparator15.Name = "toolStripSeparator15";
+            // 
+            // toolStripButtonImportFile
+            // 
+            resources.ApplyResources(this.toolStripButtonImportFile, "toolStripButtonImportFile");
+            this.toolStripButtonImportFile.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.toolStripButtonImportFile.Image = global::PraiseBase.Presenter.Properties.Resources.file_upload;
+            this.toolStripButtonImportFile.Name = "toolStripButtonImportFile";
+            this.toolStripButtonImportFile.Click += new System.EventHandler(this.toolStripButtonImportFile_Click);
             // 
             // customGroupBox1
             // 
@@ -1556,7 +1588,7 @@ namespace PraiseBase.Presenter.Presenter
         private System.Windows.Forms.TabControl tabControlTextLayer;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem3;
         private System.Windows.Forms.ToolStripMenuItem fehlerMeldenToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem4;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItemImportCCLISongSelect;
         private System.Windows.Forms.ToolStripMenuItem praiseBoxDatenbankToolStripMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator9;
         private System.Windows.Forms.ToolStripMenuItem datenverzeichnisToolStripMenuItem1;
@@ -1681,6 +1713,10 @@ namespace PraiseBase.Presenter.Presenter
         private System.Windows.Forms.CheckBox checkBoxBibleAutoShowVerse;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator7;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItemLogFile;
+        private System.Windows.Forms.ToolStripMenuItem cCLISongSelectDateiToolStripMenuItem;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator14;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator15;
+        private System.Windows.Forms.ToolStripButton toolStripButtonImportFile;
     }
 }
 

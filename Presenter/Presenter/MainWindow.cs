@@ -45,6 +45,8 @@ using PraiseBase.Presenter.Properties;
 using PraiseBase.Presenter.Util;
 using Timer = System.Windows.Forms.Timer;
 using System.ComponentModel;
+using PraiseBase.Presenter.Persistence.CCLI;
+using PraiseBase.Presenter.Template;
 
 namespace PraiseBase.Presenter.Presenter
 {
@@ -185,7 +187,12 @@ namespace PraiseBase.Presenter.Presenter
 
         private void SongEditorWndOnSongSaved(object sender, SongSavedEventArgs songSavedEventArgs)
         {
-            var item = _songManager.GetSongItemByPath(songSavedEventArgs.FileName);
+            UpdateSongListItem(songSavedEventArgs.FileName);
+        }
+
+        private void UpdateSongListItem(string filename)
+        {
+            var item = _songManager.GetSongItemByPath(filename);
             if (item != null)
             {
                 _songManager.ReloadSongItem(item);
@@ -2559,6 +2566,28 @@ namespace PraiseBase.Presenter.Presenter
             TextFileViewer viewer = new TextFileViewer();
             viewer.FilePath = logfile;
             viewer.ShowDialog(this);
+        }
+
+        private void cCLISongSelectDateiToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            DoImportSong();
+        }
+
+        private void Importer_SongSaved(object sender, SongSavedEventArgs e)
+        {
+            UpdateSongListItem(e.FileName);
+        }
+
+        private void toolStripButtonImportFile_Click(object sender, EventArgs e)
+        {
+            DoImportSong();
+        }
+
+        private void DoImportSong()
+        {
+            SongFileImporter importer = new SongFileImporter(Settings.Default);
+            importer.SongSaved += Importer_SongSaved;
+            importer.ImportDialog(this);
         }
 
         private void buttonSongViewModeSequence_Click(object sender, EventArgs e)

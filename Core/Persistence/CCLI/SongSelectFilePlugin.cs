@@ -1,4 +1,6 @@
-﻿namespace PraiseBase.Presenter.Persistence.CCLI
+﻿using System;
+
+namespace PraiseBase.Presenter.Persistence.CCLI
 {
     public class SongSelectFilePlugin : AbstractSongFilePlugin<SongSelectFile>
     {
@@ -16,6 +18,11 @@
         public override string GetFileTypeDescription()
         {
             return "SongSelect Import File";
+        }
+
+        public override bool IsImportSupported()
+        {
+            return true;
         }
 
         public override int LoadingOrder()

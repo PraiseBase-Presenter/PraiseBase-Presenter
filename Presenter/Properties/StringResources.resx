@@ -351,4 +351,7 @@
   <data name="PleaseReportBugToDeveloperByClickingOnHelpButton" xml:space="preserve">
     <value>Bitte melde diesen Fehler dem Entwickler, indem du auf den 'Hilfe'-Button klickst.</value>
   </data>
+  <data name="nSongsHaveBeenImported" xml:space="preserve">
+    <value>{0} Lieder wurden importiert!</value>
+  </data>
 </root>
