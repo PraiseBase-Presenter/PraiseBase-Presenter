@@ -169,6 +169,7 @@
     <Compile Include="Forms\UpdateCheckDialog.Designer.cs">
       <DependentUpon>UpdateCheckDialog.cs</DependentUpon>
     </Compile>
+    <Compile Include="Importer\SongFileImporter.cs" />
     <Compile Include="Projection\ProjectionManager.cs" />
     <Compile Include="Projection\ScreenManager.cs" />
     <Compile Include="Projection\SettingsSlideTextFormattingMapper.cs" />
