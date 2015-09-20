@@ -42,49 +42,68 @@ namespace PraiseBase.Presenter.Importer
                 CheckFileExists = true,
                 Filter = string.Format("{0} (*{1})|*{1}", plugin.GetFileTypeDescription(), plugin.GetFileExtension()),
                 InitialDirectory = defaultDirectory,
-                Title = StringResources.OpenSetlist
+                Title = StringResources.SongImporter,
+                Multiselect = true
             };            
             if (dlg.ShowDialog(owner) == DialogResult.OK)
             {
-                _settings.CurrentSongImporterDirectory = Path.GetDirectoryName(dlg.FileName);
-
-                var sng = plugin.Load(dlg.FileName);
-
                 SongTemplateMapper stm = new SongTemplateMapper(_settings);
 
-                // Apply formatting
-                stm.ApplyFormattingFromSettings(sng);
-                // Apply default background
-                foreach (var p in sng.Parts)
+                // Save selected directory
+                if (dlg.FileNames.Length > 0)
                 {
-                    foreach (var s in p.Slides)
+                    _settings.CurrentSongImporterDirectory = Path.GetDirectoryName(dlg.FileNames[0]);
+                }
+
+                int i = 0;
+                foreach (var selectedFileName in dlg.FileNames)
+                {
+                    // Load song
+                    var sng = plugin.Load(selectedFileName);
+
+                    // Apply formatting
+                    stm.ApplyFormattingFromSettings(sng);
+                    // Apply default background
+                    foreach (var p in sng.Parts)
                     {
-                        if (s.Background == null)
+                        foreach (var s in p.Slides)
                         {
-                            s.Background = stm.GetDefaultBackground();
+                            if (s.Background == null)
+                            {
+                                s.Background = stm.GetDefaultBackground();
+                            }
+                        }
+                    }
+
+                    // Initialize writer
+                    ISongFilePlugin filePlugin = SongFilePluginFactory.Create(SongFilePluginFactory.GetWriterPlugins().First().GetType());
+
+                    // Define target file name
+                    string fileName = _settings.DataDirectory + Path.DirectorySeparatorChar
+                        + _settings.SongDir + Path.DirectorySeparatorChar
+                        + sng.Title + filePlugin.GetFileExtension();
+
+                    // Check if already exists
+                    if ((File.Exists(fileName) && (MessageBox.Show(
+                        string.Format(StringResources.SongExistsAlready,
+                        sng.Title) + @" " + StringResources.Overwrite + @"?", StringResources.SongImporter,
+                        MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)) || !File.Exists(fileName))
+                    {
+                        // TODO Exception handling
+                        filePlugin.Save(sng, fileName);
+
+                        i++;
+
+                        // Inform others by firing a SongSaved event
+                        if (SongSaved != null)
+                        {
+                            SongSavedEventArgs p = new SongSavedEventArgs(sng, selectedFileName);
+                            SongSaved(this, p);
                         }
                     }
                 }
 
-                ISongFilePlugin filePlugin = SongFilePluginFactory.Create(SongFilePluginFactory.GetWriterPlugins().First().GetType());
-                string fileName = _settings.DataDirectory + Path.DirectorySeparatorChar
-                    + _settings.SongDir + Path.DirectorySeparatorChar
-                    + sng.Title + filePlugin.GetFileExtension();
-                if ((File.Exists(fileName) && (MessageBox.Show(
-                    string.Format(StringResources.SongExistsAlready,
-                    sng.Title) + @" " + StringResources.Overwrite + @"?", StringResources.SongImporter,
-                    MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)) || !File.Exists(fileName))
-                {
-                    // TODO Exception handling
-                    filePlugin.Save(sng, fileName);
-
-                    // Inform others by firing a SongSaved event
-                    if (SongSaved != null)
-                    {
-                        SongSavedEventArgs p = new SongSavedEventArgs(sng, dlg.FileName);
-                        SongSaved(this, p);
-                    }
-                }
+                MessageBox.Show(string.Format("{0} Lieder wurden importiert!", i), StringResources.SongImporter, MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
         }
     }
