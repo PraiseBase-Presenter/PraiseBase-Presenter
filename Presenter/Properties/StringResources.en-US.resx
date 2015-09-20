@@ -201,6 +201,9 @@
   <data name="NothingFound" xml:space="preserve">
     <value>Nothing has been found!</value>
   </data>
+  <data name="nSongsHaveBeenImported" xml:space="preserve">
+    <value>{0} songs have been imported!</value>
+  </data>
   <data name="OpenPraiseBoxDatabase" xml:space="preserve">
     <value>Open PraiseBox database</value>
   </data>

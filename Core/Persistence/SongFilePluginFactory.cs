@@ -93,5 +93,10 @@ namespace PraiseBase.Presenter.Persistence
         {
             return _plugins.Values.Where(p => p.IsWritingSupported()).ToList();
         }
+
+        public static List<ISongFilePlugin> GetImportPlugins()
+        {
+            return _plugins.Values.Where(p => p.IsImportSupported()).ToList();
+        }
     }
 }

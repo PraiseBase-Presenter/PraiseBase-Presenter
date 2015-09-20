@@ -19,6 +19,11 @@
             return "PowerPraise Lied";
         }
 
+        public override bool IsImportSupported()
+        {
+            return false;
+        }
+
         public override int LoadingOrder()
         {
             return 1;

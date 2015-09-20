@@ -18,6 +18,11 @@
             return "OpenLyrics Song";
         }
 
+        public override bool IsImportSupported()
+        {
+            return true;
+        }
+
         public override int LoadingOrder()
         {
             return 3;

@@ -3,6 +3,7 @@ using PraiseBase.Presenter.Persistence;
 using PraiseBase.Presenter.Persistence.CCLI;
 using PraiseBase.Presenter.Properties;
 using PraiseBase.Presenter.Template;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Windows.Forms;
@@ -34,19 +35,28 @@ namespace PraiseBase.Presenter.Importer
         {
             string defaultDirectory = !string.IsNullOrEmpty(_settings.CurrentSongImporterDirectory) && Directory.Exists(_settings.CurrentSongImporterDirectory) ? _settings.CurrentSongImporterDirectory : _settings.DataDirectory;
 
-            var plugin = new SongSelectFilePlugin();
+            List<ISongFilePlugin> plugins = SongFilePluginFactory.GetImportPlugins();
+            List<string> filters = new List<string>();
+            foreach (ISongFilePlugin plugin in plugins)
+            {
+                filters.Add(string.Format("{0} (*{1})|*{1}", plugin.GetFileTypeDescription(), plugin.GetFileExtension()));
+            }
+
+            //var plugin = new SongSelectFilePlugin();
             var dlg = new OpenFileDialog()
             {
                 AddExtension = true,
                 CheckPathExists = true,
                 CheckFileExists = true,
-                Filter = string.Format("{0} (*{1})|*{1}", plugin.GetFileTypeDescription(), plugin.GetFileExtension()),
+                Filter = string.Join("|", filters.ToArray()),
                 InitialDirectory = defaultDirectory,
                 Title = StringResources.SongImporter,
                 Multiselect = true
             };            
             if (dlg.ShowDialog(owner) == DialogResult.OK)
             {
+                var plugin = plugins[dlg.FilterIndex - 1];
+
                 SongTemplateMapper stm = new SongTemplateMapper(_settings);
 
                 // Save selected directory
@@ -103,7 +113,7 @@ namespace PraiseBase.Presenter.Importer
                     }
                 }
 
-                MessageBox.Show(string.Format("{0} Lieder wurden importiert!", i), StringResources.SongImporter, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show(string.Format(StringResources.nSongsHaveBeenImported, i), StringResources.SongImporter, MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
         }
     }

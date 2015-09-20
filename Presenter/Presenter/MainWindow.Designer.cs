@@ -124,6 +124,8 @@ namespace PraiseBase.Presenter.Presenter
             this.setlistenToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator6 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripMenuItemImportCCLISongSelect = new System.Windows.Forms.ToolStripMenuItem();
+            this.cCLISongSelectDateiToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator14 = new System.Windows.Forms.ToolStripSeparator();
             this.praiseBoxDatenbankToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.worToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator9 = new System.Windows.Forms.ToolStripSeparator();
@@ -187,7 +189,6 @@ namespace PraiseBase.Presenter.Presenter
             this.trackBarFadeTimeLayer1 = new System.Windows.Forms.TrackBar();
             this.trackBarFadeTime = new System.Windows.Forms.TrackBar();
             this.toolTipMyTooltip = new System.Windows.Forms.ToolTip(this.components);
-            this.cCLISongSelectDateiToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             buttonChooseDiaDir = new System.Windows.Forms.Button();
             this.splitContainerLayerContent.Panel1.SuspendLayout();
             this.splitContainerLayerContent.Panel2.SuspendLayout();
@@ -913,11 +914,23 @@ namespace PraiseBase.Presenter.Presenter
             // toolStripMenuItemImportCCLISongSelect
             // 
             this.toolStripMenuItemImportCCLISongSelect.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.cCLISongSelectDateiToolStripMenuItem,
+            this.toolStripSeparator14,
             this.praiseBoxDatenbankToolStripMenuItem,
-            this.worToolStripMenuItem,
-            this.cCLISongSelectDateiToolStripMenuItem});
+            this.worToolStripMenuItem});
             this.toolStripMenuItemImportCCLISongSelect.Name = "toolStripMenuItemImportCCLISongSelect";
             resources.ApplyResources(this.toolStripMenuItemImportCCLISongSelect, "toolStripMenuItemImportCCLISongSelect");
+            // 
+            // cCLISongSelectDateiToolStripMenuItem
+            // 
+            this.cCLISongSelectDateiToolStripMenuItem.Name = "cCLISongSelectDateiToolStripMenuItem";
+            resources.ApplyResources(this.cCLISongSelectDateiToolStripMenuItem, "cCLISongSelectDateiToolStripMenuItem");
+            this.cCLISongSelectDateiToolStripMenuItem.Click += new System.EventHandler(this.cCLISongSelectDateiToolStripMenuItem_Click);
+            // 
+            // toolStripSeparator14
+            // 
+            this.toolStripSeparator14.Name = "toolStripSeparator14";
+            resources.ApplyResources(this.toolStripSeparator14, "toolStripSeparator14");
             // 
             // praiseBoxDatenbankToolStripMenuItem
             // 
@@ -1381,12 +1394,6 @@ namespace PraiseBase.Presenter.Presenter
             this.trackBarFadeTime.Value = 1;
             this.trackBarFadeTime.Scroll += new System.EventHandler(this.trackBarFadeTime_Scroll);
             // 
-            // cCLISongSelectDateiToolStripMenuItem
-            // 
-            this.cCLISongSelectDateiToolStripMenuItem.Name = "cCLISongSelectDateiToolStripMenuItem";
-            resources.ApplyResources(this.cCLISongSelectDateiToolStripMenuItem, "cCLISongSelectDateiToolStripMenuItem");
-            this.cCLISongSelectDateiToolStripMenuItem.Click += new System.EventHandler(this.cCLISongSelectDateiToolStripMenuItem_Click);
-            // 
             // MainWindow
             // 
             resources.ApplyResources(this, "$this");
@@ -1595,6 +1602,7 @@ namespace PraiseBase.Presenter.Presenter
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator7;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItemLogFile;
         private System.Windows.Forms.ToolStripMenuItem cCLISongSelectDateiToolStripMenuItem;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator14;
     }
 }
 
