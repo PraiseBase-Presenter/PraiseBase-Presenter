@@ -908,5 +908,17 @@ namespace PraiseBase.Presenter.Properties {
                 this["LastActiveBible"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string CurrentSongImporterDirectory {
+            get {
+                return ((string)(this["CurrentSongImporterDirectory"]));
+            }
+            set {
+                this["CurrentSongImporterDirectory"] = value;
+            }
+        }
     }
 }

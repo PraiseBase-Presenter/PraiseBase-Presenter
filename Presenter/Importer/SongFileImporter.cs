@@ -32,6 +32,8 @@ namespace PraiseBase.Presenter.Importer
 
         public void ImportDialog(IWin32Window owner)
         {
+            string defaultDirectory = !string.IsNullOrEmpty(_settings.CurrentSongImporterDirectory) && Directory.Exists(_settings.CurrentSongImporterDirectory) ? _settings.CurrentSongImporterDirectory : _settings.DataDirectory;
+
             var plugin = new SongSelectFilePlugin();
             var dlg = new OpenFileDialog()
             {
@@ -39,11 +41,13 @@ namespace PraiseBase.Presenter.Importer
                 CheckPathExists = true,
                 CheckFileExists = true,
                 Filter = string.Format("{0} (*{1})|*{1}", plugin.GetFileTypeDescription(), plugin.GetFileExtension()),
-                InitialDirectory = _settings.DataDirectory,
+                InitialDirectory = defaultDirectory,
                 Title = StringResources.OpenSetlist
-            };
+            };            
             if (dlg.ShowDialog(owner) == DialogResult.OK)
             {
+                _settings.CurrentSongImporterDirectory = Path.GetDirectoryName(dlg.FileName);
+
                 var sng = plugin.Load(dlg.FileName);
 
                 SongTemplateMapper stm = new SongTemplateMapper(_settings);
