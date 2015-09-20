@@ -2570,14 +2570,24 @@ namespace PraiseBase.Presenter.Presenter
 
         private void cCLISongSelectDateiToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            SongFileImporter importer = new SongFileImporter(Settings.Default);
-            importer.SongSaved += Importer_SongSaved;
-            importer.ImportDialog(this);
+            DoImportSong();
         }
 
         private void Importer_SongSaved(object sender, SongSavedEventArgs e)
         {
             UpdateSongListItem(e.FileName);
+        }
+
+        private void toolStripButtonImportFile_Click(object sender, EventArgs e)
+        {
+            DoImportSong();
+        }
+
+        private void DoImportSong()
+        {
+            SongFileImporter importer = new SongFileImporter(Settings.Default);
+            importer.SongSaved += Importer_SongSaved;
+            importer.ImportDialog(this);
         }
 
         private void buttonSongViewModeSequence_Click(object sender, EventArgs e)
