@@ -426,7 +426,8 @@
             this.comboBoxCopyrightPosition.Items.AddRange(new object[] {
             resources.GetString("comboBoxCopyrightPosition.Items"),
             resources.GetString("comboBoxCopyrightPosition.Items1"),
-            resources.GetString("comboBoxCopyrightPosition.Items2")});
+            resources.GetString("comboBoxCopyrightPosition.Items2"),
+            resources.GetString("comboBoxCopyrightPosition.Items3")});
             resources.ApplyResources(this.comboBoxCopyrightPosition, "comboBoxCopyrightPosition");
             this.comboBoxCopyrightPosition.Name = "comboBoxCopyrightPosition";
             this.comboBoxCopyrightPosition.SelectedIndexChanged += new System.EventHandler(this.comboBoxCopyrightPosition_SelectedIndexChanged);
@@ -443,7 +444,8 @@
             this.comboBoxSourcePosition.Items.AddRange(new object[] {
             resources.GetString("comboBoxSourcePosition.Items"),
             resources.GetString("comboBoxSourcePosition.Items1"),
-            resources.GetString("comboBoxSourcePosition.Items2")});
+            resources.GetString("comboBoxSourcePosition.Items2"),
+            resources.GetString("comboBoxSourcePosition.Items3")});
             resources.ApplyResources(this.comboBoxSourcePosition, "comboBoxSourcePosition");
             this.comboBoxSourcePosition.Name = "comboBoxSourcePosition";
             this.comboBoxSourcePosition.SelectedIndexChanged += new System.EventHandler(this.comboBoxSourcePosition_SelectedIndexChanged);

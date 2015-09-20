@@ -642,7 +642,8 @@ namespace PraiseBase.Presenter.Presenter
 
             // Set header text (song source)
             if (sourcePosition == AdditionalInformationPosition.FirstSlide && isFirstSlide(e.PartNumber, e.SlideNumber) ||
-                sourcePosition == AdditionalInformationPosition.LastSlide && isLastSlide(s, e.PartNumber, e.SlideNumber))
+                sourcePosition == AdditionalInformationPosition.LastSlide && isLastSlide(s, e.PartNumber, e.SlideNumber) || 
+                sourcePosition == AdditionalInformationPosition.Always)
             {
                 ssl.HeaderText = new[]
                 {
@@ -653,7 +654,8 @@ namespace PraiseBase.Presenter.Presenter
             // Set footer text (copyright)
             if (s.Copyright != null && (
                 copyrightPosition == AdditionalInformationPosition.FirstSlide && isFirstSlide(e.PartNumber, e.SlideNumber) ||
-                copyrightPosition == AdditionalInformationPosition.LastSlide && isLastSlide(s, e.PartNumber, e.SlideNumber)))
+                copyrightPosition == AdditionalInformationPosition.LastSlide && isLastSlide(s, e.PartNumber, e.SlideNumber) ||
+                copyrightPosition == AdditionalInformationPosition.Always))
             {
                 String[] copyRightLines = s.Copyright.Split(new[] {Environment.NewLine}, StringSplitOptions.None);
                 if (!String.IsNullOrEmpty(s.CcliIdentifier))

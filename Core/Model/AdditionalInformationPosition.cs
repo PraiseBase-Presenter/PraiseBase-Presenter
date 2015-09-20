@@ -7,6 +7,7 @@
     {
         None = 0,
         FirstSlide = 1,
-        LastSlide = 2
+        LastSlide = 2,
+        Always = 3
     }
 }
