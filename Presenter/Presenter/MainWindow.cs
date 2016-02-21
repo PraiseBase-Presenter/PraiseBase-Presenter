@@ -717,7 +717,14 @@ namespace PraiseBase.Presenter.Presenter
 
         private bool isLastSlide(Song s, int partNumber, int slideNumber)
         {
-            return partNumber == s.Parts.Count - 1 && slideNumber == s.Parts[partNumber].Slides.Count - 1;
+            if (songDetailElement.SongViewMode == SongViewMode.Sequence)
+            {
+                return partNumber == s.PartSequence.Count - 1 && slideNumber == s.PartSequence[partNumber].Slides.Count - 1;
+            }
+            else
+            {
+                return partNumber == s.Parts.Count - 1 && slideNumber == s.Parts[partNumber].Slides.Count - 1;
+            }
         }
 
         private void songDetailElement_ImageClicked(object sender, SlideImageClickEventArgs e)
