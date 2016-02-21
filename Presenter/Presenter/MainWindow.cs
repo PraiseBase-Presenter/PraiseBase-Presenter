@@ -2587,9 +2587,16 @@ namespace PraiseBase.Presenter.Presenter
 
         private void DoImportSong()
         {
-            SongFileImporter importer = new SongFileImporter(Settings.Default);
-            importer.SongSaved += Importer_SongSaved;
-            importer.ImportDialog(this);
+            try
+            {
+                SongFileImporter importer = new SongFileImporter(Settings.Default);
+                importer.SongSaved += Importer_SongSaved;
+                importer.ImportDialog(this);
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.Message, StringResources.Error, MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         private void buttonSongViewModeSequence_Click(object sender, EventArgs e)
