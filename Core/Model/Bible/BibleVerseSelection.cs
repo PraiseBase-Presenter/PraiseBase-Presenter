@@ -62,6 +62,10 @@ namespace PraiseBase.Presenter.Model.Bible
         {
             get
             {
+                if (StartVerse.Number == _endVerseNumber)
+                {
+                    return StartVerse.Chapter.Verses[StartVerse.Number - 1].Text;
+                }
                 var str = "";
                 for (var i = StartVerse.Number; i <= _endVerseNumber; i++)
                 {
