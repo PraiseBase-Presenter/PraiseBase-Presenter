@@ -164,6 +164,8 @@ namespace PraiseBase.Presenter.Presenter
             ProjectionManager.Instance.ProjectionChanged += Instance_ProjectionChanged;
 
             listViewBibleVerses.AutoResizeColumn(0, ColumnHeaderAutoResizeStyle.HeaderSize);
+
+            checkBoxBibleAutoShowVerse.Checked = Settings.Default.AutoShowBibleVerse;
         }
 
         #region SongEditor
@@ -1361,6 +1363,7 @@ namespace PraiseBase.Presenter.Presenter
 
             Settings.Default.ViewerWindowState = WindowState;
             Settings.Default.MainWindowSize = Size;
+            Settings.Default.AutoShowBibleVerse = checkBoxBibleAutoShowVerse.Checked;
             Settings.Default.Save();
         }
 

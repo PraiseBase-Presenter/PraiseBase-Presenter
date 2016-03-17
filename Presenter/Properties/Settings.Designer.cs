@@ -920,5 +920,17 @@ namespace PraiseBase.Presenter.Properties {
                 this["CurrentSongImporterDirectory"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool AutoShowBibleVerse {
+            get {
+                return ((bool)(this["AutoShowBibleVerse"]));
+            }
+            set {
+                this["AutoShowBibleVerse"] = value;
+            }
+        }
     }
 }
