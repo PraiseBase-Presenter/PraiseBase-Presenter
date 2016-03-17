@@ -122,7 +122,7 @@ namespace PraiseBase.Presenter.Util
                     {
                         if (currentLineLength + currentWord.Length + 1 < maxLength)
                         {
-                            currentLine += " " + currentWord;
+                            currentLine += (currentLine.Length > 0 ? " " : "") + currentWord;
                             currentLineLength += (currentWord.Length + 1);
                         }
                         else
