@@ -643,8 +643,8 @@ namespace PraiseBase.Presenter.Presenter
             }
 
             // Set header text (song source)
-            if (sourcePosition == AdditionalInformationPosition.FirstSlide && isFirstSlide(e.PartNumber, e.SlideNumber) ||
-                sourcePosition == AdditionalInformationPosition.LastSlide && isLastSlide(s, e.PartNumber, e.SlideNumber) || 
+            if (sourcePosition == AdditionalInformationPosition.FirstSlide && e.isFirst ||
+                sourcePosition == AdditionalInformationPosition.LastSlide && e.isLast || 
                 sourcePosition == AdditionalInformationPosition.Always)
             {
                 ssl.HeaderText = new[]
@@ -655,8 +655,8 @@ namespace PraiseBase.Presenter.Presenter
 
             // Set footer text (copyright)
             if (s.Copyright != null && (
-                copyrightPosition == AdditionalInformationPosition.FirstSlide && isFirstSlide(e.PartNumber, e.SlideNumber) ||
-                copyrightPosition == AdditionalInformationPosition.LastSlide && isLastSlide(s, e.PartNumber, e.SlideNumber) ||
+                copyrightPosition == AdditionalInformationPosition.FirstSlide && e.isFirst ||
+                copyrightPosition == AdditionalInformationPosition.LastSlide && e.isLast ||
                 copyrightPosition == AdditionalInformationPosition.Always))
             {
                 String[] copyRightLines = s.Copyright.Split(new[] {Environment.NewLine}, StringSplitOptions.None);
@@ -709,23 +709,6 @@ namespace PraiseBase.Presenter.Presenter
                 {
                     ImageHistoryAdd(((ImageBackground)cs.Background).ImagePath);
                 }
-            }
-        }
-
-        private bool isFirstSlide(int partNumber, int slideNumber)
-        {
-            return partNumber == 0 && slideNumber == 0;
-        }
-
-        private bool isLastSlide(Song s, int partNumber, int slideNumber)
-        {
-            if (songDetailElement.SongViewMode == SongViewMode.Sequence)
-            {
-                return partNumber == s.PartSequence.Count - 1 && slideNumber == s.PartSequence[partNumber].Slides.Count - 1;
-            }
-            else
-            {
-                return partNumber == s.Parts.Count - 1 && slideNumber == s.Parts[partNumber].Slides.Count - 1;
             }
         }
 

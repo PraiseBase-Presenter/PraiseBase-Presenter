@@ -602,6 +602,8 @@ namespace PraiseBase.Presenter.Controls
                     var partNumber = (int) lbl.Parent.Parent.Tag;
                     var slideNumber = (int) lbl.Tag;
                     SlideClickEventArgs p = new SlideClickEventArgs(_currentSong, partNumber, slideNumber);
+                    p.isFirst = _currentSlideTextIdx == 0;
+                    p.isLast = _currentSlideTextIdx == _slideTexts.Count - 1;
                     SlideClicked(this, p);
                 }
             }
@@ -703,9 +705,25 @@ namespace PraiseBase.Presenter.Controls
 
         public Song Song { get; set; }
 
+        /// <summary>
+        /// Selected slide number
+        /// </summary>
         public int SlideNumber { get; set; }
-
+    
+        /// <summary>
+        /// Selected song part number
+        /// </summary>
         public int PartNumber { get; set; }
+
+        /// <summary>
+        /// True if this is the first slide
+        /// </summary>
+        public bool isFirst { get; set; }
+
+        /// <summary>
+        /// True if this is the last slide
+        /// </summary>
+        public bool isLast { get; set; }
     }
 
     public class SlideImageClickEventArgs : EventArgs
