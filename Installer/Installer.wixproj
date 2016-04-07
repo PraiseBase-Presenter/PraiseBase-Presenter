@@ -3,7 +3,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
-    <ProductVersion>3.5</ProductVersion>
+    <ProductVersion>3.10</ProductVersion>
     <ProjectGuid>{16af6a73-f74b-4934-8864-a27635f6022f}</ProjectGuid>
     <SchemaVersion>2.0</SchemaVersion>
     <OutputName>PraiseBase_Presenter</OutputName>
