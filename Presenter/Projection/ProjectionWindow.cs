@@ -74,16 +74,6 @@ namespace PraiseBase.Presenter.Projection
         }
 
         /// <summary>
-        /// Display text layer
-        /// </summary>
-        /// <param name="layerNum"></param>
-        /// <param name="layerContents"></param>
-        public void DisplayLayer(int layerNum, BaseLayer layerContents)
-        {
-            DisplayLayer(layerNum, layerContents, Settings.Default.ProjectionFadeTime);
-        }
-
-        /// <summary>
         /// Display text layer with transition
         /// </summary>
         /// <param name="layerNum"></param>
@@ -105,16 +95,6 @@ namespace PraiseBase.Presenter.Projection
             }
             CurrentLayers[layerNum] = layerContents;
             CurrentLayerImages[layerNum] = bmp;
-        }
-
-
-        /// <summary>
-        /// Hide layer
-        /// </summary>
-        /// <param name="layer"></param>
-        public void HideLayer(int layer)
-        {
-            HideLayer(layer, Settings.Default.ProjectionFadeTime);
         }
 
         /// <summary>

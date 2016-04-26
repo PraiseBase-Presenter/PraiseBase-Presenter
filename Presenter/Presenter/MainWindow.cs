@@ -675,8 +675,8 @@ namespace PraiseBase.Presenter.Presenter
                     ImageLayer iml = new ImageLayer(Settings.Default.ProjectionBackColor);
                     IBackground bg = (IBackground)listViewImageQueue.Items[0].Tag;
                     iml.Image = _imgManager.GetImage(bg);
-                    ProjectionManager.Instance.DisplayLayer(1, iml, Settings.Default.ProjectionFadeTimeLayer1);
-                    ProjectionManager.Instance.DisplayLayer(2, ssl);
+                    ProjectionManager.Instance.DisplayImage(iml, Settings.Default.ProjectionFadeTimeLayer1);
+                    ProjectionManager.Instance.DisplayText(ssl);
                     if (bg != null && bg.GetType() == typeof(ImageBackground))
                     {
                         ImageHistoryAdd(((ImageBackground)bg).ImagePath);
@@ -685,14 +685,14 @@ namespace PraiseBase.Presenter.Presenter
                 }
                 else
                 {
-                    ProjectionManager.Instance.DisplayLayer(2, ssl);
+                    ProjectionManager.Instance.DisplayText(ssl);
                 }
             }
 
                 // SHIFT pressed, use current slide
             else if (!_linkLayers ^ ((ModifierKeys & Keys.Shift) == Keys.Shift))
             {
-                ProjectionManager.Instance.DisplayLayer(2, ssl);
+                ProjectionManager.Instance.DisplayText(ssl);
             }
 
                 // Current slide + attached image
@@ -702,8 +702,8 @@ namespace PraiseBase.Presenter.Presenter
                 {
                     Image = _imgManager.GetImage(cs.Background)
                 };
-                ProjectionManager.Instance.DisplayLayer(1, iml, Settings.Default.ProjectionFadeTimeLayer1);
-                ProjectionManager.Instance.DisplayLayer(2, ssl);
+                ProjectionManager.Instance.DisplayImage(iml, Settings.Default.ProjectionFadeTimeLayer1);
+                ProjectionManager.Instance.DisplayText(ssl);
 
                 if (cs.Background != null && cs.Background.GetType() == typeof(ImageBackground))
                 {
@@ -741,7 +741,7 @@ namespace PraiseBase.Presenter.Presenter
                 // Hide text if layers are linked OR shift is pressed and the layers are not linked
                 if (!(!_linkLayers ^ ((ModifierKeys & Keys.Shift) == Keys.Shift)))
                 {
-                    ProjectionManager.Instance.HideLayer(2);
+                    ProjectionManager.Instance.HideText();
                 }
 
                 // Show image
@@ -749,7 +749,7 @@ namespace PraiseBase.Presenter.Presenter
                 {
                     Image = _imgManager.GetImage(e.Background)
                 };
-                ProjectionManager.Instance.DisplayLayer(1, iml, Settings.Default.ProjectionFadeTimeLayer1);
+                ProjectionManager.Instance.DisplayImage(iml, Settings.Default.ProjectionFadeTimeLayer1);
 
                 if (e.Background != null && e.Background.GetType() == typeof(ImageBackground))
                 {
@@ -1001,14 +1001,14 @@ namespace PraiseBase.Presenter.Presenter
                         !(!_linkLayers ^
                            ((ModifierKeys & Keys.Shift) == Keys.Shift && _songManager.CurrentSong != null)))
                     {
-                        ProjectionManager.Instance.HideLayer(2, Settings.Default.ProjectionFadeTime);
+                        ProjectionManager.Instance.HideText(Settings.Default.ProjectionFadeTime);
                     }
 
                     ImageLayer iml = new ImageLayer(Settings.Default.ProjectionBackColor)
                     {
                         Image = _imgManager.GetImageFromRelPath((string) listViewDirectoryImages.Items[idx].Tag)
                     };
-                    ProjectionManager.Instance.DisplayLayer(1, iml, Settings.Default.ProjectionFadeTimeLayer1);
+                    ProjectionManager.Instance.DisplayImage(iml, Settings.Default.ProjectionFadeTimeLayer1);
 
                     // Add image to history
                     ImageHistoryAdd((string)listViewDirectoryImages.Items[idx].Tag);
@@ -1173,7 +1173,7 @@ namespace PraiseBase.Presenter.Presenter
             if (_diaTimer != null && _diaTimer.Enabled)
             {
                 _diaTimer.Stop();
-                ProjectionManager.Instance.HideLayer(1);
+                ProjectionManager.Instance.HideImage();
                 buttonDiaShow.Text = StringResources.StartSlideshow;
                 return;
             }
@@ -1223,7 +1223,7 @@ namespace PraiseBase.Presenter.Presenter
                 {
                     Image = Image.FromFile(diaStack.Dequeue())
                 };
-                ProjectionManager.Instance.DisplayLayer(1, iml, Settings.Default.ProjectionFadeTimeLayer1);
+                ProjectionManager.Instance.DisplayImage(iml, Settings.Default.ProjectionFadeTimeLayer1);
                 _diaTimer.Start();
             }
         }
@@ -1233,7 +1233,7 @@ namespace PraiseBase.Presenter.Presenter
             if (((Queue<string>)((Timer)sender).Tag).Count == 0)
             {
                 ((Timer)sender).Stop();
-                ProjectionManager.Instance.HideLayer(1);
+                ProjectionManager.Instance.HideImage();
                 buttonDiaShow.Text = StringResources.StartSlideshow;
                 return;
             }
@@ -1241,7 +1241,7 @@ namespace PraiseBase.Presenter.Presenter
             {
                 Image = Image.FromFile(((Queue<string>) ((Timer) sender).Tag).Dequeue())
             };
-            ProjectionManager.Instance.DisplayLayer(1, iml, Settings.Default.ProjectionFadeTimeLayer1);
+            ProjectionManager.Instance.DisplayImage(iml, Settings.Default.ProjectionFadeTimeLayer1);
         }
 
         private void radioButton2_CheckedChanged(object sender, EventArgs e)
@@ -1297,14 +1297,14 @@ namespace PraiseBase.Presenter.Presenter
                         !(!_linkLayers ^
                           ((ModifierKeys & Keys.Shift) == Keys.Shift && _songManager.CurrentSong != null)))
                     {
-                        ProjectionManager.Instance.HideLayer(2);
+                        ProjectionManager.Instance.HideText();
                     }
 
                     ImageLayer iml = new ImageLayer(Settings.Default.ProjectionBackColor)
                     {
                         Image = _imgManager.GetImageFromRelPath((string) listViewImageHistory.Items[idx].Tag)
                     };
-                    ProjectionManager.Instance.DisplayLayer(1, iml, Settings.Default.ProjectionFadeTimeLayer1);
+                    ProjectionManager.Instance.DisplayImage(iml, Settings.Default.ProjectionFadeTimeLayer1);
                 }
             }
         }
@@ -1489,7 +1489,7 @@ namespace PraiseBase.Presenter.Presenter
                 if (
                     !((ModifierKeys & Keys.Shift) == Keys.Shift && _songManager.CurrentSong != null))
                 {
-                    ProjectionManager.Instance.HideLayer(2);
+                    ProjectionManager.Instance.HideText();
                 }
 
                 int idx = listViewImageQueue.SelectedIndices[0];
@@ -1497,7 +1497,7 @@ namespace PraiseBase.Presenter.Presenter
                 {
                     Image = _imgManager.GetImageFromRelPath((string) listViewImageQueue.Items[idx].Tag)
                 };
-                ProjectionManager.Instance.DisplayLayer(1, iml, Settings.Default.ProjectionFadeTimeLayer1);
+                ProjectionManager.Instance.DisplayImage(iml, Settings.Default.ProjectionFadeTimeLayer1);
             }
         }
 
@@ -1546,13 +1546,13 @@ namespace PraiseBase.Presenter.Presenter
                         !(!_linkLayers ^
                            ((ModifierKeys & Keys.Shift) == Keys.Shift && _songManager.CurrentSong != null)))
                     {
-                        ProjectionManager.Instance.HideLayer(2);
+                        ProjectionManager.Instance.HideText();
                     }
                     ImageLayer iml = new ImageLayer(Settings.Default.ProjectionBackColor)
                     {
                         Image = _imgManager.GetImageFromRelPath((string) listViewFavorites.Items[idx].Tag)
                     };
-                    ProjectionManager.Instance.DisplayLayer(2, iml);
+                    ProjectionManager.Instance.DisplayImage(iml);
 
                     // Add image to history
                     ImageHistoryAdd((string)listViewFavorites.Items[idx].Tag);
@@ -1580,7 +1580,7 @@ namespace PraiseBase.Presenter.Presenter
                 MainText = text.Split(new[] {Environment.NewLine}, StringSplitOptions.None)
             };
 
-            ProjectionManager.Instance.DisplayLayer(2, lt);
+            ProjectionManager.Instance.DisplayText(lt);
         }
 
         private void liedSuchenToolStripMenuItem_Click(object sender, EventArgs e)
@@ -1895,7 +1895,7 @@ namespace PraiseBase.Presenter.Presenter
                 FooterText = copyrightItems.ToArray()
             };
 
-            ProjectionManager.Instance.DisplayLayer(2, lt);
+            ProjectionManager.Instance.DisplayText(lt);
         }
 
         private void buttonAddToBibleVerseList_Click(object sender, EventArgs e)
@@ -2038,12 +2038,12 @@ namespace PraiseBase.Presenter.Presenter
 
         private void buttonToggleLayer2_Click(object sender, EventArgs e)
         {
-            ProjectionManager.Instance.HideLayer(2);
+            ProjectionManager.Instance.HideText();
         }
 
         private void buttonToggleLayer1_Click(object sender, EventArgs e)
         {
-            ProjectionManager.Instance.HideLayer(1);
+            ProjectionManager.Instance.HideImage();
         }
 
         private void titelToolStripMenuItem_Click(object sender, EventArgs e)

@@ -20,6 +20,7 @@
  *
  */
 
+using PraiseBase.Presenter.Properties;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -225,28 +226,8 @@ namespace PraiseBase.Presenter.Projection
         /// </summary>
         /// <param name="layerNum"></param>
         /// <param name="layerContent"></param>
-        public void DisplayLayer(int layerNum, BaseLayer layerContent)
-        {
-            if (ProjectionWindows.Count > 0)
-            {
-                foreach (var pw in ProjectionWindows)
-                {
-                    pw.DisplayLayer(layerNum, layerContent);
-                }
-                if (ProjectionChanged != null)
-                {
-                    ProjectionChanged(this, new ProjectionChangedEventArgs { Image = ProjectionWindows[0].GetPreviewImage() });
-                }
-            }
-        }
-
-        /// <summary>
-        /// Display a layer on all windows
-        /// </summary>
-        /// <param name="layerNum"></param>
-        /// <param name="layerContent"></param>
         /// <param name="fadetime"></param>
-        public void DisplayLayer(int layerNum, BaseLayer layerContent, int fadetime)
+        private void DisplayLayer(int layerNum, BaseLayer layerContent, int fadetime)
         {
             if (ProjectionWindows.Count > 0)
             {
@@ -254,30 +235,28 @@ namespace PraiseBase.Presenter.Projection
                 {
                     pw.DisplayLayer(layerNum, layerContent, fadetime);
                 }
-                if (ProjectionChanged != null)
-                {
-                    ProjectionChanged(this, new ProjectionChangedEventArgs { Image = ProjectionWindows[0].GetPreviewImage() });
-                }
+                ProjectionChanged?.Invoke(this, new ProjectionChangedEventArgs { Image = ProjectionWindows[0].GetPreviewImage() });
             }
         }
 
-        /// <summary>
-        /// Hide a layer on all windows
-        /// </summary>
-        /// <param name="layerNum"></param>
-        public void HideLayer(int layerNum)
+        public void DisplayImage(ImageLayer layerContent)
         {
-            if (ProjectionWindows.Count > 0)
-            {
-                foreach (var pw in ProjectionWindows)
-                {
-                    pw.HideLayer(layerNum);
-                }
-                if (ProjectionChanged != null)
-                {
-                    ProjectionChanged(this, new ProjectionChangedEventArgs { Image = ProjectionWindows[0].GetPreviewImage() });
-                }
-            }
+            DisplayImage(layerContent, Settings.Default.ProjectionFadeTime);
+        }
+
+        public void DisplayImage(ImageLayer layerContent, int fadetime)
+        {
+            DisplayLayer(1, layerContent, fadetime);
+        }
+
+        public void DisplayText(TextLayer layerContent)
+        {
+            DisplayText(layerContent, Settings.Default.ProjectionFadeTime);
+        }
+
+        public void DisplayText(TextLayer layerContent, int fadetime)
+        {
+            DisplayLayer(2, layerContent, fadetime);
         }
 
         /// <summary>
@@ -285,7 +264,7 @@ namespace PraiseBase.Presenter.Projection
         /// </summary>
         /// <param name="layerNum"></param>
         /// <param name="fadetime"></param>
-        public void HideLayer(int layerNum, int fadetime)
+        private void HideLayer(int layerNum, int fadetime)
         {
             if (ProjectionWindows.Count > 0)
             {
@@ -293,11 +272,28 @@ namespace PraiseBase.Presenter.Projection
                 {
                     pw.HideLayer(layerNum, fadetime);
                 }
-                if (ProjectionChanged != null)
-                {
-                    ProjectionChanged(this, new ProjectionChangedEventArgs { Image = ProjectionWindows[0].GetPreviewImage() });
-                }
+                ProjectionChanged?.Invoke(this, new ProjectionChangedEventArgs { Image = ProjectionWindows[0].GetPreviewImage() });
             }
+        }
+
+        public void HideImage()
+        {
+            HideImage(Settings.Default.ProjectionFadeTime);
+        }
+
+        public void HideImage(int fadetime)
+        {
+            HideLayer(1, fadetime);
+        }
+
+        public void HideText()
+        {
+            HideText(Settings.Default.ProjectionFadeTime);
+        }
+
+        public void HideText(int fadetime)
+        {
+            HideLayer(2, fadetime);
         }
     }
 }
