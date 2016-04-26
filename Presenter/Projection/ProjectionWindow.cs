@@ -30,13 +30,11 @@ namespace PraiseBase.Presenter.Projection
 {
     public partial class ProjectionWindow : Form
     {
-        protected Dictionary<int, BaseLayer> CurrentLayers;
         protected Dictionary<int, Image> CurrentLayerImages;
 
         public ProjectionWindow(Screen projScreen)
         {
             InitializeComponent();
-            CurrentLayers = new Dictionary<int, BaseLayer>();
             CurrentLayerImages = new Dictionary<int, Image>();
 
             AssignToScreen(projScreen);
@@ -56,11 +54,6 @@ namespace PraiseBase.Presenter.Projection
         {
             Location = projScreen.WorkingArea.Location;
             Size = new Size(projScreen.WorkingArea.Width, projScreen.WorkingArea.Height);
-
-            if (CurrentLayers.Count > 0)
-            {
-                RedrawLayers();
-            }
         }
 
         /// <summary>
@@ -79,12 +72,8 @@ namespace PraiseBase.Presenter.Projection
         /// <param name="layerNum"></param>
         /// <param name="layerContents"></param>
         /// <param name="fadetime"></param>
-        public void DisplayLayer(int layerNum, BaseLayer layerContents, int fadetime)
+        public void DisplayLayer(int layerNum, Bitmap bmp, int fadetime)
         {
-            var bmp = new Bitmap(Width, Height);
-            Graphics gr = Graphics.FromImage(bmp);
-            layerContents.WriteOut(gr);
-
             if (layerNum == 2)
             {
                 ((ProjectionControl)(projectionControlHost.Child)).SetProjectionText(bmp, fadetime);
@@ -93,7 +82,6 @@ namespace PraiseBase.Presenter.Projection
             {
                 ((ProjectionControl)(projectionControlHost.Child)).SetProjectionImage(bmp, fadetime);
             }
-            CurrentLayers[layerNum] = layerContents;
             CurrentLayerImages[layerNum] = bmp;
         }
 
@@ -116,18 +104,6 @@ namespace PraiseBase.Presenter.Projection
             }
 
             CurrentLayerImages[layerNum] = bmp;            
-        }
-
-        /// <summary>
-        /// Redraw all layers (e.g. after screen change)
-        /// </summary>
-        public void RedrawLayers()
-        {
-            Dictionary<int, BaseLayer> tempDict = CurrentLayers.ToDictionary(kvp => kvp.Key, kvp => kvp.Value);
-            foreach (var kvp in tempDict)
-            {
-                DisplayLayer(kvp.Key, kvp.Value, 0);
-            }
         }
 
         /// <summary>

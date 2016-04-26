@@ -53,6 +53,8 @@ namespace PraiseBase.Presenter.Projection
             Active
         }
 
+        protected Dictionary<int, BaseLayer> CurrentLayers;
+
         #region Delegates
 
         public delegate void ProjectionChange(object sender, ProjectionChangedEventArgs e);
@@ -70,6 +72,7 @@ namespace PraiseBase.Presenter.Projection
         /// </summary>
         private ProjectionManager()
         {
+            CurrentLayers = new Dictionary<int, BaseLayer>();
             InitializeWindows();
             ScreenManager.Instance.ScreensChanged += Instance_ScreensChanged;
         }
@@ -126,6 +129,11 @@ namespace PraiseBase.Presenter.Projection
                             if (i < ProjectionWindows.Count && i < ScreenManager.Instance.AvailableProjectionScreens.Count)
                             {
                                 ProjectionWindows[i].AssignToScreen(ScreenManager.Instance.AvailableProjectionScreens[i]);
+                                if (CurrentLayers.Count > 0)
+                                {
+                                    // TODO: Only redraw on related screen
+                                    RedrawLayers();
+                                }
                             }
                             // Create new window if a screen has been added
                             else if (i < ScreenManager.Instance.AvailableProjectionScreens.Count)
@@ -151,6 +159,11 @@ namespace PraiseBase.Presenter.Projection
                             if (i == 0)
                             {
                                 ProjectionWindows[0].AssignToScreen(ScreenManager.Instance.MainScreen);
+                                if (CurrentLayers.Count > 0)
+                                {
+                                    // TODO: Only redraw on related screen
+                                    RedrawLayers();
+                                }
                             }
                             // Destroy the rest
                             else
@@ -233,7 +246,13 @@ namespace PraiseBase.Presenter.Projection
             {
                 foreach (var pw in ProjectionWindows)
                 {
-                    pw.DisplayLayer(layerNum, layerContent, fadetime);
+                    Bitmap bmp = new Bitmap(pw.Width, pw.Height);
+                    Graphics gr = Graphics.FromImage(bmp);
+                    layerContent.WriteOut(gr);
+
+                    pw.DisplayLayer(layerNum, bmp, fadetime);
+
+                    CurrentLayers[layerNum] = layerContent;
                 }
                 ProjectionChanged?.Invoke(this, new ProjectionChangedEventArgs { Image = ProjectionWindows[0].GetPreviewImage() });
             }
@@ -294,6 +313,17 @@ namespace PraiseBase.Presenter.Projection
         public void HideText(int fadetime)
         {
             HideLayer(2, fadetime);
+        }
+        
+        /// <summary>
+        /// Redraw all layers (e.g. after screen change)
+        /// </summary>
+        public void RedrawLayers()
+        {
+            foreach (var kvp in CurrentLayers)
+            {
+                DisplayLayer(kvp.Key, kvp.Value, 0);
+            }
         }
     }
 }
