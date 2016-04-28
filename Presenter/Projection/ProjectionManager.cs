@@ -313,6 +313,18 @@ namespace PraiseBase.Presenter.Projection
             }
         }
 
+        public void DisplayWebsite(Uri uri)
+        {
+            if (ProjectionWindows.Count > 0)
+            {
+                foreach (var pw in ProjectionWindows)
+                {
+                    pw.ShowWebsite(uri);
+                }
+                ProjectionChanged?.Invoke(this, new ProjectionChangedEventArgs { Image = ProjectionWindows[0].GetPreviewImage() });
+            }
+        }
+
         /// <summary>
         /// Redraw all layers (e.g. after screen change)
         /// </summary>

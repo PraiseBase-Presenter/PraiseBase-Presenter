@@ -31,6 +31,8 @@
         <Image Name="projectionImageBack"  Stretch="Fill"></Image>
         <Image Name="projectionImage"  Stretch="Fill" Opacity="0"></Image>
 
+        <WebBrowser Name="webBrowser" Opacity="0"/>
+        
         <Image Name="textImageBack"  Stretch="Fill">
             <!--<Image.Effect>
                 <DropShadowEffect BlurRadius="3" Opacity="0.8" ShadowDepth="3" />

@@ -126,6 +126,9 @@ namespace PraiseBase.Presenter.Projection
 
         public void SetProjectionText(System.Drawing.Bitmap img, int fadeTime)
         {
+            webBrowser.Opacity = 0f;
+            webBrowser.Source = null;
+
             if (fadeTime > 0)
             {
                 textImage.Opacity = 0f;
@@ -152,6 +155,12 @@ namespace PraiseBase.Presenter.Projection
             textImageBack.Source = textImage.Source;
             textImageBack.Opacity = 1f;
             AnimationFinished?.Invoke(this, new EventArgs());
+        }
+
+        public void ShowWebsite(Uri uri)
+        {
+            webBrowser.Opacity = 1f;
+            webBrowser.Source = uri;
         }
 
         /// <summary>

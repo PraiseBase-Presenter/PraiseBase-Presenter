@@ -23,6 +23,7 @@
 using System.Drawing;
 using System.Windows.Forms;
 using PraiseBase.Presenter.Properties;
+using System;
 
 namespace PraiseBase.Presenter.Projection
 {
@@ -98,6 +99,15 @@ namespace PraiseBase.Presenter.Projection
         {
             var bmp = new Bitmap(Width, Height);
             ((ProjectionControl)(projectionControlHost.Child)).SetProjectionText(bmp, fadetime);
+            CurrentPreviewText = bmp;
+        }
+
+        public void ShowWebsite(Uri uri)
+        {
+            ((ProjectionControl)(projectionControlHost.Child)).ShowWebsite(uri);
+            // TODO
+            var bmp = new Bitmap(Width, Height);
+            CurrentPreviewImage = bmp;
             CurrentPreviewText = bmp;
         }
 
