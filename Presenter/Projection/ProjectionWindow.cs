@@ -75,9 +75,8 @@ namespace PraiseBase.Presenter.Projection
         /// <param name="fadetime"></param>
         public void HideImage(int fadetime)
         {
-            var bmp = new Bitmap(Width, Height);
-            ((ProjectionControl)(projectionControlHost.Child)).SetProjectionImage(bmp, fadetime);
-            CurrentPreviewImage = bmp;
+            ((ProjectionControl)(projectionControlHost.Child)).HideProjectionImage(fadetime);
+            CurrentPreviewImage = new Bitmap(Width, Height);
         }
 
         /// <summary>

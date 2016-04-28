@@ -86,6 +86,44 @@ namespace PraiseBase.Presenter.Projection
             }
         }
 
+        /// <summary>
+        /// Fired when the animation is finished
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void ImageAnimationCompleted(object sender, EventArgs e)
+        {
+            projectionImageBack.Source = projectionImage.Source;
+            AnimationFinished?.Invoke(this, new EventArgs());
+        }
+
+        public void HideProjectionImage(int fadeTime)
+        {
+            projectionImageBack.Source = null;
+            if (fadeTime > 0)
+            {
+                var imageAnimation = (Storyboard)FindResource("imageHideAnimation");
+                imageAnimation.SpeedRatio = 1000f / fadeTime;
+                imageAnimation.Begin(this);
+            }
+            else
+            {
+                projectionImage.Opacity = 0f;
+                projectionImage.Source = null;
+            }
+        }
+
+        /// <summary>
+        /// Fired when the animation is finished
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void ImageHideAnimationCompleted(object sender, EventArgs e)
+        {
+            projectionImage.Source = null;
+            AnimationFinished?.Invoke(this, new EventArgs());
+        }
+
         public void SetProjectionText(System.Drawing.Bitmap img, int fadeTime)
         {
             if (fadeTime > 0)
@@ -107,17 +145,6 @@ namespace PraiseBase.Presenter.Projection
                 textImageBack.Source = textImage.Source;
                 textImageBack.Opacity = 1f;
             }
-        }
-
-        /// <summary>
-        /// Fired when the animation is finished
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void ImageAnimationCompleted(object sender, EventArgs e)
-        {
-            projectionImageBack.Source = projectionImage.Source;
-            AnimationFinished?.Invoke(this, new EventArgs());
         }
 
         private void TextAnimationCompleted(object sender, EventArgs e)

@@ -8,6 +8,9 @@
         <Storyboard x:Key="imageAnimation">
             <DoubleAnimation  Storyboard.TargetName="projectionImage"  Storyboard.TargetProperty="(Image.Opacity)"  From="0"  To="1" Completed="ImageAnimationCompleted" Duration="0:0:1" />
         </Storyboard>
+        <Storyboard x:Key="imageHideAnimation">
+            <DoubleAnimation  Storyboard.TargetName="projectionImage"  Storyboard.TargetProperty="(Image.Opacity)"  From="1"  To="0" Completed="ImageHideAnimationCompleted" Duration="0:0:1" />
+        </Storyboard>
         <Storyboard x:Key="textAnimation">
             <DoubleAnimation  Storyboard.TargetName="textImage"  Storyboard.TargetProperty="(Image.Opacity)"  From="0"  To="1" Completed="TextAnimationCompleted" Duration="0:0:1" />
         </Storyboard>
