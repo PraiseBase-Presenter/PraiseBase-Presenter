@@ -27,6 +27,10 @@
     <Compile Include="Product.wxs" />
   </ItemGroup>
   <ItemGroup>
+    <WixExtension Include="WixNetFxExtension">
+      <HintPath>$(WixExtDir)\WixNetFxExtension.dll</HintPath>
+      <Name>WixNetFxExtension</Name>
+    </WixExtension>
     <WixExtension Include="WixFileVersionExtension">
       <HintPath>Extensions\WixFileVersionExtension.dll</HintPath>
       <Name>WixFileVersionExtension</Name>
