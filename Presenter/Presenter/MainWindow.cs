@@ -47,6 +47,7 @@ using Timer = System.Windows.Forms.Timer;
 using System.ComponentModel;
 using PraiseBase.Presenter.Persistence.CCLI;
 using PraiseBase.Presenter.Template;
+using System.Reflection;
 
 namespace PraiseBase.Presenter.Presenter
 {
@@ -166,6 +167,8 @@ namespace PraiseBase.Presenter.Presenter
             listViewBibleVerses.AutoResizeColumn(0, ColumnHeaderAutoResizeStyle.HeaderSize);
 
             checkBoxBibleAutoShowVerse.Checked = Settings.Default.AutoShowBibleVerse;
+
+            comboBoxWebVideoService.DataSource = Enum.GetValues(typeof(WebVideoService));
         }
 
         #region SongEditor
@@ -768,6 +771,11 @@ namespace PraiseBase.Presenter.Presenter
             {
                 textBoxLiveText.Focus();
             }
+            else if (tabControlTextLayer.SelectedIndex == 3)
+            {
+                textBoxWebVideoID.Focus();
+                textBoxWebVideoID.SelectAll();
+            }
         }
 
         private void webToolStripMenuItem_Click(object sender, EventArgs e)
@@ -1348,6 +1356,8 @@ namespace PraiseBase.Presenter.Presenter
             Settings.Default.MainWindowSize = Size;
             Settings.Default.AutoShowBibleVerse = checkBoxBibleAutoShowVerse.Checked;
             Settings.Default.Save();
+
+            ProjectionManager.Instance.Dispose();
         }
 
         private void datenverzeichnisOeffnenToolStripMenuItem_Click(object sender, EventArgs e)
@@ -2590,6 +2600,48 @@ namespace PraiseBase.Presenter.Presenter
             {
                 MessageBox.Show(e.Message, StringResources.Error, MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+        }
+
+        private void textBoxWebVideoID_TextChanged(object sender, EventArgs e)
+        {
+            buttonPlayWebVideo.Enabled = textBoxWebVideoID.Text.Length > 0;
+        }
+
+        private void buttonPlayWebVideo_Click(object sender, EventArgs e)
+        {
+            string videoID = textBoxWebVideoID.Text;
+            Uri uri = null;
+
+            // YouTube
+            if ((WebVideoService)comboBoxWebVideoService.SelectedItem == WebVideoService.YouTube)
+            {
+                // See API documentation at https://developers.google.com/youtube/player_parameters
+                uri = new Uri("https://www.youtube.com/embed/" + videoID + "?autoplay=1&amp;controls=0&amp;modestbranding=1&amp;rel=0&amp;showinfo=0");
+            }
+            // Vimeo
+            // TODO: Currently disabled, as Vimeo embedding shows JavaScript error in WebBrowser component
+            //if ((WebVideoService)comboBoxWebVideoService.SelectedItem == WebVideoService.Vimeo)
+            //{
+            //    // See API documentation at https://developer.vimeo.com/player/embedding
+            //    uri = new Uri("https://player.vimeo.com/video/" + videoID + "?autoplay=1&badge=0&byline=0&portrait=0&title=0&api=0&player_id=praisebasepresenter");
+            //}
+
+            if (uri != null)
+            {
+                buttonStopWebVideo.Enabled = true;
+                ProjectionManager.Instance.DisplayWebsite(uri);
+            }
+        }
+
+        private void buttonStopWebVideo_Click(object sender, EventArgs e)
+        {
+            buttonStopWebVideo.Enabled = false;
+            ProjectionManager.Instance.HideWebsite();
+        }
+
+        private void comboBoxWebVideoService_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            textBoxWebVideoID.Focus();
         }
 
         private void buttonSongViewModeSequence_Click(object sender, EventArgs e)

@@ -111,6 +111,15 @@ namespace PraiseBase.Presenter.Projection
             CurrentPreviewText = bmp;
         }
 
+        public void HideWebsite()
+        {
+            ((ProjectionControl)(projectionControlHost.Child)).HideWebsite();
+            // TODO
+            var bmp = new Bitmap(Width, Height);
+            CurrentPreviewImage = bmp;
+            CurrentPreviewText = bmp;
+        }
+
         /// <summary>
         /// Create preview image
         /// </summary>
@@ -128,6 +137,12 @@ namespace PraiseBase.Presenter.Projection
                 gr.DrawImage(CurrentPreviewText, new Rectangle(0, 0, frame.Width, frame.Height), new Rectangle(0, 0, frame.Width, frame.Height), GraphicsUnit.Pixel);
             }
             return frame;
+        }
+
+        public new void Dispose()
+        {
+            ((ProjectionControl)(projectionControlHost.Child)).Dispose();
+            base.Dispose();
         }
     }
 }

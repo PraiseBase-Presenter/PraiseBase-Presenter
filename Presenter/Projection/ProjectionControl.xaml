@@ -31,7 +31,7 @@
         <Image Name="projectionImageBack"  Stretch="Fill"></Image>
         <Image Name="projectionImage"  Stretch="Fill" Opacity="0"></Image>
 
-        <WebBrowser Name="webBrowser" Opacity="0"/>
+        <WebBrowser Name="webBrowser" Visibility="Collapsed"/>
         
         <Image Name="textImageBack"  Stretch="Fill">
             <!--<Image.Effect>

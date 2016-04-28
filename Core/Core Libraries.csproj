@@ -67,6 +67,7 @@
     <Compile Include="Model\Song\SongFormatting.cs" />
     <Compile Include="Model\Song\TextualSongRepresentationMapper.cs" />
     <Compile Include="Model\TranslationPosition.cs" />
+    <Compile Include="Model\WebVideoService.cs" />
     <Compile Include="Persistence\AbstractSongFilePlugin.cs" />
     <Compile Include="Persistence\CCLI\SongSelectFilePlugin.cs" />
     <Compile Include="Persistence\CCLI\SongSelectFile.cs" />

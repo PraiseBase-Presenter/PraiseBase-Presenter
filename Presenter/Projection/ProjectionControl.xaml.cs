@@ -51,6 +51,7 @@ namespace PraiseBase.Presenter.Projection
 
         private void ProjectionControlLoaded(object sender, RoutedEventArgs e)
         {
+            webBrowser.LoadCompleted += WebBrowser_LoadCompleted;
         }
 
         /// <summary>
@@ -126,8 +127,10 @@ namespace PraiseBase.Presenter.Projection
 
         public void SetProjectionText(System.Drawing.Bitmap img, int fadeTime)
         {
-            webBrowser.Opacity = 0f;
-            webBrowser.Source = null;
+            if (webBrowser.Source != null)
+            {
+                HideWebsite();
+            }
 
             if (fadeTime > 0)
             {
@@ -150,6 +153,11 @@ namespace PraiseBase.Presenter.Projection
             }
         }
 
+        internal void Dispose()
+        {
+            webBrowser.Dispose();
+        }
+
         private void TextAnimationCompleted(object sender, EventArgs e)
         {
             textImageBack.Source = textImage.Source;
@@ -159,8 +167,21 @@ namespace PraiseBase.Presenter.Projection
 
         public void ShowWebsite(Uri uri)
         {
-            webBrowser.Opacity = 1f;
             webBrowser.Source = uri;
+        }
+
+        public void HideWebsite()
+        {
+            webBrowser.Visibility = Visibility.Collapsed;
+            webBrowser.Source = null;
+        }
+
+        private void WebBrowser_LoadCompleted(object sender, System.Windows.Navigation.NavigationEventArgs e)
+        {
+            if (e.Uri != null)
+            {
+                webBrowser.Visibility = Visibility.Visible;
+            }
         }
 
         /// <summary>
