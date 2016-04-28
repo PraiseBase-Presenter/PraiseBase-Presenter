@@ -6,10 +6,10 @@
     <!--xmlns:my="clr-namespace:Knom.WPF.XmlNs"-->
     <UserControl.Resources>
         <Storyboard x:Key="imageAnimation">
-            <DoubleAnimation  Storyboard.TargetName="projectionImage"  Storyboard.TargetProperty="(Image.Opacity)"  From="0"  To="1" Completed="DoubleAnimationCompleted" Duration="0:0:1" />
+            <DoubleAnimation  Storyboard.TargetName="projectionImage"  Storyboard.TargetProperty="(Image.Opacity)"  From="0"  To="1" Completed="ImageAnimationCompleted" Duration="0:0:1" />
         </Storyboard>
         <Storyboard x:Key="textAnimation">
-            <DoubleAnimation  Storyboard.TargetName="textImage"  Storyboard.TargetProperty="(Image.Opacity)"  From="0"  To="1" Completed="DoubleAnimationCompleted2" Duration="0:0:1" />
+            <DoubleAnimation  Storyboard.TargetName="textImage"  Storyboard.TargetProperty="(Image.Opacity)"  From="0"  To="1" Completed="TextAnimationCompleted" Duration="0:0:1" />
         </Storyboard>
         <Storyboard x:Key="textAnimation2">
             <DoubleAnimation  Storyboard.TargetName="textImageBack"  Storyboard.TargetProperty="(Image.Opacity)"  From="1"  To="0" Duration="0:0:1" />
@@ -39,8 +39,8 @@
             </Image.Effect>-->
         </Image>
 
-        <Image Name="blackoutImage"  Stretch="Fill"></Image>
-
+        <Rectangle Name="blackoutImage"  Stretch="Fill" Fill="Black" Opacity="0" />
+        
         <!--
         <TextBlock Margin="40" Name="textBlock1" Text="" Foreground="White" FontFamily="Calibri" FontSize="60" FontWeight="Bold" Opacity="1">
             <TextBlock.BitmapEffect>

@@ -21,10 +21,10 @@
  */
 
 using System;
-using System.Drawing;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Interop;
+using System.Windows.Media;
 using System.Windows.Media.Animation;
 using System.Windows.Media.Imaging;
 
@@ -45,21 +45,12 @@ namespace PraiseBase.Presenter.Projection
         public ProjectionControl()
         {
             InitializeComponent();
-            ProjectionBackgroundColor = Color.Black;
         }
-
-        public Color ProjectionBackgroundColor { get; set; }
 
         public event AnimationFinish AnimationFinished;
 
         private void ProjectionControlLoaded(object sender, RoutedEventArgs e)
         {
-            var bmp = new Bitmap(1, 1);
-            Graphics gr = Graphics.FromImage(bmp);
-            gr.FillRectangle(new SolidBrush(ProjectionBackgroundColor), 0, 0, 1, 1);
-            blackoutImage.Source = LoadBitmap(bmp);
-            gr.Dispose();
-            blackoutImage.Opacity = 0f;
         }
 
         /// <summary>
@@ -67,10 +58,9 @@ namespace PraiseBase.Presenter.Projection
         /// </summary>
         /// <param name="source"></param>
         /// <returns></returns>
-        protected static BitmapSource LoadBitmap(Bitmap source)
+        protected static BitmapSource LoadBitmap(System.Drawing.Bitmap source)
         {
-            return Imaging.CreateBitmapSourceFromHBitmap(source.GetHbitmap(), IntPtr.Zero, Int32Rect.Empty,
-                                                         BitmapSizeOptions.FromEmptyOptions());
+            return Imaging.CreateBitmapSourceFromHBitmap(source.GetHbitmap(), IntPtr.Zero, Int32Rect.Empty, BitmapSizeOptions.FromEmptyOptions());
         }
 
         /// <summary>
@@ -78,7 +68,7 @@ namespace PraiseBase.Presenter.Projection
         /// </summary>
         /// <param name="img">Image that will be shown</param>
         /// <param name="fadeTime">Animation time in miliseconds</param>
-        public void SetProjectionImage(Bitmap img, int fadeTime)
+        public void SetProjectionImage(System.Drawing.Bitmap img, int fadeTime)
         {
             if (fadeTime > 0)
             {
@@ -96,7 +86,7 @@ namespace PraiseBase.Presenter.Projection
             }
         }
 
-        public void SetProjectionText(Bitmap img, int fadeTime)
+        public void SetProjectionText(System.Drawing.Bitmap img, int fadeTime)
         {
             if (fadeTime > 0)
             {
@@ -124,23 +114,17 @@ namespace PraiseBase.Presenter.Projection
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void DoubleAnimationCompleted(object sender, EventArgs e)
+        private void ImageAnimationCompleted(object sender, EventArgs e)
         {
             projectionImageBack.Source = projectionImage.Source;
-            if (AnimationFinished != null)
-            {
-                AnimationFinished(this, new EventArgs());
-            }
+            AnimationFinished?.Invoke(this, new EventArgs());
         }
 
-        private void DoubleAnimationCompleted2(object sender, EventArgs e)
+        private void TextAnimationCompleted(object sender, EventArgs e)
         {
             textImageBack.Source = textImage.Source;
             textImageBack.Opacity = 1f;
-            if (AnimationFinished != null)
-            {
-                AnimationFinished(this, new EventArgs());
-            }
+            AnimationFinished?.Invoke(this, new EventArgs());
         }
 
         /// <summary>
@@ -150,7 +134,7 @@ namespace PraiseBase.Presenter.Projection
         /// <param name="animationTime">Animation duration in miliseconds</param>
         public void BlackOut(bool val, int animationTime)
         {
-            var blackoutAnimation = (Storyboard)FindResource(val ? "blackoutAnimationOn" : "blackoutAnimationOff");
+            Storyboard blackoutAnimation = (Storyboard)FindResource(val ? "blackoutAnimationOn" : "blackoutAnimationOff");
             blackoutAnimation.SpeedRatio = (animationTime == 0 ? 100 : 1000f / animationTime);
             blackoutAnimation.Begin(this);
         }

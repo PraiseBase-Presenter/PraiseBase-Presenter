@@ -20,7 +20,6 @@
  *
  */
 
-using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
 using PraiseBase.Presenter.Properties;
@@ -35,14 +34,8 @@ namespace PraiseBase.Presenter.Projection
         public ProjectionWindow(Screen projScreen)
         {
             InitializeComponent();
-
             AssignToScreen(projScreen);
-
-            var wpc = new ProjectionControl
-            {
-                ProjectionBackgroundColor = Settings.Default.ProjectionBackColor
-            };
-            projectionControlHost.Child = wpc;
+            projectionControlHost.Child = new ProjectionControl();
         }
 
         /// <summary>

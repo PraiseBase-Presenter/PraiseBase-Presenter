@@ -106,6 +106,7 @@ namespace PraiseBase.Presenter.Projection
                         foreach (var s in ScreenManager.Instance.AvailableProjectionScreens)
                         {
                             ProjectionWindow pw = new ProjectionWindow(s);
+                            pw.BackColor = Settings.Default.ProjectionBackColor;
                             ProjectionWindows.Add(pw);
                         }
                         return true;
@@ -113,6 +114,7 @@ namespace PraiseBase.Presenter.Projection
                     else
                     {
                         ProjectionWindow pw = new ProjectionWindow(ScreenManager.Instance.MainScreen);
+                        pw.BackColor = Settings.Default.ProjectionBackColor;
                         ProjectionWindows.Add(pw);
                         return false;
                     }
@@ -137,6 +139,7 @@ namespace PraiseBase.Presenter.Projection
                             else if (i < ScreenManager.Instance.AvailableProjectionScreens.Count)
                             {
                                 ProjectionWindow pw = new ProjectionWindow(ScreenManager.Instance.AvailableProjectionScreens[i]);
+                                pw.BackColor = Settings.Default.ProjectionBackColor;
                                 ProjectionWindows.Add(pw);
                             }
                             // Destroy window if a screen has been removed
