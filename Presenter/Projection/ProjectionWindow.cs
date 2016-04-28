@@ -22,7 +22,6 @@
 
 using System.Collections.Generic;
 using System.Drawing;
-using System.Linq;
 using System.Windows.Forms;
 using PraiseBase.Presenter.Properties;
 
@@ -30,12 +29,12 @@ namespace PraiseBase.Presenter.Projection
 {
     public partial class ProjectionWindow : Form
     {
-        protected Dictionary<int, Image> CurrentLayerImages;
+        Image CurrentPreviewImage;
+        Image CurrentPreviewText;
 
         public ProjectionWindow(Screen projScreen)
         {
             InitializeComponent();
-            CurrentLayerImages = new Dictionary<int, Image>();
 
             AssignToScreen(projScreen);
 
@@ -67,43 +66,47 @@ namespace PraiseBase.Presenter.Projection
         }
 
         /// <summary>
-        /// Display text layer with transition
+        /// Display image with transition
         /// </summary>
-        /// <param name="layerNum"></param>
-        /// <param name="layerContents"></param>
+        /// <param name="bmp"></param>
         /// <param name="fadetime"></param>
-        public void DisplayLayer(int layerNum, Bitmap bmp, int fadetime)
+        public void DisplayImage(Bitmap bmp, int fadetime)
         {
-            if (layerNum == 2)
-            {
-                ((ProjectionControl)(projectionControlHost.Child)).SetProjectionText(bmp, fadetime);
-            }
-            else
-            {
-                ((ProjectionControl)(projectionControlHost.Child)).SetProjectionImage(bmp, fadetime);
-            }
-            CurrentLayerImages[layerNum] = bmp;
+            ((ProjectionControl)(projectionControlHost.Child)).SetProjectionImage(bmp, fadetime);
+            CurrentPreviewImage = bmp;
         }
 
         /// <summary>
-        /// Hide layer with transition
+        /// Hide image with transition
         /// </summary>
-        /// <param name="layerNum"></param>
         /// <param name="fadetime"></param>
-        public void HideLayer(int layerNum, int fadetime)
+        public void HideImage(int fadetime)
         {
             var bmp = new Bitmap(Width, Height);
+            ((ProjectionControl)(projectionControlHost.Child)).SetProjectionImage(bmp, fadetime);
+            CurrentPreviewImage = bmp;
+        }
 
-            if (layerNum == 2)
-            {
-                ((ProjectionControl)(projectionControlHost.Child)).SetProjectionText(bmp, fadetime);
-            }
-            else if (layerNum == 1)
-            {
-                ((ProjectionControl)(projectionControlHost.Child)).SetProjectionImage(bmp, fadetime);
-            }
+        /// <summary>
+        /// Display text with transition
+        /// </summary>
+        /// <param name="bmp"></param>
+        /// <param name="fadetime"></param>
+        public void DisplayText(Bitmap bmp, int fadetime)
+        {
+            ((ProjectionControl)(projectionControlHost.Child)).SetProjectionText(bmp, fadetime);
+            CurrentPreviewText = bmp;
+        }
 
-            CurrentLayerImages[layerNum] = bmp;            
+        /// <summary>
+        /// Hide text with transition
+        /// </summary>
+        /// <param name="fadetime"></param>
+        public void HideText(int fadetime)
+        {
+            var bmp = new Bitmap(Width, Height);
+            ((ProjectionControl)(projectionControlHost.Child)).SetProjectionText(bmp, fadetime);
+            CurrentPreviewText = bmp;
         }
 
         /// <summary>
@@ -114,21 +117,13 @@ namespace PraiseBase.Presenter.Projection
         {
             Image frame = new Bitmap(Width, Height);
             Graphics gr = Graphics.FromImage(frame);
-            
-            int usedLayers = 0;
-            int i = 0;
-            while (true)
+            if (CurrentPreviewImage != null)
             {
-                if (CurrentLayerImages.ContainsKey(i))
-                {
-                    gr.DrawImage(CurrentLayerImages[i], new Rectangle(0, 0, frame.Width, frame.Height), new Rectangle(0, 0, frame.Width, frame.Height), GraphicsUnit.Pixel);
-                    usedLayers++;
-                }
-                if (usedLayers >= CurrentLayerImages.Count)
-                {
-                    break;
-                }
-                i++;
+                gr.DrawImage(CurrentPreviewImage, new Rectangle(0, 0, frame.Width, frame.Height), new Rectangle(0, 0, frame.Width, frame.Height), GraphicsUnit.Pixel);
+            }
+            if (CurrentPreviewText != null)
+            {
+                gr.DrawImage(CurrentPreviewText, new Rectangle(0, 0, frame.Width, frame.Height), new Rectangle(0, 0, frame.Width, frame.Height), GraphicsUnit.Pixel);
             }
             return frame;
         }

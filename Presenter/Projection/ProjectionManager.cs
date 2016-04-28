@@ -53,7 +53,8 @@ namespace PraiseBase.Presenter.Projection
             Active
         }
 
-        protected Dictionary<int, BaseLayer> CurrentLayers;
+        private ImageLayer CurrentImage;
+        private TextLayer CurrentText;
 
         #region Delegates
 
@@ -72,7 +73,6 @@ namespace PraiseBase.Presenter.Projection
         /// </summary>
         private ProjectionManager()
         {
-            CurrentLayers = new Dictionary<int, BaseLayer>();
             InitializeWindows();
             ScreenManager.Instance.ScreensChanged += Instance_ScreensChanged;
         }
@@ -129,11 +129,9 @@ namespace PraiseBase.Presenter.Projection
                             if (i < ProjectionWindows.Count && i < ScreenManager.Instance.AvailableProjectionScreens.Count)
                             {
                                 ProjectionWindows[i].AssignToScreen(ScreenManager.Instance.AvailableProjectionScreens[i]);
-                                if (CurrentLayers.Count > 0)
-                                {
-                                    // TODO: Only redraw on related screen
-                                    RedrawLayers();
-                                }
+
+                                // TODO: Only redraw on related screen
+                                RedrawLayers();
                             }
                             // Create new window if a screen has been added
                             else if (i < ScreenManager.Instance.AvailableProjectionScreens.Count)
@@ -159,11 +157,9 @@ namespace PraiseBase.Presenter.Projection
                             if (i == 0)
                             {
                                 ProjectionWindows[0].AssignToScreen(ScreenManager.Instance.MainScreen);
-                                if (CurrentLayers.Count > 0)
-                                {
-                                    // TODO: Only redraw on related screen
-                                    RedrawLayers();
-                                }
+
+                                // TODO: Only redraw on related screen
+                                RedrawLayers();
                             }
                             // Destroy the rest
                             else
@@ -234,13 +230,12 @@ namespace PraiseBase.Presenter.Projection
             CurrentState = ProjectionState.Active;
         }
 
-        /// <summary>
-        /// Display a layer on all windows
-        /// </summary>
-        /// <param name="layerNum"></param>
-        /// <param name="layerContent"></param>
-        /// <param name="fadetime"></param>
-        private void DisplayLayer(int layerNum, BaseLayer layerContent, int fadetime)
+        public void DisplayImage(ImageLayer layerContent)
+        {
+            DisplayImage(layerContent, Settings.Default.ProjectionFadeTime);
+        }
+
+        public void DisplayImage(ImageLayer layerContent, int fadetime)
         {
             if (ProjectionWindows.Count > 0)
             {
@@ -250,22 +245,12 @@ namespace PraiseBase.Presenter.Projection
                     Graphics gr = Graphics.FromImage(bmp);
                     layerContent.WriteOut(gr);
 
-                    pw.DisplayLayer(layerNum, bmp, fadetime);
+                    pw.DisplayImage(bmp, fadetime);
 
-                    CurrentLayers[layerNum] = layerContent;
+                    CurrentImage = layerContent;
                 }
                 ProjectionChanged?.Invoke(this, new ProjectionChangedEventArgs { Image = ProjectionWindows[0].GetPreviewImage() });
             }
-        }
-
-        public void DisplayImage(ImageLayer layerContent)
-        {
-            DisplayImage(layerContent, Settings.Default.ProjectionFadeTime);
-        }
-
-        public void DisplayImage(ImageLayer layerContent, int fadetime)
-        {
-            DisplayLayer(1, layerContent, fadetime);
         }
 
         public void DisplayText(TextLayer layerContent)
@@ -275,21 +260,17 @@ namespace PraiseBase.Presenter.Projection
 
         public void DisplayText(TextLayer layerContent, int fadetime)
         {
-            DisplayLayer(2, layerContent, fadetime);
-        }
-
-        /// <summary>
-        /// Hide a layer on all windows
-        /// </summary>
-        /// <param name="layerNum"></param>
-        /// <param name="fadetime"></param>
-        private void HideLayer(int layerNum, int fadetime)
-        {
             if (ProjectionWindows.Count > 0)
             {
                 foreach (var pw in ProjectionWindows)
                 {
-                    pw.HideLayer(layerNum, fadetime);
+                    Bitmap bmp = new Bitmap(pw.Width, pw.Height);
+                    Graphics gr = Graphics.FromImage(bmp);
+                    layerContent.WriteOut(gr);
+
+                    pw.DisplayText(bmp, fadetime);
+
+                    CurrentText = layerContent;
                 }
                 ProjectionChanged?.Invoke(this, new ProjectionChangedEventArgs { Image = ProjectionWindows[0].GetPreviewImage() });
             }
@@ -302,7 +283,14 @@ namespace PraiseBase.Presenter.Projection
 
         public void HideImage(int fadetime)
         {
-            HideLayer(1, fadetime);
+            if (ProjectionWindows.Count > 0)
+            {
+                foreach (var pw in ProjectionWindows)
+                {
+                    pw.HideImage(fadetime);
+                }
+                ProjectionChanged?.Invoke(this, new ProjectionChangedEventArgs { Image = ProjectionWindows[0].GetPreviewImage() });
+            }
         }
 
         public void HideText()
@@ -312,17 +300,28 @@ namespace PraiseBase.Presenter.Projection
 
         public void HideText(int fadetime)
         {
-            HideLayer(2, fadetime);
+            if (ProjectionWindows.Count > 0)
+            {
+                foreach (var pw in ProjectionWindows)
+                {
+                    pw.HideText(fadetime);
+                }
+                ProjectionChanged?.Invoke(this, new ProjectionChangedEventArgs { Image = ProjectionWindows[0].GetPreviewImage() });
+            }
         }
-        
+
         /// <summary>
         /// Redraw all layers (e.g. after screen change)
         /// </summary>
         public void RedrawLayers()
         {
-            foreach (var kvp in CurrentLayers)
+            if (CurrentImage != null)
             {
-                DisplayLayer(kvp.Key, kvp.Value, 0);
+                DisplayImage(CurrentImage, 0);
+            }
+            if (CurrentText != null)
+            {
+                DisplayText(CurrentText, 0);
             }
         }
     }
