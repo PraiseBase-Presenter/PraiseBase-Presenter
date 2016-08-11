@@ -46,6 +46,8 @@ namespace PraiseBase.Presenter.Projection
 
         protected ProjectionState CurrentState = ProjectionState.Disabled;
 
+        public bool ChromaKeyingEnabled { get; set; } = false;
+
         protected enum ProjectionState
         {
             Disabled,
@@ -240,6 +242,10 @@ namespace PraiseBase.Presenter.Projection
 
         public void DisplayImage(ImageLayer layerContent, int fadetime)
         {
+            if (ChromaKeyingEnabled)
+            {
+               layerContent = new ImageLayer(Settings.Default.ChromaKeyingColor);
+            }
             layerContent.ImageFit = Settings.Default.ProjectionBackgroundImageFit;
             if (ProjectionWindows.Count > 0)
             {

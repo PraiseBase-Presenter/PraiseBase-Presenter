@@ -113,6 +113,9 @@ namespace PraiseBase.Presenter.Forms
 
             // Projection background image fit
             comboBoxProjectionBackgroundImageFit.SelectedIndex = GetIndexByProjectionBackgroundImageFit(_settings.ProjectionBackgroundImageFit);
+
+            // Chroma keying color
+            buttonChromaKeyingColor.BackColor = _settings.ChromaKeyingColor;
         }
 
         private void UpdateOutlineLabels()
@@ -756,6 +759,19 @@ namespace PraiseBase.Presenter.Forms
                     return 2;
             }
             return 0;
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            ColorDialog colDlg = new ColorDialog
+            {
+                Color = _settings.ChromaKeyingColor
+            };
+            if (colDlg.ShowDialog() == DialogResult.OK)
+            {
+                _settings.ChromaKeyingColor = colDlg.Color;
+                UpdateLabels();
+            }
         }
     }
 }

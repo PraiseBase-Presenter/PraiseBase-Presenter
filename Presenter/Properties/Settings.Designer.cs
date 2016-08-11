@@ -944,5 +944,17 @@ namespace PraiseBase.Presenter.Properties {
                 this["ProjectionBackgroundImageFit"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("Lime")]
+        public global::System.Drawing.Color ChromaKeyingColor {
+            get {
+                return ((global::System.Drawing.Color)(this["ChromaKeyingColor"]));
+            }
+            set {
+                this["ChromaKeyingColor"] = value;
+            }
+        }
     }
 }

@@ -38,6 +38,8 @@
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.groupBoxProjection = new System.Windows.Forms.GroupBox();
+            this.buttonChromaKeyingColor = new System.Windows.Forms.Button();
+            this.labelChromaKeyingColor = new System.Windows.Forms.Label();
             this.comboBoxProjectionBackgroundImageFit = new System.Windows.Forms.ComboBox();
             this.label7 = new System.Windows.Forms.Label();
             this.checkBoxSmoothShadow = new System.Windows.Forms.CheckBox();
@@ -227,6 +229,8 @@
             // groupBoxProjection
             // 
             resources.ApplyResources(this.groupBoxProjection, "groupBoxProjection");
+            this.groupBoxProjection.Controls.Add(this.buttonChromaKeyingColor);
+            this.groupBoxProjection.Controls.Add(this.labelChromaKeyingColor);
             this.groupBoxProjection.Controls.Add(this.comboBoxProjectionBackgroundImageFit);
             this.groupBoxProjection.Controls.Add(this.label7);
             this.groupBoxProjection.Controls.Add(this.checkBoxSmoothShadow);
@@ -235,6 +239,18 @@
             this.groupBoxProjection.Controls.Add(this.checkBoxProjectionFontScaling);
             this.groupBoxProjection.Name = "groupBoxProjection";
             this.groupBoxProjection.TabStop = false;
+            // 
+            // buttonChromaKeyingColor
+            // 
+            resources.ApplyResources(this.buttonChromaKeyingColor, "buttonChromaKeyingColor");
+            this.buttonChromaKeyingColor.Name = "buttonChromaKeyingColor";
+            this.buttonChromaKeyingColor.UseVisualStyleBackColor = true;
+            this.buttonChromaKeyingColor.Click += new System.EventHandler(this.button2_Click);
+            // 
+            // labelChromaKeyingColor
+            // 
+            resources.ApplyResources(this.labelChromaKeyingColor, "labelChromaKeyingColor");
+            this.labelChromaKeyingColor.Name = "labelChromaKeyingColor";
             // 
             // comboBoxProjectionBackgroundImageFit
             // 
@@ -1183,5 +1199,7 @@
         private System.Windows.Forms.Label labelHorizontalTranslationTextOffset;
         private System.Windows.Forms.ComboBox comboBoxProjectionBackgroundImageFit;
         private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.Label labelChromaKeyingColor;
+        private System.Windows.Forms.Button buttonChromaKeyingColor;
     }
 }

@@ -269,5 +269,8 @@
     <Setting Name="ProjectionBackgroundImageFit" Type="PraiseBase.Presenter.Projection.BackgroundImageFit" Scope="User">
       <Value Profile="(Default)">Fill</Value>
     </Setting>
+    <Setting Name="ChromaKeyingColor" Type="System.Drawing.Color" Scope="User">
+      <Value Profile="(Default)">Lime</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

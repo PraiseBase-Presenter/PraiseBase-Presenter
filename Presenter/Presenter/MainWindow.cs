@@ -2641,6 +2641,16 @@ namespace PraiseBase.Presenter.Presenter
             textBoxWebVideoID.Focus();
         }
 
+        private void toolStripMenuItemChromaKeying_Click(object sender, EventArgs e)
+        {
+            var newState = !toolStripMenuItemChromaKeying.Checked;
+            ProjectionManager.Instance.ChromaKeyingEnabled = newState;
+            toolStripButtonChromaKeying.Checked = newState;
+            toolStripMenuItemChromaKeying.Checked = newState;
+
+            //ProjectionManager.Instance.RedrawLayers();
+        }
+
         private void buttonSongViewModeSequence_Click(object sender, EventArgs e)
         {
             UpdatePresenterSongViewModeButtons(SongViewMode.Sequence);

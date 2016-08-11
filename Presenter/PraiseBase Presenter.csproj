@@ -655,6 +655,8 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="Resources\file_upload.png" />
+    <Content Include="Resources\greenscreen.png" />
+    <Content Include="Resources\greenscreen_small.png" />
     <Content Include="Resources\translate_active.png" />
     <None Include="Resources\xmag.png" />
     <None Include="Resources\wheel16.png" />
