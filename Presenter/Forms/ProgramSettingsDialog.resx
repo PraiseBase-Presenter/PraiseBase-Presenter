@@ -279,6 +279,63 @@
   <data name="tabControl1.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Bottom, Left, Right</value>
   </data>
+  <data name="comboBoxProjectionBackgroundImageFit.Items" xml:space="preserve">
+    <value>Füllen</value>
+  </data>
+  <data name="comboBoxProjectionBackgroundImageFit.Items1" xml:space="preserve">
+    <value>Einpassen</value>
+  </data>
+  <data name="comboBoxProjectionBackgroundImageFit.Items2" xml:space="preserve">
+    <value>Strecken</value>
+  </data>
+  <data name="comboBoxProjectionBackgroundImageFit.Location" type="System.Drawing.Point, System.Drawing">
+    <value>194, 104</value>
+  </data>
+  <data name="comboBoxProjectionBackgroundImageFit.Size" type="System.Drawing.Size, System.Drawing">
+    <value>121, 21</value>
+  </data>
+  <data name="comboBoxProjectionBackgroundImageFit.TabIndex" type="System.Int32, mscorlib">
+    <value>63</value>
+  </data>
+  <data name="&gt;&gt;comboBoxProjectionBackgroundImageFit.Name" xml:space="preserve">
+    <value>comboBoxProjectionBackgroundImageFit</value>
+  </data>
+  <data name="&gt;&gt;comboBoxProjectionBackgroundImageFit.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;comboBoxProjectionBackgroundImageFit.Parent" xml:space="preserve">
+    <value>groupBoxProjection</value>
+  </data>
+  <data name="&gt;&gt;comboBoxProjectionBackgroundImageFit.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="label7.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="label7.Location" type="System.Drawing.Point, System.Drawing">
+    <value>23, 107</value>
+  </data>
+  <data name="label7.Size" type="System.Drawing.Size, System.Drawing">
+    <value>165, 13</value>
+  </data>
+  <data name="label7.TabIndex" type="System.Int32, mscorlib">
+    <value>62</value>
+  </data>
+  <data name="label7.Text" xml:space="preserve">
+    <value>Skalierung des Hintergrundbildes:</value>
+  </data>
+  <data name="&gt;&gt;label7.Name" xml:space="preserve">
+    <value>label7</value>
+  </data>
+  <data name="&gt;&gt;label7.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;label7.Parent" xml:space="preserve">
+    <value>groupBoxProjection</value>
+  </data>
+  <data name="&gt;&gt;label7.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
   <data name="checkBoxSmoothShadow.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
@@ -307,7 +364,7 @@
     <value>groupBoxProjection</value>
   </data>
   <data name="&gt;&gt;checkBoxSmoothShadow.ZOrder" xml:space="preserve">
-    <value>0</value>
+    <value>2</value>
   </data>
   <data name="labelBackgroundColor.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -340,7 +397,7 @@
     <value>groupBoxProjection</value>
   </data>
   <data name="&gt;&gt;labelBackgroundColor.ZOrder" xml:space="preserve">
-    <value>1</value>
+    <value>3</value>
   </data>
   <data name="buttonProjectionBackgroundColor.FlatStyle" type="System.Windows.Forms.FlatStyle, System.Windows.Forms">
     <value>Flat</value>
@@ -370,7 +427,7 @@
     <value>groupBoxProjection</value>
   </data>
   <data name="&gt;&gt;buttonProjectionBackgroundColor.ZOrder" xml:space="preserve">
-    <value>2</value>
+    <value>4</value>
   </data>
   <data name="checkBoxProjectionFontScaling.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -400,13 +457,13 @@
     <value>groupBoxProjection</value>
   </data>
   <data name="&gt;&gt;checkBoxProjectionFontScaling.ZOrder" xml:space="preserve">
-    <value>3</value>
+    <value>5</value>
   </data>
   <data name="groupBoxProjection.Location" type="System.Drawing.Point, System.Drawing">
     <value>6, 71</value>
   </data>
   <data name="groupBoxProjection.Size" type="System.Drawing.Size, System.Drawing">
-    <value>592, 115</value>
+    <value>592, 137</value>
   </data>
   <data name="groupBoxProjection.TabIndex" type="System.Int32, mscorlib">
     <value>11</value>
@@ -460,7 +517,7 @@
     <value>Microsoft Sans Serif, 8.25pt</value>
   </data>
   <data name="groupBoxMisc.Location" type="System.Drawing.Point, System.Drawing">
-    <value>6, 192</value>
+    <value>6, 214</value>
   </data>
   <data name="groupBoxMisc.Size" type="System.Drawing.Size, System.Drawing">
     <value>592, 68</value>

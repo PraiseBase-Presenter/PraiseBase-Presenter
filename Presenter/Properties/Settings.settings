@@ -266,5 +266,8 @@
     <Setting Name="AutoShowBibleVerse" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
     </Setting>
+    <Setting Name="ProjectionBackgroundImageFit" Type="PraiseBase.Presenter.Projection.BackgroundImageFit" Scope="User">
+      <Value Profile="(Default)">Fill</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

@@ -240,6 +240,7 @@ namespace PraiseBase.Presenter.Projection
 
         public void DisplayImage(ImageLayer layerContent, int fadetime)
         {
+            layerContent.ImageFit = Settings.Default.ProjectionBackgroundImageFit;
             if (ProjectionWindows.Count > 0)
             {
                 foreach (var pw in ProjectionWindows)

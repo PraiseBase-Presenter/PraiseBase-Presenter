@@ -130,6 +130,7 @@
     <Compile Include="Persistence\Setlists\SetlistWriter.cs" />
     <Compile Include="Persistence\StatisticsWriter.cs" />
     <Compile Include="Persistence\XmlWriterHelper.cs" />
+    <Compile Include="Projection\BackgroundImageFit.cs" />
     <Compile Include="Projection\BaseLayer.cs" />
     <Compile Include="Projection\ImageLayer.cs" />
     <Compile Include="Projection\ISlideTextFormattingMapper.cs" />

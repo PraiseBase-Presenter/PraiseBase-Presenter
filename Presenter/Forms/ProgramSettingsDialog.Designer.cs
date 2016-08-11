@@ -134,6 +134,8 @@
             this.labelMainTextString = new System.Windows.Forms.Label();
             this.labelTranslationText = new System.Windows.Forms.Label();
             this.checkBoxUseMasterFormat = new System.Windows.Forms.CheckBox();
+            this.label7 = new System.Windows.Forms.Label();
+            this.comboBoxProjectionBackgroundImageFit = new System.Windows.Forms.ComboBox();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.groupBoxProjection.SuspendLayout();
@@ -224,6 +226,8 @@
             // 
             // groupBoxProjection
             // 
+            this.groupBoxProjection.Controls.Add(this.comboBoxProjectionBackgroundImageFit);
+            this.groupBoxProjection.Controls.Add(this.label7);
             this.groupBoxProjection.Controls.Add(this.checkBoxSmoothShadow);
             this.groupBoxProjection.Controls.Add(this.labelBackgroundColor);
             this.groupBoxProjection.Controls.Add(this.buttonProjectionBackgroundColor);
@@ -995,6 +999,23 @@
             this.checkBoxUseMasterFormat.UseVisualStyleBackColor = true;
             this.checkBoxUseMasterFormat.CheckedChanged += new System.EventHandler(this.checkBoxUseMasterFormat_CheckedChanged);
             // 
+            // label7
+            // 
+            resources.ApplyResources(this.label7, "label7");
+            this.label7.Name = "label7";
+            // 
+            // comboBoxProjectionBackgroundImageFit
+            // 
+            this.comboBoxProjectionBackgroundImageFit.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBoxProjectionBackgroundImageFit.FormattingEnabled = true;
+            this.comboBoxProjectionBackgroundImageFit.Items.AddRange(new object[] {
+            resources.GetString("comboBoxProjectionBackgroundImageFit.Items"),
+            resources.GetString("comboBoxProjectionBackgroundImageFit.Items1"),
+            resources.GetString("comboBoxProjectionBackgroundImageFit.Items2")});
+            resources.ApplyResources(this.comboBoxProjectionBackgroundImageFit, "comboBoxProjectionBackgroundImageFit");
+            this.comboBoxProjectionBackgroundImageFit.Name = "comboBoxProjectionBackgroundImageFit";
+            this.comboBoxProjectionBackgroundImageFit.SelectedIndexChanged += new System.EventHandler(this.comboBoxProjectionBackgroundImageFit_SelectedIndexChanged);
+            // 
             // ProgramSettingsDialog
             // 
             this.AcceptButton = this.exitButton;
@@ -1160,5 +1181,7 @@
         private System.Windows.Forms.CheckBox checkBoxSmoothShadow;
         private System.Windows.Forms.NumericUpDown numericUpDownHorizontalTranslationTextOffset;
         private System.Windows.Forms.Label labelHorizontalTranslationTextOffset;
+        private System.Windows.Forms.ComboBox comboBoxProjectionBackgroundImageFit;
+        private System.Windows.Forms.Label label7;
     }
 }

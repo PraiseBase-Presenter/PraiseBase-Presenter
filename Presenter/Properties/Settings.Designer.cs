@@ -932,5 +932,17 @@ namespace PraiseBase.Presenter.Properties {
                 this["AutoShowBibleVerse"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("Fill")]
+        public global::PraiseBase.Presenter.Projection.BackgroundImageFit ProjectionBackgroundImageFit {
+            get {
+                return ((global::PraiseBase.Presenter.Projection.BackgroundImageFit)(this["ProjectionBackgroundImageFit"]));
+            }
+            set {
+                this["ProjectionBackgroundImageFit"] = value;
+            }
+        }
     }
 }

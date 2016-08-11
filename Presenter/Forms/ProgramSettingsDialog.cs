@@ -27,6 +27,7 @@ using System.Linq;
 using System.Windows.Forms;
 using PraiseBase.Presenter.Model;
 using PraiseBase.Presenter.Properties;
+using PraiseBase.Presenter.Projection;
 
 namespace PraiseBase.Presenter.Forms
 {
@@ -109,6 +110,9 @@ namespace PraiseBase.Presenter.Forms
             {
                 listBoxSongParts.Items.Add(str);
             }
+
+            // Projection background image fit
+            comboBoxProjectionBackgroundImageFit.SelectedIndex = GetIndexByProjectionBackgroundImageFit(_settings.ProjectionBackgroundImageFit);
         }
 
         private void UpdateOutlineLabels()
@@ -717,5 +721,41 @@ namespace PraiseBase.Presenter.Forms
             _settings.ProjectionMasterHorizontalTranslationTextOffset = (int)((NumericUpDown)sender).Value;
         }
 
+        private void comboBoxProjectionBackgroundImageFit_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            int index = ((ComboBox)sender).SelectedIndex;
+            _settings.ProjectionBackgroundImageFit = getProjectionBackgroundImageFitByIndex(index);
+        }
+
+        private BackgroundImageFit getProjectionBackgroundImageFitByIndex(int index)
+        {
+            if (index == 0)
+            {
+                return BackgroundImageFit.Fill;
+            }
+            if (index == 1)
+            {
+                return BackgroundImageFit.Fit;
+            }
+            if (index == 2)
+            {
+                return BackgroundImageFit.Stretch;
+            }
+            return BackgroundImageFit.Fill;
+        }
+
+        private int GetIndexByProjectionBackgroundImageFit(BackgroundImageFit vertical)
+        {
+            switch (vertical)
+            {
+                case BackgroundImageFit.Fill:
+                    return 0;
+                case BackgroundImageFit.Fit:
+                    return 1;
+                case BackgroundImageFit.Stretch:
+                    return 2;
+            }
+            return 0;
+        }
     }
 }
