@@ -2673,6 +2673,11 @@ namespace PraiseBase.Presenter.Presenter
             }
         }
 
+        private void toolStripButtonImportFile_ButtonClick(object sender, EventArgs e)
+        {
+            toolStripMenuItemImportText_Click(sender, e);
+        }
+
         private void buttonSongViewModeSequence_Click(object sender, EventArgs e)
         {
             UpdatePresenterSongViewModeButtons(SongViewMode.Sequence);

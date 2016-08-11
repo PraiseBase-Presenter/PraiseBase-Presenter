@@ -311,6 +311,9 @@
     <EmbeddedResource Include="Forms\TextFileViewer.resx">
       <DependentUpon>TextFileViewer.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Forms\TextImportDialog.en-US.resx">
+      <DependentUpon>TextImportDialog.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\TextImportDialog.resx">
       <DependentUpon>TextImportDialog.cs</DependentUpon>
     </EmbeddedResource>
