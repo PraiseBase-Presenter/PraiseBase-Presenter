@@ -156,6 +156,18 @@ namespace PraiseBase.Presenter.Editor
         }
 
         /// <summary>
+        /// Opens a new song file editor based on the given song object
+        /// </summary>
+        /// <param name="sng"></param>
+        public void OpenNewSongObject(Song sng)
+        {
+            SongTemplateMapper stm = new SongTemplateMapper(_settings);
+            stm.ApplyFormattingFromSettings(sng);
+
+            CreateSongEditorChildForm(sng, null);
+        }
+
+        /// <summary>
         /// Event handler for opening an existing file
         /// </summary>
         /// <param name="sender"></param>

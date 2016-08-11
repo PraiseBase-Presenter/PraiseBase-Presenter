@@ -141,6 +141,7 @@
     <Compile Include="Util\FileUtils.cs" />
     <Compile Include="Util\ImageUtils.cs" />
     <Compile Include="Util\SongSearchUtil.cs" />
+    <Compile Include="Util\SongTextParser.cs" />
     <Compile Include="Util\StringUtils.cs" />
     <Compile Include="Util\UpdateChecker.cs" />
     <Compile Include="Util\UpdateInformation.cs" />
