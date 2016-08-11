@@ -176,6 +176,7 @@ namespace PraiseBase.Presenter.Presenter
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.toolStripSeparator17 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripButtonChromaKeying = new System.Windows.Forms.ToolStripButton();
+            this.toolStripButtonImportFile = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripSeparator8 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripButtonToggleTranslationText = new System.Windows.Forms.ToolStripButton();
@@ -188,7 +189,6 @@ namespace PraiseBase.Presenter.Presenter
             this.qaSegmentationToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator13 = new System.Windows.Forms.ToolStripSeparator();
             this.qAcommentsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripButtonImportFile = new System.Windows.Forms.ToolStripButton();
             this.customGroupBox1 = new PraiseBase.Presenter.Controls.CustomGroupBox();
             this.labelFadeTime = new System.Windows.Forms.Label();
             this.pictureBoxbeamerPreview = new System.Windows.Forms.PictureBox();
@@ -201,6 +201,8 @@ namespace PraiseBase.Presenter.Presenter
             this.trackBarFadeTimeLayer1 = new System.Windows.Forms.TrackBar();
             this.trackBarFadeTime = new System.Windows.Forms.TrackBar();
             this.toolTipMyTooltip = new System.Windows.Forms.ToolTip(this.components);
+            this.toolStripSeparator15 = new System.Windows.Forms.ToolStripSeparator();
+            this.toolStripMenuItemImportText = new System.Windows.Forms.ToolStripMenuItem();
             buttonChooseDiaDir = new System.Windows.Forms.Button();
             this.splitContainerLayerContent.Panel1.SuspendLayout();
             this.splitContainerLayerContent.Panel2.SuspendLayout();
@@ -996,6 +998,8 @@ namespace PraiseBase.Presenter.Presenter
             // 
             this.toolStripMenuItemImportCCLISongSelect.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.cCLISongSelectDateiToolStripMenuItem,
+            this.toolStripSeparator15,
+            this.toolStripMenuItemImportText,
             this.toolStripSeparator14,
             this.praiseBoxDatenbankToolStripMenuItem,
             this.worToolStripMenuItem});
@@ -1321,6 +1325,14 @@ namespace PraiseBase.Presenter.Presenter
             this.toolStripButtonChromaKeying.Name = "toolStripButtonChromaKeying";
             this.toolStripButtonChromaKeying.Click += new System.EventHandler(this.toolStripMenuItemChromaKeying_Click);
             // 
+            // toolStripButtonImportFile
+            // 
+            this.toolStripButtonImportFile.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.toolStripButtonImportFile.Image = global::PraiseBase.Presenter.Properties.Resources.file_upload;
+            resources.ApplyResources(this.toolStripButtonImportFile, "toolStripButtonImportFile");
+            this.toolStripButtonImportFile.Name = "toolStripButtonImportFile";
+            this.toolStripButtonImportFile.Click += new System.EventHandler(this.toolStripButtonImportFile_Click);
+            // 
             // toolStripSeparator4
             // 
             this.toolStripSeparator4.Name = "toolStripSeparator4";
@@ -1402,14 +1414,6 @@ namespace PraiseBase.Presenter.Presenter
             this.qAcommentsToolStripMenuItem.Name = "qAcommentsToolStripMenuItem";
             resources.ApplyResources(this.qAcommentsToolStripMenuItem, "qAcommentsToolStripMenuItem");
             this.qAcommentsToolStripMenuItem.Click += new System.EventHandler(this.qAcommentsToolStripMenuItem_Click);
-            // 
-            // toolStripButtonImportFile
-            // 
-            this.toolStripButtonImportFile.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolStripButtonImportFile.Image = global::PraiseBase.Presenter.Properties.Resources.file_upload;
-            resources.ApplyResources(this.toolStripButtonImportFile, "toolStripButtonImportFile");
-            this.toolStripButtonImportFile.Name = "toolStripButtonImportFile";
-            this.toolStripButtonImportFile.Click += new System.EventHandler(this.toolStripButtonImportFile_Click);
             // 
             // customGroupBox1
             // 
@@ -1498,6 +1502,17 @@ namespace PraiseBase.Presenter.Presenter
             this.trackBarFadeTime.Name = "trackBarFadeTime";
             this.trackBarFadeTime.Value = 1;
             this.trackBarFadeTime.Scroll += new System.EventHandler(this.trackBarFadeTime_Scroll);
+            // 
+            // toolStripSeparator15
+            // 
+            this.toolStripSeparator15.Name = "toolStripSeparator15";
+            resources.ApplyResources(this.toolStripSeparator15, "toolStripSeparator15");
+            // 
+            // toolStripMenuItemImportText
+            // 
+            this.toolStripMenuItemImportText.Name = "toolStripMenuItemImportText";
+            resources.ApplyResources(this.toolStripMenuItemImportText, "toolStripMenuItemImportText");
+            this.toolStripMenuItemImportText.Click += new System.EventHandler(this.toolStripMenuItemImportText_Click);
             // 
             // MainWindow
             // 
@@ -1722,6 +1737,8 @@ namespace PraiseBase.Presenter.Presenter
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItemChromaKeying;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator17;
         private System.Windows.Forms.ToolStripButton toolStripButtonChromaKeying;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator15;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItemImportText;
     }
 }
 

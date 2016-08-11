@@ -2656,6 +2656,16 @@ namespace PraiseBase.Presenter.Presenter
             toolStripMenuItemChromaKeying.Checked = enable;
         }
 
+        private void toolStripMenuItemImportText_Click(object sender, EventArgs e)
+        {
+            TextImportDialog dlg = new TextImportDialog();
+            DialogResult result = dlg.ShowDialog(this);
+            if (result == DialogResult.OK)
+            {
+                MessageBox.Show(dlg.ImportedText);
+            }
+        }
+
         private void buttonSongViewModeSequence_Click(object sender, EventArgs e)
         {
             UpdatePresenterSongViewModeButtons(SongViewMode.Sequence);
