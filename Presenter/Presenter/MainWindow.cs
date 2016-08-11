@@ -45,9 +45,6 @@ using PraiseBase.Presenter.Properties;
 using PraiseBase.Presenter.Util;
 using Timer = System.Windows.Forms.Timer;
 using System.ComponentModel;
-using PraiseBase.Presenter.Persistence.CCLI;
-using PraiseBase.Presenter.Template;
-using System.Reflection;
 
 namespace PraiseBase.Presenter.Presenter
 {
