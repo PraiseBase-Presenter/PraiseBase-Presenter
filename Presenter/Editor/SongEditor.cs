@@ -152,7 +152,7 @@ namespace PraiseBase.Presenter.Editor
             Song sng = stm.CreateNewSong();
             stm.ApplyFormattingFromSettings(sng);
 
-            CreateSongEditorChildForm(sng, null);
+            CreateSongEditorChildForm(sng, null, false);
         }
 
         /// <summary>
@@ -164,7 +164,7 @@ namespace PraiseBase.Presenter.Editor
             SongTemplateMapper stm = new SongTemplateMapper(_settings);
             stm.ApplyFormattingFromSettings(sng);
 
-            CreateSongEditorChildForm(sng, null);
+            CreateSongEditorChildForm(sng, null, true);
         }
 
         /// <summary>
@@ -249,7 +249,7 @@ namespace PraiseBase.Presenter.Editor
                     }
                 }
 
-                CreateSongEditorChildForm(sng, fileName);
+                CreateSongEditorChildForm(sng, fileName, false);
             }
             catch (NotImplementedException)
             {
@@ -266,10 +266,11 @@ namespace PraiseBase.Presenter.Editor
         /// </summary>
         /// <param name="sng">Song</param>
         /// <param name="fileName">File name, may be null</param>
+        /// <param name="forceSaveCheck">Force check for save file</param>
         /// <returns></returns>
-        private void CreateSongEditorChildForm(Song sng, String fileName)
+        private void CreateSongEditorChildForm(Song sng, String fileName, bool forceSaveCheck)
         {
-            int hashCode = sng.GetHashCode();
+            int hashCode = forceSaveCheck ? 0 : sng.GetHashCode();
             SongEditorChild childForm = new SongEditorChild(_settings, _imgManager, sng)
             {
                 Tag = new EditorChildMetaData(fileName, hashCode),
