@@ -163,6 +163,12 @@
     <Compile Include="Forms\TextFileViewer.Designer.cs">
       <DependentUpon>TextFileViewer.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\TextImportDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\TextImportDialog.Designer.cs">
+      <DependentUpon>TextImportDialog.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\UpdateCheckDialog.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -304,6 +310,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\TextFileViewer.resx">
       <DependentUpon>TextFileViewer.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\TextImportDialog.en-US.resx">
+      <DependentUpon>TextImportDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\TextImportDialog.resx">
+      <DependentUpon>TextImportDialog.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\UpdateCheckDialog.en-US.resx">
       <DependentUpon>UpdateCheckDialog.cs</DependentUpon>

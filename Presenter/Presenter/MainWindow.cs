@@ -231,6 +231,13 @@ namespace PraiseBase.Presenter.Presenter
             se.BringToFront();
         }
 
+        private void OpenSongInSongEditor(Song song)
+        {
+            ShowAndBringSongEditorToFront();
+            var se = GetSongEditor();
+            se.OpenNewSongObject(song);
+        }
+
         #endregion
 
         #region UpdateCheck
@@ -2654,6 +2661,21 @@ namespace PraiseBase.Presenter.Presenter
             ProjectionManager.Instance.ChromaKeyingEnabled = enable;
             toolStripButtonChromaKeying.Checked = enable;
             toolStripMenuItemChromaKeying.Checked = enable;
+        }
+
+        private void toolStripMenuItemImportText_Click(object sender, EventArgs e)
+        {
+            TextImportDialog dlg = new TextImportDialog(Settings.Default);
+            DialogResult result = dlg.ShowDialog(this);
+            if (result == DialogResult.OK)
+            {
+                OpenSongInSongEditor(dlg.ImportedSong);
+            }
+        }
+
+        private void toolStripButtonImportFile_ButtonClick(object sender, EventArgs e)
+        {
+            toolStripMenuItemImportText_Click(sender, e);
         }
 
         private void buttonSongViewModeSequence_Click(object sender, EventArgs e)
