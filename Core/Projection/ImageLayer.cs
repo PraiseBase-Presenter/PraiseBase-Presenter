@@ -42,46 +42,47 @@ namespace PraiseBase.Presenter.Projection
         {
             var w = (int) gr.VisibleClipBounds.Width;
             var h = (int) gr.VisibleClipBounds.Height;
-            var rect = new Rectangle(0, 0, w, h);
-
-            if (ImageFit != BackgroundImageFit.Stretch)
-            {
-                double xFactor = w / (double)Image.Width;
-                double yFactor = h / (double)Image.Height;
-
-                if (xFactor != 1 || yFactor != 1)
-                {
-                    double factor = 1d;
-                    if (ImageFit == BackgroundImageFit.Fill)
-                    {
-                        factor = Math.Max(xFactor, yFactor);
-                    }
-                    else if (ImageFit == BackgroundImageFit.Fit)
-                    {
-                        factor = Math.Min(xFactor, yFactor);
-                    }
-                    rect.Width = (int)(Image.Width * factor);
-                    rect.Height = (int)(Image.Height * factor);
-
-                    int sign = 1;
-                    if (ImageFit == BackgroundImageFit.Fill)
-                    {
-                        sign = -1;
-                    }
-                    if (rect.Width != w)
-                    {
-                        rect.X = sign * Math.Sign(rect.Width - w) * ((rect.Width - w) / 2);
-                    }
-                    if (rect.Height != h)
-                    {
-                        rect.Y = sign * Math.Sign(rect.Height - h) * ((rect.Height - h) / 2);
-                    }
-                }
-            }
 
             gr.FillRectangle(new SolidBrush(_backgroundColor), 0, 0, w, h);
             if (Image != null)
             {
+                var rect = new Rectangle(0, 0, w, h);
+
+                if (ImageFit != BackgroundImageFit.Stretch)
+                {
+                    double xFactor = w / (double)Image.Width;
+                    double yFactor = h / (double)Image.Height;
+
+                    if (xFactor != 1 || yFactor != 1)
+                    {
+                        double factor = 1d;
+                        if (ImageFit == BackgroundImageFit.Fill)
+                        {
+                            factor = Math.Max(xFactor, yFactor);
+                        }
+                        else if (ImageFit == BackgroundImageFit.Fit)
+                        {
+                            factor = Math.Min(xFactor, yFactor);
+                        }
+                        rect.Width = (int)(Image.Width * factor);
+                        rect.Height = (int)(Image.Height * factor);
+
+                        int sign = 1;
+                        if (ImageFit == BackgroundImageFit.Fill)
+                        {
+                            sign = -1;
+                        }
+                        if (rect.Width != w)
+                        {
+                            rect.X = sign * Math.Sign(rect.Width - w) * ((rect.Width - w) / 2);
+                        }
+                        if (rect.Height != h)
+                        {
+                            rect.Y = sign * Math.Sign(rect.Height - h) * ((rect.Height - h) / 2);
+                        }
+                    }
+                }
+
                 gr.DrawImage(Image, rect, 0, 0, Image.Width, Image.Height, GraphicsUnit.Pixel);
             }
         }
