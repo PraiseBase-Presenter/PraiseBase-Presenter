@@ -166,6 +166,8 @@ namespace PraiseBase.Presenter.Presenter
             checkBoxBibleAutoShowVerse.Checked = Settings.Default.AutoShowBibleVerse;
 
             comboBoxWebVideoService.DataSource = Enum.GetValues(typeof(WebVideoService));
+
+            ToggleChromaKeying(Settings.Default.ChromaKeyingEnabled);
         }
 
         #region SongEditor
@@ -1352,6 +1354,7 @@ namespace PraiseBase.Presenter.Presenter
             Settings.Default.ViewerWindowState = WindowState;
             Settings.Default.MainWindowSize = Size;
             Settings.Default.AutoShowBibleVerse = checkBoxBibleAutoShowVerse.Checked;
+            Settings.Default.ChromaKeyingEnabled = ProjectionManager.Instance.ChromaKeyingEnabled;
             Settings.Default.Save();
 
             ProjectionManager.Instance.Dispose();
@@ -2643,12 +2646,14 @@ namespace PraiseBase.Presenter.Presenter
 
         private void toolStripMenuItemChromaKeying_Click(object sender, EventArgs e)
         {
-            var newState = !toolStripMenuItemChromaKeying.Checked;
-            ProjectionManager.Instance.ChromaKeyingEnabled = newState;
-            toolStripButtonChromaKeying.Checked = newState;
-            toolStripMenuItemChromaKeying.Checked = newState;
+            ToggleChromaKeying(!toolStripMenuItemChromaKeying.Checked);
+        }
 
-            //ProjectionManager.Instance.RedrawLayers();
+        private void ToggleChromaKeying(bool enable)
+        {
+            ProjectionManager.Instance.ChromaKeyingEnabled = enable;
+            toolStripButtonChromaKeying.Checked = enable;
+            toolStripMenuItemChromaKeying.Checked = enable;
         }
 
         private void buttonSongViewModeSequence_Click(object sender, EventArgs e)

@@ -956,5 +956,17 @@ namespace PraiseBase.Presenter.Properties {
                 this["ChromaKeyingColor"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool ChromaKeyingEnabled {
+            get {
+                return ((bool)(this["ChromaKeyingEnabled"]));
+            }
+            set {
+                this["ChromaKeyingEnabled"] = value;
+            }
+        }
     }
 }
