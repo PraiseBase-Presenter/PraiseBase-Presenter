@@ -130,14 +130,26 @@
   <data name="button1.Text" xml:space="preserve">
     <value>Select directory...</value>
   </data>
-  <data name="button2.Text" xml:space="preserve">
-    <value>Restore factory defaults</value>
-  </data>
   <data name="tabPage1.Text" xml:space="preserve">
     <value>Common</value>
   </data>
   <data name="groupBoxProjection.Text" xml:space="preserve">
     <value>Projection</value>
+  </data>
+  <data name="comboBoxProjectionBackgroundImageFit.Items" xml:space="preserve">
+    <value>Fill</value>
+  </data>
+  <data name="comboBoxProjectionBackgroundImageFit.Items1" xml:space="preserve">
+    <value>Fit</value>
+  </data>
+  <data name="comboBoxProjectionBackgroundImageFit.Items2" xml:space="preserve">
+    <value>Stretch</value>
+  </data>
+  <data name="label7.Size" type="System.Drawing.Size, System.Drawing">
+    <value>135, 13</value>
+  </data>
+  <data name="label7.Text" xml:space="preserve">
+    <value>Background image scaling:</value>
   </data>
   <data name="checkBoxSmoothShadow.Size" type="System.Drawing.Size, System.Drawing">
     <value>102, 17</value>
@@ -168,9 +180,6 @@
   </data>
   <data name="groupBoxDataDirectory.Text" xml:space="preserve">
     <value>Data directory</value>
-  </data>
-  <data name="textBox2.Text" xml:space="preserve">
-    <value>If you change the user data directory, you have to reload the songs and the images (see the 'Tools' menu) or restart the program.</value>
   </data>
   <data name="tabPage3.Text" xml:space="preserve">
     <value>Song defaults</value>
@@ -400,9 +409,6 @@
   <data name="labelMainText.Text" xml:space="preserve">
     <value>Lyrics:</value>
   </data>
-  <data name="buttonProjectionMasterFont.Text" xml:space="preserve">
-    <value>Choose font...</value>
-  </data>
   <data name="buttonTranslationFont.Text" xml:space="preserve">
     <value>Choose font...</value>
   </data>
@@ -432,7 +438,7 @@
   </data>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="$this.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>Inherit</value>
+    <value>NoControl</value>
   </data>
   <data name="$this.Text" xml:space="preserve">
     <value>Settings</value>
