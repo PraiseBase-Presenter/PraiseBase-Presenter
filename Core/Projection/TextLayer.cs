@@ -408,9 +408,9 @@ namespace PraiseBase.Presenter.Projection
 
                     foreach (var s in lines)
                     {
-                        for (var x = outlineX - outLineThickness*2; x <= outlineX + outLineThickness*2; x += 2)
+                        for (var x = outlineX - outLineThickness * 2; x <= outlineX + outLineThickness * 2; x += 2)
                         {
-                            for (var y = outlineY - outLineThickness*2; y <= outlineY + outLineThickness*2; y += 2)
+                            for (var y = outlineY - outLineThickness * 2; y <= outlineY + outLineThickness * 2; y += 2)
                             {
                                 gr.DrawString(s, textFormatting.Font, br, x, y, strFormat);
                             }
@@ -418,6 +418,10 @@ namespace PraiseBase.Presenter.Projection
                         outlineY += lineHeight;
                     }
                 }
+            }
+            else
+            {
+                gr.TextRenderingHint = TextRenderingHint.SingleBitPerPixelGridFit;
             }
 
             // Text
