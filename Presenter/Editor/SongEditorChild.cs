@@ -643,6 +643,7 @@ namespace PraiseBase.Presenter.Editor
                 MainText = slide.Lines.ToArray(),
                 SubText = slide.Translation.ToArray()
             };
+            sl.DrawBordersForDebugging = Settings.Default.DebugMode;
 
             ImageLayer il = new ImageLayer(Settings.ProjectionBackColor);
 

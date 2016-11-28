@@ -172,6 +172,12 @@
   <data name="groupBoxProjection.Text" xml:space="preserve">
     <value>Projection</value>
   </data>
+  <data name="checkBoxEnableDebugMode.Size" type="System.Drawing.Size, System.Drawing">
+    <value>121, 17</value>
+  </data>
+  <data name="checkBoxEnableDebugMode.Text" xml:space="preserve">
+    <value>Enable debug mode</value>
+  </data>
   <data name="checkBoxShowLoadingScreen.Size" type="System.Drawing.Size, System.Drawing">
     <value>125, 17</value>
   </data>

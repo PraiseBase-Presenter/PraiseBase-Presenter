@@ -83,6 +83,7 @@ namespace PraiseBase.Presenter.Forms
             comboBoxCopyrightPosition.SelectedIndex = (int)_settings.ProjectionMasterCopyrightPosition;
 
             checkBoxShowLoadingScreen.Checked = _settings.ShowLoadingScreen;
+            checkBoxEnableDebugMode.Checked = _settings.DebugMode;
 
             checkBoxProjectionFontScaling.Checked = _settings.ProjectionFontScaling;
             checkBoxSmoothShadow.Checked = _settings.ProjectionSmoothShadow;
@@ -772,6 +773,11 @@ namespace PraiseBase.Presenter.Forms
                 _settings.ChromaKeyingColor = colDlg.Color;
                 UpdateLabels();
             }
+        }
+
+        private void checkBoxEnableDebugMode_CheckedChanged(object sender, EventArgs e)
+        {
+            _settings.DebugMode = checkBoxEnableDebugMode.Checked;
         }
     }
 }

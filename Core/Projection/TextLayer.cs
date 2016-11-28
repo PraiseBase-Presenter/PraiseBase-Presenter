@@ -69,6 +69,11 @@ namespace PraiseBase.Presenter.Projection
             var canvasWidth = gr.VisibleClipBounds.Width;
             var canvasHeight = gr.VisibleClipBounds.Height;
 
+            if (DrawBordersForDebugging)
+            {
+                DrawDebugRectangle(gr, new Rectangle(0, 0, (int)canvasWidth, (int)canvasHeight), Brushes.Red);
+            }
+
             //
             // Main text
             //
@@ -85,9 +90,8 @@ namespace PraiseBase.Presenter.Projection
                 // Draw borders of usable area
                 if (DrawBordersForDebugging)
                 {
-                    gr.DrawRectangle(Pens.Red,
-                        new Rectangle(_formatting.Text.HorizontalPadding, _formatting.Text.VerticalPadding,
-                            (int) usableWidth, (int) usableHeight));
+                    DrawDebugRectangle(gr, new Rectangle(_formatting.Text.HorizontalPadding, _formatting.Text.VerticalPadding,
+                            (int)usableWidth, (int)usableHeight), Brushes.Yellow);
                 }
 
                 // Line spacing
@@ -220,8 +224,16 @@ namespace PraiseBase.Presenter.Projection
                 // Draw borders of used area
                 if (DrawBordersForDebugging)
                 {
-                    gr.DrawRectangle(Pens.Pink,
-                        new Rectangle((int) textStartX, (int) textStartY, (int) usedWidth, (int) usedHeight));
+                    int debugX = (int)textStartX;
+                    if (_formatting.Text.Orientation.Horizontal == HorizontalOrientation.Center)
+                    {
+                        debugX -= (int)(usedWidth / 2);
+                    }
+                    else if (_formatting.Text.Orientation.Horizontal == HorizontalOrientation.Right)
+                    {
+                        debugX -= (int)usedWidth;
+                    }
+                    DrawDebugRectangle(gr, new Rectangle(debugX, (int)textStartY, (int)usedWidth, (int)usedHeight), Brushes.Green);
                 }
 
                 // Draw main text
@@ -430,6 +442,12 @@ namespace PraiseBase.Presenter.Projection
                 gr.DrawString(s, textFormatting.Font, new SolidBrush(textFormatting.Color), textX, textY, strFormat);
                 textY += lineHeight;
             }
+        }
+
+        private void DrawDebugRectangle(Graphics gr, Rectangle rect, Brush brush)
+        {
+            gr.DrawString(rect.Width + " x " + rect.Height, SystemFonts.DefaultFont, brush, new Point(rect.X + 10, rect.Y + 10));
+                gr.DrawRectangle(new Pen(brush, 1f), new Rectangle(rect.X, rect.Y, rect.Width - 1, rect.Height - 1));
         }
     }
 }

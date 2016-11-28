@@ -638,6 +638,7 @@ namespace PraiseBase.Presenter.Presenter
             slideFormatting.SmoothShadow = Settings.Default.ProjectionSmoothShadow;
 
             TextLayer ssl = new TextLayer(slideFormatting);
+            ssl.DrawBordersForDebugging = Settings.Default.DebugMode;
 
             // Set text and translation (based on translation switch state)
             if (cs.Translated && _songManager.CurrentSong.SwitchTextAndTranlation)
@@ -1596,6 +1597,7 @@ namespace PraiseBase.Presenter.Presenter
             {
                 MainText = text.Split(new[] {Environment.NewLine}, StringSplitOptions.None)
             };
+            lt.DrawBordersForDebugging = Settings.Default.DebugMode;
 
             ProjectionManager.Instance.DisplayText(lt);
         }
@@ -1911,6 +1913,7 @@ namespace PraiseBase.Presenter.Presenter
                 HeaderText = new[] { title },
                 FooterText = copyrightItems.ToArray()
             };
+            lt.DrawBordersForDebugging = Settings.Default.DebugMode;
 
             ProjectionManager.Instance.DisplayText(lt);
         }
