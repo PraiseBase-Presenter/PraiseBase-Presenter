@@ -2684,7 +2684,7 @@ namespace PraiseBase.Presenter.Presenter
         private void toolStripMenuItemSongStatistics_Click(object sender, EventArgs e)
         {
             SongStatsticsViewer window = new SongStatsticsViewer(_songManager);
-            window.ShowDialog(this);
+            window.Show();
         }
 
         private void buttonSongViewModeSequence_Click(object sender, EventArgs e)

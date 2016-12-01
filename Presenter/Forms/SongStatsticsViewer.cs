@@ -128,6 +128,7 @@ namespace PraiseBase.Presenter.Forms
                             list.Add(new Song() {
                                 Title = i
                             });
+                            log.WarnFormat("Song '{0}' from setlist '{1}' not found in song manager", i, fileName);
                         }
                     }
                 }

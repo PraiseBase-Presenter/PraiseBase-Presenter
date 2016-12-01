@@ -91,41 +91,41 @@
             // 
             // statusStrip1
             // 
-            resources.ApplyResources(this.statusStrip1, "statusStrip1");
             this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripStatusLabelSongs,
             this.toolStripStatusLabel3,
             this.toolStripStatusLabelNotification,
             this.toolStripStatusLabel1,
             this.toolStripStatusLabelTimeRange});
+            resources.ApplyResources(this.statusStrip1, "statusStrip1");
             this.statusStrip1.Name = "statusStrip1";
             // 
             // toolStripStatusLabelSongs
             // 
-            resources.ApplyResources(this.toolStripStatusLabelSongs, "toolStripStatusLabelSongs");
             this.toolStripStatusLabelSongs.Name = "toolStripStatusLabelSongs";
+            resources.ApplyResources(this.toolStripStatusLabelSongs, "toolStripStatusLabelSongs");
             // 
             // toolStripStatusLabel3
             // 
-            resources.ApplyResources(this.toolStripStatusLabel3, "toolStripStatusLabel3");
             this.toolStripStatusLabel3.Name = "toolStripStatusLabel3";
+            resources.ApplyResources(this.toolStripStatusLabel3, "toolStripStatusLabel3");
             this.toolStripStatusLabel3.Spring = true;
             // 
             // toolStripStatusLabelNotification
             // 
-            resources.ApplyResources(this.toolStripStatusLabelNotification, "toolStripStatusLabelNotification");
             this.toolStripStatusLabelNotification.Name = "toolStripStatusLabelNotification";
+            resources.ApplyResources(this.toolStripStatusLabelNotification, "toolStripStatusLabelNotification");
             // 
             // toolStripStatusLabel1
             // 
-            resources.ApplyResources(this.toolStripStatusLabel1, "toolStripStatusLabel1");
             this.toolStripStatusLabel1.Name = "toolStripStatusLabel1";
+            resources.ApplyResources(this.toolStripStatusLabel1, "toolStripStatusLabel1");
             this.toolStripStatusLabel1.Spring = true;
             // 
             // toolStripStatusLabelTimeRange
             // 
-            resources.ApplyResources(this.toolStripStatusLabelTimeRange, "toolStripStatusLabelTimeRange");
             this.toolStripStatusLabelTimeRange.Name = "toolStripStatusLabelTimeRange";
+            resources.ApplyResources(this.toolStripStatusLabelTimeRange, "toolStripStatusLabelTimeRange");
             // 
             // dateTimePickerStart
             // 
@@ -180,7 +180,6 @@
             this.MinimizeBox = false;
             this.Name = "SongStatsticsViewer";
             this.ShowIcon = false;
-            this.ShowInTaskbar = false;
             this.Load += new System.EventHandler(this.SongStatsticsViewer_Load);
             this.statusStrip1.ResumeLayout(false);
             this.statusStrip1.PerformLayout();
