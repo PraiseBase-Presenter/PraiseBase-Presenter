@@ -120,6 +120,9 @@
   <data name="columnHeader1.Text" xml:space="preserve">
     <value>Song name</value>
   </data>
+  <data name="columnHeader5.Text" xml:space="preserve">
+    <value>Author</value>
+  </data>
   <data name="columnHeader2.Text" xml:space="preserve">
     <value>Count</value>
   </data>

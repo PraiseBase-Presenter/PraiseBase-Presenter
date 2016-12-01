@@ -1,4 +1,6 @@
-﻿using PraiseBase.Presenter.Model;
+﻿using PraiseBase.Presenter.Manager;
+using PraiseBase.Presenter.Model;
+using PraiseBase.Presenter.Model.Song;
 using PraiseBase.Presenter.Persistence.Setlists;
 using PraiseBase.Presenter.Properties;
 using System;
@@ -19,10 +21,12 @@ namespace PraiseBase.Presenter.Forms
         private static readonly log4net.ILog log = log4net.LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
 
         private string _setlistDir;
+        private SongManager _songManager;
 
-        public SongStatsticsViewer()
+        public SongStatsticsViewer(SongManager songManager)
         {
             InitializeComponent();
+            _songManager = songManager;
             _setlistDir = Settings.Default.DataDirectory + Path.DirectorySeparatorChar + Settings.Default.SetListDir;
         }
 
@@ -51,21 +55,23 @@ namespace PraiseBase.Presenter.Forms
                         var fileWriteTime = File.GetLastWriteTime(f);
                         if (startTime < fileWriteTime && endTime > fileWriteTime)
                         {
-                            foreach (string s in ReadSetListFile(f))
+                            foreach (Song s in ReadSetListFile(f))
                             {
-                                if (entries.ContainsKey(s))
+                                if (entries.ContainsKey(s.Title))
                                 {
-                                    entries[s].Count++;
-                                    if (fileWriteTime > entries[s].LastUsed)
+                                    entries[s.Title].Count++;
+                                    if (fileWriteTime > entries[s.Title].LastUsed)
                                     {
-                                        entries[s].LastUsed = fileWriteTime;
+                                        entries[s.Title].LastUsed = fileWriteTime;
                                     }
                                 }
                                 else
                                 {
-                                    entries.Add(s, new SongStatisticsItem() {
+                                    entries.Add(s.Title, new SongStatisticsItem() {
                                         Count = 1,
-                                        LastUsed = fileWriteTime
+                                        LastUsed = fileWriteTime,
+                                        CCLI = s.CcliIdentifier,
+                                        Author = s.Authors.ToString()
                                     });
                                 }
                             }
@@ -80,6 +86,8 @@ namespace PraiseBase.Presenter.Forms
                     {
                         var entry = entries[key];
                         ListViewItem listitem = new ListViewItem(key);
+                        listitem.SubItems.Add(entry.Author);
+                        listitem.SubItems.Add(entry.CCLI);
                         listitem.SubItems.Add(entry.Count.ToString());
                         listitem.SubItems.Add(entry.LastUsed.ToString("d"));
                         listViewTable.Items.Add(listitem);
@@ -98,9 +106,9 @@ namespace PraiseBase.Presenter.Forms
             }
         }
 
-        private List<string> ReadSetListFile(string fileName)
+        private List<Song> ReadSetListFile(string fileName)
         {
-            List<string> list = new List<string>();
+            List<Song> list = new List<Song>();
             SetlistReader sr = new SetlistReader();
             try
             {
@@ -109,7 +117,18 @@ namespace PraiseBase.Presenter.Forms
                 {
                     foreach (var i in sl.Items)
                     {
-                        list.Add(i);
+                        var key = _songManager.GetKeyByTitle(i);
+                        if (key != null)
+                        {
+                            var s = _songManager.SongList[key].Song;
+                            list.Add(s);
+                        }
+                        else
+                        {
+                            list.Add(new Song() {
+                                Title = i
+                            });
+                        }
                     }
                 }
             }
@@ -157,6 +176,8 @@ namespace PraiseBase.Presenter.Forms
 
     class SongStatisticsItem
     {
+        public string Author { get; set; }
+        public string CCLI { get; set; }
         public int Count { get; set; }
         public DateTime LastUsed { get; set; }
     }

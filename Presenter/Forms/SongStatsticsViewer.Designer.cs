@@ -32,6 +32,8 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(SongStatsticsViewer));
             this.listViewTable = new System.Windows.Forms.ListView();
             this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader5 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader4 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader3 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
@@ -55,6 +57,8 @@
             resources.ApplyResources(this.listViewTable, "listViewTable");
             this.listViewTable.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.columnHeader1,
+            this.columnHeader5,
+            this.columnHeader4,
             this.columnHeader2,
             this.columnHeader3});
             this.listViewTable.FullRowSelect = true;
@@ -68,6 +72,14 @@
             // columnHeader1
             // 
             resources.ApplyResources(this.columnHeader1, "columnHeader1");
+            // 
+            // columnHeader5
+            // 
+            resources.ApplyResources(this.columnHeader5, "columnHeader5");
+            // 
+            // columnHeader4
+            // 
+            resources.ApplyResources(this.columnHeader4, "columnHeader4");
             // 
             // columnHeader2
             // 
@@ -164,7 +176,6 @@
             this.Controls.Add(this.dateTimePickerStart);
             this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.listViewTable);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "SongStatsticsViewer";
@@ -197,5 +208,7 @@
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabelNotification;
         private System.Windows.Forms.Timer timerNotification;
         private System.Windows.Forms.ColumnHeader columnHeader3;
+        private System.Windows.Forms.ColumnHeader columnHeader4;
+        private System.Windows.Forms.ColumnHeader columnHeader5;
     }
 }
