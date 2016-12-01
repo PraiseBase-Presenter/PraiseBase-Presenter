@@ -133,6 +133,15 @@ namespace PraiseBase.Presenter.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to &apos;{0}&apos; in die Zwischenablage kopiert.
+        /// </summary>
+        public static string CopiedIntoClipBoard {
+            get {
+                return ResourceManager.GetString("CopiedIntoClipBoard", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Erstelle Miniaturbilder.
         /// </summary>
         public static string CreatingThumbnails {
@@ -219,6 +228,15 @@ namespace PraiseBase.Presenter.Properties {
         public static string Images {
             get {
                 return ResourceManager.GetString("Images", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Ungültiger Zeitraum!.
+        /// </summary>
+        public static string InvalidTimeRange {
+            get {
+                return ResourceManager.GetString("InvalidTimeRange", resourceCulture);
             }
         }
         
@@ -691,6 +709,15 @@ namespace PraiseBase.Presenter.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Lieder: {0}.
+        /// </summary>
+        public static string SongsCount {
+            get {
+                return ResourceManager.GetString("SongsCount", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to {0} Lieder wurden importiert!.
         /// </summary>
         public static string SongsImported {
@@ -741,6 +768,15 @@ namespace PraiseBase.Presenter.Properties {
         public static string Thumbnails {
             get {
                 return ResourceManager.GetString("Thumbnails", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Zeitraum: {0} - {1}.
+        /// </summary>
+        public static string TimeRangeFromTo {
+            get {
+                return ResourceManager.GetString("TimeRangeFromTo", resourceCulture);
             }
         }
         

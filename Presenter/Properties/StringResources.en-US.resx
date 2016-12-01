@@ -342,4 +342,16 @@
   <data name="UpdateAvailable" xml:space="preserve">
     <value>A software update to version {0} is available (you have version {1}).</value>
   </data>
+  <data name="CopiedIntoClipBoard" xml:space="preserve">
+    <value>'{0}' copied into the clipboard</value>
+  </data>
+  <data name="InvalidTimeRange" xml:space="preserve">
+    <value>Invalid time range</value>
+  </data>
+  <data name="SongsCount" xml:space="preserve">
+    <value>Songs: {0}</value>
+  </data>
+  <data name="TimeRangeFromTo" xml:space="preserve">
+    <value>Time range: {0} - {1}</value>
+  </data>
 </root>

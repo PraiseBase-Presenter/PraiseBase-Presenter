@@ -2681,6 +2681,12 @@ namespace PraiseBase.Presenter.Presenter
             toolStripMenuItemImportText_Click(sender, e);
         }
 
+        private void toolStripMenuItemSongStatistics_Click(object sender, EventArgs e)
+        {
+            SongStatsticsViewer window = new SongStatsticsViewer();
+            window.ShowDialog(this);
+        }
+
         private void buttonSongViewModeSequence_Click(object sender, EventArgs e)
         {
             UpdatePresenterSongViewModeButtons(SongViewMode.Sequence);
