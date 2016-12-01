@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Preprocessor variables (fileVersion requires WixFileVersionExtension -->
+<?define ProductName="$(fileVersion.ProductName($(var.PraiseBase_Presenter.TargetPath)))" ?>
+<?define CompanyName="$(fileVersion.CompanyName($(var.PraiseBase_Presenter.TargetPath)))" ?>
+<?define ProductVersion="$(fileVersion.ProductVersion($(var.PraiseBase_Presenter.TargetPath)))" ?>
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi"
+     xmlns:bal="http://schemas.microsoft.com/wix/BalExtension">
+  <Bundle 
+    Name="$(var.ProductName) $(var.ProductVersion) Installer"
+    Version="$(var.ProductVersion)"
+    IconSourceFile="$(var.PraiseBase_Presenter.ProjectDir)Resources\Computer.ico"
+    UpgradeCode="4ABD2F59-A4DD-4CD0-B32C-1A9558A20179">
+    <BootstrapperApplicationRef Id="WixStandardBootstrapperApplication.HyperlinkSidebarLicense">
+      <bal:WixStandardBootstrapperApplication 
+        LicenseUrl="$(var.SolutionDir)License.rtf"
+        LogoSideFile="$(var.Installer.ProjectDir)Resources\Background.bmp" 
+        ShowVersion="yes" />
+    </BootstrapperApplicationRef>
+    <Chain>
+      <PackageGroupRef Id="NetFx46Web"/>
+      <MsiPackage
+        Compressed="yes"
+        SourceFile="$(var.Installer.TargetDir)$(var.Installer.TargetName)-$(var.ProductVersion)$(var.Installer.TargetExt)"
+        Vital="yes">
+        <MsiProperty Name="ARPSYSTEMCOMPONENT" Value="1"/>
+      </MsiPackage>
+    </Chain>
+  </Bundle>
+</Wix>

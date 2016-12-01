@@ -11,7 +11,7 @@
            Manufacturer="$(var.CompanyName)"
            Language="1031" 
            UpgradeCode="$(var.UpgradeId)">
-    <Package InstallerVersion="200" Compressed="yes" />
+    <Package InstallerVersion="200" Compressed="yes" InstallScope="perMachine" />
     <Media Id="1" Cabinet="media1.cab" EmbedCab="yes" />
 
     <Property Id="PREVIOUSVERSIONSINSTALLED" Secure="yes" />
