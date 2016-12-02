@@ -354,4 +354,16 @@
   <data name="nSongsHaveBeenImported" xml:space="preserve">
     <value>{0} Lieder wurden importiert!</value>
   </data>
+  <data name="CopiedIntoClipBoard" xml:space="preserve">
+    <value>'{0}' in die Zwischenablage kopiert</value>
+  </data>
+  <data name="InvalidTimeRange" xml:space="preserve">
+    <value>Ungültiger Zeitraum!</value>
+  </data>
+  <data name="SongsCount" xml:space="preserve">
+    <value>Lieder: {0}</value>
+  </data>
+  <data name="TimeRangeFromTo" xml:space="preserve">
+    <value>Zeitraum: {0} - {1}</value>
+  </data>
 </root>

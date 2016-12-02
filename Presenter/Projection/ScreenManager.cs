@@ -135,12 +135,12 @@ namespace PraiseBase.Presenter.Projection
                 if (!t.Primary)
                 {
                     AvailableProjectionScreens.Add(t);
-                    log.Info("Detected projection screen " + t.DeviceName + ", " + t.WorkingArea);
+                    log.Debug("Detected projection screen " + t.DeviceName + ", " + t.WorkingArea);
                 }
                 else
                 {
                     MainScreen = t;
-                    log.Info("Detected main screen " + t.DeviceName + ", " + t.WorkingArea);
+                    log.Debug("Detected main screen " + t.DeviceName + ", " + t.WorkingArea);
                 }
                 hash += t.GetHashCode();
             }
