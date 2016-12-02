@@ -45,13 +45,16 @@ namespace PraiseBase.Presenter.Model.Song
         public void FromString(string value)
         {
             Clear();
-            foreach (var s in value.Split(new[] {';'}, StringSplitOptions.RemoveEmptyEntries))
+            if (value != null)
             {
-                var sb = new SongBook
+                foreach (var s in value.Split(new[] { ';' }, StringSplitOptions.RemoveEmptyEntries))
                 {
-                    Name = s.Trim()
-                };
-                Add(sb);
+                    var sb = new SongBook
+                    {
+                        Name = s.Trim()
+                    };
+                    Add(sb);
+                }
             }
         }
 

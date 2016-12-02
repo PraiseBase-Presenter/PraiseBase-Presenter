@@ -45,15 +45,18 @@ namespace PraiseBase.Presenter.Model.Song
         public void FromString(string value)
         {
             Clear();
-            var i = 0;
-            foreach (var s in value.Split(new[] {';'}, StringSplitOptions.RemoveEmptyEntries))
+            if (value != null)
             {
-                var author = new SongAuthor
+                var i = 0;
+                foreach (var s in value.Split(new[] { ';' }, StringSplitOptions.RemoveEmptyEntries))
                 {
-                    Name = s.Trim(),
-                    Type = (i++ == 0) ? SongAuthorType.Words : SongAuthorType.Music
-                };
-                Add(author);
+                    var author = new SongAuthor
+                    {
+                        Name = s.Trim(),
+                        Type = (i++ == 0) ? SongAuthorType.Words : SongAuthorType.Music
+                    };
+                    Add(author);
+                }
             }
         }
 

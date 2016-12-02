@@ -111,6 +111,7 @@ namespace PraiseBase.Presenter.Presenter
             this.liedSuchenToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.liededitorToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem3 = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItemMetadataEditor = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItemSongStatistics = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator5 = new System.Windows.Forms.ToolStripSeparator();
             this.beendenToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -912,6 +913,7 @@ namespace PraiseBase.Presenter.Presenter
             this.liedSuchenToolStripMenuItem,
             this.liededitorToolStripMenuItem,
             this.toolStripMenuItem3,
+            this.toolStripMenuItemMetadataEditor,
             this.toolStripMenuItemSongStatistics,
             this.toolStripSeparator5,
             this.beendenToolStripMenuItem});
@@ -934,6 +936,12 @@ namespace PraiseBase.Presenter.Presenter
             resources.ApplyResources(this.toolStripMenuItem3, "toolStripMenuItem3");
             this.toolStripMenuItem3.Name = "toolStripMenuItem3";
             this.toolStripMenuItem3.Click += new System.EventHandler(this.toolStripMenuItem3_Click);
+            // 
+            // toolStripMenuItemMetadataEditor
+            // 
+            resources.ApplyResources(this.toolStripMenuItemMetadataEditor, "toolStripMenuItemMetadataEditor");
+            this.toolStripMenuItemMetadataEditor.Name = "toolStripMenuItemMetadataEditor";
+            this.toolStripMenuItemMetadataEditor.Click += new System.EventHandler(this.toolStripMenuItemMetadataEditor_Click);
             // 
             // toolStripMenuItemSongStatistics
             // 
@@ -1869,6 +1877,7 @@ namespace PraiseBase.Presenter.Presenter
         private System.Windows.Forms.ToolStripMenuItem lieddateiToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem textToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItemSongStatistics;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItemMetadataEditor;
     }
 }
 

@@ -1372,13 +1372,13 @@
     <value>6, 69</value>
   </data>
   <data name="labelCcliIdentifier.Size" type="System.Drawing.Size, System.Drawing">
-    <value>47, 13</value>
+    <value>43, 13</value>
   </data>
   <data name="labelCcliIdentifier.TabIndex" type="System.Int32, mscorlib">
     <value>89</value>
   </data>
   <data name="labelCcliIdentifier.Text" xml:space="preserve">
-    <value>CCLI ID:</value>
+    <value>CCLI #:</value>
   </data>
   <data name="&gt;&gt;labelCcliIdentifier.Name" xml:space="preserve">
     <value>labelCcliIdentifier</value>

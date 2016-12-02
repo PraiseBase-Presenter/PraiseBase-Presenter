@@ -366,4 +366,7 @@
   <data name="TimeRangeFromTo" xml:space="preserve">
     <value>Zeitraum: {0} - {1}</value>
   </data>
+  <data name="SongHasBeenUpdated" xml:space="preserve">
+    <value>Lied '{0}' aktualisiert</value>
+  </data>
 </root>

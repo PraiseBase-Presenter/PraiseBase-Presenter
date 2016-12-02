@@ -157,6 +157,12 @@
     <Compile Include="Forms\SimpleProgressWindow.Designer.cs">
       <DependentUpon>SimpleProgressWindow.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\SongMetadataEditor.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\SongMetadataEditor.Designer.cs">
+      <DependentUpon>SongMetadataEditor.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\SongStatsticsViewer.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -310,6 +316,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\SimpleProgressWindow.resx">
       <DependentUpon>SimpleProgressWindow.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\SongMetadataEditor.en-US.resx">
+      <DependentUpon>SongMetadataEditor.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\SongMetadataEditor.resx">
+      <DependentUpon>SongMetadataEditor.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\SongStatsticsViewer.en-US.resx">
       <DependentUpon>SongStatsticsViewer.cs</DependentUpon>

@@ -2687,6 +2687,13 @@ namespace PraiseBase.Presenter.Presenter
             window.Show();
         }
 
+        private void toolStripMenuItemMetadataEditor_Click(object sender, EventArgs e)
+        {
+            SongMetadataEditor window = new SongMetadataEditor(_songManager);
+            window.ShowDialog(this);
+            LoadSongList();
+        }
+
         private void buttonSongViewModeSequence_Click(object sender, EventArgs e)
         {
             UpdatePresenterSongViewModeButtons(SongViewMode.Sequence);

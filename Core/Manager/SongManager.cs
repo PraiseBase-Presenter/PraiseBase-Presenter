@@ -211,6 +211,28 @@ namespace PraiseBase.Presenter.Manager
             }
         }
 
+        /// <summary>
+        ///     Save song identified by key
+        /// </summary>
+        /// <param name="key"></param>
+        public void SaveSong(string key)
+        {
+            if (!SongList.ContainsKey(key))
+            {
+                return;
+            }
+            var item = SongList[key];
+            if (item.Plugin.IsWritingSupported())
+            {
+                item.Plugin.Save(item.Song, item.Filename);
+            }
+            else
+            {
+                throw new Exception("Das Speichern der Lieddatei " + item.Filename +
+                                    " wird von diesem Dateiformat leider nicht unterstützt!");
+            }
+        }
+
         #region Events
 
         public delegate void SongLoad(SongLoadEventArgs e);
