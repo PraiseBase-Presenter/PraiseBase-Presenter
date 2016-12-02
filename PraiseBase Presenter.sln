@@ -19,6 +19,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core Libraries", "Core\Core
 EndProject
 Project("{930C7802-8A8C-48F9-8165-68863BCCD9DD}") = "Bundle", "Bundle\Bundle.wixproj", "{813013B2-1252-4F99-835F-97B84F878CE1}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Presenter NEXT", "Presenter NEXT\Presenter NEXT.csproj", "{75DE8131-E28D-443B-8CFB-8D01242EF610}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -78,6 +80,18 @@ Global
 		{813013B2-1252-4F99-835F-97B84F878CE1}.Release|Mixed Platforms.Build.0 = Release|x86
 		{813013B2-1252-4F99-835F-97B84F878CE1}.Release|x86.ActiveCfg = Release|x86
 		{813013B2-1252-4F99-835F-97B84F878CE1}.Release|x86.Build.0 = Release|x86
+		{75DE8131-E28D-443B-8CFB-8D01242EF610}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{75DE8131-E28D-443B-8CFB-8D01242EF610}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{75DE8131-E28D-443B-8CFB-8D01242EF610}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{75DE8131-E28D-443B-8CFB-8D01242EF610}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{75DE8131-E28D-443B-8CFB-8D01242EF610}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{75DE8131-E28D-443B-8CFB-8D01242EF610}.Debug|x86.Build.0 = Debug|Any CPU
+		{75DE8131-E28D-443B-8CFB-8D01242EF610}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{75DE8131-E28D-443B-8CFB-8D01242EF610}.Release|Any CPU.Build.0 = Release|Any CPU
+		{75DE8131-E28D-443B-8CFB-8D01242EF610}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{75DE8131-E28D-443B-8CFB-8D01242EF610}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{75DE8131-E28D-443B-8CFB-8D01242EF610}.Release|x86.ActiveCfg = Release|Any CPU
+		{75DE8131-E28D-443B-8CFB-8D01242EF610}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
