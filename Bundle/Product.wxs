@@ -14,13 +14,14 @@
       <bal:WixStandardBootstrapperApplication 
         LicenseUrl="$(var.SolutionDir)License.rtf"
         LogoSideFile="$(var.Installer.ProjectDir)Resources\Background.bmp" 
+        SuppressOptionsUI="yes"
         ShowVersion="yes" />
     </BootstrapperApplicationRef>
     <Chain>
-      <PackageGroupRef Id="NetFx46Web"/>
+      <PackageGroupRef Id="NetFx40Web"/>
       <MsiPackage
         Compressed="yes"
-        SourceFile="$(var.Installer.TargetDir)$(var.Installer.TargetName)-$(var.ProductVersion)$(var.Installer.TargetExt)"
+        SourceFile="$(var.Installer.TargetDir)$(var.Installer.TargetName)$(var.Installer.TargetExt)"
         Vital="yes">
         <MsiProperty Name="ARPSYSTEMCOMPONENT" Value="1"/>
       </MsiPackage>
