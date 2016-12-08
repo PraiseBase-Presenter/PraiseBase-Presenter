@@ -121,35 +121,35 @@
   <data name="listViewTable.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Bottom, Left, Right</value>
   </data>
-  <data name="columnHeader1.Text" xml:space="preserve">
+  <data name="columnHeaderName.Text" xml:space="preserve">
     <value>Liedname</value>
   </data>
   <assembly alias="mscorlib" name="mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="columnHeader1.Width" type="System.Int32, mscorlib">
+  <data name="columnHeaderName.Width" type="System.Int32, mscorlib">
     <value>292</value>
   </data>
-  <data name="columnHeader5.Text" xml:space="preserve">
+  <data name="columnHeaderAuthor.Text" xml:space="preserve">
     <value>Autor</value>
   </data>
-  <data name="columnHeader5.Width" type="System.Int32, mscorlib">
+  <data name="columnHeaderAuthor.Width" type="System.Int32, mscorlib">
     <value>117</value>
   </data>
-  <data name="columnHeader4.Text" xml:space="preserve">
+  <data name="columnHeaderCCLI.Text" xml:space="preserve">
     <value>CCLI #</value>
   </data>
-  <data name="columnHeader4.Width" type="System.Int32, mscorlib">
+  <data name="columnHeaderCCLI.Width" type="System.Int32, mscorlib">
     <value>78</value>
   </data>
-  <data name="columnHeader2.Text" xml:space="preserve">
+  <data name="columnHeaderNumber.Text" xml:space="preserve">
     <value>Anzahl</value>
   </data>
-  <data name="columnHeader2.Width" type="System.Int32, mscorlib">
+  <data name="columnHeaderNumber.Width" type="System.Int32, mscorlib">
     <value>69</value>
   </data>
-  <data name="columnHeader3.Text" xml:space="preserve">
+  <data name="columnHeaderLatestUsed.Text" xml:space="preserve">
     <value>Zuletzt verwendet</value>
   </data>
-  <data name="columnHeader3.Width" type="System.Int32, mscorlib">
+  <data name="columnHeaderLatestUsed.Width" type="System.Int32, mscorlib">
     <value>128</value>
   </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
@@ -390,34 +390,34 @@
   <data name="$this.Text" xml:space="preserve">
     <value>Lieder-Statistik</value>
   </data>
-  <data name="&gt;&gt;columnHeader1.Name" xml:space="preserve">
-    <value>columnHeader1</value>
+  <data name="&gt;&gt;columnHeaderName.Name" xml:space="preserve">
+    <value>columnHeaderName</value>
   </data>
-  <data name="&gt;&gt;columnHeader1.Type" xml:space="preserve">
+  <data name="&gt;&gt;columnHeaderName.Type" xml:space="preserve">
     <value>System.Windows.Forms.ColumnHeader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;columnHeader5.Name" xml:space="preserve">
-    <value>columnHeader5</value>
+  <data name="&gt;&gt;columnHeaderAuthor.Name" xml:space="preserve">
+    <value>columnHeaderAuthor</value>
   </data>
-  <data name="&gt;&gt;columnHeader5.Type" xml:space="preserve">
+  <data name="&gt;&gt;columnHeaderAuthor.Type" xml:space="preserve">
     <value>System.Windows.Forms.ColumnHeader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;columnHeader4.Name" xml:space="preserve">
-    <value>columnHeader4</value>
+  <data name="&gt;&gt;columnHeaderCCLI.Name" xml:space="preserve">
+    <value>columnHeaderCCLI</value>
   </data>
-  <data name="&gt;&gt;columnHeader4.Type" xml:space="preserve">
+  <data name="&gt;&gt;columnHeaderCCLI.Type" xml:space="preserve">
     <value>System.Windows.Forms.ColumnHeader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;columnHeader2.Name" xml:space="preserve">
-    <value>columnHeader2</value>
+  <data name="&gt;&gt;columnHeaderNumber.Name" xml:space="preserve">
+    <value>columnHeaderNumber</value>
   </data>
-  <data name="&gt;&gt;columnHeader2.Type" xml:space="preserve">
+  <data name="&gt;&gt;columnHeaderNumber.Type" xml:space="preserve">
     <value>System.Windows.Forms.ColumnHeader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;columnHeader3.Name" xml:space="preserve">
-    <value>columnHeader3</value>
+  <data name="&gt;&gt;columnHeaderLatestUsed.Name" xml:space="preserve">
+    <value>columnHeaderLatestUsed</value>
   </data>
-  <data name="&gt;&gt;columnHeader3.Type" xml:space="preserve">
+  <data name="&gt;&gt;columnHeaderLatestUsed.Type" xml:space="preserve">
     <value>System.Windows.Forms.ColumnHeader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;toolStripStatusLabelSongs.Name" xml:space="preserve">

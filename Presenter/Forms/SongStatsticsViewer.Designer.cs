@@ -31,11 +31,11 @@
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(SongStatsticsViewer));
             this.listViewTable = new System.Windows.Forms.ListView();
-            this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.columnHeader5 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.columnHeader4 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.columnHeader3 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeaderName = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeaderAuthor = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeaderCCLI = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeaderNumber = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeaderLatestUsed = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.toolStripStatusLabelSongs = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStripStatusLabel3 = new System.Windows.Forms.ToolStripStatusLabel();
@@ -56,38 +56,39 @@
             // 
             resources.ApplyResources(this.listViewTable, "listViewTable");
             this.listViewTable.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
-            this.columnHeader1,
-            this.columnHeader5,
-            this.columnHeader4,
-            this.columnHeader2,
-            this.columnHeader3});
+            this.columnHeaderName,
+            this.columnHeaderAuthor,
+            this.columnHeaderCCLI,
+            this.columnHeaderNumber,
+            this.columnHeaderLatestUsed});
             this.listViewTable.FullRowSelect = true;
             this.listViewTable.GridLines = true;
             this.listViewTable.MultiSelect = false;
             this.listViewTable.Name = "listViewTable";
             this.listViewTable.UseCompatibleStateImageBehavior = false;
             this.listViewTable.View = System.Windows.Forms.View.Details;
+            this.listViewTable.ColumnClick += new System.Windows.Forms.ColumnClickEventHandler(this.listViewTable_ColumnClick);
             this.listViewTable.SelectedIndexChanged += new System.EventHandler(this.listViewTable_SelectedIndexChanged);
             // 
-            // columnHeader1
+            // columnHeaderName
             // 
-            resources.ApplyResources(this.columnHeader1, "columnHeader1");
+            resources.ApplyResources(this.columnHeaderName, "columnHeaderName");
             // 
-            // columnHeader5
+            // columnHeaderAuthor
             // 
-            resources.ApplyResources(this.columnHeader5, "columnHeader5");
+            resources.ApplyResources(this.columnHeaderAuthor, "columnHeaderAuthor");
             // 
-            // columnHeader4
+            // columnHeaderCCLI
             // 
-            resources.ApplyResources(this.columnHeader4, "columnHeader4");
+            resources.ApplyResources(this.columnHeaderCCLI, "columnHeaderCCLI");
             // 
-            // columnHeader2
+            // columnHeaderNumber
             // 
-            resources.ApplyResources(this.columnHeader2, "columnHeader2");
+            resources.ApplyResources(this.columnHeaderNumber, "columnHeaderNumber");
             // 
-            // columnHeader3
+            // columnHeaderLatestUsed
             // 
-            resources.ApplyResources(this.columnHeader3, "columnHeader3");
+            resources.ApplyResources(this.columnHeaderLatestUsed, "columnHeaderLatestUsed");
             // 
             // statusStrip1
             // 
@@ -191,8 +192,8 @@
         #endregion
 
         private System.Windows.Forms.ListView listViewTable;
-        private System.Windows.Forms.ColumnHeader columnHeader1;
-        private System.Windows.Forms.ColumnHeader columnHeader2;
+        private System.Windows.Forms.ColumnHeader columnHeaderName;
+        private System.Windows.Forms.ColumnHeader columnHeaderNumber;
         private System.Windows.Forms.StatusStrip statusStrip1;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabelSongs;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel1;
@@ -206,8 +207,8 @@
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel3;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabelNotification;
         private System.Windows.Forms.Timer timerNotification;
-        private System.Windows.Forms.ColumnHeader columnHeader3;
-        private System.Windows.Forms.ColumnHeader columnHeader4;
-        private System.Windows.Forms.ColumnHeader columnHeader5;
+        private System.Windows.Forms.ColumnHeader columnHeaderLatestUsed;
+        private System.Windows.Forms.ColumnHeader columnHeaderCCLI;
+        private System.Windows.Forms.ColumnHeader columnHeaderAuthor;
     }
 }
