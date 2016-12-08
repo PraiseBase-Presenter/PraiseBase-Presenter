@@ -18,10 +18,10 @@
         ShowVersion="yes" />
     </BootstrapperApplicationRef>
     <Chain>
-      <PackageGroupRef Id="NetFx40Web"/>
+      <PackageGroupRef Id="NetFx46Web"/>
       <MsiPackage
         Compressed="yes"
-        SourceFile="$(var.Installer.TargetDir)$(var.Installer.TargetName)$(var.Installer.TargetExt)"
+        SourceFile="$(var.Installer.TargetDir)$(var.Installer.TargetName)-$(var.ProductVersion)$(var.Installer.TargetExt)"
         Vital="yes">
         <MsiProperty Name="ARPSYSTEMCOMPONENT" Value="1"/>
       </MsiPackage>
