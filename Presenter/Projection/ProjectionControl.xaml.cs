@@ -51,7 +51,6 @@ namespace PraiseBase.Presenter.Projection
 
         private void ProjectionControlLoaded(object sender, RoutedEventArgs e)
         {
-            webBrowser.LoadCompleted += WebBrowser_LoadCompleted;
         }
 
         /// <summary>
@@ -127,7 +126,7 @@ namespace PraiseBase.Presenter.Projection
 
         public void SetProjectionText(System.Drawing.Bitmap img, int fadeTime)
         {
-            if (webBrowser.Source != null)
+            if (webBrowser.Address != null)
             {
                 HideWebsite();
             }
@@ -167,21 +166,14 @@ namespace PraiseBase.Presenter.Projection
 
         public void ShowWebsite(Uri uri)
         {
-            webBrowser.Source = uri;
+            webBrowser.Address = uri.AbsoluteUri;
+            webBrowser.Visibility = Visibility.Visible;
         }
 
         public void HideWebsite()
         {
             webBrowser.Visibility = Visibility.Collapsed;
-            webBrowser.Source = null;
-        }
-
-        private void WebBrowser_LoadCompleted(object sender, System.Windows.Navigation.NavigationEventArgs e)
-        {
-            if (e.Uri != null)
-            {
-                webBrowser.Visibility = Visibility.Visible;
-            }
+            webBrowser.Address = "about:blank";
         }
 
         /// <summary>
@@ -191,6 +183,8 @@ namespace PraiseBase.Presenter.Projection
         /// <param name="animationTime">Animation duration in miliseconds</param>
         public void BlackOut(bool val, int animationTime)
         {
+            Panel.SetZIndex(webBrowser, val ? 0 : 100);
+
             Storyboard blackoutAnimation = (Storyboard)FindResource(val ? "blackoutAnimationOn" : "blackoutAnimationOff");
             blackoutAnimation.SpeedRatio = (animationTime == 0 ? 100 : 1000f / animationTime);
             blackoutAnimation.Begin(this);

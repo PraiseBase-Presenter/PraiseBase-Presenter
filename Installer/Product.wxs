@@ -81,6 +81,78 @@
                   Source="$(var.SolutionDir)License.txt"
                   KeyPath="yes"/>
           </Component>
+
+          <Component Id="CefSharpBrowserSubprocessexe" Guid="b5d165fd-1114-4601-892e-05d3d5754e9b">
+            <File Id="CefSharp.BrowserSubprocess.exe"
+                  Source="$(var.PraiseBase_Presenter.TargetDir)CefSharp.BrowserSubprocess.exe"
+                  KeyPath="yes"/>
+          </Component>
+          <Component Id="CefSharpBrowserSubprocessCoredll" Guid="57590d8e-5ac4-4145-a8d2-5deea5f20d31">
+            <File Id="CefSharp.BrowserSubprocess.Core.dll"
+                  Source="$(var.PraiseBase_Presenter.TargetDir)CefSharp.BrowserSubprocess.Core.dll"
+                  KeyPath="yes"/>
+          </Component>
+          <Component Id="CefSharpCoredll" Guid="c835f57f-116a-4467-a406-549161dde16e">
+            <File Id="CefSharp.Core.dll"
+                  Source="$(var.PraiseBase_Presenter.TargetDir)CefSharp.Core.dll"
+                  KeyPath="yes"/>
+          </Component>
+          <Component Id="CefSharpdll" Guid="c74ff8e1-6a43-4fec-8d12-9cf74fb7d2f4">
+            <File Id="CefSharp.dll"
+                  Source="$(var.PraiseBase_Presenter.TargetDir)CefSharp.dll"
+                  KeyPath="yes"/>
+          </Component>
+          <Component Id="CefSharpWpfdll" Guid="2942af78-876c-4a5c-ac28-779bfb76249e">
+            <File Id="CefSharp.Wpf.dll"
+                  Source="$(var.PraiseBase_Presenter.TargetDir)CefSharp.Wpf.dll"
+                  KeyPath="yes"/>
+          </Component>
+          <Component Id="libcefdll" Guid="e586ca36-f1f5-4f4a-ba7b-5a09d5ab217c">
+            <File Id="libcef.dll"
+                  Source="$(var.PraiseBase_Presenter.TargetDir)libcef.dll"
+                  KeyPath="yes"/>
+          </Component>
+          <Component Id="icudtldat" Guid="f9e7c4a5-5040-468b-8ca9-981b5a6ad962">
+            <File Id="icudtl.dat"
+                  Source="$(var.PraiseBase_Presenter.TargetDir)icudtl.dat"
+                  KeyPath="yes"/>
+          </Component>
+          <Component Id="cefpak" Guid="3831985b-7404-4412-9aad-0ee0b57e9363">
+            <File Id="cef.pak"
+                  Source="$(var.PraiseBase_Presenter.TargetDir)cef.pak"
+                  KeyPath="yes"/>
+          </Component>
+          <Component Id="cef_100_percentpak" Guid="1eebd93a-061a-4aa8-96ec-beb7af7099e2">
+            <File Id="cef_100_percent.pak"
+                  Source="$(var.PraiseBase_Presenter.TargetDir)cef_100_percent.pak"
+                  KeyPath="yes"/>
+          </Component>
+          <Component Id="cef_200_percentpak" Guid="ee54d764-2ac1-45f6-accb-dc0f4d6e887c">
+            <File Id="cef_200_percent.pak"
+                  Source="$(var.PraiseBase_Presenter.TargetDir)cef_200_percent.pak"
+                  KeyPath="yes"/>
+          </Component>
+          <Component Id="chrome_elfdll" Guid="92cca491-ec42-4fe3-b1b5-e9c83e9f2dde">
+            <File Id="chrome_elf.dll"
+                  Source="$(var.PraiseBase_Presenter.TargetDir)chrome_elf.dll"
+                  KeyPath="yes"/>
+          </Component>
+          <Component Id="natives_blobbin" Guid="7b43c4b7-212f-4646-97ce-866d4c60caef">
+            <File Id="natives_blob.bin"
+                  Source="$(var.PraiseBase_Presenter.TargetDir)natives_blob.bin"
+                  KeyPath="yes"/>
+          </Component>
+          <Component Id="snapshot_blobbin" Guid="4c6fe874-ca14-475d-8367-41b3d62ad3cb">
+            <File Id="snapshot_blob.bin"
+                  Source="$(var.PraiseBase_Presenter.TargetDir)snapshot_blob.bin"
+                  KeyPath="yes"/>
+          </Component>
+          <Component Id="v8_context_snapshotbin" Guid="3e1724e4-1a92-41ab-b1b1-2bd90443e518">
+            <File Id="v8_context_snapshot.bin"
+                  Source="$(var.PraiseBase_Presenter.TargetDir)v8_context_snapshot.bin"
+                  KeyPath="yes"/>
+          </Component>
+
           <Directory Id="LanguagePackFolderEnUS" Name="en-US">
             <Component Id="LanguagePackEnUS" Guid="a8e5ffcb-0080-487d-91b4-dae27925f475">
               <File Id="PraiseBasePresenter.resources.dll"
@@ -238,6 +310,22 @@
       <ComponentRef Id="Log4netDll"/>
       <ComponentRef Id="LicenseRtf" />
       <ComponentRef Id="LicenseTxt" />
+
+      <ComponentRef Id="CefSharpBrowserSubprocessexe" />
+      <ComponentRef Id="CefSharpBrowserSubprocessCoredll" />
+      <ComponentRef Id="CefSharpCoredll" />
+      <ComponentRef Id="CefSharpdll" />
+      <ComponentRef Id="CefSharpWpfdll" />
+      <ComponentRef Id="libcefdll" />
+      <ComponentRef Id="icudtldat" />
+      <ComponentRef Id="cefpak" />
+      <ComponentRef Id="cef_100_percentpak" />
+      <ComponentRef Id="cef_200_percentpak" />
+      <ComponentRef Id="chrome_elfdll" />
+      <ComponentRef Id="natives_blobbin" />
+      <ComponentRef Id="snapshot_blobbin" />
+      <ComponentRef Id="v8_context_snapshotbin" />
+
       <ComponentRef Id="ApplicationStartMenuShortcut" />
       <ComponentRef Id="DesktopShortcut" />
       <ComponentRef Id="DataFolder" />

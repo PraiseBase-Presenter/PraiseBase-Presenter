@@ -2626,15 +2626,14 @@ namespace PraiseBase.Presenter.Presenter
             if ((WebVideoService)comboBoxWebVideoService.SelectedItem == WebVideoService.YouTube)
             {
                 // See API documentation at https://developers.google.com/youtube/player_parameters
-                uri = new Uri("https://www.youtube.com/embed/" + videoID + "?autoplay=1&amp;controls=0&amp;modestbranding=1&amp;rel=0&amp;showinfo=0");
+                uri = new Uri("https://www.youtube.com/embed/" + videoID + "?autoplay=1&controls=0&modestbranding=1&rel=0&showinfo=0");
             }
             // Vimeo
-            // TODO: Currently disabled, as Vimeo embedding shows JavaScript error in WebBrowser component
-            //if ((WebVideoService)comboBoxWebVideoService.SelectedItem == WebVideoService.Vimeo)
-            //{
-            //    // See API documentation at https://developer.vimeo.com/player/embedding
-            //    uri = new Uri("https://player.vimeo.com/video/" + videoID + "?autoplay=1&badge=0&byline=0&portrait=0&title=0&api=0&player_id=praisebasepresenter");
-            //}
+            if ((WebVideoService)comboBoxWebVideoService.SelectedItem == WebVideoService.Vimeo)
+            {
+                // See API documentation at https://developer.vimeo.com/player/embedding
+                uri = new Uri("https://player.vimeo.com/video/" + videoID + "?autoplay=1&badge=0&byline=0&portrait=0&title=0&api=0&player_id=praisebasepresenter");
+            }
 
             if (uri != null)
             {

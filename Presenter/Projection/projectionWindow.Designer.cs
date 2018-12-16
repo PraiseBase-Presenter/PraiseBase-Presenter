@@ -37,22 +37,25 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.projectionControlHost.Location = new System.Drawing.Point(0, 0);
+            this.projectionControlHost.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.projectionControlHost.Name = "projectionControlHost";
-            this.projectionControlHost.Size = new System.Drawing.Size(640, 480);
+            this.projectionControlHost.Size = new System.Drawing.Size(853, 591);
             this.projectionControlHost.TabIndex = 2;
             this.projectionControlHost.Text = "elementHost1";
+            this.projectionControlHost.ChildChanged += new System.EventHandler<System.Windows.Forms.Integration.ChildChangedEventArgs>(this.projectionControlHost_ChildChanged);
             this.projectionControlHost.Child = null;
             // 
             // ProjectionWindow
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Black;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.ClientSize = new System.Drawing.Size(640, 480);
+            this.ClientSize = new System.Drawing.Size(853, 591);
             this.ControlBox = false;
             this.Controls.Add(this.projectionControlHost);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "ProjectionWindow";

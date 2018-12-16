@@ -144,5 +144,10 @@ namespace PraiseBase.Presenter.Projection
             ((ProjectionControl)(projectionControlHost.Child)).Dispose();
             base.Dispose();
         }
+
+        private void projectionControlHost_ChildChanged(object sender, System.Windows.Forms.Integration.ChildChangedEventArgs e)
+        {
+
+        }
     }
 }

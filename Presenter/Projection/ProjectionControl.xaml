@@ -1,6 +1,7 @@
 ﻿<UserControl x:Class="PraiseBase.Presenter.Projection.ProjectionControl"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:cefSharp="clr-namespace:CefSharp.Wpf;assembly=CefSharp.Wpf"
     Height="300" Width="300" Name="projectionControl" Loaded="ProjectionControlLoaded">
 
     <UserControl.Resources>
@@ -30,14 +31,14 @@
         <Image Name="projectionImageBack"  Stretch="Fill"></Image>
         <Image Name="projectionImage"  Stretch="Fill" Opacity="0"></Image>
 
-        <WebBrowser Name="webBrowser" Visibility="Collapsed"/>
-        
         <Image Name="textImageBack"  Stretch="Fill">
         </Image>
         <Image Name="textImage"  Stretch="Fill" Opacity="0">
         </Image>
 
-        <Rectangle Name="blackoutImage"  Stretch="Fill" Fill="Black" Opacity="0" />
+        <cefSharp:ChromiumWebBrowser Name="webBrowser" Visibility="Collapsed" Panel.ZIndex="100"/>
+
+        <Rectangle Name="blackoutImage"  Stretch="Fill" Fill="Black" Opacity="0"/>
 
     </Grid>
 </UserControl>
