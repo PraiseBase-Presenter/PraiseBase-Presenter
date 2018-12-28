@@ -79,8 +79,11 @@ namespace PraiseBase.Presenter.Forms
             UpdateOrientation();
 
             // Additional information
-            comboBoxSourcePosition.SelectedIndex = (int)_settings.ProjectionMasterSourcePosition;
+            comboBoxSongBookPosition.SelectedIndex = (int)_settings.ProjectionMasterSongBookPosition;
             comboBoxCopyrightPosition.SelectedIndex = (int)_settings.ProjectionMasterCopyrightPosition;
+            comboBoxAuthorPosition.SelectedIndex = (int)_settings.ProjectionMasterAuthorPosition;
+            comboBoxPublisherPosition.SelectedIndex = (int)_settings.ProjectionMasterPublisherPosition;
+            comboBoxLicenseNumberPosition.SelectedIndex = (int)_settings.ProjectionMasterLicenseNumberPosition;
 
             checkBoxShowLoadingScreen.Checked = _settings.ShowLoadingScreen;
             checkBoxEnableDebugMode.Checked = _settings.DebugMode;
@@ -700,14 +703,29 @@ namespace PraiseBase.Presenter.Forms
             return VerticalOrientation.Top;
         }
 
-        private void comboBoxSourcePosition_SelectedIndexChanged(object sender, EventArgs e)
+        private void comboBoxSongBookPosition_SelectedIndexChanged(object sender, EventArgs e)
         {
-            _settings.ProjectionMasterSourcePosition = (AdditionalInformationPosition)comboBoxSourcePosition.SelectedIndex;
+            _settings.ProjectionMasterSongBookPosition = (AdditionalInformationPosition)comboBoxSongBookPosition.SelectedIndex;
         }
 
         private void comboBoxCopyrightPosition_SelectedIndexChanged(object sender, EventArgs e)
         {
             _settings.ProjectionMasterCopyrightPosition = (AdditionalInformationPosition)comboBoxCopyrightPosition.SelectedIndex;
+        }
+
+        private void comboBoxAuthorPosition_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            _settings.ProjectionMasterAuthorPosition = (AdditionalInformationPosition)comboBoxAuthorPosition.SelectedIndex;
+        }
+
+        private void comboBoxPublisherPosition_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            _settings.ProjectionMasterPublisherPosition = (AdditionalInformationPosition)comboBoxPublisherPosition.SelectedIndex;
+        }
+
+        private void comboBoxLicenseNumberPosition_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            _settings.ProjectionMasterLicenseNumberPosition = (AdditionalInformationPosition)comboBoxLicenseNumberPosition.SelectedIndex;
         }
 
         private void comboBoxTranslationPosition_SelectedIndexChanged(object sender, EventArgs e)
@@ -779,5 +797,6 @@ namespace PraiseBase.Presenter.Forms
         {
             _settings.DebugMode = checkBoxEnableDebugMode.Checked;
         }
+
     }
 }

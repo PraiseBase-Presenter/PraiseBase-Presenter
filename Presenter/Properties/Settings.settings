@@ -233,9 +233,6 @@
     <Setting Name="ProjectionMasterCopyrightPosition" Type="PraiseBase.Presenter.Model.AdditionalInformationPosition" Scope="User">
       <Value Profile="(Default)">LastSlide</Value>
     </Setting>
-    <Setting Name="ProjectionMasterSourcePosition" Type="PraiseBase.Presenter.Model.AdditionalInformationPosition" Scope="User">
-      <Value Profile="(Default)">FirstSlide</Value>
-    </Setting>
     <Setting Name="ProjectionMasteTranslationPosition" Type="PraiseBase.Presenter.Model.TranslationPosition" Scope="User">
       <Value Profile="(Default)">Inline</Value>
     </Setting>
@@ -277,6 +274,18 @@
     </Setting>
     <Setting Name="DebugMode" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="ProjectionMasterLicenseNumberPosition" Type="PraiseBase.Presenter.Model.AdditionalInformationPosition" Scope="User">
+      <Value Profile="(Default)">LastSlide</Value>
+    </Setting>
+    <Setting Name="ProjectionMasterSongBookPosition" Type="PraiseBase.Presenter.Model.AdditionalInformationPosition" Scope="User">
+      <Value Profile="(Default)">FirstSlide</Value>
+    </Setting>
+    <Setting Name="ProjectionMasterAuthorPosition" Type="PraiseBase.Presenter.Model.AdditionalInformationPosition" Scope="User">
+      <Value Profile="(Default)">FirstSlide</Value>
+    </Setting>
+    <Setting Name="ProjectionMasterPublisherPosition" Type="PraiseBase.Presenter.Model.AdditionalInformationPosition" Scope="User">
+      <Value Profile="(Default)">None</Value>
     </Setting>
   </Settings>
 </SettingsFile>

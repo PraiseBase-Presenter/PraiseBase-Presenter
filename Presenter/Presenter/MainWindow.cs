@@ -615,24 +615,33 @@ namespace PraiseBase.Presenter.Presenter
 
             SlideTextFormatting slideFormatting = new SlideTextFormatting();
 
-            AdditionalInformationPosition sourcePosition;
             AdditionalInformationPosition copyrightPosition;
+            AdditionalInformationPosition licenseNumberPosition;
+            AdditionalInformationPosition songBookPosition;
+            AdditionalInformationPosition authorPosition;
+            AdditionalInformationPosition publisherPosition;
 
             // Formatting based on master styling
             if (Settings.Default.ProjectionUseMaster|| s.Formatting == null)
             {
                 ISlideTextFormattingMapper<Settings> mapper = new SettingsSlideTextFormattingMapper();
                 mapper.Map(Settings.Default, ref slideFormatting);
-                sourcePosition = Settings.Default.ProjectionMasterSourcePosition;
+                licenseNumberPosition = Settings.Default.ProjectionMasterLicenseNumberPosition;
                 copyrightPosition = Settings.Default.ProjectionMasterCopyrightPosition;
+                songBookPosition = Settings.Default.ProjectionMasterSongBookPosition;
+                authorPosition = Settings.Default.ProjectionMasterAuthorPosition;
+                publisherPosition = Settings.Default.ProjectionMasterPublisherPosition;
             }
             // Formatting based on song settings
             else
             {
                 ISlideTextFormattingMapper<Song> mapper = new SongSlideTextFormattingMapper();
                 mapper.Map(s, ref slideFormatting);
-                sourcePosition = s.Formatting.SourcePosition;
+                licenseNumberPosition = s.Formatting.LicenseNumberPosition;
                 copyrightPosition = s.Formatting.CopyrightPosition;
+                songBookPosition = s.Formatting.SongBookPosition;
+                authorPosition = s.Formatting.AuthorPosition;
+                publisherPosition = s.Formatting.PublisherPosition;
             }
             slideFormatting.ScaleFontSize = Settings.Default.ProjectionFontScaling;
             slideFormatting.SmoothShadow = Settings.Default.ProjectionSmoothShadow;
@@ -652,29 +661,57 @@ namespace PraiseBase.Presenter.Presenter
                 ssl.SubText = cs.Translation.ToArray();
             }
 
-            // Set header text (song source)
-            if (sourcePosition == AdditionalInformationPosition.FirstSlide && e.isFirst ||
-                sourcePosition == AdditionalInformationPosition.LastSlide && e.isLast || 
-                sourcePosition == AdditionalInformationPosition.Always)
+            // Set header text (song book, author)
+            List<string> headerLines = new List<string>();
+            // Song book
+            if (s.SongBooks.Count > 0 && (
+                songBookPosition == AdditionalInformationPosition.FirstSlide && e.isFirst ||
+                songBookPosition == AdditionalInformationPosition.LastSlide && e.isLast ||
+                songBookPosition == AdditionalInformationPosition.Always))
             {
-                ssl.HeaderText = new[]
-                {
-                    s.SongBooks.ToString()
-                };
+                headerLines.Add(s.SongBooks.ToString());
+            }
+            // Author
+            if (s.Authors.Count > 0 && (
+                authorPosition == AdditionalInformationPosition.FirstSlide && e.isFirst ||
+                authorPosition == AdditionalInformationPosition.LastSlide && e.isLast ||
+                authorPosition == AdditionalInformationPosition.Always))
+            {
+                headerLines.Add(s.Authors.ToString());
+            }
+            if (headerLines.Count > 0)
+            {
+                ssl.HeaderText = headerLines.ToArray();
             }
 
-            // Set footer text (copyright)
+            // Set footer text (copyright, CCLI #, publisher)
+            List<string> footerLines = new List<string>();
+            // Copyright
             if (s.Copyright != null && (
                 copyrightPosition == AdditionalInformationPosition.FirstSlide && e.isFirst ||
                 copyrightPosition == AdditionalInformationPosition.LastSlide && e.isLast ||
                 copyrightPosition == AdditionalInformationPosition.Always))
             {
-                String[] copyRightLines = s.Copyright.Split(new[] {Environment.NewLine}, StringSplitOptions.None);
-                if (!String.IsNullOrEmpty(s.CcliIdentifier))
-                {
-                    copyRightLines = copyRightLines.Concat(new [] { "CCLI #" + s.CcliIdentifier }).ToArray();
-                }
-                ssl.FooterText = copyRightLines;
+                footerLines.AddRange(s.Copyright.Split(new[] { Environment.NewLine }, StringSplitOptions.None).ToList());
+            }
+            if (s.Publisher != null && (
+                publisherPosition == AdditionalInformationPosition.FirstSlide && e.isFirst ||
+                publisherPosition == AdditionalInformationPosition.LastSlide && e.isLast ||
+                publisherPosition == AdditionalInformationPosition.Always))
+            {
+                footerLines.Add(s.Publisher);
+            }
+            // License number
+            if (!string.IsNullOrEmpty(s.CcliIdentifier) && (
+                licenseNumberPosition == AdditionalInformationPosition.FirstSlide && e.isFirst ||
+                licenseNumberPosition == AdditionalInformationPosition.LastSlide && e.isLast ||
+                licenseNumberPosition == AdditionalInformationPosition.Always))
+            {
+                footerLines.Add("CCLI #" + s.CcliIdentifier);
+            }
+            if (footerLines.Count > 0)
+            {
+                ssl.FooterText = footerLines.ToArray();
             }
 
             // CTRL pressed, use image stack

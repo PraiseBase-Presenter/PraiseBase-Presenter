@@ -54,7 +54,7 @@ namespace PraiseBase.Presenter.Persistence.PowerPraise
 
             // Source / songbook
             song.SongBooks.FromString(ppl.SourceText);
-            song.Formatting.SourcePosition = ppl.Formatting.SourceTextPosition;
+            song.Formatting.SongBookPosition = ppl.Formatting.SourceTextPosition;
 
             // Song parts
             foreach (var prt in ppl.Parts)
@@ -179,7 +179,7 @@ namespace PraiseBase.Presenter.Persistence.PowerPraise
 
             // Source / songbook
             ppl.SourceText = song.SongBooks.ToString();
-            ppl.Formatting.SourceTextPosition = song.Formatting.SourcePosition;
+            ppl.Formatting.SourceTextPosition = song.Formatting.SongBookPosition;
 
             // Linespacing
             if (song.Formatting.MainText != null)

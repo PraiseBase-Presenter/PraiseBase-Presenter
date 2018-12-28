@@ -98,7 +98,10 @@ namespace PraiseBase.Presenter.Template
 
             sng.Formatting.TextOrientation = new TextOrientation(_settings.ProjectionMasterVerticalTextOrientation, _settings.ProjectionMasterHorizontalTextOrientation);
             sng.Formatting.CopyrightPosition = _settings.ProjectionMasterCopyrightPosition;
-            sng.Formatting.SourcePosition = _settings.ProjectionMasterSourcePosition;
+            sng.Formatting.LicenseNumberPosition = _settings.ProjectionMasterLicenseNumberPosition;
+            sng.Formatting.SongBookPosition = _settings.ProjectionMasterSongBookPosition;
+            sng.Formatting.AuthorPosition = _settings.ProjectionMasterAuthorPosition;
+            sng.Formatting.PublisherPosition = _settings.ProjectionMasterPublisherPosition;
             sng.Formatting.TranslationPosition = _settings.ProjectionMasteTranslationPosition;
 
             sng.Formatting.TextOutlineEnabled = _settings.ProjectionMasterOutlineEnabled;
