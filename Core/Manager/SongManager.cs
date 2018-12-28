@@ -190,7 +190,7 @@ namespace PraiseBase.Presenter.Manager
         {
             needle = SongSearchUtil.PrepareSearchText(needle);
 
-            return SongList.Where(kvp => kvp.Value.Song.Title.ToLower().Contains(needle) || (searchMode == SongSearchMode.TitleAndText && kvp.Value.SearchText.Contains(needle))).ToDictionary(kvp => kvp.Key, kvp => kvp.Value);
+            return SongList.Where(kvp => SongSearchUtil.PrepareSearchText(kvp.Value.Song.Title).Contains(needle) || (searchMode == SongSearchMode.TitleAndText && kvp.Value.SearchText.Contains(needle))).ToDictionary(kvp => kvp.Key, kvp => kvp.Value);
         }
 
         /// <summary>

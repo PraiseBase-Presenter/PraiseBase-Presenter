@@ -331,7 +331,7 @@ namespace PraiseBase.Presenter.Presenter
 
             // Fill list of songs
             int cnt = 0;
-            if (!String.IsNullOrEmpty(needle))
+            if (!string.IsNullOrEmpty(needle))
             {
                 // Search matching songs
                 foreach (var elem in _songManager.GetSearchResults(needle, Settings.Default.SongSearchMode))
