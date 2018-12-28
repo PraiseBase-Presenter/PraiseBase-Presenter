@@ -2704,13 +2704,17 @@ namespace PraiseBase.Presenter.Presenter
         {
             if (mode == SongViewMode.Sequence)
             {
-                buttonSongViewModeStructure.BackColor = Color.White;
-                buttonSongViewModeSequence.BackColor = Color.LightGray;
+                buttonSongViewModeStructure.BackColor = Color.LightGray;
+                buttonSongViewModeStructure.Font = new Font(buttonSongViewModeSequence.Font, FontStyle.Regular);
+                buttonSongViewModeSequence.BackColor = Color.White;
+                buttonSongViewModeSequence.Font = new Font(buttonSongViewModeSequence.Font, FontStyle.Bold);
             }
             else if (mode == SongViewMode.Structure)
             {
-                buttonSongViewModeStructure.BackColor = Color.LightGray;
-                buttonSongViewModeSequence.BackColor = Color.White;
+                buttonSongViewModeStructure.BackColor = Color.White;
+                buttonSongViewModeStructure.Font = new Font(buttonSongViewModeSequence.Font, FontStyle.Bold);
+                buttonSongViewModeSequence.BackColor = Color.LightGray;
+                buttonSongViewModeSequence.Font = new Font(buttonSongViewModeSequence.Font, FontStyle.Regular);
             }
             songDetailElement.SongViewMode = mode;
 
