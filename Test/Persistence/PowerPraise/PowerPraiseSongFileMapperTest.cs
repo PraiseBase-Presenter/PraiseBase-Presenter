@@ -70,7 +70,7 @@ namespace PraiseBase.Presenter.Persistence.PowerPraise
             Assert.AreEqual(expected.CcliIdentifier, actual.CcliIdentifier, "Wrong CcliID");
             Assert.AreEqual(expected.Copyright, actual.Copyright, "Wrong copyright");
             Assert.AreEqual(expected.Formatting.CopyrightPosition, actual.Formatting.CopyrightPosition, "Wrong copyright position");
-            Assert.AreEqual(expected.Formatting.SourcePosition, actual.Formatting.SourcePosition, "Wrong source position");
+            Assert.AreEqual(expected.Formatting.SongBookPosition, actual.Formatting.SongBookPosition, "Wrong source position");
             Assert.AreEqual(expected.ReleaseYear, actual.ReleaseYear, "Wrong release year");
             CollectionAssert.AreEqual(expected.Authors, actual.Authors, "Wrong author");
             Assert.AreEqual(expected.RightsManagement, actual.RightsManagement, "Wrong rights Management");

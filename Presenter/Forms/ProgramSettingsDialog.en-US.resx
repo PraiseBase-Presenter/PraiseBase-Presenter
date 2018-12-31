@@ -112,15 +112,15 @@
     <value>2.0</value>
   </resheader>
   <resheader name="reader">
-    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <resheader name="writer">
-    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="cancelButton.Text" xml:space="preserve">
     <value>&amp;Cancel</value>
   </data>
-  <assembly alias="System.Drawing" name="System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="label1.Size" type="System.Drawing.Size, System.Drawing">
     <value>135, 13</value>
   </data>
@@ -129,6 +129,15 @@
   </data>
   <data name="button1.Text" xml:space="preserve">
     <value>Select directory...</value>
+  </data>
+  <data name="tabPage1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>604, 638</value>
+  </data>
+  <data name="tabPage1.Text" xml:space="preserve">
+    <value>Common</value>
+  </data>
+  <data name="groupBoxProjection.Text" xml:space="preserve">
+    <value>Projection</value>
   </data>
   <data name="labelChromaKeyingColor.Size" type="System.Drawing.Size, System.Drawing">
     <value>106, 13</value>
@@ -169,8 +178,8 @@
   <data name="checkBoxProjectionFontScaling.Text" xml:space="preserve">
     <value>Downscale fonts</value>
   </data>
-  <data name="groupBoxProjection.Text" xml:space="preserve">
-    <value>Projection</value>
+  <data name="groupBoxMisc.Text" xml:space="preserve">
+    <value>Miscellaneous</value>
   </data>
   <data name="checkBoxEnableDebugMode.Size" type="System.Drawing.Size, System.Drawing">
     <value>121, 17</value>
@@ -184,14 +193,14 @@
   <data name="checkBoxShowLoadingScreen.Text" xml:space="preserve">
     <value>Show loading screen</value>
   </data>
-  <data name="groupBoxMisc.Text" xml:space="preserve">
-    <value>Miscellaneous</value>
-  </data>
   <data name="groupBoxDataDirectory.Text" xml:space="preserve">
     <value>Data directory</value>
   </data>
-  <data name="tabPage1.Text" xml:space="preserve">
-    <value>Common</value>
+  <data name="tabPage3.Size" type="System.Drawing.Size, System.Drawing">
+    <value>604, 638</value>
+  </data>
+  <data name="tabPage3.Text" xml:space="preserve">
+    <value>Song defaults</value>
   </data>
   <data name="label6.Size" type="System.Drawing.Size, System.Drawing">
     <value>72, 13</value>
@@ -223,8 +232,29 @@
   <data name="buttonDelTags.Text" xml:space="preserve">
     <value>Delete selected</value>
   </data>
-  <data name="tabPage3.Text" xml:space="preserve">
-    <value>Song defaults</value>
+  <data name="tabPage5.Text" xml:space="preserve">
+    <value>Master formatting</value>
+  </data>
+  <data name="groupBoxAdditionalInfo.Text" xml:space="preserve">
+    <value>Additional information</value>
+  </data>
+  <data name="labelShowLicenseNumber.Size" type="System.Drawing.Size, System.Drawing">
+    <value>80, 13</value>
+  </data>
+  <data name="labelShowLicenseNumber.Text" xml:space="preserve">
+    <value>Display CCLI #:</value>
+  </data>
+  <data name="labelShowPublisher.Size" type="System.Drawing.Size, System.Drawing">
+    <value>89, 13</value>
+  </data>
+  <data name="labelShowPublisher.Text" xml:space="preserve">
+    <value>Display publisher:</value>
+  </data>
+  <data name="labelShowAuthor.Size" type="System.Drawing.Size, System.Drawing">
+    <value>77, 13</value>
+  </data>
+  <data name="labelShowAuthor.Text" xml:space="preserve">
+    <value>Display author:</value>
   </data>
   <data name="label13.Size" type="System.Drawing.Size, System.Drawing">
     <value>90, 13</value>
@@ -232,14 +262,14 @@
   <data name="label13.Text" xml:space="preserve">
     <value>Display copyright:</value>
   </data>
-  <data name="labelShowSource.Size" type="System.Drawing.Size, System.Drawing">
-    <value>79, 13</value>
+  <data name="labelShowSongBook.Size" type="System.Drawing.Size, System.Drawing">
+    <value>94, 13</value>
   </data>
-  <data name="labelShowSource.Text" xml:space="preserve">
-    <value>Display source:</value>
+  <data name="labelShowSongBook.Text" xml:space="preserve">
+    <value>Display songbook:</value>
   </data>
-  <data name="groupBoxAdditionalInfo.Text" xml:space="preserve">
-    <value>Additional information</value>
+  <data name="groupBoxTextOrientation.Text" xml:space="preserve">
+    <value>Text orientation</value>
   </data>
   <data name="label16.Size" type="System.Drawing.Size, System.Drawing">
     <value>62, 13</value>
@@ -259,8 +289,8 @@
   <data name="label11.Text" xml:space="preserve">
     <value>Header:</value>
   </data>
-  <data name="groupBoxTextOrientation.Text" xml:space="preserve">
-    <value>Text orientation</value>
+  <data name="groupBoxShadow.Text" xml:space="preserve">
+    <value>Shadow</value>
   </data>
   <data name="labelShadowSize.Size" type="System.Drawing.Size, System.Drawing">
     <value>30, 13</value>
@@ -292,8 +322,8 @@
   <data name="labelShadowDistance.Text" xml:space="preserve">
     <value>Distance:</value>
   </data>
-  <data name="groupBoxShadow.Text" xml:space="preserve">
-    <value>Shadow</value>
+  <data name="groupBoxBorders.Text" xml:space="preserve">
+    <value>Padding</value>
   </data>
   <data name="label15.Size" type="System.Drawing.Size, System.Drawing">
     <value>45, 13</value>
@@ -310,8 +340,8 @@
   <data name="label3.Text" xml:space="preserve">
     <value>Vertical:</value>
   </data>
-  <data name="groupBoxBorders.Text" xml:space="preserve">
-    <value>Padding</value>
+  <data name="groupBoxOutline.Text" xml:space="preserve">
+    <value>Outline</value>
   </data>
   <data name="checkBoxOutlineEnabled.Size" type="System.Drawing.Size, System.Drawing">
     <value>94, 17</value>
@@ -331,8 +361,8 @@
   <data name="labelOutlineSize.Text" xml:space="preserve">
     <value>Strength:</value>
   </data>
-  <data name="groupBoxOutline.Text" xml:space="preserve">
-    <value>Outline</value>
+  <data name="groupBoxLineSpacings.Text" xml:space="preserve">
+    <value>Line spacing</value>
   </data>
   <data name="labelHorizontalTranslationTextOffset.Size" type="System.Drawing.Size, System.Drawing">
     <value>169, 13</value>
@@ -352,8 +382,8 @@
   <data name="labelTranslationLineSpacing.Text" xml:space="preserve">
     <value>Between lyrics and translation:</value>
   </data>
-  <data name="groupBoxLineSpacings.Text" xml:space="preserve">
-    <value>Line spacing</value>
+  <data name="groupBoxFonts.Text" xml:space="preserve">
+    <value>Fonts</value>
   </data>
   <data name="label20.Size" type="System.Drawing.Size, System.Drawing">
     <value>34, 13</value>
@@ -436,17 +466,11 @@
   <data name="labelTranslationText.Text" xml:space="preserve">
     <value>Translation:</value>
   </data>
-  <data name="groupBoxFonts.Text" xml:space="preserve">
-    <value>Fonts</value>
-  </data>
   <data name="checkBoxUseMasterFormat.Size" type="System.Drawing.Size, System.Drawing">
     <value>128, 17</value>
   </data>
   <data name="checkBoxUseMasterFormat.Text" xml:space="preserve">
     <value>Use master formatting</value>
-  </data>
-  <data name="tabPage5.Text" xml:space="preserve">
-    <value>Master formatting</value>
   </data>
   <data name="$this.Text" xml:space="preserve">
     <value>Settings</value>

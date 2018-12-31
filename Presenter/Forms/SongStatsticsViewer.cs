@@ -10,6 +10,7 @@ using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Windows.Forms;
+using static MoreLinq.Extensions.DistinctByExtension;
 
 namespace PraiseBase.Presenter.Forms
 {
@@ -54,7 +55,7 @@ namespace PraiseBase.Presenter.Forms
                         var fileWriteTime = File.GetLastWriteTime(f);
                         if (startTime < fileWriteTime && endTime > fileWriteTime)
                         {
-                            foreach (Song s in ReadSetListFile(f))
+                            foreach (Song s in ReadSetListFile(f).DistinctBy(item => item.Title))
                             {
                                 if (entries.ContainsKey(s.Title))
                                 {

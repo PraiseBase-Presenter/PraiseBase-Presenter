@@ -25,7 +25,7 @@ namespace PraiseBase.Presenter.Persistence.PowerPraise
                 Name = "grünes Buch 339"
             };
             song.SongBooks.Add(sb);
-            song.Formatting.SourcePosition = AdditionalInformationPosition.FirstSlide;
+            song.Formatting.SongBookPosition = AdditionalInformationPosition.FirstSlide;
 
             SongPart part = new SongPart
             {

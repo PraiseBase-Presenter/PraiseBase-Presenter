@@ -3,14 +3,29 @@
     public class SongFormatting
     {
         /// <summary>
-        ///     Copyright position (PowerPraise)
+        ///     Copyright position
         /// </summary>
         public AdditionalInformationPosition CopyrightPosition { get; set; }
 
         /// <summary>
-        ///     Source position (PowerPraise)
+        ///     License number position
         /// </summary>
-        public AdditionalInformationPosition SourcePosition { get; set; }
+        public AdditionalInformationPosition LicenseNumberPosition { get; set; }
+
+        /// <summary>
+        ///     Song book position
+        /// </summary>
+        public AdditionalInformationPosition SongBookPosition { get; set; }
+
+        /// <summary>
+        ///     Author position
+        /// </summary>
+        public AdditionalInformationPosition AuthorPosition { get; set; }
+
+        /// <summary>
+        ///     Publisher position
+        /// </summary>
+        public AdditionalInformationPosition PublisherPosition { get; set; }
 
         /// <summary>
         ///     Gets or sets the text font and color for the main text
@@ -77,7 +92,10 @@
             unchecked
             {
                 var hashCode = (int) CopyrightPosition;
-                hashCode = (hashCode*397) ^ (int) SourcePosition;
+                hashCode = (hashCode*397) ^ (int)LicenseNumberPosition;
+                hashCode = (hashCode*397) ^ (int)SongBookPosition;
+                hashCode = (hashCode*397) ^ (int)AuthorPosition;
+                hashCode = (hashCode*397) ^ (int)PublisherPosition;
                 hashCode = (hashCode*397) ^ (MainText != null ? MainText.GetHashCode() : 0);
                 hashCode = (hashCode*397) ^ (TranslationText != null ? TranslationText.GetHashCode() : 0);
                 hashCode = (hashCode*397) ^ (CopyrightText != null ? CopyrightText.GetHashCode() : 0);
@@ -95,7 +113,8 @@
 
         protected bool Equals(SongFormatting other)
         {
-            return CopyrightPosition == other.CopyrightPosition && SourcePosition == other.SourcePosition &&
+            return CopyrightPosition == other.CopyrightPosition && LicenseNumberPosition == other.LicenseNumberPosition &&
+                   SongBookPosition == other.SongBookPosition && AuthorPosition == other.AuthorPosition && PublisherPosition == other.PublisherPosition &&
                    Equals(MainText, other.MainText) && Equals(TranslationText, other.TranslationText) &&
                    Equals(CopyrightText, other.CopyrightText) && Equals(SourceText, other.SourceText) &&
                    MainLineSpacing == other.MainLineSpacing && TranslationLineSpacing == other.TranslationLineSpacing &&
