@@ -31,7 +31,8 @@
         <Image Name="projectionImage"  Stretch="Fill" Opacity="0"></Image>
 
         <WebBrowser Name="webBrowser" Visibility="Collapsed"/>
-        
+        <Vlc:VlcControl xmlns:Vlc="clr-namespace:Vlc.DotNet.Wpf;assembly=Vlc.DotNet.Wpf" x:Name="VlcControl" Visibility="Collapsed"/>
+
         <Image Name="textImageBack"  Stretch="Fill">
         </Image>
         <Image Name="textImage"  Stretch="Fill" Opacity="0">

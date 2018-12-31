@@ -21,12 +21,15 @@
  */
 
 using System;
+using System.IO;
+using System.Reflection;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Interop;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
 using System.Windows.Media.Imaging;
+using Vlc.DotNet.Wpf;
 
 namespace PraiseBase.Presenter.Projection
 {
@@ -45,6 +48,14 @@ namespace PraiseBase.Presenter.Projection
         public ProjectionControl()
         {
             InitializeComponent();
+            InitializeMediaPlayer();
+        }
+
+        private void InitializeMediaPlayer()
+        {
+            var vlcLibDirectory = new DirectoryInfo(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "libvlc", Environment.Is64BitOperatingSystem ? "win-x64" : "win-x86"));
+            VlcControl.MediaPlayer.VlcLibDirectory = vlcLibDirectory;
+            VlcControl.MediaPlayer.EndInit();
         }
 
         public event AnimationFinish AnimationFinished;
@@ -167,13 +178,29 @@ namespace PraiseBase.Presenter.Projection
 
         public void ShowWebsite(Uri uri)
         {
-            webBrowser.Source = uri;
+            PlayMedia(uri.AbsoluteUri);
+            //webBrowser.Source = uri;
         }
 
         public void HideWebsite()
         {
+            HideMedia();
+            //webBrowser.Visibility = Visibility.Collapsed;
+            //webBrowser.Source = null;
+        }
+
+        public void PlayMedia(string url)
+        {
+            //url = "http://download.blender.org/peach/bigbuckbunny_movies/big_buck_bunny_480p_h264.mov";
+            VlcControl.Visibility = Visibility.Visible;
+            VlcControl.MediaPlayer.SetMedia(new Uri(url));
+            VlcControl.MediaPlayer.Play();
+        }
+
+        public void HideMedia()
+        {
+            VlcControl.MediaPlayer.Stop();
             webBrowser.Visibility = Visibility.Collapsed;
-            webBrowser.Source = null;
         }
 
         private void WebBrowser_LoadCompleted(object sender, System.Windows.Navigation.NavigationEventArgs e)

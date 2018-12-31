@@ -2626,7 +2626,9 @@ namespace PraiseBase.Presenter.Presenter
             if ((WebVideoService)comboBoxWebVideoService.SelectedItem == WebVideoService.YouTube)
             {
                 // See API documentation at https://developers.google.com/youtube/player_parameters
-                uri = new Uri("https://www.youtube.com/embed/" + videoID + "?autoplay=1&amp;controls=0&amp;modestbranding=1&amp;rel=0&amp;showinfo=0");
+                uri = new Uri("https://www.youtube.com/watch?v=" + videoID);
+                uri = new Uri("http://download.blender.org/peach/bigbuckbunny_movies/big_buck_bunny_480p_h264.mov");
+                //uri = new Uri("https://www.youtube.com/embed/" + videoID + "?autoplay=1&amp;controls=0&amp;modestbranding=1&amp;rel=0&amp;showinfo=0");
             }
             // Vimeo
             // TODO: Currently disabled, as Vimeo embedding shows JavaScript error in WebBrowser component
