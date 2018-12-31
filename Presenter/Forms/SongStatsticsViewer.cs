@@ -23,6 +23,9 @@ namespace PraiseBase.Presenter.Forms
 
         private int sortColumn = 0;
 
+        public delegate void SongDoubleClick(string message);
+        public event SongDoubleClick SongDoubleClicked;
+
         public SongStatsticsViewer(SongManager songManager)
         {
             InitializeComponent();
@@ -204,6 +207,16 @@ namespace PraiseBase.Presenter.Forms
             else
             {
                 listViewTable.ListViewItemSorter = new ListViewItemComparer(e.Column, listViewTable.Sorting);
+            }
+        }
+
+        private void listViewTable_MouseDoubleClick(object sender, MouseEventArgs e)
+        {
+            ListView lv = (ListView)sender;
+            if (lv.SelectedItems.Count > 0)
+            {
+                var selectedSong = lv.SelectedItems[0].Text;
+                SongDoubleClicked?.Invoke(selectedSong);
             }
         }
     }

@@ -69,6 +69,7 @@
             this.listViewTable.View = System.Windows.Forms.View.Details;
             this.listViewTable.ColumnClick += new System.Windows.Forms.ColumnClickEventHandler(this.listViewTable_ColumnClick);
             this.listViewTable.SelectedIndexChanged += new System.EventHandler(this.listViewTable_SelectedIndexChanged);
+            this.listViewTable.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.listViewTable_MouseDoubleClick);
             // 
             // columnHeaderName
             // 
@@ -92,6 +93,7 @@
             // 
             // statusStrip1
             // 
+            this.statusStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripStatusLabelSongs,
             this.toolStripStatusLabel3,

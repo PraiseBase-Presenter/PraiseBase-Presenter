@@ -2721,7 +2721,19 @@ namespace PraiseBase.Presenter.Presenter
         private void toolStripMenuItemSongStatistics_Click(object sender, EventArgs e)
         {
             SongStatsticsViewer window = new SongStatsticsViewer(_songManager);
+            window.SongDoubleClicked += SongStatisticsViewer_SongDoubleClicked;
             window.Show();
+        }
+
+        private void SongStatisticsViewer_SongDoubleClicked(string title)
+        {
+            string key = _songManager.GetKeyByTitle(title);
+            if (_songManager.SongList.ContainsKey(key))
+            {
+                SongItem si = _songManager.SongList[key];
+                GetSongEditor().OpenSong(si.Filename);
+                ShowAndBringSongEditorToFront();
+            }
         }
 
         private void toolStripMenuItemMetadataEditor_Click(object sender, EventArgs e)
