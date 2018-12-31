@@ -222,6 +222,7 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
     </Compile>
+    <Compile Include="Settings.cs" />
     <Compile Include="SettingsUtil.cs" />
     <Compile Include="Template\SongTemplateMapper.cs" />
     <Compile Include="Controls\SongDetail.cs">
@@ -417,6 +418,7 @@
     <None Include="Properties\Settings.settings">
       <Generator>PublicSettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
     </None>
   </ItemGroup>
   <ItemGroup>

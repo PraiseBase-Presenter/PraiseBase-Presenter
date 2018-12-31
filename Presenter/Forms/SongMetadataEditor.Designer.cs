@@ -50,34 +50,35 @@
             // 
             // statusStrip1
             // 
-            resources.ApplyResources(this.statusStrip1, "statusStrip1");
+            this.statusStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripStatusLabelSongs,
             this.toolStripStatusLabel3,
             this.toolStripStatusLabelNotification,
             this.toolStripStatusLabel1});
+            resources.ApplyResources(this.statusStrip1, "statusStrip1");
             this.statusStrip1.Name = "statusStrip1";
             // 
             // toolStripStatusLabelSongs
             // 
-            resources.ApplyResources(this.toolStripStatusLabelSongs, "toolStripStatusLabelSongs");
             this.toolStripStatusLabelSongs.Name = "toolStripStatusLabelSongs";
+            resources.ApplyResources(this.toolStripStatusLabelSongs, "toolStripStatusLabelSongs");
             // 
             // toolStripStatusLabel3
             // 
-            resources.ApplyResources(this.toolStripStatusLabel3, "toolStripStatusLabel3");
             this.toolStripStatusLabel3.Name = "toolStripStatusLabel3";
+            resources.ApplyResources(this.toolStripStatusLabel3, "toolStripStatusLabel3");
             this.toolStripStatusLabel3.Spring = true;
             // 
             // toolStripStatusLabelNotification
             // 
-            resources.ApplyResources(this.toolStripStatusLabelNotification, "toolStripStatusLabelNotification");
             this.toolStripStatusLabelNotification.Name = "toolStripStatusLabelNotification";
+            resources.ApplyResources(this.toolStripStatusLabelNotification, "toolStripStatusLabelNotification");
             // 
             // toolStripStatusLabel1
             // 
-            resources.ApplyResources(this.toolStripStatusLabel1, "toolStripStatusLabel1");
             this.toolStripStatusLabel1.Name = "toolStripStatusLabel1";
+            resources.ApplyResources(this.toolStripStatusLabel1, "toolStripStatusLabel1");
             this.toolStripStatusLabel1.Spring = true;
             // 
             // timerNotification
@@ -87,11 +88,10 @@
             // 
             // dataGridView1
             // 
-            resources.ApplyResources(this.dataGridView1, "dataGridView1");
             this.dataGridView1.AllowUserToAddRows = false;
             this.dataGridView1.AllowUserToDeleteRows = false;
             this.dataGridView1.AllowUserToResizeRows = false;
-            this.dataGridView1.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
+            resources.ApplyResources(this.dataGridView1, "dataGridView1");
             this.dataGridView1.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
@@ -147,10 +147,10 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.dataGridView1);
             this.Controls.Add(this.statusStrip1);
-            this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "SongMetadataEditor";
             this.ShowIcon = false;
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.SongMetadataEditor_FormClosing);
             this.Load += new System.EventHandler(this.SongStatsticsViewer_Load);
             this.statusStrip1.ResumeLayout(false);
             this.statusStrip1.PerformLayout();

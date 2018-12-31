@@ -287,5 +287,14 @@
     <Setting Name="ProjectionMasterPublisherPosition" Type="PraiseBase.Presenter.Model.AdditionalInformationPosition" Scope="User">
       <Value Profile="(Default)">None</Value>
     </Setting>
+    <Setting Name="MetaDataEditorWindowState" Type="System.Windows.Forms.FormWindowState" Scope="User">
+      <Value Profile="(Default)">Normal</Value>
+    </Setting>
+    <Setting Name="MetaDataEditorColumnWidths" Type="System.Int32[]" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="MetaDataEditorWindowSize" Type="System.Drawing.Size" Scope="User">
+      <Value Profile="(Default)">0, 0</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

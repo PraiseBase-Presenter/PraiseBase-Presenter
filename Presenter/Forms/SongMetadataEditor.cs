@@ -1,6 +1,7 @@
 ﻿using PraiseBase.Presenter.Manager;
 using PraiseBase.Presenter.Properties;
 using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Reflection;
 using System.Windows.Forms;
@@ -19,6 +20,11 @@ namespace PraiseBase.Presenter.Forms
             InitializeComponent();
             _songManager = songManager;
             _setlistDir = Settings.Default.DataDirectory + Path.DirectorySeparatorChar + Settings.Default.SetListDir;
+            WindowState = Settings.Default.MetaDataEditorWindowState;
+            if (WindowState == FormWindowState.Normal && Settings.Default.MetaDataEditorWindowSize.Width > 0 && Settings.Default.MetaDataEditorWindowSize.Height > 0)
+            {
+                Size = Settings.Default.MetaDataEditorWindowSize;
+            }
         }
 
         private void SongStatsticsViewer_Load(object sender, EventArgs e)
@@ -40,6 +46,10 @@ namespace PraiseBase.Presenter.Forms
                 i++;
             }
             toolStripStatusLabelSongs.Text = string.Format(StringResources.SongsCount, i);
+            dataGridView1.AutoResizeColumns(DataGridViewAutoSizeColumnsMode.AllCells);
+            SetColumnWidths(Settings.Default.MetaDataEditorColumnWidths);
+
+            dataGridView1.ColumnWidthChanged += dataGridView1_ColumnWidthChanged;
         }
 
         private void ShowNotification(string text)
@@ -71,6 +81,42 @@ namespace PraiseBase.Presenter.Forms
 
             _songManager.SaveSong(key);
             ShowNotification(string.Format(StringResources.SongHasBeenUpdated, s.Song.Title));
+        }
+
+        private void SongMetadataEditor_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            Settings.Default.MetaDataEditorWindowState = WindowState;
+            if (WindowState == FormWindowState.Normal)
+            {
+                Settings.Default.MetaDataEditorWindowSize = Size;
+            }
+            Settings.Default.Save();
+        }
+
+        private int[] GetColumWidths()
+        {
+            List<int> widths = new List<int>();
+            foreach (DataGridViewColumn col in dataGridView1.Columns)
+            {
+                widths.Add(col.Width);
+            }
+            return widths.ToArray();
+        }
+
+        private void SetColumnWidths(int[] widths)
+        {
+            if (widths != null && widths.Length > 0)
+            {
+                for (int i = 0; i < Math.Min(widths.Length, dataGridView1.Columns.Count); i++)
+                {
+                    dataGridView1.Columns[i].Width = widths[i];
+                }
+            }
+        }
+
+        private void dataGridView1_ColumnWidthChanged(object sender, DataGridViewColumnEventArgs e)
+        {
+            Settings.Default.MetaDataEditorColumnWidths = GetColumWidths();
         }
     }
 }

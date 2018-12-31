@@ -1016,5 +1016,40 @@ namespace PraiseBase.Presenter.Properties {
                 this["ProjectionMasterPublisherPosition"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("Normal")]
+        public global::System.Windows.Forms.FormWindowState MetaDataEditorWindowState {
+            get {
+                return ((global::System.Windows.Forms.FormWindowState)(this["MetaDataEditorWindowState"]));
+            }
+            set {
+                this["MetaDataEditorWindowState"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        public int[] MetaDataEditorColumnWidths {
+            get {
+                return ((int[])(this["MetaDataEditorColumnWidths"]));
+            }
+            set {
+                this["MetaDataEditorColumnWidths"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0, 0")]
+        public global::System.Drawing.Size MetaDataEditorWindowSize {
+            get {
+                return ((global::System.Drawing.Size)(this["MetaDataEditorWindowSize"]));
+            }
+            set {
+                this["MetaDataEditorWindowSize"] = value;
+            }
+        }
     }
 }
