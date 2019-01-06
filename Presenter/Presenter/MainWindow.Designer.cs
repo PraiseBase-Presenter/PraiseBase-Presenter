@@ -123,6 +123,9 @@ namespace PraiseBase.Presenter.Presenter
             this.toolStripMenuItemChromaKeying = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator11 = new System.Windows.Forms.ToolStripSeparator();
             this.bildschirmeSuchenToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.importToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.importSongFileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.importSongTextToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.einstellungenToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.optionenToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.spracheToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -133,14 +136,6 @@ namespace PraiseBase.Presenter.Presenter
             this.liederToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.bilderToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.setlistenToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparator6 = new System.Windows.Forms.ToolStripSeparator();
-            this.toolStripMenuItemImportCCLISongSelect = new System.Windows.Forms.ToolStripMenuItem();
-            this.cCLISongSelectDateiToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparator15 = new System.Windows.Forms.ToolStripSeparator();
-            this.toolStripMenuItemImportText = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparator14 = new System.Windows.Forms.ToolStripSeparator();
-            this.praiseBoxDatenbankToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.worToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator9 = new System.Windows.Forms.ToolStripSeparator();
             this.liederlisteNeuLadenToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.bilderlisteNeuLadenToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -207,6 +202,9 @@ namespace PraiseBase.Presenter.Presenter
             this.trackBarFadeTimeLayer1 = new System.Windows.Forms.TrackBar();
             this.trackBarFadeTime = new System.Windows.Forms.TrackBar();
             this.toolTipMyTooltip = new System.Windows.Forms.ToolTip(this.components);
+            this.importPraiseBoxDatabaseToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator14 = new System.Windows.Forms.ToolStripSeparator();
+            this.importWorshipSystemDatabaseToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             buttonChooseDiaDir = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainerLayerContent)).BeginInit();
             this.splitContainerLayerContent.Panel1.SuspendLayout();
@@ -825,6 +823,7 @@ namespace PraiseBase.Presenter.Presenter
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.dateiToolStripMenuItem,
             this.präsentationToolStripMenuItem,
+            this.importToolStripMenuItem,
             this.einstellungenToolStripMenuItem,
             this.toolStripMenuItem1});
             resources.ApplyResources(this.menuStrip1, "menuStrip1");
@@ -937,6 +936,29 @@ namespace PraiseBase.Presenter.Presenter
             resources.ApplyResources(this.bildschirmeSuchenToolStripMenuItem, "bildschirmeSuchenToolStripMenuItem");
             this.bildschirmeSuchenToolStripMenuItem.Click += new System.EventHandler(this.bildschirmeSuchenToolStripMenuItem_Click);
             // 
+            // importToolStripMenuItem
+            // 
+            this.importToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.importSongFileToolStripMenuItem,
+            this.importSongTextToolStripMenuItem,
+            this.toolStripSeparator14,
+            this.importPraiseBoxDatabaseToolStripMenuItem,
+            this.importWorshipSystemDatabaseToolStripMenuItem});
+            this.importToolStripMenuItem.Name = "importToolStripMenuItem";
+            resources.ApplyResources(this.importToolStripMenuItem, "importToolStripMenuItem");
+            // 
+            // importSongFileToolStripMenuItem
+            // 
+            this.importSongFileToolStripMenuItem.Name = "importSongFileToolStripMenuItem";
+            resources.ApplyResources(this.importSongFileToolStripMenuItem, "importSongFileToolStripMenuItem");
+            this.importSongFileToolStripMenuItem.Click += new System.EventHandler(this.cCLISongSelectDateiToolStripMenuItem_Click);
+            // 
+            // importSongTextToolStripMenuItem
+            // 
+            this.importSongTextToolStripMenuItem.Name = "importSongTextToolStripMenuItem";
+            resources.ApplyResources(this.importSongTextToolStripMenuItem, "importSongTextToolStripMenuItem");
+            this.importSongTextToolStripMenuItem.Click += new System.EventHandler(this.toolStripMenuItemImportText_Click);
+            // 
             // einstellungenToolStripMenuItem
             // 
             this.einstellungenToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -944,8 +966,6 @@ namespace PraiseBase.Presenter.Presenter
             this.spracheToolStripMenuItem,
             this.toolStripSeparator2,
             this.datenverzeichnisÖffnenToolStripMenuItem,
-            this.toolStripSeparator6,
-            this.toolStripMenuItemImportCCLISongSelect,
             this.toolStripSeparator9,
             this.liederlisteNeuLadenToolStripMenuItem,
             this.bilderlisteNeuLadenToolStripMenuItem,
@@ -1009,57 +1029,6 @@ namespace PraiseBase.Presenter.Presenter
             this.setlistenToolStripMenuItem1.Name = "setlistenToolStripMenuItem1";
             resources.ApplyResources(this.setlistenToolStripMenuItem1, "setlistenToolStripMenuItem1");
             this.setlistenToolStripMenuItem1.Click += new System.EventHandler(this.setlistenToolStripMenuItem_Click);
-            // 
-            // toolStripSeparator6
-            // 
-            this.toolStripSeparator6.Name = "toolStripSeparator6";
-            resources.ApplyResources(this.toolStripSeparator6, "toolStripSeparator6");
-            // 
-            // toolStripMenuItemImportCCLISongSelect
-            // 
-            this.toolStripMenuItemImportCCLISongSelect.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.cCLISongSelectDateiToolStripMenuItem,
-            this.toolStripSeparator15,
-            this.toolStripMenuItemImportText,
-            this.toolStripSeparator14,
-            this.praiseBoxDatenbankToolStripMenuItem,
-            this.worToolStripMenuItem});
-            this.toolStripMenuItemImportCCLISongSelect.Name = "toolStripMenuItemImportCCLISongSelect";
-            resources.ApplyResources(this.toolStripMenuItemImportCCLISongSelect, "toolStripMenuItemImportCCLISongSelect");
-            // 
-            // cCLISongSelectDateiToolStripMenuItem
-            // 
-            this.cCLISongSelectDateiToolStripMenuItem.Name = "cCLISongSelectDateiToolStripMenuItem";
-            resources.ApplyResources(this.cCLISongSelectDateiToolStripMenuItem, "cCLISongSelectDateiToolStripMenuItem");
-            this.cCLISongSelectDateiToolStripMenuItem.Click += new System.EventHandler(this.cCLISongSelectDateiToolStripMenuItem_Click);
-            // 
-            // toolStripSeparator15
-            // 
-            this.toolStripSeparator15.Name = "toolStripSeparator15";
-            resources.ApplyResources(this.toolStripSeparator15, "toolStripSeparator15");
-            // 
-            // toolStripMenuItemImportText
-            // 
-            this.toolStripMenuItemImportText.Name = "toolStripMenuItemImportText";
-            resources.ApplyResources(this.toolStripMenuItemImportText, "toolStripMenuItemImportText");
-            this.toolStripMenuItemImportText.Click += new System.EventHandler(this.toolStripMenuItemImportText_Click);
-            // 
-            // toolStripSeparator14
-            // 
-            this.toolStripSeparator14.Name = "toolStripSeparator14";
-            resources.ApplyResources(this.toolStripSeparator14, "toolStripSeparator14");
-            // 
-            // praiseBoxDatenbankToolStripMenuItem
-            // 
-            this.praiseBoxDatenbankToolStripMenuItem.Name = "praiseBoxDatenbankToolStripMenuItem";
-            resources.ApplyResources(this.praiseBoxDatenbankToolStripMenuItem, "praiseBoxDatenbankToolStripMenuItem");
-            this.praiseBoxDatenbankToolStripMenuItem.Click += new System.EventHandler(this.praiseBoxDatenbankToolStripMenuItem_Click);
-            // 
-            // worToolStripMenuItem
-            // 
-            this.worToolStripMenuItem.Name = "worToolStripMenuItem";
-            resources.ApplyResources(this.worToolStripMenuItem, "worToolStripMenuItem");
-            this.worToolStripMenuItem.Click += new System.EventHandler(this.worToolStripMenuItem_Click);
             // 
             // toolStripSeparator9
             // 
@@ -1550,6 +1519,23 @@ namespace PraiseBase.Presenter.Presenter
             this.trackBarFadeTime.Value = 1;
             this.trackBarFadeTime.Scroll += new System.EventHandler(this.trackBarFadeTime_Scroll);
             // 
+            // importPraiseBoxDatabaseToolStripMenuItem
+            // 
+            this.importPraiseBoxDatabaseToolStripMenuItem.Name = "importPraiseBoxDatabaseToolStripMenuItem";
+            resources.ApplyResources(this.importPraiseBoxDatabaseToolStripMenuItem, "importPraiseBoxDatabaseToolStripMenuItem");
+            this.importPraiseBoxDatabaseToolStripMenuItem.Click += new System.EventHandler(this.praiseBoxDatenbankToolStripMenuItem_Click);
+            // 
+            // toolStripSeparator14
+            // 
+            this.toolStripSeparator14.Name = "toolStripSeparator14";
+            resources.ApplyResources(this.toolStripSeparator14, "toolStripSeparator14");
+            // 
+            // importWorshipSystemDatabaseToolStripMenuItem
+            // 
+            this.importWorshipSystemDatabaseToolStripMenuItem.Name = "importWorshipSystemDatabaseToolStripMenuItem";
+            resources.ApplyResources(this.importWorshipSystemDatabaseToolStripMenuItem, "importWorshipSystemDatabaseToolStripMenuItem");
+            this.importWorshipSystemDatabaseToolStripMenuItem.Click += new System.EventHandler(this.worToolStripMenuItem_Click);
+            // 
             // MainWindow
             // 
             resources.ApplyResources(this, "$this");
@@ -1619,7 +1605,6 @@ namespace PraiseBase.Presenter.Presenter
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
         private System.Windows.Forms.ToolStripMenuItem liededitorToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem datenverzeichnisÖffnenToolStripMenuItem;
-        private System.Windows.Forms.ToolStripSeparator toolStripSeparator6;
         private System.Windows.Forms.RadioButton radioButtonAutoDiaShow;
         private System.Windows.Forms.RadioButton radioButtonManualDiashow;
         private System.Windows.Forms.Label label1;
@@ -1635,15 +1620,12 @@ namespace PraiseBase.Presenter.Presenter
         private System.Windows.Forms.TabControl tabControlTextLayer;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem3;
         private System.Windows.Forms.ToolStripMenuItem fehlerMeldenToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItemImportCCLISongSelect;
-        private System.Windows.Forms.ToolStripMenuItem praiseBoxDatenbankToolStripMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator9;
         private System.Windows.Forms.ToolStripMenuItem datenverzeichnisToolStripMenuItem1;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator10;
         private System.Windows.Forms.ToolStripMenuItem liederToolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem bilderToolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem setlistenToolStripMenuItem1;
-        private System.Windows.Forms.ToolStripMenuItem worToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem miniaturbilderPrüfenToolStripMenuItem;
         private System.Windows.Forms.TabControl tabControl2;
         private System.Windows.Forms.TabPage tabPageSlideShow;
@@ -1760,8 +1742,6 @@ namespace PraiseBase.Presenter.Presenter
         private System.Windows.Forms.CheckBox checkBoxBibleAutoShowVerse;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator7;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItemLogFile;
-        private System.Windows.Forms.ToolStripMenuItem cCLISongSelectDateiToolStripMenuItem;
-        private System.Windows.Forms.ToolStripSeparator toolStripSeparator14;
         private System.Windows.Forms.TabPage tabPageWebVideo;
         private System.Windows.Forms.Button buttonPlayWebVideo;
         private System.Windows.Forms.TextBox textBoxWebVideoID;
@@ -1773,13 +1753,17 @@ namespace PraiseBase.Presenter.Presenter
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItemChromaKeying;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator17;
         private System.Windows.Forms.ToolStripButton toolStripButtonChromaKeying;
-        private System.Windows.Forms.ToolStripSeparator toolStripSeparator15;
-        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItemImportText;
         private System.Windows.Forms.ToolStripSplitButton toolStripButtonImportFile;
         private System.Windows.Forms.ToolStripMenuItem lieddateiToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem textToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItemSongStatistics;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItemMetadataEditor;
+        private System.Windows.Forms.ToolStripMenuItem importToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem importSongFileToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem importSongTextToolStripMenuItem;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator14;
+        private System.Windows.Forms.ToolStripMenuItem importPraiseBoxDatabaseToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem importWorshipSystemDatabaseToolStripMenuItem;
     }
 }
 
