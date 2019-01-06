@@ -36,7 +36,7 @@ namespace PraiseBase.Presenter.Manager
         private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
         private const string ExcludeThumbDirName = "[Thumbnails]";
-        private readonly string[] _imgExtensions = {"*.jpg"};
+        private readonly string[] _imgExtensions = {"*.jpg", ".jpeg"};
 
         /// <summary>
         ///     Private constructor
@@ -78,41 +78,61 @@ namespace PraiseBase.Presenter.Manager
         /// <summary>
         ///     Check and create thumbnails if necessary
         /// </summary>
+        /// <param name="cleanup">If set to true, will cleanup images of which no original file exists</param>
         public void CheckThumbs(bool cleanup)
         {
-            var missingThumbsSrc = new List<string>();
-            var missingThumbsTrg = new List<string>();
+            // Cleanup
+            if (cleanup)
+            {
+                CleanupThumbs();
+            }
+
+            // Update thumbnails
+            List<string> paths = new List<string>();
             foreach (var ext in _imgExtensions)
             {
-                var paths = Directory.GetFiles(ImageDirPath, ext, SearchOption.AllDirectories);
-                foreach (var file in paths)
+                paths.AddRange(Directory.GetFiles(ImageDirPath, ext, SearchOption.AllDirectories));
+            }
+            CheckThumbnailFiles(paths.ToArray());
+        }
+
+        /// <summary>
+        /// Cleanup thumbnail images
+        /// </summary>
+        private void CleanupThumbs()
+        {
+            // Cleanup images of which no original file exists
+            foreach (var ext in _imgExtensions)
+            {
+                var tumbPaths = Directory.GetFiles(ThumbDirPath, ext, SearchOption.AllDirectories);
+                foreach (var file in tumbPaths)
                 {
-                    if (!file.Contains(ExcludeThumbDirName) && !file.StartsWith(ThumbDirPath))
+                    var realImage = file.Replace(ThumbDirPath, ImageDirPath);
+                    if (!File.Exists(realImage))
                     {
-                        var relativePath = file.Substring((ImageDirPath + Path.DirectorySeparatorChar).Length);
-                        var thumbPath = ThumbDirPath + Path.DirectorySeparatorChar + relativePath;
-                        if (!File.Exists(thumbPath))
-                        {
-                            missingThumbsSrc.Add(file);
-                            missingThumbsTrg.Add(thumbPath);
-                        }
+                        File.Delete(file);
                     }
                 }
-                // Cleanup
-                if (cleanup)
+            }
+
+            // Cleanup empty directories
+            FileUtils.RemoveEmptySubdirectories(ThumbDirPath);
+        }
+
+        private void CheckThumbnailFiles(string[] paths) {
+            var missingThumbsSrc = new List<string>();
+            var missingThumbsTrg = new List<string>();
+            foreach (var file in paths)
+            {
+                if (!file.Contains(ExcludeThumbDirName) && !file.StartsWith(ThumbDirPath))
                 {
-                    // Cleanup images of which no original file exists
-                    var tumbPaths = Directory.GetFiles(ThumbDirPath, ext, SearchOption.AllDirectories);
-                    foreach (var file in tumbPaths)
+                    var relativePath = file.Substring((ImageDirPath + Path.DirectorySeparatorChar).Length);
+                    var thumbPath = ThumbDirPath + Path.DirectorySeparatorChar + relativePath;
+                    if (!File.Exists(thumbPath))
                     {
-                        var realImage = file.Replace(ThumbDirPath, ImageDirPath);
-                        if (!File.Exists(realImage))
-                        {
-                            File.Delete(file);
-                        }
+                        missingThumbsSrc.Add(file);
+                        missingThumbsTrg.Add(thumbPath);
                     }
-                    // Cleanup empty directories
-                    FileUtils.RemoveEmptySubdirectories(ThumbDirPath);
                 }
             }
             var cnt = missingThumbsSrc.Count;
@@ -213,9 +233,30 @@ namespace PraiseBase.Presenter.Manager
         /// <returns></returns>
         public List<string> SearchImages(string needle)
         {
-            var rootDir = ThumbDirPath + Path.DirectorySeparatorChar;
+            var rootDir = ImageDirPath + Path.DirectorySeparatorChar;
             var rootDirStrLen = rootDir.Length;
             return (from ext in _imgExtensions from ims in Directory.GetFiles(rootDir, ext, SearchOption.AllDirectories) where !ims.Contains(ExcludeThumbDirName) && !ims.StartsWith(ThumbDirPath) let haystack = Path.GetFileNameWithoutExtension(ims) where haystack.ToLower().Contains(needle) select ims.Substring(rootDirStrLen)).ToList();
+        }
+
+        public void ImportImage(string sourcePath)
+        {
+            ImportImage(sourcePath, null);
+        }
+
+        public void ImportImage(string sourcePath, string relativeTargetPath)
+        {
+            string target = ImageDirPath;
+            if (relativeTargetPath != null)
+            {
+                target += "\\" + relativeTargetPath;
+            }
+            if (Directory.Exists(target))
+            {
+                target += "\\" + Path.GetFileName(sourcePath);
+                File.Copy(sourcePath, target, true);
+                CheckThumbnailFiles(new string[] { target });
+                ImageImported?.Invoke(target);
+            }
         }
 
         #region Events
@@ -238,11 +279,12 @@ namespace PraiseBase.Presenter.Manager
 
         protected virtual void OnThumbnailCreated(ThumbnailCreateEventArgs e)
         {
-            if (ThumbnailCreated != null)
-            {
-                ThumbnailCreated(e);
-            }
+            ThumbnailCreated?.Invoke(e);
         }
+
+        public delegate void ImageImport(string path);
+
+        public event ImageImport ImageImported;
 
         #endregion Events
     }

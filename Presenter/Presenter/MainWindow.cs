@@ -933,89 +933,115 @@ namespace PraiseBase.Presenter.Presenter
         {
             if (treeViewImageDirectories.Nodes.Count > 1)
             {
-                listViewDirectoryImages.BeginUpdate();
-                listViewDirectoryImages.SuspendLayout();
-                listViewDirectoryImages.Items.Clear();
-
-                if (listViewDirectoryImages.LargeImageList != null)
-                {
-                    listViewDirectoryImages.LargeImageList.Dispose();
-                }
-
                 // Search
                 if (treeViewImageDirectories.SelectedNode.Level == 0 && treeViewImageDirectories.SelectedNode.Index == treeViewImageDirectories.Nodes.Count - 1)
                 {
-                    var imList = new ImageList
-                    {
-                        ImageSize = Settings.Default.ThumbSize,
-                        ColorDepth = ColorDepth.Depth32Bit
-                    };
-
-                    var lviList = new List<ListViewItem>();
-
-                    string pathPrefix = _imgManager.ThumbDirPath + Path.DirectorySeparatorChar;
-                    int i = 0;
-
-                    foreach (string file in _imageSearchResults)
-                    {
-                        var lvi = new ListViewItem(Path.GetFileNameWithoutExtension(file))
-                        {
-                            Tag = file,
-                            ImageIndex = i
-                        };
-                        imList.Images.Add(Image.FromFile(pathPrefix + file));
-                        lviList.Add(lvi);
-                        i++;
-                    }
-                    listViewDirectoryImages.Items.AddRange(lviList.ToArray());
-                    listViewDirectoryImages.LargeImageList = imList;
-
-                    labelImgDirName.Text = StringResources.SearchResults + @" (" + i + @" " + StringResources.Images + @")";
+                    PopulateImageListFromSearch(_imageSearchResults);
                 }
                 else
                 {
                     string relativeImageDir = ((string)treeViewImageDirectories.SelectedNode.Tag) + Path.DirectorySeparatorChar;
-                    string imDir = _imgManager.ThumbDirPath + Path.DirectorySeparatorChar + relativeImageDir;
+                    PopulateImageListFromDirectory(relativeImageDir);
+                }
+            }
+        }
 
-                    if (Directory.Exists(imDir))
+        private void PrepareImageListViewUpdate()
+        {
+            listViewDirectoryImages.BeginUpdate();
+            listViewDirectoryImages.SuspendLayout();
+            listViewDirectoryImages.Items.Clear();
+            if (listViewDirectoryImages.LargeImageList != null)
+            {
+                listViewDirectoryImages.LargeImageList.Dispose();
+            }
+        }
+
+        private void FinishImageListViewUpdate()
+        {
+            listViewDirectoryImages.ResumeLayout();
+            listViewDirectoryImages.EndUpdate();
+        }
+
+        private void PopulateImageListFromSearch(List<string> searchResults)
+        {
+            PrepareImageListViewUpdate();
+
+            var imList = new ImageList
+            {
+                ImageSize = Settings.Default.ThumbSize,
+                ColorDepth = ColorDepth.Depth32Bit
+            };
+
+            var lviList = new List<ListViewItem>();
+
+            string pathPrefix = _imgManager.ThumbDirPath + Path.DirectorySeparatorChar;
+            int i = 0;
+
+            foreach (string file in searchResults)
+            {
+                var lvi = new ListViewItem(Path.GetFileNameWithoutExtension(file))
+                {
+                    Tag = file,
+                    ImageIndex = i
+                };
+                imList.Images.Add(Image.FromFile(pathPrefix + file));
+                lviList.Add(lvi);
+                i++;
+            }
+            listViewDirectoryImages.Items.AddRange(lviList.ToArray());
+            listViewDirectoryImages.LargeImageList = imList;
+
+            listViewDirectoryImages.Tag = null;
+
+            labelImgDirName.Text = StringResources.SearchResults + @" (" + i + @" " + StringResources.Images + @")";
+
+            FinishImageListViewUpdate();
+        }
+
+        private void PopulateImageListFromDirectory(string relativeImageDir)
+        {
+            string imDir = _imgManager.ThumbDirPath + Path.DirectorySeparatorChar + relativeImageDir;
+            if (Directory.Exists(imDir))
+            {
+                PrepareImageListViewUpdate();
+
+                var imList = new ImageList
+                {
+                    ImageSize = Settings.Default.ThumbSize,
+                    ColorDepth = ColorDepth.Depth32Bit
+                };
+
+                string[] songFilePaths = Directory.GetFiles(imDir, "*.jpg", SearchOption.TopDirectoryOnly);
+                int i = 0;
+                foreach (string file in songFilePaths)
+                {
+                    var lvi = new ListViewItem(Path.GetFileNameWithoutExtension(file))
                     {
-                        var imList = new ImageList
-                        {
-                            ImageSize = Settings.Default.ThumbSize,
-                            ColorDepth = ColorDepth.Depth32Bit
-                        };
+                        Tag = relativeImageDir + Path.GetFileName(file),
+                        ImageIndex = i
+                    };
+                    listViewDirectoryImages.Items.Add(lvi);
+                    imList.Images.Add(Image.FromFile(file));
+                    i++;
+                }
+                listViewDirectoryImages.LargeImageList = imList;
 
-                        string[] songFilePaths = Directory.GetFiles(imDir, "*.jpg", SearchOption.TopDirectoryOnly);
-                        int i = 0;
-                        foreach (string file in songFilePaths)
-                        {
-                            var lvi = new ListViewItem(Path.GetFileNameWithoutExtension(file))
-                            {
-                                Tag = relativeImageDir + Path.GetFileName(file),
-                                ImageIndex = i
-                            };
-                            listViewDirectoryImages.Items.Add(lvi);
-                            imList.Images.Add(Image.FromFile(file));
-                            i++;
-                        }
-                        listViewDirectoryImages.LargeImageList = imList;
-
-                        string categoryName;
-                        if (treeViewImageDirectories.SelectedNode.Level == 0)
-                        {
-                            categoryName = StringResources.TopDirectory;
-                        }
-                        else
-                        {
-                            categoryName = StringResources.Category + " '" + Path.GetFileName(((string)treeViewImageDirectories.SelectedNode.Tag));
-                        }
-
-                        labelImgDirName.Text = categoryName + @"' (" + i + @" " + StringResources.Images + @"):";
-                    }
+                string categoryName;
+                if (treeViewImageDirectories.SelectedNode.Level == 0)
+                {
+                    categoryName = StringResources.TopDirectory;
+                }
+                else
+                {
+                    categoryName = StringResources.Category + " '" + Path.GetFileName(((string)treeViewImageDirectories.SelectedNode.Tag));
                 }
 
-                listViewDirectoryImages.ResumeLayout();
-                listViewDirectoryImages.EndUpdate();
+                labelImgDirName.Text = categoryName + @"' (" + i + @" " + StringResources.Images + @"):";
+
+                listViewDirectoryImages.Tag = relativeImageDir;
+
+                FinishImageListViewUpdate();
             }
         }
 
@@ -1133,6 +1159,11 @@ namespace PraiseBase.Presenter.Presenter
             ImageTreeViewInit();
             listViewDirectoryImages.Items.Clear();
             GC.Collect();
+
+            if (listViewDirectoryImages.Tag != null)
+            {
+                PopulateImageListFromDirectory((string)listViewDirectoryImages.Tag);
+            }
         }
 
         private void toolStripButton5_Click(object sender, EventArgs e)
@@ -2741,6 +2772,32 @@ namespace PraiseBase.Presenter.Presenter
             SongMetadataEditor window = new SongMetadataEditor(_songManager);
             window.ShowDialog(this);
             LoadSongList();
+        }
+
+        private void importImageToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog dlg = new OpenFileDialog
+            {
+                Title = StringResources.ImportImages,
+                Filter = StringResources.Images + @" (*.jpg;*.jpeg)|*.jpg;*.jpeg|" + StringResources.AllFiles + @" (*.*)|*.*",
+                Multiselect = true
+            };
+            if (dlg.ShowDialog() == DialogResult.OK)
+            {
+                string dir = null;
+                if (listViewDirectoryImages.Tag != null)
+                {
+                    dir = (string)listViewDirectoryImages.Tag;
+                }
+                foreach (string file in dlg.FileNames)
+                {
+                    if (File.Exists(file))
+                    {
+                        _imgManager.ImportImage(file, dir);
+                    }
+                }
+                ReloadImageList();
+            }
         }
 
         private void buttonSongViewModeSequence_Click(object sender, EventArgs e)
