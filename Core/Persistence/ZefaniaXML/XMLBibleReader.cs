@@ -20,6 +20,7 @@
  *
  */
 
+using System;
 using System.Collections.Generic;
 using System.Xml;
 using PraiseBase.Presenter.Model.Bible;
@@ -51,10 +52,12 @@ namespace PraiseBase.Presenter.Persistence.ZefaniaXML
             var textReader = new XmlTextReader(fileName);
 
             // Read until end of file
+            bool validFile = false;
             while (textReader.Read())
             {
                 if (textReader.NodeType == XmlNodeType.Element && textReader.Name.ToLower() == "xmlbible")
                 {
+                    validFile = true;
                     while (textReader.Read())
                     {
                         if (textReader.NodeType != XmlNodeType.Element) continue;
@@ -69,6 +72,10 @@ namespace PraiseBase.Presenter.Persistence.ZefaniaXML
                     }
                     break;
                 }
+            }
+            if (!validFile)
+            {
+                throw new Exception("Invalid bible file " + fileName);
             }
             return b;
         }

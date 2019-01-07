@@ -824,5 +824,14 @@ namespace PraiseBase.Presenter.Properties {
                 return ResourceManager.GetString("UpdateAvailable", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Zefania XML Bibeldateien ähnelt.
+        /// </summary>
+        public static string ZefaniaXmlBibleFiles {
+            get {
+                return ResourceManager.GetString("ZefaniaXmlBibleFiles", resourceCulture);
+            }
+        }
     }
 }

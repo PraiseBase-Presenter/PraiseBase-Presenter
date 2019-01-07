@@ -2800,6 +2800,27 @@ namespace PraiseBase.Presenter.Presenter
             }
         }
 
+        private void importBibleToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog dlg = new OpenFileDialog
+            {
+                Title = StringResources.ImportImages,
+                Filter = StringResources.ZefaniaXmlBibleFiles + @" (*.xml)|*.xml|" + StringResources.AllFiles + @" (*.*)|*.*",
+            };
+            if (dlg.ShowDialog() == DialogResult.OK)
+            {
+                try
+                {
+                    _bibleManager.ImportFile(dlg.FileName);
+                    reloadBibles();
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message, StringResources.Error, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+        }
+
         private void buttonSongViewModeSequence_Click(object sender, EventArgs e)
         {
             UpdatePresenterSongViewModeButtons(SongViewMode.Sequence);

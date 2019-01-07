@@ -360,4 +360,7 @@
   <data name="ImportImages" xml:space="preserve">
     <value>Import images</value>
   </data>
+  <data name="ZefaniaXmlBibleFiles" xml:space="preserve">
+    <value>Zefania XML Bible files</value>
+  </data>
 </root>

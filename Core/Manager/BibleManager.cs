@@ -250,6 +250,18 @@ namespace PraiseBase.Presenter.Manager
         }
 
         /// <summary>
+        /// Import bible file
+        /// </summary>
+        /// <param name="sourcePath">Source path</param>
+        /// <exception cref="Exception">If the file is not a valid XML Bible</exception>
+        public void ImportFile(string sourcePath)
+        {
+            new XmlBibleReader().LoadMeta(sourcePath);
+            string targetPath = BibleDirectory + "\\" + Path.GetFileName(sourcePath);
+            File.Copy(sourcePath, targetPath, true);
+        }
+
+        /// <summary>
         ///     Song item structure
         /// </summary>
         public struct BibleItem

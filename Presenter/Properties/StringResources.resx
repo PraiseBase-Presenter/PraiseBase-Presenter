@@ -372,4 +372,7 @@
   <data name="ImportImages" xml:space="preserve">
     <value>Bilder importieren</value>
   </data>
+  <data name="ZefaniaXmlBibleFiles" xml:space="preserve">
+    <value>Zefania XML Bibeldateien</value>
+  </data>
 </root>
