@@ -1051,5 +1051,29 @@ namespace PraiseBase.Presenter.Properties {
                 this["MetaDataEditorWindowSize"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool MainWindowForegroundSectionShown {
+            get {
+                return ((bool)(this["MainWindowForegroundSectionShown"]));
+            }
+            set {
+                this["MainWindowForegroundSectionShown"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool MainWindowBackgroundSectionShown {
+            get {
+                return ((bool)(this["MainWindowBackgroundSectionShown"]));
+            }
+            set {
+                this["MainWindowBackgroundSectionShown"] = value;
+            }
+        }
     }
 }

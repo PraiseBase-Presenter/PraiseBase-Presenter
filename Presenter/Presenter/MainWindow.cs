@@ -118,6 +118,8 @@ namespace PraiseBase.Presenter.Presenter
             {
                 splitContainerLayerContent.SplitterDistance = Settings.Default.LayerContentSplitterPosition;
             }
+            splitContainerLayerContent.Panel1Collapsed = !Settings.Default.MainWindowForegroundSectionShown;
+            splitContainerLayerContent.Panel2Collapsed = !Settings.Default.MainWindowBackgroundSectionShown;
 
             LoadSongList();
 
@@ -1435,6 +1437,8 @@ namespace PraiseBase.Presenter.Presenter
             Settings.Default.AutoShowBibleVerse = checkBoxBibleAutoShowVerse.Checked;
             Settings.Default.ChromaKeyingEnabled = ProjectionManager.Instance.ChromaKeyingEnabled;
             Settings.Default.LayerContentSplitterPosition = splitContainerLayerContent.SplitterDistance;
+            Settings.Default.MainWindowForegroundSectionShown = !splitContainerLayerContent.Panel1Collapsed;
+            Settings.Default.MainWindowBackgroundSectionShown = !splitContainerLayerContent.Panel2Collapsed;
             Settings.Default.Save();
 
             ProjectionManager.Instance.Dispose();
@@ -2818,6 +2822,26 @@ namespace PraiseBase.Presenter.Presenter
                     MessageBox.Show(ex.Message, StringResources.Error, MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
+        }
+        
+        private void vordergrundToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            splitContainerLayerContent.Panel1Collapsed = !splitContainerLayerContent.Panel1Collapsed;
+        }
+
+        private void hintergrundToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            splitContainerLayerContent.Panel2Collapsed = !splitContainerLayerContent.Panel2Collapsed;
+        }
+
+        private void splitContainerLayerContent_Panel1_ClientSizeChanged(object sender, EventArgs e)
+        {
+            hintergrundToolStripMenuItem.Checked = !splitContainerLayerContent.Panel2Collapsed;
+        }
+
+        private void splitContainerLayerContent_Panel2_ClientSizeChanged(object sender, EventArgs e)
+        {
+            vordergrundToolStripMenuItem.Checked = !splitContainerLayerContent.Panel1Collapsed;
         }
 
         private void buttonSongViewModeSequence_Click(object sender, EventArgs e)
