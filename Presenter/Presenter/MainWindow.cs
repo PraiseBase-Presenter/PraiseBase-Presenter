@@ -1428,7 +1428,10 @@ namespace PraiseBase.Presenter.Presenter
             }
 
             Settings.Default.ViewerWindowState = WindowState;
-            Settings.Default.MainWindowSize = Size;
+            if (WindowState == FormWindowState.Normal)
+            {
+                Settings.Default.MainWindowSize = Size;
+            }
             Settings.Default.AutoShowBibleVerse = checkBoxBibleAutoShowVerse.Checked;
             Settings.Default.ChromaKeyingEnabled = ProjectionManager.Instance.ChromaKeyingEnabled;
             Settings.Default.LayerContentSplitterPosition = splitContainerLayerContent.SplitterDistance;
