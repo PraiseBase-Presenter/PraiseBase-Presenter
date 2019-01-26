@@ -71,6 +71,12 @@
                 Source="$(var.SolutionDir)lib\log4net.dll"
                 KeyPath="yes" />
           </Component>
+          <Component Id="MoreLinqDll" Guid="95f4abf0-94b9-4b96-bc03-84274447a4b3">
+            <File Id="MoreLinqDllFile"
+                Name="MoreLinq.dll"
+                Source="$(var.PraiseBase_Presenter.TargetDir)\MoreLinq.dll"
+                KeyPath="yes" />
+          </Component>
           <Component Id="LicenseRtf" Guid="96dc79f8-2344-4610-a167-9b09ee501509">
             <File Id="License.rtf" 
                   Source="$(var.SolutionDir)License.rtf" 
@@ -236,6 +242,7 @@
       <ComponentRef Id="ProductComponent" />
       <ComponentRef Id="CoreDll" />
       <ComponentRef Id="Log4netDll"/>
+      <ComponentRef Id="MoreLinqDll"/>
       <ComponentRef Id="LicenseRtf" />
       <ComponentRef Id="LicenseTxt" />
       <ComponentRef Id="ApplicationStartMenuShortcut" />
