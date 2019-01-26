@@ -68,6 +68,8 @@ namespace PraiseBase.Presenter.Controls
         private Button _prevSongButton;
         private Button _nextSongButton;
 
+        private bool _showFirstAndLastBackgrounds;
+
         private SelectAfterLoad _selectAfterLoad = SelectAfterLoad.None;
 
         //
@@ -147,7 +149,7 @@ namespace PraiseBase.Presenter.Controls
             // Draw new stuff
             //
 
-            bool showFirstLastBackgrounds = ShowFirstAndLastBackground || (parts.Count > 0 && (previousSong != null || nextSong != null));
+            _showFirstAndLastBackgrounds = ShowFirstAndLastBackground || (parts.Count > 0 && (previousSong != null || nextSong != null));
 
             int ypos = TopMargin;
 
@@ -201,7 +203,7 @@ namespace PraiseBase.Presenter.Controls
                 ypos += AddSpacer(ypos);
             }
 
-            if (showFirstLastBackgrounds)
+            if (_showFirstAndLastBackgrounds)
             {
                 List<PartPanelElement> fe = new List<PartPanelElement>
                 {
@@ -235,7 +237,7 @@ namespace PraiseBase.Presenter.Controls
                 ypos += AddPartCopmponent(ypos, elements, ThumbnailSize.Height, labelSize, partIdx, parts[i].Caption);
             }
 
-            if (showFirstLastBackgrounds)
+            if (_showFirstAndLastBackgrounds)
             {
                 List<PartPanelElement> fe2 = new List<PartPanelElement>
                 {
@@ -602,8 +604,8 @@ namespace PraiseBase.Presenter.Controls
                     var partNumber = (int) lbl.Parent.Parent.Tag;
                     var slideNumber = (int) lbl.Tag;
                     SlideClickEventArgs p = new SlideClickEventArgs(_currentSong, partNumber, slideNumber);
-                    p.isFirst = _currentSlideTextIdx == 0;
-                    p.isLast = _currentSlideTextIdx == _slideTexts.Count - 1;
+                    p.isFirst = _currentSlideTextIdx == (_showFirstAndLastBackgrounds ? 1 : 0);
+                    p.isLast = _currentSlideTextIdx == _slideTexts.Count - (_showFirstAndLastBackgrounds ? 2 : 1);
                     SlideClicked(this, p);
                 }
             }
