@@ -257,7 +257,6 @@ namespace PraiseBase.Presenter.Presenter
             // splitContainerLayerContent.Panel2
             // 
             this.splitContainerLayerContent.Panel2.Controls.Add(this.customGroupBox3);
-            this.splitContainerLayerContent.SplitterMoved += new System.Windows.Forms.SplitterEventHandler(this.splitContainerLayerContent_SplitterMoved);
             // 
             // customGroupBox2
             // 

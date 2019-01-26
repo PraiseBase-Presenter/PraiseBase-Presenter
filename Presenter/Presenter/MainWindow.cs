@@ -1431,6 +1431,7 @@ namespace PraiseBase.Presenter.Presenter
             Settings.Default.MainWindowSize = Size;
             Settings.Default.AutoShowBibleVerse = checkBoxBibleAutoShowVerse.Checked;
             Settings.Default.ChromaKeyingEnabled = ProjectionManager.Instance.ChromaKeyingEnabled;
+            Settings.Default.LayerContentSplitterPosition = splitContainerLayerContent.SplitterDistance;
             Settings.Default.Save();
 
             ProjectionManager.Instance.Dispose();
@@ -2271,11 +2272,6 @@ namespace PraiseBase.Presenter.Presenter
             {
                 MessageBox.Show(StringResources.NoActiveSong);
             }
-        }
-
-        private void splitContainerLayerContent_SplitterMoved(object sender, SplitterEventArgs e)
-        {
-            Settings.Default.LayerContentSplitterPosition = splitContainerLayerContent.SplitterDistance;
         }
 
         private void songDetailElement_PreviousSongClicked(object sender, SongSwitchEventArgs e)
