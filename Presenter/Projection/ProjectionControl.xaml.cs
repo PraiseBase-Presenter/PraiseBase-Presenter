@@ -51,7 +51,7 @@ namespace PraiseBase.Presenter.Projection
 
         private void ProjectionControlLoaded(object sender, RoutedEventArgs e)
         {
-            webBrowser.LoadCompleted += WebBrowser_LoadCompleted;
+
         }
 
         /// <summary>
@@ -167,21 +167,21 @@ namespace PraiseBase.Presenter.Projection
 
         public void ShowWebsite(Uri uri)
         {
-            webBrowser.Source = uri;
+            var embed = "<html><head>" +
+"<meta http-equiv=\"X-UA-Compatible\" content=\"IE=Edge\"/>" +
+"<style type=\"text/css\">html { height: 100%; } body { height:100%; background: black; margin: 0; padding: 0; overflow: hidden; }</style>" +
+"</head><body>" +
+"<iframe width=\"100%\" height=\"100%\" style=\"margin: 0; padding: 0\" src=\"" + uri + "\"" +
+"frameborder = \"0\" allow = \"autoplay; encrypted-media\" allowfullscreen></iframe>" +
+"</body></html>";
+            webBrowser.NavigateToString(embed);
+            webBrowser.Visibility = Visibility.Visible;
         }
 
         public void HideWebsite()
         {
             webBrowser.Visibility = Visibility.Collapsed;
             webBrowser.Source = null;
-        }
-
-        private void WebBrowser_LoadCompleted(object sender, System.Windows.Navigation.NavigationEventArgs e)
-        {
-            if (e.Uri != null)
-            {
-                webBrowser.Visibility = Visibility.Visible;
-            }
         }
 
         /// <summary>
