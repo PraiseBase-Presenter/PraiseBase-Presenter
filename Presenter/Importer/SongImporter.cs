@@ -12,7 +12,7 @@ using PraiseBase.Presenter.Template;
 
 namespace PraiseBase.Presenter.Importer
 {
-    public partial class SongImporter : Form
+    public partial class SongImporter : UI.FormBase
     {
         private readonly ImportFormat _format;
 
@@ -28,7 +28,7 @@ namespace PraiseBase.Presenter.Importer
         /// </summary>
         /// <param name="settings"></param>
         /// <param name="importFormat">Import type</param>
-        public SongImporter(Settings settings, ImportFormat importFormat)
+        public SongImporter(Settings settings, ImportFormat importFormat) : base()
         {
             _settings = settings;
             _format = importFormat;

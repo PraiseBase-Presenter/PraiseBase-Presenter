@@ -35,7 +35,7 @@ using PraiseBase.Presenter.Template;
 
 namespace PraiseBase.Presenter.Editor
 {
-    public partial class SongEditorChild : Form
+    public partial class SongEditorChild : UI.FormBase
     {
         #region Public fields
 
@@ -90,7 +90,7 @@ namespace PraiseBase.Presenter.Editor
 
         #endregion
 
-        public SongEditorChild(Settings settings, ImageManager imgManager, Song sng)
+        public SongEditorChild(Settings settings, ImageManager imgManager, Song sng) : base()
         {
             Settings = settings;
             ImgManager = imgManager;

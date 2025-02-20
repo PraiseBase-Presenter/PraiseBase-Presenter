@@ -97,6 +97,18 @@ namespace PraiseBase.Presenter.Presenter
             songDetailElement.ImageManager = imgManager;
 
             songDetailElement.AvailableSongCaption = Settings.Default.SongParts;
+
+            LoadAppConfig();
+        }
+
+        private void LoadAppConfig()
+        {
+            Program.Theme = Settings.Default.Theme;
+            Constants.ApplyTheme(this);
+
+            Program.isDarkMode = Settings.Default.DarkMode.ToString().ToLower() == "true" ? true : false;
+
+            DarkTitleBarClass.UseImmersiveDarkMode(this.Handle, Program.isDarkMode);
         }
 
         /// <summary>

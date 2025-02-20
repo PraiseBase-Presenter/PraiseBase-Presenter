@@ -31,13 +31,13 @@ using PraiseBase.Presenter.Util;
 
 namespace PraiseBase.Presenter.Forms
 {
-    public partial class AboutDialog : Form
+    public partial class AboutDialog : UI.FormBase
     {
         private String _updateDownloadUrl = string.Empty;
         private readonly String _updateCheckUrl;
         private readonly String _authorInfo;
 
-        public AboutDialog(string updateCheckUrl, String authorInfo)
+        public AboutDialog(string updateCheckUrl, String authorInfo) : base()
         {
             _updateCheckUrl = updateCheckUrl;
             _authorInfo = authorInfo;

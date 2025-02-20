@@ -3,9 +3,9 @@ using System.Windows.Forms;
 
 namespace PraiseBase.Presenter.Forms
 {
-    public partial class SimpleProgressWindow : Form
+    public partial class SimpleProgressWindow : UI.FormBase
     {
-        public SimpleProgressWindow(string title)
+        public SimpleProgressWindow(string title) : base()
         {
             InitializeComponent();
 

@@ -105,6 +105,7 @@
             resources.ApplyResources(this.menuStrip, "menuStrip");
             this.menuStrip.MdiWindowListItem = this.windowsMenu;
             this.menuStrip.Name = "menuStrip";
+            this.menuStrip.Tag = "themeable";
             // 
             // fileMenu
             // 
@@ -415,6 +416,7 @@
             this.toolStripButton1,
             this.toolStripButton2});
             this.toolStrip.Name = "toolStrip";
+            this.toolStrip.Tag = "themeable";
             this.toolStrip.TextDirection = System.Windows.Forms.ToolStripTextDirection.Vertical90;
             // 
             // newToolStripButton
@@ -491,6 +493,7 @@
             this.toolStripStatusLabel1});
             resources.ApplyResources(this.statusStrip1, "statusStrip1");
             this.statusStrip1.Name = "statusStrip1";
+            this.statusStrip1.Tag = "themeable";
             // 
             // toolStripStatusLabel1
             // 

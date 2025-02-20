@@ -3,7 +3,7 @@ using System.Windows.Forms;
 
 namespace PraiseBase.Presenter.Forms
 {
-    public partial class CommentDialog : Form
+    public partial class CommentDialog : UI.FormBase
     {
         public string Comment
         {
@@ -17,7 +17,7 @@ namespace PraiseBase.Presenter.Forms
             }
         }
 
-        public CommentDialog()
+        public CommentDialog() : base()
         {
             InitializeComponent();
         }

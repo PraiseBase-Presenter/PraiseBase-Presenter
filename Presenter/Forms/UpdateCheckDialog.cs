@@ -6,13 +6,13 @@ using PraiseBase.Presenter.Util;
 
 namespace PraiseBase.Presenter.Forms
 {
-    public partial class UpdateCheckDialog : Form
+    public partial class UpdateCheckDialog : UI.FormBase
     {
         public bool HideNotification { get; private set; }
 
         private readonly UpdateInformation _updateInformation;
 
-        public UpdateCheckDialog(UpdateInformation updateInformation)
+        public UpdateCheckDialog(UpdateInformation updateInformation) : base()
         {
             _updateInformation = updateInformation;
 

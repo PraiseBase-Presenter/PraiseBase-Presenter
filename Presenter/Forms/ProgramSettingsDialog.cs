@@ -31,11 +31,11 @@ using PraiseBase.Presenter.Projection;
 
 namespace PraiseBase.Presenter.Forms
 {
-    public partial class ProgramSettingsDialog : Form
+    public partial class ProgramSettingsDialog : UI.FormBase
     {
         private readonly Settings _settings;
 
-        public ProgramSettingsDialog(Settings settings)
+        public ProgramSettingsDialog(Settings settings) : base()
         {
             _settings = settings;
 
@@ -90,6 +90,8 @@ namespace PraiseBase.Presenter.Forms
 
             checkBoxProjectionFontScaling.Checked = _settings.ProjectionFontScaling;
             checkBoxSmoothShadow.Checked = _settings.ProjectionSmoothShadow;
+
+            checkDarkToolbar.Checked = _settings.DarkMode;
 
             listBoxTags.Items.Clear();
             var strList = _settings.Tags.Cast<string>().ToList();
@@ -798,5 +800,16 @@ namespace PraiseBase.Presenter.Forms
             _settings.DebugMode = checkBoxEnableDebugMode.Checked;
         }
 
+        private void checkDarkToolbar_CheckedChanged(object sender, EventArgs e)
+        {
+            _settings.DarkMode = checkDarkToolbar.Checked;
+            Program.isDarkMode = checkDarkToolbar.Checked;
+
+            foreach (Form form in Application.OpenForms)
+            {
+                Constants.ApplyTheme(form);
+                DarkTitleBarClass.UseImmersiveDarkMode(form.Handle, Program.isDarkMode);
+            }
+        }
     }
 }

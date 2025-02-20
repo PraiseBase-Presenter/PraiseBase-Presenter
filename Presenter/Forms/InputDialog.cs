@@ -3,7 +3,7 @@ using System.Windows.Forms;
 
 namespace PraiseBase.Presenter.Forms
 {
-    public partial class InputDialog : Form
+    public partial class InputDialog : UI.FormBase
     {
         public String InputValue
         {
@@ -11,7 +11,7 @@ namespace PraiseBase.Presenter.Forms
             set { textBoxResponseValue.Text = value; }
         }
 
-        public InputDialog(string title, string text)
+        public InputDialog(string title, string text) : base()
         {
             InitializeComponent();
 
