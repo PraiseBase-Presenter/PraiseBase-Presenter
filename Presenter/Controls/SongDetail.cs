@@ -80,11 +80,11 @@ namespace PraiseBase.Presenter.Controls
         private const int SpaceHeight = 1;
         private const int SpacerMargin = 4;
 
-        private readonly Color _itemNormalFg = Color.Black;
-        private readonly Color _itemNormalBg = Color.White;
+        private Color _itemNormalFg = Color.FromArgb(255, 255, 255);
+        private Color _itemNormalBg = Color.FromArgb(45, 45, 45);
 
-        private readonly Color _itemActiveFg = Color.White;
-        private readonly Color _itemActiveBg = SystemColors.Highlight;
+        private Color _itemActiveFg = Color.White;
+        private Color _itemActiveBg = Color.FromArgb(30, 32, 36);
 
         private readonly Font _partCaptionFont = new Font("Arial", 13);
         private readonly Font _slideTextFont = new Font("Arial", 9);
@@ -100,6 +100,50 @@ namespace PraiseBase.Presenter.Controls
         private const int RightMargin = 24;
         private const int TopMargin = 5;
         private const int BottomMargin = 5;
+
+        [Description("The background color of normal slide.")]
+        [Category("Appearance")]
+        public Color SlideNormalBackColor
+        {
+            get { return _itemNormalBg; }
+            set
+            {
+                _itemNormalBg = value;
+            }
+        }
+
+        [Description("The fore color of the normal slide.")]
+        [Category("Appearance")]
+        public Color SlideNormalForeColor
+        {
+            get { return _itemNormalFg; }
+            set
+            {
+                _itemNormalFg = value;
+            }
+        }
+
+        [Description("The background color of the active slide.")]
+        [Category("Appearance")]
+        public Color SlideActiveBackColor
+        {
+            get { return _itemActiveBg; }
+            set
+            {
+                _itemActiveBg = value;
+            }
+        }
+
+        [Description("The fore color of active slide.")]
+        [Category("Appearance")]
+        public Color SlideActiveForeColor
+        {
+            get { return _itemActiveFg; }
+            set
+            {
+                _itemActiveFg = value;
+            }
+        }
 
         public ImageManager ImageManager { get; set; }
 

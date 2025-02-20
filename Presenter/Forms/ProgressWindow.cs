@@ -3,11 +3,11 @@ using System.Windows.Forms;
 
 namespace PraiseBase.Presenter.Forms
 {
-    public partial class ProgressWindow : Form
+    public partial class ProgressWindow : UI.FormBase
     {
         public Boolean Cancelled { get; private set; }
 
-        public ProgressWindow(string title, int maximum)
+        public ProgressWindow(string title, int maximum) : base()
         {
             InitializeComponent();
             Cancelled = false;

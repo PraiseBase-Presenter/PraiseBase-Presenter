@@ -34,6 +34,7 @@ using PraiseBase.Presenter.Presenter;
 using PraiseBase.Presenter.Properties;
 using log4net.Config;
 using System.Diagnostics;
+using System.Drawing;
 
 namespace PraiseBase.Presenter
 {
@@ -41,6 +42,9 @@ namespace PraiseBase.Presenter
     {
         // Here is the once-per-class call to initialize the log object
         private static readonly log4net.ILog log = log4net.LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
+
+        public static Color Theme { get; set; }
+        public static bool isDarkMode = false;
 
         /// <summary>
         /// The main entry point for the application.
@@ -54,6 +58,8 @@ namespace PraiseBase.Presenter
 
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
+
+            isDarkMode = Settings.Default.DarkMode.ToString().ToLower() == "true";
 
             // Update settings from previous version
             if (Settings.Default.UpgradeRequired)

@@ -29,7 +29,7 @@ using PraiseBase.Presenter.Properties;
 
 namespace PraiseBase.Presenter.Forms
 {
-    public partial class ImageDialog : Form
+    public partial class ImageDialog : UI.FormBase
     {
         public IBackground Background { get; set; }
 
@@ -47,7 +47,7 @@ namespace PraiseBase.Presenter.Forms
 
         private readonly ImageManager _imgManager;
 
-        public ImageDialog(ImageManager imgManager)
+        public ImageDialog(ImageManager imgManager) : base()
         {
             _imgManager = imgManager;
             InitializeComponent();

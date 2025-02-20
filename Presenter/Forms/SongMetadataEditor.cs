@@ -8,14 +8,14 @@ using System.Windows.Forms;
 
 namespace PraiseBase.Presenter.Forms
 {
-    public partial class SongMetadataEditor : Form
+    public partial class SongMetadataEditor : UI.FormBase
     {
         private static readonly log4net.ILog log = log4net.LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
 
         private string _setlistDir;
         private SongManager _songManager;
 
-        public SongMetadataEditor(SongManager songManager)
+        public SongMetadataEditor(SongManager songManager) : base()
         {
             InitializeComponent();
             _songManager = songManager;

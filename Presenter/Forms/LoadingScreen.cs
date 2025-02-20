@@ -20,6 +20,7 @@
  *
  */
 
+using System.Drawing;
 using System.Windows.Forms;
 using PraiseBase.Presenter.Manager;
 
@@ -32,6 +33,11 @@ namespace PraiseBase.Presenter.Forms
         public LoadingScreen(SongManager songManager, ImageManager imgManager)
         {
             InitializeComponent();
+            if (Program.isDarkMode)
+            {
+                this.pictureBox1.BackColor = Color.FromArgb(45, 45, 45);
+            }
+            DwmHelper.SetCorner(this, DwmHelper.DWM_WINDOW_CORNER_PREFERENCE.DWMWCP_ROUNDSMALL);
             if (ShowSongLoading)
             {
                 songManager.SongLoaded += SongManager_SongLoaded;

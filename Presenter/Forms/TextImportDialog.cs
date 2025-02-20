@@ -6,13 +6,13 @@ using System.Windows.Forms;
 
 namespace PraiseBase.Presenter.Forms
 {
-    public partial class TextImportDialog : Form
+    public partial class TextImportDialog : UI.FormBase
     {
         public Song ImportedSong { get; private set; }
 
         private Settings _settings;
 
-        public TextImportDialog(Settings settings)
+        public TextImportDialog(Settings settings) : base()
         {
             _settings = settings;
             InitializeComponent();

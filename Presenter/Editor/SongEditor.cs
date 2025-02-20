@@ -111,7 +111,7 @@ namespace PraiseBase.Presenter.Editor
 
         #endregion
 
-        public SongEditor(Settings settings, ImageManager imgManager, String filename)
+        public SongEditor(Settings settings, ImageManager imgManager, String filename) : base()
         {
             // Initialize internal variables
             _settings = settings;
@@ -129,6 +129,8 @@ namespace PraiseBase.Presenter.Editor
             {
                 OpenSong(filename);
             }
+
+            Constants.ApplyTheme(this);
         }
 
         void selectLanguageToolStripMenuItem_Click(object sender, EventArgs e)

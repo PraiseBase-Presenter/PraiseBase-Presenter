@@ -14,7 +14,7 @@ using static MoreLinq.Extensions.DistinctByExtension;
 
 namespace PraiseBase.Presenter.Forms
 {
-    public partial class SongStatsticsViewer : Form
+    public partial class SongStatsticsViewer : UI.FormBase
     {
         private static readonly log4net.ILog log = log4net.LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
 
@@ -26,7 +26,7 @@ namespace PraiseBase.Presenter.Forms
         public delegate void SongDoubleClick(string message);
         public event SongDoubleClick SongDoubleClicked;
 
-        public SongStatsticsViewer(SongManager songManager)
+        public SongStatsticsViewer(SongManager songManager) : base()
         {
             InitializeComponent();
             _songManager = songManager;

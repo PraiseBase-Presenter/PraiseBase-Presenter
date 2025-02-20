@@ -8,7 +8,7 @@ using PraiseBase.Presenter.Properties;
 
 namespace PraiseBase.Presenter.Presenter
 {
-    public partial class SongBrowserDialog : Form
+    public partial class SongBrowserDialog : UI.FormBase
     {
         public enum SongBrowseDialogAction
         {
@@ -31,7 +31,7 @@ namespace PraiseBase.Presenter.Presenter
 
         private readonly SongManager _songManager;
 
-        public SongBrowserDialog(SongManager songManager)
+        public SongBrowserDialog(SongManager songManager) : base()
         {
             _songManager = songManager;
             SelectedItems = new List<string>();

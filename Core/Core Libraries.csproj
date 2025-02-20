@@ -45,11 +45,15 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ColorHelper.cs" />
+    <Compile Include="DarkTitleBarClass.cs" />
+    <Compile Include="DwmHelper.cs" />
     <Compile Include="Manager\BibleManager.cs" />
     <Compile Include="Manager\ImageManager.cs" />
     <Compile Include="Manager\SongItem.cs" />
     <Compile Include="Manager\SongManager.cs" />
     <Compile Include="Manager\SongViewMode.cs" />
+    <Compile Include="MenuRenderer.cs" />
     <Compile Include="Model\AdditionalInformationPosition.cs" />
     <Compile Include="Model\Bible\Bible.cs" />
     <Compile Include="Model\Bible\BibleBook.cs" />
@@ -141,6 +145,7 @@
     <Compile Include="Projection\SongSlideTextFormattingMapper.cs" />
     <Compile Include="Projection\TextLayer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="UiUtils.cs" />
     <Compile Include="Util\FileUtils.cs" />
     <Compile Include="Util\ImageUtils.cs" />
     <Compile Include="Util\SongSearchUtil.cs" />

@@ -20,6 +20,8 @@ namespace PraiseBase.Presenter.Controls
 
         private string _placeHolderText = "Suchen";
         private string _currentText = String.Empty;
+        private Color _textBoxBackColor = Color.White;
+        private Color _textBoxForeColor = Color.Black;
 
         public SearchTextBox()
         {
@@ -116,6 +118,30 @@ namespace PraiseBase.Presenter.Controls
             }
         }
 
+        [Description("The background color of the TextBox.")]
+        [Category("Appearance")]
+        public Color TextBoxBackColor
+        {
+            get { return _textBoxBackColor; }
+            set
+            {
+                _textBoxBackColor = value;
+                textBox.BackColor = value;
+            }
+        }
+
+        [Description("The fore color of the TextBox.")]
+        [Category("Appearance")]
+        public Color TextBoxForeColor
+        {
+            get { return _textBoxForeColor; }
+            set
+            {
+                _textBoxForeColor = value;
+                textBox.ForeColor = value;
+            }
+        }
+
         public new event TextChange TextChanged;
 
         private void cmPictureBox_MouseClick(object sender, MouseEventArgs e)
@@ -129,16 +155,16 @@ namespace PraiseBase.Presenter.Controls
 
         private void SearchTextBox_EnabledChanged(object sender, EventArgs e)
         {
-            if (!Enabled)
-            {
-                BackColor = Color.LightGray;
-                textBox.BackColor = Color.LightGray;
-            }
-            else
-            {
-                BackColor = Color.White;
-                textBox.BackColor = Color.White;
-            }
+            //if (!Enabled)
+            //{
+            //    BackColor = Color.LightGray;
+            //    textBox.BackColor = Color.LightGray;
+            //}
+            //else
+            //{
+            //    BackColor = Color.White;
+            //    textBox.BackColor = Color.White;
+            //}
         }
 
         /// <summary>

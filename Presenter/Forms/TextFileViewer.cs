@@ -4,7 +4,7 @@ using System.Windows.Forms;
 
 namespace PraiseBase.Presenter.Forms
 {
-    public partial class TextFileViewer : Form
+    public partial class TextFileViewer : UI.FormBase
     {
         private string _filePath;
 
@@ -33,7 +33,7 @@ namespace PraiseBase.Presenter.Forms
             }
         }
 
-        public TextFileViewer()
+        public TextFileViewer() : base()
         {
             InitializeComponent();
         }

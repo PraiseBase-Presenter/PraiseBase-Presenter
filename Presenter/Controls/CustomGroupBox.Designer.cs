@@ -35,14 +35,13 @@
             // 
             // panelTitleBG
             // 
-            this.panelTitleBG.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left))));
-            this.panelTitleBG.BackgroundImage = global::PraiseBase.Presenter.Properties.Resources.fade1blue;
             this.panelTitleBG.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.panelTitleBG.Controls.Add(this.labelTitle);
             this.panelTitleBG.Location = new System.Drawing.Point(0, 0);
             this.panelTitleBG.Name = "panelTitleBG";
-            this.panelTitleBG.Size = new System.Drawing.Size(this.Width, 28);
+            this.panelTitleBG.Size = new System.Drawing.Size(200, 28);
             this.panelTitleBG.TabIndex = 0;
+            this.panelTitleBG.Visible = false;
             // 
             // labelTitle
             // 
@@ -52,20 +51,18 @@
             this.labelTitle.ForeColor = System.Drawing.Color.White;
             this.labelTitle.Location = new System.Drawing.Point(4, 5);
             this.labelTitle.Name = "labelTitle";
-            this.labelTitle.Size = new System.Drawing.Size(39, 16);
+            this.labelTitle.Size = new System.Drawing.Size(38, 16);
             this.labelTitle.TabIndex = 1;
             this.labelTitle.Text = "Title";
             // 
             // CustomGroupBox
             // 
-            this.Controls.Add(this.panelTitleBG);
-            this.Name = "CustomGroupBox";
-            this.panelTitleBG.ResumeLayout(false);
-            this.panelTitleBG.PerformLayout();
             this.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panelTitleBG.ResumeLayout(false);
+            this.panelTitleBG.PerformLayout();
             this.ResumeLayout(false);
-            this.Paint += new System.Windows.Forms.PaintEventHandler(CustomGroupBox_Paint);
+
         }
 
         #endregion
